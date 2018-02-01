@@ -1,10 +1,14 @@
-{-# LANGUAGE DataKinds           #-}
-{-# LANGUAGE KindSignatures      #-}
-{-# LANGUAGE LambdaCase          #-}
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE DataKinds                  #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE KindSignatures             #-}
+{-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 
 module Terrafomo.Attribute
-    ( Attribute  (..)
+    ( Computed  (..)
+    , computedName
+
+    , Attribute (..)
     , attributeName
     ) where
 
@@ -17,20 +21,23 @@ import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
 
 import Terrafomo.Name (Key, Name)
 
+newtype Computed s a = Computed Name
+    deriving (Show, Eq, Hashable)
+
+computedName :: Computed s a -> Name
+computedName (Computed n) = n
+
 -- | An argument is either a computed attribute of another terraform resource
 -- or data source, a constant value, or nil.
 data Attribute s (n :: Symbol) a
-    = Computed !Key !Name
+    = Compute  !Key !(Computed s a)
     | Constant !a
     | Nil
       deriving (Show, Eq)
 
--- deriving instance Show a => Show (Attribute n a)
--- deriving instance Eq   a => Eq   (Attribute n a)
-
 instance Hashable a => Hashable (Attribute s n a) where
     hashWithSalt s = \case
-        Computed k n -> s `hashWithSalt` (0 :: Int) `hashWithSalt` k `hashWithSalt` n
+        Compute  k x -> s `hashWithSalt` (0 :: Int) `hashWithSalt` k `hashWithSalt` x
         Constant   x -> s `hashWithSalt` (1 :: Int) `hashWithSalt` x
         Nil          -> s `hashWithSalt` (2 :: Int)
 

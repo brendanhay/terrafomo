@@ -1,3 +1,5 @@
+{-# LANGUAGE DataKinds                  #-}
+
 {-# LANGUAGE DefaultSignatures          #-}
 {-# LANGUAGE DeriveFunctor              #-}
 {-# LANGUAGE FlexibleInstances          #-}
@@ -16,15 +18,16 @@ module Terrafomo.Monad
     (
     -- * Terraform Monad
       TerraformConfig
-    , TerraformOutput
+    , TerraformOutput (..)
+
     , Terraform
     , runTerraform
 
     -- * Terraform Monad Class
-    , MonadTerraform (..)
+    , MonadTerraform  (..)
 
     -- * Errors
-    , TerraformError (..)
+    , TerraformError  (..)
 
     -- * Providers
     , withProvider
@@ -35,6 +38,7 @@ module Terrafomo.Monad
     , remote
 
     -- * Attribute Values
+    , computed
     , constant
     , nil
     ) where
@@ -51,11 +55,10 @@ import Data.Proxy      (Proxy (..))
 import Data.Semigroup  (Semigroup)
 import Data.Typeable   (Typeable)
 
-import GHC.TypeLits (KnownSymbol)
-
 import Terrafomo.Attribute
 import Terrafomo.Backend
 import Terrafomo.DataSource  (DataSource (..))
+import Terrafomo.Format      (nformat, (%))
 import Terrafomo.Name
 import Terrafomo.Output
 import Terrafomo.Provider
@@ -275,6 +278,14 @@ instance ( MonadTerraform s m
 
 -- Syntax
 
+-- | Refer to a reference's attribute for which the value will be computed
+-- during @terraform apply@.
+computed
+    :: Lens.SimpleGetter a (Computed s b)
+    -> Reference s a
+    -> Attribute s n b
+computed l (UnsafeReference key x) = Compute key (x Lens.^. l)
+
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.
 constant :: forall n s a. a -> Attribute s n a
 constant = Constant
@@ -315,7 +326,9 @@ insertProvider = \case
     Just p  -> do
         let key   = providerKey p
             value = HCL.toHCL p
-        Just key <$ insertValue key value providers (\s w -> w { providers = s })
+
+        Just key <$
+            insertValue key value providers (\s w -> w { providers = s })
 
 -- Values
 
@@ -334,12 +347,13 @@ datasource name x =
         let key   = Key (dataType x) name
             value = HCL.toHCL (key, Lens.set Meta.provider alias x)
 
-        unique <- insertValue key value datasources (\s w -> w { datasources = s })
+        unique <-
+            insertValue key value datasources (\s w -> w { datasources = s })
 
         unless unique $
             MTL.throwError (NonUniqueKey key value)
 
-        pure $! UnsafeReference key
+        pure $! UnsafeReference key (dataConfig x)
 
 resource
     :: ( MonadTerraform s m
@@ -356,12 +370,13 @@ resource name x =
         let key   = Key (resourceType x) name
             value = HCL.toHCL (key, Lens.set Meta.provider alias x)
 
-        unique <- insertValue key value resources (\s w -> w { resources = s })
+        unique <-
+            insertValue key value resources (\s w -> w { resources = s })
 
         unless unique $
             MTL.throwError (NonUniqueKey key value)
 
-        pure $! UnsafeReference key
+        pure $! UnsafeReference key (resourceConfig x)
 
 -- | Emit an output variable to the remote state.
 --
@@ -370,20 +385,23 @@ resource name x =
 -- @
 output
     :: ( MonadTerraform s m
-       , KnownSymbol n
-       , HCL.ToHCL a
+       , HCL.ToHCL b
        )
-    => Name
-    -> Attribute s n a
-    -> m (Output a)
-output name arg =
+    => Lens.SimpleGetter a (Computed s b)
+    -> Reference s a
+    -> m (Output b)
+output l (UnsafeReference key x) =
     liftTerraform $ do
         b <- MTL.gets backend
 
-        let out   = Output name b arg
+        let attr  = x Lens.^. l
+            name  = nformat (ftype % "_" % fname % "_" % fname)
+                        (keyType key) (keyName key) (computedName attr)
+            out   = Output b name (key, computedName attr)
             value = HCL.toHCL out
 
-        unique <- insertValue name value outputs (\s w -> w { outputs = s })
+        unique <-
+            insertValue name value outputs (\s w -> w { outputs = s })
 
         unless unique $
             MTL.throwError (NonUniqueOutput name value)
@@ -397,24 +415,20 @@ remote
        MonadTerraform s m
     => Output a
     -> m (Attribute s n a)
-remote (Output name x arg) =
-    case arg of
-        Constant    y -> pure (Constant y)
-        Nil           -> pure Nil
-        Computed _  _ ->
-            liftTerraform $ do
-                let hash  = Name (Hash.human x)
-                    state = newRemoteState hash x
-                    key   = remoteStateKey state
-                    value = HCL.toHCL state
+remote (Output x name _) =
+    liftTerraform $ do
+        let hash  = Name (Hash.human x)
+            state = newRemoteState hash x
+            key   = remoteStateKey state
+            value = HCL.toHCL state
 
-                exists <- MTL.gets (VMap.member key . datasources)
+        exists <- MTL.gets (VMap.member key . datasources)
 
-                if exists
-                    then MTL.throwError (NonUniqueKey key value)
-                    else void $ insertValue key value remotes (\s w -> w { remotes = s })
+        if exists
+            then MTL.throwError (NonUniqueKey key value)
+            else void (insertValue key value remotes (\s w -> w { remotes = s }))
 
-                pure $! Computed key name
+        pure $! Compute key (Computed name)
 
 insertValue
     :: ( MonadTerraform s m
@@ -432,7 +446,6 @@ insertValue
 insertValue key value state update =
     liftTerraform $ do
         vmap <- MTL.gets state
-
         case VMap.insert key value vmap of
             Nothing    ->                               pure False
             Just vmap' -> MTL.modify' (update vmap') >> pure True

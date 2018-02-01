@@ -2135,15 +2135,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Types as TF
 import qualified Terrafomo.AWS.Provider as TF
-import qualified Terrafomo.AWS.Types    as TF
-import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.IP           as TF
-import qualified Terrafomo.Meta         as TF (configuration)
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.Resource     as TF
-import qualified Terrafomo.Resource     as TF
+import qualified Terrafomo.Resource as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.IP as TF
+import qualified Terrafomo.Meta as TF (configuration)
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Resource as TF
+import qualified Terrafomo.Attribute as TF
 
 {- | The @sfn_activity@ AWS resource.
 
@@ -2167,16 +2167,19 @@ instance HasName (ActivityResource s) Text where
              (\s a -> s { _name = a } :: ActivityResource s)
 
 instance HasComputedCreationDate (ActivityResource s) Text where
-    computedCreationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_date")
+    type HasComputedCreationDateThread (ActivityResource s) Text = s
+
+    computedCreationDate = to (\_ -> TF.Computed "creation_date")
 
 instance HasComputedId (ActivityResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ActivityResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (ActivityResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (ActivityResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 activityResource :: TF.Resource TF.AWS (ActivityResource s)
 activityResource =
@@ -2196,13 +2199,13 @@ minutes. The creation of this resource will block until the new AMI is
 available for use on new instances.
 -}
 data AmiCopyResource s = AmiCopyResource {
-      _encrypted         :: !(TF.Attribute s "encrypted" Text)
+      _encrypted :: !(TF.Attribute s "encrypted" Text)
     {- ^ (Optional) Specifies whether the destination snapshots of the copied image should be encrypted. Defaults to @false@ -}
-    , _kms_key_id        :: !(TF.Attribute s "kms_key_id" Text)
+    , _kms_key_id :: !(TF.Attribute s "kms_key_id" Text)
     {- ^ (Optional) The full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A region-unique name for the AMI. -}
-    , _source_ami_id     :: !(TF.Attribute s "source_ami_id" Text)
+    , _source_ami_id :: !(TF.Attribute s "source_ami_id" Text)
     {- ^ (Required) The id of the AMI to copy. This id must be valid in the region given by @source_ami_region@ . -}
     , _source_ami_region :: !(TF.Attribute s "source_ami_region" TF.Region)
     {- ^ (Required) The region from which the AMI will be copied. This may be the same as the AWS provider region in order to create a copy within the same region. -}
@@ -2333,7 +2336,7 @@ account.
 data AmiLaunchPermissionResource s = AmiLaunchPermissionResource {
       _account_id :: !(TF.Attribute s "account_id" Text)
     {- ^ - (required) An AWS Account ID to add launch permissions. -}
-    , _image_id   :: !(TF.Attribute s "image_id" Text)
+    , _image_id :: !(TF.Attribute s "image_id" Text)
     {- ^ - (required) A region-unique name for the AMI. -}
     } deriving (Show, Eq)
 
@@ -2358,8 +2361,9 @@ instance HasImageId (AmiLaunchPermissionResource s) Text where
              (\s a -> s { _image_id = a } :: AmiLaunchPermissionResource s)
 
 instance HasComputedId (AmiLaunchPermissionResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (AmiLaunchPermissionResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 amiLaunchPermissionResource :: TF.Resource TF.AWS (AmiLaunchPermissionResource s)
 amiLaunchPermissionResource =
@@ -2378,19 +2382,19 @@ instead. If you just want to share an existing AMI with another AWS account,
 it's better to use @aws_ami_launch_permission@ instead.
 -}
 data AmiResource s = AmiResource {
-      _architecture           :: !(TF.Attribute s "architecture" Text)
+      _architecture :: !(TF.Attribute s "architecture" Text)
     {- ^ (Optional) Machine architecture for created instances. Defaults to "x86_64". -}
-    , _description            :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A longer, human-readable description for the AMI. -}
-    , _ebs_block_device       :: !(TF.Attribute s "ebs_block_device" Text)
+    , _ebs_block_device :: !(TF.Attribute s "ebs_block_device" Text)
     {- ^ (Optional) Nested block describing an EBS block device that should be attached to created instances. The structure of this block is described below. -}
     , _ephemeral_block_device :: !(TF.Attribute s "ephemeral_block_device" Text)
     {- ^ (Optional) Nested block describing an ephemeral block device that should be attached to created instances. The structure of this block is described below. -}
-    , _name                   :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A region-unique name for the AMI. -}
-    , _root_device_name       :: !(TF.Attribute s "root_device_name" Text)
+    , _root_device_name :: !(TF.Attribute s "root_device_name" Text)
     {- ^ (Optional) The name of the root device (for example, @/dev/sda1@ , or @/dev/xvda@ ). -}
-    , _virtualization_type    :: !(TF.Attribute s "virtualization_type" Text)
+    , _virtualization_type :: !(TF.Attribute s "virtualization_type" Text)
     {- ^ (Optional) Keyword to choose what virtualization mode created instances will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type changes the set of further arguments that are required, as described below. -}
     } deriving (Show, Eq)
 
@@ -2492,8 +2496,9 @@ instance HasCloudwatchRoleArn (ApiGatewayAccountResource s) Text where
              (\s a -> s { _cloudwatch_role_arn = a } :: ApiGatewayAccountResource s)
 
 instance HasComputedThrottleSettings (ApiGatewayAccountResource s) Text where
-    computedThrottleSettings =
-        to (\x -> TF.Computed (TF.referenceKey x) "throttle_settings")
+    type HasComputedThrottleSettingsThread (ApiGatewayAccountResource s) Text = s
+
+    computedThrottleSettings = to (\_ -> TF.Computed "throttle_settings")
 
 apiGatewayAccountResource :: TF.Resource TF.AWS (ApiGatewayAccountResource s)
 apiGatewayAccountResource =
@@ -2511,13 +2516,13 @@ to associate an API key with an API stage.
 data ApiGatewayApiKeyResource s = ApiGatewayApiKeyResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The API key description. Defaults to "Managed by Terraform". -}
-    , _enabled     :: !(TF.Attribute s "enabled" TF.Bool)
+    , _enabled :: !(TF.Attribute s "enabled" TF.Bool)
     {- ^ (Optional) Specifies whether the API key can be used by callers. Defaults to @true@ . -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the API key -}
-    , _stage_key   :: !(TF.Attribute s "stage_key" Text)
+    , _stage_key :: !(TF.Attribute s "stage_key" Text)
     {- ^ (Optional) A list of stage keys associated with the API key - see below -}
-    , _value       :: !(TF.Attribute s "value" Text)
+    , _value :: !(TF.Attribute s "value" Text)
     {- ^ (Optional) The value of the API key. If not specified, it will be automatically generated by AWS on creation. -}
     } deriving (Show, Eq)
 
@@ -2566,20 +2571,24 @@ instance HasValue (ApiGatewayApiKeyResource s) Text where
              (\s a -> s { _value = a } :: ApiGatewayApiKeyResource s)
 
 instance HasComputedCreatedDate (ApiGatewayApiKeyResource s) Text where
-    computedCreatedDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_date")
+    type HasComputedCreatedDateThread (ApiGatewayApiKeyResource s) Text = s
+
+    computedCreatedDate = to (\_ -> TF.Computed "created_date")
 
 instance HasComputedId (ApiGatewayApiKeyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ApiGatewayApiKeyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLastUpdatedDate (ApiGatewayApiKeyResource s) Text where
-    computedLastUpdatedDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "last_updated_date")
+    type HasComputedLastUpdatedDateThread (ApiGatewayApiKeyResource s) Text = s
+
+    computedLastUpdatedDate = to (\_ -> TF.Computed "last_updated_date")
 
 instance HasComputedValue (ApiGatewayApiKeyResource s) Text where
-    computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
+    type HasComputedValueThread (ApiGatewayApiKeyResource s) Text = s
+
+    computedValue = to (\_ -> TF.Computed "value")
 
 apiGatewayApiKeyResource :: TF.Resource TF.AWS (ApiGatewayApiKeyResource s)
 apiGatewayApiKeyResource =
@@ -2704,13 +2713,13 @@ with a deployed API so that its methods can be called via the custom domain
 name.
 -}
 data ApiGatewayBasePathMappingResource s = ApiGatewayBasePathMappingResource {
-      _api_id      :: !(TF.Attribute s "api_id" Text)
+      _api_id :: !(TF.Attribute s "api_id" Text)
     {- ^ (Required) The id of the API to connect. -}
-    , _base_path   :: !(TF.Attribute s "base_path" Text)
+    , _base_path :: !(TF.Attribute s "base_path" Text)
     {- ^ (Optional) Path segment that must be prepended to the path when accessing the API via this mapping. If omitted, the API is exposed at the root of the given domain. -}
     , _domain_name :: !(TF.Attribute s "domain_name" Text)
     {- ^ (Required) The already-registered domain name to connect the API to. -}
-    , _stage_name  :: !(TF.Attribute s "stage_name" Text)
+    , _stage_name :: !(TF.Attribute s "stage_name" Text)
     {- ^ (Optional) The name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path. -}
     } deriving (Show, Eq)
 
@@ -2782,20 +2791,24 @@ instance HasDescription (ApiGatewayClientCertificateResource s) Text where
              (\s a -> s { _description = a } :: ApiGatewayClientCertificateResource s)
 
 instance HasComputedCreatedDate (ApiGatewayClientCertificateResource s) Text where
-    computedCreatedDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_date")
+    type HasComputedCreatedDateThread (ApiGatewayClientCertificateResource s) Text = s
+
+    computedCreatedDate = to (\_ -> TF.Computed "created_date")
 
 instance HasComputedExpirationDate (ApiGatewayClientCertificateResource s) Text where
-    computedExpirationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "expiration_date")
+    type HasComputedExpirationDateThread (ApiGatewayClientCertificateResource s) Text = s
+
+    computedExpirationDate = to (\_ -> TF.Computed "expiration_date")
 
 instance HasComputedId (ApiGatewayClientCertificateResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ApiGatewayClientCertificateResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedPemEncodedCertificate (ApiGatewayClientCertificateResource s) Text where
-    computedPemEncodedCertificate =
-        to (\x -> TF.Computed (TF.referenceKey x) "pem_encoded_certificate")
+    type HasComputedPemEncodedCertificateThread (ApiGatewayClientCertificateResource s) Text = s
+
+    computedPemEncodedCertificate = to (\_ -> TF.Computed "pem_encoded_certificate")
 
 apiGatewayClientCertificateResource :: TF.Resource TF.AWS (ApiGatewayClientCertificateResource s)
 apiGatewayClientCertificateResource =
@@ -2812,15 +2825,15 @@ Provides an API Gateway Deployment. -> Note: Depends on having
 an explicit @depends_on = ["aws_api_gateway_integration.name"]@ .
 -}
 data ApiGatewayDeploymentResource s = ApiGatewayDeploymentResource {
-      _description       :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the deployment -}
-    , _rest_api_id       :: !(TF.Attribute s "rest_api_id" Text)
+    , _rest_api_id :: !(TF.Attribute s "rest_api_id" Text)
     {- ^ (Required) The ID of the associated REST API -}
     , _stage_description :: !(TF.Attribute s "stage_description" Text)
     {- ^ (Optional) The description of the stage -}
-    , _stage_name        :: !(TF.Attribute s "stage_name" Text)
+    , _stage_name :: !(TF.Attribute s "stage_name" Text)
     {- ^ (Required) The name of the stage -}
-    , _variables         :: !(TF.Attribute s "variables" Text)
+    , _variables :: !(TF.Attribute s "variables" Text)
     {- ^ (Optional) A map that defines variables for the stage -}
     } deriving (Show, Eq)
 
@@ -2869,20 +2882,24 @@ instance HasVariables (ApiGatewayDeploymentResource s) Text where
              (\s a -> s { _variables = a } :: ApiGatewayDeploymentResource s)
 
 instance HasComputedCreatedDate (ApiGatewayDeploymentResource s) Text where
-    computedCreatedDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_date")
+    type HasComputedCreatedDateThread (ApiGatewayDeploymentResource s) Text = s
+
+    computedCreatedDate = to (\_ -> TF.Computed "created_date")
 
 instance HasComputedExecutionArn (ApiGatewayDeploymentResource s) Text where
-    computedExecutionArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "execution_arn")
+    type HasComputedExecutionArnThread (ApiGatewayDeploymentResource s) Text = s
+
+    computedExecutionArn = to (\_ -> TF.Computed "execution_arn")
 
 instance HasComputedId (ApiGatewayDeploymentResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ApiGatewayDeploymentResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedInvokeUrl (ApiGatewayDeploymentResource s) Text where
-    computedInvokeUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "invoke_url")
+    type HasComputedInvokeUrlThread (ApiGatewayDeploymentResource s) Text = s
+
+    computedInvokeUrl = to (\_ -> TF.Computed "invoke_url")
 
 apiGatewayDeploymentResource :: TF.Resource TF.AWS (ApiGatewayDeploymentResource s)
 apiGatewayDeploymentResource =
@@ -2900,9 +2917,9 @@ apiGatewayDeploymentResource =
 Provides a settings of an API Gateway Documentation Part.
 -}
 data ApiGatewayDocumentationPartResource s = ApiGatewayDocumentationPartResource {
-      _location    :: !(TF.Attribute s "location" Text)
+      _location :: !(TF.Attribute s "location" Text)
     {- ^ (Required) The location of the targeted API entity of the to-be-created documentation part. See below. -}
-    , _properties  :: !(TF.Attribute s "properties" Text)
+    , _properties :: !(TF.Attribute s "properties" Text)
     {- ^ (Required) A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published. -}
     , _rest_api_id :: !(TF.Attribute s "rest_api_id" Text)
     {- ^ (Required) The ID of the associated Rest API -}
@@ -3027,20 +3044,24 @@ instance HasDomainName (ApiGatewayDomainNameResource s) Text where
              (\s a -> s { _domain_name = a } :: ApiGatewayDomainNameResource s)
 
 instance HasComputedCertificateUploadDate (ApiGatewayDomainNameResource s) Text where
-    computedCertificateUploadDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "certificate_upload_date")
+    type HasComputedCertificateUploadDateThread (ApiGatewayDomainNameResource s) Text = s
+
+    computedCertificateUploadDate = to (\_ -> TF.Computed "certificate_upload_date")
 
 instance HasComputedCloudfrontDomainName (ApiGatewayDomainNameResource s) Text where
-    computedCloudfrontDomainName =
-        to (\x -> TF.Computed (TF.referenceKey x) "cloudfront_domain_name")
+    type HasComputedCloudfrontDomainNameThread (ApiGatewayDomainNameResource s) Text = s
+
+    computedCloudfrontDomainName = to (\_ -> TF.Computed "cloudfront_domain_name")
 
 instance HasComputedCloudfrontZoneId (ApiGatewayDomainNameResource s) Text where
-    computedCloudfrontZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "cloudfront_zone_id")
+    type HasComputedCloudfrontZoneIdThread (ApiGatewayDomainNameResource s) Text = s
+
+    computedCloudfrontZoneId = to (\_ -> TF.Computed "cloudfront_zone_id")
 
 instance HasComputedId (ApiGatewayDomainNameResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ApiGatewayDomainNameResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 apiGatewayDomainNameResource :: TF.Resource TF.AWS (ApiGatewayDomainNameResource s)
 apiGatewayDomainNameResource =
@@ -3061,13 +3082,13 @@ Provides an API Gateway Gateway Response for a REST API Gateway.
 data ApiGatewayGatewayResponseResource s = ApiGatewayGatewayResponseResource {
       _response_parameters :: !(TF.Attribute s "response_parameters" Text)
     {- ^ (Optional) A map specifying the templates used to transform the response body. -}
-    , _response_templates  :: !(TF.Attribute s "response_templates" Text)
+    , _response_templates :: !(TF.Attribute s "response_templates" Text)
     {- ^ (Optional) A map specifying the parameters (paths, query strings and headers) of the Gateway Response. -}
-    , _response_type       :: !(TF.Attribute s "response_type" Text)
+    , _response_type :: !(TF.Attribute s "response_type" Text)
     {- ^ (Required) The response type of the associated GatewayResponse. -}
-    , _rest_api_id         :: !(TF.Attribute s "rest_api_id" Text)
+    , _rest_api_id :: !(TF.Attribute s "rest_api_id" Text)
     {- ^ (Required) The string identifier of the associated REST API. -}
-    , _status_code         :: !(TF.Attribute s "status_code" Text)
+    , _status_code :: !(TF.Attribute s "status_code" Text)
     {- ^ (Optional) The HTTP status code of the Gateway Response. -}
     } deriving (Show, Eq)
 
@@ -3421,23 +3442,23 @@ apiGatewayIntegrationResponseResource =
 Provides a HTTP Method for an API Gateway Resource.
 -}
 data ApiGatewayMethodResource s = ApiGatewayMethodResource {
-      _api_key_required     :: !(TF.Attribute s "api_key_required" Text)
+      _api_key_required :: !(TF.Attribute s "api_key_required" Text)
     {- ^ (Optional) Specify if the method requires an API key -}
-    , _authorization        :: !(TF.Attribute s "authorization" Text)
+    , _authorization :: !(TF.Attribute s "authorization" Text)
     {- ^ (Required) The type of authorization used for the method ( @NONE@ , @CUSTOM@ , @AWS_IAM@ ) -}
-    , _authorizer_id        :: !(TF.Attribute s "authorizer_id" Text)
+    , _authorizer_id :: !(TF.Attribute s "authorizer_id" Text)
     {- ^ (Optional) The authorizer id to be used when the authorization is @CUSTOM@ -}
-    , _http_method          :: !(TF.Attribute s "http_method" Text)
+    , _http_method :: !(TF.Attribute s "http_method" Text)
     {- ^ (Required) The HTTP Method ( @GET@ , @POST@ , @PUT@ , @DELETE@ , @HEAD@ , @OPTIONS@ , @ANY@ ) -}
-    , _request_models       :: !(TF.Attribute s "request_models" Text)
+    , _request_models :: !(TF.Attribute s "request_models" Text)
     {- ^ (Optional) A map of the API models used for the request's content type where key is the content type (e.g. @application/json@ ) and value is either @Error@ , @Empty@ (built-in models) or @aws_api_gateway_model@ 's @name@ . -}
-    , _request_parameters   :: !(TF.Attribute s "request_parameters" Text)
+    , _request_parameters :: !(TF.Attribute s "request_parameters" Text)
     {- ^ (Optional) A map of request query string parameters and headers that should be passed to the integration. For example: -}
     , _request_validator_id :: !(TF.Attribute s "request_validator_id" Text)
     {- ^ (Optional) The ID of a @aws_api_gateway_request_validator@ -}
-    , _resource_id          :: !(TF.Attribute s "resource_id" Text)
+    , _resource_id :: !(TF.Attribute s "resource_id" Text)
     {- ^ (Required) The API resource ID -}
-    , _rest_api_id          :: !(TF.Attribute s "rest_api_id" Text)
+    , _rest_api_id :: !(TF.Attribute s "rest_api_id" Text)
     {- ^ (Required) The ID of the associated REST API -}
     } deriving (Show, Eq)
 
@@ -3635,9 +3656,9 @@ data ApiGatewayMethodSettingsResource s = ApiGatewayMethodSettingsResource {
     {- ^ (Required) Method path defined as @{resource_path}/{http_method}@ for an individual method override, or @*/*@ for overriding all methods in the stage. -}
     , _rest_api_id :: !(TF.Attribute s "rest_api_id" Text)
     {- ^ (Required) The ID of the REST API -}
-    , _settings    :: !(TF.Attribute s "settings" Text)
+    , _settings :: !(TF.Attribute s "settings" Text)
     {- ^ (Required) The settings block, see below. -}
-    , _stage_name  :: !(TF.Attribute s "stage_name" Text)
+    , _stage_name :: !(TF.Attribute s "stage_name" Text)
     {- ^ (Required) The name of the stage -}
     } deriving (Show, Eq)
 
@@ -3694,13 +3715,13 @@ Provides a Model for a API Gateway.
 data ApiGatewayModelResource s = ApiGatewayModelResource {
       _content_type :: !(TF.Attribute s "content_type" Text)
     {- ^ (Required) The content type of the model -}
-    , _description  :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the model -}
-    , _name         :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the model -}
-    , _rest_api_id  :: !(TF.Attribute s "rest_api_id" Text)
+    , _rest_api_id :: !(TF.Attribute s "rest_api_id" Text)
     {- ^ (Required) The ID of the associated REST API -}
-    , _schema       :: !(TF.Attribute s "schema" Text)
+    , _schema :: !(TF.Attribute s "schema" Text)
     {- ^ (Required) The schema of the model in a JSON form -}
     } deriving (Show, Eq)
 
@@ -3749,8 +3770,9 @@ instance HasSchema (ApiGatewayModelResource s) Text where
              (\s a -> s { _schema = a } :: ApiGatewayModelResource s)
 
 instance HasComputedId (ApiGatewayModelResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ApiGatewayModelResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 apiGatewayModelResource :: TF.Resource TF.AWS (ApiGatewayModelResource s)
 apiGatewayModelResource =
@@ -3768,9 +3790,9 @@ apiGatewayModelResource =
 Provides an API Gateway Resource.
 -}
 data ApiGatewayResourceResource s = ApiGatewayResourceResource {
-      _parent_id   :: !(TF.Attribute s "parent_id" Text)
+      _parent_id :: !(TF.Attribute s "parent_id" Text)
     {- ^ (Required) The ID of the parent API resource -}
-    , _path_part   :: !(TF.Attribute s "path_part" Text)
+    , _path_part :: !(TF.Attribute s "path_part" Text)
     {- ^ (Required) The last path segment of this API resource. -}
     , _rest_api_id :: !(TF.Attribute s "rest_api_id" Text)
     {- ^ (Required) The ID of the associated REST API -}
@@ -3805,12 +3827,14 @@ instance HasRestApiId (ApiGatewayResourceResource s) Text where
              (\s a -> s { _rest_api_id = a } :: ApiGatewayResourceResource s)
 
 instance HasComputedId (ApiGatewayResourceResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ApiGatewayResourceResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedPath (ApiGatewayResourceResource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (ApiGatewayResourceResource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 apiGatewayResourceResource :: TF.Resource TF.AWS (ApiGatewayResourceResource s)
 apiGatewayResourceResource =
@@ -3828,11 +3852,11 @@ Provides an API Gateway REST API.
 data ApiGatewayRestApiResource s = ApiGatewayRestApiResource {
       _binary_media_types :: !(TF.Attribute s "binary_media_types" Text)
     {- ^ (Optional) The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads. -}
-    , _body               :: !(TF.Attribute s "body" Text)
+    , _body :: !(TF.Attribute s "body" Text)
     {- ^ (Optional) An OpenAPI specification that defines the set of routes and integrations to create as part of the REST API. -}
-    , _description        :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the REST API -}
-    , _name               :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the REST API -}
     } deriving (Show, Eq)
 
@@ -3873,16 +3897,19 @@ instance HasName (ApiGatewayRestApiResource s) Text where
              (\s a -> s { _name = a } :: ApiGatewayRestApiResource s)
 
 instance HasComputedCreatedDate (ApiGatewayRestApiResource s) Text where
-    computedCreatedDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_date")
+    type HasComputedCreatedDateThread (ApiGatewayRestApiResource s) Text = s
+
+    computedCreatedDate = to (\_ -> TF.Computed "created_date")
 
 instance HasComputedId (ApiGatewayRestApiResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ApiGatewayRestApiResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedRootResourceId (ApiGatewayRestApiResource s) Text where
-    computedRootResourceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "root_resource_id")
+    type HasComputedRootResourceIdThread (ApiGatewayRestApiResource s) Text = s
+
+    computedRootResourceId = to (\_ -> TF.Computed "root_resource_id")
 
 apiGatewayRestApiResource :: TF.Resource TF.AWS (ApiGatewayRestApiResource s)
 apiGatewayRestApiResource =
@@ -4015,9 +4042,9 @@ apiGatewayStageResource =
 Provides an API Gateway Usage Plan Key.
 -}
 data ApiGatewayUsagePlanKeyResource s = ApiGatewayUsagePlanKeyResource {
-      _key_id        :: !(TF.Attribute s "key_id" Text)
+      _key_id :: !(TF.Attribute s "key_id" Text)
     {- ^ (Required) The identifier of the API key resource. -}
-    , _key_type      :: !(TF.Attribute s "key_type" Text)
+    , _key_type :: !(TF.Attribute s "key_type" Text)
     {- ^ (Required) The type of the API key resource. Currently, the valid key type is API_KEY. -}
     , _usage_plan_id :: !(TF.Attribute s "usage_plan_id" Text)
     {- ^ (Required) The Id of the usage plan resource representing to associate the key to. -}
@@ -4052,28 +4079,34 @@ instance HasUsagePlanId (ApiGatewayUsagePlanKeyResource s) Text where
              (\s a -> s { _usage_plan_id = a } :: ApiGatewayUsagePlanKeyResource s)
 
 instance HasComputedId (ApiGatewayUsagePlanKeyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ApiGatewayUsagePlanKeyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedKeyId (ApiGatewayUsagePlanKeyResource s) Text where
-    computedKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_id")
+    type HasComputedKeyIdThread (ApiGatewayUsagePlanKeyResource s) Text = s
+
+    computedKeyId = to (\_ -> TF.Computed "key_id")
 
 instance HasComputedKeyType (ApiGatewayUsagePlanKeyResource s) Text where
-    computedKeyType =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_type")
+    type HasComputedKeyTypeThread (ApiGatewayUsagePlanKeyResource s) Text = s
+
+    computedKeyType = to (\_ -> TF.Computed "key_type")
 
 instance HasComputedName (ApiGatewayUsagePlanKeyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (ApiGatewayUsagePlanKeyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedUsagePlanId (ApiGatewayUsagePlanKeyResource s) Text where
-    computedUsagePlanId =
-        to (\x -> TF.Computed (TF.referenceKey x) "usage_plan_id")
+    type HasComputedUsagePlanIdThread (ApiGatewayUsagePlanKeyResource s) Text = s
+
+    computedUsagePlanId = to (\_ -> TF.Computed "usage_plan_id")
 
 instance HasComputedValue (ApiGatewayUsagePlanKeyResource s) Text where
-    computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
+    type HasComputedValueThread (ApiGatewayUsagePlanKeyResource s) Text = s
+
+    computedValue = to (\_ -> TF.Computed "value")
 
 apiGatewayUsagePlanKeyResource :: TF.Resource TF.AWS (ApiGatewayUsagePlanKeyResource s)
 apiGatewayUsagePlanKeyResource =
@@ -4089,15 +4122,15 @@ apiGatewayUsagePlanKeyResource =
 Provides an API Gateway Usage Plan.
 -}
 data ApiGatewayUsagePlanResource s = ApiGatewayUsagePlanResource {
-      _api_stages        :: !(TF.Attribute s "api_stages" Text)
+      _api_stages :: !(TF.Attribute s "api_stages" Text)
     {- ^ (Optional) The associated <#api-stages-arguments> of the usage plan. -}
-    , _description       :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Required) The description of a usage plan. -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the usage plan. -}
-    , _product_code      :: !(TF.Attribute s "product_code" Text)
+    , _product_code :: !(TF.Attribute s "product_code" Text)
     {- ^ (Optional) The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace. -}
-    , _quota_settings    :: !(TF.Attribute s "quota_settings" Text)
+    , _quota_settings :: !(TF.Attribute s "quota_settings" Text)
     {- ^ (Optional) The <#quota-settings-arguments> of the usage plan. -}
     , _throttle_settings :: !(TF.Attribute s "throttle_settings" Text)
     {- ^ (Optional) The <#throttling-settings-arguments> of the usage plan. -}
@@ -4173,13 +4206,13 @@ Provides an application cookie stickiness policy, which allows an ELB to wed
 its sticky cookie's expiration to a cookie generated by your application.
 -}
 data AppCookieStickinessPolicyResource s = AppCookieStickinessPolicyResource {
-      _cookie_name   :: !(TF.Attribute s "cookie_name" Text)
+      _cookie_name :: !(TF.Attribute s "cookie_name" Text)
     {- ^ (Required) The application cookie whose lifetime the ELB's cookie should follow. -}
-    , _lb_port       :: !(TF.Attribute s "lb_port" TF.Word16)
+    , _lb_port :: !(TF.Attribute s "lb_port" TF.Word16)
     {- ^ (Required) The load balancer port to which the policy should be applied. This must be an active listener on the load balancer. -}
     , _load_balancer :: !(TF.Attribute s "load_balancer" Text)
     {- ^ (Required) The name of load balancer to which the policy should be attached. -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the stickiness policy. -}
     } deriving (Show, Eq)
 
@@ -4220,24 +4253,29 @@ instance HasName (AppCookieStickinessPolicyResource s) Text where
              (\s a -> s { _name = a } :: AppCookieStickinessPolicyResource s)
 
 instance HasComputedCookieName (AppCookieStickinessPolicyResource s) Text where
-    computedCookieName =
-        to (\x -> TF.Computed (TF.referenceKey x) "cookie_name")
+    type HasComputedCookieNameThread (AppCookieStickinessPolicyResource s) Text = s
+
+    computedCookieName = to (\_ -> TF.Computed "cookie_name")
 
 instance HasComputedId (AppCookieStickinessPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (AppCookieStickinessPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLbPort (AppCookieStickinessPolicyResource s) TF.Word16 where
-    computedLbPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "lb_port")
+    type HasComputedLbPortThread (AppCookieStickinessPolicyResource s) TF.Word16 = s
+
+    computedLbPort = to (\_ -> TF.Computed "lb_port")
 
 instance HasComputedLoadBalancer (AppCookieStickinessPolicyResource s) Text where
-    computedLoadBalancer =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer")
+    type HasComputedLoadBalancerThread (AppCookieStickinessPolicyResource s) Text = s
+
+    computedLoadBalancer = to (\_ -> TF.Computed "load_balancer")
 
 instance HasComputedName (AppCookieStickinessPolicyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (AppCookieStickinessPolicyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 appCookieStickinessPolicyResource :: TF.Resource TF.AWS (AppCookieStickinessPolicyResource s)
 appCookieStickinessPolicyResource =
@@ -4348,21 +4386,21 @@ appautoscalingPolicyResource =
 Provides an Application AutoScaling ScheduledAction resource.
 -}
 data AppautoscalingScheduledActionResource s = AppautoscalingScheduledActionResource {
-      _end_time               :: !(TF.Attribute s "end_time" Text)
+      _end_time :: !(TF.Attribute s "end_time" Text)
     {- ^ (Optional) The date and time for the scheduled action to end. Specify the following format: 2006-01-02T15:04:05Z -}
-    , _name                   :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the scheduled action. -}
-    , _resource_id            :: !(TF.Attribute s "resource_id" Text)
+    , _resource_id :: !(TF.Attribute s "resource_id" Text)
     {- ^ (Required) The identifier of the resource associated with the scheduled action. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ResourceId> -}
-    , _scalable_dimension     :: !(TF.Attribute s "scalable_dimension" Text)
+    , _scalable_dimension :: !(TF.Attribute s "scalable_dimension" Text)
     {- ^ (Optional) The scalable dimension. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ScalableDimension> Example: ecs:service:DesiredCount -}
     , _scalable_target_action :: !(TF.Attribute s "scalable_target_action" Text)
     {- ^ (Optional) The new minimum and maximum capacity. You can set both values or just one. See <#scalable-target-action-arguments> -}
-    , _schedule               :: !(TF.Attribute s "schedule" Text)
+    , _schedule :: !(TF.Attribute s "schedule" Text)
     {- ^ (Optional) The schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). In UTC. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-Schedule> -}
-    , _service_namespace      :: !(TF.Attribute s "service_namespace" Text)
+    , _service_namespace :: !(TF.Attribute s "service_namespace" Text)
     {- ^ (Required) The namespace of the AWS service. Documentation can be found in the parameter at: <https://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScheduledAction.html#ApplicationAutoScaling-PutScheduledAction-request-ServiceNamespace> Example: ecs -}
-    , _start_time             :: !(TF.Attribute s "start_time" Text)
+    , _start_time :: !(TF.Attribute s "start_time" Text)
     {- ^ (Optional) The date and time for the scheduled action to start. Specify the following format: 2006-01-02T15:04:05Z -}
     } deriving (Show, Eq)
 
@@ -4453,17 +4491,17 @@ appautoscalingScheduledActionResource =
 Provides an Application AutoScaling ScalableTarget resource.
 -}
 data AppautoscalingTargetResource s = AppautoscalingTargetResource {
-      _max_capacity       :: !(TF.Attribute s "max_capacity" Text)
+      _max_capacity :: !(TF.Attribute s "max_capacity" Text)
     {- ^ (Required) The max capacity of the scalable target. -}
-    , _min_capacity       :: !(TF.Attribute s "min_capacity" Text)
+    , _min_capacity :: !(TF.Attribute s "min_capacity" Text)
     {- ^ (Required) The min capacity of the scalable target. -}
-    , _resource_id        :: !(TF.Attribute s "resource_id" Text)
+    , _resource_id :: !(TF.Attribute s "resource_id" Text)
     {- ^ (Required) The resource type and unique identifier string for the resource associated with the scaling policy. Documentation can be found in the @ResourceId@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
-    , _role_arn           :: !(TF.Attribute s "role_arn" Text)
+    , _role_arn :: !(TF.Attribute s "role_arn" Text)
     {- ^ (Optional) The ARN of the IAM role that allows Application AutoScaling to modify your scalable target on your behalf. -}
     , _scalable_dimension :: !(TF.Attribute s "scalable_dimension" Text)
     {- ^ (Required) The scalable dimension of the scalable target. Documentation can be found in the @ScalableDimension@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
-    , _service_namespace  :: !(TF.Attribute s "service_namespace" Text)
+    , _service_namespace :: !(TF.Attribute s "service_namespace" Text)
     {- ^ (Required) The AWS service namespace of the scalable target. Documentation can be found in the @ServiceNamespace@ parameter at: <http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html#API_RegisterScalableTarget_RequestParameters> -}
     } deriving (Show, Eq)
 
@@ -4536,7 +4574,7 @@ appautoscalingTargetResource =
 Provides a SSM resource data sync.
 -}
 data AthenaDatabaseResource s = AthenaDatabaseResource {
-      _name           :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Name for the configuration. -}
     , _s3_destination :: !(TF.Attribute s "s3_destination" Text)
     {- ^ (Required) Amazon S3 configuration details for the sync. -}
@@ -4575,13 +4613,13 @@ athenaDatabaseResource =
 Provides an Athena Named Query resource.
 -}
 data AthenaNamedQueryResource s = AthenaNamedQueryResource {
-      _database    :: !(TF.Attribute s "database" Text)
+      _database :: !(TF.Attribute s "database" Text)
     {- ^ (Required) The database to which the query belongs. -}
     , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A brief explanation of the query. Maximum length of 1024. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The plain language name for the query. Maximum length of 128. -}
-    , _query       :: !(TF.Attribute s "query" Text)
+    , _query :: !(TF.Attribute s "query" Text)
     {- ^ (Required) The text of the query itself. In other words, all query statements. Maximum length of 262144. -}
     } deriving (Show, Eq)
 
@@ -4622,8 +4660,9 @@ instance HasQuery (AthenaNamedQueryResource s) Text where
              (\s a -> s { _query = a } :: AthenaNamedQueryResource s)
 
 instance HasComputedId (AthenaNamedQueryResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (AthenaNamedQueryResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 athenaNamedQueryResource :: TF.Resource TF.AWS (AthenaNamedQueryResource s)
 athenaNamedQueryResource =
@@ -4646,11 +4685,11 @@ Attachment resource. Doing so will cause a conflict and will overwrite
 attachments.
 -}
 data AutoscalingAttachmentResource s = AutoscalingAttachmentResource {
-      _alb_target_group_arn   :: !(TF.Attribute s "alb_target_group_arn" Text)
+      _alb_target_group_arn :: !(TF.Attribute s "alb_target_group_arn" Text)
     {- ^ (Optional) The ARN of an ALB Target Group. -}
     , _autoscaling_group_name :: !(TF.Attribute s "autoscaling_group_name" Text)
     {- ^ (Required) Name of ASG to associate with the ELB. -}
-    , _elb                    :: !(TF.Attribute s "elb" Text)
+    , _elb :: !(TF.Attribute s "elb" Text)
     {- ^ (Optional) The name of the ELB. -}
     } deriving (Show, Eq)
 
@@ -4963,60 +5002,74 @@ instance HasWaitForElbCapacity (AutoscalingGroupResource s) Text where
              (\s a -> s { _wait_for_elb_capacity = a } :: AutoscalingGroupResource s)
 
 instance HasComputedArn (AutoscalingGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (AutoscalingGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedAvailabilityZones (AutoscalingGroupResource s) Text where
-    computedAvailabilityZones =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zones")
+    type HasComputedAvailabilityZonesThread (AutoscalingGroupResource s) Text = s
+
+    computedAvailabilityZones = to (\_ -> TF.Computed "availability_zones")
 
 instance HasComputedDefaultCooldown (AutoscalingGroupResource s) Text where
-    computedDefaultCooldown =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_cooldown")
+    type HasComputedDefaultCooldownThread (AutoscalingGroupResource s) Text = s
+
+    computedDefaultCooldown = to (\_ -> TF.Computed "default_cooldown")
 
 instance HasComputedDesiredCapacity (AutoscalingGroupResource s) Text where
-    computedDesiredCapacity =
-        to (\x -> TF.Computed (TF.referenceKey x) "desired_capacity")
+    type HasComputedDesiredCapacityThread (AutoscalingGroupResource s) Text = s
+
+    computedDesiredCapacity = to (\_ -> TF.Computed "desired_capacity")
 
 instance HasComputedHealthCheckGracePeriod (AutoscalingGroupResource s) Text where
-    computedHealthCheckGracePeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "health_check_grace_period")
+    type HasComputedHealthCheckGracePeriodThread (AutoscalingGroupResource s) Text = s
+
+    computedHealthCheckGracePeriod = to (\_ -> TF.Computed "health_check_grace_period")
 
 instance HasComputedHealthCheckType (AutoscalingGroupResource s) Text where
-    computedHealthCheckType =
-        to (\x -> TF.Computed (TF.referenceKey x) "health_check_type")
+    type HasComputedHealthCheckTypeThread (AutoscalingGroupResource s) Text = s
+
+    computedHealthCheckType = to (\_ -> TF.Computed "health_check_type")
 
 instance HasComputedId (AutoscalingGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (AutoscalingGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLaunchConfiguration (AutoscalingGroupResource s) Text where
-    computedLaunchConfiguration =
-        to (\x -> TF.Computed (TF.referenceKey x) "launch_configuration")
+    type HasComputedLaunchConfigurationThread (AutoscalingGroupResource s) Text = s
+
+    computedLaunchConfiguration = to (\_ -> TF.Computed "launch_configuration")
 
 instance HasComputedLoadBalancers (AutoscalingGroupResource s) Text where
-    computedLoadBalancers =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancers")
+    type HasComputedLoadBalancersThread (AutoscalingGroupResource s) Text = s
+
+    computedLoadBalancers = to (\_ -> TF.Computed "load_balancers")
 
 instance HasComputedMaxSize (AutoscalingGroupResource s) Text where
-    computedMaxSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "max_size")
+    type HasComputedMaxSizeThread (AutoscalingGroupResource s) Text = s
+
+    computedMaxSize = to (\_ -> TF.Computed "max_size")
 
 instance HasComputedMinSize (AutoscalingGroupResource s) Text where
-    computedMinSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "min_size")
+    type HasComputedMinSizeThread (AutoscalingGroupResource s) Text = s
+
+    computedMinSize = to (\_ -> TF.Computed "min_size")
 
 instance HasComputedName (AutoscalingGroupResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (AutoscalingGroupResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedTargetGroupArns (AutoscalingGroupResource s) Text where
-    computedTargetGroupArns =
-        to (\x -> TF.Computed (TF.referenceKey x) "target_group_arns")
+    type HasComputedTargetGroupArnsThread (AutoscalingGroupResource s) Text = s
+
+    computedTargetGroupArns = to (\_ -> TF.Computed "target_group_arns")
 
 instance HasComputedVpcZoneIdentifier (AutoscalingGroupResource s) Text where
-    computedVpcZoneIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_zone_identifier")
+    type HasComputedVpcZoneIdentifierThread (AutoscalingGroupResource s) Text = s
+
+    computedVpcZoneIdentifier = to (\_ -> TF.Computed "vpc_zone_identifier")
 
 autoscalingGroupResource :: TF.Resource TF.AWS (AutoscalingGroupResource s)
 autoscalingGroupResource =
@@ -5174,11 +5227,11 @@ inside Amazon Web Services, and are applied to each AutoScaling Group you
 supply.
 -}
 data AutoscalingNotificationResource s = AutoscalingNotificationResource {
-      _group_names   :: !(TF.Attribute s "group_names" Text)
+      _group_names :: !(TF.Attribute s "group_names" Text)
     {- ^ (Required) A list of AutoScaling Group Names -}
     , _notifications :: !(TF.Attribute s "notifications" Text)
     {- ^ (Required) A list of Notification Types that trigger notifications. Acceptable values are documented <https://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_NotificationConfiguration.html> -}
-    , _topic_arn     :: !(TF.Attribute s "topic_arn" Text)
+    , _topic_arn :: !(TF.Attribute s "topic_arn" Text)
     {- ^ (Required) The Topic ARN for notifications to be sent through -}
     } deriving (Show, Eq)
 
@@ -5230,13 +5283,13 @@ or
 (policy-based) scaling.
 -}
 data AutoscalingPolicyResource s = AutoscalingPolicyResource {
-      _adjustment_type        :: !(TF.Attribute s "adjustment_type" Text)
+      _adjustment_type :: !(TF.Attribute s "adjustment_type" Text)
     {- ^ (Required) Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values are @ChangeInCapacity@ , @ExactCapacity@ , and @PercentChangeInCapacity@ . -}
     , _autoscaling_group_name :: !(TF.Attribute s "autoscaling_group_name" Text)
     {- ^ (Required) The name of the autoscaling group. -}
-    , _name                   :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the policy. -}
-    , _policy_type            :: !(TF.Attribute s "policy_type" Text)
+    , _policy_type :: !(TF.Attribute s "policy_type" Text)
     {- ^ (Optional) The policy type, either "SimpleScaling" or "StepScaling". If this value isn't provided, AWS will default to "SimpleScaling." -}
     } deriving (Show, Eq)
 
@@ -5277,24 +5330,29 @@ instance HasPolicyType (AutoscalingPolicyResource s) Text where
              (\s a -> s { _policy_type = a } :: AutoscalingPolicyResource s)
 
 instance HasComputedAdjustmentType (AutoscalingPolicyResource s) Text where
-    computedAdjustmentType =
-        to (\x -> TF.Computed (TF.referenceKey x) "adjustment_type")
+    type HasComputedAdjustmentTypeThread (AutoscalingPolicyResource s) Text = s
+
+    computedAdjustmentType = to (\_ -> TF.Computed "adjustment_type")
 
 instance HasComputedArn (AutoscalingPolicyResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (AutoscalingPolicyResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedAutoscalingGroupName (AutoscalingPolicyResource s) Text where
-    computedAutoscalingGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "autoscaling_group_name")
+    type HasComputedAutoscalingGroupNameThread (AutoscalingPolicyResource s) Text = s
+
+    computedAutoscalingGroupName = to (\_ -> TF.Computed "autoscaling_group_name")
 
 instance HasComputedName (AutoscalingPolicyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (AutoscalingPolicyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedPolicyType (AutoscalingPolicyResource s) Text where
-    computedPolicyType =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy_type")
+    type HasComputedPolicyTypeThread (AutoscalingPolicyResource s) Text = s
+
+    computedPolicyType = to (\_ -> TF.Computed "policy_type")
 
 autoscalingPolicyResource :: TF.Resource TF.AWS (AutoscalingPolicyResource s)
 autoscalingPolicyResource =
@@ -5313,19 +5371,19 @@ Provides an AutoScaling Schedule resource.
 data AutoscalingScheduleResource s = AutoscalingScheduleResource {
       _autoscaling_group_name :: !(TF.Attribute s "autoscaling_group_name" Text)
     {- ^ (Required) The name or Amazon Resource Name (ARN) of the Auto Scaling group. -}
-    , _desired_capacity       :: !(TF.Attribute s "desired_capacity" Text)
+    , _desired_capacity :: !(TF.Attribute s "desired_capacity" Text)
     {- ^ (Optional) The number of EC2 instances that should be running in the group. Default 0.  Set to -1 if you don't want to change the desired capacity at the scheduled time. -}
-    , _end_time               :: !(TF.Attribute s "end_time" Text)
+    , _end_time :: !(TF.Attribute s "end_time" Text)
     {- ^ (Optional) The time for this action to end, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action in the past, Auto Scaling returns an error message. -}
-    , _max_size               :: !(TF.Attribute s "max_size" Text)
+    , _max_size :: !(TF.Attribute s "max_size" Text)
     {- ^ (Optional) The maximum size for the Auto Scaling group. Default 0. Set to -1 if you don't want to change the maximum size at the scheduled time. -}
-    , _min_size               :: !(TF.Attribute s "min_size" Text)
+    , _min_size :: !(TF.Attribute s "min_size" Text)
     {- ^ (Optional) The minimum size for the Auto Scaling group. Default 0. Set to -1 if you don't want to change the minimum size at the scheduled time. -}
-    , _recurrence             :: !(TF.Attribute s "recurrence" Text)
+    , _recurrence :: !(TF.Attribute s "recurrence" Text)
     {- ^ (Optional) The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. -}
-    , _scheduled_action_name  :: !(TF.Attribute s "scheduled_action_name" Text)
+    , _scheduled_action_name :: !(TF.Attribute s "scheduled_action_name" Text)
     {- ^ (Required) The name of this scaling action. -}
-    , _start_time             :: !(TF.Attribute s "start_time" Text)
+    , _start_time :: !(TF.Attribute s "start_time" Text)
     {- ^ (Optional) The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format in UTC/GMT only (for example, 2014-06-01T00:00:00Z ). If you try to schedule your action in the past, Auto Scaling returns an error message. -}
     } deriving (Show, Eq)
 
@@ -5398,8 +5456,9 @@ instance HasStartTime (AutoscalingScheduleResource s) Text where
              (\s a -> s { _start_time = a } :: AutoscalingScheduleResource s)
 
 instance HasComputedArn (AutoscalingScheduleResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (AutoscalingScheduleResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 autoscalingScheduleResource :: TF.Resource TF.AWS (AutoscalingScheduleResource s)
 autoscalingScheduleResource =
@@ -5487,20 +5546,24 @@ instance HasType' (BatchComputeEnvironmentResource s) Text where
              (\s a -> s { _type' = a } :: BatchComputeEnvironmentResource s)
 
 instance HasComputedArn (BatchComputeEnvironmentResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (BatchComputeEnvironmentResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedEcsClusterArn (BatchComputeEnvironmentResource s) Text where
-    computedEcsClusterArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "ecs_cluster_arn")
+    type HasComputedEcsClusterArnThread (BatchComputeEnvironmentResource s) Text = s
+
+    computedEcsClusterArn = to (\_ -> TF.Computed "ecs_cluster_arn")
 
 instance HasComputedStatus (BatchComputeEnvironmentResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (BatchComputeEnvironmentResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 instance HasComputedStatusReason (BatchComputeEnvironmentResource s) Text where
-    computedStatusReason =
-        to (\x -> TF.Computed (TF.referenceKey x) "status_reason")
+    type HasComputedStatusReasonThread (BatchComputeEnvironmentResource s) Text = s
+
+    computedStatusReason = to (\_ -> TF.Computed "status_reason")
 
 batchComputeEnvironmentResource :: TF.Resource TF.AWS (BatchComputeEnvironmentResource s)
 batchComputeEnvironmentResource =
@@ -5520,13 +5583,13 @@ Provides a Batch Job Definition resource.
 data BatchJobDefinitionResource s = BatchJobDefinitionResource {
       _container_properties :: !(TF.Attribute s "container_properties" Text)
     {- ^ (Optional) A valid <http://docs.aws.amazon.com/batch/latest/APIReference/API_RegisterJobDefinition.html> provided as a single valid JSON document. This parameter is required if the @type@ parameter is @container@ . -}
-    , _name                 :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Specifies the name of the job definition. -}
-    , _parameters           :: !(TF.Attribute s "parameters" Text)
+    , _parameters :: !(TF.Attribute s "parameters" Text)
     {- ^ (Optional) Specifies the parameter substitution placeholders to set in the job definition. -}
-    , _retry_strategy       :: !(TF.Attribute s "retry_strategy" Text)
+    , _retry_strategy :: !(TF.Attribute s "retry_strategy" Text)
     {- ^ (Optional) Specifies the retry strategy to use for failed jobs that are submitted with this job definition. Maximum number of @retry_strategy@ is @1@ .  Defined below. -}
-    , _type'                :: !(TF.Attribute s "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of job definition.  Must be @container@ -}
     } deriving (Show, Eq)
 
@@ -5592,11 +5655,11 @@ Provides a Batch Job Queue resource.
 data BatchJobQueueResource s = BatchJobQueueResource {
       _compute_environments :: !(TF.Attribute s "compute_environments" Text)
     {- ^ (Required) Specifies the set of compute environments mapped to a job queue and their order.  The position of the compute environments in the list will dictate the order. You can associate up to 3 compute environments with a job queue. -}
-    , _name                 :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Specifies the name of the job queue. -}
-    , _priority             :: !(TF.Attribute s "priority" Text)
+    , _priority :: !(TF.Attribute s "priority" Text)
     {- ^ (Required) The priority of the job queue. Job queues with a higher priority are evaluated first when associated with same compute environment. -}
-    , _state                :: !(TF.Attribute s "state" Text)
+    , _state :: !(TF.Attribute s "state" Text)
     {- ^ (Required) The state of the job queue. Must be one of: @ENABLED@ or @DISABLED@ -}
     } deriving (Show, Eq)
 
@@ -5637,8 +5700,9 @@ instance HasState (BatchJobQueueResource s) Text where
              (\s a -> s { _state = a } :: BatchJobQueueResource s)
 
 instance HasComputedArn (BatchJobQueueResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (BatchJobQueueResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 batchJobQueueResource :: TF.Resource TF.AWS (BatchJobQueueResource s)
 batchJobQueueResource =
@@ -5655,29 +5719,29 @@ batchJobQueueResource =
 Provides a CloudFormation Stack resource.
 -}
 data CloudformationStackResource s = CloudformationStackResource {
-      _capabilities       :: !(TF.Attribute s "capabilities" Text)
+      _capabilities :: !(TF.Attribute s "capabilities" Text)
     {- ^ (Optional) A list of capabilities. Valid values: @CAPABILITY_IAM@ or @CAPABILITY_NAMED_IAM@ -}
-    , _disable_rollback   :: !(TF.Attribute s "disable_rollback" Text)
+    , _disable_rollback :: !(TF.Attribute s "disable_rollback" Text)
     {- ^ (Optional) Set to true to disable rollback of the stack if stack creation failed. Conflicts with @on_failure@ . -}
-    , _iam_role_arn       :: !(TF.Attribute s "iam_role_arn" Text)
+    , _iam_role_arn :: !(TF.Attribute s "iam_role_arn" Text)
     {- ^ (Optional) The ARN of an IAM role that AWS CloudFormation assumes to create the stack. If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials. -}
-    , _name               :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Stack name. -}
-    , _notification_arns  :: !(TF.Attribute s "notification_arns" Text)
+    , _notification_arns :: !(TF.Attribute s "notification_arns" Text)
     {- ^ (Optional) A list of SNS topic ARNs to publish stack related events. -}
-    , _on_failure         :: !(TF.Attribute s "on_failure" Text)
+    , _on_failure :: !(TF.Attribute s "on_failure" Text)
     {- ^ (Optional) Action to be taken if stack creation fails. This must be one of: @DO_NOTHING@ , @ROLLBACK@ , or @DELETE@ . Conflicts with @disable_rollback@ . -}
-    , _parameters         :: !(TF.Attribute s "parameters" Text)
+    , _parameters :: !(TF.Attribute s "parameters" Text)
     {- ^ (Optional) A list of Parameter structures that specify input parameters for the stack. -}
-    , _policy_body        :: !(TF.Attribute s "policy_body" Text)
+    , _policy_body :: !(TF.Attribute s "policy_body" Text)
     {- ^ (Optional) Structure containing the stack policy body. Conflicts w/ @policy_url@ . -}
-    , _policy_url         :: !(TF.Attribute s "policy_url" Text)
+    , _policy_url :: !(TF.Attribute s "policy_url" Text)
     {- ^ (Optional) Location of a file containing the stack policy. Conflicts w/ @policy_body@ . -}
-    , _tags               :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A list of tags to associate with this stack. -}
-    , _template_body      :: !(TF.Attribute s "template_body" Text)
+    , _template_body :: !(TF.Attribute s "template_body" Text)
     {- ^ (Optional) Structure containing the template body (max size: 51,200 bytes). -}
-    , _template_url       :: !(TF.Attribute s "template_url" Text)
+    , _template_url :: !(TF.Attribute s "template_url" Text)
     {- ^ (Optional) Location of a file containing the template body (max size: 460,800 bytes). -}
     , _timeout_in_minutes :: !(TF.Attribute s "timeout_in_minutes" Text)
     {- ^ (Optional) The amount of time that can pass before the stack status becomes @CREATE_FAILED@ . -}
@@ -5792,12 +5856,14 @@ instance HasTimeoutInMinutes (CloudformationStackResource s) Text where
              (\s a -> s { _timeout_in_minutes = a } :: CloudformationStackResource s)
 
 instance HasComputedId (CloudformationStackResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CloudformationStackResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedOutputs (CloudformationStackResource s) Text where
-    computedOutputs =
-        to (\x -> TF.Computed (TF.referenceKey x) "outputs")
+    type HasComputedOutputsThread (CloudformationStackResource s) Text = s
+
+    computedOutputs = to (\_ -> TF.Computed "outputs")
 
 cloudformationStackResource :: TF.Resource TF.AWS (CloudformationStackResource s)
 cloudformationStackResource =
@@ -5833,39 +5899,39 @@ need to delete a distribution that is enabled and you do not want to wait,
 you need to use the @retain_on_delete@ flag.
 -}
 data CloudfrontDistributionResource s = CloudfrontDistributionResource {
-      _aliases                :: !(TF.Attribute s "aliases" Text)
+      _aliases :: !(TF.Attribute s "aliases" Text)
     {- ^ (Optional) - Extra CNAMEs (alternate domain names), if any, for this distribution. -}
-    , _cache_behavior         :: !(TF.Attribute s "cache_behavior" Text)
+    , _cache_behavior :: !(TF.Attribute s "cache_behavior" Text)
     {- ^ (Optional) - A <#cache-behavior-arguments> resource for this distribution (multiples allowed). -}
-    , _comment                :: !(TF.Attribute s "comment" Text)
+    , _comment :: !(TF.Attribute s "comment" Text)
     {- ^ (Optional) - Any comments you want to include about the distribution. -}
-    , _custom_error_response  :: !(TF.Attribute s "custom_error_response" Text)
+    , _custom_error_response :: !(TF.Attribute s "custom_error_response" Text)
     {- ^ (Optional) - One or more <#custom-error-response-arguments> elements (multiples allowed). -}
     , _default_cache_behavior :: !(TF.Attribute s "default_cache_behavior" Text)
     {- ^ (Required) - The <#default-cache-behavior-arguments> for this distribution (maximum one). -}
-    , _default_root_object    :: !(TF.Attribute s "default_root_object" Text)
+    , _default_root_object :: !(TF.Attribute s "default_root_object" Text)
     {- ^ (Optional) - The object that you want CloudFront to return (for example, index.html) when an end user requests the root URL. -}
-    , _enabled                :: !(TF.Attribute s "enabled" TF.Bool)
+    , _enabled :: !(TF.Attribute s "enabled" TF.Bool)
     {- ^ (Required) - Whether the distribution is enabled to accept end user requests for content. -}
-    , _http_version           :: !(TF.Attribute s "http_version" Text)
+    , _http_version :: !(TF.Attribute s "http_version" Text)
     {- ^ (Optional) - The maximum HTTP version to support on the distribution. Allowed values are @http1.1@ and @http2@ . The default is @http2@ . -}
-    , _is_ipv6_enabled        :: !(TF.Attribute s "is_ipv6_enabled" TF.Bool)
+    , _is_ipv6_enabled :: !(TF.Attribute s "is_ipv6_enabled" TF.Bool)
     {- ^ (Optional) - Whether the IPv6 is enabled for the distribution. -}
-    , _logging_config         :: !(TF.Attribute s "logging_config" Text)
+    , _logging_config :: !(TF.Attribute s "logging_config" Text)
     {- ^ (Optional) - The <#logging-config-arguments> that controls how logs are written to your distribution (maximum one). -}
-    , _origin                 :: !(TF.Attribute s "origin" Text)
+    , _origin :: !(TF.Attribute s "origin" Text)
     {- ^ (Required) - One or more <#origin-arguments> for this distribution (multiples allowed). -}
-    , _price_class            :: !(TF.Attribute s "price_class" Text)
+    , _price_class :: !(TF.Attribute s "price_class" Text)
     {- ^ (Optional) - The price class for this distribution. One of @PriceClass_All@ , @PriceClass_200@ , @PriceClass_100@ -}
-    , _restrictions           :: !(TF.Attribute s "restrictions" Text)
+    , _restrictions :: !(TF.Attribute s "restrictions" Text)
     {- ^ (Required) - The <#restrictions-arguments> for this distribution (maximum one). -}
-    , _retain_on_delete       :: !(TF.Attribute s "retain_on_delete" Text)
+    , _retain_on_delete :: !(TF.Attribute s "retain_on_delete" Text)
     {- ^ (Optional) - Disables the distribution instead of deleting it when destroying the resource through Terraform. If this is set, the distribution needs to be deleted manually afterwards. Default: @false@ . -}
-    , _tags                   :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _viewer_certificate     :: !(TF.Attribute s "viewer_certificate" Text)
+    , _viewer_certificate :: !(TF.Attribute s "viewer_certificate" Text)
     {- ^ (Required) - The <#viewer-certificate-arguments> for this distribution (maximum one). -}
-    , _web_acl_id             :: !(TF.Attribute s "web_acl_id" Text)
+    , _web_acl_id :: !(TF.Attribute s "web_acl_id" Text)
     {- ^ (Optional) - If you're using AWS WAF to filter CloudFront requests, the Id of the AWS WAF web ACL that is associated with the distribution. -}
     } deriving (Show, Eq)
 
@@ -6059,28 +6125,34 @@ instance HasComment (CloudfrontOriginAccessIdentityResource s) Text where
              (\s a -> s { _comment = a } :: CloudfrontOriginAccessIdentityResource s)
 
 instance HasComputedCallerReference (CloudfrontOriginAccessIdentityResource s) Text where
-    computedCallerReference =
-        to (\x -> TF.Computed (TF.referenceKey x) "caller_reference")
+    type HasComputedCallerReferenceThread (CloudfrontOriginAccessIdentityResource s) Text = s
+
+    computedCallerReference = to (\_ -> TF.Computed "caller_reference")
 
 instance HasComputedCloudfrontAccessIdentityPath (CloudfrontOriginAccessIdentityResource s) Text where
-    computedCloudfrontAccessIdentityPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "cloudfront_access_identity_path")
+    type HasComputedCloudfrontAccessIdentityPathThread (CloudfrontOriginAccessIdentityResource s) Text = s
+
+    computedCloudfrontAccessIdentityPath = to (\_ -> TF.Computed "cloudfront_access_identity_path")
 
 instance HasComputedEtag (CloudfrontOriginAccessIdentityResource s) Text where
-    computedEtag =
-        to (\x -> TF.Computed (TF.referenceKey x) "etag")
+    type HasComputedEtagThread (CloudfrontOriginAccessIdentityResource s) Text = s
+
+    computedEtag = to (\_ -> TF.Computed "etag")
 
 instance HasComputedIamArn (CloudfrontOriginAccessIdentityResource s) Text where
-    computedIamArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "iam_arn")
+    type HasComputedIamArnThread (CloudfrontOriginAccessIdentityResource s) Text = s
+
+    computedIamArn = to (\_ -> TF.Computed "iam_arn")
 
 instance HasComputedId (CloudfrontOriginAccessIdentityResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CloudfrontOriginAccessIdentityResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedS3CanonicalUserId (CloudfrontOriginAccessIdentityResource s) Text where
-    computedS3CanonicalUserId =
-        to (\x -> TF.Computed (TF.referenceKey x) "s3_canonical_user_id")
+    type HasComputedS3CanonicalUserIdThread (CloudfrontOriginAccessIdentityResource s) Text = s
+
+    computedS3CanonicalUserId = to (\_ -> TF.Computed "s3_canonical_user_id")
 
 cloudfrontOriginAccessIdentityResource :: TF.Resource TF.AWS (CloudfrontOriginAccessIdentityResource s)
 cloudfrontOriginAccessIdentityResource =
@@ -6221,16 +6293,19 @@ instance HasTags (CloudtrailResource s) TF.Tags where
              (\s a -> s { _tags = a } :: CloudtrailResource s)
 
 instance HasComputedArn (CloudtrailResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CloudtrailResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedHomeRegion (CloudtrailResource s) TF.Region where
-    computedHomeRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "home_region")
+    type HasComputedHomeRegionThread (CloudtrailResource s) TF.Region = s
+
+    computedHomeRegion = to (\_ -> TF.Computed "home_region")
 
 instance HasComputedId (CloudtrailResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CloudtrailResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 cloudtrailResource :: TF.Resource TF.AWS (CloudtrailResource s)
 cloudtrailResource =
@@ -6282,8 +6357,9 @@ instance HasDashboardName (CloudwatchDashboardResource s) Text where
              (\s a -> s { _dashboard_name = a } :: CloudwatchDashboardResource s)
 
 instance HasComputedDashboardArn (CloudwatchDashboardResource s) Text where
-    computedDashboardArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "dashboard_arn")
+    type HasComputedDashboardArnThread (CloudwatchDashboardResource s) Text = s
+
+    computedDashboardArn = to (\_ -> TF.Computed "dashboard_arn")
 
 cloudwatchDashboardResource :: TF.Resource TF.AWS (CloudwatchDashboardResource s)
 cloudwatchDashboardResource =
@@ -6299,9 +6375,9 @@ Provides a resource to create a CloudWatch Events permission to support
 cross-account events in the current account default event bus.
 -}
 data CloudwatchEventPermissionResource s = CloudwatchEventPermissionResource {
-      _action       :: !(TF.Attribute s "action" Text)
+      _action :: !(TF.Attribute s "action" Text)
     {- ^ (Optional) The action that you are enabling the other account to perform. Defaults to @events:PutEvents@ . -}
-    , _principal    :: !(TF.Attribute s "principal" Text)
+    , _principal :: !(TF.Attribute s "principal" Text)
     {- ^ (Required) The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify @*@ to permit any account to put events to your default event bus. -}
     , _statement_id :: !(TF.Attribute s "statement_id" Text)
     {- ^ (Required) An identifier string for the external account that you are granting permissions to. -}
@@ -6336,8 +6412,9 @@ instance HasStatementId (CloudwatchEventPermissionResource s) Text where
              (\s a -> s { _statement_id = a } :: CloudwatchEventPermissionResource s)
 
 instance HasComputedId (CloudwatchEventPermissionResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CloudwatchEventPermissionResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 cloudwatchEventPermissionResource :: TF.Resource TF.AWS (CloudwatchEventPermissionResource s)
 cloudwatchEventPermissionResource =
@@ -6353,15 +6430,15 @@ cloudwatchEventPermissionResource =
 Provides a CloudWatch Event Rule resource.
 -}
 data CloudwatchEventRuleResource s = CloudwatchEventRuleResource {
-      _description         :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the rule. -}
-    , _event_pattern       :: !(TF.Attribute s "event_pattern" Text)
+    , _event_pattern :: !(TF.Attribute s "event_pattern" Text)
     {- ^ (Required, if @schedule_expression@ isn't specified) Event pattern described a JSON object. See full documentation of <http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatchEventsandEventPatterns.html> for details. -}
-    , _is_enabled          :: !(TF.Attribute s "is_enabled" TF.Bool)
+    , _is_enabled :: !(TF.Attribute s "is_enabled" TF.Bool)
     {- ^ (Optional) Whether the rule should be enabled (defaults to @true@ ). -}
-    , _name                :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The rule's name. -}
-    , _role_arn            :: !(TF.Attribute s "role_arn" Text)
+    , _role_arn :: !(TF.Attribute s "role_arn" Text)
     {- ^ (Optional) The Amazon Resource Name (ARN) associated with the role that is used for target invocation. -}
     , _schedule_expression :: !(TF.Attribute s "schedule_expression" Text)
     {- ^ (Required, if @event_pattern@ isn't specified) The scheduling expression. For example, @cron(0 20 * * ? *)@ or @rate(5 minutes)@ . -}
@@ -6420,8 +6497,9 @@ instance HasScheduleExpression (CloudwatchEventRuleResource s) Text where
              (\s a -> s { _schedule_expression = a } :: CloudwatchEventRuleResource s)
 
 instance HasComputedArn (CloudwatchEventRuleResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CloudwatchEventRuleResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 cloudwatchEventRuleResource :: TF.Resource TF.AWS (CloudwatchEventRuleResource s)
 cloudwatchEventRuleResource =
@@ -6440,23 +6518,23 @@ cloudwatchEventRuleResource =
 Provides a CloudWatch Event Target resource.
 -}
 data CloudwatchEventTargetResource s = CloudwatchEventTargetResource {
-      _arn                 :: !(TF.Attribute s "arn" Text)
+      _arn :: !(TF.Attribute s "arn" Text)
     {- ^ (Required) The Amazon Resource Name (ARN) associated of the target. -}
-    , _ecs_target          :: !(TF.Attribute s "ecs_target" Text)
+    , _ecs_target :: !(TF.Attribute s "ecs_target" Text)
     {- ^ (Optional) Parameters used when you are using the rule to invoke Amazon ECS Task. Documented below. A maximum of 1 are allowed. -}
-    , _input               :: !(TF.Attribute s "input" Text)
+    , _input :: !(TF.Attribute s "input" Text)
     {- ^ (Optional) Valid JSON text passed to the target. -}
-    , _input_path          :: !(TF.Attribute s "input_path" Text)
+    , _input_path :: !(TF.Attribute s "input_path" Text)
     {- ^ (Optional) The value of the <http://goessner.net/articles/JsonPath/> that is used for extracting part of the matched event when passing it to the target. -}
-    , _input_transformer   :: !(TF.Attribute s "input_transformer" Text)
+    , _input_transformer :: !(TF.Attribute s "input_transformer" Text)
     {- ^ (Optional) Parameters used when you are providing a custom input to a target based on certain event data. -}
-    , _role_arn            :: !(TF.Attribute s "role_arn" Text)
+    , _role_arn :: !(TF.Attribute s "role_arn" Text)
     {- ^ (Optional) The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered. Required if @ecs_target@ is used. -}
-    , _rule                :: !(TF.Attribute s "rule" Text)
+    , _rule :: !(TF.Attribute s "rule" Text)
     {- ^ (Required) The name of the rule you want to add targets to. -}
     , _run_command_targets :: !(TF.Attribute s "run_command_targets" Text)
     {- ^ (Optional) Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed. -}
-    , _target_id           :: !(TF.Attribute s "target_id" Text)
+    , _target_id :: !(TF.Attribute s "target_id" Text)
     {- ^ (Optional) The unique target assignment ID.  If missing, will generate a random, unique id. -}
     } deriving (Show, Eq)
 
@@ -6556,7 +6634,7 @@ cloudwatchEventTargetResource =
 Provides a CloudWatch Logs destination policy resource.
 -}
 data CloudwatchLogDestinationPolicyResource s = CloudwatchLogDestinationPolicyResource {
-      _access_policy    :: !(TF.Attribute s "access_policy" Text)
+      _access_policy :: !(TF.Attribute s "access_policy" Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. -}
     , _destination_name :: !(TF.Attribute s "destination_name" Text)
     {- ^ (Required) A name for the subscription filter -}
@@ -6595,9 +6673,9 @@ cloudwatchLogDestinationPolicyResource =
 Provides a CloudWatch Logs destination resource.
 -}
 data CloudwatchLogDestinationResource s = CloudwatchLogDestinationResource {
-      _name       :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A name for the log destination -}
-    , _role_arn   :: !(TF.Attribute s "role_arn" Text)
+    , _role_arn :: !(TF.Attribute s "role_arn" Text)
     {- ^ (Required) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target -}
     , _target_arn :: !(TF.Attribute s "target_arn" Text)
     {- ^ (Required) The ARN of the target Amazon Kinesis stream or Amazon Lambda resource for the destination -}
@@ -6632,8 +6710,9 @@ instance HasTargetArn (CloudwatchLogDestinationResource s) Text where
              (\s a -> s { _target_arn = a } :: CloudwatchLogDestinationResource s)
 
 instance HasComputedArn (CloudwatchLogDestinationResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CloudwatchLogDestinationResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 cloudwatchLogDestinationResource :: TF.Resource TF.AWS (CloudwatchLogDestinationResource s)
 cloudwatchLogDestinationResource =
@@ -6649,15 +6728,15 @@ cloudwatchLogDestinationResource =
 Provides a CloudWatch Log Group resource.
 -}
 data CloudwatchLogGroupResource s = CloudwatchLogGroupResource {
-      _kms_key_id        :: !(TF.Attribute s "kms_key_id" Text)
+      _kms_key_id :: !(TF.Attribute s "kms_key_id" Text)
     {- ^ (Optional) The ARN of the KMS Key to use when encrypting log data. Please note, after the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested. -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the log group. If omitted, Terraform will assign a random, unique name. -}
-    , _name_prefix       :: !(TF.Attribute s "name_prefix" Text)
+    , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     , _retention_in_days :: !(TF.Attribute s "retention_in_days" Text)
     {- ^ (Optional) Specifies the number of days you want to retain log events in the specified log group. -}
-    , _tags              :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -6706,8 +6785,9 @@ instance HasTags (CloudwatchLogGroupResource s) TF.Tags where
              (\s a -> s { _tags = a } :: CloudwatchLogGroupResource s)
 
 instance HasComputedArn (CloudwatchLogGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CloudwatchLogGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 cloudwatchLogGroupResource :: TF.Resource TF.AWS (CloudwatchLogGroupResource s)
 cloudwatchLogGroupResource =
@@ -6725,13 +6805,13 @@ cloudwatchLogGroupResource =
 Provides a CloudWatch Log Metric Filter resource.
 -}
 data CloudwatchLogMetricFilterResource s = CloudwatchLogMetricFilterResource {
-      _log_group_name        :: !(TF.Attribute s "log_group_name" Text)
+      _log_group_name :: !(TF.Attribute s "log_group_name" Text)
     {- ^ (Required) The name of the log group to associate the metric filter with. -}
     , _metric_transformation :: !(TF.Attribute s "metric_transformation" Text)
     {- ^ (Required) A block defining collection of information needed to define how metric data gets emitted. See below. -}
-    , _name                  :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A name for the metric filter. -}
-    , _pattern               :: !(TF.Attribute s "pattern" Text)
+    , _pattern :: !(TF.Attribute s "pattern" Text)
     {- ^ (Required) A valid <https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/FilterAndPatternSyntax.html> for extracting metric data out of ingested log events. -}
     } deriving (Show, Eq)
 
@@ -6772,8 +6852,9 @@ instance HasPattern (CloudwatchLogMetricFilterResource s) Text where
              (\s a -> s { _pattern = a } :: CloudwatchLogMetricFilterResource s)
 
 instance HasComputedId (CloudwatchLogMetricFilterResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CloudwatchLogMetricFilterResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 cloudwatchLogMetricFilterResource :: TF.Resource TF.AWS (CloudwatchLogMetricFilterResource s)
 cloudwatchLogMetricFilterResource =
@@ -6792,7 +6873,7 @@ Provides a resource to manage a CloudWatch log resource policy.
 data CloudwatchLogResourcePolicyResource s = CloudwatchLogResourcePolicyResource {
       _policy_document :: !(TF.Attribute s "policy_document" Text)
     {- ^ (Required) Details of the resource policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. Maximum length of 5120 characters. -}
-    , _policy_name     :: !(TF.Attribute s "policy_name" Text)
+    , _policy_name :: !(TF.Attribute s "policy_name" Text)
     {- ^ (Required) Name of the resource policy. -}
     } deriving (Show, Eq)
 
@@ -6817,8 +6898,9 @@ instance HasPolicyName (CloudwatchLogResourcePolicyResource s) Text where
              (\s a -> s { _policy_name = a } :: CloudwatchLogResourcePolicyResource s)
 
 instance HasComputedId (CloudwatchLogResourcePolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CloudwatchLogResourcePolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 cloudwatchLogResourcePolicyResource :: TF.Resource TF.AWS (CloudwatchLogResourcePolicyResource s)
 cloudwatchLogResourcePolicyResource =
@@ -6835,7 +6917,7 @@ Provides a CloudWatch Log Stream resource.
 data CloudwatchLogStreamResource s = CloudwatchLogStreamResource {
       _log_group_name :: !(TF.Attribute s "log_group_name" Text)
     {- ^ (Required) The name of the log group under which the log stream is to be created. -}
-    , _name           :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the log stream. Must not be longer than 512 characters and must not contain @:@ -}
     } deriving (Show, Eq)
 
@@ -6860,8 +6942,9 @@ instance HasName (CloudwatchLogStreamResource s) Text where
              (\s a -> s { _name = a } :: CloudwatchLogStreamResource s)
 
 instance HasComputedArn (CloudwatchLogStreamResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CloudwatchLogStreamResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 cloudwatchLogStreamResource :: TF.Resource TF.AWS (CloudwatchLogStreamResource s)
 cloudwatchLogStreamResource =
@@ -6878,13 +6961,13 @@ Provides a CloudWatch Logs subscription filter resource.
 data CloudwatchLogSubscriptionFilterResource s = CloudwatchLogSubscriptionFilterResource {
       _destination_arn :: !(TF.Attribute s "destination_arn" Text)
     {- ^ (Required) The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN. -}
-    , _filter_pattern  :: !(TF.Attribute s "filter_pattern" Text)
+    , _filter_pattern :: !(TF.Attribute s "filter_pattern" Text)
     {- ^ (Required) A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. -}
-    , _log_group_name  :: !(TF.Attribute s "log_group_name" Text)
+    , _log_group_name :: !(TF.Attribute s "log_group_name" Text)
     {- ^ (Required) The name of the log group to associate the subscription filter with -}
-    , _name            :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A name for the subscription filter -}
-    , _role_arn        :: !(TF.Attribute s "role_arn" Text)
+    , _role_arn :: !(TF.Attribute s "role_arn" Text)
     {- ^ (Optional) The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use @aws_lambda_permission@ resource for granting access from CloudWatch logs to the destination Lambda function. -}
     } deriving (Show, Eq)
 
@@ -6933,8 +7016,9 @@ instance HasRoleArn (CloudwatchLogSubscriptionFilterResource s) Text where
              (\s a -> s { _role_arn = a } :: CloudwatchLogSubscriptionFilterResource s)
 
 instance HasComputedArn (CloudwatchLogSubscriptionFilterResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CloudwatchLogSubscriptionFilterResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 cloudwatchLogSubscriptionFilterResource :: TF.Resource TF.AWS (CloudwatchLogSubscriptionFilterResource s)
 cloudwatchLogSubscriptionFilterResource =
@@ -7149,8 +7233,9 @@ instance HasUnit (CloudwatchMetricAlarmResource s) Text where
              (\s a -> s { _unit = a } :: CloudwatchMetricAlarmResource s)
 
 instance HasComputedId (CloudwatchMetricAlarmResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CloudwatchMetricAlarmResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 cloudwatchMetricAlarmResource :: TF.Resource TF.AWS (CloudwatchMetricAlarmResource s)
 cloudwatchMetricAlarmResource =
@@ -7182,23 +7267,23 @@ cloudwatchMetricAlarmResource =
 Provides a CodeBuild Project resource.
 -}
 data CodebuildProjectResource s = CodebuildProjectResource {
-      _artifacts      :: !(TF.Attribute s "artifacts" Text)
+      _artifacts :: !(TF.Attribute s "artifacts" Text)
     {- ^ (Required) Information about the project's build output artifacts. Artifact blocks are documented below. -}
-    , _build_timeout  :: !(TF.Attribute s "build_timeout" Text)
+    , _build_timeout :: !(TF.Attribute s "build_timeout" Text)
     {- ^ (Optional) How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed. The default is 60 minutes. -}
-    , _description    :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A short description of the project. -}
     , _encryption_key :: !(TF.Attribute s "encryption_key" Text)
     {- ^ (Optional) The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts. -}
-    , _environment    :: !(TF.Attribute s "environment" Text)
+    , _environment :: !(TF.Attribute s "environment" Text)
     {- ^ (Required) Information about the project's build environment. Environment blocks are documented below. -}
-    , _name           :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The projects name. -}
-    , _service_role   :: !(TF.Attribute s "service_role" Text)
+    , _service_role :: !(TF.Attribute s "service_role" Text)
     {- ^ (Optional) The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account. -}
-    , _source         :: !(TF.Attribute s "source" Text)
+    , _source :: !(TF.Attribute s "source" Text)
     {- ^ (Required) Information about the project's input source code. Source blocks are documented below. -}
-    , _tags           :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -7279,24 +7364,29 @@ instance HasTags (CodebuildProjectResource s) TF.Tags where
              (\s a -> s { _tags = a } :: CodebuildProjectResource s)
 
 instance HasComputedDescription (CodebuildProjectResource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (CodebuildProjectResource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedEncryptionKey (CodebuildProjectResource s) Text where
-    computedEncryptionKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "encryption_key")
+    type HasComputedEncryptionKeyThread (CodebuildProjectResource s) Text = s
+
+    computedEncryptionKey = to (\_ -> TF.Computed "encryption_key")
 
 instance HasComputedId (CodebuildProjectResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CodebuildProjectResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (CodebuildProjectResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (CodebuildProjectResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedServiceRole (CodebuildProjectResource s) Text where
-    computedServiceRole =
-        to (\x -> TF.Computed (TF.referenceKey x) "service_role")
+    type HasComputedServiceRoleThread (CodebuildProjectResource s) Text = s
+
+    computedServiceRole = to (\_ -> TF.Computed "service_role")
 
 codebuildProjectResource :: TF.Resource TF.AWS (CodebuildProjectResource s)
 codebuildProjectResource =
@@ -7322,9 +7412,9 @@ available regions are listed
 .
 -}
 data CodecommitRepositoryResource s = CodecommitRepositoryResource {
-      _default_branch  :: !(TF.Attribute s "default_branch" Text)
+      _default_branch :: !(TF.Attribute s "default_branch" Text)
     {- ^ (Optional) The default branch of the repository. The branch specified here needs to exist. -}
-    , _description     :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the repository. This needs to be less than 1000 characters -}
     , _repository_name :: !(TF.Attribute s "repository_name" Text)
     {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
@@ -7359,20 +7449,24 @@ instance HasRepositoryName (CodecommitRepositoryResource s) Text where
              (\s a -> s { _repository_name = a } :: CodecommitRepositoryResource s)
 
 instance HasComputedArn (CodecommitRepositoryResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CodecommitRepositoryResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedCloneUrlHttp (CodecommitRepositoryResource s) Text where
-    computedCloneUrlHttp =
-        to (\x -> TF.Computed (TF.referenceKey x) "clone_url_http")
+    type HasComputedCloneUrlHttpThread (CodecommitRepositoryResource s) Text = s
+
+    computedCloneUrlHttp = to (\_ -> TF.Computed "clone_url_http")
 
 instance HasComputedCloneUrlSsh (CodecommitRepositoryResource s) Text where
-    computedCloneUrlSsh =
-        to (\x -> TF.Computed (TF.referenceKey x) "clone_url_ssh")
+    type HasComputedCloneUrlSshThread (CodecommitRepositoryResource s) Text = s
+
+    computedCloneUrlSsh = to (\_ -> TF.Computed "clone_url_ssh")
 
 instance HasComputedRepositoryId (CodecommitRepositoryResource s) Text where
-    computedRepositoryId =
-        to (\x -> TF.Computed (TF.referenceKey x) "repository_id")
+    type HasComputedRepositoryIdThread (CodecommitRepositoryResource s) Text = s
+
+    computedRepositoryId = to (\_ -> TF.Computed "repository_id")
 
 codecommitRepositoryResource :: TF.Resource TF.AWS (CodecommitRepositoryResource s)
 codecommitRepositoryResource =
@@ -7392,15 +7486,15 @@ listed
 .
 -}
 data CodecommitTriggerResource s = CodecommitTriggerResource {
-      _branches        :: !(TF.Attribute s "branches" Text)
+      _branches :: !(TF.Attribute s "branches" Text)
     {- ^ (Optional) The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches. -}
-    , _custom_data     :: !(TF.Attribute s "custom_data" Text)
+    , _custom_data :: !(TF.Attribute s "custom_data" Text)
     {- ^ (Optional) Any custom data associated with the trigger that will be included in the information sent to the target of the trigger. -}
     , _destination_arn :: !(TF.Attribute s "destination_arn" Text)
     {- ^ (Required) The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS). -}
-    , _events          :: !(TF.Attribute s "events" Text)
+    , _events :: !(TF.Attribute s "events" Text)
     {- ^ (Required) The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: @all@ , @updateReference@ , @createReference@ , @deleteReference@ . -}
-    , _name            :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the trigger. -}
     , _repository_name :: !(TF.Attribute s "repository_name" Text)
     {- ^ (Required) The name for the repository. This needs to be less than 100 characters. -}
@@ -7492,12 +7586,14 @@ instance HasName (CodedeployAppResource s) Text where
              (\s a -> s { _name = a } :: CodedeployAppResource s)
 
 instance HasComputedId (CodedeployAppResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CodedeployAppResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (CodedeployAppResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (CodedeployAppResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 codedeployAppResource :: TF.Resource TF.AWS (CodedeployAppResource s)
 codedeployAppResource =
@@ -7513,7 +7609,7 @@ Provides a CodeDeploy deployment config for an application
 data CodedeployDeploymentConfigResource s = CodedeployDeploymentConfigResource {
       _deployment_config_name :: !(TF.Attribute s "deployment_config_name" Text)
     {- ^ (Required) The name of the deployment config. -}
-    , _minimum_healthy_hosts  :: !(TF.Attribute s "minimum_healthy_hosts" Text)
+    , _minimum_healthy_hosts :: !(TF.Attribute s "minimum_healthy_hosts" Text)
     {- ^ (Optional) A minimum_healthy_hosts block. Minimum Healthy Hosts are documented below. -}
     } deriving (Show, Eq)
 
@@ -7538,12 +7634,14 @@ instance HasMinimumHealthyHosts (CodedeployDeploymentConfigResource s) Text wher
              (\s a -> s { _minimum_healthy_hosts = a } :: CodedeployDeploymentConfigResource s)
 
 instance HasComputedDeploymentConfigId (CodedeployDeploymentConfigResource s) Text where
-    computedDeploymentConfigId =
-        to (\x -> TF.Computed (TF.referenceKey x) "deployment_config_id")
+    type HasComputedDeploymentConfigIdThread (CodedeployDeploymentConfigResource s) Text = s
+
+    computedDeploymentConfigId = to (\_ -> TF.Computed "deployment_config_id")
 
 instance HasComputedId (CodedeployDeploymentConfigResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CodedeployDeploymentConfigResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 codedeployDeploymentConfigResource :: TF.Resource TF.AWS (CodedeployDeploymentConfigResource s)
 codedeployDeploymentConfigResource =
@@ -7722,11 +7820,11 @@ specified.
 data CodepipelineResource s = CodepipelineResource {
       _artifact_store :: !(TF.Attribute s "artifact_store" Text)
     {- ^ (Required) An artifact_store block. Artifact stores are documented below. -}
-    , _name           :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the pipeline. -}
-    , _role_arn       :: !(TF.Attribute s "role_arn" Text)
+    , _role_arn :: !(TF.Attribute s "role_arn" Text)
     {- ^ (Required) A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf. -}
-    , _stage          :: !(TF.Attribute s "stage" Text)
+    , _stage :: !(TF.Attribute s "stage" Text)
     {- ^ (Required) A stage block. Stages are documented below. -}
     } deriving (Show, Eq)
 
@@ -7767,12 +7865,14 @@ instance HasStage (CodepipelineResource s) Text where
              (\s a -> s { _stage = a } :: CodepipelineResource s)
 
 instance HasComputedArn (CodepipelineResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CodepipelineResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (CodepipelineResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CodepipelineResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 codepipelineResource :: TF.Resource TF.AWS (CodepipelineResource s)
 codepipelineResource =
@@ -7885,9 +7985,9 @@ Provides an AWS Cognito Identity Pool Roles Attachment.
 data CognitoIdentityPoolRolesAttachmentResource s = CognitoIdentityPoolRolesAttachmentResource {
       _identity_pool_id :: !(TF.Attribute s "identity_pool_id" Text)
     {- ^ (Required) - An identity pool ID in the format REGION:GUID. -}
-    , _role_mapping     :: !(TF.Attribute s "role_mapping" Text)
+    , _role_mapping :: !(TF.Attribute s "role_mapping" Text)
     {- ^ (Optional) - A List of <#role-mappings> . -}
-    , _roles            :: !(TF.Attribute s "roles" Text)
+    , _roles :: !(TF.Attribute s "roles" Text)
     {- ^ (Required) - The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN. -}
     } deriving (Show, Eq)
 
@@ -8080,12 +8180,14 @@ instance HasWriteAttributes (CognitoUserPoolClientResource s) Text where
              (\s a -> s { _write_attributes = a } :: CognitoUserPoolClientResource s)
 
 instance HasComputedClientSecret (CognitoUserPoolClientResource s) Text where
-    computedClientSecret =
-        to (\x -> TF.Computed (TF.referenceKey x) "client_secret")
+    type HasComputedClientSecretThread (CognitoUserPoolClientResource s) Text = s
+
+    computedClientSecret = to (\_ -> TF.Computed "client_secret")
 
 instance HasComputedId (CognitoUserPoolClientResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CognitoUserPoolClientResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 cognitoUserPoolClientResource :: TF.Resource TF.AWS (CognitoUserPoolClientResource s)
 cognitoUserPoolClientResource =
@@ -8112,7 +8214,7 @@ cognitoUserPoolClientResource =
 Provides a Cognito User Pool Domain resource.
 -}
 data CognitoUserPoolDomainResource s = CognitoUserPoolDomainResource {
-      _domain       :: !(TF.Attribute s "domain" Text)
+      _domain :: !(TF.Attribute s "domain" Text)
     {- ^ (Required) The domain string. -}
     , _user_pool_id :: !(TF.Attribute s "user_pool_id" Text)
     {- ^ (Required) The user pool ID. -}
@@ -8139,20 +8241,24 @@ instance HasUserPoolId (CognitoUserPoolDomainResource s) Text where
              (\s a -> s { _user_pool_id = a } :: CognitoUserPoolDomainResource s)
 
 instance HasComputedAwsAccountId (CognitoUserPoolDomainResource s) Text where
-    computedAwsAccountId =
-        to (\x -> TF.Computed (TF.referenceKey x) "aws_account_id")
+    type HasComputedAwsAccountIdThread (CognitoUserPoolDomainResource s) Text = s
+
+    computedAwsAccountId = to (\_ -> TF.Computed "aws_account_id")
 
 instance HasComputedCloudfrontDistributionArn (CognitoUserPoolDomainResource s) Text where
-    computedCloudfrontDistributionArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "cloudfront_distribution_arn")
+    type HasComputedCloudfrontDistributionArnThread (CognitoUserPoolDomainResource s) Text = s
+
+    computedCloudfrontDistributionArn = to (\_ -> TF.Computed "cloudfront_distribution_arn")
 
 instance HasComputedS3Bucket (CognitoUserPoolDomainResource s) Text where
-    computedS3Bucket =
-        to (\x -> TF.Computed (TF.referenceKey x) "s3_bucket")
+    type HasComputedS3BucketThread (CognitoUserPoolDomainResource s) Text = s
+
+    computedS3Bucket = to (\_ -> TF.Computed "s3_bucket")
 
 instance HasComputedVersion (CognitoUserPoolDomainResource s) Text where
-    computedVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "version")
+    type HasComputedVersionThread (CognitoUserPoolDomainResource s) Text = s
+
+    computedVersion = to (\_ -> TF.Computed "version")
 
 cognitoUserPoolDomainResource :: TF.Resource TF.AWS (CognitoUserPoolDomainResource s)
 cognitoUserPoolDomainResource =
@@ -8474,11 +8580,11 @@ creation requires Configuration Recorder). This is why
 separate resource.
 -}
 data ConfigConfigurationRecorderResource s = ConfigConfigurationRecorderResource {
-      _name            :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the recorder. Defaults to @default@ . Changing it recreates the resource. -}
     , _recording_group :: !(TF.Attribute s "recording_group" Text)
     {- ^ (Optional) Recording group - see below. -}
-    , _role_arn        :: !(TF.Attribute s "role_arn" Text)
+    , _role_arn :: !(TF.Attribute s "role_arn" Text)
     {- ^ (Required) Amazon Resource Name (ARN) of the IAM role. used to make read or write requests to the delivery channel and to describe the AWS resources associated with the account. See <http://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html> for more details. -}
     } deriving (Show, Eq)
 
@@ -8529,7 +8635,7 @@ Recorder. ~> Note: Starting Configuration Recorder requires a
 data ConfigConfigurationRecorderStatusResource s = ConfigConfigurationRecorderStatusResource {
       _is_enabled :: !(TF.Attribute s "is_enabled" TF.Bool)
     {- ^ (Required) Whether the configuration recorder should be enabled or disabled. -}
-    , _name       :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the recorder -}
     } deriving (Show, Eq)
 
@@ -8643,13 +8749,13 @@ VPN gateways via VPN connections, and allow you to establish tunnels between
 your network and the VPC.
 -}
 data CustomerGatewayResource s = CustomerGatewayResource {
-      _bgp_asn    :: !(TF.Attribute s "bgp_asn" Text)
+      _bgp_asn :: !(TF.Attribute s "bgp_asn" Text)
     {- ^ (Required) The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN). -}
     , _ip_address :: !(TF.Attribute s "ip_address" Text)
     {- ^ (Required) The IP address of the gateway's Internet-routable external interface. -}
-    , _tags       :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) Tags to apply to the gateway. -}
-    , _type'      :: !(TF.Attribute s "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of customer gateway. The only type AWS supports at this time is "ipsec.1". -}
     } deriving (Show, Eq)
 
@@ -8690,24 +8796,29 @@ instance HasType' (CustomerGatewayResource s) Text where
              (\s a -> s { _type' = a } :: CustomerGatewayResource s)
 
 instance HasComputedBgpAsn (CustomerGatewayResource s) Text where
-    computedBgpAsn =
-        to (\x -> TF.Computed (TF.referenceKey x) "bgp_asn")
+    type HasComputedBgpAsnThread (CustomerGatewayResource s) Text = s
+
+    computedBgpAsn = to (\_ -> TF.Computed "bgp_asn")
 
 instance HasComputedId (CustomerGatewayResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CustomerGatewayResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedIpAddress (CustomerGatewayResource s) Text where
-    computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
+    type HasComputedIpAddressThread (CustomerGatewayResource s) Text = s
+
+    computedIpAddress = to (\_ -> TF.Computed "ip_address")
 
 instance HasComputedTags (CustomerGatewayResource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (CustomerGatewayResource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedType' (CustomerGatewayResource s) Text where
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+    type HasComputedType'Thread (CustomerGatewayResource s) Text = s
+
+    computedType' = to (\_ -> TF.Computed "type")
 
 customerGatewayResource :: TF.Resource TF.AWS (CustomerGatewayResource s)
 customerGatewayResource =
@@ -8724,19 +8835,19 @@ customerGatewayResource =
 Provides a DB event subscription resource.
 -}
 data DbEventSubscriptionResource s = DbEventSubscriptionResource {
-      _enabled          :: !(TF.Attribute s "enabled" TF.Bool)
+      _enabled :: !(TF.Attribute s "enabled" TF.Bool)
     {- ^ (Optional) A boolean flag to enable/disable the subscription. Defaults to true. -}
     , _event_categories :: !(TF.Attribute s "event_categories" Text)
     {- ^ (Optional) A list of event categories for a SourceType that you want to subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide//USER_Events.html -}
-    , _name             :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the DB event subscription. -}
-    , _sns_topic        :: !(TF.Attribute s "sns_topic" Text)
+    , _sns_topic :: !(TF.Attribute s "sns_topic" Text)
     {- ^ (Required) The SNS topic to send events to. -}
-    , _source_ids       :: !(TF.Attribute s "source_ids" Text)
+    , _source_ids :: !(TF.Attribute s "source_ids" Text)
     {- ^ (Optional) A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified. -}
-    , _source_type      :: !(TF.Attribute s "source_type" Text)
+    , _source_type :: !(TF.Attribute s "source_type" Text)
     {- ^ (Optional) The type of source that will be generating the events. -}
-    , _tags             :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -9366,12 +9477,14 @@ instance HasTags (DbOptionGroupResource s) TF.Tags where
              (\s a -> s { _tags = a } :: DbOptionGroupResource s)
 
 instance HasComputedArn (DbOptionGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (DbOptionGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (DbOptionGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DbOptionGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 dbOptionGroupResource :: TF.Resource TF.AWS (DbOptionGroupResource s)
 dbOptionGroupResource =
@@ -9393,15 +9506,15 @@ Provides an RDS DB parameter group resource.
 data DbParameterGroupResource s = DbParameterGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the DB parameter group. Defaults to "Managed by Terraform". -}
-    , _family'     :: !(TF.Attribute s "family" Text)
+    , _family' :: !(TF.Attribute s "family" Text)
     {- ^ (Required) The family of the DB parameter group. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the DB parameter group. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _parameter   :: !(TF.Attribute s "parameter" Text)
+    , _parameter :: !(TF.Attribute s "parameter" Text)
     {- ^ (Optional) A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html> after initial creation of the group. -}
-    , _tags        :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -9458,12 +9571,14 @@ instance HasTags (DbParameterGroupResource s) TF.Tags where
              (\s a -> s { _tags = a } :: DbParameterGroupResource s)
 
 instance HasComputedArn (DbParameterGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (DbParameterGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (DbParameterGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DbParameterGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 dbParameterGroupResource :: TF.Resource TF.AWS (DbParameterGroupResource s)
 dbParameterGroupResource =
@@ -9487,11 +9602,11 @@ instead.
 data DbSecurityGroupResource s = DbSecurityGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the DB security group. Defaults to "Managed by Terraform". -}
-    , _ingress     :: !(TF.Attribute s "ingress" Text)
+    , _ingress :: !(TF.Attribute s "ingress" Text)
     {- ^ (Required) A list of ingress rules. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the DB security group. -}
-    , _tags        :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -9532,12 +9647,14 @@ instance HasTags (DbSecurityGroupResource s) TF.Tags where
              (\s a -> s { _tags = a } :: DbSecurityGroupResource s)
 
 instance HasComputedArn (DbSecurityGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (DbSecurityGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (DbSecurityGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DbSecurityGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 dbSecurityGroupResource :: TF.Resource TF.AWS (DbSecurityGroupResource s)
 dbSecurityGroupResource =
@@ -9581,64 +9698,79 @@ instance HasDbSnapshotIdentifier (DbSnapshotResource s) Text where
              (\s a -> s { _db_snapshot_identifier = a } :: DbSnapshotResource s)
 
 instance HasComputedAllocatedStorage (DbSnapshotResource s) Text where
-    computedAllocatedStorage =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocated_storage")
+    type HasComputedAllocatedStorageThread (DbSnapshotResource s) Text = s
+
+    computedAllocatedStorage = to (\_ -> TF.Computed "allocated_storage")
 
 instance HasComputedAvailabilityZone (DbSnapshotResource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (DbSnapshotResource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedDbSnapshotArn (DbSnapshotResource s) Text where
-    computedDbSnapshotArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_snapshot_arn")
+    type HasComputedDbSnapshotArnThread (DbSnapshotResource s) Text = s
+
+    computedDbSnapshotArn = to (\_ -> TF.Computed "db_snapshot_arn")
 
 instance HasComputedEncrypted (DbSnapshotResource s) Text where
-    computedEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted")
+    type HasComputedEncryptedThread (DbSnapshotResource s) Text = s
+
+    computedEncrypted = to (\_ -> TF.Computed "encrypted")
 
 instance HasComputedEngine (DbSnapshotResource s) Text where
-    computedEngine =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine")
+    type HasComputedEngineThread (DbSnapshotResource s) Text = s
+
+    computedEngine = to (\_ -> TF.Computed "engine")
 
 instance HasComputedEngineVersion (DbSnapshotResource s) Text where
-    computedEngineVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine_version")
+    type HasComputedEngineVersionThread (DbSnapshotResource s) Text = s
+
+    computedEngineVersion = to (\_ -> TF.Computed "engine_version")
 
 instance HasComputedIops (DbSnapshotResource s) Text where
-    computedIops =
-        to (\x -> TF.Computed (TF.referenceKey x) "iops")
+    type HasComputedIopsThread (DbSnapshotResource s) Text = s
+
+    computedIops = to (\_ -> TF.Computed "iops")
 
 instance HasComputedKmsKeyId (DbSnapshotResource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (DbSnapshotResource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 instance HasComputedLicenseModel (DbSnapshotResource s) Text where
-    computedLicenseModel =
-        to (\x -> TF.Computed (TF.referenceKey x) "license_model")
+    type HasComputedLicenseModelThread (DbSnapshotResource s) Text = s
+
+    computedLicenseModel = to (\_ -> TF.Computed "license_model")
 
 instance HasComputedOptionGroupName (DbSnapshotResource s) Text where
-    computedOptionGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "option_group_name")
+    type HasComputedOptionGroupNameThread (DbSnapshotResource s) Text = s
+
+    computedOptionGroupName = to (\_ -> TF.Computed "option_group_name")
 
 instance HasComputedSourceDbSnapshotIdentifier (DbSnapshotResource s) Text where
-    computedSourceDbSnapshotIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_db_snapshot_identifier")
+    type HasComputedSourceDbSnapshotIdentifierThread (DbSnapshotResource s) Text = s
+
+    computedSourceDbSnapshotIdentifier = to (\_ -> TF.Computed "source_db_snapshot_identifier")
 
 instance HasComputedSourceRegion (DbSnapshotResource s) TF.Region where
-    computedSourceRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_region")
+    type HasComputedSourceRegionThread (DbSnapshotResource s) TF.Region = s
+
+    computedSourceRegion = to (\_ -> TF.Computed "source_region")
 
 instance HasComputedStatus (DbSnapshotResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (DbSnapshotResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 instance HasComputedStorageType (DbSnapshotResource s) Text where
-    computedStorageType =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_type")
+    type HasComputedStorageTypeThread (DbSnapshotResource s) Text = s
+
+    computedStorageType = to (\_ -> TF.Computed "storage_type")
 
 instance HasComputedVpcId (DbSnapshotResource s) Text where
-    computedVpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_id")
+    type HasComputedVpcIdThread (DbSnapshotResource s) Text = s
+
+    computedVpcId = to (\_ -> TF.Computed "vpc_id")
 
 dbSnapshotResource :: TF.Resource TF.AWS (DbSnapshotResource s)
 dbSnapshotResource =
@@ -9655,13 +9787,13 @@ Provides an RDS DB subnet group resource.
 data DbSubnetGroupResource s = DbSubnetGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the DB subnet group. Defaults to "Managed by Terraform". -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the DB subnet group. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _subnet_ids  :: !(TF.Attribute s "subnet_ids" Text)
+    , _subnet_ids :: !(TF.Attribute s "subnet_ids" Text)
     {- ^ (Required) A list of VPC subnet IDs. -}
-    , _tags        :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -9710,12 +9842,14 @@ instance HasTags (DbSubnetGroupResource s) TF.Tags where
              (\s a -> s { _tags = a } :: DbSubnetGroupResource s)
 
 instance HasComputedArn (DbSubnetGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (DbSubnetGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (DbSubnetGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DbSubnetGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 dbSubnetGroupResource :: TF.Resource TF.AWS (DbSubnetGroupResource s)
 dbSubnetGroupResource =
@@ -9752,13 +9886,13 @@ about Network ACLs, see the AWS Documentation on
 data DefaultNetworkAclResource s = DefaultNetworkAclResource {
       _default_network_acl_id :: !(TF.Attribute s "default_network_acl_id" Text)
     {- ^ (Required) The Network ACL ID to manage. This attribute is exported from @aws_vpc@ , or manually found via the AWS Console. -}
-    , _egress                 :: !(TF.Attribute s "egress" Text)
+    , _egress :: !(TF.Attribute s "egress" Text)
     {- ^ (Optional) Specifies an egress rule. Parameters defined below. -}
-    , _ingress                :: !(TF.Attribute s "ingress" Text)
+    , _ingress :: !(TF.Attribute s "ingress" Text)
     {- ^ (Optional) Specifies an ingress rule. Parameters defined below. -}
-    , _subnet_ids             :: !(TF.Attribute s "subnet_ids" Text)
+    , _subnet_ids :: !(TF.Attribute s "subnet_ids" Text)
     {- ^ (Optional) A list of Subnet IDs to apply the ACL to. See the notes below on managing Subnets in the Default Network ACL -}
-    , _tags                   :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -9847,11 +9981,11 @@ will overwrite routes.
 data DefaultRouteTableResource s = DefaultRouteTableResource {
       _default_route_table_id :: !(TF.Attribute s "default_route_table_id" Text)
     {- ^ (Required) The ID of the Default Routing Table. -}
-    , _propagating_vgws       :: !(TF.Attribute s "propagating_vgws" Text)
+    , _propagating_vgws :: !(TF.Attribute s "propagating_vgws" Text)
     {- ^ (Optional) A list of virtual gateways for propagation. -}
-    , _route                  :: !(TF.Attribute s "route" Text)
+    , _route :: !(TF.Attribute s "route" Text)
     {- ^ (Optional) A list of route objects. Their keys are documented below. -}
-    , _tags                   :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -9892,8 +10026,9 @@ instance HasTags (DefaultRouteTableResource s) TF.Tags where
              (\s a -> s { _tags = a } :: DefaultRouteTableResource s)
 
 instance HasComputedId (DefaultRouteTableResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DefaultRouteTableResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 defaultRouteTableResource :: TF.Resource TF.AWS (DefaultRouteTableResource s)
 defaultRouteTableResource =
@@ -9930,13 +10065,13 @@ Security Groups, see the AWS Documentation on
 .
 -}
 data DefaultSecurityGroupResource s = DefaultSecurityGroupResource {
-      _egress  :: !(TF.Attribute s "egress" Text)
+      _egress :: !(TF.Attribute s "egress" Text)
     {- ^ (Optional, VPC only) Can be specified multiple times for each egress rule. Each egress block supports fields documented below. -}
     , _ingress :: !(TF.Attribute s "ingress" Text)
     {- ^ (Optional) Can be specified multiple times for each ingress rule. Each ingress block supports fields documented below. -}
-    , _tags    :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_id  :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional, Forces new resource) The VPC ID. Note that changing the @vpc_id@ will not restore any default security group rules that were modified, added, or removed. It will be left in it's current state -}
     } deriving (Show, Eq)
 
@@ -10032,9 +10167,9 @@ instead "adopts" it into management.
 data DefaultVpcDhcpOptionsResource s = DefaultVpcDhcpOptionsResource {
       _netbios_name_servers :: !(TF.Attribute s "netbios_name_servers" Text)
     {- ^ (Optional) List of NETBIOS name servers. -}
-    , _netbios_node_type    :: !(TF.Attribute s "netbios_node_type" Text)
+    , _netbios_node_type :: !(TF.Attribute s "netbios_node_type" Text)
     {- ^ (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt> . -}
-    , _tags                 :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -10087,13 +10222,13 @@ differently from normal resources, in that Terraform does not create this
 resource, but instead "adopts" it into management.
 -}
 data DefaultVpcResource s = DefaultVpcResource {
-      _enable_classiclink   :: !(TF.Attribute s "enable_classiclink" TF.Bool)
+      _enable_classiclink :: !(TF.Attribute s "enable_classiclink" TF.Bool)
     {- ^ (Optional) A boolean flag to enable/disable ClassicLink for the VPC. Only valid in regions and accounts that support EC2 Classic. See the <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html> for more information. Defaults false. -}
     , _enable_dns_hostnames :: !(TF.Attribute s "enable_dns_hostnames" TF.Bool)
     {- ^ (Optional) A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false. -}
-    , _enable_dns_support   :: !(TF.Attribute s "enable_dns_support" TF.Bool)
+    , _enable_dns_support :: !(TF.Attribute s "enable_dns_support" TF.Bool)
     {- ^ (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults true. -}
-    , _tags                 :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -10170,8 +10305,9 @@ instance HasName (DevicefarmProjectResource s) Text where
              (\s a -> s { _name = a } :: DevicefarmProjectResource s)
 
 instance HasComputedArn (DevicefarmProjectResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (DevicefarmProjectResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 devicefarmProjectResource :: TF.Resource TF.AWS (DevicefarmProjectResource s)
 devicefarmProjectResource =
@@ -10187,27 +10323,27 @@ Provides a Simple or Managed Microsoft directory in AWS Directory Service.
 stored in the raw state as plain-text. </docs/state/sensitive-data.html> .
 -}
 data DirectoryServiceDirectoryResource s = DirectoryServiceDirectoryResource {
-      _alias            :: !(TF.Attribute s "alias" Text)
+      _alias :: !(TF.Attribute s "alias" Text)
     {- ^ (Optional) The alias for the directory (must be unique amongst all aliases in AWS). Required for @enable_sso@ . -}
     , _connect_settings :: !(TF.Attribute s "connect_settings" Text)
     {- ^ (Required for @ADConnector@ ) Connector related information about the directory. Fields documented below. -}
-    , _description      :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A textual description for the directory. -}
-    , _enable_sso       :: !(TF.Attribute s "enable_sso" TF.Bool)
+    , _enable_sso :: !(TF.Attribute s "enable_sso" TF.Bool)
     {- ^ (Optional) Whether to enable single-sign on for the directory. Requires @alias@ . Defaults to @false@ . -}
-    , _name             :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The fully qualified name for the directory, such as @corp.example.com@ -}
-    , _password         :: !(TF.Attribute s "password" Text)
+    , _password :: !(TF.Attribute s "password" Text)
     {- ^ (Required) The password for the directory administrator or connector user. -}
-    , _short_name       :: !(TF.Attribute s "short_name" Text)
+    , _short_name :: !(TF.Attribute s "short_name" Text)
     {- ^ (Optional) The short name of the directory, such as @CORP@ . -}
-    , _size             :: !(TF.Attribute s "size" Text)
+    , _size :: !(TF.Attribute s "size" Text)
     {- ^ (Required for @SimpleAD@ and @ADConnector@ ) The size of the directory ( @Small@ or @Large@ are accepted values). -}
-    , _tags             :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _type'            :: !(TF.Attribute s "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Optional) - The directory type ( @SimpleAD@ or @MicrosoftAD@ are accepted values). Defaults to @SimpleAD@ . -}
-    , _vpc_settings     :: !(TF.Attribute s "vpc_settings" Text)
+    , _vpc_settings :: !(TF.Attribute s "vpc_settings" Text)
     {- ^ (Required for @SimpleAD@ and @MicrosoftAD@ ) VPC related information about the directory. Fields documented below. -}
     } deriving (Show, Eq)
 
@@ -10304,20 +10440,24 @@ instance HasVpcSettings (DirectoryServiceDirectoryResource s) Text where
              (\s a -> s { _vpc_settings = a } :: DirectoryServiceDirectoryResource s)
 
 instance HasComputedAccessUrl (DirectoryServiceDirectoryResource s) Text where
-    computedAccessUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "access_url")
+    type HasComputedAccessUrlThread (DirectoryServiceDirectoryResource s) Text = s
+
+    computedAccessUrl = to (\_ -> TF.Computed "access_url")
 
 instance HasComputedDnsIpAddresses (DirectoryServiceDirectoryResource s) Text where
-    computedDnsIpAddresses =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_ip_addresses")
+    type HasComputedDnsIpAddressesThread (DirectoryServiceDirectoryResource s) Text = s
+
+    computedDnsIpAddresses = to (\_ -> TF.Computed "dns_ip_addresses")
 
 instance HasComputedId (DirectoryServiceDirectoryResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DirectoryServiceDirectoryResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedSecurityGroupId (DirectoryServiceDirectoryResource s) Text where
-    computedSecurityGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_group_id")
+    type HasComputedSecurityGroupIdThread (DirectoryServiceDirectoryResource s) Text = s
+
+    computedSecurityGroupId = to (\_ -> TF.Computed "security_group_id")
 
 directoryServiceDirectoryResource :: TF.Resource TF.AWS (DirectoryServiceDirectoryResource s)
 directoryServiceDirectoryResource =
@@ -10344,9 +10484,9 @@ including the PEM encoded certificate will be stored in the raw state as
 plain-text. </docs/state/sensitive-data.html> .
 -}
 data DmsCertificateResource s = DmsCertificateResource {
-      _certificate_id     :: !(TF.Attribute s "certificate_id" Text)
+      _certificate_id :: !(TF.Attribute s "certificate_id" Text)
     {- ^ (Required) The certificate identifier. -}
-    , _certificate_pem    :: !(TF.Attribute s "certificate_pem" Text)
+    , _certificate_pem :: !(TF.Attribute s "certificate_pem" Text)
     {- ^ (Optional) The contents of the .pem X.509 certificate file for the certificate. Either @certificate_pem@ or @certificate_wallet@ must be set. -}
     , _certificate_wallet :: !(TF.Attribute s "certificate_wallet" Text)
     {- ^ (Optional) The contents of the Oracle Wallet certificate for use with SSL. Either @certificate_pem@ or @certificate_wallet@ must be set. -}
@@ -10381,8 +10521,9 @@ instance HasCertificateWallet (DmsCertificateResource s) Text where
              (\s a -> s { _certificate_wallet = a } :: DmsCertificateResource s)
 
 instance HasComputedCertificateArn (DmsCertificateResource s) Text where
-    computedCertificateArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "certificate_arn")
+    type HasComputedCertificateArnThread (DmsCertificateResource s) Text = s
+
+    computedCertificateArn = to (\_ -> TF.Computed "certificate_arn")
 
 dmsCertificateResource :: TF.Resource TF.AWS (DmsCertificateResource s)
 dmsCertificateResource =
@@ -10548,8 +10689,9 @@ instance HasUsername (DmsEndpointResource s) Text where
              (\s a -> s { _username = a } :: DmsEndpointResource s)
 
 instance HasComputedEndpointArn (DmsEndpointResource s) Text where
-    computedEndpointArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint_arn")
+    type HasComputedEndpointArnThread (DmsEndpointResource s) Text = s
+
+    computedEndpointArn = to (\_ -> TF.Computed "endpoint_arn")
 
 dmsEndpointResource :: TF.Resource TF.AWS (DmsEndpointResource s)
 dmsEndpointResource =
@@ -10724,16 +10866,19 @@ instance HasVpcSecurityGroupIds (DmsReplicationInstanceResource s) Text where
              (\s a -> s { _vpc_security_group_ids = a } :: DmsReplicationInstanceResource s)
 
 instance HasComputedReplicationInstanceArn (DmsReplicationInstanceResource s) Text where
-    computedReplicationInstanceArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "replication_instance_arn")
+    type HasComputedReplicationInstanceArnThread (DmsReplicationInstanceResource s) Text = s
+
+    computedReplicationInstanceArn = to (\_ -> TF.Computed "replication_instance_arn")
 
 instance HasComputedReplicationInstancePrivateIps (DmsReplicationInstanceResource s) Text where
-    computedReplicationInstancePrivateIps =
-        to (\x -> TF.Computed (TF.referenceKey x) "replication_instance_private_ips")
+    type HasComputedReplicationInstancePrivateIpsThread (DmsReplicationInstanceResource s) Text = s
+
+    computedReplicationInstancePrivateIps = to (\_ -> TF.Computed "replication_instance_private_ips")
 
 instance HasComputedReplicationInstancePublicIps (DmsReplicationInstanceResource s) Text where
-    computedReplicationInstancePublicIps =
-        to (\x -> TF.Computed (TF.referenceKey x) "replication_instance_public_ips")
+    type HasComputedReplicationInstancePublicIpsThread (DmsReplicationInstanceResource s) Text = s
+
+    computedReplicationInstancePublicIps = to (\_ -> TF.Computed "replication_instance_public_ips")
 
 dmsReplicationInstanceResource :: TF.Resource TF.AWS (DmsReplicationInstanceResource s)
 dmsReplicationInstanceResource =
@@ -10799,8 +10944,9 @@ instance HasSubnetIds (DmsReplicationSubnetGroupResource s) Text where
              (\s a -> s { _subnet_ids = a } :: DmsReplicationSubnetGroupResource s)
 
 instance HasComputedVpcId (DmsReplicationSubnetGroupResource s) Text where
-    computedVpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_id")
+    type HasComputedVpcIdThread (DmsReplicationSubnetGroupResource s) Text = s
+
+    computedVpcId = to (\_ -> TF.Computed "vpc_id")
 
 dmsReplicationSubnetGroupResource :: TF.Resource TF.AWS (DmsReplicationSubnetGroupResource s)
 dmsReplicationSubnetGroupResource =
@@ -10914,8 +11060,9 @@ instance HasTargetEndpointArn (DmsReplicationTaskResource s) Text where
              (\s a -> s { _target_endpoint_arn = a } :: DmsReplicationTaskResource s)
 
 instance HasComputedReplicationTaskArn (DmsReplicationTaskResource s) Text where
-    computedReplicationTaskArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "replication_task_arn")
+    type HasComputedReplicationTaskArnThread (DmsReplicationTaskResource s) Text = s
+
+    computedReplicationTaskArn = to (\_ -> TF.Computed "replication_task_arn")
 
 dmsReplicationTaskResource :: TF.Resource TF.AWS (DmsReplicationTaskResource s)
 dmsReplicationTaskResource =
@@ -10939,7 +11086,7 @@ Associates a Direct Connect Connection with a LAG.
 data DxConnectionAssociationResource s = DxConnectionAssociationResource {
       _connection_id :: !(TF.Attribute s "connection_id" Text)
     {- ^ (Required) The ID of the connection. -}
-    , _lag_id        :: !(TF.Attribute s "lag_id" Text)
+    , _lag_id :: !(TF.Attribute s "lag_id" Text)
     {- ^ (Required) The ID of the LAG with which to associate the connection. -}
     } deriving (Show, Eq)
 
@@ -10978,9 +11125,9 @@ Provides a Connection of Direct Connect.
 data DxConnectionResource s = DxConnectionResource {
       _bandwidth :: !(TF.Attribute s "bandwidth" Text)
     {- ^ (Required) The bandwidth of the connection. Available values: 1Gbps, 10Gbps. Case sensitive. -}
-    , _location  :: !(TF.Attribute s "location" Text)
+    , _location :: !(TF.Attribute s "location" Text)
     {- ^ (Required) The AWS Direct Connect location where the connection is located. See <https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeLocations.html> for the list of AWS Direct Connect locations. Use @locationCode@ . -}
-    , _name      :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the connection. -}
     } deriving (Show, Eq)
 
@@ -11013,8 +11160,9 @@ instance HasName (DxConnectionResource s) Text where
              (\s a -> s { _name = a } :: DxConnectionResource s)
 
 instance HasComputedId (DxConnectionResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DxConnectionResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 dxConnectionResource :: TF.Resource TF.AWS (DxConnectionResource s)
 dxConnectionResource =
@@ -11032,11 +11180,11 @@ Provides a Direct Connect LAG.
 data DxLagResource s = DxLagResource {
       _connections_bandwidth :: !(TF.Attribute s "connections_bandwidth" Text)
     {- ^ (Required) The bandwidth of the individual physical connections bundled by the LAG. Available values: 1Gbps, 10Gbps. Case sensitive. -}
-    , _force_destroy         :: !(TF.Attribute s "force_destroy" Text)
+    , _force_destroy :: !(TF.Attribute s "force_destroy" Text)
     {- ^ (Optional, Default:false) A boolean that indicates all connections associated with the LAG should be deleted so that the LAG can be destroyed without error. These objects are not recoverable. -}
-    , _location              :: !(TF.Attribute s "location" Text)
+    , _location :: !(TF.Attribute s "location" Text)
     {- ^ (Required) The AWS Direct Connect location in which the LAG should be allocated. See <https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeLocations.html> for the list of AWS Direct Connect locations. Use @locationCode@ . -}
-    , _name                  :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the LAG. -}
     , _number_of_connections :: !(TF.Attribute s "number_of_connections" Text)
     {- ^ (Required) The number of physical connections initially provisioned and bundled by the LAG. -}
@@ -11087,8 +11235,9 @@ instance HasNumberOfConnections (DxLagResource s) Text where
              (\s a -> s { _number_of_connections = a } :: DxLagResource s)
 
 instance HasComputedId (DxLagResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DxLagResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 dxLagResource :: TF.Resource TF.AWS (DxLagResource s)
 dxLagResource =
@@ -11260,9 +11409,9 @@ Creates a Snapshot of an EBS Volume.
 data EbsSnapshotResource s = EbsSnapshotResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A description of what the snapshot is. -}
-    , _tags        :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the snapshot -}
-    , _volume_id   :: !(TF.Attribute s "volume_id" Text)
+    , _volume_id :: !(TF.Attribute s "volume_id" Text)
     {- ^ (Required) The Volume ID of which to make a snapshot. -}
     } deriving (Show, Eq)
 
@@ -11295,36 +11444,44 @@ instance HasVolumeId (EbsSnapshotResource s) Text where
              (\s a -> s { _volume_id = a } :: EbsSnapshotResource s)
 
 instance HasComputedDataEncryptionKeyId (EbsSnapshotResource s) Text where
-    computedDataEncryptionKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "data_encryption_key_id")
+    type HasComputedDataEncryptionKeyIdThread (EbsSnapshotResource s) Text = s
+
+    computedDataEncryptionKeyId = to (\_ -> TF.Computed "data_encryption_key_id")
 
 instance HasComputedEncrypted (EbsSnapshotResource s) Text where
-    computedEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted")
+    type HasComputedEncryptedThread (EbsSnapshotResource s) Text = s
+
+    computedEncrypted = to (\_ -> TF.Computed "encrypted")
 
 instance HasComputedId (EbsSnapshotResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EbsSnapshotResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedKmsKeyId (EbsSnapshotResource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (EbsSnapshotResource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 instance HasComputedOwnerAlias (EbsSnapshotResource s) Text where
-    computedOwnerAlias =
-        to (\x -> TF.Computed (TF.referenceKey x) "owner_alias")
+    type HasComputedOwnerAliasThread (EbsSnapshotResource s) Text = s
+
+    computedOwnerAlias = to (\_ -> TF.Computed "owner_alias")
 
 instance HasComputedOwnerId (EbsSnapshotResource s) Text where
-    computedOwnerId =
-        to (\x -> TF.Computed (TF.referenceKey x) "owner_id")
+    type HasComputedOwnerIdThread (EbsSnapshotResource s) Text = s
+
+    computedOwnerId = to (\_ -> TF.Computed "owner_id")
 
 instance HasComputedTags (EbsSnapshotResource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (EbsSnapshotResource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedVolumeSize (EbsSnapshotResource s) Text where
-    computedVolumeSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "volume_size")
+    type HasComputedVolumeSizeThread (EbsSnapshotResource s) Text = s
+
+    computedVolumeSize = to (\_ -> TF.Computed "volume_size")
 
 ebsSnapshotResource :: TF.Resource TF.AWS (EbsSnapshotResource s)
 ebsSnapshotResource =
@@ -11342,19 +11499,19 @@ Manages a single EBS volume.
 data EbsVolumeResource s = EbsVolumeResource {
       _availability_zone :: !(TF.Attribute s "availability_zone" TF.Zone)
     {- ^ (Required) The AZ where the EBS volume will exist. -}
-    , _encrypted         :: !(TF.Attribute s "encrypted" Text)
+    , _encrypted :: !(TF.Attribute s "encrypted" Text)
     {- ^ (Optional) If true, the disk will be encrypted. -}
-    , _iops              :: !(TF.Attribute s "iops" Text)
+    , _iops :: !(TF.Attribute s "iops" Text)
     {- ^ (Optional) The amount of IOPS to provision for the disk. -}
-    , _kms_key_id        :: !(TF.Attribute s "kms_key_id" Text)
+    , _kms_key_id :: !(TF.Attribute s "kms_key_id" Text)
     {- ^ (Optional) The ARN for the KMS encryption key. When specifying @kms_key_id@ , @encrypted@ needs to be set to true. -}
-    , _size              :: !(TF.Attribute s "size" Text)
+    , _size :: !(TF.Attribute s "size" Text)
     {- ^ (Optional) The size of the drive in GiBs. -}
-    , _snapshot_id       :: !(TF.Attribute s "snapshot_id" Text)
+    , _snapshot_id :: !(TF.Attribute s "snapshot_id" Text)
     {- ^ (Optional) A snapshot to base the EBS volume off of. -}
-    , _tags              :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _type'             :: !(TF.Attribute s "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Optional) The type of EBS volume. Can be "standard", "gp2", "io1", "sc1" or "st1" (Default: "standard"). -}
     } deriving (Show, Eq)
 
@@ -11427,12 +11584,14 @@ instance HasType' (EbsVolumeResource s) Text where
              (\s a -> s { _type' = a } :: EbsVolumeResource s)
 
 instance HasComputedArn (EbsVolumeResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (EbsVolumeResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (EbsVolumeResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EbsVolumeResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 ebsVolumeResource :: TF.Resource TF.AWS (EbsVolumeResource s)
 ebsVolumeResource =
@@ -11453,7 +11612,7 @@ ebsVolumeResource =
 Provides an ECR lifecycle policy.
 -}
 data EcrLifecyclePolicyResource s = EcrLifecyclePolicyResource {
-      _policy     :: !(TF.Attribute s "policy" Text)
+      _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. See more details about <http://docs.aws.amazon.com/ja_jp/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters> in the official AWS docs. -}
     , _repository :: !(TF.Attribute s "repository" Text)
     {- ^ (Required) Name of the repository to apply the policy. -}
@@ -11480,12 +11639,14 @@ instance HasRepository (EcrLifecyclePolicyResource s) Text where
              (\s a -> s { _repository = a } :: EcrLifecyclePolicyResource s)
 
 instance HasComputedRegistryId (EcrLifecyclePolicyResource s) Text where
-    computedRegistryId =
-        to (\x -> TF.Computed (TF.referenceKey x) "registry_id")
+    type HasComputedRegistryIdThread (EcrLifecyclePolicyResource s) Text = s
+
+    computedRegistryId = to (\_ -> TF.Computed "registry_id")
 
 instance HasComputedRepository (EcrLifecyclePolicyResource s) Text where
-    computedRepository =
-        to (\x -> TF.Computed (TF.referenceKey x) "repository")
+    type HasComputedRepositoryThread (EcrLifecyclePolicyResource s) Text = s
+
+    computedRepository = to (\_ -> TF.Computed "repository")
 
 ecrLifecyclePolicyResource :: TF.Resource TF.AWS (EcrLifecyclePolicyResource s)
 ecrLifecyclePolicyResource =
@@ -11503,7 +11664,7 @@ Registry is not yet rolled out in all regions - available regions are listed
 <https://docs.aws.amazon.com/general/latest/gr/rande.html#ecr_region> .
 -}
 data EcrRepositoryPolicyResource s = EcrRepositoryPolicyResource {
-      _policy     :: !(TF.Attribute s "policy" Text)
+      _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. -}
     , _repository :: !(TF.Attribute s "repository" Text)
     {- ^ (Required) Name of the repository to apply the policy. -}
@@ -11530,12 +11691,14 @@ instance HasRepository (EcrRepositoryPolicyResource s) Text where
              (\s a -> s { _repository = a } :: EcrRepositoryPolicyResource s)
 
 instance HasComputedRegistryId (EcrRepositoryPolicyResource s) Text where
-    computedRegistryId =
-        to (\x -> TF.Computed (TF.referenceKey x) "registry_id")
+    type HasComputedRegistryIdThread (EcrRepositoryPolicyResource s) Text = s
+
+    computedRegistryId = to (\_ -> TF.Computed "registry_id")
 
 instance HasComputedRepository (EcrRepositoryPolicyResource s) Text where
-    computedRepository =
-        to (\x -> TF.Computed (TF.referenceKey x) "repository")
+    type HasComputedRepositoryThread (EcrRepositoryPolicyResource s) Text = s
+
+    computedRepository = to (\_ -> TF.Computed "repository")
 
 ecrRepositoryPolicyResource :: TF.Resource TF.AWS (EcrRepositoryPolicyResource s)
 ecrRepositoryPolicyResource =
@@ -11570,20 +11733,24 @@ instance HasName (EcrRepositoryResource s) Text where
              (\s a -> s { _name = a } :: EcrRepositoryResource s)
 
 instance HasComputedArn (EcrRepositoryResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (EcrRepositoryResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedName (EcrRepositoryResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (EcrRepositoryResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedRegistryId (EcrRepositoryResource s) Text where
-    computedRegistryId =
-        to (\x -> TF.Computed (TF.referenceKey x) "registry_id")
+    type HasComputedRegistryIdThread (EcrRepositoryResource s) Text = s
+
+    computedRegistryId = to (\_ -> TF.Computed "registry_id")
 
 instance HasComputedRepositoryUrl (EcrRepositoryResource s) Text where
-    computedRepositoryUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "repository_url")
+    type HasComputedRepositoryUrlThread (EcrRepositoryResource s) Text = s
+
+    computedRepositoryUrl = to (\_ -> TF.Computed "repository_url")
 
 ecrRepositoryResource :: TF.Resource TF.AWS (EcrRepositoryResource s)
 ecrRepositoryResource =
@@ -11614,12 +11781,14 @@ instance HasName (EcsClusterResource s) Text where
              (\s a -> s { _name = a } :: EcsClusterResource s)
 
 instance HasComputedArn (EcsClusterResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (EcsClusterResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (EcsClusterResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EcsClusterResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 ecsClusterResource :: TF.Resource TF.AWS (EcsClusterResource s)
 ecsClusterResource =
@@ -11802,7 +11971,7 @@ Provides an ECS task definition to be used in @aws_ecs_service@ .
 data EcsTaskDefinitionResource s = EcsTaskDefinitionResource {
       _container_definitions :: !(TF.Attribute s "container_definitions" Text)
     {- ^ (Required) A list of valid [container definitions] (http://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html) provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the [Task Definition Parameters] (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html) section from the official <https://docs.aws.amazon.com/AmazonECS/latest/developerguide> . -}
-    , _family'               :: !(TF.Attribute s "family" Text)
+    , _family' :: !(TF.Attribute s "family" Text)
     {- ^ (Required) A unique name for your task definition. -}
     } deriving (Show, Eq)
 
@@ -11839,17 +12008,17 @@ ecsTaskDefinitionResource =
 Provides an Elastic File System (EFS) resource.
 -}
 data EfsFileSystemResource s = EfsFileSystemResource {
-      _creation_token   :: !(TF.Attribute s "creation_token" Text)
+      _creation_token :: !(TF.Attribute s "creation_token" Text)
     {- ^ (Optional) A unique name (a maximum of 64 characters are allowed) used as reference when creating the Elastic File System to ensure idempotent file system creation. By default generated by Terraform. See [Elastic File System] (http://docs.aws.amazon.com/efs/latest/ug/) user guide for more information. -}
-    , _encrypted        :: !(TF.Attribute s "encrypted" Text)
+    , _encrypted :: !(TF.Attribute s "encrypted" Text)
     {- ^ (Optional) If true, the disk will be encrypted. -}
-    , _kms_key_id       :: !(TF.Attribute s "kms_key_id" Text)
+    , _kms_key_id :: !(TF.Attribute s "kms_key_id" Text)
     {- ^ (Optional) The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true. -}
     , _performance_mode :: !(TF.Attribute s "performance_mode" Text)
     {- ^ (Optional) The file system performance mode. Can be either @"generalPurpose"@ or @"maxIO"@ (Default: @"generalPurpose"@ ). -}
-    , _reference_name   :: !(TF.Attribute s "reference_name" Text)
+    , _reference_name :: !(TF.Attribute s "reference_name" Text)
     {- ^ - DEPRECATED (Optional) A reference name used when creating the @Creation Token@ which Amazon EFS uses to ensure idempotent file system creation. By default generated by Terraform. -}
-    , _tags             :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the file system. -}
     } deriving (Show, Eq)
 
@@ -11906,16 +12075,19 @@ instance HasTags (EfsFileSystemResource s) TF.Tags where
              (\s a -> s { _tags = a } :: EfsFileSystemResource s)
 
 instance HasComputedDnsName (EfsFileSystemResource s) Text where
-    computedDnsName =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_name")
+    type HasComputedDnsNameThread (EfsFileSystemResource s) Text = s
+
+    computedDnsName = to (\_ -> TF.Computed "dns_name")
 
 instance HasComputedId (EfsFileSystemResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EfsFileSystemResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedKmsKeyId (EfsFileSystemResource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (EfsFileSystemResource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 efsFileSystemResource :: TF.Resource TF.AWS (EfsFileSystemResource s)
 efsFileSystemResource =
@@ -11934,13 +12106,13 @@ efsFileSystemResource =
 Provides an Elastic File System (EFS) mount target.
 -}
 data EfsMountTargetResource s = EfsMountTargetResource {
-      _file_system_id  :: !(TF.Attribute s "file_system_id" Text)
+      _file_system_id :: !(TF.Attribute s "file_system_id" Text)
     {- ^ (Required) The ID of the file system for which the mount target is intended. -}
-    , _ip_address      :: !(TF.Attribute s "ip_address" Text)
+    , _ip_address :: !(TF.Attribute s "ip_address" Text)
     {- ^ (Optional) The address (within the address range of the specified subnet) at which the file system may be mounted via the mount target. -}
     , _security_groups :: !(TF.Attribute s "security_groups" Text)
     {- ^ (Optional) A list of up to 5 VPC security group IDs (that must be for the same VPC as subnet specified) in effect for the mount target. -}
-    , _subnet_id       :: !(TF.Attribute s "subnet_id" Text)
+    , _subnet_id :: !(TF.Attribute s "subnet_id" Text)
     {- ^ (Required) The ID of the subnet to add the mount target in. -}
     } deriving (Show, Eq)
 
@@ -11981,16 +12153,19 @@ instance HasSubnetId (EfsMountTargetResource s) Text where
              (\s a -> s { _subnet_id = a } :: EfsMountTargetResource s)
 
 instance HasComputedDnsName (EfsMountTargetResource s) Text where
-    computedDnsName =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_name")
+    type HasComputedDnsNameThread (EfsMountTargetResource s) Text = s
+
+    computedDnsName = to (\_ -> TF.Computed "dns_name")
 
 instance HasComputedId (EfsMountTargetResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EfsMountTargetResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedNetworkInterfaceId (EfsMountTargetResource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (EfsMountTargetResource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 efsMountTargetResource :: TF.Resource TF.AWS (EfsMountTargetResource s)
 efsMountTargetResource =
@@ -12027,8 +12202,9 @@ instance HasVpcId (EgressOnlyInternetGatewayResource s) Text where
              (\s a -> s { _vpc_id = a } :: EgressOnlyInternetGatewayResource s)
 
 instance HasComputedId (EgressOnlyInternetGatewayResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EgressOnlyInternetGatewayResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 egressOnlyInternetGatewayResource :: TF.Resource TF.AWS (EgressOnlyInternetGatewayResource s)
 egressOnlyInternetGatewayResource =
@@ -12046,17 +12222,17 @@ pre-existing or distributed to customers or users and therefore cannot be
 changed.
 -}
 data EipAssociationResource s = EipAssociationResource {
-      _allocation_id        :: !(TF.Attribute s "allocation_id" Text)
+      _allocation_id :: !(TF.Attribute s "allocation_id" Text)
     {- ^ (Optional) The allocation ID. This is required for EC2-VPC. -}
-    , _allow_reassociation  :: !(TF.Attribute s "allow_reassociation" Text)
+    , _allow_reassociation :: !(TF.Attribute s "allow_reassociation" Text)
     {- ^ (Optional, Boolean) Whether to allow an Elastic IP to be re-associated. Defaults to @true@ in VPC. -}
-    , _instance_id          :: !(TF.Attribute s "instance_id" Text)
+    , _instance_id :: !(TF.Attribute s "instance_id" Text)
     {- ^ (Optional) The ID of the instance. This is required for EC2-Classic. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. The operation fails if you specify an instance ID unless exactly one network interface is attached. -}
     , _network_interface_id :: !(TF.Attribute s "network_interface_id" Text)
     {- ^ (Optional) The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID. -}
-    , _private_ip_address   :: !(TF.Attribute s "private_ip_address" Text)
+    , _private_ip_address :: !(TF.Attribute s "private_ip_address" Text)
     {- ^ (Optional) The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address. -}
-    , _public_ip            :: !(TF.Attribute s "public_ip" Text)
+    , _public_ip :: !(TF.Attribute s "public_ip" Text)
     {- ^ (Optional) The Elastic IP address. This is required for EC2-Classic. -}
     } deriving (Show, Eq)
 
@@ -12113,28 +12289,34 @@ instance HasPublicIp (EipAssociationResource s) Text where
              (\s a -> s { _public_ip = a } :: EipAssociationResource s)
 
 instance HasComputedAllocationId (EipAssociationResource s) Text where
-    computedAllocationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocation_id")
+    type HasComputedAllocationIdThread (EipAssociationResource s) Text = s
+
+    computedAllocationId = to (\_ -> TF.Computed "allocation_id")
 
 instance HasComputedAssociationId (EipAssociationResource s) Text where
-    computedAssociationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "association_id")
+    type HasComputedAssociationIdThread (EipAssociationResource s) Text = s
+
+    computedAssociationId = to (\_ -> TF.Computed "association_id")
 
 instance HasComputedInstanceId (EipAssociationResource s) Text where
-    computedInstanceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_id")
+    type HasComputedInstanceIdThread (EipAssociationResource s) Text = s
+
+    computedInstanceId = to (\_ -> TF.Computed "instance_id")
 
 instance HasComputedNetworkInterfaceId (EipAssociationResource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (EipAssociationResource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 instance HasComputedPrivateIpAddress (EipAssociationResource s) Text where
-    computedPrivateIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip_address")
+    type HasComputedPrivateIpAddressThread (EipAssociationResource s) Text = s
+
+    computedPrivateIpAddress = to (\_ -> TF.Computed "private_ip_address")
 
 instance HasComputedPublicIp (EipAssociationResource s) Text where
-    computedPublicIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_ip")
+    type HasComputedPublicIpThread (EipAssociationResource s) Text = s
+
+    computedPublicIp = to (\_ -> TF.Computed "public_ip")
 
 eipAssociationResource :: TF.Resource TF.AWS (EipAssociationResource s)
 eipAssociationResource =
@@ -12211,28 +12393,34 @@ instance HasVpc (EipResource s) Text where
              (\s a -> s { _vpc = a } :: EipResource s)
 
 instance HasComputedAssociateWithPrivateIp (EipResource s) Text where
-    computedAssociateWithPrivateIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "associate_with_private_ip")
+    type HasComputedAssociateWithPrivateIpThread (EipResource s) Text = s
+
+    computedAssociateWithPrivateIp = to (\_ -> TF.Computed "associate_with_private_ip")
 
 instance HasComputedId (EipResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EipResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedInstance' (EipResource s) Text where
-    computedInstance' =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance")
+    type HasComputedInstance'Thread (EipResource s) Text = s
+
+    computedInstance' = to (\_ -> TF.Computed "instance")
 
 instance HasComputedNetworkInterface (EipResource s) Text where
-    computedNetworkInterface =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface")
+    type HasComputedNetworkInterfaceThread (EipResource s) Text = s
+
+    computedNetworkInterface = to (\_ -> TF.Computed "network_interface")
 
 instance HasComputedPrivateIp (EipResource s) Text where
-    computedPrivateIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip")
+    type HasComputedPrivateIpThread (EipResource s) Text = s
+
+    computedPrivateIp = to (\_ -> TF.Computed "private_ip")
 
 instance HasComputedPublicIp (EipResource s) Text where
-    computedPublicIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_ip")
+    type HasComputedPublicIpThread (EipResource s) Text = s
+
+    computedPublicIp = to (\_ -> TF.Computed "public_ip")
 
 eipResource :: TF.Resource TF.AWS (EipResource s)
 eipResource =
@@ -12256,7 +12444,7 @@ application versions
 data ElasticBeanstalkApplicationResource s = ElasticBeanstalkApplicationResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) Short description of the application -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the application, must be unique within your account -}
     } deriving (Show, Eq)
 
@@ -12301,17 +12489,17 @@ returned when attempting to delete an Application Version while it is still
 in use by a different environment. To work around this you can:
 -}
 data ElasticBeanstalkApplicationVersionResource s = ElasticBeanstalkApplicationVersionResource {
-      _application  :: !(TF.Attribute s "application" Text)
+      _application :: !(TF.Attribute s "application" Text)
     {- ^ (Required) Name of the Beanstalk Application the version is associated with. -}
-    , _bucket       :: !(TF.Attribute s "bucket" Text)
+    , _bucket :: !(TF.Attribute s "bucket" Text)
     {- ^ (Required) S3 bucket that contains the Application Version source bundle. -}
-    , _description  :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) Short description of the Application Version. -}
     , _force_delete :: !(TF.Attribute s "force_delete" Text)
     {- ^ (Optional) On delete, force an Application Version to be deleted when it may be in use by multiple Elastic Beanstalk Environments. -}
-    , _key          :: !(TF.Attribute s "key" Text)
+    , _key :: !(TF.Attribute s "key" Text)
     {- ^ (Required) S3 object that is the Application Version source bundle. -}
-    , _name         :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A unique name for the this Application Version. -}
     } deriving (Show, Eq)
 
@@ -12368,8 +12556,9 @@ instance HasName (ElasticBeanstalkApplicationVersionResource s) Text where
              (\s a -> s { _name = a } :: ElasticBeanstalkApplicationVersionResource s)
 
 instance HasComputedName (ElasticBeanstalkApplicationVersionResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (ElasticBeanstalkApplicationVersionResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 elasticBeanstalkApplicationVersionResource :: TF.Resource TF.AWS (ElasticBeanstalkApplicationVersionResource s)
 elasticBeanstalkApplicationVersionResource =
@@ -12390,15 +12579,15 @@ with a specific application and are used to deploy different versions of the
 application with the same configuration settings.
 -}
 data ElasticBeanstalkConfigurationTemplateResource s = ElasticBeanstalkConfigurationTemplateResource {
-      _application         :: !(TF.Attribute s "application" Text)
+      _application :: !(TF.Attribute s "application" Text)
     {- ^ – (Required) name of the application to associate with this configuration template -}
-    , _description         :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) Short description of the Template -}
-    , _environment_id      :: !(TF.Attribute s "environment_id" Text)
+    , _environment_id :: !(TF.Attribute s "environment_id" Text)
     {- ^ – (Optional) The ID of the environment used with this configuration template -}
-    , _name                :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A unique name for this Template. -}
-    , _setting             :: !(TF.Attribute s "setting" Text)
+    , _setting :: !(TF.Attribute s "setting" Text)
     {- ^ – (Optional) Option settings to configure the new Environment. These override specific values that are set as defaults. The format is detailed below in <#option-settings> -}
     , _solution_stack_name :: !(TF.Attribute s "solution_stack_name" Text)
     {- ^ – (Optional) A solution stack to base your Template off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
@@ -12476,27 +12665,27 @@ about the infrastructure that runs those applications. Environments are
 often things such as @development@ , @integration@ , or @production@ .
 -}
 data ElasticBeanstalkEnvironmentResource s = ElasticBeanstalkEnvironmentResource {
-      _application            :: !(TF.Attribute s "application" Text)
+      _application :: !(TF.Attribute s "application" Text)
     {- ^ – (Required) Name of the application that contains the version to be deployed -}
-    , _cname_prefix           :: !(TF.Attribute s "cname_prefix" Text)
+    , _cname_prefix :: !(TF.Attribute s "cname_prefix" Text)
     {- ^ (Optional) Prefix to use for the fully qualified DNS name of the Environment. -}
-    , _description            :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) Short description of the Environment -}
-    , _name                   :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A unique name for this Environment. This name is used in the application URL -}
-    , _poll_interval          :: !(TF.Attribute s "poll_interval" Text)
+    , _poll_interval :: !(TF.Attribute s "poll_interval" Text)
     {- ^ – The time between polling the AWS API to check if changes have been applied. Use this to adjust the rate of API calls for any @create@ or @update@ action. Minimum @10s@ , maximum @180s@ . Omit this to use the default behavior, which is an exponential backoff -}
-    , _setting                :: !(TF.Attribute s "setting" Text)
+    , _setting :: !(TF.Attribute s "setting" Text)
     {- ^ – (Optional) Option settings to configure the new Environment. These override specific values that are set as defaults. The format is detailed below in <#option-settings> -}
-    , _solution_stack_name    :: !(TF.Attribute s "solution_stack_name" Text)
+    , _solution_stack_name :: !(TF.Attribute s "solution_stack_name" Text)
     {- ^ – (Optional) A solution stack to base your environment off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
-    , _tags                   :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ – (Optional) A set of tags to apply to the Environment. Note: at this time the Elastic Beanstalk API does not provide a programatic way of changing these tags after initial application -}
-    , _template_name          :: !(TF.Attribute s "template_name" Text)
+    , _template_name :: !(TF.Attribute s "template_name" Text)
     {- ^ – (Optional) The name of the Elastic Beanstalk Configuration template to use in deployment -}
-    , _tier                   :: !(TF.Attribute s "tier" Text)
+    , _tier :: !(TF.Attribute s "tier" Text)
     {- ^ (Optional) Elastic Beanstalk Environment tier. Valid values are @Worker@ or @WebServer@ . If tier is left blank @WebServer@ will be used. -}
-    , _version_label          :: !(TF.Attribute s "version_label" Text)
+    , _version_label :: !(TF.Attribute s "version_label" Text)
     {- ^ (Optional) The name of the Elastic Beanstalk Application Version to use in deployment. -}
     , _wait_for_ready_timeout :: !(TF.Attribute s "wait_for_ready_timeout" Text)
     {- ^ - (Default: @20m@ ) The maximum <https://golang.org/pkg/time/#ParseDuration> that Terraform should wait for an Elastic Beanstalk Environment to be in a ready state before timing out. -}
@@ -12851,16 +13040,19 @@ instance HasTags (ElasticacheClusterResource s) TF.Tags where
              (\s a -> s { _tags = a } :: ElasticacheClusterResource s)
 
 instance HasComputedCacheNodes (ElasticacheClusterResource s) Text where
-    computedCacheNodes =
-        to (\x -> TF.Computed (TF.referenceKey x) "cache_nodes")
+    type HasComputedCacheNodesThread (ElasticacheClusterResource s) Text = s
+
+    computedCacheNodes = to (\_ -> TF.Computed "cache_nodes")
 
 instance HasComputedClusterAddress (ElasticacheClusterResource s) Text where
-    computedClusterAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_address")
+    type HasComputedClusterAddressThread (ElasticacheClusterResource s) Text = s
+
+    computedClusterAddress = to (\_ -> TF.Computed "cluster_address")
 
 instance HasComputedConfigurationEndpoint (ElasticacheClusterResource s) Text where
-    computedConfigurationEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "configuration_endpoint")
+    type HasComputedConfigurationEndpointThread (ElasticacheClusterResource s) Text = s
+
+    computedConfigurationEndpoint = to (\_ -> TF.Computed "configuration_endpoint")
 
 elasticacheClusterResource :: TF.Resource TF.AWS (ElasticacheClusterResource s)
 elasticacheClusterResource =
@@ -12896,11 +13088,11 @@ Provides an ElastiCache parameter group resource.
 data ElasticacheParameterGroupResource s = ElasticacheParameterGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the ElastiCache parameter group. Defaults to "Managed by Terraform". -}
-    , _family'     :: !(TF.Attribute s "family" Text)
+    , _family' :: !(TF.Attribute s "family" Text)
     {- ^ (Required) The family of the ElastiCache parameter group. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the ElastiCache parameter group. -}
-    , _parameter   :: !(TF.Attribute s "parameter" Text)
+    , _parameter :: !(TF.Attribute s "parameter" Text)
     {- ^ (Optional) A list of ElastiCache parameters to apply. -}
     } deriving (Show, Eq)
 
@@ -12941,8 +13133,9 @@ instance HasParameter (ElasticacheParameterGroupResource s) Text where
              (\s a -> s { _parameter = a } :: ElasticacheParameterGroupResource s)
 
 instance HasComputedId (ElasticacheParameterGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ElasticacheParameterGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 elasticacheParameterGroupResource :: TF.Resource TF.AWS (ElasticacheParameterGroupResource s)
 elasticacheParameterGroupResource =
@@ -13226,16 +13419,19 @@ instance HasTransitEncryptionEnabled (ElasticacheReplicationGroupResource s) TF.
              (\s a -> s { _transit_encryption_enabled = a } :: ElasticacheReplicationGroupResource s)
 
 instance HasComputedConfigurationEndpointAddress (ElasticacheReplicationGroupResource s) Text where
-    computedConfigurationEndpointAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "configuration_endpoint_address")
+    type HasComputedConfigurationEndpointAddressThread (ElasticacheReplicationGroupResource s) Text = s
+
+    computedConfigurationEndpointAddress = to (\_ -> TF.Computed "configuration_endpoint_address")
 
 instance HasComputedId (ElasticacheReplicationGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ElasticacheReplicationGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedPrimaryEndpointAddress (ElasticacheReplicationGroupResource s) Text where
-    computedPrimaryEndpointAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_endpoint_address")
+    type HasComputedPrimaryEndpointAddressThread (ElasticacheReplicationGroupResource s) Text = s
+
+    computedPrimaryEndpointAddress = to (\_ -> TF.Computed "primary_endpoint_address")
 
 elasticacheReplicationGroupResource :: TF.Resource TF.AWS (ElasticacheReplicationGroupResource s)
 elasticacheReplicationGroupResource =
@@ -13277,9 +13473,9 @@ working with an ElastiCache cluster outside of a VPC. If you are using a
 VPC, see the <elasticache_subnet_group.html> .
 -}
 data ElasticacheSecurityGroupResource s = ElasticacheSecurityGroupResource {
-      _description          :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ – (Optional) description for the cache security group. Defaults to "Managed by Terraform". -}
-    , _name                 :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ – (Required) Name for the cache security group. This value is stored as a lowercase string. -}
     , _security_group_names :: !(TF.Attribute s "security_group_names" Text)
     {- ^ – (Required) List of EC2 security group names to be authorized for ingress to the cache security group -}
@@ -13331,9 +13527,9 @@ VPC. If you are on EC2 Classic, see the <elasticache_security_group.html> .
 data ElasticacheSubnetGroupResource s = ElasticacheSubnetGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ – (Optional) Description for the cache subnet group. Defaults to "Managed by Terraform". -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ – (Required) Name for the cache subnet group. Elasticache converts this name to lowercase. -}
-    , _subnet_ids  :: !(TF.Attribute s "subnet_ids" Text)
+    , _subnet_ids :: !(TF.Attribute s "subnet_ids" Text)
     {- ^ – (Required) List of VPC Subnet IDs for the cache subnet group -}
     } deriving (Show, Eq)
 
@@ -13382,7 +13578,7 @@ attributes (e.g. ARN)
 data ElasticsearchDomainPolicyResource s = ElasticsearchDomainPolicyResource {
       _access_policies :: !(TF.Attribute s "access_policies" Text)
     {- ^ (Optional) IAM policy document specifying the access policies for the domain -}
-    , _domain_name     :: !(TF.Attribute s "domain_name" Text)
+    , _domain_name :: !(TF.Attribute s "domain_name" Text)
     {- ^ (Required) Name of the domain. -}
     } deriving (Show, Eq)
 
@@ -13419,27 +13615,27 @@ elasticsearchDomainPolicyResource =
 
 -}
 data ElasticsearchDomainResource s = ElasticsearchDomainResource {
-      _access_policies        :: !(TF.Attribute s "access_policies" Text)
+      _access_policies :: !(TF.Attribute s "access_policies" Text)
     {- ^ (Optional) IAM policy document specifying the access policies for the domain -}
-    , _advanced_options       :: !(TF.Attribute s "advanced_options" Text)
+    , _advanced_options :: !(TF.Attribute s "advanced_options" Text)
     {- ^ (Optional) Key-value string pairs to specify advanced configuration options. -}
-    , _cluster_config         :: !(TF.Attribute s "cluster_config" Text)
+    , _cluster_config :: !(TF.Attribute s "cluster_config" Text)
     {- ^ (Optional) Cluster configuration of the domain, see below. -}
-    , _domain_name            :: !(TF.Attribute s "domain_name" Text)
+    , _domain_name :: !(TF.Attribute s "domain_name" Text)
     {- ^ (Required) Name of the domain. -}
-    , _ebs_options            :: !(TF.Attribute s "ebs_options" Text)
+    , _ebs_options :: !(TF.Attribute s "ebs_options" Text)
     {- ^ (Optional) EBS related options, may be required based on chosen <https://aws.amazon.com/elasticsearch-service/pricing/> . See below. -}
-    , _elasticsearch_version  :: !(TF.Attribute s "elasticsearch_version" Text)
+    , _elasticsearch_version :: !(TF.Attribute s "elasticsearch_version" Text)
     {- ^ (Optional) The version of ElasticSearch to deploy. Defaults to @1.5@ -}
-    , _encrypt_at_rest        :: !(TF.Attribute s "encrypt_at_rest" Text)
+    , _encrypt_at_rest :: !(TF.Attribute s "encrypt_at_rest" Text)
     {- ^ (Optional) Encrypt at rest options. Only available for <http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-supported-instance-types.html> . See below. -}
     , _log_publishing_options :: !(TF.Attribute s "log_publishing_options" Text)
     {- ^ (Optional) Options for publishing slow logs to CloudWatch Logs. -}
-    , _snapshot_options       :: !(TF.Attribute s "snapshot_options" Text)
+    , _snapshot_options :: !(TF.Attribute s "snapshot_options" Text)
     {- ^ (Optional) Snapshot related options, see below. -}
-    , _tags                   :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource -}
-    , _vpc_options            :: !(TF.Attribute s "vpc_options" Text)
+    , _vpc_options :: !(TF.Attribute s "vpc_options" Text)
     {- ^ (Optional) VPC related options, see below. Adding or removing this configuration forces a new resource ( <https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-vpc-limitations> ). -}
     } deriving (Show, Eq)
 
@@ -13536,28 +13732,34 @@ instance HasVpcOptions (ElasticsearchDomainResource s) Text where
              (\s a -> s { _vpc_options = a } :: ElasticsearchDomainResource s)
 
 instance HasComputedArn (ElasticsearchDomainResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (ElasticsearchDomainResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedDomainId (ElasticsearchDomainResource s) Text where
-    computedDomainId =
-        to (\x -> TF.Computed (TF.referenceKey x) "domain_id")
+    type HasComputedDomainIdThread (ElasticsearchDomainResource s) Text = s
+
+    computedDomainId = to (\_ -> TF.Computed "domain_id")
 
 instance HasComputedEndpoint (ElasticsearchDomainResource s) Text where
-    computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
+    type HasComputedEndpointThread (ElasticsearchDomainResource s) Text = s
+
+    computedEndpoint = to (\_ -> TF.Computed "endpoint")
 
 instance HasComputedKibanaEndpoint (ElasticsearchDomainResource s) Text where
-    computedKibanaEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "kibana_endpoint")
+    type HasComputedKibanaEndpointThread (ElasticsearchDomainResource s) Text = s
+
+    computedKibanaEndpoint = to (\_ -> TF.Computed "kibana_endpoint")
 
 instance HasComputedVpcOptions0AvailabilityZones (ElasticsearchDomainResource s) Text where
-    computedVpcOptions0AvailabilityZones =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_options.0.availability_zones")
+    type HasComputedVpcOptions0AvailabilityZonesThread (ElasticsearchDomainResource s) Text = s
+
+    computedVpcOptions0AvailabilityZones = to (\_ -> TF.Computed "vpc_options.0.availability_zones")
 
 instance HasComputedVpcOptions0VpcId (ElasticsearchDomainResource s) Text where
-    computedVpcOptions0VpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_options.0.vpc_id")
+    type HasComputedVpcOptions0VpcIdThread (ElasticsearchDomainResource s) Text = s
+
+    computedVpcOptions0VpcId = to (\_ -> TF.Computed "vpc_options.0.vpc_id")
 
 elasticsearchDomainResource :: TF.Resource TF.AWS (ElasticsearchDomainResource s)
 elasticsearchDomainResource =
@@ -13708,23 +13910,23 @@ elastictranscoderPipelineResource =
 Provides an Elastic Transcoder preset resource.
 -}
 data ElastictranscoderPresetResource s = ElastictranscoderPresetResource {
-      _audio               :: !(TF.Attribute s "audio" Text)
+      _audio :: !(TF.Attribute s "audio" Text)
     {- ^ (Optional, Forces new resource) Audio parameters object (documented below). -}
     , _audio_codec_options :: !(TF.Attribute s "audio_codec_options" Text)
     {- ^ (Optional, Forces new resource) Codec options for the audio parameters (documented below) -}
-    , _container           :: !(TF.Attribute s "container" Text)
+    , _container :: !(TF.Attribute s "container" Text)
     {- ^ (Required, Forces new resource) The container type for the output file. Valid values are @flac@ , @flv@ , @fmp4@ , @gif@ , @mp3@ , @mp4@ , @mpg@ , @mxf@ , @oga@ , @ogg@ , @ts@ , and @webm@ . -}
-    , _description         :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional, Forces new resource) A description of the preset (maximum 255 characters) -}
-    , _name                :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the preset. (maximum 40 characters) -}
-    , _thumbnails          :: !(TF.Attribute s "thumbnails" Text)
+    , _thumbnails :: !(TF.Attribute s "thumbnails" Text)
     {- ^ (Optional, Forces new resource) Thumbnail parameters object (documented below) -}
-    , _video               :: !(TF.Attribute s "video" Text)
+    , _video :: !(TF.Attribute s "video" Text)
     {- ^ (Optional, Forces new resource) Video parameters object (documented below) -}
     , _video_codec_options :: !(TF.Attribute s "video_codec_options" Text)
     {- ^ (Optional, Forces new resource) Codec options for the video parameters -}
-    , _video_watermarks    :: !(TF.Attribute s "video_watermarks" Text)
+    , _video_watermarks :: !(TF.Attribute s "video_watermarks" Text)
     {- ^ (Optional, Forces new resource) Watermark parameters for the video parameters (documented below) -}
     } deriving (Show, Eq)
 
@@ -13830,7 +14032,7 @@ Attachment resource. Doing so will cause a conflict and will overwrite
 attachments.
 -}
 data ElbAttachmentResource s = ElbAttachmentResource {
-      _elb       :: !(TF.Attribute s "elb" Text)
+      _elb :: !(TF.Attribute s "elb" Text)
     {- ^ (Required) The name of the ELB. -}
     , _instance' :: !(TF.Attribute s "instance" Text)
     {- ^ (Required) Instance ID to place in the ELB pool. -}
@@ -13869,11 +14071,11 @@ elbAttachmentResource =
 Attaches a load balancer policy to an ELB backend server.
 -}
 data ElbLoadBalancerBackendServerPolicyResource s = ElbLoadBalancerBackendServerPolicyResource {
-      _instance_port      :: !(TF.Attribute s "instance_port" TF.Word16)
+      _instance_port :: !(TF.Attribute s "instance_port" TF.Word16)
     {- ^ (Required) The instance port to apply the policy to. -}
     , _load_balancer_name :: !(TF.Attribute s "load_balancer_name" Text)
     {- ^ (Required) The load balancer to attach the policy to. -}
-    , _policy_names       :: !(TF.Attribute s "policy_names" Text)
+    , _policy_names :: !(TF.Attribute s "policy_names" Text)
     {- ^ (Required) List of Policy Names to apply to the backend server. -}
     } deriving (Show, Eq)
 
@@ -13906,16 +14108,19 @@ instance HasPolicyNames (ElbLoadBalancerBackendServerPolicyResource s) Text wher
              (\s a -> s { _policy_names = a } :: ElbLoadBalancerBackendServerPolicyResource s)
 
 instance HasComputedId (ElbLoadBalancerBackendServerPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ElbLoadBalancerBackendServerPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedInstancePort (ElbLoadBalancerBackendServerPolicyResource s) TF.Word16 where
-    computedInstancePort =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_port")
+    type HasComputedInstancePortThread (ElbLoadBalancerBackendServerPolicyResource s) TF.Word16 = s
+
+    computedInstancePort = to (\_ -> TF.Computed "instance_port")
 
 instance HasComputedLoadBalancerName (ElbLoadBalancerBackendServerPolicyResource s) Text where
-    computedLoadBalancerName =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer_name")
+    type HasComputedLoadBalancerNameThread (ElbLoadBalancerBackendServerPolicyResource s) Text = s
+
+    computedLoadBalancerName = to (\_ -> TF.Computed "load_balancer_name")
 
 elbLoadBalancerBackendServerPolicyResource :: TF.Resource TF.AWS (ElbLoadBalancerBackendServerPolicyResource s)
 elbLoadBalancerBackendServerPolicyResource =
@@ -13935,7 +14140,7 @@ data ElbLoadBalancerListenerPolicyResource s = ElbLoadBalancerListenerPolicyReso
     {- ^ (Required) The load balancer to attach the policy to. -}
     , _load_balancer_port :: !(TF.Attribute s "load_balancer_port" TF.Word16)
     {- ^ (Required) The load balancer listener port to apply the policy to. -}
-    , _policy_names       :: !(TF.Attribute s "policy_names" Text)
+    , _policy_names :: !(TF.Attribute s "policy_names" Text)
     {- ^ (Required) List of Policy Names to apply to the backend server. -}
     } deriving (Show, Eq)
 
@@ -13968,16 +14173,19 @@ instance HasPolicyNames (ElbLoadBalancerListenerPolicyResource s) Text where
              (\s a -> s { _policy_names = a } :: ElbLoadBalancerListenerPolicyResource s)
 
 instance HasComputedId (ElbLoadBalancerListenerPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ElbLoadBalancerListenerPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLoadBalancerName (ElbLoadBalancerListenerPolicyResource s) Text where
-    computedLoadBalancerName =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer_name")
+    type HasComputedLoadBalancerNameThread (ElbLoadBalancerListenerPolicyResource s) Text = s
+
+    computedLoadBalancerName = to (\_ -> TF.Computed "load_balancer_name")
 
 instance HasComputedLoadBalancerPort (ElbLoadBalancerListenerPolicyResource s) TF.Word16 where
-    computedLoadBalancerPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer_port")
+    type HasComputedLoadBalancerPortThread (ElbLoadBalancerListenerPolicyResource s) TF.Word16 = s
+
+    computedLoadBalancerPort = to (\_ -> TF.Computed "load_balancer_port")
 
 elbLoadBalancerListenerPolicyResource :: TF.Resource TF.AWS (ElbLoadBalancerListenerPolicyResource s)
 elbLoadBalancerListenerPolicyResource =
@@ -13996,11 +14204,11 @@ backend server.
 data ElbLoadBalancerPolicyResource s = ElbLoadBalancerPolicyResource {
       _load_balancer_name :: !(TF.Attribute s "load_balancer_name" Text)
     {- ^ (Required) The load balancer on which the policy is defined. -}
-    , _policy_attribute   :: !(TF.Attribute s "policy_attribute" Text)
+    , _policy_attribute :: !(TF.Attribute s "policy_attribute" Text)
     {- ^ (Optional) Policy attribute to apply to the policy. -}
-    , _policy_name        :: !(TF.Attribute s "policy_name" Text)
+    , _policy_name :: !(TF.Attribute s "policy_name" Text)
     {- ^ (Required) The name of the load balancer policy. -}
-    , _policy_type_name   :: !(TF.Attribute s "policy_type_name" Text)
+    , _policy_type_name :: !(TF.Attribute s "policy_type_name" Text)
     {- ^ (Required) The policy type. -}
     } deriving (Show, Eq)
 
@@ -14041,20 +14249,24 @@ instance HasPolicyTypeName (ElbLoadBalancerPolicyResource s) Text where
              (\s a -> s { _policy_type_name = a } :: ElbLoadBalancerPolicyResource s)
 
 instance HasComputedId (ElbLoadBalancerPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ElbLoadBalancerPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLoadBalancerName (ElbLoadBalancerPolicyResource s) Text where
-    computedLoadBalancerName =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer_name")
+    type HasComputedLoadBalancerNameThread (ElbLoadBalancerPolicyResource s) Text = s
+
+    computedLoadBalancerName = to (\_ -> TF.Computed "load_balancer_name")
 
 instance HasComputedPolicyName (ElbLoadBalancerPolicyResource s) Text where
-    computedPolicyName =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy_name")
+    type HasComputedPolicyNameThread (ElbLoadBalancerPolicyResource s) Text = s
+
+    computedPolicyName = to (\_ -> TF.Computed "policy_name")
 
 instance HasComputedPolicyTypeName (ElbLoadBalancerPolicyResource s) Text where
-    computedPolicyTypeName =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy_type_name")
+    type HasComputedPolicyTypeNameThread (ElbLoadBalancerPolicyResource s) Text = s
+
+    computedPolicyTypeName = to (\_ -> TF.Computed "policy_type_name")
 
 elbLoadBalancerPolicyResource :: TF.Resource TF.AWS (ElbLoadBalancerPolicyResource s)
 elbLoadBalancerPolicyResource =
@@ -14494,17 +14706,17 @@ Terraform will resize any Instance Group to zero when destroying the
 resource.
 -}
 data EmrInstanceGroupResource s = EmrInstanceGroupResource {
-      _cluster_id     :: !(TF.Attribute s "cluster_id" Text)
+      _cluster_id :: !(TF.Attribute s "cluster_id" Text)
     {- ^ (Required) ID of the EMR Cluster to attach to. Changing this forces a new resource to be created. -}
-    , _ebs_config     :: !(TF.Attribute s "ebs_config" Text)
+    , _ebs_config :: !(TF.Attribute s "ebs_config" Text)
     {- ^ (Optional) One or more @ebs_config@ blocks as defined below. Changing this forces a new resource to be created. -}
-    , _ebs_optimized  :: !(TF.Attribute s "ebs_optimized" Text)
+    , _ebs_optimized :: !(TF.Attribute s "ebs_optimized" Text)
     {- ^ (Optional) Indicates whether an Amazon EBS volume is EBS-optimized. Changing this forces a new resource to be created. -}
     , _instance_count :: !(TF.Attribute s "instance_count" Text)
     {- ^ (Optional) Target number of instances for the instance group. Defaults to 0. -}
-    , _instance_type  :: !(TF.Attribute s "instance_type" Text)
+    , _instance_type :: !(TF.Attribute s "instance_type" Text)
     {- ^ (Required) The EC2 instance type for all instances in the instance group. Changing this forces a new resource to be created. -}
-    , _name           :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Human friendly name given to the instance group. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
@@ -14561,16 +14773,19 @@ instance HasName (EmrInstanceGroupResource s) Text where
              (\s a -> s { _name = a } :: EmrInstanceGroupResource s)
 
 instance HasComputedId (EmrInstanceGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EmrInstanceGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedRunningInstanceCount (EmrInstanceGroupResource s) Text where
-    computedRunningInstanceCount =
-        to (\x -> TF.Computed (TF.referenceKey x) "running_instance_count")
+    type HasComputedRunningInstanceCountThread (EmrInstanceGroupResource s) Text = s
+
+    computedRunningInstanceCount = to (\_ -> TF.Computed "running_instance_count")
 
 instance HasComputedStatus (EmrInstanceGroupResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (EmrInstanceGroupResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 emrInstanceGroupResource :: TF.Resource TF.AWS (EmrInstanceGroupResource s)
 emrInstanceGroupResource =
@@ -14591,9 +14806,9 @@ Provides a resource to manage AWS EMR Security Configurations
 data EmrSecurityConfigurationResource s = EmrSecurityConfigurationResource {
       _configuration :: !(TF.Attribute s "configuration" Text)
     {- ^ (Required) A JSON formatted Security Configuration -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the EMR Security Configuration. By default generated by Terraform. -}
-    , _name_prefix   :: !(TF.Attribute s "name_prefix" Text)
+    , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     } deriving (Show, Eq)
 
@@ -14626,20 +14841,24 @@ instance HasNamePrefix (EmrSecurityConfigurationResource s) Text where
              (\s a -> s { _name_prefix = a } :: EmrSecurityConfigurationResource s)
 
 instance HasComputedConfiguration (EmrSecurityConfigurationResource s) Text where
-    computedConfiguration =
-        to (\x -> TF.Computed (TF.referenceKey x) "configuration")
+    type HasComputedConfigurationThread (EmrSecurityConfigurationResource s) Text = s
+
+    computedConfiguration = to (\_ -> TF.Computed "configuration")
 
 instance HasComputedCreationDate (EmrSecurityConfigurationResource s) Text where
-    computedCreationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_date")
+    type HasComputedCreationDateThread (EmrSecurityConfigurationResource s) Text = s
+
+    computedCreationDate = to (\_ -> TF.Computed "creation_date")
 
 instance HasComputedId (EmrSecurityConfigurationResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EmrSecurityConfigurationResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (EmrSecurityConfigurationResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (EmrSecurityConfigurationResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 emrSecurityConfigurationResource :: TF.Resource TF.AWS (EmrSecurityConfigurationResource s)
 emrSecurityConfigurationResource =
@@ -14656,17 +14875,17 @@ Provides a VPC/Subnet/ENI Flow Log to capture IP traffic for a specific
 network interface, subnet, or VPC. Logs are sent to a CloudWatch Log Group.
 -}
 data FlowLogResource s = FlowLogResource {
-      _eni_id         :: !(TF.Attribute s "eni_id" Text)
+      _eni_id :: !(TF.Attribute s "eni_id" Text)
     {- ^ (Optional) Elastic Network Interface ID to attach to -}
-    , _iam_role_arn   :: !(TF.Attribute s "iam_role_arn" Text)
+    , _iam_role_arn :: !(TF.Attribute s "iam_role_arn" Text)
     {- ^ (Required) The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group -}
     , _log_group_name :: !(TF.Attribute s "log_group_name" Text)
     {- ^ (Required) The name of the CloudWatch log group -}
-    , _subnet_id      :: !(TF.Attribute s "subnet_id" Text)
+    , _subnet_id :: !(TF.Attribute s "subnet_id" Text)
     {- ^ (Optional) Subnet ID to attach to -}
-    , _traffic_type   :: !(TF.Attribute s "traffic_type" Text)
+    , _traffic_type :: !(TF.Attribute s "traffic_type" Text)
     {- ^ (Required) The type of traffic to capture. Valid values: @ACCEPT@ , @REJECT@ , @ALL@ -}
-    , _vpc_id         :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) VPC ID to attach to -}
     } deriving (Show, Eq)
 
@@ -14723,8 +14942,9 @@ instance HasVpcId (FlowLogResource s) Text where
              (\s a -> s { _vpc_id = a } :: FlowLogResource s)
 
 instance HasComputedId (FlowLogResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (FlowLogResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 flowLogResource :: TF.Resource TF.AWS (FlowLogResource s)
 flowLogResource =
@@ -14748,11 +14968,11 @@ removing a Glacier Vault, the Vault must be empty.
 data GlacierVaultResource s = GlacierVaultResource {
       _access_policy :: !(TF.Attribute s "access_policy" Text)
     {- ^ (Optional) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. Use the <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html> for more information on Glacier Vault Policy -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the Vault. Names can be between 1 and 255 characters long and the valid characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.' (period). -}
-    , _notification  :: !(TF.Attribute s "notification" Text)
+    , _notification :: !(TF.Attribute s "notification" Text)
     {- ^ (Optional) The notifications for the Vault. Fields documented below. -}
-    , _tags          :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -14793,12 +15013,14 @@ instance HasTags (GlacierVaultResource s) TF.Tags where
              (\s a -> s { _tags = a } :: GlacierVaultResource s)
 
 instance HasComputedArn (GlacierVaultResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (GlacierVaultResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedLocation (GlacierVaultResource s) Text where
-    computedLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "location")
+    type HasComputedLocationThread (GlacierVaultResource s) Text = s
+
+    computedLocation = to (\_ -> TF.Computed "location")
 
 glacierVaultResource :: TF.Resource TF.AWS (GlacierVaultResource s)
 glacierVaultResource =
@@ -14817,15 +15039,15 @@ Provides a Glue Catalog Database Resource. You can refer to the
 full explanation of the Glue Data Catalog functionality
 -}
 data GlueCatalogDatabaseResource s = GlueCatalogDatabaseResource {
-      _catalog_id   :: !(TF.Attribute s "catalog_id" Text)
+      _catalog_id :: !(TF.Attribute s "catalog_id" Text)
     {- ^ (Optional) ID of the Glue Catalog to create the database in. If omitted, this defaults to the AWS Account ID. -}
-    , _description  :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) Description of the database. -}
     , _location_uri :: !(TF.Attribute s "location_uri" Text)
     {- ^ (Optional) The location of the database (for example, an HDFS path). -}
-    , _name         :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the database. -}
-    , _parameters   :: !(TF.Attribute s "parameters" Text)
+    , _parameters :: !(TF.Attribute s "parameters" Text)
     {- ^ (Optional) A list of key-value pairs that define parameters and properties of the database. -}
     } deriving (Show, Eq)
 
@@ -14912,12 +15134,14 @@ instance HasEnable (GuarddutyDetectorResource s) TF.Bool where
              (\s a -> s { _enable = a } :: GuarddutyDetectorResource s)
 
 instance HasComputedAccountId (GuarddutyDetectorResource s) Text where
-    computedAccountId =
-        to (\x -> TF.Computed (TF.referenceKey x) "account_id")
+    type HasComputedAccountIdThread (GuarddutyDetectorResource s) Text = s
+
+    computedAccountId = to (\_ -> TF.Computed "account_id")
 
 instance HasComputedId (GuarddutyDetectorResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (GuarddutyDetectorResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 guarddutyDetectorResource :: TF.Resource TF.AWS (GuarddutyDetectorResource s)
 guarddutyDetectorResource =
@@ -14940,11 +15164,11 @@ be tracked in
 .
 -}
 data GuarddutyMemberResource s = GuarddutyMemberResource {
-      _account_id  :: !(TF.Attribute s "account_id" Text)
+      _account_id :: !(TF.Attribute s "account_id" Text)
     {- ^ (Required) AWS account ID for member account. -}
     , _detector_id :: !(TF.Attribute s "detector_id" Text)
     {- ^ (Required) The detector ID of the GuardDuty account where you want to create member accounts. -}
-    , _email       :: !(TF.Attribute s "email" Text)
+    , _email :: !(TF.Attribute s "email" Text)
     {- ^ (Required) Email address for member account. -}
     } deriving (Show, Eq)
 
@@ -14977,8 +15201,9 @@ instance HasEmail (GuarddutyMemberResource s) Text where
              (\s a -> s { _email = a } :: GuarddutyMemberResource s)
 
 instance HasComputedId (GuarddutyMemberResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (GuarddutyMemberResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 guarddutyMemberResource :: TF.Resource TF.AWS (GuarddutyMemberResource s)
 guarddutyMemberResource =
@@ -14997,7 +15222,7 @@ requests to be made as an IAM user.
 data IamAccessKeyResource s = IamAccessKeyResource {
       _pgp_key :: !(TF.Attribute s "pgp_key" Text)
     {- ^ (Optional) Either a base-64 encoded PGP public key, or a keybase username in the form @keybase:some_person_that_exists@ . -}
-    , _user    :: !(TF.Attribute s "user" Text)
+    , _user :: !(TF.Attribute s "user" Text)
     {- ^ (Required) The IAM user to associate with this access key. -}
     } deriving (Show, Eq)
 
@@ -15022,32 +15247,39 @@ instance HasUser (IamAccessKeyResource s) Text where
              (\s a -> s { _user = a } :: IamAccessKeyResource s)
 
 instance HasComputedEncryptedSecret (IamAccessKeyResource s) Text where
-    computedEncryptedSecret =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted_secret")
+    type HasComputedEncryptedSecretThread (IamAccessKeyResource s) Text = s
+
+    computedEncryptedSecret = to (\_ -> TF.Computed "encrypted_secret")
 
 instance HasComputedId (IamAccessKeyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamAccessKeyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedKeyFingerprint (IamAccessKeyResource s) Text where
-    computedKeyFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_fingerprint")
+    type HasComputedKeyFingerprintThread (IamAccessKeyResource s) Text = s
+
+    computedKeyFingerprint = to (\_ -> TF.Computed "key_fingerprint")
 
 instance HasComputedSecret (IamAccessKeyResource s) Text where
-    computedSecret =
-        to (\x -> TF.Computed (TF.referenceKey x) "secret")
+    type HasComputedSecretThread (IamAccessKeyResource s) Text = s
+
+    computedSecret = to (\_ -> TF.Computed "secret")
 
 instance HasComputedSesSmtpPassword (IamAccessKeyResource s) Text where
-    computedSesSmtpPassword =
-        to (\x -> TF.Computed (TF.referenceKey x) "ses_smtp_password")
+    type HasComputedSesSmtpPasswordThread (IamAccessKeyResource s) Text = s
+
+    computedSesSmtpPassword = to (\_ -> TF.Computed "ses_smtp_password")
 
 instance HasComputedStatus (IamAccessKeyResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (IamAccessKeyResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 instance HasComputedUser (IamAccessKeyResource s) Text where
-    computedUser =
-        to (\x -> TF.Computed (TF.referenceKey x) "user")
+    type HasComputedUserThread (IamAccessKeyResource s) Text = s
+
+    computedUser = to (\_ -> TF.Computed "user")
 
 iamAccessKeyResource :: TF.Resource TF.AWS (IamAccessKeyResource s)
 iamAccessKeyResource =
@@ -15192,8 +15424,9 @@ instance HasRequireUppercaseCharacters (IamAccountPasswordPolicyResource s) Text
              (\s a -> s { _require_uppercase_characters = a } :: IamAccountPasswordPolicyResource s)
 
 instance HasComputedExpirePasswords (IamAccountPasswordPolicyResource s) Text where
-    computedExpirePasswords =
-        to (\x -> TF.Computed (TF.referenceKey x) "expire_passwords")
+    type HasComputedExpirePasswordsThread (IamAccountPasswordPolicyResource s) Text = s
+
+    computedExpirePasswords = to (\_ -> TF.Computed "expire_passwords")
 
 iamAccountPasswordPolicyResource :: TF.Resource TF.AWS (IamAccountPasswordPolicyResource s)
 iamAccountPasswordPolicyResource =
@@ -15220,7 +15453,7 @@ For more information on managing IAM Groups or IAM Users, see
 data IamGroupMembershipResource s = IamGroupMembershipResource {
       _group :: !(TF.Attribute s "group" Text)
     {- ^ – (Required) The IAM Group name to attach the list of @users@ to -}
-    , _name  :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name to identify the Group Membership -}
     , _users :: !(TF.Attribute s "users" Text)
     {- ^ (Required) A list of IAM User names to associate with the Group -}
@@ -15255,16 +15488,19 @@ instance HasUsers (IamGroupMembershipResource s) Text where
              (\s a -> s { _users = a } :: IamGroupMembershipResource s)
 
 instance HasComputedGroup (IamGroupMembershipResource s) Text where
-    computedGroup =
-        to (\x -> TF.Computed (TF.referenceKey x) "group")
+    type HasComputedGroupThread (IamGroupMembershipResource s) Text = s
+
+    computedGroup = to (\_ -> TF.Computed "group")
 
 instance HasComputedName (IamGroupMembershipResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamGroupMembershipResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedUsers (IamGroupMembershipResource s) Text where
-    computedUsers =
-        to (\x -> TF.Computed (TF.referenceKey x) "users")
+    type HasComputedUsersThread (IamGroupMembershipResource s) Text = s
+
+    computedUsers = to (\_ -> TF.Computed "users")
 
 iamGroupMembershipResource :: TF.Resource TF.AWS (IamGroupMembershipResource s)
 iamGroupMembershipResource =
@@ -15280,7 +15516,7 @@ iamGroupMembershipResource =
 Attaches a Managed IAM Policy to an IAM group
 -}
 data IamGroupPolicyAttachmentResource s = IamGroupPolicyAttachmentResource {
-      _group      :: !(TF.Attribute s "group" Text)
+      _group :: !(TF.Attribute s "group" Text)
     {- ^ (Required) - The group the policy should be applied to -}
     , _policy_arn :: !(TF.Attribute s "policy_arn" Text)
     {- ^ (Required) - The ARN of the policy you want to apply -}
@@ -15319,13 +15555,13 @@ iamGroupPolicyAttachmentResource =
 Provides an IAM policy attached to a group.
 -}
 data IamGroupPolicyResource s = IamGroupPolicyResource {
-      _group       :: !(TF.Attribute s "group" Text)
+      _group :: !(TF.Attribute s "group" Text)
     {- ^ (Required) The IAM group to attach to the policy. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the policy. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _policy      :: !(TF.Attribute s "policy" Text)
+    , _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. -}
     } deriving (Show, Eq)
 
@@ -15366,20 +15602,24 @@ instance HasPolicy (IamGroupPolicyResource s) Text where
              (\s a -> s { _policy = a } :: IamGroupPolicyResource s)
 
 instance HasComputedGroup (IamGroupPolicyResource s) Text where
-    computedGroup =
-        to (\x -> TF.Computed (TF.referenceKey x) "group")
+    type HasComputedGroupThread (IamGroupPolicyResource s) Text = s
+
+    computedGroup = to (\_ -> TF.Computed "group")
 
 instance HasComputedId (IamGroupPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamGroupPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (IamGroupPolicyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamGroupPolicyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedPolicy (IamGroupPolicyResource s) Text where
-    computedPolicy =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy")
+    type HasComputedPolicyThread (IamGroupPolicyResource s) Text = s
+
+    computedPolicy = to (\_ -> TF.Computed "policy")
 
 iamGroupPolicyResource :: TF.Resource TF.AWS (IamGroupPolicyResource s)
 iamGroupPolicyResource =
@@ -15423,24 +15663,29 @@ instance HasPath (IamGroupResource s) Text where
              (\s a -> s { _path = a } :: IamGroupResource s)
 
 instance HasComputedArn (IamGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (IamGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (IamGroupResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamGroupResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedPath (IamGroupResource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (IamGroupResource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 instance HasComputedUniqueId (IamGroupResource s) Text where
-    computedUniqueId =
-        to (\x -> TF.Computed (TF.referenceKey x) "unique_id")
+    type HasComputedUniqueIdThread (IamGroupResource s) Text = s
+
+    computedUniqueId = to (\_ -> TF.Computed "unique_id")
 
 iamGroupResource :: TF.Resource TF.AWS (IamGroupResource s)
 iamGroupResource =
@@ -15456,15 +15701,15 @@ Provides an IAM instance profile. ~> NOTE: Either @role@ or @roles@ (
 deprecated ) must be specified.
 -}
 data IamInstanceProfileResource s = IamInstanceProfileResource {
-      _name        :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The profile's name. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _path        :: !(TF.Attribute s "path" Text)
+    , _path :: !(TF.Attribute s "path" Text)
     {- ^ (Optional, default "/") Path in which to create the profile. -}
-    , _role        :: !(TF.Attribute s "role" Text)
+    , _role :: !(TF.Attribute s "role" Text)
     {- ^ (Optional) The role name to include in the profile. -}
-    , _roles       :: !(TF.Attribute s "roles" Text)
+    , _roles :: !(TF.Attribute s "roles" Text)
     {- ^ - ( Deprecated ) A list of role names to include in the profile.  The current default is 1.  If you see an error message similar to @Cannot exceed quota for InstanceSessionsPerInstanceProfile: 1@ , then you must contact AWS support and ask for a limit increase. WARNING: This is deprecated since <https://github.com/hashicorp/terraform/blob/master/CHANGELOG.md#093-april-12-2017> , as >= 2 roles are not possible. See <https://github.com/hashicorp/terraform/issues/11575> . -}
     } deriving (Show, Eq)
 
@@ -15513,36 +15758,44 @@ instance HasRoles (IamInstanceProfileResource s) Text where
              (\s a -> s { _roles = a } :: IamInstanceProfileResource s)
 
 instance HasComputedArn (IamInstanceProfileResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamInstanceProfileResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedCreateDate (IamInstanceProfileResource s) Text where
-    computedCreateDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "create_date")
+    type HasComputedCreateDateThread (IamInstanceProfileResource s) Text = s
+
+    computedCreateDate = to (\_ -> TF.Computed "create_date")
 
 instance HasComputedId (IamInstanceProfileResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamInstanceProfileResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (IamInstanceProfileResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamInstanceProfileResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedPath (IamInstanceProfileResource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (IamInstanceProfileResource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 instance HasComputedRole (IamInstanceProfileResource s) Text where
-    computedRole =
-        to (\x -> TF.Computed (TF.referenceKey x) "role")
+    type HasComputedRoleThread (IamInstanceProfileResource s) Text = s
+
+    computedRole = to (\_ -> TF.Computed "role")
 
 instance HasComputedRoles (IamInstanceProfileResource s) Text where
-    computedRoles =
-        to (\x -> TF.Computed (TF.referenceKey x) "roles")
+    type HasComputedRolesThread (IamInstanceProfileResource s) Text = s
+
+    computedRoles = to (\_ -> TF.Computed "roles")
 
 instance HasComputedUniqueId (IamInstanceProfileResource s) Text where
-    computedUniqueId =
-        to (\x -> TF.Computed (TF.referenceKey x) "unique_id")
+    type HasComputedUniqueIdThread (IamInstanceProfileResource s) Text = s
+
+    computedUniqueId = to (\_ -> TF.Computed "unique_id")
 
 iamInstanceProfileResource :: TF.Resource TF.AWS (IamInstanceProfileResource s)
 iamInstanceProfileResource =
@@ -15560,11 +15813,11 @@ iamInstanceProfileResource =
 Provides an IAM OpenID Connect provider.
 -}
 data IamOpenidConnectProviderResource s = IamOpenidConnectProviderResource {
-      _client_id_list  :: !(TF.Attribute s "client_id_list" Text)
+      _client_id_list :: !(TF.Attribute s "client_id_list" Text)
     {- ^ (Required) A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.) -}
     , _thumbprint_list :: !(TF.Attribute s "thumbprint_list" Text)
     {- ^ (Required) A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). -}
-    , _url             :: !(TF.Attribute s "url" Text)
+    , _url :: !(TF.Attribute s "url" Text)
     {- ^ (Required) The URL of the identity provider. Corresponds to the iss claim. -}
     } deriving (Show, Eq)
 
@@ -15597,8 +15850,9 @@ instance HasUrl (IamOpenidConnectProviderResource s) Text where
              (\s a -> s { _url = a } :: IamOpenidConnectProviderResource s)
 
 instance HasComputedArn (IamOpenidConnectProviderResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamOpenidConnectProviderResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 iamOpenidConnectProviderResource :: TF.Resource TF.AWS (IamOpenidConnectProviderResource s)
 iamOpenidConnectProviderResource =
@@ -15623,15 +15877,15 @@ than Terraform will have that attached policy revoked by Terraform. Consider
 exclusive attachment of an IAM policy.
 -}
 data IamPolicyAttachmentResource s = IamPolicyAttachmentResource {
-      _groups     :: !(TF.Attribute s "groups" Text)
+      _groups :: !(TF.Attribute s "groups" Text)
     {- ^ (Optional) - The group(s) the policy should be applied to -}
-    , _name       :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) - The name of the policy. This cannot be an empty string. -}
     , _policy_arn :: !(TF.Attribute s "policy_arn" Text)
     {- ^ (Required) - The ARN of the policy you want to apply -}
-    , _roles      :: !(TF.Attribute s "roles" Text)
+    , _roles :: !(TF.Attribute s "roles" Text)
     {- ^ (Optional) - The role(s) the policy should be applied to -}
-    , _users      :: !(TF.Attribute s "users" Text)
+    , _users :: !(TF.Attribute s "users" Text)
     {- ^ (Optional) - The user(s) the policy should be applied to -}
     } deriving (Show, Eq)
 
@@ -15680,12 +15934,14 @@ instance HasUsers (IamPolicyAttachmentResource s) Text where
              (\s a -> s { _users = a } :: IamPolicyAttachmentResource s)
 
 instance HasComputedId (IamPolicyAttachmentResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamPolicyAttachmentResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (IamPolicyAttachmentResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamPolicyAttachmentResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 iamPolicyAttachmentResource :: TF.Resource TF.AWS (IamPolicyAttachmentResource s)
 iamPolicyAttachmentResource =
@@ -15705,13 +15961,13 @@ Provides an IAM policy.
 data IamPolicyResource s = IamPolicyResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) Description of the IAM policy. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the policy. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _path        :: !(TF.Attribute s "path" Text)
+    , _path :: !(TF.Attribute s "path" Text)
     {- ^ (Optional, default "/") Path in which to create the policy. See <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html> for more information. -}
-    , _policy      :: !(TF.Attribute s "policy" Text)
+    , _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax, @file@ function, or the </docs/providers/aws/d/iam_policy_document.html> are all helpful here. -}
     } deriving (Show, Eq)
 
@@ -15760,28 +16016,34 @@ instance HasPolicy (IamPolicyResource s) Text where
              (\s a -> s { _policy = a } :: IamPolicyResource s)
 
 instance HasComputedArn (IamPolicyResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamPolicyResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedDescription (IamPolicyResource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (IamPolicyResource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedId (IamPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (IamPolicyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamPolicyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedPath (IamPolicyResource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (IamPolicyResource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 instance HasComputedPolicy (IamPolicyResource s) Text where
-    computedPolicy =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy")
+    type HasComputedPolicyThread (IamPolicyResource s) Text = s
+
+    computedPolicy = to (\_ -> TF.Computed "policy")
 
 iamPolicyResource :: TF.Resource TF.AWS (IamPolicyResource s)
 iamPolicyResource =
@@ -15801,7 +16063,7 @@ Attaches a Managed IAM Policy to an IAM role
 data IamRolePolicyAttachmentResource s = IamRolePolicyAttachmentResource {
       _policy_arn :: !(TF.Attribute s "policy_arn" Text)
     {- ^ (Required) - The ARN of the policy you want to apply -}
-    , _role       :: !(TF.Attribute s "role" Text)
+    , _role :: !(TF.Attribute s "role" Text)
     {- ^ (Required) - The role the policy should be applied to -}
     } deriving (Show, Eq)
 
@@ -15838,13 +16100,13 @@ iamRolePolicyAttachmentResource =
 Provides an IAM role policy.
 -}
 data IamRolePolicyResource s = IamRolePolicyResource {
-      _name        :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the role policy. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _policy      :: !(TF.Attribute s "policy" Text)
+    , _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. -}
-    , _role        :: !(TF.Attribute s "role" Text)
+    , _role :: !(TF.Attribute s "role" Text)
     {- ^ (Required) The IAM role to attach to the policy. -}
     } deriving (Show, Eq)
 
@@ -15885,20 +16147,24 @@ instance HasRole (IamRolePolicyResource s) Text where
              (\s a -> s { _role = a } :: IamRolePolicyResource s)
 
 instance HasComputedId (IamRolePolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamRolePolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (IamRolePolicyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamRolePolicyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedPolicy (IamRolePolicyResource s) Text where
-    computedPolicy =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy")
+    type HasComputedPolicyThread (IamRolePolicyResource s) Text = s
+
+    computedPolicy = to (\_ -> TF.Computed "policy")
 
 instance HasComputedRole (IamRolePolicyResource s) Text where
-    computedRole =
-        to (\x -> TF.Computed (TF.referenceKey x) "role")
+    type HasComputedRoleThread (IamRolePolicyResource s) Text = s
+
+    computedRole = to (\_ -> TF.Computed "role")
 
 iamRolePolicyResource :: TF.Resource TF.AWS (IamRolePolicyResource s)
 iamRolePolicyResource =
@@ -15917,9 +16183,9 @@ Provides an IAM role.
 data IamRoleResource s = IamRoleResource {
       _assume_role_policy :: !(TF.Attribute s "assume_role_policy" Text)
     {- ^ (Required) The policy that grants an entity permission to assume the role. -}
-    , _name               :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the role. If omitted, Terraform will assign a random, unique name. -}
-    , _name_prefix        :: !(TF.Attribute s "name_prefix" Text)
+    , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     } deriving (Show, Eq)
 
@@ -15952,24 +16218,29 @@ instance HasNamePrefix (IamRoleResource s) Text where
              (\s a -> s { _name_prefix = a } :: IamRoleResource s)
 
 instance HasComputedArn (IamRoleResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamRoleResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedCreateDate (IamRoleResource s) Text where
-    computedCreateDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "create_date")
+    type HasComputedCreateDateThread (IamRoleResource s) Text = s
+
+    computedCreateDate = to (\_ -> TF.Computed "create_date")
 
 instance HasComputedDescription (IamRoleResource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (IamRoleResource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedName (IamRoleResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamRoleResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedUniqueId (IamRoleResource s) Text where
-    computedUniqueId =
-        to (\x -> TF.Computed (TF.referenceKey x) "unique_id")
+    type HasComputedUniqueIdThread (IamRoleResource s) Text = s
+
+    computedUniqueId = to (\_ -> TF.Computed "unique_id")
 
 iamRoleResource :: TF.Resource TF.AWS (IamRoleResource s)
 iamRoleResource =
@@ -15985,7 +16256,7 @@ iamRoleResource =
 Provides an IAM SAML provider.
 -}
 data IamSamlProviderResource s = IamSamlProviderResource {
-      _name                   :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the provider to create. -}
     , _saml_metadata_document :: !(TF.Attribute s "saml_metadata_document" Text)
     {- ^ (Required) An XML document generated by an identity provider that supports SAML 2.0. -}
@@ -16012,12 +16283,14 @@ instance HasSamlMetadataDocument (IamSamlProviderResource s) Text where
              (\s a -> s { _saml_metadata_document = a } :: IamSamlProviderResource s)
 
 instance HasComputedArn (IamSamlProviderResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamSamlProviderResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedValidUntil (IamSamlProviderResource s) Text where
-    computedValidUntil =
-        to (\x -> TF.Computed (TF.referenceKey x) "valid_until")
+    type HasComputedValidUntilThread (IamSamlProviderResource s) Text = s
+
+    computedValidUntil = to (\_ -> TF.Computed "valid_until")
 
 iamSamlProviderResource :: TF.Resource TF.AWS (IamSamlProviderResource s)
 iamSamlProviderResource =
@@ -16033,17 +16306,17 @@ Provides an IAM Server Certificate resource to upload Server Certificates.
 Certs uploaded to IAM can easily work with other AWS services such as:
 -}
 data IamServerCertificateResource s = IamServerCertificateResource {
-      _certificate_body  :: !(TF.Attribute s "certificate_body" Text)
+      _certificate_body :: !(TF.Attribute s "certificate_body" Text)
     {- ^ – (Required) The contents of the public key certificate in PEM-encoded format. -}
     , _certificate_chain :: !(TF.Attribute s "certificate_chain" Text)
     {- ^ – (Optional) The contents of the certificate chain. This is typically a concatenation of the PEM-encoded public key certificates of the chain. -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the Server Certificate. Do not include the path in this value. If omitted, Terraform will assign a random, unique name. -}
-    , _name_prefix       :: !(TF.Attribute s "name_prefix" Text)
+    , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _path              :: !(TF.Attribute s "path" Text)
+    , _path :: !(TF.Attribute s "path" Text)
     {- ^ (Optional) The IAM path for the server certificate.  If it is not included, it defaults to a slash (/). If this certificate is for use with AWS CloudFront, the path must be in format @/cloudfront/your_path_here@ . See <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html> for more details on IAM Paths. -}
-    , _private_key       :: !(TF.Attribute s "private_key" Text)
+    , _private_key :: !(TF.Attribute s "private_key" Text)
     {- ^ – (Required) The contents of the private key in PEM-encoded format. -}
     } deriving (Show, Eq)
 
@@ -16100,16 +16373,19 @@ instance HasPrivateKey (IamServerCertificateResource s) Text where
              (\s a -> s { _private_key = a } :: IamServerCertificateResource s)
 
 instance HasComputedArn (IamServerCertificateResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamServerCertificateResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (IamServerCertificateResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamServerCertificateResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (IamServerCertificateResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamServerCertificateResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 iamServerCertificateResource :: TF.Resource TF.AWS (IamServerCertificateResource s)
 iamServerCertificateResource =
@@ -16177,12 +16453,14 @@ instance HasUser (IamUserLoginProfileResource s) Text where
              (\s a -> s { _user = a } :: IamUserLoginProfileResource s)
 
 instance HasComputedEncryptedPassword (IamUserLoginProfileResource s) Text where
-    computedEncryptedPassword =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted_password")
+    type HasComputedEncryptedPasswordThread (IamUserLoginProfileResource s) Text = s
+
+    computedEncryptedPassword = to (\_ -> TF.Computed "encrypted_password")
 
 instance HasComputedKeyFingerprint (IamUserLoginProfileResource s) Text where
-    computedKeyFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_fingerprint")
+    type HasComputedKeyFingerprintThread (IamUserLoginProfileResource s) Text = s
+
+    computedKeyFingerprint = to (\_ -> TF.Computed "key_fingerprint")
 
 iamUserLoginProfileResource :: TF.Resource TF.AWS (IamUserLoginProfileResource s)
 iamUserLoginProfileResource =
@@ -16201,7 +16479,7 @@ Attaches a Managed IAM Policy to an IAM user
 data IamUserPolicyAttachmentResource s = IamUserPolicyAttachmentResource {
       _policy_arn :: !(TF.Attribute s "policy_arn" Text)
     {- ^ (Required) - The ARN of the policy you want to apply -}
-    , _user       :: !(TF.Attribute s "user" Text)
+    , _user :: !(TF.Attribute s "user" Text)
     {- ^ (Required) - The user the policy should be applied to -}
     } deriving (Show, Eq)
 
@@ -16238,13 +16516,13 @@ iamUserPolicyAttachmentResource =
 Provides an IAM policy attached to a user.
 -}
 data IamUserPolicyResource s = IamUserPolicyResource {
-      _name        :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the policy. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _policy      :: !(TF.Attribute s "policy" Text)
+    , _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. -}
-    , _user        :: !(TF.Attribute s "user" Text)
+    , _user :: !(TF.Attribute s "user" Text)
     {- ^ (Required) IAM user to which to attach this policy. -}
     } deriving (Show, Eq)
 
@@ -16301,9 +16579,9 @@ Provides an IAM user.
 data IamUserResource s = IamUserResource {
       _force_destroy :: !(TF.Attribute s "force_destroy" Text)
     {- ^ (Optional, default false) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without @force_destroy@ a user with non-Terraform-managed access keys and login profile will fail to be destroyed. -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The user's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: @=,.@-_.@ . User names are not distinguished by case. For example, you cannot create users named both "TESTUSER" and "testuser". -}
-    , _path          :: !(TF.Attribute s "path" Text)
+    , _path :: !(TF.Attribute s "path" Text)
     {- ^ (Optional, default "/") Path in which to create the user. -}
     } deriving (Show, Eq)
 
@@ -16336,16 +16614,19 @@ instance HasPath (IamUserResource s) Text where
              (\s a -> s { _path = a } :: IamUserResource s)
 
 instance HasComputedArn (IamUserResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamUserResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedName (IamUserResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IamUserResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedUniqueId (IamUserResource s) Text where
-    computedUniqueId =
-        to (\x -> TF.Computed (TF.referenceKey x) "unique_id")
+    type HasComputedUniqueIdThread (IamUserResource s) Text = s
+
+    computedUniqueId = to (\_ -> TF.Computed "unique_id")
 
 iamUserResource :: TF.Resource TF.AWS (IamUserResource s)
 iamUserResource =
@@ -16361,13 +16642,13 @@ iamUserResource =
 Uploads an SSH public key and associates it with the specified IAM user.
 -}
 data IamUserSshKeyResource s = IamUserSshKeyResource {
-      _encoding   :: !(TF.Attribute s "encoding" Text)
+      _encoding :: !(TF.Attribute s "encoding" Text)
     {- ^ (Required) Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use @SSH@ . To retrieve the public key in PEM format, use @PEM@ . -}
     , _public_key :: !(TF.Attribute s "public_key" Text)
     {- ^ (Required) The SSH public key. The public key must be encoded in ssh-rsa format or PEM format. -}
-    , _status     :: !(TF.Attribute s "status" Text)
+    , _status :: !(TF.Attribute s "status" Text)
     {- ^ (Optional) The status to assign to the SSH public key. Active means the key can be used for authentication with an AWS CodeCommit repository. Inactive means the key cannot be used. Default is @active@ . -}
-    , _username   :: !(TF.Attribute s "username" Text)
+    , _username :: !(TF.Attribute s "username" Text)
     {- ^ (Required) The name of the IAM user to associate the SSH public key with. -}
     } deriving (Show, Eq)
 
@@ -16408,12 +16689,14 @@ instance HasUsername (IamUserSshKeyResource s) Text where
              (\s a -> s { _username = a } :: IamUserSshKeyResource s)
 
 instance HasComputedFingerprint (IamUserSshKeyResource s) Text where
-    computedFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "fingerprint")
+    type HasComputedFingerprintThread (IamUserSshKeyResource s) Text = s
+
+    computedFingerprint = to (\_ -> TF.Computed "fingerprint")
 
 instance HasComputedSshPublicKeyId (IamUserSshKeyResource s) Text where
-    computedSshPublicKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "ssh_public_key_id")
+    type HasComputedSshPublicKeyIdThread (IamUserSshKeyResource s) Text = s
+
+    computedSshPublicKeyId = to (\_ -> TF.Computed "ssh_public_key_id")
 
 iamUserSshKeyResource :: TF.Resource TF.AWS (IamUserSshKeyResource s)
 iamUserSshKeyResource =
@@ -16430,7 +16713,7 @@ iamUserSshKeyResource =
 Provides a Inspector assessment target
 -}
 data InspectorAssessmentTargetResource s = InspectorAssessmentTargetResource {
-      _name               :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the assessment target. -}
     , _resource_group_arn :: !(TF.Attribute s "resource_group_arn" Text)
     {- ^ (Required )- The resource group ARN stating tags for instance matching. -}
@@ -16457,8 +16740,9 @@ instance HasResourceGroupArn (InspectorAssessmentTargetResource s) Text where
              (\s a -> s { _resource_group_arn = a } :: InspectorAssessmentTargetResource s)
 
 instance HasComputedArn (InspectorAssessmentTargetResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (InspectorAssessmentTargetResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 inspectorAssessmentTargetResource :: TF.Resource TF.AWS (InspectorAssessmentTargetResource s)
 inspectorAssessmentTargetResource =
@@ -16473,13 +16757,13 @@ inspectorAssessmentTargetResource =
 Provides a Inspector assessment template
 -}
 data InspectorAssessmentTemplateResource s = InspectorAssessmentTemplateResource {
-      _duration           :: !(TF.Attribute s "duration" Text)
+      _duration :: !(TF.Attribute s "duration" Text)
     {- ^ (Required) The duration of the inspector run. -}
-    , _name               :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the assessment template. -}
     , _rules_package_arns :: !(TF.Attribute s "rules_package_arns" Text)
     {- ^ (Required) The rules to be used during the run. -}
-    , _target_arn         :: !(TF.Attribute s "target_arn" Text)
+    , _target_arn :: !(TF.Attribute s "target_arn" Text)
     {- ^ (Required) The assessment target ARN to attach the template to. -}
     } deriving (Show, Eq)
 
@@ -16520,8 +16804,9 @@ instance HasTargetArn (InspectorAssessmentTemplateResource s) Text where
              (\s a -> s { _target_arn = a } :: InspectorAssessmentTemplateResource s)
 
 instance HasComputedArn (InspectorAssessmentTemplateResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (InspectorAssessmentTemplateResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 inspectorAssessmentTemplateResource :: TF.Resource TF.AWS (InspectorAssessmentTemplateResource s)
 inspectorAssessmentTemplateResource =
@@ -16555,8 +16840,9 @@ instance HasTags (InspectorResourceGroupResource s) TF.Tags where
              (\s a -> s { _tags = a } :: InspectorResourceGroupResource s)
 
 instance HasComputedArn (InspectorResourceGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (InspectorResourceGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 inspectorResourceGroupResource :: TF.Resource TF.AWS (InspectorResourceGroupResource s)
 inspectorResourceGroupResource =
@@ -16886,7 +17172,7 @@ instanceResource =
 Provides a resource to create a VPC Internet Gateway.
 -}
 data InternetGatewayResource s = InternetGatewayResource {
-      _tags   :: !(TF.Attribute s "tags" TF.Tags)
+      _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The VPC ID to create in. -}
@@ -16913,8 +17199,9 @@ instance HasVpcId (InternetGatewayResource s) Text where
              (\s a -> s { _vpc_id = a } :: InternetGatewayResource s)
 
 instance HasComputedId (InternetGatewayResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (InternetGatewayResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 internetGatewayResource :: TF.Resource TF.AWS (InternetGatewayResource s)
 internetGatewayResource =
@@ -16931,7 +17218,7 @@ Creates and manages an AWS IoT certificate.
 data IotCertificateResource s = IotCertificateResource {
       _active :: !(TF.Attribute s "active" Text)
     {- ^ (Required)  Boolean flag to indicate if the certificate should be active -}
-    , _csr    :: !(TF.Attribute s "csr" Text)
+    , _csr :: !(TF.Attribute s "csr" Text)
     {- ^ (Required) The certificate signing request. Review the [IoT API Reference Guide] (http://docs.aws.amazon.com/iot/latest/apireference/API_CreateCertificateFromCsr.html) for more information on creating a certificate from a certificate signing request (CSR). -}
     } deriving (Show, Eq)
 
@@ -16956,8 +17243,9 @@ instance HasCsr (IotCertificateResource s) Text where
              (\s a -> s { _csr = a } :: IotCertificateResource s)
 
 instance HasComputedArn (IotCertificateResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IotCertificateResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 iotCertificateResource :: TF.Resource TF.AWS (IotCertificateResource s)
 iotCertificateResource =
@@ -16972,7 +17260,7 @@ iotCertificateResource =
 Provides an IoT policy.
 -}
 data IotPolicyResource s = IotPolicyResource {
-      _name   :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the policy. -}
     , _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The policy document. This is a JSON formatted string. The heredoc syntax or @file@ function is helpful here. Use the [IoT Developer Guide] (http://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html) for more information on IoT Policies -}
@@ -16999,20 +17287,24 @@ instance HasPolicy (IotPolicyResource s) Text where
              (\s a -> s { _policy = a } :: IotPolicyResource s)
 
 instance HasComputedArn (IotPolicyResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IotPolicyResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedDefaultVersionId (IotPolicyResource s) Text where
-    computedDefaultVersionId =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_version_id")
+    type HasComputedDefaultVersionIdThread (IotPolicyResource s) Text = s
+
+    computedDefaultVersionId = to (\_ -> TF.Computed "default_version_id")
 
 instance HasComputedName (IotPolicyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (IotPolicyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedPolicy (IotPolicyResource s) Text where
-    computedPolicy =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy")
+    type HasComputedPolicyThread (IotPolicyResource s) Text = s
+
+    computedPolicy = to (\_ -> TF.Computed "policy")
 
 iotPolicyResource :: TF.Resource TF.AWS (IotPolicyResource s)
 iotPolicyResource =
@@ -17035,11 +17327,11 @@ be in any format supported by AWS. Supported formats (per the
 ) are:
 -}
 data KeyPairResource s = KeyPairResource {
-      _key_name        :: !(TF.Attribute s "key_name" Text)
+      _key_name :: !(TF.Attribute s "key_name" Text)
     {- ^ (Optional) The name for the key pair. -}
     , _key_name_prefix :: !(TF.Attribute s "key_name_prefix" Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @key_name@ . -}
-    , _public_key      :: !(TF.Attribute s "public_key" Text)
+    , _public_key :: !(TF.Attribute s "public_key" Text)
     {- ^ (Required) The public key material. -}
     } deriving (Show, Eq)
 
@@ -17072,12 +17364,14 @@ instance HasPublicKey (KeyPairResource s) Text where
              (\s a -> s { _public_key = a } :: KeyPairResource s)
 
 instance HasComputedFingerprint (KeyPairResource s) Text where
-    computedFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "fingerprint")
+    type HasComputedFingerprintThread (KeyPairResource s) Text = s
+
+    computedFingerprint = to (\_ -> TF.Computed "fingerprint")
 
 instance HasComputedKeyName (KeyPairResource s) Text where
-    computedKeyName =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_name")
+    type HasComputedKeyNameThread (KeyPairResource s) Text = s
+
+    computedKeyName = to (\_ -> TF.Computed "key_name")
 
 keyPairResource :: TF.Resource TF.AWS (KeyPairResource s)
 keyPairResource =
@@ -17163,8 +17457,9 @@ instance HasS3Configuration (KinesisFirehoseDeliveryStreamResource s) Text where
              (\s a -> s { _s3_configuration = a } :: KinesisFirehoseDeliveryStreamResource s)
 
 instance HasComputedArn (KinesisFirehoseDeliveryStreamResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (KinesisFirehoseDeliveryStreamResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 kinesisFirehoseDeliveryStreamResource :: TF.Resource TF.AWS (KinesisFirehoseDeliveryStreamResource s)
 kinesisFirehoseDeliveryStreamResource =
@@ -17185,19 +17480,19 @@ scales elastically for real-time processing of streaming big data. For more
 details, see the <https://aws.amazon.com/documentation/kinesis/> .
 -}
 data KinesisStreamResource s = KinesisStreamResource {
-      _encryption_type     :: !(TF.Attribute s "encryption_type" Text)
+      _encryption_type :: !(TF.Attribute s "encryption_type" Text)
     {- ^ (Optional) The encryption type to use. The only acceptable values are @NONE@ or @KMS@ . The default value is @NONE@ . -}
-    , _kms_key_id          :: !(TF.Attribute s "kms_key_id" Text)
+    , _kms_key_id :: !(TF.Attribute s "kms_key_id" Text)
     {- ^ (Optional) The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias aws/kinesis. -}
-    , _name                :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) A name to identify the stream. This is unique to the AWS account and region the Stream is created in. -}
-    , _retention_period    :: !(TF.Attribute s "retention_period" Text)
+    , _retention_period :: !(TF.Attribute s "retention_period" Text)
     {- ^ (Optional) Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 168 hours. Minimum value is 24. Default is 24. -}
-    , _shard_count         :: !(TF.Attribute s "shard_count" Text)
+    , _shard_count :: !(TF.Attribute s "shard_count" Text)
     {- ^ – (Required) The number of shards that the stream will use. Amazon has guidlines for specifying the Stream size that should be referenced when creating a Kinesis stream. See <https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html> for more. -}
     , _shard_level_metrics :: !(TF.Attribute s "shard_level_metrics" Text)
     {- ^ (Optional) A list of shard-level CloudWatch metrics which can be enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable. -}
-    , _tags                :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -17262,20 +17557,24 @@ instance HasTags (KinesisStreamResource s) TF.Tags where
              (\s a -> s { _tags = a } :: KinesisStreamResource s)
 
 instance HasComputedArn (KinesisStreamResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (KinesisStreamResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (KinesisStreamResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (KinesisStreamResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (KinesisStreamResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (KinesisStreamResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedShardCount (KinesisStreamResource s) Text where
-    computedShardCount =
-        to (\x -> TF.Computed (TF.referenceKey x) "shard_count")
+    type HasComputedShardCountThread (KinesisStreamResource s) Text = s
+
+    computedShardCount = to (\_ -> TF.Computed "shard_count")
 
 kinesisStreamResource :: TF.Resource TF.AWS (KinesisStreamResource s)
 kinesisStreamResource =
@@ -17299,9 +17598,9 @@ create as many aliases as the
 you.
 -}
 data KmsAliasResource s = KmsAliasResource {
-      _name          :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The display name of the alias. The name must start with the word "alias" followed by a forward slash (alias/) -}
-    , _name_prefix   :: !(TF.Attribute s "name_prefix" Text)
+    , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional) Creates an unique alias beginning with the specified prefix. The name must start with the word "alias" followed by a forward slash (alias/).  Conflicts with @name@ . -}
     , _target_key_id :: !(TF.Attribute s "target_key_id" Text)
     {- ^ (Required) Identifier for the key for which the alias is for, can be either an ARN or key_id. -}
@@ -17336,8 +17635,9 @@ instance HasTargetKeyId (KmsAliasResource s) Text where
              (\s a -> s { _target_key_id = a } :: KmsAliasResource s)
 
 instance HasComputedArn (KmsAliasResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (KmsAliasResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 kmsAliasResource :: TF.Resource TF.AWS (KmsAliasResource s)
 kmsAliasResource =
@@ -17430,12 +17730,14 @@ instance HasTags (KmsKeyResource s) TF.Tags where
              (\s a -> s { _tags = a } :: KmsKeyResource s)
 
 instance HasComputedArn (KmsKeyResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (KmsKeyResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedKeyId (KmsKeyResource s) Text where
-    computedKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_id")
+    type HasComputedKeyIdThread (KmsKeyResource s) Text = s
+
+    computedKeyId = to (\_ -> TF.Computed "key_id")
 
 kmsKeyResource :: TF.Resource TF.AWS (KmsKeyResource s)
 kmsKeyResource =
@@ -17460,13 +17762,13 @@ information about function aliases, see
 API docs.
 -}
 data LambdaAliasResource s = LambdaAliasResource {
-      _description      :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) Description of the alias. -}
-    , _function_name    :: !(TF.Attribute s "function_name" Text)
+    , _function_name :: !(TF.Attribute s "function_name" Text)
     {- ^ (Required) The function ARN of the Lambda function for which you want to create an alias. -}
     , _function_version :: !(TF.Attribute s "function_version" Text)
     {- ^ (Required) Lambda function version for which you are creating the alias. Pattern: @(\$LATEST|[0-9]+)@ . -}
-    , _name             :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) Name for the alias you are creating. Pattern: @(?!^[0-9]+$)([a-zA-Z0-9-_]+)@ -}
     } deriving (Show, Eq)
 
@@ -17507,8 +17809,9 @@ instance HasName (LambdaAliasResource s) Text where
              (\s a -> s { _name = a } :: LambdaAliasResource s)
 
 instance HasComputedArn (LambdaAliasResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LambdaAliasResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 lambdaAliasResource :: TF.Resource TF.AWS (LambdaAliasResource s)
 lambdaAliasResource =
@@ -17530,13 +17833,13 @@ information about event source mappings, see
 in the API docs.
 -}
 data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource {
-      _batch_size        :: !(TF.Attribute s "batch_size" Text)
+      _batch_size :: !(TF.Attribute s "batch_size" Text)
     {- ^ (Optional) The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to @100@ . -}
-    , _enabled           :: !(TF.Attribute s "enabled" TF.Bool)
+    , _enabled :: !(TF.Attribute s "enabled" TF.Bool)
     {- ^ (Optional) Determines if the mapping will be enabled on creation. Defaults to @true@ . -}
-    , _event_source_arn  :: !(TF.Attribute s "event_source_arn" Text)
+    , _event_source_arn :: !(TF.Attribute s "event_source_arn" Text)
     {- ^ (Required) The event source ARN - can either be a Kinesis or DynamoDB stream. -}
-    , _function_name     :: !(TF.Attribute s "function_name" Text)
+    , _function_name :: !(TF.Attribute s "function_name" Text)
     {- ^ (Required) The name or the ARN of the Lambda function that will be subscribing to events. -}
     , _starting_position :: !(TF.Attribute s "starting_position" Text)
     {- ^ (Required) The position in the stream where AWS Lambda should start reading. Can be one of either @TRIM_HORIZON@ or @LATEST@ . -}
@@ -17587,28 +17890,34 @@ instance HasStartingPosition (LambdaEventSourceMappingResource s) Text where
              (\s a -> s { _starting_position = a } :: LambdaEventSourceMappingResource s)
 
 instance HasComputedFunctionArn (LambdaEventSourceMappingResource s) Text where
-    computedFunctionArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "function_arn")
+    type HasComputedFunctionArnThread (LambdaEventSourceMappingResource s) Text = s
+
+    computedFunctionArn = to (\_ -> TF.Computed "function_arn")
 
 instance HasComputedLastModified (LambdaEventSourceMappingResource s) Text where
-    computedLastModified =
-        to (\x -> TF.Computed (TF.referenceKey x) "last_modified")
+    type HasComputedLastModifiedThread (LambdaEventSourceMappingResource s) Text = s
+
+    computedLastModified = to (\_ -> TF.Computed "last_modified")
 
 instance HasComputedLastProcessingResult (LambdaEventSourceMappingResource s) Text where
-    computedLastProcessingResult =
-        to (\x -> TF.Computed (TF.referenceKey x) "last_processing_result")
+    type HasComputedLastProcessingResultThread (LambdaEventSourceMappingResource s) Text = s
+
+    computedLastProcessingResult = to (\_ -> TF.Computed "last_processing_result")
 
 instance HasComputedState (LambdaEventSourceMappingResource s) Text where
-    computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
+    type HasComputedStateThread (LambdaEventSourceMappingResource s) Text = s
+
+    computedState = to (\_ -> TF.Computed "state")
 
 instance HasComputedStateTransitionReason (LambdaEventSourceMappingResource s) Text where
-    computedStateTransitionReason =
-        to (\x -> TF.Computed (TF.referenceKey x) "state_transition_reason")
+    type HasComputedStateTransitionReasonThread (LambdaEventSourceMappingResource s) Text = s
+
+    computedStateTransitionReason = to (\_ -> TF.Computed "state_transition_reason")
 
 instance HasComputedUuid (LambdaEventSourceMappingResource s) Text where
-    computedUuid =
-        to (\x -> TF.Computed (TF.referenceKey x) "uuid")
+    type HasComputedUuidThread (LambdaEventSourceMappingResource s) Text = s
+
+    computedUuid = to (\_ -> TF.Computed "uuid")
 
 lambdaEventSourceMappingResource :: TF.Resource TF.AWS (LambdaEventSourceMappingResource s)
 lambdaEventSourceMappingResource =
@@ -17826,32 +18135,39 @@ instance HasVpcConfig (LambdaFunctionResource s) Text where
              (\s a -> s { _vpc_config = a } :: LambdaFunctionResource s)
 
 instance HasComputedArn (LambdaFunctionResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LambdaFunctionResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedInvokeArn (LambdaFunctionResource s) Text where
-    computedInvokeArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "invoke_arn")
+    type HasComputedInvokeArnThread (LambdaFunctionResource s) Text = s
+
+    computedInvokeArn = to (\_ -> TF.Computed "invoke_arn")
 
 instance HasComputedKmsKeyArn (LambdaFunctionResource s) Text where
-    computedKmsKeyArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_arn")
+    type HasComputedKmsKeyArnThread (LambdaFunctionResource s) Text = s
+
+    computedKmsKeyArn = to (\_ -> TF.Computed "kms_key_arn")
 
 instance HasComputedLastModified (LambdaFunctionResource s) Text where
-    computedLastModified =
-        to (\x -> TF.Computed (TF.referenceKey x) "last_modified")
+    type HasComputedLastModifiedThread (LambdaFunctionResource s) Text = s
+
+    computedLastModified = to (\_ -> TF.Computed "last_modified")
 
 instance HasComputedQualifiedArn (LambdaFunctionResource s) Text where
-    computedQualifiedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "qualified_arn")
+    type HasComputedQualifiedArnThread (LambdaFunctionResource s) Text = s
+
+    computedQualifiedArn = to (\_ -> TF.Computed "qualified_arn")
 
 instance HasComputedSourceCodeHash (LambdaFunctionResource s) Text where
-    computedSourceCodeHash =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_code_hash")
+    type HasComputedSourceCodeHashThread (LambdaFunctionResource s) Text = s
+
+    computedSourceCodeHash = to (\_ -> TF.Computed "source_code_hash")
 
 instance HasComputedVersion (LambdaFunctionResource s) Text where
-    computedVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "version")
+    type HasComputedVersionThread (LambdaFunctionResource s) Text = s
+
+    computedVersion = to (\_ -> TF.Computed "version")
 
 lambdaFunctionResource :: TF.Resource TF.AWS (LambdaFunctionResource s)
 lambdaFunctionResource =
@@ -17884,19 +18200,19 @@ Creates a Lambda permission to allow external sources invoking the Lambda
 function (e.g. CloudWatch Event Rule, SNS or S3).
 -}
 data LambdaPermissionResource s = LambdaPermissionResource {
-      _action         :: !(TF.Attribute s "action" Text)
+      _action :: !(TF.Attribute s "action" Text)
     {- ^ (Required) The AWS Lambda action you want to allow in this statement. (e.g. @lambda:InvokeFunction@ ) -}
-    , _function_name  :: !(TF.Attribute s "function_name" Text)
+    , _function_name :: !(TF.Attribute s "function_name" Text)
     {- ^ (Required) Name of the Lambda function whose resource policy you are updating -}
-    , _principal      :: !(TF.Attribute s "principal" Text)
+    , _principal :: !(TF.Attribute s "principal" Text)
     {- ^ (Required) The principal who is getting this permission. e.g. @s3.amazonaws.com@ , an AWS account ID, or any valid AWS service principal such as @events.amazonaws.com@ or @sns.amazonaws.com@ . -}
-    , _qualifier      :: !(TF.Attribute s "qualifier" Text)
+    , _qualifier :: !(TF.Attribute s "qualifier" Text)
     {- ^ (Optional) Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN. e.g. @arn:aws:lambda:aws-region:acct-id:function:function-name:2@ -}
     , _source_account :: !(TF.Attribute s "source_account" Text)
     {- ^ (Optional) The AWS account ID (without a hyphen) of the source owner. -}
-    , _source_arn     :: !(TF.Attribute s "source_arn" Text)
+    , _source_arn :: !(TF.Attribute s "source_arn" Text)
     {- ^ (Optional) When granting Amazon S3 or CloudWatch Events permission to invoke your function, you should specify this field with the Amazon Resource Name (ARN) for the S3 Bucket or CloudWatch Events Rule as its value.  This ensures that only events generated from the specified bucket or rule can invoke the function. API Gateway ARNs have a unique structure described <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html> . -}
-    , _statement_id   :: !(TF.Attribute s "statement_id" Text)
+    , _statement_id :: !(TF.Attribute s "statement_id" Text)
     {- ^ (Required) A unique statement identifier. -}
     } deriving (Show, Eq)
 
@@ -18242,24 +18558,29 @@ instance HasName (LbCookieStickinessPolicyResource s) Text where
              (\s a -> s { _name = a } :: LbCookieStickinessPolicyResource s)
 
 instance HasComputedCookieExpirationPeriod (LbCookieStickinessPolicyResource s) Text where
-    computedCookieExpirationPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "cookie_expiration_period")
+    type HasComputedCookieExpirationPeriodThread (LbCookieStickinessPolicyResource s) Text = s
+
+    computedCookieExpirationPeriod = to (\_ -> TF.Computed "cookie_expiration_period")
 
 instance HasComputedId (LbCookieStickinessPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LbCookieStickinessPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLbPort (LbCookieStickinessPolicyResource s) TF.Word16 where
-    computedLbPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "lb_port")
+    type HasComputedLbPortThread (LbCookieStickinessPolicyResource s) TF.Word16 = s
+
+    computedLbPort = to (\_ -> TF.Computed "lb_port")
 
 instance HasComputedLoadBalancer (LbCookieStickinessPolicyResource s) Text where
-    computedLoadBalancer =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer")
+    type HasComputedLoadBalancerThread (LbCookieStickinessPolicyResource s) Text = s
+
+    computedLoadBalancer = to (\_ -> TF.Computed "load_balancer")
 
 instance HasComputedName (LbCookieStickinessPolicyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (LbCookieStickinessPolicyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 lbCookieStickinessPolicyResource :: TF.Resource TF.AWS (LbCookieStickinessPolicyResource s)
 lbCookieStickinessPolicyResource =
@@ -18277,17 +18598,17 @@ Provides a Load Balancer Listener resource. ~> Note:  @aws_alb_listener@ is
 known as @aws_lb_listener@ . The functionality is identical.
 -}
 data LbListenerResource s = LbListenerResource {
-      _certificate_arn   :: !(TF.Attribute s "certificate_arn" Text)
+      _certificate_arn :: !(TF.Attribute s "certificate_arn" Text)
     {- ^ (Optional) The ARN of the SSL server certificate. Exactly one certificate is required if the protocol is HTTPS. -}
-    , _default_action    :: !(TF.Attribute s "default_action" Text)
+    , _default_action :: !(TF.Attribute s "default_action" Text)
     {- ^ (Required) An Action block. Action blocks are documented below. -}
     , _load_balancer_arn :: !(TF.Attribute s "load_balancer_arn" Text)
     {- ^ (Required, Forces New Resource) The ARN of the load balancer. -}
-    , _port              :: !(TF.Attribute s "port" Text)
+    , _port :: !(TF.Attribute s "port" Text)
     {- ^ (Required) The port on which the load balancer is listening. -}
-    , _protocol          :: !(TF.Attribute s "protocol" Text)
+    , _protocol :: !(TF.Attribute s "protocol" Text)
     {- ^ (Optional) The protocol for connections from clients to the load balancer. Valid values are @TCP@ , @HTTP@ and @HTTPS@ . Defaults to @HTTP@ . -}
-    , _ssl_policy        :: !(TF.Attribute s "ssl_policy" Text)
+    , _ssl_policy :: !(TF.Attribute s "ssl_policy" Text)
     {- ^ (Optional) The name of the SSL Policy for the listener. Required if @protocol@ is @HTTPS@ . -}
     } deriving (Show, Eq)
 
@@ -18344,12 +18665,14 @@ instance HasSslPolicy (LbListenerResource s) Text where
              (\s a -> s { _ssl_policy = a } :: LbListenerResource s)
 
 instance HasComputedArn (LbListenerResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LbListenerResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (LbListenerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LbListenerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 lbListenerResource :: TF.Resource TF.AWS (LbListenerResource s)
 lbListenerResource =
@@ -18370,13 +18693,13 @@ Provides a Load Balancer Listener Rule resource. ~> Note:
 functionality is identical.
 -}
 data LbListenerRuleResource s = LbListenerRuleResource {
-      _action       :: !(TF.Attribute s "action" Text)
+      _action :: !(TF.Attribute s "action" Text)
     {- ^ (Required) An Action block. Action blocks are documented below. -}
-    , _condition    :: !(TF.Attribute s "condition" Text)
+    , _condition :: !(TF.Attribute s "condition" Text)
     {- ^ (Required) A Condition block. Condition blocks are documented below. -}
     , _listener_arn :: !(TF.Attribute s "listener_arn" Text)
     {- ^ (Required, Forces New Resource) The ARN of the listener to which to attach the rule. -}
-    , _priority     :: !(TF.Attribute s "priority" Text)
+    , _priority :: !(TF.Attribute s "priority" Text)
     {- ^ (Required) The priority for the rule. A listener can't have multiple rules with the same priority. -}
     } deriving (Show, Eq)
 
@@ -18417,12 +18740,14 @@ instance HasPriority (LbListenerRuleResource s) Text where
              (\s a -> s { _priority = a } :: LbListenerRuleResource s)
 
 instance HasComputedArn (LbListenerRuleResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LbListenerRuleResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (LbListenerRuleResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LbListenerRuleResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 lbListenerRuleResource :: TF.Resource TF.AWS (LbListenerRuleResource s)
 lbListenerRuleResource =
@@ -18567,28 +18892,34 @@ instance HasTags (LbResource s) TF.Tags where
              (\s a -> s { _tags = a } :: LbResource s)
 
 instance HasComputedArn (LbResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LbResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedArnSuffix (LbResource s) Text where
-    computedArnSuffix =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn_suffix")
+    type HasComputedArnSuffixThread (LbResource s) Text = s
+
+    computedArnSuffix = to (\_ -> TF.Computed "arn_suffix")
 
 instance HasComputedCanonicalHostedZoneId (LbResource s) Text where
-    computedCanonicalHostedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "canonical_hosted_zone_id")
+    type HasComputedCanonicalHostedZoneIdThread (LbResource s) Text = s
+
+    computedCanonicalHostedZoneId = to (\_ -> TF.Computed "canonical_hosted_zone_id")
 
 instance HasComputedDnsName (LbResource s) Text where
-    computedDnsName =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_name")
+    type HasComputedDnsNameThread (LbResource s) Text = s
+
+    computedDnsName = to (\_ -> TF.Computed "dns_name")
 
 instance HasComputedId (LbResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LbResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedZoneId (LbResource s) Text where
-    computedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "zone_id")
+    type HasComputedZoneIdThread (LbResource s) Text = s
+
+    computedZoneId = to (\_ -> TF.Computed "zone_id")
 
 lbResource :: TF.Resource TF.AWS (LbResource s)
 lbResource =
@@ -18615,13 +18946,13 @@ control the ciphers and protocols that are supported during SSL negotiations
 between a client and a load balancer.
 -}
 data LbSslNegotiationPolicyResource s = LbSslNegotiationPolicyResource {
-      _attribute     :: !(TF.Attribute s "attribute" Text)
+      _attribute :: !(TF.Attribute s "attribute" Text)
     {- ^ (Optional) An SSL Negotiation policy attribute. Each has two properties: -}
-    , _lb_port       :: !(TF.Attribute s "lb_port" TF.Word16)
+    , _lb_port :: !(TF.Attribute s "lb_port" TF.Word16)
     {- ^ (Required) The load balancer port to which the policy should be applied. This must be an active listener on the load balancer. -}
     , _load_balancer :: !(TF.Attribute s "load_balancer" Text)
     {- ^ (Required) The load balancer to which the policy should be attached. -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the SSL negotiation policy. -}
     } deriving (Show, Eq)
 
@@ -18662,24 +18993,29 @@ instance HasName (LbSslNegotiationPolicyResource s) Text where
              (\s a -> s { _name = a } :: LbSslNegotiationPolicyResource s)
 
 instance HasComputedAttribute (LbSslNegotiationPolicyResource s) Text where
-    computedAttribute =
-        to (\x -> TF.Computed (TF.referenceKey x) "attribute")
+    type HasComputedAttributeThread (LbSslNegotiationPolicyResource s) Text = s
+
+    computedAttribute = to (\_ -> TF.Computed "attribute")
 
 instance HasComputedId (LbSslNegotiationPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LbSslNegotiationPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLbPort (LbSslNegotiationPolicyResource s) TF.Word16 where
-    computedLbPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "lb_port")
+    type HasComputedLbPortThread (LbSslNegotiationPolicyResource s) TF.Word16 = s
+
+    computedLbPort = to (\_ -> TF.Computed "lb_port")
 
 instance HasComputedLoadBalancer (LbSslNegotiationPolicyResource s) Text where
-    computedLoadBalancer =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer")
+    type HasComputedLoadBalancerThread (LbSslNegotiationPolicyResource s) Text = s
+
+    computedLoadBalancer = to (\_ -> TF.Computed "load_balancer")
 
 instance HasComputedName (LbSslNegotiationPolicyResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (LbSslNegotiationPolicyResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 lbSslNegotiationPolicyResource :: TF.Resource TF.AWS (LbSslNegotiationPolicyResource s)
 lbSslNegotiationPolicyResource =
@@ -18700,11 +19036,11 @@ group ~> Note:  @aws_alb_target_group_attachment@ is known as
 data LbTargetGroupAttachmentResource s = LbTargetGroupAttachmentResource {
       _availability_zone :: !(TF.Attribute s "availability_zone" TF.Zone)
     {- ^ (Optional) The Availability Zone where the IP address of the target is to be registered. -}
-    , _port              :: !(TF.Attribute s "port" Text)
+    , _port :: !(TF.Attribute s "port" Text)
     {- ^ (Optional) The port on which targets receive traffic. -}
-    , _target_group_arn  :: !(TF.Attribute s "target_group_arn" Text)
+    , _target_group_arn :: !(TF.Attribute s "target_group_arn" Text)
     {- ^ (Required) The ARN of the target group with which to register targets -}
-    , _target_id         :: !(TF.Attribute s "target_id" Text)
+    , _target_id :: !(TF.Attribute s "target_id" Text)
     {- ^ (Required) The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. -}
     } deriving (Show, Eq)
 
@@ -18745,8 +19081,9 @@ instance HasTargetId (LbTargetGroupAttachmentResource s) Text where
              (\s a -> s { _target_id = a } :: LbTargetGroupAttachmentResource s)
 
 instance HasComputedId (LbTargetGroupAttachmentResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LbTargetGroupAttachmentResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 lbTargetGroupAttachmentResource :: TF.Resource TF.AWS (LbTargetGroupAttachmentResource s)
 lbTargetGroupAttachmentResource =
@@ -18767,23 +19104,23 @@ functionality is identical.
 data LbTargetGroupResource s = LbTargetGroupResource {
       _deregistration_delay :: !(TF.Attribute s "deregistration_delay" Text)
     {- ^ (Optional) The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds. -}
-    , _health_check         :: !(TF.Attribute s "health_check" Text)
+    , _health_check :: !(TF.Attribute s "health_check" Text)
     {- ^ (Optional) A Health Check block. Health Check blocks are documented below. -}
-    , _name                 :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the target group. If omitted, Terraform will assign a random, unique name. -}
-    , _name_prefix          :: !(TF.Attribute s "name_prefix" Text)
+    , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _port                 :: !(TF.Attribute s "port" Text)
+    , _port :: !(TF.Attribute s "port" Text)
     {- ^ (Required) The port on which targets receive traffic, unless overridden when registering a specific target. -}
-    , _protocol             :: !(TF.Attribute s "protocol" Text)
+    , _protocol :: !(TF.Attribute s "protocol" Text)
     {- ^ (Required) The protocol to use for routing traffic to the targets. -}
-    , _stickiness           :: !(TF.Attribute s "stickiness" Text)
+    , _stickiness :: !(TF.Attribute s "stickiness" Text)
     {- ^ (Optional) A Stickiness block. Stickiness blocks are documented below. @stickiness@ is only valid if used with Load Balancers of type @Application@ -}
-    , _tags                 :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _target_type          :: !(TF.Attribute s "target_type" Text)
+    , _target_type :: !(TF.Attribute s "target_type" Text)
     {- ^ (Optional) The type of target that you must specify when registering targets with this target group. The possible values are @instance@ (targets are specified by instance ID) or @ip@ (targets are specified by IP address). The default is @instance@ . Note that you can't specify targets for a target group using both instance IDs and IP addresses. If the target type is @ip@ , specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses. -}
-    , _vpc_id               :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The identifier of the VPC in which to create the target group. -}
     } deriving (Show, Eq)
 
@@ -18872,20 +19209,24 @@ instance HasVpcId (LbTargetGroupResource s) Text where
              (\s a -> s { _vpc_id = a } :: LbTargetGroupResource s)
 
 instance HasComputedArn (LbTargetGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LbTargetGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedArnSuffix (LbTargetGroupResource s) Text where
-    computedArnSuffix =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn_suffix")
+    type HasComputedArnSuffixThread (LbTargetGroupResource s) Text = s
+
+    computedArnSuffix = to (\_ -> TF.Computed "arn_suffix")
 
 instance HasComputedId (LbTargetGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LbTargetGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (LbTargetGroupResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (LbTargetGroupResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 lbTargetGroupResource :: TF.Resource TF.AWS (LbTargetGroupResource s)
 lbTargetGroupResource =
@@ -18932,12 +19273,14 @@ instance HasDomainName (LightsailDomainResource s) Text where
              (\s a -> s { _domain_name = a } :: LightsailDomainResource s)
 
 instance HasComputedArn (LightsailDomainResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LightsailDomainResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (LightsailDomainResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LightsailDomainResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 lightsailDomainResource :: TF.Resource TF.AWS (LightsailDomainResource s)
 lightsailDomainResource =
@@ -18959,15 +19302,15 @@ for more details
 data LightsailInstanceResource s = LightsailInstanceResource {
       _availability_zone :: !(TF.Attribute s "availability_zone" TF.Zone)
     {- ^ (Required) The Availability Zone in which to create your instance. At this time, must be in @us-east-1@ , @us-east-2@ , @us-west-2@ , @eu-west-1@ , @eu-west-2@ , @eu-central-1@ , @ap-southeast-1@ , @ap-southeast-2@ , @ap-northeast-1@ , @ap-south-1@ regions -}
-    , _blueprint_id      :: !(TF.Attribute s "blueprint_id" Text)
+    , _blueprint_id :: !(TF.Attribute s "blueprint_id" Text)
     {- ^ (Required) The ID for a virtual private server image (see list below) -}
-    , _bundle_id         :: !(TF.Attribute s "bundle_id" Text)
+    , _bundle_id :: !(TF.Attribute s "bundle_id" Text)
     {- ^ (Required) The bundle of specification information (see list below) -}
-    , _key_pair_name     :: !(TF.Attribute s "key_pair_name" Text)
+    , _key_pair_name :: !(TF.Attribute s "key_pair_name" Text)
     {- ^ (Required) The name of your key pair. Created in the Lightsail console (cannot use @aws_key_pair@ at this time) -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the Lightsail Instance -}
-    , _user_data         :: !(TF.Attribute s "user_data" Text)
+    , _user_data :: !(TF.Attribute s "user_data" Text)
     {- ^ (Optional) launch script to configure server with additional user data -}
     } deriving (Show, Eq)
 
@@ -19045,9 +19388,9 @@ limited number of AWS Regions, please see
 for more details
 -}
 data LightsailKeyPairResource s = LightsailKeyPairResource {
-      _name       :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the Lightsail Key Pair. If omitted, a unique name will be generated by Terraform -}
-    , _pgp_key    :: !(TF.Attribute s "pgp_key" Text)
+    , _pgp_key :: !(TF.Attribute s "pgp_key" Text)
     {- ^ – (Optional) An optional PGP key to encrypt the resulting private key material. Only used when creating a new key pair -}
     , _public_key :: !(TF.Attribute s "public_key" Text)
     {- ^ (Required) The public key material. This public key will be imported into Lightsail -}
@@ -19082,32 +19425,39 @@ instance HasPublicKey (LightsailKeyPairResource s) Text where
              (\s a -> s { _public_key = a } :: LightsailKeyPairResource s)
 
 instance HasComputedArn (LightsailKeyPairResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LightsailKeyPairResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedEncryptedFingerprint (LightsailKeyPairResource s) Text where
-    computedEncryptedFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted_fingerprint")
+    type HasComputedEncryptedFingerprintThread (LightsailKeyPairResource s) Text = s
+
+    computedEncryptedFingerprint = to (\_ -> TF.Computed "encrypted_fingerprint")
 
 instance HasComputedEncryptedPrivateKey (LightsailKeyPairResource s) Text where
-    computedEncryptedPrivateKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted_private_key")
+    type HasComputedEncryptedPrivateKeyThread (LightsailKeyPairResource s) Text = s
+
+    computedEncryptedPrivateKey = to (\_ -> TF.Computed "encrypted_private_key")
 
 instance HasComputedFingerprint (LightsailKeyPairResource s) Text where
-    computedFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "fingerprint")
+    type HasComputedFingerprintThread (LightsailKeyPairResource s) Text = s
+
+    computedFingerprint = to (\_ -> TF.Computed "fingerprint")
 
 instance HasComputedId (LightsailKeyPairResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (LightsailKeyPairResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedPrivateKey (LightsailKeyPairResource s) Text where
-    computedPrivateKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_key")
+    type HasComputedPrivateKeyThread (LightsailKeyPairResource s) Text = s
+
+    computedPrivateKey = to (\_ -> TF.Computed "private_key")
 
 instance HasComputedPublicKey (LightsailKeyPairResource s) Text where
-    computedPublicKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_key")
+    type HasComputedPublicKeyThread (LightsailKeyPairResource s) Text = s
+
+    computedPublicKey = to (\_ -> TF.Computed "public_key")
 
 lightsailKeyPairResource :: TF.Resource TF.AWS (LightsailKeyPairResource s)
 lightsailKeyPairResource =
@@ -19127,7 +19477,7 @@ supported in a limited number of AWS Regions, please see
 for more details
 -}
 data LightsailStaticIpAttachmentResource s = LightsailStaticIpAttachmentResource {
-      _instance_name  :: !(TF.Attribute s "instance_name" Text)
+      _instance_name :: !(TF.Attribute s "instance_name" Text)
     {- ^ (Required) The name of the Lightsail instance to attach the IP to -}
     , _static_ip_name :: !(TF.Attribute s "static_ip_name" Text)
     {- ^ (Required) The name of the allocated static IP -}
@@ -19154,16 +19504,19 @@ instance HasStaticIpName (LightsailStaticIpAttachmentResource s) Text where
              (\s a -> s { _static_ip_name = a } :: LightsailStaticIpAttachmentResource s)
 
 instance HasComputedArn (LightsailStaticIpAttachmentResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LightsailStaticIpAttachmentResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedIpAddress (LightsailStaticIpAttachmentResource s) Text where
-    computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
+    type HasComputedIpAddressThread (LightsailStaticIpAttachmentResource s) Text = s
+
+    computedIpAddress = to (\_ -> TF.Computed "ip_address")
 
 instance HasComputedSupportCode (LightsailStaticIpAttachmentResource s) Text where
-    computedSupportCode =
-        to (\x -> TF.Computed (TF.referenceKey x) "support_code")
+    type HasComputedSupportCodeThread (LightsailStaticIpAttachmentResource s) Text = s
+
+    computedSupportCode = to (\_ -> TF.Computed "support_code")
 
 lightsailStaticIpAttachmentResource :: TF.Resource TF.AWS (LightsailStaticIpAttachmentResource s)
 lightsailStaticIpAttachmentResource =
@@ -19198,16 +19551,19 @@ instance HasName (LightsailStaticIpResource s) Text where
              (\s a -> s { _name = a } :: LightsailStaticIpResource s)
 
 instance HasComputedArn (LightsailStaticIpResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (LightsailStaticIpResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedIpAddress (LightsailStaticIpResource s) Text where
-    computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
+    type HasComputedIpAddressThread (LightsailStaticIpResource s) Text = s
+
+    computedIpAddress = to (\_ -> TF.Computed "ip_address")
 
 instance HasComputedSupportCode (LightsailStaticIpResource s) Text where
-    computedSupportCode =
-        to (\x -> TF.Computed (TF.referenceKey x) "support_code")
+    type HasComputedSupportCodeThread (LightsailStaticIpResource s) Text = s
+
+    computedSupportCode = to (\_ -> TF.Computed "support_code")
 
 lightsailStaticIpResource :: TF.Resource TF.AWS (LightsailStaticIpResource s)
 lightsailStaticIpResource =
@@ -19223,7 +19579,7 @@ Provides a resource for managing the main routing table of a VPC.
 data MainRouteTableAssociationResource s = MainRouteTableAssociationResource {
       _route_table_id :: !(TF.Attribute s "route_table_id" Text)
     {- ^ (Required) The ID of the Route Table to set as the new main route table for the target VPC -}
-    , _vpc_id         :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The ID of the VPC whose main route table should be set -}
     } deriving (Show, Eq)
 
@@ -19248,12 +19604,14 @@ instance HasVpcId (MainRouteTableAssociationResource s) Text where
              (\s a -> s { _vpc_id = a } :: MainRouteTableAssociationResource s)
 
 instance HasComputedId (MainRouteTableAssociationResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (MainRouteTableAssociationResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedOriginalRouteTableId (MainRouteTableAssociationResource s) Text where
-    computedOriginalRouteTableId =
-        to (\x -> TF.Computed (TF.referenceKey x) "original_route_table_id")
+    type HasComputedOriginalRouteTableIdThread (MainRouteTableAssociationResource s) Text = s
+
+    computedOriginalRouteTableId = to (\_ -> TF.Computed "original_route_table_id")
 
 mainRouteTableAssociationResource :: TF.Resource TF.AWS (MainRouteTableAssociationResource s)
 mainRouteTableAssociationResource =
@@ -19285,12 +19643,14 @@ instance HasName (MediaStoreContainerResource s) Text where
              (\s a -> s { _name = a } :: MediaStoreContainerResource s)
 
 instance HasComputedArn (MediaStoreContainerResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (MediaStoreContainerResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedEndpoint (MediaStoreContainerResource s) Text where
-    computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
+    type HasComputedEndpointThread (MediaStoreContainerResource s) Text = s
+
+    computedEndpoint = to (\_ -> TF.Computed "endpoint")
 
 mediaStoreContainerResource :: TF.Resource TF.AWS (MediaStoreContainerResource s)
 mediaStoreContainerResource =
@@ -19478,15 +19838,15 @@ see
 .
 -}
 data MqConfigurationResource s = MqConfigurationResource {
-      _data'          :: !(TF.Attribute s "data" Text)
+      _data' :: !(TF.Attribute s "data" Text)
     {- ^ (Required) The broker configuration in XML format. See <https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-broker-configuration-parameters.html> for supported parameters and format of the XML. -}
-    , _description    :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the configuration. -}
-    , _engine_type    :: !(TF.Attribute s "engine_type" Text)
+    , _engine_type :: !(TF.Attribute s "engine_type" Text)
     {- ^ (Required) The type of broker engine. -}
     , _engine_version :: !(TF.Attribute s "engine_version" Text)
     {- ^ (Required) The version of the broker engine. -}
-    , _name           :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the configuration -}
     } deriving (Show, Eq)
 
@@ -19535,16 +19895,19 @@ instance HasName (MqConfigurationResource s) Text where
              (\s a -> s { _name = a } :: MqConfigurationResource s)
 
 instance HasComputedArn (MqConfigurationResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (MqConfigurationResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (MqConfigurationResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (MqConfigurationResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLatestRevision (MqConfigurationResource s) Text where
-    computedLatestRevision =
-        to (\x -> TF.Computed (TF.referenceKey x) "latest_revision")
+    type HasComputedLatestRevisionThread (MqConfigurationResource s) Text = s
+
+    computedLatestRevision = to (\_ -> TF.Computed "latest_revision")
 
 mqConfigurationResource :: TF.Resource TF.AWS (MqConfigurationResource s)
 mqConfigurationResource =
@@ -19564,9 +19927,9 @@ Provides a resource to create a VPC NAT Gateway.
 data NatGatewayResource s = NatGatewayResource {
       _allocation_id :: !(TF.Attribute s "allocation_id" Text)
     {- ^ (Required) The Allocation ID of the Elastic IP address for the gateway. -}
-    , _subnet_id     :: !(TF.Attribute s "subnet_id" Text)
+    , _subnet_id :: !(TF.Attribute s "subnet_id" Text)
     {- ^ (Required) The Subnet ID of the subnet in which to place the gateway. -}
-    , _tags          :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -19599,28 +19962,34 @@ instance HasTags (NatGatewayResource s) TF.Tags where
              (\s a -> s { _tags = a } :: NatGatewayResource s)
 
 instance HasComputedAllocationId (NatGatewayResource s) Text where
-    computedAllocationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocation_id")
+    type HasComputedAllocationIdThread (NatGatewayResource s) Text = s
+
+    computedAllocationId = to (\_ -> TF.Computed "allocation_id")
 
 instance HasComputedId (NatGatewayResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (NatGatewayResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedNetworkInterfaceId (NatGatewayResource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (NatGatewayResource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 instance HasComputedPrivateIp (NatGatewayResource s) Text where
-    computedPrivateIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip")
+    type HasComputedPrivateIpThread (NatGatewayResource s) Text = s
+
+    computedPrivateIp = to (\_ -> TF.Computed "private_ip")
 
 instance HasComputedPublicIp (NatGatewayResource s) Text where
-    computedPublicIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_ip")
+    type HasComputedPublicIpThread (NatGatewayResource s) Text = s
+
+    computedPublicIp = to (\_ -> TF.Computed "public_ip")
 
 instance HasComputedSubnetId (NatGatewayResource s) Text where
-    computedSubnetId =
-        to (\x -> TF.Computed (TF.referenceKey x) "subnet_id")
+    type HasComputedSubnetIdThread (NatGatewayResource s) Text = s
+
+    computedSubnetId = to (\_ -> TF.Computed "subnet_id")
 
 natGatewayResource :: TF.Resource TF.AWS (NatGatewayResource s)
 natGatewayResource =
@@ -19638,17 +20007,17 @@ similar to your security groups in order to add an additional layer of
 security to your VPC.
 -}
 data NetworkAclResource s = NetworkAclResource {
-      _egress     :: !(TF.Attribute s "egress" Text)
+      _egress :: !(TF.Attribute s "egress" Text)
     {- ^ (Optional) Specifies an egress rule. Parameters defined below. -}
-    , _ingress    :: !(TF.Attribute s "ingress" Text)
+    , _ingress :: !(TF.Attribute s "ingress" Text)
     {- ^ (Optional) Specifies an ingress rule. Parameters defined below. -}
-    , _subnet_id  :: !(TF.Attribute s "subnet_id" Text)
+    , _subnet_id :: !(TF.Attribute s "subnet_id" Text)
     {- ^ (Optional, Deprecated) The ID of the associated Subnet. This attribute is deprecated, please use the @subnet_ids@ attribute instead -}
     , _subnet_ids :: !(TF.Attribute s "subnet_ids" Text)
     {- ^ (Optional) A list of Subnet IDs to apply the ACL to -}
-    , _tags       :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_id     :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The ID of the associated VPC. -}
     } deriving (Show, Eq)
 
@@ -19705,8 +20074,9 @@ instance HasVpcId (NetworkAclResource s) Text where
              (\s a -> s { _vpc_id = a } :: NetworkAclResource s)
 
 instance HasComputedId (NetworkAclResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (NetworkAclResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 networkAclResource :: TF.Resource TF.AWS (NetworkAclResource s)
 networkAclResource =
@@ -19725,27 +20095,27 @@ networkAclResource =
 Creates an entry (a rule) in a network ACL with the specified rule number.
 -}
 data NetworkAclRuleResource s = NetworkAclRuleResource {
-      _cidr_block      :: !(TF.Attribute s "cidr_block" TF.CIDR)
+      _cidr_block :: !(TF.Attribute s "cidr_block" TF.CIDR)
     {- ^ (Optional) The network range to allow or deny, in CIDR notation (for example 172.16.0.0/24 ). -}
-    , _egress          :: !(TF.Attribute s "egress" Text)
+    , _egress :: !(TF.Attribute s "egress" Text)
     {- ^ (Optional, bool) Indicates whether this is an egress rule (rule is applied to traffic leaving the subnet). Default @false@ . -}
-    , _from_port       :: !(TF.Attribute s "from_port" TF.Word16)
+    , _from_port :: !(TF.Attribute s "from_port" TF.Word16)
     {- ^ (Optional) The from port to match. -}
-    , _icmp_code       :: !(TF.Attribute s "icmp_code" Text)
+    , _icmp_code :: !(TF.Attribute s "icmp_code" Text)
     {- ^ (Optional) ICMP protocol: The ICMP code. Required if specifying ICMP for the protocol. e.g. -1 -}
-    , _icmp_type       :: !(TF.Attribute s "icmp_type" Text)
+    , _icmp_type :: !(TF.Attribute s "icmp_type" Text)
     {- ^ (Optional) ICMP protocol: The ICMP type. Required if specifying ICMP for the protocol. e.g. -1 -}
     , _ipv6_cidr_block :: !(TF.Attribute s "ipv6_cidr_block" TF.CIDR)
     {- ^ (Optional) The IPv6 CIDR block to allow or deny. -}
-    , _network_acl_id  :: !(TF.Attribute s "network_acl_id" Text)
+    , _network_acl_id :: !(TF.Attribute s "network_acl_id" Text)
     {- ^ (Required) The ID of the network ACL. -}
-    , _protocol        :: !(TF.Attribute s "protocol" Text)
+    , _protocol :: !(TF.Attribute s "protocol" Text)
     {- ^ (Required) The protocol. A value of -1 means all protocols. -}
-    , _rule_action     :: !(TF.Attribute s "rule_action" Text)
+    , _rule_action :: !(TF.Attribute s "rule_action" Text)
     {- ^ (Required) Indicates whether to allow or deny the traffic that matches the rule. Accepted values: @allow@ | @deny@ -}
-    , _rule_number     :: !(TF.Attribute s "rule_number" Text)
+    , _rule_number :: !(TF.Attribute s "rule_number" Text)
     {- ^ (Required) The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number. -}
-    , _to_port         :: !(TF.Attribute s "to_port" TF.Word16)
+    , _to_port :: !(TF.Attribute s "to_port" TF.Word16)
     {- ^ (Optional) The to port to match. -}
     } deriving (Show, Eq)
 
@@ -19842,8 +20212,9 @@ instance HasToPort (NetworkAclRuleResource s) TF.Word16 where
              (\s a -> s { _to_port = a } :: NetworkAclRuleResource s)
 
 instance HasComputedId (NetworkAclRuleResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (NetworkAclRuleResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 networkAclRuleResource :: TF.Resource TF.AWS (NetworkAclRuleResource s)
 networkAclRuleResource =
@@ -19867,9 +20238,9 @@ networkAclRuleResource =
 Attach an Elastic network interface (ENI) resource with EC2 instance.
 -}
 data NetworkInterfaceAttachmentResource s = NetworkInterfaceAttachmentResource {
-      _device_index         :: !(TF.Attribute s "device_index" Text)
+      _device_index :: !(TF.Attribute s "device_index" Text)
     {- ^ (Required) Network interface index (int). -}
-    , _instance_id          :: !(TF.Attribute s "instance_id" Text)
+    , _instance_id :: !(TF.Attribute s "instance_id" Text)
     {- ^ (Required) Instance ID to attach. -}
     , _network_interface_id :: !(TF.Attribute s "network_interface_id" Text)
     {- ^ (Required) ENI ID to attach. -}
@@ -19904,20 +20275,24 @@ instance HasNetworkInterfaceId (NetworkInterfaceAttachmentResource s) Text where
              (\s a -> s { _network_interface_id = a } :: NetworkInterfaceAttachmentResource s)
 
 instance HasComputedAttachmentId (NetworkInterfaceAttachmentResource s) Text where
-    computedAttachmentId =
-        to (\x -> TF.Computed (TF.referenceKey x) "attachment_id")
+    type HasComputedAttachmentIdThread (NetworkInterfaceAttachmentResource s) Text = s
+
+    computedAttachmentId = to (\_ -> TF.Computed "attachment_id")
 
 instance HasComputedInstanceId (NetworkInterfaceAttachmentResource s) Text where
-    computedInstanceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_id")
+    type HasComputedInstanceIdThread (NetworkInterfaceAttachmentResource s) Text = s
+
+    computedInstanceId = to (\_ -> TF.Computed "instance_id")
 
 instance HasComputedNetworkInterfaceId (NetworkInterfaceAttachmentResource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (NetworkInterfaceAttachmentResource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 instance HasComputedStatus (NetworkInterfaceAttachmentResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (NetworkInterfaceAttachmentResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 networkInterfaceAttachmentResource :: TF.Resource TF.AWS (NetworkInterfaceAttachmentResource s)
 networkInterfaceAttachmentResource =
@@ -19933,21 +20308,21 @@ networkInterfaceAttachmentResource =
 Provides an Elastic network interface (ENI) resource.
 -}
 data NetworkInterfaceResource s = NetworkInterfaceResource {
-      _attachment        :: !(TF.Attribute s "attachment" Text)
+      _attachment :: !(TF.Attribute s "attachment" Text)
     {- ^ (Optional) Block to define the attachment of the ENI. Documented below. -}
-    , _description       :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) A description for the network interface. -}
-    , _private_ips       :: !(TF.Attribute s "private_ips" Text)
+    , _private_ips :: !(TF.Attribute s "private_ips" Text)
     {- ^ (Optional) List of private IPs to assign to the ENI. -}
     , _private_ips_count :: !(TF.Attribute s "private_ips_count" Text)
     {- ^ (Optional) Number of private IPs to assign to the ENI. -}
-    , _security_groups   :: !(TF.Attribute s "security_groups" Text)
+    , _security_groups :: !(TF.Attribute s "security_groups" Text)
     {- ^ (Optional) List of security group IDs to assign to the ENI. -}
     , _source_dest_check :: !(TF.Attribute s "source_dest_check" Text)
     {- ^ (Optional) Whether to enable source destination checking for the ENI. Default true. -}
-    , _subnet_id         :: !(TF.Attribute s "subnet_id" Text)
+    , _subnet_id :: !(TF.Attribute s "subnet_id" Text)
     {- ^ (Required) Subnet ID to create the ENI in. -}
-    , _tags              :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -20020,36 +20395,44 @@ instance HasTags (NetworkInterfaceResource s) TF.Tags where
              (\s a -> s { _tags = a } :: NetworkInterfaceResource s)
 
 instance HasComputedAttachment (NetworkInterfaceResource s) Text where
-    computedAttachment =
-        to (\x -> TF.Computed (TF.referenceKey x) "attachment")
+    type HasComputedAttachmentThread (NetworkInterfaceResource s) Text = s
+
+    computedAttachment = to (\_ -> TF.Computed "attachment")
 
 instance HasComputedDescription (NetworkInterfaceResource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (NetworkInterfaceResource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedId (NetworkInterfaceResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (NetworkInterfaceResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedPrivateIps (NetworkInterfaceResource s) Text where
-    computedPrivateIps =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ips")
+    type HasComputedPrivateIpsThread (NetworkInterfaceResource s) Text = s
+
+    computedPrivateIps = to (\_ -> TF.Computed "private_ips")
 
 instance HasComputedSecurityGroups (NetworkInterfaceResource s) Text where
-    computedSecurityGroups =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_groups")
+    type HasComputedSecurityGroupsThread (NetworkInterfaceResource s) Text = s
+
+    computedSecurityGroups = to (\_ -> TF.Computed "security_groups")
 
 instance HasComputedSourceDestCheck (NetworkInterfaceResource s) Text where
-    computedSourceDestCheck =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_dest_check")
+    type HasComputedSourceDestCheckThread (NetworkInterfaceResource s) Text = s
+
+    computedSourceDestCheck = to (\_ -> TF.Computed "source_dest_check")
 
 instance HasComputedSubnetId (NetworkInterfaceResource s) Text where
-    computedSubnetId =
-        to (\x -> TF.Computed (TF.referenceKey x) "subnet_id")
+    type HasComputedSubnetIdThread (NetworkInterfaceResource s) Text = s
+
+    computedSubnetId = to (\_ -> TF.Computed "subnet_id")
 
 instance HasComputedTags (NetworkInterfaceResource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (NetworkInterfaceResource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 networkInterfaceResource :: TF.Resource TF.AWS (NetworkInterfaceResource s)
 networkInterfaceResource =
@@ -20081,7 +20464,7 @@ undefined behavior - please use one or the other.
 data NetworkInterfaceSgAttachmentResource s = NetworkInterfaceSgAttachmentResource {
       _network_interface_id :: !(TF.Attribute s "network_interface_id" Text)
     {- ^ (Required) The ID of the network interface to attach to. -}
-    , _security_group_id    :: !(TF.Attribute s "security_group_id" Text)
+    , _security_group_id :: !(TF.Attribute s "security_group_id" Text)
     {- ^ (Required) The ID of the security group. -}
     } deriving (Show, Eq)
 
@@ -20295,8 +20678,9 @@ instance HasType' (OpsworksApplicationResource s) Text where
              (\s a -> s { _type' = a } :: OpsworksApplicationResource s)
 
 instance HasComputedId (OpsworksApplicationResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksApplicationResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksApplicationResource :: TF.Resource TF.AWS (OpsworksApplicationResource s)
 opsworksApplicationResource =
@@ -20493,8 +20877,9 @@ instance HasUseEbsOptimizedInstances (OpsworksCustomLayerResource s) Text where
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksCustomLayerResource s)
 
 instance HasComputedId (OpsworksCustomLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksCustomLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksCustomLayerResource :: TF.Resource TF.AWS (OpsworksCustomLayerResource s)
 opsworksCustomLayerResource =
@@ -20710,8 +21095,9 @@ instance HasUsername (OpsworksGangliaLayerResource s) Text where
              (\s a -> s { _username = a } :: OpsworksGangliaLayerResource s)
 
 instance HasComputedId (OpsworksGangliaLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksGangliaLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksGangliaLayerResource :: TF.Resource TF.AWS (OpsworksGangliaLayerResource s)
 opsworksGangliaLayerResource =
@@ -20959,8 +21345,9 @@ instance HasUseEbsOptimizedInstances (OpsworksHaproxyLayerResource s) Text where
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksHaproxyLayerResource s)
 
 instance HasComputedId (OpsworksHaproxyLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksHaproxyLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksHaproxyLayerResource :: TF.Resource TF.AWS (OpsworksHaproxyLayerResource s)
 opsworksHaproxyLayerResource =
@@ -21449,8 +21836,9 @@ instance HasUseEbsOptimizedInstances (OpsworksJavaAppLayerResource s) Text where
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksJavaAppLayerResource s)
 
 instance HasComputedId (OpsworksJavaAppLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksJavaAppLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksJavaAppLayerResource :: TF.Resource TF.AWS (OpsworksJavaAppLayerResource s)
 opsworksJavaAppLayerResource =
@@ -21650,8 +22038,9 @@ instance HasUseEbsOptimizedInstances (OpsworksMemcachedLayerResource s) Text whe
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksMemcachedLayerResource s)
 
 instance HasComputedId (OpsworksMemcachedLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksMemcachedLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksMemcachedLayerResource :: TF.Resource TF.AWS (OpsworksMemcachedLayerResource s)
 opsworksMemcachedLayerResource =
@@ -21859,8 +22248,9 @@ instance HasUseEbsOptimizedInstances (OpsworksMysqlLayerResource s) Text where
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksMysqlLayerResource s)
 
 instance HasComputedId (OpsworksMysqlLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksMysqlLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksMysqlLayerResource :: TF.Resource TF.AWS (OpsworksMysqlLayerResource s)
 opsworksMysqlLayerResource =
@@ -22057,8 +22447,9 @@ instance HasUseEbsOptimizedInstances (OpsworksNodejsAppLayerResource s) Text whe
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksNodejsAppLayerResource s)
 
 instance HasComputedId (OpsworksNodejsAppLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksNodejsAppLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksNodejsAppLayerResource :: TF.Resource TF.AWS (OpsworksNodejsAppLayerResource s)
 opsworksNodejsAppLayerResource =
@@ -22087,15 +22478,15 @@ opsworksNodejsAppLayerResource =
 Provides an OpsWorks permission resource.
 -}
 data OpsworksPermissionResource s = OpsworksPermissionResource {
-      _allow_ssh  :: !(TF.Attribute s "allow_ssh" Text)
+      _allow_ssh :: !(TF.Attribute s "allow_ssh" Text)
     {- ^ (Optional) Whether the user is allowed to use SSH to communicate with the instance -}
     , _allow_sudo :: !(TF.Attribute s "allow_sudo" Text)
     {- ^ (Optional) Whether the user is allowed to use sudo to elevate privileges -}
-    , _level      :: !(TF.Attribute s "level" Text)
+    , _level :: !(TF.Attribute s "level" Text)
     {- ^ (Optional) The users permission level. Mus be one of @deny@ , @show@ , @deploy@ , @manage@ , @iam_only@ -}
-    , _stack_id   :: !(TF.Attribute s "stack_id" Text)
+    , _stack_id :: !(TF.Attribute s "stack_id" Text)
     {- ^ (Required) The stack to set the permissions for -}
-    , _user_arn   :: !(TF.Attribute s "user_arn" Text)
+    , _user_arn :: !(TF.Attribute s "user_arn" Text)
     {- ^ (Required) The user's IAM ARN to set permissions for -}
     } deriving (Show, Eq)
 
@@ -22144,8 +22535,9 @@ instance HasUserArn (OpsworksPermissionResource s) Text where
              (\s a -> s { _user_arn = a } :: OpsworksPermissionResource s)
 
 instance HasComputedId (OpsworksPermissionResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksPermissionResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksPermissionResource :: TF.Resource TF.AWS (OpsworksPermissionResource s)
 opsworksPermissionResource =
@@ -22320,8 +22712,9 @@ instance HasUseEbsOptimizedInstances (OpsworksPhpAppLayerResource s) Text where
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksPhpAppLayerResource s)
 
 instance HasComputedId (OpsworksPhpAppLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksPhpAppLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksPhpAppLayerResource :: TF.Resource TF.AWS (OpsworksPhpAppLayerResource s)
 opsworksPhpAppLayerResource =
@@ -22566,8 +22959,9 @@ instance HasUseEbsOptimizedInstances (OpsworksRailsAppLayerResource s) Text wher
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksRailsAppLayerResource s)
 
 instance HasComputedId (OpsworksRailsAppLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksRailsAppLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksRailsAppLayerResource :: TF.Resource TF.AWS (OpsworksRailsAppLayerResource s)
 opsworksRailsAppLayerResource =
@@ -22603,13 +22997,13 @@ including the username and password will be stored in the raw state as
 plain-text. </docs/state/sensitive-data.html> .
 -}
 data OpsworksRdsDbInstanceResource s = OpsworksRdsDbInstanceResource {
-      _db_password         :: !(TF.Attribute s "db_password" Text)
+      _db_password :: !(TF.Attribute s "db_password" Text)
     {- ^ (Required) A db password -}
-    , _db_user             :: !(TF.Attribute s "db_user" Text)
+    , _db_user :: !(TF.Attribute s "db_user" Text)
     {- ^ (Required) A db username -}
     , _rds_db_instance_arn :: !(TF.Attribute s "rds_db_instance_arn" Text)
     {- ^ (Required) The db instance to register for this stack. Changing this will force a new resource. -}
-    , _stack_id            :: !(TF.Attribute s "stack_id" Text)
+    , _stack_id :: !(TF.Attribute s "stack_id" Text)
     {- ^ (Required) The stack to register a db inatance for. Changing this will force a new resource. -}
     } deriving (Show, Eq)
 
@@ -22650,8 +23044,9 @@ instance HasStackId (OpsworksRdsDbInstanceResource s) Text where
              (\s a -> s { _stack_id = a } :: OpsworksRdsDbInstanceResource s)
 
 instance HasComputedId (OpsworksRdsDbInstanceResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksRdsDbInstanceResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksRdsDbInstanceResource :: TF.Resource TF.AWS (OpsworksRdsDbInstanceResource s)
 opsworksRdsDbInstanceResource =
@@ -22895,8 +23290,9 @@ instance HasVpcId (OpsworksStackResource s) Text where
              (\s a -> s { _vpc_id = a } :: OpsworksStackResource s)
 
 instance HasComputedId (OpsworksStackResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksStackResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksStackResource :: TF.Resource TF.AWS (OpsworksStackResource s)
 opsworksStackResource =
@@ -23078,8 +23474,9 @@ instance HasUseEbsOptimizedInstances (OpsworksStaticWebLayerResource s) Text whe
              (\s a -> s { _use_ebs_optimized_instances = a } :: OpsworksStaticWebLayerResource s)
 
 instance HasComputedId (OpsworksStaticWebLayerResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksStaticWebLayerResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksStaticWebLayerResource :: TF.Resource TF.AWS (OpsworksStaticWebLayerResource s)
 opsworksStaticWebLayerResource =
@@ -23108,11 +23505,11 @@ Provides an OpsWorks User Profile resource.
 data OpsworksUserProfileResource s = OpsworksUserProfileResource {
       _allow_self_management :: !(TF.Attribute s "allow_self_management" Text)
     {- ^ (Optional) Whether users can specify their own SSH public key through the My Settings page -}
-    , _ssh_public_key        :: !(TF.Attribute s "ssh_public_key" Text)
+    , _ssh_public_key :: !(TF.Attribute s "ssh_public_key" Text)
     {- ^ (Optional) The users public key -}
-    , _ssh_username          :: !(TF.Attribute s "ssh_username" Text)
+    , _ssh_username :: !(TF.Attribute s "ssh_username" Text)
     {- ^ (Required) The ssh username, with witch this user wants to log in -}
-    , _user_arn              :: !(TF.Attribute s "user_arn" Text)
+    , _user_arn :: !(TF.Attribute s "user_arn" Text)
     {- ^ (Required) The user's IAM ARN -}
     } deriving (Show, Eq)
 
@@ -23153,8 +23550,9 @@ instance HasUserArn (OpsworksUserProfileResource s) Text where
              (\s a -> s { _user_arn = a } :: OpsworksUserProfileResource s)
 
 instance HasComputedId (OpsworksUserProfileResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (OpsworksUserProfileResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 opsworksUserProfileResource :: TF.Resource TF.AWS (OpsworksUserProfileResource s)
 opsworksUserProfileResource =
@@ -23173,7 +23571,7 @@ Provides an EC2 placement group. Read more about placement groups in
 .
 -}
 data PlacementGroupResource s = PlacementGroupResource {
-      _name     :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the placement group. -}
     , _strategy :: !(TF.Attribute s "strategy" Text)
     {- ^ (Required) The placement strategy. -}
@@ -23200,8 +23598,9 @@ instance HasStrategy (PlacementGroupResource s) Text where
              (\s a -> s { _strategy = a } :: PlacementGroupResource s)
 
 instance HasComputedId (PlacementGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (PlacementGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 placementGroupResource :: TF.Resource TF.AWS (PlacementGroupResource s)
 placementGroupResource =
@@ -23219,7 +23618,7 @@ connection information to a backend.
 data ProxyProtocolPolicyResource s = ProxyProtocolPolicyResource {
       _instance_ports :: !(TF.Attribute s "instance_ports" Text)
     {- ^ (Required) List of instance ports to which the policy should be applied. This can be specified if the protocol is SSL or TCP. -}
-    , _load_balancer  :: !(TF.Attribute s "load_balancer" Text)
+    , _load_balancer :: !(TF.Attribute s "load_balancer" Text)
     {- ^ (Required) The load balancer to which the policy should be attached. -}
     } deriving (Show, Eq)
 
@@ -23244,12 +23643,14 @@ instance HasLoadBalancer (ProxyProtocolPolicyResource s) Text where
              (\s a -> s { _load_balancer = a } :: ProxyProtocolPolicyResource s)
 
 instance HasComputedId (ProxyProtocolPolicyResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ProxyProtocolPolicyResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedLoadBalancer (ProxyProtocolPolicyResource s) Text where
-    computedLoadBalancer =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer")
+    type HasComputedLoadBalancerThread (ProxyProtocolPolicyResource s) Text = s
+
+    computedLoadBalancer = to (\_ -> TF.Computed "load_balancer")
 
 proxyProtocolPolicyResource :: TF.Resource TF.AWS (ProxyProtocolPolicyResource s)
 proxyProtocolPolicyResource =
@@ -23472,72 +23873,89 @@ instance HasTags (RdsClusterInstanceResource s) TF.Tags where
              (\s a -> s { _tags = a } :: RdsClusterInstanceResource s)
 
 instance HasComputedAllocatedStorage (RdsClusterInstanceResource s) Text where
-    computedAllocatedStorage =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocated_storage")
+    type HasComputedAllocatedStorageThread (RdsClusterInstanceResource s) Text = s
+
+    computedAllocatedStorage = to (\_ -> TF.Computed "allocated_storage")
 
 instance HasComputedAvailabilityZone (RdsClusterInstanceResource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (RdsClusterInstanceResource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedClusterIdentifier (RdsClusterInstanceResource s) Text where
-    computedClusterIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_identifier")
+    type HasComputedClusterIdentifierThread (RdsClusterInstanceResource s) Text = s
+
+    computedClusterIdentifier = to (\_ -> TF.Computed "cluster_identifier")
 
 instance HasComputedDatabaseName (RdsClusterInstanceResource s) Text where
-    computedDatabaseName =
-        to (\x -> TF.Computed (TF.referenceKey x) "database_name")
+    type HasComputedDatabaseNameThread (RdsClusterInstanceResource s) Text = s
+
+    computedDatabaseName = to (\_ -> TF.Computed "database_name")
 
 instance HasComputedDbiResourceId (RdsClusterInstanceResource s) Text where
-    computedDbiResourceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "dbi_resource_id")
+    type HasComputedDbiResourceIdThread (RdsClusterInstanceResource s) Text = s
+
+    computedDbiResourceId = to (\_ -> TF.Computed "dbi_resource_id")
 
 instance HasComputedEndpoint (RdsClusterInstanceResource s) Text where
-    computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
+    type HasComputedEndpointThread (RdsClusterInstanceResource s) Text = s
+
+    computedEndpoint = to (\_ -> TF.Computed "endpoint")
 
 instance HasComputedEngine (RdsClusterInstanceResource s) Text where
-    computedEngine =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine")
+    type HasComputedEngineThread (RdsClusterInstanceResource s) Text = s
+
+    computedEngine = to (\_ -> TF.Computed "engine")
 
 instance HasComputedEngineVersion (RdsClusterInstanceResource s) Text where
-    computedEngineVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine_version")
+    type HasComputedEngineVersionThread (RdsClusterInstanceResource s) Text = s
+
+    computedEngineVersion = to (\_ -> TF.Computed "engine_version")
 
 instance HasComputedId (RdsClusterInstanceResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RdsClusterInstanceResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedIdentifier (RdsClusterInstanceResource s) Text where
-    computedIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "identifier")
+    type HasComputedIdentifierThread (RdsClusterInstanceResource s) Text = s
+
+    computedIdentifier = to (\_ -> TF.Computed "identifier")
 
 instance HasComputedKmsKeyId (RdsClusterInstanceResource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (RdsClusterInstanceResource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 instance HasComputedPerformanceInsightsEnabled (RdsClusterInstanceResource s) TF.Bool where
-    computedPerformanceInsightsEnabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "performance_insights_enabled")
+    type HasComputedPerformanceInsightsEnabledThread (RdsClusterInstanceResource s) TF.Bool = s
+
+    computedPerformanceInsightsEnabled = to (\_ -> TF.Computed "performance_insights_enabled")
 
 instance HasComputedPerformanceInsightsKmsKeyId (RdsClusterInstanceResource s) Text where
-    computedPerformanceInsightsKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "performance_insights_kms_key_id")
+    type HasComputedPerformanceInsightsKmsKeyIdThread (RdsClusterInstanceResource s) Text = s
+
+    computedPerformanceInsightsKmsKeyId = to (\_ -> TF.Computed "performance_insights_kms_key_id")
 
 instance HasComputedPort (RdsClusterInstanceResource s) Text where
-    computedPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "port")
+    type HasComputedPortThread (RdsClusterInstanceResource s) Text = s
+
+    computedPort = to (\_ -> TF.Computed "port")
 
 instance HasComputedStatus (RdsClusterInstanceResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (RdsClusterInstanceResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 instance HasComputedStorageEncrypted (RdsClusterInstanceResource s) Text where
-    computedStorageEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_encrypted")
+    type HasComputedStorageEncryptedThread (RdsClusterInstanceResource s) Text = s
+
+    computedStorageEncrypted = to (\_ -> TF.Computed "storage_encrypted")
 
 instance HasComputedWriter (RdsClusterInstanceResource s) Text where
-    computedWriter =
-        to (\x -> TF.Computed (TF.referenceKey x) "writer")
+    type HasComputedWriterThread (RdsClusterInstanceResource s) Text = s
+
+    computedWriter = to (\_ -> TF.Computed "writer")
 
 rdsClusterInstanceResource :: TF.Resource TF.AWS (RdsClusterInstanceResource s)
 rdsClusterInstanceResource =
@@ -23571,15 +23989,15 @@ Provides an RDS DB cluster parameter group resource.
 data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the DB cluster parameter group. Defaults to "Managed by Terraform". -}
-    , _family'     :: !(TF.Attribute s "family" Text)
+    , _family' :: !(TF.Attribute s "family" Text)
     {- ^ (Required) The family of the DB cluster parameter group. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the DB cluster parameter group. If omitted, Terraform will assign a random, unique name. -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _parameter   :: !(TF.Attribute s "parameter" Text)
+    , _parameter :: !(TF.Attribute s "parameter" Text)
     {- ^ (Optional) A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html> after initial creation of the group. -}
-    , _tags        :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -23636,12 +24054,14 @@ instance HasTags (RdsClusterParameterGroupResource s) TF.Tags where
              (\s a -> s { _tags = a } :: RdsClusterParameterGroupResource s)
 
 instance HasComputedArn (RdsClusterParameterGroupResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (RdsClusterParameterGroupResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (RdsClusterParameterGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RdsClusterParameterGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 rdsClusterParameterGroupResource :: TF.Resource TF.AWS (RdsClusterParameterGroupResource s)
 rdsClusterParameterGroupResource =
@@ -23913,84 +24333,104 @@ instance HasVpcSecurityGroupIds (RdsClusterResource s) Text where
              (\s a -> s { _vpc_security_group_ids = a } :: RdsClusterResource s)
 
 instance HasComputedAllocatedStorage (RdsClusterResource s) Text where
-    computedAllocatedStorage =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocated_storage")
+    type HasComputedAllocatedStorageThread (RdsClusterResource s) Text = s
+
+    computedAllocatedStorage = to (\_ -> TF.Computed "allocated_storage")
 
 instance HasComputedAvailabilityZones (RdsClusterResource s) Text where
-    computedAvailabilityZones =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zones")
+    type HasComputedAvailabilityZonesThread (RdsClusterResource s) Text = s
+
+    computedAvailabilityZones = to (\_ -> TF.Computed "availability_zones")
 
 instance HasComputedBackupRetentionPeriod (RdsClusterResource s) Text where
-    computedBackupRetentionPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "backup_retention_period")
+    type HasComputedBackupRetentionPeriodThread (RdsClusterResource s) Text = s
+
+    computedBackupRetentionPeriod = to (\_ -> TF.Computed "backup_retention_period")
 
 instance HasComputedClusterIdentifier (RdsClusterResource s) Text where
-    computedClusterIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_identifier")
+    type HasComputedClusterIdentifierThread (RdsClusterResource s) Text = s
+
+    computedClusterIdentifier = to (\_ -> TF.Computed "cluster_identifier")
 
 instance HasComputedClusterMembers (RdsClusterResource s) Text where
-    computedClusterMembers =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_members")
+    type HasComputedClusterMembersThread (RdsClusterResource s) Text = s
+
+    computedClusterMembers = to (\_ -> TF.Computed "cluster_members")
 
 instance HasComputedClusterResourceId (RdsClusterResource s) Text where
-    computedClusterResourceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_resource_id")
+    type HasComputedClusterResourceIdThread (RdsClusterResource s) Text = s
+
+    computedClusterResourceId = to (\_ -> TF.Computed "cluster_resource_id")
 
 instance HasComputedDatabaseName (RdsClusterResource s) Text where
-    computedDatabaseName =
-        to (\x -> TF.Computed (TF.referenceKey x) "database_name")
+    type HasComputedDatabaseNameThread (RdsClusterResource s) Text = s
+
+    computedDatabaseName = to (\_ -> TF.Computed "database_name")
 
 instance HasComputedEndpoint (RdsClusterResource s) Text where
-    computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
+    type HasComputedEndpointThread (RdsClusterResource s) Text = s
+
+    computedEndpoint = to (\_ -> TF.Computed "endpoint")
 
 instance HasComputedEngine (RdsClusterResource s) Text where
-    computedEngine =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine")
+    type HasComputedEngineThread (RdsClusterResource s) Text = s
+
+    computedEngine = to (\_ -> TF.Computed "engine")
 
 instance HasComputedEngineVersion (RdsClusterResource s) Text where
-    computedEngineVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine_version")
+    type HasComputedEngineVersionThread (RdsClusterResource s) Text = s
+
+    computedEngineVersion = to (\_ -> TF.Computed "engine_version")
 
 instance HasComputedId (RdsClusterResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RdsClusterResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedMaintenanceWindow (RdsClusterResource s) Text where
-    computedMaintenanceWindow =
-        to (\x -> TF.Computed (TF.referenceKey x) "maintenance_window")
+    type HasComputedMaintenanceWindowThread (RdsClusterResource s) Text = s
+
+    computedMaintenanceWindow = to (\_ -> TF.Computed "maintenance_window")
 
 instance HasComputedMasterUsername (RdsClusterResource s) Text where
-    computedMasterUsername =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_username")
+    type HasComputedMasterUsernameThread (RdsClusterResource s) Text = s
+
+    computedMasterUsername = to (\_ -> TF.Computed "master_username")
 
 instance HasComputedPort (RdsClusterResource s) Text where
-    computedPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "port")
+    type HasComputedPortThread (RdsClusterResource s) Text = s
+
+    computedPort = to (\_ -> TF.Computed "port")
 
 instance HasComputedPreferredBackupWindow (RdsClusterResource s) Text where
-    computedPreferredBackupWindow =
-        to (\x -> TF.Computed (TF.referenceKey x) "preferred_backup_window")
+    type HasComputedPreferredBackupWindowThread (RdsClusterResource s) Text = s
+
+    computedPreferredBackupWindow = to (\_ -> TF.Computed "preferred_backup_window")
 
 instance HasComputedPreferredMaintenanceWindow (RdsClusterResource s) Text where
-    computedPreferredMaintenanceWindow =
-        to (\x -> TF.Computed (TF.referenceKey x) "preferred_maintenance_window")
+    type HasComputedPreferredMaintenanceWindowThread (RdsClusterResource s) Text = s
+
+    computedPreferredMaintenanceWindow = to (\_ -> TF.Computed "preferred_maintenance_window")
 
 instance HasComputedReaderEndpoint (RdsClusterResource s) Text where
-    computedReaderEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "reader_endpoint")
+    type HasComputedReaderEndpointThread (RdsClusterResource s) Text = s
+
+    computedReaderEndpoint = to (\_ -> TF.Computed "reader_endpoint")
 
 instance HasComputedReplicationSourceIdentifier (RdsClusterResource s) Text where
-    computedReplicationSourceIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "replication_source_identifier")
+    type HasComputedReplicationSourceIdentifierThread (RdsClusterResource s) Text = s
+
+    computedReplicationSourceIdentifier = to (\_ -> TF.Computed "replication_source_identifier")
 
 instance HasComputedStatus (RdsClusterResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (RdsClusterResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 instance HasComputedStorageEncrypted (RdsClusterResource s) Text where
-    computedStorageEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_encrypted")
+    type HasComputedStorageEncryptedThread (RdsClusterResource s) Text = s
+
+    computedStorageEncrypted = to (\_ -> TF.Computed "storage_encrypted")
 
 rdsClusterResource :: TF.Resource TF.AWS (RdsClusterResource s)
 rdsClusterResource =
@@ -24388,11 +24828,11 @@ Provides a Redshift Cluster parameter group resource.
 data RedshiftParameterGroupResource s = RedshiftParameterGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the Redshift parameter group. Defaults to "Managed by Terraform". -}
-    , _family'     :: !(TF.Attribute s "family" Text)
+    , _family' :: !(TF.Attribute s "family" Text)
     {- ^ (Required) The family of the Redshift parameter group. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the Redshift parameter group. -}
-    , _parameter   :: !(TF.Attribute s "parameter" Text)
+    , _parameter :: !(TF.Attribute s "parameter" Text)
     {- ^ (Optional) A list of Redshift parameters to apply. -}
     } deriving (Show, Eq)
 
@@ -24433,8 +24873,9 @@ instance HasParameter (RedshiftParameterGroupResource s) Text where
              (\s a -> s { _parameter = a } :: RedshiftParameterGroupResource s)
 
 instance HasComputedId (RedshiftParameterGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RedshiftParameterGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 redshiftParameterGroupResource :: TF.Resource TF.AWS (RedshiftParameterGroupResource s)
 redshiftParameterGroupResource =
@@ -24454,9 +24895,9 @@ control access to non-VPC clusters
 data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the Redshift security group. Defaults to "Managed by Terraform". -}
-    , _ingress     :: !(TF.Attribute s "ingress" Text)
+    , _ingress :: !(TF.Attribute s "ingress" Text)
     {- ^ (Optional) A list of ingress rules. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the Redshift security group. -}
     } deriving (Show, Eq)
 
@@ -24489,8 +24930,9 @@ instance HasName (RedshiftSecurityGroupResource s) Text where
              (\s a -> s { _name = a } :: RedshiftSecurityGroupResource s)
 
 instance HasComputedId (RedshiftSecurityGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RedshiftSecurityGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 redshiftSecurityGroupResource :: TF.Resource TF.AWS (RedshiftSecurityGroupResource s)
 redshiftSecurityGroupResource =
@@ -24510,11 +24952,11 @@ when creating Amazon Redshift subnet group.
 data RedshiftSubnetGroupResource s = RedshiftSubnetGroupResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the Redshift Subnet group. Defaults to "Managed by Terraform". -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the Redshift Subnet group. -}
-    , _subnet_ids  :: !(TF.Attribute s "subnet_ids" Text)
+    , _subnet_ids :: !(TF.Attribute s "subnet_ids" Text)
     {- ^ (Required) An array of VPC subnet IDs. -}
-    , _tags        :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -24555,8 +24997,9 @@ instance HasTags (RedshiftSubnetGroupResource s) TF.Tags where
              (\s a -> s { _tags = a } :: RedshiftSubnetGroupResource s)
 
 instance HasComputedId (RedshiftSubnetGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RedshiftSubnetGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 redshiftSubnetGroupResource :: TF.Resource TF.AWS (RedshiftSubnetGroupResource s)
 redshiftSubnetGroupResource =
@@ -24592,12 +25035,14 @@ instance HasReferenceName (Route53DelegationSetResource s) Text where
              (\s a -> s { _reference_name = a } :: Route53DelegationSetResource s)
 
 instance HasComputedId (Route53DelegationSetResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (Route53DelegationSetResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedNameServers (Route53DelegationSetResource s) Text where
-    computedNameServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "name_servers")
+    type HasComputedNameServersThread (Route53DelegationSetResource s) Text = s
+
+    computedNameServers = to (\_ -> TF.Computed "name_servers")
 
 route53DelegationSetResource :: TF.Resource TF.AWS (Route53DelegationSetResource s)
 route53DelegationSetResource =
@@ -24870,8 +25315,9 @@ instance HasZoneId (Route53QueryLogResource s) Text where
              (\s a -> s { _zone_id = a } :: Route53QueryLogResource s)
 
 instance HasComputedId (Route53QueryLogResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (Route53QueryLogResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 route53QueryLogResource :: TF.Resource TF.AWS (Route53QueryLogResource s)
 route53QueryLogResource =
@@ -25023,8 +25469,9 @@ instance HasZoneId (Route53RecordResource s) Text where
              (\s a -> s { _zone_id = a } :: Route53RecordResource s)
 
 instance HasComputedFqdn (Route53RecordResource s) Text where
-    computedFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "fqdn")
+    type HasComputedFqdnThread (Route53RecordResource s) Text = s
+
+    computedFqdn = to (\_ -> TF.Computed "fqdn")
 
 route53RecordResource :: TF.Resource TF.AWS (Route53RecordResource s)
 route53RecordResource =
@@ -25050,11 +25497,11 @@ route53RecordResource =
 Provides a Route53 private Hosted Zone to VPC association resource.
 -}
 data Route53ZoneAssociationResource s = Route53ZoneAssociationResource {
-      _vpc_id     :: !(TF.Attribute s "vpc_id" Text)
+      _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The VPC to associate with the private hosted zone. -}
     , _vpc_region :: !(TF.Attribute s "vpc_region" TF.Region)
     {- ^ (Optional) The VPC's region. Defaults to the region of the AWS provider. -}
-    , _zone_id    :: !(TF.Attribute s "zone_id" Text)
+    , _zone_id :: !(TF.Attribute s "zone_id" Text)
     {- ^ (Required) The private hosted zone to associate. -}
     } deriving (Show, Eq)
 
@@ -25087,20 +25534,24 @@ instance HasZoneId (Route53ZoneAssociationResource s) Text where
              (\s a -> s { _zone_id = a } :: Route53ZoneAssociationResource s)
 
 instance HasComputedId (Route53ZoneAssociationResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (Route53ZoneAssociationResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedVpcId (Route53ZoneAssociationResource s) Text where
-    computedVpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_id")
+    type HasComputedVpcIdThread (Route53ZoneAssociationResource s) Text = s
+
+    computedVpcId = to (\_ -> TF.Computed "vpc_id")
 
 instance HasComputedVpcRegion (Route53ZoneAssociationResource s) TF.Region where
-    computedVpcRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_region")
+    type HasComputedVpcRegionThread (Route53ZoneAssociationResource s) TF.Region = s
+
+    computedVpcRegion = to (\_ -> TF.Computed "vpc_region")
 
 instance HasComputedZoneId (Route53ZoneAssociationResource s) Text where
-    computedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "zone_id")
+    type HasComputedZoneIdThread (Route53ZoneAssociationResource s) Text = s
+
+    computedZoneId = to (\_ -> TF.Computed "zone_id")
 
 route53ZoneAssociationResource :: TF.Resource TF.AWS (Route53ZoneAssociationResource s)
 route53ZoneAssociationResource =
@@ -25116,19 +25567,19 @@ route53ZoneAssociationResource =
 Provides a Route53 Hosted Zone resource.
 -}
 data Route53ZoneResource s = Route53ZoneResource {
-      _comment           :: !(TF.Attribute s "comment" Text)
+      _comment :: !(TF.Attribute s "comment" Text)
     {- ^ (Optional) A comment for the hosted zone. Defaults to 'Managed by Terraform'. -}
     , _delegation_set_id :: !(TF.Attribute s "delegation_set_id" Text)
     {- ^ (Optional) The ID of the reusable delegation set whose NS records you want to assign to the hosted zone. Conflicts w/ @vpc_id@ as delegation sets can only be used for public zones. -}
-    , _force_destroy     :: !(TF.Attribute s "force_destroy" Text)
+    , _force_destroy :: !(TF.Attribute s "force_destroy" Text)
     {- ^ (Optional) Whether to destroy all records (possibly managed outside of Terraform) in the zone when destroying the zone. -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) This is the name of the hosted zone. -}
-    , _tags              :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the zone. -}
-    , _vpc_id            :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) The VPC to associate with a private hosted zone. Specifying @vpc_id@ will create a private hosted zone. Conflicts w/ @delegation_set_id@ as delegation sets can only be used for public zones. -}
-    , _vpc_region        :: !(TF.Attribute s "vpc_region" TF.Region)
+    , _vpc_region :: !(TF.Attribute s "vpc_region" TF.Region)
     {- ^ (Optional) The VPC's region. Defaults to the region of the AWS provider. -}
     } deriving (Show, Eq)
 
@@ -25193,12 +25644,14 @@ instance HasVpcRegion (Route53ZoneResource s) TF.Region where
              (\s a -> s { _vpc_region = a } :: Route53ZoneResource s)
 
 instance HasComputedNameServers (Route53ZoneResource s) Text where
-    computedNameServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "name_servers")
+    type HasComputedNameServersThread (Route53ZoneResource s) Text = s
+
+    computedNameServers = to (\_ -> TF.Computed "name_servers")
 
 instance HasComputedZoneId (Route53ZoneResource s) Text where
-    computedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "zone_id")
+    type HasComputedZoneIdThread (Route53ZoneResource s) Text = s
+
+    computedZoneId = to (\_ -> TF.Computed "zone_id")
 
 route53ZoneResource :: TF.Resource TF.AWS (Route53ZoneResource s)
 route53ZoneResource =
@@ -25320,40 +25773,49 @@ instance HasVpcPeeringConnectionId (RouteResource s) Text where
              (\s a -> s { _vpc_peering_connection_id = a } :: RouteResource s)
 
 instance HasComputedDestinationCidrBlock (RouteResource s) TF.CIDR where
-    computedDestinationCidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "destination_cidr_block")
+    type HasComputedDestinationCidrBlockThread (RouteResource s) TF.CIDR = s
+
+    computedDestinationCidrBlock = to (\_ -> TF.Computed "destination_cidr_block")
 
 instance HasComputedDestinationIpv6CidrBlock (RouteResource s) TF.CIDR where
-    computedDestinationIpv6CidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "destination_ipv6_cidr_block")
+    type HasComputedDestinationIpv6CidrBlockThread (RouteResource s) TF.CIDR = s
+
+    computedDestinationIpv6CidrBlock = to (\_ -> TF.Computed "destination_ipv6_cidr_block")
 
 instance HasComputedEgressOnlyGatewayId (RouteResource s) Text where
-    computedEgressOnlyGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "egress_only_gateway_id")
+    type HasComputedEgressOnlyGatewayIdThread (RouteResource s) Text = s
+
+    computedEgressOnlyGatewayId = to (\_ -> TF.Computed "egress_only_gateway_id")
 
 instance HasComputedGatewayId (RouteResource s) Text where
-    computedGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "gateway_id")
+    type HasComputedGatewayIdThread (RouteResource s) Text = s
+
+    computedGatewayId = to (\_ -> TF.Computed "gateway_id")
 
 instance HasComputedInstanceId (RouteResource s) Text where
-    computedInstanceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_id")
+    type HasComputedInstanceIdThread (RouteResource s) Text = s
+
+    computedInstanceId = to (\_ -> TF.Computed "instance_id")
 
 instance HasComputedNatGatewayId (RouteResource s) Text where
-    computedNatGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "nat_gateway_id")
+    type HasComputedNatGatewayIdThread (RouteResource s) Text = s
+
+    computedNatGatewayId = to (\_ -> TF.Computed "nat_gateway_id")
 
 instance HasComputedNetworkInterfaceId (RouteResource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (RouteResource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 instance HasComputedRouteTableId (RouteResource s) Text where
-    computedRouteTableId =
-        to (\x -> TF.Computed (TF.referenceKey x) "route_table_id")
+    type HasComputedRouteTableIdThread (RouteResource s) Text = s
+
+    computedRouteTableId = to (\_ -> TF.Computed "route_table_id")
 
 instance HasComputedVpcPeeringConnectionId (RouteResource s) Text where
-    computedVpcPeeringConnectionId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_peering_connection_id")
+    type HasComputedVpcPeeringConnectionIdThread (RouteResource s) Text = s
+
+    computedVpcPeeringConnectionId = to (\_ -> TF.Computed "vpc_peering_connection_id")
 
 routeResource :: TF.Resource TF.AWS (RouteResource s)
 routeResource =
@@ -25378,7 +25840,7 @@ table.
 data RouteTableAssociationResource s = RouteTableAssociationResource {
       _route_table_id :: !(TF.Attribute s "route_table_id" Text)
     {- ^ (Required) The ID of the routing table to associate with. -}
-    , _subnet_id      :: !(TF.Attribute s "subnet_id" Text)
+    , _subnet_id :: !(TF.Attribute s "subnet_id" Text)
     {- ^ (Required) The subnet ID to create an association. -}
     } deriving (Show, Eq)
 
@@ -25403,8 +25865,9 @@ instance HasSubnetId (RouteTableAssociationResource s) Text where
              (\s a -> s { _subnet_id = a } :: RouteTableAssociationResource s)
 
 instance HasComputedId (RouteTableAssociationResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RouteTableAssociationResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 routeTableAssociationResource :: TF.Resource TF.AWS (RouteTableAssociationResource s)
 routeTableAssociationResource =
@@ -25438,11 +25901,11 @@ this argument when defining route propagation using the separate resource.
 data RouteTableResource s = RouteTableResource {
       _propagating_vgws :: !(TF.Attribute s "propagating_vgws" Text)
     {- ^ (Optional) A list of virtual gateways for propagation. -}
-    , _route            :: !(TF.Attribute s "route" Text)
+    , _route :: !(TF.Attribute s "route" Text)
     {- ^ (Optional) A list of route objects. Their keys are documented below. -}
-    , _tags             :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_id           :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The VPC ID. -}
     } deriving (Show, Eq)
 
@@ -25483,8 +25946,9 @@ instance HasVpcId (RouteTableResource s) Text where
              (\s a -> s { _vpc_id = a } :: RouteTableResource s)
 
 instance HasComputedId (RouteTableResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RouteTableResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 routeTableResource :: TF.Resource TF.AWS (RouteTableResource s)
 routeTableResource =
@@ -25501,13 +25965,13 @@ routeTableResource =
 Provides a S3 bucket notification resource.
 -}
 data S3BucketNotificationResource s = S3BucketNotificationResource {
-      _bucket          :: !(TF.Attribute s "bucket" Text)
+      _bucket :: !(TF.Attribute s "bucket" Text)
     {- ^ (Required) The name of the bucket to put notification configuration. -}
     , _lambda_function :: !(TF.Attribute s "lambda_function" Text)
     {- ^ (Optional, Multiple) Used to configure notifications to a Lambda Function (documented below). -}
-    , _queue           :: !(TF.Attribute s "queue" Text)
+    , _queue :: !(TF.Attribute s "queue" Text)
     {- ^ (Optional) The notification configuration to SQS Queue (documented below). -}
-    , _topic           :: !(TF.Attribute s "topic" Text)
+    , _topic :: !(TF.Attribute s "topic" Text)
     {- ^ (Optional) The notification configuration to SNS Topic (documented below). -}
     } deriving (Show, Eq)
 
@@ -25562,37 +26026,37 @@ s3BucketNotificationResource =
 Provides a S3 bucket object resource.
 -}
 data S3BucketObjectResource s = S3BucketObjectResource {
-      _acl                    :: !(TF.Attribute s "acl" Text)
+      _acl :: !(TF.Attribute s "acl" Text)
     {- ^ (Optional) The <https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl> to apply. Defaults to "private". -}
-    , _bucket                 :: !(TF.Attribute s "bucket" Text)
+    , _bucket :: !(TF.Attribute s "bucket" Text)
     {- ^ (Required) The name of the bucket to put the file in. -}
-    , _cache_control          :: !(TF.Attribute s "cache_control" Text)
+    , _cache_control :: !(TF.Attribute s "cache_control" Text)
     {- ^ (Optional) Specifies caching behavior along the request/reply chain Read <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9> for further details. -}
-    , _content                :: !(TF.Attribute s "content" Text)
+    , _content :: !(TF.Attribute s "content" Text)
     {- ^ (Required unless @source@ given) The literal content being uploaded to the bucket. -}
-    , _content_disposition    :: !(TF.Attribute s "content_disposition" Text)
+    , _content_disposition :: !(TF.Attribute s "content_disposition" Text)
     {- ^ (Optional) Specifies presentational information for the object. Read <http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1> for further information. -}
-    , _content_encoding       :: !(TF.Attribute s "content_encoding" Text)
+    , _content_encoding :: !(TF.Attribute s "content_encoding" Text)
     {- ^ (Optional) Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11> for further information. -}
-    , _content_language       :: !(TF.Attribute s "content_language" Text)
+    , _content_language :: !(TF.Attribute s "content_language" Text)
     {- ^ (Optional) The language the content is in e.g. en-US or en-GB. -}
-    , _content_type           :: !(TF.Attribute s "content_type" Text)
+    , _content_type :: !(TF.Attribute s "content_type" Text)
     {- ^ (Optional) A standard MIME type describing the format of the object data, e.g. application/octet-stream. All Valid MIME Types are valid for this input. -}
-    , _etag                   :: !(TF.Attribute s "etag" Text)
+    , _etag :: !(TF.Attribute s "etag" Text)
     {- ^ (Optional) Used to trigger updates. The only meaningful value is @${md5(file("path/to/file"))}@ . This attribute is not compatible with @kms_key_id@ . -}
-    , _key                    :: !(TF.Attribute s "key" Text)
+    , _key :: !(TF.Attribute s "key" Text)
     {- ^ (Required) The name of the object once it is in the bucket. -}
-    , _kms_key_id             :: !(TF.Attribute s "kms_key_id" Text)
+    , _kms_key_id :: !(TF.Attribute s "kms_key_id" Text)
     {- ^ (Optional) Specifies the AWS KMS Key ARN to use for object encryption. This value is a fully qualified ARN of the KMS Key. If using @aws_kms_key@ , use the exported @arn@ attribute: @kms_key_id = "${aws_kms_key.foo.arn}"@ -}
     , _server_side_encryption :: !(TF.Attribute s "server_side_encryption" Text)
     {- ^ (Optional) Specifies server-side encryption of the object in S3. Valid values are " @AES256@ " and " @aws:kms@ ". -}
-    , _source                 :: !(TF.Attribute s "source" Text)
+    , _source :: !(TF.Attribute s "source" Text)
     {- ^ (Required) The path to the source file being uploaded to the bucket. -}
-    , _storage_class          :: !(TF.Attribute s "storage_class" Text)
+    , _storage_class :: !(TF.Attribute s "storage_class" Text)
     {- ^ (Optional) Specifies the desired <http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html> for the object. Can be either " @STANDARD@ ", " @REDUCED_REDUNDANCY@ ", or " @STANDARD_IA@ ". Defaults to " @STANDARD@ ". -}
-    , _tags                   :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the object. -}
-    , _website_redirect       :: !(TF.Attribute s "website_redirect" Text)
+    , _website_redirect :: !(TF.Attribute s "website_redirect" Text)
     {- ^ (Optional) Specifies a target URL for <http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html> . -}
     } deriving (Show, Eq)
 
@@ -25729,16 +26193,19 @@ instance HasWebsiteRedirect (S3BucketObjectResource s) Text where
              (\s a -> s { _website_redirect = a } :: S3BucketObjectResource s)
 
 instance HasComputedEtag (S3BucketObjectResource s) Text where
-    computedEtag =
-        to (\x -> TF.Computed (TF.referenceKey x) "etag")
+    type HasComputedEtagThread (S3BucketObjectResource s) Text = s
+
+    computedEtag = to (\_ -> TF.Computed "etag")
 
 instance HasComputedId (S3BucketObjectResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (S3BucketObjectResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedVersionId (S3BucketObjectResource s) Text where
-    computedVersionId =
-        to (\x -> TF.Computed (TF.referenceKey x) "version_id")
+    type HasComputedVersionIdThread (S3BucketObjectResource s) Text = s
+
+    computedVersionId = to (\_ -> TF.Computed "version_id")
 
 s3BucketObjectResource :: TF.Resource TF.AWS (S3BucketObjectResource s)
 s3BucketObjectResource =
@@ -25973,32 +26440,39 @@ instance HasWebsite (S3BucketResource s) Text where
              (\s a -> s { _website = a } :: S3BucketResource s)
 
 instance HasComputedArn (S3BucketResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (S3BucketResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedBucketDomainName (S3BucketResource s) Text where
-    computedBucketDomainName =
-        to (\x -> TF.Computed (TF.referenceKey x) "bucket_domain_name")
+    type HasComputedBucketDomainNameThread (S3BucketResource s) Text = s
+
+    computedBucketDomainName = to (\_ -> TF.Computed "bucket_domain_name")
 
 instance HasComputedHostedZoneId (S3BucketResource s) Text where
-    computedHostedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "hosted_zone_id")
+    type HasComputedHostedZoneIdThread (S3BucketResource s) Text = s
+
+    computedHostedZoneId = to (\_ -> TF.Computed "hosted_zone_id")
 
 instance HasComputedId (S3BucketResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (S3BucketResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedRegion (S3BucketResource s) TF.Region where
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
+    type HasComputedRegionThread (S3BucketResource s) TF.Region = s
+
+    computedRegion = to (\_ -> TF.Computed "region")
 
 instance HasComputedWebsiteDomain (S3BucketResource s) Text where
-    computedWebsiteDomain =
-        to (\x -> TF.Computed (TF.referenceKey x) "website_domain")
+    type HasComputedWebsiteDomainThread (S3BucketResource s) Text = s
+
+    computedWebsiteDomain = to (\_ -> TF.Computed "website_domain")
 
 instance HasComputedWebsiteEndpoint (S3BucketResource s) Text where
-    computedWebsiteEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "website_endpoint")
+    type HasComputedWebsiteEndpointThread (S3BucketResource s) Text = s
+
+    computedWebsiteEndpoint = to (\_ -> TF.Computed "website_endpoint")
 
 s3BucketResource :: TF.Resource TF.AWS (S3BucketResource s)
 s3BucketResource =
@@ -26033,21 +26507,21 @@ conjunction with any Security Group Rule resources. Doing so will cause a
 conflict of rule settings and will overwrite rules.
 -}
 data SecurityGroupResource s = SecurityGroupResource {
-      _description            :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional, Forces new resource) The security group description. Defaults to "Managed by Terraform". Cannot be "". NOTE : This field maps to the AWS @GroupDescription@ attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use @tags@ . -}
-    , _egress                 :: !(TF.Attribute s "egress" Text)
+    , _egress :: !(TF.Attribute s "egress" Text)
     {- ^ (Optional, VPC only) Can be specified multiple times for each egress rule. Each egress block supports fields documented below. -}
-    , _ingress                :: !(TF.Attribute s "ingress" Text)
+    , _ingress :: !(TF.Attribute s "ingress" Text)
     {- ^ (Optional) Can be specified multiple times for each ingress rule. Each ingress block supports fields documented below. -}
-    , _name                   :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional, Forces new resource) The name of the security group. If omitted, Terraform will assign a random, unique name -}
-    , _name_prefix            :: !(TF.Attribute s "name_prefix" Text)
+    , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     , _revoke_rules_on_delete :: !(TF.Attribute s "revoke_rules_on_delete" Text)
     {- ^ (Optional) Instruct Terraform to revoke all of the Security Groups attached ingress and egress rules before deleting the rule itself. This is normally not needed, however certain AWS services such as Elastic Map Reduce may automatically add required rules to security groups used with the service, and those rules may contain a cyclic dependency that prevent the security groups from being destroyed without removing the dependency first. Default @false@ -}
-    , _tags                   :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_id                 :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional, Forces new resource) The VPC ID. -}
     } deriving (Show, Eq)
 
@@ -26285,9 +26759,9 @@ Provides a Service Discovery Private DNS Namespace resource.
 data ServiceDiscoveryPrivateDnsNamespaceResource s = ServiceDiscoveryPrivateDnsNamespaceResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description that you specify for the namespace when you create it. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the namespace. -}
-    , _vpc         :: !(TF.Attribute s "vpc" Text)
+    , _vpc :: !(TF.Attribute s "vpc" Text)
     {- ^ (Required) The ID of VPC that you want to associate the namespace with. -}
     } deriving (Show, Eq)
 
@@ -26320,16 +26794,19 @@ instance HasVpc (ServiceDiscoveryPrivateDnsNamespaceResource s) Text where
              (\s a -> s { _vpc = a } :: ServiceDiscoveryPrivateDnsNamespaceResource s)
 
 instance HasComputedArn (ServiceDiscoveryPrivateDnsNamespaceResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (ServiceDiscoveryPrivateDnsNamespaceResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedHostedZone (ServiceDiscoveryPrivateDnsNamespaceResource s) Text where
-    computedHostedZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "hosted_zone")
+    type HasComputedHostedZoneThread (ServiceDiscoveryPrivateDnsNamespaceResource s) Text = s
+
+    computedHostedZone = to (\_ -> TF.Computed "hosted_zone")
 
 instance HasComputedId (ServiceDiscoveryPrivateDnsNamespaceResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ServiceDiscoveryPrivateDnsNamespaceResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 serviceDiscoveryPrivateDnsNamespaceResource :: TF.Resource TF.AWS (ServiceDiscoveryPrivateDnsNamespaceResource s)
 serviceDiscoveryPrivateDnsNamespaceResource =
@@ -26347,7 +26824,7 @@ Provides a Service Discovery Public DNS Namespace resource.
 data ServiceDiscoveryPublicDnsNamespaceResource s = ServiceDiscoveryPublicDnsNamespaceResource {
       _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description that you specify for the namespace when you create it. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the namespace. -}
     } deriving (Show, Eq)
 
@@ -26372,16 +26849,19 @@ instance HasName (ServiceDiscoveryPublicDnsNamespaceResource s) Text where
              (\s a -> s { _name = a } :: ServiceDiscoveryPublicDnsNamespaceResource s)
 
 instance HasComputedArn (ServiceDiscoveryPublicDnsNamespaceResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (ServiceDiscoveryPublicDnsNamespaceResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedHostedZone (ServiceDiscoveryPublicDnsNamespaceResource s) Text where
-    computedHostedZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "hosted_zone")
+    type HasComputedHostedZoneThread (ServiceDiscoveryPublicDnsNamespaceResource s) Text = s
+
+    computedHostedZone = to (\_ -> TF.Computed "hosted_zone")
 
 instance HasComputedId (ServiceDiscoveryPublicDnsNamespaceResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ServiceDiscoveryPublicDnsNamespaceResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 serviceDiscoveryPublicDnsNamespaceResource :: TF.Resource TF.AWS (ServiceDiscoveryPublicDnsNamespaceResource s)
 serviceDiscoveryPublicDnsNamespaceResource =
@@ -26396,13 +26876,13 @@ serviceDiscoveryPublicDnsNamespaceResource =
 Provides a Service Discovery Service resource.
 -}
 data ServiceDiscoveryServiceResource s = ServiceDiscoveryServiceResource {
-      _description         :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the service. -}
-    , _dns_config          :: !(TF.Attribute s "dns_config" Text)
+    , _dns_config :: !(TF.Attribute s "dns_config" Text)
     {- ^ (Required) A complex type that contains information about the resource record sets that you want Amazon Route 53 to create when you register an instance. -}
     , _health_check_config :: !(TF.Attribute s "health_check_config" Text)
     {- ^ (Optional) A complex type that contains settings for an optional health check. Only for Public DNS namespaces. -}
-    , _name                :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required, ForceNew) The name of the service. -}
     } deriving (Show, Eq)
 
@@ -26457,13 +26937,13 @@ serviceDiscoveryServiceResource =
 Provides a resource to create a Service Catalog Portfolio.
 -}
 data ServicecatalogPortfolioResource s = ServicecatalogPortfolioResource {
-      _description   :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Required) Description of the portfolio -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the portfolio. -}
     , _provider_name :: !(TF.Attribute s "provider_name" Text)
     {- ^ (Required) Name of the person or organization who owns the portfolio. -}
-    , _tags          :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) Tags to apply to the connection. -}
     } deriving (Show, Eq)
 
@@ -26504,8 +26984,9 @@ instance HasTags (ServicecatalogPortfolioResource s) TF.Tags where
              (\s a -> s { _tags = a } :: ServicecatalogPortfolioResource s)
 
 instance HasComputedId (ServicecatalogPortfolioResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ServicecatalogPortfolioResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 servicecatalogPortfolioResource :: TF.Resource TF.AWS (ServicecatalogPortfolioResource s)
 servicecatalogPortfolioResource =
@@ -26596,8 +27077,9 @@ instance HasDomain (SesDomainDkimResource s) Text where
              (\s a -> s { _domain = a } :: SesDomainDkimResource s)
 
 instance HasComputedDkimTokens (SesDomainDkimResource s) Text where
-    computedDkimTokens =
-        to (\x -> TF.Computed (TF.referenceKey x) "dkim_tokens")
+    type HasComputedDkimTokensThread (SesDomainDkimResource s) Text = s
+
+    computedDkimTokens = to (\_ -> TF.Computed "dkim_tokens")
 
 sesDomainDkimResource :: TF.Resource TF.AWS (SesDomainDkimResource s)
 sesDomainDkimResource =
@@ -26628,12 +27110,14 @@ instance HasDomain (SesDomainIdentityResource s) Text where
              (\s a -> s { _domain = a } :: SesDomainIdentityResource s)
 
 instance HasComputedArn (SesDomainIdentityResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (SesDomainIdentityResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedVerificationToken (SesDomainIdentityResource s) Text where
-    computedVerificationToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "verification_token")
+    type HasComputedVerificationTokenThread (SesDomainIdentityResource s) Text = s
+
+    computedVerificationToken = to (\_ -> TF.Computed "verification_token")
 
 sesDomainIdentityResource :: TF.Resource TF.AWS (SesDomainIdentityResource s)
 sesDomainIdentityResource =
@@ -26651,15 +27135,15 @@ data SesEventDestinationResource s = SesEventDestinationResource {
     {- ^ (Optional) CloudWatch destination for the events -}
     , _configuration_set_name :: !(TF.Attribute s "configuration_set_name" Text)
     {- ^ (Required) The name of the configuration set -}
-    , _enabled                :: !(TF.Attribute s "enabled" TF.Bool)
+    , _enabled :: !(TF.Attribute s "enabled" TF.Bool)
     {- ^ (Optional) If true, the event destination will be enabled -}
-    , _kinesis_destination    :: !(TF.Attribute s "kinesis_destination" Text)
+    , _kinesis_destination :: !(TF.Attribute s "kinesis_destination" Text)
     {- ^ (Optional) Send the events to a kinesis firehose destination -}
-    , _matching_types         :: !(TF.Attribute s "matching_types" Text)
+    , _matching_types :: !(TF.Attribute s "matching_types" Text)
     {- ^ (Required) A list of matching types. May be any of @"send"@ , @"reject"@ , @"bounce"@ , @"complaint"@ , @"delivery"@ , @"open"@ , or @"click"@ . -}
-    , _name                   :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the event destination -}
-    , _sns_destination        :: !(TF.Attribute s "sns_destination" Text)
+    , _sns_destination :: !(TF.Attribute s "sns_destination" Text)
     {- ^ (Optional) Send the events to an SNS Topic destination -}
     } deriving (Show, Eq)
 
@@ -26741,9 +27225,9 @@ sesEventDestinationResource =
 Provides an SES receipt filter resource
 -}
 data SesReceiptFilterResource s = SesReceiptFilterResource {
-      _cidr   :: !(TF.Attribute s "cidr" Text)
+      _cidr :: !(TF.Attribute s "cidr" Text)
     {- ^ (Required) The IP address or address range to filter, in CIDR notation -}
-    , _name   :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the filter -}
     , _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) Block or Allow -}
@@ -26793,31 +27277,31 @@ Provides an SES receipt rule resource
 data SesReceiptRuleResource s = SesReceiptRuleResource {
       _add_header_action :: !(TF.Attribute s "add_header_action" Text)
     {- ^ (Optional) A list of Add Header Action blocks. Documented below. -}
-    , _after             :: !(TF.Attribute s "after" Text)
+    , _after :: !(TF.Attribute s "after" Text)
     {- ^ (Optional) The name of the rule to place this rule after -}
-    , _bounce_action     :: !(TF.Attribute s "bounce_action" Text)
+    , _bounce_action :: !(TF.Attribute s "bounce_action" Text)
     {- ^ (Optional) A list of Bounce Action blocks. Documented below. -}
-    , _enabled           :: !(TF.Attribute s "enabled" TF.Bool)
+    , _enabled :: !(TF.Attribute s "enabled" TF.Bool)
     {- ^ (Optional) If true, the rule will be enabled -}
-    , _lambda_action     :: !(TF.Attribute s "lambda_action" Text)
+    , _lambda_action :: !(TF.Attribute s "lambda_action" Text)
     {- ^ (Optional) A list of Lambda Action blocks. Documented below. -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the rule -}
-    , _recipients        :: !(TF.Attribute s "recipients" Text)
+    , _recipients :: !(TF.Attribute s "recipients" Text)
     {- ^ (Optional) A list of email addresses -}
-    , _rule_set_name     :: !(TF.Attribute s "rule_set_name" Text)
+    , _rule_set_name :: !(TF.Attribute s "rule_set_name" Text)
     {- ^ (Required) The name of the rule set -}
-    , _s3_action         :: !(TF.Attribute s "s3_action" Text)
+    , _s3_action :: !(TF.Attribute s "s3_action" Text)
     {- ^ (Optional) A list of S3 Action blocks. Documented below. -}
-    , _scan_enabled      :: !(TF.Attribute s "scan_enabled" TF.Bool)
+    , _scan_enabled :: !(TF.Attribute s "scan_enabled" TF.Bool)
     {- ^ (Optional) If true, incoming emails will be scanned for spam and viruses -}
-    , _sns_action        :: !(TF.Attribute s "sns_action" Text)
+    , _sns_action :: !(TF.Attribute s "sns_action" Text)
     {- ^ (Optional) A list of SNS Action blocks. Documented below. -}
-    , _stop_action       :: !(TF.Attribute s "stop_action" Text)
+    , _stop_action :: !(TF.Attribute s "stop_action" Text)
     {- ^ (Optional) A list of Stop Action blocks. Documented below. -}
-    , _tls_policy        :: !(TF.Attribute s "tls_policy" Text)
+    , _tls_policy :: !(TF.Attribute s "tls_policy" Text)
     {- ^ (Optional) Require or Optional -}
-    , _workmail_action   :: !(TF.Attribute s "workmail_action" Text)
+    , _workmail_action :: !(TF.Attribute s "workmail_action" Text)
     {- ^ (Optional) A list of WorkMail Action blocks. Documented below. -}
     } deriving (Show, Eq)
 
@@ -26990,13 +27474,13 @@ sesReceiptRuleSetResource =
 Provides a resource to create a SES template.
 -}
 data SesTemplateResource s = SesTemplateResource {
-      _html    :: !(TF.Attribute s "html" Text)
+      _html :: !(TF.Attribute s "html" Text)
     {- ^ (Optional) The HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts. -}
-    , _name    :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the template. Cannot exceed 64 characters. You will refer to this name when you send email. -}
     , _subject :: !(TF.Attribute s "subject" Text)
     {- ^ (Optional) The subject line of the email. -}
-    , _text    :: !(TF.Attribute s "text" Text)
+    , _text :: !(TF.Attribute s "text" Text)
     {- ^ (Optional) The email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts. -}
     } deriving (Show, Eq)
 
@@ -27037,8 +27521,9 @@ instance HasText (SesTemplateResource s) Text where
              (\s a -> s { _text = a } :: SesTemplateResource s)
 
 instance HasComputedId (SesTemplateResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SesTemplateResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 sesTemplateResource :: TF.Resource TF.AWS (SesTemplateResource s)
 sesTemplateResource =
@@ -27072,8 +27557,9 @@ instance HasName (SimpledbDomainResource s) Text where
              (\s a -> s { _name = a } :: SimpledbDomainResource s)
 
 instance HasComputedId (SimpledbDomainResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SimpledbDomainResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 simpledbDomainResource :: TF.Resource TF.AWS (SimpledbDomainResource s)
 simpledbDomainResource =
@@ -27087,7 +27573,7 @@ simpledbDomainResource =
 Adds permission to create volumes off of a given EBS Snapshot.
 -}
 data SnapshotCreateVolumePermissionResource s = SnapshotCreateVolumePermissionResource {
-      _account_id  :: !(TF.Attribute s "account_id" Text)
+      _account_id :: !(TF.Attribute s "account_id" Text)
     {- ^ - (required) An AWS Account ID to add create volume permissions -}
     , _snapshot_id :: !(TF.Attribute s "snapshot_id" Text)
     {- ^ - (required) A snapshot ID -}
@@ -27114,8 +27600,9 @@ instance HasSnapshotId (SnapshotCreateVolumePermissionResource s) Text where
              (\s a -> s { _snapshot_id = a } :: SnapshotCreateVolumePermissionResource s)
 
 instance HasComputedId (SnapshotCreateVolumePermissionResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SnapshotCreateVolumePermissionResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 snapshotCreateVolumePermissionResource :: TF.Resource TF.AWS (SnapshotCreateVolumePermissionResource s)
 snapshotCreateVolumePermissionResource =
@@ -27134,7 +27621,7 @@ avoid this problem, just specify the full ARN, e.g.
 @arn:aws:iam::123456789012:root@
 -}
 data SnsTopicPolicyResource s = SnsTopicPolicyResource {
-      _arn    :: !(TF.Attribute s "arn" Text)
+      _arn :: !(TF.Attribute s "arn" Text)
     {- ^ (Required) The ARN of the SNS topic -}
     , _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The fully-formed AWS policy as JSON -}
@@ -27175,11 +27662,11 @@ Provides an SNS topic resource
 data SnsTopicResource s = SnsTopicResource {
       _delivery_policy :: !(TF.Attribute s "delivery_policy" Text)
     {- ^ (Optional) The SNS delivery policy -}
-    , _display_name    :: !(TF.Attribute s "display_name" Text)
+    , _display_name :: !(TF.Attribute s "display_name" Text)
     {- ^ (Optional) The display name for the SNS topic -}
-    , _name            :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The friendly name for the SNS topic -}
-    , _policy          :: !(TF.Attribute s "policy" Text)
+    , _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Optional) The fully-formed AWS policy as JSON -}
     } deriving (Show, Eq)
 
@@ -27220,12 +27707,14 @@ instance HasPolicy (SnsTopicResource s) Text where
              (\s a -> s { _policy = a } :: SnsTopicResource s)
 
 instance HasComputedArn (SnsTopicResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (SnsTopicResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (SnsTopicResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SnsTopicResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 snsTopicResource :: TF.Resource TF.AWS (SnsTopicResource s)
 snsTopicResource =
@@ -27624,7 +28113,7 @@ Allows you to set a policy of an SQS Queue while referencing ARN of the
 queue within the policy.
 -}
 data SqsQueuePolicyResource s = SqsQueuePolicyResource {
-      _policy    :: !(TF.Attribute s "policy" Text)
+      _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Required) The JSON policy for the SQS queue -}
     , _queue_url :: !(TF.Attribute s "queue_url" Text)
     {- ^ (Required) The URL of the SQS Queue to which to attach the policy -}
@@ -27810,12 +28299,14 @@ instance HasVisibilityTimeoutSeconds (SqsQueueResource s) Text where
              (\s a -> s { _visibility_timeout_seconds = a } :: SqsQueueResource s)
 
 instance HasComputedArn (SqsQueueResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (SqsQueueResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (SqsQueueResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SqsQueueResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 sqsQueueResource :: TF.Resource TF.AWS (SqsQueueResource s)
 sqsQueueResource =
@@ -27843,13 +28334,13 @@ Registers an on-premises server or virtual machine with Amazon EC2 so that
 it can be managed using Run Command.
 -}
 data SsmActivationResource s = SsmActivationResource {
-      _description        :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s "description" Text)
     {- ^ (Optional) The description of the resource that you want to register. -}
-    , _expiration_date    :: !(TF.Attribute s "expiration_date" Text)
+    , _expiration_date :: !(TF.Attribute s "expiration_date" Text)
     {- ^ (Optional) The date by which this activation request should expire. The default value is 24 hours. -}
-    , _iam_role           :: !(TF.Attribute s "iam_role" Text)
+    , _iam_role :: !(TF.Attribute s "iam_role" Text)
     {- ^ (Required) The IAM Role to attach to the managed instance. -}
-    , _name               :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The default name of the registerd managed instance. -}
     , _registration_limit :: !(TF.Attribute s "registration_limit" Text)
     {- ^ (Optional) The maximum number of managed instances you want to register. The default value is 1 instance. -}
@@ -27900,36 +28391,44 @@ instance HasRegistrationLimit (SsmActivationResource s) Text where
              (\s a -> s { _registration_limit = a } :: SsmActivationResource s)
 
 instance HasComputedActivationCode (SsmActivationResource s) Text where
-    computedActivationCode =
-        to (\x -> TF.Computed (TF.referenceKey x) "activation_code")
+    type HasComputedActivationCodeThread (SsmActivationResource s) Text = s
+
+    computedActivationCode = to (\_ -> TF.Computed "activation_code")
 
 instance HasComputedDescription (SsmActivationResource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (SsmActivationResource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedExpirationDate (SsmActivationResource s) Text where
-    computedExpirationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "expiration_date")
+    type HasComputedExpirationDateThread (SsmActivationResource s) Text = s
+
+    computedExpirationDate = to (\_ -> TF.Computed "expiration_date")
 
 instance HasComputedExpired (SsmActivationResource s) Text where
-    computedExpired =
-        to (\x -> TF.Computed (TF.referenceKey x) "expired")
+    type HasComputedExpiredThread (SsmActivationResource s) Text = s
+
+    computedExpired = to (\_ -> TF.Computed "expired")
 
 instance HasComputedIamRole (SsmActivationResource s) Text where
-    computedIamRole =
-        to (\x -> TF.Computed (TF.referenceKey x) "iam_role")
+    type HasComputedIamRoleThread (SsmActivationResource s) Text = s
+
+    computedIamRole = to (\_ -> TF.Computed "iam_role")
 
 instance HasComputedName (SsmActivationResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (SsmActivationResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedRegistrationCount (SsmActivationResource s) Text where
-    computedRegistrationCount =
-        to (\x -> TF.Computed (TF.referenceKey x) "registration_count")
+    type HasComputedRegistrationCountThread (SsmActivationResource s) Text = s
+
+    computedRegistrationCount = to (\_ -> TF.Computed "registration_count")
 
 instance HasComputedRegistrationLimit (SsmActivationResource s) Text where
-    computedRegistrationLimit =
-        to (\x -> TF.Computed (TF.referenceKey x) "registration_limit")
+    type HasComputedRegistrationLimitThread (SsmActivationResource s) Text = s
+
+    computedRegistrationLimit = to (\_ -> TF.Computed "registration_limit")
 
 ssmActivationResource :: TF.Resource TF.AWS (SsmActivationResource s)
 ssmActivationResource =
@@ -27947,21 +28446,21 @@ ssmActivationResource =
 Associates an SSM Document to an instance or EC2 tag.
 -}
 data SsmAssociationResource s = SsmAssociationResource {
-      _association_name    :: !(TF.Attribute s "association_name" Text)
+      _association_name :: !(TF.Attribute s "association_name" Text)
     {- ^ (Optional) The descriptive name for the association. -}
-    , _document_version    :: !(TF.Attribute s "document_version" Text)
+    , _document_version :: !(TF.Attribute s "document_version" Text)
     {- ^ (Optional) The document version you want to associate with the target(s). Can be a specific version or the default version. -}
-    , _instance_id         :: !(TF.Attribute s "instance_id" Text)
+    , _instance_id :: !(TF.Attribute s "instance_id" Text)
     {- ^ (Optional) The instance ID to apply an SSM document to. -}
-    , _name                :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the SSM document to apply. -}
-    , _output_location     :: !(TF.Attribute s "output_location" Text)
+    , _output_location :: !(TF.Attribute s "output_location" Text)
     {- ^ (Optional) An output location block. Output Location is documented below. -}
-    , _parameters          :: !(TF.Attribute s "parameters" Text)
+    , _parameters :: !(TF.Attribute s "parameters" Text)
     {- ^ (Optional) A block of arbitrary string parameters to pass to the SSM document. -}
     , _schedule_expression :: !(TF.Attribute s "schedule_expression" Text)
     {- ^ (Optional) A cron expression when the association will be applied to the target(s). -}
-    , _targets             :: !(TF.Attribute s "targets" Text)
+    , _targets :: !(TF.Attribute s "targets" Text)
     {- ^ (Optional) A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets. -}
     } deriving (Show, Eq)
 
@@ -28034,16 +28533,19 @@ instance HasTargets (SsmAssociationResource s) Text where
              (\s a -> s { _targets = a } :: SsmAssociationResource s)
 
 instance HasComputedInstanceIds (SsmAssociationResource s) Text where
-    computedInstanceIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_ids")
+    type HasComputedInstanceIdsThread (SsmAssociationResource s) Text = s
+
+    computedInstanceIds = to (\_ -> TF.Computed "instance_ids")
 
 instance HasComputedName (SsmAssociationResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (SsmAssociationResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedParameters (SsmAssociationResource s) Text where
-    computedParameters =
-        to (\x -> TF.Computed (TF.referenceKey x) "parameters")
+    type HasComputedParametersThread (SsmAssociationResource s) Text = s
+
+    computedParameters = to (\_ -> TF.Computed "parameters")
 
 ssmAssociationResource :: TF.Resource TF.AWS (SsmAssociationResource s)
 ssmAssociationResource =
@@ -28069,13 +28571,13 @@ once created, see
 resource.
 -}
 data SsmDocumentResource s = SsmDocumentResource {
-      _content       :: !(TF.Attribute s "content" Text)
+      _content :: !(TF.Attribute s "content" Text)
     {- ^ (Required) The json content of the document. -}
     , _document_type :: !(TF.Attribute s "document_type" Text)
     {- ^ (Required) The type of the document. Valid document types include: @Command@ , @Policy@ and @Automation@ -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the document. -}
-    , _permissions   :: !(TF.Attribute s "permissions" Text)
+    , _permissions :: !(TF.Attribute s "permissions" Text)
     {- ^ (Optional) Additional Permissions to attach to the document. See <#permissions> below for details. -}
     } deriving (Show, Eq)
 
@@ -28116,64 +28618,79 @@ instance HasPermissions (SsmDocumentResource s) Text where
              (\s a -> s { _permissions = a } :: SsmDocumentResource s)
 
 instance HasComputedContent (SsmDocumentResource s) Text where
-    computedContent =
-        to (\x -> TF.Computed (TF.referenceKey x) "content")
+    type HasComputedContentThread (SsmDocumentResource s) Text = s
+
+    computedContent = to (\_ -> TF.Computed "content")
 
 instance HasComputedCreatedDate (SsmDocumentResource s) Text where
-    computedCreatedDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_date")
+    type HasComputedCreatedDateThread (SsmDocumentResource s) Text = s
+
+    computedCreatedDate = to (\_ -> TF.Computed "created_date")
 
 instance HasComputedDefaultVersion (SsmDocumentResource s) Text where
-    computedDefaultVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_version")
+    type HasComputedDefaultVersionThread (SsmDocumentResource s) Text = s
+
+    computedDefaultVersion = to (\_ -> TF.Computed "default_version")
 
 instance HasComputedDescription (SsmDocumentResource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (SsmDocumentResource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedDocumentType (SsmDocumentResource s) Text where
-    computedDocumentType =
-        to (\x -> TF.Computed (TF.referenceKey x) "document_type")
+    type HasComputedDocumentTypeThread (SsmDocumentResource s) Text = s
+
+    computedDocumentType = to (\_ -> TF.Computed "document_type")
 
 instance HasComputedHash (SsmDocumentResource s) Text where
-    computedHash =
-        to (\x -> TF.Computed (TF.referenceKey x) "hash")
+    type HasComputedHashThread (SsmDocumentResource s) Text = s
+
+    computedHash = to (\_ -> TF.Computed "hash")
 
 instance HasComputedHashType (SsmDocumentResource s) Text where
-    computedHashType =
-        to (\x -> TF.Computed (TF.referenceKey x) "hash_type")
+    type HasComputedHashTypeThread (SsmDocumentResource s) Text = s
+
+    computedHashType = to (\_ -> TF.Computed "hash_type")
 
 instance HasComputedLatestVersion (SsmDocumentResource s) Text where
-    computedLatestVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "latest_version")
+    type HasComputedLatestVersionThread (SsmDocumentResource s) Text = s
+
+    computedLatestVersion = to (\_ -> TF.Computed "latest_version")
 
 instance HasComputedName (SsmDocumentResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (SsmDocumentResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedOwner (SsmDocumentResource s) Text where
-    computedOwner =
-        to (\x -> TF.Computed (TF.referenceKey x) "owner")
+    type HasComputedOwnerThread (SsmDocumentResource s) Text = s
+
+    computedOwner = to (\_ -> TF.Computed "owner")
 
 instance HasComputedParameter (SsmDocumentResource s) Text where
-    computedParameter =
-        to (\x -> TF.Computed (TF.referenceKey x) "parameter")
+    type HasComputedParameterThread (SsmDocumentResource s) Text = s
+
+    computedParameter = to (\_ -> TF.Computed "parameter")
 
 instance HasComputedPermissions (SsmDocumentResource s) Text where
-    computedPermissions =
-        to (\x -> TF.Computed (TF.referenceKey x) "permissions")
+    type HasComputedPermissionsThread (SsmDocumentResource s) Text = s
+
+    computedPermissions = to (\_ -> TF.Computed "permissions")
 
 instance HasComputedPlatformTypes (SsmDocumentResource s) Text where
-    computedPlatformTypes =
-        to (\x -> TF.Computed (TF.referenceKey x) "platform_types")
+    type HasComputedPlatformTypesThread (SsmDocumentResource s) Text = s
+
+    computedPlatformTypes = to (\_ -> TF.Computed "platform_types")
 
 instance HasComputedSchemaVersion (SsmDocumentResource s) Text where
-    computedSchemaVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "schema_version")
+    type HasComputedSchemaVersionThread (SsmDocumentResource s) Text = s
+
+    computedSchemaVersion = to (\_ -> TF.Computed "schema_version")
 
 instance HasComputedStatus (SsmDocumentResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (SsmDocumentResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 ssmDocumentResource :: TF.Resource TF.AWS (SsmDocumentResource s)
 ssmDocumentResource =
@@ -28247,8 +28764,9 @@ instance HasSchedule (SsmMaintenanceWindowResource s) Text where
              (\s a -> s { _schedule = a } :: SsmMaintenanceWindowResource s)
 
 instance HasComputedId (SsmMaintenanceWindowResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SsmMaintenanceWindowResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 ssmMaintenanceWindowResource :: TF.Resource TF.AWS (SsmMaintenanceWindowResource s)
 ssmMaintenanceWindowResource =
@@ -28268,11 +28786,11 @@ Provides an SSM Maintenance Window Target resource
 data SsmMaintenanceWindowTargetResource s = SsmMaintenanceWindowTargetResource {
       _owner_information :: !(TF.Attribute s "owner_information" Text)
     {- ^ (Optional) User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window. -}
-    , _resource_type     :: !(TF.Attribute s "resource_type" Text)
+    , _resource_type :: !(TF.Attribute s "resource_type" Text)
     {- ^ (Required) The type of target being registered with the Maintenance Window. Possible values @INSTANCE@ . -}
-    , _targets           :: !(TF.Attribute s "targets" Text)
+    , _targets :: !(TF.Attribute s "targets" Text)
     {- ^ (Required) The targets (either instances or tags). Instances are specified using Key=instanceids,Values=instanceid1,instanceid2. Tags are specified using Key=tag name,Values=tag value. -}
-    , _window_id         :: !(TF.Attribute s "window_id" Text)
+    , _window_id :: !(TF.Attribute s "window_id" Text)
     {- ^ (Required) The Id of the maintenance window to register the target with. -}
     } deriving (Show, Eq)
 
@@ -28313,8 +28831,9 @@ instance HasWindowId (SsmMaintenanceWindowTargetResource s) Text where
              (\s a -> s { _window_id = a } :: SsmMaintenanceWindowTargetResource s)
 
 instance HasComputedId (SsmMaintenanceWindowTargetResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SsmMaintenanceWindowTargetResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 ssmMaintenanceWindowTargetResource :: TF.Resource TF.AWS (SsmMaintenanceWindowTargetResource s)
 ssmMaintenanceWindowTargetResource =
@@ -28331,25 +28850,25 @@ ssmMaintenanceWindowTargetResource =
 Provides an SSM Maintenance Window Task resource
 -}
 data SsmMaintenanceWindowTaskResource s = SsmMaintenanceWindowTaskResource {
-      _logging_info     :: !(TF.Attribute s "logging_info" Text)
+      _logging_info :: !(TF.Attribute s "logging_info" Text)
     {- ^ (Optional) A structure containing information about an Amazon S3 bucket to write instance-level logs to. Documented below. -}
-    , _max_concurrency  :: !(TF.Attribute s "max_concurrency" Text)
+    , _max_concurrency :: !(TF.Attribute s "max_concurrency" Text)
     {- ^ (Required) The maximum number of targets this task can be run for in parallel. -}
-    , _max_errors       :: !(TF.Attribute s "max_errors" Text)
+    , _max_errors :: !(TF.Attribute s "max_errors" Text)
     {- ^ (Required) The maximum number of errors allowed before this task stops being scheduled. -}
-    , _priority         :: !(TF.Attribute s "priority" Text)
+    , _priority :: !(TF.Attribute s "priority" Text)
     {- ^ (Optional) The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel. -}
     , _service_role_arn :: !(TF.Attribute s "service_role_arn" Text)
     {- ^ (Required) The role that should be assumed when executing the task. -}
-    , _targets          :: !(TF.Attribute s "targets" Text)
+    , _targets :: !(TF.Attribute s "targets" Text)
     {- ^ (Required) The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2. -}
-    , _task_arn         :: !(TF.Attribute s "task_arn" Text)
+    , _task_arn :: !(TF.Attribute s "task_arn" Text)
     {- ^ (Required) The ARN of the task to execute. -}
-    , _task_parameters  :: !(TF.Attribute s "task_parameters" Text)
+    , _task_parameters :: !(TF.Attribute s "task_parameters" Text)
     {- ^ (Optional) A structure containing information about parameters required by the particular @task_arn@ . Documented below. -}
-    , _task_type        :: !(TF.Attribute s "task_type" Text)
+    , _task_type :: !(TF.Attribute s "task_type" Text)
     {- ^ (Required) The type of task being registered. The only allowed value is @RUN_COMMAND@ . -}
-    , _window_id        :: !(TF.Attribute s "window_id" Text)
+    , _window_id :: !(TF.Attribute s "window_id" Text)
     {- ^ (Required) The Id of the maintenance window to register the task with. -}
     } deriving (Show, Eq)
 
@@ -28438,8 +28957,9 @@ instance HasWindowId (SsmMaintenanceWindowTaskResource s) Text where
              (\s a -> s { _window_id = a } :: SsmMaintenanceWindowTaskResource s)
 
 instance HasComputedId (SsmMaintenanceWindowTaskResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SsmMaintenanceWindowTaskResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 ssmMaintenanceWindowTaskResource :: TF.Resource TF.AWS (SsmMaintenanceWindowTaskResource s)
 ssmMaintenanceWindowTaskResource =
@@ -28462,15 +28982,15 @@ ssmMaintenanceWindowTaskResource =
 Provides an SSM Parameter resource.
 -}
 data SsmParameterResource s = SsmParameterResource {
-      _key_id    :: !(TF.Attribute s "key_id" Text)
+      _key_id :: !(TF.Attribute s "key_id" Text)
     {- ^ (Optional) The KMS key id or arn for encrypting a SecureString. -}
-    , _name      :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the parameter. -}
     , _overwrite :: !(TF.Attribute s "overwrite" Text)
     {- ^ (Optional) Overwrite an existing parameter. If not specified, will default to @false@ . -}
-    , _type'     :: !(TF.Attribute s "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of the parameter. Valid types are @String@ , @StringList@ and @SecureString@ . -}
-    , _value     :: !(TF.Attribute s "value" Text)
+    , _value :: !(TF.Attribute s "value" Text)
     {- ^ (Required) The value of the parameter. -}
     } deriving (Show, Eq)
 
@@ -28519,20 +29039,24 @@ instance HasValue (SsmParameterResource s) Text where
              (\s a -> s { _value = a } :: SsmParameterResource s)
 
 instance HasComputedArn (SsmParameterResource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (SsmParameterResource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedName (SsmParameterResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (SsmParameterResource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedType' (SsmParameterResource s) Text where
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+    type HasComputedType'Thread (SsmParameterResource s) Text = s
+
+    computedType' = to (\_ -> TF.Computed "type")
 
 instance HasComputedValue (SsmParameterResource s) Text where
-    computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
+    type HasComputedValueThread (SsmParameterResource s) Text = s
+
+    computedValue = to (\_ -> TF.Computed "value")
 
 ssmParameterResource :: TF.Resource TF.AWS (SsmParameterResource s)
 ssmParameterResource =
@@ -28639,8 +29163,9 @@ instance HasRejectedPatches (SsmPatchBaselineResource s) Text where
              (\s a -> s { _rejected_patches = a } :: SsmPatchBaselineResource s)
 
 instance HasComputedId (SsmPatchBaselineResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SsmPatchBaselineResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 ssmPatchBaselineResource :: TF.Resource TF.AWS (SsmPatchBaselineResource s)
 ssmPatchBaselineResource =
@@ -28688,8 +29213,9 @@ instance HasPatchGroup (SsmPatchGroupResource s) Text where
              (\s a -> s { _patch_group = a } :: SsmPatchGroupResource s)
 
 instance HasComputedId (SsmPatchGroupResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SsmPatchGroupResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 ssmPatchGroupResource :: TF.Resource TF.AWS (SsmPatchGroupResource s)
 ssmPatchGroupResource =
@@ -28706,9 +29232,9 @@ Provides a Step Function State Machine resource
 data StateMachineResource s = StateMachineResource {
       _definition :: !(TF.Attribute s "definition" Text)
     {- ^ (Required) The Amazon States Language definition of the state machine. -}
-    , _name       :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the state machine. -}
-    , _role_arn   :: !(TF.Attribute s "role_arn" Text)
+    , _role_arn :: !(TF.Attribute s "role_arn" Text)
     {- ^ (Required) The Amazon Resource Name (ARN) of the IAM role to use for this state machine. -}
     } deriving (Show, Eq)
 
@@ -28741,16 +29267,19 @@ instance HasRoleArn (StateMachineResource s) Text where
              (\s a -> s { _role_arn = a } :: StateMachineResource s)
 
 instance HasComputedCreationDate (StateMachineResource s) Text where
-    computedCreationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_date")
+    type HasComputedCreationDateThread (StateMachineResource s) Text = s
+
+    computedCreationDate = to (\_ -> TF.Computed "creation_date")
 
 instance HasComputedId (StateMachineResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (StateMachineResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedStatus (StateMachineResource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (StateMachineResource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 stateMachineResource :: TF.Resource TF.AWS (StateMachineResource s)
 stateMachineResource =
@@ -28843,28 +29372,34 @@ instance HasVpcId (SubnetResource s) Text where
              (\s a -> s { _vpc_id = a } :: SubnetResource s)
 
 instance HasComputedAvailabilityZone (SubnetResource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (SubnetResource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedCidrBlock (SubnetResource s) TF.CIDR where
-    computedCidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_block")
+    type HasComputedCidrBlockThread (SubnetResource s) TF.CIDR = s
+
+    computedCidrBlock = to (\_ -> TF.Computed "cidr_block")
 
 instance HasComputedId (SubnetResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (SubnetResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedIpv6AssociationId (SubnetResource s) Text where
-    computedIpv6AssociationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_association_id")
+    type HasComputedIpv6AssociationIdThread (SubnetResource s) Text = s
+
+    computedIpv6AssociationId = to (\_ -> TF.Computed "ipv6_association_id")
 
 instance HasComputedIpv6CidrBlock (SubnetResource s) TF.CIDR where
-    computedIpv6CidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_cidr_block")
+    type HasComputedIpv6CidrBlockThread (SubnetResource s) TF.CIDR = s
+
+    computedIpv6CidrBlock = to (\_ -> TF.Computed "ipv6_cidr_block")
 
 instance HasComputedVpcId (SubnetResource s) Text where
-    computedVpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_id")
+    type HasComputedVpcIdThread (SubnetResource s) Text = s
+
+    computedVpcId = to (\_ -> TF.Computed "vpc_id")
 
 subnetResource :: TF.Resource TF.AWS (SubnetResource s)
 subnetResource =
@@ -28890,15 +29425,15 @@ cannot be mixed with external @aws_ebs_volume@ + @aws_ebs_volume_attachment@
 resources for a given instance.
 -}
 data VolumeAttachmentResource s = VolumeAttachmentResource {
-      _device_name  :: !(TF.Attribute s "device_name" Text)
+      _device_name :: !(TF.Attribute s "device_name" Text)
     {- ^ (Required) The device name to expose to the instance (for example, @/dev/sdh@ or @xvdh@ ) -}
     , _force_detach :: !(TF.Attribute s "force_detach" Text)
     {- ^ (Optional, Boolean) Set to @true@ if you want to force the volume to detach. Useful if previous attempts failed, but use this option only as a last resort, as this can result in data loss . See <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html> for more information. -}
-    , _instance_id  :: !(TF.Attribute s "instance_id" Text)
+    , _instance_id :: !(TF.Attribute s "instance_id" Text)
     {- ^ (Required) ID of the Instance to attach to -}
     , _skip_destroy :: !(TF.Attribute s "skip_destroy" Text)
     {- ^ (Optional, Boolean) Set this to true if you do not wish to detach the volume from the instance to which it is attached at destroy time, and instead just remove the attachment from Terraform state. This is useful when destroying an instance which has volumes created by some other means attached. -}
-    , _volume_id    :: !(TF.Attribute s "volume_id" Text)
+    , _volume_id :: !(TF.Attribute s "volume_id" Text)
     {- ^ (Required) ID of the Volume to be attached -}
     } deriving (Show, Eq)
 
@@ -28947,16 +29482,19 @@ instance HasVolumeId (VolumeAttachmentResource s) Text where
              (\s a -> s { _volume_id = a } :: VolumeAttachmentResource s)
 
 instance HasComputedDeviceName (VolumeAttachmentResource s) Text where
-    computedDeviceName =
-        to (\x -> TF.Computed (TF.referenceKey x) "device_name")
+    type HasComputedDeviceNameThread (VolumeAttachmentResource s) Text = s
+
+    computedDeviceName = to (\_ -> TF.Computed "device_name")
 
 instance HasComputedInstanceId (VolumeAttachmentResource s) Text where
-    computedInstanceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_id")
+    type HasComputedInstanceIdThread (VolumeAttachmentResource s) Text = s
+
+    computedInstanceId = to (\_ -> TF.Computed "instance_id")
 
 instance HasComputedVolumeId (VolumeAttachmentResource s) Text where
-    computedVolumeId =
-        to (\x -> TF.Computed (TF.referenceKey x) "volume_id")
+    type HasComputedVolumeIdThread (VolumeAttachmentResource s) Text = s
+
+    computedVolumeId = to (\_ -> TF.Computed "volume_id")
 
 volumeAttachmentResource :: TF.Resource TF.AWS (VolumeAttachmentResource s)
 volumeAttachmentResource =
@@ -28976,7 +29514,7 @@ Provides a VPC DHCP Options Association resource.
 data VpcDhcpOptionsAssociationResource s = VpcDhcpOptionsAssociationResource {
       _dhcp_options_id :: !(TF.Attribute s "dhcp_options_id" Text)
     {- ^ (Required) The ID of the DHCP Options Set to associate to the VPC. -}
-    , _vpc_id          :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The ID of the VPC to which we would like to associate a DHCP Options Set. -}
     } deriving (Show, Eq)
 
@@ -29013,17 +29551,17 @@ vpcDhcpOptionsAssociationResource =
 Provides a VPC DHCP Options resource.
 -}
 data VpcDhcpOptionsResource s = VpcDhcpOptionsResource {
-      _domain_name          :: !(TF.Attribute s "domain_name" Text)
+      _domain_name :: !(TF.Attribute s "domain_name" Text)
     {- ^ (Optional) the suffix domain name to use by default when resolving non Fully Qualified Domain Names. In other words, this is what ends up being the @search@ value in the @/etc/resolv.conf@ file. -}
-    , _domain_name_servers  :: !(TF.Attribute s "domain_name_servers" Text)
+    , _domain_name_servers :: !(TF.Attribute s "domain_name_servers" Text)
     {- ^ (Optional) List of name servers to configure in @/etc/resolv.conf@ . If you want to use the default AWS nameservers you should set this to @AmazonProvidedDNS@ . -}
     , _netbios_name_servers :: !(TF.Attribute s "netbios_name_servers" Text)
     {- ^ (Optional) List of NETBIOS name servers. -}
-    , _netbios_node_type    :: !(TF.Attribute s "netbios_node_type" Text)
+    , _netbios_node_type :: !(TF.Attribute s "netbios_node_type" Text)
     {- ^ (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt> . -}
-    , _ntp_servers          :: !(TF.Attribute s "ntp_servers" Text)
+    , _ntp_servers :: !(TF.Attribute s "ntp_servers" Text)
     {- ^ (Optional) List of NTP servers to configure. -}
-    , _tags                 :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -29103,13 +29641,13 @@ Doing so will cause a conflict of associations and will overwrite the
 association.
 -}
 data VpcEndpointResource s = VpcEndpointResource {
-      _policy          :: !(TF.Attribute s "policy" Text)
+      _policy :: !(TF.Attribute s "policy" Text)
     {- ^ (Optional) A policy to attach to the endpoint that controls access to the service. -}
     , _route_table_ids :: !(TF.Attribute s "route_table_ids" Text)
     {- ^ (Optional) One or more route table IDs. -}
-    , _service_name    :: !(TF.Attribute s "service_name" Text)
+    , _service_name :: !(TF.Attribute s "service_name" Text)
     {- ^ (Required) The AWS service name, in the form @com.amazonaws.region.service@ . -}
-    , _vpc_id          :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The ID of the VPC in which the endpoint will be used. -}
     } deriving (Show, Eq)
 
@@ -29150,16 +29688,19 @@ instance HasVpcId (VpcEndpointResource s) Text where
              (\s a -> s { _vpc_id = a } :: VpcEndpointResource s)
 
 instance HasComputedCidrBlocks (VpcEndpointResource s) Text where
-    computedCidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
+    type HasComputedCidrBlocksThread (VpcEndpointResource s) Text = s
+
+    computedCidrBlocks = to (\_ -> TF.Computed "cidr_blocks")
 
 instance HasComputedId (VpcEndpointResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (VpcEndpointResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedPrefixListId (VpcEndpointResource s) Text where
-    computedPrefixListId =
-        to (\x -> TF.Computed (TF.referenceKey x) "prefix_list_id")
+    type HasComputedPrefixListIdThread (VpcEndpointResource s) Text = s
+
+    computedPrefixListId = to (\_ -> TF.Computed "prefix_list_id")
 
 vpcEndpointResource :: TF.Resource TF.AWS (VpcEndpointResource s)
 vpcEndpointResource =
@@ -29184,7 +29725,7 @@ Doing so will cause a conflict of associations and will overwrite the
 association.
 -}
 data VpcEndpointRouteTableAssociationResource s = VpcEndpointRouteTableAssociationResource {
-      _route_table_id  :: !(TF.Attribute s "route_table_id" Text)
+      _route_table_id :: !(TF.Attribute s "route_table_id" Text)
     {- ^ (Required) The ID of the routing table to be associated with the VPC endpoint. -}
     , _vpc_endpoint_id :: !(TF.Attribute s "vpc_endpoint_id" Text)
     {- ^ (Required) The ID of the VPC endpoint with which the routing table will be associated. -}
@@ -29211,8 +29752,9 @@ instance HasVpcEndpointId (VpcEndpointRouteTableAssociationResource s) Text wher
              (\s a -> s { _vpc_endpoint_id = a } :: VpcEndpointRouteTableAssociationResource s)
 
 instance HasComputedId (VpcEndpointRouteTableAssociationResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (VpcEndpointRouteTableAssociationResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 vpcEndpointRouteTableAssociationResource :: TF.Resource TF.AWS (VpcEndpointRouteTableAssociationResource s)
 vpcEndpointRouteTableAssociationResource =
@@ -29289,21 +29831,21 @@ connection and use the @aws_vpc_peering_connection_accepter@ resource to
 manage the accepter's side of the connection.
 -}
 data VpcPeeringConnectionResource s = VpcPeeringConnectionResource {
-      _accepter      :: !(TF.Attribute s "accepter" Text)
+      _accepter :: !(TF.Attribute s "accepter" Text)
     {- ^ (Optional) - An optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that accepts the peering connection (a maximum of one). -}
-    , _auto_accept   :: !(TF.Attribute s "auto_accept" Text)
+    , _auto_accept :: !(TF.Attribute s "auto_accept" Text)
     {- ^ (Optional) Accept the peering (both VPCs need to be in the same AWS account). -}
     , _peer_owner_id :: !(TF.Attribute s "peer_owner_id" Text)
     {- ^ (Optional) The AWS account ID of the owner of the peer VPC. Defaults to the account ID the </docs/providers/aws/index.html> is currently connected to. -}
-    , _peer_region   :: !(TF.Attribute s "peer_region" TF.Region)
+    , _peer_region :: !(TF.Attribute s "peer_region" TF.Region)
     {- ^ (Optional) The region of the accepter VPC of the [VPC Peering Connection]. @auto_accept@ must be @false@ , and use the @aws_vpc_peering_connection_accepter@ to manage the accepter side. -}
-    , _peer_vpc_id   :: !(TF.Attribute s "peer_vpc_id" Text)
+    , _peer_vpc_id :: !(TF.Attribute s "peer_vpc_id" Text)
     {- ^ (Required) The ID of the VPC with which you are creating the VPC Peering Connection. -}
-    , _requester     :: !(TF.Attribute s "requester" Text)
+    , _requester :: !(TF.Attribute s "requester" Text)
     {- ^ (Optional) - A optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that requests the peering connection (a maximum of one). -}
-    , _tags          :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_id        :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The ID of the requester VPC. -}
     } deriving (Show, Eq)
 
@@ -29481,52 +30023,64 @@ instance HasTags (VpcResource s) TF.Tags where
              (\s a -> s { _tags = a } :: VpcResource s)
 
 instance HasComputedCidrBlock (VpcResource s) TF.CIDR where
-    computedCidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_block")
+    type HasComputedCidrBlockThread (VpcResource s) TF.CIDR = s
+
+    computedCidrBlock = to (\_ -> TF.Computed "cidr_block")
 
 instance HasComputedDefaultNetworkAclId (VpcResource s) Text where
-    computedDefaultNetworkAclId =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_network_acl_id")
+    type HasComputedDefaultNetworkAclIdThread (VpcResource s) Text = s
+
+    computedDefaultNetworkAclId = to (\_ -> TF.Computed "default_network_acl_id")
 
 instance HasComputedDefaultRouteTableId (VpcResource s) Text where
-    computedDefaultRouteTableId =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_route_table_id")
+    type HasComputedDefaultRouteTableIdThread (VpcResource s) Text = s
+
+    computedDefaultRouteTableId = to (\_ -> TF.Computed "default_route_table_id")
 
 instance HasComputedDefaultSecurityGroupId (VpcResource s) Text where
-    computedDefaultSecurityGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_security_group_id")
+    type HasComputedDefaultSecurityGroupIdThread (VpcResource s) Text = s
+
+    computedDefaultSecurityGroupId = to (\_ -> TF.Computed "default_security_group_id")
 
 instance HasComputedEnableClassiclink (VpcResource s) TF.Bool where
-    computedEnableClassiclink =
-        to (\x -> TF.Computed (TF.referenceKey x) "enable_classiclink")
+    type HasComputedEnableClassiclinkThread (VpcResource s) TF.Bool = s
+
+    computedEnableClassiclink = to (\_ -> TF.Computed "enable_classiclink")
 
 instance HasComputedEnableDnsHostnames (VpcResource s) TF.Bool where
-    computedEnableDnsHostnames =
-        to (\x -> TF.Computed (TF.referenceKey x) "enable_dns_hostnames")
+    type HasComputedEnableDnsHostnamesThread (VpcResource s) TF.Bool = s
+
+    computedEnableDnsHostnames = to (\_ -> TF.Computed "enable_dns_hostnames")
 
 instance HasComputedEnableDnsSupport (VpcResource s) TF.Bool where
-    computedEnableDnsSupport =
-        to (\x -> TF.Computed (TF.referenceKey x) "enable_dns_support")
+    type HasComputedEnableDnsSupportThread (VpcResource s) TF.Bool = s
+
+    computedEnableDnsSupport = to (\_ -> TF.Computed "enable_dns_support")
 
 instance HasComputedId (VpcResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (VpcResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedInstanceTenancy (VpcResource s) Text where
-    computedInstanceTenancy =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_tenancy")
+    type HasComputedInstanceTenancyThread (VpcResource s) Text = s
+
+    computedInstanceTenancy = to (\_ -> TF.Computed "instance_tenancy")
 
 instance HasComputedIpv6AssociationId (VpcResource s) Text where
-    computedIpv6AssociationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_association_id")
+    type HasComputedIpv6AssociationIdThread (VpcResource s) Text = s
+
+    computedIpv6AssociationId = to (\_ -> TF.Computed "ipv6_association_id")
 
 instance HasComputedIpv6CidrBlock (VpcResource s) TF.CIDR where
-    computedIpv6CidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_cidr_block")
+    type HasComputedIpv6CidrBlockThread (VpcResource s) TF.CIDR = s
+
+    computedIpv6CidrBlock = to (\_ -> TF.Computed "ipv6_cidr_block")
 
 instance HasComputedMainRouteTableId (VpcResource s) Text where
-    computedMainRouteTableId =
-        to (\x -> TF.Computed (TF.referenceKey x) "main_route_table_id")
+    type HasComputedMainRouteTableIdThread (VpcResource s) Text = s
+
+    computedMainRouteTableId = to (\_ -> TF.Computed "main_route_table_id")
 
 vpcResource :: TF.Resource TF.AWS (VpcResource s)
 vpcResource =
@@ -29553,13 +30107,13 @@ raw state as plain-text. </docs/state/sensitive-data.html> .
 data VpnConnectionResource s = VpnConnectionResource {
       _customer_gateway_id :: !(TF.Attribute s "customer_gateway_id" Text)
     {- ^ (Required) The ID of the customer gateway. -}
-    , _static_routes_only  :: !(TF.Attribute s "static_routes_only" Text)
+    , _static_routes_only :: !(TF.Attribute s "static_routes_only" Text)
     {- ^ (Optional, Default @false@ ) Whether the VPN connection uses static routes exclusively. Static routes must be used for devices that don't support BGP. -}
-    , _tags                :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) Tags to apply to the connection. -}
-    , _type'               :: !(TF.Attribute s "type" Text)
+    , _type' :: !(TF.Attribute s "type" Text)
     {- ^ (Required) The type of VPN connection. The only type AWS supports at this time is "ipsec.1". -}
-    , _vpn_gateway_id      :: !(TF.Attribute s "vpn_gateway_id" Text)
+    , _vpn_gateway_id :: !(TF.Attribute s "vpn_gateway_id" Text)
     {- ^ (Required) The ID of the virtual private gateway. -}
     } deriving (Show, Eq)
 
@@ -29608,80 +30162,99 @@ instance HasVpnGatewayId (VpnConnectionResource s) Text where
              (\s a -> s { _vpn_gateway_id = a } :: VpnConnectionResource s)
 
 instance HasComputedCustomerGatewayConfiguration (VpnConnectionResource s) Text where
-    computedCustomerGatewayConfiguration =
-        to (\x -> TF.Computed (TF.referenceKey x) "customer_gateway_configuration")
+    type HasComputedCustomerGatewayConfigurationThread (VpnConnectionResource s) Text = s
+
+    computedCustomerGatewayConfiguration = to (\_ -> TF.Computed "customer_gateway_configuration")
 
 instance HasComputedCustomerGatewayId (VpnConnectionResource s) Text where
-    computedCustomerGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "customer_gateway_id")
+    type HasComputedCustomerGatewayIdThread (VpnConnectionResource s) Text = s
+
+    computedCustomerGatewayId = to (\_ -> TF.Computed "customer_gateway_id")
 
 instance HasComputedId (VpnConnectionResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (VpnConnectionResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedStaticRoutesOnly (VpnConnectionResource s) Text where
-    computedStaticRoutesOnly =
-        to (\x -> TF.Computed (TF.referenceKey x) "static_routes_only")
+    type HasComputedStaticRoutesOnlyThread (VpnConnectionResource s) Text = s
+
+    computedStaticRoutesOnly = to (\_ -> TF.Computed "static_routes_only")
 
 instance HasComputedTags (VpnConnectionResource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (VpnConnectionResource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedTunnel1Address (VpnConnectionResource s) Text where
-    computedTunnel1Address =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel1_address")
+    type HasComputedTunnel1AddressThread (VpnConnectionResource s) Text = s
+
+    computedTunnel1Address = to (\_ -> TF.Computed "tunnel1_address")
 
 instance HasComputedTunnel1BgpAsn (VpnConnectionResource s) Text where
-    computedTunnel1BgpAsn =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel1_bgp_asn")
+    type HasComputedTunnel1BgpAsnThread (VpnConnectionResource s) Text = s
+
+    computedTunnel1BgpAsn = to (\_ -> TF.Computed "tunnel1_bgp_asn")
 
 instance HasComputedTunnel1BgpHoldtime (VpnConnectionResource s) Text where
-    computedTunnel1BgpHoldtime =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel1_bgp_holdtime")
+    type HasComputedTunnel1BgpHoldtimeThread (VpnConnectionResource s) Text = s
+
+    computedTunnel1BgpHoldtime = to (\_ -> TF.Computed "tunnel1_bgp_holdtime")
 
 instance HasComputedTunnel1CgwInsideAddress (VpnConnectionResource s) Text where
-    computedTunnel1CgwInsideAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel1_cgw_inside_address")
+    type HasComputedTunnel1CgwInsideAddressThread (VpnConnectionResource s) Text = s
+
+    computedTunnel1CgwInsideAddress = to (\_ -> TF.Computed "tunnel1_cgw_inside_address")
 
 instance HasComputedTunnel1PresharedKey (VpnConnectionResource s) Text where
-    computedTunnel1PresharedKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel1_preshared_key")
+    type HasComputedTunnel1PresharedKeyThread (VpnConnectionResource s) Text = s
+
+    computedTunnel1PresharedKey = to (\_ -> TF.Computed "tunnel1_preshared_key")
 
 instance HasComputedTunnel1VgwInsideAddress (VpnConnectionResource s) Text where
-    computedTunnel1VgwInsideAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel1_vgw_inside_address")
+    type HasComputedTunnel1VgwInsideAddressThread (VpnConnectionResource s) Text = s
+
+    computedTunnel1VgwInsideAddress = to (\_ -> TF.Computed "tunnel1_vgw_inside_address")
 
 instance HasComputedTunnel2Address (VpnConnectionResource s) Text where
-    computedTunnel2Address =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel2_address")
+    type HasComputedTunnel2AddressThread (VpnConnectionResource s) Text = s
+
+    computedTunnel2Address = to (\_ -> TF.Computed "tunnel2_address")
 
 instance HasComputedTunnel2BgpAsn (VpnConnectionResource s) Text where
-    computedTunnel2BgpAsn =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel2_bgp_asn")
+    type HasComputedTunnel2BgpAsnThread (VpnConnectionResource s) Text = s
+
+    computedTunnel2BgpAsn = to (\_ -> TF.Computed "tunnel2_bgp_asn")
 
 instance HasComputedTunnel2BgpHoldtime (VpnConnectionResource s) Text where
-    computedTunnel2BgpHoldtime =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel2_bgp_holdtime")
+    type HasComputedTunnel2BgpHoldtimeThread (VpnConnectionResource s) Text = s
+
+    computedTunnel2BgpHoldtime = to (\_ -> TF.Computed "tunnel2_bgp_holdtime")
 
 instance HasComputedTunnel2CgwInsideAddress (VpnConnectionResource s) Text where
-    computedTunnel2CgwInsideAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel2_cgw_inside_address")
+    type HasComputedTunnel2CgwInsideAddressThread (VpnConnectionResource s) Text = s
+
+    computedTunnel2CgwInsideAddress = to (\_ -> TF.Computed "tunnel2_cgw_inside_address")
 
 instance HasComputedTunnel2PresharedKey (VpnConnectionResource s) Text where
-    computedTunnel2PresharedKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel2_preshared_key")
+    type HasComputedTunnel2PresharedKeyThread (VpnConnectionResource s) Text = s
+
+    computedTunnel2PresharedKey = to (\_ -> TF.Computed "tunnel2_preshared_key")
 
 instance HasComputedTunnel2VgwInsideAddress (VpnConnectionResource s) Text where
-    computedTunnel2VgwInsideAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "tunnel2_vgw_inside_address")
+    type HasComputedTunnel2VgwInsideAddressThread (VpnConnectionResource s) Text = s
+
+    computedTunnel2VgwInsideAddress = to (\_ -> TF.Computed "tunnel2_vgw_inside_address")
 
 instance HasComputedType' (VpnConnectionResource s) Text where
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+    type HasComputedType'Thread (VpnConnectionResource s) Text = s
+
+    computedType' = to (\_ -> TF.Computed "type")
 
 instance HasComputedVpnGatewayId (VpnConnectionResource s) Text where
-    computedVpnGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpn_gateway_id")
+    type HasComputedVpnGatewayIdThread (VpnConnectionResource s) Text = s
+
+    computedVpnGatewayId = to (\_ -> TF.Computed "vpn_gateway_id")
 
 vpnConnectionResource :: TF.Resource TF.AWS (VpnConnectionResource s)
 vpnConnectionResource =
@@ -29726,12 +30299,14 @@ instance HasVpnConnectionId (VpnConnectionRouteResource s) Text where
              (\s a -> s { _vpn_connection_id = a } :: VpnConnectionRouteResource s)
 
 instance HasComputedDestinationCidrBlock (VpnConnectionRouteResource s) TF.CIDR where
-    computedDestinationCidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "destination_cidr_block")
+    type HasComputedDestinationCidrBlockThread (VpnConnectionRouteResource s) TF.CIDR = s
+
+    computedDestinationCidrBlock = to (\_ -> TF.Computed "destination_cidr_block")
 
 instance HasComputedVpnConnectionId (VpnConnectionRouteResource s) Text where
-    computedVpnConnectionId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpn_connection_id")
+    type HasComputedVpnConnectionIdThread (VpnConnectionRouteResource s) Text = s
+
+    computedVpnConnectionId = to (\_ -> TF.Computed "vpn_connection_id")
 
 vpnConnectionRouteResource :: TF.Resource TF.AWS (VpnConnectionRouteResource s)
 vpnConnectionRouteResource =
@@ -29750,7 +30325,7 @@ Virtual Private Gateway it creates to an existing VPC by setting the
 <vpn_gateway.html#vpc_id> attribute accordingly.
 -}
 data VpnGatewayAttachmentResource s = VpnGatewayAttachmentResource {
-      _vpc_id         :: !(TF.Attribute s "vpc_id" Text)
+      _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The ID of the VPC. -}
     , _vpn_gateway_id :: !(TF.Attribute s "vpn_gateway_id" Text)
     {- ^ (Required) The ID of the Virtual Private Gateway. -}
@@ -29777,12 +30352,14 @@ instance HasVpnGatewayId (VpnGatewayAttachmentResource s) Text where
              (\s a -> s { _vpn_gateway_id = a } :: VpnGatewayAttachmentResource s)
 
 instance HasComputedVpcId (VpnGatewayAttachmentResource s) Text where
-    computedVpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_id")
+    type HasComputedVpcIdThread (VpnGatewayAttachmentResource s) Text = s
+
+    computedVpcId = to (\_ -> TF.Computed "vpc_id")
 
 instance HasComputedVpnGatewayId (VpnGatewayAttachmentResource s) Text where
-    computedVpnGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpn_gateway_id")
+    type HasComputedVpnGatewayIdThread (VpnGatewayAttachmentResource s) Text = s
+
+    computedVpnGatewayId = to (\_ -> TF.Computed "vpn_gateway_id")
 
 vpnGatewayAttachmentResource :: TF.Resource TF.AWS (VpnGatewayAttachmentResource s)
 vpnGatewayAttachmentResource =
@@ -29799,9 +30376,9 @@ Provides a resource to create a VPC VPN Gateway.
 data VpnGatewayResource s = VpnGatewayResource {
       _availability_zone :: !(TF.Attribute s "availability_zone" TF.Zone)
     {- ^ (Optional) The Availability Zone for the virtual private gateway. -}
-    , _tags              :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _vpc_id            :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) The VPC ID to create in. -}
     } deriving (Show, Eq)
 
@@ -29834,8 +30411,9 @@ instance HasVpcId (VpnGatewayResource s) Text where
              (\s a -> s { _vpc_id = a } :: VpnGatewayResource s)
 
 instance HasComputedId (VpnGatewayResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (VpnGatewayResource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 vpnGatewayResource :: TF.Resource TF.AWS (VpnGatewayResource s)
 vpnGatewayResource =
@@ -29895,7 +30473,7 @@ Provides a WAF Byte Match Set Resource
 data WafByteMatchSetResource s = WafByteMatchSetResource {
       _byte_match_tuples :: !(TF.Attribute s "byte_match_tuples" Text)
     {- ^ - Specifies the bytes (typically a string that corresponds with ASCII characters) that you want to search for in web requests, the location in requests that you want to search, and other settings. -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the Byte Match Set. -}
     } deriving (Show, Eq)
 
@@ -29934,7 +30512,7 @@ Provides a WAF IPSet Resource
 data WafIpsetResource s = WafIpsetResource {
       _ip_set_descriptors :: !(TF.Attribute s "ip_set_descriptors" Text)
     {- ^ (Optional) Specifies the IP address type (IPV4 or IPV6) and the IP address range (in CIDR format) that web requests originate from. -}
-    , _name               :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the IPSet. -}
     } deriving (Show, Eq)
 
@@ -29973,13 +30551,13 @@ Provides a WAF Rate Based Rule Resource
 data WafRateBasedRuleResource s = WafRateBasedRuleResource {
       _metric_name :: !(TF.Attribute s "metric_name" Text)
     {- ^ (Required) The name or description for the Amazon CloudWatch metric of this rule. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the rule. -}
-    , _predicates  :: !(TF.Attribute s "predicates" Text)
+    , _predicates :: !(TF.Attribute s "predicates" Text)
     {- ^ (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet objects to include in a rule. -}
-    , _rate_key    :: !(TF.Attribute s "rate_key" Text)
+    , _rate_key :: !(TF.Attribute s "rate_key" Text)
     {- ^ (Required) Valid value is IP. -}
-    , _rate_limit  :: !(TF.Attribute s "rate_limit" Text)
+    , _rate_limit :: !(TF.Attribute s "rate_limit" Text)
     {- ^ (Required) The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. Minimum value is 2000. -}
     } deriving (Show, Eq)
 
@@ -30045,9 +30623,9 @@ Provides a WAF Rule Resource
 data WafRuleResource s = WafRuleResource {
       _metric_name :: !(TF.Attribute s "metric_name" Text)
     {- ^ (Required) The name or description for the Amazon CloudWatch metric of this rule. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the rule. -}
-    , _predicates  :: !(TF.Attribute s "predicates" Text)
+    , _predicates :: !(TF.Attribute s "predicates" Text)
     {- ^ (Optional) One of ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet objects to include in a rule. -}
     } deriving (Show, Eq)
 
@@ -30093,7 +30671,7 @@ wafRuleResource =
 Provides a WAF Size Constraint Set Resource
 -}
 data WafSizeConstraintSetResource s = WafSizeConstraintSetResource {
-      _name             :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the Size Constraint Set. -}
     , _size_constraints :: !(TF.Attribute s "size_constraints" Text)
     {- ^ (Optional) Specifies the parts of web requests that you want to inspect the size of. -}
@@ -30173,11 +30751,11 @@ Provides a WAF Web ACL Resource
 data WafWebAclResource s = WafWebAclResource {
       _default_action :: !(TF.Attribute s "default_action" Text)
     {- ^ (Required) The action that you want AWS WAF to take when a request doesn't match the criteria in any of the rules that are associated with the web ACL. -}
-    , _metric_name    :: !(TF.Attribute s "metric_name" Text)
+    , _metric_name :: !(TF.Attribute s "metric_name" Text)
     {- ^ (Required) The name or description for the Amazon CloudWatch metric of this web ACL. -}
-    , _name           :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the web ACL. -}
-    , _rules          :: !(TF.Attribute s "rules" Text)
+    , _rules :: !(TF.Attribute s "rules" Text)
     {- ^ (Required) The rules to associate with the web ACL and the settings for each rule. -}
     } deriving (Show, Eq)
 
@@ -30232,7 +30810,7 @@ wafWebAclResource =
 Provides a WAF XSS Match Set Resource
 -}
 data WafXssMatchSetResource s = WafXssMatchSetResource {
-      _name             :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the SizeConstraintSet. -}
     , _xss_match_tuples :: !(TF.Attribute s "xss_match_tuples" Text)
     {- ^ (Optional) The parts of web requests that you want to inspect for cross-site scripting attacks. -}
@@ -30274,7 +30852,7 @@ Load Balancer.
 data WafregionalByteMatchSetResource s = WafregionalByteMatchSetResource {
       _byte_match_tuple :: !(TF.Attribute s "byte_match_tuple" Text)
     {- ^ (Optional)Settings for the ByteMatchSet, such as the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests. ByteMatchTuple documented below. -}
-    , _name             :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the ByteMatchSet. -}
     } deriving (Show, Eq)
 
@@ -30314,7 +30892,7 @@ Balancer.
 data WafregionalIpsetResource s = WafregionalIpsetResource {
       _ip_set_descriptor :: !(TF.Attribute s "ip_set_descriptor" Text)
     {- ^ (Optional) The IP address type and IP address range (in CIDR notation) from which web requests originate. -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name or description of the IPSet. -}
     } deriving (Show, Eq)
 
@@ -40874,778 +41452,1296 @@ instance HasZoneId a b => HasZoneId (TF.Resource p a) b where
     zoneId = TF.configuration . zoneId
 
 class HasComputedAccessUrl a b | a -> b where
-    computedAccessUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAccessUrlThread a b :: *
+
+    computedAccessUrl :: forall r. Getting r a (TF.Computed (HasComputedAccessUrlThread a b) b)
 
 class HasComputedAccountId a b | a -> b where
-    computedAccountId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAccountIdThread a b :: *
+
+    computedAccountId :: forall r. Getting r a (TF.Computed (HasComputedAccountIdThread a b) b)
 
 class HasComputedActivationCode a b | a -> b where
-    computedActivationCode :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedActivationCodeThread a b :: *
+
+    computedActivationCode :: forall r. Getting r a (TF.Computed (HasComputedActivationCodeThread a b) b)
 
 class HasComputedAdjustmentType a b | a -> b where
-    computedAdjustmentType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAdjustmentTypeThread a b :: *
+
+    computedAdjustmentType :: forall r. Getting r a (TF.Computed (HasComputedAdjustmentTypeThread a b) b)
 
 class HasComputedAllocatedStorage a b | a -> b where
-    computedAllocatedStorage :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAllocatedStorageThread a b :: *
+
+    computedAllocatedStorage :: forall r. Getting r a (TF.Computed (HasComputedAllocatedStorageThread a b) b)
 
 class HasComputedAllocationId a b | a -> b where
-    computedAllocationId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAllocationIdThread a b :: *
+
+    computedAllocationId :: forall r. Getting r a (TF.Computed (HasComputedAllocationIdThread a b) b)
 
 class HasComputedArn a b | a -> b where
-    computedArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedArnThread a b :: *
+
+    computedArn :: forall r. Getting r a (TF.Computed (HasComputedArnThread a b) b)
 
 class HasComputedArnSuffix a b | a -> b where
-    computedArnSuffix :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedArnSuffixThread a b :: *
+
+    computedArnSuffix :: forall r. Getting r a (TF.Computed (HasComputedArnSuffixThread a b) b)
 
 class HasComputedAssociateWithPrivateIp a b | a -> b where
-    computedAssociateWithPrivateIp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAssociateWithPrivateIpThread a b :: *
+
+    computedAssociateWithPrivateIp :: forall r. Getting r a (TF.Computed (HasComputedAssociateWithPrivateIpThread a b) b)
 
 class HasComputedAssociationId a b | a -> b where
-    computedAssociationId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAssociationIdThread a b :: *
+
+    computedAssociationId :: forall r. Getting r a (TF.Computed (HasComputedAssociationIdThread a b) b)
 
 class HasComputedAttachment a b | a -> b where
-    computedAttachment :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAttachmentThread a b :: *
+
+    computedAttachment :: forall r. Getting r a (TF.Computed (HasComputedAttachmentThread a b) b)
 
 class HasComputedAttachmentId a b | a -> b where
-    computedAttachmentId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAttachmentIdThread a b :: *
+
+    computedAttachmentId :: forall r. Getting r a (TF.Computed (HasComputedAttachmentIdThread a b) b)
 
 class HasComputedAttribute a b | a -> b where
-    computedAttribute :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAttributeThread a b :: *
+
+    computedAttribute :: forall r. Getting r a (TF.Computed (HasComputedAttributeThread a b) b)
 
 class HasComputedAutoscalingGroupName a b | a -> b where
-    computedAutoscalingGroupName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAutoscalingGroupNameThread a b :: *
+
+    computedAutoscalingGroupName :: forall r. Getting r a (TF.Computed (HasComputedAutoscalingGroupNameThread a b) b)
 
 class HasComputedAvailabilityZone a b | a -> b where
-    computedAvailabilityZone :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAvailabilityZoneThread a b :: *
+
+    computedAvailabilityZone :: forall r. Getting r a (TF.Computed (HasComputedAvailabilityZoneThread a b) b)
 
 class HasComputedAvailabilityZones a b | a -> b where
-    computedAvailabilityZones :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAvailabilityZonesThread a b :: *
+
+    computedAvailabilityZones :: forall r. Getting r a (TF.Computed (HasComputedAvailabilityZonesThread a b) b)
 
 class HasComputedAwsAccountId a b | a -> b where
-    computedAwsAccountId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAwsAccountIdThread a b :: *
+
+    computedAwsAccountId :: forall r. Getting r a (TF.Computed (HasComputedAwsAccountIdThread a b) b)
 
 class HasComputedBackupRetentionPeriod a b | a -> b where
-    computedBackupRetentionPeriod :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedBackupRetentionPeriodThread a b :: *
+
+    computedBackupRetentionPeriod :: forall r. Getting r a (TF.Computed (HasComputedBackupRetentionPeriodThread a b) b)
 
 class HasComputedBgpAsn a b | a -> b where
-    computedBgpAsn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedBgpAsnThread a b :: *
+
+    computedBgpAsn :: forall r. Getting r a (TF.Computed (HasComputedBgpAsnThread a b) b)
 
 class HasComputedBucketDomainName a b | a -> b where
-    computedBucketDomainName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedBucketDomainNameThread a b :: *
+
+    computedBucketDomainName :: forall r. Getting r a (TF.Computed (HasComputedBucketDomainNameThread a b) b)
 
 class HasComputedCacheNodes a b | a -> b where
-    computedCacheNodes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCacheNodesThread a b :: *
+
+    computedCacheNodes :: forall r. Getting r a (TF.Computed (HasComputedCacheNodesThread a b) b)
 
 class HasComputedCallerReference a b | a -> b where
-    computedCallerReference :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCallerReferenceThread a b :: *
+
+    computedCallerReference :: forall r. Getting r a (TF.Computed (HasComputedCallerReferenceThread a b) b)
 
 class HasComputedCanonicalHostedZoneId a b | a -> b where
-    computedCanonicalHostedZoneId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCanonicalHostedZoneIdThread a b :: *
+
+    computedCanonicalHostedZoneId :: forall r. Getting r a (TF.Computed (HasComputedCanonicalHostedZoneIdThread a b) b)
 
 class HasComputedCertificateArn a b | a -> b where
-    computedCertificateArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCertificateArnThread a b :: *
+
+    computedCertificateArn :: forall r. Getting r a (TF.Computed (HasComputedCertificateArnThread a b) b)
 
 class HasComputedCertificateUploadDate a b | a -> b where
-    computedCertificateUploadDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCertificateUploadDateThread a b :: *
+
+    computedCertificateUploadDate :: forall r. Getting r a (TF.Computed (HasComputedCertificateUploadDateThread a b) b)
 
 class HasComputedCidrBlock a b | a -> b where
-    computedCidrBlock :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCidrBlockThread a b :: *
+
+    computedCidrBlock :: forall r. Getting r a (TF.Computed (HasComputedCidrBlockThread a b) b)
 
 class HasComputedCidrBlocks a b | a -> b where
-    computedCidrBlocks :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCidrBlocksThread a b :: *
+
+    computedCidrBlocks :: forall r. Getting r a (TF.Computed (HasComputedCidrBlocksThread a b) b)
 
 class HasComputedClientSecret a b | a -> b where
-    computedClientSecret :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedClientSecretThread a b :: *
+
+    computedClientSecret :: forall r. Getting r a (TF.Computed (HasComputedClientSecretThread a b) b)
 
 class HasComputedCloneUrlHttp a b | a -> b where
-    computedCloneUrlHttp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCloneUrlHttpThread a b :: *
+
+    computedCloneUrlHttp :: forall r. Getting r a (TF.Computed (HasComputedCloneUrlHttpThread a b) b)
 
 class HasComputedCloneUrlSsh a b | a -> b where
-    computedCloneUrlSsh :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCloneUrlSshThread a b :: *
+
+    computedCloneUrlSsh :: forall r. Getting r a (TF.Computed (HasComputedCloneUrlSshThread a b) b)
 
 class HasComputedCloudfrontAccessIdentityPath a b | a -> b where
-    computedCloudfrontAccessIdentityPath :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCloudfrontAccessIdentityPathThread a b :: *
+
+    computedCloudfrontAccessIdentityPath :: forall r. Getting r a (TF.Computed (HasComputedCloudfrontAccessIdentityPathThread a b) b)
 
 class HasComputedCloudfrontDistributionArn a b | a -> b where
-    computedCloudfrontDistributionArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCloudfrontDistributionArnThread a b :: *
+
+    computedCloudfrontDistributionArn :: forall r. Getting r a (TF.Computed (HasComputedCloudfrontDistributionArnThread a b) b)
 
 class HasComputedCloudfrontDomainName a b | a -> b where
-    computedCloudfrontDomainName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCloudfrontDomainNameThread a b :: *
+
+    computedCloudfrontDomainName :: forall r. Getting r a (TF.Computed (HasComputedCloudfrontDomainNameThread a b) b)
 
 class HasComputedCloudfrontZoneId a b | a -> b where
-    computedCloudfrontZoneId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCloudfrontZoneIdThread a b :: *
+
+    computedCloudfrontZoneId :: forall r. Getting r a (TF.Computed (HasComputedCloudfrontZoneIdThread a b) b)
 
 class HasComputedClusterAddress a b | a -> b where
-    computedClusterAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedClusterAddressThread a b :: *
+
+    computedClusterAddress :: forall r. Getting r a (TF.Computed (HasComputedClusterAddressThread a b) b)
 
 class HasComputedClusterIdentifier a b | a -> b where
-    computedClusterIdentifier :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedClusterIdentifierThread a b :: *
+
+    computedClusterIdentifier :: forall r. Getting r a (TF.Computed (HasComputedClusterIdentifierThread a b) b)
 
 class HasComputedClusterMembers a b | a -> b where
-    computedClusterMembers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedClusterMembersThread a b :: *
+
+    computedClusterMembers :: forall r. Getting r a (TF.Computed (HasComputedClusterMembersThread a b) b)
 
 class HasComputedClusterResourceId a b | a -> b where
-    computedClusterResourceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedClusterResourceIdThread a b :: *
+
+    computedClusterResourceId :: forall r. Getting r a (TF.Computed (HasComputedClusterResourceIdThread a b) b)
 
 class HasComputedConfiguration a b | a -> b where
-    computedConfiguration :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedConfigurationThread a b :: *
+
+    computedConfiguration :: forall r. Getting r a (TF.Computed (HasComputedConfigurationThread a b) b)
 
 class HasComputedConfigurationEndpoint a b | a -> b where
-    computedConfigurationEndpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedConfigurationEndpointThread a b :: *
+
+    computedConfigurationEndpoint :: forall r. Getting r a (TF.Computed (HasComputedConfigurationEndpointThread a b) b)
 
 class HasComputedConfigurationEndpointAddress a b | a -> b where
-    computedConfigurationEndpointAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedConfigurationEndpointAddressThread a b :: *
+
+    computedConfigurationEndpointAddress :: forall r. Getting r a (TF.Computed (HasComputedConfigurationEndpointAddressThread a b) b)
 
 class HasComputedContent a b | a -> b where
-    computedContent :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedContentThread a b :: *
+
+    computedContent :: forall r. Getting r a (TF.Computed (HasComputedContentThread a b) b)
 
 class HasComputedCookieExpirationPeriod a b | a -> b where
-    computedCookieExpirationPeriod :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCookieExpirationPeriodThread a b :: *
+
+    computedCookieExpirationPeriod :: forall r. Getting r a (TF.Computed (HasComputedCookieExpirationPeriodThread a b) b)
 
 class HasComputedCookieName a b | a -> b where
-    computedCookieName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCookieNameThread a b :: *
+
+    computedCookieName :: forall r. Getting r a (TF.Computed (HasComputedCookieNameThread a b) b)
 
 class HasComputedCreateDate a b | a -> b where
-    computedCreateDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCreateDateThread a b :: *
+
+    computedCreateDate :: forall r. Getting r a (TF.Computed (HasComputedCreateDateThread a b) b)
 
 class HasComputedCreatedDate a b | a -> b where
-    computedCreatedDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCreatedDateThread a b :: *
+
+    computedCreatedDate :: forall r. Getting r a (TF.Computed (HasComputedCreatedDateThread a b) b)
 
 class HasComputedCreationDate a b | a -> b where
-    computedCreationDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCreationDateThread a b :: *
+
+    computedCreationDate :: forall r. Getting r a (TF.Computed (HasComputedCreationDateThread a b) b)
 
 class HasComputedCustomerGatewayConfiguration a b | a -> b where
-    computedCustomerGatewayConfiguration :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCustomerGatewayConfigurationThread a b :: *
+
+    computedCustomerGatewayConfiguration :: forall r. Getting r a (TF.Computed (HasComputedCustomerGatewayConfigurationThread a b) b)
 
 class HasComputedCustomerGatewayId a b | a -> b where
-    computedCustomerGatewayId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCustomerGatewayIdThread a b :: *
+
+    computedCustomerGatewayId :: forall r. Getting r a (TF.Computed (HasComputedCustomerGatewayIdThread a b) b)
 
 class HasComputedDashboardArn a b | a -> b where
-    computedDashboardArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDashboardArnThread a b :: *
+
+    computedDashboardArn :: forall r. Getting r a (TF.Computed (HasComputedDashboardArnThread a b) b)
 
 class HasComputedDataEncryptionKeyId a b | a -> b where
-    computedDataEncryptionKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDataEncryptionKeyIdThread a b :: *
+
+    computedDataEncryptionKeyId :: forall r. Getting r a (TF.Computed (HasComputedDataEncryptionKeyIdThread a b) b)
 
 class HasComputedDatabaseName a b | a -> b where
-    computedDatabaseName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDatabaseNameThread a b :: *
+
+    computedDatabaseName :: forall r. Getting r a (TF.Computed (HasComputedDatabaseNameThread a b) b)
 
 class HasComputedDbSnapshotArn a b | a -> b where
-    computedDbSnapshotArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbSnapshotArnThread a b :: *
+
+    computedDbSnapshotArn :: forall r. Getting r a (TF.Computed (HasComputedDbSnapshotArnThread a b) b)
 
 class HasComputedDbiResourceId a b | a -> b where
-    computedDbiResourceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbiResourceIdThread a b :: *
+
+    computedDbiResourceId :: forall r. Getting r a (TF.Computed (HasComputedDbiResourceIdThread a b) b)
 
 class HasComputedDefaultCooldown a b | a -> b where
-    computedDefaultCooldown :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDefaultCooldownThread a b :: *
+
+    computedDefaultCooldown :: forall r. Getting r a (TF.Computed (HasComputedDefaultCooldownThread a b) b)
 
 class HasComputedDefaultNetworkAclId a b | a -> b where
-    computedDefaultNetworkAclId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDefaultNetworkAclIdThread a b :: *
+
+    computedDefaultNetworkAclId :: forall r. Getting r a (TF.Computed (HasComputedDefaultNetworkAclIdThread a b) b)
 
 class HasComputedDefaultRouteTableId a b | a -> b where
-    computedDefaultRouteTableId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDefaultRouteTableIdThread a b :: *
+
+    computedDefaultRouteTableId :: forall r. Getting r a (TF.Computed (HasComputedDefaultRouteTableIdThread a b) b)
 
 class HasComputedDefaultSecurityGroupId a b | a -> b where
-    computedDefaultSecurityGroupId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDefaultSecurityGroupIdThread a b :: *
+
+    computedDefaultSecurityGroupId :: forall r. Getting r a (TF.Computed (HasComputedDefaultSecurityGroupIdThread a b) b)
 
 class HasComputedDefaultVersion a b | a -> b where
-    computedDefaultVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDefaultVersionThread a b :: *
+
+    computedDefaultVersion :: forall r. Getting r a (TF.Computed (HasComputedDefaultVersionThread a b) b)
 
 class HasComputedDefaultVersionId a b | a -> b where
-    computedDefaultVersionId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDefaultVersionIdThread a b :: *
+
+    computedDefaultVersionId :: forall r. Getting r a (TF.Computed (HasComputedDefaultVersionIdThread a b) b)
 
 class HasComputedDeploymentConfigId a b | a -> b where
-    computedDeploymentConfigId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDeploymentConfigIdThread a b :: *
+
+    computedDeploymentConfigId :: forall r. Getting r a (TF.Computed (HasComputedDeploymentConfigIdThread a b) b)
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDescriptionThread a b :: *
+
+    computedDescription :: forall r. Getting r a (TF.Computed (HasComputedDescriptionThread a b) b)
 
 class HasComputedDesiredCapacity a b | a -> b where
-    computedDesiredCapacity :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDesiredCapacityThread a b :: *
+
+    computedDesiredCapacity :: forall r. Getting r a (TF.Computed (HasComputedDesiredCapacityThread a b) b)
 
 class HasComputedDestinationCidrBlock a b | a -> b where
-    computedDestinationCidrBlock :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDestinationCidrBlockThread a b :: *
+
+    computedDestinationCidrBlock :: forall r. Getting r a (TF.Computed (HasComputedDestinationCidrBlockThread a b) b)
 
 class HasComputedDestinationIpv6CidrBlock a b | a -> b where
-    computedDestinationIpv6CidrBlock :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDestinationIpv6CidrBlockThread a b :: *
+
+    computedDestinationIpv6CidrBlock :: forall r. Getting r a (TF.Computed (HasComputedDestinationIpv6CidrBlockThread a b) b)
 
 class HasComputedDeviceName a b | a -> b where
-    computedDeviceName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDeviceNameThread a b :: *
+
+    computedDeviceName :: forall r. Getting r a (TF.Computed (HasComputedDeviceNameThread a b) b)
 
 class HasComputedDkimTokens a b | a -> b where
-    computedDkimTokens :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDkimTokensThread a b :: *
+
+    computedDkimTokens :: forall r. Getting r a (TF.Computed (HasComputedDkimTokensThread a b) b)
 
 class HasComputedDnsIpAddresses a b | a -> b where
-    computedDnsIpAddresses :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDnsIpAddressesThread a b :: *
+
+    computedDnsIpAddresses :: forall r. Getting r a (TF.Computed (HasComputedDnsIpAddressesThread a b) b)
 
 class HasComputedDnsName a b | a -> b where
-    computedDnsName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDnsNameThread a b :: *
+
+    computedDnsName :: forall r. Getting r a (TF.Computed (HasComputedDnsNameThread a b) b)
 
 class HasComputedDocumentType a b | a -> b where
-    computedDocumentType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDocumentTypeThread a b :: *
+
+    computedDocumentType :: forall r. Getting r a (TF.Computed (HasComputedDocumentTypeThread a b) b)
 
 class HasComputedDomainId a b | a -> b where
-    computedDomainId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDomainIdThread a b :: *
+
+    computedDomainId :: forall r. Getting r a (TF.Computed (HasComputedDomainIdThread a b) b)
 
 class HasComputedEcsClusterArn a b | a -> b where
-    computedEcsClusterArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEcsClusterArnThread a b :: *
+
+    computedEcsClusterArn :: forall r. Getting r a (TF.Computed (HasComputedEcsClusterArnThread a b) b)
 
 class HasComputedEgressOnlyGatewayId a b | a -> b where
-    computedEgressOnlyGatewayId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEgressOnlyGatewayIdThread a b :: *
+
+    computedEgressOnlyGatewayId :: forall r. Getting r a (TF.Computed (HasComputedEgressOnlyGatewayIdThread a b) b)
 
 class HasComputedEnableClassiclink a b | a -> b where
-    computedEnableClassiclink :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEnableClassiclinkThread a b :: *
+
+    computedEnableClassiclink :: forall r. Getting r a (TF.Computed (HasComputedEnableClassiclinkThread a b) b)
 
 class HasComputedEnableDnsHostnames a b | a -> b where
-    computedEnableDnsHostnames :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEnableDnsHostnamesThread a b :: *
+
+    computedEnableDnsHostnames :: forall r. Getting r a (TF.Computed (HasComputedEnableDnsHostnamesThread a b) b)
 
 class HasComputedEnableDnsSupport a b | a -> b where
-    computedEnableDnsSupport :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEnableDnsSupportThread a b :: *
+
+    computedEnableDnsSupport :: forall r. Getting r a (TF.Computed (HasComputedEnableDnsSupportThread a b) b)
 
 class HasComputedEncrypted a b | a -> b where
-    computedEncrypted :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEncryptedThread a b :: *
+
+    computedEncrypted :: forall r. Getting r a (TF.Computed (HasComputedEncryptedThread a b) b)
 
 class HasComputedEncryptedFingerprint a b | a -> b where
-    computedEncryptedFingerprint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEncryptedFingerprintThread a b :: *
+
+    computedEncryptedFingerprint :: forall r. Getting r a (TF.Computed (HasComputedEncryptedFingerprintThread a b) b)
 
 class HasComputedEncryptedPassword a b | a -> b where
-    computedEncryptedPassword :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEncryptedPasswordThread a b :: *
+
+    computedEncryptedPassword :: forall r. Getting r a (TF.Computed (HasComputedEncryptedPasswordThread a b) b)
 
 class HasComputedEncryptedPrivateKey a b | a -> b where
-    computedEncryptedPrivateKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEncryptedPrivateKeyThread a b :: *
+
+    computedEncryptedPrivateKey :: forall r. Getting r a (TF.Computed (HasComputedEncryptedPrivateKeyThread a b) b)
 
 class HasComputedEncryptedSecret a b | a -> b where
-    computedEncryptedSecret :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEncryptedSecretThread a b :: *
+
+    computedEncryptedSecret :: forall r. Getting r a (TF.Computed (HasComputedEncryptedSecretThread a b) b)
 
 class HasComputedEncryptionKey a b | a -> b where
-    computedEncryptionKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEncryptionKeyThread a b :: *
+
+    computedEncryptionKey :: forall r. Getting r a (TF.Computed (HasComputedEncryptionKeyThread a b) b)
 
 class HasComputedEndpoint a b | a -> b where
-    computedEndpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEndpointThread a b :: *
+
+    computedEndpoint :: forall r. Getting r a (TF.Computed (HasComputedEndpointThread a b) b)
 
 class HasComputedEndpointArn a b | a -> b where
-    computedEndpointArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEndpointArnThread a b :: *
+
+    computedEndpointArn :: forall r. Getting r a (TF.Computed (HasComputedEndpointArnThread a b) b)
 
 class HasComputedEngine a b | a -> b where
-    computedEngine :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEngineThread a b :: *
+
+    computedEngine :: forall r. Getting r a (TF.Computed (HasComputedEngineThread a b) b)
 
 class HasComputedEngineVersion a b | a -> b where
-    computedEngineVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEngineVersionThread a b :: *
+
+    computedEngineVersion :: forall r. Getting r a (TF.Computed (HasComputedEngineVersionThread a b) b)
 
 class HasComputedEtag a b | a -> b where
-    computedEtag :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEtagThread a b :: *
+
+    computedEtag :: forall r. Getting r a (TF.Computed (HasComputedEtagThread a b) b)
 
 class HasComputedExecutionArn a b | a -> b where
-    computedExecutionArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedExecutionArnThread a b :: *
+
+    computedExecutionArn :: forall r. Getting r a (TF.Computed (HasComputedExecutionArnThread a b) b)
 
 class HasComputedExpirationDate a b | a -> b where
-    computedExpirationDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedExpirationDateThread a b :: *
+
+    computedExpirationDate :: forall r. Getting r a (TF.Computed (HasComputedExpirationDateThread a b) b)
 
 class HasComputedExpirePasswords a b | a -> b where
-    computedExpirePasswords :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedExpirePasswordsThread a b :: *
+
+    computedExpirePasswords :: forall r. Getting r a (TF.Computed (HasComputedExpirePasswordsThread a b) b)
 
 class HasComputedExpired a b | a -> b where
-    computedExpired :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedExpiredThread a b :: *
+
+    computedExpired :: forall r. Getting r a (TF.Computed (HasComputedExpiredThread a b) b)
 
 class HasComputedFingerprint a b | a -> b where
-    computedFingerprint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedFingerprintThread a b :: *
+
+    computedFingerprint :: forall r. Getting r a (TF.Computed (HasComputedFingerprintThread a b) b)
 
 class HasComputedFqdn a b | a -> b where
-    computedFqdn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedFqdnThread a b :: *
+
+    computedFqdn :: forall r. Getting r a (TF.Computed (HasComputedFqdnThread a b) b)
 
 class HasComputedFunctionArn a b | a -> b where
-    computedFunctionArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedFunctionArnThread a b :: *
+
+    computedFunctionArn :: forall r. Getting r a (TF.Computed (HasComputedFunctionArnThread a b) b)
 
 class HasComputedGatewayId a b | a -> b where
-    computedGatewayId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedGatewayIdThread a b :: *
+
+    computedGatewayId :: forall r. Getting r a (TF.Computed (HasComputedGatewayIdThread a b) b)
 
 class HasComputedGroup a b | a -> b where
-    computedGroup :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedGroupThread a b :: *
+
+    computedGroup :: forall r. Getting r a (TF.Computed (HasComputedGroupThread a b) b)
 
 class HasComputedHash a b | a -> b where
-    computedHash :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHashThread a b :: *
+
+    computedHash :: forall r. Getting r a (TF.Computed (HasComputedHashThread a b) b)
 
 class HasComputedHashType a b | a -> b where
-    computedHashType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHashTypeThread a b :: *
+
+    computedHashType :: forall r. Getting r a (TF.Computed (HasComputedHashTypeThread a b) b)
 
 class HasComputedHealthCheckGracePeriod a b | a -> b where
-    computedHealthCheckGracePeriod :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHealthCheckGracePeriodThread a b :: *
+
+    computedHealthCheckGracePeriod :: forall r. Getting r a (TF.Computed (HasComputedHealthCheckGracePeriodThread a b) b)
 
 class HasComputedHealthCheckType a b | a -> b where
-    computedHealthCheckType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHealthCheckTypeThread a b :: *
+
+    computedHealthCheckType :: forall r. Getting r a (TF.Computed (HasComputedHealthCheckTypeThread a b) b)
 
 class HasComputedHomeRegion a b | a -> b where
-    computedHomeRegion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHomeRegionThread a b :: *
+
+    computedHomeRegion :: forall r. Getting r a (TF.Computed (HasComputedHomeRegionThread a b) b)
 
 class HasComputedHostedZone a b | a -> b where
-    computedHostedZone :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHostedZoneThread a b :: *
+
+    computedHostedZone :: forall r. Getting r a (TF.Computed (HasComputedHostedZoneThread a b) b)
 
 class HasComputedHostedZoneId a b | a -> b where
-    computedHostedZoneId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHostedZoneIdThread a b :: *
+
+    computedHostedZoneId :: forall r. Getting r a (TF.Computed (HasComputedHostedZoneIdThread a b) b)
 
 class HasComputedIamArn a b | a -> b where
-    computedIamArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIamArnThread a b :: *
+
+    computedIamArn :: forall r. Getting r a (TF.Computed (HasComputedIamArnThread a b) b)
 
 class HasComputedIamRole a b | a -> b where
-    computedIamRole :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIamRoleThread a b :: *
+
+    computedIamRole :: forall r. Getting r a (TF.Computed (HasComputedIamRoleThread a b) b)
 
 class HasComputedId a b | a -> b where
-    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIdThread a b :: *
+
+    computedId :: forall r. Getting r a (TF.Computed (HasComputedIdThread a b) b)
 
 class HasComputedIdentifier a b | a -> b where
-    computedIdentifier :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIdentifierThread a b :: *
+
+    computedIdentifier :: forall r. Getting r a (TF.Computed (HasComputedIdentifierThread a b) b)
 
 class HasComputedInstance' a b | a -> b where
-    computedInstance' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInstance'Thread a b :: *
+
+    computedInstance' :: forall r. Getting r a (TF.Computed (HasComputedInstance'Thread a b) b)
 
 class HasComputedInstanceId a b | a -> b where
-    computedInstanceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInstanceIdThread a b :: *
+
+    computedInstanceId :: forall r. Getting r a (TF.Computed (HasComputedInstanceIdThread a b) b)
 
 class HasComputedInstanceIds a b | a -> b where
-    computedInstanceIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInstanceIdsThread a b :: *
+
+    computedInstanceIds :: forall r. Getting r a (TF.Computed (HasComputedInstanceIdsThread a b) b)
 
 class HasComputedInstancePort a b | a -> b where
-    computedInstancePort :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInstancePortThread a b :: *
+
+    computedInstancePort :: forall r. Getting r a (TF.Computed (HasComputedInstancePortThread a b) b)
 
 class HasComputedInstanceTenancy a b | a -> b where
-    computedInstanceTenancy :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInstanceTenancyThread a b :: *
+
+    computedInstanceTenancy :: forall r. Getting r a (TF.Computed (HasComputedInstanceTenancyThread a b) b)
 
 class HasComputedInvokeArn a b | a -> b where
-    computedInvokeArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInvokeArnThread a b :: *
+
+    computedInvokeArn :: forall r. Getting r a (TF.Computed (HasComputedInvokeArnThread a b) b)
 
 class HasComputedInvokeUrl a b | a -> b where
-    computedInvokeUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInvokeUrlThread a b :: *
+
+    computedInvokeUrl :: forall r. Getting r a (TF.Computed (HasComputedInvokeUrlThread a b) b)
 
 class HasComputedIops a b | a -> b where
-    computedIops :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIopsThread a b :: *
+
+    computedIops :: forall r. Getting r a (TF.Computed (HasComputedIopsThread a b) b)
 
 class HasComputedIpAddress a b | a -> b where
-    computedIpAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIpAddressThread a b :: *
+
+    computedIpAddress :: forall r. Getting r a (TF.Computed (HasComputedIpAddressThread a b) b)
 
 class HasComputedIpv6AssociationId a b | a -> b where
-    computedIpv6AssociationId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIpv6AssociationIdThread a b :: *
+
+    computedIpv6AssociationId :: forall r. Getting r a (TF.Computed (HasComputedIpv6AssociationIdThread a b) b)
 
 class HasComputedIpv6CidrBlock a b | a -> b where
-    computedIpv6CidrBlock :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIpv6CidrBlockThread a b :: *
+
+    computedIpv6CidrBlock :: forall r. Getting r a (TF.Computed (HasComputedIpv6CidrBlockThread a b) b)
 
 class HasComputedKeyFingerprint a b | a -> b where
-    computedKeyFingerprint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKeyFingerprintThread a b :: *
+
+    computedKeyFingerprint :: forall r. Getting r a (TF.Computed (HasComputedKeyFingerprintThread a b) b)
 
 class HasComputedKeyId a b | a -> b where
-    computedKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKeyIdThread a b :: *
+
+    computedKeyId :: forall r. Getting r a (TF.Computed (HasComputedKeyIdThread a b) b)
 
 class HasComputedKeyName a b | a -> b where
-    computedKeyName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKeyNameThread a b :: *
+
+    computedKeyName :: forall r. Getting r a (TF.Computed (HasComputedKeyNameThread a b) b)
 
 class HasComputedKeyType a b | a -> b where
-    computedKeyType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKeyTypeThread a b :: *
+
+    computedKeyType :: forall r. Getting r a (TF.Computed (HasComputedKeyTypeThread a b) b)
 
 class HasComputedKibanaEndpoint a b | a -> b where
-    computedKibanaEndpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKibanaEndpointThread a b :: *
+
+    computedKibanaEndpoint :: forall r. Getting r a (TF.Computed (HasComputedKibanaEndpointThread a b) b)
 
 class HasComputedKmsKeyArn a b | a -> b where
-    computedKmsKeyArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKmsKeyArnThread a b :: *
+
+    computedKmsKeyArn :: forall r. Getting r a (TF.Computed (HasComputedKmsKeyArnThread a b) b)
 
 class HasComputedKmsKeyId a b | a -> b where
-    computedKmsKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKmsKeyIdThread a b :: *
+
+    computedKmsKeyId :: forall r. Getting r a (TF.Computed (HasComputedKmsKeyIdThread a b) b)
 
 class HasComputedLastModified a b | a -> b where
-    computedLastModified :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLastModifiedThread a b :: *
+
+    computedLastModified :: forall r. Getting r a (TF.Computed (HasComputedLastModifiedThread a b) b)
 
 class HasComputedLastProcessingResult a b | a -> b where
-    computedLastProcessingResult :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLastProcessingResultThread a b :: *
+
+    computedLastProcessingResult :: forall r. Getting r a (TF.Computed (HasComputedLastProcessingResultThread a b) b)
 
 class HasComputedLastUpdatedDate a b | a -> b where
-    computedLastUpdatedDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLastUpdatedDateThread a b :: *
+
+    computedLastUpdatedDate :: forall r. Getting r a (TF.Computed (HasComputedLastUpdatedDateThread a b) b)
 
 class HasComputedLatestRevision a b | a -> b where
-    computedLatestRevision :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLatestRevisionThread a b :: *
+
+    computedLatestRevision :: forall r. Getting r a (TF.Computed (HasComputedLatestRevisionThread a b) b)
 
 class HasComputedLatestVersion a b | a -> b where
-    computedLatestVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLatestVersionThread a b :: *
+
+    computedLatestVersion :: forall r. Getting r a (TF.Computed (HasComputedLatestVersionThread a b) b)
 
 class HasComputedLaunchConfiguration a b | a -> b where
-    computedLaunchConfiguration :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLaunchConfigurationThread a b :: *
+
+    computedLaunchConfiguration :: forall r. Getting r a (TF.Computed (HasComputedLaunchConfigurationThread a b) b)
 
 class HasComputedLbPort a b | a -> b where
-    computedLbPort :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLbPortThread a b :: *
+
+    computedLbPort :: forall r. Getting r a (TF.Computed (HasComputedLbPortThread a b) b)
 
 class HasComputedLicenseModel a b | a -> b where
-    computedLicenseModel :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLicenseModelThread a b :: *
+
+    computedLicenseModel :: forall r. Getting r a (TF.Computed (HasComputedLicenseModelThread a b) b)
 
 class HasComputedLoadBalancer a b | a -> b where
-    computedLoadBalancer :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLoadBalancerThread a b :: *
+
+    computedLoadBalancer :: forall r. Getting r a (TF.Computed (HasComputedLoadBalancerThread a b) b)
 
 class HasComputedLoadBalancerName a b | a -> b where
-    computedLoadBalancerName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLoadBalancerNameThread a b :: *
+
+    computedLoadBalancerName :: forall r. Getting r a (TF.Computed (HasComputedLoadBalancerNameThread a b) b)
 
 class HasComputedLoadBalancerPort a b | a -> b where
-    computedLoadBalancerPort :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLoadBalancerPortThread a b :: *
+
+    computedLoadBalancerPort :: forall r. Getting r a (TF.Computed (HasComputedLoadBalancerPortThread a b) b)
 
 class HasComputedLoadBalancers a b | a -> b where
-    computedLoadBalancers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLoadBalancersThread a b :: *
+
+    computedLoadBalancers :: forall r. Getting r a (TF.Computed (HasComputedLoadBalancersThread a b) b)
 
 class HasComputedLocation a b | a -> b where
-    computedLocation :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLocationThread a b :: *
+
+    computedLocation :: forall r. Getting r a (TF.Computed (HasComputedLocationThread a b) b)
 
 class HasComputedMainRouteTableId a b | a -> b where
-    computedMainRouteTableId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMainRouteTableIdThread a b :: *
+
+    computedMainRouteTableId :: forall r. Getting r a (TF.Computed (HasComputedMainRouteTableIdThread a b) b)
 
 class HasComputedMaintenanceWindow a b | a -> b where
-    computedMaintenanceWindow :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMaintenanceWindowThread a b :: *
+
+    computedMaintenanceWindow :: forall r. Getting r a (TF.Computed (HasComputedMaintenanceWindowThread a b) b)
 
 class HasComputedMasterUsername a b | a -> b where
-    computedMasterUsername :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMasterUsernameThread a b :: *
+
+    computedMasterUsername :: forall r. Getting r a (TF.Computed (HasComputedMasterUsernameThread a b) b)
 
 class HasComputedMaxSize a b | a -> b where
-    computedMaxSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMaxSizeThread a b :: *
+
+    computedMaxSize :: forall r. Getting r a (TF.Computed (HasComputedMaxSizeThread a b) b)
 
 class HasComputedMinSize a b | a -> b where
-    computedMinSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMinSizeThread a b :: *
+
+    computedMinSize :: forall r. Getting r a (TF.Computed (HasComputedMinSizeThread a b) b)
 
 class HasComputedName a b | a -> b where
-    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNameThread a b :: *
+
+    computedName :: forall r. Getting r a (TF.Computed (HasComputedNameThread a b) b)
 
 class HasComputedNameServers a b | a -> b where
-    computedNameServers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNameServersThread a b :: *
+
+    computedNameServers :: forall r. Getting r a (TF.Computed (HasComputedNameServersThread a b) b)
 
 class HasComputedNatGatewayId a b | a -> b where
-    computedNatGatewayId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNatGatewayIdThread a b :: *
+
+    computedNatGatewayId :: forall r. Getting r a (TF.Computed (HasComputedNatGatewayIdThread a b) b)
 
 class HasComputedNetworkInterface a b | a -> b where
-    computedNetworkInterface :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNetworkInterfaceThread a b :: *
+
+    computedNetworkInterface :: forall r. Getting r a (TF.Computed (HasComputedNetworkInterfaceThread a b) b)
 
 class HasComputedNetworkInterfaceId a b | a -> b where
-    computedNetworkInterfaceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNetworkInterfaceIdThread a b :: *
+
+    computedNetworkInterfaceId :: forall r. Getting r a (TF.Computed (HasComputedNetworkInterfaceIdThread a b) b)
 
 class HasComputedOptionGroupName a b | a -> b where
-    computedOptionGroupName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOptionGroupNameThread a b :: *
+
+    computedOptionGroupName :: forall r. Getting r a (TF.Computed (HasComputedOptionGroupNameThread a b) b)
 
 class HasComputedOriginalRouteTableId a b | a -> b where
-    computedOriginalRouteTableId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOriginalRouteTableIdThread a b :: *
+
+    computedOriginalRouteTableId :: forall r. Getting r a (TF.Computed (HasComputedOriginalRouteTableIdThread a b) b)
 
 class HasComputedOutputs a b | a -> b where
-    computedOutputs :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOutputsThread a b :: *
+
+    computedOutputs :: forall r. Getting r a (TF.Computed (HasComputedOutputsThread a b) b)
 
 class HasComputedOwner a b | a -> b where
-    computedOwner :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOwnerThread a b :: *
+
+    computedOwner :: forall r. Getting r a (TF.Computed (HasComputedOwnerThread a b) b)
 
 class HasComputedOwnerAlias a b | a -> b where
-    computedOwnerAlias :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOwnerAliasThread a b :: *
+
+    computedOwnerAlias :: forall r. Getting r a (TF.Computed (HasComputedOwnerAliasThread a b) b)
 
 class HasComputedOwnerId a b | a -> b where
-    computedOwnerId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOwnerIdThread a b :: *
+
+    computedOwnerId :: forall r. Getting r a (TF.Computed (HasComputedOwnerIdThread a b) b)
 
 class HasComputedParameter a b | a -> b where
-    computedParameter :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedParameterThread a b :: *
+
+    computedParameter :: forall r. Getting r a (TF.Computed (HasComputedParameterThread a b) b)
 
 class HasComputedParameters a b | a -> b where
-    computedParameters :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedParametersThread a b :: *
+
+    computedParameters :: forall r. Getting r a (TF.Computed (HasComputedParametersThread a b) b)
 
 class HasComputedPath a b | a -> b where
-    computedPath :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPathThread a b :: *
+
+    computedPath :: forall r. Getting r a (TF.Computed (HasComputedPathThread a b) b)
 
 class HasComputedPemEncodedCertificate a b | a -> b where
-    computedPemEncodedCertificate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPemEncodedCertificateThread a b :: *
+
+    computedPemEncodedCertificate :: forall r. Getting r a (TF.Computed (HasComputedPemEncodedCertificateThread a b) b)
 
 class HasComputedPerformanceInsightsEnabled a b | a -> b where
-    computedPerformanceInsightsEnabled :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPerformanceInsightsEnabledThread a b :: *
+
+    computedPerformanceInsightsEnabled :: forall r. Getting r a (TF.Computed (HasComputedPerformanceInsightsEnabledThread a b) b)
 
 class HasComputedPerformanceInsightsKmsKeyId a b | a -> b where
-    computedPerformanceInsightsKmsKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPerformanceInsightsKmsKeyIdThread a b :: *
+
+    computedPerformanceInsightsKmsKeyId :: forall r. Getting r a (TF.Computed (HasComputedPerformanceInsightsKmsKeyIdThread a b) b)
 
 class HasComputedPermissions a b | a -> b where
-    computedPermissions :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPermissionsThread a b :: *
+
+    computedPermissions :: forall r. Getting r a (TF.Computed (HasComputedPermissionsThread a b) b)
 
 class HasComputedPlatformTypes a b | a -> b where
-    computedPlatformTypes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPlatformTypesThread a b :: *
+
+    computedPlatformTypes :: forall r. Getting r a (TF.Computed (HasComputedPlatformTypesThread a b) b)
 
 class HasComputedPolicy a b | a -> b where
-    computedPolicy :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPolicyThread a b :: *
+
+    computedPolicy :: forall r. Getting r a (TF.Computed (HasComputedPolicyThread a b) b)
 
 class HasComputedPolicyName a b | a -> b where
-    computedPolicyName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPolicyNameThread a b :: *
+
+    computedPolicyName :: forall r. Getting r a (TF.Computed (HasComputedPolicyNameThread a b) b)
 
 class HasComputedPolicyType a b | a -> b where
-    computedPolicyType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPolicyTypeThread a b :: *
+
+    computedPolicyType :: forall r. Getting r a (TF.Computed (HasComputedPolicyTypeThread a b) b)
 
 class HasComputedPolicyTypeName a b | a -> b where
-    computedPolicyTypeName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPolicyTypeNameThread a b :: *
+
+    computedPolicyTypeName :: forall r. Getting r a (TF.Computed (HasComputedPolicyTypeNameThread a b) b)
 
 class HasComputedPort a b | a -> b where
-    computedPort :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPortThread a b :: *
+
+    computedPort :: forall r. Getting r a (TF.Computed (HasComputedPortThread a b) b)
 
 class HasComputedPreferredBackupWindow a b | a -> b where
-    computedPreferredBackupWindow :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPreferredBackupWindowThread a b :: *
+
+    computedPreferredBackupWindow :: forall r. Getting r a (TF.Computed (HasComputedPreferredBackupWindowThread a b) b)
 
 class HasComputedPreferredMaintenanceWindow a b | a -> b where
-    computedPreferredMaintenanceWindow :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPreferredMaintenanceWindowThread a b :: *
+
+    computedPreferredMaintenanceWindow :: forall r. Getting r a (TF.Computed (HasComputedPreferredMaintenanceWindowThread a b) b)
 
 class HasComputedPrefixListId a b | a -> b where
-    computedPrefixListId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrefixListIdThread a b :: *
+
+    computedPrefixListId :: forall r. Getting r a (TF.Computed (HasComputedPrefixListIdThread a b) b)
 
 class HasComputedPrimaryEndpointAddress a b | a -> b where
-    computedPrimaryEndpointAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrimaryEndpointAddressThread a b :: *
+
+    computedPrimaryEndpointAddress :: forall r. Getting r a (TF.Computed (HasComputedPrimaryEndpointAddressThread a b) b)
 
 class HasComputedPrivateIp a b | a -> b where
-    computedPrivateIp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrivateIpThread a b :: *
+
+    computedPrivateIp :: forall r. Getting r a (TF.Computed (HasComputedPrivateIpThread a b) b)
 
 class HasComputedPrivateIpAddress a b | a -> b where
-    computedPrivateIpAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrivateIpAddressThread a b :: *
+
+    computedPrivateIpAddress :: forall r. Getting r a (TF.Computed (HasComputedPrivateIpAddressThread a b) b)
 
 class HasComputedPrivateIps a b | a -> b where
-    computedPrivateIps :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrivateIpsThread a b :: *
+
+    computedPrivateIps :: forall r. Getting r a (TF.Computed (HasComputedPrivateIpsThread a b) b)
 
 class HasComputedPrivateKey a b | a -> b where
-    computedPrivateKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrivateKeyThread a b :: *
+
+    computedPrivateKey :: forall r. Getting r a (TF.Computed (HasComputedPrivateKeyThread a b) b)
 
 class HasComputedPublicIp a b | a -> b where
-    computedPublicIp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPublicIpThread a b :: *
+
+    computedPublicIp :: forall r. Getting r a (TF.Computed (HasComputedPublicIpThread a b) b)
 
 class HasComputedPublicKey a b | a -> b where
-    computedPublicKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPublicKeyThread a b :: *
+
+    computedPublicKey :: forall r. Getting r a (TF.Computed (HasComputedPublicKeyThread a b) b)
 
 class HasComputedQualifiedArn a b | a -> b where
-    computedQualifiedArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedQualifiedArnThread a b :: *
+
+    computedQualifiedArn :: forall r. Getting r a (TF.Computed (HasComputedQualifiedArnThread a b) b)
 
 class HasComputedReaderEndpoint a b | a -> b where
-    computedReaderEndpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReaderEndpointThread a b :: *
+
+    computedReaderEndpoint :: forall r. Getting r a (TF.Computed (HasComputedReaderEndpointThread a b) b)
 
 class HasComputedRegion a b | a -> b where
-    computedRegion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRegionThread a b :: *
+
+    computedRegion :: forall r. Getting r a (TF.Computed (HasComputedRegionThread a b) b)
 
 class HasComputedRegistrationCount a b | a -> b where
-    computedRegistrationCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRegistrationCountThread a b :: *
+
+    computedRegistrationCount :: forall r. Getting r a (TF.Computed (HasComputedRegistrationCountThread a b) b)
 
 class HasComputedRegistrationLimit a b | a -> b where
-    computedRegistrationLimit :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRegistrationLimitThread a b :: *
+
+    computedRegistrationLimit :: forall r. Getting r a (TF.Computed (HasComputedRegistrationLimitThread a b) b)
 
 class HasComputedRegistryId a b | a -> b where
-    computedRegistryId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRegistryIdThread a b :: *
+
+    computedRegistryId :: forall r. Getting r a (TF.Computed (HasComputedRegistryIdThread a b) b)
 
 class HasComputedReplicationInstanceArn a b | a -> b where
-    computedReplicationInstanceArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReplicationInstanceArnThread a b :: *
+
+    computedReplicationInstanceArn :: forall r. Getting r a (TF.Computed (HasComputedReplicationInstanceArnThread a b) b)
 
 class HasComputedReplicationInstancePrivateIps a b | a -> b where
-    computedReplicationInstancePrivateIps :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReplicationInstancePrivateIpsThread a b :: *
+
+    computedReplicationInstancePrivateIps :: forall r. Getting r a (TF.Computed (HasComputedReplicationInstancePrivateIpsThread a b) b)
 
 class HasComputedReplicationInstancePublicIps a b | a -> b where
-    computedReplicationInstancePublicIps :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReplicationInstancePublicIpsThread a b :: *
+
+    computedReplicationInstancePublicIps :: forall r. Getting r a (TF.Computed (HasComputedReplicationInstancePublicIpsThread a b) b)
 
 class HasComputedReplicationSourceIdentifier a b | a -> b where
-    computedReplicationSourceIdentifier :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReplicationSourceIdentifierThread a b :: *
+
+    computedReplicationSourceIdentifier :: forall r. Getting r a (TF.Computed (HasComputedReplicationSourceIdentifierThread a b) b)
 
 class HasComputedReplicationTaskArn a b | a -> b where
-    computedReplicationTaskArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReplicationTaskArnThread a b :: *
+
+    computedReplicationTaskArn :: forall r. Getting r a (TF.Computed (HasComputedReplicationTaskArnThread a b) b)
 
 class HasComputedRepository a b | a -> b where
-    computedRepository :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRepositoryThread a b :: *
+
+    computedRepository :: forall r. Getting r a (TF.Computed (HasComputedRepositoryThread a b) b)
 
 class HasComputedRepositoryId a b | a -> b where
-    computedRepositoryId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRepositoryIdThread a b :: *
+
+    computedRepositoryId :: forall r. Getting r a (TF.Computed (HasComputedRepositoryIdThread a b) b)
 
 class HasComputedRepositoryUrl a b | a -> b where
-    computedRepositoryUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRepositoryUrlThread a b :: *
+
+    computedRepositoryUrl :: forall r. Getting r a (TF.Computed (HasComputedRepositoryUrlThread a b) b)
 
 class HasComputedRole a b | a -> b where
-    computedRole :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRoleThread a b :: *
+
+    computedRole :: forall r. Getting r a (TF.Computed (HasComputedRoleThread a b) b)
 
 class HasComputedRoles a b | a -> b where
-    computedRoles :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRolesThread a b :: *
+
+    computedRoles :: forall r. Getting r a (TF.Computed (HasComputedRolesThread a b) b)
 
 class HasComputedRootResourceId a b | a -> b where
-    computedRootResourceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRootResourceIdThread a b :: *
+
+    computedRootResourceId :: forall r. Getting r a (TF.Computed (HasComputedRootResourceIdThread a b) b)
 
 class HasComputedRouteTableId a b | a -> b where
-    computedRouteTableId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRouteTableIdThread a b :: *
+
+    computedRouteTableId :: forall r. Getting r a (TF.Computed (HasComputedRouteTableIdThread a b) b)
 
 class HasComputedRunningInstanceCount a b | a -> b where
-    computedRunningInstanceCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRunningInstanceCountThread a b :: *
+
+    computedRunningInstanceCount :: forall r. Getting r a (TF.Computed (HasComputedRunningInstanceCountThread a b) b)
 
 class HasComputedS3Bucket a b | a -> b where
-    computedS3Bucket :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedS3BucketThread a b :: *
+
+    computedS3Bucket :: forall r. Getting r a (TF.Computed (HasComputedS3BucketThread a b) b)
 
 class HasComputedS3CanonicalUserId a b | a -> b where
-    computedS3CanonicalUserId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedS3CanonicalUserIdThread a b :: *
+
+    computedS3CanonicalUserId :: forall r. Getting r a (TF.Computed (HasComputedS3CanonicalUserIdThread a b) b)
 
 class HasComputedSchemaVersion a b | a -> b where
-    computedSchemaVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSchemaVersionThread a b :: *
+
+    computedSchemaVersion :: forall r. Getting r a (TF.Computed (HasComputedSchemaVersionThread a b) b)
 
 class HasComputedSecret a b | a -> b where
-    computedSecret :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSecretThread a b :: *
+
+    computedSecret :: forall r. Getting r a (TF.Computed (HasComputedSecretThread a b) b)
 
 class HasComputedSecurityGroupId a b | a -> b where
-    computedSecurityGroupId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSecurityGroupIdThread a b :: *
+
+    computedSecurityGroupId :: forall r. Getting r a (TF.Computed (HasComputedSecurityGroupIdThread a b) b)
 
 class HasComputedSecurityGroups a b | a -> b where
-    computedSecurityGroups :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSecurityGroupsThread a b :: *
+
+    computedSecurityGroups :: forall r. Getting r a (TF.Computed (HasComputedSecurityGroupsThread a b) b)
 
 class HasComputedServiceRole a b | a -> b where
-    computedServiceRole :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedServiceRoleThread a b :: *
+
+    computedServiceRole :: forall r. Getting r a (TF.Computed (HasComputedServiceRoleThread a b) b)
 
 class HasComputedSesSmtpPassword a b | a -> b where
-    computedSesSmtpPassword :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSesSmtpPasswordThread a b :: *
+
+    computedSesSmtpPassword :: forall r. Getting r a (TF.Computed (HasComputedSesSmtpPasswordThread a b) b)
 
 class HasComputedShardCount a b | a -> b where
-    computedShardCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedShardCountThread a b :: *
+
+    computedShardCount :: forall r. Getting r a (TF.Computed (HasComputedShardCountThread a b) b)
 
 class HasComputedSourceCodeHash a b | a -> b where
-    computedSourceCodeHash :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSourceCodeHashThread a b :: *
+
+    computedSourceCodeHash :: forall r. Getting r a (TF.Computed (HasComputedSourceCodeHashThread a b) b)
 
 class HasComputedSourceDbSnapshotIdentifier a b | a -> b where
-    computedSourceDbSnapshotIdentifier :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSourceDbSnapshotIdentifierThread a b :: *
+
+    computedSourceDbSnapshotIdentifier :: forall r. Getting r a (TF.Computed (HasComputedSourceDbSnapshotIdentifierThread a b) b)
 
 class HasComputedSourceDestCheck a b | a -> b where
-    computedSourceDestCheck :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSourceDestCheckThread a b :: *
+
+    computedSourceDestCheck :: forall r. Getting r a (TF.Computed (HasComputedSourceDestCheckThread a b) b)
 
 class HasComputedSourceRegion a b | a -> b where
-    computedSourceRegion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSourceRegionThread a b :: *
+
+    computedSourceRegion :: forall r. Getting r a (TF.Computed (HasComputedSourceRegionThread a b) b)
 
 class HasComputedSshPublicKeyId a b | a -> b where
-    computedSshPublicKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSshPublicKeyIdThread a b :: *
+
+    computedSshPublicKeyId :: forall r. Getting r a (TF.Computed (HasComputedSshPublicKeyIdThread a b) b)
 
 class HasComputedState a b | a -> b where
-    computedState :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStateThread a b :: *
+
+    computedState :: forall r. Getting r a (TF.Computed (HasComputedStateThread a b) b)
 
 class HasComputedStateTransitionReason a b | a -> b where
-    computedStateTransitionReason :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStateTransitionReasonThread a b :: *
+
+    computedStateTransitionReason :: forall r. Getting r a (TF.Computed (HasComputedStateTransitionReasonThread a b) b)
 
 class HasComputedStaticRoutesOnly a b | a -> b where
-    computedStaticRoutesOnly :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStaticRoutesOnlyThread a b :: *
+
+    computedStaticRoutesOnly :: forall r. Getting r a (TF.Computed (HasComputedStaticRoutesOnlyThread a b) b)
 
 class HasComputedStatus a b | a -> b where
-    computedStatus :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStatusThread a b :: *
+
+    computedStatus :: forall r. Getting r a (TF.Computed (HasComputedStatusThread a b) b)
 
 class HasComputedStatusReason a b | a -> b where
-    computedStatusReason :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStatusReasonThread a b :: *
+
+    computedStatusReason :: forall r. Getting r a (TF.Computed (HasComputedStatusReasonThread a b) b)
 
 class HasComputedStorageEncrypted a b | a -> b where
-    computedStorageEncrypted :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStorageEncryptedThread a b :: *
+
+    computedStorageEncrypted :: forall r. Getting r a (TF.Computed (HasComputedStorageEncryptedThread a b) b)
 
 class HasComputedStorageType a b | a -> b where
-    computedStorageType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStorageTypeThread a b :: *
+
+    computedStorageType :: forall r. Getting r a (TF.Computed (HasComputedStorageTypeThread a b) b)
 
 class HasComputedSubnetId a b | a -> b where
-    computedSubnetId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSubnetIdThread a b :: *
+
+    computedSubnetId :: forall r. Getting r a (TF.Computed (HasComputedSubnetIdThread a b) b)
 
 class HasComputedSupportCode a b | a -> b where
-    computedSupportCode :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSupportCodeThread a b :: *
+
+    computedSupportCode :: forall r. Getting r a (TF.Computed (HasComputedSupportCodeThread a b) b)
 
 class HasComputedTags a b | a -> b where
-    computedTags :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTagsThread a b :: *
+
+    computedTags :: forall r. Getting r a (TF.Computed (HasComputedTagsThread a b) b)
 
 class HasComputedTargetGroupArns a b | a -> b where
-    computedTargetGroupArns :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTargetGroupArnsThread a b :: *
+
+    computedTargetGroupArns :: forall r. Getting r a (TF.Computed (HasComputedTargetGroupArnsThread a b) b)
 
 class HasComputedThrottleSettings a b | a -> b where
-    computedThrottleSettings :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedThrottleSettingsThread a b :: *
+
+    computedThrottleSettings :: forall r. Getting r a (TF.Computed (HasComputedThrottleSettingsThread a b) b)
 
 class HasComputedTunnel1Address a b | a -> b where
-    computedTunnel1Address :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel1AddressThread a b :: *
+
+    computedTunnel1Address :: forall r. Getting r a (TF.Computed (HasComputedTunnel1AddressThread a b) b)
 
 class HasComputedTunnel1BgpAsn a b | a -> b where
-    computedTunnel1BgpAsn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel1BgpAsnThread a b :: *
+
+    computedTunnel1BgpAsn :: forall r. Getting r a (TF.Computed (HasComputedTunnel1BgpAsnThread a b) b)
 
 class HasComputedTunnel1BgpHoldtime a b | a -> b where
-    computedTunnel1BgpHoldtime :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel1BgpHoldtimeThread a b :: *
+
+    computedTunnel1BgpHoldtime :: forall r. Getting r a (TF.Computed (HasComputedTunnel1BgpHoldtimeThread a b) b)
 
 class HasComputedTunnel1CgwInsideAddress a b | a -> b where
-    computedTunnel1CgwInsideAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel1CgwInsideAddressThread a b :: *
+
+    computedTunnel1CgwInsideAddress :: forall r. Getting r a (TF.Computed (HasComputedTunnel1CgwInsideAddressThread a b) b)
 
 class HasComputedTunnel1PresharedKey a b | a -> b where
-    computedTunnel1PresharedKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel1PresharedKeyThread a b :: *
+
+    computedTunnel1PresharedKey :: forall r. Getting r a (TF.Computed (HasComputedTunnel1PresharedKeyThread a b) b)
 
 class HasComputedTunnel1VgwInsideAddress a b | a -> b where
-    computedTunnel1VgwInsideAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel1VgwInsideAddressThread a b :: *
+
+    computedTunnel1VgwInsideAddress :: forall r. Getting r a (TF.Computed (HasComputedTunnel1VgwInsideAddressThread a b) b)
 
 class HasComputedTunnel2Address a b | a -> b where
-    computedTunnel2Address :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel2AddressThread a b :: *
+
+    computedTunnel2Address :: forall r. Getting r a (TF.Computed (HasComputedTunnel2AddressThread a b) b)
 
 class HasComputedTunnel2BgpAsn a b | a -> b where
-    computedTunnel2BgpAsn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel2BgpAsnThread a b :: *
+
+    computedTunnel2BgpAsn :: forall r. Getting r a (TF.Computed (HasComputedTunnel2BgpAsnThread a b) b)
 
 class HasComputedTunnel2BgpHoldtime a b | a -> b where
-    computedTunnel2BgpHoldtime :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel2BgpHoldtimeThread a b :: *
+
+    computedTunnel2BgpHoldtime :: forall r. Getting r a (TF.Computed (HasComputedTunnel2BgpHoldtimeThread a b) b)
 
 class HasComputedTunnel2CgwInsideAddress a b | a -> b where
-    computedTunnel2CgwInsideAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel2CgwInsideAddressThread a b :: *
+
+    computedTunnel2CgwInsideAddress :: forall r. Getting r a (TF.Computed (HasComputedTunnel2CgwInsideAddressThread a b) b)
 
 class HasComputedTunnel2PresharedKey a b | a -> b where
-    computedTunnel2PresharedKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel2PresharedKeyThread a b :: *
+
+    computedTunnel2PresharedKey :: forall r. Getting r a (TF.Computed (HasComputedTunnel2PresharedKeyThread a b) b)
 
 class HasComputedTunnel2VgwInsideAddress a b | a -> b where
-    computedTunnel2VgwInsideAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTunnel2VgwInsideAddressThread a b :: *
+
+    computedTunnel2VgwInsideAddress :: forall r. Getting r a (TF.Computed (HasComputedTunnel2VgwInsideAddressThread a b) b)
 
 class HasComputedType' a b | a -> b where
-    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedType'Thread a b :: *
+
+    computedType' :: forall r. Getting r a (TF.Computed (HasComputedType'Thread a b) b)
 
 class HasComputedUniqueId a b | a -> b where
-    computedUniqueId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUniqueIdThread a b :: *
+
+    computedUniqueId :: forall r. Getting r a (TF.Computed (HasComputedUniqueIdThread a b) b)
 
 class HasComputedUsagePlanId a b | a -> b where
-    computedUsagePlanId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUsagePlanIdThread a b :: *
+
+    computedUsagePlanId :: forall r. Getting r a (TF.Computed (HasComputedUsagePlanIdThread a b) b)
 
 class HasComputedUser a b | a -> b where
-    computedUser :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUserThread a b :: *
+
+    computedUser :: forall r. Getting r a (TF.Computed (HasComputedUserThread a b) b)
 
 class HasComputedUsers a b | a -> b where
-    computedUsers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUsersThread a b :: *
+
+    computedUsers :: forall r. Getting r a (TF.Computed (HasComputedUsersThread a b) b)
 
 class HasComputedUuid a b | a -> b where
-    computedUuid :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUuidThread a b :: *
+
+    computedUuid :: forall r. Getting r a (TF.Computed (HasComputedUuidThread a b) b)
 
 class HasComputedValidUntil a b | a -> b where
-    computedValidUntil :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedValidUntilThread a b :: *
+
+    computedValidUntil :: forall r. Getting r a (TF.Computed (HasComputedValidUntilThread a b) b)
 
 class HasComputedValue a b | a -> b where
-    computedValue :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedValueThread a b :: *
+
+    computedValue :: forall r. Getting r a (TF.Computed (HasComputedValueThread a b) b)
 
 class HasComputedVerificationToken a b | a -> b where
-    computedVerificationToken :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVerificationTokenThread a b :: *
+
+    computedVerificationToken :: forall r. Getting r a (TF.Computed (HasComputedVerificationTokenThread a b) b)
 
 class HasComputedVersion a b | a -> b where
-    computedVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVersionThread a b :: *
+
+    computedVersion :: forall r. Getting r a (TF.Computed (HasComputedVersionThread a b) b)
 
 class HasComputedVersionId a b | a -> b where
-    computedVersionId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVersionIdThread a b :: *
+
+    computedVersionId :: forall r. Getting r a (TF.Computed (HasComputedVersionIdThread a b) b)
 
 class HasComputedVolumeId a b | a -> b where
-    computedVolumeId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVolumeIdThread a b :: *
+
+    computedVolumeId :: forall r. Getting r a (TF.Computed (HasComputedVolumeIdThread a b) b)
 
 class HasComputedVolumeSize a b | a -> b where
-    computedVolumeSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVolumeSizeThread a b :: *
+
+    computedVolumeSize :: forall r. Getting r a (TF.Computed (HasComputedVolumeSizeThread a b) b)
 
 class HasComputedVpcId a b | a -> b where
-    computedVpcId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcIdThread a b :: *
+
+    computedVpcId :: forall r. Getting r a (TF.Computed (HasComputedVpcIdThread a b) b)
 
 class HasComputedVpcOptions0AvailabilityZones a b | a -> b where
-    computedVpcOptions0AvailabilityZones :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcOptions0AvailabilityZonesThread a b :: *
+
+    computedVpcOptions0AvailabilityZones :: forall r. Getting r a (TF.Computed (HasComputedVpcOptions0AvailabilityZonesThread a b) b)
 
 class HasComputedVpcOptions0VpcId a b | a -> b where
-    computedVpcOptions0VpcId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcOptions0VpcIdThread a b :: *
+
+    computedVpcOptions0VpcId :: forall r. Getting r a (TF.Computed (HasComputedVpcOptions0VpcIdThread a b) b)
 
 class HasComputedVpcPeeringConnectionId a b | a -> b where
-    computedVpcPeeringConnectionId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcPeeringConnectionIdThread a b :: *
+
+    computedVpcPeeringConnectionId :: forall r. Getting r a (TF.Computed (HasComputedVpcPeeringConnectionIdThread a b) b)
 
 class HasComputedVpcRegion a b | a -> b where
-    computedVpcRegion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcRegionThread a b :: *
+
+    computedVpcRegion :: forall r. Getting r a (TF.Computed (HasComputedVpcRegionThread a b) b)
 
 class HasComputedVpcZoneIdentifier a b | a -> b where
-    computedVpcZoneIdentifier :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcZoneIdentifierThread a b :: *
+
+    computedVpcZoneIdentifier :: forall r. Getting r a (TF.Computed (HasComputedVpcZoneIdentifierThread a b) b)
 
 class HasComputedVpnConnectionId a b | a -> b where
-    computedVpnConnectionId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpnConnectionIdThread a b :: *
+
+    computedVpnConnectionId :: forall r. Getting r a (TF.Computed (HasComputedVpnConnectionIdThread a b) b)
 
 class HasComputedVpnGatewayId a b | a -> b where
-    computedVpnGatewayId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpnGatewayIdThread a b :: *
+
+    computedVpnGatewayId :: forall r. Getting r a (TF.Computed (HasComputedVpnGatewayIdThread a b) b)
 
 class HasComputedWebsiteDomain a b | a -> b where
-    computedWebsiteDomain :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedWebsiteDomainThread a b :: *
+
+    computedWebsiteDomain :: forall r. Getting r a (TF.Computed (HasComputedWebsiteDomainThread a b) b)
 
 class HasComputedWebsiteEndpoint a b | a -> b where
-    computedWebsiteEndpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedWebsiteEndpointThread a b :: *
+
+    computedWebsiteEndpoint :: forall r. Getting r a (TF.Computed (HasComputedWebsiteEndpointThread a b) b)
 
 class HasComputedWriter a b | a -> b where
-    computedWriter :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedWriterThread a b :: *
+
+    computedWriter :: forall r. Getting r a (TF.Computed (HasComputedWriterThread a b) b)
 
 class HasComputedZoneId a b | a -> b where
-    computedZoneId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedZoneIdThread a b :: *
+
+    computedZoneId :: forall r. Getting r a (TF.Computed (HasComputedZoneIdThread a b) b)

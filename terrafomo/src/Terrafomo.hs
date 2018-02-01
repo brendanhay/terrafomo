@@ -7,37 +7,42 @@
 module Terrafomo
     (
     -- * Terraform Monad
-      Terraform
+      TerraformConfig
+    , TerraformOutput (..)
+    , Terraform
     , runTerraform
 
     -- * Terraform Monad Class
-    , MonadTerraform (..)
+    , MonadTerraform  (..)
 
     -- * Errors
-    , TerraformError (..)
+    , TerraformError  (..)
 
     -- * Terraform Backends
-    , Backend        (..)
-    , Local          (..)
+    , Backend         (..)
+    , Local           (..)
     , localBackend
 
     -- * Terraform Syntax
-    , Name           (..)
+    , Name            (..)
 
     , Reference
     , referenceKey
 
     -- ** Attributes
+    , Computed
+    , computed
+
     , Attribute
     , constant
     , nil
 
     -- * Providers
-    , IsProvider     (..)
+    , IsProvider      (..)
     , withProvider
 
     -- * Meta Parameters
-    , HasMeta        (..)
+    , HasMeta         (..)
     , dependOn
 
     , Changes
@@ -61,6 +66,15 @@ module Terrafomo
     , output
     , remote
 
+    -- * Domain Types
+    , Bits            (..)
+    , IP              (..)
+    , CIDR            (..)
+
+    -- * Serialization
+    , HCL.ToHCL       (..)
+    , HCL.renderHCL
+
     -- * Formatting
     , (Formatting.%)
 
@@ -69,15 +83,6 @@ module Terrafomo
     , (Lens..~)
     , (Lens.?~)
     , (Lens.%~)
-
-    -- * Domain Types
-    , Bits      (..)
-    , IP        (..)
-    , CIDR      (..)
-
-    -- * Serialization
-    , HCL.ToHCL (..)
-    , HCL.renderHCL
     ) where
 
 import GHC.TypeLits (KnownSymbol)

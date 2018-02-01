@@ -163,9 +163,9 @@ attribute :: (KnownSymbol n, ToHCL a) => Attribute s n a -> Maybe Value
 attribute x =
     assign (unquoted (fromName (attributeName x))) <$>
         case x of
-            Computed k n -> Just (computed k n)
-            Constant   v -> Just (toHCL      v)
-            _            -> Nothing
+            Compute  k (Computed n) -> Just (computed k n)
+            Constant             v  -> Just (toHCL      v)
+            _                       -> Nothing
 
 computed :: Key -> Name -> Value
 computed (Key t n) v =

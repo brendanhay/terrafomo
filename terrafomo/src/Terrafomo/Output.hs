@@ -4,7 +4,7 @@
 
 module Terrafomo.Output
     ( Output (..)
---    , outputKey
+    , outputKey
     ) where
 
 import Data.Maybe     (maybeToList)
@@ -12,9 +12,9 @@ import Data.Semigroup ((<>))
 
 import GHC.TypeLits (KnownSymbol)
 
-import Terrafomo.Attribute (Attribute)
+import Terrafomo.Attribute (Computed)
 import Terrafomo.Backend   (Backend)
-import Terrafomo.Name      (Name)
+import Terrafomo.Name      (Key, Name)
 
 import qualified Terrafomo.HCL as HCL
 
@@ -23,19 +23,17 @@ import qualified Terrafomo.HCL as HCL
 -- > output "ip" {
 -- >   value = "${aws_eip.ip.public_ip}"
 -- > }
-data Output a where
-    Output :: ( KnownSymbol n
-              , HCL.ToHCL a
-              )
-           => !Name
-           -> !(Backend HCL.Value)
-           -> !(Attribute s n a)
-           -> Output a
+data Output a = Output
+    { outputBackend :: !(Backend HCL.Value)
+    , outputName    :: !Name
+    , outputValue   :: !(Key, Name)
+    } deriving (Show, Eq)
 
-deriving instance Show a => Show (Output a)
+outputKey :: Output a -> Key
+outputKey = fst . outputValue
 
-instance HCL.ToHCL (Output a) where
-    toHCL (Output n _ v) =
-        HCL.object (pure "output" <> pure (HCL.name n)) $
-            maybeToList $
-                HCL.assign "value" <$> HCL.attribute v
+instance HCL.ToHCL a => HCL.ToHCL (Output a) where
+    toHCL (Output _ n v) =
+        HCL.object (pure "output" <> pure (HCL.name n))
+            [ HCL.assign "value" (uncurry HCL.computed v)
+            ]

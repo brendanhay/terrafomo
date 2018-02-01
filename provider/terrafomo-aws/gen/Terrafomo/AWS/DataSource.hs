@@ -544,15 +544,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Types as TF
 import qualified Terrafomo.AWS.Provider as TF
-import qualified Terrafomo.AWS.Types    as TF
-import qualified Terrafomo.DataSource   as TF
-import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.IP           as TF
-import qualified Terrafomo.Meta         as TF (configuration)
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.Resource     as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.IP as TF
+import qualified Terrafomo.Meta as TF (configuration)
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Resource as TF
+import qualified Terrafomo.Attribute as TF
 
 {- | The @aws_acm_certificate@ AWS datasource.
 
@@ -563,7 +563,7 @@ creation of ACM certificates. But using this data source, you can reference
 them by domain without having to hard code the ARNs as input.
 -}
 data AcmCertificateDataSource s = AcmCertificateDataSource {
-      _domain   :: !(TF.Attribute s "domain" Text)
+      _domain :: !(TF.Attribute s "domain" Text)
     {- ^ (Required) The domain of the certificate to look up. If no certificate is found with this name, an error will be returned. -}
     , _statuses :: !(TF.Attribute s "statuses" Text)
     {- ^ (Optional) A list of statuses on which to filter the returned list. Valid values are @PENDING_VALIDATION@ , @ISSUED@ , @INACTIVE@ , @EXPIRED@ , @VALIDATION_TIMED_OUT@ , @REVOKED@ and @FAILED@ . If no value is specified, only certificates in the @ISSUED@ state are returned. -}
@@ -590,8 +590,9 @@ instance HasStatuses (AcmCertificateDataSource s) Text where
              (\s a -> s { _statuses = a } :: AcmCertificateDataSource s)
 
 instance HasComputedArn (AcmCertificateDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (AcmCertificateDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 acmCertificateDataSource :: TF.DataSource TF.AWS (AcmCertificateDataSource s)
 acmCertificateDataSource =
@@ -609,13 +610,13 @@ resources.
 data AmiDataSource s = AmiDataSource {
       _executable_users :: !(TF.Attribute s "executable_users" Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter           :: !(TF.Attribute s "filter" Text)
+    , _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _most_recent      :: !(TF.Attribute s "most_recent" Text)
+    , _most_recent :: !(TF.Attribute s "most_recent" Text)
     {- ^ (Optional) If more than one result is returned, use the most recent AMI. -}
-    , _name_regex       :: !(TF.Attribute s "name_regex" Text)
+    , _name_regex :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners           :: !(TF.Attribute s "owners" Text)
+    , _owners :: !(TF.Attribute s "owners" Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
@@ -664,100 +665,124 @@ instance HasOwners (AmiDataSource s) Text where
              (\s a -> s { _owners = a } :: AmiDataSource s)
 
 instance HasComputedArchitecture (AmiDataSource s) Text where
-    computedArchitecture =
-        to (\x -> TF.Computed (TF.referenceKey x) "architecture")
+    type HasComputedArchitectureThread (AmiDataSource s) Text = s
+
+    computedArchitecture = to (\_ -> TF.Computed "architecture")
 
 instance HasComputedBlockDeviceMappings (AmiDataSource s) Text where
-    computedBlockDeviceMappings =
-        to (\x -> TF.Computed (TF.referenceKey x) "block_device_mappings")
+    type HasComputedBlockDeviceMappingsThread (AmiDataSource s) Text = s
+
+    computedBlockDeviceMappings = to (\_ -> TF.Computed "block_device_mappings")
 
 instance HasComputedCreationDate (AmiDataSource s) Text where
-    computedCreationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_date")
+    type HasComputedCreationDateThread (AmiDataSource s) Text = s
+
+    computedCreationDate = to (\_ -> TF.Computed "creation_date")
 
 instance HasComputedDescription (AmiDataSource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (AmiDataSource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedHypervisor (AmiDataSource s) Text where
-    computedHypervisor =
-        to (\x -> TF.Computed (TF.referenceKey x) "hypervisor")
+    type HasComputedHypervisorThread (AmiDataSource s) Text = s
+
+    computedHypervisor = to (\_ -> TF.Computed "hypervisor")
 
 instance HasComputedImageId (AmiDataSource s) Text where
-    computedImageId =
-        to (\x -> TF.Computed (TF.referenceKey x) "image_id")
+    type HasComputedImageIdThread (AmiDataSource s) Text = s
+
+    computedImageId = to (\_ -> TF.Computed "image_id")
 
 instance HasComputedImageLocation (AmiDataSource s) Text where
-    computedImageLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "image_location")
+    type HasComputedImageLocationThread (AmiDataSource s) Text = s
+
+    computedImageLocation = to (\_ -> TF.Computed "image_location")
 
 instance HasComputedImageOwnerAlias (AmiDataSource s) Text where
-    computedImageOwnerAlias =
-        to (\x -> TF.Computed (TF.referenceKey x) "image_owner_alias")
+    type HasComputedImageOwnerAliasThread (AmiDataSource s) Text = s
+
+    computedImageOwnerAlias = to (\_ -> TF.Computed "image_owner_alias")
 
 instance HasComputedImageType (AmiDataSource s) Text where
-    computedImageType =
-        to (\x -> TF.Computed (TF.referenceKey x) "image_type")
+    type HasComputedImageTypeThread (AmiDataSource s) Text = s
+
+    computedImageType = to (\_ -> TF.Computed "image_type")
 
 instance HasComputedKernelId (AmiDataSource s) Text where
-    computedKernelId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kernel_id")
+    type HasComputedKernelIdThread (AmiDataSource s) Text = s
+
+    computedKernelId = to (\_ -> TF.Computed "kernel_id")
 
 instance HasComputedName (AmiDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (AmiDataSource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedOwnerId (AmiDataSource s) Text where
-    computedOwnerId =
-        to (\x -> TF.Computed (TF.referenceKey x) "owner_id")
+    type HasComputedOwnerIdThread (AmiDataSource s) Text = s
+
+    computedOwnerId = to (\_ -> TF.Computed "owner_id")
 
 instance HasComputedPlatform (AmiDataSource s) Text where
-    computedPlatform =
-        to (\x -> TF.Computed (TF.referenceKey x) "platform")
+    type HasComputedPlatformThread (AmiDataSource s) Text = s
+
+    computedPlatform = to (\_ -> TF.Computed "platform")
 
 instance HasComputedProductCodes (AmiDataSource s) Text where
-    computedProductCodes =
-        to (\x -> TF.Computed (TF.referenceKey x) "product_codes")
+    type HasComputedProductCodesThread (AmiDataSource s) Text = s
+
+    computedProductCodes = to (\_ -> TF.Computed "product_codes")
 
 instance HasComputedPublic (AmiDataSource s) Text where
-    computedPublic =
-        to (\x -> TF.Computed (TF.referenceKey x) "public")
+    type HasComputedPublicThread (AmiDataSource s) Text = s
+
+    computedPublic = to (\_ -> TF.Computed "public")
 
 instance HasComputedRamdiskId (AmiDataSource s) Text where
-    computedRamdiskId =
-        to (\x -> TF.Computed (TF.referenceKey x) "ramdisk_id")
+    type HasComputedRamdiskIdThread (AmiDataSource s) Text = s
+
+    computedRamdiskId = to (\_ -> TF.Computed "ramdisk_id")
 
 instance HasComputedRootDeviceName (AmiDataSource s) Text where
-    computedRootDeviceName =
-        to (\x -> TF.Computed (TF.referenceKey x) "root_device_name")
+    type HasComputedRootDeviceNameThread (AmiDataSource s) Text = s
+
+    computedRootDeviceName = to (\_ -> TF.Computed "root_device_name")
 
 instance HasComputedRootDeviceType (AmiDataSource s) Text where
-    computedRootDeviceType =
-        to (\x -> TF.Computed (TF.referenceKey x) "root_device_type")
+    type HasComputedRootDeviceTypeThread (AmiDataSource s) Text = s
+
+    computedRootDeviceType = to (\_ -> TF.Computed "root_device_type")
 
 instance HasComputedRootSnapshotId (AmiDataSource s) Text where
-    computedRootSnapshotId =
-        to (\x -> TF.Computed (TF.referenceKey x) "root_snapshot_id")
+    type HasComputedRootSnapshotIdThread (AmiDataSource s) Text = s
+
+    computedRootSnapshotId = to (\_ -> TF.Computed "root_snapshot_id")
 
 instance HasComputedSriovNetSupport (AmiDataSource s) Text where
-    computedSriovNetSupport =
-        to (\x -> TF.Computed (TF.referenceKey x) "sriov_net_support")
+    type HasComputedSriovNetSupportThread (AmiDataSource s) Text = s
+
+    computedSriovNetSupport = to (\_ -> TF.Computed "sriov_net_support")
 
 instance HasComputedState (AmiDataSource s) Text where
-    computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
+    type HasComputedStateThread (AmiDataSource s) Text = s
+
+    computedState = to (\_ -> TF.Computed "state")
 
 instance HasComputedStateReason (AmiDataSource s) Text where
-    computedStateReason =
-        to (\x -> TF.Computed (TF.referenceKey x) "state_reason")
+    type HasComputedStateReasonThread (AmiDataSource s) Text = s
+
+    computedStateReason = to (\_ -> TF.Computed "state_reason")
 
 instance HasComputedTags (AmiDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (AmiDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedVirtualizationType (AmiDataSource s) Text where
-    computedVirtualizationType =
-        to (\x -> TF.Computed (TF.referenceKey x) "virtualization_type")
+    type HasComputedVirtualizationTypeThread (AmiDataSource s) Text = s
+
+    computedVirtualizationType = to (\_ -> TF.Computed "virtualization_type")
 
 amiDataSource :: TF.DataSource TF.AWS (AmiDataSource s)
 amiDataSource =
@@ -778,11 +803,11 @@ criteria.
 data AmiIdsDataSource s = AmiIdsDataSource {
       _executable_users :: !(TF.Attribute s "executable_users" Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on  the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter           :: !(TF.Attribute s "filter" Text)
+    , _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _name_regex       :: !(TF.Attribute s "name_regex" Text)
+    , _name_regex :: !(TF.Attribute s "name_regex" Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners           :: !(TF.Attribute s "owners" Text)
+    , _owners :: !(TF.Attribute s "owners" Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
@@ -856,8 +881,9 @@ instance HasFilter (AutoscalingGroupsDataSource s) Text where
              (\s a -> s { _filter = a } :: AutoscalingGroupsDataSource s)
 
 instance HasComputedNames (AutoscalingGroupsDataSource s) Text where
-    computedNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "names")
+    type HasComputedNamesThread (AutoscalingGroupsDataSource s) Text = s
+
+    computedNames = to (\_ -> TF.Computed "names")
 
 autoscalingGroupsDataSource :: TF.DataSource TF.AWS (AutoscalingGroupsDataSource s)
 autoscalingGroupsDataSource =
@@ -878,7 +904,7 @@ numbers. This is different from the @aws_availability_zones@ (plural) data
 source, which provides a list of the available zones.
 -}
 data AvailabilityZoneDataSource s = AvailabilityZoneDataSource {
-      _name  :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The full name of the availability zone to select. -}
     , _state :: !(TF.Attribute s "state" Text)
     {- ^ (Optional) A specific availability zone state to require. May be any of @"available"@ , @"information"@ or @"impaired"@ . -}
@@ -905,20 +931,24 @@ instance HasState (AvailabilityZoneDataSource s) Text where
              (\s a -> s { _state = a } :: AvailabilityZoneDataSource s)
 
 instance HasComputedName (AvailabilityZoneDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (AvailabilityZoneDataSource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedNameSuffix (AvailabilityZoneDataSource s) Text where
-    computedNameSuffix =
-        to (\x -> TF.Computed (TF.referenceKey x) "name_suffix")
+    type HasComputedNameSuffixThread (AvailabilityZoneDataSource s) Text = s
+
+    computedNameSuffix = to (\_ -> TF.Computed "name_suffix")
 
 instance HasComputedRegion (AvailabilityZoneDataSource s) TF.Region where
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
+    type HasComputedRegionThread (AvailabilityZoneDataSource s) TF.Region = s
+
+    computedRegion = to (\_ -> TF.Computed "region")
 
 instance HasComputedState (AvailabilityZoneDataSource s) Text where
-    computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
+    type HasComputedStateThread (AvailabilityZoneDataSource s) Text = s
+
+    computedState = to (\_ -> TF.Computed "state")
 
 availabilityZoneDataSource :: TF.DataSource TF.AWS (AvailabilityZoneDataSource s)
 availabilityZoneDataSource =
@@ -954,8 +984,9 @@ instance HasState (AvailabilityZonesDataSource s) Text where
              (\s a -> s { _state = a } :: AvailabilityZonesDataSource s)
 
 instance HasComputedNames (AvailabilityZonesDataSource s) Text where
-    computedNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "names")
+    type HasComputedNamesThread (AvailabilityZonesDataSource s) Text = s
+
+    computedNames = to (\_ -> TF.Computed "names")
 
 availabilityZonesDataSource :: TF.DataSource TF.AWS (AvailabilityZonesDataSource s)
 availabilityZonesDataSource =
@@ -977,12 +1008,14 @@ instance TF.ToHCL (BillingServiceAccountDataSource s) where
     toHCL _ = TF.block []
 
 instance HasComputedArn (BillingServiceAccountDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (BillingServiceAccountDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (BillingServiceAccountDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (BillingServiceAccountDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 billingServiceAccountDataSource :: TF.DataSource TF.AWS (BillingServiceAccountDataSource s)
 billingServiceAccountDataSource =
@@ -998,9 +1031,9 @@ and ARN in which Terraform is authorized.
 data CallerIdentityDataSource s = CallerIdentityDataSource {
       _account_id :: !(TF.Attribute s "account_id" Text)
     {- ^ - The AWS Account ID number of the account that owns or contains the calling entity. -}
-    , _arn        :: !(TF.Attribute s "arn" Text)
+    , _arn :: !(TF.Attribute s "arn" Text)
     {- ^ - The AWS ARN associated with the calling entity. -}
-    , _user_id    :: !(TF.Attribute s "user_id" Text)
+    , _user_id :: !(TF.Attribute s "user_id" Text)
     {- ^ - The unique identifier of the calling entity. -}
     } deriving (Show, Eq)
 
@@ -1050,7 +1083,7 @@ effective account in which Terraform is working.
 data CanonicalUserIdDataSource s = CanonicalUserIdDataSource {
       _display_name :: !(TF.Attribute s "display_name" Text)
     {- ^ - The human-friendly name linked to the canonical user ID. -}
-    , _id           :: !(TF.Attribute s "id" Text)
+    , _id :: !(TF.Attribute s "id" Text)
     {- ^ - The canonical user ID associated with the AWS account. -}
     } deriving (Show, Eq)
 
@@ -1105,44 +1138,54 @@ instance HasName (CloudformationStackDataSource s) Text where
              (\s a -> s { _name = a } :: CloudformationStackDataSource s)
 
 instance HasComputedCapabilities (CloudformationStackDataSource s) Text where
-    computedCapabilities =
-        to (\x -> TF.Computed (TF.referenceKey x) "capabilities")
+    type HasComputedCapabilitiesThread (CloudformationStackDataSource s) Text = s
+
+    computedCapabilities = to (\_ -> TF.Computed "capabilities")
 
 instance HasComputedDescription (CloudformationStackDataSource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (CloudformationStackDataSource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedDisableRollback (CloudformationStackDataSource s) Text where
-    computedDisableRollback =
-        to (\x -> TF.Computed (TF.referenceKey x) "disable_rollback")
+    type HasComputedDisableRollbackThread (CloudformationStackDataSource s) Text = s
+
+    computedDisableRollback = to (\_ -> TF.Computed "disable_rollback")
 
 instance HasComputedIamRoleArn (CloudformationStackDataSource s) Text where
-    computedIamRoleArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "iam_role_arn")
+    type HasComputedIamRoleArnThread (CloudformationStackDataSource s) Text = s
+
+    computedIamRoleArn = to (\_ -> TF.Computed "iam_role_arn")
 
 instance HasComputedNotificationArns (CloudformationStackDataSource s) Text where
-    computedNotificationArns =
-        to (\x -> TF.Computed (TF.referenceKey x) "notification_arns")
+    type HasComputedNotificationArnsThread (CloudformationStackDataSource s) Text = s
+
+    computedNotificationArns = to (\_ -> TF.Computed "notification_arns")
 
 instance HasComputedOutputs (CloudformationStackDataSource s) Text where
-    computedOutputs =
-        to (\x -> TF.Computed (TF.referenceKey x) "outputs")
+    type HasComputedOutputsThread (CloudformationStackDataSource s) Text = s
+
+    computedOutputs = to (\_ -> TF.Computed "outputs")
 
 instance HasComputedParameters (CloudformationStackDataSource s) Text where
-    computedParameters =
-        to (\x -> TF.Computed (TF.referenceKey x) "parameters")
+    type HasComputedParametersThread (CloudformationStackDataSource s) Text = s
+
+    computedParameters = to (\_ -> TF.Computed "parameters")
 
 instance HasComputedTags (CloudformationStackDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (CloudformationStackDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedTemplateBody (CloudformationStackDataSource s) Text where
-    computedTemplateBody =
-        to (\x -> TF.Computed (TF.referenceKey x) "template_body")
+    type HasComputedTemplateBodyThread (CloudformationStackDataSource s) Text = s
+
+    computedTemplateBody = to (\_ -> TF.Computed "template_body")
 
 instance HasComputedTimeoutInMinutes (CloudformationStackDataSource s) Text where
-    computedTimeoutInMinutes =
-        to (\x -> TF.Computed (TF.referenceKey x) "timeout_in_minutes")
+    type HasComputedTimeoutInMinutesThread (CloudformationStackDataSource s) Text = s
+
+    computedTimeoutInMinutes = to (\_ -> TF.Computed "timeout_in_minutes")
 
 cloudformationStackDataSource :: TF.DataSource TF.AWS (CloudformationStackDataSource s)
 cloudformationStackDataSource =
@@ -1176,12 +1219,14 @@ instance HasRegion (CloudtrailServiceAccountDataSource s) TF.Region where
              (\s a -> s { _region = a } :: CloudtrailServiceAccountDataSource s)
 
 instance HasComputedArn (CloudtrailServiceAccountDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (CloudtrailServiceAccountDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (CloudtrailServiceAccountDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (CloudtrailServiceAccountDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 cloudtrailServiceAccountDataSource :: TF.DataSource TF.AWS (CloudtrailServiceAccountDataSource s)
 cloudtrailServiceAccountDataSource =
@@ -1212,144 +1257,179 @@ instance HasDbInstanceIdentifier (DbInstanceDataSource s) Text where
              (\s a -> s { _db_instance_identifier = a } :: DbInstanceDataSource s)
 
 instance HasComputedAddress (DbInstanceDataSource s) Text where
-    computedAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "address")
+    type HasComputedAddressThread (DbInstanceDataSource s) Text = s
+
+    computedAddress = to (\_ -> TF.Computed "address")
 
 instance HasComputedAllocatedStorage (DbInstanceDataSource s) Text where
-    computedAllocatedStorage =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocated_storage")
+    type HasComputedAllocatedStorageThread (DbInstanceDataSource s) Text = s
+
+    computedAllocatedStorage = to (\_ -> TF.Computed "allocated_storage")
 
 instance HasComputedAutoMinorVersionUpgrade (DbInstanceDataSource s) Text where
-    computedAutoMinorVersionUpgrade =
-        to (\x -> TF.Computed (TF.referenceKey x) "auto_minor_version_upgrade")
+    type HasComputedAutoMinorVersionUpgradeThread (DbInstanceDataSource s) Text = s
+
+    computedAutoMinorVersionUpgrade = to (\_ -> TF.Computed "auto_minor_version_upgrade")
 
 instance HasComputedAvailabilityZone (DbInstanceDataSource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (DbInstanceDataSource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedBackupRetentionPeriod (DbInstanceDataSource s) Text where
-    computedBackupRetentionPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "backup_retention_period")
+    type HasComputedBackupRetentionPeriodThread (DbInstanceDataSource s) Text = s
+
+    computedBackupRetentionPeriod = to (\_ -> TF.Computed "backup_retention_period")
 
 instance HasComputedCaCertIdentifier (DbInstanceDataSource s) Text where
-    computedCaCertIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "ca_cert_identifier")
+    type HasComputedCaCertIdentifierThread (DbInstanceDataSource s) Text = s
+
+    computedCaCertIdentifier = to (\_ -> TF.Computed "ca_cert_identifier")
 
 instance HasComputedDbClusterIdentifier (DbInstanceDataSource s) Text where
-    computedDbClusterIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_cluster_identifier")
+    type HasComputedDbClusterIdentifierThread (DbInstanceDataSource s) Text = s
+
+    computedDbClusterIdentifier = to (\_ -> TF.Computed "db_cluster_identifier")
 
 instance HasComputedDbInstanceArn (DbInstanceDataSource s) Text where
-    computedDbInstanceArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_instance_arn")
+    type HasComputedDbInstanceArnThread (DbInstanceDataSource s) Text = s
+
+    computedDbInstanceArn = to (\_ -> TF.Computed "db_instance_arn")
 
 instance HasComputedDbInstanceClass (DbInstanceDataSource s) Text where
-    computedDbInstanceClass =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_instance_class")
+    type HasComputedDbInstanceClassThread (DbInstanceDataSource s) Text = s
+
+    computedDbInstanceClass = to (\_ -> TF.Computed "db_instance_class")
 
 instance HasComputedDbInstancePort (DbInstanceDataSource s) TF.Word16 where
-    computedDbInstancePort =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_instance_port")
+    type HasComputedDbInstancePortThread (DbInstanceDataSource s) TF.Word16 = s
+
+    computedDbInstancePort = to (\_ -> TF.Computed "db_instance_port")
 
 instance HasComputedDbName (DbInstanceDataSource s) Text where
-    computedDbName =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_name")
+    type HasComputedDbNameThread (DbInstanceDataSource s) Text = s
+
+    computedDbName = to (\_ -> TF.Computed "db_name")
 
 instance HasComputedDbParameterGroups (DbInstanceDataSource s) Text where
-    computedDbParameterGroups =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_parameter_groups")
+    type HasComputedDbParameterGroupsThread (DbInstanceDataSource s) Text = s
+
+    computedDbParameterGroups = to (\_ -> TF.Computed "db_parameter_groups")
 
 instance HasComputedDbSecurityGroups (DbInstanceDataSource s) Text where
-    computedDbSecurityGroups =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_security_groups")
+    type HasComputedDbSecurityGroupsThread (DbInstanceDataSource s) Text = s
+
+    computedDbSecurityGroups = to (\_ -> TF.Computed "db_security_groups")
 
 instance HasComputedDbSubnetGroup (DbInstanceDataSource s) Text where
-    computedDbSubnetGroup =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_subnet_group")
+    type HasComputedDbSubnetGroupThread (DbInstanceDataSource s) Text = s
+
+    computedDbSubnetGroup = to (\_ -> TF.Computed "db_subnet_group")
 
 instance HasComputedEndpoint (DbInstanceDataSource s) Text where
-    computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
+    type HasComputedEndpointThread (DbInstanceDataSource s) Text = s
+
+    computedEndpoint = to (\_ -> TF.Computed "endpoint")
 
 instance HasComputedEngine (DbInstanceDataSource s) Text where
-    computedEngine =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine")
+    type HasComputedEngineThread (DbInstanceDataSource s) Text = s
+
+    computedEngine = to (\_ -> TF.Computed "engine")
 
 instance HasComputedEngineVersion (DbInstanceDataSource s) Text where
-    computedEngineVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine_version")
+    type HasComputedEngineVersionThread (DbInstanceDataSource s) Text = s
+
+    computedEngineVersion = to (\_ -> TF.Computed "engine_version")
 
 instance HasComputedHostedZoneId (DbInstanceDataSource s) Text where
-    computedHostedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "hosted_zone_id")
+    type HasComputedHostedZoneIdThread (DbInstanceDataSource s) Text = s
+
+    computedHostedZoneId = to (\_ -> TF.Computed "hosted_zone_id")
 
 instance HasComputedIops (DbInstanceDataSource s) Text where
-    computedIops =
-        to (\x -> TF.Computed (TF.referenceKey x) "iops")
+    type HasComputedIopsThread (DbInstanceDataSource s) Text = s
+
+    computedIops = to (\_ -> TF.Computed "iops")
 
 instance HasComputedKmsKeyId (DbInstanceDataSource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (DbInstanceDataSource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 instance HasComputedLicenseModel (DbInstanceDataSource s) Text where
-    computedLicenseModel =
-        to (\x -> TF.Computed (TF.referenceKey x) "license_model")
+    type HasComputedLicenseModelThread (DbInstanceDataSource s) Text = s
+
+    computedLicenseModel = to (\_ -> TF.Computed "license_model")
 
 instance HasComputedMasterUsername (DbInstanceDataSource s) Text where
-    computedMasterUsername =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_username")
+    type HasComputedMasterUsernameThread (DbInstanceDataSource s) Text = s
+
+    computedMasterUsername = to (\_ -> TF.Computed "master_username")
 
 instance HasComputedMonitoringInterval (DbInstanceDataSource s) Text where
-    computedMonitoringInterval =
-        to (\x -> TF.Computed (TF.referenceKey x) "monitoring_interval")
+    type HasComputedMonitoringIntervalThread (DbInstanceDataSource s) Text = s
+
+    computedMonitoringInterval = to (\_ -> TF.Computed "monitoring_interval")
 
 instance HasComputedMonitoringRoleArn (DbInstanceDataSource s) Text where
-    computedMonitoringRoleArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "monitoring_role_arn")
+    type HasComputedMonitoringRoleArnThread (DbInstanceDataSource s) Text = s
+
+    computedMonitoringRoleArn = to (\_ -> TF.Computed "monitoring_role_arn")
 
 instance HasComputedMultiAz (DbInstanceDataSource s) Text where
-    computedMultiAz =
-        to (\x -> TF.Computed (TF.referenceKey x) "multi_az")
+    type HasComputedMultiAzThread (DbInstanceDataSource s) Text = s
+
+    computedMultiAz = to (\_ -> TF.Computed "multi_az")
 
 instance HasComputedOptionGroupMemberships (DbInstanceDataSource s) Text where
-    computedOptionGroupMemberships =
-        to (\x -> TF.Computed (TF.referenceKey x) "option_group_memberships")
+    type HasComputedOptionGroupMembershipsThread (DbInstanceDataSource s) Text = s
+
+    computedOptionGroupMemberships = to (\_ -> TF.Computed "option_group_memberships")
 
 instance HasComputedPort (DbInstanceDataSource s) Text where
-    computedPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "port")
+    type HasComputedPortThread (DbInstanceDataSource s) Text = s
+
+    computedPort = to (\_ -> TF.Computed "port")
 
 instance HasComputedPreferredBackupWindow (DbInstanceDataSource s) Text where
-    computedPreferredBackupWindow =
-        to (\x -> TF.Computed (TF.referenceKey x) "preferred_backup_window")
+    type HasComputedPreferredBackupWindowThread (DbInstanceDataSource s) Text = s
+
+    computedPreferredBackupWindow = to (\_ -> TF.Computed "preferred_backup_window")
 
 instance HasComputedPreferredMaintenanceWindow (DbInstanceDataSource s) Text where
-    computedPreferredMaintenanceWindow =
-        to (\x -> TF.Computed (TF.referenceKey x) "preferred_maintenance_window")
+    type HasComputedPreferredMaintenanceWindowThread (DbInstanceDataSource s) Text = s
+
+    computedPreferredMaintenanceWindow = to (\_ -> TF.Computed "preferred_maintenance_window")
 
 instance HasComputedPubliclyAccessible (DbInstanceDataSource s) Text where
-    computedPubliclyAccessible =
-        to (\x -> TF.Computed (TF.referenceKey x) "publicly_accessible")
+    type HasComputedPubliclyAccessibleThread (DbInstanceDataSource s) Text = s
+
+    computedPubliclyAccessible = to (\_ -> TF.Computed "publicly_accessible")
 
 instance HasComputedReplicateSourceDb (DbInstanceDataSource s) Text where
-    computedReplicateSourceDb =
-        to (\x -> TF.Computed (TF.referenceKey x) "replicate_source_db")
+    type HasComputedReplicateSourceDbThread (DbInstanceDataSource s) Text = s
+
+    computedReplicateSourceDb = to (\_ -> TF.Computed "replicate_source_db")
 
 instance HasComputedStorageEncrypted (DbInstanceDataSource s) Text where
-    computedStorageEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_encrypted")
+    type HasComputedStorageEncryptedThread (DbInstanceDataSource s) Text = s
+
+    computedStorageEncrypted = to (\_ -> TF.Computed "storage_encrypted")
 
 instance HasComputedStorageType (DbInstanceDataSource s) Text where
-    computedStorageType =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_type")
+    type HasComputedStorageTypeThread (DbInstanceDataSource s) Text = s
+
+    computedStorageType = to (\_ -> TF.Computed "storage_type")
 
 instance HasComputedTimezone (DbInstanceDataSource s) Text where
-    computedTimezone =
-        to (\x -> TF.Computed (TF.referenceKey x) "timezone")
+    type HasComputedTimezoneThread (DbInstanceDataSource s) Text = s
+
+    computedTimezone = to (\_ -> TF.Computed "timezone")
 
 instance HasComputedVpcSecurityGroups (DbInstanceDataSource s) Text where
-    computedVpcSecurityGroups =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_security_groups")
+    type HasComputedVpcSecurityGroupsThread (DbInstanceDataSource s) Text = s
+
+    computedVpcSecurityGroups = to (\_ -> TF.Computed "vpc_security_groups")
 
 dbInstanceDataSource :: TF.DataSource TF.AWS (DbInstanceDataSource s)
 dbInstanceDataSource =
@@ -1369,13 +1449,13 @@ data DbSnapshotDataSource s = DbSnapshotDataSource {
     {- ^ (Optional) Returns the list of snapshots created by the specific db_instance -}
     , _db_snapshot_identifier :: !(TF.Attribute s "db_snapshot_identifier" Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
-    , _include_public         :: !(TF.Attribute s "include_public" Text)
+    , _include_public :: !(TF.Attribute s "include_public" Text)
     {- ^ (Optional) Set this value to true to include manual DB snapshots that are public and can be copied or restored by any AWS account, otherwise set this value to false. The default is @false@ . -}
-    , _include_shared         :: !(TF.Attribute s "include_shared" Text)
+    , _include_shared :: !(TF.Attribute s "include_shared" Text)
     {- ^ (Optional) Set this value to true to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, otherwise set this value to false. The default is @false@ . -}
-    , _most_recent            :: !(TF.Attribute s "most_recent" Text)
+    , _most_recent :: !(TF.Attribute s "most_recent" Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Snapshot. -}
-    , _snapshot_type          :: !(TF.Attribute s "snapshot_type" Text)
+    , _snapshot_type :: !(TF.Attribute s "snapshot_type" Text)
     {- ^ (Optional) The type of snapshots to be returned. If you don't specify a SnapshotType value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. Possible values are, @automated@ , @manual@ , @shared@ and @public@ . -}
     } deriving (Show, Eq)
 
@@ -1432,72 +1512,89 @@ instance HasSnapshotType (DbSnapshotDataSource s) Text where
              (\s a -> s { _snapshot_type = a } :: DbSnapshotDataSource s)
 
 instance HasComputedAllocatedStorage (DbSnapshotDataSource s) Text where
-    computedAllocatedStorage =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocated_storage")
+    type HasComputedAllocatedStorageThread (DbSnapshotDataSource s) Text = s
+
+    computedAllocatedStorage = to (\_ -> TF.Computed "allocated_storage")
 
 instance HasComputedAvailabilityZone (DbSnapshotDataSource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (DbSnapshotDataSource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedDbSnapshotArn (DbSnapshotDataSource s) Text where
-    computedDbSnapshotArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_snapshot_arn")
+    type HasComputedDbSnapshotArnThread (DbSnapshotDataSource s) Text = s
+
+    computedDbSnapshotArn = to (\_ -> TF.Computed "db_snapshot_arn")
 
 instance HasComputedEncrypted (DbSnapshotDataSource s) Text where
-    computedEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted")
+    type HasComputedEncryptedThread (DbSnapshotDataSource s) Text = s
+
+    computedEncrypted = to (\_ -> TF.Computed "encrypted")
 
 instance HasComputedEngine (DbSnapshotDataSource s) Text where
-    computedEngine =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine")
+    type HasComputedEngineThread (DbSnapshotDataSource s) Text = s
+
+    computedEngine = to (\_ -> TF.Computed "engine")
 
 instance HasComputedEngineVersion (DbSnapshotDataSource s) Text where
-    computedEngineVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine_version")
+    type HasComputedEngineVersionThread (DbSnapshotDataSource s) Text = s
+
+    computedEngineVersion = to (\_ -> TF.Computed "engine_version")
 
 instance HasComputedId (DbSnapshotDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (DbSnapshotDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedIops (DbSnapshotDataSource s) Text where
-    computedIops =
-        to (\x -> TF.Computed (TF.referenceKey x) "iops")
+    type HasComputedIopsThread (DbSnapshotDataSource s) Text = s
+
+    computedIops = to (\_ -> TF.Computed "iops")
 
 instance HasComputedKmsKeyId (DbSnapshotDataSource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (DbSnapshotDataSource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 instance HasComputedLicenseModel (DbSnapshotDataSource s) Text where
-    computedLicenseModel =
-        to (\x -> TF.Computed (TF.referenceKey x) "license_model")
+    type HasComputedLicenseModelThread (DbSnapshotDataSource s) Text = s
+
+    computedLicenseModel = to (\_ -> TF.Computed "license_model")
 
 instance HasComputedOptionGroupName (DbSnapshotDataSource s) Text where
-    computedOptionGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "option_group_name")
+    type HasComputedOptionGroupNameThread (DbSnapshotDataSource s) Text = s
+
+    computedOptionGroupName = to (\_ -> TF.Computed "option_group_name")
 
 instance HasComputedSnapshotCreateTime (DbSnapshotDataSource s) Text where
-    computedSnapshotCreateTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_create_time")
+    type HasComputedSnapshotCreateTimeThread (DbSnapshotDataSource s) Text = s
+
+    computedSnapshotCreateTime = to (\_ -> TF.Computed "snapshot_create_time")
 
 instance HasComputedSourceDbSnapshotIdentifier (DbSnapshotDataSource s) Text where
-    computedSourceDbSnapshotIdentifier =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_db_snapshot_identifier")
+    type HasComputedSourceDbSnapshotIdentifierThread (DbSnapshotDataSource s) Text = s
+
+    computedSourceDbSnapshotIdentifier = to (\_ -> TF.Computed "source_db_snapshot_identifier")
 
 instance HasComputedSourceRegion (DbSnapshotDataSource s) TF.Region where
-    computedSourceRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_region")
+    type HasComputedSourceRegionThread (DbSnapshotDataSource s) TF.Region = s
+
+    computedSourceRegion = to (\_ -> TF.Computed "source_region")
 
 instance HasComputedStatus (DbSnapshotDataSource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (DbSnapshotDataSource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 instance HasComputedStorageType (DbSnapshotDataSource s) Text where
-    computedStorageType =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_type")
+    type HasComputedStorageTypeThread (DbSnapshotDataSource s) Text = s
+
+    computedStorageType = to (\_ -> TF.Computed "storage_type")
 
 instance HasComputedVpcId (DbSnapshotDataSource s) Text where
-    computedVpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_id")
+    type HasComputedVpcIdThread (DbSnapshotDataSource s) Text = s
+
+    computedVpcId = to (\_ -> TF.Computed "vpc_id")
 
 dbSnapshotDataSource :: TF.DataSource TF.AWS (DbSnapshotDataSource s)
 dbSnapshotDataSource =
@@ -1545,15 +1642,15 @@ Use this data source to get information about an EBS Snapshot for use when
 provisioning EBS Volumes
 -}
 data EbsSnapshotDataSource s = EbsSnapshotDataSource {
-      _filter                 :: !(TF.Attribute s "filter" Text)
+      _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _most_recent            :: !(TF.Attribute s "most_recent" Text)
+    , _most_recent :: !(TF.Attribute s "most_recent" Text)
     {- ^ (Optional) If more than one result is returned, use the most recent snapshot. -}
-    , _owners                 :: !(TF.Attribute s "owners" Text)
+    , _owners :: !(TF.Attribute s "owners" Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Attribute s "restorable_by_user_ids" Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
-    , _snapshot_ids           :: !(TF.Attribute s "snapshot_ids" Text)
+    , _snapshot_ids :: !(TF.Attribute s "snapshot_ids" Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
     } deriving (Show, Eq)
 
@@ -1602,52 +1699,64 @@ instance HasSnapshotIds (EbsSnapshotDataSource s) Text where
              (\s a -> s { _snapshot_ids = a } :: EbsSnapshotDataSource s)
 
 instance HasComputedDataEncryptionKeyId (EbsSnapshotDataSource s) Text where
-    computedDataEncryptionKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "data_encryption_key_id")
+    type HasComputedDataEncryptionKeyIdThread (EbsSnapshotDataSource s) Text = s
+
+    computedDataEncryptionKeyId = to (\_ -> TF.Computed "data_encryption_key_id")
 
 instance HasComputedDescription (EbsSnapshotDataSource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (EbsSnapshotDataSource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 instance HasComputedEncrypted (EbsSnapshotDataSource s) Text where
-    computedEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted")
+    type HasComputedEncryptedThread (EbsSnapshotDataSource s) Text = s
+
+    computedEncrypted = to (\_ -> TF.Computed "encrypted")
 
 instance HasComputedId (EbsSnapshotDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EbsSnapshotDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedKmsKeyId (EbsSnapshotDataSource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (EbsSnapshotDataSource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 instance HasComputedOwnerAlias (EbsSnapshotDataSource s) Text where
-    computedOwnerAlias =
-        to (\x -> TF.Computed (TF.referenceKey x) "owner_alias")
+    type HasComputedOwnerAliasThread (EbsSnapshotDataSource s) Text = s
+
+    computedOwnerAlias = to (\_ -> TF.Computed "owner_alias")
 
 instance HasComputedOwnerId (EbsSnapshotDataSource s) Text where
-    computedOwnerId =
-        to (\x -> TF.Computed (TF.referenceKey x) "owner_id")
+    type HasComputedOwnerIdThread (EbsSnapshotDataSource s) Text = s
+
+    computedOwnerId = to (\_ -> TF.Computed "owner_id")
 
 instance HasComputedSnapshotId (EbsSnapshotDataSource s) Text where
-    computedSnapshotId =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_id")
+    type HasComputedSnapshotIdThread (EbsSnapshotDataSource s) Text = s
+
+    computedSnapshotId = to (\_ -> TF.Computed "snapshot_id")
 
 instance HasComputedState (EbsSnapshotDataSource s) Text where
-    computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
+    type HasComputedStateThread (EbsSnapshotDataSource s) Text = s
+
+    computedState = to (\_ -> TF.Computed "state")
 
 instance HasComputedTags (EbsSnapshotDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (EbsSnapshotDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedVolumeId (EbsSnapshotDataSource s) Text where
-    computedVolumeId =
-        to (\x -> TF.Computed (TF.referenceKey x) "volume_id")
+    type HasComputedVolumeIdThread (EbsSnapshotDataSource s) Text = s
+
+    computedVolumeId = to (\_ -> TF.Computed "volume_id")
 
 instance HasComputedVolumeSize (EbsSnapshotDataSource s) Text where
-    computedVolumeSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "volume_size")
+    type HasComputedVolumeSizeThread (EbsSnapshotDataSource s) Text = s
+
+    computedVolumeSize = to (\_ -> TF.Computed "volume_size")
 
 ebsSnapshotDataSource :: TF.DataSource TF.AWS (EbsSnapshotDataSource s)
 ebsSnapshotDataSource =
@@ -1666,9 +1775,9 @@ Use this data source to get a list of EBS Snapshot IDs matching the
 specified criteria.
 -}
 data EbsSnapshotIdsDataSource s = EbsSnapshotIdsDataSource {
-      _filter                 :: !(TF.Attribute s "filter" Text)
+      _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _owners                 :: !(TF.Attribute s "owners" Text)
+    , _owners :: !(TF.Attribute s "owners" Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Attribute s "restorable_by_user_ids" Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
@@ -1717,7 +1826,7 @@ Use this data source to get information about an EBS volume for use in other
 resources.
 -}
 data EbsVolumeDataSource s = EbsVolumeDataSource {
-      _filter      :: !(TF.Attribute s "filter" Text)
+      _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html> . -}
     , _most_recent :: !(TF.Attribute s "most_recent" Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Volume. -}
@@ -1744,48 +1853,59 @@ instance HasMostRecent (EbsVolumeDataSource s) Text where
              (\s a -> s { _most_recent = a } :: EbsVolumeDataSource s)
 
 instance HasComputedArn (EbsVolumeDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (EbsVolumeDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedAvailabilityZone (EbsVolumeDataSource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (EbsVolumeDataSource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedEncrypted (EbsVolumeDataSource s) Text where
-    computedEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted")
+    type HasComputedEncryptedThread (EbsVolumeDataSource s) Text = s
+
+    computedEncrypted = to (\_ -> TF.Computed "encrypted")
 
 instance HasComputedId (EbsVolumeDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (EbsVolumeDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedIops (EbsVolumeDataSource s) Text where
-    computedIops =
-        to (\x -> TF.Computed (TF.referenceKey x) "iops")
+    type HasComputedIopsThread (EbsVolumeDataSource s) Text = s
+
+    computedIops = to (\_ -> TF.Computed "iops")
 
 instance HasComputedKmsKeyId (EbsVolumeDataSource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (EbsVolumeDataSource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 instance HasComputedSize (EbsVolumeDataSource s) Text where
-    computedSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "size")
+    type HasComputedSizeThread (EbsVolumeDataSource s) Text = s
+
+    computedSize = to (\_ -> TF.Computed "size")
 
 instance HasComputedSnapshotId (EbsVolumeDataSource s) Text where
-    computedSnapshotId =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_id")
+    type HasComputedSnapshotIdThread (EbsVolumeDataSource s) Text = s
+
+    computedSnapshotId = to (\_ -> TF.Computed "snapshot_id")
 
 instance HasComputedTags (EbsVolumeDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (EbsVolumeDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedVolumeId (EbsVolumeDataSource s) Text where
-    computedVolumeId =
-        to (\x -> TF.Computed (TF.referenceKey x) "volume_id")
+    type HasComputedVolumeIdThread (EbsVolumeDataSource s) Text = s
+
+    computedVolumeId = to (\_ -> TF.Computed "volume_id")
 
 instance HasComputedVolumeType (EbsVolumeDataSource s) Text where
-    computedVolumeType =
-        to (\x -> TF.Computed (TF.referenceKey x) "volume_type")
+    type HasComputedVolumeTypeThread (EbsVolumeDataSource s) Text = s
+
+    computedVolumeType = to (\_ -> TF.Computed "volume_type")
 
 ebsVolumeDataSource :: TF.DataSource TF.AWS (EbsVolumeDataSource s)
 ebsVolumeDataSource =
@@ -1818,16 +1938,19 @@ instance HasName (EcrRepositoryDataSource s) Text where
              (\s a -> s { _name = a } :: EcrRepositoryDataSource s)
 
 instance HasComputedArn (EcrRepositoryDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (EcrRepositoryDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedRegistryId (EcrRepositoryDataSource s) Text where
-    computedRegistryId =
-        to (\x -> TF.Computed (TF.referenceKey x) "registry_id")
+    type HasComputedRegistryIdThread (EcrRepositoryDataSource s) Text = s
+
+    computedRegistryId = to (\_ -> TF.Computed "registry_id")
 
 instance HasComputedRepositoryUrl (EcrRepositoryDataSource s) Text where
-    computedRepositoryUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "repository_url")
+    type HasComputedRepositoryUrlThread (EcrRepositoryDataSource s) Text = s
+
+    computedRepositoryUrl = to (\_ -> TF.Computed "repository_url")
 
 ecrRepositoryDataSource :: TF.DataSource TF.AWS (EcrRepositoryDataSource s)
 ecrRepositoryDataSource =
@@ -1859,24 +1982,29 @@ instance HasClusterName (EcsClusterDataSource s) Text where
              (\s a -> s { _cluster_name = a } :: EcsClusterDataSource s)
 
 instance HasComputedArn (EcsClusterDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (EcsClusterDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedPendingTasksCount (EcsClusterDataSource s) Text where
-    computedPendingTasksCount =
-        to (\x -> TF.Computed (TF.referenceKey x) "pending_tasks_count")
+    type HasComputedPendingTasksCountThread (EcsClusterDataSource s) Text = s
+
+    computedPendingTasksCount = to (\_ -> TF.Computed "pending_tasks_count")
 
 instance HasComputedRegisteredContainerInstancesCount (EcsClusterDataSource s) Text where
-    computedRegisteredContainerInstancesCount =
-        to (\x -> TF.Computed (TF.referenceKey x) "registered_container_instances_count")
+    type HasComputedRegisteredContainerInstancesCountThread (EcsClusterDataSource s) Text = s
+
+    computedRegisteredContainerInstancesCount = to (\_ -> TF.Computed "registered_container_instances_count")
 
 instance HasComputedRunningTasksCount (EcsClusterDataSource s) Text where
-    computedRunningTasksCount =
-        to (\x -> TF.Computed (TF.referenceKey x) "running_tasks_count")
+    type HasComputedRunningTasksCountThread (EcsClusterDataSource s) Text = s
+
+    computedRunningTasksCount = to (\_ -> TF.Computed "running_tasks_count")
 
 instance HasComputedStatus (EcsClusterDataSource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (EcsClusterDataSource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 ecsClusterDataSource :: TF.DataSource TF.AWS (EcsClusterDataSource s)
 ecsClusterDataSource =
@@ -1891,7 +2019,7 @@ The ECS container definition data source allows access to details of a
 specific container within an AWS ECS service.
 -}
 data EcsContainerDefinitionDataSource s = EcsContainerDefinitionDataSource {
-      _container_name  :: !(TF.Attribute s "container_name" Text)
+      _container_name :: !(TF.Attribute s "container_name" Text)
     {- ^ (Required) The name of the container definition -}
     , _task_definition :: !(TF.Attribute s "task_definition" Text)
     {- ^ (Required) The ARN of the task definition which contains the container -}
@@ -1918,36 +2046,44 @@ instance HasTaskDefinition (EcsContainerDefinitionDataSource s) Text where
              (\s a -> s { _task_definition = a } :: EcsContainerDefinitionDataSource s)
 
 instance HasComputedCpu (EcsContainerDefinitionDataSource s) Text where
-    computedCpu =
-        to (\x -> TF.Computed (TF.referenceKey x) "cpu")
+    type HasComputedCpuThread (EcsContainerDefinitionDataSource s) Text = s
+
+    computedCpu = to (\_ -> TF.Computed "cpu")
 
 instance HasComputedDisableNetworking (EcsContainerDefinitionDataSource s) Text where
-    computedDisableNetworking =
-        to (\x -> TF.Computed (TF.referenceKey x) "disable_networking")
+    type HasComputedDisableNetworkingThread (EcsContainerDefinitionDataSource s) Text = s
+
+    computedDisableNetworking = to (\_ -> TF.Computed "disable_networking")
 
 instance HasComputedDockerLabels (EcsContainerDefinitionDataSource s) Text where
-    computedDockerLabels =
-        to (\x -> TF.Computed (TF.referenceKey x) "docker_labels")
+    type HasComputedDockerLabelsThread (EcsContainerDefinitionDataSource s) Text = s
+
+    computedDockerLabels = to (\_ -> TF.Computed "docker_labels")
 
 instance HasComputedEnvironment (EcsContainerDefinitionDataSource s) Text where
-    computedEnvironment =
-        to (\x -> TF.Computed (TF.referenceKey x) "environment")
+    type HasComputedEnvironmentThread (EcsContainerDefinitionDataSource s) Text = s
+
+    computedEnvironment = to (\_ -> TF.Computed "environment")
 
 instance HasComputedImage (EcsContainerDefinitionDataSource s) Text where
-    computedImage =
-        to (\x -> TF.Computed (TF.referenceKey x) "image")
+    type HasComputedImageThread (EcsContainerDefinitionDataSource s) Text = s
+
+    computedImage = to (\_ -> TF.Computed "image")
 
 instance HasComputedImageDigest (EcsContainerDefinitionDataSource s) Text where
-    computedImageDigest =
-        to (\x -> TF.Computed (TF.referenceKey x) "image_digest")
+    type HasComputedImageDigestThread (EcsContainerDefinitionDataSource s) Text = s
+
+    computedImageDigest = to (\_ -> TF.Computed "image_digest")
 
 instance HasComputedMemory (EcsContainerDefinitionDataSource s) Text where
-    computedMemory =
-        to (\x -> TF.Computed (TF.referenceKey x) "memory")
+    type HasComputedMemoryThread (EcsContainerDefinitionDataSource s) Text = s
+
+    computedMemory = to (\_ -> TF.Computed "memory")
 
 instance HasComputedMemoryReservation (EcsContainerDefinitionDataSource s) Text where
-    computedMemoryReservation =
-        to (\x -> TF.Computed (TF.referenceKey x) "memory_reservation")
+    type HasComputedMemoryReservationThread (EcsContainerDefinitionDataSource s) Text = s
+
+    computedMemoryReservation = to (\_ -> TF.Computed "memory_reservation")
 
 ecsContainerDefinitionDataSource :: TF.DataSource TF.AWS (EcsContainerDefinitionDataSource s)
 ecsContainerDefinitionDataSource =
@@ -1980,24 +2116,29 @@ instance HasTaskDefinition (EcsTaskDefinitionDataSource s) Text where
              (\s a -> s { _task_definition = a } :: EcsTaskDefinitionDataSource s)
 
 instance HasComputedFamily' (EcsTaskDefinitionDataSource s) Text where
-    computedFamily' =
-        to (\x -> TF.Computed (TF.referenceKey x) "family")
+    type HasComputedFamily'Thread (EcsTaskDefinitionDataSource s) Text = s
+
+    computedFamily' = to (\_ -> TF.Computed "family")
 
 instance HasComputedNetworkMode (EcsTaskDefinitionDataSource s) Text where
-    computedNetworkMode =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_mode")
+    type HasComputedNetworkModeThread (EcsTaskDefinitionDataSource s) Text = s
+
+    computedNetworkMode = to (\_ -> TF.Computed "network_mode")
 
 instance HasComputedRevision (EcsTaskDefinitionDataSource s) Text where
-    computedRevision =
-        to (\x -> TF.Computed (TF.referenceKey x) "revision")
+    type HasComputedRevisionThread (EcsTaskDefinitionDataSource s) Text = s
+
+    computedRevision = to (\_ -> TF.Computed "revision")
 
 instance HasComputedStatus (EcsTaskDefinitionDataSource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (EcsTaskDefinitionDataSource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 instance HasComputedTaskRoleArn (EcsTaskDefinitionDataSource s) Text where
-    computedTaskRoleArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "task_role_arn")
+    type HasComputedTaskRoleArnThread (EcsTaskDefinitionDataSource s) Text = s
+
+    computedTaskRoleArn = to (\_ -> TF.Computed "task_role_arn")
 
 ecsTaskDefinitionDataSource :: TF.DataSource TF.AWS (EcsTaskDefinitionDataSource s)
 ecsTaskDefinitionDataSource =
@@ -2038,24 +2179,29 @@ instance HasFileSystemId (EfsFileSystemDataSource s) Text where
              (\s a -> s { _file_system_id = a } :: EfsFileSystemDataSource s)
 
 instance HasComputedDnsName (EfsFileSystemDataSource s) Text where
-    computedDnsName =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_name")
+    type HasComputedDnsNameThread (EfsFileSystemDataSource s) Text = s
+
+    computedDnsName = to (\_ -> TF.Computed "dns_name")
 
 instance HasComputedEncrypted (EfsFileSystemDataSource s) Text where
-    computedEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "encrypted")
+    type HasComputedEncryptedThread (EfsFileSystemDataSource s) Text = s
+
+    computedEncrypted = to (\_ -> TF.Computed "encrypted")
 
 instance HasComputedKmsKeyId (EfsFileSystemDataSource s) Text where
-    computedKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "kms_key_id")
+    type HasComputedKmsKeyIdThread (EfsFileSystemDataSource s) Text = s
+
+    computedKmsKeyId = to (\_ -> TF.Computed "kms_key_id")
 
 instance HasComputedPerformanceMode (EfsFileSystemDataSource s) Text where
-    computedPerformanceMode =
-        to (\x -> TF.Computed (TF.referenceKey x) "performance_mode")
+    type HasComputedPerformanceModeThread (EfsFileSystemDataSource s) Text = s
+
+    computedPerformanceMode = to (\_ -> TF.Computed "performance_mode")
 
 instance HasComputedTags (EfsFileSystemDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (EfsFileSystemDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 efsFileSystemDataSource :: TF.DataSource TF.AWS (EfsFileSystemDataSource s)
 efsFileSystemDataSource =
@@ -2087,28 +2233,34 @@ instance HasMountTargetId (EfsMountTargetDataSource s) Text where
              (\s a -> s { _mount_target_id = a } :: EfsMountTargetDataSource s)
 
 instance HasComputedDnsName (EfsMountTargetDataSource s) Text where
-    computedDnsName =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_name")
+    type HasComputedDnsNameThread (EfsMountTargetDataSource s) Text = s
+
+    computedDnsName = to (\_ -> TF.Computed "dns_name")
 
 instance HasComputedFileSystemId (EfsMountTargetDataSource s) Text where
-    computedFileSystemId =
-        to (\x -> TF.Computed (TF.referenceKey x) "file_system_id")
+    type HasComputedFileSystemIdThread (EfsMountTargetDataSource s) Text = s
+
+    computedFileSystemId = to (\_ -> TF.Computed "file_system_id")
 
 instance HasComputedIpAddress (EfsMountTargetDataSource s) Text where
-    computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
+    type HasComputedIpAddressThread (EfsMountTargetDataSource s) Text = s
+
+    computedIpAddress = to (\_ -> TF.Computed "ip_address")
 
 instance HasComputedNetworkInterfaceId (EfsMountTargetDataSource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (EfsMountTargetDataSource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 instance HasComputedSecurityGroups (EfsMountTargetDataSource s) Text where
-    computedSecurityGroups =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_groups")
+    type HasComputedSecurityGroupsThread (EfsMountTargetDataSource s) Text = s
+
+    computedSecurityGroups = to (\_ -> TF.Computed "security_groups")
 
 instance HasComputedSubnetId (EfsMountTargetDataSource s) Text where
-    computedSubnetId =
-        to (\x -> TF.Computed (TF.referenceKey x) "subnet_id")
+    type HasComputedSubnetIdThread (EfsMountTargetDataSource s) Text = s
+
+    computedSubnetId = to (\_ -> TF.Computed "subnet_id")
 
 efsMountTargetDataSource :: TF.DataSource TF.AWS (EfsMountTargetDataSource s)
 efsMountTargetDataSource =
@@ -2124,7 +2276,7 @@ prove useful when a module accepts an allocation ID or public IP as an input
 variable and needs to determine the other.
 -}
 data EipDataSource s = EipDataSource {
-      _id        :: !(TF.Attribute s "id" Text)
+      _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The allocation id of the specific EIP to retrieve. -}
     , _public_ip :: !(TF.Attribute s "public_ip" Text)
     {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
@@ -2165,7 +2317,7 @@ Use this data source to get the name of a elastic beanstalk solution stack.
 data ElasticBeanstalkSolutionStackDataSource s = ElasticBeanstalkSolutionStackDataSource {
       _most_recent :: !(TF.Attribute s "most_recent" Text)
     {- ^ (Optional) If more than one result is returned, use the most recent solution stack. -}
-    , _name_regex  :: !(TF.Attribute s "name_regex" Text)
+    , _name_regex :: !(TF.Attribute s "name_regex" Text)
     {- ^ - A regex string to apply to the solution stack list returned by AWS. See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> from AWS documentation for reference solution stack names. -}
     } deriving (Show, Eq)
 
@@ -2190,8 +2342,9 @@ instance HasNameRegex (ElasticBeanstalkSolutionStackDataSource s) Text where
              (\s a -> s { _name_regex = a } :: ElasticBeanstalkSolutionStackDataSource s)
 
 instance HasComputedName (ElasticBeanstalkSolutionStackDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (ElasticBeanstalkSolutionStackDataSource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 elasticBeanstalkSolutionStackDataSource :: TF.DataSource TF.AWS (ElasticBeanstalkSolutionStackDataSource s)
 elasticBeanstalkSolutionStackDataSource =
@@ -2223,80 +2376,99 @@ instance HasClusterId (ElasticacheClusterDataSource s) Text where
              (\s a -> s { _cluster_id = a } :: ElasticacheClusterDataSource s)
 
 instance HasComputedAvailabilityZone (ElasticacheClusterDataSource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (ElasticacheClusterDataSource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedCacheNodes (ElasticacheClusterDataSource s) Text where
-    computedCacheNodes =
-        to (\x -> TF.Computed (TF.referenceKey x) "cache_nodes")
+    type HasComputedCacheNodesThread (ElasticacheClusterDataSource s) Text = s
+
+    computedCacheNodes = to (\_ -> TF.Computed "cache_nodes")
 
 instance HasComputedClusterAddress (ElasticacheClusterDataSource s) Text where
-    computedClusterAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_address")
+    type HasComputedClusterAddressThread (ElasticacheClusterDataSource s) Text = s
+
+    computedClusterAddress = to (\_ -> TF.Computed "cluster_address")
 
 instance HasComputedConfigurationEndpoint (ElasticacheClusterDataSource s) Text where
-    computedConfigurationEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "configuration_endpoint")
+    type HasComputedConfigurationEndpointThread (ElasticacheClusterDataSource s) Text = s
+
+    computedConfigurationEndpoint = to (\_ -> TF.Computed "configuration_endpoint")
 
 instance HasComputedEngine (ElasticacheClusterDataSource s) Text where
-    computedEngine =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine")
+    type HasComputedEngineThread (ElasticacheClusterDataSource s) Text = s
+
+    computedEngine = to (\_ -> TF.Computed "engine")
 
 instance HasComputedEngineVersion (ElasticacheClusterDataSource s) Text where
-    computedEngineVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine_version")
+    type HasComputedEngineVersionThread (ElasticacheClusterDataSource s) Text = s
+
+    computedEngineVersion = to (\_ -> TF.Computed "engine_version")
 
 instance HasComputedMaintenanceWindow (ElasticacheClusterDataSource s) Text where
-    computedMaintenanceWindow =
-        to (\x -> TF.Computed (TF.referenceKey x) "maintenance_window")
+    type HasComputedMaintenanceWindowThread (ElasticacheClusterDataSource s) Text = s
+
+    computedMaintenanceWindow = to (\_ -> TF.Computed "maintenance_window")
 
 instance HasComputedNodeType (ElasticacheClusterDataSource s) Text where
-    computedNodeType =
-        to (\x -> TF.Computed (TF.referenceKey x) "node_type")
+    type HasComputedNodeTypeThread (ElasticacheClusterDataSource s) Text = s
+
+    computedNodeType = to (\_ -> TF.Computed "node_type")
 
 instance HasComputedNotificationTopicArn (ElasticacheClusterDataSource s) Text where
-    computedNotificationTopicArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "notification_topic_arn")
+    type HasComputedNotificationTopicArnThread (ElasticacheClusterDataSource s) Text = s
+
+    computedNotificationTopicArn = to (\_ -> TF.Computed "notification_topic_arn")
 
 instance HasComputedNumCacheNodes (ElasticacheClusterDataSource s) Text where
-    computedNumCacheNodes =
-        to (\x -> TF.Computed (TF.referenceKey x) "num_cache_nodes")
+    type HasComputedNumCacheNodesThread (ElasticacheClusterDataSource s) Text = s
+
+    computedNumCacheNodes = to (\_ -> TF.Computed "num_cache_nodes")
 
 instance HasComputedParameterGroupName (ElasticacheClusterDataSource s) Text where
-    computedParameterGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "parameter_group_name")
+    type HasComputedParameterGroupNameThread (ElasticacheClusterDataSource s) Text = s
+
+    computedParameterGroupName = to (\_ -> TF.Computed "parameter_group_name")
 
 instance HasComputedPort (ElasticacheClusterDataSource s) Text where
-    computedPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "port")
+    type HasComputedPortThread (ElasticacheClusterDataSource s) Text = s
+
+    computedPort = to (\_ -> TF.Computed "port")
 
 instance HasComputedReplicationGroupId (ElasticacheClusterDataSource s) Text where
-    computedReplicationGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "replication_group_id")
+    type HasComputedReplicationGroupIdThread (ElasticacheClusterDataSource s) Text = s
+
+    computedReplicationGroupId = to (\_ -> TF.Computed "replication_group_id")
 
 instance HasComputedSecurityGroupIds (ElasticacheClusterDataSource s) Text where
-    computedSecurityGroupIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_group_ids")
+    type HasComputedSecurityGroupIdsThread (ElasticacheClusterDataSource s) Text = s
+
+    computedSecurityGroupIds = to (\_ -> TF.Computed "security_group_ids")
 
 instance HasComputedSecurityGroupNames (ElasticacheClusterDataSource s) Text where
-    computedSecurityGroupNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_group_names")
+    type HasComputedSecurityGroupNamesThread (ElasticacheClusterDataSource s) Text = s
+
+    computedSecurityGroupNames = to (\_ -> TF.Computed "security_group_names")
 
 instance HasComputedSnapshotRetentionLimit (ElasticacheClusterDataSource s) Text where
-    computedSnapshotRetentionLimit =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_retention_limit")
+    type HasComputedSnapshotRetentionLimitThread (ElasticacheClusterDataSource s) Text = s
+
+    computedSnapshotRetentionLimit = to (\_ -> TF.Computed "snapshot_retention_limit")
 
 instance HasComputedSnapshotWindow (ElasticacheClusterDataSource s) Text where
-    computedSnapshotWindow =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_window")
+    type HasComputedSnapshotWindowThread (ElasticacheClusterDataSource s) Text = s
+
+    computedSnapshotWindow = to (\_ -> TF.Computed "snapshot_window")
 
 instance HasComputedSubnetGroupName (ElasticacheClusterDataSource s) Text where
-    computedSubnetGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "subnet_group_name")
+    type HasComputedSubnetGroupNameThread (ElasticacheClusterDataSource s) Text = s
+
+    computedSubnetGroupName = to (\_ -> TF.Computed "subnet_group_name")
 
 instance HasComputedTags (ElasticacheClusterDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (ElasticacheClusterDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 elasticacheClusterDataSource :: TF.DataSource TF.AWS (ElasticacheClusterDataSource s)
 elasticacheClusterDataSource =
@@ -2328,48 +2500,59 @@ instance HasReplicationGroupId (ElasticacheReplicationGroupDataSource s) Text wh
              (\s a -> s { _replication_group_id = a } :: ElasticacheReplicationGroupDataSource s)
 
 instance HasComputedAuthTokenEnabled (ElasticacheReplicationGroupDataSource s) TF.Bool where
-    computedAuthTokenEnabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "auth_token_enabled")
+    type HasComputedAuthTokenEnabledThread (ElasticacheReplicationGroupDataSource s) TF.Bool = s
+
+    computedAuthTokenEnabled = to (\_ -> TF.Computed "auth_token_enabled")
 
 instance HasComputedAutomaticFailoverEnabled (ElasticacheReplicationGroupDataSource s) TF.Bool where
-    computedAutomaticFailoverEnabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "automatic_failover_enabled")
+    type HasComputedAutomaticFailoverEnabledThread (ElasticacheReplicationGroupDataSource s) TF.Bool = s
+
+    computedAutomaticFailoverEnabled = to (\_ -> TF.Computed "automatic_failover_enabled")
 
 instance HasComputedConfigurationEndpointAddress (ElasticacheReplicationGroupDataSource s) Text where
-    computedConfigurationEndpointAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "configuration_endpoint_address")
+    type HasComputedConfigurationEndpointAddressThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedConfigurationEndpointAddress = to (\_ -> TF.Computed "configuration_endpoint_address")
 
 instance HasComputedNodeType (ElasticacheReplicationGroupDataSource s) Text where
-    computedNodeType =
-        to (\x -> TF.Computed (TF.referenceKey x) "node_type")
+    type HasComputedNodeTypeThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedNodeType = to (\_ -> TF.Computed "node_type")
 
 instance HasComputedNumberCacheClusters (ElasticacheReplicationGroupDataSource s) Text where
-    computedNumberCacheClusters =
-        to (\x -> TF.Computed (TF.referenceKey x) "number_cache_clusters")
+    type HasComputedNumberCacheClustersThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedNumberCacheClusters = to (\_ -> TF.Computed "number_cache_clusters")
 
 instance HasComputedPort (ElasticacheReplicationGroupDataSource s) Text where
-    computedPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "port")
+    type HasComputedPortThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedPort = to (\_ -> TF.Computed "port")
 
 instance HasComputedPrimaryEndpointAddress (ElasticacheReplicationGroupDataSource s) Text where
-    computedPrimaryEndpointAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_endpoint_address")
+    type HasComputedPrimaryEndpointAddressThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedPrimaryEndpointAddress = to (\_ -> TF.Computed "primary_endpoint_address")
 
 instance HasComputedReplicationGroupDescription (ElasticacheReplicationGroupDataSource s) Text where
-    computedReplicationGroupDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "replication_group_description")
+    type HasComputedReplicationGroupDescriptionThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedReplicationGroupDescription = to (\_ -> TF.Computed "replication_group_description")
 
 instance HasComputedReplicationGroupId (ElasticacheReplicationGroupDataSource s) Text where
-    computedReplicationGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "replication_group_id")
+    type HasComputedReplicationGroupIdThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedReplicationGroupId = to (\_ -> TF.Computed "replication_group_id")
 
 instance HasComputedSnapshotRetentionLimit (ElasticacheReplicationGroupDataSource s) Text where
-    computedSnapshotRetentionLimit =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_retention_limit")
+    type HasComputedSnapshotRetentionLimitThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedSnapshotRetentionLimit = to (\_ -> TF.Computed "snapshot_retention_limit")
 
 instance HasComputedSnapshotWindow (ElasticacheReplicationGroupDataSource s) Text where
-    computedSnapshotWindow =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_window")
+    type HasComputedSnapshotWindowThread (ElasticacheReplicationGroupDataSource s) Text = s
+
+    computedSnapshotWindow = to (\_ -> TF.Computed "snapshot_window")
 
 elasticacheReplicationGroupDataSource :: TF.DataSource TF.AWS (ElasticacheReplicationGroupDataSource s)
 elasticacheReplicationGroupDataSource =
@@ -2434,8 +2617,9 @@ instance HasRegion (ElbHostedZoneIdDataSource s) TF.Region where
              (\s a -> s { _region = a } :: ElbHostedZoneIdDataSource s)
 
 instance HasComputedId (ElbHostedZoneIdDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ElbHostedZoneIdDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 elbHostedZoneIdDataSource :: TF.DataSource TF.AWS (ElbHostedZoneIdDataSource s)
 elbHostedZoneIdDataSource =
@@ -2468,12 +2652,14 @@ instance HasRegion (ElbServiceAccountDataSource s) TF.Region where
              (\s a -> s { _region = a } :: ElbServiceAccountDataSource s)
 
 instance HasComputedArn (ElbServiceAccountDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (ElbServiceAccountDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (ElbServiceAccountDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (ElbServiceAccountDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 elbServiceAccountDataSource :: TF.DataSource TF.AWS (ElbServiceAccountDataSource s)
 elbServiceAccountDataSource =
@@ -2535,16 +2721,19 @@ instance HasGroupName (IamGroupDataSource s) Text where
              (\s a -> s { _group_name = a } :: IamGroupDataSource s)
 
 instance HasComputedArn (IamGroupDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamGroupDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedGroupId (IamGroupDataSource s) Text where
-    computedGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "group_id")
+    type HasComputedGroupIdThread (IamGroupDataSource s) Text = s
+
+    computedGroupId = to (\_ -> TF.Computed "group_id")
 
 instance HasComputedPath (IamGroupDataSource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (IamGroupDataSource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 iamGroupDataSource :: TF.DataSource TF.AWS (IamGroupDataSource s)
 iamGroupDataSource =
@@ -2577,20 +2766,24 @@ instance HasName (IamInstanceProfileDataSource s) Text where
              (\s a -> s { _name = a } :: IamInstanceProfileDataSource s)
 
 instance HasComputedArn (IamInstanceProfileDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamInstanceProfileDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedCreateDate (IamInstanceProfileDataSource s) Text where
-    computedCreateDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "create_date")
+    type HasComputedCreateDateThread (IamInstanceProfileDataSource s) Text = s
+
+    computedCreateDate = to (\_ -> TF.Computed "create_date")
 
 instance HasComputedPath (IamInstanceProfileDataSource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (IamInstanceProfileDataSource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 instance HasComputedRoleId (IamInstanceProfileDataSource s) Text where
-    computedRoleId =
-        to (\x -> TF.Computed (TF.referenceKey x) "role_id")
+    type HasComputedRoleIdThread (IamInstanceProfileDataSource s) Text = s
+
+    computedRoleId = to (\_ -> TF.Computed "role_id")
 
 iamInstanceProfileDataSource :: TF.DataSource TF.AWS (IamInstanceProfileDataSource s)
 iamInstanceProfileDataSource =
@@ -2665,24 +2858,29 @@ instance HasName (IamRoleDataSource s) Text where
              (\s a -> s { _name = a } :: IamRoleDataSource s)
 
 instance HasComputedArn (IamRoleDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamRoleDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedAssumeRolePolicy (IamRoleDataSource s) Text where
-    computedAssumeRolePolicy =
-        to (\x -> TF.Computed (TF.referenceKey x) "assume_role_policy")
+    type HasComputedAssumeRolePolicyThread (IamRoleDataSource s) Text = s
+
+    computedAssumeRolePolicy = to (\_ -> TF.Computed "assume_role_policy")
 
 instance HasComputedId (IamRoleDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (IamRoleDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedPath (IamRoleDataSource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (IamRoleDataSource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 instance HasComputedUniqueId (IamRoleDataSource s) Text where
-    computedUniqueId =
-        to (\x -> TF.Computed (TF.referenceKey x) "unique_id")
+    type HasComputedUniqueIdThread (IamRoleDataSource s) Text = s
+
+    computedUniqueId = to (\_ -> TF.Computed "unique_id")
 
 iamRoleDataSource :: TF.DataSource TF.AWS (IamRoleDataSource s)
 iamRoleDataSource =
@@ -2696,9 +2894,9 @@ iamRoleDataSource =
 Use this data source to lookup information about IAM Server Certificates.
 -}
 data IamServerCertificateDataSource s = IamServerCertificateDataSource {
-      _latest      :: !(TF.Attribute s "latest" Text)
+      _latest :: !(TF.Attribute s "latest" Text)
     {- ^ - sort results by expiration date. returns the certificate with expiration date in furthest in the future. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ - exact name of the cert to lookup -}
     , _name_prefix :: !(TF.Attribute s "name_prefix" Text)
     {- ^ - prefix of cert to filter by -}
@@ -2733,28 +2931,34 @@ instance HasNamePrefix (IamServerCertificateDataSource s) Text where
              (\s a -> s { _name_prefix = a } :: IamServerCertificateDataSource s)
 
 instance HasComputedArn (IamServerCertificateDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamServerCertificateDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedCertificateBody (IamServerCertificateDataSource s) Text where
-    computedCertificateBody =
-        to (\x -> TF.Computed (TF.referenceKey x) "certificate_body")
+    type HasComputedCertificateBodyThread (IamServerCertificateDataSource s) Text = s
+
+    computedCertificateBody = to (\_ -> TF.Computed "certificate_body")
 
 instance HasComputedCertificateChain (IamServerCertificateDataSource s) Text where
-    computedCertificateChain =
-        to (\x -> TF.Computed (TF.referenceKey x) "certificate_chain")
+    type HasComputedCertificateChainThread (IamServerCertificateDataSource s) Text = s
+
+    computedCertificateChain = to (\_ -> TF.Computed "certificate_chain")
 
 instance HasComputedExpirationDate (IamServerCertificateDataSource s) Text where
-    computedExpirationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "expiration_date")
+    type HasComputedExpirationDateThread (IamServerCertificateDataSource s) Text = s
+
+    computedExpirationDate = to (\_ -> TF.Computed "expiration_date")
 
 instance HasComputedPath (IamServerCertificateDataSource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (IamServerCertificateDataSource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 instance HasComputedUploadDate (IamServerCertificateDataSource s) Text where
-    computedUploadDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "upload_date")
+    type HasComputedUploadDateThread (IamServerCertificateDataSource s) Text = s
+
+    computedUploadDate = to (\_ -> TF.Computed "upload_date")
 
 iamServerCertificateDataSource :: TF.DataSource TF.AWS (IamServerCertificateDataSource s)
 iamServerCertificateDataSource =
@@ -2789,16 +2993,19 @@ instance HasUserName (IamUserDataSource s) Text where
              (\s a -> s { _user_name = a } :: IamUserDataSource s)
 
 instance HasComputedArn (IamUserDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (IamUserDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedPath (IamUserDataSource s) Text where
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
+    type HasComputedPathThread (IamUserDataSource s) Text = s
+
+    computedPath = to (\_ -> TF.Computed "path")
 
 instance HasComputedUserId (IamUserDataSource s) Text where
-    computedUserId =
-        to (\x -> TF.Computed (TF.referenceKey x) "user_id")
+    type HasComputedUserIdThread (IamUserDataSource s) Text = s
+
+    computedUserId = to (\_ -> TF.Computed "user_id")
 
 iamUserDataSource :: TF.DataSource TF.AWS (IamUserDataSource s)
 iamUserDataSource =
@@ -2813,9 +3020,9 @@ Use this data source to get the ID of an Amazon EC2 Instance for use in
 other resources.
 -}
 data InstanceDataSource s = InstanceDataSource {
-      _filter        :: !(TF.Attribute s "filter" Text)
+      _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_id   :: !(TF.Attribute s "instance_id" Text)
+    , _instance_id :: !(TF.Attribute s "instance_id" Text)
     {- ^ (Optional) Specify the exact Instance ID with which to populate the data source. -}
     , _instance_tags :: !(TF.Attribute s "instance_tags" Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
@@ -2850,100 +3057,124 @@ instance HasInstanceTags (InstanceDataSource s) Text where
              (\s a -> s { _instance_tags = a } :: InstanceDataSource s)
 
 instance HasComputedAssociatePublicIpAddress (InstanceDataSource s) Text where
-    computedAssociatePublicIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "associate_public_ip_address")
+    type HasComputedAssociatePublicIpAddressThread (InstanceDataSource s) Text = s
+
+    computedAssociatePublicIpAddress = to (\_ -> TF.Computed "associate_public_ip_address")
 
 instance HasComputedAvailabilityZone (InstanceDataSource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (InstanceDataSource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedEbsBlockDevice (InstanceDataSource s) Text where
-    computedEbsBlockDevice =
-        to (\x -> TF.Computed (TF.referenceKey x) "ebs_block_device")
+    type HasComputedEbsBlockDeviceThread (InstanceDataSource s) Text = s
+
+    computedEbsBlockDevice = to (\_ -> TF.Computed "ebs_block_device")
 
 instance HasComputedEbsOptimized (InstanceDataSource s) Text where
-    computedEbsOptimized =
-        to (\x -> TF.Computed (TF.referenceKey x) "ebs_optimized")
+    type HasComputedEbsOptimizedThread (InstanceDataSource s) Text = s
+
+    computedEbsOptimized = to (\_ -> TF.Computed "ebs_optimized")
 
 instance HasComputedEphemeralBlockDevice (InstanceDataSource s) Text where
-    computedEphemeralBlockDevice =
-        to (\x -> TF.Computed (TF.referenceKey x) "ephemeral_block_device")
+    type HasComputedEphemeralBlockDeviceThread (InstanceDataSource s) Text = s
+
+    computedEphemeralBlockDevice = to (\_ -> TF.Computed "ephemeral_block_device")
 
 instance HasComputedIamInstanceProfile (InstanceDataSource s) Text where
-    computedIamInstanceProfile =
-        to (\x -> TF.Computed (TF.referenceKey x) "iam_instance_profile")
+    type HasComputedIamInstanceProfileThread (InstanceDataSource s) Text = s
+
+    computedIamInstanceProfile = to (\_ -> TF.Computed "iam_instance_profile")
 
 instance HasComputedInstanceType (InstanceDataSource s) Text where
-    computedInstanceType =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_type")
+    type HasComputedInstanceTypeThread (InstanceDataSource s) Text = s
+
+    computedInstanceType = to (\_ -> TF.Computed "instance_type")
 
 instance HasComputedIpv6Addresses (InstanceDataSource s) Text where
-    computedIpv6Addresses =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_addresses")
+    type HasComputedIpv6AddressesThread (InstanceDataSource s) Text = s
+
+    computedIpv6Addresses = to (\_ -> TF.Computed "ipv6_addresses")
 
 instance HasComputedKeyName (InstanceDataSource s) Text where
-    computedKeyName =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_name")
+    type HasComputedKeyNameThread (InstanceDataSource s) Text = s
+
+    computedKeyName = to (\_ -> TF.Computed "key_name")
 
 instance HasComputedMonitoring (InstanceDataSource s) Text where
-    computedMonitoring =
-        to (\x -> TF.Computed (TF.referenceKey x) "monitoring")
+    type HasComputedMonitoringThread (InstanceDataSource s) Text = s
+
+    computedMonitoring = to (\_ -> TF.Computed "monitoring")
 
 instance HasComputedNetworkInterfaceId (InstanceDataSource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (InstanceDataSource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 instance HasComputedPlacementGroup (InstanceDataSource s) Text where
-    computedPlacementGroup =
-        to (\x -> TF.Computed (TF.referenceKey x) "placement_group")
+    type HasComputedPlacementGroupThread (InstanceDataSource s) Text = s
+
+    computedPlacementGroup = to (\_ -> TF.Computed "placement_group")
 
 instance HasComputedPrivateDns (InstanceDataSource s) Text where
-    computedPrivateDns =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_dns")
+    type HasComputedPrivateDnsThread (InstanceDataSource s) Text = s
+
+    computedPrivateDns = to (\_ -> TF.Computed "private_dns")
 
 instance HasComputedPrivateIp (InstanceDataSource s) Text where
-    computedPrivateIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip")
+    type HasComputedPrivateIpThread (InstanceDataSource s) Text = s
+
+    computedPrivateIp = to (\_ -> TF.Computed "private_ip")
 
 instance HasComputedPublicDns (InstanceDataSource s) Text where
-    computedPublicDns =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_dns")
+    type HasComputedPublicDnsThread (InstanceDataSource s) Text = s
+
+    computedPublicDns = to (\_ -> TF.Computed "public_dns")
 
 instance HasComputedPublicIp (InstanceDataSource s) Text where
-    computedPublicIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_ip")
+    type HasComputedPublicIpThread (InstanceDataSource s) Text = s
+
+    computedPublicIp = to (\_ -> TF.Computed "public_ip")
 
 instance HasComputedRootBlockDevice (InstanceDataSource s) Text where
-    computedRootBlockDevice =
-        to (\x -> TF.Computed (TF.referenceKey x) "root_block_device")
+    type HasComputedRootBlockDeviceThread (InstanceDataSource s) Text = s
+
+    computedRootBlockDevice = to (\_ -> TF.Computed "root_block_device")
 
 instance HasComputedSecurityGroups (InstanceDataSource s) Text where
-    computedSecurityGroups =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_groups")
+    type HasComputedSecurityGroupsThread (InstanceDataSource s) Text = s
+
+    computedSecurityGroups = to (\_ -> TF.Computed "security_groups")
 
 instance HasComputedSourceDestCheck (InstanceDataSource s) Text where
-    computedSourceDestCheck =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_dest_check")
+    type HasComputedSourceDestCheckThread (InstanceDataSource s) Text = s
+
+    computedSourceDestCheck = to (\_ -> TF.Computed "source_dest_check")
 
 instance HasComputedSubnetId (InstanceDataSource s) Text where
-    computedSubnetId =
-        to (\x -> TF.Computed (TF.referenceKey x) "subnet_id")
+    type HasComputedSubnetIdThread (InstanceDataSource s) Text = s
+
+    computedSubnetId = to (\_ -> TF.Computed "subnet_id")
 
 instance HasComputedTags (InstanceDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (InstanceDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedTenancy (InstanceDataSource s) Text where
-    computedTenancy =
-        to (\x -> TF.Computed (TF.referenceKey x) "tenancy")
+    type HasComputedTenancyThread (InstanceDataSource s) Text = s
+
+    computedTenancy = to (\_ -> TF.Computed "tenancy")
 
 instance HasComputedUserData (InstanceDataSource s) Text where
-    computedUserData =
-        to (\x -> TF.Computed (TF.referenceKey x) "user_data")
+    type HasComputedUserDataThread (InstanceDataSource s) Text = s
+
+    computedUserData = to (\_ -> TF.Computed "user_data")
 
 instance HasComputedVpcSecurityGroupIds (InstanceDataSource s) Text where
-    computedVpcSecurityGroupIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_security_group_ids")
+    type HasComputedVpcSecurityGroupIdsThread (InstanceDataSource s) Text = s
+
+    computedVpcSecurityGroupIds = to (\_ -> TF.Computed "vpc_security_group_ids")
 
 instanceDataSource :: TF.DataSource TF.AWS (InstanceDataSource s)
 instanceDataSource =
@@ -2970,7 +3201,7 @@ any time and you'd need to re-run @apply@ every time an instance comes up or
 dies.
 -}
 data InstancesDataSource s = InstancesDataSource {
-      _filter        :: !(TF.Attribute s "filter" Text)
+      _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
     , _instance_tags :: !(TF.Attribute s "instance_tags" Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on desired instances. -}
@@ -2997,16 +3228,19 @@ instance HasInstanceTags (InstancesDataSource s) Text where
              (\s a -> s { _instance_tags = a } :: InstancesDataSource s)
 
 instance HasComputedIds (InstancesDataSource s) Text where
-    computedIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "ids")
+    type HasComputedIdsThread (InstancesDataSource s) Text = s
+
+    computedIds = to (\_ -> TF.Computed "ids")
 
 instance HasComputedPrivateIps (InstancesDataSource s) Text where
-    computedPrivateIps =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ips")
+    type HasComputedPrivateIpsThread (InstancesDataSource s) Text = s
+
+    computedPrivateIps = to (\_ -> TF.Computed "private_ips")
 
 instance HasComputedPublicIps (InstancesDataSource s) Text where
-    computedPublicIps =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_ips")
+    type HasComputedPublicIpsThread (InstancesDataSource s) Text = s
+
+    computedPublicIps = to (\_ -> TF.Computed "public_ips")
 
 instancesDataSource :: TF.DataSource TF.AWS (InstancesDataSource s)
 instancesDataSource =
@@ -3021,11 +3255,11 @@ instancesDataSource =
 @aws_internet_gateway@ provides details about a specific Internet Gateway.
 -}
 data InternetGatewayDataSource s = InternetGatewayDataSource {
-      _filter              :: !(TF.Attribute s "filter" Text)
+      _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _internet_gateway_id :: !(TF.Attribute s "internet_gateway_id" Text)
     {- ^ (Optional) The id of the specific Internet Gateway to retrieve. -}
-    , _tags                :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Internet Gateway. -}
     } deriving (Show, Eq)
 
@@ -3058,12 +3292,14 @@ instance HasTags (InternetGatewayDataSource s) TF.Tags where
              (\s a -> s { _tags = a } :: InternetGatewayDataSource s)
 
 instance HasComputedState (InternetGatewayDataSource s) Text where
-    computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
+    type HasComputedStateThread (InternetGatewayDataSource s) Text = s
+
+    computedState = to (\_ -> TF.Computed "state")
 
 instance HasComputedVpcId (InternetGatewayDataSource s) Text where
-    computedVpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_id")
+    type HasComputedVpcIdThread (InternetGatewayDataSource s) Text = s
+
+    computedVpcId = to (\_ -> TF.Computed "vpc_id")
 
 internetGatewayDataSource :: TF.DataSource TF.AWS (InternetGatewayDataSource s)
 internetGatewayDataSource =
@@ -3081,7 +3317,7 @@ Use this data source to get the
 AWS products and services.
 -}
 data IpRangesDataSource s = IpRangesDataSource {
-      _regions  :: !(TF.Attribute s "regions" Text)
+      _regions :: !(TF.Attribute s "regions" Text)
     {- ^ (Optional) Filter IP ranges by regions (or include all regions, if omitted). Valid items are @global@ (for @cloudfront@ ) as well as all AWS regions (e.g. @eu-central-1@ ) -}
     , _services :: !(TF.Attribute s "services" Text)
     {- ^ (Required) Filter IP ranges by services. Valid items are @amazon@ (for amazon.com), @cloudfront@ , @codebuild@ , @ec2@ , @route53@ , @route53_healthchecks@ and @S3@ . -}
@@ -3108,16 +3344,19 @@ instance HasServices (IpRangesDataSource s) Text where
              (\s a -> s { _services = a } :: IpRangesDataSource s)
 
 instance HasComputedCidrBlocks (IpRangesDataSource s) Text where
-    computedCidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
+    type HasComputedCidrBlocksThread (IpRangesDataSource s) Text = s
+
+    computedCidrBlocks = to (\_ -> TF.Computed "cidr_blocks")
 
 instance HasComputedCreateDate (IpRangesDataSource s) Text where
-    computedCreateDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "create_date")
+    type HasComputedCreateDateThread (IpRangesDataSource s) Text = s
+
+    computedCreateDate = to (\_ -> TF.Computed "create_date")
 
 instance HasComputedSyncToken (IpRangesDataSource s) Text where
-    computedSyncToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "sync_token")
+    type HasComputedSyncTokenThread (IpRangesDataSource s) Text = s
+
+    computedSyncToken = to (\_ -> TF.Computed "sync_token")
 
 ipRangesDataSource :: TF.DataSource TF.AWS (IpRangesDataSource s)
 ipRangesDataSource =
@@ -3151,40 +3390,49 @@ instance HasName (KinesisStreamDataSource s) Text where
              (\s a -> s { _name = a } :: KinesisStreamDataSource s)
 
 instance HasComputedArn (KinesisStreamDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (KinesisStreamDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedClosedShards (KinesisStreamDataSource s) Text where
-    computedClosedShards =
-        to (\x -> TF.Computed (TF.referenceKey x) "closed_shards")
+    type HasComputedClosedShardsThread (KinesisStreamDataSource s) Text = s
+
+    computedClosedShards = to (\_ -> TF.Computed "closed_shards")
 
 instance HasComputedCreationTimestamp (KinesisStreamDataSource s) Text where
-    computedCreationTimestamp =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_timestamp")
+    type HasComputedCreationTimestampThread (KinesisStreamDataSource s) Text = s
+
+    computedCreationTimestamp = to (\_ -> TF.Computed "creation_timestamp")
 
 instance HasComputedName (KinesisStreamDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (KinesisStreamDataSource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 instance HasComputedOpenShards (KinesisStreamDataSource s) Text where
-    computedOpenShards =
-        to (\x -> TF.Computed (TF.referenceKey x) "open_shards")
+    type HasComputedOpenShardsThread (KinesisStreamDataSource s) Text = s
+
+    computedOpenShards = to (\_ -> TF.Computed "open_shards")
 
 instance HasComputedRetentionPeriod (KinesisStreamDataSource s) Text where
-    computedRetentionPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "retention_period")
+    type HasComputedRetentionPeriodThread (KinesisStreamDataSource s) Text = s
+
+    computedRetentionPeriod = to (\_ -> TF.Computed "retention_period")
 
 instance HasComputedShardLevelMetrics (KinesisStreamDataSource s) Text where
-    computedShardLevelMetrics =
-        to (\x -> TF.Computed (TF.referenceKey x) "shard_level_metrics")
+    type HasComputedShardLevelMetricsThread (KinesisStreamDataSource s) Text = s
+
+    computedShardLevelMetrics = to (\_ -> TF.Computed "shard_level_metrics")
 
 instance HasComputedStatus (KinesisStreamDataSource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+    type HasComputedStatusThread (KinesisStreamDataSource s) Text = s
+
+    computedStatus = to (\_ -> TF.Computed "status")
 
 instance HasComputedTags (KinesisStreamDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (KinesisStreamDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 kinesisStreamDataSource :: TF.DataSource TF.AWS (KinesisStreamDataSource s)
 kinesisStreamDataSource =
@@ -3217,16 +3465,19 @@ instance HasName (KmsAliasDataSource s) Text where
              (\s a -> s { _name = a } :: KmsAliasDataSource s)
 
 instance HasComputedArn (KmsAliasDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (KmsAliasDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedTargetKeyArn (KmsAliasDataSource s) Text where
-    computedTargetKeyArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "target_key_arn")
+    type HasComputedTargetKeyArnThread (KmsAliasDataSource s) Text = s
+
+    computedTargetKeyArn = to (\_ -> TF.Computed "target_key_arn")
 
 instance HasComputedTargetKeyId (KmsAliasDataSource s) Text where
-    computedTargetKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "target_key_id")
+    type HasComputedTargetKeyIdThread (KmsAliasDataSource s) Text = s
+
+    computedTargetKeyId = to (\_ -> TF.Computed "target_key_id")
 
 kmsAliasDataSource :: TF.DataSource TF.AWS (KmsAliasDataSource s)
 kmsAliasDataSource =
@@ -3243,9 +3494,9 @@ including the plaintext be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data KmsCiphertextDataSource s = KmsCiphertextDataSource {
-      _context   :: !(TF.Attribute s "context" Text)
+      _context :: !(TF.Attribute s "context" Text)
     {- ^ (Optional) An optional mapping that makes up the encryption context. -}
-    , _key_id    :: !(TF.Attribute s "key_id" Text)
+    , _key_id :: !(TF.Attribute s "key_id" Text)
     {- ^ (Required) Globally unique key ID for the customer master key. -}
     , _plaintext :: !(TF.Attribute s "plaintext" Text)
     {- ^ (Required) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file. -}
@@ -3280,8 +3531,9 @@ instance HasPlaintext (KmsCiphertextDataSource s) Text where
              (\s a -> s { _plaintext = a } :: KmsCiphertextDataSource s)
 
 instance HasComputedCiphertextBlob (KmsCiphertextDataSource s) Text where
-    computedCiphertextBlob =
-        to (\x -> TF.Computed (TF.referenceKey x) "ciphertext_blob")
+    type HasComputedCiphertextBlobThread (KmsCiphertextDataSource s) Text = s
+
+    computedCiphertextBlob = to (\_ -> TF.Computed "ciphertext_blob")
 
 kmsCiphertextDataSource :: TF.DataSource TF.AWS (KmsCiphertextDataSource s)
 kmsCiphertextDataSource =
@@ -3333,7 +3585,7 @@ useful when a module accepts an LB as an input variable and needs to, for
 example, determine the security groups associated with it, etc.
 -}
 data LbDataSource s = LbDataSource {
-      _arn  :: !(TF.Attribute s "arn" Text)
+      _arn :: !(TF.Attribute s "arn" Text)
     {- ^ (Optional) The full ARN of the load balancer. -}
     , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The unique name of the load balancer. -}
@@ -3409,7 +3661,7 @@ also be used to get the ARN of an LB Target Group for use in other
 resources, given LB Target Group name.
 -}
 data LbTargetGroupDataSource s = LbTargetGroupDataSource {
-      _arn  :: !(TF.Attribute s "arn" Text)
+      _arn :: !(TF.Attribute s "arn" Text)
     {- ^ (Optional) The full ARN of the target group. -}
     , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The unique name of the target group. -}
@@ -3448,19 +3700,19 @@ lbTargetGroupDataSource =
 Provides details about a specific Nat Gateway.
 -}
 data NatGatewayDataSource s = NatGatewayDataSource {
-      _filter    :: !(TF.Attribute s "filter" Text)
+      _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) Custom filter block as described below. More complex filters can be expressed using one or more @filter@ sub-blocks, which take the following arguments: -}
-    , _id        :: !(TF.Attribute s "id" Text)
+    , _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The id of the specific Nat Gateway to retrieve. -}
-    , _name      :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the field to filter by, as defined by <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html> . -}
-    , _state     :: !(TF.Attribute s "state" Text)
+    , _state :: !(TF.Attribute s "state" Text)
     {- ^ (Optional) The state of the NAT gateway (pending | failed | available | deleting | deleted ). -}
     , _subnet_id :: !(TF.Attribute s "subnet_id" Text)
     {- ^ (Optional) The id of subnet that the Nat Gateway resides in. -}
-    , _values    :: !(TF.Attribute s "values" Text)
+    , _values :: !(TF.Attribute s "values" Text)
     {- ^ (Required) Set of values that are accepted for the given field. An Nat Gateway will be selected if any one of the given values matches. -}
-    , _vpc_id    :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) The id of the VPC that the Nat Gateway resides in. -}
     } deriving (Show, Eq)
 
@@ -3525,20 +3777,24 @@ instance HasVpcId (NatGatewayDataSource s) Text where
              (\s a -> s { _vpc_id = a } :: NatGatewayDataSource s)
 
 instance HasComputedAllocationId (NatGatewayDataSource s) Text where
-    computedAllocationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocation_id")
+    type HasComputedAllocationIdThread (NatGatewayDataSource s) Text = s
+
+    computedAllocationId = to (\_ -> TF.Computed "allocation_id")
 
 instance HasComputedNetworkInterfaceId (NatGatewayDataSource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (NatGatewayDataSource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 instance HasComputedPrivateIp (NatGatewayDataSource s) Text where
-    computedPrivateIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip")
+    type HasComputedPrivateIpThread (NatGatewayDataSource s) Text = s
+
+    computedPrivateIp = to (\_ -> TF.Computed "private_ip")
 
 instance HasComputedPublicIp (NatGatewayDataSource s) Text where
-    computedPublicIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_ip")
+    type HasComputedPublicIpThread (NatGatewayDataSource s) Text = s
+
+    computedPublicIp = to (\_ -> TF.Computed "public_ip")
 
 natGatewayDataSource :: TF.DataSource TF.AWS (NatGatewayDataSource s)
 natGatewayDataSource =
@@ -3575,32 +3831,39 @@ instance HasId (NetworkInterfaceDataSource s) Text where
              (\s a -> s { _id = a } :: NetworkInterfaceDataSource s)
 
 instance HasComputedAssociation (NetworkInterfaceDataSource s) Text where
-    computedAssociation =
-        to (\x -> TF.Computed (TF.referenceKey x) "association")
+    type HasComputedAssociationThread (NetworkInterfaceDataSource s) Text = s
+
+    computedAssociation = to (\_ -> TF.Computed "association")
 
 instance HasComputedAvailabilityZone (NetworkInterfaceDataSource s) TF.Zone where
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
+    type HasComputedAvailabilityZoneThread (NetworkInterfaceDataSource s) TF.Zone = s
+
+    computedAvailabilityZone = to (\_ -> TF.Computed "availability_zone")
 
 instance HasComputedInterfaceType (NetworkInterfaceDataSource s) Text where
-    computedInterfaceType =
-        to (\x -> TF.Computed (TF.referenceKey x) "interface_type")
+    type HasComputedInterfaceTypeThread (NetworkInterfaceDataSource s) Text = s
+
+    computedInterfaceType = to (\_ -> TF.Computed "interface_type")
 
 instance HasComputedIpv6Addresses (NetworkInterfaceDataSource s) Text where
-    computedIpv6Addresses =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_addresses")
+    type HasComputedIpv6AddressesThread (NetworkInterfaceDataSource s) Text = s
+
+    computedIpv6Addresses = to (\_ -> TF.Computed "ipv6_addresses")
 
 instance HasComputedMacAddress (NetworkInterfaceDataSource s) Text where
-    computedMacAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "mac_address")
+    type HasComputedMacAddressThread (NetworkInterfaceDataSource s) Text = s
+
+    computedMacAddress = to (\_ -> TF.Computed "mac_address")
 
 instance HasComputedOwnerId (NetworkInterfaceDataSource s) Text where
-    computedOwnerId =
-        to (\x -> TF.Computed (TF.referenceKey x) "owner_id")
+    type HasComputedOwnerIdThread (NetworkInterfaceDataSource s) Text = s
+
+    computedOwnerId = to (\_ -> TF.Computed "owner_id")
 
 instance HasComputedRequesterId (NetworkInterfaceDataSource s) Text where
-    computedRequesterId =
-        to (\x -> TF.Computed (TF.referenceKey x) "requester_id")
+    type HasComputedRequesterIdThread (NetworkInterfaceDataSource s) Text = s
+
+    computedRequesterId = to (\_ -> TF.Computed "requester_id")
 
 networkInterfaceDataSource :: TF.DataSource TF.AWS (NetworkInterfaceDataSource s)
 networkInterfaceDataSource =
@@ -3635,7 +3898,7 @@ associated AWS service. The latter may be useful e.g. for adding network ACL
 rules.
 -}
 data PrefixListDataSource s = PrefixListDataSource {
-      _name           :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name of the prefix list to select. -}
     , _prefix_list_id :: !(TF.Attribute s "prefix_list_id" Text)
     {- ^ (Optional) The ID of the prefix list to select. -}
@@ -3662,16 +3925,19 @@ instance HasPrefixListId (PrefixListDataSource s) Text where
              (\s a -> s { _prefix_list_id = a } :: PrefixListDataSource s)
 
 instance HasComputedCidrBlocks (PrefixListDataSource s) Text where
-    computedCidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
+    type HasComputedCidrBlocksThread (PrefixListDataSource s) Text = s
+
+    computedCidrBlocks = to (\_ -> TF.Computed "cidr_blocks")
 
 instance HasComputedId (PrefixListDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (PrefixListDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedName (PrefixListDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (PrefixListDataSource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 prefixListDataSource :: TF.DataSource TF.AWS (PrefixListDataSource s)
 prefixListDataSource =
@@ -3734,12 +4000,14 @@ instance HasRegion (RedshiftServiceAccountDataSource s) TF.Region where
              (\s a -> s { _region = a } :: RedshiftServiceAccountDataSource s)
 
 instance HasComputedArn (RedshiftServiceAccountDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (RedshiftServiceAccountDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedId (RedshiftServiceAccountDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (RedshiftServiceAccountDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 redshiftServiceAccountDataSource :: TF.DataSource TF.AWS (RedshiftServiceAccountDataSource s)
 redshiftServiceAccountDataSource =
@@ -3757,11 +4025,11 @@ the provider. The latter can be useful in a child module which is inheriting
 an AWS provider configuration from its parent module.
 -}
 data RegionDataSource s = RegionDataSource {
-      _current  :: !(TF.Attribute s "current" Text)
+      _current :: !(TF.Attribute s "current" Text)
     {- ^ (Optional) Set to @true@ to match only the region configured in the provider. (It is not meaningful to set this to @false@ .) -}
     , _endpoint :: !(TF.Attribute s "endpoint" Text)
     {- ^ (Optional) The endpoint of the region to select. -}
-    , _name     :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The full name of the region to select. -}
     } deriving (Show, Eq)
 
@@ -3794,16 +4062,19 @@ instance HasName (RegionDataSource s) Text where
              (\s a -> s { _name = a } :: RegionDataSource s)
 
 instance HasComputedCurrent (RegionDataSource s) Text where
-    computedCurrent =
-        to (\x -> TF.Computed (TF.referenceKey x) "current")
+    type HasComputedCurrentThread (RegionDataSource s) Text = s
+
+    computedCurrent = to (\_ -> TF.Computed "current")
 
 instance HasComputedEndpoint (RegionDataSource s) Text where
-    computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
+    type HasComputedEndpointThread (RegionDataSource s) Text = s
+
+    computedEndpoint = to (\_ -> TF.Computed "endpoint")
 
 instance HasComputedName (RegionDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+    type HasComputedNameThread (RegionDataSource s) Text = s
+
+    computedName = to (\_ -> TF.Computed "name")
 
 regionDataSource :: TF.DataSource TF.AWS (RegionDataSource s)
 regionDataSource =
@@ -3821,15 +4092,15 @@ This data source allows to find a Hosted Zone ID given Hosted Zone name and
 certain search criteria.
 -}
 data Route53ZoneDataSource s = Route53ZoneDataSource {
-      _name         :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The Hosted Zone name of the desired Hosted Zone. -}
     , _private_zone :: !(TF.Attribute s "private_zone" Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone. -}
-    , _tags         :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) Used with @name@ field. A mapping of tags, each pair of which must exactly match a pair on the desired Hosted Zone. -}
-    , _vpc_id       :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone associated with the vpc_id (in this case, private_zone is not mandatory). -}
-    , _zone_id      :: !(TF.Attribute s "zone_id" Text)
+    , _zone_id :: !(TF.Attribute s "zone_id" Text)
     {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
     } deriving (Show, Eq)
 
@@ -3878,16 +4149,19 @@ instance HasZoneId (Route53ZoneDataSource s) Text where
              (\s a -> s { _zone_id = a } :: Route53ZoneDataSource s)
 
 instance HasComputedCallerReference (Route53ZoneDataSource s) Text where
-    computedCallerReference =
-        to (\x -> TF.Computed (TF.referenceKey x) "caller_reference")
+    type HasComputedCallerReferenceThread (Route53ZoneDataSource s) Text = s
+
+    computedCallerReference = to (\_ -> TF.Computed "caller_reference")
 
 instance HasComputedComment (Route53ZoneDataSource s) Text where
-    computedComment =
-        to (\x -> TF.Computed (TF.referenceKey x) "comment")
+    type HasComputedCommentThread (Route53ZoneDataSource s) Text = s
+
+    computedComment = to (\_ -> TF.Computed "comment")
 
 instance HasComputedResourceRecordSetCount (Route53ZoneDataSource s) Text where
-    computedResourceRecordSetCount =
-        to (\x -> TF.Computed (TF.referenceKey x) "resource_record_set_count")
+    type HasComputedResourceRecordSetCountThread (Route53ZoneDataSource s) Text = s
+
+    computedResourceRecordSetCount = to (\_ -> TF.Computed "resource_record_set_count")
 
 route53ZoneDataSource :: TF.DataSource TF.AWS (Route53ZoneDataSource s)
 route53ZoneDataSource =
@@ -3907,15 +4181,15 @@ resource can prove useful when a module accepts a Subnet id as an input
 variable and needs to, for example, add a route in the Route Table.
 -}
 data RouteTableDataSource s = RouteTableDataSource {
-      _filter         :: !(TF.Attribute s "filter" Text)
+      _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _route_table_id :: !(TF.Attribute s "route_table_id" Text)
     {- ^ (Optional) The id of the specific Route Table to retrieve. -}
-    , _subnet_id      :: !(TF.Attribute s "subnet_id" Text)
+    , _subnet_id :: !(TF.Attribute s "subnet_id" Text)
     {- ^ (Optional) The id of a Subnet which is connected to the Route Table (not be exported if not given in parameter). -}
-    , _tags           :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Route Table. -}
-    , _vpc_id         :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
     } deriving (Show, Eq)
 
@@ -3964,36 +4238,44 @@ instance HasVpcId (RouteTableDataSource s) Text where
              (\s a -> s { _vpc_id = a } :: RouteTableDataSource s)
 
 instance HasComputedCidrBlock (RouteTableDataSource s) TF.CIDR where
-    computedCidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_block")
+    type HasComputedCidrBlockThread (RouteTableDataSource s) TF.CIDR = s
+
+    computedCidrBlock = to (\_ -> TF.Computed "cidr_block")
 
 instance HasComputedEgressOnlyGatewayId (RouteTableDataSource s) Text where
-    computedEgressOnlyGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "egress_only_gateway_id")
+    type HasComputedEgressOnlyGatewayIdThread (RouteTableDataSource s) Text = s
+
+    computedEgressOnlyGatewayId = to (\_ -> TF.Computed "egress_only_gateway_id")
 
 instance HasComputedGatewayId (RouteTableDataSource s) Text where
-    computedGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "gateway_id")
+    type HasComputedGatewayIdThread (RouteTableDataSource s) Text = s
+
+    computedGatewayId = to (\_ -> TF.Computed "gateway_id")
 
 instance HasComputedInstanceId (RouteTableDataSource s) Text where
-    computedInstanceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_id")
+    type HasComputedInstanceIdThread (RouteTableDataSource s) Text = s
+
+    computedInstanceId = to (\_ -> TF.Computed "instance_id")
 
 instance HasComputedIpv6CidrBlock (RouteTableDataSource s) TF.CIDR where
-    computedIpv6CidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_cidr_block")
+    type HasComputedIpv6CidrBlockThread (RouteTableDataSource s) TF.CIDR = s
+
+    computedIpv6CidrBlock = to (\_ -> TF.Computed "ipv6_cidr_block")
 
 instance HasComputedNatGatewayId (RouteTableDataSource s) Text where
-    computedNatGatewayId =
-        to (\x -> TF.Computed (TF.referenceKey x) "nat_gateway_id")
+    type HasComputedNatGatewayIdThread (RouteTableDataSource s) Text = s
+
+    computedNatGatewayId = to (\_ -> TF.Computed "nat_gateway_id")
 
 instance HasComputedNetworkInterfaceId (RouteTableDataSource s) Text where
-    computedNetworkInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_id")
+    type HasComputedNetworkInterfaceIdThread (RouteTableDataSource s) Text = s
+
+    computedNetworkInterfaceId = to (\_ -> TF.Computed "network_interface_id")
 
 instance HasComputedVpcPeeringConnectionId (RouteTableDataSource s) Text where
-    computedVpcPeeringConnectionId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_peering_connection_id")
+    type HasComputedVpcPeeringConnectionIdThread (RouteTableDataSource s) Text = s
+
+    computedVpcPeeringConnectionId = to (\_ -> TF.Computed "vpc_peering_connection_id")
 
 routeTableDataSource :: TF.DataSource TF.AWS (RouteTableDataSource s)
 routeTableDataSource =
@@ -4030,32 +4312,39 @@ instance HasBucket (S3BucketDataSource s) Text where
              (\s a -> s { _bucket = a } :: S3BucketDataSource s)
 
 instance HasComputedArn (S3BucketDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (S3BucketDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedBucketDomainName (S3BucketDataSource s) Text where
-    computedBucketDomainName =
-        to (\x -> TF.Computed (TF.referenceKey x) "bucket_domain_name")
+    type HasComputedBucketDomainNameThread (S3BucketDataSource s) Text = s
+
+    computedBucketDomainName = to (\_ -> TF.Computed "bucket_domain_name")
 
 instance HasComputedHostedZoneId (S3BucketDataSource s) Text where
-    computedHostedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "hosted_zone_id")
+    type HasComputedHostedZoneIdThread (S3BucketDataSource s) Text = s
+
+    computedHostedZoneId = to (\_ -> TF.Computed "hosted_zone_id")
 
 instance HasComputedId (S3BucketDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+    type HasComputedIdThread (S3BucketDataSource s) Text = s
+
+    computedId = to (\_ -> TF.Computed "id")
 
 instance HasComputedRegion (S3BucketDataSource s) TF.Region where
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
+    type HasComputedRegionThread (S3BucketDataSource s) TF.Region = s
+
+    computedRegion = to (\_ -> TF.Computed "region")
 
 instance HasComputedWebsiteDomain (S3BucketDataSource s) Text where
-    computedWebsiteDomain =
-        to (\x -> TF.Computed (TF.referenceKey x) "website_domain")
+    type HasComputedWebsiteDomainThread (S3BucketDataSource s) Text = s
+
+    computedWebsiteDomain = to (\_ -> TF.Computed "website_domain")
 
 instance HasComputedWebsiteEndpoint (S3BucketDataSource s) Text where
-    computedWebsiteEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "website_endpoint")
+    type HasComputedWebsiteEndpointThread (S3BucketDataSource s) Text = s
+
+    computedWebsiteEndpoint = to (\_ -> TF.Computed "website_endpoint")
 
 s3BucketDataSource :: TF.DataSource TF.AWS (S3BucketDataSource s)
 s3BucketDataSource =
@@ -4074,9 +4363,9 @@ to prevent printing unsafe characters and potentially downloading large
 amount of data which would be thrown away in favour of metadata.
 -}
 data S3BucketObjectDataSource s = S3BucketObjectDataSource {
-      _bucket     :: !(TF.Attribute s "bucket" Text)
+      _bucket :: !(TF.Attribute s "bucket" Text)
     {- ^ (Required) The name of the bucket to read the object from -}
-    , _key        :: !(TF.Attribute s "key" Text)
+    , _key :: !(TF.Attribute s "key" Text)
     {- ^ (Required) The full path to the object inside the bucket -}
     , _version_id :: !(TF.Attribute s "version_id" Text)
     {- ^ (Optional) Specific version ID of the object returned (defaults to latest version) -}
@@ -4111,76 +4400,94 @@ instance HasVersionId (S3BucketObjectDataSource s) Text where
              (\s a -> s { _version_id = a } :: S3BucketObjectDataSource s)
 
 instance HasComputedBody (S3BucketObjectDataSource s) Text where
-    computedBody =
-        to (\x -> TF.Computed (TF.referenceKey x) "body")
+    type HasComputedBodyThread (S3BucketObjectDataSource s) Text = s
+
+    computedBody = to (\_ -> TF.Computed "body")
 
 instance HasComputedCacheControl (S3BucketObjectDataSource s) Text where
-    computedCacheControl =
-        to (\x -> TF.Computed (TF.referenceKey x) "cache_control")
+    type HasComputedCacheControlThread (S3BucketObjectDataSource s) Text = s
+
+    computedCacheControl = to (\_ -> TF.Computed "cache_control")
 
 instance HasComputedContentDisposition (S3BucketObjectDataSource s) Text where
-    computedContentDisposition =
-        to (\x -> TF.Computed (TF.referenceKey x) "content_disposition")
+    type HasComputedContentDispositionThread (S3BucketObjectDataSource s) Text = s
+
+    computedContentDisposition = to (\_ -> TF.Computed "content_disposition")
 
 instance HasComputedContentEncoding (S3BucketObjectDataSource s) Text where
-    computedContentEncoding =
-        to (\x -> TF.Computed (TF.referenceKey x) "content_encoding")
+    type HasComputedContentEncodingThread (S3BucketObjectDataSource s) Text = s
+
+    computedContentEncoding = to (\_ -> TF.Computed "content_encoding")
 
 instance HasComputedContentLanguage (S3BucketObjectDataSource s) Text where
-    computedContentLanguage =
-        to (\x -> TF.Computed (TF.referenceKey x) "content_language")
+    type HasComputedContentLanguageThread (S3BucketObjectDataSource s) Text = s
+
+    computedContentLanguage = to (\_ -> TF.Computed "content_language")
 
 instance HasComputedContentLength (S3BucketObjectDataSource s) Text where
-    computedContentLength =
-        to (\x -> TF.Computed (TF.referenceKey x) "content_length")
+    type HasComputedContentLengthThread (S3BucketObjectDataSource s) Text = s
+
+    computedContentLength = to (\_ -> TF.Computed "content_length")
 
 instance HasComputedContentType (S3BucketObjectDataSource s) Text where
-    computedContentType =
-        to (\x -> TF.Computed (TF.referenceKey x) "content_type")
+    type HasComputedContentTypeThread (S3BucketObjectDataSource s) Text = s
+
+    computedContentType = to (\_ -> TF.Computed "content_type")
 
 instance HasComputedEtag (S3BucketObjectDataSource s) Text where
-    computedEtag =
-        to (\x -> TF.Computed (TF.referenceKey x) "etag")
+    type HasComputedEtagThread (S3BucketObjectDataSource s) Text = s
+
+    computedEtag = to (\_ -> TF.Computed "etag")
 
 instance HasComputedExpiration (S3BucketObjectDataSource s) Text where
-    computedExpiration =
-        to (\x -> TF.Computed (TF.referenceKey x) "expiration")
+    type HasComputedExpirationThread (S3BucketObjectDataSource s) Text = s
+
+    computedExpiration = to (\_ -> TF.Computed "expiration")
 
 instance HasComputedExpires (S3BucketObjectDataSource s) Text where
-    computedExpires =
-        to (\x -> TF.Computed (TF.referenceKey x) "expires")
+    type HasComputedExpiresThread (S3BucketObjectDataSource s) Text = s
+
+    computedExpires = to (\_ -> TF.Computed "expires")
 
 instance HasComputedLastModified (S3BucketObjectDataSource s) Text where
-    computedLastModified =
-        to (\x -> TF.Computed (TF.referenceKey x) "last_modified")
+    type HasComputedLastModifiedThread (S3BucketObjectDataSource s) Text = s
+
+    computedLastModified = to (\_ -> TF.Computed "last_modified")
 
 instance HasComputedMetadata (S3BucketObjectDataSource s) Text where
-    computedMetadata =
-        to (\x -> TF.Computed (TF.referenceKey x) "metadata")
+    type HasComputedMetadataThread (S3BucketObjectDataSource s) Text = s
+
+    computedMetadata = to (\_ -> TF.Computed "metadata")
 
 instance HasComputedServerSideEncryption (S3BucketObjectDataSource s) Text where
-    computedServerSideEncryption =
-        to (\x -> TF.Computed (TF.referenceKey x) "server_side_encryption")
+    type HasComputedServerSideEncryptionThread (S3BucketObjectDataSource s) Text = s
+
+    computedServerSideEncryption = to (\_ -> TF.Computed "server_side_encryption")
 
 instance HasComputedSseKmsKeyId (S3BucketObjectDataSource s) Text where
-    computedSseKmsKeyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "sse_kms_key_id")
+    type HasComputedSseKmsKeyIdThread (S3BucketObjectDataSource s) Text = s
+
+    computedSseKmsKeyId = to (\_ -> TF.Computed "sse_kms_key_id")
 
 instance HasComputedStorageClass (S3BucketObjectDataSource s) Text where
-    computedStorageClass =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_class")
+    type HasComputedStorageClassThread (S3BucketObjectDataSource s) Text = s
+
+    computedStorageClass = to (\_ -> TF.Computed "storage_class")
 
 instance HasComputedTags (S3BucketObjectDataSource s) TF.Tags where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+    type HasComputedTagsThread (S3BucketObjectDataSource s) TF.Tags = s
+
+    computedTags = to (\_ -> TF.Computed "tags")
 
 instance HasComputedVersionId (S3BucketObjectDataSource s) Text where
-    computedVersionId =
-        to (\x -> TF.Computed (TF.referenceKey x) "version_id")
+    type HasComputedVersionIdThread (S3BucketObjectDataSource s) Text = s
+
+    computedVersionId = to (\_ -> TF.Computed "version_id")
 
 instance HasComputedWebsiteRedirectLocation (S3BucketObjectDataSource s) Text where
-    computedWebsiteRedirectLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "website_redirect_location")
+    type HasComputedWebsiteRedirectLocationThread (S3BucketObjectDataSource s) Text = s
+
+    computedWebsiteRedirectLocation = to (\_ -> TF.Computed "website_redirect_location")
 
 s3BucketObjectDataSource :: TF.DataSource TF.AWS (S3BucketObjectDataSource s)
 s3BucketObjectDataSource =
@@ -4201,11 +4508,11 @@ the security group belongs to.
 data SecurityGroupDataSource s = SecurityGroupDataSource {
       _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id     :: !(TF.Attribute s "id" Text)
+    , _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The id of the specific security group to retrieve. -}
-    , _name   :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s "name" Text)
     {- ^ (Optional) The name that the desired security group must have. -}
-    , _tags   :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired security group. -}
     , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
@@ -4256,12 +4563,14 @@ instance HasVpcId (SecurityGroupDataSource s) Text where
              (\s a -> s { _vpc_id = a } :: SecurityGroupDataSource s)
 
 instance HasComputedArn (SecurityGroupDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (SecurityGroupDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 instance HasComputedDescription (SecurityGroupDataSource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+    type HasComputedDescriptionThread (SecurityGroupDataSource s) Text = s
+
+    computedDescription = to (\_ -> TF.Computed "description")
 
 securityGroupDataSource :: TF.DataSource TF.AWS (SecurityGroupDataSource s)
 securityGroupDataSource =
@@ -4298,8 +4607,9 @@ instance HasName (SnsTopicDataSource s) Text where
              (\s a -> s { _name = a } :: SnsTopicDataSource s)
 
 instance HasComputedArn (SnsTopicDataSource s) Text where
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
+    type HasComputedArnThread (SnsTopicDataSource s) Text = s
+
+    computedArn = to (\_ -> TF.Computed "arn")
 
 snsTopicDataSource :: TF.DataSource TF.AWS (SnsTopicDataSource s)
 snsTopicDataSource =
@@ -4313,7 +4623,7 @@ snsTopicDataSource =
 Provides an SSM Parameter data source.
 -}
 data SsmParameterDataSource s = SsmParameterDataSource {
-      _name            :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s "name" Text)
     {- ^ (Required) The name of the parameter. -}
     , _with_decryption :: !(TF.Attribute s "with_decryption" Text)
     {- ^ (Optional) Whether to return decrypted @SecureString@ value. Defaults to @true@ . -}
@@ -4357,21 +4667,21 @@ to.
 data SubnetDataSource s = SubnetDataSource {
       _availability_zone :: !(TF.Attribute s "availability_zone" TF.Zone)
     {- ^ (Optional) The availability zone where the subnet must reside. -}
-    , _cidr_block        :: !(TF.Attribute s "cidr_block" TF.CIDR)
+    , _cidr_block :: !(TF.Attribute s "cidr_block" TF.CIDR)
     {- ^ (Optional) The cidr block of the desired subnet. -}
-    , _default_for_az    :: !(TF.Attribute s "default_for_az" Text)
+    , _default_for_az :: !(TF.Attribute s "default_for_az" Text)
     {- ^ (Optional) Boolean constraint for whether the desired subnet must be the default subnet for its associated availability zone. -}
-    , _filter            :: !(TF.Attribute s "filter" Text)
+    , _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                :: !(TF.Attribute s "id" Text)
+    , _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The id of the specific subnet to retrieve. -}
-    , _ipv6_cidr_block   :: !(TF.Attribute s "ipv6_cidr_block" TF.CIDR)
+    , _ipv6_cidr_block :: !(TF.Attribute s "ipv6_cidr_block" TF.CIDR)
     {- ^ (Optional) The Ipv6 cidr block of the desired subnet -}
-    , _state             :: !(TF.Attribute s "state" Text)
+    , _state :: !(TF.Attribute s "state" Text)
     {- ^ (Optional) The state that the desired subnet must have. -}
-    , _tags              :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnet. -}
-    , _vpc_id            :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) The id of the VPC that the desired subnet belongs to. -}
     } deriving (Show, Eq)
 
@@ -4472,7 +4782,7 @@ subnetDataSource =
 useful for getting back a list of subnet ids for a vpc.
 -}
 data SubnetIdsDataSource s = SubnetIdsDataSource {
-      _tags   :: !(TF.Attribute s "tags" TF.Tags)
+      _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnets. -}
     , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Required) The VPC ID that you want to filter from. -}
@@ -4499,8 +4809,9 @@ instance HasVpcId (SubnetIdsDataSource s) Text where
              (\s a -> s { _vpc_id = a } :: SubnetIdsDataSource s)
 
 instance HasComputedIds (SubnetIdsDataSource s) Text where
-    computedIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "ids")
+    type HasComputedIdsThread (SubnetIdsDataSource s) Text = s
+
+    computedIds = to (\_ -> TF.Computed "ids")
 
 subnetIdsDataSource :: TF.DataSource TF.AWS (SubnetIdsDataSource s)
 subnetIdsDataSource =
@@ -4517,19 +4828,19 @@ useful when a module accepts a vpc id as an input variable and needs to, for
 example, determine the CIDR block of that VPC.
 -}
 data VpcDataSource s = VpcDataSource {
-      _cidr_block      :: !(TF.Attribute s "cidr_block" TF.CIDR)
+      _cidr_block :: !(TF.Attribute s "cidr_block" TF.CIDR)
     {- ^ (Optional) The cidr block of the desired VPC. -}
-    , _default'        :: !(TF.Attribute s "default" Text)
+    , _default' :: !(TF.Attribute s "default" Text)
     {- ^ (Optional) Boolean constraint on whether the desired VPC is the default VPC for the region. -}
     , _dhcp_options_id :: !(TF.Attribute s "dhcp_options_id" Text)
     {- ^ (Optional) The DHCP options id of the desired VPC. -}
-    , _filter          :: !(TF.Attribute s "filter" Text)
+    , _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id              :: !(TF.Attribute s "id" Text)
+    , _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The id of the specific VPC to retrieve. -}
-    , _state           :: !(TF.Attribute s "state" Text)
+    , _state :: !(TF.Attribute s "state" Text)
     {- ^ (Optional) The current state of the desired VPC. Can be either @"pending"@ or @"available"@ . -}
-    , _tags            :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC. -}
     } deriving (Show, Eq)
 
@@ -4594,24 +4905,29 @@ instance HasTags (VpcDataSource s) TF.Tags where
              (\s a -> s { _tags = a } :: VpcDataSource s)
 
 instance HasComputedEnableDnsHostnames (VpcDataSource s) TF.Bool where
-    computedEnableDnsHostnames =
-        to (\x -> TF.Computed (TF.referenceKey x) "enable_dns_hostnames")
+    type HasComputedEnableDnsHostnamesThread (VpcDataSource s) TF.Bool = s
+
+    computedEnableDnsHostnames = to (\_ -> TF.Computed "enable_dns_hostnames")
 
 instance HasComputedEnableDnsSupport (VpcDataSource s) TF.Bool where
-    computedEnableDnsSupport =
-        to (\x -> TF.Computed (TF.referenceKey x) "enable_dns_support")
+    type HasComputedEnableDnsSupportThread (VpcDataSource s) TF.Bool = s
+
+    computedEnableDnsSupport = to (\_ -> TF.Computed "enable_dns_support")
 
 instance HasComputedInstanceTenancy (VpcDataSource s) Text where
-    computedInstanceTenancy =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_tenancy")
+    type HasComputedInstanceTenancyThread (VpcDataSource s) Text = s
+
+    computedInstanceTenancy = to (\_ -> TF.Computed "instance_tenancy")
 
 instance HasComputedIpv6AssociationId (VpcDataSource s) Text where
-    computedIpv6AssociationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_association_id")
+    type HasComputedIpv6AssociationIdThread (VpcDataSource s) Text = s
+
+    computedIpv6AssociationId = to (\_ -> TF.Computed "ipv6_association_id")
 
 instance HasComputedIpv6CidrBlock (VpcDataSource s) TF.CIDR where
-    computedIpv6CidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_cidr_block")
+    type HasComputedIpv6CidrBlockThread (VpcDataSource s) TF.CIDR = s
+
+    computedIpv6CidrBlock = to (\_ -> TF.Computed "ipv6_cidr_block")
 
 vpcDataSource :: TF.DataSource TF.AWS (VpcDataSource s)
 vpcDataSource =
@@ -4631,13 +4947,13 @@ vpcDataSource =
 The VPC Endpoint data source provides details about a specific VPC endpoint.
 -}
 data VpcEndpointDataSource s = VpcEndpointDataSource {
-      _id           :: !(TF.Attribute s "id" Text)
+      _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The ID of the specific VPC Endpoint to retrieve. -}
     , _service_name :: !(TF.Attribute s "service_name" Text)
     {- ^ (Optional) The AWS service name of the specific VPC Endpoint to retrieve. -}
-    , _state        :: !(TF.Attribute s "state" Text)
+    , _state :: !(TF.Attribute s "state" Text)
     {- ^ (Optional) The state of the specific VPC Endpoint to retrieve. -}
-    , _vpc_id       :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) The ID of the VPC in which the specific VPC Endpoint is used. -}
     } deriving (Show, Eq)
 
@@ -4678,16 +4994,19 @@ instance HasVpcId (VpcEndpointDataSource s) Text where
              (\s a -> s { _vpc_id = a } :: VpcEndpointDataSource s)
 
 instance HasComputedPolicy (VpcEndpointDataSource s) Text where
-    computedPolicy =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy")
+    type HasComputedPolicyThread (VpcEndpointDataSource s) Text = s
+
+    computedPolicy = to (\_ -> TF.Computed "policy")
 
 instance HasComputedPrefixListId (VpcEndpointDataSource s) Text where
-    computedPrefixListId =
-        to (\x -> TF.Computed (TF.referenceKey x) "prefix_list_id")
+    type HasComputedPrefixListIdThread (VpcEndpointDataSource s) Text = s
+
+    computedPrefixListId = to (\_ -> TF.Computed "prefix_list_id")
 
 instance HasComputedRouteTableIds (VpcEndpointDataSource s) Text where
-    computedRouteTableIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "route_table_ids")
+    type HasComputedRouteTableIdsThread (VpcEndpointDataSource s) Text = s
+
+    computedRouteTableIds = to (\_ -> TF.Computed "route_table_ids")
 
 vpcEndpointDataSource :: TF.DataSource TF.AWS (VpcEndpointDataSource s)
 vpcEndpointDataSource =
@@ -4723,8 +5042,9 @@ instance HasService (VpcEndpointServiceDataSource s) Text where
              (\s a -> s { _service = a } :: VpcEndpointServiceDataSource s)
 
 instance HasComputedServiceName (VpcEndpointServiceDataSource s) Text where
-    computedServiceName =
-        to (\x -> TF.Computed (TF.referenceKey x) "service_name")
+    type HasComputedServiceNameThread (VpcEndpointServiceDataSource s) Text = s
+
+    computedServiceName = to (\_ -> TF.Computed "service_name")
 
 vpcEndpointServiceDataSource :: TF.DataSource TF.AWS (VpcEndpointServiceDataSource s)
 vpcEndpointServiceDataSource =
@@ -4739,29 +5059,29 @@ The VPC Peering Connection data source provides details about a specific VPC
 peering connection.
 -}
 data VpcPeeringConnectionDataSource s = VpcPeeringConnectionDataSource {
-      _cidr_block      :: !(TF.Attribute s "cidr_block" TF.CIDR)
+      _cidr_block :: !(TF.Attribute s "cidr_block" TF.CIDR)
     {- ^ (Optional) The CIDR block of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _filter          :: !(TF.Attribute s "filter" Text)
+    , _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id              :: !(TF.Attribute s "id" Text)
+    , _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The ID of the specific VPC Peering Connection to retrieve. -}
-    , _owner_id        :: !(TF.Attribute s "owner_id" Text)
+    , _owner_id :: !(TF.Attribute s "owner_id" Text)
     {- ^ (Optional) The AWS account ID of the owner of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     , _peer_cidr_block :: !(TF.Attribute s "peer_cidr_block" TF.CIDR)
     {- ^ (Optional) The CIDR block of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_owner_id   :: !(TF.Attribute s "peer_owner_id" Text)
+    , _peer_owner_id :: !(TF.Attribute s "peer_owner_id" Text)
     {- ^ (Optional) The AWS account ID of the owner of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_region     :: !(TF.Attribute s "peer_region" TF.Region)
+    , _peer_region :: !(TF.Attribute s "peer_region" TF.Region)
     {- ^ (Optional) The region of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_vpc_id     :: !(TF.Attribute s "peer_vpc_id" Text)
+    , _peer_vpc_id :: !(TF.Attribute s "peer_vpc_id" Text)
     {- ^ (Optional) The ID of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _region          :: !(TF.Attribute s "region" TF.Region)
+    , _region :: !(TF.Attribute s "region" TF.Region)
     {- ^ (Optional) The region of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _status          :: !(TF.Attribute s "status" Text)
+    , _status :: !(TF.Attribute s "status" Text)
     {- ^ (Optional) The status of the specific VPC Peering Connection to retrieve. -}
-    , _tags            :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC Peering Connection. -}
-    , _vpc_id          :: !(TF.Attribute s "vpc_id" Text)
+    , _vpc_id :: !(TF.Attribute s "vpc_id" Text)
     {- ^ (Optional) The ID of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     } deriving (Show, Eq)
 
@@ -4866,12 +5186,14 @@ instance HasVpcId (VpcPeeringConnectionDataSource s) Text where
              (\s a -> s { _vpc_id = a } :: VpcPeeringConnectionDataSource s)
 
 instance HasComputedAccepter (VpcPeeringConnectionDataSource s) Text where
-    computedAccepter =
-        to (\x -> TF.Computed (TF.referenceKey x) "accepter")
+    type HasComputedAccepterThread (VpcPeeringConnectionDataSource s) Text = s
+
+    computedAccepter = to (\_ -> TF.Computed "accepter")
 
 instance HasComputedRequester (VpcPeeringConnectionDataSource s) Text where
-    computedRequester =
-        to (\x -> TF.Computed (TF.referenceKey x) "requester")
+    type HasComputedRequesterThread (VpcPeeringConnectionDataSource s) Text = s
+
+    computedRequester = to (\_ -> TF.Computed "requester")
 
 vpcPeeringConnectionDataSource :: TF.DataSource TF.AWS (VpcPeeringConnectionDataSource s)
 vpcPeeringConnectionDataSource =
@@ -4896,17 +5218,17 @@ vpcPeeringConnectionDataSource =
 The VPN Gateway data source provides details about a specific VPN gateway.
 -}
 data VpnGatewayDataSource s = VpnGatewayDataSource {
-      _attached_vpc_id   :: !(TF.Attribute s "attached_vpc_id" Text)
+      _attached_vpc_id :: !(TF.Attribute s "attached_vpc_id" Text)
     {- ^ (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve. -}
     , _availability_zone :: !(TF.Attribute s "availability_zone" TF.Zone)
     {- ^ (Optional) The Availability Zone of the specific VPN Gateway to retrieve. -}
-    , _filter            :: !(TF.Attribute s "filter" Text)
+    , _filter :: !(TF.Attribute s "filter" Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                :: !(TF.Attribute s "id" Text)
+    , _id :: !(TF.Attribute s "id" Text)
     {- ^ (Optional) The ID of the specific VPN Gateway to retrieve. -}
-    , _state             :: !(TF.Attribute s "state" Text)
+    , _state :: !(TF.Attribute s "state" Text)
     {- ^ (Optional) The state of the specific VPN Gateway to retrieve. -}
-    , _tags              :: !(TF.Attribute s "tags" TF.Tags)
+    , _tags :: !(TF.Attribute s "tags" TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPN Gateway. -}
     } deriving (Show, Eq)
 
@@ -5822,661 +6144,1101 @@ instance HasZoneId a b => HasZoneId (TF.DataSource p a) b where
     zoneId = TF.configuration . zoneId
 
 class HasComputedAccepter a b | a -> b where
-    computedAccepter :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAccepterThread a b :: *
+
+    computedAccepter :: forall r. Getting r a (TF.Computed (HasComputedAccepterThread a b) b)
 
 class HasComputedAddress a b | a -> b where
-    computedAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAddressThread a b :: *
+
+    computedAddress :: forall r. Getting r a (TF.Computed (HasComputedAddressThread a b) b)
 
 class HasComputedAllocatedStorage a b | a -> b where
-    computedAllocatedStorage :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAllocatedStorageThread a b :: *
+
+    computedAllocatedStorage :: forall r. Getting r a (TF.Computed (HasComputedAllocatedStorageThread a b) b)
 
 class HasComputedAllocationId a b | a -> b where
-    computedAllocationId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAllocationIdThread a b :: *
+
+    computedAllocationId :: forall r. Getting r a (TF.Computed (HasComputedAllocationIdThread a b) b)
 
 class HasComputedArchitecture a b | a -> b where
-    computedArchitecture :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedArchitectureThread a b :: *
+
+    computedArchitecture :: forall r. Getting r a (TF.Computed (HasComputedArchitectureThread a b) b)
 
 class HasComputedArn a b | a -> b where
-    computedArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedArnThread a b :: *
+
+    computedArn :: forall r. Getting r a (TF.Computed (HasComputedArnThread a b) b)
 
 class HasComputedAssociatePublicIpAddress a b | a -> b where
-    computedAssociatePublicIpAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAssociatePublicIpAddressThread a b :: *
+
+    computedAssociatePublicIpAddress :: forall r. Getting r a (TF.Computed (HasComputedAssociatePublicIpAddressThread a b) b)
 
 class HasComputedAssociation a b | a -> b where
-    computedAssociation :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAssociationThread a b :: *
+
+    computedAssociation :: forall r. Getting r a (TF.Computed (HasComputedAssociationThread a b) b)
 
 class HasComputedAssumeRolePolicy a b | a -> b where
-    computedAssumeRolePolicy :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAssumeRolePolicyThread a b :: *
+
+    computedAssumeRolePolicy :: forall r. Getting r a (TF.Computed (HasComputedAssumeRolePolicyThread a b) b)
 
 class HasComputedAuthTokenEnabled a b | a -> b where
-    computedAuthTokenEnabled :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAuthTokenEnabledThread a b :: *
+
+    computedAuthTokenEnabled :: forall r. Getting r a (TF.Computed (HasComputedAuthTokenEnabledThread a b) b)
 
 class HasComputedAutoMinorVersionUpgrade a b | a -> b where
-    computedAutoMinorVersionUpgrade :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAutoMinorVersionUpgradeThread a b :: *
+
+    computedAutoMinorVersionUpgrade :: forall r. Getting r a (TF.Computed (HasComputedAutoMinorVersionUpgradeThread a b) b)
 
 class HasComputedAutomaticFailoverEnabled a b | a -> b where
-    computedAutomaticFailoverEnabled :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAutomaticFailoverEnabledThread a b :: *
+
+    computedAutomaticFailoverEnabled :: forall r. Getting r a (TF.Computed (HasComputedAutomaticFailoverEnabledThread a b) b)
 
 class HasComputedAvailabilityZone a b | a -> b where
-    computedAvailabilityZone :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedAvailabilityZoneThread a b :: *
+
+    computedAvailabilityZone :: forall r. Getting r a (TF.Computed (HasComputedAvailabilityZoneThread a b) b)
 
 class HasComputedBackupRetentionPeriod a b | a -> b where
-    computedBackupRetentionPeriod :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedBackupRetentionPeriodThread a b :: *
+
+    computedBackupRetentionPeriod :: forall r. Getting r a (TF.Computed (HasComputedBackupRetentionPeriodThread a b) b)
 
 class HasComputedBlockDeviceMappings a b | a -> b where
-    computedBlockDeviceMappings :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedBlockDeviceMappingsThread a b :: *
+
+    computedBlockDeviceMappings :: forall r. Getting r a (TF.Computed (HasComputedBlockDeviceMappingsThread a b) b)
 
 class HasComputedBody a b | a -> b where
-    computedBody :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedBodyThread a b :: *
+
+    computedBody :: forall r. Getting r a (TF.Computed (HasComputedBodyThread a b) b)
 
 class HasComputedBucketDomainName a b | a -> b where
-    computedBucketDomainName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedBucketDomainNameThread a b :: *
+
+    computedBucketDomainName :: forall r. Getting r a (TF.Computed (HasComputedBucketDomainNameThread a b) b)
 
 class HasComputedCaCertIdentifier a b | a -> b where
-    computedCaCertIdentifier :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCaCertIdentifierThread a b :: *
+
+    computedCaCertIdentifier :: forall r. Getting r a (TF.Computed (HasComputedCaCertIdentifierThread a b) b)
 
 class HasComputedCacheControl a b | a -> b where
-    computedCacheControl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCacheControlThread a b :: *
+
+    computedCacheControl :: forall r. Getting r a (TF.Computed (HasComputedCacheControlThread a b) b)
 
 class HasComputedCacheNodes a b | a -> b where
-    computedCacheNodes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCacheNodesThread a b :: *
+
+    computedCacheNodes :: forall r. Getting r a (TF.Computed (HasComputedCacheNodesThread a b) b)
 
 class HasComputedCallerReference a b | a -> b where
-    computedCallerReference :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCallerReferenceThread a b :: *
+
+    computedCallerReference :: forall r. Getting r a (TF.Computed (HasComputedCallerReferenceThread a b) b)
 
 class HasComputedCapabilities a b | a -> b where
-    computedCapabilities :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCapabilitiesThread a b :: *
+
+    computedCapabilities :: forall r. Getting r a (TF.Computed (HasComputedCapabilitiesThread a b) b)
 
 class HasComputedCertificateBody a b | a -> b where
-    computedCertificateBody :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCertificateBodyThread a b :: *
+
+    computedCertificateBody :: forall r. Getting r a (TF.Computed (HasComputedCertificateBodyThread a b) b)
 
 class HasComputedCertificateChain a b | a -> b where
-    computedCertificateChain :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCertificateChainThread a b :: *
+
+    computedCertificateChain :: forall r. Getting r a (TF.Computed (HasComputedCertificateChainThread a b) b)
 
 class HasComputedCidrBlock a b | a -> b where
-    computedCidrBlock :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCidrBlockThread a b :: *
+
+    computedCidrBlock :: forall r. Getting r a (TF.Computed (HasComputedCidrBlockThread a b) b)
 
 class HasComputedCidrBlocks a b | a -> b where
-    computedCidrBlocks :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCidrBlocksThread a b :: *
+
+    computedCidrBlocks :: forall r. Getting r a (TF.Computed (HasComputedCidrBlocksThread a b) b)
 
 class HasComputedCiphertextBlob a b | a -> b where
-    computedCiphertextBlob :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCiphertextBlobThread a b :: *
+
+    computedCiphertextBlob :: forall r. Getting r a (TF.Computed (HasComputedCiphertextBlobThread a b) b)
 
 class HasComputedClosedShards a b | a -> b where
-    computedClosedShards :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedClosedShardsThread a b :: *
+
+    computedClosedShards :: forall r. Getting r a (TF.Computed (HasComputedClosedShardsThread a b) b)
 
 class HasComputedClusterAddress a b | a -> b where
-    computedClusterAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedClusterAddressThread a b :: *
+
+    computedClusterAddress :: forall r. Getting r a (TF.Computed (HasComputedClusterAddressThread a b) b)
 
 class HasComputedComment a b | a -> b where
-    computedComment :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCommentThread a b :: *
+
+    computedComment :: forall r. Getting r a (TF.Computed (HasComputedCommentThread a b) b)
 
 class HasComputedConfigurationEndpoint a b | a -> b where
-    computedConfigurationEndpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedConfigurationEndpointThread a b :: *
+
+    computedConfigurationEndpoint :: forall r. Getting r a (TF.Computed (HasComputedConfigurationEndpointThread a b) b)
 
 class HasComputedConfigurationEndpointAddress a b | a -> b where
-    computedConfigurationEndpointAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedConfigurationEndpointAddressThread a b :: *
+
+    computedConfigurationEndpointAddress :: forall r. Getting r a (TF.Computed (HasComputedConfigurationEndpointAddressThread a b) b)
 
 class HasComputedContentDisposition a b | a -> b where
-    computedContentDisposition :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedContentDispositionThread a b :: *
+
+    computedContentDisposition :: forall r. Getting r a (TF.Computed (HasComputedContentDispositionThread a b) b)
 
 class HasComputedContentEncoding a b | a -> b where
-    computedContentEncoding :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedContentEncodingThread a b :: *
+
+    computedContentEncoding :: forall r. Getting r a (TF.Computed (HasComputedContentEncodingThread a b) b)
 
 class HasComputedContentLanguage a b | a -> b where
-    computedContentLanguage :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedContentLanguageThread a b :: *
+
+    computedContentLanguage :: forall r. Getting r a (TF.Computed (HasComputedContentLanguageThread a b) b)
 
 class HasComputedContentLength a b | a -> b where
-    computedContentLength :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedContentLengthThread a b :: *
+
+    computedContentLength :: forall r. Getting r a (TF.Computed (HasComputedContentLengthThread a b) b)
 
 class HasComputedContentType a b | a -> b where
-    computedContentType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedContentTypeThread a b :: *
+
+    computedContentType :: forall r. Getting r a (TF.Computed (HasComputedContentTypeThread a b) b)
 
 class HasComputedCpu a b | a -> b where
-    computedCpu :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCpuThread a b :: *
+
+    computedCpu :: forall r. Getting r a (TF.Computed (HasComputedCpuThread a b) b)
 
 class HasComputedCreateDate a b | a -> b where
-    computedCreateDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCreateDateThread a b :: *
+
+    computedCreateDate :: forall r. Getting r a (TF.Computed (HasComputedCreateDateThread a b) b)
 
 class HasComputedCreationDate a b | a -> b where
-    computedCreationDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCreationDateThread a b :: *
+
+    computedCreationDate :: forall r. Getting r a (TF.Computed (HasComputedCreationDateThread a b) b)
 
 class HasComputedCreationTimestamp a b | a -> b where
-    computedCreationTimestamp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCreationTimestampThread a b :: *
+
+    computedCreationTimestamp :: forall r. Getting r a (TF.Computed (HasComputedCreationTimestampThread a b) b)
 
 class HasComputedCurrent a b | a -> b where
-    computedCurrent :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedCurrentThread a b :: *
+
+    computedCurrent :: forall r. Getting r a (TF.Computed (HasComputedCurrentThread a b) b)
 
 class HasComputedDataEncryptionKeyId a b | a -> b where
-    computedDataEncryptionKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDataEncryptionKeyIdThread a b :: *
+
+    computedDataEncryptionKeyId :: forall r. Getting r a (TF.Computed (HasComputedDataEncryptionKeyIdThread a b) b)
 
 class HasComputedDbClusterIdentifier a b | a -> b where
-    computedDbClusterIdentifier :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbClusterIdentifierThread a b :: *
+
+    computedDbClusterIdentifier :: forall r. Getting r a (TF.Computed (HasComputedDbClusterIdentifierThread a b) b)
 
 class HasComputedDbInstanceArn a b | a -> b where
-    computedDbInstanceArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbInstanceArnThread a b :: *
+
+    computedDbInstanceArn :: forall r. Getting r a (TF.Computed (HasComputedDbInstanceArnThread a b) b)
 
 class HasComputedDbInstanceClass a b | a -> b where
-    computedDbInstanceClass :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbInstanceClassThread a b :: *
+
+    computedDbInstanceClass :: forall r. Getting r a (TF.Computed (HasComputedDbInstanceClassThread a b) b)
 
 class HasComputedDbInstancePort a b | a -> b where
-    computedDbInstancePort :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbInstancePortThread a b :: *
+
+    computedDbInstancePort :: forall r. Getting r a (TF.Computed (HasComputedDbInstancePortThread a b) b)
 
 class HasComputedDbName a b | a -> b where
-    computedDbName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbNameThread a b :: *
+
+    computedDbName :: forall r. Getting r a (TF.Computed (HasComputedDbNameThread a b) b)
 
 class HasComputedDbParameterGroups a b | a -> b where
-    computedDbParameterGroups :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbParameterGroupsThread a b :: *
+
+    computedDbParameterGroups :: forall r. Getting r a (TF.Computed (HasComputedDbParameterGroupsThread a b) b)
 
 class HasComputedDbSecurityGroups a b | a -> b where
-    computedDbSecurityGroups :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbSecurityGroupsThread a b :: *
+
+    computedDbSecurityGroups :: forall r. Getting r a (TF.Computed (HasComputedDbSecurityGroupsThread a b) b)
 
 class HasComputedDbSnapshotArn a b | a -> b where
-    computedDbSnapshotArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbSnapshotArnThread a b :: *
+
+    computedDbSnapshotArn :: forall r. Getting r a (TF.Computed (HasComputedDbSnapshotArnThread a b) b)
 
 class HasComputedDbSubnetGroup a b | a -> b where
-    computedDbSubnetGroup :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDbSubnetGroupThread a b :: *
+
+    computedDbSubnetGroup :: forall r. Getting r a (TF.Computed (HasComputedDbSubnetGroupThread a b) b)
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDescriptionThread a b :: *
+
+    computedDescription :: forall r. Getting r a (TF.Computed (HasComputedDescriptionThread a b) b)
 
 class HasComputedDisableNetworking a b | a -> b where
-    computedDisableNetworking :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDisableNetworkingThread a b :: *
+
+    computedDisableNetworking :: forall r. Getting r a (TF.Computed (HasComputedDisableNetworkingThread a b) b)
 
 class HasComputedDisableRollback a b | a -> b where
-    computedDisableRollback :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDisableRollbackThread a b :: *
+
+    computedDisableRollback :: forall r. Getting r a (TF.Computed (HasComputedDisableRollbackThread a b) b)
 
 class HasComputedDnsName a b | a -> b where
-    computedDnsName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDnsNameThread a b :: *
+
+    computedDnsName :: forall r. Getting r a (TF.Computed (HasComputedDnsNameThread a b) b)
 
 class HasComputedDockerLabels a b | a -> b where
-    computedDockerLabels :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedDockerLabelsThread a b :: *
+
+    computedDockerLabels :: forall r. Getting r a (TF.Computed (HasComputedDockerLabelsThread a b) b)
 
 class HasComputedEbsBlockDevice a b | a -> b where
-    computedEbsBlockDevice :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEbsBlockDeviceThread a b :: *
+
+    computedEbsBlockDevice :: forall r. Getting r a (TF.Computed (HasComputedEbsBlockDeviceThread a b) b)
 
 class HasComputedEbsOptimized a b | a -> b where
-    computedEbsOptimized :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEbsOptimizedThread a b :: *
+
+    computedEbsOptimized :: forall r. Getting r a (TF.Computed (HasComputedEbsOptimizedThread a b) b)
 
 class HasComputedEgressOnlyGatewayId a b | a -> b where
-    computedEgressOnlyGatewayId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEgressOnlyGatewayIdThread a b :: *
+
+    computedEgressOnlyGatewayId :: forall r. Getting r a (TF.Computed (HasComputedEgressOnlyGatewayIdThread a b) b)
 
 class HasComputedEnableDnsHostnames a b | a -> b where
-    computedEnableDnsHostnames :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEnableDnsHostnamesThread a b :: *
+
+    computedEnableDnsHostnames :: forall r. Getting r a (TF.Computed (HasComputedEnableDnsHostnamesThread a b) b)
 
 class HasComputedEnableDnsSupport a b | a -> b where
-    computedEnableDnsSupport :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEnableDnsSupportThread a b :: *
+
+    computedEnableDnsSupport :: forall r. Getting r a (TF.Computed (HasComputedEnableDnsSupportThread a b) b)
 
 class HasComputedEncrypted a b | a -> b where
-    computedEncrypted :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEncryptedThread a b :: *
+
+    computedEncrypted :: forall r. Getting r a (TF.Computed (HasComputedEncryptedThread a b) b)
 
 class HasComputedEndpoint a b | a -> b where
-    computedEndpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEndpointThread a b :: *
+
+    computedEndpoint :: forall r. Getting r a (TF.Computed (HasComputedEndpointThread a b) b)
 
 class HasComputedEngine a b | a -> b where
-    computedEngine :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEngineThread a b :: *
+
+    computedEngine :: forall r. Getting r a (TF.Computed (HasComputedEngineThread a b) b)
 
 class HasComputedEngineVersion a b | a -> b where
-    computedEngineVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEngineVersionThread a b :: *
+
+    computedEngineVersion :: forall r. Getting r a (TF.Computed (HasComputedEngineVersionThread a b) b)
 
 class HasComputedEnvironment a b | a -> b where
-    computedEnvironment :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEnvironmentThread a b :: *
+
+    computedEnvironment :: forall r. Getting r a (TF.Computed (HasComputedEnvironmentThread a b) b)
 
 class HasComputedEphemeralBlockDevice a b | a -> b where
-    computedEphemeralBlockDevice :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEphemeralBlockDeviceThread a b :: *
+
+    computedEphemeralBlockDevice :: forall r. Getting r a (TF.Computed (HasComputedEphemeralBlockDeviceThread a b) b)
 
 class HasComputedEtag a b | a -> b where
-    computedEtag :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedEtagThread a b :: *
+
+    computedEtag :: forall r. Getting r a (TF.Computed (HasComputedEtagThread a b) b)
 
 class HasComputedExpiration a b | a -> b where
-    computedExpiration :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedExpirationThread a b :: *
+
+    computedExpiration :: forall r. Getting r a (TF.Computed (HasComputedExpirationThread a b) b)
 
 class HasComputedExpirationDate a b | a -> b where
-    computedExpirationDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedExpirationDateThread a b :: *
+
+    computedExpirationDate :: forall r. Getting r a (TF.Computed (HasComputedExpirationDateThread a b) b)
 
 class HasComputedExpires a b | a -> b where
-    computedExpires :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedExpiresThread a b :: *
+
+    computedExpires :: forall r. Getting r a (TF.Computed (HasComputedExpiresThread a b) b)
 
 class HasComputedFamily' a b | a -> b where
-    computedFamily' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedFamily'Thread a b :: *
+
+    computedFamily' :: forall r. Getting r a (TF.Computed (HasComputedFamily'Thread a b) b)
 
 class HasComputedFileSystemId a b | a -> b where
-    computedFileSystemId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedFileSystemIdThread a b :: *
+
+    computedFileSystemId :: forall r. Getting r a (TF.Computed (HasComputedFileSystemIdThread a b) b)
 
 class HasComputedGatewayId a b | a -> b where
-    computedGatewayId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedGatewayIdThread a b :: *
+
+    computedGatewayId :: forall r. Getting r a (TF.Computed (HasComputedGatewayIdThread a b) b)
 
 class HasComputedGroupId a b | a -> b where
-    computedGroupId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedGroupIdThread a b :: *
+
+    computedGroupId :: forall r. Getting r a (TF.Computed (HasComputedGroupIdThread a b) b)
 
 class HasComputedHostedZoneId a b | a -> b where
-    computedHostedZoneId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHostedZoneIdThread a b :: *
+
+    computedHostedZoneId :: forall r. Getting r a (TF.Computed (HasComputedHostedZoneIdThread a b) b)
 
 class HasComputedHypervisor a b | a -> b where
-    computedHypervisor :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedHypervisorThread a b :: *
+
+    computedHypervisor :: forall r. Getting r a (TF.Computed (HasComputedHypervisorThread a b) b)
 
 class HasComputedIamInstanceProfile a b | a -> b where
-    computedIamInstanceProfile :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIamInstanceProfileThread a b :: *
+
+    computedIamInstanceProfile :: forall r. Getting r a (TF.Computed (HasComputedIamInstanceProfileThread a b) b)
 
 class HasComputedIamRoleArn a b | a -> b where
-    computedIamRoleArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIamRoleArnThread a b :: *
+
+    computedIamRoleArn :: forall r. Getting r a (TF.Computed (HasComputedIamRoleArnThread a b) b)
 
 class HasComputedId a b | a -> b where
-    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIdThread a b :: *
+
+    computedId :: forall r. Getting r a (TF.Computed (HasComputedIdThread a b) b)
 
 class HasComputedIds a b | a -> b where
-    computedIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIdsThread a b :: *
+
+    computedIds :: forall r. Getting r a (TF.Computed (HasComputedIdsThread a b) b)
 
 class HasComputedImage a b | a -> b where
-    computedImage :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedImageThread a b :: *
+
+    computedImage :: forall r. Getting r a (TF.Computed (HasComputedImageThread a b) b)
 
 class HasComputedImageDigest a b | a -> b where
-    computedImageDigest :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedImageDigestThread a b :: *
+
+    computedImageDigest :: forall r. Getting r a (TF.Computed (HasComputedImageDigestThread a b) b)
 
 class HasComputedImageId a b | a -> b where
-    computedImageId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedImageIdThread a b :: *
+
+    computedImageId :: forall r. Getting r a (TF.Computed (HasComputedImageIdThread a b) b)
 
 class HasComputedImageLocation a b | a -> b where
-    computedImageLocation :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedImageLocationThread a b :: *
+
+    computedImageLocation :: forall r. Getting r a (TF.Computed (HasComputedImageLocationThread a b) b)
 
 class HasComputedImageOwnerAlias a b | a -> b where
-    computedImageOwnerAlias :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedImageOwnerAliasThread a b :: *
+
+    computedImageOwnerAlias :: forall r. Getting r a (TF.Computed (HasComputedImageOwnerAliasThread a b) b)
 
 class HasComputedImageType a b | a -> b where
-    computedImageType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedImageTypeThread a b :: *
+
+    computedImageType :: forall r. Getting r a (TF.Computed (HasComputedImageTypeThread a b) b)
 
 class HasComputedInstanceId a b | a -> b where
-    computedInstanceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInstanceIdThread a b :: *
+
+    computedInstanceId :: forall r. Getting r a (TF.Computed (HasComputedInstanceIdThread a b) b)
 
 class HasComputedInstanceTenancy a b | a -> b where
-    computedInstanceTenancy :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInstanceTenancyThread a b :: *
+
+    computedInstanceTenancy :: forall r. Getting r a (TF.Computed (HasComputedInstanceTenancyThread a b) b)
 
 class HasComputedInstanceType a b | a -> b where
-    computedInstanceType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInstanceTypeThread a b :: *
+
+    computedInstanceType :: forall r. Getting r a (TF.Computed (HasComputedInstanceTypeThread a b) b)
 
 class HasComputedInterfaceType a b | a -> b where
-    computedInterfaceType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedInterfaceTypeThread a b :: *
+
+    computedInterfaceType :: forall r. Getting r a (TF.Computed (HasComputedInterfaceTypeThread a b) b)
 
 class HasComputedIops a b | a -> b where
-    computedIops :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIopsThread a b :: *
+
+    computedIops :: forall r. Getting r a (TF.Computed (HasComputedIopsThread a b) b)
 
 class HasComputedIpAddress a b | a -> b where
-    computedIpAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIpAddressThread a b :: *
+
+    computedIpAddress :: forall r. Getting r a (TF.Computed (HasComputedIpAddressThread a b) b)
 
 class HasComputedIpv6Addresses a b | a -> b where
-    computedIpv6Addresses :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIpv6AddressesThread a b :: *
+
+    computedIpv6Addresses :: forall r. Getting r a (TF.Computed (HasComputedIpv6AddressesThread a b) b)
 
 class HasComputedIpv6AssociationId a b | a -> b where
-    computedIpv6AssociationId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIpv6AssociationIdThread a b :: *
+
+    computedIpv6AssociationId :: forall r. Getting r a (TF.Computed (HasComputedIpv6AssociationIdThread a b) b)
 
 class HasComputedIpv6CidrBlock a b | a -> b where
-    computedIpv6CidrBlock :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedIpv6CidrBlockThread a b :: *
+
+    computedIpv6CidrBlock :: forall r. Getting r a (TF.Computed (HasComputedIpv6CidrBlockThread a b) b)
 
 class HasComputedKernelId a b | a -> b where
-    computedKernelId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKernelIdThread a b :: *
+
+    computedKernelId :: forall r. Getting r a (TF.Computed (HasComputedKernelIdThread a b) b)
 
 class HasComputedKeyName a b | a -> b where
-    computedKeyName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKeyNameThread a b :: *
+
+    computedKeyName :: forall r. Getting r a (TF.Computed (HasComputedKeyNameThread a b) b)
 
 class HasComputedKmsKeyId a b | a -> b where
-    computedKmsKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedKmsKeyIdThread a b :: *
+
+    computedKmsKeyId :: forall r. Getting r a (TF.Computed (HasComputedKmsKeyIdThread a b) b)
 
 class HasComputedLastModified a b | a -> b where
-    computedLastModified :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLastModifiedThread a b :: *
+
+    computedLastModified :: forall r. Getting r a (TF.Computed (HasComputedLastModifiedThread a b) b)
 
 class HasComputedLicenseModel a b | a -> b where
-    computedLicenseModel :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedLicenseModelThread a b :: *
+
+    computedLicenseModel :: forall r. Getting r a (TF.Computed (HasComputedLicenseModelThread a b) b)
 
 class HasComputedMacAddress a b | a -> b where
-    computedMacAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMacAddressThread a b :: *
+
+    computedMacAddress :: forall r. Getting r a (TF.Computed (HasComputedMacAddressThread a b) b)
 
 class HasComputedMaintenanceWindow a b | a -> b where
-    computedMaintenanceWindow :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMaintenanceWindowThread a b :: *
+
+    computedMaintenanceWindow :: forall r. Getting r a (TF.Computed (HasComputedMaintenanceWindowThread a b) b)
 
 class HasComputedMasterUsername a b | a -> b where
-    computedMasterUsername :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMasterUsernameThread a b :: *
+
+    computedMasterUsername :: forall r. Getting r a (TF.Computed (HasComputedMasterUsernameThread a b) b)
 
 class HasComputedMemory a b | a -> b where
-    computedMemory :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMemoryThread a b :: *
+
+    computedMemory :: forall r. Getting r a (TF.Computed (HasComputedMemoryThread a b) b)
 
 class HasComputedMemoryReservation a b | a -> b where
-    computedMemoryReservation :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMemoryReservationThread a b :: *
+
+    computedMemoryReservation :: forall r. Getting r a (TF.Computed (HasComputedMemoryReservationThread a b) b)
 
 class HasComputedMetadata a b | a -> b where
-    computedMetadata :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMetadataThread a b :: *
+
+    computedMetadata :: forall r. Getting r a (TF.Computed (HasComputedMetadataThread a b) b)
 
 class HasComputedMonitoring a b | a -> b where
-    computedMonitoring :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMonitoringThread a b :: *
+
+    computedMonitoring :: forall r. Getting r a (TF.Computed (HasComputedMonitoringThread a b) b)
 
 class HasComputedMonitoringInterval a b | a -> b where
-    computedMonitoringInterval :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMonitoringIntervalThread a b :: *
+
+    computedMonitoringInterval :: forall r. Getting r a (TF.Computed (HasComputedMonitoringIntervalThread a b) b)
 
 class HasComputedMonitoringRoleArn a b | a -> b where
-    computedMonitoringRoleArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMonitoringRoleArnThread a b :: *
+
+    computedMonitoringRoleArn :: forall r. Getting r a (TF.Computed (HasComputedMonitoringRoleArnThread a b) b)
 
 class HasComputedMultiAz a b | a -> b where
-    computedMultiAz :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedMultiAzThread a b :: *
+
+    computedMultiAz :: forall r. Getting r a (TF.Computed (HasComputedMultiAzThread a b) b)
 
 class HasComputedName a b | a -> b where
-    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNameThread a b :: *
+
+    computedName :: forall r. Getting r a (TF.Computed (HasComputedNameThread a b) b)
 
 class HasComputedNameSuffix a b | a -> b where
-    computedNameSuffix :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNameSuffixThread a b :: *
+
+    computedNameSuffix :: forall r. Getting r a (TF.Computed (HasComputedNameSuffixThread a b) b)
 
 class HasComputedNames a b | a -> b where
-    computedNames :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNamesThread a b :: *
+
+    computedNames :: forall r. Getting r a (TF.Computed (HasComputedNamesThread a b) b)
 
 class HasComputedNatGatewayId a b | a -> b where
-    computedNatGatewayId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNatGatewayIdThread a b :: *
+
+    computedNatGatewayId :: forall r. Getting r a (TF.Computed (HasComputedNatGatewayIdThread a b) b)
 
 class HasComputedNetworkInterfaceId a b | a -> b where
-    computedNetworkInterfaceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNetworkInterfaceIdThread a b :: *
+
+    computedNetworkInterfaceId :: forall r. Getting r a (TF.Computed (HasComputedNetworkInterfaceIdThread a b) b)
 
 class HasComputedNetworkMode a b | a -> b where
-    computedNetworkMode :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNetworkModeThread a b :: *
+
+    computedNetworkMode :: forall r. Getting r a (TF.Computed (HasComputedNetworkModeThread a b) b)
 
 class HasComputedNodeType a b | a -> b where
-    computedNodeType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNodeTypeThread a b :: *
+
+    computedNodeType :: forall r. Getting r a (TF.Computed (HasComputedNodeTypeThread a b) b)
 
 class HasComputedNotificationArns a b | a -> b where
-    computedNotificationArns :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNotificationArnsThread a b :: *
+
+    computedNotificationArns :: forall r. Getting r a (TF.Computed (HasComputedNotificationArnsThread a b) b)
 
 class HasComputedNotificationTopicArn a b | a -> b where
-    computedNotificationTopicArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNotificationTopicArnThread a b :: *
+
+    computedNotificationTopicArn :: forall r. Getting r a (TF.Computed (HasComputedNotificationTopicArnThread a b) b)
 
 class HasComputedNumCacheNodes a b | a -> b where
-    computedNumCacheNodes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNumCacheNodesThread a b :: *
+
+    computedNumCacheNodes :: forall r. Getting r a (TF.Computed (HasComputedNumCacheNodesThread a b) b)
 
 class HasComputedNumberCacheClusters a b | a -> b where
-    computedNumberCacheClusters :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedNumberCacheClustersThread a b :: *
+
+    computedNumberCacheClusters :: forall r. Getting r a (TF.Computed (HasComputedNumberCacheClustersThread a b) b)
 
 class HasComputedOpenShards a b | a -> b where
-    computedOpenShards :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOpenShardsThread a b :: *
+
+    computedOpenShards :: forall r. Getting r a (TF.Computed (HasComputedOpenShardsThread a b) b)
 
 class HasComputedOptionGroupMemberships a b | a -> b where
-    computedOptionGroupMemberships :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOptionGroupMembershipsThread a b :: *
+
+    computedOptionGroupMemberships :: forall r. Getting r a (TF.Computed (HasComputedOptionGroupMembershipsThread a b) b)
 
 class HasComputedOptionGroupName a b | a -> b where
-    computedOptionGroupName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOptionGroupNameThread a b :: *
+
+    computedOptionGroupName :: forall r. Getting r a (TF.Computed (HasComputedOptionGroupNameThread a b) b)
 
 class HasComputedOutputs a b | a -> b where
-    computedOutputs :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOutputsThread a b :: *
+
+    computedOutputs :: forall r. Getting r a (TF.Computed (HasComputedOutputsThread a b) b)
 
 class HasComputedOwnerAlias a b | a -> b where
-    computedOwnerAlias :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOwnerAliasThread a b :: *
+
+    computedOwnerAlias :: forall r. Getting r a (TF.Computed (HasComputedOwnerAliasThread a b) b)
 
 class HasComputedOwnerId a b | a -> b where
-    computedOwnerId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedOwnerIdThread a b :: *
+
+    computedOwnerId :: forall r. Getting r a (TF.Computed (HasComputedOwnerIdThread a b) b)
 
 class HasComputedParameterGroupName a b | a -> b where
-    computedParameterGroupName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedParameterGroupNameThread a b :: *
+
+    computedParameterGroupName :: forall r. Getting r a (TF.Computed (HasComputedParameterGroupNameThread a b) b)
 
 class HasComputedParameters a b | a -> b where
-    computedParameters :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedParametersThread a b :: *
+
+    computedParameters :: forall r. Getting r a (TF.Computed (HasComputedParametersThread a b) b)
 
 class HasComputedPath a b | a -> b where
-    computedPath :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPathThread a b :: *
+
+    computedPath :: forall r. Getting r a (TF.Computed (HasComputedPathThread a b) b)
 
 class HasComputedPendingTasksCount a b | a -> b where
-    computedPendingTasksCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPendingTasksCountThread a b :: *
+
+    computedPendingTasksCount :: forall r. Getting r a (TF.Computed (HasComputedPendingTasksCountThread a b) b)
 
 class HasComputedPerformanceMode a b | a -> b where
-    computedPerformanceMode :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPerformanceModeThread a b :: *
+
+    computedPerformanceMode :: forall r. Getting r a (TF.Computed (HasComputedPerformanceModeThread a b) b)
 
 class HasComputedPlacementGroup a b | a -> b where
-    computedPlacementGroup :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPlacementGroupThread a b :: *
+
+    computedPlacementGroup :: forall r. Getting r a (TF.Computed (HasComputedPlacementGroupThread a b) b)
 
 class HasComputedPlatform a b | a -> b where
-    computedPlatform :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPlatformThread a b :: *
+
+    computedPlatform :: forall r. Getting r a (TF.Computed (HasComputedPlatformThread a b) b)
 
 class HasComputedPolicy a b | a -> b where
-    computedPolicy :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPolicyThread a b :: *
+
+    computedPolicy :: forall r. Getting r a (TF.Computed (HasComputedPolicyThread a b) b)
 
 class HasComputedPort a b | a -> b where
-    computedPort :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPortThread a b :: *
+
+    computedPort :: forall r. Getting r a (TF.Computed (HasComputedPortThread a b) b)
 
 class HasComputedPreferredBackupWindow a b | a -> b where
-    computedPreferredBackupWindow :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPreferredBackupWindowThread a b :: *
+
+    computedPreferredBackupWindow :: forall r. Getting r a (TF.Computed (HasComputedPreferredBackupWindowThread a b) b)
 
 class HasComputedPreferredMaintenanceWindow a b | a -> b where
-    computedPreferredMaintenanceWindow :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPreferredMaintenanceWindowThread a b :: *
+
+    computedPreferredMaintenanceWindow :: forall r. Getting r a (TF.Computed (HasComputedPreferredMaintenanceWindowThread a b) b)
 
 class HasComputedPrefixListId a b | a -> b where
-    computedPrefixListId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrefixListIdThread a b :: *
+
+    computedPrefixListId :: forall r. Getting r a (TF.Computed (HasComputedPrefixListIdThread a b) b)
 
 class HasComputedPrimaryEndpointAddress a b | a -> b where
-    computedPrimaryEndpointAddress :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrimaryEndpointAddressThread a b :: *
+
+    computedPrimaryEndpointAddress :: forall r. Getting r a (TF.Computed (HasComputedPrimaryEndpointAddressThread a b) b)
 
 class HasComputedPrivateDns a b | a -> b where
-    computedPrivateDns :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrivateDnsThread a b :: *
+
+    computedPrivateDns :: forall r. Getting r a (TF.Computed (HasComputedPrivateDnsThread a b) b)
 
 class HasComputedPrivateIp a b | a -> b where
-    computedPrivateIp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrivateIpThread a b :: *
+
+    computedPrivateIp :: forall r. Getting r a (TF.Computed (HasComputedPrivateIpThread a b) b)
 
 class HasComputedPrivateIps a b | a -> b where
-    computedPrivateIps :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPrivateIpsThread a b :: *
+
+    computedPrivateIps :: forall r. Getting r a (TF.Computed (HasComputedPrivateIpsThread a b) b)
 
 class HasComputedProductCodes a b | a -> b where
-    computedProductCodes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedProductCodesThread a b :: *
+
+    computedProductCodes :: forall r. Getting r a (TF.Computed (HasComputedProductCodesThread a b) b)
 
 class HasComputedPublic a b | a -> b where
-    computedPublic :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPublicThread a b :: *
+
+    computedPublic :: forall r. Getting r a (TF.Computed (HasComputedPublicThread a b) b)
 
 class HasComputedPublicDns a b | a -> b where
-    computedPublicDns :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPublicDnsThread a b :: *
+
+    computedPublicDns :: forall r. Getting r a (TF.Computed (HasComputedPublicDnsThread a b) b)
 
 class HasComputedPublicIp a b | a -> b where
-    computedPublicIp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPublicIpThread a b :: *
+
+    computedPublicIp :: forall r. Getting r a (TF.Computed (HasComputedPublicIpThread a b) b)
 
 class HasComputedPublicIps a b | a -> b where
-    computedPublicIps :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPublicIpsThread a b :: *
+
+    computedPublicIps :: forall r. Getting r a (TF.Computed (HasComputedPublicIpsThread a b) b)
 
 class HasComputedPubliclyAccessible a b | a -> b where
-    computedPubliclyAccessible :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedPubliclyAccessibleThread a b :: *
+
+    computedPubliclyAccessible :: forall r. Getting r a (TF.Computed (HasComputedPubliclyAccessibleThread a b) b)
 
 class HasComputedRamdiskId a b | a -> b where
-    computedRamdiskId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRamdiskIdThread a b :: *
+
+    computedRamdiskId :: forall r. Getting r a (TF.Computed (HasComputedRamdiskIdThread a b) b)
 
 class HasComputedRegion a b | a -> b where
-    computedRegion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRegionThread a b :: *
+
+    computedRegion :: forall r. Getting r a (TF.Computed (HasComputedRegionThread a b) b)
 
 class HasComputedRegisteredContainerInstancesCount a b | a -> b where
-    computedRegisteredContainerInstancesCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRegisteredContainerInstancesCountThread a b :: *
+
+    computedRegisteredContainerInstancesCount :: forall r. Getting r a (TF.Computed (HasComputedRegisteredContainerInstancesCountThread a b) b)
 
 class HasComputedRegistryId a b | a -> b where
-    computedRegistryId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRegistryIdThread a b :: *
+
+    computedRegistryId :: forall r. Getting r a (TF.Computed (HasComputedRegistryIdThread a b) b)
 
 class HasComputedReplicateSourceDb a b | a -> b where
-    computedReplicateSourceDb :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReplicateSourceDbThread a b :: *
+
+    computedReplicateSourceDb :: forall r. Getting r a (TF.Computed (HasComputedReplicateSourceDbThread a b) b)
 
 class HasComputedReplicationGroupDescription a b | a -> b where
-    computedReplicationGroupDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReplicationGroupDescriptionThread a b :: *
+
+    computedReplicationGroupDescription :: forall r. Getting r a (TF.Computed (HasComputedReplicationGroupDescriptionThread a b) b)
 
 class HasComputedReplicationGroupId a b | a -> b where
-    computedReplicationGroupId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedReplicationGroupIdThread a b :: *
+
+    computedReplicationGroupId :: forall r. Getting r a (TF.Computed (HasComputedReplicationGroupIdThread a b) b)
 
 class HasComputedRepositoryUrl a b | a -> b where
-    computedRepositoryUrl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRepositoryUrlThread a b :: *
+
+    computedRepositoryUrl :: forall r. Getting r a (TF.Computed (HasComputedRepositoryUrlThread a b) b)
 
 class HasComputedRequester a b | a -> b where
-    computedRequester :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRequesterThread a b :: *
+
+    computedRequester :: forall r. Getting r a (TF.Computed (HasComputedRequesterThread a b) b)
 
 class HasComputedRequesterId a b | a -> b where
-    computedRequesterId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRequesterIdThread a b :: *
+
+    computedRequesterId :: forall r. Getting r a (TF.Computed (HasComputedRequesterIdThread a b) b)
 
 class HasComputedResourceRecordSetCount a b | a -> b where
-    computedResourceRecordSetCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedResourceRecordSetCountThread a b :: *
+
+    computedResourceRecordSetCount :: forall r. Getting r a (TF.Computed (HasComputedResourceRecordSetCountThread a b) b)
 
 class HasComputedRetentionPeriod a b | a -> b where
-    computedRetentionPeriod :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRetentionPeriodThread a b :: *
+
+    computedRetentionPeriod :: forall r. Getting r a (TF.Computed (HasComputedRetentionPeriodThread a b) b)
 
 class HasComputedRevision a b | a -> b where
-    computedRevision :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRevisionThread a b :: *
+
+    computedRevision :: forall r. Getting r a (TF.Computed (HasComputedRevisionThread a b) b)
 
 class HasComputedRoleId a b | a -> b where
-    computedRoleId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRoleIdThread a b :: *
+
+    computedRoleId :: forall r. Getting r a (TF.Computed (HasComputedRoleIdThread a b) b)
 
 class HasComputedRootBlockDevice a b | a -> b where
-    computedRootBlockDevice :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRootBlockDeviceThread a b :: *
+
+    computedRootBlockDevice :: forall r. Getting r a (TF.Computed (HasComputedRootBlockDeviceThread a b) b)
 
 class HasComputedRootDeviceName a b | a -> b where
-    computedRootDeviceName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRootDeviceNameThread a b :: *
+
+    computedRootDeviceName :: forall r. Getting r a (TF.Computed (HasComputedRootDeviceNameThread a b) b)
 
 class HasComputedRootDeviceType a b | a -> b where
-    computedRootDeviceType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRootDeviceTypeThread a b :: *
+
+    computedRootDeviceType :: forall r. Getting r a (TF.Computed (HasComputedRootDeviceTypeThread a b) b)
 
 class HasComputedRootSnapshotId a b | a -> b where
-    computedRootSnapshotId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRootSnapshotIdThread a b :: *
+
+    computedRootSnapshotId :: forall r. Getting r a (TF.Computed (HasComputedRootSnapshotIdThread a b) b)
 
 class HasComputedRouteTableIds a b | a -> b where
-    computedRouteTableIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRouteTableIdsThread a b :: *
+
+    computedRouteTableIds :: forall r. Getting r a (TF.Computed (HasComputedRouteTableIdsThread a b) b)
 
 class HasComputedRunningTasksCount a b | a -> b where
-    computedRunningTasksCount :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedRunningTasksCountThread a b :: *
+
+    computedRunningTasksCount :: forall r. Getting r a (TF.Computed (HasComputedRunningTasksCountThread a b) b)
 
 class HasComputedSecurityGroupIds a b | a -> b where
-    computedSecurityGroupIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSecurityGroupIdsThread a b :: *
+
+    computedSecurityGroupIds :: forall r. Getting r a (TF.Computed (HasComputedSecurityGroupIdsThread a b) b)
 
 class HasComputedSecurityGroupNames a b | a -> b where
-    computedSecurityGroupNames :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSecurityGroupNamesThread a b :: *
+
+    computedSecurityGroupNames :: forall r. Getting r a (TF.Computed (HasComputedSecurityGroupNamesThread a b) b)
 
 class HasComputedSecurityGroups a b | a -> b where
-    computedSecurityGroups :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSecurityGroupsThread a b :: *
+
+    computedSecurityGroups :: forall r. Getting r a (TF.Computed (HasComputedSecurityGroupsThread a b) b)
 
 class HasComputedServerSideEncryption a b | a -> b where
-    computedServerSideEncryption :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedServerSideEncryptionThread a b :: *
+
+    computedServerSideEncryption :: forall r. Getting r a (TF.Computed (HasComputedServerSideEncryptionThread a b) b)
 
 class HasComputedServiceName a b | a -> b where
-    computedServiceName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedServiceNameThread a b :: *
+
+    computedServiceName :: forall r. Getting r a (TF.Computed (HasComputedServiceNameThread a b) b)
 
 class HasComputedShardLevelMetrics a b | a -> b where
-    computedShardLevelMetrics :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedShardLevelMetricsThread a b :: *
+
+    computedShardLevelMetrics :: forall r. Getting r a (TF.Computed (HasComputedShardLevelMetricsThread a b) b)
 
 class HasComputedSize a b | a -> b where
-    computedSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSizeThread a b :: *
+
+    computedSize :: forall r. Getting r a (TF.Computed (HasComputedSizeThread a b) b)
 
 class HasComputedSnapshotCreateTime a b | a -> b where
-    computedSnapshotCreateTime :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSnapshotCreateTimeThread a b :: *
+
+    computedSnapshotCreateTime :: forall r. Getting r a (TF.Computed (HasComputedSnapshotCreateTimeThread a b) b)
 
 class HasComputedSnapshotId a b | a -> b where
-    computedSnapshotId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSnapshotIdThread a b :: *
+
+    computedSnapshotId :: forall r. Getting r a (TF.Computed (HasComputedSnapshotIdThread a b) b)
 
 class HasComputedSnapshotRetentionLimit a b | a -> b where
-    computedSnapshotRetentionLimit :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSnapshotRetentionLimitThread a b :: *
+
+    computedSnapshotRetentionLimit :: forall r. Getting r a (TF.Computed (HasComputedSnapshotRetentionLimitThread a b) b)
 
 class HasComputedSnapshotWindow a b | a -> b where
-    computedSnapshotWindow :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSnapshotWindowThread a b :: *
+
+    computedSnapshotWindow :: forall r. Getting r a (TF.Computed (HasComputedSnapshotWindowThread a b) b)
 
 class HasComputedSourceDbSnapshotIdentifier a b | a -> b where
-    computedSourceDbSnapshotIdentifier :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSourceDbSnapshotIdentifierThread a b :: *
+
+    computedSourceDbSnapshotIdentifier :: forall r. Getting r a (TF.Computed (HasComputedSourceDbSnapshotIdentifierThread a b) b)
 
 class HasComputedSourceDestCheck a b | a -> b where
-    computedSourceDestCheck :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSourceDestCheckThread a b :: *
+
+    computedSourceDestCheck :: forall r. Getting r a (TF.Computed (HasComputedSourceDestCheckThread a b) b)
 
 class HasComputedSourceRegion a b | a -> b where
-    computedSourceRegion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSourceRegionThread a b :: *
+
+    computedSourceRegion :: forall r. Getting r a (TF.Computed (HasComputedSourceRegionThread a b) b)
 
 class HasComputedSriovNetSupport a b | a -> b where
-    computedSriovNetSupport :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSriovNetSupportThread a b :: *
+
+    computedSriovNetSupport :: forall r. Getting r a (TF.Computed (HasComputedSriovNetSupportThread a b) b)
 
 class HasComputedSseKmsKeyId a b | a -> b where
-    computedSseKmsKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSseKmsKeyIdThread a b :: *
+
+    computedSseKmsKeyId :: forall r. Getting r a (TF.Computed (HasComputedSseKmsKeyIdThread a b) b)
 
 class HasComputedState a b | a -> b where
-    computedState :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStateThread a b :: *
+
+    computedState :: forall r. Getting r a (TF.Computed (HasComputedStateThread a b) b)
 
 class HasComputedStateReason a b | a -> b where
-    computedStateReason :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStateReasonThread a b :: *
+
+    computedStateReason :: forall r. Getting r a (TF.Computed (HasComputedStateReasonThread a b) b)
 
 class HasComputedStatus a b | a -> b where
-    computedStatus :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStatusThread a b :: *
+
+    computedStatus :: forall r. Getting r a (TF.Computed (HasComputedStatusThread a b) b)
 
 class HasComputedStorageClass a b | a -> b where
-    computedStorageClass :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStorageClassThread a b :: *
+
+    computedStorageClass :: forall r. Getting r a (TF.Computed (HasComputedStorageClassThread a b) b)
 
 class HasComputedStorageEncrypted a b | a -> b where
-    computedStorageEncrypted :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStorageEncryptedThread a b :: *
+
+    computedStorageEncrypted :: forall r. Getting r a (TF.Computed (HasComputedStorageEncryptedThread a b) b)
 
 class HasComputedStorageType a b | a -> b where
-    computedStorageType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedStorageTypeThread a b :: *
+
+    computedStorageType :: forall r. Getting r a (TF.Computed (HasComputedStorageTypeThread a b) b)
 
 class HasComputedSubnetGroupName a b | a -> b where
-    computedSubnetGroupName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSubnetGroupNameThread a b :: *
+
+    computedSubnetGroupName :: forall r. Getting r a (TF.Computed (HasComputedSubnetGroupNameThread a b) b)
 
 class HasComputedSubnetId a b | a -> b where
-    computedSubnetId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSubnetIdThread a b :: *
+
+    computedSubnetId :: forall r. Getting r a (TF.Computed (HasComputedSubnetIdThread a b) b)
 
 class HasComputedSyncToken a b | a -> b where
-    computedSyncToken :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedSyncTokenThread a b :: *
+
+    computedSyncToken :: forall r. Getting r a (TF.Computed (HasComputedSyncTokenThread a b) b)
 
 class HasComputedTags a b | a -> b where
-    computedTags :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTagsThread a b :: *
+
+    computedTags :: forall r. Getting r a (TF.Computed (HasComputedTagsThread a b) b)
 
 class HasComputedTargetKeyArn a b | a -> b where
-    computedTargetKeyArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTargetKeyArnThread a b :: *
+
+    computedTargetKeyArn :: forall r. Getting r a (TF.Computed (HasComputedTargetKeyArnThread a b) b)
 
 class HasComputedTargetKeyId a b | a -> b where
-    computedTargetKeyId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTargetKeyIdThread a b :: *
+
+    computedTargetKeyId :: forall r. Getting r a (TF.Computed (HasComputedTargetKeyIdThread a b) b)
 
 class HasComputedTaskRoleArn a b | a -> b where
-    computedTaskRoleArn :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTaskRoleArnThread a b :: *
+
+    computedTaskRoleArn :: forall r. Getting r a (TF.Computed (HasComputedTaskRoleArnThread a b) b)
 
 class HasComputedTemplateBody a b | a -> b where
-    computedTemplateBody :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTemplateBodyThread a b :: *
+
+    computedTemplateBody :: forall r. Getting r a (TF.Computed (HasComputedTemplateBodyThread a b) b)
 
 class HasComputedTenancy a b | a -> b where
-    computedTenancy :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTenancyThread a b :: *
+
+    computedTenancy :: forall r. Getting r a (TF.Computed (HasComputedTenancyThread a b) b)
 
 class HasComputedTimeoutInMinutes a b | a -> b where
-    computedTimeoutInMinutes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTimeoutInMinutesThread a b :: *
+
+    computedTimeoutInMinutes :: forall r. Getting r a (TF.Computed (HasComputedTimeoutInMinutesThread a b) b)
 
 class HasComputedTimezone a b | a -> b where
-    computedTimezone :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedTimezoneThread a b :: *
+
+    computedTimezone :: forall r. Getting r a (TF.Computed (HasComputedTimezoneThread a b) b)
 
 class HasComputedUniqueId a b | a -> b where
-    computedUniqueId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUniqueIdThread a b :: *
+
+    computedUniqueId :: forall r. Getting r a (TF.Computed (HasComputedUniqueIdThread a b) b)
 
 class HasComputedUploadDate a b | a -> b where
-    computedUploadDate :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUploadDateThread a b :: *
+
+    computedUploadDate :: forall r. Getting r a (TF.Computed (HasComputedUploadDateThread a b) b)
 
 class HasComputedUserData a b | a -> b where
-    computedUserData :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUserDataThread a b :: *
+
+    computedUserData :: forall r. Getting r a (TF.Computed (HasComputedUserDataThread a b) b)
 
 class HasComputedUserId a b | a -> b where
-    computedUserId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedUserIdThread a b :: *
+
+    computedUserId :: forall r. Getting r a (TF.Computed (HasComputedUserIdThread a b) b)
 
 class HasComputedVersionId a b | a -> b where
-    computedVersionId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVersionIdThread a b :: *
+
+    computedVersionId :: forall r. Getting r a (TF.Computed (HasComputedVersionIdThread a b) b)
 
 class HasComputedVirtualizationType a b | a -> b where
-    computedVirtualizationType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVirtualizationTypeThread a b :: *
+
+    computedVirtualizationType :: forall r. Getting r a (TF.Computed (HasComputedVirtualizationTypeThread a b) b)
 
 class HasComputedVolumeId a b | a -> b where
-    computedVolumeId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVolumeIdThread a b :: *
+
+    computedVolumeId :: forall r. Getting r a (TF.Computed (HasComputedVolumeIdThread a b) b)
 
 class HasComputedVolumeSize a b | a -> b where
-    computedVolumeSize :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVolumeSizeThread a b :: *
+
+    computedVolumeSize :: forall r. Getting r a (TF.Computed (HasComputedVolumeSizeThread a b) b)
 
 class HasComputedVolumeType a b | a -> b where
-    computedVolumeType :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVolumeTypeThread a b :: *
+
+    computedVolumeType :: forall r. Getting r a (TF.Computed (HasComputedVolumeTypeThread a b) b)
 
 class HasComputedVpcId a b | a -> b where
-    computedVpcId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcIdThread a b :: *
+
+    computedVpcId :: forall r. Getting r a (TF.Computed (HasComputedVpcIdThread a b) b)
 
 class HasComputedVpcPeeringConnectionId a b | a -> b where
-    computedVpcPeeringConnectionId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcPeeringConnectionIdThread a b :: *
+
+    computedVpcPeeringConnectionId :: forall r. Getting r a (TF.Computed (HasComputedVpcPeeringConnectionIdThread a b) b)
 
 class HasComputedVpcSecurityGroupIds a b | a -> b where
-    computedVpcSecurityGroupIds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcSecurityGroupIdsThread a b :: *
+
+    computedVpcSecurityGroupIds :: forall r. Getting r a (TF.Computed (HasComputedVpcSecurityGroupIdsThread a b) b)
 
 class HasComputedVpcSecurityGroups a b | a -> b where
-    computedVpcSecurityGroups :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedVpcSecurityGroupsThread a b :: *
+
+    computedVpcSecurityGroups :: forall r. Getting r a (TF.Computed (HasComputedVpcSecurityGroupsThread a b) b)
 
 class HasComputedWebsiteDomain a b | a -> b where
-    computedWebsiteDomain :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedWebsiteDomainThread a b :: *
+
+    computedWebsiteDomain :: forall r. Getting r a (TF.Computed (HasComputedWebsiteDomainThread a b) b)
 
 class HasComputedWebsiteEndpoint a b | a -> b where
-    computedWebsiteEndpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedWebsiteEndpointThread a b :: *
+
+    computedWebsiteEndpoint :: forall r. Getting r a (TF.Computed (HasComputedWebsiteEndpointThread a b) b)
 
 class HasComputedWebsiteRedirectLocation a b | a -> b where
-    computedWebsiteRedirectLocation :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type HasComputedWebsiteRedirectLocationThread a b :: *
+
+    computedWebsiteRedirectLocation :: forall r. Getting r a (TF.Computed (HasComputedWebsiteRedirectLocationThread a b) b)

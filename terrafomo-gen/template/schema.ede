@@ -102,8 +102,9 @@ instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} whe
   {% for field in schema.value.attributeFields %}
 
 instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} where
-    {{ field.value.method }} =
-        to (\x -> TF.Computed (TF.referenceKey x) "{{ field.value.name }}")
+    type {{ field.value.class }}Thread ({{ schema.key }} s) {{ field.value.type }} = s
+
+    {{ field.value.method }} = to (\_ -> TF.Computed "{{ field.value.name }}")
   {% endfor %}
 
 {% let constructor = schema.key | lowerHead %}
@@ -134,5 +135,7 @@ instance {{ class.value.name }} a b => {{ class.value.name}} (TF.{{ type }} p a)
 {% for class in attributeClasses %}
 
 class {{ class.value.name }} a b | a -> b where
-    {{ class.value.method }} :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    type {{ class.value.name }}Thread a b :: *
+
+    {{ class.value.method }} :: forall r. Getting r a (TF.Computed ({{ class.value.name }}Thread a b) b)
 {% endfor %}
