@@ -72,7 +72,7 @@ import Formatting (Format, (%))
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
 import qualified Network.AWS.Data.Text  as AWS
-import qualified Terrafomo.Syntax.HCL   as HCL
+import qualified Terrafomo.HCL          as HCL
 
 newtype Tags = Tags { fromTags :: Map Text Text }
     deriving (Show, Eq)

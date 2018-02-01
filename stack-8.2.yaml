@@ -1,11 +1,10 @@
-resolver:  nightly-2018-01-09
-# resolver: lts-10.3
+resolver: lts-10.4
 
 local-bin-path: bin
 
 nix:
   enable: true
-  packages: [zlib]
+  packages: [stdenv, zlib]
 
 extra-deps: []
 
