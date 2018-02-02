@@ -7,10 +7,12 @@ module Terrafomo.Hash
 
 import Data.Hashable (Hashable (hash))
 import Data.Text     (Text)
+import Data.Vector   (Vector)
 
 import Numeric (showHex)
 
 import qualified Data.Text     as Text
+import qualified Data.Vector   as Vector
 import qualified System.Random as Random
 
 base16 :: Hashable a => a -> Text
@@ -20,14 +22,14 @@ base16 x =
 
 human :: Hashable a => a -> Text
 human = Text.intercalate "_"
-      . map (dictionary !!)
+      . map (dictionary Vector.!)
       . take 5
       . Random.randomRs (0, length dictionary)
       . Random.mkStdGen
       . hash
 
-dictionary :: [Text]
-dictionary =
+dictionary :: Vector Text
+dictionary = Vector.fromList
     [ "aardvark"
     , "absurd"
     , "accrue"

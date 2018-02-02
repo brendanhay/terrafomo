@@ -397,7 +397,7 @@ output attr = do
             Computed k v ->
                 pure $! nformat (Format.stext % "_" % fname) (Hash.base16 k) v
             _            ->
-                getNextName "v"
+                getNextName
 
         let out   = Output b name attr
             value = HCL.toHCL out
@@ -452,12 +452,9 @@ insertValue key value state update =
             Just vmap' -> MTL.modify' (update vmap') >> pure True
 
 -- | Generate a unique prefixed name for the current context.
-getNextName
-    :: MonadTerraform s m
-    => LText.Text
-    -> m Name
-getNextName prefix =
+getNextName :: MonadTerraform s m => m Name
+getNextName =
     liftTerraform $ do
         MTL.modify' (\s -> s { supply = supply s + 1 })
-        nformat (Format.text % Format.pint 3) prefix
+        nformat (Format.stext) . Hash.human
             <$> MTL.gets supply

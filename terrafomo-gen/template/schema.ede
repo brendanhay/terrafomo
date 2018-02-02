@@ -92,15 +92,15 @@ instance TF.ToHCL ({{ schema.key }} s) where
   {% else %}
     toHCL _ = TF.block []
   {% endfor %}
-  {% for field in schema.value.argumentFields %}
 
+  {% for field in schema.value.argumentFields %}
 instance P.{{ field.value.class }} ({{ schema.key }} s) s {{ field.value.type }} where
     {{ field.value.method }} =
         lens ({{ field.value.label }} :: {{ schema.key }} s -> TF.Attribute s {{ field.value.type }})
-            (\s a -> s { {{ field.value.label }} = a } :: {{ schema.key }} s)
+             (\s a -> s { {{ field.value.label }} = a } :: {{ schema.key }} s)
+
   {% endfor %}
   {% for field in schema.value.attributeFields %}
-
 instance P.{{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }}
   {% endfor %}
 
