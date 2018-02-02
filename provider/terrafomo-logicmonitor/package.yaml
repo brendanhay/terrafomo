@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.LogicMonitor
-    - Terrafomo.LogicMonitor.DataSource
+    - Terrafomo.LogicMonitor.Data
     - Terrafomo.LogicMonitor.Resource
 
   reexported-modules: >

@@ -15,21 +15,21 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Scaleway.DataSource
+-- Module      : Terrafomo.Scaleway.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Scaleway.DataSource
+module Terrafomo.Scaleway.Data
     (
     -- * Types
-      BootscriptDataSource (..)
-    , bootscriptDataSource
+      BootscriptData (..)
+    , bootscriptData
 
-    , ImageDataSource (..)
-    , imageDataSource
+    , ImageData (..)
+    , imageData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -60,7 +60,7 @@ import qualified Data.Word                   as TF
 import qualified GHC.Base                    as TF
 import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.DataSource        as TF
+import qualified Terrafomo.Data              as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
 import qualified Terrafomo.Meta              as TF
@@ -69,12 +69,12 @@ import qualified Terrafomo.Resource          as TF
 import qualified Terrafomo.Scaleway.Provider as TF
 import qualified Terrafomo.Scaleway.Types    as TF
 
-{- | The @scaleway_bootscript@ Scaleway datasource.
+{- | The @scaleway_bootscript@ Scaleway data.
 
 Use this data source to get the ID of a registered Bootscript for use with
 the @scaleway_server@ resource.
 -}
-data BootscriptDataSource s = BootscriptDataSource {
+data BootscriptData s = BootscriptData {
       _architecture :: !(TF.Attribute s Text)
     {- ^ (Optional) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
     , _name         :: !(TF.Attribute s Text)
@@ -83,57 +83,57 @@ data BootscriptDataSource s = BootscriptDataSource {
     {- ^ (Optional) Regexp to match Bootscript name by -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BootscriptDataSource s) where
-    toHCL BootscriptDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (BootscriptData s) where
+    toHCL BootscriptData{..} = TF.block $ catMaybes
         [ TF.attribute "architecture" _architecture
         , TF.attribute "name" _name
         , TF.attribute "name_filter" _name_filter
         ]
 
-instance HasArchitecture (BootscriptDataSource s) s Text where
+instance HasArchitecture (BootscriptData s) s Text where
     architecture =
-        lens (_architecture :: BootscriptDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _architecture = a } :: BootscriptDataSource s)
+        lens (_architecture :: BootscriptData s -> TF.Attribute s Text)
+            (\s a -> s { _architecture = a } :: BootscriptData s)
 
-instance HasName (BootscriptDataSource s) s Text where
+instance HasName (BootscriptData s) s Text where
     name =
-        lens (_name :: BootscriptDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: BootscriptDataSource s)
+        lens (_name :: BootscriptData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: BootscriptData s)
 
-instance HasNameFilter (BootscriptDataSource s) s Text where
+instance HasNameFilter (BootscriptData s) s Text where
     nameFilter =
-        lens (_name_filter :: BootscriptDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name_filter = a } :: BootscriptDataSource s)
+        lens (_name_filter :: BootscriptData s -> TF.Attribute s Text)
+            (\s a -> s { _name_filter = a } :: BootscriptData s)
 
-instance HasComputedArchitecture (BootscriptDataSource s) Text
+instance HasComputedArchitecture (BootscriptData s) Text
 
-instance HasComputedBootCmdArgs (BootscriptDataSource s) Text
+instance HasComputedBootCmdArgs (BootscriptData s) Text
 
-instance HasComputedDtb (BootscriptDataSource s) Text
+instance HasComputedDtb (BootscriptData s) Text
 
-instance HasComputedInitrd (BootscriptDataSource s) Text
+instance HasComputedInitrd (BootscriptData s) Text
 
-instance HasComputedKernel (BootscriptDataSource s) Text
+instance HasComputedKernel (BootscriptData s) Text
 
-instance HasComputedOrganization (BootscriptDataSource s) Text
+instance HasComputedOrganization (BootscriptData s) Text
 
-instance HasComputedPublic (BootscriptDataSource s) Text
+instance HasComputedPublic (BootscriptData s) Text
 
-bootscriptDataSource :: TF.DataSource TF.Scaleway (BootscriptDataSource s)
-bootscriptDataSource =
-    TF.newDataSource "scaleway_bootscript" $
-        BootscriptDataSource {
+bootscriptData :: TF.Data TF.Scaleway (BootscriptData s)
+bootscriptData =
+    TF.newData "scaleway_bootscript" $
+        BootscriptData {
               _architecture = TF.Nil
             , _name = TF.Nil
             , _name_filter = TF.Nil
             }
 
-{- | The @scaleway_image@ Scaleway datasource.
+{- | The @scaleway_image@ Scaleway data.
 
 Use this data source to get the ID of a registered Image for use with the
 @scaleway_server@ resource.
 -}
-data ImageDataSource s = ImageDataSource {
+data ImageData s = ImageData {
       _architecture :: !(TF.Attribute s Text)
     {- ^ (Required) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
     , _name         :: !(TF.Attribute s Text)
@@ -142,40 +142,40 @@ data ImageDataSource s = ImageDataSource {
     {- ^ (Optional) Regexp to match Image name by -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageDataSource s) where
-    toHCL ImageDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ImageData s) where
+    toHCL ImageData{..} = TF.block $ catMaybes
         [ TF.attribute "architecture" _architecture
         , TF.attribute "name" _name
         , TF.attribute "name_filter" _name_filter
         ]
 
-instance HasArchitecture (ImageDataSource s) s Text where
+instance HasArchitecture (ImageData s) s Text where
     architecture =
-        lens (_architecture :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _architecture = a } :: ImageDataSource s)
+        lens (_architecture :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _architecture = a } :: ImageData s)
 
-instance HasName (ImageDataSource s) s Text where
+instance HasName (ImageData s) s Text where
     name =
-        lens (_name :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageDataSource s)
+        lens (_name :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ImageData s)
 
-instance HasNameFilter (ImageDataSource s) s Text where
+instance HasNameFilter (ImageData s) s Text where
     nameFilter =
-        lens (_name_filter :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name_filter = a } :: ImageDataSource s)
+        lens (_name_filter :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _name_filter = a } :: ImageData s)
 
-instance HasComputedArchitecture (ImageDataSource s) Text
+instance HasComputedArchitecture (ImageData s) Text
 
-instance HasComputedCreationDate (ImageDataSource s) Text
+instance HasComputedCreationDate (ImageData s) Text
 
-instance HasComputedOrganization (ImageDataSource s) Text
+instance HasComputedOrganization (ImageData s) Text
 
-instance HasComputedPublic (ImageDataSource s) Text
+instance HasComputedPublic (ImageData s) Text
 
-imageDataSource :: TF.DataSource TF.Scaleway (ImageDataSource s)
-imageDataSource =
-    TF.newDataSource "scaleway_image" $
-        ImageDataSource {
+imageData :: TF.Data TF.Scaleway (ImageData s)
+imageData =
+    TF.newData "scaleway_image" $
+        ImageData {
               _architecture = TF.Nil
             , _name = TF.Nil
             , _name_filter = TF.Nil
@@ -184,19 +184,19 @@ imageDataSource =
 class HasArchitecture a s b | a -> s b where
     architecture :: Lens' a (TF.Attribute s b)
 
-instance HasArchitecture a s b => HasArchitecture (TF.DataSource p a) s b where
+instance HasArchitecture a s b => HasArchitecture (TF.Data p a) s b where
     architecture = TF.configuration . architecture
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
+instance HasName a s b => HasName (TF.Data p a) s b where
     name = TF.configuration . name
 
 class HasNameFilter a s b | a -> s b where
     nameFilter :: Lens' a (TF.Attribute s b)
 
-instance HasNameFilter a s b => HasNameFilter (TF.DataSource p a) s b where
+instance HasNameFilter a s b => HasNameFilter (TF.Data p a) s b where
     nameFilter = TF.configuration . nameFilter
 
 class HasComputedArchitecture a b | a -> b where

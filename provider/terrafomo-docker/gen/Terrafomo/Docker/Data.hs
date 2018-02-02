@@ -15,18 +15,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Docker.DataSource
+-- Module      : Terrafomo.Docker.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Docker.DataSource
+module Terrafomo.Docker.Data
     (
     -- * Types
-      RegistryImageDataSource (..)
-    , registryImageDataSource
+      RegistryImageData (..)
+    , registryImageData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -48,7 +48,7 @@ import qualified Data.Word                 as TF
 import qualified GHC.Base                  as TF
 import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.DataSource      as TF
+import qualified Terrafomo.Data            as TF
 import qualified Terrafomo.Docker.Provider as TF
 import qualified Terrafomo.Docker.Types    as TF
 import qualified Terrafomo.HCL             as TF
@@ -57,40 +57,40 @@ import qualified Terrafomo.Meta            as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Resource        as TF
 
-{- | The @docker_registry_image@ Docker datasource.
+{- | The @docker_registry_image@ Docker data.
 
 Reads the image metadata from a Docker Registry. Used in conjunction with
 the </docs/providers/docker/r/image.html> resource to keep an image up to
 date on the latest available version of the tag.
 -}
-data RegistryImageDataSource s = RegistryImageDataSource {
+data RegistryImageData s = RegistryImageData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required, string) The name of the Docker image, including any tags. e.g. @alpine:latest@ -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegistryImageDataSource s) where
-    toHCL RegistryImageDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (RegistryImageData s) where
+    toHCL RegistryImageData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (RegistryImageDataSource s) s Text where
+instance HasName (RegistryImageData s) s Text where
     name =
-        lens (_name :: RegistryImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RegistryImageDataSource s)
+        lens (_name :: RegistryImageData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: RegistryImageData s)
 
-instance HasComputedSha256Digest (RegistryImageDataSource s) Text
+instance HasComputedSha256Digest (RegistryImageData s) Text
 
-registryImageDataSource :: TF.DataSource TF.Docker (RegistryImageDataSource s)
-registryImageDataSource =
-    TF.newDataSource "docker_registry_image" $
-        RegistryImageDataSource {
+registryImageData :: TF.Data TF.Docker (RegistryImageData s)
+registryImageData =
+    TF.newData "docker_registry_image" $
+        RegistryImageData {
               _name = TF.Nil
             }
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
+instance HasName a s b => HasName (TF.Data p a) s b where
     name = TF.configuration . name
 
 class HasComputedSha256Digest a b | a -> b where

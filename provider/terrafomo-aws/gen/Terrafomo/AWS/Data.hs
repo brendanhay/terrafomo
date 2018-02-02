@@ -15,225 +15,225 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.AWS.DataSource
+-- Module      : Terrafomo.AWS.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AWS.DataSource
+module Terrafomo.AWS.Data
     (
     -- * Types
-      AcmCertificateDataSource (..)
-    , acmCertificateDataSource
+      AcmCertificateData (..)
+    , acmCertificateData
 
-    , AmiDataSource (..)
-    , amiDataSource
+    , AmiData (..)
+    , amiData
 
-    , AmiIdsDataSource (..)
-    , amiIdsDataSource
+    , AmiIdsData (..)
+    , amiIdsData
 
-    , AutoscalingGroupsDataSource (..)
-    , autoscalingGroupsDataSource
+    , AutoscalingGroupsData (..)
+    , autoscalingGroupsData
 
-    , AvailabilityZoneDataSource (..)
-    , availabilityZoneDataSource
+    , AvailabilityZoneData (..)
+    , availabilityZoneData
 
-    , AvailabilityZonesDataSource (..)
-    , availabilityZonesDataSource
+    , AvailabilityZonesData (..)
+    , availabilityZonesData
 
-    , BillingServiceAccountDataSource (..)
-    , billingServiceAccountDataSource
+    , BillingServiceAccountData (..)
+    , billingServiceAccountData
 
-    , CallerIdentityDataSource (..)
-    , callerIdentityDataSource
+    , CallerIdentityData (..)
+    , callerIdentityData
 
-    , CanonicalUserIdDataSource (..)
-    , canonicalUserIdDataSource
+    , CanonicalUserIdData (..)
+    , canonicalUserIdData
 
-    , CloudformationStackDataSource (..)
-    , cloudformationStackDataSource
+    , CloudformationStackData (..)
+    , cloudformationStackData
 
-    , CloudtrailServiceAccountDataSource (..)
-    , cloudtrailServiceAccountDataSource
+    , CloudtrailServiceAccountData (..)
+    , cloudtrailServiceAccountData
 
-    , DbInstanceDataSource (..)
-    , dbInstanceDataSource
+    , DbInstanceData (..)
+    , dbInstanceData
 
-    , DbSnapshotDataSource (..)
-    , dbSnapshotDataSource
+    , DbSnapshotData (..)
+    , dbSnapshotData
 
-    , DynamodbTableDataSource (..)
-    , dynamodbTableDataSource
+    , DynamodbTableData (..)
+    , dynamodbTableData
 
-    , EbsSnapshotDataSource (..)
-    , ebsSnapshotDataSource
+    , EbsSnapshotData (..)
+    , ebsSnapshotData
 
-    , EbsSnapshotIdsDataSource (..)
-    , ebsSnapshotIdsDataSource
+    , EbsSnapshotIdsData (..)
+    , ebsSnapshotIdsData
 
-    , EbsVolumeDataSource (..)
-    , ebsVolumeDataSource
+    , EbsVolumeData (..)
+    , ebsVolumeData
 
-    , EcrRepositoryDataSource (..)
-    , ecrRepositoryDataSource
+    , EcrRepositoryData (..)
+    , ecrRepositoryData
 
-    , EcsClusterDataSource (..)
-    , ecsClusterDataSource
+    , EcsClusterData (..)
+    , ecsClusterData
 
-    , EcsContainerDefinitionDataSource (..)
-    , ecsContainerDefinitionDataSource
+    , EcsContainerDefinitionData (..)
+    , ecsContainerDefinitionData
 
-    , EcsTaskDefinitionDataSource (..)
-    , ecsTaskDefinitionDataSource
+    , EcsTaskDefinitionData (..)
+    , ecsTaskDefinitionData
 
-    , EfsFileSystemDataSource (..)
-    , efsFileSystemDataSource
+    , EfsFileSystemData (..)
+    , efsFileSystemData
 
-    , EfsMountTargetDataSource (..)
-    , efsMountTargetDataSource
+    , EfsMountTargetData (..)
+    , efsMountTargetData
 
-    , EipDataSource (..)
-    , eipDataSource
+    , EipData (..)
+    , eipData
 
-    , ElasticBeanstalkSolutionStackDataSource (..)
-    , elasticBeanstalkSolutionStackDataSource
+    , ElasticBeanstalkSolutionStackData (..)
+    , elasticBeanstalkSolutionStackData
 
-    , ElasticacheClusterDataSource (..)
-    , elasticacheClusterDataSource
+    , ElasticacheClusterData (..)
+    , elasticacheClusterData
 
-    , ElasticacheReplicationGroupDataSource (..)
-    , elasticacheReplicationGroupDataSource
+    , ElasticacheReplicationGroupData (..)
+    , elasticacheReplicationGroupData
 
-    , ElbDataSource (..)
-    , elbDataSource
+    , ElbData (..)
+    , elbData
 
-    , ElbHostedZoneIdDataSource (..)
-    , elbHostedZoneIdDataSource
+    , ElbHostedZoneIdData (..)
+    , elbHostedZoneIdData
 
-    , ElbServiceAccountDataSource (..)
-    , elbServiceAccountDataSource
+    , ElbServiceAccountData (..)
+    , elbServiceAccountData
 
-    , IamAccountAliasDataSource (..)
-    , iamAccountAliasDataSource
+    , IamAccountAliasData (..)
+    , iamAccountAliasData
 
-    , IamGroupDataSource (..)
-    , iamGroupDataSource
+    , IamGroupData (..)
+    , iamGroupData
 
-    , IamInstanceProfileDataSource (..)
-    , iamInstanceProfileDataSource
+    , IamInstanceProfileData (..)
+    , iamInstanceProfileData
 
-    , IamPolicyDataSource (..)
-    , iamPolicyDataSource
+    , IamPolicyData (..)
+    , iamPolicyData
 
-    , IamPolicyDocumentDataSource (..)
-    , iamPolicyDocumentDataSource
+    , IamPolicyDocumentData (..)
+    , iamPolicyDocumentData
 
-    , IamRoleDataSource (..)
-    , iamRoleDataSource
+    , IamRoleData (..)
+    , iamRoleData
 
-    , IamServerCertificateDataSource (..)
-    , iamServerCertificateDataSource
+    , IamServerCertificateData (..)
+    , iamServerCertificateData
 
-    , IamUserDataSource (..)
-    , iamUserDataSource
+    , IamUserData (..)
+    , iamUserData
 
-    , InstanceDataSource (..)
-    , instanceDataSource
+    , InstanceData (..)
+    , instanceData
 
-    , InstancesDataSource (..)
-    , instancesDataSource
+    , InstancesData (..)
+    , instancesData
 
-    , InternetGatewayDataSource (..)
-    , internetGatewayDataSource
+    , InternetGatewayData (..)
+    , internetGatewayData
 
-    , IpRangesDataSource (..)
-    , ipRangesDataSource
+    , IpRangesData (..)
+    , ipRangesData
 
-    , KinesisStreamDataSource (..)
-    , kinesisStreamDataSource
+    , KinesisStreamData (..)
+    , kinesisStreamData
 
-    , KmsAliasDataSource (..)
-    , kmsAliasDataSource
+    , KmsAliasData (..)
+    , kmsAliasData
 
-    , KmsCiphertextDataSource (..)
-    , kmsCiphertextDataSource
+    , KmsCiphertextData (..)
+    , kmsCiphertextData
 
-    , KmsSecretDataSource (..)
-    , kmsSecretDataSource
+    , KmsSecretData (..)
+    , kmsSecretData
 
-    , LbDataSource (..)
-    , lbDataSource
+    , LbData (..)
+    , lbData
 
-    , LbListenerDataSource (..)
-    , lbListenerDataSource
+    , LbListenerData (..)
+    , lbListenerData
 
-    , LbTargetGroupDataSource (..)
-    , lbTargetGroupDataSource
+    , LbTargetGroupData (..)
+    , lbTargetGroupData
 
-    , NatGatewayDataSource (..)
-    , natGatewayDataSource
+    , NatGatewayData (..)
+    , natGatewayData
 
-    , NetworkInterfaceDataSource (..)
-    , networkInterfaceDataSource
+    , NetworkInterfaceData (..)
+    , networkInterfaceData
 
-    , PartitionDataSource (..)
-    , partitionDataSource
+    , PartitionData (..)
+    , partitionData
 
-    , PrefixListDataSource (..)
-    , prefixListDataSource
+    , PrefixListData (..)
+    , prefixListData
 
-    , RdsClusterDataSource (..)
-    , rdsClusterDataSource
+    , RdsClusterData (..)
+    , rdsClusterData
 
-    , RedshiftServiceAccountDataSource (..)
-    , redshiftServiceAccountDataSource
+    , RedshiftServiceAccountData (..)
+    , redshiftServiceAccountData
 
-    , RegionDataSource (..)
-    , regionDataSource
+    , RegionData (..)
+    , regionData
 
-    , Route53ZoneDataSource (..)
-    , route53ZoneDataSource
+    , Route53ZoneData (..)
+    , route53ZoneData
 
-    , RouteTableDataSource (..)
-    , routeTableDataSource
+    , RouteTableData (..)
+    , routeTableData
 
-    , S3BucketDataSource (..)
-    , s3BucketDataSource
+    , S3BucketData (..)
+    , s3BucketData
 
-    , S3BucketObjectDataSource (..)
-    , s3BucketObjectDataSource
+    , S3BucketObjectData (..)
+    , s3BucketObjectData
 
-    , SecurityGroupDataSource (..)
-    , securityGroupDataSource
+    , SecurityGroupData (..)
+    , securityGroupData
 
-    , SnsTopicDataSource (..)
-    , snsTopicDataSource
+    , SnsTopicData (..)
+    , snsTopicData
 
-    , SsmParameterDataSource (..)
-    , ssmParameterDataSource
+    , SsmParameterData (..)
+    , ssmParameterData
 
-    , SubnetDataSource (..)
-    , subnetDataSource
+    , SubnetData (..)
+    , subnetData
 
-    , SubnetIdsDataSource (..)
-    , subnetIdsDataSource
+    , SubnetIdsData (..)
+    , subnetIdsData
 
-    , VpcDataSource (..)
-    , vpcDataSource
+    , VpcData (..)
+    , vpcData
 
-    , VpcEndpointDataSource (..)
-    , vpcEndpointDataSource
+    , VpcEndpointData (..)
+    , vpcEndpointData
 
-    , VpcEndpointServiceDataSource (..)
-    , vpcEndpointServiceDataSource
+    , VpcEndpointServiceData (..)
+    , vpcEndpointServiceData
 
-    , VpcPeeringConnectionDataSource (..)
-    , vpcPeeringConnectionDataSource
+    , VpcPeeringConnectionData (..)
+    , vpcPeeringConnectionData
 
-    , VpnGatewayDataSource (..)
-    , vpnGatewayDataSource
+    , VpnGatewayData (..)
+    , vpnGatewayData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -555,14 +555,14 @@ import qualified Numeric.Natural        as TF
 import qualified Terrafomo.Attribute    as TF
 import qualified Terrafomo.AWS.Provider as TF
 import qualified Terrafomo.AWS.Types    as TF
-import qualified Terrafomo.DataSource   as TF
+import qualified Terrafomo.Data         as TF
 import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.IP           as TF
 import qualified Terrafomo.Meta         as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Resource     as TF
 
-{- | The @aws_acm_certificate@ AWS datasource.
+{- | The @aws_acm_certificate@ AWS data.
 
 Use this data source to get the ARN of a certificate in AWS Certificate
 Manager (ACM). The process of requesting and verifying a certificate in ACM
@@ -570,7 +570,7 @@ requires some manual steps, which means that Terraform cannot automate the
 creation of ACM certificates. But using this data source, you can reference
 them by domain without having to hard code the ARNs as input.
 -}
-data AcmCertificateDataSource s = AcmCertificateDataSource {
+data AcmCertificateData s = AcmCertificateData {
       _domain      :: !(TF.Attribute s Text)
     {- ^ (Required) The domain of the certificate to look up. If no certificate is found with this name, an error will be returned. -}
     , _most_recent :: !(TF.Attribute s Text)
@@ -581,52 +581,52 @@ data AcmCertificateDataSource s = AcmCertificateDataSource {
     {- ^ (Optional) A list of types on which to filter the returned list. Valid values are @AMAZON_ISSUED@ and @IMPORTED@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AcmCertificateDataSource s) where
-    toHCL AcmCertificateDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AcmCertificateData s) where
+    toHCL AcmCertificateData{..} = TF.block $ catMaybes
         [ TF.attribute "domain" _domain
         , TF.attribute "most_recent" _most_recent
         , TF.attribute "statuses" _statuses
         , TF.attribute "types" _types
         ]
 
-instance HasDomain (AcmCertificateDataSource s) s Text where
+instance HasDomain (AcmCertificateData s) s Text where
     domain =
-        lens (_domain :: AcmCertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _domain = a } :: AcmCertificateDataSource s)
+        lens (_domain :: AcmCertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _domain = a } :: AcmCertificateData s)
 
-instance HasMostRecent (AcmCertificateDataSource s) s Text where
+instance HasMostRecent (AcmCertificateData s) s Text where
     mostRecent =
-        lens (_most_recent :: AcmCertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: AcmCertificateDataSource s)
+        lens (_most_recent :: AcmCertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _most_recent = a } :: AcmCertificateData s)
 
-instance HasStatuses (AcmCertificateDataSource s) s Text where
+instance HasStatuses (AcmCertificateData s) s Text where
     statuses =
-        lens (_statuses :: AcmCertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _statuses = a } :: AcmCertificateDataSource s)
+        lens (_statuses :: AcmCertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _statuses = a } :: AcmCertificateData s)
 
-instance HasTypes (AcmCertificateDataSource s) s Text where
+instance HasTypes (AcmCertificateData s) s Text where
     types =
-        lens (_types :: AcmCertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _types = a } :: AcmCertificateDataSource s)
+        lens (_types :: AcmCertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _types = a } :: AcmCertificateData s)
 
-instance HasComputedArn (AcmCertificateDataSource s) Text
+instance HasComputedArn (AcmCertificateData s) Text
 
-acmCertificateDataSource :: TF.DataSource TF.AWS (AcmCertificateDataSource s)
-acmCertificateDataSource =
-    TF.newDataSource "aws_acm_certificate" $
-        AcmCertificateDataSource {
+acmCertificateData :: TF.Data TF.AWS (AcmCertificateData s)
+acmCertificateData =
+    TF.newData "aws_acm_certificate" $
+        AcmCertificateData {
               _domain = TF.Nil
             , _most_recent = TF.Nil
             , _statuses = TF.Nil
             , _types = TF.Nil
             }
 
-{- | The @aws_ami@ AWS datasource.
+{- | The @aws_ami@ AWS data.
 
 Use this data source to get the ID of a registered AMI for use in other
 resources.
 -}
-data AmiDataSource s = AmiDataSource {
+data AmiData s = AmiData {
       _executable_users :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
     , _filter           :: !(TF.Attribute s Text)
@@ -639,8 +639,8 @@ data AmiDataSource s = AmiDataSource {
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AmiDataSource s) where
-    toHCL AmiDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AmiData s) where
+    toHCL AmiData{..} = TF.block $ catMaybes
         [ TF.attribute "executable_users" _executable_users
         , TF.attribute "filter" _filter
         , TF.attribute "most_recent" _most_recent
@@ -648,83 +648,83 @@ instance TF.ToHCL (AmiDataSource s) where
         , TF.attribute "owners" _owners
         ]
 
-instance HasExecutableUsers (AmiDataSource s) s Text where
+instance HasExecutableUsers (AmiData s) s Text where
     executableUsers =
-        lens (_executable_users :: AmiDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _executable_users = a } :: AmiDataSource s)
+        lens (_executable_users :: AmiData s -> TF.Attribute s Text)
+            (\s a -> s { _executable_users = a } :: AmiData s)
 
-instance HasFilter (AmiDataSource s) s Text where
+instance HasFilter (AmiData s) s Text where
     filter =
-        lens (_filter :: AmiDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: AmiDataSource s)
+        lens (_filter :: AmiData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: AmiData s)
 
-instance HasMostRecent (AmiDataSource s) s Text where
+instance HasMostRecent (AmiData s) s Text where
     mostRecent =
-        lens (_most_recent :: AmiDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: AmiDataSource s)
+        lens (_most_recent :: AmiData s -> TF.Attribute s Text)
+            (\s a -> s { _most_recent = a } :: AmiData s)
 
-instance HasNameRegex (AmiDataSource s) s Text where
+instance HasNameRegex (AmiData s) s Text where
     nameRegex =
-        lens (_name_regex :: AmiDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: AmiDataSource s)
+        lens (_name_regex :: AmiData s -> TF.Attribute s Text)
+            (\s a -> s { _name_regex = a } :: AmiData s)
 
-instance HasOwners (AmiDataSource s) s Text where
+instance HasOwners (AmiData s) s Text where
     owners =
-        lens (_owners :: AmiDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _owners = a } :: AmiDataSource s)
+        lens (_owners :: AmiData s -> TF.Attribute s Text)
+            (\s a -> s { _owners = a } :: AmiData s)
 
-instance HasComputedArchitecture (AmiDataSource s) Text
+instance HasComputedArchitecture (AmiData s) Text
 
-instance HasComputedBlockDeviceMappings (AmiDataSource s) Text
+instance HasComputedBlockDeviceMappings (AmiData s) Text
 
-instance HasComputedCreationDate (AmiDataSource s) Text
+instance HasComputedCreationDate (AmiData s) Text
 
-instance HasComputedDescription (AmiDataSource s) Text
+instance HasComputedDescription (AmiData s) Text
 
-instance HasComputedHypervisor (AmiDataSource s) Text
+instance HasComputedHypervisor (AmiData s) Text
 
-instance HasComputedImageId (AmiDataSource s) Text
+instance HasComputedImageId (AmiData s) Text
 
-instance HasComputedImageLocation (AmiDataSource s) Text
+instance HasComputedImageLocation (AmiData s) Text
 
-instance HasComputedImageOwnerAlias (AmiDataSource s) Text
+instance HasComputedImageOwnerAlias (AmiData s) Text
 
-instance HasComputedImageType (AmiDataSource s) Text
+instance HasComputedImageType (AmiData s) Text
 
-instance HasComputedKernelId (AmiDataSource s) Text
+instance HasComputedKernelId (AmiData s) Text
 
-instance HasComputedName (AmiDataSource s) Text
+instance HasComputedName (AmiData s) Text
 
-instance HasComputedOwnerId (AmiDataSource s) Text
+instance HasComputedOwnerId (AmiData s) Text
 
-instance HasComputedPlatform (AmiDataSource s) Text
+instance HasComputedPlatform (AmiData s) Text
 
-instance HasComputedProductCodes (AmiDataSource s) Text
+instance HasComputedProductCodes (AmiData s) Text
 
-instance HasComputedPublic (AmiDataSource s) Text
+instance HasComputedPublic (AmiData s) Text
 
-instance HasComputedRamdiskId (AmiDataSource s) Text
+instance HasComputedRamdiskId (AmiData s) Text
 
-instance HasComputedRootDeviceName (AmiDataSource s) Text
+instance HasComputedRootDeviceName (AmiData s) Text
 
-instance HasComputedRootDeviceType (AmiDataSource s) Text
+instance HasComputedRootDeviceType (AmiData s) Text
 
-instance HasComputedRootSnapshotId (AmiDataSource s) Text
+instance HasComputedRootSnapshotId (AmiData s) Text
 
-instance HasComputedSriovNetSupport (AmiDataSource s) Text
+instance HasComputedSriovNetSupport (AmiData s) Text
 
-instance HasComputedState (AmiDataSource s) Text
+instance HasComputedState (AmiData s) Text
 
-instance HasComputedStateReason (AmiDataSource s) Text
+instance HasComputedStateReason (AmiData s) Text
 
-instance HasComputedTags (AmiDataSource s) TF.Tags
+instance HasComputedTags (AmiData s) TF.Tags
 
-instance HasComputedVirtualizationType (AmiDataSource s) Text
+instance HasComputedVirtualizationType (AmiData s) Text
 
-amiDataSource :: TF.DataSource TF.AWS (AmiDataSource s)
-amiDataSource =
-    TF.newDataSource "aws_ami" $
-        AmiDataSource {
+amiData :: TF.Data TF.AWS (AmiData s)
+amiData =
+    TF.newData "aws_ami" $
+        AmiData {
               _executable_users = TF.Nil
             , _filter = TF.Nil
             , _most_recent = TF.Nil
@@ -732,12 +732,12 @@ amiDataSource =
             , _owners = TF.Nil
             }
 
-{- | The @aws_ami_ids@ AWS datasource.
+{- | The @aws_ami_ids@ AWS data.
 
 Use this data source to get a list of AMI IDs matching the specified
 criteria.
 -}
-data AmiIdsDataSource s = AmiIdsDataSource {
+data AmiIdsData s = AmiIdsData {
       _executable_users :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on  the image. Valid items are the numeric account ID or @self@ . -}
     , _filter           :: !(TF.Attribute s Text)
@@ -748,75 +748,75 @@ data AmiIdsDataSource s = AmiIdsDataSource {
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AmiIdsDataSource s) where
-    toHCL AmiIdsDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AmiIdsData s) where
+    toHCL AmiIdsData{..} = TF.block $ catMaybes
         [ TF.attribute "executable_users" _executable_users
         , TF.attribute "filter" _filter
         , TF.attribute "name_regex" _name_regex
         , TF.attribute "owners" _owners
         ]
 
-instance HasExecutableUsers (AmiIdsDataSource s) s Text where
+instance HasExecutableUsers (AmiIdsData s) s Text where
     executableUsers =
-        lens (_executable_users :: AmiIdsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _executable_users = a } :: AmiIdsDataSource s)
+        lens (_executable_users :: AmiIdsData s -> TF.Attribute s Text)
+            (\s a -> s { _executable_users = a } :: AmiIdsData s)
 
-instance HasFilter (AmiIdsDataSource s) s Text where
+instance HasFilter (AmiIdsData s) s Text where
     filter =
-        lens (_filter :: AmiIdsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: AmiIdsDataSource s)
+        lens (_filter :: AmiIdsData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: AmiIdsData s)
 
-instance HasNameRegex (AmiIdsDataSource s) s Text where
+instance HasNameRegex (AmiIdsData s) s Text where
     nameRegex =
-        lens (_name_regex :: AmiIdsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: AmiIdsDataSource s)
+        lens (_name_regex :: AmiIdsData s -> TF.Attribute s Text)
+            (\s a -> s { _name_regex = a } :: AmiIdsData s)
 
-instance HasOwners (AmiIdsDataSource s) s Text where
+instance HasOwners (AmiIdsData s) s Text where
     owners =
-        lens (_owners :: AmiIdsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _owners = a } :: AmiIdsDataSource s)
+        lens (_owners :: AmiIdsData s -> TF.Attribute s Text)
+            (\s a -> s { _owners = a } :: AmiIdsData s)
 
-amiIdsDataSource :: TF.DataSource TF.AWS (AmiIdsDataSource s)
-amiIdsDataSource =
-    TF.newDataSource "aws_ami_ids" $
-        AmiIdsDataSource {
+amiIdsData :: TF.Data TF.AWS (AmiIdsData s)
+amiIdsData =
+    TF.newData "aws_ami_ids" $
+        AmiIdsData {
               _executable_users = TF.Nil
             , _filter = TF.Nil
             , _name_regex = TF.Nil
             , _owners = TF.Nil
             }
 
-{- | The @aws_autoscaling_groups@ AWS datasource.
+{- | The @aws_autoscaling_groups@ AWS data.
 
 The Autoscaling Groups data source allows access to the list of AWS ASGs
 within a specific region. This will allow you to pass a list of AutoScaling
 Groups to other resources.
 -}
-data AutoscalingGroupsDataSource s = AutoscalingGroupsDataSource {
+data AutoscalingGroupsData s = AutoscalingGroupsData {
       _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) A filter used to scope the list e.g. by tags. See <http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_Filter.html> . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AutoscalingGroupsDataSource s) where
-    toHCL AutoscalingGroupsDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AutoscalingGroupsData s) where
+    toHCL AutoscalingGroupsData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         ]
 
-instance HasFilter (AutoscalingGroupsDataSource s) s Text where
+instance HasFilter (AutoscalingGroupsData s) s Text where
     filter =
-        lens (_filter :: AutoscalingGroupsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: AutoscalingGroupsDataSource s)
+        lens (_filter :: AutoscalingGroupsData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: AutoscalingGroupsData s)
 
-instance HasComputedNames (AutoscalingGroupsDataSource s) Text
+instance HasComputedNames (AutoscalingGroupsData s) Text
 
-autoscalingGroupsDataSource :: TF.DataSource TF.AWS (AutoscalingGroupsDataSource s)
-autoscalingGroupsDataSource =
-    TF.newDataSource "aws_autoscaling_groups" $
-        AutoscalingGroupsDataSource {
+autoscalingGroupsData :: TF.Data TF.AWS (AutoscalingGroupsData s)
+autoscalingGroupsData =
+    TF.newData "aws_autoscaling_groups" $
+        AutoscalingGroupsData {
               _filter = TF.Nil
             }
 
-{- | The @aws_availability_zone@ AWS datasource.
+{- | The @aws_availability_zone@ AWS data.
 
 @aws_availability_zone@ provides details about a specific availability zone
 (AZ) in the current region. This can be used both to validate an
@@ -827,46 +827,46 @@ several regions by mapping both the region and the subnet letter to network
 numbers. This is different from the @aws_availability_zones@ (plural) data
 source, which provides a list of the available zones.
 -}
-data AvailabilityZoneDataSource s = AvailabilityZoneDataSource {
+data AvailabilityZoneData s = AvailabilityZoneData {
       _name  :: !(TF.Attribute s Text)
     {- ^ (Optional) The full name of the availability zone to select. -}
     , _state :: !(TF.Attribute s Text)
     {- ^ (Optional) A specific availability zone state to require. May be any of @"available"@ , @"information"@ or @"impaired"@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AvailabilityZoneDataSource s) where
-    toHCL AvailabilityZoneDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AvailabilityZoneData s) where
+    toHCL AvailabilityZoneData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "state" _state
         ]
 
-instance HasName (AvailabilityZoneDataSource s) s Text where
+instance HasName (AvailabilityZoneData s) s Text where
     name =
-        lens (_name :: AvailabilityZoneDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AvailabilityZoneDataSource s)
+        lens (_name :: AvailabilityZoneData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: AvailabilityZoneData s)
 
-instance HasState (AvailabilityZoneDataSource s) s Text where
+instance HasState (AvailabilityZoneData s) s Text where
     state =
-        lens (_state :: AvailabilityZoneDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: AvailabilityZoneDataSource s)
+        lens (_state :: AvailabilityZoneData s -> TF.Attribute s Text)
+            (\s a -> s { _state = a } :: AvailabilityZoneData s)
 
-instance HasComputedName (AvailabilityZoneDataSource s) Text
+instance HasComputedName (AvailabilityZoneData s) Text
 
-instance HasComputedNameSuffix (AvailabilityZoneDataSource s) Text
+instance HasComputedNameSuffix (AvailabilityZoneData s) Text
 
-instance HasComputedRegion (AvailabilityZoneDataSource s) TF.Region
+instance HasComputedRegion (AvailabilityZoneData s) TF.Region
 
-instance HasComputedState (AvailabilityZoneDataSource s) Text
+instance HasComputedState (AvailabilityZoneData s) Text
 
-availabilityZoneDataSource :: TF.DataSource TF.AWS (AvailabilityZoneDataSource s)
-availabilityZoneDataSource =
-    TF.newDataSource "aws_availability_zone" $
-        AvailabilityZoneDataSource {
+availabilityZoneData :: TF.Data TF.AWS (AvailabilityZoneData s)
+availabilityZoneData =
+    TF.newData "aws_availability_zone" $
+        AvailabilityZoneData {
               _name = TF.Nil
             , _state = TF.Nil
             }
 
-{- | The @aws_availability_zones@ AWS datasource.
+{- | The @aws_availability_zones@ AWS data.
 
 The Availability Zones data source allows access to the list of AWS
 Availability Zones which can be accessed by an AWS account within the region
@@ -874,58 +874,58 @@ configured in the provider. This is different from the
 @aws_availability_zone@ (singular) data source, which provides some details
 about a specific availability zone.
 -}
-data AvailabilityZonesDataSource s = AvailabilityZonesDataSource {
+data AvailabilityZonesData s = AvailabilityZonesData {
       _state :: !(TF.Attribute s Text)
     {- ^ (Optional) Allows to filter list of Availability Zones based on their current state. Can be either @"available"@ , @"information"@ , @"impaired"@ or @"unavailable"@ . By default the list includes a complete set of Availability Zones to which the underlying AWS account has access, regardless of their state. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AvailabilityZonesDataSource s) where
-    toHCL AvailabilityZonesDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AvailabilityZonesData s) where
+    toHCL AvailabilityZonesData{..} = TF.block $ catMaybes
         [ TF.attribute "state" _state
         ]
 
-instance HasState (AvailabilityZonesDataSource s) s Text where
+instance HasState (AvailabilityZonesData s) s Text where
     state =
-        lens (_state :: AvailabilityZonesDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: AvailabilityZonesDataSource s)
+        lens (_state :: AvailabilityZonesData s -> TF.Attribute s Text)
+            (\s a -> s { _state = a } :: AvailabilityZonesData s)
 
-instance HasComputedNames (AvailabilityZonesDataSource s) Text
+instance HasComputedNames (AvailabilityZonesData s) Text
 
-availabilityZonesDataSource :: TF.DataSource TF.AWS (AvailabilityZonesDataSource s)
-availabilityZonesDataSource =
-    TF.newDataSource "aws_availability_zones" $
-        AvailabilityZonesDataSource {
+availabilityZonesData :: TF.Data TF.AWS (AvailabilityZonesData s)
+availabilityZonesData =
+    TF.newData "aws_availability_zones" $
+        AvailabilityZonesData {
               _state = TF.Nil
             }
 
-{- | The @aws_billing_service_account@ AWS datasource.
+{- | The @aws_billing_service_account@ AWS data.
 
 Use this data source to get the Account ID of the
 <http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-getting-started.html#step-2>
 for the purpose of whitelisting in S3 bucket policy.
 -}
-data BillingServiceAccountDataSource s = BillingServiceAccountDataSource {
+data BillingServiceAccountData s = BillingServiceAccountData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BillingServiceAccountDataSource s) where
+instance TF.ToHCL (BillingServiceAccountData s) where
     toHCL _ = TF.block []
 
-instance HasComputedArn (BillingServiceAccountDataSource s) Text
+instance HasComputedArn (BillingServiceAccountData s) Text
 
-instance HasComputedId (BillingServiceAccountDataSource s) Text
+instance HasComputedId (BillingServiceAccountData s) Text
 
-billingServiceAccountDataSource :: TF.DataSource TF.AWS (BillingServiceAccountDataSource s)
-billingServiceAccountDataSource =
-    TF.newDataSource "aws_billing_service_account" $
-        BillingServiceAccountDataSource {
+billingServiceAccountData :: TF.Data TF.AWS (BillingServiceAccountData s)
+billingServiceAccountData =
+    TF.newData "aws_billing_service_account" $
+        BillingServiceAccountData {
             }
 
-{- | The @aws_caller_identity@ AWS datasource.
+{- | The @aws_caller_identity@ AWS data.
 
 Use this data source to get the access to the effective Account ID, User ID,
 and ARN in which Terraform is authorized.
 -}
-data CallerIdentityDataSource s = CallerIdentityDataSource {
+data CallerIdentityData s = CallerIdentityData {
       _account_id :: !(TF.Attribute s Text)
     {- ^ - The AWS Account ID number of the account that owns or contains the calling entity. -}
     , _arn        :: !(TF.Attribute s Text)
@@ -934,257 +934,257 @@ data CallerIdentityDataSource s = CallerIdentityDataSource {
     {- ^ - The unique identifier of the calling entity. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CallerIdentityDataSource s) where
-    toHCL CallerIdentityDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (CallerIdentityData s) where
+    toHCL CallerIdentityData{..} = TF.block $ catMaybes
         [ TF.attribute "account_id" _account_id
         , TF.attribute "arn" _arn
         , TF.attribute "user_id" _user_id
         ]
 
-instance HasAccountId (CallerIdentityDataSource s) s Text where
+instance HasAccountId (CallerIdentityData s) s Text where
     accountId =
-        lens (_account_id :: CallerIdentityDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _account_id = a } :: CallerIdentityDataSource s)
+        lens (_account_id :: CallerIdentityData s -> TF.Attribute s Text)
+            (\s a -> s { _account_id = a } :: CallerIdentityData s)
 
-instance HasArn (CallerIdentityDataSource s) s Text where
+instance HasArn (CallerIdentityData s) s Text where
     arn =
-        lens (_arn :: CallerIdentityDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _arn = a } :: CallerIdentityDataSource s)
+        lens (_arn :: CallerIdentityData s -> TF.Attribute s Text)
+            (\s a -> s { _arn = a } :: CallerIdentityData s)
 
-instance HasUserId (CallerIdentityDataSource s) s Text where
+instance HasUserId (CallerIdentityData s) s Text where
     userId =
-        lens (_user_id :: CallerIdentityDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _user_id = a } :: CallerIdentityDataSource s)
+        lens (_user_id :: CallerIdentityData s -> TF.Attribute s Text)
+            (\s a -> s { _user_id = a } :: CallerIdentityData s)
 
-callerIdentityDataSource :: TF.DataSource TF.AWS (CallerIdentityDataSource s)
-callerIdentityDataSource =
-    TF.newDataSource "aws_caller_identity" $
-        CallerIdentityDataSource {
+callerIdentityData :: TF.Data TF.AWS (CallerIdentityData s)
+callerIdentityData =
+    TF.newData "aws_caller_identity" $
+        CallerIdentityData {
               _account_id = TF.Nil
             , _arn = TF.Nil
             , _user_id = TF.Nil
             }
 
-{- | The @aws_canonical_user_id@ AWS datasource.
+{- | The @aws_canonical_user_id@ AWS data.
 
 The Canonical User ID data source allows access to the
 <http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html> for the
 effective account in which Terraform is working.
 -}
-data CanonicalUserIdDataSource s = CanonicalUserIdDataSource {
+data CanonicalUserIdData s = CanonicalUserIdData {
       _display_name :: !(TF.Attribute s Text)
     {- ^ - The human-friendly name linked to the canonical user ID. -}
     , _id           :: !(TF.Attribute s Text)
     {- ^ - The canonical user ID associated with the AWS account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CanonicalUserIdDataSource s) where
-    toHCL CanonicalUserIdDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (CanonicalUserIdData s) where
+    toHCL CanonicalUserIdData{..} = TF.block $ catMaybes
         [ TF.attribute "display_name" _display_name
         , TF.attribute "id" _id
         ]
 
-instance HasDisplayName (CanonicalUserIdDataSource s) s Text where
+instance HasDisplayName (CanonicalUserIdData s) s Text where
     displayName =
-        lens (_display_name :: CanonicalUserIdDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _display_name = a } :: CanonicalUserIdDataSource s)
+        lens (_display_name :: CanonicalUserIdData s -> TF.Attribute s Text)
+            (\s a -> s { _display_name = a } :: CanonicalUserIdData s)
 
-instance HasId (CanonicalUserIdDataSource s) s Text where
+instance HasId (CanonicalUserIdData s) s Text where
     id =
-        lens (_id :: CanonicalUserIdDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: CanonicalUserIdDataSource s)
+        lens (_id :: CanonicalUserIdData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: CanonicalUserIdData s)
 
-canonicalUserIdDataSource :: TF.DataSource TF.AWS (CanonicalUserIdDataSource s)
-canonicalUserIdDataSource =
-    TF.newDataSource "aws_canonical_user_id" $
-        CanonicalUserIdDataSource {
+canonicalUserIdData :: TF.Data TF.AWS (CanonicalUserIdData s)
+canonicalUserIdData =
+    TF.newData "aws_canonical_user_id" $
+        CanonicalUserIdData {
               _display_name = TF.Nil
             , _id = TF.Nil
             }
 
-{- | The @aws_cloudformation_stack@ AWS datasource.
+{- | The @aws_cloudformation_stack@ AWS data.
 
 The CloudFormation Stack data source allows access to stack outputs and
 other useful data including the template body.
 -}
-data CloudformationStackDataSource s = CloudformationStackDataSource {
+data CloudformationStackData s = CloudformationStackData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the stack -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudformationStackDataSource s) where
-    toHCL CloudformationStackDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (CloudformationStackData s) where
+    toHCL CloudformationStackData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (CloudformationStackDataSource s) s Text where
+instance HasName (CloudformationStackData s) s Text where
     name =
-        lens (_name :: CloudformationStackDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CloudformationStackDataSource s)
+        lens (_name :: CloudformationStackData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: CloudformationStackData s)
 
-instance HasComputedCapabilities (CloudformationStackDataSource s) Text
+instance HasComputedCapabilities (CloudformationStackData s) Text
 
-instance HasComputedDescription (CloudformationStackDataSource s) Text
+instance HasComputedDescription (CloudformationStackData s) Text
 
-instance HasComputedDisableRollback (CloudformationStackDataSource s) Text
+instance HasComputedDisableRollback (CloudformationStackData s) Text
 
-instance HasComputedIamRoleArn (CloudformationStackDataSource s) Text
+instance HasComputedIamRoleArn (CloudformationStackData s) Text
 
-instance HasComputedNotificationArns (CloudformationStackDataSource s) Text
+instance HasComputedNotificationArns (CloudformationStackData s) Text
 
-instance HasComputedOutputs (CloudformationStackDataSource s) Text
+instance HasComputedOutputs (CloudformationStackData s) Text
 
-instance HasComputedParameters (CloudformationStackDataSource s) Text
+instance HasComputedParameters (CloudformationStackData s) Text
 
-instance HasComputedTags (CloudformationStackDataSource s) TF.Tags
+instance HasComputedTags (CloudformationStackData s) TF.Tags
 
-instance HasComputedTemplateBody (CloudformationStackDataSource s) Text
+instance HasComputedTemplateBody (CloudformationStackData s) Text
 
-instance HasComputedTimeoutInMinutes (CloudformationStackDataSource s) Text
+instance HasComputedTimeoutInMinutes (CloudformationStackData s) Text
 
-cloudformationStackDataSource :: TF.DataSource TF.AWS (CloudformationStackDataSource s)
-cloudformationStackDataSource =
-    TF.newDataSource "aws_cloudformation_stack" $
-        CloudformationStackDataSource {
+cloudformationStackData :: TF.Data TF.AWS (CloudformationStackData s)
+cloudformationStackData =
+    TF.newData "aws_cloudformation_stack" $
+        CloudformationStackData {
               _name = TF.Nil
             }
 
-{- | The @aws_cloudtrail_service_account@ AWS datasource.
+{- | The @aws_cloudtrail_service_account@ AWS data.
 
 Use this data source to get the Account ID of the
 <http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-supported-regions.html>
 in a given region for the purpose of allowing CloudTrail to store trail data
 in S3.
 -}
-data CloudtrailServiceAccountDataSource s = CloudtrailServiceAccountDataSource {
+data CloudtrailServiceAccountData s = CloudtrailServiceAccountData {
       _region :: !(TF.Attribute s TF.Region)
     {- ^ (Optional) Name of the region whose AWS CloudTrail account ID is desired. Defaults to the region from the AWS provider configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CloudtrailServiceAccountDataSource s) where
-    toHCL CloudtrailServiceAccountDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (CloudtrailServiceAccountData s) where
+    toHCL CloudtrailServiceAccountData{..} = TF.block $ catMaybes
         [ TF.attribute "region" _region
         ]
 
-instance HasRegion (CloudtrailServiceAccountDataSource s) s TF.Region where
+instance HasRegion (CloudtrailServiceAccountData s) s TF.Region where
     region =
-        lens (_region :: CloudtrailServiceAccountDataSource s -> TF.Attribute s TF.Region)
-            (\s a -> s { _region = a } :: CloudtrailServiceAccountDataSource s)
+        lens (_region :: CloudtrailServiceAccountData s -> TF.Attribute s TF.Region)
+            (\s a -> s { _region = a } :: CloudtrailServiceAccountData s)
 
-instance HasComputedArn (CloudtrailServiceAccountDataSource s) Text
+instance HasComputedArn (CloudtrailServiceAccountData s) Text
 
-instance HasComputedId (CloudtrailServiceAccountDataSource s) Text
+instance HasComputedId (CloudtrailServiceAccountData s) Text
 
-cloudtrailServiceAccountDataSource :: TF.DataSource TF.AWS (CloudtrailServiceAccountDataSource s)
-cloudtrailServiceAccountDataSource =
-    TF.newDataSource "aws_cloudtrail_service_account" $
-        CloudtrailServiceAccountDataSource {
+cloudtrailServiceAccountData :: TF.Data TF.AWS (CloudtrailServiceAccountData s)
+cloudtrailServiceAccountData =
+    TF.newData "aws_cloudtrail_service_account" $
+        CloudtrailServiceAccountData {
               _region = TF.Nil
             }
 
-{- | The @aws_db_instance@ AWS datasource.
+{- | The @aws_db_instance@ AWS data.
 
 Use this data source to get information about an RDS instance
 -}
-data DbInstanceDataSource s = DbInstanceDataSource {
+data DbInstanceData s = DbInstanceData {
       _db_instance_identifier :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the RDS instance -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbInstanceDataSource s) where
-    toHCL DbInstanceDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (DbInstanceData s) where
+    toHCL DbInstanceData{..} = TF.block $ catMaybes
         [ TF.attribute "db_instance_identifier" _db_instance_identifier
         ]
 
-instance HasDbInstanceIdentifier (DbInstanceDataSource s) s Text where
+instance HasDbInstanceIdentifier (DbInstanceData s) s Text where
     dbInstanceIdentifier =
-        lens (_db_instance_identifier :: DbInstanceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _db_instance_identifier = a } :: DbInstanceDataSource s)
+        lens (_db_instance_identifier :: DbInstanceData s -> TF.Attribute s Text)
+            (\s a -> s { _db_instance_identifier = a } :: DbInstanceData s)
 
-instance HasComputedAddress (DbInstanceDataSource s) Text
+instance HasComputedAddress (DbInstanceData s) Text
 
-instance HasComputedAllocatedStorage (DbInstanceDataSource s) Text
+instance HasComputedAllocatedStorage (DbInstanceData s) Text
 
-instance HasComputedAutoMinorVersionUpgrade (DbInstanceDataSource s) Text
+instance HasComputedAutoMinorVersionUpgrade (DbInstanceData s) Text
 
-instance HasComputedAvailabilityZone (DbInstanceDataSource s) TF.Zone
+instance HasComputedAvailabilityZone (DbInstanceData s) TF.Zone
 
-instance HasComputedBackupRetentionPeriod (DbInstanceDataSource s) Text
+instance HasComputedBackupRetentionPeriod (DbInstanceData s) Text
 
-instance HasComputedCaCertIdentifier (DbInstanceDataSource s) Text
+instance HasComputedCaCertIdentifier (DbInstanceData s) Text
 
-instance HasComputedDbClusterIdentifier (DbInstanceDataSource s) Text
+instance HasComputedDbClusterIdentifier (DbInstanceData s) Text
 
-instance HasComputedDbInstanceArn (DbInstanceDataSource s) Text
+instance HasComputedDbInstanceArn (DbInstanceData s) Text
 
-instance HasComputedDbInstanceClass (DbInstanceDataSource s) Text
+instance HasComputedDbInstanceClass (DbInstanceData s) Text
 
-instance HasComputedDbInstancePort (DbInstanceDataSource s) TF.Word16
+instance HasComputedDbInstancePort (DbInstanceData s) TF.Word16
 
-instance HasComputedDbName (DbInstanceDataSource s) Text
+instance HasComputedDbName (DbInstanceData s) Text
 
-instance HasComputedDbParameterGroups (DbInstanceDataSource s) Text
+instance HasComputedDbParameterGroups (DbInstanceData s) Text
 
-instance HasComputedDbSecurityGroups (DbInstanceDataSource s) Text
+instance HasComputedDbSecurityGroups (DbInstanceData s) Text
 
-instance HasComputedDbSubnetGroup (DbInstanceDataSource s) Text
+instance HasComputedDbSubnetGroup (DbInstanceData s) Text
 
-instance HasComputedEndpoint (DbInstanceDataSource s) Text
+instance HasComputedEndpoint (DbInstanceData s) Text
 
-instance HasComputedEngine (DbInstanceDataSource s) Text
+instance HasComputedEngine (DbInstanceData s) Text
 
-instance HasComputedEngineVersion (DbInstanceDataSource s) Text
+instance HasComputedEngineVersion (DbInstanceData s) Text
 
-instance HasComputedHostedZoneId (DbInstanceDataSource s) Text
+instance HasComputedHostedZoneId (DbInstanceData s) Text
 
-instance HasComputedIops (DbInstanceDataSource s) Text
+instance HasComputedIops (DbInstanceData s) Text
 
-instance HasComputedKmsKeyId (DbInstanceDataSource s) Text
+instance HasComputedKmsKeyId (DbInstanceData s) Text
 
-instance HasComputedLicenseModel (DbInstanceDataSource s) Text
+instance HasComputedLicenseModel (DbInstanceData s) Text
 
-instance HasComputedMasterUsername (DbInstanceDataSource s) Text
+instance HasComputedMasterUsername (DbInstanceData s) Text
 
-instance HasComputedMonitoringInterval (DbInstanceDataSource s) Text
+instance HasComputedMonitoringInterval (DbInstanceData s) Text
 
-instance HasComputedMonitoringRoleArn (DbInstanceDataSource s) Text
+instance HasComputedMonitoringRoleArn (DbInstanceData s) Text
 
-instance HasComputedMultiAz (DbInstanceDataSource s) Text
+instance HasComputedMultiAz (DbInstanceData s) Text
 
-instance HasComputedOptionGroupMemberships (DbInstanceDataSource s) Text
+instance HasComputedOptionGroupMemberships (DbInstanceData s) Text
 
-instance HasComputedPort (DbInstanceDataSource s) Text
+instance HasComputedPort (DbInstanceData s) Text
 
-instance HasComputedPreferredBackupWindow (DbInstanceDataSource s) Text
+instance HasComputedPreferredBackupWindow (DbInstanceData s) Text
 
-instance HasComputedPreferredMaintenanceWindow (DbInstanceDataSource s) Text
+instance HasComputedPreferredMaintenanceWindow (DbInstanceData s) Text
 
-instance HasComputedPubliclyAccessible (DbInstanceDataSource s) Text
+instance HasComputedPubliclyAccessible (DbInstanceData s) Text
 
-instance HasComputedReplicateSourceDb (DbInstanceDataSource s) Text
+instance HasComputedReplicateSourceDb (DbInstanceData s) Text
 
-instance HasComputedStorageEncrypted (DbInstanceDataSource s) Text
+instance HasComputedStorageEncrypted (DbInstanceData s) Text
 
-instance HasComputedStorageType (DbInstanceDataSource s) Text
+instance HasComputedStorageType (DbInstanceData s) Text
 
-instance HasComputedTimezone (DbInstanceDataSource s) Text
+instance HasComputedTimezone (DbInstanceData s) Text
 
-instance HasComputedVpcSecurityGroups (DbInstanceDataSource s) Text
+instance HasComputedVpcSecurityGroups (DbInstanceData s) Text
 
-dbInstanceDataSource :: TF.DataSource TF.AWS (DbInstanceDataSource s)
-dbInstanceDataSource =
-    TF.newDataSource "aws_db_instance" $
-        DbInstanceDataSource {
+dbInstanceData :: TF.Data TF.AWS (DbInstanceData s)
+dbInstanceData =
+    TF.newData "aws_db_instance" $
+        DbInstanceData {
               _db_instance_identifier = TF.Nil
             }
 
-{- | The @aws_db_snapshot@ AWS datasource.
+{- | The @aws_db_snapshot@ AWS data.
 
 Use this data source to get information about a DB Snapshot for use when
 provisioning DB instances ~> NOTE: This data source does not apply to
 snapshots created on Aurora DB clusters.
 -}
-data DbSnapshotDataSource s = DbSnapshotDataSource {
+data DbSnapshotData s = DbSnapshotData {
       _db_instance_identifier :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns the list of snapshots created by the specific db_instance -}
     , _db_snapshot_identifier :: !(TF.Attribute s Text)
@@ -1199,8 +1199,8 @@ data DbSnapshotDataSource s = DbSnapshotDataSource {
     {- ^ (Optional) The type of snapshots to be returned. If you don't specify a SnapshotType value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. Possible values are, @automated@ , @manual@ , @shared@ and @public@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DbSnapshotDataSource s) where
-    toHCL DbSnapshotDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (DbSnapshotData s) where
+    toHCL DbSnapshotData{..} = TF.block $ catMaybes
         [ TF.attribute "db_instance_identifier" _db_instance_identifier
         , TF.attribute "db_snapshot_identifier" _db_snapshot_identifier
         , TF.attribute "include_public" _include_public
@@ -1209,74 +1209,74 @@ instance TF.ToHCL (DbSnapshotDataSource s) where
         , TF.attribute "snapshot_type" _snapshot_type
         ]
 
-instance HasDbInstanceIdentifier (DbSnapshotDataSource s) s Text where
+instance HasDbInstanceIdentifier (DbSnapshotData s) s Text where
     dbInstanceIdentifier =
-        lens (_db_instance_identifier :: DbSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _db_instance_identifier = a } :: DbSnapshotDataSource s)
+        lens (_db_instance_identifier :: DbSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _db_instance_identifier = a } :: DbSnapshotData s)
 
-instance HasDbSnapshotIdentifier (DbSnapshotDataSource s) s Text where
+instance HasDbSnapshotIdentifier (DbSnapshotData s) s Text where
     dbSnapshotIdentifier =
-        lens (_db_snapshot_identifier :: DbSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _db_snapshot_identifier = a } :: DbSnapshotDataSource s)
+        lens (_db_snapshot_identifier :: DbSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _db_snapshot_identifier = a } :: DbSnapshotData s)
 
-instance HasIncludePublic (DbSnapshotDataSource s) s Text where
+instance HasIncludePublic (DbSnapshotData s) s Text where
     includePublic =
-        lens (_include_public :: DbSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _include_public = a } :: DbSnapshotDataSource s)
+        lens (_include_public :: DbSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _include_public = a } :: DbSnapshotData s)
 
-instance HasIncludeShared (DbSnapshotDataSource s) s Text where
+instance HasIncludeShared (DbSnapshotData s) s Text where
     includeShared =
-        lens (_include_shared :: DbSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _include_shared = a } :: DbSnapshotDataSource s)
+        lens (_include_shared :: DbSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _include_shared = a } :: DbSnapshotData s)
 
-instance HasMostRecent (DbSnapshotDataSource s) s Text where
+instance HasMostRecent (DbSnapshotData s) s Text where
     mostRecent =
-        lens (_most_recent :: DbSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: DbSnapshotDataSource s)
+        lens (_most_recent :: DbSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _most_recent = a } :: DbSnapshotData s)
 
-instance HasSnapshotType (DbSnapshotDataSource s) s Text where
+instance HasSnapshotType (DbSnapshotData s) s Text where
     snapshotType =
-        lens (_snapshot_type :: DbSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _snapshot_type = a } :: DbSnapshotDataSource s)
+        lens (_snapshot_type :: DbSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _snapshot_type = a } :: DbSnapshotData s)
 
-instance HasComputedAllocatedStorage (DbSnapshotDataSource s) Text
+instance HasComputedAllocatedStorage (DbSnapshotData s) Text
 
-instance HasComputedAvailabilityZone (DbSnapshotDataSource s) TF.Zone
+instance HasComputedAvailabilityZone (DbSnapshotData s) TF.Zone
 
-instance HasComputedDbSnapshotArn (DbSnapshotDataSource s) Text
+instance HasComputedDbSnapshotArn (DbSnapshotData s) Text
 
-instance HasComputedEncrypted (DbSnapshotDataSource s) Text
+instance HasComputedEncrypted (DbSnapshotData s) Text
 
-instance HasComputedEngine (DbSnapshotDataSource s) Text
+instance HasComputedEngine (DbSnapshotData s) Text
 
-instance HasComputedEngineVersion (DbSnapshotDataSource s) Text
+instance HasComputedEngineVersion (DbSnapshotData s) Text
 
-instance HasComputedId (DbSnapshotDataSource s) Text
+instance HasComputedId (DbSnapshotData s) Text
 
-instance HasComputedIops (DbSnapshotDataSource s) Text
+instance HasComputedIops (DbSnapshotData s) Text
 
-instance HasComputedKmsKeyId (DbSnapshotDataSource s) Text
+instance HasComputedKmsKeyId (DbSnapshotData s) Text
 
-instance HasComputedLicenseModel (DbSnapshotDataSource s) Text
+instance HasComputedLicenseModel (DbSnapshotData s) Text
 
-instance HasComputedOptionGroupName (DbSnapshotDataSource s) Text
+instance HasComputedOptionGroupName (DbSnapshotData s) Text
 
-instance HasComputedSnapshotCreateTime (DbSnapshotDataSource s) Text
+instance HasComputedSnapshotCreateTime (DbSnapshotData s) Text
 
-instance HasComputedSourceDbSnapshotIdentifier (DbSnapshotDataSource s) Text
+instance HasComputedSourceDbSnapshotIdentifier (DbSnapshotData s) Text
 
-instance HasComputedSourceRegion (DbSnapshotDataSource s) TF.Region
+instance HasComputedSourceRegion (DbSnapshotData s) TF.Region
 
-instance HasComputedStatus (DbSnapshotDataSource s) Text
+instance HasComputedStatus (DbSnapshotData s) Text
 
-instance HasComputedStorageType (DbSnapshotDataSource s) Text
+instance HasComputedStorageType (DbSnapshotData s) Text
 
-instance HasComputedVpcId (DbSnapshotDataSource s) Text
+instance HasComputedVpcId (DbSnapshotData s) Text
 
-dbSnapshotDataSource :: TF.DataSource TF.AWS (DbSnapshotDataSource s)
-dbSnapshotDataSource =
-    TF.newDataSource "aws_db_snapshot" $
-        DbSnapshotDataSource {
+dbSnapshotData :: TF.Data TF.AWS (DbSnapshotData s)
+dbSnapshotData =
+    TF.newData "aws_db_snapshot" $
+        DbSnapshotData {
               _db_instance_identifier = TF.Nil
             , _db_snapshot_identifier = TF.Nil
             , _include_public = TF.Nil
@@ -1285,38 +1285,38 @@ dbSnapshotDataSource =
             , _snapshot_type = TF.Nil
             }
 
-{- | The @aws_dynamodb_table@ AWS datasource.
+{- | The @aws_dynamodb_table@ AWS data.
 
 Provides information about a DynamoDB table.
 -}
-data DynamodbTableDataSource s = DynamodbTableDataSource {
+data DynamodbTableData s = DynamodbTableData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the DynamoDB table. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DynamodbTableDataSource s) where
-    toHCL DynamodbTableDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (DynamodbTableData s) where
+    toHCL DynamodbTableData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (DynamodbTableDataSource s) s Text where
+instance HasName (DynamodbTableData s) s Text where
     name =
-        lens (_name :: DynamodbTableDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DynamodbTableDataSource s)
+        lens (_name :: DynamodbTableData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: DynamodbTableData s)
 
-dynamodbTableDataSource :: TF.DataSource TF.AWS (DynamodbTableDataSource s)
-dynamodbTableDataSource =
-    TF.newDataSource "aws_dynamodb_table" $
-        DynamodbTableDataSource {
+dynamodbTableData :: TF.Data TF.AWS (DynamodbTableData s)
+dynamodbTableData =
+    TF.newData "aws_dynamodb_table" $
+        DynamodbTableData {
               _name = TF.Nil
             }
 
-{- | The @aws_ebs_snapshot@ AWS datasource.
+{- | The @aws_ebs_snapshot@ AWS data.
 
 Use this data source to get information about an EBS Snapshot for use when
 provisioning EBS Volumes
 -}
-data EbsSnapshotDataSource s = EbsSnapshotDataSource {
+data EbsSnapshotData s = EbsSnapshotData {
       _filter                 :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
     , _most_recent            :: !(TF.Attribute s Text)
@@ -1329,8 +1329,8 @@ data EbsSnapshotDataSource s = EbsSnapshotDataSource {
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EbsSnapshotDataSource s) where
-    toHCL EbsSnapshotDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EbsSnapshotData s) where
+    toHCL EbsSnapshotData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "most_recent" _most_recent
         , TF.attribute "owners" _owners
@@ -1338,59 +1338,59 @@ instance TF.ToHCL (EbsSnapshotDataSource s) where
         , TF.attribute "snapshot_ids" _snapshot_ids
         ]
 
-instance HasFilter (EbsSnapshotDataSource s) s Text where
+instance HasFilter (EbsSnapshotData s) s Text where
     filter =
-        lens (_filter :: EbsSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: EbsSnapshotDataSource s)
+        lens (_filter :: EbsSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: EbsSnapshotData s)
 
-instance HasMostRecent (EbsSnapshotDataSource s) s Text where
+instance HasMostRecent (EbsSnapshotData s) s Text where
     mostRecent =
-        lens (_most_recent :: EbsSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: EbsSnapshotDataSource s)
+        lens (_most_recent :: EbsSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _most_recent = a } :: EbsSnapshotData s)
 
-instance HasOwners (EbsSnapshotDataSource s) s Text where
+instance HasOwners (EbsSnapshotData s) s Text where
     owners =
-        lens (_owners :: EbsSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _owners = a } :: EbsSnapshotDataSource s)
+        lens (_owners :: EbsSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _owners = a } :: EbsSnapshotData s)
 
-instance HasRestorableByUserIds (EbsSnapshotDataSource s) s Text where
+instance HasRestorableByUserIds (EbsSnapshotData s) s Text where
     restorableByUserIds =
-        lens (_restorable_by_user_ids :: EbsSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotDataSource s)
+        lens (_restorable_by_user_ids :: EbsSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotData s)
 
-instance HasSnapshotIds (EbsSnapshotDataSource s) s Text where
+instance HasSnapshotIds (EbsSnapshotData s) s Text where
     snapshotIds =
-        lens (_snapshot_ids :: EbsSnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _snapshot_ids = a } :: EbsSnapshotDataSource s)
+        lens (_snapshot_ids :: EbsSnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _snapshot_ids = a } :: EbsSnapshotData s)
 
-instance HasComputedDataEncryptionKeyId (EbsSnapshotDataSource s) Text
+instance HasComputedDataEncryptionKeyId (EbsSnapshotData s) Text
 
-instance HasComputedDescription (EbsSnapshotDataSource s) Text
+instance HasComputedDescription (EbsSnapshotData s) Text
 
-instance HasComputedEncrypted (EbsSnapshotDataSource s) Text
+instance HasComputedEncrypted (EbsSnapshotData s) Text
 
-instance HasComputedId (EbsSnapshotDataSource s) Text
+instance HasComputedId (EbsSnapshotData s) Text
 
-instance HasComputedKmsKeyId (EbsSnapshotDataSource s) Text
+instance HasComputedKmsKeyId (EbsSnapshotData s) Text
 
-instance HasComputedOwnerAlias (EbsSnapshotDataSource s) Text
+instance HasComputedOwnerAlias (EbsSnapshotData s) Text
 
-instance HasComputedOwnerId (EbsSnapshotDataSource s) Text
+instance HasComputedOwnerId (EbsSnapshotData s) Text
 
-instance HasComputedSnapshotId (EbsSnapshotDataSource s) Text
+instance HasComputedSnapshotId (EbsSnapshotData s) Text
 
-instance HasComputedState (EbsSnapshotDataSource s) Text
+instance HasComputedState (EbsSnapshotData s) Text
 
-instance HasComputedTags (EbsSnapshotDataSource s) TF.Tags
+instance HasComputedTags (EbsSnapshotData s) TF.Tags
 
-instance HasComputedVolumeId (EbsSnapshotDataSource s) Text
+instance HasComputedVolumeId (EbsSnapshotData s) Text
 
-instance HasComputedVolumeSize (EbsSnapshotDataSource s) Text
+instance HasComputedVolumeSize (EbsSnapshotData s) Text
 
-ebsSnapshotDataSource :: TF.DataSource TF.AWS (EbsSnapshotDataSource s)
-ebsSnapshotDataSource =
-    TF.newDataSource "aws_ebs_snapshot" $
-        EbsSnapshotDataSource {
+ebsSnapshotData :: TF.Data TF.AWS (EbsSnapshotData s)
+ebsSnapshotData =
+    TF.newData "aws_ebs_snapshot" $
+        EbsSnapshotData {
               _filter = TF.Nil
             , _most_recent = TF.Nil
             , _owners = TF.Nil
@@ -1398,12 +1398,12 @@ ebsSnapshotDataSource =
             , _snapshot_ids = TF.Nil
             }
 
-{- | The @aws_ebs_snapshot_ids@ AWS datasource.
+{- | The @aws_ebs_snapshot_ids@ AWS data.
 
 Use this data source to get a list of EBS Snapshot IDs matching the
 specified criteria.
 -}
-data EbsSnapshotIdsDataSource s = EbsSnapshotIdsDataSource {
+data EbsSnapshotIdsData s = EbsSnapshotIdsData {
       _filter                 :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
     , _owners                 :: !(TF.Attribute s Text)
@@ -1412,525 +1412,525 @@ data EbsSnapshotIdsDataSource s = EbsSnapshotIdsDataSource {
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EbsSnapshotIdsDataSource s) where
-    toHCL EbsSnapshotIdsDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EbsSnapshotIdsData s) where
+    toHCL EbsSnapshotIdsData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "owners" _owners
         , TF.attribute "restorable_by_user_ids" _restorable_by_user_ids
         ]
 
-instance HasFilter (EbsSnapshotIdsDataSource s) s Text where
+instance HasFilter (EbsSnapshotIdsData s) s Text where
     filter =
-        lens (_filter :: EbsSnapshotIdsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: EbsSnapshotIdsDataSource s)
+        lens (_filter :: EbsSnapshotIdsData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: EbsSnapshotIdsData s)
 
-instance HasOwners (EbsSnapshotIdsDataSource s) s Text where
+instance HasOwners (EbsSnapshotIdsData s) s Text where
     owners =
-        lens (_owners :: EbsSnapshotIdsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _owners = a } :: EbsSnapshotIdsDataSource s)
+        lens (_owners :: EbsSnapshotIdsData s -> TF.Attribute s Text)
+            (\s a -> s { _owners = a } :: EbsSnapshotIdsData s)
 
-instance HasRestorableByUserIds (EbsSnapshotIdsDataSource s) s Text where
+instance HasRestorableByUserIds (EbsSnapshotIdsData s) s Text where
     restorableByUserIds =
-        lens (_restorable_by_user_ids :: EbsSnapshotIdsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotIdsDataSource s)
+        lens (_restorable_by_user_ids :: EbsSnapshotIdsData s -> TF.Attribute s Text)
+            (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotIdsData s)
 
-ebsSnapshotIdsDataSource :: TF.DataSource TF.AWS (EbsSnapshotIdsDataSource s)
-ebsSnapshotIdsDataSource =
-    TF.newDataSource "aws_ebs_snapshot_ids" $
-        EbsSnapshotIdsDataSource {
+ebsSnapshotIdsData :: TF.Data TF.AWS (EbsSnapshotIdsData s)
+ebsSnapshotIdsData =
+    TF.newData "aws_ebs_snapshot_ids" $
+        EbsSnapshotIdsData {
               _filter = TF.Nil
             , _owners = TF.Nil
             , _restorable_by_user_ids = TF.Nil
             }
 
-{- | The @aws_ebs_volume@ AWS datasource.
+{- | The @aws_ebs_volume@ AWS data.
 
 Use this data source to get information about an EBS volume for use in other
 resources.
 -}
-data EbsVolumeDataSource s = EbsVolumeDataSource {
+data EbsVolumeData s = EbsVolumeData {
       _filter      :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html> . -}
     , _most_recent :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Volume. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EbsVolumeDataSource s) where
-    toHCL EbsVolumeDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EbsVolumeData s) where
+    toHCL EbsVolumeData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "most_recent" _most_recent
         ]
 
-instance HasFilter (EbsVolumeDataSource s) s Text where
+instance HasFilter (EbsVolumeData s) s Text where
     filter =
-        lens (_filter :: EbsVolumeDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: EbsVolumeDataSource s)
+        lens (_filter :: EbsVolumeData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: EbsVolumeData s)
 
-instance HasMostRecent (EbsVolumeDataSource s) s Text where
+instance HasMostRecent (EbsVolumeData s) s Text where
     mostRecent =
-        lens (_most_recent :: EbsVolumeDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: EbsVolumeDataSource s)
+        lens (_most_recent :: EbsVolumeData s -> TF.Attribute s Text)
+            (\s a -> s { _most_recent = a } :: EbsVolumeData s)
 
-instance HasComputedArn (EbsVolumeDataSource s) Text
+instance HasComputedArn (EbsVolumeData s) Text
 
-instance HasComputedAvailabilityZone (EbsVolumeDataSource s) TF.Zone
+instance HasComputedAvailabilityZone (EbsVolumeData s) TF.Zone
 
-instance HasComputedEncrypted (EbsVolumeDataSource s) Text
+instance HasComputedEncrypted (EbsVolumeData s) Text
 
-instance HasComputedId (EbsVolumeDataSource s) Text
+instance HasComputedId (EbsVolumeData s) Text
 
-instance HasComputedIops (EbsVolumeDataSource s) Text
+instance HasComputedIops (EbsVolumeData s) Text
 
-instance HasComputedKmsKeyId (EbsVolumeDataSource s) Text
+instance HasComputedKmsKeyId (EbsVolumeData s) Text
 
-instance HasComputedSize (EbsVolumeDataSource s) Text
+instance HasComputedSize (EbsVolumeData s) Text
 
-instance HasComputedSnapshotId (EbsVolumeDataSource s) Text
+instance HasComputedSnapshotId (EbsVolumeData s) Text
 
-instance HasComputedTags (EbsVolumeDataSource s) TF.Tags
+instance HasComputedTags (EbsVolumeData s) TF.Tags
 
-instance HasComputedVolumeId (EbsVolumeDataSource s) Text
+instance HasComputedVolumeId (EbsVolumeData s) Text
 
-instance HasComputedVolumeType (EbsVolumeDataSource s) Text
+instance HasComputedVolumeType (EbsVolumeData s) Text
 
-ebsVolumeDataSource :: TF.DataSource TF.AWS (EbsVolumeDataSource s)
-ebsVolumeDataSource =
-    TF.newDataSource "aws_ebs_volume" $
-        EbsVolumeDataSource {
+ebsVolumeData :: TF.Data TF.AWS (EbsVolumeData s)
+ebsVolumeData =
+    TF.newData "aws_ebs_volume" $
+        EbsVolumeData {
               _filter = TF.Nil
             , _most_recent = TF.Nil
             }
 
-{- | The @aws_ecr_repository@ AWS datasource.
+{- | The @aws_ecr_repository@ AWS data.
 
 The ECR Repository data source allows the ARN, Repository URI and Registry
 ID to be retrieved for an ECR repository.
 -}
-data EcrRepositoryDataSource s = EcrRepositoryDataSource {
+data EcrRepositoryData s = EcrRepositoryData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the ECR Repository. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcrRepositoryDataSource s) where
-    toHCL EcrRepositoryDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EcrRepositoryData s) where
+    toHCL EcrRepositoryData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (EcrRepositoryDataSource s) s Text where
+instance HasName (EcrRepositoryData s) s Text where
     name =
-        lens (_name :: EcrRepositoryDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EcrRepositoryDataSource s)
+        lens (_name :: EcrRepositoryData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: EcrRepositoryData s)
 
-instance HasComputedArn (EcrRepositoryDataSource s) Text
+instance HasComputedArn (EcrRepositoryData s) Text
 
-instance HasComputedRegistryId (EcrRepositoryDataSource s) Text
+instance HasComputedRegistryId (EcrRepositoryData s) Text
 
-instance HasComputedRepositoryUrl (EcrRepositoryDataSource s) Text
+instance HasComputedRepositoryUrl (EcrRepositoryData s) Text
 
-ecrRepositoryDataSource :: TF.DataSource TF.AWS (EcrRepositoryDataSource s)
-ecrRepositoryDataSource =
-    TF.newDataSource "aws_ecr_repository" $
-        EcrRepositoryDataSource {
+ecrRepositoryData :: TF.Data TF.AWS (EcrRepositoryData s)
+ecrRepositoryData =
+    TF.newData "aws_ecr_repository" $
+        EcrRepositoryData {
               _name = TF.Nil
             }
 
-{- | The @aws_ecs_cluster@ AWS datasource.
+{- | The @aws_ecs_cluster@ AWS data.
 
 The ECS Cluster data source allows access to details of a specific cluster
 within an AWS ECS service.
 -}
-data EcsClusterDataSource s = EcsClusterDataSource {
+data EcsClusterData s = EcsClusterData {
       _cluster_name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the ECS Cluster -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcsClusterDataSource s) where
-    toHCL EcsClusterDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EcsClusterData s) where
+    toHCL EcsClusterData{..} = TF.block $ catMaybes
         [ TF.attribute "cluster_name" _cluster_name
         ]
 
-instance HasClusterName (EcsClusterDataSource s) s Text where
+instance HasClusterName (EcsClusterData s) s Text where
     clusterName =
-        lens (_cluster_name :: EcsClusterDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _cluster_name = a } :: EcsClusterDataSource s)
+        lens (_cluster_name :: EcsClusterData s -> TF.Attribute s Text)
+            (\s a -> s { _cluster_name = a } :: EcsClusterData s)
 
-instance HasComputedArn (EcsClusterDataSource s) Text
+instance HasComputedArn (EcsClusterData s) Text
 
-instance HasComputedPendingTasksCount (EcsClusterDataSource s) Text
+instance HasComputedPendingTasksCount (EcsClusterData s) Text
 
-instance HasComputedRegisteredContainerInstancesCount (EcsClusterDataSource s) Text
+instance HasComputedRegisteredContainerInstancesCount (EcsClusterData s) Text
 
-instance HasComputedRunningTasksCount (EcsClusterDataSource s) Text
+instance HasComputedRunningTasksCount (EcsClusterData s) Text
 
-instance HasComputedStatus (EcsClusterDataSource s) Text
+instance HasComputedStatus (EcsClusterData s) Text
 
-ecsClusterDataSource :: TF.DataSource TF.AWS (EcsClusterDataSource s)
-ecsClusterDataSource =
-    TF.newDataSource "aws_ecs_cluster" $
-        EcsClusterDataSource {
+ecsClusterData :: TF.Data TF.AWS (EcsClusterData s)
+ecsClusterData =
+    TF.newData "aws_ecs_cluster" $
+        EcsClusterData {
               _cluster_name = TF.Nil
             }
 
-{- | The @aws_ecs_container_definition@ AWS datasource.
+{- | The @aws_ecs_container_definition@ AWS data.
 
 The ECS container definition data source allows access to details of a
 specific container within an AWS ECS service.
 -}
-data EcsContainerDefinitionDataSource s = EcsContainerDefinitionDataSource {
+data EcsContainerDefinitionData s = EcsContainerDefinitionData {
       _container_name  :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the container definition -}
     , _task_definition :: !(TF.Attribute s Text)
     {- ^ (Required) The ARN of the task definition which contains the container -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcsContainerDefinitionDataSource s) where
-    toHCL EcsContainerDefinitionDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EcsContainerDefinitionData s) where
+    toHCL EcsContainerDefinitionData{..} = TF.block $ catMaybes
         [ TF.attribute "container_name" _container_name
         , TF.attribute "task_definition" _task_definition
         ]
 
-instance HasContainerName (EcsContainerDefinitionDataSource s) s Text where
+instance HasContainerName (EcsContainerDefinitionData s) s Text where
     containerName =
-        lens (_container_name :: EcsContainerDefinitionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _container_name = a } :: EcsContainerDefinitionDataSource s)
+        lens (_container_name :: EcsContainerDefinitionData s -> TF.Attribute s Text)
+            (\s a -> s { _container_name = a } :: EcsContainerDefinitionData s)
 
-instance HasTaskDefinition (EcsContainerDefinitionDataSource s) s Text where
+instance HasTaskDefinition (EcsContainerDefinitionData s) s Text where
     taskDefinition =
-        lens (_task_definition :: EcsContainerDefinitionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _task_definition = a } :: EcsContainerDefinitionDataSource s)
+        lens (_task_definition :: EcsContainerDefinitionData s -> TF.Attribute s Text)
+            (\s a -> s { _task_definition = a } :: EcsContainerDefinitionData s)
 
-instance HasComputedCpu (EcsContainerDefinitionDataSource s) Text
+instance HasComputedCpu (EcsContainerDefinitionData s) Text
 
-instance HasComputedDisableNetworking (EcsContainerDefinitionDataSource s) Text
+instance HasComputedDisableNetworking (EcsContainerDefinitionData s) Text
 
-instance HasComputedDockerLabels (EcsContainerDefinitionDataSource s) Text
+instance HasComputedDockerLabels (EcsContainerDefinitionData s) Text
 
-instance HasComputedEnvironment (EcsContainerDefinitionDataSource s) Text
+instance HasComputedEnvironment (EcsContainerDefinitionData s) Text
 
-instance HasComputedImage (EcsContainerDefinitionDataSource s) Text
+instance HasComputedImage (EcsContainerDefinitionData s) Text
 
-instance HasComputedImageDigest (EcsContainerDefinitionDataSource s) Text
+instance HasComputedImageDigest (EcsContainerDefinitionData s) Text
 
-instance HasComputedMemory (EcsContainerDefinitionDataSource s) Text
+instance HasComputedMemory (EcsContainerDefinitionData s) Text
 
-instance HasComputedMemoryReservation (EcsContainerDefinitionDataSource s) Text
+instance HasComputedMemoryReservation (EcsContainerDefinitionData s) Text
 
-ecsContainerDefinitionDataSource :: TF.DataSource TF.AWS (EcsContainerDefinitionDataSource s)
-ecsContainerDefinitionDataSource =
-    TF.newDataSource "aws_ecs_container_definition" $
-        EcsContainerDefinitionDataSource {
+ecsContainerDefinitionData :: TF.Data TF.AWS (EcsContainerDefinitionData s)
+ecsContainerDefinitionData =
+    TF.newData "aws_ecs_container_definition" $
+        EcsContainerDefinitionData {
               _container_name = TF.Nil
             , _task_definition = TF.Nil
             }
 
-{- | The @aws_ecs_task_definition@ AWS datasource.
+{- | The @aws_ecs_task_definition@ AWS data.
 
 The ECS task definition data source allows access to details of a specific
 AWS ECS task definition.
 -}
-data EcsTaskDefinitionDataSource s = EcsTaskDefinitionDataSource {
+data EcsTaskDefinitionData s = EcsTaskDefinitionData {
       _task_definition :: !(TF.Attribute s Text)
     {- ^ (Required) The family for the latest ACTIVE revision, family and revision (family:revision) for a specific revision in the family, the ARN of the task definition to access to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EcsTaskDefinitionDataSource s) where
-    toHCL EcsTaskDefinitionDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EcsTaskDefinitionData s) where
+    toHCL EcsTaskDefinitionData{..} = TF.block $ catMaybes
         [ TF.attribute "task_definition" _task_definition
         ]
 
-instance HasTaskDefinition (EcsTaskDefinitionDataSource s) s Text where
+instance HasTaskDefinition (EcsTaskDefinitionData s) s Text where
     taskDefinition =
-        lens (_task_definition :: EcsTaskDefinitionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _task_definition = a } :: EcsTaskDefinitionDataSource s)
+        lens (_task_definition :: EcsTaskDefinitionData s -> TF.Attribute s Text)
+            (\s a -> s { _task_definition = a } :: EcsTaskDefinitionData s)
 
-instance HasComputedFamily' (EcsTaskDefinitionDataSource s) Text
+instance HasComputedFamily' (EcsTaskDefinitionData s) Text
 
-instance HasComputedNetworkMode (EcsTaskDefinitionDataSource s) Text
+instance HasComputedNetworkMode (EcsTaskDefinitionData s) Text
 
-instance HasComputedRevision (EcsTaskDefinitionDataSource s) Text
+instance HasComputedRevision (EcsTaskDefinitionData s) Text
 
-instance HasComputedStatus (EcsTaskDefinitionDataSource s) Text
+instance HasComputedStatus (EcsTaskDefinitionData s) Text
 
-instance HasComputedTaskRoleArn (EcsTaskDefinitionDataSource s) Text
+instance HasComputedTaskRoleArn (EcsTaskDefinitionData s) Text
 
-ecsTaskDefinitionDataSource :: TF.DataSource TF.AWS (EcsTaskDefinitionDataSource s)
-ecsTaskDefinitionDataSource =
-    TF.newDataSource "aws_ecs_task_definition" $
-        EcsTaskDefinitionDataSource {
+ecsTaskDefinitionData :: TF.Data TF.AWS (EcsTaskDefinitionData s)
+ecsTaskDefinitionData =
+    TF.newData "aws_ecs_task_definition" $
+        EcsTaskDefinitionData {
               _task_definition = TF.Nil
             }
 
-{- | The @aws_efs_file_system@ AWS datasource.
+{- | The @aws_efs_file_system@ AWS data.
 
 Provides information about an Elastic File System (EFS).
 -}
-data EfsFileSystemDataSource s = EfsFileSystemDataSource {
+data EfsFileSystemData s = EfsFileSystemData {
       _creation_token :: !(TF.Attribute s Text)
     {- ^ (Optional) Restricts the list to the file system with this creation token. -}
     , _file_system_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID that identifies the file system (e.g. fs-ccfc0d65). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EfsFileSystemDataSource s) where
-    toHCL EfsFileSystemDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EfsFileSystemData s) where
+    toHCL EfsFileSystemData{..} = TF.block $ catMaybes
         [ TF.attribute "creation_token" _creation_token
         , TF.attribute "file_system_id" _file_system_id
         ]
 
-instance HasCreationToken (EfsFileSystemDataSource s) s Text where
+instance HasCreationToken (EfsFileSystemData s) s Text where
     creationToken =
-        lens (_creation_token :: EfsFileSystemDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _creation_token = a } :: EfsFileSystemDataSource s)
+        lens (_creation_token :: EfsFileSystemData s -> TF.Attribute s Text)
+            (\s a -> s { _creation_token = a } :: EfsFileSystemData s)
 
-instance HasFileSystemId (EfsFileSystemDataSource s) s Text where
+instance HasFileSystemId (EfsFileSystemData s) s Text where
     fileSystemId =
-        lens (_file_system_id :: EfsFileSystemDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _file_system_id = a } :: EfsFileSystemDataSource s)
+        lens (_file_system_id :: EfsFileSystemData s -> TF.Attribute s Text)
+            (\s a -> s { _file_system_id = a } :: EfsFileSystemData s)
 
-instance HasComputedDnsName (EfsFileSystemDataSource s) Text
+instance HasComputedDnsName (EfsFileSystemData s) Text
 
-instance HasComputedEncrypted (EfsFileSystemDataSource s) Text
+instance HasComputedEncrypted (EfsFileSystemData s) Text
 
-instance HasComputedKmsKeyId (EfsFileSystemDataSource s) Text
+instance HasComputedKmsKeyId (EfsFileSystemData s) Text
 
-instance HasComputedPerformanceMode (EfsFileSystemDataSource s) Text
+instance HasComputedPerformanceMode (EfsFileSystemData s) Text
 
-instance HasComputedTags (EfsFileSystemDataSource s) TF.Tags
+instance HasComputedTags (EfsFileSystemData s) TF.Tags
 
-efsFileSystemDataSource :: TF.DataSource TF.AWS (EfsFileSystemDataSource s)
-efsFileSystemDataSource =
-    TF.newDataSource "aws_efs_file_system" $
-        EfsFileSystemDataSource {
+efsFileSystemData :: TF.Data TF.AWS (EfsFileSystemData s)
+efsFileSystemData =
+    TF.newData "aws_efs_file_system" $
+        EfsFileSystemData {
               _creation_token = TF.Nil
             , _file_system_id = TF.Nil
             }
 
-{- | The @aws_efs_mount_target@ AWS datasource.
+{- | The @aws_efs_mount_target@ AWS data.
 
 Provides information about an Elastic File System Mount Target (EFS).
 -}
-data EfsMountTargetDataSource s = EfsMountTargetDataSource {
+data EfsMountTargetData s = EfsMountTargetData {
       _mount_target_id :: !(TF.Attribute s Text)
     {- ^ (Required) ID of the mount target that you want to have described -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EfsMountTargetDataSource s) where
-    toHCL EfsMountTargetDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EfsMountTargetData s) where
+    toHCL EfsMountTargetData{..} = TF.block $ catMaybes
         [ TF.attribute "mount_target_id" _mount_target_id
         ]
 
-instance HasMountTargetId (EfsMountTargetDataSource s) s Text where
+instance HasMountTargetId (EfsMountTargetData s) s Text where
     mountTargetId =
-        lens (_mount_target_id :: EfsMountTargetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _mount_target_id = a } :: EfsMountTargetDataSource s)
+        lens (_mount_target_id :: EfsMountTargetData s -> TF.Attribute s Text)
+            (\s a -> s { _mount_target_id = a } :: EfsMountTargetData s)
 
-instance HasComputedDnsName (EfsMountTargetDataSource s) Text
+instance HasComputedDnsName (EfsMountTargetData s) Text
 
-instance HasComputedFileSystemId (EfsMountTargetDataSource s) Text
+instance HasComputedFileSystemId (EfsMountTargetData s) Text
 
-instance HasComputedIpAddress (EfsMountTargetDataSource s) Text
+instance HasComputedIpAddress (EfsMountTargetData s) Text
 
-instance HasComputedNetworkInterfaceId (EfsMountTargetDataSource s) Text
+instance HasComputedNetworkInterfaceId (EfsMountTargetData s) Text
 
-instance HasComputedSecurityGroups (EfsMountTargetDataSource s) Text
+instance HasComputedSecurityGroups (EfsMountTargetData s) Text
 
-instance HasComputedSubnetId (EfsMountTargetDataSource s) Text
+instance HasComputedSubnetId (EfsMountTargetData s) Text
 
-efsMountTargetDataSource :: TF.DataSource TF.AWS (EfsMountTargetDataSource s)
-efsMountTargetDataSource =
-    TF.newDataSource "aws_efs_mount_target" $
-        EfsMountTargetDataSource {
+efsMountTargetData :: TF.Data TF.AWS (EfsMountTargetData s)
+efsMountTargetData =
+    TF.newData "aws_efs_mount_target" $
+        EfsMountTargetData {
               _mount_target_id = TF.Nil
             }
 
-{- | The @aws_eip@ AWS datasource.
+{- | The @aws_eip@ AWS data.
 
 @aws_eip@ provides details about a specific Elastic IP. This resource can
 prove useful when a module accepts an allocation ID or public IP as an input
 variable and needs to determine the other.
 -}
-data EipDataSource s = EipDataSource {
+data EipData s = EipData {
       _id        :: !(TF.Attribute s Text)
     {- ^ (Optional) The allocation id of the specific EIP to retrieve. -}
     , _public_ip :: !(TF.Attribute s Text)
     {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EipDataSource s) where
-    toHCL EipDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EipData s) where
+    toHCL EipData{..} = TF.block $ catMaybes
         [ TF.attribute "id" _id
         , TF.attribute "public_ip" _public_ip
         ]
 
-instance HasId (EipDataSource s) s Text where
+instance HasId (EipData s) s Text where
     id =
-        lens (_id :: EipDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: EipDataSource s)
+        lens (_id :: EipData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: EipData s)
 
-instance HasPublicIp (EipDataSource s) s Text where
+instance HasPublicIp (EipData s) s Text where
     publicIp =
-        lens (_public_ip :: EipDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _public_ip = a } :: EipDataSource s)
+        lens (_public_ip :: EipData s -> TF.Attribute s Text)
+            (\s a -> s { _public_ip = a } :: EipData s)
 
-eipDataSource :: TF.DataSource TF.AWS (EipDataSource s)
-eipDataSource =
-    TF.newDataSource "aws_eip" $
-        EipDataSource {
+eipData :: TF.Data TF.AWS (EipData s)
+eipData =
+    TF.newData "aws_eip" $
+        EipData {
               _id = TF.Nil
             , _public_ip = TF.Nil
             }
 
-{- | The @aws_elastic_beanstalk_solution_stack@ AWS datasource.
+{- | The @aws_elastic_beanstalk_solution_stack@ AWS data.
 
 Use this data source to get the name of a elastic beanstalk solution stack.
 -}
-data ElasticBeanstalkSolutionStackDataSource s = ElasticBeanstalkSolutionStackDataSource {
+data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData {
       _most_recent :: !(TF.Attribute s TF.Bool)
     {- ^ (Optional) If more than one result is returned, use the most recent solution stack. -}
     , _name_regex  :: !(TF.Attribute s Text)
     {- ^ - A regex string to apply to the solution stack list returned by AWS. See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> from AWS documentation for reference solution stack names. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElasticBeanstalkSolutionStackDataSource s) where
-    toHCL ElasticBeanstalkSolutionStackDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ElasticBeanstalkSolutionStackData s) where
+    toHCL ElasticBeanstalkSolutionStackData{..} = TF.block $ catMaybes
         [ TF.attribute "most_recent" _most_recent
         , TF.attribute "name_regex" _name_regex
         ]
 
-instance HasMostRecent (ElasticBeanstalkSolutionStackDataSource s) s TF.Bool where
+instance HasMostRecent (ElasticBeanstalkSolutionStackData s) s TF.Bool where
     mostRecent =
-        lens (_most_recent :: ElasticBeanstalkSolutionStackDataSource s -> TF.Attribute s TF.Bool)
-            (\s a -> s { _most_recent = a } :: ElasticBeanstalkSolutionStackDataSource s)
+        lens (_most_recent :: ElasticBeanstalkSolutionStackData s -> TF.Attribute s TF.Bool)
+            (\s a -> s { _most_recent = a } :: ElasticBeanstalkSolutionStackData s)
 
-instance HasNameRegex (ElasticBeanstalkSolutionStackDataSource s) s Text where
+instance HasNameRegex (ElasticBeanstalkSolutionStackData s) s Text where
     nameRegex =
-        lens (_name_regex :: ElasticBeanstalkSolutionStackDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: ElasticBeanstalkSolutionStackDataSource s)
+        lens (_name_regex :: ElasticBeanstalkSolutionStackData s -> TF.Attribute s Text)
+            (\s a -> s { _name_regex = a } :: ElasticBeanstalkSolutionStackData s)
 
-instance HasComputedName (ElasticBeanstalkSolutionStackDataSource s) Text
+instance HasComputedName (ElasticBeanstalkSolutionStackData s) Text
 
-elasticBeanstalkSolutionStackDataSource :: TF.DataSource TF.AWS (ElasticBeanstalkSolutionStackDataSource s)
-elasticBeanstalkSolutionStackDataSource =
-    TF.newDataSource "aws_elastic_beanstalk_solution_stack" $
-        ElasticBeanstalkSolutionStackDataSource {
+elasticBeanstalkSolutionStackData :: TF.Data TF.AWS (ElasticBeanstalkSolutionStackData s)
+elasticBeanstalkSolutionStackData =
+    TF.newData "aws_elastic_beanstalk_solution_stack" $
+        ElasticBeanstalkSolutionStackData {
               _most_recent = TF.Nil
             , _name_regex = TF.Nil
             }
 
-{- | The @aws_elasticache_cluster@ AWS datasource.
+{- | The @aws_elasticache_cluster@ AWS data.
 
 Use this data source to get information about an Elasticache Cluster
 -}
-data ElasticacheClusterDataSource s = ElasticacheClusterDataSource {
+data ElasticacheClusterData s = ElasticacheClusterData {
       _cluster_id :: !(TF.Attribute s Text)
     {- ^ – (Required) Group identifier. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElasticacheClusterDataSource s) where
-    toHCL ElasticacheClusterDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ElasticacheClusterData s) where
+    toHCL ElasticacheClusterData{..} = TF.block $ catMaybes
         [ TF.attribute "cluster_id" _cluster_id
         ]
 
-instance HasClusterId (ElasticacheClusterDataSource s) s Text where
+instance HasClusterId (ElasticacheClusterData s) s Text where
     clusterId =
-        lens (_cluster_id :: ElasticacheClusterDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _cluster_id = a } :: ElasticacheClusterDataSource s)
+        lens (_cluster_id :: ElasticacheClusterData s -> TF.Attribute s Text)
+            (\s a -> s { _cluster_id = a } :: ElasticacheClusterData s)
 
-instance HasComputedAvailabilityZone (ElasticacheClusterDataSource s) TF.Zone
+instance HasComputedAvailabilityZone (ElasticacheClusterData s) TF.Zone
 
-instance HasComputedCacheNodes (ElasticacheClusterDataSource s) Text
+instance HasComputedCacheNodes (ElasticacheClusterData s) Text
 
-instance HasComputedClusterAddress (ElasticacheClusterDataSource s) Text
+instance HasComputedClusterAddress (ElasticacheClusterData s) Text
 
-instance HasComputedConfigurationEndpoint (ElasticacheClusterDataSource s) Text
+instance HasComputedConfigurationEndpoint (ElasticacheClusterData s) Text
 
-instance HasComputedEngine (ElasticacheClusterDataSource s) Text
+instance HasComputedEngine (ElasticacheClusterData s) Text
 
-instance HasComputedEngineVersion (ElasticacheClusterDataSource s) Text
+instance HasComputedEngineVersion (ElasticacheClusterData s) Text
 
-instance HasComputedMaintenanceWindow (ElasticacheClusterDataSource s) Text
+instance HasComputedMaintenanceWindow (ElasticacheClusterData s) Text
 
-instance HasComputedNodeType (ElasticacheClusterDataSource s) Text
+instance HasComputedNodeType (ElasticacheClusterData s) Text
 
-instance HasComputedNotificationTopicArn (ElasticacheClusterDataSource s) Text
+instance HasComputedNotificationTopicArn (ElasticacheClusterData s) Text
 
-instance HasComputedNumCacheNodes (ElasticacheClusterDataSource s) Text
+instance HasComputedNumCacheNodes (ElasticacheClusterData s) Text
 
-instance HasComputedParameterGroupName (ElasticacheClusterDataSource s) Text
+instance HasComputedParameterGroupName (ElasticacheClusterData s) Text
 
-instance HasComputedPort (ElasticacheClusterDataSource s) Text
+instance HasComputedPort (ElasticacheClusterData s) Text
 
-instance HasComputedReplicationGroupId (ElasticacheClusterDataSource s) Text
+instance HasComputedReplicationGroupId (ElasticacheClusterData s) Text
 
-instance HasComputedSecurityGroupIds (ElasticacheClusterDataSource s) Text
+instance HasComputedSecurityGroupIds (ElasticacheClusterData s) Text
 
-instance HasComputedSecurityGroupNames (ElasticacheClusterDataSource s) Text
+instance HasComputedSecurityGroupNames (ElasticacheClusterData s) Text
 
-instance HasComputedSnapshotRetentionLimit (ElasticacheClusterDataSource s) Text
+instance HasComputedSnapshotRetentionLimit (ElasticacheClusterData s) Text
 
-instance HasComputedSnapshotWindow (ElasticacheClusterDataSource s) Text
+instance HasComputedSnapshotWindow (ElasticacheClusterData s) Text
 
-instance HasComputedSubnetGroupName (ElasticacheClusterDataSource s) Text
+instance HasComputedSubnetGroupName (ElasticacheClusterData s) Text
 
-instance HasComputedTags (ElasticacheClusterDataSource s) TF.Tags
+instance HasComputedTags (ElasticacheClusterData s) TF.Tags
 
-elasticacheClusterDataSource :: TF.DataSource TF.AWS (ElasticacheClusterDataSource s)
-elasticacheClusterDataSource =
-    TF.newDataSource "aws_elasticache_cluster" $
-        ElasticacheClusterDataSource {
+elasticacheClusterData :: TF.Data TF.AWS (ElasticacheClusterData s)
+elasticacheClusterData =
+    TF.newData "aws_elasticache_cluster" $
+        ElasticacheClusterData {
               _cluster_id = TF.Nil
             }
 
-{- | The @aws_elasticache_replication_group@ AWS datasource.
+{- | The @aws_elasticache_replication_group@ AWS data.
 
 Use this data source to get information about an Elasticache Replication
 Group.
 -}
-data ElasticacheReplicationGroupDataSource s = ElasticacheReplicationGroupDataSource {
+data ElasticacheReplicationGroupData s = ElasticacheReplicationGroupData {
       _replication_group_id :: !(TF.Attribute s Text)
     {- ^ – (Required) The identifier for the replication group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElasticacheReplicationGroupDataSource s) where
-    toHCL ElasticacheReplicationGroupDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ElasticacheReplicationGroupData s) where
+    toHCL ElasticacheReplicationGroupData{..} = TF.block $ catMaybes
         [ TF.attribute "replication_group_id" _replication_group_id
         ]
 
-instance HasReplicationGroupId (ElasticacheReplicationGroupDataSource s) s Text where
+instance HasReplicationGroupId (ElasticacheReplicationGroupData s) s Text where
     replicationGroupId =
-        lens (_replication_group_id :: ElasticacheReplicationGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _replication_group_id = a } :: ElasticacheReplicationGroupDataSource s)
+        lens (_replication_group_id :: ElasticacheReplicationGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _replication_group_id = a } :: ElasticacheReplicationGroupData s)
 
-instance HasComputedAuthTokenEnabled (ElasticacheReplicationGroupDataSource s) TF.Bool
+instance HasComputedAuthTokenEnabled (ElasticacheReplicationGroupData s) TF.Bool
 
-instance HasComputedAutomaticFailoverEnabled (ElasticacheReplicationGroupDataSource s) TF.Bool
+instance HasComputedAutomaticFailoverEnabled (ElasticacheReplicationGroupData s) TF.Bool
 
-instance HasComputedConfigurationEndpointAddress (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedConfigurationEndpointAddress (ElasticacheReplicationGroupData s) Text
 
-instance HasComputedNodeType (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedNodeType (ElasticacheReplicationGroupData s) Text
 
-instance HasComputedNumberCacheClusters (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedNumberCacheClusters (ElasticacheReplicationGroupData s) Text
 
-instance HasComputedPort (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedPort (ElasticacheReplicationGroupData s) Text
 
-instance HasComputedPrimaryEndpointAddress (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedPrimaryEndpointAddress (ElasticacheReplicationGroupData s) Text
 
-instance HasComputedReplicationGroupDescription (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedReplicationGroupDescription (ElasticacheReplicationGroupData s) Text
 
-instance HasComputedReplicationGroupId (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedReplicationGroupId (ElasticacheReplicationGroupData s) Text
 
-instance HasComputedSnapshotRetentionLimit (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedSnapshotRetentionLimit (ElasticacheReplicationGroupData s) Text
 
-instance HasComputedSnapshotWindow (ElasticacheReplicationGroupDataSource s) Text
+instance HasComputedSnapshotWindow (ElasticacheReplicationGroupData s) Text
 
-elasticacheReplicationGroupDataSource :: TF.DataSource TF.AWS (ElasticacheReplicationGroupDataSource s)
-elasticacheReplicationGroupDataSource =
-    TF.newDataSource "aws_elasticache_replication_group" $
-        ElasticacheReplicationGroupDataSource {
+elasticacheReplicationGroupData :: TF.Data TF.AWS (ElasticacheReplicationGroupData s)
+elasticacheReplicationGroupData =
+    TF.newData "aws_elasticache_replication_group" $
+        ElasticacheReplicationGroupData {
               _replication_group_id = TF.Nil
             }
 
-{- | The @aws_elb@ AWS datasource.
+{- | The @aws_elb@ AWS data.
 
 Provides information about a "classic" Elastic Load Balancer (ELB). See
 </docs/providers/aws/d/lb.html> if you are looking for "v2" Application Load
@@ -1938,305 +1938,305 @@ Balancer (ALB) or Network Load Balancer (NLB). This data source can prove
 useful when a module accepts an LB as an input variable and needs to, for
 example, determine the security groups associated with it, etc.
 -}
-data ElbDataSource s = ElbDataSource {
+data ElbData s = ElbData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The unique name of the load balancer. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElbDataSource s) where
-    toHCL ElbDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ElbData s) where
+    toHCL ElbData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (ElbDataSource s) s Text where
+instance HasName (ElbData s) s Text where
     name =
-        lens (_name :: ElbDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ElbDataSource s)
+        lens (_name :: ElbData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ElbData s)
 
-elbDataSource :: TF.DataSource TF.AWS (ElbDataSource s)
-elbDataSource =
-    TF.newDataSource "aws_elb" $
-        ElbDataSource {
+elbData :: TF.Data TF.AWS (ElbData s)
+elbData =
+    TF.newData "aws_elb" $
+        ElbData {
               _name = TF.Nil
             }
 
-{- | The @aws_elb_hosted_zone_id@ AWS datasource.
+{- | The @aws_elb_hosted_zone_id@ AWS data.
 
 Use this data source to get the HostedZoneId of the AWS Elastic Load
 Balancing HostedZoneId in a given region for the purpose of using in an AWS
 Route53 Alias.
 -}
-data ElbHostedZoneIdDataSource s = ElbHostedZoneIdDataSource {
+data ElbHostedZoneIdData s = ElbHostedZoneIdData {
       _region :: !(TF.Attribute s TF.Region)
     {- ^ (Optional) Name of the region whose AWS ELB HostedZoneId is desired. Defaults to the region from the AWS provider configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElbHostedZoneIdDataSource s) where
-    toHCL ElbHostedZoneIdDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ElbHostedZoneIdData s) where
+    toHCL ElbHostedZoneIdData{..} = TF.block $ catMaybes
         [ TF.attribute "region" _region
         ]
 
-instance HasRegion (ElbHostedZoneIdDataSource s) s TF.Region where
+instance HasRegion (ElbHostedZoneIdData s) s TF.Region where
     region =
-        lens (_region :: ElbHostedZoneIdDataSource s -> TF.Attribute s TF.Region)
-            (\s a -> s { _region = a } :: ElbHostedZoneIdDataSource s)
+        lens (_region :: ElbHostedZoneIdData s -> TF.Attribute s TF.Region)
+            (\s a -> s { _region = a } :: ElbHostedZoneIdData s)
 
-instance HasComputedId (ElbHostedZoneIdDataSource s) Text
+instance HasComputedId (ElbHostedZoneIdData s) Text
 
-elbHostedZoneIdDataSource :: TF.DataSource TF.AWS (ElbHostedZoneIdDataSource s)
-elbHostedZoneIdDataSource =
-    TF.newDataSource "aws_elb_hosted_zone_id" $
-        ElbHostedZoneIdDataSource {
+elbHostedZoneIdData :: TF.Data TF.AWS (ElbHostedZoneIdData s)
+elbHostedZoneIdData =
+    TF.newData "aws_elb_hosted_zone_id" $
+        ElbHostedZoneIdData {
               _region = TF.Nil
             }
 
-{- | The @aws_elb_service_account@ AWS datasource.
+{- | The @aws_elb_service_account@ AWS data.
 
 Use this data source to get the Account ID of the
 <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html#attach-bucket-policy>
 in a given region for the purpose of whitelisting in S3 bucket policy.
 -}
-data ElbServiceAccountDataSource s = ElbServiceAccountDataSource {
+data ElbServiceAccountData s = ElbServiceAccountData {
       _region :: !(TF.Attribute s TF.Region)
     {- ^ (Optional) Name of the region whose AWS ELB account ID is desired. Defaults to the region from the AWS provider configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ElbServiceAccountDataSource s) where
-    toHCL ElbServiceAccountDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ElbServiceAccountData s) where
+    toHCL ElbServiceAccountData{..} = TF.block $ catMaybes
         [ TF.attribute "region" _region
         ]
 
-instance HasRegion (ElbServiceAccountDataSource s) s TF.Region where
+instance HasRegion (ElbServiceAccountData s) s TF.Region where
     region =
-        lens (_region :: ElbServiceAccountDataSource s -> TF.Attribute s TF.Region)
-            (\s a -> s { _region = a } :: ElbServiceAccountDataSource s)
+        lens (_region :: ElbServiceAccountData s -> TF.Attribute s TF.Region)
+            (\s a -> s { _region = a } :: ElbServiceAccountData s)
 
-instance HasComputedArn (ElbServiceAccountDataSource s) Text
+instance HasComputedArn (ElbServiceAccountData s) Text
 
-instance HasComputedId (ElbServiceAccountDataSource s) Text
+instance HasComputedId (ElbServiceAccountData s) Text
 
-elbServiceAccountDataSource :: TF.DataSource TF.AWS (ElbServiceAccountDataSource s)
-elbServiceAccountDataSource =
-    TF.newDataSource "aws_elb_service_account" $
-        ElbServiceAccountDataSource {
+elbServiceAccountData :: TF.Data TF.AWS (ElbServiceAccountData s)
+elbServiceAccountData =
+    TF.newData "aws_elb_service_account" $
+        ElbServiceAccountData {
               _region = TF.Nil
             }
 
-{- | The @aws_iam_account_alias@ AWS datasource.
+{- | The @aws_iam_account_alias@ AWS data.
 
 The IAM Account Alias data source allows access to the account alias for the
 effective account in which Terraform is working.
 -}
-data IamAccountAliasDataSource s = IamAccountAliasDataSource {
+data IamAccountAliasData s = IamAccountAliasData {
       _account_alias :: !(TF.Attribute s Text)
     {- ^ - The alias associated with the AWS account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamAccountAliasDataSource s) where
-    toHCL IamAccountAliasDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IamAccountAliasData s) where
+    toHCL IamAccountAliasData{..} = TF.block $ catMaybes
         [ TF.attribute "account_alias" _account_alias
         ]
 
-instance HasAccountAlias (IamAccountAliasDataSource s) s Text where
+instance HasAccountAlias (IamAccountAliasData s) s Text where
     accountAlias =
-        lens (_account_alias :: IamAccountAliasDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _account_alias = a } :: IamAccountAliasDataSource s)
+        lens (_account_alias :: IamAccountAliasData s -> TF.Attribute s Text)
+            (\s a -> s { _account_alias = a } :: IamAccountAliasData s)
 
-iamAccountAliasDataSource :: TF.DataSource TF.AWS (IamAccountAliasDataSource s)
-iamAccountAliasDataSource =
-    TF.newDataSource "aws_iam_account_alias" $
-        IamAccountAliasDataSource {
+iamAccountAliasData :: TF.Data TF.AWS (IamAccountAliasData s)
+iamAccountAliasData =
+    TF.newData "aws_iam_account_alias" $
+        IamAccountAliasData {
               _account_alias = TF.Nil
             }
 
-{- | The @aws_iam_group@ AWS datasource.
+{- | The @aws_iam_group@ AWS data.
 
 This data source can be used to fetch information about a specific IAM
 group. By using this data source, you can reference IAM group properties
 without having to hard code ARNs as input.
 -}
-data IamGroupDataSource s = IamGroupDataSource {
+data IamGroupData s = IamGroupData {
       _group_name :: !(TF.Attribute s Text)
     {- ^ (Required) The friendly IAM group name to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamGroupDataSource s) where
-    toHCL IamGroupDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IamGroupData s) where
+    toHCL IamGroupData{..} = TF.block $ catMaybes
         [ TF.attribute "group_name" _group_name
         ]
 
-instance HasGroupName (IamGroupDataSource s) s Text where
+instance HasGroupName (IamGroupData s) s Text where
     groupName =
-        lens (_group_name :: IamGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _group_name = a } :: IamGroupDataSource s)
+        lens (_group_name :: IamGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _group_name = a } :: IamGroupData s)
 
-instance HasComputedArn (IamGroupDataSource s) Text
+instance HasComputedArn (IamGroupData s) Text
 
-instance HasComputedGroupId (IamGroupDataSource s) Text
+instance HasComputedGroupId (IamGroupData s) Text
 
-instance HasComputedPath (IamGroupDataSource s) Text
+instance HasComputedPath (IamGroupData s) Text
 
-iamGroupDataSource :: TF.DataSource TF.AWS (IamGroupDataSource s)
-iamGroupDataSource =
-    TF.newDataSource "aws_iam_group" $
-        IamGroupDataSource {
+iamGroupData :: TF.Data TF.AWS (IamGroupData s)
+iamGroupData =
+    TF.newData "aws_iam_group" $
+        IamGroupData {
               _group_name = TF.Nil
             }
 
-{- | The @aws_iam_instance_profile@ AWS datasource.
+{- | The @aws_iam_instance_profile@ AWS data.
 
 This data source can be used to fetch information about a specific IAM
 instance profile. By using this data source, you can reference IAM instance
 profile properties without having to hard code ARNs as input.
 -}
-data IamInstanceProfileDataSource s = IamInstanceProfileDataSource {
+data IamInstanceProfileData s = IamInstanceProfileData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The friendly IAM instance profile name to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamInstanceProfileDataSource s) where
-    toHCL IamInstanceProfileDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IamInstanceProfileData s) where
+    toHCL IamInstanceProfileData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (IamInstanceProfileDataSource s) s Text where
+instance HasName (IamInstanceProfileData s) s Text where
     name =
-        lens (_name :: IamInstanceProfileDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: IamInstanceProfileDataSource s)
+        lens (_name :: IamInstanceProfileData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: IamInstanceProfileData s)
 
-instance HasComputedArn (IamInstanceProfileDataSource s) Text
+instance HasComputedArn (IamInstanceProfileData s) Text
 
-instance HasComputedCreateDate (IamInstanceProfileDataSource s) Text
+instance HasComputedCreateDate (IamInstanceProfileData s) Text
 
-instance HasComputedPath (IamInstanceProfileDataSource s) Text
+instance HasComputedPath (IamInstanceProfileData s) Text
 
-instance HasComputedRoleId (IamInstanceProfileDataSource s) Text
+instance HasComputedRoleId (IamInstanceProfileData s) Text
 
-iamInstanceProfileDataSource :: TF.DataSource TF.AWS (IamInstanceProfileDataSource s)
-iamInstanceProfileDataSource =
-    TF.newDataSource "aws_iam_instance_profile" $
-        IamInstanceProfileDataSource {
+iamInstanceProfileData :: TF.Data TF.AWS (IamInstanceProfileData s)
+iamInstanceProfileData =
+    TF.newData "aws_iam_instance_profile" $
+        IamInstanceProfileData {
               _name = TF.Nil
             }
 
-{- | The @aws_iam_policy@ AWS datasource.
+{- | The @aws_iam_policy@ AWS data.
 
 This data source can be used to fetch information about a specific IAM
 policy.
 -}
-data IamPolicyDataSource s = IamPolicyDataSource {
+data IamPolicyData s = IamPolicyData {
       _arn :: !(TF.Attribute s Text)
     {- ^ (Required) ARN of the IAM policy. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamPolicyDataSource s) where
-    toHCL IamPolicyDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IamPolicyData s) where
+    toHCL IamPolicyData{..} = TF.block $ catMaybes
         [ TF.attribute "arn" _arn
         ]
 
-instance HasArn (IamPolicyDataSource s) s Text where
+instance HasArn (IamPolicyData s) s Text where
     arn =
-        lens (_arn :: IamPolicyDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _arn = a } :: IamPolicyDataSource s)
+        lens (_arn :: IamPolicyData s -> TF.Attribute s Text)
+            (\s a -> s { _arn = a } :: IamPolicyData s)
 
-instance HasComputedArn (IamPolicyDataSource s) Text
+instance HasComputedArn (IamPolicyData s) Text
 
-instance HasComputedDescription (IamPolicyDataSource s) Text
+instance HasComputedDescription (IamPolicyData s) Text
 
-instance HasComputedName (IamPolicyDataSource s) Text
+instance HasComputedName (IamPolicyData s) Text
 
-instance HasComputedPath (IamPolicyDataSource s) Text
+instance HasComputedPath (IamPolicyData s) Text
 
-instance HasComputedPolicy (IamPolicyDataSource s) Text
+instance HasComputedPolicy (IamPolicyData s) Text
 
-iamPolicyDataSource :: TF.DataSource TF.AWS (IamPolicyDataSource s)
-iamPolicyDataSource =
-    TF.newDataSource "aws_iam_policy" $
-        IamPolicyDataSource {
+iamPolicyData :: TF.Data TF.AWS (IamPolicyData s)
+iamPolicyData =
+    TF.newData "aws_iam_policy" $
+        IamPolicyData {
               _arn = TF.Nil
             }
 
-{- | The @aws_iam_policy_document@ AWS datasource.
+{- | The @aws_iam_policy_document@ AWS data.
 
 Generates an IAM policy document in JSON format. This is a data source which
 can be used to construct a JSON representation of an IAM policy document,
 for use with resources which expect policy documents, such as the
 @aws_iam_policy@ resource.
 -}
-data IamPolicyDocumentDataSource s = IamPolicyDocumentDataSource {
+data IamPolicyDocumentData s = IamPolicyDocumentData {
       _policy_id :: !(TF.Attribute s Text)
     {- ^ (Optional) - An ID for the policy document. -}
     , _statement :: !(TF.Attribute s Text)
     {- ^ (Required) - A nested configuration block (described below) configuring one statement to be included in the policy document. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamPolicyDocumentDataSource s) where
-    toHCL IamPolicyDocumentDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IamPolicyDocumentData s) where
+    toHCL IamPolicyDocumentData{..} = TF.block $ catMaybes
         [ TF.attribute "policy_id" _policy_id
         , TF.attribute "statement" _statement
         ]
 
-instance HasPolicyId (IamPolicyDocumentDataSource s) s Text where
+instance HasPolicyId (IamPolicyDocumentData s) s Text where
     policyId =
-        lens (_policy_id :: IamPolicyDocumentDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _policy_id = a } :: IamPolicyDocumentDataSource s)
+        lens (_policy_id :: IamPolicyDocumentData s -> TF.Attribute s Text)
+            (\s a -> s { _policy_id = a } :: IamPolicyDocumentData s)
 
-instance HasStatement (IamPolicyDocumentDataSource s) s Text where
+instance HasStatement (IamPolicyDocumentData s) s Text where
     statement =
-        lens (_statement :: IamPolicyDocumentDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _statement = a } :: IamPolicyDocumentDataSource s)
+        lens (_statement :: IamPolicyDocumentData s -> TF.Attribute s Text)
+            (\s a -> s { _statement = a } :: IamPolicyDocumentData s)
 
-iamPolicyDocumentDataSource :: TF.DataSource TF.AWS (IamPolicyDocumentDataSource s)
-iamPolicyDocumentDataSource =
-    TF.newDataSource "aws_iam_policy_document" $
-        IamPolicyDocumentDataSource {
+iamPolicyDocumentData :: TF.Data TF.AWS (IamPolicyDocumentData s)
+iamPolicyDocumentData =
+    TF.newData "aws_iam_policy_document" $
+        IamPolicyDocumentData {
               _policy_id = TF.Nil
             , _statement = TF.Nil
             }
 
-{- | The @aws_iam_role@ AWS datasource.
+{- | The @aws_iam_role@ AWS data.
 
 This data source can be used to fetch information about a specific IAM role.
 By using this data source, you can reference IAM role properties without
 having to hard code ARNs as input.
 -}
-data IamRoleDataSource s = IamRoleDataSource {
+data IamRoleData s = IamRoleData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The friendly IAM role name to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamRoleDataSource s) where
-    toHCL IamRoleDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IamRoleData s) where
+    toHCL IamRoleData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (IamRoleDataSource s) s Text where
+instance HasName (IamRoleData s) s Text where
     name =
-        lens (_name :: IamRoleDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: IamRoleDataSource s)
+        lens (_name :: IamRoleData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: IamRoleData s)
 
-instance HasComputedArn (IamRoleDataSource s) Text
+instance HasComputedArn (IamRoleData s) Text
 
-instance HasComputedAssumeRolePolicy (IamRoleDataSource s) Text
+instance HasComputedAssumeRolePolicy (IamRoleData s) Text
 
-instance HasComputedId (IamRoleDataSource s) Text
+instance HasComputedId (IamRoleData s) Text
 
-instance HasComputedPath (IamRoleDataSource s) Text
+instance HasComputedPath (IamRoleData s) Text
 
-instance HasComputedUniqueId (IamRoleDataSource s) Text
+instance HasComputedUniqueId (IamRoleData s) Text
 
-iamRoleDataSource :: TF.DataSource TF.AWS (IamRoleDataSource s)
-iamRoleDataSource =
-    TF.newDataSource "aws_iam_role" $
-        IamRoleDataSource {
+iamRoleData :: TF.Data TF.AWS (IamRoleData s)
+iamRoleData =
+    TF.newData "aws_iam_role" $
+        IamRoleData {
               _name = TF.Nil
             }
 
-{- | The @aws_iam_server_certificate@ AWS datasource.
+{- | The @aws_iam_server_certificate@ AWS data.
 
 Use this data source to lookup information about IAM Server Certificates.
 -}
-data IamServerCertificateDataSource s = IamServerCertificateDataSource {
+data IamServerCertificateData s = IamServerCertificateData {
       _latest      :: !(TF.Attribute s Text)
     {- ^ - sort results by expiration date. returns the certificate with expiration date in furthest in the future. -}
     , _name        :: !(TF.Attribute s Text)
@@ -2245,89 +2245,89 @@ data IamServerCertificateDataSource s = IamServerCertificateDataSource {
     {- ^ - prefix of cert to filter by -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamServerCertificateDataSource s) where
-    toHCL IamServerCertificateDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IamServerCertificateData s) where
+    toHCL IamServerCertificateData{..} = TF.block $ catMaybes
         [ TF.attribute "latest" _latest
         , TF.attribute "name" _name
         , TF.attribute "name_prefix" _name_prefix
         ]
 
-instance HasLatest (IamServerCertificateDataSource s) s Text where
+instance HasLatest (IamServerCertificateData s) s Text where
     latest =
-        lens (_latest :: IamServerCertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _latest = a } :: IamServerCertificateDataSource s)
+        lens (_latest :: IamServerCertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _latest = a } :: IamServerCertificateData s)
 
-instance HasName (IamServerCertificateDataSource s) s Text where
+instance HasName (IamServerCertificateData s) s Text where
     name =
-        lens (_name :: IamServerCertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: IamServerCertificateDataSource s)
+        lens (_name :: IamServerCertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: IamServerCertificateData s)
 
-instance HasNamePrefix (IamServerCertificateDataSource s) s Text where
+instance HasNamePrefix (IamServerCertificateData s) s Text where
     namePrefix =
-        lens (_name_prefix :: IamServerCertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name_prefix = a } :: IamServerCertificateDataSource s)
+        lens (_name_prefix :: IamServerCertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _name_prefix = a } :: IamServerCertificateData s)
 
-instance HasComputedArn (IamServerCertificateDataSource s) Text
+instance HasComputedArn (IamServerCertificateData s) Text
 
-instance HasComputedCertificateBody (IamServerCertificateDataSource s) Text
+instance HasComputedCertificateBody (IamServerCertificateData s) Text
 
-instance HasComputedCertificateChain (IamServerCertificateDataSource s) Text
+instance HasComputedCertificateChain (IamServerCertificateData s) Text
 
-instance HasComputedExpirationDate (IamServerCertificateDataSource s) Text
+instance HasComputedExpirationDate (IamServerCertificateData s) Text
 
-instance HasComputedPath (IamServerCertificateDataSource s) Text
+instance HasComputedPath (IamServerCertificateData s) Text
 
-instance HasComputedUploadDate (IamServerCertificateDataSource s) Text
+instance HasComputedUploadDate (IamServerCertificateData s) Text
 
-iamServerCertificateDataSource :: TF.DataSource TF.AWS (IamServerCertificateDataSource s)
-iamServerCertificateDataSource =
-    TF.newDataSource "aws_iam_server_certificate" $
-        IamServerCertificateDataSource {
+iamServerCertificateData :: TF.Data TF.AWS (IamServerCertificateData s)
+iamServerCertificateData =
+    TF.newData "aws_iam_server_certificate" $
+        IamServerCertificateData {
               _latest = TF.Nil
             , _name = TF.Nil
             , _name_prefix = TF.Nil
             }
 
-{- | The @aws_iam_user@ AWS datasource.
+{- | The @aws_iam_user@ AWS data.
 
 This data source can be used to fetch information about a specific IAM user.
 By using this data source, you can reference IAM user properties without
 having to hard code ARNs or unique IDs as input.
 -}
-data IamUserDataSource s = IamUserDataSource {
+data IamUserData s = IamUserData {
       _user_name :: !(TF.Attribute s Text)
     {- ^ (Required) The friendly IAM user name to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IamUserDataSource s) where
-    toHCL IamUserDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IamUserData s) where
+    toHCL IamUserData{..} = TF.block $ catMaybes
         [ TF.attribute "user_name" _user_name
         ]
 
-instance HasUserName (IamUserDataSource s) s Text where
+instance HasUserName (IamUserData s) s Text where
     userName =
-        lens (_user_name :: IamUserDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _user_name = a } :: IamUserDataSource s)
+        lens (_user_name :: IamUserData s -> TF.Attribute s Text)
+            (\s a -> s { _user_name = a } :: IamUserData s)
 
-instance HasComputedArn (IamUserDataSource s) Text
+instance HasComputedArn (IamUserData s) Text
 
-instance HasComputedPath (IamUserDataSource s) Text
+instance HasComputedPath (IamUserData s) Text
 
-instance HasComputedUserId (IamUserDataSource s) Text
+instance HasComputedUserId (IamUserData s) Text
 
-iamUserDataSource :: TF.DataSource TF.AWS (IamUserDataSource s)
-iamUserDataSource =
-    TF.newDataSource "aws_iam_user" $
-        IamUserDataSource {
+iamUserData :: TF.Data TF.AWS (IamUserData s)
+iamUserData =
+    TF.newData "aws_iam_user" $
+        IamUserData {
               _user_name = TF.Nil
             }
 
-{- | The @aws_instance@ AWS datasource.
+{- | The @aws_instance@ AWS data.
 
 Use this data source to get the ID of an Amazon EC2 Instance for use in
 other resources.
 -}
-data InstanceDataSource s = InstanceDataSource {
+data InstanceData s = InstanceData {
       _filter        :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
     , _instance_id   :: !(TF.Attribute s Text)
@@ -2336,86 +2336,86 @@ data InstanceDataSource s = InstanceDataSource {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstanceDataSource s) where
-    toHCL InstanceDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (InstanceData s) where
+    toHCL InstanceData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "instance_id" _instance_id
         , TF.attribute "instance_tags" _instance_tags
         ]
 
-instance HasFilter (InstanceDataSource s) s Text where
+instance HasFilter (InstanceData s) s Text where
     filter =
-        lens (_filter :: InstanceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: InstanceDataSource s)
+        lens (_filter :: InstanceData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: InstanceData s)
 
-instance HasInstanceId (InstanceDataSource s) s Text where
+instance HasInstanceId (InstanceData s) s Text where
     instanceId =
-        lens (_instance_id :: InstanceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _instance_id = a } :: InstanceDataSource s)
+        lens (_instance_id :: InstanceData s -> TF.Attribute s Text)
+            (\s a -> s { _instance_id = a } :: InstanceData s)
 
-instance HasInstanceTags (InstanceDataSource s) s Text where
+instance HasInstanceTags (InstanceData s) s Text where
     instanceTags =
-        lens (_instance_tags :: InstanceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _instance_tags = a } :: InstanceDataSource s)
+        lens (_instance_tags :: InstanceData s -> TF.Attribute s Text)
+            (\s a -> s { _instance_tags = a } :: InstanceData s)
 
-instance HasComputedAssociatePublicIpAddress (InstanceDataSource s) Text
+instance HasComputedAssociatePublicIpAddress (InstanceData s) Text
 
-instance HasComputedAvailabilityZone (InstanceDataSource s) TF.Zone
+instance HasComputedAvailabilityZone (InstanceData s) TF.Zone
 
-instance HasComputedEbsBlockDevice (InstanceDataSource s) Text
+instance HasComputedEbsBlockDevice (InstanceData s) Text
 
-instance HasComputedEbsOptimized (InstanceDataSource s) Text
+instance HasComputedEbsOptimized (InstanceData s) Text
 
-instance HasComputedEphemeralBlockDevice (InstanceDataSource s) Text
+instance HasComputedEphemeralBlockDevice (InstanceData s) Text
 
-instance HasComputedIamInstanceProfile (InstanceDataSource s) Text
+instance HasComputedIamInstanceProfile (InstanceData s) Text
 
-instance HasComputedInstanceType (InstanceDataSource s) Text
+instance HasComputedInstanceType (InstanceData s) Text
 
-instance HasComputedIpv6Addresses (InstanceDataSource s) Text
+instance HasComputedIpv6Addresses (InstanceData s) Text
 
-instance HasComputedKeyName (InstanceDataSource s) Text
+instance HasComputedKeyName (InstanceData s) Text
 
-instance HasComputedMonitoring (InstanceDataSource s) Text
+instance HasComputedMonitoring (InstanceData s) Text
 
-instance HasComputedNetworkInterfaceId (InstanceDataSource s) Text
+instance HasComputedNetworkInterfaceId (InstanceData s) Text
 
-instance HasComputedPlacementGroup (InstanceDataSource s) Text
+instance HasComputedPlacementGroup (InstanceData s) Text
 
-instance HasComputedPrivateDns (InstanceDataSource s) Text
+instance HasComputedPrivateDns (InstanceData s) Text
 
-instance HasComputedPrivateIp (InstanceDataSource s) Text
+instance HasComputedPrivateIp (InstanceData s) Text
 
-instance HasComputedPublicDns (InstanceDataSource s) Text
+instance HasComputedPublicDns (InstanceData s) Text
 
-instance HasComputedPublicIp (InstanceDataSource s) Text
+instance HasComputedPublicIp (InstanceData s) Text
 
-instance HasComputedRootBlockDevice (InstanceDataSource s) Text
+instance HasComputedRootBlockDevice (InstanceData s) Text
 
-instance HasComputedSecurityGroups (InstanceDataSource s) Text
+instance HasComputedSecurityGroups (InstanceData s) Text
 
-instance HasComputedSourceDestCheck (InstanceDataSource s) Text
+instance HasComputedSourceDestCheck (InstanceData s) Text
 
-instance HasComputedSubnetId (InstanceDataSource s) Text
+instance HasComputedSubnetId (InstanceData s) Text
 
-instance HasComputedTags (InstanceDataSource s) TF.Tags
+instance HasComputedTags (InstanceData s) TF.Tags
 
-instance HasComputedTenancy (InstanceDataSource s) Text
+instance HasComputedTenancy (InstanceData s) Text
 
-instance HasComputedUserData (InstanceDataSource s) Text
+instance HasComputedUserData (InstanceData s) Text
 
-instance HasComputedVpcSecurityGroupIds (InstanceDataSource s) Text
+instance HasComputedVpcSecurityGroupIds (InstanceData s) Text
 
-instanceDataSource :: TF.DataSource TF.AWS (InstanceDataSource s)
-instanceDataSource =
-    TF.newDataSource "aws_instance" $
-        InstanceDataSource {
+instanceData :: TF.Data TF.AWS (InstanceData s)
+instanceData =
+    TF.newData "aws_instance" $
+        InstanceData {
               _filter = TF.Nil
             , _instance_id = TF.Nil
             , _instance_tags = TF.Nil
             }
 
-{- | The @aws_instances@ AWS datasource.
+{- | The @aws_instances@ AWS data.
 
 Use this data source to get IDs or IPs of Amazon EC2 instances to be
 referenced elsewhere, e.g. to allow easier migration from another management
@@ -2430,48 +2430,48 @@ instances (e.g. managed via autoscaling group), as the output may change at
 any time and you'd need to re-run @apply@ every time an instance comes up or
 dies.
 -}
-data InstancesDataSource s = InstancesDataSource {
+data InstancesData s = InstancesData {
       _filter        :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
     , _instance_tags :: !(TF.Attribute s Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on desired instances. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InstancesDataSource s) where
-    toHCL InstancesDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (InstancesData s) where
+    toHCL InstancesData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "instance_tags" _instance_tags
         ]
 
-instance HasFilter (InstancesDataSource s) s Text where
+instance HasFilter (InstancesData s) s Text where
     filter =
-        lens (_filter :: InstancesDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: InstancesDataSource s)
+        lens (_filter :: InstancesData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: InstancesData s)
 
-instance HasInstanceTags (InstancesDataSource s) s Text where
+instance HasInstanceTags (InstancesData s) s Text where
     instanceTags =
-        lens (_instance_tags :: InstancesDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _instance_tags = a } :: InstancesDataSource s)
+        lens (_instance_tags :: InstancesData s -> TF.Attribute s Text)
+            (\s a -> s { _instance_tags = a } :: InstancesData s)
 
-instance HasComputedIds (InstancesDataSource s) Text
+instance HasComputedIds (InstancesData s) Text
 
-instance HasComputedPrivateIps (InstancesDataSource s) Text
+instance HasComputedPrivateIps (InstancesData s) Text
 
-instance HasComputedPublicIps (InstancesDataSource s) Text
+instance HasComputedPublicIps (InstancesData s) Text
 
-instancesDataSource :: TF.DataSource TF.AWS (InstancesDataSource s)
-instancesDataSource =
-    TF.newDataSource "aws_instances" $
-        InstancesDataSource {
+instancesData :: TF.Data TF.AWS (InstancesData s)
+instancesData =
+    TF.newData "aws_instances" $
+        InstancesData {
               _filter = TF.Nil
             , _instance_tags = TF.Nil
             }
 
-{- | The @aws_internet_gateway@ AWS datasource.
+{- | The @aws_internet_gateway@ AWS data.
 
 @aws_internet_gateway@ provides details about a specific Internet Gateway.
 -}
-data InternetGatewayDataSource s = InternetGatewayDataSource {
+data InternetGatewayData s = InternetGatewayData {
       _filter              :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _internet_gateway_id :: !(TF.Attribute s Text)
@@ -2480,172 +2480,172 @@ data InternetGatewayDataSource s = InternetGatewayDataSource {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Internet Gateway. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (InternetGatewayDataSource s) where
-    toHCL InternetGatewayDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (InternetGatewayData s) where
+    toHCL InternetGatewayData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "internet_gateway_id" _internet_gateway_id
         , TF.attribute "tags" _tags
         ]
 
-instance HasFilter (InternetGatewayDataSource s) s Text where
+instance HasFilter (InternetGatewayData s) s Text where
     filter =
-        lens (_filter :: InternetGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: InternetGatewayDataSource s)
+        lens (_filter :: InternetGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: InternetGatewayData s)
 
-instance HasInternetGatewayId (InternetGatewayDataSource s) s Text where
+instance HasInternetGatewayId (InternetGatewayData s) s Text where
     internetGatewayId =
-        lens (_internet_gateway_id :: InternetGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _internet_gateway_id = a } :: InternetGatewayDataSource s)
+        lens (_internet_gateway_id :: InternetGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _internet_gateway_id = a } :: InternetGatewayData s)
 
-instance HasTags (InternetGatewayDataSource s) s TF.Tags where
+instance HasTags (InternetGatewayData s) s TF.Tags where
     tags =
-        lens (_tags :: InternetGatewayDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: InternetGatewayDataSource s)
+        lens (_tags :: InternetGatewayData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: InternetGatewayData s)
 
-instance HasComputedState (InternetGatewayDataSource s) Text
+instance HasComputedState (InternetGatewayData s) Text
 
-instance HasComputedVpcId (InternetGatewayDataSource s) Text
+instance HasComputedVpcId (InternetGatewayData s) Text
 
-internetGatewayDataSource :: TF.DataSource TF.AWS (InternetGatewayDataSource s)
-internetGatewayDataSource =
-    TF.newDataSource "aws_internet_gateway" $
-        InternetGatewayDataSource {
+internetGatewayData :: TF.Data TF.AWS (InternetGatewayData s)
+internetGatewayData =
+    TF.newData "aws_internet_gateway" $
+        InternetGatewayData {
               _filter = TF.Nil
             , _internet_gateway_id = TF.Nil
             , _tags = TF.Nil
             }
 
-{- | The @aws_ip_ranges@ AWS datasource.
+{- | The @aws_ip_ranges@ AWS data.
 
 Use this data source to get the
 <http://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html> of various
 AWS products and services.
 -}
-data IpRangesDataSource s = IpRangesDataSource {
+data IpRangesData s = IpRangesData {
       _regions  :: !(TF.Attribute s Text)
     {- ^ (Optional) Filter IP ranges by regions (or include all regions, if omitted). Valid items are @global@ (for @cloudfront@ ) as well as all AWS regions (e.g. @eu-central-1@ ) -}
     , _services :: !(TF.Attribute s Text)
     {- ^ (Required) Filter IP ranges by services. Valid items are @amazon@ (for amazon.com), @cloudfront@ , @codebuild@ , @ec2@ , @route53@ , @route53_healthchecks@ and @S3@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpRangesDataSource s) where
-    toHCL IpRangesDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (IpRangesData s) where
+    toHCL IpRangesData{..} = TF.block $ catMaybes
         [ TF.attribute "regions" _regions
         , TF.attribute "services" _services
         ]
 
-instance HasRegions (IpRangesDataSource s) s Text where
+instance HasRegions (IpRangesData s) s Text where
     regions =
-        lens (_regions :: IpRangesDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _regions = a } :: IpRangesDataSource s)
+        lens (_regions :: IpRangesData s -> TF.Attribute s Text)
+            (\s a -> s { _regions = a } :: IpRangesData s)
 
-instance HasServices (IpRangesDataSource s) s Text where
+instance HasServices (IpRangesData s) s Text where
     services =
-        lens (_services :: IpRangesDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _services = a } :: IpRangesDataSource s)
+        lens (_services :: IpRangesData s -> TF.Attribute s Text)
+            (\s a -> s { _services = a } :: IpRangesData s)
 
-instance HasComputedCidrBlocks (IpRangesDataSource s) Text
+instance HasComputedCidrBlocks (IpRangesData s) Text
 
-instance HasComputedCreateDate (IpRangesDataSource s) Text
+instance HasComputedCreateDate (IpRangesData s) Text
 
-instance HasComputedSyncToken (IpRangesDataSource s) Text
+instance HasComputedSyncToken (IpRangesData s) Text
 
-ipRangesDataSource :: TF.DataSource TF.AWS (IpRangesDataSource s)
-ipRangesDataSource =
-    TF.newDataSource "aws_ip_ranges" $
-        IpRangesDataSource {
+ipRangesData :: TF.Data TF.AWS (IpRangesData s)
+ipRangesData =
+    TF.newData "aws_ip_ranges" $
+        IpRangesData {
               _regions = TF.Nil
             , _services = TF.Nil
             }
 
-{- | The @aws_kinesis_stream@ AWS datasource.
+{- | The @aws_kinesis_stream@ AWS data.
 
 Use this data source to get information about a Kinesis Stream for use in
 other resources. For more details, see the
 <https://aws.amazon.com/documentation/kinesis/> .
 -}
-data KinesisStreamDataSource s = KinesisStreamDataSource {
+data KinesisStreamData s = KinesisStreamData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the Kinesis Stream. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KinesisStreamDataSource s) where
-    toHCL KinesisStreamDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (KinesisStreamData s) where
+    toHCL KinesisStreamData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (KinesisStreamDataSource s) s Text where
+instance HasName (KinesisStreamData s) s Text where
     name =
-        lens (_name :: KinesisStreamDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: KinesisStreamDataSource s)
+        lens (_name :: KinesisStreamData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: KinesisStreamData s)
 
-instance HasComputedArn (KinesisStreamDataSource s) Text
+instance HasComputedArn (KinesisStreamData s) Text
 
-instance HasComputedClosedShards (KinesisStreamDataSource s) Text
+instance HasComputedClosedShards (KinesisStreamData s) Text
 
-instance HasComputedCreationTimestamp (KinesisStreamDataSource s) Text
+instance HasComputedCreationTimestamp (KinesisStreamData s) Text
 
-instance HasComputedName (KinesisStreamDataSource s) Text
+instance HasComputedName (KinesisStreamData s) Text
 
-instance HasComputedOpenShards (KinesisStreamDataSource s) Text
+instance HasComputedOpenShards (KinesisStreamData s) Text
 
-instance HasComputedRetentionPeriod (KinesisStreamDataSource s) Text
+instance HasComputedRetentionPeriod (KinesisStreamData s) Text
 
-instance HasComputedShardLevelMetrics (KinesisStreamDataSource s) Text
+instance HasComputedShardLevelMetrics (KinesisStreamData s) Text
 
-instance HasComputedStatus (KinesisStreamDataSource s) Text
+instance HasComputedStatus (KinesisStreamData s) Text
 
-instance HasComputedTags (KinesisStreamDataSource s) TF.Tags
+instance HasComputedTags (KinesisStreamData s) TF.Tags
 
-kinesisStreamDataSource :: TF.DataSource TF.AWS (KinesisStreamDataSource s)
-kinesisStreamDataSource =
-    TF.newDataSource "aws_kinesis_stream" $
-        KinesisStreamDataSource {
+kinesisStreamData :: TF.Data TF.AWS (KinesisStreamData s)
+kinesisStreamData =
+    TF.newData "aws_kinesis_stream" $
+        KinesisStreamData {
               _name = TF.Nil
             }
 
-{- | The @aws_kms_alias@ AWS datasource.
+{- | The @aws_kms_alias@ AWS data.
 
 Use this data source to get the ARN of a KMS key alias. By using this data
 source, you can reference key alias without having to hard code the ARN as
 input.
 -}
-data KmsAliasDataSource s = KmsAliasDataSource {
+data KmsAliasData s = KmsAliasData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The display name of the alias. The name must start with the word "alias" followed by a forward slash (alias/) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsAliasDataSource s) where
-    toHCL KmsAliasDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (KmsAliasData s) where
+    toHCL KmsAliasData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (KmsAliasDataSource s) s Text where
+instance HasName (KmsAliasData s) s Text where
     name =
-        lens (_name :: KmsAliasDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: KmsAliasDataSource s)
+        lens (_name :: KmsAliasData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: KmsAliasData s)
 
-instance HasComputedArn (KmsAliasDataSource s) Text
+instance HasComputedArn (KmsAliasData s) Text
 
-instance HasComputedTargetKeyArn (KmsAliasDataSource s) Text
+instance HasComputedTargetKeyArn (KmsAliasData s) Text
 
-instance HasComputedTargetKeyId (KmsAliasDataSource s) Text
+instance HasComputedTargetKeyId (KmsAliasData s) Text
 
-kmsAliasDataSource :: TF.DataSource TF.AWS (KmsAliasDataSource s)
-kmsAliasDataSource =
-    TF.newDataSource "aws_kms_alias" $
-        KmsAliasDataSource {
+kmsAliasData :: TF.Data TF.AWS (KmsAliasData s)
+kmsAliasData =
+    TF.newData "aws_kms_alias" $
+        KmsAliasData {
               _name = TF.Nil
             }
 
-{- | The @aws_kms_ciphertext@ AWS datasource.
+{- | The @aws_kms_ciphertext@ AWS data.
 
 The KMS ciphertext data source allows you to encrypt plaintext into
 ciphertext by using an AWS KMS customer master key. ~> Note: All arguments
 including the plaintext be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
-data KmsCiphertextDataSource s = KmsCiphertextDataSource {
+data KmsCiphertextData s = KmsCiphertextData {
       _context   :: !(TF.Attribute s Text)
     {- ^ (Optional) An optional mapping that makes up the encryption context. -}
     , _key_id    :: !(TF.Attribute s Text)
@@ -2654,40 +2654,40 @@ data KmsCiphertextDataSource s = KmsCiphertextDataSource {
     {- ^ (Required) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsCiphertextDataSource s) where
-    toHCL KmsCiphertextDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (KmsCiphertextData s) where
+    toHCL KmsCiphertextData{..} = TF.block $ catMaybes
         [ TF.attribute "context" _context
         , TF.attribute "key_id" _key_id
         , TF.attribute "plaintext" _plaintext
         ]
 
-instance HasContext (KmsCiphertextDataSource s) s Text where
+instance HasContext (KmsCiphertextData s) s Text where
     context =
-        lens (_context :: KmsCiphertextDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _context = a } :: KmsCiphertextDataSource s)
+        lens (_context :: KmsCiphertextData s -> TF.Attribute s Text)
+            (\s a -> s { _context = a } :: KmsCiphertextData s)
 
-instance HasKeyId (KmsCiphertextDataSource s) s Text where
+instance HasKeyId (KmsCiphertextData s) s Text where
     keyId =
-        lens (_key_id :: KmsCiphertextDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _key_id = a } :: KmsCiphertextDataSource s)
+        lens (_key_id :: KmsCiphertextData s -> TF.Attribute s Text)
+            (\s a -> s { _key_id = a } :: KmsCiphertextData s)
 
-instance HasPlaintext (KmsCiphertextDataSource s) s Text where
+instance HasPlaintext (KmsCiphertextData s) s Text where
     plaintext =
-        lens (_plaintext :: KmsCiphertextDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _plaintext = a } :: KmsCiphertextDataSource s)
+        lens (_plaintext :: KmsCiphertextData s -> TF.Attribute s Text)
+            (\s a -> s { _plaintext = a } :: KmsCiphertextData s)
 
-instance HasComputedCiphertextBlob (KmsCiphertextDataSource s) Text
+instance HasComputedCiphertextBlob (KmsCiphertextData s) Text
 
-kmsCiphertextDataSource :: TF.DataSource TF.AWS (KmsCiphertextDataSource s)
-kmsCiphertextDataSource =
-    TF.newDataSource "aws_kms_ciphertext" $
-        KmsCiphertextDataSource {
+kmsCiphertextData :: TF.Data TF.AWS (KmsCiphertextData s)
+kmsCiphertextData =
+    TF.newData "aws_kms_ciphertext" $
+        KmsCiphertextData {
               _context = TF.Nil
             , _key_id = TF.Nil
             , _plaintext = TF.Nil
             }
 
-{- | The @aws_kms_secret@ AWS datasource.
+{- | The @aws_kms_secret@ AWS data.
 
 The KMS secret data source allows you to use data encrypted with the AWS KMS
 service within your resource definitions. ~> NOTE : Using this data provider
@@ -2696,67 +2696,67 @@ does not take care of protecting that data in the logging output, plan
 output or state output. Please take care to secure your secret data outside
 of resource definitions.
 -}
-data KmsSecretDataSource s = KmsSecretDataSource {
+data KmsSecretData s = KmsSecretData {
       _secret :: !(TF.Attribute s Text)
     {- ^ (Required) One or more encrypted payload definitions from the KMS service.  See the Secret Definitions below. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KmsSecretDataSource s) where
-    toHCL KmsSecretDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (KmsSecretData s) where
+    toHCL KmsSecretData{..} = TF.block $ catMaybes
         [ TF.attribute "secret" _secret
         ]
 
-instance HasSecret (KmsSecretDataSource s) s Text where
+instance HasSecret (KmsSecretData s) s Text where
     secret =
-        lens (_secret :: KmsSecretDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _secret = a } :: KmsSecretDataSource s)
+        lens (_secret :: KmsSecretData s -> TF.Attribute s Text)
+            (\s a -> s { _secret = a } :: KmsSecretData s)
 
-kmsSecretDataSource :: TF.DataSource TF.AWS (KmsSecretDataSource s)
-kmsSecretDataSource =
-    TF.newDataSource "aws_kms_secret" $
-        KmsSecretDataSource {
+kmsSecretData :: TF.Data TF.AWS (KmsSecretData s)
+kmsSecretData =
+    TF.newData "aws_kms_secret" $
+        KmsSecretData {
               _secret = TF.Nil
             }
 
-{- | The @aws_lb@ AWS datasource.
+{- | The @aws_lb@ AWS data.
 
 ~> Note:  @aws_alb@ is known as @aws_lb@ . The functionality is identical.
 Provides information about a Load Balancer. This data source can prove
 useful when a module accepts an LB as an input variable and needs to, for
 example, determine the security groups associated with it, etc.
 -}
-data LbDataSource s = LbDataSource {
+data LbData s = LbData {
       _arn  :: !(TF.Attribute s Text)
     {- ^ (Optional) The full ARN of the load balancer. -}
     , _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The unique name of the load balancer. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbDataSource s) where
-    toHCL LbDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (LbData s) where
+    toHCL LbData{..} = TF.block $ catMaybes
         [ TF.attribute "arn" _arn
         , TF.attribute "name" _name
         ]
 
-instance HasArn (LbDataSource s) s Text where
+instance HasArn (LbData s) s Text where
     arn =
-        lens (_arn :: LbDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _arn = a } :: LbDataSource s)
+        lens (_arn :: LbData s -> TF.Attribute s Text)
+            (\s a -> s { _arn = a } :: LbData s)
 
-instance HasName (LbDataSource s) s Text where
+instance HasName (LbData s) s Text where
     name =
-        lens (_name :: LbDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: LbDataSource s)
+        lens (_name :: LbData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: LbData s)
 
-lbDataSource :: TF.DataSource TF.AWS (LbDataSource s)
-lbDataSource =
-    TF.newDataSource "aws_lb" $
-        LbDataSource {
+lbData :: TF.Data TF.AWS (LbData s)
+lbData =
+    TF.newData "aws_lb" $
+        LbData {
               _arn = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @aws_lb_listener@ AWS datasource.
+{- | The @aws_lb_listener@ AWS data.
 
 ~> Note:  @aws_alb_listener@ is known as @aws_lb_listener@ . The
 functionality is identical. Provides information about a Load Balancer
@@ -2764,7 +2764,7 @@ Listener. This data source can prove useful when a module accepts an LB
 Listener as an input variable and needs to know the LB it is attached to, or
 other information specific to the listener in question.
 -}
-data LbListenerDataSource s = LbListenerDataSource {
+data LbListenerData s = LbListenerData {
       _arn               :: !(TF.Attribute s Text)
     {- ^ (Optional) The arn of the listener. Required if @load_balancer_arn@ and @port@ is not set. -}
     , _load_balancer_arn :: !(TF.Attribute s Text)
@@ -2773,38 +2773,38 @@ data LbListenerDataSource s = LbListenerDataSource {
     {- ^ (Optional) The port of the listener. Required if @arn@ is not set. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbListenerDataSource s) where
-    toHCL LbListenerDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (LbListenerData s) where
+    toHCL LbListenerData{..} = TF.block $ catMaybes
         [ TF.attribute "arn" _arn
         , TF.attribute "load_balancer_arn" _load_balancer_arn
         , TF.attribute "port" _port
         ]
 
-instance HasArn (LbListenerDataSource s) s Text where
+instance HasArn (LbListenerData s) s Text where
     arn =
-        lens (_arn :: LbListenerDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _arn = a } :: LbListenerDataSource s)
+        lens (_arn :: LbListenerData s -> TF.Attribute s Text)
+            (\s a -> s { _arn = a } :: LbListenerData s)
 
-instance HasLoadBalancerArn (LbListenerDataSource s) s Text where
+instance HasLoadBalancerArn (LbListenerData s) s Text where
     loadBalancerArn =
-        lens (_load_balancer_arn :: LbListenerDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _load_balancer_arn = a } :: LbListenerDataSource s)
+        lens (_load_balancer_arn :: LbListenerData s -> TF.Attribute s Text)
+            (\s a -> s { _load_balancer_arn = a } :: LbListenerData s)
 
-instance HasPort (LbListenerDataSource s) s Text where
+instance HasPort (LbListenerData s) s Text where
     port =
-        lens (_port :: LbListenerDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _port = a } :: LbListenerDataSource s)
+        lens (_port :: LbListenerData s -> TF.Attribute s Text)
+            (\s a -> s { _port = a } :: LbListenerData s)
 
-lbListenerDataSource :: TF.DataSource TF.AWS (LbListenerDataSource s)
-lbListenerDataSource =
-    TF.newDataSource "aws_lb_listener" $
-        LbListenerDataSource {
+lbListenerData :: TF.Data TF.AWS (LbListenerData s)
+lbListenerData =
+    TF.newData "aws_lb_listener" $
+        LbListenerData {
               _arn = TF.Nil
             , _load_balancer_arn = TF.Nil
             , _port = TF.Nil
             }
 
-{- | The @aws_lb_target_group@ AWS datasource.
+{- | The @aws_lb_target_group@ AWS data.
 
 ~> Note:  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The
 functionality is identical. Provides information about a Load Balancer
@@ -2813,42 +2813,42 @@ Target Group as an input variable and needs to know its attributes. It can
 also be used to get the ARN of an LB Target Group for use in other
 resources, given LB Target Group name.
 -}
-data LbTargetGroupDataSource s = LbTargetGroupDataSource {
+data LbTargetGroupData s = LbTargetGroupData {
       _arn  :: !(TF.Attribute s Text)
     {- ^ (Optional) The full ARN of the target group. -}
     , _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The unique name of the target group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (LbTargetGroupDataSource s) where
-    toHCL LbTargetGroupDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (LbTargetGroupData s) where
+    toHCL LbTargetGroupData{..} = TF.block $ catMaybes
         [ TF.attribute "arn" _arn
         , TF.attribute "name" _name
         ]
 
-instance HasArn (LbTargetGroupDataSource s) s Text where
+instance HasArn (LbTargetGroupData s) s Text where
     arn =
-        lens (_arn :: LbTargetGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _arn = a } :: LbTargetGroupDataSource s)
+        lens (_arn :: LbTargetGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _arn = a } :: LbTargetGroupData s)
 
-instance HasName (LbTargetGroupDataSource s) s Text where
+instance HasName (LbTargetGroupData s) s Text where
     name =
-        lens (_name :: LbTargetGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: LbTargetGroupDataSource s)
+        lens (_name :: LbTargetGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: LbTargetGroupData s)
 
-lbTargetGroupDataSource :: TF.DataSource TF.AWS (LbTargetGroupDataSource s)
-lbTargetGroupDataSource =
-    TF.newDataSource "aws_lb_target_group" $
-        LbTargetGroupDataSource {
+lbTargetGroupData :: TF.Data TF.AWS (LbTargetGroupData s)
+lbTargetGroupData =
+    TF.newData "aws_lb_target_group" $
+        LbTargetGroupData {
               _arn = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @aws_nat_gateway@ AWS datasource.
+{- | The @aws_nat_gateway@ AWS data.
 
 Provides details about a specific Nat Gateway.
 -}
-data NatGatewayDataSource s = NatGatewayDataSource {
+data NatGatewayData s = NatGatewayData {
       _filter    :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. More complex filters can be expressed using one or more @filter@ sub-blocks, which take the following arguments: -}
     , _id        :: !(TF.Attribute s Text)
@@ -2865,8 +2865,8 @@ data NatGatewayDataSource s = NatGatewayDataSource {
     {- ^ (Optional) The id of the VPC that the Nat Gateway resides in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NatGatewayDataSource s) where
-    toHCL NatGatewayDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (NatGatewayData s) where
+    toHCL NatGatewayData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "id" _id
         , TF.attribute "name" _name
@@ -2876,53 +2876,53 @@ instance TF.ToHCL (NatGatewayDataSource s) where
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasFilter (NatGatewayDataSource s) s Text where
+instance HasFilter (NatGatewayData s) s Text where
     filter =
-        lens (_filter :: NatGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: NatGatewayDataSource s)
+        lens (_filter :: NatGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: NatGatewayData s)
 
-instance HasId (NatGatewayDataSource s) s Text where
+instance HasId (NatGatewayData s) s Text where
     id =
-        lens (_id :: NatGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: NatGatewayDataSource s)
+        lens (_id :: NatGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: NatGatewayData s)
 
-instance HasName (NatGatewayDataSource s) s Text where
+instance HasName (NatGatewayData s) s Text where
     name =
-        lens (_name :: NatGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NatGatewayDataSource s)
+        lens (_name :: NatGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: NatGatewayData s)
 
-instance HasState (NatGatewayDataSource s) s Text where
+instance HasState (NatGatewayData s) s Text where
     state =
-        lens (_state :: NatGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: NatGatewayDataSource s)
+        lens (_state :: NatGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _state = a } :: NatGatewayData s)
 
-instance HasSubnetId (NatGatewayDataSource s) s Text where
+instance HasSubnetId (NatGatewayData s) s Text where
     subnetId =
-        lens (_subnet_id :: NatGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _subnet_id = a } :: NatGatewayDataSource s)
+        lens (_subnet_id :: NatGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _subnet_id = a } :: NatGatewayData s)
 
-instance HasValues (NatGatewayDataSource s) s Text where
+instance HasValues (NatGatewayData s) s Text where
     values =
-        lens (_values :: NatGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _values = a } :: NatGatewayDataSource s)
+        lens (_values :: NatGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _values = a } :: NatGatewayData s)
 
-instance HasVpcId (NatGatewayDataSource s) s Text where
+instance HasVpcId (NatGatewayData s) s Text where
     vpcId =
-        lens (_vpc_id :: NatGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: NatGatewayDataSource s)
+        lens (_vpc_id :: NatGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _vpc_id = a } :: NatGatewayData s)
 
-instance HasComputedAllocationId (NatGatewayDataSource s) Text
+instance HasComputedAllocationId (NatGatewayData s) Text
 
-instance HasComputedNetworkInterfaceId (NatGatewayDataSource s) Text
+instance HasComputedNetworkInterfaceId (NatGatewayData s) Text
 
-instance HasComputedPrivateIp (NatGatewayDataSource s) Text
+instance HasComputedPrivateIp (NatGatewayData s) Text
 
-instance HasComputedPublicIp (NatGatewayDataSource s) Text
+instance HasComputedPublicIp (NatGatewayData s) Text
 
-natGatewayDataSource :: TF.DataSource TF.AWS (NatGatewayDataSource s)
-natGatewayDataSource =
-    TF.newDataSource "aws_nat_gateway" $
-        NatGatewayDataSource {
+natGatewayData :: TF.Data TF.AWS (NatGatewayData s)
+natGatewayData =
+    TF.newData "aws_nat_gateway" $
+        NatGatewayData {
               _filter = TF.Nil
             , _id = TF.Nil
             , _name = TF.Nil
@@ -2932,73 +2932,73 @@ natGatewayDataSource =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_network_interface@ AWS datasource.
+{- | The @aws_network_interface@ AWS data.
 
 Use this data source to get information about a Network Interface.
 -}
-data NetworkInterfaceDataSource s = NetworkInterfaceDataSource {
+data NetworkInterfaceData s = NetworkInterfaceData {
       _filter :: !(TF.Attribute s Text)
     {- ^ – (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-network-interfaces.html> in the AWS CLI reference. -}
     , _id     :: !(TF.Attribute s Text)
     {- ^ – (Optional) The identifier for the network interface. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkInterfaceDataSource s) where
-    toHCL NetworkInterfaceDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (NetworkInterfaceData s) where
+    toHCL NetworkInterfaceData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "id" _id
         ]
 
-instance HasFilter (NetworkInterfaceDataSource s) s Text where
+instance HasFilter (NetworkInterfaceData s) s Text where
     filter =
-        lens (_filter :: NetworkInterfaceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: NetworkInterfaceDataSource s)
+        lens (_filter :: NetworkInterfaceData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: NetworkInterfaceData s)
 
-instance HasId (NetworkInterfaceDataSource s) s Text where
+instance HasId (NetworkInterfaceData s) s Text where
     id =
-        lens (_id :: NetworkInterfaceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: NetworkInterfaceDataSource s)
+        lens (_id :: NetworkInterfaceData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: NetworkInterfaceData s)
 
-instance HasComputedAssociation (NetworkInterfaceDataSource s) Text
+instance HasComputedAssociation (NetworkInterfaceData s) Text
 
-instance HasComputedAvailabilityZone (NetworkInterfaceDataSource s) TF.Zone
+instance HasComputedAvailabilityZone (NetworkInterfaceData s) TF.Zone
 
-instance HasComputedInterfaceType (NetworkInterfaceDataSource s) Text
+instance HasComputedInterfaceType (NetworkInterfaceData s) Text
 
-instance HasComputedIpv6Addresses (NetworkInterfaceDataSource s) Text
+instance HasComputedIpv6Addresses (NetworkInterfaceData s) Text
 
-instance HasComputedMacAddress (NetworkInterfaceDataSource s) Text
+instance HasComputedMacAddress (NetworkInterfaceData s) Text
 
-instance HasComputedOwnerId (NetworkInterfaceDataSource s) Text
+instance HasComputedOwnerId (NetworkInterfaceData s) Text
 
-instance HasComputedRequesterId (NetworkInterfaceDataSource s) Text
+instance HasComputedRequesterId (NetworkInterfaceData s) Text
 
-networkInterfaceDataSource :: TF.DataSource TF.AWS (NetworkInterfaceDataSource s)
-networkInterfaceDataSource =
-    TF.newDataSource "aws_network_interface" $
-        NetworkInterfaceDataSource {
+networkInterfaceData :: TF.Data TF.AWS (NetworkInterfaceData s)
+networkInterfaceData =
+    TF.newData "aws_network_interface" $
+        NetworkInterfaceData {
               _filter = TF.Nil
             , _id = TF.Nil
             }
 
-{- | The @aws_partition@ AWS datasource.
+{- | The @aws_partition@ AWS data.
 
 Use this data source to lookup current AWS partition in which Terraform is
 working
 -}
-data PartitionDataSource s = PartitionDataSource {
+data PartitionData s = PartitionData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PartitionDataSource s) where
+instance TF.ToHCL (PartitionData s) where
     toHCL _ = TF.block []
 
-partitionDataSource :: TF.DataSource TF.AWS (PartitionDataSource s)
-partitionDataSource =
-    TF.newDataSource "aws_partition" $
-        PartitionDataSource {
+partitionData :: TF.Data TF.AWS (PartitionData s)
+partitionData =
+    TF.newData "aws_partition" $
+        PartitionData {
             }
 
-{- | The @aws_prefix_list@ AWS datasource.
+{- | The @aws_prefix_list@ AWS data.
 
 @aws_prefix_list@ provides details about a specific prefix list (PL) in the
 current region. This can be used both to validate a prefix list given in a
@@ -3006,103 +3006,103 @@ variable and to obtain the CIDR blocks (IP address ranges) for the
 associated AWS service. The latter may be useful e.g. for adding network ACL
 rules.
 -}
-data PrefixListDataSource s = PrefixListDataSource {
+data PrefixListData s = PrefixListData {
       _name           :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the prefix list to select. -}
     , _prefix_list_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the prefix list to select. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PrefixListDataSource s) where
-    toHCL PrefixListDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (PrefixListData s) where
+    toHCL PrefixListData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "prefix_list_id" _prefix_list_id
         ]
 
-instance HasName (PrefixListDataSource s) s Text where
+instance HasName (PrefixListData s) s Text where
     name =
-        lens (_name :: PrefixListDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: PrefixListDataSource s)
+        lens (_name :: PrefixListData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: PrefixListData s)
 
-instance HasPrefixListId (PrefixListDataSource s) s Text where
+instance HasPrefixListId (PrefixListData s) s Text where
     prefixListId =
-        lens (_prefix_list_id :: PrefixListDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _prefix_list_id = a } :: PrefixListDataSource s)
+        lens (_prefix_list_id :: PrefixListData s -> TF.Attribute s Text)
+            (\s a -> s { _prefix_list_id = a } :: PrefixListData s)
 
-instance HasComputedCidrBlocks (PrefixListDataSource s) Text
+instance HasComputedCidrBlocks (PrefixListData s) Text
 
-instance HasComputedId (PrefixListDataSource s) Text
+instance HasComputedId (PrefixListData s) Text
 
-instance HasComputedName (PrefixListDataSource s) Text
+instance HasComputedName (PrefixListData s) Text
 
-prefixListDataSource :: TF.DataSource TF.AWS (PrefixListDataSource s)
-prefixListDataSource =
-    TF.newDataSource "aws_prefix_list" $
-        PrefixListDataSource {
+prefixListData :: TF.Data TF.AWS (PrefixListData s)
+prefixListData =
+    TF.newData "aws_prefix_list" $
+        PrefixListData {
               _name = TF.Nil
             , _prefix_list_id = TF.Nil
             }
 
-{- | The @aws_rds_cluster@ AWS datasource.
+{- | The @aws_rds_cluster@ AWS data.
 
 Provides information about a RDS cluster.
 -}
-data RdsClusterDataSource s = RdsClusterDataSource {
+data RdsClusterData s = RdsClusterData {
       _cluster_identifier :: !(TF.Attribute s Text)
     {- ^ (Required) The cluster identifier of the RDS cluster. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RdsClusterDataSource s) where
-    toHCL RdsClusterDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (RdsClusterData s) where
+    toHCL RdsClusterData{..} = TF.block $ catMaybes
         [ TF.attribute "cluster_identifier" _cluster_identifier
         ]
 
-instance HasClusterIdentifier (RdsClusterDataSource s) s Text where
+instance HasClusterIdentifier (RdsClusterData s) s Text where
     clusterIdentifier =
-        lens (_cluster_identifier :: RdsClusterDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _cluster_identifier = a } :: RdsClusterDataSource s)
+        lens (_cluster_identifier :: RdsClusterData s -> TF.Attribute s Text)
+            (\s a -> s { _cluster_identifier = a } :: RdsClusterData s)
 
-rdsClusterDataSource :: TF.DataSource TF.AWS (RdsClusterDataSource s)
-rdsClusterDataSource =
-    TF.newDataSource "aws_rds_cluster" $
-        RdsClusterDataSource {
+rdsClusterData :: TF.Data TF.AWS (RdsClusterData s)
+rdsClusterData =
+    TF.newData "aws_rds_cluster" $
+        RdsClusterData {
               _cluster_identifier = TF.Nil
             }
 
-{- | The @aws_redshift_service_account@ AWS datasource.
+{- | The @aws_redshift_service_account@ AWS data.
 
 Use this data source to get the Account ID of the
 <http://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html#db-auditing-enable-logging>
 in a given region for the purpose of allowing Redshift to store audit data
 in S3.
 -}
-data RedshiftServiceAccountDataSource s = RedshiftServiceAccountDataSource {
+data RedshiftServiceAccountData s = RedshiftServiceAccountData {
       _region :: !(TF.Attribute s TF.Region)
     {- ^ (Optional) Name of the region whose AWS Redshift account ID is desired. Defaults to the region from the AWS provider configuration. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RedshiftServiceAccountDataSource s) where
-    toHCL RedshiftServiceAccountDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (RedshiftServiceAccountData s) where
+    toHCL RedshiftServiceAccountData{..} = TF.block $ catMaybes
         [ TF.attribute "region" _region
         ]
 
-instance HasRegion (RedshiftServiceAccountDataSource s) s TF.Region where
+instance HasRegion (RedshiftServiceAccountData s) s TF.Region where
     region =
-        lens (_region :: RedshiftServiceAccountDataSource s -> TF.Attribute s TF.Region)
-            (\s a -> s { _region = a } :: RedshiftServiceAccountDataSource s)
+        lens (_region :: RedshiftServiceAccountData s -> TF.Attribute s TF.Region)
+            (\s a -> s { _region = a } :: RedshiftServiceAccountData s)
 
-instance HasComputedArn (RedshiftServiceAccountDataSource s) Text
+instance HasComputedArn (RedshiftServiceAccountData s) Text
 
-instance HasComputedId (RedshiftServiceAccountDataSource s) Text
+instance HasComputedId (RedshiftServiceAccountData s) Text
 
-redshiftServiceAccountDataSource :: TF.DataSource TF.AWS (RedshiftServiceAccountDataSource s)
-redshiftServiceAccountDataSource =
-    TF.newDataSource "aws_redshift_service_account" $
-        RedshiftServiceAccountDataSource {
+redshiftServiceAccountData :: TF.Data TF.AWS (RedshiftServiceAccountData s)
+redshiftServiceAccountData =
+    TF.newData "aws_redshift_service_account" $
+        RedshiftServiceAccountData {
               _region = TF.Nil
             }
 
-{- | The @aws_region@ AWS datasource.
+{- | The @aws_region@ AWS data.
 
 @aws_region@ provides details about a specific AWS region. As well as
 validating a given region name (and optionally obtaining its endpoint) this
@@ -3110,7 +3110,7 @@ resource can be used to discover the name of the region configured within
 the provider. The latter can be useful in a child module which is inheriting
 an AWS provider configuration from its parent module.
 -}
-data RegionDataSource s = RegionDataSource {
+data RegionData s = RegionData {
       _current  :: !(TF.Attribute s Text)
     {- ^ (Optional) Set to @true@ to match only the region configured in the provider. (It is not meaningful to set this to @false@ .) -}
     , _endpoint :: !(TF.Attribute s Text)
@@ -3119,50 +3119,50 @@ data RegionDataSource s = RegionDataSource {
     {- ^ (Optional) The full name of the region to select. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegionDataSource s) where
-    toHCL RegionDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (RegionData s) where
+    toHCL RegionData{..} = TF.block $ catMaybes
         [ TF.attribute "current" _current
         , TF.attribute "endpoint" _endpoint
         , TF.attribute "name" _name
         ]
 
-instance HasCurrent (RegionDataSource s) s Text where
+instance HasCurrent (RegionData s) s Text where
     current =
-        lens (_current :: RegionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _current = a } :: RegionDataSource s)
+        lens (_current :: RegionData s -> TF.Attribute s Text)
+            (\s a -> s { _current = a } :: RegionData s)
 
-instance HasEndpoint (RegionDataSource s) s Text where
+instance HasEndpoint (RegionData s) s Text where
     endpoint =
-        lens (_endpoint :: RegionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _endpoint = a } :: RegionDataSource s)
+        lens (_endpoint :: RegionData s -> TF.Attribute s Text)
+            (\s a -> s { _endpoint = a } :: RegionData s)
 
-instance HasName (RegionDataSource s) s Text where
+instance HasName (RegionData s) s Text where
     name =
-        lens (_name :: RegionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RegionDataSource s)
+        lens (_name :: RegionData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: RegionData s)
 
-instance HasComputedCurrent (RegionDataSource s) Text
+instance HasComputedCurrent (RegionData s) Text
 
-instance HasComputedEndpoint (RegionDataSource s) Text
+instance HasComputedEndpoint (RegionData s) Text
 
-instance HasComputedName (RegionDataSource s) Text
+instance HasComputedName (RegionData s) Text
 
-regionDataSource :: TF.DataSource TF.AWS (RegionDataSource s)
-regionDataSource =
-    TF.newDataSource "aws_region" $
-        RegionDataSource {
+regionData :: TF.Data TF.AWS (RegionData s)
+regionData =
+    TF.newData "aws_region" $
+        RegionData {
               _current = TF.Nil
             , _endpoint = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @aws_route53_zone@ AWS datasource.
+{- | The @aws_route53_zone@ AWS data.
 
 @aws_route53_zone@ provides details about a specific Route 53 Hosted Zone.
 This data source allows to find a Hosted Zone ID given Hosted Zone name and
 certain search criteria.
 -}
-data Route53ZoneDataSource s = Route53ZoneDataSource {
+data Route53ZoneData s = Route53ZoneData {
       _name         :: !(TF.Attribute s Text)
     {- ^ (Optional) The Hosted Zone name of the desired Hosted Zone. -}
     , _private_zone :: !(TF.Attribute s Text)
@@ -3175,8 +3175,8 @@ data Route53ZoneDataSource s = Route53ZoneDataSource {
     {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (Route53ZoneDataSource s) where
-    toHCL Route53ZoneDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (Route53ZoneData s) where
+    toHCL Route53ZoneData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "private_zone" _private_zone
         , TF.attribute "tags" _tags
@@ -3184,41 +3184,41 @@ instance TF.ToHCL (Route53ZoneDataSource s) where
         , TF.attribute "zone_id" _zone_id
         ]
 
-instance HasName (Route53ZoneDataSource s) s Text where
+instance HasName (Route53ZoneData s) s Text where
     name =
-        lens (_name :: Route53ZoneDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: Route53ZoneDataSource s)
+        lens (_name :: Route53ZoneData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: Route53ZoneData s)
 
-instance HasPrivateZone (Route53ZoneDataSource s) s Text where
+instance HasPrivateZone (Route53ZoneData s) s Text where
     privateZone =
-        lens (_private_zone :: Route53ZoneDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _private_zone = a } :: Route53ZoneDataSource s)
+        lens (_private_zone :: Route53ZoneData s -> TF.Attribute s Text)
+            (\s a -> s { _private_zone = a } :: Route53ZoneData s)
 
-instance HasTags (Route53ZoneDataSource s) s TF.Tags where
+instance HasTags (Route53ZoneData s) s TF.Tags where
     tags =
-        lens (_tags :: Route53ZoneDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: Route53ZoneDataSource s)
+        lens (_tags :: Route53ZoneData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: Route53ZoneData s)
 
-instance HasVpcId (Route53ZoneDataSource s) s Text where
+instance HasVpcId (Route53ZoneData s) s Text where
     vpcId =
-        lens (_vpc_id :: Route53ZoneDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: Route53ZoneDataSource s)
+        lens (_vpc_id :: Route53ZoneData s -> TF.Attribute s Text)
+            (\s a -> s { _vpc_id = a } :: Route53ZoneData s)
 
-instance HasZoneId (Route53ZoneDataSource s) s Text where
+instance HasZoneId (Route53ZoneData s) s Text where
     zoneId =
-        lens (_zone_id :: Route53ZoneDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _zone_id = a } :: Route53ZoneDataSource s)
+        lens (_zone_id :: Route53ZoneData s -> TF.Attribute s Text)
+            (\s a -> s { _zone_id = a } :: Route53ZoneData s)
 
-instance HasComputedCallerReference (Route53ZoneDataSource s) Text
+instance HasComputedCallerReference (Route53ZoneData s) Text
 
-instance HasComputedComment (Route53ZoneDataSource s) Text
+instance HasComputedComment (Route53ZoneData s) Text
 
-instance HasComputedResourceRecordSetCount (Route53ZoneDataSource s) Text
+instance HasComputedResourceRecordSetCount (Route53ZoneData s) Text
 
-route53ZoneDataSource :: TF.DataSource TF.AWS (Route53ZoneDataSource s)
-route53ZoneDataSource =
-    TF.newDataSource "aws_route53_zone" $
-        Route53ZoneDataSource {
+route53ZoneData :: TF.Data TF.AWS (Route53ZoneData s)
+route53ZoneData =
+    TF.newData "aws_route53_zone" $
+        Route53ZoneData {
               _name = TF.Nil
             , _private_zone = TF.Nil
             , _tags = TF.Nil
@@ -3226,13 +3226,13 @@ route53ZoneDataSource =
             , _zone_id = TF.Nil
             }
 
-{- | The @aws_route_table@ AWS datasource.
+{- | The @aws_route_table@ AWS data.
 
 @aws_route_table@ provides details about a specific Route Table. This
 resource can prove useful when a module accepts a Subnet id as an input
 variable and needs to, for example, add a route in the Route Table.
 -}
-data RouteTableDataSource s = RouteTableDataSource {
+data RouteTableData s = RouteTableData {
       _filter         :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _route_table_id :: !(TF.Attribute s Text)
@@ -3245,8 +3245,8 @@ data RouteTableDataSource s = RouteTableDataSource {
     {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RouteTableDataSource s) where
-    toHCL RouteTableDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (RouteTableData s) where
+    toHCL RouteTableData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "route_table_id" _route_table_id
         , TF.attribute "subnet_id" _subnet_id
@@ -3254,51 +3254,51 @@ instance TF.ToHCL (RouteTableDataSource s) where
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasFilter (RouteTableDataSource s) s Text where
+instance HasFilter (RouteTableData s) s Text where
     filter =
-        lens (_filter :: RouteTableDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: RouteTableDataSource s)
+        lens (_filter :: RouteTableData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: RouteTableData s)
 
-instance HasRouteTableId (RouteTableDataSource s) s Text where
+instance HasRouteTableId (RouteTableData s) s Text where
     routeTableId =
-        lens (_route_table_id :: RouteTableDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _route_table_id = a } :: RouteTableDataSource s)
+        lens (_route_table_id :: RouteTableData s -> TF.Attribute s Text)
+            (\s a -> s { _route_table_id = a } :: RouteTableData s)
 
-instance HasSubnetId (RouteTableDataSource s) s Text where
+instance HasSubnetId (RouteTableData s) s Text where
     subnetId =
-        lens (_subnet_id :: RouteTableDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _subnet_id = a } :: RouteTableDataSource s)
+        lens (_subnet_id :: RouteTableData s -> TF.Attribute s Text)
+            (\s a -> s { _subnet_id = a } :: RouteTableData s)
 
-instance HasTags (RouteTableDataSource s) s TF.Tags where
+instance HasTags (RouteTableData s) s TF.Tags where
     tags =
-        lens (_tags :: RouteTableDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: RouteTableDataSource s)
+        lens (_tags :: RouteTableData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: RouteTableData s)
 
-instance HasVpcId (RouteTableDataSource s) s Text where
+instance HasVpcId (RouteTableData s) s Text where
     vpcId =
-        lens (_vpc_id :: RouteTableDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: RouteTableDataSource s)
+        lens (_vpc_id :: RouteTableData s -> TF.Attribute s Text)
+            (\s a -> s { _vpc_id = a } :: RouteTableData s)
 
-instance HasComputedCidrBlock (RouteTableDataSource s) TF.CIDR
+instance HasComputedCidrBlock (RouteTableData s) TF.CIDR
 
-instance HasComputedEgressOnlyGatewayId (RouteTableDataSource s) Text
+instance HasComputedEgressOnlyGatewayId (RouteTableData s) Text
 
-instance HasComputedGatewayId (RouteTableDataSource s) Text
+instance HasComputedGatewayId (RouteTableData s) Text
 
-instance HasComputedInstanceId (RouteTableDataSource s) Text
+instance HasComputedInstanceId (RouteTableData s) Text
 
-instance HasComputedIpv6CidrBlock (RouteTableDataSource s) TF.CIDR
+instance HasComputedIpv6CidrBlock (RouteTableData s) TF.CIDR
 
-instance HasComputedNatGatewayId (RouteTableDataSource s) Text
+instance HasComputedNatGatewayId (RouteTableData s) Text
 
-instance HasComputedNetworkInterfaceId (RouteTableDataSource s) Text
+instance HasComputedNetworkInterfaceId (RouteTableData s) Text
 
-instance HasComputedVpcPeeringConnectionId (RouteTableDataSource s) Text
+instance HasComputedVpcPeeringConnectionId (RouteTableData s) Text
 
-routeTableDataSource :: TF.DataSource TF.AWS (RouteTableDataSource s)
-routeTableDataSource =
-    TF.newDataSource "aws_route_table" $
-        RouteTableDataSource {
+routeTableData :: TF.Data TF.AWS (RouteTableData s)
+routeTableData =
+    TF.newData "aws_route_table" $
+        RouteTableData {
               _filter = TF.Nil
             , _route_table_id = TF.Nil
             , _subnet_id = TF.Nil
@@ -3306,49 +3306,49 @@ routeTableDataSource =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_s3_bucket@ AWS datasource.
+{- | The @aws_s3_bucket@ AWS data.
 
 Provides details about a specific S3 bucket. This resource may prove useful
 when setting up a Route53 record, or an origin for a CloudFront
 Distribution.
 -}
-data S3BucketDataSource s = S3BucketDataSource {
+data S3BucketData s = S3BucketData {
       _bucket :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the bucket -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (S3BucketDataSource s) where
-    toHCL S3BucketDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (S3BucketData s) where
+    toHCL S3BucketData{..} = TF.block $ catMaybes
         [ TF.attribute "bucket" _bucket
         ]
 
-instance HasBucket (S3BucketDataSource s) s Text where
+instance HasBucket (S3BucketData s) s Text where
     bucket =
-        lens (_bucket :: S3BucketDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _bucket = a } :: S3BucketDataSource s)
+        lens (_bucket :: S3BucketData s -> TF.Attribute s Text)
+            (\s a -> s { _bucket = a } :: S3BucketData s)
 
-instance HasComputedArn (S3BucketDataSource s) Text
+instance HasComputedArn (S3BucketData s) Text
 
-instance HasComputedBucketDomainName (S3BucketDataSource s) Text
+instance HasComputedBucketDomainName (S3BucketData s) Text
 
-instance HasComputedHostedZoneId (S3BucketDataSource s) Text
+instance HasComputedHostedZoneId (S3BucketData s) Text
 
-instance HasComputedId (S3BucketDataSource s) Text
+instance HasComputedId (S3BucketData s) Text
 
-instance HasComputedRegion (S3BucketDataSource s) TF.Region
+instance HasComputedRegion (S3BucketData s) TF.Region
 
-instance HasComputedWebsiteDomain (S3BucketDataSource s) Text
+instance HasComputedWebsiteDomain (S3BucketData s) Text
 
-instance HasComputedWebsiteEndpoint (S3BucketDataSource s) Text
+instance HasComputedWebsiteEndpoint (S3BucketData s) Text
 
-s3BucketDataSource :: TF.DataSource TF.AWS (S3BucketDataSource s)
-s3BucketDataSource =
-    TF.newDataSource "aws_s3_bucket" $
-        S3BucketDataSource {
+s3BucketData :: TF.Data TF.AWS (S3BucketData s)
+s3BucketData =
+    TF.newData "aws_s3_bucket" $
+        S3BucketData {
               _bucket = TF.Nil
             }
 
-{- | The @aws_s3_bucket_object@ AWS datasource.
+{- | The @aws_s3_bucket_object@ AWS data.
 
 The S3 object data source allows access to the metadata and optionally (see
 below) content of an object stored inside S3 bucket. ~> Note: The content of
@@ -3357,7 +3357,7 @@ human-readable @Content-Type@ ( @text/*@ and @application/json@ ). This is
 to prevent printing unsafe characters and potentially downloading large
 amount of data which would be thrown away in favour of metadata.
 -}
-data S3BucketObjectDataSource s = S3BucketObjectDataSource {
+data S3BucketObjectData s = S3BucketObjectData {
       _bucket     :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the bucket to read the object from -}
     , _key        :: !(TF.Attribute s Text)
@@ -3366,81 +3366,81 @@ data S3BucketObjectDataSource s = S3BucketObjectDataSource {
     {- ^ (Optional) Specific version ID of the object returned (defaults to latest version) -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (S3BucketObjectDataSource s) where
-    toHCL S3BucketObjectDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (S3BucketObjectData s) where
+    toHCL S3BucketObjectData{..} = TF.block $ catMaybes
         [ TF.attribute "bucket" _bucket
         , TF.attribute "key" _key
         , TF.attribute "version_id" _version_id
         ]
 
-instance HasBucket (S3BucketObjectDataSource s) s Text where
+instance HasBucket (S3BucketObjectData s) s Text where
     bucket =
-        lens (_bucket :: S3BucketObjectDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _bucket = a } :: S3BucketObjectDataSource s)
+        lens (_bucket :: S3BucketObjectData s -> TF.Attribute s Text)
+            (\s a -> s { _bucket = a } :: S3BucketObjectData s)
 
-instance HasKey (S3BucketObjectDataSource s) s Text where
+instance HasKey (S3BucketObjectData s) s Text where
     key =
-        lens (_key :: S3BucketObjectDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _key = a } :: S3BucketObjectDataSource s)
+        lens (_key :: S3BucketObjectData s -> TF.Attribute s Text)
+            (\s a -> s { _key = a } :: S3BucketObjectData s)
 
-instance HasVersionId (S3BucketObjectDataSource s) s Text where
+instance HasVersionId (S3BucketObjectData s) s Text where
     versionId =
-        lens (_version_id :: S3BucketObjectDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _version_id = a } :: S3BucketObjectDataSource s)
+        lens (_version_id :: S3BucketObjectData s -> TF.Attribute s Text)
+            (\s a -> s { _version_id = a } :: S3BucketObjectData s)
 
-instance HasComputedBody (S3BucketObjectDataSource s) Text
+instance HasComputedBody (S3BucketObjectData s) Text
 
-instance HasComputedCacheControl (S3BucketObjectDataSource s) Text
+instance HasComputedCacheControl (S3BucketObjectData s) Text
 
-instance HasComputedContentDisposition (S3BucketObjectDataSource s) Text
+instance HasComputedContentDisposition (S3BucketObjectData s) Text
 
-instance HasComputedContentEncoding (S3BucketObjectDataSource s) Text
+instance HasComputedContentEncoding (S3BucketObjectData s) Text
 
-instance HasComputedContentLanguage (S3BucketObjectDataSource s) Text
+instance HasComputedContentLanguage (S3BucketObjectData s) Text
 
-instance HasComputedContentLength (S3BucketObjectDataSource s) Text
+instance HasComputedContentLength (S3BucketObjectData s) Text
 
-instance HasComputedContentType (S3BucketObjectDataSource s) Text
+instance HasComputedContentType (S3BucketObjectData s) Text
 
-instance HasComputedEtag (S3BucketObjectDataSource s) Text
+instance HasComputedEtag (S3BucketObjectData s) Text
 
-instance HasComputedExpiration (S3BucketObjectDataSource s) Text
+instance HasComputedExpiration (S3BucketObjectData s) Text
 
-instance HasComputedExpires (S3BucketObjectDataSource s) Text
+instance HasComputedExpires (S3BucketObjectData s) Text
 
-instance HasComputedLastModified (S3BucketObjectDataSource s) Text
+instance HasComputedLastModified (S3BucketObjectData s) Text
 
-instance HasComputedMetadata (S3BucketObjectDataSource s) Text
+instance HasComputedMetadata (S3BucketObjectData s) Text
 
-instance HasComputedServerSideEncryption (S3BucketObjectDataSource s) Text
+instance HasComputedServerSideEncryption (S3BucketObjectData s) Text
 
-instance HasComputedSseKmsKeyId (S3BucketObjectDataSource s) Text
+instance HasComputedSseKmsKeyId (S3BucketObjectData s) Text
 
-instance HasComputedStorageClass (S3BucketObjectDataSource s) Text
+instance HasComputedStorageClass (S3BucketObjectData s) Text
 
-instance HasComputedTags (S3BucketObjectDataSource s) TF.Tags
+instance HasComputedTags (S3BucketObjectData s) TF.Tags
 
-instance HasComputedVersionId (S3BucketObjectDataSource s) Text
+instance HasComputedVersionId (S3BucketObjectData s) Text
 
-instance HasComputedWebsiteRedirectLocation (S3BucketObjectDataSource s) Text
+instance HasComputedWebsiteRedirectLocation (S3BucketObjectData s) Text
 
-s3BucketObjectDataSource :: TF.DataSource TF.AWS (S3BucketObjectDataSource s)
-s3BucketObjectDataSource =
-    TF.newDataSource "aws_s3_bucket_object" $
-        S3BucketObjectDataSource {
+s3BucketObjectData :: TF.Data TF.AWS (S3BucketObjectData s)
+s3BucketObjectData =
+    TF.newData "aws_s3_bucket_object" $
+        S3BucketObjectData {
               _bucket = TF.Nil
             , _key = TF.Nil
             , _version_id = TF.Nil
             }
 
-{- | The @aws_security_group@ AWS datasource.
+{- | The @aws_security_group@ AWS data.
 
 @aws_security_group@ provides details about a specific Security Group. This
 resource can prove useful when a module accepts a Security Group id as an
 input variable and needs to, for example, determine the id of the VPC that
 the security group belongs to.
 -}
-data SecurityGroupDataSource s = SecurityGroupDataSource {
+data SecurityGroupData s = SecurityGroupData {
       _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _id     :: !(TF.Attribute s Text)
@@ -3453,8 +3453,8 @@ data SecurityGroupDataSource s = SecurityGroupDataSource {
     {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SecurityGroupDataSource s) where
-    toHCL SecurityGroupDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SecurityGroupData s) where
+    toHCL SecurityGroupData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "id" _id
         , TF.attribute "name" _name
@@ -3462,39 +3462,39 @@ instance TF.ToHCL (SecurityGroupDataSource s) where
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasFilter (SecurityGroupDataSource s) s Text where
+instance HasFilter (SecurityGroupData s) s Text where
     filter =
-        lens (_filter :: SecurityGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: SecurityGroupDataSource s)
+        lens (_filter :: SecurityGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: SecurityGroupData s)
 
-instance HasId (SecurityGroupDataSource s) s Text where
+instance HasId (SecurityGroupData s) s Text where
     id =
-        lens (_id :: SecurityGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: SecurityGroupDataSource s)
+        lens (_id :: SecurityGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: SecurityGroupData s)
 
-instance HasName (SecurityGroupDataSource s) s Text where
+instance HasName (SecurityGroupData s) s Text where
     name =
-        lens (_name :: SecurityGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SecurityGroupDataSource s)
+        lens (_name :: SecurityGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SecurityGroupData s)
 
-instance HasTags (SecurityGroupDataSource s) s TF.Tags where
+instance HasTags (SecurityGroupData s) s TF.Tags where
     tags =
-        lens (_tags :: SecurityGroupDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: SecurityGroupDataSource s)
+        lens (_tags :: SecurityGroupData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: SecurityGroupData s)
 
-instance HasVpcId (SecurityGroupDataSource s) s Text where
+instance HasVpcId (SecurityGroupData s) s Text where
     vpcId =
-        lens (_vpc_id :: SecurityGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: SecurityGroupDataSource s)
+        lens (_vpc_id :: SecurityGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _vpc_id = a } :: SecurityGroupData s)
 
-instance HasComputedArn (SecurityGroupDataSource s) Text
+instance HasComputedArn (SecurityGroupData s) Text
 
-instance HasComputedDescription (SecurityGroupDataSource s) Text
+instance HasComputedDescription (SecurityGroupData s) Text
 
-securityGroupDataSource :: TF.DataSource TF.AWS (SecurityGroupDataSource s)
-securityGroupDataSource =
-    TF.newDataSource "aws_security_group" $
-        SecurityGroupDataSource {
+securityGroupData :: TF.Data TF.AWS (SecurityGroupData s)
+securityGroupData =
+    TF.newData "aws_security_group" $
+        SecurityGroupData {
               _filter = TF.Nil
             , _id = TF.Nil
             , _name = TF.Nil
@@ -3502,79 +3502,79 @@ securityGroupDataSource =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_sns_topic@ AWS datasource.
+{- | The @aws_sns_topic@ AWS data.
 
 Use this data source to get the ARN of a topic in AWS Simple Notification
 Service (SNS). By using this data source, you can reference SNS topics
 without having to hard code the ARNs as input.
 -}
-data SnsTopicDataSource s = SnsTopicDataSource {
+data SnsTopicData s = SnsTopicData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The friendly name of the topic to match. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnsTopicDataSource s) where
-    toHCL SnsTopicDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SnsTopicData s) where
+    toHCL SnsTopicData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (SnsTopicDataSource s) s Text where
+instance HasName (SnsTopicData s) s Text where
     name =
-        lens (_name :: SnsTopicDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SnsTopicDataSource s)
+        lens (_name :: SnsTopicData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SnsTopicData s)
 
-instance HasComputedArn (SnsTopicDataSource s) Text
+instance HasComputedArn (SnsTopicData s) Text
 
-snsTopicDataSource :: TF.DataSource TF.AWS (SnsTopicDataSource s)
-snsTopicDataSource =
-    TF.newDataSource "aws_sns_topic" $
-        SnsTopicDataSource {
+snsTopicData :: TF.Data TF.AWS (SnsTopicData s)
+snsTopicData =
+    TF.newData "aws_sns_topic" $
+        SnsTopicData {
               _name = TF.Nil
             }
 
-{- | The @aws_ssm_parameter@ AWS datasource.
+{- | The @aws_ssm_parameter@ AWS data.
 
 Provides an SSM Parameter data source.
 -}
-data SsmParameterDataSource s = SsmParameterDataSource {
+data SsmParameterData s = SsmParameterData {
       _name            :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the parameter. -}
     , _with_decryption :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether to return decrypted @SecureString@ value. Defaults to @true@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SsmParameterDataSource s) where
-    toHCL SsmParameterDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SsmParameterData s) where
+    toHCL SsmParameterData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "with_decryption" _with_decryption
         ]
 
-instance HasName (SsmParameterDataSource s) s Text where
+instance HasName (SsmParameterData s) s Text where
     name =
-        lens (_name :: SsmParameterDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SsmParameterDataSource s)
+        lens (_name :: SsmParameterData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SsmParameterData s)
 
-instance HasWithDecryption (SsmParameterDataSource s) s Text where
+instance HasWithDecryption (SsmParameterData s) s Text where
     withDecryption =
-        lens (_with_decryption :: SsmParameterDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _with_decryption = a } :: SsmParameterDataSource s)
+        lens (_with_decryption :: SsmParameterData s -> TF.Attribute s Text)
+            (\s a -> s { _with_decryption = a } :: SsmParameterData s)
 
-ssmParameterDataSource :: TF.DataSource TF.AWS (SsmParameterDataSource s)
-ssmParameterDataSource =
-    TF.newDataSource "aws_ssm_parameter" $
-        SsmParameterDataSource {
+ssmParameterData :: TF.Data TF.AWS (SsmParameterData s)
+ssmParameterData =
+    TF.newData "aws_ssm_parameter" $
+        SsmParameterData {
               _name = TF.Nil
             , _with_decryption = TF.Nil
             }
 
-{- | The @aws_subnet@ AWS datasource.
+{- | The @aws_subnet@ AWS data.
 
 @aws_subnet@ provides details about a specific VPC subnet. This resource can
 prove useful when a module accepts a subnet id as an input variable and
 needs to, for example, determine the id of the VPC that the subnet belongs
 to.
 -}
-data SubnetDataSource s = SubnetDataSource {
+data SubnetData s = SubnetData {
       _availability_zone :: !(TF.Attribute s TF.Zone)
     {- ^ (Optional) The availability zone where the subnet must reside. -}
     , _cidr_block        :: !(TF.Attribute s TF.CIDR)
@@ -3595,8 +3595,8 @@ data SubnetDataSource s = SubnetDataSource {
     {- ^ (Optional) The id of the VPC that the desired subnet belongs to. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubnetDataSource s) where
-    toHCL SubnetDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SubnetData s) where
+    toHCL SubnetData{..} = TF.block $ catMaybes
         [ TF.attribute "availability_zone" _availability_zone
         , TF.attribute "cidr_block" _cidr_block
         , TF.attribute "default_for_az" _default_for_az
@@ -3608,55 +3608,55 @@ instance TF.ToHCL (SubnetDataSource s) where
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasAvailabilityZone (SubnetDataSource s) s TF.Zone where
+instance HasAvailabilityZone (SubnetData s) s TF.Zone where
     availabilityZone =
-        lens (_availability_zone :: SubnetDataSource s -> TF.Attribute s TF.Zone)
-            (\s a -> s { _availability_zone = a } :: SubnetDataSource s)
+        lens (_availability_zone :: SubnetData s -> TF.Attribute s TF.Zone)
+            (\s a -> s { _availability_zone = a } :: SubnetData s)
 
-instance HasCidrBlock (SubnetDataSource s) s TF.CIDR where
+instance HasCidrBlock (SubnetData s) s TF.CIDR where
     cidrBlock =
-        lens (_cidr_block :: SubnetDataSource s -> TF.Attribute s TF.CIDR)
-            (\s a -> s { _cidr_block = a } :: SubnetDataSource s)
+        lens (_cidr_block :: SubnetData s -> TF.Attribute s TF.CIDR)
+            (\s a -> s { _cidr_block = a } :: SubnetData s)
 
-instance HasDefaultForAz (SubnetDataSource s) s Text where
+instance HasDefaultForAz (SubnetData s) s Text where
     defaultForAz =
-        lens (_default_for_az :: SubnetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _default_for_az = a } :: SubnetDataSource s)
+        lens (_default_for_az :: SubnetData s -> TF.Attribute s Text)
+            (\s a -> s { _default_for_az = a } :: SubnetData s)
 
-instance HasFilter (SubnetDataSource s) s Text where
+instance HasFilter (SubnetData s) s Text where
     filter =
-        lens (_filter :: SubnetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: SubnetDataSource s)
+        lens (_filter :: SubnetData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: SubnetData s)
 
-instance HasId (SubnetDataSource s) s Text where
+instance HasId (SubnetData s) s Text where
     id =
-        lens (_id :: SubnetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: SubnetDataSource s)
+        lens (_id :: SubnetData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: SubnetData s)
 
-instance HasIpv6CidrBlock (SubnetDataSource s) s TF.CIDR where
+instance HasIpv6CidrBlock (SubnetData s) s TF.CIDR where
     ipv6CidrBlock =
-        lens (_ipv6_cidr_block :: SubnetDataSource s -> TF.Attribute s TF.CIDR)
-            (\s a -> s { _ipv6_cidr_block = a } :: SubnetDataSource s)
+        lens (_ipv6_cidr_block :: SubnetData s -> TF.Attribute s TF.CIDR)
+            (\s a -> s { _ipv6_cidr_block = a } :: SubnetData s)
 
-instance HasState (SubnetDataSource s) s Text where
+instance HasState (SubnetData s) s Text where
     state =
-        lens (_state :: SubnetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: SubnetDataSource s)
+        lens (_state :: SubnetData s -> TF.Attribute s Text)
+            (\s a -> s { _state = a } :: SubnetData s)
 
-instance HasTags (SubnetDataSource s) s TF.Tags where
+instance HasTags (SubnetData s) s TF.Tags where
     tags =
-        lens (_tags :: SubnetDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: SubnetDataSource s)
+        lens (_tags :: SubnetData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: SubnetData s)
 
-instance HasVpcId (SubnetDataSource s) s Text where
+instance HasVpcId (SubnetData s) s Text where
     vpcId =
-        lens (_vpc_id :: SubnetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: SubnetDataSource s)
+        lens (_vpc_id :: SubnetData s -> TF.Attribute s Text)
+            (\s a -> s { _vpc_id = a } :: SubnetData s)
 
-subnetDataSource :: TF.DataSource TF.AWS (SubnetDataSource s)
-subnetDataSource =
-    TF.newDataSource "aws_subnet" $
-        SubnetDataSource {
+subnetData :: TF.Data TF.AWS (SubnetData s)
+subnetData =
+    TF.newData "aws_subnet" $
+        SubnetData {
               _availability_zone = TF.Nil
             , _cidr_block = TF.Nil
             , _default_for_az = TF.Nil
@@ -3668,51 +3668,51 @@ subnetDataSource =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_subnet_ids@ AWS datasource.
+{- | The @aws_subnet_ids@ AWS data.
 
 @aws_subnet_ids@ provides a list of ids for a vpc_id This resource can be
 useful for getting back a list of subnet ids for a vpc.
 -}
-data SubnetIdsDataSource s = SubnetIdsDataSource {
+data SubnetIdsData s = SubnetIdsData {
       _tags   :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnets. -}
     , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Required) The VPC ID that you want to filter from. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubnetIdsDataSource s) where
-    toHCL SubnetIdsDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SubnetIdsData s) where
+    toHCL SubnetIdsData{..} = TF.block $ catMaybes
         [ TF.attribute "tags" _tags
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasTags (SubnetIdsDataSource s) s TF.Tags where
+instance HasTags (SubnetIdsData s) s TF.Tags where
     tags =
-        lens (_tags :: SubnetIdsDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: SubnetIdsDataSource s)
+        lens (_tags :: SubnetIdsData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: SubnetIdsData s)
 
-instance HasVpcId (SubnetIdsDataSource s) s Text where
+instance HasVpcId (SubnetIdsData s) s Text where
     vpcId =
-        lens (_vpc_id :: SubnetIdsDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: SubnetIdsDataSource s)
+        lens (_vpc_id :: SubnetIdsData s -> TF.Attribute s Text)
+            (\s a -> s { _vpc_id = a } :: SubnetIdsData s)
 
-instance HasComputedIds (SubnetIdsDataSource s) Text
+instance HasComputedIds (SubnetIdsData s) Text
 
-subnetIdsDataSource :: TF.DataSource TF.AWS (SubnetIdsDataSource s)
-subnetIdsDataSource =
-    TF.newDataSource "aws_subnet_ids" $
-        SubnetIdsDataSource {
+subnetIdsData :: TF.Data TF.AWS (SubnetIdsData s)
+subnetIdsData =
+    TF.newData "aws_subnet_ids" $
+        SubnetIdsData {
               _tags = TF.Nil
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_vpc@ AWS datasource.
+{- | The @aws_vpc@ AWS data.
 
 @aws_vpc@ provides details about a specific VPC. This resource can prove
 useful when a module accepts a vpc id as an input variable and needs to, for
 example, determine the CIDR block of that VPC.
 -}
-data VpcDataSource s = VpcDataSource {
+data VpcData s = VpcData {
       _cidr_block      :: !(TF.Attribute s TF.CIDR)
     {- ^ (Optional) The cidr block of the desired VPC. -}
     , _default'        :: !(TF.Attribute s Text)
@@ -3729,8 +3729,8 @@ data VpcDataSource s = VpcDataSource {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcDataSource s) where
-    toHCL VpcDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (VpcData s) where
+    toHCL VpcData{..} = TF.block $ catMaybes
         [ TF.attribute "cidr_block" _cidr_block
         , TF.attribute "default" _default'
         , TF.attribute "dhcp_options_id" _dhcp_options_id
@@ -3740,55 +3740,55 @@ instance TF.ToHCL (VpcDataSource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasCidrBlock (VpcDataSource s) s TF.CIDR where
+instance HasCidrBlock (VpcData s) s TF.CIDR where
     cidrBlock =
-        lens (_cidr_block :: VpcDataSource s -> TF.Attribute s TF.CIDR)
-            (\s a -> s { _cidr_block = a } :: VpcDataSource s)
+        lens (_cidr_block :: VpcData s -> TF.Attribute s TF.CIDR)
+            (\s a -> s { _cidr_block = a } :: VpcData s)
 
-instance HasDefault' (VpcDataSource s) s Text where
+instance HasDefault' (VpcData s) s Text where
     default' =
-        lens (_default' :: VpcDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _default' = a } :: VpcDataSource s)
+        lens (_default' :: VpcData s -> TF.Attribute s Text)
+            (\s a -> s { _default' = a } :: VpcData s)
 
-instance HasDhcpOptionsId (VpcDataSource s) s Text where
+instance HasDhcpOptionsId (VpcData s) s Text where
     dhcpOptionsId =
-        lens (_dhcp_options_id :: VpcDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _dhcp_options_id = a } :: VpcDataSource s)
+        lens (_dhcp_options_id :: VpcData s -> TF.Attribute s Text)
+            (\s a -> s { _dhcp_options_id = a } :: VpcData s)
 
-instance HasFilter (VpcDataSource s) s Text where
+instance HasFilter (VpcData s) s Text where
     filter =
-        lens (_filter :: VpcDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: VpcDataSource s)
+        lens (_filter :: VpcData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: VpcData s)
 
-instance HasId (VpcDataSource s) s Text where
+instance HasId (VpcData s) s Text where
     id =
-        lens (_id :: VpcDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: VpcDataSource s)
+        lens (_id :: VpcData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: VpcData s)
 
-instance HasState (VpcDataSource s) s Text where
+instance HasState (VpcData s) s Text where
     state =
-        lens (_state :: VpcDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: VpcDataSource s)
+        lens (_state :: VpcData s -> TF.Attribute s Text)
+            (\s a -> s { _state = a } :: VpcData s)
 
-instance HasTags (VpcDataSource s) s TF.Tags where
+instance HasTags (VpcData s) s TF.Tags where
     tags =
-        lens (_tags :: VpcDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: VpcDataSource s)
+        lens (_tags :: VpcData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: VpcData s)
 
-instance HasComputedEnableDnsHostnames (VpcDataSource s) TF.Bool
+instance HasComputedEnableDnsHostnames (VpcData s) TF.Bool
 
-instance HasComputedEnableDnsSupport (VpcDataSource s) TF.Bool
+instance HasComputedEnableDnsSupport (VpcData s) TF.Bool
 
-instance HasComputedInstanceTenancy (VpcDataSource s) Text
+instance HasComputedInstanceTenancy (VpcData s) Text
 
-instance HasComputedIpv6AssociationId (VpcDataSource s) Text
+instance HasComputedIpv6AssociationId (VpcData s) Text
 
-instance HasComputedIpv6CidrBlock (VpcDataSource s) TF.CIDR
+instance HasComputedIpv6CidrBlock (VpcData s) TF.CIDR
 
-vpcDataSource :: TF.DataSource TF.AWS (VpcDataSource s)
-vpcDataSource =
-    TF.newDataSource "aws_vpc" $
-        VpcDataSource {
+vpcData :: TF.Data TF.AWS (VpcData s)
+vpcData =
+    TF.newData "aws_vpc" $
+        VpcData {
               _cidr_block = TF.Nil
             , _default' = TF.Nil
             , _dhcp_options_id = TF.Nil
@@ -3798,11 +3798,11 @@ vpcDataSource =
             , _tags = TF.Nil
             }
 
-{- | The @aws_vpc_endpoint@ AWS datasource.
+{- | The @aws_vpc_endpoint@ AWS data.
 
 The VPC Endpoint data source provides details about a specific VPC endpoint.
 -}
-data VpcEndpointDataSource s = VpcEndpointDataSource {
+data VpcEndpointData s = VpcEndpointData {
       _id           :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the specific VPC Endpoint to retrieve. -}
     , _service_name :: !(TF.Attribute s Text)
@@ -3813,86 +3813,86 @@ data VpcEndpointDataSource s = VpcEndpointDataSource {
     {- ^ (Optional) The ID of the VPC in which the specific VPC Endpoint is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcEndpointDataSource s) where
-    toHCL VpcEndpointDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (VpcEndpointData s) where
+    toHCL VpcEndpointData{..} = TF.block $ catMaybes
         [ TF.attribute "id" _id
         , TF.attribute "service_name" _service_name
         , TF.attribute "state" _state
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasId (VpcEndpointDataSource s) s Text where
+instance HasId (VpcEndpointData s) s Text where
     id =
-        lens (_id :: VpcEndpointDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: VpcEndpointDataSource s)
+        lens (_id :: VpcEndpointData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: VpcEndpointData s)
 
-instance HasServiceName (VpcEndpointDataSource s) s Text where
+instance HasServiceName (VpcEndpointData s) s Text where
     serviceName =
-        lens (_service_name :: VpcEndpointDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _service_name = a } :: VpcEndpointDataSource s)
+        lens (_service_name :: VpcEndpointData s -> TF.Attribute s Text)
+            (\s a -> s { _service_name = a } :: VpcEndpointData s)
 
-instance HasState (VpcEndpointDataSource s) s Text where
+instance HasState (VpcEndpointData s) s Text where
     state =
-        lens (_state :: VpcEndpointDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: VpcEndpointDataSource s)
+        lens (_state :: VpcEndpointData s -> TF.Attribute s Text)
+            (\s a -> s { _state = a } :: VpcEndpointData s)
 
-instance HasVpcId (VpcEndpointDataSource s) s Text where
+instance HasVpcId (VpcEndpointData s) s Text where
     vpcId =
-        lens (_vpc_id :: VpcEndpointDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: VpcEndpointDataSource s)
+        lens (_vpc_id :: VpcEndpointData s -> TF.Attribute s Text)
+            (\s a -> s { _vpc_id = a } :: VpcEndpointData s)
 
-instance HasComputedPolicy (VpcEndpointDataSource s) Text
+instance HasComputedPolicy (VpcEndpointData s) Text
 
-instance HasComputedPrefixListId (VpcEndpointDataSource s) Text
+instance HasComputedPrefixListId (VpcEndpointData s) Text
 
-instance HasComputedRouteTableIds (VpcEndpointDataSource s) Text
+instance HasComputedRouteTableIds (VpcEndpointData s) Text
 
-vpcEndpointDataSource :: TF.DataSource TF.AWS (VpcEndpointDataSource s)
-vpcEndpointDataSource =
-    TF.newDataSource "aws_vpc_endpoint" $
-        VpcEndpointDataSource {
+vpcEndpointData :: TF.Data TF.AWS (VpcEndpointData s)
+vpcEndpointData =
+    TF.newData "aws_vpc_endpoint" $
+        VpcEndpointData {
               _id = TF.Nil
             , _service_name = TF.Nil
             , _state = TF.Nil
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_vpc_endpoint_service@ AWS datasource.
+{- | The @aws_vpc_endpoint_service@ AWS data.
 
 The VPC Endpoint Service data source allows access to a specific AWS service
 that can be specified when creating a VPC endpoint within the region
 configured in the provider.
 -}
-data VpcEndpointServiceDataSource s = VpcEndpointServiceDataSource {
+data VpcEndpointServiceData s = VpcEndpointServiceData {
       _service :: !(TF.Attribute s Text)
     {- ^ (Required) The common name of the AWS service (e.g. @s3@ ). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcEndpointServiceDataSource s) where
-    toHCL VpcEndpointServiceDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (VpcEndpointServiceData s) where
+    toHCL VpcEndpointServiceData{..} = TF.block $ catMaybes
         [ TF.attribute "service" _service
         ]
 
-instance HasService (VpcEndpointServiceDataSource s) s Text where
+instance HasService (VpcEndpointServiceData s) s Text where
     service =
-        lens (_service :: VpcEndpointServiceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _service = a } :: VpcEndpointServiceDataSource s)
+        lens (_service :: VpcEndpointServiceData s -> TF.Attribute s Text)
+            (\s a -> s { _service = a } :: VpcEndpointServiceData s)
 
-instance HasComputedServiceName (VpcEndpointServiceDataSource s) Text
+instance HasComputedServiceName (VpcEndpointServiceData s) Text
 
-vpcEndpointServiceDataSource :: TF.DataSource TF.AWS (VpcEndpointServiceDataSource s)
-vpcEndpointServiceDataSource =
-    TF.newDataSource "aws_vpc_endpoint_service" $
-        VpcEndpointServiceDataSource {
+vpcEndpointServiceData :: TF.Data TF.AWS (VpcEndpointServiceData s)
+vpcEndpointServiceData =
+    TF.newData "aws_vpc_endpoint_service" $
+        VpcEndpointServiceData {
               _service = TF.Nil
             }
 
-{- | The @aws_vpc_peering_connection@ AWS datasource.
+{- | The @aws_vpc_peering_connection@ AWS data.
 
 The VPC Peering Connection data source provides details about a specific VPC
 peering connection.
 -}
-data VpcPeeringConnectionDataSource s = VpcPeeringConnectionDataSource {
+data VpcPeeringConnectionData s = VpcPeeringConnectionData {
       _cidr_block      :: !(TF.Attribute s TF.CIDR)
     {- ^ (Optional) The CIDR block of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     , _filter          :: !(TF.Attribute s Text)
@@ -3919,8 +3919,8 @@ data VpcPeeringConnectionDataSource s = VpcPeeringConnectionDataSource {
     {- ^ (Optional) The ID of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpcPeeringConnectionDataSource s) where
-    toHCL VpcPeeringConnectionDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (VpcPeeringConnectionData s) where
+    toHCL VpcPeeringConnectionData{..} = TF.block $ catMaybes
         [ TF.attribute "cidr_block" _cidr_block
         , TF.attribute "filter" _filter
         , TF.attribute "id" _id
@@ -3935,74 +3935,74 @@ instance TF.ToHCL (VpcPeeringConnectionDataSource s) where
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasCidrBlock (VpcPeeringConnectionDataSource s) s TF.CIDR where
+instance HasCidrBlock (VpcPeeringConnectionData s) s TF.CIDR where
     cidrBlock =
-        lens (_cidr_block :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.CIDR)
-            (\s a -> s { _cidr_block = a } :: VpcPeeringConnectionDataSource s)
+        lens (_cidr_block :: VpcPeeringConnectionData s -> TF.Attribute s TF.CIDR)
+            (\s a -> s { _cidr_block = a } :: VpcPeeringConnectionData s)
 
-instance HasFilter (VpcPeeringConnectionDataSource s) s Text where
+instance HasFilter (VpcPeeringConnectionData s) s Text where
     filter =
-        lens (_filter :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: VpcPeeringConnectionDataSource s)
+        lens (_filter :: VpcPeeringConnectionData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: VpcPeeringConnectionData s)
 
-instance HasId (VpcPeeringConnectionDataSource s) s Text where
+instance HasId (VpcPeeringConnectionData s) s Text where
     id =
-        lens (_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: VpcPeeringConnectionDataSource s)
+        lens (_id :: VpcPeeringConnectionData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: VpcPeeringConnectionData s)
 
-instance HasOwnerId (VpcPeeringConnectionDataSource s) s Text where
+instance HasOwnerId (VpcPeeringConnectionData s) s Text where
     ownerId =
-        lens (_owner_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _owner_id = a } :: VpcPeeringConnectionDataSource s)
+        lens (_owner_id :: VpcPeeringConnectionData s -> TF.Attribute s Text)
+            (\s a -> s { _owner_id = a } :: VpcPeeringConnectionData s)
 
-instance HasPeerCidrBlock (VpcPeeringConnectionDataSource s) s TF.CIDR where
+instance HasPeerCidrBlock (VpcPeeringConnectionData s) s TF.CIDR where
     peerCidrBlock =
-        lens (_peer_cidr_block :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.CIDR)
-            (\s a -> s { _peer_cidr_block = a } :: VpcPeeringConnectionDataSource s)
+        lens (_peer_cidr_block :: VpcPeeringConnectionData s -> TF.Attribute s TF.CIDR)
+            (\s a -> s { _peer_cidr_block = a } :: VpcPeeringConnectionData s)
 
-instance HasPeerOwnerId (VpcPeeringConnectionDataSource s) s Text where
+instance HasPeerOwnerId (VpcPeeringConnectionData s) s Text where
     peerOwnerId =
-        lens (_peer_owner_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _peer_owner_id = a } :: VpcPeeringConnectionDataSource s)
+        lens (_peer_owner_id :: VpcPeeringConnectionData s -> TF.Attribute s Text)
+            (\s a -> s { _peer_owner_id = a } :: VpcPeeringConnectionData s)
 
-instance HasPeerRegion (VpcPeeringConnectionDataSource s) s TF.Region where
+instance HasPeerRegion (VpcPeeringConnectionData s) s TF.Region where
     peerRegion =
-        lens (_peer_region :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.Region)
-            (\s a -> s { _peer_region = a } :: VpcPeeringConnectionDataSource s)
+        lens (_peer_region :: VpcPeeringConnectionData s -> TF.Attribute s TF.Region)
+            (\s a -> s { _peer_region = a } :: VpcPeeringConnectionData s)
 
-instance HasPeerVpcId (VpcPeeringConnectionDataSource s) s Text where
+instance HasPeerVpcId (VpcPeeringConnectionData s) s Text where
     peerVpcId =
-        lens (_peer_vpc_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _peer_vpc_id = a } :: VpcPeeringConnectionDataSource s)
+        lens (_peer_vpc_id :: VpcPeeringConnectionData s -> TF.Attribute s Text)
+            (\s a -> s { _peer_vpc_id = a } :: VpcPeeringConnectionData s)
 
-instance HasRegion (VpcPeeringConnectionDataSource s) s TF.Region where
+instance HasRegion (VpcPeeringConnectionData s) s TF.Region where
     region =
-        lens (_region :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.Region)
-            (\s a -> s { _region = a } :: VpcPeeringConnectionDataSource s)
+        lens (_region :: VpcPeeringConnectionData s -> TF.Attribute s TF.Region)
+            (\s a -> s { _region = a } :: VpcPeeringConnectionData s)
 
-instance HasStatus (VpcPeeringConnectionDataSource s) s Text where
+instance HasStatus (VpcPeeringConnectionData s) s Text where
     status =
-        lens (_status :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _status = a } :: VpcPeeringConnectionDataSource s)
+        lens (_status :: VpcPeeringConnectionData s -> TF.Attribute s Text)
+            (\s a -> s { _status = a } :: VpcPeeringConnectionData s)
 
-instance HasTags (VpcPeeringConnectionDataSource s) s TF.Tags where
+instance HasTags (VpcPeeringConnectionData s) s TF.Tags where
     tags =
-        lens (_tags :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: VpcPeeringConnectionDataSource s)
+        lens (_tags :: VpcPeeringConnectionData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: VpcPeeringConnectionData s)
 
-instance HasVpcId (VpcPeeringConnectionDataSource s) s Text where
+instance HasVpcId (VpcPeeringConnectionData s) s Text where
     vpcId =
-        lens (_vpc_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: VpcPeeringConnectionDataSource s)
+        lens (_vpc_id :: VpcPeeringConnectionData s -> TF.Attribute s Text)
+            (\s a -> s { _vpc_id = a } :: VpcPeeringConnectionData s)
 
-instance HasComputedAccepter (VpcPeeringConnectionDataSource s) Text
+instance HasComputedAccepter (VpcPeeringConnectionData s) Text
 
-instance HasComputedRequester (VpcPeeringConnectionDataSource s) Text
+instance HasComputedRequester (VpcPeeringConnectionData s) Text
 
-vpcPeeringConnectionDataSource :: TF.DataSource TF.AWS (VpcPeeringConnectionDataSource s)
-vpcPeeringConnectionDataSource =
-    TF.newDataSource "aws_vpc_peering_connection" $
-        VpcPeeringConnectionDataSource {
+vpcPeeringConnectionData :: TF.Data TF.AWS (VpcPeeringConnectionData s)
+vpcPeeringConnectionData =
+    TF.newData "aws_vpc_peering_connection" $
+        VpcPeeringConnectionData {
               _cidr_block = TF.Nil
             , _filter = TF.Nil
             , _id = TF.Nil
@@ -4017,11 +4017,11 @@ vpcPeeringConnectionDataSource =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_vpn_gateway@ AWS datasource.
+{- | The @aws_vpn_gateway@ AWS data.
 
 The VPN Gateway data source provides details about a specific VPN gateway.
 -}
-data VpnGatewayDataSource s = VpnGatewayDataSource {
+data VpnGatewayData s = VpnGatewayData {
       _attached_vpc_id   :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve. -}
     , _availability_zone :: !(TF.Attribute s TF.Zone)
@@ -4036,8 +4036,8 @@ data VpnGatewayDataSource s = VpnGatewayDataSource {
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPN Gateway. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VpnGatewayDataSource s) where
-    toHCL VpnGatewayDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (VpnGatewayData s) where
+    toHCL VpnGatewayData{..} = TF.block $ catMaybes
         [ TF.attribute "attached_vpc_id" _attached_vpc_id
         , TF.attribute "availability_zone" _availability_zone
         , TF.attribute "filter" _filter
@@ -4046,40 +4046,40 @@ instance TF.ToHCL (VpnGatewayDataSource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAttachedVpcId (VpnGatewayDataSource s) s Text where
+instance HasAttachedVpcId (VpnGatewayData s) s Text where
     attachedVpcId =
-        lens (_attached_vpc_id :: VpnGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _attached_vpc_id = a } :: VpnGatewayDataSource s)
+        lens (_attached_vpc_id :: VpnGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _attached_vpc_id = a } :: VpnGatewayData s)
 
-instance HasAvailabilityZone (VpnGatewayDataSource s) s TF.Zone where
+instance HasAvailabilityZone (VpnGatewayData s) s TF.Zone where
     availabilityZone =
-        lens (_availability_zone :: VpnGatewayDataSource s -> TF.Attribute s TF.Zone)
-            (\s a -> s { _availability_zone = a } :: VpnGatewayDataSource s)
+        lens (_availability_zone :: VpnGatewayData s -> TF.Attribute s TF.Zone)
+            (\s a -> s { _availability_zone = a } :: VpnGatewayData s)
 
-instance HasFilter (VpnGatewayDataSource s) s Text where
+instance HasFilter (VpnGatewayData s) s Text where
     filter =
-        lens (_filter :: VpnGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: VpnGatewayDataSource s)
+        lens (_filter :: VpnGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: VpnGatewayData s)
 
-instance HasId (VpnGatewayDataSource s) s Text where
+instance HasId (VpnGatewayData s) s Text where
     id =
-        lens (_id :: VpnGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: VpnGatewayDataSource s)
+        lens (_id :: VpnGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: VpnGatewayData s)
 
-instance HasState (VpnGatewayDataSource s) s Text where
+instance HasState (VpnGatewayData s) s Text where
     state =
-        lens (_state :: VpnGatewayDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: VpnGatewayDataSource s)
+        lens (_state :: VpnGatewayData s -> TF.Attribute s Text)
+            (\s a -> s { _state = a } :: VpnGatewayData s)
 
-instance HasTags (VpnGatewayDataSource s) s TF.Tags where
+instance HasTags (VpnGatewayData s) s TF.Tags where
     tags =
-        lens (_tags :: VpnGatewayDataSource s -> TF.Attribute s TF.Tags)
-            (\s a -> s { _tags = a } :: VpnGatewayDataSource s)
+        lens (_tags :: VpnGatewayData s -> TF.Attribute s TF.Tags)
+            (\s a -> s { _tags = a } :: VpnGatewayData s)
 
-vpnGatewayDataSource :: TF.DataSource TF.AWS (VpnGatewayDataSource s)
-vpnGatewayDataSource =
-    TF.newDataSource "aws_vpn_gateway" $
-        VpnGatewayDataSource {
+vpnGatewayData :: TF.Data TF.AWS (VpnGatewayData s)
+vpnGatewayData =
+    TF.newData "aws_vpn_gateway" $
+        VpnGatewayData {
               _attached_vpc_id = TF.Nil
             , _availability_zone = TF.Nil
             , _filter = TF.Nil
@@ -4091,481 +4091,481 @@ vpnGatewayDataSource =
 class HasAccountAlias a s b | a -> s b where
     accountAlias :: Lens' a (TF.Attribute s b)
 
-instance HasAccountAlias a s b => HasAccountAlias (TF.DataSource p a) s b where
+instance HasAccountAlias a s b => HasAccountAlias (TF.Data p a) s b where
     accountAlias = TF.configuration . accountAlias
 
 class HasAccountId a s b | a -> s b where
     accountId :: Lens' a (TF.Attribute s b)
 
-instance HasAccountId a s b => HasAccountId (TF.DataSource p a) s b where
+instance HasAccountId a s b => HasAccountId (TF.Data p a) s b where
     accountId = TF.configuration . accountId
 
 class HasArn a s b | a -> s b where
     arn :: Lens' a (TF.Attribute s b)
 
-instance HasArn a s b => HasArn (TF.DataSource p a) s b where
+instance HasArn a s b => HasArn (TF.Data p a) s b where
     arn = TF.configuration . arn
 
 class HasAttachedVpcId a s b | a -> s b where
     attachedVpcId :: Lens' a (TF.Attribute s b)
 
-instance HasAttachedVpcId a s b => HasAttachedVpcId (TF.DataSource p a) s b where
+instance HasAttachedVpcId a s b => HasAttachedVpcId (TF.Data p a) s b where
     attachedVpcId = TF.configuration . attachedVpcId
 
 class HasAvailabilityZone a s b | a -> s b where
     availabilityZone :: Lens' a (TF.Attribute s b)
 
-instance HasAvailabilityZone a s b => HasAvailabilityZone (TF.DataSource p a) s b where
+instance HasAvailabilityZone a s b => HasAvailabilityZone (TF.Data p a) s b where
     availabilityZone = TF.configuration . availabilityZone
 
 class HasBucket a s b | a -> s b where
     bucket :: Lens' a (TF.Attribute s b)
 
-instance HasBucket a s b => HasBucket (TF.DataSource p a) s b where
+instance HasBucket a s b => HasBucket (TF.Data p a) s b where
     bucket = TF.configuration . bucket
 
 class HasCidrBlock a s b | a -> s b where
     cidrBlock :: Lens' a (TF.Attribute s b)
 
-instance HasCidrBlock a s b => HasCidrBlock (TF.DataSource p a) s b where
+instance HasCidrBlock a s b => HasCidrBlock (TF.Data p a) s b where
     cidrBlock = TF.configuration . cidrBlock
 
 class HasClusterId a s b | a -> s b where
     clusterId :: Lens' a (TF.Attribute s b)
 
-instance HasClusterId a s b => HasClusterId (TF.DataSource p a) s b where
+instance HasClusterId a s b => HasClusterId (TF.Data p a) s b where
     clusterId = TF.configuration . clusterId
 
 class HasClusterIdentifier a s b | a -> s b where
     clusterIdentifier :: Lens' a (TF.Attribute s b)
 
-instance HasClusterIdentifier a s b => HasClusterIdentifier (TF.DataSource p a) s b where
+instance HasClusterIdentifier a s b => HasClusterIdentifier (TF.Data p a) s b where
     clusterIdentifier = TF.configuration . clusterIdentifier
 
 class HasClusterName a s b | a -> s b where
     clusterName :: Lens' a (TF.Attribute s b)
 
-instance HasClusterName a s b => HasClusterName (TF.DataSource p a) s b where
+instance HasClusterName a s b => HasClusterName (TF.Data p a) s b where
     clusterName = TF.configuration . clusterName
 
 class HasContainerName a s b | a -> s b where
     containerName :: Lens' a (TF.Attribute s b)
 
-instance HasContainerName a s b => HasContainerName (TF.DataSource p a) s b where
+instance HasContainerName a s b => HasContainerName (TF.Data p a) s b where
     containerName = TF.configuration . containerName
 
 class HasContext a s b | a -> s b where
     context :: Lens' a (TF.Attribute s b)
 
-instance HasContext a s b => HasContext (TF.DataSource p a) s b where
+instance HasContext a s b => HasContext (TF.Data p a) s b where
     context = TF.configuration . context
 
 class HasCreationToken a s b | a -> s b where
     creationToken :: Lens' a (TF.Attribute s b)
 
-instance HasCreationToken a s b => HasCreationToken (TF.DataSource p a) s b where
+instance HasCreationToken a s b => HasCreationToken (TF.Data p a) s b where
     creationToken = TF.configuration . creationToken
 
 class HasCurrent a s b | a -> s b where
     current :: Lens' a (TF.Attribute s b)
 
-instance HasCurrent a s b => HasCurrent (TF.DataSource p a) s b where
+instance HasCurrent a s b => HasCurrent (TF.Data p a) s b where
     current = TF.configuration . current
 
 class HasDbInstanceIdentifier a s b | a -> s b where
     dbInstanceIdentifier :: Lens' a (TF.Attribute s b)
 
-instance HasDbInstanceIdentifier a s b => HasDbInstanceIdentifier (TF.DataSource p a) s b where
+instance HasDbInstanceIdentifier a s b => HasDbInstanceIdentifier (TF.Data p a) s b where
     dbInstanceIdentifier = TF.configuration . dbInstanceIdentifier
 
 class HasDbSnapshotIdentifier a s b | a -> s b where
     dbSnapshotIdentifier :: Lens' a (TF.Attribute s b)
 
-instance HasDbSnapshotIdentifier a s b => HasDbSnapshotIdentifier (TF.DataSource p a) s b where
+instance HasDbSnapshotIdentifier a s b => HasDbSnapshotIdentifier (TF.Data p a) s b where
     dbSnapshotIdentifier = TF.configuration . dbSnapshotIdentifier
 
 class HasDefault' a s b | a -> s b where
     default' :: Lens' a (TF.Attribute s b)
 
-instance HasDefault' a s b => HasDefault' (TF.DataSource p a) s b where
+instance HasDefault' a s b => HasDefault' (TF.Data p a) s b where
     default' = TF.configuration . default'
 
 class HasDefaultForAz a s b | a -> s b where
     defaultForAz :: Lens' a (TF.Attribute s b)
 
-instance HasDefaultForAz a s b => HasDefaultForAz (TF.DataSource p a) s b where
+instance HasDefaultForAz a s b => HasDefaultForAz (TF.Data p a) s b where
     defaultForAz = TF.configuration . defaultForAz
 
 class HasDhcpOptionsId a s b | a -> s b where
     dhcpOptionsId :: Lens' a (TF.Attribute s b)
 
-instance HasDhcpOptionsId a s b => HasDhcpOptionsId (TF.DataSource p a) s b where
+instance HasDhcpOptionsId a s b => HasDhcpOptionsId (TF.Data p a) s b where
     dhcpOptionsId = TF.configuration . dhcpOptionsId
 
 class HasDisplayName a s b | a -> s b where
     displayName :: Lens' a (TF.Attribute s b)
 
-instance HasDisplayName a s b => HasDisplayName (TF.DataSource p a) s b where
+instance HasDisplayName a s b => HasDisplayName (TF.Data p a) s b where
     displayName = TF.configuration . displayName
 
 class HasDomain a s b | a -> s b where
     domain :: Lens' a (TF.Attribute s b)
 
-instance HasDomain a s b => HasDomain (TF.DataSource p a) s b where
+instance HasDomain a s b => HasDomain (TF.Data p a) s b where
     domain = TF.configuration . domain
 
 class HasEndpoint a s b | a -> s b where
     endpoint :: Lens' a (TF.Attribute s b)
 
-instance HasEndpoint a s b => HasEndpoint (TF.DataSource p a) s b where
+instance HasEndpoint a s b => HasEndpoint (TF.Data p a) s b where
     endpoint = TF.configuration . endpoint
 
 class HasExecutableUsers a s b | a -> s b where
     executableUsers :: Lens' a (TF.Attribute s b)
 
-instance HasExecutableUsers a s b => HasExecutableUsers (TF.DataSource p a) s b where
+instance HasExecutableUsers a s b => HasExecutableUsers (TF.Data p a) s b where
     executableUsers = TF.configuration . executableUsers
 
 class HasFileSystemId a s b | a -> s b where
     fileSystemId :: Lens' a (TF.Attribute s b)
 
-instance HasFileSystemId a s b => HasFileSystemId (TF.DataSource p a) s b where
+instance HasFileSystemId a s b => HasFileSystemId (TF.Data p a) s b where
     fileSystemId = TF.configuration . fileSystemId
 
 class HasFilter a s b | a -> s b where
     filter :: Lens' a (TF.Attribute s b)
 
-instance HasFilter a s b => HasFilter (TF.DataSource p a) s b where
+instance HasFilter a s b => HasFilter (TF.Data p a) s b where
     filter = TF.configuration . filter
 
 class HasGroupName a s b | a -> s b where
     groupName :: Lens' a (TF.Attribute s b)
 
-instance HasGroupName a s b => HasGroupName (TF.DataSource p a) s b where
+instance HasGroupName a s b => HasGroupName (TF.Data p a) s b where
     groupName = TF.configuration . groupName
 
 class HasId a s b | a -> s b where
     id :: Lens' a (TF.Attribute s b)
 
-instance HasId a s b => HasId (TF.DataSource p a) s b where
+instance HasId a s b => HasId (TF.Data p a) s b where
     id = TF.configuration . id
 
 class HasIncludePublic a s b | a -> s b where
     includePublic :: Lens' a (TF.Attribute s b)
 
-instance HasIncludePublic a s b => HasIncludePublic (TF.DataSource p a) s b where
+instance HasIncludePublic a s b => HasIncludePublic (TF.Data p a) s b where
     includePublic = TF.configuration . includePublic
 
 class HasIncludeShared a s b | a -> s b where
     includeShared :: Lens' a (TF.Attribute s b)
 
-instance HasIncludeShared a s b => HasIncludeShared (TF.DataSource p a) s b where
+instance HasIncludeShared a s b => HasIncludeShared (TF.Data p a) s b where
     includeShared = TF.configuration . includeShared
 
 class HasInstanceId a s b | a -> s b where
     instanceId :: Lens' a (TF.Attribute s b)
 
-instance HasInstanceId a s b => HasInstanceId (TF.DataSource p a) s b where
+instance HasInstanceId a s b => HasInstanceId (TF.Data p a) s b where
     instanceId = TF.configuration . instanceId
 
 class HasInstanceTags a s b | a -> s b where
     instanceTags :: Lens' a (TF.Attribute s b)
 
-instance HasInstanceTags a s b => HasInstanceTags (TF.DataSource p a) s b where
+instance HasInstanceTags a s b => HasInstanceTags (TF.Data p a) s b where
     instanceTags = TF.configuration . instanceTags
 
 class HasInternetGatewayId a s b | a -> s b where
     internetGatewayId :: Lens' a (TF.Attribute s b)
 
-instance HasInternetGatewayId a s b => HasInternetGatewayId (TF.DataSource p a) s b where
+instance HasInternetGatewayId a s b => HasInternetGatewayId (TF.Data p a) s b where
     internetGatewayId = TF.configuration . internetGatewayId
 
 class HasIpv6CidrBlock a s b | a -> s b where
     ipv6CidrBlock :: Lens' a (TF.Attribute s b)
 
-instance HasIpv6CidrBlock a s b => HasIpv6CidrBlock (TF.DataSource p a) s b where
+instance HasIpv6CidrBlock a s b => HasIpv6CidrBlock (TF.Data p a) s b where
     ipv6CidrBlock = TF.configuration . ipv6CidrBlock
 
 class HasKey a s b | a -> s b where
     key :: Lens' a (TF.Attribute s b)
 
-instance HasKey a s b => HasKey (TF.DataSource p a) s b where
+instance HasKey a s b => HasKey (TF.Data p a) s b where
     key = TF.configuration . key
 
 class HasKeyId a s b | a -> s b where
     keyId :: Lens' a (TF.Attribute s b)
 
-instance HasKeyId a s b => HasKeyId (TF.DataSource p a) s b where
+instance HasKeyId a s b => HasKeyId (TF.Data p a) s b where
     keyId = TF.configuration . keyId
 
 class HasLatest a s b | a -> s b where
     latest :: Lens' a (TF.Attribute s b)
 
-instance HasLatest a s b => HasLatest (TF.DataSource p a) s b where
+instance HasLatest a s b => HasLatest (TF.Data p a) s b where
     latest = TF.configuration . latest
 
 class HasLoadBalancerArn a s b | a -> s b where
     loadBalancerArn :: Lens' a (TF.Attribute s b)
 
-instance HasLoadBalancerArn a s b => HasLoadBalancerArn (TF.DataSource p a) s b where
+instance HasLoadBalancerArn a s b => HasLoadBalancerArn (TF.Data p a) s b where
     loadBalancerArn = TF.configuration . loadBalancerArn
 
 class HasMostRecent a s b | a -> s b where
     mostRecent :: Lens' a (TF.Attribute s b)
 
-instance HasMostRecent a s b => HasMostRecent (TF.DataSource p a) s b where
+instance HasMostRecent a s b => HasMostRecent (TF.Data p a) s b where
     mostRecent = TF.configuration . mostRecent
 
 class HasMountTargetId a s b | a -> s b where
     mountTargetId :: Lens' a (TF.Attribute s b)
 
-instance HasMountTargetId a s b => HasMountTargetId (TF.DataSource p a) s b where
+instance HasMountTargetId a s b => HasMountTargetId (TF.Data p a) s b where
     mountTargetId = TF.configuration . mountTargetId
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
+instance HasName a s b => HasName (TF.Data p a) s b where
     name = TF.configuration . name
 
 class HasNamePrefix a s b | a -> s b where
     namePrefix :: Lens' a (TF.Attribute s b)
 
-instance HasNamePrefix a s b => HasNamePrefix (TF.DataSource p a) s b where
+instance HasNamePrefix a s b => HasNamePrefix (TF.Data p a) s b where
     namePrefix = TF.configuration . namePrefix
 
 class HasNameRegex a s b | a -> s b where
     nameRegex :: Lens' a (TF.Attribute s b)
 
-instance HasNameRegex a s b => HasNameRegex (TF.DataSource p a) s b where
+instance HasNameRegex a s b => HasNameRegex (TF.Data p a) s b where
     nameRegex = TF.configuration . nameRegex
 
 class HasOwnerId a s b | a -> s b where
     ownerId :: Lens' a (TF.Attribute s b)
 
-instance HasOwnerId a s b => HasOwnerId (TF.DataSource p a) s b where
+instance HasOwnerId a s b => HasOwnerId (TF.Data p a) s b where
     ownerId = TF.configuration . ownerId
 
 class HasOwners a s b | a -> s b where
     owners :: Lens' a (TF.Attribute s b)
 
-instance HasOwners a s b => HasOwners (TF.DataSource p a) s b where
+instance HasOwners a s b => HasOwners (TF.Data p a) s b where
     owners = TF.configuration . owners
 
 class HasPeerCidrBlock a s b | a -> s b where
     peerCidrBlock :: Lens' a (TF.Attribute s b)
 
-instance HasPeerCidrBlock a s b => HasPeerCidrBlock (TF.DataSource p a) s b where
+instance HasPeerCidrBlock a s b => HasPeerCidrBlock (TF.Data p a) s b where
     peerCidrBlock = TF.configuration . peerCidrBlock
 
 class HasPeerOwnerId a s b | a -> s b where
     peerOwnerId :: Lens' a (TF.Attribute s b)
 
-instance HasPeerOwnerId a s b => HasPeerOwnerId (TF.DataSource p a) s b where
+instance HasPeerOwnerId a s b => HasPeerOwnerId (TF.Data p a) s b where
     peerOwnerId = TF.configuration . peerOwnerId
 
 class HasPeerRegion a s b | a -> s b where
     peerRegion :: Lens' a (TF.Attribute s b)
 
-instance HasPeerRegion a s b => HasPeerRegion (TF.DataSource p a) s b where
+instance HasPeerRegion a s b => HasPeerRegion (TF.Data p a) s b where
     peerRegion = TF.configuration . peerRegion
 
 class HasPeerVpcId a s b | a -> s b where
     peerVpcId :: Lens' a (TF.Attribute s b)
 
-instance HasPeerVpcId a s b => HasPeerVpcId (TF.DataSource p a) s b where
+instance HasPeerVpcId a s b => HasPeerVpcId (TF.Data p a) s b where
     peerVpcId = TF.configuration . peerVpcId
 
 class HasPlaintext a s b | a -> s b where
     plaintext :: Lens' a (TF.Attribute s b)
 
-instance HasPlaintext a s b => HasPlaintext (TF.DataSource p a) s b where
+instance HasPlaintext a s b => HasPlaintext (TF.Data p a) s b where
     plaintext = TF.configuration . plaintext
 
 class HasPolicyId a s b | a -> s b where
     policyId :: Lens' a (TF.Attribute s b)
 
-instance HasPolicyId a s b => HasPolicyId (TF.DataSource p a) s b where
+instance HasPolicyId a s b => HasPolicyId (TF.Data p a) s b where
     policyId = TF.configuration . policyId
 
 class HasPort a s b | a -> s b where
     port :: Lens' a (TF.Attribute s b)
 
-instance HasPort a s b => HasPort (TF.DataSource p a) s b where
+instance HasPort a s b => HasPort (TF.Data p a) s b where
     port = TF.configuration . port
 
 class HasPrefixListId a s b | a -> s b where
     prefixListId :: Lens' a (TF.Attribute s b)
 
-instance HasPrefixListId a s b => HasPrefixListId (TF.DataSource p a) s b where
+instance HasPrefixListId a s b => HasPrefixListId (TF.Data p a) s b where
     prefixListId = TF.configuration . prefixListId
 
 class HasPrivateZone a s b | a -> s b where
     privateZone :: Lens' a (TF.Attribute s b)
 
-instance HasPrivateZone a s b => HasPrivateZone (TF.DataSource p a) s b where
+instance HasPrivateZone a s b => HasPrivateZone (TF.Data p a) s b where
     privateZone = TF.configuration . privateZone
 
 class HasPublicIp a s b | a -> s b where
     publicIp :: Lens' a (TF.Attribute s b)
 
-instance HasPublicIp a s b => HasPublicIp (TF.DataSource p a) s b where
+instance HasPublicIp a s b => HasPublicIp (TF.Data p a) s b where
     publicIp = TF.configuration . publicIp
 
 class HasRegion a s b | a -> s b where
     region :: Lens' a (TF.Attribute s b)
 
-instance HasRegion a s b => HasRegion (TF.DataSource p a) s b where
+instance HasRegion a s b => HasRegion (TF.Data p a) s b where
     region = TF.configuration . region
 
 class HasRegions a s b | a -> s b where
     regions :: Lens' a (TF.Attribute s b)
 
-instance HasRegions a s b => HasRegions (TF.DataSource p a) s b where
+instance HasRegions a s b => HasRegions (TF.Data p a) s b where
     regions = TF.configuration . regions
 
 class HasReplicationGroupId a s b | a -> s b where
     replicationGroupId :: Lens' a (TF.Attribute s b)
 
-instance HasReplicationGroupId a s b => HasReplicationGroupId (TF.DataSource p a) s b where
+instance HasReplicationGroupId a s b => HasReplicationGroupId (TF.Data p a) s b where
     replicationGroupId = TF.configuration . replicationGroupId
 
 class HasRestorableByUserIds a s b | a -> s b where
     restorableByUserIds :: Lens' a (TF.Attribute s b)
 
-instance HasRestorableByUserIds a s b => HasRestorableByUserIds (TF.DataSource p a) s b where
+instance HasRestorableByUserIds a s b => HasRestorableByUserIds (TF.Data p a) s b where
     restorableByUserIds = TF.configuration . restorableByUserIds
 
 class HasRouteTableId a s b | a -> s b where
     routeTableId :: Lens' a (TF.Attribute s b)
 
-instance HasRouteTableId a s b => HasRouteTableId (TF.DataSource p a) s b where
+instance HasRouteTableId a s b => HasRouteTableId (TF.Data p a) s b where
     routeTableId = TF.configuration . routeTableId
 
 class HasSecret a s b | a -> s b where
     secret :: Lens' a (TF.Attribute s b)
 
-instance HasSecret a s b => HasSecret (TF.DataSource p a) s b where
+instance HasSecret a s b => HasSecret (TF.Data p a) s b where
     secret = TF.configuration . secret
 
 class HasService a s b | a -> s b where
     service :: Lens' a (TF.Attribute s b)
 
-instance HasService a s b => HasService (TF.DataSource p a) s b where
+instance HasService a s b => HasService (TF.Data p a) s b where
     service = TF.configuration . service
 
 class HasServiceName a s b | a -> s b where
     serviceName :: Lens' a (TF.Attribute s b)
 
-instance HasServiceName a s b => HasServiceName (TF.DataSource p a) s b where
+instance HasServiceName a s b => HasServiceName (TF.Data p a) s b where
     serviceName = TF.configuration . serviceName
 
 class HasServices a s b | a -> s b where
     services :: Lens' a (TF.Attribute s b)
 
-instance HasServices a s b => HasServices (TF.DataSource p a) s b where
+instance HasServices a s b => HasServices (TF.Data p a) s b where
     services = TF.configuration . services
 
 class HasSnapshotIds a s b | a -> s b where
     snapshotIds :: Lens' a (TF.Attribute s b)
 
-instance HasSnapshotIds a s b => HasSnapshotIds (TF.DataSource p a) s b where
+instance HasSnapshotIds a s b => HasSnapshotIds (TF.Data p a) s b where
     snapshotIds = TF.configuration . snapshotIds
 
 class HasSnapshotType a s b | a -> s b where
     snapshotType :: Lens' a (TF.Attribute s b)
 
-instance HasSnapshotType a s b => HasSnapshotType (TF.DataSource p a) s b where
+instance HasSnapshotType a s b => HasSnapshotType (TF.Data p a) s b where
     snapshotType = TF.configuration . snapshotType
 
 class HasState a s b | a -> s b where
     state :: Lens' a (TF.Attribute s b)
 
-instance HasState a s b => HasState (TF.DataSource p a) s b where
+instance HasState a s b => HasState (TF.Data p a) s b where
     state = TF.configuration . state
 
 class HasStatement a s b | a -> s b where
     statement :: Lens' a (TF.Attribute s b)
 
-instance HasStatement a s b => HasStatement (TF.DataSource p a) s b where
+instance HasStatement a s b => HasStatement (TF.Data p a) s b where
     statement = TF.configuration . statement
 
 class HasStatus a s b | a -> s b where
     status :: Lens' a (TF.Attribute s b)
 
-instance HasStatus a s b => HasStatus (TF.DataSource p a) s b where
+instance HasStatus a s b => HasStatus (TF.Data p a) s b where
     status = TF.configuration . status
 
 class HasStatuses a s b | a -> s b where
     statuses :: Lens' a (TF.Attribute s b)
 
-instance HasStatuses a s b => HasStatuses (TF.DataSource p a) s b where
+instance HasStatuses a s b => HasStatuses (TF.Data p a) s b where
     statuses = TF.configuration . statuses
 
 class HasSubnetId a s b | a -> s b where
     subnetId :: Lens' a (TF.Attribute s b)
 
-instance HasSubnetId a s b => HasSubnetId (TF.DataSource p a) s b where
+instance HasSubnetId a s b => HasSubnetId (TF.Data p a) s b where
     subnetId = TF.configuration . subnetId
 
 class HasTags a s b | a -> s b where
     tags :: Lens' a (TF.Attribute s b)
 
-instance HasTags a s b => HasTags (TF.DataSource p a) s b where
+instance HasTags a s b => HasTags (TF.Data p a) s b where
     tags = TF.configuration . tags
 
 class HasTaskDefinition a s b | a -> s b where
     taskDefinition :: Lens' a (TF.Attribute s b)
 
-instance HasTaskDefinition a s b => HasTaskDefinition (TF.DataSource p a) s b where
+instance HasTaskDefinition a s b => HasTaskDefinition (TF.Data p a) s b where
     taskDefinition = TF.configuration . taskDefinition
 
 class HasTypes a s b | a -> s b where
     types :: Lens' a (TF.Attribute s b)
 
-instance HasTypes a s b => HasTypes (TF.DataSource p a) s b where
+instance HasTypes a s b => HasTypes (TF.Data p a) s b where
     types = TF.configuration . types
 
 class HasUserId a s b | a -> s b where
     userId :: Lens' a (TF.Attribute s b)
 
-instance HasUserId a s b => HasUserId (TF.DataSource p a) s b where
+instance HasUserId a s b => HasUserId (TF.Data p a) s b where
     userId = TF.configuration . userId
 
 class HasUserName a s b | a -> s b where
     userName :: Lens' a (TF.Attribute s b)
 
-instance HasUserName a s b => HasUserName (TF.DataSource p a) s b where
+instance HasUserName a s b => HasUserName (TF.Data p a) s b where
     userName = TF.configuration . userName
 
 class HasValues a s b | a -> s b where
     values :: Lens' a (TF.Attribute s b)
 
-instance HasValues a s b => HasValues (TF.DataSource p a) s b where
+instance HasValues a s b => HasValues (TF.Data p a) s b where
     values = TF.configuration . values
 
 class HasVersionId a s b | a -> s b where
     versionId :: Lens' a (TF.Attribute s b)
 
-instance HasVersionId a s b => HasVersionId (TF.DataSource p a) s b where
+instance HasVersionId a s b => HasVersionId (TF.Data p a) s b where
     versionId = TF.configuration . versionId
 
 class HasVpcId a s b | a -> s b where
     vpcId :: Lens' a (TF.Attribute s b)
 
-instance HasVpcId a s b => HasVpcId (TF.DataSource p a) s b where
+instance HasVpcId a s b => HasVpcId (TF.Data p a) s b where
     vpcId = TF.configuration . vpcId
 
 class HasWithDecryption a s b | a -> s b where
     withDecryption :: Lens' a (TF.Attribute s b)
 
-instance HasWithDecryption a s b => HasWithDecryption (TF.DataSource p a) s b where
+instance HasWithDecryption a s b => HasWithDecryption (TF.Data p a) s b where
     withDecryption = TF.configuration . withDecryption
 
 class HasZoneId a s b | a -> s b where
     zoneId :: Lens' a (TF.Attribute s b)
 
-instance HasZoneId a s b => HasZoneId (TF.DataSource p a) s b where
+instance HasZoneId a s b => HasZoneId (TF.Data p a) s b where
     zoneId = TF.configuration . zoneId
 
 class HasComputedAccepter a b | a -> b where

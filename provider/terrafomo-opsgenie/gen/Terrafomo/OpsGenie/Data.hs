@@ -15,18 +15,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.OpsGenie.DataSource
+-- Module      : Terrafomo.OpsGenie.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OpsGenie.DataSource
+module Terrafomo.OpsGenie.Data
     (
     -- * Types
-      UserDataSource (..)
-    , userDataSource
+      UserData (..)
+    , userData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -49,7 +49,7 @@ import qualified Data.Word                   as TF
 import qualified GHC.Base                    as TF
 import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.DataSource        as TF
+import qualified Terrafomo.Data              as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
 import qualified Terrafomo.Meta              as TF
@@ -58,41 +58,41 @@ import qualified Terrafomo.OpsGenie.Provider as TF
 import qualified Terrafomo.OpsGenie.Types    as TF
 import qualified Terrafomo.Resource          as TF
 
-{- | The @opsgenie_user@ OpsGenie datasource.
+{- | The @opsgenie_user@ OpsGenie data.
 
 Use this data source to get information about a specific user within
 OpsGenie.
 -}
-data UserDataSource s = UserDataSource {
+data UserData s = UserData {
       _username :: !(TF.Attribute s Text)
     {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserDataSource s) where
-    toHCL UserDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (UserData s) where
+    toHCL UserData{..} = TF.block $ catMaybes
         [ TF.attribute "username" _username
         ]
 
-instance HasUsername (UserDataSource s) s Text where
+instance HasUsername (UserData s) s Text where
     username =
-        lens (_username :: UserDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: UserDataSource s)
+        lens (_username :: UserData s -> TF.Attribute s Text)
+            (\s a -> s { _username = a } :: UserData s)
 
-instance HasComputedFullName (UserDataSource s) Text
+instance HasComputedFullName (UserData s) Text
 
-instance HasComputedRole (UserDataSource s) Text
+instance HasComputedRole (UserData s) Text
 
-userDataSource :: TF.DataSource TF.OpsGenie (UserDataSource s)
-userDataSource =
-    TF.newDataSource "opsgenie_user" $
-        UserDataSource {
+userData :: TF.Data TF.OpsGenie (UserData s)
+userData =
+    TF.newData "opsgenie_user" $
+        UserData {
               _username = TF.Nil
             }
 
 class HasUsername a s b | a -> s b where
     username :: Lens' a (TF.Attribute s b)
 
-instance HasUsername a s b => HasUsername (TF.DataSource p a) s b where
+instance HasUsername a s b => HasUsername (TF.Data p a) s b where
     username = TF.configuration . username
 
 class HasComputedFullName a b | a -> b where

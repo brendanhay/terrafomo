@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.ProfitBricks
-    - Terrafomo.ProfitBricks.DataSource
+    - Terrafomo.ProfitBricks.Data
     - Terrafomo.ProfitBricks.Resource
 
   reexported-modules: >

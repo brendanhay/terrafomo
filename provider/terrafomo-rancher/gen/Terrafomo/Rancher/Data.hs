@@ -15,24 +15,24 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Rancher.DataSource
+-- Module      : Terrafomo.Rancher.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Rancher.DataSource
+module Terrafomo.Rancher.Data
     (
     -- * Types
-      CertificateDataSource (..)
-    , certificateDataSource
+      CertificateData (..)
+    , certificateData
 
-    , EnvironmentDataSource (..)
-    , environmentDataSource
+    , EnvironmentData (..)
+    , environmentData
 
-    , SettingDataSource (..)
-    , settingDataSource
+    , SettingData (..)
+    , settingData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -69,7 +69,7 @@ import qualified Data.Word                  as TF
 import qualified GHC.Base                   as TF
 import qualified Numeric.Natural            as TF
 import qualified Terrafomo.Attribute        as TF
-import qualified Terrafomo.DataSource       as TF
+import qualified Terrafomo.Data             as TF
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.IP               as TF
 import qualified Terrafomo.Meta             as TF
@@ -78,135 +78,135 @@ import qualified Terrafomo.Rancher.Provider as TF
 import qualified Terrafomo.Rancher.Types    as TF
 import qualified Terrafomo.Resource         as TF
 
-{- | The @rancher_certificate@ Rancher datasource.
+{- | The @rancher_certificate@ Rancher data.
 
 Use this data source to retrieve information about a Rancher certificate.
 -}
-data CertificateDataSource s = CertificateDataSource {
+data CertificateData s = CertificateData {
       _environment_id :: !(TF.Attribute s Text)
     {- ^ (Required) The ID of the environment. -}
     , _name           :: !(TF.Attribute s Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CertificateDataSource s) where
-    toHCL CertificateDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (CertificateData s) where
+    toHCL CertificateData{..} = TF.block $ catMaybes
         [ TF.attribute "environment_id" _environment_id
         , TF.attribute "name" _name
         ]
 
-instance HasEnvironmentId (CertificateDataSource s) s Text where
+instance HasEnvironmentId (CertificateData s) s Text where
     environmentId =
-        lens (_environment_id :: CertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: CertificateDataSource s)
+        lens (_environment_id :: CertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _environment_id = a } :: CertificateData s)
 
-instance HasName (CertificateDataSource s) s Text where
+instance HasName (CertificateData s) s Text where
     name =
-        lens (_name :: CertificateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CertificateDataSource s)
+        lens (_name :: CertificateData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: CertificateData s)
 
-instance HasComputedAlgorithm (CertificateDataSource s) Text
+instance HasComputedAlgorithm (CertificateData s) Text
 
-instance HasComputedCertFingerprint (CertificateDataSource s) Text
+instance HasComputedCertFingerprint (CertificateData s) Text
 
-instance HasComputedCn (CertificateDataSource s) Text
+instance HasComputedCn (CertificateData s) Text
 
-instance HasComputedExpiresAt (CertificateDataSource s) Text
+instance HasComputedExpiresAt (CertificateData s) Text
 
-instance HasComputedId (CertificateDataSource s) Text
+instance HasComputedId (CertificateData s) Text
 
-instance HasComputedIssuedAt (CertificateDataSource s) Text
+instance HasComputedIssuedAt (CertificateData s) Text
 
-instance HasComputedIssuer (CertificateDataSource s) Text
+instance HasComputedIssuer (CertificateData s) Text
 
-instance HasComputedSerialNumber (CertificateDataSource s) Text
+instance HasComputedSerialNumber (CertificateData s) Text
 
-instance HasComputedSubjectAlternativeNames (CertificateDataSource s) Text
+instance HasComputedSubjectAlternativeNames (CertificateData s) Text
 
-instance HasComputedVersion (CertificateDataSource s) Text
+instance HasComputedVersion (CertificateData s) Text
 
-certificateDataSource :: TF.DataSource TF.Rancher (CertificateDataSource s)
-certificateDataSource =
-    TF.newDataSource "rancher_certificate" $
-        CertificateDataSource {
+certificateData :: TF.Data TF.Rancher (CertificateData s)
+certificateData =
+    TF.newData "rancher_certificate" $
+        CertificateData {
               _environment_id = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @rancher_environment@ Rancher datasource.
+{- | The @rancher_environment@ Rancher data.
 
 Use this data source to retrieve information about a Rancher environment.
 -}
-data EnvironmentDataSource s = EnvironmentDataSource {
+data EnvironmentData s = EnvironmentData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EnvironmentDataSource s) where
-    toHCL EnvironmentDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EnvironmentData s) where
+    toHCL EnvironmentData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (EnvironmentDataSource s) s Text where
+instance HasName (EnvironmentData s) s Text where
     name =
-        lens (_name :: EnvironmentDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EnvironmentDataSource s)
+        lens (_name :: EnvironmentData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: EnvironmentData s)
 
-instance HasComputedDescription (EnvironmentDataSource s) Text
+instance HasComputedDescription (EnvironmentData s) Text
 
-instance HasComputedId (EnvironmentDataSource s) Text
+instance HasComputedId (EnvironmentData s) Text
 
-instance HasComputedMember (EnvironmentDataSource s) Text
+instance HasComputedMember (EnvironmentData s) Text
 
-instance HasComputedOrchestration (EnvironmentDataSource s) Text
+instance HasComputedOrchestration (EnvironmentData s) Text
 
-instance HasComputedProjectTemplateId (EnvironmentDataSource s) Text
+instance HasComputedProjectTemplateId (EnvironmentData s) Text
 
-environmentDataSource :: TF.DataSource TF.Rancher (EnvironmentDataSource s)
-environmentDataSource =
-    TF.newDataSource "rancher_environment" $
-        EnvironmentDataSource {
+environmentData :: TF.Data TF.Rancher (EnvironmentData s)
+environmentData =
+    TF.newData "rancher_environment" $
+        EnvironmentData {
               _name = TF.Nil
             }
 
-{- | The @rancher_setting@ Rancher datasource.
+{- | The @rancher_setting@ Rancher data.
 
 Use this data source to retrieve information about a Rancher setting.
 -}
-data SettingDataSource s = SettingDataSource {
+data SettingData s = SettingData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SettingDataSource s) where
-    toHCL SettingDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SettingData s) where
+    toHCL SettingData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (SettingDataSource s) s Text where
+instance HasName (SettingData s) s Text where
     name =
-        lens (_name :: SettingDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SettingDataSource s)
+        lens (_name :: SettingData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SettingData s)
 
-instance HasComputedValue (SettingDataSource s) Text
+instance HasComputedValue (SettingData s) Text
 
-settingDataSource :: TF.DataSource TF.Rancher (SettingDataSource s)
-settingDataSource =
-    TF.newDataSource "rancher_setting" $
-        SettingDataSource {
+settingData :: TF.Data TF.Rancher (SettingData s)
+settingData =
+    TF.newData "rancher_setting" $
+        SettingData {
               _name = TF.Nil
             }
 
 class HasEnvironmentId a s b | a -> s b where
     environmentId :: Lens' a (TF.Attribute s b)
 
-instance HasEnvironmentId a s b => HasEnvironmentId (TF.DataSource p a) s b where
+instance HasEnvironmentId a s b => HasEnvironmentId (TF.Data p a) s b where
     environmentId = TF.configuration . environmentId
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
+instance HasName a s b => HasName (TF.Data p a) s b where
     name = TF.configuration . name
 
 class HasComputedAlgorithm a b | a -> b where

@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.GitHub
-    - Terrafomo.GitHub.DataSource
+    - Terrafomo.GitHub.Data
     - Terrafomo.GitHub.Resource
 
   reexported-modules: >

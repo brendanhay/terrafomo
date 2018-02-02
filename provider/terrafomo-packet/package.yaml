@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Packet
-    - Terrafomo.Packet.DataSource
+    - Terrafomo.Packet.Data
     - Terrafomo.Packet.Resource
 
   reexported-modules: >

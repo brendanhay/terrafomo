@@ -15,18 +15,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Cloudflare.DataSource
+-- Module      : Terrafomo.Cloudflare.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cloudflare.DataSource
+module Terrafomo.Cloudflare.Data
     (
     -- * Types
-      IpRangesDataSource (..)
-    , ipRangesDataSource
+      IpRangesData (..)
+    , ipRangesData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -51,34 +51,34 @@ import qualified Numeric.Natural               as TF
 import qualified Terrafomo.Attribute           as TF
 import qualified Terrafomo.Cloudflare.Provider as TF
 import qualified Terrafomo.Cloudflare.Types    as TF
-import qualified Terrafomo.DataSource          as TF
+import qualified Terrafomo.Data                as TF
 import qualified Terrafomo.HCL                 as TF
 import qualified Terrafomo.IP                  as TF
 import qualified Terrafomo.Meta                as TF
 import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Resource            as TF
 
-{- | The @cloudflare_ip_ranges@ Cloudflare datasource.
+{- | The @cloudflare_ip_ranges@ Cloudflare data.
 
 Use this data source to get the <https://www.cloudflare.com/ips/> of
 CloudFlare edge nodes.
 -}
-data IpRangesDataSource s = IpRangesDataSource {
+data IpRangesData s = IpRangesData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpRangesDataSource s) where
+instance TF.ToHCL (IpRangesData s) where
     toHCL _ = TF.block []
 
-instance HasComputedCidrBlocks (IpRangesDataSource s) Text
+instance HasComputedCidrBlocks (IpRangesData s) Text
 
-instance HasComputedIpv4CidrBlocks (IpRangesDataSource s) Text
+instance HasComputedIpv4CidrBlocks (IpRangesData s) Text
 
-instance HasComputedIpv6CidrBlocks (IpRangesDataSource s) Text
+instance HasComputedIpv6CidrBlocks (IpRangesData s) Text
 
-ipRangesDataSource :: TF.DataSource TF.Cloudflare (IpRangesDataSource s)
-ipRangesDataSource =
-    TF.newDataSource "cloudflare_ip_ranges" $
-        IpRangesDataSource {
+ipRangesData :: TF.Data TF.Cloudflare (IpRangesData s)
+ipRangesData =
+    TF.newData "cloudflare_ip_ranges" $
+        IpRangesData {
             }
 
 class HasComputedCidrBlocks a b | a -> b where

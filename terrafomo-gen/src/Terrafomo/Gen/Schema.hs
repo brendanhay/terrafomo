@@ -31,7 +31,12 @@ import qualified Terrafomo.Gen.JSON as JSON
 data SchemaType
     = Resource
     | DataSource
-      deriving (Show, Read, Eq)
+      deriving (Eq)
+
+instance Show SchemaType where
+    show = \case
+        Resource   -> "Resource"
+        DataSource -> "Data"
 
 instance ToJSON SchemaType where
     toJSON = JSON.toJSON . show

@@ -15,27 +15,27 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Triton.DataSource
+-- Module      : Terrafomo.Triton.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Triton.DataSource
+module Terrafomo.Triton.Data
     (
     -- * Types
-      AccountDataSource (..)
-    , accountDataSource
+      AccountData (..)
+    , accountData
 
-    , DatacenterDataSource (..)
-    , datacenterDataSource
+    , DatacenterData (..)
+    , datacenterData
 
-    , ImageDataSource (..)
-    , imageDataSource
+    , ImageData (..)
+    , imageData
 
-    , NetworkDataSource (..)
-    , networkDataSource
+    , NetworkData (..)
+    , networkData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -66,7 +66,7 @@ import qualified Data.Word                 as TF
 import qualified GHC.Base                  as TF
 import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.DataSource      as TF
+import qualified Terrafomo.Data            as TF
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.IP              as TF
 import qualified Terrafomo.Meta            as TF
@@ -75,75 +75,75 @@ import qualified Terrafomo.Resource        as TF
 import qualified Terrafomo.Triton.Provider as TF
 import qualified Terrafomo.Triton.Types    as TF
 
-{- | The @triton_account@ Triton datasource.
+{- | The @triton_account@ Triton data.
 
 The @triton_account@ data source queries the Triton Account API for account
 information.
 -}
-data AccountDataSource s = AccountDataSource {
+data AccountData s = AccountData {
       _cns_enabled :: !(TF.Attribute s Text)
     {- ^ - (bool) Whether CNS is enabled for the account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AccountDataSource s) where
-    toHCL AccountDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AccountData s) where
+    toHCL AccountData{..} = TF.block $ catMaybes
         [ TF.attribute "cns_enabled" _cns_enabled
         ]
 
-instance HasCnsEnabled (AccountDataSource s) s Text where
+instance HasCnsEnabled (AccountData s) s Text where
     cnsEnabled =
-        lens (_cns_enabled :: AccountDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _cns_enabled = a } :: AccountDataSource s)
+        lens (_cns_enabled :: AccountData s -> TF.Attribute s Text)
+            (\s a -> s { _cns_enabled = a } :: AccountData s)
 
-accountDataSource :: TF.DataSource TF.Triton (AccountDataSource s)
-accountDataSource =
-    TF.newDataSource "triton_account" $
-        AccountDataSource {
+accountData :: TF.Data TF.Triton (AccountData s)
+accountData =
+    TF.newData "triton_account" $
+        AccountData {
               _cns_enabled = TF.Nil
             }
 
-{- | The @triton_datacenter@ Triton datasource.
+{- | The @triton_datacenter@ Triton data.
 
 The @triton_datacenter@ data source queries the Triton Account API for
 datacenter information.
 -}
-data DatacenterDataSource s = DatacenterDataSource {
+data DatacenterData s = DatacenterData {
       _endpoint :: !(TF.Attribute s Text)
     {- ^ - (string) The endpoint url of the datacenter -}
     , _name     :: !(TF.Attribute s Text)
     {- ^ - (string) The name of the datacenter. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DatacenterDataSource s) where
-    toHCL DatacenterDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (DatacenterData s) where
+    toHCL DatacenterData{..} = TF.block $ catMaybes
         [ TF.attribute "endpoint" _endpoint
         , TF.attribute "name" _name
         ]
 
-instance HasEndpoint (DatacenterDataSource s) s Text where
+instance HasEndpoint (DatacenterData s) s Text where
     endpoint =
-        lens (_endpoint :: DatacenterDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _endpoint = a } :: DatacenterDataSource s)
+        lens (_endpoint :: DatacenterData s -> TF.Attribute s Text)
+            (\s a -> s { _endpoint = a } :: DatacenterData s)
 
-instance HasName (DatacenterDataSource s) s Text where
+instance HasName (DatacenterData s) s Text where
     name =
-        lens (_name :: DatacenterDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatacenterDataSource s)
+        lens (_name :: DatacenterData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: DatacenterData s)
 
-datacenterDataSource :: TF.DataSource TF.Triton (DatacenterDataSource s)
-datacenterDataSource =
-    TF.newDataSource "triton_datacenter" $
-        DatacenterDataSource {
+datacenterData :: TF.Data TF.Triton (DatacenterData s)
+datacenterData =
+    TF.newData "triton_datacenter" $
+        DatacenterData {
               _endpoint = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @triton_image@ Triton datasource.
+{- | The @triton_image@ Triton data.
 
 The @triton_image@ data source queries the Triton Image API for an image ID
 based on a variety of different parameters.
 -}
-data ImageDataSource s = ImageDataSource {
+data ImageData s = ImageData {
       _most_recent :: !(TF.Attribute s Text)
     {- ^ - (bool) If more than one result is returned, use the most recent Image. -}
     , _name        :: !(TF.Attribute s Text)
@@ -162,8 +162,8 @@ data ImageDataSource s = ImageDataSource {
     {- ^ - (string) The version for the image -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageDataSource s) where
-    toHCL ImageDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ImageData s) where
+    toHCL ImageData{..} = TF.block $ catMaybes
         [ TF.attribute "most_recent" _most_recent
         , TF.attribute "name" _name
         , TF.attribute "os" _os
@@ -174,50 +174,50 @@ instance TF.ToHCL (ImageDataSource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasMostRecent (ImageDataSource s) s Text where
+instance HasMostRecent (ImageData s) s Text where
     mostRecent =
-        lens (_most_recent :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: ImageDataSource s)
+        lens (_most_recent :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _most_recent = a } :: ImageData s)
 
-instance HasName (ImageDataSource s) s Text where
+instance HasName (ImageData s) s Text where
     name =
-        lens (_name :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageDataSource s)
+        lens (_name :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ImageData s)
 
-instance HasOs (ImageDataSource s) s Text where
+instance HasOs (ImageData s) s Text where
     os =
-        lens (_os :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _os = a } :: ImageDataSource s)
+        lens (_os :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _os = a } :: ImageData s)
 
-instance HasOwner (ImageDataSource s) s Text where
+instance HasOwner (ImageData s) s Text where
     owner =
-        lens (_owner :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _owner = a } :: ImageDataSource s)
+        lens (_owner :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _owner = a } :: ImageData s)
 
-instance HasPublic (ImageDataSource s) s Text where
+instance HasPublic (ImageData s) s Text where
     public =
-        lens (_public :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _public = a } :: ImageDataSource s)
+        lens (_public :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _public = a } :: ImageData s)
 
-instance HasState (ImageDataSource s) s Text where
+instance HasState (ImageData s) s Text where
     state =
-        lens (_state :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: ImageDataSource s)
+        lens (_state :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _state = a } :: ImageData s)
 
-instance HasType' (ImageDataSource s) s Text where
+instance HasType' (ImageData s) s Text where
     type' =
-        lens (_type' :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: ImageDataSource s)
+        lens (_type' :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _type' = a } :: ImageData s)
 
-instance HasVersion (ImageDataSource s) s Text where
+instance HasVersion (ImageData s) s Text where
     version =
-        lens (_version :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _version = a } :: ImageDataSource s)
+        lens (_version :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _version = a } :: ImageData s)
 
-imageDataSource :: TF.DataSource TF.Triton (ImageDataSource s)
-imageDataSource =
-    TF.newDataSource "triton_image" $
-        ImageDataSource {
+imageData :: TF.Data TF.Triton (ImageData s)
+imageData =
+    TF.newData "triton_image" $
+        ImageData {
               _most_recent = TF.Nil
             , _name = TF.Nil
             , _os = TF.Nil
@@ -228,93 +228,93 @@ imageDataSource =
             , _version = TF.Nil
             }
 
-{- | The @triton_network@ Triton datasource.
+{- | The @triton_network@ Triton data.
 
 The @triton_network@ data source queries the Triton Network API for a
 network ID based on the name of the network.
 -}
-data NetworkDataSource s = NetworkDataSource {
+data NetworkData s = NetworkData {
       _name :: !(TF.Attribute s Text)
     {- ^ - (string) The name of the network. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkDataSource s) where
-    toHCL NetworkDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (NetworkData s) where
+    toHCL NetworkData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (NetworkDataSource s) s Text where
+instance HasName (NetworkData s) s Text where
     name =
-        lens (_name :: NetworkDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NetworkDataSource s)
+        lens (_name :: NetworkData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: NetworkData s)
 
-instance HasComputedId (NetworkDataSource s) Text
+instance HasComputedId (NetworkData s) Text
 
-networkDataSource :: TF.DataSource TF.Triton (NetworkDataSource s)
-networkDataSource =
-    TF.newDataSource "triton_network" $
-        NetworkDataSource {
+networkData :: TF.Data TF.Triton (NetworkData s)
+networkData =
+    TF.newData "triton_network" $
+        NetworkData {
               _name = TF.Nil
             }
 
 class HasCnsEnabled a s b | a -> s b where
     cnsEnabled :: Lens' a (TF.Attribute s b)
 
-instance HasCnsEnabled a s b => HasCnsEnabled (TF.DataSource p a) s b where
+instance HasCnsEnabled a s b => HasCnsEnabled (TF.Data p a) s b where
     cnsEnabled = TF.configuration . cnsEnabled
 
 class HasEndpoint a s b | a -> s b where
     endpoint :: Lens' a (TF.Attribute s b)
 
-instance HasEndpoint a s b => HasEndpoint (TF.DataSource p a) s b where
+instance HasEndpoint a s b => HasEndpoint (TF.Data p a) s b where
     endpoint = TF.configuration . endpoint
 
 class HasMostRecent a s b | a -> s b where
     mostRecent :: Lens' a (TF.Attribute s b)
 
-instance HasMostRecent a s b => HasMostRecent (TF.DataSource p a) s b where
+instance HasMostRecent a s b => HasMostRecent (TF.Data p a) s b where
     mostRecent = TF.configuration . mostRecent
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
+instance HasName a s b => HasName (TF.Data p a) s b where
     name = TF.configuration . name
 
 class HasOs a s b | a -> s b where
     os :: Lens' a (TF.Attribute s b)
 
-instance HasOs a s b => HasOs (TF.DataSource p a) s b where
+instance HasOs a s b => HasOs (TF.Data p a) s b where
     os = TF.configuration . os
 
 class HasOwner a s b | a -> s b where
     owner :: Lens' a (TF.Attribute s b)
 
-instance HasOwner a s b => HasOwner (TF.DataSource p a) s b where
+instance HasOwner a s b => HasOwner (TF.Data p a) s b where
     owner = TF.configuration . owner
 
 class HasPublic a s b | a -> s b where
     public :: Lens' a (TF.Attribute s b)
 
-instance HasPublic a s b => HasPublic (TF.DataSource p a) s b where
+instance HasPublic a s b => HasPublic (TF.Data p a) s b where
     public = TF.configuration . public
 
 class HasState a s b | a -> s b where
     state :: Lens' a (TF.Attribute s b)
 
-instance HasState a s b => HasState (TF.DataSource p a) s b where
+instance HasState a s b => HasState (TF.Data p a) s b where
     state = TF.configuration . state
 
 class HasType' a s b | a -> s b where
     type' :: Lens' a (TF.Attribute s b)
 
-instance HasType' a s b => HasType' (TF.DataSource p a) s b where
+instance HasType' a s b => HasType' (TF.Data p a) s b where
     type' = TF.configuration . type'
 
 class HasVersion a s b | a -> s b where
     version :: Lens' a (TF.Attribute s b)
 
-instance HasVersion a s b => HasVersion (TF.DataSource p a) s b where
+instance HasVersion a s b => HasVersion (TF.Data p a) s b where
     version = TF.configuration . version
 
 class HasComputedId a b | a -> b where

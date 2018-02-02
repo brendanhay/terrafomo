@@ -15,66 +15,66 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.AzureRM.DataSource
+-- Module      : Terrafomo.AzureRM.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AzureRM.DataSource
+module Terrafomo.AzureRM.Data
     (
     -- * Types
-      AppServicePlanDataSource (..)
-    , appServicePlanDataSource
+      AppServicePlanData (..)
+    , appServicePlanData
 
-    , BuiltinRoleDefinitionDataSource (..)
-    , builtinRoleDefinitionDataSource
+    , BuiltinRoleDefinitionData (..)
+    , builtinRoleDefinitionData
 
-    , ClientConfigDataSource (..)
-    , clientConfigDataSource
+    , ClientConfigData (..)
+    , clientConfigData
 
-    , DnsZoneDataSource (..)
-    , dnsZoneDataSource
+    , DnsZoneData (..)
+    , dnsZoneData
 
-    , EventhubNamespaceDataSource (..)
-    , eventhubNamespaceDataSource
+    , EventhubNamespaceData (..)
+    , eventhubNamespaceData
 
-    , ImageDataSource (..)
-    , imageDataSource
+    , ImageData (..)
+    , imageData
 
-    , KeyVaultAccessPolicyDataSource (..)
-    , keyVaultAccessPolicyDataSource
+    , KeyVaultAccessPolicyData (..)
+    , keyVaultAccessPolicyData
 
-    , ManagedDiskDataSource (..)
-    , managedDiskDataSource
+    , ManagedDiskData (..)
+    , managedDiskData
 
-    , NetworkSecurityGroupDataSource (..)
-    , networkSecurityGroupDataSource
+    , NetworkSecurityGroupData (..)
+    , networkSecurityGroupData
 
-    , PlatformImageDataSource (..)
-    , platformImageDataSource
+    , PlatformImageData (..)
+    , platformImageData
 
-    , PublicIpDataSource (..)
-    , publicIpDataSource
+    , PublicIpData (..)
+    , publicIpData
 
-    , ResourceGroupDataSource (..)
-    , resourceGroupDataSource
+    , ResourceGroupData (..)
+    , resourceGroupData
 
-    , RoleDefinitionDataSource (..)
-    , roleDefinitionDataSource
+    , RoleDefinitionData (..)
+    , roleDefinitionData
 
-    , SnapshotDataSource (..)
-    , snapshotDataSource
+    , SnapshotData (..)
+    , snapshotData
 
-    , SubnetDataSource (..)
-    , subnetDataSource
+    , SubnetData (..)
+    , subnetData
 
-    , SubscriptionDataSource (..)
-    , subscriptionDataSource
+    , SubscriptionData (..)
+    , subscriptionData
 
-    , VirtualNetworkDataSource (..)
-    , virtualNetworkDataSource
+    , VirtualNetworkData (..)
+    , virtualNetworkData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -158,105 +158,105 @@ import qualified Numeric.Natural            as TF
 import qualified Terrafomo.Attribute        as TF
 import qualified Terrafomo.AzureRM.Provider as TF
 import qualified Terrafomo.AzureRM.Types    as TF
-import qualified Terrafomo.DataSource       as TF
+import qualified Terrafomo.Data             as TF
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.IP               as TF
 import qualified Terrafomo.Meta             as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Resource         as TF
 
-{- | The @azurerm_app_service_plan@ AzureRM datasource.
+{- | The @azurerm_app_service_plan@ AzureRM data.
 
 Use this data source to obtain information about an App Service Plan
 (formerly known as a @Server Farm@ ).
 -}
-data AppServicePlanDataSource s = AppServicePlanDataSource {
+data AppServicePlanData s = AppServicePlanData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the App Service Plan. -}
     , _resource_group_name :: !(TF.Attribute s Text)
     {- ^ (Required) The Name of the Resource Group where the App Service Plan exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AppServicePlanDataSource s) where
-    toHCL AppServicePlanDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AppServicePlanData s) where
+    toHCL AppServicePlanData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasName (AppServicePlanDataSource s) s Text where
+instance HasName (AppServicePlanData s) s Text where
     name =
-        lens (_name :: AppServicePlanDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AppServicePlanDataSource s)
+        lens (_name :: AppServicePlanData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: AppServicePlanData s)
 
-instance HasResourceGroupName (AppServicePlanDataSource s) s Text where
+instance HasResourceGroupName (AppServicePlanData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: AppServicePlanDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: AppServicePlanDataSource s)
+        lens (_resource_group_name :: AppServicePlanData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: AppServicePlanData s)
 
-instance HasComputedId (AppServicePlanDataSource s) Text
+instance HasComputedId (AppServicePlanData s) Text
 
-instance HasComputedKind (AppServicePlanDataSource s) Text
+instance HasComputedKind (AppServicePlanData s) Text
 
-instance HasComputedLocation (AppServicePlanDataSource s) Text
+instance HasComputedLocation (AppServicePlanData s) Text
 
-instance HasComputedProperties (AppServicePlanDataSource s) Text
+instance HasComputedProperties (AppServicePlanData s) Text
 
-instance HasComputedSku (AppServicePlanDataSource s) Text
+instance HasComputedSku (AppServicePlanData s) Text
 
-instance HasComputedTags (AppServicePlanDataSource s) Text
+instance HasComputedTags (AppServicePlanData s) Text
 
-appServicePlanDataSource :: TF.DataSource TF.AzureRM (AppServicePlanDataSource s)
-appServicePlanDataSource =
-    TF.newDataSource "azurerm_app_service_plan" $
-        AppServicePlanDataSource {
+appServicePlanData :: TF.Data TF.AzureRM (AppServicePlanData s)
+appServicePlanData =
+    TF.newData "azurerm_app_service_plan" $
+        AppServicePlanData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_builtin_role_definition@ AzureRM datasource.
+{- | The @azurerm_builtin_role_definition@ AzureRM data.
 
 Use this data source to access the properties of a built-in Role Definition.
 To access information about a custom Role Definition, <role_definition.html>
 instead.
 -}
-data BuiltinRoleDefinitionDataSource s = BuiltinRoleDefinitionDataSource {
+data BuiltinRoleDefinitionData s = BuiltinRoleDefinitionData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the built-in Role Definition. Possible values are: @Contributor@ , @Owner@ , @Reader@ and @VirtualMachineContributor@ . -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (BuiltinRoleDefinitionDataSource s) where
-    toHCL BuiltinRoleDefinitionDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (BuiltinRoleDefinitionData s) where
+    toHCL BuiltinRoleDefinitionData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (BuiltinRoleDefinitionDataSource s) s Text where
+instance HasName (BuiltinRoleDefinitionData s) s Text where
     name =
-        lens (_name :: BuiltinRoleDefinitionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: BuiltinRoleDefinitionDataSource s)
+        lens (_name :: BuiltinRoleDefinitionData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: BuiltinRoleDefinitionData s)
 
-instance HasComputedAssignableScopes (BuiltinRoleDefinitionDataSource s) Text
+instance HasComputedAssignableScopes (BuiltinRoleDefinitionData s) Text
 
-instance HasComputedDescription (BuiltinRoleDefinitionDataSource s) Text
+instance HasComputedDescription (BuiltinRoleDefinitionData s) Text
 
-instance HasComputedId (BuiltinRoleDefinitionDataSource s) Text
+instance HasComputedId (BuiltinRoleDefinitionData s) Text
 
-instance HasComputedPermissions (BuiltinRoleDefinitionDataSource s) Text
+instance HasComputedPermissions (BuiltinRoleDefinitionData s) Text
 
-instance HasComputedType' (BuiltinRoleDefinitionDataSource s) Text
+instance HasComputedType' (BuiltinRoleDefinitionData s) Text
 
-builtinRoleDefinitionDataSource :: TF.DataSource TF.AzureRM (BuiltinRoleDefinitionDataSource s)
-builtinRoleDefinitionDataSource =
-    TF.newDataSource "azurerm_builtin_role_definition" $
-        BuiltinRoleDefinitionDataSource {
+builtinRoleDefinitionData :: TF.Data TF.AzureRM (BuiltinRoleDefinitionData s)
+builtinRoleDefinitionData =
+    TF.newData "azurerm_builtin_role_definition" $
+        BuiltinRoleDefinitionData {
               _name = TF.Nil
             }
 
-{- | The @azurerm_client_config@ AzureRM datasource.
+{- | The @azurerm_client_config@ AzureRM data.
 
 Use this data source to access the configuration of the Azure Resource
 Manager provider.
 -}
-data ClientConfigDataSource s = ClientConfigDataSource {
+data ClientConfigData s = ClientConfigData {
       _client_id       :: !(TF.Attribute s Text)
     {- ^ is set to the Azure Client ID (Application Object ID). -}
     , _subscription_id :: !(TF.Attribute s Text)
@@ -265,136 +265,136 @@ data ClientConfigDataSource s = ClientConfigDataSource {
     {- ^ is set to the Azure Tenant ID. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ClientConfigDataSource s) where
-    toHCL ClientConfigDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ClientConfigData s) where
+    toHCL ClientConfigData{..} = TF.block $ catMaybes
         [ TF.attribute "client_id" _client_id
         , TF.attribute "subscription_id" _subscription_id
         , TF.attribute "tenant_id" _tenant_id
         ]
 
-instance HasClientId (ClientConfigDataSource s) s Text where
+instance HasClientId (ClientConfigData s) s Text where
     clientId =
-        lens (_client_id :: ClientConfigDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _client_id = a } :: ClientConfigDataSource s)
+        lens (_client_id :: ClientConfigData s -> TF.Attribute s Text)
+            (\s a -> s { _client_id = a } :: ClientConfigData s)
 
-instance HasSubscriptionId (ClientConfigDataSource s) s Text where
+instance HasSubscriptionId (ClientConfigData s) s Text where
     subscriptionId =
-        lens (_subscription_id :: ClientConfigDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _subscription_id = a } :: ClientConfigDataSource s)
+        lens (_subscription_id :: ClientConfigData s -> TF.Attribute s Text)
+            (\s a -> s { _subscription_id = a } :: ClientConfigData s)
 
-instance HasTenantId (ClientConfigDataSource s) s Text where
+instance HasTenantId (ClientConfigData s) s Text where
     tenantId =
-        lens (_tenant_id :: ClientConfigDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _tenant_id = a } :: ClientConfigDataSource s)
+        lens (_tenant_id :: ClientConfigData s -> TF.Attribute s Text)
+            (\s a -> s { _tenant_id = a } :: ClientConfigData s)
 
-clientConfigDataSource :: TF.DataSource TF.AzureRM (ClientConfigDataSource s)
-clientConfigDataSource =
-    TF.newDataSource "azurerm_client_config" $
-        ClientConfigDataSource {
+clientConfigData :: TF.Data TF.AzureRM (ClientConfigData s)
+clientConfigData =
+    TF.newData "azurerm_client_config" $
+        ClientConfigData {
               _client_id = TF.Nil
             , _subscription_id = TF.Nil
             , _tenant_id = TF.Nil
             }
 
-{- | The @azurerm_dns_zone@ AzureRM datasource.
+{- | The @azurerm_dns_zone@ AzureRM data.
 
 Use this data source to obtain information about a DNS Zone.
 -}
-data DnsZoneDataSource s = DnsZoneDataSource {
+data DnsZoneData s = DnsZoneData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the DNS Zone. -}
     , _resource_group_name :: !(TF.Attribute s Text)
     {- ^ (Required) The Name of the Resource Group where the DNS Zone exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (DnsZoneDataSource s) where
-    toHCL DnsZoneDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (DnsZoneData s) where
+    toHCL DnsZoneData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasName (DnsZoneDataSource s) s Text where
+instance HasName (DnsZoneData s) s Text where
     name =
-        lens (_name :: DnsZoneDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DnsZoneDataSource s)
+        lens (_name :: DnsZoneData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: DnsZoneData s)
 
-instance HasResourceGroupName (DnsZoneDataSource s) s Text where
+instance HasResourceGroupName (DnsZoneData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: DnsZoneDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: DnsZoneDataSource s)
+        lens (_resource_group_name :: DnsZoneData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: DnsZoneData s)
 
-instance HasComputedId (DnsZoneDataSource s) Text
+instance HasComputedId (DnsZoneData s) Text
 
-instance HasComputedMaxNumberOfRecordSets (DnsZoneDataSource s) Text
+instance HasComputedMaxNumberOfRecordSets (DnsZoneData s) Text
 
-instance HasComputedNameServers (DnsZoneDataSource s) Text
+instance HasComputedNameServers (DnsZoneData s) Text
 
-instance HasComputedNumberOfRecordSets (DnsZoneDataSource s) Text
+instance HasComputedNumberOfRecordSets (DnsZoneData s) Text
 
-instance HasComputedTags (DnsZoneDataSource s) Text
+instance HasComputedTags (DnsZoneData s) Text
 
-dnsZoneDataSource :: TF.DataSource TF.AzureRM (DnsZoneDataSource s)
-dnsZoneDataSource =
-    TF.newDataSource "azurerm_dns_zone" $
-        DnsZoneDataSource {
+dnsZoneData :: TF.Data TF.AzureRM (DnsZoneData s)
+dnsZoneData =
+    TF.newData "azurerm_dns_zone" $
+        DnsZoneData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_eventhub_namespace@ AzureRM datasource.
+{- | The @azurerm_eventhub_namespace@ AzureRM data.
 
 Use this data source to obtain information about an EventHub Namespace.
 -}
-data EventhubNamespaceDataSource s = EventhubNamespaceDataSource {
+data EventhubNamespaceData s = EventhubNamespaceData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the EventHub Namespace. -}
     , _resource_group_name :: !(TF.Attribute s Text)
     {- ^ (Required) The Name of the Resource Group where the EventHub Namespace exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (EventhubNamespaceDataSource s) where
-    toHCL EventhubNamespaceDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (EventhubNamespaceData s) where
+    toHCL EventhubNamespaceData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasName (EventhubNamespaceDataSource s) s Text where
+instance HasName (EventhubNamespaceData s) s Text where
     name =
-        lens (_name :: EventhubNamespaceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EventhubNamespaceDataSource s)
+        lens (_name :: EventhubNamespaceData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: EventhubNamespaceData s)
 
-instance HasResourceGroupName (EventhubNamespaceDataSource s) s Text where
+instance HasResourceGroupName (EventhubNamespaceData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: EventhubNamespaceDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: EventhubNamespaceDataSource s)
+        lens (_resource_group_name :: EventhubNamespaceData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: EventhubNamespaceData s)
 
-instance HasComputedAutoInflateEnabled (EventhubNamespaceDataSource s) Text
+instance HasComputedAutoInflateEnabled (EventhubNamespaceData s) Text
 
-instance HasComputedCapacity (EventhubNamespaceDataSource s) Text
+instance HasComputedCapacity (EventhubNamespaceData s) Text
 
-instance HasComputedId (EventhubNamespaceDataSource s) Text
+instance HasComputedId (EventhubNamespaceData s) Text
 
-instance HasComputedLocation (EventhubNamespaceDataSource s) Text
+instance HasComputedLocation (EventhubNamespaceData s) Text
 
-instance HasComputedMaximumThroughputUnits (EventhubNamespaceDataSource s) Text
+instance HasComputedMaximumThroughputUnits (EventhubNamespaceData s) Text
 
-instance HasComputedSku (EventhubNamespaceDataSource s) Text
+instance HasComputedSku (EventhubNamespaceData s) Text
 
-instance HasComputedTags (EventhubNamespaceDataSource s) Text
+instance HasComputedTags (EventhubNamespaceData s) Text
 
-eventhubNamespaceDataSource :: TF.DataSource TF.AzureRM (EventhubNamespaceDataSource s)
-eventhubNamespaceDataSource =
-    TF.newDataSource "azurerm_eventhub_namespace" $
-        EventhubNamespaceDataSource {
+eventhubNamespaceData :: TF.Data TF.AzureRM (EventhubNamespaceData s)
+eventhubNamespaceData =
+    TF.newData "azurerm_eventhub_namespace" $
+        EventhubNamespaceData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_image@ AzureRM datasource.
+{- | The @azurerm_image@ AzureRM data.
 
 Use this data source to access information about an Image.
 -}
-data ImageDataSource s = ImageDataSource {
+data ImageData s = ImageData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the Image. -}
     , _name_regex          :: !(TF.Attribute s Text)
@@ -405,185 +405,185 @@ data ImageDataSource s = ImageDataSource {
     {- ^ (Optional) By default when matching by regex, images are sorted by name in ascending order and the first match is chosen, to sort descending, set this flag. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageDataSource s) where
-    toHCL ImageDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ImageData s) where
+    toHCL ImageData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "name_regex" _name_regex
         , TF.attribute "resource_group_name" _resource_group_name
         , TF.attribute "sort_descending" _sort_descending
         ]
 
-instance HasName (ImageDataSource s) s Text where
+instance HasName (ImageData s) s Text where
     name =
-        lens (_name :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageDataSource s)
+        lens (_name :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ImageData s)
 
-instance HasNameRegex (ImageDataSource s) s Text where
+instance HasNameRegex (ImageData s) s Text where
     nameRegex =
-        lens (_name_regex :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: ImageDataSource s)
+        lens (_name_regex :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _name_regex = a } :: ImageData s)
 
-instance HasResourceGroupName (ImageDataSource s) s Text where
+instance HasResourceGroupName (ImageData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: ImageDataSource s)
+        lens (_resource_group_name :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: ImageData s)
 
-instance HasSortDescending (ImageDataSource s) s Text where
+instance HasSortDescending (ImageData s) s Text where
     sortDescending =
-        lens (_sort_descending :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _sort_descending = a } :: ImageDataSource s)
+        lens (_sort_descending :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _sort_descending = a } :: ImageData s)
 
-instance HasComputedDataDisk (ImageDataSource s) Text
+instance HasComputedDataDisk (ImageData s) Text
 
-instance HasComputedLocation (ImageDataSource s) Text
+instance HasComputedLocation (ImageData s) Text
 
-instance HasComputedName (ImageDataSource s) Text
+instance HasComputedName (ImageData s) Text
 
-instance HasComputedOsDisk (ImageDataSource s) Text
+instance HasComputedOsDisk (ImageData s) Text
 
-instance HasComputedTags (ImageDataSource s) Text
+instance HasComputedTags (ImageData s) Text
 
-imageDataSource :: TF.DataSource TF.AzureRM (ImageDataSource s)
-imageDataSource =
-    TF.newDataSource "azurerm_image" $
-        ImageDataSource {
+imageData :: TF.Data TF.AzureRM (ImageData s)
+imageData =
+    TF.newData "azurerm_image" $
+        ImageData {
               _name = TF.Nil
             , _name_regex = TF.Nil
             , _resource_group_name = TF.Nil
             , _sort_descending = TF.Nil
             }
 
-{- | The @azurerm_key_vault_access_policy@ AzureRM datasource.
+{- | The @azurerm_key_vault_access_policy@ AzureRM data.
 
 Use this data source to access information about the permissions from the
 Management Key Vault Templates.
 -}
-data KeyVaultAccessPolicyDataSource s = KeyVaultAccessPolicyDataSource {
+data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the Management Tempalte. Possible values are: @Key Management@ , @Secret Management@ , @Certificate Management@ , @Key & Secret Management@ , @Key & Certificate Management@ , @Secret & Certificate Management@ , @Key, Secret, & Certificate Management@ -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (KeyVaultAccessPolicyDataSource s) where
-    toHCL KeyVaultAccessPolicyDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (KeyVaultAccessPolicyData s) where
+    toHCL KeyVaultAccessPolicyData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (KeyVaultAccessPolicyDataSource s) s Text where
+instance HasName (KeyVaultAccessPolicyData s) s Text where
     name =
-        lens (_name :: KeyVaultAccessPolicyDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: KeyVaultAccessPolicyDataSource s)
+        lens (_name :: KeyVaultAccessPolicyData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: KeyVaultAccessPolicyData s)
 
-instance HasComputedCertificatePermissions (KeyVaultAccessPolicyDataSource s) Text
+instance HasComputedCertificatePermissions (KeyVaultAccessPolicyData s) Text
 
-instance HasComputedId (KeyVaultAccessPolicyDataSource s) Text
+instance HasComputedId (KeyVaultAccessPolicyData s) Text
 
-instance HasComputedKeyPermissions (KeyVaultAccessPolicyDataSource s) Text
+instance HasComputedKeyPermissions (KeyVaultAccessPolicyData s) Text
 
-instance HasComputedSecretPermissions (KeyVaultAccessPolicyDataSource s) Text
+instance HasComputedSecretPermissions (KeyVaultAccessPolicyData s) Text
 
-keyVaultAccessPolicyDataSource :: TF.DataSource TF.AzureRM (KeyVaultAccessPolicyDataSource s)
-keyVaultAccessPolicyDataSource =
-    TF.newDataSource "azurerm_key_vault_access_policy" $
-        KeyVaultAccessPolicyDataSource {
+keyVaultAccessPolicyData :: TF.Data TF.AzureRM (KeyVaultAccessPolicyData s)
+keyVaultAccessPolicyData =
+    TF.newData "azurerm_key_vault_access_policy" $
+        KeyVaultAccessPolicyData {
               _name = TF.Nil
             }
 
-{- | The @azurerm_managed_disk@ AzureRM datasource.
+{- | The @azurerm_managed_disk@ AzureRM data.
 
 Use this data source to access the properties of an existing Azure Managed
 Disk.
 -}
-data ManagedDiskDataSource s = ManagedDiskDataSource {
+data ManagedDiskData s = ManagedDiskData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the Managed Disk. -}
     , _resource_group_name :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ManagedDiskDataSource s) where
-    toHCL ManagedDiskDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ManagedDiskData s) where
+    toHCL ManagedDiskData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasName (ManagedDiskDataSource s) s Text where
+instance HasName (ManagedDiskData s) s Text where
     name =
-        lens (_name :: ManagedDiskDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ManagedDiskDataSource s)
+        lens (_name :: ManagedDiskData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ManagedDiskData s)
 
-instance HasResourceGroupName (ManagedDiskDataSource s) s Text where
+instance HasResourceGroupName (ManagedDiskData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: ManagedDiskDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: ManagedDiskDataSource s)
+        lens (_resource_group_name :: ManagedDiskData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: ManagedDiskData s)
 
-instance HasComputedDiskSizeGb (ManagedDiskDataSource s) Text
+instance HasComputedDiskSizeGb (ManagedDiskData s) Text
 
-instance HasComputedOsType (ManagedDiskDataSource s) Text
+instance HasComputedOsType (ManagedDiskData s) Text
 
-instance HasComputedSourceResourceId (ManagedDiskDataSource s) Text
+instance HasComputedSourceResourceId (ManagedDiskData s) Text
 
-instance HasComputedSourceUri (ManagedDiskDataSource s) Text
+instance HasComputedSourceUri (ManagedDiskData s) Text
 
-instance HasComputedStorageAccountType (ManagedDiskDataSource s) Text
+instance HasComputedStorageAccountType (ManagedDiskData s) Text
 
-instance HasComputedTags (ManagedDiskDataSource s) Text
+instance HasComputedTags (ManagedDiskData s) Text
 
-managedDiskDataSource :: TF.DataSource TF.AzureRM (ManagedDiskDataSource s)
-managedDiskDataSource =
-    TF.newDataSource "azurerm_managed_disk" $
-        ManagedDiskDataSource {
+managedDiskData :: TF.Data TF.AzureRM (ManagedDiskData s)
+managedDiskData =
+    TF.newData "azurerm_managed_disk" $
+        ManagedDiskData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_network_security_group@ AzureRM datasource.
+{- | The @azurerm_network_security_group@ AzureRM data.
 
 Use this data source to access the properties of a Network Security Group.
 -}
-data NetworkSecurityGroupDataSource s = NetworkSecurityGroupDataSource {
+data NetworkSecurityGroupData s = NetworkSecurityGroupData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the Name of the Network Security Group. -}
     , _resource_group_name :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the Name of the Resource Group within which the Network Security Group exists -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (NetworkSecurityGroupDataSource s) where
-    toHCL NetworkSecurityGroupDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (NetworkSecurityGroupData s) where
+    toHCL NetworkSecurityGroupData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasName (NetworkSecurityGroupDataSource s) s Text where
+instance HasName (NetworkSecurityGroupData s) s Text where
     name =
-        lens (_name :: NetworkSecurityGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NetworkSecurityGroupDataSource s)
+        lens (_name :: NetworkSecurityGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: NetworkSecurityGroupData s)
 
-instance HasResourceGroupName (NetworkSecurityGroupDataSource s) s Text where
+instance HasResourceGroupName (NetworkSecurityGroupData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: NetworkSecurityGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: NetworkSecurityGroupDataSource s)
+        lens (_resource_group_name :: NetworkSecurityGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: NetworkSecurityGroupData s)
 
-instance HasComputedId (NetworkSecurityGroupDataSource s) Text
+instance HasComputedId (NetworkSecurityGroupData s) Text
 
-instance HasComputedLocation (NetworkSecurityGroupDataSource s) Text
+instance HasComputedLocation (NetworkSecurityGroupData s) Text
 
-instance HasComputedSecurityRule (NetworkSecurityGroupDataSource s) Text
+instance HasComputedSecurityRule (NetworkSecurityGroupData s) Text
 
-instance HasComputedTags (NetworkSecurityGroupDataSource s) Text
+instance HasComputedTags (NetworkSecurityGroupData s) Text
 
-networkSecurityGroupDataSource :: TF.DataSource TF.AzureRM (NetworkSecurityGroupDataSource s)
-networkSecurityGroupDataSource =
-    TF.newDataSource "azurerm_network_security_group" $
-        NetworkSecurityGroupDataSource {
+networkSecurityGroupData :: TF.Data TF.AzureRM (NetworkSecurityGroupData s)
+networkSecurityGroupData =
+    TF.newData "azurerm_network_security_group" $
+        NetworkSecurityGroupData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_platform_image@ AzureRM datasource.
+{- | The @azurerm_platform_image@ AzureRM data.
 
 Use this data source to access the properties of an Azure Platform Image.
 -}
-data PlatformImageDataSource s = PlatformImageDataSource {
+data PlatformImageData s = PlatformImageData {
       _location  :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the Location to pull information about this Platform Image from. -}
     , _offer     :: !(TF.Attribute s Text)
@@ -594,224 +594,224 @@ data PlatformImageDataSource s = PlatformImageDataSource {
     {- ^ (Required) Specifies the SKU of the Platform Image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PlatformImageDataSource s) where
-    toHCL PlatformImageDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (PlatformImageData s) where
+    toHCL PlatformImageData{..} = TF.block $ catMaybes
         [ TF.attribute "location" _location
         , TF.attribute "offer" _offer
         , TF.attribute "publisher" _publisher
         , TF.attribute "sku" _sku
         ]
 
-instance HasLocation (PlatformImageDataSource s) s Text where
+instance HasLocation (PlatformImageData s) s Text where
     location =
-        lens (_location :: PlatformImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _location = a } :: PlatformImageDataSource s)
+        lens (_location :: PlatformImageData s -> TF.Attribute s Text)
+            (\s a -> s { _location = a } :: PlatformImageData s)
 
-instance HasOffer (PlatformImageDataSource s) s Text where
+instance HasOffer (PlatformImageData s) s Text where
     offer =
-        lens (_offer :: PlatformImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _offer = a } :: PlatformImageDataSource s)
+        lens (_offer :: PlatformImageData s -> TF.Attribute s Text)
+            (\s a -> s { _offer = a } :: PlatformImageData s)
 
-instance HasPublisher (PlatformImageDataSource s) s Text where
+instance HasPublisher (PlatformImageData s) s Text where
     publisher =
-        lens (_publisher :: PlatformImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _publisher = a } :: PlatformImageDataSource s)
+        lens (_publisher :: PlatformImageData s -> TF.Attribute s Text)
+            (\s a -> s { _publisher = a } :: PlatformImageData s)
 
-instance HasSku (PlatformImageDataSource s) s Text where
+instance HasSku (PlatformImageData s) s Text where
     sku =
-        lens (_sku :: PlatformImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _sku = a } :: PlatformImageDataSource s)
+        lens (_sku :: PlatformImageData s -> TF.Attribute s Text)
+            (\s a -> s { _sku = a } :: PlatformImageData s)
 
-instance HasComputedId (PlatformImageDataSource s) Text
+instance HasComputedId (PlatformImageData s) Text
 
-instance HasComputedVersion (PlatformImageDataSource s) Text
+instance HasComputedVersion (PlatformImageData s) Text
 
-platformImageDataSource :: TF.DataSource TF.AzureRM (PlatformImageDataSource s)
-platformImageDataSource =
-    TF.newDataSource "azurerm_platform_image" $
-        PlatformImageDataSource {
+platformImageData :: TF.Data TF.AzureRM (PlatformImageData s)
+platformImageData =
+    TF.newData "azurerm_platform_image" $
+        PlatformImageData {
               _location = TF.Nil
             , _offer = TF.Nil
             , _publisher = TF.Nil
             , _sku = TF.Nil
             }
 
-{- | The @azurerm_public_ip@ AzureRM datasource.
+{- | The @azurerm_public_ip@ AzureRM data.
 
 Use this data source to access the properties of an existing Azure Public IP
 Address.
 -}
-data PublicIpDataSource s = PublicIpDataSource {
+data PublicIpData s = PublicIpData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the public IP address. -}
     , _resource_group_name :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (PublicIpDataSource s) where
-    toHCL PublicIpDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (PublicIpData s) where
+    toHCL PublicIpData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasName (PublicIpDataSource s) s Text where
+instance HasName (PublicIpData s) s Text where
     name =
-        lens (_name :: PublicIpDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: PublicIpDataSource s)
+        lens (_name :: PublicIpData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: PublicIpData s)
 
-instance HasResourceGroupName (PublicIpDataSource s) s Text where
+instance HasResourceGroupName (PublicIpData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: PublicIpDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: PublicIpDataSource s)
+        lens (_resource_group_name :: PublicIpData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: PublicIpData s)
 
-instance HasComputedDomainNameLabel (PublicIpDataSource s) Text
+instance HasComputedDomainNameLabel (PublicIpData s) Text
 
-instance HasComputedFqdn (PublicIpDataSource s) Text
+instance HasComputedFqdn (PublicIpData s) Text
 
-instance HasComputedIdleTimeoutInMinutes (PublicIpDataSource s) Text
+instance HasComputedIdleTimeoutInMinutes (PublicIpData s) Text
 
-instance HasComputedIpAddress (PublicIpDataSource s) Text
+instance HasComputedIpAddress (PublicIpData s) Text
 
-instance HasComputedTags (PublicIpDataSource s) Text
+instance HasComputedTags (PublicIpData s) Text
 
-publicIpDataSource :: TF.DataSource TF.AzureRM (PublicIpDataSource s)
-publicIpDataSource =
-    TF.newDataSource "azurerm_public_ip" $
-        PublicIpDataSource {
+publicIpData :: TF.Data TF.AzureRM (PublicIpData s)
+publicIpData =
+    TF.newData "azurerm_public_ip" $
+        PublicIpData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_resource_group@ AzureRM datasource.
+{- | The @azurerm_resource_group@ AzureRM data.
 
 Use this data source to access the properties of an Azure resource group.
 -}
-data ResourceGroupDataSource s = ResourceGroupDataSource {
+data ResourceGroupData s = ResourceGroupData {
       _name :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the resource group. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ResourceGroupDataSource s) where
-    toHCL ResourceGroupDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ResourceGroupData s) where
+    toHCL ResourceGroupData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (ResourceGroupDataSource s) s Text where
+instance HasName (ResourceGroupData s) s Text where
     name =
-        lens (_name :: ResourceGroupDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ResourceGroupDataSource s)
+        lens (_name :: ResourceGroupData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ResourceGroupData s)
 
-instance HasComputedLocation (ResourceGroupDataSource s) Text
+instance HasComputedLocation (ResourceGroupData s) Text
 
-instance HasComputedTags (ResourceGroupDataSource s) Text
+instance HasComputedTags (ResourceGroupData s) Text
 
-resourceGroupDataSource :: TF.DataSource TF.AzureRM (ResourceGroupDataSource s)
-resourceGroupDataSource =
-    TF.newDataSource "azurerm_resource_group" $
-        ResourceGroupDataSource {
+resourceGroupData :: TF.Data TF.AzureRM (ResourceGroupData s)
+resourceGroupData =
+    TF.newData "azurerm_resource_group" $
+        ResourceGroupData {
               _name = TF.Nil
             }
 
-{- | The @azurerm_role_definition@ AzureRM datasource.
+{- | The @azurerm_role_definition@ AzureRM data.
 
 Use this data source to access the properties of a custom Role Definition.
 To access information about a built-in Role Definition,
 <builtin_role_definition.html> instead.
 -}
-data RoleDefinitionDataSource s = RoleDefinitionDataSource {
+data RoleDefinitionData s = RoleDefinitionData {
       _role_definition_id :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the ID of the Role Definition as a UUID/GUID. -}
     , _scope              :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the Scope at which the Custom Role Definition exists. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RoleDefinitionDataSource s) where
-    toHCL RoleDefinitionDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (RoleDefinitionData s) where
+    toHCL RoleDefinitionData{..} = TF.block $ catMaybes
         [ TF.attribute "role_definition_id" _role_definition_id
         , TF.attribute "scope" _scope
         ]
 
-instance HasRoleDefinitionId (RoleDefinitionDataSource s) s Text where
+instance HasRoleDefinitionId (RoleDefinitionData s) s Text where
     roleDefinitionId =
-        lens (_role_definition_id :: RoleDefinitionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _role_definition_id = a } :: RoleDefinitionDataSource s)
+        lens (_role_definition_id :: RoleDefinitionData s -> TF.Attribute s Text)
+            (\s a -> s { _role_definition_id = a } :: RoleDefinitionData s)
 
-instance HasScope (RoleDefinitionDataSource s) s Text where
+instance HasScope (RoleDefinitionData s) s Text where
     scope =
-        lens (_scope :: RoleDefinitionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _scope = a } :: RoleDefinitionDataSource s)
+        lens (_scope :: RoleDefinitionData s -> TF.Attribute s Text)
+            (\s a -> s { _scope = a } :: RoleDefinitionData s)
 
-instance HasComputedAssignableScopes (RoleDefinitionDataSource s) Text
+instance HasComputedAssignableScopes (RoleDefinitionData s) Text
 
-instance HasComputedDescription (RoleDefinitionDataSource s) Text
+instance HasComputedDescription (RoleDefinitionData s) Text
 
-instance HasComputedId (RoleDefinitionDataSource s) Text
+instance HasComputedId (RoleDefinitionData s) Text
 
-instance HasComputedPermissions (RoleDefinitionDataSource s) Text
+instance HasComputedPermissions (RoleDefinitionData s) Text
 
-instance HasComputedType' (RoleDefinitionDataSource s) Text
+instance HasComputedType' (RoleDefinitionData s) Text
 
-roleDefinitionDataSource :: TF.DataSource TF.AzureRM (RoleDefinitionDataSource s)
-roleDefinitionDataSource =
-    TF.newDataSource "azurerm_role_definition" $
-        RoleDefinitionDataSource {
+roleDefinitionData :: TF.Data TF.AzureRM (RoleDefinitionData s)
+roleDefinitionData =
+    TF.newData "azurerm_role_definition" $
+        RoleDefinitionData {
               _role_definition_id = TF.Nil
             , _scope = TF.Nil
             }
 
-{- | The @azurerm_snapshot@ AzureRM datasource.
+{- | The @azurerm_snapshot@ AzureRM data.
 
 Use this data source to access the properties of a Snapshot of an Disk.
 -}
-data SnapshotDataSource s = SnapshotDataSource {
+data SnapshotData s = SnapshotData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the Snapshot. -}
     , _resource_group_name :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the resource group the Snapshot is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SnapshotDataSource s) where
-    toHCL SnapshotDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SnapshotData s) where
+    toHCL SnapshotData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasName (SnapshotDataSource s) s Text where
+instance HasName (SnapshotData s) s Text where
     name =
-        lens (_name :: SnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SnapshotDataSource s)
+        lens (_name :: SnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SnapshotData s)
 
-instance HasResourceGroupName (SnapshotDataSource s) s Text where
+instance HasResourceGroupName (SnapshotData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: SnapshotDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: SnapshotDataSource s)
+        lens (_resource_group_name :: SnapshotData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: SnapshotData s)
 
-instance HasComputedCreateOption (SnapshotDataSource s) Text
+instance HasComputedCreateOption (SnapshotData s) Text
 
-instance HasComputedDiskSizeGb (SnapshotDataSource s) Text
+instance HasComputedDiskSizeGb (SnapshotData s) Text
 
-instance HasComputedId (SnapshotDataSource s) Text
+instance HasComputedId (SnapshotData s) Text
 
-instance HasComputedSourceResourceId (SnapshotDataSource s) Text
+instance HasComputedSourceResourceId (SnapshotData s) Text
 
-instance HasComputedSourceUri (SnapshotDataSource s) Text
+instance HasComputedSourceUri (SnapshotData s) Text
 
-instance HasComputedStorageAccountId (SnapshotDataSource s) Text
+instance HasComputedStorageAccountId (SnapshotData s) Text
 
-snapshotDataSource :: TF.DataSource TF.AzureRM (SnapshotDataSource s)
-snapshotDataSource =
-    TF.newDataSource "azurerm_snapshot" $
-        SnapshotDataSource {
+snapshotData :: TF.Data TF.AzureRM (SnapshotData s)
+snapshotData =
+    TF.newData "azurerm_snapshot" $
+        SnapshotData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_subnet@ AzureRM datasource.
+{- | The @azurerm_subnet@ AzureRM data.
 
 Use this data source to access the properties of an Azure Subnet located
 within a Virtual Network.
 -}
-data SubnetDataSource s = SubnetDataSource {
+data SubnetData s = SubnetData {
       _name                 :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the Subnet. -}
     , _resource_group_name  :: !(TF.Attribute s Text)
@@ -820,124 +820,124 @@ data SubnetDataSource s = SubnetDataSource {
     {- ^ (Required) Specifies the name of the Virtual Network this Subnet is located within. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubnetDataSource s) where
-    toHCL SubnetDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SubnetData s) where
+    toHCL SubnetData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         , TF.attribute "virtual_network_name" _virtual_network_name
         ]
 
-instance HasName (SubnetDataSource s) s Text where
+instance HasName (SubnetData s) s Text where
     name =
-        lens (_name :: SubnetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SubnetDataSource s)
+        lens (_name :: SubnetData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SubnetData s)
 
-instance HasResourceGroupName (SubnetDataSource s) s Text where
+instance HasResourceGroupName (SubnetData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: SubnetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: SubnetDataSource s)
+        lens (_resource_group_name :: SubnetData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: SubnetData s)
 
-instance HasVirtualNetworkName (SubnetDataSource s) s Text where
+instance HasVirtualNetworkName (SubnetData s) s Text where
     virtualNetworkName =
-        lens (_virtual_network_name :: SubnetDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _virtual_network_name = a } :: SubnetDataSource s)
+        lens (_virtual_network_name :: SubnetData s -> TF.Attribute s Text)
+            (\s a -> s { _virtual_network_name = a } :: SubnetData s)
 
-instance HasComputedAddressPrefix (SubnetDataSource s) Text
+instance HasComputedAddressPrefix (SubnetData s) Text
 
-instance HasComputedId (SubnetDataSource s) Text
+instance HasComputedId (SubnetData s) Text
 
-instance HasComputedIpConfigurations (SubnetDataSource s) Text
+instance HasComputedIpConfigurations (SubnetData s) Text
 
-instance HasComputedNetworkSecurityGroupId (SubnetDataSource s) Text
+instance HasComputedNetworkSecurityGroupId (SubnetData s) Text
 
-instance HasComputedRouteTableId (SubnetDataSource s) Text
+instance HasComputedRouteTableId (SubnetData s) Text
 
-subnetDataSource :: TF.DataSource TF.AzureRM (SubnetDataSource s)
-subnetDataSource =
-    TF.newDataSource "azurerm_subnet" $
-        SubnetDataSource {
+subnetData :: TF.Data TF.AzureRM (SubnetData s)
+subnetData =
+    TF.newData "azurerm_subnet" $
+        SubnetData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             , _virtual_network_name = TF.Nil
             }
 
-{- | The @azurerm_subscription@ AzureRM datasource.
+{- | The @azurerm_subscription@ AzureRM data.
 
 Use this data source to access the properties of an Azure subscription.
 -}
-data SubscriptionDataSource s = SubscriptionDataSource {
+data SubscriptionData s = SubscriptionData {
       _subscription_id :: !(TF.Attribute s Text)
     {- ^ (Optional) Specifies the ID of the subscription. If this argument is omitted, the subscription ID of the current Azure Resource Manager provider is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (SubscriptionDataSource s) where
-    toHCL SubscriptionDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (SubscriptionData s) where
+    toHCL SubscriptionData{..} = TF.block $ catMaybes
         [ TF.attribute "subscription_id" _subscription_id
         ]
 
-instance HasSubscriptionId (SubscriptionDataSource s) s Text where
+instance HasSubscriptionId (SubscriptionData s) s Text where
     subscriptionId =
-        lens (_subscription_id :: SubscriptionDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _subscription_id = a } :: SubscriptionDataSource s)
+        lens (_subscription_id :: SubscriptionData s -> TF.Attribute s Text)
+            (\s a -> s { _subscription_id = a } :: SubscriptionData s)
 
-instance HasComputedDisplayName (SubscriptionDataSource s) Text
+instance HasComputedDisplayName (SubscriptionData s) Text
 
-instance HasComputedLocationPlacementId (SubscriptionDataSource s) Text
+instance HasComputedLocationPlacementId (SubscriptionData s) Text
 
-instance HasComputedQuotaId (SubscriptionDataSource s) Text
+instance HasComputedQuotaId (SubscriptionData s) Text
 
-instance HasComputedSpendingLimit (SubscriptionDataSource s) Text
+instance HasComputedSpendingLimit (SubscriptionData s) Text
 
-instance HasComputedState (SubscriptionDataSource s) Text
+instance HasComputedState (SubscriptionData s) Text
 
-subscriptionDataSource :: TF.DataSource TF.AzureRM (SubscriptionDataSource s)
-subscriptionDataSource =
-    TF.newDataSource "azurerm_subscription" $
-        SubscriptionDataSource {
+subscriptionData :: TF.Data TF.AzureRM (SubscriptionData s)
+subscriptionData =
+    TF.newData "azurerm_subscription" $
+        SubscriptionData {
               _subscription_id = TF.Nil
             }
 
-{- | The @azurerm_virtual_network@ AzureRM datasource.
+{- | The @azurerm_virtual_network@ AzureRM data.
 
 Use this data source to access the properties of an Azure Virtual Network.
 -}
-data VirtualNetworkDataSource s = VirtualNetworkDataSource {
+data VirtualNetworkData s = VirtualNetworkData {
       _name                :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the Virtual Network. -}
     , _resource_group_name :: !(TF.Attribute s Text)
     {- ^ (Required) Specifies the name of the resource group the Virtual Network is located in. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (VirtualNetworkDataSource s) where
-    toHCL VirtualNetworkDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (VirtualNetworkData s) where
+    toHCL VirtualNetworkData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasName (VirtualNetworkDataSource s) s Text where
+instance HasName (VirtualNetworkData s) s Text where
     name =
-        lens (_name :: VirtualNetworkDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VirtualNetworkDataSource s)
+        lens (_name :: VirtualNetworkData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: VirtualNetworkData s)
 
-instance HasResourceGroupName (VirtualNetworkDataSource s) s Text where
+instance HasResourceGroupName (VirtualNetworkData s) s Text where
     resourceGroupName =
-        lens (_resource_group_name :: VirtualNetworkDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: VirtualNetworkDataSource s)
+        lens (_resource_group_name :: VirtualNetworkData s -> TF.Attribute s Text)
+            (\s a -> s { _resource_group_name = a } :: VirtualNetworkData s)
 
-instance HasComputedAddressSpaces (VirtualNetworkDataSource s) Text
+instance HasComputedAddressSpaces (VirtualNetworkData s) Text
 
-instance HasComputedDnsServers (VirtualNetworkDataSource s) Text
+instance HasComputedDnsServers (VirtualNetworkData s) Text
 
-instance HasComputedId (VirtualNetworkDataSource s) Text
+instance HasComputedId (VirtualNetworkData s) Text
 
-instance HasComputedSubnets (VirtualNetworkDataSource s) Text
+instance HasComputedSubnets (VirtualNetworkData s) Text
 
-instance HasComputedVnetPeerings (VirtualNetworkDataSource s) Text
+instance HasComputedVnetPeerings (VirtualNetworkData s) Text
 
-virtualNetworkDataSource :: TF.DataSource TF.AzureRM (VirtualNetworkDataSource s)
-virtualNetworkDataSource =
-    TF.newDataSource "azurerm_virtual_network" $
-        VirtualNetworkDataSource {
+virtualNetworkData :: TF.Data TF.AzureRM (VirtualNetworkData s)
+virtualNetworkData =
+    TF.newData "azurerm_virtual_network" $
+        VirtualNetworkData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -945,85 +945,85 @@ virtualNetworkDataSource =
 class HasClientId a s b | a -> s b where
     clientId :: Lens' a (TF.Attribute s b)
 
-instance HasClientId a s b => HasClientId (TF.DataSource p a) s b where
+instance HasClientId a s b => HasClientId (TF.Data p a) s b where
     clientId = TF.configuration . clientId
 
 class HasLocation a s b | a -> s b where
     location :: Lens' a (TF.Attribute s b)
 
-instance HasLocation a s b => HasLocation (TF.DataSource p a) s b where
+instance HasLocation a s b => HasLocation (TF.Data p a) s b where
     location = TF.configuration . location
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
+instance HasName a s b => HasName (TF.Data p a) s b where
     name = TF.configuration . name
 
 class HasNameRegex a s b | a -> s b where
     nameRegex :: Lens' a (TF.Attribute s b)
 
-instance HasNameRegex a s b => HasNameRegex (TF.DataSource p a) s b where
+instance HasNameRegex a s b => HasNameRegex (TF.Data p a) s b where
     nameRegex = TF.configuration . nameRegex
 
 class HasOffer a s b | a -> s b where
     offer :: Lens' a (TF.Attribute s b)
 
-instance HasOffer a s b => HasOffer (TF.DataSource p a) s b where
+instance HasOffer a s b => HasOffer (TF.Data p a) s b where
     offer = TF.configuration . offer
 
 class HasPublisher a s b | a -> s b where
     publisher :: Lens' a (TF.Attribute s b)
 
-instance HasPublisher a s b => HasPublisher (TF.DataSource p a) s b where
+instance HasPublisher a s b => HasPublisher (TF.Data p a) s b where
     publisher = TF.configuration . publisher
 
 class HasResourceGroupName a s b | a -> s b where
     resourceGroupName :: Lens' a (TF.Attribute s b)
 
-instance HasResourceGroupName a s b => HasResourceGroupName (TF.DataSource p a) s b where
+instance HasResourceGroupName a s b => HasResourceGroupName (TF.Data p a) s b where
     resourceGroupName = TF.configuration . resourceGroupName
 
 class HasRoleDefinitionId a s b | a -> s b where
     roleDefinitionId :: Lens' a (TF.Attribute s b)
 
-instance HasRoleDefinitionId a s b => HasRoleDefinitionId (TF.DataSource p a) s b where
+instance HasRoleDefinitionId a s b => HasRoleDefinitionId (TF.Data p a) s b where
     roleDefinitionId = TF.configuration . roleDefinitionId
 
 class HasScope a s b | a -> s b where
     scope :: Lens' a (TF.Attribute s b)
 
-instance HasScope a s b => HasScope (TF.DataSource p a) s b where
+instance HasScope a s b => HasScope (TF.Data p a) s b where
     scope = TF.configuration . scope
 
 class HasSku a s b | a -> s b where
     sku :: Lens' a (TF.Attribute s b)
 
-instance HasSku a s b => HasSku (TF.DataSource p a) s b where
+instance HasSku a s b => HasSku (TF.Data p a) s b where
     sku = TF.configuration . sku
 
 class HasSortDescending a s b | a -> s b where
     sortDescending :: Lens' a (TF.Attribute s b)
 
-instance HasSortDescending a s b => HasSortDescending (TF.DataSource p a) s b where
+instance HasSortDescending a s b => HasSortDescending (TF.Data p a) s b where
     sortDescending = TF.configuration . sortDescending
 
 class HasSubscriptionId a s b | a -> s b where
     subscriptionId :: Lens' a (TF.Attribute s b)
 
-instance HasSubscriptionId a s b => HasSubscriptionId (TF.DataSource p a) s b where
+instance HasSubscriptionId a s b => HasSubscriptionId (TF.Data p a) s b where
     subscriptionId = TF.configuration . subscriptionId
 
 class HasTenantId a s b | a -> s b where
     tenantId :: Lens' a (TF.Attribute s b)
 
-instance HasTenantId a s b => HasTenantId (TF.DataSource p a) s b where
+instance HasTenantId a s b => HasTenantId (TF.Data p a) s b where
     tenantId = TF.configuration . tenantId
 
 class HasVirtualNetworkName a s b | a -> s b where
     virtualNetworkName :: Lens' a (TF.Attribute s b)
 
-instance HasVirtualNetworkName a s b => HasVirtualNetworkName (TF.DataSource p a) s b where
+instance HasVirtualNetworkName a s b => HasVirtualNetworkName (TF.Data p a) s b where
     virtualNetworkName = TF.configuration . virtualNetworkName
 
 class HasComputedAddressPrefix a b | a -> b where

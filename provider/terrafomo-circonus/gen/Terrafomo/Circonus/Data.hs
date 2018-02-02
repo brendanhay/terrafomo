@@ -15,21 +15,21 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Circonus.DataSource
+-- Module      : Terrafomo.Circonus.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Circonus.DataSource
+module Terrafomo.Circonus.Data
     (
     -- * Types
-      AccountDataSource (..)
-    , accountDataSource
+      AccountData (..)
+    , accountData
 
-    , CollectorDataSource (..)
-    , collectorDataSource
+    , CollectorData (..)
+    , collectorData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -74,14 +74,14 @@ import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.Circonus.Provider as TF
 import qualified Terrafomo.Circonus.Types    as TF
-import qualified Terrafomo.DataSource        as TF
+import qualified Terrafomo.Data              as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
 import qualified Terrafomo.Meta              as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Resource          as TF
 
-{- | The @circonus_account@ Circonus datasource.
+{- | The @circonus_account@ Circonus data.
 
 @circonus_account@ provides
 <https://login.circonus.com/resources/api/calls/account> about a specific
@@ -89,70 +89,70 @@ import qualified Terrafomo.Resource          as TF
 @circonus_account@ data source can be used for pulling various attributes
 about a specific Circonus Account.
 -}
-data AccountDataSource s = AccountDataSource {
+data AccountData s = AccountData {
       _current :: !(TF.Attribute s Text)
     {- ^ (Optional) Automatically use the current Circonus Account attached to the API token making the request. -}
     , _id      :: !(TF.Attribute s Text)
     {- ^ (Optional) The Circonus ID of a given account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AccountDataSource s) where
-    toHCL AccountDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (AccountData s) where
+    toHCL AccountData{..} = TF.block $ catMaybes
         [ TF.attribute "current" _current
         , TF.attribute "id" _id
         ]
 
-instance HasCurrent (AccountDataSource s) s Text where
+instance HasCurrent (AccountData s) s Text where
     current =
-        lens (_current :: AccountDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _current = a } :: AccountDataSource s)
+        lens (_current :: AccountData s -> TF.Attribute s Text)
+            (\s a -> s { _current = a } :: AccountData s)
 
-instance HasId (AccountDataSource s) s Text where
+instance HasId (AccountData s) s Text where
     id =
-        lens (_id :: AccountDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: AccountDataSource s)
+        lens (_id :: AccountData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: AccountData s)
 
-instance HasComputedAddress1 (AccountDataSource s) Text
+instance HasComputedAddress1 (AccountData s) Text
 
-instance HasComputedAddress2 (AccountDataSource s) Text
+instance HasComputedAddress2 (AccountData s) Text
 
-instance HasComputedCcEmail (AccountDataSource s) Text
+instance HasComputedCcEmail (AccountData s) Text
 
-instance HasComputedCity (AccountDataSource s) Text
+instance HasComputedCity (AccountData s) Text
 
-instance HasComputedContactGroups (AccountDataSource s) Text
+instance HasComputedContactGroups (AccountData s) Text
 
-instance HasComputedCountry (AccountDataSource s) Text
+instance HasComputedCountry (AccountData s) Text
 
-instance HasComputedDescription (AccountDataSource s) Text
+instance HasComputedDescription (AccountData s) Text
 
-instance HasComputedId (AccountDataSource s) Text
+instance HasComputedId (AccountData s) Text
 
-instance HasComputedInvites (AccountDataSource s) Text
+instance HasComputedInvites (AccountData s) Text
 
-instance HasComputedName (AccountDataSource s) Text
+instance HasComputedName (AccountData s) Text
 
-instance HasComputedOwner (AccountDataSource s) Text
+instance HasComputedOwner (AccountData s) Text
 
-instance HasComputedState (AccountDataSource s) Text
+instance HasComputedState (AccountData s) Text
 
-instance HasComputedTimezone (AccountDataSource s) Text
+instance HasComputedTimezone (AccountData s) Text
 
-instance HasComputedUiBaseUrl (AccountDataSource s) Text
+instance HasComputedUiBaseUrl (AccountData s) Text
 
-instance HasComputedUsage (AccountDataSource s) Text
+instance HasComputedUsage (AccountData s) Text
 
-instance HasComputedUsers (AccountDataSource s) Text
+instance HasComputedUsers (AccountData s) Text
 
-accountDataSource :: TF.DataSource TF.Circonus (AccountDataSource s)
-accountDataSource =
-    TF.newDataSource "circonus_account" $
-        AccountDataSource {
+accountData :: TF.Data TF.Circonus (AccountData s)
+accountData =
+    TF.newData "circonus_account" $
+        AccountData {
               _current = TF.Nil
             , _id = TF.Nil
             }
 
-{- | The @circonus_collector@ Circonus datasource.
+{- | The @circonus_collector@ Circonus data.
 
 @circonus_collector@ provides
 <https://login.circonus.com/resources/api/calls/broker> about a specific
@@ -169,52 +169,52 @@ broker group level. The @circonus_collector@ is simply a renamed Circonus
 act as a fan-in agent that either pulls or has metrics pushed into it and
 funneled back through Circonus.
 -}
-data CollectorDataSource s = CollectorDataSource {
+data CollectorData s = CollectorData {
       _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The Circonus ID of a given collector. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CollectorDataSource s) where
-    toHCL CollectorDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (CollectorData s) where
+    toHCL CollectorData{..} = TF.block $ catMaybes
         [ TF.attribute "id" _id
         ]
 
-instance HasId (CollectorDataSource s) s Text where
+instance HasId (CollectorData s) s Text where
     id =
-        lens (_id :: CollectorDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: CollectorDataSource s)
+        lens (_id :: CollectorData s -> TF.Attribute s Text)
+            (\s a -> s { _id = a } :: CollectorData s)
 
-instance HasComputedDetails (CollectorDataSource s) Text
+instance HasComputedDetails (CollectorData s) Text
 
-instance HasComputedId (CollectorDataSource s) Text
+instance HasComputedId (CollectorData s) Text
 
-instance HasComputedLatitude (CollectorDataSource s) Text
+instance HasComputedLatitude (CollectorData s) Text
 
-instance HasComputedLongitude (CollectorDataSource s) Text
+instance HasComputedLongitude (CollectorData s) Text
 
-instance HasComputedName (CollectorDataSource s) Text
+instance HasComputedName (CollectorData s) Text
 
-instance HasComputedTags (CollectorDataSource s) Text
+instance HasComputedTags (CollectorData s) Text
 
-instance HasComputedType' (CollectorDataSource s) Text
+instance HasComputedType' (CollectorData s) Text
 
-collectorDataSource :: TF.DataSource TF.Circonus (CollectorDataSource s)
-collectorDataSource =
-    TF.newDataSource "circonus_collector" $
-        CollectorDataSource {
+collectorData :: TF.Data TF.Circonus (CollectorData s)
+collectorData =
+    TF.newData "circonus_collector" $
+        CollectorData {
               _id = TF.Nil
             }
 
 class HasCurrent a s b | a -> s b where
     current :: Lens' a (TF.Attribute s b)
 
-instance HasCurrent a s b => HasCurrent (TF.DataSource p a) s b where
+instance HasCurrent a s b => HasCurrent (TF.Data p a) s b where
     current = TF.configuration . current
 
 class HasId a s b | a -> s b where
     id :: Lens' a (TF.Attribute s b)
 
-instance HasId a s b => HasId (TF.DataSource p a) s b where
+instance HasId a s b => HasId (TF.Data p a) s b where
     id = TF.configuration . id
 
 class HasComputedAddress1 a b | a -> b where

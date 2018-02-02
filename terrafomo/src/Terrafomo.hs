@@ -44,8 +44,8 @@ module Terrafomo
     , ignoreAllChanges
     , ignore
 
-    -- * DataSources
-    , DataSource
+    -- * Data Sources
+    , Data
     , datasource
 
     -- * Resources
@@ -69,7 +69,7 @@ module Terrafomo
 
 import Terrafomo.Attribute
 import Terrafomo.Backend
-import Terrafomo.DataSource
+import Terrafomo.Data
 import Terrafomo.IP
 import Terrafomo.Meta
 import Terrafomo.Monad

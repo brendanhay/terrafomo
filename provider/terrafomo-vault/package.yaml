@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Vault
-    - Terrafomo.Vault.DataSource
+    - Terrafomo.Vault.Data
     - Terrafomo.Vault.Resource
 
   reexported-modules: >

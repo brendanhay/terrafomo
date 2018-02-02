@@ -15,18 +15,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Fastly.DataSource
+-- Module      : Terrafomo.Fastly.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Fastly.DataSource
+module Terrafomo.Fastly.Data
     (
     -- * Types
-      IpRangesDataSource (..)
-    , ipRangesDataSource
+      IpRangesData (..)
+    , ipRangesData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -47,7 +47,7 @@ import qualified Data.Word                 as TF
 import qualified GHC.Base                  as TF
 import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.DataSource      as TF
+import qualified Terrafomo.Data            as TF
 import qualified Terrafomo.Fastly.Provider as TF
 import qualified Terrafomo.Fastly.Types    as TF
 import qualified Terrafomo.HCL             as TF
@@ -56,24 +56,24 @@ import qualified Terrafomo.Meta            as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Resource        as TF
 
-{- | The @fastly_ip_ranges@ Fastly datasource.
+{- | The @fastly_ip_ranges@ Fastly data.
 
 Use this data source to get the
 <https://docs.fastly.com/guides/securing-communications/accessing-fastlys-ip-ranges>
 of Fastly edge nodes.
 -}
-data IpRangesDataSource s = IpRangesDataSource {
+data IpRangesData s = IpRangesData {
     } deriving (Show, Eq)
 
-instance TF.ToHCL (IpRangesDataSource s) where
+instance TF.ToHCL (IpRangesData s) where
     toHCL _ = TF.block []
 
-instance HasComputedCidrBlocks (IpRangesDataSource s) Text
+instance HasComputedCidrBlocks (IpRangesData s) Text
 
-ipRangesDataSource :: TF.DataSource TF.Fastly (IpRangesDataSource s)
-ipRangesDataSource =
-    TF.newDataSource "fastly_ip_ranges" $
-        IpRangesDataSource {
+ipRangesData :: TF.Data TF.Fastly (IpRangesData s)
+ipRangesData =
+    TF.newData "fastly_ip_ranges" $
+        IpRangesData {
             }
 
 class HasComputedCidrBlocks a b | a -> b where

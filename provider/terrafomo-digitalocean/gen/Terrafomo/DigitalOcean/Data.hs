@@ -15,18 +15,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.DigitalOcean.DataSource
+-- Module      : Terrafomo.DigitalOcean.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.DigitalOcean.DataSource
+module Terrafomo.DigitalOcean.Data
     (
     -- * Types
-      ImageDataSource (..)
-    , imageDataSource
+      ImageData (..)
+    , imageData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -54,7 +54,7 @@ import qualified Data.Word                       as TF
 import qualified GHC.Base                        as TF
 import qualified Numeric.Natural                 as TF
 import qualified Terrafomo.Attribute             as TF
-import qualified Terrafomo.DataSource            as TF
+import qualified Terrafomo.Data                  as TF
 import qualified Terrafomo.DigitalOcean.Provider as TF
 import qualified Terrafomo.DigitalOcean.Types    as TF
 import qualified Terrafomo.HCL                   as TF
@@ -63,52 +63,52 @@ import qualified Terrafomo.Meta                  as TF
 import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.Resource              as TF
 
-{- | The @digitalocean_image@ DigitalOcean datasource.
+{- | The @digitalocean_image@ DigitalOcean data.
 
 Get information on an snapshot images. The aim of this datasource is to
 enable you to build droplets based on snapshot names. An error is triggered
 if zero or more than one result is returned by the query.
 -}
-data ImageDataSource s = ImageDataSource {
+data ImageData s = ImageData {
       _name :: !(TF.Attribute s Text)
     {- ^ - The name of the image. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (ImageDataSource s) where
-    toHCL ImageDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (ImageData s) where
+    toHCL ImageData{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
         ]
 
-instance HasName (ImageDataSource s) s Text where
+instance HasName (ImageData s) s Text where
     name =
-        lens (_name :: ImageDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageDataSource s)
+        lens (_name :: ImageData s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ImageData s)
 
-instance HasComputedImage (ImageDataSource s) Text
+instance HasComputedImage (ImageData s) Text
 
-instance HasComputedMinDiskSize (ImageDataSource s) Text
+instance HasComputedMinDiskSize (ImageData s) Text
 
-instance HasComputedName (ImageDataSource s) Text
+instance HasComputedName (ImageData s) Text
 
-instance HasComputedPrivate (ImageDataSource s) Text
+instance HasComputedPrivate (ImageData s) Text
 
-instance HasComputedRegions (ImageDataSource s) Text
+instance HasComputedRegions (ImageData s) Text
 
-instance HasComputedSizeGigabytes (ImageDataSource s) Text
+instance HasComputedSizeGigabytes (ImageData s) Text
 
-instance HasComputedType' (ImageDataSource s) Text
+instance HasComputedType' (ImageData s) Text
 
-imageDataSource :: TF.DataSource TF.DigitalOcean (ImageDataSource s)
-imageDataSource =
-    TF.newDataSource "digitalocean_image" $
-        ImageDataSource {
+imageData :: TF.Data TF.DigitalOcean (ImageData s)
+imageData =
+    TF.newData "digitalocean_image" $
+        ImageData {
               _name = TF.Nil
             }
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
+instance HasName a s b => HasName (TF.Data p a) s b where
     name = TF.configuration . name
 
 class HasComputedImage a b | a -> b where

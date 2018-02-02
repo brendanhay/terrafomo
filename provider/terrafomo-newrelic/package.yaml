@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.NewRelic
-    - Terrafomo.NewRelic.DataSource
+    - Terrafomo.NewRelic.Data
     - Terrafomo.NewRelic.Resource
 
   reexported-modules: >

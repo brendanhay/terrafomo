@@ -56,7 +56,7 @@ import GHC.Exts (IsList (..))
 
 import Terrafomo.Attribute
 import Terrafomo.Backend
-import Terrafomo.DataSource  (DataSource (..))
+import Terrafomo.Data        (Data (..))
 import Terrafomo.Format      (nformat, (%))
 import Terrafomo.Name
 import Terrafomo.Output
@@ -92,7 +92,7 @@ import qualified Control.Monad.Trans.Writer.Strict as Strict
 -- Errors
 
 data TerraformError
-    = NonUniqueDataSource !Key  !HCL.Value
+    = NonUniqueData !Key  !HCL.Value
     | NonUniqueResource   !Key  !HCL.Value
     | NonUniqueOutput     !Name !HCL.Value
       deriving (Eq, Show, Typeable)
@@ -339,7 +339,7 @@ datasource
        , HCL.ToHCL a
        )
     => Name
-    -> DataSource p a
+    -> Data p a
     -> m (Reference s a)
 datasource name x =
     liftTerraform $ do
@@ -352,7 +352,7 @@ datasource name x =
             insertValue key value datasources (\s w -> w { datasources = s })
 
         unless unique $
-            MTL.throwError (NonUniqueDataSource key value)
+            MTL.throwError (NonUniqueData key value)
 
         pure (UnsafeReference key)
 
@@ -429,7 +429,7 @@ remote x =
         exists <- MTL.gets (VMap.member key . datasources)
 
         if exists
-            then MTL.throwError (NonUniqueDataSource key value)
+            then MTL.throwError (NonUniqueData key value)
             else void (insertValue key value remotes (\s w -> w { remotes = s }))
 
         pure (Computed key (outputName x))

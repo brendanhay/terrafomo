@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.DigitalOcean
-    - Terrafomo.DigitalOcean.DataSource
+    - Terrafomo.DigitalOcean.Data
     - Terrafomo.DigitalOcean.Resource
 
   reexported-modules: >

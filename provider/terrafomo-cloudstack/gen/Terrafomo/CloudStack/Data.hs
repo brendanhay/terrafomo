@@ -15,18 +15,18 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.CloudStack.DataSource
+-- Module      : Terrafomo.CloudStack.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.CloudStack.DataSource
+module Terrafomo.CloudStack.Data
     (
     -- * Types
-      TemplateDataSource (..)
-    , templateDataSource
+      TemplateData (..)
+    , templateData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -59,62 +59,62 @@ import qualified Numeric.Natural               as TF
 import qualified Terrafomo.Attribute           as TF
 import qualified Terrafomo.CloudStack.Provider as TF
 import qualified Terrafomo.CloudStack.Types    as TF
-import qualified Terrafomo.DataSource          as TF
+import qualified Terrafomo.Data                as TF
 import qualified Terrafomo.HCL                 as TF
 import qualified Terrafomo.IP                  as TF
 import qualified Terrafomo.Meta                as TF
 import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Resource            as TF
 
-{- | The @cloudstack_template@ CloudStack datasource.
+{- | The @cloudstack_template@ CloudStack data.
 
 Use this datasource to get the ID of a template for use in other resources.
 -}
-data TemplateDataSource s = TemplateDataSource {
+data TemplateData s = TemplateData {
       _filter          :: !(TF.Attribute s Text)
     {- ^ (Required) One or more name/value pairs to filter off of. You can apply filters on any exported attributes. -}
     , _template_filter :: !(TF.Attribute s Text)
     {- ^ (Required) The template filter. Possible values are @featured@ , @self@ , @selfexecutable@ , @sharedexecutable@ , @executable@ and @community@ (see the Cloudstack API listTemplate command documentation). -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TemplateDataSource s) where
-    toHCL TemplateDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (TemplateData s) where
+    toHCL TemplateData{..} = TF.block $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "template_filter" _template_filter
         ]
 
-instance HasFilter (TemplateDataSource s) s Text where
+instance HasFilter (TemplateData s) s Text where
     filter =
-        lens (_filter :: TemplateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: TemplateDataSource s)
+        lens (_filter :: TemplateData s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: TemplateData s)
 
-instance HasTemplateFilter (TemplateDataSource s) s Text where
+instance HasTemplateFilter (TemplateData s) s Text where
     templateFilter =
-        lens (_template_filter :: TemplateDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _template_filter = a } :: TemplateDataSource s)
+        lens (_template_filter :: TemplateData s -> TF.Attribute s Text)
+            (\s a -> s { _template_filter = a } :: TemplateData s)
 
-instance HasComputedAccount (TemplateDataSource s) Text
+instance HasComputedAccount (TemplateData s) Text
 
-instance HasComputedCreated (TemplateDataSource s) Text
+instance HasComputedCreated (TemplateData s) Text
 
-instance HasComputedDisplayText (TemplateDataSource s) Text
+instance HasComputedDisplayText (TemplateData s) Text
 
-instance HasComputedFormat (TemplateDataSource s) Text
+instance HasComputedFormat (TemplateData s) Text
 
-instance HasComputedHypervisor (TemplateDataSource s) Text
+instance HasComputedHypervisor (TemplateData s) Text
 
-instance HasComputedId (TemplateDataSource s) Text
+instance HasComputedId (TemplateData s) Text
 
-instance HasComputedName (TemplateDataSource s) Text
+instance HasComputedName (TemplateData s) Text
 
-instance HasComputedSize (TemplateDataSource s) Text
+instance HasComputedSize (TemplateData s) Text
 
-instance HasComputedTags (TemplateDataSource s) Text
+instance HasComputedTags (TemplateData s) Text
 
-templateDataSource :: TF.DataSource TF.CloudStack (TemplateDataSource s)
-templateDataSource =
-    TF.newDataSource "cloudstack_template" $
-        TemplateDataSource {
+templateData :: TF.Data TF.CloudStack (TemplateData s)
+templateData =
+    TF.newData "cloudstack_template" $
+        TemplateData {
               _filter = TF.Nil
             , _template_filter = TF.Nil
             }
@@ -122,13 +122,13 @@ templateDataSource =
 class HasFilter a s b | a -> s b where
     filter :: Lens' a (TF.Attribute s b)
 
-instance HasFilter a s b => HasFilter (TF.DataSource p a) s b where
+instance HasFilter a s b => HasFilter (TF.Data p a) s b where
     filter = TF.configuration . filter
 
 class HasTemplateFilter a s b | a -> s b where
     templateFilter :: Lens' a (TF.Attribute s b)
 
-instance HasTemplateFilter a s b => HasTemplateFilter (TF.DataSource p a) s b where
+instance HasTemplateFilter a s b => HasTemplateFilter (TF.Data p a) s b where
     templateFilter = TF.configuration . templateFilter
 
 class HasComputedAccount a b | a -> b where

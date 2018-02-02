@@ -19,7 +19,7 @@ library:
     - Terrafomo
     - Terrafomo.Attribute
     - Terrafomo.Backend
-    - Terrafomo.DataSource
+    - Terrafomo.Data
     - Terrafomo.Format
     - Terrafomo.HCL
     - Terrafomo.IP

@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Docker
-    - Terrafomo.Docker.DataSource
+    - Terrafomo.Docker.Data
     - Terrafomo.Docker.Resource
 
   reexported-modules: >

@@ -15,21 +15,21 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.GitHub.DataSource
+-- Module      : Terrafomo.GitHub.Data
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.GitHub.DataSource
+module Terrafomo.GitHub.Data
     (
     -- * Types
-      TeamDataSource (..)
-    , teamDataSource
+      TeamData (..)
+    , teamData
 
-    , UserDataSource (..)
-    , userDataSource
+    , UserData (..)
+    , userData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -74,7 +74,7 @@ import qualified Data.Word                 as TF
 import qualified GHC.Base                  as TF
 import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.DataSource      as TF
+import qualified Terrafomo.Data            as TF
 import qualified Terrafomo.GitHub.Provider as TF
 import qualified Terrafomo.GitHub.Types    as TF
 import qualified Terrafomo.HCL             as TF
@@ -83,116 +83,116 @@ import qualified Terrafomo.Meta            as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Resource        as TF
 
-{- | The @github_team@ GitHub datasource.
+{- | The @github_team@ GitHub data.
 
 Use this data source to retrieve information about a Github team.
 -}
-data TeamDataSource s = TeamDataSource {
+data TeamData s = TeamData {
       _slug :: !(TF.Attribute s Text)
     {- ^ (Required) The team slug. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (TeamDataSource s) where
-    toHCL TeamDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (TeamData s) where
+    toHCL TeamData{..} = TF.block $ catMaybes
         [ TF.attribute "slug" _slug
         ]
 
-instance HasSlug (TeamDataSource s) s Text where
+instance HasSlug (TeamData s) s Text where
     slug =
-        lens (_slug :: TeamDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _slug = a } :: TeamDataSource s)
+        lens (_slug :: TeamData s -> TF.Attribute s Text)
+            (\s a -> s { _slug = a } :: TeamData s)
 
-instance HasComputedDescription (TeamDataSource s) Text
+instance HasComputedDescription (TeamData s) Text
 
-instance HasComputedId (TeamDataSource s) Text
+instance HasComputedId (TeamData s) Text
 
-instance HasComputedMembers (TeamDataSource s) Text
+instance HasComputedMembers (TeamData s) Text
 
-instance HasComputedName (TeamDataSource s) Text
+instance HasComputedName (TeamData s) Text
 
-instance HasComputedPermission (TeamDataSource s) Text
+instance HasComputedPermission (TeamData s) Text
 
-instance HasComputedPrivacy (TeamDataSource s) Text
+instance HasComputedPrivacy (TeamData s) Text
 
-teamDataSource :: TF.DataSource TF.GitHub (TeamDataSource s)
-teamDataSource =
-    TF.newDataSource "github_team" $
-        TeamDataSource {
+teamData :: TF.Data TF.GitHub (TeamData s)
+teamData =
+    TF.newData "github_team" $
+        TeamData {
               _slug = TF.Nil
             }
 
-{- | The @github_user@ GitHub datasource.
+{- | The @github_user@ GitHub data.
 
 Use this data source to retrieve information about a Github user.
 -}
-data UserDataSource s = UserDataSource {
+data UserData s = UserData {
       _username :: !(TF.Attribute s Text)
     {- ^ (Required) The username. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (UserDataSource s) where
-    toHCL UserDataSource{..} = TF.block $ catMaybes
+instance TF.ToHCL (UserData s) where
+    toHCL UserData{..} = TF.block $ catMaybes
         [ TF.attribute "username" _username
         ]
 
-instance HasUsername (UserDataSource s) s Text where
+instance HasUsername (UserData s) s Text where
     username =
-        lens (_username :: UserDataSource s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: UserDataSource s)
+        lens (_username :: UserData s -> TF.Attribute s Text)
+            (\s a -> s { _username = a } :: UserData s)
 
-instance HasComputedAvatarUrl (UserDataSource s) Text
+instance HasComputedAvatarUrl (UserData s) Text
 
-instance HasComputedBio (UserDataSource s) Text
+instance HasComputedBio (UserData s) Text
 
-instance HasComputedBlog (UserDataSource s) Text
+instance HasComputedBlog (UserData s) Text
 
-instance HasComputedCompany (UserDataSource s) Text
+instance HasComputedCompany (UserData s) Text
 
-instance HasComputedCreatedAt (UserDataSource s) Text
+instance HasComputedCreatedAt (UserData s) Text
 
-instance HasComputedEmail (UserDataSource s) Text
+instance HasComputedEmail (UserData s) Text
 
-instance HasComputedFollowers (UserDataSource s) Text
+instance HasComputedFollowers (UserData s) Text
 
-instance HasComputedFollowing (UserDataSource s) Text
+instance HasComputedFollowing (UserData s) Text
 
-instance HasComputedGpgKeys (UserDataSource s) Text
+instance HasComputedGpgKeys (UserData s) Text
 
-instance HasComputedGravatarId (UserDataSource s) Text
+instance HasComputedGravatarId (UserData s) Text
 
-instance HasComputedLocation (UserDataSource s) Text
+instance HasComputedLocation (UserData s) Text
 
-instance HasComputedLogin (UserDataSource s) Text
+instance HasComputedLogin (UserData s) Text
 
-instance HasComputedName (UserDataSource s) Text
+instance HasComputedName (UserData s) Text
 
-instance HasComputedPublicGists (UserDataSource s) Text
+instance HasComputedPublicGists (UserData s) Text
 
-instance HasComputedPublicRepos (UserDataSource s) Text
+instance HasComputedPublicRepos (UserData s) Text
 
-instance HasComputedSiteAdmin (UserDataSource s) Text
+instance HasComputedSiteAdmin (UserData s) Text
 
-instance HasComputedSshKeys (UserDataSource s) Text
+instance HasComputedSshKeys (UserData s) Text
 
-instance HasComputedUpdatedAt (UserDataSource s) Text
+instance HasComputedUpdatedAt (UserData s) Text
 
-userDataSource :: TF.DataSource TF.GitHub (UserDataSource s)
-userDataSource =
-    TF.newDataSource "github_user" $
-        UserDataSource {
+userData :: TF.Data TF.GitHub (UserData s)
+userData =
+    TF.newData "github_user" $
+        UserData {
               _username = TF.Nil
             }
 
 class HasSlug a s b | a -> s b where
     slug :: Lens' a (TF.Attribute s b)
 
-instance HasSlug a s b => HasSlug (TF.DataSource p a) s b where
+instance HasSlug a s b => HasSlug (TF.Data p a) s b where
     slug = TF.configuration . slug
 
 class HasUsername a s b | a -> s b where
     username :: Lens' a (TF.Attribute s b)
 
-instance HasUsername a s b => HasUsername (TF.DataSource p a) s b where
+instance HasUsername a s b => HasUsername (TF.Data p a) s b where
     username = TF.configuration . username
 
 class HasComputedAvatarUrl a b | a -> b where

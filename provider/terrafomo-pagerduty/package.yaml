@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.PagerDuty
-    - Terrafomo.PagerDuty.DataSource
+    - Terrafomo.PagerDuty.Data
     - Terrafomo.PagerDuty.Resource
 
   reexported-modules: >

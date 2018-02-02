@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.OpenStack
-    - Terrafomo.OpenStack.DataSource
+    - Terrafomo.OpenStack.Data
     - Terrafomo.OpenStack.Resource
 
   reexported-modules: >
