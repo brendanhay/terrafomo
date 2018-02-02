@@ -23,14 +23,14 @@ module Terrafomo.Consul.Provider
     , emptyConsul
 
     -- * Lenses
-    , address
-    , caFile
-    , certFile
-    , datacenter
-    , httpAuth
-    , keyFile
-    , scheme
-    , token
+    , providerAddress
+    , providerCaFile
+    , providerCertFile
+    , providerDatacenter
+    , providerHttpAuth
+    , providerKeyFile
+    , providerScheme
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -110,34 +110,34 @@ emptyConsul = Consul {
       , _token = Nothing
     }
 
-address :: Lens' Consul (Maybe Text)
-address =
+providerAddress :: Lens' Consul (Maybe Text)
+providerAddress =
     lens _address (\s a -> s { _address = a })
 
-caFile :: Lens' Consul (Maybe Text)
-caFile =
+providerCaFile :: Lens' Consul (Maybe Text)
+providerCaFile =
     lens _ca_file (\s a -> s { _ca_file = a })
 
-certFile :: Lens' Consul (Maybe Text)
-certFile =
+providerCertFile :: Lens' Consul (Maybe Text)
+providerCertFile =
     lens _cert_file (\s a -> s { _cert_file = a })
 
-datacenter :: Lens' Consul (Maybe Text)
-datacenter =
+providerDatacenter :: Lens' Consul (Maybe Text)
+providerDatacenter =
     lens _datacenter (\s a -> s { _datacenter = a })
 
-httpAuth :: Lens' Consul (Maybe Text)
-httpAuth =
+providerHttpAuth :: Lens' Consul (Maybe Text)
+providerHttpAuth =
     lens _http_auth (\s a -> s { _http_auth = a })
 
-keyFile :: Lens' Consul (Maybe Text)
-keyFile =
+providerKeyFile :: Lens' Consul (Maybe Text)
+providerKeyFile =
     lens _key_file (\s a -> s { _key_file = a })
 
-scheme :: Lens' Consul (Maybe Text)
-scheme =
+providerScheme :: Lens' Consul (Maybe Text)
+providerScheme =
     lens _scheme (\s a -> s { _scheme = a })
 
-token :: Lens' Consul (Maybe Text)
-token =
+providerToken :: Lens' Consul (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

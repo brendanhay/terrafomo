@@ -23,14 +23,14 @@ module Terrafomo.OPC.Provider
     , emptyOPC
 
     -- * Lenses
-    , endpoint
-    , identityDomain
-    , insecure
-    , maxRetries
-    , password
-    , storageEndpoint
-    , storageServiceId
-    , user
+    , providerEndpoint
+    , providerIdentityDomain
+    , providerInsecure
+    , providerMaxRetries
+    , providerPassword
+    , providerStorageEndpoint
+    , providerStorageServiceId
+    , providerUser
     ) where
 
 import Data.Hashable      (Hashable)
@@ -109,34 +109,34 @@ emptyOPC = OPC {
       , _user = Nothing
     }
 
-endpoint :: Lens' OPC (Maybe Text)
-endpoint =
+providerEndpoint :: Lens' OPC (Maybe Text)
+providerEndpoint =
     lens _endpoint (\s a -> s { _endpoint = a })
 
-identityDomain :: Lens' OPC (Maybe Text)
-identityDomain =
+providerIdentityDomain :: Lens' OPC (Maybe Text)
+providerIdentityDomain =
     lens _identity_domain (\s a -> s { _identity_domain = a })
 
-insecure :: Lens' OPC (Maybe Text)
-insecure =
+providerInsecure :: Lens' OPC (Maybe Text)
+providerInsecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-maxRetries :: Lens' OPC (Maybe Text)
-maxRetries =
+providerMaxRetries :: Lens' OPC (Maybe Text)
+providerMaxRetries =
     lens _max_retries (\s a -> s { _max_retries = a })
 
-password :: Lens' OPC (Maybe Text)
-password =
+providerPassword :: Lens' OPC (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-storageEndpoint :: Lens' OPC (Maybe Text)
-storageEndpoint =
+providerStorageEndpoint :: Lens' OPC (Maybe Text)
+providerStorageEndpoint =
     lens _storage_endpoint (\s a -> s { _storage_endpoint = a })
 
-storageServiceId :: Lens' OPC (Maybe Text)
-storageServiceId =
+providerStorageServiceId :: Lens' OPC (Maybe Text)
+providerStorageServiceId =
     lens _storage_service_id (\s a -> s { _storage_service_id = a })
 
-user :: Lens' OPC (Maybe Text)
-user =
+providerUser :: Lens' OPC (Maybe Text)
+providerUser =
     lens _user (\s a -> s { _user = a })

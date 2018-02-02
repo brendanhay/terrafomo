@@ -61,9 +61,9 @@ import qualified Terrafomo.OVH.Lens     as P
 import qualified Terrafomo.OVH.Provider as P
 import           Terrafomo.OVH.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @publiccloud_region@ OVH datasource.
 

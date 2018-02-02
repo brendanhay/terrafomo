@@ -23,19 +23,19 @@ module Terrafomo.Kubernetes.Provider
     , emptyKubernetes
 
     -- * Lenses
-    , clientCertificate
-    , clientKey
-    , clusterCaCertificate
-    , configContext
-    , configContextAuthInfo
-    , configContextCluster
-    , configPath
-    , host
-    , insecure
-    , loadConfigFile
-    , password
-    , token
-    , username
+    , providerClientCertificate
+    , providerClientKey
+    , providerClusterCaCertificate
+    , providerConfigContext
+    , providerConfigContextAuthInfo
+    , providerConfigContextCluster
+    , providerConfigPath
+    , providerHost
+    , providerInsecure
+    , providerLoadConfigFile
+    , providerPassword
+    , providerToken
+    , providerUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -134,54 +134,54 @@ emptyKubernetes = Kubernetes {
       , _username = Nothing
     }
 
-clientCertificate :: Lens' Kubernetes (Maybe Text)
-clientCertificate =
+providerClientCertificate :: Lens' Kubernetes (Maybe Text)
+providerClientCertificate =
     lens _client_certificate (\s a -> s { _client_certificate = a })
 
-clientKey :: Lens' Kubernetes (Maybe Text)
-clientKey =
+providerClientKey :: Lens' Kubernetes (Maybe Text)
+providerClientKey =
     lens _client_key (\s a -> s { _client_key = a })
 
-clusterCaCertificate :: Lens' Kubernetes (Maybe Text)
-clusterCaCertificate =
+providerClusterCaCertificate :: Lens' Kubernetes (Maybe Text)
+providerClusterCaCertificate =
     lens _cluster_ca_certificate (\s a -> s { _cluster_ca_certificate = a })
 
-configContext :: Lens' Kubernetes (Maybe Text)
-configContext =
+providerConfigContext :: Lens' Kubernetes (Maybe Text)
+providerConfigContext =
     lens _config_context (\s a -> s { _config_context = a })
 
-configContextAuthInfo :: Lens' Kubernetes (Maybe Text)
-configContextAuthInfo =
+providerConfigContextAuthInfo :: Lens' Kubernetes (Maybe Text)
+providerConfigContextAuthInfo =
     lens _config_context_auth_info (\s a -> s { _config_context_auth_info = a })
 
-configContextCluster :: Lens' Kubernetes (Maybe Text)
-configContextCluster =
+providerConfigContextCluster :: Lens' Kubernetes (Maybe Text)
+providerConfigContextCluster =
     lens _config_context_cluster (\s a -> s { _config_context_cluster = a })
 
-configPath :: Lens' Kubernetes (Maybe Text)
-configPath =
+providerConfigPath :: Lens' Kubernetes (Maybe Text)
+providerConfigPath =
     lens _config_path (\s a -> s { _config_path = a })
 
-host :: Lens' Kubernetes (Maybe Text)
-host =
+providerHost :: Lens' Kubernetes (Maybe Text)
+providerHost =
     lens _host (\s a -> s { _host = a })
 
-insecure :: Lens' Kubernetes (Maybe Text)
-insecure =
+providerInsecure :: Lens' Kubernetes (Maybe Text)
+providerInsecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-loadConfigFile :: Lens' Kubernetes (Maybe Text)
-loadConfigFile =
+providerLoadConfigFile :: Lens' Kubernetes (Maybe Text)
+providerLoadConfigFile =
     lens _load_config_file (\s a -> s { _load_config_file = a })
 
-password :: Lens' Kubernetes (Maybe Text)
-password =
+providerPassword :: Lens' Kubernetes (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-token :: Lens' Kubernetes (Maybe Text)
-token =
+providerToken :: Lens' Kubernetes (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })
 
-username :: Lens' Kubernetes (Maybe Text)
-username =
+providerUsername :: Lens' Kubernetes (Maybe Text)
+providerUsername =
     lens _username (\s a -> s { _username = a })

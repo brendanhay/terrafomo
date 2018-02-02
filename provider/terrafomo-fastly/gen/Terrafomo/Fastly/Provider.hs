@@ -23,7 +23,7 @@ module Terrafomo.Fastly.Provider
     , emptyFastly
 
     -- * Lenses
-    , apiKey
+    , providerApiKey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -75,6 +75,6 @@ emptyFastly = Fastly {
         _api_key = Nothing
     }
 
-apiKey :: Lens' Fastly (Maybe Text)
-apiKey =
+providerApiKey :: Lens' Fastly (Maybe Text)
+providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })

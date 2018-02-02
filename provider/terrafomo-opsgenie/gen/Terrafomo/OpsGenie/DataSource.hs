@@ -53,9 +53,9 @@ import qualified Terrafomo.OpsGenie.Lens     as P
 import qualified Terrafomo.OpsGenie.Provider as P
 import           Terrafomo.OpsGenie.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @opsgenie_user@ OpsGenie datasource.
 

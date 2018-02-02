@@ -39,89 +39,61 @@ import GHC.Base ((.))
 
 import Lens.Micro (Getting, Lens', to)
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.Meta       as TF
-import qualified Terrafomo.Name       as TF
-import qualified Terrafomo.Resource   as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.Lifecycle as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Source    as TF
 
 class HasAddress a s b | a -> s b where
     address :: Lens' a (TF.Attribute s b)
 
-instance HasAddress a s b => HasAddress (TF.DataSource p a) s b where
-    address = TF.configuration . address
-
-instance HasAddress a s b => HasAddress (TF.Resource p a) s b where
+instance HasAddress a s b => HasAddress (TF.Source l p a) s b where
     address = TF.configuration . address
 
 class HasArguments a s b | a -> s b where
     arguments :: Lens' a (TF.Attribute s b)
 
-instance HasArguments a s b => HasArguments (TF.DataSource p a) s b where
-    arguments = TF.configuration . arguments
-
-instance HasArguments a s b => HasArguments (TF.Resource p a) s b where
+instance HasArguments a s b => HasArguments (TF.Source l p a) s b where
     arguments = TF.configuration . arguments
 
 class HasCheckCommand a s b | a -> s b where
     checkCommand :: Lens' a (TF.Attribute s b)
 
-instance HasCheckCommand a s b => HasCheckCommand (TF.DataSource p a) s b where
-    checkCommand = TF.configuration . checkCommand
-
-instance HasCheckCommand a s b => HasCheckCommand (TF.Resource p a) s b where
+instance HasCheckCommand a s b => HasCheckCommand (TF.Source l p a) s b where
     checkCommand = TF.configuration . checkCommand
 
 class HasCommand a s b | a -> s b where
     command :: Lens' a (TF.Attribute s b)
 
-instance HasCommand a s b => HasCommand (TF.DataSource p a) s b where
-    command = TF.configuration . command
-
-instance HasCommand a s b => HasCommand (TF.Resource p a) s b where
+instance HasCommand a s b => HasCommand (TF.Source l p a) s b where
     command = TF.configuration . command
 
 class HasDisplayName a s b | a -> s b where
     displayName :: Lens' a (TF.Attribute s b)
 
-instance HasDisplayName a s b => HasDisplayName (TF.DataSource p a) s b where
-    displayName = TF.configuration . displayName
-
-instance HasDisplayName a s b => HasDisplayName (TF.Resource p a) s b where
+instance HasDisplayName a s b => HasDisplayName (TF.Source l p a) s b where
     displayName = TF.configuration . displayName
 
 class HasHostname a s b | a -> s b where
     hostname :: Lens' a (TF.Attribute s b)
 
-instance HasHostname a s b => HasHostname (TF.DataSource p a) s b where
-    hostname = TF.configuration . hostname
-
-instance HasHostname a s b => HasHostname (TF.Resource p a) s b where
+instance HasHostname a s b => HasHostname (TF.Source l p a) s b where
     hostname = TF.configuration . hostname
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
-    name = TF.configuration . name
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
+instance HasName a s b => HasName (TF.Source l p a) s b where
     name = TF.configuration . name
 
 class HasTemplates a s b | a -> s b where
     templates :: Lens' a (TF.Attribute s b)
 
-instance HasTemplates a s b => HasTemplates (TF.DataSource p a) s b where
-    templates = TF.configuration . templates
-
-instance HasTemplates a s b => HasTemplates (TF.Resource p a) s b where
+instance HasTemplates a s b => HasTemplates (TF.Source l p a) s b where
     templates = TF.configuration . templates
 
 class HasVars a s b | a -> s b where
     vars :: Lens' a (TF.Attribute s b)
 
-instance HasVars a s b => HasVars (TF.DataSource p a) s b where
-    vars = TF.configuration . vars
-
-instance HasVars a s b => HasVars (TF.Resource p a) s b where
+instance HasVars a s b => HasVars (TF.Source l p a) s b where
     vars = TF.configuration . vars

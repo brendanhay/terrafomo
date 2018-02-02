@@ -23,7 +23,7 @@ module Terrafomo.Packet.Provider
     , emptyPacket
 
     -- * Lenses
-    , authToken
+    , providerAuthToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -74,6 +74,6 @@ emptyPacket = Packet {
         _auth_token = Nothing
     }
 
-authToken :: Lens' Packet (Maybe Text)
-authToken =
+providerAuthToken :: Lens' Packet (Maybe Text)
+providerAuthToken =
     lens _auth_token (\s a -> s { _auth_token = a })

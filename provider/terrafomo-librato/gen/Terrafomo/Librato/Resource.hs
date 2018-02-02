@@ -98,7 +98,7 @@ import           Terrafomo.Librato.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Resource  as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @librato_alert@ Librato resource.
 

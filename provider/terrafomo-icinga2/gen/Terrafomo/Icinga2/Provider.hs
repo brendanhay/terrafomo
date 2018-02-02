@@ -23,10 +23,10 @@ module Terrafomo.Icinga2.Provider
     , emptyIcinga2
 
     -- * Lenses
-    , apiPassword
-    , apiUrl
-    , apiUser
-    , insecureSkipTlsVerify
+    , providerApiPassword
+    , providerApiUrl
+    , providerApiUser
+    , providerInsecureSkipTlsVerify
     ) where
 
 import Data.Hashable      (Hashable)
@@ -89,18 +89,18 @@ emptyIcinga2 = Icinga2 {
       , _insecure_skip_tls_verify = Nothing
     }
 
-apiPassword :: Lens' Icinga2 (Maybe Text)
-apiPassword =
+providerApiPassword :: Lens' Icinga2 (Maybe Text)
+providerApiPassword =
     lens _api_password (\s a -> s { _api_password = a })
 
-apiUrl :: Lens' Icinga2 (Maybe Text)
-apiUrl =
+providerApiUrl :: Lens' Icinga2 (Maybe Text)
+providerApiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-apiUser :: Lens' Icinga2 (Maybe Text)
-apiUser =
+providerApiUser :: Lens' Icinga2 (Maybe Text)
+providerApiUser =
     lens _api_user (\s a -> s { _api_user = a })
 
-insecureSkipTlsVerify :: Lens' Icinga2 (Maybe Text)
-insecureSkipTlsVerify =
+providerInsecureSkipTlsVerify :: Lens' Icinga2 (Maybe Text)
+providerInsecureSkipTlsVerify =
     lens _insecure_skip_tls_verify (\s a -> s { _insecure_skip_tls_verify = a })

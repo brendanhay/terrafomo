@@ -30,8 +30,7 @@ import GHC.Base ((.))
 
 import Lens.Micro (Getting, Lens', to)
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.Meta       as TF
-import qualified Terrafomo.Name       as TF
-import qualified Terrafomo.Resource   as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.Lifecycle as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Source    as TF

@@ -557,9 +557,9 @@ import qualified Terrafomo.AWS.Provider as P
 import           Terrafomo.AWS.Types    as P
 import qualified Terrafomo.IP           as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @aws_acm_certificate@ AWS datasource.
 

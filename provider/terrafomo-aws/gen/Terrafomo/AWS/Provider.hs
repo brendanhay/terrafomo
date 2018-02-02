@@ -23,23 +23,23 @@ module Terrafomo.AWS.Provider
     , emptyAWS
 
     -- * Lenses
-    , accessKey
-    , allowedAccountIds
-    , assumeRole
-    , forbiddenAccountIds
-    , insecure
-    , maxRetries
-    , profile
-    , region
-    , s3ForcePathStyle
-    , secretKey
-    , sharedCredentialsFile
-    , skipCredentialsValidation
-    , skipGetEc2Platforms
-    , skipMetadataApiCheck
-    , skipRegionValidation
-    , skipRequestingAccountId
-    , token
+    , providerAccessKey
+    , providerAllowedAccountIds
+    , providerAssumeRole
+    , providerForbiddenAccountIds
+    , providerInsecure
+    , providerMaxRetries
+    , providerProfile
+    , providerRegion
+    , providerS3ForcePathStyle
+    , providerSecretKey
+    , providerSharedCredentialsFile
+    , providerSkipCredentialsValidation
+    , providerSkipGetEc2Platforms
+    , providerSkipMetadataApiCheck
+    , providerSkipRegionValidation
+    , providerSkipRequestingAccountId
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -154,70 +154,70 @@ emptyAWS = AWS {
       , _token = Nothing
     }
 
-accessKey :: Lens' AWS (Maybe Text)
-accessKey =
+providerAccessKey :: Lens' AWS (Maybe Text)
+providerAccessKey =
     lens _access_key (\s a -> s { _access_key = a })
 
-allowedAccountIds :: Lens' AWS (Maybe Text)
-allowedAccountIds =
+providerAllowedAccountIds :: Lens' AWS (Maybe Text)
+providerAllowedAccountIds =
     lens _allowed_account_ids (\s a -> s { _allowed_account_ids = a })
 
-assumeRole :: Lens' AWS (Maybe Text)
-assumeRole =
+providerAssumeRole :: Lens' AWS (Maybe Text)
+providerAssumeRole =
     lens _assume_role (\s a -> s { _assume_role = a })
 
-forbiddenAccountIds :: Lens' AWS (Maybe Text)
-forbiddenAccountIds =
+providerForbiddenAccountIds :: Lens' AWS (Maybe Text)
+providerForbiddenAccountIds =
     lens _forbidden_account_ids (\s a -> s { _forbidden_account_ids = a })
 
-insecure :: Lens' AWS (Maybe Text)
-insecure =
+providerInsecure :: Lens' AWS (Maybe Text)
+providerInsecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-maxRetries :: Lens' AWS (Maybe Text)
-maxRetries =
+providerMaxRetries :: Lens' AWS (Maybe Text)
+providerMaxRetries =
     lens _max_retries (\s a -> s { _max_retries = a })
 
-profile :: Lens' AWS (Maybe Text)
-profile =
+providerProfile :: Lens' AWS (Maybe Text)
+providerProfile =
     lens _profile (\s a -> s { _profile = a })
 
-region :: Lens' AWS (Maybe P.Region)
-region =
+providerRegion :: Lens' AWS (Maybe P.Region)
+providerRegion =
     lens _region (\s a -> s { _region = a })
 
-s3ForcePathStyle :: Lens' AWS (Maybe Text)
-s3ForcePathStyle =
+providerS3ForcePathStyle :: Lens' AWS (Maybe Text)
+providerS3ForcePathStyle =
     lens _s3_force_path_style (\s a -> s { _s3_force_path_style = a })
 
-secretKey :: Lens' AWS (Maybe Text)
-secretKey =
+providerSecretKey :: Lens' AWS (Maybe Text)
+providerSecretKey =
     lens _secret_key (\s a -> s { _secret_key = a })
 
-sharedCredentialsFile :: Lens' AWS (Maybe Text)
-sharedCredentialsFile =
+providerSharedCredentialsFile :: Lens' AWS (Maybe Text)
+providerSharedCredentialsFile =
     lens _shared_credentials_file (\s a -> s { _shared_credentials_file = a })
 
-skipCredentialsValidation :: Lens' AWS (Maybe Text)
-skipCredentialsValidation =
+providerSkipCredentialsValidation :: Lens' AWS (Maybe Text)
+providerSkipCredentialsValidation =
     lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
 
-skipGetEc2Platforms :: Lens' AWS (Maybe Text)
-skipGetEc2Platforms =
+providerSkipGetEc2Platforms :: Lens' AWS (Maybe Text)
+providerSkipGetEc2Platforms =
     lens _skip_get_ec2_platforms (\s a -> s { _skip_get_ec2_platforms = a })
 
-skipMetadataApiCheck :: Lens' AWS (Maybe Text)
-skipMetadataApiCheck =
+providerSkipMetadataApiCheck :: Lens' AWS (Maybe Text)
+providerSkipMetadataApiCheck =
     lens _skip_metadata_api_check (\s a -> s { _skip_metadata_api_check = a })
 
-skipRegionValidation :: Lens' AWS (Maybe Text)
-skipRegionValidation =
+providerSkipRegionValidation :: Lens' AWS (Maybe Text)
+providerSkipRegionValidation =
     lens _skip_region_validation (\s a -> s { _skip_region_validation = a })
 
-skipRequestingAccountId :: Lens' AWS (Maybe Text)
-skipRequestingAccountId =
+providerSkipRequestingAccountId :: Lens' AWS (Maybe Text)
+providerSkipRequestingAccountId =
     lens _skip_requesting_account_id (\s a -> s { _skip_requesting_account_id = a })
 
-token :: Lens' AWS (Maybe Text)
-token =
+providerToken :: Lens' AWS (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

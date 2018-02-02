@@ -23,9 +23,9 @@ module Terrafomo.LogicMonitor.Provider
     , emptyLogicMonitor
 
     -- * Lenses
-    , apiId
-    , apiKey
-    , company
+    , providerApiId
+    , providerApiKey
+    , providerCompany
     ) where
 
 import Data.Hashable      (Hashable)
@@ -84,14 +84,14 @@ emptyLogicMonitor = LogicMonitor {
       , _company = Nothing
     }
 
-apiId :: Lens' LogicMonitor (Maybe Text)
-apiId =
+providerApiId :: Lens' LogicMonitor (Maybe Text)
+providerApiId =
     lens _api_id (\s a -> s { _api_id = a })
 
-apiKey :: Lens' LogicMonitor (Maybe Text)
-apiKey =
+providerApiKey :: Lens' LogicMonitor (Maybe Text)
+providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-company :: Lens' LogicMonitor (Maybe Text)
-company =
+providerCompany :: Lens' LogicMonitor (Maybe Text)
+providerCompany =
     lens _company (\s a -> s { _company = a })

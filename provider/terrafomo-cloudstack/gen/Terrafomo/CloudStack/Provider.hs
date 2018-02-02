@@ -23,13 +23,13 @@ module Terrafomo.CloudStack.Provider
     , emptyCloudStack
 
     -- * Lenses
-    , apiKey
-    , apiUrl
-    , config
-    , httpGetOnly
-    , profile
-    , secretKey
-    , timeout
+    , providerApiKey
+    , providerApiUrl
+    , providerConfig
+    , providerHttpGetOnly
+    , providerProfile
+    , providerSecretKey
+    , providerTimeout
     ) where
 
 import Data.Hashable      (Hashable)
@@ -108,30 +108,30 @@ emptyCloudStack = CloudStack {
       , _timeout = Nothing
     }
 
-apiKey :: Lens' CloudStack (Maybe Text)
-apiKey =
+providerApiKey :: Lens' CloudStack (Maybe Text)
+providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-apiUrl :: Lens' CloudStack (Maybe Text)
-apiUrl =
+providerApiUrl :: Lens' CloudStack (Maybe Text)
+providerApiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-config :: Lens' CloudStack (Maybe Text)
-config =
+providerConfig :: Lens' CloudStack (Maybe Text)
+providerConfig =
     lens _config (\s a -> s { _config = a })
 
-httpGetOnly :: Lens' CloudStack (Maybe Text)
-httpGetOnly =
+providerHttpGetOnly :: Lens' CloudStack (Maybe Text)
+providerHttpGetOnly =
     lens _http_get_only (\s a -> s { _http_get_only = a })
 
-profile :: Lens' CloudStack (Maybe Text)
-profile =
+providerProfile :: Lens' CloudStack (Maybe Text)
+providerProfile =
     lens _profile (\s a -> s { _profile = a })
 
-secretKey :: Lens' CloudStack (Maybe Text)
-secretKey =
+providerSecretKey :: Lens' CloudStack (Maybe Text)
+providerSecretKey =
     lens _secret_key (\s a -> s { _secret_key = a })
 
-timeout :: Lens' CloudStack (Maybe Text)
-timeout =
+providerTimeout :: Lens' CloudStack (Maybe Text)
+providerTimeout =
     lens _timeout (\s a -> s { _timeout = a })

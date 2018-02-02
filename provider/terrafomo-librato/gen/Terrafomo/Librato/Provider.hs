@@ -23,8 +23,8 @@ module Terrafomo.Librato.Provider
     , emptyLibrato
 
     -- * Lenses
-    , email
-    , token
+    , providerEmail
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -79,10 +79,10 @@ emptyLibrato = Librato {
       , _token = Nothing
     }
 
-email :: Lens' Librato (Maybe Text)
-email =
+providerEmail :: Lens' Librato (Maybe Text)
+providerEmail =
     lens _email (\s a -> s { _email = a })
 
-token :: Lens' Librato (Maybe Text)
-token =
+providerToken :: Lens' Librato (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

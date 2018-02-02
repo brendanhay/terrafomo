@@ -23,8 +23,8 @@ module Terrafomo.Heroku.Provider
     , emptyHeroku
 
     -- * Lenses
-    , apiKey
-    , email
+    , providerApiKey
+    , providerEmail
     ) where
 
 import Data.Hashable      (Hashable)
@@ -79,10 +79,10 @@ emptyHeroku = Heroku {
       , _email = Nothing
     }
 
-apiKey :: Lens' Heroku (Maybe Text)
-apiKey =
+providerApiKey :: Lens' Heroku (Maybe Text)
+providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-email :: Lens' Heroku (Maybe Text)
-email =
+providerEmail :: Lens' Heroku (Maybe Text)
+providerEmail =
     lens _email (\s a -> s { _email = a })

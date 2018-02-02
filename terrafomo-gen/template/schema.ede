@@ -55,7 +55,7 @@ import qualified Terrafomo.IP as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.{{ type }} as TF
+import qualified Terrafomo.Source as TF
 {% for schema in schemas %}
 
 {% let original = schema.value.name %}

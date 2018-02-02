@@ -23,9 +23,9 @@ module Terrafomo.Rancher.Provider
     , emptyRancher
 
     -- * Lenses
-    , accessKey
-    , apiUrl
-    , secretKey
+    , providerAccessKey
+    , providerApiUrl
+    , providerSecretKey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -84,14 +84,14 @@ emptyRancher = Rancher {
       , _secret_key = Nothing
     }
 
-accessKey :: Lens' Rancher (Maybe Text)
-accessKey =
+providerAccessKey :: Lens' Rancher (Maybe Text)
+providerAccessKey =
     lens _access_key (\s a -> s { _access_key = a })
 
-apiUrl :: Lens' Rancher (Maybe Text)
-apiUrl =
+providerApiUrl :: Lens' Rancher (Maybe Text)
+providerApiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-secretKey :: Lens' Rancher (Maybe Text)
-secretKey =
+providerSecretKey :: Lens' Rancher (Maybe Text)
+providerSecretKey =
     lens _secret_key (\s a -> s { _secret_key = a })

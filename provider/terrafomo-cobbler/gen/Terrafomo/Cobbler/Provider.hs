@@ -23,9 +23,9 @@ module Terrafomo.Cobbler.Provider
     , emptyCobbler
 
     -- * Lenses
-    , password
-    , url
-    , username
+    , providerPassword
+    , providerUrl
+    , providerUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -84,14 +84,14 @@ emptyCobbler = Cobbler {
       , _username = Nothing
     }
 
-password :: Lens' Cobbler (Maybe Text)
-password =
+providerPassword :: Lens' Cobbler (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-url :: Lens' Cobbler (Maybe Text)
-url =
+providerUrl :: Lens' Cobbler (Maybe Text)
+providerUrl =
     lens _url (\s a -> s { _url = a })
 
-username :: Lens' Cobbler (Maybe Text)
-username =
+providerUsername :: Lens' Cobbler (Maybe Text)
+providerUsername =
     lens _username (\s a -> s { _username = a })

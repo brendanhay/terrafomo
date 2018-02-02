@@ -79,7 +79,7 @@ import           Terrafomo.SoftLayer.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Resource  as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @softlayer_ssh_key@ SoftLayer resource.
 

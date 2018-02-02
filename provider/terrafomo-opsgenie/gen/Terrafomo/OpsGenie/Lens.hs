@@ -41,82 +41,57 @@ import GHC.Base ((.))
 
 import Lens.Micro (Getting, Lens', to)
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.Meta       as TF
-import qualified Terrafomo.Name       as TF
-import qualified Terrafomo.Resource   as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.Lifecycle as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Source    as TF
 
 class HasDescription a s b | a -> s b where
     description :: Lens' a (TF.Attribute s b)
 
-instance HasDescription a s b => HasDescription (TF.DataSource p a) s b where
-    description = TF.configuration . description
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
+instance HasDescription a s b => HasDescription (TF.Source l p a) s b where
     description = TF.configuration . description
 
 class HasFullName a s b | a -> s b where
     fullName :: Lens' a (TF.Attribute s b)
 
-instance HasFullName a s b => HasFullName (TF.DataSource p a) s b where
-    fullName = TF.configuration . fullName
-
-instance HasFullName a s b => HasFullName (TF.Resource p a) s b where
+instance HasFullName a s b => HasFullName (TF.Source l p a) s b where
     fullName = TF.configuration . fullName
 
 class HasLocale a s b | a -> s b where
     locale :: Lens' a (TF.Attribute s b)
 
-instance HasLocale a s b => HasLocale (TF.DataSource p a) s b where
-    locale = TF.configuration . locale
-
-instance HasLocale a s b => HasLocale (TF.Resource p a) s b where
+instance HasLocale a s b => HasLocale (TF.Source l p a) s b where
     locale = TF.configuration . locale
 
 class HasMember a s b | a -> s b where
     member :: Lens' a (TF.Attribute s b)
 
-instance HasMember a s b => HasMember (TF.DataSource p a) s b where
-    member = TF.configuration . member
-
-instance HasMember a s b => HasMember (TF.Resource p a) s b where
+instance HasMember a s b => HasMember (TF.Source l p a) s b where
     member = TF.configuration . member
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
-    name = TF.configuration . name
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
+instance HasName a s b => HasName (TF.Source l p a) s b where
     name = TF.configuration . name
 
 class HasRole a s b | a -> s b where
     role :: Lens' a (TF.Attribute s b)
 
-instance HasRole a s b => HasRole (TF.DataSource p a) s b where
-    role = TF.configuration . role
-
-instance HasRole a s b => HasRole (TF.Resource p a) s b where
+instance HasRole a s b => HasRole (TF.Source l p a) s b where
     role = TF.configuration . role
 
 class HasTimezone a s b | a -> s b where
     timezone :: Lens' a (TF.Attribute s b)
 
-instance HasTimezone a s b => HasTimezone (TF.DataSource p a) s b where
-    timezone = TF.configuration . timezone
-
-instance HasTimezone a s b => HasTimezone (TF.Resource p a) s b where
+instance HasTimezone a s b => HasTimezone (TF.Source l p a) s b where
     timezone = TF.configuration . timezone
 
 class HasUsername a s b | a -> s b where
     username :: Lens' a (TF.Attribute s b)
 
-instance HasUsername a s b => HasUsername (TF.DataSource p a) s b where
-    username = TF.configuration . username
-
-instance HasUsername a s b => HasUsername (TF.Resource p a) s b where
+instance HasUsername a s b => HasUsername (TF.Source l p a) s b where
     username = TF.configuration . username
 
 class HasComputedFullName a b | a -> b where

@@ -64,9 +64,9 @@ import qualified Terrafomo.Scaleway.Lens     as P
 import qualified Terrafomo.Scaleway.Provider as P
 import           Terrafomo.Scaleway.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @scaleway_bootscript@ Scaleway datasource.
 

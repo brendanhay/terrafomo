@@ -23,7 +23,7 @@ module Terrafomo.DigitalOcean.Provider
     , emptyDigitalOcean
 
     -- * Lenses
-    , token
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -74,6 +74,6 @@ emptyDigitalOcean = DigitalOcean {
         _token = Nothing
     }
 
-token :: Lens' DigitalOcean (Maybe Text)
-token =
+providerToken :: Lens' DigitalOcean (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

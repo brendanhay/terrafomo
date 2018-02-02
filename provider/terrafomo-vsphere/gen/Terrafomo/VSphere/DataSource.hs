@@ -98,9 +98,9 @@ import qualified Terrafomo.VSphere.Lens     as P
 import qualified Terrafomo.VSphere.Provider as P
 import           Terrafomo.VSphere.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @vsphere_custom_attribute@ VSphere datasource.
 

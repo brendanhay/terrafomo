@@ -271,20 +271,16 @@ renderPackage
 renderPackage tmpls dir p d r = do
     let packageFile = dir    </> "package" <.> "yaml"
         srcDir      = dir    </> "src"
-        mainFile    = srcDir </> NS.toPath (NS.provider p) <.> "hs"
+        genDir      = dir    </> "gen"
         typesFile   = srcDir </> NS.toPath (NS.types    p) <.> "hs"
 
     createDirectory dir
 
-    echo "Package" packageFile
     hoistEither (Render.package tmpls p d r)
         >>= scriptIO . LText.writeFile packageFile
 
-    mainExists <- scriptIO (Dir.doesFileExist mainFile)
-    echo "Main" (mainFile ++ " == " ++ show mainExists)
-    unless mainExists $
-        hoistEither (Render.main tmpls p)
-            >>= writeNS srcDir
+    hoistEither (Render.main tmpls p d r)
+        >>= writeNS genDir
 
     typesExists <- scriptIO (Dir.doesFileExist typesFile)
     echo "Types" (typesFile ++ " == " ++ show typesExists)

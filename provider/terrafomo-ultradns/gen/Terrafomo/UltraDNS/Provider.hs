@@ -23,9 +23,9 @@ module Terrafomo.UltraDNS.Provider
     , emptyUltraDNS
 
     -- * Lenses
-    , baseurl
-    , password
-    , username
+    , providerBaseurl
+    , providerPassword
+    , providerUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -84,14 +84,14 @@ emptyUltraDNS = UltraDNS {
       , _username = Nothing
     }
 
-baseurl :: Lens' UltraDNS (Maybe Text)
-baseurl =
+providerBaseurl :: Lens' UltraDNS (Maybe Text)
+providerBaseurl =
     lens _baseurl (\s a -> s { _baseurl = a })
 
-password :: Lens' UltraDNS (Maybe Text)
-password =
+providerPassword :: Lens' UltraDNS (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' UltraDNS (Maybe Text)
-username =
+providerUsername :: Lens' UltraDNS (Maybe Text)
+providerUsername =
     lens _username (\s a -> s { _username = a })

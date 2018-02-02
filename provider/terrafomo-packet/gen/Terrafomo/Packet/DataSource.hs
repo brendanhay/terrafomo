@@ -55,9 +55,9 @@ import qualified Terrafomo.Packet.Lens     as P
 import qualified Terrafomo.Packet.Provider as P
 import           Terrafomo.Packet.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @packet_precreated_ip_block@ Packet datasource.
 

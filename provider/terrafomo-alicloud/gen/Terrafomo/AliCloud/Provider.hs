@@ -23,9 +23,9 @@ module Terrafomo.AliCloud.Provider
     , emptyAliCloud
 
     -- * Lenses
-    , accessKey
-    , region
-    , secretKey
+    , providerAccessKey
+    , providerRegion
+    , providerSecretKey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -84,14 +84,14 @@ emptyAliCloud = AliCloud {
       , _secret_key = Nothing
     }
 
-accessKey :: Lens' AliCloud (Maybe Text)
-accessKey =
+providerAccessKey :: Lens' AliCloud (Maybe Text)
+providerAccessKey =
     lens _access_key (\s a -> s { _access_key = a })
 
-region :: Lens' AliCloud (Maybe Text)
-region =
+providerRegion :: Lens' AliCloud (Maybe Text)
+providerRegion =
     lens _region (\s a -> s { _region = a })
 
-secretKey :: Lens' AliCloud (Maybe Text)
-secretKey =
+providerSecretKey :: Lens' AliCloud (Maybe Text)
+providerSecretKey =
     lens _secret_key (\s a -> s { _secret_key = a })

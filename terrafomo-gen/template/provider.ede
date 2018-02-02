@@ -18,10 +18,7 @@ module {{ namespace }}
 
     -- * Lenses
   {% for field in schema.argumentFields %}
-    , {{ field.value.method }}
-  {% endfor %}
-  {% for field in schema.attributeFields %}
-    , {{ field.value.method }}
+    , provider{{ field.value.method | upperHead }}
   {% endfor %}
     ) where
 
@@ -93,7 +90,7 @@ empty{{ provider.name }} = {{ provider.name }} {
     }
 {% for field in schema.argumentFields %}
 
-{{ field.value.method }} :: Lens' {{ provider.name }} (Maybe {{ field.value.type }})
-{{ field.value.method }} =
+provider{{ field.value.method | upperHead }} :: Lens' {{ provider.name }} (Maybe {{ field.value.type }})
+provider{{ field.value.method | upperHead }} =
     lens {{ field.value.label }} (\s a -> s { {{ field.value.label }} = a })
 {% endfor %}

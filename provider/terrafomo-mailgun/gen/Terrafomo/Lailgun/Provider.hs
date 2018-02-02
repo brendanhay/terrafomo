@@ -23,7 +23,7 @@ module Terrafomo.Lailgun.Provider
     , emptyLailgun
 
     -- * Lenses
-    , apiKey
+    , providerApiKey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -74,6 +74,6 @@ emptyLailgun = Lailgun {
         _api_key = Nothing
     }
 
-apiKey :: Lens' Lailgun (Maybe Text)
-apiKey =
+providerApiKey :: Lens' Lailgun (Maybe Text)
+providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })

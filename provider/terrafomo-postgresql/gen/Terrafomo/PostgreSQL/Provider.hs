@@ -23,15 +23,15 @@ module Terrafomo.PostgreSQL.Provider
     , emptyPostgreSQL
 
     -- * Lenses
-    , connectTimeout
-    , database
-    , expectedVersion
-    , host
-    , maxConnections
-    , password
-    , port
-    , sslmode
-    , username
+    , providerConnectTimeout
+    , providerDatabase
+    , providerExpectedVersion
+    , providerHost
+    , providerMaxConnections
+    , providerPassword
+    , providerPort
+    , providerSslmode
+    , providerUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -113,38 +113,38 @@ emptyPostgreSQL = PostgreSQL {
       , _username = Nothing
     }
 
-connectTimeout :: Lens' PostgreSQL (Maybe Text)
-connectTimeout =
+providerConnectTimeout :: Lens' PostgreSQL (Maybe Text)
+providerConnectTimeout =
     lens _connect_timeout (\s a -> s { _connect_timeout = a })
 
-database :: Lens' PostgreSQL (Maybe Text)
-database =
+providerDatabase :: Lens' PostgreSQL (Maybe Text)
+providerDatabase =
     lens _database (\s a -> s { _database = a })
 
-expectedVersion :: Lens' PostgreSQL (Maybe Text)
-expectedVersion =
+providerExpectedVersion :: Lens' PostgreSQL (Maybe Text)
+providerExpectedVersion =
     lens _expected_version (\s a -> s { _expected_version = a })
 
-host :: Lens' PostgreSQL (Maybe Text)
-host =
+providerHost :: Lens' PostgreSQL (Maybe Text)
+providerHost =
     lens _host (\s a -> s { _host = a })
 
-maxConnections :: Lens' PostgreSQL (Maybe Text)
-maxConnections =
+providerMaxConnections :: Lens' PostgreSQL (Maybe Text)
+providerMaxConnections =
     lens _max_connections (\s a -> s { _max_connections = a })
 
-password :: Lens' PostgreSQL (Maybe Text)
-password =
+providerPassword :: Lens' PostgreSQL (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-port :: Lens' PostgreSQL (Maybe Text)
-port =
+providerPort :: Lens' PostgreSQL (Maybe Text)
+providerPort =
     lens _port (\s a -> s { _port = a })
 
-sslmode :: Lens' PostgreSQL (Maybe Text)
-sslmode =
+providerSslmode :: Lens' PostgreSQL (Maybe Text)
+providerSslmode =
     lens _sslmode (\s a -> s { _sslmode = a })
 
-username :: Lens' PostgreSQL (Maybe Text)
-username =
+providerUsername :: Lens' PostgreSQL (Maybe Text)
+providerUsername =
     lens _username (\s a -> s { _username = a })

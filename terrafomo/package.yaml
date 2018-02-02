@@ -19,17 +19,16 @@ library:
     - Terrafomo
     - Terrafomo.Attribute
     - Terrafomo.Backend
-    - Terrafomo.DataSource
     - Terrafomo.Format
     - Terrafomo.HCL
     - Terrafomo.IP
-    - Terrafomo.Meta
+    - Terrafomo.Lifecycle
     - Terrafomo.Monad
     - Terrafomo.Name
     - Terrafomo.Output
     - Terrafomo.Provider
     - Terrafomo.RemoteState
-    - Terrafomo.Resource
+    - Terrafomo.Source
 
   dependencies:
     - aeson

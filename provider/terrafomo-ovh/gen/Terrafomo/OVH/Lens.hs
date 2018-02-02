@@ -85,172 +85,117 @@ import GHC.Base ((.))
 
 import Lens.Micro (Getting, Lens', to)
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.Meta       as TF
-import qualified Terrafomo.Name       as TF
-import qualified Terrafomo.Resource   as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.Lifecycle as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Source    as TF
 
 class HasDescription a s b | a -> s b where
     description :: Lens' a (TF.Attribute s b)
 
-instance HasDescription a s b => HasDescription (TF.DataSource p a) s b where
-    description = TF.configuration . description
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
+instance HasDescription a s b => HasDescription (TF.Source l p a) s b where
     description = TF.configuration . description
 
 class HasDhcp a s b | a -> s b where
     dhcp :: Lens' a (TF.Attribute s b)
 
-instance HasDhcp a s b => HasDhcp (TF.DataSource p a) s b where
-    dhcp = TF.configuration . dhcp
-
-instance HasDhcp a s b => HasDhcp (TF.Resource p a) s b where
+instance HasDhcp a s b => HasDhcp (TF.Source l p a) s b where
     dhcp = TF.configuration . dhcp
 
 class HasEnd a s b | a -> s b where
     end :: Lens' a (TF.Attribute s b)
 
-instance HasEnd a s b => HasEnd (TF.DataSource p a) s b where
-    end = TF.configuration . end
-
-instance HasEnd a s b => HasEnd (TF.Resource p a) s b where
+instance HasEnd a s b => HasEnd (TF.Source l p a) s b where
     end = TF.configuration . end
 
 class HasFieldType a s b | a -> s b where
     fieldType :: Lens' a (TF.Attribute s b)
 
-instance HasFieldType a s b => HasFieldType (TF.DataSource p a) s b where
-    fieldType = TF.configuration . fieldType
-
-instance HasFieldType a s b => HasFieldType (TF.Resource p a) s b where
+instance HasFieldType a s b => HasFieldType (TF.Source l p a) s b where
     fieldType = TF.configuration . fieldType
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
-    name = TF.configuration . name
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
+instance HasName a s b => HasName (TF.Source l p a) s b where
     name = TF.configuration . name
 
 class HasNetwork a s b | a -> s b where
     network :: Lens' a (TF.Attribute s b)
 
-instance HasNetwork a s b => HasNetwork (TF.DataSource p a) s b where
-    network = TF.configuration . network
-
-instance HasNetwork a s b => HasNetwork (TF.Resource p a) s b where
+instance HasNetwork a s b => HasNetwork (TF.Source l p a) s b where
     network = TF.configuration . network
 
 class HasNetworkId a s b | a -> s b where
     networkId :: Lens' a (TF.Attribute s b)
 
-instance HasNetworkId a s b => HasNetworkId (TF.DataSource p a) s b where
-    networkId = TF.configuration . networkId
-
-instance HasNetworkId a s b => HasNetworkId (TF.Resource p a) s b where
+instance HasNetworkId a s b => HasNetworkId (TF.Source l p a) s b where
     networkId = TF.configuration . networkId
 
 class HasNoGateway a s b | a -> s b where
     noGateway :: Lens' a (TF.Attribute s b)
 
-instance HasNoGateway a s b => HasNoGateway (TF.DataSource p a) s b where
-    noGateway = TF.configuration . noGateway
-
-instance HasNoGateway a s b => HasNoGateway (TF.Resource p a) s b where
+instance HasNoGateway a s b => HasNoGateway (TF.Source l p a) s b where
     noGateway = TF.configuration . noGateway
 
 class HasProjectId a s b | a -> s b where
     projectId :: Lens' a (TF.Attribute s b)
 
-instance HasProjectId a s b => HasProjectId (TF.DataSource p a) s b where
-    projectId = TF.configuration . projectId
-
-instance HasProjectId a s b => HasProjectId (TF.Resource p a) s b where
+instance HasProjectId a s b => HasProjectId (TF.Source l p a) s b where
     projectId = TF.configuration . projectId
 
 class HasRegion a s b | a -> s b where
     region :: Lens' a (TF.Attribute s b)
 
-instance HasRegion a s b => HasRegion (TF.DataSource p a) s b where
-    region = TF.configuration . region
-
-instance HasRegion a s b => HasRegion (TF.Resource p a) s b where
+instance HasRegion a s b => HasRegion (TF.Source l p a) s b where
     region = TF.configuration . region
 
 class HasRegions a s b | a -> s b where
     regions :: Lens' a (TF.Attribute s b)
 
-instance HasRegions a s b => HasRegions (TF.DataSource p a) s b where
-    regions = TF.configuration . regions
-
-instance HasRegions a s b => HasRegions (TF.Resource p a) s b where
+instance HasRegions a s b => HasRegions (TF.Source l p a) s b where
     regions = TF.configuration . regions
 
 class HasStart a s b | a -> s b where
     start :: Lens' a (TF.Attribute s b)
 
-instance HasStart a s b => HasStart (TF.DataSource p a) s b where
-    start = TF.configuration . start
-
-instance HasStart a s b => HasStart (TF.Resource p a) s b where
+instance HasStart a s b => HasStart (TF.Source l p a) s b where
     start = TF.configuration . start
 
 class HasSubDomain a s b | a -> s b where
     subDomain :: Lens' a (TF.Attribute s b)
 
-instance HasSubDomain a s b => HasSubDomain (TF.DataSource p a) s b where
-    subDomain = TF.configuration . subDomain
-
-instance HasSubDomain a s b => HasSubDomain (TF.Resource p a) s b where
+instance HasSubDomain a s b => HasSubDomain (TF.Source l p a) s b where
     subDomain = TF.configuration . subDomain
 
 class HasTarget a s b | a -> s b where
     target :: Lens' a (TF.Attribute s b)
 
-instance HasTarget a s b => HasTarget (TF.DataSource p a) s b where
-    target = TF.configuration . target
-
-instance HasTarget a s b => HasTarget (TF.Resource p a) s b where
+instance HasTarget a s b => HasTarget (TF.Source l p a) s b where
     target = TF.configuration . target
 
 class HasTtl a s b | a -> s b where
     ttl :: Lens' a (TF.Attribute s b)
 
-instance HasTtl a s b => HasTtl (TF.DataSource p a) s b where
-    ttl = TF.configuration . ttl
-
-instance HasTtl a s b => HasTtl (TF.Resource p a) s b where
+instance HasTtl a s b => HasTtl (TF.Source l p a) s b where
     ttl = TF.configuration . ttl
 
 class HasVlanId a s b | a -> s b where
     vlanId :: Lens' a (TF.Attribute s b)
 
-instance HasVlanId a s b => HasVlanId (TF.DataSource p a) s b where
-    vlanId = TF.configuration . vlanId
-
-instance HasVlanId a s b => HasVlanId (TF.Resource p a) s b where
+instance HasVlanId a s b => HasVlanId (TF.Source l p a) s b where
     vlanId = TF.configuration . vlanId
 
 class HasVrackId a s b | a -> s b where
     vrackId :: Lens' a (TF.Attribute s b)
 
-instance HasVrackId a s b => HasVrackId (TF.DataSource p a) s b where
-    vrackId = TF.configuration . vrackId
-
-instance HasVrackId a s b => HasVrackId (TF.Resource p a) s b where
+instance HasVrackId a s b => HasVrackId (TF.Source l p a) s b where
     vrackId = TF.configuration . vrackId
 
 class HasZone a s b | a -> s b where
     zone :: Lens' a (TF.Attribute s b)
 
-instance HasZone a s b => HasZone (TF.DataSource p a) s b where
-    zone = TF.configuration . zone
-
-instance HasZone a s b => HasZone (TF.Resource p a) s b where
+instance HasZone a s b => HasZone (TF.Source l p a) s b where
     zone = TF.configuration . zone
 
 class HasComputedCidr a b | a -> b where

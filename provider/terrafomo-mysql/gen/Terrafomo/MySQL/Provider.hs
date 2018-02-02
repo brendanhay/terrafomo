@@ -23,9 +23,9 @@ module Terrafomo.MySQL.Provider
     , emptyMySQL
 
     -- * Lenses
-    , endpoint
-    , password
-    , username
+    , providerEndpoint
+    , providerPassword
+    , providerUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -84,14 +84,14 @@ emptyMySQL = MySQL {
       , _username = Nothing
     }
 
-endpoint :: Lens' MySQL (Maybe Text)
-endpoint =
+providerEndpoint :: Lens' MySQL (Maybe Text)
+providerEndpoint =
     lens _endpoint (\s a -> s { _endpoint = a })
 
-password :: Lens' MySQL (Maybe Text)
-password =
+providerPassword :: Lens' MySQL (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' MySQL (Maybe Text)
-username =
+providerUsername :: Lens' MySQL (Maybe Text)
+providerUsername =
     lens _username (\s a -> s { _username = a })

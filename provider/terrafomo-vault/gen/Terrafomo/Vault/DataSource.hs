@@ -64,9 +64,9 @@ import qualified Terrafomo.Vault.Lens     as P
 import qualified Terrafomo.Vault.Provider as P
 import           Terrafomo.Vault.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @vault_aws_access_credentials@ Vault datasource.
 

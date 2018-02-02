@@ -23,10 +23,10 @@ module Terrafomo.Gitlab.Provider
     , emptyGitlab
 
     -- * Lenses
-    , baseUrl
-    , cacertFile
-    , insecure
-    , token
+    , providerBaseUrl
+    , providerCacertFile
+    , providerInsecure
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -88,18 +88,18 @@ emptyGitlab = Gitlab {
       , _token = Nothing
     }
 
-baseUrl :: Lens' Gitlab (Maybe Text)
-baseUrl =
+providerBaseUrl :: Lens' Gitlab (Maybe Text)
+providerBaseUrl =
     lens _base_url (\s a -> s { _base_url = a })
 
-cacertFile :: Lens' Gitlab (Maybe Text)
-cacertFile =
+providerCacertFile :: Lens' Gitlab (Maybe Text)
+providerCacertFile =
     lens _cacert_file (\s a -> s { _cacert_file = a })
 
-insecure :: Lens' Gitlab (Maybe Text)
-insecure =
+providerInsecure :: Lens' Gitlab (Maybe Text)
+providerInsecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-token :: Lens' Gitlab (Maybe Text)
-token =
+providerToken :: Lens' Gitlab (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

@@ -23,8 +23,8 @@ module Terrafomo.PagerDuty.Provider
     , emptyPagerDuty
 
     -- * Lenses
-    , skipCredentialsValidation
-    , token
+    , providerSkipCredentialsValidation
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -80,10 +80,10 @@ emptyPagerDuty = PagerDuty {
       , _token = Nothing
     }
 
-skipCredentialsValidation :: Lens' PagerDuty (Maybe Text)
-skipCredentialsValidation =
+providerSkipCredentialsValidation :: Lens' PagerDuty (Maybe Text)
+providerSkipCredentialsValidation =
     lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
 
-token :: Lens' PagerDuty (Maybe Text)
-token =
+providerToken :: Lens' PagerDuty (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

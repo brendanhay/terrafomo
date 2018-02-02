@@ -23,9 +23,9 @@ module Terrafomo.DNSMadeEasy.Provider
     , emptyDNSMadeEasy
 
     -- * Lenses
-    , akey
-    , skey
-    , usesandbox
+    , providerAkey
+    , providerSkey
+    , providerUsesandbox
     ) where
 
 import Data.Hashable      (Hashable)
@@ -84,14 +84,14 @@ emptyDNSMadeEasy = DNSMadeEasy {
       , _usesandbox = Nothing
     }
 
-akey :: Lens' DNSMadeEasy (Maybe Text)
-akey =
+providerAkey :: Lens' DNSMadeEasy (Maybe Text)
+providerAkey =
     lens _akey (\s a -> s { _akey = a })
 
-skey :: Lens' DNSMadeEasy (Maybe Text)
-skey =
+providerSkey :: Lens' DNSMadeEasy (Maybe Text)
+providerSkey =
     lens _skey (\s a -> s { _skey = a })
 
-usesandbox :: Lens' DNSMadeEasy (Maybe Text)
-usesandbox =
+providerUsesandbox :: Lens' DNSMadeEasy (Maybe Text)
+providerUsesandbox =
     lens _usesandbox (\s a -> s { _usesandbox = a })

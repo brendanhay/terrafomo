@@ -65,7 +65,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Resource  as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @influxdb_continuous_query@ InfluxDB resource.
 

@@ -23,8 +23,8 @@ module Terrafomo.Bitbucket.Provider
     , emptyBitbucket
 
     -- * Lenses
-    , password
-    , username
+    , providerPassword
+    , providerUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -78,10 +78,10 @@ emptyBitbucket = Bitbucket {
       , _username = Nothing
     }
 
-password :: Lens' Bitbucket (Maybe Text)
-password =
+providerPassword :: Lens' Bitbucket (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' Bitbucket (Maybe Text)
-username =
+providerUsername :: Lens' Bitbucket (Maybe Text)
+providerUsername =
     lens _username (\s a -> s { _username = a })

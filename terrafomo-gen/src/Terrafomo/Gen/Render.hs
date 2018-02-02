@@ -55,18 +55,16 @@ package tmpls p d r =
     render (packageTemplate tmpls)
         [ "provider" .= fmap Just p
         , "package"  .= providerPackage p
-        , "exposed"  .=
-            ( NS.provider p
-            : [NS.schemaType p DataSource | d]
-           ++ [NS.schemaType p Resource   | r]
-            )
+        , "exposed"  .= [NS.provider p]
         ]
 
 main
     :: Templates EDE.Template
     -> Provider (Maybe Schema)
+    -> Bool -- ^ Any datasource module?
+    -> Bool -- ^ Any resource module?
     -> Either Text (NS, LText.Text)
-main tmpls p =
+main tmpls p d r =
     let ns = NS.provider p
      in second (ns,) $ render (mainTemplate tmpls)
         [ "namespace" .= ns
@@ -74,7 +72,9 @@ main tmpls p =
         , "schema"    .= providerDatatype p
         , "reexports" .=
             ( NS.types p
-            : [NS.provider p <> "Provider" | isJust (providerDatatype p)]
+            : [NS.provider   p <> "Provider" | isJust (providerDatatype p)]
+           ++ [NS.schemaType p DataSource    | d]
+           ++ [NS.schemaType p Resource      | r]
             )
         ]
 

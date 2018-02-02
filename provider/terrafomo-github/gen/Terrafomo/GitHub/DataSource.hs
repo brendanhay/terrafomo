@@ -78,9 +78,9 @@ import qualified Terrafomo.GitHub.Provider as P
 import           Terrafomo.GitHub.Types    as P
 import qualified Terrafomo.IP              as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @github_team@ GitHub datasource.
 

@@ -23,9 +23,9 @@ module Terrafomo.CenturyLinkCloud.Provider
     , emptyCenturyLinkCloud
 
     -- * Lenses
-    , clcAccount
-    , clcPassword
-    , clcUsername
+    , providerClcAccount
+    , providerClcPassword
+    , providerClcUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -85,14 +85,14 @@ emptyCenturyLinkCloud = CenturyLinkCloud {
       , _clc_username = Nothing
     }
 
-clcAccount :: Lens' CenturyLinkCloud (Maybe Text)
-clcAccount =
+providerClcAccount :: Lens' CenturyLinkCloud (Maybe Text)
+providerClcAccount =
     lens _clc_account (\s a -> s { _clc_account = a })
 
-clcPassword :: Lens' CenturyLinkCloud (Maybe Text)
-clcPassword =
+providerClcPassword :: Lens' CenturyLinkCloud (Maybe Text)
+providerClcPassword =
     lens _clc_password (\s a -> s { _clc_password = a })
 
-clcUsername :: Lens' CenturyLinkCloud (Maybe Text)
-clcUsername =
+providerClcUsername :: Lens' CenturyLinkCloud (Maybe Text)
+providerClcUsername =
     lens _clc_username (\s a -> s { _clc_username = a })

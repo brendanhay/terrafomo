@@ -53,9 +53,9 @@ import qualified Terrafomo.Cloudflare.Provider as P
 import           Terrafomo.Cloudflare.Types    as P
 import qualified Terrafomo.IP                  as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @cloudflare_ip_ranges@ Cloudflare datasource.
 

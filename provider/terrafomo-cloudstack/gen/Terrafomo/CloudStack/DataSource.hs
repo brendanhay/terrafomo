@@ -61,9 +61,9 @@ import qualified Terrafomo.CloudStack.Provider as P
 import           Terrafomo.CloudStack.Types    as P
 import qualified Terrafomo.IP                  as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @cloudstack_template@ CloudStack datasource.
 

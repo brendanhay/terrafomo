@@ -123,7 +123,7 @@ import           Terrafomo.Triton.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Resource  as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @triton_fabric@ Triton resource.
 

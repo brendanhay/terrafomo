@@ -54,9 +54,9 @@ import qualified Terrafomo.NewRelic.Lens     as P
 import qualified Terrafomo.NewRelic.Provider as P
 import           Terrafomo.NewRelic.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @newrelic_application@ NewRelic datasource.
 

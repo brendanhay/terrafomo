@@ -36,14 +36,6 @@ module Terrafomo
     , IsProvider      (..)
     , withProvider
 
-    -- * Meta Parameters
-    , HasMeta         (..)
-    , dependOn
-
-    , Changes
-    , ignoreAllChanges
-    , ignore
-
     -- * Data Sources
     , DataSource
     , datasource
@@ -55,6 +47,14 @@ module Terrafomo
     -- ** Lifecycles
     , HasLifecycle    (..)
     , Lifecycle       (..)
+
+    -- *** Ignored Attributes
+    , Changes
+    , ignoreAllChanges
+    , ignore
+
+    -- * Dependencies
+    , dependOn
 
     -- * Outputs and Remote State
     , Output
@@ -69,11 +69,10 @@ module Terrafomo
 
 import Terrafomo.Attribute
 import Terrafomo.Backend
-import Terrafomo.DataSource
 import Terrafomo.IP
-import Terrafomo.Meta
+import Terrafomo.Lifecycle
 import Terrafomo.Monad
 import Terrafomo.Name
 import Terrafomo.Output
 import Terrafomo.Provider
-import Terrafomo.Resource
+import Terrafomo.Source

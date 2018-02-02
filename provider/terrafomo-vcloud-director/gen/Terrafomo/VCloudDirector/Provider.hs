@@ -23,13 +23,13 @@ module Terrafomo.VCloudDirector.Provider
     , emptyVCloudDirector
 
     -- * Lenses
-    , allowUnverifiedSsl
-    , maxRetryTimeout
-    , org
-    , password
-    , url
-    , user
-    , vdc
+    , providerAllowUnverifiedSsl
+    , providerMaxRetryTimeout
+    , providerOrg
+    , providerPassword
+    , providerUrl
+    , providerUser
+    , providerVdc
     ) where
 
 import Data.Hashable      (Hashable)
@@ -106,30 +106,30 @@ emptyVCloudDirector = VCloudDirector {
       , _vdc = Nothing
     }
 
-allowUnverifiedSsl :: Lens' VCloudDirector (Maybe Text)
-allowUnverifiedSsl =
+providerAllowUnverifiedSsl :: Lens' VCloudDirector (Maybe Text)
+providerAllowUnverifiedSsl =
     lens _allow_unverified_ssl (\s a -> s { _allow_unverified_ssl = a })
 
-maxRetryTimeout :: Lens' VCloudDirector (Maybe Text)
-maxRetryTimeout =
+providerMaxRetryTimeout :: Lens' VCloudDirector (Maybe Text)
+providerMaxRetryTimeout =
     lens _max_retry_timeout (\s a -> s { _max_retry_timeout = a })
 
-org :: Lens' VCloudDirector (Maybe Text)
-org =
+providerOrg :: Lens' VCloudDirector (Maybe Text)
+providerOrg =
     lens _org (\s a -> s { _org = a })
 
-password :: Lens' VCloudDirector (Maybe Text)
-password =
+providerPassword :: Lens' VCloudDirector (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-url :: Lens' VCloudDirector (Maybe Text)
-url =
+providerUrl :: Lens' VCloudDirector (Maybe Text)
+providerUrl =
     lens _url (\s a -> s { _url = a })
 
-user :: Lens' VCloudDirector (Maybe Text)
-user =
+providerUser :: Lens' VCloudDirector (Maybe Text)
+providerUser =
     lens _user (\s a -> s { _user = a })
 
-vdc :: Lens' VCloudDirector (Maybe Text)
-vdc =
+providerVdc :: Lens' VCloudDirector (Maybe Text)
+providerVdc =
     lens _vdc (\s a -> s { _vdc = a })

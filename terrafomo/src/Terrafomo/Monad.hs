@@ -56,23 +56,20 @@ import GHC.Exts (IsList (..))
 
 import Terrafomo.Attribute
 import Terrafomo.Backend
-import Terrafomo.DataSource  (DataSource (..))
 import Terrafomo.Format      (nformat, (%))
 import Terrafomo.Name
 import Terrafomo.Output
 import Terrafomo.Provider
 import Terrafomo.RemoteState
-import Terrafomo.Resource    (Resource (..))
+import Terrafomo.Source      (DataSource, Resource, Source (..))
 import Terrafomo.ValueMap    (ValueMap)
 
 import qualified Data.DList                   as DList
 import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
-import qualified Lens.Micro                   as Lens
 import qualified Terrafomo.Format             as Format
 import qualified Terrafomo.Hash               as Hash
 import qualified Terrafomo.HCL                as HCL
-import qualified Terrafomo.Meta               as Meta
 import qualified Terrafomo.ValueMap           as VMap
 import qualified Text.PrettyPrint.Leijen.Text as PP
 
@@ -343,10 +340,10 @@ datasource
     -> m (Reference s a)
 datasource name x =
     liftTerraform $ do
-        alias <- insertProvider (dataProvider x)
+        alias <- insertProvider (_sourceProvider x)
 
-        let key   = Key (dataType x) name
-            value = HCL.toHCL (key, Lens.set Meta.provider alias x)
+        let key   = Key (_sourceType x) name
+            value = HCL.toHCL (key, x { _sourceProvider = alias })
 
         unique <-
             insertValue key value datasources (\s w -> w { datasources = s })
@@ -366,10 +363,10 @@ resource
     -> m (Reference s a)
 resource name x =
     liftTerraform $ do
-        alias <- insertProvider (resourceProvider x)
+        alias <- insertProvider (_sourceProvider x)
 
-        let key   = Key (resourceType x) name
-            value = HCL.toHCL (key, Lens.set Meta.provider alias x)
+        let key   = Key (_sourceType x) name
+            value = HCL.toHCL (key, x { _sourceProvider = alias })
 
         unique <-
             insertValue key value resources (\s w -> w { resources = s })

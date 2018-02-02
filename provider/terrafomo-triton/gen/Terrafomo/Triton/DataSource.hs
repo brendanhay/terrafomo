@@ -70,9 +70,9 @@ import qualified Terrafomo.Triton.Lens     as P
 import qualified Terrafomo.Triton.Provider as P
 import           Terrafomo.Triton.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @triton_account@ Triton datasource.
 

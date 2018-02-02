@@ -138,9 +138,9 @@ import qualified Terrafomo.OpenStack.Lens     as P
 import qualified Terrafomo.OpenStack.Provider as P
 import           Terrafomo.OpenStack.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @openstack_compute_flavor_v2@ OpenStack datasource.
 

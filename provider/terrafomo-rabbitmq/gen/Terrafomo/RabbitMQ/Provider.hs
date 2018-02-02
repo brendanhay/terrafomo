@@ -23,11 +23,11 @@ module Terrafomo.RabbitMQ.Provider
     , emptyRabbitMQ
 
     -- * Lenses
-    , cacertFile
-    , endpoint
-    , insecure
-    , password
-    , username
+    , providerCacertFile
+    , providerEndpoint
+    , providerInsecure
+    , providerPassword
+    , providerUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -94,22 +94,22 @@ emptyRabbitMQ = RabbitMQ {
       , _username = Nothing
     }
 
-cacertFile :: Lens' RabbitMQ (Maybe Text)
-cacertFile =
+providerCacertFile :: Lens' RabbitMQ (Maybe Text)
+providerCacertFile =
     lens _cacert_file (\s a -> s { _cacert_file = a })
 
-endpoint :: Lens' RabbitMQ (Maybe Text)
-endpoint =
+providerEndpoint :: Lens' RabbitMQ (Maybe Text)
+providerEndpoint =
     lens _endpoint (\s a -> s { _endpoint = a })
 
-insecure :: Lens' RabbitMQ (Maybe Text)
-insecure =
+providerInsecure :: Lens' RabbitMQ (Maybe Text)
+providerInsecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-password :: Lens' RabbitMQ (Maybe Text)
-password =
+providerPassword :: Lens' RabbitMQ (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' RabbitMQ (Maybe Text)
-username =
+providerUsername :: Lens' RabbitMQ (Maybe Text)
+providerUsername =
     lens _username (\s a -> s { _username = a })

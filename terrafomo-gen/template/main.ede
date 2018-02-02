@@ -1,7 +1,7 @@
--- This module was auto-generated. If it exists, it will not be overwritten.
+-- This module is auto-generated.
 
-{-# OPTIONS_GHC -fno-warn-dodgy-exports  #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+-- {-# OPTIONS_GHC -fno-warn-dodgy-exports  #-}
+-- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
 --

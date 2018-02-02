@@ -23,8 +23,8 @@ module Terrafomo.Cloudflare.Provider
     , emptyCloudflare
 
     -- * Lenses
-    , email
-    , token
+    , providerEmail
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -79,10 +79,10 @@ emptyCloudflare = Cloudflare {
       , _token = Nothing
     }
 
-email :: Lens' Cloudflare (Maybe Text)
-email =
+providerEmail :: Lens' Cloudflare (Maybe Text)
+providerEmail =
     lens _email (\s a -> s { _email = a })
 
-token :: Lens' Cloudflare (Maybe Text)
-token =
+providerToken :: Lens' Cloudflare (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

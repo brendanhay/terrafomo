@@ -64,6 +64,7 @@ import Lens.Micro (Lens', lens)
 import Network.AWS.Types (Region (..))
 
 import Terrafomo
+import Terrafomo.Source (configuration)
 
 import Formatting (Format, (%))
 

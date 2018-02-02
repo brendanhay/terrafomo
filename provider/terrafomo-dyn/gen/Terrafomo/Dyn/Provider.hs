@@ -23,9 +23,9 @@ module Terrafomo.Dyn.Provider
     , emptyDyn
 
     -- * Lenses
-    , customerName
-    , password
-    , username
+    , providerCustomerName
+    , providerPassword
+    , providerUsername
     ) where
 
 import Data.Hashable      (Hashable)
@@ -84,14 +84,14 @@ emptyDyn = Dyn {
       , _username = Nothing
     }
 
-customerName :: Lens' Dyn (Maybe Text)
-customerName =
+providerCustomerName :: Lens' Dyn (Maybe Text)
+providerCustomerName =
     lens _customer_name (\s a -> s { _customer_name = a })
 
-password :: Lens' Dyn (Maybe Text)
-password =
+providerPassword :: Lens' Dyn (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-username :: Lens' Dyn (Maybe Text)
-username =
+providerUsername :: Lens' Dyn (Maybe Text)
+providerUsername =
     lens _username (\s a -> s { _username = a })

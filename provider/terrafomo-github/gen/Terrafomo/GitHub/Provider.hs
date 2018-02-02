@@ -23,9 +23,9 @@ module Terrafomo.GitHub.Provider
     , emptyGitHub
 
     -- * Lenses
-    , baseUrl
-    , organization
-    , token
+    , providerBaseUrl
+    , providerOrganization
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -85,14 +85,14 @@ emptyGitHub = GitHub {
       , _token = Nothing
     }
 
-baseUrl :: Lens' GitHub (Maybe Text)
-baseUrl =
+providerBaseUrl :: Lens' GitHub (Maybe Text)
+providerBaseUrl =
     lens _base_url (\s a -> s { _base_url = a })
 
-organization :: Lens' GitHub (Maybe Text)
-organization =
+providerOrganization :: Lens' GitHub (Maybe Text)
+providerOrganization =
     lens _organization (\s a -> s { _organization = a })
 
-token :: Lens' GitHub (Maybe Text)
-token =
+providerToken :: Lens' GitHub (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

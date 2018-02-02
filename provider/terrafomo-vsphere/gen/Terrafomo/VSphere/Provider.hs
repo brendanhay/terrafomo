@@ -23,10 +23,10 @@ module Terrafomo.VSphere.Provider
     , emptyVSphere
 
     -- * Lenses
-    , allowUnverifiedSsl
-    , password
-    , user
-    , vsphereServer
+    , providerAllowUnverifiedSsl
+    , providerPassword
+    , providerUser
+    , providerVsphereServer
     ) where
 
 import Data.Hashable      (Hashable)
@@ -94,18 +94,18 @@ emptyVSphere = VSphere {
       , _vsphere_server = Nothing
     }
 
-allowUnverifiedSsl :: Lens' VSphere (Maybe Text)
-allowUnverifiedSsl =
+providerAllowUnverifiedSsl :: Lens' VSphere (Maybe Text)
+providerAllowUnverifiedSsl =
     lens _allow_unverified_ssl (\s a -> s { _allow_unverified_ssl = a })
 
-password :: Lens' VSphere (Maybe Text)
-password =
+providerPassword :: Lens' VSphere (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-user :: Lens' VSphere (Maybe Text)
-user =
+providerUser :: Lens' VSphere (Maybe Text)
+providerUser =
     lens _user (\s a -> s { _user = a })
 
-vsphereServer :: Lens' VSphere (Maybe Text)
-vsphereServer =
+providerVsphereServer :: Lens' VSphere (Maybe Text)
+providerVsphereServer =
     lens _vsphere_server (\s a -> s { _vsphere_server = a })

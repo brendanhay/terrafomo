@@ -23,8 +23,8 @@ module Terrafomo.Circonus.Provider
     , emptyCirconus
 
     -- * Lenses
-    , apiUrl
-    , key
+    , providerApiUrl
+    , providerKey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -77,10 +77,10 @@ emptyCirconus = Circonus {
       , _key = Nothing
     }
 
-apiUrl :: Lens' Circonus (Maybe Text)
-apiUrl =
+providerApiUrl :: Lens' Circonus (Maybe Text)
+providerApiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-key :: Lens' Circonus (Maybe Text)
-key =
+providerKey :: Lens' Circonus (Maybe Text)
+providerKey =
     lens _key (\s a -> s { _key = a })

@@ -23,7 +23,7 @@ module Terrafomo.Logentries.Provider
     , emptyLogentries
 
     -- * Lenses
-    , accountKey
+    , providerAccountKey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -74,6 +74,6 @@ emptyLogentries = Logentries {
         _account_key = Nothing
     }
 
-accountKey :: Lens' Logentries (Maybe Text)
-accountKey =
+providerAccountKey :: Lens' Logentries (Maybe Text)
+providerAccountKey =
     lens _account_key (\s a -> s { _account_key = a })

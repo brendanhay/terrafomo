@@ -23,13 +23,13 @@ module Terrafomo.AzureRM.Provider
     , emptyAzureRM
 
     -- * Lenses
-    , clientId
-    , clientSecret
-    , environment
-    , skipCredentialsValidation
-    , skipProviderRegistration
-    , subscriptionId
-    , tenantId
+    , providerClientId
+    , providerClientSecret
+    , providerEnvironment
+    , providerSkipCredentialsValidation
+    , providerSkipProviderRegistration
+    , providerSubscriptionId
+    , providerTenantId
     ) where
 
 import Data.Hashable      (Hashable)
@@ -105,30 +105,30 @@ emptyAzureRM = AzureRM {
       , _tenant_id = Nothing
     }
 
-clientId :: Lens' AzureRM (Maybe Text)
-clientId =
+providerClientId :: Lens' AzureRM (Maybe Text)
+providerClientId =
     lens _client_id (\s a -> s { _client_id = a })
 
-clientSecret :: Lens' AzureRM (Maybe Text)
-clientSecret =
+providerClientSecret :: Lens' AzureRM (Maybe Text)
+providerClientSecret =
     lens _client_secret (\s a -> s { _client_secret = a })
 
-environment :: Lens' AzureRM (Maybe Text)
-environment =
+providerEnvironment :: Lens' AzureRM (Maybe Text)
+providerEnvironment =
     lens _environment (\s a -> s { _environment = a })
 
-skipCredentialsValidation :: Lens' AzureRM (Maybe Text)
-skipCredentialsValidation =
+providerSkipCredentialsValidation :: Lens' AzureRM (Maybe Text)
+providerSkipCredentialsValidation =
     lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
 
-skipProviderRegistration :: Lens' AzureRM (Maybe Text)
-skipProviderRegistration =
+providerSkipProviderRegistration :: Lens' AzureRM (Maybe Text)
+providerSkipProviderRegistration =
     lens _skip_provider_registration (\s a -> s { _skip_provider_registration = a })
 
-subscriptionId :: Lens' AzureRM (Maybe Text)
-subscriptionId =
+providerSubscriptionId :: Lens' AzureRM (Maybe Text)
+providerSubscriptionId =
     lens _subscription_id (\s a -> s { _subscription_id = a })
 
-tenantId :: Lens' AzureRM (Maybe Text)
-tenantId =
+providerTenantId :: Lens' AzureRM (Maybe Text)
+providerTenantId =
     lens _tenant_id (\s a -> s { _tenant_id = a })

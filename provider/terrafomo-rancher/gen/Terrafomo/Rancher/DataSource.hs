@@ -73,9 +73,9 @@ import qualified Terrafomo.Rancher.Lens     as P
 import qualified Terrafomo.Rancher.Provider as P
 import           Terrafomo.Rancher.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @rancher_certificate@ Rancher datasource.
 

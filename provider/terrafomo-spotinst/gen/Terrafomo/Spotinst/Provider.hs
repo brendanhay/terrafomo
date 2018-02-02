@@ -23,11 +23,11 @@ module Terrafomo.Spotinst.Provider
     , emptySpotinst
 
     -- * Lenses
-    , clientId
-    , clientSecret
-    , email
-    , password
-    , token
+    , providerClientId
+    , providerClientSecret
+    , providerEmail
+    , providerPassword
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -94,22 +94,22 @@ emptySpotinst = Spotinst {
       , _token = Nothing
     }
 
-clientId :: Lens' Spotinst (Maybe Text)
-clientId =
+providerClientId :: Lens' Spotinst (Maybe Text)
+providerClientId =
     lens _client_id (\s a -> s { _client_id = a })
 
-clientSecret :: Lens' Spotinst (Maybe Text)
-clientSecret =
+providerClientSecret :: Lens' Spotinst (Maybe Text)
+providerClientSecret =
     lens _client_secret (\s a -> s { _client_secret = a })
 
-email :: Lens' Spotinst (Maybe Text)
-email =
+providerEmail :: Lens' Spotinst (Maybe Text)
+providerEmail =
     lens _email (\s a -> s { _email = a })
 
-password :: Lens' Spotinst (Maybe Text)
-password =
+providerPassword :: Lens' Spotinst (Maybe Text)
+providerPassword =
     lens _password (\s a -> s { _password = a })
 
-token :: Lens' Spotinst (Maybe Text)
-token =
+providerToken :: Lens' Spotinst (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

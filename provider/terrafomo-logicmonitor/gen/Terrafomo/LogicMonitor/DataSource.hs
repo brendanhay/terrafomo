@@ -57,9 +57,9 @@ import qualified Terrafomo.LogicMonitor.Lens     as P
 import qualified Terrafomo.LogicMonitor.Provider as P
 import           Terrafomo.LogicMonitor.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @logicmonitor_collectors@ LogicMonitor datasource.
 

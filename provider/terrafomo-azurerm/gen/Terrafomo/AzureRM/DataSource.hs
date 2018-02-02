@@ -160,9 +160,9 @@ import qualified Terrafomo.AzureRM.Provider as P
 import           Terrafomo.AzureRM.Types    as P
 import qualified Terrafomo.IP               as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @azurerm_app_service_plan@ AzureRM datasource.
 

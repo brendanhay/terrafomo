@@ -23,7 +23,7 @@ module Terrafomo.NewRelic.Provider
     , emptyNewRelic
 
     -- * Lenses
-    , apiKey
+    , providerApiKey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -73,6 +73,6 @@ emptyNewRelic = NewRelic {
         _api_key = Nothing
     }
 
-apiKey :: Lens' NewRelic (Maybe Text)
-apiKey =
+providerApiKey :: Lens' NewRelic (Maybe Text)
+providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })

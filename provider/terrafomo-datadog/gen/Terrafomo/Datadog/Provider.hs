@@ -23,8 +23,8 @@ module Terrafomo.Datadog.Provider
     , emptyDatadog
 
     -- * Lenses
-    , apiKey
-    , appKey
+    , providerApiKey
+    , providerAppKey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -79,10 +79,10 @@ emptyDatadog = Datadog {
       , _app_key = Nothing
     }
 
-apiKey :: Lens' Datadog (Maybe Text)
-apiKey =
+providerApiKey :: Lens' Datadog (Maybe Text)
+providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-appKey :: Lens' Datadog (Maybe Text)
-appKey =
+providerAppKey :: Lens' Datadog (Maybe Text)
+providerAppKey =
     lens _app_key (\s a -> s { _app_key = a })

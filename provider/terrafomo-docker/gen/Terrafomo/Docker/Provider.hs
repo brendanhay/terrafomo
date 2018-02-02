@@ -23,10 +23,10 @@ module Terrafomo.Docker.Provider
     , emptyDocker
 
     -- * Lenses
-    , caMaterial
-    , certPath
-    , host
-    , registryAuth
+    , providerCaMaterial
+    , providerCertPath
+    , providerHost
+    , providerRegistryAuth
     ) where
 
 import Data.Hashable      (Hashable)
@@ -91,18 +91,18 @@ emptyDocker = Docker {
       , _registry_auth = Nothing
     }
 
-caMaterial :: Lens' Docker (Maybe Text)
-caMaterial =
+providerCaMaterial :: Lens' Docker (Maybe Text)
+providerCaMaterial =
     lens _ca_material (\s a -> s { _ca_material = a })
 
-certPath :: Lens' Docker (Maybe Text)
-certPath =
+providerCertPath :: Lens' Docker (Maybe Text)
+providerCertPath =
     lens _cert_path (\s a -> s { _cert_path = a })
 
-host :: Lens' Docker (Maybe Text)
-host =
+providerHost :: Lens' Docker (Maybe Text)
+providerHost =
     lens _host (\s a -> s { _host = a })
 
-registryAuth :: Lens' Docker (Maybe Text)
-registryAuth =
+providerRegistryAuth :: Lens' Docker (Maybe Text)
+providerRegistryAuth =
     lens _registry_auth (\s a -> s { _registry_auth = a })

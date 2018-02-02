@@ -23,7 +23,7 @@ module Terrafomo.NS1.Provider
     , emptyNS1
 
     -- * Lenses
-    , apikey
+    , providerApikey
     ) where
 
 import Data.Hashable      (Hashable)
@@ -73,6 +73,6 @@ emptyNS1 = NS1 {
         _apikey = Nothing
     }
 
-apikey :: Lens' NS1 (Maybe Text)
-apikey =
+providerApikey :: Lens' NS1 (Maybe Text)
+providerApikey =
     lens _apikey (\s a -> s { _apikey = a })

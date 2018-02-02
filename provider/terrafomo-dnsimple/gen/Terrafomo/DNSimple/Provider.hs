@@ -23,8 +23,8 @@ module Terrafomo.DNSimple.Provider
     , emptyDNSimple
 
     -- * Lenses
-    , account
-    , token
+    , providerAccount
+    , providerToken
     ) where
 
 import Data.Hashable      (Hashable)
@@ -79,10 +79,10 @@ emptyDNSimple = DNSimple {
       , _token = Nothing
     }
 
-account :: Lens' DNSimple (Maybe Text)
-account =
+providerAccount :: Lens' DNSimple (Maybe Text)
+providerAccount =
     lens _account (\s a -> s { _account = a })
 
-token :: Lens' DNSimple (Maybe Text)
-token =
+providerToken :: Lens' DNSimple (Maybe Text)
+providerToken =
     lens _token (\s a -> s { _token = a })

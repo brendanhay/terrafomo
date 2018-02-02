@@ -77,289 +77,195 @@ import GHC.Base ((.))
 
 import Lens.Micro (Getting, Lens', to)
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.Meta       as TF
-import qualified Terrafomo.Name       as TF
-import qualified Terrafomo.Resource   as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.Lifecycle as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Source    as TF
 
 class HasAcknowledgementTimeout a s b | a -> s b where
     acknowledgementTimeout :: Lens' a (TF.Attribute s b)
 
-instance HasAcknowledgementTimeout a s b => HasAcknowledgementTimeout (TF.DataSource p a) s b where
-    acknowledgementTimeout = TF.configuration . acknowledgementTimeout
-
-instance HasAcknowledgementTimeout a s b => HasAcknowledgementTimeout (TF.Resource p a) s b where
+instance HasAcknowledgementTimeout a s b => HasAcknowledgementTimeout (TF.Source l p a) s b where
     acknowledgementTimeout = TF.configuration . acknowledgementTimeout
 
 class HasAddress a s b | a -> s b where
     address :: Lens' a (TF.Attribute s b)
 
-instance HasAddress a s b => HasAddress (TF.DataSource p a) s b where
-    address = TF.configuration . address
-
-instance HasAddress a s b => HasAddress (TF.Resource p a) s b where
+instance HasAddress a s b => HasAddress (TF.Source l p a) s b where
     address = TF.configuration . address
 
 class HasAlertCreation a s b | a -> s b where
     alertCreation :: Lens' a (TF.Attribute s b)
 
-instance HasAlertCreation a s b => HasAlertCreation (TF.DataSource p a) s b where
-    alertCreation = TF.configuration . alertCreation
-
-instance HasAlertCreation a s b => HasAlertCreation (TF.Resource p a) s b where
+instance HasAlertCreation a s b => HasAlertCreation (TF.Source l p a) s b where
     alertCreation = TF.configuration . alertCreation
 
 class HasAutoResolveTimeout a s b | a -> s b where
     autoResolveTimeout :: Lens' a (TF.Attribute s b)
 
-instance HasAutoResolveTimeout a s b => HasAutoResolveTimeout (TF.DataSource p a) s b where
-    autoResolveTimeout = TF.configuration . autoResolveTimeout
-
-instance HasAutoResolveTimeout a s b => HasAutoResolveTimeout (TF.Resource p a) s b where
+instance HasAutoResolveTimeout a s b => HasAutoResolveTimeout (TF.Source l p a) s b where
     autoResolveTimeout = TF.configuration . autoResolveTimeout
 
 class HasColor a s b | a -> s b where
     color :: Lens' a (TF.Attribute s b)
 
-instance HasColor a s b => HasColor (TF.DataSource p a) s b where
-    color = TF.configuration . color
-
-instance HasColor a s b => HasColor (TF.Resource p a) s b where
+instance HasColor a s b => HasColor (TF.Source l p a) s b where
     color = TF.configuration . color
 
 class HasCountryCode a s b | a -> s b where
     countryCode :: Lens' a (TF.Attribute s b)
 
-instance HasCountryCode a s b => HasCountryCode (TF.DataSource p a) s b where
-    countryCode = TF.configuration . countryCode
-
-instance HasCountryCode a s b => HasCountryCode (TF.Resource p a) s b where
+instance HasCountryCode a s b => HasCountryCode (TF.Source l p a) s b where
     countryCode = TF.configuration . countryCode
 
 class HasDescription a s b | a -> s b where
     description :: Lens' a (TF.Attribute s b)
 
-instance HasDescription a s b => HasDescription (TF.DataSource p a) s b where
-    description = TF.configuration . description
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
+instance HasDescription a s b => HasDescription (TF.Source l p a) s b where
     description = TF.configuration . description
 
 class HasEmail a s b | a -> s b where
     email :: Lens' a (TF.Attribute s b)
 
-instance HasEmail a s b => HasEmail (TF.DataSource p a) s b where
-    email = TF.configuration . email
-
-instance HasEmail a s b => HasEmail (TF.Resource p a) s b where
+instance HasEmail a s b => HasEmail (TF.Source l p a) s b where
     email = TF.configuration . email
 
 class HasEndTime a s b | a -> s b where
     endTime :: Lens' a (TF.Attribute s b)
 
-instance HasEndTime a s b => HasEndTime (TF.DataSource p a) s b where
-    endTime = TF.configuration . endTime
-
-instance HasEndTime a s b => HasEndTime (TF.Resource p a) s b where
+instance HasEndTime a s b => HasEndTime (TF.Source l p a) s b where
     endTime = TF.configuration . endTime
 
 class HasEscalationPolicy a s b | a -> s b where
     escalationPolicy :: Lens' a (TF.Attribute s b)
 
-instance HasEscalationPolicy a s b => HasEscalationPolicy (TF.DataSource p a) s b where
-    escalationPolicy = TF.configuration . escalationPolicy
-
-instance HasEscalationPolicy a s b => HasEscalationPolicy (TF.Resource p a) s b where
+instance HasEscalationPolicy a s b => HasEscalationPolicy (TF.Source l p a) s b where
     escalationPolicy = TF.configuration . escalationPolicy
 
 class HasIntegrationEmail a s b | a -> s b where
     integrationEmail :: Lens' a (TF.Attribute s b)
 
-instance HasIntegrationEmail a s b => HasIntegrationEmail (TF.DataSource p a) s b where
-    integrationEmail = TF.configuration . integrationEmail
-
-instance HasIntegrationEmail a s b => HasIntegrationEmail (TF.Resource p a) s b where
+instance HasIntegrationEmail a s b => HasIntegrationEmail (TF.Source l p a) s b where
     integrationEmail = TF.configuration . integrationEmail
 
 class HasIntegrationKey a s b | a -> s b where
     integrationKey :: Lens' a (TF.Attribute s b)
 
-instance HasIntegrationKey a s b => HasIntegrationKey (TF.DataSource p a) s b where
-    integrationKey = TF.configuration . integrationKey
-
-instance HasIntegrationKey a s b => HasIntegrationKey (TF.Resource p a) s b where
+instance HasIntegrationKey a s b => HasIntegrationKey (TF.Source l p a) s b where
     integrationKey = TF.configuration . integrationKey
 
 class HasJobTitle a s b | a -> s b where
     jobTitle :: Lens' a (TF.Attribute s b)
 
-instance HasJobTitle a s b => HasJobTitle (TF.DataSource p a) s b where
-    jobTitle = TF.configuration . jobTitle
-
-instance HasJobTitle a s b => HasJobTitle (TF.Resource p a) s b where
+instance HasJobTitle a s b => HasJobTitle (TF.Source l p a) s b where
     jobTitle = TF.configuration . jobTitle
 
 class HasLabel a s b | a -> s b where
     label :: Lens' a (TF.Attribute s b)
 
-instance HasLabel a s b => HasLabel (TF.DataSource p a) s b where
-    label = TF.configuration . label
-
-instance HasLabel a s b => HasLabel (TF.Resource p a) s b where
+instance HasLabel a s b => HasLabel (TF.Source l p a) s b where
     label = TF.configuration . label
 
 class HasLayer a s b | a -> s b where
     layer :: Lens' a (TF.Attribute s b)
 
-instance HasLayer a s b => HasLayer (TF.DataSource p a) s b where
-    layer = TF.configuration . layer
-
-instance HasLayer a s b => HasLayer (TF.Resource p a) s b where
+instance HasLayer a s b => HasLayer (TF.Source l p a) s b where
     layer = TF.configuration . layer
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.DataSource p a) s b where
-    name = TF.configuration . name
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
+instance HasName a s b => HasName (TF.Source l p a) s b where
     name = TF.configuration . name
 
 class HasNumLoops a s b | a -> s b where
     numLoops :: Lens' a (TF.Attribute s b)
 
-instance HasNumLoops a s b => HasNumLoops (TF.DataSource p a) s b where
-    numLoops = TF.configuration . numLoops
-
-instance HasNumLoops a s b => HasNumLoops (TF.Resource p a) s b where
+instance HasNumLoops a s b => HasNumLoops (TF.Source l p a) s b where
     numLoops = TF.configuration . numLoops
 
 class HasOverflow a s b | a -> s b where
     overflow :: Lens' a (TF.Attribute s b)
 
-instance HasOverflow a s b => HasOverflow (TF.DataSource p a) s b where
-    overflow = TF.configuration . overflow
-
-instance HasOverflow a s b => HasOverflow (TF.Resource p a) s b where
+instance HasOverflow a s b => HasOverflow (TF.Source l p a) s b where
     overflow = TF.configuration . overflow
 
 class HasRole a s b | a -> s b where
     role :: Lens' a (TF.Attribute s b)
 
-instance HasRole a s b => HasRole (TF.DataSource p a) s b where
-    role = TF.configuration . role
-
-instance HasRole a s b => HasRole (TF.Resource p a) s b where
+instance HasRole a s b => HasRole (TF.Source l p a) s b where
     role = TF.configuration . role
 
 class HasRule a s b | a -> s b where
     rule :: Lens' a (TF.Attribute s b)
 
-instance HasRule a s b => HasRule (TF.DataSource p a) s b where
-    rule = TF.configuration . rule
-
-instance HasRule a s b => HasRule (TF.Resource p a) s b where
+instance HasRule a s b => HasRule (TF.Source l p a) s b where
     rule = TF.configuration . rule
 
 class HasSendShortEmail a s b | a -> s b where
     sendShortEmail :: Lens' a (TF.Attribute s b)
 
-instance HasSendShortEmail a s b => HasSendShortEmail (TF.DataSource p a) s b where
-    sendShortEmail = TF.configuration . sendShortEmail
-
-instance HasSendShortEmail a s b => HasSendShortEmail (TF.Resource p a) s b where
+instance HasSendShortEmail a s b => HasSendShortEmail (TF.Source l p a) s b where
     sendShortEmail = TF.configuration . sendShortEmail
 
 class HasService a s b | a -> s b where
     service :: Lens' a (TF.Attribute s b)
 
-instance HasService a s b => HasService (TF.DataSource p a) s b where
-    service = TF.configuration . service
-
-instance HasService a s b => HasService (TF.Resource p a) s b where
+instance HasService a s b => HasService (TF.Source l p a) s b where
     service = TF.configuration . service
 
 class HasServices a s b | a -> s b where
     services :: Lens' a (TF.Attribute s b)
 
-instance HasServices a s b => HasServices (TF.DataSource p a) s b where
-    services = TF.configuration . services
-
-instance HasServices a s b => HasServices (TF.Resource p a) s b where
+instance HasServices a s b => HasServices (TF.Source l p a) s b where
     services = TF.configuration . services
 
 class HasSrc a s b | a -> s b where
     src :: Lens' a (TF.Attribute s b)
 
-instance HasSrc a s b => HasSrc (TF.DataSource p a) s b where
-    src = TF.configuration . src
-
-instance HasSrc a s b => HasSrc (TF.Resource p a) s b where
+instance HasSrc a s b => HasSrc (TF.Source l p a) s b where
     src = TF.configuration . src
 
 class HasStartTime a s b | a -> s b where
     startTime :: Lens' a (TF.Attribute s b)
 
-instance HasStartTime a s b => HasStartTime (TF.DataSource p a) s b where
-    startTime = TF.configuration . startTime
-
-instance HasStartTime a s b => HasStartTime (TF.Resource p a) s b where
+instance HasStartTime a s b => HasStartTime (TF.Source l p a) s b where
     startTime = TF.configuration . startTime
 
 class HasTeamId a s b | a -> s b where
     teamId :: Lens' a (TF.Attribute s b)
 
-instance HasTeamId a s b => HasTeamId (TF.DataSource p a) s b where
-    teamId = TF.configuration . teamId
-
-instance HasTeamId a s b => HasTeamId (TF.Resource p a) s b where
+instance HasTeamId a s b => HasTeamId (TF.Source l p a) s b where
     teamId = TF.configuration . teamId
 
 class HasTeams a s b | a -> s b where
     teams :: Lens' a (TF.Attribute s b)
 
-instance HasTeams a s b => HasTeams (TF.DataSource p a) s b where
-    teams = TF.configuration . teams
-
-instance HasTeams a s b => HasTeams (TF.Resource p a) s b where
+instance HasTeams a s b => HasTeams (TF.Source l p a) s b where
     teams = TF.configuration . teams
 
 class HasTimeZone a s b | a -> s b where
     timeZone :: Lens' a (TF.Attribute s b)
 
-instance HasTimeZone a s b => HasTimeZone (TF.DataSource p a) s b where
-    timeZone = TF.configuration . timeZone
-
-instance HasTimeZone a s b => HasTimeZone (TF.Resource p a) s b where
+instance HasTimeZone a s b => HasTimeZone (TF.Source l p a) s b where
     timeZone = TF.configuration . timeZone
 
 class HasType' a s b | a -> s b where
     type' :: Lens' a (TF.Attribute s b)
 
-instance HasType' a s b => HasType' (TF.DataSource p a) s b where
-    type' = TF.configuration . type'
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
+instance HasType' a s b => HasType' (TF.Source l p a) s b where
     type' = TF.configuration . type'
 
 class HasUserId a s b | a -> s b where
     userId :: Lens' a (TF.Attribute s b)
 
-instance HasUserId a s b => HasUserId (TF.DataSource p a) s b where
-    userId = TF.configuration . userId
-
-instance HasUserId a s b => HasUserId (TF.Resource p a) s b where
+instance HasUserId a s b => HasUserId (TF.Source l p a) s b where
     userId = TF.configuration . userId
 
 class HasVendor a s b | a -> s b where
     vendor :: Lens' a (TF.Attribute s b)
 
-instance HasVendor a s b => HasVendor (TF.DataSource p a) s b where
-    vendor = TF.configuration . vendor
-
-instance HasVendor a s b => HasVendor (TF.Resource p a) s b where
+instance HasVendor a s b => HasVendor (TF.Source l p a) s b where
     vendor = TF.configuration . vendor
 
 class HasComputedAvatarUrl a b | a -> b where

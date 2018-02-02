@@ -107,9 +107,9 @@ import qualified Terrafomo.OPC.Lens     as P
 import qualified Terrafomo.OPC.Provider as P
 import           Terrafomo.OPC.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @opc_compute_image_list_entry@ OPC datasource.
 

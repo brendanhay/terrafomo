@@ -23,8 +23,8 @@ module Terrafomo.PowerDNS.Provider
     , emptyPowerDNS
 
     -- * Lenses
-    , apiKey
-    , serverUrl
+    , providerApiKey
+    , providerServerUrl
     ) where
 
 import Data.Hashable      (Hashable)
@@ -82,10 +82,10 @@ emptyPowerDNS = PowerDNS {
       , _server_url = Nothing
     }
 
-apiKey :: Lens' PowerDNS (Maybe Text)
-apiKey =
+providerApiKey :: Lens' PowerDNS (Maybe Text)
+providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-serverUrl :: Lens' PowerDNS (Maybe Text)
-serverUrl =
+providerServerUrl :: Lens' PowerDNS (Maybe Text)
+providerServerUrl =
     lens _server_url (\s a -> s { _server_url = a })

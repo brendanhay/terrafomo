@@ -23,12 +23,12 @@ module Terrafomo.Triton.Provider
     , emptyTriton
 
     -- * Lenses
-    , account
-    , insecureSkipTlsVerify
-    , keyId
-    , keyMaterial
-    , url
-    , user
+    , providerAccount
+    , providerInsecureSkipTlsVerify
+    , providerKeyId
+    , providerKeyMaterial
+    , providerUrl
+    , providerUser
     ) where
 
 import Data.Hashable      (Hashable)
@@ -100,26 +100,26 @@ emptyTriton = Triton {
       , _user = Nothing
     }
 
-account :: Lens' Triton (Maybe Text)
-account =
+providerAccount :: Lens' Triton (Maybe Text)
+providerAccount =
     lens _account (\s a -> s { _account = a })
 
-insecureSkipTlsVerify :: Lens' Triton (Maybe Text)
-insecureSkipTlsVerify =
+providerInsecureSkipTlsVerify :: Lens' Triton (Maybe Text)
+providerInsecureSkipTlsVerify =
     lens _insecure_skip_tls_verify (\s a -> s { _insecure_skip_tls_verify = a })
 
-keyId :: Lens' Triton (Maybe Text)
-keyId =
+providerKeyId :: Lens' Triton (Maybe Text)
+providerKeyId =
     lens _key_id (\s a -> s { _key_id = a })
 
-keyMaterial :: Lens' Triton (Maybe Text)
-keyMaterial =
+providerKeyMaterial :: Lens' Triton (Maybe Text)
+providerKeyMaterial =
     lens _key_material (\s a -> s { _key_material = a })
 
-url :: Lens' Triton (Maybe Text)
-url =
+providerUrl :: Lens' Triton (Maybe Text)
+providerUrl =
     lens _url (\s a -> s { _url = a })
 
-user :: Lens' Triton (Maybe Text)
-user =
+providerUser :: Lens' Triton (Maybe Text)
+providerUser =
     lens _user (\s a -> s { _user = a })

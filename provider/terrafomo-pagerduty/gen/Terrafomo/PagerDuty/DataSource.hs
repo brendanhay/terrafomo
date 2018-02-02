@@ -63,9 +63,9 @@ import qualified Terrafomo.PagerDuty.Lens     as P
 import qualified Terrafomo.PagerDuty.Provider as P
 import           Terrafomo.PagerDuty.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @pagerduty_escalation_policy@ PagerDuty datasource.
 

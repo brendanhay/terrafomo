@@ -54,9 +54,9 @@ import qualified Terrafomo.Kubernetes.Lens     as P
 import qualified Terrafomo.Kubernetes.Provider as P
 import           Terrafomo.Kubernetes.Types    as P
 
-import qualified Terrafomo.Attribute  as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Source    as TF
 
 {- | The @kubernetes_service@ Kubernetes datasource.
 

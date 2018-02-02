@@ -23,12 +23,12 @@ module Terrafomo.Nomad.Provider
     , emptyNomad
 
     -- * Lenses
-    , address
-    , caFile
-    , certFile
-    , keyFile
-    , region
-    , secretId
+    , providerAddress
+    , providerCaFile
+    , providerCertFile
+    , providerKeyFile
+    , providerRegion
+    , providerSecretId
     ) where
 
 import Data.Hashable      (Hashable)
@@ -98,26 +98,26 @@ emptyNomad = Nomad {
       , _secret_id = Nothing
     }
 
-address :: Lens' Nomad (Maybe Text)
-address =
+providerAddress :: Lens' Nomad (Maybe Text)
+providerAddress =
     lens _address (\s a -> s { _address = a })
 
-caFile :: Lens' Nomad (Maybe Text)
-caFile =
+providerCaFile :: Lens' Nomad (Maybe Text)
+providerCaFile =
     lens _ca_file (\s a -> s { _ca_file = a })
 
-certFile :: Lens' Nomad (Maybe Text)
-certFile =
+providerCertFile :: Lens' Nomad (Maybe Text)
+providerCertFile =
     lens _cert_file (\s a -> s { _cert_file = a })
 
-keyFile :: Lens' Nomad (Maybe Text)
-keyFile =
+providerKeyFile :: Lens' Nomad (Maybe Text)
+providerKeyFile =
     lens _key_file (\s a -> s { _key_file = a })
 
-region :: Lens' Nomad (Maybe Text)
-region =
+providerRegion :: Lens' Nomad (Maybe Text)
+providerRegion =
     lens _region (\s a -> s { _region = a })
 
-secretId :: Lens' Nomad (Maybe Text)
-secretId =
+providerSecretId :: Lens' Nomad (Maybe Text)
+providerSecretId =
     lens _secret_id (\s a -> s { _secret_id = a })

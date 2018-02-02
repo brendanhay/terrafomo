@@ -23,10 +23,10 @@ module Terrafomo.Chef.Provider
     , emptyChef
 
     -- * Lenses
-    , allowUnverifiedSsl
-    , clientName
-    , keyMaterial
-    , serverUrl
+    , providerAllowUnverifiedSsl
+    , providerClientName
+    , providerKeyMaterial
+    , providerServerUrl
     ) where
 
 import Data.Hashable      (Hashable)
@@ -89,18 +89,18 @@ emptyChef = Chef {
       , _server_url = Nothing
     }
 
-allowUnverifiedSsl :: Lens' Chef (Maybe Text)
-allowUnverifiedSsl =
+providerAllowUnverifiedSsl :: Lens' Chef (Maybe Text)
+providerAllowUnverifiedSsl =
     lens _allow_unverified_ssl (\s a -> s { _allow_unverified_ssl = a })
 
-clientName :: Lens' Chef (Maybe Text)
-clientName =
+providerClientName :: Lens' Chef (Maybe Text)
+providerClientName =
     lens _client_name (\s a -> s { _client_name = a })
 
-keyMaterial :: Lens' Chef (Maybe Text)
-keyMaterial =
+providerKeyMaterial :: Lens' Chef (Maybe Text)
+providerKeyMaterial =
     lens _key_material (\s a -> s { _key_material = a })
 
-serverUrl :: Lens' Chef (Maybe Text)
-serverUrl =
+providerServerUrl :: Lens' Chef (Maybe Text)
+providerServerUrl =
     lens _server_url (\s a -> s { _server_url = a })
