@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Nomad.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -36,39 +33,41 @@ module Terrafomo.Nomad.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasDeregisterOnDestroy (..)
-    , HasDeregisterOnIdChange (..)
-    , HasDescription (..)
-    , HasGlobal (..)
-    , HasJobspec (..)
-    , HasName (..)
-    , HasPolicies (..)
-    , HasRulesHcl (..)
-    , HasType' (..)
+    , P.HasDeregisterOnDestroy (..)
+    , P.HasDeregisterOnIdChange (..)
+    , P.HasDescription (..)
+    , P.HasGlobal (..)
+    , P.HasJobspec (..)
+    , P.HasName (..)
+    , P.HasPolicies (..)
+    , P.HasRulesHcl (..)
+    , P.HasType' (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                as TF
-import qualified GHC.Base                 as TF
-import qualified Numeric.Natural          as TF
-import qualified Terrafomo.Attribute      as TF
-import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.IP             as TF
-import qualified Terrafomo.Meta           as TF
-import qualified Terrafomo.Name           as TF
-import qualified Terrafomo.Nomad.Provider as TF
-import qualified Terrafomo.Nomad.Types    as TF
-import qualified Terrafomo.Resource       as TF
-import qualified Terrafomo.Resource       as TF
+import qualified Data.Word                as P
+import qualified GHC.Base                 as P
+import qualified Numeric.Natural          as P
+import qualified Terrafomo.IP             as P
+import qualified Terrafomo.Nomad.Lens     as P
+import qualified Terrafomo.Nomad.Provider as P
+import           Terrafomo.Nomad.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @nomad_acl_policy@ Nomad resource.
 
@@ -90,22 +89,22 @@ instance TF.ToHCL (AclPolicyResource s) where
         , TF.attribute "rules_hcl" _rules_hcl
         ]
 
-instance HasDescription (AclPolicyResource s) s Text where
+instance P.HasDescription (AclPolicyResource s) s Text where
     description =
         lens (_description :: AclPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: AclPolicyResource s)
 
-instance HasName (AclPolicyResource s) s Text where
+instance P.HasName (AclPolicyResource s) s Text where
     name =
         lens (_name :: AclPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AclPolicyResource s)
 
-instance HasRulesHcl (AclPolicyResource s) s Text where
+instance P.HasRulesHcl (AclPolicyResource s) s Text where
     rulesHcl =
         lens (_rules_hcl :: AclPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
 
-aclPolicyResource :: TF.Resource TF.Nomad (AclPolicyResource s)
+aclPolicyResource :: TF.Resource P.Nomad (AclPolicyResource s)
 aclPolicyResource =
     TF.newResource "nomad_acl_policy" $
         AclPolicyResource {
@@ -139,27 +138,27 @@ instance TF.ToHCL (AclTokenResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasGlobal (AclTokenResource s) s Text where
+instance P.HasGlobal (AclTokenResource s) s Text where
     global =
         lens (_global :: AclTokenResource s -> TF.Attribute s Text)
             (\s a -> s { _global = a } :: AclTokenResource s)
 
-instance HasName (AclTokenResource s) s Text where
+instance P.HasName (AclTokenResource s) s Text where
     name =
         lens (_name :: AclTokenResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AclTokenResource s)
 
-instance HasPolicies (AclTokenResource s) s Text where
+instance P.HasPolicies (AclTokenResource s) s Text where
     policies =
         lens (_policies :: AclTokenResource s -> TF.Attribute s Text)
             (\s a -> s { _policies = a } :: AclTokenResource s)
 
-instance HasType' (AclTokenResource s) s Text where
+instance P.HasType' (AclTokenResource s) s Text where
     type' =
         lens (_type' :: AclTokenResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: AclTokenResource s)
 
-aclTokenResource :: TF.Resource TF.Nomad (AclTokenResource s)
+aclTokenResource :: TF.Resource P.Nomad (AclTokenResource s)
 aclTokenResource =
     TF.newResource "nomad_acl_token" $
         AclTokenResource {
@@ -195,22 +194,22 @@ instance TF.ToHCL (JobResource s) where
         , TF.attribute "jobspec" _jobspec
         ]
 
-instance HasDeregisterOnDestroy (JobResource s) s Text where
+instance P.HasDeregisterOnDestroy (JobResource s) s Text where
     deregisterOnDestroy =
         lens (_deregister_on_destroy :: JobResource s -> TF.Attribute s Text)
             (\s a -> s { _deregister_on_destroy = a } :: JobResource s)
 
-instance HasDeregisterOnIdChange (JobResource s) s Text where
+instance P.HasDeregisterOnIdChange (JobResource s) s Text where
     deregisterOnIdChange =
         lens (_deregister_on_id_change :: JobResource s -> TF.Attribute s Text)
             (\s a -> s { _deregister_on_id_change = a } :: JobResource s)
 
-instance HasJobspec (JobResource s) s Text where
+instance P.HasJobspec (JobResource s) s Text where
     jobspec =
         lens (_jobspec :: JobResource s -> TF.Attribute s Text)
             (\s a -> s { _jobspec = a } :: JobResource s)
 
-jobResource :: TF.Resource TF.Nomad (JobResource s)
+jobResource :: TF.Resource P.Nomad (JobResource s)
 jobResource =
     TF.newResource "nomad_job" $
         JobResource {
@@ -218,57 +217,3 @@ jobResource =
             , _deregister_on_id_change = TF.Nil
             , _jobspec = TF.Nil
             }
-
-class HasDeregisterOnDestroy a s b | a -> s b where
-    deregisterOnDestroy :: Lens' a (TF.Attribute s b)
-
-instance HasDeregisterOnDestroy a s b => HasDeregisterOnDestroy (TF.Resource p a) s b where
-    deregisterOnDestroy = TF.configuration . deregisterOnDestroy
-
-class HasDeregisterOnIdChange a s b | a -> s b where
-    deregisterOnIdChange :: Lens' a (TF.Attribute s b)
-
-instance HasDeregisterOnIdChange a s b => HasDeregisterOnIdChange (TF.Resource p a) s b where
-    deregisterOnIdChange = TF.configuration . deregisterOnIdChange
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasGlobal a s b | a -> s b where
-    global :: Lens' a (TF.Attribute s b)
-
-instance HasGlobal a s b => HasGlobal (TF.Resource p a) s b where
-    global = TF.configuration . global
-
-class HasJobspec a s b | a -> s b where
-    jobspec :: Lens' a (TF.Attribute s b)
-
-instance HasJobspec a s b => HasJobspec (TF.Resource p a) s b where
-    jobspec = TF.configuration . jobspec
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasPolicies a s b | a -> s b where
-    policies :: Lens' a (TF.Attribute s b)
-
-instance HasPolicies a s b => HasPolicies (TF.Resource p a) s b where
-    policies = TF.configuration . policies
-
-class HasRulesHcl a s b | a -> s b where
-    rulesHcl :: Lens' a (TF.Attribute s b)
-
-instance HasRulesHcl a s b => HasRulesHcl (TF.Resource p a) s b where
-    rulesHcl = TF.configuration . rulesHcl
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'

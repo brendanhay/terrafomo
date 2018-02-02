@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Packet.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -48,83 +45,85 @@ module Terrafomo.Packet.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAlwaysPxe (..)
-    , HasBillingCycle (..)
-    , HasCidrNotation (..)
-    , HasDescription (..)
-    , HasDeviceId (..)
-    , HasFacility (..)
-    , HasHardwareReservationId (..)
-    , HasHostname (..)
-    , HasIpxeScriptUrl (..)
-    , HasName (..)
-    , HasOperatingSystem (..)
-    , HasPlan (..)
-    , HasProjectId (..)
-    , HasPublicIpv4SubnetSize (..)
-    , HasPublicKey (..)
-    , HasQuantity (..)
-    , HasSize (..)
-    , HasSnapshotPolicies (..)
-    , HasStorage (..)
-    , HasUserData (..)
-    , HasVolumeId (..)
+    , P.HasAlwaysPxe (..)
+    , P.HasBillingCycle (..)
+    , P.HasCidrNotation (..)
+    , P.HasDescription (..)
+    , P.HasDeviceId (..)
+    , P.HasFacility (..)
+    , P.HasHardwareReservationId (..)
+    , P.HasHostname (..)
+    , P.HasIpxeScriptUrl (..)
+    , P.HasName (..)
+    , P.HasOperatingSystem (..)
+    , P.HasPlan (..)
+    , P.HasProjectId (..)
+    , P.HasPublicIpv4SubnetSize (..)
+    , P.HasPublicKey (..)
+    , P.HasQuantity (..)
+    , P.HasSize (..)
+    , P.HasSnapshotPolicies (..)
+    , P.HasStorage (..)
+    , P.HasUserData (..)
+    , P.HasVolumeId (..)
 
     -- ** Computed Attributes
-    , HasComputedAccessPrivateIpv4 (..)
-    , HasComputedAccessPublicIpv4 (..)
-    , HasComputedAccessPublicIpv6 (..)
-    , HasComputedAddressFamily (..)
-    , HasComputedAttachments (..)
-    , HasComputedBillingCycle (..)
-    , HasComputedCidr (..)
-    , HasComputedCidrNotation (..)
-    , HasComputedCreated (..)
-    , HasComputedDescription (..)
-    , HasComputedDeviceId (..)
-    , HasComputedFacility (..)
-    , HasComputedFingerprint (..)
-    , HasComputedGateway (..)
-    , HasComputedHardwareReservationId (..)
-    , HasComputedHostname (..)
-    , HasComputedId (..)
-    , HasComputedLocked (..)
-    , HasComputedName (..)
-    , HasComputedNetmask (..)
-    , HasComputedNetwork (..)
-    , HasComputedOperatingSystem (..)
-    , HasComputedPlan (..)
-    , HasComputedProjectId (..)
-    , HasComputedPublic (..)
-    , HasComputedPublicKey (..)
-    , HasComputedQuantity (..)
-    , HasComputedRootPassword (..)
-    , HasComputedSize (..)
-    , HasComputedState (..)
-    , HasComputedTags (..)
-    , HasComputedUpdated (..)
+    , P.HasComputedAccessPrivateIpv4 (..)
+    , P.HasComputedAccessPublicIpv4 (..)
+    , P.HasComputedAccessPublicIpv6 (..)
+    , P.HasComputedAddressFamily (..)
+    , P.HasComputedAttachments (..)
+    , P.HasComputedBillingCycle (..)
+    , P.HasComputedCidr (..)
+    , P.HasComputedCidrNotation (..)
+    , P.HasComputedCreated (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDeviceId (..)
+    , P.HasComputedFacility (..)
+    , P.HasComputedFingerprint (..)
+    , P.HasComputedGateway (..)
+    , P.HasComputedHardwareReservationId (..)
+    , P.HasComputedHostname (..)
+    , P.HasComputedId (..)
+    , P.HasComputedLocked (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNetmask (..)
+    , P.HasComputedNetwork (..)
+    , P.HasComputedOperatingSystem (..)
+    , P.HasComputedPlan (..)
+    , P.HasComputedProjectId (..)
+    , P.HasComputedPublic (..)
+    , P.HasComputedPublicKey (..)
+    , P.HasComputedQuantity (..)
+    , P.HasComputedRootPassword (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedState (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedUpdated (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                 as TF
-import qualified GHC.Base                  as TF
-import qualified Numeric.Natural           as TF
-import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.HCL             as TF
-import qualified Terrafomo.IP              as TF
-import qualified Terrafomo.Meta            as TF
-import qualified Terrafomo.Name            as TF
-import qualified Terrafomo.Packet.Provider as TF
-import qualified Terrafomo.Packet.Types    as TF
-import qualified Terrafomo.Resource        as TF
-import qualified Terrafomo.Resource        as TF
+import qualified Data.Word                 as P
+import qualified GHC.Base                  as P
+import qualified Numeric.Natural           as P
+import qualified Terrafomo.IP              as P
+import qualified Terrafomo.Packet.Lens     as P
+import qualified Terrafomo.Packet.Provider as P
+import           Terrafomo.Packet.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @packet_device@ Packet resource.
 
@@ -176,103 +175,103 @@ instance TF.ToHCL (DeviceResource s) where
         , TF.attribute "user_data" _user_data
         ]
 
-instance HasAlwaysPxe (DeviceResource s) s Text where
+instance P.HasAlwaysPxe (DeviceResource s) s Text where
     alwaysPxe =
         lens (_always_pxe :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _always_pxe = a } :: DeviceResource s)
 
-instance HasBillingCycle (DeviceResource s) s Text where
+instance P.HasBillingCycle (DeviceResource s) s Text where
     billingCycle =
         lens (_billing_cycle :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _billing_cycle = a } :: DeviceResource s)
 
-instance HasFacility (DeviceResource s) s Text where
+instance P.HasFacility (DeviceResource s) s Text where
     facility =
         lens (_facility :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _facility = a } :: DeviceResource s)
 
-instance HasHardwareReservationId (DeviceResource s) s Text where
+instance P.HasHardwareReservationId (DeviceResource s) s Text where
     hardwareReservationId =
         lens (_hardware_reservation_id :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _hardware_reservation_id = a } :: DeviceResource s)
 
-instance HasHostname (DeviceResource s) s Text where
+instance P.HasHostname (DeviceResource s) s Text where
     hostname =
         lens (_hostname :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _hostname = a } :: DeviceResource s)
 
-instance HasIpxeScriptUrl (DeviceResource s) s Text where
+instance P.HasIpxeScriptUrl (DeviceResource s) s Text where
     ipxeScriptUrl =
         lens (_ipxe_script_url :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _ipxe_script_url = a } :: DeviceResource s)
 
-instance HasOperatingSystem (DeviceResource s) s Text where
+instance P.HasOperatingSystem (DeviceResource s) s Text where
     operatingSystem =
         lens (_operating_system :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _operating_system = a } :: DeviceResource s)
 
-instance HasPlan (DeviceResource s) s Text where
+instance P.HasPlan (DeviceResource s) s Text where
     plan =
         lens (_plan :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _plan = a } :: DeviceResource s)
 
-instance HasProjectId (DeviceResource s) s Text where
+instance P.HasProjectId (DeviceResource s) s Text where
     projectId =
         lens (_project_id :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _project_id = a } :: DeviceResource s)
 
-instance HasPublicIpv4SubnetSize (DeviceResource s) s Text where
+instance P.HasPublicIpv4SubnetSize (DeviceResource s) s Text where
     publicIpv4SubnetSize =
         lens (_public_ipv4_subnet_size :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _public_ipv4_subnet_size = a } :: DeviceResource s)
 
-instance HasStorage (DeviceResource s) s Text where
+instance P.HasStorage (DeviceResource s) s Text where
     storage =
         lens (_storage :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _storage = a } :: DeviceResource s)
 
-instance HasUserData (DeviceResource s) s Text where
+instance P.HasUserData (DeviceResource s) s Text where
     userData =
         lens (_user_data :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _user_data = a } :: DeviceResource s)
 
-instance HasComputedAccessPrivateIpv4 (DeviceResource s) Text
+instance P.HasComputedAccessPrivateIpv4 (DeviceResource s) Text
 
-instance HasComputedAccessPublicIpv4 (DeviceResource s) Text
+instance P.HasComputedAccessPublicIpv4 (DeviceResource s) Text
 
-instance HasComputedAccessPublicIpv6 (DeviceResource s) Text
+instance P.HasComputedAccessPublicIpv6 (DeviceResource s) Text
 
-instance HasComputedBillingCycle (DeviceResource s) Text
+instance P.HasComputedBillingCycle (DeviceResource s) Text
 
-instance HasComputedCreated (DeviceResource s) Text
+instance P.HasComputedCreated (DeviceResource s) Text
 
-instance HasComputedFacility (DeviceResource s) Text
+instance P.HasComputedFacility (DeviceResource s) Text
 
-instance HasComputedHardwareReservationId (DeviceResource s) Text
+instance P.HasComputedHardwareReservationId (DeviceResource s) Text
 
-instance HasComputedHostname (DeviceResource s) Text
+instance P.HasComputedHostname (DeviceResource s) Text
 
-instance HasComputedId (DeviceResource s) Text
+instance P.HasComputedId (DeviceResource s) Text
 
-instance HasComputedLocked (DeviceResource s) Text
+instance P.HasComputedLocked (DeviceResource s) Text
 
-instance HasComputedNetwork (DeviceResource s) Text
+instance P.HasComputedNetwork (DeviceResource s) Text
 
-instance HasComputedOperatingSystem (DeviceResource s) Text
+instance P.HasComputedOperatingSystem (DeviceResource s) Text
 
-instance HasComputedPlan (DeviceResource s) Text
+instance P.HasComputedPlan (DeviceResource s) Text
 
-instance HasComputedProjectId (DeviceResource s) Text
+instance P.HasComputedProjectId (DeviceResource s) Text
 
-instance HasComputedRootPassword (DeviceResource s) Text
+instance P.HasComputedRootPassword (DeviceResource s) Text
 
-instance HasComputedState (DeviceResource s) Text
+instance P.HasComputedState (DeviceResource s) Text
 
-instance HasComputedTags (DeviceResource s) Text
+instance P.HasComputedTags (DeviceResource s) Text
 
-instance HasComputedUpdated (DeviceResource s) Text
+instance P.HasComputedUpdated (DeviceResource s) Text
 
-deviceResource :: TF.Resource TF.Packet (DeviceResource s)
+deviceResource :: TF.Resource P.Packet (DeviceResource s)
 deviceResource =
     TF.newResource "packet_device" $
         DeviceResource {
@@ -316,35 +315,35 @@ instance TF.ToHCL (IpAttachmentResource s) where
         , TF.attribute "device_id" _device_id
         ]
 
-instance HasCidrNotation (IpAttachmentResource s) s Text where
+instance P.HasCidrNotation (IpAttachmentResource s) s Text where
     cidrNotation =
         lens (_cidr_notation :: IpAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _cidr_notation = a } :: IpAttachmentResource s)
 
-instance HasDeviceId (IpAttachmentResource s) s Text where
+instance P.HasDeviceId (IpAttachmentResource s) s Text where
     deviceId =
         lens (_device_id :: IpAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _device_id = a } :: IpAttachmentResource s)
 
-instance HasComputedAddressFamily (IpAttachmentResource s) Text
+instance P.HasComputedAddressFamily (IpAttachmentResource s) Text
 
-instance HasComputedCidr (IpAttachmentResource s) Text
+instance P.HasComputedCidr (IpAttachmentResource s) Text
 
-instance HasComputedCidrNotation (IpAttachmentResource s) Text
+instance P.HasComputedCidrNotation (IpAttachmentResource s) Text
 
-instance HasComputedDeviceId (IpAttachmentResource s) Text
+instance P.HasComputedDeviceId (IpAttachmentResource s) Text
 
-instance HasComputedGateway (IpAttachmentResource s) Text
+instance P.HasComputedGateway (IpAttachmentResource s) Text
 
-instance HasComputedId (IpAttachmentResource s) Text
+instance P.HasComputedId (IpAttachmentResource s) Text
 
-instance HasComputedNetmask (IpAttachmentResource s) Text
+instance P.HasComputedNetmask (IpAttachmentResource s) Text
 
-instance HasComputedNetwork (IpAttachmentResource s) Text
+instance P.HasComputedNetwork (IpAttachmentResource s) Text
 
-instance HasComputedPublic (IpAttachmentResource s) Text
+instance P.HasComputedPublic (IpAttachmentResource s) Text
 
-ipAttachmentResource :: TF.Resource TF.Packet (IpAttachmentResource s)
+ipAttachmentResource :: TF.Resource P.Packet (IpAttachmentResource s)
 ipAttachmentResource =
     TF.newResource "packet_ip_attachment" $
         IpAttachmentResource {
@@ -367,18 +366,18 @@ instance TF.ToHCL (ProjectResource s) where
         [ TF.attribute "name" _name
         ]
 
-instance HasName (ProjectResource s) s Text where
+instance P.HasName (ProjectResource s) s Text where
     name =
         lens (_name :: ProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ProjectResource s)
 
-instance HasComputedCreated (ProjectResource s) Text
+instance P.HasComputedCreated (ProjectResource s) Text
 
-instance HasComputedId (ProjectResource s) Text
+instance P.HasComputedId (ProjectResource s) Text
 
-instance HasComputedUpdated (ProjectResource s) Text
+instance P.HasComputedUpdated (ProjectResource s) Text
 
-projectResource :: TF.Resource TF.Packet (ProjectResource s)
+projectResource :: TF.Resource P.Packet (ProjectResource s)
 projectResource =
     TF.newResource "packet_project" $
         ProjectResource {
@@ -415,42 +414,42 @@ instance TF.ToHCL (ReservedIpBlockResource s) where
         , TF.attribute "quantity" _quantity
         ]
 
-instance HasFacility (ReservedIpBlockResource s) s Text where
+instance P.HasFacility (ReservedIpBlockResource s) s Text where
     facility =
         lens (_facility :: ReservedIpBlockResource s -> TF.Attribute s Text)
             (\s a -> s { _facility = a } :: ReservedIpBlockResource s)
 
-instance HasProjectId (ReservedIpBlockResource s) s Text where
+instance P.HasProjectId (ReservedIpBlockResource s) s Text where
     projectId =
         lens (_project_id :: ReservedIpBlockResource s -> TF.Attribute s Text)
             (\s a -> s { _project_id = a } :: ReservedIpBlockResource s)
 
-instance HasQuantity (ReservedIpBlockResource s) s Text where
+instance P.HasQuantity (ReservedIpBlockResource s) s Text where
     quantity =
         lens (_quantity :: ReservedIpBlockResource s -> TF.Attribute s Text)
             (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
 
-instance HasComputedAddressFamily (ReservedIpBlockResource s) Text
+instance P.HasComputedAddressFamily (ReservedIpBlockResource s) Text
 
-instance HasComputedCidr (ReservedIpBlockResource s) Text
+instance P.HasComputedCidr (ReservedIpBlockResource s) Text
 
-instance HasComputedCidrNotation (ReservedIpBlockResource s) Text
+instance P.HasComputedCidrNotation (ReservedIpBlockResource s) Text
 
-instance HasComputedFacility (ReservedIpBlockResource s) Text
+instance P.HasComputedFacility (ReservedIpBlockResource s) Text
 
-instance HasComputedId (ReservedIpBlockResource s) Text
+instance P.HasComputedId (ReservedIpBlockResource s) Text
 
-instance HasComputedNetmask (ReservedIpBlockResource s) Text
+instance P.HasComputedNetmask (ReservedIpBlockResource s) Text
 
-instance HasComputedNetwork (ReservedIpBlockResource s) Text
+instance P.HasComputedNetwork (ReservedIpBlockResource s) Text
 
-instance HasComputedProjectId (ReservedIpBlockResource s) Text
+instance P.HasComputedProjectId (ReservedIpBlockResource s) Text
 
-instance HasComputedPublic (ReservedIpBlockResource s) Text
+instance P.HasComputedPublic (ReservedIpBlockResource s) Text
 
-instance HasComputedQuantity (ReservedIpBlockResource s) Text
+instance P.HasComputedQuantity (ReservedIpBlockResource s) Text
 
-reservedIpBlockResource :: TF.Resource TF.Packet (ReservedIpBlockResource s)
+reservedIpBlockResource :: TF.Resource P.Packet (ReservedIpBlockResource s)
 reservedIpBlockResource =
     TF.newResource "packet_reserved_ip_block" $
         ReservedIpBlockResource {
@@ -478,29 +477,29 @@ instance TF.ToHCL (SshKeyResource s) where
         , TF.attribute "public_key" _public_key
         ]
 
-instance HasName (SshKeyResource s) s Text where
+instance P.HasName (SshKeyResource s) s Text where
     name =
         lens (_name :: SshKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SshKeyResource s)
 
-instance HasPublicKey (SshKeyResource s) s Text where
+instance P.HasPublicKey (SshKeyResource s) s Text where
     publicKey =
         lens (_public_key :: SshKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _public_key = a } :: SshKeyResource s)
 
-instance HasComputedCreated (SshKeyResource s) Text
+instance P.HasComputedCreated (SshKeyResource s) Text
 
-instance HasComputedFingerprint (SshKeyResource s) Text
+instance P.HasComputedFingerprint (SshKeyResource s) Text
 
-instance HasComputedId (SshKeyResource s) Text
+instance P.HasComputedId (SshKeyResource s) Text
 
-instance HasComputedName (SshKeyResource s) Text
+instance P.HasComputedName (SshKeyResource s) Text
 
-instance HasComputedPublicKey (SshKeyResource s) Text
+instance P.HasComputedPublicKey (SshKeyResource s) Text
 
-instance HasComputedUpdated (SshKeyResource s) Text
+instance P.HasComputedUpdated (SshKeyResource s) Text
 
-sshKeyResource :: TF.Resource TF.Packet (SshKeyResource s)
+sshKeyResource :: TF.Resource P.Packet (SshKeyResource s)
 sshKeyResource =
     TF.newResource "packet_ssh_key" $
         SshKeyResource {
@@ -528,19 +527,19 @@ instance TF.ToHCL (VolumeAttachmentResource s) where
         , TF.attribute "volume_id" _volume_id
         ]
 
-instance HasDeviceId (VolumeAttachmentResource s) s Text where
+instance P.HasDeviceId (VolumeAttachmentResource s) s Text where
     deviceId =
         lens (_device_id :: VolumeAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _device_id = a } :: VolumeAttachmentResource s)
 
-instance HasVolumeId (VolumeAttachmentResource s) s Text where
+instance P.HasVolumeId (VolumeAttachmentResource s) s Text where
     volumeId =
         lens (_volume_id :: VolumeAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _volume_id = a } :: VolumeAttachmentResource s)
 
-instance HasComputedId (VolumeAttachmentResource s) Text
+instance P.HasComputedId (VolumeAttachmentResource s) Text
 
-volumeAttachmentResource :: TF.Resource TF.Packet (VolumeAttachmentResource s)
+volumeAttachmentResource :: TF.Resource P.Packet (VolumeAttachmentResource s)
 volumeAttachmentResource =
     TF.newResource "packet_volume_attachment" $
         VolumeAttachmentResource {
@@ -583,68 +582,68 @@ instance TF.ToHCL (VolumeResource s) where
         , TF.attribute "snapshot_policies" _snapshot_policies
         ]
 
-instance HasBillingCycle (VolumeResource s) s Text where
+instance P.HasBillingCycle (VolumeResource s) s Text where
     billingCycle =
         lens (_billing_cycle :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _billing_cycle = a } :: VolumeResource s)
 
-instance HasDescription (VolumeResource s) s Text where
+instance P.HasDescription (VolumeResource s) s Text where
     description =
         lens (_description :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: VolumeResource s)
 
-instance HasFacility (VolumeResource s) s Text where
+instance P.HasFacility (VolumeResource s) s Text where
     facility =
         lens (_facility :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _facility = a } :: VolumeResource s)
 
-instance HasPlan (VolumeResource s) s Text where
+instance P.HasPlan (VolumeResource s) s Text where
     plan =
         lens (_plan :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _plan = a } :: VolumeResource s)
 
-instance HasProjectId (VolumeResource s) s Text where
+instance P.HasProjectId (VolumeResource s) s Text where
     projectId =
         lens (_project_id :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _project_id = a } :: VolumeResource s)
 
-instance HasSize (VolumeResource s) s Text where
+instance P.HasSize (VolumeResource s) s Text where
     size =
         lens (_size :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: VolumeResource s)
 
-instance HasSnapshotPolicies (VolumeResource s) s Text where
+instance P.HasSnapshotPolicies (VolumeResource s) s Text where
     snapshotPolicies =
         lens (_snapshot_policies :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _snapshot_policies = a } :: VolumeResource s)
 
-instance HasComputedAttachments (VolumeResource s) Text
+instance P.HasComputedAttachments (VolumeResource s) Text
 
-instance HasComputedBillingCycle (VolumeResource s) Text
+instance P.HasComputedBillingCycle (VolumeResource s) Text
 
-instance HasComputedCreated (VolumeResource s) Text
+instance P.HasComputedCreated (VolumeResource s) Text
 
-instance HasComputedDescription (VolumeResource s) Text
+instance P.HasComputedDescription (VolumeResource s) Text
 
-instance HasComputedFacility (VolumeResource s) Text
+instance P.HasComputedFacility (VolumeResource s) Text
 
-instance HasComputedId (VolumeResource s) Text
+instance P.HasComputedId (VolumeResource s) Text
 
-instance HasComputedLocked (VolumeResource s) Text
+instance P.HasComputedLocked (VolumeResource s) Text
 
-instance HasComputedName (VolumeResource s) Text
+instance P.HasComputedName (VolumeResource s) Text
 
-instance HasComputedPlan (VolumeResource s) Text
+instance P.HasComputedPlan (VolumeResource s) Text
 
-instance HasComputedProjectId (VolumeResource s) Text
+instance P.HasComputedProjectId (VolumeResource s) Text
 
-instance HasComputedSize (VolumeResource s) Text
+instance P.HasComputedSize (VolumeResource s) Text
 
-instance HasComputedState (VolumeResource s) Text
+instance P.HasComputedState (VolumeResource s) Text
 
-instance HasComputedUpdated (VolumeResource s) Text
+instance P.HasComputedUpdated (VolumeResource s) Text
 
-volumeResource :: TF.Resource TF.Packet (VolumeResource s)
+volumeResource :: TF.Resource P.Packet (VolumeResource s)
 volumeResource =
     TF.newResource "packet_volume" $
         VolumeResource {
@@ -656,321 +655,3 @@ volumeResource =
             , _size = TF.Nil
             , _snapshot_policies = TF.Nil
             }
-
-class HasAlwaysPxe a s b | a -> s b where
-    alwaysPxe :: Lens' a (TF.Attribute s b)
-
-instance HasAlwaysPxe a s b => HasAlwaysPxe (TF.Resource p a) s b where
-    alwaysPxe = TF.configuration . alwaysPxe
-
-class HasBillingCycle a s b | a -> s b where
-    billingCycle :: Lens' a (TF.Attribute s b)
-
-instance HasBillingCycle a s b => HasBillingCycle (TF.Resource p a) s b where
-    billingCycle = TF.configuration . billingCycle
-
-class HasCidrNotation a s b | a -> s b where
-    cidrNotation :: Lens' a (TF.Attribute s b)
-
-instance HasCidrNotation a s b => HasCidrNotation (TF.Resource p a) s b where
-    cidrNotation = TF.configuration . cidrNotation
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasDeviceId a s b | a -> s b where
-    deviceId :: Lens' a (TF.Attribute s b)
-
-instance HasDeviceId a s b => HasDeviceId (TF.Resource p a) s b where
-    deviceId = TF.configuration . deviceId
-
-class HasFacility a s b | a -> s b where
-    facility :: Lens' a (TF.Attribute s b)
-
-instance HasFacility a s b => HasFacility (TF.Resource p a) s b where
-    facility = TF.configuration . facility
-
-class HasHardwareReservationId a s b | a -> s b where
-    hardwareReservationId :: Lens' a (TF.Attribute s b)
-
-instance HasHardwareReservationId a s b => HasHardwareReservationId (TF.Resource p a) s b where
-    hardwareReservationId = TF.configuration . hardwareReservationId
-
-class HasHostname a s b | a -> s b where
-    hostname :: Lens' a (TF.Attribute s b)
-
-instance HasHostname a s b => HasHostname (TF.Resource p a) s b where
-    hostname = TF.configuration . hostname
-
-class HasIpxeScriptUrl a s b | a -> s b where
-    ipxeScriptUrl :: Lens' a (TF.Attribute s b)
-
-instance HasIpxeScriptUrl a s b => HasIpxeScriptUrl (TF.Resource p a) s b where
-    ipxeScriptUrl = TF.configuration . ipxeScriptUrl
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasOperatingSystem a s b | a -> s b where
-    operatingSystem :: Lens' a (TF.Attribute s b)
-
-instance HasOperatingSystem a s b => HasOperatingSystem (TF.Resource p a) s b where
-    operatingSystem = TF.configuration . operatingSystem
-
-class HasPlan a s b | a -> s b where
-    plan :: Lens' a (TF.Attribute s b)
-
-instance HasPlan a s b => HasPlan (TF.Resource p a) s b where
-    plan = TF.configuration . plan
-
-class HasProjectId a s b | a -> s b where
-    projectId :: Lens' a (TF.Attribute s b)
-
-instance HasProjectId a s b => HasProjectId (TF.Resource p a) s b where
-    projectId = TF.configuration . projectId
-
-class HasPublicIpv4SubnetSize a s b | a -> s b where
-    publicIpv4SubnetSize :: Lens' a (TF.Attribute s b)
-
-instance HasPublicIpv4SubnetSize a s b => HasPublicIpv4SubnetSize (TF.Resource p a) s b where
-    publicIpv4SubnetSize = TF.configuration . publicIpv4SubnetSize
-
-class HasPublicKey a s b | a -> s b where
-    publicKey :: Lens' a (TF.Attribute s b)
-
-instance HasPublicKey a s b => HasPublicKey (TF.Resource p a) s b where
-    publicKey = TF.configuration . publicKey
-
-class HasQuantity a s b | a -> s b where
-    quantity :: Lens' a (TF.Attribute s b)
-
-instance HasQuantity a s b => HasQuantity (TF.Resource p a) s b where
-    quantity = TF.configuration . quantity
-
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attribute s b)
-
-instance HasSize a s b => HasSize (TF.Resource p a) s b where
-    size = TF.configuration . size
-
-class HasSnapshotPolicies a s b | a -> s b where
-    snapshotPolicies :: Lens' a (TF.Attribute s b)
-
-instance HasSnapshotPolicies a s b => HasSnapshotPolicies (TF.Resource p a) s b where
-    snapshotPolicies = TF.configuration . snapshotPolicies
-
-class HasStorage a s b | a -> s b where
-    storage :: Lens' a (TF.Attribute s b)
-
-instance HasStorage a s b => HasStorage (TF.Resource p a) s b where
-    storage = TF.configuration . storage
-
-class HasUserData a s b | a -> s b where
-    userData :: Lens' a (TF.Attribute s b)
-
-instance HasUserData a s b => HasUserData (TF.Resource p a) s b where
-    userData = TF.configuration . userData
-
-class HasVolumeId a s b | a -> s b where
-    volumeId :: Lens' a (TF.Attribute s b)
-
-instance HasVolumeId a s b => HasVolumeId (TF.Resource p a) s b where
-    volumeId = TF.configuration . volumeId
-
-class HasComputedAccessPrivateIpv4 a b | a -> b where
-    computedAccessPrivateIpv4
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAccessPrivateIpv4 =
-        to (\x -> TF.Computed (TF.referenceKey x) "access_private_ipv4")
-
-class HasComputedAccessPublicIpv4 a b | a -> b where
-    computedAccessPublicIpv4
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAccessPublicIpv4 =
-        to (\x -> TF.Computed (TF.referenceKey x) "access_public_ipv4")
-
-class HasComputedAccessPublicIpv6 a b | a -> b where
-    computedAccessPublicIpv6
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAccessPublicIpv6 =
-        to (\x -> TF.Computed (TF.referenceKey x) "access_public_ipv6")
-
-class HasComputedAddressFamily a b | a -> b where
-    computedAddressFamily
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAddressFamily =
-        to (\x -> TF.Computed (TF.referenceKey x) "address_family")
-
-class HasComputedAttachments a b | a -> b where
-    computedAttachments
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAttachments =
-        to (\x -> TF.Computed (TF.referenceKey x) "attachments")
-
-class HasComputedBillingCycle a b | a -> b where
-    computedBillingCycle
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBillingCycle =
-        to (\x -> TF.Computed (TF.referenceKey x) "billing_cycle")
-
-class HasComputedCidr a b | a -> b where
-    computedCidr
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCidr =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr")
-
-class HasComputedCidrNotation a b | a -> b where
-    computedCidrNotation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCidrNotation =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_notation")
-
-class HasComputedCreated a b | a -> b where
-    computedCreated
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCreated =
-        to (\x -> TF.Computed (TF.referenceKey x) "created")
-
-class HasComputedDescription a b | a -> b where
-    computedDescription
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
-
-class HasComputedDeviceId a b | a -> b where
-    computedDeviceId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDeviceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "device_id")
-
-class HasComputedFacility a b | a -> b where
-    computedFacility
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedFacility =
-        to (\x -> TF.Computed (TF.referenceKey x) "facility")
-
-class HasComputedFingerprint a b | a -> b where
-    computedFingerprint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "fingerprint")
-
-class HasComputedGateway a b | a -> b where
-    computedGateway
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedGateway =
-        to (\x -> TF.Computed (TF.referenceKey x) "gateway")
-
-class HasComputedHardwareReservationId a b | a -> b where
-    computedHardwareReservationId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHardwareReservationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "hardware_reservation_id")
-
-class HasComputedHostname a b | a -> b where
-    computedHostname
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedLocked a b | a -> b where
-    computedLocked
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLocked =
-        to (\x -> TF.Computed (TF.referenceKey x) "locked")
-
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
-
-class HasComputedNetmask a b | a -> b where
-    computedNetmask
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNetmask =
-        to (\x -> TF.Computed (TF.referenceKey x) "netmask")
-
-class HasComputedNetwork a b | a -> b where
-    computedNetwork
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNetwork =
-        to (\x -> TF.Computed (TF.referenceKey x) "network")
-
-class HasComputedOperatingSystem a b | a -> b where
-    computedOperatingSystem
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOperatingSystem =
-        to (\x -> TF.Computed (TF.referenceKey x) "operating_system")
-
-class HasComputedPlan a b | a -> b where
-    computedPlan
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPlan =
-        to (\x -> TF.Computed (TF.referenceKey x) "plan")
-
-class HasComputedProjectId a b | a -> b where
-    computedProjectId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedProjectId =
-        to (\x -> TF.Computed (TF.referenceKey x) "project_id")
-
-class HasComputedPublic a b | a -> b where
-    computedPublic
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPublic =
-        to (\x -> TF.Computed (TF.referenceKey x) "public")
-
-class HasComputedPublicKey a b | a -> b where
-    computedPublicKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPublicKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_key")
-
-class HasComputedQuantity a b | a -> b where
-    computedQuantity
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedQuantity =
-        to (\x -> TF.Computed (TF.referenceKey x) "quantity")
-
-class HasComputedRootPassword a b | a -> b where
-    computedRootPassword
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRootPassword =
-        to (\x -> TF.Computed (TF.referenceKey x) "root_password")
-
-class HasComputedSize a b | a -> b where
-    computedSize
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "size")
-
-class HasComputedState a b | a -> b where
-    computedState
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
-
-class HasComputedTags a b | a -> b where
-    computedTags
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
-
-class HasComputedUpdated a b | a -> b where
-    computedUpdated
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUpdated =
-        to (\x -> TF.Computed (TF.referenceKey x) "updated")

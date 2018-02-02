@@ -1,22 +1,19 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Google.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -306,378 +303,380 @@ module Terrafomo.Google.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAccountId (..)
-    , HasAckDeadlineSeconds (..)
-    , HasAdditionalZones (..)
-    , HasAddonsConfig (..)
-    , HasAddress (..)
-    , HasAddressType (..)
-    , HasAdvertisedRoutePriority (..)
-    , HasAllow (..)
-    , HasAllowStoppingForUpdate (..)
-    , HasAttachedDisk (..)
-    , HasAuthoritative (..)
-    , HasAutoCreateRoutes (..)
-    , HasAutoCreateSubnetworks (..)
-    , HasAutoHealingPolicies (..)
-    , HasAutoscaling (..)
-    , HasAutoscalingPolicy (..)
-    , HasAvailableMemoryMb (..)
-    , HasBackend (..)
-    , HasBackendService (..)
-    , HasBackupPool (..)
-    , HasBaseInstanceName (..)
-    , HasBgp (..)
-    , HasBillingAccount (..)
-    , HasBooleanPolicy (..)
-    , HasBootDisk (..)
-    , HasBucket (..)
-    , HasBucketName (..)
-    , HasCanIpForward (..)
-    , HasCertificate (..)
-    , HasCharset (..)
-    , HasCheckIntervalSec (..)
-    , HasCluster (..)
-    , HasClusterConfig (..)
-    , HasClusterId (..)
-    , HasClusterIpv4Cidr (..)
-    , HasCollation (..)
-    , HasConfig (..)
-    , HasConnectionDrainingTimeoutSec (..)
-    , HasConnectionName (..)
-    , HasConstraint (..)
-    , HasCors (..)
-    , HasCreateTimeout (..)
-    , HasCredentials (..)
-    , HasCryptoKeyId (..)
-    , HasDatabaseVersion (..)
-    , HasDatasetId (..)
-    , HasDdl (..)
-    , HasDefaultAcl (..)
-    , HasDefaultService (..)
-    , HasDefaultTableExpirationMs (..)
-    , HasDeleted (..)
-    , HasDeny (..)
-    , HasDescription (..)
-    , HasDestRange (..)
-    , HasDestination (..)
-    , HasDestinationRanges (..)
-    , HasDirection (..)
-    , HasDisableOnDestroy (..)
-    , HasDisableProject (..)
-    , HasDisk (..)
-    , HasDiskEncryptionKeyRaw (..)
-    , HasDisplayName (..)
-    , HasDnsName (..)
-    , HasEnableCdn (..)
-    , HasEnableKubernetesAlpha (..)
-    , HasEnableLegacyAbac (..)
-    , HasEntryPoint (..)
-    , HasEventNotificationConfig (..)
-    , HasExpirationTime (..)
-    , HasFailoverRatio (..)
-    , HasFolder (..)
-    , HasFolderId (..)
-    , HasForceDelete (..)
-    , HasForceDestroy (..)
-    , HasFriendlyName (..)
-    , HasGrpcConfig (..)
-    , HasGuestAccelerator (..)
-    , HasHealthChecks (..)
-    , HasHealthyThreshold (..)
-    , HasHost (..)
-    , HasHostProject (..)
-    , HasHostRule (..)
-    , HasHttpConfig (..)
-    , HasHttpHealthCheck (..)
-    , HasHttpsHealthCheck (..)
-    , HasIap (..)
-    , HasIkeVersion (..)
-    , HasImage (..)
-    , HasInitialNodeCount (..)
-    , HasInstance' (..)
-    , HasInstanceDescription (..)
-    , HasInstanceName (..)
-    , HasInstanceTemplate (..)
-    , HasInstanceType (..)
-    , HasInstances (..)
-    , HasInterface (..)
-    , HasIpAddress (..)
-    , HasIpAllocationPolicy (..)
-    , HasIpCidrRange (..)
-    , HasIpProtocol (..)
-    , HasIpRange (..)
-    , HasIpVersion (..)
-    , HasIpv4Range (..)
-    , HasKey (..)
-    , HasKeyAlgorithm (..)
-    , HasKeyRing (..)
-    , HasKeyRingId (..)
-    , HasLabels (..)
-    , HasLifecycleRule (..)
-    , HasListPolicy (..)
-    , HasLoadBalancingScheme (..)
-    , HasLocalTrafficSelector (..)
-    , HasLocation (..)
-    , HasLogging (..)
-    , HasLoggingService (..)
-    , HasMachineType (..)
-    , HasMaintenancePolicy (..)
-    , HasManagedZone (..)
-    , HasManagement (..)
-    , HasMasterAuth (..)
-    , HasMasterAuthorizedNetworksConfig (..)
-    , HasMasterInstanceName (..)
-    , HasMaxWorkers (..)
-    , HasMember (..)
-    , HasMembers (..)
-    , HasMembers (..)
-    , HasMetadata (..)
-    , HasMetadataStartupScript (..)
-    , HasMinCpuPlatform (..)
-    , HasMinMasterVersion (..)
-    , HasMonitoringService (..)
-    , HasMqttConfig (..)
-    , HasName (..)
-    , HasNamePrefix (..)
-    , HasNamedPort (..)
-    , HasNetwork (..)
-    , HasNetworkInterface (..)
-    , HasNetworkPolicy (..)
-    , HasNextHopGateway (..)
-    , HasNextHopInstance (..)
-    , HasNextHopInstanceZone (..)
-    , HasNextHopIp (..)
-    , HasNextHopVpnTunnel (..)
-    , HasNodeConfig (..)
-    , HasNodeCount (..)
-    , HasNodePool (..)
-    , HasNodeVersion (..)
-    , HasNumNodes (..)
-    , HasObject (..)
-    , HasOnDelete (..)
-    , HasOpenapiConfig (..)
-    , HasOrgId (..)
-    , HasParameters (..)
-    , HasParent (..)
-    , HasPassword (..)
-    , HasPathMatcher (..)
-    , HasPeerAsn (..)
-    , HasPeerIp (..)
-    , HasPeerIpAddress (..)
-    , HasPeerNetwork (..)
-    , HasPermissions (..)
-    , HasPgpKey (..)
-    , HasPlacement (..)
-    , HasPolicyData (..)
-    , HasPort (..)
-    , HasPortName (..)
-    , HasPortRange (..)
-    , HasPorts (..)
-    , HasPredefinedAcl (..)
-    , HasPriority (..)
-    , HasPrivateIpGoogleAccess (..)
-    , HasPrivateKey (..)
-    , HasPrivateKeyType (..)
-    , HasProject (..)
-    , HasProjectId (..)
-    , HasProtocOutput (..)
-    , HasProtocol (..)
-    , HasProxyHeader (..)
-    , HasPublicKeyType (..)
-    , HasPushConfig (..)
-    , HasRawDisk (..)
-    , HasRegion (..)
-    , HasRemoteTrafficSelector (..)
-    , HasReplicaConfiguration (..)
-    , HasRequestPath (..)
-    , HasRole (..)
-    , HasRoleEntity (..)
-    , HasRoleId (..)
-    , HasRotationPeriod (..)
-    , HasRouter (..)
-    , HasRoutingMode (..)
-    , HasRrdatas (..)
-    , HasScheduling (..)
-    , HasScheduling (..)
-    , HasSchema (..)
-    , HasScratchDisk (..)
-    , HasSecondaryIpRange (..)
-    , HasService (..)
-    , HasServiceAccount (..)
-    , HasServiceAccountId (..)
-    , HasServiceName (..)
-    , HasServiceProject (..)
-    , HasServices (..)
-    , HasSessionAffinity (..)
-    , HasSettings (..)
-    , HasSharedSecret (..)
-    , HasSize (..)
-    , HasSkipDelete (..)
-    , HasSnapshot (..)
-    , HasSnapshotEncryptionKeyRaw (..)
-    , HasSourceArchiveBucket (..)
-    , HasSourceArchiveObject (..)
-    , HasSourceDisk (..)
-    , HasSourceDiskEncryptionKeyRaw (..)
-    , HasSourceRanges (..)
-    , HasSourceServiceAccounts (..)
-    , HasSourceTags (..)
-    , HasSplitKeys (..)
-    , HasSslCertificates (..)
-    , HasSslHealthCheck (..)
-    , HasStage (..)
-    , HasStateNotificationConfig (..)
-    , HasStorageClass (..)
-    , HasStorageType (..)
-    , HasSubnetwork (..)
-    , HasTableId (..)
-    , HasTags (..)
-    , HasTarget (..)
-    , HasTargetPools (..)
-    , HasTargetServiceAccounts (..)
-    , HasTargetSize (..)
-    , HasTargetTags (..)
-    , HasTargetVpnGateway (..)
-    , HasTcpHealthCheck (..)
-    , HasTempGcsLocation (..)
-    , HasTemplateGcsPath (..)
-    , HasTest (..)
-    , HasText (..)
-    , HasTimePartitioning (..)
-    , HasTimeout (..)
-    , HasTimeoutSec (..)
-    , HasTitle (..)
-    , HasTopic (..)
-    , HasTriggerBucket (..)
-    , HasTriggerHttp (..)
-    , HasTriggerTopic (..)
-    , HasTtl (..)
-    , HasType' (..)
-    , HasUnhealthyThreshold (..)
-    , HasUpdateStrategy (..)
-    , HasUrlMap (..)
-    , HasValue (..)
-    , HasVersion (..)
-    , HasVersioning (..)
-    , HasView (..)
-    , HasVpnTunnel (..)
-    , HasWebsite (..)
-    , HasXxxConfig (..)
-    , HasZone (..)
+    , P.HasAccountId (..)
+    , P.HasAckDeadlineSeconds (..)
+    , P.HasAdditionalZones (..)
+    , P.HasAddonsConfig (..)
+    , P.HasAddress (..)
+    , P.HasAddressType (..)
+    , P.HasAdvertisedRoutePriority (..)
+    , P.HasAllow (..)
+    , P.HasAllowStoppingForUpdate (..)
+    , P.HasAttachedDisk (..)
+    , P.HasAuthoritative (..)
+    , P.HasAutoCreateRoutes (..)
+    , P.HasAutoCreateSubnetworks (..)
+    , P.HasAutoHealingPolicies (..)
+    , P.HasAutoscaling (..)
+    , P.HasAutoscalingPolicy (..)
+    , P.HasAvailableMemoryMb (..)
+    , P.HasBackend (..)
+    , P.HasBackendService (..)
+    , P.HasBackupPool (..)
+    , P.HasBaseInstanceName (..)
+    , P.HasBgp (..)
+    , P.HasBillingAccount (..)
+    , P.HasBooleanPolicy (..)
+    , P.HasBootDisk (..)
+    , P.HasBucket (..)
+    , P.HasBucketName (..)
+    , P.HasCanIpForward (..)
+    , P.HasCertificate (..)
+    , P.HasCharset (..)
+    , P.HasCheckIntervalSec (..)
+    , P.HasCluster (..)
+    , P.HasClusterConfig (..)
+    , P.HasClusterId (..)
+    , P.HasClusterIpv4Cidr (..)
+    , P.HasCollation (..)
+    , P.HasConfig (..)
+    , P.HasConnectionDrainingTimeoutSec (..)
+    , P.HasConnectionName (..)
+    , P.HasConstraint (..)
+    , P.HasCors (..)
+    , P.HasCreateTimeout (..)
+    , P.HasCredentials (..)
+    , P.HasCryptoKeyId (..)
+    , P.HasDatabaseVersion (..)
+    , P.HasDatasetId (..)
+    , P.HasDdl (..)
+    , P.HasDefaultAcl (..)
+    , P.HasDefaultService (..)
+    , P.HasDefaultTableExpirationMs (..)
+    , P.HasDeleted (..)
+    , P.HasDeny (..)
+    , P.HasDescription (..)
+    , P.HasDestRange (..)
+    , P.HasDestination (..)
+    , P.HasDestinationRanges (..)
+    , P.HasDirection (..)
+    , P.HasDisableOnDestroy (..)
+    , P.HasDisableProject (..)
+    , P.HasDisk (..)
+    , P.HasDiskEncryptionKeyRaw (..)
+    , P.HasDisplayName (..)
+    , P.HasDnsName (..)
+    , P.HasEnableCdn (..)
+    , P.HasEnableKubernetesAlpha (..)
+    , P.HasEnableLegacyAbac (..)
+    , P.HasEntryPoint (..)
+    , P.HasEventNotificationConfig (..)
+    , P.HasExpirationTime (..)
+    , P.HasFailoverRatio (..)
+    , P.HasFolder (..)
+    , P.HasFolderId (..)
+    , P.HasForceDelete (..)
+    , P.HasForceDestroy (..)
+    , P.HasFriendlyName (..)
+    , P.HasGrpcConfig (..)
+    , P.HasGuestAccelerator (..)
+    , P.HasHealthChecks (..)
+    , P.HasHealthyThreshold (..)
+    , P.HasHost (..)
+    , P.HasHostProject (..)
+    , P.HasHostRule (..)
+    , P.HasHttpConfig (..)
+    , P.HasHttpHealthCheck (..)
+    , P.HasHttpsHealthCheck (..)
+    , P.HasIap (..)
+    , P.HasIkeVersion (..)
+    , P.HasImage (..)
+    , P.HasInitialNodeCount (..)
+    , P.HasInstance' (..)
+    , P.HasInstanceDescription (..)
+    , P.HasInstanceName (..)
+    , P.HasInstanceTemplate (..)
+    , P.HasInstanceType (..)
+    , P.HasInstances (..)
+    , P.HasInterface (..)
+    , P.HasIpAddress (..)
+    , P.HasIpAllocationPolicy (..)
+    , P.HasIpCidrRange (..)
+    , P.HasIpProtocol (..)
+    , P.HasIpRange (..)
+    , P.HasIpVersion (..)
+    , P.HasIpv4Range (..)
+    , P.HasKey (..)
+    , P.HasKeyAlgorithm (..)
+    , P.HasKeyRing (..)
+    , P.HasKeyRingId (..)
+    , P.HasLabels (..)
+    , P.HasLifecycleRule (..)
+    , P.HasListPolicy (..)
+    , P.HasLoadBalancingScheme (..)
+    , P.HasLocalTrafficSelector (..)
+    , P.HasLocation (..)
+    , P.HasLogging (..)
+    , P.HasLoggingService (..)
+    , P.HasMachineType (..)
+    , P.HasMaintenancePolicy (..)
+    , P.HasManagedZone (..)
+    , P.HasManagement (..)
+    , P.HasMasterAuth (..)
+    , P.HasMasterAuthorizedNetworksConfig (..)
+    , P.HasMasterInstanceName (..)
+    , P.HasMaxWorkers (..)
+    , P.HasMember (..)
+    , P.HasMembers (..)
+    , P.HasMembers (..)
+    , P.HasMetadata (..)
+    , P.HasMetadataStartupScript (..)
+    , P.HasMinCpuPlatform (..)
+    , P.HasMinMasterVersion (..)
+    , P.HasMonitoringService (..)
+    , P.HasMqttConfig (..)
+    , P.HasName (..)
+    , P.HasNamePrefix (..)
+    , P.HasNamedPort (..)
+    , P.HasNetwork (..)
+    , P.HasNetworkInterface (..)
+    , P.HasNetworkPolicy (..)
+    , P.HasNextHopGateway (..)
+    , P.HasNextHopInstance (..)
+    , P.HasNextHopInstanceZone (..)
+    , P.HasNextHopIp (..)
+    , P.HasNextHopVpnTunnel (..)
+    , P.HasNodeConfig (..)
+    , P.HasNodeCount (..)
+    , P.HasNodePool (..)
+    , P.HasNodeVersion (..)
+    , P.HasNumNodes (..)
+    , P.HasObject (..)
+    , P.HasOnDelete (..)
+    , P.HasOpenapiConfig (..)
+    , P.HasOrgId (..)
+    , P.HasParameters (..)
+    , P.HasParent (..)
+    , P.HasPassword (..)
+    , P.HasPathMatcher (..)
+    , P.HasPeerAsn (..)
+    , P.HasPeerIp (..)
+    , P.HasPeerIpAddress (..)
+    , P.HasPeerNetwork (..)
+    , P.HasPermissions (..)
+    , P.HasPgpKey (..)
+    , P.HasPlacement (..)
+    , P.HasPolicyData (..)
+    , P.HasPort (..)
+    , P.HasPortName (..)
+    , P.HasPortRange (..)
+    , P.HasPorts (..)
+    , P.HasPredefinedAcl (..)
+    , P.HasPriority (..)
+    , P.HasPrivateIpGoogleAccess (..)
+    , P.HasPrivateKey (..)
+    , P.HasPrivateKeyType (..)
+    , P.HasProject (..)
+    , P.HasProjectId (..)
+    , P.HasProtocOutput (..)
+    , P.HasProtocol (..)
+    , P.HasProxyHeader (..)
+    , P.HasPublicKeyType (..)
+    , P.HasPushConfig (..)
+    , P.HasRawDisk (..)
+    , P.HasRegion (..)
+    , P.HasRemoteTrafficSelector (..)
+    , P.HasReplicaConfiguration (..)
+    , P.HasRequestPath (..)
+    , P.HasRole (..)
+    , P.HasRoleEntity (..)
+    , P.HasRoleId (..)
+    , P.HasRotationPeriod (..)
+    , P.HasRouter (..)
+    , P.HasRoutingMode (..)
+    , P.HasRrdatas (..)
+    , P.HasScheduling (..)
+    , P.HasScheduling (..)
+    , P.HasSchema (..)
+    , P.HasScratchDisk (..)
+    , P.HasSecondaryIpRange (..)
+    , P.HasService (..)
+    , P.HasServiceAccount (..)
+    , P.HasServiceAccountId (..)
+    , P.HasServiceName (..)
+    , P.HasServiceProject (..)
+    , P.HasServices (..)
+    , P.HasSessionAffinity (..)
+    , P.HasSettings (..)
+    , P.HasSharedSecret (..)
+    , P.HasSize (..)
+    , P.HasSkipDelete (..)
+    , P.HasSnapshot (..)
+    , P.HasSnapshotEncryptionKeyRaw (..)
+    , P.HasSourceArchiveBucket (..)
+    , P.HasSourceArchiveObject (..)
+    , P.HasSourceDisk (..)
+    , P.HasSourceDiskEncryptionKeyRaw (..)
+    , P.HasSourceRanges (..)
+    , P.HasSourceServiceAccounts (..)
+    , P.HasSourceTags (..)
+    , P.HasSplitKeys (..)
+    , P.HasSslCertificates (..)
+    , P.HasSslHealthCheck (..)
+    , P.HasStage (..)
+    , P.HasStateNotificationConfig (..)
+    , P.HasStorageClass (..)
+    , P.HasStorageType (..)
+    , P.HasSubnetwork (..)
+    , P.HasTableId (..)
+    , P.HasTags (..)
+    , P.HasTarget (..)
+    , P.HasTargetPools (..)
+    , P.HasTargetServiceAccounts (..)
+    , P.HasTargetSize (..)
+    , P.HasTargetTags (..)
+    , P.HasTargetVpnGateway (..)
+    , P.HasTcpHealthCheck (..)
+    , P.HasTempGcsLocation (..)
+    , P.HasTemplateGcsPath (..)
+    , P.HasTest (..)
+    , P.HasText (..)
+    , P.HasTimePartitioning (..)
+    , P.HasTimeout (..)
+    , P.HasTimeoutSec (..)
+    , P.HasTitle (..)
+    , P.HasTopic (..)
+    , P.HasTriggerBucket (..)
+    , P.HasTriggerHttp (..)
+    , P.HasTriggerTopic (..)
+    , P.HasTtl (..)
+    , P.HasType' (..)
+    , P.HasUnhealthyThreshold (..)
+    , P.HasUpdateStrategy (..)
+    , P.HasUrlMap (..)
+    , P.HasValue (..)
+    , P.HasVersion (..)
+    , P.HasVersioning (..)
+    , P.HasView (..)
+    , P.HasVpnTunnel (..)
+    , P.HasWebsite (..)
+    , P.HasXxxConfig (..)
+    , P.HasZone (..)
 
     -- ** Computed Attributes
-    , HasComputedAddress (..)
-    , HasComputedApis (..)
-    , HasComputedAttachedDisk0DiskEncryptionKeySha256 (..)
-    , HasComputedBootDiskDiskEncryptionKeySha256 (..)
-    , HasComputedCertificateId (..)
-    , HasComputedClusterConfigBucket (..)
-    , HasComputedClusterConfigMasterConfigInstanceNames (..)
-    , HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames (..)
-    , HasComputedClusterConfigSoftwareConfigProperties (..)
-    , HasComputedClusterConfigWorkerConfigInstanceNames (..)
-    , HasComputedConfigId (..)
-    , HasComputedCpuPlatform (..)
-    , HasComputedCrc32c (..)
-    , HasComputedCreateTime (..)
-    , HasComputedCreationTime (..)
-    , HasComputedDetailedStatus (..)
-    , HasComputedDisk0DiskEncryptionKeySha256 (..)
-    , HasComputedDiskEncryptionKeySha256 (..)
-    , HasComputedDnsAddress (..)
-    , HasComputedDriverControlsFilesUri (..)
-    , HasComputedDriverOutputResourceUri (..)
-    , HasComputedEmail (..)
-    , HasComputedEndpoint (..)
-    , HasComputedEndpoints (..)
-    , HasComputedEtag (..)
-    , HasComputedFingerprint (..)
-    , HasComputedGatewayAddress (..)
-    , HasComputedGatewayIpv4 (..)
-    , HasComputedHttpsTriggerUrl (..)
-    , HasComputedId (..)
-    , HasComputedInstanceGroup (..)
-    , HasComputedInstanceGroupUrls (..)
-    , HasComputedInstanceId (..)
-    , HasComputedIpAddress (..)
-    , HasComputedIpAddress0IpAddress (..)
-    , HasComputedIpAddress0TimeToRetire (..)
-    , HasComputedLabelFingerprint (..)
-    , HasComputedLastModifiedTime (..)
-    , HasComputedLifecycleState (..)
-    , HasComputedLocation (..)
-    , HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration (..)
-    , HasComputedMapId (..)
-    , HasComputedMasterAuth0ClientCertificate (..)
-    , HasComputedMasterAuth0ClientKey (..)
-    , HasComputedMasterAuth0ClusterCaCertificate (..)
-    , HasComputedMasterVersion (..)
-    , HasComputedMd5hash (..)
-    , HasComputedMetadataFingerprint (..)
-    , HasComputedName (..)
-    , HasComputedNameServers (..)
-    , HasComputedNetworkInterface0AccessConfig0AssignedNatIp (..)
-    , HasComputedNetworkInterface0Address (..)
-    , HasComputedNextHopNetwork (..)
-    , HasComputedNumBytes (..)
-    , HasComputedNumLongTermBytes (..)
-    , HasComputedNumRows (..)
-    , HasComputedNumber (..)
-    , HasComputedPath (..)
-    , HasComputedPolicyEtag (..)
-    , HasComputedPrivateKey (..)
-    , HasComputedPrivateKeyEncrypted (..)
-    , HasComputedPrivateKeyFingerprint (..)
-    , HasComputedProject (..)
-    , HasComputedProxyId (..)
-    , HasComputedPublicKey (..)
-    , HasComputedReference0ClusterUuid (..)
-    , HasComputedRegion (..)
-    , HasComputedRestorePolicy (..)
-    , HasComputedSelfLink (..)
-    , HasComputedSettingsVersion (..)
-    , HasComputedSize (..)
-    , HasComputedSnapshotEncryptionKeySha256 (..)
-    , HasComputedSourceDiskEncryptionKeySha256 (..)
-    , HasComputedSourceDiskLink (..)
-    , HasComputedState (..)
-    , HasComputedStateDetails (..)
-    , HasComputedStatus0Details (..)
-    , HasComputedStatus0State (..)
-    , HasComputedStatus0StateStartTime (..)
-    , HasComputedStatus0Substate (..)
-    , HasComputedTagsFingerprint (..)
-    , HasComputedType' (..)
-    , HasComputedUniqueId (..)
-    , HasComputedUpdateTime (..)
-    , HasComputedUrl (..)
-    , HasComputedUsers (..)
-    , HasComputedValidAfter (..)
-    , HasComputedValidBefore (..)
-    , HasComputedWriterIdentity (..)
+    , P.HasComputedAddress (..)
+    , P.HasComputedApis (..)
+    , P.HasComputedAttachedDisk0DiskEncryptionKeySha256 (..)
+    , P.HasComputedBootDiskDiskEncryptionKeySha256 (..)
+    , P.HasComputedCertificateId (..)
+    , P.HasComputedClusterConfigBucket (..)
+    , P.HasComputedClusterConfigMasterConfigInstanceNames (..)
+    , P.HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames (..)
+    , P.HasComputedClusterConfigSoftwareConfigProperties (..)
+    , P.HasComputedClusterConfigWorkerConfigInstanceNames (..)
+    , P.HasComputedConfigId (..)
+    , P.HasComputedCpuPlatform (..)
+    , P.HasComputedCrc32c (..)
+    , P.HasComputedCreateTime (..)
+    , P.HasComputedCreationTime (..)
+    , P.HasComputedDetailedStatus (..)
+    , P.HasComputedDisk0DiskEncryptionKeySha256 (..)
+    , P.HasComputedDiskEncryptionKeySha256 (..)
+    , P.HasComputedDnsAddress (..)
+    , P.HasComputedDriverControlsFilesUri (..)
+    , P.HasComputedDriverOutputResourceUri (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEndpoint (..)
+    , P.HasComputedEndpoints (..)
+    , P.HasComputedEtag (..)
+    , P.HasComputedFingerprint (..)
+    , P.HasComputedGatewayAddress (..)
+    , P.HasComputedGatewayIpv4 (..)
+    , P.HasComputedHttpsTriggerUrl (..)
+    , P.HasComputedId (..)
+    , P.HasComputedInstanceGroup (..)
+    , P.HasComputedInstanceGroupUrls (..)
+    , P.HasComputedInstanceId (..)
+    , P.HasComputedIpAddress (..)
+    , P.HasComputedIpAddress0IpAddress (..)
+    , P.HasComputedIpAddress0TimeToRetire (..)
+    , P.HasComputedLabelFingerprint (..)
+    , P.HasComputedLastModifiedTime (..)
+    , P.HasComputedLifecycleState (..)
+    , P.HasComputedLocation (..)
+    , P.HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration (..)
+    , P.HasComputedMapId (..)
+    , P.HasComputedMasterAuth0ClientCertificate (..)
+    , P.HasComputedMasterAuth0ClientKey (..)
+    , P.HasComputedMasterAuth0ClusterCaCertificate (..)
+    , P.HasComputedMasterVersion (..)
+    , P.HasComputedMd5hash (..)
+    , P.HasComputedMetadataFingerprint (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNameServers (..)
+    , P.HasComputedNetworkInterface0AccessConfig0AssignedNatIp (..)
+    , P.HasComputedNetworkInterface0Address (..)
+    , P.HasComputedNextHopNetwork (..)
+    , P.HasComputedNumBytes (..)
+    , P.HasComputedNumLongTermBytes (..)
+    , P.HasComputedNumRows (..)
+    , P.HasComputedNumber (..)
+    , P.HasComputedPath (..)
+    , P.HasComputedPolicyEtag (..)
+    , P.HasComputedPrivateKey (..)
+    , P.HasComputedPrivateKeyEncrypted (..)
+    , P.HasComputedPrivateKeyFingerprint (..)
+    , P.HasComputedProject (..)
+    , P.HasComputedProxyId (..)
+    , P.HasComputedPublicKey (..)
+    , P.HasComputedReference0ClusterUuid (..)
+    , P.HasComputedRegion (..)
+    , P.HasComputedRestorePolicy (..)
+    , P.HasComputedSelfLink (..)
+    , P.HasComputedSettingsVersion (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedSnapshotEncryptionKeySha256 (..)
+    , P.HasComputedSourceDiskEncryptionKeySha256 (..)
+    , P.HasComputedSourceDiskLink (..)
+    , P.HasComputedState (..)
+    , P.HasComputedStateDetails (..)
+    , P.HasComputedStatus0Details (..)
+    , P.HasComputedStatus0State (..)
+    , P.HasComputedStatus0StateStartTime (..)
+    , P.HasComputedStatus0Substate (..)
+    , P.HasComputedTagsFingerprint (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUniqueId (..)
+    , P.HasComputedUpdateTime (..)
+    , P.HasComputedUrl (..)
+    , P.HasComputedUsers (..)
+    , P.HasComputedValidAfter (..)
+    , P.HasComputedValidBefore (..)
+    , P.HasComputedWriterIdentity (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word as TF
-import qualified GHC.Base as TF
-import qualified Numeric.Natural as TF
-import qualified Terrafomo.Google.Types as TF
-import qualified Terrafomo.Google.Provider as TF
-import qualified Terrafomo.Resource as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.IP as TF
-import qualified Terrafomo.Meta as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Resource as TF
+import Terrafomo.Google.Types as P
+import qualified Terrafomo.Google.Lens as P
+import qualified Terrafomo.Google.Provider as P
+import qualified Data.Word as P
+import qualified GHC.Base as P
+import qualified Numeric.Natural as P
+import qualified Terrafomo.IP as P
+
 import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Resource as TF
 
 {- | The @google_bigquery_dataset@ Google resource.
 
@@ -713,50 +712,50 @@ instance TF.ToHCL (BigqueryDatasetResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasDatasetId (BigqueryDatasetResource s) s Text where
+instance P.HasDatasetId (BigqueryDatasetResource s) s Text where
     datasetId =
         lens (_dataset_id :: BigqueryDatasetResource s -> TF.Attribute s Text)
             (\s a -> s { _dataset_id = a } :: BigqueryDatasetResource s)
 
-instance HasDefaultTableExpirationMs (BigqueryDatasetResource s) s Text where
+instance P.HasDefaultTableExpirationMs (BigqueryDatasetResource s) s Text where
     defaultTableExpirationMs =
         lens (_default_table_expiration_ms :: BigqueryDatasetResource s -> TF.Attribute s Text)
             (\s a -> s { _default_table_expiration_ms = a } :: BigqueryDatasetResource s)
 
-instance HasDescription (BigqueryDatasetResource s) s Text where
+instance P.HasDescription (BigqueryDatasetResource s) s Text where
     description =
         lens (_description :: BigqueryDatasetResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: BigqueryDatasetResource s)
 
-instance HasFriendlyName (BigqueryDatasetResource s) s Text where
+instance P.HasFriendlyName (BigqueryDatasetResource s) s Text where
     friendlyName =
         lens (_friendly_name :: BigqueryDatasetResource s -> TF.Attribute s Text)
             (\s a -> s { _friendly_name = a } :: BigqueryDatasetResource s)
 
-instance HasLabels (BigqueryDatasetResource s) s Text where
+instance P.HasLabels (BigqueryDatasetResource s) s Text where
     labels =
         lens (_labels :: BigqueryDatasetResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: BigqueryDatasetResource s)
 
-instance HasLocation (BigqueryDatasetResource s) s Text where
+instance P.HasLocation (BigqueryDatasetResource s) s Text where
     location =
         lens (_location :: BigqueryDatasetResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: BigqueryDatasetResource s)
 
-instance HasProject (BigqueryDatasetResource s) s Text where
+instance P.HasProject (BigqueryDatasetResource s) s Text where
     project =
         lens (_project :: BigqueryDatasetResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: BigqueryDatasetResource s)
 
-instance HasComputedCreationTime (BigqueryDatasetResource s) Text
+instance P.HasComputedCreationTime (BigqueryDatasetResource s) Text
 
-instance HasComputedEtag (BigqueryDatasetResource s) Text
+instance P.HasComputedEtag (BigqueryDatasetResource s) Text
 
-instance HasComputedLastModifiedTime (BigqueryDatasetResource s) Text
+instance P.HasComputedLastModifiedTime (BigqueryDatasetResource s) Text
 
-instance HasComputedSelfLink (BigqueryDatasetResource s) Text
+instance P.HasComputedSelfLink (BigqueryDatasetResource s) Text
 
-bigqueryDatasetResource :: TF.Resource TF.Google (BigqueryDatasetResource s)
+bigqueryDatasetResource :: TF.Resource P.Google (BigqueryDatasetResource s)
 bigqueryDatasetResource =
     TF.newResource "google_bigquery_dataset" $
         BigqueryDatasetResource {
@@ -812,75 +811,75 @@ instance TF.ToHCL (BigqueryTableResource s) where
         , TF.attribute "view" _view
         ]
 
-instance HasDatasetId (BigqueryTableResource s) s Text where
+instance P.HasDatasetId (BigqueryTableResource s) s Text where
     datasetId =
         lens (_dataset_id :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _dataset_id = a } :: BigqueryTableResource s)
 
-instance HasDescription (BigqueryTableResource s) s Text where
+instance P.HasDescription (BigqueryTableResource s) s Text where
     description =
         lens (_description :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: BigqueryTableResource s)
 
-instance HasExpirationTime (BigqueryTableResource s) s Text where
+instance P.HasExpirationTime (BigqueryTableResource s) s Text where
     expirationTime =
         lens (_expiration_time :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _expiration_time = a } :: BigqueryTableResource s)
 
-instance HasFriendlyName (BigqueryTableResource s) s Text where
+instance P.HasFriendlyName (BigqueryTableResource s) s Text where
     friendlyName =
         lens (_friendly_name :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _friendly_name = a } :: BigqueryTableResource s)
 
-instance HasLabels (BigqueryTableResource s) s Text where
+instance P.HasLabels (BigqueryTableResource s) s Text where
     labels =
         lens (_labels :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: BigqueryTableResource s)
 
-instance HasProject (BigqueryTableResource s) s Text where
+instance P.HasProject (BigqueryTableResource s) s Text where
     project =
         lens (_project :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: BigqueryTableResource s)
 
-instance HasSchema (BigqueryTableResource s) s Text where
+instance P.HasSchema (BigqueryTableResource s) s Text where
     schema =
         lens (_schema :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _schema = a } :: BigqueryTableResource s)
 
-instance HasTableId (BigqueryTableResource s) s Text where
+instance P.HasTableId (BigqueryTableResource s) s Text where
     tableId =
         lens (_table_id :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _table_id = a } :: BigqueryTableResource s)
 
-instance HasTimePartitioning (BigqueryTableResource s) s Text where
+instance P.HasTimePartitioning (BigqueryTableResource s) s Text where
     timePartitioning =
         lens (_time_partitioning :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _time_partitioning = a } :: BigqueryTableResource s)
 
-instance HasView (BigqueryTableResource s) s Text where
+instance P.HasView (BigqueryTableResource s) s Text where
     view =
         lens (_view :: BigqueryTableResource s -> TF.Attribute s Text)
             (\s a -> s { _view = a } :: BigqueryTableResource s)
 
-instance HasComputedCreationTime (BigqueryTableResource s) Text
+instance P.HasComputedCreationTime (BigqueryTableResource s) Text
 
-instance HasComputedEtag (BigqueryTableResource s) Text
+instance P.HasComputedEtag (BigqueryTableResource s) Text
 
-instance HasComputedLastModifiedTime (BigqueryTableResource s) Text
+instance P.HasComputedLastModifiedTime (BigqueryTableResource s) Text
 
-instance HasComputedLocation (BigqueryTableResource s) Text
+instance P.HasComputedLocation (BigqueryTableResource s) Text
 
-instance HasComputedNumBytes (BigqueryTableResource s) Text
+instance P.HasComputedNumBytes (BigqueryTableResource s) Text
 
-instance HasComputedNumLongTermBytes (BigqueryTableResource s) Text
+instance P.HasComputedNumLongTermBytes (BigqueryTableResource s) Text
 
-instance HasComputedNumRows (BigqueryTableResource s) Text
+instance P.HasComputedNumRows (BigqueryTableResource s) Text
 
-instance HasComputedSelfLink (BigqueryTableResource s) Text
+instance P.HasComputedSelfLink (BigqueryTableResource s) Text
 
-instance HasComputedType' (BigqueryTableResource s) Text
+instance P.HasComputedType' (BigqueryTableResource s) Text
 
-bigqueryTableResource :: TF.Resource TF.Google (BigqueryTableResource s)
+bigqueryTableResource :: TF.Resource P.Google (BigqueryTableResource s)
 bigqueryTableResource =
     TF.newResource "google_bigquery_table" $
         BigqueryTableResource {
@@ -933,47 +932,47 @@ instance TF.ToHCL (BigtableInstanceResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasClusterId (BigtableInstanceResource s) s Text where
+instance P.HasClusterId (BigtableInstanceResource s) s Text where
     clusterId =
         lens (_cluster_id :: BigtableInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _cluster_id = a } :: BigtableInstanceResource s)
 
-instance HasDisplayName (BigtableInstanceResource s) s Text where
+instance P.HasDisplayName (BigtableInstanceResource s) s Text where
     displayName =
         lens (_display_name :: BigtableInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _display_name = a } :: BigtableInstanceResource s)
 
-instance HasInstanceType (BigtableInstanceResource s) s Text where
+instance P.HasInstanceType (BigtableInstanceResource s) s Text where
     instanceType =
         lens (_instance_type :: BigtableInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_type = a } :: BigtableInstanceResource s)
 
-instance HasName (BigtableInstanceResource s) s Text where
+instance P.HasName (BigtableInstanceResource s) s Text where
     name =
         lens (_name :: BigtableInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: BigtableInstanceResource s)
 
-instance HasNumNodes (BigtableInstanceResource s) s Text where
+instance P.HasNumNodes (BigtableInstanceResource s) s Text where
     numNodes =
         lens (_num_nodes :: BigtableInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _num_nodes = a } :: BigtableInstanceResource s)
 
-instance HasProject (BigtableInstanceResource s) s Text where
+instance P.HasProject (BigtableInstanceResource s) s Text where
     project =
         lens (_project :: BigtableInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: BigtableInstanceResource s)
 
-instance HasStorageType (BigtableInstanceResource s) s Text where
+instance P.HasStorageType (BigtableInstanceResource s) s Text where
     storageType =
         lens (_storage_type :: BigtableInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_type = a } :: BigtableInstanceResource s)
 
-instance HasZone (BigtableInstanceResource s) s Text where
+instance P.HasZone (BigtableInstanceResource s) s Text where
     zone =
         lens (_zone :: BigtableInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: BigtableInstanceResource s)
 
-bigtableInstanceResource :: TF.Resource TF.Google (BigtableInstanceResource s)
+bigtableInstanceResource :: TF.Resource P.Google (BigtableInstanceResource s)
 bigtableInstanceResource =
     TF.newResource "google_bigtable_instance" $
         BigtableInstanceResource {
@@ -1012,27 +1011,27 @@ instance TF.ToHCL (BigtableTableResource s) where
         , TF.attribute "split_keys" _split_keys
         ]
 
-instance HasInstanceName (BigtableTableResource s) s Text where
+instance P.HasInstanceName (BigtableTableResource s) s Text where
     instanceName =
         lens (_instance_name :: BigtableTableResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_name = a } :: BigtableTableResource s)
 
-instance HasName (BigtableTableResource s) s Text where
+instance P.HasName (BigtableTableResource s) s Text where
     name =
         lens (_name :: BigtableTableResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: BigtableTableResource s)
 
-instance HasProject (BigtableTableResource s) s Text where
+instance P.HasProject (BigtableTableResource s) s Text where
     project =
         lens (_project :: BigtableTableResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: BigtableTableResource s)
 
-instance HasSplitKeys (BigtableTableResource s) s Text where
+instance P.HasSplitKeys (BigtableTableResource s) s Text where
     splitKeys =
         lens (_split_keys :: BigtableTableResource s -> TF.Attribute s Text)
             (\s a -> s { _split_keys = a } :: BigtableTableResource s)
 
-bigtableTableResource :: TF.Resource TF.Google (BigtableTableResource s)
+bigtableTableResource :: TF.Resource P.Google (BigtableTableResource s)
 bigtableTableResource =
     TF.newResource "google_bigtable_table" $
         BigtableTableResource {
@@ -1088,68 +1087,68 @@ instance TF.ToHCL (CloudfunctionsFunctionResource s) where
         , TF.attribute "trigger_topic" _trigger_topic
         ]
 
-instance HasAvailableMemoryMb (CloudfunctionsFunctionResource s) s Text where
+instance P.HasAvailableMemoryMb (CloudfunctionsFunctionResource s) s Text where
     availableMemoryMb =
         lens (_available_memory_mb :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _available_memory_mb = a } :: CloudfunctionsFunctionResource s)
 
-instance HasDescription (CloudfunctionsFunctionResource s) s Text where
+instance P.HasDescription (CloudfunctionsFunctionResource s) s Text where
     description =
         lens (_description :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: CloudfunctionsFunctionResource s)
 
-instance HasEntryPoint (CloudfunctionsFunctionResource s) s Text where
+instance P.HasEntryPoint (CloudfunctionsFunctionResource s) s Text where
     entryPoint =
         lens (_entry_point :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _entry_point = a } :: CloudfunctionsFunctionResource s)
 
-instance HasLabels (CloudfunctionsFunctionResource s) s Text where
+instance P.HasLabels (CloudfunctionsFunctionResource s) s Text where
     labels =
         lens (_labels :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: CloudfunctionsFunctionResource s)
 
-instance HasName (CloudfunctionsFunctionResource s) s Text where
+instance P.HasName (CloudfunctionsFunctionResource s) s Text where
     name =
         lens (_name :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CloudfunctionsFunctionResource s)
 
-instance HasSourceArchiveBucket (CloudfunctionsFunctionResource s) s Text where
+instance P.HasSourceArchiveBucket (CloudfunctionsFunctionResource s) s Text where
     sourceArchiveBucket =
         lens (_source_archive_bucket :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _source_archive_bucket = a } :: CloudfunctionsFunctionResource s)
 
-instance HasSourceArchiveObject (CloudfunctionsFunctionResource s) s Text where
+instance P.HasSourceArchiveObject (CloudfunctionsFunctionResource s) s Text where
     sourceArchiveObject =
         lens (_source_archive_object :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _source_archive_object = a } :: CloudfunctionsFunctionResource s)
 
-instance HasTimeout (CloudfunctionsFunctionResource s) s Text where
+instance P.HasTimeout (CloudfunctionsFunctionResource s) s Text where
     timeout =
         lens (_timeout :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _timeout = a } :: CloudfunctionsFunctionResource s)
 
-instance HasTriggerBucket (CloudfunctionsFunctionResource s) s Text where
+instance P.HasTriggerBucket (CloudfunctionsFunctionResource s) s Text where
     triggerBucket =
         lens (_trigger_bucket :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _trigger_bucket = a } :: CloudfunctionsFunctionResource s)
 
-instance HasTriggerHttp (CloudfunctionsFunctionResource s) s Text where
+instance P.HasTriggerHttp (CloudfunctionsFunctionResource s) s Text where
     triggerHttp =
         lens (_trigger_http :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _trigger_http = a } :: CloudfunctionsFunctionResource s)
 
-instance HasTriggerTopic (CloudfunctionsFunctionResource s) s Text where
+instance P.HasTriggerTopic (CloudfunctionsFunctionResource s) s Text where
     triggerTopic =
         lens (_trigger_topic :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
             (\s a -> s { _trigger_topic = a } :: CloudfunctionsFunctionResource s)
 
-instance HasComputedHttpsTriggerUrl (CloudfunctionsFunctionResource s) Text
+instance P.HasComputedHttpsTriggerUrl (CloudfunctionsFunctionResource s) Text
 
-instance HasComputedProject (CloudfunctionsFunctionResource s) Text
+instance P.HasComputedProject (CloudfunctionsFunctionResource s) Text
 
-instance HasComputedRegion (CloudfunctionsFunctionResource s) Text
+instance P.HasComputedRegion (CloudfunctionsFunctionResource s) Text
 
-cloudfunctionsFunctionResource :: TF.Resource TF.Google (CloudfunctionsFunctionResource s)
+cloudfunctionsFunctionResource :: TF.Resource P.Google (CloudfunctionsFunctionResource s)
 cloudfunctionsFunctionResource =
     TF.newResource "google_cloudfunctions_function" $
         CloudfunctionsFunctionResource {
@@ -1200,41 +1199,41 @@ instance TF.ToHCL (ComputeAddressResource s) where
         , TF.attribute "subnetwork" _subnetwork
         ]
 
-instance HasAddress (ComputeAddressResource s) s Text where
+instance P.HasAddress (ComputeAddressResource s) s Text where
     address =
         lens (_address :: ComputeAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _address = a } :: ComputeAddressResource s)
 
-instance HasAddressType (ComputeAddressResource s) s Text where
+instance P.HasAddressType (ComputeAddressResource s) s Text where
     addressType =
         lens (_address_type :: ComputeAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _address_type = a } :: ComputeAddressResource s)
 
-instance HasName (ComputeAddressResource s) s Text where
+instance P.HasName (ComputeAddressResource s) s Text where
     name =
         lens (_name :: ComputeAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeAddressResource s)
 
-instance HasProject (ComputeAddressResource s) s Text where
+instance P.HasProject (ComputeAddressResource s) s Text where
     project =
         lens (_project :: ComputeAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeAddressResource s)
 
-instance HasRegion (ComputeAddressResource s) s Text where
+instance P.HasRegion (ComputeAddressResource s) s Text where
     region =
         lens (_region :: ComputeAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeAddressResource s)
 
-instance HasSubnetwork (ComputeAddressResource s) s Text where
+instance P.HasSubnetwork (ComputeAddressResource s) s Text where
     subnetwork =
         lens (_subnetwork :: ComputeAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _subnetwork = a } :: ComputeAddressResource s)
 
-instance HasComputedAddress (ComputeAddressResource s) Text
+instance P.HasComputedAddress (ComputeAddressResource s) Text
 
-instance HasComputedSelfLink (ComputeAddressResource s) Text
+instance P.HasComputedSelfLink (ComputeAddressResource s) Text
 
-computeAddressResource :: TF.Resource TF.Google (ComputeAddressResource s)
+computeAddressResource :: TF.Resource P.Google (ComputeAddressResource s)
 computeAddressResource =
     TF.newResource "google_compute_address" $
         ComputeAddressResource {
@@ -1282,39 +1281,39 @@ instance TF.ToHCL (ComputeAutoscalerResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasAutoscalingPolicy (ComputeAutoscalerResource s) s Text where
+instance P.HasAutoscalingPolicy (ComputeAutoscalerResource s) s Text where
     autoscalingPolicy =
         lens (_autoscaling_policy :: ComputeAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _autoscaling_policy = a } :: ComputeAutoscalerResource s)
 
-instance HasDescription (ComputeAutoscalerResource s) s Text where
+instance P.HasDescription (ComputeAutoscalerResource s) s Text where
     description =
         lens (_description :: ComputeAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeAutoscalerResource s)
 
-instance HasName (ComputeAutoscalerResource s) s Text where
+instance P.HasName (ComputeAutoscalerResource s) s Text where
     name =
         lens (_name :: ComputeAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeAutoscalerResource s)
 
-instance HasProject (ComputeAutoscalerResource s) s Text where
+instance P.HasProject (ComputeAutoscalerResource s) s Text where
     project =
         lens (_project :: ComputeAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeAutoscalerResource s)
 
-instance HasTarget (ComputeAutoscalerResource s) s Text where
+instance P.HasTarget (ComputeAutoscalerResource s) s Text where
     target =
         lens (_target :: ComputeAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _target = a } :: ComputeAutoscalerResource s)
 
-instance HasZone (ComputeAutoscalerResource s) s Text where
+instance P.HasZone (ComputeAutoscalerResource s) s Text where
     zone =
         lens (_zone :: ComputeAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ComputeAutoscalerResource s)
 
-instance HasComputedSelfLink (ComputeAutoscalerResource s) Text
+instance P.HasComputedSelfLink (ComputeAutoscalerResource s) Text
 
-computeAutoscalerResource :: TF.Resource TF.Google (ComputeAutoscalerResource s)
+computeAutoscalerResource :: TF.Resource P.Google (ComputeAutoscalerResource s)
 computeAutoscalerResource =
     TF.newResource "google_compute_autoscaler" $
         ComputeAutoscalerResource {
@@ -1356,34 +1355,34 @@ instance TF.ToHCL (ComputeBackendBucketResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasBucketName (ComputeBackendBucketResource s) s Text where
+instance P.HasBucketName (ComputeBackendBucketResource s) s Text where
     bucketName =
         lens (_bucket_name :: ComputeBackendBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _bucket_name = a } :: ComputeBackendBucketResource s)
 
-instance HasDescription (ComputeBackendBucketResource s) s Text where
+instance P.HasDescription (ComputeBackendBucketResource s) s Text where
     description =
         lens (_description :: ComputeBackendBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeBackendBucketResource s)
 
-instance HasEnableCdn (ComputeBackendBucketResource s) s Text where
+instance P.HasEnableCdn (ComputeBackendBucketResource s) s Text where
     enableCdn =
         lens (_enable_cdn :: ComputeBackendBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_cdn = a } :: ComputeBackendBucketResource s)
 
-instance HasName (ComputeBackendBucketResource s) s Text where
+instance P.HasName (ComputeBackendBucketResource s) s Text where
     name =
         lens (_name :: ComputeBackendBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeBackendBucketResource s)
 
-instance HasProject (ComputeBackendBucketResource s) s Text where
+instance P.HasProject (ComputeBackendBucketResource s) s Text where
     project =
         lens (_project :: ComputeBackendBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeBackendBucketResource s)
 
-instance HasComputedSelfLink (ComputeBackendBucketResource s) Text
+instance P.HasComputedSelfLink (ComputeBackendBucketResource s) Text
 
-computeBackendBucketResource :: TF.Resource TF.Google (ComputeBackendBucketResource s)
+computeBackendBucketResource :: TF.Resource P.Google (ComputeBackendBucketResource s)
 computeBackendBucketResource =
     TF.newResource "google_compute_backend_bucket" $
         ComputeBackendBucketResource {
@@ -1447,71 +1446,71 @@ instance TF.ToHCL (ComputeBackendServiceResource s) where
         , TF.attribute "timeout_sec" _timeout_sec
         ]
 
-instance HasBackend (ComputeBackendServiceResource s) s Text where
+instance P.HasBackend (ComputeBackendServiceResource s) s Text where
     backend =
         lens (_backend :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _backend = a } :: ComputeBackendServiceResource s)
 
-instance HasConnectionDrainingTimeoutSec (ComputeBackendServiceResource s) s Text where
+instance P.HasConnectionDrainingTimeoutSec (ComputeBackendServiceResource s) s Text where
     connectionDrainingTimeoutSec =
         lens (_connection_draining_timeout_sec :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _connection_draining_timeout_sec = a } :: ComputeBackendServiceResource s)
 
-instance HasDescription (ComputeBackendServiceResource s) s Text where
+instance P.HasDescription (ComputeBackendServiceResource s) s Text where
     description =
         lens (_description :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeBackendServiceResource s)
 
-instance HasEnableCdn (ComputeBackendServiceResource s) s Text where
+instance P.HasEnableCdn (ComputeBackendServiceResource s) s Text where
     enableCdn =
         lens (_enable_cdn :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_cdn = a } :: ComputeBackendServiceResource s)
 
-instance HasHealthChecks (ComputeBackendServiceResource s) s Text where
+instance P.HasHealthChecks (ComputeBackendServiceResource s) s Text where
     healthChecks =
         lens (_health_checks :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _health_checks = a } :: ComputeBackendServiceResource s)
 
-instance HasIap (ComputeBackendServiceResource s) s Text where
+instance P.HasIap (ComputeBackendServiceResource s) s Text where
     iap =
         lens (_iap :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _iap = a } :: ComputeBackendServiceResource s)
 
-instance HasName (ComputeBackendServiceResource s) s Text where
+instance P.HasName (ComputeBackendServiceResource s) s Text where
     name =
         lens (_name :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeBackendServiceResource s)
 
-instance HasPortName (ComputeBackendServiceResource s) s Text where
+instance P.HasPortName (ComputeBackendServiceResource s) s Text where
     portName =
         lens (_port_name :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _port_name = a } :: ComputeBackendServiceResource s)
 
-instance HasProject (ComputeBackendServiceResource s) s Text where
+instance P.HasProject (ComputeBackendServiceResource s) s Text where
     project =
         lens (_project :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeBackendServiceResource s)
 
-instance HasProtocol (ComputeBackendServiceResource s) s Text where
+instance P.HasProtocol (ComputeBackendServiceResource s) s Text where
     protocol =
         lens (_protocol :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: ComputeBackendServiceResource s)
 
-instance HasSessionAffinity (ComputeBackendServiceResource s) s Text where
+instance P.HasSessionAffinity (ComputeBackendServiceResource s) s Text where
     sessionAffinity =
         lens (_session_affinity :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _session_affinity = a } :: ComputeBackendServiceResource s)
 
-instance HasTimeoutSec (ComputeBackendServiceResource s) s Text where
+instance P.HasTimeoutSec (ComputeBackendServiceResource s) s Text where
     timeoutSec =
         lens (_timeout_sec :: ComputeBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _timeout_sec = a } :: ComputeBackendServiceResource s)
 
-instance HasComputedFingerprint (ComputeBackendServiceResource s) Text
+instance P.HasComputedFingerprint (ComputeBackendServiceResource s) Text
 
-instance HasComputedSelfLink (ComputeBackendServiceResource s) Text
+instance P.HasComputedSelfLink (ComputeBackendServiceResource s) Text
 
-computeBackendServiceResource :: TF.Resource TF.Google (ComputeBackendServiceResource s)
+computeBackendServiceResource :: TF.Resource P.Google (ComputeBackendServiceResource s)
 computeBackendServiceResource =
     TF.newResource "google_compute_backend_service" $
         ComputeBackendServiceResource {
@@ -1572,60 +1571,60 @@ instance TF.ToHCL (ComputeDiskResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasDiskEncryptionKeyRaw (ComputeDiskResource s) s Text where
+instance P.HasDiskEncryptionKeyRaw (ComputeDiskResource s) s Text where
     diskEncryptionKeyRaw =
         lens (_disk_encryption_key_raw :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _disk_encryption_key_raw = a } :: ComputeDiskResource s)
 
-instance HasImage (ComputeDiskResource s) s Text where
+instance P.HasImage (ComputeDiskResource s) s Text where
     image =
         lens (_image :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _image = a } :: ComputeDiskResource s)
 
-instance HasLabels (ComputeDiskResource s) s Text where
+instance P.HasLabels (ComputeDiskResource s) s Text where
     labels =
         lens (_labels :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: ComputeDiskResource s)
 
-instance HasName (ComputeDiskResource s) s Text where
+instance P.HasName (ComputeDiskResource s) s Text where
     name =
         lens (_name :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeDiskResource s)
 
-instance HasProject (ComputeDiskResource s) s Text where
+instance P.HasProject (ComputeDiskResource s) s Text where
     project =
         lens (_project :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeDiskResource s)
 
-instance HasSize (ComputeDiskResource s) s Text where
+instance P.HasSize (ComputeDiskResource s) s Text where
     size =
         lens (_size :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: ComputeDiskResource s)
 
-instance HasSnapshot (ComputeDiskResource s) s Text where
+instance P.HasSnapshot (ComputeDiskResource s) s Text where
     snapshot =
         lens (_snapshot :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _snapshot = a } :: ComputeDiskResource s)
 
-instance HasType' (ComputeDiskResource s) s Text where
+instance P.HasType' (ComputeDiskResource s) s Text where
     type' =
         lens (_type' :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: ComputeDiskResource s)
 
-instance HasZone (ComputeDiskResource s) s Text where
+instance P.HasZone (ComputeDiskResource s) s Text where
     zone =
         lens (_zone :: ComputeDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ComputeDiskResource s)
 
-instance HasComputedDiskEncryptionKeySha256 (ComputeDiskResource s) Text
+instance P.HasComputedDiskEncryptionKeySha256 (ComputeDiskResource s) Text
 
-instance HasComputedLabelFingerprint (ComputeDiskResource s) Text
+instance P.HasComputedLabelFingerprint (ComputeDiskResource s) Text
 
-instance HasComputedSelfLink (ComputeDiskResource s) Text
+instance P.HasComputedSelfLink (ComputeDiskResource s) Text
 
-instance HasComputedUsers (ComputeDiskResource s) Text
+instance P.HasComputedUsers (ComputeDiskResource s) Text
 
-computeDiskResource :: TF.Resource TF.Google (ComputeDiskResource s)
+computeDiskResource :: TF.Resource P.Google (ComputeDiskResource s)
 computeDiskResource =
     TF.newResource "google_compute_disk" $
         ComputeDiskResource {
@@ -1695,79 +1694,79 @@ instance TF.ToHCL (ComputeFirewallResource s) where
         , TF.attribute "target_tags" _target_tags
         ]
 
-instance HasAllow (ComputeFirewallResource s) s Text where
+instance P.HasAllow (ComputeFirewallResource s) s Text where
     allow =
         lens (_allow :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _allow = a } :: ComputeFirewallResource s)
 
-instance HasDeny (ComputeFirewallResource s) s Text where
+instance P.HasDeny (ComputeFirewallResource s) s Text where
     deny =
         lens (_deny :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _deny = a } :: ComputeFirewallResource s)
 
-instance HasDescription (ComputeFirewallResource s) s Text where
+instance P.HasDescription (ComputeFirewallResource s) s Text where
     description =
         lens (_description :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeFirewallResource s)
 
-instance HasDestinationRanges (ComputeFirewallResource s) s Text where
+instance P.HasDestinationRanges (ComputeFirewallResource s) s Text where
     destinationRanges =
         lens (_destination_ranges :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _destination_ranges = a } :: ComputeFirewallResource s)
 
-instance HasDirection (ComputeFirewallResource s) s Text where
+instance P.HasDirection (ComputeFirewallResource s) s Text where
     direction =
         lens (_direction :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _direction = a } :: ComputeFirewallResource s)
 
-instance HasName (ComputeFirewallResource s) s Text where
+instance P.HasName (ComputeFirewallResource s) s Text where
     name =
         lens (_name :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeFirewallResource s)
 
-instance HasNetwork (ComputeFirewallResource s) s Text where
+instance P.HasNetwork (ComputeFirewallResource s) s Text where
     network =
         lens (_network :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeFirewallResource s)
 
-instance HasPriority (ComputeFirewallResource s) s Text where
+instance P.HasPriority (ComputeFirewallResource s) s Text where
     priority =
         lens (_priority :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _priority = a } :: ComputeFirewallResource s)
 
-instance HasProject (ComputeFirewallResource s) s Text where
+instance P.HasProject (ComputeFirewallResource s) s Text where
     project =
         lens (_project :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeFirewallResource s)
 
-instance HasSourceRanges (ComputeFirewallResource s) s Text where
+instance P.HasSourceRanges (ComputeFirewallResource s) s Text where
     sourceRanges =
         lens (_source_ranges :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _source_ranges = a } :: ComputeFirewallResource s)
 
-instance HasSourceServiceAccounts (ComputeFirewallResource s) s Text where
+instance P.HasSourceServiceAccounts (ComputeFirewallResource s) s Text where
     sourceServiceAccounts =
         lens (_source_service_accounts :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _source_service_accounts = a } :: ComputeFirewallResource s)
 
-instance HasSourceTags (ComputeFirewallResource s) s Text where
+instance P.HasSourceTags (ComputeFirewallResource s) s Text where
     sourceTags =
         lens (_source_tags :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _source_tags = a } :: ComputeFirewallResource s)
 
-instance HasTargetServiceAccounts (ComputeFirewallResource s) s Text where
+instance P.HasTargetServiceAccounts (ComputeFirewallResource s) s Text where
     targetServiceAccounts =
         lens (_target_service_accounts :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _target_service_accounts = a } :: ComputeFirewallResource s)
 
-instance HasTargetTags (ComputeFirewallResource s) s Text where
+instance P.HasTargetTags (ComputeFirewallResource s) s Text where
     targetTags =
         lens (_target_tags :: ComputeFirewallResource s -> TF.Attribute s Text)
             (\s a -> s { _target_tags = a } :: ComputeFirewallResource s)
 
-instance HasComputedSelfLink (ComputeFirewallResource s) Text
+instance P.HasComputedSelfLink (ComputeFirewallResource s) Text
 
-computeFirewallResource :: TF.Resource TF.Google (ComputeFirewallResource s)
+computeFirewallResource :: TF.Resource P.Google (ComputeFirewallResource s)
 computeFirewallResource =
     TF.newResource "google_compute_firewall" $
         ComputeFirewallResource {
@@ -1841,74 +1840,74 @@ instance TF.ToHCL (ComputeForwardingRuleResource s) where
         , TF.attribute "target" _target
         ]
 
-instance HasBackendService (ComputeForwardingRuleResource s) s Text where
+instance P.HasBackendService (ComputeForwardingRuleResource s) s Text where
     backendService =
         lens (_backend_service :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_service = a } :: ComputeForwardingRuleResource s)
 
-instance HasDescription (ComputeForwardingRuleResource s) s Text where
+instance P.HasDescription (ComputeForwardingRuleResource s) s Text where
     description =
         lens (_description :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeForwardingRuleResource s)
 
-instance HasIpAddress (ComputeForwardingRuleResource s) s Text where
+instance P.HasIpAddress (ComputeForwardingRuleResource s) s Text where
     ipAddress =
         lens (_ip_address :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_address = a } :: ComputeForwardingRuleResource s)
 
-instance HasIpProtocol (ComputeForwardingRuleResource s) s Text where
+instance P.HasIpProtocol (ComputeForwardingRuleResource s) s Text where
     ipProtocol =
         lens (_ip_protocol :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_protocol = a } :: ComputeForwardingRuleResource s)
 
-instance HasLoadBalancingScheme (ComputeForwardingRuleResource s) s Text where
+instance P.HasLoadBalancingScheme (ComputeForwardingRuleResource s) s Text where
     loadBalancingScheme =
         lens (_load_balancing_scheme :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _load_balancing_scheme = a } :: ComputeForwardingRuleResource s)
 
-instance HasName (ComputeForwardingRuleResource s) s Text where
+instance P.HasName (ComputeForwardingRuleResource s) s Text where
     name =
         lens (_name :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeForwardingRuleResource s)
 
-instance HasNetwork (ComputeForwardingRuleResource s) s Text where
+instance P.HasNetwork (ComputeForwardingRuleResource s) s Text where
     network =
         lens (_network :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeForwardingRuleResource s)
 
-instance HasPortRange (ComputeForwardingRuleResource s) s Text where
+instance P.HasPortRange (ComputeForwardingRuleResource s) s Text where
     portRange =
         lens (_port_range :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _port_range = a } :: ComputeForwardingRuleResource s)
 
-instance HasPorts (ComputeForwardingRuleResource s) s Text where
+instance P.HasPorts (ComputeForwardingRuleResource s) s Text where
     ports =
         lens (_ports :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _ports = a } :: ComputeForwardingRuleResource s)
 
-instance HasProject (ComputeForwardingRuleResource s) s Text where
+instance P.HasProject (ComputeForwardingRuleResource s) s Text where
     project =
         lens (_project :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeForwardingRuleResource s)
 
-instance HasRegion (ComputeForwardingRuleResource s) s Text where
+instance P.HasRegion (ComputeForwardingRuleResource s) s Text where
     region =
         lens (_region :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeForwardingRuleResource s)
 
-instance HasSubnetwork (ComputeForwardingRuleResource s) s Text where
+instance P.HasSubnetwork (ComputeForwardingRuleResource s) s Text where
     subnetwork =
         lens (_subnetwork :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _subnetwork = a } :: ComputeForwardingRuleResource s)
 
-instance HasTarget (ComputeForwardingRuleResource s) s Text where
+instance P.HasTarget (ComputeForwardingRuleResource s) s Text where
     target =
         lens (_target :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _target = a } :: ComputeForwardingRuleResource s)
 
-instance HasComputedSelfLink (ComputeForwardingRuleResource s) Text
+instance P.HasComputedSelfLink (ComputeForwardingRuleResource s) Text
 
-computeForwardingRuleResource :: TF.Resource TF.Google (ComputeForwardingRuleResource s)
+computeForwardingRuleResource :: TF.Resource P.Google (ComputeForwardingRuleResource s)
 computeForwardingRuleResource =
     TF.newResource "google_compute_forwarding_rule" $
         ComputeForwardingRuleResource {
@@ -1950,26 +1949,26 @@ instance TF.ToHCL (ComputeGlobalAddressResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasIpVersion (ComputeGlobalAddressResource s) s Text where
+instance P.HasIpVersion (ComputeGlobalAddressResource s) s Text where
     ipVersion =
         lens (_ip_version :: ComputeGlobalAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_version = a } :: ComputeGlobalAddressResource s)
 
-instance HasName (ComputeGlobalAddressResource s) s Text where
+instance P.HasName (ComputeGlobalAddressResource s) s Text where
     name =
         lens (_name :: ComputeGlobalAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeGlobalAddressResource s)
 
-instance HasProject (ComputeGlobalAddressResource s) s Text where
+instance P.HasProject (ComputeGlobalAddressResource s) s Text where
     project =
         lens (_project :: ComputeGlobalAddressResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeGlobalAddressResource s)
 
-instance HasComputedAddress (ComputeGlobalAddressResource s) Text
+instance P.HasComputedAddress (ComputeGlobalAddressResource s) Text
 
-instance HasComputedSelfLink (ComputeGlobalAddressResource s) Text
+instance P.HasComputedSelfLink (ComputeGlobalAddressResource s) Text
 
-computeGlobalAddressResource :: TF.Resource TF.Google (ComputeGlobalAddressResource s)
+computeGlobalAddressResource :: TF.Resource P.Google (ComputeGlobalAddressResource s)
 computeGlobalAddressResource =
     TF.newResource "google_compute_global_address" $
         ComputeGlobalAddressResource {
@@ -2021,56 +2020,56 @@ instance TF.ToHCL (ComputeGlobalForwardingRuleResource s) where
         , TF.attribute "target" _target
         ]
 
-instance HasDescription (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasDescription (ComputeGlobalForwardingRuleResource s) s Text where
     description =
         lens (_description :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasIpAddress (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasIpAddress (ComputeGlobalForwardingRuleResource s) s Text where
     ipAddress =
         lens (_ip_address :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_address = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasIpProtocol (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasIpProtocol (ComputeGlobalForwardingRuleResource s) s Text where
     ipProtocol =
         lens (_ip_protocol :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_protocol = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasIpVersion (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasIpVersion (ComputeGlobalForwardingRuleResource s) s Text where
     ipVersion =
         lens (_ip_version :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_version = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasLabels (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasLabels (ComputeGlobalForwardingRuleResource s) s Text where
     labels =
         lens (_labels :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasName (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasName (ComputeGlobalForwardingRuleResource s) s Text where
     name =
         lens (_name :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasPortRange (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasPortRange (ComputeGlobalForwardingRuleResource s) s Text where
     portRange =
         lens (_port_range :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _port_range = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasProject (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasProject (ComputeGlobalForwardingRuleResource s) s Text where
     project =
         lens (_project :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasTarget (ComputeGlobalForwardingRuleResource s) s Text where
+instance P.HasTarget (ComputeGlobalForwardingRuleResource s) s Text where
     target =
         lens (_target :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _target = a } :: ComputeGlobalForwardingRuleResource s)
 
-instance HasComputedLabelFingerprint (ComputeGlobalForwardingRuleResource s) Text
+instance P.HasComputedLabelFingerprint (ComputeGlobalForwardingRuleResource s) Text
 
-instance HasComputedSelfLink (ComputeGlobalForwardingRuleResource s) Text
+instance P.HasComputedSelfLink (ComputeGlobalForwardingRuleResource s) Text
 
-computeGlobalForwardingRuleResource :: TF.Resource TF.Google (ComputeGlobalForwardingRuleResource s)
+computeGlobalForwardingRuleResource :: TF.Resource P.Google (ComputeGlobalForwardingRuleResource s)
 computeGlobalForwardingRuleResource =
     TF.newResource "google_compute_global_forwarding_rule" $
         ComputeGlobalForwardingRuleResource {
@@ -2133,64 +2132,64 @@ instance TF.ToHCL (ComputeHealthCheckResource s) where
         , TF.attribute "unhealthy_threshold" _unhealthy_threshold
         ]
 
-instance HasCheckIntervalSec (ComputeHealthCheckResource s) s Text where
+instance P.HasCheckIntervalSec (ComputeHealthCheckResource s) s Text where
     checkIntervalSec =
         lens (_check_interval_sec :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _check_interval_sec = a } :: ComputeHealthCheckResource s)
 
-instance HasDescription (ComputeHealthCheckResource s) s Text where
+instance P.HasDescription (ComputeHealthCheckResource s) s Text where
     description =
         lens (_description :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeHealthCheckResource s)
 
-instance HasHealthyThreshold (ComputeHealthCheckResource s) s Text where
+instance P.HasHealthyThreshold (ComputeHealthCheckResource s) s Text where
     healthyThreshold =
         lens (_healthy_threshold :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _healthy_threshold = a } :: ComputeHealthCheckResource s)
 
-instance HasHttpHealthCheck (ComputeHealthCheckResource s) s Text where
+instance P.HasHttpHealthCheck (ComputeHealthCheckResource s) s Text where
     httpHealthCheck =
         lens (_http_health_check :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _http_health_check = a } :: ComputeHealthCheckResource s)
 
-instance HasHttpsHealthCheck (ComputeHealthCheckResource s) s Text where
+instance P.HasHttpsHealthCheck (ComputeHealthCheckResource s) s Text where
     httpsHealthCheck =
         lens (_https_health_check :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _https_health_check = a } :: ComputeHealthCheckResource s)
 
-instance HasName (ComputeHealthCheckResource s) s Text where
+instance P.HasName (ComputeHealthCheckResource s) s Text where
     name =
         lens (_name :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeHealthCheckResource s)
 
-instance HasProject (ComputeHealthCheckResource s) s Text where
+instance P.HasProject (ComputeHealthCheckResource s) s Text where
     project =
         lens (_project :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeHealthCheckResource s)
 
-instance HasSslHealthCheck (ComputeHealthCheckResource s) s Text where
+instance P.HasSslHealthCheck (ComputeHealthCheckResource s) s Text where
     sslHealthCheck =
         lens (_ssl_health_check :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _ssl_health_check = a } :: ComputeHealthCheckResource s)
 
-instance HasTcpHealthCheck (ComputeHealthCheckResource s) s Text where
+instance P.HasTcpHealthCheck (ComputeHealthCheckResource s) s Text where
     tcpHealthCheck =
         lens (_tcp_health_check :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _tcp_health_check = a } :: ComputeHealthCheckResource s)
 
-instance HasTimeoutSec (ComputeHealthCheckResource s) s Text where
+instance P.HasTimeoutSec (ComputeHealthCheckResource s) s Text where
     timeoutSec =
         lens (_timeout_sec :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _timeout_sec = a } :: ComputeHealthCheckResource s)
 
-instance HasUnhealthyThreshold (ComputeHealthCheckResource s) s Text where
+instance P.HasUnhealthyThreshold (ComputeHealthCheckResource s) s Text where
     unhealthyThreshold =
         lens (_unhealthy_threshold :: ComputeHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _unhealthy_threshold = a } :: ComputeHealthCheckResource s)
 
-instance HasComputedSelfLink (ComputeHealthCheckResource s) Text
+instance P.HasComputedSelfLink (ComputeHealthCheckResource s) Text
 
-computeHealthCheckResource :: TF.Resource TF.Google (ComputeHealthCheckResource s)
+computeHealthCheckResource :: TF.Resource P.Google (ComputeHealthCheckResource s)
 computeHealthCheckResource =
     TF.newResource "google_compute_health_check" $
         ComputeHealthCheckResource {
@@ -2258,59 +2257,59 @@ instance TF.ToHCL (ComputeHttpHealthCheckResource s) where
         , TF.attribute "unhealthy_threshold" _unhealthy_threshold
         ]
 
-instance HasCheckIntervalSec (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasCheckIntervalSec (ComputeHttpHealthCheckResource s) s Text where
     checkIntervalSec =
         lens (_check_interval_sec :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _check_interval_sec = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasDescription (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasDescription (ComputeHttpHealthCheckResource s) s Text where
     description =
         lens (_description :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasHealthyThreshold (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasHealthyThreshold (ComputeHttpHealthCheckResource s) s Text where
     healthyThreshold =
         lens (_healthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _healthy_threshold = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasHost (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasHost (ComputeHttpHealthCheckResource s) s Text where
     host =
         lens (_host :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _host = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasName (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasName (ComputeHttpHealthCheckResource s) s Text where
     name =
         lens (_name :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasPort (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasPort (ComputeHttpHealthCheckResource s) s Text where
     port =
         lens (_port :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _port = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasProject (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasProject (ComputeHttpHealthCheckResource s) s Text where
     project =
         lens (_project :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasRequestPath (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasRequestPath (ComputeHttpHealthCheckResource s) s Text where
     requestPath =
         lens (_request_path :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _request_path = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasTimeoutSec (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasTimeoutSec (ComputeHttpHealthCheckResource s) s Text where
     timeoutSec =
         lens (_timeout_sec :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _timeout_sec = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) s Text where
+instance P.HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) s Text where
     unhealthyThreshold =
         lens (_unhealthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _unhealthy_threshold = a } :: ComputeHttpHealthCheckResource s)
 
-instance HasComputedSelfLink (ComputeHttpHealthCheckResource s) Text
+instance P.HasComputedSelfLink (ComputeHttpHealthCheckResource s) Text
 
-computeHttpHealthCheckResource :: TF.Resource TF.Google (ComputeHttpHealthCheckResource s)
+computeHttpHealthCheckResource :: TF.Resource P.Google (ComputeHttpHealthCheckResource s)
 computeHttpHealthCheckResource =
     TF.newResource "google_compute_http_health_check" $
         ComputeHttpHealthCheckResource {
@@ -2377,59 +2376,59 @@ instance TF.ToHCL (ComputeHttpsHealthCheckResource s) where
         , TF.attribute "unhealthy_threshold" _unhealthy_threshold
         ]
 
-instance HasCheckIntervalSec (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasCheckIntervalSec (ComputeHttpsHealthCheckResource s) s Text where
     checkIntervalSec =
         lens (_check_interval_sec :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _check_interval_sec = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasDescription (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasDescription (ComputeHttpsHealthCheckResource s) s Text where
     description =
         lens (_description :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasHealthyThreshold (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasHealthyThreshold (ComputeHttpsHealthCheckResource s) s Text where
     healthyThreshold =
         lens (_healthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _healthy_threshold = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasHost (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasHost (ComputeHttpsHealthCheckResource s) s Text where
     host =
         lens (_host :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _host = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasName (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasName (ComputeHttpsHealthCheckResource s) s Text where
     name =
         lens (_name :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasPort (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasPort (ComputeHttpsHealthCheckResource s) s Text where
     port =
         lens (_port :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _port = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasProject (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasProject (ComputeHttpsHealthCheckResource s) s Text where
     project =
         lens (_project :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasRequestPath (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasRequestPath (ComputeHttpsHealthCheckResource s) s Text where
     requestPath =
         lens (_request_path :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _request_path = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasTimeoutSec (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasTimeoutSec (ComputeHttpsHealthCheckResource s) s Text where
     timeoutSec =
         lens (_timeout_sec :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _timeout_sec = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) s Text where
+instance P.HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) s Text where
     unhealthyThreshold =
         lens (_unhealthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
             (\s a -> s { _unhealthy_threshold = a } :: ComputeHttpsHealthCheckResource s)
 
-instance HasComputedSelfLink (ComputeHttpsHealthCheckResource s) Text
+instance P.HasComputedSelfLink (ComputeHttpsHealthCheckResource s) Text
 
-computeHttpsHealthCheckResource :: TF.Resource TF.Google (ComputeHttpsHealthCheckResource s)
+computeHttpsHealthCheckResource :: TF.Resource P.Google (ComputeHttpsHealthCheckResource s)
 computeHttpsHealthCheckResource =
     TF.newResource "google_compute_https_health_check" $
         ComputeHttpsHealthCheckResource {
@@ -2471,31 +2470,31 @@ instance TF.ToHCL (ComputeImageResource s) where
         , TF.attribute "source_disk" _source_disk
         ]
 
-instance HasCreateTimeout (ComputeImageResource s) s Text where
+instance P.HasCreateTimeout (ComputeImageResource s) s Text where
     createTimeout =
         lens (_create_timeout :: ComputeImageResource s -> TF.Attribute s Text)
             (\s a -> s { _create_timeout = a } :: ComputeImageResource s)
 
-instance HasName (ComputeImageResource s) s Text where
+instance P.HasName (ComputeImageResource s) s Text where
     name =
         lens (_name :: ComputeImageResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeImageResource s)
 
-instance HasRawDisk (ComputeImageResource s) s Text where
+instance P.HasRawDisk (ComputeImageResource s) s Text where
     rawDisk =
         lens (_raw_disk :: ComputeImageResource s -> TF.Attribute s Text)
             (\s a -> s { _raw_disk = a } :: ComputeImageResource s)
 
-instance HasSourceDisk (ComputeImageResource s) s Text where
+instance P.HasSourceDisk (ComputeImageResource s) s Text where
     sourceDisk =
         lens (_source_disk :: ComputeImageResource s -> TF.Attribute s Text)
             (\s a -> s { _source_disk = a } :: ComputeImageResource s)
 
-instance HasComputedLabelFingerprint (ComputeImageResource s) Text
+instance P.HasComputedLabelFingerprint (ComputeImageResource s) Text
 
-instance HasComputedSelfLink (ComputeImageResource s) Text
+instance P.HasComputedSelfLink (ComputeImageResource s) Text
 
-computeImageResource :: TF.Resource TF.Google (ComputeImageResource s)
+computeImageResource :: TF.Resource P.Google (ComputeImageResource s)
 computeImageResource =
     TF.newResource "google_compute_image" $
         ComputeImageResource {
@@ -2556,68 +2555,68 @@ instance TF.ToHCL (ComputeInstanceGroupManagerResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasAutoHealingPolicies (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasAutoHealingPolicies (ComputeInstanceGroupManagerResource s) s Text where
     autoHealingPolicies =
         lens (_auto_healing_policies :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_healing_policies = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasBaseInstanceName (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasBaseInstanceName (ComputeInstanceGroupManagerResource s) s Text where
     baseInstanceName =
         lens (_base_instance_name :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _base_instance_name = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasDescription (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasDescription (ComputeInstanceGroupManagerResource s) s Text where
     description =
         lens (_description :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasInstanceTemplate (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasInstanceTemplate (ComputeInstanceGroupManagerResource s) s Text where
     instanceTemplate =
         lens (_instance_template :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_template = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasName (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasName (ComputeInstanceGroupManagerResource s) s Text where
     name =
         lens (_name :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasNamedPort (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasNamedPort (ComputeInstanceGroupManagerResource s) s Text where
     namedPort =
         lens (_named_port :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _named_port = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasProject (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasProject (ComputeInstanceGroupManagerResource s) s Text where
     project =
         lens (_project :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasTargetPools (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasTargetPools (ComputeInstanceGroupManagerResource s) s Text where
     targetPools =
         lens (_target_pools :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _target_pools = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasTargetSize (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasTargetSize (ComputeInstanceGroupManagerResource s) s Text where
     targetSize =
         lens (_target_size :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _target_size = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasUpdateStrategy (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasUpdateStrategy (ComputeInstanceGroupManagerResource s) s Text where
     updateStrategy =
         lens (_update_strategy :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _update_strategy = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasZone (ComputeInstanceGroupManagerResource s) s Text where
+instance P.HasZone (ComputeInstanceGroupManagerResource s) s Text where
     zone =
         lens (_zone :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ComputeInstanceGroupManagerResource s)
 
-instance HasComputedFingerprint (ComputeInstanceGroupManagerResource s) Text
+instance P.HasComputedFingerprint (ComputeInstanceGroupManagerResource s) Text
 
-instance HasComputedInstanceGroup (ComputeInstanceGroupManagerResource s) Text
+instance P.HasComputedInstanceGroup (ComputeInstanceGroupManagerResource s) Text
 
-instance HasComputedSelfLink (ComputeInstanceGroupManagerResource s) Text
+instance P.HasComputedSelfLink (ComputeInstanceGroupManagerResource s) Text
 
-computeInstanceGroupManagerResource :: TF.Resource TF.Google (ComputeInstanceGroupManagerResource s)
+computeInstanceGroupManagerResource :: TF.Resource P.Google (ComputeInstanceGroupManagerResource s)
 computeInstanceGroupManagerResource =
     TF.newResource "google_compute_instance_group_manager" $
         ComputeInstanceGroupManagerResource {
@@ -2669,46 +2668,46 @@ instance TF.ToHCL (ComputeInstanceGroupResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasDescription (ComputeInstanceGroupResource s) s Text where
+instance P.HasDescription (ComputeInstanceGroupResource s) s Text where
     description =
         lens (_description :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeInstanceGroupResource s)
 
-instance HasInstances (ComputeInstanceGroupResource s) s Text where
+instance P.HasInstances (ComputeInstanceGroupResource s) s Text where
     instances =
         lens (_instances :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _instances = a } :: ComputeInstanceGroupResource s)
 
-instance HasName (ComputeInstanceGroupResource s) s Text where
+instance P.HasName (ComputeInstanceGroupResource s) s Text where
     name =
         lens (_name :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeInstanceGroupResource s)
 
-instance HasNamedPort (ComputeInstanceGroupResource s) s Text where
+instance P.HasNamedPort (ComputeInstanceGroupResource s) s Text where
     namedPort =
         lens (_named_port :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _named_port = a } :: ComputeInstanceGroupResource s)
 
-instance HasNetwork (ComputeInstanceGroupResource s) s Text where
+instance P.HasNetwork (ComputeInstanceGroupResource s) s Text where
     network =
         lens (_network :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeInstanceGroupResource s)
 
-instance HasProject (ComputeInstanceGroupResource s) s Text where
+instance P.HasProject (ComputeInstanceGroupResource s) s Text where
     project =
         lens (_project :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeInstanceGroupResource s)
 
-instance HasZone (ComputeInstanceGroupResource s) s Text where
+instance P.HasZone (ComputeInstanceGroupResource s) s Text where
     zone =
         lens (_zone :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ComputeInstanceGroupResource s)
 
-instance HasComputedSelfLink (ComputeInstanceGroupResource s) Text
+instance P.HasComputedSelfLink (ComputeInstanceGroupResource s) Text
 
-instance HasComputedSize (ComputeInstanceGroupResource s) Text
+instance P.HasComputedSize (ComputeInstanceGroupResource s) Text
 
-computeInstanceGroupResource :: TF.Resource TF.Google (ComputeInstanceGroupResource s)
+computeInstanceGroupResource :: TF.Resource P.Google (ComputeInstanceGroupResource s)
 computeInstanceGroupResource =
     TF.newResource "google_compute_instance_group" $
         ComputeInstanceGroupResource {
@@ -2794,129 +2793,129 @@ instance TF.ToHCL (ComputeInstanceResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasAllowStoppingForUpdate (ComputeInstanceResource s) s Text where
+instance P.HasAllowStoppingForUpdate (ComputeInstanceResource s) s Text where
     allowStoppingForUpdate =
         lens (_allow_stopping_for_update :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _allow_stopping_for_update = a } :: ComputeInstanceResource s)
 
-instance HasAttachedDisk (ComputeInstanceResource s) s Text where
+instance P.HasAttachedDisk (ComputeInstanceResource s) s Text where
     attachedDisk =
         lens (_attached_disk :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _attached_disk = a } :: ComputeInstanceResource s)
 
-instance HasBootDisk (ComputeInstanceResource s) s Text where
+instance P.HasBootDisk (ComputeInstanceResource s) s Text where
     bootDisk =
         lens (_boot_disk :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _boot_disk = a } :: ComputeInstanceResource s)
 
-instance HasCanIpForward (ComputeInstanceResource s) s Text where
+instance P.HasCanIpForward (ComputeInstanceResource s) s Text where
     canIpForward =
         lens (_can_ip_forward :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _can_ip_forward = a } :: ComputeInstanceResource s)
 
-instance HasCreateTimeout (ComputeInstanceResource s) s Text where
+instance P.HasCreateTimeout (ComputeInstanceResource s) s Text where
     createTimeout =
         lens (_create_timeout :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _create_timeout = a } :: ComputeInstanceResource s)
 
-instance HasDescription (ComputeInstanceResource s) s Text where
+instance P.HasDescription (ComputeInstanceResource s) s Text where
     description =
         lens (_description :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeInstanceResource s)
 
-instance HasGuestAccelerator (ComputeInstanceResource s) s Text where
+instance P.HasGuestAccelerator (ComputeInstanceResource s) s Text where
     guestAccelerator =
         lens (_guest_accelerator :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _guest_accelerator = a } :: ComputeInstanceResource s)
 
-instance HasLabels (ComputeInstanceResource s) s Text where
+instance P.HasLabels (ComputeInstanceResource s) s Text where
     labels =
         lens (_labels :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: ComputeInstanceResource s)
 
-instance HasMachineType (ComputeInstanceResource s) s Text where
+instance P.HasMachineType (ComputeInstanceResource s) s Text where
     machineType =
         lens (_machine_type :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _machine_type = a } :: ComputeInstanceResource s)
 
-instance HasMetadata (ComputeInstanceResource s) s Text where
+instance P.HasMetadata (ComputeInstanceResource s) s Text where
     metadata =
         lens (_metadata :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ComputeInstanceResource s)
 
-instance HasMetadataStartupScript (ComputeInstanceResource s) s Text where
+instance P.HasMetadataStartupScript (ComputeInstanceResource s) s Text where
     metadataStartupScript =
         lens (_metadata_startup_script :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata_startup_script = a } :: ComputeInstanceResource s)
 
-instance HasMinCpuPlatform (ComputeInstanceResource s) s Text where
+instance P.HasMinCpuPlatform (ComputeInstanceResource s) s Text where
     minCpuPlatform =
         lens (_min_cpu_platform :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _min_cpu_platform = a } :: ComputeInstanceResource s)
 
-instance HasName (ComputeInstanceResource s) s Text where
+instance P.HasName (ComputeInstanceResource s) s Text where
     name =
         lens (_name :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeInstanceResource s)
 
-instance HasNetworkInterface (ComputeInstanceResource s) s Text where
+instance P.HasNetworkInterface (ComputeInstanceResource s) s Text where
     networkInterface =
         lens (_network_interface :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _network_interface = a } :: ComputeInstanceResource s)
 
-instance HasProject (ComputeInstanceResource s) s Text where
+instance P.HasProject (ComputeInstanceResource s) s Text where
     project =
         lens (_project :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeInstanceResource s)
 
-instance HasScheduling (ComputeInstanceResource s) s Text where
+instance P.HasScheduling (ComputeInstanceResource s) s Text where
     scheduling =
         lens (_scheduling :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _scheduling = a } :: ComputeInstanceResource s)
 
-instance HasScratchDisk (ComputeInstanceResource s) s Text where
+instance P.HasScratchDisk (ComputeInstanceResource s) s Text where
     scratchDisk =
         lens (_scratch_disk :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _scratch_disk = a } :: ComputeInstanceResource s)
 
-instance HasServiceAccount (ComputeInstanceResource s) s Text where
+instance P.HasServiceAccount (ComputeInstanceResource s) s Text where
     serviceAccount =
         lens (_service_account :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _service_account = a } :: ComputeInstanceResource s)
 
-instance HasTags (ComputeInstanceResource s) s Text where
+instance P.HasTags (ComputeInstanceResource s) s Text where
     tags =
         lens (_tags :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ComputeInstanceResource s)
 
-instance HasZone (ComputeInstanceResource s) s Text where
+instance P.HasZone (ComputeInstanceResource s) s Text where
     zone =
         lens (_zone :: ComputeInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ComputeInstanceResource s)
 
-instance HasComputedAttachedDisk0DiskEncryptionKeySha256 (ComputeInstanceResource s) Text
+instance P.HasComputedAttachedDisk0DiskEncryptionKeySha256 (ComputeInstanceResource s) Text
 
-instance HasComputedBootDiskDiskEncryptionKeySha256 (ComputeInstanceResource s) Text
+instance P.HasComputedBootDiskDiskEncryptionKeySha256 (ComputeInstanceResource s) Text
 
-instance HasComputedCpuPlatform (ComputeInstanceResource s) Text
+instance P.HasComputedCpuPlatform (ComputeInstanceResource s) Text
 
-instance HasComputedDisk0DiskEncryptionKeySha256 (ComputeInstanceResource s) Text
+instance P.HasComputedDisk0DiskEncryptionKeySha256 (ComputeInstanceResource s) Text
 
-instance HasComputedInstanceId (ComputeInstanceResource s) Text
+instance P.HasComputedInstanceId (ComputeInstanceResource s) Text
 
-instance HasComputedLabelFingerprint (ComputeInstanceResource s) Text
+instance P.HasComputedLabelFingerprint (ComputeInstanceResource s) Text
 
-instance HasComputedMetadataFingerprint (ComputeInstanceResource s) Text
+instance P.HasComputedMetadataFingerprint (ComputeInstanceResource s) Text
 
-instance HasComputedNetworkInterface0AccessConfig0AssignedNatIp (ComputeInstanceResource s) Text
+instance P.HasComputedNetworkInterface0AccessConfig0AssignedNatIp (ComputeInstanceResource s) Text
 
-instance HasComputedNetworkInterface0Address (ComputeInstanceResource s) Text
+instance P.HasComputedNetworkInterface0Address (ComputeInstanceResource s) Text
 
-instance HasComputedSelfLink (ComputeInstanceResource s) Text
+instance P.HasComputedSelfLink (ComputeInstanceResource s) Text
 
-instance HasComputedTagsFingerprint (ComputeInstanceResource s) Text
+instance P.HasComputedTagsFingerprint (ComputeInstanceResource s) Text
 
-computeInstanceResource :: TF.Resource TF.Google (ComputeInstanceResource s)
+computeInstanceResource :: TF.Resource P.Google (ComputeInstanceResource s)
 computeInstanceResource =
     TF.newResource "google_compute_instance" $
         ComputeInstanceResource {
@@ -3009,103 +3008,103 @@ instance TF.ToHCL (ComputeInstanceTemplateResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasCanIpForward (ComputeInstanceTemplateResource s) s Text where
+instance P.HasCanIpForward (ComputeInstanceTemplateResource s) s Text where
     canIpForward =
         lens (_can_ip_forward :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _can_ip_forward = a } :: ComputeInstanceTemplateResource s)
 
-instance HasDescription (ComputeInstanceTemplateResource s) s Text where
+instance P.HasDescription (ComputeInstanceTemplateResource s) s Text where
     description =
         lens (_description :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeInstanceTemplateResource s)
 
-instance HasDisk (ComputeInstanceTemplateResource s) s Text where
+instance P.HasDisk (ComputeInstanceTemplateResource s) s Text where
     disk =
         lens (_disk :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _disk = a } :: ComputeInstanceTemplateResource s)
 
-instance HasGuestAccelerator (ComputeInstanceTemplateResource s) s Text where
+instance P.HasGuestAccelerator (ComputeInstanceTemplateResource s) s Text where
     guestAccelerator =
         lens (_guest_accelerator :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _guest_accelerator = a } :: ComputeInstanceTemplateResource s)
 
-instance HasInstanceDescription (ComputeInstanceTemplateResource s) s Text where
+instance P.HasInstanceDescription (ComputeInstanceTemplateResource s) s Text where
     instanceDescription =
         lens (_instance_description :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_description = a } :: ComputeInstanceTemplateResource s)
 
-instance HasLabels (ComputeInstanceTemplateResource s) s Text where
+instance P.HasLabels (ComputeInstanceTemplateResource s) s Text where
     labels =
         lens (_labels :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: ComputeInstanceTemplateResource s)
 
-instance HasMachineType (ComputeInstanceTemplateResource s) s Text where
+instance P.HasMachineType (ComputeInstanceTemplateResource s) s Text where
     machineType =
         lens (_machine_type :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _machine_type = a } :: ComputeInstanceTemplateResource s)
 
-instance HasMetadata (ComputeInstanceTemplateResource s) s Text where
+instance P.HasMetadata (ComputeInstanceTemplateResource s) s Text where
     metadata =
         lens (_metadata :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ComputeInstanceTemplateResource s)
 
-instance HasMetadataStartupScript (ComputeInstanceTemplateResource s) s Text where
+instance P.HasMetadataStartupScript (ComputeInstanceTemplateResource s) s Text where
     metadataStartupScript =
         lens (_metadata_startup_script :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata_startup_script = a } :: ComputeInstanceTemplateResource s)
 
-instance HasMinCpuPlatform (ComputeInstanceTemplateResource s) s Text where
+instance P.HasMinCpuPlatform (ComputeInstanceTemplateResource s) s Text where
     minCpuPlatform =
         lens (_min_cpu_platform :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _min_cpu_platform = a } :: ComputeInstanceTemplateResource s)
 
-instance HasName (ComputeInstanceTemplateResource s) s Text where
+instance P.HasName (ComputeInstanceTemplateResource s) s Text where
     name =
         lens (_name :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeInstanceTemplateResource s)
 
-instance HasNamePrefix (ComputeInstanceTemplateResource s) s Text where
+instance P.HasNamePrefix (ComputeInstanceTemplateResource s) s Text where
     namePrefix =
         lens (_name_prefix :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _name_prefix = a } :: ComputeInstanceTemplateResource s)
 
-instance HasNetworkInterface (ComputeInstanceTemplateResource s) s Text where
+instance P.HasNetworkInterface (ComputeInstanceTemplateResource s) s Text where
     networkInterface =
         lens (_network_interface :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _network_interface = a } :: ComputeInstanceTemplateResource s)
 
-instance HasProject (ComputeInstanceTemplateResource s) s Text where
+instance P.HasProject (ComputeInstanceTemplateResource s) s Text where
     project =
         lens (_project :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeInstanceTemplateResource s)
 
-instance HasRegion (ComputeInstanceTemplateResource s) s Text where
+instance P.HasRegion (ComputeInstanceTemplateResource s) s Text where
     region =
         lens (_region :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeInstanceTemplateResource s)
 
-instance HasScheduling (ComputeInstanceTemplateResource s) s Text where
+instance P.HasScheduling (ComputeInstanceTemplateResource s) s Text where
     scheduling =
         lens (_scheduling :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _scheduling = a } :: ComputeInstanceTemplateResource s)
 
-instance HasServiceAccount (ComputeInstanceTemplateResource s) s Text where
+instance P.HasServiceAccount (ComputeInstanceTemplateResource s) s Text where
     serviceAccount =
         lens (_service_account :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _service_account = a } :: ComputeInstanceTemplateResource s)
 
-instance HasTags (ComputeInstanceTemplateResource s) s Text where
+instance P.HasTags (ComputeInstanceTemplateResource s) s Text where
     tags =
         lens (_tags :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ComputeInstanceTemplateResource s)
 
-instance HasComputedMetadataFingerprint (ComputeInstanceTemplateResource s) Text
+instance P.HasComputedMetadataFingerprint (ComputeInstanceTemplateResource s) Text
 
-instance HasComputedSelfLink (ComputeInstanceTemplateResource s) Text
+instance P.HasComputedSelfLink (ComputeInstanceTemplateResource s) Text
 
-instance HasComputedTagsFingerprint (ComputeInstanceTemplateResource s) Text
+instance P.HasComputedTagsFingerprint (ComputeInstanceTemplateResource s) Text
 
-computeInstanceTemplateResource :: TF.Resource TF.Google (ComputeInstanceTemplateResource s)
+computeInstanceTemplateResource :: TF.Resource P.Google (ComputeInstanceTemplateResource s)
 computeInstanceTemplateResource =
     TF.newResource "google_compute_instance_template" $
         ComputeInstanceTemplateResource {
@@ -3157,31 +3156,31 @@ instance TF.ToHCL (ComputeNetworkPeeringResource s) where
         , TF.attribute "peer_network" _peer_network
         ]
 
-instance HasAutoCreateRoutes (ComputeNetworkPeeringResource s) s Text where
+instance P.HasAutoCreateRoutes (ComputeNetworkPeeringResource s) s Text where
     autoCreateRoutes =
         lens (_auto_create_routes :: ComputeNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_create_routes = a } :: ComputeNetworkPeeringResource s)
 
-instance HasName (ComputeNetworkPeeringResource s) s Text where
+instance P.HasName (ComputeNetworkPeeringResource s) s Text where
     name =
         lens (_name :: ComputeNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeNetworkPeeringResource s)
 
-instance HasNetwork (ComputeNetworkPeeringResource s) s Text where
+instance P.HasNetwork (ComputeNetworkPeeringResource s) s Text where
     network =
         lens (_network :: ComputeNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeNetworkPeeringResource s)
 
-instance HasPeerNetwork (ComputeNetworkPeeringResource s) s Text where
+instance P.HasPeerNetwork (ComputeNetworkPeeringResource s) s Text where
     peerNetwork =
         lens (_peer_network :: ComputeNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _peer_network = a } :: ComputeNetworkPeeringResource s)
 
-instance HasComputedState (ComputeNetworkPeeringResource s) Text
+instance P.HasComputedState (ComputeNetworkPeeringResource s) Text
 
-instance HasComputedStateDetails (ComputeNetworkPeeringResource s) Text
+instance P.HasComputedStateDetails (ComputeNetworkPeeringResource s) Text
 
-computeNetworkPeeringResource :: TF.Resource TF.Google (ComputeNetworkPeeringResource s)
+computeNetworkPeeringResource :: TF.Resource P.Google (ComputeNetworkPeeringResource s)
 computeNetworkPeeringResource =
     TF.newResource "google_compute_network_peering" $
         ComputeNetworkPeeringResource {
@@ -3222,43 +3221,43 @@ instance TF.ToHCL (ComputeNetworkResource s) where
         , TF.attribute "routing_mode" _routing_mode
         ]
 
-instance HasAutoCreateSubnetworks (ComputeNetworkResource s) s Text where
+instance P.HasAutoCreateSubnetworks (ComputeNetworkResource s) s Text where
     autoCreateSubnetworks =
         lens (_auto_create_subnetworks :: ComputeNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_create_subnetworks = a } :: ComputeNetworkResource s)
 
-instance HasDescription (ComputeNetworkResource s) s Text where
+instance P.HasDescription (ComputeNetworkResource s) s Text where
     description =
         lens (_description :: ComputeNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeNetworkResource s)
 
-instance HasIpv4Range (ComputeNetworkResource s) s Text where
+instance P.HasIpv4Range (ComputeNetworkResource s) s Text where
     ipv4Range =
         lens (_ipv4_range :: ComputeNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _ipv4_range = a } :: ComputeNetworkResource s)
 
-instance HasName (ComputeNetworkResource s) s Text where
+instance P.HasName (ComputeNetworkResource s) s Text where
     name =
         lens (_name :: ComputeNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeNetworkResource s)
 
-instance HasProject (ComputeNetworkResource s) s Text where
+instance P.HasProject (ComputeNetworkResource s) s Text where
     project =
         lens (_project :: ComputeNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeNetworkResource s)
 
-instance HasRoutingMode (ComputeNetworkResource s) s Text where
+instance P.HasRoutingMode (ComputeNetworkResource s) s Text where
     routingMode =
         lens (_routing_mode :: ComputeNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _routing_mode = a } :: ComputeNetworkResource s)
 
-instance HasComputedGatewayIpv4 (ComputeNetworkResource s) Text
+instance P.HasComputedGatewayIpv4 (ComputeNetworkResource s) Text
 
-instance HasComputedName (ComputeNetworkResource s) Text
+instance P.HasComputedName (ComputeNetworkResource s) Text
 
-instance HasComputedSelfLink (ComputeNetworkResource s) Text
+instance P.HasComputedSelfLink (ComputeNetworkResource s) Text
 
-computeNetworkResource :: TF.Resource TF.Google (ComputeNetworkResource s)
+computeNetworkResource :: TF.Resource P.Google (ComputeNetworkResource s)
 computeNetworkResource =
     TF.newResource "google_compute_network" $
         ComputeNetworkResource {
@@ -3293,22 +3292,22 @@ instance TF.ToHCL (ComputeProjectMetadataItemResource s) where
         , TF.attribute "value" _value
         ]
 
-instance HasKey (ComputeProjectMetadataItemResource s) s Text where
+instance P.HasKey (ComputeProjectMetadataItemResource s) s Text where
     key =
         lens (_key :: ComputeProjectMetadataItemResource s -> TF.Attribute s Text)
             (\s a -> s { _key = a } :: ComputeProjectMetadataItemResource s)
 
-instance HasProject (ComputeProjectMetadataItemResource s) s Text where
+instance P.HasProject (ComputeProjectMetadataItemResource s) s Text where
     project =
         lens (_project :: ComputeProjectMetadataItemResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeProjectMetadataItemResource s)
 
-instance HasValue (ComputeProjectMetadataItemResource s) s Text where
+instance P.HasValue (ComputeProjectMetadataItemResource s) s Text where
     value =
         lens (_value :: ComputeProjectMetadataItemResource s -> TF.Attribute s Text)
             (\s a -> s { _value = a } :: ComputeProjectMetadataItemResource s)
 
-computeProjectMetadataItemResource :: TF.Resource TF.Google (ComputeProjectMetadataItemResource s)
+computeProjectMetadataItemResource :: TF.Resource P.Google (ComputeProjectMetadataItemResource s)
 computeProjectMetadataItemResource =
     TF.newResource "google_compute_project_metadata_item" $
         ComputeProjectMetadataItemResource {
@@ -3340,17 +3339,17 @@ instance TF.ToHCL (ComputeProjectMetadataResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasMetadata (ComputeProjectMetadataResource s) s Text where
+instance P.HasMetadata (ComputeProjectMetadataResource s) s Text where
     metadata =
         lens (_metadata :: ComputeProjectMetadataResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ComputeProjectMetadataResource s)
 
-instance HasProject (ComputeProjectMetadataResource s) s Text where
+instance P.HasProject (ComputeProjectMetadataResource s) s Text where
     project =
         lens (_project :: ComputeProjectMetadataResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeProjectMetadataResource s)
 
-computeProjectMetadataResource :: TF.Resource TF.Google (ComputeProjectMetadataResource s)
+computeProjectMetadataResource :: TF.Resource P.Google (ComputeProjectMetadataResource s)
 computeProjectMetadataResource =
     TF.newResource "google_compute_project_metadata" $
         ComputeProjectMetadataResource {
@@ -3394,39 +3393,39 @@ instance TF.ToHCL (ComputeRegionAutoscalerResource s) where
         , TF.attribute "target" _target
         ]
 
-instance HasAutoscalingPolicy (ComputeRegionAutoscalerResource s) s Text where
+instance P.HasAutoscalingPolicy (ComputeRegionAutoscalerResource s) s Text where
     autoscalingPolicy =
         lens (_autoscaling_policy :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _autoscaling_policy = a } :: ComputeRegionAutoscalerResource s)
 
-instance HasDescription (ComputeRegionAutoscalerResource s) s Text where
+instance P.HasDescription (ComputeRegionAutoscalerResource s) s Text where
     description =
         lens (_description :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeRegionAutoscalerResource s)
 
-instance HasName (ComputeRegionAutoscalerResource s) s Text where
+instance P.HasName (ComputeRegionAutoscalerResource s) s Text where
     name =
         lens (_name :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeRegionAutoscalerResource s)
 
-instance HasProject (ComputeRegionAutoscalerResource s) s Text where
+instance P.HasProject (ComputeRegionAutoscalerResource s) s Text where
     project =
         lens (_project :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeRegionAutoscalerResource s)
 
-instance HasRegion (ComputeRegionAutoscalerResource s) s Text where
+instance P.HasRegion (ComputeRegionAutoscalerResource s) s Text where
     region =
         lens (_region :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeRegionAutoscalerResource s)
 
-instance HasTarget (ComputeRegionAutoscalerResource s) s Text where
+instance P.HasTarget (ComputeRegionAutoscalerResource s) s Text where
     target =
         lens (_target :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _target = a } :: ComputeRegionAutoscalerResource s)
 
-instance HasComputedSelfLink (ComputeRegionAutoscalerResource s) Text
+instance P.HasComputedSelfLink (ComputeRegionAutoscalerResource s) Text
 
-computeRegionAutoscalerResource :: TF.Resource TF.Google (ComputeRegionAutoscalerResource s)
+computeRegionAutoscalerResource :: TF.Resource P.Google (ComputeRegionAutoscalerResource s)
 computeRegionAutoscalerResource =
     TF.newResource "google_compute_region_autoscaler" $
         ComputeRegionAutoscalerResource {
@@ -3482,61 +3481,61 @@ instance TF.ToHCL (ComputeRegionBackendServiceResource s) where
         , TF.attribute "timeout_sec" _timeout_sec
         ]
 
-instance HasBackend (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasBackend (ComputeRegionBackendServiceResource s) s Text where
     backend =
         lens (_backend :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _backend = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasConnectionDrainingTimeoutSec (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasConnectionDrainingTimeoutSec (ComputeRegionBackendServiceResource s) s Text where
     connectionDrainingTimeoutSec =
         lens (_connection_draining_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _connection_draining_timeout_sec = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasDescription (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasDescription (ComputeRegionBackendServiceResource s) s Text where
     description =
         lens (_description :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasHealthChecks (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasHealthChecks (ComputeRegionBackendServiceResource s) s Text where
     healthChecks =
         lens (_health_checks :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _health_checks = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasName (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasName (ComputeRegionBackendServiceResource s) s Text where
     name =
         lens (_name :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasProject (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasProject (ComputeRegionBackendServiceResource s) s Text where
     project =
         lens (_project :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasProtocol (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasProtocol (ComputeRegionBackendServiceResource s) s Text where
     protocol =
         lens (_protocol :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasRegion (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasRegion (ComputeRegionBackendServiceResource s) s Text where
     region =
         lens (_region :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasSessionAffinity (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasSessionAffinity (ComputeRegionBackendServiceResource s) s Text where
     sessionAffinity =
         lens (_session_affinity :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _session_affinity = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasTimeoutSec (ComputeRegionBackendServiceResource s) s Text where
+instance P.HasTimeoutSec (ComputeRegionBackendServiceResource s) s Text where
     timeoutSec =
         lens (_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _timeout_sec = a } :: ComputeRegionBackendServiceResource s)
 
-instance HasComputedFingerprint (ComputeRegionBackendServiceResource s) Text
+instance P.HasComputedFingerprint (ComputeRegionBackendServiceResource s) Text
 
-instance HasComputedSelfLink (ComputeRegionBackendServiceResource s) Text
+instance P.HasComputedSelfLink (ComputeRegionBackendServiceResource s) Text
 
-computeRegionBackendServiceResource :: TF.Resource TF.Google (ComputeRegionBackendServiceResource s)
+computeRegionBackendServiceResource :: TF.Resource P.Google (ComputeRegionBackendServiceResource s)
 computeRegionBackendServiceResource =
     TF.newResource "google_compute_region_backend_service" $
         ComputeRegionBackendServiceResource {
@@ -3600,63 +3599,63 @@ instance TF.ToHCL (ComputeRegionInstanceGroupManagerResource s) where
         , TF.attribute "target_size" _target_size
         ]
 
-instance HasAutoHealingPolicies (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasAutoHealingPolicies (ComputeRegionInstanceGroupManagerResource s) s Text where
     autoHealingPolicies =
         lens (_auto_healing_policies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_healing_policies = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasBaseInstanceName (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasBaseInstanceName (ComputeRegionInstanceGroupManagerResource s) s Text where
     baseInstanceName =
         lens (_base_instance_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _base_instance_name = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasDescription (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasDescription (ComputeRegionInstanceGroupManagerResource s) s Text where
     description =
         lens (_description :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasInstanceTemplate (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasInstanceTemplate (ComputeRegionInstanceGroupManagerResource s) s Text where
     instanceTemplate =
         lens (_instance_template :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_template = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasName (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasName (ComputeRegionInstanceGroupManagerResource s) s Text where
     name =
         lens (_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasNamedPort (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasNamedPort (ComputeRegionInstanceGroupManagerResource s) s Text where
     namedPort =
         lens (_named_port :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _named_port = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasProject (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasProject (ComputeRegionInstanceGroupManagerResource s) s Text where
     project =
         lens (_project :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasRegion (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasRegion (ComputeRegionInstanceGroupManagerResource s) s Text where
     region =
         lens (_region :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasTargetPools (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasTargetPools (ComputeRegionInstanceGroupManagerResource s) s Text where
     targetPools =
         lens (_target_pools :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _target_pools = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasTargetSize (ComputeRegionInstanceGroupManagerResource s) s Text where
+instance P.HasTargetSize (ComputeRegionInstanceGroupManagerResource s) s Text where
     targetSize =
         lens (_target_size :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
             (\s a -> s { _target_size = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance HasComputedFingerprint (ComputeRegionInstanceGroupManagerResource s) Text
+instance P.HasComputedFingerprint (ComputeRegionInstanceGroupManagerResource s) Text
 
-instance HasComputedInstanceGroup (ComputeRegionInstanceGroupManagerResource s) Text
+instance P.HasComputedInstanceGroup (ComputeRegionInstanceGroupManagerResource s) Text
 
-instance HasComputedSelfLink (ComputeRegionInstanceGroupManagerResource s) Text
+instance P.HasComputedSelfLink (ComputeRegionInstanceGroupManagerResource s) Text
 
-computeRegionInstanceGroupManagerResource :: TF.Resource TF.Google (ComputeRegionInstanceGroupManagerResource s)
+computeRegionInstanceGroupManagerResource :: TF.Resource P.Google (ComputeRegionInstanceGroupManagerResource s)
 computeRegionInstanceGroupManagerResource =
     TF.newResource "google_compute_region_instance_group_manager" $
         ComputeRegionInstanceGroupManagerResource {
@@ -3718,66 +3717,66 @@ instance TF.ToHCL (ComputeRouteResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasDestRange (ComputeRouteResource s) s Text where
+instance P.HasDestRange (ComputeRouteResource s) s Text where
     destRange =
         lens (_dest_range :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _dest_range = a } :: ComputeRouteResource s)
 
-instance HasName (ComputeRouteResource s) s Text where
+instance P.HasName (ComputeRouteResource s) s Text where
     name =
         lens (_name :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeRouteResource s)
 
-instance HasNetwork (ComputeRouteResource s) s Text where
+instance P.HasNetwork (ComputeRouteResource s) s Text where
     network =
         lens (_network :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeRouteResource s)
 
-instance HasNextHopGateway (ComputeRouteResource s) s Text where
+instance P.HasNextHopGateway (ComputeRouteResource s) s Text where
     nextHopGateway =
         lens (_next_hop_gateway :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _next_hop_gateway = a } :: ComputeRouteResource s)
 
-instance HasNextHopInstance (ComputeRouteResource s) s Text where
+instance P.HasNextHopInstance (ComputeRouteResource s) s Text where
     nextHopInstance =
         lens (_next_hop_instance :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _next_hop_instance = a } :: ComputeRouteResource s)
 
-instance HasNextHopInstanceZone (ComputeRouteResource s) s Text where
+instance P.HasNextHopInstanceZone (ComputeRouteResource s) s Text where
     nextHopInstanceZone =
         lens (_next_hop_instance_zone :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _next_hop_instance_zone = a } :: ComputeRouteResource s)
 
-instance HasNextHopIp (ComputeRouteResource s) s Text where
+instance P.HasNextHopIp (ComputeRouteResource s) s Text where
     nextHopIp =
         lens (_next_hop_ip :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _next_hop_ip = a } :: ComputeRouteResource s)
 
-instance HasNextHopVpnTunnel (ComputeRouteResource s) s Text where
+instance P.HasNextHopVpnTunnel (ComputeRouteResource s) s Text where
     nextHopVpnTunnel =
         lens (_next_hop_vpn_tunnel :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _next_hop_vpn_tunnel = a } :: ComputeRouteResource s)
 
-instance HasPriority (ComputeRouteResource s) s Text where
+instance P.HasPriority (ComputeRouteResource s) s Text where
     priority =
         lens (_priority :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _priority = a } :: ComputeRouteResource s)
 
-instance HasProject (ComputeRouteResource s) s Text where
+instance P.HasProject (ComputeRouteResource s) s Text where
     project =
         lens (_project :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeRouteResource s)
 
-instance HasTags (ComputeRouteResource s) s Text where
+instance P.HasTags (ComputeRouteResource s) s Text where
     tags =
         lens (_tags :: ComputeRouteResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ComputeRouteResource s)
 
-instance HasComputedNextHopNetwork (ComputeRouteResource s) Text
+instance P.HasComputedNextHopNetwork (ComputeRouteResource s) Text
 
-instance HasComputedSelfLink (ComputeRouteResource s) Text
+instance P.HasComputedSelfLink (ComputeRouteResource s) Text
 
-computeRouteResource :: TF.Resource TF.Google (ComputeRouteResource s)
+computeRouteResource :: TF.Resource P.Google (ComputeRouteResource s)
 computeRouteResource =
     TF.newResource "google_compute_route" $
         ComputeRouteResource {
@@ -3825,37 +3824,37 @@ instance TF.ToHCL (ComputeRouterInterfaceResource s) where
         , TF.attribute "vpn_tunnel" _vpn_tunnel
         ]
 
-instance HasIpRange (ComputeRouterInterfaceResource s) s Text where
+instance P.HasIpRange (ComputeRouterInterfaceResource s) s Text where
     ipRange =
         lens (_ip_range :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_range = a } :: ComputeRouterInterfaceResource s)
 
-instance HasName (ComputeRouterInterfaceResource s) s Text where
+instance P.HasName (ComputeRouterInterfaceResource s) s Text where
     name =
         lens (_name :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeRouterInterfaceResource s)
 
-instance HasProject (ComputeRouterInterfaceResource s) s Text where
+instance P.HasProject (ComputeRouterInterfaceResource s) s Text where
     project =
         lens (_project :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeRouterInterfaceResource s)
 
-instance HasRegion (ComputeRouterInterfaceResource s) s Text where
+instance P.HasRegion (ComputeRouterInterfaceResource s) s Text where
     region =
         lens (_region :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeRouterInterfaceResource s)
 
-instance HasRouter (ComputeRouterInterfaceResource s) s Text where
+instance P.HasRouter (ComputeRouterInterfaceResource s) s Text where
     router =
         lens (_router :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _router = a } :: ComputeRouterInterfaceResource s)
 
-instance HasVpnTunnel (ComputeRouterInterfaceResource s) s Text where
+instance P.HasVpnTunnel (ComputeRouterInterfaceResource s) s Text where
     vpnTunnel =
         lens (_vpn_tunnel :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _vpn_tunnel = a } :: ComputeRouterInterfaceResource s)
 
-computeRouterInterfaceResource :: TF.Resource TF.Google (ComputeRouterInterfaceResource s)
+computeRouterInterfaceResource :: TF.Resource P.Google (ComputeRouterInterfaceResource s)
 computeRouterInterfaceResource =
     TF.newResource "google_compute_router_interface" $
         ComputeRouterInterfaceResource {
@@ -3898,39 +3897,39 @@ instance TF.ToHCL (ComputeRouterResource s) where
         , TF.attribute "region" _region
         ]
 
-instance HasBgp (ComputeRouterResource s) s Text where
+instance P.HasBgp (ComputeRouterResource s) s Text where
     bgp =
         lens (_bgp :: ComputeRouterResource s -> TF.Attribute s Text)
             (\s a -> s { _bgp = a } :: ComputeRouterResource s)
 
-instance HasDescription (ComputeRouterResource s) s Text where
+instance P.HasDescription (ComputeRouterResource s) s Text where
     description =
         lens (_description :: ComputeRouterResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeRouterResource s)
 
-instance HasName (ComputeRouterResource s) s Text where
+instance P.HasName (ComputeRouterResource s) s Text where
     name =
         lens (_name :: ComputeRouterResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeRouterResource s)
 
-instance HasNetwork (ComputeRouterResource s) s Text where
+instance P.HasNetwork (ComputeRouterResource s) s Text where
     network =
         lens (_network :: ComputeRouterResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeRouterResource s)
 
-instance HasProject (ComputeRouterResource s) s Text where
+instance P.HasProject (ComputeRouterResource s) s Text where
     project =
         lens (_project :: ComputeRouterResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeRouterResource s)
 
-instance HasRegion (ComputeRouterResource s) s Text where
+instance P.HasRegion (ComputeRouterResource s) s Text where
     region =
         lens (_region :: ComputeRouterResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeRouterResource s)
 
-instance HasComputedSelfLink (ComputeRouterResource s) Text
+instance P.HasComputedSelfLink (ComputeRouterResource s) Text
 
-computeRouterResource :: TF.Resource TF.Google (ComputeRouterResource s)
+computeRouterResource :: TF.Resource P.Google (ComputeRouterResource s)
 computeRouterResource =
     TF.newResource "google_compute_router" $
         ComputeRouterResource {
@@ -3960,12 +3959,12 @@ instance TF.ToHCL (ComputeSharedVpcHostProjectResource s) where
         [ TF.attribute "project" _project
         ]
 
-instance HasProject (ComputeSharedVpcHostProjectResource s) s Text where
+instance P.HasProject (ComputeSharedVpcHostProjectResource s) s Text where
     project =
         lens (_project :: ComputeSharedVpcHostProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeSharedVpcHostProjectResource s)
 
-computeSharedVpcHostProjectResource :: TF.Resource TF.Google (ComputeSharedVpcHostProjectResource s)
+computeSharedVpcHostProjectResource :: TF.Resource P.Google (ComputeSharedVpcHostProjectResource s)
 computeSharedVpcHostProjectResource =
     TF.newResource "google_compute_shared_vpc_host_project" $
         ComputeSharedVpcHostProjectResource {
@@ -3994,17 +3993,17 @@ instance TF.ToHCL (ComputeSharedVpcServiceProjectResource s) where
         , TF.attribute "service_project" _service_project
         ]
 
-instance HasHostProject (ComputeSharedVpcServiceProjectResource s) s Text where
+instance P.HasHostProject (ComputeSharedVpcServiceProjectResource s) s Text where
     hostProject =
         lens (_host_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _host_project = a } :: ComputeSharedVpcServiceProjectResource s)
 
-instance HasServiceProject (ComputeSharedVpcServiceProjectResource s) s Text where
+instance P.HasServiceProject (ComputeSharedVpcServiceProjectResource s) s Text where
     serviceProject =
         lens (_service_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _service_project = a } :: ComputeSharedVpcServiceProjectResource s)
 
-computeSharedVpcServiceProjectResource :: TF.Resource TF.Google (ComputeSharedVpcServiceProjectResource s)
+computeSharedVpcServiceProjectResource :: TF.Resource P.Google (ComputeSharedVpcServiceProjectResource s)
 computeSharedVpcServiceProjectResource =
     TF.newResource "google_compute_shared_vpc_service_project" $
         ComputeSharedVpcServiceProjectResource {
@@ -4046,52 +4045,52 @@ instance TF.ToHCL (ComputeSnapshotResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasLabels (ComputeSnapshotResource s) s Text where
+instance P.HasLabels (ComputeSnapshotResource s) s Text where
     labels =
         lens (_labels :: ComputeSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: ComputeSnapshotResource s)
 
-instance HasName (ComputeSnapshotResource s) s Text where
+instance P.HasName (ComputeSnapshotResource s) s Text where
     name =
         lens (_name :: ComputeSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeSnapshotResource s)
 
-instance HasProject (ComputeSnapshotResource s) s Text where
+instance P.HasProject (ComputeSnapshotResource s) s Text where
     project =
         lens (_project :: ComputeSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeSnapshotResource s)
 
-instance HasSnapshotEncryptionKeyRaw (ComputeSnapshotResource s) s Text where
+instance P.HasSnapshotEncryptionKeyRaw (ComputeSnapshotResource s) s Text where
     snapshotEncryptionKeyRaw =
         lens (_snapshot_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _snapshot_encryption_key_raw = a } :: ComputeSnapshotResource s)
 
-instance HasSourceDisk (ComputeSnapshotResource s) s Text where
+instance P.HasSourceDisk (ComputeSnapshotResource s) s Text where
     sourceDisk =
         lens (_source_disk :: ComputeSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _source_disk = a } :: ComputeSnapshotResource s)
 
-instance HasSourceDiskEncryptionKeyRaw (ComputeSnapshotResource s) s Text where
+instance P.HasSourceDiskEncryptionKeyRaw (ComputeSnapshotResource s) s Text where
     sourceDiskEncryptionKeyRaw =
         lens (_source_disk_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _source_disk_encryption_key_raw = a } :: ComputeSnapshotResource s)
 
-instance HasZone (ComputeSnapshotResource s) s Text where
+instance P.HasZone (ComputeSnapshotResource s) s Text where
     zone =
         lens (_zone :: ComputeSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ComputeSnapshotResource s)
 
-instance HasComputedLabelFingerprint (ComputeSnapshotResource s) Text
+instance P.HasComputedLabelFingerprint (ComputeSnapshotResource s) Text
 
-instance HasComputedSelfLink (ComputeSnapshotResource s) Text
+instance P.HasComputedSelfLink (ComputeSnapshotResource s) Text
 
-instance HasComputedSnapshotEncryptionKeySha256 (ComputeSnapshotResource s) Text
+instance P.HasComputedSnapshotEncryptionKeySha256 (ComputeSnapshotResource s) Text
 
-instance HasComputedSourceDiskEncryptionKeySha256 (ComputeSnapshotResource s) Text
+instance P.HasComputedSourceDiskEncryptionKeySha256 (ComputeSnapshotResource s) Text
 
-instance HasComputedSourceDiskLink (ComputeSnapshotResource s) Text
+instance P.HasComputedSourceDiskLink (ComputeSnapshotResource s) Text
 
-computeSnapshotResource :: TF.Resource TF.Google (ComputeSnapshotResource s)
+computeSnapshotResource :: TF.Resource P.Google (ComputeSnapshotResource s)
 computeSnapshotResource =
     TF.newResource "google_compute_snapshot" $
         ComputeSnapshotResource {
@@ -4137,41 +4136,41 @@ instance TF.ToHCL (ComputeSslCertificateResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasCertificate (ComputeSslCertificateResource s) s Text where
+instance P.HasCertificate (ComputeSslCertificateResource s) s Text where
     certificate =
         lens (_certificate :: ComputeSslCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _certificate = a } :: ComputeSslCertificateResource s)
 
-instance HasDescription (ComputeSslCertificateResource s) s Text where
+instance P.HasDescription (ComputeSslCertificateResource s) s Text where
     description =
         lens (_description :: ComputeSslCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeSslCertificateResource s)
 
-instance HasName (ComputeSslCertificateResource s) s Text where
+instance P.HasName (ComputeSslCertificateResource s) s Text where
     name =
         lens (_name :: ComputeSslCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeSslCertificateResource s)
 
-instance HasNamePrefix (ComputeSslCertificateResource s) s Text where
+instance P.HasNamePrefix (ComputeSslCertificateResource s) s Text where
     namePrefix =
         lens (_name_prefix :: ComputeSslCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _name_prefix = a } :: ComputeSslCertificateResource s)
 
-instance HasPrivateKey (ComputeSslCertificateResource s) s Text where
+instance P.HasPrivateKey (ComputeSslCertificateResource s) s Text where
     privateKey =
         lens (_private_key :: ComputeSslCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _private_key = a } :: ComputeSslCertificateResource s)
 
-instance HasProject (ComputeSslCertificateResource s) s Text where
+instance P.HasProject (ComputeSslCertificateResource s) s Text where
     project =
         lens (_project :: ComputeSslCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeSslCertificateResource s)
 
-instance HasComputedCertificateId (ComputeSslCertificateResource s) Text
+instance P.HasComputedCertificateId (ComputeSslCertificateResource s) Text
 
-instance HasComputedSelfLink (ComputeSslCertificateResource s) Text
+instance P.HasComputedSelfLink (ComputeSslCertificateResource s) Text
 
-computeSslCertificateResource :: TF.Resource TF.Google (ComputeSslCertificateResource s)
+computeSslCertificateResource :: TF.Resource P.Google (ComputeSslCertificateResource s)
 computeSslCertificateResource =
     TF.newResource "google_compute_ssl_certificate" $
         ComputeSslCertificateResource {
@@ -4220,51 +4219,51 @@ instance TF.ToHCL (ComputeSubnetworkResource s) where
         , TF.attribute "secondary_ip_range" _secondary_ip_range
         ]
 
-instance HasDescription (ComputeSubnetworkResource s) s Text where
+instance P.HasDescription (ComputeSubnetworkResource s) s Text where
     description =
         lens (_description :: ComputeSubnetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeSubnetworkResource s)
 
-instance HasIpCidrRange (ComputeSubnetworkResource s) s Text where
+instance P.HasIpCidrRange (ComputeSubnetworkResource s) s Text where
     ipCidrRange =
         lens (_ip_cidr_range :: ComputeSubnetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_cidr_range = a } :: ComputeSubnetworkResource s)
 
-instance HasName (ComputeSubnetworkResource s) s Text where
+instance P.HasName (ComputeSubnetworkResource s) s Text where
     name =
         lens (_name :: ComputeSubnetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeSubnetworkResource s)
 
-instance HasNetwork (ComputeSubnetworkResource s) s Text where
+instance P.HasNetwork (ComputeSubnetworkResource s) s Text where
     network =
         lens (_network :: ComputeSubnetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeSubnetworkResource s)
 
-instance HasPrivateIpGoogleAccess (ComputeSubnetworkResource s) s Text where
+instance P.HasPrivateIpGoogleAccess (ComputeSubnetworkResource s) s Text where
     privateIpGoogleAccess =
         lens (_private_ip_google_access :: ComputeSubnetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _private_ip_google_access = a } :: ComputeSubnetworkResource s)
 
-instance HasProject (ComputeSubnetworkResource s) s Text where
+instance P.HasProject (ComputeSubnetworkResource s) s Text where
     project =
         lens (_project :: ComputeSubnetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeSubnetworkResource s)
 
-instance HasRegion (ComputeSubnetworkResource s) s Text where
+instance P.HasRegion (ComputeSubnetworkResource s) s Text where
     region =
         lens (_region :: ComputeSubnetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeSubnetworkResource s)
 
-instance HasSecondaryIpRange (ComputeSubnetworkResource s) s Text where
+instance P.HasSecondaryIpRange (ComputeSubnetworkResource s) s Text where
     secondaryIpRange =
         lens (_secondary_ip_range :: ComputeSubnetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _secondary_ip_range = a } :: ComputeSubnetworkResource s)
 
-instance HasComputedGatewayAddress (ComputeSubnetworkResource s) Text
+instance P.HasComputedGatewayAddress (ComputeSubnetworkResource s) Text
 
-instance HasComputedSelfLink (ComputeSubnetworkResource s) Text
+instance P.HasComputedSelfLink (ComputeSubnetworkResource s) Text
 
-computeSubnetworkResource :: TF.Resource TF.Google (ComputeSubnetworkResource s)
+computeSubnetworkResource :: TF.Resource P.Google (ComputeSubnetworkResource s)
 computeSubnetworkResource =
     TF.newResource "google_compute_subnetwork" $
         ComputeSubnetworkResource {
@@ -4304,31 +4303,31 @@ instance TF.ToHCL (ComputeTargetHttpProxyResource s) where
         , TF.attribute "url_map" _url_map
         ]
 
-instance HasDescription (ComputeTargetHttpProxyResource s) s Text where
+instance P.HasDescription (ComputeTargetHttpProxyResource s) s Text where
     description =
         lens (_description :: ComputeTargetHttpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeTargetHttpProxyResource s)
 
-instance HasName (ComputeTargetHttpProxyResource s) s Text where
+instance P.HasName (ComputeTargetHttpProxyResource s) s Text where
     name =
         lens (_name :: ComputeTargetHttpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeTargetHttpProxyResource s)
 
-instance HasProject (ComputeTargetHttpProxyResource s) s Text where
+instance P.HasProject (ComputeTargetHttpProxyResource s) s Text where
     project =
         lens (_project :: ComputeTargetHttpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeTargetHttpProxyResource s)
 
-instance HasUrlMap (ComputeTargetHttpProxyResource s) s Text where
+instance P.HasUrlMap (ComputeTargetHttpProxyResource s) s Text where
     urlMap =
         lens (_url_map :: ComputeTargetHttpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _url_map = a } :: ComputeTargetHttpProxyResource s)
 
-instance HasComputedProxyId (ComputeTargetHttpProxyResource s) Text
+instance P.HasComputedProxyId (ComputeTargetHttpProxyResource s) Text
 
-instance HasComputedSelfLink (ComputeTargetHttpProxyResource s) Text
+instance P.HasComputedSelfLink (ComputeTargetHttpProxyResource s) Text
 
-computeTargetHttpProxyResource :: TF.Resource TF.Google (ComputeTargetHttpProxyResource s)
+computeTargetHttpProxyResource :: TF.Resource P.Google (ComputeTargetHttpProxyResource s)
 computeTargetHttpProxyResource =
     TF.newResource "google_compute_target_http_proxy" $
         ComputeTargetHttpProxyResource {
@@ -4368,36 +4367,36 @@ instance TF.ToHCL (ComputeTargetHttpsProxyResource s) where
         , TF.attribute "url_map" _url_map
         ]
 
-instance HasDescription (ComputeTargetHttpsProxyResource s) s Text where
+instance P.HasDescription (ComputeTargetHttpsProxyResource s) s Text where
     description =
         lens (_description :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeTargetHttpsProxyResource s)
 
-instance HasName (ComputeTargetHttpsProxyResource s) s Text where
+instance P.HasName (ComputeTargetHttpsProxyResource s) s Text where
     name =
         lens (_name :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeTargetHttpsProxyResource s)
 
-instance HasProject (ComputeTargetHttpsProxyResource s) s Text where
+instance P.HasProject (ComputeTargetHttpsProxyResource s) s Text where
     project =
         lens (_project :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeTargetHttpsProxyResource s)
 
-instance HasSslCertificates (ComputeTargetHttpsProxyResource s) s Text where
+instance P.HasSslCertificates (ComputeTargetHttpsProxyResource s) s Text where
     sslCertificates =
         lens (_ssl_certificates :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _ssl_certificates = a } :: ComputeTargetHttpsProxyResource s)
 
-instance HasUrlMap (ComputeTargetHttpsProxyResource s) s Text where
+instance P.HasUrlMap (ComputeTargetHttpsProxyResource s) s Text where
     urlMap =
         lens (_url_map :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _url_map = a } :: ComputeTargetHttpsProxyResource s)
 
-instance HasComputedProxyId (ComputeTargetHttpsProxyResource s) Text
+instance P.HasComputedProxyId (ComputeTargetHttpsProxyResource s) Text
 
-instance HasComputedSelfLink (ComputeTargetHttpsProxyResource s) Text
+instance P.HasComputedSelfLink (ComputeTargetHttpsProxyResource s) Text
 
-computeTargetHttpsProxyResource :: TF.Resource TF.Google (ComputeTargetHttpsProxyResource s)
+computeTargetHttpsProxyResource :: TF.Resource P.Google (ComputeTargetHttpsProxyResource s)
 computeTargetHttpsProxyResource =
     TF.newResource "google_compute_target_https_proxy" $
         ComputeTargetHttpsProxyResource {
@@ -4450,54 +4449,54 @@ instance TF.ToHCL (ComputeTargetPoolResource s) where
         , TF.attribute "session_affinity" _session_affinity
         ]
 
-instance HasBackupPool (ComputeTargetPoolResource s) s Text where
+instance P.HasBackupPool (ComputeTargetPoolResource s) s Text where
     backupPool =
         lens (_backup_pool :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _backup_pool = a } :: ComputeTargetPoolResource s)
 
-instance HasDescription (ComputeTargetPoolResource s) s Text where
+instance P.HasDescription (ComputeTargetPoolResource s) s Text where
     description =
         lens (_description :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeTargetPoolResource s)
 
-instance HasFailoverRatio (ComputeTargetPoolResource s) s Text where
+instance P.HasFailoverRatio (ComputeTargetPoolResource s) s Text where
     failoverRatio =
         lens (_failover_ratio :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _failover_ratio = a } :: ComputeTargetPoolResource s)
 
-instance HasHealthChecks (ComputeTargetPoolResource s) s Text where
+instance P.HasHealthChecks (ComputeTargetPoolResource s) s Text where
     healthChecks =
         lens (_health_checks :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _health_checks = a } :: ComputeTargetPoolResource s)
 
-instance HasInstances (ComputeTargetPoolResource s) s Text where
+instance P.HasInstances (ComputeTargetPoolResource s) s Text where
     instances =
         lens (_instances :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _instances = a } :: ComputeTargetPoolResource s)
 
-instance HasName (ComputeTargetPoolResource s) s Text where
+instance P.HasName (ComputeTargetPoolResource s) s Text where
     name =
         lens (_name :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeTargetPoolResource s)
 
-instance HasProject (ComputeTargetPoolResource s) s Text where
+instance P.HasProject (ComputeTargetPoolResource s) s Text where
     project =
         lens (_project :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeTargetPoolResource s)
 
-instance HasRegion (ComputeTargetPoolResource s) s Text where
+instance P.HasRegion (ComputeTargetPoolResource s) s Text where
     region =
         lens (_region :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeTargetPoolResource s)
 
-instance HasSessionAffinity (ComputeTargetPoolResource s) s Text where
+instance P.HasSessionAffinity (ComputeTargetPoolResource s) s Text where
     sessionAffinity =
         lens (_session_affinity :: ComputeTargetPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _session_affinity = a } :: ComputeTargetPoolResource s)
 
-instance HasComputedSelfLink (ComputeTargetPoolResource s) Text
+instance P.HasComputedSelfLink (ComputeTargetPoolResource s) Text
 
-computeTargetPoolResource :: TF.Resource TF.Google (ComputeTargetPoolResource s)
+computeTargetPoolResource :: TF.Resource P.Google (ComputeTargetPoolResource s)
 computeTargetPoolResource =
     TF.newResource "google_compute_target_pool" $
         ComputeTargetPoolResource {
@@ -4543,41 +4542,41 @@ instance TF.ToHCL (ComputeTargetSslProxyResource s) where
         , TF.attribute "ssl_certificates" _ssl_certificates
         ]
 
-instance HasBackendService (ComputeTargetSslProxyResource s) s Text where
+instance P.HasBackendService (ComputeTargetSslProxyResource s) s Text where
     backendService =
         lens (_backend_service :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_service = a } :: ComputeTargetSslProxyResource s)
 
-instance HasDescription (ComputeTargetSslProxyResource s) s Text where
+instance P.HasDescription (ComputeTargetSslProxyResource s) s Text where
     description =
         lens (_description :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeTargetSslProxyResource s)
 
-instance HasName (ComputeTargetSslProxyResource s) s Text where
+instance P.HasName (ComputeTargetSslProxyResource s) s Text where
     name =
         lens (_name :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeTargetSslProxyResource s)
 
-instance HasProject (ComputeTargetSslProxyResource s) s Text where
+instance P.HasProject (ComputeTargetSslProxyResource s) s Text where
     project =
         lens (_project :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeTargetSslProxyResource s)
 
-instance HasProxyHeader (ComputeTargetSslProxyResource s) s Text where
+instance P.HasProxyHeader (ComputeTargetSslProxyResource s) s Text where
     proxyHeader =
         lens (_proxy_header :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _proxy_header = a } :: ComputeTargetSslProxyResource s)
 
-instance HasSslCertificates (ComputeTargetSslProxyResource s) s Text where
+instance P.HasSslCertificates (ComputeTargetSslProxyResource s) s Text where
     sslCertificates =
         lens (_ssl_certificates :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _ssl_certificates = a } :: ComputeTargetSslProxyResource s)
 
-instance HasComputedProxyId (ComputeTargetSslProxyResource s) Text
+instance P.HasComputedProxyId (ComputeTargetSslProxyResource s) Text
 
-instance HasComputedSelfLink (ComputeTargetSslProxyResource s) Text
+instance P.HasComputedSelfLink (ComputeTargetSslProxyResource s) Text
 
-computeTargetSslProxyResource :: TF.Resource TF.Google (ComputeTargetSslProxyResource s)
+computeTargetSslProxyResource :: TF.Resource P.Google (ComputeTargetSslProxyResource s)
 computeTargetSslProxyResource =
     TF.newResource "google_compute_target_ssl_proxy" $
         ComputeTargetSslProxyResource {
@@ -4617,36 +4616,36 @@ instance TF.ToHCL (ComputeTargetTcpProxyResource s) where
         , TF.attribute "proxy_header" _proxy_header
         ]
 
-instance HasBackendService (ComputeTargetTcpProxyResource s) s Text where
+instance P.HasBackendService (ComputeTargetTcpProxyResource s) s Text where
     backendService =
         lens (_backend_service :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_service = a } :: ComputeTargetTcpProxyResource s)
 
-instance HasDescription (ComputeTargetTcpProxyResource s) s Text where
+instance P.HasDescription (ComputeTargetTcpProxyResource s) s Text where
     description =
         lens (_description :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeTargetTcpProxyResource s)
 
-instance HasName (ComputeTargetTcpProxyResource s) s Text where
+instance P.HasName (ComputeTargetTcpProxyResource s) s Text where
     name =
         lens (_name :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeTargetTcpProxyResource s)
 
-instance HasProject (ComputeTargetTcpProxyResource s) s Text where
+instance P.HasProject (ComputeTargetTcpProxyResource s) s Text where
     project =
         lens (_project :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeTargetTcpProxyResource s)
 
-instance HasProxyHeader (ComputeTargetTcpProxyResource s) s Text where
+instance P.HasProxyHeader (ComputeTargetTcpProxyResource s) s Text where
     proxyHeader =
         lens (_proxy_header :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
             (\s a -> s { _proxy_header = a } :: ComputeTargetTcpProxyResource s)
 
-instance HasComputedProxyId (ComputeTargetTcpProxyResource s) Text
+instance P.HasComputedProxyId (ComputeTargetTcpProxyResource s) Text
 
-instance HasComputedSelfLink (ComputeTargetTcpProxyResource s) Text
+instance P.HasComputedSelfLink (ComputeTargetTcpProxyResource s) Text
 
-computeTargetTcpProxyResource :: TF.Resource TF.Google (ComputeTargetTcpProxyResource s)
+computeTargetTcpProxyResource :: TF.Resource P.Google (ComputeTargetTcpProxyResource s)
 computeTargetTcpProxyResource =
     TF.newResource "google_compute_target_tcp_proxy" $
         ComputeTargetTcpProxyResource {
@@ -4691,48 +4690,48 @@ instance TF.ToHCL (ComputeUrlMapResource s) where
         , TF.attribute "test" _test
         ]
 
-instance HasDefaultService (ComputeUrlMapResource s) s Text where
+instance P.HasDefaultService (ComputeUrlMapResource s) s Text where
     defaultService =
         lens (_default_service :: ComputeUrlMapResource s -> TF.Attribute s Text)
             (\s a -> s { _default_service = a } :: ComputeUrlMapResource s)
 
-instance HasDescription (ComputeUrlMapResource s) s Text where
+instance P.HasDescription (ComputeUrlMapResource s) s Text where
     description =
         lens (_description :: ComputeUrlMapResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeUrlMapResource s)
 
-instance HasHostRule (ComputeUrlMapResource s) s Text where
+instance P.HasHostRule (ComputeUrlMapResource s) s Text where
     hostRule =
         lens (_host_rule :: ComputeUrlMapResource s -> TF.Attribute s Text)
             (\s a -> s { _host_rule = a } :: ComputeUrlMapResource s)
 
-instance HasName (ComputeUrlMapResource s) s Text where
+instance P.HasName (ComputeUrlMapResource s) s Text where
     name =
         lens (_name :: ComputeUrlMapResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeUrlMapResource s)
 
-instance HasPathMatcher (ComputeUrlMapResource s) s Text where
+instance P.HasPathMatcher (ComputeUrlMapResource s) s Text where
     pathMatcher =
         lens (_path_matcher :: ComputeUrlMapResource s -> TF.Attribute s Text)
             (\s a -> s { _path_matcher = a } :: ComputeUrlMapResource s)
 
-instance HasProject (ComputeUrlMapResource s) s Text where
+instance P.HasProject (ComputeUrlMapResource s) s Text where
     project =
         lens (_project :: ComputeUrlMapResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeUrlMapResource s)
 
-instance HasTest (ComputeUrlMapResource s) s Text where
+instance P.HasTest (ComputeUrlMapResource s) s Text where
     test =
         lens (_test :: ComputeUrlMapResource s -> TF.Attribute s Text)
             (\s a -> s { _test = a } :: ComputeUrlMapResource s)
 
-instance HasComputedFingerprint (ComputeUrlMapResource s) Text
+instance P.HasComputedFingerprint (ComputeUrlMapResource s) Text
 
-instance HasComputedMapId (ComputeUrlMapResource s) Text
+instance P.HasComputedMapId (ComputeUrlMapResource s) Text
 
-instance HasComputedSelfLink (ComputeUrlMapResource s) Text
+instance P.HasComputedSelfLink (ComputeUrlMapResource s) Text
 
-computeUrlMapResource :: TF.Resource TF.Google (ComputeUrlMapResource s)
+computeUrlMapResource :: TF.Resource P.Google (ComputeUrlMapResource s)
 computeUrlMapResource =
     TF.newResource "google_compute_url_map" $
         ComputeUrlMapResource {
@@ -4772,34 +4771,34 @@ instance TF.ToHCL (ComputeVpnGatewayResource s) where
         , TF.attribute "region" _region
         ]
 
-instance HasDescription (ComputeVpnGatewayResource s) s Text where
+instance P.HasDescription (ComputeVpnGatewayResource s) s Text where
     description =
         lens (_description :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeVpnGatewayResource s)
 
-instance HasName (ComputeVpnGatewayResource s) s Text where
+instance P.HasName (ComputeVpnGatewayResource s) s Text where
     name =
         lens (_name :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeVpnGatewayResource s)
 
-instance HasNetwork (ComputeVpnGatewayResource s) s Text where
+instance P.HasNetwork (ComputeVpnGatewayResource s) s Text where
     network =
         lens (_network :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeVpnGatewayResource s)
 
-instance HasProject (ComputeVpnGatewayResource s) s Text where
+instance P.HasProject (ComputeVpnGatewayResource s) s Text where
     project =
         lens (_project :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeVpnGatewayResource s)
 
-instance HasRegion (ComputeVpnGatewayResource s) s Text where
+instance P.HasRegion (ComputeVpnGatewayResource s) s Text where
     region =
         lens (_region :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeVpnGatewayResource s)
 
-instance HasComputedSelfLink (ComputeVpnGatewayResource s) Text
+instance P.HasComputedSelfLink (ComputeVpnGatewayResource s) Text
 
-computeVpnGatewayResource :: TF.Resource TF.Google (ComputeVpnGatewayResource s)
+computeVpnGatewayResource :: TF.Resource P.Google (ComputeVpnGatewayResource s)
 computeVpnGatewayResource =
     TF.newResource "google_compute_vpn_gateway" $
         ComputeVpnGatewayResource {
@@ -4857,66 +4856,66 @@ instance TF.ToHCL (ComputeVpnTunnelResource s) where
         , TF.attribute "target_vpn_gateway" _target_vpn_gateway
         ]
 
-instance HasDescription (ComputeVpnTunnelResource s) s Text where
+instance P.HasDescription (ComputeVpnTunnelResource s) s Text where
     description =
         lens (_description :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ComputeVpnTunnelResource s)
 
-instance HasIkeVersion (ComputeVpnTunnelResource s) s Text where
+instance P.HasIkeVersion (ComputeVpnTunnelResource s) s Text where
     ikeVersion =
         lens (_ike_version :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _ike_version = a } :: ComputeVpnTunnelResource s)
 
-instance HasLocalTrafficSelector (ComputeVpnTunnelResource s) s Text where
+instance P.HasLocalTrafficSelector (ComputeVpnTunnelResource s) s Text where
     localTrafficSelector =
         lens (_local_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _local_traffic_selector = a } :: ComputeVpnTunnelResource s)
 
-instance HasName (ComputeVpnTunnelResource s) s Text where
+instance P.HasName (ComputeVpnTunnelResource s) s Text where
     name =
         lens (_name :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ComputeVpnTunnelResource s)
 
-instance HasPeerIp (ComputeVpnTunnelResource s) s Text where
+instance P.HasPeerIp (ComputeVpnTunnelResource s) s Text where
     peerIp =
         lens (_peer_ip :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _peer_ip = a } :: ComputeVpnTunnelResource s)
 
-instance HasProject (ComputeVpnTunnelResource s) s Text where
+instance P.HasProject (ComputeVpnTunnelResource s) s Text where
     project =
         lens (_project :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ComputeVpnTunnelResource s)
 
-instance HasRegion (ComputeVpnTunnelResource s) s Text where
+instance P.HasRegion (ComputeVpnTunnelResource s) s Text where
     region =
         lens (_region :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ComputeVpnTunnelResource s)
 
-instance HasRemoteTrafficSelector (ComputeVpnTunnelResource s) s Text where
+instance P.HasRemoteTrafficSelector (ComputeVpnTunnelResource s) s Text where
     remoteTrafficSelector =
         lens (_remote_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _remote_traffic_selector = a } :: ComputeVpnTunnelResource s)
 
-instance HasRouter (ComputeVpnTunnelResource s) s Text where
+instance P.HasRouter (ComputeVpnTunnelResource s) s Text where
     router =
         lens (_router :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _router = a } :: ComputeVpnTunnelResource s)
 
-instance HasSharedSecret (ComputeVpnTunnelResource s) s Text where
+instance P.HasSharedSecret (ComputeVpnTunnelResource s) s Text where
     sharedSecret =
         lens (_shared_secret :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _shared_secret = a } :: ComputeVpnTunnelResource s)
 
-instance HasTargetVpnGateway (ComputeVpnTunnelResource s) s Text where
+instance P.HasTargetVpnGateway (ComputeVpnTunnelResource s) s Text where
     targetVpnGateway =
         lens (_target_vpn_gateway :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
             (\s a -> s { _target_vpn_gateway = a } :: ComputeVpnTunnelResource s)
 
-instance HasComputedDetailedStatus (ComputeVpnTunnelResource s) Text
+instance P.HasComputedDetailedStatus (ComputeVpnTunnelResource s) Text
 
-instance HasComputedSelfLink (ComputeVpnTunnelResource s) Text
+instance P.HasComputedSelfLink (ComputeVpnTunnelResource s) Text
 
-computeVpnTunnelResource :: TF.Resource TF.Google (ComputeVpnTunnelResource s)
+computeVpnTunnelResource :: TF.Resource P.Google (ComputeVpnTunnelResource s)
 computeVpnTunnelResource =
     TF.newResource "google_compute_vpn_tunnel" $
         ComputeVpnTunnelResource {
@@ -5017,136 +5016,136 @@ instance TF.ToHCL (ContainerClusterResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasAdditionalZones (ContainerClusterResource s) s Text where
+instance P.HasAdditionalZones (ContainerClusterResource s) s Text where
     additionalZones =
         lens (_additional_zones :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _additional_zones = a } :: ContainerClusterResource s)
 
-instance HasAddonsConfig (ContainerClusterResource s) s Text where
+instance P.HasAddonsConfig (ContainerClusterResource s) s Text where
     addonsConfig =
         lens (_addons_config :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _addons_config = a } :: ContainerClusterResource s)
 
-instance HasClusterIpv4Cidr (ContainerClusterResource s) s Text where
+instance P.HasClusterIpv4Cidr (ContainerClusterResource s) s Text where
     clusterIpv4Cidr =
         lens (_cluster_ipv4_cidr :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _cluster_ipv4_cidr = a } :: ContainerClusterResource s)
 
-instance HasDescription (ContainerClusterResource s) s Text where
+instance P.HasDescription (ContainerClusterResource s) s Text where
     description =
         lens (_description :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ContainerClusterResource s)
 
-instance HasEnableKubernetesAlpha (ContainerClusterResource s) s Text where
+instance P.HasEnableKubernetesAlpha (ContainerClusterResource s) s Text where
     enableKubernetesAlpha =
         lens (_enable_kubernetes_alpha :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_kubernetes_alpha = a } :: ContainerClusterResource s)
 
-instance HasEnableLegacyAbac (ContainerClusterResource s) s Text where
+instance P.HasEnableLegacyAbac (ContainerClusterResource s) s Text where
     enableLegacyAbac =
         lens (_enable_legacy_abac :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_legacy_abac = a } :: ContainerClusterResource s)
 
-instance HasInitialNodeCount (ContainerClusterResource s) s Text where
+instance P.HasInitialNodeCount (ContainerClusterResource s) s Text where
     initialNodeCount =
         lens (_initial_node_count :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _initial_node_count = a } :: ContainerClusterResource s)
 
-instance HasIpAllocationPolicy (ContainerClusterResource s) s Text where
+instance P.HasIpAllocationPolicy (ContainerClusterResource s) s Text where
     ipAllocationPolicy =
         lens (_ip_allocation_policy :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_allocation_policy = a } :: ContainerClusterResource s)
 
-instance HasLoggingService (ContainerClusterResource s) s Text where
+instance P.HasLoggingService (ContainerClusterResource s) s Text where
     loggingService =
         lens (_logging_service :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _logging_service = a } :: ContainerClusterResource s)
 
-instance HasMaintenancePolicy (ContainerClusterResource s) s Text where
+instance P.HasMaintenancePolicy (ContainerClusterResource s) s Text where
     maintenancePolicy =
         lens (_maintenance_policy :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _maintenance_policy = a } :: ContainerClusterResource s)
 
-instance HasMasterAuth (ContainerClusterResource s) s Text where
+instance P.HasMasterAuth (ContainerClusterResource s) s Text where
     masterAuth =
         lens (_master_auth :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _master_auth = a } :: ContainerClusterResource s)
 
-instance HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) s Text where
+instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) s Text where
     masterAuthorizedNetworksConfig =
         lens (_master_authorized_networks_config :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _master_authorized_networks_config = a } :: ContainerClusterResource s)
 
-instance HasMinMasterVersion (ContainerClusterResource s) s Text where
+instance P.HasMinMasterVersion (ContainerClusterResource s) s Text where
     minMasterVersion =
         lens (_min_master_version :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _min_master_version = a } :: ContainerClusterResource s)
 
-instance HasMonitoringService (ContainerClusterResource s) s Text where
+instance P.HasMonitoringService (ContainerClusterResource s) s Text where
     monitoringService =
         lens (_monitoring_service :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _monitoring_service = a } :: ContainerClusterResource s)
 
-instance HasName (ContainerClusterResource s) s Text where
+instance P.HasName (ContainerClusterResource s) s Text where
     name =
         lens (_name :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ContainerClusterResource s)
 
-instance HasNetwork (ContainerClusterResource s) s Text where
+instance P.HasNetwork (ContainerClusterResource s) s Text where
     network =
         lens (_network :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ContainerClusterResource s)
 
-instance HasNetworkPolicy (ContainerClusterResource s) s Text where
+instance P.HasNetworkPolicy (ContainerClusterResource s) s Text where
     networkPolicy =
         lens (_network_policy :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _network_policy = a } :: ContainerClusterResource s)
 
-instance HasNodeConfig (ContainerClusterResource s) s Text where
+instance P.HasNodeConfig (ContainerClusterResource s) s Text where
     nodeConfig =
         lens (_node_config :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _node_config = a } :: ContainerClusterResource s)
 
-instance HasNodePool (ContainerClusterResource s) s Text where
+instance P.HasNodePool (ContainerClusterResource s) s Text where
     nodePool =
         lens (_node_pool :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _node_pool = a } :: ContainerClusterResource s)
 
-instance HasNodeVersion (ContainerClusterResource s) s Text where
+instance P.HasNodeVersion (ContainerClusterResource s) s Text where
     nodeVersion =
         lens (_node_version :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _node_version = a } :: ContainerClusterResource s)
 
-instance HasProject (ContainerClusterResource s) s Text where
+instance P.HasProject (ContainerClusterResource s) s Text where
     project =
         lens (_project :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ContainerClusterResource s)
 
-instance HasSubnetwork (ContainerClusterResource s) s Text where
+instance P.HasSubnetwork (ContainerClusterResource s) s Text where
     subnetwork =
         lens (_subnetwork :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _subnetwork = a } :: ContainerClusterResource s)
 
-instance HasZone (ContainerClusterResource s) s Text where
+instance P.HasZone (ContainerClusterResource s) s Text where
     zone =
         lens (_zone :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ContainerClusterResource s)
 
-instance HasComputedEndpoint (ContainerClusterResource s) Text
+instance P.HasComputedEndpoint (ContainerClusterResource s) Text
 
-instance HasComputedInstanceGroupUrls (ContainerClusterResource s) Text
+instance P.HasComputedInstanceGroupUrls (ContainerClusterResource s) Text
 
-instance HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration (ContainerClusterResource s) Text
+instance P.HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration (ContainerClusterResource s) Text
 
-instance HasComputedMasterAuth0ClientCertificate (ContainerClusterResource s) Text
+instance P.HasComputedMasterAuth0ClientCertificate (ContainerClusterResource s) Text
 
-instance HasComputedMasterAuth0ClientKey (ContainerClusterResource s) Text
+instance P.HasComputedMasterAuth0ClientKey (ContainerClusterResource s) Text
 
-instance HasComputedMasterAuth0ClusterCaCertificate (ContainerClusterResource s) Text
+instance P.HasComputedMasterAuth0ClusterCaCertificate (ContainerClusterResource s) Text
 
-instance HasComputedMasterVersion (ContainerClusterResource s) Text
+instance P.HasComputedMasterVersion (ContainerClusterResource s) Text
 
-containerClusterResource :: TF.Resource TF.Google (ContainerClusterResource s)
+containerClusterResource :: TF.Resource P.Google (ContainerClusterResource s)
 containerClusterResource =
     TF.newResource "google_container_cluster" $
         ContainerClusterResource {
@@ -5216,52 +5215,52 @@ instance TF.ToHCL (ContainerNodePoolResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasAutoscaling (ContainerNodePoolResource s) s Text where
+instance P.HasAutoscaling (ContainerNodePoolResource s) s Text where
     autoscaling =
         lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _autoscaling = a } :: ContainerNodePoolResource s)
 
-instance HasCluster (ContainerNodePoolResource s) s Text where
+instance P.HasCluster (ContainerNodePoolResource s) s Text where
     cluster =
         lens (_cluster :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _cluster = a } :: ContainerNodePoolResource s)
 
-instance HasManagement (ContainerNodePoolResource s) s Text where
+instance P.HasManagement (ContainerNodePoolResource s) s Text where
     management =
         lens (_management :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _management = a } :: ContainerNodePoolResource s)
 
-instance HasName (ContainerNodePoolResource s) s Text where
+instance P.HasName (ContainerNodePoolResource s) s Text where
     name =
         lens (_name :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ContainerNodePoolResource s)
 
-instance HasNamePrefix (ContainerNodePoolResource s) s Text where
+instance P.HasNamePrefix (ContainerNodePoolResource s) s Text where
     namePrefix =
         lens (_name_prefix :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _name_prefix = a } :: ContainerNodePoolResource s)
 
-instance HasNodeConfig (ContainerNodePoolResource s) s Text where
+instance P.HasNodeConfig (ContainerNodePoolResource s) s Text where
     nodeConfig =
         lens (_node_config :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _node_config = a } :: ContainerNodePoolResource s)
 
-instance HasNodeCount (ContainerNodePoolResource s) s Text where
+instance P.HasNodeCount (ContainerNodePoolResource s) s Text where
     nodeCount =
         lens (_node_count :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _node_count = a } :: ContainerNodePoolResource s)
 
-instance HasProject (ContainerNodePoolResource s) s Text where
+instance P.HasProject (ContainerNodePoolResource s) s Text where
     project =
         lens (_project :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ContainerNodePoolResource s)
 
-instance HasZone (ContainerNodePoolResource s) s Text where
+instance P.HasZone (ContainerNodePoolResource s) s Text where
     zone =
         lens (_zone :: ContainerNodePoolResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ContainerNodePoolResource s)
 
-containerNodePoolResource :: TF.Resource TF.Google (ContainerNodePoolResource s)
+containerNodePoolResource :: TF.Resource P.Google (ContainerNodePoolResource s)
 containerNodePoolResource =
     TF.newResource "google_container_node_pool" $
         ContainerNodePoolResource {
@@ -5314,49 +5313,49 @@ instance TF.ToHCL (DataflowJobResource s) where
         , TF.attribute "zone" _zone
         ]
 
-instance HasMaxWorkers (DataflowJobResource s) s Text where
+instance P.HasMaxWorkers (DataflowJobResource s) s Text where
     maxWorkers =
         lens (_max_workers :: DataflowJobResource s -> TF.Attribute s Text)
             (\s a -> s { _max_workers = a } :: DataflowJobResource s)
 
-instance HasName (DataflowJobResource s) s Text where
+instance P.HasName (DataflowJobResource s) s Text where
     name =
         lens (_name :: DataflowJobResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DataflowJobResource s)
 
-instance HasOnDelete (DataflowJobResource s) s Text where
+instance P.HasOnDelete (DataflowJobResource s) s Text where
     onDelete =
         lens (_on_delete :: DataflowJobResource s -> TF.Attribute s Text)
             (\s a -> s { _on_delete = a } :: DataflowJobResource s)
 
-instance HasParameters (DataflowJobResource s) s Text where
+instance P.HasParameters (DataflowJobResource s) s Text where
     parameters =
         lens (_parameters :: DataflowJobResource s -> TF.Attribute s Text)
             (\s a -> s { _parameters = a } :: DataflowJobResource s)
 
-instance HasProject (DataflowJobResource s) s Text where
+instance P.HasProject (DataflowJobResource s) s Text where
     project =
         lens (_project :: DataflowJobResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: DataflowJobResource s)
 
-instance HasTempGcsLocation (DataflowJobResource s) s Text where
+instance P.HasTempGcsLocation (DataflowJobResource s) s Text where
     tempGcsLocation =
         lens (_temp_gcs_location :: DataflowJobResource s -> TF.Attribute s Text)
             (\s a -> s { _temp_gcs_location = a } :: DataflowJobResource s)
 
-instance HasTemplateGcsPath (DataflowJobResource s) s Text where
+instance P.HasTemplateGcsPath (DataflowJobResource s) s Text where
     templateGcsPath =
         lens (_template_gcs_path :: DataflowJobResource s -> TF.Attribute s Text)
             (\s a -> s { _template_gcs_path = a } :: DataflowJobResource s)
 
-instance HasZone (DataflowJobResource s) s Text where
+instance P.HasZone (DataflowJobResource s) s Text where
     zone =
         lens (_zone :: DataflowJobResource s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: DataflowJobResource s)
 
-instance HasComputedState (DataflowJobResource s) Text
+instance P.HasComputedState (DataflowJobResource s) Text
 
-dataflowJobResource :: TF.Resource TF.Google (DataflowJobResource s)
+dataflowJobResource :: TF.Resource P.Google (DataflowJobResource s)
 dataflowJobResource =
     TF.newResource "google_dataflow_job" $
         DataflowJobResource {
@@ -5401,42 +5400,42 @@ instance TF.ToHCL (DataprocClusterResource s) where
         , TF.attribute "region" _region
         ]
 
-instance HasClusterConfig (DataprocClusterResource s) s Text where
+instance P.HasClusterConfig (DataprocClusterResource s) s Text where
     clusterConfig =
         lens (_cluster_config :: DataprocClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _cluster_config = a } :: DataprocClusterResource s)
 
-instance HasLabels (DataprocClusterResource s) s Text where
+instance P.HasLabels (DataprocClusterResource s) s Text where
     labels =
         lens (_labels :: DataprocClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: DataprocClusterResource s)
 
-instance HasName (DataprocClusterResource s) s Text where
+instance P.HasName (DataprocClusterResource s) s Text where
     name =
         lens (_name :: DataprocClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DataprocClusterResource s)
 
-instance HasProject (DataprocClusterResource s) s Text where
+instance P.HasProject (DataprocClusterResource s) s Text where
     project =
         lens (_project :: DataprocClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: DataprocClusterResource s)
 
-instance HasRegion (DataprocClusterResource s) s Text where
+instance P.HasRegion (DataprocClusterResource s) s Text where
     region =
         lens (_region :: DataprocClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: DataprocClusterResource s)
 
-instance HasComputedClusterConfigBucket (DataprocClusterResource s) Text
+instance P.HasComputedClusterConfigBucket (DataprocClusterResource s) Text
 
-instance HasComputedClusterConfigMasterConfigInstanceNames (DataprocClusterResource s) Text
+instance P.HasComputedClusterConfigMasterConfigInstanceNames (DataprocClusterResource s) Text
 
-instance HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames (DataprocClusterResource s) Text
+instance P.HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames (DataprocClusterResource s) Text
 
-instance HasComputedClusterConfigSoftwareConfigProperties (DataprocClusterResource s) Text
+instance P.HasComputedClusterConfigSoftwareConfigProperties (DataprocClusterResource s) Text
 
-instance HasComputedClusterConfigWorkerConfigInstanceNames (DataprocClusterResource s) Text
+instance P.HasComputedClusterConfigWorkerConfigInstanceNames (DataprocClusterResource s) Text
 
-dataprocClusterResource :: TF.Resource TF.Google (DataprocClusterResource s)
+dataprocClusterResource :: TF.Resource P.Google (DataprocClusterResource s)
 dataprocClusterResource =
     TF.newResource "google_dataproc_cluster" $
         DataprocClusterResource {
@@ -5465,9 +5464,9 @@ data DataprocJobResource s = DataprocJobResource {
     {- ^ (Optional) The Cloud Dataproc region. This essentially determines which clusters are available for this job to be submitted to. If not specified, defaults to @global@ . -}
     , _xxx_config :: !(TF.Attribute s Text)
     {- ^ (Required) Exactly one of the specific job types to run on the cluster should be specified. If you want to submit multiple jobs, this will currently require the definition of multiple @google_dataproc_job@ resources as shown in the example above, or by setting the @count@ attribute. The following job configs are supported: -}
-    , placement :: !(TF.Attribute s TF.PlacementType)
+    , placement :: !(TF.Attribute s P.PlacementType)
     {- ^ (Optional) See datatype documentation. -}
-    , scheduling :: !(TF.Attribute s TF.SchedulingType)
+    , scheduling :: !(TF.Attribute s P.SchedulingType)
     {- ^ (Optional) See datatype documentation. -}
     } deriving (Show, Eq)
 
@@ -5482,56 +5481,56 @@ instance TF.ToHCL (DataprocJobResource s) where
         , TF.attribute "scheduling.max_failures_per_hour" scheduling
         ]
 
-instance HasForceDelete (DataprocJobResource s) s Text where
+instance P.HasForceDelete (DataprocJobResource s) s Text where
     forceDelete =
         lens (_force_delete :: DataprocJobResource s -> TF.Attribute s Text)
             (\s a -> s { _force_delete = a } :: DataprocJobResource s)
 
-instance HasLabels (DataprocJobResource s) s Text where
+instance P.HasLabels (DataprocJobResource s) s Text where
     labels =
         lens (_labels :: DataprocJobResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: DataprocJobResource s)
 
-instance HasProject (DataprocJobResource s) s Text where
+instance P.HasProject (DataprocJobResource s) s Text where
     project =
         lens (_project :: DataprocJobResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: DataprocJobResource s)
 
-instance HasRegion (DataprocJobResource s) s Text where
+instance P.HasRegion (DataprocJobResource s) s Text where
     region =
         lens (_region :: DataprocJobResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: DataprocJobResource s)
 
-instance HasXxxConfig (DataprocJobResource s) s Text where
+instance P.HasXxxConfig (DataprocJobResource s) s Text where
     xxxConfig =
         lens (_xxx_config :: DataprocJobResource s -> TF.Attribute s Text)
             (\s a -> s { _xxx_config = a } :: DataprocJobResource s)
 
-instance HasPlacement (DataprocJobResource s) s TF.PlacementType where
+instance P.HasPlacement (DataprocJobResource s) s P.PlacementType where
     placement =
-        lens (placement :: DataprocJobResource s -> TF.Attribute s TF.PlacementType)
+        lens (placement :: DataprocJobResource s -> TF.Attribute s P.PlacementType)
             (\s a -> s { placement = a } :: DataprocJobResource s)
 
-instance HasScheduling (DataprocJobResource s) s TF.SchedulingType where
+instance P.HasScheduling (DataprocJobResource s) s P.SchedulingType where
     scheduling =
-        lens (scheduling :: DataprocJobResource s -> TF.Attribute s TF.SchedulingType)
+        lens (scheduling :: DataprocJobResource s -> TF.Attribute s P.SchedulingType)
             (\s a -> s { scheduling = a } :: DataprocJobResource s)
 
-instance HasComputedDriverControlsFilesUri (DataprocJobResource s) Text
+instance P.HasComputedDriverControlsFilesUri (DataprocJobResource s) Text
 
-instance HasComputedDriverOutputResourceUri (DataprocJobResource s) Text
+instance P.HasComputedDriverOutputResourceUri (DataprocJobResource s) Text
 
-instance HasComputedReference0ClusterUuid (DataprocJobResource s) Text
+instance P.HasComputedReference0ClusterUuid (DataprocJobResource s) Text
 
-instance HasComputedStatus0Details (DataprocJobResource s) Text
+instance P.HasComputedStatus0Details (DataprocJobResource s) Text
 
-instance HasComputedStatus0State (DataprocJobResource s) Text
+instance P.HasComputedStatus0State (DataprocJobResource s) Text
 
-instance HasComputedStatus0StateStartTime (DataprocJobResource s) Text
+instance P.HasComputedStatus0StateStartTime (DataprocJobResource s) Text
 
-instance HasComputedStatus0Substate (DataprocJobResource s) Text
+instance P.HasComputedStatus0Substate (DataprocJobResource s) Text
 
-dataprocJobResource :: TF.Resource TF.Google (DataprocJobResource s)
+dataprocJobResource :: TF.Resource P.Google (DataprocJobResource s)
 dataprocJobResource =
     TF.newResource "google_dataproc_job" $
         DataprocJobResource {
@@ -5569,29 +5568,29 @@ instance TF.ToHCL (DnsManagedZoneResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasDescription (DnsManagedZoneResource s) s Text where
+instance P.HasDescription (DnsManagedZoneResource s) s Text where
     description =
         lens (_description :: DnsManagedZoneResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: DnsManagedZoneResource s)
 
-instance HasDnsName (DnsManagedZoneResource s) s Text where
+instance P.HasDnsName (DnsManagedZoneResource s) s Text where
     dnsName =
         lens (_dns_name :: DnsManagedZoneResource s -> TF.Attribute s Text)
             (\s a -> s { _dns_name = a } :: DnsManagedZoneResource s)
 
-instance HasName (DnsManagedZoneResource s) s Text where
+instance P.HasName (DnsManagedZoneResource s) s Text where
     name =
         lens (_name :: DnsManagedZoneResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsManagedZoneResource s)
 
-instance HasProject (DnsManagedZoneResource s) s Text where
+instance P.HasProject (DnsManagedZoneResource s) s Text where
     project =
         lens (_project :: DnsManagedZoneResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: DnsManagedZoneResource s)
 
-instance HasComputedNameServers (DnsManagedZoneResource s) Text
+instance P.HasComputedNameServers (DnsManagedZoneResource s) Text
 
-dnsManagedZoneResource :: TF.Resource TF.Google (DnsManagedZoneResource s)
+dnsManagedZoneResource :: TF.Resource P.Google (DnsManagedZoneResource s)
 dnsManagedZoneResource =
     TF.newResource "google_dns_managed_zone" $
         DnsManagedZoneResource {
@@ -5637,37 +5636,37 @@ instance TF.ToHCL (DnsRecordSetResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasManagedZone (DnsRecordSetResource s) s Text where
+instance P.HasManagedZone (DnsRecordSetResource s) s Text where
     managedZone =
         lens (_managed_zone :: DnsRecordSetResource s -> TF.Attribute s Text)
             (\s a -> s { _managed_zone = a } :: DnsRecordSetResource s)
 
-instance HasName (DnsRecordSetResource s) s Text where
+instance P.HasName (DnsRecordSetResource s) s Text where
     name =
         lens (_name :: DnsRecordSetResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsRecordSetResource s)
 
-instance HasProject (DnsRecordSetResource s) s Text where
+instance P.HasProject (DnsRecordSetResource s) s Text where
     project =
         lens (_project :: DnsRecordSetResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: DnsRecordSetResource s)
 
-instance HasRrdatas (DnsRecordSetResource s) s Text where
+instance P.HasRrdatas (DnsRecordSetResource s) s Text where
     rrdatas =
         lens (_rrdatas :: DnsRecordSetResource s -> TF.Attribute s Text)
             (\s a -> s { _rrdatas = a } :: DnsRecordSetResource s)
 
-instance HasTtl (DnsRecordSetResource s) s Text where
+instance P.HasTtl (DnsRecordSetResource s) s Text where
     ttl =
         lens (_ttl :: DnsRecordSetResource s -> TF.Attribute s Text)
             (\s a -> s { _ttl = a } :: DnsRecordSetResource s)
 
-instance HasType' (DnsRecordSetResource s) s Text where
+instance P.HasType' (DnsRecordSetResource s) s Text where
     type' =
         lens (_type' :: DnsRecordSetResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: DnsRecordSetResource s)
 
-dnsRecordSetResource :: TF.Resource TF.Google (DnsRecordSetResource s)
+dnsRecordSetResource :: TF.Resource P.Google (DnsRecordSetResource s)
 dnsRecordSetResource =
     TF.newResource "google_dns_record_set" $
         DnsRecordSetResource {
@@ -5708,40 +5707,40 @@ instance TF.ToHCL (EndpointsServiceResource s) where
         , TF.attribute "service_name" _service_name
         ]
 
-instance HasGrpcConfig (EndpointsServiceResource s) s Text where
+instance P.HasGrpcConfig (EndpointsServiceResource s) s Text where
     grpcConfig =
         lens (_grpc_config :: EndpointsServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _grpc_config = a } :: EndpointsServiceResource s)
 
-instance HasOpenapiConfig (EndpointsServiceResource s) s Text where
+instance P.HasOpenapiConfig (EndpointsServiceResource s) s Text where
     openapiConfig =
         lens (_openapi_config :: EndpointsServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _openapi_config = a } :: EndpointsServiceResource s)
 
-instance HasProject (EndpointsServiceResource s) s Text where
+instance P.HasProject (EndpointsServiceResource s) s Text where
     project =
         lens (_project :: EndpointsServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: EndpointsServiceResource s)
 
-instance HasProtocOutput (EndpointsServiceResource s) s Text where
+instance P.HasProtocOutput (EndpointsServiceResource s) s Text where
     protocOutput =
         lens (_protoc_output :: EndpointsServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _protoc_output = a } :: EndpointsServiceResource s)
 
-instance HasServiceName (EndpointsServiceResource s) s Text where
+instance P.HasServiceName (EndpointsServiceResource s) s Text where
     serviceName =
         lens (_service_name :: EndpointsServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _service_name = a } :: EndpointsServiceResource s)
 
-instance HasComputedApis (EndpointsServiceResource s) Text
+instance P.HasComputedApis (EndpointsServiceResource s) Text
 
-instance HasComputedConfigId (EndpointsServiceResource s) Text
+instance P.HasComputedConfigId (EndpointsServiceResource s) Text
 
-instance HasComputedDnsAddress (EndpointsServiceResource s) Text
+instance P.HasComputedDnsAddress (EndpointsServiceResource s) Text
 
-instance HasComputedEndpoints (EndpointsServiceResource s) Text
+instance P.HasComputedEndpoints (EndpointsServiceResource s) Text
 
-endpointsServiceResource :: TF.Resource TF.Google (EndpointsServiceResource s)
+endpointsServiceResource :: TF.Resource P.Google (EndpointsServiceResource s)
 endpointsServiceResource =
     TF.newResource "google_endpoints_service" $
         EndpointsServiceResource {
@@ -5770,19 +5769,19 @@ instance TF.ToHCL (FolderIamPolicyResource s) where
         , TF.attribute "policy_data" _policy_data
         ]
 
-instance HasFolder (FolderIamPolicyResource s) s Text where
+instance P.HasFolder (FolderIamPolicyResource s) s Text where
     folder =
         lens (_folder :: FolderIamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _folder = a } :: FolderIamPolicyResource s)
 
-instance HasPolicyData (FolderIamPolicyResource s) s Text where
+instance P.HasPolicyData (FolderIamPolicyResource s) s Text where
     policyData =
         lens (_policy_data :: FolderIamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_data = a } :: FolderIamPolicyResource s)
 
-instance HasComputedEtag (FolderIamPolicyResource s) Text
+instance P.HasComputedEtag (FolderIamPolicyResource s) Text
 
-folderIamPolicyResource :: TF.Resource TF.Google (FolderIamPolicyResource s)
+folderIamPolicyResource :: TF.Resource P.Google (FolderIamPolicyResource s)
 folderIamPolicyResource =
     TF.newResource "google_folder_iam_policy" $
         FolderIamPolicyResource {
@@ -5821,36 +5820,36 @@ instance TF.ToHCL (FolderOrganizationPolicyResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasBooleanPolicy (FolderOrganizationPolicyResource s) s Text where
+instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) s Text where
     booleanPolicy =
         lens (_boolean_policy :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _boolean_policy = a } :: FolderOrganizationPolicyResource s)
 
-instance HasConstraint (FolderOrganizationPolicyResource s) s Text where
+instance P.HasConstraint (FolderOrganizationPolicyResource s) s Text where
     constraint =
         lens (_constraint :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _constraint = a } :: FolderOrganizationPolicyResource s)
 
-instance HasFolder (FolderOrganizationPolicyResource s) s Text where
+instance P.HasFolder (FolderOrganizationPolicyResource s) s Text where
     folder =
         lens (_folder :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _folder = a } :: FolderOrganizationPolicyResource s)
 
-instance HasListPolicy (FolderOrganizationPolicyResource s) s Text where
+instance P.HasListPolicy (FolderOrganizationPolicyResource s) s Text where
     listPolicy =
         lens (_list_policy :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _list_policy = a } :: FolderOrganizationPolicyResource s)
 
-instance HasVersion (FolderOrganizationPolicyResource s) s Text where
+instance P.HasVersion (FolderOrganizationPolicyResource s) s Text where
     version =
         lens (_version :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: FolderOrganizationPolicyResource s)
 
-instance HasComputedEtag (FolderOrganizationPolicyResource s) Text
+instance P.HasComputedEtag (FolderOrganizationPolicyResource s) Text
 
-instance HasComputedUpdateTime (FolderOrganizationPolicyResource s) Text
+instance P.HasComputedUpdateTime (FolderOrganizationPolicyResource s) Text
 
-folderOrganizationPolicyResource :: TF.Resource TF.Google (FolderOrganizationPolicyResource s)
+folderOrganizationPolicyResource :: TF.Resource P.Google (FolderOrganizationPolicyResource s)
 folderOrganizationPolicyResource =
     TF.newResource "google_folder_organization_policy" $
         FolderOrganizationPolicyResource {
@@ -5893,23 +5892,23 @@ instance TF.ToHCL (FolderResource s) where
         , TF.attribute "parent" _parent
         ]
 
-instance HasDisplayName (FolderResource s) s Text where
+instance P.HasDisplayName (FolderResource s) s Text where
     displayName =
         lens (_display_name :: FolderResource s -> TF.Attribute s Text)
             (\s a -> s { _display_name = a } :: FolderResource s)
 
-instance HasParent (FolderResource s) s Text where
+instance P.HasParent (FolderResource s) s Text where
     parent =
         lens (_parent :: FolderResource s -> TF.Attribute s Text)
             (\s a -> s { _parent = a } :: FolderResource s)
 
-instance HasComputedCreateTime (FolderResource s) Text
+instance P.HasComputedCreateTime (FolderResource s) Text
 
-instance HasComputedLifecycleState (FolderResource s) Text
+instance P.HasComputedLifecycleState (FolderResource s) Text
 
-instance HasComputedName (FolderResource s) Text
+instance P.HasComputedName (FolderResource s) Text
 
-folderResource :: TF.Resource TF.Google (FolderResource s)
+folderResource :: TF.Resource P.Google (FolderResource s)
 folderResource =
     TF.newResource "google_folder" $
         FolderResource {
@@ -5938,24 +5937,24 @@ instance TF.ToHCL (KmsCryptoKeyIamBindingResource s) where
         , TF.attribute "role" _role
         ]
 
-instance HasCryptoKeyId (KmsCryptoKeyIamBindingResource s) s Text where
+instance P.HasCryptoKeyId (KmsCryptoKeyIamBindingResource s) s Text where
     cryptoKeyId =
         lens (_crypto_key_id :: KmsCryptoKeyIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _crypto_key_id = a } :: KmsCryptoKeyIamBindingResource s)
 
-instance HasMembers (KmsCryptoKeyIamBindingResource s) s Text where
+instance P.HasMembers (KmsCryptoKeyIamBindingResource s) s Text where
     members =
         lens (_members :: KmsCryptoKeyIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _members = a } :: KmsCryptoKeyIamBindingResource s)
 
-instance HasRole (KmsCryptoKeyIamBindingResource s) s Text where
+instance P.HasRole (KmsCryptoKeyIamBindingResource s) s Text where
     role =
         lens (_role :: KmsCryptoKeyIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: KmsCryptoKeyIamBindingResource s)
 
-instance HasComputedEtag (KmsCryptoKeyIamBindingResource s) Text
+instance P.HasComputedEtag (KmsCryptoKeyIamBindingResource s) Text
 
-kmsCryptoKeyIamBindingResource :: TF.Resource TF.Google (KmsCryptoKeyIamBindingResource s)
+kmsCryptoKeyIamBindingResource :: TF.Resource P.Google (KmsCryptoKeyIamBindingResource s)
 kmsCryptoKeyIamBindingResource =
     TF.newResource "google_kms_crypto_key_iam_binding" $
         KmsCryptoKeyIamBindingResource {
@@ -5990,24 +5989,24 @@ instance TF.ToHCL (KmsCryptoKeyIamMemberResource s) where
         , TF.attribute "role" _role
         ]
 
-instance HasCryptoKeyId (KmsCryptoKeyIamMemberResource s) s Text where
+instance P.HasCryptoKeyId (KmsCryptoKeyIamMemberResource s) s Text where
     cryptoKeyId =
         lens (_crypto_key_id :: KmsCryptoKeyIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _crypto_key_id = a } :: KmsCryptoKeyIamMemberResource s)
 
-instance HasMember (KmsCryptoKeyIamMemberResource s) s Text where
+instance P.HasMember (KmsCryptoKeyIamMemberResource s) s Text where
     member =
         lens (_member :: KmsCryptoKeyIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _member = a } :: KmsCryptoKeyIamMemberResource s)
 
-instance HasRole (KmsCryptoKeyIamMemberResource s) s Text where
+instance P.HasRole (KmsCryptoKeyIamMemberResource s) s Text where
     role =
         lens (_role :: KmsCryptoKeyIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: KmsCryptoKeyIamMemberResource s)
 
-instance HasComputedEtag (KmsCryptoKeyIamMemberResource s) Text
+instance P.HasComputedEtag (KmsCryptoKeyIamMemberResource s) Text
 
-kmsCryptoKeyIamMemberResource :: TF.Resource TF.Google (KmsCryptoKeyIamMemberResource s)
+kmsCryptoKeyIamMemberResource :: TF.Resource P.Google (KmsCryptoKeyIamMemberResource s)
 kmsCryptoKeyIamMemberResource =
     TF.newResource "google_kms_crypto_key_iam_member" $
         KmsCryptoKeyIamMemberResource {
@@ -6045,24 +6044,24 @@ instance TF.ToHCL (KmsCryptoKeyResource s) where
         , TF.attribute "rotation_period" _rotation_period
         ]
 
-instance HasKeyRing (KmsCryptoKeyResource s) s Text where
+instance P.HasKeyRing (KmsCryptoKeyResource s) s Text where
     keyRing =
         lens (_key_ring :: KmsCryptoKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _key_ring = a } :: KmsCryptoKeyResource s)
 
-instance HasName (KmsCryptoKeyResource s) s Text where
+instance P.HasName (KmsCryptoKeyResource s) s Text where
     name =
         lens (_name :: KmsCryptoKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: KmsCryptoKeyResource s)
 
-instance HasRotationPeriod (KmsCryptoKeyResource s) s Text where
+instance P.HasRotationPeriod (KmsCryptoKeyResource s) s Text where
     rotationPeriod =
         lens (_rotation_period :: KmsCryptoKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _rotation_period = a } :: KmsCryptoKeyResource s)
 
-instance HasComputedId (KmsCryptoKeyResource s) Text
+instance P.HasComputedId (KmsCryptoKeyResource s) Text
 
-kmsCryptoKeyResource :: TF.Resource TF.Google (KmsCryptoKeyResource s)
+kmsCryptoKeyResource :: TF.Resource P.Google (KmsCryptoKeyResource s)
 kmsCryptoKeyResource =
     TF.newResource "google_kms_crypto_key" $
         KmsCryptoKeyResource {
@@ -6098,24 +6097,24 @@ instance TF.ToHCL (KmsKeyRingResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasLocation (KmsKeyRingResource s) s Text where
+instance P.HasLocation (KmsKeyRingResource s) s Text where
     location =
         lens (_location :: KmsKeyRingResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: KmsKeyRingResource s)
 
-instance HasName (KmsKeyRingResource s) s Text where
+instance P.HasName (KmsKeyRingResource s) s Text where
     name =
         lens (_name :: KmsKeyRingResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: KmsKeyRingResource s)
 
-instance HasProject (KmsKeyRingResource s) s Text where
+instance P.HasProject (KmsKeyRingResource s) s Text where
     project =
         lens (_project :: KmsKeyRingResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: KmsKeyRingResource s)
 
-instance HasComputedId (KmsKeyRingResource s) Text
+instance P.HasComputedId (KmsKeyRingResource s) Text
 
-kmsKeyRingResource :: TF.Resource TF.Google (KmsKeyRingResource s)
+kmsKeyRingResource :: TF.Resource P.Google (KmsKeyRingResource s)
 kmsKeyRingResource =
     TF.newResource "google_kms_key_ring" $
         KmsKeyRingResource {
@@ -6149,24 +6148,24 @@ instance TF.ToHCL (LoggingBillingAccountSinkResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasBillingAccount (LoggingBillingAccountSinkResource s) s Text where
+instance P.HasBillingAccount (LoggingBillingAccountSinkResource s) s Text where
     billingAccount =
         lens (_billing_account :: LoggingBillingAccountSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _billing_account = a } :: LoggingBillingAccountSinkResource s)
 
-instance HasDestination (LoggingBillingAccountSinkResource s) s Text where
+instance P.HasDestination (LoggingBillingAccountSinkResource s) s Text where
     destination =
         lens (_destination :: LoggingBillingAccountSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _destination = a } :: LoggingBillingAccountSinkResource s)
 
-instance HasName (LoggingBillingAccountSinkResource s) s Text where
+instance P.HasName (LoggingBillingAccountSinkResource s) s Text where
     name =
         lens (_name :: LoggingBillingAccountSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LoggingBillingAccountSinkResource s)
 
-instance HasComputedWriterIdentity (LoggingBillingAccountSinkResource s) Text
+instance P.HasComputedWriterIdentity (LoggingBillingAccountSinkResource s) Text
 
-loggingBillingAccountSinkResource :: TF.Resource TF.Google (LoggingBillingAccountSinkResource s)
+loggingBillingAccountSinkResource :: TF.Resource P.Google (LoggingBillingAccountSinkResource s)
 loggingBillingAccountSinkResource =
     TF.newResource "google_logging_billing_account_sink" $
         LoggingBillingAccountSinkResource {
@@ -6200,24 +6199,24 @@ instance TF.ToHCL (LoggingFolderSinkResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDestination (LoggingFolderSinkResource s) s Text where
+instance P.HasDestination (LoggingFolderSinkResource s) s Text where
     destination =
         lens (_destination :: LoggingFolderSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _destination = a } :: LoggingFolderSinkResource s)
 
-instance HasFolder (LoggingFolderSinkResource s) s Text where
+instance P.HasFolder (LoggingFolderSinkResource s) s Text where
     folder =
         lens (_folder :: LoggingFolderSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _folder = a } :: LoggingFolderSinkResource s)
 
-instance HasName (LoggingFolderSinkResource s) s Text where
+instance P.HasName (LoggingFolderSinkResource s) s Text where
     name =
         lens (_name :: LoggingFolderSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LoggingFolderSinkResource s)
 
-instance HasComputedWriterIdentity (LoggingFolderSinkResource s) Text
+instance P.HasComputedWriterIdentity (LoggingFolderSinkResource s) Text
 
-loggingFolderSinkResource :: TF.Resource TF.Google (LoggingFolderSinkResource s)
+loggingFolderSinkResource :: TF.Resource P.Google (LoggingFolderSinkResource s)
 loggingFolderSinkResource =
     TF.newResource "google_logging_folder_sink" $
         LoggingFolderSinkResource {
@@ -6251,24 +6250,24 @@ instance TF.ToHCL (LoggingOrganizationSinkResource s) where
         , TF.attribute "org_id" _org_id
         ]
 
-instance HasDestination (LoggingOrganizationSinkResource s) s Text where
+instance P.HasDestination (LoggingOrganizationSinkResource s) s Text where
     destination =
         lens (_destination :: LoggingOrganizationSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _destination = a } :: LoggingOrganizationSinkResource s)
 
-instance HasName (LoggingOrganizationSinkResource s) s Text where
+instance P.HasName (LoggingOrganizationSinkResource s) s Text where
     name =
         lens (_name :: LoggingOrganizationSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LoggingOrganizationSinkResource s)
 
-instance HasOrgId (LoggingOrganizationSinkResource s) s Text where
+instance P.HasOrgId (LoggingOrganizationSinkResource s) s Text where
     orgId =
         lens (_org_id :: LoggingOrganizationSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _org_id = a } :: LoggingOrganizationSinkResource s)
 
-instance HasComputedWriterIdentity (LoggingOrganizationSinkResource s) Text
+instance P.HasComputedWriterIdentity (LoggingOrganizationSinkResource s) Text
 
-loggingOrganizationSinkResource :: TF.Resource TF.Google (LoggingOrganizationSinkResource s)
+loggingOrganizationSinkResource :: TF.Resource P.Google (LoggingOrganizationSinkResource s)
 loggingOrganizationSinkResource =
     TF.newResource "google_logging_organization_sink" $
         LoggingOrganizationSinkResource {
@@ -6300,19 +6299,19 @@ instance TF.ToHCL (LoggingProjectSinkResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDestination (LoggingProjectSinkResource s) s Text where
+instance P.HasDestination (LoggingProjectSinkResource s) s Text where
     destination =
         lens (_destination :: LoggingProjectSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _destination = a } :: LoggingProjectSinkResource s)
 
-instance HasName (LoggingProjectSinkResource s) s Text where
+instance P.HasName (LoggingProjectSinkResource s) s Text where
     name =
         lens (_name :: LoggingProjectSinkResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LoggingProjectSinkResource s)
 
-instance HasComputedWriterIdentity (LoggingProjectSinkResource s) Text
+instance P.HasComputedWriterIdentity (LoggingProjectSinkResource s) Text
 
-loggingProjectSinkResource :: TF.Resource TF.Google (LoggingProjectSinkResource s)
+loggingProjectSinkResource :: TF.Resource P.Google (LoggingProjectSinkResource s)
 loggingProjectSinkResource =
     TF.newResource "google_logging_project_sink" $
         LoggingProjectSinkResource {
@@ -6343,24 +6342,24 @@ instance TF.ToHCL (OrganizationIamBindingResource s) where
         , TF.attribute "role" _role
         ]
 
-instance HasMembers (OrganizationIamBindingResource s) s Text where
+instance P.HasMembers (OrganizationIamBindingResource s) s Text where
     members =
         lens (_members :: OrganizationIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _members = a } :: OrganizationIamBindingResource s)
 
-instance HasOrgId (OrganizationIamBindingResource s) s Text where
+instance P.HasOrgId (OrganizationIamBindingResource s) s Text where
     orgId =
         lens (_org_id :: OrganizationIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _org_id = a } :: OrganizationIamBindingResource s)
 
-instance HasRole (OrganizationIamBindingResource s) s Text where
+instance P.HasRole (OrganizationIamBindingResource s) s Text where
     role =
         lens (_role :: OrganizationIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: OrganizationIamBindingResource s)
 
-instance HasComputedEtag (OrganizationIamBindingResource s) Text
+instance P.HasComputedEtag (OrganizationIamBindingResource s) Text
 
-organizationIamBindingResource :: TF.Resource TF.Google (OrganizationIamBindingResource s)
+organizationIamBindingResource :: TF.Resource P.Google (OrganizationIamBindingResource s)
 organizationIamBindingResource =
     TF.newResource "google_organization_iam_binding" $
         OrganizationIamBindingResource {
@@ -6404,42 +6403,42 @@ instance TF.ToHCL (OrganizationIamCustomRoleResource s) where
         , TF.attribute "title" _title
         ]
 
-instance HasDeleted (OrganizationIamCustomRoleResource s) s Text where
+instance P.HasDeleted (OrganizationIamCustomRoleResource s) s Text where
     deleted =
         lens (_deleted :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _deleted = a } :: OrganizationIamCustomRoleResource s)
 
-instance HasDescription (OrganizationIamCustomRoleResource s) s Text where
+instance P.HasDescription (OrganizationIamCustomRoleResource s) s Text where
     description =
         lens (_description :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: OrganizationIamCustomRoleResource s)
 
-instance HasOrgId (OrganizationIamCustomRoleResource s) s Text where
+instance P.HasOrgId (OrganizationIamCustomRoleResource s) s Text where
     orgId =
         lens (_org_id :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _org_id = a } :: OrganizationIamCustomRoleResource s)
 
-instance HasPermissions (OrganizationIamCustomRoleResource s) s Text where
+instance P.HasPermissions (OrganizationIamCustomRoleResource s) s Text where
     permissions =
         lens (_permissions :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _permissions = a } :: OrganizationIamCustomRoleResource s)
 
-instance HasRoleId (OrganizationIamCustomRoleResource s) s Text where
+instance P.HasRoleId (OrganizationIamCustomRoleResource s) s Text where
     roleId =
         lens (_role_id :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _role_id = a } :: OrganizationIamCustomRoleResource s)
 
-instance HasStage (OrganizationIamCustomRoleResource s) s Text where
+instance P.HasStage (OrganizationIamCustomRoleResource s) s Text where
     stage =
         lens (_stage :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _stage = a } :: OrganizationIamCustomRoleResource s)
 
-instance HasTitle (OrganizationIamCustomRoleResource s) s Text where
+instance P.HasTitle (OrganizationIamCustomRoleResource s) s Text where
     title =
         lens (_title :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _title = a } :: OrganizationIamCustomRoleResource s)
 
-organizationIamCustomRoleResource :: TF.Resource TF.Google (OrganizationIamCustomRoleResource s)
+organizationIamCustomRoleResource :: TF.Resource P.Google (OrganizationIamCustomRoleResource s)
 organizationIamCustomRoleResource =
     TF.newResource "google_organization_iam_custom_role" $
         OrganizationIamCustomRoleResource {
@@ -6476,24 +6475,24 @@ instance TF.ToHCL (OrganizationIamMemberResource s) where
         , TF.attribute "role" _role
         ]
 
-instance HasMember (OrganizationIamMemberResource s) s Text where
+instance P.HasMember (OrganizationIamMemberResource s) s Text where
     member =
         lens (_member :: OrganizationIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _member = a } :: OrganizationIamMemberResource s)
 
-instance HasOrgId (OrganizationIamMemberResource s) s Text where
+instance P.HasOrgId (OrganizationIamMemberResource s) s Text where
     orgId =
         lens (_org_id :: OrganizationIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _org_id = a } :: OrganizationIamMemberResource s)
 
-instance HasRole (OrganizationIamMemberResource s) s Text where
+instance P.HasRole (OrganizationIamMemberResource s) s Text where
     role =
         lens (_role :: OrganizationIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: OrganizationIamMemberResource s)
 
-instance HasComputedEtag (OrganizationIamMemberResource s) Text
+instance P.HasComputedEtag (OrganizationIamMemberResource s) Text
 
-organizationIamMemberResource :: TF.Resource TF.Google (OrganizationIamMemberResource s)
+organizationIamMemberResource :: TF.Resource P.Google (OrganizationIamMemberResource s)
 organizationIamMemberResource =
     TF.newResource "google_organization_iam_member" $
         OrganizationIamMemberResource {
@@ -6533,36 +6532,36 @@ instance TF.ToHCL (OrganizationPolicyResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasBooleanPolicy (OrganizationPolicyResource s) s Text where
+instance P.HasBooleanPolicy (OrganizationPolicyResource s) s Text where
     booleanPolicy =
         lens (_boolean_policy :: OrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _boolean_policy = a } :: OrganizationPolicyResource s)
 
-instance HasConstraint (OrganizationPolicyResource s) s Text where
+instance P.HasConstraint (OrganizationPolicyResource s) s Text where
     constraint =
         lens (_constraint :: OrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _constraint = a } :: OrganizationPolicyResource s)
 
-instance HasListPolicy (OrganizationPolicyResource s) s Text where
+instance P.HasListPolicy (OrganizationPolicyResource s) s Text where
     listPolicy =
         lens (_list_policy :: OrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _list_policy = a } :: OrganizationPolicyResource s)
 
-instance HasOrgId (OrganizationPolicyResource s) s Text where
+instance P.HasOrgId (OrganizationPolicyResource s) s Text where
     orgId =
         lens (_org_id :: OrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _org_id = a } :: OrganizationPolicyResource s)
 
-instance HasVersion (OrganizationPolicyResource s) s Text where
+instance P.HasVersion (OrganizationPolicyResource s) s Text where
     version =
         lens (_version :: OrganizationPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: OrganizationPolicyResource s)
 
-instance HasComputedEtag (OrganizationPolicyResource s) Text
+instance P.HasComputedEtag (OrganizationPolicyResource s) Text
 
-instance HasComputedUpdateTime (OrganizationPolicyResource s) Text
+instance P.HasComputedUpdateTime (OrganizationPolicyResource s) Text
 
-organizationPolicyResource :: TF.Resource TF.Google (OrganizationPolicyResource s)
+organizationPolicyResource :: TF.Resource P.Google (OrganizationPolicyResource s)
 organizationPolicyResource =
     TF.newResource "google_organization_policy" $
         OrganizationPolicyResource {
@@ -6596,24 +6595,24 @@ instance TF.ToHCL (ProjectIamBindingResource s) where
         , TF.attribute "role" _role
         ]
 
-instance HasMembers (ProjectIamBindingResource s) s Text where
+instance P.HasMembers (ProjectIamBindingResource s) s Text where
     members =
         lens (_members :: ProjectIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _members = a } :: ProjectIamBindingResource s)
 
-instance HasProject (ProjectIamBindingResource s) s Text where
+instance P.HasProject (ProjectIamBindingResource s) s Text where
     project =
         lens (_project :: ProjectIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ProjectIamBindingResource s)
 
-instance HasRole (ProjectIamBindingResource s) s Text where
+instance P.HasRole (ProjectIamBindingResource s) s Text where
     role =
         lens (_role :: ProjectIamBindingResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: ProjectIamBindingResource s)
 
-instance HasComputedEtag (ProjectIamBindingResource s) Text
+instance P.HasComputedEtag (ProjectIamBindingResource s) Text
 
-projectIamBindingResource :: TF.Resource TF.Google (ProjectIamBindingResource s)
+projectIamBindingResource :: TF.Resource P.Google (ProjectIamBindingResource s)
 projectIamBindingResource =
     TF.newResource "google_project_iam_binding" $
         ProjectIamBindingResource {
@@ -6657,42 +6656,42 @@ instance TF.ToHCL (ProjectIamCustomRoleResource s) where
         , TF.attribute "title" _title
         ]
 
-instance HasDeleted (ProjectIamCustomRoleResource s) s Text where
+instance P.HasDeleted (ProjectIamCustomRoleResource s) s Text where
     deleted =
         lens (_deleted :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _deleted = a } :: ProjectIamCustomRoleResource s)
 
-instance HasDescription (ProjectIamCustomRoleResource s) s Text where
+instance P.HasDescription (ProjectIamCustomRoleResource s) s Text where
     description =
         lens (_description :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ProjectIamCustomRoleResource s)
 
-instance HasPermissions (ProjectIamCustomRoleResource s) s Text where
+instance P.HasPermissions (ProjectIamCustomRoleResource s) s Text where
     permissions =
         lens (_permissions :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _permissions = a } :: ProjectIamCustomRoleResource s)
 
-instance HasProject (ProjectIamCustomRoleResource s) s Text where
+instance P.HasProject (ProjectIamCustomRoleResource s) s Text where
     project =
         lens (_project :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ProjectIamCustomRoleResource s)
 
-instance HasRoleId (ProjectIamCustomRoleResource s) s Text where
+instance P.HasRoleId (ProjectIamCustomRoleResource s) s Text where
     roleId =
         lens (_role_id :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _role_id = a } :: ProjectIamCustomRoleResource s)
 
-instance HasStage (ProjectIamCustomRoleResource s) s Text where
+instance P.HasStage (ProjectIamCustomRoleResource s) s Text where
     stage =
         lens (_stage :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _stage = a } :: ProjectIamCustomRoleResource s)
 
-instance HasTitle (ProjectIamCustomRoleResource s) s Text where
+instance P.HasTitle (ProjectIamCustomRoleResource s) s Text where
     title =
         lens (_title :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _title = a } :: ProjectIamCustomRoleResource s)
 
-projectIamCustomRoleResource :: TF.Resource TF.Google (ProjectIamCustomRoleResource s)
+projectIamCustomRoleResource :: TF.Resource P.Google (ProjectIamCustomRoleResource s)
 projectIamCustomRoleResource =
     TF.newResource "google_project_iam_custom_role" $
         ProjectIamCustomRoleResource {
@@ -6730,24 +6729,24 @@ instance TF.ToHCL (ProjectIamMemberResource s) where
         , TF.attribute "role" _role
         ]
 
-instance HasMember (ProjectIamMemberResource s) s Text where
+instance P.HasMember (ProjectIamMemberResource s) s Text where
     member =
         lens (_member :: ProjectIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _member = a } :: ProjectIamMemberResource s)
 
-instance HasProject (ProjectIamMemberResource s) s Text where
+instance P.HasProject (ProjectIamMemberResource s) s Text where
     project =
         lens (_project :: ProjectIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ProjectIamMemberResource s)
 
-instance HasRole (ProjectIamMemberResource s) s Text where
+instance P.HasRole (ProjectIamMemberResource s) s Text where
     role =
         lens (_role :: ProjectIamMemberResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: ProjectIamMemberResource s)
 
-instance HasComputedEtag (ProjectIamMemberResource s) Text
+instance P.HasComputedEtag (ProjectIamMemberResource s) Text
 
-projectIamMemberResource :: TF.Resource TF.Google (ProjectIamMemberResource s)
+projectIamMemberResource :: TF.Resource P.Google (ProjectIamMemberResource s)
 projectIamMemberResource =
     TF.newResource "google_project_iam_member" $
         ProjectIamMemberResource {
@@ -6781,31 +6780,31 @@ instance TF.ToHCL (ProjectIamPolicyResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasAuthoritative (ProjectIamPolicyResource s) s Text where
+instance P.HasAuthoritative (ProjectIamPolicyResource s) s Text where
     authoritative =
         lens (_authoritative :: ProjectIamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _authoritative = a } :: ProjectIamPolicyResource s)
 
-instance HasDisableProject (ProjectIamPolicyResource s) s Text where
+instance P.HasDisableProject (ProjectIamPolicyResource s) s Text where
     disableProject =
         lens (_disable_project :: ProjectIamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _disable_project = a } :: ProjectIamPolicyResource s)
 
-instance HasPolicyData (ProjectIamPolicyResource s) s Text where
+instance P.HasPolicyData (ProjectIamPolicyResource s) s Text where
     policyData =
         lens (_policy_data :: ProjectIamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_data = a } :: ProjectIamPolicyResource s)
 
-instance HasProject (ProjectIamPolicyResource s) s Text where
+instance P.HasProject (ProjectIamPolicyResource s) s Text where
     project =
         lens (_project :: ProjectIamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ProjectIamPolicyResource s)
 
-instance HasComputedEtag (ProjectIamPolicyResource s) Text
+instance P.HasComputedEtag (ProjectIamPolicyResource s) Text
 
-instance HasComputedRestorePolicy (ProjectIamPolicyResource s) Text
+instance P.HasComputedRestorePolicy (ProjectIamPolicyResource s) Text
 
-projectIamPolicyResource :: TF.Resource TF.Google (ProjectIamPolicyResource s)
+projectIamPolicyResource :: TF.Resource P.Google (ProjectIamPolicyResource s)
 projectIamPolicyResource =
     TF.newResource "google_project_iam_policy" $
         ProjectIamPolicyResource {
@@ -6857,46 +6856,46 @@ instance TF.ToHCL (ProjectResource s) where
         , TF.attribute "skip_delete" _skip_delete
         ]
 
-instance HasBillingAccount (ProjectResource s) s Text where
+instance P.HasBillingAccount (ProjectResource s) s Text where
     billingAccount =
         lens (_billing_account :: ProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _billing_account = a } :: ProjectResource s)
 
-instance HasFolderId (ProjectResource s) s Text where
+instance P.HasFolderId (ProjectResource s) s Text where
     folderId =
         lens (_folder_id :: ProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _folder_id = a } :: ProjectResource s)
 
-instance HasLabels (ProjectResource s) s Text where
+instance P.HasLabels (ProjectResource s) s Text where
     labels =
         lens (_labels :: ProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: ProjectResource s)
 
-instance HasName (ProjectResource s) s Text where
+instance P.HasName (ProjectResource s) s Text where
     name =
         lens (_name :: ProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ProjectResource s)
 
-instance HasOrgId (ProjectResource s) s Text where
+instance P.HasOrgId (ProjectResource s) s Text where
     orgId =
         lens (_org_id :: ProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _org_id = a } :: ProjectResource s)
 
-instance HasProjectId (ProjectResource s) s Text where
+instance P.HasProjectId (ProjectResource s) s Text where
     projectId =
         lens (_project_id :: ProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _project_id = a } :: ProjectResource s)
 
-instance HasSkipDelete (ProjectResource s) s Text where
+instance P.HasSkipDelete (ProjectResource s) s Text where
     skipDelete =
         lens (_skip_delete :: ProjectResource s -> TF.Attribute s Text)
             (\s a -> s { _skip_delete = a } :: ProjectResource s)
 
-instance HasComputedNumber (ProjectResource s) Text
+instance P.HasComputedNumber (ProjectResource s) Text
 
-instance HasComputedPolicyEtag (ProjectResource s) Text
+instance P.HasComputedPolicyEtag (ProjectResource s) Text
 
-projectResource :: TF.Resource TF.Google (ProjectResource s)
+projectResource :: TF.Resource P.Google (ProjectResource s)
 projectResource =
     TF.newResource "google_project" $
         ProjectResource {
@@ -6934,22 +6933,22 @@ instance TF.ToHCL (ProjectServiceResource s) where
         , TF.attribute "service" _service
         ]
 
-instance HasDisableOnDestroy (ProjectServiceResource s) s Text where
+instance P.HasDisableOnDestroy (ProjectServiceResource s) s Text where
     disableOnDestroy =
         lens (_disable_on_destroy :: ProjectServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _disable_on_destroy = a } :: ProjectServiceResource s)
 
-instance HasProject (ProjectServiceResource s) s Text where
+instance P.HasProject (ProjectServiceResource s) s Text where
     project =
         lens (_project :: ProjectServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ProjectServiceResource s)
 
-instance HasService (ProjectServiceResource s) s Text where
+instance P.HasService (ProjectServiceResource s) s Text where
     service =
         lens (_service :: ProjectServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _service = a } :: ProjectServiceResource s)
 
-projectServiceResource :: TF.Resource TF.Google (ProjectServiceResource s)
+projectServiceResource :: TF.Resource P.Google (ProjectServiceResource s)
 projectServiceResource =
     TF.newResource "google_project_service" $
         ProjectServiceResource {
@@ -6982,17 +6981,17 @@ instance TF.ToHCL (ProjectServicesResource s) where
         , TF.attribute "services" _services
         ]
 
-instance HasProject (ProjectServicesResource s) s Text where
+instance P.HasProject (ProjectServicesResource s) s Text where
     project =
         lens (_project :: ProjectServicesResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ProjectServicesResource s)
 
-instance HasServices (ProjectServicesResource s) s Text where
+instance P.HasServices (ProjectServicesResource s) s Text where
     services =
         lens (_services :: ProjectServicesResource s -> TF.Attribute s Text)
             (\s a -> s { _services = a } :: ProjectServicesResource s)
 
-projectServicesResource :: TF.Resource TF.Google (ProjectServicesResource s)
+projectServicesResource :: TF.Resource P.Google (ProjectServicesResource s)
 projectServicesResource =
     TF.newResource "google_project_services" $
         ProjectServicesResource {
@@ -7029,34 +7028,34 @@ instance TF.ToHCL (PubsubSubscriptionResource s) where
         , TF.attribute "topic" _topic
         ]
 
-instance HasAckDeadlineSeconds (PubsubSubscriptionResource s) s Text where
+instance P.HasAckDeadlineSeconds (PubsubSubscriptionResource s) s Text where
     ackDeadlineSeconds =
         lens (_ack_deadline_seconds :: PubsubSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _ack_deadline_seconds = a } :: PubsubSubscriptionResource s)
 
-instance HasName (PubsubSubscriptionResource s) s Text where
+instance P.HasName (PubsubSubscriptionResource s) s Text where
     name =
         lens (_name :: PubsubSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PubsubSubscriptionResource s)
 
-instance HasProject (PubsubSubscriptionResource s) s Text where
+instance P.HasProject (PubsubSubscriptionResource s) s Text where
     project =
         lens (_project :: PubsubSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: PubsubSubscriptionResource s)
 
-instance HasPushConfig (PubsubSubscriptionResource s) s Text where
+instance P.HasPushConfig (PubsubSubscriptionResource s) s Text where
     pushConfig =
         lens (_push_config :: PubsubSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _push_config = a } :: PubsubSubscriptionResource s)
 
-instance HasTopic (PubsubSubscriptionResource s) s Text where
+instance P.HasTopic (PubsubSubscriptionResource s) s Text where
     topic =
         lens (_topic :: PubsubSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _topic = a } :: PubsubSubscriptionResource s)
 
-instance HasComputedPath (PubsubSubscriptionResource s) Text
+instance P.HasComputedPath (PubsubSubscriptionResource s) Text
 
-pubsubSubscriptionResource :: TF.Resource TF.Google (PubsubSubscriptionResource s)
+pubsubSubscriptionResource :: TF.Resource P.Google (PubsubSubscriptionResource s)
 pubsubSubscriptionResource =
     TF.newResource "google_pubsub_subscription" $
         PubsubSubscriptionResource {
@@ -7086,17 +7085,17 @@ instance TF.ToHCL (PubsubTopicResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasName (PubsubTopicResource s) s Text where
+instance P.HasName (PubsubTopicResource s) s Text where
     name =
         lens (_name :: PubsubTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PubsubTopicResource s)
 
-instance HasProject (PubsubTopicResource s) s Text where
+instance P.HasProject (PubsubTopicResource s) s Text where
     project =
         lens (_project :: PubsubTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: PubsubTopicResource s)
 
-pubsubTopicResource :: TF.Resource TF.Google (PubsubTopicResource s)
+pubsubTopicResource :: TF.Resource P.Google (PubsubTopicResource s)
 pubsubTopicResource =
     TF.newResource "google_pubsub_topic" $
         PubsubTopicResource {
@@ -7142,47 +7141,47 @@ instance TF.ToHCL (RegistryResource s) where
         , TF.attribute "state_notification_config" _state_notification_config
         ]
 
-instance HasCredentials (RegistryResource s) s Text where
+instance P.HasCredentials (RegistryResource s) s Text where
     credentials =
         lens (_credentials :: RegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _credentials = a } :: RegistryResource s)
 
-instance HasEventNotificationConfig (RegistryResource s) s Text where
+instance P.HasEventNotificationConfig (RegistryResource s) s Text where
     eventNotificationConfig =
         lens (_event_notification_config :: RegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _event_notification_config = a } :: RegistryResource s)
 
-instance HasHttpConfig (RegistryResource s) s Text where
+instance P.HasHttpConfig (RegistryResource s) s Text where
     httpConfig =
         lens (_http_config :: RegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _http_config = a } :: RegistryResource s)
 
-instance HasMqttConfig (RegistryResource s) s Text where
+instance P.HasMqttConfig (RegistryResource s) s Text where
     mqttConfig =
         lens (_mqtt_config :: RegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _mqtt_config = a } :: RegistryResource s)
 
-instance HasName (RegistryResource s) s Text where
+instance P.HasName (RegistryResource s) s Text where
     name =
         lens (_name :: RegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RegistryResource s)
 
-instance HasProject (RegistryResource s) s Text where
+instance P.HasProject (RegistryResource s) s Text where
     project =
         lens (_project :: RegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: RegistryResource s)
 
-instance HasRegion (RegistryResource s) s Text where
+instance P.HasRegion (RegistryResource s) s Text where
     region =
         lens (_region :: RegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: RegistryResource s)
 
-instance HasStateNotificationConfig (RegistryResource s) s Text where
+instance P.HasStateNotificationConfig (RegistryResource s) s Text where
     stateNotificationConfig =
         lens (_state_notification_config :: RegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _state_notification_config = a } :: RegistryResource s)
 
-registryResource :: TF.Resource TF.Google (RegistryResource s)
+registryResource :: TF.Resource P.Google (RegistryResource s)
 registryResource =
     TF.newResource "google\cloudiot_registry" $
         RegistryResource {
@@ -7217,24 +7216,24 @@ instance TF.ToHCL (Resource s) where
         , TF.attribute "role" _role
         ]
 
-instance HasBucket (Resource s) s Text where
+instance P.HasBucket (Resource s) s Text where
     bucket =
         lens (_bucket :: Resource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: Resource s)
 
-instance HasMembers (Resource s) s Text where
+instance P.HasMembers (Resource s) s Text where
     members =
         lens (_members :: Resource s -> TF.Attribute s Text)
             (\s a -> s { _members = a } :: Resource s)
 
-instance HasRole (Resource s) s Text where
+instance P.HasRole (Resource s) s Text where
     role =
         lens (_role :: Resource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: Resource s)
 
-instance HasComputedEtag (Resource s) Text
+instance P.HasComputedEtag (Resource s) Text
 
-resource :: TF.Resource TF.Google (Resource s)
+resource :: TF.Resource P.Google (Resource s)
 resource =
     TF.newResource "IAMpolicyforGooglestoragebucket" $
         Resource {
@@ -7267,22 +7266,22 @@ instance TF.ToHCL (RuntimeconfigConfigResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasDescription (RuntimeconfigConfigResource s) s Text where
+instance P.HasDescription (RuntimeconfigConfigResource s) s Text where
     description =
         lens (_description :: RuntimeconfigConfigResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: RuntimeconfigConfigResource s)
 
-instance HasName (RuntimeconfigConfigResource s) s Text where
+instance P.HasName (RuntimeconfigConfigResource s) s Text where
     name =
         lens (_name :: RuntimeconfigConfigResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RuntimeconfigConfigResource s)
 
-instance HasProject (RuntimeconfigConfigResource s) s Text where
+instance P.HasProject (RuntimeconfigConfigResource s) s Text where
     project =
         lens (_project :: RuntimeconfigConfigResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: RuntimeconfigConfigResource s)
 
-runtimeconfigConfigResource :: TF.Resource TF.Google (RuntimeconfigConfigResource s)
+runtimeconfigConfigResource :: TF.Resource P.Google (RuntimeconfigConfigResource s)
 runtimeconfigConfigResource =
     TF.newResource "google_runtimeconfig_config" $
         RuntimeconfigConfigResource {
@@ -7318,29 +7317,29 @@ instance TF.ToHCL (RuntimeconfigVariableResource s) where
         , TF.attribute "text" _text
         ]
 
-instance HasName (RuntimeconfigVariableResource s) s Text where
+instance P.HasName (RuntimeconfigVariableResource s) s Text where
     name =
         lens (_name :: RuntimeconfigVariableResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RuntimeconfigVariableResource s)
 
-instance HasParent (RuntimeconfigVariableResource s) s Text where
+instance P.HasParent (RuntimeconfigVariableResource s) s Text where
     parent =
         lens (_parent :: RuntimeconfigVariableResource s -> TF.Attribute s Text)
             (\s a -> s { _parent = a } :: RuntimeconfigVariableResource s)
 
-instance HasProject (RuntimeconfigVariableResource s) s Text where
+instance P.HasProject (RuntimeconfigVariableResource s) s Text where
     project =
         lens (_project :: RuntimeconfigVariableResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: RuntimeconfigVariableResource s)
 
-instance HasText (RuntimeconfigVariableResource s) s Text where
+instance P.HasText (RuntimeconfigVariableResource s) s Text where
     text =
         lens (_text :: RuntimeconfigVariableResource s -> TF.Attribute s Text)
             (\s a -> s { _text = a } :: RuntimeconfigVariableResource s)
 
-instance HasComputedUpdateTime (RuntimeconfigVariableResource s) Text
+instance P.HasComputedUpdateTime (RuntimeconfigVariableResource s) Text
 
-runtimeconfigVariableResource :: TF.Resource TF.Google (RuntimeconfigVariableResource s)
+runtimeconfigVariableResource :: TF.Resource P.Google (RuntimeconfigVariableResource s)
 runtimeconfigVariableResource =
     TF.newResource "google_runtimeconfig_variable" $
         RuntimeconfigVariableResource {
@@ -7382,46 +7381,46 @@ instance TF.ToHCL (ServiceAccountKeyResource s) where
         , TF.attribute "service_account_id" _service_account_id
         ]
 
-instance HasKeyAlgorithm (ServiceAccountKeyResource s) s Text where
+instance P.HasKeyAlgorithm (ServiceAccountKeyResource s) s Text where
     keyAlgorithm =
         lens (_key_algorithm :: ServiceAccountKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _key_algorithm = a } :: ServiceAccountKeyResource s)
 
-instance HasPgpKey (ServiceAccountKeyResource s) s Text where
+instance P.HasPgpKey (ServiceAccountKeyResource s) s Text where
     pgpKey =
         lens (_pgp_key :: ServiceAccountKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _pgp_key = a } :: ServiceAccountKeyResource s)
 
-instance HasPrivateKeyType (ServiceAccountKeyResource s) s Text where
+instance P.HasPrivateKeyType (ServiceAccountKeyResource s) s Text where
     privateKeyType =
         lens (_private_key_type :: ServiceAccountKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _private_key_type = a } :: ServiceAccountKeyResource s)
 
-instance HasPublicKeyType (ServiceAccountKeyResource s) s Text where
+instance P.HasPublicKeyType (ServiceAccountKeyResource s) s Text where
     publicKeyType =
         lens (_public_key_type :: ServiceAccountKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _public_key_type = a } :: ServiceAccountKeyResource s)
 
-instance HasServiceAccountId (ServiceAccountKeyResource s) s Text where
+instance P.HasServiceAccountId (ServiceAccountKeyResource s) s Text where
     serviceAccountId =
         lens (_service_account_id :: ServiceAccountKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _service_account_id = a } :: ServiceAccountKeyResource s)
 
-instance HasComputedName (ServiceAccountKeyResource s) Text
+instance P.HasComputedName (ServiceAccountKeyResource s) Text
 
-instance HasComputedPrivateKey (ServiceAccountKeyResource s) Text
+instance P.HasComputedPrivateKey (ServiceAccountKeyResource s) Text
 
-instance HasComputedPrivateKeyEncrypted (ServiceAccountKeyResource s) Text
+instance P.HasComputedPrivateKeyEncrypted (ServiceAccountKeyResource s) Text
 
-instance HasComputedPrivateKeyFingerprint (ServiceAccountKeyResource s) Text
+instance P.HasComputedPrivateKeyFingerprint (ServiceAccountKeyResource s) Text
 
-instance HasComputedPublicKey (ServiceAccountKeyResource s) Text
+instance P.HasComputedPublicKey (ServiceAccountKeyResource s) Text
 
-instance HasComputedValidAfter (ServiceAccountKeyResource s) Text
+instance P.HasComputedValidAfter (ServiceAccountKeyResource s) Text
 
-instance HasComputedValidBefore (ServiceAccountKeyResource s) Text
+instance P.HasComputedValidBefore (ServiceAccountKeyResource s) Text
 
-serviceAccountKeyResource :: TF.Resource TF.Google (ServiceAccountKeyResource s)
+serviceAccountKeyResource :: TF.Resource P.Google (ServiceAccountKeyResource s)
 serviceAccountKeyResource =
     TF.newResource "google_service_account_key" $
         ServiceAccountKeyResource {
@@ -7456,33 +7455,33 @@ instance TF.ToHCL (ServiceAccountResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasAccountId (ServiceAccountResource s) s Text where
+instance P.HasAccountId (ServiceAccountResource s) s Text where
     accountId =
         lens (_account_id :: ServiceAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _account_id = a } :: ServiceAccountResource s)
 
-instance HasDisplayName (ServiceAccountResource s) s Text where
+instance P.HasDisplayName (ServiceAccountResource s) s Text where
     displayName =
         lens (_display_name :: ServiceAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _display_name = a } :: ServiceAccountResource s)
 
-instance HasPolicyData (ServiceAccountResource s) s Text where
+instance P.HasPolicyData (ServiceAccountResource s) s Text where
     policyData =
         lens (_policy_data :: ServiceAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_data = a } :: ServiceAccountResource s)
 
-instance HasProject (ServiceAccountResource s) s Text where
+instance P.HasProject (ServiceAccountResource s) s Text where
     project =
         lens (_project :: ServiceAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: ServiceAccountResource s)
 
-instance HasComputedEmail (ServiceAccountResource s) Text
+instance P.HasComputedEmail (ServiceAccountResource s) Text
 
-instance HasComputedName (ServiceAccountResource s) Text
+instance P.HasComputedName (ServiceAccountResource s) Text
 
-instance HasComputedUniqueId (ServiceAccountResource s) Text
+instance P.HasComputedUniqueId (ServiceAccountResource s) Text
 
-serviceAccountResource :: TF.Resource TF.Google (ServiceAccountResource s)
+serviceAccountResource :: TF.Resource P.Google (ServiceAccountResource s)
 serviceAccountResource =
     TF.newResource "google_service_account" $
         ServiceAccountResource {
@@ -7511,21 +7510,21 @@ instance TF.ToHCL (SourcerepoRepositoryResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasName (SourcerepoRepositoryResource s) s Text where
+instance P.HasName (SourcerepoRepositoryResource s) s Text where
     name =
         lens (_name :: SourcerepoRepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SourcerepoRepositoryResource s)
 
-instance HasProject (SourcerepoRepositoryResource s) s Text where
+instance P.HasProject (SourcerepoRepositoryResource s) s Text where
     project =
         lens (_project :: SourcerepoRepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: SourcerepoRepositoryResource s)
 
-instance HasComputedSize (SourcerepoRepositoryResource s) Text
+instance P.HasComputedSize (SourcerepoRepositoryResource s) Text
 
-instance HasComputedUrl (SourcerepoRepositoryResource s) Text
+instance P.HasComputedUrl (SourcerepoRepositoryResource s) Text
 
-sourcerepoRepositoryResource :: TF.Resource TF.Google (SourcerepoRepositoryResource s)
+sourcerepoRepositoryResource :: TF.Resource P.Google (SourcerepoRepositoryResource s)
 sourcerepoRepositoryResource =
     TF.newResource "google_sourcerepo_repository" $
         SourcerepoRepositoryResource {
@@ -7565,39 +7564,39 @@ instance TF.ToHCL (SpannerInstanceResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasConfig (SpannerInstanceResource s) s Text where
+instance P.HasConfig (SpannerInstanceResource s) s Text where
     config =
         lens (_config :: SpannerInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _config = a } :: SpannerInstanceResource s)
 
-instance HasDisplayName (SpannerInstanceResource s) s Text where
+instance P.HasDisplayName (SpannerInstanceResource s) s Text where
     displayName =
         lens (_display_name :: SpannerInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _display_name = a } :: SpannerInstanceResource s)
 
-instance HasLabels (SpannerInstanceResource s) s Text where
+instance P.HasLabels (SpannerInstanceResource s) s Text where
     labels =
         lens (_labels :: SpannerInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: SpannerInstanceResource s)
 
-instance HasName (SpannerInstanceResource s) s Text where
+instance P.HasName (SpannerInstanceResource s) s Text where
     name =
         lens (_name :: SpannerInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SpannerInstanceResource s)
 
-instance HasNumNodes (SpannerInstanceResource s) s Text where
+instance P.HasNumNodes (SpannerInstanceResource s) s Text where
     numNodes =
         lens (_num_nodes :: SpannerInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _num_nodes = a } :: SpannerInstanceResource s)
 
-instance HasProject (SpannerInstanceResource s) s Text where
+instance P.HasProject (SpannerInstanceResource s) s Text where
     project =
         lens (_project :: SpannerInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: SpannerInstanceResource s)
 
-instance HasComputedState (SpannerInstanceResource s) Text
+instance P.HasComputedState (SpannerInstanceResource s) Text
 
-spannerInstanceResource :: TF.Resource TF.Google (SpannerInstanceResource s)
+spannerInstanceResource :: TF.Resource P.Google (SpannerInstanceResource s)
 spannerInstanceResource =
     TF.newResource "google_spanner_instance" $
         SpannerInstanceResource {
@@ -7652,55 +7651,55 @@ instance TF.ToHCL (SqlDatabaseInstanceResource s) where
         , TF.attribute "settings" _settings
         ]
 
-instance HasConnectionName (SqlDatabaseInstanceResource s) s Text where
+instance P.HasConnectionName (SqlDatabaseInstanceResource s) s Text where
     connectionName =
         lens (_connection_name :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _connection_name = a } :: SqlDatabaseInstanceResource s)
 
-instance HasDatabaseVersion (SqlDatabaseInstanceResource s) s Text where
+instance P.HasDatabaseVersion (SqlDatabaseInstanceResource s) s Text where
     databaseVersion =
         lens (_database_version :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _database_version = a } :: SqlDatabaseInstanceResource s)
 
-instance HasMasterInstanceName (SqlDatabaseInstanceResource s) s Text where
+instance P.HasMasterInstanceName (SqlDatabaseInstanceResource s) s Text where
     masterInstanceName =
         lens (_master_instance_name :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _master_instance_name = a } :: SqlDatabaseInstanceResource s)
 
-instance HasName (SqlDatabaseInstanceResource s) s Text where
+instance P.HasName (SqlDatabaseInstanceResource s) s Text where
     name =
         lens (_name :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SqlDatabaseInstanceResource s)
 
-instance HasProject (SqlDatabaseInstanceResource s) s Text where
+instance P.HasProject (SqlDatabaseInstanceResource s) s Text where
     project =
         lens (_project :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: SqlDatabaseInstanceResource s)
 
-instance HasRegion (SqlDatabaseInstanceResource s) s Text where
+instance P.HasRegion (SqlDatabaseInstanceResource s) s Text where
     region =
         lens (_region :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: SqlDatabaseInstanceResource s)
 
-instance HasReplicaConfiguration (SqlDatabaseInstanceResource s) s Text where
+instance P.HasReplicaConfiguration (SqlDatabaseInstanceResource s) s Text where
     replicaConfiguration =
         lens (_replica_configuration :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _replica_configuration = a } :: SqlDatabaseInstanceResource s)
 
-instance HasSettings (SqlDatabaseInstanceResource s) s Text where
+instance P.HasSettings (SqlDatabaseInstanceResource s) s Text where
     settings =
         lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _settings = a } :: SqlDatabaseInstanceResource s)
 
-instance HasComputedIpAddress0IpAddress (SqlDatabaseInstanceResource s) Text
+instance P.HasComputedIpAddress0IpAddress (SqlDatabaseInstanceResource s) Text
 
-instance HasComputedIpAddress0TimeToRetire (SqlDatabaseInstanceResource s) Text
+instance P.HasComputedIpAddress0TimeToRetire (SqlDatabaseInstanceResource s) Text
 
-instance HasComputedSelfLink (SqlDatabaseInstanceResource s) Text
+instance P.HasComputedSelfLink (SqlDatabaseInstanceResource s) Text
 
-instance HasComputedSettingsVersion (SqlDatabaseInstanceResource s) Text
+instance P.HasComputedSettingsVersion (SqlDatabaseInstanceResource s) Text
 
-sqlDatabaseInstanceResource :: TF.Resource TF.Google (SqlDatabaseInstanceResource s)
+sqlDatabaseInstanceResource :: TF.Resource P.Google (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource =
     TF.newResource "google_sql_database_instance" $
         SqlDatabaseInstanceResource {
@@ -7744,34 +7743,34 @@ instance TF.ToHCL (SqlDatabaseResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasCharset (SqlDatabaseResource s) s Text where
+instance P.HasCharset (SqlDatabaseResource s) s Text where
     charset =
         lens (_charset :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _charset = a } :: SqlDatabaseResource s)
 
-instance HasCollation (SqlDatabaseResource s) s Text where
+instance P.HasCollation (SqlDatabaseResource s) s Text where
     collation =
         lens (_collation :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _collation = a } :: SqlDatabaseResource s)
 
-instance HasInstance' (SqlDatabaseResource s) s Text where
+instance P.HasInstance' (SqlDatabaseResource s) s Text where
     instance' =
         lens (_instance' :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _instance' = a } :: SqlDatabaseResource s)
 
-instance HasName (SqlDatabaseResource s) s Text where
+instance P.HasName (SqlDatabaseResource s) s Text where
     name =
         lens (_name :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SqlDatabaseResource s)
 
-instance HasProject (SqlDatabaseResource s) s Text where
+instance P.HasProject (SqlDatabaseResource s) s Text where
     project =
         lens (_project :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: SqlDatabaseResource s)
 
-instance HasComputedSelfLink (SqlDatabaseResource s) Text
+instance P.HasComputedSelfLink (SqlDatabaseResource s) Text
 
-sqlDatabaseResource :: TF.Resource TF.Google (SqlDatabaseResource s)
+sqlDatabaseResource :: TF.Resource P.Google (SqlDatabaseResource s)
 sqlDatabaseResource =
     TF.newResource "google_sql_database" $
         SqlDatabaseResource {
@@ -7813,32 +7812,32 @@ instance TF.ToHCL (SqlUserResource s) where
         , TF.attribute "project" _project
         ]
 
-instance HasHost (SqlUserResource s) s Text where
+instance P.HasHost (SqlUserResource s) s Text where
     host =
         lens (_host :: SqlUserResource s -> TF.Attribute s Text)
             (\s a -> s { _host = a } :: SqlUserResource s)
 
-instance HasInstance' (SqlUserResource s) s Text where
+instance P.HasInstance' (SqlUserResource s) s Text where
     instance' =
         lens (_instance' :: SqlUserResource s -> TF.Attribute s Text)
             (\s a -> s { _instance' = a } :: SqlUserResource s)
 
-instance HasName (SqlUserResource s) s Text where
+instance P.HasName (SqlUserResource s) s Text where
     name =
         lens (_name :: SqlUserResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SqlUserResource s)
 
-instance HasPassword (SqlUserResource s) s Text where
+instance P.HasPassword (SqlUserResource s) s Text where
     password =
         lens (_password :: SqlUserResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: SqlUserResource s)
 
-instance HasProject (SqlUserResource s) s Text where
+instance P.HasProject (SqlUserResource s) s Text where
     project =
         lens (_project :: SqlUserResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: SqlUserResource s)
 
-sqlUserResource :: TF.Resource TF.Google (SqlUserResource s)
+sqlUserResource :: TF.Resource P.Google (SqlUserResource s)
 sqlUserResource =
     TF.newResource "google_sql_user" $
         SqlUserResource {
@@ -7875,27 +7874,27 @@ instance TF.ToHCL (StorageBucketAclResource s) where
         , TF.attribute "role_entity" _role_entity
         ]
 
-instance HasBucket (StorageBucketAclResource s) s Text where
+instance P.HasBucket (StorageBucketAclResource s) s Text where
     bucket =
         lens (_bucket :: StorageBucketAclResource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: StorageBucketAclResource s)
 
-instance HasDefaultAcl (StorageBucketAclResource s) s Text where
+instance P.HasDefaultAcl (StorageBucketAclResource s) s Text where
     defaultAcl =
         lens (_default_acl :: StorageBucketAclResource s -> TF.Attribute s Text)
             (\s a -> s { _default_acl = a } :: StorageBucketAclResource s)
 
-instance HasPredefinedAcl (StorageBucketAclResource s) s Text where
+instance P.HasPredefinedAcl (StorageBucketAclResource s) s Text where
     predefinedAcl =
         lens (_predefined_acl :: StorageBucketAclResource s -> TF.Attribute s Text)
             (\s a -> s { _predefined_acl = a } :: StorageBucketAclResource s)
 
-instance HasRoleEntity (StorageBucketAclResource s) s Text where
+instance P.HasRoleEntity (StorageBucketAclResource s) s Text where
     roleEntity =
         lens (_role_entity :: StorageBucketAclResource s -> TF.Attribute s Text)
             (\s a -> s { _role_entity = a } :: StorageBucketAclResource s)
 
-storageBucketAclResource :: TF.Resource TF.Google (StorageBucketAclResource s)
+storageBucketAclResource :: TF.Resource P.Google (StorageBucketAclResource s)
 storageBucketAclResource =
     TF.newResource "google_storage_bucket_acl" $
         StorageBucketAclResource {
@@ -7926,21 +7925,21 @@ instance TF.ToHCL (StorageBucketObjectResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasBucket (StorageBucketObjectResource s) s Text where
+instance P.HasBucket (StorageBucketObjectResource s) s Text where
     bucket =
         lens (_bucket :: StorageBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: StorageBucketObjectResource s)
 
-instance HasName (StorageBucketObjectResource s) s Text where
+instance P.HasName (StorageBucketObjectResource s) s Text where
     name =
         lens (_name :: StorageBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: StorageBucketObjectResource s)
 
-instance HasComputedCrc32c (StorageBucketObjectResource s) Text
+instance P.HasComputedCrc32c (StorageBucketObjectResource s) Text
 
-instance HasComputedMd5hash (StorageBucketObjectResource s) Text
+instance P.HasComputedMd5hash (StorageBucketObjectResource s) Text
 
-storageBucketObjectResource :: TF.Resource TF.Google (StorageBucketObjectResource s)
+storageBucketObjectResource :: TF.Resource P.Google (StorageBucketObjectResource s)
 storageBucketObjectResource =
     TF.newResource "google_storage_bucket_object" $
         StorageBucketObjectResource {
@@ -7997,66 +7996,66 @@ instance TF.ToHCL (StorageBucketResource s) where
         , TF.attribute "website" _website
         ]
 
-instance HasCors (StorageBucketResource s) s Text where
+instance P.HasCors (StorageBucketResource s) s Text where
     cors =
         lens (_cors :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _cors = a } :: StorageBucketResource s)
 
-instance HasForceDestroy (StorageBucketResource s) s Text where
+instance P.HasForceDestroy (StorageBucketResource s) s Text where
     forceDestroy =
         lens (_force_destroy :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _force_destroy = a } :: StorageBucketResource s)
 
-instance HasLabels (StorageBucketResource s) s Text where
+instance P.HasLabels (StorageBucketResource s) s Text where
     labels =
         lens (_labels :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: StorageBucketResource s)
 
-instance HasLifecycleRule (StorageBucketResource s) s Text where
+instance P.HasLifecycleRule (StorageBucketResource s) s Text where
     lifecycleRule =
         lens (_lifecycle_rule :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _lifecycle_rule = a } :: StorageBucketResource s)
 
-instance HasLocation (StorageBucketResource s) s Text where
+instance P.HasLocation (StorageBucketResource s) s Text where
     location =
         lens (_location :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: StorageBucketResource s)
 
-instance HasLogging (StorageBucketResource s) s Text where
+instance P.HasLogging (StorageBucketResource s) s Text where
     logging =
         lens (_logging :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _logging = a } :: StorageBucketResource s)
 
-instance HasName (StorageBucketResource s) s Text where
+instance P.HasName (StorageBucketResource s) s Text where
     name =
         lens (_name :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: StorageBucketResource s)
 
-instance HasProject (StorageBucketResource s) s Text where
+instance P.HasProject (StorageBucketResource s) s Text where
     project =
         lens (_project :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _project = a } :: StorageBucketResource s)
 
-instance HasStorageClass (StorageBucketResource s) s Text where
+instance P.HasStorageClass (StorageBucketResource s) s Text where
     storageClass =
         lens (_storage_class :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_class = a } :: StorageBucketResource s)
 
-instance HasVersioning (StorageBucketResource s) s Text where
+instance P.HasVersioning (StorageBucketResource s) s Text where
     versioning =
         lens (_versioning :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _versioning = a } :: StorageBucketResource s)
 
-instance HasWebsite (StorageBucketResource s) s Text where
+instance P.HasWebsite (StorageBucketResource s) s Text where
     website =
         lens (_website :: StorageBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _website = a } :: StorageBucketResource s)
 
-instance HasComputedSelfLink (StorageBucketResource s) Text
+instance P.HasComputedSelfLink (StorageBucketResource s) Text
 
-instance HasComputedUrl (StorageBucketResource s) Text
+instance P.HasComputedUrl (StorageBucketResource s) Text
 
-storageBucketResource :: TF.Resource TF.Google (StorageBucketResource s)
+storageBucketResource :: TF.Resource P.Google (StorageBucketResource s)
 storageBucketResource =
     TF.newResource "google_storage_bucket" $
         StorageBucketResource {
@@ -8094,17 +8093,17 @@ instance TF.ToHCL (StorageDefaultObjectAclResource s) where
         , TF.attribute "role_entity" _role_entity
         ]
 
-instance HasBucket (StorageDefaultObjectAclResource s) s Text where
+instance P.HasBucket (StorageDefaultObjectAclResource s) s Text where
     bucket =
         lens (_bucket :: StorageDefaultObjectAclResource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: StorageDefaultObjectAclResource s)
 
-instance HasRoleEntity (StorageDefaultObjectAclResource s) s Text where
+instance P.HasRoleEntity (StorageDefaultObjectAclResource s) s Text where
     roleEntity =
         lens (_role_entity :: StorageDefaultObjectAclResource s -> TF.Attribute s Text)
             (\s a -> s { _role_entity = a } :: StorageDefaultObjectAclResource s)
 
-storageDefaultObjectAclResource :: TF.Resource TF.Google (StorageDefaultObjectAclResource s)
+storageDefaultObjectAclResource :: TF.Resource P.Google (StorageDefaultObjectAclResource s)
 storageDefaultObjectAclResource =
     TF.newResource "google_storage_default_object_acl" $
         StorageDefaultObjectAclResource {
@@ -8138,27 +8137,27 @@ instance TF.ToHCL (StorageObjectAclResource s) where
         , TF.attribute "role_entity" _role_entity
         ]
 
-instance HasBucket (StorageObjectAclResource s) s Text where
+instance P.HasBucket (StorageObjectAclResource s) s Text where
     bucket =
         lens (_bucket :: StorageObjectAclResource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: StorageObjectAclResource s)
 
-instance HasObject (StorageObjectAclResource s) s Text where
+instance P.HasObject (StorageObjectAclResource s) s Text where
     object =
         lens (_object :: StorageObjectAclResource s -> TF.Attribute s Text)
             (\s a -> s { _object = a } :: StorageObjectAclResource s)
 
-instance HasPredefinedAcl (StorageObjectAclResource s) s Text where
+instance P.HasPredefinedAcl (StorageObjectAclResource s) s Text where
     predefinedAcl =
         lens (_predefined_acl :: StorageObjectAclResource s -> TF.Attribute s Text)
             (\s a -> s { _predefined_acl = a } :: StorageObjectAclResource s)
 
-instance HasRoleEntity (StorageObjectAclResource s) s Text where
+instance P.HasRoleEntity (StorageObjectAclResource s) s Text where
     roleEntity =
         lens (_role_entity :: StorageObjectAclResource s -> TF.Attribute s Text)
             (\s a -> s { _role_entity = a } :: StorageObjectAclResource s)
 
-storageObjectAclResource :: TF.Resource TF.Google (StorageObjectAclResource s)
+storageObjectAclResource :: TF.Resource P.Google (StorageObjectAclResource s)
 storageObjectAclResource =
     TF.newResource "google_storage_object_acl" $
         StorageObjectAclResource {
@@ -8167,2091 +8166,3 @@ storageObjectAclResource =
             , _predefined_acl = TF.Nil
             , _role_entity = TF.Nil
             }
-
-class HasAccountId a s b | a -> s b where
-    accountId :: Lens' a (TF.Attribute s b)
-
-instance HasAccountId a s b => HasAccountId (TF.Resource p a) s b where
-    accountId = TF.configuration . accountId
-
-class HasAckDeadlineSeconds a s b | a -> s b where
-    ackDeadlineSeconds :: Lens' a (TF.Attribute s b)
-
-instance HasAckDeadlineSeconds a s b => HasAckDeadlineSeconds (TF.Resource p a) s b where
-    ackDeadlineSeconds = TF.configuration . ackDeadlineSeconds
-
-class HasAdditionalZones a s b | a -> s b where
-    additionalZones :: Lens' a (TF.Attribute s b)
-
-instance HasAdditionalZones a s b => HasAdditionalZones (TF.Resource p a) s b where
-    additionalZones = TF.configuration . additionalZones
-
-class HasAddonsConfig a s b | a -> s b where
-    addonsConfig :: Lens' a (TF.Attribute s b)
-
-instance HasAddonsConfig a s b => HasAddonsConfig (TF.Resource p a) s b where
-    addonsConfig = TF.configuration . addonsConfig
-
-class HasAddress a s b | a -> s b where
-    address :: Lens' a (TF.Attribute s b)
-
-instance HasAddress a s b => HasAddress (TF.Resource p a) s b where
-    address = TF.configuration . address
-
-class HasAddressType a s b | a -> s b where
-    addressType :: Lens' a (TF.Attribute s b)
-
-instance HasAddressType a s b => HasAddressType (TF.Resource p a) s b where
-    addressType = TF.configuration . addressType
-
-class HasAdvertisedRoutePriority a s b | a -> s b where
-    advertisedRoutePriority :: Lens' a (TF.Attribute s b)
-
-instance HasAdvertisedRoutePriority a s b => HasAdvertisedRoutePriority (TF.Resource p a) s b where
-    advertisedRoutePriority = TF.configuration . advertisedRoutePriority
-
-class HasAllow a s b | a -> s b where
-    allow :: Lens' a (TF.Attribute s b)
-
-instance HasAllow a s b => HasAllow (TF.Resource p a) s b where
-    allow = TF.configuration . allow
-
-class HasAllowStoppingForUpdate a s b | a -> s b where
-    allowStoppingForUpdate :: Lens' a (TF.Attribute s b)
-
-instance HasAllowStoppingForUpdate a s b => HasAllowStoppingForUpdate (TF.Resource p a) s b where
-    allowStoppingForUpdate = TF.configuration . allowStoppingForUpdate
-
-class HasAttachedDisk a s b | a -> s b where
-    attachedDisk :: Lens' a (TF.Attribute s b)
-
-instance HasAttachedDisk a s b => HasAttachedDisk (TF.Resource p a) s b where
-    attachedDisk = TF.configuration . attachedDisk
-
-class HasAuthoritative a s b | a -> s b where
-    authoritative :: Lens' a (TF.Attribute s b)
-
-instance HasAuthoritative a s b => HasAuthoritative (TF.Resource p a) s b where
-    authoritative = TF.configuration . authoritative
-
-class HasAutoCreateRoutes a s b | a -> s b where
-    autoCreateRoutes :: Lens' a (TF.Attribute s b)
-
-instance HasAutoCreateRoutes a s b => HasAutoCreateRoutes (TF.Resource p a) s b where
-    autoCreateRoutes = TF.configuration . autoCreateRoutes
-
-class HasAutoCreateSubnetworks a s b | a -> s b where
-    autoCreateSubnetworks :: Lens' a (TF.Attribute s b)
-
-instance HasAutoCreateSubnetworks a s b => HasAutoCreateSubnetworks (TF.Resource p a) s b where
-    autoCreateSubnetworks = TF.configuration . autoCreateSubnetworks
-
-class HasAutoHealingPolicies a s b | a -> s b where
-    autoHealingPolicies :: Lens' a (TF.Attribute s b)
-
-instance HasAutoHealingPolicies a s b => HasAutoHealingPolicies (TF.Resource p a) s b where
-    autoHealingPolicies = TF.configuration . autoHealingPolicies
-
-class HasAutoscaling a s b | a -> s b where
-    autoscaling :: Lens' a (TF.Attribute s b)
-
-instance HasAutoscaling a s b => HasAutoscaling (TF.Resource p a) s b where
-    autoscaling = TF.configuration . autoscaling
-
-class HasAutoscalingPolicy a s b | a -> s b where
-    autoscalingPolicy :: Lens' a (TF.Attribute s b)
-
-instance HasAutoscalingPolicy a s b => HasAutoscalingPolicy (TF.Resource p a) s b where
-    autoscalingPolicy = TF.configuration . autoscalingPolicy
-
-class HasAvailableMemoryMb a s b | a -> s b where
-    availableMemoryMb :: Lens' a (TF.Attribute s b)
-
-instance HasAvailableMemoryMb a s b => HasAvailableMemoryMb (TF.Resource p a) s b where
-    availableMemoryMb = TF.configuration . availableMemoryMb
-
-class HasBackend a s b | a -> s b where
-    backend :: Lens' a (TF.Attribute s b)
-
-instance HasBackend a s b => HasBackend (TF.Resource p a) s b where
-    backend = TF.configuration . backend
-
-class HasBackendService a s b | a -> s b where
-    backendService :: Lens' a (TF.Attribute s b)
-
-instance HasBackendService a s b => HasBackendService (TF.Resource p a) s b where
-    backendService = TF.configuration . backendService
-
-class HasBackupPool a s b | a -> s b where
-    backupPool :: Lens' a (TF.Attribute s b)
-
-instance HasBackupPool a s b => HasBackupPool (TF.Resource p a) s b where
-    backupPool = TF.configuration . backupPool
-
-class HasBaseInstanceName a s b | a -> s b where
-    baseInstanceName :: Lens' a (TF.Attribute s b)
-
-instance HasBaseInstanceName a s b => HasBaseInstanceName (TF.Resource p a) s b where
-    baseInstanceName = TF.configuration . baseInstanceName
-
-class HasBgp a s b | a -> s b where
-    bgp :: Lens' a (TF.Attribute s b)
-
-instance HasBgp a s b => HasBgp (TF.Resource p a) s b where
-    bgp = TF.configuration . bgp
-
-class HasBillingAccount a s b | a -> s b where
-    billingAccount :: Lens' a (TF.Attribute s b)
-
-instance HasBillingAccount a s b => HasBillingAccount (TF.Resource p a) s b where
-    billingAccount = TF.configuration . billingAccount
-
-class HasBooleanPolicy a s b | a -> s b where
-    booleanPolicy :: Lens' a (TF.Attribute s b)
-
-instance HasBooleanPolicy a s b => HasBooleanPolicy (TF.Resource p a) s b where
-    booleanPolicy = TF.configuration . booleanPolicy
-
-class HasBootDisk a s b | a -> s b where
-    bootDisk :: Lens' a (TF.Attribute s b)
-
-instance HasBootDisk a s b => HasBootDisk (TF.Resource p a) s b where
-    bootDisk = TF.configuration . bootDisk
-
-class HasBucket a s b | a -> s b where
-    bucket :: Lens' a (TF.Attribute s b)
-
-instance HasBucket a s b => HasBucket (TF.Resource p a) s b where
-    bucket = TF.configuration . bucket
-
-class HasBucketName a s b | a -> s b where
-    bucketName :: Lens' a (TF.Attribute s b)
-
-instance HasBucketName a s b => HasBucketName (TF.Resource p a) s b where
-    bucketName = TF.configuration . bucketName
-
-class HasCanIpForward a s b | a -> s b where
-    canIpForward :: Lens' a (TF.Attribute s b)
-
-instance HasCanIpForward a s b => HasCanIpForward (TF.Resource p a) s b where
-    canIpForward = TF.configuration . canIpForward
-
-class HasCertificate a s b | a -> s b where
-    certificate :: Lens' a (TF.Attribute s b)
-
-instance HasCertificate a s b => HasCertificate (TF.Resource p a) s b where
-    certificate = TF.configuration . certificate
-
-class HasCharset a s b | a -> s b where
-    charset :: Lens' a (TF.Attribute s b)
-
-instance HasCharset a s b => HasCharset (TF.Resource p a) s b where
-    charset = TF.configuration . charset
-
-class HasCheckIntervalSec a s b | a -> s b where
-    checkIntervalSec :: Lens' a (TF.Attribute s b)
-
-instance HasCheckIntervalSec a s b => HasCheckIntervalSec (TF.Resource p a) s b where
-    checkIntervalSec = TF.configuration . checkIntervalSec
-
-class HasCluster a s b | a -> s b where
-    cluster :: Lens' a (TF.Attribute s b)
-
-instance HasCluster a s b => HasCluster (TF.Resource p a) s b where
-    cluster = TF.configuration . cluster
-
-class HasClusterConfig a s b | a -> s b where
-    clusterConfig :: Lens' a (TF.Attribute s b)
-
-instance HasClusterConfig a s b => HasClusterConfig (TF.Resource p a) s b where
-    clusterConfig = TF.configuration . clusterConfig
-
-class HasClusterId a s b | a -> s b where
-    clusterId :: Lens' a (TF.Attribute s b)
-
-instance HasClusterId a s b => HasClusterId (TF.Resource p a) s b where
-    clusterId = TF.configuration . clusterId
-
-class HasClusterIpv4Cidr a s b | a -> s b where
-    clusterIpv4Cidr :: Lens' a (TF.Attribute s b)
-
-instance HasClusterIpv4Cidr a s b => HasClusterIpv4Cidr (TF.Resource p a) s b where
-    clusterIpv4Cidr = TF.configuration . clusterIpv4Cidr
-
-class HasCollation a s b | a -> s b where
-    collation :: Lens' a (TF.Attribute s b)
-
-instance HasCollation a s b => HasCollation (TF.Resource p a) s b where
-    collation = TF.configuration . collation
-
-class HasConfig a s b | a -> s b where
-    config :: Lens' a (TF.Attribute s b)
-
-instance HasConfig a s b => HasConfig (TF.Resource p a) s b where
-    config = TF.configuration . config
-
-class HasConnectionDrainingTimeoutSec a s b | a -> s b where
-    connectionDrainingTimeoutSec :: Lens' a (TF.Attribute s b)
-
-instance HasConnectionDrainingTimeoutSec a s b => HasConnectionDrainingTimeoutSec (TF.Resource p a) s b where
-    connectionDrainingTimeoutSec = TF.configuration . connectionDrainingTimeoutSec
-
-class HasConnectionName a s b | a -> s b where
-    connectionName :: Lens' a (TF.Attribute s b)
-
-instance HasConnectionName a s b => HasConnectionName (TF.Resource p a) s b where
-    connectionName = TF.configuration . connectionName
-
-class HasConstraint a s b | a -> s b where
-    constraint :: Lens' a (TF.Attribute s b)
-
-instance HasConstraint a s b => HasConstraint (TF.Resource p a) s b where
-    constraint = TF.configuration . constraint
-
-class HasCors a s b | a -> s b where
-    cors :: Lens' a (TF.Attribute s b)
-
-instance HasCors a s b => HasCors (TF.Resource p a) s b where
-    cors = TF.configuration . cors
-
-class HasCreateTimeout a s b | a -> s b where
-    createTimeout :: Lens' a (TF.Attribute s b)
-
-instance HasCreateTimeout a s b => HasCreateTimeout (TF.Resource p a) s b where
-    createTimeout = TF.configuration . createTimeout
-
-class HasCredentials a s b | a -> s b where
-    credentials :: Lens' a (TF.Attribute s b)
-
-instance HasCredentials a s b => HasCredentials (TF.Resource p a) s b where
-    credentials = TF.configuration . credentials
-
-class HasCryptoKeyId a s b | a -> s b where
-    cryptoKeyId :: Lens' a (TF.Attribute s b)
-
-instance HasCryptoKeyId a s b => HasCryptoKeyId (TF.Resource p a) s b where
-    cryptoKeyId = TF.configuration . cryptoKeyId
-
-class HasDatabaseVersion a s b | a -> s b where
-    databaseVersion :: Lens' a (TF.Attribute s b)
-
-instance HasDatabaseVersion a s b => HasDatabaseVersion (TF.Resource p a) s b where
-    databaseVersion = TF.configuration . databaseVersion
-
-class HasDatasetId a s b | a -> s b where
-    datasetId :: Lens' a (TF.Attribute s b)
-
-instance HasDatasetId a s b => HasDatasetId (TF.Resource p a) s b where
-    datasetId = TF.configuration . datasetId
-
-class HasDdl a s b | a -> s b where
-    ddl :: Lens' a (TF.Attribute s b)
-
-instance HasDdl a s b => HasDdl (TF.Resource p a) s b where
-    ddl = TF.configuration . ddl
-
-class HasDefaultAcl a s b | a -> s b where
-    defaultAcl :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultAcl a s b => HasDefaultAcl (TF.Resource p a) s b where
-    defaultAcl = TF.configuration . defaultAcl
-
-class HasDefaultService a s b | a -> s b where
-    defaultService :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultService a s b => HasDefaultService (TF.Resource p a) s b where
-    defaultService = TF.configuration . defaultService
-
-class HasDefaultTableExpirationMs a s b | a -> s b where
-    defaultTableExpirationMs :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultTableExpirationMs a s b => HasDefaultTableExpirationMs (TF.Resource p a) s b where
-    defaultTableExpirationMs = TF.configuration . defaultTableExpirationMs
-
-class HasDeleted a s b | a -> s b where
-    deleted :: Lens' a (TF.Attribute s b)
-
-instance HasDeleted a s b => HasDeleted (TF.Resource p a) s b where
-    deleted = TF.configuration . deleted
-
-class HasDeny a s b | a -> s b where
-    deny :: Lens' a (TF.Attribute s b)
-
-instance HasDeny a s b => HasDeny (TF.Resource p a) s b where
-    deny = TF.configuration . deny
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasDestRange a s b | a -> s b where
-    destRange :: Lens' a (TF.Attribute s b)
-
-instance HasDestRange a s b => HasDestRange (TF.Resource p a) s b where
-    destRange = TF.configuration . destRange
-
-class HasDestination a s b | a -> s b where
-    destination :: Lens' a (TF.Attribute s b)
-
-instance HasDestination a s b => HasDestination (TF.Resource p a) s b where
-    destination = TF.configuration . destination
-
-class HasDestinationRanges a s b | a -> s b where
-    destinationRanges :: Lens' a (TF.Attribute s b)
-
-instance HasDestinationRanges a s b => HasDestinationRanges (TF.Resource p a) s b where
-    destinationRanges = TF.configuration . destinationRanges
-
-class HasDirection a s b | a -> s b where
-    direction :: Lens' a (TF.Attribute s b)
-
-instance HasDirection a s b => HasDirection (TF.Resource p a) s b where
-    direction = TF.configuration . direction
-
-class HasDisableOnDestroy a s b | a -> s b where
-    disableOnDestroy :: Lens' a (TF.Attribute s b)
-
-instance HasDisableOnDestroy a s b => HasDisableOnDestroy (TF.Resource p a) s b where
-    disableOnDestroy = TF.configuration . disableOnDestroy
-
-class HasDisableProject a s b | a -> s b where
-    disableProject :: Lens' a (TF.Attribute s b)
-
-instance HasDisableProject a s b => HasDisableProject (TF.Resource p a) s b where
-    disableProject = TF.configuration . disableProject
-
-class HasDisk a s b | a -> s b where
-    disk :: Lens' a (TF.Attribute s b)
-
-instance HasDisk a s b => HasDisk (TF.Resource p a) s b where
-    disk = TF.configuration . disk
-
-class HasDiskEncryptionKeyRaw a s b | a -> s b where
-    diskEncryptionKeyRaw :: Lens' a (TF.Attribute s b)
-
-instance HasDiskEncryptionKeyRaw a s b => HasDiskEncryptionKeyRaw (TF.Resource p a) s b where
-    diskEncryptionKeyRaw = TF.configuration . diskEncryptionKeyRaw
-
-class HasDisplayName a s b | a -> s b where
-    displayName :: Lens' a (TF.Attribute s b)
-
-instance HasDisplayName a s b => HasDisplayName (TF.Resource p a) s b where
-    displayName = TF.configuration . displayName
-
-class HasDnsName a s b | a -> s b where
-    dnsName :: Lens' a (TF.Attribute s b)
-
-instance HasDnsName a s b => HasDnsName (TF.Resource p a) s b where
-    dnsName = TF.configuration . dnsName
-
-class HasEnableCdn a s b | a -> s b where
-    enableCdn :: Lens' a (TF.Attribute s b)
-
-instance HasEnableCdn a s b => HasEnableCdn (TF.Resource p a) s b where
-    enableCdn = TF.configuration . enableCdn
-
-class HasEnableKubernetesAlpha a s b | a -> s b where
-    enableKubernetesAlpha :: Lens' a (TF.Attribute s b)
-
-instance HasEnableKubernetesAlpha a s b => HasEnableKubernetesAlpha (TF.Resource p a) s b where
-    enableKubernetesAlpha = TF.configuration . enableKubernetesAlpha
-
-class HasEnableLegacyAbac a s b | a -> s b where
-    enableLegacyAbac :: Lens' a (TF.Attribute s b)
-
-instance HasEnableLegacyAbac a s b => HasEnableLegacyAbac (TF.Resource p a) s b where
-    enableLegacyAbac = TF.configuration . enableLegacyAbac
-
-class HasEntryPoint a s b | a -> s b where
-    entryPoint :: Lens' a (TF.Attribute s b)
-
-instance HasEntryPoint a s b => HasEntryPoint (TF.Resource p a) s b where
-    entryPoint = TF.configuration . entryPoint
-
-class HasEventNotificationConfig a s b | a -> s b where
-    eventNotificationConfig :: Lens' a (TF.Attribute s b)
-
-instance HasEventNotificationConfig a s b => HasEventNotificationConfig (TF.Resource p a) s b where
-    eventNotificationConfig = TF.configuration . eventNotificationConfig
-
-class HasExpirationTime a s b | a -> s b where
-    expirationTime :: Lens' a (TF.Attribute s b)
-
-instance HasExpirationTime a s b => HasExpirationTime (TF.Resource p a) s b where
-    expirationTime = TF.configuration . expirationTime
-
-class HasFailoverRatio a s b | a -> s b where
-    failoverRatio :: Lens' a (TF.Attribute s b)
-
-instance HasFailoverRatio a s b => HasFailoverRatio (TF.Resource p a) s b where
-    failoverRatio = TF.configuration . failoverRatio
-
-class HasFolder a s b | a -> s b where
-    folder :: Lens' a (TF.Attribute s b)
-
-instance HasFolder a s b => HasFolder (TF.Resource p a) s b where
-    folder = TF.configuration . folder
-
-class HasFolderId a s b | a -> s b where
-    folderId :: Lens' a (TF.Attribute s b)
-
-instance HasFolderId a s b => HasFolderId (TF.Resource p a) s b where
-    folderId = TF.configuration . folderId
-
-class HasForceDelete a s b | a -> s b where
-    forceDelete :: Lens' a (TF.Attribute s b)
-
-instance HasForceDelete a s b => HasForceDelete (TF.Resource p a) s b where
-    forceDelete = TF.configuration . forceDelete
-
-class HasForceDestroy a s b | a -> s b where
-    forceDestroy :: Lens' a (TF.Attribute s b)
-
-instance HasForceDestroy a s b => HasForceDestroy (TF.Resource p a) s b where
-    forceDestroy = TF.configuration . forceDestroy
-
-class HasFriendlyName a s b | a -> s b where
-    friendlyName :: Lens' a (TF.Attribute s b)
-
-instance HasFriendlyName a s b => HasFriendlyName (TF.Resource p a) s b where
-    friendlyName = TF.configuration . friendlyName
-
-class HasGrpcConfig a s b | a -> s b where
-    grpcConfig :: Lens' a (TF.Attribute s b)
-
-instance HasGrpcConfig a s b => HasGrpcConfig (TF.Resource p a) s b where
-    grpcConfig = TF.configuration . grpcConfig
-
-class HasGuestAccelerator a s b | a -> s b where
-    guestAccelerator :: Lens' a (TF.Attribute s b)
-
-instance HasGuestAccelerator a s b => HasGuestAccelerator (TF.Resource p a) s b where
-    guestAccelerator = TF.configuration . guestAccelerator
-
-class HasHealthChecks a s b | a -> s b where
-    healthChecks :: Lens' a (TF.Attribute s b)
-
-instance HasHealthChecks a s b => HasHealthChecks (TF.Resource p a) s b where
-    healthChecks = TF.configuration . healthChecks
-
-class HasHealthyThreshold a s b | a -> s b where
-    healthyThreshold :: Lens' a (TF.Attribute s b)
-
-instance HasHealthyThreshold a s b => HasHealthyThreshold (TF.Resource p a) s b where
-    healthyThreshold = TF.configuration . healthyThreshold
-
-class HasHost a s b | a -> s b where
-    host :: Lens' a (TF.Attribute s b)
-
-instance HasHost a s b => HasHost (TF.Resource p a) s b where
-    host = TF.configuration . host
-
-class HasHostProject a s b | a -> s b where
-    hostProject :: Lens' a (TF.Attribute s b)
-
-instance HasHostProject a s b => HasHostProject (TF.Resource p a) s b where
-    hostProject = TF.configuration . hostProject
-
-class HasHostRule a s b | a -> s b where
-    hostRule :: Lens' a (TF.Attribute s b)
-
-instance HasHostRule a s b => HasHostRule (TF.Resource p a) s b where
-    hostRule = TF.configuration . hostRule
-
-class HasHttpConfig a s b | a -> s b where
-    httpConfig :: Lens' a (TF.Attribute s b)
-
-instance HasHttpConfig a s b => HasHttpConfig (TF.Resource p a) s b where
-    httpConfig = TF.configuration . httpConfig
-
-class HasHttpHealthCheck a s b | a -> s b where
-    httpHealthCheck :: Lens' a (TF.Attribute s b)
-
-instance HasHttpHealthCheck a s b => HasHttpHealthCheck (TF.Resource p a) s b where
-    httpHealthCheck = TF.configuration . httpHealthCheck
-
-class HasHttpsHealthCheck a s b | a -> s b where
-    httpsHealthCheck :: Lens' a (TF.Attribute s b)
-
-instance HasHttpsHealthCheck a s b => HasHttpsHealthCheck (TF.Resource p a) s b where
-    httpsHealthCheck = TF.configuration . httpsHealthCheck
-
-class HasIap a s b | a -> s b where
-    iap :: Lens' a (TF.Attribute s b)
-
-instance HasIap a s b => HasIap (TF.Resource p a) s b where
-    iap = TF.configuration . iap
-
-class HasIkeVersion a s b | a -> s b where
-    ikeVersion :: Lens' a (TF.Attribute s b)
-
-instance HasIkeVersion a s b => HasIkeVersion (TF.Resource p a) s b where
-    ikeVersion = TF.configuration . ikeVersion
-
-class HasImage a s b | a -> s b where
-    image :: Lens' a (TF.Attribute s b)
-
-instance HasImage a s b => HasImage (TF.Resource p a) s b where
-    image = TF.configuration . image
-
-class HasInitialNodeCount a s b | a -> s b where
-    initialNodeCount :: Lens' a (TF.Attribute s b)
-
-instance HasInitialNodeCount a s b => HasInitialNodeCount (TF.Resource p a) s b where
-    initialNodeCount = TF.configuration . initialNodeCount
-
-class HasInstance' a s b | a -> s b where
-    instance' :: Lens' a (TF.Attribute s b)
-
-instance HasInstance' a s b => HasInstance' (TF.Resource p a) s b where
-    instance' = TF.configuration . instance'
-
-class HasInstanceDescription a s b | a -> s b where
-    instanceDescription :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceDescription a s b => HasInstanceDescription (TF.Resource p a) s b where
-    instanceDescription = TF.configuration . instanceDescription
-
-class HasInstanceName a s b | a -> s b where
-    instanceName :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceName a s b => HasInstanceName (TF.Resource p a) s b where
-    instanceName = TF.configuration . instanceName
-
-class HasInstanceTemplate a s b | a -> s b where
-    instanceTemplate :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceTemplate a s b => HasInstanceTemplate (TF.Resource p a) s b where
-    instanceTemplate = TF.configuration . instanceTemplate
-
-class HasInstanceType a s b | a -> s b where
-    instanceType :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceType a s b => HasInstanceType (TF.Resource p a) s b where
-    instanceType = TF.configuration . instanceType
-
-class HasInstances a s b | a -> s b where
-    instances :: Lens' a (TF.Attribute s b)
-
-instance HasInstances a s b => HasInstances (TF.Resource p a) s b where
-    instances = TF.configuration . instances
-
-class HasInterface a s b | a -> s b where
-    interface :: Lens' a (TF.Attribute s b)
-
-instance HasInterface a s b => HasInterface (TF.Resource p a) s b where
-    interface = TF.configuration . interface
-
-class HasIpAddress a s b | a -> s b where
-    ipAddress :: Lens' a (TF.Attribute s b)
-
-instance HasIpAddress a s b => HasIpAddress (TF.Resource p a) s b where
-    ipAddress = TF.configuration . ipAddress
-
-class HasIpAllocationPolicy a s b | a -> s b where
-    ipAllocationPolicy :: Lens' a (TF.Attribute s b)
-
-instance HasIpAllocationPolicy a s b => HasIpAllocationPolicy (TF.Resource p a) s b where
-    ipAllocationPolicy = TF.configuration . ipAllocationPolicy
-
-class HasIpCidrRange a s b | a -> s b where
-    ipCidrRange :: Lens' a (TF.Attribute s b)
-
-instance HasIpCidrRange a s b => HasIpCidrRange (TF.Resource p a) s b where
-    ipCidrRange = TF.configuration . ipCidrRange
-
-class HasIpProtocol a s b | a -> s b where
-    ipProtocol :: Lens' a (TF.Attribute s b)
-
-instance HasIpProtocol a s b => HasIpProtocol (TF.Resource p a) s b where
-    ipProtocol = TF.configuration . ipProtocol
-
-class HasIpRange a s b | a -> s b where
-    ipRange :: Lens' a (TF.Attribute s b)
-
-instance HasIpRange a s b => HasIpRange (TF.Resource p a) s b where
-    ipRange = TF.configuration . ipRange
-
-class HasIpVersion a s b | a -> s b where
-    ipVersion :: Lens' a (TF.Attribute s b)
-
-instance HasIpVersion a s b => HasIpVersion (TF.Resource p a) s b where
-    ipVersion = TF.configuration . ipVersion
-
-class HasIpv4Range a s b | a -> s b where
-    ipv4Range :: Lens' a (TF.Attribute s b)
-
-instance HasIpv4Range a s b => HasIpv4Range (TF.Resource p a) s b where
-    ipv4Range = TF.configuration . ipv4Range
-
-class HasKey a s b | a -> s b where
-    key :: Lens' a (TF.Attribute s b)
-
-instance HasKey a s b => HasKey (TF.Resource p a) s b where
-    key = TF.configuration . key
-
-class HasKeyAlgorithm a s b | a -> s b where
-    keyAlgorithm :: Lens' a (TF.Attribute s b)
-
-instance HasKeyAlgorithm a s b => HasKeyAlgorithm (TF.Resource p a) s b where
-    keyAlgorithm = TF.configuration . keyAlgorithm
-
-class HasKeyRing a s b | a -> s b where
-    keyRing :: Lens' a (TF.Attribute s b)
-
-instance HasKeyRing a s b => HasKeyRing (TF.Resource p a) s b where
-    keyRing = TF.configuration . keyRing
-
-class HasKeyRingId a s b | a -> s b where
-    keyRingId :: Lens' a (TF.Attribute s b)
-
-instance HasKeyRingId a s b => HasKeyRingId (TF.Resource p a) s b where
-    keyRingId = TF.configuration . keyRingId
-
-class HasLabels a s b | a -> s b where
-    labels :: Lens' a (TF.Attribute s b)
-
-instance HasLabels a s b => HasLabels (TF.Resource p a) s b where
-    labels = TF.configuration . labels
-
-class HasLifecycleRule a s b | a -> s b where
-    lifecycleRule :: Lens' a (TF.Attribute s b)
-
-instance HasLifecycleRule a s b => HasLifecycleRule (TF.Resource p a) s b where
-    lifecycleRule = TF.configuration . lifecycleRule
-
-class HasListPolicy a s b | a -> s b where
-    listPolicy :: Lens' a (TF.Attribute s b)
-
-instance HasListPolicy a s b => HasListPolicy (TF.Resource p a) s b where
-    listPolicy = TF.configuration . listPolicy
-
-class HasLoadBalancingScheme a s b | a -> s b where
-    loadBalancingScheme :: Lens' a (TF.Attribute s b)
-
-instance HasLoadBalancingScheme a s b => HasLoadBalancingScheme (TF.Resource p a) s b where
-    loadBalancingScheme = TF.configuration . loadBalancingScheme
-
-class HasLocalTrafficSelector a s b | a -> s b where
-    localTrafficSelector :: Lens' a (TF.Attribute s b)
-
-instance HasLocalTrafficSelector a s b => HasLocalTrafficSelector (TF.Resource p a) s b where
-    localTrafficSelector = TF.configuration . localTrafficSelector
-
-class HasLocation a s b | a -> s b where
-    location :: Lens' a (TF.Attribute s b)
-
-instance HasLocation a s b => HasLocation (TF.Resource p a) s b where
-    location = TF.configuration . location
-
-class HasLogging a s b | a -> s b where
-    logging :: Lens' a (TF.Attribute s b)
-
-instance HasLogging a s b => HasLogging (TF.Resource p a) s b where
-    logging = TF.configuration . logging
-
-class HasLoggingService a s b | a -> s b where
-    loggingService :: Lens' a (TF.Attribute s b)
-
-instance HasLoggingService a s b => HasLoggingService (TF.Resource p a) s b where
-    loggingService = TF.configuration . loggingService
-
-class HasMachineType a s b | a -> s b where
-    machineType :: Lens' a (TF.Attribute s b)
-
-instance HasMachineType a s b => HasMachineType (TF.Resource p a) s b where
-    machineType = TF.configuration . machineType
-
-class HasMaintenancePolicy a s b | a -> s b where
-    maintenancePolicy :: Lens' a (TF.Attribute s b)
-
-instance HasMaintenancePolicy a s b => HasMaintenancePolicy (TF.Resource p a) s b where
-    maintenancePolicy = TF.configuration . maintenancePolicy
-
-class HasManagedZone a s b | a -> s b where
-    managedZone :: Lens' a (TF.Attribute s b)
-
-instance HasManagedZone a s b => HasManagedZone (TF.Resource p a) s b where
-    managedZone = TF.configuration . managedZone
-
-class HasManagement a s b | a -> s b where
-    management :: Lens' a (TF.Attribute s b)
-
-instance HasManagement a s b => HasManagement (TF.Resource p a) s b where
-    management = TF.configuration . management
-
-class HasMasterAuth a s b | a -> s b where
-    masterAuth :: Lens' a (TF.Attribute s b)
-
-instance HasMasterAuth a s b => HasMasterAuth (TF.Resource p a) s b where
-    masterAuth = TF.configuration . masterAuth
-
-class HasMasterAuthorizedNetworksConfig a s b | a -> s b where
-    masterAuthorizedNetworksConfig :: Lens' a (TF.Attribute s b)
-
-instance HasMasterAuthorizedNetworksConfig a s b => HasMasterAuthorizedNetworksConfig (TF.Resource p a) s b where
-    masterAuthorizedNetworksConfig = TF.configuration . masterAuthorizedNetworksConfig
-
-class HasMasterInstanceName a s b | a -> s b where
-    masterInstanceName :: Lens' a (TF.Attribute s b)
-
-instance HasMasterInstanceName a s b => HasMasterInstanceName (TF.Resource p a) s b where
-    masterInstanceName = TF.configuration . masterInstanceName
-
-class HasMaxWorkers a s b | a -> s b where
-    maxWorkers :: Lens' a (TF.Attribute s b)
-
-instance HasMaxWorkers a s b => HasMaxWorkers (TF.Resource p a) s b where
-    maxWorkers = TF.configuration . maxWorkers
-
-class HasMember a s b | a -> s b where
-    member :: Lens' a (TF.Attribute s b)
-
-instance HasMember a s b => HasMember (TF.Resource p a) s b where
-    member = TF.configuration . member
-
-class HasMembers a s b | a -> s b where
-    members :: Lens' a (TF.Attribute s b)
-
-instance HasMembers a s b => HasMembers (TF.Resource p a) s b where
-    members = TF.configuration . members
-
-class HasMembers a s b | a -> s b where
-    members :: Lens' a (TF.Attribute s b)
-
-instance HasMembers a s b => HasMembers (TF.Resource p a) s b where
-    members = TF.configuration . members
-
-class HasMetadata a s b | a -> s b where
-    metadata :: Lens' a (TF.Attribute s b)
-
-instance HasMetadata a s b => HasMetadata (TF.Resource p a) s b where
-    metadata = TF.configuration . metadata
-
-class HasMetadataStartupScript a s b | a -> s b where
-    metadataStartupScript :: Lens' a (TF.Attribute s b)
-
-instance HasMetadataStartupScript a s b => HasMetadataStartupScript (TF.Resource p a) s b where
-    metadataStartupScript = TF.configuration . metadataStartupScript
-
-class HasMinCpuPlatform a s b | a -> s b where
-    minCpuPlatform :: Lens' a (TF.Attribute s b)
-
-instance HasMinCpuPlatform a s b => HasMinCpuPlatform (TF.Resource p a) s b where
-    minCpuPlatform = TF.configuration . minCpuPlatform
-
-class HasMinMasterVersion a s b | a -> s b where
-    minMasterVersion :: Lens' a (TF.Attribute s b)
-
-instance HasMinMasterVersion a s b => HasMinMasterVersion (TF.Resource p a) s b where
-    minMasterVersion = TF.configuration . minMasterVersion
-
-class HasMonitoringService a s b | a -> s b where
-    monitoringService :: Lens' a (TF.Attribute s b)
-
-instance HasMonitoringService a s b => HasMonitoringService (TF.Resource p a) s b where
-    monitoringService = TF.configuration . monitoringService
-
-class HasMqttConfig a s b | a -> s b where
-    mqttConfig :: Lens' a (TF.Attribute s b)
-
-instance HasMqttConfig a s b => HasMqttConfig (TF.Resource p a) s b where
-    mqttConfig = TF.configuration . mqttConfig
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasNamePrefix a s b | a -> s b where
-    namePrefix :: Lens' a (TF.Attribute s b)
-
-instance HasNamePrefix a s b => HasNamePrefix (TF.Resource p a) s b where
-    namePrefix = TF.configuration . namePrefix
-
-class HasNamedPort a s b | a -> s b where
-    namedPort :: Lens' a (TF.Attribute s b)
-
-instance HasNamedPort a s b => HasNamedPort (TF.Resource p a) s b where
-    namedPort = TF.configuration . namedPort
-
-class HasNetwork a s b | a -> s b where
-    network :: Lens' a (TF.Attribute s b)
-
-instance HasNetwork a s b => HasNetwork (TF.Resource p a) s b where
-    network = TF.configuration . network
-
-class HasNetworkInterface a s b | a -> s b where
-    networkInterface :: Lens' a (TF.Attribute s b)
-
-instance HasNetworkInterface a s b => HasNetworkInterface (TF.Resource p a) s b where
-    networkInterface = TF.configuration . networkInterface
-
-class HasNetworkPolicy a s b | a -> s b where
-    networkPolicy :: Lens' a (TF.Attribute s b)
-
-instance HasNetworkPolicy a s b => HasNetworkPolicy (TF.Resource p a) s b where
-    networkPolicy = TF.configuration . networkPolicy
-
-class HasNextHopGateway a s b | a -> s b where
-    nextHopGateway :: Lens' a (TF.Attribute s b)
-
-instance HasNextHopGateway a s b => HasNextHopGateway (TF.Resource p a) s b where
-    nextHopGateway = TF.configuration . nextHopGateway
-
-class HasNextHopInstance a s b | a -> s b where
-    nextHopInstance :: Lens' a (TF.Attribute s b)
-
-instance HasNextHopInstance a s b => HasNextHopInstance (TF.Resource p a) s b where
-    nextHopInstance = TF.configuration . nextHopInstance
-
-class HasNextHopInstanceZone a s b | a -> s b where
-    nextHopInstanceZone :: Lens' a (TF.Attribute s b)
-
-instance HasNextHopInstanceZone a s b => HasNextHopInstanceZone (TF.Resource p a) s b where
-    nextHopInstanceZone = TF.configuration . nextHopInstanceZone
-
-class HasNextHopIp a s b | a -> s b where
-    nextHopIp :: Lens' a (TF.Attribute s b)
-
-instance HasNextHopIp a s b => HasNextHopIp (TF.Resource p a) s b where
-    nextHopIp = TF.configuration . nextHopIp
-
-class HasNextHopVpnTunnel a s b | a -> s b where
-    nextHopVpnTunnel :: Lens' a (TF.Attribute s b)
-
-instance HasNextHopVpnTunnel a s b => HasNextHopVpnTunnel (TF.Resource p a) s b where
-    nextHopVpnTunnel = TF.configuration . nextHopVpnTunnel
-
-class HasNodeConfig a s b | a -> s b where
-    nodeConfig :: Lens' a (TF.Attribute s b)
-
-instance HasNodeConfig a s b => HasNodeConfig (TF.Resource p a) s b where
-    nodeConfig = TF.configuration . nodeConfig
-
-class HasNodeCount a s b | a -> s b where
-    nodeCount :: Lens' a (TF.Attribute s b)
-
-instance HasNodeCount a s b => HasNodeCount (TF.Resource p a) s b where
-    nodeCount = TF.configuration . nodeCount
-
-class HasNodePool a s b | a -> s b where
-    nodePool :: Lens' a (TF.Attribute s b)
-
-instance HasNodePool a s b => HasNodePool (TF.Resource p a) s b where
-    nodePool = TF.configuration . nodePool
-
-class HasNodeVersion a s b | a -> s b where
-    nodeVersion :: Lens' a (TF.Attribute s b)
-
-instance HasNodeVersion a s b => HasNodeVersion (TF.Resource p a) s b where
-    nodeVersion = TF.configuration . nodeVersion
-
-class HasNumNodes a s b | a -> s b where
-    numNodes :: Lens' a (TF.Attribute s b)
-
-instance HasNumNodes a s b => HasNumNodes (TF.Resource p a) s b where
-    numNodes = TF.configuration . numNodes
-
-class HasObject a s b | a -> s b where
-    object :: Lens' a (TF.Attribute s b)
-
-instance HasObject a s b => HasObject (TF.Resource p a) s b where
-    object = TF.configuration . object
-
-class HasOnDelete a s b | a -> s b where
-    onDelete :: Lens' a (TF.Attribute s b)
-
-instance HasOnDelete a s b => HasOnDelete (TF.Resource p a) s b where
-    onDelete = TF.configuration . onDelete
-
-class HasOpenapiConfig a s b | a -> s b where
-    openapiConfig :: Lens' a (TF.Attribute s b)
-
-instance HasOpenapiConfig a s b => HasOpenapiConfig (TF.Resource p a) s b where
-    openapiConfig = TF.configuration . openapiConfig
-
-class HasOrgId a s b | a -> s b where
-    orgId :: Lens' a (TF.Attribute s b)
-
-instance HasOrgId a s b => HasOrgId (TF.Resource p a) s b where
-    orgId = TF.configuration . orgId
-
-class HasParameters a s b | a -> s b where
-    parameters :: Lens' a (TF.Attribute s b)
-
-instance HasParameters a s b => HasParameters (TF.Resource p a) s b where
-    parameters = TF.configuration . parameters
-
-class HasParent a s b | a -> s b where
-    parent :: Lens' a (TF.Attribute s b)
-
-instance HasParent a s b => HasParent (TF.Resource p a) s b where
-    parent = TF.configuration . parent
-
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
-
-instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
-    password = TF.configuration . password
-
-class HasPathMatcher a s b | a -> s b where
-    pathMatcher :: Lens' a (TF.Attribute s b)
-
-instance HasPathMatcher a s b => HasPathMatcher (TF.Resource p a) s b where
-    pathMatcher = TF.configuration . pathMatcher
-
-class HasPeerAsn a s b | a -> s b where
-    peerAsn :: Lens' a (TF.Attribute s b)
-
-instance HasPeerAsn a s b => HasPeerAsn (TF.Resource p a) s b where
-    peerAsn = TF.configuration . peerAsn
-
-class HasPeerIp a s b | a -> s b where
-    peerIp :: Lens' a (TF.Attribute s b)
-
-instance HasPeerIp a s b => HasPeerIp (TF.Resource p a) s b where
-    peerIp = TF.configuration . peerIp
-
-class HasPeerIpAddress a s b | a -> s b where
-    peerIpAddress :: Lens' a (TF.Attribute s b)
-
-instance HasPeerIpAddress a s b => HasPeerIpAddress (TF.Resource p a) s b where
-    peerIpAddress = TF.configuration . peerIpAddress
-
-class HasPeerNetwork a s b | a -> s b where
-    peerNetwork :: Lens' a (TF.Attribute s b)
-
-instance HasPeerNetwork a s b => HasPeerNetwork (TF.Resource p a) s b where
-    peerNetwork = TF.configuration . peerNetwork
-
-class HasPermissions a s b | a -> s b where
-    permissions :: Lens' a (TF.Attribute s b)
-
-instance HasPermissions a s b => HasPermissions (TF.Resource p a) s b where
-    permissions = TF.configuration . permissions
-
-class HasPgpKey a s b | a -> s b where
-    pgpKey :: Lens' a (TF.Attribute s b)
-
-instance HasPgpKey a s b => HasPgpKey (TF.Resource p a) s b where
-    pgpKey = TF.configuration . pgpKey
-
-class HasPlacement a s b | a -> s b where
-    placement :: Lens' a (TF.Attribute s b)
-
-instance HasPlacement a s b => HasPlacement (TF.Resource p a) s b where
-    placement = TF.configuration . placement
-
-class HasPolicyData a s b | a -> s b where
-    policyData :: Lens' a (TF.Attribute s b)
-
-instance HasPolicyData a s b => HasPolicyData (TF.Resource p a) s b where
-    policyData = TF.configuration . policyData
-
-class HasPort a s b | a -> s b where
-    port :: Lens' a (TF.Attribute s b)
-
-instance HasPort a s b => HasPort (TF.Resource p a) s b where
-    port = TF.configuration . port
-
-class HasPortName a s b | a -> s b where
-    portName :: Lens' a (TF.Attribute s b)
-
-instance HasPortName a s b => HasPortName (TF.Resource p a) s b where
-    portName = TF.configuration . portName
-
-class HasPortRange a s b | a -> s b where
-    portRange :: Lens' a (TF.Attribute s b)
-
-instance HasPortRange a s b => HasPortRange (TF.Resource p a) s b where
-    portRange = TF.configuration . portRange
-
-class HasPorts a s b | a -> s b where
-    ports :: Lens' a (TF.Attribute s b)
-
-instance HasPorts a s b => HasPorts (TF.Resource p a) s b where
-    ports = TF.configuration . ports
-
-class HasPredefinedAcl a s b | a -> s b where
-    predefinedAcl :: Lens' a (TF.Attribute s b)
-
-instance HasPredefinedAcl a s b => HasPredefinedAcl (TF.Resource p a) s b where
-    predefinedAcl = TF.configuration . predefinedAcl
-
-class HasPriority a s b | a -> s b where
-    priority :: Lens' a (TF.Attribute s b)
-
-instance HasPriority a s b => HasPriority (TF.Resource p a) s b where
-    priority = TF.configuration . priority
-
-class HasPrivateIpGoogleAccess a s b | a -> s b where
-    privateIpGoogleAccess :: Lens' a (TF.Attribute s b)
-
-instance HasPrivateIpGoogleAccess a s b => HasPrivateIpGoogleAccess (TF.Resource p a) s b where
-    privateIpGoogleAccess = TF.configuration . privateIpGoogleAccess
-
-class HasPrivateKey a s b | a -> s b where
-    privateKey :: Lens' a (TF.Attribute s b)
-
-instance HasPrivateKey a s b => HasPrivateKey (TF.Resource p a) s b where
-    privateKey = TF.configuration . privateKey
-
-class HasPrivateKeyType a s b | a -> s b where
-    privateKeyType :: Lens' a (TF.Attribute s b)
-
-instance HasPrivateKeyType a s b => HasPrivateKeyType (TF.Resource p a) s b where
-    privateKeyType = TF.configuration . privateKeyType
-
-class HasProject a s b | a -> s b where
-    project :: Lens' a (TF.Attribute s b)
-
-instance HasProject a s b => HasProject (TF.Resource p a) s b where
-    project = TF.configuration . project
-
-class HasProjectId a s b | a -> s b where
-    projectId :: Lens' a (TF.Attribute s b)
-
-instance HasProjectId a s b => HasProjectId (TF.Resource p a) s b where
-    projectId = TF.configuration . projectId
-
-class HasProtocOutput a s b | a -> s b where
-    protocOutput :: Lens' a (TF.Attribute s b)
-
-instance HasProtocOutput a s b => HasProtocOutput (TF.Resource p a) s b where
-    protocOutput = TF.configuration . protocOutput
-
-class HasProtocol a s b | a -> s b where
-    protocol :: Lens' a (TF.Attribute s b)
-
-instance HasProtocol a s b => HasProtocol (TF.Resource p a) s b where
-    protocol = TF.configuration . protocol
-
-class HasProxyHeader a s b | a -> s b where
-    proxyHeader :: Lens' a (TF.Attribute s b)
-
-instance HasProxyHeader a s b => HasProxyHeader (TF.Resource p a) s b where
-    proxyHeader = TF.configuration . proxyHeader
-
-class HasPublicKeyType a s b | a -> s b where
-    publicKeyType :: Lens' a (TF.Attribute s b)
-
-instance HasPublicKeyType a s b => HasPublicKeyType (TF.Resource p a) s b where
-    publicKeyType = TF.configuration . publicKeyType
-
-class HasPushConfig a s b | a -> s b where
-    pushConfig :: Lens' a (TF.Attribute s b)
-
-instance HasPushConfig a s b => HasPushConfig (TF.Resource p a) s b where
-    pushConfig = TF.configuration . pushConfig
-
-class HasRawDisk a s b | a -> s b where
-    rawDisk :: Lens' a (TF.Attribute s b)
-
-instance HasRawDisk a s b => HasRawDisk (TF.Resource p a) s b where
-    rawDisk = TF.configuration . rawDisk
-
-class HasRegion a s b | a -> s b where
-    region :: Lens' a (TF.Attribute s b)
-
-instance HasRegion a s b => HasRegion (TF.Resource p a) s b where
-    region = TF.configuration . region
-
-class HasRemoteTrafficSelector a s b | a -> s b where
-    remoteTrafficSelector :: Lens' a (TF.Attribute s b)
-
-instance HasRemoteTrafficSelector a s b => HasRemoteTrafficSelector (TF.Resource p a) s b where
-    remoteTrafficSelector = TF.configuration . remoteTrafficSelector
-
-class HasReplicaConfiguration a s b | a -> s b where
-    replicaConfiguration :: Lens' a (TF.Attribute s b)
-
-instance HasReplicaConfiguration a s b => HasReplicaConfiguration (TF.Resource p a) s b where
-    replicaConfiguration = TF.configuration . replicaConfiguration
-
-class HasRequestPath a s b | a -> s b where
-    requestPath :: Lens' a (TF.Attribute s b)
-
-instance HasRequestPath a s b => HasRequestPath (TF.Resource p a) s b where
-    requestPath = TF.configuration . requestPath
-
-class HasRole a s b | a -> s b where
-    role :: Lens' a (TF.Attribute s b)
-
-instance HasRole a s b => HasRole (TF.Resource p a) s b where
-    role = TF.configuration . role
-
-class HasRoleEntity a s b | a -> s b where
-    roleEntity :: Lens' a (TF.Attribute s b)
-
-instance HasRoleEntity a s b => HasRoleEntity (TF.Resource p a) s b where
-    roleEntity = TF.configuration . roleEntity
-
-class HasRoleId a s b | a -> s b where
-    roleId :: Lens' a (TF.Attribute s b)
-
-instance HasRoleId a s b => HasRoleId (TF.Resource p a) s b where
-    roleId = TF.configuration . roleId
-
-class HasRotationPeriod a s b | a -> s b where
-    rotationPeriod :: Lens' a (TF.Attribute s b)
-
-instance HasRotationPeriod a s b => HasRotationPeriod (TF.Resource p a) s b where
-    rotationPeriod = TF.configuration . rotationPeriod
-
-class HasRouter a s b | a -> s b where
-    router :: Lens' a (TF.Attribute s b)
-
-instance HasRouter a s b => HasRouter (TF.Resource p a) s b where
-    router = TF.configuration . router
-
-class HasRoutingMode a s b | a -> s b where
-    routingMode :: Lens' a (TF.Attribute s b)
-
-instance HasRoutingMode a s b => HasRoutingMode (TF.Resource p a) s b where
-    routingMode = TF.configuration . routingMode
-
-class HasRrdatas a s b | a -> s b where
-    rrdatas :: Lens' a (TF.Attribute s b)
-
-instance HasRrdatas a s b => HasRrdatas (TF.Resource p a) s b where
-    rrdatas = TF.configuration . rrdatas
-
-class HasScheduling a s b | a -> s b where
-    scheduling :: Lens' a (TF.Attribute s b)
-
-instance HasScheduling a s b => HasScheduling (TF.Resource p a) s b where
-    scheduling = TF.configuration . scheduling
-
-class HasScheduling a s b | a -> s b where
-    scheduling :: Lens' a (TF.Attribute s b)
-
-instance HasScheduling a s b => HasScheduling (TF.Resource p a) s b where
-    scheduling = TF.configuration . scheduling
-
-class HasSchema a s b | a -> s b where
-    schema :: Lens' a (TF.Attribute s b)
-
-instance HasSchema a s b => HasSchema (TF.Resource p a) s b where
-    schema = TF.configuration . schema
-
-class HasScratchDisk a s b | a -> s b where
-    scratchDisk :: Lens' a (TF.Attribute s b)
-
-instance HasScratchDisk a s b => HasScratchDisk (TF.Resource p a) s b where
-    scratchDisk = TF.configuration . scratchDisk
-
-class HasSecondaryIpRange a s b | a -> s b where
-    secondaryIpRange :: Lens' a (TF.Attribute s b)
-
-instance HasSecondaryIpRange a s b => HasSecondaryIpRange (TF.Resource p a) s b where
-    secondaryIpRange = TF.configuration . secondaryIpRange
-
-class HasService a s b | a -> s b where
-    service :: Lens' a (TF.Attribute s b)
-
-instance HasService a s b => HasService (TF.Resource p a) s b where
-    service = TF.configuration . service
-
-class HasServiceAccount a s b | a -> s b where
-    serviceAccount :: Lens' a (TF.Attribute s b)
-
-instance HasServiceAccount a s b => HasServiceAccount (TF.Resource p a) s b where
-    serviceAccount = TF.configuration . serviceAccount
-
-class HasServiceAccountId a s b | a -> s b where
-    serviceAccountId :: Lens' a (TF.Attribute s b)
-
-instance HasServiceAccountId a s b => HasServiceAccountId (TF.Resource p a) s b where
-    serviceAccountId = TF.configuration . serviceAccountId
-
-class HasServiceName a s b | a -> s b where
-    serviceName :: Lens' a (TF.Attribute s b)
-
-instance HasServiceName a s b => HasServiceName (TF.Resource p a) s b where
-    serviceName = TF.configuration . serviceName
-
-class HasServiceProject a s b | a -> s b where
-    serviceProject :: Lens' a (TF.Attribute s b)
-
-instance HasServiceProject a s b => HasServiceProject (TF.Resource p a) s b where
-    serviceProject = TF.configuration . serviceProject
-
-class HasServices a s b | a -> s b where
-    services :: Lens' a (TF.Attribute s b)
-
-instance HasServices a s b => HasServices (TF.Resource p a) s b where
-    services = TF.configuration . services
-
-class HasSessionAffinity a s b | a -> s b where
-    sessionAffinity :: Lens' a (TF.Attribute s b)
-
-instance HasSessionAffinity a s b => HasSessionAffinity (TF.Resource p a) s b where
-    sessionAffinity = TF.configuration . sessionAffinity
-
-class HasSettings a s b | a -> s b where
-    settings :: Lens' a (TF.Attribute s b)
-
-instance HasSettings a s b => HasSettings (TF.Resource p a) s b where
-    settings = TF.configuration . settings
-
-class HasSharedSecret a s b | a -> s b where
-    sharedSecret :: Lens' a (TF.Attribute s b)
-
-instance HasSharedSecret a s b => HasSharedSecret (TF.Resource p a) s b where
-    sharedSecret = TF.configuration . sharedSecret
-
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attribute s b)
-
-instance HasSize a s b => HasSize (TF.Resource p a) s b where
-    size = TF.configuration . size
-
-class HasSkipDelete a s b | a -> s b where
-    skipDelete :: Lens' a (TF.Attribute s b)
-
-instance HasSkipDelete a s b => HasSkipDelete (TF.Resource p a) s b where
-    skipDelete = TF.configuration . skipDelete
-
-class HasSnapshot a s b | a -> s b where
-    snapshot :: Lens' a (TF.Attribute s b)
-
-instance HasSnapshot a s b => HasSnapshot (TF.Resource p a) s b where
-    snapshot = TF.configuration . snapshot
-
-class HasSnapshotEncryptionKeyRaw a s b | a -> s b where
-    snapshotEncryptionKeyRaw :: Lens' a (TF.Attribute s b)
-
-instance HasSnapshotEncryptionKeyRaw a s b => HasSnapshotEncryptionKeyRaw (TF.Resource p a) s b where
-    snapshotEncryptionKeyRaw = TF.configuration . snapshotEncryptionKeyRaw
-
-class HasSourceArchiveBucket a s b | a -> s b where
-    sourceArchiveBucket :: Lens' a (TF.Attribute s b)
-
-instance HasSourceArchiveBucket a s b => HasSourceArchiveBucket (TF.Resource p a) s b where
-    sourceArchiveBucket = TF.configuration . sourceArchiveBucket
-
-class HasSourceArchiveObject a s b | a -> s b where
-    sourceArchiveObject :: Lens' a (TF.Attribute s b)
-
-instance HasSourceArchiveObject a s b => HasSourceArchiveObject (TF.Resource p a) s b where
-    sourceArchiveObject = TF.configuration . sourceArchiveObject
-
-class HasSourceDisk a s b | a -> s b where
-    sourceDisk :: Lens' a (TF.Attribute s b)
-
-instance HasSourceDisk a s b => HasSourceDisk (TF.Resource p a) s b where
-    sourceDisk = TF.configuration . sourceDisk
-
-class HasSourceDiskEncryptionKeyRaw a s b | a -> s b where
-    sourceDiskEncryptionKeyRaw :: Lens' a (TF.Attribute s b)
-
-instance HasSourceDiskEncryptionKeyRaw a s b => HasSourceDiskEncryptionKeyRaw (TF.Resource p a) s b where
-    sourceDiskEncryptionKeyRaw = TF.configuration . sourceDiskEncryptionKeyRaw
-
-class HasSourceRanges a s b | a -> s b where
-    sourceRanges :: Lens' a (TF.Attribute s b)
-
-instance HasSourceRanges a s b => HasSourceRanges (TF.Resource p a) s b where
-    sourceRanges = TF.configuration . sourceRanges
-
-class HasSourceServiceAccounts a s b | a -> s b where
-    sourceServiceAccounts :: Lens' a (TF.Attribute s b)
-
-instance HasSourceServiceAccounts a s b => HasSourceServiceAccounts (TF.Resource p a) s b where
-    sourceServiceAccounts = TF.configuration . sourceServiceAccounts
-
-class HasSourceTags a s b | a -> s b where
-    sourceTags :: Lens' a (TF.Attribute s b)
-
-instance HasSourceTags a s b => HasSourceTags (TF.Resource p a) s b where
-    sourceTags = TF.configuration . sourceTags
-
-class HasSplitKeys a s b | a -> s b where
-    splitKeys :: Lens' a (TF.Attribute s b)
-
-instance HasSplitKeys a s b => HasSplitKeys (TF.Resource p a) s b where
-    splitKeys = TF.configuration . splitKeys
-
-class HasSslCertificates a s b | a -> s b where
-    sslCertificates :: Lens' a (TF.Attribute s b)
-
-instance HasSslCertificates a s b => HasSslCertificates (TF.Resource p a) s b where
-    sslCertificates = TF.configuration . sslCertificates
-
-class HasSslHealthCheck a s b | a -> s b where
-    sslHealthCheck :: Lens' a (TF.Attribute s b)
-
-instance HasSslHealthCheck a s b => HasSslHealthCheck (TF.Resource p a) s b where
-    sslHealthCheck = TF.configuration . sslHealthCheck
-
-class HasStage a s b | a -> s b where
-    stage :: Lens' a (TF.Attribute s b)
-
-instance HasStage a s b => HasStage (TF.Resource p a) s b where
-    stage = TF.configuration . stage
-
-class HasStateNotificationConfig a s b | a -> s b where
-    stateNotificationConfig :: Lens' a (TF.Attribute s b)
-
-instance HasStateNotificationConfig a s b => HasStateNotificationConfig (TF.Resource p a) s b where
-    stateNotificationConfig = TF.configuration . stateNotificationConfig
-
-class HasStorageClass a s b | a -> s b where
-    storageClass :: Lens' a (TF.Attribute s b)
-
-instance HasStorageClass a s b => HasStorageClass (TF.Resource p a) s b where
-    storageClass = TF.configuration . storageClass
-
-class HasStorageType a s b | a -> s b where
-    storageType :: Lens' a (TF.Attribute s b)
-
-instance HasStorageType a s b => HasStorageType (TF.Resource p a) s b where
-    storageType = TF.configuration . storageType
-
-class HasSubnetwork a s b | a -> s b where
-    subnetwork :: Lens' a (TF.Attribute s b)
-
-instance HasSubnetwork a s b => HasSubnetwork (TF.Resource p a) s b where
-    subnetwork = TF.configuration . subnetwork
-
-class HasTableId a s b | a -> s b where
-    tableId :: Lens' a (TF.Attribute s b)
-
-instance HasTableId a s b => HasTableId (TF.Resource p a) s b where
-    tableId = TF.configuration . tableId
-
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attribute s b)
-
-instance HasTags a s b => HasTags (TF.Resource p a) s b where
-    tags = TF.configuration . tags
-
-class HasTarget a s b | a -> s b where
-    target :: Lens' a (TF.Attribute s b)
-
-instance HasTarget a s b => HasTarget (TF.Resource p a) s b where
-    target = TF.configuration . target
-
-class HasTargetPools a s b | a -> s b where
-    targetPools :: Lens' a (TF.Attribute s b)
-
-instance HasTargetPools a s b => HasTargetPools (TF.Resource p a) s b where
-    targetPools = TF.configuration . targetPools
-
-class HasTargetServiceAccounts a s b | a -> s b where
-    targetServiceAccounts :: Lens' a (TF.Attribute s b)
-
-instance HasTargetServiceAccounts a s b => HasTargetServiceAccounts (TF.Resource p a) s b where
-    targetServiceAccounts = TF.configuration . targetServiceAccounts
-
-class HasTargetSize a s b | a -> s b where
-    targetSize :: Lens' a (TF.Attribute s b)
-
-instance HasTargetSize a s b => HasTargetSize (TF.Resource p a) s b where
-    targetSize = TF.configuration . targetSize
-
-class HasTargetTags a s b | a -> s b where
-    targetTags :: Lens' a (TF.Attribute s b)
-
-instance HasTargetTags a s b => HasTargetTags (TF.Resource p a) s b where
-    targetTags = TF.configuration . targetTags
-
-class HasTargetVpnGateway a s b | a -> s b where
-    targetVpnGateway :: Lens' a (TF.Attribute s b)
-
-instance HasTargetVpnGateway a s b => HasTargetVpnGateway (TF.Resource p a) s b where
-    targetVpnGateway = TF.configuration . targetVpnGateway
-
-class HasTcpHealthCheck a s b | a -> s b where
-    tcpHealthCheck :: Lens' a (TF.Attribute s b)
-
-instance HasTcpHealthCheck a s b => HasTcpHealthCheck (TF.Resource p a) s b where
-    tcpHealthCheck = TF.configuration . tcpHealthCheck
-
-class HasTempGcsLocation a s b | a -> s b where
-    tempGcsLocation :: Lens' a (TF.Attribute s b)
-
-instance HasTempGcsLocation a s b => HasTempGcsLocation (TF.Resource p a) s b where
-    tempGcsLocation = TF.configuration . tempGcsLocation
-
-class HasTemplateGcsPath a s b | a -> s b where
-    templateGcsPath :: Lens' a (TF.Attribute s b)
-
-instance HasTemplateGcsPath a s b => HasTemplateGcsPath (TF.Resource p a) s b where
-    templateGcsPath = TF.configuration . templateGcsPath
-
-class HasTest a s b | a -> s b where
-    test :: Lens' a (TF.Attribute s b)
-
-instance HasTest a s b => HasTest (TF.Resource p a) s b where
-    test = TF.configuration . test
-
-class HasText a s b | a -> s b where
-    text :: Lens' a (TF.Attribute s b)
-
-instance HasText a s b => HasText (TF.Resource p a) s b where
-    text = TF.configuration . text
-
-class HasTimePartitioning a s b | a -> s b where
-    timePartitioning :: Lens' a (TF.Attribute s b)
-
-instance HasTimePartitioning a s b => HasTimePartitioning (TF.Resource p a) s b where
-    timePartitioning = TF.configuration . timePartitioning
-
-class HasTimeout a s b | a -> s b where
-    timeout :: Lens' a (TF.Attribute s b)
-
-instance HasTimeout a s b => HasTimeout (TF.Resource p a) s b where
-    timeout = TF.configuration . timeout
-
-class HasTimeoutSec a s b | a -> s b where
-    timeoutSec :: Lens' a (TF.Attribute s b)
-
-instance HasTimeoutSec a s b => HasTimeoutSec (TF.Resource p a) s b where
-    timeoutSec = TF.configuration . timeoutSec
-
-class HasTitle a s b | a -> s b where
-    title :: Lens' a (TF.Attribute s b)
-
-instance HasTitle a s b => HasTitle (TF.Resource p a) s b where
-    title = TF.configuration . title
-
-class HasTopic a s b | a -> s b where
-    topic :: Lens' a (TF.Attribute s b)
-
-instance HasTopic a s b => HasTopic (TF.Resource p a) s b where
-    topic = TF.configuration . topic
-
-class HasTriggerBucket a s b | a -> s b where
-    triggerBucket :: Lens' a (TF.Attribute s b)
-
-instance HasTriggerBucket a s b => HasTriggerBucket (TF.Resource p a) s b where
-    triggerBucket = TF.configuration . triggerBucket
-
-class HasTriggerHttp a s b | a -> s b where
-    triggerHttp :: Lens' a (TF.Attribute s b)
-
-instance HasTriggerHttp a s b => HasTriggerHttp (TF.Resource p a) s b where
-    triggerHttp = TF.configuration . triggerHttp
-
-class HasTriggerTopic a s b | a -> s b where
-    triggerTopic :: Lens' a (TF.Attribute s b)
-
-instance HasTriggerTopic a s b => HasTriggerTopic (TF.Resource p a) s b where
-    triggerTopic = TF.configuration . triggerTopic
-
-class HasTtl a s b | a -> s b where
-    ttl :: Lens' a (TF.Attribute s b)
-
-instance HasTtl a s b => HasTtl (TF.Resource p a) s b where
-    ttl = TF.configuration . ttl
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasUnhealthyThreshold a s b | a -> s b where
-    unhealthyThreshold :: Lens' a (TF.Attribute s b)
-
-instance HasUnhealthyThreshold a s b => HasUnhealthyThreshold (TF.Resource p a) s b where
-    unhealthyThreshold = TF.configuration . unhealthyThreshold
-
-class HasUpdateStrategy a s b | a -> s b where
-    updateStrategy :: Lens' a (TF.Attribute s b)
-
-instance HasUpdateStrategy a s b => HasUpdateStrategy (TF.Resource p a) s b where
-    updateStrategy = TF.configuration . updateStrategy
-
-class HasUrlMap a s b | a -> s b where
-    urlMap :: Lens' a (TF.Attribute s b)
-
-instance HasUrlMap a s b => HasUrlMap (TF.Resource p a) s b where
-    urlMap = TF.configuration . urlMap
-
-class HasValue a s b | a -> s b where
-    value :: Lens' a (TF.Attribute s b)
-
-instance HasValue a s b => HasValue (TF.Resource p a) s b where
-    value = TF.configuration . value
-
-class HasVersion a s b | a -> s b where
-    version :: Lens' a (TF.Attribute s b)
-
-instance HasVersion a s b => HasVersion (TF.Resource p a) s b where
-    version = TF.configuration . version
-
-class HasVersioning a s b | a -> s b where
-    versioning :: Lens' a (TF.Attribute s b)
-
-instance HasVersioning a s b => HasVersioning (TF.Resource p a) s b where
-    versioning = TF.configuration . versioning
-
-class HasView a s b | a -> s b where
-    view :: Lens' a (TF.Attribute s b)
-
-instance HasView a s b => HasView (TF.Resource p a) s b where
-    view = TF.configuration . view
-
-class HasVpnTunnel a s b | a -> s b where
-    vpnTunnel :: Lens' a (TF.Attribute s b)
-
-instance HasVpnTunnel a s b => HasVpnTunnel (TF.Resource p a) s b where
-    vpnTunnel = TF.configuration . vpnTunnel
-
-class HasWebsite a s b | a -> s b where
-    website :: Lens' a (TF.Attribute s b)
-
-instance HasWebsite a s b => HasWebsite (TF.Resource p a) s b where
-    website = TF.configuration . website
-
-class HasXxxConfig a s b | a -> s b where
-    xxxConfig :: Lens' a (TF.Attribute s b)
-
-instance HasXxxConfig a s b => HasXxxConfig (TF.Resource p a) s b where
-    xxxConfig = TF.configuration . xxxConfig
-
-class HasZone a s b | a -> s b where
-    zone :: Lens' a (TF.Attribute s b)
-
-instance HasZone a s b => HasZone (TF.Resource p a) s b where
-    zone = TF.configuration . zone
-
-class HasComputedAddress a b | a -> b where
-    computedAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "address")
-
-class HasComputedApis a b | a -> b where
-    computedApis
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedApis =
-        to (\x -> TF.Computed (TF.referenceKey x) "apis")
-
-class HasComputedAttachedDisk0DiskEncryptionKeySha256 a b | a -> b where
-    computedAttachedDisk0DiskEncryptionKeySha256
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAttachedDisk0DiskEncryptionKeySha256 =
-        to (\x -> TF.Computed (TF.referenceKey x) "attached_disk.0.disk_encryption_key_sha256")
-
-class HasComputedBootDiskDiskEncryptionKeySha256 a b | a -> b where
-    computedBootDiskDiskEncryptionKeySha256
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBootDiskDiskEncryptionKeySha256 =
-        to (\x -> TF.Computed (TF.referenceKey x) "boot_disk.disk_encryption_key_sha256")
-
-class HasComputedCertificateId a b | a -> b where
-    computedCertificateId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCertificateId =
-        to (\x -> TF.Computed (TF.referenceKey x) "certificate_id")
-
-class HasComputedClusterConfigBucket a b | a -> b where
-    computedClusterConfigBucket
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedClusterConfigBucket =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_config.bucket")
-
-class HasComputedClusterConfigMasterConfigInstanceNames a b | a -> b where
-    computedClusterConfigMasterConfigInstanceNames
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedClusterConfigMasterConfigInstanceNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_config.master_config.instance_names")
-
-class HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames a b | a -> b where
-    computedClusterConfigPreemptibleWorkerConfigInstanceNames
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedClusterConfigPreemptibleWorkerConfigInstanceNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_config.preemptible_worker_config.instance_names")
-
-class HasComputedClusterConfigSoftwareConfigProperties a b | a -> b where
-    computedClusterConfigSoftwareConfigProperties
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedClusterConfigSoftwareConfigProperties =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_config.software_config.properties")
-
-class HasComputedClusterConfigWorkerConfigInstanceNames a b | a -> b where
-    computedClusterConfigWorkerConfigInstanceNames
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedClusterConfigWorkerConfigInstanceNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "cluster_config.worker_config.instance_names")
-
-class HasComputedConfigId a b | a -> b where
-    computedConfigId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedConfigId =
-        to (\x -> TF.Computed (TF.referenceKey x) "config_id")
-
-class HasComputedCpuPlatform a b | a -> b where
-    computedCpuPlatform
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCpuPlatform =
-        to (\x -> TF.Computed (TF.referenceKey x) "cpu_platform")
-
-class HasComputedCrc32c a b | a -> b where
-    computedCrc32c
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCrc32c =
-        to (\x -> TF.Computed (TF.referenceKey x) "crc32c")
-
-class HasComputedCreateTime a b | a -> b where
-    computedCreateTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCreateTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "create_time")
-
-class HasComputedCreationTime a b | a -> b where
-    computedCreationTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCreationTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_time")
-
-class HasComputedDetailedStatus a b | a -> b where
-    computedDetailedStatus
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDetailedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "detailed_status")
-
-class HasComputedDisk0DiskEncryptionKeySha256 a b | a -> b where
-    computedDisk0DiskEncryptionKeySha256
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDisk0DiskEncryptionKeySha256 =
-        to (\x -> TF.Computed (TF.referenceKey x) "disk.0.disk_encryption_key_sha256")
-
-class HasComputedDiskEncryptionKeySha256 a b | a -> b where
-    computedDiskEncryptionKeySha256
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDiskEncryptionKeySha256 =
-        to (\x -> TF.Computed (TF.referenceKey x) "disk_encryption_key_sha256")
-
-class HasComputedDnsAddress a b | a -> b where
-    computedDnsAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDnsAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_address")
-
-class HasComputedDriverControlsFilesUri a b | a -> b where
-    computedDriverControlsFilesUri
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDriverControlsFilesUri =
-        to (\x -> TF.Computed (TF.referenceKey x) "driver_controls_files_uri")
-
-class HasComputedDriverOutputResourceUri a b | a -> b where
-    computedDriverOutputResourceUri
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDriverOutputResourceUri =
-        to (\x -> TF.Computed (TF.referenceKey x) "driver_output_resource_uri")
-
-class HasComputedEmail a b | a -> b where
-    computedEmail
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEmail =
-        to (\x -> TF.Computed (TF.referenceKey x) "email")
-
-class HasComputedEndpoint a b | a -> b where
-    computedEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
-
-class HasComputedEndpoints a b | a -> b where
-    computedEndpoints
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEndpoints =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoints")
-
-class HasComputedEtag a b | a -> b where
-    computedEtag
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEtag =
-        to (\x -> TF.Computed (TF.referenceKey x) "etag")
-
-class HasComputedFingerprint a b | a -> b where
-    computedFingerprint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "fingerprint")
-
-class HasComputedGatewayAddress a b | a -> b where
-    computedGatewayAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedGatewayAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "gateway_address")
-
-class HasComputedGatewayIpv4 a b | a -> b where
-    computedGatewayIpv4
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedGatewayIpv4 =
-        to (\x -> TF.Computed (TF.referenceKey x) "gateway_ipv4")
-
-class HasComputedHttpsTriggerUrl a b | a -> b where
-    computedHttpsTriggerUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHttpsTriggerUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "https_trigger_url")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedInstanceGroup a b | a -> b where
-    computedInstanceGroup
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceGroup =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_group")
-
-class HasComputedInstanceGroupUrls a b | a -> b where
-    computedInstanceGroupUrls
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceGroupUrls =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_group_urls")
-
-class HasComputedInstanceId a b | a -> b where
-    computedInstanceId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_id")
-
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
-
-class HasComputedIpAddress0IpAddress a b | a -> b where
-    computedIpAddress0IpAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpAddress0IpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address.0.ip_address")
-
-class HasComputedIpAddress0TimeToRetire a b | a -> b where
-    computedIpAddress0TimeToRetire
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpAddress0TimeToRetire =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address.0.time_to_retire")
-
-class HasComputedLabelFingerprint a b | a -> b where
-    computedLabelFingerprint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLabelFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "label_fingerprint")
-
-class HasComputedLastModifiedTime a b | a -> b where
-    computedLastModifiedTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLastModifiedTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "last_modified_time")
-
-class HasComputedLifecycleState a b | a -> b where
-    computedLifecycleState
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLifecycleState =
-        to (\x -> TF.Computed (TF.referenceKey x) "lifecycle_state")
-
-class HasComputedLocation a b | a -> b where
-    computedLocation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "location")
-
-class HasComputedMaintenancePolicy0DailyMaintenanceWindow0Duration a b | a -> b where
-    computedMaintenancePolicy0DailyMaintenanceWindow0Duration
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMaintenancePolicy0DailyMaintenanceWindow0Duration =
-        to (\x -> TF.Computed (TF.referenceKey x) "maintenance_policy.0.daily_maintenance_window.0.duration")
-
-class HasComputedMapId a b | a -> b where
-    computedMapId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMapId =
-        to (\x -> TF.Computed (TF.referenceKey x) "map_id")
-
-class HasComputedMasterAuth0ClientCertificate a b | a -> b where
-    computedMasterAuth0ClientCertificate
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMasterAuth0ClientCertificate =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_auth.0.client_certificate")
-
-class HasComputedMasterAuth0ClientKey a b | a -> b where
-    computedMasterAuth0ClientKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMasterAuth0ClientKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_auth.0.client_key")
-
-class HasComputedMasterAuth0ClusterCaCertificate a b | a -> b where
-    computedMasterAuth0ClusterCaCertificate
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMasterAuth0ClusterCaCertificate =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_auth.0.cluster_ca_certificate")
-
-class HasComputedMasterVersion a b | a -> b where
-    computedMasterVersion
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMasterVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_version")
-
-class HasComputedMd5hash a b | a -> b where
-    computedMd5hash
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMd5hash =
-        to (\x -> TF.Computed (TF.referenceKey x) "md5hash")
-
-class HasComputedMetadataFingerprint a b | a -> b where
-    computedMetadataFingerprint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMetadataFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "metadata_fingerprint")
-
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
-
-class HasComputedNameServers a b | a -> b where
-    computedNameServers
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNameServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "name_servers")
-
-class HasComputedNetworkInterface0AccessConfig0AssignedNatIp a b | a -> b where
-    computedNetworkInterface0AccessConfig0AssignedNatIp
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNetworkInterface0AccessConfig0AssignedNatIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface.0.access_config.0.assigned_nat_ip")
-
-class HasComputedNetworkInterface0Address a b | a -> b where
-    computedNetworkInterface0Address
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNetworkInterface0Address =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface.0.address")
-
-class HasComputedNextHopNetwork a b | a -> b where
-    computedNextHopNetwork
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNextHopNetwork =
-        to (\x -> TF.Computed (TF.referenceKey x) "next_hop_network")
-
-class HasComputedNumBytes a b | a -> b where
-    computedNumBytes
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNumBytes =
-        to (\x -> TF.Computed (TF.referenceKey x) "num_bytes")
-
-class HasComputedNumLongTermBytes a b | a -> b where
-    computedNumLongTermBytes
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNumLongTermBytes =
-        to (\x -> TF.Computed (TF.referenceKey x) "num_long_term_bytes")
-
-class HasComputedNumRows a b | a -> b where
-    computedNumRows
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNumRows =
-        to (\x -> TF.Computed (TF.referenceKey x) "num_rows")
-
-class HasComputedNumber a b | a -> b where
-    computedNumber
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNumber =
-        to (\x -> TF.Computed (TF.referenceKey x) "number")
-
-class HasComputedPath a b | a -> b where
-    computedPath
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPath =
-        to (\x -> TF.Computed (TF.referenceKey x) "path")
-
-class HasComputedPolicyEtag a b | a -> b where
-    computedPolicyEtag
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPolicyEtag =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy_etag")
-
-class HasComputedPrivateKey a b | a -> b where
-    computedPrivateKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrivateKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_key")
-
-class HasComputedPrivateKeyEncrypted a b | a -> b where
-    computedPrivateKeyEncrypted
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrivateKeyEncrypted =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_key_encrypted")
-
-class HasComputedPrivateKeyFingerprint a b | a -> b where
-    computedPrivateKeyFingerprint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrivateKeyFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_key_fingerprint")
-
-class HasComputedProject a b | a -> b where
-    computedProject
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedProject =
-        to (\x -> TF.Computed (TF.referenceKey x) "project")
-
-class HasComputedProxyId a b | a -> b where
-    computedProxyId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedProxyId =
-        to (\x -> TF.Computed (TF.referenceKey x) "proxy_id")
-
-class HasComputedPublicKey a b | a -> b where
-    computedPublicKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPublicKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_key")
-
-class HasComputedReference0ClusterUuid a b | a -> b where
-    computedReference0ClusterUuid
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedReference0ClusterUuid =
-        to (\x -> TF.Computed (TF.referenceKey x) "reference.0.cluster_uuid")
-
-class HasComputedRegion a b | a -> b where
-    computedRegion
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
-
-class HasComputedRestorePolicy a b | a -> b where
-    computedRestorePolicy
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRestorePolicy =
-        to (\x -> TF.Computed (TF.referenceKey x) "restore_policy")
-
-class HasComputedSelfLink a b | a -> b where
-    computedSelfLink
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSelfLink =
-        to (\x -> TF.Computed (TF.referenceKey x) "self_link")
-
-class HasComputedSettingsVersion a b | a -> b where
-    computedSettingsVersion
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSettingsVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "settings.version")
-
-class HasComputedSize a b | a -> b where
-    computedSize
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "size")
-
-class HasComputedSnapshotEncryptionKeySha256 a b | a -> b where
-    computedSnapshotEncryptionKeySha256
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSnapshotEncryptionKeySha256 =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_encryption_key_sha256")
-
-class HasComputedSourceDiskEncryptionKeySha256 a b | a -> b where
-    computedSourceDiskEncryptionKeySha256
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSourceDiskEncryptionKeySha256 =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_disk_encryption_key_sha256")
-
-class HasComputedSourceDiskLink a b | a -> b where
-    computedSourceDiskLink
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSourceDiskLink =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_disk_link")
-
-class HasComputedState a b | a -> b where
-    computedState
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
-
-class HasComputedStateDetails a b | a -> b where
-    computedStateDetails
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStateDetails =
-        to (\x -> TF.Computed (TF.referenceKey x) "state_details")
-
-class HasComputedStatus0Details a b | a -> b where
-    computedStatus0Details
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStatus0Details =
-        to (\x -> TF.Computed (TF.referenceKey x) "status.0.details")
-
-class HasComputedStatus0State a b | a -> b where
-    computedStatus0State
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStatus0State =
-        to (\x -> TF.Computed (TF.referenceKey x) "status.0.state")
-
-class HasComputedStatus0StateStartTime a b | a -> b where
-    computedStatus0StateStartTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStatus0StateStartTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "status.0.state_start_time")
-
-class HasComputedStatus0Substate a b | a -> b where
-    computedStatus0Substate
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStatus0Substate =
-        to (\x -> TF.Computed (TF.referenceKey x) "status.0.substate")
-
-class HasComputedTagsFingerprint a b | a -> b where
-    computedTagsFingerprint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedTagsFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags_fingerprint")
-
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
-
-class HasComputedUniqueId a b | a -> b where
-    computedUniqueId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUniqueId =
-        to (\x -> TF.Computed (TF.referenceKey x) "unique_id")
-
-class HasComputedUpdateTime a b | a -> b where
-    computedUpdateTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUpdateTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "update_time")
-
-class HasComputedUrl a b | a -> b where
-    computedUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "url")
-
-class HasComputedUsers a b | a -> b where
-    computedUsers
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUsers =
-        to (\x -> TF.Computed (TF.referenceKey x) "users")
-
-class HasComputedValidAfter a b | a -> b where
-    computedValidAfter
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedValidAfter =
-        to (\x -> TF.Computed (TF.referenceKey x) "valid_after")
-
-class HasComputedValidBefore a b | a -> b where
-    computedValidBefore
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedValidBefore =
-        to (\x -> TF.Computed (TF.referenceKey x) "valid_before")
-
-class HasComputedWriterIdentity a b | a -> b where
-    computedWriterIdentity
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedWriterIdentity =
-        to (\x -> TF.Computed (TF.referenceKey x) "writer_identity")

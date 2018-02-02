@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Heroku.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -57,70 +54,72 @@ module Terrafomo.Heroku.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAcm (..)
-    , HasAddonId (..)
-    , HasApp (..)
-    , HasAppId (..)
-    , HasBuildpacks (..)
-    , HasCertificateChain (..)
-    , HasConfig (..)
-    , HasConfigVars (..)
-    , HasEnabled (..)
-    , HasHostname (..)
-    , HasName (..)
-    , HasOrganization (..)
-    , HasPipeline (..)
-    , HasPlan (..)
-    , HasPrivateKey (..)
-    , HasRegion (..)
-    , HasSpace (..)
-    , HasStack (..)
-    , HasStage (..)
-    , HasUrl (..)
+    , P.HasAcm (..)
+    , P.HasAddonId (..)
+    , P.HasApp (..)
+    , P.HasAppId (..)
+    , P.HasBuildpacks (..)
+    , P.HasCertificateChain (..)
+    , P.HasConfig (..)
+    , P.HasConfigVars (..)
+    , P.HasEnabled (..)
+    , P.HasHostname (..)
+    , P.HasName (..)
+    , P.HasOrganization (..)
+    , P.HasPipeline (..)
+    , P.HasPlan (..)
+    , P.HasPrivateKey (..)
+    , P.HasRegion (..)
+    , P.HasSpace (..)
+    , P.HasStack (..)
+    , P.HasStage (..)
+    , P.HasUrl (..)
 
     -- ** Computed Attributes
-    , HasComputedAllConfigVars (..)
-    , HasComputedApp (..)
-    , HasComputedAppId (..)
-    , HasComputedCname (..)
-    , HasComputedConfigVars (..)
-    , HasComputedGitUrl (..)
-    , HasComputedHerokuHostname (..)
-    , HasComputedHostname (..)
-    , HasComputedId (..)
-    , HasComputedName (..)
-    , HasComputedOrganization (..)
-    , HasComputedPipeline (..)
-    , HasComputedPlan (..)
-    , HasComputedProviderId (..)
-    , HasComputedRegion (..)
-    , HasComputedSpace (..)
-    , HasComputedStack (..)
-    , HasComputedStage (..)
-    , HasComputedToken (..)
-    , HasComputedWebUrl (..)
+    , P.HasComputedAllConfigVars (..)
+    , P.HasComputedApp (..)
+    , P.HasComputedAppId (..)
+    , P.HasComputedCname (..)
+    , P.HasComputedConfigVars (..)
+    , P.HasComputedGitUrl (..)
+    , P.HasComputedHerokuHostname (..)
+    , P.HasComputedHostname (..)
+    , P.HasComputedId (..)
+    , P.HasComputedName (..)
+    , P.HasComputedOrganization (..)
+    , P.HasComputedPipeline (..)
+    , P.HasComputedPlan (..)
+    , P.HasComputedProviderId (..)
+    , P.HasComputedRegion (..)
+    , P.HasComputedSpace (..)
+    , P.HasComputedStack (..)
+    , P.HasComputedStage (..)
+    , P.HasComputedToken (..)
+    , P.HasComputedWebUrl (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                 as TF
-import qualified GHC.Base                  as TF
-import qualified Numeric.Natural           as TF
-import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.HCL             as TF
-import qualified Terrafomo.Heroku.Provider as TF
-import qualified Terrafomo.Heroku.Types    as TF
-import qualified Terrafomo.IP              as TF
-import qualified Terrafomo.Meta            as TF
-import qualified Terrafomo.Name            as TF
-import qualified Terrafomo.Resource        as TF
-import qualified Terrafomo.Resource        as TF
+import qualified Data.Word                 as P
+import qualified GHC.Base                  as P
+import qualified Numeric.Natural           as P
+import qualified Terrafomo.Heroku.Lens     as P
+import qualified Terrafomo.Heroku.Provider as P
+import           Terrafomo.Heroku.Types    as P
+import qualified Terrafomo.IP              as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @heroku_addon_attachment@ Heroku resource.
 
@@ -142,24 +141,24 @@ instance TF.ToHCL (AddonAttachmentResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasAddonId (AddonAttachmentResource s) s Text where
+instance P.HasAddonId (AddonAttachmentResource s) s Text where
     addonId =
         lens (_addon_id :: AddonAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _addon_id = a } :: AddonAttachmentResource s)
 
-instance HasAppId (AddonAttachmentResource s) s Text where
+instance P.HasAppId (AddonAttachmentResource s) s Text where
     appId =
         lens (_app_id :: AddonAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _app_id = a } :: AddonAttachmentResource s)
 
-instance HasName (AddonAttachmentResource s) s Text where
+instance P.HasName (AddonAttachmentResource s) s Text where
     name =
         lens (_name :: AddonAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AddonAttachmentResource s)
 
-instance HasComputedId (AddonAttachmentResource s) Text
+instance P.HasComputedId (AddonAttachmentResource s) Text
 
-addonAttachmentResource :: TF.Resource TF.Heroku (AddonAttachmentResource s)
+addonAttachmentResource :: TF.Resource P.Heroku (AddonAttachmentResource s)
 addonAttachmentResource =
     TF.newResource "heroku_addon_attachment" $
         AddonAttachmentResource {
@@ -189,32 +188,32 @@ instance TF.ToHCL (AddonResource s) where
         , TF.attribute "plan" _plan
         ]
 
-instance HasApp (AddonResource s) s Text where
+instance P.HasApp (AddonResource s) s Text where
     app =
         lens (_app :: AddonResource s -> TF.Attribute s Text)
             (\s a -> s { _app = a } :: AddonResource s)
 
-instance HasConfig (AddonResource s) s Text where
+instance P.HasConfig (AddonResource s) s Text where
     config =
         lens (_config :: AddonResource s -> TF.Attribute s Text)
             (\s a -> s { _config = a } :: AddonResource s)
 
-instance HasPlan (AddonResource s) s Text where
+instance P.HasPlan (AddonResource s) s Text where
     plan =
         lens (_plan :: AddonResource s -> TF.Attribute s Text)
             (\s a -> s { _plan = a } :: AddonResource s)
 
-instance HasComputedConfigVars (AddonResource s) Text
+instance P.HasComputedConfigVars (AddonResource s) Text
 
-instance HasComputedId (AddonResource s) Text
+instance P.HasComputedId (AddonResource s) Text
 
-instance HasComputedName (AddonResource s) Text
+instance P.HasComputedName (AddonResource s) Text
 
-instance HasComputedPlan (AddonResource s) Text
+instance P.HasComputedPlan (AddonResource s) Text
 
-instance HasComputedProviderId (AddonResource s) Text
+instance P.HasComputedProviderId (AddonResource s) Text
 
-addonResource :: TF.Resource TF.Heroku (AddonResource s)
+addonResource :: TF.Resource P.Heroku (AddonResource s)
 addonResource =
     TF.newResource "heroku_addon" $
         AddonResource {
@@ -244,22 +243,22 @@ instance TF.ToHCL (AppFeatureResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasApp (AppFeatureResource s) s Text where
+instance P.HasApp (AppFeatureResource s) s Text where
     app =
         lens (_app :: AppFeatureResource s -> TF.Attribute s Text)
             (\s a -> s { _app = a } :: AppFeatureResource s)
 
-instance HasEnabled (AppFeatureResource s) s Text where
+instance P.HasEnabled (AppFeatureResource s) s Text where
     enabled =
         lens (_enabled :: AppFeatureResource s -> TF.Attribute s Text)
             (\s a -> s { _enabled = a } :: AppFeatureResource s)
 
-instance HasName (AppFeatureResource s) s Text where
+instance P.HasName (AppFeatureResource s) s Text where
     name =
         lens (_name :: AppFeatureResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AppFeatureResource s)
 
-appFeatureResource :: TF.Resource TF.Heroku (AppFeatureResource s)
+appFeatureResource :: TF.Resource P.Heroku (AppFeatureResource s)
 appFeatureResource =
     TF.newResource "heroku_app_feature" $
         AppFeatureResource {
@@ -304,65 +303,65 @@ instance TF.ToHCL (AppResource s) where
         , TF.attribute "stack" _stack
         ]
 
-instance HasAcm (AppResource s) s Text where
+instance P.HasAcm (AppResource s) s Text where
     acm =
         lens (_acm :: AppResource s -> TF.Attribute s Text)
             (\s a -> s { _acm = a } :: AppResource s)
 
-instance HasBuildpacks (AppResource s) s Text where
+instance P.HasBuildpacks (AppResource s) s Text where
     buildpacks =
         lens (_buildpacks :: AppResource s -> TF.Attribute s Text)
             (\s a -> s { _buildpacks = a } :: AppResource s)
 
-instance HasConfigVars (AppResource s) s Text where
+instance P.HasConfigVars (AppResource s) s Text where
     configVars =
         lens (_config_vars :: AppResource s -> TF.Attribute s Text)
             (\s a -> s { _config_vars = a } :: AppResource s)
 
-instance HasName (AppResource s) s Text where
+instance P.HasName (AppResource s) s Text where
     name =
         lens (_name :: AppResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AppResource s)
 
-instance HasOrganization (AppResource s) s Text where
+instance P.HasOrganization (AppResource s) s Text where
     organization =
         lens (_organization :: AppResource s -> TF.Attribute s Text)
             (\s a -> s { _organization = a } :: AppResource s)
 
-instance HasRegion (AppResource s) s Text where
+instance P.HasRegion (AppResource s) s Text where
     region =
         lens (_region :: AppResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: AppResource s)
 
-instance HasSpace (AppResource s) s Text where
+instance P.HasSpace (AppResource s) s Text where
     space =
         lens (_space :: AppResource s -> TF.Attribute s Text)
             (\s a -> s { _space = a } :: AppResource s)
 
-instance HasStack (AppResource s) s Text where
+instance P.HasStack (AppResource s) s Text where
     stack =
         lens (_stack :: AppResource s -> TF.Attribute s Text)
             (\s a -> s { _stack = a } :: AppResource s)
 
-instance HasComputedAllConfigVars (AppResource s) Text
+instance P.HasComputedAllConfigVars (AppResource s) Text
 
-instance HasComputedGitUrl (AppResource s) Text
+instance P.HasComputedGitUrl (AppResource s) Text
 
-instance HasComputedHerokuHostname (AppResource s) Text
+instance P.HasComputedHerokuHostname (AppResource s) Text
 
-instance HasComputedId (AppResource s) Text
+instance P.HasComputedId (AppResource s) Text
 
-instance HasComputedName (AppResource s) Text
+instance P.HasComputedName (AppResource s) Text
 
-instance HasComputedRegion (AppResource s) Text
+instance P.HasComputedRegion (AppResource s) Text
 
-instance HasComputedSpace (AppResource s) Text
+instance P.HasComputedSpace (AppResource s) Text
 
-instance HasComputedStack (AppResource s) Text
+instance P.HasComputedStack (AppResource s) Text
 
-instance HasComputedWebUrl (AppResource s) Text
+instance P.HasComputedWebUrl (AppResource s) Text
 
-appResource :: TF.Resource TF.Heroku (AppResource s)
+appResource :: TF.Resource P.Heroku (AppResource s)
 appResource =
     TF.newResource "heroku_app" $
         AppResource {
@@ -397,28 +396,28 @@ instance TF.ToHCL (CertResource s) where
         , TF.attribute "private_key" _private_key
         ]
 
-instance HasApp (CertResource s) s Text where
+instance P.HasApp (CertResource s) s Text where
     app =
         lens (_app :: CertResource s -> TF.Attribute s Text)
             (\s a -> s { _app = a } :: CertResource s)
 
-instance HasCertificateChain (CertResource s) s Text where
+instance P.HasCertificateChain (CertResource s) s Text where
     certificateChain =
         lens (_certificate_chain :: CertResource s -> TF.Attribute s Text)
             (\s a -> s { _certificate_chain = a } :: CertResource s)
 
-instance HasPrivateKey (CertResource s) s Text where
+instance P.HasPrivateKey (CertResource s) s Text where
     privateKey =
         lens (_private_key :: CertResource s -> TF.Attribute s Text)
             (\s a -> s { _private_key = a } :: CertResource s)
 
-instance HasComputedCname (CertResource s) Text
+instance P.HasComputedCname (CertResource s) Text
 
-instance HasComputedId (CertResource s) Text
+instance P.HasComputedId (CertResource s) Text
 
-instance HasComputedName (CertResource s) Text
+instance P.HasComputedName (CertResource s) Text
 
-certResource :: TF.Resource TF.Heroku (CertResource s)
+certResource :: TF.Resource P.Heroku (CertResource s)
 certResource =
     TF.newResource "heroku_cert" $
         CertResource {
@@ -445,23 +444,23 @@ instance TF.ToHCL (DomainResource s) where
         , TF.attribute "hostname" _hostname
         ]
 
-instance HasApp (DomainResource s) s Text where
+instance P.HasApp (DomainResource s) s Text where
     app =
         lens (_app :: DomainResource s -> TF.Attribute s Text)
             (\s a -> s { _app = a } :: DomainResource s)
 
-instance HasHostname (DomainResource s) s Text where
+instance P.HasHostname (DomainResource s) s Text where
     hostname =
         lens (_hostname :: DomainResource s -> TF.Attribute s Text)
             (\s a -> s { _hostname = a } :: DomainResource s)
 
-instance HasComputedCname (DomainResource s) Text
+instance P.HasComputedCname (DomainResource s) Text
 
-instance HasComputedHostname (DomainResource s) Text
+instance P.HasComputedHostname (DomainResource s) Text
 
-instance HasComputedId (DomainResource s) Text
+instance P.HasComputedId (DomainResource s) Text
 
-domainResource :: TF.Resource TF.Heroku (DomainResource s)
+domainResource :: TF.Resource P.Heroku (DomainResource s)
 domainResource =
     TF.newResource "heroku_domain" $
         DomainResource {
@@ -487,19 +486,19 @@ instance TF.ToHCL (DrainResource s) where
         , TF.attribute "url" _url
         ]
 
-instance HasApp (DrainResource s) s Text where
+instance P.HasApp (DrainResource s) s Text where
     app =
         lens (_app :: DrainResource s -> TF.Attribute s Text)
             (\s a -> s { _app = a } :: DrainResource s)
 
-instance HasUrl (DrainResource s) s Text where
+instance P.HasUrl (DrainResource s) s Text where
     url =
         lens (_url :: DrainResource s -> TF.Attribute s Text)
             (\s a -> s { _url = a } :: DrainResource s)
 
-instance HasComputedToken (DrainResource s) Text
+instance P.HasComputedToken (DrainResource s) Text
 
-drainResource :: TF.Resource TF.Heroku (DrainResource s)
+drainResource :: TF.Resource P.Heroku (DrainResource s)
 drainResource =
     TF.newResource "heroku_drain" $
         DrainResource {
@@ -531,32 +530,32 @@ instance TF.ToHCL (PipelineCouplingResource s) where
         , TF.attribute "stage" _stage
         ]
 
-instance HasApp (PipelineCouplingResource s) s Text where
+instance P.HasApp (PipelineCouplingResource s) s Text where
     app =
         lens (_app :: PipelineCouplingResource s -> TF.Attribute s Text)
             (\s a -> s { _app = a } :: PipelineCouplingResource s)
 
-instance HasPipeline (PipelineCouplingResource s) s Text where
+instance P.HasPipeline (PipelineCouplingResource s) s Text where
     pipeline =
         lens (_pipeline :: PipelineCouplingResource s -> TF.Attribute s Text)
             (\s a -> s { _pipeline = a } :: PipelineCouplingResource s)
 
-instance HasStage (PipelineCouplingResource s) s Text where
+instance P.HasStage (PipelineCouplingResource s) s Text where
     stage =
         lens (_stage :: PipelineCouplingResource s -> TF.Attribute s Text)
             (\s a -> s { _stage = a } :: PipelineCouplingResource s)
 
-instance HasComputedApp (PipelineCouplingResource s) Text
+instance P.HasComputedApp (PipelineCouplingResource s) Text
 
-instance HasComputedAppId (PipelineCouplingResource s) Text
+instance P.HasComputedAppId (PipelineCouplingResource s) Text
 
-instance HasComputedId (PipelineCouplingResource s) Text
+instance P.HasComputedId (PipelineCouplingResource s) Text
 
-instance HasComputedPipeline (PipelineCouplingResource s) Text
+instance P.HasComputedPipeline (PipelineCouplingResource s) Text
 
-instance HasComputedStage (PipelineCouplingResource s) Text
+instance P.HasComputedStage (PipelineCouplingResource s) Text
 
-pipelineCouplingResource :: TF.Resource TF.Heroku (PipelineCouplingResource s)
+pipelineCouplingResource :: TF.Resource P.Heroku (PipelineCouplingResource s)
 pipelineCouplingResource =
     TF.newResource "heroku_pipeline_coupling" $
         PipelineCouplingResource {
@@ -582,16 +581,16 @@ instance TF.ToHCL (PipelineResource s) where
         [ TF.attribute "name" _name
         ]
 
-instance HasName (PipelineResource s) s Text where
+instance P.HasName (PipelineResource s) s Text where
     name =
         lens (_name :: PipelineResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PipelineResource s)
 
-instance HasComputedId (PipelineResource s) Text
+instance P.HasComputedId (PipelineResource s) Text
 
-instance HasComputedName (PipelineResource s) Text
+instance P.HasComputedName (PipelineResource s) Text
 
-pipelineResource :: TF.Resource TF.Heroku (PipelineResource s)
+pipelineResource :: TF.Resource P.Heroku (PipelineResource s)
 pipelineResource =
     TF.newResource "heroku_pipeline" $
         PipelineResource {
@@ -619,30 +618,30 @@ instance TF.ToHCL (SpaceResource s) where
         , TF.attribute "region" _region
         ]
 
-instance HasName (SpaceResource s) s Text where
+instance P.HasName (SpaceResource s) s Text where
     name =
         lens (_name :: SpaceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SpaceResource s)
 
-instance HasOrganization (SpaceResource s) s Text where
+instance P.HasOrganization (SpaceResource s) s Text where
     organization =
         lens (_organization :: SpaceResource s -> TF.Attribute s Text)
             (\s a -> s { _organization = a } :: SpaceResource s)
 
-instance HasRegion (SpaceResource s) s Text where
+instance P.HasRegion (SpaceResource s) s Text where
     region =
         lens (_region :: SpaceResource s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: SpaceResource s)
 
-instance HasComputedId (SpaceResource s) Text
+instance P.HasComputedId (SpaceResource s) Text
 
-instance HasComputedName (SpaceResource s) Text
+instance P.HasComputedName (SpaceResource s) Text
 
-instance HasComputedOrganization (SpaceResource s) Text
+instance P.HasComputedOrganization (SpaceResource s) Text
 
-instance HasComputedRegion (SpaceResource s) Text
+instance P.HasComputedRegion (SpaceResource s) Text
 
-spaceResource :: TF.Resource TF.Heroku (SpaceResource s)
+spaceResource :: TF.Resource P.Heroku (SpaceResource s)
 spaceResource =
     TF.newResource "heroku_space" $
         SpaceResource {
@@ -650,243 +649,3 @@ spaceResource =
             , _organization = TF.Nil
             , _region = TF.Nil
             }
-
-class HasAcm a s b | a -> s b where
-    acm :: Lens' a (TF.Attribute s b)
-
-instance HasAcm a s b => HasAcm (TF.Resource p a) s b where
-    acm = TF.configuration . acm
-
-class HasAddonId a s b | a -> s b where
-    addonId :: Lens' a (TF.Attribute s b)
-
-instance HasAddonId a s b => HasAddonId (TF.Resource p a) s b where
-    addonId = TF.configuration . addonId
-
-class HasApp a s b | a -> s b where
-    app :: Lens' a (TF.Attribute s b)
-
-instance HasApp a s b => HasApp (TF.Resource p a) s b where
-    app = TF.configuration . app
-
-class HasAppId a s b | a -> s b where
-    appId :: Lens' a (TF.Attribute s b)
-
-instance HasAppId a s b => HasAppId (TF.Resource p a) s b where
-    appId = TF.configuration . appId
-
-class HasBuildpacks a s b | a -> s b where
-    buildpacks :: Lens' a (TF.Attribute s b)
-
-instance HasBuildpacks a s b => HasBuildpacks (TF.Resource p a) s b where
-    buildpacks = TF.configuration . buildpacks
-
-class HasCertificateChain a s b | a -> s b where
-    certificateChain :: Lens' a (TF.Attribute s b)
-
-instance HasCertificateChain a s b => HasCertificateChain (TF.Resource p a) s b where
-    certificateChain = TF.configuration . certificateChain
-
-class HasConfig a s b | a -> s b where
-    config :: Lens' a (TF.Attribute s b)
-
-instance HasConfig a s b => HasConfig (TF.Resource p a) s b where
-    config = TF.configuration . config
-
-class HasConfigVars a s b | a -> s b where
-    configVars :: Lens' a (TF.Attribute s b)
-
-instance HasConfigVars a s b => HasConfigVars (TF.Resource p a) s b where
-    configVars = TF.configuration . configVars
-
-class HasEnabled a s b | a -> s b where
-    enabled :: Lens' a (TF.Attribute s b)
-
-instance HasEnabled a s b => HasEnabled (TF.Resource p a) s b where
-    enabled = TF.configuration . enabled
-
-class HasHostname a s b | a -> s b where
-    hostname :: Lens' a (TF.Attribute s b)
-
-instance HasHostname a s b => HasHostname (TF.Resource p a) s b where
-    hostname = TF.configuration . hostname
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasOrganization a s b | a -> s b where
-    organization :: Lens' a (TF.Attribute s b)
-
-instance HasOrganization a s b => HasOrganization (TF.Resource p a) s b where
-    organization = TF.configuration . organization
-
-class HasPipeline a s b | a -> s b where
-    pipeline :: Lens' a (TF.Attribute s b)
-
-instance HasPipeline a s b => HasPipeline (TF.Resource p a) s b where
-    pipeline = TF.configuration . pipeline
-
-class HasPlan a s b | a -> s b where
-    plan :: Lens' a (TF.Attribute s b)
-
-instance HasPlan a s b => HasPlan (TF.Resource p a) s b where
-    plan = TF.configuration . plan
-
-class HasPrivateKey a s b | a -> s b where
-    privateKey :: Lens' a (TF.Attribute s b)
-
-instance HasPrivateKey a s b => HasPrivateKey (TF.Resource p a) s b where
-    privateKey = TF.configuration . privateKey
-
-class HasRegion a s b | a -> s b where
-    region :: Lens' a (TF.Attribute s b)
-
-instance HasRegion a s b => HasRegion (TF.Resource p a) s b where
-    region = TF.configuration . region
-
-class HasSpace a s b | a -> s b where
-    space :: Lens' a (TF.Attribute s b)
-
-instance HasSpace a s b => HasSpace (TF.Resource p a) s b where
-    space = TF.configuration . space
-
-class HasStack a s b | a -> s b where
-    stack :: Lens' a (TF.Attribute s b)
-
-instance HasStack a s b => HasStack (TF.Resource p a) s b where
-    stack = TF.configuration . stack
-
-class HasStage a s b | a -> s b where
-    stage :: Lens' a (TF.Attribute s b)
-
-instance HasStage a s b => HasStage (TF.Resource p a) s b where
-    stage = TF.configuration . stage
-
-class HasUrl a s b | a -> s b where
-    url :: Lens' a (TF.Attribute s b)
-
-instance HasUrl a s b => HasUrl (TF.Resource p a) s b where
-    url = TF.configuration . url
-
-class HasComputedAllConfigVars a b | a -> b where
-    computedAllConfigVars
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAllConfigVars =
-        to (\x -> TF.Computed (TF.referenceKey x) "all_config_vars")
-
-class HasComputedApp a b | a -> b where
-    computedApp
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedApp =
-        to (\x -> TF.Computed (TF.referenceKey x) "app")
-
-class HasComputedAppId a b | a -> b where
-    computedAppId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAppId =
-        to (\x -> TF.Computed (TF.referenceKey x) "app_id")
-
-class HasComputedCname a b | a -> b where
-    computedCname
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCname =
-        to (\x -> TF.Computed (TF.referenceKey x) "cname")
-
-class HasComputedConfigVars a b | a -> b where
-    computedConfigVars
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedConfigVars =
-        to (\x -> TF.Computed (TF.referenceKey x) "config_vars")
-
-class HasComputedGitUrl a b | a -> b where
-    computedGitUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedGitUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "git_url")
-
-class HasComputedHerokuHostname a b | a -> b where
-    computedHerokuHostname
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHerokuHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "heroku_hostname")
-
-class HasComputedHostname a b | a -> b where
-    computedHostname
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
-
-class HasComputedOrganization a b | a -> b where
-    computedOrganization
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOrganization =
-        to (\x -> TF.Computed (TF.referenceKey x) "organization")
-
-class HasComputedPipeline a b | a -> b where
-    computedPipeline
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPipeline =
-        to (\x -> TF.Computed (TF.referenceKey x) "pipeline")
-
-class HasComputedPlan a b | a -> b where
-    computedPlan
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPlan =
-        to (\x -> TF.Computed (TF.referenceKey x) "plan")
-
-class HasComputedProviderId a b | a -> b where
-    computedProviderId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedProviderId =
-        to (\x -> TF.Computed (TF.referenceKey x) "provider_id")
-
-class HasComputedRegion a b | a -> b where
-    computedRegion
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
-
-class HasComputedSpace a b | a -> b where
-    computedSpace
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSpace =
-        to (\x -> TF.Computed (TF.referenceKey x) "space")
-
-class HasComputedStack a b | a -> b where
-    computedStack
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStack =
-        to (\x -> TF.Computed (TF.referenceKey x) "stack")
-
-class HasComputedStage a b | a -> b where
-    computedStage
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStage =
-        to (\x -> TF.Computed (TF.referenceKey x) "stage")
-
-class HasComputedToken a b | a -> b where
-    computedToken
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "token")
-
-class HasComputedWebUrl a b | a -> b where
-    computedWebUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedWebUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "web_url")

@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.NewRelic.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -42,49 +39,51 @@ module Terrafomo.NewRelic.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasChannelId (..)
-    , HasConditionScope (..)
-    , HasConfiguration (..)
-    , HasEnabled (..)
-    , HasEntities (..)
-    , HasIncidentPreference (..)
-    , HasMetric (..)
-    , HasName (..)
-    , HasNrql (..)
-    , HasPolicyId (..)
-    , HasRunbookUrl (..)
-    , HasTerm (..)
-    , HasType' (..)
-    , HasUserDefinedMetric (..)
-    , HasUserDefinedValueFunction (..)
-    , HasValueFunction (..)
+    , P.HasChannelId (..)
+    , P.HasConditionScope (..)
+    , P.HasConfiguration (..)
+    , P.HasEnabled (..)
+    , P.HasEntities (..)
+    , P.HasIncidentPreference (..)
+    , P.HasMetric (..)
+    , P.HasName (..)
+    , P.HasNrql (..)
+    , P.HasPolicyId (..)
+    , P.HasRunbookUrl (..)
+    , P.HasTerm (..)
+    , P.HasType' (..)
+    , P.HasUserDefinedMetric (..)
+    , P.HasUserDefinedValueFunction (..)
+    , P.HasValueFunction (..)
 
     -- ** Computed Attributes
-    , HasComputedCreatedAt (..)
-    , HasComputedId (..)
-    , HasComputedUpdatedAt (..)
+    , P.HasComputedCreatedAt (..)
+    , P.HasComputedId (..)
+    , P.HasComputedUpdatedAt (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                   as TF
-import qualified GHC.Base                    as TF
-import qualified Numeric.Natural             as TF
-import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.IP                as TF
-import qualified Terrafomo.Meta              as TF
-import qualified Terrafomo.Name              as TF
-import qualified Terrafomo.NewRelic.Provider as TF
-import qualified Terrafomo.NewRelic.Types    as TF
-import qualified Terrafomo.Resource          as TF
-import qualified Terrafomo.Resource          as TF
+import qualified Data.Word                   as P
+import qualified GHC.Base                    as P
+import qualified Numeric.Natural             as P
+import qualified Terrafomo.IP                as P
+import qualified Terrafomo.NewRelic.Lens     as P
+import qualified Terrafomo.NewRelic.Provider as P
+import           Terrafomo.NewRelic.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @newrelic_alert_channel@ NewRelic resource.
 
@@ -106,24 +105,24 @@ instance TF.ToHCL (AlertChannelResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasConfiguration (AlertChannelResource s) s Text where
+instance P.HasConfiguration (AlertChannelResource s) s Text where
     configuration =
         lens (_configuration :: AlertChannelResource s -> TF.Attribute s Text)
             (\s a -> s { _configuration = a } :: AlertChannelResource s)
 
-instance HasName (AlertChannelResource s) s Text where
+instance P.HasName (AlertChannelResource s) s Text where
     name =
         lens (_name :: AlertChannelResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AlertChannelResource s)
 
-instance HasType' (AlertChannelResource s) s Text where
+instance P.HasType' (AlertChannelResource s) s Text where
     type' =
         lens (_type' :: AlertChannelResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: AlertChannelResource s)
 
-instance HasComputedId (AlertChannelResource s) Text
+instance P.HasComputedId (AlertChannelResource s) Text
 
-alertChannelResource :: TF.Resource TF.NewRelic (AlertChannelResource s)
+alertChannelResource :: TF.Resource P.NewRelic (AlertChannelResource s)
 alertChannelResource =
     TF.newResource "newrelic_alert_channel" $
         AlertChannelResource {
@@ -173,57 +172,57 @@ instance TF.ToHCL (AlertConditionResource s) where
         , TF.attribute "user_defined_value_function" _user_defined_value_function
         ]
 
-instance HasConditionScope (AlertConditionResource s) s Text where
+instance P.HasConditionScope (AlertConditionResource s) s Text where
     conditionScope =
         lens (_condition_scope :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _condition_scope = a } :: AlertConditionResource s)
 
-instance HasEntities (AlertConditionResource s) s Text where
+instance P.HasEntities (AlertConditionResource s) s Text where
     entities =
         lens (_entities :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _entities = a } :: AlertConditionResource s)
 
-instance HasMetric (AlertConditionResource s) s Text where
+instance P.HasMetric (AlertConditionResource s) s Text where
     metric =
         lens (_metric :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _metric = a } :: AlertConditionResource s)
 
-instance HasName (AlertConditionResource s) s Text where
+instance P.HasName (AlertConditionResource s) s Text where
     name =
         lens (_name :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AlertConditionResource s)
 
-instance HasPolicyId (AlertConditionResource s) s Text where
+instance P.HasPolicyId (AlertConditionResource s) s Text where
     policyId =
         lens (_policy_id :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_id = a } :: AlertConditionResource s)
 
-instance HasRunbookUrl (AlertConditionResource s) s Text where
+instance P.HasRunbookUrl (AlertConditionResource s) s Text where
     runbookUrl =
         lens (_runbook_url :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _runbook_url = a } :: AlertConditionResource s)
 
-instance HasTerm (AlertConditionResource s) s Text where
+instance P.HasTerm (AlertConditionResource s) s Text where
     term =
         lens (_term :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _term = a } :: AlertConditionResource s)
 
-instance HasType' (AlertConditionResource s) s Text where
+instance P.HasType' (AlertConditionResource s) s Text where
     type' =
         lens (_type' :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: AlertConditionResource s)
 
-instance HasUserDefinedMetric (AlertConditionResource s) s Text where
+instance P.HasUserDefinedMetric (AlertConditionResource s) s Text where
     userDefinedMetric =
         lens (_user_defined_metric :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _user_defined_metric = a } :: AlertConditionResource s)
 
-instance HasUserDefinedValueFunction (AlertConditionResource s) s Text where
+instance P.HasUserDefinedValueFunction (AlertConditionResource s) s Text where
     userDefinedValueFunction =
         lens (_user_defined_value_function :: AlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _user_defined_value_function = a } :: AlertConditionResource s)
 
-alertConditionResource :: TF.Resource TF.NewRelic (AlertConditionResource s)
+alertConditionResource :: TF.Resource P.NewRelic (AlertConditionResource s)
 alertConditionResource =
     TF.newResource "newrelic_alert_condition" $
         AlertConditionResource {
@@ -256,17 +255,17 @@ instance TF.ToHCL (AlertPolicyChannelResource s) where
         , TF.attribute "policy_id" _policy_id
         ]
 
-instance HasChannelId (AlertPolicyChannelResource s) s Text where
+instance P.HasChannelId (AlertPolicyChannelResource s) s Text where
     channelId =
         lens (_channel_id :: AlertPolicyChannelResource s -> TF.Attribute s Text)
             (\s a -> s { _channel_id = a } :: AlertPolicyChannelResource s)
 
-instance HasPolicyId (AlertPolicyChannelResource s) s Text where
+instance P.HasPolicyId (AlertPolicyChannelResource s) s Text where
     policyId =
         lens (_policy_id :: AlertPolicyChannelResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_id = a } :: AlertPolicyChannelResource s)
 
-alertPolicyChannelResource :: TF.Resource TF.NewRelic (AlertPolicyChannelResource s)
+alertPolicyChannelResource :: TF.Resource P.NewRelic (AlertPolicyChannelResource s)
 alertPolicyChannelResource =
     TF.newResource "newrelic_alert_policy_channel" $
         AlertPolicyChannelResource {
@@ -291,23 +290,23 @@ instance TF.ToHCL (AlertPolicyResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasIncidentPreference (AlertPolicyResource s) s Text where
+instance P.HasIncidentPreference (AlertPolicyResource s) s Text where
     incidentPreference =
         lens (_incident_preference :: AlertPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _incident_preference = a } :: AlertPolicyResource s)
 
-instance HasName (AlertPolicyResource s) s Text where
+instance P.HasName (AlertPolicyResource s) s Text where
     name =
         lens (_name :: AlertPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AlertPolicyResource s)
 
-instance HasComputedCreatedAt (AlertPolicyResource s) Text
+instance P.HasComputedCreatedAt (AlertPolicyResource s) Text
 
-instance HasComputedId (AlertPolicyResource s) Text
+instance P.HasComputedId (AlertPolicyResource s) Text
 
-instance HasComputedUpdatedAt (AlertPolicyResource s) Text
+instance P.HasComputedUpdatedAt (AlertPolicyResource s) Text
 
-alertPolicyResource :: TF.Resource TF.NewRelic (AlertPolicyResource s)
+alertPolicyResource :: TF.Resource P.NewRelic (AlertPolicyResource s)
 alertPolicyResource =
     TF.newResource "newrelic_alert_policy" $
         AlertPolicyResource {
@@ -347,42 +346,42 @@ instance TF.ToHCL (NrqlAlertConditionResource s) where
         , TF.attribute "value_function" _value_function
         ]
 
-instance HasEnabled (NrqlAlertConditionResource s) s Text where
+instance P.HasEnabled (NrqlAlertConditionResource s) s Text where
     enabled =
         lens (_enabled :: NrqlAlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _enabled = a } :: NrqlAlertConditionResource s)
 
-instance HasName (NrqlAlertConditionResource s) s Text where
+instance P.HasName (NrqlAlertConditionResource s) s Text where
     name =
         lens (_name :: NrqlAlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NrqlAlertConditionResource s)
 
-instance HasNrql (NrqlAlertConditionResource s) s Text where
+instance P.HasNrql (NrqlAlertConditionResource s) s Text where
     nrql =
         lens (_nrql :: NrqlAlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _nrql = a } :: NrqlAlertConditionResource s)
 
-instance HasPolicyId (NrqlAlertConditionResource s) s Text where
+instance P.HasPolicyId (NrqlAlertConditionResource s) s Text where
     policyId =
         lens (_policy_id :: NrqlAlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_id = a } :: NrqlAlertConditionResource s)
 
-instance HasRunbookUrl (NrqlAlertConditionResource s) s Text where
+instance P.HasRunbookUrl (NrqlAlertConditionResource s) s Text where
     runbookUrl =
         lens (_runbook_url :: NrqlAlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _runbook_url = a } :: NrqlAlertConditionResource s)
 
-instance HasTerm (NrqlAlertConditionResource s) s Text where
+instance P.HasTerm (NrqlAlertConditionResource s) s Text where
     term =
         lens (_term :: NrqlAlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _term = a } :: NrqlAlertConditionResource s)
 
-instance HasValueFunction (NrqlAlertConditionResource s) s Text where
+instance P.HasValueFunction (NrqlAlertConditionResource s) s Text where
     valueFunction =
         lens (_value_function :: NrqlAlertConditionResource s -> TF.Attribute s Text)
             (\s a -> s { _value_function = a } :: NrqlAlertConditionResource s)
 
-nrqlAlertConditionResource :: TF.Resource TF.NewRelic (NrqlAlertConditionResource s)
+nrqlAlertConditionResource :: TF.Resource P.NewRelic (NrqlAlertConditionResource s)
 nrqlAlertConditionResource =
     TF.newResource "newrelic_nrql_alert_condition" $
         NrqlAlertConditionResource {
@@ -394,117 +393,3 @@ nrqlAlertConditionResource =
             , _term = TF.Nil
             , _value_function = TF.Nil
             }
-
-class HasChannelId a s b | a -> s b where
-    channelId :: Lens' a (TF.Attribute s b)
-
-instance HasChannelId a s b => HasChannelId (TF.Resource p a) s b where
-    channelId = TF.configuration . channelId
-
-class HasConditionScope a s b | a -> s b where
-    conditionScope :: Lens' a (TF.Attribute s b)
-
-instance HasConditionScope a s b => HasConditionScope (TF.Resource p a) s b where
-    conditionScope = TF.configuration . conditionScope
-
-class HasConfiguration a s b | a -> s b where
-    configuration :: Lens' a (TF.Attribute s b)
-
-instance HasConfiguration a s b => HasConfiguration (TF.Resource p a) s b where
-    configuration = TF.configuration . configuration
-
-class HasEnabled a s b | a -> s b where
-    enabled :: Lens' a (TF.Attribute s b)
-
-instance HasEnabled a s b => HasEnabled (TF.Resource p a) s b where
-    enabled = TF.configuration . enabled
-
-class HasEntities a s b | a -> s b where
-    entities :: Lens' a (TF.Attribute s b)
-
-instance HasEntities a s b => HasEntities (TF.Resource p a) s b where
-    entities = TF.configuration . entities
-
-class HasIncidentPreference a s b | a -> s b where
-    incidentPreference :: Lens' a (TF.Attribute s b)
-
-instance HasIncidentPreference a s b => HasIncidentPreference (TF.Resource p a) s b where
-    incidentPreference = TF.configuration . incidentPreference
-
-class HasMetric a s b | a -> s b where
-    metric :: Lens' a (TF.Attribute s b)
-
-instance HasMetric a s b => HasMetric (TF.Resource p a) s b where
-    metric = TF.configuration . metric
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasNrql a s b | a -> s b where
-    nrql :: Lens' a (TF.Attribute s b)
-
-instance HasNrql a s b => HasNrql (TF.Resource p a) s b where
-    nrql = TF.configuration . nrql
-
-class HasPolicyId a s b | a -> s b where
-    policyId :: Lens' a (TF.Attribute s b)
-
-instance HasPolicyId a s b => HasPolicyId (TF.Resource p a) s b where
-    policyId = TF.configuration . policyId
-
-class HasRunbookUrl a s b | a -> s b where
-    runbookUrl :: Lens' a (TF.Attribute s b)
-
-instance HasRunbookUrl a s b => HasRunbookUrl (TF.Resource p a) s b where
-    runbookUrl = TF.configuration . runbookUrl
-
-class HasTerm a s b | a -> s b where
-    term :: Lens' a (TF.Attribute s b)
-
-instance HasTerm a s b => HasTerm (TF.Resource p a) s b where
-    term = TF.configuration . term
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasUserDefinedMetric a s b | a -> s b where
-    userDefinedMetric :: Lens' a (TF.Attribute s b)
-
-instance HasUserDefinedMetric a s b => HasUserDefinedMetric (TF.Resource p a) s b where
-    userDefinedMetric = TF.configuration . userDefinedMetric
-
-class HasUserDefinedValueFunction a s b | a -> s b where
-    userDefinedValueFunction :: Lens' a (TF.Attribute s b)
-
-instance HasUserDefinedValueFunction a s b => HasUserDefinedValueFunction (TF.Resource p a) s b where
-    userDefinedValueFunction = TF.configuration . userDefinedValueFunction
-
-class HasValueFunction a s b | a -> s b where
-    valueFunction :: Lens' a (TF.Attribute s b)
-
-instance HasValueFunction a s b => HasValueFunction (TF.Resource p a) s b where
-    valueFunction = TF.configuration . valueFunction
-
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCreatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedUpdatedAt a b | a -> b where
-    computedUpdatedAt
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUpdatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "updated_at")

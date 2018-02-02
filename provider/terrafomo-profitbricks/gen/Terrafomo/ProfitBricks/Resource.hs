@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.ProfitBricks.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -66,33 +63,35 @@ module Terrafomo.ProfitBricks.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasDescription (..)
-    , HasLocation (..)
-    , HasName (..)
+    , P.HasDescription (..)
+    , P.HasLocation (..)
+    , P.HasName (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                       as TF
-import qualified GHC.Base                        as TF
-import qualified Numeric.Natural                 as TF
-import qualified Terrafomo.Attribute             as TF
-import qualified Terrafomo.HCL                   as TF
-import qualified Terrafomo.IP                    as TF
-import qualified Terrafomo.Meta                  as TF
-import qualified Terrafomo.Name                  as TF
-import qualified Terrafomo.ProfitBricks.Provider as TF
-import qualified Terrafomo.ProfitBricks.Types    as TF
-import qualified Terrafomo.Resource              as TF
-import qualified Terrafomo.Resource              as TF
+import qualified Data.Word                       as P
+import qualified GHC.Base                        as P
+import qualified Numeric.Natural                 as P
+import qualified Terrafomo.IP                    as P
+import qualified Terrafomo.ProfitBricks.Lens     as P
+import qualified Terrafomo.ProfitBricks.Provider as P
+import           Terrafomo.ProfitBricks.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @profitbricks_datacenter@ ProfitBricks resource.
 
@@ -114,22 +113,22 @@ instance TF.ToHCL (DatacenterResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDescription (DatacenterResource s) s Text where
+instance P.HasDescription (DatacenterResource s) s Text where
     description =
         lens (_description :: DatacenterResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: DatacenterResource s)
 
-instance HasLocation (DatacenterResource s) s Text where
+instance P.HasLocation (DatacenterResource s) s Text where
     location =
         lens (_location :: DatacenterResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: DatacenterResource s)
 
-instance HasName (DatacenterResource s) s Text where
+instance P.HasName (DatacenterResource s) s Text where
     name =
         lens (_name :: DatacenterResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DatacenterResource s)
 
-datacenterResource :: TF.Resource TF.ProfitBricks (DatacenterResource s)
+datacenterResource :: TF.Resource P.ProfitBricks (DatacenterResource s)
 datacenterResource =
     TF.newResource "profitbricks_datacenter" $
         DatacenterResource {
@@ -148,7 +147,7 @@ data FirewallResource s = FirewallResource {
 instance TF.ToHCL (FirewallResource s) where
     toHCL _ = TF.block []
 
-firewallResource :: TF.Resource TF.ProfitBricks (FirewallResource s)
+firewallResource :: TF.Resource P.ProfitBricks (FirewallResource s)
 firewallResource =
     TF.newResource "profitbricks_firewall" $
         FirewallResource {
@@ -164,7 +163,7 @@ data GroupResource s = GroupResource {
 instance TF.ToHCL (GroupResource s) where
     toHCL _ = TF.block []
 
-groupResource :: TF.Resource TF.ProfitBricks (GroupResource s)
+groupResource :: TF.Resource P.ProfitBricks (GroupResource s)
 groupResource =
     TF.newResource "profitbricks_group" $
         GroupResource {
@@ -180,7 +179,7 @@ data IpblockResource s = IpblockResource {
 instance TF.ToHCL (IpblockResource s) where
     toHCL _ = TF.block []
 
-ipblockResource :: TF.Resource TF.ProfitBricks (IpblockResource s)
+ipblockResource :: TF.Resource P.ProfitBricks (IpblockResource s)
 ipblockResource =
     TF.newResource "profitbricks_ipblock" $
         IpblockResource {
@@ -196,7 +195,7 @@ data IpfailoverResource s = IpfailoverResource {
 instance TF.ToHCL (IpfailoverResource s) where
     toHCL _ = TF.block []
 
-ipfailoverResource :: TF.Resource TF.ProfitBricks (IpfailoverResource s)
+ipfailoverResource :: TF.Resource P.ProfitBricks (IpfailoverResource s)
 ipfailoverResource =
     TF.newResource "profitbricks_ipfailover" $
         IpfailoverResource {
@@ -212,7 +211,7 @@ data LanResource s = LanResource {
 instance TF.ToHCL (LanResource s) where
     toHCL _ = TF.block []
 
-lanResource :: TF.Resource TF.ProfitBricks (LanResource s)
+lanResource :: TF.Resource P.ProfitBricks (LanResource s)
 lanResource =
     TF.newResource "profitbricks_lan" $
         LanResource {
@@ -228,7 +227,7 @@ data LoadbalancerResource s = LoadbalancerResource {
 instance TF.ToHCL (LoadbalancerResource s) where
     toHCL _ = TF.block []
 
-loadbalancerResource :: TF.Resource TF.ProfitBricks (LoadbalancerResource s)
+loadbalancerResource :: TF.Resource P.ProfitBricks (LoadbalancerResource s)
 loadbalancerResource =
     TF.newResource "profitbricks_loadbalancer" $
         LoadbalancerResource {
@@ -244,7 +243,7 @@ data NicResource s = NicResource {
 instance TF.ToHCL (NicResource s) where
     toHCL _ = TF.block []
 
-nicResource :: TF.Resource TF.ProfitBricks (NicResource s)
+nicResource :: TF.Resource P.ProfitBricks (NicResource s)
 nicResource =
     TF.newResource "profitbricks_nic" $
         NicResource {
@@ -260,7 +259,7 @@ data ServerResource s = ServerResource {
 instance TF.ToHCL (ServerResource s) where
     toHCL _ = TF.block []
 
-serverResource :: TF.Resource TF.ProfitBricks (ServerResource s)
+serverResource :: TF.Resource P.ProfitBricks (ServerResource s)
 serverResource =
     TF.newResource "profitbricks_server" $
         ServerResource {
@@ -277,7 +276,7 @@ data ShareResource s = ShareResource {
 instance TF.ToHCL (ShareResource s) where
     toHCL _ = TF.block []
 
-shareResource :: TF.Resource TF.ProfitBricks (ShareResource s)
+shareResource :: TF.Resource P.ProfitBricks (ShareResource s)
 shareResource =
     TF.newResource "profitbricks_share" $
         ShareResource {
@@ -293,7 +292,7 @@ data SnapshotResource s = SnapshotResource {
 instance TF.ToHCL (SnapshotResource s) where
     toHCL _ = TF.block []
 
-snapshotResource :: TF.Resource TF.ProfitBricks (SnapshotResource s)
+snapshotResource :: TF.Resource P.ProfitBricks (SnapshotResource s)
 snapshotResource =
     TF.newResource "profitbricks_snapshot" $
         SnapshotResource {
@@ -309,7 +308,7 @@ data UserResource s = UserResource {
 instance TF.ToHCL (UserResource s) where
     toHCL _ = TF.block []
 
-userResource :: TF.Resource TF.ProfitBricks (UserResource s)
+userResource :: TF.Resource P.ProfitBricks (UserResource s)
 userResource =
     TF.newResource "profitbricks_user" $
         UserResource {
@@ -325,26 +324,8 @@ data VolumeResource s = VolumeResource {
 instance TF.ToHCL (VolumeResource s) where
     toHCL _ = TF.block []
 
-volumeResource :: TF.Resource TF.ProfitBricks (VolumeResource s)
+volumeResource :: TF.Resource P.ProfitBricks (VolumeResource s)
 volumeResource =
     TF.newResource "profitbricks_volume" $
         VolumeResource {
             }
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasLocation a s b | a -> s b where
-    location :: Lens' a (TF.Attribute s b)
-
-instance HasLocation a s b => HasLocation (TF.Resource p a) s b where
-    location = TF.configuration . location
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name

@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.DNSMadeEasy.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -32,28 +29,30 @@ module Terrafomo.DNSMadeEasy.Resource
     -- ** Arguments
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                      as TF
-import qualified GHC.Base                       as TF
-import qualified Numeric.Natural                as TF
-import qualified Terrafomo.Attribute            as TF
-import qualified Terrafomo.DNSMadeEasy.Provider as TF
-import qualified Terrafomo.DNSMadeEasy.Types    as TF
-import qualified Terrafomo.HCL                  as TF
-import qualified Terrafomo.IP                   as TF
-import qualified Terrafomo.Meta                 as TF
-import qualified Terrafomo.Name                 as TF
-import qualified Terrafomo.Resource             as TF
-import qualified Terrafomo.Resource             as TF
+import qualified Data.Word                      as P
+import qualified GHC.Base                       as P
+import qualified Numeric.Natural                as P
+import qualified Terrafomo.DNSMadeEasy.Lens     as P
+import qualified Terrafomo.DNSMadeEasy.Provider as P
+import           Terrafomo.DNSMadeEasy.Types    as P
+import qualified Terrafomo.IP                   as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @dme_record@ DNSMadeEasy resource.
 
@@ -65,7 +64,7 @@ data RecordResource s = RecordResource {
 instance TF.ToHCL (RecordResource s) where
     toHCL _ = TF.block []
 
-recordResource :: TF.Resource TF.DNSMadeEasy (RecordResource s)
+recordResource :: TF.Resource P.DNSMadeEasy (RecordResource s)
 recordResource =
     TF.newResource "dme_record" $
         RecordResource {

@@ -164,7 +164,7 @@ argItem rules = item >>> paragraph >>> argument
                         , argHelp     = pure "(Optional) See datatype documentation."
                         , argRequired = False
                         , argIgnored  = False
-                        , argType     = pure ("TF." <> dataTypeName x <> "Type")
+                        , argType     = pure ("P." <> dataTypeName x <> "Type")
                         }
 
     -- should use Parsec.Char here and rethrow errors.

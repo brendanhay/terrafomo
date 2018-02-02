@@ -25,7 +25,6 @@ module {{ namespace }}
   {% endfor %}
     ) where
 
-import Data.Function      (on)
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -37,13 +36,13 @@ import GHC.Generics (Generic)
 import Lens.Micro (Lens', lens)
 
 {% for import in imports %}
-import qualified {{ import.value }} as TF
+import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.IP       as TF
-import qualified Terrafomo.Name     as TF
+import qualified Terrafomo.IP as P
+
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Provider as TF
-import qualified Terrafomo.Attribute as TF
 
 {- | {{ provider.name }} Terraform provider.
 {% if schema.about %}

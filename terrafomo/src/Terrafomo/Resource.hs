@@ -27,7 +27,7 @@ data Resource p a = Resource
     , resourceDependsOn :: !(Set Dependency)
     , resourceType      :: !Type
     , resourceConfig    :: !a
-    }
+    } deriving (Show, Eq)
 
 instance HasMeta Resource where
     provider      = lens resourceProvider  (\s a -> s { resourceProvider  = a })

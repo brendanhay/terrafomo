@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Chef.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -42,43 +39,45 @@ module Terrafomo.Chef.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAutomaticAttributesJson (..)
-    , HasContentJson (..)
-    , HasCookbookConstraints (..)
-    , HasDataBagName (..)
-    , HasDefaultAttributesJson (..)
-    , HasDescription (..)
-    , HasEnvironmentName (..)
-    , HasName (..)
-    , HasNormalAttributesJson (..)
-    , HasOverrideAttributesJson (..)
-    , HasRunList (..)
+    , P.HasAutomaticAttributesJson (..)
+    , P.HasContentJson (..)
+    , P.HasCookbookConstraints (..)
+    , P.HasDataBagName (..)
+    , P.HasDefaultAttributesJson (..)
+    , P.HasDescription (..)
+    , P.HasEnvironmentName (..)
+    , P.HasName (..)
+    , P.HasNormalAttributesJson (..)
+    , P.HasOverrideAttributesJson (..)
+    , P.HasRunList (..)
 
     -- ** Computed Attributes
-    , HasComputedApiUri (..)
-    , HasComputedId (..)
+    , P.HasComputedApiUri (..)
+    , P.HasComputedId (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word               as TF
-import qualified GHC.Base                as TF
-import qualified Numeric.Natural         as TF
-import qualified Terrafomo.Attribute     as TF
-import qualified Terrafomo.Chef.Provider as TF
-import qualified Terrafomo.Chef.Types    as TF
-import qualified Terrafomo.HCL           as TF
-import qualified Terrafomo.IP            as TF
-import qualified Terrafomo.Meta          as TF
-import qualified Terrafomo.Name          as TF
-import qualified Terrafomo.Resource      as TF
-import qualified Terrafomo.Resource      as TF
+import qualified Data.Word               as P
+import qualified GHC.Base                as P
+import qualified Numeric.Natural         as P
+import qualified Terrafomo.Chef.Lens     as P
+import qualified Terrafomo.Chef.Provider as P
+import           Terrafomo.Chef.Types    as P
+import qualified Terrafomo.IP            as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @chef_data_bag_item@ Chef resource.
 
@@ -100,19 +99,19 @@ instance TF.ToHCL (DataBagItemResource s) where
         , TF.attribute "data_bag_name" _data_bag_name
         ]
 
-instance HasContentJson (DataBagItemResource s) s Text where
+instance P.HasContentJson (DataBagItemResource s) s Text where
     contentJson =
         lens (_content_json :: DataBagItemResource s -> TF.Attribute s Text)
             (\s a -> s { _content_json = a } :: DataBagItemResource s)
 
-instance HasDataBagName (DataBagItemResource s) s Text where
+instance P.HasDataBagName (DataBagItemResource s) s Text where
     dataBagName =
         lens (_data_bag_name :: DataBagItemResource s -> TF.Attribute s Text)
             (\s a -> s { _data_bag_name = a } :: DataBagItemResource s)
 
-instance HasComputedId (DataBagItemResource s) Text
+instance P.HasComputedId (DataBagItemResource s) Text
 
-dataBagItemResource :: TF.Resource TF.Chef (DataBagItemResource s)
+dataBagItemResource :: TF.Resource P.Chef (DataBagItemResource s)
 dataBagItemResource =
     TF.newResource "chef_data_bag_item" $
         DataBagItemResource {
@@ -138,14 +137,14 @@ instance TF.ToHCL (DataBagResource s) where
         [ TF.attribute "name" _name
         ]
 
-instance HasName (DataBagResource s) s Text where
+instance P.HasName (DataBagResource s) s Text where
     name =
         lens (_name :: DataBagResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DataBagResource s)
 
-instance HasComputedApiUri (DataBagResource s) Text
+instance P.HasComputedApiUri (DataBagResource s) Text
 
-dataBagResource :: TF.Resource TF.Chef (DataBagResource s)
+dataBagResource :: TF.Resource P.Chef (DataBagResource s)
 dataBagResource =
     TF.newResource "chef_data_bag" $
         DataBagResource {
@@ -180,32 +179,32 @@ instance TF.ToHCL (EnvironmentResource s) where
         , TF.attribute "override_attributes_json" _override_attributes_json
         ]
 
-instance HasCookbookConstraints (EnvironmentResource s) s Text where
+instance P.HasCookbookConstraints (EnvironmentResource s) s Text where
     cookbookConstraints =
         lens (_cookbook_constraints :: EnvironmentResource s -> TF.Attribute s Text)
             (\s a -> s { _cookbook_constraints = a } :: EnvironmentResource s)
 
-instance HasDefaultAttributesJson (EnvironmentResource s) s Text where
+instance P.HasDefaultAttributesJson (EnvironmentResource s) s Text where
     defaultAttributesJson =
         lens (_default_attributes_json :: EnvironmentResource s -> TF.Attribute s Text)
             (\s a -> s { _default_attributes_json = a } :: EnvironmentResource s)
 
-instance HasDescription (EnvironmentResource s) s Text where
+instance P.HasDescription (EnvironmentResource s) s Text where
     description =
         lens (_description :: EnvironmentResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: EnvironmentResource s)
 
-instance HasName (EnvironmentResource s) s Text where
+instance P.HasName (EnvironmentResource s) s Text where
     name =
         lens (_name :: EnvironmentResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: EnvironmentResource s)
 
-instance HasOverrideAttributesJson (EnvironmentResource s) s Text where
+instance P.HasOverrideAttributesJson (EnvironmentResource s) s Text where
     overrideAttributesJson =
         lens (_override_attributes_json :: EnvironmentResource s -> TF.Attribute s Text)
             (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
 
-environmentResource :: TF.Resource TF.Chef (EnvironmentResource s)
+environmentResource :: TF.Resource P.Chef (EnvironmentResource s)
 environmentResource =
     TF.newResource "chef_environment" $
         EnvironmentResource {
@@ -253,42 +252,42 @@ instance TF.ToHCL (NodeResource s) where
         , TF.attribute "run_list" _run_list
         ]
 
-instance HasAutomaticAttributesJson (NodeResource s) s Text where
+instance P.HasAutomaticAttributesJson (NodeResource s) s Text where
     automaticAttributesJson =
         lens (_automatic_attributes_json :: NodeResource s -> TF.Attribute s Text)
             (\s a -> s { _automatic_attributes_json = a } :: NodeResource s)
 
-instance HasDefaultAttributesJson (NodeResource s) s Text where
+instance P.HasDefaultAttributesJson (NodeResource s) s Text where
     defaultAttributesJson =
         lens (_default_attributes_json :: NodeResource s -> TF.Attribute s Text)
             (\s a -> s { _default_attributes_json = a } :: NodeResource s)
 
-instance HasEnvironmentName (NodeResource s) s Text where
+instance P.HasEnvironmentName (NodeResource s) s Text where
     environmentName =
         lens (_environment_name :: NodeResource s -> TF.Attribute s Text)
             (\s a -> s { _environment_name = a } :: NodeResource s)
 
-instance HasName (NodeResource s) s Text where
+instance P.HasName (NodeResource s) s Text where
     name =
         lens (_name :: NodeResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NodeResource s)
 
-instance HasNormalAttributesJson (NodeResource s) s Text where
+instance P.HasNormalAttributesJson (NodeResource s) s Text where
     normalAttributesJson =
         lens (_normal_attributes_json :: NodeResource s -> TF.Attribute s Text)
             (\s a -> s { _normal_attributes_json = a } :: NodeResource s)
 
-instance HasOverrideAttributesJson (NodeResource s) s Text where
+instance P.HasOverrideAttributesJson (NodeResource s) s Text where
     overrideAttributesJson =
         lens (_override_attributes_json :: NodeResource s -> TF.Attribute s Text)
             (\s a -> s { _override_attributes_json = a } :: NodeResource s)
 
-instance HasRunList (NodeResource s) s Text where
+instance P.HasRunList (NodeResource s) s Text where
     runList =
         lens (_run_list :: NodeResource s -> TF.Attribute s Text)
             (\s a -> s { _run_list = a } :: NodeResource s)
 
-nodeResource :: TF.Resource TF.Chef (NodeResource s)
+nodeResource :: TF.Resource P.Chef (NodeResource s)
 nodeResource =
     TF.newResource "chef_node" $
         NodeResource {
@@ -328,32 +327,32 @@ instance TF.ToHCL (RoleResource s) where
         , TF.attribute "run_list" _run_list
         ]
 
-instance HasDefaultAttributesJson (RoleResource s) s Text where
+instance P.HasDefaultAttributesJson (RoleResource s) s Text where
     defaultAttributesJson =
         lens (_default_attributes_json :: RoleResource s -> TF.Attribute s Text)
             (\s a -> s { _default_attributes_json = a } :: RoleResource s)
 
-instance HasDescription (RoleResource s) s Text where
+instance P.HasDescription (RoleResource s) s Text where
     description =
         lens (_description :: RoleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: RoleResource s)
 
-instance HasName (RoleResource s) s Text where
+instance P.HasName (RoleResource s) s Text where
     name =
         lens (_name :: RoleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RoleResource s)
 
-instance HasOverrideAttributesJson (RoleResource s) s Text where
+instance P.HasOverrideAttributesJson (RoleResource s) s Text where
     overrideAttributesJson =
         lens (_override_attributes_json :: RoleResource s -> TF.Attribute s Text)
             (\s a -> s { _override_attributes_json = a } :: RoleResource s)
 
-instance HasRunList (RoleResource s) s Text where
+instance P.HasRunList (RoleResource s) s Text where
     runList =
         lens (_run_list :: RoleResource s -> TF.Attribute s Text)
             (\s a -> s { _run_list = a } :: RoleResource s)
 
-roleResource :: TF.Resource TF.Chef (RoleResource s)
+roleResource :: TF.Resource P.Chef (RoleResource s)
 roleResource =
     TF.newResource "chef_role" $
         RoleResource {
@@ -363,81 +362,3 @@ roleResource =
             , _override_attributes_json = TF.Nil
             , _run_list = TF.Nil
             }
-
-class HasAutomaticAttributesJson a s b | a -> s b where
-    automaticAttributesJson :: Lens' a (TF.Attribute s b)
-
-instance HasAutomaticAttributesJson a s b => HasAutomaticAttributesJson (TF.Resource p a) s b where
-    automaticAttributesJson = TF.configuration . automaticAttributesJson
-
-class HasContentJson a s b | a -> s b where
-    contentJson :: Lens' a (TF.Attribute s b)
-
-instance HasContentJson a s b => HasContentJson (TF.Resource p a) s b where
-    contentJson = TF.configuration . contentJson
-
-class HasCookbookConstraints a s b | a -> s b where
-    cookbookConstraints :: Lens' a (TF.Attribute s b)
-
-instance HasCookbookConstraints a s b => HasCookbookConstraints (TF.Resource p a) s b where
-    cookbookConstraints = TF.configuration . cookbookConstraints
-
-class HasDataBagName a s b | a -> s b where
-    dataBagName :: Lens' a (TF.Attribute s b)
-
-instance HasDataBagName a s b => HasDataBagName (TF.Resource p a) s b where
-    dataBagName = TF.configuration . dataBagName
-
-class HasDefaultAttributesJson a s b | a -> s b where
-    defaultAttributesJson :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultAttributesJson a s b => HasDefaultAttributesJson (TF.Resource p a) s b where
-    defaultAttributesJson = TF.configuration . defaultAttributesJson
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasEnvironmentName a s b | a -> s b where
-    environmentName :: Lens' a (TF.Attribute s b)
-
-instance HasEnvironmentName a s b => HasEnvironmentName (TF.Resource p a) s b where
-    environmentName = TF.configuration . environmentName
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasNormalAttributesJson a s b | a -> s b where
-    normalAttributesJson :: Lens' a (TF.Attribute s b)
-
-instance HasNormalAttributesJson a s b => HasNormalAttributesJson (TF.Resource p a) s b where
-    normalAttributesJson = TF.configuration . normalAttributesJson
-
-class HasOverrideAttributesJson a s b | a -> s b where
-    overrideAttributesJson :: Lens' a (TF.Attribute s b)
-
-instance HasOverrideAttributesJson a s b => HasOverrideAttributesJson (TF.Resource p a) s b where
-    overrideAttributesJson = TF.configuration . overrideAttributesJson
-
-class HasRunList a s b | a -> s b where
-    runList :: Lens' a (TF.Attribute s b)
-
-instance HasRunList a s b => HasRunList (TF.Resource p a) s b where
-    runList = TF.configuration . runList
-
-class HasComputedApiUri a b | a -> b where
-    computedApiUri
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedApiUri =
-        to (\x -> TF.Computed (TF.referenceKey x) "api_uri")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")

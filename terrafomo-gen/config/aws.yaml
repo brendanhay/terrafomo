@@ -9,32 +9,32 @@ dependencies:
 rules:
   - mode: suffix
     match: cidr_block
-    type: 'TF.CIDR'
+    type: 'P.CIDR'
 
   - mode: exact
     match: tags
-    type: 'TF.Tags'
+    type: 'P.Tags'
 
   - mode: suffix
     match: _port
-    type: 'TF.Word16'
+    type: 'P.Word16'
 
   - mode: prefix
     match: enable
-    type: 'TF.Bool'
+    type: 'P.Bool'
 
   - mode: suffix
     match: enable
-    type: 'TF.Bool'
+    type: 'P.Bool'
 
   - mode: suffix
     match: enabled
-    type: 'TF.Bool'
+    type: 'P.Bool'
 
   - mode: suffix
     match: region
-    type: 'TF.Region'
+    type: 'P.Region'
 
   - mode: suffix
     match: availability_zone
-    type: 'TF.Zone'
+    type: 'P.Zone'

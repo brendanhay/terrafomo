@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Kubernetes.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -66,39 +63,41 @@ module Terrafomo.Kubernetes.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasData' (..)
-    , HasImagePullSecret (..)
-    , HasMetadata (..)
-    , HasParameters (..)
-    , HasSecret (..)
-    , HasSpec (..)
-    , HasStorageProvisioner (..)
-    , HasType' (..)
-    , HasWaitUntilBound (..)
+    , P.HasData' (..)
+    , P.HasImagePullSecret (..)
+    , P.HasMetadata (..)
+    , P.HasParameters (..)
+    , P.HasSecret (..)
+    , P.HasSpec (..)
+    , P.HasStorageProvisioner (..)
+    , P.HasType' (..)
+    , P.HasWaitUntilBound (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                     as TF
-import qualified GHC.Base                      as TF
-import qualified Numeric.Natural               as TF
-import qualified Terrafomo.Attribute           as TF
-import qualified Terrafomo.HCL                 as TF
-import qualified Terrafomo.IP                  as TF
-import qualified Terrafomo.Kubernetes.Provider as TF
-import qualified Terrafomo.Kubernetes.Types    as TF
-import qualified Terrafomo.Meta                as TF
-import qualified Terrafomo.Name                as TF
-import qualified Terrafomo.Resource            as TF
-import qualified Terrafomo.Resource            as TF
+import qualified Data.Word                     as P
+import qualified GHC.Base                      as P
+import qualified Numeric.Natural               as P
+import qualified Terrafomo.IP                  as P
+import qualified Terrafomo.Kubernetes.Lens     as P
+import qualified Terrafomo.Kubernetes.Provider as P
+import           Terrafomo.Kubernetes.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @kubernetes_config_map@ Kubernetes resource.
 
@@ -120,17 +119,17 @@ instance TF.ToHCL (ConfigMapResource s) where
         , TF.attribute "metadata" _metadata
         ]
 
-instance HasData' (ConfigMapResource s) s Text where
+instance P.HasData' (ConfigMapResource s) s Text where
     data' =
         lens (_data' :: ConfigMapResource s -> TF.Attribute s Text)
             (\s a -> s { _data' = a } :: ConfigMapResource s)
 
-instance HasMetadata (ConfigMapResource s) s Text where
+instance P.HasMetadata (ConfigMapResource s) s Text where
     metadata =
         lens (_metadata :: ConfigMapResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ConfigMapResource s)
 
-configMapResource :: TF.Resource TF.Kubernetes (ConfigMapResource s)
+configMapResource :: TF.Resource P.Kubernetes (ConfigMapResource s)
 configMapResource =
     TF.newResource "kubernetes_config_map" $
         ConfigMapResource {
@@ -157,17 +156,17 @@ instance TF.ToHCL (HorizontalPodAutoscalerResource s) where
         , TF.attribute "spec" _spec
         ]
 
-instance HasMetadata (HorizontalPodAutoscalerResource s) s Text where
+instance P.HasMetadata (HorizontalPodAutoscalerResource s) s Text where
     metadata =
         lens (_metadata :: HorizontalPodAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: HorizontalPodAutoscalerResource s)
 
-instance HasSpec (HorizontalPodAutoscalerResource s) s Text where
+instance P.HasSpec (HorizontalPodAutoscalerResource s) s Text where
     spec =
         lens (_spec :: HorizontalPodAutoscalerResource s -> TF.Attribute s Text)
             (\s a -> s { _spec = a } :: HorizontalPodAutoscalerResource s)
 
-horizontalPodAutoscalerResource :: TF.Resource TF.Kubernetes (HorizontalPodAutoscalerResource s)
+horizontalPodAutoscalerResource :: TF.Resource P.Kubernetes (HorizontalPodAutoscalerResource s)
 horizontalPodAutoscalerResource =
     TF.newResource "kubernetes_horizontal_pod_autoscaler" $
         HorizontalPodAutoscalerResource {
@@ -195,17 +194,17 @@ instance TF.ToHCL (LimitRangeResource s) where
         , TF.attribute "spec" _spec
         ]
 
-instance HasMetadata (LimitRangeResource s) s Text where
+instance P.HasMetadata (LimitRangeResource s) s Text where
     metadata =
         lens (_metadata :: LimitRangeResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: LimitRangeResource s)
 
-instance HasSpec (LimitRangeResource s) s Text where
+instance P.HasSpec (LimitRangeResource s) s Text where
     spec =
         lens (_spec :: LimitRangeResource s -> TF.Attribute s Text)
             (\s a -> s { _spec = a } :: LimitRangeResource s)
 
-limitRangeResource :: TF.Resource TF.Kubernetes (LimitRangeResource s)
+limitRangeResource :: TF.Resource P.Kubernetes (LimitRangeResource s)
 limitRangeResource =
     TF.newResource "kubernetes_limit_range" $
         LimitRangeResource {
@@ -229,12 +228,12 @@ instance TF.ToHCL (NamespaceResource s) where
         [ TF.attribute "metadata" _metadata
         ]
 
-instance HasMetadata (NamespaceResource s) s Text where
+instance P.HasMetadata (NamespaceResource s) s Text where
     metadata =
         lens (_metadata :: NamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: NamespaceResource s)
 
-namespaceResource :: TF.Resource TF.Kubernetes (NamespaceResource s)
+namespaceResource :: TF.Resource P.Kubernetes (NamespaceResource s)
 namespaceResource =
     TF.newResource "kubernetes_namespace" $
         NamespaceResource {
@@ -262,22 +261,22 @@ instance TF.ToHCL (PersistentVolumeClaimResource s) where
         , TF.attribute "wait_until_bound" _wait_until_bound
         ]
 
-instance HasMetadata (PersistentVolumeClaimResource s) s Text where
+instance P.HasMetadata (PersistentVolumeClaimResource s) s Text where
     metadata =
         lens (_metadata :: PersistentVolumeClaimResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: PersistentVolumeClaimResource s)
 
-instance HasSpec (PersistentVolumeClaimResource s) s Text where
+instance P.HasSpec (PersistentVolumeClaimResource s) s Text where
     spec =
         lens (_spec :: PersistentVolumeClaimResource s -> TF.Attribute s Text)
             (\s a -> s { _spec = a } :: PersistentVolumeClaimResource s)
 
-instance HasWaitUntilBound (PersistentVolumeClaimResource s) s Text where
+instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) s Text where
     waitUntilBound =
         lens (_wait_until_bound :: PersistentVolumeClaimResource s -> TF.Attribute s Text)
             (\s a -> s { _wait_until_bound = a } :: PersistentVolumeClaimResource s)
 
-persistentVolumeClaimResource :: TF.Resource TF.Kubernetes (PersistentVolumeClaimResource s)
+persistentVolumeClaimResource :: TF.Resource P.Kubernetes (PersistentVolumeClaimResource s)
 persistentVolumeClaimResource =
     TF.newResource "kubernetes_persistent_volume_claim" $
         PersistentVolumeClaimResource {
@@ -307,17 +306,17 @@ instance TF.ToHCL (PersistentVolumeResource s) where
         , TF.attribute "spec" _spec
         ]
 
-instance HasMetadata (PersistentVolumeResource s) s Text where
+instance P.HasMetadata (PersistentVolumeResource s) s Text where
     metadata =
         lens (_metadata :: PersistentVolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: PersistentVolumeResource s)
 
-instance HasSpec (PersistentVolumeResource s) s Text where
+instance P.HasSpec (PersistentVolumeResource s) s Text where
     spec =
         lens (_spec :: PersistentVolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _spec = a } :: PersistentVolumeResource s)
 
-persistentVolumeResource :: TF.Resource TF.Kubernetes (PersistentVolumeResource s)
+persistentVolumeResource :: TF.Resource P.Kubernetes (PersistentVolumeResource s)
 persistentVolumeResource =
     TF.newResource "kubernetes_persistent_volume" $
         PersistentVolumeResource {
@@ -345,17 +344,17 @@ instance TF.ToHCL (PodResource s) where
         , TF.attribute "spec" _spec
         ]
 
-instance HasMetadata (PodResource s) s Text where
+instance P.HasMetadata (PodResource s) s Text where
     metadata =
         lens (_metadata :: PodResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: PodResource s)
 
-instance HasSpec (PodResource s) s Text where
+instance P.HasSpec (PodResource s) s Text where
     spec =
         lens (_spec :: PodResource s -> TF.Attribute s Text)
             (\s a -> s { _spec = a } :: PodResource s)
 
-podResource :: TF.Resource TF.Kubernetes (PodResource s)
+podResource :: TF.Resource P.Kubernetes (PodResource s)
 podResource =
     TF.newResource "kubernetes_pod" $
         PodResource {
@@ -384,17 +383,17 @@ instance TF.ToHCL (ReplicationControllerResource s) where
         , TF.attribute "spec" _spec
         ]
 
-instance HasMetadata (ReplicationControllerResource s) s Text where
+instance P.HasMetadata (ReplicationControllerResource s) s Text where
     metadata =
         lens (_metadata :: ReplicationControllerResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ReplicationControllerResource s)
 
-instance HasSpec (ReplicationControllerResource s) s Text where
+instance P.HasSpec (ReplicationControllerResource s) s Text where
     spec =
         lens (_spec :: ReplicationControllerResource s -> TF.Attribute s Text)
             (\s a -> s { _spec = a } :: ReplicationControllerResource s)
 
-replicationControllerResource :: TF.Resource TF.Kubernetes (ReplicationControllerResource s)
+replicationControllerResource :: TF.Resource P.Kubernetes (ReplicationControllerResource s)
 replicationControllerResource =
     TF.newResource "kubernetes_replication_controller" $
         ReplicationControllerResource {
@@ -422,17 +421,17 @@ instance TF.ToHCL (ResourceQuotaResource s) where
         , TF.attribute "spec" _spec
         ]
 
-instance HasMetadata (ResourceQuotaResource s) s Text where
+instance P.HasMetadata (ResourceQuotaResource s) s Text where
     metadata =
         lens (_metadata :: ResourceQuotaResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ResourceQuotaResource s)
 
-instance HasSpec (ResourceQuotaResource s) s Text where
+instance P.HasSpec (ResourceQuotaResource s) s Text where
     spec =
         lens (_spec :: ResourceQuotaResource s -> TF.Attribute s Text)
             (\s a -> s { _spec = a } :: ResourceQuotaResource s)
 
-resourceQuotaResource :: TF.Resource TF.Kubernetes (ResourceQuotaResource s)
+resourceQuotaResource :: TF.Resource P.Kubernetes (ResourceQuotaResource s)
 resourceQuotaResource =
     TF.newResource "kubernetes_resource_quota" $
         ResourceQuotaResource {
@@ -469,22 +468,22 @@ instance TF.ToHCL (SecretResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasData' (SecretResource s) s Text where
+instance P.HasData' (SecretResource s) s Text where
     data' =
         lens (_data' :: SecretResource s -> TF.Attribute s Text)
             (\s a -> s { _data' = a } :: SecretResource s)
 
-instance HasMetadata (SecretResource s) s Text where
+instance P.HasMetadata (SecretResource s) s Text where
     metadata =
         lens (_metadata :: SecretResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: SecretResource s)
 
-instance HasType' (SecretResource s) s Text where
+instance P.HasType' (SecretResource s) s Text where
     type' =
         lens (_type' :: SecretResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: SecretResource s)
 
-secretResource :: TF.Resource TF.Kubernetes (SecretResource s)
+secretResource :: TF.Resource P.Kubernetes (SecretResource s)
 secretResource =
     TF.newResource "kubernetes_secret" $
         SecretResource {
@@ -514,22 +513,22 @@ instance TF.ToHCL (ServiceAccountResource s) where
         , TF.attribute "secret" _secret
         ]
 
-instance HasImagePullSecret (ServiceAccountResource s) s Text where
+instance P.HasImagePullSecret (ServiceAccountResource s) s Text where
     imagePullSecret =
         lens (_image_pull_secret :: ServiceAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _image_pull_secret = a } :: ServiceAccountResource s)
 
-instance HasMetadata (ServiceAccountResource s) s Text where
+instance P.HasMetadata (ServiceAccountResource s) s Text where
     metadata =
         lens (_metadata :: ServiceAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ServiceAccountResource s)
 
-instance HasSecret (ServiceAccountResource s) s Text where
+instance P.HasSecret (ServiceAccountResource s) s Text where
     secret =
         lens (_secret :: ServiceAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _secret = a } :: ServiceAccountResource s)
 
-serviceAccountResource :: TF.Resource TF.Kubernetes (ServiceAccountResource s)
+serviceAccountResource :: TF.Resource P.Kubernetes (ServiceAccountResource s)
 serviceAccountResource =
     TF.newResource "kubernetes_service_account" $
         ServiceAccountResource {
@@ -556,17 +555,17 @@ instance TF.ToHCL (ServiceResource s) where
         , TF.attribute "spec" _spec
         ]
 
-instance HasMetadata (ServiceResource s) s Text where
+instance P.HasMetadata (ServiceResource s) s Text where
     metadata =
         lens (_metadata :: ServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ServiceResource s)
 
-instance HasSpec (ServiceResource s) s Text where
+instance P.HasSpec (ServiceResource s) s Text where
     spec =
         lens (_spec :: ServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _spec = a } :: ServiceResource s)
 
-serviceResource :: TF.Resource TF.Kubernetes (ServiceResource s)
+serviceResource :: TF.Resource P.Kubernetes (ServiceResource s)
 serviceResource =
     TF.newResource "kubernetes_service" $
         ServiceResource {
@@ -597,22 +596,22 @@ instance TF.ToHCL (StorageClassResource s) where
         , TF.attribute "storage_provisioner" _storage_provisioner
         ]
 
-instance HasMetadata (StorageClassResource s) s Text where
+instance P.HasMetadata (StorageClassResource s) s Text where
     metadata =
         lens (_metadata :: StorageClassResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: StorageClassResource s)
 
-instance HasParameters (StorageClassResource s) s Text where
+instance P.HasParameters (StorageClassResource s) s Text where
     parameters =
         lens (_parameters :: StorageClassResource s -> TF.Attribute s Text)
             (\s a -> s { _parameters = a } :: StorageClassResource s)
 
-instance HasStorageProvisioner (StorageClassResource s) s Text where
+instance P.HasStorageProvisioner (StorageClassResource s) s Text where
     storageProvisioner =
         lens (_storage_provisioner :: StorageClassResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_provisioner = a } :: StorageClassResource s)
 
-storageClassResource :: TF.Resource TF.Kubernetes (StorageClassResource s)
+storageClassResource :: TF.Resource P.Kubernetes (StorageClassResource s)
 storageClassResource =
     TF.newResource "kubernetes_storage_class" $
         StorageClassResource {
@@ -620,57 +619,3 @@ storageClassResource =
             , _parameters = TF.Nil
             , _storage_provisioner = TF.Nil
             }
-
-class HasData' a s b | a -> s b where
-    data' :: Lens' a (TF.Attribute s b)
-
-instance HasData' a s b => HasData' (TF.Resource p a) s b where
-    data' = TF.configuration . data'
-
-class HasImagePullSecret a s b | a -> s b where
-    imagePullSecret :: Lens' a (TF.Attribute s b)
-
-instance HasImagePullSecret a s b => HasImagePullSecret (TF.Resource p a) s b where
-    imagePullSecret = TF.configuration . imagePullSecret
-
-class HasMetadata a s b | a -> s b where
-    metadata :: Lens' a (TF.Attribute s b)
-
-instance HasMetadata a s b => HasMetadata (TF.Resource p a) s b where
-    metadata = TF.configuration . metadata
-
-class HasParameters a s b | a -> s b where
-    parameters :: Lens' a (TF.Attribute s b)
-
-instance HasParameters a s b => HasParameters (TF.Resource p a) s b where
-    parameters = TF.configuration . parameters
-
-class HasSecret a s b | a -> s b where
-    secret :: Lens' a (TF.Attribute s b)
-
-instance HasSecret a s b => HasSecret (TF.Resource p a) s b where
-    secret = TF.configuration . secret
-
-class HasSpec a s b | a -> s b where
-    spec :: Lens' a (TF.Attribute s b)
-
-instance HasSpec a s b => HasSpec (TF.Resource p a) s b where
-    spec = TF.configuration . spec
-
-class HasStorageProvisioner a s b | a -> s b where
-    storageProvisioner :: Lens' a (TF.Attribute s b)
-
-instance HasStorageProvisioner a s b => HasStorageProvisioner (TF.Resource p a) s b where
-    storageProvisioner = TF.configuration . storageProvisioner
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasWaitUntilBound a s b | a -> s b where
-    waitUntilBound :: Lens' a (TF.Attribute s b)
-
-instance HasWaitUntilBound a s b => HasWaitUntilBound (TF.Resource p a) s b where
-    waitUntilBound = TF.configuration . waitUntilBound

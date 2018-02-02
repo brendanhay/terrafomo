@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Grafana.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -36,47 +33,49 @@ module Terrafomo.Grafana.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAccessMode (..)
-    , HasBasicAuthEnabled (..)
-    , HasBasicAuthPassword (..)
-    , HasBasicAuthUsername (..)
-    , HasConfigJson (..)
-    , HasDatabaseName (..)
-    , HasIsDefault (..)
-    , HasJsonData (..)
-    , HasName (..)
-    , HasPassword (..)
-    , HasSecureJsonData (..)
-    , HasSettings (..)
-    , HasType' (..)
-    , HasUrl (..)
-    , HasUsername (..)
+    , P.HasAccessMode (..)
+    , P.HasBasicAuthEnabled (..)
+    , P.HasBasicAuthPassword (..)
+    , P.HasBasicAuthUsername (..)
+    , P.HasConfigJson (..)
+    , P.HasDatabaseName (..)
+    , P.HasIsDefault (..)
+    , P.HasJsonData (..)
+    , P.HasName (..)
+    , P.HasPassword (..)
+    , P.HasSecureJsonData (..)
+    , P.HasSettings (..)
+    , P.HasType' (..)
+    , P.HasUrl (..)
+    , P.HasUsername (..)
 
     -- ** Computed Attributes
-    , HasComputedId (..)
-    , HasComputedSlug (..)
+    , P.HasComputedId (..)
+    , P.HasComputedSlug (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                  as TF
-import qualified GHC.Base                   as TF
-import qualified Numeric.Natural            as TF
-import qualified Terrafomo.Attribute        as TF
-import qualified Terrafomo.Grafana.Provider as TF
-import qualified Terrafomo.Grafana.Types    as TF
-import qualified Terrafomo.HCL              as TF
-import qualified Terrafomo.IP               as TF
-import qualified Terrafomo.Meta             as TF
-import qualified Terrafomo.Name             as TF
-import qualified Terrafomo.Resource         as TF
-import qualified Terrafomo.Resource         as TF
+import qualified Data.Word                  as P
+import qualified GHC.Base                   as P
+import qualified Numeric.Natural            as P
+import qualified Terrafomo.Grafana.Lens     as P
+import qualified Terrafomo.Grafana.Provider as P
+import           Terrafomo.Grafana.Types    as P
+import qualified Terrafomo.IP               as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @grafana_alert_notification@ Grafana resource.
 
@@ -102,29 +101,29 @@ instance TF.ToHCL (AlertNotificationResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasIsDefault (AlertNotificationResource s) s Text where
+instance P.HasIsDefault (AlertNotificationResource s) s Text where
     isDefault =
         lens (_is_default :: AlertNotificationResource s -> TF.Attribute s Text)
             (\s a -> s { _is_default = a } :: AlertNotificationResource s)
 
-instance HasName (AlertNotificationResource s) s Text where
+instance P.HasName (AlertNotificationResource s) s Text where
     name =
         lens (_name :: AlertNotificationResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AlertNotificationResource s)
 
-instance HasSettings (AlertNotificationResource s) s Text where
+instance P.HasSettings (AlertNotificationResource s) s Text where
     settings =
         lens (_settings :: AlertNotificationResource s -> TF.Attribute s Text)
             (\s a -> s { _settings = a } :: AlertNotificationResource s)
 
-instance HasType' (AlertNotificationResource s) s Text where
+instance P.HasType' (AlertNotificationResource s) s Text where
     type' =
         lens (_type' :: AlertNotificationResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: AlertNotificationResource s)
 
-instance HasComputedId (AlertNotificationResource s) Text
+instance P.HasComputedId (AlertNotificationResource s) Text
 
-alertNotificationResource :: TF.Resource TF.Grafana (AlertNotificationResource s)
+alertNotificationResource :: TF.Resource P.Grafana (AlertNotificationResource s)
 alertNotificationResource =
     TF.newResource "grafana_alert_notification" $
         AlertNotificationResource {
@@ -148,14 +147,14 @@ instance TF.ToHCL (DashboardResource s) where
         [ TF.attribute "config_json" _config_json
         ]
 
-instance HasConfigJson (DashboardResource s) s Text where
+instance P.HasConfigJson (DashboardResource s) s Text where
     configJson =
         lens (_config_json :: DashboardResource s -> TF.Attribute s Text)
             (\s a -> s { _config_json = a } :: DashboardResource s)
 
-instance HasComputedSlug (DashboardResource s) Text
+instance P.HasComputedSlug (DashboardResource s) Text
 
-dashboardResource :: TF.Resource TF.Grafana (DashboardResource s)
+dashboardResource :: TF.Resource P.Grafana (DashboardResource s)
 dashboardResource =
     TF.newResource "grafana_dashboard" $
         DashboardResource {
@@ -213,74 +212,74 @@ instance TF.ToHCL (DataSourceResource s) where
         , TF.attribute "username" _username
         ]
 
-instance HasAccessMode (DataSourceResource s) s Text where
+instance P.HasAccessMode (DataSourceResource s) s Text where
     accessMode =
         lens (_access_mode :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _access_mode = a } :: DataSourceResource s)
 
-instance HasBasicAuthEnabled (DataSourceResource s) s Text where
+instance P.HasBasicAuthEnabled (DataSourceResource s) s Text where
     basicAuthEnabled =
         lens (_basic_auth_enabled :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _basic_auth_enabled = a } :: DataSourceResource s)
 
-instance HasBasicAuthPassword (DataSourceResource s) s Text where
+instance P.HasBasicAuthPassword (DataSourceResource s) s Text where
     basicAuthPassword =
         lens (_basic_auth_password :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _basic_auth_password = a } :: DataSourceResource s)
 
-instance HasBasicAuthUsername (DataSourceResource s) s Text where
+instance P.HasBasicAuthUsername (DataSourceResource s) s Text where
     basicAuthUsername =
         lens (_basic_auth_username :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _basic_auth_username = a } :: DataSourceResource s)
 
-instance HasDatabaseName (DataSourceResource s) s Text where
+instance P.HasDatabaseName (DataSourceResource s) s Text where
     databaseName =
         lens (_database_name :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _database_name = a } :: DataSourceResource s)
 
-instance HasIsDefault (DataSourceResource s) s Text where
+instance P.HasIsDefault (DataSourceResource s) s Text where
     isDefault =
         lens (_is_default :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _is_default = a } :: DataSourceResource s)
 
-instance HasJsonData (DataSourceResource s) s Text where
+instance P.HasJsonData (DataSourceResource s) s Text where
     jsonData =
         lens (_json_data :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _json_data = a } :: DataSourceResource s)
 
-instance HasName (DataSourceResource s) s Text where
+instance P.HasName (DataSourceResource s) s Text where
     name =
         lens (_name :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DataSourceResource s)
 
-instance HasPassword (DataSourceResource s) s Text where
+instance P.HasPassword (DataSourceResource s) s Text where
     password =
         lens (_password :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: DataSourceResource s)
 
-instance HasSecureJsonData (DataSourceResource s) s Text where
+instance P.HasSecureJsonData (DataSourceResource s) s Text where
     secureJsonData =
         lens (_secure_json_data :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _secure_json_data = a } :: DataSourceResource s)
 
-instance HasType' (DataSourceResource s) s Text where
+instance P.HasType' (DataSourceResource s) s Text where
     type' =
         lens (_type' :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: DataSourceResource s)
 
-instance HasUrl (DataSourceResource s) s Text where
+instance P.HasUrl (DataSourceResource s) s Text where
     url =
         lens (_url :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _url = a } :: DataSourceResource s)
 
-instance HasUsername (DataSourceResource s) s Text where
+instance P.HasUsername (DataSourceResource s) s Text where
     username =
         lens (_username :: DataSourceResource s -> TF.Attribute s Text)
             (\s a -> s { _username = a } :: DataSourceResource s)
 
-instance HasComputedId (DataSourceResource s) Text
+instance P.HasComputedId (DataSourceResource s) Text
 
-dataSourceResource :: TF.Resource TF.Grafana (DataSourceResource s)
+dataSourceResource :: TF.Resource P.Grafana (DataSourceResource s)
 dataSourceResource =
     TF.newResource "grafana_data_source" $
         DataSourceResource {
@@ -298,105 +297,3 @@ dataSourceResource =
             , _url = TF.Nil
             , _username = TF.Nil
             }
-
-class HasAccessMode a s b | a -> s b where
-    accessMode :: Lens' a (TF.Attribute s b)
-
-instance HasAccessMode a s b => HasAccessMode (TF.Resource p a) s b where
-    accessMode = TF.configuration . accessMode
-
-class HasBasicAuthEnabled a s b | a -> s b where
-    basicAuthEnabled :: Lens' a (TF.Attribute s b)
-
-instance HasBasicAuthEnabled a s b => HasBasicAuthEnabled (TF.Resource p a) s b where
-    basicAuthEnabled = TF.configuration . basicAuthEnabled
-
-class HasBasicAuthPassword a s b | a -> s b where
-    basicAuthPassword :: Lens' a (TF.Attribute s b)
-
-instance HasBasicAuthPassword a s b => HasBasicAuthPassword (TF.Resource p a) s b where
-    basicAuthPassword = TF.configuration . basicAuthPassword
-
-class HasBasicAuthUsername a s b | a -> s b where
-    basicAuthUsername :: Lens' a (TF.Attribute s b)
-
-instance HasBasicAuthUsername a s b => HasBasicAuthUsername (TF.Resource p a) s b where
-    basicAuthUsername = TF.configuration . basicAuthUsername
-
-class HasConfigJson a s b | a -> s b where
-    configJson :: Lens' a (TF.Attribute s b)
-
-instance HasConfigJson a s b => HasConfigJson (TF.Resource p a) s b where
-    configJson = TF.configuration . configJson
-
-class HasDatabaseName a s b | a -> s b where
-    databaseName :: Lens' a (TF.Attribute s b)
-
-instance HasDatabaseName a s b => HasDatabaseName (TF.Resource p a) s b where
-    databaseName = TF.configuration . databaseName
-
-class HasIsDefault a s b | a -> s b where
-    isDefault :: Lens' a (TF.Attribute s b)
-
-instance HasIsDefault a s b => HasIsDefault (TF.Resource p a) s b where
-    isDefault = TF.configuration . isDefault
-
-class HasJsonData a s b | a -> s b where
-    jsonData :: Lens' a (TF.Attribute s b)
-
-instance HasJsonData a s b => HasJsonData (TF.Resource p a) s b where
-    jsonData = TF.configuration . jsonData
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
-
-instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
-    password = TF.configuration . password
-
-class HasSecureJsonData a s b | a -> s b where
-    secureJsonData :: Lens' a (TF.Attribute s b)
-
-instance HasSecureJsonData a s b => HasSecureJsonData (TF.Resource p a) s b where
-    secureJsonData = TF.configuration . secureJsonData
-
-class HasSettings a s b | a -> s b where
-    settings :: Lens' a (TF.Attribute s b)
-
-instance HasSettings a s b => HasSettings (TF.Resource p a) s b where
-    settings = TF.configuration . settings
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasUrl a s b | a -> s b where
-    url :: Lens' a (TF.Attribute s b)
-
-instance HasUrl a s b => HasUrl (TF.Resource p a) s b where
-    url = TF.configuration . url
-
-class HasUsername a s b | a -> s b where
-    username :: Lens' a (TF.Attribute s b)
-
-instance HasUsername a s b => HasUsername (TF.Resource p a) s b where
-    username = TF.configuration . username
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedSlug a b | a -> b where
-    computedSlug
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSlug =
-        to (\x -> TF.Computed (TF.referenceKey x) "slug")

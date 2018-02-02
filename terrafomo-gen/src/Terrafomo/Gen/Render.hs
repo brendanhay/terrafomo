@@ -42,6 +42,7 @@ data Templates a = Templates
     , schemaTemplate   :: !a
     , mainTemplate     :: !a
     , typesTemplate    :: !a
+    , lensTemplate     :: !a
     } deriving (Show, Functor, Foldable, Traversable)
 
 package
@@ -86,6 +87,7 @@ types tmpls p =
      in second (ns,) $ render (typesTemplate tmpls)
         [ "namespace" .= ns
         , "provider"  .= p
+        , "imports"   .= [NS.lenses p]
         ]
 
 provider
@@ -98,10 +100,22 @@ provider tmpls p =
         [ "namespace" .= ns
         , "provider"  .= p
         , "schema"    .= providerDatatype p
-        , "imports"   .=
-            ( NS.types p
-            : []
-            )
+        , "imports"   .= [NS.types p]
+        ]
+
+lenses
+    :: Templates EDE.Template
+    -> Provider (Maybe a)
+    -> [Schema]
+    -> Either Text (NS, LText.Text)
+lenses tmpls p xs =
+    let ns            = NS.provider p <> "Lens"
+        (args, attrs) = getClasses xs
+     in second (ns,) $ render (lensTemplate tmpls)
+        [ "namespace"        .= ns
+        , "provider"         .= p
+        , "argumentClasses"  .= args
+        , "attributeClasses" .= attrs
         ]
 
 schemas
@@ -111,20 +125,19 @@ schemas
     -> [Schema]
     -> Either Text (NS, LText.Text)
 schemas tmpls p typ xs =
-    let ns                        = NS.schemaType p typ
-        (argClasses, attrClasses) = getClasses xs
+    let ns            = NS.schemaType p typ
+        (args, attrs) = getClasses xs
      in second (ns,) $ render (schemaTemplate tmpls)
         [ "namespace"        .= ns
         , "provider"         .= p
         , "type"             .= typ
         , "schemas"          .= createMap (getTypeName typ) xs
-        , "argumentClasses"  .= argClasses
-        , "attributeClasses" .= attrClasses
+        , "argumentClasses"  .= args
+        , "attributeClasses" .= attrs
+        , "typesNamespace"   .= NS.types p
         , "imports"          .=
-            ( NS.types p
+            ( NS.lenses p
             : [NS.provider p <> "Provider" | isJust (providerDatatype p)]
-           ++ ["Terrafomo.Resource"        | typ == Resource]
-           ++ ["Terrafomo.DataSource"      | typ == DataSource]
             )
         ]
 

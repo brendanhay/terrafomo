@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.LogicMonitor.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -36,40 +33,42 @@ module Terrafomo.LogicMonitor.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAppliesTo (..)
-    , HasCollector (..)
-    , HasDescription (..)
-    , HasDisableAlerting (..)
-    , HasDisplayName (..)
-    , HasHostgroupId (..)
-    , HasIpAddr (..)
-    , HasName (..)
-    , HasParentId (..)
-    , HasProperties (..)
+    , P.HasAppliesTo (..)
+    , P.HasCollector (..)
+    , P.HasDescription (..)
+    , P.HasDisableAlerting (..)
+    , P.HasDisplayName (..)
+    , P.HasHostgroupId (..)
+    , P.HasIpAddr (..)
+    , P.HasName (..)
+    , P.HasParentId (..)
+    , P.HasProperties (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                       as TF
-import qualified GHC.Base                        as TF
-import qualified Numeric.Natural                 as TF
-import qualified Terrafomo.Attribute             as TF
-import qualified Terrafomo.HCL                   as TF
-import qualified Terrafomo.IP                    as TF
-import qualified Terrafomo.LogicMonitor.Provider as TF
-import qualified Terrafomo.LogicMonitor.Types    as TF
-import qualified Terrafomo.Meta                  as TF
-import qualified Terrafomo.Name                  as TF
-import qualified Terrafomo.Resource              as TF
-import qualified Terrafomo.Resource              as TF
+import qualified Data.Word                       as P
+import qualified GHC.Base                        as P
+import qualified Numeric.Natural                 as P
+import qualified Terrafomo.IP                    as P
+import qualified Terrafomo.LogicMonitor.Lens     as P
+import qualified Terrafomo.LogicMonitor.Provider as P
+import           Terrafomo.LogicMonitor.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @logicmonitor_collector_group@ LogicMonitor resource.
 
@@ -89,17 +88,17 @@ instance TF.ToHCL (CollectorGroupResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDescription (CollectorGroupResource s) s Text where
+instance P.HasDescription (CollectorGroupResource s) s Text where
     description =
         lens (_description :: CollectorGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: CollectorGroupResource s)
 
-instance HasName (CollectorGroupResource s) s Text where
+instance P.HasName (CollectorGroupResource s) s Text where
     name =
         lens (_name :: CollectorGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CollectorGroupResource s)
 
-collectorGroupResource :: TF.Resource TF.LogicMonitor (CollectorGroupResource s)
+collectorGroupResource :: TF.Resource P.LogicMonitor (CollectorGroupResource s)
 collectorGroupResource =
     TF.newResource "logicmonitor_collector_group" $
         CollectorGroupResource {
@@ -137,37 +136,37 @@ instance TF.ToHCL (DeviceGroupResource s) where
         , TF.attribute "properties" _properties
         ]
 
-instance HasAppliesTo (DeviceGroupResource s) s Text where
+instance P.HasAppliesTo (DeviceGroupResource s) s Text where
     appliesTo =
         lens (_applies_to :: DeviceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
 
-instance HasDescription (DeviceGroupResource s) s Text where
+instance P.HasDescription (DeviceGroupResource s) s Text where
     description =
         lens (_description :: DeviceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: DeviceGroupResource s)
 
-instance HasDisableAlerting (DeviceGroupResource s) s Text where
+instance P.HasDisableAlerting (DeviceGroupResource s) s Text where
     disableAlerting =
         lens (_disable_alerting :: DeviceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
 
-instance HasName (DeviceGroupResource s) s Text where
+instance P.HasName (DeviceGroupResource s) s Text where
     name =
         lens (_name :: DeviceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DeviceGroupResource s)
 
-instance HasParentId (DeviceGroupResource s) s Text where
+instance P.HasParentId (DeviceGroupResource s) s Text where
     parentId =
         lens (_parent_id :: DeviceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
 
-instance HasProperties (DeviceGroupResource s) s Text where
+instance P.HasProperties (DeviceGroupResource s) s Text where
     properties =
         lens (_properties :: DeviceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _properties = a } :: DeviceGroupResource s)
 
-deviceGroupResource :: TF.Resource TF.LogicMonitor (DeviceGroupResource s)
+deviceGroupResource :: TF.Resource P.LogicMonitor (DeviceGroupResource s)
 deviceGroupResource =
     TF.newResource "logicmonitor_device_group" $
         DeviceGroupResource {
@@ -209,37 +208,37 @@ instance TF.ToHCL (DeviceResource s) where
         , TF.attribute "properties" _properties
         ]
 
-instance HasCollector (DeviceResource s) s Text where
+instance P.HasCollector (DeviceResource s) s Text where
     collector =
         lens (_collector :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _collector = a } :: DeviceResource s)
 
-instance HasDisableAlerting (DeviceResource s) s Text where
+instance P.HasDisableAlerting (DeviceResource s) s Text where
     disableAlerting =
         lens (_disable_alerting :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _disable_alerting = a } :: DeviceResource s)
 
-instance HasDisplayName (DeviceResource s) s Text where
+instance P.HasDisplayName (DeviceResource s) s Text where
     displayName =
         lens (_display_name :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _display_name = a } :: DeviceResource s)
 
-instance HasHostgroupId (DeviceResource s) s Text where
+instance P.HasHostgroupId (DeviceResource s) s Text where
     hostgroupId =
         lens (_hostgroup_id :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
 
-instance HasIpAddr (DeviceResource s) s Text where
+instance P.HasIpAddr (DeviceResource s) s Text where
     ipAddr =
         lens (_ip_addr :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_addr = a } :: DeviceResource s)
 
-instance HasProperties (DeviceResource s) s Text where
+instance P.HasProperties (DeviceResource s) s Text where
     properties =
         lens (_properties :: DeviceResource s -> TF.Attribute s Text)
             (\s a -> s { _properties = a } :: DeviceResource s)
 
-deviceResource :: TF.Resource TF.LogicMonitor (DeviceResource s)
+deviceResource :: TF.Resource P.LogicMonitor (DeviceResource s)
 deviceResource =
     TF.newResource "logicmonitor_device" $
         DeviceResource {
@@ -250,63 +249,3 @@ deviceResource =
             , _ip_addr = TF.Nil
             , _properties = TF.Nil
             }
-
-class HasAppliesTo a s b | a -> s b where
-    appliesTo :: Lens' a (TF.Attribute s b)
-
-instance HasAppliesTo a s b => HasAppliesTo (TF.Resource p a) s b where
-    appliesTo = TF.configuration . appliesTo
-
-class HasCollector a s b | a -> s b where
-    collector :: Lens' a (TF.Attribute s b)
-
-instance HasCollector a s b => HasCollector (TF.Resource p a) s b where
-    collector = TF.configuration . collector
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasDisableAlerting a s b | a -> s b where
-    disableAlerting :: Lens' a (TF.Attribute s b)
-
-instance HasDisableAlerting a s b => HasDisableAlerting (TF.Resource p a) s b where
-    disableAlerting = TF.configuration . disableAlerting
-
-class HasDisplayName a s b | a -> s b where
-    displayName :: Lens' a (TF.Attribute s b)
-
-instance HasDisplayName a s b => HasDisplayName (TF.Resource p a) s b where
-    displayName = TF.configuration . displayName
-
-class HasHostgroupId a s b | a -> s b where
-    hostgroupId :: Lens' a (TF.Attribute s b)
-
-instance HasHostgroupId a s b => HasHostgroupId (TF.Resource p a) s b where
-    hostgroupId = TF.configuration . hostgroupId
-
-class HasIpAddr a s b | a -> s b where
-    ipAddr :: Lens' a (TF.Attribute s b)
-
-instance HasIpAddr a s b => HasIpAddr (TF.Resource p a) s b where
-    ipAddr = TF.configuration . ipAddr
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasParentId a s b | a -> s b where
-    parentId :: Lens' a (TF.Attribute s b)
-
-instance HasParentId a s b => HasParentId (TF.Resource p a) s b where
-    parentId = TF.configuration . parentId
-
-class HasProperties a s b | a -> s b where
-    properties :: Lens' a (TF.Attribute s b)
-
-instance HasProperties a s b => HasProperties (TF.Resource p a) s b where
-    properties = TF.configuration . properties

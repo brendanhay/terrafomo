@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.RabbitMQ.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -48,44 +45,46 @@ module Terrafomo.RabbitMQ.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasArguments (..)
-    , HasDestination (..)
-    , HasDestinationType (..)
-    , HasName (..)
-    , HasPassword (..)
-    , HasPermissions (..)
-    , HasPolicy (..)
-    , HasRoutingKey (..)
-    , HasSettings (..)
-    , HasSource (..)
-    , HasTags (..)
-    , HasUser (..)
-    , HasVhost (..)
+    , P.HasArguments (..)
+    , P.HasDestination (..)
+    , P.HasDestinationType (..)
+    , P.HasName (..)
+    , P.HasPassword (..)
+    , P.HasPermissions (..)
+    , P.HasPolicy (..)
+    , P.HasRoutingKey (..)
+    , P.HasSettings (..)
+    , P.HasSource (..)
+    , P.HasTags (..)
+    , P.HasUser (..)
+    , P.HasVhost (..)
 
     -- ** Computed Attributes
-    , HasComputedPropertiesKey (..)
+    , P.HasComputedPropertiesKey (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                   as TF
-import qualified GHC.Base                    as TF
-import qualified Numeric.Natural             as TF
-import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.IP                as TF
-import qualified Terrafomo.Meta              as TF
-import qualified Terrafomo.Name              as TF
-import qualified Terrafomo.RabbitMQ.Provider as TF
-import qualified Terrafomo.RabbitMQ.Types    as TF
-import qualified Terrafomo.Resource          as TF
-import qualified Terrafomo.Resource          as TF
+import qualified Data.Word                   as P
+import qualified GHC.Base                    as P
+import qualified Numeric.Natural             as P
+import qualified Terrafomo.IP                as P
+import qualified Terrafomo.RabbitMQ.Lens     as P
+import qualified Terrafomo.RabbitMQ.Provider as P
+import           Terrafomo.RabbitMQ.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @rabbitmq_binding@ RabbitMQ resource.
 
@@ -117,39 +116,39 @@ instance TF.ToHCL (BindingResource s) where
         , TF.attribute "vhost" _vhost
         ]
 
-instance HasArguments (BindingResource s) s Text where
+instance P.HasArguments (BindingResource s) s Text where
     arguments =
         lens (_arguments :: BindingResource s -> TF.Attribute s Text)
             (\s a -> s { _arguments = a } :: BindingResource s)
 
-instance HasDestination (BindingResource s) s Text where
+instance P.HasDestination (BindingResource s) s Text where
     destination =
         lens (_destination :: BindingResource s -> TF.Attribute s Text)
             (\s a -> s { _destination = a } :: BindingResource s)
 
-instance HasDestinationType (BindingResource s) s Text where
+instance P.HasDestinationType (BindingResource s) s Text where
     destinationType =
         lens (_destination_type :: BindingResource s -> TF.Attribute s Text)
             (\s a -> s { _destination_type = a } :: BindingResource s)
 
-instance HasRoutingKey (BindingResource s) s Text where
+instance P.HasRoutingKey (BindingResource s) s Text where
     routingKey =
         lens (_routing_key :: BindingResource s -> TF.Attribute s Text)
             (\s a -> s { _routing_key = a } :: BindingResource s)
 
-instance HasSource (BindingResource s) s Text where
+instance P.HasSource (BindingResource s) s Text where
     source =
         lens (_source :: BindingResource s -> TF.Attribute s Text)
             (\s a -> s { _source = a } :: BindingResource s)
 
-instance HasVhost (BindingResource s) s Text where
+instance P.HasVhost (BindingResource s) s Text where
     vhost =
         lens (_vhost :: BindingResource s -> TF.Attribute s Text)
             (\s a -> s { _vhost = a } :: BindingResource s)
 
-instance HasComputedPropertiesKey (BindingResource s) Text
+instance P.HasComputedPropertiesKey (BindingResource s) Text
 
-bindingResource :: TF.Resource TF.RabbitMQ (BindingResource s)
+bindingResource :: TF.Resource P.RabbitMQ (BindingResource s)
 bindingResource =
     TF.newResource "rabbitmq_binding" $
         BindingResource {
@@ -181,22 +180,22 @@ instance TF.ToHCL (ExchangeResource s) where
         , TF.attribute "vhost" _vhost
         ]
 
-instance HasName (ExchangeResource s) s Text where
+instance P.HasName (ExchangeResource s) s Text where
     name =
         lens (_name :: ExchangeResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ExchangeResource s)
 
-instance HasSettings (ExchangeResource s) s Text where
+instance P.HasSettings (ExchangeResource s) s Text where
     settings =
         lens (_settings :: ExchangeResource s -> TF.Attribute s Text)
             (\s a -> s { _settings = a } :: ExchangeResource s)
 
-instance HasVhost (ExchangeResource s) s Text where
+instance P.HasVhost (ExchangeResource s) s Text where
     vhost =
         lens (_vhost :: ExchangeResource s -> TF.Attribute s Text)
             (\s a -> s { _vhost = a } :: ExchangeResource s)
 
-exchangeResource :: TF.Resource TF.RabbitMQ (ExchangeResource s)
+exchangeResource :: TF.Resource P.RabbitMQ (ExchangeResource s)
 exchangeResource =
     TF.newResource "rabbitmq_exchange" $
         ExchangeResource {
@@ -226,22 +225,22 @@ instance TF.ToHCL (PermissionsResource s) where
         , TF.attribute "vhost" _vhost
         ]
 
-instance HasPermissions (PermissionsResource s) s Text where
+instance P.HasPermissions (PermissionsResource s) s Text where
     permissions =
         lens (_permissions :: PermissionsResource s -> TF.Attribute s Text)
             (\s a -> s { _permissions = a } :: PermissionsResource s)
 
-instance HasUser (PermissionsResource s) s Text where
+instance P.HasUser (PermissionsResource s) s Text where
     user =
         lens (_user :: PermissionsResource s -> TF.Attribute s Text)
             (\s a -> s { _user = a } :: PermissionsResource s)
 
-instance HasVhost (PermissionsResource s) s Text where
+instance P.HasVhost (PermissionsResource s) s Text where
     vhost =
         lens (_vhost :: PermissionsResource s -> TF.Attribute s Text)
             (\s a -> s { _vhost = a } :: PermissionsResource s)
 
-permissionsResource :: TF.Resource TF.RabbitMQ (PermissionsResource s)
+permissionsResource :: TF.Resource P.RabbitMQ (PermissionsResource s)
 permissionsResource =
     TF.newResource "rabbitmq_permissions" $
         PermissionsResource {
@@ -271,22 +270,22 @@ instance TF.ToHCL (PolicyResource s) where
         , TF.attribute "vhost" _vhost
         ]
 
-instance HasName (PolicyResource s) s Text where
+instance P.HasName (PolicyResource s) s Text where
     name =
         lens (_name :: PolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PolicyResource s)
 
-instance HasPolicy (PolicyResource s) s Text where
+instance P.HasPolicy (PolicyResource s) s Text where
     policy =
         lens (_policy :: PolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _policy = a } :: PolicyResource s)
 
-instance HasVhost (PolicyResource s) s Text where
+instance P.HasVhost (PolicyResource s) s Text where
     vhost =
         lens (_vhost :: PolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _vhost = a } :: PolicyResource s)
 
-policyResource :: TF.Resource TF.RabbitMQ (PolicyResource s)
+policyResource :: TF.Resource P.RabbitMQ (PolicyResource s)
 policyResource =
     TF.newResource "rabbitmq_policy" $
         PolicyResource {
@@ -315,22 +314,22 @@ instance TF.ToHCL (QueueResource s) where
         , TF.attribute "vhost" _vhost
         ]
 
-instance HasName (QueueResource s) s Text where
+instance P.HasName (QueueResource s) s Text where
     name =
         lens (_name :: QueueResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: QueueResource s)
 
-instance HasSettings (QueueResource s) s Text where
+instance P.HasSettings (QueueResource s) s Text where
     settings =
         lens (_settings :: QueueResource s -> TF.Attribute s Text)
             (\s a -> s { _settings = a } :: QueueResource s)
 
-instance HasVhost (QueueResource s) s Text where
+instance P.HasVhost (QueueResource s) s Text where
     vhost =
         lens (_vhost :: QueueResource s -> TF.Attribute s Text)
             (\s a -> s { _vhost = a } :: QueueResource s)
 
-queueResource :: TF.Resource TF.RabbitMQ (QueueResource s)
+queueResource :: TF.Resource P.RabbitMQ (QueueResource s)
 queueResource =
     TF.newResource "rabbitmq_queue" $
         QueueResource {
@@ -361,22 +360,22 @@ instance TF.ToHCL (UserResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasName (UserResource s) s Text where
+instance P.HasName (UserResource s) s Text where
     name =
         lens (_name :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: UserResource s)
 
-instance HasPassword (UserResource s) s Text where
+instance P.HasPassword (UserResource s) s Text where
     password =
         lens (_password :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: UserResource s)
 
-instance HasTags (UserResource s) s Text where
+instance P.HasTags (UserResource s) s Text where
     tags =
         lens (_tags :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: UserResource s)
 
-userResource :: TF.Resource TF.RabbitMQ (UserResource s)
+userResource :: TF.Resource P.RabbitMQ (UserResource s)
 userResource =
     TF.newResource "rabbitmq_user" $
         UserResource {
@@ -399,98 +398,14 @@ instance TF.ToHCL (VhostResource s) where
         [ TF.attribute "name" _name
         ]
 
-instance HasName (VhostResource s) s Text where
+instance P.HasName (VhostResource s) s Text where
     name =
         lens (_name :: VhostResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VhostResource s)
 
-vhostResource :: TF.Resource TF.RabbitMQ (VhostResource s)
+vhostResource :: TF.Resource P.RabbitMQ (VhostResource s)
 vhostResource =
     TF.newResource "rabbitmq_vhost" $
         VhostResource {
               _name = TF.Nil
             }
-
-class HasArguments a s b | a -> s b where
-    arguments :: Lens' a (TF.Attribute s b)
-
-instance HasArguments a s b => HasArguments (TF.Resource p a) s b where
-    arguments = TF.configuration . arguments
-
-class HasDestination a s b | a -> s b where
-    destination :: Lens' a (TF.Attribute s b)
-
-instance HasDestination a s b => HasDestination (TF.Resource p a) s b where
-    destination = TF.configuration . destination
-
-class HasDestinationType a s b | a -> s b where
-    destinationType :: Lens' a (TF.Attribute s b)
-
-instance HasDestinationType a s b => HasDestinationType (TF.Resource p a) s b where
-    destinationType = TF.configuration . destinationType
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
-
-instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
-    password = TF.configuration . password
-
-class HasPermissions a s b | a -> s b where
-    permissions :: Lens' a (TF.Attribute s b)
-
-instance HasPermissions a s b => HasPermissions (TF.Resource p a) s b where
-    permissions = TF.configuration . permissions
-
-class HasPolicy a s b | a -> s b where
-    policy :: Lens' a (TF.Attribute s b)
-
-instance HasPolicy a s b => HasPolicy (TF.Resource p a) s b where
-    policy = TF.configuration . policy
-
-class HasRoutingKey a s b | a -> s b where
-    routingKey :: Lens' a (TF.Attribute s b)
-
-instance HasRoutingKey a s b => HasRoutingKey (TF.Resource p a) s b where
-    routingKey = TF.configuration . routingKey
-
-class HasSettings a s b | a -> s b where
-    settings :: Lens' a (TF.Attribute s b)
-
-instance HasSettings a s b => HasSettings (TF.Resource p a) s b where
-    settings = TF.configuration . settings
-
-class HasSource a s b | a -> s b where
-    source :: Lens' a (TF.Attribute s b)
-
-instance HasSource a s b => HasSource (TF.Resource p a) s b where
-    source = TF.configuration . source
-
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attribute s b)
-
-instance HasTags a s b => HasTags (TF.Resource p a) s b where
-    tags = TF.configuration . tags
-
-class HasUser a s b | a -> s b where
-    user :: Lens' a (TF.Attribute s b)
-
-instance HasUser a s b => HasUser (TF.Resource p a) s b where
-    user = TF.configuration . user
-
-class HasVhost a s b | a -> s b where
-    vhost :: Lens' a (TF.Attribute s b)
-
-instance HasVhost a s b => HasVhost (TF.Resource p a) s b where
-    vhost = TF.configuration . vhost
-
-class HasComputedPropertiesKey a b | a -> b where
-    computedPropertiesKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPropertiesKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "properties_key")

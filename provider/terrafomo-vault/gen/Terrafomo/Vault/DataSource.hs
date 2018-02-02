@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Vault.DataSource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -33,41 +30,43 @@ module Terrafomo.Vault.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasBackend (..)
-    , HasPath (..)
-    , HasRole (..)
-    , HasType' (..)
+    , P.HasBackend (..)
+    , P.HasPath (..)
+    , P.HasRole (..)
+    , P.HasType' (..)
 
     -- ** Computed Attributes
-    , HasComputedAccessKey (..)
-    , HasComputedLeaseDuration (..)
-    , HasComputedLeaseId (..)
-    , HasComputedLeaseRenewable (..)
-    , HasComputedLeaseStartTime (..)
-    , HasComputedSecretKey (..)
-    , HasComputedSecurityToken (..)
+    , P.HasComputedAccessKey (..)
+    , P.HasComputedLeaseDuration (..)
+    , P.HasComputedLeaseId (..)
+    , P.HasComputedLeaseRenewable (..)
+    , P.HasComputedLeaseStartTime (..)
+    , P.HasComputedSecretKey (..)
+    , P.HasComputedSecurityToken (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                as TF
-import qualified GHC.Base                 as TF
-import qualified Numeric.Natural          as TF
-import qualified Terrafomo.Attribute      as TF
-import qualified Terrafomo.DataSource     as TF
-import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.IP             as TF
-import qualified Terrafomo.Meta           as TF
-import qualified Terrafomo.Name           as TF
-import qualified Terrafomo.Resource       as TF
-import qualified Terrafomo.Vault.Provider as TF
-import qualified Terrafomo.Vault.Types    as TF
+import qualified Data.Word                as P
+import qualified GHC.Base                 as P
+import qualified Numeric.Natural          as P
+import qualified Terrafomo.IP             as P
+import qualified Terrafomo.Vault.Lens     as P
+import qualified Terrafomo.Vault.Provider as P
+import           Terrafomo.Vault.Types    as P
+
+import qualified Terrafomo.Attribute  as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL        as TF
 
 {- | The @vault_aws_access_credentials@ Vault datasource.
 
@@ -94,36 +93,36 @@ instance TF.ToHCL (AwsAccessCredentialsData s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasBackend (AwsAccessCredentialsData s) s Text where
+instance P.HasBackend (AwsAccessCredentialsData s) s Text where
     backend =
         lens (_backend :: AwsAccessCredentialsData s -> TF.Attribute s Text)
             (\s a -> s { _backend = a } :: AwsAccessCredentialsData s)
 
-instance HasRole (AwsAccessCredentialsData s) s Text where
+instance P.HasRole (AwsAccessCredentialsData s) s Text where
     role =
         lens (_role :: AwsAccessCredentialsData s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: AwsAccessCredentialsData s)
 
-instance HasType' (AwsAccessCredentialsData s) s Text where
+instance P.HasType' (AwsAccessCredentialsData s) s Text where
     type' =
         lens (_type' :: AwsAccessCredentialsData s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
 
-instance HasComputedAccessKey (AwsAccessCredentialsData s) Text
+instance P.HasComputedAccessKey (AwsAccessCredentialsData s) Text
 
-instance HasComputedLeaseDuration (AwsAccessCredentialsData s) Text
+instance P.HasComputedLeaseDuration (AwsAccessCredentialsData s) Text
 
-instance HasComputedLeaseId (AwsAccessCredentialsData s) Text
+instance P.HasComputedLeaseId (AwsAccessCredentialsData s) Text
 
-instance HasComputedLeaseRenewable (AwsAccessCredentialsData s) Text
+instance P.HasComputedLeaseRenewable (AwsAccessCredentialsData s) Text
 
-instance HasComputedLeaseStartTime (AwsAccessCredentialsData s) Text
+instance P.HasComputedLeaseStartTime (AwsAccessCredentialsData s) Text
 
-instance HasComputedSecretKey (AwsAccessCredentialsData s) Text
+instance P.HasComputedSecretKey (AwsAccessCredentialsData s) Text
 
-instance HasComputedSecurityToken (AwsAccessCredentialsData s) Text
+instance P.HasComputedSecurityToken (AwsAccessCredentialsData s) Text
 
-awsAccessCredentialsData :: TF.DataSource TF.Vault (AwsAccessCredentialsData s)
+awsAccessCredentialsData :: TF.DataSource P.Vault (AwsAccessCredentialsData s)
 awsAccessCredentialsData =
     TF.newDataSource "vault_aws_access_credentials" $
         AwsAccessCredentialsData {
@@ -154,80 +153,14 @@ instance TF.ToHCL (GenericSecretData s) where
         [ TF.attribute "path" _path
         ]
 
-instance HasPath (GenericSecretData s) s Text where
+instance P.HasPath (GenericSecretData s) s Text where
     path =
         lens (_path :: GenericSecretData s -> TF.Attribute s Text)
             (\s a -> s { _path = a } :: GenericSecretData s)
 
-genericSecretData :: TF.DataSource TF.Vault (GenericSecretData s)
+genericSecretData :: TF.DataSource P.Vault (GenericSecretData s)
 genericSecretData =
     TF.newDataSource "vault_generic_secret" $
         GenericSecretData {
               _path = TF.Nil
             }
-
-class HasBackend a s b | a -> s b where
-    backend :: Lens' a (TF.Attribute s b)
-
-instance HasBackend a s b => HasBackend (TF.DataSource p a) s b where
-    backend = TF.configuration . backend
-
-class HasPath a s b | a -> s b where
-    path :: Lens' a (TF.Attribute s b)
-
-instance HasPath a s b => HasPath (TF.DataSource p a) s b where
-    path = TF.configuration . path
-
-class HasRole a s b | a -> s b where
-    role :: Lens' a (TF.Attribute s b)
-
-instance HasRole a s b => HasRole (TF.DataSource p a) s b where
-    role = TF.configuration . role
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.DataSource p a) s b where
-    type' = TF.configuration . type'
-
-class HasComputedAccessKey a b | a -> b where
-    computedAccessKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAccessKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "access_key")
-
-class HasComputedLeaseDuration a b | a -> b where
-    computedLeaseDuration
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLeaseDuration =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_duration")
-
-class HasComputedLeaseId a b | a -> b where
-    computedLeaseId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLeaseId =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_id")
-
-class HasComputedLeaseRenewable a b | a -> b where
-    computedLeaseRenewable
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLeaseRenewable =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_renewable")
-
-class HasComputedLeaseStartTime a b | a -> b where
-    computedLeaseStartTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLeaseStartTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_start_time")
-
-class HasComputedSecretKey a b | a -> b where
-    computedSecretKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecretKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secret_key")
-
-class HasComputedSecurityToken a b | a -> b where
-    computedSecurityToken
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecurityToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_token")

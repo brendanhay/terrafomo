@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.OVH.DataSource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -33,38 +30,40 @@ module Terrafomo.OVH.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasProjectId (..)
-    , HasRegion (..)
+    , P.HasProjectId (..)
+    , P.HasRegion (..)
 
     -- ** Computed Attributes
-    , HasComputedContinentCode (..)
-    , HasComputedContinentCode (..)
-    , HasComputedDatacenterLocation (..)
-    , HasComputedDatacenterLocation (..)
-    , HasComputedNames (..)
-    , HasComputedServices (..)
+    , P.HasComputedContinentCode (..)
+    , P.HasComputedContinentCode (..)
+    , P.HasComputedDatacenterLocation (..)
+    , P.HasComputedDatacenterLocation (..)
+    , P.HasComputedNames (..)
+    , P.HasComputedServices (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word              as TF
-import qualified GHC.Base               as TF
-import qualified Numeric.Natural        as TF
-import qualified Terrafomo.Attribute    as TF
-import qualified Terrafomo.DataSource   as TF
-import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.IP           as TF
-import qualified Terrafomo.Meta         as TF
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.OVH.Provider as TF
-import qualified Terrafomo.OVH.Types    as TF
-import qualified Terrafomo.Resource     as TF
+import qualified Data.Word              as P
+import qualified GHC.Base               as P
+import qualified Numeric.Natural        as P
+import qualified Terrafomo.IP           as P
+import qualified Terrafomo.OVH.Lens     as P
+import qualified Terrafomo.OVH.Provider as P
+import           Terrafomo.OVH.Types    as P
+
+import qualified Terrafomo.Attribute  as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL        as TF
 
 {- | The @publiccloud_region@ OVH datasource.
 
@@ -84,27 +83,27 @@ instance TF.ToHCL (RegionData s) where
         , TF.attribute "region" _region
         ]
 
-instance HasProjectId (RegionData s) s Text where
+instance P.HasProjectId (RegionData s) s Text where
     projectId =
         lens (_project_id :: RegionData s -> TF.Attribute s Text)
             (\s a -> s { _project_id = a } :: RegionData s)
 
-instance HasRegion (RegionData s) s Text where
+instance P.HasRegion (RegionData s) s Text where
     region =
         lens (_region :: RegionData s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: RegionData s)
 
-instance HasComputedContinentCode (RegionData s) Text
+instance P.HasComputedContinentCode (RegionData s) Text
 
-instance HasComputedContinentCode (RegionData s) Text
+instance P.HasComputedContinentCode (RegionData s) Text
 
-instance HasComputedDatacenterLocation (RegionData s) Text
+instance P.HasComputedDatacenterLocation (RegionData s) Text
 
-instance HasComputedDatacenterLocation (RegionData s) Text
+instance P.HasComputedDatacenterLocation (RegionData s) Text
 
-instance HasComputedServices (RegionData s) Text
+instance P.HasComputedServices (RegionData s) Text
 
-regionData :: TF.DataSource TF.OVH (RegionData s)
+regionData :: TF.DataSource P.OVH (RegionData s)
 regionData =
     TF.newDataSource "publiccloud_region" $
         RegionData {
@@ -126,64 +125,16 @@ instance TF.ToHCL (RegionsData s) where
         [ TF.attribute "project_id" _project_id
         ]
 
-instance HasProjectId (RegionsData s) s Text where
+instance P.HasProjectId (RegionsData s) s Text where
     projectId =
         lens (_project_id :: RegionsData s -> TF.Attribute s Text)
             (\s a -> s { _project_id = a } :: RegionsData s)
 
-instance HasComputedNames (RegionsData s) Text
+instance P.HasComputedNames (RegionsData s) Text
 
-regionsData :: TF.DataSource TF.OVH (RegionsData s)
+regionsData :: TF.DataSource P.OVH (RegionsData s)
 regionsData =
     TF.newDataSource "publiccloud_regions" $
         RegionsData {
               _project_id = TF.Nil
             }
-
-class HasProjectId a s b | a -> s b where
-    projectId :: Lens' a (TF.Attribute s b)
-
-instance HasProjectId a s b => HasProjectId (TF.DataSource p a) s b where
-    projectId = TF.configuration . projectId
-
-class HasRegion a s b | a -> s b where
-    region :: Lens' a (TF.Attribute s b)
-
-instance HasRegion a s b => HasRegion (TF.DataSource p a) s b where
-    region = TF.configuration . region
-
-class HasComputedContinentCode a b | a -> b where
-    computedContinentCode
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedContinentCode =
-        to (\x -> TF.Computed (TF.referenceKey x) "continentCode")
-
-class HasComputedContinentCode a b | a -> b where
-    computedContinentCode
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedContinentCode =
-        to (\x -> TF.Computed (TF.referenceKey x) "continent_code")
-
-class HasComputedDatacenterLocation a b | a -> b where
-    computedDatacenterLocation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDatacenterLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "datacenterLocation")
-
-class HasComputedDatacenterLocation a b | a -> b where
-    computedDatacenterLocation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDatacenterLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "datacenter_location")
-
-class HasComputedNames a b | a -> b where
-    computedNames
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "names")
-
-class HasComputedServices a b | a -> b where
-    computedServices
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedServices =
-        to (\x -> TF.Computed (TF.referenceKey x) "services")

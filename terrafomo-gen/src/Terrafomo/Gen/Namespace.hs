@@ -49,5 +49,8 @@ provider p = "Terrafomo" <> NS (pure (providerName p))
 types :: Provider a -> NS
 types p = provider p <> "Types"
 
+lenses :: Provider a -> NS
+lenses p = provider p <> "Lens"
+
 schemaType :: Provider a -> SchemaType -> NS
 schemaType p typ = provider p <> fromString (show typ)

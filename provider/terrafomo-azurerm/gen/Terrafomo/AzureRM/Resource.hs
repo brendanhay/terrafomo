@@ -1,22 +1,19 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.AzureRM.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -309,382 +306,384 @@ module Terrafomo.AzureRM.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAccess (..)
-    , HasAccessPolicy (..)
-    , HasAccessTier (..)
-    , HasAccountEncryptionSource (..)
-    , HasAccountKind (..)
-    , HasAccountName (..)
-    , HasAccountReplicationType (..)
-    , HasAccountTier (..)
-    , HasActiveActive (..)
-    , HasAddressPrefix (..)
-    , HasAddressSpace (..)
-    , HasAdminEnabled (..)
-    , HasAdministratorLogin (..)
-    , HasAdministratorLoginPassword (..)
-    , HasAgentPoolProfile (..)
-    , HasAllowClassicOperations (..)
-    , HasAllowForwardedTraffic (..)
-    , HasAllowGatewayTransit (..)
-    , HasAllowVirtualNetworkAccess (..)
-    , HasAppServicePlanId (..)
-    , HasAppSettings (..)
-    , HasApplicationType (..)
-    , HasAssignableScopes (..)
-    , HasAttempts (..)
-    , HasAuthenticationCertificate (..)
-    , HasAuthorizationKey (..)
-    , HasAutoDeleteOnIdle (..)
-    , HasAutoInflateEnabled (..)
-    , HasAvailabilitySetId (..)
-    , HasBackendAddressPool (..)
-    , HasBackendAddressPoolId (..)
-    , HasBackendHttpSettings (..)
-    , HasBackendPort (..)
-    , HasBandwidthInMbps (..)
-    , HasBgpSettings (..)
-    , HasBootDiagnostics (..)
-    , HasCapacity (..)
-    , HasCaptureDescription (..)
-    , HasCertificate (..)
-    , HasCertificatePolicy (..)
-    , HasCharset (..)
-    , HasClientAffinityEnabled (..)
-    , HasCollation (..)
-    , HasConnectionString (..)
-    , HasConsistencyPolicy (..)
-    , HasContainer (..)
-    , HasContainerAccessType (..)
-    , HasContentType (..)
-    , HasContentTypesToCompress (..)
-    , HasCreateMode (..)
-    , HasCreateOption (..)
-    , HasCustomDomain (..)
-    , HasDataDisk (..)
-    , HasDbDtuMax (..)
-    , HasDbDtuMin (..)
-    , HasDeadLetteringOnMessageExpiration (..)
-    , HasDefaultLocalNetworkGatewayId (..)
-    , HasDefaultMessageTtl (..)
-    , HasDeleteDataDisksOnTermination (..)
-    , HasDeleteOsDiskOnTermination (..)
-    , HasDeploymentMode (..)
-    , HasDescription (..)
-    , HasDestinationAddressPrefix (..)
-    , HasDestinationAddressPrefixes (..)
-    , HasDestinationPortRange (..)
-    , HasDestinationPortRanges (..)
-    , HasDiagnosticsProfile (..)
-    , HasDirection (..)
-    , HasDisabledSslProtocols (..)
-    , HasDiskSizeGb (..)
-    , HasDnsConfig (..)
-    , HasDnsServers (..)
-    , HasDtu (..)
-    , HasDuplicateDetectionHistoryTimeWindow (..)
-    , HasEdition (..)
-    , HasElasticPoolName (..)
-    , HasEnableAcceleratedNetworking (..)
-    , HasEnableBatchedOperations (..)
-    , HasEnableBgp (..)
-    , HasEnableBlobEncryption (..)
-    , HasEnableExpress (..)
-    , HasEnableFileEncryption (..)
-    , HasEnableFloatingIp (..)
-    , HasEnableHttpsTrafficOnly (..)
-    , HasEnableIpForwarding (..)
-    , HasEnablePartitioning (..)
-    , HasEnabled (..)
-    , HasEnabledForDeployment (..)
-    , HasEnabledForDiskEncryption (..)
-    , HasEnabledForTemplateDeployment (..)
-    , HasEncryptionSettings (..)
-    , HasEndIp (..)
-    , HasEndIpAddress (..)
-    , HasEndpointLocation (..)
-    , HasEndpointStatus (..)
-    , HasEventhubName (..)
-    , HasExpiryTime (..)
-    , HasExpressRouteCircuitId (..)
-    , HasExtension (..)
-    , HasFailoverPolicy (..)
-    , HasFamily' (..)
-    , HasFrequency (..)
-    , HasFrontendIpConfiguration (..)
-    , HasFrontendIpConfigurationName (..)
-    , HasFrontendPort (..)
-    , HasFrontendPortEnd (..)
-    , HasFrontendPortStart (..)
-    , HasGatewayAddress (..)
-    , HasGatewayIpConfiguration (..)
-    , HasHttpListener (..)
-    , HasIdentity (..)
-    , HasIdleTimeoutInMinutes (..)
-    , HasImageReferenceId (..)
-    , HasInternalDnsNameLabel (..)
-    , HasIntervalInSeconds (..)
-    , HasIpAddressType (..)
-    , HasIpConfiguration (..)
-    , HasIpRangeFilter (..)
-    , HasIsCompressionEnabled (..)
-    , HasIsHttpAllowed (..)
-    , HasIsHttpsAllowed (..)
-    , HasKeyOpts (..)
-    , HasKeySize (..)
-    , HasKeyType (..)
-    , HasKind (..)
-    , HasLicenseType (..)
-    , HasLinuxProfile (..)
-    , HasLoadDistribution (..)
-    , HasLoadbalancerId (..)
-    , HasLocalNetworkGatewayId (..)
-    , HasLocation (..)
-    , HasLockDuration (..)
-    , HasLockLevel (..)
-    , HasLogProgress (..)
-    , HasLogVerbose (..)
-    , HasManaged (..)
-    , HasMasterProfile (..)
-    , HasMaxDeliveryCount (..)
-    , HasMaxSizeBytes (..)
-    , HasMaxSizeInMegabytes (..)
-    , HasMaximumThroughputUnits (..)
-    , HasMessageRetention (..)
-    , HasMetricName (..)
-    , HasMinChildEndpoints (..)
-    , HasMonitorConfig (..)
-    , HasName (..)
-    , HasNamespaceName (..)
-    , HasNetworkInterfaceIds (..)
-    , HasNetworkProfile (..)
-    , HasNetworkSecurityGroupId (..)
-    , HasNetworkSecurityGroupName (..)
-    , HasNextHopInIpAddress (..)
-    , HasNextHopType (..)
-    , HasNumberOfProbes (..)
-    , HasOfferType (..)
-    , HasOrchestrationPlatform (..)
-    , HasOrigin (..)
-    , HasOriginHostHeader (..)
-    , HasOriginPath (..)
-    , HasOsDisk (..)
-    , HasOsProfile (..)
-    , HasOsProfileLinuxConfig (..)
-    , HasOsProfileSecrets (..)
-    , HasOsProfileWindowsConfig (..)
-    , HasOsType (..)
-    , HasOverprovision (..)
-    , HasParallelism (..)
-    , HasPartitionCount (..)
-    , HasPassword (..)
-    , HasPeerVirtualNetworkGatewayId (..)
-    , HasPeeringLocation (..)
-    , HasPermissions (..)
-    , HasPlan (..)
-    , HasPlatformFaultDomainCount (..)
-    , HasPlatformUpdateDomainCount (..)
-    , HasPoolSize (..)
-    , HasPort (..)
-    , HasPrimaryNetworkInterfaceId (..)
-    , HasPrincipalId (..)
-    , HasPriority (..)
-    , HasProbe (..)
-    , HasProbeId (..)
-    , HasProfileName (..)
-    , HasProfileStatus (..)
-    , HasProperties (..)
-    , HasProtocol (..)
-    , HasPublishContentLink (..)
-    , HasPublisher (..)
-    , HasQuerystringCachingBehaviour (..)
-    , HasQuota (..)
-    , HasRecord (..)
-    , HasRecords (..)
-    , HasRedisCacheName (..)
-    , HasRemoteVirtualNetworkId (..)
-    , HasReplicaCount (..)
-    , HasRequestPath (..)
-    , HasRequestRoutingRule (..)
-    , HasRequestedServiceObjectiveId (..)
-    , HasRequestedServiceObjectiveName (..)
-    , HasRequiresDuplicateDetection (..)
-    , HasRequiresSession (..)
-    , HasResourceGroupName (..)
-    , HasResourceId (..)
-    , HasRestorePointInTime (..)
-    , HasRetentionInDays (..)
-    , HasRoleDefinitionId (..)
-    , HasRoute (..)
-    , HasRouteTableId (..)
-    , HasRouteTableName (..)
-    , HasRoutingWeight (..)
-    , HasRunbookType (..)
-    , HasScope (..)
-    , HasSecurityRule (..)
-    , HasServerName (..)
-    , HasServicePrincipal (..)
-    , HasServiceProviderName (..)
-    , HasSharedKey (..)
-    , HasSinglePlacementGroup (..)
-    , HasSiteConfig (..)
-    , HasSize (..)
-    , HasSku (..)
-    , HasSource (..)
-    , HasSourceAddressPrefix (..)
-    , HasSourceAddressPrefixes (..)
-    , HasSourceDatabaseDeletionDate (..)
-    , HasSourceDatabaseId (..)
-    , HasSourcePortRange (..)
-    , HasSourcePortRanges (..)
-    , HasSourceResourceId (..)
-    , HasSourceUri (..)
-    , HasSourceVirtualMachineId (..)
-    , HasSslCertificate (..)
-    , HasStartIp (..)
-    , HasStartIpAddress (..)
-    , HasStartTime (..)
-    , HasStatus (..)
-    , HasStorageAccountId (..)
-    , HasStorageAccountName (..)
-    , HasStorageAccountType (..)
-    , HasStorageConnectionString (..)
-    , HasStorageContainerName (..)
-    , HasStorageDataDisk (..)
-    , HasStorageImageReference (..)
-    , HasStorageMb (..)
-    , HasStorageOsDisk (..)
-    , HasStorageProfileDataDisk (..)
-    , HasStorageProfileImageReference (..)
-    , HasStorageProfileOsDisk (..)
-    , HasSubnet (..)
-    , HasSupportOrdering (..)
-    , HasTTL (..)
-    , HasTags (..)
-    , HasTarget (..)
-    , HasTargetResourceId (..)
-    , HasTemplateBody (..)
-    , HasTenantId (..)
-    , HasTimezone (..)
-    , HasTopicName (..)
-    , HasTrafficRoutingMethod (..)
-    , HasTtl (..)
-    , HasType' (..)
-    , HasUpgradePolicyMode (..)
-    , HasUrlPathMap (..)
-    , HasUseRemoteGateways (..)
-    , HasUseSubdomain (..)
-    , HasUserMetadata (..)
-    , HasUsername (..)
-    , HasValue (..)
-    , HasVaultUri (..)
-    , HasVersion (..)
-    , HasVirtualMachineName (..)
-    , HasVirtualNetworkGatewayId (..)
-    , HasVirtualNetworkName (..)
-    , HasVmSize (..)
-    , HasVpnClientConfiguration (..)
-    , HasVpnType (..)
-    , HasWafConfiguration (..)
-    , HasWeight (..)
-    , HasZoneName (..)
+    , P.HasAccess (..)
+    , P.HasAccessPolicy (..)
+    , P.HasAccessTier (..)
+    , P.HasAccountEncryptionSource (..)
+    , P.HasAccountKind (..)
+    , P.HasAccountName (..)
+    , P.HasAccountReplicationType (..)
+    , P.HasAccountTier (..)
+    , P.HasActiveActive (..)
+    , P.HasAddressPrefix (..)
+    , P.HasAddressSpace (..)
+    , P.HasAdminEnabled (..)
+    , P.HasAdministratorLogin (..)
+    , P.HasAdministratorLoginPassword (..)
+    , P.HasAgentPoolProfile (..)
+    , P.HasAllowClassicOperations (..)
+    , P.HasAllowForwardedTraffic (..)
+    , P.HasAllowGatewayTransit (..)
+    , P.HasAllowVirtualNetworkAccess (..)
+    , P.HasAppServicePlanId (..)
+    , P.HasAppSettings (..)
+    , P.HasApplicationType (..)
+    , P.HasAssignableScopes (..)
+    , P.HasAttempts (..)
+    , P.HasAuthenticationCertificate (..)
+    , P.HasAuthorizationKey (..)
+    , P.HasAutoDeleteOnIdle (..)
+    , P.HasAutoInflateEnabled (..)
+    , P.HasAvailabilitySetId (..)
+    , P.HasBackendAddressPool (..)
+    , P.HasBackendAddressPoolId (..)
+    , P.HasBackendHttpSettings (..)
+    , P.HasBackendPort (..)
+    , P.HasBandwidthInMbps (..)
+    , P.HasBgpSettings (..)
+    , P.HasBootDiagnostics (..)
+    , P.HasCapacity (..)
+    , P.HasCaptureDescription (..)
+    , P.HasCertificate (..)
+    , P.HasCertificatePolicy (..)
+    , P.HasCharset (..)
+    , P.HasClientAffinityEnabled (..)
+    , P.HasCollation (..)
+    , P.HasConnectionString (..)
+    , P.HasConsistencyPolicy (..)
+    , P.HasContainer (..)
+    , P.HasContainerAccessType (..)
+    , P.HasContentType (..)
+    , P.HasContentTypesToCompress (..)
+    , P.HasCreateMode (..)
+    , P.HasCreateOption (..)
+    , P.HasCustomDomain (..)
+    , P.HasDataDisk (..)
+    , P.HasDbDtuMax (..)
+    , P.HasDbDtuMin (..)
+    , P.HasDeadLetteringOnMessageExpiration (..)
+    , P.HasDefaultLocalNetworkGatewayId (..)
+    , P.HasDefaultMessageTtl (..)
+    , P.HasDeleteDataDisksOnTermination (..)
+    , P.HasDeleteOsDiskOnTermination (..)
+    , P.HasDeploymentMode (..)
+    , P.HasDescription (..)
+    , P.HasDestinationAddressPrefix (..)
+    , P.HasDestinationAddressPrefixes (..)
+    , P.HasDestinationPortRange (..)
+    , P.HasDestinationPortRanges (..)
+    , P.HasDiagnosticsProfile (..)
+    , P.HasDirection (..)
+    , P.HasDisabledSslProtocols (..)
+    , P.HasDiskSizeGb (..)
+    , P.HasDnsConfig (..)
+    , P.HasDnsServers (..)
+    , P.HasDtu (..)
+    , P.HasDuplicateDetectionHistoryTimeWindow (..)
+    , P.HasEdition (..)
+    , P.HasElasticPoolName (..)
+    , P.HasEnableAcceleratedNetworking (..)
+    , P.HasEnableBatchedOperations (..)
+    , P.HasEnableBgp (..)
+    , P.HasEnableBlobEncryption (..)
+    , P.HasEnableExpress (..)
+    , P.HasEnableFileEncryption (..)
+    , P.HasEnableFloatingIp (..)
+    , P.HasEnableHttpsTrafficOnly (..)
+    , P.HasEnableIpForwarding (..)
+    , P.HasEnablePartitioning (..)
+    , P.HasEnabled (..)
+    , P.HasEnabledForDeployment (..)
+    , P.HasEnabledForDiskEncryption (..)
+    , P.HasEnabledForTemplateDeployment (..)
+    , P.HasEncryptionSettings (..)
+    , P.HasEndIp (..)
+    , P.HasEndIpAddress (..)
+    , P.HasEndpointLocation (..)
+    , P.HasEndpointStatus (..)
+    , P.HasEventhubName (..)
+    , P.HasExpiryTime (..)
+    , P.HasExpressRouteCircuitId (..)
+    , P.HasExtension (..)
+    , P.HasFailoverPolicy (..)
+    , P.HasFamily' (..)
+    , P.HasFrequency (..)
+    , P.HasFrontendIpConfiguration (..)
+    , P.HasFrontendIpConfigurationName (..)
+    , P.HasFrontendPort (..)
+    , P.HasFrontendPortEnd (..)
+    , P.HasFrontendPortStart (..)
+    , P.HasGatewayAddress (..)
+    , P.HasGatewayIpConfiguration (..)
+    , P.HasHttpListener (..)
+    , P.HasIdentity (..)
+    , P.HasIdleTimeoutInMinutes (..)
+    , P.HasImageReferenceId (..)
+    , P.HasInternalDnsNameLabel (..)
+    , P.HasIntervalInSeconds (..)
+    , P.HasIpAddressType (..)
+    , P.HasIpConfiguration (..)
+    , P.HasIpRangeFilter (..)
+    , P.HasIsCompressionEnabled (..)
+    , P.HasIsHttpAllowed (..)
+    , P.HasIsHttpsAllowed (..)
+    , P.HasKeyOpts (..)
+    , P.HasKeySize (..)
+    , P.HasKeyType (..)
+    , P.HasKind (..)
+    , P.HasLicenseType (..)
+    , P.HasLinuxProfile (..)
+    , P.HasLoadDistribution (..)
+    , P.HasLoadbalancerId (..)
+    , P.HasLocalNetworkGatewayId (..)
+    , P.HasLocation (..)
+    , P.HasLockDuration (..)
+    , P.HasLockLevel (..)
+    , P.HasLogProgress (..)
+    , P.HasLogVerbose (..)
+    , P.HasManaged (..)
+    , P.HasMasterProfile (..)
+    , P.HasMaxDeliveryCount (..)
+    , P.HasMaxSizeBytes (..)
+    , P.HasMaxSizeInMegabytes (..)
+    , P.HasMaximumThroughputUnits (..)
+    , P.HasMessageRetention (..)
+    , P.HasMetricName (..)
+    , P.HasMinChildEndpoints (..)
+    , P.HasMonitorConfig (..)
+    , P.HasName (..)
+    , P.HasNamespaceName (..)
+    , P.HasNetworkInterfaceIds (..)
+    , P.HasNetworkProfile (..)
+    , P.HasNetworkSecurityGroupId (..)
+    , P.HasNetworkSecurityGroupName (..)
+    , P.HasNextHopInIpAddress (..)
+    , P.HasNextHopType (..)
+    , P.HasNumberOfProbes (..)
+    , P.HasOfferType (..)
+    , P.HasOrchestrationPlatform (..)
+    , P.HasOrigin (..)
+    , P.HasOriginHostHeader (..)
+    , P.HasOriginPath (..)
+    , P.HasOsDisk (..)
+    , P.HasOsProfile (..)
+    , P.HasOsProfileLinuxConfig (..)
+    , P.HasOsProfileSecrets (..)
+    , P.HasOsProfileWindowsConfig (..)
+    , P.HasOsType (..)
+    , P.HasOverprovision (..)
+    , P.HasParallelism (..)
+    , P.HasPartitionCount (..)
+    , P.HasPassword (..)
+    , P.HasPeerVirtualNetworkGatewayId (..)
+    , P.HasPeeringLocation (..)
+    , P.HasPermissions (..)
+    , P.HasPlan (..)
+    , P.HasPlatformFaultDomainCount (..)
+    , P.HasPlatformUpdateDomainCount (..)
+    , P.HasPoolSize (..)
+    , P.HasPort (..)
+    , P.HasPrimaryNetworkInterfaceId (..)
+    , P.HasPrincipalId (..)
+    , P.HasPriority (..)
+    , P.HasProbe (..)
+    , P.HasProbeId (..)
+    , P.HasProfileName (..)
+    , P.HasProfileStatus (..)
+    , P.HasProperties (..)
+    , P.HasProtocol (..)
+    , P.HasPublishContentLink (..)
+    , P.HasPublisher (..)
+    , P.HasQuerystringCachingBehaviour (..)
+    , P.HasQuota (..)
+    , P.HasRecord (..)
+    , P.HasRecords (..)
+    , P.HasRedisCacheName (..)
+    , P.HasRemoteVirtualNetworkId (..)
+    , P.HasReplicaCount (..)
+    , P.HasRequestPath (..)
+    , P.HasRequestRoutingRule (..)
+    , P.HasRequestedServiceObjectiveId (..)
+    , P.HasRequestedServiceObjectiveName (..)
+    , P.HasRequiresDuplicateDetection (..)
+    , P.HasRequiresSession (..)
+    , P.HasResourceGroupName (..)
+    , P.HasResourceId (..)
+    , P.HasRestorePointInTime (..)
+    , P.HasRetentionInDays (..)
+    , P.HasRoleDefinitionId (..)
+    , P.HasRoute (..)
+    , P.HasRouteTableId (..)
+    , P.HasRouteTableName (..)
+    , P.HasRoutingWeight (..)
+    , P.HasRunbookType (..)
+    , P.HasScope (..)
+    , P.HasSecurityRule (..)
+    , P.HasServerName (..)
+    , P.HasServicePrincipal (..)
+    , P.HasServiceProviderName (..)
+    , P.HasSharedKey (..)
+    , P.HasSinglePlacementGroup (..)
+    , P.HasSiteConfig (..)
+    , P.HasSize (..)
+    , P.HasSku (..)
+    , P.HasSource (..)
+    , P.HasSourceAddressPrefix (..)
+    , P.HasSourceAddressPrefixes (..)
+    , P.HasSourceDatabaseDeletionDate (..)
+    , P.HasSourceDatabaseId (..)
+    , P.HasSourcePortRange (..)
+    , P.HasSourcePortRanges (..)
+    , P.HasSourceResourceId (..)
+    , P.HasSourceUri (..)
+    , P.HasSourceVirtualMachineId (..)
+    , P.HasSslCertificate (..)
+    , P.HasStartIp (..)
+    , P.HasStartIpAddress (..)
+    , P.HasStartTime (..)
+    , P.HasStatus (..)
+    , P.HasStorageAccountId (..)
+    , P.HasStorageAccountName (..)
+    , P.HasStorageAccountType (..)
+    , P.HasStorageConnectionString (..)
+    , P.HasStorageContainerName (..)
+    , P.HasStorageDataDisk (..)
+    , P.HasStorageImageReference (..)
+    , P.HasStorageMb (..)
+    , P.HasStorageOsDisk (..)
+    , P.HasStorageProfileDataDisk (..)
+    , P.HasStorageProfileImageReference (..)
+    , P.HasStorageProfileOsDisk (..)
+    , P.HasSubnet (..)
+    , P.HasSupportOrdering (..)
+    , P.HasTTL (..)
+    , P.HasTags (..)
+    , P.HasTarget (..)
+    , P.HasTargetResourceId (..)
+    , P.HasTemplateBody (..)
+    , P.HasTenantId (..)
+    , P.HasTimezone (..)
+    , P.HasTopicName (..)
+    , P.HasTrafficRoutingMethod (..)
+    , P.HasTtl (..)
+    , P.HasType' (..)
+    , P.HasUpgradePolicyMode (..)
+    , P.HasUrlPathMap (..)
+    , P.HasUseRemoteGateways (..)
+    , P.HasUseSubdomain (..)
+    , P.HasUserMetadata (..)
+    , P.HasUsername (..)
+    , P.HasValue (..)
+    , P.HasVaultUri (..)
+    , P.HasVersion (..)
+    , P.HasVirtualMachineName (..)
+    , P.HasVirtualNetworkGatewayId (..)
+    , P.HasVirtualNetworkName (..)
+    , P.HasVmSize (..)
+    , P.HasVpnClientConfiguration (..)
+    , P.HasVpnType (..)
+    , P.HasWafConfiguration (..)
+    , P.HasWeight (..)
+    , P.HasZoneName (..)
 
     -- ** Computed Attributes
-    , HasComputedAddressPrefix (..)
-    , HasComputedAddressSpace (..)
-    , HasComputedAdminPassword (..)
-    , HasComputedAdminUsername (..)
-    , HasComputedAgentPoolProfileFqdn (..)
-    , HasComputedAppId (..)
-    , HasComputedAppliedDnsServers (..)
-    , HasComputedCreationData (..)
-    , HasComputedCreationDate (..)
-    , HasComputedDefaultHostname (..)
-    , HasComputedDefaultSecondaryLocation (..)
-    , HasComputedDefaultSiteHostname (..)
-    , HasComputedDiagnosticsProfileStorageUri (..)
-    , HasComputedDiskSizeGb (..)
-    , HasComputedE (..)
-    , HasComputedEndpoint (..)
-    , HasComputedFqdn (..)
-    , HasComputedFullyQualifiedDomainName (..)
-    , HasComputedId (..)
-    , HasComputedInstrumentationKey (..)
-    , HasComputedInternalFqdn (..)
-    , HasComputedIpAddress (..)
-    , HasComputedIpConfigurations (..)
-    , HasComputedLocation (..)
-    , HasComputedLoginServer (..)
-    , HasComputedMacAddress (..)
-    , HasComputedMasterProfileFqdn (..)
-    , HasComputedMaxNumberOfRecordSets (..)
-    , HasComputedMaximumNumberOfWorkers (..)
-    , HasComputedN (..)
-    , HasComputedName (..)
-    , HasComputedNameServers (..)
-    , HasComputedNumberOfRecordSets (..)
-    , HasComputedOutboundIpAddresses (..)
-    , HasComputedOutputs (..)
-    , HasComputedPartitionIds (..)
-    , HasComputedPortalUrl (..)
-    , HasComputedPrimaryAccessKey (..)
-    , HasComputedPrimaryBlobConnectionString (..)
-    , HasComputedPrimaryBlobEndpoint (..)
-    , HasComputedPrimaryConnectionString (..)
-    , HasComputedPrimaryFileEndpoint (..)
-    , HasComputedPrimaryKey (..)
-    , HasComputedPrimaryLocation (..)
-    , HasComputedPrimaryMasterKey (..)
-    , HasComputedPrimaryQueueEndpoint (..)
-    , HasComputedPrimaryReadonlyMasterKey (..)
-    , HasComputedPrimarySharedKey (..)
-    , HasComputedPrimaryTableEndpoint (..)
-    , HasComputedPrivateIpAddress (..)
-    , HasComputedPrivateIpAddresses (..)
-    , HasComputedProperties (..)
-    , HasComputedResourceGroupName (..)
-    , HasComputedSecondaryAccessKey (..)
-    , HasComputedSecondaryBlobConnectionString (..)
-    , HasComputedSecondaryBlobEndpoint (..)
-    , HasComputedSecondaryConnectionString (..)
-    , HasComputedSecondaryKey (..)
-    , HasComputedSecondaryLocation (..)
-    , HasComputedSecondaryMasterKey (..)
-    , HasComputedSecondaryQueueEndpoint (..)
-    , HasComputedSecondaryReadonlyMasterKey (..)
-    , HasComputedSecondarySharedKey (..)
-    , HasComputedSecondaryTableEndpoint (..)
-    , HasComputedServiceKey (..)
-    , HasComputedServiceProviderProvisioningState (..)
-    , HasComputedSubnets (..)
-    , HasComputedUrl (..)
-    , HasComputedVaultUri (..)
-    , HasComputedVersion (..)
-    , HasComputedVirtualMachineId (..)
-    , HasComputedVirtualNetworkName (..)
-    , HasComputedWorkspaceId (..)
+    , P.HasComputedAddressPrefix (..)
+    , P.HasComputedAddressSpace (..)
+    , P.HasComputedAdminPassword (..)
+    , P.HasComputedAdminUsername (..)
+    , P.HasComputedAgentPoolProfileFqdn (..)
+    , P.HasComputedAppId (..)
+    , P.HasComputedAppliedDnsServers (..)
+    , P.HasComputedCreationData (..)
+    , P.HasComputedCreationDate (..)
+    , P.HasComputedDefaultHostname (..)
+    , P.HasComputedDefaultSecondaryLocation (..)
+    , P.HasComputedDefaultSiteHostname (..)
+    , P.HasComputedDiagnosticsProfileStorageUri (..)
+    , P.HasComputedDiskSizeGb (..)
+    , P.HasComputedE (..)
+    , P.HasComputedEndpoint (..)
+    , P.HasComputedFqdn (..)
+    , P.HasComputedFullyQualifiedDomainName (..)
+    , P.HasComputedId (..)
+    , P.HasComputedInstrumentationKey (..)
+    , P.HasComputedInternalFqdn (..)
+    , P.HasComputedIpAddress (..)
+    , P.HasComputedIpConfigurations (..)
+    , P.HasComputedLocation (..)
+    , P.HasComputedLoginServer (..)
+    , P.HasComputedMacAddress (..)
+    , P.HasComputedMasterProfileFqdn (..)
+    , P.HasComputedMaxNumberOfRecordSets (..)
+    , P.HasComputedMaximumNumberOfWorkers (..)
+    , P.HasComputedN (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNameServers (..)
+    , P.HasComputedNumberOfRecordSets (..)
+    , P.HasComputedOutboundIpAddresses (..)
+    , P.HasComputedOutputs (..)
+    , P.HasComputedPartitionIds (..)
+    , P.HasComputedPortalUrl (..)
+    , P.HasComputedPrimaryAccessKey (..)
+    , P.HasComputedPrimaryBlobConnectionString (..)
+    , P.HasComputedPrimaryBlobEndpoint (..)
+    , P.HasComputedPrimaryConnectionString (..)
+    , P.HasComputedPrimaryFileEndpoint (..)
+    , P.HasComputedPrimaryKey (..)
+    , P.HasComputedPrimaryLocation (..)
+    , P.HasComputedPrimaryMasterKey (..)
+    , P.HasComputedPrimaryQueueEndpoint (..)
+    , P.HasComputedPrimaryReadonlyMasterKey (..)
+    , P.HasComputedPrimarySharedKey (..)
+    , P.HasComputedPrimaryTableEndpoint (..)
+    , P.HasComputedPrivateIpAddress (..)
+    , P.HasComputedPrivateIpAddresses (..)
+    , P.HasComputedProperties (..)
+    , P.HasComputedResourceGroupName (..)
+    , P.HasComputedSecondaryAccessKey (..)
+    , P.HasComputedSecondaryBlobConnectionString (..)
+    , P.HasComputedSecondaryBlobEndpoint (..)
+    , P.HasComputedSecondaryConnectionString (..)
+    , P.HasComputedSecondaryKey (..)
+    , P.HasComputedSecondaryLocation (..)
+    , P.HasComputedSecondaryMasterKey (..)
+    , P.HasComputedSecondaryQueueEndpoint (..)
+    , P.HasComputedSecondaryReadonlyMasterKey (..)
+    , P.HasComputedSecondarySharedKey (..)
+    , P.HasComputedSecondaryTableEndpoint (..)
+    , P.HasComputedServiceKey (..)
+    , P.HasComputedServiceProviderProvisioningState (..)
+    , P.HasComputedSubnets (..)
+    , P.HasComputedUrl (..)
+    , P.HasComputedVaultUri (..)
+    , P.HasComputedVersion (..)
+    , P.HasComputedVirtualMachineId (..)
+    , P.HasComputedVirtualNetworkName (..)
+    , P.HasComputedWorkspaceId (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word as TF
-import qualified GHC.Base as TF
-import qualified Numeric.Natural as TF
-import qualified Terrafomo.AzureRM.Types as TF
-import qualified Terrafomo.AzureRM.Provider as TF
-import qualified Terrafomo.Resource as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.IP as TF
-import qualified Terrafomo.Meta as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Resource as TF
+import Terrafomo.AzureRM.Types as P
+import qualified Terrafomo.AzureRM.Lens as P
+import qualified Terrafomo.AzureRM.Provider as P
+import qualified Data.Word as P
+import qualified GHC.Base as P
+import qualified Numeric.Natural as P
+import qualified Terrafomo.IP as P
+
 import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Resource as TF
 
 {- | The @azurerm_app_service_plan@ AzureRM resource.
 
@@ -718,46 +717,46 @@ instance TF.ToHCL (AppServicePlanResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasKind (AppServicePlanResource s) s Text where
+instance P.HasKind (AppServicePlanResource s) s Text where
     kind =
         lens (_kind :: AppServicePlanResource s -> TF.Attribute s Text)
             (\s a -> s { _kind = a } :: AppServicePlanResource s)
 
-instance HasLocation (AppServicePlanResource s) s Text where
+instance P.HasLocation (AppServicePlanResource s) s Text where
     location =
         lens (_location :: AppServicePlanResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: AppServicePlanResource s)
 
-instance HasName (AppServicePlanResource s) s Text where
+instance P.HasName (AppServicePlanResource s) s Text where
     name =
         lens (_name :: AppServicePlanResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AppServicePlanResource s)
 
-instance HasProperties (AppServicePlanResource s) s Text where
+instance P.HasProperties (AppServicePlanResource s) s Text where
     properties =
         lens (_properties :: AppServicePlanResource s -> TF.Attribute s Text)
             (\s a -> s { _properties = a } :: AppServicePlanResource s)
 
-instance HasResourceGroupName (AppServicePlanResource s) s Text where
+instance P.HasResourceGroupName (AppServicePlanResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: AppServicePlanResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: AppServicePlanResource s)
 
-instance HasSku (AppServicePlanResource s) s Text where
+instance P.HasSku (AppServicePlanResource s) s Text where
     sku =
         lens (_sku :: AppServicePlanResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: AppServicePlanResource s)
 
-instance HasTags (AppServicePlanResource s) s Text where
+instance P.HasTags (AppServicePlanResource s) s Text where
     tags =
         lens (_tags :: AppServicePlanResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: AppServicePlanResource s)
 
-instance HasComputedId (AppServicePlanResource s) Text
+instance P.HasComputedId (AppServicePlanResource s) Text
 
-instance HasComputedMaximumNumberOfWorkers (AppServicePlanResource s) Text
+instance P.HasComputedMaximumNumberOfWorkers (AppServicePlanResource s) Text
 
-appServicePlanResource :: TF.Resource TF.AzureRM (AppServicePlanResource s)
+appServicePlanResource :: TF.Resource P.AzureRM (AppServicePlanResource s)
 appServicePlanResource =
     TF.newResource "azurerm_app_service_plan" $
         AppServicePlanResource {
@@ -811,63 +810,63 @@ instance TF.ToHCL (AppServiceResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAppServicePlanId (AppServiceResource s) s Text where
+instance P.HasAppServicePlanId (AppServiceResource s) s Text where
     appServicePlanId =
         lens (_app_service_plan_id :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _app_service_plan_id = a } :: AppServiceResource s)
 
-instance HasAppSettings (AppServiceResource s) s Text where
+instance P.HasAppSettings (AppServiceResource s) s Text where
     appSettings =
         lens (_app_settings :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _app_settings = a } :: AppServiceResource s)
 
-instance HasClientAffinityEnabled (AppServiceResource s) s Text where
+instance P.HasClientAffinityEnabled (AppServiceResource s) s Text where
     clientAffinityEnabled =
         lens (_client_affinity_enabled :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _client_affinity_enabled = a } :: AppServiceResource s)
 
-instance HasConnectionString (AppServiceResource s) s Text where
+instance P.HasConnectionString (AppServiceResource s) s Text where
     connectionString =
         lens (_connection_string :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _connection_string = a } :: AppServiceResource s)
 
-instance HasEnabled (AppServiceResource s) s Text where
+instance P.HasEnabled (AppServiceResource s) s Text where
     enabled =
         lens (_enabled :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _enabled = a } :: AppServiceResource s)
 
-instance HasLocation (AppServiceResource s) s Text where
+instance P.HasLocation (AppServiceResource s) s Text where
     location =
         lens (_location :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: AppServiceResource s)
 
-instance HasName (AppServiceResource s) s Text where
+instance P.HasName (AppServiceResource s) s Text where
     name =
         lens (_name :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AppServiceResource s)
 
-instance HasResourceGroupName (AppServiceResource s) s Text where
+instance P.HasResourceGroupName (AppServiceResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: AppServiceResource s)
 
-instance HasSiteConfig (AppServiceResource s) s Text where
+instance P.HasSiteConfig (AppServiceResource s) s Text where
     siteConfig =
         lens (_site_config :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _site_config = a } :: AppServiceResource s)
 
-instance HasTags (AppServiceResource s) s Text where
+instance P.HasTags (AppServiceResource s) s Text where
     tags =
         lens (_tags :: AppServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: AppServiceResource s)
 
-instance HasComputedDefaultSiteHostname (AppServiceResource s) Text
+instance P.HasComputedDefaultSiteHostname (AppServiceResource s) Text
 
-instance HasComputedId (AppServiceResource s) Text
+instance P.HasComputedId (AppServiceResource s) Text
 
-instance HasComputedOutboundIpAddresses (AppServiceResource s) Text
+instance P.HasComputedOutboundIpAddresses (AppServiceResource s) Text
 
-appServiceResource :: TF.Resource TF.AzureRM (AppServiceResource s)
+appServiceResource :: TF.Resource P.AzureRM (AppServiceResource s)
 appServiceResource =
     TF.newResource "azurerm_app_service" $
         AppServiceResource {
@@ -946,100 +945,100 @@ instance TF.ToHCL (ApplicationGatewayResource s) where
         , TF.attribute "waf_configuration" _waf_configuration
         ]
 
-instance HasAuthenticationCertificate (ApplicationGatewayResource s) s Text where
+instance P.HasAuthenticationCertificate (ApplicationGatewayResource s) s Text where
     authenticationCertificate =
         lens (_authentication_certificate :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _authentication_certificate = a } :: ApplicationGatewayResource s)
 
-instance HasBackendAddressPool (ApplicationGatewayResource s) s Text where
+instance P.HasBackendAddressPool (ApplicationGatewayResource s) s Text where
     backendAddressPool =
         lens (_backend_address_pool :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_address_pool = a } :: ApplicationGatewayResource s)
 
-instance HasBackendHttpSettings (ApplicationGatewayResource s) s Text where
+instance P.HasBackendHttpSettings (ApplicationGatewayResource s) s Text where
     backendHttpSettings =
         lens (_backend_http_settings :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_http_settings = a } :: ApplicationGatewayResource s)
 
-instance HasDisabledSslProtocols (ApplicationGatewayResource s) s Text where
+instance P.HasDisabledSslProtocols (ApplicationGatewayResource s) s Text where
     disabledSslProtocols =
         lens (_disabled_ssl_protocols :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _disabled_ssl_protocols = a } :: ApplicationGatewayResource s)
 
-instance HasFrontendIpConfiguration (ApplicationGatewayResource s) s Text where
+instance P.HasFrontendIpConfiguration (ApplicationGatewayResource s) s Text where
     frontendIpConfiguration =
         lens (_frontend_ip_configuration :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_ip_configuration = a } :: ApplicationGatewayResource s)
 
-instance HasFrontendPort (ApplicationGatewayResource s) s Text where
+instance P.HasFrontendPort (ApplicationGatewayResource s) s Text where
     frontendPort =
         lens (_frontend_port :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_port = a } :: ApplicationGatewayResource s)
 
-instance HasGatewayIpConfiguration (ApplicationGatewayResource s) s Text where
+instance P.HasGatewayIpConfiguration (ApplicationGatewayResource s) s Text where
     gatewayIpConfiguration =
         lens (_gateway_ip_configuration :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _gateway_ip_configuration = a } :: ApplicationGatewayResource s)
 
-instance HasHttpListener (ApplicationGatewayResource s) s Text where
+instance P.HasHttpListener (ApplicationGatewayResource s) s Text where
     httpListener =
         lens (_http_listener :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _http_listener = a } :: ApplicationGatewayResource s)
 
-instance HasLocation (ApplicationGatewayResource s) s Text where
+instance P.HasLocation (ApplicationGatewayResource s) s Text where
     location =
         lens (_location :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ApplicationGatewayResource s)
 
-instance HasName (ApplicationGatewayResource s) s Text where
+instance P.HasName (ApplicationGatewayResource s) s Text where
     name =
         lens (_name :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ApplicationGatewayResource s)
 
-instance HasProbe (ApplicationGatewayResource s) s Text where
+instance P.HasProbe (ApplicationGatewayResource s) s Text where
     probe =
         lens (_probe :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _probe = a } :: ApplicationGatewayResource s)
 
-instance HasRequestRoutingRule (ApplicationGatewayResource s) s Text where
+instance P.HasRequestRoutingRule (ApplicationGatewayResource s) s Text where
     requestRoutingRule =
         lens (_request_routing_rule :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _request_routing_rule = a } :: ApplicationGatewayResource s)
 
-instance HasResourceGroupName (ApplicationGatewayResource s) s Text where
+instance P.HasResourceGroupName (ApplicationGatewayResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ApplicationGatewayResource s)
 
-instance HasSku (ApplicationGatewayResource s) s Text where
+instance P.HasSku (ApplicationGatewayResource s) s Text where
     sku =
         lens (_sku :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: ApplicationGatewayResource s)
 
-instance HasSslCertificate (ApplicationGatewayResource s) s Text where
+instance P.HasSslCertificate (ApplicationGatewayResource s) s Text where
     sslCertificate =
         lens (_ssl_certificate :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _ssl_certificate = a } :: ApplicationGatewayResource s)
 
-instance HasUrlPathMap (ApplicationGatewayResource s) s Text where
+instance P.HasUrlPathMap (ApplicationGatewayResource s) s Text where
     urlPathMap =
         lens (_url_path_map :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _url_path_map = a } :: ApplicationGatewayResource s)
 
-instance HasWafConfiguration (ApplicationGatewayResource s) s Text where
+instance P.HasWafConfiguration (ApplicationGatewayResource s) s Text where
     wafConfiguration =
         lens (_waf_configuration :: ApplicationGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _waf_configuration = a } :: ApplicationGatewayResource s)
 
-instance HasComputedId (ApplicationGatewayResource s) Text
+instance P.HasComputedId (ApplicationGatewayResource s) Text
 
-instance HasComputedLocation (ApplicationGatewayResource s) Text
+instance P.HasComputedLocation (ApplicationGatewayResource s) Text
 
-instance HasComputedName (ApplicationGatewayResource s) Text
+instance P.HasComputedName (ApplicationGatewayResource s) Text
 
-instance HasComputedResourceGroupName (ApplicationGatewayResource s) Text
+instance P.HasComputedResourceGroupName (ApplicationGatewayResource s) Text
 
-applicationGatewayResource :: TF.Resource TF.AzureRM (ApplicationGatewayResource s)
+applicationGatewayResource :: TF.Resource P.AzureRM (ApplicationGatewayResource s)
 applicationGatewayResource =
     TF.newResource "azurerm_application_gateway" $
         ApplicationGatewayResource {
@@ -1088,38 +1087,38 @@ instance TF.ToHCL (ApplicationInsightsResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasApplicationType (ApplicationInsightsResource s) s Text where
+instance P.HasApplicationType (ApplicationInsightsResource s) s Text where
     applicationType =
         lens (_application_type :: ApplicationInsightsResource s -> TF.Attribute s Text)
             (\s a -> s { _application_type = a } :: ApplicationInsightsResource s)
 
-instance HasLocation (ApplicationInsightsResource s) s Text where
+instance P.HasLocation (ApplicationInsightsResource s) s Text where
     location =
         lens (_location :: ApplicationInsightsResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ApplicationInsightsResource s)
 
-instance HasName (ApplicationInsightsResource s) s Text where
+instance P.HasName (ApplicationInsightsResource s) s Text where
     name =
         lens (_name :: ApplicationInsightsResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ApplicationInsightsResource s)
 
-instance HasResourceGroupName (ApplicationInsightsResource s) s Text where
+instance P.HasResourceGroupName (ApplicationInsightsResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ApplicationInsightsResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ApplicationInsightsResource s)
 
-instance HasTags (ApplicationInsightsResource s) s Text where
+instance P.HasTags (ApplicationInsightsResource s) s Text where
     tags =
         lens (_tags :: ApplicationInsightsResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ApplicationInsightsResource s)
 
-instance HasComputedAppId (ApplicationInsightsResource s) Text
+instance P.HasComputedAppId (ApplicationInsightsResource s) Text
 
-instance HasComputedId (ApplicationInsightsResource s) Text
+instance P.HasComputedId (ApplicationInsightsResource s) Text
 
-instance HasComputedInstrumentationKey (ApplicationInsightsResource s) Text
+instance P.HasComputedInstrumentationKey (ApplicationInsightsResource s) Text
 
-applicationInsightsResource :: TF.Resource TF.AzureRM (ApplicationInsightsResource s)
+applicationInsightsResource :: TF.Resource P.AzureRM (ApplicationInsightsResource s)
 applicationInsightsResource =
     TF.newResource "azurerm_application_insights" $
         ApplicationInsightsResource {
@@ -1156,34 +1155,34 @@ instance TF.ToHCL (AutomationAccountResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (AutomationAccountResource s) s Text where
+instance P.HasLocation (AutomationAccountResource s) s Text where
     location =
         lens (_location :: AutomationAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: AutomationAccountResource s)
 
-instance HasName (AutomationAccountResource s) s Text where
+instance P.HasName (AutomationAccountResource s) s Text where
     name =
         lens (_name :: AutomationAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AutomationAccountResource s)
 
-instance HasResourceGroupName (AutomationAccountResource s) s Text where
+instance P.HasResourceGroupName (AutomationAccountResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: AutomationAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: AutomationAccountResource s)
 
-instance HasSku (AutomationAccountResource s) s Text where
+instance P.HasSku (AutomationAccountResource s) s Text where
     sku =
         lens (_sku :: AutomationAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: AutomationAccountResource s)
 
-instance HasTags (AutomationAccountResource s) s Text where
+instance P.HasTags (AutomationAccountResource s) s Text where
     tags =
         lens (_tags :: AutomationAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: AutomationAccountResource s)
 
-instance HasComputedId (AutomationAccountResource s) Text
+instance P.HasComputedId (AutomationAccountResource s) Text
 
-automationAccountResource :: TF.Resource TF.AzureRM (AutomationAccountResource s)
+automationAccountResource :: TF.Resource P.AzureRM (AutomationAccountResource s)
 automationAccountResource =
     TF.newResource "azurerm_automation_account" $
         AutomationAccountResource {
@@ -1223,39 +1222,39 @@ instance TF.ToHCL (AutomationCredentialResource s) where
         , TF.attribute "username" _username
         ]
 
-instance HasAccountName (AutomationCredentialResource s) s Text where
+instance P.HasAccountName (AutomationCredentialResource s) s Text where
     accountName =
         lens (_account_name :: AutomationCredentialResource s -> TF.Attribute s Text)
             (\s a -> s { _account_name = a } :: AutomationCredentialResource s)
 
-instance HasDescription (AutomationCredentialResource s) s Text where
+instance P.HasDescription (AutomationCredentialResource s) s Text where
     description =
         lens (_description :: AutomationCredentialResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: AutomationCredentialResource s)
 
-instance HasName (AutomationCredentialResource s) s Text where
+instance P.HasName (AutomationCredentialResource s) s Text where
     name =
         lens (_name :: AutomationCredentialResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AutomationCredentialResource s)
 
-instance HasPassword (AutomationCredentialResource s) s Text where
+instance P.HasPassword (AutomationCredentialResource s) s Text where
     password =
         lens (_password :: AutomationCredentialResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: AutomationCredentialResource s)
 
-instance HasResourceGroupName (AutomationCredentialResource s) s Text where
+instance P.HasResourceGroupName (AutomationCredentialResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: AutomationCredentialResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: AutomationCredentialResource s)
 
-instance HasUsername (AutomationCredentialResource s) s Text where
+instance P.HasUsername (AutomationCredentialResource s) s Text where
     username =
         lens (_username :: AutomationCredentialResource s -> TF.Attribute s Text)
             (\s a -> s { _username = a } :: AutomationCredentialResource s)
 
-instance HasComputedId (AutomationCredentialResource s) Text
+instance P.HasComputedId (AutomationCredentialResource s) Text
 
-automationCredentialResource :: TF.Resource TF.AzureRM (AutomationCredentialResource s)
+automationCredentialResource :: TF.Resource P.AzureRM (AutomationCredentialResource s)
 automationCredentialResource =
     TF.newResource "azurerm_automation_credential" $
         AutomationCredentialResource {
@@ -1305,54 +1304,54 @@ instance TF.ToHCL (AutomationRunbookResource s) where
         , TF.attribute "runbook_type" _runbook_type
         ]
 
-instance HasAccountName (AutomationRunbookResource s) s Text where
+instance P.HasAccountName (AutomationRunbookResource s) s Text where
     accountName =
         lens (_account_name :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _account_name = a } :: AutomationRunbookResource s)
 
-instance HasDescription (AutomationRunbookResource s) s Text where
+instance P.HasDescription (AutomationRunbookResource s) s Text where
     description =
         lens (_description :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: AutomationRunbookResource s)
 
-instance HasLocation (AutomationRunbookResource s) s Text where
+instance P.HasLocation (AutomationRunbookResource s) s Text where
     location =
         lens (_location :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: AutomationRunbookResource s)
 
-instance HasLogProgress (AutomationRunbookResource s) s Text where
+instance P.HasLogProgress (AutomationRunbookResource s) s Text where
     logProgress =
         lens (_log_progress :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _log_progress = a } :: AutomationRunbookResource s)
 
-instance HasLogVerbose (AutomationRunbookResource s) s Text where
+instance P.HasLogVerbose (AutomationRunbookResource s) s Text where
     logVerbose =
         lens (_log_verbose :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _log_verbose = a } :: AutomationRunbookResource s)
 
-instance HasName (AutomationRunbookResource s) s Text where
+instance P.HasName (AutomationRunbookResource s) s Text where
     name =
         lens (_name :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AutomationRunbookResource s)
 
-instance HasPublishContentLink (AutomationRunbookResource s) s Text where
+instance P.HasPublishContentLink (AutomationRunbookResource s) s Text where
     publishContentLink =
         lens (_publish_content_link :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _publish_content_link = a } :: AutomationRunbookResource s)
 
-instance HasResourceGroupName (AutomationRunbookResource s) s Text where
+instance P.HasResourceGroupName (AutomationRunbookResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: AutomationRunbookResource s)
 
-instance HasRunbookType (AutomationRunbookResource s) s Text where
+instance P.HasRunbookType (AutomationRunbookResource s) s Text where
     runbookType =
         lens (_runbook_type :: AutomationRunbookResource s -> TF.Attribute s Text)
             (\s a -> s { _runbook_type = a } :: AutomationRunbookResource s)
 
-instance HasComputedId (AutomationRunbookResource s) Text
+instance P.HasComputedId (AutomationRunbookResource s) Text
 
-automationRunbookResource :: TF.Resource TF.AzureRM (AutomationRunbookResource s)
+automationRunbookResource :: TF.Resource P.AzureRM (AutomationRunbookResource s)
 automationRunbookResource =
     TF.newResource "azurerm_automation_runbook" $
         AutomationRunbookResource {
@@ -1402,49 +1401,49 @@ instance TF.ToHCL (AutomationScheduleResource s) where
         , TF.attribute "timezone" _timezone
         ]
 
-instance HasAccountName (AutomationScheduleResource s) s Text where
+instance P.HasAccountName (AutomationScheduleResource s) s Text where
     accountName =
         lens (_account_name :: AutomationScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _account_name = a } :: AutomationScheduleResource s)
 
-instance HasDescription (AutomationScheduleResource s) s Text where
+instance P.HasDescription (AutomationScheduleResource s) s Text where
     description =
         lens (_description :: AutomationScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: AutomationScheduleResource s)
 
-instance HasExpiryTime (AutomationScheduleResource s) s Text where
+instance P.HasExpiryTime (AutomationScheduleResource s) s Text where
     expiryTime =
         lens (_expiry_time :: AutomationScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _expiry_time = a } :: AutomationScheduleResource s)
 
-instance HasFrequency (AutomationScheduleResource s) s Text where
+instance P.HasFrequency (AutomationScheduleResource s) s Text where
     frequency =
         lens (_frequency :: AutomationScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _frequency = a } :: AutomationScheduleResource s)
 
-instance HasName (AutomationScheduleResource s) s Text where
+instance P.HasName (AutomationScheduleResource s) s Text where
     name =
         lens (_name :: AutomationScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AutomationScheduleResource s)
 
-instance HasResourceGroupName (AutomationScheduleResource s) s Text where
+instance P.HasResourceGroupName (AutomationScheduleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: AutomationScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: AutomationScheduleResource s)
 
-instance HasStartTime (AutomationScheduleResource s) s Text where
+instance P.HasStartTime (AutomationScheduleResource s) s Text where
     startTime =
         lens (_start_time :: AutomationScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _start_time = a } :: AutomationScheduleResource s)
 
-instance HasTimezone (AutomationScheduleResource s) s Text where
+instance P.HasTimezone (AutomationScheduleResource s) s Text where
     timezone =
         lens (_timezone :: AutomationScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _timezone = a } :: AutomationScheduleResource s)
 
-instance HasComputedId (AutomationScheduleResource s) Text
+instance P.HasComputedId (AutomationScheduleResource s) Text
 
-automationScheduleResource :: TF.Resource TF.AzureRM (AutomationScheduleResource s)
+automationScheduleResource :: TF.Resource P.AzureRM (AutomationScheduleResource s)
 automationScheduleResource =
     TF.newResource "azurerm_automation_schedule" $
         AutomationScheduleResource {
@@ -1490,44 +1489,44 @@ instance TF.ToHCL (AvailabilitySetResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (AvailabilitySetResource s) s Text where
+instance P.HasLocation (AvailabilitySetResource s) s Text where
     location =
         lens (_location :: AvailabilitySetResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: AvailabilitySetResource s)
 
-instance HasManaged (AvailabilitySetResource s) s Text where
+instance P.HasManaged (AvailabilitySetResource s) s Text where
     managed =
         lens (_managed :: AvailabilitySetResource s -> TF.Attribute s Text)
             (\s a -> s { _managed = a } :: AvailabilitySetResource s)
 
-instance HasName (AvailabilitySetResource s) s Text where
+instance P.HasName (AvailabilitySetResource s) s Text where
     name =
         lens (_name :: AvailabilitySetResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AvailabilitySetResource s)
 
-instance HasPlatformFaultDomainCount (AvailabilitySetResource s) s Text where
+instance P.HasPlatformFaultDomainCount (AvailabilitySetResource s) s Text where
     platformFaultDomainCount =
         lens (_platform_fault_domain_count :: AvailabilitySetResource s -> TF.Attribute s Text)
             (\s a -> s { _platform_fault_domain_count = a } :: AvailabilitySetResource s)
 
-instance HasPlatformUpdateDomainCount (AvailabilitySetResource s) s Text where
+instance P.HasPlatformUpdateDomainCount (AvailabilitySetResource s) s Text where
     platformUpdateDomainCount =
         lens (_platform_update_domain_count :: AvailabilitySetResource s -> TF.Attribute s Text)
             (\s a -> s { _platform_update_domain_count = a } :: AvailabilitySetResource s)
 
-instance HasResourceGroupName (AvailabilitySetResource s) s Text where
+instance P.HasResourceGroupName (AvailabilitySetResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: AvailabilitySetResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: AvailabilitySetResource s)
 
-instance HasTags (AvailabilitySetResource s) s Text where
+instance P.HasTags (AvailabilitySetResource s) s Text where
     tags =
         lens (_tags :: AvailabilitySetResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: AvailabilitySetResource s)
 
-instance HasComputedId (AvailabilitySetResource s) Text
+instance P.HasComputedId (AvailabilitySetResource s) Text
 
-availabilitySetResource :: TF.Resource TF.AzureRM (AvailabilitySetResource s)
+availabilitySetResource :: TF.Resource P.AzureRM (AvailabilitySetResource s)
 availabilitySetResource =
     TF.newResource "azurerm_availability_set" $
         AvailabilitySetResource {
@@ -1593,74 +1592,74 @@ instance TF.ToHCL (CdnEndpointResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasContentTypesToCompress (CdnEndpointResource s) s Text where
+instance P.HasContentTypesToCompress (CdnEndpointResource s) s Text where
     contentTypesToCompress =
         lens (_content_types_to_compress :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _content_types_to_compress = a } :: CdnEndpointResource s)
 
-instance HasIsCompressionEnabled (CdnEndpointResource s) s Text where
+instance P.HasIsCompressionEnabled (CdnEndpointResource s) s Text where
     isCompressionEnabled =
         lens (_is_compression_enabled :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _is_compression_enabled = a } :: CdnEndpointResource s)
 
-instance HasIsHttpAllowed (CdnEndpointResource s) s Text where
+instance P.HasIsHttpAllowed (CdnEndpointResource s) s Text where
     isHttpAllowed =
         lens (_is_http_allowed :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _is_http_allowed = a } :: CdnEndpointResource s)
 
-instance HasIsHttpsAllowed (CdnEndpointResource s) s Text where
+instance P.HasIsHttpsAllowed (CdnEndpointResource s) s Text where
     isHttpsAllowed =
         lens (_is_https_allowed :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _is_https_allowed = a } :: CdnEndpointResource s)
 
-instance HasLocation (CdnEndpointResource s) s Text where
+instance P.HasLocation (CdnEndpointResource s) s Text where
     location =
         lens (_location :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: CdnEndpointResource s)
 
-instance HasName (CdnEndpointResource s) s Text where
+instance P.HasName (CdnEndpointResource s) s Text where
     name =
         lens (_name :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CdnEndpointResource s)
 
-instance HasOrigin (CdnEndpointResource s) s Text where
+instance P.HasOrigin (CdnEndpointResource s) s Text where
     origin =
         lens (_origin :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _origin = a } :: CdnEndpointResource s)
 
-instance HasOriginHostHeader (CdnEndpointResource s) s Text where
+instance P.HasOriginHostHeader (CdnEndpointResource s) s Text where
     originHostHeader =
         lens (_origin_host_header :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _origin_host_header = a } :: CdnEndpointResource s)
 
-instance HasOriginPath (CdnEndpointResource s) s Text where
+instance P.HasOriginPath (CdnEndpointResource s) s Text where
     originPath =
         lens (_origin_path :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _origin_path = a } :: CdnEndpointResource s)
 
-instance HasProfileName (CdnEndpointResource s) s Text where
+instance P.HasProfileName (CdnEndpointResource s) s Text where
     profileName =
         lens (_profile_name :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _profile_name = a } :: CdnEndpointResource s)
 
-instance HasQuerystringCachingBehaviour (CdnEndpointResource s) s Text where
+instance P.HasQuerystringCachingBehaviour (CdnEndpointResource s) s Text where
     querystringCachingBehaviour =
         lens (_querystring_caching_behaviour :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _querystring_caching_behaviour = a } :: CdnEndpointResource s)
 
-instance HasResourceGroupName (CdnEndpointResource s) s Text where
+instance P.HasResourceGroupName (CdnEndpointResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: CdnEndpointResource s)
 
-instance HasTags (CdnEndpointResource s) s Text where
+instance P.HasTags (CdnEndpointResource s) s Text where
     tags =
         lens (_tags :: CdnEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: CdnEndpointResource s)
 
-instance HasComputedId (CdnEndpointResource s) Text
+instance P.HasComputedId (CdnEndpointResource s) Text
 
-cdnEndpointResource :: TF.Resource TF.AzureRM (CdnEndpointResource s)
+cdnEndpointResource :: TF.Resource P.AzureRM (CdnEndpointResource s)
 cdnEndpointResource =
     TF.newResource "azurerm_cdn_endpoint" $
         CdnEndpointResource {
@@ -1705,34 +1704,34 @@ instance TF.ToHCL (CdnProfileResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (CdnProfileResource s) s Text where
+instance P.HasLocation (CdnProfileResource s) s Text where
     location =
         lens (_location :: CdnProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: CdnProfileResource s)
 
-instance HasName (CdnProfileResource s) s Text where
+instance P.HasName (CdnProfileResource s) s Text where
     name =
         lens (_name :: CdnProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CdnProfileResource s)
 
-instance HasResourceGroupName (CdnProfileResource s) s Text where
+instance P.HasResourceGroupName (CdnProfileResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: CdnProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: CdnProfileResource s)
 
-instance HasSku (CdnProfileResource s) s Text where
+instance P.HasSku (CdnProfileResource s) s Text where
     sku =
         lens (_sku :: CdnProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: CdnProfileResource s)
 
-instance HasTags (CdnProfileResource s) s Text where
+instance P.HasTags (CdnProfileResource s) s Text where
     tags =
         lens (_tags :: CdnProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: CdnProfileResource s)
 
-instance HasComputedId (CdnProfileResource s) Text
+instance P.HasComputedId (CdnProfileResource s) Text
 
-cdnProfileResource :: TF.Resource TF.AzureRM (CdnProfileResource s)
+cdnProfileResource :: TF.Resource P.AzureRM (CdnProfileResource s)
 cdnProfileResource =
     TF.newResource "azurerm_cdn_profile" $
         CdnProfileResource {
@@ -1772,41 +1771,41 @@ instance TF.ToHCL (ContainerGroupResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasContainer (ContainerGroupResource s) s Text where
+instance P.HasContainer (ContainerGroupResource s) s Text where
     container =
         lens (_container :: ContainerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _container = a } :: ContainerGroupResource s)
 
-instance HasIpAddressType (ContainerGroupResource s) s Text where
+instance P.HasIpAddressType (ContainerGroupResource s) s Text where
     ipAddressType =
         lens (_ip_address_type :: ContainerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_address_type = a } :: ContainerGroupResource s)
 
-instance HasLocation (ContainerGroupResource s) s Text where
+instance P.HasLocation (ContainerGroupResource s) s Text where
     location =
         lens (_location :: ContainerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ContainerGroupResource s)
 
-instance HasName (ContainerGroupResource s) s Text where
+instance P.HasName (ContainerGroupResource s) s Text where
     name =
         lens (_name :: ContainerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ContainerGroupResource s)
 
-instance HasOsType (ContainerGroupResource s) s Text where
+instance P.HasOsType (ContainerGroupResource s) s Text where
     osType =
         lens (_os_type :: ContainerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _os_type = a } :: ContainerGroupResource s)
 
-instance HasResourceGroupName (ContainerGroupResource s) s Text where
+instance P.HasResourceGroupName (ContainerGroupResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ContainerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ContainerGroupResource s)
 
-instance HasComputedId (ContainerGroupResource s) Text
+instance P.HasComputedId (ContainerGroupResource s) Text
 
-instance HasComputedIpAddress (ContainerGroupResource s) Text
+instance P.HasComputedIpAddress (ContainerGroupResource s) Text
 
-containerGroupResource :: TF.Resource TF.AzureRM (ContainerGroupResource s)
+containerGroupResource :: TF.Resource P.AzureRM (ContainerGroupResource s)
 containerGroupResource =
     TF.newResource "azurerm_container_group" $
         ContainerGroupResource {
@@ -1852,50 +1851,50 @@ instance TF.ToHCL (ContainerRegistryResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAdminEnabled (ContainerRegistryResource s) s Text where
+instance P.HasAdminEnabled (ContainerRegistryResource s) s Text where
     adminEnabled =
         lens (_admin_enabled :: ContainerRegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _admin_enabled = a } :: ContainerRegistryResource s)
 
-instance HasLocation (ContainerRegistryResource s) s Text where
+instance P.HasLocation (ContainerRegistryResource s) s Text where
     location =
         lens (_location :: ContainerRegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ContainerRegistryResource s)
 
-instance HasName (ContainerRegistryResource s) s Text where
+instance P.HasName (ContainerRegistryResource s) s Text where
     name =
         lens (_name :: ContainerRegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ContainerRegistryResource s)
 
-instance HasResourceGroupName (ContainerRegistryResource s) s Text where
+instance P.HasResourceGroupName (ContainerRegistryResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ContainerRegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ContainerRegistryResource s)
 
-instance HasSku (ContainerRegistryResource s) s Text where
+instance P.HasSku (ContainerRegistryResource s) s Text where
     sku =
         lens (_sku :: ContainerRegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: ContainerRegistryResource s)
 
-instance HasStorageAccountId (ContainerRegistryResource s) s Text where
+instance P.HasStorageAccountId (ContainerRegistryResource s) s Text where
     storageAccountId =
         lens (_storage_account_id :: ContainerRegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_account_id = a } :: ContainerRegistryResource s)
 
-instance HasTags (ContainerRegistryResource s) s Text where
+instance P.HasTags (ContainerRegistryResource s) s Text where
     tags =
         lens (_tags :: ContainerRegistryResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ContainerRegistryResource s)
 
-instance HasComputedAdminPassword (ContainerRegistryResource s) Text
+instance P.HasComputedAdminPassword (ContainerRegistryResource s) Text
 
-instance HasComputedAdminUsername (ContainerRegistryResource s) Text
+instance P.HasComputedAdminUsername (ContainerRegistryResource s) Text
 
-instance HasComputedId (ContainerRegistryResource s) Text
+instance P.HasComputedId (ContainerRegistryResource s) Text
 
-instance HasComputedLoginServer (ContainerRegistryResource s) Text
+instance P.HasComputedLoginServer (ContainerRegistryResource s) Text
 
-containerRegistryResource :: TF.Resource TF.AzureRM (ContainerRegistryResource s)
+containerRegistryResource :: TF.Resource P.AzureRM (ContainerRegistryResource s)
 containerRegistryResource =
     TF.newResource "azurerm_container_registry" $
         ContainerRegistryResource {
@@ -1951,65 +1950,65 @@ instance TF.ToHCL (ContainerServiceResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAgentPoolProfile (ContainerServiceResource s) s Text where
+instance P.HasAgentPoolProfile (ContainerServiceResource s) s Text where
     agentPoolProfile =
         lens (_agent_pool_profile :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _agent_pool_profile = a } :: ContainerServiceResource s)
 
-instance HasDiagnosticsProfile (ContainerServiceResource s) s Text where
+instance P.HasDiagnosticsProfile (ContainerServiceResource s) s Text where
     diagnosticsProfile =
         lens (_diagnostics_profile :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _diagnostics_profile = a } :: ContainerServiceResource s)
 
-instance HasLinuxProfile (ContainerServiceResource s) s Text where
+instance P.HasLinuxProfile (ContainerServiceResource s) s Text where
     linuxProfile =
         lens (_linux_profile :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _linux_profile = a } :: ContainerServiceResource s)
 
-instance HasLocation (ContainerServiceResource s) s Text where
+instance P.HasLocation (ContainerServiceResource s) s Text where
     location =
         lens (_location :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ContainerServiceResource s)
 
-instance HasMasterProfile (ContainerServiceResource s) s Text where
+instance P.HasMasterProfile (ContainerServiceResource s) s Text where
     masterProfile =
         lens (_master_profile :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _master_profile = a } :: ContainerServiceResource s)
 
-instance HasName (ContainerServiceResource s) s Text where
+instance P.HasName (ContainerServiceResource s) s Text where
     name =
         lens (_name :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ContainerServiceResource s)
 
-instance HasOrchestrationPlatform (ContainerServiceResource s) s Text where
+instance P.HasOrchestrationPlatform (ContainerServiceResource s) s Text where
     orchestrationPlatform =
         lens (_orchestration_platform :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _orchestration_platform = a } :: ContainerServiceResource s)
 
-instance HasResourceGroupName (ContainerServiceResource s) s Text where
+instance P.HasResourceGroupName (ContainerServiceResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ContainerServiceResource s)
 
-instance HasServicePrincipal (ContainerServiceResource s) s Text where
+instance P.HasServicePrincipal (ContainerServiceResource s) s Text where
     servicePrincipal =
         lens (_service_principal :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _service_principal = a } :: ContainerServiceResource s)
 
-instance HasTags (ContainerServiceResource s) s Text where
+instance P.HasTags (ContainerServiceResource s) s Text where
     tags =
         lens (_tags :: ContainerServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ContainerServiceResource s)
 
-instance HasComputedAgentPoolProfileFqdn (ContainerServiceResource s) Text
+instance P.HasComputedAgentPoolProfileFqdn (ContainerServiceResource s) Text
 
-instance HasComputedDiagnosticsProfileStorageUri (ContainerServiceResource s) Text
+instance P.HasComputedDiagnosticsProfileStorageUri (ContainerServiceResource s) Text
 
-instance HasComputedId (ContainerServiceResource s) Text
+instance P.HasComputedId (ContainerServiceResource s) Text
 
-instance HasComputedMasterProfileFqdn (ContainerServiceResource s) Text
+instance P.HasComputedMasterProfileFqdn (ContainerServiceResource s) Text
 
-containerServiceResource :: TF.Resource TF.AzureRM (ContainerServiceResource s)
+containerServiceResource :: TF.Resource P.AzureRM (ContainerServiceResource s)
 containerServiceResource =
     TF.newResource "azurerm_container_service" $
         ContainerServiceResource {
@@ -2063,62 +2062,62 @@ instance TF.ToHCL (CosmosDbAccountResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasConsistencyPolicy (CosmosDbAccountResource s) s Text where
+instance P.HasConsistencyPolicy (CosmosDbAccountResource s) s Text where
     consistencyPolicy =
         lens (_consistency_policy :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _consistency_policy = a } :: CosmosDbAccountResource s)
 
-instance HasFailoverPolicy (CosmosDbAccountResource s) s Text where
+instance P.HasFailoverPolicy (CosmosDbAccountResource s) s Text where
     failoverPolicy =
         lens (_failover_policy :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _failover_policy = a } :: CosmosDbAccountResource s)
 
-instance HasIpRangeFilter (CosmosDbAccountResource s) s Text where
+instance P.HasIpRangeFilter (CosmosDbAccountResource s) s Text where
     ipRangeFilter =
         lens (_ip_range_filter :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_range_filter = a } :: CosmosDbAccountResource s)
 
-instance HasKind (CosmosDbAccountResource s) s Text where
+instance P.HasKind (CosmosDbAccountResource s) s Text where
     kind =
         lens (_kind :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _kind = a } :: CosmosDbAccountResource s)
 
-instance HasLocation (CosmosDbAccountResource s) s Text where
+instance P.HasLocation (CosmosDbAccountResource s) s Text where
     location =
         lens (_location :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: CosmosDbAccountResource s)
 
-instance HasName (CosmosDbAccountResource s) s Text where
+instance P.HasName (CosmosDbAccountResource s) s Text where
     name =
         lens (_name :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CosmosDbAccountResource s)
 
-instance HasOfferType (CosmosDbAccountResource s) s Text where
+instance P.HasOfferType (CosmosDbAccountResource s) s Text where
     offerType =
         lens (_offer_type :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _offer_type = a } :: CosmosDbAccountResource s)
 
-instance HasResourceGroupName (CosmosDbAccountResource s) s Text where
+instance P.HasResourceGroupName (CosmosDbAccountResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: CosmosDbAccountResource s)
 
-instance HasTags (CosmosDbAccountResource s) s Text where
+instance P.HasTags (CosmosDbAccountResource s) s Text where
     tags =
         lens (_tags :: CosmosDbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: CosmosDbAccountResource s)
 
-instance HasComputedId (CosmosDbAccountResource s) Text
+instance P.HasComputedId (CosmosDbAccountResource s) Text
 
-instance HasComputedPrimaryMasterKey (CosmosDbAccountResource s) Text
+instance P.HasComputedPrimaryMasterKey (CosmosDbAccountResource s) Text
 
-instance HasComputedPrimaryReadonlyMasterKey (CosmosDbAccountResource s) Text
+instance P.HasComputedPrimaryReadonlyMasterKey (CosmosDbAccountResource s) Text
 
-instance HasComputedSecondaryMasterKey (CosmosDbAccountResource s) Text
+instance P.HasComputedSecondaryMasterKey (CosmosDbAccountResource s) Text
 
-instance HasComputedSecondaryReadonlyMasterKey (CosmosDbAccountResource s) Text
+instance P.HasComputedSecondaryReadonlyMasterKey (CosmosDbAccountResource s) Text
 
-cosmosDbAccountResource :: TF.Resource TF.AzureRM (CosmosDbAccountResource s)
+cosmosDbAccountResource :: TF.Resource P.AzureRM (CosmosDbAccountResource s)
 cosmosDbAccountResource =
     TF.newResource "azurerm_cosmos_db_account" $
         CosmosDbAccountResource {
@@ -2162,39 +2161,39 @@ instance TF.ToHCL (DnsARecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance HasTTL (DnsARecordResource s) s Text where
+instance P.HasTTL (DnsARecordResource s) s Text where
     TTL =
         lens (_TTL :: DnsARecordResource s -> TF.Attribute s Text)
             (\s a -> s { _TTL = a } :: DnsARecordResource s)
 
-instance HasName (DnsARecordResource s) s Text where
+instance P.HasName (DnsARecordResource s) s Text where
     name =
         lens (_name :: DnsARecordResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsARecordResource s)
 
-instance HasRecords (DnsARecordResource s) s Text where
+instance P.HasRecords (DnsARecordResource s) s Text where
     records =
         lens (_records :: DnsARecordResource s -> TF.Attribute s Text)
             (\s a -> s { _records = a } :: DnsARecordResource s)
 
-instance HasResourceGroupName (DnsARecordResource s) s Text where
+instance P.HasResourceGroupName (DnsARecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsARecordResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsARecordResource s)
 
-instance HasTags (DnsARecordResource s) s Text where
+instance P.HasTags (DnsARecordResource s) s Text where
     tags =
         lens (_tags :: DnsARecordResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsARecordResource s)
 
-instance HasZoneName (DnsARecordResource s) s Text where
+instance P.HasZoneName (DnsARecordResource s) s Text where
     zoneName =
         lens (_zone_name :: DnsARecordResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_name = a } :: DnsARecordResource s)
 
-instance HasComputedId (DnsARecordResource s) Text
+instance P.HasComputedId (DnsARecordResource s) Text
 
-dnsARecordResource :: TF.Resource TF.AzureRM (DnsARecordResource s)
+dnsARecordResource :: TF.Resource P.AzureRM (DnsARecordResource s)
 dnsARecordResource =
     TF.newResource "azurerm_dns_a_record" $
         DnsARecordResource {
@@ -2235,39 +2234,39 @@ instance TF.ToHCL (DnsAaaaRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance HasTTL (DnsAaaaRecordResource s) s Text where
+instance P.HasTTL (DnsAaaaRecordResource s) s Text where
     TTL =
         lens (_TTL :: DnsAaaaRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _TTL = a } :: DnsAaaaRecordResource s)
 
-instance HasName (DnsAaaaRecordResource s) s Text where
+instance P.HasName (DnsAaaaRecordResource s) s Text where
     name =
         lens (_name :: DnsAaaaRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsAaaaRecordResource s)
 
-instance HasRecords (DnsAaaaRecordResource s) s Text where
+instance P.HasRecords (DnsAaaaRecordResource s) s Text where
     records =
         lens (_records :: DnsAaaaRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _records = a } :: DnsAaaaRecordResource s)
 
-instance HasResourceGroupName (DnsAaaaRecordResource s) s Text where
+instance P.HasResourceGroupName (DnsAaaaRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsAaaaRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsAaaaRecordResource s)
 
-instance HasTags (DnsAaaaRecordResource s) s Text where
+instance P.HasTags (DnsAaaaRecordResource s) s Text where
     tags =
         lens (_tags :: DnsAaaaRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsAaaaRecordResource s)
 
-instance HasZoneName (DnsAaaaRecordResource s) s Text where
+instance P.HasZoneName (DnsAaaaRecordResource s) s Text where
     zoneName =
         lens (_zone_name :: DnsAaaaRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_name = a } :: DnsAaaaRecordResource s)
 
-instance HasComputedId (DnsAaaaRecordResource s) Text
+instance P.HasComputedId (DnsAaaaRecordResource s) Text
 
-dnsAaaaRecordResource :: TF.Resource TF.AzureRM (DnsAaaaRecordResource s)
+dnsAaaaRecordResource :: TF.Resource P.AzureRM (DnsAaaaRecordResource s)
 dnsAaaaRecordResource =
     TF.newResource "azurerm_dns_aaaa_record" $
         DnsAaaaRecordResource {
@@ -2308,39 +2307,39 @@ instance TF.ToHCL (DnsCnameRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance HasTTL (DnsCnameRecordResource s) s Text where
+instance P.HasTTL (DnsCnameRecordResource s) s Text where
     TTL =
         lens (_TTL :: DnsCnameRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _TTL = a } :: DnsCnameRecordResource s)
 
-instance HasName (DnsCnameRecordResource s) s Text where
+instance P.HasName (DnsCnameRecordResource s) s Text where
     name =
         lens (_name :: DnsCnameRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsCnameRecordResource s)
 
-instance HasRecord (DnsCnameRecordResource s) s Text where
+instance P.HasRecord (DnsCnameRecordResource s) s Text where
     record =
         lens (_record :: DnsCnameRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _record = a } :: DnsCnameRecordResource s)
 
-instance HasResourceGroupName (DnsCnameRecordResource s) s Text where
+instance P.HasResourceGroupName (DnsCnameRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsCnameRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsCnameRecordResource s)
 
-instance HasTags (DnsCnameRecordResource s) s Text where
+instance P.HasTags (DnsCnameRecordResource s) s Text where
     tags =
         lens (_tags :: DnsCnameRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsCnameRecordResource s)
 
-instance HasZoneName (DnsCnameRecordResource s) s Text where
+instance P.HasZoneName (DnsCnameRecordResource s) s Text where
     zoneName =
         lens (_zone_name :: DnsCnameRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_name = a } :: DnsCnameRecordResource s)
 
-instance HasComputedId (DnsCnameRecordResource s) Text
+instance P.HasComputedId (DnsCnameRecordResource s) Text
 
-dnsCnameRecordResource :: TF.Resource TF.AzureRM (DnsCnameRecordResource s)
+dnsCnameRecordResource :: TF.Resource P.AzureRM (DnsCnameRecordResource s)
 dnsCnameRecordResource =
     TF.newResource "azurerm_dns_cname_record" $
         DnsCnameRecordResource {
@@ -2381,39 +2380,39 @@ instance TF.ToHCL (DnsMxRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance HasName (DnsMxRecordResource s) s Text where
+instance P.HasName (DnsMxRecordResource s) s Text where
     name =
         lens (_name :: DnsMxRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsMxRecordResource s)
 
-instance HasRecord (DnsMxRecordResource s) s Text where
+instance P.HasRecord (DnsMxRecordResource s) s Text where
     record =
         lens (_record :: DnsMxRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _record = a } :: DnsMxRecordResource s)
 
-instance HasResourceGroupName (DnsMxRecordResource s) s Text where
+instance P.HasResourceGroupName (DnsMxRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsMxRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsMxRecordResource s)
 
-instance HasTags (DnsMxRecordResource s) s Text where
+instance P.HasTags (DnsMxRecordResource s) s Text where
     tags =
         lens (_tags :: DnsMxRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsMxRecordResource s)
 
-instance HasTtl (DnsMxRecordResource s) s Text where
+instance P.HasTtl (DnsMxRecordResource s) s Text where
     ttl =
         lens (_ttl :: DnsMxRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _ttl = a } :: DnsMxRecordResource s)
 
-instance HasZoneName (DnsMxRecordResource s) s Text where
+instance P.HasZoneName (DnsMxRecordResource s) s Text where
     zoneName =
         lens (_zone_name :: DnsMxRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_name = a } :: DnsMxRecordResource s)
 
-instance HasComputedId (DnsMxRecordResource s) Text
+instance P.HasComputedId (DnsMxRecordResource s) Text
 
-dnsMxRecordResource :: TF.Resource TF.AzureRM (DnsMxRecordResource s)
+dnsMxRecordResource :: TF.Resource P.AzureRM (DnsMxRecordResource s)
 dnsMxRecordResource =
     TF.newResource "azurerm_dns_mx_record" $
         DnsMxRecordResource {
@@ -2454,39 +2453,39 @@ instance TF.ToHCL (DnsNsRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance HasName (DnsNsRecordResource s) s Text where
+instance P.HasName (DnsNsRecordResource s) s Text where
     name =
         lens (_name :: DnsNsRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsNsRecordResource s)
 
-instance HasRecord (DnsNsRecordResource s) s Text where
+instance P.HasRecord (DnsNsRecordResource s) s Text where
     record =
         lens (_record :: DnsNsRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _record = a } :: DnsNsRecordResource s)
 
-instance HasResourceGroupName (DnsNsRecordResource s) s Text where
+instance P.HasResourceGroupName (DnsNsRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsNsRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsNsRecordResource s)
 
-instance HasTags (DnsNsRecordResource s) s Text where
+instance P.HasTags (DnsNsRecordResource s) s Text where
     tags =
         lens (_tags :: DnsNsRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsNsRecordResource s)
 
-instance HasTtl (DnsNsRecordResource s) s Text where
+instance P.HasTtl (DnsNsRecordResource s) s Text where
     ttl =
         lens (_ttl :: DnsNsRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _ttl = a } :: DnsNsRecordResource s)
 
-instance HasZoneName (DnsNsRecordResource s) s Text where
+instance P.HasZoneName (DnsNsRecordResource s) s Text where
     zoneName =
         lens (_zone_name :: DnsNsRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_name = a } :: DnsNsRecordResource s)
 
-instance HasComputedId (DnsNsRecordResource s) Text
+instance P.HasComputedId (DnsNsRecordResource s) Text
 
-dnsNsRecordResource :: TF.Resource TF.AzureRM (DnsNsRecordResource s)
+dnsNsRecordResource :: TF.Resource P.AzureRM (DnsNsRecordResource s)
 dnsNsRecordResource =
     TF.newResource "azurerm_dns_ns_record" $
         DnsNsRecordResource {
@@ -2527,39 +2526,39 @@ instance TF.ToHCL (DnsPtrRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance HasName (DnsPtrRecordResource s) s Text where
+instance P.HasName (DnsPtrRecordResource s) s Text where
     name =
         lens (_name :: DnsPtrRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsPtrRecordResource s)
 
-instance HasRecords (DnsPtrRecordResource s) s Text where
+instance P.HasRecords (DnsPtrRecordResource s) s Text where
     records =
         lens (_records :: DnsPtrRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _records = a } :: DnsPtrRecordResource s)
 
-instance HasResourceGroupName (DnsPtrRecordResource s) s Text where
+instance P.HasResourceGroupName (DnsPtrRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsPtrRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsPtrRecordResource s)
 
-instance HasTags (DnsPtrRecordResource s) s Text where
+instance P.HasTags (DnsPtrRecordResource s) s Text where
     tags =
         lens (_tags :: DnsPtrRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsPtrRecordResource s)
 
-instance HasTtl (DnsPtrRecordResource s) s Text where
+instance P.HasTtl (DnsPtrRecordResource s) s Text where
     ttl =
         lens (_ttl :: DnsPtrRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _ttl = a } :: DnsPtrRecordResource s)
 
-instance HasZoneName (DnsPtrRecordResource s) s Text where
+instance P.HasZoneName (DnsPtrRecordResource s) s Text where
     zoneName =
         lens (_zone_name :: DnsPtrRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_name = a } :: DnsPtrRecordResource s)
 
-instance HasComputedId (DnsPtrRecordResource s) Text
+instance P.HasComputedId (DnsPtrRecordResource s) Text
 
-dnsPtrRecordResource :: TF.Resource TF.AzureRM (DnsPtrRecordResource s)
+dnsPtrRecordResource :: TF.Resource P.AzureRM (DnsPtrRecordResource s)
 dnsPtrRecordResource =
     TF.newResource "azurerm_dns_ptr_record" $
         DnsPtrRecordResource {
@@ -2600,39 +2599,39 @@ instance TF.ToHCL (DnsSrvRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance HasName (DnsSrvRecordResource s) s Text where
+instance P.HasName (DnsSrvRecordResource s) s Text where
     name =
         lens (_name :: DnsSrvRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsSrvRecordResource s)
 
-instance HasRecord (DnsSrvRecordResource s) s Text where
+instance P.HasRecord (DnsSrvRecordResource s) s Text where
     record =
         lens (_record :: DnsSrvRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _record = a } :: DnsSrvRecordResource s)
 
-instance HasResourceGroupName (DnsSrvRecordResource s) s Text where
+instance P.HasResourceGroupName (DnsSrvRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsSrvRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsSrvRecordResource s)
 
-instance HasTags (DnsSrvRecordResource s) s Text where
+instance P.HasTags (DnsSrvRecordResource s) s Text where
     tags =
         lens (_tags :: DnsSrvRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsSrvRecordResource s)
 
-instance HasTtl (DnsSrvRecordResource s) s Text where
+instance P.HasTtl (DnsSrvRecordResource s) s Text where
     ttl =
         lens (_ttl :: DnsSrvRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _ttl = a } :: DnsSrvRecordResource s)
 
-instance HasZoneName (DnsSrvRecordResource s) s Text where
+instance P.HasZoneName (DnsSrvRecordResource s) s Text where
     zoneName =
         lens (_zone_name :: DnsSrvRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_name = a } :: DnsSrvRecordResource s)
 
-instance HasComputedId (DnsSrvRecordResource s) Text
+instance P.HasComputedId (DnsSrvRecordResource s) Text
 
-dnsSrvRecordResource :: TF.Resource TF.AzureRM (DnsSrvRecordResource s)
+dnsSrvRecordResource :: TF.Resource P.AzureRM (DnsSrvRecordResource s)
 dnsSrvRecordResource =
     TF.newResource "azurerm_dns_srv_record" $
         DnsSrvRecordResource {
@@ -2673,39 +2672,39 @@ instance TF.ToHCL (DnsTxtRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance HasName (DnsTxtRecordResource s) s Text where
+instance P.HasName (DnsTxtRecordResource s) s Text where
     name =
         lens (_name :: DnsTxtRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsTxtRecordResource s)
 
-instance HasRecord (DnsTxtRecordResource s) s Text where
+instance P.HasRecord (DnsTxtRecordResource s) s Text where
     record =
         lens (_record :: DnsTxtRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _record = a } :: DnsTxtRecordResource s)
 
-instance HasResourceGroupName (DnsTxtRecordResource s) s Text where
+instance P.HasResourceGroupName (DnsTxtRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsTxtRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsTxtRecordResource s)
 
-instance HasTags (DnsTxtRecordResource s) s Text where
+instance P.HasTags (DnsTxtRecordResource s) s Text where
     tags =
         lens (_tags :: DnsTxtRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsTxtRecordResource s)
 
-instance HasTtl (DnsTxtRecordResource s) s Text where
+instance P.HasTtl (DnsTxtRecordResource s) s Text where
     ttl =
         lens (_ttl :: DnsTxtRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _ttl = a } :: DnsTxtRecordResource s)
 
-instance HasZoneName (DnsTxtRecordResource s) s Text where
+instance P.HasZoneName (DnsTxtRecordResource s) s Text where
     zoneName =
         lens (_zone_name :: DnsTxtRecordResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_name = a } :: DnsTxtRecordResource s)
 
-instance HasComputedId (DnsTxtRecordResource s) Text
+instance P.HasComputedId (DnsTxtRecordResource s) Text
 
-dnsTxtRecordResource :: TF.Resource TF.AzureRM (DnsTxtRecordResource s)
+dnsTxtRecordResource :: TF.Resource P.AzureRM (DnsTxtRecordResource s)
 dnsTxtRecordResource =
     TF.newResource "azurerm_dns_txt_record" $
         DnsTxtRecordResource {
@@ -2739,30 +2738,30 @@ instance TF.ToHCL (DnsZoneResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasName (DnsZoneResource s) s Text where
+instance P.HasName (DnsZoneResource s) s Text where
     name =
         lens (_name :: DnsZoneResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsZoneResource s)
 
-instance HasResourceGroupName (DnsZoneResource s) s Text where
+instance P.HasResourceGroupName (DnsZoneResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsZoneResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: DnsZoneResource s)
 
-instance HasTags (DnsZoneResource s) s Text where
+instance P.HasTags (DnsZoneResource s) s Text where
     tags =
         lens (_tags :: DnsZoneResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DnsZoneResource s)
 
-instance HasComputedId (DnsZoneResource s) Text
+instance P.HasComputedId (DnsZoneResource s) Text
 
-instance HasComputedMaxNumberOfRecordSets (DnsZoneResource s) Text
+instance P.HasComputedMaxNumberOfRecordSets (DnsZoneResource s) Text
 
-instance HasComputedNameServers (DnsZoneResource s) Text
+instance P.HasComputedNameServers (DnsZoneResource s) Text
 
-instance HasComputedNumberOfRecordSets (DnsZoneResource s) Text
+instance P.HasComputedNumberOfRecordSets (DnsZoneResource s) Text
 
-dnsZoneResource :: TF.Resource TF.AzureRM (DnsZoneResource s)
+dnsZoneResource :: TF.Resource P.AzureRM (DnsZoneResource s)
 dnsZoneResource =
     TF.newResource "azurerm_dns_zone" $
         DnsZoneResource {
@@ -2795,35 +2794,35 @@ instance TF.ToHCL (EventgridTopicResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (EventgridTopicResource s) s Text where
+instance P.HasLocation (EventgridTopicResource s) s Text where
     location =
         lens (_location :: EventgridTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: EventgridTopicResource s)
 
-instance HasName (EventgridTopicResource s) s Text where
+instance P.HasName (EventgridTopicResource s) s Text where
     name =
         lens (_name :: EventgridTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: EventgridTopicResource s)
 
-instance HasResourceGroupName (EventgridTopicResource s) s Text where
+instance P.HasResourceGroupName (EventgridTopicResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: EventgridTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: EventgridTopicResource s)
 
-instance HasTags (EventgridTopicResource s) s Text where
+instance P.HasTags (EventgridTopicResource s) s Text where
     tags =
         lens (_tags :: EventgridTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: EventgridTopicResource s)
 
-instance HasComputedEndpoint (EventgridTopicResource s) Text
+instance P.HasComputedEndpoint (EventgridTopicResource s) Text
 
-instance HasComputedId (EventgridTopicResource s) Text
+instance P.HasComputedId (EventgridTopicResource s) Text
 
-instance HasComputedPrimaryAccessKey (EventgridTopicResource s) Text
+instance P.HasComputedPrimaryAccessKey (EventgridTopicResource s) Text
 
-instance HasComputedSecondaryAccessKey (EventgridTopicResource s) Text
+instance P.HasComputedSecondaryAccessKey (EventgridTopicResource s) Text
 
-eventgridTopicResource :: TF.Resource TF.AzureRM (EventgridTopicResource s)
+eventgridTopicResource :: TF.Resource P.AzureRM (EventgridTopicResource s)
 eventgridTopicResource =
     TF.newResource "azurerm_eventgrid_topic" $
         EventgridTopicResource {
@@ -2856,37 +2855,37 @@ instance TF.ToHCL (EventhubAuthorizationRuleResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasEventhubName (EventhubAuthorizationRuleResource s) s Text where
+instance P.HasEventhubName (EventhubAuthorizationRuleResource s) s Text where
     eventhubName =
         lens (_eventhub_name :: EventhubAuthorizationRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _eventhub_name = a } :: EventhubAuthorizationRuleResource s)
 
-instance HasName (EventhubAuthorizationRuleResource s) s Text where
+instance P.HasName (EventhubAuthorizationRuleResource s) s Text where
     name =
         lens (_name :: EventhubAuthorizationRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: EventhubAuthorizationRuleResource s)
 
-instance HasNamespaceName (EventhubAuthorizationRuleResource s) s Text where
+instance P.HasNamespaceName (EventhubAuthorizationRuleResource s) s Text where
     namespaceName =
         lens (_namespace_name :: EventhubAuthorizationRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _namespace_name = a } :: EventhubAuthorizationRuleResource s)
 
-instance HasResourceGroupName (EventhubAuthorizationRuleResource s) s Text where
+instance P.HasResourceGroupName (EventhubAuthorizationRuleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: EventhubAuthorizationRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: EventhubAuthorizationRuleResource s)
 
-instance HasComputedId (EventhubAuthorizationRuleResource s) Text
+instance P.HasComputedId (EventhubAuthorizationRuleResource s) Text
 
-instance HasComputedPrimaryConnectionString (EventhubAuthorizationRuleResource s) Text
+instance P.HasComputedPrimaryConnectionString (EventhubAuthorizationRuleResource s) Text
 
-instance HasComputedPrimaryKey (EventhubAuthorizationRuleResource s) Text
+instance P.HasComputedPrimaryKey (EventhubAuthorizationRuleResource s) Text
 
-instance HasComputedSecondaryConnectionString (EventhubAuthorizationRuleResource s) Text
+instance P.HasComputedSecondaryConnectionString (EventhubAuthorizationRuleResource s) Text
 
-instance HasComputedSecondaryKey (EventhubAuthorizationRuleResource s) Text
+instance P.HasComputedSecondaryKey (EventhubAuthorizationRuleResource s) Text
 
-eventhubAuthorizationRuleResource :: TF.Resource TF.AzureRM (EventhubAuthorizationRuleResource s)
+eventhubAuthorizationRuleResource :: TF.Resource P.AzureRM (EventhubAuthorizationRuleResource s)
 eventhubAuthorizationRuleResource =
     TF.newResource "azurerm_eventhub_authorization_rule" $
         EventhubAuthorizationRuleResource {
@@ -2923,34 +2922,34 @@ instance TF.ToHCL (EventhubConsumerGroupResource s) where
         , TF.attribute "user_metadata" _user_metadata
         ]
 
-instance HasEventhubName (EventhubConsumerGroupResource s) s Text where
+instance P.HasEventhubName (EventhubConsumerGroupResource s) s Text where
     eventhubName =
         lens (_eventhub_name :: EventhubConsumerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _eventhub_name = a } :: EventhubConsumerGroupResource s)
 
-instance HasName (EventhubConsumerGroupResource s) s Text where
+instance P.HasName (EventhubConsumerGroupResource s) s Text where
     name =
         lens (_name :: EventhubConsumerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: EventhubConsumerGroupResource s)
 
-instance HasNamespaceName (EventhubConsumerGroupResource s) s Text where
+instance P.HasNamespaceName (EventhubConsumerGroupResource s) s Text where
     namespaceName =
         lens (_namespace_name :: EventhubConsumerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _namespace_name = a } :: EventhubConsumerGroupResource s)
 
-instance HasResourceGroupName (EventhubConsumerGroupResource s) s Text where
+instance P.HasResourceGroupName (EventhubConsumerGroupResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: EventhubConsumerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: EventhubConsumerGroupResource s)
 
-instance HasUserMetadata (EventhubConsumerGroupResource s) s Text where
+instance P.HasUserMetadata (EventhubConsumerGroupResource s) s Text where
     userMetadata =
         lens (_user_metadata :: EventhubConsumerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _user_metadata = a } :: EventhubConsumerGroupResource s)
 
-instance HasComputedId (EventhubConsumerGroupResource s) Text
+instance P.HasComputedId (EventhubConsumerGroupResource s) Text
 
-eventhubConsumerGroupResource :: TF.Resource TF.AzureRM (EventhubConsumerGroupResource s)
+eventhubConsumerGroupResource :: TF.Resource P.AzureRM (EventhubConsumerGroupResource s)
 eventhubConsumerGroupResource =
     TF.newResource "azurerm_eventhub_consumer_group" $
         EventhubConsumerGroupResource {
@@ -2996,49 +2995,49 @@ instance TF.ToHCL (EventhubNamespaceResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAutoInflateEnabled (EventhubNamespaceResource s) s Text where
+instance P.HasAutoInflateEnabled (EventhubNamespaceResource s) s Text where
     autoInflateEnabled =
         lens (_auto_inflate_enabled :: EventhubNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_inflate_enabled = a } :: EventhubNamespaceResource s)
 
-instance HasCapacity (EventhubNamespaceResource s) s Text where
+instance P.HasCapacity (EventhubNamespaceResource s) s Text where
     capacity =
         lens (_capacity :: EventhubNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _capacity = a } :: EventhubNamespaceResource s)
 
-instance HasLocation (EventhubNamespaceResource s) s Text where
+instance P.HasLocation (EventhubNamespaceResource s) s Text where
     location =
         lens (_location :: EventhubNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: EventhubNamespaceResource s)
 
-instance HasMaximumThroughputUnits (EventhubNamespaceResource s) s Text where
+instance P.HasMaximumThroughputUnits (EventhubNamespaceResource s) s Text where
     maximumThroughputUnits =
         lens (_maximum_throughput_units :: EventhubNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _maximum_throughput_units = a } :: EventhubNamespaceResource s)
 
-instance HasName (EventhubNamespaceResource s) s Text where
+instance P.HasName (EventhubNamespaceResource s) s Text where
     name =
         lens (_name :: EventhubNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: EventhubNamespaceResource s)
 
-instance HasResourceGroupName (EventhubNamespaceResource s) s Text where
+instance P.HasResourceGroupName (EventhubNamespaceResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: EventhubNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: EventhubNamespaceResource s)
 
-instance HasSku (EventhubNamespaceResource s) s Text where
+instance P.HasSku (EventhubNamespaceResource s) s Text where
     sku =
         lens (_sku :: EventhubNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: EventhubNamespaceResource s)
 
-instance HasTags (EventhubNamespaceResource s) s Text where
+instance P.HasTags (EventhubNamespaceResource s) s Text where
     tags =
         lens (_tags :: EventhubNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: EventhubNamespaceResource s)
 
-instance HasComputedId (EventhubNamespaceResource s) Text
+instance P.HasComputedId (EventhubNamespaceResource s) Text
 
-eventhubNamespaceResource :: TF.Resource TF.AzureRM (EventhubNamespaceResource s)
+eventhubNamespaceResource :: TF.Resource P.AzureRM (EventhubNamespaceResource s)
 eventhubNamespaceResource =
     TF.newResource "azurerm_eventhub_namespace" $
         EventhubNamespaceResource {
@@ -3081,41 +3080,41 @@ instance TF.ToHCL (EventhubResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasCaptureDescription (EventhubResource s) s Text where
+instance P.HasCaptureDescription (EventhubResource s) s Text where
     captureDescription =
         lens (_capture_description :: EventhubResource s -> TF.Attribute s Text)
             (\s a -> s { _capture_description = a } :: EventhubResource s)
 
-instance HasMessageRetention (EventhubResource s) s Text where
+instance P.HasMessageRetention (EventhubResource s) s Text where
     messageRetention =
         lens (_message_retention :: EventhubResource s -> TF.Attribute s Text)
             (\s a -> s { _message_retention = a } :: EventhubResource s)
 
-instance HasName (EventhubResource s) s Text where
+instance P.HasName (EventhubResource s) s Text where
     name =
         lens (_name :: EventhubResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: EventhubResource s)
 
-instance HasNamespaceName (EventhubResource s) s Text where
+instance P.HasNamespaceName (EventhubResource s) s Text where
     namespaceName =
         lens (_namespace_name :: EventhubResource s -> TF.Attribute s Text)
             (\s a -> s { _namespace_name = a } :: EventhubResource s)
 
-instance HasPartitionCount (EventhubResource s) s Text where
+instance P.HasPartitionCount (EventhubResource s) s Text where
     partitionCount =
         lens (_partition_count :: EventhubResource s -> TF.Attribute s Text)
             (\s a -> s { _partition_count = a } :: EventhubResource s)
 
-instance HasResourceGroupName (EventhubResource s) s Text where
+instance P.HasResourceGroupName (EventhubResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: EventhubResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: EventhubResource s)
 
-instance HasComputedId (EventhubResource s) Text
+instance P.HasComputedId (EventhubResource s) Text
 
-instance HasComputedPartitionIds (EventhubResource s) Text
+instance P.HasComputedPartitionIds (EventhubResource s) Text
 
-eventhubResource :: TF.Resource TF.AzureRM (EventhubResource s)
+eventhubResource :: TF.Resource P.AzureRM (EventhubResource s)
 eventhubResource =
     TF.newResource "azurerm_eventhub" $
         EventhubResource {
@@ -3165,58 +3164,58 @@ instance TF.ToHCL (ExpressRouteCircuitResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAllowClassicOperations (ExpressRouteCircuitResource s) s Text where
+instance P.HasAllowClassicOperations (ExpressRouteCircuitResource s) s Text where
     allowClassicOperations =
         lens (_allow_classic_operations :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _allow_classic_operations = a } :: ExpressRouteCircuitResource s)
 
-instance HasBandwidthInMbps (ExpressRouteCircuitResource s) s Text where
+instance P.HasBandwidthInMbps (ExpressRouteCircuitResource s) s Text where
     bandwidthInMbps =
         lens (_bandwidth_in_mbps :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _bandwidth_in_mbps = a } :: ExpressRouteCircuitResource s)
 
-instance HasLocation (ExpressRouteCircuitResource s) s Text where
+instance P.HasLocation (ExpressRouteCircuitResource s) s Text where
     location =
         lens (_location :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ExpressRouteCircuitResource s)
 
-instance HasName (ExpressRouteCircuitResource s) s Text where
+instance P.HasName (ExpressRouteCircuitResource s) s Text where
     name =
         lens (_name :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ExpressRouteCircuitResource s)
 
-instance HasPeeringLocation (ExpressRouteCircuitResource s) s Text where
+instance P.HasPeeringLocation (ExpressRouteCircuitResource s) s Text where
     peeringLocation =
         lens (_peering_location :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _peering_location = a } :: ExpressRouteCircuitResource s)
 
-instance HasResourceGroupName (ExpressRouteCircuitResource s) s Text where
+instance P.HasResourceGroupName (ExpressRouteCircuitResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ExpressRouteCircuitResource s)
 
-instance HasServiceProviderName (ExpressRouteCircuitResource s) s Text where
+instance P.HasServiceProviderName (ExpressRouteCircuitResource s) s Text where
     serviceProviderName =
         lens (_service_provider_name :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _service_provider_name = a } :: ExpressRouteCircuitResource s)
 
-instance HasSku (ExpressRouteCircuitResource s) s Text where
+instance P.HasSku (ExpressRouteCircuitResource s) s Text where
     sku =
         lens (_sku :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: ExpressRouteCircuitResource s)
 
-instance HasTags (ExpressRouteCircuitResource s) s Text where
+instance P.HasTags (ExpressRouteCircuitResource s) s Text where
     tags =
         lens (_tags :: ExpressRouteCircuitResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ExpressRouteCircuitResource s)
 
-instance HasComputedId (ExpressRouteCircuitResource s) Text
+instance P.HasComputedId (ExpressRouteCircuitResource s) Text
 
-instance HasComputedServiceKey (ExpressRouteCircuitResource s) Text
+instance P.HasComputedServiceKey (ExpressRouteCircuitResource s) Text
 
-instance HasComputedServiceProviderProvisioningState (ExpressRouteCircuitResource s) Text
+instance P.HasComputedServiceProviderProvisioningState (ExpressRouteCircuitResource s) Text
 
-expressRouteCircuitResource :: TF.Resource TF.AzureRM (ExpressRouteCircuitResource s)
+expressRouteCircuitResource :: TF.Resource P.AzureRM (ExpressRouteCircuitResource s)
 expressRouteCircuitResource =
     TF.newResource "azurerm_express_route_circuit" $
         ExpressRouteCircuitResource {
@@ -3281,68 +3280,68 @@ instance TF.ToHCL (FunctionAppResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasAppServicePlanId (FunctionAppResource s) s Text where
+instance P.HasAppServicePlanId (FunctionAppResource s) s Text where
     appServicePlanId =
         lens (_app_service_plan_id :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _app_service_plan_id = a } :: FunctionAppResource s)
 
-instance HasAppSettings (FunctionAppResource s) s Text where
+instance P.HasAppSettings (FunctionAppResource s) s Text where
     appSettings =
         lens (_app_settings :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _app_settings = a } :: FunctionAppResource s)
 
-instance HasConnectionString (FunctionAppResource s) s Text where
+instance P.HasConnectionString (FunctionAppResource s) s Text where
     connectionString =
         lens (_connection_string :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _connection_string = a } :: FunctionAppResource s)
 
-instance HasEnabled (FunctionAppResource s) s Text where
+instance P.HasEnabled (FunctionAppResource s) s Text where
     enabled =
         lens (_enabled :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _enabled = a } :: FunctionAppResource s)
 
-instance HasLocation (FunctionAppResource s) s Text where
+instance P.HasLocation (FunctionAppResource s) s Text where
     location =
         lens (_location :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: FunctionAppResource s)
 
-instance HasName (FunctionAppResource s) s Text where
+instance P.HasName (FunctionAppResource s) s Text where
     name =
         lens (_name :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: FunctionAppResource s)
 
-instance HasResourceGroupName (FunctionAppResource s) s Text where
+instance P.HasResourceGroupName (FunctionAppResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: FunctionAppResource s)
 
-instance HasSiteConfig (FunctionAppResource s) s Text where
+instance P.HasSiteConfig (FunctionAppResource s) s Text where
     siteConfig =
         lens (_site_config :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _site_config = a } :: FunctionAppResource s)
 
-instance HasStorageConnectionString (FunctionAppResource s) s Text where
+instance P.HasStorageConnectionString (FunctionAppResource s) s Text where
     storageConnectionString =
         lens (_storage_connection_string :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_connection_string = a } :: FunctionAppResource s)
 
-instance HasTags (FunctionAppResource s) s Text where
+instance P.HasTags (FunctionAppResource s) s Text where
     tags =
         lens (_tags :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: FunctionAppResource s)
 
-instance HasVersion (FunctionAppResource s) s Text where
+instance P.HasVersion (FunctionAppResource s) s Text where
     version =
         lens (_version :: FunctionAppResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: FunctionAppResource s)
 
-instance HasComputedDefaultHostname (FunctionAppResource s) Text
+instance P.HasComputedDefaultHostname (FunctionAppResource s) Text
 
-instance HasComputedId (FunctionAppResource s) Text
+instance P.HasComputedId (FunctionAppResource s) Text
 
-instance HasComputedOutboundIpAddresses (FunctionAppResource s) Text
+instance P.HasComputedOutboundIpAddresses (FunctionAppResource s) Text
 
-functionAppResource :: TF.Resource TF.AzureRM (FunctionAppResource s)
+functionAppResource :: TF.Resource P.AzureRM (FunctionAppResource s)
 functionAppResource =
     TF.newResource "azurerm_function_app" $
         FunctionAppResource {
@@ -3392,44 +3391,44 @@ instance TF.ToHCL (ImageResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasDataDisk (ImageResource s) s Text where
+instance P.HasDataDisk (ImageResource s) s Text where
     dataDisk =
         lens (_data_disk :: ImageResource s -> TF.Attribute s Text)
             (\s a -> s { _data_disk = a } :: ImageResource s)
 
-instance HasLocation (ImageResource s) s Text where
+instance P.HasLocation (ImageResource s) s Text where
     location =
         lens (_location :: ImageResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ImageResource s)
 
-instance HasName (ImageResource s) s Text where
+instance P.HasName (ImageResource s) s Text where
     name =
         lens (_name :: ImageResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ImageResource s)
 
-instance HasOsDisk (ImageResource s) s Text where
+instance P.HasOsDisk (ImageResource s) s Text where
     osDisk =
         lens (_os_disk :: ImageResource s -> TF.Attribute s Text)
             (\s a -> s { _os_disk = a } :: ImageResource s)
 
-instance HasResourceGroupName (ImageResource s) s Text where
+instance P.HasResourceGroupName (ImageResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ImageResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ImageResource s)
 
-instance HasSourceVirtualMachineId (ImageResource s) s Text where
+instance P.HasSourceVirtualMachineId (ImageResource s) s Text where
     sourceVirtualMachineId =
         lens (_source_virtual_machine_id :: ImageResource s -> TF.Attribute s Text)
             (\s a -> s { _source_virtual_machine_id = a } :: ImageResource s)
 
-instance HasTags (ImageResource s) s Text where
+instance P.HasTags (ImageResource s) s Text where
     tags =
         lens (_tags :: ImageResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ImageResource s)
 
-instance HasComputedId (ImageResource s) Text
+instance P.HasComputedId (ImageResource s) Text
 
-imageResource :: TF.Resource TF.AzureRM (ImageResource s)
+imageResource :: TF.Resource P.AzureRM (ImageResource s)
 imageResource =
     TF.newResource "azurerm_image" $
         ImageResource {
@@ -3468,36 +3467,36 @@ instance TF.ToHCL (KeyVaultCertificateResource s) where
         , TF.attribute "vault_uri" _vault_uri
         ]
 
-instance HasCertificate (KeyVaultCertificateResource s) s Text where
+instance P.HasCertificate (KeyVaultCertificateResource s) s Text where
     certificate =
         lens (_certificate :: KeyVaultCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _certificate = a } :: KeyVaultCertificateResource s)
 
-instance HasCertificatePolicy (KeyVaultCertificateResource s) s Text where
+instance P.HasCertificatePolicy (KeyVaultCertificateResource s) s Text where
     certificatePolicy =
         lens (_certificate_policy :: KeyVaultCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _certificate_policy = a } :: KeyVaultCertificateResource s)
 
-instance HasName (KeyVaultCertificateResource s) s Text where
+instance P.HasName (KeyVaultCertificateResource s) s Text where
     name =
         lens (_name :: KeyVaultCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: KeyVaultCertificateResource s)
 
-instance HasTags (KeyVaultCertificateResource s) s Text where
+instance P.HasTags (KeyVaultCertificateResource s) s Text where
     tags =
         lens (_tags :: KeyVaultCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: KeyVaultCertificateResource s)
 
-instance HasVaultUri (KeyVaultCertificateResource s) s Text where
+instance P.HasVaultUri (KeyVaultCertificateResource s) s Text where
     vaultUri =
         lens (_vault_uri :: KeyVaultCertificateResource s -> TF.Attribute s Text)
             (\s a -> s { _vault_uri = a } :: KeyVaultCertificateResource s)
 
-instance HasComputedId (KeyVaultCertificateResource s) Text
+instance P.HasComputedId (KeyVaultCertificateResource s) Text
 
-instance HasComputedVersion (KeyVaultCertificateResource s) Text
+instance P.HasComputedVersion (KeyVaultCertificateResource s) Text
 
-keyVaultCertificateResource :: TF.Resource TF.AzureRM (KeyVaultCertificateResource s)
+keyVaultCertificateResource :: TF.Resource P.AzureRM (KeyVaultCertificateResource s)
 keyVaultCertificateResource =
     TF.newResource "azurerm_key_vault_certificate" $
         KeyVaultCertificateResource {
@@ -3537,45 +3536,45 @@ instance TF.ToHCL (KeyVaultKeyResource s) where
         , TF.attribute "vault_uri" _vault_uri
         ]
 
-instance HasKeyOpts (KeyVaultKeyResource s) s Text where
+instance P.HasKeyOpts (KeyVaultKeyResource s) s Text where
     keyOpts =
         lens (_key_opts :: KeyVaultKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _key_opts = a } :: KeyVaultKeyResource s)
 
-instance HasKeySize (KeyVaultKeyResource s) s Text where
+instance P.HasKeySize (KeyVaultKeyResource s) s Text where
     keySize =
         lens (_key_size :: KeyVaultKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _key_size = a } :: KeyVaultKeyResource s)
 
-instance HasKeyType (KeyVaultKeyResource s) s Text where
+instance P.HasKeyType (KeyVaultKeyResource s) s Text where
     keyType =
         lens (_key_type :: KeyVaultKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _key_type = a } :: KeyVaultKeyResource s)
 
-instance HasName (KeyVaultKeyResource s) s Text where
+instance P.HasName (KeyVaultKeyResource s) s Text where
     name =
         lens (_name :: KeyVaultKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: KeyVaultKeyResource s)
 
-instance HasTags (KeyVaultKeyResource s) s Text where
+instance P.HasTags (KeyVaultKeyResource s) s Text where
     tags =
         lens (_tags :: KeyVaultKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: KeyVaultKeyResource s)
 
-instance HasVaultUri (KeyVaultKeyResource s) s Text where
+instance P.HasVaultUri (KeyVaultKeyResource s) s Text where
     vaultUri =
         lens (_vault_uri :: KeyVaultKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _vault_uri = a } :: KeyVaultKeyResource s)
 
-instance HasComputedE (KeyVaultKeyResource s) Text
+instance P.HasComputedE (KeyVaultKeyResource s) Text
 
-instance HasComputedId (KeyVaultKeyResource s) Text
+instance P.HasComputedId (KeyVaultKeyResource s) Text
 
-instance HasComputedN (KeyVaultKeyResource s) Text
+instance P.HasComputedN (KeyVaultKeyResource s) Text
 
-instance HasComputedVersion (KeyVaultKeyResource s) Text
+instance P.HasComputedVersion (KeyVaultKeyResource s) Text
 
-keyVaultKeyResource :: TF.Resource TF.AzureRM (KeyVaultKeyResource s)
+keyVaultKeyResource :: TF.Resource P.AzureRM (KeyVaultKeyResource s)
 keyVaultKeyResource =
     TF.newResource "azurerm_key_vault_key" $
         KeyVaultKeyResource {
@@ -3628,61 +3627,61 @@ instance TF.ToHCL (KeyVaultResource s) where
         , TF.attribute "tenant_id" _tenant_id
         ]
 
-instance HasAccessPolicy (KeyVaultResource s) s Text where
+instance P.HasAccessPolicy (KeyVaultResource s) s Text where
     accessPolicy =
         lens (_access_policy :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _access_policy = a } :: KeyVaultResource s)
 
-instance HasEnabledForDeployment (KeyVaultResource s) s Text where
+instance P.HasEnabledForDeployment (KeyVaultResource s) s Text where
     enabledForDeployment =
         lens (_enabled_for_deployment :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _enabled_for_deployment = a } :: KeyVaultResource s)
 
-instance HasEnabledForDiskEncryption (KeyVaultResource s) s Text where
+instance P.HasEnabledForDiskEncryption (KeyVaultResource s) s Text where
     enabledForDiskEncryption =
         lens (_enabled_for_disk_encryption :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _enabled_for_disk_encryption = a } :: KeyVaultResource s)
 
-instance HasEnabledForTemplateDeployment (KeyVaultResource s) s Text where
+instance P.HasEnabledForTemplateDeployment (KeyVaultResource s) s Text where
     enabledForTemplateDeployment =
         lens (_enabled_for_template_deployment :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _enabled_for_template_deployment = a } :: KeyVaultResource s)
 
-instance HasLocation (KeyVaultResource s) s Text where
+instance P.HasLocation (KeyVaultResource s) s Text where
     location =
         lens (_location :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: KeyVaultResource s)
 
-instance HasName (KeyVaultResource s) s Text where
+instance P.HasName (KeyVaultResource s) s Text where
     name =
         lens (_name :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: KeyVaultResource s)
 
-instance HasResourceGroupName (KeyVaultResource s) s Text where
+instance P.HasResourceGroupName (KeyVaultResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: KeyVaultResource s)
 
-instance HasSku (KeyVaultResource s) s Text where
+instance P.HasSku (KeyVaultResource s) s Text where
     sku =
         lens (_sku :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: KeyVaultResource s)
 
-instance HasTags (KeyVaultResource s) s Text where
+instance P.HasTags (KeyVaultResource s) s Text where
     tags =
         lens (_tags :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: KeyVaultResource s)
 
-instance HasTenantId (KeyVaultResource s) s Text where
+instance P.HasTenantId (KeyVaultResource s) s Text where
     tenantId =
         lens (_tenant_id :: KeyVaultResource s -> TF.Attribute s Text)
             (\s a -> s { _tenant_id = a } :: KeyVaultResource s)
 
-instance HasComputedId (KeyVaultResource s) Text
+instance P.HasComputedId (KeyVaultResource s) Text
 
-instance HasComputedVaultUri (KeyVaultResource s) Text
+instance P.HasComputedVaultUri (KeyVaultResource s) Text
 
-keyVaultResource :: TF.Resource TF.AzureRM (KeyVaultResource s)
+keyVaultResource :: TF.Resource P.AzureRM (KeyVaultResource s)
 keyVaultResource =
     TF.newResource "azurerm_key_vault" $
         KeyVaultResource {
@@ -3724,36 +3723,36 @@ instance TF.ToHCL (KeyVaultSecretResource s) where
         , TF.attribute "vault_uri" _vault_uri
         ]
 
-instance HasContentType (KeyVaultSecretResource s) s Text where
+instance P.HasContentType (KeyVaultSecretResource s) s Text where
     contentType =
         lens (_content_type :: KeyVaultSecretResource s -> TF.Attribute s Text)
             (\s a -> s { _content_type = a } :: KeyVaultSecretResource s)
 
-instance HasName (KeyVaultSecretResource s) s Text where
+instance P.HasName (KeyVaultSecretResource s) s Text where
     name =
         lens (_name :: KeyVaultSecretResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: KeyVaultSecretResource s)
 
-instance HasTags (KeyVaultSecretResource s) s Text where
+instance P.HasTags (KeyVaultSecretResource s) s Text where
     tags =
         lens (_tags :: KeyVaultSecretResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: KeyVaultSecretResource s)
 
-instance HasValue (KeyVaultSecretResource s) s Text where
+instance P.HasValue (KeyVaultSecretResource s) s Text where
     value =
         lens (_value :: KeyVaultSecretResource s -> TF.Attribute s Text)
             (\s a -> s { _value = a } :: KeyVaultSecretResource s)
 
-instance HasVaultUri (KeyVaultSecretResource s) s Text where
+instance P.HasVaultUri (KeyVaultSecretResource s) s Text where
     vaultUri =
         lens (_vault_uri :: KeyVaultSecretResource s -> TF.Attribute s Text)
             (\s a -> s { _vault_uri = a } :: KeyVaultSecretResource s)
 
-instance HasComputedId (KeyVaultSecretResource s) Text
+instance P.HasComputedId (KeyVaultSecretResource s) Text
 
-instance HasComputedVersion (KeyVaultSecretResource s) Text
+instance P.HasComputedVersion (KeyVaultSecretResource s) Text
 
-keyVaultSecretResource :: TF.Resource TF.AzureRM (KeyVaultSecretResource s)
+keyVaultSecretResource :: TF.Resource P.AzureRM (KeyVaultSecretResource s)
 keyVaultSecretResource =
     TF.newResource "azurerm_key_vault_secret" $
         KeyVaultSecretResource {
@@ -3786,24 +3785,24 @@ instance TF.ToHCL (LbBackendAddressPoolResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasLoadbalancerId (LbBackendAddressPoolResource s) s Text where
+instance P.HasLoadbalancerId (LbBackendAddressPoolResource s) s Text where
     loadbalancerId =
         lens (_loadbalancer_id :: LbBackendAddressPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _loadbalancer_id = a } :: LbBackendAddressPoolResource s)
 
-instance HasName (LbBackendAddressPoolResource s) s Text where
+instance P.HasName (LbBackendAddressPoolResource s) s Text where
     name =
         lens (_name :: LbBackendAddressPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbBackendAddressPoolResource s)
 
-instance HasResourceGroupName (LbBackendAddressPoolResource s) s Text where
+instance P.HasResourceGroupName (LbBackendAddressPoolResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: LbBackendAddressPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: LbBackendAddressPoolResource s)
 
-instance HasComputedId (LbBackendAddressPoolResource s) Text
+instance P.HasComputedId (LbBackendAddressPoolResource s) Text
 
-lbBackendAddressPoolResource :: TF.Resource TF.AzureRM (LbBackendAddressPoolResource s)
+lbBackendAddressPoolResource :: TF.Resource P.AzureRM (LbBackendAddressPoolResource s)
 lbBackendAddressPoolResource =
     TF.newResource "azurerm_lb_backend_address_pool" $
         LbBackendAddressPoolResource {
@@ -3848,49 +3847,49 @@ instance TF.ToHCL (LbNatPoolResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasBackendPort (LbNatPoolResource s) s Text where
+instance P.HasBackendPort (LbNatPoolResource s) s Text where
     backendPort =
         lens (_backend_port :: LbNatPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_port = a } :: LbNatPoolResource s)
 
-instance HasFrontendIpConfigurationName (LbNatPoolResource s) s Text where
+instance P.HasFrontendIpConfigurationName (LbNatPoolResource s) s Text where
     frontendIpConfigurationName =
         lens (_frontend_ip_configuration_name :: LbNatPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_ip_configuration_name = a } :: LbNatPoolResource s)
 
-instance HasFrontendPortEnd (LbNatPoolResource s) s Text where
+instance P.HasFrontendPortEnd (LbNatPoolResource s) s Text where
     frontendPortEnd =
         lens (_frontend_port_end :: LbNatPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_port_end = a } :: LbNatPoolResource s)
 
-instance HasFrontendPortStart (LbNatPoolResource s) s Text where
+instance P.HasFrontendPortStart (LbNatPoolResource s) s Text where
     frontendPortStart =
         lens (_frontend_port_start :: LbNatPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_port_start = a } :: LbNatPoolResource s)
 
-instance HasLoadbalancerId (LbNatPoolResource s) s Text where
+instance P.HasLoadbalancerId (LbNatPoolResource s) s Text where
     loadbalancerId =
         lens (_loadbalancer_id :: LbNatPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _loadbalancer_id = a } :: LbNatPoolResource s)
 
-instance HasName (LbNatPoolResource s) s Text where
+instance P.HasName (LbNatPoolResource s) s Text where
     name =
         lens (_name :: LbNatPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbNatPoolResource s)
 
-instance HasProtocol (LbNatPoolResource s) s Text where
+instance P.HasProtocol (LbNatPoolResource s) s Text where
     protocol =
         lens (_protocol :: LbNatPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: LbNatPoolResource s)
 
-instance HasResourceGroupName (LbNatPoolResource s) s Text where
+instance P.HasResourceGroupName (LbNatPoolResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: LbNatPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: LbNatPoolResource s)
 
-instance HasComputedId (LbNatPoolResource s) Text
+instance P.HasComputedId (LbNatPoolResource s) Text
 
-lbNatPoolResource :: TF.Resource TF.AzureRM (LbNatPoolResource s)
+lbNatPoolResource :: TF.Resource P.AzureRM (LbNatPoolResource s)
 lbNatPoolResource =
     TF.newResource "azurerm_lb_nat_pool" $
         LbNatPoolResource {
@@ -3940,49 +3939,49 @@ instance TF.ToHCL (LbNatRuleResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasBackendPort (LbNatRuleResource s) s Text where
+instance P.HasBackendPort (LbNatRuleResource s) s Text where
     backendPort =
         lens (_backend_port :: LbNatRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_port = a } :: LbNatRuleResource s)
 
-instance HasEnableFloatingIp (LbNatRuleResource s) s Text where
+instance P.HasEnableFloatingIp (LbNatRuleResource s) s Text where
     enableFloatingIp =
         lens (_enable_floating_ip :: LbNatRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_floating_ip = a } :: LbNatRuleResource s)
 
-instance HasFrontendIpConfigurationName (LbNatRuleResource s) s Text where
+instance P.HasFrontendIpConfigurationName (LbNatRuleResource s) s Text where
     frontendIpConfigurationName =
         lens (_frontend_ip_configuration_name :: LbNatRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_ip_configuration_name = a } :: LbNatRuleResource s)
 
-instance HasFrontendPort (LbNatRuleResource s) s Text where
+instance P.HasFrontendPort (LbNatRuleResource s) s Text where
     frontendPort =
         lens (_frontend_port :: LbNatRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_port = a } :: LbNatRuleResource s)
 
-instance HasLoadbalancerId (LbNatRuleResource s) s Text where
+instance P.HasLoadbalancerId (LbNatRuleResource s) s Text where
     loadbalancerId =
         lens (_loadbalancer_id :: LbNatRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _loadbalancer_id = a } :: LbNatRuleResource s)
 
-instance HasName (LbNatRuleResource s) s Text where
+instance P.HasName (LbNatRuleResource s) s Text where
     name =
         lens (_name :: LbNatRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbNatRuleResource s)
 
-instance HasProtocol (LbNatRuleResource s) s Text where
+instance P.HasProtocol (LbNatRuleResource s) s Text where
     protocol =
         lens (_protocol :: LbNatRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: LbNatRuleResource s)
 
-instance HasResourceGroupName (LbNatRuleResource s) s Text where
+instance P.HasResourceGroupName (LbNatRuleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: LbNatRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: LbNatRuleResource s)
 
-instance HasComputedId (LbNatRuleResource s) Text
+instance P.HasComputedId (LbNatRuleResource s) Text
 
-lbNatRuleResource :: TF.Resource TF.AzureRM (LbNatRuleResource s)
+lbNatRuleResource :: TF.Resource P.AzureRM (LbNatRuleResource s)
 lbNatRuleResource =
     TF.newResource "azurerm_lb_nat_rule" $
         LbNatRuleResource {
@@ -4032,49 +4031,49 @@ instance TF.ToHCL (LbProbeResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasIntervalInSeconds (LbProbeResource s) s Text where
+instance P.HasIntervalInSeconds (LbProbeResource s) s Text where
     intervalInSeconds =
         lens (_interval_in_seconds :: LbProbeResource s -> TF.Attribute s Text)
             (\s a -> s { _interval_in_seconds = a } :: LbProbeResource s)
 
-instance HasLoadbalancerId (LbProbeResource s) s Text where
+instance P.HasLoadbalancerId (LbProbeResource s) s Text where
     loadbalancerId =
         lens (_loadbalancer_id :: LbProbeResource s -> TF.Attribute s Text)
             (\s a -> s { _loadbalancer_id = a } :: LbProbeResource s)
 
-instance HasName (LbProbeResource s) s Text where
+instance P.HasName (LbProbeResource s) s Text where
     name =
         lens (_name :: LbProbeResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbProbeResource s)
 
-instance HasNumberOfProbes (LbProbeResource s) s Text where
+instance P.HasNumberOfProbes (LbProbeResource s) s Text where
     numberOfProbes =
         lens (_number_of_probes :: LbProbeResource s -> TF.Attribute s Text)
             (\s a -> s { _number_of_probes = a } :: LbProbeResource s)
 
-instance HasPort (LbProbeResource s) s Text where
+instance P.HasPort (LbProbeResource s) s Text where
     port =
         lens (_port :: LbProbeResource s -> TF.Attribute s Text)
             (\s a -> s { _port = a } :: LbProbeResource s)
 
-instance HasProtocol (LbProbeResource s) s Text where
+instance P.HasProtocol (LbProbeResource s) s Text where
     protocol =
         lens (_protocol :: LbProbeResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: LbProbeResource s)
 
-instance HasRequestPath (LbProbeResource s) s Text where
+instance P.HasRequestPath (LbProbeResource s) s Text where
     requestPath =
         lens (_request_path :: LbProbeResource s -> TF.Attribute s Text)
             (\s a -> s { _request_path = a } :: LbProbeResource s)
 
-instance HasResourceGroupName (LbProbeResource s) s Text where
+instance P.HasResourceGroupName (LbProbeResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: LbProbeResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: LbProbeResource s)
 
-instance HasComputedId (LbProbeResource s) Text
+instance P.HasComputedId (LbProbeResource s) Text
 
-lbProbeResource :: TF.Resource TF.AzureRM (LbProbeResource s)
+lbProbeResource :: TF.Resource P.AzureRM (LbProbeResource s)
 lbProbeResource =
     TF.newResource "azurerm_lb_probe" $
         LbProbeResource {
@@ -4114,38 +4113,38 @@ instance TF.ToHCL (LbResource s) where
         , TF.attribute "sku" _sku
         ]
 
-instance HasFrontendIpConfiguration (LbResource s) s Text where
+instance P.HasFrontendIpConfiguration (LbResource s) s Text where
     frontendIpConfiguration =
         lens (_frontend_ip_configuration :: LbResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_ip_configuration = a } :: LbResource s)
 
-instance HasLocation (LbResource s) s Text where
+instance P.HasLocation (LbResource s) s Text where
     location =
         lens (_location :: LbResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: LbResource s)
 
-instance HasName (LbResource s) s Text where
+instance P.HasName (LbResource s) s Text where
     name =
         lens (_name :: LbResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbResource s)
 
-instance HasResourceGroupName (LbResource s) s Text where
+instance P.HasResourceGroupName (LbResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: LbResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: LbResource s)
 
-instance HasSku (LbResource s) s Text where
+instance P.HasSku (LbResource s) s Text where
     sku =
         lens (_sku :: LbResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: LbResource s)
 
-instance HasComputedId (LbResource s) Text
+instance P.HasComputedId (LbResource s) Text
 
-instance HasComputedPrivateIpAddress (LbResource s) Text
+instance P.HasComputedPrivateIpAddress (LbResource s) Text
 
-instance HasComputedPrivateIpAddresses (LbResource s) Text
+instance P.HasComputedPrivateIpAddresses (LbResource s) Text
 
-lbResource :: TF.Resource TF.AzureRM (LbResource s)
+lbResource :: TF.Resource P.AzureRM (LbResource s)
 lbResource =
     TF.newResource "azurerm_lb" $
         LbResource {
@@ -4204,69 +4203,69 @@ instance TF.ToHCL (LbRuleResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasBackendAddressPoolId (LbRuleResource s) s Text where
+instance P.HasBackendAddressPoolId (LbRuleResource s) s Text where
     backendAddressPoolId =
         lens (_backend_address_pool_id :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_address_pool_id = a } :: LbRuleResource s)
 
-instance HasBackendPort (LbRuleResource s) s Text where
+instance P.HasBackendPort (LbRuleResource s) s Text where
     backendPort =
         lens (_backend_port :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_port = a } :: LbRuleResource s)
 
-instance HasEnableFloatingIp (LbRuleResource s) s Text where
+instance P.HasEnableFloatingIp (LbRuleResource s) s Text where
     enableFloatingIp =
         lens (_enable_floating_ip :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_floating_ip = a } :: LbRuleResource s)
 
-instance HasFrontendIpConfigurationName (LbRuleResource s) s Text where
+instance P.HasFrontendIpConfigurationName (LbRuleResource s) s Text where
     frontendIpConfigurationName =
         lens (_frontend_ip_configuration_name :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_ip_configuration_name = a } :: LbRuleResource s)
 
-instance HasFrontendPort (LbRuleResource s) s Text where
+instance P.HasFrontendPort (LbRuleResource s) s Text where
     frontendPort =
         lens (_frontend_port :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_port = a } :: LbRuleResource s)
 
-instance HasIdleTimeoutInMinutes (LbRuleResource s) s Text where
+instance P.HasIdleTimeoutInMinutes (LbRuleResource s) s Text where
     idleTimeoutInMinutes =
         lens (_idle_timeout_in_minutes :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _idle_timeout_in_minutes = a } :: LbRuleResource s)
 
-instance HasLoadDistribution (LbRuleResource s) s Text where
+instance P.HasLoadDistribution (LbRuleResource s) s Text where
     loadDistribution =
         lens (_load_distribution :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _load_distribution = a } :: LbRuleResource s)
 
-instance HasLoadbalancerId (LbRuleResource s) s Text where
+instance P.HasLoadbalancerId (LbRuleResource s) s Text where
     loadbalancerId =
         lens (_loadbalancer_id :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _loadbalancer_id = a } :: LbRuleResource s)
 
-instance HasName (LbRuleResource s) s Text where
+instance P.HasName (LbRuleResource s) s Text where
     name =
         lens (_name :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbRuleResource s)
 
-instance HasProbeId (LbRuleResource s) s Text where
+instance P.HasProbeId (LbRuleResource s) s Text where
     probeId =
         lens (_probe_id :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _probe_id = a } :: LbRuleResource s)
 
-instance HasProtocol (LbRuleResource s) s Text where
+instance P.HasProtocol (LbRuleResource s) s Text where
     protocol =
         lens (_protocol :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: LbRuleResource s)
 
-instance HasResourceGroupName (LbRuleResource s) s Text where
+instance P.HasResourceGroupName (LbRuleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: LbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: LbRuleResource s)
 
-instance HasComputedId (LbRuleResource s) Text
+instance P.HasComputedId (LbRuleResource s) Text
 
-lbRuleResource :: TF.Resource TF.AzureRM (LbRuleResource s)
+lbRuleResource :: TF.Resource P.AzureRM (LbRuleResource s)
 lbRuleResource =
     TF.newResource "azurerm_lb_rule" $
         LbRuleResource {
@@ -4317,44 +4316,44 @@ instance TF.ToHCL (LocalNetworkGatewayResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAddressSpace (LocalNetworkGatewayResource s) s Text where
+instance P.HasAddressSpace (LocalNetworkGatewayResource s) s Text where
     addressSpace =
         lens (_address_space :: LocalNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _address_space = a } :: LocalNetworkGatewayResource s)
 
-instance HasBgpSettings (LocalNetworkGatewayResource s) s Text where
+instance P.HasBgpSettings (LocalNetworkGatewayResource s) s Text where
     bgpSettings =
         lens (_bgp_settings :: LocalNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _bgp_settings = a } :: LocalNetworkGatewayResource s)
 
-instance HasGatewayAddress (LocalNetworkGatewayResource s) s Text where
+instance P.HasGatewayAddress (LocalNetworkGatewayResource s) s Text where
     gatewayAddress =
         lens (_gateway_address :: LocalNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _gateway_address = a } :: LocalNetworkGatewayResource s)
 
-instance HasLocation (LocalNetworkGatewayResource s) s Text where
+instance P.HasLocation (LocalNetworkGatewayResource s) s Text where
     location =
         lens (_location :: LocalNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: LocalNetworkGatewayResource s)
 
-instance HasName (LocalNetworkGatewayResource s) s Text where
+instance P.HasName (LocalNetworkGatewayResource s) s Text where
     name =
         lens (_name :: LocalNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LocalNetworkGatewayResource s)
 
-instance HasResourceGroupName (LocalNetworkGatewayResource s) s Text where
+instance P.HasResourceGroupName (LocalNetworkGatewayResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: LocalNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: LocalNetworkGatewayResource s)
 
-instance HasTags (LocalNetworkGatewayResource s) s Text where
+instance P.HasTags (LocalNetworkGatewayResource s) s Text where
     tags =
         lens (_tags :: LocalNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: LocalNetworkGatewayResource s)
 
-instance HasComputedId (LocalNetworkGatewayResource s) Text
+instance P.HasComputedId (LocalNetworkGatewayResource s) Text
 
-localNetworkGatewayResource :: TF.Resource TF.AzureRM (LocalNetworkGatewayResource s)
+localNetworkGatewayResource :: TF.Resource P.AzureRM (LocalNetworkGatewayResource s)
 localNetworkGatewayResource =
     TF.newResource "azurerm_local_network_gateway" $
         LocalNetworkGatewayResource {
@@ -4396,47 +4395,47 @@ instance TF.ToHCL (LogAnalyticsWorkspaceResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (LogAnalyticsWorkspaceResource s) s Text where
+instance P.HasLocation (LogAnalyticsWorkspaceResource s) s Text where
     location =
         lens (_location :: LogAnalyticsWorkspaceResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: LogAnalyticsWorkspaceResource s)
 
-instance HasName (LogAnalyticsWorkspaceResource s) s Text where
+instance P.HasName (LogAnalyticsWorkspaceResource s) s Text where
     name =
         lens (_name :: LogAnalyticsWorkspaceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LogAnalyticsWorkspaceResource s)
 
-instance HasResourceGroupName (LogAnalyticsWorkspaceResource s) s Text where
+instance P.HasResourceGroupName (LogAnalyticsWorkspaceResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: LogAnalyticsWorkspaceResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: LogAnalyticsWorkspaceResource s)
 
-instance HasRetentionInDays (LogAnalyticsWorkspaceResource s) s Text where
+instance P.HasRetentionInDays (LogAnalyticsWorkspaceResource s) s Text where
     retentionInDays =
         lens (_retention_in_days :: LogAnalyticsWorkspaceResource s -> TF.Attribute s Text)
             (\s a -> s { _retention_in_days = a } :: LogAnalyticsWorkspaceResource s)
 
-instance HasSku (LogAnalyticsWorkspaceResource s) s Text where
+instance P.HasSku (LogAnalyticsWorkspaceResource s) s Text where
     sku =
         lens (_sku :: LogAnalyticsWorkspaceResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: LogAnalyticsWorkspaceResource s)
 
-instance HasTags (LogAnalyticsWorkspaceResource s) s Text where
+instance P.HasTags (LogAnalyticsWorkspaceResource s) s Text where
     tags =
         lens (_tags :: LogAnalyticsWorkspaceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: LogAnalyticsWorkspaceResource s)
 
-instance HasComputedId (LogAnalyticsWorkspaceResource s) Text
+instance P.HasComputedId (LogAnalyticsWorkspaceResource s) Text
 
-instance HasComputedPortalUrl (LogAnalyticsWorkspaceResource s) Text
+instance P.HasComputedPortalUrl (LogAnalyticsWorkspaceResource s) Text
 
-instance HasComputedPrimarySharedKey (LogAnalyticsWorkspaceResource s) Text
+instance P.HasComputedPrimarySharedKey (LogAnalyticsWorkspaceResource s) Text
 
-instance HasComputedSecondarySharedKey (LogAnalyticsWorkspaceResource s) Text
+instance P.HasComputedSecondarySharedKey (LogAnalyticsWorkspaceResource s) Text
 
-instance HasComputedWorkspaceId (LogAnalyticsWorkspaceResource s) Text
+instance P.HasComputedWorkspaceId (LogAnalyticsWorkspaceResource s) Text
 
-logAnalyticsWorkspaceResource :: TF.Resource TF.AzureRM (LogAnalyticsWorkspaceResource s)
+logAnalyticsWorkspaceResource :: TF.Resource P.AzureRM (LogAnalyticsWorkspaceResource s)
 logAnalyticsWorkspaceResource =
     TF.newResource "azurerm_log_analytics_workspace" $
         LogAnalyticsWorkspaceResource {
@@ -4495,69 +4494,69 @@ instance TF.ToHCL (ManagedDiskResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasCreateOption (ManagedDiskResource s) s Text where
+instance P.HasCreateOption (ManagedDiskResource s) s Text where
     createOption =
         lens (_create_option :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _create_option = a } :: ManagedDiskResource s)
 
-instance HasDiskSizeGb (ManagedDiskResource s) s Text where
+instance P.HasDiskSizeGb (ManagedDiskResource s) s Text where
     diskSizeGb =
         lens (_disk_size_gb :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _disk_size_gb = a } :: ManagedDiskResource s)
 
-instance HasEncryptionSettings (ManagedDiskResource s) s Text where
+instance P.HasEncryptionSettings (ManagedDiskResource s) s Text where
     encryptionSettings =
         lens (_encryption_settings :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _encryption_settings = a } :: ManagedDiskResource s)
 
-instance HasImageReferenceId (ManagedDiskResource s) s Text where
+instance P.HasImageReferenceId (ManagedDiskResource s) s Text where
     imageReferenceId =
         lens (_image_reference_id :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _image_reference_id = a } :: ManagedDiskResource s)
 
-instance HasLocation (ManagedDiskResource s) s Text where
+instance P.HasLocation (ManagedDiskResource s) s Text where
     location =
         lens (_location :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ManagedDiskResource s)
 
-instance HasName (ManagedDiskResource s) s Text where
+instance P.HasName (ManagedDiskResource s) s Text where
     name =
         lens (_name :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ManagedDiskResource s)
 
-instance HasOsType (ManagedDiskResource s) s Text where
+instance P.HasOsType (ManagedDiskResource s) s Text where
     osType =
         lens (_os_type :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _os_type = a } :: ManagedDiskResource s)
 
-instance HasResourceGroupName (ManagedDiskResource s) s Text where
+instance P.HasResourceGroupName (ManagedDiskResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ManagedDiskResource s)
 
-instance HasSourceResourceId (ManagedDiskResource s) s Text where
+instance P.HasSourceResourceId (ManagedDiskResource s) s Text where
     sourceResourceId =
         lens (_source_resource_id :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _source_resource_id = a } :: ManagedDiskResource s)
 
-instance HasSourceUri (ManagedDiskResource s) s Text where
+instance P.HasSourceUri (ManagedDiskResource s) s Text where
     sourceUri =
         lens (_source_uri :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _source_uri = a } :: ManagedDiskResource s)
 
-instance HasStorageAccountType (ManagedDiskResource s) s Text where
+instance P.HasStorageAccountType (ManagedDiskResource s) s Text where
     storageAccountType =
         lens (_storage_account_type :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_account_type = a } :: ManagedDiskResource s)
 
-instance HasTags (ManagedDiskResource s) s Text where
+instance P.HasTags (ManagedDiskResource s) s Text where
     tags =
         lens (_tags :: ManagedDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ManagedDiskResource s)
 
-instance HasComputedId (ManagedDiskResource s) Text
+instance P.HasComputedId (ManagedDiskResource s) Text
 
-managedDiskResource :: TF.Resource TF.AzureRM (ManagedDiskResource s)
+managedDiskResource :: TF.Resource P.AzureRM (ManagedDiskResource s)
 managedDiskResource =
     TF.newResource "azurerm_managed_disk" $
         ManagedDiskResource {
@@ -4596,24 +4595,24 @@ instance TF.ToHCL (ManagementLockResource s) where
         , TF.attribute "scope" _scope
         ]
 
-instance HasLockLevel (ManagementLockResource s) s Text where
+instance P.HasLockLevel (ManagementLockResource s) s Text where
     lockLevel =
         lens (_lock_level :: ManagementLockResource s -> TF.Attribute s Text)
             (\s a -> s { _lock_level = a } :: ManagementLockResource s)
 
-instance HasName (ManagementLockResource s) s Text where
+instance P.HasName (ManagementLockResource s) s Text where
     name =
         lens (_name :: ManagementLockResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ManagementLockResource s)
 
-instance HasScope (ManagementLockResource s) s Text where
+instance P.HasScope (ManagementLockResource s) s Text where
     scope =
         lens (_scope :: ManagementLockResource s -> TF.Attribute s Text)
             (\s a -> s { _scope = a } :: ManagementLockResource s)
 
-instance HasComputedId (ManagementLockResource s) Text
+instance P.HasComputedId (ManagementLockResource s) Text
 
-managementLockResource :: TF.Resource TF.AzureRM (ManagementLockResource s)
+managementLockResource :: TF.Resource P.AzureRM (ManagementLockResource s)
 managementLockResource =
     TF.newResource "azurerm_management_lock" $
         ManagementLockResource {
@@ -4656,44 +4655,44 @@ instance TF.ToHCL (MetricAlertruleResource s) where
         , TF.attribute "resource_id" _resource_id
         ]
 
-instance HasDescription (MetricAlertruleResource s) s Text where
+instance P.HasDescription (MetricAlertruleResource s) s Text where
     description =
         lens (_description :: MetricAlertruleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: MetricAlertruleResource s)
 
-instance HasEnabled (MetricAlertruleResource s) s Text where
+instance P.HasEnabled (MetricAlertruleResource s) s Text where
     enabled =
         lens (_enabled :: MetricAlertruleResource s -> TF.Attribute s Text)
             (\s a -> s { _enabled = a } :: MetricAlertruleResource s)
 
-instance HasLocation (MetricAlertruleResource s) s Text where
+instance P.HasLocation (MetricAlertruleResource s) s Text where
     location =
         lens (_location :: MetricAlertruleResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: MetricAlertruleResource s)
 
-instance HasMetricName (MetricAlertruleResource s) s Text where
+instance P.HasMetricName (MetricAlertruleResource s) s Text where
     metricName =
         lens (_metric_name :: MetricAlertruleResource s -> TF.Attribute s Text)
             (\s a -> s { _metric_name = a } :: MetricAlertruleResource s)
 
-instance HasName (MetricAlertruleResource s) s Text where
+instance P.HasName (MetricAlertruleResource s) s Text where
     name =
         lens (_name :: MetricAlertruleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: MetricAlertruleResource s)
 
-instance HasResourceGroupName (MetricAlertruleResource s) s Text where
+instance P.HasResourceGroupName (MetricAlertruleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: MetricAlertruleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: MetricAlertruleResource s)
 
-instance HasResourceId (MetricAlertruleResource s) s Text where
+instance P.HasResourceId (MetricAlertruleResource s) s Text where
     resourceId =
         lens (_resource_id :: MetricAlertruleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_id = a } :: MetricAlertruleResource s)
 
-instance HasComputedId (MetricAlertruleResource s) Text
+instance P.HasComputedId (MetricAlertruleResource s) Text
 
-metricAlertruleResource :: TF.Resource TF.AzureRM (MetricAlertruleResource s)
+metricAlertruleResource :: TF.Resource P.AzureRM (MetricAlertruleResource s)
 metricAlertruleResource =
     TF.newResource "azurerm_metric_alertrule" $
         MetricAlertruleResource {
@@ -4729,29 +4728,29 @@ instance TF.ToHCL (MysqlConfigurationResource s) where
         , TF.attribute "value" _value
         ]
 
-instance HasName (MysqlConfigurationResource s) s Text where
+instance P.HasName (MysqlConfigurationResource s) s Text where
     name =
         lens (_name :: MysqlConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: MysqlConfigurationResource s)
 
-instance HasResourceGroupName (MysqlConfigurationResource s) s Text where
+instance P.HasResourceGroupName (MysqlConfigurationResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: MysqlConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: MysqlConfigurationResource s)
 
-instance HasServerName (MysqlConfigurationResource s) s Text where
+instance P.HasServerName (MysqlConfigurationResource s) s Text where
     serverName =
         lens (_server_name :: MysqlConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: MysqlConfigurationResource s)
 
-instance HasValue (MysqlConfigurationResource s) s Text where
+instance P.HasValue (MysqlConfigurationResource s) s Text where
     value =
         lens (_value :: MysqlConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _value = a } :: MysqlConfigurationResource s)
 
-instance HasComputedId (MysqlConfigurationResource s) Text
+instance P.HasComputedId (MysqlConfigurationResource s) Text
 
-mysqlConfigurationResource :: TF.Resource TF.AzureRM (MysqlConfigurationResource s)
+mysqlConfigurationResource :: TF.Resource P.AzureRM (MysqlConfigurationResource s)
 mysqlConfigurationResource =
     TF.newResource "azurerm_mysql_configuration" $
         MysqlConfigurationResource {
@@ -4787,34 +4786,34 @@ instance TF.ToHCL (MysqlDatabaseResource s) where
         , TF.attribute "server_name" _server_name
         ]
 
-instance HasCharset (MysqlDatabaseResource s) s Text where
+instance P.HasCharset (MysqlDatabaseResource s) s Text where
     charset =
         lens (_charset :: MysqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _charset = a } :: MysqlDatabaseResource s)
 
-instance HasCollation (MysqlDatabaseResource s) s Text where
+instance P.HasCollation (MysqlDatabaseResource s) s Text where
     collation =
         lens (_collation :: MysqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _collation = a } :: MysqlDatabaseResource s)
 
-instance HasName (MysqlDatabaseResource s) s Text where
+instance P.HasName (MysqlDatabaseResource s) s Text where
     name =
         lens (_name :: MysqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: MysqlDatabaseResource s)
 
-instance HasResourceGroupName (MysqlDatabaseResource s) s Text where
+instance P.HasResourceGroupName (MysqlDatabaseResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: MysqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: MysqlDatabaseResource s)
 
-instance HasServerName (MysqlDatabaseResource s) s Text where
+instance P.HasServerName (MysqlDatabaseResource s) s Text where
     serverName =
         lens (_server_name :: MysqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: MysqlDatabaseResource s)
 
-instance HasComputedId (MysqlDatabaseResource s) Text
+instance P.HasComputedId (MysqlDatabaseResource s) Text
 
-mysqlDatabaseResource :: TF.Resource TF.AzureRM (MysqlDatabaseResource s)
+mysqlDatabaseResource :: TF.Resource P.AzureRM (MysqlDatabaseResource s)
 mysqlDatabaseResource =
     TF.newResource "azurerm_mysql_database" $
         MysqlDatabaseResource {
@@ -4851,34 +4850,34 @@ instance TF.ToHCL (MysqlFirewallRuleResource s) where
         , TF.attribute "start_ip_address" _start_ip_address
         ]
 
-instance HasEndIpAddress (MysqlFirewallRuleResource s) s Text where
+instance P.HasEndIpAddress (MysqlFirewallRuleResource s) s Text where
     endIpAddress =
         lens (_end_ip_address :: MysqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _end_ip_address = a } :: MysqlFirewallRuleResource s)
 
-instance HasName (MysqlFirewallRuleResource s) s Text where
+instance P.HasName (MysqlFirewallRuleResource s) s Text where
     name =
         lens (_name :: MysqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: MysqlFirewallRuleResource s)
 
-instance HasResourceGroupName (MysqlFirewallRuleResource s) s Text where
+instance P.HasResourceGroupName (MysqlFirewallRuleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: MysqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: MysqlFirewallRuleResource s)
 
-instance HasServerName (MysqlFirewallRuleResource s) s Text where
+instance P.HasServerName (MysqlFirewallRuleResource s) s Text where
     serverName =
         lens (_server_name :: MysqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: MysqlFirewallRuleResource s)
 
-instance HasStartIpAddress (MysqlFirewallRuleResource s) s Text where
+instance P.HasStartIpAddress (MysqlFirewallRuleResource s) s Text where
     startIpAddress =
         lens (_start_ip_address :: MysqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _start_ip_address = a } :: MysqlFirewallRuleResource s)
 
-instance HasComputedId (MysqlFirewallRuleResource s) Text
+instance P.HasComputedId (MysqlFirewallRuleResource s) Text
 
-mysqlFirewallRuleResource :: TF.Resource TF.AzureRM (MysqlFirewallRuleResource s)
+mysqlFirewallRuleResource :: TF.Resource P.AzureRM (MysqlFirewallRuleResource s)
 mysqlFirewallRuleResource =
     TF.newResource "azurerm_mysql_firewall_rule" $
         MysqlFirewallRuleResource {
@@ -4924,51 +4923,51 @@ instance TF.ToHCL (MysqlServerResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasAdministratorLogin (MysqlServerResource s) s Text where
+instance P.HasAdministratorLogin (MysqlServerResource s) s Text where
     administratorLogin =
         lens (_administrator_login :: MysqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _administrator_login = a } :: MysqlServerResource s)
 
-instance HasAdministratorLoginPassword (MysqlServerResource s) s Text where
+instance P.HasAdministratorLoginPassword (MysqlServerResource s) s Text where
     administratorLoginPassword =
         lens (_administrator_login_password :: MysqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _administrator_login_password = a } :: MysqlServerResource s)
 
-instance HasLocation (MysqlServerResource s) s Text where
+instance P.HasLocation (MysqlServerResource s) s Text where
     location =
         lens (_location :: MysqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: MysqlServerResource s)
 
-instance HasName (MysqlServerResource s) s Text where
+instance P.HasName (MysqlServerResource s) s Text where
     name =
         lens (_name :: MysqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: MysqlServerResource s)
 
-instance HasResourceGroupName (MysqlServerResource s) s Text where
+instance P.HasResourceGroupName (MysqlServerResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: MysqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: MysqlServerResource s)
 
-instance HasSku (MysqlServerResource s) s Text where
+instance P.HasSku (MysqlServerResource s) s Text where
     sku =
         lens (_sku :: MysqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: MysqlServerResource s)
 
-instance HasStorageMb (MysqlServerResource s) s Text where
+instance P.HasStorageMb (MysqlServerResource s) s Text where
     storageMb =
         lens (_storage_mb :: MysqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_mb = a } :: MysqlServerResource s)
 
-instance HasVersion (MysqlServerResource s) s Text where
+instance P.HasVersion (MysqlServerResource s) s Text where
     version =
         lens (_version :: MysqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: MysqlServerResource s)
 
-instance HasComputedFqdn (MysqlServerResource s) Text
+instance P.HasComputedFqdn (MysqlServerResource s) Text
 
-instance HasComputedId (MysqlServerResource s) Text
+instance P.HasComputedId (MysqlServerResource s) Text
 
-mysqlServerResource :: TF.Resource TF.AzureRM (MysqlServerResource s)
+mysqlServerResource :: TF.Resource P.AzureRM (MysqlServerResource s)
 mysqlServerResource =
     TF.newResource "azurerm_mysql_server" $
         MysqlServerResource {
@@ -5024,69 +5023,69 @@ instance TF.ToHCL (NetworkInterfaceResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasDnsServers (NetworkInterfaceResource s) s Text where
+instance P.HasDnsServers (NetworkInterfaceResource s) s Text where
     dnsServers =
         lens (_dns_servers :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _dns_servers = a } :: NetworkInterfaceResource s)
 
-instance HasEnableAcceleratedNetworking (NetworkInterfaceResource s) s Text where
+instance P.HasEnableAcceleratedNetworking (NetworkInterfaceResource s) s Text where
     enableAcceleratedNetworking =
         lens (_enable_accelerated_networking :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_accelerated_networking = a } :: NetworkInterfaceResource s)
 
-instance HasEnableIpForwarding (NetworkInterfaceResource s) s Text where
+instance P.HasEnableIpForwarding (NetworkInterfaceResource s) s Text where
     enableIpForwarding =
         lens (_enable_ip_forwarding :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_ip_forwarding = a } :: NetworkInterfaceResource s)
 
-instance HasInternalDnsNameLabel (NetworkInterfaceResource s) s Text where
+instance P.HasInternalDnsNameLabel (NetworkInterfaceResource s) s Text where
     internalDnsNameLabel =
         lens (_internal_dns_name_label :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _internal_dns_name_label = a } :: NetworkInterfaceResource s)
 
-instance HasIpConfiguration (NetworkInterfaceResource s) s Text where
+instance P.HasIpConfiguration (NetworkInterfaceResource s) s Text where
     ipConfiguration =
         lens (_ip_configuration :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_configuration = a } :: NetworkInterfaceResource s)
 
-instance HasLocation (NetworkInterfaceResource s) s Text where
+instance P.HasLocation (NetworkInterfaceResource s) s Text where
     location =
         lens (_location :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: NetworkInterfaceResource s)
 
-instance HasName (NetworkInterfaceResource s) s Text where
+instance P.HasName (NetworkInterfaceResource s) s Text where
     name =
         lens (_name :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NetworkInterfaceResource s)
 
-instance HasNetworkSecurityGroupId (NetworkInterfaceResource s) s Text where
+instance P.HasNetworkSecurityGroupId (NetworkInterfaceResource s) s Text where
     networkSecurityGroupId =
         lens (_network_security_group_id :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _network_security_group_id = a } :: NetworkInterfaceResource s)
 
-instance HasResourceGroupName (NetworkInterfaceResource s) s Text where
+instance P.HasResourceGroupName (NetworkInterfaceResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: NetworkInterfaceResource s)
 
-instance HasTags (NetworkInterfaceResource s) s Text where
+instance P.HasTags (NetworkInterfaceResource s) s Text where
     tags =
         lens (_tags :: NetworkInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: NetworkInterfaceResource s)
 
-instance HasComputedAppliedDnsServers (NetworkInterfaceResource s) Text
+instance P.HasComputedAppliedDnsServers (NetworkInterfaceResource s) Text
 
-instance HasComputedId (NetworkInterfaceResource s) Text
+instance P.HasComputedId (NetworkInterfaceResource s) Text
 
-instance HasComputedInternalFqdn (NetworkInterfaceResource s) Text
+instance P.HasComputedInternalFqdn (NetworkInterfaceResource s) Text
 
-instance HasComputedMacAddress (NetworkInterfaceResource s) Text
+instance P.HasComputedMacAddress (NetworkInterfaceResource s) Text
 
-instance HasComputedPrivateIpAddress (NetworkInterfaceResource s) Text
+instance P.HasComputedPrivateIpAddress (NetworkInterfaceResource s) Text
 
-instance HasComputedVirtualMachineId (NetworkInterfaceResource s) Text
+instance P.HasComputedVirtualMachineId (NetworkInterfaceResource s) Text
 
-networkInterfaceResource :: TF.Resource TF.AzureRM (NetworkInterfaceResource s)
+networkInterfaceResource :: TF.Resource P.AzureRM (NetworkInterfaceResource s)
 networkInterfaceResource =
     TF.newResource "azurerm_network_interface" $
         NetworkInterfaceResource {
@@ -5136,34 +5135,34 @@ instance TF.ToHCL (NetworkSecurityGroupResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (NetworkSecurityGroupResource s) s Text where
+instance P.HasLocation (NetworkSecurityGroupResource s) s Text where
     location =
         lens (_location :: NetworkSecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: NetworkSecurityGroupResource s)
 
-instance HasName (NetworkSecurityGroupResource s) s Text where
+instance P.HasName (NetworkSecurityGroupResource s) s Text where
     name =
         lens (_name :: NetworkSecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NetworkSecurityGroupResource s)
 
-instance HasResourceGroupName (NetworkSecurityGroupResource s) s Text where
+instance P.HasResourceGroupName (NetworkSecurityGroupResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: NetworkSecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: NetworkSecurityGroupResource s)
 
-instance HasSecurityRule (NetworkSecurityGroupResource s) s Text where
+instance P.HasSecurityRule (NetworkSecurityGroupResource s) s Text where
     securityRule =
         lens (_security_rule :: NetworkSecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _security_rule = a } :: NetworkSecurityGroupResource s)
 
-instance HasTags (NetworkSecurityGroupResource s) s Text where
+instance P.HasTags (NetworkSecurityGroupResource s) s Text where
     tags =
         lens (_tags :: NetworkSecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: NetworkSecurityGroupResource s)
 
-instance HasComputedId (NetworkSecurityGroupResource s) Text
+instance P.HasComputedId (NetworkSecurityGroupResource s) Text
 
-networkSecurityGroupResource :: TF.Resource TF.AzureRM (NetworkSecurityGroupResource s)
+networkSecurityGroupResource :: TF.Resource P.AzureRM (NetworkSecurityGroupResource s)
 networkSecurityGroupResource =
     TF.newResource "azurerm_network_security_group" $
         NetworkSecurityGroupResource {
@@ -5239,89 +5238,89 @@ instance TF.ToHCL (NetworkSecurityRuleResource s) where
         , TF.attribute "source_port_ranges" _source_port_ranges
         ]
 
-instance HasAccess (NetworkSecurityRuleResource s) s Text where
+instance P.HasAccess (NetworkSecurityRuleResource s) s Text where
     access =
         lens (_access :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _access = a } :: NetworkSecurityRuleResource s)
 
-instance HasDescription (NetworkSecurityRuleResource s) s Text where
+instance P.HasDescription (NetworkSecurityRuleResource s) s Text where
     description =
         lens (_description :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: NetworkSecurityRuleResource s)
 
-instance HasDestinationAddressPrefix (NetworkSecurityRuleResource s) s Text where
+instance P.HasDestinationAddressPrefix (NetworkSecurityRuleResource s) s Text where
     destinationAddressPrefix =
         lens (_destination_address_prefix :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _destination_address_prefix = a } :: NetworkSecurityRuleResource s)
 
-instance HasDestinationAddressPrefixes (NetworkSecurityRuleResource s) s Text where
+instance P.HasDestinationAddressPrefixes (NetworkSecurityRuleResource s) s Text where
     destinationAddressPrefixes =
         lens (_destination_address_prefixes :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _destination_address_prefixes = a } :: NetworkSecurityRuleResource s)
 
-instance HasDestinationPortRange (NetworkSecurityRuleResource s) s Text where
+instance P.HasDestinationPortRange (NetworkSecurityRuleResource s) s Text where
     destinationPortRange =
         lens (_destination_port_range :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _destination_port_range = a } :: NetworkSecurityRuleResource s)
 
-instance HasDestinationPortRanges (NetworkSecurityRuleResource s) s Text where
+instance P.HasDestinationPortRanges (NetworkSecurityRuleResource s) s Text where
     destinationPortRanges =
         lens (_destination_port_ranges :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _destination_port_ranges = a } :: NetworkSecurityRuleResource s)
 
-instance HasDirection (NetworkSecurityRuleResource s) s Text where
+instance P.HasDirection (NetworkSecurityRuleResource s) s Text where
     direction =
         lens (_direction :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _direction = a } :: NetworkSecurityRuleResource s)
 
-instance HasName (NetworkSecurityRuleResource s) s Text where
+instance P.HasName (NetworkSecurityRuleResource s) s Text where
     name =
         lens (_name :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NetworkSecurityRuleResource s)
 
-instance HasNetworkSecurityGroupName (NetworkSecurityRuleResource s) s Text where
+instance P.HasNetworkSecurityGroupName (NetworkSecurityRuleResource s) s Text where
     networkSecurityGroupName =
         lens (_network_security_group_name :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _network_security_group_name = a } :: NetworkSecurityRuleResource s)
 
-instance HasPriority (NetworkSecurityRuleResource s) s Text where
+instance P.HasPriority (NetworkSecurityRuleResource s) s Text where
     priority =
         lens (_priority :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _priority = a } :: NetworkSecurityRuleResource s)
 
-instance HasProtocol (NetworkSecurityRuleResource s) s Text where
+instance P.HasProtocol (NetworkSecurityRuleResource s) s Text where
     protocol =
         lens (_protocol :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: NetworkSecurityRuleResource s)
 
-instance HasResourceGroupName (NetworkSecurityRuleResource s) s Text where
+instance P.HasResourceGroupName (NetworkSecurityRuleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: NetworkSecurityRuleResource s)
 
-instance HasSourceAddressPrefix (NetworkSecurityRuleResource s) s Text where
+instance P.HasSourceAddressPrefix (NetworkSecurityRuleResource s) s Text where
     sourceAddressPrefix =
         lens (_source_address_prefix :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _source_address_prefix = a } :: NetworkSecurityRuleResource s)
 
-instance HasSourceAddressPrefixes (NetworkSecurityRuleResource s) s Text where
+instance P.HasSourceAddressPrefixes (NetworkSecurityRuleResource s) s Text where
     sourceAddressPrefixes =
         lens (_source_address_prefixes :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _source_address_prefixes = a } :: NetworkSecurityRuleResource s)
 
-instance HasSourcePortRange (NetworkSecurityRuleResource s) s Text where
+instance P.HasSourcePortRange (NetworkSecurityRuleResource s) s Text where
     sourcePortRange =
         lens (_source_port_range :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _source_port_range = a } :: NetworkSecurityRuleResource s)
 
-instance HasSourcePortRanges (NetworkSecurityRuleResource s) s Text where
+instance P.HasSourcePortRanges (NetworkSecurityRuleResource s) s Text where
     sourcePortRanges =
         lens (_source_port_ranges :: NetworkSecurityRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _source_port_ranges = a } :: NetworkSecurityRuleResource s)
 
-instance HasComputedId (NetworkSecurityRuleResource s) Text
+instance P.HasComputedId (NetworkSecurityRuleResource s) Text
 
-networkSecurityRuleResource :: TF.Resource TF.AzureRM (NetworkSecurityRuleResource s)
+networkSecurityRuleResource :: TF.Resource P.AzureRM (NetworkSecurityRuleResource s)
 networkSecurityRuleResource =
     TF.newResource "azurerm_network_security_rule" $
         NetworkSecurityRuleResource {
@@ -5366,29 +5365,29 @@ instance TF.ToHCL (NetworkWatcherResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (NetworkWatcherResource s) s Text where
+instance P.HasLocation (NetworkWatcherResource s) s Text where
     location =
         lens (_location :: NetworkWatcherResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: NetworkWatcherResource s)
 
-instance HasName (NetworkWatcherResource s) s Text where
+instance P.HasName (NetworkWatcherResource s) s Text where
     name =
         lens (_name :: NetworkWatcherResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NetworkWatcherResource s)
 
-instance HasResourceGroupName (NetworkWatcherResource s) s Text where
+instance P.HasResourceGroupName (NetworkWatcherResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: NetworkWatcherResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: NetworkWatcherResource s)
 
-instance HasTags (NetworkWatcherResource s) s Text where
+instance P.HasTags (NetworkWatcherResource s) s Text where
     tags =
         lens (_tags :: NetworkWatcherResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: NetworkWatcherResource s)
 
-instance HasComputedId (NetworkWatcherResource s) Text
+instance P.HasComputedId (NetworkWatcherResource s) Text
 
-networkWatcherResource :: TF.Resource TF.AzureRM (NetworkWatcherResource s)
+networkWatcherResource :: TF.Resource P.AzureRM (NetworkWatcherResource s)
 networkWatcherResource =
     TF.newResource "azurerm_network_watcher" $
         NetworkWatcherResource {
@@ -5421,29 +5420,29 @@ instance TF.ToHCL (PostgresqlConfigurationResource s) where
         , TF.attribute "value" _value
         ]
 
-instance HasName (PostgresqlConfigurationResource s) s Text where
+instance P.HasName (PostgresqlConfigurationResource s) s Text where
     name =
         lens (_name :: PostgresqlConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PostgresqlConfigurationResource s)
 
-instance HasResourceGroupName (PostgresqlConfigurationResource s) s Text where
+instance P.HasResourceGroupName (PostgresqlConfigurationResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: PostgresqlConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: PostgresqlConfigurationResource s)
 
-instance HasServerName (PostgresqlConfigurationResource s) s Text where
+instance P.HasServerName (PostgresqlConfigurationResource s) s Text where
     serverName =
         lens (_server_name :: PostgresqlConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: PostgresqlConfigurationResource s)
 
-instance HasValue (PostgresqlConfigurationResource s) s Text where
+instance P.HasValue (PostgresqlConfigurationResource s) s Text where
     value =
         lens (_value :: PostgresqlConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _value = a } :: PostgresqlConfigurationResource s)
 
-instance HasComputedId (PostgresqlConfigurationResource s) Text
+instance P.HasComputedId (PostgresqlConfigurationResource s) Text
 
-postgresqlConfigurationResource :: TF.Resource TF.AzureRM (PostgresqlConfigurationResource s)
+postgresqlConfigurationResource :: TF.Resource P.AzureRM (PostgresqlConfigurationResource s)
 postgresqlConfigurationResource =
     TF.newResource "azurerm_postgresql_configuration" $
         PostgresqlConfigurationResource {
@@ -5479,34 +5478,34 @@ instance TF.ToHCL (PostgresqlDatabaseResource s) where
         , TF.attribute "server_name" _server_name
         ]
 
-instance HasCharset (PostgresqlDatabaseResource s) s Text where
+instance P.HasCharset (PostgresqlDatabaseResource s) s Text where
     charset =
         lens (_charset :: PostgresqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _charset = a } :: PostgresqlDatabaseResource s)
 
-instance HasCollation (PostgresqlDatabaseResource s) s Text where
+instance P.HasCollation (PostgresqlDatabaseResource s) s Text where
     collation =
         lens (_collation :: PostgresqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _collation = a } :: PostgresqlDatabaseResource s)
 
-instance HasName (PostgresqlDatabaseResource s) s Text where
+instance P.HasName (PostgresqlDatabaseResource s) s Text where
     name =
         lens (_name :: PostgresqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PostgresqlDatabaseResource s)
 
-instance HasResourceGroupName (PostgresqlDatabaseResource s) s Text where
+instance P.HasResourceGroupName (PostgresqlDatabaseResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: PostgresqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: PostgresqlDatabaseResource s)
 
-instance HasServerName (PostgresqlDatabaseResource s) s Text where
+instance P.HasServerName (PostgresqlDatabaseResource s) s Text where
     serverName =
         lens (_server_name :: PostgresqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: PostgresqlDatabaseResource s)
 
-instance HasComputedId (PostgresqlDatabaseResource s) Text
+instance P.HasComputedId (PostgresqlDatabaseResource s) Text
 
-postgresqlDatabaseResource :: TF.Resource TF.AzureRM (PostgresqlDatabaseResource s)
+postgresqlDatabaseResource :: TF.Resource P.AzureRM (PostgresqlDatabaseResource s)
 postgresqlDatabaseResource =
     TF.newResource "azurerm_postgresql_database" $
         PostgresqlDatabaseResource {
@@ -5543,34 +5542,34 @@ instance TF.ToHCL (PostgresqlFirewallRuleResource s) where
         , TF.attribute "start_ip_address" _start_ip_address
         ]
 
-instance HasEndIpAddress (PostgresqlFirewallRuleResource s) s Text where
+instance P.HasEndIpAddress (PostgresqlFirewallRuleResource s) s Text where
     endIpAddress =
         lens (_end_ip_address :: PostgresqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _end_ip_address = a } :: PostgresqlFirewallRuleResource s)
 
-instance HasName (PostgresqlFirewallRuleResource s) s Text where
+instance P.HasName (PostgresqlFirewallRuleResource s) s Text where
     name =
         lens (_name :: PostgresqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PostgresqlFirewallRuleResource s)
 
-instance HasResourceGroupName (PostgresqlFirewallRuleResource s) s Text where
+instance P.HasResourceGroupName (PostgresqlFirewallRuleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: PostgresqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: PostgresqlFirewallRuleResource s)
 
-instance HasServerName (PostgresqlFirewallRuleResource s) s Text where
+instance P.HasServerName (PostgresqlFirewallRuleResource s) s Text where
     serverName =
         lens (_server_name :: PostgresqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: PostgresqlFirewallRuleResource s)
 
-instance HasStartIpAddress (PostgresqlFirewallRuleResource s) s Text where
+instance P.HasStartIpAddress (PostgresqlFirewallRuleResource s) s Text where
     startIpAddress =
         lens (_start_ip_address :: PostgresqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _start_ip_address = a } :: PostgresqlFirewallRuleResource s)
 
-instance HasComputedId (PostgresqlFirewallRuleResource s) Text
+instance P.HasComputedId (PostgresqlFirewallRuleResource s) Text
 
-postgresqlFirewallRuleResource :: TF.Resource TF.AzureRM (PostgresqlFirewallRuleResource s)
+postgresqlFirewallRuleResource :: TF.Resource P.AzureRM (PostgresqlFirewallRuleResource s)
 postgresqlFirewallRuleResource =
     TF.newResource "azurerm_postgresql_firewall_rule" $
         PostgresqlFirewallRuleResource {
@@ -5616,51 +5615,51 @@ instance TF.ToHCL (PostgresqlServerResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasAdministratorLogin (PostgresqlServerResource s) s Text where
+instance P.HasAdministratorLogin (PostgresqlServerResource s) s Text where
     administratorLogin =
         lens (_administrator_login :: PostgresqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _administrator_login = a } :: PostgresqlServerResource s)
 
-instance HasAdministratorLoginPassword (PostgresqlServerResource s) s Text where
+instance P.HasAdministratorLoginPassword (PostgresqlServerResource s) s Text where
     administratorLoginPassword =
         lens (_administrator_login_password :: PostgresqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _administrator_login_password = a } :: PostgresqlServerResource s)
 
-instance HasLocation (PostgresqlServerResource s) s Text where
+instance P.HasLocation (PostgresqlServerResource s) s Text where
     location =
         lens (_location :: PostgresqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: PostgresqlServerResource s)
 
-instance HasName (PostgresqlServerResource s) s Text where
+instance P.HasName (PostgresqlServerResource s) s Text where
     name =
         lens (_name :: PostgresqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PostgresqlServerResource s)
 
-instance HasResourceGroupName (PostgresqlServerResource s) s Text where
+instance P.HasResourceGroupName (PostgresqlServerResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: PostgresqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: PostgresqlServerResource s)
 
-instance HasSku (PostgresqlServerResource s) s Text where
+instance P.HasSku (PostgresqlServerResource s) s Text where
     sku =
         lens (_sku :: PostgresqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: PostgresqlServerResource s)
 
-instance HasStorageMb (PostgresqlServerResource s) s Text where
+instance P.HasStorageMb (PostgresqlServerResource s) s Text where
     storageMb =
         lens (_storage_mb :: PostgresqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_mb = a } :: PostgresqlServerResource s)
 
-instance HasVersion (PostgresqlServerResource s) s Text where
+instance P.HasVersion (PostgresqlServerResource s) s Text where
     version =
         lens (_version :: PostgresqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: PostgresqlServerResource s)
 
-instance HasComputedFqdn (PostgresqlServerResource s) Text
+instance P.HasComputedFqdn (PostgresqlServerResource s) Text
 
-instance HasComputedId (PostgresqlServerResource s) Text
+instance P.HasComputedId (PostgresqlServerResource s) Text
 
-postgresqlServerResource :: TF.Resource TF.AzureRM (PostgresqlServerResource s)
+postgresqlServerResource :: TF.Resource P.AzureRM (PostgresqlServerResource s)
 postgresqlServerResource =
     TF.newResource "azurerm_postgresql_server" $
         PostgresqlServerResource {
@@ -5697,31 +5696,31 @@ instance TF.ToHCL (PublicIpResource s) where
         , TF.attribute "sku" _sku
         ]
 
-instance HasLocation (PublicIpResource s) s Text where
+instance P.HasLocation (PublicIpResource s) s Text where
     location =
         lens (_location :: PublicIpResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: PublicIpResource s)
 
-instance HasName (PublicIpResource s) s Text where
+instance P.HasName (PublicIpResource s) s Text where
     name =
         lens (_name :: PublicIpResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PublicIpResource s)
 
-instance HasResourceGroupName (PublicIpResource s) s Text where
+instance P.HasResourceGroupName (PublicIpResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: PublicIpResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: PublicIpResource s)
 
-instance HasSku (PublicIpResource s) s Text where
+instance P.HasSku (PublicIpResource s) s Text where
     sku =
         lens (_sku :: PublicIpResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: PublicIpResource s)
 
-instance HasComputedId (PublicIpResource s) Text
+instance P.HasComputedId (PublicIpResource s) Text
 
-instance HasComputedIpAddress (PublicIpResource s) Text
+instance P.HasComputedIpAddress (PublicIpResource s) Text
 
-publicIpResource :: TF.Resource TF.AzureRM (PublicIpResource s)
+publicIpResource :: TF.Resource P.AzureRM (PublicIpResource s)
 publicIpResource =
     TF.newResource "azurerm_public_ip" $
         PublicIpResource {
@@ -5757,32 +5756,32 @@ instance TF.ToHCL (RedisCacheResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasCapacity (RedisCacheResource s) s Text where
+instance P.HasCapacity (RedisCacheResource s) s Text where
     capacity =
         lens (_capacity :: RedisCacheResource s -> TF.Attribute s Text)
             (\s a -> s { _capacity = a } :: RedisCacheResource s)
 
-instance HasFamily' (RedisCacheResource s) s Text where
+instance P.HasFamily' (RedisCacheResource s) s Text where
     family' =
         lens (_family' :: RedisCacheResource s -> TF.Attribute s Text)
             (\s a -> s { _family' = a } :: RedisCacheResource s)
 
-instance HasLocation (RedisCacheResource s) s Text where
+instance P.HasLocation (RedisCacheResource s) s Text where
     location =
         lens (_location :: RedisCacheResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: RedisCacheResource s)
 
-instance HasName (RedisCacheResource s) s Text where
+instance P.HasName (RedisCacheResource s) s Text where
     name =
         lens (_name :: RedisCacheResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RedisCacheResource s)
 
-instance HasResourceGroupName (RedisCacheResource s) s Text where
+instance P.HasResourceGroupName (RedisCacheResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: RedisCacheResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: RedisCacheResource s)
 
-redisCacheResource :: TF.Resource TF.AzureRM (RedisCacheResource s)
+redisCacheResource :: TF.Resource P.AzureRM (RedisCacheResource s)
 redisCacheResource =
     TF.newResource "azurerm_redis_cache" $
         RedisCacheResource {
@@ -5821,34 +5820,34 @@ instance TF.ToHCL (RedisFirewallRuleResource s) where
         , TF.attribute "start_ip" _start_ip
         ]
 
-instance HasEndIp (RedisFirewallRuleResource s) s Text where
+instance P.HasEndIp (RedisFirewallRuleResource s) s Text where
     endIp =
         lens (_end_ip :: RedisFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _end_ip = a } :: RedisFirewallRuleResource s)
 
-instance HasName (RedisFirewallRuleResource s) s Text where
+instance P.HasName (RedisFirewallRuleResource s) s Text where
     name =
         lens (_name :: RedisFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RedisFirewallRuleResource s)
 
-instance HasRedisCacheName (RedisFirewallRuleResource s) s Text where
+instance P.HasRedisCacheName (RedisFirewallRuleResource s) s Text where
     redisCacheName =
         lens (_redis_cache_name :: RedisFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _redis_cache_name = a } :: RedisFirewallRuleResource s)
 
-instance HasResourceGroupName (RedisFirewallRuleResource s) s Text where
+instance P.HasResourceGroupName (RedisFirewallRuleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: RedisFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: RedisFirewallRuleResource s)
 
-instance HasStartIp (RedisFirewallRuleResource s) s Text where
+instance P.HasStartIp (RedisFirewallRuleResource s) s Text where
     startIp =
         lens (_start_ip :: RedisFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _start_ip = a } :: RedisFirewallRuleResource s)
 
-instance HasComputedId (RedisFirewallRuleResource s) Text
+instance P.HasComputedId (RedisFirewallRuleResource s) Text
 
-redisFirewallRuleResource :: TF.Resource TF.AzureRM (RedisFirewallRuleResource s)
+redisFirewallRuleResource :: TF.Resource P.AzureRM (RedisFirewallRuleResource s)
 redisFirewallRuleResource =
     TF.newResource "azurerm_redis_firewall_rule" $
         RedisFirewallRuleResource {
@@ -5879,24 +5878,24 @@ instance TF.ToHCL (ResourceGroupResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (ResourceGroupResource s) s Text where
+instance P.HasLocation (ResourceGroupResource s) s Text where
     location =
         lens (_location :: ResourceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ResourceGroupResource s)
 
-instance HasName (ResourceGroupResource s) s Text where
+instance P.HasName (ResourceGroupResource s) s Text where
     name =
         lens (_name :: ResourceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ResourceGroupResource s)
 
-instance HasTags (ResourceGroupResource s) s Text where
+instance P.HasTags (ResourceGroupResource s) s Text where
     tags =
         lens (_tags :: ResourceGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ResourceGroupResource s)
 
-instance HasComputedId (ResourceGroupResource s) Text
+instance P.HasComputedId (ResourceGroupResource s) Text
 
-resourceGroupResource :: TF.Resource TF.AzureRM (ResourceGroupResource s)
+resourceGroupResource :: TF.Resource P.AzureRM (ResourceGroupResource s)
 resourceGroupResource =
     TF.newResource "azurerm_resource_group" $
         ResourceGroupResource {
@@ -5928,29 +5927,29 @@ instance TF.ToHCL (RoleAssignmentResource s) where
         , TF.attribute "scope" _scope
         ]
 
-instance HasName (RoleAssignmentResource s) s Text where
+instance P.HasName (RoleAssignmentResource s) s Text where
     name =
         lens (_name :: RoleAssignmentResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RoleAssignmentResource s)
 
-instance HasPrincipalId (RoleAssignmentResource s) s Text where
+instance P.HasPrincipalId (RoleAssignmentResource s) s Text where
     principalId =
         lens (_principal_id :: RoleAssignmentResource s -> TF.Attribute s Text)
             (\s a -> s { _principal_id = a } :: RoleAssignmentResource s)
 
-instance HasRoleDefinitionId (RoleAssignmentResource s) s Text where
+instance P.HasRoleDefinitionId (RoleAssignmentResource s) s Text where
     roleDefinitionId =
         lens (_role_definition_id :: RoleAssignmentResource s -> TF.Attribute s Text)
             (\s a -> s { _role_definition_id = a } :: RoleAssignmentResource s)
 
-instance HasScope (RoleAssignmentResource s) s Text where
+instance P.HasScope (RoleAssignmentResource s) s Text where
     scope =
         lens (_scope :: RoleAssignmentResource s -> TF.Attribute s Text)
             (\s a -> s { _scope = a } :: RoleAssignmentResource s)
 
-instance HasComputedId (RoleAssignmentResource s) Text
+instance P.HasComputedId (RoleAssignmentResource s) Text
 
-roleAssignmentResource :: TF.Resource TF.AzureRM (RoleAssignmentResource s)
+roleAssignmentResource :: TF.Resource P.AzureRM (RoleAssignmentResource s)
 roleAssignmentResource =
     TF.newResource "azurerm_role_assignment" $
         RoleAssignmentResource {
@@ -5989,39 +5988,39 @@ instance TF.ToHCL (RoleDefinitionResource s) where
         , TF.attribute "scope" _scope
         ]
 
-instance HasAssignableScopes (RoleDefinitionResource s) s Text where
+instance P.HasAssignableScopes (RoleDefinitionResource s) s Text where
     assignableScopes =
         lens (_assignable_scopes :: RoleDefinitionResource s -> TF.Attribute s Text)
             (\s a -> s { _assignable_scopes = a } :: RoleDefinitionResource s)
 
-instance HasDescription (RoleDefinitionResource s) s Text where
+instance P.HasDescription (RoleDefinitionResource s) s Text where
     description =
         lens (_description :: RoleDefinitionResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: RoleDefinitionResource s)
 
-instance HasName (RoleDefinitionResource s) s Text where
+instance P.HasName (RoleDefinitionResource s) s Text where
     name =
         lens (_name :: RoleDefinitionResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RoleDefinitionResource s)
 
-instance HasPermissions (RoleDefinitionResource s) s Text where
+instance P.HasPermissions (RoleDefinitionResource s) s Text where
     permissions =
         lens (_permissions :: RoleDefinitionResource s -> TF.Attribute s Text)
             (\s a -> s { _permissions = a } :: RoleDefinitionResource s)
 
-instance HasRoleDefinitionId (RoleDefinitionResource s) s Text where
+instance P.HasRoleDefinitionId (RoleDefinitionResource s) s Text where
     roleDefinitionId =
         lens (_role_definition_id :: RoleDefinitionResource s -> TF.Attribute s Text)
             (\s a -> s { _role_definition_id = a } :: RoleDefinitionResource s)
 
-instance HasScope (RoleDefinitionResource s) s Text where
+instance P.HasScope (RoleDefinitionResource s) s Text where
     scope =
         lens (_scope :: RoleDefinitionResource s -> TF.Attribute s Text)
             (\s a -> s { _scope = a } :: RoleDefinitionResource s)
 
-instance HasComputedId (RoleDefinitionResource s) Text
+instance P.HasComputedId (RoleDefinitionResource s) Text
 
-roleDefinitionResource :: TF.Resource TF.AzureRM (RoleDefinitionResource s)
+roleDefinitionResource :: TF.Resource P.AzureRM (RoleDefinitionResource s)
 roleDefinitionResource =
     TF.newResource "azurerm_role_definition" $
         RoleDefinitionResource {
@@ -6062,39 +6061,39 @@ instance TF.ToHCL (RouteResource s) where
         , TF.attribute "route_table_name" _route_table_name
         ]
 
-instance HasAddressPrefix (RouteResource s) s Text where
+instance P.HasAddressPrefix (RouteResource s) s Text where
     addressPrefix =
         lens (_address_prefix :: RouteResource s -> TF.Attribute s Text)
             (\s a -> s { _address_prefix = a } :: RouteResource s)
 
-instance HasName (RouteResource s) s Text where
+instance P.HasName (RouteResource s) s Text where
     name =
         lens (_name :: RouteResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RouteResource s)
 
-instance HasNextHopInIpAddress (RouteResource s) s Text where
+instance P.HasNextHopInIpAddress (RouteResource s) s Text where
     nextHopInIpAddress =
         lens (_next_hop_in_ip_address :: RouteResource s -> TF.Attribute s Text)
             (\s a -> s { _next_hop_in_ip_address = a } :: RouteResource s)
 
-instance HasNextHopType (RouteResource s) s Text where
+instance P.HasNextHopType (RouteResource s) s Text where
     nextHopType =
         lens (_next_hop_type :: RouteResource s -> TF.Attribute s Text)
             (\s a -> s { _next_hop_type = a } :: RouteResource s)
 
-instance HasResourceGroupName (RouteResource s) s Text where
+instance P.HasResourceGroupName (RouteResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: RouteResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: RouteResource s)
 
-instance HasRouteTableName (RouteResource s) s Text where
+instance P.HasRouteTableName (RouteResource s) s Text where
     routeTableName =
         lens (_route_table_name :: RouteResource s -> TF.Attribute s Text)
             (\s a -> s { _route_table_name = a } :: RouteResource s)
 
-instance HasComputedId (RouteResource s) Text
+instance P.HasComputedId (RouteResource s) Text
 
-routeResource :: TF.Resource TF.AzureRM (RouteResource s)
+routeResource :: TF.Resource P.AzureRM (RouteResource s)
 routeResource =
     TF.newResource "azurerm_route" $
         RouteResource {
@@ -6132,36 +6131,36 @@ instance TF.ToHCL (RouteTableResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (RouteTableResource s) s Text where
+instance P.HasLocation (RouteTableResource s) s Text where
     location =
         lens (_location :: RouteTableResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: RouteTableResource s)
 
-instance HasName (RouteTableResource s) s Text where
+instance P.HasName (RouteTableResource s) s Text where
     name =
         lens (_name :: RouteTableResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RouteTableResource s)
 
-instance HasResourceGroupName (RouteTableResource s) s Text where
+instance P.HasResourceGroupName (RouteTableResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: RouteTableResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: RouteTableResource s)
 
-instance HasRoute (RouteTableResource s) s Text where
+instance P.HasRoute (RouteTableResource s) s Text where
     route =
         lens (_route :: RouteTableResource s -> TF.Attribute s Text)
             (\s a -> s { _route = a } :: RouteTableResource s)
 
-instance HasTags (RouteTableResource s) s Text where
+instance P.HasTags (RouteTableResource s) s Text where
     tags =
         lens (_tags :: RouteTableResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: RouteTableResource s)
 
-instance HasComputedId (RouteTableResource s) Text
+instance P.HasComputedId (RouteTableResource s) Text
 
-instance HasComputedSubnets (RouteTableResource s) Text
+instance P.HasComputedSubnets (RouteTableResource s) Text
 
-routeTableResource :: TF.Resource TF.AzureRM (RouteTableResource s)
+routeTableResource :: TF.Resource P.AzureRM (RouteTableResource s)
 routeTableResource =
     TF.newResource "azurerm_route_table" $
         RouteTableResource {
@@ -6204,44 +6203,44 @@ instance TF.ToHCL (SearchServiceResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasLocation (SearchServiceResource s) s Text where
+instance P.HasLocation (SearchServiceResource s) s Text where
     location =
         lens (_location :: SearchServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: SearchServiceResource s)
 
-instance HasName (SearchServiceResource s) s Text where
+instance P.HasName (SearchServiceResource s) s Text where
     name =
         lens (_name :: SearchServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SearchServiceResource s)
 
-instance HasPartitionCount (SearchServiceResource s) s Text where
+instance P.HasPartitionCount (SearchServiceResource s) s Text where
     partitionCount =
         lens (_partition_count :: SearchServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _partition_count = a } :: SearchServiceResource s)
 
-instance HasReplicaCount (SearchServiceResource s) s Text where
+instance P.HasReplicaCount (SearchServiceResource s) s Text where
     replicaCount =
         lens (_replica_count :: SearchServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _replica_count = a } :: SearchServiceResource s)
 
-instance HasResourceGroupName (SearchServiceResource s) s Text where
+instance P.HasResourceGroupName (SearchServiceResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SearchServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: SearchServiceResource s)
 
-instance HasSku (SearchServiceResource s) s Text where
+instance P.HasSku (SearchServiceResource s) s Text where
     sku =
         lens (_sku :: SearchServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: SearchServiceResource s)
 
-instance HasTags (SearchServiceResource s) s Text where
+instance P.HasTags (SearchServiceResource s) s Text where
     tags =
         lens (_tags :: SearchServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: SearchServiceResource s)
 
-instance HasComputedId (SearchServiceResource s) Text
+instance P.HasComputedId (SearchServiceResource s) Text
 
-searchServiceResource :: TF.Resource TF.AzureRM (SearchServiceResource s)
+searchServiceResource :: TF.Resource P.AzureRM (SearchServiceResource s)
 searchServiceResource =
     TF.newResource "azurerm_search_service" $
         SearchServiceResource {
@@ -6283,39 +6282,39 @@ instance TF.ToHCL (ServicebusNamespaceResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasCapacity (ServicebusNamespaceResource s) s Text where
+instance P.HasCapacity (ServicebusNamespaceResource s) s Text where
     capacity =
         lens (_capacity :: ServicebusNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _capacity = a } :: ServicebusNamespaceResource s)
 
-instance HasLocation (ServicebusNamespaceResource s) s Text where
+instance P.HasLocation (ServicebusNamespaceResource s) s Text where
     location =
         lens (_location :: ServicebusNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ServicebusNamespaceResource s)
 
-instance HasName (ServicebusNamespaceResource s) s Text where
+instance P.HasName (ServicebusNamespaceResource s) s Text where
     name =
         lens (_name :: ServicebusNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ServicebusNamespaceResource s)
 
-instance HasResourceGroupName (ServicebusNamespaceResource s) s Text where
+instance P.HasResourceGroupName (ServicebusNamespaceResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ServicebusNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ServicebusNamespaceResource s)
 
-instance HasSku (ServicebusNamespaceResource s) s Text where
+instance P.HasSku (ServicebusNamespaceResource s) s Text where
     sku =
         lens (_sku :: ServicebusNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: ServicebusNamespaceResource s)
 
-instance HasTags (ServicebusNamespaceResource s) s Text where
+instance P.HasTags (ServicebusNamespaceResource s) s Text where
     tags =
         lens (_tags :: ServicebusNamespaceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ServicebusNamespaceResource s)
 
-instance HasComputedId (ServicebusNamespaceResource s) Text
+instance P.HasComputedId (ServicebusNamespaceResource s) Text
 
-servicebusNamespaceResource :: TF.Resource TF.AzureRM (ServicebusNamespaceResource s)
+servicebusNamespaceResource :: TF.Resource P.AzureRM (ServicebusNamespaceResource s)
 servicebusNamespaceResource =
     TF.newResource "azurerm_servicebus_namespace" $
         ServicebusNamespaceResource {
@@ -6362,47 +6361,47 @@ instance TF.ToHCL (ServicebusQueueResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasAutoDeleteOnIdle (ServicebusQueueResource s) s Text where
+instance P.HasAutoDeleteOnIdle (ServicebusQueueResource s) s Text where
     autoDeleteOnIdle =
         lens (_auto_delete_on_idle :: ServicebusQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_delete_on_idle = a } :: ServicebusQueueResource s)
 
-instance HasDefaultMessageTtl (ServicebusQueueResource s) s Text where
+instance P.HasDefaultMessageTtl (ServicebusQueueResource s) s Text where
     defaultMessageTtl =
         lens (_default_message_ttl :: ServicebusQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _default_message_ttl = a } :: ServicebusQueueResource s)
 
-instance HasDuplicateDetectionHistoryTimeWindow (ServicebusQueueResource s) s Text where
+instance P.HasDuplicateDetectionHistoryTimeWindow (ServicebusQueueResource s) s Text where
     duplicateDetectionHistoryTimeWindow =
         lens (_duplicate_detection_history_time_window :: ServicebusQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _duplicate_detection_history_time_window = a } :: ServicebusQueueResource s)
 
-instance HasEnableExpress (ServicebusQueueResource s) s Text where
+instance P.HasEnableExpress (ServicebusQueueResource s) s Text where
     enableExpress =
         lens (_enable_express :: ServicebusQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_express = a } :: ServicebusQueueResource s)
 
-instance HasLocation (ServicebusQueueResource s) s Text where
+instance P.HasLocation (ServicebusQueueResource s) s Text where
     location =
         lens (_location :: ServicebusQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ServicebusQueueResource s)
 
-instance HasName (ServicebusQueueResource s) s Text where
+instance P.HasName (ServicebusQueueResource s) s Text where
     name =
         lens (_name :: ServicebusQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ServicebusQueueResource s)
 
-instance HasNamespaceName (ServicebusQueueResource s) s Text where
+instance P.HasNamespaceName (ServicebusQueueResource s) s Text where
     namespaceName =
         lens (_namespace_name :: ServicebusQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _namespace_name = a } :: ServicebusQueueResource s)
 
-instance HasResourceGroupName (ServicebusQueueResource s) s Text where
+instance P.HasResourceGroupName (ServicebusQueueResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ServicebusQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ServicebusQueueResource s)
 
-servicebusQueueResource :: TF.Resource TF.AzureRM (ServicebusQueueResource s)
+servicebusQueueResource :: TF.Resource P.AzureRM (ServicebusQueueResource s)
 servicebusQueueResource =
     TF.newResource "azurerm_servicebus_queue" $
         ServicebusQueueResource {
@@ -6463,67 +6462,67 @@ instance TF.ToHCL (ServicebusSubscriptionResource s) where
         , TF.attribute "topic_name" _topic_name
         ]
 
-instance HasAutoDeleteOnIdle (ServicebusSubscriptionResource s) s Text where
+instance P.HasAutoDeleteOnIdle (ServicebusSubscriptionResource s) s Text where
     autoDeleteOnIdle =
         lens (_auto_delete_on_idle :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_delete_on_idle = a } :: ServicebusSubscriptionResource s)
 
-instance HasDeadLetteringOnMessageExpiration (ServicebusSubscriptionResource s) s Text where
+instance P.HasDeadLetteringOnMessageExpiration (ServicebusSubscriptionResource s) s Text where
     deadLetteringOnMessageExpiration =
         lens (_dead_lettering_on_message_expiration :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _dead_lettering_on_message_expiration = a } :: ServicebusSubscriptionResource s)
 
-instance HasDefaultMessageTtl (ServicebusSubscriptionResource s) s Text where
+instance P.HasDefaultMessageTtl (ServicebusSubscriptionResource s) s Text where
     defaultMessageTtl =
         lens (_default_message_ttl :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _default_message_ttl = a } :: ServicebusSubscriptionResource s)
 
-instance HasEnableBatchedOperations (ServicebusSubscriptionResource s) s Text where
+instance P.HasEnableBatchedOperations (ServicebusSubscriptionResource s) s Text where
     enableBatchedOperations =
         lens (_enable_batched_operations :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_batched_operations = a } :: ServicebusSubscriptionResource s)
 
-instance HasLocation (ServicebusSubscriptionResource s) s Text where
+instance P.HasLocation (ServicebusSubscriptionResource s) s Text where
     location =
         lens (_location :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ServicebusSubscriptionResource s)
 
-instance HasLockDuration (ServicebusSubscriptionResource s) s Text where
+instance P.HasLockDuration (ServicebusSubscriptionResource s) s Text where
     lockDuration =
         lens (_lock_duration :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _lock_duration = a } :: ServicebusSubscriptionResource s)
 
-instance HasMaxDeliveryCount (ServicebusSubscriptionResource s) s Text where
+instance P.HasMaxDeliveryCount (ServicebusSubscriptionResource s) s Text where
     maxDeliveryCount =
         lens (_max_delivery_count :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _max_delivery_count = a } :: ServicebusSubscriptionResource s)
 
-instance HasName (ServicebusSubscriptionResource s) s Text where
+instance P.HasName (ServicebusSubscriptionResource s) s Text where
     name =
         lens (_name :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ServicebusSubscriptionResource s)
 
-instance HasNamespaceName (ServicebusSubscriptionResource s) s Text where
+instance P.HasNamespaceName (ServicebusSubscriptionResource s) s Text where
     namespaceName =
         lens (_namespace_name :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _namespace_name = a } :: ServicebusSubscriptionResource s)
 
-instance HasRequiresSession (ServicebusSubscriptionResource s) s Text where
+instance P.HasRequiresSession (ServicebusSubscriptionResource s) s Text where
     requiresSession =
         lens (_requires_session :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _requires_session = a } :: ServicebusSubscriptionResource s)
 
-instance HasResourceGroupName (ServicebusSubscriptionResource s) s Text where
+instance P.HasResourceGroupName (ServicebusSubscriptionResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ServicebusSubscriptionResource s)
 
-instance HasTopicName (ServicebusSubscriptionResource s) s Text where
+instance P.HasTopicName (ServicebusSubscriptionResource s) s Text where
     topicName =
         lens (_topic_name :: ServicebusSubscriptionResource s -> TF.Attribute s Text)
             (\s a -> s { _topic_name = a } :: ServicebusSubscriptionResource s)
 
-servicebusSubscriptionResource :: TF.Resource TF.AzureRM (ServicebusSubscriptionResource s)
+servicebusSubscriptionResource :: TF.Resource P.AzureRM (ServicebusSubscriptionResource s)
 servicebusSubscriptionResource =
     TF.newResource "azurerm_servicebus_subscription" $
         ServicebusSubscriptionResource {
@@ -6595,77 +6594,77 @@ instance TF.ToHCL (ServicebusTopicResource s) where
         , TF.attribute "support_ordering" _support_ordering
         ]
 
-instance HasAutoDeleteOnIdle (ServicebusTopicResource s) s Text where
+instance P.HasAutoDeleteOnIdle (ServicebusTopicResource s) s Text where
     autoDeleteOnIdle =
         lens (_auto_delete_on_idle :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_delete_on_idle = a } :: ServicebusTopicResource s)
 
-instance HasDefaultMessageTtl (ServicebusTopicResource s) s Text where
+instance P.HasDefaultMessageTtl (ServicebusTopicResource s) s Text where
     defaultMessageTtl =
         lens (_default_message_ttl :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _default_message_ttl = a } :: ServicebusTopicResource s)
 
-instance HasDuplicateDetectionHistoryTimeWindow (ServicebusTopicResource s) s Text where
+instance P.HasDuplicateDetectionHistoryTimeWindow (ServicebusTopicResource s) s Text where
     duplicateDetectionHistoryTimeWindow =
         lens (_duplicate_detection_history_time_window :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _duplicate_detection_history_time_window = a } :: ServicebusTopicResource s)
 
-instance HasEnableBatchedOperations (ServicebusTopicResource s) s Text where
+instance P.HasEnableBatchedOperations (ServicebusTopicResource s) s Text where
     enableBatchedOperations =
         lens (_enable_batched_operations :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_batched_operations = a } :: ServicebusTopicResource s)
 
-instance HasEnableExpress (ServicebusTopicResource s) s Text where
+instance P.HasEnableExpress (ServicebusTopicResource s) s Text where
     enableExpress =
         lens (_enable_express :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_express = a } :: ServicebusTopicResource s)
 
-instance HasEnablePartitioning (ServicebusTopicResource s) s Text where
+instance P.HasEnablePartitioning (ServicebusTopicResource s) s Text where
     enablePartitioning =
         lens (_enable_partitioning :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_partitioning = a } :: ServicebusTopicResource s)
 
-instance HasLocation (ServicebusTopicResource s) s Text where
+instance P.HasLocation (ServicebusTopicResource s) s Text where
     location =
         lens (_location :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: ServicebusTopicResource s)
 
-instance HasMaxSizeInMegabytes (ServicebusTopicResource s) s Text where
+instance P.HasMaxSizeInMegabytes (ServicebusTopicResource s) s Text where
     maxSizeInMegabytes =
         lens (_max_size_in_megabytes :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _max_size_in_megabytes = a } :: ServicebusTopicResource s)
 
-instance HasName (ServicebusTopicResource s) s Text where
+instance P.HasName (ServicebusTopicResource s) s Text where
     name =
         lens (_name :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ServicebusTopicResource s)
 
-instance HasNamespaceName (ServicebusTopicResource s) s Text where
+instance P.HasNamespaceName (ServicebusTopicResource s) s Text where
     namespaceName =
         lens (_namespace_name :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _namespace_name = a } :: ServicebusTopicResource s)
 
-instance HasRequiresDuplicateDetection (ServicebusTopicResource s) s Text where
+instance P.HasRequiresDuplicateDetection (ServicebusTopicResource s) s Text where
     requiresDuplicateDetection =
         lens (_requires_duplicate_detection :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _requires_duplicate_detection = a } :: ServicebusTopicResource s)
 
-instance HasResourceGroupName (ServicebusTopicResource s) s Text where
+instance P.HasResourceGroupName (ServicebusTopicResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: ServicebusTopicResource s)
 
-instance HasStatus (ServicebusTopicResource s) s Text where
+instance P.HasStatus (ServicebusTopicResource s) s Text where
     status =
         lens (_status :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _status = a } :: ServicebusTopicResource s)
 
-instance HasSupportOrdering (ServicebusTopicResource s) s Text where
+instance P.HasSupportOrdering (ServicebusTopicResource s) s Text where
     supportOrdering =
         lens (_support_ordering :: ServicebusTopicResource s -> TF.Attribute s Text)
             (\s a -> s { _support_ordering = a } :: ServicebusTopicResource s)
 
-servicebusTopicResource :: TF.Resource TF.AzureRM (ServicebusTopicResource s)
+servicebusTopicResource :: TF.Resource P.AzureRM (ServicebusTopicResource s)
 servicebusTopicResource =
     TF.newResource "azurerm_servicebus_topic" $
         ServicebusTopicResource {
@@ -6708,31 +6707,31 @@ instance TF.ToHCL (SnapshotResource s) where
         , TF.attribute "resource_group_name" _resource_group_name
         ]
 
-instance HasCreateOption (SnapshotResource s) s Text where
+instance P.HasCreateOption (SnapshotResource s) s Text where
     createOption =
         lens (_create_option :: SnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _create_option = a } :: SnapshotResource s)
 
-instance HasLocation (SnapshotResource s) s Text where
+instance P.HasLocation (SnapshotResource s) s Text where
     location =
         lens (_location :: SnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: SnapshotResource s)
 
-instance HasName (SnapshotResource s) s Text where
+instance P.HasName (SnapshotResource s) s Text where
     name =
         lens (_name :: SnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SnapshotResource s)
 
-instance HasResourceGroupName (SnapshotResource s) s Text where
+instance P.HasResourceGroupName (SnapshotResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: SnapshotResource s)
 
-instance HasComputedDiskSizeGb (SnapshotResource s) Text
+instance P.HasComputedDiskSizeGb (SnapshotResource s) Text
 
-instance HasComputedId (SnapshotResource s) Text
+instance P.HasComputedId (SnapshotResource s) Text
 
-snapshotResource :: TF.Resource TF.AzureRM (SnapshotResource s)
+snapshotResource :: TF.Resource P.AzureRM (SnapshotResource s)
 snapshotResource =
     TF.newResource "azurerm_snapshot" $
         SnapshotResource {
@@ -6798,88 +6797,88 @@ instance TF.ToHCL (SqlDatabaseResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasCollation (SqlDatabaseResource s) s Text where
+instance P.HasCollation (SqlDatabaseResource s) s Text where
     collation =
         lens (_collation :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _collation = a } :: SqlDatabaseResource s)
 
-instance HasCreateMode (SqlDatabaseResource s) s Text where
+instance P.HasCreateMode (SqlDatabaseResource s) s Text where
     createMode =
         lens (_create_mode :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _create_mode = a } :: SqlDatabaseResource s)
 
-instance HasEdition (SqlDatabaseResource s) s Text where
+instance P.HasEdition (SqlDatabaseResource s) s Text where
     edition =
         lens (_edition :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _edition = a } :: SqlDatabaseResource s)
 
-instance HasElasticPoolName (SqlDatabaseResource s) s Text where
+instance P.HasElasticPoolName (SqlDatabaseResource s) s Text where
     elasticPoolName =
         lens (_elastic_pool_name :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _elastic_pool_name = a } :: SqlDatabaseResource s)
 
-instance HasLocation (SqlDatabaseResource s) s Text where
+instance P.HasLocation (SqlDatabaseResource s) s Text where
     location =
         lens (_location :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: SqlDatabaseResource s)
 
-instance HasMaxSizeBytes (SqlDatabaseResource s) s Text where
+instance P.HasMaxSizeBytes (SqlDatabaseResource s) s Text where
     maxSizeBytes =
         lens (_max_size_bytes :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _max_size_bytes = a } :: SqlDatabaseResource s)
 
-instance HasName (SqlDatabaseResource s) s Text where
+instance P.HasName (SqlDatabaseResource s) s Text where
     name =
         lens (_name :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SqlDatabaseResource s)
 
-instance HasRequestedServiceObjectiveId (SqlDatabaseResource s) s Text where
+instance P.HasRequestedServiceObjectiveId (SqlDatabaseResource s) s Text where
     requestedServiceObjectiveId =
         lens (_requested_service_objective_id :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _requested_service_objective_id = a } :: SqlDatabaseResource s)
 
-instance HasRequestedServiceObjectiveName (SqlDatabaseResource s) s Text where
+instance P.HasRequestedServiceObjectiveName (SqlDatabaseResource s) s Text where
     requestedServiceObjectiveName =
         lens (_requested_service_objective_name :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _requested_service_objective_name = a } :: SqlDatabaseResource s)
 
-instance HasResourceGroupName (SqlDatabaseResource s) s Text where
+instance P.HasResourceGroupName (SqlDatabaseResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: SqlDatabaseResource s)
 
-instance HasRestorePointInTime (SqlDatabaseResource s) s Text where
+instance P.HasRestorePointInTime (SqlDatabaseResource s) s Text where
     restorePointInTime =
         lens (_restore_point_in_time :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _restore_point_in_time = a } :: SqlDatabaseResource s)
 
-instance HasServerName (SqlDatabaseResource s) s Text where
+instance P.HasServerName (SqlDatabaseResource s) s Text where
     serverName =
         lens (_server_name :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: SqlDatabaseResource s)
 
-instance HasSourceDatabaseDeletionDate (SqlDatabaseResource s) s Text where
+instance P.HasSourceDatabaseDeletionDate (SqlDatabaseResource s) s Text where
     sourceDatabaseDeletionDate =
         lens (_source_database_deletion_date :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _source_database_deletion_date = a } :: SqlDatabaseResource s)
 
-instance HasSourceDatabaseId (SqlDatabaseResource s) s Text where
+instance P.HasSourceDatabaseId (SqlDatabaseResource s) s Text where
     sourceDatabaseId =
         lens (_source_database_id :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _source_database_id = a } :: SqlDatabaseResource s)
 
-instance HasTags (SqlDatabaseResource s) s Text where
+instance P.HasTags (SqlDatabaseResource s) s Text where
     tags =
         lens (_tags :: SqlDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: SqlDatabaseResource s)
 
-instance HasComputedCreationData (SqlDatabaseResource s) Text
+instance P.HasComputedCreationData (SqlDatabaseResource s) Text
 
-instance HasComputedDefaultSecondaryLocation (SqlDatabaseResource s) Text
+instance P.HasComputedDefaultSecondaryLocation (SqlDatabaseResource s) Text
 
-instance HasComputedId (SqlDatabaseResource s) Text
+instance P.HasComputedId (SqlDatabaseResource s) Text
 
-sqlDatabaseResource :: TF.Resource TF.AzureRM (SqlDatabaseResource s)
+sqlDatabaseResource :: TF.Resource P.AzureRM (SqlDatabaseResource s)
 sqlDatabaseResource =
     TF.newResource "azurerm_sql_database" $
         SqlDatabaseResource {
@@ -6941,61 +6940,61 @@ instance TF.ToHCL (SqlElasticpoolResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasDbDtuMax (SqlElasticpoolResource s) s Text where
+instance P.HasDbDtuMax (SqlElasticpoolResource s) s Text where
     dbDtuMax =
         lens (_db_dtu_max :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _db_dtu_max = a } :: SqlElasticpoolResource s)
 
-instance HasDbDtuMin (SqlElasticpoolResource s) s Text where
+instance P.HasDbDtuMin (SqlElasticpoolResource s) s Text where
     dbDtuMin =
         lens (_db_dtu_min :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _db_dtu_min = a } :: SqlElasticpoolResource s)
 
-instance HasDtu (SqlElasticpoolResource s) s Text where
+instance P.HasDtu (SqlElasticpoolResource s) s Text where
     dtu =
         lens (_dtu :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _dtu = a } :: SqlElasticpoolResource s)
 
-instance HasEdition (SqlElasticpoolResource s) s Text where
+instance P.HasEdition (SqlElasticpoolResource s) s Text where
     edition =
         lens (_edition :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _edition = a } :: SqlElasticpoolResource s)
 
-instance HasLocation (SqlElasticpoolResource s) s Text where
+instance P.HasLocation (SqlElasticpoolResource s) s Text where
     location =
         lens (_location :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: SqlElasticpoolResource s)
 
-instance HasName (SqlElasticpoolResource s) s Text where
+instance P.HasName (SqlElasticpoolResource s) s Text where
     name =
         lens (_name :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SqlElasticpoolResource s)
 
-instance HasPoolSize (SqlElasticpoolResource s) s Text where
+instance P.HasPoolSize (SqlElasticpoolResource s) s Text where
     poolSize =
         lens (_pool_size :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _pool_size = a } :: SqlElasticpoolResource s)
 
-instance HasResourceGroupName (SqlElasticpoolResource s) s Text where
+instance P.HasResourceGroupName (SqlElasticpoolResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: SqlElasticpoolResource s)
 
-instance HasServerName (SqlElasticpoolResource s) s Text where
+instance P.HasServerName (SqlElasticpoolResource s) s Text where
     serverName =
         lens (_server_name :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: SqlElasticpoolResource s)
 
-instance HasTags (SqlElasticpoolResource s) s Text where
+instance P.HasTags (SqlElasticpoolResource s) s Text where
     tags =
         lens (_tags :: SqlElasticpoolResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: SqlElasticpoolResource s)
 
-instance HasComputedCreationDate (SqlElasticpoolResource s) Text
+instance P.HasComputedCreationDate (SqlElasticpoolResource s) Text
 
-instance HasComputedId (SqlElasticpoolResource s) Text
+instance P.HasComputedId (SqlElasticpoolResource s) Text
 
-sqlElasticpoolResource :: TF.Resource TF.AzureRM (SqlElasticpoolResource s)
+sqlElasticpoolResource :: TF.Resource P.AzureRM (SqlElasticpoolResource s)
 sqlElasticpoolResource =
     TF.newResource "azurerm_sql_elasticpool" $
         SqlElasticpoolResource {
@@ -7037,34 +7036,34 @@ instance TF.ToHCL (SqlFirewallRuleResource s) where
         , TF.attribute "start_ip_address" _start_ip_address
         ]
 
-instance HasEndIpAddress (SqlFirewallRuleResource s) s Text where
+instance P.HasEndIpAddress (SqlFirewallRuleResource s) s Text where
     endIpAddress =
         lens (_end_ip_address :: SqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _end_ip_address = a } :: SqlFirewallRuleResource s)
 
-instance HasName (SqlFirewallRuleResource s) s Text where
+instance P.HasName (SqlFirewallRuleResource s) s Text where
     name =
         lens (_name :: SqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SqlFirewallRuleResource s)
 
-instance HasResourceGroupName (SqlFirewallRuleResource s) s Text where
+instance P.HasResourceGroupName (SqlFirewallRuleResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: SqlFirewallRuleResource s)
 
-instance HasServerName (SqlFirewallRuleResource s) s Text where
+instance P.HasServerName (SqlFirewallRuleResource s) s Text where
     serverName =
         lens (_server_name :: SqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _server_name = a } :: SqlFirewallRuleResource s)
 
-instance HasStartIpAddress (SqlFirewallRuleResource s) s Text where
+instance P.HasStartIpAddress (SqlFirewallRuleResource s) s Text where
     startIpAddress =
         lens (_start_ip_address :: SqlFirewallRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _start_ip_address = a } :: SqlFirewallRuleResource s)
 
-instance HasComputedId (SqlFirewallRuleResource s) Text
+instance P.HasComputedId (SqlFirewallRuleResource s) Text
 
-sqlFirewallRuleResource :: TF.Resource TF.AzureRM (SqlFirewallRuleResource s)
+sqlFirewallRuleResource :: TF.Resource P.AzureRM (SqlFirewallRuleResource s)
 sqlFirewallRuleResource =
     TF.newResource "azurerm_sql_firewall_rule" $
         SqlFirewallRuleResource {
@@ -7109,46 +7108,46 @@ instance TF.ToHCL (SqlServerResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasAdministratorLogin (SqlServerResource s) s Text where
+instance P.HasAdministratorLogin (SqlServerResource s) s Text where
     administratorLogin =
         lens (_administrator_login :: SqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _administrator_login = a } :: SqlServerResource s)
 
-instance HasAdministratorLoginPassword (SqlServerResource s) s Text where
+instance P.HasAdministratorLoginPassword (SqlServerResource s) s Text where
     administratorLoginPassword =
         lens (_administrator_login_password :: SqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _administrator_login_password = a } :: SqlServerResource s)
 
-instance HasLocation (SqlServerResource s) s Text where
+instance P.HasLocation (SqlServerResource s) s Text where
     location =
         lens (_location :: SqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: SqlServerResource s)
 
-instance HasName (SqlServerResource s) s Text where
+instance P.HasName (SqlServerResource s) s Text where
     name =
         lens (_name :: SqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SqlServerResource s)
 
-instance HasResourceGroupName (SqlServerResource s) s Text where
+instance P.HasResourceGroupName (SqlServerResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: SqlServerResource s)
 
-instance HasTags (SqlServerResource s) s Text where
+instance P.HasTags (SqlServerResource s) s Text where
     tags =
         lens (_tags :: SqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: SqlServerResource s)
 
-instance HasVersion (SqlServerResource s) s Text where
+instance P.HasVersion (SqlServerResource s) s Text where
     version =
         lens (_version :: SqlServerResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: SqlServerResource s)
 
-instance HasComputedFullyQualifiedDomainName (SqlServerResource s) Text
+instance P.HasComputedFullyQualifiedDomainName (SqlServerResource s) Text
 
-instance HasComputedId (SqlServerResource s) Text
+instance P.HasComputedId (SqlServerResource s) Text
 
-sqlServerResource :: TF.Resource TF.AzureRM (SqlServerResource s)
+sqlServerResource :: TF.Resource P.AzureRM (SqlServerResource s)
 sqlServerResource =
     TF.newResource "azurerm_sql_server" $
         SqlServerResource {
@@ -7214,109 +7213,109 @@ instance TF.ToHCL (StorageAccountResource s) where
         , TF.attribute "use_subdomain" _use_subdomain
         ]
 
-instance HasAccessTier (StorageAccountResource s) s Text where
+instance P.HasAccessTier (StorageAccountResource s) s Text where
     accessTier =
         lens (_access_tier :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _access_tier = a } :: StorageAccountResource s)
 
-instance HasAccountEncryptionSource (StorageAccountResource s) s Text where
+instance P.HasAccountEncryptionSource (StorageAccountResource s) s Text where
     accountEncryptionSource =
         lens (_account_encryption_source :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _account_encryption_source = a } :: StorageAccountResource s)
 
-instance HasAccountKind (StorageAccountResource s) s Text where
+instance P.HasAccountKind (StorageAccountResource s) s Text where
     accountKind =
         lens (_account_kind :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _account_kind = a } :: StorageAccountResource s)
 
-instance HasAccountReplicationType (StorageAccountResource s) s Text where
+instance P.HasAccountReplicationType (StorageAccountResource s) s Text where
     accountReplicationType =
         lens (_account_replication_type :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _account_replication_type = a } :: StorageAccountResource s)
 
-instance HasAccountTier (StorageAccountResource s) s Text where
+instance P.HasAccountTier (StorageAccountResource s) s Text where
     accountTier =
         lens (_account_tier :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _account_tier = a } :: StorageAccountResource s)
 
-instance HasCustomDomain (StorageAccountResource s) s Text where
+instance P.HasCustomDomain (StorageAccountResource s) s Text where
     customDomain =
         lens (_custom_domain :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _custom_domain = a } :: StorageAccountResource s)
 
-instance HasEnableBlobEncryption (StorageAccountResource s) s Text where
+instance P.HasEnableBlobEncryption (StorageAccountResource s) s Text where
     enableBlobEncryption =
         lens (_enable_blob_encryption :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_blob_encryption = a } :: StorageAccountResource s)
 
-instance HasEnableFileEncryption (StorageAccountResource s) s Text where
+instance P.HasEnableFileEncryption (StorageAccountResource s) s Text where
     enableFileEncryption =
         lens (_enable_file_encryption :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_file_encryption = a } :: StorageAccountResource s)
 
-instance HasEnableHttpsTrafficOnly (StorageAccountResource s) s Text where
+instance P.HasEnableHttpsTrafficOnly (StorageAccountResource s) s Text where
     enableHttpsTrafficOnly =
         lens (_enable_https_traffic_only :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_https_traffic_only = a } :: StorageAccountResource s)
 
-instance HasLocation (StorageAccountResource s) s Text where
+instance P.HasLocation (StorageAccountResource s) s Text where
     location =
         lens (_location :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: StorageAccountResource s)
 
-instance HasName (StorageAccountResource s) s Text where
+instance P.HasName (StorageAccountResource s) s Text where
     name =
         lens (_name :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: StorageAccountResource s)
 
-instance HasResourceGroupName (StorageAccountResource s) s Text where
+instance P.HasResourceGroupName (StorageAccountResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: StorageAccountResource s)
 
-instance HasTags (StorageAccountResource s) s Text where
+instance P.HasTags (StorageAccountResource s) s Text where
     tags =
         lens (_tags :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: StorageAccountResource s)
 
-instance HasUseSubdomain (StorageAccountResource s) s Text where
+instance P.HasUseSubdomain (StorageAccountResource s) s Text where
     useSubdomain =
         lens (_use_subdomain :: StorageAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _use_subdomain = a } :: StorageAccountResource s)
 
-instance HasComputedId (StorageAccountResource s) Text
+instance P.HasComputedId (StorageAccountResource s) Text
 
-instance HasComputedPrimaryAccessKey (StorageAccountResource s) Text
+instance P.HasComputedPrimaryAccessKey (StorageAccountResource s) Text
 
-instance HasComputedPrimaryBlobConnectionString (StorageAccountResource s) Text
+instance P.HasComputedPrimaryBlobConnectionString (StorageAccountResource s) Text
 
-instance HasComputedPrimaryBlobEndpoint (StorageAccountResource s) Text
+instance P.HasComputedPrimaryBlobEndpoint (StorageAccountResource s) Text
 
-instance HasComputedPrimaryConnectionString (StorageAccountResource s) Text
+instance P.HasComputedPrimaryConnectionString (StorageAccountResource s) Text
 
-instance HasComputedPrimaryFileEndpoint (StorageAccountResource s) Text
+instance P.HasComputedPrimaryFileEndpoint (StorageAccountResource s) Text
 
-instance HasComputedPrimaryLocation (StorageAccountResource s) Text
+instance P.HasComputedPrimaryLocation (StorageAccountResource s) Text
 
-instance HasComputedPrimaryQueueEndpoint (StorageAccountResource s) Text
+instance P.HasComputedPrimaryQueueEndpoint (StorageAccountResource s) Text
 
-instance HasComputedPrimaryTableEndpoint (StorageAccountResource s) Text
+instance P.HasComputedPrimaryTableEndpoint (StorageAccountResource s) Text
 
-instance HasComputedSecondaryAccessKey (StorageAccountResource s) Text
+instance P.HasComputedSecondaryAccessKey (StorageAccountResource s) Text
 
-instance HasComputedSecondaryBlobConnectionString (StorageAccountResource s) Text
+instance P.HasComputedSecondaryBlobConnectionString (StorageAccountResource s) Text
 
-instance HasComputedSecondaryBlobEndpoint (StorageAccountResource s) Text
+instance P.HasComputedSecondaryBlobEndpoint (StorageAccountResource s) Text
 
-instance HasComputedSecondaryConnectionString (StorageAccountResource s) Text
+instance P.HasComputedSecondaryConnectionString (StorageAccountResource s) Text
 
-instance HasComputedSecondaryLocation (StorageAccountResource s) Text
+instance P.HasComputedSecondaryLocation (StorageAccountResource s) Text
 
-instance HasComputedSecondaryQueueEndpoint (StorageAccountResource s) Text
+instance P.HasComputedSecondaryQueueEndpoint (StorageAccountResource s) Text
 
-instance HasComputedSecondaryTableEndpoint (StorageAccountResource s) Text
+instance P.HasComputedSecondaryTableEndpoint (StorageAccountResource s) Text
 
-storageAccountResource :: TF.Resource TF.AzureRM (StorageAccountResource s)
+storageAccountResource :: TF.Resource P.AzureRM (StorageAccountResource s)
 storageAccountResource =
     TF.newResource "azurerm_storage_account" $
         StorageAccountResource {
@@ -7377,61 +7376,61 @@ instance TF.ToHCL (StorageBlobResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasAttempts (StorageBlobResource s) s Text where
+instance P.HasAttempts (StorageBlobResource s) s Text where
     attempts =
         lens (_attempts :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _attempts = a } :: StorageBlobResource s)
 
-instance HasName (StorageBlobResource s) s Text where
+instance P.HasName (StorageBlobResource s) s Text where
     name =
         lens (_name :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: StorageBlobResource s)
 
-instance HasParallelism (StorageBlobResource s) s Text where
+instance P.HasParallelism (StorageBlobResource s) s Text where
     parallelism =
         lens (_parallelism :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _parallelism = a } :: StorageBlobResource s)
 
-instance HasResourceGroupName (StorageBlobResource s) s Text where
+instance P.HasResourceGroupName (StorageBlobResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: StorageBlobResource s)
 
-instance HasSize (StorageBlobResource s) s Text where
+instance P.HasSize (StorageBlobResource s) s Text where
     size =
         lens (_size :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: StorageBlobResource s)
 
-instance HasSource (StorageBlobResource s) s Text where
+instance P.HasSource (StorageBlobResource s) s Text where
     source =
         lens (_source :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _source = a } :: StorageBlobResource s)
 
-instance HasSourceUri (StorageBlobResource s) s Text where
+instance P.HasSourceUri (StorageBlobResource s) s Text where
     sourceUri =
         lens (_source_uri :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _source_uri = a } :: StorageBlobResource s)
 
-instance HasStorageAccountName (StorageBlobResource s) s Text where
+instance P.HasStorageAccountName (StorageBlobResource s) s Text where
     storageAccountName =
         lens (_storage_account_name :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_account_name = a } :: StorageBlobResource s)
 
-instance HasStorageContainerName (StorageBlobResource s) s Text where
+instance P.HasStorageContainerName (StorageBlobResource s) s Text where
     storageContainerName =
         lens (_storage_container_name :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_container_name = a } :: StorageBlobResource s)
 
-instance HasType' (StorageBlobResource s) s Text where
+instance P.HasType' (StorageBlobResource s) s Text where
     type' =
         lens (_type' :: StorageBlobResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: StorageBlobResource s)
 
-instance HasComputedId (StorageBlobResource s) Text
+instance P.HasComputedId (StorageBlobResource s) Text
 
-instance HasComputedUrl (StorageBlobResource s) Text
+instance P.HasComputedUrl (StorageBlobResource s) Text
 
-storageBlobResource :: TF.Resource TF.AzureRM (StorageBlobResource s)
+storageBlobResource :: TF.Resource P.AzureRM (StorageBlobResource s)
 storageBlobResource =
     TF.newResource "azurerm_storage_blob" $
         StorageBlobResource {
@@ -7470,31 +7469,31 @@ instance TF.ToHCL (StorageContainerResource s) where
         , TF.attribute "storage_account_name" _storage_account_name
         ]
 
-instance HasContainerAccessType (StorageContainerResource s) s Text where
+instance P.HasContainerAccessType (StorageContainerResource s) s Text where
     containerAccessType =
         lens (_container_access_type :: StorageContainerResource s -> TF.Attribute s Text)
             (\s a -> s { _container_access_type = a } :: StorageContainerResource s)
 
-instance HasName (StorageContainerResource s) s Text where
+instance P.HasName (StorageContainerResource s) s Text where
     name =
         lens (_name :: StorageContainerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: StorageContainerResource s)
 
-instance HasResourceGroupName (StorageContainerResource s) s Text where
+instance P.HasResourceGroupName (StorageContainerResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: StorageContainerResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: StorageContainerResource s)
 
-instance HasStorageAccountName (StorageContainerResource s) s Text where
+instance P.HasStorageAccountName (StorageContainerResource s) s Text where
     storageAccountName =
         lens (_storage_account_name :: StorageContainerResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_account_name = a } :: StorageContainerResource s)
 
-instance HasComputedId (StorageContainerResource s) Text
+instance P.HasComputedId (StorageContainerResource s) Text
 
-instance HasComputedProperties (StorageContainerResource s) Text
+instance P.HasComputedProperties (StorageContainerResource s) Text
 
-storageContainerResource :: TF.Resource TF.AzureRM (StorageContainerResource s)
+storageContainerResource :: TF.Resource P.AzureRM (StorageContainerResource s)
 storageContainerResource =
     TF.newResource "azurerm_storage_container" $
         StorageContainerResource {
@@ -7524,24 +7523,24 @@ instance TF.ToHCL (StorageQueueResource s) where
         , TF.attribute "storage_account_name" _storage_account_name
         ]
 
-instance HasName (StorageQueueResource s) s Text where
+instance P.HasName (StorageQueueResource s) s Text where
     name =
         lens (_name :: StorageQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: StorageQueueResource s)
 
-instance HasResourceGroupName (StorageQueueResource s) s Text where
+instance P.HasResourceGroupName (StorageQueueResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: StorageQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: StorageQueueResource s)
 
-instance HasStorageAccountName (StorageQueueResource s) s Text where
+instance P.HasStorageAccountName (StorageQueueResource s) s Text where
     storageAccountName =
         lens (_storage_account_name :: StorageQueueResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_account_name = a } :: StorageQueueResource s)
 
-instance HasComputedId (StorageQueueResource s) Text
+instance P.HasComputedId (StorageQueueResource s) Text
 
-storageQueueResource :: TF.Resource TF.AzureRM (StorageQueueResource s)
+storageQueueResource :: TF.Resource P.AzureRM (StorageQueueResource s)
 storageQueueResource =
     TF.newResource "azurerm_storage_queue" $
         StorageQueueResource {
@@ -7573,31 +7572,31 @@ instance TF.ToHCL (StorageShareResource s) where
         , TF.attribute "storage_account_name" _storage_account_name
         ]
 
-instance HasName (StorageShareResource s) s Text where
+instance P.HasName (StorageShareResource s) s Text where
     name =
         lens (_name :: StorageShareResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: StorageShareResource s)
 
-instance HasQuota (StorageShareResource s) s Text where
+instance P.HasQuota (StorageShareResource s) s Text where
     quota =
         lens (_quota :: StorageShareResource s -> TF.Attribute s Text)
             (\s a -> s { _quota = a } :: StorageShareResource s)
 
-instance HasResourceGroupName (StorageShareResource s) s Text where
+instance P.HasResourceGroupName (StorageShareResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: StorageShareResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: StorageShareResource s)
 
-instance HasStorageAccountName (StorageShareResource s) s Text where
+instance P.HasStorageAccountName (StorageShareResource s) s Text where
     storageAccountName =
         lens (_storage_account_name :: StorageShareResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_account_name = a } :: StorageShareResource s)
 
-instance HasComputedId (StorageShareResource s) Text
+instance P.HasComputedId (StorageShareResource s) Text
 
-instance HasComputedUrl (StorageShareResource s) Text
+instance P.HasComputedUrl (StorageShareResource s) Text
 
-storageShareResource :: TF.Resource TF.AzureRM (StorageShareResource s)
+storageShareResource :: TF.Resource P.AzureRM (StorageShareResource s)
 storageShareResource =
     TF.newResource "azurerm_storage_share" $
         StorageShareResource {
@@ -7627,24 +7626,24 @@ instance TF.ToHCL (StorageTableResource s) where
         , TF.attribute "storage_account_name" _storage_account_name
         ]
 
-instance HasName (StorageTableResource s) s Text where
+instance P.HasName (StorageTableResource s) s Text where
     name =
         lens (_name :: StorageTableResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: StorageTableResource s)
 
-instance HasResourceGroupName (StorageTableResource s) s Text where
+instance P.HasResourceGroupName (StorageTableResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: StorageTableResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: StorageTableResource s)
 
-instance HasStorageAccountName (StorageTableResource s) s Text where
+instance P.HasStorageAccountName (StorageTableResource s) s Text where
     storageAccountName =
         lens (_storage_account_name :: StorageTableResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_account_name = a } :: StorageTableResource s)
 
-instance HasComputedId (StorageTableResource s) Text
+instance P.HasComputedId (StorageTableResource s) Text
 
-storageTableResource :: TF.Resource TF.AzureRM (StorageTableResource s)
+storageTableResource :: TF.Resource P.AzureRM (StorageTableResource s)
 storageTableResource =
     TF.newResource "azurerm_storage_table" $
         StorageTableResource {
@@ -7688,49 +7687,49 @@ instance TF.ToHCL (SubnetResource s) where
         , TF.attribute "virtual_network_name" _virtual_network_name
         ]
 
-instance HasAddressPrefix (SubnetResource s) s Text where
+instance P.HasAddressPrefix (SubnetResource s) s Text where
     addressPrefix =
         lens (_address_prefix :: SubnetResource s -> TF.Attribute s Text)
             (\s a -> s { _address_prefix = a } :: SubnetResource s)
 
-instance HasName (SubnetResource s) s Text where
+instance P.HasName (SubnetResource s) s Text where
     name =
         lens (_name :: SubnetResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SubnetResource s)
 
-instance HasNetworkSecurityGroupId (SubnetResource s) s Text where
+instance P.HasNetworkSecurityGroupId (SubnetResource s) s Text where
     networkSecurityGroupId =
         lens (_network_security_group_id :: SubnetResource s -> TF.Attribute s Text)
             (\s a -> s { _network_security_group_id = a } :: SubnetResource s)
 
-instance HasResourceGroupName (SubnetResource s) s Text where
+instance P.HasResourceGroupName (SubnetResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SubnetResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: SubnetResource s)
 
-instance HasRouteTableId (SubnetResource s) s Text where
+instance P.HasRouteTableId (SubnetResource s) s Text where
     routeTableId =
         lens (_route_table_id :: SubnetResource s -> TF.Attribute s Text)
             (\s a -> s { _route_table_id = a } :: SubnetResource s)
 
-instance HasVirtualNetworkName (SubnetResource s) s Text where
+instance P.HasVirtualNetworkName (SubnetResource s) s Text where
     virtualNetworkName =
         lens (_virtual_network_name :: SubnetResource s -> TF.Attribute s Text)
             (\s a -> s { _virtual_network_name = a } :: SubnetResource s)
 
-instance HasComputedAddressPrefix (SubnetResource s) Text
+instance P.HasComputedAddressPrefix (SubnetResource s) Text
 
-instance HasComputedId (SubnetResource s) Text
+instance P.HasComputedId (SubnetResource s) Text
 
-instance HasComputedIpConfigurations (SubnetResource s) Text
+instance P.HasComputedIpConfigurations (SubnetResource s) Text
 
-instance HasComputedName (SubnetResource s) Text
+instance P.HasComputedName (SubnetResource s) Text
 
-instance HasComputedResourceGroupName (SubnetResource s) Text
+instance P.HasComputedResourceGroupName (SubnetResource s) Text
 
-instance HasComputedVirtualNetworkName (SubnetResource s) Text
+instance P.HasComputedVirtualNetworkName (SubnetResource s) Text
 
-subnetResource :: TF.Resource TF.AzureRM (SubnetResource s)
+subnetResource :: TF.Resource P.AzureRM (SubnetResource s)
 subnetResource =
     TF.newResource "azurerm_subnet" $
         SubnetResource {
@@ -7776,31 +7775,31 @@ instance TF.ToHCL (TemplateDeploymentResource s) where
         , TF.attribute "template_body" _template_body
         ]
 
-instance HasDeploymentMode (TemplateDeploymentResource s) s Text where
+instance P.HasDeploymentMode (TemplateDeploymentResource s) s Text where
     deploymentMode =
         lens (_deployment_mode :: TemplateDeploymentResource s -> TF.Attribute s Text)
             (\s a -> s { _deployment_mode = a } :: TemplateDeploymentResource s)
 
-instance HasName (TemplateDeploymentResource s) s Text where
+instance P.HasName (TemplateDeploymentResource s) s Text where
     name =
         lens (_name :: TemplateDeploymentResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TemplateDeploymentResource s)
 
-instance HasResourceGroupName (TemplateDeploymentResource s) s Text where
+instance P.HasResourceGroupName (TemplateDeploymentResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: TemplateDeploymentResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: TemplateDeploymentResource s)
 
-instance HasTemplateBody (TemplateDeploymentResource s) s Text where
+instance P.HasTemplateBody (TemplateDeploymentResource s) s Text where
     templateBody =
         lens (_template_body :: TemplateDeploymentResource s -> TF.Attribute s Text)
             (\s a -> s { _template_body = a } :: TemplateDeploymentResource s)
 
-instance HasComputedId (TemplateDeploymentResource s) Text
+instance P.HasComputedId (TemplateDeploymentResource s) Text
 
-instance HasComputedOutputs (TemplateDeploymentResource s) Text
+instance P.HasComputedOutputs (TemplateDeploymentResource s) Text
 
-templateDeploymentResource :: TF.Resource TF.AzureRM (TemplateDeploymentResource s)
+templateDeploymentResource :: TF.Resource P.AzureRM (TemplateDeploymentResource s)
 templateDeploymentResource =
     TF.newResource "azurerm_template_deployment" $
         TemplateDeploymentResource {
@@ -7854,64 +7853,64 @@ instance TF.ToHCL (TrafficManagerEndpointResource s) where
         , TF.attribute "weight" _weight
         ]
 
-instance HasEndpointLocation (TrafficManagerEndpointResource s) s Text where
+instance P.HasEndpointLocation (TrafficManagerEndpointResource s) s Text where
     endpointLocation =
         lens (_endpoint_location :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _endpoint_location = a } :: TrafficManagerEndpointResource s)
 
-instance HasEndpointStatus (TrafficManagerEndpointResource s) s Text where
+instance P.HasEndpointStatus (TrafficManagerEndpointResource s) s Text where
     endpointStatus =
         lens (_endpoint_status :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _endpoint_status = a } :: TrafficManagerEndpointResource s)
 
-instance HasMinChildEndpoints (TrafficManagerEndpointResource s) s Text where
+instance P.HasMinChildEndpoints (TrafficManagerEndpointResource s) s Text where
     minChildEndpoints =
         lens (_min_child_endpoints :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _min_child_endpoints = a } :: TrafficManagerEndpointResource s)
 
-instance HasName (TrafficManagerEndpointResource s) s Text where
+instance P.HasName (TrafficManagerEndpointResource s) s Text where
     name =
         lens (_name :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TrafficManagerEndpointResource s)
 
-instance HasPriority (TrafficManagerEndpointResource s) s Text where
+instance P.HasPriority (TrafficManagerEndpointResource s) s Text where
     priority =
         lens (_priority :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _priority = a } :: TrafficManagerEndpointResource s)
 
-instance HasProfileName (TrafficManagerEndpointResource s) s Text where
+instance P.HasProfileName (TrafficManagerEndpointResource s) s Text where
     profileName =
         lens (_profile_name :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _profile_name = a } :: TrafficManagerEndpointResource s)
 
-instance HasResourceGroupName (TrafficManagerEndpointResource s) s Text where
+instance P.HasResourceGroupName (TrafficManagerEndpointResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: TrafficManagerEndpointResource s)
 
-instance HasTarget (TrafficManagerEndpointResource s) s Text where
+instance P.HasTarget (TrafficManagerEndpointResource s) s Text where
     target =
         lens (_target :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _target = a } :: TrafficManagerEndpointResource s)
 
-instance HasTargetResourceId (TrafficManagerEndpointResource s) s Text where
+instance P.HasTargetResourceId (TrafficManagerEndpointResource s) s Text where
     targetResourceId =
         lens (_target_resource_id :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _target_resource_id = a } :: TrafficManagerEndpointResource s)
 
-instance HasType' (TrafficManagerEndpointResource s) s Text where
+instance P.HasType' (TrafficManagerEndpointResource s) s Text where
     type' =
         lens (_type' :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: TrafficManagerEndpointResource s)
 
-instance HasWeight (TrafficManagerEndpointResource s) s Text where
+instance P.HasWeight (TrafficManagerEndpointResource s) s Text where
     weight =
         lens (_weight :: TrafficManagerEndpointResource s -> TF.Attribute s Text)
             (\s a -> s { _weight = a } :: TrafficManagerEndpointResource s)
 
-instance HasComputedId (TrafficManagerEndpointResource s) Text
+instance P.HasComputedId (TrafficManagerEndpointResource s) Text
 
-trafficManagerEndpointResource :: TF.Resource TF.AzureRM (TrafficManagerEndpointResource s)
+trafficManagerEndpointResource :: TF.Resource P.AzureRM (TrafficManagerEndpointResource s)
 trafficManagerEndpointResource =
     TF.newResource "azurerm_traffic_manager_endpoint" $
         TrafficManagerEndpointResource {
@@ -7961,46 +7960,46 @@ instance TF.ToHCL (TrafficManagerProfileResource s) where
         , TF.attribute "traffic_routing_method" _traffic_routing_method
         ]
 
-instance HasDnsConfig (TrafficManagerProfileResource s) s Text where
+instance P.HasDnsConfig (TrafficManagerProfileResource s) s Text where
     dnsConfig =
         lens (_dns_config :: TrafficManagerProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _dns_config = a } :: TrafficManagerProfileResource s)
 
-instance HasMonitorConfig (TrafficManagerProfileResource s) s Text where
+instance P.HasMonitorConfig (TrafficManagerProfileResource s) s Text where
     monitorConfig =
         lens (_monitor_config :: TrafficManagerProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _monitor_config = a } :: TrafficManagerProfileResource s)
 
-instance HasName (TrafficManagerProfileResource s) s Text where
+instance P.HasName (TrafficManagerProfileResource s) s Text where
     name =
         lens (_name :: TrafficManagerProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TrafficManagerProfileResource s)
 
-instance HasProfileStatus (TrafficManagerProfileResource s) s Text where
+instance P.HasProfileStatus (TrafficManagerProfileResource s) s Text where
     profileStatus =
         lens (_profile_status :: TrafficManagerProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _profile_status = a } :: TrafficManagerProfileResource s)
 
-instance HasResourceGroupName (TrafficManagerProfileResource s) s Text where
+instance P.HasResourceGroupName (TrafficManagerProfileResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: TrafficManagerProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: TrafficManagerProfileResource s)
 
-instance HasTags (TrafficManagerProfileResource s) s Text where
+instance P.HasTags (TrafficManagerProfileResource s) s Text where
     tags =
         lens (_tags :: TrafficManagerProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: TrafficManagerProfileResource s)
 
-instance HasTrafficRoutingMethod (TrafficManagerProfileResource s) s Text where
+instance P.HasTrafficRoutingMethod (TrafficManagerProfileResource s) s Text where
     trafficRoutingMethod =
         lens (_traffic_routing_method :: TrafficManagerProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _traffic_routing_method = a } :: TrafficManagerProfileResource s)
 
-instance HasComputedFqdn (TrafficManagerProfileResource s) Text
+instance P.HasComputedFqdn (TrafficManagerProfileResource s) Text
 
-instance HasComputedId (TrafficManagerProfileResource s) Text
+instance P.HasComputedId (TrafficManagerProfileResource s) Text
 
-trafficManagerProfileResource :: TF.Resource TF.AzureRM (TrafficManagerProfileResource s)
+trafficManagerProfileResource :: TF.Resource P.AzureRM (TrafficManagerProfileResource s)
 trafficManagerProfileResource =
     TF.newResource "azurerm_traffic_manager_profile" $
         TrafficManagerProfileResource {
@@ -8043,39 +8042,39 @@ instance TF.ToHCL (VirtualMachineExtensionResource s) where
         , TF.attribute "virtual_machine_name" _virtual_machine_name
         ]
 
-instance HasLocation (VirtualMachineExtensionResource s) s Text where
+instance P.HasLocation (VirtualMachineExtensionResource s) s Text where
     location =
         lens (_location :: VirtualMachineExtensionResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: VirtualMachineExtensionResource s)
 
-instance HasName (VirtualMachineExtensionResource s) s Text where
+instance P.HasName (VirtualMachineExtensionResource s) s Text where
     name =
         lens (_name :: VirtualMachineExtensionResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualMachineExtensionResource s)
 
-instance HasPublisher (VirtualMachineExtensionResource s) s Text where
+instance P.HasPublisher (VirtualMachineExtensionResource s) s Text where
     publisher =
         lens (_publisher :: VirtualMachineExtensionResource s -> TF.Attribute s Text)
             (\s a -> s { _publisher = a } :: VirtualMachineExtensionResource s)
 
-instance HasResourceGroupName (VirtualMachineExtensionResource s) s Text where
+instance P.HasResourceGroupName (VirtualMachineExtensionResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: VirtualMachineExtensionResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: VirtualMachineExtensionResource s)
 
-instance HasType' (VirtualMachineExtensionResource s) s Text where
+instance P.HasType' (VirtualMachineExtensionResource s) s Text where
     type' =
         lens (_type' :: VirtualMachineExtensionResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: VirtualMachineExtensionResource s)
 
-instance HasVirtualMachineName (VirtualMachineExtensionResource s) s Text where
+instance P.HasVirtualMachineName (VirtualMachineExtensionResource s) s Text where
     virtualMachineName =
         lens (_virtual_machine_name :: VirtualMachineExtensionResource s -> TF.Attribute s Text)
             (\s a -> s { _virtual_machine_name = a } :: VirtualMachineExtensionResource s)
 
-instance HasComputedId (VirtualMachineExtensionResource s) Text
+instance P.HasComputedId (VirtualMachineExtensionResource s) Text
 
-virtualMachineExtensionResource :: TF.Resource TF.AzureRM (VirtualMachineExtensionResource s)
+virtualMachineExtensionResource :: TF.Resource P.AzureRM (VirtualMachineExtensionResource s)
 virtualMachineExtensionResource =
     TF.newResource "azurerm_virtual_machine_extension" $
         VirtualMachineExtensionResource {
@@ -8161,114 +8160,114 @@ instance TF.ToHCL (VirtualMachineResource s) where
         , TF.attribute "vm_size" _vm_size
         ]
 
-instance HasAvailabilitySetId (VirtualMachineResource s) s Text where
+instance P.HasAvailabilitySetId (VirtualMachineResource s) s Text where
     availabilitySetId =
         lens (_availability_set_id :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _availability_set_id = a } :: VirtualMachineResource s)
 
-instance HasBootDiagnostics (VirtualMachineResource s) s Text where
+instance P.HasBootDiagnostics (VirtualMachineResource s) s Text where
     bootDiagnostics =
         lens (_boot_diagnostics :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _boot_diagnostics = a } :: VirtualMachineResource s)
 
-instance HasDeleteDataDisksOnTermination (VirtualMachineResource s) s Text where
+instance P.HasDeleteDataDisksOnTermination (VirtualMachineResource s) s Text where
     deleteDataDisksOnTermination =
         lens (_delete_data_disks_on_termination :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _delete_data_disks_on_termination = a } :: VirtualMachineResource s)
 
-instance HasDeleteOsDiskOnTermination (VirtualMachineResource s) s Text where
+instance P.HasDeleteOsDiskOnTermination (VirtualMachineResource s) s Text where
     deleteOsDiskOnTermination =
         lens (_delete_os_disk_on_termination :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _delete_os_disk_on_termination = a } :: VirtualMachineResource s)
 
-instance HasIdentity (VirtualMachineResource s) s Text where
+instance P.HasIdentity (VirtualMachineResource s) s Text where
     identity =
         lens (_identity :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _identity = a } :: VirtualMachineResource s)
 
-instance HasLicenseType (VirtualMachineResource s) s Text where
+instance P.HasLicenseType (VirtualMachineResource s) s Text where
     licenseType =
         lens (_license_type :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _license_type = a } :: VirtualMachineResource s)
 
-instance HasLocation (VirtualMachineResource s) s Text where
+instance P.HasLocation (VirtualMachineResource s) s Text where
     location =
         lens (_location :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: VirtualMachineResource s)
 
-instance HasName (VirtualMachineResource s) s Text where
+instance P.HasName (VirtualMachineResource s) s Text where
     name =
         lens (_name :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualMachineResource s)
 
-instance HasNetworkInterfaceIds (VirtualMachineResource s) s Text where
+instance P.HasNetworkInterfaceIds (VirtualMachineResource s) s Text where
     networkInterfaceIds =
         lens (_network_interface_ids :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _network_interface_ids = a } :: VirtualMachineResource s)
 
-instance HasOsProfile (VirtualMachineResource s) s Text where
+instance P.HasOsProfile (VirtualMachineResource s) s Text where
     osProfile =
         lens (_os_profile :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _os_profile = a } :: VirtualMachineResource s)
 
-instance HasOsProfileLinuxConfig (VirtualMachineResource s) s Text where
+instance P.HasOsProfileLinuxConfig (VirtualMachineResource s) s Text where
     osProfileLinuxConfig =
         lens (_os_profile_linux_config :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _os_profile_linux_config = a } :: VirtualMachineResource s)
 
-instance HasOsProfileSecrets (VirtualMachineResource s) s Text where
+instance P.HasOsProfileSecrets (VirtualMachineResource s) s Text where
     osProfileSecrets =
         lens (_os_profile_secrets :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _os_profile_secrets = a } :: VirtualMachineResource s)
 
-instance HasOsProfileWindowsConfig (VirtualMachineResource s) s Text where
+instance P.HasOsProfileWindowsConfig (VirtualMachineResource s) s Text where
     osProfileWindowsConfig =
         lens (_os_profile_windows_config :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _os_profile_windows_config = a } :: VirtualMachineResource s)
 
-instance HasPlan (VirtualMachineResource s) s Text where
+instance P.HasPlan (VirtualMachineResource s) s Text where
     plan =
         lens (_plan :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _plan = a } :: VirtualMachineResource s)
 
-instance HasPrimaryNetworkInterfaceId (VirtualMachineResource s) s Text where
+instance P.HasPrimaryNetworkInterfaceId (VirtualMachineResource s) s Text where
     primaryNetworkInterfaceId =
         lens (_primary_network_interface_id :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _primary_network_interface_id = a } :: VirtualMachineResource s)
 
-instance HasResourceGroupName (VirtualMachineResource s) s Text where
+instance P.HasResourceGroupName (VirtualMachineResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: VirtualMachineResource s)
 
-instance HasStorageDataDisk (VirtualMachineResource s) s Text where
+instance P.HasStorageDataDisk (VirtualMachineResource s) s Text where
     storageDataDisk =
         lens (_storage_data_disk :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_data_disk = a } :: VirtualMachineResource s)
 
-instance HasStorageImageReference (VirtualMachineResource s) s Text where
+instance P.HasStorageImageReference (VirtualMachineResource s) s Text where
     storageImageReference =
         lens (_storage_image_reference :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_image_reference = a } :: VirtualMachineResource s)
 
-instance HasStorageOsDisk (VirtualMachineResource s) s Text where
+instance P.HasStorageOsDisk (VirtualMachineResource s) s Text where
     storageOsDisk =
         lens (_storage_os_disk :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_os_disk = a } :: VirtualMachineResource s)
 
-instance HasTags (VirtualMachineResource s) s Text where
+instance P.HasTags (VirtualMachineResource s) s Text where
     tags =
         lens (_tags :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: VirtualMachineResource s)
 
-instance HasVmSize (VirtualMachineResource s) s Text where
+instance P.HasVmSize (VirtualMachineResource s) s Text where
     vmSize =
         lens (_vm_size :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _vm_size = a } :: VirtualMachineResource s)
 
-instance HasComputedId (VirtualMachineResource s) Text
+instance P.HasComputedId (VirtualMachineResource s) Text
 
-virtualMachineResource :: TF.Resource TF.AzureRM (VirtualMachineResource s)
+virtualMachineResource :: TF.Resource P.AzureRM (VirtualMachineResource s)
 virtualMachineResource =
     TF.newResource "azurerm_virtual_machine" $
         VirtualMachineResource {
@@ -8365,102 +8364,102 @@ instance TF.ToHCL (VirtualMachineScaleSetResource s) where
         , TF.attribute "upgrade_policy_mode" _upgrade_policy_mode
         ]
 
-instance HasBootDiagnostics (VirtualMachineScaleSetResource s) s Text where
+instance P.HasBootDiagnostics (VirtualMachineScaleSetResource s) s Text where
     bootDiagnostics =
         lens (_boot_diagnostics :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _boot_diagnostics = a } :: VirtualMachineScaleSetResource s)
 
-instance HasExtension (VirtualMachineScaleSetResource s) s Text where
+instance P.HasExtension (VirtualMachineScaleSetResource s) s Text where
     extension =
         lens (_extension :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _extension = a } :: VirtualMachineScaleSetResource s)
 
-instance HasLocation (VirtualMachineScaleSetResource s) s Text where
+instance P.HasLocation (VirtualMachineScaleSetResource s) s Text where
     location =
         lens (_location :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: VirtualMachineScaleSetResource s)
 
-instance HasName (VirtualMachineScaleSetResource s) s Text where
+instance P.HasName (VirtualMachineScaleSetResource s) s Text where
     name =
         lens (_name :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualMachineScaleSetResource s)
 
-instance HasNetworkProfile (VirtualMachineScaleSetResource s) s Text where
+instance P.HasNetworkProfile (VirtualMachineScaleSetResource s) s Text where
     networkProfile =
         lens (_network_profile :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _network_profile = a } :: VirtualMachineScaleSetResource s)
 
-instance HasOsProfile (VirtualMachineScaleSetResource s) s Text where
+instance P.HasOsProfile (VirtualMachineScaleSetResource s) s Text where
     osProfile =
         lens (_os_profile :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _os_profile = a } :: VirtualMachineScaleSetResource s)
 
-instance HasOsProfileLinuxConfig (VirtualMachineScaleSetResource s) s Text where
+instance P.HasOsProfileLinuxConfig (VirtualMachineScaleSetResource s) s Text where
     osProfileLinuxConfig =
         lens (_os_profile_linux_config :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _os_profile_linux_config = a } :: VirtualMachineScaleSetResource s)
 
-instance HasOsProfileSecrets (VirtualMachineScaleSetResource s) s Text where
+instance P.HasOsProfileSecrets (VirtualMachineScaleSetResource s) s Text where
     osProfileSecrets =
         lens (_os_profile_secrets :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _os_profile_secrets = a } :: VirtualMachineScaleSetResource s)
 
-instance HasOsProfileWindowsConfig (VirtualMachineScaleSetResource s) s Text where
+instance P.HasOsProfileWindowsConfig (VirtualMachineScaleSetResource s) s Text where
     osProfileWindowsConfig =
         lens (_os_profile_windows_config :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _os_profile_windows_config = a } :: VirtualMachineScaleSetResource s)
 
-instance HasOverprovision (VirtualMachineScaleSetResource s) s Text where
+instance P.HasOverprovision (VirtualMachineScaleSetResource s) s Text where
     overprovision =
         lens (_overprovision :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _overprovision = a } :: VirtualMachineScaleSetResource s)
 
-instance HasPlan (VirtualMachineScaleSetResource s) s Text where
+instance P.HasPlan (VirtualMachineScaleSetResource s) s Text where
     plan =
         lens (_plan :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _plan = a } :: VirtualMachineScaleSetResource s)
 
-instance HasResourceGroupName (VirtualMachineScaleSetResource s) s Text where
+instance P.HasResourceGroupName (VirtualMachineScaleSetResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: VirtualMachineScaleSetResource s)
 
-instance HasSinglePlacementGroup (VirtualMachineScaleSetResource s) s Text where
+instance P.HasSinglePlacementGroup (VirtualMachineScaleSetResource s) s Text where
     singlePlacementGroup =
         lens (_single_placement_group :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _single_placement_group = a } :: VirtualMachineScaleSetResource s)
 
-instance HasSku (VirtualMachineScaleSetResource s) s Text where
+instance P.HasSku (VirtualMachineScaleSetResource s) s Text where
     sku =
         lens (_sku :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: VirtualMachineScaleSetResource s)
 
-instance HasStorageProfileDataDisk (VirtualMachineScaleSetResource s) s Text where
+instance P.HasStorageProfileDataDisk (VirtualMachineScaleSetResource s) s Text where
     storageProfileDataDisk =
         lens (_storage_profile_data_disk :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_profile_data_disk = a } :: VirtualMachineScaleSetResource s)
 
-instance HasStorageProfileImageReference (VirtualMachineScaleSetResource s) s Text where
+instance P.HasStorageProfileImageReference (VirtualMachineScaleSetResource s) s Text where
     storageProfileImageReference =
         lens (_storage_profile_image_reference :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_profile_image_reference = a } :: VirtualMachineScaleSetResource s)
 
-instance HasStorageProfileOsDisk (VirtualMachineScaleSetResource s) s Text where
+instance P.HasStorageProfileOsDisk (VirtualMachineScaleSetResource s) s Text where
     storageProfileOsDisk =
         lens (_storage_profile_os_disk :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_profile_os_disk = a } :: VirtualMachineScaleSetResource s)
 
-instance HasTags (VirtualMachineScaleSetResource s) s Text where
+instance P.HasTags (VirtualMachineScaleSetResource s) s Text where
     tags =
         lens (_tags :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: VirtualMachineScaleSetResource s)
 
-instance HasUpgradePolicyMode (VirtualMachineScaleSetResource s) s Text where
+instance P.HasUpgradePolicyMode (VirtualMachineScaleSetResource s) s Text where
     upgradePolicyMode =
         lens (_upgrade_policy_mode :: VirtualMachineScaleSetResource s -> TF.Attribute s Text)
             (\s a -> s { _upgrade_policy_mode = a } :: VirtualMachineScaleSetResource s)
 
-virtualMachineScaleSetResource :: TF.Resource TF.AzureRM (VirtualMachineScaleSetResource s)
+virtualMachineScaleSetResource :: TF.Resource P.AzureRM (VirtualMachineScaleSetResource s)
 virtualMachineScaleSetResource =
     TF.newResource "azurerm_virtual_machine_scale_set" $
         VirtualMachineScaleSetResource {
@@ -8535,74 +8534,74 @@ instance TF.ToHCL (VirtualNetworkGatewayConnectionResource s) where
         , TF.attribute "virtual_network_gateway_id" _virtual_network_gateway_id
         ]
 
-instance HasAuthorizationKey (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasAuthorizationKey (VirtualNetworkGatewayConnectionResource s) s Text where
     authorizationKey =
         lens (_authorization_key :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _authorization_key = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasEnableBgp (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasEnableBgp (VirtualNetworkGatewayConnectionResource s) s Text where
     enableBgp =
         lens (_enable_bgp :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_bgp = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasExpressRouteCircuitId (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasExpressRouteCircuitId (VirtualNetworkGatewayConnectionResource s) s Text where
     expressRouteCircuitId =
         lens (_express_route_circuit_id :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _express_route_circuit_id = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasLocalNetworkGatewayId (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasLocalNetworkGatewayId (VirtualNetworkGatewayConnectionResource s) s Text where
     localNetworkGatewayId =
         lens (_local_network_gateway_id :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _local_network_gateway_id = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasLocation (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasLocation (VirtualNetworkGatewayConnectionResource s) s Text where
     location =
         lens (_location :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasName (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasName (VirtualNetworkGatewayConnectionResource s) s Text where
     name =
         lens (_name :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasPeerVirtualNetworkGatewayId (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasPeerVirtualNetworkGatewayId (VirtualNetworkGatewayConnectionResource s) s Text where
     peerVirtualNetworkGatewayId =
         lens (_peer_virtual_network_gateway_id :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _peer_virtual_network_gateway_id = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasResourceGroupName (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasResourceGroupName (VirtualNetworkGatewayConnectionResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasRoutingWeight (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasRoutingWeight (VirtualNetworkGatewayConnectionResource s) s Text where
     routingWeight =
         lens (_routing_weight :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _routing_weight = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasSharedKey (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasSharedKey (VirtualNetworkGatewayConnectionResource s) s Text where
     sharedKey =
         lens (_shared_key :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _shared_key = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasTags (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasTags (VirtualNetworkGatewayConnectionResource s) s Text where
     tags =
         lens (_tags :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasType' (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasType' (VirtualNetworkGatewayConnectionResource s) s Text where
     type' =
         lens (_type' :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasVirtualNetworkGatewayId (VirtualNetworkGatewayConnectionResource s) s Text where
+instance P.HasVirtualNetworkGatewayId (VirtualNetworkGatewayConnectionResource s) s Text where
     virtualNetworkGatewayId =
         lens (_virtual_network_gateway_id :: VirtualNetworkGatewayConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _virtual_network_gateway_id = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance HasComputedId (VirtualNetworkGatewayConnectionResource s) Text
+instance P.HasComputedId (VirtualNetworkGatewayConnectionResource s) Text
 
-virtualNetworkGatewayConnectionResource :: TF.Resource TF.AzureRM (VirtualNetworkGatewayConnectionResource s)
+virtualNetworkGatewayConnectionResource :: TF.Resource P.AzureRM (VirtualNetworkGatewayConnectionResource s)
 virtualNetworkGatewayConnectionResource =
     TF.newResource "azurerm_virtual_network_gateway_connection" $
         VirtualNetworkGatewayConnectionResource {
@@ -8670,69 +8669,69 @@ instance TF.ToHCL (VirtualNetworkGatewayResource s) where
         , TF.attribute "vpn_type" _vpn_type
         ]
 
-instance HasActiveActive (VirtualNetworkGatewayResource s) s Text where
+instance P.HasActiveActive (VirtualNetworkGatewayResource s) s Text where
     activeActive =
         lens (_active_active :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _active_active = a } :: VirtualNetworkGatewayResource s)
 
-instance HasDefaultLocalNetworkGatewayId (VirtualNetworkGatewayResource s) s Text where
+instance P.HasDefaultLocalNetworkGatewayId (VirtualNetworkGatewayResource s) s Text where
     defaultLocalNetworkGatewayId =
         lens (_default_local_network_gateway_id :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _default_local_network_gateway_id = a } :: VirtualNetworkGatewayResource s)
 
-instance HasEnableBgp (VirtualNetworkGatewayResource s) s Text where
+instance P.HasEnableBgp (VirtualNetworkGatewayResource s) s Text where
     enableBgp =
         lens (_enable_bgp :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_bgp = a } :: VirtualNetworkGatewayResource s)
 
-instance HasIpConfiguration (VirtualNetworkGatewayResource s) s Text where
+instance P.HasIpConfiguration (VirtualNetworkGatewayResource s) s Text where
     ipConfiguration =
         lens (_ip_configuration :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_configuration = a } :: VirtualNetworkGatewayResource s)
 
-instance HasLocation (VirtualNetworkGatewayResource s) s Text where
+instance P.HasLocation (VirtualNetworkGatewayResource s) s Text where
     location =
         lens (_location :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: VirtualNetworkGatewayResource s)
 
-instance HasName (VirtualNetworkGatewayResource s) s Text where
+instance P.HasName (VirtualNetworkGatewayResource s) s Text where
     name =
         lens (_name :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualNetworkGatewayResource s)
 
-instance HasResourceGroupName (VirtualNetworkGatewayResource s) s Text where
+instance P.HasResourceGroupName (VirtualNetworkGatewayResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: VirtualNetworkGatewayResource s)
 
-instance HasSku (VirtualNetworkGatewayResource s) s Text where
+instance P.HasSku (VirtualNetworkGatewayResource s) s Text where
     sku =
         lens (_sku :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _sku = a } :: VirtualNetworkGatewayResource s)
 
-instance HasTags (VirtualNetworkGatewayResource s) s Text where
+instance P.HasTags (VirtualNetworkGatewayResource s) s Text where
     tags =
         lens (_tags :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: VirtualNetworkGatewayResource s)
 
-instance HasType' (VirtualNetworkGatewayResource s) s Text where
+instance P.HasType' (VirtualNetworkGatewayResource s) s Text where
     type' =
         lens (_type' :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: VirtualNetworkGatewayResource s)
 
-instance HasVpnClientConfiguration (VirtualNetworkGatewayResource s) s Text where
+instance P.HasVpnClientConfiguration (VirtualNetworkGatewayResource s) s Text where
     vpnClientConfiguration =
         lens (_vpn_client_configuration :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _vpn_client_configuration = a } :: VirtualNetworkGatewayResource s)
 
-instance HasVpnType (VirtualNetworkGatewayResource s) s Text where
+instance P.HasVpnType (VirtualNetworkGatewayResource s) s Text where
     vpnType =
         lens (_vpn_type :: VirtualNetworkGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _vpn_type = a } :: VirtualNetworkGatewayResource s)
 
-instance HasComputedId (VirtualNetworkGatewayResource s) Text
+instance P.HasComputedId (VirtualNetworkGatewayResource s) Text
 
-virtualNetworkGatewayResource :: TF.Resource TF.AzureRM (VirtualNetworkGatewayResource s)
+virtualNetworkGatewayResource :: TF.Resource P.AzureRM (VirtualNetworkGatewayResource s)
 virtualNetworkGatewayResource =
     TF.newResource "azurerm_virtual_network_gateway" $
         VirtualNetworkGatewayResource {
@@ -8786,49 +8785,49 @@ instance TF.ToHCL (VirtualNetworkPeeringResource s) where
         , TF.attribute "virtual_network_name" _virtual_network_name
         ]
 
-instance HasAllowForwardedTraffic (VirtualNetworkPeeringResource s) s Text where
+instance P.HasAllowForwardedTraffic (VirtualNetworkPeeringResource s) s Text where
     allowForwardedTraffic =
         lens (_allow_forwarded_traffic :: VirtualNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _allow_forwarded_traffic = a } :: VirtualNetworkPeeringResource s)
 
-instance HasAllowGatewayTransit (VirtualNetworkPeeringResource s) s Text where
+instance P.HasAllowGatewayTransit (VirtualNetworkPeeringResource s) s Text where
     allowGatewayTransit =
         lens (_allow_gateway_transit :: VirtualNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _allow_gateway_transit = a } :: VirtualNetworkPeeringResource s)
 
-instance HasAllowVirtualNetworkAccess (VirtualNetworkPeeringResource s) s Text where
+instance P.HasAllowVirtualNetworkAccess (VirtualNetworkPeeringResource s) s Text where
     allowVirtualNetworkAccess =
         lens (_allow_virtual_network_access :: VirtualNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _allow_virtual_network_access = a } :: VirtualNetworkPeeringResource s)
 
-instance HasName (VirtualNetworkPeeringResource s) s Text where
+instance P.HasName (VirtualNetworkPeeringResource s) s Text where
     name =
         lens (_name :: VirtualNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualNetworkPeeringResource s)
 
-instance HasRemoteVirtualNetworkId (VirtualNetworkPeeringResource s) s Text where
+instance P.HasRemoteVirtualNetworkId (VirtualNetworkPeeringResource s) s Text where
     remoteVirtualNetworkId =
         lens (_remote_virtual_network_id :: VirtualNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _remote_virtual_network_id = a } :: VirtualNetworkPeeringResource s)
 
-instance HasResourceGroupName (VirtualNetworkPeeringResource s) s Text where
+instance P.HasResourceGroupName (VirtualNetworkPeeringResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: VirtualNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: VirtualNetworkPeeringResource s)
 
-instance HasUseRemoteGateways (VirtualNetworkPeeringResource s) s Text where
+instance P.HasUseRemoteGateways (VirtualNetworkPeeringResource s) s Text where
     useRemoteGateways =
         lens (_use_remote_gateways :: VirtualNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _use_remote_gateways = a } :: VirtualNetworkPeeringResource s)
 
-instance HasVirtualNetworkName (VirtualNetworkPeeringResource s) s Text where
+instance P.HasVirtualNetworkName (VirtualNetworkPeeringResource s) s Text where
     virtualNetworkName =
         lens (_virtual_network_name :: VirtualNetworkPeeringResource s -> TF.Attribute s Text)
             (\s a -> s { _virtual_network_name = a } :: VirtualNetworkPeeringResource s)
 
-instance HasComputedId (VirtualNetworkPeeringResource s) Text
+instance P.HasComputedId (VirtualNetworkPeeringResource s) Text
 
-virtualNetworkPeeringResource :: TF.Resource TF.AzureRM (VirtualNetworkPeeringResource s)
+virtualNetworkPeeringResource :: TF.Resource P.AzureRM (VirtualNetworkPeeringResource s)
 virtualNetworkPeeringResource =
     TF.newResource "azurerm_virtual_network_peering" $
         VirtualNetworkPeeringResource {
@@ -8881,52 +8880,52 @@ instance TF.ToHCL (VirtualNetworkResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAddressSpace (VirtualNetworkResource s) s Text where
+instance P.HasAddressSpace (VirtualNetworkResource s) s Text where
     addressSpace =
         lens (_address_space :: VirtualNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _address_space = a } :: VirtualNetworkResource s)
 
-instance HasDnsServers (VirtualNetworkResource s) s Text where
+instance P.HasDnsServers (VirtualNetworkResource s) s Text where
     dnsServers =
         lens (_dns_servers :: VirtualNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _dns_servers = a } :: VirtualNetworkResource s)
 
-instance HasLocation (VirtualNetworkResource s) s Text where
+instance P.HasLocation (VirtualNetworkResource s) s Text where
     location =
         lens (_location :: VirtualNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: VirtualNetworkResource s)
 
-instance HasName (VirtualNetworkResource s) s Text where
+instance P.HasName (VirtualNetworkResource s) s Text where
     name =
         lens (_name :: VirtualNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualNetworkResource s)
 
-instance HasResourceGroupName (VirtualNetworkResource s) s Text where
+instance P.HasResourceGroupName (VirtualNetworkResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: VirtualNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_group_name = a } :: VirtualNetworkResource s)
 
-instance HasSubnet (VirtualNetworkResource s) s Text where
+instance P.HasSubnet (VirtualNetworkResource s) s Text where
     subnet =
         lens (_subnet :: VirtualNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _subnet = a } :: VirtualNetworkResource s)
 
-instance HasTags (VirtualNetworkResource s) s Text where
+instance P.HasTags (VirtualNetworkResource s) s Text where
     tags =
         lens (_tags :: VirtualNetworkResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: VirtualNetworkResource s)
 
-instance HasComputedAddressSpace (VirtualNetworkResource s) Text
+instance P.HasComputedAddressSpace (VirtualNetworkResource s) Text
 
-instance HasComputedId (VirtualNetworkResource s) Text
+instance P.HasComputedId (VirtualNetworkResource s) Text
 
-instance HasComputedLocation (VirtualNetworkResource s) Text
+instance P.HasComputedLocation (VirtualNetworkResource s) Text
 
-instance HasComputedName (VirtualNetworkResource s) Text
+instance P.HasComputedName (VirtualNetworkResource s) Text
 
-instance HasComputedResourceGroupName (VirtualNetworkResource s) Text
+instance P.HasComputedResourceGroupName (VirtualNetworkResource s) Text
 
-virtualNetworkResource :: TF.Resource TF.AzureRM (VirtualNetworkResource s)
+virtualNetworkResource :: TF.Resource P.AzureRM (VirtualNetworkResource s)
 virtualNetworkResource =
     TF.newResource "azurerm_virtual_network" $
         VirtualNetworkResource {
@@ -8938,2115 +8937,3 @@ virtualNetworkResource =
             , _subnet = TF.Nil
             , _tags = TF.Nil
             }
-
-class HasAccess a s b | a -> s b where
-    access :: Lens' a (TF.Attribute s b)
-
-instance HasAccess a s b => HasAccess (TF.Resource p a) s b where
-    access = TF.configuration . access
-
-class HasAccessPolicy a s b | a -> s b where
-    accessPolicy :: Lens' a (TF.Attribute s b)
-
-instance HasAccessPolicy a s b => HasAccessPolicy (TF.Resource p a) s b where
-    accessPolicy = TF.configuration . accessPolicy
-
-class HasAccessTier a s b | a -> s b where
-    accessTier :: Lens' a (TF.Attribute s b)
-
-instance HasAccessTier a s b => HasAccessTier (TF.Resource p a) s b where
-    accessTier = TF.configuration . accessTier
-
-class HasAccountEncryptionSource a s b | a -> s b where
-    accountEncryptionSource :: Lens' a (TF.Attribute s b)
-
-instance HasAccountEncryptionSource a s b => HasAccountEncryptionSource (TF.Resource p a) s b where
-    accountEncryptionSource = TF.configuration . accountEncryptionSource
-
-class HasAccountKind a s b | a -> s b where
-    accountKind :: Lens' a (TF.Attribute s b)
-
-instance HasAccountKind a s b => HasAccountKind (TF.Resource p a) s b where
-    accountKind = TF.configuration . accountKind
-
-class HasAccountName a s b | a -> s b where
-    accountName :: Lens' a (TF.Attribute s b)
-
-instance HasAccountName a s b => HasAccountName (TF.Resource p a) s b where
-    accountName = TF.configuration . accountName
-
-class HasAccountReplicationType a s b | a -> s b where
-    accountReplicationType :: Lens' a (TF.Attribute s b)
-
-instance HasAccountReplicationType a s b => HasAccountReplicationType (TF.Resource p a) s b where
-    accountReplicationType = TF.configuration . accountReplicationType
-
-class HasAccountTier a s b | a -> s b where
-    accountTier :: Lens' a (TF.Attribute s b)
-
-instance HasAccountTier a s b => HasAccountTier (TF.Resource p a) s b where
-    accountTier = TF.configuration . accountTier
-
-class HasActiveActive a s b | a -> s b where
-    activeActive :: Lens' a (TF.Attribute s b)
-
-instance HasActiveActive a s b => HasActiveActive (TF.Resource p a) s b where
-    activeActive = TF.configuration . activeActive
-
-class HasAddressPrefix a s b | a -> s b where
-    addressPrefix :: Lens' a (TF.Attribute s b)
-
-instance HasAddressPrefix a s b => HasAddressPrefix (TF.Resource p a) s b where
-    addressPrefix = TF.configuration . addressPrefix
-
-class HasAddressSpace a s b | a -> s b where
-    addressSpace :: Lens' a (TF.Attribute s b)
-
-instance HasAddressSpace a s b => HasAddressSpace (TF.Resource p a) s b where
-    addressSpace = TF.configuration . addressSpace
-
-class HasAdminEnabled a s b | a -> s b where
-    adminEnabled :: Lens' a (TF.Attribute s b)
-
-instance HasAdminEnabled a s b => HasAdminEnabled (TF.Resource p a) s b where
-    adminEnabled = TF.configuration . adminEnabled
-
-class HasAdministratorLogin a s b | a -> s b where
-    administratorLogin :: Lens' a (TF.Attribute s b)
-
-instance HasAdministratorLogin a s b => HasAdministratorLogin (TF.Resource p a) s b where
-    administratorLogin = TF.configuration . administratorLogin
-
-class HasAdministratorLoginPassword a s b | a -> s b where
-    administratorLoginPassword :: Lens' a (TF.Attribute s b)
-
-instance HasAdministratorLoginPassword a s b => HasAdministratorLoginPassword (TF.Resource p a) s b where
-    administratorLoginPassword = TF.configuration . administratorLoginPassword
-
-class HasAgentPoolProfile a s b | a -> s b where
-    agentPoolProfile :: Lens' a (TF.Attribute s b)
-
-instance HasAgentPoolProfile a s b => HasAgentPoolProfile (TF.Resource p a) s b where
-    agentPoolProfile = TF.configuration . agentPoolProfile
-
-class HasAllowClassicOperations a s b | a -> s b where
-    allowClassicOperations :: Lens' a (TF.Attribute s b)
-
-instance HasAllowClassicOperations a s b => HasAllowClassicOperations (TF.Resource p a) s b where
-    allowClassicOperations = TF.configuration . allowClassicOperations
-
-class HasAllowForwardedTraffic a s b | a -> s b where
-    allowForwardedTraffic :: Lens' a (TF.Attribute s b)
-
-instance HasAllowForwardedTraffic a s b => HasAllowForwardedTraffic (TF.Resource p a) s b where
-    allowForwardedTraffic = TF.configuration . allowForwardedTraffic
-
-class HasAllowGatewayTransit a s b | a -> s b where
-    allowGatewayTransit :: Lens' a (TF.Attribute s b)
-
-instance HasAllowGatewayTransit a s b => HasAllowGatewayTransit (TF.Resource p a) s b where
-    allowGatewayTransit = TF.configuration . allowGatewayTransit
-
-class HasAllowVirtualNetworkAccess a s b | a -> s b where
-    allowVirtualNetworkAccess :: Lens' a (TF.Attribute s b)
-
-instance HasAllowVirtualNetworkAccess a s b => HasAllowVirtualNetworkAccess (TF.Resource p a) s b where
-    allowVirtualNetworkAccess = TF.configuration . allowVirtualNetworkAccess
-
-class HasAppServicePlanId a s b | a -> s b where
-    appServicePlanId :: Lens' a (TF.Attribute s b)
-
-instance HasAppServicePlanId a s b => HasAppServicePlanId (TF.Resource p a) s b where
-    appServicePlanId = TF.configuration . appServicePlanId
-
-class HasAppSettings a s b | a -> s b where
-    appSettings :: Lens' a (TF.Attribute s b)
-
-instance HasAppSettings a s b => HasAppSettings (TF.Resource p a) s b where
-    appSettings = TF.configuration . appSettings
-
-class HasApplicationType a s b | a -> s b where
-    applicationType :: Lens' a (TF.Attribute s b)
-
-instance HasApplicationType a s b => HasApplicationType (TF.Resource p a) s b where
-    applicationType = TF.configuration . applicationType
-
-class HasAssignableScopes a s b | a -> s b where
-    assignableScopes :: Lens' a (TF.Attribute s b)
-
-instance HasAssignableScopes a s b => HasAssignableScopes (TF.Resource p a) s b where
-    assignableScopes = TF.configuration . assignableScopes
-
-class HasAttempts a s b | a -> s b where
-    attempts :: Lens' a (TF.Attribute s b)
-
-instance HasAttempts a s b => HasAttempts (TF.Resource p a) s b where
-    attempts = TF.configuration . attempts
-
-class HasAuthenticationCertificate a s b | a -> s b where
-    authenticationCertificate :: Lens' a (TF.Attribute s b)
-
-instance HasAuthenticationCertificate a s b => HasAuthenticationCertificate (TF.Resource p a) s b where
-    authenticationCertificate = TF.configuration . authenticationCertificate
-
-class HasAuthorizationKey a s b | a -> s b where
-    authorizationKey :: Lens' a (TF.Attribute s b)
-
-instance HasAuthorizationKey a s b => HasAuthorizationKey (TF.Resource p a) s b where
-    authorizationKey = TF.configuration . authorizationKey
-
-class HasAutoDeleteOnIdle a s b | a -> s b where
-    autoDeleteOnIdle :: Lens' a (TF.Attribute s b)
-
-instance HasAutoDeleteOnIdle a s b => HasAutoDeleteOnIdle (TF.Resource p a) s b where
-    autoDeleteOnIdle = TF.configuration . autoDeleteOnIdle
-
-class HasAutoInflateEnabled a s b | a -> s b where
-    autoInflateEnabled :: Lens' a (TF.Attribute s b)
-
-instance HasAutoInflateEnabled a s b => HasAutoInflateEnabled (TF.Resource p a) s b where
-    autoInflateEnabled = TF.configuration . autoInflateEnabled
-
-class HasAvailabilitySetId a s b | a -> s b where
-    availabilitySetId :: Lens' a (TF.Attribute s b)
-
-instance HasAvailabilitySetId a s b => HasAvailabilitySetId (TF.Resource p a) s b where
-    availabilitySetId = TF.configuration . availabilitySetId
-
-class HasBackendAddressPool a s b | a -> s b where
-    backendAddressPool :: Lens' a (TF.Attribute s b)
-
-instance HasBackendAddressPool a s b => HasBackendAddressPool (TF.Resource p a) s b where
-    backendAddressPool = TF.configuration . backendAddressPool
-
-class HasBackendAddressPoolId a s b | a -> s b where
-    backendAddressPoolId :: Lens' a (TF.Attribute s b)
-
-instance HasBackendAddressPoolId a s b => HasBackendAddressPoolId (TF.Resource p a) s b where
-    backendAddressPoolId = TF.configuration . backendAddressPoolId
-
-class HasBackendHttpSettings a s b | a -> s b where
-    backendHttpSettings :: Lens' a (TF.Attribute s b)
-
-instance HasBackendHttpSettings a s b => HasBackendHttpSettings (TF.Resource p a) s b where
-    backendHttpSettings = TF.configuration . backendHttpSettings
-
-class HasBackendPort a s b | a -> s b where
-    backendPort :: Lens' a (TF.Attribute s b)
-
-instance HasBackendPort a s b => HasBackendPort (TF.Resource p a) s b where
-    backendPort = TF.configuration . backendPort
-
-class HasBandwidthInMbps a s b | a -> s b where
-    bandwidthInMbps :: Lens' a (TF.Attribute s b)
-
-instance HasBandwidthInMbps a s b => HasBandwidthInMbps (TF.Resource p a) s b where
-    bandwidthInMbps = TF.configuration . bandwidthInMbps
-
-class HasBgpSettings a s b | a -> s b where
-    bgpSettings :: Lens' a (TF.Attribute s b)
-
-instance HasBgpSettings a s b => HasBgpSettings (TF.Resource p a) s b where
-    bgpSettings = TF.configuration . bgpSettings
-
-class HasBootDiagnostics a s b | a -> s b where
-    bootDiagnostics :: Lens' a (TF.Attribute s b)
-
-instance HasBootDiagnostics a s b => HasBootDiagnostics (TF.Resource p a) s b where
-    bootDiagnostics = TF.configuration . bootDiagnostics
-
-class HasCapacity a s b | a -> s b where
-    capacity :: Lens' a (TF.Attribute s b)
-
-instance HasCapacity a s b => HasCapacity (TF.Resource p a) s b where
-    capacity = TF.configuration . capacity
-
-class HasCaptureDescription a s b | a -> s b where
-    captureDescription :: Lens' a (TF.Attribute s b)
-
-instance HasCaptureDescription a s b => HasCaptureDescription (TF.Resource p a) s b where
-    captureDescription = TF.configuration . captureDescription
-
-class HasCertificate a s b | a -> s b where
-    certificate :: Lens' a (TF.Attribute s b)
-
-instance HasCertificate a s b => HasCertificate (TF.Resource p a) s b where
-    certificate = TF.configuration . certificate
-
-class HasCertificatePolicy a s b | a -> s b where
-    certificatePolicy :: Lens' a (TF.Attribute s b)
-
-instance HasCertificatePolicy a s b => HasCertificatePolicy (TF.Resource p a) s b where
-    certificatePolicy = TF.configuration . certificatePolicy
-
-class HasCharset a s b | a -> s b where
-    charset :: Lens' a (TF.Attribute s b)
-
-instance HasCharset a s b => HasCharset (TF.Resource p a) s b where
-    charset = TF.configuration . charset
-
-class HasClientAffinityEnabled a s b | a -> s b where
-    clientAffinityEnabled :: Lens' a (TF.Attribute s b)
-
-instance HasClientAffinityEnabled a s b => HasClientAffinityEnabled (TF.Resource p a) s b where
-    clientAffinityEnabled = TF.configuration . clientAffinityEnabled
-
-class HasCollation a s b | a -> s b where
-    collation :: Lens' a (TF.Attribute s b)
-
-instance HasCollation a s b => HasCollation (TF.Resource p a) s b where
-    collation = TF.configuration . collation
-
-class HasConnectionString a s b | a -> s b where
-    connectionString :: Lens' a (TF.Attribute s b)
-
-instance HasConnectionString a s b => HasConnectionString (TF.Resource p a) s b where
-    connectionString = TF.configuration . connectionString
-
-class HasConsistencyPolicy a s b | a -> s b where
-    consistencyPolicy :: Lens' a (TF.Attribute s b)
-
-instance HasConsistencyPolicy a s b => HasConsistencyPolicy (TF.Resource p a) s b where
-    consistencyPolicy = TF.configuration . consistencyPolicy
-
-class HasContainer a s b | a -> s b where
-    container :: Lens' a (TF.Attribute s b)
-
-instance HasContainer a s b => HasContainer (TF.Resource p a) s b where
-    container = TF.configuration . container
-
-class HasContainerAccessType a s b | a -> s b where
-    containerAccessType :: Lens' a (TF.Attribute s b)
-
-instance HasContainerAccessType a s b => HasContainerAccessType (TF.Resource p a) s b where
-    containerAccessType = TF.configuration . containerAccessType
-
-class HasContentType a s b | a -> s b where
-    contentType :: Lens' a (TF.Attribute s b)
-
-instance HasContentType a s b => HasContentType (TF.Resource p a) s b where
-    contentType = TF.configuration . contentType
-
-class HasContentTypesToCompress a s b | a -> s b where
-    contentTypesToCompress :: Lens' a (TF.Attribute s b)
-
-instance HasContentTypesToCompress a s b => HasContentTypesToCompress (TF.Resource p a) s b where
-    contentTypesToCompress = TF.configuration . contentTypesToCompress
-
-class HasCreateMode a s b | a -> s b where
-    createMode :: Lens' a (TF.Attribute s b)
-
-instance HasCreateMode a s b => HasCreateMode (TF.Resource p a) s b where
-    createMode = TF.configuration . createMode
-
-class HasCreateOption a s b | a -> s b where
-    createOption :: Lens' a (TF.Attribute s b)
-
-instance HasCreateOption a s b => HasCreateOption (TF.Resource p a) s b where
-    createOption = TF.configuration . createOption
-
-class HasCustomDomain a s b | a -> s b where
-    customDomain :: Lens' a (TF.Attribute s b)
-
-instance HasCustomDomain a s b => HasCustomDomain (TF.Resource p a) s b where
-    customDomain = TF.configuration . customDomain
-
-class HasDataDisk a s b | a -> s b where
-    dataDisk :: Lens' a (TF.Attribute s b)
-
-instance HasDataDisk a s b => HasDataDisk (TF.Resource p a) s b where
-    dataDisk = TF.configuration . dataDisk
-
-class HasDbDtuMax a s b | a -> s b where
-    dbDtuMax :: Lens' a (TF.Attribute s b)
-
-instance HasDbDtuMax a s b => HasDbDtuMax (TF.Resource p a) s b where
-    dbDtuMax = TF.configuration . dbDtuMax
-
-class HasDbDtuMin a s b | a -> s b where
-    dbDtuMin :: Lens' a (TF.Attribute s b)
-
-instance HasDbDtuMin a s b => HasDbDtuMin (TF.Resource p a) s b where
-    dbDtuMin = TF.configuration . dbDtuMin
-
-class HasDeadLetteringOnMessageExpiration a s b | a -> s b where
-    deadLetteringOnMessageExpiration :: Lens' a (TF.Attribute s b)
-
-instance HasDeadLetteringOnMessageExpiration a s b => HasDeadLetteringOnMessageExpiration (TF.Resource p a) s b where
-    deadLetteringOnMessageExpiration = TF.configuration . deadLetteringOnMessageExpiration
-
-class HasDefaultLocalNetworkGatewayId a s b | a -> s b where
-    defaultLocalNetworkGatewayId :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultLocalNetworkGatewayId a s b => HasDefaultLocalNetworkGatewayId (TF.Resource p a) s b where
-    defaultLocalNetworkGatewayId = TF.configuration . defaultLocalNetworkGatewayId
-
-class HasDefaultMessageTtl a s b | a -> s b where
-    defaultMessageTtl :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultMessageTtl a s b => HasDefaultMessageTtl (TF.Resource p a) s b where
-    defaultMessageTtl = TF.configuration . defaultMessageTtl
-
-class HasDeleteDataDisksOnTermination a s b | a -> s b where
-    deleteDataDisksOnTermination :: Lens' a (TF.Attribute s b)
-
-instance HasDeleteDataDisksOnTermination a s b => HasDeleteDataDisksOnTermination (TF.Resource p a) s b where
-    deleteDataDisksOnTermination = TF.configuration . deleteDataDisksOnTermination
-
-class HasDeleteOsDiskOnTermination a s b | a -> s b where
-    deleteOsDiskOnTermination :: Lens' a (TF.Attribute s b)
-
-instance HasDeleteOsDiskOnTermination a s b => HasDeleteOsDiskOnTermination (TF.Resource p a) s b where
-    deleteOsDiskOnTermination = TF.configuration . deleteOsDiskOnTermination
-
-class HasDeploymentMode a s b | a -> s b where
-    deploymentMode :: Lens' a (TF.Attribute s b)
-
-instance HasDeploymentMode a s b => HasDeploymentMode (TF.Resource p a) s b where
-    deploymentMode = TF.configuration . deploymentMode
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasDestinationAddressPrefix a s b | a -> s b where
-    destinationAddressPrefix :: Lens' a (TF.Attribute s b)
-
-instance HasDestinationAddressPrefix a s b => HasDestinationAddressPrefix (TF.Resource p a) s b where
-    destinationAddressPrefix = TF.configuration . destinationAddressPrefix
-
-class HasDestinationAddressPrefixes a s b | a -> s b where
-    destinationAddressPrefixes :: Lens' a (TF.Attribute s b)
-
-instance HasDestinationAddressPrefixes a s b => HasDestinationAddressPrefixes (TF.Resource p a) s b where
-    destinationAddressPrefixes = TF.configuration . destinationAddressPrefixes
-
-class HasDestinationPortRange a s b | a -> s b where
-    destinationPortRange :: Lens' a (TF.Attribute s b)
-
-instance HasDestinationPortRange a s b => HasDestinationPortRange (TF.Resource p a) s b where
-    destinationPortRange = TF.configuration . destinationPortRange
-
-class HasDestinationPortRanges a s b | a -> s b where
-    destinationPortRanges :: Lens' a (TF.Attribute s b)
-
-instance HasDestinationPortRanges a s b => HasDestinationPortRanges (TF.Resource p a) s b where
-    destinationPortRanges = TF.configuration . destinationPortRanges
-
-class HasDiagnosticsProfile a s b | a -> s b where
-    diagnosticsProfile :: Lens' a (TF.Attribute s b)
-
-instance HasDiagnosticsProfile a s b => HasDiagnosticsProfile (TF.Resource p a) s b where
-    diagnosticsProfile = TF.configuration . diagnosticsProfile
-
-class HasDirection a s b | a -> s b where
-    direction :: Lens' a (TF.Attribute s b)
-
-instance HasDirection a s b => HasDirection (TF.Resource p a) s b where
-    direction = TF.configuration . direction
-
-class HasDisabledSslProtocols a s b | a -> s b where
-    disabledSslProtocols :: Lens' a (TF.Attribute s b)
-
-instance HasDisabledSslProtocols a s b => HasDisabledSslProtocols (TF.Resource p a) s b where
-    disabledSslProtocols = TF.configuration . disabledSslProtocols
-
-class HasDiskSizeGb a s b | a -> s b where
-    diskSizeGb :: Lens' a (TF.Attribute s b)
-
-instance HasDiskSizeGb a s b => HasDiskSizeGb (TF.Resource p a) s b where
-    diskSizeGb = TF.configuration . diskSizeGb
-
-class HasDnsConfig a s b | a -> s b where
-    dnsConfig :: Lens' a (TF.Attribute s b)
-
-instance HasDnsConfig a s b => HasDnsConfig (TF.Resource p a) s b where
-    dnsConfig = TF.configuration . dnsConfig
-
-class HasDnsServers a s b | a -> s b where
-    dnsServers :: Lens' a (TF.Attribute s b)
-
-instance HasDnsServers a s b => HasDnsServers (TF.Resource p a) s b where
-    dnsServers = TF.configuration . dnsServers
-
-class HasDtu a s b | a -> s b where
-    dtu :: Lens' a (TF.Attribute s b)
-
-instance HasDtu a s b => HasDtu (TF.Resource p a) s b where
-    dtu = TF.configuration . dtu
-
-class HasDuplicateDetectionHistoryTimeWindow a s b | a -> s b where
-    duplicateDetectionHistoryTimeWindow :: Lens' a (TF.Attribute s b)
-
-instance HasDuplicateDetectionHistoryTimeWindow a s b => HasDuplicateDetectionHistoryTimeWindow (TF.Resource p a) s b where
-    duplicateDetectionHistoryTimeWindow = TF.configuration . duplicateDetectionHistoryTimeWindow
-
-class HasEdition a s b | a -> s b where
-    edition :: Lens' a (TF.Attribute s b)
-
-instance HasEdition a s b => HasEdition (TF.Resource p a) s b where
-    edition = TF.configuration . edition
-
-class HasElasticPoolName a s b | a -> s b where
-    elasticPoolName :: Lens' a (TF.Attribute s b)
-
-instance HasElasticPoolName a s b => HasElasticPoolName (TF.Resource p a) s b where
-    elasticPoolName = TF.configuration . elasticPoolName
-
-class HasEnableAcceleratedNetworking a s b | a -> s b where
-    enableAcceleratedNetworking :: Lens' a (TF.Attribute s b)
-
-instance HasEnableAcceleratedNetworking a s b => HasEnableAcceleratedNetworking (TF.Resource p a) s b where
-    enableAcceleratedNetworking = TF.configuration . enableAcceleratedNetworking
-
-class HasEnableBatchedOperations a s b | a -> s b where
-    enableBatchedOperations :: Lens' a (TF.Attribute s b)
-
-instance HasEnableBatchedOperations a s b => HasEnableBatchedOperations (TF.Resource p a) s b where
-    enableBatchedOperations = TF.configuration . enableBatchedOperations
-
-class HasEnableBgp a s b | a -> s b where
-    enableBgp :: Lens' a (TF.Attribute s b)
-
-instance HasEnableBgp a s b => HasEnableBgp (TF.Resource p a) s b where
-    enableBgp = TF.configuration . enableBgp
-
-class HasEnableBlobEncryption a s b | a -> s b where
-    enableBlobEncryption :: Lens' a (TF.Attribute s b)
-
-instance HasEnableBlobEncryption a s b => HasEnableBlobEncryption (TF.Resource p a) s b where
-    enableBlobEncryption = TF.configuration . enableBlobEncryption
-
-class HasEnableExpress a s b | a -> s b where
-    enableExpress :: Lens' a (TF.Attribute s b)
-
-instance HasEnableExpress a s b => HasEnableExpress (TF.Resource p a) s b where
-    enableExpress = TF.configuration . enableExpress
-
-class HasEnableFileEncryption a s b | a -> s b where
-    enableFileEncryption :: Lens' a (TF.Attribute s b)
-
-instance HasEnableFileEncryption a s b => HasEnableFileEncryption (TF.Resource p a) s b where
-    enableFileEncryption = TF.configuration . enableFileEncryption
-
-class HasEnableFloatingIp a s b | a -> s b where
-    enableFloatingIp :: Lens' a (TF.Attribute s b)
-
-instance HasEnableFloatingIp a s b => HasEnableFloatingIp (TF.Resource p a) s b where
-    enableFloatingIp = TF.configuration . enableFloatingIp
-
-class HasEnableHttpsTrafficOnly a s b | a -> s b where
-    enableHttpsTrafficOnly :: Lens' a (TF.Attribute s b)
-
-instance HasEnableHttpsTrafficOnly a s b => HasEnableHttpsTrafficOnly (TF.Resource p a) s b where
-    enableHttpsTrafficOnly = TF.configuration . enableHttpsTrafficOnly
-
-class HasEnableIpForwarding a s b | a -> s b where
-    enableIpForwarding :: Lens' a (TF.Attribute s b)
-
-instance HasEnableIpForwarding a s b => HasEnableIpForwarding (TF.Resource p a) s b where
-    enableIpForwarding = TF.configuration . enableIpForwarding
-
-class HasEnablePartitioning a s b | a -> s b where
-    enablePartitioning :: Lens' a (TF.Attribute s b)
-
-instance HasEnablePartitioning a s b => HasEnablePartitioning (TF.Resource p a) s b where
-    enablePartitioning = TF.configuration . enablePartitioning
-
-class HasEnabled a s b | a -> s b where
-    enabled :: Lens' a (TF.Attribute s b)
-
-instance HasEnabled a s b => HasEnabled (TF.Resource p a) s b where
-    enabled = TF.configuration . enabled
-
-class HasEnabledForDeployment a s b | a -> s b where
-    enabledForDeployment :: Lens' a (TF.Attribute s b)
-
-instance HasEnabledForDeployment a s b => HasEnabledForDeployment (TF.Resource p a) s b where
-    enabledForDeployment = TF.configuration . enabledForDeployment
-
-class HasEnabledForDiskEncryption a s b | a -> s b where
-    enabledForDiskEncryption :: Lens' a (TF.Attribute s b)
-
-instance HasEnabledForDiskEncryption a s b => HasEnabledForDiskEncryption (TF.Resource p a) s b where
-    enabledForDiskEncryption = TF.configuration . enabledForDiskEncryption
-
-class HasEnabledForTemplateDeployment a s b | a -> s b where
-    enabledForTemplateDeployment :: Lens' a (TF.Attribute s b)
-
-instance HasEnabledForTemplateDeployment a s b => HasEnabledForTemplateDeployment (TF.Resource p a) s b where
-    enabledForTemplateDeployment = TF.configuration . enabledForTemplateDeployment
-
-class HasEncryptionSettings a s b | a -> s b where
-    encryptionSettings :: Lens' a (TF.Attribute s b)
-
-instance HasEncryptionSettings a s b => HasEncryptionSettings (TF.Resource p a) s b where
-    encryptionSettings = TF.configuration . encryptionSettings
-
-class HasEndIp a s b | a -> s b where
-    endIp :: Lens' a (TF.Attribute s b)
-
-instance HasEndIp a s b => HasEndIp (TF.Resource p a) s b where
-    endIp = TF.configuration . endIp
-
-class HasEndIpAddress a s b | a -> s b where
-    endIpAddress :: Lens' a (TF.Attribute s b)
-
-instance HasEndIpAddress a s b => HasEndIpAddress (TF.Resource p a) s b where
-    endIpAddress = TF.configuration . endIpAddress
-
-class HasEndpointLocation a s b | a -> s b where
-    endpointLocation :: Lens' a (TF.Attribute s b)
-
-instance HasEndpointLocation a s b => HasEndpointLocation (TF.Resource p a) s b where
-    endpointLocation = TF.configuration . endpointLocation
-
-class HasEndpointStatus a s b | a -> s b where
-    endpointStatus :: Lens' a (TF.Attribute s b)
-
-instance HasEndpointStatus a s b => HasEndpointStatus (TF.Resource p a) s b where
-    endpointStatus = TF.configuration . endpointStatus
-
-class HasEventhubName a s b | a -> s b where
-    eventhubName :: Lens' a (TF.Attribute s b)
-
-instance HasEventhubName a s b => HasEventhubName (TF.Resource p a) s b where
-    eventhubName = TF.configuration . eventhubName
-
-class HasExpiryTime a s b | a -> s b where
-    expiryTime :: Lens' a (TF.Attribute s b)
-
-instance HasExpiryTime a s b => HasExpiryTime (TF.Resource p a) s b where
-    expiryTime = TF.configuration . expiryTime
-
-class HasExpressRouteCircuitId a s b | a -> s b where
-    expressRouteCircuitId :: Lens' a (TF.Attribute s b)
-
-instance HasExpressRouteCircuitId a s b => HasExpressRouteCircuitId (TF.Resource p a) s b where
-    expressRouteCircuitId = TF.configuration . expressRouteCircuitId
-
-class HasExtension a s b | a -> s b where
-    extension :: Lens' a (TF.Attribute s b)
-
-instance HasExtension a s b => HasExtension (TF.Resource p a) s b where
-    extension = TF.configuration . extension
-
-class HasFailoverPolicy a s b | a -> s b where
-    failoverPolicy :: Lens' a (TF.Attribute s b)
-
-instance HasFailoverPolicy a s b => HasFailoverPolicy (TF.Resource p a) s b where
-    failoverPolicy = TF.configuration . failoverPolicy
-
-class HasFamily' a s b | a -> s b where
-    family' :: Lens' a (TF.Attribute s b)
-
-instance HasFamily' a s b => HasFamily' (TF.Resource p a) s b where
-    family' = TF.configuration . family'
-
-class HasFrequency a s b | a -> s b where
-    frequency :: Lens' a (TF.Attribute s b)
-
-instance HasFrequency a s b => HasFrequency (TF.Resource p a) s b where
-    frequency = TF.configuration . frequency
-
-class HasFrontendIpConfiguration a s b | a -> s b where
-    frontendIpConfiguration :: Lens' a (TF.Attribute s b)
-
-instance HasFrontendIpConfiguration a s b => HasFrontendIpConfiguration (TF.Resource p a) s b where
-    frontendIpConfiguration = TF.configuration . frontendIpConfiguration
-
-class HasFrontendIpConfigurationName a s b | a -> s b where
-    frontendIpConfigurationName :: Lens' a (TF.Attribute s b)
-
-instance HasFrontendIpConfigurationName a s b => HasFrontendIpConfigurationName (TF.Resource p a) s b where
-    frontendIpConfigurationName = TF.configuration . frontendIpConfigurationName
-
-class HasFrontendPort a s b | a -> s b where
-    frontendPort :: Lens' a (TF.Attribute s b)
-
-instance HasFrontendPort a s b => HasFrontendPort (TF.Resource p a) s b where
-    frontendPort = TF.configuration . frontendPort
-
-class HasFrontendPortEnd a s b | a -> s b where
-    frontendPortEnd :: Lens' a (TF.Attribute s b)
-
-instance HasFrontendPortEnd a s b => HasFrontendPortEnd (TF.Resource p a) s b where
-    frontendPortEnd = TF.configuration . frontendPortEnd
-
-class HasFrontendPortStart a s b | a -> s b where
-    frontendPortStart :: Lens' a (TF.Attribute s b)
-
-instance HasFrontendPortStart a s b => HasFrontendPortStart (TF.Resource p a) s b where
-    frontendPortStart = TF.configuration . frontendPortStart
-
-class HasGatewayAddress a s b | a -> s b where
-    gatewayAddress :: Lens' a (TF.Attribute s b)
-
-instance HasGatewayAddress a s b => HasGatewayAddress (TF.Resource p a) s b where
-    gatewayAddress = TF.configuration . gatewayAddress
-
-class HasGatewayIpConfiguration a s b | a -> s b where
-    gatewayIpConfiguration :: Lens' a (TF.Attribute s b)
-
-instance HasGatewayIpConfiguration a s b => HasGatewayIpConfiguration (TF.Resource p a) s b where
-    gatewayIpConfiguration = TF.configuration . gatewayIpConfiguration
-
-class HasHttpListener a s b | a -> s b where
-    httpListener :: Lens' a (TF.Attribute s b)
-
-instance HasHttpListener a s b => HasHttpListener (TF.Resource p a) s b where
-    httpListener = TF.configuration . httpListener
-
-class HasIdentity a s b | a -> s b where
-    identity :: Lens' a (TF.Attribute s b)
-
-instance HasIdentity a s b => HasIdentity (TF.Resource p a) s b where
-    identity = TF.configuration . identity
-
-class HasIdleTimeoutInMinutes a s b | a -> s b where
-    idleTimeoutInMinutes :: Lens' a (TF.Attribute s b)
-
-instance HasIdleTimeoutInMinutes a s b => HasIdleTimeoutInMinutes (TF.Resource p a) s b where
-    idleTimeoutInMinutes = TF.configuration . idleTimeoutInMinutes
-
-class HasImageReferenceId a s b | a -> s b where
-    imageReferenceId :: Lens' a (TF.Attribute s b)
-
-instance HasImageReferenceId a s b => HasImageReferenceId (TF.Resource p a) s b where
-    imageReferenceId = TF.configuration . imageReferenceId
-
-class HasInternalDnsNameLabel a s b | a -> s b where
-    internalDnsNameLabel :: Lens' a (TF.Attribute s b)
-
-instance HasInternalDnsNameLabel a s b => HasInternalDnsNameLabel (TF.Resource p a) s b where
-    internalDnsNameLabel = TF.configuration . internalDnsNameLabel
-
-class HasIntervalInSeconds a s b | a -> s b where
-    intervalInSeconds :: Lens' a (TF.Attribute s b)
-
-instance HasIntervalInSeconds a s b => HasIntervalInSeconds (TF.Resource p a) s b where
-    intervalInSeconds = TF.configuration . intervalInSeconds
-
-class HasIpAddressType a s b | a -> s b where
-    ipAddressType :: Lens' a (TF.Attribute s b)
-
-instance HasIpAddressType a s b => HasIpAddressType (TF.Resource p a) s b where
-    ipAddressType = TF.configuration . ipAddressType
-
-class HasIpConfiguration a s b | a -> s b where
-    ipConfiguration :: Lens' a (TF.Attribute s b)
-
-instance HasIpConfiguration a s b => HasIpConfiguration (TF.Resource p a) s b where
-    ipConfiguration = TF.configuration . ipConfiguration
-
-class HasIpRangeFilter a s b | a -> s b where
-    ipRangeFilter :: Lens' a (TF.Attribute s b)
-
-instance HasIpRangeFilter a s b => HasIpRangeFilter (TF.Resource p a) s b where
-    ipRangeFilter = TF.configuration . ipRangeFilter
-
-class HasIsCompressionEnabled a s b | a -> s b where
-    isCompressionEnabled :: Lens' a (TF.Attribute s b)
-
-instance HasIsCompressionEnabled a s b => HasIsCompressionEnabled (TF.Resource p a) s b where
-    isCompressionEnabled = TF.configuration . isCompressionEnabled
-
-class HasIsHttpAllowed a s b | a -> s b where
-    isHttpAllowed :: Lens' a (TF.Attribute s b)
-
-instance HasIsHttpAllowed a s b => HasIsHttpAllowed (TF.Resource p a) s b where
-    isHttpAllowed = TF.configuration . isHttpAllowed
-
-class HasIsHttpsAllowed a s b | a -> s b where
-    isHttpsAllowed :: Lens' a (TF.Attribute s b)
-
-instance HasIsHttpsAllowed a s b => HasIsHttpsAllowed (TF.Resource p a) s b where
-    isHttpsAllowed = TF.configuration . isHttpsAllowed
-
-class HasKeyOpts a s b | a -> s b where
-    keyOpts :: Lens' a (TF.Attribute s b)
-
-instance HasKeyOpts a s b => HasKeyOpts (TF.Resource p a) s b where
-    keyOpts = TF.configuration . keyOpts
-
-class HasKeySize a s b | a -> s b where
-    keySize :: Lens' a (TF.Attribute s b)
-
-instance HasKeySize a s b => HasKeySize (TF.Resource p a) s b where
-    keySize = TF.configuration . keySize
-
-class HasKeyType a s b | a -> s b where
-    keyType :: Lens' a (TF.Attribute s b)
-
-instance HasKeyType a s b => HasKeyType (TF.Resource p a) s b where
-    keyType = TF.configuration . keyType
-
-class HasKind a s b | a -> s b where
-    kind :: Lens' a (TF.Attribute s b)
-
-instance HasKind a s b => HasKind (TF.Resource p a) s b where
-    kind = TF.configuration . kind
-
-class HasLicenseType a s b | a -> s b where
-    licenseType :: Lens' a (TF.Attribute s b)
-
-instance HasLicenseType a s b => HasLicenseType (TF.Resource p a) s b where
-    licenseType = TF.configuration . licenseType
-
-class HasLinuxProfile a s b | a -> s b where
-    linuxProfile :: Lens' a (TF.Attribute s b)
-
-instance HasLinuxProfile a s b => HasLinuxProfile (TF.Resource p a) s b where
-    linuxProfile = TF.configuration . linuxProfile
-
-class HasLoadDistribution a s b | a -> s b where
-    loadDistribution :: Lens' a (TF.Attribute s b)
-
-instance HasLoadDistribution a s b => HasLoadDistribution (TF.Resource p a) s b where
-    loadDistribution = TF.configuration . loadDistribution
-
-class HasLoadbalancerId a s b | a -> s b where
-    loadbalancerId :: Lens' a (TF.Attribute s b)
-
-instance HasLoadbalancerId a s b => HasLoadbalancerId (TF.Resource p a) s b where
-    loadbalancerId = TF.configuration . loadbalancerId
-
-class HasLocalNetworkGatewayId a s b | a -> s b where
-    localNetworkGatewayId :: Lens' a (TF.Attribute s b)
-
-instance HasLocalNetworkGatewayId a s b => HasLocalNetworkGatewayId (TF.Resource p a) s b where
-    localNetworkGatewayId = TF.configuration . localNetworkGatewayId
-
-class HasLocation a s b | a -> s b where
-    location :: Lens' a (TF.Attribute s b)
-
-instance HasLocation a s b => HasLocation (TF.Resource p a) s b where
-    location = TF.configuration . location
-
-class HasLockDuration a s b | a -> s b where
-    lockDuration :: Lens' a (TF.Attribute s b)
-
-instance HasLockDuration a s b => HasLockDuration (TF.Resource p a) s b where
-    lockDuration = TF.configuration . lockDuration
-
-class HasLockLevel a s b | a -> s b where
-    lockLevel :: Lens' a (TF.Attribute s b)
-
-instance HasLockLevel a s b => HasLockLevel (TF.Resource p a) s b where
-    lockLevel = TF.configuration . lockLevel
-
-class HasLogProgress a s b | a -> s b where
-    logProgress :: Lens' a (TF.Attribute s b)
-
-instance HasLogProgress a s b => HasLogProgress (TF.Resource p a) s b where
-    logProgress = TF.configuration . logProgress
-
-class HasLogVerbose a s b | a -> s b where
-    logVerbose :: Lens' a (TF.Attribute s b)
-
-instance HasLogVerbose a s b => HasLogVerbose (TF.Resource p a) s b where
-    logVerbose = TF.configuration . logVerbose
-
-class HasManaged a s b | a -> s b where
-    managed :: Lens' a (TF.Attribute s b)
-
-instance HasManaged a s b => HasManaged (TF.Resource p a) s b where
-    managed = TF.configuration . managed
-
-class HasMasterProfile a s b | a -> s b where
-    masterProfile :: Lens' a (TF.Attribute s b)
-
-instance HasMasterProfile a s b => HasMasterProfile (TF.Resource p a) s b where
-    masterProfile = TF.configuration . masterProfile
-
-class HasMaxDeliveryCount a s b | a -> s b where
-    maxDeliveryCount :: Lens' a (TF.Attribute s b)
-
-instance HasMaxDeliveryCount a s b => HasMaxDeliveryCount (TF.Resource p a) s b where
-    maxDeliveryCount = TF.configuration . maxDeliveryCount
-
-class HasMaxSizeBytes a s b | a -> s b where
-    maxSizeBytes :: Lens' a (TF.Attribute s b)
-
-instance HasMaxSizeBytes a s b => HasMaxSizeBytes (TF.Resource p a) s b where
-    maxSizeBytes = TF.configuration . maxSizeBytes
-
-class HasMaxSizeInMegabytes a s b | a -> s b where
-    maxSizeInMegabytes :: Lens' a (TF.Attribute s b)
-
-instance HasMaxSizeInMegabytes a s b => HasMaxSizeInMegabytes (TF.Resource p a) s b where
-    maxSizeInMegabytes = TF.configuration . maxSizeInMegabytes
-
-class HasMaximumThroughputUnits a s b | a -> s b where
-    maximumThroughputUnits :: Lens' a (TF.Attribute s b)
-
-instance HasMaximumThroughputUnits a s b => HasMaximumThroughputUnits (TF.Resource p a) s b where
-    maximumThroughputUnits = TF.configuration . maximumThroughputUnits
-
-class HasMessageRetention a s b | a -> s b where
-    messageRetention :: Lens' a (TF.Attribute s b)
-
-instance HasMessageRetention a s b => HasMessageRetention (TF.Resource p a) s b where
-    messageRetention = TF.configuration . messageRetention
-
-class HasMetricName a s b | a -> s b where
-    metricName :: Lens' a (TF.Attribute s b)
-
-instance HasMetricName a s b => HasMetricName (TF.Resource p a) s b where
-    metricName = TF.configuration . metricName
-
-class HasMinChildEndpoints a s b | a -> s b where
-    minChildEndpoints :: Lens' a (TF.Attribute s b)
-
-instance HasMinChildEndpoints a s b => HasMinChildEndpoints (TF.Resource p a) s b where
-    minChildEndpoints = TF.configuration . minChildEndpoints
-
-class HasMonitorConfig a s b | a -> s b where
-    monitorConfig :: Lens' a (TF.Attribute s b)
-
-instance HasMonitorConfig a s b => HasMonitorConfig (TF.Resource p a) s b where
-    monitorConfig = TF.configuration . monitorConfig
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasNamespaceName a s b | a -> s b where
-    namespaceName :: Lens' a (TF.Attribute s b)
-
-instance HasNamespaceName a s b => HasNamespaceName (TF.Resource p a) s b where
-    namespaceName = TF.configuration . namespaceName
-
-class HasNetworkInterfaceIds a s b | a -> s b where
-    networkInterfaceIds :: Lens' a (TF.Attribute s b)
-
-instance HasNetworkInterfaceIds a s b => HasNetworkInterfaceIds (TF.Resource p a) s b where
-    networkInterfaceIds = TF.configuration . networkInterfaceIds
-
-class HasNetworkProfile a s b | a -> s b where
-    networkProfile :: Lens' a (TF.Attribute s b)
-
-instance HasNetworkProfile a s b => HasNetworkProfile (TF.Resource p a) s b where
-    networkProfile = TF.configuration . networkProfile
-
-class HasNetworkSecurityGroupId a s b | a -> s b where
-    networkSecurityGroupId :: Lens' a (TF.Attribute s b)
-
-instance HasNetworkSecurityGroupId a s b => HasNetworkSecurityGroupId (TF.Resource p a) s b where
-    networkSecurityGroupId = TF.configuration . networkSecurityGroupId
-
-class HasNetworkSecurityGroupName a s b | a -> s b where
-    networkSecurityGroupName :: Lens' a (TF.Attribute s b)
-
-instance HasNetworkSecurityGroupName a s b => HasNetworkSecurityGroupName (TF.Resource p a) s b where
-    networkSecurityGroupName = TF.configuration . networkSecurityGroupName
-
-class HasNextHopInIpAddress a s b | a -> s b where
-    nextHopInIpAddress :: Lens' a (TF.Attribute s b)
-
-instance HasNextHopInIpAddress a s b => HasNextHopInIpAddress (TF.Resource p a) s b where
-    nextHopInIpAddress = TF.configuration . nextHopInIpAddress
-
-class HasNextHopType a s b | a -> s b where
-    nextHopType :: Lens' a (TF.Attribute s b)
-
-instance HasNextHopType a s b => HasNextHopType (TF.Resource p a) s b where
-    nextHopType = TF.configuration . nextHopType
-
-class HasNumberOfProbes a s b | a -> s b where
-    numberOfProbes :: Lens' a (TF.Attribute s b)
-
-instance HasNumberOfProbes a s b => HasNumberOfProbes (TF.Resource p a) s b where
-    numberOfProbes = TF.configuration . numberOfProbes
-
-class HasOfferType a s b | a -> s b where
-    offerType :: Lens' a (TF.Attribute s b)
-
-instance HasOfferType a s b => HasOfferType (TF.Resource p a) s b where
-    offerType = TF.configuration . offerType
-
-class HasOrchestrationPlatform a s b | a -> s b where
-    orchestrationPlatform :: Lens' a (TF.Attribute s b)
-
-instance HasOrchestrationPlatform a s b => HasOrchestrationPlatform (TF.Resource p a) s b where
-    orchestrationPlatform = TF.configuration . orchestrationPlatform
-
-class HasOrigin a s b | a -> s b where
-    origin :: Lens' a (TF.Attribute s b)
-
-instance HasOrigin a s b => HasOrigin (TF.Resource p a) s b where
-    origin = TF.configuration . origin
-
-class HasOriginHostHeader a s b | a -> s b where
-    originHostHeader :: Lens' a (TF.Attribute s b)
-
-instance HasOriginHostHeader a s b => HasOriginHostHeader (TF.Resource p a) s b where
-    originHostHeader = TF.configuration . originHostHeader
-
-class HasOriginPath a s b | a -> s b where
-    originPath :: Lens' a (TF.Attribute s b)
-
-instance HasOriginPath a s b => HasOriginPath (TF.Resource p a) s b where
-    originPath = TF.configuration . originPath
-
-class HasOsDisk a s b | a -> s b where
-    osDisk :: Lens' a (TF.Attribute s b)
-
-instance HasOsDisk a s b => HasOsDisk (TF.Resource p a) s b where
-    osDisk = TF.configuration . osDisk
-
-class HasOsProfile a s b | a -> s b where
-    osProfile :: Lens' a (TF.Attribute s b)
-
-instance HasOsProfile a s b => HasOsProfile (TF.Resource p a) s b where
-    osProfile = TF.configuration . osProfile
-
-class HasOsProfileLinuxConfig a s b | a -> s b where
-    osProfileLinuxConfig :: Lens' a (TF.Attribute s b)
-
-instance HasOsProfileLinuxConfig a s b => HasOsProfileLinuxConfig (TF.Resource p a) s b where
-    osProfileLinuxConfig = TF.configuration . osProfileLinuxConfig
-
-class HasOsProfileSecrets a s b | a -> s b where
-    osProfileSecrets :: Lens' a (TF.Attribute s b)
-
-instance HasOsProfileSecrets a s b => HasOsProfileSecrets (TF.Resource p a) s b where
-    osProfileSecrets = TF.configuration . osProfileSecrets
-
-class HasOsProfileWindowsConfig a s b | a -> s b where
-    osProfileWindowsConfig :: Lens' a (TF.Attribute s b)
-
-instance HasOsProfileWindowsConfig a s b => HasOsProfileWindowsConfig (TF.Resource p a) s b where
-    osProfileWindowsConfig = TF.configuration . osProfileWindowsConfig
-
-class HasOsType a s b | a -> s b where
-    osType :: Lens' a (TF.Attribute s b)
-
-instance HasOsType a s b => HasOsType (TF.Resource p a) s b where
-    osType = TF.configuration . osType
-
-class HasOverprovision a s b | a -> s b where
-    overprovision :: Lens' a (TF.Attribute s b)
-
-instance HasOverprovision a s b => HasOverprovision (TF.Resource p a) s b where
-    overprovision = TF.configuration . overprovision
-
-class HasParallelism a s b | a -> s b where
-    parallelism :: Lens' a (TF.Attribute s b)
-
-instance HasParallelism a s b => HasParallelism (TF.Resource p a) s b where
-    parallelism = TF.configuration . parallelism
-
-class HasPartitionCount a s b | a -> s b where
-    partitionCount :: Lens' a (TF.Attribute s b)
-
-instance HasPartitionCount a s b => HasPartitionCount (TF.Resource p a) s b where
-    partitionCount = TF.configuration . partitionCount
-
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
-
-instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
-    password = TF.configuration . password
-
-class HasPeerVirtualNetworkGatewayId a s b | a -> s b where
-    peerVirtualNetworkGatewayId :: Lens' a (TF.Attribute s b)
-
-instance HasPeerVirtualNetworkGatewayId a s b => HasPeerVirtualNetworkGatewayId (TF.Resource p a) s b where
-    peerVirtualNetworkGatewayId = TF.configuration . peerVirtualNetworkGatewayId
-
-class HasPeeringLocation a s b | a -> s b where
-    peeringLocation :: Lens' a (TF.Attribute s b)
-
-instance HasPeeringLocation a s b => HasPeeringLocation (TF.Resource p a) s b where
-    peeringLocation = TF.configuration . peeringLocation
-
-class HasPermissions a s b | a -> s b where
-    permissions :: Lens' a (TF.Attribute s b)
-
-instance HasPermissions a s b => HasPermissions (TF.Resource p a) s b where
-    permissions = TF.configuration . permissions
-
-class HasPlan a s b | a -> s b where
-    plan :: Lens' a (TF.Attribute s b)
-
-instance HasPlan a s b => HasPlan (TF.Resource p a) s b where
-    plan = TF.configuration . plan
-
-class HasPlatformFaultDomainCount a s b | a -> s b where
-    platformFaultDomainCount :: Lens' a (TF.Attribute s b)
-
-instance HasPlatformFaultDomainCount a s b => HasPlatformFaultDomainCount (TF.Resource p a) s b where
-    platformFaultDomainCount = TF.configuration . platformFaultDomainCount
-
-class HasPlatformUpdateDomainCount a s b | a -> s b where
-    platformUpdateDomainCount :: Lens' a (TF.Attribute s b)
-
-instance HasPlatformUpdateDomainCount a s b => HasPlatformUpdateDomainCount (TF.Resource p a) s b where
-    platformUpdateDomainCount = TF.configuration . platformUpdateDomainCount
-
-class HasPoolSize a s b | a -> s b where
-    poolSize :: Lens' a (TF.Attribute s b)
-
-instance HasPoolSize a s b => HasPoolSize (TF.Resource p a) s b where
-    poolSize = TF.configuration . poolSize
-
-class HasPort a s b | a -> s b where
-    port :: Lens' a (TF.Attribute s b)
-
-instance HasPort a s b => HasPort (TF.Resource p a) s b where
-    port = TF.configuration . port
-
-class HasPrimaryNetworkInterfaceId a s b | a -> s b where
-    primaryNetworkInterfaceId :: Lens' a (TF.Attribute s b)
-
-instance HasPrimaryNetworkInterfaceId a s b => HasPrimaryNetworkInterfaceId (TF.Resource p a) s b where
-    primaryNetworkInterfaceId = TF.configuration . primaryNetworkInterfaceId
-
-class HasPrincipalId a s b | a -> s b where
-    principalId :: Lens' a (TF.Attribute s b)
-
-instance HasPrincipalId a s b => HasPrincipalId (TF.Resource p a) s b where
-    principalId = TF.configuration . principalId
-
-class HasPriority a s b | a -> s b where
-    priority :: Lens' a (TF.Attribute s b)
-
-instance HasPriority a s b => HasPriority (TF.Resource p a) s b where
-    priority = TF.configuration . priority
-
-class HasProbe a s b | a -> s b where
-    probe :: Lens' a (TF.Attribute s b)
-
-instance HasProbe a s b => HasProbe (TF.Resource p a) s b where
-    probe = TF.configuration . probe
-
-class HasProbeId a s b | a -> s b where
-    probeId :: Lens' a (TF.Attribute s b)
-
-instance HasProbeId a s b => HasProbeId (TF.Resource p a) s b where
-    probeId = TF.configuration . probeId
-
-class HasProfileName a s b | a -> s b where
-    profileName :: Lens' a (TF.Attribute s b)
-
-instance HasProfileName a s b => HasProfileName (TF.Resource p a) s b where
-    profileName = TF.configuration . profileName
-
-class HasProfileStatus a s b | a -> s b where
-    profileStatus :: Lens' a (TF.Attribute s b)
-
-instance HasProfileStatus a s b => HasProfileStatus (TF.Resource p a) s b where
-    profileStatus = TF.configuration . profileStatus
-
-class HasProperties a s b | a -> s b where
-    properties :: Lens' a (TF.Attribute s b)
-
-instance HasProperties a s b => HasProperties (TF.Resource p a) s b where
-    properties = TF.configuration . properties
-
-class HasProtocol a s b | a -> s b where
-    protocol :: Lens' a (TF.Attribute s b)
-
-instance HasProtocol a s b => HasProtocol (TF.Resource p a) s b where
-    protocol = TF.configuration . protocol
-
-class HasPublishContentLink a s b | a -> s b where
-    publishContentLink :: Lens' a (TF.Attribute s b)
-
-instance HasPublishContentLink a s b => HasPublishContentLink (TF.Resource p a) s b where
-    publishContentLink = TF.configuration . publishContentLink
-
-class HasPublisher a s b | a -> s b where
-    publisher :: Lens' a (TF.Attribute s b)
-
-instance HasPublisher a s b => HasPublisher (TF.Resource p a) s b where
-    publisher = TF.configuration . publisher
-
-class HasQuerystringCachingBehaviour a s b | a -> s b where
-    querystringCachingBehaviour :: Lens' a (TF.Attribute s b)
-
-instance HasQuerystringCachingBehaviour a s b => HasQuerystringCachingBehaviour (TF.Resource p a) s b where
-    querystringCachingBehaviour = TF.configuration . querystringCachingBehaviour
-
-class HasQuota a s b | a -> s b where
-    quota :: Lens' a (TF.Attribute s b)
-
-instance HasQuota a s b => HasQuota (TF.Resource p a) s b where
-    quota = TF.configuration . quota
-
-class HasRecord a s b | a -> s b where
-    record :: Lens' a (TF.Attribute s b)
-
-instance HasRecord a s b => HasRecord (TF.Resource p a) s b where
-    record = TF.configuration . record
-
-class HasRecords a s b | a -> s b where
-    records :: Lens' a (TF.Attribute s b)
-
-instance HasRecords a s b => HasRecords (TF.Resource p a) s b where
-    records = TF.configuration . records
-
-class HasRedisCacheName a s b | a -> s b where
-    redisCacheName :: Lens' a (TF.Attribute s b)
-
-instance HasRedisCacheName a s b => HasRedisCacheName (TF.Resource p a) s b where
-    redisCacheName = TF.configuration . redisCacheName
-
-class HasRemoteVirtualNetworkId a s b | a -> s b where
-    remoteVirtualNetworkId :: Lens' a (TF.Attribute s b)
-
-instance HasRemoteVirtualNetworkId a s b => HasRemoteVirtualNetworkId (TF.Resource p a) s b where
-    remoteVirtualNetworkId = TF.configuration . remoteVirtualNetworkId
-
-class HasReplicaCount a s b | a -> s b where
-    replicaCount :: Lens' a (TF.Attribute s b)
-
-instance HasReplicaCount a s b => HasReplicaCount (TF.Resource p a) s b where
-    replicaCount = TF.configuration . replicaCount
-
-class HasRequestPath a s b | a -> s b where
-    requestPath :: Lens' a (TF.Attribute s b)
-
-instance HasRequestPath a s b => HasRequestPath (TF.Resource p a) s b where
-    requestPath = TF.configuration . requestPath
-
-class HasRequestRoutingRule a s b | a -> s b where
-    requestRoutingRule :: Lens' a (TF.Attribute s b)
-
-instance HasRequestRoutingRule a s b => HasRequestRoutingRule (TF.Resource p a) s b where
-    requestRoutingRule = TF.configuration . requestRoutingRule
-
-class HasRequestedServiceObjectiveId a s b | a -> s b where
-    requestedServiceObjectiveId :: Lens' a (TF.Attribute s b)
-
-instance HasRequestedServiceObjectiveId a s b => HasRequestedServiceObjectiveId (TF.Resource p a) s b where
-    requestedServiceObjectiveId = TF.configuration . requestedServiceObjectiveId
-
-class HasRequestedServiceObjectiveName a s b | a -> s b where
-    requestedServiceObjectiveName :: Lens' a (TF.Attribute s b)
-
-instance HasRequestedServiceObjectiveName a s b => HasRequestedServiceObjectiveName (TF.Resource p a) s b where
-    requestedServiceObjectiveName = TF.configuration . requestedServiceObjectiveName
-
-class HasRequiresDuplicateDetection a s b | a -> s b where
-    requiresDuplicateDetection :: Lens' a (TF.Attribute s b)
-
-instance HasRequiresDuplicateDetection a s b => HasRequiresDuplicateDetection (TF.Resource p a) s b where
-    requiresDuplicateDetection = TF.configuration . requiresDuplicateDetection
-
-class HasRequiresSession a s b | a -> s b where
-    requiresSession :: Lens' a (TF.Attribute s b)
-
-instance HasRequiresSession a s b => HasRequiresSession (TF.Resource p a) s b where
-    requiresSession = TF.configuration . requiresSession
-
-class HasResourceGroupName a s b | a -> s b where
-    resourceGroupName :: Lens' a (TF.Attribute s b)
-
-instance HasResourceGroupName a s b => HasResourceGroupName (TF.Resource p a) s b where
-    resourceGroupName = TF.configuration . resourceGroupName
-
-class HasResourceId a s b | a -> s b where
-    resourceId :: Lens' a (TF.Attribute s b)
-
-instance HasResourceId a s b => HasResourceId (TF.Resource p a) s b where
-    resourceId = TF.configuration . resourceId
-
-class HasRestorePointInTime a s b | a -> s b where
-    restorePointInTime :: Lens' a (TF.Attribute s b)
-
-instance HasRestorePointInTime a s b => HasRestorePointInTime (TF.Resource p a) s b where
-    restorePointInTime = TF.configuration . restorePointInTime
-
-class HasRetentionInDays a s b | a -> s b where
-    retentionInDays :: Lens' a (TF.Attribute s b)
-
-instance HasRetentionInDays a s b => HasRetentionInDays (TF.Resource p a) s b where
-    retentionInDays = TF.configuration . retentionInDays
-
-class HasRoleDefinitionId a s b | a -> s b where
-    roleDefinitionId :: Lens' a (TF.Attribute s b)
-
-instance HasRoleDefinitionId a s b => HasRoleDefinitionId (TF.Resource p a) s b where
-    roleDefinitionId = TF.configuration . roleDefinitionId
-
-class HasRoute a s b | a -> s b where
-    route :: Lens' a (TF.Attribute s b)
-
-instance HasRoute a s b => HasRoute (TF.Resource p a) s b where
-    route = TF.configuration . route
-
-class HasRouteTableId a s b | a -> s b where
-    routeTableId :: Lens' a (TF.Attribute s b)
-
-instance HasRouteTableId a s b => HasRouteTableId (TF.Resource p a) s b where
-    routeTableId = TF.configuration . routeTableId
-
-class HasRouteTableName a s b | a -> s b where
-    routeTableName :: Lens' a (TF.Attribute s b)
-
-instance HasRouteTableName a s b => HasRouteTableName (TF.Resource p a) s b where
-    routeTableName = TF.configuration . routeTableName
-
-class HasRoutingWeight a s b | a -> s b where
-    routingWeight :: Lens' a (TF.Attribute s b)
-
-instance HasRoutingWeight a s b => HasRoutingWeight (TF.Resource p a) s b where
-    routingWeight = TF.configuration . routingWeight
-
-class HasRunbookType a s b | a -> s b where
-    runbookType :: Lens' a (TF.Attribute s b)
-
-instance HasRunbookType a s b => HasRunbookType (TF.Resource p a) s b where
-    runbookType = TF.configuration . runbookType
-
-class HasScope a s b | a -> s b where
-    scope :: Lens' a (TF.Attribute s b)
-
-instance HasScope a s b => HasScope (TF.Resource p a) s b where
-    scope = TF.configuration . scope
-
-class HasSecurityRule a s b | a -> s b where
-    securityRule :: Lens' a (TF.Attribute s b)
-
-instance HasSecurityRule a s b => HasSecurityRule (TF.Resource p a) s b where
-    securityRule = TF.configuration . securityRule
-
-class HasServerName a s b | a -> s b where
-    serverName :: Lens' a (TF.Attribute s b)
-
-instance HasServerName a s b => HasServerName (TF.Resource p a) s b where
-    serverName = TF.configuration . serverName
-
-class HasServicePrincipal a s b | a -> s b where
-    servicePrincipal :: Lens' a (TF.Attribute s b)
-
-instance HasServicePrincipal a s b => HasServicePrincipal (TF.Resource p a) s b where
-    servicePrincipal = TF.configuration . servicePrincipal
-
-class HasServiceProviderName a s b | a -> s b where
-    serviceProviderName :: Lens' a (TF.Attribute s b)
-
-instance HasServiceProviderName a s b => HasServiceProviderName (TF.Resource p a) s b where
-    serviceProviderName = TF.configuration . serviceProviderName
-
-class HasSharedKey a s b | a -> s b where
-    sharedKey :: Lens' a (TF.Attribute s b)
-
-instance HasSharedKey a s b => HasSharedKey (TF.Resource p a) s b where
-    sharedKey = TF.configuration . sharedKey
-
-class HasSinglePlacementGroup a s b | a -> s b where
-    singlePlacementGroup :: Lens' a (TF.Attribute s b)
-
-instance HasSinglePlacementGroup a s b => HasSinglePlacementGroup (TF.Resource p a) s b where
-    singlePlacementGroup = TF.configuration . singlePlacementGroup
-
-class HasSiteConfig a s b | a -> s b where
-    siteConfig :: Lens' a (TF.Attribute s b)
-
-instance HasSiteConfig a s b => HasSiteConfig (TF.Resource p a) s b where
-    siteConfig = TF.configuration . siteConfig
-
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attribute s b)
-
-instance HasSize a s b => HasSize (TF.Resource p a) s b where
-    size = TF.configuration . size
-
-class HasSku a s b | a -> s b where
-    sku :: Lens' a (TF.Attribute s b)
-
-instance HasSku a s b => HasSku (TF.Resource p a) s b where
-    sku = TF.configuration . sku
-
-class HasSource a s b | a -> s b where
-    source :: Lens' a (TF.Attribute s b)
-
-instance HasSource a s b => HasSource (TF.Resource p a) s b where
-    source = TF.configuration . source
-
-class HasSourceAddressPrefix a s b | a -> s b where
-    sourceAddressPrefix :: Lens' a (TF.Attribute s b)
-
-instance HasSourceAddressPrefix a s b => HasSourceAddressPrefix (TF.Resource p a) s b where
-    sourceAddressPrefix = TF.configuration . sourceAddressPrefix
-
-class HasSourceAddressPrefixes a s b | a -> s b where
-    sourceAddressPrefixes :: Lens' a (TF.Attribute s b)
-
-instance HasSourceAddressPrefixes a s b => HasSourceAddressPrefixes (TF.Resource p a) s b where
-    sourceAddressPrefixes = TF.configuration . sourceAddressPrefixes
-
-class HasSourceDatabaseDeletionDate a s b | a -> s b where
-    sourceDatabaseDeletionDate :: Lens' a (TF.Attribute s b)
-
-instance HasSourceDatabaseDeletionDate a s b => HasSourceDatabaseDeletionDate (TF.Resource p a) s b where
-    sourceDatabaseDeletionDate = TF.configuration . sourceDatabaseDeletionDate
-
-class HasSourceDatabaseId a s b | a -> s b where
-    sourceDatabaseId :: Lens' a (TF.Attribute s b)
-
-instance HasSourceDatabaseId a s b => HasSourceDatabaseId (TF.Resource p a) s b where
-    sourceDatabaseId = TF.configuration . sourceDatabaseId
-
-class HasSourcePortRange a s b | a -> s b where
-    sourcePortRange :: Lens' a (TF.Attribute s b)
-
-instance HasSourcePortRange a s b => HasSourcePortRange (TF.Resource p a) s b where
-    sourcePortRange = TF.configuration . sourcePortRange
-
-class HasSourcePortRanges a s b | a -> s b where
-    sourcePortRanges :: Lens' a (TF.Attribute s b)
-
-instance HasSourcePortRanges a s b => HasSourcePortRanges (TF.Resource p a) s b where
-    sourcePortRanges = TF.configuration . sourcePortRanges
-
-class HasSourceResourceId a s b | a -> s b where
-    sourceResourceId :: Lens' a (TF.Attribute s b)
-
-instance HasSourceResourceId a s b => HasSourceResourceId (TF.Resource p a) s b where
-    sourceResourceId = TF.configuration . sourceResourceId
-
-class HasSourceUri a s b | a -> s b where
-    sourceUri :: Lens' a (TF.Attribute s b)
-
-instance HasSourceUri a s b => HasSourceUri (TF.Resource p a) s b where
-    sourceUri = TF.configuration . sourceUri
-
-class HasSourceVirtualMachineId a s b | a -> s b where
-    sourceVirtualMachineId :: Lens' a (TF.Attribute s b)
-
-instance HasSourceVirtualMachineId a s b => HasSourceVirtualMachineId (TF.Resource p a) s b where
-    sourceVirtualMachineId = TF.configuration . sourceVirtualMachineId
-
-class HasSslCertificate a s b | a -> s b where
-    sslCertificate :: Lens' a (TF.Attribute s b)
-
-instance HasSslCertificate a s b => HasSslCertificate (TF.Resource p a) s b where
-    sslCertificate = TF.configuration . sslCertificate
-
-class HasStartIp a s b | a -> s b where
-    startIp :: Lens' a (TF.Attribute s b)
-
-instance HasStartIp a s b => HasStartIp (TF.Resource p a) s b where
-    startIp = TF.configuration . startIp
-
-class HasStartIpAddress a s b | a -> s b where
-    startIpAddress :: Lens' a (TF.Attribute s b)
-
-instance HasStartIpAddress a s b => HasStartIpAddress (TF.Resource p a) s b where
-    startIpAddress = TF.configuration . startIpAddress
-
-class HasStartTime a s b | a -> s b where
-    startTime :: Lens' a (TF.Attribute s b)
-
-instance HasStartTime a s b => HasStartTime (TF.Resource p a) s b where
-    startTime = TF.configuration . startTime
-
-class HasStatus a s b | a -> s b where
-    status :: Lens' a (TF.Attribute s b)
-
-instance HasStatus a s b => HasStatus (TF.Resource p a) s b where
-    status = TF.configuration . status
-
-class HasStorageAccountId a s b | a -> s b where
-    storageAccountId :: Lens' a (TF.Attribute s b)
-
-instance HasStorageAccountId a s b => HasStorageAccountId (TF.Resource p a) s b where
-    storageAccountId = TF.configuration . storageAccountId
-
-class HasStorageAccountName a s b | a -> s b where
-    storageAccountName :: Lens' a (TF.Attribute s b)
-
-instance HasStorageAccountName a s b => HasStorageAccountName (TF.Resource p a) s b where
-    storageAccountName = TF.configuration . storageAccountName
-
-class HasStorageAccountType a s b | a -> s b where
-    storageAccountType :: Lens' a (TF.Attribute s b)
-
-instance HasStorageAccountType a s b => HasStorageAccountType (TF.Resource p a) s b where
-    storageAccountType = TF.configuration . storageAccountType
-
-class HasStorageConnectionString a s b | a -> s b where
-    storageConnectionString :: Lens' a (TF.Attribute s b)
-
-instance HasStorageConnectionString a s b => HasStorageConnectionString (TF.Resource p a) s b where
-    storageConnectionString = TF.configuration . storageConnectionString
-
-class HasStorageContainerName a s b | a -> s b where
-    storageContainerName :: Lens' a (TF.Attribute s b)
-
-instance HasStorageContainerName a s b => HasStorageContainerName (TF.Resource p a) s b where
-    storageContainerName = TF.configuration . storageContainerName
-
-class HasStorageDataDisk a s b | a -> s b where
-    storageDataDisk :: Lens' a (TF.Attribute s b)
-
-instance HasStorageDataDisk a s b => HasStorageDataDisk (TF.Resource p a) s b where
-    storageDataDisk = TF.configuration . storageDataDisk
-
-class HasStorageImageReference a s b | a -> s b where
-    storageImageReference :: Lens' a (TF.Attribute s b)
-
-instance HasStorageImageReference a s b => HasStorageImageReference (TF.Resource p a) s b where
-    storageImageReference = TF.configuration . storageImageReference
-
-class HasStorageMb a s b | a -> s b where
-    storageMb :: Lens' a (TF.Attribute s b)
-
-instance HasStorageMb a s b => HasStorageMb (TF.Resource p a) s b where
-    storageMb = TF.configuration . storageMb
-
-class HasStorageOsDisk a s b | a -> s b where
-    storageOsDisk :: Lens' a (TF.Attribute s b)
-
-instance HasStorageOsDisk a s b => HasStorageOsDisk (TF.Resource p a) s b where
-    storageOsDisk = TF.configuration . storageOsDisk
-
-class HasStorageProfileDataDisk a s b | a -> s b where
-    storageProfileDataDisk :: Lens' a (TF.Attribute s b)
-
-instance HasStorageProfileDataDisk a s b => HasStorageProfileDataDisk (TF.Resource p a) s b where
-    storageProfileDataDisk = TF.configuration . storageProfileDataDisk
-
-class HasStorageProfileImageReference a s b | a -> s b where
-    storageProfileImageReference :: Lens' a (TF.Attribute s b)
-
-instance HasStorageProfileImageReference a s b => HasStorageProfileImageReference (TF.Resource p a) s b where
-    storageProfileImageReference = TF.configuration . storageProfileImageReference
-
-class HasStorageProfileOsDisk a s b | a -> s b where
-    storageProfileOsDisk :: Lens' a (TF.Attribute s b)
-
-instance HasStorageProfileOsDisk a s b => HasStorageProfileOsDisk (TF.Resource p a) s b where
-    storageProfileOsDisk = TF.configuration . storageProfileOsDisk
-
-class HasSubnet a s b | a -> s b where
-    subnet :: Lens' a (TF.Attribute s b)
-
-instance HasSubnet a s b => HasSubnet (TF.Resource p a) s b where
-    subnet = TF.configuration . subnet
-
-class HasSupportOrdering a s b | a -> s b where
-    supportOrdering :: Lens' a (TF.Attribute s b)
-
-instance HasSupportOrdering a s b => HasSupportOrdering (TF.Resource p a) s b where
-    supportOrdering = TF.configuration . supportOrdering
-
-class HasTTL a s b | a -> s b where
-    TTL :: Lens' a (TF.Attribute s b)
-
-instance HasTTL a s b => HasTTL (TF.Resource p a) s b where
-    TTL = TF.configuration . TTL
-
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attribute s b)
-
-instance HasTags a s b => HasTags (TF.Resource p a) s b where
-    tags = TF.configuration . tags
-
-class HasTarget a s b | a -> s b where
-    target :: Lens' a (TF.Attribute s b)
-
-instance HasTarget a s b => HasTarget (TF.Resource p a) s b where
-    target = TF.configuration . target
-
-class HasTargetResourceId a s b | a -> s b where
-    targetResourceId :: Lens' a (TF.Attribute s b)
-
-instance HasTargetResourceId a s b => HasTargetResourceId (TF.Resource p a) s b where
-    targetResourceId = TF.configuration . targetResourceId
-
-class HasTemplateBody a s b | a -> s b where
-    templateBody :: Lens' a (TF.Attribute s b)
-
-instance HasTemplateBody a s b => HasTemplateBody (TF.Resource p a) s b where
-    templateBody = TF.configuration . templateBody
-
-class HasTenantId a s b | a -> s b where
-    tenantId :: Lens' a (TF.Attribute s b)
-
-instance HasTenantId a s b => HasTenantId (TF.Resource p a) s b where
-    tenantId = TF.configuration . tenantId
-
-class HasTimezone a s b | a -> s b where
-    timezone :: Lens' a (TF.Attribute s b)
-
-instance HasTimezone a s b => HasTimezone (TF.Resource p a) s b where
-    timezone = TF.configuration . timezone
-
-class HasTopicName a s b | a -> s b where
-    topicName :: Lens' a (TF.Attribute s b)
-
-instance HasTopicName a s b => HasTopicName (TF.Resource p a) s b where
-    topicName = TF.configuration . topicName
-
-class HasTrafficRoutingMethod a s b | a -> s b where
-    trafficRoutingMethod :: Lens' a (TF.Attribute s b)
-
-instance HasTrafficRoutingMethod a s b => HasTrafficRoutingMethod (TF.Resource p a) s b where
-    trafficRoutingMethod = TF.configuration . trafficRoutingMethod
-
-class HasTtl a s b | a -> s b where
-    ttl :: Lens' a (TF.Attribute s b)
-
-instance HasTtl a s b => HasTtl (TF.Resource p a) s b where
-    ttl = TF.configuration . ttl
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasUpgradePolicyMode a s b | a -> s b where
-    upgradePolicyMode :: Lens' a (TF.Attribute s b)
-
-instance HasUpgradePolicyMode a s b => HasUpgradePolicyMode (TF.Resource p a) s b where
-    upgradePolicyMode = TF.configuration . upgradePolicyMode
-
-class HasUrlPathMap a s b | a -> s b where
-    urlPathMap :: Lens' a (TF.Attribute s b)
-
-instance HasUrlPathMap a s b => HasUrlPathMap (TF.Resource p a) s b where
-    urlPathMap = TF.configuration . urlPathMap
-
-class HasUseRemoteGateways a s b | a -> s b where
-    useRemoteGateways :: Lens' a (TF.Attribute s b)
-
-instance HasUseRemoteGateways a s b => HasUseRemoteGateways (TF.Resource p a) s b where
-    useRemoteGateways = TF.configuration . useRemoteGateways
-
-class HasUseSubdomain a s b | a -> s b where
-    useSubdomain :: Lens' a (TF.Attribute s b)
-
-instance HasUseSubdomain a s b => HasUseSubdomain (TF.Resource p a) s b where
-    useSubdomain = TF.configuration . useSubdomain
-
-class HasUserMetadata a s b | a -> s b where
-    userMetadata :: Lens' a (TF.Attribute s b)
-
-instance HasUserMetadata a s b => HasUserMetadata (TF.Resource p a) s b where
-    userMetadata = TF.configuration . userMetadata
-
-class HasUsername a s b | a -> s b where
-    username :: Lens' a (TF.Attribute s b)
-
-instance HasUsername a s b => HasUsername (TF.Resource p a) s b where
-    username = TF.configuration . username
-
-class HasValue a s b | a -> s b where
-    value :: Lens' a (TF.Attribute s b)
-
-instance HasValue a s b => HasValue (TF.Resource p a) s b where
-    value = TF.configuration . value
-
-class HasVaultUri a s b | a -> s b where
-    vaultUri :: Lens' a (TF.Attribute s b)
-
-instance HasVaultUri a s b => HasVaultUri (TF.Resource p a) s b where
-    vaultUri = TF.configuration . vaultUri
-
-class HasVersion a s b | a -> s b where
-    version :: Lens' a (TF.Attribute s b)
-
-instance HasVersion a s b => HasVersion (TF.Resource p a) s b where
-    version = TF.configuration . version
-
-class HasVirtualMachineName a s b | a -> s b where
-    virtualMachineName :: Lens' a (TF.Attribute s b)
-
-instance HasVirtualMachineName a s b => HasVirtualMachineName (TF.Resource p a) s b where
-    virtualMachineName = TF.configuration . virtualMachineName
-
-class HasVirtualNetworkGatewayId a s b | a -> s b where
-    virtualNetworkGatewayId :: Lens' a (TF.Attribute s b)
-
-instance HasVirtualNetworkGatewayId a s b => HasVirtualNetworkGatewayId (TF.Resource p a) s b where
-    virtualNetworkGatewayId = TF.configuration . virtualNetworkGatewayId
-
-class HasVirtualNetworkName a s b | a -> s b where
-    virtualNetworkName :: Lens' a (TF.Attribute s b)
-
-instance HasVirtualNetworkName a s b => HasVirtualNetworkName (TF.Resource p a) s b where
-    virtualNetworkName = TF.configuration . virtualNetworkName
-
-class HasVmSize a s b | a -> s b where
-    vmSize :: Lens' a (TF.Attribute s b)
-
-instance HasVmSize a s b => HasVmSize (TF.Resource p a) s b where
-    vmSize = TF.configuration . vmSize
-
-class HasVpnClientConfiguration a s b | a -> s b where
-    vpnClientConfiguration :: Lens' a (TF.Attribute s b)
-
-instance HasVpnClientConfiguration a s b => HasVpnClientConfiguration (TF.Resource p a) s b where
-    vpnClientConfiguration = TF.configuration . vpnClientConfiguration
-
-class HasVpnType a s b | a -> s b where
-    vpnType :: Lens' a (TF.Attribute s b)
-
-instance HasVpnType a s b => HasVpnType (TF.Resource p a) s b where
-    vpnType = TF.configuration . vpnType
-
-class HasWafConfiguration a s b | a -> s b where
-    wafConfiguration :: Lens' a (TF.Attribute s b)
-
-instance HasWafConfiguration a s b => HasWafConfiguration (TF.Resource p a) s b where
-    wafConfiguration = TF.configuration . wafConfiguration
-
-class HasWeight a s b | a -> s b where
-    weight :: Lens' a (TF.Attribute s b)
-
-instance HasWeight a s b => HasWeight (TF.Resource p a) s b where
-    weight = TF.configuration . weight
-
-class HasZoneName a s b | a -> s b where
-    zoneName :: Lens' a (TF.Attribute s b)
-
-instance HasZoneName a s b => HasZoneName (TF.Resource p a) s b where
-    zoneName = TF.configuration . zoneName
-
-class HasComputedAddressPrefix a b | a -> b where
-    computedAddressPrefix
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAddressPrefix =
-        to (\x -> TF.Computed (TF.referenceKey x) "address_prefix")
-
-class HasComputedAddressSpace a b | a -> b where
-    computedAddressSpace
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAddressSpace =
-        to (\x -> TF.Computed (TF.referenceKey x) "address_space")
-
-class HasComputedAdminPassword a b | a -> b where
-    computedAdminPassword
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAdminPassword =
-        to (\x -> TF.Computed (TF.referenceKey x) "admin_password")
-
-class HasComputedAdminUsername a b | a -> b where
-    computedAdminUsername
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAdminUsername =
-        to (\x -> TF.Computed (TF.referenceKey x) "admin_username")
-
-class HasComputedAgentPoolProfileFqdn a b | a -> b where
-    computedAgentPoolProfileFqdn
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAgentPoolProfileFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "agent_pool_profile.fqdn")
-
-class HasComputedAppId a b | a -> b where
-    computedAppId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAppId =
-        to (\x -> TF.Computed (TF.referenceKey x) "app_id")
-
-class HasComputedAppliedDnsServers a b | a -> b where
-    computedAppliedDnsServers
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAppliedDnsServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "applied_dns_servers")
-
-class HasComputedCreationData a b | a -> b where
-    computedCreationData
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCreationData =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_data")
-
-class HasComputedCreationDate a b | a -> b where
-    computedCreationDate
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCreationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_date")
-
-class HasComputedDefaultHostname a b | a -> b where
-    computedDefaultHostname
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDefaultHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_hostname")
-
-class HasComputedDefaultSecondaryLocation a b | a -> b where
-    computedDefaultSecondaryLocation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDefaultSecondaryLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_secondary_location")
-
-class HasComputedDefaultSiteHostname a b | a -> b where
-    computedDefaultSiteHostname
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDefaultSiteHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_site_hostname")
-
-class HasComputedDiagnosticsProfileStorageUri a b | a -> b where
-    computedDiagnosticsProfileStorageUri
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDiagnosticsProfileStorageUri =
-        to (\x -> TF.Computed (TF.referenceKey x) "diagnostics_profile.storage_uri")
-
-class HasComputedDiskSizeGb a b | a -> b where
-    computedDiskSizeGb
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDiskSizeGb =
-        to (\x -> TF.Computed (TF.referenceKey x) "disk_size_gb")
-
-class HasComputedE a b | a -> b where
-    computedE
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedE =
-        to (\x -> TF.Computed (TF.referenceKey x) "e")
-
-class HasComputedEndpoint a b | a -> b where
-    computedEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
-
-class HasComputedFqdn a b | a -> b where
-    computedFqdn
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "fqdn")
-
-class HasComputedFullyQualifiedDomainName a b | a -> b where
-    computedFullyQualifiedDomainName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedFullyQualifiedDomainName =
-        to (\x -> TF.Computed (TF.referenceKey x) "fully_qualified_domain_name")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedInstrumentationKey a b | a -> b where
-    computedInstrumentationKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstrumentationKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "instrumentation_key")
-
-class HasComputedInternalFqdn a b | a -> b where
-    computedInternalFqdn
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInternalFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "internal_fqdn")
-
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
-
-class HasComputedIpConfigurations a b | a -> b where
-    computedIpConfigurations
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpConfigurations =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_configurations")
-
-class HasComputedLocation a b | a -> b where
-    computedLocation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "location")
-
-class HasComputedLoginServer a b | a -> b where
-    computedLoginServer
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLoginServer =
-        to (\x -> TF.Computed (TF.referenceKey x) "login_server")
-
-class HasComputedMacAddress a b | a -> b where
-    computedMacAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMacAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "mac_address")
-
-class HasComputedMasterProfileFqdn a b | a -> b where
-    computedMasterProfileFqdn
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMasterProfileFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_profile.fqdn")
-
-class HasComputedMaxNumberOfRecordSets a b | a -> b where
-    computedMaxNumberOfRecordSets
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMaxNumberOfRecordSets =
-        to (\x -> TF.Computed (TF.referenceKey x) "max_number_of_record_sets")
-
-class HasComputedMaximumNumberOfWorkers a b | a -> b where
-    computedMaximumNumberOfWorkers
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMaximumNumberOfWorkers =
-        to (\x -> TF.Computed (TF.referenceKey x) "maximum_number_of_workers")
-
-class HasComputedN a b | a -> b where
-    computedN
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedN =
-        to (\x -> TF.Computed (TF.referenceKey x) "n")
-
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
-
-class HasComputedNameServers a b | a -> b where
-    computedNameServers
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNameServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "name_servers")
-
-class HasComputedNumberOfRecordSets a b | a -> b where
-    computedNumberOfRecordSets
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNumberOfRecordSets =
-        to (\x -> TF.Computed (TF.referenceKey x) "number_of_record_sets")
-
-class HasComputedOutboundIpAddresses a b | a -> b where
-    computedOutboundIpAddresses
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOutboundIpAddresses =
-        to (\x -> TF.Computed (TF.referenceKey x) "outbound_ip_addresses")
-
-class HasComputedOutputs a b | a -> b where
-    computedOutputs
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOutputs =
-        to (\x -> TF.Computed (TF.referenceKey x) "outputs")
-
-class HasComputedPartitionIds a b | a -> b where
-    computedPartitionIds
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPartitionIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "partition_ids")
-
-class HasComputedPortalUrl a b | a -> b where
-    computedPortalUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPortalUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "portal_url")
-
-class HasComputedPrimaryAccessKey a b | a -> b where
-    computedPrimaryAccessKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryAccessKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_access_key")
-
-class HasComputedPrimaryBlobConnectionString a b | a -> b where
-    computedPrimaryBlobConnectionString
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryBlobConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_blob_connection_string")
-
-class HasComputedPrimaryBlobEndpoint a b | a -> b where
-    computedPrimaryBlobEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryBlobEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_blob_endpoint")
-
-class HasComputedPrimaryConnectionString a b | a -> b where
-    computedPrimaryConnectionString
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_connection_string")
-
-class HasComputedPrimaryFileEndpoint a b | a -> b where
-    computedPrimaryFileEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryFileEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_file_endpoint")
-
-class HasComputedPrimaryKey a b | a -> b where
-    computedPrimaryKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_key")
-
-class HasComputedPrimaryLocation a b | a -> b where
-    computedPrimaryLocation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_location")
-
-class HasComputedPrimaryMasterKey a b | a -> b where
-    computedPrimaryMasterKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryMasterKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_master_key")
-
-class HasComputedPrimaryQueueEndpoint a b | a -> b where
-    computedPrimaryQueueEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryQueueEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_queue_endpoint")
-
-class HasComputedPrimaryReadonlyMasterKey a b | a -> b where
-    computedPrimaryReadonlyMasterKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryReadonlyMasterKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_readonly_master_key")
-
-class HasComputedPrimarySharedKey a b | a -> b where
-    computedPrimarySharedKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimarySharedKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_shared_key")
-
-class HasComputedPrimaryTableEndpoint a b | a -> b where
-    computedPrimaryTableEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrimaryTableEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_table_endpoint")
-
-class HasComputedPrivateIpAddress a b | a -> b where
-    computedPrivateIpAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrivateIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip_address")
-
-class HasComputedPrivateIpAddresses a b | a -> b where
-    computedPrivateIpAddresses
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrivateIpAddresses =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip_addresses")
-
-class HasComputedProperties a b | a -> b where
-    computedProperties
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedProperties =
-        to (\x -> TF.Computed (TF.referenceKey x) "properties")
-
-class HasComputedResourceGroupName a b | a -> b where
-    computedResourceGroupName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedResourceGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "resource_group_name")
-
-class HasComputedSecondaryAccessKey a b | a -> b where
-    computedSecondaryAccessKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryAccessKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_access_key")
-
-class HasComputedSecondaryBlobConnectionString a b | a -> b where
-    computedSecondaryBlobConnectionString
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryBlobConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_blob_connection_string")
-
-class HasComputedSecondaryBlobEndpoint a b | a -> b where
-    computedSecondaryBlobEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryBlobEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_blob_endpoint")
-
-class HasComputedSecondaryConnectionString a b | a -> b where
-    computedSecondaryConnectionString
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_connection_string")
-
-class HasComputedSecondaryKey a b | a -> b where
-    computedSecondaryKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_key")
-
-class HasComputedSecondaryLocation a b | a -> b where
-    computedSecondaryLocation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_location")
-
-class HasComputedSecondaryMasterKey a b | a -> b where
-    computedSecondaryMasterKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryMasterKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_master_key")
-
-class HasComputedSecondaryQueueEndpoint a b | a -> b where
-    computedSecondaryQueueEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryQueueEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_queue_endpoint")
-
-class HasComputedSecondaryReadonlyMasterKey a b | a -> b where
-    computedSecondaryReadonlyMasterKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryReadonlyMasterKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_readonly_master_key")
-
-class HasComputedSecondarySharedKey a b | a -> b where
-    computedSecondarySharedKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondarySharedKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_shared_key")
-
-class HasComputedSecondaryTableEndpoint a b | a -> b where
-    computedSecondaryTableEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecondaryTableEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_table_endpoint")
-
-class HasComputedServiceKey a b | a -> b where
-    computedServiceKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedServiceKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "service_key")
-
-class HasComputedServiceProviderProvisioningState a b | a -> b where
-    computedServiceProviderProvisioningState
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedServiceProviderProvisioningState =
-        to (\x -> TF.Computed (TF.referenceKey x) "service_provider_provisioning_state")
-
-class HasComputedSubnets a b | a -> b where
-    computedSubnets
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSubnets =
-        to (\x -> TF.Computed (TF.referenceKey x) "subnets")
-
-class HasComputedUrl a b | a -> b where
-    computedUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "url")
-
-class HasComputedVaultUri a b | a -> b where
-    computedVaultUri
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVaultUri =
-        to (\x -> TF.Computed (TF.referenceKey x) "vault_uri")
-
-class HasComputedVersion a b | a -> b where
-    computedVersion
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "version")
-
-class HasComputedVirtualMachineId a b | a -> b where
-    computedVirtualMachineId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVirtualMachineId =
-        to (\x -> TF.Computed (TF.referenceKey x) "virtual_machine_id")
-
-class HasComputedVirtualNetworkName a b | a -> b where
-    computedVirtualNetworkName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVirtualNetworkName =
-        to (\x -> TF.Computed (TF.referenceKey x) "virtual_network_name")
-
-class HasComputedWorkspaceId a b | a -> b where
-    computedWorkspaceId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedWorkspaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "workspace_id")

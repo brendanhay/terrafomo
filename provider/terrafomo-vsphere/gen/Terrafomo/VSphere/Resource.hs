@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.VSphere.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -75,95 +72,97 @@ module Terrafomo.VSphere.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAccessMode (..)
-    , HasAdapterType (..)
-    , HasAssociableTypes (..)
-    , HasAutoExpand (..)
-    , HasCardinality (..)
-    , HasCategoryId (..)
-    , HasConsolidate (..)
-    , HasContactDetail (..)
-    , HasContactName (..)
-    , HasCreateDirectories (..)
-    , HasDatacenter (..)
-    , HasDatacenterId (..)
-    , HasDatastore (..)
-    , HasDescription (..)
-    , HasDestinationFile (..)
-    , HasDisks (..)
-    , HasDistributedVirtualSwitchUuid (..)
-    , HasFolder (..)
-    , HasHostSystemId (..)
-    , HasHostSystemIds (..)
-    , HasIpv4Address (..)
-    , HasLabels (..)
-    , HasLacpApiVersion (..)
-    , HasLicenseKey (..)
-    , HasLinkDiscoveryOperation (..)
-    , HasLinkDiscoveryProtocol (..)
-    , HasManagedObjectType (..)
-    , HasMaxMtu (..)
-    , HasMemory (..)
-    , HasMtu (..)
-    , HasMulticastFilteringMode (..)
-    , HasName (..)
-    , HasNumberOfPorts (..)
-    , HasPath (..)
-    , HasQuiesce (..)
-    , HasRemoteHosts (..)
-    , HasRemotePath (..)
-    , HasRemoveChildren (..)
-    , HasResourcePoolId (..)
-    , HasSecurityType (..)
-    , HasSize (..)
-    , HasSnapshotName (..)
-    , HasSourceDatacenter (..)
-    , HasSourceDatastore (..)
-    , HasSourceFile (..)
-    , HasTags (..)
-    , HasType' (..)
-    , HasVersion (..)
-    , HasVirtualMachineUuid (..)
-    , HasVirtualSwitchName (..)
-    , HasVlanId (..)
-    , HasVmdkPath (..)
+    , P.HasAccessMode (..)
+    , P.HasAdapterType (..)
+    , P.HasAssociableTypes (..)
+    , P.HasAutoExpand (..)
+    , P.HasCardinality (..)
+    , P.HasCategoryId (..)
+    , P.HasConsolidate (..)
+    , P.HasContactDetail (..)
+    , P.HasContactName (..)
+    , P.HasCreateDirectories (..)
+    , P.HasDatacenter (..)
+    , P.HasDatacenterId (..)
+    , P.HasDatastore (..)
+    , P.HasDescription (..)
+    , P.HasDestinationFile (..)
+    , P.HasDisks (..)
+    , P.HasDistributedVirtualSwitchUuid (..)
+    , P.HasFolder (..)
+    , P.HasHostSystemId (..)
+    , P.HasHostSystemIds (..)
+    , P.HasIpv4Address (..)
+    , P.HasLabels (..)
+    , P.HasLacpApiVersion (..)
+    , P.HasLicenseKey (..)
+    , P.HasLinkDiscoveryOperation (..)
+    , P.HasLinkDiscoveryProtocol (..)
+    , P.HasManagedObjectType (..)
+    , P.HasMaxMtu (..)
+    , P.HasMemory (..)
+    , P.HasMtu (..)
+    , P.HasMulticastFilteringMode (..)
+    , P.HasName (..)
+    , P.HasNumberOfPorts (..)
+    , P.HasPath (..)
+    , P.HasQuiesce (..)
+    , P.HasRemoteHosts (..)
+    , P.HasRemotePath (..)
+    , P.HasRemoveChildren (..)
+    , P.HasResourcePoolId (..)
+    , P.HasSecurityType (..)
+    , P.HasSize (..)
+    , P.HasSnapshotName (..)
+    , P.HasSourceDatacenter (..)
+    , P.HasSourceDatastore (..)
+    , P.HasSourceFile (..)
+    , P.HasTags (..)
+    , P.HasType' (..)
+    , P.HasVersion (..)
+    , P.HasVirtualMachineUuid (..)
+    , P.HasVirtualSwitchName (..)
+    , P.HasVlanId (..)
+    , P.HasVmdkPath (..)
 
     -- ** Computed Attributes
-    , HasComputedAccessible (..)
-    , HasComputedCapacity (..)
-    , HasComputedEditionKey (..)
-    , HasComputedFreeSpace (..)
-    , HasComputedId (..)
-    , HasComputedMaintenanceMode (..)
-    , HasComputedMultipleHostAccess (..)
-    , HasComputedName (..)
-    , HasComputedProtocolEndpoint (..)
-    , HasComputedTotal (..)
-    , HasComputedUncommittedSpace (..)
-    , HasComputedUrl (..)
-    , HasComputedUsed (..)
+    , P.HasComputedAccessible (..)
+    , P.HasComputedCapacity (..)
+    , P.HasComputedEditionKey (..)
+    , P.HasComputedFreeSpace (..)
+    , P.HasComputedId (..)
+    , P.HasComputedMaintenanceMode (..)
+    , P.HasComputedMultipleHostAccess (..)
+    , P.HasComputedName (..)
+    , P.HasComputedProtocolEndpoint (..)
+    , P.HasComputedTotal (..)
+    , P.HasComputedUncommittedSpace (..)
+    , P.HasComputedUrl (..)
+    , P.HasComputedUsed (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                  as TF
-import qualified GHC.Base                   as TF
-import qualified Numeric.Natural            as TF
-import qualified Terrafomo.Attribute        as TF
-import qualified Terrafomo.HCL              as TF
-import qualified Terrafomo.IP               as TF
-import qualified Terrafomo.Meta             as TF
-import qualified Terrafomo.Name             as TF
-import qualified Terrafomo.Resource         as TF
-import qualified Terrafomo.Resource         as TF
-import qualified Terrafomo.VSphere.Provider as TF
-import qualified Terrafomo.VSphere.Types    as TF
+import qualified Data.Word                  as P
+import qualified GHC.Base                   as P
+import qualified Numeric.Natural            as P
+import qualified Terrafomo.IP               as P
+import qualified Terrafomo.VSphere.Lens     as P
+import qualified Terrafomo.VSphere.Provider as P
+import           Terrafomo.VSphere.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @vsphere_custom_attribute@ VSphere resource.
 
@@ -189,17 +188,17 @@ instance TF.ToHCL (CustomAttributeResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasManagedObjectType (CustomAttributeResource s) s Text where
+instance P.HasManagedObjectType (CustomAttributeResource s) s Text where
     managedObjectType =
         lens (_managed_object_type :: CustomAttributeResource s -> TF.Attribute s Text)
             (\s a -> s { _managed_object_type = a } :: CustomAttributeResource s)
 
-instance HasName (CustomAttributeResource s) s Text where
+instance P.HasName (CustomAttributeResource s) s Text where
     name =
         lens (_name :: CustomAttributeResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CustomAttributeResource s)
 
-customAttributeResource :: TF.Resource TF.VSphere (CustomAttributeResource s)
+customAttributeResource :: TF.Resource P.VSphere (CustomAttributeResource s)
 customAttributeResource =
     TF.newResource "vsphere_custom_attribute" $
         CustomAttributeResource {
@@ -228,22 +227,22 @@ instance TF.ToHCL (DatacenterResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasFolder (DatacenterResource s) s Text where
+instance P.HasFolder (DatacenterResource s) s Text where
     folder =
         lens (_folder :: DatacenterResource s -> TF.Attribute s Text)
             (\s a -> s { _folder = a } :: DatacenterResource s)
 
-instance HasName (DatacenterResource s) s Text where
+instance P.HasName (DatacenterResource s) s Text where
     name =
         lens (_name :: DatacenterResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DatacenterResource s)
 
-instance HasTags (DatacenterResource s) s Text where
+instance P.HasTags (DatacenterResource s) s Text where
     tags =
         lens (_tags :: DatacenterResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DatacenterResource s)
 
-datacenterResource :: TF.Resource TF.VSphere (DatacenterResource s)
+datacenterResource :: TF.Resource P.VSphere (DatacenterResource s)
 datacenterResource =
     TF.newResource "vsphere_datacenter" $
         DatacenterResource {
@@ -293,37 +292,37 @@ instance TF.ToHCL (DistributedPortGroupResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasAutoExpand (DistributedPortGroupResource s) s Text where
+instance P.HasAutoExpand (DistributedPortGroupResource s) s Text where
     autoExpand =
         lens (_auto_expand :: DistributedPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_expand = a } :: DistributedPortGroupResource s)
 
-instance HasDescription (DistributedPortGroupResource s) s Text where
+instance P.HasDescription (DistributedPortGroupResource s) s Text where
     description =
         lens (_description :: DistributedPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: DistributedPortGroupResource s)
 
-instance HasDistributedVirtualSwitchUuid (DistributedPortGroupResource s) s Text where
+instance P.HasDistributedVirtualSwitchUuid (DistributedPortGroupResource s) s Text where
     distributedVirtualSwitchUuid =
         lens (_distributed_virtual_switch_uuid :: DistributedPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _distributed_virtual_switch_uuid = a } :: DistributedPortGroupResource s)
 
-instance HasName (DistributedPortGroupResource s) s Text where
+instance P.HasName (DistributedPortGroupResource s) s Text where
     name =
         lens (_name :: DistributedPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DistributedPortGroupResource s)
 
-instance HasNumberOfPorts (DistributedPortGroupResource s) s Text where
+instance P.HasNumberOfPorts (DistributedPortGroupResource s) s Text where
     numberOfPorts =
         lens (_number_of_ports :: DistributedPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _number_of_ports = a } :: DistributedPortGroupResource s)
 
-instance HasType' (DistributedPortGroupResource s) s Text where
+instance P.HasType' (DistributedPortGroupResource s) s Text where
     type' =
         lens (_type' :: DistributedPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: DistributedPortGroupResource s)
 
-distributedPortGroupResource :: TF.Resource TF.VSphere (DistributedPortGroupResource s)
+distributedPortGroupResource :: TF.Resource P.VSphere (DistributedPortGroupResource s)
 distributedPortGroupResource =
     TF.newResource "vsphere_distributed_port_group" $
         DistributedPortGroupResource {
@@ -402,77 +401,77 @@ instance TF.ToHCL (DistributedVirtualSwitchResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasContactDetail (DistributedVirtualSwitchResource s) s Text where
+instance P.HasContactDetail (DistributedVirtualSwitchResource s) s Text where
     contactDetail =
         lens (_contact_detail :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _contact_detail = a } :: DistributedVirtualSwitchResource s)
 
-instance HasContactName (DistributedVirtualSwitchResource s) s Text where
+instance P.HasContactName (DistributedVirtualSwitchResource s) s Text where
     contactName =
         lens (_contact_name :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _contact_name = a } :: DistributedVirtualSwitchResource s)
 
-instance HasDatacenterId (DistributedVirtualSwitchResource s) s Text where
+instance P.HasDatacenterId (DistributedVirtualSwitchResource s) s Text where
     datacenterId =
         lens (_datacenter_id :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchResource s)
 
-instance HasDescription (DistributedVirtualSwitchResource s) s Text where
+instance P.HasDescription (DistributedVirtualSwitchResource s) s Text where
     description =
         lens (_description :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: DistributedVirtualSwitchResource s)
 
-instance HasFolder (DistributedVirtualSwitchResource s) s Text where
+instance P.HasFolder (DistributedVirtualSwitchResource s) s Text where
     folder =
         lens (_folder :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource s)
 
-instance HasIpv4Address (DistributedVirtualSwitchResource s) s Text where
+instance P.HasIpv4Address (DistributedVirtualSwitchResource s) s Text where
     ipv4Address =
         lens (_ipv4_address :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _ipv4_address = a } :: DistributedVirtualSwitchResource s)
 
-instance HasLacpApiVersion (DistributedVirtualSwitchResource s) s Text where
+instance P.HasLacpApiVersion (DistributedVirtualSwitchResource s) s Text where
     lacpApiVersion =
         lens (_lacp_api_version :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _lacp_api_version = a } :: DistributedVirtualSwitchResource s)
 
-instance HasLinkDiscoveryOperation (DistributedVirtualSwitchResource s) s Text where
+instance P.HasLinkDiscoveryOperation (DistributedVirtualSwitchResource s) s Text where
     linkDiscoveryOperation =
         lens (_link_discovery_operation :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _link_discovery_operation = a } :: DistributedVirtualSwitchResource s)
 
-instance HasLinkDiscoveryProtocol (DistributedVirtualSwitchResource s) s Text where
+instance P.HasLinkDiscoveryProtocol (DistributedVirtualSwitchResource s) s Text where
     linkDiscoveryProtocol =
         lens (_link_discovery_protocol :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _link_discovery_protocol = a } :: DistributedVirtualSwitchResource s)
 
-instance HasMaxMtu (DistributedVirtualSwitchResource s) s Text where
+instance P.HasMaxMtu (DistributedVirtualSwitchResource s) s Text where
     maxMtu =
         lens (_max_mtu :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _max_mtu = a } :: DistributedVirtualSwitchResource s)
 
-instance HasMulticastFilteringMode (DistributedVirtualSwitchResource s) s Text where
+instance P.HasMulticastFilteringMode (DistributedVirtualSwitchResource s) s Text where
     multicastFilteringMode =
         lens (_multicast_filtering_mode :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _multicast_filtering_mode = a } :: DistributedVirtualSwitchResource s)
 
-instance HasName (DistributedVirtualSwitchResource s) s Text where
+instance P.HasName (DistributedVirtualSwitchResource s) s Text where
     name =
         lens (_name :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DistributedVirtualSwitchResource s)
 
-instance HasTags (DistributedVirtualSwitchResource s) s Text where
+instance P.HasTags (DistributedVirtualSwitchResource s) s Text where
     tags =
         lens (_tags :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
 
-instance HasVersion (DistributedVirtualSwitchResource s) s Text where
+instance P.HasVersion (DistributedVirtualSwitchResource s) s Text where
     version =
         lens (_version :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: DistributedVirtualSwitchResource s)
 
-distributedVirtualSwitchResource :: TF.Resource TF.VSphere (DistributedVirtualSwitchResource s)
+distributedVirtualSwitchResource :: TF.Resource P.VSphere (DistributedVirtualSwitchResource s)
 distributedVirtualSwitchResource =
     TF.newResource "vsphere_distributed_virtual_switch" $
         DistributedVirtualSwitchResource {
@@ -534,42 +533,42 @@ instance TF.ToHCL (FileResource s) where
         , TF.attribute "source_file" _source_file
         ]
 
-instance HasCreateDirectories (FileResource s) s Text where
+instance P.HasCreateDirectories (FileResource s) s Text where
     createDirectories =
         lens (_create_directories :: FileResource s -> TF.Attribute s Text)
             (\s a -> s { _create_directories = a } :: FileResource s)
 
-instance HasDatacenter (FileResource s) s Text where
+instance P.HasDatacenter (FileResource s) s Text where
     datacenter =
         lens (_datacenter :: FileResource s -> TF.Attribute s Text)
             (\s a -> s { _datacenter = a } :: FileResource s)
 
-instance HasDatastore (FileResource s) s Text where
+instance P.HasDatastore (FileResource s) s Text where
     datastore =
         lens (_datastore :: FileResource s -> TF.Attribute s Text)
             (\s a -> s { _datastore = a } :: FileResource s)
 
-instance HasDestinationFile (FileResource s) s Text where
+instance P.HasDestinationFile (FileResource s) s Text where
     destinationFile =
         lens (_destination_file :: FileResource s -> TF.Attribute s Text)
             (\s a -> s { _destination_file = a } :: FileResource s)
 
-instance HasSourceDatacenter (FileResource s) s Text where
+instance P.HasSourceDatacenter (FileResource s) s Text where
     sourceDatacenter =
         lens (_source_datacenter :: FileResource s -> TF.Attribute s Text)
             (\s a -> s { _source_datacenter = a } :: FileResource s)
 
-instance HasSourceDatastore (FileResource s) s Text where
+instance P.HasSourceDatastore (FileResource s) s Text where
     sourceDatastore =
         lens (_source_datastore :: FileResource s -> TF.Attribute s Text)
             (\s a -> s { _source_datastore = a } :: FileResource s)
 
-instance HasSourceFile (FileResource s) s Text where
+instance P.HasSourceFile (FileResource s) s Text where
     sourceFile =
         lens (_source_file :: FileResource s -> TF.Attribute s Text)
             (\s a -> s { _source_file = a } :: FileResource s)
 
-fileResource :: TF.Resource TF.VSphere (FileResource s)
+fileResource :: TF.Resource P.VSphere (FileResource s)
 fileResource =
     TF.newResource "vsphere_file" $
         FileResource {
@@ -603,12 +602,12 @@ instance TF.ToHCL (FolderResource s) where
         [ TF.attribute "path" _path
         ]
 
-instance HasPath (FolderResource s) s Text where
+instance P.HasPath (FolderResource s) s Text where
     path =
         lens (_path :: FolderResource s -> TF.Attribute s Text)
             (\s a -> s { _path = a } :: FolderResource s)
 
-folderResource :: TF.Resource TF.VSphere (FolderResource s)
+folderResource :: TF.Resource P.VSphere (FolderResource s)
 folderResource =
     TF.newResource "vsphere_folder" $
         FolderResource {
@@ -644,27 +643,27 @@ instance TF.ToHCL (HostPortGroupResource s) where
         , TF.attribute "vlan_id" _vlan_id
         ]
 
-instance HasHostSystemId (HostPortGroupResource s) s Text where
+instance P.HasHostSystemId (HostPortGroupResource s) s Text where
     hostSystemId =
         lens (_host_system_id :: HostPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _host_system_id = a } :: HostPortGroupResource s)
 
-instance HasName (HostPortGroupResource s) s Text where
+instance P.HasName (HostPortGroupResource s) s Text where
     name =
         lens (_name :: HostPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: HostPortGroupResource s)
 
-instance HasVirtualSwitchName (HostPortGroupResource s) s Text where
+instance P.HasVirtualSwitchName (HostPortGroupResource s) s Text where
     virtualSwitchName =
         lens (_virtual_switch_name :: HostPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _virtual_switch_name = a } :: HostPortGroupResource s)
 
-instance HasVlanId (HostPortGroupResource s) s Text where
+instance P.HasVlanId (HostPortGroupResource s) s Text where
     vlanId =
         lens (_vlan_id :: HostPortGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _vlan_id = a } :: HostPortGroupResource s)
 
-hostPortGroupResource :: TF.Resource TF.VSphere (HostPortGroupResource s)
+hostPortGroupResource :: TF.Resource P.VSphere (HostPortGroupResource s)
 hostPortGroupResource =
     TF.newResource "vsphere_host_port_group" $
         HostPortGroupResource {
@@ -703,27 +702,27 @@ instance TF.ToHCL (HostVirtualSwitchResource s) where
         , TF.attribute "number_of_ports" _number_of_ports
         ]
 
-instance HasHostSystemId (HostVirtualSwitchResource s) s Text where
+instance P.HasHostSystemId (HostVirtualSwitchResource s) s Text where
     hostSystemId =
         lens (_host_system_id :: HostVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _host_system_id = a } :: HostVirtualSwitchResource s)
 
-instance HasMtu (HostVirtualSwitchResource s) s Text where
+instance P.HasMtu (HostVirtualSwitchResource s) s Text where
     mtu =
         lens (_mtu :: HostVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _mtu = a } :: HostVirtualSwitchResource s)
 
-instance HasName (HostVirtualSwitchResource s) s Text where
+instance P.HasName (HostVirtualSwitchResource s) s Text where
     name =
         lens (_name :: HostVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: HostVirtualSwitchResource s)
 
-instance HasNumberOfPorts (HostVirtualSwitchResource s) s Text where
+instance P.HasNumberOfPorts (HostVirtualSwitchResource s) s Text where
     numberOfPorts =
         lens (_number_of_ports :: HostVirtualSwitchResource s -> TF.Attribute s Text)
             (\s a -> s { _number_of_ports = a } :: HostVirtualSwitchResource s)
 
-hostVirtualSwitchResource :: TF.Resource TF.VSphere (HostVirtualSwitchResource s)
+hostVirtualSwitchResource :: TF.Resource P.VSphere (HostVirtualSwitchResource s)
 hostVirtualSwitchResource =
     TF.newResource "vsphere_host_virtual_switch" $
         HostVirtualSwitchResource {
@@ -751,25 +750,25 @@ instance TF.ToHCL (LicenseResource s) where
         , TF.attribute "license_key" _license_key
         ]
 
-instance HasLabels (LicenseResource s) s Text where
+instance P.HasLabels (LicenseResource s) s Text where
     labels =
         lens (_labels :: LicenseResource s -> TF.Attribute s Text)
             (\s a -> s { _labels = a } :: LicenseResource s)
 
-instance HasLicenseKey (LicenseResource s) s Text where
+instance P.HasLicenseKey (LicenseResource s) s Text where
     licenseKey =
         lens (_license_key :: LicenseResource s -> TF.Attribute s Text)
             (\s a -> s { _license_key = a } :: LicenseResource s)
 
-instance HasComputedEditionKey (LicenseResource s) Text
+instance P.HasComputedEditionKey (LicenseResource s) Text
 
-instance HasComputedName (LicenseResource s) Text
+instance P.HasComputedName (LicenseResource s) Text
 
-instance HasComputedTotal (LicenseResource s) Text
+instance P.HasComputedTotal (LicenseResource s) Text
 
-instance HasComputedUsed (LicenseResource s) Text
+instance P.HasComputedUsed (LicenseResource s) Text
 
-licenseResource :: TF.Resource TF.VSphere (LicenseResource s)
+licenseResource :: TF.Resource P.VSphere (LicenseResource s)
 licenseResource =
     TF.newResource "vsphere_license" $
         LicenseResource {
@@ -821,70 +820,70 @@ instance TF.ToHCL (NasDatastoreResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasAccessMode (NasDatastoreResource s) s Text where
+instance P.HasAccessMode (NasDatastoreResource s) s Text where
     accessMode =
         lens (_access_mode :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _access_mode = a } :: NasDatastoreResource s)
 
-instance HasFolder (NasDatastoreResource s) s Text where
+instance P.HasFolder (NasDatastoreResource s) s Text where
     folder =
         lens (_folder :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _folder = a } :: NasDatastoreResource s)
 
-instance HasHostSystemIds (NasDatastoreResource s) s Text where
+instance P.HasHostSystemIds (NasDatastoreResource s) s Text where
     hostSystemIds =
         lens (_host_system_ids :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _host_system_ids = a } :: NasDatastoreResource s)
 
-instance HasName (NasDatastoreResource s) s Text where
+instance P.HasName (NasDatastoreResource s) s Text where
     name =
         lens (_name :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NasDatastoreResource s)
 
-instance HasRemoteHosts (NasDatastoreResource s) s Text where
+instance P.HasRemoteHosts (NasDatastoreResource s) s Text where
     remoteHosts =
         lens (_remote_hosts :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _remote_hosts = a } :: NasDatastoreResource s)
 
-instance HasRemotePath (NasDatastoreResource s) s Text where
+instance P.HasRemotePath (NasDatastoreResource s) s Text where
     remotePath =
         lens (_remote_path :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _remote_path = a } :: NasDatastoreResource s)
 
-instance HasSecurityType (NasDatastoreResource s) s Text where
+instance P.HasSecurityType (NasDatastoreResource s) s Text where
     securityType =
         lens (_security_type :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _security_type = a } :: NasDatastoreResource s)
 
-instance HasTags (NasDatastoreResource s) s Text where
+instance P.HasTags (NasDatastoreResource s) s Text where
     tags =
         lens (_tags :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: NasDatastoreResource s)
 
-instance HasType' (NasDatastoreResource s) s Text where
+instance P.HasType' (NasDatastoreResource s) s Text where
     type' =
         lens (_type' :: NasDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: NasDatastoreResource s)
 
-instance HasComputedAccessible (NasDatastoreResource s) Text
+instance P.HasComputedAccessible (NasDatastoreResource s) Text
 
-instance HasComputedCapacity (NasDatastoreResource s) Text
+instance P.HasComputedCapacity (NasDatastoreResource s) Text
 
-instance HasComputedFreeSpace (NasDatastoreResource s) Text
+instance P.HasComputedFreeSpace (NasDatastoreResource s) Text
 
-instance HasComputedId (NasDatastoreResource s) Text
+instance P.HasComputedId (NasDatastoreResource s) Text
 
-instance HasComputedMaintenanceMode (NasDatastoreResource s) Text
+instance P.HasComputedMaintenanceMode (NasDatastoreResource s) Text
 
-instance HasComputedMultipleHostAccess (NasDatastoreResource s) Text
+instance P.HasComputedMultipleHostAccess (NasDatastoreResource s) Text
 
-instance HasComputedProtocolEndpoint (NasDatastoreResource s) Text
+instance P.HasComputedProtocolEndpoint (NasDatastoreResource s) Text
 
-instance HasComputedUncommittedSpace (NasDatastoreResource s) Text
+instance P.HasComputedUncommittedSpace (NasDatastoreResource s) Text
 
-instance HasComputedUrl (NasDatastoreResource s) Text
+instance P.HasComputedUrl (NasDatastoreResource s) Text
 
-nasDatastoreResource :: TF.Resource TF.VSphere (NasDatastoreResource s)
+nasDatastoreResource :: TF.Resource P.VSphere (NasDatastoreResource s)
 nasDatastoreResource =
     TF.newResource "vsphere_nas_datastore" $
         NasDatastoreResource {
@@ -929,27 +928,27 @@ instance TF.ToHCL (TagCategoryResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasAssociableTypes (TagCategoryResource s) s Text where
+instance P.HasAssociableTypes (TagCategoryResource s) s Text where
     associableTypes =
         lens (_associable_types :: TagCategoryResource s -> TF.Attribute s Text)
             (\s a -> s { _associable_types = a } :: TagCategoryResource s)
 
-instance HasCardinality (TagCategoryResource s) s Text where
+instance P.HasCardinality (TagCategoryResource s) s Text where
     cardinality =
         lens (_cardinality :: TagCategoryResource s -> TF.Attribute s Text)
             (\s a -> s { _cardinality = a } :: TagCategoryResource s)
 
-instance HasDescription (TagCategoryResource s) s Text where
+instance P.HasDescription (TagCategoryResource s) s Text where
     description =
         lens (_description :: TagCategoryResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: TagCategoryResource s)
 
-instance HasName (TagCategoryResource s) s Text where
+instance P.HasName (TagCategoryResource s) s Text where
     name =
         lens (_name :: TagCategoryResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TagCategoryResource s)
 
-tagCategoryResource :: TF.Resource TF.VSphere (TagCategoryResource s)
+tagCategoryResource :: TF.Resource P.VSphere (TagCategoryResource s)
 tagCategoryResource =
     TF.newResource "vsphere_tag_category" $
         TagCategoryResource {
@@ -985,22 +984,22 @@ instance TF.ToHCL (TagResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasCategoryId (TagResource s) s Text where
+instance P.HasCategoryId (TagResource s) s Text where
     categoryId =
         lens (_category_id :: TagResource s -> TF.Attribute s Text)
             (\s a -> s { _category_id = a } :: TagResource s)
 
-instance HasDescription (TagResource s) s Text where
+instance P.HasDescription (TagResource s) s Text where
     description =
         lens (_description :: TagResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: TagResource s)
 
-instance HasName (TagResource s) s Text where
+instance P.HasName (TagResource s) s Text where
     name =
         lens (_name :: TagResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TagResource s)
 
-tagResource :: TF.Resource TF.VSphere (TagResource s)
+tagResource :: TF.Resource P.VSphere (TagResource s)
 tagResource =
     TF.newResource "vsphere_tag" $
         TagResource {
@@ -1042,37 +1041,37 @@ instance TF.ToHCL (VirtualDiskResource s) where
         , TF.attribute "vmdk_path" _vmdk_path
         ]
 
-instance HasAdapterType (VirtualDiskResource s) s Text where
+instance P.HasAdapterType (VirtualDiskResource s) s Text where
     adapterType =
         lens (_adapter_type :: VirtualDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _adapter_type = a } :: VirtualDiskResource s)
 
-instance HasDatacenter (VirtualDiskResource s) s Text where
+instance P.HasDatacenter (VirtualDiskResource s) s Text where
     datacenter =
         lens (_datacenter :: VirtualDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _datacenter = a } :: VirtualDiskResource s)
 
-instance HasDatastore (VirtualDiskResource s) s Text where
+instance P.HasDatastore (VirtualDiskResource s) s Text where
     datastore =
         lens (_datastore :: VirtualDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _datastore = a } :: VirtualDiskResource s)
 
-instance HasSize (VirtualDiskResource s) s Text where
+instance P.HasSize (VirtualDiskResource s) s Text where
     size =
         lens (_size :: VirtualDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: VirtualDiskResource s)
 
-instance HasType' (VirtualDiskResource s) s Text where
+instance P.HasType' (VirtualDiskResource s) s Text where
     type' =
         lens (_type' :: VirtualDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: VirtualDiskResource s)
 
-instance HasVmdkPath (VirtualDiskResource s) s Text where
+instance P.HasVmdkPath (VirtualDiskResource s) s Text where
     vmdkPath =
         lens (_vmdk_path :: VirtualDiskResource s -> TF.Attribute s Text)
             (\s a -> s { _vmdk_path = a } :: VirtualDiskResource s)
 
-virtualDiskResource :: TF.Resource TF.VSphere (VirtualDiskResource s)
+virtualDiskResource :: TF.Resource P.VSphere (VirtualDiskResource s)
 virtualDiskResource =
     TF.newResource "vsphere_virtual_disk" $
         VirtualDiskResource {
@@ -1107,17 +1106,17 @@ instance TF.ToHCL (VirtualMachineResource s) where
         , TF.attribute "resource_pool_id" _resource_pool_id
         ]
 
-instance HasName (VirtualMachineResource s) s Text where
+instance P.HasName (VirtualMachineResource s) s Text where
     name =
         lens (_name :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualMachineResource s)
 
-instance HasResourcePoolId (VirtualMachineResource s) s Text where
+instance P.HasResourcePoolId (VirtualMachineResource s) s Text where
     resourcePoolId =
         lens (_resource_pool_id :: VirtualMachineResource s -> TF.Attribute s Text)
             (\s a -> s { _resource_pool_id = a } :: VirtualMachineResource s)
 
-virtualMachineResource :: TF.Resource TF.VSphere (VirtualMachineResource s)
+virtualMachineResource :: TF.Resource P.VSphere (VirtualMachineResource s)
 virtualMachineResource =
     TF.newResource "vsphere_virtual_machine" $
         VirtualMachineResource {
@@ -1174,42 +1173,42 @@ instance TF.ToHCL (VirtualMachineSnapshotResource s) where
         , TF.attribute "virtual_machine_uuid" _virtual_machine_uuid
         ]
 
-instance HasConsolidate (VirtualMachineSnapshotResource s) s Text where
+instance P.HasConsolidate (VirtualMachineSnapshotResource s) s Text where
     consolidate =
         lens (_consolidate :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _consolidate = a } :: VirtualMachineSnapshotResource s)
 
-instance HasDescription (VirtualMachineSnapshotResource s) s Text where
+instance P.HasDescription (VirtualMachineSnapshotResource s) s Text where
     description =
         lens (_description :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: VirtualMachineSnapshotResource s)
 
-instance HasMemory (VirtualMachineSnapshotResource s) s Text where
+instance P.HasMemory (VirtualMachineSnapshotResource s) s Text where
     memory =
         lens (_memory :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _memory = a } :: VirtualMachineSnapshotResource s)
 
-instance HasQuiesce (VirtualMachineSnapshotResource s) s Text where
+instance P.HasQuiesce (VirtualMachineSnapshotResource s) s Text where
     quiesce =
         lens (_quiesce :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _quiesce = a } :: VirtualMachineSnapshotResource s)
 
-instance HasRemoveChildren (VirtualMachineSnapshotResource s) s Text where
+instance P.HasRemoveChildren (VirtualMachineSnapshotResource s) s Text where
     removeChildren =
         lens (_remove_children :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _remove_children = a } :: VirtualMachineSnapshotResource s)
 
-instance HasSnapshotName (VirtualMachineSnapshotResource s) s Text where
+instance P.HasSnapshotName (VirtualMachineSnapshotResource s) s Text where
     snapshotName =
         lens (_snapshot_name :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _snapshot_name = a } :: VirtualMachineSnapshotResource s)
 
-instance HasVirtualMachineUuid (VirtualMachineSnapshotResource s) s Text where
+instance P.HasVirtualMachineUuid (VirtualMachineSnapshotResource s) s Text where
     virtualMachineUuid =
         lens (_virtual_machine_uuid :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
             (\s a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource s)
 
-virtualMachineSnapshotResource :: TF.Resource TF.VSphere (VirtualMachineSnapshotResource s)
+virtualMachineSnapshotResource :: TF.Resource P.VSphere (VirtualMachineSnapshotResource s)
 virtualMachineSnapshotResource =
     TF.newResource "vsphere_virtual_machine_snapshot" $
         VirtualMachineSnapshotResource {
@@ -1253,48 +1252,48 @@ instance TF.ToHCL (VmfsDatastoreResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasDisks (VmfsDatastoreResource s) s Text where
+instance P.HasDisks (VmfsDatastoreResource s) s Text where
     disks =
         lens (_disks :: VmfsDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _disks = a } :: VmfsDatastoreResource s)
 
-instance HasFolder (VmfsDatastoreResource s) s Text where
+instance P.HasFolder (VmfsDatastoreResource s) s Text where
     folder =
         lens (_folder :: VmfsDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _folder = a } :: VmfsDatastoreResource s)
 
-instance HasHostSystemId (VmfsDatastoreResource s) s Text where
+instance P.HasHostSystemId (VmfsDatastoreResource s) s Text where
     hostSystemId =
         lens (_host_system_id :: VmfsDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _host_system_id = a } :: VmfsDatastoreResource s)
 
-instance HasName (VmfsDatastoreResource s) s Text where
+instance P.HasName (VmfsDatastoreResource s) s Text where
     name =
         lens (_name :: VmfsDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VmfsDatastoreResource s)
 
-instance HasTags (VmfsDatastoreResource s) s Text where
+instance P.HasTags (VmfsDatastoreResource s) s Text where
     tags =
         lens (_tags :: VmfsDatastoreResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
 
-instance HasComputedAccessible (VmfsDatastoreResource s) Text
+instance P.HasComputedAccessible (VmfsDatastoreResource s) Text
 
-instance HasComputedCapacity (VmfsDatastoreResource s) Text
+instance P.HasComputedCapacity (VmfsDatastoreResource s) Text
 
-instance HasComputedFreeSpace (VmfsDatastoreResource s) Text
+instance P.HasComputedFreeSpace (VmfsDatastoreResource s) Text
 
-instance HasComputedId (VmfsDatastoreResource s) Text
+instance P.HasComputedId (VmfsDatastoreResource s) Text
 
-instance HasComputedMaintenanceMode (VmfsDatastoreResource s) Text
+instance P.HasComputedMaintenanceMode (VmfsDatastoreResource s) Text
 
-instance HasComputedMultipleHostAccess (VmfsDatastoreResource s) Text
+instance P.HasComputedMultipleHostAccess (VmfsDatastoreResource s) Text
 
-instance HasComputedUncommittedSpace (VmfsDatastoreResource s) Text
+instance P.HasComputedUncommittedSpace (VmfsDatastoreResource s) Text
 
-instance HasComputedUrl (VmfsDatastoreResource s) Text
+instance P.HasComputedUrl (VmfsDatastoreResource s) Text
 
-vmfsDatastoreResource :: TF.Resource TF.VSphere (VmfsDatastoreResource s)
+vmfsDatastoreResource :: TF.Resource P.VSphere (VmfsDatastoreResource s)
 vmfsDatastoreResource =
     TF.newResource "vsphere_vmfs_datastore" $
         VmfsDatastoreResource {
@@ -1304,393 +1303,3 @@ vmfsDatastoreResource =
             , _name = TF.Nil
             , _tags = TF.Nil
             }
-
-class HasAccessMode a s b | a -> s b where
-    accessMode :: Lens' a (TF.Attribute s b)
-
-instance HasAccessMode a s b => HasAccessMode (TF.Resource p a) s b where
-    accessMode = TF.configuration . accessMode
-
-class HasAdapterType a s b | a -> s b where
-    adapterType :: Lens' a (TF.Attribute s b)
-
-instance HasAdapterType a s b => HasAdapterType (TF.Resource p a) s b where
-    adapterType = TF.configuration . adapterType
-
-class HasAssociableTypes a s b | a -> s b where
-    associableTypes :: Lens' a (TF.Attribute s b)
-
-instance HasAssociableTypes a s b => HasAssociableTypes (TF.Resource p a) s b where
-    associableTypes = TF.configuration . associableTypes
-
-class HasAutoExpand a s b | a -> s b where
-    autoExpand :: Lens' a (TF.Attribute s b)
-
-instance HasAutoExpand a s b => HasAutoExpand (TF.Resource p a) s b where
-    autoExpand = TF.configuration . autoExpand
-
-class HasCardinality a s b | a -> s b where
-    cardinality :: Lens' a (TF.Attribute s b)
-
-instance HasCardinality a s b => HasCardinality (TF.Resource p a) s b where
-    cardinality = TF.configuration . cardinality
-
-class HasCategoryId a s b | a -> s b where
-    categoryId :: Lens' a (TF.Attribute s b)
-
-instance HasCategoryId a s b => HasCategoryId (TF.Resource p a) s b where
-    categoryId = TF.configuration . categoryId
-
-class HasConsolidate a s b | a -> s b where
-    consolidate :: Lens' a (TF.Attribute s b)
-
-instance HasConsolidate a s b => HasConsolidate (TF.Resource p a) s b where
-    consolidate = TF.configuration . consolidate
-
-class HasContactDetail a s b | a -> s b where
-    contactDetail :: Lens' a (TF.Attribute s b)
-
-instance HasContactDetail a s b => HasContactDetail (TF.Resource p a) s b where
-    contactDetail = TF.configuration . contactDetail
-
-class HasContactName a s b | a -> s b where
-    contactName :: Lens' a (TF.Attribute s b)
-
-instance HasContactName a s b => HasContactName (TF.Resource p a) s b where
-    contactName = TF.configuration . contactName
-
-class HasCreateDirectories a s b | a -> s b where
-    createDirectories :: Lens' a (TF.Attribute s b)
-
-instance HasCreateDirectories a s b => HasCreateDirectories (TF.Resource p a) s b where
-    createDirectories = TF.configuration . createDirectories
-
-class HasDatacenter a s b | a -> s b where
-    datacenter :: Lens' a (TF.Attribute s b)
-
-instance HasDatacenter a s b => HasDatacenter (TF.Resource p a) s b where
-    datacenter = TF.configuration . datacenter
-
-class HasDatacenterId a s b | a -> s b where
-    datacenterId :: Lens' a (TF.Attribute s b)
-
-instance HasDatacenterId a s b => HasDatacenterId (TF.Resource p a) s b where
-    datacenterId = TF.configuration . datacenterId
-
-class HasDatastore a s b | a -> s b where
-    datastore :: Lens' a (TF.Attribute s b)
-
-instance HasDatastore a s b => HasDatastore (TF.Resource p a) s b where
-    datastore = TF.configuration . datastore
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasDestinationFile a s b | a -> s b where
-    destinationFile :: Lens' a (TF.Attribute s b)
-
-instance HasDestinationFile a s b => HasDestinationFile (TF.Resource p a) s b where
-    destinationFile = TF.configuration . destinationFile
-
-class HasDisks a s b | a -> s b where
-    disks :: Lens' a (TF.Attribute s b)
-
-instance HasDisks a s b => HasDisks (TF.Resource p a) s b where
-    disks = TF.configuration . disks
-
-class HasDistributedVirtualSwitchUuid a s b | a -> s b where
-    distributedVirtualSwitchUuid :: Lens' a (TF.Attribute s b)
-
-instance HasDistributedVirtualSwitchUuid a s b => HasDistributedVirtualSwitchUuid (TF.Resource p a) s b where
-    distributedVirtualSwitchUuid = TF.configuration . distributedVirtualSwitchUuid
-
-class HasFolder a s b | a -> s b where
-    folder :: Lens' a (TF.Attribute s b)
-
-instance HasFolder a s b => HasFolder (TF.Resource p a) s b where
-    folder = TF.configuration . folder
-
-class HasHostSystemId a s b | a -> s b where
-    hostSystemId :: Lens' a (TF.Attribute s b)
-
-instance HasHostSystemId a s b => HasHostSystemId (TF.Resource p a) s b where
-    hostSystemId = TF.configuration . hostSystemId
-
-class HasHostSystemIds a s b | a -> s b where
-    hostSystemIds :: Lens' a (TF.Attribute s b)
-
-instance HasHostSystemIds a s b => HasHostSystemIds (TF.Resource p a) s b where
-    hostSystemIds = TF.configuration . hostSystemIds
-
-class HasIpv4Address a s b | a -> s b where
-    ipv4Address :: Lens' a (TF.Attribute s b)
-
-instance HasIpv4Address a s b => HasIpv4Address (TF.Resource p a) s b where
-    ipv4Address = TF.configuration . ipv4Address
-
-class HasLabels a s b | a -> s b where
-    labels :: Lens' a (TF.Attribute s b)
-
-instance HasLabels a s b => HasLabels (TF.Resource p a) s b where
-    labels = TF.configuration . labels
-
-class HasLacpApiVersion a s b | a -> s b where
-    lacpApiVersion :: Lens' a (TF.Attribute s b)
-
-instance HasLacpApiVersion a s b => HasLacpApiVersion (TF.Resource p a) s b where
-    lacpApiVersion = TF.configuration . lacpApiVersion
-
-class HasLicenseKey a s b | a -> s b where
-    licenseKey :: Lens' a (TF.Attribute s b)
-
-instance HasLicenseKey a s b => HasLicenseKey (TF.Resource p a) s b where
-    licenseKey = TF.configuration . licenseKey
-
-class HasLinkDiscoveryOperation a s b | a -> s b where
-    linkDiscoveryOperation :: Lens' a (TF.Attribute s b)
-
-instance HasLinkDiscoveryOperation a s b => HasLinkDiscoveryOperation (TF.Resource p a) s b where
-    linkDiscoveryOperation = TF.configuration . linkDiscoveryOperation
-
-class HasLinkDiscoveryProtocol a s b | a -> s b where
-    linkDiscoveryProtocol :: Lens' a (TF.Attribute s b)
-
-instance HasLinkDiscoveryProtocol a s b => HasLinkDiscoveryProtocol (TF.Resource p a) s b where
-    linkDiscoveryProtocol = TF.configuration . linkDiscoveryProtocol
-
-class HasManagedObjectType a s b | a -> s b where
-    managedObjectType :: Lens' a (TF.Attribute s b)
-
-instance HasManagedObjectType a s b => HasManagedObjectType (TF.Resource p a) s b where
-    managedObjectType = TF.configuration . managedObjectType
-
-class HasMaxMtu a s b | a -> s b where
-    maxMtu :: Lens' a (TF.Attribute s b)
-
-instance HasMaxMtu a s b => HasMaxMtu (TF.Resource p a) s b where
-    maxMtu = TF.configuration . maxMtu
-
-class HasMemory a s b | a -> s b where
-    memory :: Lens' a (TF.Attribute s b)
-
-instance HasMemory a s b => HasMemory (TF.Resource p a) s b where
-    memory = TF.configuration . memory
-
-class HasMtu a s b | a -> s b where
-    mtu :: Lens' a (TF.Attribute s b)
-
-instance HasMtu a s b => HasMtu (TF.Resource p a) s b where
-    mtu = TF.configuration . mtu
-
-class HasMulticastFilteringMode a s b | a -> s b where
-    multicastFilteringMode :: Lens' a (TF.Attribute s b)
-
-instance HasMulticastFilteringMode a s b => HasMulticastFilteringMode (TF.Resource p a) s b where
-    multicastFilteringMode = TF.configuration . multicastFilteringMode
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasNumberOfPorts a s b | a -> s b where
-    numberOfPorts :: Lens' a (TF.Attribute s b)
-
-instance HasNumberOfPorts a s b => HasNumberOfPorts (TF.Resource p a) s b where
-    numberOfPorts = TF.configuration . numberOfPorts
-
-class HasPath a s b | a -> s b where
-    path :: Lens' a (TF.Attribute s b)
-
-instance HasPath a s b => HasPath (TF.Resource p a) s b where
-    path = TF.configuration . path
-
-class HasQuiesce a s b | a -> s b where
-    quiesce :: Lens' a (TF.Attribute s b)
-
-instance HasQuiesce a s b => HasQuiesce (TF.Resource p a) s b where
-    quiesce = TF.configuration . quiesce
-
-class HasRemoteHosts a s b | a -> s b where
-    remoteHosts :: Lens' a (TF.Attribute s b)
-
-instance HasRemoteHosts a s b => HasRemoteHosts (TF.Resource p a) s b where
-    remoteHosts = TF.configuration . remoteHosts
-
-class HasRemotePath a s b | a -> s b where
-    remotePath :: Lens' a (TF.Attribute s b)
-
-instance HasRemotePath a s b => HasRemotePath (TF.Resource p a) s b where
-    remotePath = TF.configuration . remotePath
-
-class HasRemoveChildren a s b | a -> s b where
-    removeChildren :: Lens' a (TF.Attribute s b)
-
-instance HasRemoveChildren a s b => HasRemoveChildren (TF.Resource p a) s b where
-    removeChildren = TF.configuration . removeChildren
-
-class HasResourcePoolId a s b | a -> s b where
-    resourcePoolId :: Lens' a (TF.Attribute s b)
-
-instance HasResourcePoolId a s b => HasResourcePoolId (TF.Resource p a) s b where
-    resourcePoolId = TF.configuration . resourcePoolId
-
-class HasSecurityType a s b | a -> s b where
-    securityType :: Lens' a (TF.Attribute s b)
-
-instance HasSecurityType a s b => HasSecurityType (TF.Resource p a) s b where
-    securityType = TF.configuration . securityType
-
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attribute s b)
-
-instance HasSize a s b => HasSize (TF.Resource p a) s b where
-    size = TF.configuration . size
-
-class HasSnapshotName a s b | a -> s b where
-    snapshotName :: Lens' a (TF.Attribute s b)
-
-instance HasSnapshotName a s b => HasSnapshotName (TF.Resource p a) s b where
-    snapshotName = TF.configuration . snapshotName
-
-class HasSourceDatacenter a s b | a -> s b where
-    sourceDatacenter :: Lens' a (TF.Attribute s b)
-
-instance HasSourceDatacenter a s b => HasSourceDatacenter (TF.Resource p a) s b where
-    sourceDatacenter = TF.configuration . sourceDatacenter
-
-class HasSourceDatastore a s b | a -> s b where
-    sourceDatastore :: Lens' a (TF.Attribute s b)
-
-instance HasSourceDatastore a s b => HasSourceDatastore (TF.Resource p a) s b where
-    sourceDatastore = TF.configuration . sourceDatastore
-
-class HasSourceFile a s b | a -> s b where
-    sourceFile :: Lens' a (TF.Attribute s b)
-
-instance HasSourceFile a s b => HasSourceFile (TF.Resource p a) s b where
-    sourceFile = TF.configuration . sourceFile
-
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attribute s b)
-
-instance HasTags a s b => HasTags (TF.Resource p a) s b where
-    tags = TF.configuration . tags
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasVersion a s b | a -> s b where
-    version :: Lens' a (TF.Attribute s b)
-
-instance HasVersion a s b => HasVersion (TF.Resource p a) s b where
-    version = TF.configuration . version
-
-class HasVirtualMachineUuid a s b | a -> s b where
-    virtualMachineUuid :: Lens' a (TF.Attribute s b)
-
-instance HasVirtualMachineUuid a s b => HasVirtualMachineUuid (TF.Resource p a) s b where
-    virtualMachineUuid = TF.configuration . virtualMachineUuid
-
-class HasVirtualSwitchName a s b | a -> s b where
-    virtualSwitchName :: Lens' a (TF.Attribute s b)
-
-instance HasVirtualSwitchName a s b => HasVirtualSwitchName (TF.Resource p a) s b where
-    virtualSwitchName = TF.configuration . virtualSwitchName
-
-class HasVlanId a s b | a -> s b where
-    vlanId :: Lens' a (TF.Attribute s b)
-
-instance HasVlanId a s b => HasVlanId (TF.Resource p a) s b where
-    vlanId = TF.configuration . vlanId
-
-class HasVmdkPath a s b | a -> s b where
-    vmdkPath :: Lens' a (TF.Attribute s b)
-
-instance HasVmdkPath a s b => HasVmdkPath (TF.Resource p a) s b where
-    vmdkPath = TF.configuration . vmdkPath
-
-class HasComputedAccessible a b | a -> b where
-    computedAccessible
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAccessible =
-        to (\x -> TF.Computed (TF.referenceKey x) "accessible")
-
-class HasComputedCapacity a b | a -> b where
-    computedCapacity
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCapacity =
-        to (\x -> TF.Computed (TF.referenceKey x) "capacity")
-
-class HasComputedEditionKey a b | a -> b where
-    computedEditionKey
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEditionKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "edition_key")
-
-class HasComputedFreeSpace a b | a -> b where
-    computedFreeSpace
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedFreeSpace =
-        to (\x -> TF.Computed (TF.referenceKey x) "free_space")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedMaintenanceMode a b | a -> b where
-    computedMaintenanceMode
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMaintenanceMode =
-        to (\x -> TF.Computed (TF.referenceKey x) "maintenance_mode")
-
-class HasComputedMultipleHostAccess a b | a -> b where
-    computedMultipleHostAccess
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMultipleHostAccess =
-        to (\x -> TF.Computed (TF.referenceKey x) "multiple_host_access")
-
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
-
-class HasComputedProtocolEndpoint a b | a -> b where
-    computedProtocolEndpoint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedProtocolEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "protocol_endpoint")
-
-class HasComputedTotal a b | a -> b where
-    computedTotal
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedTotal =
-        to (\x -> TF.Computed (TF.referenceKey x) "total")
-
-class HasComputedUncommittedSpace a b | a -> b where
-    computedUncommittedSpace
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUncommittedSpace =
-        to (\x -> TF.Computed (TF.referenceKey x) "uncommitted_space")
-
-class HasComputedUrl a b | a -> b where
-    computedUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "url")
-
-class HasComputedUsed a b | a -> b where
-    computedUsed
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUsed =
-        to (\x -> TF.Computed (TF.referenceKey x) "used")

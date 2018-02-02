@@ -1,7 +1,7 @@
 arguments:
   _attribute:
-    type: 'TF.DynamoTableAttributes'
+    type: 'P.DynamoTableAttributes'
   _read_capacity:
-    type: 'TF.Natural'
+    type: 'P.Natural'
   _write_capacity:
-    type: 'TF.Natural'
+    type: 'P.Natural'

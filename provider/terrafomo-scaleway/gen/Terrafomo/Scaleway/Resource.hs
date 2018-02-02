@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Scaleway.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -45,52 +42,54 @@ module Terrafomo.Scaleway.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAction (..)
-    , HasBootscript (..)
-    , HasDescription (..)
-    , HasDirection (..)
-    , HasDynamicIpRequired (..)
-    , HasEnableIpv6 (..)
-    , HasImage (..)
-    , HasIpRange (..)
-    , HasName (..)
-    , HasPort (..)
-    , HasProtocol (..)
-    , HasPublicIpv6 (..)
-    , HasSecurityGroup (..)
-    , HasServer (..)
-    , HasSizeInGb (..)
-    , HasState (..)
-    , HasStateDetail (..)
-    , HasTags (..)
-    , HasType' (..)
-    , HasVolume (..)
+    , P.HasAction (..)
+    , P.HasBootscript (..)
+    , P.HasDescription (..)
+    , P.HasDirection (..)
+    , P.HasDynamicIpRequired (..)
+    , P.HasEnableIpv6 (..)
+    , P.HasImage (..)
+    , P.HasIpRange (..)
+    , P.HasName (..)
+    , P.HasPort (..)
+    , P.HasProtocol (..)
+    , P.HasPublicIpv6 (..)
+    , P.HasSecurityGroup (..)
+    , P.HasServer (..)
+    , P.HasSizeInGb (..)
+    , P.HasState (..)
+    , P.HasStateDetail (..)
+    , P.HasTags (..)
+    , P.HasType' (..)
+    , P.HasVolume (..)
 
     -- ** Computed Attributes
-    , HasComputedId (..)
-    , HasComputedIp (..)
+    , P.HasComputedId (..)
+    , P.HasComputedIp (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                   as TF
-import qualified GHC.Base                    as TF
-import qualified Numeric.Natural             as TF
-import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.IP                as TF
-import qualified Terrafomo.Meta              as TF
-import qualified Terrafomo.Name              as TF
-import qualified Terrafomo.Resource          as TF
-import qualified Terrafomo.Resource          as TF
-import qualified Terrafomo.Scaleway.Provider as TF
-import qualified Terrafomo.Scaleway.Types    as TF
+import qualified Data.Word                   as P
+import qualified GHC.Base                    as P
+import qualified Numeric.Natural             as P
+import qualified Terrafomo.IP                as P
+import qualified Terrafomo.Scaleway.Lens     as P
+import qualified Terrafomo.Scaleway.Provider as P
+import           Terrafomo.Scaleway.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @scaleway_ip@ Scaleway resource.
 
@@ -108,16 +107,16 @@ instance TF.ToHCL (IpResource s) where
         [ TF.attribute "server" _server
         ]
 
-instance HasServer (IpResource s) s Text where
+instance P.HasServer (IpResource s) s Text where
     server =
         lens (_server :: IpResource s -> TF.Attribute s Text)
             (\s a -> s { _server = a } :: IpResource s)
 
-instance HasComputedId (IpResource s) Text
+instance P.HasComputedId (IpResource s) Text
 
-instance HasComputedIp (IpResource s) Text
+instance P.HasComputedIp (IpResource s) Text
 
-ipResource :: TF.Resource TF.Scaleway (IpResource s)
+ipResource :: TF.Resource P.Scaleway (IpResource s)
 ipResource =
     TF.newResource "scaleway_ip" $
         IpResource {
@@ -143,19 +142,19 @@ instance TF.ToHCL (SecurityGroupResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDescription (SecurityGroupResource s) s Text where
+instance P.HasDescription (SecurityGroupResource s) s Text where
     description =
         lens (_description :: SecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: SecurityGroupResource s)
 
-instance HasName (SecurityGroupResource s) s Text where
+instance P.HasName (SecurityGroupResource s) s Text where
     name =
         lens (_name :: SecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SecurityGroupResource s)
 
-instance HasComputedId (SecurityGroupResource s) Text
+instance P.HasComputedId (SecurityGroupResource s) Text
 
-securityGroupResource :: TF.Resource TF.Scaleway (SecurityGroupResource s)
+securityGroupResource :: TF.Resource P.Scaleway (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "scaleway_security_group" $
         SecurityGroupResource {
@@ -194,39 +193,39 @@ instance TF.ToHCL (SecurityGroupRuleResource s) where
         , TF.attribute "security_group" _security_group
         ]
 
-instance HasAction (SecurityGroupRuleResource s) s Text where
+instance P.HasAction (SecurityGroupRuleResource s) s Text where
     action =
         lens (_action :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _action = a } :: SecurityGroupRuleResource s)
 
-instance HasDirection (SecurityGroupRuleResource s) s Text where
+instance P.HasDirection (SecurityGroupRuleResource s) s Text where
     direction =
         lens (_direction :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _direction = a } :: SecurityGroupRuleResource s)
 
-instance HasIpRange (SecurityGroupRuleResource s) s Text where
+instance P.HasIpRange (SecurityGroupRuleResource s) s Text where
     ipRange =
         lens (_ip_range :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_range = a } :: SecurityGroupRuleResource s)
 
-instance HasPort (SecurityGroupRuleResource s) s Text where
+instance P.HasPort (SecurityGroupRuleResource s) s Text where
     port =
         lens (_port :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _port = a } :: SecurityGroupRuleResource s)
 
-instance HasProtocol (SecurityGroupRuleResource s) s Text where
+instance P.HasProtocol (SecurityGroupRuleResource s) s Text where
     protocol =
         lens (_protocol :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
 
-instance HasSecurityGroup (SecurityGroupRuleResource s) s Text where
+instance P.HasSecurityGroup (SecurityGroupRuleResource s) s Text where
     securityGroup =
         lens (_security_group :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _security_group = a } :: SecurityGroupRuleResource s)
 
-instance HasComputedId (SecurityGroupRuleResource s) Text
+instance P.HasComputedId (SecurityGroupRuleResource s) Text
 
-securityGroupRuleResource :: TF.Resource TF.Scaleway (SecurityGroupRuleResource s)
+securityGroupRuleResource :: TF.Resource P.Scaleway (SecurityGroupRuleResource s)
 securityGroupRuleResource =
     TF.newResource "scaleway_security_group_rule" $
         SecurityGroupRuleResource {
@@ -287,67 +286,67 @@ instance TF.ToHCL (ServerResource s) where
         , TF.attribute "volume" _volume
         ]
 
-instance HasBootscript (ServerResource s) s Text where
+instance P.HasBootscript (ServerResource s) s Text where
     bootscript =
         lens (_bootscript :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _bootscript = a } :: ServerResource s)
 
-instance HasDynamicIpRequired (ServerResource s) s Text where
+instance P.HasDynamicIpRequired (ServerResource s) s Text where
     dynamicIpRequired =
         lens (_dynamic_ip_required :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _dynamic_ip_required = a } :: ServerResource s)
 
-instance HasEnableIpv6 (ServerResource s) s Text where
+instance P.HasEnableIpv6 (ServerResource s) s Text where
     enableIpv6 =
         lens (_enable_ipv6 :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _enable_ipv6 = a } :: ServerResource s)
 
-instance HasImage (ServerResource s) s Text where
+instance P.HasImage (ServerResource s) s Text where
     image =
         lens (_image :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _image = a } :: ServerResource s)
 
-instance HasName (ServerResource s) s Text where
+instance P.HasName (ServerResource s) s Text where
     name =
         lens (_name :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ServerResource s)
 
-instance HasPublicIpv6 (ServerResource s) s Text where
+instance P.HasPublicIpv6 (ServerResource s) s Text where
     publicIpv6 =
         lens (_public_ipv6 :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _public_ipv6 = a } :: ServerResource s)
 
-instance HasSecurityGroup (ServerResource s) s Text where
+instance P.HasSecurityGroup (ServerResource s) s Text where
     securityGroup =
         lens (_security_group :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _security_group = a } :: ServerResource s)
 
-instance HasState (ServerResource s) s Text where
+instance P.HasState (ServerResource s) s Text where
     state =
         lens (_state :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _state = a } :: ServerResource s)
 
-instance HasStateDetail (ServerResource s) s Text where
+instance P.HasStateDetail (ServerResource s) s Text where
     stateDetail =
         lens (_state_detail :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _state_detail = a } :: ServerResource s)
 
-instance HasTags (ServerResource s) s Text where
+instance P.HasTags (ServerResource s) s Text where
     tags =
         lens (_tags :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: ServerResource s)
 
-instance HasType' (ServerResource s) s Text where
+instance P.HasType' (ServerResource s) s Text where
     type' =
         lens (_type' :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: ServerResource s)
 
-instance HasVolume (ServerResource s) s Text where
+instance P.HasVolume (ServerResource s) s Text where
     volume =
         lens (_volume :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _volume = a } :: ServerResource s)
 
-serverResource :: TF.Resource TF.Scaleway (ServerResource s)
+serverResource :: TF.Resource P.Scaleway (ServerResource s)
 serverResource =
     TF.newResource "scaleway_server" $
         ServerResource {
@@ -384,19 +383,19 @@ instance TF.ToHCL (VolumeAttachmentResource s) where
         , TF.attribute "volume" _volume
         ]
 
-instance HasServer (VolumeAttachmentResource s) s Text where
+instance P.HasServer (VolumeAttachmentResource s) s Text where
     server =
         lens (_server :: VolumeAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _server = a } :: VolumeAttachmentResource s)
 
-instance HasVolume (VolumeAttachmentResource s) s Text where
+instance P.HasVolume (VolumeAttachmentResource s) s Text where
     volume =
         lens (_volume :: VolumeAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
 
-instance HasComputedId (VolumeAttachmentResource s) Text
+instance P.HasComputedId (VolumeAttachmentResource s) Text
 
-volumeAttachmentResource :: TF.Resource TF.Scaleway (VolumeAttachmentResource s)
+volumeAttachmentResource :: TF.Resource P.Scaleway (VolumeAttachmentResource s)
 volumeAttachmentResource =
     TF.newResource "scaleway_volume_attachment" $
         VolumeAttachmentResource {
@@ -429,29 +428,29 @@ instance TF.ToHCL (VolumeResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasName (VolumeResource s) s Text where
+instance P.HasName (VolumeResource s) s Text where
     name =
         lens (_name :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VolumeResource s)
 
-instance HasServer (VolumeResource s) s Text where
+instance P.HasServer (VolumeResource s) s Text where
     server =
         lens (_server :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _server = a } :: VolumeResource s)
 
-instance HasSizeInGb (VolumeResource s) s Text where
+instance P.HasSizeInGb (VolumeResource s) s Text where
     sizeInGb =
         lens (_size_in_gb :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _size_in_gb = a } :: VolumeResource s)
 
-instance HasType' (VolumeResource s) s Text where
+instance P.HasType' (VolumeResource s) s Text where
     type' =
         lens (_type' :: VolumeResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: VolumeResource s)
 
-instance HasComputedId (VolumeResource s) Text
+instance P.HasComputedId (VolumeResource s) Text
 
-volumeResource :: TF.Resource TF.Scaleway (VolumeResource s)
+volumeResource :: TF.Resource P.Scaleway (VolumeResource s)
 volumeResource =
     TF.newResource "scaleway_volume" $
         VolumeResource {
@@ -460,135 +459,3 @@ volumeResource =
             , _size_in_gb = TF.Nil
             , _type' = TF.Nil
             }
-
-class HasAction a s b | a -> s b where
-    action :: Lens' a (TF.Attribute s b)
-
-instance HasAction a s b => HasAction (TF.Resource p a) s b where
-    action = TF.configuration . action
-
-class HasBootscript a s b | a -> s b where
-    bootscript :: Lens' a (TF.Attribute s b)
-
-instance HasBootscript a s b => HasBootscript (TF.Resource p a) s b where
-    bootscript = TF.configuration . bootscript
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasDirection a s b | a -> s b where
-    direction :: Lens' a (TF.Attribute s b)
-
-instance HasDirection a s b => HasDirection (TF.Resource p a) s b where
-    direction = TF.configuration . direction
-
-class HasDynamicIpRequired a s b | a -> s b where
-    dynamicIpRequired :: Lens' a (TF.Attribute s b)
-
-instance HasDynamicIpRequired a s b => HasDynamicIpRequired (TF.Resource p a) s b where
-    dynamicIpRequired = TF.configuration . dynamicIpRequired
-
-class HasEnableIpv6 a s b | a -> s b where
-    enableIpv6 :: Lens' a (TF.Attribute s b)
-
-instance HasEnableIpv6 a s b => HasEnableIpv6 (TF.Resource p a) s b where
-    enableIpv6 = TF.configuration . enableIpv6
-
-class HasImage a s b | a -> s b where
-    image :: Lens' a (TF.Attribute s b)
-
-instance HasImage a s b => HasImage (TF.Resource p a) s b where
-    image = TF.configuration . image
-
-class HasIpRange a s b | a -> s b where
-    ipRange :: Lens' a (TF.Attribute s b)
-
-instance HasIpRange a s b => HasIpRange (TF.Resource p a) s b where
-    ipRange = TF.configuration . ipRange
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasPort a s b | a -> s b where
-    port :: Lens' a (TF.Attribute s b)
-
-instance HasPort a s b => HasPort (TF.Resource p a) s b where
-    port = TF.configuration . port
-
-class HasProtocol a s b | a -> s b where
-    protocol :: Lens' a (TF.Attribute s b)
-
-instance HasProtocol a s b => HasProtocol (TF.Resource p a) s b where
-    protocol = TF.configuration . protocol
-
-class HasPublicIpv6 a s b | a -> s b where
-    publicIpv6 :: Lens' a (TF.Attribute s b)
-
-instance HasPublicIpv6 a s b => HasPublicIpv6 (TF.Resource p a) s b where
-    publicIpv6 = TF.configuration . publicIpv6
-
-class HasSecurityGroup a s b | a -> s b where
-    securityGroup :: Lens' a (TF.Attribute s b)
-
-instance HasSecurityGroup a s b => HasSecurityGroup (TF.Resource p a) s b where
-    securityGroup = TF.configuration . securityGroup
-
-class HasServer a s b | a -> s b where
-    server :: Lens' a (TF.Attribute s b)
-
-instance HasServer a s b => HasServer (TF.Resource p a) s b where
-    server = TF.configuration . server
-
-class HasSizeInGb a s b | a -> s b where
-    sizeInGb :: Lens' a (TF.Attribute s b)
-
-instance HasSizeInGb a s b => HasSizeInGb (TF.Resource p a) s b where
-    sizeInGb = TF.configuration . sizeInGb
-
-class HasState a s b | a -> s b where
-    state :: Lens' a (TF.Attribute s b)
-
-instance HasState a s b => HasState (TF.Resource p a) s b where
-    state = TF.configuration . state
-
-class HasStateDetail a s b | a -> s b where
-    stateDetail :: Lens' a (TF.Attribute s b)
-
-instance HasStateDetail a s b => HasStateDetail (TF.Resource p a) s b where
-    stateDetail = TF.configuration . stateDetail
-
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attribute s b)
-
-instance HasTags a s b => HasTags (TF.Resource p a) s b where
-    tags = TF.configuration . tags
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasVolume a s b | a -> s b where
-    volume :: Lens' a (TF.Attribute s b)
-
-instance HasVolume a s b => HasVolume (TF.Resource p a) s b where
-    volume = TF.configuration . volume
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedIp a b | a -> b where
-    computedIp
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip")

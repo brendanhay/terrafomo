@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.VSphere.DataSource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -60,48 +57,50 @@ module Terrafomo.VSphere.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasCategoryId (..)
-    , HasDatacenterId (..)
-    , HasFilter (..)
-    , HasHostSystemId (..)
-    , HasName (..)
-    , HasRescan (..)
-    , HasScsiControllerScanCount (..)
+    , P.HasCategoryId (..)
+    , P.HasDatacenterId (..)
+    , P.HasFilter (..)
+    , P.HasHostSystemId (..)
+    , P.HasName (..)
+    , P.HasRescan (..)
+    , P.HasScsiControllerScanCount (..)
 
     -- ** Computed Attributes
-    , HasComputedAlternateGuestName (..)
-    , HasComputedDisks (..)
-    , HasComputedEagerlyScrub (..)
-    , HasComputedGuestId (..)
-    , HasComputedId (..)
-    , HasComputedNetworkInterfaceTypes (..)
-    , HasComputedScsiType (..)
-    , HasComputedSize (..)
-    , HasComputedThinProvisioned (..)
-    , HasComputedType' (..)
-    , HasComputedUplinks (..)
+    , P.HasComputedAlternateGuestName (..)
+    , P.HasComputedDisks (..)
+    , P.HasComputedEagerlyScrub (..)
+    , P.HasComputedGuestId (..)
+    , P.HasComputedId (..)
+    , P.HasComputedNetworkInterfaceTypes (..)
+    , P.HasComputedScsiType (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedThinProvisioned (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUplinks (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                  as TF
-import qualified GHC.Base                   as TF
-import qualified Numeric.Natural            as TF
-import qualified Terrafomo.Attribute        as TF
-import qualified Terrafomo.DataSource       as TF
-import qualified Terrafomo.HCL              as TF
-import qualified Terrafomo.IP               as TF
-import qualified Terrafomo.Meta             as TF
-import qualified Terrafomo.Name             as TF
-import qualified Terrafomo.Resource         as TF
-import qualified Terrafomo.VSphere.Provider as TF
-import qualified Terrafomo.VSphere.Types    as TF
+import qualified Data.Word                  as P
+import qualified GHC.Base                   as P
+import qualified Numeric.Natural            as P
+import qualified Terrafomo.IP               as P
+import qualified Terrafomo.VSphere.Lens     as P
+import qualified Terrafomo.VSphere.Provider as P
+import           Terrafomo.VSphere.Types    as P
+
+import qualified Terrafomo.Attribute  as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL        as TF
 
 {- | The @vsphere_custom_attribute@ VSphere datasource.
 
@@ -123,12 +122,12 @@ instance TF.ToHCL (CustomAttributeData s) where
         [ TF.attribute "name" _name
         ]
 
-instance HasName (CustomAttributeData s) s Text where
+instance P.HasName (CustomAttributeData s) s Text where
     name =
         lens (_name :: CustomAttributeData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CustomAttributeData s)
 
-customAttributeData :: TF.DataSource TF.VSphere (CustomAttributeData s)
+customAttributeData :: TF.DataSource P.VSphere (CustomAttributeData s)
 customAttributeData =
     TF.newDataSource "vsphere_custom_attribute" $
         CustomAttributeData {
@@ -152,12 +151,12 @@ instance TF.ToHCL (DatacenterData s) where
         [ TF.attribute "name" _name
         ]
 
-instance HasName (DatacenterData s) s Text where
+instance P.HasName (DatacenterData s) s Text where
     name =
         lens (_name :: DatacenterData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DatacenterData s)
 
-datacenterData :: TF.DataSource TF.VSphere (DatacenterData s)
+datacenterData :: TF.DataSource P.VSphere (DatacenterData s)
 datacenterData =
     TF.newDataSource "vsphere_datacenter" $
         DatacenterData {
@@ -184,17 +183,17 @@ instance TF.ToHCL (DatastoreData s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDatacenterId (DatastoreData s) s Text where
+instance P.HasDatacenterId (DatastoreData s) s Text where
     datacenterId =
         lens (_datacenter_id :: DatastoreData s -> TF.Attribute s Text)
             (\s a -> s { _datacenter_id = a } :: DatastoreData s)
 
-instance HasName (DatastoreData s) s Text where
+instance P.HasName (DatastoreData s) s Text where
     name =
         lens (_name :: DatastoreData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DatastoreData s)
 
-datastoreData :: TF.DataSource TF.VSphere (DatastoreData s)
+datastoreData :: TF.DataSource P.VSphere (DatastoreData s)
 datastoreData =
     TF.newDataSource "vsphere_datastore" $
         DatastoreData {
@@ -224,21 +223,21 @@ instance TF.ToHCL (DistributedVirtualSwitchData s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDatacenterId (DistributedVirtualSwitchData s) s Text where
+instance P.HasDatacenterId (DistributedVirtualSwitchData s) s Text where
     datacenterId =
         lens (_datacenter_id :: DistributedVirtualSwitchData s -> TF.Attribute s Text)
             (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchData s)
 
-instance HasName (DistributedVirtualSwitchData s) s Text where
+instance P.HasName (DistributedVirtualSwitchData s) s Text where
     name =
         lens (_name :: DistributedVirtualSwitchData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DistributedVirtualSwitchData s)
 
-instance HasComputedId (DistributedVirtualSwitchData s) Text
+instance P.HasComputedId (DistributedVirtualSwitchData s) Text
 
-instance HasComputedUplinks (DistributedVirtualSwitchData s) Text
+instance P.HasComputedUplinks (DistributedVirtualSwitchData s) Text
 
-distributedVirtualSwitchData :: TF.DataSource TF.VSphere (DistributedVirtualSwitchData s)
+distributedVirtualSwitchData :: TF.DataSource P.VSphere (DistributedVirtualSwitchData s)
 distributedVirtualSwitchData =
     TF.newDataSource "vsphere_distributed_virtual_switch" $
         DistributedVirtualSwitchData {
@@ -265,17 +264,17 @@ instance TF.ToHCL (HostData s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDatacenterId (HostData s) s Text where
+instance P.HasDatacenterId (HostData s) s Text where
     datacenterId =
         lens (_datacenter_id :: HostData s -> TF.Attribute s Text)
             (\s a -> s { _datacenter_id = a } :: HostData s)
 
-instance HasName (HostData s) s Text where
+instance P.HasName (HostData s) s Text where
     name =
         lens (_name :: HostData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: HostData s)
 
-hostData :: TF.DataSource TF.VSphere (HostData s)
+hostData :: TF.DataSource P.VSphere (HostData s)
 hostData =
     TF.newDataSource "vsphere_host" $
         HostData {
@@ -304,21 +303,21 @@ instance TF.ToHCL (NetworkData s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDatacenterId (NetworkData s) s Text where
+instance P.HasDatacenterId (NetworkData s) s Text where
     datacenterId =
         lens (_datacenter_id :: NetworkData s -> TF.Attribute s Text)
             (\s a -> s { _datacenter_id = a } :: NetworkData s)
 
-instance HasName (NetworkData s) s Text where
+instance P.HasName (NetworkData s) s Text where
     name =
         lens (_name :: NetworkData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NetworkData s)
 
-instance HasComputedId (NetworkData s) Text
+instance P.HasComputedId (NetworkData s) Text
 
-instance HasComputedType' (NetworkData s) Text
+instance P.HasComputedType' (NetworkData s) Text
 
-networkData :: TF.DataSource TF.VSphere (NetworkData s)
+networkData :: TF.DataSource P.VSphere (NetworkData s)
 networkData =
     TF.newDataSource "vsphere_network" $
         NetworkData {
@@ -346,17 +345,17 @@ instance TF.ToHCL (ResourcePoolData s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDatacenterId (ResourcePoolData s) s Text where
+instance P.HasDatacenterId (ResourcePoolData s) s Text where
     datacenterId =
         lens (_datacenter_id :: ResourcePoolData s -> TF.Attribute s Text)
             (\s a -> s { _datacenter_id = a } :: ResourcePoolData s)
 
-instance HasName (ResourcePoolData s) s Text where
+instance P.HasName (ResourcePoolData s) s Text where
     name =
         lens (_name :: ResourcePoolData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ResourcePoolData s)
 
-resourcePoolData :: TF.DataSource TF.VSphere (ResourcePoolData s)
+resourcePoolData :: TF.DataSource P.VSphere (ResourcePoolData s)
 resourcePoolData =
     TF.newDataSource "vsphere_resource_pool" $
         ResourcePoolData {
@@ -384,12 +383,12 @@ instance TF.ToHCL (TagCategoryData s) where
         [ TF.attribute "name" _name
         ]
 
-instance HasName (TagCategoryData s) s Text where
+instance P.HasName (TagCategoryData s) s Text where
     name =
         lens (_name :: TagCategoryData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TagCategoryData s)
 
-tagCategoryData :: TF.DataSource TF.VSphere (TagCategoryData s)
+tagCategoryData :: TF.DataSource P.VSphere (TagCategoryData s)
 tagCategoryData =
     TF.newDataSource "vsphere_tag_category" $
         TagCategoryData {
@@ -419,17 +418,17 @@ instance TF.ToHCL (TagData s) where
         , TF.attribute "name" _name
         ]
 
-instance HasCategoryId (TagData s) s Text where
+instance P.HasCategoryId (TagData s) s Text where
     categoryId =
         lens (_category_id :: TagData s -> TF.Attribute s Text)
             (\s a -> s { _category_id = a } :: TagData s)
 
-instance HasName (TagData s) s Text where
+instance P.HasName (TagData s) s Text where
     name =
         lens (_name :: TagData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TagData s)
 
-tagData :: TF.DataSource TF.VSphere (TagData s)
+tagData :: TF.DataSource P.VSphere (TagData s)
 tagData =
     TF.newDataSource "vsphere_tag" $
         TagData {
@@ -461,40 +460,40 @@ instance TF.ToHCL (VirtualMachineData s) where
         , TF.attribute "scsi_controller_scan_count" _scsi_controller_scan_count
         ]
 
-instance HasDatacenterId (VirtualMachineData s) s Text where
+instance P.HasDatacenterId (VirtualMachineData s) s Text where
     datacenterId =
         lens (_datacenter_id :: VirtualMachineData s -> TF.Attribute s Text)
             (\s a -> s { _datacenter_id = a } :: VirtualMachineData s)
 
-instance HasName (VirtualMachineData s) s Text where
+instance P.HasName (VirtualMachineData s) s Text where
     name =
         lens (_name :: VirtualMachineData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VirtualMachineData s)
 
-instance HasScsiControllerScanCount (VirtualMachineData s) s Text where
+instance P.HasScsiControllerScanCount (VirtualMachineData s) s Text where
     scsiControllerScanCount =
         lens (_scsi_controller_scan_count :: VirtualMachineData s -> TF.Attribute s Text)
             (\s a -> s { _scsi_controller_scan_count = a } :: VirtualMachineData s)
 
-instance HasComputedAlternateGuestName (VirtualMachineData s) Text
+instance P.HasComputedAlternateGuestName (VirtualMachineData s) Text
 
-instance HasComputedDisks (VirtualMachineData s) Text
+instance P.HasComputedDisks (VirtualMachineData s) Text
 
-instance HasComputedEagerlyScrub (VirtualMachineData s) Text
+instance P.HasComputedEagerlyScrub (VirtualMachineData s) Text
 
-instance HasComputedGuestId (VirtualMachineData s) Text
+instance P.HasComputedGuestId (VirtualMachineData s) Text
 
-instance HasComputedId (VirtualMachineData s) Text
+instance P.HasComputedId (VirtualMachineData s) Text
 
-instance HasComputedNetworkInterfaceTypes (VirtualMachineData s) Text
+instance P.HasComputedNetworkInterfaceTypes (VirtualMachineData s) Text
 
-instance HasComputedScsiType (VirtualMachineData s) Text
+instance P.HasComputedScsiType (VirtualMachineData s) Text
 
-instance HasComputedSize (VirtualMachineData s) Text
+instance P.HasComputedSize (VirtualMachineData s) Text
 
-instance HasComputedThinProvisioned (VirtualMachineData s) Text
+instance P.HasComputedThinProvisioned (VirtualMachineData s) Text
 
-virtualMachineData :: TF.DataSource TF.VSphere (VirtualMachineData s)
+virtualMachineData :: TF.DataSource P.VSphere (VirtualMachineData s)
 virtualMachineData =
     TF.newDataSource "vsphere_virtual_machine" $
         VirtualMachineData {
@@ -526,24 +525,24 @@ instance TF.ToHCL (VmfsDisksData s) where
         , TF.attribute "rescan" _rescan
         ]
 
-instance HasFilter (VmfsDisksData s) s Text where
+instance P.HasFilter (VmfsDisksData s) s Text where
     filter =
         lens (_filter :: VmfsDisksData s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: VmfsDisksData s)
 
-instance HasHostSystemId (VmfsDisksData s) s Text where
+instance P.HasHostSystemId (VmfsDisksData s) s Text where
     hostSystemId =
         lens (_host_system_id :: VmfsDisksData s -> TF.Attribute s Text)
             (\s a -> s { _host_system_id = a } :: VmfsDisksData s)
 
-instance HasRescan (VmfsDisksData s) s Text where
+instance P.HasRescan (VmfsDisksData s) s Text where
     rescan =
         lens (_rescan :: VmfsDisksData s -> TF.Attribute s Text)
             (\s a -> s { _rescan = a } :: VmfsDisksData s)
 
-instance HasComputedDisks (VmfsDisksData s) Text
+instance P.HasComputedDisks (VmfsDisksData s) Text
 
-vmfsDisksData :: TF.DataSource TF.VSphere (VmfsDisksData s)
+vmfsDisksData :: TF.DataSource P.VSphere (VmfsDisksData s)
 vmfsDisksData =
     TF.newDataSource "vsphere_vmfs_disks" $
         VmfsDisksData {
@@ -551,111 +550,3 @@ vmfsDisksData =
             , _host_system_id = TF.Nil
             , _rescan = TF.Nil
             }
-
-class HasCategoryId a s b | a -> s b where
-    categoryId :: Lens' a (TF.Attribute s b)
-
-instance HasCategoryId a s b => HasCategoryId (TF.DataSource p a) s b where
-    categoryId = TF.configuration . categoryId
-
-class HasDatacenterId a s b | a -> s b where
-    datacenterId :: Lens' a (TF.Attribute s b)
-
-instance HasDatacenterId a s b => HasDatacenterId (TF.DataSource p a) s b where
-    datacenterId = TF.configuration . datacenterId
-
-class HasFilter a s b | a -> s b where
-    filter :: Lens' a (TF.Attribute s b)
-
-instance HasFilter a s b => HasFilter (TF.DataSource p a) s b where
-    filter = TF.configuration . filter
-
-class HasHostSystemId a s b | a -> s b where
-    hostSystemId :: Lens' a (TF.Attribute s b)
-
-instance HasHostSystemId a s b => HasHostSystemId (TF.DataSource p a) s b where
-    hostSystemId = TF.configuration . hostSystemId
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.DataSource p a) s b where
-    name = TF.configuration . name
-
-class HasRescan a s b | a -> s b where
-    rescan :: Lens' a (TF.Attribute s b)
-
-instance HasRescan a s b => HasRescan (TF.DataSource p a) s b where
-    rescan = TF.configuration . rescan
-
-class HasScsiControllerScanCount a s b | a -> s b where
-    scsiControllerScanCount :: Lens' a (TF.Attribute s b)
-
-instance HasScsiControllerScanCount a s b => HasScsiControllerScanCount (TF.DataSource p a) s b where
-    scsiControllerScanCount = TF.configuration . scsiControllerScanCount
-
-class HasComputedAlternateGuestName a b | a -> b where
-    computedAlternateGuestName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAlternateGuestName =
-        to (\x -> TF.Computed (TF.referenceKey x) "alternate_guest_name")
-
-class HasComputedDisks a b | a -> b where
-    computedDisks
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDisks =
-        to (\x -> TF.Computed (TF.referenceKey x) "disks")
-
-class HasComputedEagerlyScrub a b | a -> b where
-    computedEagerlyScrub
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEagerlyScrub =
-        to (\x -> TF.Computed (TF.referenceKey x) "eagerly_scrub")
-
-class HasComputedGuestId a b | a -> b where
-    computedGuestId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedGuestId =
-        to (\x -> TF.Computed (TF.referenceKey x) "guest_id")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedNetworkInterfaceTypes a b | a -> b where
-    computedNetworkInterfaceTypes
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNetworkInterfaceTypes =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_interface_types")
-
-class HasComputedScsiType a b | a -> b where
-    computedScsiType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedScsiType =
-        to (\x -> TF.Computed (TF.referenceKey x) "scsi_type")
-
-class HasComputedSize a b | a -> b where
-    computedSize
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "size")
-
-class HasComputedThinProvisioned a b | a -> b where
-    computedThinProvisioned
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedThinProvisioned =
-        to (\x -> TF.Computed (TF.referenceKey x) "thin_provisioned")
-
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
-
-class HasComputedUplinks a b | a -> b where
-    computedUplinks
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUplinks =
-        to (\x -> TF.Computed (TF.referenceKey x) "uplinks")

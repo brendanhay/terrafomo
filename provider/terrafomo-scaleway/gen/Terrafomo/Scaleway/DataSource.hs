@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Scaleway.DataSource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -33,41 +30,43 @@ module Terrafomo.Scaleway.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasArchitecture (..)
-    , HasName (..)
-    , HasNameFilter (..)
+    , P.HasArchitecture (..)
+    , P.HasName (..)
+    , P.HasNameFilter (..)
 
     -- ** Computed Attributes
-    , HasComputedArchitecture (..)
-    , HasComputedBootCmdArgs (..)
-    , HasComputedCreationDate (..)
-    , HasComputedDtb (..)
-    , HasComputedInitrd (..)
-    , HasComputedKernel (..)
-    , HasComputedOrganization (..)
-    , HasComputedPublic (..)
+    , P.HasComputedArchitecture (..)
+    , P.HasComputedBootCmdArgs (..)
+    , P.HasComputedCreationDate (..)
+    , P.HasComputedDtb (..)
+    , P.HasComputedInitrd (..)
+    , P.HasComputedKernel (..)
+    , P.HasComputedOrganization (..)
+    , P.HasComputedPublic (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                   as TF
-import qualified GHC.Base                    as TF
-import qualified Numeric.Natural             as TF
-import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.DataSource        as TF
-import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.IP                as TF
-import qualified Terrafomo.Meta              as TF
-import qualified Terrafomo.Name              as TF
-import qualified Terrafomo.Resource          as TF
-import qualified Terrafomo.Scaleway.Provider as TF
-import qualified Terrafomo.Scaleway.Types    as TF
+import qualified Data.Word                   as P
+import qualified GHC.Base                    as P
+import qualified Numeric.Natural             as P
+import qualified Terrafomo.IP                as P
+import qualified Terrafomo.Scaleway.Lens     as P
+import qualified Terrafomo.Scaleway.Provider as P
+import           Terrafomo.Scaleway.Types    as P
+
+import qualified Terrafomo.Attribute  as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL        as TF
 
 {- | The @scaleway_bootscript@ Scaleway datasource.
 
@@ -90,36 +89,36 @@ instance TF.ToHCL (BootscriptData s) where
         , TF.attribute "name_filter" _name_filter
         ]
 
-instance HasArchitecture (BootscriptData s) s Text where
+instance P.HasArchitecture (BootscriptData s) s Text where
     architecture =
         lens (_architecture :: BootscriptData s -> TF.Attribute s Text)
             (\s a -> s { _architecture = a } :: BootscriptData s)
 
-instance HasName (BootscriptData s) s Text where
+instance P.HasName (BootscriptData s) s Text where
     name =
         lens (_name :: BootscriptData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: BootscriptData s)
 
-instance HasNameFilter (BootscriptData s) s Text where
+instance P.HasNameFilter (BootscriptData s) s Text where
     nameFilter =
         lens (_name_filter :: BootscriptData s -> TF.Attribute s Text)
             (\s a -> s { _name_filter = a } :: BootscriptData s)
 
-instance HasComputedArchitecture (BootscriptData s) Text
+instance P.HasComputedArchitecture (BootscriptData s) Text
 
-instance HasComputedBootCmdArgs (BootscriptData s) Text
+instance P.HasComputedBootCmdArgs (BootscriptData s) Text
 
-instance HasComputedDtb (BootscriptData s) Text
+instance P.HasComputedDtb (BootscriptData s) Text
 
-instance HasComputedInitrd (BootscriptData s) Text
+instance P.HasComputedInitrd (BootscriptData s) Text
 
-instance HasComputedKernel (BootscriptData s) Text
+instance P.HasComputedKernel (BootscriptData s) Text
 
-instance HasComputedOrganization (BootscriptData s) Text
+instance P.HasComputedOrganization (BootscriptData s) Text
 
-instance HasComputedPublic (BootscriptData s) Text
+instance P.HasComputedPublic (BootscriptData s) Text
 
-bootscriptData :: TF.DataSource TF.Scaleway (BootscriptData s)
+bootscriptData :: TF.DataSource P.Scaleway (BootscriptData s)
 bootscriptData =
     TF.newDataSource "scaleway_bootscript" $
         BootscriptData {
@@ -149,30 +148,30 @@ instance TF.ToHCL (ImageData s) where
         , TF.attribute "name_filter" _name_filter
         ]
 
-instance HasArchitecture (ImageData s) s Text where
+instance P.HasArchitecture (ImageData s) s Text where
     architecture =
         lens (_architecture :: ImageData s -> TF.Attribute s Text)
             (\s a -> s { _architecture = a } :: ImageData s)
 
-instance HasName (ImageData s) s Text where
+instance P.HasName (ImageData s) s Text where
     name =
         lens (_name :: ImageData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ImageData s)
 
-instance HasNameFilter (ImageData s) s Text where
+instance P.HasNameFilter (ImageData s) s Text where
     nameFilter =
         lens (_name_filter :: ImageData s -> TF.Attribute s Text)
             (\s a -> s { _name_filter = a } :: ImageData s)
 
-instance HasComputedArchitecture (ImageData s) Text
+instance P.HasComputedArchitecture (ImageData s) Text
 
-instance HasComputedCreationDate (ImageData s) Text
+instance P.HasComputedCreationDate (ImageData s) Text
 
-instance HasComputedOrganization (ImageData s) Text
+instance P.HasComputedOrganization (ImageData s) Text
 
-instance HasComputedPublic (ImageData s) Text
+instance P.HasComputedPublic (ImageData s) Text
 
-imageData :: TF.DataSource TF.Scaleway (ImageData s)
+imageData :: TF.DataSource P.Scaleway (ImageData s)
 imageData =
     TF.newDataSource "scaleway_image" $
         ImageData {
@@ -180,69 +179,3 @@ imageData =
             , _name = TF.Nil
             , _name_filter = TF.Nil
             }
-
-class HasArchitecture a s b | a -> s b where
-    architecture :: Lens' a (TF.Attribute s b)
-
-instance HasArchitecture a s b => HasArchitecture (TF.DataSource p a) s b where
-    architecture = TF.configuration . architecture
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.DataSource p a) s b where
-    name = TF.configuration . name
-
-class HasNameFilter a s b | a -> s b where
-    nameFilter :: Lens' a (TF.Attribute s b)
-
-instance HasNameFilter a s b => HasNameFilter (TF.DataSource p a) s b where
-    nameFilter = TF.configuration . nameFilter
-
-class HasComputedArchitecture a b | a -> b where
-    computedArchitecture
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedArchitecture =
-        to (\x -> TF.Computed (TF.referenceKey x) "architecture")
-
-class HasComputedBootCmdArgs a b | a -> b where
-    computedBootCmdArgs
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBootCmdArgs =
-        to (\x -> TF.Computed (TF.referenceKey x) "boot_cmd_args")
-
-class HasComputedCreationDate a b | a -> b where
-    computedCreationDate
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCreationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_date")
-
-class HasComputedDtb a b | a -> b where
-    computedDtb
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDtb =
-        to (\x -> TF.Computed (TF.referenceKey x) "dtb")
-
-class HasComputedInitrd a b | a -> b where
-    computedInitrd
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInitrd =
-        to (\x -> TF.Computed (TF.referenceKey x) "initrd")
-
-class HasComputedKernel a b | a -> b where
-    computedKernel
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedKernel =
-        to (\x -> TF.Computed (TF.referenceKey x) "kernel")
-
-class HasComputedOrganization a b | a -> b where
-    computedOrganization
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOrganization =
-        to (\x -> TF.Computed (TF.referenceKey x) "organization")
-
-class HasComputedPublic a b | a -> b where
-    computedPublic
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPublic =
-        to (\x -> TF.Computed (TF.referenceKey x) "public")

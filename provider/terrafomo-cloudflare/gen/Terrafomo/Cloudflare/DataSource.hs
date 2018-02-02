@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Cloudflare.DataSource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -32,31 +29,33 @@ module Terrafomo.Cloudflare.DataSource
     -- ** Arguments
 
     -- ** Computed Attributes
-    , HasComputedCidrBlocks (..)
-    , HasComputedIpv4CidrBlocks (..)
-    , HasComputedIpv6CidrBlocks (..)
+    , P.HasComputedCidrBlocks (..)
+    , P.HasComputedIpv4CidrBlocks (..)
+    , P.HasComputedIpv6CidrBlocks (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                     as TF
-import qualified GHC.Base                      as TF
-import qualified Numeric.Natural               as TF
-import qualified Terrafomo.Attribute           as TF
-import qualified Terrafomo.Cloudflare.Provider as TF
-import qualified Terrafomo.Cloudflare.Types    as TF
-import qualified Terrafomo.DataSource          as TF
-import qualified Terrafomo.HCL                 as TF
-import qualified Terrafomo.IP                  as TF
-import qualified Terrafomo.Meta                as TF
-import qualified Terrafomo.Name                as TF
-import qualified Terrafomo.Resource            as TF
+import qualified Data.Word                     as P
+import qualified GHC.Base                      as P
+import qualified Numeric.Natural               as P
+import qualified Terrafomo.Cloudflare.Lens     as P
+import qualified Terrafomo.Cloudflare.Provider as P
+import           Terrafomo.Cloudflare.Types    as P
+import qualified Terrafomo.IP                  as P
+
+import qualified Terrafomo.Attribute  as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL        as TF
 
 {- | The @cloudflare_ip_ranges@ Cloudflare datasource.
 
@@ -69,32 +68,14 @@ data IpRangesData s = IpRangesData {
 instance TF.ToHCL (IpRangesData s) where
     toHCL _ = TF.block []
 
-instance HasComputedCidrBlocks (IpRangesData s) Text
+instance P.HasComputedCidrBlocks (IpRangesData s) Text
 
-instance HasComputedIpv4CidrBlocks (IpRangesData s) Text
+instance P.HasComputedIpv4CidrBlocks (IpRangesData s) Text
 
-instance HasComputedIpv6CidrBlocks (IpRangesData s) Text
+instance P.HasComputedIpv6CidrBlocks (IpRangesData s) Text
 
-ipRangesData :: TF.DataSource TF.Cloudflare (IpRangesData s)
+ipRangesData :: TF.DataSource P.Cloudflare (IpRangesData s)
 ipRangesData =
     TF.newDataSource "cloudflare_ip_ranges" $
         IpRangesData {
             }
-
-class HasComputedCidrBlocks a b | a -> b where
-    computedCidrBlocks
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
-
-class HasComputedIpv4CidrBlocks a b | a -> b where
-    computedIpv4CidrBlocks
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpv4CidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv4_cidr_blocks")
-
-class HasComputedIpv6CidrBlocks a b | a -> b where
-    computedIpv6CidrBlocks
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpv6CidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_cidr_blocks")

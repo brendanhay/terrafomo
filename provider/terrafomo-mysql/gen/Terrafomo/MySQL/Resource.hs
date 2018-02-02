@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.MySQL.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -36,40 +33,42 @@ module Terrafomo.MySQL.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasDatabase (..)
-    , HasDefaultCharacterSet (..)
-    , HasDefaultCollation (..)
-    , HasGrant (..)
-    , HasHost (..)
-    , HasName (..)
-    , HasPassword (..)
-    , HasPlaintextPassword (..)
-    , HasPrivileges (..)
-    , HasUser (..)
+    , P.HasDatabase (..)
+    , P.HasDefaultCharacterSet (..)
+    , P.HasDefaultCollation (..)
+    , P.HasGrant (..)
+    , P.HasHost (..)
+    , P.HasName (..)
+    , P.HasPassword (..)
+    , P.HasPlaintextPassword (..)
+    , P.HasPrivileges (..)
+    , P.HasUser (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                as TF
-import qualified GHC.Base                 as TF
-import qualified Numeric.Natural          as TF
-import qualified Terrafomo.Attribute      as TF
-import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.IP             as TF
-import qualified Terrafomo.Meta           as TF
-import qualified Terrafomo.MySQL.Provider as TF
-import qualified Terrafomo.MySQL.Types    as TF
-import qualified Terrafomo.Name           as TF
-import qualified Terrafomo.Resource       as TF
-import qualified Terrafomo.Resource       as TF
+import qualified Data.Word                as P
+import qualified GHC.Base                 as P
+import qualified Numeric.Natural          as P
+import qualified Terrafomo.IP             as P
+import qualified Terrafomo.MySQL.Lens     as P
+import qualified Terrafomo.MySQL.Provider as P
+import           Terrafomo.MySQL.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @mysql_database@ MySQL resource.
 
@@ -95,22 +94,22 @@ instance TF.ToHCL (DatabaseResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDefaultCharacterSet (DatabaseResource s) s Text where
+instance P.HasDefaultCharacterSet (DatabaseResource s) s Text where
     defaultCharacterSet =
         lens (_default_character_set :: DatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _default_character_set = a } :: DatabaseResource s)
 
-instance HasDefaultCollation (DatabaseResource s) s Text where
+instance P.HasDefaultCollation (DatabaseResource s) s Text where
     defaultCollation =
         lens (_default_collation :: DatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _default_collation = a } :: DatabaseResource s)
 
-instance HasName (DatabaseResource s) s Text where
+instance P.HasName (DatabaseResource s) s Text where
     name =
         lens (_name :: DatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DatabaseResource s)
 
-databaseResource :: TF.Resource TF.MySQL (DatabaseResource s)
+databaseResource :: TF.Resource P.MySQL (DatabaseResource s)
 databaseResource =
     TF.newResource "mysql_database" $
         DatabaseResource {
@@ -146,32 +145,32 @@ instance TF.ToHCL (GrantResource s) where
         , TF.attribute "user" _user
         ]
 
-instance HasDatabase (GrantResource s) s Text where
+instance P.HasDatabase (GrantResource s) s Text where
     database =
         lens (_database :: GrantResource s -> TF.Attribute s Text)
             (\s a -> s { _database = a } :: GrantResource s)
 
-instance HasGrant (GrantResource s) s Text where
+instance P.HasGrant (GrantResource s) s Text where
     grant =
         lens (_grant :: GrantResource s -> TF.Attribute s Text)
             (\s a -> s { _grant = a } :: GrantResource s)
 
-instance HasHost (GrantResource s) s Text where
+instance P.HasHost (GrantResource s) s Text where
     host =
         lens (_host :: GrantResource s -> TF.Attribute s Text)
             (\s a -> s { _host = a } :: GrantResource s)
 
-instance HasPrivileges (GrantResource s) s Text where
+instance P.HasPrivileges (GrantResource s) s Text where
     privileges =
         lens (_privileges :: GrantResource s -> TF.Attribute s Text)
             (\s a -> s { _privileges = a } :: GrantResource s)
 
-instance HasUser (GrantResource s) s Text where
+instance P.HasUser (GrantResource s) s Text where
     user =
         lens (_user :: GrantResource s -> TF.Attribute s Text)
             (\s a -> s { _user = a } :: GrantResource s)
 
-grantResource :: TF.Resource TF.MySQL (GrantResource s)
+grantResource :: TF.Resource P.MySQL (GrantResource s)
 grantResource =
     TF.newResource "mysql_grant" $
         GrantResource {
@@ -208,27 +207,27 @@ instance TF.ToHCL (UserResource s) where
         , TF.attribute "user" _user
         ]
 
-instance HasHost (UserResource s) s Text where
+instance P.HasHost (UserResource s) s Text where
     host =
         lens (_host :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _host = a } :: UserResource s)
 
-instance HasPassword (UserResource s) s Text where
+instance P.HasPassword (UserResource s) s Text where
     password =
         lens (_password :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: UserResource s)
 
-instance HasPlaintextPassword (UserResource s) s Text where
+instance P.HasPlaintextPassword (UserResource s) s Text where
     plaintextPassword =
         lens (_plaintext_password :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _plaintext_password = a } :: UserResource s)
 
-instance HasUser (UserResource s) s Text where
+instance P.HasUser (UserResource s) s Text where
     user =
         lens (_user :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _user = a } :: UserResource s)
 
-userResource :: TF.Resource TF.MySQL (UserResource s)
+userResource :: TF.Resource P.MySQL (UserResource s)
 userResource =
     TF.newResource "mysql_user" $
         UserResource {
@@ -237,63 +236,3 @@ userResource =
             , _plaintext_password = TF.Nil
             , _user = TF.Nil
             }
-
-class HasDatabase a s b | a -> s b where
-    database :: Lens' a (TF.Attribute s b)
-
-instance HasDatabase a s b => HasDatabase (TF.Resource p a) s b where
-    database = TF.configuration . database
-
-class HasDefaultCharacterSet a s b | a -> s b where
-    defaultCharacterSet :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultCharacterSet a s b => HasDefaultCharacterSet (TF.Resource p a) s b where
-    defaultCharacterSet = TF.configuration . defaultCharacterSet
-
-class HasDefaultCollation a s b | a -> s b where
-    defaultCollation :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultCollation a s b => HasDefaultCollation (TF.Resource p a) s b where
-    defaultCollation = TF.configuration . defaultCollation
-
-class HasGrant a s b | a -> s b where
-    grant :: Lens' a (TF.Attribute s b)
-
-instance HasGrant a s b => HasGrant (TF.Resource p a) s b where
-    grant = TF.configuration . grant
-
-class HasHost a s b | a -> s b where
-    host :: Lens' a (TF.Attribute s b)
-
-instance HasHost a s b => HasHost (TF.Resource p a) s b where
-    host = TF.configuration . host
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
-
-instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
-    password = TF.configuration . password
-
-class HasPlaintextPassword a s b | a -> s b where
-    plaintextPassword :: Lens' a (TF.Attribute s b)
-
-instance HasPlaintextPassword a s b => HasPlaintextPassword (TF.Resource p a) s b where
-    plaintextPassword = TF.configuration . plaintextPassword
-
-class HasPrivileges a s b | a -> s b where
-    privileges :: Lens' a (TF.Attribute s b)
-
-instance HasPrivileges a s b => HasPrivileges (TF.Resource p a) s b where
-    privileges = TF.configuration . privileges
-
-class HasUser a s b | a -> s b where
-    user :: Lens' a (TF.Attribute s b)
-
-instance HasUser a s b => HasUser (TF.Resource p a) s b where
-    user = TF.configuration . user

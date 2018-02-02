@@ -169,9 +169,9 @@ assign k v = Assign k (toHCL v)
 attribute :: ToHCL a => Id -> Attribute s a -> Maybe Value
 attribute k =
     fmap (assign k) . \case
-        Computed k v -> Just (computed k v)
-        Constant   v -> Just (toHCL      v)
-        _            -> Nothing
+        Computed k' v -> Just (computed k' v)
+        Constant    v -> Just (toHCL      v)
+        _             -> Nothing
 
 computed :: Key -> Name -> Value
 computed (Key t n) v =

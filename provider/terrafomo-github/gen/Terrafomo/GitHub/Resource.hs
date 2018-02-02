@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.GitHub.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -60,71 +57,73 @@ module Terrafomo.GitHub.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasActive (..)
-    , HasAllowMergeCommit (..)
-    , HasAllowRebaseMerge (..)
-    , HasAllowSquashMerge (..)
-    , HasAutoInit (..)
-    , HasBranch (..)
-    , HasColor (..)
-    , HasConfiguration (..)
-    , HasDefaultBranch (..)
-    , HasDescription (..)
-    , HasEnforceAdmins (..)
-    , HasEvents (..)
-    , HasGitignoreTemplate (..)
-    , HasHasDownloads (..)
-    , HasHasIssues (..)
-    , HasHasWiki (..)
-    , HasHomepageUrl (..)
-    , HasKey (..)
-    , HasLdapDn (..)
-    , HasLicenseTemplate (..)
-    , HasName (..)
-    , HasPermission (..)
-    , HasPrivacy (..)
-    , HasPrivate (..)
-    , HasReadOnly (..)
-    , HasRepository (..)
-    , HasRequiredPullRequestReviews (..)
-    , HasRequiredStatusChecks (..)
-    , HasRestrictions (..)
-    , HasRole (..)
-    , HasTeamId (..)
-    , HasTitle (..)
-    , HasUrl (..)
-    , HasUsername (..)
+    , P.HasActive (..)
+    , P.HasAllowMergeCommit (..)
+    , P.HasAllowRebaseMerge (..)
+    , P.HasAllowSquashMerge (..)
+    , P.HasAutoInit (..)
+    , P.HasBranch (..)
+    , P.HasColor (..)
+    , P.HasConfiguration (..)
+    , P.HasDefaultBranch (..)
+    , P.HasDescription (..)
+    , P.HasEnforceAdmins (..)
+    , P.HasEvents (..)
+    , P.HasGitignoreTemplate (..)
+    , P.HasHasDownloads (..)
+    , P.HasHasIssues (..)
+    , P.HasHasWiki (..)
+    , P.HasHomepageUrl (..)
+    , P.HasKey (..)
+    , P.HasLdapDn (..)
+    , P.HasLicenseTemplate (..)
+    , P.HasName (..)
+    , P.HasPermission (..)
+    , P.HasPrivacy (..)
+    , P.HasPrivate (..)
+    , P.HasReadOnly (..)
+    , P.HasRepository (..)
+    , P.HasRequiredPullRequestReviews (..)
+    , P.HasRequiredStatusChecks (..)
+    , P.HasRestrictions (..)
+    , P.HasRole (..)
+    , P.HasTeamId (..)
+    , P.HasTitle (..)
+    , P.HasUrl (..)
+    , P.HasUsername (..)
 
     -- ** Computed Attributes
-    , HasComputedFullName (..)
-    , HasComputedGitCloneUrl (..)
-    , HasComputedHttpCloneUrl (..)
-    , HasComputedId (..)
-    , HasComputedSshCloneUrl (..)
-    , HasComputedSvnUrl (..)
-    , HasComputedUrl (..)
+    , P.HasComputedFullName (..)
+    , P.HasComputedGitCloneUrl (..)
+    , P.HasComputedHttpCloneUrl (..)
+    , P.HasComputedId (..)
+    , P.HasComputedSshCloneUrl (..)
+    , P.HasComputedSvnUrl (..)
+    , P.HasComputedUrl (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                 as TF
-import qualified GHC.Base                  as TF
-import qualified Numeric.Natural           as TF
-import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.GitHub.Provider as TF
-import qualified Terrafomo.GitHub.Types    as TF
-import qualified Terrafomo.HCL             as TF
-import qualified Terrafomo.IP              as TF
-import qualified Terrafomo.Meta            as TF
-import qualified Terrafomo.Name            as TF
-import qualified Terrafomo.Resource        as TF
-import qualified Terrafomo.Resource        as TF
+import qualified Data.Word                 as P
+import qualified GHC.Base                  as P
+import qualified Numeric.Natural           as P
+import qualified Terrafomo.GitHub.Lens     as P
+import qualified Terrafomo.GitHub.Provider as P
+import           Terrafomo.GitHub.Types    as P
+import qualified Terrafomo.IP              as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @github_branch_protection@ GitHub resource.
 
@@ -159,37 +158,37 @@ instance TF.ToHCL (BranchProtectionResource s) where
         , TF.attribute "restrictions" _restrictions
         ]
 
-instance HasBranch (BranchProtectionResource s) s Text where
+instance P.HasBranch (BranchProtectionResource s) s Text where
     branch =
         lens (_branch :: BranchProtectionResource s -> TF.Attribute s Text)
             (\s a -> s { _branch = a } :: BranchProtectionResource s)
 
-instance HasEnforceAdmins (BranchProtectionResource s) s Text where
+instance P.HasEnforceAdmins (BranchProtectionResource s) s Text where
     enforceAdmins =
         lens (_enforce_admins :: BranchProtectionResource s -> TF.Attribute s Text)
             (\s a -> s { _enforce_admins = a } :: BranchProtectionResource s)
 
-instance HasRepository (BranchProtectionResource s) s Text where
+instance P.HasRepository (BranchProtectionResource s) s Text where
     repository =
         lens (_repository :: BranchProtectionResource s -> TF.Attribute s Text)
             (\s a -> s { _repository = a } :: BranchProtectionResource s)
 
-instance HasRequiredPullRequestReviews (BranchProtectionResource s) s Text where
+instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) s Text where
     requiredPullRequestReviews =
         lens (_required_pull_request_reviews :: BranchProtectionResource s -> TF.Attribute s Text)
             (\s a -> s { _required_pull_request_reviews = a } :: BranchProtectionResource s)
 
-instance HasRequiredStatusChecks (BranchProtectionResource s) s Text where
+instance P.HasRequiredStatusChecks (BranchProtectionResource s) s Text where
     requiredStatusChecks =
         lens (_required_status_checks :: BranchProtectionResource s -> TF.Attribute s Text)
             (\s a -> s { _required_status_checks = a } :: BranchProtectionResource s)
 
-instance HasRestrictions (BranchProtectionResource s) s Text where
+instance P.HasRestrictions (BranchProtectionResource s) s Text where
     restrictions =
         lens (_restrictions :: BranchProtectionResource s -> TF.Attribute s Text)
             (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
-branchProtectionResource :: TF.Resource TF.GitHub (BranchProtectionResource s)
+branchProtectionResource :: TF.Resource P.GitHub (BranchProtectionResource s)
 branchProtectionResource =
     TF.newResource "github_branch_protection" $
         BranchProtectionResource {
@@ -231,27 +230,27 @@ instance TF.ToHCL (IssueLabelResource s) where
         , TF.attribute "url" _url
         ]
 
-instance HasColor (IssueLabelResource s) s Text where
+instance P.HasColor (IssueLabelResource s) s Text where
     color =
         lens (_color :: IssueLabelResource s -> TF.Attribute s Text)
             (\s a -> s { _color = a } :: IssueLabelResource s)
 
-instance HasName (IssueLabelResource s) s Text where
+instance P.HasName (IssueLabelResource s) s Text where
     name =
         lens (_name :: IssueLabelResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: IssueLabelResource s)
 
-instance HasRepository (IssueLabelResource s) s Text where
+instance P.HasRepository (IssueLabelResource s) s Text where
     repository =
         lens (_repository :: IssueLabelResource s -> TF.Attribute s Text)
             (\s a -> s { _repository = a } :: IssueLabelResource s)
 
-instance HasUrl (IssueLabelResource s) s Text where
+instance P.HasUrl (IssueLabelResource s) s Text where
     url =
         lens (_url :: IssueLabelResource s -> TF.Attribute s Text)
             (\s a -> s { _url = a } :: IssueLabelResource s)
 
-issueLabelResource :: TF.Resource TF.GitHub (IssueLabelResource s)
+issueLabelResource :: TF.Resource P.GitHub (IssueLabelResource s)
 issueLabelResource =
     TF.newResource "github_issue_label" $
         IssueLabelResource {
@@ -281,17 +280,17 @@ instance TF.ToHCL (MembershipResource s) where
         , TF.attribute "username" _username
         ]
 
-instance HasRole (MembershipResource s) s Text where
+instance P.HasRole (MembershipResource s) s Text where
     role =
         lens (_role :: MembershipResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: MembershipResource s)
 
-instance HasUsername (MembershipResource s) s Text where
+instance P.HasUsername (MembershipResource s) s Text where
     username =
         lens (_username :: MembershipResource s -> TF.Attribute s Text)
             (\s a -> s { _username = a } :: MembershipResource s)
 
-membershipResource :: TF.Resource TF.GitHub (MembershipResource s)
+membershipResource :: TF.Resource P.GitHub (MembershipResource s)
 membershipResource =
     TF.newResource "github_membership" $
         MembershipResource {
@@ -323,29 +322,29 @@ instance TF.ToHCL (OrganizationWebhookResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasActive (OrganizationWebhookResource s) s Text where
+instance P.HasActive (OrganizationWebhookResource s) s Text where
     active =
         lens (_active :: OrganizationWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _active = a } :: OrganizationWebhookResource s)
 
-instance HasConfiguration (OrganizationWebhookResource s) s Text where
+instance P.HasConfiguration (OrganizationWebhookResource s) s Text where
     configuration =
         lens (_configuration :: OrganizationWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _configuration = a } :: OrganizationWebhookResource s)
 
-instance HasEvents (OrganizationWebhookResource s) s Text where
+instance P.HasEvents (OrganizationWebhookResource s) s Text where
     events =
         lens (_events :: OrganizationWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _events = a } :: OrganizationWebhookResource s)
 
-instance HasName (OrganizationWebhookResource s) s Text where
+instance P.HasName (OrganizationWebhookResource s) s Text where
     name =
         lens (_name :: OrganizationWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: OrganizationWebhookResource s)
 
-instance HasComputedUrl (OrganizationWebhookResource s) Text
+instance P.HasComputedUrl (OrganizationWebhookResource s) Text
 
-organizationWebhookResource :: TF.Resource TF.GitHub (OrganizationWebhookResource s)
+organizationWebhookResource :: TF.Resource P.GitHub (OrganizationWebhookResource s)
 organizationWebhookResource =
     TF.newResource "github_organization_webhook" $
         OrganizationWebhookResource {
@@ -383,22 +382,22 @@ instance TF.ToHCL (RepositoryCollaboratorResource s) where
         , TF.attribute "username" _username
         ]
 
-instance HasPermission (RepositoryCollaboratorResource s) s Text where
+instance P.HasPermission (RepositoryCollaboratorResource s) s Text where
     permission =
         lens (_permission :: RepositoryCollaboratorResource s -> TF.Attribute s Text)
             (\s a -> s { _permission = a } :: RepositoryCollaboratorResource s)
 
-instance HasRepository (RepositoryCollaboratorResource s) s Text where
+instance P.HasRepository (RepositoryCollaboratorResource s) s Text where
     repository =
         lens (_repository :: RepositoryCollaboratorResource s -> TF.Attribute s Text)
             (\s a -> s { _repository = a } :: RepositoryCollaboratorResource s)
 
-instance HasUsername (RepositoryCollaboratorResource s) s Text where
+instance P.HasUsername (RepositoryCollaboratorResource s) s Text where
     username =
         lens (_username :: RepositoryCollaboratorResource s -> TF.Attribute s Text)
             (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
 
-repositoryCollaboratorResource :: TF.Resource TF.GitHub (RepositoryCollaboratorResource s)
+repositoryCollaboratorResource :: TF.Resource P.GitHub (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource =
     TF.newResource "github_repository_collaborator" $
         RepositoryCollaboratorResource {
@@ -434,27 +433,27 @@ instance TF.ToHCL (RepositoryDeployKeyResource s) where
         , TF.attribute "title" _title
         ]
 
-instance HasKey (RepositoryDeployKeyResource s) s Text where
+instance P.HasKey (RepositoryDeployKeyResource s) s Text where
     key =
         lens (_key :: RepositoryDeployKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _key = a } :: RepositoryDeployKeyResource s)
 
-instance HasReadOnly (RepositoryDeployKeyResource s) s Text where
+instance P.HasReadOnly (RepositoryDeployKeyResource s) s Text where
     readOnly =
         lens (_read_only :: RepositoryDeployKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _read_only = a } :: RepositoryDeployKeyResource s)
 
-instance HasRepository (RepositoryDeployKeyResource s) s Text where
+instance P.HasRepository (RepositoryDeployKeyResource s) s Text where
     repository =
         lens (_repository :: RepositoryDeployKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _repository = a } :: RepositoryDeployKeyResource s)
 
-instance HasTitle (RepositoryDeployKeyResource s) s Text where
+instance P.HasTitle (RepositoryDeployKeyResource s) s Text where
     title =
         lens (_title :: RepositoryDeployKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
 
-repositoryDeployKeyResource :: TF.Resource TF.GitHub (RepositoryDeployKeyResource s)
+repositoryDeployKeyResource :: TF.Resource P.GitHub (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource =
     TF.newResource "github_repository_deploy_key" $
         RepositoryDeployKeyResource {
@@ -519,87 +518,87 @@ instance TF.ToHCL (RepositoryResource s) where
         , TF.attribute "private" _private
         ]
 
-instance HasAllowMergeCommit (RepositoryResource s) s Text where
+instance P.HasAllowMergeCommit (RepositoryResource s) s Text where
     allowMergeCommit =
         lens (_allow_merge_commit :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _allow_merge_commit = a } :: RepositoryResource s)
 
-instance HasAllowRebaseMerge (RepositoryResource s) s Text where
+instance P.HasAllowRebaseMerge (RepositoryResource s) s Text where
     allowRebaseMerge =
         lens (_allow_rebase_merge :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _allow_rebase_merge = a } :: RepositoryResource s)
 
-instance HasAllowSquashMerge (RepositoryResource s) s Text where
+instance P.HasAllowSquashMerge (RepositoryResource s) s Text where
     allowSquashMerge =
         lens (_allow_squash_merge :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _allow_squash_merge = a } :: RepositoryResource s)
 
-instance HasAutoInit (RepositoryResource s) s Text where
+instance P.HasAutoInit (RepositoryResource s) s Text where
     autoInit =
         lens (_auto_init :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _auto_init = a } :: RepositoryResource s)
 
-instance HasDefaultBranch (RepositoryResource s) s Text where
+instance P.HasDefaultBranch (RepositoryResource s) s Text where
     defaultBranch =
         lens (_default_branch :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _default_branch = a } :: RepositoryResource s)
 
-instance HasDescription (RepositoryResource s) s Text where
+instance P.HasDescription (RepositoryResource s) s Text where
     description =
         lens (_description :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: RepositoryResource s)
 
-instance HasGitignoreTemplate (RepositoryResource s) s Text where
+instance P.HasGitignoreTemplate (RepositoryResource s) s Text where
     gitignoreTemplate =
         lens (_gitignore_template :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _gitignore_template = a } :: RepositoryResource s)
 
-instance HasHasDownloads (RepositoryResource s) s Text where
+instance P.HasHasDownloads (RepositoryResource s) s Text where
     hasDownloads =
         lens (_has_downloads :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _has_downloads = a } :: RepositoryResource s)
 
-instance HasHasIssues (RepositoryResource s) s Text where
+instance P.HasHasIssues (RepositoryResource s) s Text where
     hasIssues =
         lens (_has_issues :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _has_issues = a } :: RepositoryResource s)
 
-instance HasHasWiki (RepositoryResource s) s Text where
+instance P.HasHasWiki (RepositoryResource s) s Text where
     hasWiki =
         lens (_has_wiki :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _has_wiki = a } :: RepositoryResource s)
 
-instance HasHomepageUrl (RepositoryResource s) s Text where
+instance P.HasHomepageUrl (RepositoryResource s) s Text where
     homepageUrl =
         lens (_homepage_url :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _homepage_url = a } :: RepositoryResource s)
 
-instance HasLicenseTemplate (RepositoryResource s) s Text where
+instance P.HasLicenseTemplate (RepositoryResource s) s Text where
     licenseTemplate =
         lens (_license_template :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _license_template = a } :: RepositoryResource s)
 
-instance HasName (RepositoryResource s) s Text where
+instance P.HasName (RepositoryResource s) s Text where
     name =
         lens (_name :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RepositoryResource s)
 
-instance HasPrivate (RepositoryResource s) s Text where
+instance P.HasPrivate (RepositoryResource s) s Text where
     private =
         lens (_private :: RepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _private = a } :: RepositoryResource s)
 
-instance HasComputedFullName (RepositoryResource s) Text
+instance P.HasComputedFullName (RepositoryResource s) Text
 
-instance HasComputedGitCloneUrl (RepositoryResource s) Text
+instance P.HasComputedGitCloneUrl (RepositoryResource s) Text
 
-instance HasComputedHttpCloneUrl (RepositoryResource s) Text
+instance P.HasComputedHttpCloneUrl (RepositoryResource s) Text
 
-instance HasComputedSshCloneUrl (RepositoryResource s) Text
+instance P.HasComputedSshCloneUrl (RepositoryResource s) Text
 
-instance HasComputedSvnUrl (RepositoryResource s) Text
+instance P.HasComputedSvnUrl (RepositoryResource s) Text
 
-repositoryResource :: TF.Resource TF.GitHub (RepositoryResource s)
+repositoryResource :: TF.Resource P.GitHub (RepositoryResource s)
 repositoryResource =
     TF.newResource "github_repository" $
         RepositoryResource {
@@ -647,34 +646,34 @@ instance TF.ToHCL (RepositoryWebhookResource s) where
         , TF.attribute "repository" _repository
         ]
 
-instance HasActive (RepositoryWebhookResource s) s Text where
+instance P.HasActive (RepositoryWebhookResource s) s Text where
     active =
         lens (_active :: RepositoryWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _active = a } :: RepositoryWebhookResource s)
 
-instance HasConfiguration (RepositoryWebhookResource s) s Text where
+instance P.HasConfiguration (RepositoryWebhookResource s) s Text where
     configuration =
         lens (_configuration :: RepositoryWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _configuration = a } :: RepositoryWebhookResource s)
 
-instance HasEvents (RepositoryWebhookResource s) s Text where
+instance P.HasEvents (RepositoryWebhookResource s) s Text where
     events =
         lens (_events :: RepositoryWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _events = a } :: RepositoryWebhookResource s)
 
-instance HasName (RepositoryWebhookResource s) s Text where
+instance P.HasName (RepositoryWebhookResource s) s Text where
     name =
         lens (_name :: RepositoryWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RepositoryWebhookResource s)
 
-instance HasRepository (RepositoryWebhookResource s) s Text where
+instance P.HasRepository (RepositoryWebhookResource s) s Text where
     repository =
         lens (_repository :: RepositoryWebhookResource s -> TF.Attribute s Text)
             (\s a -> s { _repository = a } :: RepositoryWebhookResource s)
 
-instance HasComputedUrl (RepositoryWebhookResource s) Text
+instance P.HasComputedUrl (RepositoryWebhookResource s) Text
 
-repositoryWebhookResource :: TF.Resource TF.GitHub (RepositoryWebhookResource s)
+repositoryWebhookResource :: TF.Resource P.GitHub (RepositoryWebhookResource s)
 repositoryWebhookResource =
     TF.newResource "github_repository_webhook" $
         RepositoryWebhookResource {
@@ -709,22 +708,22 @@ instance TF.ToHCL (TeamMembershipResource s) where
         , TF.attribute "username" _username
         ]
 
-instance HasRole (TeamMembershipResource s) s Text where
+instance P.HasRole (TeamMembershipResource s) s Text where
     role =
         lens (_role :: TeamMembershipResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: TeamMembershipResource s)
 
-instance HasTeamId (TeamMembershipResource s) s Text where
+instance P.HasTeamId (TeamMembershipResource s) s Text where
     teamId =
         lens (_team_id :: TeamMembershipResource s -> TF.Attribute s Text)
             (\s a -> s { _team_id = a } :: TeamMembershipResource s)
 
-instance HasUsername (TeamMembershipResource s) s Text where
+instance P.HasUsername (TeamMembershipResource s) s Text where
     username =
         lens (_username :: TeamMembershipResource s -> TF.Attribute s Text)
             (\s a -> s { _username = a } :: TeamMembershipResource s)
 
-teamMembershipResource :: TF.Resource TF.GitHub (TeamMembershipResource s)
+teamMembershipResource :: TF.Resource P.GitHub (TeamMembershipResource s)
 teamMembershipResource =
     TF.newResource "github_team_membership" $
         TeamMembershipResource {
@@ -757,22 +756,22 @@ instance TF.ToHCL (TeamRepositoryResource s) where
         , TF.attribute "team_id" _team_id
         ]
 
-instance HasPermission (TeamRepositoryResource s) s Text where
+instance P.HasPermission (TeamRepositoryResource s) s Text where
     permission =
         lens (_permission :: TeamRepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _permission = a } :: TeamRepositoryResource s)
 
-instance HasRepository (TeamRepositoryResource s) s Text where
+instance P.HasRepository (TeamRepositoryResource s) s Text where
     repository =
         lens (_repository :: TeamRepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _repository = a } :: TeamRepositoryResource s)
 
-instance HasTeamId (TeamRepositoryResource s) s Text where
+instance P.HasTeamId (TeamRepositoryResource s) s Text where
     teamId =
         lens (_team_id :: TeamRepositoryResource s -> TF.Attribute s Text)
             (\s a -> s { _team_id = a } :: TeamRepositoryResource s)
 
-teamRepositoryResource :: TF.Resource TF.GitHub (TeamRepositoryResource s)
+teamRepositoryResource :: TF.Resource P.GitHub (TeamRepositoryResource s)
 teamRepositoryResource =
     TF.newResource "github_team_repository" $
         TeamRepositoryResource {
@@ -806,29 +805,29 @@ instance TF.ToHCL (TeamResource s) where
         , TF.attribute "privacy" _privacy
         ]
 
-instance HasDescription (TeamResource s) s Text where
+instance P.HasDescription (TeamResource s) s Text where
     description =
         lens (_description :: TeamResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: TeamResource s)
 
-instance HasLdapDn (TeamResource s) s Text where
+instance P.HasLdapDn (TeamResource s) s Text where
     ldapDn =
         lens (_ldap_dn :: TeamResource s -> TF.Attribute s Text)
             (\s a -> s { _ldap_dn = a } :: TeamResource s)
 
-instance HasName (TeamResource s) s Text where
+instance P.HasName (TeamResource s) s Text where
     name =
         lens (_name :: TeamResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TeamResource s)
 
-instance HasPrivacy (TeamResource s) s Text where
+instance P.HasPrivacy (TeamResource s) s Text where
     privacy =
         lens (_privacy :: TeamResource s -> TF.Attribute s Text)
             (\s a -> s { _privacy = a } :: TeamResource s)
 
-instance HasComputedId (TeamResource s) Text
+instance P.HasComputedId (TeamResource s) Text
 
-teamResource :: TF.Resource TF.GitHub (TeamResource s)
+teamResource :: TF.Resource P.GitHub (TeamResource s)
 teamResource =
     TF.newResource "github_team" $
         TeamResource {
@@ -837,249 +836,3 @@ teamResource =
             , _name = TF.Nil
             , _privacy = TF.Nil
             }
-
-class HasActive a s b | a -> s b where
-    active :: Lens' a (TF.Attribute s b)
-
-instance HasActive a s b => HasActive (TF.Resource p a) s b where
-    active = TF.configuration . active
-
-class HasAllowMergeCommit a s b | a -> s b where
-    allowMergeCommit :: Lens' a (TF.Attribute s b)
-
-instance HasAllowMergeCommit a s b => HasAllowMergeCommit (TF.Resource p a) s b where
-    allowMergeCommit = TF.configuration . allowMergeCommit
-
-class HasAllowRebaseMerge a s b | a -> s b where
-    allowRebaseMerge :: Lens' a (TF.Attribute s b)
-
-instance HasAllowRebaseMerge a s b => HasAllowRebaseMerge (TF.Resource p a) s b where
-    allowRebaseMerge = TF.configuration . allowRebaseMerge
-
-class HasAllowSquashMerge a s b | a -> s b where
-    allowSquashMerge :: Lens' a (TF.Attribute s b)
-
-instance HasAllowSquashMerge a s b => HasAllowSquashMerge (TF.Resource p a) s b where
-    allowSquashMerge = TF.configuration . allowSquashMerge
-
-class HasAutoInit a s b | a -> s b where
-    autoInit :: Lens' a (TF.Attribute s b)
-
-instance HasAutoInit a s b => HasAutoInit (TF.Resource p a) s b where
-    autoInit = TF.configuration . autoInit
-
-class HasBranch a s b | a -> s b where
-    branch :: Lens' a (TF.Attribute s b)
-
-instance HasBranch a s b => HasBranch (TF.Resource p a) s b where
-    branch = TF.configuration . branch
-
-class HasColor a s b | a -> s b where
-    color :: Lens' a (TF.Attribute s b)
-
-instance HasColor a s b => HasColor (TF.Resource p a) s b where
-    color = TF.configuration . color
-
-class HasConfiguration a s b | a -> s b where
-    configuration :: Lens' a (TF.Attribute s b)
-
-instance HasConfiguration a s b => HasConfiguration (TF.Resource p a) s b where
-    configuration = TF.configuration . configuration
-
-class HasDefaultBranch a s b | a -> s b where
-    defaultBranch :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultBranch a s b => HasDefaultBranch (TF.Resource p a) s b where
-    defaultBranch = TF.configuration . defaultBranch
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasEnforceAdmins a s b | a -> s b where
-    enforceAdmins :: Lens' a (TF.Attribute s b)
-
-instance HasEnforceAdmins a s b => HasEnforceAdmins (TF.Resource p a) s b where
-    enforceAdmins = TF.configuration . enforceAdmins
-
-class HasEvents a s b | a -> s b where
-    events :: Lens' a (TF.Attribute s b)
-
-instance HasEvents a s b => HasEvents (TF.Resource p a) s b where
-    events = TF.configuration . events
-
-class HasGitignoreTemplate a s b | a -> s b where
-    gitignoreTemplate :: Lens' a (TF.Attribute s b)
-
-instance HasGitignoreTemplate a s b => HasGitignoreTemplate (TF.Resource p a) s b where
-    gitignoreTemplate = TF.configuration . gitignoreTemplate
-
-class HasHasDownloads a s b | a -> s b where
-    hasDownloads :: Lens' a (TF.Attribute s b)
-
-instance HasHasDownloads a s b => HasHasDownloads (TF.Resource p a) s b where
-    hasDownloads = TF.configuration . hasDownloads
-
-class HasHasIssues a s b | a -> s b where
-    hasIssues :: Lens' a (TF.Attribute s b)
-
-instance HasHasIssues a s b => HasHasIssues (TF.Resource p a) s b where
-    hasIssues = TF.configuration . hasIssues
-
-class HasHasWiki a s b | a -> s b where
-    hasWiki :: Lens' a (TF.Attribute s b)
-
-instance HasHasWiki a s b => HasHasWiki (TF.Resource p a) s b where
-    hasWiki = TF.configuration . hasWiki
-
-class HasHomepageUrl a s b | a -> s b where
-    homepageUrl :: Lens' a (TF.Attribute s b)
-
-instance HasHomepageUrl a s b => HasHomepageUrl (TF.Resource p a) s b where
-    homepageUrl = TF.configuration . homepageUrl
-
-class HasKey a s b | a -> s b where
-    key :: Lens' a (TF.Attribute s b)
-
-instance HasKey a s b => HasKey (TF.Resource p a) s b where
-    key = TF.configuration . key
-
-class HasLdapDn a s b | a -> s b where
-    ldapDn :: Lens' a (TF.Attribute s b)
-
-instance HasLdapDn a s b => HasLdapDn (TF.Resource p a) s b where
-    ldapDn = TF.configuration . ldapDn
-
-class HasLicenseTemplate a s b | a -> s b where
-    licenseTemplate :: Lens' a (TF.Attribute s b)
-
-instance HasLicenseTemplate a s b => HasLicenseTemplate (TF.Resource p a) s b where
-    licenseTemplate = TF.configuration . licenseTemplate
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasPermission a s b | a -> s b where
-    permission :: Lens' a (TF.Attribute s b)
-
-instance HasPermission a s b => HasPermission (TF.Resource p a) s b where
-    permission = TF.configuration . permission
-
-class HasPrivacy a s b | a -> s b where
-    privacy :: Lens' a (TF.Attribute s b)
-
-instance HasPrivacy a s b => HasPrivacy (TF.Resource p a) s b where
-    privacy = TF.configuration . privacy
-
-class HasPrivate a s b | a -> s b where
-    private :: Lens' a (TF.Attribute s b)
-
-instance HasPrivate a s b => HasPrivate (TF.Resource p a) s b where
-    private = TF.configuration . private
-
-class HasReadOnly a s b | a -> s b where
-    readOnly :: Lens' a (TF.Attribute s b)
-
-instance HasReadOnly a s b => HasReadOnly (TF.Resource p a) s b where
-    readOnly = TF.configuration . readOnly
-
-class HasRepository a s b | a -> s b where
-    repository :: Lens' a (TF.Attribute s b)
-
-instance HasRepository a s b => HasRepository (TF.Resource p a) s b where
-    repository = TF.configuration . repository
-
-class HasRequiredPullRequestReviews a s b | a -> s b where
-    requiredPullRequestReviews :: Lens' a (TF.Attribute s b)
-
-instance HasRequiredPullRequestReviews a s b => HasRequiredPullRequestReviews (TF.Resource p a) s b where
-    requiredPullRequestReviews = TF.configuration . requiredPullRequestReviews
-
-class HasRequiredStatusChecks a s b | a -> s b where
-    requiredStatusChecks :: Lens' a (TF.Attribute s b)
-
-instance HasRequiredStatusChecks a s b => HasRequiredStatusChecks (TF.Resource p a) s b where
-    requiredStatusChecks = TF.configuration . requiredStatusChecks
-
-class HasRestrictions a s b | a -> s b where
-    restrictions :: Lens' a (TF.Attribute s b)
-
-instance HasRestrictions a s b => HasRestrictions (TF.Resource p a) s b where
-    restrictions = TF.configuration . restrictions
-
-class HasRole a s b | a -> s b where
-    role :: Lens' a (TF.Attribute s b)
-
-instance HasRole a s b => HasRole (TF.Resource p a) s b where
-    role = TF.configuration . role
-
-class HasTeamId a s b | a -> s b where
-    teamId :: Lens' a (TF.Attribute s b)
-
-instance HasTeamId a s b => HasTeamId (TF.Resource p a) s b where
-    teamId = TF.configuration . teamId
-
-class HasTitle a s b | a -> s b where
-    title :: Lens' a (TF.Attribute s b)
-
-instance HasTitle a s b => HasTitle (TF.Resource p a) s b where
-    title = TF.configuration . title
-
-class HasUrl a s b | a -> s b where
-    url :: Lens' a (TF.Attribute s b)
-
-instance HasUrl a s b => HasUrl (TF.Resource p a) s b where
-    url = TF.configuration . url
-
-class HasUsername a s b | a -> s b where
-    username :: Lens' a (TF.Attribute s b)
-
-instance HasUsername a s b => HasUsername (TF.Resource p a) s b where
-    username = TF.configuration . username
-
-class HasComputedFullName a b | a -> b where
-    computedFullName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedFullName =
-        to (\x -> TF.Computed (TF.referenceKey x) "full_name")
-
-class HasComputedGitCloneUrl a b | a -> b where
-    computedGitCloneUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedGitCloneUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "git_clone_url")
-
-class HasComputedHttpCloneUrl a b | a -> b where
-    computedHttpCloneUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHttpCloneUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "http_clone_url")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedSshCloneUrl a b | a -> b where
-    computedSshCloneUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSshCloneUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ssh_clone_url")
-
-class HasComputedSvnUrl a b | a -> b where
-    computedSvnUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSvnUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "svn_url")
-
-class HasComputedUrl a b | a -> b where
-    computedUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "url")

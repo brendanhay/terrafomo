@@ -1,0 +1,56 @@
+-- This module is auto-generated.
+
+{-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE NoImplicitPrelude      #-}
+{-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE RankNTypes             #-}
+{-# LANGUAGE UndecidableInstances   #-}
+
+-- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+{% include "_include/license.ede" %}
+--
+module {{ namespace }}
+    (
+    -- * Overloaded Fields
+    -- ** Arguments
+  {% for class in argumentClasses %}
+    {% if class.first %}  {% else %}, {% endif %}{{ class.value.name }} (..)
+  {% endfor %}
+
+    -- ** Computed Attributes
+  {% for class in attributeClasses %}
+    , {{ class.value.name }} (..)
+  {% endfor %}
+    ) where
+
+import GHC.Base ((.))
+
+import Lens.Micro (Getting, Lens', to)
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.Meta as TF
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Resource as TF
+{% for class in argumentClasses %}
+
+class {{ class.value.name }} a s b | a -> s b where
+    {{ class.value.method }} :: Lens' a (TF.Attribute s b)
+
+instance {{ class.value.name }} a s b => {{ class.value.name}} (TF.DataSource p a) s b where
+    {{ class.value.method }} = TF.configuration . {{ class.value.method }}
+
+instance {{ class.value.name }} a s b => {{ class.value.name}} (TF.Resource p a) s b where
+    {{ class.value.method }} = TF.configuration . {{ class.value.method }}
+{% endfor %}
+{% for class in attributeClasses %}
+
+class {{ class.value.name }} a b | a -> b where
+    {{ class.value.method }}
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    {{ class.value.method }} =
+        to (\x -> TF.Computed (TF.referenceKey x) "{{ class.value.symbol }}")
+{% endfor %}

@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Logentries.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -33,38 +30,40 @@ module Terrafomo.Logentries.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasFilename (..)
-    , HasLocation (..)
-    , HasLogsetId (..)
-    , HasName (..)
-    , HasRetentionPeriod (..)
-    , HasSource (..)
-    , HasType' (..)
+    , P.HasFilename (..)
+    , P.HasLocation (..)
+    , P.HasLogsetId (..)
+    , P.HasName (..)
+    , P.HasRetentionPeriod (..)
+    , P.HasSource (..)
+    , P.HasType' (..)
 
     -- ** Computed Attributes
-    , HasComputedToken (..)
+    , P.HasComputedToken (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                     as TF
-import qualified GHC.Base                      as TF
-import qualified Numeric.Natural               as TF
-import qualified Terrafomo.Attribute           as TF
-import qualified Terrafomo.HCL                 as TF
-import qualified Terrafomo.IP                  as TF
-import qualified Terrafomo.Logentries.Provider as TF
-import qualified Terrafomo.Logentries.Types    as TF
-import qualified Terrafomo.Meta                as TF
-import qualified Terrafomo.Name                as TF
-import qualified Terrafomo.Resource            as TF
-import qualified Terrafomo.Resource            as TF
+import qualified Data.Word                     as P
+import qualified GHC.Base                      as P
+import qualified Numeric.Natural               as P
+import qualified Terrafomo.IP                  as P
+import qualified Terrafomo.Logentries.Lens     as P
+import qualified Terrafomo.Logentries.Provider as P
+import           Terrafomo.Logentries.Types    as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @logentries_log@ Logentries resource.
 
@@ -95,39 +94,39 @@ instance TF.ToHCL (LogResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasFilename (LogResource s) s Text where
+instance P.HasFilename (LogResource s) s Text where
     filename =
         lens (_filename :: LogResource s -> TF.Attribute s Text)
             (\s a -> s { _filename = a } :: LogResource s)
 
-instance HasLogsetId (LogResource s) s Text where
+instance P.HasLogsetId (LogResource s) s Text where
     logsetId =
         lens (_logset_id :: LogResource s -> TF.Attribute s Text)
             (\s a -> s { _logset_id = a } :: LogResource s)
 
-instance HasName (LogResource s) s Text where
+instance P.HasName (LogResource s) s Text where
     name =
         lens (_name :: LogResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LogResource s)
 
-instance HasRetentionPeriod (LogResource s) s Text where
+instance P.HasRetentionPeriod (LogResource s) s Text where
     retentionPeriod =
         lens (_retention_period :: LogResource s -> TF.Attribute s Text)
             (\s a -> s { _retention_period = a } :: LogResource s)
 
-instance HasSource (LogResource s) s Text where
+instance P.HasSource (LogResource s) s Text where
     source =
         lens (_source :: LogResource s -> TF.Attribute s Text)
             (\s a -> s { _source = a } :: LogResource s)
 
-instance HasType' (LogResource s) s Text where
+instance P.HasType' (LogResource s) s Text where
     type' =
         lens (_type' :: LogResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: LogResource s)
 
-instance HasComputedToken (LogResource s) Text
+instance P.HasComputedToken (LogResource s) Text
 
-logResource :: TF.Resource TF.Logentries (LogResource s)
+logResource :: TF.Resource P.Logentries (LogResource s)
 logResource =
     TF.newResource "logentries_log" $
         LogResource {
@@ -157,68 +156,20 @@ instance TF.ToHCL (LogsetResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasLocation (LogsetResource s) s Text where
+instance P.HasLocation (LogsetResource s) s Text where
     location =
         lens (_location :: LogsetResource s -> TF.Attribute s Text)
             (\s a -> s { _location = a } :: LogsetResource s)
 
-instance HasName (LogsetResource s) s Text where
+instance P.HasName (LogsetResource s) s Text where
     name =
         lens (_name :: LogsetResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LogsetResource s)
 
-logsetResource :: TF.Resource TF.Logentries (LogsetResource s)
+logsetResource :: TF.Resource P.Logentries (LogsetResource s)
 logsetResource =
     TF.newResource "logentries_logset" $
         LogsetResource {
               _location = TF.Nil
             , _name = TF.Nil
             }
-
-class HasFilename a s b | a -> s b where
-    filename :: Lens' a (TF.Attribute s b)
-
-instance HasFilename a s b => HasFilename (TF.Resource p a) s b where
-    filename = TF.configuration . filename
-
-class HasLocation a s b | a -> s b where
-    location :: Lens' a (TF.Attribute s b)
-
-instance HasLocation a s b => HasLocation (TF.Resource p a) s b where
-    location = TF.configuration . location
-
-class HasLogsetId a s b | a -> s b where
-    logsetId :: Lens' a (TF.Attribute s b)
-
-instance HasLogsetId a s b => HasLogsetId (TF.Resource p a) s b where
-    logsetId = TF.configuration . logsetId
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasRetentionPeriod a s b | a -> s b where
-    retentionPeriod :: Lens' a (TF.Attribute s b)
-
-instance HasRetentionPeriod a s b => HasRetentionPeriod (TF.Resource p a) s b where
-    retentionPeriod = TF.configuration . retentionPeriod
-
-class HasSource a s b | a -> s b where
-    source :: Lens' a (TF.Attribute s b)
-
-instance HasSource a s b => HasSource (TF.Resource p a) s b where
-    source = TF.configuration . source
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasComputedToken a b | a -> b where
-    computedToken
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "token")

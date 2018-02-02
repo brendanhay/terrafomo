@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.AliCloud.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -183,378 +180,380 @@ module Terrafomo.AliCloud.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAccessPointId (..)
-    , HasAccountAlias (..)
-    , HasAccountName (..)
-    , HasAcl (..)
-    , HasActive (..)
-    , HasAdjustmentType (..)
-    , HasAdjustmentValue (..)
-    , HasAllocationId (..)
-    , HasAvailabilityZone (..)
-    , HasBackendPort (..)
-    , HasBackupPeriod (..)
-    , HasBackupTime (..)
-    , HasBandwidth (..)
-    , HasBucket (..)
-    , HasCacheControl (..)
-    , HasCategory (..)
-    , HasCdnType (..)
-    , HasCharacterSet (..)
-    , HasCidrBlock (..)
-    , HasCidrIp (..)
-    , HasComments (..)
-    , HasConnectionPrefix (..)
-    , HasContent (..)
-    , HasContentDisposition (..)
-    , HasContentEncoding (..)
-    , HasContentMd5 (..)
-    , HasContentType (..)
-    , HasCookie (..)
-    , HasCookieTimeout (..)
-    , HasCooldown (..)
-    , HasCoreRule (..)
-    , HasDataDisk (..)
-    , HasDbInstanceIds (..)
-    , HasDbNames (..)
-    , HasDefaultCooldown (..)
-    , HasDeletionWindowInDays (..)
-    , HasDescription (..)
-    , HasDestinationCidrblock (..)
-    , HasDiskCategory (..)
-    , HasDiskId (..)
-    , HasDiskSize (..)
-    , HasDisplayName (..)
-    , HasDocument (..)
-    , HasDomain (..)
-    , HasDomainName (..)
-    , HasDryRun (..)
-    , HasEmail (..)
-    , HasEnable (..)
-    , HasEngine (..)
-    , HasEngineVersion (..)
-    , HasExpires (..)
-    , HasExternalIp (..)
-    , HasExternalPort (..)
-    , HasForce (..)
-    , HasForceDelete (..)
-    , HasForwardTableId (..)
-    , HasFrontendPort (..)
-    , HasGroupId (..)
-    , HasGroupName (..)
-    , HasHealthCheck (..)
-    , HasHealthCheckConnectPort (..)
-    , HasHealthCheckDomain (..)
-    , HasHealthCheckHttpCode (..)
-    , HasHealthCheckInterval (..)
-    , HasHealthCheckSourceIp (..)
-    , HasHealthCheckTargetIp (..)
-    , HasHealthCheckTimeout (..)
-    , HasHealthCheckType (..)
-    , HasHealthCheckUri (..)
-    , HasHealthyThreshold (..)
-    , HasHostName (..)
-    , HasHostRecord (..)
-    , HasImageId (..)
-    , HasIncludeDataDisks (..)
-    , HasInstanceChargeType (..)
-    , HasInstanceId (..)
-    , HasInstanceIds (..)
-    , HasInstanceName (..)
-    , HasInstanceStorage (..)
-    , HasInstanceType (..)
-    , HasInternalIp (..)
-    , HasInternalPort (..)
-    , HasInternet (..)
-    , HasInternetChargeType (..)
-    , HasInternetMaxBandwidthIn (..)
-    , HasInternetMaxBandwidthOut (..)
-    , HasIpProtocol (..)
-    , HasIsEnabled (..)
-    , HasIsOutdated (..)
-    , HasKey (..)
-    , HasKeyFile (..)
-    , HasKeyName (..)
-    , HasKeyNamePrefix (..)
-    , HasKeyUsage (..)
-    , HasLaunchExpirationTime (..)
-    , HasLaunchTime (..)
-    , HasLifecycleRule (..)
-    , HasLoadBalancerId (..)
-    , HasLoadbalancerIds (..)
-    , HasLogBackup (..)
-    , HasLogRetentionPeriod (..)
-    , HasLogging (..)
-    , HasLoggingIsenable (..)
-    , HasMaxSize (..)
-    , HasMfaBindRequired (..)
-    , HasMinSize (..)
-    , HasMobile (..)
-    , HasMultiAz (..)
-    , HasName (..)
-    , HasNamePrefix (..)
-    , HasNexthopId (..)
-    , HasNexthopType (..)
-    , HasNicType (..)
-    , HasOppositeAccessPointId (..)
-    , HasOppositeInterfaceId (..)
-    , HasOppositeInterfaceOwnerId (..)
-    , HasOppositeRegion (..)
-    , HasOppositeRouterId (..)
-    , HasOppositeRouterType (..)
-    , HasPassword (..)
-    , HasPasswordResetRequired (..)
-    , HasPeriod (..)
-    , HasPeriodUnit (..)
-    , HasPersistenceTimeout (..)
-    , HasPolicy (..)
-    , HasPolicyName (..)
-    , HasPolicyType (..)
-    , HasPort (..)
-    , HasPortRange (..)
-    , HasPriority (..)
-    , HasPrivateIp (..)
-    , HasPrivilege (..)
-    , HasProtocol (..)
-    , HasPublicKey (..)
-    , HasRamUsers (..)
-    , HasRecurrenceEndTime (..)
-    , HasRecurrenceType (..)
-    , HasRecurrenceValue (..)
-    , HasRefererConfig (..)
-    , HasRemovalPolicies (..)
-    , HasRetentionPeriod (..)
-    , HasRole (..)
-    , HasRoleName (..)
-    , HasRouteTableId (..)
-    , HasRouterId (..)
-    , HasRouterType (..)
-    , HasRouting (..)
-    , HasScalingConfigurationName (..)
-    , HasScalingGroupId (..)
-    , HasScalingGroupName (..)
-    , HasScalingRuleName (..)
-    , HasScheduledAction (..)
-    , HasScheduledTaskName (..)
-    , HasScheduler (..)
-    , HasScope (..)
-    , HasSecretFile (..)
-    , HasSecurityGroupId (..)
-    , HasSecurityGroups (..)
-    , HasSecurityIps (..)
-    , HasServerGroupId (..)
-    , HasServerSideEncryption (..)
-    , HasServers (..)
-    , HasServices (..)
-    , HasSize (..)
-    , HasSnapshotId (..)
-    , HasSnatIp (..)
-    , HasSnatTableId (..)
-    , HasSource (..)
-    , HasSourceGroupOwnerAccount (..)
-    , HasSourcePort (..)
-    , HasSourceSecurityGroupId (..)
-    , HasSourceType (..)
-    , HasSourceVswitchId (..)
-    , HasSources (..)
-    , HasSpecification (..)
-    , HasSpotPriceLimit (..)
-    , HasSpotStrategy (..)
-    , HasSslCertificateId (..)
-    , HasStatement (..)
-    , HasStatus (..)
-    , HasStickySession (..)
-    , HasStickySessionType (..)
-    , HasSubstitute (..)
-    , HasSystemDiskCategory (..)
-    , HasSystemDiskSize (..)
-    , HasTags (..)
-    , HasTaskEnabled (..)
-    , HasTtl (..)
-    , HasType' (..)
-    , HasUnhealthyThreshold (..)
-    , HasUrl (..)
-    , HasUserData (..)
-    , HasUserName (..)
-    , HasUserNames (..)
-    , HasValue (..)
-    , HasVersion (..)
-    , HasVpcId (..)
-    , HasVswitchId (..)
-    , HasVswitchIds (..)
-    , HasWebsite (..)
-    , HasWeight (..)
-    , HasZoneId (..)
+    , P.HasAccessPointId (..)
+    , P.HasAccountAlias (..)
+    , P.HasAccountName (..)
+    , P.HasAcl (..)
+    , P.HasActive (..)
+    , P.HasAdjustmentType (..)
+    , P.HasAdjustmentValue (..)
+    , P.HasAllocationId (..)
+    , P.HasAvailabilityZone (..)
+    , P.HasBackendPort (..)
+    , P.HasBackupPeriod (..)
+    , P.HasBackupTime (..)
+    , P.HasBandwidth (..)
+    , P.HasBucket (..)
+    , P.HasCacheControl (..)
+    , P.HasCategory (..)
+    , P.HasCdnType (..)
+    , P.HasCharacterSet (..)
+    , P.HasCidrBlock (..)
+    , P.HasCidrIp (..)
+    , P.HasComments (..)
+    , P.HasConnectionPrefix (..)
+    , P.HasContent (..)
+    , P.HasContentDisposition (..)
+    , P.HasContentEncoding (..)
+    , P.HasContentMd5 (..)
+    , P.HasContentType (..)
+    , P.HasCookie (..)
+    , P.HasCookieTimeout (..)
+    , P.HasCooldown (..)
+    , P.HasCoreRule (..)
+    , P.HasDataDisk (..)
+    , P.HasDbInstanceIds (..)
+    , P.HasDbNames (..)
+    , P.HasDefaultCooldown (..)
+    , P.HasDeletionWindowInDays (..)
+    , P.HasDescription (..)
+    , P.HasDestinationCidrblock (..)
+    , P.HasDiskCategory (..)
+    , P.HasDiskId (..)
+    , P.HasDiskSize (..)
+    , P.HasDisplayName (..)
+    , P.HasDocument (..)
+    , P.HasDomain (..)
+    , P.HasDomainName (..)
+    , P.HasDryRun (..)
+    , P.HasEmail (..)
+    , P.HasEnable (..)
+    , P.HasEngine (..)
+    , P.HasEngineVersion (..)
+    , P.HasExpires (..)
+    , P.HasExternalIp (..)
+    , P.HasExternalPort (..)
+    , P.HasForce (..)
+    , P.HasForceDelete (..)
+    , P.HasForwardTableId (..)
+    , P.HasFrontendPort (..)
+    , P.HasGroupId (..)
+    , P.HasGroupName (..)
+    , P.HasHealthCheck (..)
+    , P.HasHealthCheckConnectPort (..)
+    , P.HasHealthCheckDomain (..)
+    , P.HasHealthCheckHttpCode (..)
+    , P.HasHealthCheckInterval (..)
+    , P.HasHealthCheckSourceIp (..)
+    , P.HasHealthCheckTargetIp (..)
+    , P.HasHealthCheckTimeout (..)
+    , P.HasHealthCheckType (..)
+    , P.HasHealthCheckUri (..)
+    , P.HasHealthyThreshold (..)
+    , P.HasHostName (..)
+    , P.HasHostRecord (..)
+    , P.HasImageId (..)
+    , P.HasIncludeDataDisks (..)
+    , P.HasInstanceChargeType (..)
+    , P.HasInstanceId (..)
+    , P.HasInstanceIds (..)
+    , P.HasInstanceName (..)
+    , P.HasInstanceStorage (..)
+    , P.HasInstanceType (..)
+    , P.HasInternalIp (..)
+    , P.HasInternalPort (..)
+    , P.HasInternet (..)
+    , P.HasInternetChargeType (..)
+    , P.HasInternetMaxBandwidthIn (..)
+    , P.HasInternetMaxBandwidthOut (..)
+    , P.HasIpProtocol (..)
+    , P.HasIsEnabled (..)
+    , P.HasIsOutdated (..)
+    , P.HasKey (..)
+    , P.HasKeyFile (..)
+    , P.HasKeyName (..)
+    , P.HasKeyNamePrefix (..)
+    , P.HasKeyUsage (..)
+    , P.HasLaunchExpirationTime (..)
+    , P.HasLaunchTime (..)
+    , P.HasLifecycleRule (..)
+    , P.HasLoadBalancerId (..)
+    , P.HasLoadbalancerIds (..)
+    , P.HasLogBackup (..)
+    , P.HasLogRetentionPeriod (..)
+    , P.HasLogging (..)
+    , P.HasLoggingIsenable (..)
+    , P.HasMaxSize (..)
+    , P.HasMfaBindRequired (..)
+    , P.HasMinSize (..)
+    , P.HasMobile (..)
+    , P.HasMultiAz (..)
+    , P.HasName (..)
+    , P.HasNamePrefix (..)
+    , P.HasNexthopId (..)
+    , P.HasNexthopType (..)
+    , P.HasNicType (..)
+    , P.HasOppositeAccessPointId (..)
+    , P.HasOppositeInterfaceId (..)
+    , P.HasOppositeInterfaceOwnerId (..)
+    , P.HasOppositeRegion (..)
+    , P.HasOppositeRouterId (..)
+    , P.HasOppositeRouterType (..)
+    , P.HasPassword (..)
+    , P.HasPasswordResetRequired (..)
+    , P.HasPeriod (..)
+    , P.HasPeriodUnit (..)
+    , P.HasPersistenceTimeout (..)
+    , P.HasPolicy (..)
+    , P.HasPolicyName (..)
+    , P.HasPolicyType (..)
+    , P.HasPort (..)
+    , P.HasPortRange (..)
+    , P.HasPriority (..)
+    , P.HasPrivateIp (..)
+    , P.HasPrivilege (..)
+    , P.HasProtocol (..)
+    , P.HasPublicKey (..)
+    , P.HasRamUsers (..)
+    , P.HasRecurrenceEndTime (..)
+    , P.HasRecurrenceType (..)
+    , P.HasRecurrenceValue (..)
+    , P.HasRefererConfig (..)
+    , P.HasRemovalPolicies (..)
+    , P.HasRetentionPeriod (..)
+    , P.HasRole (..)
+    , P.HasRoleName (..)
+    , P.HasRouteTableId (..)
+    , P.HasRouterId (..)
+    , P.HasRouterType (..)
+    , P.HasRouting (..)
+    , P.HasScalingConfigurationName (..)
+    , P.HasScalingGroupId (..)
+    , P.HasScalingGroupName (..)
+    , P.HasScalingRuleName (..)
+    , P.HasScheduledAction (..)
+    , P.HasScheduledTaskName (..)
+    , P.HasScheduler (..)
+    , P.HasScope (..)
+    , P.HasSecretFile (..)
+    , P.HasSecurityGroupId (..)
+    , P.HasSecurityGroups (..)
+    , P.HasSecurityIps (..)
+    , P.HasServerGroupId (..)
+    , P.HasServerSideEncryption (..)
+    , P.HasServers (..)
+    , P.HasServices (..)
+    , P.HasSize (..)
+    , P.HasSnapshotId (..)
+    , P.HasSnatIp (..)
+    , P.HasSnatTableId (..)
+    , P.HasSource (..)
+    , P.HasSourceGroupOwnerAccount (..)
+    , P.HasSourcePort (..)
+    , P.HasSourceSecurityGroupId (..)
+    , P.HasSourceType (..)
+    , P.HasSourceVswitchId (..)
+    , P.HasSources (..)
+    , P.HasSpecification (..)
+    , P.HasSpotPriceLimit (..)
+    , P.HasSpotStrategy (..)
+    , P.HasSslCertificateId (..)
+    , P.HasStatement (..)
+    , P.HasStatus (..)
+    , P.HasStickySession (..)
+    , P.HasStickySessionType (..)
+    , P.HasSubstitute (..)
+    , P.HasSystemDiskCategory (..)
+    , P.HasSystemDiskSize (..)
+    , P.HasTags (..)
+    , P.HasTaskEnabled (..)
+    , P.HasTtl (..)
+    , P.HasType' (..)
+    , P.HasUnhealthyThreshold (..)
+    , P.HasUrl (..)
+    , P.HasUserData (..)
+    , P.HasUserName (..)
+    , P.HasUserNames (..)
+    , P.HasValue (..)
+    , P.HasVersion (..)
+    , P.HasVpcId (..)
+    , P.HasVswitchId (..)
+    , P.HasVswitchIds (..)
+    , P.HasWebsite (..)
+    , P.HasWeight (..)
+    , P.HasZoneId (..)
 
     -- ** Computed Attributes
-    , HasComputedAccessPointId (..)
-    , HasComputedAccountAlias (..)
-    , HasComputedAccountName (..)
-    , HasComputedAddress (..)
-    , HasComputedAdjustmentType (..)
-    , HasComputedAdjustmentValue (..)
-    , HasComputedAllocationId (..)
-    , HasComputedAri (..)
-    , HasComputedArn (..)
-    , HasComputedAttachmentCount (..)
-    , HasComputedAvailabilityZone (..)
-    , HasComputedBackendServers (..)
-    , HasComputedBackupPeriod (..)
-    , HasComputedBackupRetentionPeriod (..)
-    , HasComputedBackupTime (..)
-    , HasComputedBandwidth (..)
-    , HasComputedBandwidthPackageIds (..)
-    , HasComputedCategory (..)
-    , HasComputedCharacterSet (..)
-    , HasComputedCidrBlock (..)
-    , HasComputedComments (..)
-    , HasComputedConnectionPrefix (..)
-    , HasComputedConnectionString (..)
-    , HasComputedConnections (..)
-    , HasComputedContentLength (..)
-    , HasComputedCooldown (..)
-    , HasComputedDbInstanceClass (..)
-    , HasComputedDbInstanceIds (..)
-    , HasComputedDbInstanceNetType (..)
-    , HasComputedDbInstanceStorage (..)
-    , HasComputedDbMappings (..)
-    , HasComputedDbNames (..)
-    , HasComputedDefaultCooldown (..)
-    , HasComputedDeletionWindowInDays (..)
-    , HasComputedDescription (..)
-    , HasComputedDestinationCidrblock (..)
-    , HasComputedDeviceName (..)
-    , HasComputedDiskId (..)
-    , HasComputedDisplayName (..)
-    , HasComputedDnsServer (..)
-    , HasComputedDocument (..)
-    , HasComputedDomain (..)
-    , HasComputedDryRun (..)
-    , HasComputedEmail (..)
-    , HasComputedEngine (..)
-    , HasComputedEngineVersion (..)
-    , HasComputedEtag (..)
-    , HasComputedFingerprint (..)
-    , HasComputedForce (..)
-    , HasComputedForntendPort (..)
-    , HasComputedForwardTableIds (..)
-    , HasComputedGroupId (..)
-    , HasComputedGroupName (..)
-    , HasComputedHealthCheckSourceIp (..)
-    , HasComputedHealthCheckTargetIp (..)
-    , HasComputedHostName (..)
-    , HasComputedHostRecord (..)
-    , HasComputedId (..)
-    , HasComputedImageId (..)
-    , HasComputedInstanceChargeType (..)
-    , HasComputedInstanceId (..)
-    , HasComputedInstanceIds (..)
-    , HasComputedInstanceName (..)
-    , HasComputedInstanceNetworkType (..)
-    , HasComputedInstanceStorage (..)
-    , HasComputedInstanceType (..)
-    , HasComputedInternet (..)
-    , HasComputedInternetChargeType (..)
-    , HasComputedIpAddress (..)
-    , HasComputedIpProtocol (..)
-    , HasComputedIsEnabled (..)
-    , HasComputedKeyName (..)
-    , HasComputedKeyUsage (..)
-    , HasComputedLaunchTime (..)
-    , HasComputedLoadBalancerId (..)
-    , HasComputedLoadbalancerIds (..)
-    , HasComputedLocked (..)
-    , HasComputedLogBackup (..)
-    , HasComputedLogRetentionPeriod (..)
-    , HasComputedMasterUserName (..)
-    , HasComputedMaxSize (..)
-    , HasComputedMfaBindRequired (..)
-    , HasComputedMinSize (..)
-    , HasComputedMobile (..)
-    , HasComputedName (..)
-    , HasComputedNexthopId (..)
-    , HasComputedNexthopType (..)
-    , HasComputedOppositeAccessPointId (..)
-    , HasComputedOppositeInterfaceId (..)
-    , HasComputedOppositeInterfaceOwnerId (..)
-    , HasComputedOppositeRouterId (..)
-    , HasComputedOppositeRouterType (..)
-    , HasComputedPasswordResetRequired (..)
-    , HasComputedPeriod (..)
-    , HasComputedPeriodUnit (..)
-    , HasComputedPolicyName (..)
-    , HasComputedPolicyType (..)
-    , HasComputedPort (..)
-    , HasComputedPortRange (..)
-    , HasComputedPreferredBackupPeriod (..)
-    , HasComputedPreferredBackupTime (..)
-    , HasComputedPriority (..)
-    , HasComputedPrivateIp (..)
-    , HasComputedPrivilege (..)
-    , HasComputedPublicIp (..)
-    , HasComputedRamUsers (..)
-    , HasComputedRemovalPolicies (..)
-    , HasComputedRetentionPeriod (..)
-    , HasComputedRole (..)
-    , HasComputedRoleName (..)
-    , HasComputedRouteTableId (..)
-    , HasComputedRouterId (..)
-    , HasComputedRouterType (..)
-    , HasComputedRouting (..)
-    , HasComputedScalingGroupId (..)
-    , HasComputedScalingGroupName (..)
-    , HasComputedScalingRuleName (..)
-    , HasComputedScheduledAction (..)
-    , HasComputedScheduledTaskName (..)
-    , HasComputedSecurityIps (..)
-    , HasComputedServerGroupId (..)
-    , HasComputedServices (..)
-    , HasComputedSize (..)
-    , HasComputedSnapshotId (..)
-    , HasComputedSnatTableIds (..)
-    , HasComputedSpec (..)
-    , HasComputedSpecification (..)
-    , HasComputedSpotPriceLimit (..)
-    , HasComputedSpotStrategy (..)
-    , HasComputedStatement (..)
-    , HasComputedStatus (..)
-    , HasComputedTags (..)
-    , HasComputedTaskEnabled (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedUrl (..)
-    , HasComputedUserData (..)
-    , HasComputedUserName (..)
-    , HasComputedUserNames (..)
-    , HasComputedValue (..)
-    , HasComputedVersion (..)
-    , HasComputedVpcId (..)
-    , HasComputedVswitchId (..)
-    , HasComputedVswitchIds (..)
-    , HasComputedWeight (..)
-    , HasComputedZoneId (..)
+    , P.HasComputedAccessPointId (..)
+    , P.HasComputedAccountAlias (..)
+    , P.HasComputedAccountName (..)
+    , P.HasComputedAddress (..)
+    , P.HasComputedAdjustmentType (..)
+    , P.HasComputedAdjustmentValue (..)
+    , P.HasComputedAllocationId (..)
+    , P.HasComputedAri (..)
+    , P.HasComputedArn (..)
+    , P.HasComputedAttachmentCount (..)
+    , P.HasComputedAvailabilityZone (..)
+    , P.HasComputedBackendServers (..)
+    , P.HasComputedBackupPeriod (..)
+    , P.HasComputedBackupRetentionPeriod (..)
+    , P.HasComputedBackupTime (..)
+    , P.HasComputedBandwidth (..)
+    , P.HasComputedBandwidthPackageIds (..)
+    , P.HasComputedCategory (..)
+    , P.HasComputedCharacterSet (..)
+    , P.HasComputedCidrBlock (..)
+    , P.HasComputedComments (..)
+    , P.HasComputedConnectionPrefix (..)
+    , P.HasComputedConnectionString (..)
+    , P.HasComputedConnections (..)
+    , P.HasComputedContentLength (..)
+    , P.HasComputedCooldown (..)
+    , P.HasComputedDbInstanceClass (..)
+    , P.HasComputedDbInstanceIds (..)
+    , P.HasComputedDbInstanceNetType (..)
+    , P.HasComputedDbInstanceStorage (..)
+    , P.HasComputedDbMappings (..)
+    , P.HasComputedDbNames (..)
+    , P.HasComputedDefaultCooldown (..)
+    , P.HasComputedDeletionWindowInDays (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedDestinationCidrblock (..)
+    , P.HasComputedDeviceName (..)
+    , P.HasComputedDiskId (..)
+    , P.HasComputedDisplayName (..)
+    , P.HasComputedDnsServer (..)
+    , P.HasComputedDocument (..)
+    , P.HasComputedDomain (..)
+    , P.HasComputedDryRun (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEngine (..)
+    , P.HasComputedEngineVersion (..)
+    , P.HasComputedEtag (..)
+    , P.HasComputedFingerprint (..)
+    , P.HasComputedForce (..)
+    , P.HasComputedForntendPort (..)
+    , P.HasComputedForwardTableIds (..)
+    , P.HasComputedGroupId (..)
+    , P.HasComputedGroupName (..)
+    , P.HasComputedHealthCheckSourceIp (..)
+    , P.HasComputedHealthCheckTargetIp (..)
+    , P.HasComputedHostName (..)
+    , P.HasComputedHostRecord (..)
+    , P.HasComputedId (..)
+    , P.HasComputedImageId (..)
+    , P.HasComputedInstanceChargeType (..)
+    , P.HasComputedInstanceId (..)
+    , P.HasComputedInstanceIds (..)
+    , P.HasComputedInstanceName (..)
+    , P.HasComputedInstanceNetworkType (..)
+    , P.HasComputedInstanceStorage (..)
+    , P.HasComputedInstanceType (..)
+    , P.HasComputedInternet (..)
+    , P.HasComputedInternetChargeType (..)
+    , P.HasComputedIpAddress (..)
+    , P.HasComputedIpProtocol (..)
+    , P.HasComputedIsEnabled (..)
+    , P.HasComputedKeyName (..)
+    , P.HasComputedKeyUsage (..)
+    , P.HasComputedLaunchTime (..)
+    , P.HasComputedLoadBalancerId (..)
+    , P.HasComputedLoadbalancerIds (..)
+    , P.HasComputedLocked (..)
+    , P.HasComputedLogBackup (..)
+    , P.HasComputedLogRetentionPeriod (..)
+    , P.HasComputedMasterUserName (..)
+    , P.HasComputedMaxSize (..)
+    , P.HasComputedMfaBindRequired (..)
+    , P.HasComputedMinSize (..)
+    , P.HasComputedMobile (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNexthopId (..)
+    , P.HasComputedNexthopType (..)
+    , P.HasComputedOppositeAccessPointId (..)
+    , P.HasComputedOppositeInterfaceId (..)
+    , P.HasComputedOppositeInterfaceOwnerId (..)
+    , P.HasComputedOppositeRouterId (..)
+    , P.HasComputedOppositeRouterType (..)
+    , P.HasComputedPasswordResetRequired (..)
+    , P.HasComputedPeriod (..)
+    , P.HasComputedPeriodUnit (..)
+    , P.HasComputedPolicyName (..)
+    , P.HasComputedPolicyType (..)
+    , P.HasComputedPort (..)
+    , P.HasComputedPortRange (..)
+    , P.HasComputedPreferredBackupPeriod (..)
+    , P.HasComputedPreferredBackupTime (..)
+    , P.HasComputedPriority (..)
+    , P.HasComputedPrivateIp (..)
+    , P.HasComputedPrivilege (..)
+    , P.HasComputedPublicIp (..)
+    , P.HasComputedRamUsers (..)
+    , P.HasComputedRemovalPolicies (..)
+    , P.HasComputedRetentionPeriod (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedRoleName (..)
+    , P.HasComputedRouteTableId (..)
+    , P.HasComputedRouterId (..)
+    , P.HasComputedRouterType (..)
+    , P.HasComputedRouting (..)
+    , P.HasComputedScalingGroupId (..)
+    , P.HasComputedScalingGroupName (..)
+    , P.HasComputedScalingRuleName (..)
+    , P.HasComputedScheduledAction (..)
+    , P.HasComputedScheduledTaskName (..)
+    , P.HasComputedSecurityIps (..)
+    , P.HasComputedServerGroupId (..)
+    , P.HasComputedServices (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedSnapshotId (..)
+    , P.HasComputedSnatTableIds (..)
+    , P.HasComputedSpec (..)
+    , P.HasComputedSpecification (..)
+    , P.HasComputedSpotPriceLimit (..)
+    , P.HasComputedSpotStrategy (..)
+    , P.HasComputedStatement (..)
+    , P.HasComputedStatus (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTaskEnabled (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUrl (..)
+    , P.HasComputedUserData (..)
+    , P.HasComputedUserName (..)
+    , P.HasComputedUserNames (..)
+    , P.HasComputedValue (..)
+    , P.HasComputedVersion (..)
+    , P.HasComputedVpcId (..)
+    , P.HasComputedVswitchId (..)
+    , P.HasComputedVswitchIds (..)
+    , P.HasComputedWeight (..)
+    , P.HasComputedZoneId (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                   as TF
-import qualified GHC.Base                    as TF
-import qualified Numeric.Natural             as TF
-import qualified Terrafomo.AliCloud.Provider as TF
-import qualified Terrafomo.AliCloud.Types    as TF
-import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.IP                as TF
-import qualified Terrafomo.Meta              as TF
-import qualified Terrafomo.Name              as TF
-import qualified Terrafomo.Resource          as TF
-import qualified Terrafomo.Resource          as TF
+import qualified Data.Word                   as P
+import qualified GHC.Base                    as P
+import qualified Numeric.Natural             as P
+import qualified Terrafomo.AliCloud.Lens     as P
+import qualified Terrafomo.AliCloud.Provider as P
+import           Terrafomo.AliCloud.Types    as P
+import qualified Terrafomo.IP                as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @alicloud_cdn_domain@ AliCloud resource.
 
@@ -585,37 +584,37 @@ instance TF.ToHCL (CdnDomainResource s) where
         , TF.attribute "sources" _sources
         ]
 
-instance HasCdnType (CdnDomainResource s) s Text where
+instance P.HasCdnType (CdnDomainResource s) s Text where
     cdnType =
         lens (_cdn_type :: CdnDomainResource s -> TF.Attribute s Text)
             (\s a -> s { _cdn_type = a } :: CdnDomainResource s)
 
-instance HasDomainName (CdnDomainResource s) s Text where
+instance P.HasDomainName (CdnDomainResource s) s Text where
     domainName =
         lens (_domain_name :: CdnDomainResource s -> TF.Attribute s Text)
             (\s a -> s { _domain_name = a } :: CdnDomainResource s)
 
-instance HasScope (CdnDomainResource s) s Text where
+instance P.HasScope (CdnDomainResource s) s Text where
     scope =
         lens (_scope :: CdnDomainResource s -> TF.Attribute s Text)
             (\s a -> s { _scope = a } :: CdnDomainResource s)
 
-instance HasSourcePort (CdnDomainResource s) s Text where
+instance P.HasSourcePort (CdnDomainResource s) s Text where
     sourcePort =
         lens (_source_port :: CdnDomainResource s -> TF.Attribute s Text)
             (\s a -> s { _source_port = a } :: CdnDomainResource s)
 
-instance HasSourceType (CdnDomainResource s) s Text where
+instance P.HasSourceType (CdnDomainResource s) s Text where
     sourceType =
         lens (_source_type :: CdnDomainResource s -> TF.Attribute s Text)
             (\s a -> s { _source_type = a } :: CdnDomainResource s)
 
-instance HasSources (CdnDomainResource s) s Text where
+instance P.HasSources (CdnDomainResource s) s Text where
     sources =
         lens (_sources :: CdnDomainResource s -> TF.Attribute s Text)
             (\s a -> s { _sources = a } :: CdnDomainResource s)
 
-cdnDomainResource :: TF.Resource TF.AliCloud (CdnDomainResource s)
+cdnDomainResource :: TF.Resource P.AliCloud (CdnDomainResource s)
 cdnDomainResource =
     TF.newResource "alicloud_cdn_domain" $
         CdnDomainResource {
@@ -668,67 +667,67 @@ instance TF.ToHCL (ContainerClusterResource s) where
         , TF.attribute "vswitch_id" _vswitch_id
         ]
 
-instance HasCidrBlock (ContainerClusterResource s) s Text where
+instance P.HasCidrBlock (ContainerClusterResource s) s Text where
     cidrBlock =
         lens (_cidr_block :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _cidr_block = a } :: ContainerClusterResource s)
 
-instance HasDiskCategory (ContainerClusterResource s) s Text where
+instance P.HasDiskCategory (ContainerClusterResource s) s Text where
     diskCategory =
         lens (_disk_category :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _disk_category = a } :: ContainerClusterResource s)
 
-instance HasDiskSize (ContainerClusterResource s) s Text where
+instance P.HasDiskSize (ContainerClusterResource s) s Text where
     diskSize =
         lens (_disk_size :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _disk_size = a } :: ContainerClusterResource s)
 
-instance HasImageId (ContainerClusterResource s) s Text where
+instance P.HasImageId (ContainerClusterResource s) s Text where
     imageId =
         lens (_image_id :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _image_id = a } :: ContainerClusterResource s)
 
-instance HasInstanceType (ContainerClusterResource s) s Text where
+instance P.HasInstanceType (ContainerClusterResource s) s Text where
     instanceType =
         lens (_instance_type :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_type = a } :: ContainerClusterResource s)
 
-instance HasName (ContainerClusterResource s) s Text where
+instance P.HasName (ContainerClusterResource s) s Text where
     name =
         lens (_name :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ContainerClusterResource s)
 
-instance HasNamePrefix (ContainerClusterResource s) s Text where
+instance P.HasNamePrefix (ContainerClusterResource s) s Text where
     namePrefix =
         lens (_name_prefix :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _name_prefix = a } :: ContainerClusterResource s)
 
-instance HasPassword (ContainerClusterResource s) s Text where
+instance P.HasPassword (ContainerClusterResource s) s Text where
     password =
         lens (_password :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: ContainerClusterResource s)
 
-instance HasSize (ContainerClusterResource s) s Text where
+instance P.HasSize (ContainerClusterResource s) s Text where
     size =
         lens (_size :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: ContainerClusterResource s)
 
-instance HasVswitchId (ContainerClusterResource s) s Text where
+instance P.HasVswitchId (ContainerClusterResource s) s Text where
     vswitchId =
         lens (_vswitch_id :: ContainerClusterResource s -> TF.Attribute s Text)
             (\s a -> s { _vswitch_id = a } :: ContainerClusterResource s)
 
-instance HasComputedId (ContainerClusterResource s) Text
+instance P.HasComputedId (ContainerClusterResource s) Text
 
-instance HasComputedName (ContainerClusterResource s) Text
+instance P.HasComputedName (ContainerClusterResource s) Text
 
-instance HasComputedSize (ContainerClusterResource s) Text
+instance P.HasComputedSize (ContainerClusterResource s) Text
 
-instance HasComputedVpcId (ContainerClusterResource s) Text
+instance P.HasComputedVpcId (ContainerClusterResource s) Text
 
-instance HasComputedVswitchId (ContainerClusterResource s) Text
+instance P.HasComputedVswitchId (ContainerClusterResource s) Text
 
-containerClusterResource :: TF.Resource TF.AliCloud (ContainerClusterResource s)
+containerClusterResource :: TF.Resource P.AliCloud (ContainerClusterResource s)
 containerClusterResource =
     TF.newResource "alicloud_container_cluster" $
         ContainerClusterResource {
@@ -769,37 +768,37 @@ instance TF.ToHCL (DbAccountPrivilegeResource s) where
         , TF.attribute "privilege" _privilege
         ]
 
-instance HasAccountName (DbAccountPrivilegeResource s) s Text where
+instance P.HasAccountName (DbAccountPrivilegeResource s) s Text where
     accountName =
         lens (_account_name :: DbAccountPrivilegeResource s -> TF.Attribute s Text)
             (\s a -> s { _account_name = a } :: DbAccountPrivilegeResource s)
 
-instance HasDbNames (DbAccountPrivilegeResource s) s Text where
+instance P.HasDbNames (DbAccountPrivilegeResource s) s Text where
     dbNames =
         lens (_db_names :: DbAccountPrivilegeResource s -> TF.Attribute s Text)
             (\s a -> s { _db_names = a } :: DbAccountPrivilegeResource s)
 
-instance HasInstanceId (DbAccountPrivilegeResource s) s Text where
+instance P.HasInstanceId (DbAccountPrivilegeResource s) s Text where
     instanceId =
         lens (_instance_id :: DbAccountPrivilegeResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_id = a } :: DbAccountPrivilegeResource s)
 
-instance HasPrivilege (DbAccountPrivilegeResource s) s Text where
+instance P.HasPrivilege (DbAccountPrivilegeResource s) s Text where
     privilege =
         lens (_privilege :: DbAccountPrivilegeResource s -> TF.Attribute s Text)
             (\s a -> s { _privilege = a } :: DbAccountPrivilegeResource s)
 
-instance HasComputedAccountName (DbAccountPrivilegeResource s) Text
+instance P.HasComputedAccountName (DbAccountPrivilegeResource s) Text
 
-instance HasComputedDbNames (DbAccountPrivilegeResource s) Text
+instance P.HasComputedDbNames (DbAccountPrivilegeResource s) Text
 
-instance HasComputedId (DbAccountPrivilegeResource s) Text
+instance P.HasComputedId (DbAccountPrivilegeResource s) Text
 
-instance HasComputedInstanceId (DbAccountPrivilegeResource s) Text
+instance P.HasComputedInstanceId (DbAccountPrivilegeResource s) Text
 
-instance HasComputedPrivilege (DbAccountPrivilegeResource s) Text
+instance P.HasComputedPrivilege (DbAccountPrivilegeResource s) Text
 
-dbAccountPrivilegeResource :: TF.Resource TF.AliCloud (DbAccountPrivilegeResource s)
+dbAccountPrivilegeResource :: TF.Resource P.AliCloud (DbAccountPrivilegeResource s)
 dbAccountPrivilegeResource =
     TF.newResource "alicloud_db_account_privilege" $
         DbAccountPrivilegeResource {
@@ -836,42 +835,42 @@ instance TF.ToHCL (DbAccountResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasDescription (DbAccountResource s) s Text where
+instance P.HasDescription (DbAccountResource s) s Text where
     description =
         lens (_description :: DbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: DbAccountResource s)
 
-instance HasInstanceId (DbAccountResource s) s Text where
+instance P.HasInstanceId (DbAccountResource s) s Text where
     instanceId =
         lens (_instance_id :: DbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_id = a } :: DbAccountResource s)
 
-instance HasName (DbAccountResource s) s Text where
+instance P.HasName (DbAccountResource s) s Text where
     name =
         lens (_name :: DbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DbAccountResource s)
 
-instance HasPassword (DbAccountResource s) s Text where
+instance P.HasPassword (DbAccountResource s) s Text where
     password =
         lens (_password :: DbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: DbAccountResource s)
 
-instance HasType' (DbAccountResource s) s Text where
+instance P.HasType' (DbAccountResource s) s Text where
     type' =
         lens (_type' :: DbAccountResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: DbAccountResource s)
 
-instance HasComputedDescription (DbAccountResource s) Text
+instance P.HasComputedDescription (DbAccountResource s) Text
 
-instance HasComputedId (DbAccountResource s) Text
+instance P.HasComputedId (DbAccountResource s) Text
 
-instance HasComputedInstanceId (DbAccountResource s) Text
+instance P.HasComputedInstanceId (DbAccountResource s) Text
 
-instance HasComputedName (DbAccountResource s) Text
+instance P.HasComputedName (DbAccountResource s) Text
 
-instance HasComputedType' (DbAccountResource s) Text
+instance P.HasComputedType' (DbAccountResource s) Text
 
-dbAccountResource :: TF.Resource TF.AliCloud (DbAccountResource s)
+dbAccountResource :: TF.Resource P.AliCloud (DbAccountResource s)
 dbAccountResource =
     TF.newResource "alicloud_db_account" $
         DbAccountResource {
@@ -913,51 +912,51 @@ instance TF.ToHCL (DbBackupPolicyResource s) where
         , TF.attribute "retention_period" _retention_period
         ]
 
-instance HasBackupPeriod (DbBackupPolicyResource s) s Text where
+instance P.HasBackupPeriod (DbBackupPolicyResource s) s Text where
     backupPeriod =
         lens (_backup_period :: DbBackupPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _backup_period = a } :: DbBackupPolicyResource s)
 
-instance HasBackupTime (DbBackupPolicyResource s) s Text where
+instance P.HasBackupTime (DbBackupPolicyResource s) s Text where
     backupTime =
         lens (_backup_time :: DbBackupPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _backup_time = a } :: DbBackupPolicyResource s)
 
-instance HasInstanceId (DbBackupPolicyResource s) s Text where
+instance P.HasInstanceId (DbBackupPolicyResource s) s Text where
     instanceId =
         lens (_instance_id :: DbBackupPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_id = a } :: DbBackupPolicyResource s)
 
-instance HasLogBackup (DbBackupPolicyResource s) s Text where
+instance P.HasLogBackup (DbBackupPolicyResource s) s Text where
     logBackup =
         lens (_log_backup :: DbBackupPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _log_backup = a } :: DbBackupPolicyResource s)
 
-instance HasLogRetentionPeriod (DbBackupPolicyResource s) s Text where
+instance P.HasLogRetentionPeriod (DbBackupPolicyResource s) s Text where
     logRetentionPeriod =
         lens (_log_retention_period :: DbBackupPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _log_retention_period = a } :: DbBackupPolicyResource s)
 
-instance HasRetentionPeriod (DbBackupPolicyResource s) s Text where
+instance P.HasRetentionPeriod (DbBackupPolicyResource s) s Text where
     retentionPeriod =
         lens (_retention_period :: DbBackupPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _retention_period = a } :: DbBackupPolicyResource s)
 
-instance HasComputedBackupPeriod (DbBackupPolicyResource s) Text
+instance P.HasComputedBackupPeriod (DbBackupPolicyResource s) Text
 
-instance HasComputedBackupTime (DbBackupPolicyResource s) Text
+instance P.HasComputedBackupTime (DbBackupPolicyResource s) Text
 
-instance HasComputedId (DbBackupPolicyResource s) Text
+instance P.HasComputedId (DbBackupPolicyResource s) Text
 
-instance HasComputedInstanceId (DbBackupPolicyResource s) Text
+instance P.HasComputedInstanceId (DbBackupPolicyResource s) Text
 
-instance HasComputedLogBackup (DbBackupPolicyResource s) Text
+instance P.HasComputedLogBackup (DbBackupPolicyResource s) Text
 
-instance HasComputedLogRetentionPeriod (DbBackupPolicyResource s) Text
+instance P.HasComputedLogRetentionPeriod (DbBackupPolicyResource s) Text
 
-instance HasComputedRetentionPeriod (DbBackupPolicyResource s) Text
+instance P.HasComputedRetentionPeriod (DbBackupPolicyResource s) Text
 
-dbBackupPolicyResource :: TF.Resource TF.AliCloud (DbBackupPolicyResource s)
+dbBackupPolicyResource :: TF.Resource P.AliCloud (DbBackupPolicyResource s)
 dbBackupPolicyResource =
     TF.newResource "alicloud_db_backup_policy" $
         DbBackupPolicyResource {
@@ -993,32 +992,32 @@ instance TF.ToHCL (DbConnectionResource s) where
         , TF.attribute "port" _port
         ]
 
-instance HasConnectionPrefix (DbConnectionResource s) s Text where
+instance P.HasConnectionPrefix (DbConnectionResource s) s Text where
     connectionPrefix =
         lens (_connection_prefix :: DbConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _connection_prefix = a } :: DbConnectionResource s)
 
-instance HasInstanceId (DbConnectionResource s) s Text where
+instance P.HasInstanceId (DbConnectionResource s) s Text where
     instanceId =
         lens (_instance_id :: DbConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_id = a } :: DbConnectionResource s)
 
-instance HasPort (DbConnectionResource s) s Text where
+instance P.HasPort (DbConnectionResource s) s Text where
     port =
         lens (_port :: DbConnectionResource s -> TF.Attribute s Text)
             (\s a -> s { _port = a } :: DbConnectionResource s)
 
-instance HasComputedConnectionPrefix (DbConnectionResource s) Text
+instance P.HasComputedConnectionPrefix (DbConnectionResource s) Text
 
-instance HasComputedConnectionString (DbConnectionResource s) Text
+instance P.HasComputedConnectionString (DbConnectionResource s) Text
 
-instance HasComputedId (DbConnectionResource s) Text
+instance P.HasComputedId (DbConnectionResource s) Text
 
-instance HasComputedIpAddress (DbConnectionResource s) Text
+instance P.HasComputedIpAddress (DbConnectionResource s) Text
 
-instance HasComputedPort (DbConnectionResource s) Text
+instance P.HasComputedPort (DbConnectionResource s) Text
 
-dbConnectionResource :: TF.Resource TF.AliCloud (DbConnectionResource s)
+dbConnectionResource :: TF.Resource P.AliCloud (DbConnectionResource s)
 dbConnectionResource =
     TF.newResource "alicloud_db_connection" $
         DbConnectionResource {
@@ -1051,37 +1050,37 @@ instance TF.ToHCL (DbDatabaseResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasCharacterSet (DbDatabaseResource s) s Text where
+instance P.HasCharacterSet (DbDatabaseResource s) s Text where
     characterSet =
         lens (_character_set :: DbDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _character_set = a } :: DbDatabaseResource s)
 
-instance HasDescription (DbDatabaseResource s) s Text where
+instance P.HasDescription (DbDatabaseResource s) s Text where
     description =
         lens (_description :: DbDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: DbDatabaseResource s)
 
-instance HasInstanceId (DbDatabaseResource s) s Text where
+instance P.HasInstanceId (DbDatabaseResource s) s Text where
     instanceId =
         lens (_instance_id :: DbDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_id = a } :: DbDatabaseResource s)
 
-instance HasName (DbDatabaseResource s) s Text where
+instance P.HasName (DbDatabaseResource s) s Text where
     name =
         lens (_name :: DbDatabaseResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DbDatabaseResource s)
 
-instance HasComputedCharacterSet (DbDatabaseResource s) Text
+instance P.HasComputedCharacterSet (DbDatabaseResource s) Text
 
-instance HasComputedDescription (DbDatabaseResource s) Text
+instance P.HasComputedDescription (DbDatabaseResource s) Text
 
-instance HasComputedId (DbDatabaseResource s) Text
+instance P.HasComputedId (DbDatabaseResource s) Text
 
-instance HasComputedInstanceId (DbDatabaseResource s) Text
+instance P.HasComputedInstanceId (DbDatabaseResource s) Text
 
-instance HasComputedName (DbDatabaseResource s) Text
+instance P.HasComputedName (DbDatabaseResource s) Text
 
-dbDatabaseResource :: TF.Resource TF.AliCloud (DbDatabaseResource s)
+dbDatabaseResource :: TF.Resource P.AliCloud (DbDatabaseResource s)
 dbDatabaseResource =
     TF.newResource "alicloud_db_database" $
         DbDatabaseResource {
@@ -1137,108 +1136,108 @@ instance TF.ToHCL (DbInstanceResource s) where
         , TF.attribute "zone_id" _zone_id
         ]
 
-instance HasEngine (DbInstanceResource s) s Text where
+instance P.HasEngine (DbInstanceResource s) s Text where
     engine =
         lens (_engine :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _engine = a } :: DbInstanceResource s)
 
-instance HasEngineVersion (DbInstanceResource s) s Text where
+instance P.HasEngineVersion (DbInstanceResource s) s Text where
     engineVersion =
         lens (_engine_version :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _engine_version = a } :: DbInstanceResource s)
 
-instance HasInstanceChargeType (DbInstanceResource s) s Text where
+instance P.HasInstanceChargeType (DbInstanceResource s) s Text where
     instanceChargeType =
         lens (_instance_charge_type :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_charge_type = a } :: DbInstanceResource s)
 
-instance HasInstanceName (DbInstanceResource s) s Text where
+instance P.HasInstanceName (DbInstanceResource s) s Text where
     instanceName =
         lens (_instance_name :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_name = a } :: DbInstanceResource s)
 
-instance HasInstanceStorage (DbInstanceResource s) s Text where
+instance P.HasInstanceStorage (DbInstanceResource s) s Text where
     instanceStorage =
         lens (_instance_storage :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_storage = a } :: DbInstanceResource s)
 
-instance HasInstanceType (DbInstanceResource s) s Text where
+instance P.HasInstanceType (DbInstanceResource s) s Text where
     instanceType =
         lens (_instance_type :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_type = a } :: DbInstanceResource s)
 
-instance HasMultiAz (DbInstanceResource s) s Text where
+instance P.HasMultiAz (DbInstanceResource s) s Text where
     multiAz =
         lens (_multi_az :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _multi_az = a } :: DbInstanceResource s)
 
-instance HasPeriod (DbInstanceResource s) s Text where
+instance P.HasPeriod (DbInstanceResource s) s Text where
     period =
         lens (_period :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _period = a } :: DbInstanceResource s)
 
-instance HasSecurityIps (DbInstanceResource s) s Text where
+instance P.HasSecurityIps (DbInstanceResource s) s Text where
     securityIps =
         lens (_security_ips :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _security_ips = a } :: DbInstanceResource s)
 
-instance HasVswitchId (DbInstanceResource s) s Text where
+instance P.HasVswitchId (DbInstanceResource s) s Text where
     vswitchId =
         lens (_vswitch_id :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _vswitch_id = a } :: DbInstanceResource s)
 
-instance HasZoneId (DbInstanceResource s) s Text where
+instance P.HasZoneId (DbInstanceResource s) s Text where
     zoneId =
         lens (_zone_id :: DbInstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _zone_id = a } :: DbInstanceResource s)
 
-instance HasComputedBackupRetentionPeriod (DbInstanceResource s) Text
+instance P.HasComputedBackupRetentionPeriod (DbInstanceResource s) Text
 
-instance HasComputedConnectionString (DbInstanceResource s) Text
+instance P.HasComputedConnectionString (DbInstanceResource s) Text
 
-instance HasComputedConnections (DbInstanceResource s) Text
+instance P.HasComputedConnections (DbInstanceResource s) Text
 
-instance HasComputedDbInstanceClass (DbInstanceResource s) Text
+instance P.HasComputedDbInstanceClass (DbInstanceResource s) Text
 
-instance HasComputedDbInstanceNetType (DbInstanceResource s) Text
+instance P.HasComputedDbInstanceNetType (DbInstanceResource s) Text
 
-instance HasComputedDbInstanceStorage (DbInstanceResource s) Text
+instance P.HasComputedDbInstanceStorage (DbInstanceResource s) Text
 
-instance HasComputedDbMappings (DbInstanceResource s) Text
+instance P.HasComputedDbMappings (DbInstanceResource s) Text
 
-instance HasComputedEngine (DbInstanceResource s) Text
+instance P.HasComputedEngine (DbInstanceResource s) Text
 
-instance HasComputedEngineVersion (DbInstanceResource s) Text
+instance P.HasComputedEngineVersion (DbInstanceResource s) Text
 
-instance HasComputedId (DbInstanceResource s) Text
+instance P.HasComputedId (DbInstanceResource s) Text
 
-instance HasComputedInstanceChargeType (DbInstanceResource s) Text
+instance P.HasComputedInstanceChargeType (DbInstanceResource s) Text
 
-instance HasComputedInstanceName (DbInstanceResource s) Text
+instance P.HasComputedInstanceName (DbInstanceResource s) Text
 
-instance HasComputedInstanceNetworkType (DbInstanceResource s) Text
+instance P.HasComputedInstanceNetworkType (DbInstanceResource s) Text
 
-instance HasComputedInstanceStorage (DbInstanceResource s) Text
+instance P.HasComputedInstanceStorage (DbInstanceResource s) Text
 
-instance HasComputedInstanceType (DbInstanceResource s) Text
+instance P.HasComputedInstanceType (DbInstanceResource s) Text
 
-instance HasComputedMasterUserName (DbInstanceResource s) Text
+instance P.HasComputedMasterUserName (DbInstanceResource s) Text
 
-instance HasComputedPeriod (DbInstanceResource s) Text
+instance P.HasComputedPeriod (DbInstanceResource s) Text
 
-instance HasComputedPort (DbInstanceResource s) Text
+instance P.HasComputedPort (DbInstanceResource s) Text
 
-instance HasComputedPreferredBackupPeriod (DbInstanceResource s) Text
+instance P.HasComputedPreferredBackupPeriod (DbInstanceResource s) Text
 
-instance HasComputedPreferredBackupTime (DbInstanceResource s) Text
+instance P.HasComputedPreferredBackupTime (DbInstanceResource s) Text
 
-instance HasComputedSecurityIps (DbInstanceResource s) Text
+instance P.HasComputedSecurityIps (DbInstanceResource s) Text
 
-instance HasComputedVswitchId (DbInstanceResource s) Text
+instance P.HasComputedVswitchId (DbInstanceResource s) Text
 
-instance HasComputedZoneId (DbInstanceResource s) Text
+instance P.HasComputedZoneId (DbInstanceResource s) Text
 
-dbInstanceResource :: TF.Resource TF.AliCloud (DbInstanceResource s)
+dbInstanceResource :: TF.Resource P.AliCloud (DbInstanceResource s)
 dbInstanceResource =
     TF.newResource "alicloud_db_instance" $
         DbInstanceResource {
@@ -1273,23 +1272,23 @@ instance TF.ToHCL (DiskAttachmentResource s) where
         , TF.attribute "instance_id" _instance_id
         ]
 
-instance HasDiskId (DiskAttachmentResource s) s Text where
+instance P.HasDiskId (DiskAttachmentResource s) s Text where
     diskId =
         lens (_disk_id :: DiskAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _disk_id = a } :: DiskAttachmentResource s)
 
-instance HasInstanceId (DiskAttachmentResource s) s Text where
+instance P.HasInstanceId (DiskAttachmentResource s) s Text where
     instanceId =
         lens (_instance_id :: DiskAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_id = a } :: DiskAttachmentResource s)
 
-instance HasComputedDeviceName (DiskAttachmentResource s) Text
+instance P.HasComputedDeviceName (DiskAttachmentResource s) Text
 
-instance HasComputedDiskId (DiskAttachmentResource s) Text
+instance P.HasComputedDiskId (DiskAttachmentResource s) Text
 
-instance HasComputedInstanceId (DiskAttachmentResource s) Text
+instance P.HasComputedInstanceId (DiskAttachmentResource s) Text
 
-diskAttachmentResource :: TF.Resource TF.AliCloud (DiskAttachmentResource s)
+diskAttachmentResource :: TF.Resource P.AliCloud (DiskAttachmentResource s)
 diskAttachmentResource =
     TF.newResource "alicloud_disk_attachment" $
         DiskAttachmentResource {
@@ -1332,60 +1331,60 @@ instance TF.ToHCL (DiskResource s) where
         , TF.attribute "tags" _tags
         ]
 
-instance HasAvailabilityZone (DiskResource s) s Text where
+instance P.HasAvailabilityZone (DiskResource s) s Text where
     availabilityZone =
         lens (_availability_zone :: DiskResource s -> TF.Attribute s Text)
             (\s a -> s { _availability_zone = a } :: DiskResource s)
 
-instance HasCategory (DiskResource s) s Text where
+instance P.HasCategory (DiskResource s) s Text where
     category =
         lens (_category :: DiskResource s -> TF.Attribute s Text)
             (\s a -> s { _category = a } :: DiskResource s)
 
-instance HasDescription (DiskResource s) s Text where
+instance P.HasDescription (DiskResource s) s Text where
     description =
         lens (_description :: DiskResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: DiskResource s)
 
-instance HasName (DiskResource s) s Text where
+instance P.HasName (DiskResource s) s Text where
     name =
         lens (_name :: DiskResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DiskResource s)
 
-instance HasSize (DiskResource s) s Text where
+instance P.HasSize (DiskResource s) s Text where
     size =
         lens (_size :: DiskResource s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: DiskResource s)
 
-instance HasSnapshotId (DiskResource s) s Text where
+instance P.HasSnapshotId (DiskResource s) s Text where
     snapshotId =
         lens (_snapshot_id :: DiskResource s -> TF.Attribute s Text)
             (\s a -> s { _snapshot_id = a } :: DiskResource s)
 
-instance HasTags (DiskResource s) s Text where
+instance P.HasTags (DiskResource s) s Text where
     tags =
         lens (_tags :: DiskResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: DiskResource s)
 
-instance HasComputedAvailabilityZone (DiskResource s) Text
+instance P.HasComputedAvailabilityZone (DiskResource s) Text
 
-instance HasComputedCategory (DiskResource s) Text
+instance P.HasComputedCategory (DiskResource s) Text
 
-instance HasComputedDescription (DiskResource s) Text
+instance P.HasComputedDescription (DiskResource s) Text
 
-instance HasComputedId (DiskResource s) Text
+instance P.HasComputedId (DiskResource s) Text
 
-instance HasComputedName (DiskResource s) Text
+instance P.HasComputedName (DiskResource s) Text
 
-instance HasComputedSize (DiskResource s) Text
+instance P.HasComputedSize (DiskResource s) Text
 
-instance HasComputedSnapshotId (DiskResource s) Text
+instance P.HasComputedSnapshotId (DiskResource s) Text
 
-instance HasComputedStatus (DiskResource s) Text
+instance P.HasComputedStatus (DiskResource s) Text
 
-instance HasComputedTags (DiskResource s) Text
+instance P.HasComputedTags (DiskResource s) Text
 
-diskResource :: TF.Resource TF.AliCloud (DiskResource s)
+diskResource :: TF.Resource P.AliCloud (DiskResource s)
 diskResource =
     TF.newResource "alicloud_disk" $
         DiskResource {
@@ -1412,16 +1411,16 @@ instance TF.ToHCL (DnsGroupResource s) where
         [ TF.attribute "name" _name
         ]
 
-instance HasName (DnsGroupResource s) s Text where
+instance P.HasName (DnsGroupResource s) s Text where
     name =
         lens (_name :: DnsGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsGroupResource s)
 
-instance HasComputedId (DnsGroupResource s) Text
+instance P.HasComputedId (DnsGroupResource s) Text
 
-instance HasComputedName (DnsGroupResource s) Text
+instance P.HasComputedName (DnsGroupResource s) Text
 
-dnsGroupResource :: TF.Resource TF.AliCloud (DnsGroupResource s)
+dnsGroupResource :: TF.Resource P.AliCloud (DnsGroupResource s)
 dnsGroupResource =
     TF.newResource "alicloud_dns_group" $
         DnsGroupResource {
@@ -1460,62 +1459,62 @@ instance TF.ToHCL (DnsResource s) where
         , TF.attribute "value" _value
         ]
 
-instance HasHostRecord (DnsResource s) s Text where
+instance P.HasHostRecord (DnsResource s) s Text where
     hostRecord =
         lens (_host_record :: DnsResource s -> TF.Attribute s Text)
             (\s a -> s { _host_record = a } :: DnsResource s)
 
-instance HasName (DnsResource s) s Text where
+instance P.HasName (DnsResource s) s Text where
     name =
         lens (_name :: DnsResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DnsResource s)
 
-instance HasPriority (DnsResource s) s Text where
+instance P.HasPriority (DnsResource s) s Text where
     priority =
         lens (_priority :: DnsResource s -> TF.Attribute s Text)
             (\s a -> s { _priority = a } :: DnsResource s)
 
-instance HasRouting (DnsResource s) s Text where
+instance P.HasRouting (DnsResource s) s Text where
     routing =
         lens (_routing :: DnsResource s -> TF.Attribute s Text)
             (\s a -> s { _routing = a } :: DnsResource s)
 
-instance HasTtl (DnsResource s) s Text where
+instance P.HasTtl (DnsResource s) s Text where
     ttl =
         lens (_ttl :: DnsResource s -> TF.Attribute s Text)
             (\s a -> s { _ttl = a } :: DnsResource s)
 
-instance HasType' (DnsResource s) s Text where
+instance P.HasType' (DnsResource s) s Text where
     type' =
         lens (_type' :: DnsResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: DnsResource s)
 
-instance HasValue (DnsResource s) s Text where
+instance P.HasValue (DnsResource s) s Text where
     value =
         lens (_value :: DnsResource s -> TF.Attribute s Text)
             (\s a -> s { _value = a } :: DnsResource s)
 
-instance HasComputedLocked (DnsResource s) Text
+instance P.HasComputedLocked (DnsResource s) Text
 
-instance HasComputedHostRecord (DnsResource s) Text
+instance P.HasComputedHostRecord (DnsResource s) Text
 
-instance HasComputedId (DnsResource s) Text
+instance P.HasComputedId (DnsResource s) Text
 
-instance HasComputedName (DnsResource s) Text
+instance P.HasComputedName (DnsResource s) Text
 
-instance HasComputedPriority (DnsResource s) Text
+instance P.HasComputedPriority (DnsResource s) Text
 
-instance HasComputedRouting (DnsResource s) Text
+instance P.HasComputedRouting (DnsResource s) Text
 
-instance HasComputedStatus (DnsResource s) Text
+instance P.HasComputedStatus (DnsResource s) Text
 
-instance HasComputedTtl (DnsResource s) Text
+instance P.HasComputedTtl (DnsResource s) Text
 
-instance HasComputedType' (DnsResource s) Text
+instance P.HasComputedType' (DnsResource s) Text
 
-instance HasComputedValue (DnsResource s) Text
+instance P.HasComputedValue (DnsResource s) Text
 
-dnsResource :: TF.Resource TF.AliCloud (DnsResource s)
+dnsResource :: TF.Resource P.AliCloud (DnsResource s)
 dnsResource =
     TF.newResource "alicloud_dns" $
         DnsResource {
@@ -1551,21 +1550,21 @@ instance TF.ToHCL (EipAssociationResource s) where
         , TF.attribute "instance_id" _instance_id
         ]
 
-instance HasAllocationId (EipAssociationResource s) s Text where
+instance P.HasAllocationId (EipAssociationResource s) s Text where
     allocationId =
         lens (_allocation_id :: EipAssociationResource s -> TF.Attribute s Text)
             (\s a -> s { _allocation_id = a } :: EipAssociationResource s)
 
-instance HasInstanceId (EipAssociationResource s) s Text where
+instance P.HasInstanceId (EipAssociationResource s) s Text where
     instanceId =
         lens (_instance_id :: EipAssociationResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_id = a } :: EipAssociationResource s)
 
-instance HasComputedAllocationId (EipAssociationResource s) Text
+instance P.HasComputedAllocationId (EipAssociationResource s) Text
 
-instance HasComputedInstanceId (EipAssociationResource s) Text
+instance P.HasComputedInstanceId (EipAssociationResource s) Text
 
-eipAssociationResource :: TF.Resource TF.AliCloud (EipAssociationResource s)
+eipAssociationResource :: TF.Resource P.AliCloud (EipAssociationResource s)
 eipAssociationResource =
     TF.newResource "alicloud_eip_association" $
         EipAssociationResource {
@@ -1594,27 +1593,27 @@ instance TF.ToHCL (EipResource s) where
         , TF.attribute "internet_charge_type" _internet_charge_type
         ]
 
-instance HasBandwidth (EipResource s) s Text where
+instance P.HasBandwidth (EipResource s) s Text where
     bandwidth =
         lens (_bandwidth :: EipResource s -> TF.Attribute s Text)
             (\s a -> s { _bandwidth = a } :: EipResource s)
 
-instance HasInternetChargeType (EipResource s) s Text where
+instance P.HasInternetChargeType (EipResource s) s Text where
     internetChargeType =
         lens (_internet_charge_type :: EipResource s -> TF.Attribute s Text)
             (\s a -> s { _internet_charge_type = a } :: EipResource s)
 
-instance HasComputedBandwidth (EipResource s) Text
+instance P.HasComputedBandwidth (EipResource s) Text
 
-instance HasComputedId (EipResource s) Text
+instance P.HasComputedId (EipResource s) Text
 
-instance HasComputedInternetChargeType (EipResource s) Text
+instance P.HasComputedInternetChargeType (EipResource s) Text
 
-instance HasComputedIpAddress (EipResource s) Text
+instance P.HasComputedIpAddress (EipResource s) Text
 
-instance HasComputedStatus (EipResource s) Text
+instance P.HasComputedStatus (EipResource s) Text
 
-eipResource :: TF.Resource TF.AliCloud (EipResource s)
+eipResource :: TF.Resource P.AliCloud (EipResource s)
 eipResource =
     TF.newResource "alicloud_eip" $
         EipResource {
@@ -1647,28 +1646,28 @@ instance TF.ToHCL (EssAttachmentResource s) where
         , TF.attribute "scaling_group_id" _scaling_group_id
         ]
 
-instance HasForce (EssAttachmentResource s) s Text where
+instance P.HasForce (EssAttachmentResource s) s Text where
     force =
         lens (_force :: EssAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _force = a } :: EssAttachmentResource s)
 
-instance HasInstanceIds (EssAttachmentResource s) s Text where
+instance P.HasInstanceIds (EssAttachmentResource s) s Text where
     instanceIds =
         lens (_instance_ids :: EssAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_ids = a } :: EssAttachmentResource s)
 
-instance HasScalingGroupId (EssAttachmentResource s) s Text where
+instance P.HasScalingGroupId (EssAttachmentResource s) s Text where
     scalingGroupId =
         lens (_scaling_group_id :: EssAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _scaling_group_id = a } :: EssAttachmentResource s)
 
-instance HasComputedForce (EssAttachmentResource s) Text
+instance P.HasComputedForce (EssAttachmentResource s) Text
 
-instance HasComputedId (EssAttachmentResource s) Text
+instance P.HasComputedId (EssAttachmentResource s) Text
 
-instance HasComputedInstanceIds (EssAttachmentResource s) Text
+instance P.HasComputedInstanceIds (EssAttachmentResource s) Text
 
-essAttachmentResource :: TF.Resource TF.AliCloud (EssAttachmentResource s)
+essAttachmentResource :: TF.Resource P.AliCloud (EssAttachmentResource s)
 essAttachmentResource =
     TF.newResource "alicloud_ess_attachment" $
         EssAttachmentResource {
@@ -1749,102 +1748,102 @@ instance TF.ToHCL (EssScalingConfigurationResource s) where
         , TF.attribute "user_data" _user_data
         ]
 
-instance HasActive (EssScalingConfigurationResource s) s Text where
+instance P.HasActive (EssScalingConfigurationResource s) s Text where
     active =
         lens (_active :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _active = a } :: EssScalingConfigurationResource s)
 
-instance HasDataDisk (EssScalingConfigurationResource s) s Text where
+instance P.HasDataDisk (EssScalingConfigurationResource s) s Text where
     dataDisk =
         lens (_data_disk :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _data_disk = a } :: EssScalingConfigurationResource s)
 
-instance HasEnable (EssScalingConfigurationResource s) s Text where
+instance P.HasEnable (EssScalingConfigurationResource s) s Text where
     enable =
         lens (_enable :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _enable = a } :: EssScalingConfigurationResource s)
 
-instance HasForceDelete (EssScalingConfigurationResource s) s Text where
+instance P.HasForceDelete (EssScalingConfigurationResource s) s Text where
     forceDelete =
         lens (_force_delete :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _force_delete = a } :: EssScalingConfigurationResource s)
 
-instance HasImageId (EssScalingConfigurationResource s) s Text where
+instance P.HasImageId (EssScalingConfigurationResource s) s Text where
     imageId =
         lens (_image_id :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _image_id = a } :: EssScalingConfigurationResource s)
 
-instance HasInstanceType (EssScalingConfigurationResource s) s Text where
+instance P.HasInstanceType (EssScalingConfigurationResource s) s Text where
     instanceType =
         lens (_instance_type :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_type = a } :: EssScalingConfigurationResource s)
 
-instance HasInternetChargeType (EssScalingConfigurationResource s) s Text where
+instance P.HasInternetChargeType (EssScalingConfigurationResource s) s Text where
     internetChargeType =
         lens (_internet_charge_type :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _internet_charge_type = a } :: EssScalingConfigurationResource s)
 
-instance HasInternetMaxBandwidthIn (EssScalingConfigurationResource s) s Text where
+instance P.HasInternetMaxBandwidthIn (EssScalingConfigurationResource s) s Text where
     internetMaxBandwidthIn =
         lens (_internet_max_bandwidth_in :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _internet_max_bandwidth_in = a } :: EssScalingConfigurationResource s)
 
-instance HasInternetMaxBandwidthOut (EssScalingConfigurationResource s) s Text where
+instance P.HasInternetMaxBandwidthOut (EssScalingConfigurationResource s) s Text where
     internetMaxBandwidthOut =
         lens (_internet_max_bandwidth_out :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _internet_max_bandwidth_out = a } :: EssScalingConfigurationResource s)
 
-instance HasIsOutdated (EssScalingConfigurationResource s) s Text where
+instance P.HasIsOutdated (EssScalingConfigurationResource s) s Text where
     isOutdated =
         lens (_is_outdated :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _is_outdated = a } :: EssScalingConfigurationResource s)
 
-instance HasKeyName (EssScalingConfigurationResource s) s Text where
+instance P.HasKeyName (EssScalingConfigurationResource s) s Text where
     keyName =
         lens (_key_name :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _key_name = a } :: EssScalingConfigurationResource s)
 
-instance HasRoleName (EssScalingConfigurationResource s) s Text where
+instance P.HasRoleName (EssScalingConfigurationResource s) s Text where
     roleName =
         lens (_role_name :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _role_name = a } :: EssScalingConfigurationResource s)
 
-instance HasScalingConfigurationName (EssScalingConfigurationResource s) s Text where
+instance P.HasScalingConfigurationName (EssScalingConfigurationResource s) s Text where
     scalingConfigurationName =
         lens (_scaling_configuration_name :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _scaling_configuration_name = a } :: EssScalingConfigurationResource s)
 
-instance HasScalingGroupId (EssScalingConfigurationResource s) s Text where
+instance P.HasScalingGroupId (EssScalingConfigurationResource s) s Text where
     scalingGroupId =
         lens (_scaling_group_id :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _scaling_group_id = a } :: EssScalingConfigurationResource s)
 
-instance HasSecurityGroupId (EssScalingConfigurationResource s) s Text where
+instance P.HasSecurityGroupId (EssScalingConfigurationResource s) s Text where
     securityGroupId =
         lens (_security_group_id :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _security_group_id = a } :: EssScalingConfigurationResource s)
 
-instance HasSubstitute (EssScalingConfigurationResource s) s Text where
+instance P.HasSubstitute (EssScalingConfigurationResource s) s Text where
     substitute =
         lens (_substitute :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _substitute = a } :: EssScalingConfigurationResource s)
 
-instance HasSystemDiskCategory (EssScalingConfigurationResource s) s Text where
+instance P.HasSystemDiskCategory (EssScalingConfigurationResource s) s Text where
     systemDiskCategory =
         lens (_system_disk_category :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _system_disk_category = a } :: EssScalingConfigurationResource s)
 
-instance HasTags (EssScalingConfigurationResource s) s Text where
+instance P.HasTags (EssScalingConfigurationResource s) s Text where
     tags =
         lens (_tags :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: EssScalingConfigurationResource s)
 
-instance HasUserData (EssScalingConfigurationResource s) s Text where
+instance P.HasUserData (EssScalingConfigurationResource s) s Text where
     userData =
         lens (_user_data :: EssScalingConfigurationResource s -> TF.Attribute s Text)
             (\s a -> s { _user_data = a } :: EssScalingConfigurationResource s)
 
-essScalingConfigurationResource :: TF.Resource TF.AliCloud (EssScalingConfigurationResource s)
+essScalingConfigurationResource :: TF.Resource P.AliCloud (EssScalingConfigurationResource s)
 essScalingConfigurationResource =
     TF.newResource "alicloud_ess_scaling_configuration" $
         EssScalingConfigurationResource {
@@ -1909,65 +1908,65 @@ instance TF.ToHCL (EssScalingGroupResource s) where
         , TF.attribute "vswitch_ids" _vswitch_ids
         ]
 
-instance HasDbInstanceIds (EssScalingGroupResource s) s Text where
+instance P.HasDbInstanceIds (EssScalingGroupResource s) s Text where
     dbInstanceIds =
         lens (_db_instance_ids :: EssScalingGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _db_instance_ids = a } :: EssScalingGroupResource s)
 
-instance HasDefaultCooldown (EssScalingGroupResource s) s Text where
+instance P.HasDefaultCooldown (EssScalingGroupResource s) s Text where
     defaultCooldown =
         lens (_default_cooldown :: EssScalingGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _default_cooldown = a } :: EssScalingGroupResource s)
 
-instance HasLoadbalancerIds (EssScalingGroupResource s) s Text where
+instance P.HasLoadbalancerIds (EssScalingGroupResource s) s Text where
     loadbalancerIds =
         lens (_loadbalancer_ids :: EssScalingGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _loadbalancer_ids = a } :: EssScalingGroupResource s)
 
-instance HasMaxSize (EssScalingGroupResource s) s Text where
+instance P.HasMaxSize (EssScalingGroupResource s) s Text where
     maxSize =
         lens (_max_size :: EssScalingGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _max_size = a } :: EssScalingGroupResource s)
 
-instance HasMinSize (EssScalingGroupResource s) s Text where
+instance P.HasMinSize (EssScalingGroupResource s) s Text where
     minSize =
         lens (_min_size :: EssScalingGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _min_size = a } :: EssScalingGroupResource s)
 
-instance HasRemovalPolicies (EssScalingGroupResource s) s Text where
+instance P.HasRemovalPolicies (EssScalingGroupResource s) s Text where
     removalPolicies =
         lens (_removal_policies :: EssScalingGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _removal_policies = a } :: EssScalingGroupResource s)
 
-instance HasScalingGroupName (EssScalingGroupResource s) s Text where
+instance P.HasScalingGroupName (EssScalingGroupResource s) s Text where
     scalingGroupName =
         lens (_scaling_group_name :: EssScalingGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _scaling_group_name = a } :: EssScalingGroupResource s)
 
-instance HasVswitchIds (EssScalingGroupResource s) s Text where
+instance P.HasVswitchIds (EssScalingGroupResource s) s Text where
     vswitchIds =
         lens (_vswitch_ids :: EssScalingGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _vswitch_ids = a } :: EssScalingGroupResource s)
 
-instance HasComputedDbInstanceIds (EssScalingGroupResource s) Text
+instance P.HasComputedDbInstanceIds (EssScalingGroupResource s) Text
 
-instance HasComputedDefaultCooldown (EssScalingGroupResource s) Text
+instance P.HasComputedDefaultCooldown (EssScalingGroupResource s) Text
 
-instance HasComputedId (EssScalingGroupResource s) Text
+instance P.HasComputedId (EssScalingGroupResource s) Text
 
-instance HasComputedLoadbalancerIds (EssScalingGroupResource s) Text
+instance P.HasComputedLoadbalancerIds (EssScalingGroupResource s) Text
 
-instance HasComputedMaxSize (EssScalingGroupResource s) Text
+instance P.HasComputedMaxSize (EssScalingGroupResource s) Text
 
-instance HasComputedMinSize (EssScalingGroupResource s) Text
+instance P.HasComputedMinSize (EssScalingGroupResource s) Text
 
-instance HasComputedRemovalPolicies (EssScalingGroupResource s) Text
+instance P.HasComputedRemovalPolicies (EssScalingGroupResource s) Text
 
-instance HasComputedScalingGroupName (EssScalingGroupResource s) Text
+instance P.HasComputedScalingGroupName (EssScalingGroupResource s) Text
 
-instance HasComputedVswitchIds (EssScalingGroupResource s) Text
+instance P.HasComputedVswitchIds (EssScalingGroupResource s) Text
 
-essScalingGroupResource :: TF.Resource TF.AliCloud (EssScalingGroupResource s)
+essScalingGroupResource :: TF.Resource P.AliCloud (EssScalingGroupResource s)
 essScalingGroupResource =
     TF.newResource "alicloud_ess_scaling_group" $
         EssScalingGroupResource {
@@ -2007,46 +2006,46 @@ instance TF.ToHCL (EssScalingRuleResource s) where
         , TF.attribute "scaling_rule_name" _scaling_rule_name
         ]
 
-instance HasAdjustmentType (EssScalingRuleResource s) s Text where
+instance P.HasAdjustmentType (EssScalingRuleResource s) s Text where
     adjustmentType =
         lens (_adjustment_type :: EssScalingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _adjustment_type = a } :: EssScalingRuleResource s)
 
-instance HasAdjustmentValue (EssScalingRuleResource s) s Text where
+instance P.HasAdjustmentValue (EssScalingRuleResource s) s Text where
     adjustmentValue =
         lens (_adjustment_value :: EssScalingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _adjustment_value = a } :: EssScalingRuleResource s)
 
-instance HasCooldown (EssScalingRuleResource s) s Text where
+instance P.HasCooldown (EssScalingRuleResource s) s Text where
     cooldown =
         lens (_cooldown :: EssScalingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _cooldown = a } :: EssScalingRuleResource s)
 
-instance HasScalingGroupId (EssScalingRuleResource s) s Text where
+instance P.HasScalingGroupId (EssScalingRuleResource s) s Text where
     scalingGroupId =
         lens (_scaling_group_id :: EssScalingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _scaling_group_id = a } :: EssScalingRuleResource s)
 
-instance HasScalingRuleName (EssScalingRuleResource s) s Text where
+instance P.HasScalingRuleName (EssScalingRuleResource s) s Text where
     scalingRuleName =
         lens (_scaling_rule_name :: EssScalingRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _scaling_rule_name = a } :: EssScalingRuleResource s)
 
-instance HasComputedAdjustmentType (EssScalingRuleResource s) Text
+instance P.HasComputedAdjustmentType (EssScalingRuleResource s) Text
 
-instance HasComputedAdjustmentValue (EssScalingRuleResource s) Text
+instance P.HasComputedAdjustmentValue (EssScalingRuleResource s) Text
 
-instance HasComputedAri (EssScalingRuleResource s) Text
+instance P.HasComputedAri (EssScalingRuleResource s) Text
 
-instance HasComputedCooldown (EssScalingRuleResource s) Text
+instance P.HasComputedCooldown (EssScalingRuleResource s) Text
 
-instance HasComputedId (EssScalingRuleResource s) Text
+instance P.HasComputedId (EssScalingRuleResource s) Text
 
-instance HasComputedScalingGroupId (EssScalingRuleResource s) Text
+instance P.HasComputedScalingGroupId (EssScalingRuleResource s) Text
 
-instance HasComputedScalingRuleName (EssScalingRuleResource s) Text
+instance P.HasComputedScalingRuleName (EssScalingRuleResource s) Text
 
-essScalingRuleResource :: TF.Resource TF.AliCloud (EssScalingRuleResource s)
+essScalingRuleResource :: TF.Resource P.AliCloud (EssScalingRuleResource s)
 essScalingRuleResource =
     TF.newResource "alicloud_ess_scaling_rule" $
         EssScalingRuleResource {
@@ -2095,64 +2094,64 @@ instance TF.ToHCL (EssScheduleResource s) where
         , TF.attribute "task_enabled" _task_enabled
         ]
 
-instance HasDescription (EssScheduleResource s) s Text where
+instance P.HasDescription (EssScheduleResource s) s Text where
     description =
         lens (_description :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: EssScheduleResource s)
 
-instance HasLaunchExpirationTime (EssScheduleResource s) s Text where
+instance P.HasLaunchExpirationTime (EssScheduleResource s) s Text where
     launchExpirationTime =
         lens (_launch_expiration_time :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _launch_expiration_time = a } :: EssScheduleResource s)
 
-instance HasLaunchTime (EssScheduleResource s) s Text where
+instance P.HasLaunchTime (EssScheduleResource s) s Text where
     launchTime =
         lens (_launch_time :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _launch_time = a } :: EssScheduleResource s)
 
-instance HasRecurrenceEndTime (EssScheduleResource s) s Text where
+instance P.HasRecurrenceEndTime (EssScheduleResource s) s Text where
     recurrenceEndTime =
         lens (_recurrence_end_time :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _recurrence_end_time = a } :: EssScheduleResource s)
 
-instance HasRecurrenceType (EssScheduleResource s) s Text where
+instance P.HasRecurrenceType (EssScheduleResource s) s Text where
     recurrenceType =
         lens (_recurrence_type :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _recurrence_type = a } :: EssScheduleResource s)
 
-instance HasRecurrenceValue (EssScheduleResource s) s Text where
+instance P.HasRecurrenceValue (EssScheduleResource s) s Text where
     recurrenceValue =
         lens (_recurrence_value :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _recurrence_value = a } :: EssScheduleResource s)
 
-instance HasScheduledAction (EssScheduleResource s) s Text where
+instance P.HasScheduledAction (EssScheduleResource s) s Text where
     scheduledAction =
         lens (_scheduled_action :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _scheduled_action = a } :: EssScheduleResource s)
 
-instance HasScheduledTaskName (EssScheduleResource s) s Text where
+instance P.HasScheduledTaskName (EssScheduleResource s) s Text where
     scheduledTaskName =
         lens (_scheduled_task_name :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _scheduled_task_name = a } :: EssScheduleResource s)
 
-instance HasTaskEnabled (EssScheduleResource s) s Text where
+instance P.HasTaskEnabled (EssScheduleResource s) s Text where
     taskEnabled =
         lens (_task_enabled :: EssScheduleResource s -> TF.Attribute s Text)
             (\s a -> s { _task_enabled = a } :: EssScheduleResource s)
 
-instance HasComputedDescription (EssScheduleResource s) Text
+instance P.HasComputedDescription (EssScheduleResource s) Text
 
-instance HasComputedId (EssScheduleResource s) Text
+instance P.HasComputedId (EssScheduleResource s) Text
 
-instance HasComputedLaunchTime (EssScheduleResource s) Text
+instance P.HasComputedLaunchTime (EssScheduleResource s) Text
 
-instance HasComputedScheduledAction (EssScheduleResource s) Text
+instance P.HasComputedScheduledAction (EssScheduleResource s) Text
 
-instance HasComputedScheduledTaskName (EssScheduleResource s) Text
+instance P.HasComputedScheduledTaskName (EssScheduleResource s) Text
 
-instance HasComputedTaskEnabled (EssScheduleResource s) Text
+instance P.HasComputedTaskEnabled (EssScheduleResource s) Text
 
-essScheduleResource :: TF.Resource TF.AliCloud (EssScheduleResource s)
+essScheduleResource :: TF.Resource P.AliCloud (EssScheduleResource s)
 essScheduleResource =
     TF.newResource "alicloud_ess_schedule" $
         EssScheduleResource {
@@ -2196,37 +2195,37 @@ instance TF.ToHCL (ForwardResource s) where
         , TF.attribute "ip_protocol" _ip_protocol
         ]
 
-instance HasExternalIp (ForwardResource s) s Text where
+instance P.HasExternalIp (ForwardResource s) s Text where
     externalIp =
         lens (_external_ip :: ForwardResource s -> TF.Attribute s Text)
             (\s a -> s { _external_ip = a } :: ForwardResource s)
 
-instance HasExternalPort (ForwardResource s) s Text where
+instance P.HasExternalPort (ForwardResource s) s Text where
     externalPort =
         lens (_external_port :: ForwardResource s -> TF.Attribute s Text)
             (\s a -> s { _external_port = a } :: ForwardResource s)
 
-instance HasForwardTableId (ForwardResource s) s Text where
+instance P.HasForwardTableId (ForwardResource s) s Text where
     forwardTableId =
         lens (_forward_table_id :: ForwardResource s -> TF.Attribute s Text)
             (\s a -> s { _forward_table_id = a } :: ForwardResource s)
 
-instance HasInternalIp (ForwardResource s) s Text where
+instance P.HasInternalIp (ForwardResource s) s Text where
     internalIp =
         lens (_internal_ip :: ForwardResource s -> TF.Attribute s Text)
             (\s a -> s { _internal_ip = a } :: ForwardResource s)
 
-instance HasInternalPort (ForwardResource s) s Text where
+instance P.HasInternalPort (ForwardResource s) s Text where
     internalPort =
         lens (_internal_port :: ForwardResource s -> TF.Attribute s Text)
             (\s a -> s { _internal_port = a } :: ForwardResource s)
 
-instance HasIpProtocol (ForwardResource s) s Text where
+instance P.HasIpProtocol (ForwardResource s) s Text where
     ipProtocol =
         lens (_ip_protocol :: ForwardResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_protocol = a } :: ForwardResource s)
 
-forwardResource :: TF.Resource TF.AliCloud (ForwardResource s)
+forwardResource :: TF.Resource P.AliCloud (ForwardResource s)
 forwardResource =
     TF.newResource "alicloud_forward" $
         ForwardResource {
@@ -2340,182 +2339,182 @@ instance TF.ToHCL (InstanceResource s) where
         , TF.attribute "vswitch_id" _vswitch_id
         ]
 
-instance HasAvailabilityZone (InstanceResource s) s Text where
+instance P.HasAvailabilityZone (InstanceResource s) s Text where
     availabilityZone =
         lens (_availability_zone :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _availability_zone = a } :: InstanceResource s)
 
-instance HasDescription (InstanceResource s) s Text where
+instance P.HasDescription (InstanceResource s) s Text where
     description =
         lens (_description :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: InstanceResource s)
 
-instance HasDryRun (InstanceResource s) s Text where
+instance P.HasDryRun (InstanceResource s) s Text where
     dryRun =
         lens (_dry_run :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _dry_run = a } :: InstanceResource s)
 
-instance HasHostName (InstanceResource s) s Text where
+instance P.HasHostName (InstanceResource s) s Text where
     hostName =
         lens (_host_name :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _host_name = a } :: InstanceResource s)
 
-instance HasImageId (InstanceResource s) s Text where
+instance P.HasImageId (InstanceResource s) s Text where
     imageId =
         lens (_image_id :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _image_id = a } :: InstanceResource s)
 
-instance HasIncludeDataDisks (InstanceResource s) s Text where
+instance P.HasIncludeDataDisks (InstanceResource s) s Text where
     includeDataDisks =
         lens (_include_data_disks :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _include_data_disks = a } :: InstanceResource s)
 
-instance HasInstanceChargeType (InstanceResource s) s Text where
+instance P.HasInstanceChargeType (InstanceResource s) s Text where
     instanceChargeType =
         lens (_instance_charge_type :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_charge_type = a } :: InstanceResource s)
 
-instance HasInstanceName (InstanceResource s) s Text where
+instance P.HasInstanceName (InstanceResource s) s Text where
     instanceName =
         lens (_instance_name :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_name = a } :: InstanceResource s)
 
-instance HasInstanceType (InstanceResource s) s Text where
+instance P.HasInstanceType (InstanceResource s) s Text where
     instanceType =
         lens (_instance_type :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_type = a } :: InstanceResource s)
 
-instance HasInternetChargeType (InstanceResource s) s Text where
+instance P.HasInternetChargeType (InstanceResource s) s Text where
     internetChargeType =
         lens (_internet_charge_type :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _internet_charge_type = a } :: InstanceResource s)
 
-instance HasInternetMaxBandwidthIn (InstanceResource s) s Text where
+instance P.HasInternetMaxBandwidthIn (InstanceResource s) s Text where
     internetMaxBandwidthIn =
         lens (_internet_max_bandwidth_in :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _internet_max_bandwidth_in = a } :: InstanceResource s)
 
-instance HasInternetMaxBandwidthOut (InstanceResource s) s Text where
+instance P.HasInternetMaxBandwidthOut (InstanceResource s) s Text where
     internetMaxBandwidthOut =
         lens (_internet_max_bandwidth_out :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _internet_max_bandwidth_out = a } :: InstanceResource s)
 
-instance HasIsOutdated (InstanceResource s) s Text where
+instance P.HasIsOutdated (InstanceResource s) s Text where
     isOutdated =
         lens (_is_outdated :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _is_outdated = a } :: InstanceResource s)
 
-instance HasKeyName (InstanceResource s) s Text where
+instance P.HasKeyName (InstanceResource s) s Text where
     keyName =
         lens (_key_name :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _key_name = a } :: InstanceResource s)
 
-instance HasPassword (InstanceResource s) s Text where
+instance P.HasPassword (InstanceResource s) s Text where
     password =
         lens (_password :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: InstanceResource s)
 
-instance HasPeriod (InstanceResource s) s Text where
+instance P.HasPeriod (InstanceResource s) s Text where
     period =
         lens (_period :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _period = a } :: InstanceResource s)
 
-instance HasPeriodUnit (InstanceResource s) s Text where
+instance P.HasPeriodUnit (InstanceResource s) s Text where
     periodUnit =
         lens (_period_unit :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _period_unit = a } :: InstanceResource s)
 
-instance HasPrivateIp (InstanceResource s) s Text where
+instance P.HasPrivateIp (InstanceResource s) s Text where
     privateIp =
         lens (_private_ip :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _private_ip = a } :: InstanceResource s)
 
-instance HasRoleName (InstanceResource s) s Text where
+instance P.HasRoleName (InstanceResource s) s Text where
     roleName =
         lens (_role_name :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _role_name = a } :: InstanceResource s)
 
-instance HasSecurityGroups (InstanceResource s) s Text where
+instance P.HasSecurityGroups (InstanceResource s) s Text where
     securityGroups =
         lens (_security_groups :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _security_groups = a } :: InstanceResource s)
 
-instance HasSpotPriceLimit (InstanceResource s) s Text where
+instance P.HasSpotPriceLimit (InstanceResource s) s Text where
     spotPriceLimit =
         lens (_spot_price_limit :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _spot_price_limit = a } :: InstanceResource s)
 
-instance HasSpotStrategy (InstanceResource s) s Text where
+instance P.HasSpotStrategy (InstanceResource s) s Text where
     spotStrategy =
         lens (_spot_strategy :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _spot_strategy = a } :: InstanceResource s)
 
-instance HasSystemDiskCategory (InstanceResource s) s Text where
+instance P.HasSystemDiskCategory (InstanceResource s) s Text where
     systemDiskCategory =
         lens (_system_disk_category :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _system_disk_category = a } :: InstanceResource s)
 
-instance HasSystemDiskSize (InstanceResource s) s Text where
+instance P.HasSystemDiskSize (InstanceResource s) s Text where
     systemDiskSize =
         lens (_system_disk_size :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _system_disk_size = a } :: InstanceResource s)
 
-instance HasTags (InstanceResource s) s Text where
+instance P.HasTags (InstanceResource s) s Text where
     tags =
         lens (_tags :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: InstanceResource s)
 
-instance HasUserData (InstanceResource s) s Text where
+instance P.HasUserData (InstanceResource s) s Text where
     userData =
         lens (_user_data :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _user_data = a } :: InstanceResource s)
 
-instance HasVswitchId (InstanceResource s) s Text where
+instance P.HasVswitchId (InstanceResource s) s Text where
     vswitchId =
         lens (_vswitch_id :: InstanceResource s -> TF.Attribute s Text)
             (\s a -> s { _vswitch_id = a } :: InstanceResource s)
 
-instance HasComputedAvailabilityZone (InstanceResource s) Text
+instance P.HasComputedAvailabilityZone (InstanceResource s) Text
 
-instance HasComputedDescription (InstanceResource s) Text
+instance P.HasComputedDescription (InstanceResource s) Text
 
-instance HasComputedDryRun (InstanceResource s) Text
+instance P.HasComputedDryRun (InstanceResource s) Text
 
-instance HasComputedHostName (InstanceResource s) Text
+instance P.HasComputedHostName (InstanceResource s) Text
 
-instance HasComputedId (InstanceResource s) Text
+instance P.HasComputedId (InstanceResource s) Text
 
-instance HasComputedImageId (InstanceResource s) Text
+instance P.HasComputedImageId (InstanceResource s) Text
 
-instance HasComputedInstanceName (InstanceResource s) Text
+instance P.HasComputedInstanceName (InstanceResource s) Text
 
-instance HasComputedInstanceType (InstanceResource s) Text
+instance P.HasComputedInstanceType (InstanceResource s) Text
 
-instance HasComputedKeyName (InstanceResource s) Text
+instance P.HasComputedKeyName (InstanceResource s) Text
 
-instance HasComputedPeriod (InstanceResource s) Text
+instance P.HasComputedPeriod (InstanceResource s) Text
 
-instance HasComputedPeriodUnit (InstanceResource s) Text
+instance P.HasComputedPeriodUnit (InstanceResource s) Text
 
-instance HasComputedPrivateIp (InstanceResource s) Text
+instance P.HasComputedPrivateIp (InstanceResource s) Text
 
-instance HasComputedPublicIp (InstanceResource s) Text
+instance P.HasComputedPublicIp (InstanceResource s) Text
 
-instance HasComputedRoleName (InstanceResource s) Text
+instance P.HasComputedRoleName (InstanceResource s) Text
 
-instance HasComputedSpotPriceLimit (InstanceResource s) Text
+instance P.HasComputedSpotPriceLimit (InstanceResource s) Text
 
-instance HasComputedSpotStrategy (InstanceResource s) Text
+instance P.HasComputedSpotStrategy (InstanceResource s) Text
 
-instance HasComputedStatus (InstanceResource s) Text
+instance P.HasComputedStatus (InstanceResource s) Text
 
-instance HasComputedTags (InstanceResource s) Text
+instance P.HasComputedTags (InstanceResource s) Text
 
-instance HasComputedUserData (InstanceResource s) Text
+instance P.HasComputedUserData (InstanceResource s) Text
 
-instance HasComputedVswitchId (InstanceResource s) Text
+instance P.HasComputedVswitchId (InstanceResource s) Text
 
-instanceResource :: TF.Resource TF.AliCloud (InstanceResource s)
+instanceResource :: TF.Resource P.AliCloud (InstanceResource s)
 instanceResource =
     TF.newResource "alicloud_instance" $
         InstanceResource {
@@ -2566,21 +2565,21 @@ instance TF.ToHCL (KeyPairAttachmentResource s) where
         , TF.attribute "key_name" _key_name
         ]
 
-instance HasInstanceIds (KeyPairAttachmentResource s) s Text where
+instance P.HasInstanceIds (KeyPairAttachmentResource s) s Text where
     instanceIds =
         lens (_instance_ids :: KeyPairAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_ids = a } :: KeyPairAttachmentResource s)
 
-instance HasKeyName (KeyPairAttachmentResource s) s Text where
+instance P.HasKeyName (KeyPairAttachmentResource s) s Text where
     keyName =
         lens (_key_name :: KeyPairAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _key_name = a } :: KeyPairAttachmentResource s)
 
-instance HasComputedInstanceIds (KeyPairAttachmentResource s) Text
+instance P.HasComputedInstanceIds (KeyPairAttachmentResource s) Text
 
-instance HasComputedKeyName (KeyPairAttachmentResource s) Text
+instance P.HasComputedKeyName (KeyPairAttachmentResource s) Text
 
-keyPairAttachmentResource :: TF.Resource TF.AliCloud (KeyPairAttachmentResource s)
+keyPairAttachmentResource :: TF.Resource P.AliCloud (KeyPairAttachmentResource s)
 keyPairAttachmentResource =
     TF.newResource "alicloud_key_pair_attachment" $
         KeyPairAttachmentResource {
@@ -2611,31 +2610,31 @@ instance TF.ToHCL (KeyPairResource s) where
         , TF.attribute "public_key" _public_key
         ]
 
-instance HasKeyFile (KeyPairResource s) s Text where
+instance P.HasKeyFile (KeyPairResource s) s Text where
     keyFile =
         lens (_key_file :: KeyPairResource s -> TF.Attribute s Text)
             (\s a -> s { _key_file = a } :: KeyPairResource s)
 
-instance HasKeyName (KeyPairResource s) s Text where
+instance P.HasKeyName (KeyPairResource s) s Text where
     keyName =
         lens (_key_name :: KeyPairResource s -> TF.Attribute s Text)
             (\s a -> s { _key_name = a } :: KeyPairResource s)
 
-instance HasKeyNamePrefix (KeyPairResource s) s Text where
+instance P.HasKeyNamePrefix (KeyPairResource s) s Text where
     keyNamePrefix =
         lens (_key_name_prefix :: KeyPairResource s -> TF.Attribute s Text)
             (\s a -> s { _key_name_prefix = a } :: KeyPairResource s)
 
-instance HasPublicKey (KeyPairResource s) s Text where
+instance P.HasPublicKey (KeyPairResource s) s Text where
     publicKey =
         lens (_public_key :: KeyPairResource s -> TF.Attribute s Text)
             (\s a -> s { _public_key = a } :: KeyPairResource s)
 
-instance HasComputedFingerprint (KeyPairResource s) Text
+instance P.HasComputedFingerprint (KeyPairResource s) Text
 
-instance HasComputedKeyName (KeyPairResource s) Text
+instance P.HasComputedKeyName (KeyPairResource s) Text
 
-keyPairResource :: TF.Resource TF.AliCloud (KeyPairResource s)
+keyPairResource :: TF.Resource P.AliCloud (KeyPairResource s)
 keyPairResource =
     TF.newResource "alicloud_key_pair" $
         KeyPairResource {
@@ -2669,39 +2668,39 @@ instance TF.ToHCL (KmsKeyResource s) where
         , TF.attribute "key_usage" _key_usage
         ]
 
-instance HasDeletionWindowInDays (KmsKeyResource s) s Text where
+instance P.HasDeletionWindowInDays (KmsKeyResource s) s Text where
     deletionWindowInDays =
         lens (_deletion_window_in_days :: KmsKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _deletion_window_in_days = a } :: KmsKeyResource s)
 
-instance HasDescription (KmsKeyResource s) s Text where
+instance P.HasDescription (KmsKeyResource s) s Text where
     description =
         lens (_description :: KmsKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: KmsKeyResource s)
 
-instance HasIsEnabled (KmsKeyResource s) s Text where
+instance P.HasIsEnabled (KmsKeyResource s) s Text where
     isEnabled =
         lens (_is_enabled :: KmsKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _is_enabled = a } :: KmsKeyResource s)
 
-instance HasKeyUsage (KmsKeyResource s) s Text where
+instance P.HasKeyUsage (KmsKeyResource s) s Text where
     keyUsage =
         lens (_key_usage :: KmsKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _key_usage = a } :: KmsKeyResource s)
 
-instance HasComputedArn (KmsKeyResource s) Text
+instance P.HasComputedArn (KmsKeyResource s) Text
 
-instance HasComputedDeletionWindowInDays (KmsKeyResource s) Text
+instance P.HasComputedDeletionWindowInDays (KmsKeyResource s) Text
 
-instance HasComputedDescription (KmsKeyResource s) Text
+instance P.HasComputedDescription (KmsKeyResource s) Text
 
-instance HasComputedId (KmsKeyResource s) Text
+instance P.HasComputedId (KmsKeyResource s) Text
 
-instance HasComputedIsEnabled (KmsKeyResource s) Text
+instance P.HasComputedIsEnabled (KmsKeyResource s) Text
 
-instance HasComputedKeyUsage (KmsKeyResource s) Text
+instance P.HasComputedKeyUsage (KmsKeyResource s) Text
 
-kmsKeyResource :: TF.Resource TF.AliCloud (KmsKeyResource s)
+kmsKeyResource :: TF.Resource P.AliCloud (KmsKeyResource s)
 kmsKeyResource =
     TF.newResource "alicloud_kms_key" $
         KmsKeyResource {
@@ -2741,45 +2740,45 @@ instance TF.ToHCL (NatGatewayResource s) where
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasDescription (NatGatewayResource s) s Text where
+instance P.HasDescription (NatGatewayResource s) s Text where
     description =
         lens (_description :: NatGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: NatGatewayResource s)
 
-instance HasName (NatGatewayResource s) s Text where
+instance P.HasName (NatGatewayResource s) s Text where
     name =
         lens (_name :: NatGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NatGatewayResource s)
 
-instance HasSpecification (NatGatewayResource s) s Text where
+instance P.HasSpecification (NatGatewayResource s) s Text where
     specification =
         lens (_specification :: NatGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _specification = a } :: NatGatewayResource s)
 
-instance HasVpcId (NatGatewayResource s) s Text where
+instance P.HasVpcId (NatGatewayResource s) s Text where
     vpcId =
         lens (_vpc_id :: NatGatewayResource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: NatGatewayResource s)
 
-instance HasComputedBandwidthPackageIds (NatGatewayResource s) Text
+instance P.HasComputedBandwidthPackageIds (NatGatewayResource s) Text
 
-instance HasComputedDescription (NatGatewayResource s) Text
+instance P.HasComputedDescription (NatGatewayResource s) Text
 
-instance HasComputedForwardTableIds (NatGatewayResource s) Text
+instance P.HasComputedForwardTableIds (NatGatewayResource s) Text
 
-instance HasComputedId (NatGatewayResource s) Text
+instance P.HasComputedId (NatGatewayResource s) Text
 
-instance HasComputedName (NatGatewayResource s) Text
+instance P.HasComputedName (NatGatewayResource s) Text
 
-instance HasComputedSnatTableIds (NatGatewayResource s) Text
+instance P.HasComputedSnatTableIds (NatGatewayResource s) Text
 
-instance HasComputedSpec (NatGatewayResource s) Text
+instance P.HasComputedSpec (NatGatewayResource s) Text
 
-instance HasComputedSpecification (NatGatewayResource s) Text
+instance P.HasComputedSpecification (NatGatewayResource s) Text
 
-instance HasComputedVpcId (NatGatewayResource s) Text
+instance P.HasComputedVpcId (NatGatewayResource s) Text
 
-natGatewayResource :: TF.Resource TF.AliCloud (NatGatewayResource s)
+natGatewayResource :: TF.Resource P.AliCloud (NatGatewayResource s)
 natGatewayResource =
     TF.newResource "alicloud_nat_gateway" $
         NatGatewayResource {
@@ -2836,73 +2835,73 @@ instance TF.ToHCL (OssBucketObjectResource s) where
         , TF.attribute "source" _source
         ]
 
-instance HasAcl (OssBucketObjectResource s) s Text where
+instance P.HasAcl (OssBucketObjectResource s) s Text where
     acl =
         lens (_acl :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _acl = a } :: OssBucketObjectResource s)
 
-instance HasBucket (OssBucketObjectResource s) s Text where
+instance P.HasBucket (OssBucketObjectResource s) s Text where
     bucket =
         lens (_bucket :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: OssBucketObjectResource s)
 
-instance HasCacheControl (OssBucketObjectResource s) s Text where
+instance P.HasCacheControl (OssBucketObjectResource s) s Text where
     cacheControl =
         lens (_cache_control :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _cache_control = a } :: OssBucketObjectResource s)
 
-instance HasContent (OssBucketObjectResource s) s Text where
+instance P.HasContent (OssBucketObjectResource s) s Text where
     content =
         lens (_content :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _content = a } :: OssBucketObjectResource s)
 
-instance HasContentDisposition (OssBucketObjectResource s) s Text where
+instance P.HasContentDisposition (OssBucketObjectResource s) s Text where
     contentDisposition =
         lens (_content_disposition :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _content_disposition = a } :: OssBucketObjectResource s)
 
-instance HasContentEncoding (OssBucketObjectResource s) s Text where
+instance P.HasContentEncoding (OssBucketObjectResource s) s Text where
     contentEncoding =
         lens (_content_encoding :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _content_encoding = a } :: OssBucketObjectResource s)
 
-instance HasContentMd5 (OssBucketObjectResource s) s Text where
+instance P.HasContentMd5 (OssBucketObjectResource s) s Text where
     contentMd5 =
         lens (_content_md5 :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _content_md5 = a } :: OssBucketObjectResource s)
 
-instance HasContentType (OssBucketObjectResource s) s Text where
+instance P.HasContentType (OssBucketObjectResource s) s Text where
     contentType =
         lens (_content_type :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _content_type = a } :: OssBucketObjectResource s)
 
-instance HasExpires (OssBucketObjectResource s) s Text where
+instance P.HasExpires (OssBucketObjectResource s) s Text where
     expires =
         lens (_expires :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _expires = a } :: OssBucketObjectResource s)
 
-instance HasKey (OssBucketObjectResource s) s Text where
+instance P.HasKey (OssBucketObjectResource s) s Text where
     key =
         lens (_key :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _key = a } :: OssBucketObjectResource s)
 
-instance HasServerSideEncryption (OssBucketObjectResource s) s Text where
+instance P.HasServerSideEncryption (OssBucketObjectResource s) s Text where
     serverSideEncryption =
         lens (_server_side_encryption :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _server_side_encryption = a } :: OssBucketObjectResource s)
 
-instance HasSource (OssBucketObjectResource s) s Text where
+instance P.HasSource (OssBucketObjectResource s) s Text where
     source =
         lens (_source :: OssBucketObjectResource s -> TF.Attribute s Text)
             (\s a -> s { _source = a } :: OssBucketObjectResource s)
 
-instance HasComputedContentLength (OssBucketObjectResource s) Text
+instance P.HasComputedContentLength (OssBucketObjectResource s) Text
 
-instance HasComputedEtag (OssBucketObjectResource s) Text
+instance P.HasComputedEtag (OssBucketObjectResource s) Text
 
-instance HasComputedId (OssBucketObjectResource s) Text
+instance P.HasComputedId (OssBucketObjectResource s) Text
 
-ossBucketObjectResource :: TF.Resource TF.AliCloud (OssBucketObjectResource s)
+ossBucketObjectResource :: TF.Resource P.AliCloud (OssBucketObjectResource s)
 ossBucketObjectResource =
     TF.newResource "alicloud_oss_bucket_object" $
         OssBucketObjectResource {
@@ -2957,47 +2956,47 @@ instance TF.ToHCL (OssBucketResource s) where
         , TF.attribute "website" _website
         ]
 
-instance HasAcl (OssBucketResource s) s Text where
+instance P.HasAcl (OssBucketResource s) s Text where
     acl =
         lens (_acl :: OssBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _acl = a } :: OssBucketResource s)
 
-instance HasBucket (OssBucketResource s) s Text where
+instance P.HasBucket (OssBucketResource s) s Text where
     bucket =
         lens (_bucket :: OssBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: OssBucketResource s)
 
-instance HasCoreRule (OssBucketResource s) s Text where
+instance P.HasCoreRule (OssBucketResource s) s Text where
     coreRule =
         lens (_core_rule :: OssBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _core_rule = a } :: OssBucketResource s)
 
-instance HasLifecycleRule (OssBucketResource s) s Text where
+instance P.HasLifecycleRule (OssBucketResource s) s Text where
     lifecycleRule =
         lens (_lifecycle_rule :: OssBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _lifecycle_rule = a } :: OssBucketResource s)
 
-instance HasLogging (OssBucketResource s) s Text where
+instance P.HasLogging (OssBucketResource s) s Text where
     logging =
         lens (_logging :: OssBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _logging = a } :: OssBucketResource s)
 
-instance HasLoggingIsenable (OssBucketResource s) s Text where
+instance P.HasLoggingIsenable (OssBucketResource s) s Text where
     loggingIsenable =
         lens (_logging_isenable :: OssBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _logging_isenable = a } :: OssBucketResource s)
 
-instance HasRefererConfig (OssBucketResource s) s Text where
+instance P.HasRefererConfig (OssBucketResource s) s Text where
     refererConfig =
         lens (_referer_config :: OssBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _referer_config = a } :: OssBucketResource s)
 
-instance HasWebsite (OssBucketResource s) s Text where
+instance P.HasWebsite (OssBucketResource s) s Text where
     website =
         lens (_website :: OssBucketResource s -> TF.Attribute s Text)
             (\s a -> s { _website = a } :: OssBucketResource s)
 
-ossBucketResource :: TF.Resource TF.AliCloud (OssBucketResource s)
+ossBucketResource :: TF.Resource P.AliCloud (OssBucketResource s)
 ossBucketResource =
     TF.newResource "alicloud_oss_bucket" $
         OssBucketResource {
@@ -3032,26 +3031,26 @@ instance TF.ToHCL (RamAccessKeyResource s) where
         , TF.attribute "user_name" _user_name
         ]
 
-instance HasSecretFile (RamAccessKeyResource s) s Text where
+instance P.HasSecretFile (RamAccessKeyResource s) s Text where
     secretFile =
         lens (_secret_file :: RamAccessKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _secret_file = a } :: RamAccessKeyResource s)
 
-instance HasStatus (RamAccessKeyResource s) s Text where
+instance P.HasStatus (RamAccessKeyResource s) s Text where
     status =
         lens (_status :: RamAccessKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _status = a } :: RamAccessKeyResource s)
 
-instance HasUserName (RamAccessKeyResource s) s Text where
+instance P.HasUserName (RamAccessKeyResource s) s Text where
     userName =
         lens (_user_name :: RamAccessKeyResource s -> TF.Attribute s Text)
             (\s a -> s { _user_name = a } :: RamAccessKeyResource s)
 
-instance HasComputedId (RamAccessKeyResource s) Text
+instance P.HasComputedId (RamAccessKeyResource s) Text
 
-instance HasComputedStatus (RamAccessKeyResource s) Text
+instance P.HasComputedStatus (RamAccessKeyResource s) Text
 
-ramAccessKeyResource :: TF.Resource TF.AliCloud (RamAccessKeyResource s)
+ramAccessKeyResource :: TF.Resource P.AliCloud (RamAccessKeyResource s)
 ramAccessKeyResource =
     TF.newResource "alicloud_ram_access_key" $
         RamAccessKeyResource {
@@ -3074,14 +3073,14 @@ instance TF.ToHCL (RamAccountAliasResource s) where
         [ TF.attribute "account_alias" _account_alias
         ]
 
-instance HasAccountAlias (RamAccountAliasResource s) s Text where
+instance P.HasAccountAlias (RamAccountAliasResource s) s Text where
     accountAlias =
         lens (_account_alias :: RamAccountAliasResource s -> TF.Attribute s Text)
             (\s a -> s { _account_alias = a } :: RamAccountAliasResource s)
 
-instance HasComputedAccountAlias (RamAccountAliasResource s) Text
+instance P.HasComputedAccountAlias (RamAccountAliasResource s) Text
 
-ramAccountAliasResource :: TF.Resource TF.AliCloud (RamAccountAliasResource s)
+ramAccountAliasResource :: TF.Resource P.AliCloud (RamAccountAliasResource s)
 ramAccountAliasResource =
     TF.newResource "alicloud_ram_account_alias" $
         RamAccountAliasResource {
@@ -3100,7 +3099,7 @@ data RamAliasResource s = RamAliasResource {
 instance TF.ToHCL (RamAliasResource s) where
     toHCL _ = TF.block []
 
-ramAliasResource :: TF.Resource TF.AliCloud (RamAliasResource s)
+ramAliasResource :: TF.Resource P.AliCloud (RamAliasResource s)
 ramAliasResource =
     TF.newResource "alicloud_ram_alias" $
         RamAliasResource {
@@ -3123,23 +3122,23 @@ instance TF.ToHCL (RamGroupMembershipResource s) where
         , TF.attribute "user_names" _user_names
         ]
 
-instance HasGroupName (RamGroupMembershipResource s) s Text where
+instance P.HasGroupName (RamGroupMembershipResource s) s Text where
     groupName =
         lens (_group_name :: RamGroupMembershipResource s -> TF.Attribute s Text)
             (\s a -> s { _group_name = a } :: RamGroupMembershipResource s)
 
-instance HasUserNames (RamGroupMembershipResource s) s Text where
+instance P.HasUserNames (RamGroupMembershipResource s) s Text where
     userNames =
         lens (_user_names :: RamGroupMembershipResource s -> TF.Attribute s Text)
             (\s a -> s { _user_names = a } :: RamGroupMembershipResource s)
 
-instance HasComputedGroupName (RamGroupMembershipResource s) Text
+instance P.HasComputedGroupName (RamGroupMembershipResource s) Text
 
-instance HasComputedId (RamGroupMembershipResource s) Text
+instance P.HasComputedId (RamGroupMembershipResource s) Text
 
-instance HasComputedUserNames (RamGroupMembershipResource s) Text
+instance P.HasComputedUserNames (RamGroupMembershipResource s) Text
 
-ramGroupMembershipResource :: TF.Resource TF.AliCloud (RamGroupMembershipResource s)
+ramGroupMembershipResource :: TF.Resource P.AliCloud (RamGroupMembershipResource s)
 ramGroupMembershipResource =
     TF.newResource "alicloud_ram_group_membership" $
         RamGroupMembershipResource {
@@ -3167,30 +3166,30 @@ instance TF.ToHCL (RamGroupPolicyAttachmentResource s) where
         , TF.attribute "policy_type" _policy_type
         ]
 
-instance HasGroupName (RamGroupPolicyAttachmentResource s) s Text where
+instance P.HasGroupName (RamGroupPolicyAttachmentResource s) s Text where
     groupName =
         lens (_group_name :: RamGroupPolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _group_name = a } :: RamGroupPolicyAttachmentResource s)
 
-instance HasPolicyName (RamGroupPolicyAttachmentResource s) s Text where
+instance P.HasPolicyName (RamGroupPolicyAttachmentResource s) s Text where
     policyName =
         lens (_policy_name :: RamGroupPolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_name = a } :: RamGroupPolicyAttachmentResource s)
 
-instance HasPolicyType (RamGroupPolicyAttachmentResource s) s Text where
+instance P.HasPolicyType (RamGroupPolicyAttachmentResource s) s Text where
     policyType =
         lens (_policy_type :: RamGroupPolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_type = a } :: RamGroupPolicyAttachmentResource s)
 
-instance HasComputedGroupName (RamGroupPolicyAttachmentResource s) Text
+instance P.HasComputedGroupName (RamGroupPolicyAttachmentResource s) Text
 
-instance HasComputedId (RamGroupPolicyAttachmentResource s) Text
+instance P.HasComputedId (RamGroupPolicyAttachmentResource s) Text
 
-instance HasComputedPolicyName (RamGroupPolicyAttachmentResource s) Text
+instance P.HasComputedPolicyName (RamGroupPolicyAttachmentResource s) Text
 
-instance HasComputedPolicyType (RamGroupPolicyAttachmentResource s) Text
+instance P.HasComputedPolicyType (RamGroupPolicyAttachmentResource s) Text
 
-ramGroupPolicyAttachmentResource :: TF.Resource TF.AliCloud (RamGroupPolicyAttachmentResource s)
+ramGroupPolicyAttachmentResource :: TF.Resource P.AliCloud (RamGroupPolicyAttachmentResource s)
 ramGroupPolicyAttachmentResource =
     TF.newResource "alicloud_ram_group_policy_attachment" $
         RamGroupPolicyAttachmentResource {
@@ -3223,28 +3222,28 @@ instance TF.ToHCL (RamGroupResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasComments (RamGroupResource s) s Text where
+instance P.HasComments (RamGroupResource s) s Text where
     comments =
         lens (_comments :: RamGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _comments = a } :: RamGroupResource s)
 
-instance HasForce (RamGroupResource s) s Text where
+instance P.HasForce (RamGroupResource s) s Text where
     force =
         lens (_force :: RamGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _force = a } :: RamGroupResource s)
 
-instance HasName (RamGroupResource s) s Text where
+instance P.HasName (RamGroupResource s) s Text where
     name =
         lens (_name :: RamGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RamGroupResource s)
 
-instance HasComputedComments (RamGroupResource s) Text
+instance P.HasComputedComments (RamGroupResource s) Text
 
-instance HasComputedId (RamGroupResource s) Text
+instance P.HasComputedId (RamGroupResource s) Text
 
-instance HasComputedName (RamGroupResource s) Text
+instance P.HasComputedName (RamGroupResource s) Text
 
-ramGroupResource :: TF.Resource TF.AliCloud (RamGroupResource s)
+ramGroupResource :: TF.Resource P.AliCloud (RamGroupResource s)
 ramGroupResource =
     TF.newResource "alicloud_ram_group" $
         RamGroupResource {
@@ -3276,35 +3275,35 @@ instance TF.ToHCL (RamLoginProfileResource s) where
         , TF.attribute "user_name" _user_name
         ]
 
-instance HasMfaBindRequired (RamLoginProfileResource s) s Text where
+instance P.HasMfaBindRequired (RamLoginProfileResource s) s Text where
     mfaBindRequired =
         lens (_mfa_bind_required :: RamLoginProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _mfa_bind_required = a } :: RamLoginProfileResource s)
 
-instance HasPassword (RamLoginProfileResource s) s Text where
+instance P.HasPassword (RamLoginProfileResource s) s Text where
     password =
         lens (_password :: RamLoginProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: RamLoginProfileResource s)
 
-instance HasPasswordResetRequired (RamLoginProfileResource s) s Text where
+instance P.HasPasswordResetRequired (RamLoginProfileResource s) s Text where
     passwordResetRequired =
         lens (_password_reset_required :: RamLoginProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _password_reset_required = a } :: RamLoginProfileResource s)
 
-instance HasUserName (RamLoginProfileResource s) s Text where
+instance P.HasUserName (RamLoginProfileResource s) s Text where
     userName =
         lens (_user_name :: RamLoginProfileResource s -> TF.Attribute s Text)
             (\s a -> s { _user_name = a } :: RamLoginProfileResource s)
 
-instance HasComputedId (RamLoginProfileResource s) Text
+instance P.HasComputedId (RamLoginProfileResource s) Text
 
-instance HasComputedMfaBindRequired (RamLoginProfileResource s) Text
+instance P.HasComputedMfaBindRequired (RamLoginProfileResource s) Text
 
-instance HasComputedPasswordResetRequired (RamLoginProfileResource s) Text
+instance P.HasComputedPasswordResetRequired (RamLoginProfileResource s) Text
 
-instance HasComputedUserName (RamLoginProfileResource s) Text
+instance P.HasComputedUserName (RamLoginProfileResource s) Text
 
-ramLoginProfileResource :: TF.Resource TF.AliCloud (RamLoginProfileResource s)
+ramLoginProfileResource :: TF.Resource P.AliCloud (RamLoginProfileResource s)
 ramLoginProfileResource =
     TF.newResource "alicloud_ram_login_profile" $
         RamLoginProfileResource {
@@ -3347,53 +3346,53 @@ instance TF.ToHCL (RamPolicyResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasDescription (RamPolicyResource s) s Text where
+instance P.HasDescription (RamPolicyResource s) s Text where
     description =
         lens (_description :: RamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: RamPolicyResource s)
 
-instance HasDocument (RamPolicyResource s) s Text where
+instance P.HasDocument (RamPolicyResource s) s Text where
     document =
         lens (_document :: RamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _document = a } :: RamPolicyResource s)
 
-instance HasForce (RamPolicyResource s) s Text where
+instance P.HasForce (RamPolicyResource s) s Text where
     force =
         lens (_force :: RamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _force = a } :: RamPolicyResource s)
 
-instance HasName (RamPolicyResource s) s Text where
+instance P.HasName (RamPolicyResource s) s Text where
     name =
         lens (_name :: RamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RamPolicyResource s)
 
-instance HasStatement (RamPolicyResource s) s Text where
+instance P.HasStatement (RamPolicyResource s) s Text where
     statement =
         lens (_statement :: RamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _statement = a } :: RamPolicyResource s)
 
-instance HasVersion (RamPolicyResource s) s Text where
+instance P.HasVersion (RamPolicyResource s) s Text where
     version =
         lens (_version :: RamPolicyResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: RamPolicyResource s)
 
-instance HasComputedAttachmentCount (RamPolicyResource s) Text
+instance P.HasComputedAttachmentCount (RamPolicyResource s) Text
 
-instance HasComputedDescription (RamPolicyResource s) Text
+instance P.HasComputedDescription (RamPolicyResource s) Text
 
-instance HasComputedDocument (RamPolicyResource s) Text
+instance P.HasComputedDocument (RamPolicyResource s) Text
 
-instance HasComputedId (RamPolicyResource s) Text
+instance P.HasComputedId (RamPolicyResource s) Text
 
-instance HasComputedName (RamPolicyResource s) Text
+instance P.HasComputedName (RamPolicyResource s) Text
 
-instance HasComputedStatement (RamPolicyResource s) Text
+instance P.HasComputedStatement (RamPolicyResource s) Text
 
-instance HasComputedType' (RamPolicyResource s) Text
+instance P.HasComputedType' (RamPolicyResource s) Text
 
-instance HasComputedVersion (RamPolicyResource s) Text
+instance P.HasComputedVersion (RamPolicyResource s) Text
 
-ramPolicyResource :: TF.Resource TF.AliCloud (RamPolicyResource s)
+ramPolicyResource :: TF.Resource P.AliCloud (RamPolicyResource s)
 ramPolicyResource =
     TF.newResource "alicloud_ram_policy" $
         RamPolicyResource {
@@ -3423,21 +3422,21 @@ instance TF.ToHCL (RamRoleAttachmentResource s) where
         , TF.attribute "role_name" _role_name
         ]
 
-instance HasInstanceIds (RamRoleAttachmentResource s) s Text where
+instance P.HasInstanceIds (RamRoleAttachmentResource s) s Text where
     instanceIds =
         lens (_instance_ids :: RamRoleAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_ids = a } :: RamRoleAttachmentResource s)
 
-instance HasRoleName (RamRoleAttachmentResource s) s Text where
+instance P.HasRoleName (RamRoleAttachmentResource s) s Text where
     roleName =
         lens (_role_name :: RamRoleAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _role_name = a } :: RamRoleAttachmentResource s)
 
-instance HasComputedInstanceIds (RamRoleAttachmentResource s) Text
+instance P.HasComputedInstanceIds (RamRoleAttachmentResource s) Text
 
-instance HasComputedRoleName (RamRoleAttachmentResource s) Text
+instance P.HasComputedRoleName (RamRoleAttachmentResource s) Text
 
-ramRoleAttachmentResource :: TF.Resource TF.AliCloud (RamRoleAttachmentResource s)
+ramRoleAttachmentResource :: TF.Resource P.AliCloud (RamRoleAttachmentResource s)
 ramRoleAttachmentResource =
     TF.newResource "alicloud_ram_role_attachment" $
         RamRoleAttachmentResource {
@@ -3465,30 +3464,30 @@ instance TF.ToHCL (RamRolePolicyAttachmentResource s) where
         , TF.attribute "role_name" _role_name
         ]
 
-instance HasPolicyName (RamRolePolicyAttachmentResource s) s Text where
+instance P.HasPolicyName (RamRolePolicyAttachmentResource s) s Text where
     policyName =
         lens (_policy_name :: RamRolePolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_name = a } :: RamRolePolicyAttachmentResource s)
 
-instance HasPolicyType (RamRolePolicyAttachmentResource s) s Text where
+instance P.HasPolicyType (RamRolePolicyAttachmentResource s) s Text where
     policyType =
         lens (_policy_type :: RamRolePolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_type = a } :: RamRolePolicyAttachmentResource s)
 
-instance HasRoleName (RamRolePolicyAttachmentResource s) s Text where
+instance P.HasRoleName (RamRolePolicyAttachmentResource s) s Text where
     roleName =
         lens (_role_name :: RamRolePolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _role_name = a } :: RamRolePolicyAttachmentResource s)
 
-instance HasComputedId (RamRolePolicyAttachmentResource s) Text
+instance P.HasComputedId (RamRolePolicyAttachmentResource s) Text
 
-instance HasComputedPolicyName (RamRolePolicyAttachmentResource s) Text
+instance P.HasComputedPolicyName (RamRolePolicyAttachmentResource s) Text
 
-instance HasComputedPolicyType (RamRolePolicyAttachmentResource s) Text
+instance P.HasComputedPolicyType (RamRolePolicyAttachmentResource s) Text
 
-instance HasComputedRoleName (RamRolePolicyAttachmentResource s) Text
+instance P.HasComputedRoleName (RamRolePolicyAttachmentResource s) Text
 
-ramRolePolicyAttachmentResource :: TF.Resource TF.AliCloud (RamRolePolicyAttachmentResource s)
+ramRolePolicyAttachmentResource :: TF.Resource P.AliCloud (RamRolePolicyAttachmentResource s)
 ramRolePolicyAttachmentResource =
     TF.newResource "alicloud_ram_role_policy_attachment" $
         RamRolePolicyAttachmentResource {
@@ -3533,58 +3532,58 @@ instance TF.ToHCL (RamRoleResource s) where
         , TF.attribute "version" _version
         ]
 
-instance HasDescription (RamRoleResource s) s Text where
+instance P.HasDescription (RamRoleResource s) s Text where
     description =
         lens (_description :: RamRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: RamRoleResource s)
 
-instance HasDocument (RamRoleResource s) s Text where
+instance P.HasDocument (RamRoleResource s) s Text where
     document =
         lens (_document :: RamRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _document = a } :: RamRoleResource s)
 
-instance HasForce (RamRoleResource s) s Text where
+instance P.HasForce (RamRoleResource s) s Text where
     force =
         lens (_force :: RamRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _force = a } :: RamRoleResource s)
 
-instance HasName (RamRoleResource s) s Text where
+instance P.HasName (RamRoleResource s) s Text where
     name =
         lens (_name :: RamRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RamRoleResource s)
 
-instance HasRamUsers (RamRoleResource s) s Text where
+instance P.HasRamUsers (RamRoleResource s) s Text where
     ramUsers =
         lens (_ram_users :: RamRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _ram_users = a } :: RamRoleResource s)
 
-instance HasServices (RamRoleResource s) s Text where
+instance P.HasServices (RamRoleResource s) s Text where
     services =
         lens (_services :: RamRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _services = a } :: RamRoleResource s)
 
-instance HasVersion (RamRoleResource s) s Text where
+instance P.HasVersion (RamRoleResource s) s Text where
     version =
         lens (_version :: RamRoleResource s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: RamRoleResource s)
 
-instance HasComputedArn (RamRoleResource s) Text
+instance P.HasComputedArn (RamRoleResource s) Text
 
-instance HasComputedDescription (RamRoleResource s) Text
+instance P.HasComputedDescription (RamRoleResource s) Text
 
-instance HasComputedDocument (RamRoleResource s) Text
+instance P.HasComputedDocument (RamRoleResource s) Text
 
-instance HasComputedId (RamRoleResource s) Text
+instance P.HasComputedId (RamRoleResource s) Text
 
-instance HasComputedName (RamRoleResource s) Text
+instance P.HasComputedName (RamRoleResource s) Text
 
-instance HasComputedRamUsers (RamRoleResource s) Text
+instance P.HasComputedRamUsers (RamRoleResource s) Text
 
-instance HasComputedServices (RamRoleResource s) Text
+instance P.HasComputedServices (RamRoleResource s) Text
 
-instance HasComputedVersion (RamRoleResource s) Text
+instance P.HasComputedVersion (RamRoleResource s) Text
 
-ramRoleResource :: TF.Resource TF.AliCloud (RamRoleResource s)
+ramRoleResource :: TF.Resource P.AliCloud (RamRoleResource s)
 ramRoleResource =
     TF.newResource "alicloud_ram_role" $
         RamRoleResource {
@@ -3617,30 +3616,30 @@ instance TF.ToHCL (RamUserPolicyAttachmentResource s) where
         , TF.attribute "user_name" _user_name
         ]
 
-instance HasPolicyName (RamUserPolicyAttachmentResource s) s Text where
+instance P.HasPolicyName (RamUserPolicyAttachmentResource s) s Text where
     policyName =
         lens (_policy_name :: RamUserPolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_name = a } :: RamUserPolicyAttachmentResource s)
 
-instance HasPolicyType (RamUserPolicyAttachmentResource s) s Text where
+instance P.HasPolicyType (RamUserPolicyAttachmentResource s) s Text where
     policyType =
         lens (_policy_type :: RamUserPolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _policy_type = a } :: RamUserPolicyAttachmentResource s)
 
-instance HasUserName (RamUserPolicyAttachmentResource s) s Text where
+instance P.HasUserName (RamUserPolicyAttachmentResource s) s Text where
     userName =
         lens (_user_name :: RamUserPolicyAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _user_name = a } :: RamUserPolicyAttachmentResource s)
 
-instance HasComputedId (RamUserPolicyAttachmentResource s) Text
+instance P.HasComputedId (RamUserPolicyAttachmentResource s) Text
 
-instance HasComputedPolicyName (RamUserPolicyAttachmentResource s) Text
+instance P.HasComputedPolicyName (RamUserPolicyAttachmentResource s) Text
 
-instance HasComputedPolicyType (RamUserPolicyAttachmentResource s) Text
+instance P.HasComputedPolicyType (RamUserPolicyAttachmentResource s) Text
 
-instance HasComputedUserName (RamUserPolicyAttachmentResource s) Text
+instance P.HasComputedUserName (RamUserPolicyAttachmentResource s) Text
 
-ramUserPolicyAttachmentResource :: TF.Resource TF.AliCloud (RamUserPolicyAttachmentResource s)
+ramUserPolicyAttachmentResource :: TF.Resource P.AliCloud (RamUserPolicyAttachmentResource s)
 ramUserPolicyAttachmentResource =
     TF.newResource "alicloud_ram_user_policy_attachment" $
         RamUserPolicyAttachmentResource {
@@ -3682,49 +3681,49 @@ instance TF.ToHCL (RamUserResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasComments (RamUserResource s) s Text where
+instance P.HasComments (RamUserResource s) s Text where
     comments =
         lens (_comments :: RamUserResource s -> TF.Attribute s Text)
             (\s a -> s { _comments = a } :: RamUserResource s)
 
-instance HasDisplayName (RamUserResource s) s Text where
+instance P.HasDisplayName (RamUserResource s) s Text where
     displayName =
         lens (_display_name :: RamUserResource s -> TF.Attribute s Text)
             (\s a -> s { _display_name = a } :: RamUserResource s)
 
-instance HasEmail (RamUserResource s) s Text where
+instance P.HasEmail (RamUserResource s) s Text where
     email =
         lens (_email :: RamUserResource s -> TF.Attribute s Text)
             (\s a -> s { _email = a } :: RamUserResource s)
 
-instance HasForce (RamUserResource s) s Text where
+instance P.HasForce (RamUserResource s) s Text where
     force =
         lens (_force :: RamUserResource s -> TF.Attribute s Text)
             (\s a -> s { _force = a } :: RamUserResource s)
 
-instance HasMobile (RamUserResource s) s Text where
+instance P.HasMobile (RamUserResource s) s Text where
     mobile =
         lens (_mobile :: RamUserResource s -> TF.Attribute s Text)
             (\s a -> s { _mobile = a } :: RamUserResource s)
 
-instance HasName (RamUserResource s) s Text where
+instance P.HasName (RamUserResource s) s Text where
     name =
         lens (_name :: RamUserResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RamUserResource s)
 
-instance HasComputedComments (RamUserResource s) Text
+instance P.HasComputedComments (RamUserResource s) Text
 
-instance HasComputedDisplayName (RamUserResource s) Text
+instance P.HasComputedDisplayName (RamUserResource s) Text
 
-instance HasComputedEmail (RamUserResource s) Text
+instance P.HasComputedEmail (RamUserResource s) Text
 
-instance HasComputedId (RamUserResource s) Text
+instance P.HasComputedId (RamUserResource s) Text
 
-instance HasComputedMobile (RamUserResource s) Text
+instance P.HasComputedMobile (RamUserResource s) Text
 
-instance HasComputedName (RamUserResource s) Text
+instance P.HasComputedName (RamUserResource s) Text
 
-ramUserResource :: TF.Resource TF.AliCloud (RamUserResource s)
+ramUserResource :: TF.Resource P.AliCloud (RamUserResource s)
 ramUserResource =
     TF.newResource "alicloud_ram_user" $
         RamUserResource {
@@ -3760,37 +3759,37 @@ instance TF.ToHCL (RouteEntryResource s) where
         , TF.attribute "route_table_id" _route_table_id
         ]
 
-instance HasDestinationCidrblock (RouteEntryResource s) s Text where
+instance P.HasDestinationCidrblock (RouteEntryResource s) s Text where
     destinationCidrblock =
         lens (_destination_cidrblock :: RouteEntryResource s -> TF.Attribute s Text)
             (\s a -> s { _destination_cidrblock = a } :: RouteEntryResource s)
 
-instance HasNexthopId (RouteEntryResource s) s Text where
+instance P.HasNexthopId (RouteEntryResource s) s Text where
     nexthopId =
         lens (_nexthop_id :: RouteEntryResource s -> TF.Attribute s Text)
             (\s a -> s { _nexthop_id = a } :: RouteEntryResource s)
 
-instance HasNexthopType (RouteEntryResource s) s Text where
+instance P.HasNexthopType (RouteEntryResource s) s Text where
     nexthopType =
         lens (_nexthop_type :: RouteEntryResource s -> TF.Attribute s Text)
             (\s a -> s { _nexthop_type = a } :: RouteEntryResource s)
 
-instance HasRouteTableId (RouteEntryResource s) s Text where
+instance P.HasRouteTableId (RouteEntryResource s) s Text where
     routeTableId =
         lens (_route_table_id :: RouteEntryResource s -> TF.Attribute s Text)
             (\s a -> s { _route_table_id = a } :: RouteEntryResource s)
 
-instance HasComputedDestinationCidrblock (RouteEntryResource s) Text
+instance P.HasComputedDestinationCidrblock (RouteEntryResource s) Text
 
-instance HasComputedNexthopId (RouteEntryResource s) Text
+instance P.HasComputedNexthopId (RouteEntryResource s) Text
 
-instance HasComputedNexthopType (RouteEntryResource s) Text
+instance P.HasComputedNexthopType (RouteEntryResource s) Text
 
-instance HasComputedRouteTableId (RouteEntryResource s) Text
+instance P.HasComputedRouteTableId (RouteEntryResource s) Text
 
-instance HasComputedRouterId (RouteEntryResource s) Text
+instance P.HasComputedRouterId (RouteEntryResource s) Text
 
-routeEntryResource :: TF.Resource TF.AliCloud (RouteEntryResource s)
+routeEntryResource :: TF.Resource P.AliCloud (RouteEntryResource s)
 routeEntryResource =
     TF.newResource "alicloud_route_entry" $
         RouteEntryResource {
@@ -3859,112 +3858,112 @@ instance TF.ToHCL (RouterInterfaceResource s) where
         , TF.attribute "specification" _specification
         ]
 
-instance HasAccessPointId (RouterInterfaceResource s) s Text where
+instance P.HasAccessPointId (RouterInterfaceResource s) s Text where
     accessPointId =
         lens (_access_point_id :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _access_point_id = a } :: RouterInterfaceResource s)
 
-instance HasDescription (RouterInterfaceResource s) s Text where
+instance P.HasDescription (RouterInterfaceResource s) s Text where
     description =
         lens (_description :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: RouterInterfaceResource s)
 
-instance HasHealthCheckSourceIp (RouterInterfaceResource s) s Text where
+instance P.HasHealthCheckSourceIp (RouterInterfaceResource s) s Text where
     healthCheckSourceIp =
         lens (_health_check_source_ip :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_source_ip = a } :: RouterInterfaceResource s)
 
-instance HasHealthCheckTargetIp (RouterInterfaceResource s) s Text where
+instance P.HasHealthCheckTargetIp (RouterInterfaceResource s) s Text where
     healthCheckTargetIp =
         lens (_health_check_target_ip :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_target_ip = a } :: RouterInterfaceResource s)
 
-instance HasName (RouterInterfaceResource s) s Text where
+instance P.HasName (RouterInterfaceResource s) s Text where
     name =
         lens (_name :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RouterInterfaceResource s)
 
-instance HasOppositeAccessPointId (RouterInterfaceResource s) s Text where
+instance P.HasOppositeAccessPointId (RouterInterfaceResource s) s Text where
     oppositeAccessPointId =
         lens (_opposite_access_point_id :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _opposite_access_point_id = a } :: RouterInterfaceResource s)
 
-instance HasOppositeInterfaceId (RouterInterfaceResource s) s Text where
+instance P.HasOppositeInterfaceId (RouterInterfaceResource s) s Text where
     oppositeInterfaceId =
         lens (_opposite_interface_id :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _opposite_interface_id = a } :: RouterInterfaceResource s)
 
-instance HasOppositeInterfaceOwnerId (RouterInterfaceResource s) s Text where
+instance P.HasOppositeInterfaceOwnerId (RouterInterfaceResource s) s Text where
     oppositeInterfaceOwnerId =
         lens (_opposite_interface_owner_id :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _opposite_interface_owner_id = a } :: RouterInterfaceResource s)
 
-instance HasOppositeRegion (RouterInterfaceResource s) s Text where
+instance P.HasOppositeRegion (RouterInterfaceResource s) s Text where
     oppositeRegion =
         lens (_opposite_region :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _opposite_region = a } :: RouterInterfaceResource s)
 
-instance HasOppositeRouterId (RouterInterfaceResource s) s Text where
+instance P.HasOppositeRouterId (RouterInterfaceResource s) s Text where
     oppositeRouterId =
         lens (_opposite_router_id :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _opposite_router_id = a } :: RouterInterfaceResource s)
 
-instance HasOppositeRouterType (RouterInterfaceResource s) s Text where
+instance P.HasOppositeRouterType (RouterInterfaceResource s) s Text where
     oppositeRouterType =
         lens (_opposite_router_type :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _opposite_router_type = a } :: RouterInterfaceResource s)
 
-instance HasRole (RouterInterfaceResource s) s Text where
+instance P.HasRole (RouterInterfaceResource s) s Text where
     role =
         lens (_role :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: RouterInterfaceResource s)
 
-instance HasRouterId (RouterInterfaceResource s) s Text where
+instance P.HasRouterId (RouterInterfaceResource s) s Text where
     routerId =
         lens (_router_id :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _router_id = a } :: RouterInterfaceResource s)
 
-instance HasRouterType (RouterInterfaceResource s) s Text where
+instance P.HasRouterType (RouterInterfaceResource s) s Text where
     routerType =
         lens (_router_type :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _router_type = a } :: RouterInterfaceResource s)
 
-instance HasSpecification (RouterInterfaceResource s) s Text where
+instance P.HasSpecification (RouterInterfaceResource s) s Text where
     specification =
         lens (_specification :: RouterInterfaceResource s -> TF.Attribute s Text)
             (\s a -> s { _specification = a } :: RouterInterfaceResource s)
 
-instance HasComputedAccessPointId (RouterInterfaceResource s) Text
+instance P.HasComputedAccessPointId (RouterInterfaceResource s) Text
 
-instance HasComputedDescription (RouterInterfaceResource s) Text
+instance P.HasComputedDescription (RouterInterfaceResource s) Text
 
-instance HasComputedHealthCheckSourceIp (RouterInterfaceResource s) Text
+instance P.HasComputedHealthCheckSourceIp (RouterInterfaceResource s) Text
 
-instance HasComputedHealthCheckTargetIp (RouterInterfaceResource s) Text
+instance P.HasComputedHealthCheckTargetIp (RouterInterfaceResource s) Text
 
-instance HasComputedId (RouterInterfaceResource s) Text
+instance P.HasComputedId (RouterInterfaceResource s) Text
 
-instance HasComputedName (RouterInterfaceResource s) Text
+instance P.HasComputedName (RouterInterfaceResource s) Text
 
-instance HasComputedOppositeAccessPointId (RouterInterfaceResource s) Text
+instance P.HasComputedOppositeAccessPointId (RouterInterfaceResource s) Text
 
-instance HasComputedOppositeInterfaceId (RouterInterfaceResource s) Text
+instance P.HasComputedOppositeInterfaceId (RouterInterfaceResource s) Text
 
-instance HasComputedOppositeInterfaceOwnerId (RouterInterfaceResource s) Text
+instance P.HasComputedOppositeInterfaceOwnerId (RouterInterfaceResource s) Text
 
-instance HasComputedOppositeRouterId (RouterInterfaceResource s) Text
+instance P.HasComputedOppositeRouterId (RouterInterfaceResource s) Text
 
-instance HasComputedOppositeRouterType (RouterInterfaceResource s) Text
+instance P.HasComputedOppositeRouterType (RouterInterfaceResource s) Text
 
-instance HasComputedRole (RouterInterfaceResource s) Text
+instance P.HasComputedRole (RouterInterfaceResource s) Text
 
-instance HasComputedRouterId (RouterInterfaceResource s) Text
+instance P.HasComputedRouterId (RouterInterfaceResource s) Text
 
-instance HasComputedRouterType (RouterInterfaceResource s) Text
+instance P.HasComputedRouterType (RouterInterfaceResource s) Text
 
-instance HasComputedSpecification (RouterInterfaceResource s) Text
+instance P.HasComputedSpecification (RouterInterfaceResource s) Text
 
-routerInterfaceResource :: TF.Resource TF.AliCloud (RouterInterfaceResource s)
+routerInterfaceResource :: TF.Resource P.AliCloud (RouterInterfaceResource s)
 routerInterfaceResource =
     TF.newResource "alicloud_router_interface" $
         RouterInterfaceResource {
@@ -4007,30 +4006,30 @@ instance TF.ToHCL (SecurityGroupResource s) where
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasDescription (SecurityGroupResource s) s Text where
+instance P.HasDescription (SecurityGroupResource s) s Text where
     description =
         lens (_description :: SecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: SecurityGroupResource s)
 
-instance HasName (SecurityGroupResource s) s Text where
+instance P.HasName (SecurityGroupResource s) s Text where
     name =
         lens (_name :: SecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SecurityGroupResource s)
 
-instance HasVpcId (SecurityGroupResource s) s Text where
+instance P.HasVpcId (SecurityGroupResource s) s Text where
     vpcId =
         lens (_vpc_id :: SecurityGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: SecurityGroupResource s)
 
-instance HasComputedDescription (SecurityGroupResource s) Text
+instance P.HasComputedDescription (SecurityGroupResource s) Text
 
-instance HasComputedId (SecurityGroupResource s) Text
+instance P.HasComputedId (SecurityGroupResource s) Text
 
-instance HasComputedName (SecurityGroupResource s) Text
+instance P.HasComputedName (SecurityGroupResource s) Text
 
-instance HasComputedVpcId (SecurityGroupResource s) Text
+instance P.HasComputedVpcId (SecurityGroupResource s) Text
 
-securityGroupResource :: TF.Resource TF.AliCloud (SecurityGroupResource s)
+securityGroupResource :: TF.Resource P.AliCloud (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "alicloud_security_group" $
         SecurityGroupResource {
@@ -4085,67 +4084,67 @@ instance TF.ToHCL (SecurityGroupRuleResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasCidrIp (SecurityGroupRuleResource s) s Text where
+instance P.HasCidrIp (SecurityGroupRuleResource s) s Text where
     cidrIp =
         lens (_cidr_ip :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _cidr_ip = a } :: SecurityGroupRuleResource s)
 
-instance HasIpProtocol (SecurityGroupRuleResource s) s Text where
+instance P.HasIpProtocol (SecurityGroupRuleResource s) s Text where
     ipProtocol =
         lens (_ip_protocol :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_protocol = a } :: SecurityGroupRuleResource s)
 
-instance HasNicType (SecurityGroupRuleResource s) s Text where
+instance P.HasNicType (SecurityGroupRuleResource s) s Text where
     nicType =
         lens (_nic_type :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _nic_type = a } :: SecurityGroupRuleResource s)
 
-instance HasPolicy (SecurityGroupRuleResource s) s Text where
+instance P.HasPolicy (SecurityGroupRuleResource s) s Text where
     policy =
         lens (_policy :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _policy = a } :: SecurityGroupRuleResource s)
 
-instance HasPortRange (SecurityGroupRuleResource s) s Text where
+instance P.HasPortRange (SecurityGroupRuleResource s) s Text where
     portRange =
         lens (_port_range :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _port_range = a } :: SecurityGroupRuleResource s)
 
-instance HasPriority (SecurityGroupRuleResource s) s Text where
+instance P.HasPriority (SecurityGroupRuleResource s) s Text where
     priority =
         lens (_priority :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _priority = a } :: SecurityGroupRuleResource s)
 
-instance HasSecurityGroupId (SecurityGroupRuleResource s) s Text where
+instance P.HasSecurityGroupId (SecurityGroupRuleResource s) s Text where
     securityGroupId =
         lens (_security_group_id :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _security_group_id = a } :: SecurityGroupRuleResource s)
 
-instance HasSourceGroupOwnerAccount (SecurityGroupRuleResource s) s Text where
+instance P.HasSourceGroupOwnerAccount (SecurityGroupRuleResource s) s Text where
     sourceGroupOwnerAccount =
         lens (_source_group_owner_account :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _source_group_owner_account = a } :: SecurityGroupRuleResource s)
 
-instance HasSourceSecurityGroupId (SecurityGroupRuleResource s) s Text where
+instance P.HasSourceSecurityGroupId (SecurityGroupRuleResource s) s Text where
     sourceSecurityGroupId =
         lens (_source_security_group_id :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _source_security_group_id = a } :: SecurityGroupRuleResource s)
 
-instance HasType' (SecurityGroupRuleResource s) s Text where
+instance P.HasType' (SecurityGroupRuleResource s) s Text where
     type' =
         lens (_type' :: SecurityGroupRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
-instance HasComputedId (SecurityGroupRuleResource s) Text
+instance P.HasComputedId (SecurityGroupRuleResource s) Text
 
-instance HasComputedIpProtocol (SecurityGroupRuleResource s) Text
+instance P.HasComputedIpProtocol (SecurityGroupRuleResource s) Text
 
-instance HasComputedName (SecurityGroupRuleResource s) Text
+instance P.HasComputedName (SecurityGroupRuleResource s) Text
 
-instance HasComputedPortRange (SecurityGroupRuleResource s) Text
+instance P.HasComputedPortRange (SecurityGroupRuleResource s) Text
 
-instance HasComputedType' (SecurityGroupRuleResource s) Text
+instance P.HasComputedType' (SecurityGroupRuleResource s) Text
 
-securityGroupRuleResource :: TF.Resource TF.AliCloud (SecurityGroupRuleResource s)
+securityGroupRuleResource :: TF.Resource P.AliCloud (SecurityGroupRuleResource s)
 securityGroupRuleResource =
     TF.newResource "alicloud_security_group_rule" $
         SecurityGroupRuleResource {
@@ -4182,32 +4181,32 @@ instance TF.ToHCL (SlbAttachmentResource s) where
         , TF.attribute "weight" _weight
         ]
 
-instance HasInstanceIds (SlbAttachmentResource s) s Text where
+instance P.HasInstanceIds (SlbAttachmentResource s) s Text where
     instanceIds =
         lens (_instance_ids :: SlbAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _instance_ids = a } :: SlbAttachmentResource s)
 
-instance HasLoadBalancerId (SlbAttachmentResource s) s Text where
+instance P.HasLoadBalancerId (SlbAttachmentResource s) s Text where
     loadBalancerId =
         lens (_load_balancer_id :: SlbAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _load_balancer_id = a } :: SlbAttachmentResource s)
 
-instance HasWeight (SlbAttachmentResource s) s Text where
+instance P.HasWeight (SlbAttachmentResource s) s Text where
     weight =
         lens (_weight :: SlbAttachmentResource s -> TF.Attribute s Text)
             (\s a -> s { _weight = a } :: SlbAttachmentResource s)
 
-instance HasComputedBackendServers (SlbAttachmentResource s) Text
+instance P.HasComputedBackendServers (SlbAttachmentResource s) Text
 
-instance HasComputedId (SlbAttachmentResource s) Text
+instance P.HasComputedId (SlbAttachmentResource s) Text
 
-instance HasComputedInstanceIds (SlbAttachmentResource s) Text
+instance P.HasComputedInstanceIds (SlbAttachmentResource s) Text
 
-instance HasComputedLoadBalancerId (SlbAttachmentResource s) Text
+instance P.HasComputedLoadBalancerId (SlbAttachmentResource s) Text
 
-instance HasComputedWeight (SlbAttachmentResource s) Text
+instance P.HasComputedWeight (SlbAttachmentResource s) Text
 
-slbAttachmentResource :: TF.Resource TF.AliCloud (SlbAttachmentResource s)
+slbAttachmentResource :: TF.Resource P.AliCloud (SlbAttachmentResource s)
 slbAttachmentResource =
     TF.newResource "alicloud_slb_attachment" $
         SlbAttachmentResource {
@@ -4293,117 +4292,117 @@ instance TF.ToHCL (SlbListenerResource s) where
         , TF.attribute "unhealthy_threshold" _unhealthy_threshold
         ]
 
-instance HasBackendPort (SlbListenerResource s) s Text where
+instance P.HasBackendPort (SlbListenerResource s) s Text where
     backendPort =
         lens (_backend_port :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _backend_port = a } :: SlbListenerResource s)
 
-instance HasBandwidth (SlbListenerResource s) s Text where
+instance P.HasBandwidth (SlbListenerResource s) s Text where
     bandwidth =
         lens (_bandwidth :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _bandwidth = a } :: SlbListenerResource s)
 
-instance HasCookie (SlbListenerResource s) s Text where
+instance P.HasCookie (SlbListenerResource s) s Text where
     cookie =
         lens (_cookie :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _cookie = a } :: SlbListenerResource s)
 
-instance HasCookieTimeout (SlbListenerResource s) s Text where
+instance P.HasCookieTimeout (SlbListenerResource s) s Text where
     cookieTimeout =
         lens (_cookie_timeout :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _cookie_timeout = a } :: SlbListenerResource s)
 
-instance HasFrontendPort (SlbListenerResource s) s Text where
+instance P.HasFrontendPort (SlbListenerResource s) s Text where
     frontendPort =
         lens (_frontend_port :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_port = a } :: SlbListenerResource s)
 
-instance HasHealthCheck (SlbListenerResource s) s Text where
+instance P.HasHealthCheck (SlbListenerResource s) s Text where
     healthCheck =
         lens (_health_check :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check = a } :: SlbListenerResource s)
 
-instance HasHealthCheckConnectPort (SlbListenerResource s) s Text where
+instance P.HasHealthCheckConnectPort (SlbListenerResource s) s Text where
     healthCheckConnectPort =
         lens (_health_check_connect_port :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_connect_port = a } :: SlbListenerResource s)
 
-instance HasHealthCheckDomain (SlbListenerResource s) s Text where
+instance P.HasHealthCheckDomain (SlbListenerResource s) s Text where
     healthCheckDomain =
         lens (_health_check_domain :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_domain = a } :: SlbListenerResource s)
 
-instance HasHealthCheckHttpCode (SlbListenerResource s) s Text where
+instance P.HasHealthCheckHttpCode (SlbListenerResource s) s Text where
     healthCheckHttpCode =
         lens (_health_check_http_code :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_http_code = a } :: SlbListenerResource s)
 
-instance HasHealthCheckInterval (SlbListenerResource s) s Text where
+instance P.HasHealthCheckInterval (SlbListenerResource s) s Text where
     healthCheckInterval =
         lens (_health_check_interval :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_interval = a } :: SlbListenerResource s)
 
-instance HasHealthCheckTimeout (SlbListenerResource s) s Text where
+instance P.HasHealthCheckTimeout (SlbListenerResource s) s Text where
     healthCheckTimeout =
         lens (_health_check_timeout :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_timeout = a } :: SlbListenerResource s)
 
-instance HasHealthCheckType (SlbListenerResource s) s Text where
+instance P.HasHealthCheckType (SlbListenerResource s) s Text where
     healthCheckType =
         lens (_health_check_type :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_type = a } :: SlbListenerResource s)
 
-instance HasHealthCheckUri (SlbListenerResource s) s Text where
+instance P.HasHealthCheckUri (SlbListenerResource s) s Text where
     healthCheckUri =
         lens (_health_check_uri :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _health_check_uri = a } :: SlbListenerResource s)
 
-instance HasHealthyThreshold (SlbListenerResource s) s Text where
+instance P.HasHealthyThreshold (SlbListenerResource s) s Text where
     healthyThreshold =
         lens (_healthy_threshold :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _healthy_threshold = a } :: SlbListenerResource s)
 
-instance HasLoadBalancerId (SlbListenerResource s) s Text where
+instance P.HasLoadBalancerId (SlbListenerResource s) s Text where
     loadBalancerId =
         lens (_load_balancer_id :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _load_balancer_id = a } :: SlbListenerResource s)
 
-instance HasPersistenceTimeout (SlbListenerResource s) s Text where
+instance P.HasPersistenceTimeout (SlbListenerResource s) s Text where
     persistenceTimeout =
         lens (_persistence_timeout :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _persistence_timeout = a } :: SlbListenerResource s)
 
-instance HasProtocol (SlbListenerResource s) s Text where
+instance P.HasProtocol (SlbListenerResource s) s Text where
     protocol =
         lens (_protocol :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _protocol = a } :: SlbListenerResource s)
 
-instance HasScheduler (SlbListenerResource s) s Text where
+instance P.HasScheduler (SlbListenerResource s) s Text where
     scheduler =
         lens (_scheduler :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _scheduler = a } :: SlbListenerResource s)
 
-instance HasSslCertificateId (SlbListenerResource s) s Text where
+instance P.HasSslCertificateId (SlbListenerResource s) s Text where
     sslCertificateId =
         lens (_ssl_certificate_id :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _ssl_certificate_id = a } :: SlbListenerResource s)
 
-instance HasStickySession (SlbListenerResource s) s Text where
+instance P.HasStickySession (SlbListenerResource s) s Text where
     stickySession =
         lens (_sticky_session :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _sticky_session = a } :: SlbListenerResource s)
 
-instance HasStickySessionType (SlbListenerResource s) s Text where
+instance P.HasStickySessionType (SlbListenerResource s) s Text where
     stickySessionType =
         lens (_sticky_session_type :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _sticky_session_type = a } :: SlbListenerResource s)
 
-instance HasUnhealthyThreshold (SlbListenerResource s) s Text where
+instance P.HasUnhealthyThreshold (SlbListenerResource s) s Text where
     unhealthyThreshold =
         lens (_unhealthy_threshold :: SlbListenerResource s -> TF.Attribute s Text)
             (\s a -> s { _unhealthy_threshold = a } :: SlbListenerResource s)
 
-slbListenerResource :: TF.Resource TF.AliCloud (SlbListenerResource s)
+slbListenerResource :: TF.Resource P.AliCloud (SlbListenerResource s)
 slbListenerResource =
     TF.newResource "alicloud_slb_listener" $
         SlbListenerResource {
@@ -4470,53 +4469,53 @@ instance TF.ToHCL (SlbResource s) where
         , TF.attribute "vswitch_id" _vswitch_id
         ]
 
-instance HasBandwidth (SlbResource s) s Text where
+instance P.HasBandwidth (SlbResource s) s Text where
     bandwidth =
         lens (_bandwidth :: SlbResource s -> TF.Attribute s Text)
             (\s a -> s { _bandwidth = a } :: SlbResource s)
 
-instance HasInternet (SlbResource s) s Text where
+instance P.HasInternet (SlbResource s) s Text where
     internet =
         lens (_internet :: SlbResource s -> TF.Attribute s Text)
             (\s a -> s { _internet = a } :: SlbResource s)
 
-instance HasInternetChargeType (SlbResource s) s Text where
+instance P.HasInternetChargeType (SlbResource s) s Text where
     internetChargeType =
         lens (_internet_charge_type :: SlbResource s -> TF.Attribute s Text)
             (\s a -> s { _internet_charge_type = a } :: SlbResource s)
 
-instance HasName (SlbResource s) s Text where
+instance P.HasName (SlbResource s) s Text where
     name =
         lens (_name :: SlbResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SlbResource s)
 
-instance HasSpecification (SlbResource s) s Text where
+instance P.HasSpecification (SlbResource s) s Text where
     specification =
         lens (_specification :: SlbResource s -> TF.Attribute s Text)
             (\s a -> s { _specification = a } :: SlbResource s)
 
-instance HasVswitchId (SlbResource s) s Text where
+instance P.HasVswitchId (SlbResource s) s Text where
     vswitchId =
         lens (_vswitch_id :: SlbResource s -> TF.Attribute s Text)
             (\s a -> s { _vswitch_id = a } :: SlbResource s)
 
-instance HasComputedAddress (SlbResource s) Text
+instance P.HasComputedAddress (SlbResource s) Text
 
-instance HasComputedBandwidth (SlbResource s) Text
+instance P.HasComputedBandwidth (SlbResource s) Text
 
-instance HasComputedId (SlbResource s) Text
+instance P.HasComputedId (SlbResource s) Text
 
-instance HasComputedInternet (SlbResource s) Text
+instance P.HasComputedInternet (SlbResource s) Text
 
-instance HasComputedInternetChargeType (SlbResource s) Text
+instance P.HasComputedInternetChargeType (SlbResource s) Text
 
-instance HasComputedName (SlbResource s) Text
+instance P.HasComputedName (SlbResource s) Text
 
-instance HasComputedSpecification (SlbResource s) Text
+instance P.HasComputedSpecification (SlbResource s) Text
 
-instance HasComputedVswitchId (SlbResource s) Text
+instance P.HasComputedVswitchId (SlbResource s) Text
 
-slbResource :: TF.Resource TF.AliCloud (SlbResource s)
+slbResource :: TF.Resource P.AliCloud (SlbResource s)
 slbResource =
     TF.newResource "alicloud_slb" $
         SlbResource {
@@ -4566,51 +4565,51 @@ instance TF.ToHCL (SlbRuleResource s) where
         , TF.attribute "url" _url
         ]
 
-instance HasDomain (SlbRuleResource s) s Text where
+instance P.HasDomain (SlbRuleResource s) s Text where
     domain =
         lens (_domain :: SlbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _domain = a } :: SlbRuleResource s)
 
-instance HasFrontendPort (SlbRuleResource s) s Text where
+instance P.HasFrontendPort (SlbRuleResource s) s Text where
     frontendPort =
         lens (_frontend_port :: SlbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _frontend_port = a } :: SlbRuleResource s)
 
-instance HasLoadBalancerId (SlbRuleResource s) s Text where
+instance P.HasLoadBalancerId (SlbRuleResource s) s Text where
     loadBalancerId =
         lens (_load_balancer_id :: SlbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _load_balancer_id = a } :: SlbRuleResource s)
 
-instance HasName (SlbRuleResource s) s Text where
+instance P.HasName (SlbRuleResource s) s Text where
     name =
         lens (_name :: SlbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SlbRuleResource s)
 
-instance HasServerGroupId (SlbRuleResource s) s Text where
+instance P.HasServerGroupId (SlbRuleResource s) s Text where
     serverGroupId =
         lens (_server_group_id :: SlbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _server_group_id = a } :: SlbRuleResource s)
 
-instance HasUrl (SlbRuleResource s) s Text where
+instance P.HasUrl (SlbRuleResource s) s Text where
     url =
         lens (_url :: SlbRuleResource s -> TF.Attribute s Text)
             (\s a -> s { _url = a } :: SlbRuleResource s)
 
-instance HasComputedDomain (SlbRuleResource s) Text
+instance P.HasComputedDomain (SlbRuleResource s) Text
 
-instance HasComputedForntendPort (SlbRuleResource s) Text
+instance P.HasComputedForntendPort (SlbRuleResource s) Text
 
-instance HasComputedId (SlbRuleResource s) Text
+instance P.HasComputedId (SlbRuleResource s) Text
 
-instance HasComputedLoadBalancerId (SlbRuleResource s) Text
+instance P.HasComputedLoadBalancerId (SlbRuleResource s) Text
 
-instance HasComputedName (SlbRuleResource s) Text
+instance P.HasComputedName (SlbRuleResource s) Text
 
-instance HasComputedServerGroupId (SlbRuleResource s) Text
+instance P.HasComputedServerGroupId (SlbRuleResource s) Text
 
-instance HasComputedUrl (SlbRuleResource s) Text
+instance P.HasComputedUrl (SlbRuleResource s) Text
 
-slbRuleResource :: TF.Resource TF.AliCloud (SlbRuleResource s)
+slbRuleResource :: TF.Resource P.AliCloud (SlbRuleResource s)
 slbRuleResource =
     TF.newResource "alicloud_slb_rule" $
         SlbRuleResource {
@@ -4651,22 +4650,22 @@ instance TF.ToHCL (SlbServerGroupResource s) where
         , TF.attribute "servers" _servers
         ]
 
-instance HasLoadBalancerId (SlbServerGroupResource s) s Text where
+instance P.HasLoadBalancerId (SlbServerGroupResource s) s Text where
     loadBalancerId =
         lens (_load_balancer_id :: SlbServerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _load_balancer_id = a } :: SlbServerGroupResource s)
 
-instance HasName (SlbServerGroupResource s) s Text where
+instance P.HasName (SlbServerGroupResource s) s Text where
     name =
         lens (_name :: SlbServerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SlbServerGroupResource s)
 
-instance HasServers (SlbServerGroupResource s) s Text where
+instance P.HasServers (SlbServerGroupResource s) s Text where
     servers =
         lens (_servers :: SlbServerGroupResource s -> TF.Attribute s Text)
             (\s a -> s { _servers = a } :: SlbServerGroupResource s)
 
-slbServerGroupResource :: TF.Resource TF.AliCloud (SlbServerGroupResource s)
+slbServerGroupResource :: TF.Resource P.AliCloud (SlbServerGroupResource s)
 slbServerGroupResource =
     TF.newResource "alicloud_slb_server_group" $
         SlbServerGroupResource {
@@ -4695,22 +4694,22 @@ instance TF.ToHCL (SnatResource s) where
         , TF.attribute "source_vswitch_id" _source_vswitch_id
         ]
 
-instance HasSnatIp (SnatResource s) s Text where
+instance P.HasSnatIp (SnatResource s) s Text where
     snatIp =
         lens (_snat_ip :: SnatResource s -> TF.Attribute s Text)
             (\s a -> s { _snat_ip = a } :: SnatResource s)
 
-instance HasSnatTableId (SnatResource s) s Text where
+instance P.HasSnatTableId (SnatResource s) s Text where
     snatTableId =
         lens (_snat_table_id :: SnatResource s -> TF.Attribute s Text)
             (\s a -> s { _snat_table_id = a } :: SnatResource s)
 
-instance HasSourceVswitchId (SnatResource s) s Text where
+instance P.HasSourceVswitchId (SnatResource s) s Text where
     sourceVswitchId =
         lens (_source_vswitch_id :: SnatResource s -> TF.Attribute s Text)
             (\s a -> s { _source_vswitch_id = a } :: SnatResource s)
 
-snatResource :: TF.Resource TF.AliCloud (SnatResource s)
+snatResource :: TF.Resource P.AliCloud (SnatResource s)
 snatResource =
     TF.newResource "alicloud_snat" $
         SnatResource {
@@ -4740,34 +4739,34 @@ instance TF.ToHCL (VpcResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasCidrBlock (VpcResource s) s Text where
+instance P.HasCidrBlock (VpcResource s) s Text where
     cidrBlock =
         lens (_cidr_block :: VpcResource s -> TF.Attribute s Text)
             (\s a -> s { _cidr_block = a } :: VpcResource s)
 
-instance HasDescription (VpcResource s) s Text where
+instance P.HasDescription (VpcResource s) s Text where
     description =
         lens (_description :: VpcResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: VpcResource s)
 
-instance HasName (VpcResource s) s Text where
+instance P.HasName (VpcResource s) s Text where
     name =
         lens (_name :: VpcResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VpcResource s)
 
-instance HasComputedCidrBlock (VpcResource s) Text
+instance P.HasComputedCidrBlock (VpcResource s) Text
 
-instance HasComputedDescription (VpcResource s) Text
+instance P.HasComputedDescription (VpcResource s) Text
 
-instance HasComputedId (VpcResource s) Text
+instance P.HasComputedId (VpcResource s) Text
 
-instance HasComputedName (VpcResource s) Text
+instance P.HasComputedName (VpcResource s) Text
 
-instance HasComputedRouteTableId (VpcResource s) Text
+instance P.HasComputedRouteTableId (VpcResource s) Text
 
-instance HasComputedRouterId (VpcResource s) Text
+instance P.HasComputedRouterId (VpcResource s) Text
 
-vpcResource :: TF.Resource TF.AliCloud (VpcResource s)
+vpcResource :: TF.Resource P.AliCloud (VpcResource s)
 vpcResource =
     TF.newResource "alicloud_vpc" $
         VpcResource {
@@ -4802,44 +4801,44 @@ instance TF.ToHCL (VswitchResource s) where
         , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasAvailabilityZone (VswitchResource s) s Text where
+instance P.HasAvailabilityZone (VswitchResource s) s Text where
     availabilityZone =
         lens (_availability_zone :: VswitchResource s -> TF.Attribute s Text)
             (\s a -> s { _availability_zone = a } :: VswitchResource s)
 
-instance HasCidrBlock (VswitchResource s) s Text where
+instance P.HasCidrBlock (VswitchResource s) s Text where
     cidrBlock =
         lens (_cidr_block :: VswitchResource s -> TF.Attribute s Text)
             (\s a -> s { _cidr_block = a } :: VswitchResource s)
 
-instance HasDescription (VswitchResource s) s Text where
+instance P.HasDescription (VswitchResource s) s Text where
     description =
         lens (_description :: VswitchResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: VswitchResource s)
 
-instance HasName (VswitchResource s) s Text where
+instance P.HasName (VswitchResource s) s Text where
     name =
         lens (_name :: VswitchResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: VswitchResource s)
 
-instance HasVpcId (VswitchResource s) s Text where
+instance P.HasVpcId (VswitchResource s) s Text where
     vpcId =
         lens (_vpc_id :: VswitchResource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: VswitchResource s)
 
-instance HasComputedAvailabilityZone (VswitchResource s) Text
+instance P.HasComputedAvailabilityZone (VswitchResource s) Text
 
-instance HasComputedCidrBlock (VswitchResource s) Text
+instance P.HasComputedCidrBlock (VswitchResource s) Text
 
-instance HasComputedDescription (VswitchResource s) Text
+instance P.HasComputedDescription (VswitchResource s) Text
 
-instance HasComputedId (VswitchResource s) Text
+instance P.HasComputedId (VswitchResource s) Text
 
-instance HasComputedName (VswitchResource s) Text
+instance P.HasComputedName (VswitchResource s) Text
 
-instance HasComputedVpcId (VswitchResource s) Text
+instance P.HasComputedVpcId (VswitchResource s) Text
 
-vswitchResource :: TF.Resource TF.AliCloud (VswitchResource s)
+vswitchResource :: TF.Resource P.AliCloud (VswitchResource s)
 vswitchResource =
     TF.newResource "alicloud_vswitch" $
         VswitchResource {
@@ -4849,2091 +4848,3 @@ vswitchResource =
             , _name = TF.Nil
             , _vpc_id = TF.Nil
             }
-
-class HasAccessPointId a s b | a -> s b where
-    accessPointId :: Lens' a (TF.Attribute s b)
-
-instance HasAccessPointId a s b => HasAccessPointId (TF.Resource p a) s b where
-    accessPointId = TF.configuration . accessPointId
-
-class HasAccountAlias a s b | a -> s b where
-    accountAlias :: Lens' a (TF.Attribute s b)
-
-instance HasAccountAlias a s b => HasAccountAlias (TF.Resource p a) s b where
-    accountAlias = TF.configuration . accountAlias
-
-class HasAccountName a s b | a -> s b where
-    accountName :: Lens' a (TF.Attribute s b)
-
-instance HasAccountName a s b => HasAccountName (TF.Resource p a) s b where
-    accountName = TF.configuration . accountName
-
-class HasAcl a s b | a -> s b where
-    acl :: Lens' a (TF.Attribute s b)
-
-instance HasAcl a s b => HasAcl (TF.Resource p a) s b where
-    acl = TF.configuration . acl
-
-class HasActive a s b | a -> s b where
-    active :: Lens' a (TF.Attribute s b)
-
-instance HasActive a s b => HasActive (TF.Resource p a) s b where
-    active = TF.configuration . active
-
-class HasAdjustmentType a s b | a -> s b where
-    adjustmentType :: Lens' a (TF.Attribute s b)
-
-instance HasAdjustmentType a s b => HasAdjustmentType (TF.Resource p a) s b where
-    adjustmentType = TF.configuration . adjustmentType
-
-class HasAdjustmentValue a s b | a -> s b where
-    adjustmentValue :: Lens' a (TF.Attribute s b)
-
-instance HasAdjustmentValue a s b => HasAdjustmentValue (TF.Resource p a) s b where
-    adjustmentValue = TF.configuration . adjustmentValue
-
-class HasAllocationId a s b | a -> s b where
-    allocationId :: Lens' a (TF.Attribute s b)
-
-instance HasAllocationId a s b => HasAllocationId (TF.Resource p a) s b where
-    allocationId = TF.configuration . allocationId
-
-class HasAvailabilityZone a s b | a -> s b where
-    availabilityZone :: Lens' a (TF.Attribute s b)
-
-instance HasAvailabilityZone a s b => HasAvailabilityZone (TF.Resource p a) s b where
-    availabilityZone = TF.configuration . availabilityZone
-
-class HasBackendPort a s b | a -> s b where
-    backendPort :: Lens' a (TF.Attribute s b)
-
-instance HasBackendPort a s b => HasBackendPort (TF.Resource p a) s b where
-    backendPort = TF.configuration . backendPort
-
-class HasBackupPeriod a s b | a -> s b where
-    backupPeriod :: Lens' a (TF.Attribute s b)
-
-instance HasBackupPeriod a s b => HasBackupPeriod (TF.Resource p a) s b where
-    backupPeriod = TF.configuration . backupPeriod
-
-class HasBackupTime a s b | a -> s b where
-    backupTime :: Lens' a (TF.Attribute s b)
-
-instance HasBackupTime a s b => HasBackupTime (TF.Resource p a) s b where
-    backupTime = TF.configuration . backupTime
-
-class HasBandwidth a s b | a -> s b where
-    bandwidth :: Lens' a (TF.Attribute s b)
-
-instance HasBandwidth a s b => HasBandwidth (TF.Resource p a) s b where
-    bandwidth = TF.configuration . bandwidth
-
-class HasBucket a s b | a -> s b where
-    bucket :: Lens' a (TF.Attribute s b)
-
-instance HasBucket a s b => HasBucket (TF.Resource p a) s b where
-    bucket = TF.configuration . bucket
-
-class HasCacheControl a s b | a -> s b where
-    cacheControl :: Lens' a (TF.Attribute s b)
-
-instance HasCacheControl a s b => HasCacheControl (TF.Resource p a) s b where
-    cacheControl = TF.configuration . cacheControl
-
-class HasCategory a s b | a -> s b where
-    category :: Lens' a (TF.Attribute s b)
-
-instance HasCategory a s b => HasCategory (TF.Resource p a) s b where
-    category = TF.configuration . category
-
-class HasCdnType a s b | a -> s b where
-    cdnType :: Lens' a (TF.Attribute s b)
-
-instance HasCdnType a s b => HasCdnType (TF.Resource p a) s b where
-    cdnType = TF.configuration . cdnType
-
-class HasCharacterSet a s b | a -> s b where
-    characterSet :: Lens' a (TF.Attribute s b)
-
-instance HasCharacterSet a s b => HasCharacterSet (TF.Resource p a) s b where
-    characterSet = TF.configuration . characterSet
-
-class HasCidrBlock a s b | a -> s b where
-    cidrBlock :: Lens' a (TF.Attribute s b)
-
-instance HasCidrBlock a s b => HasCidrBlock (TF.Resource p a) s b where
-    cidrBlock = TF.configuration . cidrBlock
-
-class HasCidrIp a s b | a -> s b where
-    cidrIp :: Lens' a (TF.Attribute s b)
-
-instance HasCidrIp a s b => HasCidrIp (TF.Resource p a) s b where
-    cidrIp = TF.configuration . cidrIp
-
-class HasComments a s b | a -> s b where
-    comments :: Lens' a (TF.Attribute s b)
-
-instance HasComments a s b => HasComments (TF.Resource p a) s b where
-    comments = TF.configuration . comments
-
-class HasConnectionPrefix a s b | a -> s b where
-    connectionPrefix :: Lens' a (TF.Attribute s b)
-
-instance HasConnectionPrefix a s b => HasConnectionPrefix (TF.Resource p a) s b where
-    connectionPrefix = TF.configuration . connectionPrefix
-
-class HasContent a s b | a -> s b where
-    content :: Lens' a (TF.Attribute s b)
-
-instance HasContent a s b => HasContent (TF.Resource p a) s b where
-    content = TF.configuration . content
-
-class HasContentDisposition a s b | a -> s b where
-    contentDisposition :: Lens' a (TF.Attribute s b)
-
-instance HasContentDisposition a s b => HasContentDisposition (TF.Resource p a) s b where
-    contentDisposition = TF.configuration . contentDisposition
-
-class HasContentEncoding a s b | a -> s b where
-    contentEncoding :: Lens' a (TF.Attribute s b)
-
-instance HasContentEncoding a s b => HasContentEncoding (TF.Resource p a) s b where
-    contentEncoding = TF.configuration . contentEncoding
-
-class HasContentMd5 a s b | a -> s b where
-    contentMd5 :: Lens' a (TF.Attribute s b)
-
-instance HasContentMd5 a s b => HasContentMd5 (TF.Resource p a) s b where
-    contentMd5 = TF.configuration . contentMd5
-
-class HasContentType a s b | a -> s b where
-    contentType :: Lens' a (TF.Attribute s b)
-
-instance HasContentType a s b => HasContentType (TF.Resource p a) s b where
-    contentType = TF.configuration . contentType
-
-class HasCookie a s b | a -> s b where
-    cookie :: Lens' a (TF.Attribute s b)
-
-instance HasCookie a s b => HasCookie (TF.Resource p a) s b where
-    cookie = TF.configuration . cookie
-
-class HasCookieTimeout a s b | a -> s b where
-    cookieTimeout :: Lens' a (TF.Attribute s b)
-
-instance HasCookieTimeout a s b => HasCookieTimeout (TF.Resource p a) s b where
-    cookieTimeout = TF.configuration . cookieTimeout
-
-class HasCooldown a s b | a -> s b where
-    cooldown :: Lens' a (TF.Attribute s b)
-
-instance HasCooldown a s b => HasCooldown (TF.Resource p a) s b where
-    cooldown = TF.configuration . cooldown
-
-class HasCoreRule a s b | a -> s b where
-    coreRule :: Lens' a (TF.Attribute s b)
-
-instance HasCoreRule a s b => HasCoreRule (TF.Resource p a) s b where
-    coreRule = TF.configuration . coreRule
-
-class HasDataDisk a s b | a -> s b where
-    dataDisk :: Lens' a (TF.Attribute s b)
-
-instance HasDataDisk a s b => HasDataDisk (TF.Resource p a) s b where
-    dataDisk = TF.configuration . dataDisk
-
-class HasDbInstanceIds a s b | a -> s b where
-    dbInstanceIds :: Lens' a (TF.Attribute s b)
-
-instance HasDbInstanceIds a s b => HasDbInstanceIds (TF.Resource p a) s b where
-    dbInstanceIds = TF.configuration . dbInstanceIds
-
-class HasDbNames a s b | a -> s b where
-    dbNames :: Lens' a (TF.Attribute s b)
-
-instance HasDbNames a s b => HasDbNames (TF.Resource p a) s b where
-    dbNames = TF.configuration . dbNames
-
-class HasDefaultCooldown a s b | a -> s b where
-    defaultCooldown :: Lens' a (TF.Attribute s b)
-
-instance HasDefaultCooldown a s b => HasDefaultCooldown (TF.Resource p a) s b where
-    defaultCooldown = TF.configuration . defaultCooldown
-
-class HasDeletionWindowInDays a s b | a -> s b where
-    deletionWindowInDays :: Lens' a (TF.Attribute s b)
-
-instance HasDeletionWindowInDays a s b => HasDeletionWindowInDays (TF.Resource p a) s b where
-    deletionWindowInDays = TF.configuration . deletionWindowInDays
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasDestinationCidrblock a s b | a -> s b where
-    destinationCidrblock :: Lens' a (TF.Attribute s b)
-
-instance HasDestinationCidrblock a s b => HasDestinationCidrblock (TF.Resource p a) s b where
-    destinationCidrblock = TF.configuration . destinationCidrblock
-
-class HasDiskCategory a s b | a -> s b where
-    diskCategory :: Lens' a (TF.Attribute s b)
-
-instance HasDiskCategory a s b => HasDiskCategory (TF.Resource p a) s b where
-    diskCategory = TF.configuration . diskCategory
-
-class HasDiskId a s b | a -> s b where
-    diskId :: Lens' a (TF.Attribute s b)
-
-instance HasDiskId a s b => HasDiskId (TF.Resource p a) s b where
-    diskId = TF.configuration . diskId
-
-class HasDiskSize a s b | a -> s b where
-    diskSize :: Lens' a (TF.Attribute s b)
-
-instance HasDiskSize a s b => HasDiskSize (TF.Resource p a) s b where
-    diskSize = TF.configuration . diskSize
-
-class HasDisplayName a s b | a -> s b where
-    displayName :: Lens' a (TF.Attribute s b)
-
-instance HasDisplayName a s b => HasDisplayName (TF.Resource p a) s b where
-    displayName = TF.configuration . displayName
-
-class HasDocument a s b | a -> s b where
-    document :: Lens' a (TF.Attribute s b)
-
-instance HasDocument a s b => HasDocument (TF.Resource p a) s b where
-    document = TF.configuration . document
-
-class HasDomain a s b | a -> s b where
-    domain :: Lens' a (TF.Attribute s b)
-
-instance HasDomain a s b => HasDomain (TF.Resource p a) s b where
-    domain = TF.configuration . domain
-
-class HasDomainName a s b | a -> s b where
-    domainName :: Lens' a (TF.Attribute s b)
-
-instance HasDomainName a s b => HasDomainName (TF.Resource p a) s b where
-    domainName = TF.configuration . domainName
-
-class HasDryRun a s b | a -> s b where
-    dryRun :: Lens' a (TF.Attribute s b)
-
-instance HasDryRun a s b => HasDryRun (TF.Resource p a) s b where
-    dryRun = TF.configuration . dryRun
-
-class HasEmail a s b | a -> s b where
-    email :: Lens' a (TF.Attribute s b)
-
-instance HasEmail a s b => HasEmail (TF.Resource p a) s b where
-    email = TF.configuration . email
-
-class HasEnable a s b | a -> s b where
-    enable :: Lens' a (TF.Attribute s b)
-
-instance HasEnable a s b => HasEnable (TF.Resource p a) s b where
-    enable = TF.configuration . enable
-
-class HasEngine a s b | a -> s b where
-    engine :: Lens' a (TF.Attribute s b)
-
-instance HasEngine a s b => HasEngine (TF.Resource p a) s b where
-    engine = TF.configuration . engine
-
-class HasEngineVersion a s b | a -> s b where
-    engineVersion :: Lens' a (TF.Attribute s b)
-
-instance HasEngineVersion a s b => HasEngineVersion (TF.Resource p a) s b where
-    engineVersion = TF.configuration . engineVersion
-
-class HasExpires a s b | a -> s b where
-    expires :: Lens' a (TF.Attribute s b)
-
-instance HasExpires a s b => HasExpires (TF.Resource p a) s b where
-    expires = TF.configuration . expires
-
-class HasExternalIp a s b | a -> s b where
-    externalIp :: Lens' a (TF.Attribute s b)
-
-instance HasExternalIp a s b => HasExternalIp (TF.Resource p a) s b where
-    externalIp = TF.configuration . externalIp
-
-class HasExternalPort a s b | a -> s b where
-    externalPort :: Lens' a (TF.Attribute s b)
-
-instance HasExternalPort a s b => HasExternalPort (TF.Resource p a) s b where
-    externalPort = TF.configuration . externalPort
-
-class HasForce a s b | a -> s b where
-    force :: Lens' a (TF.Attribute s b)
-
-instance HasForce a s b => HasForce (TF.Resource p a) s b where
-    force = TF.configuration . force
-
-class HasForceDelete a s b | a -> s b where
-    forceDelete :: Lens' a (TF.Attribute s b)
-
-instance HasForceDelete a s b => HasForceDelete (TF.Resource p a) s b where
-    forceDelete = TF.configuration . forceDelete
-
-class HasForwardTableId a s b | a -> s b where
-    forwardTableId :: Lens' a (TF.Attribute s b)
-
-instance HasForwardTableId a s b => HasForwardTableId (TF.Resource p a) s b where
-    forwardTableId = TF.configuration . forwardTableId
-
-class HasFrontendPort a s b | a -> s b where
-    frontendPort :: Lens' a (TF.Attribute s b)
-
-instance HasFrontendPort a s b => HasFrontendPort (TF.Resource p a) s b where
-    frontendPort = TF.configuration . frontendPort
-
-class HasGroupId a s b | a -> s b where
-    groupId :: Lens' a (TF.Attribute s b)
-
-instance HasGroupId a s b => HasGroupId (TF.Resource p a) s b where
-    groupId = TF.configuration . groupId
-
-class HasGroupName a s b | a -> s b where
-    groupName :: Lens' a (TF.Attribute s b)
-
-instance HasGroupName a s b => HasGroupName (TF.Resource p a) s b where
-    groupName = TF.configuration . groupName
-
-class HasHealthCheck a s b | a -> s b where
-    healthCheck :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheck a s b => HasHealthCheck (TF.Resource p a) s b where
-    healthCheck = TF.configuration . healthCheck
-
-class HasHealthCheckConnectPort a s b | a -> s b where
-    healthCheckConnectPort :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckConnectPort a s b => HasHealthCheckConnectPort (TF.Resource p a) s b where
-    healthCheckConnectPort = TF.configuration . healthCheckConnectPort
-
-class HasHealthCheckDomain a s b | a -> s b where
-    healthCheckDomain :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckDomain a s b => HasHealthCheckDomain (TF.Resource p a) s b where
-    healthCheckDomain = TF.configuration . healthCheckDomain
-
-class HasHealthCheckHttpCode a s b | a -> s b where
-    healthCheckHttpCode :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckHttpCode a s b => HasHealthCheckHttpCode (TF.Resource p a) s b where
-    healthCheckHttpCode = TF.configuration . healthCheckHttpCode
-
-class HasHealthCheckInterval a s b | a -> s b where
-    healthCheckInterval :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckInterval a s b => HasHealthCheckInterval (TF.Resource p a) s b where
-    healthCheckInterval = TF.configuration . healthCheckInterval
-
-class HasHealthCheckSourceIp a s b | a -> s b where
-    healthCheckSourceIp :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckSourceIp a s b => HasHealthCheckSourceIp (TF.Resource p a) s b where
-    healthCheckSourceIp = TF.configuration . healthCheckSourceIp
-
-class HasHealthCheckTargetIp a s b | a -> s b where
-    healthCheckTargetIp :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckTargetIp a s b => HasHealthCheckTargetIp (TF.Resource p a) s b where
-    healthCheckTargetIp = TF.configuration . healthCheckTargetIp
-
-class HasHealthCheckTimeout a s b | a -> s b where
-    healthCheckTimeout :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckTimeout a s b => HasHealthCheckTimeout (TF.Resource p a) s b where
-    healthCheckTimeout = TF.configuration . healthCheckTimeout
-
-class HasHealthCheckType a s b | a -> s b where
-    healthCheckType :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckType a s b => HasHealthCheckType (TF.Resource p a) s b where
-    healthCheckType = TF.configuration . healthCheckType
-
-class HasHealthCheckUri a s b | a -> s b where
-    healthCheckUri :: Lens' a (TF.Attribute s b)
-
-instance HasHealthCheckUri a s b => HasHealthCheckUri (TF.Resource p a) s b where
-    healthCheckUri = TF.configuration . healthCheckUri
-
-class HasHealthyThreshold a s b | a -> s b where
-    healthyThreshold :: Lens' a (TF.Attribute s b)
-
-instance HasHealthyThreshold a s b => HasHealthyThreshold (TF.Resource p a) s b where
-    healthyThreshold = TF.configuration . healthyThreshold
-
-class HasHostName a s b | a -> s b where
-    hostName :: Lens' a (TF.Attribute s b)
-
-instance HasHostName a s b => HasHostName (TF.Resource p a) s b where
-    hostName = TF.configuration . hostName
-
-class HasHostRecord a s b | a -> s b where
-    hostRecord :: Lens' a (TF.Attribute s b)
-
-instance HasHostRecord a s b => HasHostRecord (TF.Resource p a) s b where
-    hostRecord = TF.configuration . hostRecord
-
-class HasImageId a s b | a -> s b where
-    imageId :: Lens' a (TF.Attribute s b)
-
-instance HasImageId a s b => HasImageId (TF.Resource p a) s b where
-    imageId = TF.configuration . imageId
-
-class HasIncludeDataDisks a s b | a -> s b where
-    includeDataDisks :: Lens' a (TF.Attribute s b)
-
-instance HasIncludeDataDisks a s b => HasIncludeDataDisks (TF.Resource p a) s b where
-    includeDataDisks = TF.configuration . includeDataDisks
-
-class HasInstanceChargeType a s b | a -> s b where
-    instanceChargeType :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceChargeType a s b => HasInstanceChargeType (TF.Resource p a) s b where
-    instanceChargeType = TF.configuration . instanceChargeType
-
-class HasInstanceId a s b | a -> s b where
-    instanceId :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceId a s b => HasInstanceId (TF.Resource p a) s b where
-    instanceId = TF.configuration . instanceId
-
-class HasInstanceIds a s b | a -> s b where
-    instanceIds :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceIds a s b => HasInstanceIds (TF.Resource p a) s b where
-    instanceIds = TF.configuration . instanceIds
-
-class HasInstanceName a s b | a -> s b where
-    instanceName :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceName a s b => HasInstanceName (TF.Resource p a) s b where
-    instanceName = TF.configuration . instanceName
-
-class HasInstanceStorage a s b | a -> s b where
-    instanceStorage :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceStorage a s b => HasInstanceStorage (TF.Resource p a) s b where
-    instanceStorage = TF.configuration . instanceStorage
-
-class HasInstanceType a s b | a -> s b where
-    instanceType :: Lens' a (TF.Attribute s b)
-
-instance HasInstanceType a s b => HasInstanceType (TF.Resource p a) s b where
-    instanceType = TF.configuration . instanceType
-
-class HasInternalIp a s b | a -> s b where
-    internalIp :: Lens' a (TF.Attribute s b)
-
-instance HasInternalIp a s b => HasInternalIp (TF.Resource p a) s b where
-    internalIp = TF.configuration . internalIp
-
-class HasInternalPort a s b | a -> s b where
-    internalPort :: Lens' a (TF.Attribute s b)
-
-instance HasInternalPort a s b => HasInternalPort (TF.Resource p a) s b where
-    internalPort = TF.configuration . internalPort
-
-class HasInternet a s b | a -> s b where
-    internet :: Lens' a (TF.Attribute s b)
-
-instance HasInternet a s b => HasInternet (TF.Resource p a) s b where
-    internet = TF.configuration . internet
-
-class HasInternetChargeType a s b | a -> s b where
-    internetChargeType :: Lens' a (TF.Attribute s b)
-
-instance HasInternetChargeType a s b => HasInternetChargeType (TF.Resource p a) s b where
-    internetChargeType = TF.configuration . internetChargeType
-
-class HasInternetMaxBandwidthIn a s b | a -> s b where
-    internetMaxBandwidthIn :: Lens' a (TF.Attribute s b)
-
-instance HasInternetMaxBandwidthIn a s b => HasInternetMaxBandwidthIn (TF.Resource p a) s b where
-    internetMaxBandwidthIn = TF.configuration . internetMaxBandwidthIn
-
-class HasInternetMaxBandwidthOut a s b | a -> s b where
-    internetMaxBandwidthOut :: Lens' a (TF.Attribute s b)
-
-instance HasInternetMaxBandwidthOut a s b => HasInternetMaxBandwidthOut (TF.Resource p a) s b where
-    internetMaxBandwidthOut = TF.configuration . internetMaxBandwidthOut
-
-class HasIpProtocol a s b | a -> s b where
-    ipProtocol :: Lens' a (TF.Attribute s b)
-
-instance HasIpProtocol a s b => HasIpProtocol (TF.Resource p a) s b where
-    ipProtocol = TF.configuration . ipProtocol
-
-class HasIsEnabled a s b | a -> s b where
-    isEnabled :: Lens' a (TF.Attribute s b)
-
-instance HasIsEnabled a s b => HasIsEnabled (TF.Resource p a) s b where
-    isEnabled = TF.configuration . isEnabled
-
-class HasIsOutdated a s b | a -> s b where
-    isOutdated :: Lens' a (TF.Attribute s b)
-
-instance HasIsOutdated a s b => HasIsOutdated (TF.Resource p a) s b where
-    isOutdated = TF.configuration . isOutdated
-
-class HasKey a s b | a -> s b where
-    key :: Lens' a (TF.Attribute s b)
-
-instance HasKey a s b => HasKey (TF.Resource p a) s b where
-    key = TF.configuration . key
-
-class HasKeyFile a s b | a -> s b where
-    keyFile :: Lens' a (TF.Attribute s b)
-
-instance HasKeyFile a s b => HasKeyFile (TF.Resource p a) s b where
-    keyFile = TF.configuration . keyFile
-
-class HasKeyName a s b | a -> s b where
-    keyName :: Lens' a (TF.Attribute s b)
-
-instance HasKeyName a s b => HasKeyName (TF.Resource p a) s b where
-    keyName = TF.configuration . keyName
-
-class HasKeyNamePrefix a s b | a -> s b where
-    keyNamePrefix :: Lens' a (TF.Attribute s b)
-
-instance HasKeyNamePrefix a s b => HasKeyNamePrefix (TF.Resource p a) s b where
-    keyNamePrefix = TF.configuration . keyNamePrefix
-
-class HasKeyUsage a s b | a -> s b where
-    keyUsage :: Lens' a (TF.Attribute s b)
-
-instance HasKeyUsage a s b => HasKeyUsage (TF.Resource p a) s b where
-    keyUsage = TF.configuration . keyUsage
-
-class HasLaunchExpirationTime a s b | a -> s b where
-    launchExpirationTime :: Lens' a (TF.Attribute s b)
-
-instance HasLaunchExpirationTime a s b => HasLaunchExpirationTime (TF.Resource p a) s b where
-    launchExpirationTime = TF.configuration . launchExpirationTime
-
-class HasLaunchTime a s b | a -> s b where
-    launchTime :: Lens' a (TF.Attribute s b)
-
-instance HasLaunchTime a s b => HasLaunchTime (TF.Resource p a) s b where
-    launchTime = TF.configuration . launchTime
-
-class HasLifecycleRule a s b | a -> s b where
-    lifecycleRule :: Lens' a (TF.Attribute s b)
-
-instance HasLifecycleRule a s b => HasLifecycleRule (TF.Resource p a) s b where
-    lifecycleRule = TF.configuration . lifecycleRule
-
-class HasLoadBalancerId a s b | a -> s b where
-    loadBalancerId :: Lens' a (TF.Attribute s b)
-
-instance HasLoadBalancerId a s b => HasLoadBalancerId (TF.Resource p a) s b where
-    loadBalancerId = TF.configuration . loadBalancerId
-
-class HasLoadbalancerIds a s b | a -> s b where
-    loadbalancerIds :: Lens' a (TF.Attribute s b)
-
-instance HasLoadbalancerIds a s b => HasLoadbalancerIds (TF.Resource p a) s b where
-    loadbalancerIds = TF.configuration . loadbalancerIds
-
-class HasLogBackup a s b | a -> s b where
-    logBackup :: Lens' a (TF.Attribute s b)
-
-instance HasLogBackup a s b => HasLogBackup (TF.Resource p a) s b where
-    logBackup = TF.configuration . logBackup
-
-class HasLogRetentionPeriod a s b | a -> s b where
-    logRetentionPeriod :: Lens' a (TF.Attribute s b)
-
-instance HasLogRetentionPeriod a s b => HasLogRetentionPeriod (TF.Resource p a) s b where
-    logRetentionPeriod = TF.configuration . logRetentionPeriod
-
-class HasLogging a s b | a -> s b where
-    logging :: Lens' a (TF.Attribute s b)
-
-instance HasLogging a s b => HasLogging (TF.Resource p a) s b where
-    logging = TF.configuration . logging
-
-class HasLoggingIsenable a s b | a -> s b where
-    loggingIsenable :: Lens' a (TF.Attribute s b)
-
-instance HasLoggingIsenable a s b => HasLoggingIsenable (TF.Resource p a) s b where
-    loggingIsenable = TF.configuration . loggingIsenable
-
-class HasMaxSize a s b | a -> s b where
-    maxSize :: Lens' a (TF.Attribute s b)
-
-instance HasMaxSize a s b => HasMaxSize (TF.Resource p a) s b where
-    maxSize = TF.configuration . maxSize
-
-class HasMfaBindRequired a s b | a -> s b where
-    mfaBindRequired :: Lens' a (TF.Attribute s b)
-
-instance HasMfaBindRequired a s b => HasMfaBindRequired (TF.Resource p a) s b where
-    mfaBindRequired = TF.configuration . mfaBindRequired
-
-class HasMinSize a s b | a -> s b where
-    minSize :: Lens' a (TF.Attribute s b)
-
-instance HasMinSize a s b => HasMinSize (TF.Resource p a) s b where
-    minSize = TF.configuration . minSize
-
-class HasMobile a s b | a -> s b where
-    mobile :: Lens' a (TF.Attribute s b)
-
-instance HasMobile a s b => HasMobile (TF.Resource p a) s b where
-    mobile = TF.configuration . mobile
-
-class HasMultiAz a s b | a -> s b where
-    multiAz :: Lens' a (TF.Attribute s b)
-
-instance HasMultiAz a s b => HasMultiAz (TF.Resource p a) s b where
-    multiAz = TF.configuration . multiAz
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasNamePrefix a s b | a -> s b where
-    namePrefix :: Lens' a (TF.Attribute s b)
-
-instance HasNamePrefix a s b => HasNamePrefix (TF.Resource p a) s b where
-    namePrefix = TF.configuration . namePrefix
-
-class HasNexthopId a s b | a -> s b where
-    nexthopId :: Lens' a (TF.Attribute s b)
-
-instance HasNexthopId a s b => HasNexthopId (TF.Resource p a) s b where
-    nexthopId = TF.configuration . nexthopId
-
-class HasNexthopType a s b | a -> s b where
-    nexthopType :: Lens' a (TF.Attribute s b)
-
-instance HasNexthopType a s b => HasNexthopType (TF.Resource p a) s b where
-    nexthopType = TF.configuration . nexthopType
-
-class HasNicType a s b | a -> s b where
-    nicType :: Lens' a (TF.Attribute s b)
-
-instance HasNicType a s b => HasNicType (TF.Resource p a) s b where
-    nicType = TF.configuration . nicType
-
-class HasOppositeAccessPointId a s b | a -> s b where
-    oppositeAccessPointId :: Lens' a (TF.Attribute s b)
-
-instance HasOppositeAccessPointId a s b => HasOppositeAccessPointId (TF.Resource p a) s b where
-    oppositeAccessPointId = TF.configuration . oppositeAccessPointId
-
-class HasOppositeInterfaceId a s b | a -> s b where
-    oppositeInterfaceId :: Lens' a (TF.Attribute s b)
-
-instance HasOppositeInterfaceId a s b => HasOppositeInterfaceId (TF.Resource p a) s b where
-    oppositeInterfaceId = TF.configuration . oppositeInterfaceId
-
-class HasOppositeInterfaceOwnerId a s b | a -> s b where
-    oppositeInterfaceOwnerId :: Lens' a (TF.Attribute s b)
-
-instance HasOppositeInterfaceOwnerId a s b => HasOppositeInterfaceOwnerId (TF.Resource p a) s b where
-    oppositeInterfaceOwnerId = TF.configuration . oppositeInterfaceOwnerId
-
-class HasOppositeRegion a s b | a -> s b where
-    oppositeRegion :: Lens' a (TF.Attribute s b)
-
-instance HasOppositeRegion a s b => HasOppositeRegion (TF.Resource p a) s b where
-    oppositeRegion = TF.configuration . oppositeRegion
-
-class HasOppositeRouterId a s b | a -> s b where
-    oppositeRouterId :: Lens' a (TF.Attribute s b)
-
-instance HasOppositeRouterId a s b => HasOppositeRouterId (TF.Resource p a) s b where
-    oppositeRouterId = TF.configuration . oppositeRouterId
-
-class HasOppositeRouterType a s b | a -> s b where
-    oppositeRouterType :: Lens' a (TF.Attribute s b)
-
-instance HasOppositeRouterType a s b => HasOppositeRouterType (TF.Resource p a) s b where
-    oppositeRouterType = TF.configuration . oppositeRouterType
-
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
-
-instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
-    password = TF.configuration . password
-
-class HasPasswordResetRequired a s b | a -> s b where
-    passwordResetRequired :: Lens' a (TF.Attribute s b)
-
-instance HasPasswordResetRequired a s b => HasPasswordResetRequired (TF.Resource p a) s b where
-    passwordResetRequired = TF.configuration . passwordResetRequired
-
-class HasPeriod a s b | a -> s b where
-    period :: Lens' a (TF.Attribute s b)
-
-instance HasPeriod a s b => HasPeriod (TF.Resource p a) s b where
-    period = TF.configuration . period
-
-class HasPeriodUnit a s b | a -> s b where
-    periodUnit :: Lens' a (TF.Attribute s b)
-
-instance HasPeriodUnit a s b => HasPeriodUnit (TF.Resource p a) s b where
-    periodUnit = TF.configuration . periodUnit
-
-class HasPersistenceTimeout a s b | a -> s b where
-    persistenceTimeout :: Lens' a (TF.Attribute s b)
-
-instance HasPersistenceTimeout a s b => HasPersistenceTimeout (TF.Resource p a) s b where
-    persistenceTimeout = TF.configuration . persistenceTimeout
-
-class HasPolicy a s b | a -> s b where
-    policy :: Lens' a (TF.Attribute s b)
-
-instance HasPolicy a s b => HasPolicy (TF.Resource p a) s b where
-    policy = TF.configuration . policy
-
-class HasPolicyName a s b | a -> s b where
-    policyName :: Lens' a (TF.Attribute s b)
-
-instance HasPolicyName a s b => HasPolicyName (TF.Resource p a) s b where
-    policyName = TF.configuration . policyName
-
-class HasPolicyType a s b | a -> s b where
-    policyType :: Lens' a (TF.Attribute s b)
-
-instance HasPolicyType a s b => HasPolicyType (TF.Resource p a) s b where
-    policyType = TF.configuration . policyType
-
-class HasPort a s b | a -> s b where
-    port :: Lens' a (TF.Attribute s b)
-
-instance HasPort a s b => HasPort (TF.Resource p a) s b where
-    port = TF.configuration . port
-
-class HasPortRange a s b | a -> s b where
-    portRange :: Lens' a (TF.Attribute s b)
-
-instance HasPortRange a s b => HasPortRange (TF.Resource p a) s b where
-    portRange = TF.configuration . portRange
-
-class HasPriority a s b | a -> s b where
-    priority :: Lens' a (TF.Attribute s b)
-
-instance HasPriority a s b => HasPriority (TF.Resource p a) s b where
-    priority = TF.configuration . priority
-
-class HasPrivateIp a s b | a -> s b where
-    privateIp :: Lens' a (TF.Attribute s b)
-
-instance HasPrivateIp a s b => HasPrivateIp (TF.Resource p a) s b where
-    privateIp = TF.configuration . privateIp
-
-class HasPrivilege a s b | a -> s b where
-    privilege :: Lens' a (TF.Attribute s b)
-
-instance HasPrivilege a s b => HasPrivilege (TF.Resource p a) s b where
-    privilege = TF.configuration . privilege
-
-class HasProtocol a s b | a -> s b where
-    protocol :: Lens' a (TF.Attribute s b)
-
-instance HasProtocol a s b => HasProtocol (TF.Resource p a) s b where
-    protocol = TF.configuration . protocol
-
-class HasPublicKey a s b | a -> s b where
-    publicKey :: Lens' a (TF.Attribute s b)
-
-instance HasPublicKey a s b => HasPublicKey (TF.Resource p a) s b where
-    publicKey = TF.configuration . publicKey
-
-class HasRamUsers a s b | a -> s b where
-    ramUsers :: Lens' a (TF.Attribute s b)
-
-instance HasRamUsers a s b => HasRamUsers (TF.Resource p a) s b where
-    ramUsers = TF.configuration . ramUsers
-
-class HasRecurrenceEndTime a s b | a -> s b where
-    recurrenceEndTime :: Lens' a (TF.Attribute s b)
-
-instance HasRecurrenceEndTime a s b => HasRecurrenceEndTime (TF.Resource p a) s b where
-    recurrenceEndTime = TF.configuration . recurrenceEndTime
-
-class HasRecurrenceType a s b | a -> s b where
-    recurrenceType :: Lens' a (TF.Attribute s b)
-
-instance HasRecurrenceType a s b => HasRecurrenceType (TF.Resource p a) s b where
-    recurrenceType = TF.configuration . recurrenceType
-
-class HasRecurrenceValue a s b | a -> s b where
-    recurrenceValue :: Lens' a (TF.Attribute s b)
-
-instance HasRecurrenceValue a s b => HasRecurrenceValue (TF.Resource p a) s b where
-    recurrenceValue = TF.configuration . recurrenceValue
-
-class HasRefererConfig a s b | a -> s b where
-    refererConfig :: Lens' a (TF.Attribute s b)
-
-instance HasRefererConfig a s b => HasRefererConfig (TF.Resource p a) s b where
-    refererConfig = TF.configuration . refererConfig
-
-class HasRemovalPolicies a s b | a -> s b where
-    removalPolicies :: Lens' a (TF.Attribute s b)
-
-instance HasRemovalPolicies a s b => HasRemovalPolicies (TF.Resource p a) s b where
-    removalPolicies = TF.configuration . removalPolicies
-
-class HasRetentionPeriod a s b | a -> s b where
-    retentionPeriod :: Lens' a (TF.Attribute s b)
-
-instance HasRetentionPeriod a s b => HasRetentionPeriod (TF.Resource p a) s b where
-    retentionPeriod = TF.configuration . retentionPeriod
-
-class HasRole a s b | a -> s b where
-    role :: Lens' a (TF.Attribute s b)
-
-instance HasRole a s b => HasRole (TF.Resource p a) s b where
-    role = TF.configuration . role
-
-class HasRoleName a s b | a -> s b where
-    roleName :: Lens' a (TF.Attribute s b)
-
-instance HasRoleName a s b => HasRoleName (TF.Resource p a) s b where
-    roleName = TF.configuration . roleName
-
-class HasRouteTableId a s b | a -> s b where
-    routeTableId :: Lens' a (TF.Attribute s b)
-
-instance HasRouteTableId a s b => HasRouteTableId (TF.Resource p a) s b where
-    routeTableId = TF.configuration . routeTableId
-
-class HasRouterId a s b | a -> s b where
-    routerId :: Lens' a (TF.Attribute s b)
-
-instance HasRouterId a s b => HasRouterId (TF.Resource p a) s b where
-    routerId = TF.configuration . routerId
-
-class HasRouterType a s b | a -> s b where
-    routerType :: Lens' a (TF.Attribute s b)
-
-instance HasRouterType a s b => HasRouterType (TF.Resource p a) s b where
-    routerType = TF.configuration . routerType
-
-class HasRouting a s b | a -> s b where
-    routing :: Lens' a (TF.Attribute s b)
-
-instance HasRouting a s b => HasRouting (TF.Resource p a) s b where
-    routing = TF.configuration . routing
-
-class HasScalingConfigurationName a s b | a -> s b where
-    scalingConfigurationName :: Lens' a (TF.Attribute s b)
-
-instance HasScalingConfigurationName a s b => HasScalingConfigurationName (TF.Resource p a) s b where
-    scalingConfigurationName = TF.configuration . scalingConfigurationName
-
-class HasScalingGroupId a s b | a -> s b where
-    scalingGroupId :: Lens' a (TF.Attribute s b)
-
-instance HasScalingGroupId a s b => HasScalingGroupId (TF.Resource p a) s b where
-    scalingGroupId = TF.configuration . scalingGroupId
-
-class HasScalingGroupName a s b | a -> s b where
-    scalingGroupName :: Lens' a (TF.Attribute s b)
-
-instance HasScalingGroupName a s b => HasScalingGroupName (TF.Resource p a) s b where
-    scalingGroupName = TF.configuration . scalingGroupName
-
-class HasScalingRuleName a s b | a -> s b where
-    scalingRuleName :: Lens' a (TF.Attribute s b)
-
-instance HasScalingRuleName a s b => HasScalingRuleName (TF.Resource p a) s b where
-    scalingRuleName = TF.configuration . scalingRuleName
-
-class HasScheduledAction a s b | a -> s b where
-    scheduledAction :: Lens' a (TF.Attribute s b)
-
-instance HasScheduledAction a s b => HasScheduledAction (TF.Resource p a) s b where
-    scheduledAction = TF.configuration . scheduledAction
-
-class HasScheduledTaskName a s b | a -> s b where
-    scheduledTaskName :: Lens' a (TF.Attribute s b)
-
-instance HasScheduledTaskName a s b => HasScheduledTaskName (TF.Resource p a) s b where
-    scheduledTaskName = TF.configuration . scheduledTaskName
-
-class HasScheduler a s b | a -> s b where
-    scheduler :: Lens' a (TF.Attribute s b)
-
-instance HasScheduler a s b => HasScheduler (TF.Resource p a) s b where
-    scheduler = TF.configuration . scheduler
-
-class HasScope a s b | a -> s b where
-    scope :: Lens' a (TF.Attribute s b)
-
-instance HasScope a s b => HasScope (TF.Resource p a) s b where
-    scope = TF.configuration . scope
-
-class HasSecretFile a s b | a -> s b where
-    secretFile :: Lens' a (TF.Attribute s b)
-
-instance HasSecretFile a s b => HasSecretFile (TF.Resource p a) s b where
-    secretFile = TF.configuration . secretFile
-
-class HasSecurityGroupId a s b | a -> s b where
-    securityGroupId :: Lens' a (TF.Attribute s b)
-
-instance HasSecurityGroupId a s b => HasSecurityGroupId (TF.Resource p a) s b where
-    securityGroupId = TF.configuration . securityGroupId
-
-class HasSecurityGroups a s b | a -> s b where
-    securityGroups :: Lens' a (TF.Attribute s b)
-
-instance HasSecurityGroups a s b => HasSecurityGroups (TF.Resource p a) s b where
-    securityGroups = TF.configuration . securityGroups
-
-class HasSecurityIps a s b | a -> s b where
-    securityIps :: Lens' a (TF.Attribute s b)
-
-instance HasSecurityIps a s b => HasSecurityIps (TF.Resource p a) s b where
-    securityIps = TF.configuration . securityIps
-
-class HasServerGroupId a s b | a -> s b where
-    serverGroupId :: Lens' a (TF.Attribute s b)
-
-instance HasServerGroupId a s b => HasServerGroupId (TF.Resource p a) s b where
-    serverGroupId = TF.configuration . serverGroupId
-
-class HasServerSideEncryption a s b | a -> s b where
-    serverSideEncryption :: Lens' a (TF.Attribute s b)
-
-instance HasServerSideEncryption a s b => HasServerSideEncryption (TF.Resource p a) s b where
-    serverSideEncryption = TF.configuration . serverSideEncryption
-
-class HasServers a s b | a -> s b where
-    servers :: Lens' a (TF.Attribute s b)
-
-instance HasServers a s b => HasServers (TF.Resource p a) s b where
-    servers = TF.configuration . servers
-
-class HasServices a s b | a -> s b where
-    services :: Lens' a (TF.Attribute s b)
-
-instance HasServices a s b => HasServices (TF.Resource p a) s b where
-    services = TF.configuration . services
-
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attribute s b)
-
-instance HasSize a s b => HasSize (TF.Resource p a) s b where
-    size = TF.configuration . size
-
-class HasSnapshotId a s b | a -> s b where
-    snapshotId :: Lens' a (TF.Attribute s b)
-
-instance HasSnapshotId a s b => HasSnapshotId (TF.Resource p a) s b where
-    snapshotId = TF.configuration . snapshotId
-
-class HasSnatIp a s b | a -> s b where
-    snatIp :: Lens' a (TF.Attribute s b)
-
-instance HasSnatIp a s b => HasSnatIp (TF.Resource p a) s b where
-    snatIp = TF.configuration . snatIp
-
-class HasSnatTableId a s b | a -> s b where
-    snatTableId :: Lens' a (TF.Attribute s b)
-
-instance HasSnatTableId a s b => HasSnatTableId (TF.Resource p a) s b where
-    snatTableId = TF.configuration . snatTableId
-
-class HasSource a s b | a -> s b where
-    source :: Lens' a (TF.Attribute s b)
-
-instance HasSource a s b => HasSource (TF.Resource p a) s b where
-    source = TF.configuration . source
-
-class HasSourceGroupOwnerAccount a s b | a -> s b where
-    sourceGroupOwnerAccount :: Lens' a (TF.Attribute s b)
-
-instance HasSourceGroupOwnerAccount a s b => HasSourceGroupOwnerAccount (TF.Resource p a) s b where
-    sourceGroupOwnerAccount = TF.configuration . sourceGroupOwnerAccount
-
-class HasSourcePort a s b | a -> s b where
-    sourcePort :: Lens' a (TF.Attribute s b)
-
-instance HasSourcePort a s b => HasSourcePort (TF.Resource p a) s b where
-    sourcePort = TF.configuration . sourcePort
-
-class HasSourceSecurityGroupId a s b | a -> s b where
-    sourceSecurityGroupId :: Lens' a (TF.Attribute s b)
-
-instance HasSourceSecurityGroupId a s b => HasSourceSecurityGroupId (TF.Resource p a) s b where
-    sourceSecurityGroupId = TF.configuration . sourceSecurityGroupId
-
-class HasSourceType a s b | a -> s b where
-    sourceType :: Lens' a (TF.Attribute s b)
-
-instance HasSourceType a s b => HasSourceType (TF.Resource p a) s b where
-    sourceType = TF.configuration . sourceType
-
-class HasSourceVswitchId a s b | a -> s b where
-    sourceVswitchId :: Lens' a (TF.Attribute s b)
-
-instance HasSourceVswitchId a s b => HasSourceVswitchId (TF.Resource p a) s b where
-    sourceVswitchId = TF.configuration . sourceVswitchId
-
-class HasSources a s b | a -> s b where
-    sources :: Lens' a (TF.Attribute s b)
-
-instance HasSources a s b => HasSources (TF.Resource p a) s b where
-    sources = TF.configuration . sources
-
-class HasSpecification a s b | a -> s b where
-    specification :: Lens' a (TF.Attribute s b)
-
-instance HasSpecification a s b => HasSpecification (TF.Resource p a) s b where
-    specification = TF.configuration . specification
-
-class HasSpotPriceLimit a s b | a -> s b where
-    spotPriceLimit :: Lens' a (TF.Attribute s b)
-
-instance HasSpotPriceLimit a s b => HasSpotPriceLimit (TF.Resource p a) s b where
-    spotPriceLimit = TF.configuration . spotPriceLimit
-
-class HasSpotStrategy a s b | a -> s b where
-    spotStrategy :: Lens' a (TF.Attribute s b)
-
-instance HasSpotStrategy a s b => HasSpotStrategy (TF.Resource p a) s b where
-    spotStrategy = TF.configuration . spotStrategy
-
-class HasSslCertificateId a s b | a -> s b where
-    sslCertificateId :: Lens' a (TF.Attribute s b)
-
-instance HasSslCertificateId a s b => HasSslCertificateId (TF.Resource p a) s b where
-    sslCertificateId = TF.configuration . sslCertificateId
-
-class HasStatement a s b | a -> s b where
-    statement :: Lens' a (TF.Attribute s b)
-
-instance HasStatement a s b => HasStatement (TF.Resource p a) s b where
-    statement = TF.configuration . statement
-
-class HasStatus a s b | a -> s b where
-    status :: Lens' a (TF.Attribute s b)
-
-instance HasStatus a s b => HasStatus (TF.Resource p a) s b where
-    status = TF.configuration . status
-
-class HasStickySession a s b | a -> s b where
-    stickySession :: Lens' a (TF.Attribute s b)
-
-instance HasStickySession a s b => HasStickySession (TF.Resource p a) s b where
-    stickySession = TF.configuration . stickySession
-
-class HasStickySessionType a s b | a -> s b where
-    stickySessionType :: Lens' a (TF.Attribute s b)
-
-instance HasStickySessionType a s b => HasStickySessionType (TF.Resource p a) s b where
-    stickySessionType = TF.configuration . stickySessionType
-
-class HasSubstitute a s b | a -> s b where
-    substitute :: Lens' a (TF.Attribute s b)
-
-instance HasSubstitute a s b => HasSubstitute (TF.Resource p a) s b where
-    substitute = TF.configuration . substitute
-
-class HasSystemDiskCategory a s b | a -> s b where
-    systemDiskCategory :: Lens' a (TF.Attribute s b)
-
-instance HasSystemDiskCategory a s b => HasSystemDiskCategory (TF.Resource p a) s b where
-    systemDiskCategory = TF.configuration . systemDiskCategory
-
-class HasSystemDiskSize a s b | a -> s b where
-    systemDiskSize :: Lens' a (TF.Attribute s b)
-
-instance HasSystemDiskSize a s b => HasSystemDiskSize (TF.Resource p a) s b where
-    systemDiskSize = TF.configuration . systemDiskSize
-
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attribute s b)
-
-instance HasTags a s b => HasTags (TF.Resource p a) s b where
-    tags = TF.configuration . tags
-
-class HasTaskEnabled a s b | a -> s b where
-    taskEnabled :: Lens' a (TF.Attribute s b)
-
-instance HasTaskEnabled a s b => HasTaskEnabled (TF.Resource p a) s b where
-    taskEnabled = TF.configuration . taskEnabled
-
-class HasTtl a s b | a -> s b where
-    ttl :: Lens' a (TF.Attribute s b)
-
-instance HasTtl a s b => HasTtl (TF.Resource p a) s b where
-    ttl = TF.configuration . ttl
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasUnhealthyThreshold a s b | a -> s b where
-    unhealthyThreshold :: Lens' a (TF.Attribute s b)
-
-instance HasUnhealthyThreshold a s b => HasUnhealthyThreshold (TF.Resource p a) s b where
-    unhealthyThreshold = TF.configuration . unhealthyThreshold
-
-class HasUrl a s b | a -> s b where
-    url :: Lens' a (TF.Attribute s b)
-
-instance HasUrl a s b => HasUrl (TF.Resource p a) s b where
-    url = TF.configuration . url
-
-class HasUserData a s b | a -> s b where
-    userData :: Lens' a (TF.Attribute s b)
-
-instance HasUserData a s b => HasUserData (TF.Resource p a) s b where
-    userData = TF.configuration . userData
-
-class HasUserName a s b | a -> s b where
-    userName :: Lens' a (TF.Attribute s b)
-
-instance HasUserName a s b => HasUserName (TF.Resource p a) s b where
-    userName = TF.configuration . userName
-
-class HasUserNames a s b | a -> s b where
-    userNames :: Lens' a (TF.Attribute s b)
-
-instance HasUserNames a s b => HasUserNames (TF.Resource p a) s b where
-    userNames = TF.configuration . userNames
-
-class HasValue a s b | a -> s b where
-    value :: Lens' a (TF.Attribute s b)
-
-instance HasValue a s b => HasValue (TF.Resource p a) s b where
-    value = TF.configuration . value
-
-class HasVersion a s b | a -> s b where
-    version :: Lens' a (TF.Attribute s b)
-
-instance HasVersion a s b => HasVersion (TF.Resource p a) s b where
-    version = TF.configuration . version
-
-class HasVpcId a s b | a -> s b where
-    vpcId :: Lens' a (TF.Attribute s b)
-
-instance HasVpcId a s b => HasVpcId (TF.Resource p a) s b where
-    vpcId = TF.configuration . vpcId
-
-class HasVswitchId a s b | a -> s b where
-    vswitchId :: Lens' a (TF.Attribute s b)
-
-instance HasVswitchId a s b => HasVswitchId (TF.Resource p a) s b where
-    vswitchId = TF.configuration . vswitchId
-
-class HasVswitchIds a s b | a -> s b where
-    vswitchIds :: Lens' a (TF.Attribute s b)
-
-instance HasVswitchIds a s b => HasVswitchIds (TF.Resource p a) s b where
-    vswitchIds = TF.configuration . vswitchIds
-
-class HasWebsite a s b | a -> s b where
-    website :: Lens' a (TF.Attribute s b)
-
-instance HasWebsite a s b => HasWebsite (TF.Resource p a) s b where
-    website = TF.configuration . website
-
-class HasWeight a s b | a -> s b where
-    weight :: Lens' a (TF.Attribute s b)
-
-instance HasWeight a s b => HasWeight (TF.Resource p a) s b where
-    weight = TF.configuration . weight
-
-class HasZoneId a s b | a -> s b where
-    zoneId :: Lens' a (TF.Attribute s b)
-
-instance HasZoneId a s b => HasZoneId (TF.Resource p a) s b where
-    zoneId = TF.configuration . zoneId
-
-class HasComputedAccessPointId a b | a -> b where
-    computedAccessPointId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAccessPointId =
-        to (\x -> TF.Computed (TF.referenceKey x) "access_point_id")
-
-class HasComputedAccountAlias a b | a -> b where
-    computedAccountAlias
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAccountAlias =
-        to (\x -> TF.Computed (TF.referenceKey x) "account_alias")
-
-class HasComputedAccountName a b | a -> b where
-    computedAccountName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAccountName =
-        to (\x -> TF.Computed (TF.referenceKey x) "account_name")
-
-class HasComputedAddress a b | a -> b where
-    computedAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "address")
-
-class HasComputedAdjustmentType a b | a -> b where
-    computedAdjustmentType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAdjustmentType =
-        to (\x -> TF.Computed (TF.referenceKey x) "adjustment_type")
-
-class HasComputedAdjustmentValue a b | a -> b where
-    computedAdjustmentValue
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAdjustmentValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "adjustment_value")
-
-class HasComputedAllocationId a b | a -> b where
-    computedAllocationId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAllocationId =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocation_id")
-
-class HasComputedAri a b | a -> b where
-    computedAri
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAri =
-        to (\x -> TF.Computed (TF.referenceKey x) "ari")
-
-class HasComputedArn a b | a -> b where
-    computedArn
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedArn =
-        to (\x -> TF.Computed (TF.referenceKey x) "arn")
-
-class HasComputedAttachmentCount a b | a -> b where
-    computedAttachmentCount
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAttachmentCount =
-        to (\x -> TF.Computed (TF.referenceKey x) "attachment_count")
-
-class HasComputedAvailabilityZone a b | a -> b where
-    computedAvailabilityZone
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedAvailabilityZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone")
-
-class HasComputedBackendServers a b | a -> b where
-    computedBackendServers
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBackendServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "backend_servers")
-
-class HasComputedBackupPeriod a b | a -> b where
-    computedBackupPeriod
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBackupPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "backup_period")
-
-class HasComputedBackupRetentionPeriod a b | a -> b where
-    computedBackupRetentionPeriod
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBackupRetentionPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "backup_retention_period")
-
-class HasComputedBackupTime a b | a -> b where
-    computedBackupTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBackupTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "backup_time")
-
-class HasComputedBandwidth a b | a -> b where
-    computedBandwidth
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBandwidth =
-        to (\x -> TF.Computed (TF.referenceKey x) "bandwidth")
-
-class HasComputedBandwidthPackageIds a b | a -> b where
-    computedBandwidthPackageIds
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedBandwidthPackageIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "bandwidth_package_ids")
-
-class HasComputedCategory a b | a -> b where
-    computedCategory
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCategory =
-        to (\x -> TF.Computed (TF.referenceKey x) "category")
-
-class HasComputedCharacterSet a b | a -> b where
-    computedCharacterSet
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCharacterSet =
-        to (\x -> TF.Computed (TF.referenceKey x) "character_set")
-
-class HasComputedCidrBlock a b | a -> b where
-    computedCidrBlock
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCidrBlock =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_block")
-
-class HasComputedComments a b | a -> b where
-    computedComments
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedComments =
-        to (\x -> TF.Computed (TF.referenceKey x) "comments")
-
-class HasComputedConnectionPrefix a b | a -> b where
-    computedConnectionPrefix
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedConnectionPrefix =
-        to (\x -> TF.Computed (TF.referenceKey x) "connection_prefix")
-
-class HasComputedConnectionString a b | a -> b where
-    computedConnectionString
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "connection_string")
-
-class HasComputedConnections a b | a -> b where
-    computedConnections
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedConnections =
-        to (\x -> TF.Computed (TF.referenceKey x) "connections")
-
-class HasComputedContentLength a b | a -> b where
-    computedContentLength
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedContentLength =
-        to (\x -> TF.Computed (TF.referenceKey x) "content_length")
-
-class HasComputedCooldown a b | a -> b where
-    computedCooldown
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedCooldown =
-        to (\x -> TF.Computed (TF.referenceKey x) "cooldown")
-
-class HasComputedDbInstanceClass a b | a -> b where
-    computedDbInstanceClass
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDbInstanceClass =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_instance_class")
-
-class HasComputedDbInstanceIds a b | a -> b where
-    computedDbInstanceIds
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDbInstanceIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_instance_ids")
-
-class HasComputedDbInstanceNetType a b | a -> b where
-    computedDbInstanceNetType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDbInstanceNetType =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_instance_net_type")
-
-class HasComputedDbInstanceStorage a b | a -> b where
-    computedDbInstanceStorage
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDbInstanceStorage =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_instance_storage")
-
-class HasComputedDbMappings a b | a -> b where
-    computedDbMappings
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDbMappings =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_mappings")
-
-class HasComputedDbNames a b | a -> b where
-    computedDbNames
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDbNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "db_names")
-
-class HasComputedDefaultCooldown a b | a -> b where
-    computedDefaultCooldown
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDefaultCooldown =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_cooldown")
-
-class HasComputedDeletionWindowInDays a b | a -> b where
-    computedDeletionWindowInDays
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDeletionWindowInDays =
-        to (\x -> TF.Computed (TF.referenceKey x) "deletion_window_in_days")
-
-class HasComputedDescription a b | a -> b where
-    computedDescription
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
-
-class HasComputedDestinationCidrblock a b | a -> b where
-    computedDestinationCidrblock
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDestinationCidrblock =
-        to (\x -> TF.Computed (TF.referenceKey x) "destination_cidrblock")
-
-class HasComputedDeviceName a b | a -> b where
-    computedDeviceName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDeviceName =
-        to (\x -> TF.Computed (TF.referenceKey x) "device_name")
-
-class HasComputedDiskId a b | a -> b where
-    computedDiskId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDiskId =
-        to (\x -> TF.Computed (TF.referenceKey x) "disk_id")
-
-class HasComputedDisplayName a b | a -> b where
-    computedDisplayName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDisplayName =
-        to (\x -> TF.Computed (TF.referenceKey x) "display_name")
-
-class HasComputedDnsServer a b | a -> b where
-    computedDnsServer
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDnsServer =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_server")
-
-class HasComputedDocument a b | a -> b where
-    computedDocument
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDocument =
-        to (\x -> TF.Computed (TF.referenceKey x) "document")
-
-class HasComputedDomain a b | a -> b where
-    computedDomain
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDomain =
-        to (\x -> TF.Computed (TF.referenceKey x) "domain")
-
-class HasComputedDryRun a b | a -> b where
-    computedDryRun
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDryRun =
-        to (\x -> TF.Computed (TF.referenceKey x) "dry_run")
-
-class HasComputedEmail a b | a -> b where
-    computedEmail
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEmail =
-        to (\x -> TF.Computed (TF.referenceKey x) "email")
-
-class HasComputedEngine a b | a -> b where
-    computedEngine
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEngine =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine")
-
-class HasComputedEngineVersion a b | a -> b where
-    computedEngineVersion
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEngineVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "engine_version")
-
-class HasComputedEtag a b | a -> b where
-    computedEtag
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedEtag =
-        to (\x -> TF.Computed (TF.referenceKey x) "etag")
-
-class HasComputedFingerprint a b | a -> b where
-    computedFingerprint
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "fingerprint")
-
-class HasComputedForce a b | a -> b where
-    computedForce
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedForce =
-        to (\x -> TF.Computed (TF.referenceKey x) "force")
-
-class HasComputedForntendPort a b | a -> b where
-    computedForntendPort
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedForntendPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "forntend_port")
-
-class HasComputedForwardTableIds a b | a -> b where
-    computedForwardTableIds
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedForwardTableIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "forward_table_ids")
-
-class HasComputedGroupId a b | a -> b where
-    computedGroupId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "group_id")
-
-class HasComputedGroupName a b | a -> b where
-    computedGroupName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "group_name")
-
-class HasComputedHealthCheckSourceIp a b | a -> b where
-    computedHealthCheckSourceIp
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHealthCheckSourceIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "health_check_source_ip")
-
-class HasComputedHealthCheckTargetIp a b | a -> b where
-    computedHealthCheckTargetIp
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHealthCheckTargetIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "health_check_target_ip")
-
-class HasComputedHostName a b | a -> b where
-    computedHostName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHostName =
-        to (\x -> TF.Computed (TF.referenceKey x) "host_name")
-
-class HasComputedHostRecord a b | a -> b where
-    computedHostRecord
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedHostRecord =
-        to (\x -> TF.Computed (TF.referenceKey x) "host_record")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedImageId a b | a -> b where
-    computedImageId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedImageId =
-        to (\x -> TF.Computed (TF.referenceKey x) "image_id")
-
-class HasComputedInstanceChargeType a b | a -> b where
-    computedInstanceChargeType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceChargeType =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_charge_type")
-
-class HasComputedInstanceId a b | a -> b where
-    computedInstanceId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_id")
-
-class HasComputedInstanceIds a b | a -> b where
-    computedInstanceIds
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_ids")
-
-class HasComputedInstanceName a b | a -> b where
-    computedInstanceName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceName =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_name")
-
-class HasComputedInstanceNetworkType a b | a -> b where
-    computedInstanceNetworkType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceNetworkType =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_network_type")
-
-class HasComputedInstanceStorage a b | a -> b where
-    computedInstanceStorage
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceStorage =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_storage")
-
-class HasComputedInstanceType a b | a -> b where
-    computedInstanceType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInstanceType =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_type")
-
-class HasComputedInternet a b | a -> b where
-    computedInternet
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInternet =
-        to (\x -> TF.Computed (TF.referenceKey x) "internet")
-
-class HasComputedInternetChargeType a b | a -> b where
-    computedInternetChargeType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedInternetChargeType =
-        to (\x -> TF.Computed (TF.referenceKey x) "internet_charge_type")
-
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
-
-class HasComputedIpProtocol a b | a -> b where
-    computedIpProtocol
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIpProtocol =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_protocol")
-
-class HasComputedIsEnabled a b | a -> b where
-    computedIsEnabled
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedIsEnabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "is_enabled")
-
-class HasComputedKeyName a b | a -> b where
-    computedKeyName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedKeyName =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_name")
-
-class HasComputedKeyUsage a b | a -> b where
-    computedKeyUsage
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedKeyUsage =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_usage")
-
-class HasComputedLaunchTime a b | a -> b where
-    computedLaunchTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLaunchTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "launch_time")
-
-class HasComputedLoadBalancerId a b | a -> b where
-    computedLoadBalancerId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLoadBalancerId =
-        to (\x -> TF.Computed (TF.referenceKey x) "load_balancer_id")
-
-class HasComputedLoadbalancerIds a b | a -> b where
-    computedLoadbalancerIds
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLoadbalancerIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "loadbalancer_ids")
-
-class HasComputedLocked a b | a -> b where
-    computedLocked
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLocked =
-        to (\x -> TF.Computed (TF.referenceKey x) "Locked")
-
-class HasComputedLogBackup a b | a -> b where
-    computedLogBackup
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLogBackup =
-        to (\x -> TF.Computed (TF.referenceKey x) "log_backup")
-
-class HasComputedLogRetentionPeriod a b | a -> b where
-    computedLogRetentionPeriod
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedLogRetentionPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "log_retention_period")
-
-class HasComputedMasterUserName a b | a -> b where
-    computedMasterUserName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMasterUserName =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_user_name")
-
-class HasComputedMaxSize a b | a -> b where
-    computedMaxSize
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMaxSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "max_size")
-
-class HasComputedMfaBindRequired a b | a -> b where
-    computedMfaBindRequired
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMfaBindRequired =
-        to (\x -> TF.Computed (TF.referenceKey x) "mfa_bind_required")
-
-class HasComputedMinSize a b | a -> b where
-    computedMinSize
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMinSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "min_size")
-
-class HasComputedMobile a b | a -> b where
-    computedMobile
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedMobile =
-        to (\x -> TF.Computed (TF.referenceKey x) "mobile")
-
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
-
-class HasComputedNexthopId a b | a -> b where
-    computedNexthopId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNexthopId =
-        to (\x -> TF.Computed (TF.referenceKey x) "nexthop_id")
-
-class HasComputedNexthopType a b | a -> b where
-    computedNexthopType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedNexthopType =
-        to (\x -> TF.Computed (TF.referenceKey x) "nexthop_type")
-
-class HasComputedOppositeAccessPointId a b | a -> b where
-    computedOppositeAccessPointId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOppositeAccessPointId =
-        to (\x -> TF.Computed (TF.referenceKey x) "opposite_access_point_id")
-
-class HasComputedOppositeInterfaceId a b | a -> b where
-    computedOppositeInterfaceId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOppositeInterfaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "opposite_interface_id")
-
-class HasComputedOppositeInterfaceOwnerId a b | a -> b where
-    computedOppositeInterfaceOwnerId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOppositeInterfaceOwnerId =
-        to (\x -> TF.Computed (TF.referenceKey x) "opposite_interface_owner_id")
-
-class HasComputedOppositeRouterId a b | a -> b where
-    computedOppositeRouterId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOppositeRouterId =
-        to (\x -> TF.Computed (TF.referenceKey x) "opposite_router_id")
-
-class HasComputedOppositeRouterType a b | a -> b where
-    computedOppositeRouterType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedOppositeRouterType =
-        to (\x -> TF.Computed (TF.referenceKey x) "opposite_router_type")
-
-class HasComputedPasswordResetRequired a b | a -> b where
-    computedPasswordResetRequired
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPasswordResetRequired =
-        to (\x -> TF.Computed (TF.referenceKey x) "password_reset_required")
-
-class HasComputedPeriod a b | a -> b where
-    computedPeriod
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "period")
-
-class HasComputedPeriodUnit a b | a -> b where
-    computedPeriodUnit
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPeriodUnit =
-        to (\x -> TF.Computed (TF.referenceKey x) "period_unit")
-
-class HasComputedPolicyName a b | a -> b where
-    computedPolicyName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPolicyName =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy_name")
-
-class HasComputedPolicyType a b | a -> b where
-    computedPolicyType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPolicyType =
-        to (\x -> TF.Computed (TF.referenceKey x) "policy_type")
-
-class HasComputedPort a b | a -> b where
-    computedPort
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "port")
-
-class HasComputedPortRange a b | a -> b where
-    computedPortRange
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPortRange =
-        to (\x -> TF.Computed (TF.referenceKey x) "port_range")
-
-class HasComputedPreferredBackupPeriod a b | a -> b where
-    computedPreferredBackupPeriod
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPreferredBackupPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "preferred_backup_period")
-
-class HasComputedPreferredBackupTime a b | a -> b where
-    computedPreferredBackupTime
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPreferredBackupTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "preferred_backup_time")
-
-class HasComputedPriority a b | a -> b where
-    computedPriority
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPriority =
-        to (\x -> TF.Computed (TF.referenceKey x) "priority")
-
-class HasComputedPrivateIp a b | a -> b where
-    computedPrivateIp
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrivateIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip")
-
-class HasComputedPrivilege a b | a -> b where
-    computedPrivilege
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPrivilege =
-        to (\x -> TF.Computed (TF.referenceKey x) "privilege")
-
-class HasComputedPublicIp a b | a -> b where
-    computedPublicIp
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedPublicIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_ip")
-
-class HasComputedRamUsers a b | a -> b where
-    computedRamUsers
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRamUsers =
-        to (\x -> TF.Computed (TF.referenceKey x) "ram_users")
-
-class HasComputedRemovalPolicies a b | a -> b where
-    computedRemovalPolicies
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRemovalPolicies =
-        to (\x -> TF.Computed (TF.referenceKey x) "removal_policies")
-
-class HasComputedRetentionPeriod a b | a -> b where
-    computedRetentionPeriod
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRetentionPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "retention_period")
-
-class HasComputedRole a b | a -> b where
-    computedRole
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRole =
-        to (\x -> TF.Computed (TF.referenceKey x) "role")
-
-class HasComputedRoleName a b | a -> b where
-    computedRoleName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRoleName =
-        to (\x -> TF.Computed (TF.referenceKey x) "role_name")
-
-class HasComputedRouteTableId a b | a -> b where
-    computedRouteTableId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRouteTableId =
-        to (\x -> TF.Computed (TF.referenceKey x) "route_table_id")
-
-class HasComputedRouterId a b | a -> b where
-    computedRouterId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRouterId =
-        to (\x -> TF.Computed (TF.referenceKey x) "router_id")
-
-class HasComputedRouterType a b | a -> b where
-    computedRouterType
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRouterType =
-        to (\x -> TF.Computed (TF.referenceKey x) "router_type")
-
-class HasComputedRouting a b | a -> b where
-    computedRouting
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedRouting =
-        to (\x -> TF.Computed (TF.referenceKey x) "routing")
-
-class HasComputedScalingGroupId a b | a -> b where
-    computedScalingGroupId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedScalingGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "scaling_group_id")
-
-class HasComputedScalingGroupName a b | a -> b where
-    computedScalingGroupName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedScalingGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "scaling_group_name")
-
-class HasComputedScalingRuleName a b | a -> b where
-    computedScalingRuleName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedScalingRuleName =
-        to (\x -> TF.Computed (TF.referenceKey x) "scaling_rule_name")
-
-class HasComputedScheduledAction a b | a -> b where
-    computedScheduledAction
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedScheduledAction =
-        to (\x -> TF.Computed (TF.referenceKey x) "scheduled_action")
-
-class HasComputedScheduledTaskName a b | a -> b where
-    computedScheduledTaskName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedScheduledTaskName =
-        to (\x -> TF.Computed (TF.referenceKey x) "scheduled_task_name")
-
-class HasComputedSecurityIps a b | a -> b where
-    computedSecurityIps
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSecurityIps =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_ips")
-
-class HasComputedServerGroupId a b | a -> b where
-    computedServerGroupId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedServerGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "server_group_id")
-
-class HasComputedServices a b | a -> b where
-    computedServices
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedServices =
-        to (\x -> TF.Computed (TF.referenceKey x) "services")
-
-class HasComputedSize a b | a -> b where
-    computedSize
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSize =
-        to (\x -> TF.Computed (TF.referenceKey x) "size")
-
-class HasComputedSnapshotId a b | a -> b where
-    computedSnapshotId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSnapshotId =
-        to (\x -> TF.Computed (TF.referenceKey x) "snapshot_id")
-
-class HasComputedSnatTableIds a b | a -> b where
-    computedSnatTableIds
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSnatTableIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "snat_table_ids")
-
-class HasComputedSpec a b | a -> b where
-    computedSpec
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSpec =
-        to (\x -> TF.Computed (TF.referenceKey x) "spec")
-
-class HasComputedSpecification a b | a -> b where
-    computedSpecification
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSpecification =
-        to (\x -> TF.Computed (TF.referenceKey x) "specification")
-
-class HasComputedSpotPriceLimit a b | a -> b where
-    computedSpotPriceLimit
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSpotPriceLimit =
-        to (\x -> TF.Computed (TF.referenceKey x) "spot_price_limit")
-
-class HasComputedSpotStrategy a b | a -> b where
-    computedSpotStrategy
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedSpotStrategy =
-        to (\x -> TF.Computed (TF.referenceKey x) "spot_strategy")
-
-class HasComputedStatement a b | a -> b where
-    computedStatement
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStatement =
-        to (\x -> TF.Computed (TF.referenceKey x) "statement")
-
-class HasComputedStatus a b | a -> b where
-    computedStatus
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
-
-class HasComputedTags a b | a -> b where
-    computedTags
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
-
-class HasComputedTaskEnabled a b | a -> b where
-    computedTaskEnabled
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedTaskEnabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "task_enabled")
-
-class HasComputedTtl a b | a -> b where
-    computedTtl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedTtl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
-
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
-
-class HasComputedUrl a b | a -> b where
-    computedUrl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "url")
-
-class HasComputedUserData a b | a -> b where
-    computedUserData
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUserData =
-        to (\x -> TF.Computed (TF.referenceKey x) "user_data")
-
-class HasComputedUserName a b | a -> b where
-    computedUserName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUserName =
-        to (\x -> TF.Computed (TF.referenceKey x) "user_name")
-
-class HasComputedUserNames a b | a -> b where
-    computedUserNames
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedUserNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "user_names")
-
-class HasComputedValue a b | a -> b where
-    computedValue
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
-
-class HasComputedVersion a b | a -> b where
-    computedVersion
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "version")
-
-class HasComputedVpcId a b | a -> b where
-    computedVpcId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVpcId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vpc_id")
-
-class HasComputedVswitchId a b | a -> b where
-    computedVswitchId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVswitchId =
-        to (\x -> TF.Computed (TF.referenceKey x) "vswitch_id")
-
-class HasComputedVswitchIds a b | a -> b where
-    computedVswitchIds
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVswitchIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "vswitch_ids")
-
-class HasComputedWeight a b | a -> b where
-    computedWeight
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedWeight =
-        to (\x -> TF.Computed (TF.referenceKey x) "weight")
-
-class HasComputedZoneId a b | a -> b where
-    computedZoneId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "zone_id")

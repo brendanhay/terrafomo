@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Icinga2.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -39,39 +36,41 @@ module Terrafomo.Icinga2.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAddress (..)
-    , HasArguments (..)
-    , HasCheckCommand (..)
-    , HasCommand (..)
-    , HasDisplayName (..)
-    , HasHostname (..)
-    , HasName (..)
-    , HasTemplates (..)
-    , HasVars (..)
+    , P.HasAddress (..)
+    , P.HasArguments (..)
+    , P.HasCheckCommand (..)
+    , P.HasCommand (..)
+    , P.HasDisplayName (..)
+    , P.HasHostname (..)
+    , P.HasName (..)
+    , P.HasTemplates (..)
+    , P.HasVars (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                  as TF
-import qualified GHC.Base                   as TF
-import qualified Numeric.Natural            as TF
-import qualified Terrafomo.Attribute        as TF
-import qualified Terrafomo.HCL              as TF
-import qualified Terrafomo.Icinga2.Provider as TF
-import qualified Terrafomo.Icinga2.Types    as TF
-import qualified Terrafomo.IP               as TF
-import qualified Terrafomo.Meta             as TF
-import qualified Terrafomo.Name             as TF
-import qualified Terrafomo.Resource         as TF
-import qualified Terrafomo.Resource         as TF
+import qualified Data.Word                  as P
+import qualified GHC.Base                   as P
+import qualified Numeric.Natural            as P
+import qualified Terrafomo.Icinga2.Lens     as P
+import qualified Terrafomo.Icinga2.Provider as P
+import           Terrafomo.Icinga2.Types    as P
+import qualified Terrafomo.IP               as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @icinga2_checkcommand@ Icinga2 resource.
 
@@ -97,27 +96,27 @@ instance TF.ToHCL (CheckcommandResource s) where
         , TF.attribute "templates" _templates
         ]
 
-instance HasArguments (CheckcommandResource s) s Text where
+instance P.HasArguments (CheckcommandResource s) s Text where
     arguments =
         lens (_arguments :: CheckcommandResource s -> TF.Attribute s Text)
             (\s a -> s { _arguments = a } :: CheckcommandResource s)
 
-instance HasCommand (CheckcommandResource s) s Text where
+instance P.HasCommand (CheckcommandResource s) s Text where
     command =
         lens (_command :: CheckcommandResource s -> TF.Attribute s Text)
             (\s a -> s { _command = a } :: CheckcommandResource s)
 
-instance HasName (CheckcommandResource s) s Text where
+instance P.HasName (CheckcommandResource s) s Text where
     name =
         lens (_name :: CheckcommandResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CheckcommandResource s)
 
-instance HasTemplates (CheckcommandResource s) s Text where
+instance P.HasTemplates (CheckcommandResource s) s Text where
     templates =
         lens (_templates :: CheckcommandResource s -> TF.Attribute s Text)
             (\s a -> s { _templates = a } :: CheckcommandResource s)
 
-checkcommandResource :: TF.Resource TF.Icinga2 (CheckcommandResource s)
+checkcommandResource :: TF.Resource P.Icinga2 (CheckcommandResource s)
 checkcommandResource =
     TF.newResource "icinga2_checkcommand" $
         CheckcommandResource {
@@ -154,32 +153,32 @@ instance TF.ToHCL (HostResource s) where
         , TF.attribute "vars" _vars
         ]
 
-instance HasAddress (HostResource s) s Text where
+instance P.HasAddress (HostResource s) s Text where
     address =
         lens (_address :: HostResource s -> TF.Attribute s Text)
             (\s a -> s { _address = a } :: HostResource s)
 
-instance HasCheckCommand (HostResource s) s Text where
+instance P.HasCheckCommand (HostResource s) s Text where
     checkCommand =
         lens (_check_command :: HostResource s -> TF.Attribute s Text)
             (\s a -> s { _check_command = a } :: HostResource s)
 
-instance HasHostname (HostResource s) s Text where
+instance P.HasHostname (HostResource s) s Text where
     hostname =
         lens (_hostname :: HostResource s -> TF.Attribute s Text)
             (\s a -> s { _hostname = a } :: HostResource s)
 
-instance HasTemplates (HostResource s) s Text where
+instance P.HasTemplates (HostResource s) s Text where
     templates =
         lens (_templates :: HostResource s -> TF.Attribute s Text)
             (\s a -> s { _templates = a } :: HostResource s)
 
-instance HasVars (HostResource s) s Text where
+instance P.HasVars (HostResource s) s Text where
     vars =
         lens (_vars :: HostResource s -> TF.Attribute s Text)
             (\s a -> s { _vars = a } :: HostResource s)
 
-hostResource :: TF.Resource TF.Icinga2 (HostResource s)
+hostResource :: TF.Resource P.Icinga2 (HostResource s)
 hostResource =
     TF.newResource "icinga2_host" $
         HostResource {
@@ -208,17 +207,17 @@ instance TF.ToHCL (HostgroupResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasDisplayName (HostgroupResource s) s Text where
+instance P.HasDisplayName (HostgroupResource s) s Text where
     displayName =
         lens (_display_name :: HostgroupResource s -> TF.Attribute s Text)
             (\s a -> s { _display_name = a } :: HostgroupResource s)
 
-instance HasName (HostgroupResource s) s Text where
+instance P.HasName (HostgroupResource s) s Text where
     name =
         lens (_name :: HostgroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: HostgroupResource s)
 
-hostgroupResource :: TF.Resource TF.Icinga2 (HostgroupResource s)
+hostgroupResource :: TF.Resource P.Icinga2 (HostgroupResource s)
 hostgroupResource =
     TF.newResource "icinga2_hostgroup" $
         HostgroupResource {
@@ -247,22 +246,22 @@ instance TF.ToHCL (ServiceResource s) where
         , TF.attribute "name" _name
         ]
 
-instance HasCheckCommand (ServiceResource s) s Text where
+instance P.HasCheckCommand (ServiceResource s) s Text where
     checkCommand =
         lens (_check_command :: ServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _check_command = a } :: ServiceResource s)
 
-instance HasHostname (ServiceResource s) s Text where
+instance P.HasHostname (ServiceResource s) s Text where
     hostname =
         lens (_hostname :: ServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _hostname = a } :: ServiceResource s)
 
-instance HasName (ServiceResource s) s Text where
+instance P.HasName (ServiceResource s) s Text where
     name =
         lens (_name :: ServiceResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ServiceResource s)
 
-serviceResource :: TF.Resource TF.Icinga2 (ServiceResource s)
+serviceResource :: TF.Resource P.Icinga2 (ServiceResource s)
 serviceResource =
     TF.newResource "icinga2_service" $
         ServiceResource {
@@ -270,57 +269,3 @@ serviceResource =
             , _hostname = TF.Nil
             , _name = TF.Nil
             }
-
-class HasAddress a s b | a -> s b where
-    address :: Lens' a (TF.Attribute s b)
-
-instance HasAddress a s b => HasAddress (TF.Resource p a) s b where
-    address = TF.configuration . address
-
-class HasArguments a s b | a -> s b where
-    arguments :: Lens' a (TF.Attribute s b)
-
-instance HasArguments a s b => HasArguments (TF.Resource p a) s b where
-    arguments = TF.configuration . arguments
-
-class HasCheckCommand a s b | a -> s b where
-    checkCommand :: Lens' a (TF.Attribute s b)
-
-instance HasCheckCommand a s b => HasCheckCommand (TF.Resource p a) s b where
-    checkCommand = TF.configuration . checkCommand
-
-class HasCommand a s b | a -> s b where
-    command :: Lens' a (TF.Attribute s b)
-
-instance HasCommand a s b => HasCommand (TF.Resource p a) s b where
-    command = TF.configuration . command
-
-class HasDisplayName a s b | a -> s b where
-    displayName :: Lens' a (TF.Attribute s b)
-
-instance HasDisplayName a s b => HasDisplayName (TF.Resource p a) s b where
-    displayName = TF.configuration . displayName
-
-class HasHostname a s b | a -> s b where
-    hostname :: Lens' a (TF.Attribute s b)
-
-instance HasHostname a s b => HasHostname (TF.Resource p a) s b where
-    hostname = TF.configuration . hostname
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasTemplates a s b | a -> s b where
-    templates :: Lens' a (TF.Attribute s b)
-
-instance HasTemplates a s b => HasTemplates (TF.Resource p a) s b where
-    templates = TF.configuration . templates
-
-class HasVars a s b | a -> s b where
-    vars :: Lens' a (TF.Attribute s b)
-
-instance HasVars a s b => HasVars (TF.Resource p a) s b where
-    vars = TF.configuration . vars

@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.CenturyLinkCloud.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -42,67 +39,69 @@ module Terrafomo.CenturyLinkCloud.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasAaPolicyId (..)
-    , HasAdditionalDisks (..)
-    , HasConfigurationId (..)
-    , HasCpu (..)
-    , HasCreatedDat (..)
-    , HasCustomFields (..)
-    , HasDataCenter (..)
-    , HasDescription (..)
-    , HasGroupId (..)
-    , HasInternalIpAddress (..)
-    , HasIpAddress (..)
-    , HasLoadBalancer (..)
-    , HasLocationId (..)
-    , HasMemoryMb (..)
-    , HasMetadata (..)
-    , HasMethod (..)
-    , HasModifiedDat (..)
-    , HasName (..)
-    , HasNameTemplate (..)
-    , HasNetworkId (..)
-    , HasNodes (..)
-    , HasOsType (..)
-    , HasParent (..)
-    , HasParentGroupId (..)
-    , HasPassword (..)
-    , HasPersistence (..)
-    , HasPort (..)
-    , HasPorts (..)
-    , HasPowerState (..)
-    , HasPrivateIpAddress (..)
-    , HasPublicIpAddress (..)
-    , HasServerId (..)
-    , HasSourceRestrictions (..)
-    , HasSourceServerId (..)
-    , HasStatus (..)
-    , HasStorageType (..)
-    , HasType' (..)
+    , P.HasAaPolicyId (..)
+    , P.HasAdditionalDisks (..)
+    , P.HasConfigurationId (..)
+    , P.HasCpu (..)
+    , P.HasCreatedDat (..)
+    , P.HasCustomFields (..)
+    , P.HasDataCenter (..)
+    , P.HasDescription (..)
+    , P.HasGroupId (..)
+    , P.HasInternalIpAddress (..)
+    , P.HasIpAddress (..)
+    , P.HasLoadBalancer (..)
+    , P.HasLocationId (..)
+    , P.HasMemoryMb (..)
+    , P.HasMetadata (..)
+    , P.HasMethod (..)
+    , P.HasModifiedDat (..)
+    , P.HasName (..)
+    , P.HasNameTemplate (..)
+    , P.HasNetworkId (..)
+    , P.HasNodes (..)
+    , P.HasOsType (..)
+    , P.HasParent (..)
+    , P.HasParentGroupId (..)
+    , P.HasPassword (..)
+    , P.HasPersistence (..)
+    , P.HasPort (..)
+    , P.HasPorts (..)
+    , P.HasPowerState (..)
+    , P.HasPrivateIpAddress (..)
+    , P.HasPublicIpAddress (..)
+    , P.HasServerId (..)
+    , P.HasSourceRestrictions (..)
+    , P.HasSourceServerId (..)
+    , P.HasStatus (..)
+    , P.HasStorageType (..)
+    , P.HasType' (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                           as TF
-import qualified GHC.Base                            as TF
-import qualified Numeric.Natural                     as TF
-import qualified Terrafomo.Attribute                 as TF
-import qualified Terrafomo.CenturyLinkCloud.Provider as TF
-import qualified Terrafomo.CenturyLinkCloud.Types    as TF
-import qualified Terrafomo.HCL                       as TF
-import qualified Terrafomo.IP                        as TF
-import qualified Terrafomo.Meta                      as TF
-import qualified Terrafomo.Name                      as TF
-import qualified Terrafomo.Resource                  as TF
-import qualified Terrafomo.Resource                  as TF
+import qualified Data.Word                           as P
+import qualified GHC.Base                            as P
+import qualified Numeric.Natural                     as P
+import qualified Terrafomo.CenturyLinkCloud.Lens     as P
+import qualified Terrafomo.CenturyLinkCloud.Provider as P
+import           Terrafomo.CenturyLinkCloud.Types    as P
+import qualified Terrafomo.IP                        as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @clc_group@ CenturyLinkCloud resource.
 
@@ -134,37 +133,37 @@ instance TF.ToHCL (GroupResource s) where
         , TF.attribute "parent_group_id" _parent_group_id
         ]
 
-instance HasCustomFields (GroupResource s) s Text where
+instance P.HasCustomFields (GroupResource s) s Text where
     customFields =
         lens (_custom_fields :: GroupResource s -> TF.Attribute s Text)
             (\s a -> s { _custom_fields = a } :: GroupResource s)
 
-instance HasDescription (GroupResource s) s Text where
+instance P.HasDescription (GroupResource s) s Text where
     description =
         lens (_description :: GroupResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: GroupResource s)
 
-instance HasLocationId (GroupResource s) s Text where
+instance P.HasLocationId (GroupResource s) s Text where
     locationId =
         lens (_location_id :: GroupResource s -> TF.Attribute s Text)
             (\s a -> s { _location_id = a } :: GroupResource s)
 
-instance HasName (GroupResource s) s Text where
+instance P.HasName (GroupResource s) s Text where
     name =
         lens (_name :: GroupResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: GroupResource s)
 
-instance HasParent (GroupResource s) s Text where
+instance P.HasParent (GroupResource s) s Text where
     parent =
         lens (_parent :: GroupResource s -> TF.Attribute s Text)
             (\s a -> s { _parent = a } :: GroupResource s)
 
-instance HasParentGroupId (GroupResource s) s Text where
+instance P.HasParentGroupId (GroupResource s) s Text where
     parentGroupId =
         lens (_parent_group_id :: GroupResource s -> TF.Attribute s Text)
             (\s a -> s { _parent_group_id = a } :: GroupResource s)
 
-groupResource :: TF.Resource TF.CenturyLinkCloud (GroupResource s)
+groupResource :: TF.Resource P.CenturyLinkCloud (GroupResource s)
 groupResource =
     TF.newResource "clc_group" $
         GroupResource {
@@ -207,37 +206,37 @@ instance TF.ToHCL (LoadBalancerPoolResource s) where
         , TF.attribute "port" _port
         ]
 
-instance HasDataCenter (LoadBalancerPoolResource s) s Text where
+instance P.HasDataCenter (LoadBalancerPoolResource s) s Text where
     dataCenter =
         lens (_data_center :: LoadBalancerPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _data_center = a } :: LoadBalancerPoolResource s)
 
-instance HasLoadBalancer (LoadBalancerPoolResource s) s Text where
+instance P.HasLoadBalancer (LoadBalancerPoolResource s) s Text where
     loadBalancer =
         lens (_load_balancer :: LoadBalancerPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _load_balancer = a } :: LoadBalancerPoolResource s)
 
-instance HasMethod (LoadBalancerPoolResource s) s Text where
+instance P.HasMethod (LoadBalancerPoolResource s) s Text where
     method =
         lens (_method :: LoadBalancerPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _method = a } :: LoadBalancerPoolResource s)
 
-instance HasNodes (LoadBalancerPoolResource s) s Text where
+instance P.HasNodes (LoadBalancerPoolResource s) s Text where
     nodes =
         lens (_nodes :: LoadBalancerPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _nodes = a } :: LoadBalancerPoolResource s)
 
-instance HasPersistence (LoadBalancerPoolResource s) s Text where
+instance P.HasPersistence (LoadBalancerPoolResource s) s Text where
     persistence =
         lens (_persistence :: LoadBalancerPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _persistence = a } :: LoadBalancerPoolResource s)
 
-instance HasPort (LoadBalancerPoolResource s) s Text where
+instance P.HasPort (LoadBalancerPoolResource s) s Text where
     port =
         lens (_port :: LoadBalancerPoolResource s -> TF.Attribute s Text)
             (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
 
-loadBalancerPoolResource :: TF.Resource TF.CenturyLinkCloud (LoadBalancerPoolResource s)
+loadBalancerPoolResource :: TF.Resource P.CenturyLinkCloud (LoadBalancerPoolResource s)
 loadBalancerPoolResource =
     TF.newResource "clc_load_balancer_pool" $
         LoadBalancerPoolResource {
@@ -277,32 +276,32 @@ instance TF.ToHCL (LoadBalancerResource s) where
         , TF.attribute "status" _status
         ]
 
-instance HasDataCenter (LoadBalancerResource s) s Text where
+instance P.HasDataCenter (LoadBalancerResource s) s Text where
     dataCenter =
         lens (_data_center :: LoadBalancerResource s -> TF.Attribute s Text)
             (\s a -> s { _data_center = a } :: LoadBalancerResource s)
 
-instance HasDescription (LoadBalancerResource s) s Text where
+instance P.HasDescription (LoadBalancerResource s) s Text where
     description =
         lens (_description :: LoadBalancerResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: LoadBalancerResource s)
 
-instance HasIpAddress (LoadBalancerResource s) s Text where
+instance P.HasIpAddress (LoadBalancerResource s) s Text where
     ipAddress =
         lens (_ip_address :: LoadBalancerResource s -> TF.Attribute s Text)
             (\s a -> s { _ip_address = a } :: LoadBalancerResource s)
 
-instance HasName (LoadBalancerResource s) s Text where
+instance P.HasName (LoadBalancerResource s) s Text where
     name =
         lens (_name :: LoadBalancerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LoadBalancerResource s)
 
-instance HasStatus (LoadBalancerResource s) s Text where
+instance P.HasStatus (LoadBalancerResource s) s Text where
     status =
         lens (_status :: LoadBalancerResource s -> TF.Attribute s Text)
             (\s a -> s { _status = a } :: LoadBalancerResource s)
 
-loadBalancerResource :: TF.Resource TF.CenturyLinkCloud (LoadBalancerResource s)
+loadBalancerResource :: TF.Resource P.CenturyLinkCloud (LoadBalancerResource s)
 loadBalancerResource =
     TF.newResource "clc_load_balancer" $
         LoadBalancerResource {
@@ -337,27 +336,27 @@ instance TF.ToHCL (PublicIpResource s) where
         , TF.attribute "source_restrictions" _source_restrictions
         ]
 
-instance HasInternalIpAddress (PublicIpResource s) s Text where
+instance P.HasInternalIpAddress (PublicIpResource s) s Text where
     internalIpAddress =
         lens (_internal_ip_address :: PublicIpResource s -> TF.Attribute s Text)
             (\s a -> s { _internal_ip_address = a } :: PublicIpResource s)
 
-instance HasPorts (PublicIpResource s) s Text where
+instance P.HasPorts (PublicIpResource s) s Text where
     ports =
         lens (_ports :: PublicIpResource s -> TF.Attribute s Text)
             (\s a -> s { _ports = a } :: PublicIpResource s)
 
-instance HasServerId (PublicIpResource s) s Text where
+instance P.HasServerId (PublicIpResource s) s Text where
     serverId =
         lens (_server_id :: PublicIpResource s -> TF.Attribute s Text)
             (\s a -> s { _server_id = a } :: PublicIpResource s)
 
-instance HasSourceRestrictions (PublicIpResource s) s Text where
+instance P.HasSourceRestrictions (PublicIpResource s) s Text where
     sourceRestrictions =
         lens (_source_restrictions :: PublicIpResource s -> TF.Attribute s Text)
             (\s a -> s { _source_restrictions = a } :: PublicIpResource s)
 
-publicIpResource :: TF.Resource TF.CenturyLinkCloud (PublicIpResource s)
+publicIpResource :: TF.Resource P.CenturyLinkCloud (PublicIpResource s)
 publicIpResource =
     TF.newResource "clc_public_ip" $
         PublicIpResource {
@@ -444,117 +443,117 @@ instance TF.ToHCL (ServerResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasAaPolicyId (ServerResource s) s Text where
+instance P.HasAaPolicyId (ServerResource s) s Text where
     aaPolicyId =
         lens (_aa_policy_id :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _aa_policy_id = a } :: ServerResource s)
 
-instance HasAdditionalDisks (ServerResource s) s Text where
+instance P.HasAdditionalDisks (ServerResource s) s Text where
     additionalDisks =
         lens (_additional_disks :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _additional_disks = a } :: ServerResource s)
 
-instance HasConfigurationId (ServerResource s) s Text where
+instance P.HasConfigurationId (ServerResource s) s Text where
     configurationId =
         lens (_configuration_id :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _configuration_id = a } :: ServerResource s)
 
-instance HasCpu (ServerResource s) s Text where
+instance P.HasCpu (ServerResource s) s Text where
     cpu =
         lens (_cpu :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _cpu = a } :: ServerResource s)
 
-instance HasCreatedDat (ServerResource s) s Text where
+instance P.HasCreatedDat (ServerResource s) s Text where
     createdDat =
         lens (_created_dat :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _created_dat = a } :: ServerResource s)
 
-instance HasCustomFields (ServerResource s) s Text where
+instance P.HasCustomFields (ServerResource s) s Text where
     customFields =
         lens (_custom_fields :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _custom_fields = a } :: ServerResource s)
 
-instance HasDescription (ServerResource s) s Text where
+instance P.HasDescription (ServerResource s) s Text where
     description =
         lens (_description :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: ServerResource s)
 
-instance HasGroupId (ServerResource s) s Text where
+instance P.HasGroupId (ServerResource s) s Text where
     groupId =
         lens (_group_id :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _group_id = a } :: ServerResource s)
 
-instance HasMemoryMb (ServerResource s) s Text where
+instance P.HasMemoryMb (ServerResource s) s Text where
     memoryMb =
         lens (_memory_mb :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _memory_mb = a } :: ServerResource s)
 
-instance HasMetadata (ServerResource s) s Text where
+instance P.HasMetadata (ServerResource s) s Text where
     metadata =
         lens (_metadata :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ServerResource s)
 
-instance HasModifiedDat (ServerResource s) s Text where
+instance P.HasModifiedDat (ServerResource s) s Text where
     modifiedDat =
         lens (_modified_dat :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _modified_dat = a } :: ServerResource s)
 
-instance HasName (ServerResource s) s Text where
+instance P.HasName (ServerResource s) s Text where
     name =
         lens (_name :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ServerResource s)
 
-instance HasNameTemplate (ServerResource s) s Text where
+instance P.HasNameTemplate (ServerResource s) s Text where
     nameTemplate =
         lens (_name_template :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _name_template = a } :: ServerResource s)
 
-instance HasNetworkId (ServerResource s) s Text where
+instance P.HasNetworkId (ServerResource s) s Text where
     networkId =
         lens (_network_id :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _network_id = a } :: ServerResource s)
 
-instance HasOsType (ServerResource s) s Text where
+instance P.HasOsType (ServerResource s) s Text where
     osType =
         lens (_os_type :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _os_type = a } :: ServerResource s)
 
-instance HasPassword (ServerResource s) s Text where
+instance P.HasPassword (ServerResource s) s Text where
     password =
         lens (_password :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _password = a } :: ServerResource s)
 
-instance HasPowerState (ServerResource s) s Text where
+instance P.HasPowerState (ServerResource s) s Text where
     powerState =
         lens (_power_state :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _power_state = a } :: ServerResource s)
 
-instance HasPrivateIpAddress (ServerResource s) s Text where
+instance P.HasPrivateIpAddress (ServerResource s) s Text where
     privateIpAddress =
         lens (_private_ip_address :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _private_ip_address = a } :: ServerResource s)
 
-instance HasPublicIpAddress (ServerResource s) s Text where
+instance P.HasPublicIpAddress (ServerResource s) s Text where
     publicIpAddress =
         lens (_public_ip_address :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _public_ip_address = a } :: ServerResource s)
 
-instance HasSourceServerId (ServerResource s) s Text where
+instance P.HasSourceServerId (ServerResource s) s Text where
     sourceServerId =
         lens (_source_server_id :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _source_server_id = a } :: ServerResource s)
 
-instance HasStorageType (ServerResource s) s Text where
+instance P.HasStorageType (ServerResource s) s Text where
     storageType =
         lens (_storage_type :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _storage_type = a } :: ServerResource s)
 
-instance HasType' (ServerResource s) s Text where
+instance P.HasType' (ServerResource s) s Text where
     type' =
         lens (_type' :: ServerResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: ServerResource s)
 
-serverResource :: TF.Resource TF.CenturyLinkCloud (ServerResource s)
+serverResource :: TF.Resource P.CenturyLinkCloud (ServerResource s)
 serverResource =
     TF.newResource "clc_server" $
         ServerResource {
@@ -581,225 +580,3 @@ serverResource =
             , _storage_type = TF.Nil
             , _type' = TF.Nil
             }
-
-class HasAaPolicyId a s b | a -> s b where
-    aaPolicyId :: Lens' a (TF.Attribute s b)
-
-instance HasAaPolicyId a s b => HasAaPolicyId (TF.Resource p a) s b where
-    aaPolicyId = TF.configuration . aaPolicyId
-
-class HasAdditionalDisks a s b | a -> s b where
-    additionalDisks :: Lens' a (TF.Attribute s b)
-
-instance HasAdditionalDisks a s b => HasAdditionalDisks (TF.Resource p a) s b where
-    additionalDisks = TF.configuration . additionalDisks
-
-class HasConfigurationId a s b | a -> s b where
-    configurationId :: Lens' a (TF.Attribute s b)
-
-instance HasConfigurationId a s b => HasConfigurationId (TF.Resource p a) s b where
-    configurationId = TF.configuration . configurationId
-
-class HasCpu a s b | a -> s b where
-    cpu :: Lens' a (TF.Attribute s b)
-
-instance HasCpu a s b => HasCpu (TF.Resource p a) s b where
-    cpu = TF.configuration . cpu
-
-class HasCreatedDat a s b | a -> s b where
-    createdDat :: Lens' a (TF.Attribute s b)
-
-instance HasCreatedDat a s b => HasCreatedDat (TF.Resource p a) s b where
-    createdDat = TF.configuration . createdDat
-
-class HasCustomFields a s b | a -> s b where
-    customFields :: Lens' a (TF.Attribute s b)
-
-instance HasCustomFields a s b => HasCustomFields (TF.Resource p a) s b where
-    customFields = TF.configuration . customFields
-
-class HasDataCenter a s b | a -> s b where
-    dataCenter :: Lens' a (TF.Attribute s b)
-
-instance HasDataCenter a s b => HasDataCenter (TF.Resource p a) s b where
-    dataCenter = TF.configuration . dataCenter
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasGroupId a s b | a -> s b where
-    groupId :: Lens' a (TF.Attribute s b)
-
-instance HasGroupId a s b => HasGroupId (TF.Resource p a) s b where
-    groupId = TF.configuration . groupId
-
-class HasInternalIpAddress a s b | a -> s b where
-    internalIpAddress :: Lens' a (TF.Attribute s b)
-
-instance HasInternalIpAddress a s b => HasInternalIpAddress (TF.Resource p a) s b where
-    internalIpAddress = TF.configuration . internalIpAddress
-
-class HasIpAddress a s b | a -> s b where
-    ipAddress :: Lens' a (TF.Attribute s b)
-
-instance HasIpAddress a s b => HasIpAddress (TF.Resource p a) s b where
-    ipAddress = TF.configuration . ipAddress
-
-class HasLoadBalancer a s b | a -> s b where
-    loadBalancer :: Lens' a (TF.Attribute s b)
-
-instance HasLoadBalancer a s b => HasLoadBalancer (TF.Resource p a) s b where
-    loadBalancer = TF.configuration . loadBalancer
-
-class HasLocationId a s b | a -> s b where
-    locationId :: Lens' a (TF.Attribute s b)
-
-instance HasLocationId a s b => HasLocationId (TF.Resource p a) s b where
-    locationId = TF.configuration . locationId
-
-class HasMemoryMb a s b | a -> s b where
-    memoryMb :: Lens' a (TF.Attribute s b)
-
-instance HasMemoryMb a s b => HasMemoryMb (TF.Resource p a) s b where
-    memoryMb = TF.configuration . memoryMb
-
-class HasMetadata a s b | a -> s b where
-    metadata :: Lens' a (TF.Attribute s b)
-
-instance HasMetadata a s b => HasMetadata (TF.Resource p a) s b where
-    metadata = TF.configuration . metadata
-
-class HasMethod a s b | a -> s b where
-    method :: Lens' a (TF.Attribute s b)
-
-instance HasMethod a s b => HasMethod (TF.Resource p a) s b where
-    method = TF.configuration . method
-
-class HasModifiedDat a s b | a -> s b where
-    modifiedDat :: Lens' a (TF.Attribute s b)
-
-instance HasModifiedDat a s b => HasModifiedDat (TF.Resource p a) s b where
-    modifiedDat = TF.configuration . modifiedDat
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasNameTemplate a s b | a -> s b where
-    nameTemplate :: Lens' a (TF.Attribute s b)
-
-instance HasNameTemplate a s b => HasNameTemplate (TF.Resource p a) s b where
-    nameTemplate = TF.configuration . nameTemplate
-
-class HasNetworkId a s b | a -> s b where
-    networkId :: Lens' a (TF.Attribute s b)
-
-instance HasNetworkId a s b => HasNetworkId (TF.Resource p a) s b where
-    networkId = TF.configuration . networkId
-
-class HasNodes a s b | a -> s b where
-    nodes :: Lens' a (TF.Attribute s b)
-
-instance HasNodes a s b => HasNodes (TF.Resource p a) s b where
-    nodes = TF.configuration . nodes
-
-class HasOsType a s b | a -> s b where
-    osType :: Lens' a (TF.Attribute s b)
-
-instance HasOsType a s b => HasOsType (TF.Resource p a) s b where
-    osType = TF.configuration . osType
-
-class HasParent a s b | a -> s b where
-    parent :: Lens' a (TF.Attribute s b)
-
-instance HasParent a s b => HasParent (TF.Resource p a) s b where
-    parent = TF.configuration . parent
-
-class HasParentGroupId a s b | a -> s b where
-    parentGroupId :: Lens' a (TF.Attribute s b)
-
-instance HasParentGroupId a s b => HasParentGroupId (TF.Resource p a) s b where
-    parentGroupId = TF.configuration . parentGroupId
-
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
-
-instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
-    password = TF.configuration . password
-
-class HasPersistence a s b | a -> s b where
-    persistence :: Lens' a (TF.Attribute s b)
-
-instance HasPersistence a s b => HasPersistence (TF.Resource p a) s b where
-    persistence = TF.configuration . persistence
-
-class HasPort a s b | a -> s b where
-    port :: Lens' a (TF.Attribute s b)
-
-instance HasPort a s b => HasPort (TF.Resource p a) s b where
-    port = TF.configuration . port
-
-class HasPorts a s b | a -> s b where
-    ports :: Lens' a (TF.Attribute s b)
-
-instance HasPorts a s b => HasPorts (TF.Resource p a) s b where
-    ports = TF.configuration . ports
-
-class HasPowerState a s b | a -> s b where
-    powerState :: Lens' a (TF.Attribute s b)
-
-instance HasPowerState a s b => HasPowerState (TF.Resource p a) s b where
-    powerState = TF.configuration . powerState
-
-class HasPrivateIpAddress a s b | a -> s b where
-    privateIpAddress :: Lens' a (TF.Attribute s b)
-
-instance HasPrivateIpAddress a s b => HasPrivateIpAddress (TF.Resource p a) s b where
-    privateIpAddress = TF.configuration . privateIpAddress
-
-class HasPublicIpAddress a s b | a -> s b where
-    publicIpAddress :: Lens' a (TF.Attribute s b)
-
-instance HasPublicIpAddress a s b => HasPublicIpAddress (TF.Resource p a) s b where
-    publicIpAddress = TF.configuration . publicIpAddress
-
-class HasServerId a s b | a -> s b where
-    serverId :: Lens' a (TF.Attribute s b)
-
-instance HasServerId a s b => HasServerId (TF.Resource p a) s b where
-    serverId = TF.configuration . serverId
-
-class HasSourceRestrictions a s b | a -> s b where
-    sourceRestrictions :: Lens' a (TF.Attribute s b)
-
-instance HasSourceRestrictions a s b => HasSourceRestrictions (TF.Resource p a) s b where
-    sourceRestrictions = TF.configuration . sourceRestrictions
-
-class HasSourceServerId a s b | a -> s b where
-    sourceServerId :: Lens' a (TF.Attribute s b)
-
-instance HasSourceServerId a s b => HasSourceServerId (TF.Resource p a) s b where
-    sourceServerId = TF.configuration . sourceServerId
-
-class HasStatus a s b | a -> s b where
-    status :: Lens' a (TF.Attribute s b)
-
-instance HasStatus a s b => HasStatus (TF.Resource p a) s b where
-    status = TF.configuration . status
-
-class HasStorageType a s b | a -> s b where
-    storageType :: Lens' a (TF.Attribute s b)
-
-instance HasStorageType a s b => HasStorageType (TF.Resource p a) s b where
-    storageType = TF.configuration . storageType
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'

@@ -10,7 +10,7 @@
 
 -- |
 -- Module      : Terrafomo.AWS.Provider
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -42,7 +42,6 @@ module Terrafomo.AWS.Provider
     , token
     ) where
 
-import Data.Function      (on)
 import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
@@ -53,12 +52,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.AWS.Types as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.IP        as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
+import qualified Terrafomo.AWS.Types as P
+import qualified Terrafomo.IP        as P
+
+import qualified Terrafomo.HCL      as TF
+import qualified Terrafomo.Name     as TF
+import qualified Terrafomo.Provider as TF
 
 {- | AWS Terraform provider.
 
@@ -82,7 +81,7 @@ data AWS = AWS {
     {- ^ (Optional) This is the maximum number of times an API call is retried, in the case where requests are being throttled or experiencing transient failures. The delay between the subsequent API calls increases exponentially. -}
     , _profile                     :: !(Maybe Text)
     {- ^ (Optional) This is the AWS profile name as set in the shared credentials file. -}
-    , _region                      :: !(Maybe TF.Region)
+    , _region                      :: !(Maybe P.Region)
     {- ^ (Required) This is the AWS region. It must be provided, but it can also be sourced from the @AWS_DEFAULT_REGION@ environment variables, or via a shared credentials file if @profile@ is specified. -}
     , _s3_force_path_style         :: !(Maybe Text)
     {- ^ (Optional) Set this to @true@ to force the request to use path-style addressing, i.e., @http://s3.amazonaws.com/BUCKET/KEY@ . By default, the S3 client will use virtual hosted bucket addressing, @http://BUCKET.s3.amazonaws.com/KEY@ , when possible. Specific to the Amazon S3 service. -}
@@ -183,7 +182,7 @@ profile :: Lens' AWS (Maybe Text)
 profile =
     lens _profile (\s a -> s { _profile = a })
 
-region :: Lens' AWS (Maybe TF.Region)
+region :: Lens' AWS (Maybe P.Region)
 region =
     lens _region (\s a -> s { _region = a })
 

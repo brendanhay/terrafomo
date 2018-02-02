@@ -149,6 +149,9 @@ main = do
 
         dir         <- renderProvider tmpls provider anyDataSources anyResources
 
+        when (anyDataSources || anyResources) $
+            renderLenses tmpls dir provider (datasources ++ resources)
+
         when anyDataSources $
             renderSchemas tmpls dir provider DataSource datasources
 
@@ -301,6 +304,17 @@ renderSchemas tmpls dir p typ xs = do
     hoistEither (Render.schemas tmpls p typ xs)
         >>= writeModule
 
+renderLenses
+    :: Templates EDE.Template
+    -> FilePath
+    -> Provider (Maybe a)
+    -> [Schema]
+    -> Script ()
+renderLenses tmpls dir p xs = do
+    let writeModule = writeNS (dir </> "gen")
+    hoistEither (Render.lenses tmpls p xs)
+        >>= writeModule
+
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do
     let moduleFile = dir </> NS.toPath ns <.> "hs"
@@ -352,6 +366,7 @@ loadTemplates Options{templateDir} =
             , schemaTemplate   = "schema.ede"
             , mainTemplate     = "main.ede"
             , typesTemplate    = "types.ede"
+            , lensTemplate     = "lens.ede"
             }
 
 parseEDE :: FilePath -> Script EDE.Template

@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Kubernetes.DataSource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -33,31 +30,33 @@ module Terrafomo.Kubernetes.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasMetadata (..)
+    , P.HasMetadata (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                     as TF
-import qualified GHC.Base                      as TF
-import qualified Numeric.Natural               as TF
-import qualified Terrafomo.Attribute           as TF
-import qualified Terrafomo.DataSource          as TF
-import qualified Terrafomo.HCL                 as TF
-import qualified Terrafomo.IP                  as TF
-import qualified Terrafomo.Kubernetes.Provider as TF
-import qualified Terrafomo.Kubernetes.Types    as TF
-import qualified Terrafomo.Meta                as TF
-import qualified Terrafomo.Name                as TF
-import qualified Terrafomo.Resource            as TF
+import qualified Data.Word                     as P
+import qualified GHC.Base                      as P
+import qualified Numeric.Natural               as P
+import qualified Terrafomo.IP                  as P
+import qualified Terrafomo.Kubernetes.Lens     as P
+import qualified Terrafomo.Kubernetes.Provider as P
+import           Terrafomo.Kubernetes.Types    as P
+
+import qualified Terrafomo.Attribute  as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL        as TF
 
 {- | The @kubernetes_service@ Kubernetes datasource.
 
@@ -75,12 +74,12 @@ instance TF.ToHCL (ServiceData s) where
         [ TF.attribute "metadata" _metadata
         ]
 
-instance HasMetadata (ServiceData s) s Text where
+instance P.HasMetadata (ServiceData s) s Text where
     metadata =
         lens (_metadata :: ServiceData s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: ServiceData s)
 
-serviceData :: TF.DataSource TF.Kubernetes (ServiceData s)
+serviceData :: TF.DataSource P.Kubernetes (ServiceData s)
 serviceData =
     TF.newDataSource "kubernetes_service" $
         ServiceData {
@@ -104,20 +103,14 @@ instance TF.ToHCL (StorageClassData s) where
         [ TF.attribute "metadata" _metadata
         ]
 
-instance HasMetadata (StorageClassData s) s Text where
+instance P.HasMetadata (StorageClassData s) s Text where
     metadata =
         lens (_metadata :: StorageClassData s -> TF.Attribute s Text)
             (\s a -> s { _metadata = a } :: StorageClassData s)
 
-storageClassData :: TF.DataSource TF.Kubernetes (StorageClassData s)
+storageClassData :: TF.DataSource P.Kubernetes (StorageClassData s)
 storageClassData =
     TF.newDataSource "kubernetes_storage_class" $
         StorageClassData {
               _metadata = TF.Nil
             }
-
-class HasMetadata a s b | a -> s b where
-    metadata :: Lens' a (TF.Attribute s b)
-
-instance HasMetadata a s b => HasMetadata (TF.DataSource p a) s b where
-    metadata = TF.configuration . metadata

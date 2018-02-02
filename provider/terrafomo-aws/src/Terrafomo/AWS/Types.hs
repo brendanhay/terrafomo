@@ -1,6 +1,5 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-{-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE FunctionalDependencies     #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -45,7 +44,6 @@ module Terrafomo.AWS.Types
     , iamPolicy
 
     -- * Classy Fields
-    , HasEnabled            (..)
     , HasMfaDelete          (..)
 
     -- * Formatters
@@ -72,6 +70,7 @@ import Formatting (Format, (%))
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
 import qualified Network.AWS.Data.Text  as AWS
+import qualified Terrafomo.AWS.Lens     as Lens
 import qualified Terrafomo.HCL          as HCL
 
 newtype Tags = Tags { fromTags :: Map Text Text }
@@ -132,7 +131,7 @@ instance HCL.ToHCL (S3BucketVersioning s) where
             , HCL.attribute "mfa_delete" (_mfa_delete x)
             ]
 
-instance HasEnabled (S3BucketVersioning s) s Bool where
+instance Lens.HasEnabled (S3BucketVersioning s) s Bool where
     enabled = lens _enabled (\s a -> s { _enabled = a })
 
 instance HasMfaDelete (S3BucketVersioning s) s Bool where
@@ -211,13 +210,13 @@ instance HCL.ToHCL (BeanstalkEnvSetting s) where
             , HCL.attribute "value"     (_value     x)
             ]
 
-instance HasNamespace (BeanstalkEnvSetting s) s Text where
+instance Lens.HasNamespace (BeanstalkEnvSetting s) s Text where
     namespace = lens _namespace (\s a -> s { _namespace = a })
 
-instance HasName (BeanstalkEnvSetting s) s Text where
+instance Lens.HasName (BeanstalkEnvSetting s) s Text where
     name = lens _name (\s a -> s { _name = a })
 
-instance HasValue (BeanstalkEnvSetting s) s Text where
+instance Lens.HasValue (BeanstalkEnvSetting s) s Text where
     value = lens _value (\s a -> s { _value = a })
 
 beanstalkEnvSetting :: BeanstalkEnvSetting s
@@ -237,36 +236,11 @@ iamPolicy = IamPolicy . HCL.toJSON
 
 -- Field Classes
 
--- FIXME: This is not observed by the actual generated classes so duplicates
--- currently exist - additionally these should be re-exported by the schema.ede
--- template, possible along with smart constructors for the above types.
-
-class HasEnabled a s b | a -> s b where
-    enabled :: Lens' a (Attribute s b)
-
-instance HasEnabled a s b => HasEnabled (Resource p a) s b where
-    enabled = configuration . enabled
-
 class HasMfaDelete a s b | a -> s b where
     mfaDelete :: Lens' a (Attribute s b)
 
 instance HasMfaDelete a s b => HasMfaDelete (Resource p a) s b where
     mfaDelete = configuration . mfaDelete
 
-class HasNamespace a s b | a -> s b where
-    namespace :: Lens' a (Attribute s b)
-
-instance HasNamespace a s b => HasNamespace (Resource p a) s b where
-    namespace = configuration . namespace
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (Attribute s b)
-
-instance HasName a s b => HasName (Resource p a) s b where
-    name = configuration . name
-
-class HasValue a s b | a -> s b where
-    value :: Lens' a (Attribute s b)
-
-instance HasValue a s b => HasValue (Resource p a) s b where
-    value = configuration . value
+instance HasMfaDelete a s b => HasMfaDelete (DataSource p a) s b where
+    mfaDelete = configuration . mfaDelete

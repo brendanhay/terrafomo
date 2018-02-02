@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.Datadog.Resource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -42,72 +39,74 @@ module Terrafomo.Datadog.Resource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasActive (..)
-    , HasDescription (..)
-    , HasDisabled (..)
-    , HasEmail (..)
-    , HasEnd (..)
-    , HasEscalationMessage (..)
-    , HasEvaluationDelay (..)
-    , HasGraph (..)
-    , HasHandle (..)
-    , HasIncludeTags (..)
-    , HasIsAdmin (..)
-    , HasLocked (..)
-    , HasMessage (..)
-    , HasMetric (..)
-    , HasMonitorId (..)
-    , HasName (..)
-    , HasNewHostDelay (..)
-    , HasNoDataTimeframe (..)
-    , HasNotifyAudit (..)
-    , HasNotifyNoData (..)
-    , HasPerUnit (..)
-    , HasQuery (..)
-    , HasReadOnly (..)
-    , HasRecurrence (..)
-    , HasRenotifyInterval (..)
-    , HasRequireFullWindow (..)
-    , HasRole (..)
-    , HasScope (..)
-    , HasShortName (..)
-    , HasSilenced (..)
-    , HasStart (..)
-    , HasStatsdInterval (..)
-    , HasTags (..)
-    , HasTemplateVariable (..)
-    , HasThresholds (..)
-    , HasTimeoutH (..)
-    , HasTitle (..)
-    , HasType' (..)
-    , HasUnit (..)
+    , P.HasActive (..)
+    , P.HasDescription (..)
+    , P.HasDisabled (..)
+    , P.HasEmail (..)
+    , P.HasEnd (..)
+    , P.HasEscalationMessage (..)
+    , P.HasEvaluationDelay (..)
+    , P.HasGraph (..)
+    , P.HasHandle (..)
+    , P.HasIncludeTags (..)
+    , P.HasIsAdmin (..)
+    , P.HasLocked (..)
+    , P.HasMessage (..)
+    , P.HasMetric (..)
+    , P.HasMonitorId (..)
+    , P.HasName (..)
+    , P.HasNewHostDelay (..)
+    , P.HasNoDataTimeframe (..)
+    , P.HasNotifyAudit (..)
+    , P.HasNotifyNoData (..)
+    , P.HasPerUnit (..)
+    , P.HasQuery (..)
+    , P.HasReadOnly (..)
+    , P.HasRecurrence (..)
+    , P.HasRenotifyInterval (..)
+    , P.HasRequireFullWindow (..)
+    , P.HasRole (..)
+    , P.HasScope (..)
+    , P.HasShortName (..)
+    , P.HasSilenced (..)
+    , P.HasStart (..)
+    , P.HasStatsdInterval (..)
+    , P.HasTags (..)
+    , P.HasTemplateVariable (..)
+    , P.HasThresholds (..)
+    , P.HasTimeoutH (..)
+    , P.HasTitle (..)
+    , P.HasType' (..)
+    , P.HasUnit (..)
 
     -- ** Computed Attributes
-    , HasComputedDisabled (..)
-    , HasComputedId (..)
-    , HasComputedVerified (..)
+    , P.HasComputedDisabled (..)
+    , P.HasComputedId (..)
+    , P.HasComputedVerified (..)
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                  as TF
-import qualified GHC.Base                   as TF
-import qualified Numeric.Natural            as TF
-import qualified Terrafomo.Attribute        as TF
-import qualified Terrafomo.Datadog.Provider as TF
-import qualified Terrafomo.Datadog.Types    as TF
-import qualified Terrafomo.HCL              as TF
-import qualified Terrafomo.IP               as TF
-import qualified Terrafomo.Meta             as TF
-import qualified Terrafomo.Name             as TF
-import qualified Terrafomo.Resource         as TF
-import qualified Terrafomo.Resource         as TF
+import qualified Data.Word                  as P
+import qualified GHC.Base                   as P
+import qualified Numeric.Natural            as P
+import qualified Terrafomo.Datadog.Lens     as P
+import qualified Terrafomo.Datadog.Provider as P
+import           Terrafomo.Datadog.Types    as P
+import qualified Terrafomo.IP               as P
+
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Resource  as TF
 
 {- | The @datadog_downtime@ Datadog resource.
 
@@ -145,49 +144,49 @@ instance TF.ToHCL (DowntimeResource s) where
         , TF.attribute "start" _start
         ]
 
-instance HasActive (DowntimeResource s) s Text where
+instance P.HasActive (DowntimeResource s) s Text where
     active =
         lens (_active :: DowntimeResource s -> TF.Attribute s Text)
             (\s a -> s { _active = a } :: DowntimeResource s)
 
-instance HasDisabled (DowntimeResource s) s Text where
+instance P.HasDisabled (DowntimeResource s) s Text where
     disabled =
         lens (_disabled :: DowntimeResource s -> TF.Attribute s Text)
             (\s a -> s { _disabled = a } :: DowntimeResource s)
 
-instance HasEnd (DowntimeResource s) s Text where
+instance P.HasEnd (DowntimeResource s) s Text where
     end =
         lens (_end :: DowntimeResource s -> TF.Attribute s Text)
             (\s a -> s { _end = a } :: DowntimeResource s)
 
-instance HasMessage (DowntimeResource s) s Text where
+instance P.HasMessage (DowntimeResource s) s Text where
     message =
         lens (_message :: DowntimeResource s -> TF.Attribute s Text)
             (\s a -> s { _message = a } :: DowntimeResource s)
 
-instance HasMonitorId (DowntimeResource s) s Text where
+instance P.HasMonitorId (DowntimeResource s) s Text where
     monitorId =
         lens (_monitor_id :: DowntimeResource s -> TF.Attribute s Text)
             (\s a -> s { _monitor_id = a } :: DowntimeResource s)
 
-instance HasRecurrence (DowntimeResource s) s Text where
+instance P.HasRecurrence (DowntimeResource s) s Text where
     recurrence =
         lens (_recurrence :: DowntimeResource s -> TF.Attribute s Text)
             (\s a -> s { _recurrence = a } :: DowntimeResource s)
 
-instance HasScope (DowntimeResource s) s Text where
+instance P.HasScope (DowntimeResource s) s Text where
     scope =
         lens (_scope :: DowntimeResource s -> TF.Attribute s Text)
             (\s a -> s { _scope = a } :: DowntimeResource s)
 
-instance HasStart (DowntimeResource s) s Text where
+instance P.HasStart (DowntimeResource s) s Text where
     start =
         lens (_start :: DowntimeResource s -> TF.Attribute s Text)
             (\s a -> s { _start = a } :: DowntimeResource s)
 
-instance HasComputedId (DowntimeResource s) Text
+instance P.HasComputedId (DowntimeResource s) Text
 
-downtimeResource :: TF.Resource TF.Datadog (DowntimeResource s)
+downtimeResource :: TF.Resource P.Datadog (DowntimeResource s)
 downtimeResource =
     TF.newResource "datadog_downtime" $
         DowntimeResource {
@@ -231,37 +230,37 @@ instance TF.ToHCL (MetricMetadataResource s) where
         , TF.attribute "unit" _unit
         ]
 
-instance HasDescription (MetricMetadataResource s) s Text where
+instance P.HasDescription (MetricMetadataResource s) s Text where
     description =
         lens (_description :: MetricMetadataResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: MetricMetadataResource s)
 
-instance HasMetric (MetricMetadataResource s) s Text where
+instance P.HasMetric (MetricMetadataResource s) s Text where
     metric =
         lens (_metric :: MetricMetadataResource s -> TF.Attribute s Text)
             (\s a -> s { _metric = a } :: MetricMetadataResource s)
 
-instance HasPerUnit (MetricMetadataResource s) s Text where
+instance P.HasPerUnit (MetricMetadataResource s) s Text where
     perUnit =
         lens (_per_unit :: MetricMetadataResource s -> TF.Attribute s Text)
             (\s a -> s { _per_unit = a } :: MetricMetadataResource s)
 
-instance HasShortName (MetricMetadataResource s) s Text where
+instance P.HasShortName (MetricMetadataResource s) s Text where
     shortName =
         lens (_short_name :: MetricMetadataResource s -> TF.Attribute s Text)
             (\s a -> s { _short_name = a } :: MetricMetadataResource s)
 
-instance HasStatsdInterval (MetricMetadataResource s) s Text where
+instance P.HasStatsdInterval (MetricMetadataResource s) s Text where
     statsdInterval =
         lens (_statsd_interval :: MetricMetadataResource s -> TF.Attribute s Text)
             (\s a -> s { _statsd_interval = a } :: MetricMetadataResource s)
 
-instance HasUnit (MetricMetadataResource s) s Text where
+instance P.HasUnit (MetricMetadataResource s) s Text where
     unit =
         lens (_unit :: MetricMetadataResource s -> TF.Attribute s Text)
             (\s a -> s { _unit = a } :: MetricMetadataResource s)
 
-metricMetadataResource :: TF.Resource TF.Datadog (MetricMetadataResource s)
+metricMetadataResource :: TF.Resource P.Datadog (MetricMetadataResource s)
 metricMetadataResource =
     TF.newResource "datadog_metric_metadata" $
         MetricMetadataResource {
@@ -339,99 +338,99 @@ instance TF.ToHCL (MonitorResource s) where
         , TF.attribute "type" _type'
         ]
 
-instance HasEscalationMessage (MonitorResource s) s Text where
+instance P.HasEscalationMessage (MonitorResource s) s Text where
     escalationMessage =
         lens (_escalation_message :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _escalation_message = a } :: MonitorResource s)
 
-instance HasEvaluationDelay (MonitorResource s) s Text where
+instance P.HasEvaluationDelay (MonitorResource s) s Text where
     evaluationDelay =
         lens (_evaluation_delay :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _evaluation_delay = a } :: MonitorResource s)
 
-instance HasIncludeTags (MonitorResource s) s Text where
+instance P.HasIncludeTags (MonitorResource s) s Text where
     includeTags =
         lens (_include_tags :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _include_tags = a } :: MonitorResource s)
 
-instance HasLocked (MonitorResource s) s Text where
+instance P.HasLocked (MonitorResource s) s Text where
     locked =
         lens (_locked :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _locked = a } :: MonitorResource s)
 
-instance HasMessage (MonitorResource s) s Text where
+instance P.HasMessage (MonitorResource s) s Text where
     message =
         lens (_message :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _message = a } :: MonitorResource s)
 
-instance HasName (MonitorResource s) s Text where
+instance P.HasName (MonitorResource s) s Text where
     name =
         lens (_name :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: MonitorResource s)
 
-instance HasNewHostDelay (MonitorResource s) s Text where
+instance P.HasNewHostDelay (MonitorResource s) s Text where
     newHostDelay =
         lens (_new_host_delay :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _new_host_delay = a } :: MonitorResource s)
 
-instance HasNoDataTimeframe (MonitorResource s) s Text where
+instance P.HasNoDataTimeframe (MonitorResource s) s Text where
     noDataTimeframe =
         lens (_no_data_timeframe :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _no_data_timeframe = a } :: MonitorResource s)
 
-instance HasNotifyAudit (MonitorResource s) s Text where
+instance P.HasNotifyAudit (MonitorResource s) s Text where
     notifyAudit =
         lens (_notify_audit :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _notify_audit = a } :: MonitorResource s)
 
-instance HasNotifyNoData (MonitorResource s) s Text where
+instance P.HasNotifyNoData (MonitorResource s) s Text where
     notifyNoData =
         lens (_notify_no_data :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _notify_no_data = a } :: MonitorResource s)
 
-instance HasQuery (MonitorResource s) s Text where
+instance P.HasQuery (MonitorResource s) s Text where
     query =
         lens (_query :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _query = a } :: MonitorResource s)
 
-instance HasRenotifyInterval (MonitorResource s) s Text where
+instance P.HasRenotifyInterval (MonitorResource s) s Text where
     renotifyInterval =
         lens (_renotify_interval :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _renotify_interval = a } :: MonitorResource s)
 
-instance HasRequireFullWindow (MonitorResource s) s Text where
+instance P.HasRequireFullWindow (MonitorResource s) s Text where
     requireFullWindow =
         lens (_require_full_window :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _require_full_window = a } :: MonitorResource s)
 
-instance HasSilenced (MonitorResource s) s Text where
+instance P.HasSilenced (MonitorResource s) s Text where
     silenced =
         lens (_silenced :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _silenced = a } :: MonitorResource s)
 
-instance HasTags (MonitorResource s) s Text where
+instance P.HasTags (MonitorResource s) s Text where
     tags =
         lens (_tags :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _tags = a } :: MonitorResource s)
 
-instance HasThresholds (MonitorResource s) s Text where
+instance P.HasThresholds (MonitorResource s) s Text where
     thresholds =
         lens (_thresholds :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _thresholds = a } :: MonitorResource s)
 
-instance HasTimeoutH (MonitorResource s) s Text where
+instance P.HasTimeoutH (MonitorResource s) s Text where
     timeoutH =
         lens (_timeout_h :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _timeout_h = a } :: MonitorResource s)
 
-instance HasType' (MonitorResource s) s Text where
+instance P.HasType' (MonitorResource s) s Text where
     type' =
         lens (_type' :: MonitorResource s -> TF.Attribute s Text)
             (\s a -> s { _type' = a } :: MonitorResource s)
 
-instance HasComputedId (MonitorResource s) Text
+instance P.HasComputedId (MonitorResource s) Text
 
-monitorResource :: TF.Resource TF.Datadog (MonitorResource s)
+monitorResource :: TF.Resource P.Datadog (MonitorResource s)
 monitorResource =
     TF.newResource "datadog_monitor" $
         MonitorResource {
@@ -482,32 +481,32 @@ instance TF.ToHCL (TimeboardResource s) where
         , TF.attribute "title" _title
         ]
 
-instance HasDescription (TimeboardResource s) s Text where
+instance P.HasDescription (TimeboardResource s) s Text where
     description =
         lens (_description :: TimeboardResource s -> TF.Attribute s Text)
             (\s a -> s { _description = a } :: TimeboardResource s)
 
-instance HasGraph (TimeboardResource s) s Text where
+instance P.HasGraph (TimeboardResource s) s Text where
     graph =
         lens (_graph :: TimeboardResource s -> TF.Attribute s Text)
             (\s a -> s { _graph = a } :: TimeboardResource s)
 
-instance HasReadOnly (TimeboardResource s) s Text where
+instance P.HasReadOnly (TimeboardResource s) s Text where
     readOnly =
         lens (_read_only :: TimeboardResource s -> TF.Attribute s Text)
             (\s a -> s { _read_only = a } :: TimeboardResource s)
 
-instance HasTemplateVariable (TimeboardResource s) s Text where
+instance P.HasTemplateVariable (TimeboardResource s) s Text where
     templateVariable =
         lens (_template_variable :: TimeboardResource s -> TF.Attribute s Text)
             (\s a -> s { _template_variable = a } :: TimeboardResource s)
 
-instance HasTitle (TimeboardResource s) s Text where
+instance P.HasTitle (TimeboardResource s) s Text where
     title =
         lens (_title :: TimeboardResource s -> TF.Attribute s Text)
             (\s a -> s { _title = a } :: TimeboardResource s)
 
-timeboardResource :: TF.Resource TF.Datadog (TimeboardResource s)
+timeboardResource :: TF.Resource P.Datadog (TimeboardResource s)
 timeboardResource =
     TF.newResource "datadog_timeboard" $
         TimeboardResource {
@@ -548,43 +547,43 @@ instance TF.ToHCL (UserResource s) where
         , TF.attribute "role" _role
         ]
 
-instance HasDisabled (UserResource s) s Text where
+instance P.HasDisabled (UserResource s) s Text where
     disabled =
         lens (_disabled :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _disabled = a } :: UserResource s)
 
-instance HasEmail (UserResource s) s Text where
+instance P.HasEmail (UserResource s) s Text where
     email =
         lens (_email :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _email = a } :: UserResource s)
 
-instance HasHandle (UserResource s) s Text where
+instance P.HasHandle (UserResource s) s Text where
     handle =
         lens (_handle :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _handle = a } :: UserResource s)
 
-instance HasIsAdmin (UserResource s) s Text where
+instance P.HasIsAdmin (UserResource s) s Text where
     isAdmin =
         lens (_is_admin :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _is_admin = a } :: UserResource s)
 
-instance HasName (UserResource s) s Text where
+instance P.HasName (UserResource s) s Text where
     name =
         lens (_name :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: UserResource s)
 
-instance HasRole (UserResource s) s Text where
+instance P.HasRole (UserResource s) s Text where
     role =
         lens (_role :: UserResource s -> TF.Attribute s Text)
             (\s a -> s { _role = a } :: UserResource s)
 
-instance HasComputedDisabled (UserResource s) Text
+instance P.HasComputedDisabled (UserResource s) Text
 
-instance HasComputedId (UserResource s) Text
+instance P.HasComputedId (UserResource s) Text
 
-instance HasComputedVerified (UserResource s) Text
+instance P.HasComputedVerified (UserResource s) Text
 
-userResource :: TF.Resource TF.Datadog (UserResource s)
+userResource :: TF.Resource P.Datadog (UserResource s)
 userResource =
     TF.newResource "datadog_user" $
         UserResource {
@@ -595,255 +594,3 @@ userResource =
             , _name = TF.Nil
             , _role = TF.Nil
             }
-
-class HasActive a s b | a -> s b where
-    active :: Lens' a (TF.Attribute s b)
-
-instance HasActive a s b => HasActive (TF.Resource p a) s b where
-    active = TF.configuration . active
-
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attribute s b)
-
-instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
-    description = TF.configuration . description
-
-class HasDisabled a s b | a -> s b where
-    disabled :: Lens' a (TF.Attribute s b)
-
-instance HasDisabled a s b => HasDisabled (TF.Resource p a) s b where
-    disabled = TF.configuration . disabled
-
-class HasEmail a s b | a -> s b where
-    email :: Lens' a (TF.Attribute s b)
-
-instance HasEmail a s b => HasEmail (TF.Resource p a) s b where
-    email = TF.configuration . email
-
-class HasEnd a s b | a -> s b where
-    end :: Lens' a (TF.Attribute s b)
-
-instance HasEnd a s b => HasEnd (TF.Resource p a) s b where
-    end = TF.configuration . end
-
-class HasEscalationMessage a s b | a -> s b where
-    escalationMessage :: Lens' a (TF.Attribute s b)
-
-instance HasEscalationMessage a s b => HasEscalationMessage (TF.Resource p a) s b where
-    escalationMessage = TF.configuration . escalationMessage
-
-class HasEvaluationDelay a s b | a -> s b where
-    evaluationDelay :: Lens' a (TF.Attribute s b)
-
-instance HasEvaluationDelay a s b => HasEvaluationDelay (TF.Resource p a) s b where
-    evaluationDelay = TF.configuration . evaluationDelay
-
-class HasGraph a s b | a -> s b where
-    graph :: Lens' a (TF.Attribute s b)
-
-instance HasGraph a s b => HasGraph (TF.Resource p a) s b where
-    graph = TF.configuration . graph
-
-class HasHandle a s b | a -> s b where
-    handle :: Lens' a (TF.Attribute s b)
-
-instance HasHandle a s b => HasHandle (TF.Resource p a) s b where
-    handle = TF.configuration . handle
-
-class HasIncludeTags a s b | a -> s b where
-    includeTags :: Lens' a (TF.Attribute s b)
-
-instance HasIncludeTags a s b => HasIncludeTags (TF.Resource p a) s b where
-    includeTags = TF.configuration . includeTags
-
-class HasIsAdmin a s b | a -> s b where
-    isAdmin :: Lens' a (TF.Attribute s b)
-
-instance HasIsAdmin a s b => HasIsAdmin (TF.Resource p a) s b where
-    isAdmin = TF.configuration . isAdmin
-
-class HasLocked a s b | a -> s b where
-    locked :: Lens' a (TF.Attribute s b)
-
-instance HasLocked a s b => HasLocked (TF.Resource p a) s b where
-    locked = TF.configuration . locked
-
-class HasMessage a s b | a -> s b where
-    message :: Lens' a (TF.Attribute s b)
-
-instance HasMessage a s b => HasMessage (TF.Resource p a) s b where
-    message = TF.configuration . message
-
-class HasMetric a s b | a -> s b where
-    metric :: Lens' a (TF.Attribute s b)
-
-instance HasMetric a s b => HasMetric (TF.Resource p a) s b where
-    metric = TF.configuration . metric
-
-class HasMonitorId a s b | a -> s b where
-    monitorId :: Lens' a (TF.Attribute s b)
-
-instance HasMonitorId a s b => HasMonitorId (TF.Resource p a) s b where
-    monitorId = TF.configuration . monitorId
-
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
-
-instance HasName a s b => HasName (TF.Resource p a) s b where
-    name = TF.configuration . name
-
-class HasNewHostDelay a s b | a -> s b where
-    newHostDelay :: Lens' a (TF.Attribute s b)
-
-instance HasNewHostDelay a s b => HasNewHostDelay (TF.Resource p a) s b where
-    newHostDelay = TF.configuration . newHostDelay
-
-class HasNoDataTimeframe a s b | a -> s b where
-    noDataTimeframe :: Lens' a (TF.Attribute s b)
-
-instance HasNoDataTimeframe a s b => HasNoDataTimeframe (TF.Resource p a) s b where
-    noDataTimeframe = TF.configuration . noDataTimeframe
-
-class HasNotifyAudit a s b | a -> s b where
-    notifyAudit :: Lens' a (TF.Attribute s b)
-
-instance HasNotifyAudit a s b => HasNotifyAudit (TF.Resource p a) s b where
-    notifyAudit = TF.configuration . notifyAudit
-
-class HasNotifyNoData a s b | a -> s b where
-    notifyNoData :: Lens' a (TF.Attribute s b)
-
-instance HasNotifyNoData a s b => HasNotifyNoData (TF.Resource p a) s b where
-    notifyNoData = TF.configuration . notifyNoData
-
-class HasPerUnit a s b | a -> s b where
-    perUnit :: Lens' a (TF.Attribute s b)
-
-instance HasPerUnit a s b => HasPerUnit (TF.Resource p a) s b where
-    perUnit = TF.configuration . perUnit
-
-class HasQuery a s b | a -> s b where
-    query :: Lens' a (TF.Attribute s b)
-
-instance HasQuery a s b => HasQuery (TF.Resource p a) s b where
-    query = TF.configuration . query
-
-class HasReadOnly a s b | a -> s b where
-    readOnly :: Lens' a (TF.Attribute s b)
-
-instance HasReadOnly a s b => HasReadOnly (TF.Resource p a) s b where
-    readOnly = TF.configuration . readOnly
-
-class HasRecurrence a s b | a -> s b where
-    recurrence :: Lens' a (TF.Attribute s b)
-
-instance HasRecurrence a s b => HasRecurrence (TF.Resource p a) s b where
-    recurrence = TF.configuration . recurrence
-
-class HasRenotifyInterval a s b | a -> s b where
-    renotifyInterval :: Lens' a (TF.Attribute s b)
-
-instance HasRenotifyInterval a s b => HasRenotifyInterval (TF.Resource p a) s b where
-    renotifyInterval = TF.configuration . renotifyInterval
-
-class HasRequireFullWindow a s b | a -> s b where
-    requireFullWindow :: Lens' a (TF.Attribute s b)
-
-instance HasRequireFullWindow a s b => HasRequireFullWindow (TF.Resource p a) s b where
-    requireFullWindow = TF.configuration . requireFullWindow
-
-class HasRole a s b | a -> s b where
-    role :: Lens' a (TF.Attribute s b)
-
-instance HasRole a s b => HasRole (TF.Resource p a) s b where
-    role = TF.configuration . role
-
-class HasScope a s b | a -> s b where
-    scope :: Lens' a (TF.Attribute s b)
-
-instance HasScope a s b => HasScope (TF.Resource p a) s b where
-    scope = TF.configuration . scope
-
-class HasShortName a s b | a -> s b where
-    shortName :: Lens' a (TF.Attribute s b)
-
-instance HasShortName a s b => HasShortName (TF.Resource p a) s b where
-    shortName = TF.configuration . shortName
-
-class HasSilenced a s b | a -> s b where
-    silenced :: Lens' a (TF.Attribute s b)
-
-instance HasSilenced a s b => HasSilenced (TF.Resource p a) s b where
-    silenced = TF.configuration . silenced
-
-class HasStart a s b | a -> s b where
-    start :: Lens' a (TF.Attribute s b)
-
-instance HasStart a s b => HasStart (TF.Resource p a) s b where
-    start = TF.configuration . start
-
-class HasStatsdInterval a s b | a -> s b where
-    statsdInterval :: Lens' a (TF.Attribute s b)
-
-instance HasStatsdInterval a s b => HasStatsdInterval (TF.Resource p a) s b where
-    statsdInterval = TF.configuration . statsdInterval
-
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attribute s b)
-
-instance HasTags a s b => HasTags (TF.Resource p a) s b where
-    tags = TF.configuration . tags
-
-class HasTemplateVariable a s b | a -> s b where
-    templateVariable :: Lens' a (TF.Attribute s b)
-
-instance HasTemplateVariable a s b => HasTemplateVariable (TF.Resource p a) s b where
-    templateVariable = TF.configuration . templateVariable
-
-class HasThresholds a s b | a -> s b where
-    thresholds :: Lens' a (TF.Attribute s b)
-
-instance HasThresholds a s b => HasThresholds (TF.Resource p a) s b where
-    thresholds = TF.configuration . thresholds
-
-class HasTimeoutH a s b | a -> s b where
-    timeoutH :: Lens' a (TF.Attribute s b)
-
-instance HasTimeoutH a s b => HasTimeoutH (TF.Resource p a) s b where
-    timeoutH = TF.configuration . timeoutH
-
-class HasTitle a s b | a -> s b where
-    title :: Lens' a (TF.Attribute s b)
-
-instance HasTitle a s b => HasTitle (TF.Resource p a) s b where
-    title = TF.configuration . title
-
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
-
-instance HasType' a s b => HasType' (TF.Resource p a) s b where
-    type' = TF.configuration . type'
-
-class HasUnit a s b | a -> s b where
-    unit :: Lens' a (TF.Attribute s b)
-
-instance HasUnit a s b => HasUnit (TF.Resource p a) s b where
-    unit = TF.configuration . unit
-
-class HasComputedDisabled a b | a -> b where
-    computedDisabled
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedDisabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "disabled")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
-
-class HasComputedVerified a b | a -> b where
-    computedVerified
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
-    computedVerified =
-        to (\x -> TF.Computed (TF.referenceKey x) "verified")

@@ -6,17 +6,14 @@
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
-{-# LANGUAGE PolyKinds              #-}
-{-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
 -- Module      : Terrafomo.LogicMonitor.DataSource
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -33,34 +30,36 @@ module Terrafomo.LogicMonitor.DataSource
 
     -- * Overloaded Fields
     -- ** Arguments
-    , HasFilters (..)
-    , HasMostRecent (..)
-    , HasOffset (..)
-    , HasSize (..)
+    , P.HasFilters (..)
+    , P.HasMostRecent (..)
+    , P.HasOffset (..)
+    , P.HasSize (..)
 
     -- ** Computed Attributes
+
+    -- * Re-exported Types
+    , module P
     ) where
 
 import Data.Maybe (catMaybes)
 import Data.Text  (Text)
 
-import GHC.Base (Eq, ($), (.))
+import GHC.Base (Eq, ($))
 import GHC.Show (Show)
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (lens)
 
-import qualified Data.Word                       as TF
-import qualified GHC.Base                        as TF
-import qualified Numeric.Natural                 as TF
-import qualified Terrafomo.Attribute             as TF
-import qualified Terrafomo.DataSource            as TF
-import qualified Terrafomo.HCL                   as TF
-import qualified Terrafomo.IP                    as TF
-import qualified Terrafomo.LogicMonitor.Provider as TF
-import qualified Terrafomo.LogicMonitor.Types    as TF
-import qualified Terrafomo.Meta                  as TF
-import qualified Terrafomo.Name                  as TF
-import qualified Terrafomo.Resource              as TF
+import qualified Data.Word                       as P
+import qualified GHC.Base                        as P
+import qualified Numeric.Natural                 as P
+import qualified Terrafomo.IP                    as P
+import qualified Terrafomo.LogicMonitor.Lens     as P
+import qualified Terrafomo.LogicMonitor.Provider as P
+import           Terrafomo.LogicMonitor.Types    as P
+
+import qualified Terrafomo.Attribute  as TF
+import qualified Terrafomo.DataSource as TF
+import qualified Terrafomo.HCL        as TF
 
 {- | The @logicmonitor_collectors@ LogicMonitor datasource.
 
@@ -85,27 +84,27 @@ instance TF.ToHCL (CollectorsData s) where
         , TF.attribute "size" _size
         ]
 
-instance HasFilters (CollectorsData s) s Text where
+instance P.HasFilters (CollectorsData s) s Text where
     filters =
         lens (_filters :: CollectorsData s -> TF.Attribute s Text)
             (\s a -> s { _filters = a } :: CollectorsData s)
 
-instance HasMostRecent (CollectorsData s) s Text where
+instance P.HasMostRecent (CollectorsData s) s Text where
     mostRecent =
         lens (_most_recent :: CollectorsData s -> TF.Attribute s Text)
             (\s a -> s { _most_recent = a } :: CollectorsData s)
 
-instance HasOffset (CollectorsData s) s Text where
+instance P.HasOffset (CollectorsData s) s Text where
     offset =
         lens (_offset :: CollectorsData s -> TF.Attribute s Text)
             (\s a -> s { _offset = a } :: CollectorsData s)
 
-instance HasSize (CollectorsData s) s Text where
+instance P.HasSize (CollectorsData s) s Text where
     size =
         lens (_size :: CollectorsData s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: CollectorsData s)
 
-collectorsData :: TF.DataSource TF.LogicMonitor (CollectorsData s)
+collectorsData :: TF.DataSource P.LogicMonitor (CollectorsData s)
 collectorsData =
     TF.newDataSource "logicmonitor_collectors" $
         CollectorsData {
@@ -135,22 +134,22 @@ instance TF.ToHCL (DeviceGroupData s) where
         , TF.attribute "size" _size
         ]
 
-instance HasFilters (DeviceGroupData s) s Text where
+instance P.HasFilters (DeviceGroupData s) s Text where
     filters =
         lens (_filters :: DeviceGroupData s -> TF.Attribute s Text)
             (\s a -> s { _filters = a } :: DeviceGroupData s)
 
-instance HasOffset (DeviceGroupData s) s Text where
+instance P.HasOffset (DeviceGroupData s) s Text where
     offset =
         lens (_offset :: DeviceGroupData s -> TF.Attribute s Text)
             (\s a -> s { _offset = a } :: DeviceGroupData s)
 
-instance HasSize (DeviceGroupData s) s Text where
+instance P.HasSize (DeviceGroupData s) s Text where
     size =
         lens (_size :: DeviceGroupData s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: DeviceGroupData s)
 
-deviceGroupData :: TF.DataSource TF.LogicMonitor (DeviceGroupData s)
+deviceGroupData :: TF.DataSource P.LogicMonitor (DeviceGroupData s)
 deviceGroupData =
     TF.newDataSource "logicmonitor_device_group" $
         DeviceGroupData {
@@ -158,27 +157,3 @@ deviceGroupData =
             , _offset = TF.Nil
             , _size = TF.Nil
             }
-
-class HasFilters a s b | a -> s b where
-    filters :: Lens' a (TF.Attribute s b)
-
-instance HasFilters a s b => HasFilters (TF.DataSource p a) s b where
-    filters = TF.configuration . filters
-
-class HasMostRecent a s b | a -> s b where
-    mostRecent :: Lens' a (TF.Attribute s b)
-
-instance HasMostRecent a s b => HasMostRecent (TF.DataSource p a) s b where
-    mostRecent = TF.configuration . mostRecent
-
-class HasOffset a s b | a -> s b where
-    offset :: Lens' a (TF.Attribute s b)
-
-instance HasOffset a s b => HasOffset (TF.DataSource p a) s b where
-    offset = TF.configuration . offset
-
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attribute s b)
-
-instance HasSize a s b => HasSize (TF.DataSource p a) s b where
-    size = TF.configuration . size
