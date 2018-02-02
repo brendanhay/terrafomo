@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -57,11 +56,14 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                as TF
+import qualified GHC.Base                 as TF
+import qualified Numeric.Natural          as TF
 import qualified Terrafomo.Attribute      as TF
 import qualified Terrafomo.DataSource     as TF
 import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.IP             as TF
-import qualified Terrafomo.Meta           as TF (configuration)
+import qualified Terrafomo.Meta           as TF
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Resource       as TF
 import qualified Terrafomo.Vault.Provider as TF
@@ -77,69 +79,49 @@ resource attributes. Protect these artifacts accordingly. See
 <../index.html> for more details.
 -}
 data AwsAccessCredentialsDataSource s = AwsAccessCredentialsDataSource {
-      _backend :: !(TF.Attribute s "backend" Text)
+      _backend :: !(TF.Attribute s Text)
     {- ^ (Required) The path to the AWS secret backend to read credentials from, with no leading or trailing @/@ s. -}
-    , _role    :: !(TF.Attribute s "role" Text)
+    , _role    :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the AWS secret backend role to read credentials from, with no leading or trailing @/@ s. -}
-    , _type'   :: !(TF.Attribute s "type" Text)
+    , _type'   :: !(TF.Attribute s Text)
     {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AwsAccessCredentialsDataSource s) where
     toHCL AwsAccessCredentialsDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _backend
-        , TF.attribute _role
-        , TF.attribute _type'
+        [ TF.attribute "backend" _backend
+        , TF.attribute "role" _role
+        , TF.attribute "type" _type'
         ]
 
-instance HasBackend (AwsAccessCredentialsDataSource s) Text where
-    type HasBackendThread (AwsAccessCredentialsDataSource s) Text = s
-
+instance HasBackend (AwsAccessCredentialsDataSource s) s Text where
     backend =
-        lens (_backend :: AwsAccessCredentialsDataSource s -> TF.Attribute s "backend" Text)
-             (\s a -> s { _backend = a } :: AwsAccessCredentialsDataSource s)
+        lens (_backend :: AwsAccessCredentialsDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _backend = a } :: AwsAccessCredentialsDataSource s)
 
-instance HasRole (AwsAccessCredentialsDataSource s) Text where
-    type HasRoleThread (AwsAccessCredentialsDataSource s) Text = s
-
+instance HasRole (AwsAccessCredentialsDataSource s) s Text where
     role =
-        lens (_role :: AwsAccessCredentialsDataSource s -> TF.Attribute s "role" Text)
-             (\s a -> s { _role = a } :: AwsAccessCredentialsDataSource s)
+        lens (_role :: AwsAccessCredentialsDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _role = a } :: AwsAccessCredentialsDataSource s)
 
-instance HasType' (AwsAccessCredentialsDataSource s) Text where
-    type HasType'Thread (AwsAccessCredentialsDataSource s) Text = s
-
+instance HasType' (AwsAccessCredentialsDataSource s) s Text where
     type' =
-        lens (_type' :: AwsAccessCredentialsDataSource s -> TF.Attribute s "type" Text)
-             (\s a -> s { _type' = a } :: AwsAccessCredentialsDataSource s)
+        lens (_type' :: AwsAccessCredentialsDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _type' = a } :: AwsAccessCredentialsDataSource s)
 
-instance HasComputedAccessKey (AwsAccessCredentialsDataSource s) Text where
-    computedAccessKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "access_key")
+instance HasComputedAccessKey (AwsAccessCredentialsDataSource s) Text
 
-instance HasComputedLeaseDuration (AwsAccessCredentialsDataSource s) Text where
-    computedLeaseDuration =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_duration")
+instance HasComputedLeaseDuration (AwsAccessCredentialsDataSource s) Text
 
-instance HasComputedLeaseId (AwsAccessCredentialsDataSource s) Text where
-    computedLeaseId =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_id")
+instance HasComputedLeaseId (AwsAccessCredentialsDataSource s) Text
 
-instance HasComputedLeaseRenewable (AwsAccessCredentialsDataSource s) Text where
-    computedLeaseRenewable =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_renewable")
+instance HasComputedLeaseRenewable (AwsAccessCredentialsDataSource s) Text
 
-instance HasComputedLeaseStartTime (AwsAccessCredentialsDataSource s) Text where
-    computedLeaseStartTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_start_time")
+instance HasComputedLeaseStartTime (AwsAccessCredentialsDataSource s) Text
 
-instance HasComputedSecretKey (AwsAccessCredentialsDataSource s) Text where
-    computedSecretKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secret_key")
+instance HasComputedSecretKey (AwsAccessCredentialsDataSource s) Text
 
-instance HasComputedSecurityToken (AwsAccessCredentialsDataSource s) Text where
-    computedSecurityToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_token")
+instance HasComputedSecurityToken (AwsAccessCredentialsDataSource s) Text
 
 awsAccessCredentialsDataSource :: TF.DataSource TF.Vault (AwsAccessCredentialsDataSource s)
 awsAccessCredentialsDataSource =
@@ -163,21 +145,19 @@ interpolated into any resource attributes. Protect these artifacts
 accordingly. See <../index.html> for more details.
 -}
 data GenericSecretDataSource s = GenericSecretDataSource {
-      _path :: !(TF.Attribute s "path" Text)
+      _path :: !(TF.Attribute s Text)
     {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (GenericSecretDataSource s) where
     toHCL GenericSecretDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _path
+        [ TF.attribute "path" _path
         ]
 
-instance HasPath (GenericSecretDataSource s) Text where
-    type HasPathThread (GenericSecretDataSource s) Text = s
-
+instance HasPath (GenericSecretDataSource s) s Text where
     path =
-        lens (_path :: GenericSecretDataSource s -> TF.Attribute s "path" Text)
-             (\s a -> s { _path = a } :: GenericSecretDataSource s)
+        lens (_path :: GenericSecretDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _path = a } :: GenericSecretDataSource s)
 
 genericSecretDataSource :: TF.DataSource TF.Vault (GenericSecretDataSource s)
 genericSecretDataSource =
@@ -186,67 +166,68 @@ genericSecretDataSource =
               _path = TF.Nil
             }
 
-class HasBackend a b | a -> b where
-    type HasBackendThread a b :: *
+class HasBackend a s b | a -> s b where
+    backend :: Lens' a (TF.Attribute s b)
 
-    backend :: Lens' a (TF.Attribute (HasBackendThread a b) "backend" b)
-
-instance HasBackend a b => HasBackend (TF.DataSource p a) b where
-    type HasBackendThread (TF.DataSource p a) b =
-         HasBackendThread a b
-
+instance HasBackend a s b => HasBackend (TF.DataSource p a) s b where
     backend = TF.configuration . backend
 
-class HasPath a b | a -> b where
-    type HasPathThread a b :: *
+class HasPath a s b | a -> s b where
+    path :: Lens' a (TF.Attribute s b)
 
-    path :: Lens' a (TF.Attribute (HasPathThread a b) "path" b)
-
-instance HasPath a b => HasPath (TF.DataSource p a) b where
-    type HasPathThread (TF.DataSource p a) b =
-         HasPathThread a b
-
+instance HasPath a s b => HasPath (TF.DataSource p a) s b where
     path = TF.configuration . path
 
-class HasRole a b | a -> b where
-    type HasRoleThread a b :: *
+class HasRole a s b | a -> s b where
+    role :: Lens' a (TF.Attribute s b)
 
-    role :: Lens' a (TF.Attribute (HasRoleThread a b) "role" b)
-
-instance HasRole a b => HasRole (TF.DataSource p a) b where
-    type HasRoleThread (TF.DataSource p a) b =
-         HasRoleThread a b
-
+instance HasRole a s b => HasRole (TF.DataSource p a) s b where
     role = TF.configuration . role
 
-class HasType' a b | a -> b where
-    type HasType'Thread a b :: *
+class HasType' a s b | a -> s b where
+    type' :: Lens' a (TF.Attribute s b)
 
-    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
-
-instance HasType' a b => HasType' (TF.DataSource p a) b where
-    type HasType'Thread (TF.DataSource p a) b =
-         HasType'Thread a b
-
+instance HasType' a s b => HasType' (TF.DataSource p a) s b where
     type' = TF.configuration . type'
 
 class HasComputedAccessKey a b | a -> b where
-    computedAccessKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedAccessKey
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAccessKey =
+        to (\x -> TF.Computed (TF.referenceKey x) "access_key")
 
 class HasComputedLeaseDuration a b | a -> b where
-    computedLeaseDuration :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedLeaseDuration
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedLeaseDuration =
+        to (\x -> TF.Computed (TF.referenceKey x) "lease_duration")
 
 class HasComputedLeaseId a b | a -> b where
-    computedLeaseId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedLeaseId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedLeaseId =
+        to (\x -> TF.Computed (TF.referenceKey x) "lease_id")
 
 class HasComputedLeaseRenewable a b | a -> b where
-    computedLeaseRenewable :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedLeaseRenewable
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedLeaseRenewable =
+        to (\x -> TF.Computed (TF.referenceKey x) "lease_renewable")
 
 class HasComputedLeaseStartTime a b | a -> b where
-    computedLeaseStartTime :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedLeaseStartTime
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedLeaseStartTime =
+        to (\x -> TF.Computed (TF.referenceKey x) "lease_start_time")
 
 class HasComputedSecretKey a b | a -> b where
-    computedSecretKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedSecretKey
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSecretKey =
+        to (\x -> TF.Computed (TF.referenceKey x) "secret_key")
 
 class HasComputedSecurityToken a b | a -> b where
-    computedSecurityToken :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedSecurityToken
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSecurityToken =
+        to (\x -> TF.Computed (TF.referenceKey x) "security_token")

@@ -1,0 +1,3 @@
+arguments:
+  _setting:
+    type: '(TF.BeanstalkEnvSettings s)'

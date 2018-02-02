@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -117,13 +116,16 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                   as TF
+import qualified GHC.Base                    as TF
+import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.DataSource        as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.Ignition.Provider as TF
 import qualified Terrafomo.Ignition.Types    as TF
 import qualified Terrafomo.IP                as TF
-import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Meta              as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Resource          as TF
 
@@ -133,135 +135,109 @@ Renders an ignition configuration as JSON. It  contains all the disks,
 partitions, arrays, filesystems, files, users, groups and units.
 -}
 data ConfigDataSource s = ConfigDataSource {
-      _append      :: !(TF.Attribute s "append" Text)
+      _append      :: !(TF.Attribute s Text)
     {- ^ (Optional) Any number of blocks with the configs to be appended to the current config. -}
-    , _arrays      :: !(TF.Attribute s "arrays" Text)
+    , _arrays      :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of RAID arrays to be configured. -}
-    , _directories :: !(TF.Attribute s "directories" Text)
+    , _directories :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of directories to be created. -}
-    , _disks       :: !(TF.Attribute s "disks" Text)
+    , _disks       :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of disks to be configured and their options. -}
-    , _files       :: !(TF.Attribute s "files" Text)
+    , _files       :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of files to be written. -}
-    , _filesystems :: !(TF.Attribute s "filesystems" Text)
+    , _filesystems :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of filesystems to be configured and/or used in the @ignition_file@ , @ignition_directory@ , and @ignition_link@ resources. -}
-    , _groups      :: !(TF.Attribute s "groups" Text)
+    , _groups      :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of groups to be added. -}
-    , _links       :: !(TF.Attribute s "links" Text)
+    , _links       :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of links to be created. -}
-    , _networkd    :: !(TF.Attribute s "networkd" Text)
+    , _networkd    :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of networkd units. Describes the desired state of the networkd files. -}
-    , _replace     :: !(TF.Attribute s "replace" Text)
+    , _replace     :: !(TF.Attribute s Text)
     {- ^ (Optional) A block with config that will replace the current. -}
-    , _systemd     :: !(TF.Attribute s "systemd" Text)
+    , _systemd     :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of systemd units. Describes the desired state of the systemd units. -}
-    , _users       :: !(TF.Attribute s "users" Text)
+    , _users       :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of accounts to be added. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ConfigDataSource s) where
     toHCL ConfigDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _append
-        , TF.attribute _arrays
-        , TF.attribute _directories
-        , TF.attribute _disks
-        , TF.attribute _files
-        , TF.attribute _filesystems
-        , TF.attribute _groups
-        , TF.attribute _links
-        , TF.attribute _networkd
-        , TF.attribute _replace
-        , TF.attribute _systemd
-        , TF.attribute _users
+        [ TF.attribute "append" _append
+        , TF.attribute "arrays" _arrays
+        , TF.attribute "directories" _directories
+        , TF.attribute "disks" _disks
+        , TF.attribute "files" _files
+        , TF.attribute "filesystems" _filesystems
+        , TF.attribute "groups" _groups
+        , TF.attribute "links" _links
+        , TF.attribute "networkd" _networkd
+        , TF.attribute "replace" _replace
+        , TF.attribute "systemd" _systemd
+        , TF.attribute "users" _users
         ]
 
-instance HasAppend (ConfigDataSource s) Text where
-    type HasAppendThread (ConfigDataSource s) Text = s
-
+instance HasAppend (ConfigDataSource s) s Text where
     append =
-        lens (_append :: ConfigDataSource s -> TF.Attribute s "append" Text)
-             (\s a -> s { _append = a } :: ConfigDataSource s)
+        lens (_append :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _append = a } :: ConfigDataSource s)
 
-instance HasArrays (ConfigDataSource s) Text where
-    type HasArraysThread (ConfigDataSource s) Text = s
-
+instance HasArrays (ConfigDataSource s) s Text where
     arrays =
-        lens (_arrays :: ConfigDataSource s -> TF.Attribute s "arrays" Text)
-             (\s a -> s { _arrays = a } :: ConfigDataSource s)
+        lens (_arrays :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _arrays = a } :: ConfigDataSource s)
 
-instance HasDirectories (ConfigDataSource s) Text where
-    type HasDirectoriesThread (ConfigDataSource s) Text = s
-
+instance HasDirectories (ConfigDataSource s) s Text where
     directories =
-        lens (_directories :: ConfigDataSource s -> TF.Attribute s "directories" Text)
-             (\s a -> s { _directories = a } :: ConfigDataSource s)
+        lens (_directories :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _directories = a } :: ConfigDataSource s)
 
-instance HasDisks (ConfigDataSource s) Text where
-    type HasDisksThread (ConfigDataSource s) Text = s
-
+instance HasDisks (ConfigDataSource s) s Text where
     disks =
-        lens (_disks :: ConfigDataSource s -> TF.Attribute s "disks" Text)
-             (\s a -> s { _disks = a } :: ConfigDataSource s)
+        lens (_disks :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _disks = a } :: ConfigDataSource s)
 
-instance HasFiles (ConfigDataSource s) Text where
-    type HasFilesThread (ConfigDataSource s) Text = s
-
+instance HasFiles (ConfigDataSource s) s Text where
     files =
-        lens (_files :: ConfigDataSource s -> TF.Attribute s "files" Text)
-             (\s a -> s { _files = a } :: ConfigDataSource s)
+        lens (_files :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _files = a } :: ConfigDataSource s)
 
-instance HasFilesystems (ConfigDataSource s) Text where
-    type HasFilesystemsThread (ConfigDataSource s) Text = s
-
+instance HasFilesystems (ConfigDataSource s) s Text where
     filesystems =
-        lens (_filesystems :: ConfigDataSource s -> TF.Attribute s "filesystems" Text)
-             (\s a -> s { _filesystems = a } :: ConfigDataSource s)
+        lens (_filesystems :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _filesystems = a } :: ConfigDataSource s)
 
-instance HasGroups (ConfigDataSource s) Text where
-    type HasGroupsThread (ConfigDataSource s) Text = s
-
+instance HasGroups (ConfigDataSource s) s Text where
     groups =
-        lens (_groups :: ConfigDataSource s -> TF.Attribute s "groups" Text)
-             (\s a -> s { _groups = a } :: ConfigDataSource s)
+        lens (_groups :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _groups = a } :: ConfigDataSource s)
 
-instance HasLinks (ConfigDataSource s) Text where
-    type HasLinksThread (ConfigDataSource s) Text = s
-
+instance HasLinks (ConfigDataSource s) s Text where
     links =
-        lens (_links :: ConfigDataSource s -> TF.Attribute s "links" Text)
-             (\s a -> s { _links = a } :: ConfigDataSource s)
+        lens (_links :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _links = a } :: ConfigDataSource s)
 
-instance HasNetworkd (ConfigDataSource s) Text where
-    type HasNetworkdThread (ConfigDataSource s) Text = s
-
+instance HasNetworkd (ConfigDataSource s) s Text where
     networkd =
-        lens (_networkd :: ConfigDataSource s -> TF.Attribute s "networkd" Text)
-             (\s a -> s { _networkd = a } :: ConfigDataSource s)
+        lens (_networkd :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _networkd = a } :: ConfigDataSource s)
 
-instance HasReplace (ConfigDataSource s) Text where
-    type HasReplaceThread (ConfigDataSource s) Text = s
-
+instance HasReplace (ConfigDataSource s) s Text where
     replace =
-        lens (_replace :: ConfigDataSource s -> TF.Attribute s "replace" Text)
-             (\s a -> s { _replace = a } :: ConfigDataSource s)
+        lens (_replace :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _replace = a } :: ConfigDataSource s)
 
-instance HasSystemd (ConfigDataSource s) Text where
-    type HasSystemdThread (ConfigDataSource s) Text = s
-
+instance HasSystemd (ConfigDataSource s) s Text where
     systemd =
-        lens (_systemd :: ConfigDataSource s -> TF.Attribute s "systemd" Text)
-             (\s a -> s { _systemd = a } :: ConfigDataSource s)
+        lens (_systemd :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _systemd = a } :: ConfigDataSource s)
 
-instance HasUsers (ConfigDataSource s) Text where
-    type HasUsersThread (ConfigDataSource s) Text = s
-
+instance HasUsers (ConfigDataSource s) s Text where
     users =
-        lens (_users :: ConfigDataSource s -> TF.Attribute s "users" Text)
-             (\s a -> s { _users = a } :: ConfigDataSource s)
+        lens (_users :: ConfigDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _users = a } :: ConfigDataSource s)
 
-instance HasComputedRendered (ConfigDataSource s) Text where
-    computedRendered =
-        to (\x -> TF.Computed (TF.referenceKey x) "rendered")
+instance HasComputedRendered (ConfigDataSource s) Text
 
 configDataSource :: TF.DataSource TF.Ignition (ConfigDataSource s)
 configDataSource =
@@ -286,65 +262,53 @@ configDataSource =
 Describes a directory to be created in a particular filesystem.
 -}
 data DirectoryDataSource s = DirectoryDataSource {
-      _filesystem :: !(TF.Attribute s "filesystem" Text)
+      _filesystem :: !(TF.Attribute s Text)
     {- ^ (Required) The internal identifier of the filesystem. This matches the last filesystem with the given identifier. This should be a valid name from a ignition_filesystem resource. -}
-    , _gid        :: !(TF.Attribute s "gid" Text)
+    , _gid        :: !(TF.Attribute s Text)
     {- ^ (Optional) The group ID of the owner. -}
-    , _mode       :: !(TF.Attribute s "mode" Text)
+    , _mode       :: !(TF.Attribute s Text)
     {- ^ (Optional) The directory's permission mode. Note that the mode must be properly specified as a decimal value (i.e. 0755 -> 493). -}
-    , _path       :: !(TF.Attribute s "path" Text)
+    , _path       :: !(TF.Attribute s Text)
     {- ^ (Required) The absolute path to the directory. -}
-    , _uid        :: !(TF.Attribute s "uid" Text)
+    , _uid        :: !(TF.Attribute s Text)
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DirectoryDataSource s) where
     toHCL DirectoryDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _filesystem
-        , TF.attribute _gid
-        , TF.attribute _mode
-        , TF.attribute _path
-        , TF.attribute _uid
+        [ TF.attribute "filesystem" _filesystem
+        , TF.attribute "gid" _gid
+        , TF.attribute "mode" _mode
+        , TF.attribute "path" _path
+        , TF.attribute "uid" _uid
         ]
 
-instance HasFilesystem (DirectoryDataSource s) Text where
-    type HasFilesystemThread (DirectoryDataSource s) Text = s
-
+instance HasFilesystem (DirectoryDataSource s) s Text where
     filesystem =
-        lens (_filesystem :: DirectoryDataSource s -> TF.Attribute s "filesystem" Text)
-             (\s a -> s { _filesystem = a } :: DirectoryDataSource s)
+        lens (_filesystem :: DirectoryDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _filesystem = a } :: DirectoryDataSource s)
 
-instance HasGid (DirectoryDataSource s) Text where
-    type HasGidThread (DirectoryDataSource s) Text = s
-
+instance HasGid (DirectoryDataSource s) s Text where
     gid =
-        lens (_gid :: DirectoryDataSource s -> TF.Attribute s "gid" Text)
-             (\s a -> s { _gid = a } :: DirectoryDataSource s)
+        lens (_gid :: DirectoryDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _gid = a } :: DirectoryDataSource s)
 
-instance HasMode (DirectoryDataSource s) Text where
-    type HasModeThread (DirectoryDataSource s) Text = s
-
+instance HasMode (DirectoryDataSource s) s Text where
     mode =
-        lens (_mode :: DirectoryDataSource s -> TF.Attribute s "mode" Text)
-             (\s a -> s { _mode = a } :: DirectoryDataSource s)
+        lens (_mode :: DirectoryDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _mode = a } :: DirectoryDataSource s)
 
-instance HasPath (DirectoryDataSource s) Text where
-    type HasPathThread (DirectoryDataSource s) Text = s
-
+instance HasPath (DirectoryDataSource s) s Text where
     path =
-        lens (_path :: DirectoryDataSource s -> TF.Attribute s "path" Text)
-             (\s a -> s { _path = a } :: DirectoryDataSource s)
+        lens (_path :: DirectoryDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _path = a } :: DirectoryDataSource s)
 
-instance HasUid (DirectoryDataSource s) Text where
-    type HasUidThread (DirectoryDataSource s) Text = s
-
+instance HasUid (DirectoryDataSource s) s Text where
     uid =
-        lens (_uid :: DirectoryDataSource s -> TF.Attribute s "uid" Text)
-             (\s a -> s { _uid = a } :: DirectoryDataSource s)
+        lens (_uid :: DirectoryDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _uid = a } :: DirectoryDataSource s)
 
-instance HasComputedId (DirectoryDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (DirectoryDataSource s) Text
 
 directoryDataSource :: TF.DataSource TF.Ignition (DirectoryDataSource s)
 directoryDataSource =
@@ -362,45 +326,37 @@ directoryDataSource =
 Describes the desired state of a system’s disk.
 -}
 data DiskDataSource s = DiskDataSource {
-      _device     :: !(TF.Attribute s "device" Text)
+      _device     :: !(TF.Attribute s Text)
     {- ^ (Required) The absolute path to the device. Devices are typically referenced by the /dev/disk/by-* symlinks. -}
-    , _partition  :: !(TF.Attribute s "partition" Text)
+    , _partition  :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of partitions and their configuration for this particular disk.. -}
-    , _wipe_table :: !(TF.Attribute s "wipe_table" Text)
+    , _wipe_table :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether or not the partition tables shall be wiped. When true, the partition tables are erased before any further manipulation. Otherwise, the existing entries are left intact. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DiskDataSource s) where
     toHCL DiskDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _device
-        , TF.attribute _partition
-        , TF.attribute _wipe_table
+        [ TF.attribute "device" _device
+        , TF.attribute "partition" _partition
+        , TF.attribute "wipe_table" _wipe_table
         ]
 
-instance HasDevice (DiskDataSource s) Text where
-    type HasDeviceThread (DiskDataSource s) Text = s
-
+instance HasDevice (DiskDataSource s) s Text where
     device =
-        lens (_device :: DiskDataSource s -> TF.Attribute s "device" Text)
-             (\s a -> s { _device = a } :: DiskDataSource s)
+        lens (_device :: DiskDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _device = a } :: DiskDataSource s)
 
-instance HasPartition (DiskDataSource s) Text where
-    type HasPartitionThread (DiskDataSource s) Text = s
-
+instance HasPartition (DiskDataSource s) s Text where
     partition =
-        lens (_partition :: DiskDataSource s -> TF.Attribute s "partition" Text)
-             (\s a -> s { _partition = a } :: DiskDataSource s)
+        lens (_partition :: DiskDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _partition = a } :: DiskDataSource s)
 
-instance HasWipeTable (DiskDataSource s) Text where
-    type HasWipeTableThread (DiskDataSource s) Text = s
-
+instance HasWipeTable (DiskDataSource s) s Text where
     wipeTable =
-        lens (_wipe_table :: DiskDataSource s -> TF.Attribute s "wipe_table" Text)
-             (\s a -> s { _wipe_table = a } :: DiskDataSource s)
+        lens (_wipe_table :: DiskDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _wipe_table = a } :: DiskDataSource s)
 
-instance HasComputedId (DiskDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (DiskDataSource s) Text
 
 diskDataSource :: TF.DataSource TF.Ignition (DiskDataSource s)
 diskDataSource =
@@ -416,85 +372,69 @@ diskDataSource =
 Describes a file to be written in a particular filesystem.
 -}
 data FileDataSource s = FileDataSource {
-      _content    :: !(TF.Attribute s "content" Text)
+      _content    :: !(TF.Attribute s Text)
     {- ^ (Optional) Block to provide the file content inline. -}
-    , _filesystem :: !(TF.Attribute s "filesystem" Text)
+    , _filesystem :: !(TF.Attribute s Text)
     {- ^ (Required) The internal identifier of the filesystem. This matches the last filesystem with the given identifier. This should be a valid name from a ignition_filesystem resource. -}
-    , _gid        :: !(TF.Attribute s "gid" Text)
+    , _gid        :: !(TF.Attribute s Text)
     {- ^ (Optional) The group ID of the owner. -}
-    , _mode       :: !(TF.Attribute s "mode" Text)
+    , _mode       :: !(TF.Attribute s Text)
     {- ^ (Optional) The file's permission mode. The mode must be properly specified as a decimal value (i.e. 0644 -> 420). -}
-    , _path       :: !(TF.Attribute s "path" Text)
+    , _path       :: !(TF.Attribute s Text)
     {- ^ (Required) The absolute path to the file. -}
-    , _source     :: !(TF.Attribute s "source" Text)
+    , _source     :: !(TF.Attribute s Text)
     {- ^ (Optional) Block to retrieve the file content from a remote location. -}
-    , _uid        :: !(TF.Attribute s "uid" Text)
+    , _uid        :: !(TF.Attribute s Text)
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FileDataSource s) where
     toHCL FileDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _content
-        , TF.attribute _filesystem
-        , TF.attribute _gid
-        , TF.attribute _mode
-        , TF.attribute _path
-        , TF.attribute _source
-        , TF.attribute _uid
+        [ TF.attribute "content" _content
+        , TF.attribute "filesystem" _filesystem
+        , TF.attribute "gid" _gid
+        , TF.attribute "mode" _mode
+        , TF.attribute "path" _path
+        , TF.attribute "source" _source
+        , TF.attribute "uid" _uid
         ]
 
-instance HasContent (FileDataSource s) Text where
-    type HasContentThread (FileDataSource s) Text = s
-
+instance HasContent (FileDataSource s) s Text where
     content =
-        lens (_content :: FileDataSource s -> TF.Attribute s "content" Text)
-             (\s a -> s { _content = a } :: FileDataSource s)
+        lens (_content :: FileDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _content = a } :: FileDataSource s)
 
-instance HasFilesystem (FileDataSource s) Text where
-    type HasFilesystemThread (FileDataSource s) Text = s
-
+instance HasFilesystem (FileDataSource s) s Text where
     filesystem =
-        lens (_filesystem :: FileDataSource s -> TF.Attribute s "filesystem" Text)
-             (\s a -> s { _filesystem = a } :: FileDataSource s)
+        lens (_filesystem :: FileDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _filesystem = a } :: FileDataSource s)
 
-instance HasGid (FileDataSource s) Text where
-    type HasGidThread (FileDataSource s) Text = s
-
+instance HasGid (FileDataSource s) s Text where
     gid =
-        lens (_gid :: FileDataSource s -> TF.Attribute s "gid" Text)
-             (\s a -> s { _gid = a } :: FileDataSource s)
+        lens (_gid :: FileDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _gid = a } :: FileDataSource s)
 
-instance HasMode (FileDataSource s) Text where
-    type HasModeThread (FileDataSource s) Text = s
-
+instance HasMode (FileDataSource s) s Text where
     mode =
-        lens (_mode :: FileDataSource s -> TF.Attribute s "mode" Text)
-             (\s a -> s { _mode = a } :: FileDataSource s)
+        lens (_mode :: FileDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _mode = a } :: FileDataSource s)
 
-instance HasPath (FileDataSource s) Text where
-    type HasPathThread (FileDataSource s) Text = s
-
+instance HasPath (FileDataSource s) s Text where
     path =
-        lens (_path :: FileDataSource s -> TF.Attribute s "path" Text)
-             (\s a -> s { _path = a } :: FileDataSource s)
+        lens (_path :: FileDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _path = a } :: FileDataSource s)
 
-instance HasSource (FileDataSource s) Text where
-    type HasSourceThread (FileDataSource s) Text = s
-
+instance HasSource (FileDataSource s) s Text where
     source =
-        lens (_source :: FileDataSource s -> TF.Attribute s "source" Text)
-             (\s a -> s { _source = a } :: FileDataSource s)
+        lens (_source :: FileDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _source = a } :: FileDataSource s)
 
-instance HasUid (FileDataSource s) Text where
-    type HasUidThread (FileDataSource s) Text = s
-
+instance HasUid (FileDataSource s) s Text where
     uid =
-        lens (_uid :: FileDataSource s -> TF.Attribute s "uid" Text)
-             (\s a -> s { _uid = a } :: FileDataSource s)
+        lens (_uid :: FileDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _uid = a } :: FileDataSource s)
 
-instance HasComputedId (FileDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (FileDataSource s) Text
 
 fileDataSource :: TF.DataSource TF.Ignition (FileDataSource s)
 fileDataSource =
@@ -515,45 +455,37 @@ Describes the desired state of a the system’s filesystems to be configured
 and/or used with the ignition_file resource.
 -}
 data FilesystemDataSource s = FilesystemDataSource {
-      _mount :: !(TF.Attribute s "mount" Text)
+      _mount :: !(TF.Attribute s Text)
     {- ^ (Optional) Contains the set of mount and formatting options for the filesystem. A non-null entry indicates that the filesystem should be mounted before it is used by Ignition. -}
-    , _name  :: !(TF.Attribute s "name" Text)
+    , _name  :: !(TF.Attribute s Text)
     {- ^ (Optional) The identifier for the filesystem, internal to Ignition. This is only required if the filesystem needs to be referenced in the a ignition_files resource. -}
-    , _path  :: !(TF.Attribute s "path" Text)
+    , _path  :: !(TF.Attribute s Text)
     {- ^ (Optional) The mount-point of the filesystem. A non-null entry indicates that the filesystem has already been mounted by the system at the specified path. This is really only useful for /sysroot . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FilesystemDataSource s) where
     toHCL FilesystemDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _mount
-        , TF.attribute _name
-        , TF.attribute _path
+        [ TF.attribute "mount" _mount
+        , TF.attribute "name" _name
+        , TF.attribute "path" _path
         ]
 
-instance HasMount (FilesystemDataSource s) Text where
-    type HasMountThread (FilesystemDataSource s) Text = s
-
+instance HasMount (FilesystemDataSource s) s Text where
     mount =
-        lens (_mount :: FilesystemDataSource s -> TF.Attribute s "mount" Text)
-             (\s a -> s { _mount = a } :: FilesystemDataSource s)
+        lens (_mount :: FilesystemDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _mount = a } :: FilesystemDataSource s)
 
-instance HasName (FilesystemDataSource s) Text where
-    type HasNameThread (FilesystemDataSource s) Text = s
-
+instance HasName (FilesystemDataSource s) s Text where
     name =
-        lens (_name :: FilesystemDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: FilesystemDataSource s)
+        lens (_name :: FilesystemDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: FilesystemDataSource s)
 
-instance HasPath (FilesystemDataSource s) Text where
-    type HasPathThread (FilesystemDataSource s) Text = s
-
+instance HasPath (FilesystemDataSource s) s Text where
     path =
-        lens (_path :: FilesystemDataSource s -> TF.Attribute s "path" Text)
-             (\s a -> s { _path = a } :: FilesystemDataSource s)
+        lens (_path :: FilesystemDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _path = a } :: FilesystemDataSource s)
 
-instance HasComputedId (FilesystemDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (FilesystemDataSource s) Text
 
 filesystemDataSource :: TF.DataSource TF.Ignition (FilesystemDataSource s)
 filesystemDataSource =
@@ -569,45 +501,37 @@ filesystemDataSource =
 Describes the desired group additions to the passwd database.
 -}
 data GroupDataSource s = GroupDataSource {
-      _gid           :: !(TF.Attribute s "gid" Text)
+      _gid           :: !(TF.Attribute s Text)
     {- ^ (Optional) The group ID of the new account. -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name          :: !(TF.Attribute s Text)
     {- ^ (Required) The groupname for the account. -}
-    , _password_hash :: !(TF.Attribute s "password_hash" Text)
+    , _password_hash :: !(TF.Attribute s Text)
     {- ^ (Optional) The encrypted password for the account. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (GroupDataSource s) where
     toHCL GroupDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _gid
-        , TF.attribute _name
-        , TF.attribute _password_hash
+        [ TF.attribute "gid" _gid
+        , TF.attribute "name" _name
+        , TF.attribute "password_hash" _password_hash
         ]
 
-instance HasGid (GroupDataSource s) Text where
-    type HasGidThread (GroupDataSource s) Text = s
-
+instance HasGid (GroupDataSource s) s Text where
     gid =
-        lens (_gid :: GroupDataSource s -> TF.Attribute s "gid" Text)
-             (\s a -> s { _gid = a } :: GroupDataSource s)
+        lens (_gid :: GroupDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _gid = a } :: GroupDataSource s)
 
-instance HasName (GroupDataSource s) Text where
-    type HasNameThread (GroupDataSource s) Text = s
-
+instance HasName (GroupDataSource s) s Text where
     name =
-        lens (_name :: GroupDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: GroupDataSource s)
+        lens (_name :: GroupDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: GroupDataSource s)
 
-instance HasPasswordHash (GroupDataSource s) Text where
-    type HasPasswordHashThread (GroupDataSource s) Text = s
-
+instance HasPasswordHash (GroupDataSource s) s Text where
     passwordHash =
-        lens (_password_hash :: GroupDataSource s -> TF.Attribute s "password_hash" Text)
-             (\s a -> s { _password_hash = a } :: GroupDataSource s)
+        lens (_password_hash :: GroupDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _password_hash = a } :: GroupDataSource s)
 
-instance HasComputedId (GroupDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (GroupDataSource s) Text
 
 groupDataSource :: TF.DataSource TF.Ignition (GroupDataSource s)
 groupDataSource =
@@ -623,75 +547,61 @@ groupDataSource =
 Describes a link to be created in a particular filesystem.
 -}
 data LinkDataSource s = LinkDataSource {
-      _filesystem :: !(TF.Attribute s "filesystem" Text)
+      _filesystem :: !(TF.Attribute s Text)
     {- ^ (Required) The internal identifier of the filesystem. This matches the last filesystem with the given identifier. This should be a valid name from a ignition_filesystem resource. -}
-    , _gid        :: !(TF.Attribute s "gid" Text)
+    , _gid        :: !(TF.Attribute s Text)
     {- ^ (Optional) The group ID of the owner. -}
-    , _hard       :: !(TF.Attribute s "hard" Text)
+    , _hard       :: !(TF.Attribute s Text)
     {- ^ (Optional) A symbolic link is created if this is false, a hard one if this is true. -}
-    , _path       :: !(TF.Attribute s "path" Text)
+    , _path       :: !(TF.Attribute s Text)
     {- ^ (Required) The absolute path to the link. -}
-    , _target     :: !(TF.Attribute s "target" Text)
+    , _target     :: !(TF.Attribute s Text)
     {- ^ (Required) The target path of the link. -}
-    , _uid        :: !(TF.Attribute s "uid" Text)
+    , _uid        :: !(TF.Attribute s Text)
     {- ^ (Optional) The user ID of the owner. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LinkDataSource s) where
     toHCL LinkDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _filesystem
-        , TF.attribute _gid
-        , TF.attribute _hard
-        , TF.attribute _path
-        , TF.attribute _target
-        , TF.attribute _uid
+        [ TF.attribute "filesystem" _filesystem
+        , TF.attribute "gid" _gid
+        , TF.attribute "hard" _hard
+        , TF.attribute "path" _path
+        , TF.attribute "target" _target
+        , TF.attribute "uid" _uid
         ]
 
-instance HasFilesystem (LinkDataSource s) Text where
-    type HasFilesystemThread (LinkDataSource s) Text = s
-
+instance HasFilesystem (LinkDataSource s) s Text where
     filesystem =
-        lens (_filesystem :: LinkDataSource s -> TF.Attribute s "filesystem" Text)
-             (\s a -> s { _filesystem = a } :: LinkDataSource s)
+        lens (_filesystem :: LinkDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _filesystem = a } :: LinkDataSource s)
 
-instance HasGid (LinkDataSource s) Text where
-    type HasGidThread (LinkDataSource s) Text = s
-
+instance HasGid (LinkDataSource s) s Text where
     gid =
-        lens (_gid :: LinkDataSource s -> TF.Attribute s "gid" Text)
-             (\s a -> s { _gid = a } :: LinkDataSource s)
+        lens (_gid :: LinkDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _gid = a } :: LinkDataSource s)
 
-instance HasHard (LinkDataSource s) Text where
-    type HasHardThread (LinkDataSource s) Text = s
-
+instance HasHard (LinkDataSource s) s Text where
     hard =
-        lens (_hard :: LinkDataSource s -> TF.Attribute s "hard" Text)
-             (\s a -> s { _hard = a } :: LinkDataSource s)
+        lens (_hard :: LinkDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _hard = a } :: LinkDataSource s)
 
-instance HasPath (LinkDataSource s) Text where
-    type HasPathThread (LinkDataSource s) Text = s
-
+instance HasPath (LinkDataSource s) s Text where
     path =
-        lens (_path :: LinkDataSource s -> TF.Attribute s "path" Text)
-             (\s a -> s { _path = a } :: LinkDataSource s)
+        lens (_path :: LinkDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _path = a } :: LinkDataSource s)
 
-instance HasTarget (LinkDataSource s) Text where
-    type HasTargetThread (LinkDataSource s) Text = s
-
+instance HasTarget (LinkDataSource s) s Text where
     target =
-        lens (_target :: LinkDataSource s -> TF.Attribute s "target" Text)
-             (\s a -> s { _target = a } :: LinkDataSource s)
+        lens (_target :: LinkDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _target = a } :: LinkDataSource s)
 
-instance HasUid (LinkDataSource s) Text where
-    type HasUidThread (LinkDataSource s) Text = s
-
+instance HasUid (LinkDataSource s) s Text where
     uid =
-        lens (_uid :: LinkDataSource s -> TF.Attribute s "uid" Text)
-             (\s a -> s { _uid = a } :: LinkDataSource s)
+        lens (_uid :: LinkDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _uid = a } :: LinkDataSource s)
 
-instance HasComputedId (LinkDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (LinkDataSource s) Text
 
 linkDataSource :: TF.DataSource TF.Ignition (LinkDataSource s)
 linkDataSource =
@@ -710,35 +620,29 @@ linkDataSource =
 Describes the desired state of the networkd units.
 -}
 data NetworkdUnitDataSource s = NetworkdUnitDataSource {
-      _content :: !(TF.Attribute s "content" Text)
+      _content :: !(TF.Attribute s Text)
     {- ^ (Required) The contents of the networkd file. -}
-    , _name    :: !(TF.Attribute s "name" Text)
+    , _name    :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the file. This must be suffixed with a valid unit type (e.g. 00-eth0.network ). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkdUnitDataSource s) where
     toHCL NetworkdUnitDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _content
-        , TF.attribute _name
+        [ TF.attribute "content" _content
+        , TF.attribute "name" _name
         ]
 
-instance HasContent (NetworkdUnitDataSource s) Text where
-    type HasContentThread (NetworkdUnitDataSource s) Text = s
-
+instance HasContent (NetworkdUnitDataSource s) s Text where
     content =
-        lens (_content :: NetworkdUnitDataSource s -> TF.Attribute s "content" Text)
-             (\s a -> s { _content = a } :: NetworkdUnitDataSource s)
+        lens (_content :: NetworkdUnitDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _content = a } :: NetworkdUnitDataSource s)
 
-instance HasName (NetworkdUnitDataSource s) Text where
-    type HasNameThread (NetworkdUnitDataSource s) Text = s
-
+instance HasName (NetworkdUnitDataSource s) s Text where
     name =
-        lens (_name :: NetworkdUnitDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: NetworkdUnitDataSource s)
+        lens (_name :: NetworkdUnitDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: NetworkdUnitDataSource s)
 
-instance HasComputedId (NetworkdUnitDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (NetworkdUnitDataSource s) Text
 
 networkdUnitDataSource :: TF.DataSource TF.Ignition (NetworkdUnitDataSource s)
 networkdUnitDataSource =
@@ -753,55 +657,45 @@ networkdUnitDataSource =
 Describes the desired state of the system’s RAID.
 -}
 data RaidDataSource s = RaidDataSource {
-      _devices :: !(TF.Attribute s "devices" Text)
+      _devices :: !(TF.Attribute s Text)
     {- ^ (Required) The list of devices (referenced by their absolute path) in the array. -}
-    , _level   :: !(TF.Attribute s "level" Text)
+    , _level   :: !(TF.Attribute s Text)
     {- ^ (Required) The redundancy level of the array (e.g. linear, raid1, raid5, etc.). -}
-    , _name    :: !(TF.Attribute s "name" Text)
+    , _name    :: !(TF.Attribute s Text)
     {- ^ (Required) The name to use for the resulting md device. -}
-    , _spares  :: !(TF.Attribute s "spares" Text)
+    , _spares  :: !(TF.Attribute s Text)
     {- ^ (Optional) The number of spares (if applicable) in the array. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RaidDataSource s) where
     toHCL RaidDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _devices
-        , TF.attribute _level
-        , TF.attribute _name
-        , TF.attribute _spares
+        [ TF.attribute "devices" _devices
+        , TF.attribute "level" _level
+        , TF.attribute "name" _name
+        , TF.attribute "spares" _spares
         ]
 
-instance HasDevices (RaidDataSource s) Text where
-    type HasDevicesThread (RaidDataSource s) Text = s
-
+instance HasDevices (RaidDataSource s) s Text where
     devices =
-        lens (_devices :: RaidDataSource s -> TF.Attribute s "devices" Text)
-             (\s a -> s { _devices = a } :: RaidDataSource s)
+        lens (_devices :: RaidDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _devices = a } :: RaidDataSource s)
 
-instance HasLevel (RaidDataSource s) Text where
-    type HasLevelThread (RaidDataSource s) Text = s
-
+instance HasLevel (RaidDataSource s) s Text where
     level =
-        lens (_level :: RaidDataSource s -> TF.Attribute s "level" Text)
-             (\s a -> s { _level = a } :: RaidDataSource s)
+        lens (_level :: RaidDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _level = a } :: RaidDataSource s)
 
-instance HasName (RaidDataSource s) Text where
-    type HasNameThread (RaidDataSource s) Text = s
-
+instance HasName (RaidDataSource s) s Text where
     name =
-        lens (_name :: RaidDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: RaidDataSource s)
+        lens (_name :: RaidDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: RaidDataSource s)
 
-instance HasSpares (RaidDataSource s) Text where
-    type HasSparesThread (RaidDataSource s) Text = s
-
+instance HasSpares (RaidDataSource s) s Text where
     spares =
-        lens (_spares :: RaidDataSource s -> TF.Attribute s "spares" Text)
-             (\s a -> s { _spares = a } :: RaidDataSource s)
+        lens (_spares :: RaidDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _spares = a } :: RaidDataSource s)
 
-instance HasComputedId (RaidDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (RaidDataSource s) Text
 
 raidDataSource :: TF.DataSource TF.Ignition (RaidDataSource s)
 raidDataSource =
@@ -818,65 +712,53 @@ raidDataSource =
 Describes the desired state of the systemd units.
 -}
 data SystemdUnitDataSource s = SystemdUnitDataSource {
-      _content :: !(TF.Attribute s "content" Text)
+      _content :: !(TF.Attribute s Text)
     {- ^ (Optional) The contents of the unit. -}
-    , _dropin  :: !(TF.Attribute s "dropin" Text)
+    , _dropin  :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of drop-ins for the unit. -}
-    , _enabled :: !(TF.Attribute s "enabled" Text)
+    , _enabled :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether or not the service shall be enabled. When true, the service is enabled. In order for this to have any effect, the unit must have an install section. (default true) -}
-    , _mask    :: !(TF.Attribute s "mask" Text)
+    , _mask    :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether or not the service shall be masked. When true, the service is masked by symlinking it to /dev/null . -}
-    , _name    :: !(TF.Attribute s "name" Text)
+    , _name    :: !(TF.Attribute s Text)
     {- ^ (Required) Tthe name of the unit. This must be suffixed with a valid unit type (e.g. thing.service ). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SystemdUnitDataSource s) where
     toHCL SystemdUnitDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _content
-        , TF.attribute _dropin
-        , TF.attribute _enabled
-        , TF.attribute _mask
-        , TF.attribute _name
+        [ TF.attribute "content" _content
+        , TF.attribute "dropin" _dropin
+        , TF.attribute "enabled" _enabled
+        , TF.attribute "mask" _mask
+        , TF.attribute "name" _name
         ]
 
-instance HasContent (SystemdUnitDataSource s) Text where
-    type HasContentThread (SystemdUnitDataSource s) Text = s
-
+instance HasContent (SystemdUnitDataSource s) s Text where
     content =
-        lens (_content :: SystemdUnitDataSource s -> TF.Attribute s "content" Text)
-             (\s a -> s { _content = a } :: SystemdUnitDataSource s)
+        lens (_content :: SystemdUnitDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _content = a } :: SystemdUnitDataSource s)
 
-instance HasDropin (SystemdUnitDataSource s) Text where
-    type HasDropinThread (SystemdUnitDataSource s) Text = s
-
+instance HasDropin (SystemdUnitDataSource s) s Text where
     dropin =
-        lens (_dropin :: SystemdUnitDataSource s -> TF.Attribute s "dropin" Text)
-             (\s a -> s { _dropin = a } :: SystemdUnitDataSource s)
+        lens (_dropin :: SystemdUnitDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _dropin = a } :: SystemdUnitDataSource s)
 
-instance HasEnabled (SystemdUnitDataSource s) Text where
-    type HasEnabledThread (SystemdUnitDataSource s) Text = s
-
+instance HasEnabled (SystemdUnitDataSource s) s Text where
     enabled =
-        lens (_enabled :: SystemdUnitDataSource s -> TF.Attribute s "enabled" Text)
-             (\s a -> s { _enabled = a } :: SystemdUnitDataSource s)
+        lens (_enabled :: SystemdUnitDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _enabled = a } :: SystemdUnitDataSource s)
 
-instance HasMask (SystemdUnitDataSource s) Text where
-    type HasMaskThread (SystemdUnitDataSource s) Text = s
-
+instance HasMask (SystemdUnitDataSource s) s Text where
     mask =
-        lens (_mask :: SystemdUnitDataSource s -> TF.Attribute s "mask" Text)
-             (\s a -> s { _mask = a } :: SystemdUnitDataSource s)
+        lens (_mask :: SystemdUnitDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _mask = a } :: SystemdUnitDataSource s)
 
-instance HasName (SystemdUnitDataSource s) Text where
-    type HasNameThread (SystemdUnitDataSource s) Text = s
-
+instance HasName (SystemdUnitDataSource s) s Text where
     name =
-        lens (_name :: SystemdUnitDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: SystemdUnitDataSource s)
+        lens (_name :: SystemdUnitDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SystemdUnitDataSource s)
 
-instance HasComputedId (SystemdUnitDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (SystemdUnitDataSource s) Text
 
 systemdUnitDataSource :: TF.DataSource TF.Ignition (SystemdUnitDataSource s)
 systemdUnitDataSource =
@@ -894,145 +776,117 @@ systemdUnitDataSource =
 Describes the desired user additions to the passwd database.
 -}
 data UserDataSource s = UserDataSource {
-      _gecos               :: !(TF.Attribute s "gecos" Text)
+      _gecos               :: !(TF.Attribute s Text)
     {- ^ (Optional) The GECOS field of the new account. -}
-    , _groups              :: !(TF.Attribute s "groups" Text)
+    , _groups              :: !(TF.Attribute s Text)
     {- ^ (Optional) The list of supplementary groups of the new account. -}
-    , _home_dir            :: !(TF.Attribute s "home_dir" Text)
+    , _home_dir            :: !(TF.Attribute s Text)
     {- ^ (Optional) The home directory of the new account. -}
-    , _name                :: !(TF.Attribute s "name" Text)
+    , _name                :: !(TF.Attribute s Text)
     {- ^ (Required) The username for the account. -}
-    , _no_create_home      :: !(TF.Attribute s "no_create_home" Text)
+    , _no_create_home      :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether or not to create the user’s home directory. -}
-    , _no_log_init         :: !(TF.Attribute s "no_log_init" Text)
+    , _no_log_init         :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether or not to add the user to the lastlog and faillog databases. -}
-    , _no_user_group       :: !(TF.Attribute s "no_user_group" Text)
+    , _no_user_group       :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether or not to create a group with the same name as the user. -}
-    , _password_hash       :: !(TF.Attribute s "password_hash" Text)
+    , _password_hash       :: !(TF.Attribute s Text)
     {- ^ (Optional) The encrypted password for the account. -}
-    , _primary_group       :: !(TF.Attribute s "primary_group" Text)
+    , _primary_group       :: !(TF.Attribute s Text)
     {- ^ (Optional) The name or ID of the primary group of the new account. -}
-    , _shell               :: !(TF.Attribute s "shell" Text)
+    , _shell               :: !(TF.Attribute s Text)
     {- ^ (Optional) The login shell of the new account. -}
-    , _ssh_authorized_keys :: !(TF.Attribute s "ssh_authorized_keys" Text)
+    , _ssh_authorized_keys :: !(TF.Attribute s Text)
     {- ^ (Optional) A list of SSH keys to be added to the user’s authorized_keys. -}
-    , _system              :: !(TF.Attribute s "system" Text)
+    , _system              :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether or not to make the account a system account. This only has an effect if the account doesn't exist yet. -}
-    , _uid                 :: !(TF.Attribute s "uid" Text)
+    , _uid                 :: !(TF.Attribute s Text)
     {- ^ (Optional) The user ID of the new account. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserDataSource s) where
     toHCL UserDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _gecos
-        , TF.attribute _groups
-        , TF.attribute _home_dir
-        , TF.attribute _name
-        , TF.attribute _no_create_home
-        , TF.attribute _no_log_init
-        , TF.attribute _no_user_group
-        , TF.attribute _password_hash
-        , TF.attribute _primary_group
-        , TF.attribute _shell
-        , TF.attribute _ssh_authorized_keys
-        , TF.attribute _system
-        , TF.attribute _uid
+        [ TF.attribute "gecos" _gecos
+        , TF.attribute "groups" _groups
+        , TF.attribute "home_dir" _home_dir
+        , TF.attribute "name" _name
+        , TF.attribute "no_create_home" _no_create_home
+        , TF.attribute "no_log_init" _no_log_init
+        , TF.attribute "no_user_group" _no_user_group
+        , TF.attribute "password_hash" _password_hash
+        , TF.attribute "primary_group" _primary_group
+        , TF.attribute "shell" _shell
+        , TF.attribute "ssh_authorized_keys" _ssh_authorized_keys
+        , TF.attribute "system" _system
+        , TF.attribute "uid" _uid
         ]
 
-instance HasGecos (UserDataSource s) Text where
-    type HasGecosThread (UserDataSource s) Text = s
-
+instance HasGecos (UserDataSource s) s Text where
     gecos =
-        lens (_gecos :: UserDataSource s -> TF.Attribute s "gecos" Text)
-             (\s a -> s { _gecos = a } :: UserDataSource s)
+        lens (_gecos :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _gecos = a } :: UserDataSource s)
 
-instance HasGroups (UserDataSource s) Text where
-    type HasGroupsThread (UserDataSource s) Text = s
-
+instance HasGroups (UserDataSource s) s Text where
     groups =
-        lens (_groups :: UserDataSource s -> TF.Attribute s "groups" Text)
-             (\s a -> s { _groups = a } :: UserDataSource s)
+        lens (_groups :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _groups = a } :: UserDataSource s)
 
-instance HasHomeDir (UserDataSource s) Text where
-    type HasHomeDirThread (UserDataSource s) Text = s
-
+instance HasHomeDir (UserDataSource s) s Text where
     homeDir =
-        lens (_home_dir :: UserDataSource s -> TF.Attribute s "home_dir" Text)
-             (\s a -> s { _home_dir = a } :: UserDataSource s)
+        lens (_home_dir :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _home_dir = a } :: UserDataSource s)
 
-instance HasName (UserDataSource s) Text where
-    type HasNameThread (UserDataSource s) Text = s
-
+instance HasName (UserDataSource s) s Text where
     name =
-        lens (_name :: UserDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: UserDataSource s)
+        lens (_name :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: UserDataSource s)
 
-instance HasNoCreateHome (UserDataSource s) Text where
-    type HasNoCreateHomeThread (UserDataSource s) Text = s
-
+instance HasNoCreateHome (UserDataSource s) s Text where
     noCreateHome =
-        lens (_no_create_home :: UserDataSource s -> TF.Attribute s "no_create_home" Text)
-             (\s a -> s { _no_create_home = a } :: UserDataSource s)
+        lens (_no_create_home :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _no_create_home = a } :: UserDataSource s)
 
-instance HasNoLogInit (UserDataSource s) Text where
-    type HasNoLogInitThread (UserDataSource s) Text = s
-
+instance HasNoLogInit (UserDataSource s) s Text where
     noLogInit =
-        lens (_no_log_init :: UserDataSource s -> TF.Attribute s "no_log_init" Text)
-             (\s a -> s { _no_log_init = a } :: UserDataSource s)
+        lens (_no_log_init :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _no_log_init = a } :: UserDataSource s)
 
-instance HasNoUserGroup (UserDataSource s) Text where
-    type HasNoUserGroupThread (UserDataSource s) Text = s
-
+instance HasNoUserGroup (UserDataSource s) s Text where
     noUserGroup =
-        lens (_no_user_group :: UserDataSource s -> TF.Attribute s "no_user_group" Text)
-             (\s a -> s { _no_user_group = a } :: UserDataSource s)
+        lens (_no_user_group :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _no_user_group = a } :: UserDataSource s)
 
-instance HasPasswordHash (UserDataSource s) Text where
-    type HasPasswordHashThread (UserDataSource s) Text = s
-
+instance HasPasswordHash (UserDataSource s) s Text where
     passwordHash =
-        lens (_password_hash :: UserDataSource s -> TF.Attribute s "password_hash" Text)
-             (\s a -> s { _password_hash = a } :: UserDataSource s)
+        lens (_password_hash :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _password_hash = a } :: UserDataSource s)
 
-instance HasPrimaryGroup (UserDataSource s) Text where
-    type HasPrimaryGroupThread (UserDataSource s) Text = s
-
+instance HasPrimaryGroup (UserDataSource s) s Text where
     primaryGroup =
-        lens (_primary_group :: UserDataSource s -> TF.Attribute s "primary_group" Text)
-             (\s a -> s { _primary_group = a } :: UserDataSource s)
+        lens (_primary_group :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _primary_group = a } :: UserDataSource s)
 
-instance HasShell (UserDataSource s) Text where
-    type HasShellThread (UserDataSource s) Text = s
-
+instance HasShell (UserDataSource s) s Text where
     shell =
-        lens (_shell :: UserDataSource s -> TF.Attribute s "shell" Text)
-             (\s a -> s { _shell = a } :: UserDataSource s)
+        lens (_shell :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _shell = a } :: UserDataSource s)
 
-instance HasSshAuthorizedKeys (UserDataSource s) Text where
-    type HasSshAuthorizedKeysThread (UserDataSource s) Text = s
-
+instance HasSshAuthorizedKeys (UserDataSource s) s Text where
     sshAuthorizedKeys =
-        lens (_ssh_authorized_keys :: UserDataSource s -> TF.Attribute s "ssh_authorized_keys" Text)
-             (\s a -> s { _ssh_authorized_keys = a } :: UserDataSource s)
+        lens (_ssh_authorized_keys :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _ssh_authorized_keys = a } :: UserDataSource s)
 
-instance HasSystem (UserDataSource s) Text where
-    type HasSystemThread (UserDataSource s) Text = s
-
+instance HasSystem (UserDataSource s) s Text where
     system =
-        lens (_system :: UserDataSource s -> TF.Attribute s "system" Text)
-             (\s a -> s { _system = a } :: UserDataSource s)
+        lens (_system :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _system = a } :: UserDataSource s)
 
-instance HasUid (UserDataSource s) Text where
-    type HasUidThread (UserDataSource s) Text = s
-
+instance HasUid (UserDataSource s) s Text where
     uid =
-        lens (_uid :: UserDataSource s -> TF.Attribute s "uid" Text)
-             (\s a -> s { _uid = a } :: UserDataSource s)
+        lens (_uid :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _uid = a } :: UserDataSource s)
 
-instance HasComputedId (UserDataSource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (UserDataSource s) Text
 
 userDataSource :: TF.DataSource TF.Ignition (UserDataSource s)
 userDataSource =
@@ -1053,470 +907,266 @@ userDataSource =
             , _uid = TF.Nil
             }
 
-class HasAppend a b | a -> b where
-    type HasAppendThread a b :: *
+class HasAppend a s b | a -> s b where
+    append :: Lens' a (TF.Attribute s b)
 
-    append :: Lens' a (TF.Attribute (HasAppendThread a b) "append" b)
-
-instance HasAppend a b => HasAppend (TF.DataSource p a) b where
-    type HasAppendThread (TF.DataSource p a) b =
-         HasAppendThread a b
-
+instance HasAppend a s b => HasAppend (TF.DataSource p a) s b where
     append = TF.configuration . append
 
-class HasArrays a b | a -> b where
-    type HasArraysThread a b :: *
+class HasArrays a s b | a -> s b where
+    arrays :: Lens' a (TF.Attribute s b)
 
-    arrays :: Lens' a (TF.Attribute (HasArraysThread a b) "arrays" b)
-
-instance HasArrays a b => HasArrays (TF.DataSource p a) b where
-    type HasArraysThread (TF.DataSource p a) b =
-         HasArraysThread a b
-
+instance HasArrays a s b => HasArrays (TF.DataSource p a) s b where
     arrays = TF.configuration . arrays
 
-class HasContent a b | a -> b where
-    type HasContentThread a b :: *
+class HasContent a s b | a -> s b where
+    content :: Lens' a (TF.Attribute s b)
 
-    content :: Lens' a (TF.Attribute (HasContentThread a b) "content" b)
-
-instance HasContent a b => HasContent (TF.DataSource p a) b where
-    type HasContentThread (TF.DataSource p a) b =
-         HasContentThread a b
-
+instance HasContent a s b => HasContent (TF.DataSource p a) s b where
     content = TF.configuration . content
 
-class HasDevice a b | a -> b where
-    type HasDeviceThread a b :: *
+class HasDevice a s b | a -> s b where
+    device :: Lens' a (TF.Attribute s b)
 
-    device :: Lens' a (TF.Attribute (HasDeviceThread a b) "device" b)
-
-instance HasDevice a b => HasDevice (TF.DataSource p a) b where
-    type HasDeviceThread (TF.DataSource p a) b =
-         HasDeviceThread a b
-
+instance HasDevice a s b => HasDevice (TF.DataSource p a) s b where
     device = TF.configuration . device
 
-class HasDevices a b | a -> b where
-    type HasDevicesThread a b :: *
+class HasDevices a s b | a -> s b where
+    devices :: Lens' a (TF.Attribute s b)
 
-    devices :: Lens' a (TF.Attribute (HasDevicesThread a b) "devices" b)
-
-instance HasDevices a b => HasDevices (TF.DataSource p a) b where
-    type HasDevicesThread (TF.DataSource p a) b =
-         HasDevicesThread a b
-
+instance HasDevices a s b => HasDevices (TF.DataSource p a) s b where
     devices = TF.configuration . devices
 
-class HasDirectories a b | a -> b where
-    type HasDirectoriesThread a b :: *
+class HasDirectories a s b | a -> s b where
+    directories :: Lens' a (TF.Attribute s b)
 
-    directories :: Lens' a (TF.Attribute (HasDirectoriesThread a b) "directories" b)
-
-instance HasDirectories a b => HasDirectories (TF.DataSource p a) b where
-    type HasDirectoriesThread (TF.DataSource p a) b =
-         HasDirectoriesThread a b
-
+instance HasDirectories a s b => HasDirectories (TF.DataSource p a) s b where
     directories = TF.configuration . directories
 
-class HasDisks a b | a -> b where
-    type HasDisksThread a b :: *
+class HasDisks a s b | a -> s b where
+    disks :: Lens' a (TF.Attribute s b)
 
-    disks :: Lens' a (TF.Attribute (HasDisksThread a b) "disks" b)
-
-instance HasDisks a b => HasDisks (TF.DataSource p a) b where
-    type HasDisksThread (TF.DataSource p a) b =
-         HasDisksThread a b
-
+instance HasDisks a s b => HasDisks (TF.DataSource p a) s b where
     disks = TF.configuration . disks
 
-class HasDropin a b | a -> b where
-    type HasDropinThread a b :: *
+class HasDropin a s b | a -> s b where
+    dropin :: Lens' a (TF.Attribute s b)
 
-    dropin :: Lens' a (TF.Attribute (HasDropinThread a b) "dropin" b)
-
-instance HasDropin a b => HasDropin (TF.DataSource p a) b where
-    type HasDropinThread (TF.DataSource p a) b =
-         HasDropinThread a b
-
+instance HasDropin a s b => HasDropin (TF.DataSource p a) s b where
     dropin = TF.configuration . dropin
 
-class HasEnabled a b | a -> b where
-    type HasEnabledThread a b :: *
+class HasEnabled a s b | a -> s b where
+    enabled :: Lens' a (TF.Attribute s b)
 
-    enabled :: Lens' a (TF.Attribute (HasEnabledThread a b) "enabled" b)
-
-instance HasEnabled a b => HasEnabled (TF.DataSource p a) b where
-    type HasEnabledThread (TF.DataSource p a) b =
-         HasEnabledThread a b
-
+instance HasEnabled a s b => HasEnabled (TF.DataSource p a) s b where
     enabled = TF.configuration . enabled
 
-class HasFiles a b | a -> b where
-    type HasFilesThread a b :: *
+class HasFiles a s b | a -> s b where
+    files :: Lens' a (TF.Attribute s b)
 
-    files :: Lens' a (TF.Attribute (HasFilesThread a b) "files" b)
-
-instance HasFiles a b => HasFiles (TF.DataSource p a) b where
-    type HasFilesThread (TF.DataSource p a) b =
-         HasFilesThread a b
-
+instance HasFiles a s b => HasFiles (TF.DataSource p a) s b where
     files = TF.configuration . files
 
-class HasFilesystem a b | a -> b where
-    type HasFilesystemThread a b :: *
+class HasFilesystem a s b | a -> s b where
+    filesystem :: Lens' a (TF.Attribute s b)
 
-    filesystem :: Lens' a (TF.Attribute (HasFilesystemThread a b) "filesystem" b)
-
-instance HasFilesystem a b => HasFilesystem (TF.DataSource p a) b where
-    type HasFilesystemThread (TF.DataSource p a) b =
-         HasFilesystemThread a b
-
+instance HasFilesystem a s b => HasFilesystem (TF.DataSource p a) s b where
     filesystem = TF.configuration . filesystem
 
-class HasFilesystems a b | a -> b where
-    type HasFilesystemsThread a b :: *
+class HasFilesystems a s b | a -> s b where
+    filesystems :: Lens' a (TF.Attribute s b)
 
-    filesystems :: Lens' a (TF.Attribute (HasFilesystemsThread a b) "filesystems" b)
-
-instance HasFilesystems a b => HasFilesystems (TF.DataSource p a) b where
-    type HasFilesystemsThread (TF.DataSource p a) b =
-         HasFilesystemsThread a b
-
+instance HasFilesystems a s b => HasFilesystems (TF.DataSource p a) s b where
     filesystems = TF.configuration . filesystems
 
-class HasGecos a b | a -> b where
-    type HasGecosThread a b :: *
+class HasGecos a s b | a -> s b where
+    gecos :: Lens' a (TF.Attribute s b)
 
-    gecos :: Lens' a (TF.Attribute (HasGecosThread a b) "gecos" b)
-
-instance HasGecos a b => HasGecos (TF.DataSource p a) b where
-    type HasGecosThread (TF.DataSource p a) b =
-         HasGecosThread a b
-
+instance HasGecos a s b => HasGecos (TF.DataSource p a) s b where
     gecos = TF.configuration . gecos
 
-class HasGid a b | a -> b where
-    type HasGidThread a b :: *
+class HasGid a s b | a -> s b where
+    gid :: Lens' a (TF.Attribute s b)
 
-    gid :: Lens' a (TF.Attribute (HasGidThread a b) "gid" b)
-
-instance HasGid a b => HasGid (TF.DataSource p a) b where
-    type HasGidThread (TF.DataSource p a) b =
-         HasGidThread a b
-
+instance HasGid a s b => HasGid (TF.DataSource p a) s b where
     gid = TF.configuration . gid
 
-class HasGroups a b | a -> b where
-    type HasGroupsThread a b :: *
+class HasGroups a s b | a -> s b where
+    groups :: Lens' a (TF.Attribute s b)
 
-    groups :: Lens' a (TF.Attribute (HasGroupsThread a b) "groups" b)
-
-instance HasGroups a b => HasGroups (TF.DataSource p a) b where
-    type HasGroupsThread (TF.DataSource p a) b =
-         HasGroupsThread a b
-
+instance HasGroups a s b => HasGroups (TF.DataSource p a) s b where
     groups = TF.configuration . groups
 
-class HasHard a b | a -> b where
-    type HasHardThread a b :: *
+class HasHard a s b | a -> s b where
+    hard :: Lens' a (TF.Attribute s b)
 
-    hard :: Lens' a (TF.Attribute (HasHardThread a b) "hard" b)
-
-instance HasHard a b => HasHard (TF.DataSource p a) b where
-    type HasHardThread (TF.DataSource p a) b =
-         HasHardThread a b
-
+instance HasHard a s b => HasHard (TF.DataSource p a) s b where
     hard = TF.configuration . hard
 
-class HasHomeDir a b | a -> b where
-    type HasHomeDirThread a b :: *
+class HasHomeDir a s b | a -> s b where
+    homeDir :: Lens' a (TF.Attribute s b)
 
-    homeDir :: Lens' a (TF.Attribute (HasHomeDirThread a b) "home_dir" b)
-
-instance HasHomeDir a b => HasHomeDir (TF.DataSource p a) b where
-    type HasHomeDirThread (TF.DataSource p a) b =
-         HasHomeDirThread a b
-
+instance HasHomeDir a s b => HasHomeDir (TF.DataSource p a) s b where
     homeDir = TF.configuration . homeDir
 
-class HasLevel a b | a -> b where
-    type HasLevelThread a b :: *
+class HasLevel a s b | a -> s b where
+    level :: Lens' a (TF.Attribute s b)
 
-    level :: Lens' a (TF.Attribute (HasLevelThread a b) "level" b)
-
-instance HasLevel a b => HasLevel (TF.DataSource p a) b where
-    type HasLevelThread (TF.DataSource p a) b =
-         HasLevelThread a b
-
+instance HasLevel a s b => HasLevel (TF.DataSource p a) s b where
     level = TF.configuration . level
 
-class HasLinks a b | a -> b where
-    type HasLinksThread a b :: *
+class HasLinks a s b | a -> s b where
+    links :: Lens' a (TF.Attribute s b)
 
-    links :: Lens' a (TF.Attribute (HasLinksThread a b) "links" b)
-
-instance HasLinks a b => HasLinks (TF.DataSource p a) b where
-    type HasLinksThread (TF.DataSource p a) b =
-         HasLinksThread a b
-
+instance HasLinks a s b => HasLinks (TF.DataSource p a) s b where
     links = TF.configuration . links
 
-class HasMask a b | a -> b where
-    type HasMaskThread a b :: *
+class HasMask a s b | a -> s b where
+    mask :: Lens' a (TF.Attribute s b)
 
-    mask :: Lens' a (TF.Attribute (HasMaskThread a b) "mask" b)
-
-instance HasMask a b => HasMask (TF.DataSource p a) b where
-    type HasMaskThread (TF.DataSource p a) b =
-         HasMaskThread a b
-
+instance HasMask a s b => HasMask (TF.DataSource p a) s b where
     mask = TF.configuration . mask
 
-class HasMode a b | a -> b where
-    type HasModeThread a b :: *
+class HasMode a s b | a -> s b where
+    mode :: Lens' a (TF.Attribute s b)
 
-    mode :: Lens' a (TF.Attribute (HasModeThread a b) "mode" b)
-
-instance HasMode a b => HasMode (TF.DataSource p a) b where
-    type HasModeThread (TF.DataSource p a) b =
-         HasModeThread a b
-
+instance HasMode a s b => HasMode (TF.DataSource p a) s b where
     mode = TF.configuration . mode
 
-class HasMount a b | a -> b where
-    type HasMountThread a b :: *
+class HasMount a s b | a -> s b where
+    mount :: Lens' a (TF.Attribute s b)
 
-    mount :: Lens' a (TF.Attribute (HasMountThread a b) "mount" b)
-
-instance HasMount a b => HasMount (TF.DataSource p a) b where
-    type HasMountThread (TF.DataSource p a) b =
-         HasMountThread a b
-
+instance HasMount a s b => HasMount (TF.DataSource p a) s b where
     mount = TF.configuration . mount
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.DataSource p a) b where
-    type HasNameThread (TF.DataSource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
-class HasNetworkd a b | a -> b where
-    type HasNetworkdThread a b :: *
+class HasNetworkd a s b | a -> s b where
+    networkd :: Lens' a (TF.Attribute s b)
 
-    networkd :: Lens' a (TF.Attribute (HasNetworkdThread a b) "networkd" b)
-
-instance HasNetworkd a b => HasNetworkd (TF.DataSource p a) b where
-    type HasNetworkdThread (TF.DataSource p a) b =
-         HasNetworkdThread a b
-
+instance HasNetworkd a s b => HasNetworkd (TF.DataSource p a) s b where
     networkd = TF.configuration . networkd
 
-class HasNoCreateHome a b | a -> b where
-    type HasNoCreateHomeThread a b :: *
+class HasNoCreateHome a s b | a -> s b where
+    noCreateHome :: Lens' a (TF.Attribute s b)
 
-    noCreateHome :: Lens' a (TF.Attribute (HasNoCreateHomeThread a b) "no_create_home" b)
-
-instance HasNoCreateHome a b => HasNoCreateHome (TF.DataSource p a) b where
-    type HasNoCreateHomeThread (TF.DataSource p a) b =
-         HasNoCreateHomeThread a b
-
+instance HasNoCreateHome a s b => HasNoCreateHome (TF.DataSource p a) s b where
     noCreateHome = TF.configuration . noCreateHome
 
-class HasNoLogInit a b | a -> b where
-    type HasNoLogInitThread a b :: *
+class HasNoLogInit a s b | a -> s b where
+    noLogInit :: Lens' a (TF.Attribute s b)
 
-    noLogInit :: Lens' a (TF.Attribute (HasNoLogInitThread a b) "no_log_init" b)
-
-instance HasNoLogInit a b => HasNoLogInit (TF.DataSource p a) b where
-    type HasNoLogInitThread (TF.DataSource p a) b =
-         HasNoLogInitThread a b
-
+instance HasNoLogInit a s b => HasNoLogInit (TF.DataSource p a) s b where
     noLogInit = TF.configuration . noLogInit
 
-class HasNoUserGroup a b | a -> b where
-    type HasNoUserGroupThread a b :: *
+class HasNoUserGroup a s b | a -> s b where
+    noUserGroup :: Lens' a (TF.Attribute s b)
 
-    noUserGroup :: Lens' a (TF.Attribute (HasNoUserGroupThread a b) "no_user_group" b)
-
-instance HasNoUserGroup a b => HasNoUserGroup (TF.DataSource p a) b where
-    type HasNoUserGroupThread (TF.DataSource p a) b =
-         HasNoUserGroupThread a b
-
+instance HasNoUserGroup a s b => HasNoUserGroup (TF.DataSource p a) s b where
     noUserGroup = TF.configuration . noUserGroup
 
-class HasPartition a b | a -> b where
-    type HasPartitionThread a b :: *
+class HasPartition a s b | a -> s b where
+    partition :: Lens' a (TF.Attribute s b)
 
-    partition :: Lens' a (TF.Attribute (HasPartitionThread a b) "partition" b)
-
-instance HasPartition a b => HasPartition (TF.DataSource p a) b where
-    type HasPartitionThread (TF.DataSource p a) b =
-         HasPartitionThread a b
-
+instance HasPartition a s b => HasPartition (TF.DataSource p a) s b where
     partition = TF.configuration . partition
 
-class HasPasswordHash a b | a -> b where
-    type HasPasswordHashThread a b :: *
+class HasPasswordHash a s b | a -> s b where
+    passwordHash :: Lens' a (TF.Attribute s b)
 
-    passwordHash :: Lens' a (TF.Attribute (HasPasswordHashThread a b) "password_hash" b)
-
-instance HasPasswordHash a b => HasPasswordHash (TF.DataSource p a) b where
-    type HasPasswordHashThread (TF.DataSource p a) b =
-         HasPasswordHashThread a b
-
+instance HasPasswordHash a s b => HasPasswordHash (TF.DataSource p a) s b where
     passwordHash = TF.configuration . passwordHash
 
-class HasPath a b | a -> b where
-    type HasPathThread a b :: *
+class HasPath a s b | a -> s b where
+    path :: Lens' a (TF.Attribute s b)
 
-    path :: Lens' a (TF.Attribute (HasPathThread a b) "path" b)
-
-instance HasPath a b => HasPath (TF.DataSource p a) b where
-    type HasPathThread (TF.DataSource p a) b =
-         HasPathThread a b
-
+instance HasPath a s b => HasPath (TF.DataSource p a) s b where
     path = TF.configuration . path
 
-class HasPrimaryGroup a b | a -> b where
-    type HasPrimaryGroupThread a b :: *
+class HasPrimaryGroup a s b | a -> s b where
+    primaryGroup :: Lens' a (TF.Attribute s b)
 
-    primaryGroup :: Lens' a (TF.Attribute (HasPrimaryGroupThread a b) "primary_group" b)
-
-instance HasPrimaryGroup a b => HasPrimaryGroup (TF.DataSource p a) b where
-    type HasPrimaryGroupThread (TF.DataSource p a) b =
-         HasPrimaryGroupThread a b
-
+instance HasPrimaryGroup a s b => HasPrimaryGroup (TF.DataSource p a) s b where
     primaryGroup = TF.configuration . primaryGroup
 
-class HasReplace a b | a -> b where
-    type HasReplaceThread a b :: *
+class HasReplace a s b | a -> s b where
+    replace :: Lens' a (TF.Attribute s b)
 
-    replace :: Lens' a (TF.Attribute (HasReplaceThread a b) "replace" b)
-
-instance HasReplace a b => HasReplace (TF.DataSource p a) b where
-    type HasReplaceThread (TF.DataSource p a) b =
-         HasReplaceThread a b
-
+instance HasReplace a s b => HasReplace (TF.DataSource p a) s b where
     replace = TF.configuration . replace
 
-class HasShell a b | a -> b where
-    type HasShellThread a b :: *
+class HasShell a s b | a -> s b where
+    shell :: Lens' a (TF.Attribute s b)
 
-    shell :: Lens' a (TF.Attribute (HasShellThread a b) "shell" b)
-
-instance HasShell a b => HasShell (TF.DataSource p a) b where
-    type HasShellThread (TF.DataSource p a) b =
-         HasShellThread a b
-
+instance HasShell a s b => HasShell (TF.DataSource p a) s b where
     shell = TF.configuration . shell
 
-class HasSource a b | a -> b where
-    type HasSourceThread a b :: *
+class HasSource a s b | a -> s b where
+    source :: Lens' a (TF.Attribute s b)
 
-    source :: Lens' a (TF.Attribute (HasSourceThread a b) "source" b)
-
-instance HasSource a b => HasSource (TF.DataSource p a) b where
-    type HasSourceThread (TF.DataSource p a) b =
-         HasSourceThread a b
-
+instance HasSource a s b => HasSource (TF.DataSource p a) s b where
     source = TF.configuration . source
 
-class HasSpares a b | a -> b where
-    type HasSparesThread a b :: *
+class HasSpares a s b | a -> s b where
+    spares :: Lens' a (TF.Attribute s b)
 
-    spares :: Lens' a (TF.Attribute (HasSparesThread a b) "spares" b)
-
-instance HasSpares a b => HasSpares (TF.DataSource p a) b where
-    type HasSparesThread (TF.DataSource p a) b =
-         HasSparesThread a b
-
+instance HasSpares a s b => HasSpares (TF.DataSource p a) s b where
     spares = TF.configuration . spares
 
-class HasSshAuthorizedKeys a b | a -> b where
-    type HasSshAuthorizedKeysThread a b :: *
+class HasSshAuthorizedKeys a s b | a -> s b where
+    sshAuthorizedKeys :: Lens' a (TF.Attribute s b)
 
-    sshAuthorizedKeys :: Lens' a (TF.Attribute (HasSshAuthorizedKeysThread a b) "ssh_authorized_keys" b)
-
-instance HasSshAuthorizedKeys a b => HasSshAuthorizedKeys (TF.DataSource p a) b where
-    type HasSshAuthorizedKeysThread (TF.DataSource p a) b =
-         HasSshAuthorizedKeysThread a b
-
+instance HasSshAuthorizedKeys a s b => HasSshAuthorizedKeys (TF.DataSource p a) s b where
     sshAuthorizedKeys = TF.configuration . sshAuthorizedKeys
 
-class HasSystem a b | a -> b where
-    type HasSystemThread a b :: *
+class HasSystem a s b | a -> s b where
+    system :: Lens' a (TF.Attribute s b)
 
-    system :: Lens' a (TF.Attribute (HasSystemThread a b) "system" b)
-
-instance HasSystem a b => HasSystem (TF.DataSource p a) b where
-    type HasSystemThread (TF.DataSource p a) b =
-         HasSystemThread a b
-
+instance HasSystem a s b => HasSystem (TF.DataSource p a) s b where
     system = TF.configuration . system
 
-class HasSystemd a b | a -> b where
-    type HasSystemdThread a b :: *
+class HasSystemd a s b | a -> s b where
+    systemd :: Lens' a (TF.Attribute s b)
 
-    systemd :: Lens' a (TF.Attribute (HasSystemdThread a b) "systemd" b)
-
-instance HasSystemd a b => HasSystemd (TF.DataSource p a) b where
-    type HasSystemdThread (TF.DataSource p a) b =
-         HasSystemdThread a b
-
+instance HasSystemd a s b => HasSystemd (TF.DataSource p a) s b where
     systemd = TF.configuration . systemd
 
-class HasTarget a b | a -> b where
-    type HasTargetThread a b :: *
+class HasTarget a s b | a -> s b where
+    target :: Lens' a (TF.Attribute s b)
 
-    target :: Lens' a (TF.Attribute (HasTargetThread a b) "target" b)
-
-instance HasTarget a b => HasTarget (TF.DataSource p a) b where
-    type HasTargetThread (TF.DataSource p a) b =
-         HasTargetThread a b
-
+instance HasTarget a s b => HasTarget (TF.DataSource p a) s b where
     target = TF.configuration . target
 
-class HasUid a b | a -> b where
-    type HasUidThread a b :: *
+class HasUid a s b | a -> s b where
+    uid :: Lens' a (TF.Attribute s b)
 
-    uid :: Lens' a (TF.Attribute (HasUidThread a b) "uid" b)
-
-instance HasUid a b => HasUid (TF.DataSource p a) b where
-    type HasUidThread (TF.DataSource p a) b =
-         HasUidThread a b
-
+instance HasUid a s b => HasUid (TF.DataSource p a) s b where
     uid = TF.configuration . uid
 
-class HasUsers a b | a -> b where
-    type HasUsersThread a b :: *
+class HasUsers a s b | a -> s b where
+    users :: Lens' a (TF.Attribute s b)
 
-    users :: Lens' a (TF.Attribute (HasUsersThread a b) "users" b)
-
-instance HasUsers a b => HasUsers (TF.DataSource p a) b where
-    type HasUsersThread (TF.DataSource p a) b =
-         HasUsersThread a b
-
+instance HasUsers a s b => HasUsers (TF.DataSource p a) s b where
     users = TF.configuration . users
 
-class HasWipeTable a b | a -> b where
-    type HasWipeTableThread a b :: *
+class HasWipeTable a s b | a -> s b where
+    wipeTable :: Lens' a (TF.Attribute s b)
 
-    wipeTable :: Lens' a (TF.Attribute (HasWipeTableThread a b) "wipe_table" b)
-
-instance HasWipeTable a b => HasWipeTable (TF.DataSource p a) b where
-    type HasWipeTableThread (TF.DataSource p a) b =
-         HasWipeTableThread a b
-
+instance HasWipeTable a s b => HasWipeTable (TF.DataSource p a) s b where
     wipeTable = TF.configuration . wipeTable
 
 class HasComputedId a b | a -> b where
-    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedId =
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
 class HasComputedRendered a b | a -> b where
-    computedRendered :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedRendered
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedRendered =
+        to (\x -> TF.Computed (TF.referenceKey x) "rendered")

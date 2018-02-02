@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -96,12 +95,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                 as TF
+import qualified GHC.Base                  as TF
+import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
 import qualified Terrafomo.Docker.Provider as TF
 import qualified Terrafomo.Docker.Types    as TF
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.IP              as TF
-import qualified Terrafomo.Meta            as TF (configuration)
+import qualified Terrafomo.Meta            as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Resource        as TF
 import qualified Terrafomo.Resource        as TF
@@ -111,331 +113,267 @@ import qualified Terrafomo.Resource        as TF
 Manages the lifecycle of a Docker container.
 -}
 data ContainerResource s = ContainerResource {
-      _capabilities          :: !(TF.Attribute s "capabilities" Text)
+      _capabilities          :: !(TF.Attribute s Text)
     {- ^ (Optional, block) See <#capabilities> below for details. -}
-    , _command               :: !(TF.Attribute s "command" Text)
+    , _command               :: !(TF.Attribute s Text)
     {- ^ (Optional, list of strings) The command to use to start the container. For example, to run @/usr/bin/myprogram -f baz.conf@ set the command to be @["/usr/bin/myprogram", "-f", "baz.conf"]@ . -}
-    , _cpu_shares            :: !(TF.Attribute s "cpu_shares" Text)
+    , _cpu_shares            :: !(TF.Attribute s Text)
     {- ^ (Optional, int) CPU shares (relative weight) for the container. -}
-    , _destroy_grace_seconds :: !(TF.Attribute s "destroy_grace_seconds" Text)
+    , _destroy_grace_seconds :: !(TF.Attribute s Text)
     {- ^ (Optional, int) If defined will attempt to stop the container before destroying. Container will be destroyed after @n@ seconds or on successful stop. -}
-    , _dns                   :: !(TF.Attribute s "dns" Text)
+    , _dns                   :: !(TF.Attribute s Text)
     {- ^ (Optional, set of strings) Set of DNS servers. -}
-    , _dns_opts              :: !(TF.Attribute s "dns_opts" Text)
+    , _dns_opts              :: !(TF.Attribute s Text)
     {- ^ (Optional, set of strings) Set of DNS options used by the DNS provider(s), see @resolv.conf@ documentation for valid list of options. -}
-    , _dns_search            :: !(TF.Attribute s "dns_search" Text)
+    , _dns_search            :: !(TF.Attribute s Text)
     {- ^ (Optional, set of strings) Set of DNS search domains that are used when bare unqualified hostnames are used inside of the container. -}
-    , _domainname            :: !(TF.Attribute s "domainname" Text)
+    , _domainname            :: !(TF.Attribute s Text)
     {- ^ (Optional, string) Domain name of the container. -}
-    , _entrypoint            :: !(TF.Attribute s "entrypoint" Text)
+    , _entrypoint            :: !(TF.Attribute s Text)
     {- ^ (Optional, list of strings) The command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run @/usr/bin/myprogram@ when starting a container, set the entrypoint to be @["/usr/bin/myprogram"]@ . -}
-    , _env                   :: !(TF.Attribute s "env" Text)
+    , _env                   :: !(TF.Attribute s Text)
     {- ^ (Optional, set of strings) Environment variables to set. -}
-    , _host                  :: !(TF.Attribute s "host" Text)
+    , _host                  :: !(TF.Attribute s Text)
     {- ^ (Optional, block) See <#extra_hosts> below for details. -}
-    , _hostname              :: !(TF.Attribute s "hostname" Text)
+    , _hostname              :: !(TF.Attribute s Text)
     {- ^ (Optional, string) Hostname of the container. -}
-    , _image                 :: !(TF.Attribute s "image" Text)
+    , _image                 :: !(TF.Attribute s Text)
     {- ^ (Required, string) The ID of the image to back this container. The easiest way to get this value is to use the @docker_image@ resource as is shown in the example above. -}
-    , _labels                :: !(TF.Attribute s "labels" Text)
+    , _labels                :: !(TF.Attribute s Text)
     {- ^ (Optional, map of strings) Key/value pairs to set as labels on the container. -}
-    , _links                 :: !(TF.Attribute s "links" Text)
+    , _links                 :: !(TF.Attribute s Text)
     {- ^ (Optional, set of strings) Set of links for link based connectivity between containers that are running on the same host. -}
-    , _log_driver            :: !(TF.Attribute s "log_driver" Text)
+    , _log_driver            :: !(TF.Attribute s Text)
     {- ^ (Optional, string) The logging driver to use for the container. Defaults to "json-file". -}
-    , _log_opts              :: !(TF.Attribute s "log_opts" Text)
+    , _log_opts              :: !(TF.Attribute s Text)
     {- ^ (Optional, map of strings) Key/value pairs to use as options for the logging driver. -}
-    , _max_retry_count       :: !(TF.Attribute s "max_retry_count" Text)
+    , _max_retry_count       :: !(TF.Attribute s Text)
     {- ^ (Optional, int) The maximum amount of times to an attempt a restart when @restart@ is set to "on-failure" -}
-    , _memory                :: !(TF.Attribute s "memory" Text)
+    , _memory                :: !(TF.Attribute s Text)
     {- ^ (Optional, int) The memory limit for the container in MBs. -}
-    , _memory_swap           :: !(TF.Attribute s "memory_swap" Text)
+    , _memory_swap           :: !(TF.Attribute s Text)
     {- ^ (Optional, int) The total memory limit (memory + swap) for the container in MBs. This setting may compute to @-1@ after @terraform apply@ if the target host doesn't support memory swap, when that is the case docker will use a soft limitation. -}
-    , _must_run              :: !(TF.Attribute s "must_run" Text)
+    , _must_run              :: !(TF.Attribute s Text)
     {- ^ (Optional, bool) If true, then the Docker container will be kept running. If false, then as long as the container exists, Terraform assumes it is successful. -}
-    , _name                  :: !(TF.Attribute s "name" Text)
+    , _name                  :: !(TF.Attribute s Text)
     {- ^ (Required, string) The name of the Docker container. -}
-    , _network_alias         :: !(TF.Attribute s "network_alias" Text)
+    , _network_alias         :: !(TF.Attribute s Text)
     {- ^ (Optional, set of strings) Network aliases of the container for user-defined networks only. -}
-    , _network_mode          :: !(TF.Attribute s "network_mode" Text)
+    , _network_mode          :: !(TF.Attribute s Text)
     {- ^ (Optional, string) Network mode of the container. -}
-    , _networks              :: !(TF.Attribute s "networks" Text)
+    , _networks              :: !(TF.Attribute s Text)
     {- ^ (Optional, set of strings) Id of the networks in which the container is. -}
-    , _ports                 :: !(TF.Attribute s "ports" Text)
+    , _ports                 :: !(TF.Attribute s Text)
     {- ^ (Optional, block) See <#ports> below for details. -}
-    , _privileged            :: !(TF.Attribute s "privileged" Text)
+    , _privileged            :: !(TF.Attribute s Text)
     {- ^ (Optional, bool) Run container in privileged mode. -}
-    , _publish_all_ports     :: !(TF.Attribute s "publish_all_ports" Text)
+    , _publish_all_ports     :: !(TF.Attribute s Text)
     {- ^ (Optional, bool) Publish all ports of the container. -}
-    , _restart               :: !(TF.Attribute s "restart" Text)
+    , _restart               :: !(TF.Attribute s Text)
     {- ^ (Optional, string) The restart policy for the container. Must be one of "no", "on-failure", "always", "unless-stopped". -}
-    , _upload                :: !(TF.Attribute s "upload" Text)
+    , _upload                :: !(TF.Attribute s Text)
     {- ^ (Optional, block) See <#upload> below for details. -}
-    , _user                  :: !(TF.Attribute s "user" Text)
+    , _user                  :: !(TF.Attribute s Text)
     {- ^ (Optional, string) User used for run the first process. Format is @user@ or @user:group@ which user and group can be passed literraly or by name. -}
-    , _volumes               :: !(TF.Attribute s "volumes" Text)
+    , _volumes               :: !(TF.Attribute s Text)
     {- ^ (Optional, block) See <#volumes> below for details. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerResource s) where
     toHCL ContainerResource{..} = TF.block $ catMaybes
-        [ TF.attribute _capabilities
-        , TF.attribute _command
-        , TF.attribute _cpu_shares
-        , TF.attribute _destroy_grace_seconds
-        , TF.attribute _dns
-        , TF.attribute _dns_opts
-        , TF.attribute _dns_search
-        , TF.attribute _domainname
-        , TF.attribute _entrypoint
-        , TF.attribute _env
-        , TF.attribute _host
-        , TF.attribute _hostname
-        , TF.attribute _image
-        , TF.attribute _labels
-        , TF.attribute _links
-        , TF.attribute _log_driver
-        , TF.attribute _log_opts
-        , TF.attribute _max_retry_count
-        , TF.attribute _memory
-        , TF.attribute _memory_swap
-        , TF.attribute _must_run
-        , TF.attribute _name
-        , TF.attribute _network_alias
-        , TF.attribute _network_mode
-        , TF.attribute _networks
-        , TF.attribute _ports
-        , TF.attribute _privileged
-        , TF.attribute _publish_all_ports
-        , TF.attribute _restart
-        , TF.attribute _upload
-        , TF.attribute _user
-        , TF.attribute _volumes
+        [ TF.attribute "capabilities" _capabilities
+        , TF.attribute "command" _command
+        , TF.attribute "cpu_shares" _cpu_shares
+        , TF.attribute "destroy_grace_seconds" _destroy_grace_seconds
+        , TF.attribute "dns" _dns
+        , TF.attribute "dns_opts" _dns_opts
+        , TF.attribute "dns_search" _dns_search
+        , TF.attribute "domainname" _domainname
+        , TF.attribute "entrypoint" _entrypoint
+        , TF.attribute "env" _env
+        , TF.attribute "host" _host
+        , TF.attribute "hostname" _hostname
+        , TF.attribute "image" _image
+        , TF.attribute "labels" _labels
+        , TF.attribute "links" _links
+        , TF.attribute "log_driver" _log_driver
+        , TF.attribute "log_opts" _log_opts
+        , TF.attribute "max_retry_count" _max_retry_count
+        , TF.attribute "memory" _memory
+        , TF.attribute "memory_swap" _memory_swap
+        , TF.attribute "must_run" _must_run
+        , TF.attribute "name" _name
+        , TF.attribute "network_alias" _network_alias
+        , TF.attribute "network_mode" _network_mode
+        , TF.attribute "networks" _networks
+        , TF.attribute "ports" _ports
+        , TF.attribute "privileged" _privileged
+        , TF.attribute "publish_all_ports" _publish_all_ports
+        , TF.attribute "restart" _restart
+        , TF.attribute "upload" _upload
+        , TF.attribute "user" _user
+        , TF.attribute "volumes" _volumes
         ]
 
-instance HasCapabilities (ContainerResource s) Text where
-    type HasCapabilitiesThread (ContainerResource s) Text = s
-
+instance HasCapabilities (ContainerResource s) s Text where
     capabilities =
-        lens (_capabilities :: ContainerResource s -> TF.Attribute s "capabilities" Text)
-             (\s a -> s { _capabilities = a } :: ContainerResource s)
+        lens (_capabilities :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _capabilities = a } :: ContainerResource s)
 
-instance HasCommand (ContainerResource s) Text where
-    type HasCommandThread (ContainerResource s) Text = s
-
+instance HasCommand (ContainerResource s) s Text where
     command =
-        lens (_command :: ContainerResource s -> TF.Attribute s "command" Text)
-             (\s a -> s { _command = a } :: ContainerResource s)
+        lens (_command :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _command = a } :: ContainerResource s)
 
-instance HasCpuShares (ContainerResource s) Text where
-    type HasCpuSharesThread (ContainerResource s) Text = s
-
+instance HasCpuShares (ContainerResource s) s Text where
     cpuShares =
-        lens (_cpu_shares :: ContainerResource s -> TF.Attribute s "cpu_shares" Text)
-             (\s a -> s { _cpu_shares = a } :: ContainerResource s)
+        lens (_cpu_shares :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _cpu_shares = a } :: ContainerResource s)
 
-instance HasDestroyGraceSeconds (ContainerResource s) Text where
-    type HasDestroyGraceSecondsThread (ContainerResource s) Text = s
-
+instance HasDestroyGraceSeconds (ContainerResource s) s Text where
     destroyGraceSeconds =
-        lens (_destroy_grace_seconds :: ContainerResource s -> TF.Attribute s "destroy_grace_seconds" Text)
-             (\s a -> s { _destroy_grace_seconds = a } :: ContainerResource s)
+        lens (_destroy_grace_seconds :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _destroy_grace_seconds = a } :: ContainerResource s)
 
-instance HasDns (ContainerResource s) Text where
-    type HasDnsThread (ContainerResource s) Text = s
-
+instance HasDns (ContainerResource s) s Text where
     dns =
-        lens (_dns :: ContainerResource s -> TF.Attribute s "dns" Text)
-             (\s a -> s { _dns = a } :: ContainerResource s)
+        lens (_dns :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _dns = a } :: ContainerResource s)
 
-instance HasDnsOpts (ContainerResource s) Text where
-    type HasDnsOptsThread (ContainerResource s) Text = s
-
+instance HasDnsOpts (ContainerResource s) s Text where
     dnsOpts =
-        lens (_dns_opts :: ContainerResource s -> TF.Attribute s "dns_opts" Text)
-             (\s a -> s { _dns_opts = a } :: ContainerResource s)
+        lens (_dns_opts :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _dns_opts = a } :: ContainerResource s)
 
-instance HasDnsSearch (ContainerResource s) Text where
-    type HasDnsSearchThread (ContainerResource s) Text = s
-
+instance HasDnsSearch (ContainerResource s) s Text where
     dnsSearch =
-        lens (_dns_search :: ContainerResource s -> TF.Attribute s "dns_search" Text)
-             (\s a -> s { _dns_search = a } :: ContainerResource s)
+        lens (_dns_search :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _dns_search = a } :: ContainerResource s)
 
-instance HasDomainname (ContainerResource s) Text where
-    type HasDomainnameThread (ContainerResource s) Text = s
-
+instance HasDomainname (ContainerResource s) s Text where
     domainname =
-        lens (_domainname :: ContainerResource s -> TF.Attribute s "domainname" Text)
-             (\s a -> s { _domainname = a } :: ContainerResource s)
+        lens (_domainname :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _domainname = a } :: ContainerResource s)
 
-instance HasEntrypoint (ContainerResource s) Text where
-    type HasEntrypointThread (ContainerResource s) Text = s
-
+instance HasEntrypoint (ContainerResource s) s Text where
     entrypoint =
-        lens (_entrypoint :: ContainerResource s -> TF.Attribute s "entrypoint" Text)
-             (\s a -> s { _entrypoint = a } :: ContainerResource s)
+        lens (_entrypoint :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _entrypoint = a } :: ContainerResource s)
 
-instance HasEnv (ContainerResource s) Text where
-    type HasEnvThread (ContainerResource s) Text = s
-
+instance HasEnv (ContainerResource s) s Text where
     env =
-        lens (_env :: ContainerResource s -> TF.Attribute s "env" Text)
-             (\s a -> s { _env = a } :: ContainerResource s)
+        lens (_env :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _env = a } :: ContainerResource s)
 
-instance HasHost (ContainerResource s) Text where
-    type HasHostThread (ContainerResource s) Text = s
-
+instance HasHost (ContainerResource s) s Text where
     host =
-        lens (_host :: ContainerResource s -> TF.Attribute s "host" Text)
-             (\s a -> s { _host = a } :: ContainerResource s)
+        lens (_host :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _host = a } :: ContainerResource s)
 
-instance HasHostname (ContainerResource s) Text where
-    type HasHostnameThread (ContainerResource s) Text = s
-
+instance HasHostname (ContainerResource s) s Text where
     hostname =
-        lens (_hostname :: ContainerResource s -> TF.Attribute s "hostname" Text)
-             (\s a -> s { _hostname = a } :: ContainerResource s)
+        lens (_hostname :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _hostname = a } :: ContainerResource s)
 
-instance HasImage (ContainerResource s) Text where
-    type HasImageThread (ContainerResource s) Text = s
-
+instance HasImage (ContainerResource s) s Text where
     image =
-        lens (_image :: ContainerResource s -> TF.Attribute s "image" Text)
-             (\s a -> s { _image = a } :: ContainerResource s)
+        lens (_image :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _image = a } :: ContainerResource s)
 
-instance HasLabels (ContainerResource s) Text where
-    type HasLabelsThread (ContainerResource s) Text = s
-
+instance HasLabels (ContainerResource s) s Text where
     labels =
-        lens (_labels :: ContainerResource s -> TF.Attribute s "labels" Text)
-             (\s a -> s { _labels = a } :: ContainerResource s)
+        lens (_labels :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _labels = a } :: ContainerResource s)
 
-instance HasLinks (ContainerResource s) Text where
-    type HasLinksThread (ContainerResource s) Text = s
-
+instance HasLinks (ContainerResource s) s Text where
     links =
-        lens (_links :: ContainerResource s -> TF.Attribute s "links" Text)
-             (\s a -> s { _links = a } :: ContainerResource s)
+        lens (_links :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _links = a } :: ContainerResource s)
 
-instance HasLogDriver (ContainerResource s) Text where
-    type HasLogDriverThread (ContainerResource s) Text = s
-
+instance HasLogDriver (ContainerResource s) s Text where
     logDriver =
-        lens (_log_driver :: ContainerResource s -> TF.Attribute s "log_driver" Text)
-             (\s a -> s { _log_driver = a } :: ContainerResource s)
+        lens (_log_driver :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _log_driver = a } :: ContainerResource s)
 
-instance HasLogOpts (ContainerResource s) Text where
-    type HasLogOptsThread (ContainerResource s) Text = s
-
+instance HasLogOpts (ContainerResource s) s Text where
     logOpts =
-        lens (_log_opts :: ContainerResource s -> TF.Attribute s "log_opts" Text)
-             (\s a -> s { _log_opts = a } :: ContainerResource s)
+        lens (_log_opts :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _log_opts = a } :: ContainerResource s)
 
-instance HasMaxRetryCount (ContainerResource s) Text where
-    type HasMaxRetryCountThread (ContainerResource s) Text = s
-
+instance HasMaxRetryCount (ContainerResource s) s Text where
     maxRetryCount =
-        lens (_max_retry_count :: ContainerResource s -> TF.Attribute s "max_retry_count" Text)
-             (\s a -> s { _max_retry_count = a } :: ContainerResource s)
+        lens (_max_retry_count :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _max_retry_count = a } :: ContainerResource s)
 
-instance HasMemory (ContainerResource s) Text where
-    type HasMemoryThread (ContainerResource s) Text = s
-
+instance HasMemory (ContainerResource s) s Text where
     memory =
-        lens (_memory :: ContainerResource s -> TF.Attribute s "memory" Text)
-             (\s a -> s { _memory = a } :: ContainerResource s)
+        lens (_memory :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _memory = a } :: ContainerResource s)
 
-instance HasMemorySwap (ContainerResource s) Text where
-    type HasMemorySwapThread (ContainerResource s) Text = s
-
+instance HasMemorySwap (ContainerResource s) s Text where
     memorySwap =
-        lens (_memory_swap :: ContainerResource s -> TF.Attribute s "memory_swap" Text)
-             (\s a -> s { _memory_swap = a } :: ContainerResource s)
+        lens (_memory_swap :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _memory_swap = a } :: ContainerResource s)
 
-instance HasMustRun (ContainerResource s) Text where
-    type HasMustRunThread (ContainerResource s) Text = s
-
+instance HasMustRun (ContainerResource s) s Text where
     mustRun =
-        lens (_must_run :: ContainerResource s -> TF.Attribute s "must_run" Text)
-             (\s a -> s { _must_run = a } :: ContainerResource s)
+        lens (_must_run :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _must_run = a } :: ContainerResource s)
 
-instance HasName (ContainerResource s) Text where
-    type HasNameThread (ContainerResource s) Text = s
-
+instance HasName (ContainerResource s) s Text where
     name =
-        lens (_name :: ContainerResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: ContainerResource s)
+        lens (_name :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ContainerResource s)
 
-instance HasNetworkAlias (ContainerResource s) Text where
-    type HasNetworkAliasThread (ContainerResource s) Text = s
-
+instance HasNetworkAlias (ContainerResource s) s Text where
     networkAlias =
-        lens (_network_alias :: ContainerResource s -> TF.Attribute s "network_alias" Text)
-             (\s a -> s { _network_alias = a } :: ContainerResource s)
+        lens (_network_alias :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _network_alias = a } :: ContainerResource s)
 
-instance HasNetworkMode (ContainerResource s) Text where
-    type HasNetworkModeThread (ContainerResource s) Text = s
-
+instance HasNetworkMode (ContainerResource s) s Text where
     networkMode =
-        lens (_network_mode :: ContainerResource s -> TF.Attribute s "network_mode" Text)
-             (\s a -> s { _network_mode = a } :: ContainerResource s)
+        lens (_network_mode :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _network_mode = a } :: ContainerResource s)
 
-instance HasNetworks (ContainerResource s) Text where
-    type HasNetworksThread (ContainerResource s) Text = s
-
+instance HasNetworks (ContainerResource s) s Text where
     networks =
-        lens (_networks :: ContainerResource s -> TF.Attribute s "networks" Text)
-             (\s a -> s { _networks = a } :: ContainerResource s)
+        lens (_networks :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _networks = a } :: ContainerResource s)
 
-instance HasPorts (ContainerResource s) Text where
-    type HasPortsThread (ContainerResource s) Text = s
-
+instance HasPorts (ContainerResource s) s Text where
     ports =
-        lens (_ports :: ContainerResource s -> TF.Attribute s "ports" Text)
-             (\s a -> s { _ports = a } :: ContainerResource s)
+        lens (_ports :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _ports = a } :: ContainerResource s)
 
-instance HasPrivileged (ContainerResource s) Text where
-    type HasPrivilegedThread (ContainerResource s) Text = s
-
+instance HasPrivileged (ContainerResource s) s Text where
     privileged =
-        lens (_privileged :: ContainerResource s -> TF.Attribute s "privileged" Text)
-             (\s a -> s { _privileged = a } :: ContainerResource s)
+        lens (_privileged :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _privileged = a } :: ContainerResource s)
 
-instance HasPublishAllPorts (ContainerResource s) Text where
-    type HasPublishAllPortsThread (ContainerResource s) Text = s
-
+instance HasPublishAllPorts (ContainerResource s) s Text where
     publishAllPorts =
-        lens (_publish_all_ports :: ContainerResource s -> TF.Attribute s "publish_all_ports" Text)
-             (\s a -> s { _publish_all_ports = a } :: ContainerResource s)
+        lens (_publish_all_ports :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _publish_all_ports = a } :: ContainerResource s)
 
-instance HasRestart (ContainerResource s) Text where
-    type HasRestartThread (ContainerResource s) Text = s
-
+instance HasRestart (ContainerResource s) s Text where
     restart =
-        lens (_restart :: ContainerResource s -> TF.Attribute s "restart" Text)
-             (\s a -> s { _restart = a } :: ContainerResource s)
+        lens (_restart :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _restart = a } :: ContainerResource s)
 
-instance HasUpload (ContainerResource s) Text where
-    type HasUploadThread (ContainerResource s) Text = s
-
+instance HasUpload (ContainerResource s) s Text where
     upload =
-        lens (_upload :: ContainerResource s -> TF.Attribute s "upload" Text)
-             (\s a -> s { _upload = a } :: ContainerResource s)
+        lens (_upload :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _upload = a } :: ContainerResource s)
 
-instance HasUser (ContainerResource s) Text where
-    type HasUserThread (ContainerResource s) Text = s
-
+instance HasUser (ContainerResource s) s Text where
     user =
-        lens (_user :: ContainerResource s -> TF.Attribute s "user" Text)
-             (\s a -> s { _user = a } :: ContainerResource s)
+        lens (_user :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _user = a } :: ContainerResource s)
 
-instance HasVolumes (ContainerResource s) Text where
-    type HasVolumesThread (ContainerResource s) Text = s
-
+instance HasVolumes (ContainerResource s) s Text where
     volumes =
-        lens (_volumes :: ContainerResource s -> TF.Attribute s "volumes" Text)
-             (\s a -> s { _volumes = a } :: ContainerResource s)
+        lens (_volumes :: ContainerResource s -> TF.Attribute s Text)
+            (\s a -> s { _volumes = a } :: ContainerResource s)
 
 containerResource :: TF.Resource TF.Docker (ContainerResource s)
 containerResource =
@@ -483,55 +421,45 @@ conjunction with </docs/providers/docker/d/registry_image.html> data source
 to update the @pull_triggers@ field.
 -}
 data ImageResource s = ImageResource {
-      _keep_locally  :: !(TF.Attribute s "keep_locally" Text)
+      _keep_locally  :: !(TF.Attribute s Text)
     {- ^ (Optional, boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation. -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name          :: !(TF.Attribute s Text)
     {- ^ (Required, string) The name of the Docker image, including any tags. -}
-    , _pull_trigger  :: !(TF.Attribute s "pull_trigger" Text)
+    , _pull_trigger  :: !(TF.Attribute s Text)
     {- ^ - Deprecated , use @pull_triggers@ instead. -}
-    , _pull_triggers :: !(TF.Attribute s "pull_triggers" Text)
+    , _pull_triggers :: !(TF.Attribute s Text)
     {- ^ (Optional, list of strings) List of values which cause an image pull when changed. This is used to store the image digest from the registry when using the @docker_registry_image@  </docs/providers/docker/d/registry_image.html> to trigger an image update. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ImageResource s) where
     toHCL ImageResource{..} = TF.block $ catMaybes
-        [ TF.attribute _keep_locally
-        , TF.attribute _name
-        , TF.attribute _pull_trigger
-        , TF.attribute _pull_triggers
+        [ TF.attribute "keep_locally" _keep_locally
+        , TF.attribute "name" _name
+        , TF.attribute "pull_trigger" _pull_trigger
+        , TF.attribute "pull_triggers" _pull_triggers
         ]
 
-instance HasKeepLocally (ImageResource s) Text where
-    type HasKeepLocallyThread (ImageResource s) Text = s
-
+instance HasKeepLocally (ImageResource s) s Text where
     keepLocally =
-        lens (_keep_locally :: ImageResource s -> TF.Attribute s "keep_locally" Text)
-             (\s a -> s { _keep_locally = a } :: ImageResource s)
+        lens (_keep_locally :: ImageResource s -> TF.Attribute s Text)
+            (\s a -> s { _keep_locally = a } :: ImageResource s)
 
-instance HasName (ImageResource s) Text where
-    type HasNameThread (ImageResource s) Text = s
-
+instance HasName (ImageResource s) s Text where
     name =
-        lens (_name :: ImageResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: ImageResource s)
+        lens (_name :: ImageResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ImageResource s)
 
-instance HasPullTrigger (ImageResource s) Text where
-    type HasPullTriggerThread (ImageResource s) Text = s
-
+instance HasPullTrigger (ImageResource s) s Text where
     pullTrigger =
-        lens (_pull_trigger :: ImageResource s -> TF.Attribute s "pull_trigger" Text)
-             (\s a -> s { _pull_trigger = a } :: ImageResource s)
+        lens (_pull_trigger :: ImageResource s -> TF.Attribute s Text)
+            (\s a -> s { _pull_trigger = a } :: ImageResource s)
 
-instance HasPullTriggers (ImageResource s) Text where
-    type HasPullTriggersThread (ImageResource s) Text = s
-
+instance HasPullTriggers (ImageResource s) s Text where
     pullTriggers =
-        lens (_pull_triggers :: ImageResource s -> TF.Attribute s "pull_triggers" Text)
-             (\s a -> s { _pull_triggers = a } :: ImageResource s)
+        lens (_pull_triggers :: ImageResource s -> TF.Attribute s Text)
+            (\s a -> s { _pull_triggers = a } :: ImageResource s)
 
-instance HasComputedLatest (ImageResource s) Text where
-    computedLatest =
-        to (\x -> TF.Computed (TF.referenceKey x) "latest")
+instance HasComputedLatest (ImageResource s) Text
 
 imageResource :: TF.Resource TF.Docker (ImageResource s)
 imageResource =
@@ -550,81 +478,67 @@ Manages a Docker Network. This can be used alongside
 the docker environment.
 -}
 data NetworkResource s = NetworkResource {
-      _check_duplicate :: !(TF.Attribute s "check_duplicate" Text)
+      _check_duplicate :: !(TF.Attribute s Text)
     {- ^ (Optional, boolean) Requests daemon to check for networks with same name. -}
-    , _driver          :: !(TF.Attribute s "driver" Text)
+    , _driver          :: !(TF.Attribute s Text)
     {- ^ (Optional, string) Name of the network driver to use. Defaults to @bridge@ driver. -}
-    , _internal        :: !(TF.Attribute s "internal" Text)
+    , _internal        :: !(TF.Attribute s Text)
     {- ^ (Optional, boolean) Restrict external access to the network. Defaults to @false@ . -}
-    , _ipam_config     :: !(TF.Attribute s "ipam_config" Text)
+    , _ipam_config     :: !(TF.Attribute s Text)
     {- ^ (Optional, block) See <#ipam_config> below for details. -}
-    , _ipam_driver     :: !(TF.Attribute s "ipam_driver" Text)
+    , _ipam_driver     :: !(TF.Attribute s Text)
     {- ^ (Optional, string) Driver used by the custom IP scheme of the network. -}
-    , _name            :: !(TF.Attribute s "name" Text)
+    , _name            :: !(TF.Attribute s Text)
     {- ^ (Required, string) The name of the Docker network. -}
-    , _options         :: !(TF.Attribute s "options" Text)
+    , _options         :: !(TF.Attribute s Text)
     {- ^ (Optional, map of strings) Network specific options to be used by the drivers. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkResource s) where
     toHCL NetworkResource{..} = TF.block $ catMaybes
-        [ TF.attribute _check_duplicate
-        , TF.attribute _driver
-        , TF.attribute _internal
-        , TF.attribute _ipam_config
-        , TF.attribute _ipam_driver
-        , TF.attribute _name
-        , TF.attribute _options
+        [ TF.attribute "check_duplicate" _check_duplicate
+        , TF.attribute "driver" _driver
+        , TF.attribute "internal" _internal
+        , TF.attribute "ipam_config" _ipam_config
+        , TF.attribute "ipam_driver" _ipam_driver
+        , TF.attribute "name" _name
+        , TF.attribute "options" _options
         ]
 
-instance HasCheckDuplicate (NetworkResource s) Text where
-    type HasCheckDuplicateThread (NetworkResource s) Text = s
-
+instance HasCheckDuplicate (NetworkResource s) s Text where
     checkDuplicate =
-        lens (_check_duplicate :: NetworkResource s -> TF.Attribute s "check_duplicate" Text)
-             (\s a -> s { _check_duplicate = a } :: NetworkResource s)
+        lens (_check_duplicate :: NetworkResource s -> TF.Attribute s Text)
+            (\s a -> s { _check_duplicate = a } :: NetworkResource s)
 
-instance HasDriver (NetworkResource s) Text where
-    type HasDriverThread (NetworkResource s) Text = s
-
+instance HasDriver (NetworkResource s) s Text where
     driver =
-        lens (_driver :: NetworkResource s -> TF.Attribute s "driver" Text)
-             (\s a -> s { _driver = a } :: NetworkResource s)
+        lens (_driver :: NetworkResource s -> TF.Attribute s Text)
+            (\s a -> s { _driver = a } :: NetworkResource s)
 
-instance HasInternal (NetworkResource s) Text where
-    type HasInternalThread (NetworkResource s) Text = s
-
+instance HasInternal (NetworkResource s) s Text where
     internal =
-        lens (_internal :: NetworkResource s -> TF.Attribute s "internal" Text)
-             (\s a -> s { _internal = a } :: NetworkResource s)
+        lens (_internal :: NetworkResource s -> TF.Attribute s Text)
+            (\s a -> s { _internal = a } :: NetworkResource s)
 
-instance HasIpamConfig (NetworkResource s) Text where
-    type HasIpamConfigThread (NetworkResource s) Text = s
-
+instance HasIpamConfig (NetworkResource s) s Text where
     ipamConfig =
-        lens (_ipam_config :: NetworkResource s -> TF.Attribute s "ipam_config" Text)
-             (\s a -> s { _ipam_config = a } :: NetworkResource s)
+        lens (_ipam_config :: NetworkResource s -> TF.Attribute s Text)
+            (\s a -> s { _ipam_config = a } :: NetworkResource s)
 
-instance HasIpamDriver (NetworkResource s) Text where
-    type HasIpamDriverThread (NetworkResource s) Text = s
-
+instance HasIpamDriver (NetworkResource s) s Text where
     ipamDriver =
-        lens (_ipam_driver :: NetworkResource s -> TF.Attribute s "ipam_driver" Text)
-             (\s a -> s { _ipam_driver = a } :: NetworkResource s)
+        lens (_ipam_driver :: NetworkResource s -> TF.Attribute s Text)
+            (\s a -> s { _ipam_driver = a } :: NetworkResource s)
 
-instance HasName (NetworkResource s) Text where
-    type HasNameThread (NetworkResource s) Text = s
-
+instance HasName (NetworkResource s) s Text where
     name =
-        lens (_name :: NetworkResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: NetworkResource s)
+        lens (_name :: NetworkResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: NetworkResource s)
 
-instance HasOptions (NetworkResource s) Text where
-    type HasOptionsThread (NetworkResource s) Text = s
-
+instance HasOptions (NetworkResource s) s Text where
     options =
-        lens (_options :: NetworkResource s -> TF.Attribute s "options" Text)
-             (\s a -> s { _options = a } :: NetworkResource s)
+        lens (_options :: NetworkResource s -> TF.Attribute s Text)
+            (\s a -> s { _options = a } :: NetworkResource s)
 
 networkResource :: TF.Resource TF.Docker (NetworkResource s)
 networkResource =
@@ -646,45 +560,37 @@ Creates and destroys a volume in Docker. This can be used alongside
 shared across containers.
 -}
 data VolumeResource s = VolumeResource {
-      _driver      :: !(TF.Attribute s "driver" Text)
+      _driver      :: !(TF.Attribute s Text)
     {- ^ (Optional, string) Driver type for the volume (defaults to local). -}
-    , _driver_opts :: !(TF.Attribute s "driver_opts" Text)
+    , _driver_opts :: !(TF.Attribute s Text)
     {- ^ (Optional, map of strings) Options specific to the driver. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name        :: !(TF.Attribute s Text)
     {- ^ (Optional, string) The name of the Docker volume (generated if not provided). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VolumeResource s) where
     toHCL VolumeResource{..} = TF.block $ catMaybes
-        [ TF.attribute _driver
-        , TF.attribute _driver_opts
-        , TF.attribute _name
+        [ TF.attribute "driver" _driver
+        , TF.attribute "driver_opts" _driver_opts
+        , TF.attribute "name" _name
         ]
 
-instance HasDriver (VolumeResource s) Text where
-    type HasDriverThread (VolumeResource s) Text = s
-
+instance HasDriver (VolumeResource s) s Text where
     driver =
-        lens (_driver :: VolumeResource s -> TF.Attribute s "driver" Text)
-             (\s a -> s { _driver = a } :: VolumeResource s)
+        lens (_driver :: VolumeResource s -> TF.Attribute s Text)
+            (\s a -> s { _driver = a } :: VolumeResource s)
 
-instance HasDriverOpts (VolumeResource s) Text where
-    type HasDriverOptsThread (VolumeResource s) Text = s
-
+instance HasDriverOpts (VolumeResource s) s Text where
     driverOpts =
-        lens (_driver_opts :: VolumeResource s -> TF.Attribute s "driver_opts" Text)
-             (\s a -> s { _driver_opts = a } :: VolumeResource s)
+        lens (_driver_opts :: VolumeResource s -> TF.Attribute s Text)
+            (\s a -> s { _driver_opts = a } :: VolumeResource s)
 
-instance HasName (VolumeResource s) Text where
-    type HasNameThread (VolumeResource s) Text = s
-
+instance HasName (VolumeResource s) s Text where
     name =
-        lens (_name :: VolumeResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: VolumeResource s)
+        lens (_name :: VolumeResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: VolumeResource s)
 
-instance HasComputedMountpoint (VolumeResource s) Text where
-    computedMountpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "mountpoint")
+instance HasComputedMountpoint (VolumeResource s) Text
 
 volumeResource :: TF.Resource TF.Docker (VolumeResource s)
 volumeResource =
@@ -695,470 +601,266 @@ volumeResource =
             , _name = TF.Nil
             }
 
-class HasCapabilities a b | a -> b where
-    type HasCapabilitiesThread a b :: *
+class HasCapabilities a s b | a -> s b where
+    capabilities :: Lens' a (TF.Attribute s b)
 
-    capabilities :: Lens' a (TF.Attribute (HasCapabilitiesThread a b) "capabilities" b)
-
-instance HasCapabilities a b => HasCapabilities (TF.Resource p a) b where
-    type HasCapabilitiesThread (TF.Resource p a) b =
-         HasCapabilitiesThread a b
-
+instance HasCapabilities a s b => HasCapabilities (TF.Resource p a) s b where
     capabilities = TF.configuration . capabilities
 
-class HasCheckDuplicate a b | a -> b where
-    type HasCheckDuplicateThread a b :: *
+class HasCheckDuplicate a s b | a -> s b where
+    checkDuplicate :: Lens' a (TF.Attribute s b)
 
-    checkDuplicate :: Lens' a (TF.Attribute (HasCheckDuplicateThread a b) "check_duplicate" b)
-
-instance HasCheckDuplicate a b => HasCheckDuplicate (TF.Resource p a) b where
-    type HasCheckDuplicateThread (TF.Resource p a) b =
-         HasCheckDuplicateThread a b
-
+instance HasCheckDuplicate a s b => HasCheckDuplicate (TF.Resource p a) s b where
     checkDuplicate = TF.configuration . checkDuplicate
 
-class HasCommand a b | a -> b where
-    type HasCommandThread a b :: *
+class HasCommand a s b | a -> s b where
+    command :: Lens' a (TF.Attribute s b)
 
-    command :: Lens' a (TF.Attribute (HasCommandThread a b) "command" b)
-
-instance HasCommand a b => HasCommand (TF.Resource p a) b where
-    type HasCommandThread (TF.Resource p a) b =
-         HasCommandThread a b
-
+instance HasCommand a s b => HasCommand (TF.Resource p a) s b where
     command = TF.configuration . command
 
-class HasCpuShares a b | a -> b where
-    type HasCpuSharesThread a b :: *
+class HasCpuShares a s b | a -> s b where
+    cpuShares :: Lens' a (TF.Attribute s b)
 
-    cpuShares :: Lens' a (TF.Attribute (HasCpuSharesThread a b) "cpu_shares" b)
-
-instance HasCpuShares a b => HasCpuShares (TF.Resource p a) b where
-    type HasCpuSharesThread (TF.Resource p a) b =
-         HasCpuSharesThread a b
-
+instance HasCpuShares a s b => HasCpuShares (TF.Resource p a) s b where
     cpuShares = TF.configuration . cpuShares
 
-class HasDestroyGraceSeconds a b | a -> b where
-    type HasDestroyGraceSecondsThread a b :: *
+class HasDestroyGraceSeconds a s b | a -> s b where
+    destroyGraceSeconds :: Lens' a (TF.Attribute s b)
 
-    destroyGraceSeconds :: Lens' a (TF.Attribute (HasDestroyGraceSecondsThread a b) "destroy_grace_seconds" b)
-
-instance HasDestroyGraceSeconds a b => HasDestroyGraceSeconds (TF.Resource p a) b where
-    type HasDestroyGraceSecondsThread (TF.Resource p a) b =
-         HasDestroyGraceSecondsThread a b
-
+instance HasDestroyGraceSeconds a s b => HasDestroyGraceSeconds (TF.Resource p a) s b where
     destroyGraceSeconds = TF.configuration . destroyGraceSeconds
 
-class HasDns a b | a -> b where
-    type HasDnsThread a b :: *
+class HasDns a s b | a -> s b where
+    dns :: Lens' a (TF.Attribute s b)
 
-    dns :: Lens' a (TF.Attribute (HasDnsThread a b) "dns" b)
-
-instance HasDns a b => HasDns (TF.Resource p a) b where
-    type HasDnsThread (TF.Resource p a) b =
-         HasDnsThread a b
-
+instance HasDns a s b => HasDns (TF.Resource p a) s b where
     dns = TF.configuration . dns
 
-class HasDnsOpts a b | a -> b where
-    type HasDnsOptsThread a b :: *
+class HasDnsOpts a s b | a -> s b where
+    dnsOpts :: Lens' a (TF.Attribute s b)
 
-    dnsOpts :: Lens' a (TF.Attribute (HasDnsOptsThread a b) "dns_opts" b)
-
-instance HasDnsOpts a b => HasDnsOpts (TF.Resource p a) b where
-    type HasDnsOptsThread (TF.Resource p a) b =
-         HasDnsOptsThread a b
-
+instance HasDnsOpts a s b => HasDnsOpts (TF.Resource p a) s b where
     dnsOpts = TF.configuration . dnsOpts
 
-class HasDnsSearch a b | a -> b where
-    type HasDnsSearchThread a b :: *
+class HasDnsSearch a s b | a -> s b where
+    dnsSearch :: Lens' a (TF.Attribute s b)
 
-    dnsSearch :: Lens' a (TF.Attribute (HasDnsSearchThread a b) "dns_search" b)
-
-instance HasDnsSearch a b => HasDnsSearch (TF.Resource p a) b where
-    type HasDnsSearchThread (TF.Resource p a) b =
-         HasDnsSearchThread a b
-
+instance HasDnsSearch a s b => HasDnsSearch (TF.Resource p a) s b where
     dnsSearch = TF.configuration . dnsSearch
 
-class HasDomainname a b | a -> b where
-    type HasDomainnameThread a b :: *
+class HasDomainname a s b | a -> s b where
+    domainname :: Lens' a (TF.Attribute s b)
 
-    domainname :: Lens' a (TF.Attribute (HasDomainnameThread a b) "domainname" b)
-
-instance HasDomainname a b => HasDomainname (TF.Resource p a) b where
-    type HasDomainnameThread (TF.Resource p a) b =
-         HasDomainnameThread a b
-
+instance HasDomainname a s b => HasDomainname (TF.Resource p a) s b where
     domainname = TF.configuration . domainname
 
-class HasDriver a b | a -> b where
-    type HasDriverThread a b :: *
+class HasDriver a s b | a -> s b where
+    driver :: Lens' a (TF.Attribute s b)
 
-    driver :: Lens' a (TF.Attribute (HasDriverThread a b) "driver" b)
-
-instance HasDriver a b => HasDriver (TF.Resource p a) b where
-    type HasDriverThread (TF.Resource p a) b =
-         HasDriverThread a b
-
+instance HasDriver a s b => HasDriver (TF.Resource p a) s b where
     driver = TF.configuration . driver
 
-class HasDriverOpts a b | a -> b where
-    type HasDriverOptsThread a b :: *
+class HasDriverOpts a s b | a -> s b where
+    driverOpts :: Lens' a (TF.Attribute s b)
 
-    driverOpts :: Lens' a (TF.Attribute (HasDriverOptsThread a b) "driver_opts" b)
-
-instance HasDriverOpts a b => HasDriverOpts (TF.Resource p a) b where
-    type HasDriverOptsThread (TF.Resource p a) b =
-         HasDriverOptsThread a b
-
+instance HasDriverOpts a s b => HasDriverOpts (TF.Resource p a) s b where
     driverOpts = TF.configuration . driverOpts
 
-class HasEntrypoint a b | a -> b where
-    type HasEntrypointThread a b :: *
+class HasEntrypoint a s b | a -> s b where
+    entrypoint :: Lens' a (TF.Attribute s b)
 
-    entrypoint :: Lens' a (TF.Attribute (HasEntrypointThread a b) "entrypoint" b)
-
-instance HasEntrypoint a b => HasEntrypoint (TF.Resource p a) b where
-    type HasEntrypointThread (TF.Resource p a) b =
-         HasEntrypointThread a b
-
+instance HasEntrypoint a s b => HasEntrypoint (TF.Resource p a) s b where
     entrypoint = TF.configuration . entrypoint
 
-class HasEnv a b | a -> b where
-    type HasEnvThread a b :: *
+class HasEnv a s b | a -> s b where
+    env :: Lens' a (TF.Attribute s b)
 
-    env :: Lens' a (TF.Attribute (HasEnvThread a b) "env" b)
-
-instance HasEnv a b => HasEnv (TF.Resource p a) b where
-    type HasEnvThread (TF.Resource p a) b =
-         HasEnvThread a b
-
+instance HasEnv a s b => HasEnv (TF.Resource p a) s b where
     env = TF.configuration . env
 
-class HasHost a b | a -> b where
-    type HasHostThread a b :: *
+class HasHost a s b | a -> s b where
+    host :: Lens' a (TF.Attribute s b)
 
-    host :: Lens' a (TF.Attribute (HasHostThread a b) "host" b)
-
-instance HasHost a b => HasHost (TF.Resource p a) b where
-    type HasHostThread (TF.Resource p a) b =
-         HasHostThread a b
-
+instance HasHost a s b => HasHost (TF.Resource p a) s b where
     host = TF.configuration . host
 
-class HasHostname a b | a -> b where
-    type HasHostnameThread a b :: *
+class HasHostname a s b | a -> s b where
+    hostname :: Lens' a (TF.Attribute s b)
 
-    hostname :: Lens' a (TF.Attribute (HasHostnameThread a b) "hostname" b)
-
-instance HasHostname a b => HasHostname (TF.Resource p a) b where
-    type HasHostnameThread (TF.Resource p a) b =
-         HasHostnameThread a b
-
+instance HasHostname a s b => HasHostname (TF.Resource p a) s b where
     hostname = TF.configuration . hostname
 
-class HasImage a b | a -> b where
-    type HasImageThread a b :: *
+class HasImage a s b | a -> s b where
+    image :: Lens' a (TF.Attribute s b)
 
-    image :: Lens' a (TF.Attribute (HasImageThread a b) "image" b)
-
-instance HasImage a b => HasImage (TF.Resource p a) b where
-    type HasImageThread (TF.Resource p a) b =
-         HasImageThread a b
-
+instance HasImage a s b => HasImage (TF.Resource p a) s b where
     image = TF.configuration . image
 
-class HasInternal a b | a -> b where
-    type HasInternalThread a b :: *
+class HasInternal a s b | a -> s b where
+    internal :: Lens' a (TF.Attribute s b)
 
-    internal :: Lens' a (TF.Attribute (HasInternalThread a b) "internal" b)
-
-instance HasInternal a b => HasInternal (TF.Resource p a) b where
-    type HasInternalThread (TF.Resource p a) b =
-         HasInternalThread a b
-
+instance HasInternal a s b => HasInternal (TF.Resource p a) s b where
     internal = TF.configuration . internal
 
-class HasIpamConfig a b | a -> b where
-    type HasIpamConfigThread a b :: *
+class HasIpamConfig a s b | a -> s b where
+    ipamConfig :: Lens' a (TF.Attribute s b)
 
-    ipamConfig :: Lens' a (TF.Attribute (HasIpamConfigThread a b) "ipam_config" b)
-
-instance HasIpamConfig a b => HasIpamConfig (TF.Resource p a) b where
-    type HasIpamConfigThread (TF.Resource p a) b =
-         HasIpamConfigThread a b
-
+instance HasIpamConfig a s b => HasIpamConfig (TF.Resource p a) s b where
     ipamConfig = TF.configuration . ipamConfig
 
-class HasIpamDriver a b | a -> b where
-    type HasIpamDriverThread a b :: *
+class HasIpamDriver a s b | a -> s b where
+    ipamDriver :: Lens' a (TF.Attribute s b)
 
-    ipamDriver :: Lens' a (TF.Attribute (HasIpamDriverThread a b) "ipam_driver" b)
-
-instance HasIpamDriver a b => HasIpamDriver (TF.Resource p a) b where
-    type HasIpamDriverThread (TF.Resource p a) b =
-         HasIpamDriverThread a b
-
+instance HasIpamDriver a s b => HasIpamDriver (TF.Resource p a) s b where
     ipamDriver = TF.configuration . ipamDriver
 
-class HasKeepLocally a b | a -> b where
-    type HasKeepLocallyThread a b :: *
+class HasKeepLocally a s b | a -> s b where
+    keepLocally :: Lens' a (TF.Attribute s b)
 
-    keepLocally :: Lens' a (TF.Attribute (HasKeepLocallyThread a b) "keep_locally" b)
-
-instance HasKeepLocally a b => HasKeepLocally (TF.Resource p a) b where
-    type HasKeepLocallyThread (TF.Resource p a) b =
-         HasKeepLocallyThread a b
-
+instance HasKeepLocally a s b => HasKeepLocally (TF.Resource p a) s b where
     keepLocally = TF.configuration . keepLocally
 
-class HasLabels a b | a -> b where
-    type HasLabelsThread a b :: *
+class HasLabels a s b | a -> s b where
+    labels :: Lens' a (TF.Attribute s b)
 
-    labels :: Lens' a (TF.Attribute (HasLabelsThread a b) "labels" b)
-
-instance HasLabels a b => HasLabels (TF.Resource p a) b where
-    type HasLabelsThread (TF.Resource p a) b =
-         HasLabelsThread a b
-
+instance HasLabels a s b => HasLabels (TF.Resource p a) s b where
     labels = TF.configuration . labels
 
-class HasLinks a b | a -> b where
-    type HasLinksThread a b :: *
+class HasLinks a s b | a -> s b where
+    links :: Lens' a (TF.Attribute s b)
 
-    links :: Lens' a (TF.Attribute (HasLinksThread a b) "links" b)
-
-instance HasLinks a b => HasLinks (TF.Resource p a) b where
-    type HasLinksThread (TF.Resource p a) b =
-         HasLinksThread a b
-
+instance HasLinks a s b => HasLinks (TF.Resource p a) s b where
     links = TF.configuration . links
 
-class HasLogDriver a b | a -> b where
-    type HasLogDriverThread a b :: *
+class HasLogDriver a s b | a -> s b where
+    logDriver :: Lens' a (TF.Attribute s b)
 
-    logDriver :: Lens' a (TF.Attribute (HasLogDriverThread a b) "log_driver" b)
-
-instance HasLogDriver a b => HasLogDriver (TF.Resource p a) b where
-    type HasLogDriverThread (TF.Resource p a) b =
-         HasLogDriverThread a b
-
+instance HasLogDriver a s b => HasLogDriver (TF.Resource p a) s b where
     logDriver = TF.configuration . logDriver
 
-class HasLogOpts a b | a -> b where
-    type HasLogOptsThread a b :: *
+class HasLogOpts a s b | a -> s b where
+    logOpts :: Lens' a (TF.Attribute s b)
 
-    logOpts :: Lens' a (TF.Attribute (HasLogOptsThread a b) "log_opts" b)
-
-instance HasLogOpts a b => HasLogOpts (TF.Resource p a) b where
-    type HasLogOptsThread (TF.Resource p a) b =
-         HasLogOptsThread a b
-
+instance HasLogOpts a s b => HasLogOpts (TF.Resource p a) s b where
     logOpts = TF.configuration . logOpts
 
-class HasMaxRetryCount a b | a -> b where
-    type HasMaxRetryCountThread a b :: *
+class HasMaxRetryCount a s b | a -> s b where
+    maxRetryCount :: Lens' a (TF.Attribute s b)
 
-    maxRetryCount :: Lens' a (TF.Attribute (HasMaxRetryCountThread a b) "max_retry_count" b)
-
-instance HasMaxRetryCount a b => HasMaxRetryCount (TF.Resource p a) b where
-    type HasMaxRetryCountThread (TF.Resource p a) b =
-         HasMaxRetryCountThread a b
-
+instance HasMaxRetryCount a s b => HasMaxRetryCount (TF.Resource p a) s b where
     maxRetryCount = TF.configuration . maxRetryCount
 
-class HasMemory a b | a -> b where
-    type HasMemoryThread a b :: *
+class HasMemory a s b | a -> s b where
+    memory :: Lens' a (TF.Attribute s b)
 
-    memory :: Lens' a (TF.Attribute (HasMemoryThread a b) "memory" b)
-
-instance HasMemory a b => HasMemory (TF.Resource p a) b where
-    type HasMemoryThread (TF.Resource p a) b =
-         HasMemoryThread a b
-
+instance HasMemory a s b => HasMemory (TF.Resource p a) s b where
     memory = TF.configuration . memory
 
-class HasMemorySwap a b | a -> b where
-    type HasMemorySwapThread a b :: *
+class HasMemorySwap a s b | a -> s b where
+    memorySwap :: Lens' a (TF.Attribute s b)
 
-    memorySwap :: Lens' a (TF.Attribute (HasMemorySwapThread a b) "memory_swap" b)
-
-instance HasMemorySwap a b => HasMemorySwap (TF.Resource p a) b where
-    type HasMemorySwapThread (TF.Resource p a) b =
-         HasMemorySwapThread a b
-
+instance HasMemorySwap a s b => HasMemorySwap (TF.Resource p a) s b where
     memorySwap = TF.configuration . memorySwap
 
-class HasMustRun a b | a -> b where
-    type HasMustRunThread a b :: *
+class HasMustRun a s b | a -> s b where
+    mustRun :: Lens' a (TF.Attribute s b)
 
-    mustRun :: Lens' a (TF.Attribute (HasMustRunThread a b) "must_run" b)
-
-instance HasMustRun a b => HasMustRun (TF.Resource p a) b where
-    type HasMustRunThread (TF.Resource p a) b =
-         HasMustRunThread a b
-
+instance HasMustRun a s b => HasMustRun (TF.Resource p a) s b where
     mustRun = TF.configuration . mustRun
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.Resource p a) b where
-    type HasNameThread (TF.Resource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.Resource p a) s b where
     name = TF.configuration . name
 
-class HasNetworkAlias a b | a -> b where
-    type HasNetworkAliasThread a b :: *
+class HasNetworkAlias a s b | a -> s b where
+    networkAlias :: Lens' a (TF.Attribute s b)
 
-    networkAlias :: Lens' a (TF.Attribute (HasNetworkAliasThread a b) "network_alias" b)
-
-instance HasNetworkAlias a b => HasNetworkAlias (TF.Resource p a) b where
-    type HasNetworkAliasThread (TF.Resource p a) b =
-         HasNetworkAliasThread a b
-
+instance HasNetworkAlias a s b => HasNetworkAlias (TF.Resource p a) s b where
     networkAlias = TF.configuration . networkAlias
 
-class HasNetworkMode a b | a -> b where
-    type HasNetworkModeThread a b :: *
+class HasNetworkMode a s b | a -> s b where
+    networkMode :: Lens' a (TF.Attribute s b)
 
-    networkMode :: Lens' a (TF.Attribute (HasNetworkModeThread a b) "network_mode" b)
-
-instance HasNetworkMode a b => HasNetworkMode (TF.Resource p a) b where
-    type HasNetworkModeThread (TF.Resource p a) b =
-         HasNetworkModeThread a b
-
+instance HasNetworkMode a s b => HasNetworkMode (TF.Resource p a) s b where
     networkMode = TF.configuration . networkMode
 
-class HasNetworks a b | a -> b where
-    type HasNetworksThread a b :: *
+class HasNetworks a s b | a -> s b where
+    networks :: Lens' a (TF.Attribute s b)
 
-    networks :: Lens' a (TF.Attribute (HasNetworksThread a b) "networks" b)
-
-instance HasNetworks a b => HasNetworks (TF.Resource p a) b where
-    type HasNetworksThread (TF.Resource p a) b =
-         HasNetworksThread a b
-
+instance HasNetworks a s b => HasNetworks (TF.Resource p a) s b where
     networks = TF.configuration . networks
 
-class HasOptions a b | a -> b where
-    type HasOptionsThread a b :: *
+class HasOptions a s b | a -> s b where
+    options :: Lens' a (TF.Attribute s b)
 
-    options :: Lens' a (TF.Attribute (HasOptionsThread a b) "options" b)
-
-instance HasOptions a b => HasOptions (TF.Resource p a) b where
-    type HasOptionsThread (TF.Resource p a) b =
-         HasOptionsThread a b
-
+instance HasOptions a s b => HasOptions (TF.Resource p a) s b where
     options = TF.configuration . options
 
-class HasPorts a b | a -> b where
-    type HasPortsThread a b :: *
+class HasPorts a s b | a -> s b where
+    ports :: Lens' a (TF.Attribute s b)
 
-    ports :: Lens' a (TF.Attribute (HasPortsThread a b) "ports" b)
-
-instance HasPorts a b => HasPorts (TF.Resource p a) b where
-    type HasPortsThread (TF.Resource p a) b =
-         HasPortsThread a b
-
+instance HasPorts a s b => HasPorts (TF.Resource p a) s b where
     ports = TF.configuration . ports
 
-class HasPrivileged a b | a -> b where
-    type HasPrivilegedThread a b :: *
+class HasPrivileged a s b | a -> s b where
+    privileged :: Lens' a (TF.Attribute s b)
 
-    privileged :: Lens' a (TF.Attribute (HasPrivilegedThread a b) "privileged" b)
-
-instance HasPrivileged a b => HasPrivileged (TF.Resource p a) b where
-    type HasPrivilegedThread (TF.Resource p a) b =
-         HasPrivilegedThread a b
-
+instance HasPrivileged a s b => HasPrivileged (TF.Resource p a) s b where
     privileged = TF.configuration . privileged
 
-class HasPublishAllPorts a b | a -> b where
-    type HasPublishAllPortsThread a b :: *
+class HasPublishAllPorts a s b | a -> s b where
+    publishAllPorts :: Lens' a (TF.Attribute s b)
 
-    publishAllPorts :: Lens' a (TF.Attribute (HasPublishAllPortsThread a b) "publish_all_ports" b)
-
-instance HasPublishAllPorts a b => HasPublishAllPorts (TF.Resource p a) b where
-    type HasPublishAllPortsThread (TF.Resource p a) b =
-         HasPublishAllPortsThread a b
-
+instance HasPublishAllPorts a s b => HasPublishAllPorts (TF.Resource p a) s b where
     publishAllPorts = TF.configuration . publishAllPorts
 
-class HasPullTrigger a b | a -> b where
-    type HasPullTriggerThread a b :: *
+class HasPullTrigger a s b | a -> s b where
+    pullTrigger :: Lens' a (TF.Attribute s b)
 
-    pullTrigger :: Lens' a (TF.Attribute (HasPullTriggerThread a b) "pull_trigger" b)
-
-instance HasPullTrigger a b => HasPullTrigger (TF.Resource p a) b where
-    type HasPullTriggerThread (TF.Resource p a) b =
-         HasPullTriggerThread a b
-
+instance HasPullTrigger a s b => HasPullTrigger (TF.Resource p a) s b where
     pullTrigger = TF.configuration . pullTrigger
 
-class HasPullTriggers a b | a -> b where
-    type HasPullTriggersThread a b :: *
+class HasPullTriggers a s b | a -> s b where
+    pullTriggers :: Lens' a (TF.Attribute s b)
 
-    pullTriggers :: Lens' a (TF.Attribute (HasPullTriggersThread a b) "pull_triggers" b)
-
-instance HasPullTriggers a b => HasPullTriggers (TF.Resource p a) b where
-    type HasPullTriggersThread (TF.Resource p a) b =
-         HasPullTriggersThread a b
-
+instance HasPullTriggers a s b => HasPullTriggers (TF.Resource p a) s b where
     pullTriggers = TF.configuration . pullTriggers
 
-class HasRestart a b | a -> b where
-    type HasRestartThread a b :: *
+class HasRestart a s b | a -> s b where
+    restart :: Lens' a (TF.Attribute s b)
 
-    restart :: Lens' a (TF.Attribute (HasRestartThread a b) "restart" b)
-
-instance HasRestart a b => HasRestart (TF.Resource p a) b where
-    type HasRestartThread (TF.Resource p a) b =
-         HasRestartThread a b
-
+instance HasRestart a s b => HasRestart (TF.Resource p a) s b where
     restart = TF.configuration . restart
 
-class HasUpload a b | a -> b where
-    type HasUploadThread a b :: *
+class HasUpload a s b | a -> s b where
+    upload :: Lens' a (TF.Attribute s b)
 
-    upload :: Lens' a (TF.Attribute (HasUploadThread a b) "upload" b)
-
-instance HasUpload a b => HasUpload (TF.Resource p a) b where
-    type HasUploadThread (TF.Resource p a) b =
-         HasUploadThread a b
-
+instance HasUpload a s b => HasUpload (TF.Resource p a) s b where
     upload = TF.configuration . upload
 
-class HasUser a b | a -> b where
-    type HasUserThread a b :: *
+class HasUser a s b | a -> s b where
+    user :: Lens' a (TF.Attribute s b)
 
-    user :: Lens' a (TF.Attribute (HasUserThread a b) "user" b)
-
-instance HasUser a b => HasUser (TF.Resource p a) b where
-    type HasUserThread (TF.Resource p a) b =
-         HasUserThread a b
-
+instance HasUser a s b => HasUser (TF.Resource p a) s b where
     user = TF.configuration . user
 
-class HasVolumes a b | a -> b where
-    type HasVolumesThread a b :: *
+class HasVolumes a s b | a -> s b where
+    volumes :: Lens' a (TF.Attribute s b)
 
-    volumes :: Lens' a (TF.Attribute (HasVolumesThread a b) "volumes" b)
-
-instance HasVolumes a b => HasVolumes (TF.Resource p a) b where
-    type HasVolumesThread (TF.Resource p a) b =
-         HasVolumesThread a b
-
+instance HasVolumes a s b => HasVolumes (TF.Resource p a) s b where
     volumes = TF.configuration . volumes
 
 class HasComputedLatest a b | a -> b where
-    computedLatest :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedLatest
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedLatest =
+        to (\x -> TF.Computed (TF.referenceKey x) "latest")
 
 class HasComputedMountpoint a b | a -> b where
-    computedMountpoint :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedMountpoint
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedMountpoint =
+        to (\x -> TF.Computed (TF.referenceKey x) "mountpoint")

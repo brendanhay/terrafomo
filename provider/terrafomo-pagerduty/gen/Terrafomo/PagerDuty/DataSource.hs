@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -56,11 +55,14 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                    as TF
+import qualified GHC.Base                     as TF
+import qualified Numeric.Natural              as TF
 import qualified Terrafomo.Attribute          as TF
 import qualified Terrafomo.DataSource         as TF
 import qualified Terrafomo.HCL                as TF
 import qualified Terrafomo.IP                 as TF
-import qualified Terrafomo.Meta               as TF (configuration)
+import qualified Terrafomo.Meta               as TF
 import qualified Terrafomo.Name               as TF
 import qualified Terrafomo.PagerDuty.Provider as TF
 import qualified Terrafomo.PagerDuty.Types    as TF
@@ -73,25 +75,21 @@ Use this data source to get information about a specific
 that you can use for other PagerDuty resources.
 -}
 data EscalationPolicyDataSource s = EscalationPolicyDataSource {
-      _name :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name to use to find an escalation policy in the PagerDuty API. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EscalationPolicyDataSource s) where
     toHCL EscalationPolicyDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (EscalationPolicyDataSource s) Text where
-    type HasNameThread (EscalationPolicyDataSource s) Text = s
-
+instance HasName (EscalationPolicyDataSource s) s Text where
     name =
-        lens (_name :: EscalationPolicyDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: EscalationPolicyDataSource s)
+        lens (_name :: EscalationPolicyDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: EscalationPolicyDataSource s)
 
-instance HasComputedName (EscalationPolicyDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (EscalationPolicyDataSource s) Text
 
 escalationPolicyDataSource :: TF.DataSource TF.PagerDuty (EscalationPolicyDataSource s)
 escalationPolicyDataSource =
@@ -107,25 +105,21 @@ Use this data source to get information about a specific
 that you can use for other PagerDuty resources.
 -}
 data ScheduleDataSource s = ScheduleDataSource {
-      _name :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name to use to find a schedule in the PagerDuty API. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ScheduleDataSource s) where
     toHCL ScheduleDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (ScheduleDataSource s) Text where
-    type HasNameThread (ScheduleDataSource s) Text = s
-
+instance HasName (ScheduleDataSource s) s Text where
     name =
-        lens (_name :: ScheduleDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: ScheduleDataSource s)
+        lens (_name :: ScheduleDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ScheduleDataSource s)
 
-instance HasComputedName (ScheduleDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (ScheduleDataSource s) Text
 
 scheduleDataSource :: TF.DataSource TF.PagerDuty (ScheduleDataSource s)
 scheduleDataSource =
@@ -141,25 +135,21 @@ Use this data source to get information about a specific
 that you can use for other PagerDuty resources.
 -}
 data UserDataSource s = UserDataSource {
-      _email :: !(TF.Attribute s "email" Text)
+      _email :: !(TF.Attribute s Text)
     {- ^ (Required) The email to use to find a user in the PagerDuty API. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserDataSource s) where
     toHCL UserDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _email
+        [ TF.attribute "email" _email
         ]
 
-instance HasEmail (UserDataSource s) Text where
-    type HasEmailThread (UserDataSource s) Text = s
-
+instance HasEmail (UserDataSource s) s Text where
     email =
-        lens (_email :: UserDataSource s -> TF.Attribute s "email" Text)
-             (\s a -> s { _email = a } :: UserDataSource s)
+        lens (_email :: UserDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _email = a } :: UserDataSource s)
 
-instance HasComputedName (UserDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (UserDataSource s) Text
 
 userDataSource :: TF.DataSource TF.PagerDuty (UserDataSource s)
 userDataSource =
@@ -176,29 +166,23 @@ that you can use for a service integration (e.g Amazon Cloudwatch, Splunk,
 Datadog).
 -}
 data VendorDataSource s = VendorDataSource {
-      _name :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Required) The vendor name to use to find a vendor in the PagerDuty API. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VendorDataSource s) where
     toHCL VendorDataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (VendorDataSource s) Text where
-    type HasNameThread (VendorDataSource s) Text = s
-
+instance HasName (VendorDataSource s) s Text where
     name =
-        lens (_name :: VendorDataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: VendorDataSource s)
+        lens (_name :: VendorDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: VendorDataSource s)
 
-instance HasComputedName (VendorDataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (VendorDataSource s) Text
 
-instance HasComputedType' (VendorDataSource s) Text where
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+instance HasComputedType' (VendorDataSource s) Text
 
 vendorDataSource :: TF.DataSource TF.PagerDuty (VendorDataSource s)
 vendorDataSource =
@@ -207,30 +191,26 @@ vendorDataSource =
               _name = TF.Nil
             }
 
-class HasEmail a b | a -> b where
-    type HasEmailThread a b :: *
+class HasEmail a s b | a -> s b where
+    email :: Lens' a (TF.Attribute s b)
 
-    email :: Lens' a (TF.Attribute (HasEmailThread a b) "email" b)
-
-instance HasEmail a b => HasEmail (TF.DataSource p a) b where
-    type HasEmailThread (TF.DataSource p a) b =
-         HasEmailThread a b
-
+instance HasEmail a s b => HasEmail (TF.DataSource p a) s b where
     email = TF.configuration . email
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.DataSource p a) b where
-    type HasNameThread (TF.DataSource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasComputedName a b | a -> b where
-    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedName =
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
 class HasComputedType' a b | a -> b where
-    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedType'
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedType' =
+        to (\x -> TF.Computed (TF.referenceKey x) "type")

@@ -1,4 +1,3 @@
-name: aws_dynamodb_table
 arguments:
   _attribute:
     type: 'TF.DynamoTableAttributes'

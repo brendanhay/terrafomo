@@ -1,7 +1,6 @@
-name: aws_network_interface
 attributes:
   _computed_id:
     help: ! '- The id of the network interface.'
     name: id
-    type: Text
+    type: 'Text'
 

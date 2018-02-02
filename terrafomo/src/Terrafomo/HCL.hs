@@ -17,9 +17,7 @@ module Terrafomo.HCL
     , ToHCL       (..)
 
     , assign
-
     , attribute
-    , computed
 
     , object
     , block
@@ -36,8 +34,14 @@ module Terrafomo.HCL
     , number
     , float
     , string
+
+    -- ** JSON Heredocs
+    , ToJSON (..)
+    , JSON
+    , json
     ) where
 
+import Data.Aeson             (ToJSON (..))
 import Data.Hashable          (Hashable)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
@@ -60,11 +64,13 @@ import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
 import Terrafomo.Attribute
 import Terrafomo.Name
 
+import qualified Data.Aeson                   as JSON
 import qualified Data.Foldable                as Fold
 import qualified Data.List                    as List
 import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
+import qualified Data.Text.Lazy.Encoding      as LText (decodeUtf8)
 import qualified Formatting                   as Format
 import qualified Text.PrettyPrint.Leijen.Text as PP
 
@@ -142,6 +148,8 @@ instance Pretty Interpolate where
         Chunk    s  -> pretty s
         Template s  -> "${" <> pretty s <> "}"
 
+type JSON = JSON.Value
+
 renderHCL :: [Value] -> Doc
 renderHCL = PP.vcat . List.intersperse (PP.text " ") . map pretty
 
@@ -158,16 +166,17 @@ assign k v = Assign k (toHCL v)
 
 -- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
 -- we need to filter it out here.
-attribute :: ToHCL a => Attribute s a -> Maybe Value
-attribute = \case
-    Computed k v -> Just (computed k v)
-    Constant   v -> Just (toHCL      v)
-    _            -> Nothing
+attribute :: ToHCL a => Id -> Attribute s a -> Maybe Value
+attribute k =
+    fmap (assign k) . \case
+        Computed k v -> Just (computed k v)
+        Constant   v -> Just (toHCL      v)
+        _            -> Nothing
 
 computed :: Key -> Name -> Value
 computed (Key t n) v =
-    toHCL $
-        Format.sformat ("${" % ftype % "." % fname % "." % fname % "}") t n v
+    let fmt = "${" % Format.stext % ftype % "." % fname % "." % fname % "}"
+     in toHCL $ Format.sformat fmt (maybe mempty (<> ".") (typePrefix t)) t n v
 
 object :: NonEmpty Id -> [Value] -> Value
 object = Object
@@ -205,6 +214,9 @@ float = Float . realToFrac
 string :: LText.Text -> Value
 string = String . Chunk
 
+json :: ToJSON a => a -> Value
+json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encode
+
 class ToHCL a where
     toHCL :: a -> Value
 
@@ -214,8 +226,8 @@ instance ToHCL Value where
 instance ToHCL Bool where
     toHCL = Bool
 
-instance ToHCL [Char] where
-    toHCL = string . fromString
+instance ToHCL a => ToHCL [a] where
+    toHCL = list
 
 instance ToHCL Float where
     toHCL = float
@@ -264,6 +276,9 @@ instance ToHCL LText.Text where
 
 instance ToHCL Builder where
     toHCL = string . Build.toLazyText
+
+instance ToHCL JSON where
+    toHCL = json
 
 instance ToHCL Name where
     toHCL = toHCL . Format.sformat fname

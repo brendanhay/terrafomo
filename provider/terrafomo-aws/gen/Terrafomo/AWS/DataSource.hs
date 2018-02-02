@@ -10,7 +10,6 @@
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -124,6 +123,9 @@ module Terrafomo.AWS.DataSource
 
     , IamInstanceProfileDataSource (..)
     , iamInstanceProfileDataSource
+
+    , IamPolicyDataSource (..)
+    , iamPolicyDataSource
 
     , IamPolicyDocumentDataSource (..)
     , iamPolicyDocumentDataSource
@@ -271,6 +273,7 @@ module Terrafomo.AWS.DataSource
     , HasKey (..)
     , HasKeyId (..)
     , HasLatest (..)
+    , HasLoadBalancerArn (..)
     , HasMostRecent (..)
     , HasMountTargetId (..)
     , HasName (..)
@@ -284,6 +287,7 @@ module Terrafomo.AWS.DataSource
     , HasPeerVpcId (..)
     , HasPlaintext (..)
     , HasPolicyId (..)
+    , HasPort (..)
     , HasPrefixListId (..)
     , HasPrivateZone (..)
     , HasPublicIp (..)
@@ -305,6 +309,7 @@ module Terrafomo.AWS.DataSource
     , HasSubnetId (..)
     , HasTags (..)
     , HasTaskDefinition (..)
+    , HasTypes (..)
     , HasUserId (..)
     , HasUserName (..)
     , HasValues (..)
@@ -536,24 +541,26 @@ module Terrafomo.AWS.DataSource
     , HasComputedWebsiteRedirectLocation (..)
     ) where
 
-import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
-import qualified Terrafomo.AWS.Types as TF
+import qualified Data.Word              as TF
+import qualified GHC.Base               as TF
+import qualified Numeric.Natural        as TF
+import qualified Terrafomo.Attribute    as TF
 import qualified Terrafomo.AWS.Provider as TF
-import qualified Terrafomo.DataSource as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.IP as TF
-import qualified Terrafomo.Meta as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Resource as TF
-import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.AWS.Types    as TF
+import qualified Terrafomo.DataSource   as TF
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.IP           as TF
+import qualified Terrafomo.Meta         as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Resource     as TF
 
 {- | The @aws_acm_certificate@ AWS datasource.
 
@@ -564,31 +571,43 @@ creation of ACM certificates. But using this data source, you can reference
 them by domain without having to hard code the ARNs as input.
 -}
 data AcmCertificateDataSource s = AcmCertificateDataSource {
-      _domain :: !(TF.Attribute s Text)
+      _domain      :: !(TF.Attribute s Text)
     {- ^ (Required) The domain of the certificate to look up. If no certificate is found with this name, an error will be returned. -}
-    , _statuses :: !(TF.Attribute s Text)
+    , _most_recent :: !(TF.Attribute s Text)
+    {- ^ (Optional) If set to true, it sorts the certificates matched by previous criteria by the NotBefore field, returning only the most recent one. If set to false, it returns an error if more than one certificate is found. Defaults to false. -}
+    , _statuses    :: !(TF.Attribute s Text)
     {- ^ (Optional) A list of statuses on which to filter the returned list. Valid values are @PENDING_VALIDATION@ , @ISSUED@ , @INACTIVE@ , @EXPIRED@ , @VALIDATION_TIMED_OUT@ , @REVOKED@ and @FAILED@ . If no value is specified, only certificates in the @ISSUED@ state are returned. -}
+    , _types       :: !(TF.Attribute s Text)
+    {- ^ (Optional) A list of types on which to filter the returned list. Valid values are @AMAZON_ISSUED@ and @IMPORTED@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AcmCertificateDataSource s) where
     toHCL AcmCertificateDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "domain" <$> TF.attribute _domain
-        , TF.assign "statuses" <$> TF.attribute _statuses
+        [ TF.attribute "domain" _domain
+        , TF.attribute "most_recent" _most_recent
+        , TF.attribute "statuses" _statuses
+        , TF.attribute "types" _types
         ]
 
-instance HasDomain (AcmCertificateDataSource s) Text where
-    type HasDomainThread (AcmCertificateDataSource s) Text = s
-
+instance HasDomain (AcmCertificateDataSource s) s Text where
     domain =
         lens (_domain :: AcmCertificateDataSource s -> TF.Attribute s Text)
             (\s a -> s { _domain = a } :: AcmCertificateDataSource s)
 
-instance HasStatuses (AcmCertificateDataSource s) Text where
-    type HasStatusesThread (AcmCertificateDataSource s) Text = s
+instance HasMostRecent (AcmCertificateDataSource s) s Text where
+    mostRecent =
+        lens (_most_recent :: AcmCertificateDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _most_recent = a } :: AcmCertificateDataSource s)
 
+instance HasStatuses (AcmCertificateDataSource s) s Text where
     statuses =
         lens (_statuses :: AcmCertificateDataSource s -> TF.Attribute s Text)
             (\s a -> s { _statuses = a } :: AcmCertificateDataSource s)
+
+instance HasTypes (AcmCertificateDataSource s) s Text where
+    types =
+        lens (_types :: AcmCertificateDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _types = a } :: AcmCertificateDataSource s)
 
 instance HasComputedArn (AcmCertificateDataSource s) Text
 
@@ -597,7 +616,9 @@ acmCertificateDataSource =
     TF.newDataSource "aws_acm_certificate" $
         AcmCertificateDataSource {
               _domain = TF.Nil
+            , _most_recent = TF.Nil
             , _statuses = TF.Nil
+            , _types = TF.Nil
             }
 
 {- | The @aws_ami@ AWS datasource.
@@ -608,56 +629,46 @@ resources.
 data AmiDataSource s = AmiDataSource {
       _executable_users :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter :: !(TF.Attribute s Text)
+    , _filter           :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _most_recent :: !(TF.Attribute s Text)
+    , _most_recent      :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent AMI. -}
-    , _name_regex :: !(TF.Attribute s Text)
+    , _name_regex       :: !(TF.Attribute s Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners :: !(TF.Attribute s Text)
+    , _owners           :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AmiDataSource s) where
     toHCL AmiDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "executable_users" <$> TF.attribute _executable_users
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "most_recent" <$> TF.attribute _most_recent
-        , TF.assign "name_regex" <$> TF.attribute _name_regex
-        , TF.assign "owners" <$> TF.attribute _owners
+        [ TF.attribute "executable_users" _executable_users
+        , TF.attribute "filter" _filter
+        , TF.attribute "most_recent" _most_recent
+        , TF.attribute "name_regex" _name_regex
+        , TF.attribute "owners" _owners
         ]
 
-instance HasExecutableUsers (AmiDataSource s) Text where
-    type HasExecutableUsersThread (AmiDataSource s) Text = s
-
+instance HasExecutableUsers (AmiDataSource s) s Text where
     executableUsers =
         lens (_executable_users :: AmiDataSource s -> TF.Attribute s Text)
             (\s a -> s { _executable_users = a } :: AmiDataSource s)
 
-instance HasFilter (AmiDataSource s) Text where
-    type HasFilterThread (AmiDataSource s) Text = s
-
+instance HasFilter (AmiDataSource s) s Text where
     filter =
         lens (_filter :: AmiDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: AmiDataSource s)
 
-instance HasMostRecent (AmiDataSource s) Text where
-    type HasMostRecentThread (AmiDataSource s) Text = s
-
+instance HasMostRecent (AmiDataSource s) s Text where
     mostRecent =
         lens (_most_recent :: AmiDataSource s -> TF.Attribute s Text)
             (\s a -> s { _most_recent = a } :: AmiDataSource s)
 
-instance HasNameRegex (AmiDataSource s) Text where
-    type HasNameRegexThread (AmiDataSource s) Text = s
-
+instance HasNameRegex (AmiDataSource s) s Text where
     nameRegex =
         lens (_name_regex :: AmiDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name_regex = a } :: AmiDataSource s)
 
-instance HasOwners (AmiDataSource s) Text where
-    type HasOwnersThread (AmiDataSource s) Text = s
-
+instance HasOwners (AmiDataSource s) s Text where
     owners =
         lens (_owners :: AmiDataSource s -> TF.Attribute s Text)
             (\s a -> s { _owners = a } :: AmiDataSource s)
@@ -729,46 +740,38 @@ criteria.
 data AmiIdsDataSource s = AmiIdsDataSource {
       _executable_users :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on  the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter :: !(TF.Attribute s Text)
+    , _filter           :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _name_regex :: !(TF.Attribute s Text)
+    , _name_regex       :: !(TF.Attribute s Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners :: !(TF.Attribute s Text)
+    , _owners           :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AmiIdsDataSource s) where
     toHCL AmiIdsDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "executable_users" <$> TF.attribute _executable_users
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "name_regex" <$> TF.attribute _name_regex
-        , TF.assign "owners" <$> TF.attribute _owners
+        [ TF.attribute "executable_users" _executable_users
+        , TF.attribute "filter" _filter
+        , TF.attribute "name_regex" _name_regex
+        , TF.attribute "owners" _owners
         ]
 
-instance HasExecutableUsers (AmiIdsDataSource s) Text where
-    type HasExecutableUsersThread (AmiIdsDataSource s) Text = s
-
+instance HasExecutableUsers (AmiIdsDataSource s) s Text where
     executableUsers =
         lens (_executable_users :: AmiIdsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _executable_users = a } :: AmiIdsDataSource s)
 
-instance HasFilter (AmiIdsDataSource s) Text where
-    type HasFilterThread (AmiIdsDataSource s) Text = s
-
+instance HasFilter (AmiIdsDataSource s) s Text where
     filter =
         lens (_filter :: AmiIdsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: AmiIdsDataSource s)
 
-instance HasNameRegex (AmiIdsDataSource s) Text where
-    type HasNameRegexThread (AmiIdsDataSource s) Text = s
-
+instance HasNameRegex (AmiIdsDataSource s) s Text where
     nameRegex =
         lens (_name_regex :: AmiIdsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name_regex = a } :: AmiIdsDataSource s)
 
-instance HasOwners (AmiIdsDataSource s) Text where
-    type HasOwnersThread (AmiIdsDataSource s) Text = s
-
+instance HasOwners (AmiIdsDataSource s) s Text where
     owners =
         lens (_owners :: AmiIdsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _owners = a } :: AmiIdsDataSource s)
@@ -796,12 +799,10 @@ data AutoscalingGroupsDataSource s = AutoscalingGroupsDataSource {
 
 instance TF.ToHCL (AutoscalingGroupsDataSource s) where
     toHCL AutoscalingGroupsDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
+        [ TF.attribute "filter" _filter
         ]
 
-instance HasFilter (AutoscalingGroupsDataSource s) Text where
-    type HasFilterThread (AutoscalingGroupsDataSource s) Text = s
-
+instance HasFilter (AutoscalingGroupsDataSource s) s Text where
     filter =
         lens (_filter :: AutoscalingGroupsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: AutoscalingGroupsDataSource s)
@@ -827,7 +828,7 @@ numbers. This is different from the @aws_availability_zones@ (plural) data
 source, which provides a list of the available zones.
 -}
 data AvailabilityZoneDataSource s = AvailabilityZoneDataSource {
-      _name :: !(TF.Attribute s Text)
+      _name  :: !(TF.Attribute s Text)
     {- ^ (Optional) The full name of the availability zone to select. -}
     , _state :: !(TF.Attribute s Text)
     {- ^ (Optional) A specific availability zone state to require. May be any of @"available"@ , @"information"@ or @"impaired"@ . -}
@@ -835,20 +836,16 @@ data AvailabilityZoneDataSource s = AvailabilityZoneDataSource {
 
 instance TF.ToHCL (AvailabilityZoneDataSource s) where
     toHCL AvailabilityZoneDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "state" <$> TF.attribute _state
+        [ TF.attribute "name" _name
+        , TF.attribute "state" _state
         ]
 
-instance HasName (AvailabilityZoneDataSource s) Text where
-    type HasNameThread (AvailabilityZoneDataSource s) Text = s
-
+instance HasName (AvailabilityZoneDataSource s) s Text where
     name =
         lens (_name :: AvailabilityZoneDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: AvailabilityZoneDataSource s)
 
-instance HasState (AvailabilityZoneDataSource s) Text where
-    type HasStateThread (AvailabilityZoneDataSource s) Text = s
-
+instance HasState (AvailabilityZoneDataSource s) s Text where
     state =
         lens (_state :: AvailabilityZoneDataSource s -> TF.Attribute s Text)
             (\s a -> s { _state = a } :: AvailabilityZoneDataSource s)
@@ -884,12 +881,10 @@ data AvailabilityZonesDataSource s = AvailabilityZonesDataSource {
 
 instance TF.ToHCL (AvailabilityZonesDataSource s) where
     toHCL AvailabilityZonesDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "state" <$> TF.attribute _state
+        [ TF.attribute "state" _state
         ]
 
-instance HasState (AvailabilityZonesDataSource s) Text where
-    type HasStateThread (AvailabilityZonesDataSource s) Text = s
-
+instance HasState (AvailabilityZonesDataSource s) s Text where
     state =
         lens (_state :: AvailabilityZonesDataSource s -> TF.Attribute s Text)
             (\s a -> s { _state = a } :: AvailabilityZonesDataSource s)
@@ -933,36 +928,30 @@ and ARN in which Terraform is authorized.
 data CallerIdentityDataSource s = CallerIdentityDataSource {
       _account_id :: !(TF.Attribute s Text)
     {- ^ - The AWS Account ID number of the account that owns or contains the calling entity. -}
-    , _arn :: !(TF.Attribute s Text)
+    , _arn        :: !(TF.Attribute s Text)
     {- ^ - The AWS ARN associated with the calling entity. -}
-    , _user_id :: !(TF.Attribute s Text)
+    , _user_id    :: !(TF.Attribute s Text)
     {- ^ - The unique identifier of the calling entity. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CallerIdentityDataSource s) where
     toHCL CallerIdentityDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "account_id" <$> TF.attribute _account_id
-        , TF.assign "arn" <$> TF.attribute _arn
-        , TF.assign "user_id" <$> TF.attribute _user_id
+        [ TF.attribute "account_id" _account_id
+        , TF.attribute "arn" _arn
+        , TF.attribute "user_id" _user_id
         ]
 
-instance HasAccountId (CallerIdentityDataSource s) Text where
-    type HasAccountIdThread (CallerIdentityDataSource s) Text = s
-
+instance HasAccountId (CallerIdentityDataSource s) s Text where
     accountId =
         lens (_account_id :: CallerIdentityDataSource s -> TF.Attribute s Text)
             (\s a -> s { _account_id = a } :: CallerIdentityDataSource s)
 
-instance HasArn (CallerIdentityDataSource s) Text where
-    type HasArnThread (CallerIdentityDataSource s) Text = s
-
+instance HasArn (CallerIdentityDataSource s) s Text where
     arn =
         lens (_arn :: CallerIdentityDataSource s -> TF.Attribute s Text)
             (\s a -> s { _arn = a } :: CallerIdentityDataSource s)
 
-instance HasUserId (CallerIdentityDataSource s) Text where
-    type HasUserIdThread (CallerIdentityDataSource s) Text = s
-
+instance HasUserId (CallerIdentityDataSource s) s Text where
     userId =
         lens (_user_id :: CallerIdentityDataSource s -> TF.Attribute s Text)
             (\s a -> s { _user_id = a } :: CallerIdentityDataSource s)
@@ -985,26 +974,22 @@ effective account in which Terraform is working.
 data CanonicalUserIdDataSource s = CanonicalUserIdDataSource {
       _display_name :: !(TF.Attribute s Text)
     {- ^ - The human-friendly name linked to the canonical user ID. -}
-    , _id :: !(TF.Attribute s Text)
+    , _id           :: !(TF.Attribute s Text)
     {- ^ - The canonical user ID associated with the AWS account. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CanonicalUserIdDataSource s) where
     toHCL CanonicalUserIdDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "display_name" <$> TF.attribute _display_name
-        , TF.assign "id" <$> TF.attribute _id
+        [ TF.attribute "display_name" _display_name
+        , TF.attribute "id" _id
         ]
 
-instance HasDisplayName (CanonicalUserIdDataSource s) Text where
-    type HasDisplayNameThread (CanonicalUserIdDataSource s) Text = s
-
+instance HasDisplayName (CanonicalUserIdDataSource s) s Text where
     displayName =
         lens (_display_name :: CanonicalUserIdDataSource s -> TF.Attribute s Text)
             (\s a -> s { _display_name = a } :: CanonicalUserIdDataSource s)
 
-instance HasId (CanonicalUserIdDataSource s) Text where
-    type HasIdThread (CanonicalUserIdDataSource s) Text = s
-
+instance HasId (CanonicalUserIdDataSource s) s Text where
     id =
         lens (_id :: CanonicalUserIdDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: CanonicalUserIdDataSource s)
@@ -1029,12 +1014,10 @@ data CloudformationStackDataSource s = CloudformationStackDataSource {
 
 instance TF.ToHCL (CloudformationStackDataSource s) where
     toHCL CloudformationStackDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (CloudformationStackDataSource s) Text where
-    type HasNameThread (CloudformationStackDataSource s) Text = s
-
+instance HasName (CloudformationStackDataSource s) s Text where
     name =
         lens (_name :: CloudformationStackDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CloudformationStackDataSource s)
@@ -1080,12 +1063,10 @@ data CloudtrailServiceAccountDataSource s = CloudtrailServiceAccountDataSource {
 
 instance TF.ToHCL (CloudtrailServiceAccountDataSource s) where
     toHCL CloudtrailServiceAccountDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
+        [ TF.attribute "region" _region
         ]
 
-instance HasRegion (CloudtrailServiceAccountDataSource s) TF.Region where
-    type HasRegionThread (CloudtrailServiceAccountDataSource s) TF.Region = s
-
+instance HasRegion (CloudtrailServiceAccountDataSource s) s TF.Region where
     region =
         lens (_region :: CloudtrailServiceAccountDataSource s -> TF.Attribute s TF.Region)
             (\s a -> s { _region = a } :: CloudtrailServiceAccountDataSource s)
@@ -1112,12 +1093,10 @@ data DbInstanceDataSource s = DbInstanceDataSource {
 
 instance TF.ToHCL (DbInstanceDataSource s) where
     toHCL DbInstanceDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "db_instance_identifier" <$> TF.attribute _db_instance_identifier
+        [ TF.attribute "db_instance_identifier" _db_instance_identifier
         ]
 
-instance HasDbInstanceIdentifier (DbInstanceDataSource s) Text where
-    type HasDbInstanceIdentifierThread (DbInstanceDataSource s) Text = s
-
+instance HasDbInstanceIdentifier (DbInstanceDataSource s) s Text where
     dbInstanceIdentifier =
         lens (_db_instance_identifier :: DbInstanceDataSource s -> TF.Attribute s Text)
             (\s a -> s { _db_instance_identifier = a } :: DbInstanceDataSource s)
@@ -1210,64 +1189,52 @@ data DbSnapshotDataSource s = DbSnapshotDataSource {
     {- ^ (Optional) Returns the list of snapshots created by the specific db_instance -}
     , _db_snapshot_identifier :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
-    , _include_public :: !(TF.Attribute s Text)
+    , _include_public         :: !(TF.Attribute s Text)
     {- ^ (Optional) Set this value to true to include manual DB snapshots that are public and can be copied or restored by any AWS account, otherwise set this value to false. The default is @false@ . -}
-    , _include_shared :: !(TF.Attribute s Text)
+    , _include_shared         :: !(TF.Attribute s Text)
     {- ^ (Optional) Set this value to true to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, otherwise set this value to false. The default is @false@ . -}
-    , _most_recent :: !(TF.Attribute s Text)
+    , _most_recent            :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Snapshot. -}
-    , _snapshot_type :: !(TF.Attribute s Text)
+    , _snapshot_type          :: !(TF.Attribute s Text)
     {- ^ (Optional) The type of snapshots to be returned. If you don't specify a SnapshotType value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. Possible values are, @automated@ , @manual@ , @shared@ and @public@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DbSnapshotDataSource s) where
     toHCL DbSnapshotDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "db_instance_identifier" <$> TF.attribute _db_instance_identifier
-        , TF.assign "db_snapshot_identifier" <$> TF.attribute _db_snapshot_identifier
-        , TF.assign "include_public" <$> TF.attribute _include_public
-        , TF.assign "include_shared" <$> TF.attribute _include_shared
-        , TF.assign "most_recent" <$> TF.attribute _most_recent
-        , TF.assign "snapshot_type" <$> TF.attribute _snapshot_type
+        [ TF.attribute "db_instance_identifier" _db_instance_identifier
+        , TF.attribute "db_snapshot_identifier" _db_snapshot_identifier
+        , TF.attribute "include_public" _include_public
+        , TF.attribute "include_shared" _include_shared
+        , TF.attribute "most_recent" _most_recent
+        , TF.attribute "snapshot_type" _snapshot_type
         ]
 
-instance HasDbInstanceIdentifier (DbSnapshotDataSource s) Text where
-    type HasDbInstanceIdentifierThread (DbSnapshotDataSource s) Text = s
-
+instance HasDbInstanceIdentifier (DbSnapshotDataSource s) s Text where
     dbInstanceIdentifier =
         lens (_db_instance_identifier :: DbSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _db_instance_identifier = a } :: DbSnapshotDataSource s)
 
-instance HasDbSnapshotIdentifier (DbSnapshotDataSource s) Text where
-    type HasDbSnapshotIdentifierThread (DbSnapshotDataSource s) Text = s
-
+instance HasDbSnapshotIdentifier (DbSnapshotDataSource s) s Text where
     dbSnapshotIdentifier =
         lens (_db_snapshot_identifier :: DbSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _db_snapshot_identifier = a } :: DbSnapshotDataSource s)
 
-instance HasIncludePublic (DbSnapshotDataSource s) Text where
-    type HasIncludePublicThread (DbSnapshotDataSource s) Text = s
-
+instance HasIncludePublic (DbSnapshotDataSource s) s Text where
     includePublic =
         lens (_include_public :: DbSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _include_public = a } :: DbSnapshotDataSource s)
 
-instance HasIncludeShared (DbSnapshotDataSource s) Text where
-    type HasIncludeSharedThread (DbSnapshotDataSource s) Text = s
-
+instance HasIncludeShared (DbSnapshotDataSource s) s Text where
     includeShared =
         lens (_include_shared :: DbSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _include_shared = a } :: DbSnapshotDataSource s)
 
-instance HasMostRecent (DbSnapshotDataSource s) Text where
-    type HasMostRecentThread (DbSnapshotDataSource s) Text = s
-
+instance HasMostRecent (DbSnapshotDataSource s) s Text where
     mostRecent =
         lens (_most_recent :: DbSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _most_recent = a } :: DbSnapshotDataSource s)
 
-instance HasSnapshotType (DbSnapshotDataSource s) Text where
-    type HasSnapshotTypeThread (DbSnapshotDataSource s) Text = s
-
+instance HasSnapshotType (DbSnapshotDataSource s) s Text where
     snapshotType =
         lens (_snapshot_type :: DbSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _snapshot_type = a } :: DbSnapshotDataSource s)
@@ -1329,12 +1296,10 @@ data DynamodbTableDataSource s = DynamodbTableDataSource {
 
 instance TF.ToHCL (DynamodbTableDataSource s) where
     toHCL DynamodbTableDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (DynamodbTableDataSource s) Text where
-    type HasNameThread (DynamodbTableDataSource s) Text = s
-
+instance HasName (DynamodbTableDataSource s) s Text where
     name =
         lens (_name :: DynamodbTableDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DynamodbTableDataSource s)
@@ -1352,58 +1317,48 @@ Use this data source to get information about an EBS Snapshot for use when
 provisioning EBS Volumes
 -}
 data EbsSnapshotDataSource s = EbsSnapshotDataSource {
-      _filter :: !(TF.Attribute s Text)
+      _filter                 :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _most_recent :: !(TF.Attribute s Text)
+    , _most_recent            :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent snapshot. -}
-    , _owners :: !(TF.Attribute s Text)
+    , _owners                 :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
-    , _snapshot_ids :: !(TF.Attribute s Text)
+    , _snapshot_ids           :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EbsSnapshotDataSource s) where
     toHCL EbsSnapshotDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "most_recent" <$> TF.attribute _most_recent
-        , TF.assign "owners" <$> TF.attribute _owners
-        , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorable_by_user_ids
-        , TF.assign "snapshot_ids" <$> TF.attribute _snapshot_ids
+        [ TF.attribute "filter" _filter
+        , TF.attribute "most_recent" _most_recent
+        , TF.attribute "owners" _owners
+        , TF.attribute "restorable_by_user_ids" _restorable_by_user_ids
+        , TF.attribute "snapshot_ids" _snapshot_ids
         ]
 
-instance HasFilter (EbsSnapshotDataSource s) Text where
-    type HasFilterThread (EbsSnapshotDataSource s) Text = s
-
+instance HasFilter (EbsSnapshotDataSource s) s Text where
     filter =
         lens (_filter :: EbsSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: EbsSnapshotDataSource s)
 
-instance HasMostRecent (EbsSnapshotDataSource s) Text where
-    type HasMostRecentThread (EbsSnapshotDataSource s) Text = s
-
+instance HasMostRecent (EbsSnapshotDataSource s) s Text where
     mostRecent =
         lens (_most_recent :: EbsSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _most_recent = a } :: EbsSnapshotDataSource s)
 
-instance HasOwners (EbsSnapshotDataSource s) Text where
-    type HasOwnersThread (EbsSnapshotDataSource s) Text = s
-
+instance HasOwners (EbsSnapshotDataSource s) s Text where
     owners =
         lens (_owners :: EbsSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _owners = a } :: EbsSnapshotDataSource s)
 
-instance HasRestorableByUserIds (EbsSnapshotDataSource s) Text where
-    type HasRestorableByUserIdsThread (EbsSnapshotDataSource s) Text = s
-
+instance HasRestorableByUserIds (EbsSnapshotDataSource s) s Text where
     restorableByUserIds =
         lens (_restorable_by_user_ids :: EbsSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotDataSource s)
 
-instance HasSnapshotIds (EbsSnapshotDataSource s) Text where
-    type HasSnapshotIdsThread (EbsSnapshotDataSource s) Text = s
-
+instance HasSnapshotIds (EbsSnapshotDataSource s) s Text where
     snapshotIds =
         lens (_snapshot_ids :: EbsSnapshotDataSource s -> TF.Attribute s Text)
             (\s a -> s { _snapshot_ids = a } :: EbsSnapshotDataSource s)
@@ -1449,9 +1404,9 @@ Use this data source to get a list of EBS Snapshot IDs matching the
 specified criteria.
 -}
 data EbsSnapshotIdsDataSource s = EbsSnapshotIdsDataSource {
-      _filter :: !(TF.Attribute s Text)
+      _filter                 :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _owners :: !(TF.Attribute s Text)
+    , _owners                 :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
@@ -1459,28 +1414,22 @@ data EbsSnapshotIdsDataSource s = EbsSnapshotIdsDataSource {
 
 instance TF.ToHCL (EbsSnapshotIdsDataSource s) where
     toHCL EbsSnapshotIdsDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "owners" <$> TF.attribute _owners
-        , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorable_by_user_ids
+        [ TF.attribute "filter" _filter
+        , TF.attribute "owners" _owners
+        , TF.attribute "restorable_by_user_ids" _restorable_by_user_ids
         ]
 
-instance HasFilter (EbsSnapshotIdsDataSource s) Text where
-    type HasFilterThread (EbsSnapshotIdsDataSource s) Text = s
-
+instance HasFilter (EbsSnapshotIdsDataSource s) s Text where
     filter =
         lens (_filter :: EbsSnapshotIdsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: EbsSnapshotIdsDataSource s)
 
-instance HasOwners (EbsSnapshotIdsDataSource s) Text where
-    type HasOwnersThread (EbsSnapshotIdsDataSource s) Text = s
-
+instance HasOwners (EbsSnapshotIdsDataSource s) s Text where
     owners =
         lens (_owners :: EbsSnapshotIdsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _owners = a } :: EbsSnapshotIdsDataSource s)
 
-instance HasRestorableByUserIds (EbsSnapshotIdsDataSource s) Text where
-    type HasRestorableByUserIdsThread (EbsSnapshotIdsDataSource s) Text = s
-
+instance HasRestorableByUserIds (EbsSnapshotIdsDataSource s) s Text where
     restorableByUserIds =
         lens (_restorable_by_user_ids :: EbsSnapshotIdsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotIdsDataSource s)
@@ -1500,7 +1449,7 @@ Use this data source to get information about an EBS volume for use in other
 resources.
 -}
 data EbsVolumeDataSource s = EbsVolumeDataSource {
-      _filter :: !(TF.Attribute s Text)
+      _filter      :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html> . -}
     , _most_recent :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Volume. -}
@@ -1508,20 +1457,16 @@ data EbsVolumeDataSource s = EbsVolumeDataSource {
 
 instance TF.ToHCL (EbsVolumeDataSource s) where
     toHCL EbsVolumeDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "most_recent" <$> TF.attribute _most_recent
+        [ TF.attribute "filter" _filter
+        , TF.attribute "most_recent" _most_recent
         ]
 
-instance HasFilter (EbsVolumeDataSource s) Text where
-    type HasFilterThread (EbsVolumeDataSource s) Text = s
-
+instance HasFilter (EbsVolumeDataSource s) s Text where
     filter =
         lens (_filter :: EbsVolumeDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: EbsVolumeDataSource s)
 
-instance HasMostRecent (EbsVolumeDataSource s) Text where
-    type HasMostRecentThread (EbsVolumeDataSource s) Text = s
-
+instance HasMostRecent (EbsVolumeDataSource s) s Text where
     mostRecent =
         lens (_most_recent :: EbsVolumeDataSource s -> TF.Attribute s Text)
             (\s a -> s { _most_recent = a } :: EbsVolumeDataSource s)
@@ -1568,12 +1513,10 @@ data EcrRepositoryDataSource s = EcrRepositoryDataSource {
 
 instance TF.ToHCL (EcrRepositoryDataSource s) where
     toHCL EcrRepositoryDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (EcrRepositoryDataSource s) Text where
-    type HasNameThread (EcrRepositoryDataSource s) Text = s
-
+instance HasName (EcrRepositoryDataSource s) s Text where
     name =
         lens (_name :: EcrRepositoryDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: EcrRepositoryDataSource s)
@@ -1603,12 +1546,10 @@ data EcsClusterDataSource s = EcsClusterDataSource {
 
 instance TF.ToHCL (EcsClusterDataSource s) where
     toHCL EcsClusterDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "cluster_name" <$> TF.attribute _cluster_name
+        [ TF.attribute "cluster_name" _cluster_name
         ]
 
-instance HasClusterName (EcsClusterDataSource s) Text where
-    type HasClusterNameThread (EcsClusterDataSource s) Text = s
-
+instance HasClusterName (EcsClusterDataSource s) s Text where
     clusterName =
         lens (_cluster_name :: EcsClusterDataSource s -> TF.Attribute s Text)
             (\s a -> s { _cluster_name = a } :: EcsClusterDataSource s)
@@ -1636,7 +1577,7 @@ The ECS container definition data source allows access to details of a
 specific container within an AWS ECS service.
 -}
 data EcsContainerDefinitionDataSource s = EcsContainerDefinitionDataSource {
-      _container_name :: !(TF.Attribute s Text)
+      _container_name  :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the container definition -}
     , _task_definition :: !(TF.Attribute s Text)
     {- ^ (Required) The ARN of the task definition which contains the container -}
@@ -1644,20 +1585,16 @@ data EcsContainerDefinitionDataSource s = EcsContainerDefinitionDataSource {
 
 instance TF.ToHCL (EcsContainerDefinitionDataSource s) where
     toHCL EcsContainerDefinitionDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "container_name" <$> TF.attribute _container_name
-        , TF.assign "task_definition" <$> TF.attribute _task_definition
+        [ TF.attribute "container_name" _container_name
+        , TF.attribute "task_definition" _task_definition
         ]
 
-instance HasContainerName (EcsContainerDefinitionDataSource s) Text where
-    type HasContainerNameThread (EcsContainerDefinitionDataSource s) Text = s
-
+instance HasContainerName (EcsContainerDefinitionDataSource s) s Text where
     containerName =
         lens (_container_name :: EcsContainerDefinitionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _container_name = a } :: EcsContainerDefinitionDataSource s)
 
-instance HasTaskDefinition (EcsContainerDefinitionDataSource s) Text where
-    type HasTaskDefinitionThread (EcsContainerDefinitionDataSource s) Text = s
-
+instance HasTaskDefinition (EcsContainerDefinitionDataSource s) s Text where
     taskDefinition =
         lens (_task_definition :: EcsContainerDefinitionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _task_definition = a } :: EcsContainerDefinitionDataSource s)
@@ -1698,12 +1635,10 @@ data EcsTaskDefinitionDataSource s = EcsTaskDefinitionDataSource {
 
 instance TF.ToHCL (EcsTaskDefinitionDataSource s) where
     toHCL EcsTaskDefinitionDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "task_definition" <$> TF.attribute _task_definition
+        [ TF.attribute "task_definition" _task_definition
         ]
 
-instance HasTaskDefinition (EcsTaskDefinitionDataSource s) Text where
-    type HasTaskDefinitionThread (EcsTaskDefinitionDataSource s) Text = s
-
+instance HasTaskDefinition (EcsTaskDefinitionDataSource s) s Text where
     taskDefinition =
         lens (_task_definition :: EcsTaskDefinitionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _task_definition = a } :: EcsTaskDefinitionDataSource s)
@@ -1738,20 +1673,16 @@ data EfsFileSystemDataSource s = EfsFileSystemDataSource {
 
 instance TF.ToHCL (EfsFileSystemDataSource s) where
     toHCL EfsFileSystemDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "creation_token" <$> TF.attribute _creation_token
-        , TF.assign "file_system_id" <$> TF.attribute _file_system_id
+        [ TF.attribute "creation_token" _creation_token
+        , TF.attribute "file_system_id" _file_system_id
         ]
 
-instance HasCreationToken (EfsFileSystemDataSource s) Text where
-    type HasCreationTokenThread (EfsFileSystemDataSource s) Text = s
-
+instance HasCreationToken (EfsFileSystemDataSource s) s Text where
     creationToken =
         lens (_creation_token :: EfsFileSystemDataSource s -> TF.Attribute s Text)
             (\s a -> s { _creation_token = a } :: EfsFileSystemDataSource s)
 
-instance HasFileSystemId (EfsFileSystemDataSource s) Text where
-    type HasFileSystemIdThread (EfsFileSystemDataSource s) Text = s
-
+instance HasFileSystemId (EfsFileSystemDataSource s) s Text where
     fileSystemId =
         lens (_file_system_id :: EfsFileSystemDataSource s -> TF.Attribute s Text)
             (\s a -> s { _file_system_id = a } :: EfsFileSystemDataSource s)
@@ -1785,12 +1716,10 @@ data EfsMountTargetDataSource s = EfsMountTargetDataSource {
 
 instance TF.ToHCL (EfsMountTargetDataSource s) where
     toHCL EfsMountTargetDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "mount_target_id" <$> TF.attribute _mount_target_id
+        [ TF.attribute "mount_target_id" _mount_target_id
         ]
 
-instance HasMountTargetId (EfsMountTargetDataSource s) Text where
-    type HasMountTargetIdThread (EfsMountTargetDataSource s) Text = s
-
+instance HasMountTargetId (EfsMountTargetDataSource s) s Text where
     mountTargetId =
         lens (_mount_target_id :: EfsMountTargetDataSource s -> TF.Attribute s Text)
             (\s a -> s { _mount_target_id = a } :: EfsMountTargetDataSource s)
@@ -1821,7 +1750,7 @@ prove useful when a module accepts an allocation ID or public IP as an input
 variable and needs to determine the other.
 -}
 data EipDataSource s = EipDataSource {
-      _id :: !(TF.Attribute s Text)
+      _id        :: !(TF.Attribute s Text)
     {- ^ (Optional) The allocation id of the specific EIP to retrieve. -}
     , _public_ip :: !(TF.Attribute s Text)
     {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
@@ -1829,20 +1758,16 @@ data EipDataSource s = EipDataSource {
 
 instance TF.ToHCL (EipDataSource s) where
     toHCL EipDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
-        , TF.assign "public_ip" <$> TF.attribute _public_ip
+        [ TF.attribute "id" _id
+        , TF.attribute "public_ip" _public_ip
         ]
 
-instance HasId (EipDataSource s) Text where
-    type HasIdThread (EipDataSource s) Text = s
-
+instance HasId (EipDataSource s) s Text where
     id =
         lens (_id :: EipDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: EipDataSource s)
 
-instance HasPublicIp (EipDataSource s) Text where
-    type HasPublicIpThread (EipDataSource s) Text = s
-
+instance HasPublicIp (EipDataSource s) s Text where
     publicIp =
         lens (_public_ip :: EipDataSource s -> TF.Attribute s Text)
             (\s a -> s { _public_ip = a } :: EipDataSource s)
@@ -1860,28 +1785,24 @@ eipDataSource =
 Use this data source to get the name of a elastic beanstalk solution stack.
 -}
 data ElasticBeanstalkSolutionStackDataSource s = ElasticBeanstalkSolutionStackDataSource {
-      _most_recent :: !(TF.Attribute s Text)
+      _most_recent :: !(TF.Attribute s TF.Bool)
     {- ^ (Optional) If more than one result is returned, use the most recent solution stack. -}
-    , _name_regex :: !(TF.Attribute s Text)
+    , _name_regex  :: !(TF.Attribute s Text)
     {- ^ - A regex string to apply to the solution stack list returned by AWS. See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> from AWS documentation for reference solution stack names. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ElasticBeanstalkSolutionStackDataSource s) where
     toHCL ElasticBeanstalkSolutionStackDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "most_recent" <$> TF.attribute _most_recent
-        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        [ TF.attribute "most_recent" _most_recent
+        , TF.attribute "name_regex" _name_regex
         ]
 
-instance HasMostRecent (ElasticBeanstalkSolutionStackDataSource s) Text where
-    type HasMostRecentThread (ElasticBeanstalkSolutionStackDataSource s) Text = s
-
+instance HasMostRecent (ElasticBeanstalkSolutionStackDataSource s) s TF.Bool where
     mostRecent =
-        lens (_most_recent :: ElasticBeanstalkSolutionStackDataSource s -> TF.Attribute s Text)
+        lens (_most_recent :: ElasticBeanstalkSolutionStackDataSource s -> TF.Attribute s TF.Bool)
             (\s a -> s { _most_recent = a } :: ElasticBeanstalkSolutionStackDataSource s)
 
-instance HasNameRegex (ElasticBeanstalkSolutionStackDataSource s) Text where
-    type HasNameRegexThread (ElasticBeanstalkSolutionStackDataSource s) Text = s
-
+instance HasNameRegex (ElasticBeanstalkSolutionStackDataSource s) s Text where
     nameRegex =
         lens (_name_regex :: ElasticBeanstalkSolutionStackDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name_regex = a } :: ElasticBeanstalkSolutionStackDataSource s)
@@ -1907,12 +1828,10 @@ data ElasticacheClusterDataSource s = ElasticacheClusterDataSource {
 
 instance TF.ToHCL (ElasticacheClusterDataSource s) where
     toHCL ElasticacheClusterDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "cluster_id" <$> TF.attribute _cluster_id
+        [ TF.attribute "cluster_id" _cluster_id
         ]
 
-instance HasClusterId (ElasticacheClusterDataSource s) Text where
-    type HasClusterIdThread (ElasticacheClusterDataSource s) Text = s
-
+instance HasClusterId (ElasticacheClusterDataSource s) s Text where
     clusterId =
         lens (_cluster_id :: ElasticacheClusterDataSource s -> TF.Attribute s Text)
             (\s a -> s { _cluster_id = a } :: ElasticacheClusterDataSource s)
@@ -1974,12 +1893,10 @@ data ElasticacheReplicationGroupDataSource s = ElasticacheReplicationGroupDataSo
 
 instance TF.ToHCL (ElasticacheReplicationGroupDataSource s) where
     toHCL ElasticacheReplicationGroupDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "replication_group_id" <$> TF.attribute _replication_group_id
+        [ TF.attribute "replication_group_id" _replication_group_id
         ]
 
-instance HasReplicationGroupId (ElasticacheReplicationGroupDataSource s) Text where
-    type HasReplicationGroupIdThread (ElasticacheReplicationGroupDataSource s) Text = s
-
+instance HasReplicationGroupId (ElasticacheReplicationGroupDataSource s) s Text where
     replicationGroupId =
         lens (_replication_group_id :: ElasticacheReplicationGroupDataSource s -> TF.Attribute s Text)
             (\s a -> s { _replication_group_id = a } :: ElasticacheReplicationGroupDataSource s)
@@ -2028,12 +1945,10 @@ data ElbDataSource s = ElbDataSource {
 
 instance TF.ToHCL (ElbDataSource s) where
     toHCL ElbDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (ElbDataSource s) Text where
-    type HasNameThread (ElbDataSource s) Text = s
-
+instance HasName (ElbDataSource s) s Text where
     name =
         lens (_name :: ElbDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ElbDataSource s)
@@ -2058,12 +1973,10 @@ data ElbHostedZoneIdDataSource s = ElbHostedZoneIdDataSource {
 
 instance TF.ToHCL (ElbHostedZoneIdDataSource s) where
     toHCL ElbHostedZoneIdDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
+        [ TF.attribute "region" _region
         ]
 
-instance HasRegion (ElbHostedZoneIdDataSource s) TF.Region where
-    type HasRegionThread (ElbHostedZoneIdDataSource s) TF.Region = s
-
+instance HasRegion (ElbHostedZoneIdDataSource s) s TF.Region where
     region =
         lens (_region :: ElbHostedZoneIdDataSource s -> TF.Attribute s TF.Region)
             (\s a -> s { _region = a } :: ElbHostedZoneIdDataSource s)
@@ -2090,12 +2003,10 @@ data ElbServiceAccountDataSource s = ElbServiceAccountDataSource {
 
 instance TF.ToHCL (ElbServiceAccountDataSource s) where
     toHCL ElbServiceAccountDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
+        [ TF.attribute "region" _region
         ]
 
-instance HasRegion (ElbServiceAccountDataSource s) TF.Region where
-    type HasRegionThread (ElbServiceAccountDataSource s) TF.Region = s
-
+instance HasRegion (ElbServiceAccountDataSource s) s TF.Region where
     region =
         lens (_region :: ElbServiceAccountDataSource s -> TF.Attribute s TF.Region)
             (\s a -> s { _region = a } :: ElbServiceAccountDataSource s)
@@ -2123,12 +2034,10 @@ data IamAccountAliasDataSource s = IamAccountAliasDataSource {
 
 instance TF.ToHCL (IamAccountAliasDataSource s) where
     toHCL IamAccountAliasDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "account_alias" <$> TF.attribute _account_alias
+        [ TF.attribute "account_alias" _account_alias
         ]
 
-instance HasAccountAlias (IamAccountAliasDataSource s) Text where
-    type HasAccountAliasThread (IamAccountAliasDataSource s) Text = s
-
+instance HasAccountAlias (IamAccountAliasDataSource s) s Text where
     accountAlias =
         lens (_account_alias :: IamAccountAliasDataSource s -> TF.Attribute s Text)
             (\s a -> s { _account_alias = a } :: IamAccountAliasDataSource s)
@@ -2153,12 +2062,10 @@ data IamGroupDataSource s = IamGroupDataSource {
 
 instance TF.ToHCL (IamGroupDataSource s) where
     toHCL IamGroupDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "group_name" <$> TF.attribute _group_name
+        [ TF.attribute "group_name" _group_name
         ]
 
-instance HasGroupName (IamGroupDataSource s) Text where
-    type HasGroupNameThread (IamGroupDataSource s) Text = s
-
+instance HasGroupName (IamGroupDataSource s) s Text where
     groupName =
         lens (_group_name :: IamGroupDataSource s -> TF.Attribute s Text)
             (\s a -> s { _group_name = a } :: IamGroupDataSource s)
@@ -2189,12 +2096,10 @@ data IamInstanceProfileDataSource s = IamInstanceProfileDataSource {
 
 instance TF.ToHCL (IamInstanceProfileDataSource s) where
     toHCL IamInstanceProfileDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (IamInstanceProfileDataSource s) Text where
-    type HasNameThread (IamInstanceProfileDataSource s) Text = s
-
+instance HasName (IamInstanceProfileDataSource s) s Text where
     name =
         lens (_name :: IamInstanceProfileDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: IamInstanceProfileDataSource s)
@@ -2214,6 +2119,43 @@ iamInstanceProfileDataSource =
               _name = TF.Nil
             }
 
+{- | The @aws_iam_policy@ AWS datasource.
+
+This data source can be used to fetch information about a specific IAM
+policy.
+-}
+data IamPolicyDataSource s = IamPolicyDataSource {
+      _arn :: !(TF.Attribute s Text)
+    {- ^ (Required) ARN of the IAM policy. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (IamPolicyDataSource s) where
+    toHCL IamPolicyDataSource{..} = TF.block $ catMaybes
+        [ TF.attribute "arn" _arn
+        ]
+
+instance HasArn (IamPolicyDataSource s) s Text where
+    arn =
+        lens (_arn :: IamPolicyDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _arn = a } :: IamPolicyDataSource s)
+
+instance HasComputedArn (IamPolicyDataSource s) Text
+
+instance HasComputedDescription (IamPolicyDataSource s) Text
+
+instance HasComputedName (IamPolicyDataSource s) Text
+
+instance HasComputedPath (IamPolicyDataSource s) Text
+
+instance HasComputedPolicy (IamPolicyDataSource s) Text
+
+iamPolicyDataSource :: TF.DataSource TF.AWS (IamPolicyDataSource s)
+iamPolicyDataSource =
+    TF.newDataSource "aws_iam_policy" $
+        IamPolicyDataSource {
+              _arn = TF.Nil
+            }
+
 {- | The @aws_iam_policy_document@ AWS datasource.
 
 Generates an IAM policy document in JSON format. This is a data source which
@@ -2230,20 +2172,16 @@ data IamPolicyDocumentDataSource s = IamPolicyDocumentDataSource {
 
 instance TF.ToHCL (IamPolicyDocumentDataSource s) where
     toHCL IamPolicyDocumentDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "policy_id" <$> TF.attribute _policy_id
-        , TF.assign "statement" <$> TF.attribute _statement
+        [ TF.attribute "policy_id" _policy_id
+        , TF.attribute "statement" _statement
         ]
 
-instance HasPolicyId (IamPolicyDocumentDataSource s) Text where
-    type HasPolicyIdThread (IamPolicyDocumentDataSource s) Text = s
-
+instance HasPolicyId (IamPolicyDocumentDataSource s) s Text where
     policyId =
         lens (_policy_id :: IamPolicyDocumentDataSource s -> TF.Attribute s Text)
             (\s a -> s { _policy_id = a } :: IamPolicyDocumentDataSource s)
 
-instance HasStatement (IamPolicyDocumentDataSource s) Text where
-    type HasStatementThread (IamPolicyDocumentDataSource s) Text = s
-
+instance HasStatement (IamPolicyDocumentDataSource s) s Text where
     statement =
         lens (_statement :: IamPolicyDocumentDataSource s -> TF.Attribute s Text)
             (\s a -> s { _statement = a } :: IamPolicyDocumentDataSource s)
@@ -2269,12 +2207,10 @@ data IamRoleDataSource s = IamRoleDataSource {
 
 instance TF.ToHCL (IamRoleDataSource s) where
     toHCL IamRoleDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (IamRoleDataSource s) Text where
-    type HasNameThread (IamRoleDataSource s) Text = s
-
+instance HasName (IamRoleDataSource s) s Text where
     name =
         lens (_name :: IamRoleDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: IamRoleDataSource s)
@@ -2301,9 +2237,9 @@ iamRoleDataSource =
 Use this data source to lookup information about IAM Server Certificates.
 -}
 data IamServerCertificateDataSource s = IamServerCertificateDataSource {
-      _latest :: !(TF.Attribute s Text)
+      _latest      :: !(TF.Attribute s Text)
     {- ^ - sort results by expiration date. returns the certificate with expiration date in furthest in the future. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attribute s Text)
     {- ^ - exact name of the cert to lookup -}
     , _name_prefix :: !(TF.Attribute s Text)
     {- ^ - prefix of cert to filter by -}
@@ -2311,28 +2247,22 @@ data IamServerCertificateDataSource s = IamServerCertificateDataSource {
 
 instance TF.ToHCL (IamServerCertificateDataSource s) where
     toHCL IamServerCertificateDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "latest" <$> TF.attribute _latest
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
+        [ TF.attribute "latest" _latest
+        , TF.attribute "name" _name
+        , TF.attribute "name_prefix" _name_prefix
         ]
 
-instance HasLatest (IamServerCertificateDataSource s) Text where
-    type HasLatestThread (IamServerCertificateDataSource s) Text = s
-
+instance HasLatest (IamServerCertificateDataSource s) s Text where
     latest =
         lens (_latest :: IamServerCertificateDataSource s -> TF.Attribute s Text)
             (\s a -> s { _latest = a } :: IamServerCertificateDataSource s)
 
-instance HasName (IamServerCertificateDataSource s) Text where
-    type HasNameThread (IamServerCertificateDataSource s) Text = s
-
+instance HasName (IamServerCertificateDataSource s) s Text where
     name =
         lens (_name :: IamServerCertificateDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: IamServerCertificateDataSource s)
 
-instance HasNamePrefix (IamServerCertificateDataSource s) Text where
-    type HasNamePrefixThread (IamServerCertificateDataSource s) Text = s
-
+instance HasNamePrefix (IamServerCertificateDataSource s) s Text where
     namePrefix =
         lens (_name_prefix :: IamServerCertificateDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name_prefix = a } :: IamServerCertificateDataSource s)
@@ -2371,12 +2301,10 @@ data IamUserDataSource s = IamUserDataSource {
 
 instance TF.ToHCL (IamUserDataSource s) where
     toHCL IamUserDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "user_name" <$> TF.attribute _user_name
+        [ TF.attribute "user_name" _user_name
         ]
 
-instance HasUserName (IamUserDataSource s) Text where
-    type HasUserNameThread (IamUserDataSource s) Text = s
-
+instance HasUserName (IamUserDataSource s) s Text where
     userName =
         lens (_user_name :: IamUserDataSource s -> TF.Attribute s Text)
             (\s a -> s { _user_name = a } :: IamUserDataSource s)
@@ -2400,9 +2328,9 @@ Use this data source to get the ID of an Amazon EC2 Instance for use in
 other resources.
 -}
 data InstanceDataSource s = InstanceDataSource {
-      _filter :: !(TF.Attribute s Text)
+      _filter        :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_id :: !(TF.Attribute s Text)
+    , _instance_id   :: !(TF.Attribute s Text)
     {- ^ (Optional) Specify the exact Instance ID with which to populate the data source. -}
     , _instance_tags :: !(TF.Attribute s Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
@@ -2410,28 +2338,22 @@ data InstanceDataSource s = InstanceDataSource {
 
 instance TF.ToHCL (InstanceDataSource s) where
     toHCL InstanceDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "instance_id" <$> TF.attribute _instance_id
-        , TF.assign "instance_tags" <$> TF.attribute _instance_tags
+        [ TF.attribute "filter" _filter
+        , TF.attribute "instance_id" _instance_id
+        , TF.attribute "instance_tags" _instance_tags
         ]
 
-instance HasFilter (InstanceDataSource s) Text where
-    type HasFilterThread (InstanceDataSource s) Text = s
-
+instance HasFilter (InstanceDataSource s) s Text where
     filter =
         lens (_filter :: InstanceDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: InstanceDataSource s)
 
-instance HasInstanceId (InstanceDataSource s) Text where
-    type HasInstanceIdThread (InstanceDataSource s) Text = s
-
+instance HasInstanceId (InstanceDataSource s) s Text where
     instanceId =
         lens (_instance_id :: InstanceDataSource s -> TF.Attribute s Text)
             (\s a -> s { _instance_id = a } :: InstanceDataSource s)
 
-instance HasInstanceTags (InstanceDataSource s) Text where
-    type HasInstanceTagsThread (InstanceDataSource s) Text = s
-
+instance HasInstanceTags (InstanceDataSource s) s Text where
     instanceTags =
         lens (_instance_tags :: InstanceDataSource s -> TF.Attribute s Text)
             (\s a -> s { _instance_tags = a } :: InstanceDataSource s)
@@ -2509,7 +2431,7 @@ any time and you'd need to re-run @apply@ every time an instance comes up or
 dies.
 -}
 data InstancesDataSource s = InstancesDataSource {
-      _filter :: !(TF.Attribute s Text)
+      _filter        :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
     , _instance_tags :: !(TF.Attribute s Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on desired instances. -}
@@ -2517,20 +2439,16 @@ data InstancesDataSource s = InstancesDataSource {
 
 instance TF.ToHCL (InstancesDataSource s) where
     toHCL InstancesDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "instance_tags" <$> TF.attribute _instance_tags
+        [ TF.attribute "filter" _filter
+        , TF.attribute "instance_tags" _instance_tags
         ]
 
-instance HasFilter (InstancesDataSource s) Text where
-    type HasFilterThread (InstancesDataSource s) Text = s
-
+instance HasFilter (InstancesDataSource s) s Text where
     filter =
         lens (_filter :: InstancesDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: InstancesDataSource s)
 
-instance HasInstanceTags (InstancesDataSource s) Text where
-    type HasInstanceTagsThread (InstancesDataSource s) Text = s
-
+instance HasInstanceTags (InstancesDataSource s) s Text where
     instanceTags =
         lens (_instance_tags :: InstancesDataSource s -> TF.Attribute s Text)
             (\s a -> s { _instance_tags = a } :: InstancesDataSource s)
@@ -2554,38 +2472,32 @@ instancesDataSource =
 @aws_internet_gateway@ provides details about a specific Internet Gateway.
 -}
 data InternetGatewayDataSource s = InternetGatewayDataSource {
-      _filter :: !(TF.Attribute s Text)
+      _filter              :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _internet_gateway_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific Internet Gateway to retrieve. -}
-    , _tags :: !(TF.Attribute s TF.Tags)
+    , _tags                :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Internet Gateway. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (InternetGatewayDataSource s) where
     toHCL InternetGatewayDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "internet_gateway_id" <$> TF.attribute _internet_gateway_id
-        , TF.assign "tags" <$> TF.attribute _tags
+        [ TF.attribute "filter" _filter
+        , TF.attribute "internet_gateway_id" _internet_gateway_id
+        , TF.attribute "tags" _tags
         ]
 
-instance HasFilter (InternetGatewayDataSource s) Text where
-    type HasFilterThread (InternetGatewayDataSource s) Text = s
-
+instance HasFilter (InternetGatewayDataSource s) s Text where
     filter =
         lens (_filter :: InternetGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: InternetGatewayDataSource s)
 
-instance HasInternetGatewayId (InternetGatewayDataSource s) Text where
-    type HasInternetGatewayIdThread (InternetGatewayDataSource s) Text = s
-
+instance HasInternetGatewayId (InternetGatewayDataSource s) s Text where
     internetGatewayId =
         lens (_internet_gateway_id :: InternetGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _internet_gateway_id = a } :: InternetGatewayDataSource s)
 
-instance HasTags (InternetGatewayDataSource s) TF.Tags where
-    type HasTagsThread (InternetGatewayDataSource s) TF.Tags = s
-
+instance HasTags (InternetGatewayDataSource s) s TF.Tags where
     tags =
         lens (_tags :: InternetGatewayDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: InternetGatewayDataSource s)
@@ -2610,7 +2522,7 @@ Use this data source to get the
 AWS products and services.
 -}
 data IpRangesDataSource s = IpRangesDataSource {
-      _regions :: !(TF.Attribute s Text)
+      _regions  :: !(TF.Attribute s Text)
     {- ^ (Optional) Filter IP ranges by regions (or include all regions, if omitted). Valid items are @global@ (for @cloudfront@ ) as well as all AWS regions (e.g. @eu-central-1@ ) -}
     , _services :: !(TF.Attribute s Text)
     {- ^ (Required) Filter IP ranges by services. Valid items are @amazon@ (for amazon.com), @cloudfront@ , @codebuild@ , @ec2@ , @route53@ , @route53_healthchecks@ and @S3@ . -}
@@ -2618,20 +2530,16 @@ data IpRangesDataSource s = IpRangesDataSource {
 
 instance TF.ToHCL (IpRangesDataSource s) where
     toHCL IpRangesDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "regions" <$> TF.attribute _regions
-        , TF.assign "services" <$> TF.attribute _services
+        [ TF.attribute "regions" _regions
+        , TF.attribute "services" _services
         ]
 
-instance HasRegions (IpRangesDataSource s) Text where
-    type HasRegionsThread (IpRangesDataSource s) Text = s
-
+instance HasRegions (IpRangesDataSource s) s Text where
     regions =
         lens (_regions :: IpRangesDataSource s -> TF.Attribute s Text)
             (\s a -> s { _regions = a } :: IpRangesDataSource s)
 
-instance HasServices (IpRangesDataSource s) Text where
-    type HasServicesThread (IpRangesDataSource s) Text = s
-
+instance HasServices (IpRangesDataSource s) s Text where
     services =
         lens (_services :: IpRangesDataSource s -> TF.Attribute s Text)
             (\s a -> s { _services = a } :: IpRangesDataSource s)
@@ -2663,12 +2571,10 @@ data KinesisStreamDataSource s = KinesisStreamDataSource {
 
 instance TF.ToHCL (KinesisStreamDataSource s) where
     toHCL KinesisStreamDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (KinesisStreamDataSource s) Text where
-    type HasNameThread (KinesisStreamDataSource s) Text = s
-
+instance HasName (KinesisStreamDataSource s) s Text where
     name =
         lens (_name :: KinesisStreamDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: KinesisStreamDataSource s)
@@ -2711,12 +2617,10 @@ data KmsAliasDataSource s = KmsAliasDataSource {
 
 instance TF.ToHCL (KmsAliasDataSource s) where
     toHCL KmsAliasDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (KmsAliasDataSource s) Text where
-    type HasNameThread (KmsAliasDataSource s) Text = s
-
+instance HasName (KmsAliasDataSource s) s Text where
     name =
         lens (_name :: KmsAliasDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: KmsAliasDataSource s)
@@ -2742,9 +2646,9 @@ including the plaintext be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data KmsCiphertextDataSource s = KmsCiphertextDataSource {
-      _context :: !(TF.Attribute s Text)
+      _context   :: !(TF.Attribute s Text)
     {- ^ (Optional) An optional mapping that makes up the encryption context. -}
-    , _key_id :: !(TF.Attribute s Text)
+    , _key_id    :: !(TF.Attribute s Text)
     {- ^ (Required) Globally unique key ID for the customer master key. -}
     , _plaintext :: !(TF.Attribute s Text)
     {- ^ (Required) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file. -}
@@ -2752,28 +2656,22 @@ data KmsCiphertextDataSource s = KmsCiphertextDataSource {
 
 instance TF.ToHCL (KmsCiphertextDataSource s) where
     toHCL KmsCiphertextDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "context" <$> TF.attribute _context
-        , TF.assign "key_id" <$> TF.attribute _key_id
-        , TF.assign "plaintext" <$> TF.attribute _plaintext
+        [ TF.attribute "context" _context
+        , TF.attribute "key_id" _key_id
+        , TF.attribute "plaintext" _plaintext
         ]
 
-instance HasContext (KmsCiphertextDataSource s) Text where
-    type HasContextThread (KmsCiphertextDataSource s) Text = s
-
+instance HasContext (KmsCiphertextDataSource s) s Text where
     context =
         lens (_context :: KmsCiphertextDataSource s -> TF.Attribute s Text)
             (\s a -> s { _context = a } :: KmsCiphertextDataSource s)
 
-instance HasKeyId (KmsCiphertextDataSource s) Text where
-    type HasKeyIdThread (KmsCiphertextDataSource s) Text = s
-
+instance HasKeyId (KmsCiphertextDataSource s) s Text where
     keyId =
         lens (_key_id :: KmsCiphertextDataSource s -> TF.Attribute s Text)
             (\s a -> s { _key_id = a } :: KmsCiphertextDataSource s)
 
-instance HasPlaintext (KmsCiphertextDataSource s) Text where
-    type HasPlaintextThread (KmsCiphertextDataSource s) Text = s
-
+instance HasPlaintext (KmsCiphertextDataSource s) s Text where
     plaintext =
         lens (_plaintext :: KmsCiphertextDataSource s -> TF.Attribute s Text)
             (\s a -> s { _plaintext = a } :: KmsCiphertextDataSource s)
@@ -2805,12 +2703,10 @@ data KmsSecretDataSource s = KmsSecretDataSource {
 
 instance TF.ToHCL (KmsSecretDataSource s) where
     toHCL KmsSecretDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "secret" <$> TF.attribute _secret
+        [ TF.attribute "secret" _secret
         ]
 
-instance HasSecret (KmsSecretDataSource s) Text where
-    type HasSecretThread (KmsSecretDataSource s) Text = s
-
+instance HasSecret (KmsSecretDataSource s) s Text where
     secret =
         lens (_secret :: KmsSecretDataSource s -> TF.Attribute s Text)
             (\s a -> s { _secret = a } :: KmsSecretDataSource s)
@@ -2830,7 +2726,7 @@ useful when a module accepts an LB as an input variable and needs to, for
 example, determine the security groups associated with it, etc.
 -}
 data LbDataSource s = LbDataSource {
-      _arn :: !(TF.Attribute s Text)
+      _arn  :: !(TF.Attribute s Text)
     {- ^ (Optional) The full ARN of the load balancer. -}
     , _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The unique name of the load balancer. -}
@@ -2838,20 +2734,16 @@ data LbDataSource s = LbDataSource {
 
 instance TF.ToHCL (LbDataSource s) where
     toHCL LbDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "arn" <$> TF.attribute _arn
-        , TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "arn" _arn
+        , TF.attribute "name" _name
         ]
 
-instance HasArn (LbDataSource s) Text where
-    type HasArnThread (LbDataSource s) Text = s
-
+instance HasArn (LbDataSource s) s Text where
     arn =
         lens (_arn :: LbDataSource s -> TF.Attribute s Text)
             (\s a -> s { _arn = a } :: LbDataSource s)
 
-instance HasName (LbDataSource s) Text where
-    type HasNameThread (LbDataSource s) Text = s
-
+instance HasName (LbDataSource s) s Text where
     name =
         lens (_name :: LbDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbDataSource s)
@@ -2873,27 +2765,43 @@ Listener as an input variable and needs to know the LB it is attached to, or
 other information specific to the listener in question.
 -}
 data LbListenerDataSource s = LbListenerDataSource {
-      _arn :: !(TF.Attribute s Text)
-    {- ^ (Required) The ARN of the listener. -}
+      _arn               :: !(TF.Attribute s Text)
+    {- ^ (Optional) The arn of the listener. Required if @load_balancer_arn@ and @port@ is not set. -}
+    , _load_balancer_arn :: !(TF.Attribute s Text)
+    {- ^ (Optional) The arn of the load balander. Required if @arn@ is not set. -}
+    , _port              :: !(TF.Attribute s Text)
+    {- ^ (Optional) The port of the listener. Required if @arn@ is not set. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LbListenerDataSource s) where
     toHCL LbListenerDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "arn" <$> TF.attribute _arn
+        [ TF.attribute "arn" _arn
+        , TF.attribute "load_balancer_arn" _load_balancer_arn
+        , TF.attribute "port" _port
         ]
 
-instance HasArn (LbListenerDataSource s) Text where
-    type HasArnThread (LbListenerDataSource s) Text = s
-
+instance HasArn (LbListenerDataSource s) s Text where
     arn =
         lens (_arn :: LbListenerDataSource s -> TF.Attribute s Text)
             (\s a -> s { _arn = a } :: LbListenerDataSource s)
+
+instance HasLoadBalancerArn (LbListenerDataSource s) s Text where
+    loadBalancerArn =
+        lens (_load_balancer_arn :: LbListenerDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _load_balancer_arn = a } :: LbListenerDataSource s)
+
+instance HasPort (LbListenerDataSource s) s Text where
+    port =
+        lens (_port :: LbListenerDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _port = a } :: LbListenerDataSource s)
 
 lbListenerDataSource :: TF.DataSource TF.AWS (LbListenerDataSource s)
 lbListenerDataSource =
     TF.newDataSource "aws_lb_listener" $
         LbListenerDataSource {
               _arn = TF.Nil
+            , _load_balancer_arn = TF.Nil
+            , _port = TF.Nil
             }
 
 {- | The @aws_lb_target_group@ AWS datasource.
@@ -2906,7 +2814,7 @@ also be used to get the ARN of an LB Target Group for use in other
 resources, given LB Target Group name.
 -}
 data LbTargetGroupDataSource s = LbTargetGroupDataSource {
-      _arn :: !(TF.Attribute s Text)
+      _arn  :: !(TF.Attribute s Text)
     {- ^ (Optional) The full ARN of the target group. -}
     , _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The unique name of the target group. -}
@@ -2914,20 +2822,16 @@ data LbTargetGroupDataSource s = LbTargetGroupDataSource {
 
 instance TF.ToHCL (LbTargetGroupDataSource s) where
     toHCL LbTargetGroupDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "arn" <$> TF.attribute _arn
-        , TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "arn" _arn
+        , TF.attribute "name" _name
         ]
 
-instance HasArn (LbTargetGroupDataSource s) Text where
-    type HasArnThread (LbTargetGroupDataSource s) Text = s
-
+instance HasArn (LbTargetGroupDataSource s) s Text where
     arn =
         lens (_arn :: LbTargetGroupDataSource s -> TF.Attribute s Text)
             (\s a -> s { _arn = a } :: LbTargetGroupDataSource s)
 
-instance HasName (LbTargetGroupDataSource s) Text where
-    type HasNameThread (LbTargetGroupDataSource s) Text = s
-
+instance HasName (LbTargetGroupDataSource s) s Text where
     name =
         lens (_name :: LbTargetGroupDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbTargetGroupDataSource s)
@@ -2945,78 +2849,64 @@ lbTargetGroupDataSource =
 Provides details about a specific Nat Gateway.
 -}
 data NatGatewayDataSource s = NatGatewayDataSource {
-      _filter :: !(TF.Attribute s Text)
+      _filter    :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. More complex filters can be expressed using one or more @filter@ sub-blocks, which take the following arguments: -}
-    , _id :: !(TF.Attribute s Text)
+    , _id        :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific Nat Gateway to retrieve. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name      :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the field to filter by, as defined by <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html> . -}
-    , _state :: !(TF.Attribute s Text)
+    , _state     :: !(TF.Attribute s Text)
     {- ^ (Optional) The state of the NAT gateway (pending | failed | available | deleting | deleted ). -}
     , _subnet_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of subnet that the Nat Gateway resides in. -}
-    , _values :: !(TF.Attribute s Text)
+    , _values    :: !(TF.Attribute s Text)
     {- ^ (Required) Set of values that are accepted for the given field. An Nat Gateway will be selected if any one of the given values matches. -}
-    , _vpc_id :: !(TF.Attribute s Text)
+    , _vpc_id    :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the VPC that the Nat Gateway resides in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NatGatewayDataSource s) where
     toHCL NatGatewayDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "id" <$> TF.attribute _id
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
-        , TF.assign "values" <$> TF.attribute _values
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        [ TF.attribute "filter" _filter
+        , TF.attribute "id" _id
+        , TF.attribute "name" _name
+        , TF.attribute "state" _state
+        , TF.attribute "subnet_id" _subnet_id
+        , TF.attribute "values" _values
+        , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasFilter (NatGatewayDataSource s) Text where
-    type HasFilterThread (NatGatewayDataSource s) Text = s
-
+instance HasFilter (NatGatewayDataSource s) s Text where
     filter =
         lens (_filter :: NatGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: NatGatewayDataSource s)
 
-instance HasId (NatGatewayDataSource s) Text where
-    type HasIdThread (NatGatewayDataSource s) Text = s
-
+instance HasId (NatGatewayDataSource s) s Text where
     id =
         lens (_id :: NatGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: NatGatewayDataSource s)
 
-instance HasName (NatGatewayDataSource s) Text where
-    type HasNameThread (NatGatewayDataSource s) Text = s
-
+instance HasName (NatGatewayDataSource s) s Text where
     name =
         lens (_name :: NatGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: NatGatewayDataSource s)
 
-instance HasState (NatGatewayDataSource s) Text where
-    type HasStateThread (NatGatewayDataSource s) Text = s
-
+instance HasState (NatGatewayDataSource s) s Text where
     state =
         lens (_state :: NatGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _state = a } :: NatGatewayDataSource s)
 
-instance HasSubnetId (NatGatewayDataSource s) Text where
-    type HasSubnetIdThread (NatGatewayDataSource s) Text = s
-
+instance HasSubnetId (NatGatewayDataSource s) s Text where
     subnetId =
         lens (_subnet_id :: NatGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _subnet_id = a } :: NatGatewayDataSource s)
 
-instance HasValues (NatGatewayDataSource s) Text where
-    type HasValuesThread (NatGatewayDataSource s) Text = s
-
+instance HasValues (NatGatewayDataSource s) s Text where
     values =
         lens (_values :: NatGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _values = a } :: NatGatewayDataSource s)
 
-instance HasVpcId (NatGatewayDataSource s) Text where
-    type HasVpcIdThread (NatGatewayDataSource s) Text = s
-
+instance HasVpcId (NatGatewayDataSource s) s Text where
     vpcId =
         lens (_vpc_id :: NatGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: NatGatewayDataSource s)
@@ -3047,18 +2937,24 @@ natGatewayDataSource =
 Use this data source to get information about a Network Interface.
 -}
 data NetworkInterfaceDataSource s = NetworkInterfaceDataSource {
-      _id :: !(TF.Attribute s Text)
-    {- ^ – (Required) The identifier for the network interface. -}
+      _filter :: !(TF.Attribute s Text)
+    {- ^ – (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-network-interfaces.html> in the AWS CLI reference. -}
+    , _id     :: !(TF.Attribute s Text)
+    {- ^ – (Optional) The identifier for the network interface. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkInterfaceDataSource s) where
     toHCL NetworkInterfaceDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
+        [ TF.attribute "filter" _filter
+        , TF.attribute "id" _id
         ]
 
-instance HasId (NetworkInterfaceDataSource s) Text where
-    type HasIdThread (NetworkInterfaceDataSource s) Text = s
+instance HasFilter (NetworkInterfaceDataSource s) s Text where
+    filter =
+        lens (_filter :: NetworkInterfaceDataSource s -> TF.Attribute s Text)
+            (\s a -> s { _filter = a } :: NetworkInterfaceDataSource s)
 
+instance HasId (NetworkInterfaceDataSource s) s Text where
     id =
         lens (_id :: NetworkInterfaceDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: NetworkInterfaceDataSource s)
@@ -3081,7 +2977,8 @@ networkInterfaceDataSource :: TF.DataSource TF.AWS (NetworkInterfaceDataSource s
 networkInterfaceDataSource =
     TF.newDataSource "aws_network_interface" $
         NetworkInterfaceDataSource {
-              _id = TF.Nil
+              _filter = TF.Nil
+            , _id = TF.Nil
             }
 
 {- | The @aws_partition@ AWS datasource.
@@ -3110,7 +3007,7 @@ associated AWS service. The latter may be useful e.g. for adding network ACL
 rules.
 -}
 data PrefixListDataSource s = PrefixListDataSource {
-      _name :: !(TF.Attribute s Text)
+      _name           :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the prefix list to select. -}
     , _prefix_list_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the prefix list to select. -}
@@ -3118,20 +3015,16 @@ data PrefixListDataSource s = PrefixListDataSource {
 
 instance TF.ToHCL (PrefixListDataSource s) where
     toHCL PrefixListDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "prefix_list_id" <$> TF.attribute _prefix_list_id
+        [ TF.attribute "name" _name
+        , TF.attribute "prefix_list_id" _prefix_list_id
         ]
 
-instance HasName (PrefixListDataSource s) Text where
-    type HasNameThread (PrefixListDataSource s) Text = s
-
+instance HasName (PrefixListDataSource s) s Text where
     name =
         lens (_name :: PrefixListDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: PrefixListDataSource s)
 
-instance HasPrefixListId (PrefixListDataSource s) Text where
-    type HasPrefixListIdThread (PrefixListDataSource s) Text = s
-
+instance HasPrefixListId (PrefixListDataSource s) s Text where
     prefixListId =
         lens (_prefix_list_id :: PrefixListDataSource s -> TF.Attribute s Text)
             (\s a -> s { _prefix_list_id = a } :: PrefixListDataSource s)
@@ -3161,12 +3054,10 @@ data RdsClusterDataSource s = RdsClusterDataSource {
 
 instance TF.ToHCL (RdsClusterDataSource s) where
     toHCL RdsClusterDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "cluster_identifier" <$> TF.attribute _cluster_identifier
+        [ TF.attribute "cluster_identifier" _cluster_identifier
         ]
 
-instance HasClusterIdentifier (RdsClusterDataSource s) Text where
-    type HasClusterIdentifierThread (RdsClusterDataSource s) Text = s
-
+instance HasClusterIdentifier (RdsClusterDataSource s) s Text where
     clusterIdentifier =
         lens (_cluster_identifier :: RdsClusterDataSource s -> TF.Attribute s Text)
             (\s a -> s { _cluster_identifier = a } :: RdsClusterDataSource s)
@@ -3192,12 +3083,10 @@ data RedshiftServiceAccountDataSource s = RedshiftServiceAccountDataSource {
 
 instance TF.ToHCL (RedshiftServiceAccountDataSource s) where
     toHCL RedshiftServiceAccountDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
+        [ TF.attribute "region" _region
         ]
 
-instance HasRegion (RedshiftServiceAccountDataSource s) TF.Region where
-    type HasRegionThread (RedshiftServiceAccountDataSource s) TF.Region = s
-
+instance HasRegion (RedshiftServiceAccountDataSource s) s TF.Region where
     region =
         lens (_region :: RedshiftServiceAccountDataSource s -> TF.Attribute s TF.Region)
             (\s a -> s { _region = a } :: RedshiftServiceAccountDataSource s)
@@ -3222,38 +3111,32 @@ the provider. The latter can be useful in a child module which is inheriting
 an AWS provider configuration from its parent module.
 -}
 data RegionDataSource s = RegionDataSource {
-      _current :: !(TF.Attribute s Text)
+      _current  :: !(TF.Attribute s Text)
     {- ^ (Optional) Set to @true@ to match only the region configured in the provider. (It is not meaningful to set this to @false@ .) -}
     , _endpoint :: !(TF.Attribute s Text)
     {- ^ (Optional) The endpoint of the region to select. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name     :: !(TF.Attribute s Text)
     {- ^ (Optional) The full name of the region to select. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RegionDataSource s) where
     toHCL RegionDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "current" <$> TF.attribute _current
-        , TF.assign "endpoint" <$> TF.attribute _endpoint
-        , TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "current" _current
+        , TF.attribute "endpoint" _endpoint
+        , TF.attribute "name" _name
         ]
 
-instance HasCurrent (RegionDataSource s) Text where
-    type HasCurrentThread (RegionDataSource s) Text = s
-
+instance HasCurrent (RegionDataSource s) s Text where
     current =
         lens (_current :: RegionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _current = a } :: RegionDataSource s)
 
-instance HasEndpoint (RegionDataSource s) Text where
-    type HasEndpointThread (RegionDataSource s) Text = s
-
+instance HasEndpoint (RegionDataSource s) s Text where
     endpoint =
         lens (_endpoint :: RegionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _endpoint = a } :: RegionDataSource s)
 
-instance HasName (RegionDataSource s) Text where
-    type HasNameThread (RegionDataSource s) Text = s
-
+instance HasName (RegionDataSource s) s Text where
     name =
         lens (_name :: RegionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: RegionDataSource s)
@@ -3280,58 +3163,48 @@ This data source allows to find a Hosted Zone ID given Hosted Zone name and
 certain search criteria.
 -}
 data Route53ZoneDataSource s = Route53ZoneDataSource {
-      _name :: !(TF.Attribute s Text)
+      _name         :: !(TF.Attribute s Text)
     {- ^ (Optional) The Hosted Zone name of the desired Hosted Zone. -}
     , _private_zone :: !(TF.Attribute s Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone. -}
-    , _tags :: !(TF.Attribute s TF.Tags)
+    , _tags         :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) Used with @name@ field. A mapping of tags, each pair of which must exactly match a pair on the desired Hosted Zone. -}
-    , _vpc_id :: !(TF.Attribute s Text)
+    , _vpc_id       :: !(TF.Attribute s Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone associated with the vpc_id (in this case, private_zone is not mandatory). -}
-    , _zone_id :: !(TF.Attribute s Text)
+    , _zone_id      :: !(TF.Attribute s Text)
     {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (Route53ZoneDataSource s) where
     toHCL Route53ZoneDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "private_zone" <$> TF.attribute _private_zone
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
-        , TF.assign "zone_id" <$> TF.attribute _zone_id
+        [ TF.attribute "name" _name
+        , TF.attribute "private_zone" _private_zone
+        , TF.attribute "tags" _tags
+        , TF.attribute "vpc_id" _vpc_id
+        , TF.attribute "zone_id" _zone_id
         ]
 
-instance HasName (Route53ZoneDataSource s) Text where
-    type HasNameThread (Route53ZoneDataSource s) Text = s
-
+instance HasName (Route53ZoneDataSource s) s Text where
     name =
         lens (_name :: Route53ZoneDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: Route53ZoneDataSource s)
 
-instance HasPrivateZone (Route53ZoneDataSource s) Text where
-    type HasPrivateZoneThread (Route53ZoneDataSource s) Text = s
-
+instance HasPrivateZone (Route53ZoneDataSource s) s Text where
     privateZone =
         lens (_private_zone :: Route53ZoneDataSource s -> TF.Attribute s Text)
             (\s a -> s { _private_zone = a } :: Route53ZoneDataSource s)
 
-instance HasTags (Route53ZoneDataSource s) TF.Tags where
-    type HasTagsThread (Route53ZoneDataSource s) TF.Tags = s
-
+instance HasTags (Route53ZoneDataSource s) s TF.Tags where
     tags =
         lens (_tags :: Route53ZoneDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: Route53ZoneDataSource s)
 
-instance HasVpcId (Route53ZoneDataSource s) Text where
-    type HasVpcIdThread (Route53ZoneDataSource s) Text = s
-
+instance HasVpcId (Route53ZoneDataSource s) s Text where
     vpcId =
         lens (_vpc_id :: Route53ZoneDataSource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: Route53ZoneDataSource s)
 
-instance HasZoneId (Route53ZoneDataSource s) Text where
-    type HasZoneIdThread (Route53ZoneDataSource s) Text = s
-
+instance HasZoneId (Route53ZoneDataSource s) s Text where
     zoneId =
         lens (_zone_id :: Route53ZoneDataSource s -> TF.Attribute s Text)
             (\s a -> s { _zone_id = a } :: Route53ZoneDataSource s)
@@ -3360,58 +3233,48 @@ resource can prove useful when a module accepts a Subnet id as an input
 variable and needs to, for example, add a route in the Route Table.
 -}
 data RouteTableDataSource s = RouteTableDataSource {
-      _filter :: !(TF.Attribute s Text)
+      _filter         :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _route_table_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific Route Table to retrieve. -}
-    , _subnet_id :: !(TF.Attribute s Text)
+    , _subnet_id      :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of a Subnet which is connected to the Route Table (not be exported if not given in parameter). -}
-    , _tags :: !(TF.Attribute s TF.Tags)
+    , _tags           :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Route Table. -}
-    , _vpc_id :: !(TF.Attribute s Text)
+    , _vpc_id         :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RouteTableDataSource s) where
     toHCL RouteTableDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "route_table_id" <$> TF.attribute _route_table_id
-        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        [ TF.attribute "filter" _filter
+        , TF.attribute "route_table_id" _route_table_id
+        , TF.attribute "subnet_id" _subnet_id
+        , TF.attribute "tags" _tags
+        , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasFilter (RouteTableDataSource s) Text where
-    type HasFilterThread (RouteTableDataSource s) Text = s
-
+instance HasFilter (RouteTableDataSource s) s Text where
     filter =
         lens (_filter :: RouteTableDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: RouteTableDataSource s)
 
-instance HasRouteTableId (RouteTableDataSource s) Text where
-    type HasRouteTableIdThread (RouteTableDataSource s) Text = s
-
+instance HasRouteTableId (RouteTableDataSource s) s Text where
     routeTableId =
         lens (_route_table_id :: RouteTableDataSource s -> TF.Attribute s Text)
             (\s a -> s { _route_table_id = a } :: RouteTableDataSource s)
 
-instance HasSubnetId (RouteTableDataSource s) Text where
-    type HasSubnetIdThread (RouteTableDataSource s) Text = s
-
+instance HasSubnetId (RouteTableDataSource s) s Text where
     subnetId =
         lens (_subnet_id :: RouteTableDataSource s -> TF.Attribute s Text)
             (\s a -> s { _subnet_id = a } :: RouteTableDataSource s)
 
-instance HasTags (RouteTableDataSource s) TF.Tags where
-    type HasTagsThread (RouteTableDataSource s) TF.Tags = s
-
+instance HasTags (RouteTableDataSource s) s TF.Tags where
     tags =
         lens (_tags :: RouteTableDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: RouteTableDataSource s)
 
-instance HasVpcId (RouteTableDataSource s) Text where
-    type HasVpcIdThread (RouteTableDataSource s) Text = s
-
+instance HasVpcId (RouteTableDataSource s) s Text where
     vpcId =
         lens (_vpc_id :: RouteTableDataSource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: RouteTableDataSource s)
@@ -3456,12 +3319,10 @@ data S3BucketDataSource s = S3BucketDataSource {
 
 instance TF.ToHCL (S3BucketDataSource s) where
     toHCL S3BucketDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "bucket" <$> TF.attribute _bucket
+        [ TF.attribute "bucket" _bucket
         ]
 
-instance HasBucket (S3BucketDataSource s) Text where
-    type HasBucketThread (S3BucketDataSource s) Text = s
-
+instance HasBucket (S3BucketDataSource s) s Text where
     bucket =
         lens (_bucket :: S3BucketDataSource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: S3BucketDataSource s)
@@ -3497,9 +3358,9 @@ to prevent printing unsafe characters and potentially downloading large
 amount of data which would be thrown away in favour of metadata.
 -}
 data S3BucketObjectDataSource s = S3BucketObjectDataSource {
-      _bucket :: !(TF.Attribute s Text)
+      _bucket     :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the bucket to read the object from -}
-    , _key :: !(TF.Attribute s Text)
+    , _key        :: !(TF.Attribute s Text)
     {- ^ (Required) The full path to the object inside the bucket -}
     , _version_id :: !(TF.Attribute s Text)
     {- ^ (Optional) Specific version ID of the object returned (defaults to latest version) -}
@@ -3507,28 +3368,22 @@ data S3BucketObjectDataSource s = S3BucketObjectDataSource {
 
 instance TF.ToHCL (S3BucketObjectDataSource s) where
     toHCL S3BucketObjectDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "bucket" <$> TF.attribute _bucket
-        , TF.assign "key" <$> TF.attribute _key
-        , TF.assign "version_id" <$> TF.attribute _version_id
+        [ TF.attribute "bucket" _bucket
+        , TF.attribute "key" _key
+        , TF.attribute "version_id" _version_id
         ]
 
-instance HasBucket (S3BucketObjectDataSource s) Text where
-    type HasBucketThread (S3BucketObjectDataSource s) Text = s
-
+instance HasBucket (S3BucketObjectDataSource s) s Text where
     bucket =
         lens (_bucket :: S3BucketObjectDataSource s -> TF.Attribute s Text)
             (\s a -> s { _bucket = a } :: S3BucketObjectDataSource s)
 
-instance HasKey (S3BucketObjectDataSource s) Text where
-    type HasKeyThread (S3BucketObjectDataSource s) Text = s
-
+instance HasKey (S3BucketObjectDataSource s) s Text where
     key =
         lens (_key :: S3BucketObjectDataSource s -> TF.Attribute s Text)
             (\s a -> s { _key = a } :: S3BucketObjectDataSource s)
 
-instance HasVersionId (S3BucketObjectDataSource s) Text where
-    type HasVersionIdThread (S3BucketObjectDataSource s) Text = s
-
+instance HasVersionId (S3BucketObjectDataSource s) s Text where
     versionId =
         lens (_version_id :: S3BucketObjectDataSource s -> TF.Attribute s Text)
             (\s a -> s { _version_id = a } :: S3BucketObjectDataSource s)
@@ -3588,11 +3443,11 @@ the security group belongs to.
 data SecurityGroupDataSource s = SecurityGroupDataSource {
       _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attribute s Text)
+    , _id     :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific security group to retrieve. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name   :: !(TF.Attribute s Text)
     {- ^ (Optional) The name that the desired security group must have. -}
-    , _tags :: !(TF.Attribute s TF.Tags)
+    , _tags   :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired security group. -}
     , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
@@ -3600,44 +3455,34 @@ data SecurityGroupDataSource s = SecurityGroupDataSource {
 
 instance TF.ToHCL (SecurityGroupDataSource s) where
     toHCL SecurityGroupDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "id" <$> TF.attribute _id
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        [ TF.attribute "filter" _filter
+        , TF.attribute "id" _id
+        , TF.attribute "name" _name
+        , TF.attribute "tags" _tags
+        , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasFilter (SecurityGroupDataSource s) Text where
-    type HasFilterThread (SecurityGroupDataSource s) Text = s
-
+instance HasFilter (SecurityGroupDataSource s) s Text where
     filter =
         lens (_filter :: SecurityGroupDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: SecurityGroupDataSource s)
 
-instance HasId (SecurityGroupDataSource s) Text where
-    type HasIdThread (SecurityGroupDataSource s) Text = s
-
+instance HasId (SecurityGroupDataSource s) s Text where
     id =
         lens (_id :: SecurityGroupDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: SecurityGroupDataSource s)
 
-instance HasName (SecurityGroupDataSource s) Text where
-    type HasNameThread (SecurityGroupDataSource s) Text = s
-
+instance HasName (SecurityGroupDataSource s) s Text where
     name =
         lens (_name :: SecurityGroupDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SecurityGroupDataSource s)
 
-instance HasTags (SecurityGroupDataSource s) TF.Tags where
-    type HasTagsThread (SecurityGroupDataSource s) TF.Tags = s
-
+instance HasTags (SecurityGroupDataSource s) s TF.Tags where
     tags =
         lens (_tags :: SecurityGroupDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: SecurityGroupDataSource s)
 
-instance HasVpcId (SecurityGroupDataSource s) Text where
-    type HasVpcIdThread (SecurityGroupDataSource s) Text = s
-
+instance HasVpcId (SecurityGroupDataSource s) s Text where
     vpcId =
         lens (_vpc_id :: SecurityGroupDataSource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: SecurityGroupDataSource s)
@@ -3670,12 +3515,10 @@ data SnsTopicDataSource s = SnsTopicDataSource {
 
 instance TF.ToHCL (SnsTopicDataSource s) where
     toHCL SnsTopicDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (SnsTopicDataSource s) Text where
-    type HasNameThread (SnsTopicDataSource s) Text = s
-
+instance HasName (SnsTopicDataSource s) s Text where
     name =
         lens (_name :: SnsTopicDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SnsTopicDataSource s)
@@ -3694,7 +3537,7 @@ snsTopicDataSource =
 Provides an SSM Parameter data source.
 -}
 data SsmParameterDataSource s = SsmParameterDataSource {
-      _name :: !(TF.Attribute s Text)
+      _name            :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the parameter. -}
     , _with_decryption :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether to return decrypted @SecureString@ value. Defaults to @true@ . -}
@@ -3702,20 +3545,16 @@ data SsmParameterDataSource s = SsmParameterDataSource {
 
 instance TF.ToHCL (SsmParameterDataSource s) where
     toHCL SsmParameterDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "with_decryption" <$> TF.attribute _with_decryption
+        [ TF.attribute "name" _name
+        , TF.attribute "with_decryption" _with_decryption
         ]
 
-instance HasName (SsmParameterDataSource s) Text where
-    type HasNameThread (SsmParameterDataSource s) Text = s
-
+instance HasName (SsmParameterDataSource s) s Text where
     name =
         lens (_name :: SsmParameterDataSource s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: SsmParameterDataSource s)
 
-instance HasWithDecryption (SsmParameterDataSource s) Text where
-    type HasWithDecryptionThread (SsmParameterDataSource s) Text = s
-
+instance HasWithDecryption (SsmParameterDataSource s) s Text where
     withDecryption =
         lens (_with_decryption :: SsmParameterDataSource s -> TF.Attribute s Text)
             (\s a -> s { _with_decryption = a } :: SsmParameterDataSource s)
@@ -3738,96 +3577,78 @@ to.
 data SubnetDataSource s = SubnetDataSource {
       _availability_zone :: !(TF.Attribute s TF.Zone)
     {- ^ (Optional) The availability zone where the subnet must reside. -}
-    , _cidr_block :: !(TF.Attribute s TF.CIDR)
+    , _cidr_block        :: !(TF.Attribute s TF.CIDR)
     {- ^ (Optional) The cidr block of the desired subnet. -}
-    , _default_for_az :: !(TF.Attribute s Text)
+    , _default_for_az    :: !(TF.Attribute s Text)
     {- ^ (Optional) Boolean constraint for whether the desired subnet must be the default subnet for its associated availability zone. -}
-    , _filter :: !(TF.Attribute s Text)
+    , _filter            :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attribute s Text)
+    , _id                :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific subnet to retrieve. -}
-    , _ipv6_cidr_block :: !(TF.Attribute s TF.CIDR)
+    , _ipv6_cidr_block   :: !(TF.Attribute s TF.CIDR)
     {- ^ (Optional) The Ipv6 cidr block of the desired subnet -}
-    , _state :: !(TF.Attribute s Text)
+    , _state             :: !(TF.Attribute s Text)
     {- ^ (Optional) The state that the desired subnet must have. -}
-    , _tags :: !(TF.Attribute s TF.Tags)
+    , _tags              :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnet. -}
-    , _vpc_id :: !(TF.Attribute s Text)
+    , _vpc_id            :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the VPC that the desired subnet belongs to. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SubnetDataSource s) where
     toHCL SubnetDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
-        , TF.assign "cidr_block" <$> TF.attribute _cidr_block
-        , TF.assign "default_for_az" <$> TF.attribute _default_for_az
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "id" <$> TF.attribute _id
-        , TF.assign "ipv6_cidr_block" <$> TF.attribute _ipv6_cidr_block
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        [ TF.attribute "availability_zone" _availability_zone
+        , TF.attribute "cidr_block" _cidr_block
+        , TF.attribute "default_for_az" _default_for_az
+        , TF.attribute "filter" _filter
+        , TF.attribute "id" _id
+        , TF.attribute "ipv6_cidr_block" _ipv6_cidr_block
+        , TF.attribute "state" _state
+        , TF.attribute "tags" _tags
+        , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasAvailabilityZone (SubnetDataSource s) TF.Zone where
-    type HasAvailabilityZoneThread (SubnetDataSource s) TF.Zone = s
-
+instance HasAvailabilityZone (SubnetDataSource s) s TF.Zone where
     availabilityZone =
         lens (_availability_zone :: SubnetDataSource s -> TF.Attribute s TF.Zone)
             (\s a -> s { _availability_zone = a } :: SubnetDataSource s)
 
-instance HasCidrBlock (SubnetDataSource s) TF.CIDR where
-    type HasCidrBlockThread (SubnetDataSource s) TF.CIDR = s
-
+instance HasCidrBlock (SubnetDataSource s) s TF.CIDR where
     cidrBlock =
         lens (_cidr_block :: SubnetDataSource s -> TF.Attribute s TF.CIDR)
             (\s a -> s { _cidr_block = a } :: SubnetDataSource s)
 
-instance HasDefaultForAz (SubnetDataSource s) Text where
-    type HasDefaultForAzThread (SubnetDataSource s) Text = s
-
+instance HasDefaultForAz (SubnetDataSource s) s Text where
     defaultForAz =
         lens (_default_for_az :: SubnetDataSource s -> TF.Attribute s Text)
             (\s a -> s { _default_for_az = a } :: SubnetDataSource s)
 
-instance HasFilter (SubnetDataSource s) Text where
-    type HasFilterThread (SubnetDataSource s) Text = s
-
+instance HasFilter (SubnetDataSource s) s Text where
     filter =
         lens (_filter :: SubnetDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: SubnetDataSource s)
 
-instance HasId (SubnetDataSource s) Text where
-    type HasIdThread (SubnetDataSource s) Text = s
-
+instance HasId (SubnetDataSource s) s Text where
     id =
         lens (_id :: SubnetDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: SubnetDataSource s)
 
-instance HasIpv6CidrBlock (SubnetDataSource s) TF.CIDR where
-    type HasIpv6CidrBlockThread (SubnetDataSource s) TF.CIDR = s
-
+instance HasIpv6CidrBlock (SubnetDataSource s) s TF.CIDR where
     ipv6CidrBlock =
         lens (_ipv6_cidr_block :: SubnetDataSource s -> TF.Attribute s TF.CIDR)
             (\s a -> s { _ipv6_cidr_block = a } :: SubnetDataSource s)
 
-instance HasState (SubnetDataSource s) Text where
-    type HasStateThread (SubnetDataSource s) Text = s
-
+instance HasState (SubnetDataSource s) s Text where
     state =
         lens (_state :: SubnetDataSource s -> TF.Attribute s Text)
             (\s a -> s { _state = a } :: SubnetDataSource s)
 
-instance HasTags (SubnetDataSource s) TF.Tags where
-    type HasTagsThread (SubnetDataSource s) TF.Tags = s
-
+instance HasTags (SubnetDataSource s) s TF.Tags where
     tags =
         lens (_tags :: SubnetDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: SubnetDataSource s)
 
-instance HasVpcId (SubnetDataSource s) Text where
-    type HasVpcIdThread (SubnetDataSource s) Text = s
-
+instance HasVpcId (SubnetDataSource s) s Text where
     vpcId =
         lens (_vpc_id :: SubnetDataSource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: SubnetDataSource s)
@@ -3853,7 +3674,7 @@ subnetDataSource =
 useful for getting back a list of subnet ids for a vpc.
 -}
 data SubnetIdsDataSource s = SubnetIdsDataSource {
-      _tags :: !(TF.Attribute s TF.Tags)
+      _tags   :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnets. -}
     , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Required) The VPC ID that you want to filter from. -}
@@ -3861,20 +3682,16 @@ data SubnetIdsDataSource s = SubnetIdsDataSource {
 
 instance TF.ToHCL (SubnetIdsDataSource s) where
     toHCL SubnetIdsDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        [ TF.attribute "tags" _tags
+        , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasTags (SubnetIdsDataSource s) TF.Tags where
-    type HasTagsThread (SubnetIdsDataSource s) TF.Tags = s
-
+instance HasTags (SubnetIdsDataSource s) s TF.Tags where
     tags =
         lens (_tags :: SubnetIdsDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: SubnetIdsDataSource s)
 
-instance HasVpcId (SubnetIdsDataSource s) Text where
-    type HasVpcIdThread (SubnetIdsDataSource s) Text = s
-
+instance HasVpcId (SubnetIdsDataSource s) s Text where
     vpcId =
         lens (_vpc_id :: SubnetIdsDataSource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: SubnetIdsDataSource s)
@@ -3896,78 +3713,64 @@ useful when a module accepts a vpc id as an input variable and needs to, for
 example, determine the CIDR block of that VPC.
 -}
 data VpcDataSource s = VpcDataSource {
-      _cidr_block :: !(TF.Attribute s TF.CIDR)
+      _cidr_block      :: !(TF.Attribute s TF.CIDR)
     {- ^ (Optional) The cidr block of the desired VPC. -}
-    , _default' :: !(TF.Attribute s Text)
+    , _default'        :: !(TF.Attribute s Text)
     {- ^ (Optional) Boolean constraint on whether the desired VPC is the default VPC for the region. -}
     , _dhcp_options_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The DHCP options id of the desired VPC. -}
-    , _filter :: !(TF.Attribute s Text)
+    , _filter          :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attribute s Text)
+    , _id              :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific VPC to retrieve. -}
-    , _state :: !(TF.Attribute s Text)
+    , _state           :: !(TF.Attribute s Text)
     {- ^ (Optional) The current state of the desired VPC. Can be either @"pending"@ or @"available"@ . -}
-    , _tags :: !(TF.Attribute s TF.Tags)
+    , _tags            :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VpcDataSource s) where
     toHCL VpcDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
-        , TF.assign "default" <$> TF.attribute _default'
-        , TF.assign "dhcp_options_id" <$> TF.attribute _dhcp_options_id
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "id" <$> TF.attribute _id
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "tags" <$> TF.attribute _tags
+        [ TF.attribute "cidr_block" _cidr_block
+        , TF.attribute "default" _default'
+        , TF.attribute "dhcp_options_id" _dhcp_options_id
+        , TF.attribute "filter" _filter
+        , TF.attribute "id" _id
+        , TF.attribute "state" _state
+        , TF.attribute "tags" _tags
         ]
 
-instance HasCidrBlock (VpcDataSource s) TF.CIDR where
-    type HasCidrBlockThread (VpcDataSource s) TF.CIDR = s
-
+instance HasCidrBlock (VpcDataSource s) s TF.CIDR where
     cidrBlock =
         lens (_cidr_block :: VpcDataSource s -> TF.Attribute s TF.CIDR)
             (\s a -> s { _cidr_block = a } :: VpcDataSource s)
 
-instance HasDefault' (VpcDataSource s) Text where
-    type HasDefault'Thread (VpcDataSource s) Text = s
-
+instance HasDefault' (VpcDataSource s) s Text where
     default' =
         lens (_default' :: VpcDataSource s -> TF.Attribute s Text)
             (\s a -> s { _default' = a } :: VpcDataSource s)
 
-instance HasDhcpOptionsId (VpcDataSource s) Text where
-    type HasDhcpOptionsIdThread (VpcDataSource s) Text = s
-
+instance HasDhcpOptionsId (VpcDataSource s) s Text where
     dhcpOptionsId =
         lens (_dhcp_options_id :: VpcDataSource s -> TF.Attribute s Text)
             (\s a -> s { _dhcp_options_id = a } :: VpcDataSource s)
 
-instance HasFilter (VpcDataSource s) Text where
-    type HasFilterThread (VpcDataSource s) Text = s
-
+instance HasFilter (VpcDataSource s) s Text where
     filter =
         lens (_filter :: VpcDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: VpcDataSource s)
 
-instance HasId (VpcDataSource s) Text where
-    type HasIdThread (VpcDataSource s) Text = s
-
+instance HasId (VpcDataSource s) s Text where
     id =
         lens (_id :: VpcDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: VpcDataSource s)
 
-instance HasState (VpcDataSource s) Text where
-    type HasStateThread (VpcDataSource s) Text = s
-
+instance HasState (VpcDataSource s) s Text where
     state =
         lens (_state :: VpcDataSource s -> TF.Attribute s Text)
             (\s a -> s { _state = a } :: VpcDataSource s)
 
-instance HasTags (VpcDataSource s) TF.Tags where
-    type HasTagsThread (VpcDataSource s) TF.Tags = s
-
+instance HasTags (VpcDataSource s) s TF.Tags where
     tags =
         lens (_tags :: VpcDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: VpcDataSource s)
@@ -4000,48 +3803,40 @@ vpcDataSource =
 The VPC Endpoint data source provides details about a specific VPC endpoint.
 -}
 data VpcEndpointDataSource s = VpcEndpointDataSource {
-      _id :: !(TF.Attribute s Text)
+      _id           :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the specific VPC Endpoint to retrieve. -}
     , _service_name :: !(TF.Attribute s Text)
     {- ^ (Optional) The AWS service name of the specific VPC Endpoint to retrieve. -}
-    , _state :: !(TF.Attribute s Text)
+    , _state        :: !(TF.Attribute s Text)
     {- ^ (Optional) The state of the specific VPC Endpoint to retrieve. -}
-    , _vpc_id :: !(TF.Attribute s Text)
+    , _vpc_id       :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the VPC in which the specific VPC Endpoint is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VpcEndpointDataSource s) where
     toHCL VpcEndpointDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
-        , TF.assign "service_name" <$> TF.attribute _service_name
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        [ TF.attribute "id" _id
+        , TF.attribute "service_name" _service_name
+        , TF.attribute "state" _state
+        , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasId (VpcEndpointDataSource s) Text where
-    type HasIdThread (VpcEndpointDataSource s) Text = s
-
+instance HasId (VpcEndpointDataSource s) s Text where
     id =
         lens (_id :: VpcEndpointDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: VpcEndpointDataSource s)
 
-instance HasServiceName (VpcEndpointDataSource s) Text where
-    type HasServiceNameThread (VpcEndpointDataSource s) Text = s
-
+instance HasServiceName (VpcEndpointDataSource s) s Text where
     serviceName =
         lens (_service_name :: VpcEndpointDataSource s -> TF.Attribute s Text)
             (\s a -> s { _service_name = a } :: VpcEndpointDataSource s)
 
-instance HasState (VpcEndpointDataSource s) Text where
-    type HasStateThread (VpcEndpointDataSource s) Text = s
-
+instance HasState (VpcEndpointDataSource s) s Text where
     state =
         lens (_state :: VpcEndpointDataSource s -> TF.Attribute s Text)
             (\s a -> s { _state = a } :: VpcEndpointDataSource s)
 
-instance HasVpcId (VpcEndpointDataSource s) Text where
-    type HasVpcIdThread (VpcEndpointDataSource s) Text = s
-
+instance HasVpcId (VpcEndpointDataSource s) s Text where
     vpcId =
         lens (_vpc_id :: VpcEndpointDataSource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: VpcEndpointDataSource s)
@@ -4075,12 +3870,10 @@ data VpcEndpointServiceDataSource s = VpcEndpointServiceDataSource {
 
 instance TF.ToHCL (VpcEndpointServiceDataSource s) where
     toHCL VpcEndpointServiceDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "service" <$> TF.attribute _service
+        [ TF.attribute "service" _service
         ]
 
-instance HasService (VpcEndpointServiceDataSource s) Text where
-    type HasServiceThread (VpcEndpointServiceDataSource s) Text = s
-
+instance HasService (VpcEndpointServiceDataSource s) s Text where
     service =
         lens (_service :: VpcEndpointServiceDataSource s -> TF.Attribute s Text)
             (\s a -> s { _service = a } :: VpcEndpointServiceDataSource s)
@@ -4100,128 +3893,104 @@ The VPC Peering Connection data source provides details about a specific VPC
 peering connection.
 -}
 data VpcPeeringConnectionDataSource s = VpcPeeringConnectionDataSource {
-      _cidr_block :: !(TF.Attribute s TF.CIDR)
+      _cidr_block      :: !(TF.Attribute s TF.CIDR)
     {- ^ (Optional) The CIDR block of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _filter :: !(TF.Attribute s Text)
+    , _filter          :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attribute s Text)
+    , _id              :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the specific VPC Peering Connection to retrieve. -}
-    , _owner_id :: !(TF.Attribute s Text)
+    , _owner_id        :: !(TF.Attribute s Text)
     {- ^ (Optional) The AWS account ID of the owner of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     , _peer_cidr_block :: !(TF.Attribute s TF.CIDR)
     {- ^ (Optional) The CIDR block of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_owner_id :: !(TF.Attribute s Text)
+    , _peer_owner_id   :: !(TF.Attribute s Text)
     {- ^ (Optional) The AWS account ID of the owner of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_region :: !(TF.Attribute s TF.Region)
+    , _peer_region     :: !(TF.Attribute s TF.Region)
     {- ^ (Optional) The region of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_vpc_id :: !(TF.Attribute s Text)
+    , _peer_vpc_id     :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _region :: !(TF.Attribute s TF.Region)
+    , _region          :: !(TF.Attribute s TF.Region)
     {- ^ (Optional) The region of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _status :: !(TF.Attribute s Text)
+    , _status          :: !(TF.Attribute s Text)
     {- ^ (Optional) The status of the specific VPC Peering Connection to retrieve. -}
-    , _tags :: !(TF.Attribute s TF.Tags)
+    , _tags            :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC Peering Connection. -}
-    , _vpc_id :: !(TF.Attribute s Text)
+    , _vpc_id          :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VpcPeeringConnectionDataSource s) where
     toHCL VpcPeeringConnectionDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "id" <$> TF.attribute _id
-        , TF.assign "owner_id" <$> TF.attribute _owner_id
-        , TF.assign "peer_cidr_block" <$> TF.attribute _peer_cidr_block
-        , TF.assign "peer_owner_id" <$> TF.attribute _peer_owner_id
-        , TF.assign "peer_region" <$> TF.attribute _peer_region
-        , TF.assign "peer_vpc_id" <$> TF.attribute _peer_vpc_id
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "status" <$> TF.attribute _status
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        [ TF.attribute "cidr_block" _cidr_block
+        , TF.attribute "filter" _filter
+        , TF.attribute "id" _id
+        , TF.attribute "owner_id" _owner_id
+        , TF.attribute "peer_cidr_block" _peer_cidr_block
+        , TF.attribute "peer_owner_id" _peer_owner_id
+        , TF.attribute "peer_region" _peer_region
+        , TF.attribute "peer_vpc_id" _peer_vpc_id
+        , TF.attribute "region" _region
+        , TF.attribute "status" _status
+        , TF.attribute "tags" _tags
+        , TF.attribute "vpc_id" _vpc_id
         ]
 
-instance HasCidrBlock (VpcPeeringConnectionDataSource s) TF.CIDR where
-    type HasCidrBlockThread (VpcPeeringConnectionDataSource s) TF.CIDR = s
-
+instance HasCidrBlock (VpcPeeringConnectionDataSource s) s TF.CIDR where
     cidrBlock =
         lens (_cidr_block :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.CIDR)
             (\s a -> s { _cidr_block = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasFilter (VpcPeeringConnectionDataSource s) Text where
-    type HasFilterThread (VpcPeeringConnectionDataSource s) Text = s
-
+instance HasFilter (VpcPeeringConnectionDataSource s) s Text where
     filter =
         lens (_filter :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasId (VpcPeeringConnectionDataSource s) Text where
-    type HasIdThread (VpcPeeringConnectionDataSource s) Text = s
-
+instance HasId (VpcPeeringConnectionDataSource s) s Text where
     id =
         lens (_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasOwnerId (VpcPeeringConnectionDataSource s) Text where
-    type HasOwnerIdThread (VpcPeeringConnectionDataSource s) Text = s
-
+instance HasOwnerId (VpcPeeringConnectionDataSource s) s Text where
     ownerId =
         lens (_owner_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _owner_id = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasPeerCidrBlock (VpcPeeringConnectionDataSource s) TF.CIDR where
-    type HasPeerCidrBlockThread (VpcPeeringConnectionDataSource s) TF.CIDR = s
-
+instance HasPeerCidrBlock (VpcPeeringConnectionDataSource s) s TF.CIDR where
     peerCidrBlock =
         lens (_peer_cidr_block :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.CIDR)
             (\s a -> s { _peer_cidr_block = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasPeerOwnerId (VpcPeeringConnectionDataSource s) Text where
-    type HasPeerOwnerIdThread (VpcPeeringConnectionDataSource s) Text = s
-
+instance HasPeerOwnerId (VpcPeeringConnectionDataSource s) s Text where
     peerOwnerId =
         lens (_peer_owner_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _peer_owner_id = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasPeerRegion (VpcPeeringConnectionDataSource s) TF.Region where
-    type HasPeerRegionThread (VpcPeeringConnectionDataSource s) TF.Region = s
-
+instance HasPeerRegion (VpcPeeringConnectionDataSource s) s TF.Region where
     peerRegion =
         lens (_peer_region :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.Region)
             (\s a -> s { _peer_region = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasPeerVpcId (VpcPeeringConnectionDataSource s) Text where
-    type HasPeerVpcIdThread (VpcPeeringConnectionDataSource s) Text = s
-
+instance HasPeerVpcId (VpcPeeringConnectionDataSource s) s Text where
     peerVpcId =
         lens (_peer_vpc_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _peer_vpc_id = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasRegion (VpcPeeringConnectionDataSource s) TF.Region where
-    type HasRegionThread (VpcPeeringConnectionDataSource s) TF.Region = s
-
+instance HasRegion (VpcPeeringConnectionDataSource s) s TF.Region where
     region =
         lens (_region :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.Region)
             (\s a -> s { _region = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasStatus (VpcPeeringConnectionDataSource s) Text where
-    type HasStatusThread (VpcPeeringConnectionDataSource s) Text = s
-
+instance HasStatus (VpcPeeringConnectionDataSource s) s Text where
     status =
         lens (_status :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _status = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasTags (VpcPeeringConnectionDataSource s) TF.Tags where
-    type HasTagsThread (VpcPeeringConnectionDataSource s) TF.Tags = s
-
+instance HasTags (VpcPeeringConnectionDataSource s) s TF.Tags where
     tags =
         lens (_tags :: VpcPeeringConnectionDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: VpcPeeringConnectionDataSource s)
 
-instance HasVpcId (VpcPeeringConnectionDataSource s) Text where
-    type HasVpcIdThread (VpcPeeringConnectionDataSource s) Text = s
-
+instance HasVpcId (VpcPeeringConnectionDataSource s) s Text where
     vpcId =
         lens (_vpc_id :: VpcPeeringConnectionDataSource s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: VpcPeeringConnectionDataSource s)
@@ -4253,68 +4022,56 @@ vpcPeeringConnectionDataSource =
 The VPN Gateway data source provides details about a specific VPN gateway.
 -}
 data VpnGatewayDataSource s = VpnGatewayDataSource {
-      _attached_vpc_id :: !(TF.Attribute s Text)
+      _attached_vpc_id   :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve. -}
     , _availability_zone :: !(TF.Attribute s TF.Zone)
     {- ^ (Optional) The Availability Zone of the specific VPN Gateway to retrieve. -}
-    , _filter :: !(TF.Attribute s Text)
+    , _filter            :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attribute s Text)
+    , _id                :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the specific VPN Gateway to retrieve. -}
-    , _state :: !(TF.Attribute s Text)
+    , _state             :: !(TF.Attribute s Text)
     {- ^ (Optional) The state of the specific VPN Gateway to retrieve. -}
-    , _tags :: !(TF.Attribute s TF.Tags)
+    , _tags              :: !(TF.Attribute s TF.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPN Gateway. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VpnGatewayDataSource s) where
     toHCL VpnGatewayDataSource{..} = TF.block $ catMaybes
-        [ TF.assign "attached_vpc_id" <$> TF.attribute _attached_vpc_id
-        , TF.assign "availability_zone" <$> TF.attribute _availability_zone
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "id" <$> TF.attribute _id
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "tags" <$> TF.attribute _tags
+        [ TF.attribute "attached_vpc_id" _attached_vpc_id
+        , TF.attribute "availability_zone" _availability_zone
+        , TF.attribute "filter" _filter
+        , TF.attribute "id" _id
+        , TF.attribute "state" _state
+        , TF.attribute "tags" _tags
         ]
 
-instance HasAttachedVpcId (VpnGatewayDataSource s) Text where
-    type HasAttachedVpcIdThread (VpnGatewayDataSource s) Text = s
-
+instance HasAttachedVpcId (VpnGatewayDataSource s) s Text where
     attachedVpcId =
         lens (_attached_vpc_id :: VpnGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _attached_vpc_id = a } :: VpnGatewayDataSource s)
 
-instance HasAvailabilityZone (VpnGatewayDataSource s) TF.Zone where
-    type HasAvailabilityZoneThread (VpnGatewayDataSource s) TF.Zone = s
-
+instance HasAvailabilityZone (VpnGatewayDataSource s) s TF.Zone where
     availabilityZone =
         lens (_availability_zone :: VpnGatewayDataSource s -> TF.Attribute s TF.Zone)
             (\s a -> s { _availability_zone = a } :: VpnGatewayDataSource s)
 
-instance HasFilter (VpnGatewayDataSource s) Text where
-    type HasFilterThread (VpnGatewayDataSource s) Text = s
-
+instance HasFilter (VpnGatewayDataSource s) s Text where
     filter =
         lens (_filter :: VpnGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _filter = a } :: VpnGatewayDataSource s)
 
-instance HasId (VpnGatewayDataSource s) Text where
-    type HasIdThread (VpnGatewayDataSource s) Text = s
-
+instance HasId (VpnGatewayDataSource s) s Text where
     id =
         lens (_id :: VpnGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: VpnGatewayDataSource s)
 
-instance HasState (VpnGatewayDataSource s) Text where
-    type HasStateThread (VpnGatewayDataSource s) Text = s
-
+instance HasState (VpnGatewayDataSource s) s Text where
     state =
         lens (_state :: VpnGatewayDataSource s -> TF.Attribute s Text)
             (\s a -> s { _state = a } :: VpnGatewayDataSource s)
 
-instance HasTags (VpnGatewayDataSource s) TF.Tags where
-    type HasTagsThread (VpnGatewayDataSource s) TF.Tags = s
-
+instance HasTags (VpnGatewayDataSource s) s TF.Tags where
     tags =
         lens (_tags :: VpnGatewayDataSource s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: VpnGatewayDataSource s)
@@ -4331,928 +4088,484 @@ vpnGatewayDataSource =
             , _tags = TF.Nil
             }
 
-class HasAccountAlias a b | a -> b where
-    type HasAccountAliasThread a b :: *
+class HasAccountAlias a s b | a -> s b where
+    accountAlias :: Lens' a (TF.Attribute s b)
 
-    accountAlias
-        :: Lens' a (TF.Attribute (HasAccountAliasThread a b) b)
-
-instance HasAccountAlias a b => HasAccountAlias (TF.DataSource p a) b where
-    type HasAccountAliasThread (TF.DataSource p a) b =
-         HasAccountAliasThread a b
-
+instance HasAccountAlias a s b => HasAccountAlias (TF.DataSource p a) s b where
     accountAlias = TF.configuration . accountAlias
 
-class HasAccountId a b | a -> b where
-    type HasAccountIdThread a b :: *
+class HasAccountId a s b | a -> s b where
+    accountId :: Lens' a (TF.Attribute s b)
 
-    accountId
-        :: Lens' a (TF.Attribute (HasAccountIdThread a b) b)
-
-instance HasAccountId a b => HasAccountId (TF.DataSource p a) b where
-    type HasAccountIdThread (TF.DataSource p a) b =
-         HasAccountIdThread a b
-
+instance HasAccountId a s b => HasAccountId (TF.DataSource p a) s b where
     accountId = TF.configuration . accountId
 
-class HasArn a b | a -> b where
-    type HasArnThread a b :: *
+class HasArn a s b | a -> s b where
+    arn :: Lens' a (TF.Attribute s b)
 
-    arn
-        :: Lens' a (TF.Attribute (HasArnThread a b) b)
-
-instance HasArn a b => HasArn (TF.DataSource p a) b where
-    type HasArnThread (TF.DataSource p a) b =
-         HasArnThread a b
-
+instance HasArn a s b => HasArn (TF.DataSource p a) s b where
     arn = TF.configuration . arn
 
-class HasAttachedVpcId a b | a -> b where
-    type HasAttachedVpcIdThread a b :: *
+class HasAttachedVpcId a s b | a -> s b where
+    attachedVpcId :: Lens' a (TF.Attribute s b)
 
-    attachedVpcId
-        :: Lens' a (TF.Attribute (HasAttachedVpcIdThread a b) b)
-
-instance HasAttachedVpcId a b => HasAttachedVpcId (TF.DataSource p a) b where
-    type HasAttachedVpcIdThread (TF.DataSource p a) b =
-         HasAttachedVpcIdThread a b
-
+instance HasAttachedVpcId a s b => HasAttachedVpcId (TF.DataSource p a) s b where
     attachedVpcId = TF.configuration . attachedVpcId
 
-class HasAvailabilityZone a b | a -> b where
-    type HasAvailabilityZoneThread a b :: *
+class HasAvailabilityZone a s b | a -> s b where
+    availabilityZone :: Lens' a (TF.Attribute s b)
 
-    availabilityZone
-        :: Lens' a (TF.Attribute (HasAvailabilityZoneThread a b) b)
-
-instance HasAvailabilityZone a b => HasAvailabilityZone (TF.DataSource p a) b where
-    type HasAvailabilityZoneThread (TF.DataSource p a) b =
-         HasAvailabilityZoneThread a b
-
+instance HasAvailabilityZone a s b => HasAvailabilityZone (TF.DataSource p a) s b where
     availabilityZone = TF.configuration . availabilityZone
 
-class HasBucket a b | a -> b where
-    type HasBucketThread a b :: *
+class HasBucket a s b | a -> s b where
+    bucket :: Lens' a (TF.Attribute s b)
 
-    bucket
-        :: Lens' a (TF.Attribute (HasBucketThread a b) b)
-
-instance HasBucket a b => HasBucket (TF.DataSource p a) b where
-    type HasBucketThread (TF.DataSource p a) b =
-         HasBucketThread a b
-
+instance HasBucket a s b => HasBucket (TF.DataSource p a) s b where
     bucket = TF.configuration . bucket
 
-class HasCidrBlock a b | a -> b where
-    type HasCidrBlockThread a b :: *
+class HasCidrBlock a s b | a -> s b where
+    cidrBlock :: Lens' a (TF.Attribute s b)
 
-    cidrBlock
-        :: Lens' a (TF.Attribute (HasCidrBlockThread a b) b)
-
-instance HasCidrBlock a b => HasCidrBlock (TF.DataSource p a) b where
-    type HasCidrBlockThread (TF.DataSource p a) b =
-         HasCidrBlockThread a b
-
+instance HasCidrBlock a s b => HasCidrBlock (TF.DataSource p a) s b where
     cidrBlock = TF.configuration . cidrBlock
 
-class HasClusterId a b | a -> b where
-    type HasClusterIdThread a b :: *
+class HasClusterId a s b | a -> s b where
+    clusterId :: Lens' a (TF.Attribute s b)
 
-    clusterId
-        :: Lens' a (TF.Attribute (HasClusterIdThread a b) b)
-
-instance HasClusterId a b => HasClusterId (TF.DataSource p a) b where
-    type HasClusterIdThread (TF.DataSource p a) b =
-         HasClusterIdThread a b
-
+instance HasClusterId a s b => HasClusterId (TF.DataSource p a) s b where
     clusterId = TF.configuration . clusterId
 
-class HasClusterIdentifier a b | a -> b where
-    type HasClusterIdentifierThread a b :: *
+class HasClusterIdentifier a s b | a -> s b where
+    clusterIdentifier :: Lens' a (TF.Attribute s b)
 
-    clusterIdentifier
-        :: Lens' a (TF.Attribute (HasClusterIdentifierThread a b) b)
-
-instance HasClusterIdentifier a b => HasClusterIdentifier (TF.DataSource p a) b where
-    type HasClusterIdentifierThread (TF.DataSource p a) b =
-         HasClusterIdentifierThread a b
-
+instance HasClusterIdentifier a s b => HasClusterIdentifier (TF.DataSource p a) s b where
     clusterIdentifier = TF.configuration . clusterIdentifier
 
-class HasClusterName a b | a -> b where
-    type HasClusterNameThread a b :: *
+class HasClusterName a s b | a -> s b where
+    clusterName :: Lens' a (TF.Attribute s b)
 
-    clusterName
-        :: Lens' a (TF.Attribute (HasClusterNameThread a b) b)
-
-instance HasClusterName a b => HasClusterName (TF.DataSource p a) b where
-    type HasClusterNameThread (TF.DataSource p a) b =
-         HasClusterNameThread a b
-
+instance HasClusterName a s b => HasClusterName (TF.DataSource p a) s b where
     clusterName = TF.configuration . clusterName
 
-class HasContainerName a b | a -> b where
-    type HasContainerNameThread a b :: *
+class HasContainerName a s b | a -> s b where
+    containerName :: Lens' a (TF.Attribute s b)
 
-    containerName
-        :: Lens' a (TF.Attribute (HasContainerNameThread a b) b)
-
-instance HasContainerName a b => HasContainerName (TF.DataSource p a) b where
-    type HasContainerNameThread (TF.DataSource p a) b =
-         HasContainerNameThread a b
-
+instance HasContainerName a s b => HasContainerName (TF.DataSource p a) s b where
     containerName = TF.configuration . containerName
 
-class HasContext a b | a -> b where
-    type HasContextThread a b :: *
+class HasContext a s b | a -> s b where
+    context :: Lens' a (TF.Attribute s b)
 
-    context
-        :: Lens' a (TF.Attribute (HasContextThread a b) b)
-
-instance HasContext a b => HasContext (TF.DataSource p a) b where
-    type HasContextThread (TF.DataSource p a) b =
-         HasContextThread a b
-
+instance HasContext a s b => HasContext (TF.DataSource p a) s b where
     context = TF.configuration . context
 
-class HasCreationToken a b | a -> b where
-    type HasCreationTokenThread a b :: *
+class HasCreationToken a s b | a -> s b where
+    creationToken :: Lens' a (TF.Attribute s b)
 
-    creationToken
-        :: Lens' a (TF.Attribute (HasCreationTokenThread a b) b)
-
-instance HasCreationToken a b => HasCreationToken (TF.DataSource p a) b where
-    type HasCreationTokenThread (TF.DataSource p a) b =
-         HasCreationTokenThread a b
-
+instance HasCreationToken a s b => HasCreationToken (TF.DataSource p a) s b where
     creationToken = TF.configuration . creationToken
 
-class HasCurrent a b | a -> b where
-    type HasCurrentThread a b :: *
+class HasCurrent a s b | a -> s b where
+    current :: Lens' a (TF.Attribute s b)
 
-    current
-        :: Lens' a (TF.Attribute (HasCurrentThread a b) b)
-
-instance HasCurrent a b => HasCurrent (TF.DataSource p a) b where
-    type HasCurrentThread (TF.DataSource p a) b =
-         HasCurrentThread a b
-
+instance HasCurrent a s b => HasCurrent (TF.DataSource p a) s b where
     current = TF.configuration . current
 
-class HasDbInstanceIdentifier a b | a -> b where
-    type HasDbInstanceIdentifierThread a b :: *
+class HasDbInstanceIdentifier a s b | a -> s b where
+    dbInstanceIdentifier :: Lens' a (TF.Attribute s b)
 
-    dbInstanceIdentifier
-        :: Lens' a (TF.Attribute (HasDbInstanceIdentifierThread a b) b)
-
-instance HasDbInstanceIdentifier a b => HasDbInstanceIdentifier (TF.DataSource p a) b where
-    type HasDbInstanceIdentifierThread (TF.DataSource p a) b =
-         HasDbInstanceIdentifierThread a b
-
+instance HasDbInstanceIdentifier a s b => HasDbInstanceIdentifier (TF.DataSource p a) s b where
     dbInstanceIdentifier = TF.configuration . dbInstanceIdentifier
 
-class HasDbSnapshotIdentifier a b | a -> b where
-    type HasDbSnapshotIdentifierThread a b :: *
+class HasDbSnapshotIdentifier a s b | a -> s b where
+    dbSnapshotIdentifier :: Lens' a (TF.Attribute s b)
 
-    dbSnapshotIdentifier
-        :: Lens' a (TF.Attribute (HasDbSnapshotIdentifierThread a b) b)
-
-instance HasDbSnapshotIdentifier a b => HasDbSnapshotIdentifier (TF.DataSource p a) b where
-    type HasDbSnapshotIdentifierThread (TF.DataSource p a) b =
-         HasDbSnapshotIdentifierThread a b
-
+instance HasDbSnapshotIdentifier a s b => HasDbSnapshotIdentifier (TF.DataSource p a) s b where
     dbSnapshotIdentifier = TF.configuration . dbSnapshotIdentifier
 
-class HasDefault' a b | a -> b where
-    type HasDefault'Thread a b :: *
+class HasDefault' a s b | a -> s b where
+    default' :: Lens' a (TF.Attribute s b)
 
-    default'
-        :: Lens' a (TF.Attribute (HasDefault'Thread a b) b)
-
-instance HasDefault' a b => HasDefault' (TF.DataSource p a) b where
-    type HasDefault'Thread (TF.DataSource p a) b =
-         HasDefault'Thread a b
-
+instance HasDefault' a s b => HasDefault' (TF.DataSource p a) s b where
     default' = TF.configuration . default'
 
-class HasDefaultForAz a b | a -> b where
-    type HasDefaultForAzThread a b :: *
+class HasDefaultForAz a s b | a -> s b where
+    defaultForAz :: Lens' a (TF.Attribute s b)
 
-    defaultForAz
-        :: Lens' a (TF.Attribute (HasDefaultForAzThread a b) b)
-
-instance HasDefaultForAz a b => HasDefaultForAz (TF.DataSource p a) b where
-    type HasDefaultForAzThread (TF.DataSource p a) b =
-         HasDefaultForAzThread a b
-
+instance HasDefaultForAz a s b => HasDefaultForAz (TF.DataSource p a) s b where
     defaultForAz = TF.configuration . defaultForAz
 
-class HasDhcpOptionsId a b | a -> b where
-    type HasDhcpOptionsIdThread a b :: *
+class HasDhcpOptionsId a s b | a -> s b where
+    dhcpOptionsId :: Lens' a (TF.Attribute s b)
 
-    dhcpOptionsId
-        :: Lens' a (TF.Attribute (HasDhcpOptionsIdThread a b) b)
-
-instance HasDhcpOptionsId a b => HasDhcpOptionsId (TF.DataSource p a) b where
-    type HasDhcpOptionsIdThread (TF.DataSource p a) b =
-         HasDhcpOptionsIdThread a b
-
+instance HasDhcpOptionsId a s b => HasDhcpOptionsId (TF.DataSource p a) s b where
     dhcpOptionsId = TF.configuration . dhcpOptionsId
 
-class HasDisplayName a b | a -> b where
-    type HasDisplayNameThread a b :: *
+class HasDisplayName a s b | a -> s b where
+    displayName :: Lens' a (TF.Attribute s b)
 
-    displayName
-        :: Lens' a (TF.Attribute (HasDisplayNameThread a b) b)
-
-instance HasDisplayName a b => HasDisplayName (TF.DataSource p a) b where
-    type HasDisplayNameThread (TF.DataSource p a) b =
-         HasDisplayNameThread a b
-
+instance HasDisplayName a s b => HasDisplayName (TF.DataSource p a) s b where
     displayName = TF.configuration . displayName
 
-class HasDomain a b | a -> b where
-    type HasDomainThread a b :: *
+class HasDomain a s b | a -> s b where
+    domain :: Lens' a (TF.Attribute s b)
 
-    domain
-        :: Lens' a (TF.Attribute (HasDomainThread a b) b)
-
-instance HasDomain a b => HasDomain (TF.DataSource p a) b where
-    type HasDomainThread (TF.DataSource p a) b =
-         HasDomainThread a b
-
+instance HasDomain a s b => HasDomain (TF.DataSource p a) s b where
     domain = TF.configuration . domain
 
-class HasEndpoint a b | a -> b where
-    type HasEndpointThread a b :: *
+class HasEndpoint a s b | a -> s b where
+    endpoint :: Lens' a (TF.Attribute s b)
 
-    endpoint
-        :: Lens' a (TF.Attribute (HasEndpointThread a b) b)
-
-instance HasEndpoint a b => HasEndpoint (TF.DataSource p a) b where
-    type HasEndpointThread (TF.DataSource p a) b =
-         HasEndpointThread a b
-
+instance HasEndpoint a s b => HasEndpoint (TF.DataSource p a) s b where
     endpoint = TF.configuration . endpoint
 
-class HasExecutableUsers a b | a -> b where
-    type HasExecutableUsersThread a b :: *
+class HasExecutableUsers a s b | a -> s b where
+    executableUsers :: Lens' a (TF.Attribute s b)
 
-    executableUsers
-        :: Lens' a (TF.Attribute (HasExecutableUsersThread a b) b)
-
-instance HasExecutableUsers a b => HasExecutableUsers (TF.DataSource p a) b where
-    type HasExecutableUsersThread (TF.DataSource p a) b =
-         HasExecutableUsersThread a b
-
+instance HasExecutableUsers a s b => HasExecutableUsers (TF.DataSource p a) s b where
     executableUsers = TF.configuration . executableUsers
 
-class HasFileSystemId a b | a -> b where
-    type HasFileSystemIdThread a b :: *
+class HasFileSystemId a s b | a -> s b where
+    fileSystemId :: Lens' a (TF.Attribute s b)
 
-    fileSystemId
-        :: Lens' a (TF.Attribute (HasFileSystemIdThread a b) b)
-
-instance HasFileSystemId a b => HasFileSystemId (TF.DataSource p a) b where
-    type HasFileSystemIdThread (TF.DataSource p a) b =
-         HasFileSystemIdThread a b
-
+instance HasFileSystemId a s b => HasFileSystemId (TF.DataSource p a) s b where
     fileSystemId = TF.configuration . fileSystemId
 
-class HasFilter a b | a -> b where
-    type HasFilterThread a b :: *
+class HasFilter a s b | a -> s b where
+    filter :: Lens' a (TF.Attribute s b)
 
-    filter
-        :: Lens' a (TF.Attribute (HasFilterThread a b) b)
-
-instance HasFilter a b => HasFilter (TF.DataSource p a) b where
-    type HasFilterThread (TF.DataSource p a) b =
-         HasFilterThread a b
-
+instance HasFilter a s b => HasFilter (TF.DataSource p a) s b where
     filter = TF.configuration . filter
 
-class HasGroupName a b | a -> b where
-    type HasGroupNameThread a b :: *
+class HasGroupName a s b | a -> s b where
+    groupName :: Lens' a (TF.Attribute s b)
 
-    groupName
-        :: Lens' a (TF.Attribute (HasGroupNameThread a b) b)
-
-instance HasGroupName a b => HasGroupName (TF.DataSource p a) b where
-    type HasGroupNameThread (TF.DataSource p a) b =
-         HasGroupNameThread a b
-
+instance HasGroupName a s b => HasGroupName (TF.DataSource p a) s b where
     groupName = TF.configuration . groupName
 
-class HasId a b | a -> b where
-    type HasIdThread a b :: *
+class HasId a s b | a -> s b where
+    id :: Lens' a (TF.Attribute s b)
 
-    id
-        :: Lens' a (TF.Attribute (HasIdThread a b) b)
-
-instance HasId a b => HasId (TF.DataSource p a) b where
-    type HasIdThread (TF.DataSource p a) b =
-         HasIdThread a b
-
+instance HasId a s b => HasId (TF.DataSource p a) s b where
     id = TF.configuration . id
 
-class HasIncludePublic a b | a -> b where
-    type HasIncludePublicThread a b :: *
+class HasIncludePublic a s b | a -> s b where
+    includePublic :: Lens' a (TF.Attribute s b)
 
-    includePublic
-        :: Lens' a (TF.Attribute (HasIncludePublicThread a b) b)
-
-instance HasIncludePublic a b => HasIncludePublic (TF.DataSource p a) b where
-    type HasIncludePublicThread (TF.DataSource p a) b =
-         HasIncludePublicThread a b
-
+instance HasIncludePublic a s b => HasIncludePublic (TF.DataSource p a) s b where
     includePublic = TF.configuration . includePublic
 
-class HasIncludeShared a b | a -> b where
-    type HasIncludeSharedThread a b :: *
+class HasIncludeShared a s b | a -> s b where
+    includeShared :: Lens' a (TF.Attribute s b)
 
-    includeShared
-        :: Lens' a (TF.Attribute (HasIncludeSharedThread a b) b)
-
-instance HasIncludeShared a b => HasIncludeShared (TF.DataSource p a) b where
-    type HasIncludeSharedThread (TF.DataSource p a) b =
-         HasIncludeSharedThread a b
-
+instance HasIncludeShared a s b => HasIncludeShared (TF.DataSource p a) s b where
     includeShared = TF.configuration . includeShared
 
-class HasInstanceId a b | a -> b where
-    type HasInstanceIdThread a b :: *
+class HasInstanceId a s b | a -> s b where
+    instanceId :: Lens' a (TF.Attribute s b)
 
-    instanceId
-        :: Lens' a (TF.Attribute (HasInstanceIdThread a b) b)
-
-instance HasInstanceId a b => HasInstanceId (TF.DataSource p a) b where
-    type HasInstanceIdThread (TF.DataSource p a) b =
-         HasInstanceIdThread a b
-
+instance HasInstanceId a s b => HasInstanceId (TF.DataSource p a) s b where
     instanceId = TF.configuration . instanceId
 
-class HasInstanceTags a b | a -> b where
-    type HasInstanceTagsThread a b :: *
+class HasInstanceTags a s b | a -> s b where
+    instanceTags :: Lens' a (TF.Attribute s b)
 
-    instanceTags
-        :: Lens' a (TF.Attribute (HasInstanceTagsThread a b) b)
-
-instance HasInstanceTags a b => HasInstanceTags (TF.DataSource p a) b where
-    type HasInstanceTagsThread (TF.DataSource p a) b =
-         HasInstanceTagsThread a b
-
+instance HasInstanceTags a s b => HasInstanceTags (TF.DataSource p a) s b where
     instanceTags = TF.configuration . instanceTags
 
-class HasInternetGatewayId a b | a -> b where
-    type HasInternetGatewayIdThread a b :: *
+class HasInternetGatewayId a s b | a -> s b where
+    internetGatewayId :: Lens' a (TF.Attribute s b)
 
-    internetGatewayId
-        :: Lens' a (TF.Attribute (HasInternetGatewayIdThread a b) b)
-
-instance HasInternetGatewayId a b => HasInternetGatewayId (TF.DataSource p a) b where
-    type HasInternetGatewayIdThread (TF.DataSource p a) b =
-         HasInternetGatewayIdThread a b
-
+instance HasInternetGatewayId a s b => HasInternetGatewayId (TF.DataSource p a) s b where
     internetGatewayId = TF.configuration . internetGatewayId
 
-class HasIpv6CidrBlock a b | a -> b where
-    type HasIpv6CidrBlockThread a b :: *
+class HasIpv6CidrBlock a s b | a -> s b where
+    ipv6CidrBlock :: Lens' a (TF.Attribute s b)
 
-    ipv6CidrBlock
-        :: Lens' a (TF.Attribute (HasIpv6CidrBlockThread a b) b)
-
-instance HasIpv6CidrBlock a b => HasIpv6CidrBlock (TF.DataSource p a) b where
-    type HasIpv6CidrBlockThread (TF.DataSource p a) b =
-         HasIpv6CidrBlockThread a b
-
+instance HasIpv6CidrBlock a s b => HasIpv6CidrBlock (TF.DataSource p a) s b where
     ipv6CidrBlock = TF.configuration . ipv6CidrBlock
 
-class HasKey a b | a -> b where
-    type HasKeyThread a b :: *
+class HasKey a s b | a -> s b where
+    key :: Lens' a (TF.Attribute s b)
 
-    key
-        :: Lens' a (TF.Attribute (HasKeyThread a b) b)
-
-instance HasKey a b => HasKey (TF.DataSource p a) b where
-    type HasKeyThread (TF.DataSource p a) b =
-         HasKeyThread a b
-
+instance HasKey a s b => HasKey (TF.DataSource p a) s b where
     key = TF.configuration . key
 
-class HasKeyId a b | a -> b where
-    type HasKeyIdThread a b :: *
+class HasKeyId a s b | a -> s b where
+    keyId :: Lens' a (TF.Attribute s b)
 
-    keyId
-        :: Lens' a (TF.Attribute (HasKeyIdThread a b) b)
-
-instance HasKeyId a b => HasKeyId (TF.DataSource p a) b where
-    type HasKeyIdThread (TF.DataSource p a) b =
-         HasKeyIdThread a b
-
+instance HasKeyId a s b => HasKeyId (TF.DataSource p a) s b where
     keyId = TF.configuration . keyId
 
-class HasLatest a b | a -> b where
-    type HasLatestThread a b :: *
+class HasLatest a s b | a -> s b where
+    latest :: Lens' a (TF.Attribute s b)
 
-    latest
-        :: Lens' a (TF.Attribute (HasLatestThread a b) b)
-
-instance HasLatest a b => HasLatest (TF.DataSource p a) b where
-    type HasLatestThread (TF.DataSource p a) b =
-         HasLatestThread a b
-
+instance HasLatest a s b => HasLatest (TF.DataSource p a) s b where
     latest = TF.configuration . latest
 
-class HasMostRecent a b | a -> b where
-    type HasMostRecentThread a b :: *
+class HasLoadBalancerArn a s b | a -> s b where
+    loadBalancerArn :: Lens' a (TF.Attribute s b)
 
-    mostRecent
-        :: Lens' a (TF.Attribute (HasMostRecentThread a b) b)
+instance HasLoadBalancerArn a s b => HasLoadBalancerArn (TF.DataSource p a) s b where
+    loadBalancerArn = TF.configuration . loadBalancerArn
 
-instance HasMostRecent a b => HasMostRecent (TF.DataSource p a) b where
-    type HasMostRecentThread (TF.DataSource p a) b =
-         HasMostRecentThread a b
+class HasMostRecent a s b | a -> s b where
+    mostRecent :: Lens' a (TF.Attribute s b)
 
+instance HasMostRecent a s b => HasMostRecent (TF.DataSource p a) s b where
     mostRecent = TF.configuration . mostRecent
 
-class HasMountTargetId a b | a -> b where
-    type HasMountTargetIdThread a b :: *
+class HasMountTargetId a s b | a -> s b where
+    mountTargetId :: Lens' a (TF.Attribute s b)
 
-    mountTargetId
-        :: Lens' a (TF.Attribute (HasMountTargetIdThread a b) b)
-
-instance HasMountTargetId a b => HasMountTargetId (TF.DataSource p a) b where
-    type HasMountTargetIdThread (TF.DataSource p a) b =
-         HasMountTargetIdThread a b
-
+instance HasMountTargetId a s b => HasMountTargetId (TF.DataSource p a) s b where
     mountTargetId = TF.configuration . mountTargetId
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name
-        :: Lens' a (TF.Attribute (HasNameThread a b) b)
-
-instance HasName a b => HasName (TF.DataSource p a) b where
-    type HasNameThread (TF.DataSource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
-class HasNamePrefix a b | a -> b where
-    type HasNamePrefixThread a b :: *
+class HasNamePrefix a s b | a -> s b where
+    namePrefix :: Lens' a (TF.Attribute s b)
 
-    namePrefix
-        :: Lens' a (TF.Attribute (HasNamePrefixThread a b) b)
-
-instance HasNamePrefix a b => HasNamePrefix (TF.DataSource p a) b where
-    type HasNamePrefixThread (TF.DataSource p a) b =
-         HasNamePrefixThread a b
-
+instance HasNamePrefix a s b => HasNamePrefix (TF.DataSource p a) s b where
     namePrefix = TF.configuration . namePrefix
 
-class HasNameRegex a b | a -> b where
-    type HasNameRegexThread a b :: *
+class HasNameRegex a s b | a -> s b where
+    nameRegex :: Lens' a (TF.Attribute s b)
 
-    nameRegex
-        :: Lens' a (TF.Attribute (HasNameRegexThread a b) b)
-
-instance HasNameRegex a b => HasNameRegex (TF.DataSource p a) b where
-    type HasNameRegexThread (TF.DataSource p a) b =
-         HasNameRegexThread a b
-
+instance HasNameRegex a s b => HasNameRegex (TF.DataSource p a) s b where
     nameRegex = TF.configuration . nameRegex
 
-class HasOwnerId a b | a -> b where
-    type HasOwnerIdThread a b :: *
+class HasOwnerId a s b | a -> s b where
+    ownerId :: Lens' a (TF.Attribute s b)
 
-    ownerId
-        :: Lens' a (TF.Attribute (HasOwnerIdThread a b) b)
-
-instance HasOwnerId a b => HasOwnerId (TF.DataSource p a) b where
-    type HasOwnerIdThread (TF.DataSource p a) b =
-         HasOwnerIdThread a b
-
+instance HasOwnerId a s b => HasOwnerId (TF.DataSource p a) s b where
     ownerId = TF.configuration . ownerId
 
-class HasOwners a b | a -> b where
-    type HasOwnersThread a b :: *
+class HasOwners a s b | a -> s b where
+    owners :: Lens' a (TF.Attribute s b)
 
-    owners
-        :: Lens' a (TF.Attribute (HasOwnersThread a b) b)
-
-instance HasOwners a b => HasOwners (TF.DataSource p a) b where
-    type HasOwnersThread (TF.DataSource p a) b =
-         HasOwnersThread a b
-
+instance HasOwners a s b => HasOwners (TF.DataSource p a) s b where
     owners = TF.configuration . owners
 
-class HasPeerCidrBlock a b | a -> b where
-    type HasPeerCidrBlockThread a b :: *
+class HasPeerCidrBlock a s b | a -> s b where
+    peerCidrBlock :: Lens' a (TF.Attribute s b)
 
-    peerCidrBlock
-        :: Lens' a (TF.Attribute (HasPeerCidrBlockThread a b) b)
-
-instance HasPeerCidrBlock a b => HasPeerCidrBlock (TF.DataSource p a) b where
-    type HasPeerCidrBlockThread (TF.DataSource p a) b =
-         HasPeerCidrBlockThread a b
-
+instance HasPeerCidrBlock a s b => HasPeerCidrBlock (TF.DataSource p a) s b where
     peerCidrBlock = TF.configuration . peerCidrBlock
 
-class HasPeerOwnerId a b | a -> b where
-    type HasPeerOwnerIdThread a b :: *
+class HasPeerOwnerId a s b | a -> s b where
+    peerOwnerId :: Lens' a (TF.Attribute s b)
 
-    peerOwnerId
-        :: Lens' a (TF.Attribute (HasPeerOwnerIdThread a b) b)
-
-instance HasPeerOwnerId a b => HasPeerOwnerId (TF.DataSource p a) b where
-    type HasPeerOwnerIdThread (TF.DataSource p a) b =
-         HasPeerOwnerIdThread a b
-
+instance HasPeerOwnerId a s b => HasPeerOwnerId (TF.DataSource p a) s b where
     peerOwnerId = TF.configuration . peerOwnerId
 
-class HasPeerRegion a b | a -> b where
-    type HasPeerRegionThread a b :: *
+class HasPeerRegion a s b | a -> s b where
+    peerRegion :: Lens' a (TF.Attribute s b)
 
-    peerRegion
-        :: Lens' a (TF.Attribute (HasPeerRegionThread a b) b)
-
-instance HasPeerRegion a b => HasPeerRegion (TF.DataSource p a) b where
-    type HasPeerRegionThread (TF.DataSource p a) b =
-         HasPeerRegionThread a b
-
+instance HasPeerRegion a s b => HasPeerRegion (TF.DataSource p a) s b where
     peerRegion = TF.configuration . peerRegion
 
-class HasPeerVpcId a b | a -> b where
-    type HasPeerVpcIdThread a b :: *
+class HasPeerVpcId a s b | a -> s b where
+    peerVpcId :: Lens' a (TF.Attribute s b)
 
-    peerVpcId
-        :: Lens' a (TF.Attribute (HasPeerVpcIdThread a b) b)
-
-instance HasPeerVpcId a b => HasPeerVpcId (TF.DataSource p a) b where
-    type HasPeerVpcIdThread (TF.DataSource p a) b =
-         HasPeerVpcIdThread a b
-
+instance HasPeerVpcId a s b => HasPeerVpcId (TF.DataSource p a) s b where
     peerVpcId = TF.configuration . peerVpcId
 
-class HasPlaintext a b | a -> b where
-    type HasPlaintextThread a b :: *
+class HasPlaintext a s b | a -> s b where
+    plaintext :: Lens' a (TF.Attribute s b)
 
-    plaintext
-        :: Lens' a (TF.Attribute (HasPlaintextThread a b) b)
-
-instance HasPlaintext a b => HasPlaintext (TF.DataSource p a) b where
-    type HasPlaintextThread (TF.DataSource p a) b =
-         HasPlaintextThread a b
-
+instance HasPlaintext a s b => HasPlaintext (TF.DataSource p a) s b where
     plaintext = TF.configuration . plaintext
 
-class HasPolicyId a b | a -> b where
-    type HasPolicyIdThread a b :: *
+class HasPolicyId a s b | a -> s b where
+    policyId :: Lens' a (TF.Attribute s b)
 
-    policyId
-        :: Lens' a (TF.Attribute (HasPolicyIdThread a b) b)
-
-instance HasPolicyId a b => HasPolicyId (TF.DataSource p a) b where
-    type HasPolicyIdThread (TF.DataSource p a) b =
-         HasPolicyIdThread a b
-
+instance HasPolicyId a s b => HasPolicyId (TF.DataSource p a) s b where
     policyId = TF.configuration . policyId
 
-class HasPrefixListId a b | a -> b where
-    type HasPrefixListIdThread a b :: *
+class HasPort a s b | a -> s b where
+    port :: Lens' a (TF.Attribute s b)
 
-    prefixListId
-        :: Lens' a (TF.Attribute (HasPrefixListIdThread a b) b)
+instance HasPort a s b => HasPort (TF.DataSource p a) s b where
+    port = TF.configuration . port
 
-instance HasPrefixListId a b => HasPrefixListId (TF.DataSource p a) b where
-    type HasPrefixListIdThread (TF.DataSource p a) b =
-         HasPrefixListIdThread a b
+class HasPrefixListId a s b | a -> s b where
+    prefixListId :: Lens' a (TF.Attribute s b)
 
+instance HasPrefixListId a s b => HasPrefixListId (TF.DataSource p a) s b where
     prefixListId = TF.configuration . prefixListId
 
-class HasPrivateZone a b | a -> b where
-    type HasPrivateZoneThread a b :: *
+class HasPrivateZone a s b | a -> s b where
+    privateZone :: Lens' a (TF.Attribute s b)
 
-    privateZone
-        :: Lens' a (TF.Attribute (HasPrivateZoneThread a b) b)
-
-instance HasPrivateZone a b => HasPrivateZone (TF.DataSource p a) b where
-    type HasPrivateZoneThread (TF.DataSource p a) b =
-         HasPrivateZoneThread a b
-
+instance HasPrivateZone a s b => HasPrivateZone (TF.DataSource p a) s b where
     privateZone = TF.configuration . privateZone
 
-class HasPublicIp a b | a -> b where
-    type HasPublicIpThread a b :: *
+class HasPublicIp a s b | a -> s b where
+    publicIp :: Lens' a (TF.Attribute s b)
 
-    publicIp
-        :: Lens' a (TF.Attribute (HasPublicIpThread a b) b)
-
-instance HasPublicIp a b => HasPublicIp (TF.DataSource p a) b where
-    type HasPublicIpThread (TF.DataSource p a) b =
-         HasPublicIpThread a b
-
+instance HasPublicIp a s b => HasPublicIp (TF.DataSource p a) s b where
     publicIp = TF.configuration . publicIp
 
-class HasRegion a b | a -> b where
-    type HasRegionThread a b :: *
+class HasRegion a s b | a -> s b where
+    region :: Lens' a (TF.Attribute s b)
 
-    region
-        :: Lens' a (TF.Attribute (HasRegionThread a b) b)
-
-instance HasRegion a b => HasRegion (TF.DataSource p a) b where
-    type HasRegionThread (TF.DataSource p a) b =
-         HasRegionThread a b
-
+instance HasRegion a s b => HasRegion (TF.DataSource p a) s b where
     region = TF.configuration . region
 
-class HasRegions a b | a -> b where
-    type HasRegionsThread a b :: *
+class HasRegions a s b | a -> s b where
+    regions :: Lens' a (TF.Attribute s b)
 
-    regions
-        :: Lens' a (TF.Attribute (HasRegionsThread a b) b)
-
-instance HasRegions a b => HasRegions (TF.DataSource p a) b where
-    type HasRegionsThread (TF.DataSource p a) b =
-         HasRegionsThread a b
-
+instance HasRegions a s b => HasRegions (TF.DataSource p a) s b where
     regions = TF.configuration . regions
 
-class HasReplicationGroupId a b | a -> b where
-    type HasReplicationGroupIdThread a b :: *
+class HasReplicationGroupId a s b | a -> s b where
+    replicationGroupId :: Lens' a (TF.Attribute s b)
 
-    replicationGroupId
-        :: Lens' a (TF.Attribute (HasReplicationGroupIdThread a b) b)
-
-instance HasReplicationGroupId a b => HasReplicationGroupId (TF.DataSource p a) b where
-    type HasReplicationGroupIdThread (TF.DataSource p a) b =
-         HasReplicationGroupIdThread a b
-
+instance HasReplicationGroupId a s b => HasReplicationGroupId (TF.DataSource p a) s b where
     replicationGroupId = TF.configuration . replicationGroupId
 
-class HasRestorableByUserIds a b | a -> b where
-    type HasRestorableByUserIdsThread a b :: *
+class HasRestorableByUserIds a s b | a -> s b where
+    restorableByUserIds :: Lens' a (TF.Attribute s b)
 
-    restorableByUserIds
-        :: Lens' a (TF.Attribute (HasRestorableByUserIdsThread a b) b)
-
-instance HasRestorableByUserIds a b => HasRestorableByUserIds (TF.DataSource p a) b where
-    type HasRestorableByUserIdsThread (TF.DataSource p a) b =
-         HasRestorableByUserIdsThread a b
-
+instance HasRestorableByUserIds a s b => HasRestorableByUserIds (TF.DataSource p a) s b where
     restorableByUserIds = TF.configuration . restorableByUserIds
 
-class HasRouteTableId a b | a -> b where
-    type HasRouteTableIdThread a b :: *
+class HasRouteTableId a s b | a -> s b where
+    routeTableId :: Lens' a (TF.Attribute s b)
 
-    routeTableId
-        :: Lens' a (TF.Attribute (HasRouteTableIdThread a b) b)
-
-instance HasRouteTableId a b => HasRouteTableId (TF.DataSource p a) b where
-    type HasRouteTableIdThread (TF.DataSource p a) b =
-         HasRouteTableIdThread a b
-
+instance HasRouteTableId a s b => HasRouteTableId (TF.DataSource p a) s b where
     routeTableId = TF.configuration . routeTableId
 
-class HasSecret a b | a -> b where
-    type HasSecretThread a b :: *
+class HasSecret a s b | a -> s b where
+    secret :: Lens' a (TF.Attribute s b)
 
-    secret
-        :: Lens' a (TF.Attribute (HasSecretThread a b) b)
-
-instance HasSecret a b => HasSecret (TF.DataSource p a) b where
-    type HasSecretThread (TF.DataSource p a) b =
-         HasSecretThread a b
-
+instance HasSecret a s b => HasSecret (TF.DataSource p a) s b where
     secret = TF.configuration . secret
 
-class HasService a b | a -> b where
-    type HasServiceThread a b :: *
+class HasService a s b | a -> s b where
+    service :: Lens' a (TF.Attribute s b)
 
-    service
-        :: Lens' a (TF.Attribute (HasServiceThread a b) b)
-
-instance HasService a b => HasService (TF.DataSource p a) b where
-    type HasServiceThread (TF.DataSource p a) b =
-         HasServiceThread a b
-
+instance HasService a s b => HasService (TF.DataSource p a) s b where
     service = TF.configuration . service
 
-class HasServiceName a b | a -> b where
-    type HasServiceNameThread a b :: *
+class HasServiceName a s b | a -> s b where
+    serviceName :: Lens' a (TF.Attribute s b)
 
-    serviceName
-        :: Lens' a (TF.Attribute (HasServiceNameThread a b) b)
-
-instance HasServiceName a b => HasServiceName (TF.DataSource p a) b where
-    type HasServiceNameThread (TF.DataSource p a) b =
-         HasServiceNameThread a b
-
+instance HasServiceName a s b => HasServiceName (TF.DataSource p a) s b where
     serviceName = TF.configuration . serviceName
 
-class HasServices a b | a -> b where
-    type HasServicesThread a b :: *
+class HasServices a s b | a -> s b where
+    services :: Lens' a (TF.Attribute s b)
 
-    services
-        :: Lens' a (TF.Attribute (HasServicesThread a b) b)
-
-instance HasServices a b => HasServices (TF.DataSource p a) b where
-    type HasServicesThread (TF.DataSource p a) b =
-         HasServicesThread a b
-
+instance HasServices a s b => HasServices (TF.DataSource p a) s b where
     services = TF.configuration . services
 
-class HasSnapshotIds a b | a -> b where
-    type HasSnapshotIdsThread a b :: *
+class HasSnapshotIds a s b | a -> s b where
+    snapshotIds :: Lens' a (TF.Attribute s b)
 
-    snapshotIds
-        :: Lens' a (TF.Attribute (HasSnapshotIdsThread a b) b)
-
-instance HasSnapshotIds a b => HasSnapshotIds (TF.DataSource p a) b where
-    type HasSnapshotIdsThread (TF.DataSource p a) b =
-         HasSnapshotIdsThread a b
-
+instance HasSnapshotIds a s b => HasSnapshotIds (TF.DataSource p a) s b where
     snapshotIds = TF.configuration . snapshotIds
 
-class HasSnapshotType a b | a -> b where
-    type HasSnapshotTypeThread a b :: *
+class HasSnapshotType a s b | a -> s b where
+    snapshotType :: Lens' a (TF.Attribute s b)
 
-    snapshotType
-        :: Lens' a (TF.Attribute (HasSnapshotTypeThread a b) b)
-
-instance HasSnapshotType a b => HasSnapshotType (TF.DataSource p a) b where
-    type HasSnapshotTypeThread (TF.DataSource p a) b =
-         HasSnapshotTypeThread a b
-
+instance HasSnapshotType a s b => HasSnapshotType (TF.DataSource p a) s b where
     snapshotType = TF.configuration . snapshotType
 
-class HasState a b | a -> b where
-    type HasStateThread a b :: *
+class HasState a s b | a -> s b where
+    state :: Lens' a (TF.Attribute s b)
 
-    state
-        :: Lens' a (TF.Attribute (HasStateThread a b) b)
-
-instance HasState a b => HasState (TF.DataSource p a) b where
-    type HasStateThread (TF.DataSource p a) b =
-         HasStateThread a b
-
+instance HasState a s b => HasState (TF.DataSource p a) s b where
     state = TF.configuration . state
 
-class HasStatement a b | a -> b where
-    type HasStatementThread a b :: *
+class HasStatement a s b | a -> s b where
+    statement :: Lens' a (TF.Attribute s b)
 
-    statement
-        :: Lens' a (TF.Attribute (HasStatementThread a b) b)
-
-instance HasStatement a b => HasStatement (TF.DataSource p a) b where
-    type HasStatementThread (TF.DataSource p a) b =
-         HasStatementThread a b
-
+instance HasStatement a s b => HasStatement (TF.DataSource p a) s b where
     statement = TF.configuration . statement
 
-class HasStatus a b | a -> b where
-    type HasStatusThread a b :: *
+class HasStatus a s b | a -> s b where
+    status :: Lens' a (TF.Attribute s b)
 
-    status
-        :: Lens' a (TF.Attribute (HasStatusThread a b) b)
-
-instance HasStatus a b => HasStatus (TF.DataSource p a) b where
-    type HasStatusThread (TF.DataSource p a) b =
-         HasStatusThread a b
-
+instance HasStatus a s b => HasStatus (TF.DataSource p a) s b where
     status = TF.configuration . status
 
-class HasStatuses a b | a -> b where
-    type HasStatusesThread a b :: *
+class HasStatuses a s b | a -> s b where
+    statuses :: Lens' a (TF.Attribute s b)
 
-    statuses
-        :: Lens' a (TF.Attribute (HasStatusesThread a b) b)
-
-instance HasStatuses a b => HasStatuses (TF.DataSource p a) b where
-    type HasStatusesThread (TF.DataSource p a) b =
-         HasStatusesThread a b
-
+instance HasStatuses a s b => HasStatuses (TF.DataSource p a) s b where
     statuses = TF.configuration . statuses
 
-class HasSubnetId a b | a -> b where
-    type HasSubnetIdThread a b :: *
+class HasSubnetId a s b | a -> s b where
+    subnetId :: Lens' a (TF.Attribute s b)
 
-    subnetId
-        :: Lens' a (TF.Attribute (HasSubnetIdThread a b) b)
-
-instance HasSubnetId a b => HasSubnetId (TF.DataSource p a) b where
-    type HasSubnetIdThread (TF.DataSource p a) b =
-         HasSubnetIdThread a b
-
+instance HasSubnetId a s b => HasSubnetId (TF.DataSource p a) s b where
     subnetId = TF.configuration . subnetId
 
-class HasTags a b | a -> b where
-    type HasTagsThread a b :: *
+class HasTags a s b | a -> s b where
+    tags :: Lens' a (TF.Attribute s b)
 
-    tags
-        :: Lens' a (TF.Attribute (HasTagsThread a b) b)
-
-instance HasTags a b => HasTags (TF.DataSource p a) b where
-    type HasTagsThread (TF.DataSource p a) b =
-         HasTagsThread a b
-
+instance HasTags a s b => HasTags (TF.DataSource p a) s b where
     tags = TF.configuration . tags
 
-class HasTaskDefinition a b | a -> b where
-    type HasTaskDefinitionThread a b :: *
+class HasTaskDefinition a s b | a -> s b where
+    taskDefinition :: Lens' a (TF.Attribute s b)
 
-    taskDefinition
-        :: Lens' a (TF.Attribute (HasTaskDefinitionThread a b) b)
-
-instance HasTaskDefinition a b => HasTaskDefinition (TF.DataSource p a) b where
-    type HasTaskDefinitionThread (TF.DataSource p a) b =
-         HasTaskDefinitionThread a b
-
+instance HasTaskDefinition a s b => HasTaskDefinition (TF.DataSource p a) s b where
     taskDefinition = TF.configuration . taskDefinition
 
-class HasUserId a b | a -> b where
-    type HasUserIdThread a b :: *
+class HasTypes a s b | a -> s b where
+    types :: Lens' a (TF.Attribute s b)
 
-    userId
-        :: Lens' a (TF.Attribute (HasUserIdThread a b) b)
+instance HasTypes a s b => HasTypes (TF.DataSource p a) s b where
+    types = TF.configuration . types
 
-instance HasUserId a b => HasUserId (TF.DataSource p a) b where
-    type HasUserIdThread (TF.DataSource p a) b =
-         HasUserIdThread a b
+class HasUserId a s b | a -> s b where
+    userId :: Lens' a (TF.Attribute s b)
 
+instance HasUserId a s b => HasUserId (TF.DataSource p a) s b where
     userId = TF.configuration . userId
 
-class HasUserName a b | a -> b where
-    type HasUserNameThread a b :: *
+class HasUserName a s b | a -> s b where
+    userName :: Lens' a (TF.Attribute s b)
 
-    userName
-        :: Lens' a (TF.Attribute (HasUserNameThread a b) b)
-
-instance HasUserName a b => HasUserName (TF.DataSource p a) b where
-    type HasUserNameThread (TF.DataSource p a) b =
-         HasUserNameThread a b
-
+instance HasUserName a s b => HasUserName (TF.DataSource p a) s b where
     userName = TF.configuration . userName
 
-class HasValues a b | a -> b where
-    type HasValuesThread a b :: *
+class HasValues a s b | a -> s b where
+    values :: Lens' a (TF.Attribute s b)
 
-    values
-        :: Lens' a (TF.Attribute (HasValuesThread a b) b)
-
-instance HasValues a b => HasValues (TF.DataSource p a) b where
-    type HasValuesThread (TF.DataSource p a) b =
-         HasValuesThread a b
-
+instance HasValues a s b => HasValues (TF.DataSource p a) s b where
     values = TF.configuration . values
 
-class HasVersionId a b | a -> b where
-    type HasVersionIdThread a b :: *
+class HasVersionId a s b | a -> s b where
+    versionId :: Lens' a (TF.Attribute s b)
 
-    versionId
-        :: Lens' a (TF.Attribute (HasVersionIdThread a b) b)
-
-instance HasVersionId a b => HasVersionId (TF.DataSource p a) b where
-    type HasVersionIdThread (TF.DataSource p a) b =
-         HasVersionIdThread a b
-
+instance HasVersionId a s b => HasVersionId (TF.DataSource p a) s b where
     versionId = TF.configuration . versionId
 
-class HasVpcId a b | a -> b where
-    type HasVpcIdThread a b :: *
+class HasVpcId a s b | a -> s b where
+    vpcId :: Lens' a (TF.Attribute s b)
 
-    vpcId
-        :: Lens' a (TF.Attribute (HasVpcIdThread a b) b)
-
-instance HasVpcId a b => HasVpcId (TF.DataSource p a) b where
-    type HasVpcIdThread (TF.DataSource p a) b =
-         HasVpcIdThread a b
-
+instance HasVpcId a s b => HasVpcId (TF.DataSource p a) s b where
     vpcId = TF.configuration . vpcId
 
-class HasWithDecryption a b | a -> b where
-    type HasWithDecryptionThread a b :: *
+class HasWithDecryption a s b | a -> s b where
+    withDecryption :: Lens' a (TF.Attribute s b)
 
-    withDecryption
-        :: Lens' a (TF.Attribute (HasWithDecryptionThread a b) b)
-
-instance HasWithDecryption a b => HasWithDecryption (TF.DataSource p a) b where
-    type HasWithDecryptionThread (TF.DataSource p a) b =
-         HasWithDecryptionThread a b
-
+instance HasWithDecryption a s b => HasWithDecryption (TF.DataSource p a) s b where
     withDecryption = TF.configuration . withDecryption
 
-class HasZoneId a b | a -> b where
-    type HasZoneIdThread a b :: *
+class HasZoneId a s b | a -> s b where
+    zoneId :: Lens' a (TF.Attribute s b)
 
-    zoneId
-        :: Lens' a (TF.Attribute (HasZoneIdThread a b) b)
-
-instance HasZoneId a b => HasZoneId (TF.DataSource p a) b where
-    type HasZoneIdThread (TF.DataSource p a) b =
-         HasZoneIdThread a b
-
+instance HasZoneId a s b => HasZoneId (TF.DataSource p a) s b where
     zoneId = TF.configuration . zoneId
 
 class HasComputedAccepter a b | a -> b where

@@ -6,7 +6,7 @@ module Terrafomo.Output
     ( Output (..)
     ) where
 
-import Data.Maybe     (catMaybes)
+import Data.Maybe     (maybeToList)
 import Data.Semigroup ((<>))
 
 import Terrafomo.Attribute (Attribute)
@@ -31,6 +31,6 @@ deriving instance Show a => Show (Output a)
 
 instance HCL.ToHCL a => HCL.ToHCL (Output a) where
     toHCL (Output _ n v) =
-        HCL.object (pure "output" <> pure (HCL.name n)) $ catMaybes
-            [ HCL.assign "value" <$> HCL.attribute v
-            ]
+        HCL.object (pure "output" <> pure (HCL.name n)) $
+            maybeToList $
+                HCL.attribute "value" v

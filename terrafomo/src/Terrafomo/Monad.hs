@@ -1,5 +1,3 @@
-{-# LANGUAGE DataKinds                  #-}
-
 {-# LANGUAGE DefaultSignatures          #-}
 {-# LANGUAGE DeriveFunctor              #-}
 {-# LANGUAGE FlexibleInstances          #-}
@@ -54,6 +52,8 @@ import Data.Proxy      (Proxy (..))
 import Data.Semigroup  (Semigroup)
 import Data.Typeable   (Typeable)
 
+import GHC.Exts (IsList (..))
+
 import Terrafomo.Attribute
 import Terrafomo.Backend
 import Terrafomo.DataSource  (DataSource (..))
@@ -92,8 +92,9 @@ import qualified Control.Monad.Trans.Writer.Strict as Strict
 -- Errors
 
 data TerraformError
-    = NonUniqueKey    !Key  !HCL.Value
-    | NonUniqueOutput !Name !HCL.Value
+    = NonUniqueDataSource !Key  !HCL.Value
+    | NonUniqueResource   !Key  !HCL.Value
+    | NonUniqueOutput     !Name !HCL.Value
       deriving (Eq, Show, Typeable)
 
 instance Exception TerraformError
@@ -136,6 +137,12 @@ renderState s =
 
 newtype TerraformOutput = TerraformOutput [(Name, LText.Text)]
     deriving (Semigroup, Monoid)
+
+instance IsList TerraformOutput where
+    type Item TerraformOutput = (Name, LText.Text)
+
+    toList (TerraformOutput xs) = xs
+    fromList                    = TerraformOutput
 
 outputState :: Name -> TerraformState -> TerraformOutput
 outputState name = TerraformOutput . pure . (name,) . renderState
@@ -345,7 +352,7 @@ datasource name x =
             insertValue key value datasources (\s w -> w { datasources = s })
 
         unless unique $
-            MTL.throwError (NonUniqueKey key value)
+            MTL.throwError (NonUniqueDataSource key value)
 
         pure (UnsafeReference key)
 
@@ -368,7 +375,7 @@ resource name x =
             insertValue key value resources (\s w -> w { resources = s })
 
         unless unique $
-            MTL.throwError (NonUniqueKey key value)
+            MTL.throwError (NonUniqueResource key value)
 
         pure (UnsafeReference key)
 
@@ -392,8 +399,8 @@ output attr = do
         name <- case attr of
             Computed k v ->
                 pure $! nformat (Format.stext % "_" % fname) (Hash.base16 k) v
-            _ ->
-                getNextName "var_"
+            _            ->
+                getNextName "v"
 
         let out   = Output b name attr
             value = HCL.toHCL out
@@ -422,7 +429,7 @@ remote x =
         exists <- MTL.gets (VMap.member key . datasources)
 
         if exists
-            then MTL.throwError (NonUniqueKey key value)
+            then MTL.throwError (NonUniqueDataSource key value)
             else void (insertValue key value remotes (\s w -> w { remotes = s }))
 
         pure (Computed key (outputName x))
@@ -452,8 +459,8 @@ getNextName
     :: MonadTerraform s m
     => LText.Text
     -> m Name
-getNextName pre =
+getNextName prefix =
     liftTerraform $ do
         MTL.modify' (\s -> s { supply = supply s + 1 })
-        nformat (Format.text % Format.pint 3) pre
+        nformat (Format.text % Format.pint 3) prefix
             <$> MTL.gets supply

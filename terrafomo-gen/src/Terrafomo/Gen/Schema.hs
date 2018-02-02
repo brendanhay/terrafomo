@@ -7,7 +7,7 @@
 
 module Terrafomo.Gen.Schema where
 
-import Data.Aeson      (FromJSON, ToJSON, (.!=), (.:), (.:?), (.=))
+import Data.Aeson      (FromJSON, ToJSON, (.!=), (.:?), (.=))
 import Data.Bifunctor  (bimap)
 import Data.Function   (on)
 import Data.Map.Strict (Map)
@@ -35,15 +35,6 @@ data SchemaType
 
 instance ToJSON SchemaType where
     toJSON = JSON.toJSON . show
-
-data Schema = Schema
-    { schemaName       :: !Text
-    , schemaAbout      :: !(Maybe Text)
-    , schemaExamples   :: ![Example]
-    , schemaDeprecated :: !Bool
-    , schemaArguments  :: !(Map Text Arg)
-    , schemaAttributes :: !(Map Text Attr)
-    } deriving (Show, Generic)
 
 data Field = Field
     { fieldClass    :: !Text
@@ -93,6 +84,15 @@ getClasses =
               , classSymbol = fieldName   x
               })
 
+data Schema = Schema
+    { schemaName       :: !(Last Text)
+    , schemaAbout      :: !(Maybe Text)
+    , schemaExamples   :: ![Example]
+    , schemaDeprecated :: !Bool
+    , schemaArguments  :: !(Map Text Arg)
+    , schemaAttributes :: !(Map Text Attr)
+    } deriving (Show, Generic)
+
 instance Semigroup Schema where
     (<>) parsed saved = Schema
         { schemaName       = schemaName     parsed
@@ -122,7 +122,7 @@ instance ToJSON Schema where
 
 instance FromJSON Schema where
     parseJSON = JSON.withObject "Schema" $ \o -> do
-        schemaName       <- o .:  "name"
+        schemaName       <- o .:? "name"       .!= mempty
         schemaAbout      <- o .:? "about"
         schemaExamples   <- o .:? "examples"   .!= []
         schemaDeprecated <- o .:? "deprecated" .!= False

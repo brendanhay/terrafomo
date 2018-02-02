@@ -53,12 +53,12 @@ import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
-import qualified Terrafomo.AWS.Types as TF
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.IP       as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
 import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.AWS.Types as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.IP        as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 
 {- | AWS Terraform provider.
 
@@ -68,39 +68,39 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data AWS = AWS {
-      _access_key :: !(Maybe Text)
+      _access_key                  :: !(Maybe Text)
     {- ^ (Optional) This is the AWS access key. It must be provided, but it can also be sourced from the @AWS_ACCESS_KEY_ID@ environment variable, or via a shared credentials file if @profile@ is specified. -}
-    , _allowed_account_ids :: !(Maybe Text)
+    , _allowed_account_ids         :: !(Maybe Text)
     {- ^ (Optional) List of allowed, white listed, AWS account IDs to prevent you from mistakenly using an incorrect one (and potentially end up destroying a live environment). Conflicts with @forbidden_account_ids@ . -}
-    , _assume_role :: !(Maybe Text)
+    , _assume_role                 :: !(Maybe Text)
     {- ^ (Optional) An @assume_role@ block (documented below). Only one @assume_role@ block may be in the configuration. -}
-    , _forbidden_account_ids :: !(Maybe Text)
+    , _forbidden_account_ids       :: !(Maybe Text)
     {- ^ (Optional) List of forbidden, blacklisted, AWS account IDs to prevent you mistakenly using a wrong one (and potentially end up destroying a live environment). Conflicts with @allowed_account_ids@ . -}
-    , _insecure :: !(Maybe Text)
+    , _insecure                    :: !(Maybe Text)
     {- ^ (Optional) Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is @false@ . -}
-    , _max_retries :: !(Maybe Text)
+    , _max_retries                 :: !(Maybe Text)
     {- ^ (Optional) This is the maximum number of times an API call is retried, in the case where requests are being throttled or experiencing transient failures. The delay between the subsequent API calls increases exponentially. -}
-    , _profile :: !(Maybe Text)
+    , _profile                     :: !(Maybe Text)
     {- ^ (Optional) This is the AWS profile name as set in the shared credentials file. -}
-    , _region :: !(Maybe TF.Region)
+    , _region                      :: !(Maybe TF.Region)
     {- ^ (Required) This is the AWS region. It must be provided, but it can also be sourced from the @AWS_DEFAULT_REGION@ environment variables, or via a shared credentials file if @profile@ is specified. -}
-    , _s3_force_path_style :: !(Maybe Text)
+    , _s3_force_path_style         :: !(Maybe Text)
     {- ^ (Optional) Set this to @true@ to force the request to use path-style addressing, i.e., @http://s3.amazonaws.com/BUCKET/KEY@ . By default, the S3 client will use virtual hosted bucket addressing, @http://BUCKET.s3.amazonaws.com/KEY@ , when possible. Specific to the Amazon S3 service. -}
-    , _secret_key :: !(Maybe Text)
+    , _secret_key                  :: !(Maybe Text)
     {- ^ (Optional) This is the AWS secret key. It must be provided, but it can also be sourced from the @AWS_SECRET_ACCESS_KEY@ environment variable, or via a shared credentials file if @profile@ is specified. -}
-    , _shared_credentials_file :: !(Maybe Text)
+    , _shared_credentials_file     :: !(Maybe Text)
     {- ^ = (Optional) This is the path to the shared credentials file. If this is not set and a profile is specified, @~/.aws/credentials@ will be used. -}
     , _skip_credentials_validation :: !(Maybe Text)
     {- ^ (Optional) Skip the credentials validation via the STS API. Useful for AWS API implementations that do not have STS available or implemented. -}
-    , _skip_get_ec2_platforms :: !(Maybe Text)
+    , _skip_get_ec2_platforms      :: !(Maybe Text)
     {- ^ (Optional) Skip getting the supported EC2 platforms. Used by users that don't have ec2:DescribeAccountAttributes permissions. -}
-    , _skip_metadata_api_check :: !(Maybe Text)
+    , _skip_metadata_api_check     :: !(Maybe Text)
     {- ^ (Optional) Skip the AWS Metadata API check.  Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to @true@ prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables. -}
-    , _skip_region_validation :: !(Maybe Text)
+    , _skip_region_validation      :: !(Maybe Text)
     {- ^ (Optional) Skip validation of provided region name. Useful for AWS-like implementations that use their own region names or to bypass the validation for regions that aren't publicly available yet. -}
-    , _skip_requesting_account_id :: !(Maybe Text)
+    , _skip_requesting_account_id  :: !(Maybe Text)
     {- ^ (Optional) Skip requesting the account ID.  Useful for AWS API implementations that do not have the IAM, STS API, or metadata API.  When set to @true@ , prevents you from managing any resource that requires Account ID to construct an ARN, e.g. -}
-    , _token :: !(Maybe Text)
+    , _token                       :: !(Maybe Text)
     {- ^ (Optional) Use this to set an MFA token. It can also be sourced from the @AWS_SESSION_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 

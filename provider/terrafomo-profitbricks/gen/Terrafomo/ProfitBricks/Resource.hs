@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -82,10 +81,13 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                       as TF
+import qualified GHC.Base                        as TF
+import qualified Numeric.Natural                 as TF
 import qualified Terrafomo.Attribute             as TF
 import qualified Terrafomo.HCL                   as TF
 import qualified Terrafomo.IP                    as TF
-import qualified Terrafomo.Meta                  as TF (configuration)
+import qualified Terrafomo.Meta                  as TF
 import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.ProfitBricks.Provider as TF
 import qualified Terrafomo.ProfitBricks.Types    as TF
@@ -97,41 +99,35 @@ import qualified Terrafomo.Resource              as TF
 Manages a Virtual Data Center on ProfitBricks
 -}
 data DatacenterResource s = DatacenterResource {
-      _description :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s Text)
     {- ^ (Optional)[string] Description for the data center. -}
-    , _location    :: !(TF.Attribute s "location" Text)
+    , _location    :: !(TF.Attribute s Text)
     {- ^ (Required)[string] The physical location where the data center will be created. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name        :: !(TF.Attribute s Text)
     {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DatacenterResource s) where
     toHCL DatacenterResource{..} = TF.block $ catMaybes
-        [ TF.attribute _description
-        , TF.attribute _location
-        , TF.attribute _name
+        [ TF.attribute "description" _description
+        , TF.attribute "location" _location
+        , TF.attribute "name" _name
         ]
 
-instance HasDescription (DatacenterResource s) Text where
-    type HasDescriptionThread (DatacenterResource s) Text = s
-
+instance HasDescription (DatacenterResource s) s Text where
     description =
-        lens (_description :: DatacenterResource s -> TF.Attribute s "description" Text)
-             (\s a -> s { _description = a } :: DatacenterResource s)
+        lens (_description :: DatacenterResource s -> TF.Attribute s Text)
+            (\s a -> s { _description = a } :: DatacenterResource s)
 
-instance HasLocation (DatacenterResource s) Text where
-    type HasLocationThread (DatacenterResource s) Text = s
-
+instance HasLocation (DatacenterResource s) s Text where
     location =
-        lens (_location :: DatacenterResource s -> TF.Attribute s "location" Text)
-             (\s a -> s { _location = a } :: DatacenterResource s)
+        lens (_location :: DatacenterResource s -> TF.Attribute s Text)
+            (\s a -> s { _location = a } :: DatacenterResource s)
 
-instance HasName (DatacenterResource s) Text where
-    type HasNameThread (DatacenterResource s) Text = s
-
+instance HasName (DatacenterResource s) s Text where
     name =
-        lens (_name :: DatacenterResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: DatacenterResource s)
+        lens (_name :: DatacenterResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: DatacenterResource s)
 
 datacenterResource :: TF.Resource TF.ProfitBricks (DatacenterResource s)
 datacenterResource =
@@ -335,35 +331,20 @@ volumeResource =
         VolumeResource {
             }
 
-class HasDescription a b | a -> b where
-    type HasDescriptionThread a b :: *
+class HasDescription a s b | a -> s b where
+    description :: Lens' a (TF.Attribute s b)
 
-    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
-
-instance HasDescription a b => HasDescription (TF.Resource p a) b where
-    type HasDescriptionThread (TF.Resource p a) b =
-         HasDescriptionThread a b
-
+instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
     description = TF.configuration . description
 
-class HasLocation a b | a -> b where
-    type HasLocationThread a b :: *
+class HasLocation a s b | a -> s b where
+    location :: Lens' a (TF.Attribute s b)
 
-    location :: Lens' a (TF.Attribute (HasLocationThread a b) "location" b)
-
-instance HasLocation a b => HasLocation (TF.Resource p a) b where
-    type HasLocationThread (TF.Resource p a) b =
-         HasLocationThread a b
-
+instance HasLocation a s b => HasLocation (TF.Resource p a) s b where
     location = TF.configuration . location
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.Resource p a) b where
-    type HasNameThread (TF.Resource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.Resource p a) s b where
     name = TF.configuration . name

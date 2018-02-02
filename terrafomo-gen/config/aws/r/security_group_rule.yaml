@@ -1,0 +1,3 @@
+arguments:
+  _cidr_blocks:
+    type: '[TF.CIDR]'

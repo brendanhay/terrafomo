@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -59,12 +58,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                       as TF
+import qualified GHC.Base                        as TF
+import qualified Numeric.Natural                 as TF
 import qualified Terrafomo.Attribute             as TF
 import qualified Terrafomo.HCL                   as TF
 import qualified Terrafomo.IP                    as TF
 import qualified Terrafomo.LogicMonitor.Provider as TF
 import qualified Terrafomo.LogicMonitor.Types    as TF
-import qualified Terrafomo.Meta                  as TF (configuration)
+import qualified Terrafomo.Meta                  as TF
 import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.Resource              as TF
 import qualified Terrafomo.Resource              as TF
@@ -75,31 +77,27 @@ Provides a LogicMonitor collector group resource. This can be used to create
 and manage LogicMonitor users
 -}
 data CollectorGroupResource s = CollectorGroupResource {
-      _description :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s Text)
     {- ^ (Optional) Set description of collector group -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name        :: !(TF.Attribute s Text)
     {- ^ (Required) Name of collector group -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CollectorGroupResource s) where
     toHCL CollectorGroupResource{..} = TF.block $ catMaybes
-        [ TF.attribute _description
-        , TF.attribute _name
+        [ TF.attribute "description" _description
+        , TF.attribute "name" _name
         ]
 
-instance HasDescription (CollectorGroupResource s) Text where
-    type HasDescriptionThread (CollectorGroupResource s) Text = s
-
+instance HasDescription (CollectorGroupResource s) s Text where
     description =
-        lens (_description :: CollectorGroupResource s -> TF.Attribute s "description" Text)
-             (\s a -> s { _description = a } :: CollectorGroupResource s)
+        lens (_description :: CollectorGroupResource s -> TF.Attribute s Text)
+            (\s a -> s { _description = a } :: CollectorGroupResource s)
 
-instance HasName (CollectorGroupResource s) Text where
-    type HasNameThread (CollectorGroupResource s) Text = s
-
+instance HasName (CollectorGroupResource s) s Text where
     name =
-        lens (_name :: CollectorGroupResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: CollectorGroupResource s)
+        lens (_name :: CollectorGroupResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: CollectorGroupResource s)
 
 collectorGroupResource :: TF.Resource TF.LogicMonitor (CollectorGroupResource s)
 collectorGroupResource =
@@ -115,71 +113,59 @@ Provides a LogicMonitor device group resource. This can be used to create
 and manage LogicMonitor device groups
 -}
 data DeviceGroupResource s = DeviceGroupResource {
-      _applies_to       :: !(TF.Attribute s "applies_to" Text)
+      _applies_to       :: !(TF.Attribute s Text)
     {- ^ (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group. -}
-    , _description      :: !(TF.Attribute s "description" Text)
+    , _description      :: !(TF.Attribute s Text)
     {- ^ (Optional) Description of device group -}
-    , _disable_alerting :: !(TF.Attribute s "disable_alerting" Text)
+    , _disable_alerting :: !(TF.Attribute s Text)
     {- ^ (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group -}
-    , _name             :: !(TF.Attribute s "name" Text)
+    , _name             :: !(TF.Attribute s Text)
     {- ^ (Required) Name of device group -}
-    , _parent_id        :: !(TF.Attribute s "parent_id" Text)
+    , _parent_id        :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the parent group for this device group (the root device group has an Id of 1) -}
-    , _properties       :: !(TF.Attribute s "properties" Text)
+    , _properties       :: !(TF.Attribute s Text)
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DeviceGroupResource s) where
     toHCL DeviceGroupResource{..} = TF.block $ catMaybes
-        [ TF.attribute _applies_to
-        , TF.attribute _description
-        , TF.attribute _disable_alerting
-        , TF.attribute _name
-        , TF.attribute _parent_id
-        , TF.attribute _properties
+        [ TF.attribute "applies_to" _applies_to
+        , TF.attribute "description" _description
+        , TF.attribute "disable_alerting" _disable_alerting
+        , TF.attribute "name" _name
+        , TF.attribute "parent_id" _parent_id
+        , TF.attribute "properties" _properties
         ]
 
-instance HasAppliesTo (DeviceGroupResource s) Text where
-    type HasAppliesToThread (DeviceGroupResource s) Text = s
-
+instance HasAppliesTo (DeviceGroupResource s) s Text where
     appliesTo =
-        lens (_applies_to :: DeviceGroupResource s -> TF.Attribute s "applies_to" Text)
-             (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
+        lens (_applies_to :: DeviceGroupResource s -> TF.Attribute s Text)
+            (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
 
-instance HasDescription (DeviceGroupResource s) Text where
-    type HasDescriptionThread (DeviceGroupResource s) Text = s
-
+instance HasDescription (DeviceGroupResource s) s Text where
     description =
-        lens (_description :: DeviceGroupResource s -> TF.Attribute s "description" Text)
-             (\s a -> s { _description = a } :: DeviceGroupResource s)
+        lens (_description :: DeviceGroupResource s -> TF.Attribute s Text)
+            (\s a -> s { _description = a } :: DeviceGroupResource s)
 
-instance HasDisableAlerting (DeviceGroupResource s) Text where
-    type HasDisableAlertingThread (DeviceGroupResource s) Text = s
-
+instance HasDisableAlerting (DeviceGroupResource s) s Text where
     disableAlerting =
-        lens (_disable_alerting :: DeviceGroupResource s -> TF.Attribute s "disable_alerting" Text)
-             (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
+        lens (_disable_alerting :: DeviceGroupResource s -> TF.Attribute s Text)
+            (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
 
-instance HasName (DeviceGroupResource s) Text where
-    type HasNameThread (DeviceGroupResource s) Text = s
-
+instance HasName (DeviceGroupResource s) s Text where
     name =
-        lens (_name :: DeviceGroupResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: DeviceGroupResource s)
+        lens (_name :: DeviceGroupResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: DeviceGroupResource s)
 
-instance HasParentId (DeviceGroupResource s) Text where
-    type HasParentIdThread (DeviceGroupResource s) Text = s
-
+instance HasParentId (DeviceGroupResource s) s Text where
     parentId =
-        lens (_parent_id :: DeviceGroupResource s -> TF.Attribute s "parent_id" Text)
-             (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
+        lens (_parent_id :: DeviceGroupResource s -> TF.Attribute s Text)
+            (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
 
-instance HasProperties (DeviceGroupResource s) Text where
-    type HasPropertiesThread (DeviceGroupResource s) Text = s
-
+instance HasProperties (DeviceGroupResource s) s Text where
     properties =
-        lens (_properties :: DeviceGroupResource s -> TF.Attribute s "properties" Text)
-             (\s a -> s { _properties = a } :: DeviceGroupResource s)
+        lens (_properties :: DeviceGroupResource s -> TF.Attribute s Text)
+            (\s a -> s { _properties = a } :: DeviceGroupResource s)
 
 deviceGroupResource :: TF.Resource TF.LogicMonitor (DeviceGroupResource s)
 deviceGroupResource =
@@ -199,71 +185,59 @@ Provides a LogicMonitor device resource. This can be used to create and
 manage LogicMonitor devices
 -}
 data DeviceResource s = DeviceResource {
-      _collector        :: !(TF.Attribute s "collector" Text)
+      _collector        :: !(TF.Attribute s Text)
     {- ^ - (required) The id of the collector that will monitoring the device -}
-    , _disable_alerting :: !(TF.Attribute s "disable_alerting" Text)
+    , _disable_alerting :: !(TF.Attribute s Text)
     {- ^ (Optional) The host is created with alerting disabled (default is true) -}
-    , _display_name     :: !(TF.Attribute s "display_name" Text)
+    , _display_name     :: !(TF.Attribute s Text)
     {- ^ (Optional) Display name of device, (default is ip_addr) -}
-    , _hostgroup_id     :: !(TF.Attribute s "hostgroup_id" Text)
+    , _hostgroup_id     :: !(TF.Attribute s Text)
     {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
-    , _ip_addr          :: !(TF.Attribute s "ip_addr" Text)
+    , _ip_addr          :: !(TF.Attribute s Text)
     {- ^ (Required) Ip Address/Hostname of device -}
-    , _properties       :: !(TF.Attribute s "properties" Text)
+    , _properties       :: !(TF.Attribute s Text)
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DeviceResource s) where
     toHCL DeviceResource{..} = TF.block $ catMaybes
-        [ TF.attribute _collector
-        , TF.attribute _disable_alerting
-        , TF.attribute _display_name
-        , TF.attribute _hostgroup_id
-        , TF.attribute _ip_addr
-        , TF.attribute _properties
+        [ TF.attribute "collector" _collector
+        , TF.attribute "disable_alerting" _disable_alerting
+        , TF.attribute "display_name" _display_name
+        , TF.attribute "hostgroup_id" _hostgroup_id
+        , TF.attribute "ip_addr" _ip_addr
+        , TF.attribute "properties" _properties
         ]
 
-instance HasCollector (DeviceResource s) Text where
-    type HasCollectorThread (DeviceResource s) Text = s
-
+instance HasCollector (DeviceResource s) s Text where
     collector =
-        lens (_collector :: DeviceResource s -> TF.Attribute s "collector" Text)
-             (\s a -> s { _collector = a } :: DeviceResource s)
+        lens (_collector :: DeviceResource s -> TF.Attribute s Text)
+            (\s a -> s { _collector = a } :: DeviceResource s)
 
-instance HasDisableAlerting (DeviceResource s) Text where
-    type HasDisableAlertingThread (DeviceResource s) Text = s
-
+instance HasDisableAlerting (DeviceResource s) s Text where
     disableAlerting =
-        lens (_disable_alerting :: DeviceResource s -> TF.Attribute s "disable_alerting" Text)
-             (\s a -> s { _disable_alerting = a } :: DeviceResource s)
+        lens (_disable_alerting :: DeviceResource s -> TF.Attribute s Text)
+            (\s a -> s { _disable_alerting = a } :: DeviceResource s)
 
-instance HasDisplayName (DeviceResource s) Text where
-    type HasDisplayNameThread (DeviceResource s) Text = s
-
+instance HasDisplayName (DeviceResource s) s Text where
     displayName =
-        lens (_display_name :: DeviceResource s -> TF.Attribute s "display_name" Text)
-             (\s a -> s { _display_name = a } :: DeviceResource s)
+        lens (_display_name :: DeviceResource s -> TF.Attribute s Text)
+            (\s a -> s { _display_name = a } :: DeviceResource s)
 
-instance HasHostgroupId (DeviceResource s) Text where
-    type HasHostgroupIdThread (DeviceResource s) Text = s
-
+instance HasHostgroupId (DeviceResource s) s Text where
     hostgroupId =
-        lens (_hostgroup_id :: DeviceResource s -> TF.Attribute s "hostgroup_id" Text)
-             (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
+        lens (_hostgroup_id :: DeviceResource s -> TF.Attribute s Text)
+            (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
 
-instance HasIpAddr (DeviceResource s) Text where
-    type HasIpAddrThread (DeviceResource s) Text = s
-
+instance HasIpAddr (DeviceResource s) s Text where
     ipAddr =
-        lens (_ip_addr :: DeviceResource s -> TF.Attribute s "ip_addr" Text)
-             (\s a -> s { _ip_addr = a } :: DeviceResource s)
+        lens (_ip_addr :: DeviceResource s -> TF.Attribute s Text)
+            (\s a -> s { _ip_addr = a } :: DeviceResource s)
 
-instance HasProperties (DeviceResource s) Text where
-    type HasPropertiesThread (DeviceResource s) Text = s
-
+instance HasProperties (DeviceResource s) s Text where
     properties =
-        lens (_properties :: DeviceResource s -> TF.Attribute s "properties" Text)
-             (\s a -> s { _properties = a } :: DeviceResource s)
+        lens (_properties :: DeviceResource s -> TF.Attribute s Text)
+            (\s a -> s { _properties = a } :: DeviceResource s)
 
 deviceResource :: TF.Resource TF.LogicMonitor (DeviceResource s)
 deviceResource =
@@ -277,112 +251,62 @@ deviceResource =
             , _properties = TF.Nil
             }
 
-class HasAppliesTo a b | a -> b where
-    type HasAppliesToThread a b :: *
+class HasAppliesTo a s b | a -> s b where
+    appliesTo :: Lens' a (TF.Attribute s b)
 
-    appliesTo :: Lens' a (TF.Attribute (HasAppliesToThread a b) "applies_to" b)
-
-instance HasAppliesTo a b => HasAppliesTo (TF.Resource p a) b where
-    type HasAppliesToThread (TF.Resource p a) b =
-         HasAppliesToThread a b
-
+instance HasAppliesTo a s b => HasAppliesTo (TF.Resource p a) s b where
     appliesTo = TF.configuration . appliesTo
 
-class HasCollector a b | a -> b where
-    type HasCollectorThread a b :: *
+class HasCollector a s b | a -> s b where
+    collector :: Lens' a (TF.Attribute s b)
 
-    collector :: Lens' a (TF.Attribute (HasCollectorThread a b) "collector" b)
-
-instance HasCollector a b => HasCollector (TF.Resource p a) b where
-    type HasCollectorThread (TF.Resource p a) b =
-         HasCollectorThread a b
-
+instance HasCollector a s b => HasCollector (TF.Resource p a) s b where
     collector = TF.configuration . collector
 
-class HasDescription a b | a -> b where
-    type HasDescriptionThread a b :: *
+class HasDescription a s b | a -> s b where
+    description :: Lens' a (TF.Attribute s b)
 
-    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
-
-instance HasDescription a b => HasDescription (TF.Resource p a) b where
-    type HasDescriptionThread (TF.Resource p a) b =
-         HasDescriptionThread a b
-
+instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
     description = TF.configuration . description
 
-class HasDisableAlerting a b | a -> b where
-    type HasDisableAlertingThread a b :: *
+class HasDisableAlerting a s b | a -> s b where
+    disableAlerting :: Lens' a (TF.Attribute s b)
 
-    disableAlerting :: Lens' a (TF.Attribute (HasDisableAlertingThread a b) "disable_alerting" b)
-
-instance HasDisableAlerting a b => HasDisableAlerting (TF.Resource p a) b where
-    type HasDisableAlertingThread (TF.Resource p a) b =
-         HasDisableAlertingThread a b
-
+instance HasDisableAlerting a s b => HasDisableAlerting (TF.Resource p a) s b where
     disableAlerting = TF.configuration . disableAlerting
 
-class HasDisplayName a b | a -> b where
-    type HasDisplayNameThread a b :: *
+class HasDisplayName a s b | a -> s b where
+    displayName :: Lens' a (TF.Attribute s b)
 
-    displayName :: Lens' a (TF.Attribute (HasDisplayNameThread a b) "display_name" b)
-
-instance HasDisplayName a b => HasDisplayName (TF.Resource p a) b where
-    type HasDisplayNameThread (TF.Resource p a) b =
-         HasDisplayNameThread a b
-
+instance HasDisplayName a s b => HasDisplayName (TF.Resource p a) s b where
     displayName = TF.configuration . displayName
 
-class HasHostgroupId a b | a -> b where
-    type HasHostgroupIdThread a b :: *
+class HasHostgroupId a s b | a -> s b where
+    hostgroupId :: Lens' a (TF.Attribute s b)
 
-    hostgroupId :: Lens' a (TF.Attribute (HasHostgroupIdThread a b) "hostgroup_id" b)
-
-instance HasHostgroupId a b => HasHostgroupId (TF.Resource p a) b where
-    type HasHostgroupIdThread (TF.Resource p a) b =
-         HasHostgroupIdThread a b
-
+instance HasHostgroupId a s b => HasHostgroupId (TF.Resource p a) s b where
     hostgroupId = TF.configuration . hostgroupId
 
-class HasIpAddr a b | a -> b where
-    type HasIpAddrThread a b :: *
+class HasIpAddr a s b | a -> s b where
+    ipAddr :: Lens' a (TF.Attribute s b)
 
-    ipAddr :: Lens' a (TF.Attribute (HasIpAddrThread a b) "ip_addr" b)
-
-instance HasIpAddr a b => HasIpAddr (TF.Resource p a) b where
-    type HasIpAddrThread (TF.Resource p a) b =
-         HasIpAddrThread a b
-
+instance HasIpAddr a s b => HasIpAddr (TF.Resource p a) s b where
     ipAddr = TF.configuration . ipAddr
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.Resource p a) b where
-    type HasNameThread (TF.Resource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.Resource p a) s b where
     name = TF.configuration . name
 
-class HasParentId a b | a -> b where
-    type HasParentIdThread a b :: *
+class HasParentId a s b | a -> s b where
+    parentId :: Lens' a (TF.Attribute s b)
 
-    parentId :: Lens' a (TF.Attribute (HasParentIdThread a b) "parent_id" b)
-
-instance HasParentId a b => HasParentId (TF.Resource p a) b where
-    type HasParentIdThread (TF.Resource p a) b =
-         HasParentIdThread a b
-
+instance HasParentId a s b => HasParentId (TF.Resource p a) s b where
     parentId = TF.configuration . parentId
 
-class HasProperties a b | a -> b where
-    type HasPropertiesThread a b :: *
+class HasProperties a s b | a -> s b where
+    properties :: Lens' a (TF.Attribute s b)
 
-    properties :: Lens' a (TF.Attribute (HasPropertiesThread a b) "properties" b)
-
-instance HasProperties a b => HasProperties (TF.Resource p a) b where
-    type HasPropertiesThread (TF.Resource p a) b =
-         HasPropertiesThread a b
-
+instance HasProperties a s b => HasProperties (TF.Resource p a) s b where
     properties = TF.configuration . properties

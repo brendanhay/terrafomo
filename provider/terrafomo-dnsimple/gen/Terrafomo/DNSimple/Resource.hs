@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -57,12 +56,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                   as TF
+import qualified GHC.Base                    as TF
+import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.DNSimple.Provider as TF
 import qualified Terrafomo.DNSimple.Types    as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
-import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Meta              as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Resource          as TF
 import qualified Terrafomo.Resource          as TF
@@ -72,103 +74,75 @@ import qualified Terrafomo.Resource          as TF
 Provides a DNSimple record resource.
 -}
 data RecordResource s = RecordResource {
-      _domain   :: !(TF.Attribute s "domain" Text)
+      _domain   :: !(TF.Attribute s Text)
     {- ^ (Required) The domain to add the record to -}
-    , _name     :: !(TF.Attribute s "name" Text)
+    , _name     :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the record -}
-    , _priority :: !(TF.Attribute s "priority" Text)
+    , _priority :: !(TF.Attribute s Text)
     {- ^ (Optional) The priority of the record - only useful for some record types -}
-    , _ttl      :: !(TF.Attribute s "ttl" Text)
+    , _ttl      :: !(TF.Attribute s Text)
     {- ^ (Optional) The TTL of the record -}
-    , _type'    :: !(TF.Attribute s "type" Text)
+    , _type'    :: !(TF.Attribute s Text)
     {- ^ (Required) The type of the record -}
-    , _value    :: !(TF.Attribute s "value" Text)
+    , _value    :: !(TF.Attribute s Text)
     {- ^ (Required) The value of the record -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.block $ catMaybes
-        [ TF.attribute _domain
-        , TF.attribute _name
-        , TF.attribute _priority
-        , TF.attribute _ttl
-        , TF.attribute _type'
-        , TF.attribute _value
+        [ TF.attribute "domain" _domain
+        , TF.attribute "name" _name
+        , TF.attribute "priority" _priority
+        , TF.attribute "ttl" _ttl
+        , TF.attribute "type" _type'
+        , TF.attribute "value" _value
         ]
 
-instance HasDomain (RecordResource s) Text where
-    type HasDomainThread (RecordResource s) Text = s
-
+instance HasDomain (RecordResource s) s Text where
     domain =
-        lens (_domain :: RecordResource s -> TF.Attribute s "domain" Text)
-             (\s a -> s { _domain = a } :: RecordResource s)
+        lens (_domain :: RecordResource s -> TF.Attribute s Text)
+            (\s a -> s { _domain = a } :: RecordResource s)
 
-instance HasName (RecordResource s) Text where
-    type HasNameThread (RecordResource s) Text = s
-
+instance HasName (RecordResource s) s Text where
     name =
-        lens (_name :: RecordResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: RecordResource s)
+        lens (_name :: RecordResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: RecordResource s)
 
-instance HasPriority (RecordResource s) Text where
-    type HasPriorityThread (RecordResource s) Text = s
-
+instance HasPriority (RecordResource s) s Text where
     priority =
-        lens (_priority :: RecordResource s -> TF.Attribute s "priority" Text)
-             (\s a -> s { _priority = a } :: RecordResource s)
+        lens (_priority :: RecordResource s -> TF.Attribute s Text)
+            (\s a -> s { _priority = a } :: RecordResource s)
 
-instance HasTtl (RecordResource s) Text where
-    type HasTtlThread (RecordResource s) Text = s
-
+instance HasTtl (RecordResource s) s Text where
     ttl =
-        lens (_ttl :: RecordResource s -> TF.Attribute s "ttl" Text)
-             (\s a -> s { _ttl = a } :: RecordResource s)
+        lens (_ttl :: RecordResource s -> TF.Attribute s Text)
+            (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance HasType' (RecordResource s) Text where
-    type HasType'Thread (RecordResource s) Text = s
-
+instance HasType' (RecordResource s) s Text where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attribute s "type" Text)
-             (\s a -> s { _type' = a } :: RecordResource s)
+        lens (_type' :: RecordResource s -> TF.Attribute s Text)
+            (\s a -> s { _type' = a } :: RecordResource s)
 
-instance HasValue (RecordResource s) Text where
-    type HasValueThread (RecordResource s) Text = s
-
+instance HasValue (RecordResource s) s Text where
     value =
-        lens (_value :: RecordResource s -> TF.Attribute s "value" Text)
-             (\s a -> s { _value = a } :: RecordResource s)
+        lens (_value :: RecordResource s -> TF.Attribute s Text)
+            (\s a -> s { _value = a } :: RecordResource s)
 
-instance HasComputedDomainId (RecordResource s) Text where
-    computedDomainId =
-        to (\x -> TF.Computed (TF.referenceKey x) "domain_id")
+instance HasComputedDomainId (RecordResource s) Text
 
-instance HasComputedHostname (RecordResource s) Text where
-    computedHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
+instance HasComputedHostname (RecordResource s) Text
 
-instance HasComputedId (RecordResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (RecordResource s) Text
 
-instance HasComputedName (RecordResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (RecordResource s) Text
 
-instance HasComputedPriority (RecordResource s) Text where
-    computedPriority =
-        to (\x -> TF.Computed (TF.referenceKey x) "priority")
+instance HasComputedPriority (RecordResource s) Text
 
-instance HasComputedTtl (RecordResource s) Text where
-    computedTtl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
+instance HasComputedTtl (RecordResource s) Text
 
-instance HasComputedType' (RecordResource s) Text where
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+instance HasComputedType' (RecordResource s) Text
 
-instance HasComputedValue (RecordResource s) Text where
-    computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
+instance HasComputedValue (RecordResource s) Text
 
 recordResource :: TF.Resource TF.DNSimple (RecordResource s)
 recordResource =
@@ -182,92 +156,86 @@ recordResource =
             , _value = TF.Nil
             }
 
-class HasDomain a b | a -> b where
-    type HasDomainThread a b :: *
+class HasDomain a s b | a -> s b where
+    domain :: Lens' a (TF.Attribute s b)
 
-    domain :: Lens' a (TF.Attribute (HasDomainThread a b) "domain" b)
-
-instance HasDomain a b => HasDomain (TF.Resource p a) b where
-    type HasDomainThread (TF.Resource p a) b =
-         HasDomainThread a b
-
+instance HasDomain a s b => HasDomain (TF.Resource p a) s b where
     domain = TF.configuration . domain
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.Resource p a) b where
-    type HasNameThread (TF.Resource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.Resource p a) s b where
     name = TF.configuration . name
 
-class HasPriority a b | a -> b where
-    type HasPriorityThread a b :: *
+class HasPriority a s b | a -> s b where
+    priority :: Lens' a (TF.Attribute s b)
 
-    priority :: Lens' a (TF.Attribute (HasPriorityThread a b) "priority" b)
-
-instance HasPriority a b => HasPriority (TF.Resource p a) b where
-    type HasPriorityThread (TF.Resource p a) b =
-         HasPriorityThread a b
-
+instance HasPriority a s b => HasPriority (TF.Resource p a) s b where
     priority = TF.configuration . priority
 
-class HasTtl a b | a -> b where
-    type HasTtlThread a b :: *
+class HasTtl a s b | a -> s b where
+    ttl :: Lens' a (TF.Attribute s b)
 
-    ttl :: Lens' a (TF.Attribute (HasTtlThread a b) "ttl" b)
-
-instance HasTtl a b => HasTtl (TF.Resource p a) b where
-    type HasTtlThread (TF.Resource p a) b =
-         HasTtlThread a b
-
+instance HasTtl a s b => HasTtl (TF.Resource p a) s b where
     ttl = TF.configuration . ttl
 
-class HasType' a b | a -> b where
-    type HasType'Thread a b :: *
+class HasType' a s b | a -> s b where
+    type' :: Lens' a (TF.Attribute s b)
 
-    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
-
-instance HasType' a b => HasType' (TF.Resource p a) b where
-    type HasType'Thread (TF.Resource p a) b =
-         HasType'Thread a b
-
+instance HasType' a s b => HasType' (TF.Resource p a) s b where
     type' = TF.configuration . type'
 
-class HasValue a b | a -> b where
-    type HasValueThread a b :: *
+class HasValue a s b | a -> s b where
+    value :: Lens' a (TF.Attribute s b)
 
-    value :: Lens' a (TF.Attribute (HasValueThread a b) "value" b)
-
-instance HasValue a b => HasValue (TF.Resource p a) b where
-    type HasValueThread (TF.Resource p a) b =
-         HasValueThread a b
-
+instance HasValue a s b => HasValue (TF.Resource p a) s b where
     value = TF.configuration . value
 
 class HasComputedDomainId a b | a -> b where
-    computedDomainId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedDomainId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDomainId =
+        to (\x -> TF.Computed (TF.referenceKey x) "domain_id")
 
 class HasComputedHostname a b | a -> b where
-    computedHostname :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedHostname
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHostname =
+        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
 
 class HasComputedId a b | a -> b where
-    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedId =
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
 class HasComputedName a b | a -> b where
-    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedName =
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
 class HasComputedPriority a b | a -> b where
-    computedPriority :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedPriority
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPriority =
+        to (\x -> TF.Computed (TF.referenceKey x) "priority")
 
 class HasComputedTtl a b | a -> b where
-    computedTtl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedTtl
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedTtl =
+        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
 
 class HasComputedType' a b | a -> b where
-    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedType'
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedType' =
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
 
 class HasComputedValue a b | a -> b where
-    computedValue :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedValue
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedValue =
+        to (\x -> TF.Computed (TF.referenceKey x) "value")

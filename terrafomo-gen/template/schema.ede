@@ -10,7 +10,6 @@
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -37,15 +36,17 @@ module {{ namespace }}
   {% endfor %}
     ) where
 
-import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
+import Data.Maybe (catMaybes)
+import Data.Text  (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word as TF
+import qualified GHC.Base as TF
+import qualified Numeric.Natural as TF
 {% for import in imports %}
 import qualified {{ import.value }} as TF
 {% endfor %}
@@ -86,16 +87,14 @@ data {{ schema.key }} s = {{ schema.key }} {
 instance TF.ToHCL ({{ schema.key }} s) where
   {% for arg in schema.value.arguments %}
     {% if arg.first %}toHCL {{ schema.key }}{..} = TF.block $ catMaybes
-        [{% else %}    ,{% endif %} TF.assign "{{ arg.value.name }}" <$> TF.attribute {{ arg.key }}{% if arg.last %}
+        [{% else %}    ,{% endif %} TF.attribute "{{ arg.value.name }}" {{ arg.key }}{% if arg.last %}
         ]{% endif %}
   {% else %}
     toHCL _ = TF.block []
   {% endfor %}
   {% for field in schema.value.argumentFields %}
 
-instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }} where
-    type {{ field.value.class }}Thread ({{ schema.key }} s) {{ field.value.type }} = s
-
+instance {{ field.value.class }} ({{ schema.key }} s) s {{ field.value.type }} where
     {{ field.value.method }} =
         lens ({{ field.value.label }} :: {{ schema.key }} s -> TF.Attribute s {{ field.value.type }})
             (\s a -> s { {{ field.value.label }} = a } :: {{ schema.key }} s)
@@ -119,16 +118,10 @@ instance {{ field.value.class }} ({{ schema.key }} s) {{ field.value.type }}
 {% endfor %}
 {% for class in argumentClasses %}
 
-class {{ class.value.name }} a b | a -> b where
-    type {{ class.value.name }}Thread a b :: *
+class {{ class.value.name }} a s b | a -> s b where
+    {{ class.value.method }} :: Lens' a (TF.Attribute s b)
 
-    {{ class.value.method }}
-        :: Lens' a (TF.Attribute ({{ class.value.name }}Thread a b) b)
-
-instance {{ class.value.name }} a b => {{ class.value.name}} (TF.{{ type }} p a) b where
-    type {{ class.value.name }}Thread (TF.{{ type }} p a) b =
-         {{ class.value.name }}Thread a b
-
+instance {{ class.value.name }} a s b => {{ class.value.name}} (TF.{{ type }} p a) s b where
     {{ class.value.method }} = TF.configuration . {{ class.value.method }}
 {% endfor %}
 {% for class in attributeClasses %}

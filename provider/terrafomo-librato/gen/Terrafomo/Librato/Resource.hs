@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -89,12 +88,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                  as TF
+import qualified GHC.Base                   as TF
+import qualified Numeric.Natural            as TF
 import qualified Terrafomo.Attribute        as TF
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.IP               as TF
 import qualified Terrafomo.Librato.Provider as TF
 import qualified Terrafomo.Librato.Types    as TF
-import qualified Terrafomo.Meta             as TF (configuration)
+import qualified Terrafomo.Meta             as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Resource         as TF
 import qualified Terrafomo.Resource         as TF
@@ -105,109 +107,81 @@ Provides a Librato Alert resource. This can be used to create and manage
 alerts on Librato.
 -}
 data AlertResource s = AlertResource {
-      _active        :: !(TF.Attribute s "active" Text)
+      _active        :: !(TF.Attribute s Text)
     {- ^ - whether the alert is active (can be triggered). Defaults to true. -}
-    , _attributes    :: !(TF.Attribute s "attributes" Text)
+    , _attributes    :: !(TF.Attribute s Text)
     {- ^ - A hash of additional attribtues for the alert. Attributes documented below. -}
-    , _condition     :: !(TF.Attribute s "condition" Text)
+    , _condition     :: !(TF.Attribute s Text)
     {- ^ - A trigger condition for the alert. Conditions documented below. -}
-    , _description   :: !(TF.Attribute s "description" Text)
+    , _description   :: !(TF.Attribute s Text)
     {- ^ (Required) Description of the alert. -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name          :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the alert. -}
-    , _rearm_seconds :: !(TF.Attribute s "rearm_seconds" Text)
+    , _rearm_seconds :: !(TF.Attribute s Text)
     {- ^ - minimum amount of time between sending alert notifications, in seconds. -}
-    , _services      :: !(TF.Attribute s "services" Text)
+    , _services      :: !(TF.Attribute s Text)
     {- ^ - list of notification service IDs. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AlertResource s) where
     toHCL AlertResource{..} = TF.block $ catMaybes
-        [ TF.attribute _active
-        , TF.attribute _attributes
-        , TF.attribute _condition
-        , TF.attribute _description
-        , TF.attribute _name
-        , TF.attribute _rearm_seconds
-        , TF.attribute _services
+        [ TF.attribute "active" _active
+        , TF.attribute "attributes" _attributes
+        , TF.attribute "condition" _condition
+        , TF.attribute "description" _description
+        , TF.attribute "name" _name
+        , TF.attribute "rearm_seconds" _rearm_seconds
+        , TF.attribute "services" _services
         ]
 
-instance HasActive (AlertResource s) Text where
-    type HasActiveThread (AlertResource s) Text = s
-
+instance HasActive (AlertResource s) s Text where
     active =
-        lens (_active :: AlertResource s -> TF.Attribute s "active" Text)
-             (\s a -> s { _active = a } :: AlertResource s)
+        lens (_active :: AlertResource s -> TF.Attribute s Text)
+            (\s a -> s { _active = a } :: AlertResource s)
 
-instance HasAttributes (AlertResource s) Text where
-    type HasAttributesThread (AlertResource s) Text = s
-
+instance HasAttributes (AlertResource s) s Text where
     attributes =
-        lens (_attributes :: AlertResource s -> TF.Attribute s "attributes" Text)
-             (\s a -> s { _attributes = a } :: AlertResource s)
+        lens (_attributes :: AlertResource s -> TF.Attribute s Text)
+            (\s a -> s { _attributes = a } :: AlertResource s)
 
-instance HasCondition (AlertResource s) Text where
-    type HasConditionThread (AlertResource s) Text = s
-
+instance HasCondition (AlertResource s) s Text where
     condition =
-        lens (_condition :: AlertResource s -> TF.Attribute s "condition" Text)
-             (\s a -> s { _condition = a } :: AlertResource s)
+        lens (_condition :: AlertResource s -> TF.Attribute s Text)
+            (\s a -> s { _condition = a } :: AlertResource s)
 
-instance HasDescription (AlertResource s) Text where
-    type HasDescriptionThread (AlertResource s) Text = s
-
+instance HasDescription (AlertResource s) s Text where
     description =
-        lens (_description :: AlertResource s -> TF.Attribute s "description" Text)
-             (\s a -> s { _description = a } :: AlertResource s)
+        lens (_description :: AlertResource s -> TF.Attribute s Text)
+            (\s a -> s { _description = a } :: AlertResource s)
 
-instance HasName (AlertResource s) Text where
-    type HasNameThread (AlertResource s) Text = s
-
+instance HasName (AlertResource s) s Text where
     name =
-        lens (_name :: AlertResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: AlertResource s)
+        lens (_name :: AlertResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: AlertResource s)
 
-instance HasRearmSeconds (AlertResource s) Text where
-    type HasRearmSecondsThread (AlertResource s) Text = s
-
+instance HasRearmSeconds (AlertResource s) s Text where
     rearmSeconds =
-        lens (_rearm_seconds :: AlertResource s -> TF.Attribute s "rearm_seconds" Text)
-             (\s a -> s { _rearm_seconds = a } :: AlertResource s)
+        lens (_rearm_seconds :: AlertResource s -> TF.Attribute s Text)
+            (\s a -> s { _rearm_seconds = a } :: AlertResource s)
 
-instance HasServices (AlertResource s) Text where
-    type HasServicesThread (AlertResource s) Text = s
-
+instance HasServices (AlertResource s) s Text where
     services =
-        lens (_services :: AlertResource s -> TF.Attribute s "services" Text)
-             (\s a -> s { _services = a } :: AlertResource s)
+        lens (_services :: AlertResource s -> TF.Attribute s Text)
+            (\s a -> s { _services = a } :: AlertResource s)
 
-instance HasComputedActive (AlertResource s) Text where
-    computedActive =
-        to (\x -> TF.Computed (TF.referenceKey x) "active")
+instance HasComputedActive (AlertResource s) Text
 
-instance HasComputedCondition (AlertResource s) Text where
-    computedCondition =
-        to (\x -> TF.Computed (TF.referenceKey x) "condition")
+instance HasComputedCondition (AlertResource s) Text
 
-instance HasComputedDescription (AlertResource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+instance HasComputedDescription (AlertResource s) Text
 
-instance HasComputedId (AlertResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (AlertResource s) Text
 
-instance HasComputedName (AlertResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (AlertResource s) Text
 
-instance HasComputedRearmSeconds (AlertResource s) Text where
-    computedRearmSeconds =
-        to (\x -> TF.Computed (TF.referenceKey x) "rearm_seconds")
+instance HasComputedRearmSeconds (AlertResource s) Text
 
-instance HasComputedServices (AlertResource s) Text where
-    computedServices =
-        to (\x -> TF.Computed (TF.referenceKey x) "services")
+instance HasComputedServices (AlertResource s) Text
 
 alertResource :: TF.Resource TF.Librato (AlertResource s)
 alertResource =
@@ -228,109 +202,81 @@ Provides a Librato Metric resource. This can be used to create and manage
 metrics on Librato.
 -}
 data MetricResource s = MetricResource {
-      _attributes   :: !(TF.Attribute s "attributes" Text)
+      _attributes   :: !(TF.Attribute s Text)
     {- ^ - The attributes hash configures specific components of a metric’s visualization. -}
-    , _composite    :: !(TF.Attribute s "composite" Text)
+    , _composite    :: !(TF.Attribute s Text)
     {- ^ - The definition of the composite metric. -}
-    , _description  :: !(TF.Attribute s "description" Text)
+    , _description  :: !(TF.Attribute s Text)
     {- ^ - Text that can be used to explain precisely what the metric is measuring. -}
-    , _display_name :: !(TF.Attribute s "display_name" Text)
+    , _display_name :: !(TF.Attribute s Text)
     {- ^ - The name which will be used for the metric when viewing the Metrics website. -}
-    , _name         :: !(TF.Attribute s "name" Text)
+    , _name         :: !(TF.Attribute s Text)
     {- ^ (Required) The unique identifier of the metric. -}
-    , _period       :: !(TF.Attribute s "period" Text)
+    , _period       :: !(TF.Attribute s Text)
     {- ^ - Number of seconds that is the standard reporting period of the metric. -}
-    , _type'        :: !(TF.Attribute s "type" Text)
+    , _type'        :: !(TF.Attribute s Text)
     {- ^ (Required) The type of metric to create (gauge, counter, or composite). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (MetricResource s) where
     toHCL MetricResource{..} = TF.block $ catMaybes
-        [ TF.attribute _attributes
-        , TF.attribute _composite
-        , TF.attribute _description
-        , TF.attribute _display_name
-        , TF.attribute _name
-        , TF.attribute _period
-        , TF.attribute _type'
+        [ TF.attribute "attributes" _attributes
+        , TF.attribute "composite" _composite
+        , TF.attribute "description" _description
+        , TF.attribute "display_name" _display_name
+        , TF.attribute "name" _name
+        , TF.attribute "period" _period
+        , TF.attribute "type" _type'
         ]
 
-instance HasAttributes (MetricResource s) Text where
-    type HasAttributesThread (MetricResource s) Text = s
-
+instance HasAttributes (MetricResource s) s Text where
     attributes =
-        lens (_attributes :: MetricResource s -> TF.Attribute s "attributes" Text)
-             (\s a -> s { _attributes = a } :: MetricResource s)
+        lens (_attributes :: MetricResource s -> TF.Attribute s Text)
+            (\s a -> s { _attributes = a } :: MetricResource s)
 
-instance HasComposite (MetricResource s) Text where
-    type HasCompositeThread (MetricResource s) Text = s
-
+instance HasComposite (MetricResource s) s Text where
     composite =
-        lens (_composite :: MetricResource s -> TF.Attribute s "composite" Text)
-             (\s a -> s { _composite = a } :: MetricResource s)
+        lens (_composite :: MetricResource s -> TF.Attribute s Text)
+            (\s a -> s { _composite = a } :: MetricResource s)
 
-instance HasDescription (MetricResource s) Text where
-    type HasDescriptionThread (MetricResource s) Text = s
-
+instance HasDescription (MetricResource s) s Text where
     description =
-        lens (_description :: MetricResource s -> TF.Attribute s "description" Text)
-             (\s a -> s { _description = a } :: MetricResource s)
+        lens (_description :: MetricResource s -> TF.Attribute s Text)
+            (\s a -> s { _description = a } :: MetricResource s)
 
-instance HasDisplayName (MetricResource s) Text where
-    type HasDisplayNameThread (MetricResource s) Text = s
-
+instance HasDisplayName (MetricResource s) s Text where
     displayName =
-        lens (_display_name :: MetricResource s -> TF.Attribute s "display_name" Text)
-             (\s a -> s { _display_name = a } :: MetricResource s)
+        lens (_display_name :: MetricResource s -> TF.Attribute s Text)
+            (\s a -> s { _display_name = a } :: MetricResource s)
 
-instance HasName (MetricResource s) Text where
-    type HasNameThread (MetricResource s) Text = s
-
+instance HasName (MetricResource s) s Text where
     name =
-        lens (_name :: MetricResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: MetricResource s)
+        lens (_name :: MetricResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: MetricResource s)
 
-instance HasPeriod (MetricResource s) Text where
-    type HasPeriodThread (MetricResource s) Text = s
-
+instance HasPeriod (MetricResource s) s Text where
     period =
-        lens (_period :: MetricResource s -> TF.Attribute s "period" Text)
-             (\s a -> s { _period = a } :: MetricResource s)
+        lens (_period :: MetricResource s -> TF.Attribute s Text)
+            (\s a -> s { _period = a } :: MetricResource s)
 
-instance HasType' (MetricResource s) Text where
-    type HasType'Thread (MetricResource s) Text = s
-
+instance HasType' (MetricResource s) s Text where
     type' =
-        lens (_type' :: MetricResource s -> TF.Attribute s "type" Text)
-             (\s a -> s { _type' = a } :: MetricResource s)
+        lens (_type' :: MetricResource s -> TF.Attribute s Text)
+            (\s a -> s { _type' = a } :: MetricResource s)
 
-instance HasComputedComposite (MetricResource s) Text where
-    computedComposite =
-        to (\x -> TF.Computed (TF.referenceKey x) "composite")
+instance HasComputedComposite (MetricResource s) Text
 
-instance HasComputedDescription (MetricResource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+instance HasComputedDescription (MetricResource s) Text
 
-instance HasComputedDisplayName (MetricResource s) Text where
-    computedDisplayName =
-        to (\x -> TF.Computed (TF.referenceKey x) "display_name")
+instance HasComputedDisplayName (MetricResource s) Text
 
-instance HasComputedName (MetricResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (MetricResource s) Text
 
-instance HasComputedPeriod (MetricResource s) Text where
-    computedPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "period")
+instance HasComputedPeriod (MetricResource s) Text
 
-instance HasComputedSourceLag (MetricResource s) Text where
-    computedSourceLag =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_lag")
+instance HasComputedSourceLag (MetricResource s) Text
 
-instance HasComputedType' (MetricResource s) Text where
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+instance HasComputedType' (MetricResource s) Text
 
 metricResource :: TF.Resource TF.Librato (MetricResource s)
 metricResource =
@@ -351,57 +297,43 @@ Provides a Librato Service resource. This can be used to create and manage
 notification services on Librato.
 -}
 data ServiceResource s = ServiceResource {
-      _settings :: !(TF.Attribute s "settings" Text)
+      _settings :: !(TF.Attribute s Text)
     {- ^ (Required) a JSON hash of settings specific to the alert type. -}
-    , _title    :: !(TF.Attribute s "title" Text)
+    , _title    :: !(TF.Attribute s Text)
     {- ^ (Required) The alert title. -}
-    , _type'    :: !(TF.Attribute s "type" Text)
+    , _type'    :: !(TF.Attribute s Text)
     {- ^ (Required) The type of notificaion. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServiceResource s) where
     toHCL ServiceResource{..} = TF.block $ catMaybes
-        [ TF.attribute _settings
-        , TF.attribute _title
-        , TF.attribute _type'
+        [ TF.attribute "settings" _settings
+        , TF.attribute "title" _title
+        , TF.attribute "type" _type'
         ]
 
-instance HasSettings (ServiceResource s) Text where
-    type HasSettingsThread (ServiceResource s) Text = s
-
+instance HasSettings (ServiceResource s) s Text where
     settings =
-        lens (_settings :: ServiceResource s -> TF.Attribute s "settings" Text)
-             (\s a -> s { _settings = a } :: ServiceResource s)
+        lens (_settings :: ServiceResource s -> TF.Attribute s Text)
+            (\s a -> s { _settings = a } :: ServiceResource s)
 
-instance HasTitle (ServiceResource s) Text where
-    type HasTitleThread (ServiceResource s) Text = s
-
+instance HasTitle (ServiceResource s) s Text where
     title =
-        lens (_title :: ServiceResource s -> TF.Attribute s "title" Text)
-             (\s a -> s { _title = a } :: ServiceResource s)
+        lens (_title :: ServiceResource s -> TF.Attribute s Text)
+            (\s a -> s { _title = a } :: ServiceResource s)
 
-instance HasType' (ServiceResource s) Text where
-    type HasType'Thread (ServiceResource s) Text = s
-
+instance HasType' (ServiceResource s) s Text where
     type' =
-        lens (_type' :: ServiceResource s -> TF.Attribute s "type" Text)
-             (\s a -> s { _type' = a } :: ServiceResource s)
+        lens (_type' :: ServiceResource s -> TF.Attribute s Text)
+            (\s a -> s { _type' = a } :: ServiceResource s)
 
-instance HasComputedId (ServiceResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (ServiceResource s) Text
 
-instance HasComputedSettings (ServiceResource s) Text where
-    computedSettings =
-        to (\x -> TF.Computed (TF.referenceKey x) "settings")
+instance HasComputedSettings (ServiceResource s) Text
 
-instance HasComputedTitle (ServiceResource s) Text where
-    computedTitle =
-        to (\x -> TF.Computed (TF.referenceKey x) "title")
+instance HasComputedTitle (ServiceResource s) Text
 
-instance HasComputedType' (ServiceResource s) Text where
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+instance HasComputedType' (ServiceResource s) Text
 
 serviceResource :: TF.Resource TF.Librato (ServiceResource s)
 serviceResource =
@@ -418,103 +350,81 @@ Provides a Librato Space Chart resource. This can be used to create and
 manage charts in Librato Spaces.
 -}
 data SpaceChartResource s = SpaceChartResource {
-      _label         :: !(TF.Attribute s "label" Text)
+      _label         :: !(TF.Attribute s Text)
     {- ^ (Optional) The Y-axis label. -}
-    , _max           :: !(TF.Attribute s "max" Text)
+    , _max           :: !(TF.Attribute s Text)
     {- ^ (Optional) The maximum display value of the chart's Y-axis. -}
-    , _min           :: !(TF.Attribute s "min" Text)
+    , _min           :: !(TF.Attribute s Text)
     {- ^ (Optional) The minimum display value of the chart's Y-axis. -}
-    , _name          :: !(TF.Attribute s "name" Text)
+    , _name          :: !(TF.Attribute s Text)
     {- ^ (Required) The title of the chart when it is displayed. -}
-    , _related_space :: !(TF.Attribute s "related_space" Text)
+    , _related_space :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of another space to which this chart is related. -}
-    , _space_id      :: !(TF.Attribute s "space_id" Text)
+    , _space_id      :: !(TF.Attribute s Text)
     {- ^ (Required) The ID of the space this chart should be in. -}
-    , _stream        :: !(TF.Attribute s "stream" Text)
+    , _stream        :: !(TF.Attribute s Text)
     {- ^ (Optional) Nested block describing a metric to use for data in the chart. The structure of this block is described below. -}
-    , _type'         :: !(TF.Attribute s "type" Text)
+    , _type'         :: !(TF.Attribute s Text)
     {- ^ (Optional) Indicates the type of chart. Must be one of line or stacked (default to line). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SpaceChartResource s) where
     toHCL SpaceChartResource{..} = TF.block $ catMaybes
-        [ TF.attribute _label
-        , TF.attribute _max
-        , TF.attribute _min
-        , TF.attribute _name
-        , TF.attribute _related_space
-        , TF.attribute _space_id
-        , TF.attribute _stream
-        , TF.attribute _type'
+        [ TF.attribute "label" _label
+        , TF.attribute "max" _max
+        , TF.attribute "min" _min
+        , TF.attribute "name" _name
+        , TF.attribute "related_space" _related_space
+        , TF.attribute "space_id" _space_id
+        , TF.attribute "stream" _stream
+        , TF.attribute "type" _type'
         ]
 
-instance HasLabel (SpaceChartResource s) Text where
-    type HasLabelThread (SpaceChartResource s) Text = s
-
+instance HasLabel (SpaceChartResource s) s Text where
     label =
-        lens (_label :: SpaceChartResource s -> TF.Attribute s "label" Text)
-             (\s a -> s { _label = a } :: SpaceChartResource s)
+        lens (_label :: SpaceChartResource s -> TF.Attribute s Text)
+            (\s a -> s { _label = a } :: SpaceChartResource s)
 
-instance HasMax (SpaceChartResource s) Text where
-    type HasMaxThread (SpaceChartResource s) Text = s
-
+instance HasMax (SpaceChartResource s) s Text where
     max =
-        lens (_max :: SpaceChartResource s -> TF.Attribute s "max" Text)
-             (\s a -> s { _max = a } :: SpaceChartResource s)
+        lens (_max :: SpaceChartResource s -> TF.Attribute s Text)
+            (\s a -> s { _max = a } :: SpaceChartResource s)
 
-instance HasMin (SpaceChartResource s) Text where
-    type HasMinThread (SpaceChartResource s) Text = s
-
+instance HasMin (SpaceChartResource s) s Text where
     min =
-        lens (_min :: SpaceChartResource s -> TF.Attribute s "min" Text)
-             (\s a -> s { _min = a } :: SpaceChartResource s)
+        lens (_min :: SpaceChartResource s -> TF.Attribute s Text)
+            (\s a -> s { _min = a } :: SpaceChartResource s)
 
-instance HasName (SpaceChartResource s) Text where
-    type HasNameThread (SpaceChartResource s) Text = s
-
+instance HasName (SpaceChartResource s) s Text where
     name =
-        lens (_name :: SpaceChartResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: SpaceChartResource s)
+        lens (_name :: SpaceChartResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SpaceChartResource s)
 
-instance HasRelatedSpace (SpaceChartResource s) Text where
-    type HasRelatedSpaceThread (SpaceChartResource s) Text = s
-
+instance HasRelatedSpace (SpaceChartResource s) s Text where
     relatedSpace =
-        lens (_related_space :: SpaceChartResource s -> TF.Attribute s "related_space" Text)
-             (\s a -> s { _related_space = a } :: SpaceChartResource s)
+        lens (_related_space :: SpaceChartResource s -> TF.Attribute s Text)
+            (\s a -> s { _related_space = a } :: SpaceChartResource s)
 
-instance HasSpaceId (SpaceChartResource s) Text where
-    type HasSpaceIdThread (SpaceChartResource s) Text = s
-
+instance HasSpaceId (SpaceChartResource s) s Text where
     spaceId =
-        lens (_space_id :: SpaceChartResource s -> TF.Attribute s "space_id" Text)
-             (\s a -> s { _space_id = a } :: SpaceChartResource s)
+        lens (_space_id :: SpaceChartResource s -> TF.Attribute s Text)
+            (\s a -> s { _space_id = a } :: SpaceChartResource s)
 
-instance HasStream (SpaceChartResource s) Text where
-    type HasStreamThread (SpaceChartResource s) Text = s
-
+instance HasStream (SpaceChartResource s) s Text where
     stream =
-        lens (_stream :: SpaceChartResource s -> TF.Attribute s "stream" Text)
-             (\s a -> s { _stream = a } :: SpaceChartResource s)
+        lens (_stream :: SpaceChartResource s -> TF.Attribute s Text)
+            (\s a -> s { _stream = a } :: SpaceChartResource s)
 
-instance HasType' (SpaceChartResource s) Text where
-    type HasType'Thread (SpaceChartResource s) Text = s
-
+instance HasType' (SpaceChartResource s) s Text where
     type' =
-        lens (_type' :: SpaceChartResource s -> TF.Attribute s "type" Text)
-             (\s a -> s { _type' = a } :: SpaceChartResource s)
+        lens (_type' :: SpaceChartResource s -> TF.Attribute s Text)
+            (\s a -> s { _type' = a } :: SpaceChartResource s)
 
-instance HasComputedId (SpaceChartResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (SpaceChartResource s) Text
 
-instance HasComputedSpaceId (SpaceChartResource s) Text where
-    computedSpaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "space_id")
+instance HasComputedSpaceId (SpaceChartResource s) Text
 
-instance HasComputedTitle (SpaceChartResource s) Text where
-    computedTitle =
-        to (\x -> TF.Computed (TF.referenceKey x) "title")
+instance HasComputedTitle (SpaceChartResource s) Text
 
 spaceChartResource :: TF.Resource TF.Librato (SpaceChartResource s)
 spaceChartResource =
@@ -536,29 +446,23 @@ Provides a Librato Space resource. This can be used to create and manage
 spaces on Librato.
 -}
 data SpaceResource s = SpaceResource {
-      _name :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the space. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SpaceResource s) where
     toHCL SpaceResource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (SpaceResource s) Text where
-    type HasNameThread (SpaceResource s) Text = s
-
+instance HasName (SpaceResource s) s Text where
     name =
-        lens (_name :: SpaceResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: SpaceResource s)
+        lens (_name :: SpaceResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: SpaceResource s)
 
-instance HasComputedId (SpaceResource s) Text where
-    computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+instance HasComputedId (SpaceResource s) Text
 
-instance HasComputedName (SpaceResource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (SpaceResource s) Text
 
 spaceResource :: TF.Resource TF.Librato (SpaceResource s)
 spaceResource =
@@ -567,256 +471,206 @@ spaceResource =
               _name = TF.Nil
             }
 
-class HasActive a b | a -> b where
-    type HasActiveThread a b :: *
+class HasActive a s b | a -> s b where
+    active :: Lens' a (TF.Attribute s b)
 
-    active :: Lens' a (TF.Attribute (HasActiveThread a b) "active" b)
-
-instance HasActive a b => HasActive (TF.Resource p a) b where
-    type HasActiveThread (TF.Resource p a) b =
-         HasActiveThread a b
-
+instance HasActive a s b => HasActive (TF.Resource p a) s b where
     active = TF.configuration . active
 
-class HasAttributes a b | a -> b where
-    type HasAttributesThread a b :: *
+class HasAttributes a s b | a -> s b where
+    attributes :: Lens' a (TF.Attribute s b)
 
-    attributes :: Lens' a (TF.Attribute (HasAttributesThread a b) "attributes" b)
-
-instance HasAttributes a b => HasAttributes (TF.Resource p a) b where
-    type HasAttributesThread (TF.Resource p a) b =
-         HasAttributesThread a b
-
+instance HasAttributes a s b => HasAttributes (TF.Resource p a) s b where
     attributes = TF.configuration . attributes
 
-class HasComposite a b | a -> b where
-    type HasCompositeThread a b :: *
+class HasComposite a s b | a -> s b where
+    composite :: Lens' a (TF.Attribute s b)
 
-    composite :: Lens' a (TF.Attribute (HasCompositeThread a b) "composite" b)
-
-instance HasComposite a b => HasComposite (TF.Resource p a) b where
-    type HasCompositeThread (TF.Resource p a) b =
-         HasCompositeThread a b
-
+instance HasComposite a s b => HasComposite (TF.Resource p a) s b where
     composite = TF.configuration . composite
 
-class HasCondition a b | a -> b where
-    type HasConditionThread a b :: *
+class HasCondition a s b | a -> s b where
+    condition :: Lens' a (TF.Attribute s b)
 
-    condition :: Lens' a (TF.Attribute (HasConditionThread a b) "condition" b)
-
-instance HasCondition a b => HasCondition (TF.Resource p a) b where
-    type HasConditionThread (TF.Resource p a) b =
-         HasConditionThread a b
-
+instance HasCondition a s b => HasCondition (TF.Resource p a) s b where
     condition = TF.configuration . condition
 
-class HasDescription a b | a -> b where
-    type HasDescriptionThread a b :: *
+class HasDescription a s b | a -> s b where
+    description :: Lens' a (TF.Attribute s b)
 
-    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
-
-instance HasDescription a b => HasDescription (TF.Resource p a) b where
-    type HasDescriptionThread (TF.Resource p a) b =
-         HasDescriptionThread a b
-
+instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
     description = TF.configuration . description
 
-class HasDisplayName a b | a -> b where
-    type HasDisplayNameThread a b :: *
+class HasDisplayName a s b | a -> s b where
+    displayName :: Lens' a (TF.Attribute s b)
 
-    displayName :: Lens' a (TF.Attribute (HasDisplayNameThread a b) "display_name" b)
-
-instance HasDisplayName a b => HasDisplayName (TF.Resource p a) b where
-    type HasDisplayNameThread (TF.Resource p a) b =
-         HasDisplayNameThread a b
-
+instance HasDisplayName a s b => HasDisplayName (TF.Resource p a) s b where
     displayName = TF.configuration . displayName
 
-class HasLabel a b | a -> b where
-    type HasLabelThread a b :: *
+class HasLabel a s b | a -> s b where
+    label :: Lens' a (TF.Attribute s b)
 
-    label :: Lens' a (TF.Attribute (HasLabelThread a b) "label" b)
-
-instance HasLabel a b => HasLabel (TF.Resource p a) b where
-    type HasLabelThread (TF.Resource p a) b =
-         HasLabelThread a b
-
+instance HasLabel a s b => HasLabel (TF.Resource p a) s b where
     label = TF.configuration . label
 
-class HasMax a b | a -> b where
-    type HasMaxThread a b :: *
+class HasMax a s b | a -> s b where
+    max :: Lens' a (TF.Attribute s b)
 
-    max :: Lens' a (TF.Attribute (HasMaxThread a b) "max" b)
-
-instance HasMax a b => HasMax (TF.Resource p a) b where
-    type HasMaxThread (TF.Resource p a) b =
-         HasMaxThread a b
-
+instance HasMax a s b => HasMax (TF.Resource p a) s b where
     max = TF.configuration . max
 
-class HasMin a b | a -> b where
-    type HasMinThread a b :: *
+class HasMin a s b | a -> s b where
+    min :: Lens' a (TF.Attribute s b)
 
-    min :: Lens' a (TF.Attribute (HasMinThread a b) "min" b)
-
-instance HasMin a b => HasMin (TF.Resource p a) b where
-    type HasMinThread (TF.Resource p a) b =
-         HasMinThread a b
-
+instance HasMin a s b => HasMin (TF.Resource p a) s b where
     min = TF.configuration . min
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.Resource p a) b where
-    type HasNameThread (TF.Resource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.Resource p a) s b where
     name = TF.configuration . name
 
-class HasPeriod a b | a -> b where
-    type HasPeriodThread a b :: *
+class HasPeriod a s b | a -> s b where
+    period :: Lens' a (TF.Attribute s b)
 
-    period :: Lens' a (TF.Attribute (HasPeriodThread a b) "period" b)
-
-instance HasPeriod a b => HasPeriod (TF.Resource p a) b where
-    type HasPeriodThread (TF.Resource p a) b =
-         HasPeriodThread a b
-
+instance HasPeriod a s b => HasPeriod (TF.Resource p a) s b where
     period = TF.configuration . period
 
-class HasRearmSeconds a b | a -> b where
-    type HasRearmSecondsThread a b :: *
+class HasRearmSeconds a s b | a -> s b where
+    rearmSeconds :: Lens' a (TF.Attribute s b)
 
-    rearmSeconds :: Lens' a (TF.Attribute (HasRearmSecondsThread a b) "rearm_seconds" b)
-
-instance HasRearmSeconds a b => HasRearmSeconds (TF.Resource p a) b where
-    type HasRearmSecondsThread (TF.Resource p a) b =
-         HasRearmSecondsThread a b
-
+instance HasRearmSeconds a s b => HasRearmSeconds (TF.Resource p a) s b where
     rearmSeconds = TF.configuration . rearmSeconds
 
-class HasRelatedSpace a b | a -> b where
-    type HasRelatedSpaceThread a b :: *
+class HasRelatedSpace a s b | a -> s b where
+    relatedSpace :: Lens' a (TF.Attribute s b)
 
-    relatedSpace :: Lens' a (TF.Attribute (HasRelatedSpaceThread a b) "related_space" b)
-
-instance HasRelatedSpace a b => HasRelatedSpace (TF.Resource p a) b where
-    type HasRelatedSpaceThread (TF.Resource p a) b =
-         HasRelatedSpaceThread a b
-
+instance HasRelatedSpace a s b => HasRelatedSpace (TF.Resource p a) s b where
     relatedSpace = TF.configuration . relatedSpace
 
-class HasServices a b | a -> b where
-    type HasServicesThread a b :: *
+class HasServices a s b | a -> s b where
+    services :: Lens' a (TF.Attribute s b)
 
-    services :: Lens' a (TF.Attribute (HasServicesThread a b) "services" b)
-
-instance HasServices a b => HasServices (TF.Resource p a) b where
-    type HasServicesThread (TF.Resource p a) b =
-         HasServicesThread a b
-
+instance HasServices a s b => HasServices (TF.Resource p a) s b where
     services = TF.configuration . services
 
-class HasSettings a b | a -> b where
-    type HasSettingsThread a b :: *
+class HasSettings a s b | a -> s b where
+    settings :: Lens' a (TF.Attribute s b)
 
-    settings :: Lens' a (TF.Attribute (HasSettingsThread a b) "settings" b)
-
-instance HasSettings a b => HasSettings (TF.Resource p a) b where
-    type HasSettingsThread (TF.Resource p a) b =
-         HasSettingsThread a b
-
+instance HasSettings a s b => HasSettings (TF.Resource p a) s b where
     settings = TF.configuration . settings
 
-class HasSpaceId a b | a -> b where
-    type HasSpaceIdThread a b :: *
+class HasSpaceId a s b | a -> s b where
+    spaceId :: Lens' a (TF.Attribute s b)
 
-    spaceId :: Lens' a (TF.Attribute (HasSpaceIdThread a b) "space_id" b)
-
-instance HasSpaceId a b => HasSpaceId (TF.Resource p a) b where
-    type HasSpaceIdThread (TF.Resource p a) b =
-         HasSpaceIdThread a b
-
+instance HasSpaceId a s b => HasSpaceId (TF.Resource p a) s b where
     spaceId = TF.configuration . spaceId
 
-class HasStream a b | a -> b where
-    type HasStreamThread a b :: *
+class HasStream a s b | a -> s b where
+    stream :: Lens' a (TF.Attribute s b)
 
-    stream :: Lens' a (TF.Attribute (HasStreamThread a b) "stream" b)
-
-instance HasStream a b => HasStream (TF.Resource p a) b where
-    type HasStreamThread (TF.Resource p a) b =
-         HasStreamThread a b
-
+instance HasStream a s b => HasStream (TF.Resource p a) s b where
     stream = TF.configuration . stream
 
-class HasTitle a b | a -> b where
-    type HasTitleThread a b :: *
+class HasTitle a s b | a -> s b where
+    title :: Lens' a (TF.Attribute s b)
 
-    title :: Lens' a (TF.Attribute (HasTitleThread a b) "title" b)
-
-instance HasTitle a b => HasTitle (TF.Resource p a) b where
-    type HasTitleThread (TF.Resource p a) b =
-         HasTitleThread a b
-
+instance HasTitle a s b => HasTitle (TF.Resource p a) s b where
     title = TF.configuration . title
 
-class HasType' a b | a -> b where
-    type HasType'Thread a b :: *
+class HasType' a s b | a -> s b where
+    type' :: Lens' a (TF.Attribute s b)
 
-    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
-
-instance HasType' a b => HasType' (TF.Resource p a) b where
-    type HasType'Thread (TF.Resource p a) b =
-         HasType'Thread a b
-
+instance HasType' a s b => HasType' (TF.Resource p a) s b where
     type' = TF.configuration . type'
 
 class HasComputedActive a b | a -> b where
-    computedActive :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedActive
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedActive =
+        to (\x -> TF.Computed (TF.referenceKey x) "active")
 
 class HasComputedComposite a b | a -> b where
-    computedComposite :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedComposite
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedComposite =
+        to (\x -> TF.Computed (TF.referenceKey x) "composite")
 
 class HasComputedCondition a b | a -> b where
-    computedCondition :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedCondition
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedCondition =
+        to (\x -> TF.Computed (TF.referenceKey x) "condition")
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedDescription
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDescription =
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
 class HasComputedDisplayName a b | a -> b where
-    computedDisplayName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedDisplayName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDisplayName =
+        to (\x -> TF.Computed (TF.referenceKey x) "display_name")
 
 class HasComputedId a b | a -> b where
-    computedId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedId =
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
 class HasComputedName a b | a -> b where
-    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedName =
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
 class HasComputedPeriod a b | a -> b where
-    computedPeriod :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedPeriod
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPeriod =
+        to (\x -> TF.Computed (TF.referenceKey x) "period")
 
 class HasComputedRearmSeconds a b | a -> b where
-    computedRearmSeconds :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedRearmSeconds
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedRearmSeconds =
+        to (\x -> TF.Computed (TF.referenceKey x) "rearm_seconds")
 
 class HasComputedServices a b | a -> b where
-    computedServices :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedServices
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedServices =
+        to (\x -> TF.Computed (TF.referenceKey x) "services")
 
 class HasComputedSettings a b | a -> b where
-    computedSettings :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedSettings
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSettings =
+        to (\x -> TF.Computed (TF.referenceKey x) "settings")
 
 class HasComputedSourceLag a b | a -> b where
-    computedSourceLag :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedSourceLag
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSourceLag =
+        to (\x -> TF.Computed (TF.referenceKey x) "source_lag")
 
 class HasComputedSpaceId a b | a -> b where
-    computedSpaceId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedSpaceId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSpaceId =
+        to (\x -> TF.Computed (TF.referenceKey x) "space_id")
 
 class HasComputedTitle a b | a -> b where
-    computedTitle :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedTitle
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedTitle =
+        to (\x -> TF.Computed (TF.referenceKey x) "title")
 
 class HasComputedType' a b | a -> b where
-    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedType'
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedType' =
+        to (\x -> TF.Computed (TF.referenceKey x) "type")

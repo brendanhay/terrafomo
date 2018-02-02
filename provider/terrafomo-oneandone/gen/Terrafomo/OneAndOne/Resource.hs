@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -89,12 +88,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word as TF
+import qualified GHC.Base as TF
+import qualified Numeric.Natural as TF
 import qualified Terrafomo.OneAndOne.Types as TF
 import qualified Terrafomo.OneAndOne.Provider as TF
 import qualified Terrafomo.Resource as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.IP as TF
-import qualified Terrafomo.Meta as TF (configuration)
+import qualified Terrafomo.Meta as TF
 import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Resource as TF
 import qualified Terrafomo.Attribute as TF
@@ -104,41 +106,35 @@ import qualified Terrafomo.Attribute as TF
 Fetches a predefined instance type for 1&1 servers
 -}
 data InstanceSizeResource s = InstanceSizeResource {
-      _name :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ -(Optional) Number of cores per processor -}
-    , _ram :: !(TF.Attribute s "ram" Text)
+    , _ram :: !(TF.Attribute s Text)
     {- ^ (Optional) Size of ram in GB -}
-    , _vcores :: !(TF.Attribute s "vcores" Text)
+    , _vcores :: !(TF.Attribute s Text)
     {- ^ (Optional)  Number of vcores -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (InstanceSizeResource s) where
     toHCL InstanceSizeResource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
-        , TF.attribute _ram
-        , TF.attribute _vcores
+        [ TF.attribute "name" _name
+        , TF.attribute "ram" _ram
+        , TF.attribute "vcores" _vcores
         ]
 
-instance HasName (InstanceSizeResource s) Text where
-    type HasNameThread (InstanceSizeResource s) Text = s
-
+instance HasName (InstanceSizeResource s) s Text where
     name =
-        lens (_name :: InstanceSizeResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: InstanceSizeResource s)
+        lens (_name :: InstanceSizeResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: InstanceSizeResource s)
 
-instance HasRam (InstanceSizeResource s) Text where
-    type HasRamThread (InstanceSizeResource s) Text = s
-
+instance HasRam (InstanceSizeResource s) s Text where
     ram =
-        lens (_ram :: InstanceSizeResource s -> TF.Attribute s "ram" Text)
-             (\s a -> s { _ram = a } :: InstanceSizeResource s)
+        lens (_ram :: InstanceSizeResource s -> TF.Attribute s Text)
+            (\s a -> s { _ram = a } :: InstanceSizeResource s)
 
-instance HasVcores (InstanceSizeResource s) Text where
-    type HasVcoresThread (InstanceSizeResource s) Text = s
-
+instance HasVcores (InstanceSizeResource s) s Text where
     vcores =
-        lens (_vcores :: InstanceSizeResource s -> TF.Attribute s "vcores" Text)
-             (\s a -> s { _vcores = a } :: InstanceSizeResource s)
+        lens (_vcores :: InstanceSizeResource s -> TF.Attribute s Text)
+            (\s a -> s { _vcores = a } :: InstanceSizeResource s)
 
 instanceSizeResource :: TF.Resource TF.OneAndOne (InstanceSizeResource s)
 instanceSizeResource =
@@ -154,51 +150,43 @@ instanceSizeResource =
 Manages a Public IP on 1&1
 -}
 data IpResource s = IpResource {
-      _datacenter :: !(TF.Attribute s "datacenter" Text)
+      _datacenter :: !(TF.Attribute s Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
-    , _ip_address :: !(TF.Attribute s "ip_address" Text)
+    , _ip_address :: !(TF.Attribute s Text)
     {- ^ - (Computed) The IP address. -}
-    , _ip_type :: !(TF.Attribute s "ip_type" Text)
+    , _ip_type :: !(TF.Attribute s Text)
     {- ^ (Required) IP type. Can be @IPV4@ or @IPV6@ -}
-    , _reverse_dns :: !(TF.Attribute s "reverse_dns" Text)
+    , _reverse_dns :: !(TF.Attribute s Text)
     {- ^ (Optional) -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IpResource s) where
     toHCL IpResource{..} = TF.block $ catMaybes
-        [ TF.attribute _datacenter
-        , TF.attribute _ip_address
-        , TF.attribute _ip_type
-        , TF.attribute _reverse_dns
+        [ TF.attribute "datacenter" _datacenter
+        , TF.attribute "ip_address" _ip_address
+        , TF.attribute "ip_type" _ip_type
+        , TF.attribute "reverse_dns" _reverse_dns
         ]
 
-instance HasDatacenter (IpResource s) Text where
-    type HasDatacenterThread (IpResource s) Text = s
-
+instance HasDatacenter (IpResource s) s Text where
     datacenter =
-        lens (_datacenter :: IpResource s -> TF.Attribute s "datacenter" Text)
-             (\s a -> s { _datacenter = a } :: IpResource s)
+        lens (_datacenter :: IpResource s -> TF.Attribute s Text)
+            (\s a -> s { _datacenter = a } :: IpResource s)
 
-instance HasIpAddress (IpResource s) Text where
-    type HasIpAddressThread (IpResource s) Text = s
-
+instance HasIpAddress (IpResource s) s Text where
     ipAddress =
-        lens (_ip_address :: IpResource s -> TF.Attribute s "ip_address" Text)
-             (\s a -> s { _ip_address = a } :: IpResource s)
+        lens (_ip_address :: IpResource s -> TF.Attribute s Text)
+            (\s a -> s { _ip_address = a } :: IpResource s)
 
-instance HasIpType (IpResource s) Text where
-    type HasIpTypeThread (IpResource s) Text = s
-
+instance HasIpType (IpResource s) s Text where
     ipType =
-        lens (_ip_type :: IpResource s -> TF.Attribute s "ip_type" Text)
-             (\s a -> s { _ip_type = a } :: IpResource s)
+        lens (_ip_type :: IpResource s -> TF.Attribute s Text)
+            (\s a -> s { _ip_type = a } :: IpResource s)
 
-instance HasReverseDns (IpResource s) Text where
-    type HasReverseDnsThread (IpResource s) Text = s
-
+instance HasReverseDns (IpResource s) s Text where
     reverseDns =
-        lens (_reverse_dns :: IpResource s -> TF.Attribute s "reverse_dns" Text)
-             (\s a -> s { _reverse_dns = a } :: IpResource s)
+        lens (_reverse_dns :: IpResource s -> TF.Attribute s Text)
+            (\s a -> s { _reverse_dns = a } :: IpResource s)
 
 ipResource :: TF.Resource TF.OneAndOne (IpResource s)
 ipResource =
@@ -215,61 +203,51 @@ ipResource =
 Manages a Shared Storage on 1&1
 -}
 data ServerResource s = ServerResource {
-      _datacenter :: !(TF.Attribute s "datacenter" Text)
+      _datacenter :: !(TF.Attribute s Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ -}
-    , _description :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s Text)
     {- ^ (Optional) Description for the shared storage -}
-    , _name :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the storage -}
-    , _size :: !(TF.Attribute s "size" Text)
+    , _size :: !(TF.Attribute s Text)
     {- ^ (Required) Size of the shared storage -}
-    , _storage_servers :: !(TF.Attribute s "storage_servers" Text)
+    , _storage_servers :: !(TF.Attribute s Text)
     {- ^ (Optional) List of servers that will have access to the stored storage -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServerResource s) where
     toHCL ServerResource{..} = TF.block $ catMaybes
-        [ TF.attribute _datacenter
-        , TF.attribute _description
-        , TF.attribute _name
-        , TF.attribute _size
-        , TF.attribute _storage_servers
+        [ TF.attribute "datacenter" _datacenter
+        , TF.attribute "description" _description
+        , TF.attribute "name" _name
+        , TF.attribute "size" _size
+        , TF.attribute "storage_servers" _storage_servers
         ]
 
-instance HasDatacenter (ServerResource s) Text where
-    type HasDatacenterThread (ServerResource s) Text = s
-
+instance HasDatacenter (ServerResource s) s Text where
     datacenter =
-        lens (_datacenter :: ServerResource s -> TF.Attribute s "datacenter" Text)
-             (\s a -> s { _datacenter = a } :: ServerResource s)
+        lens (_datacenter :: ServerResource s -> TF.Attribute s Text)
+            (\s a -> s { _datacenter = a } :: ServerResource s)
 
-instance HasDescription (ServerResource s) Text where
-    type HasDescriptionThread (ServerResource s) Text = s
-
+instance HasDescription (ServerResource s) s Text where
     description =
-        lens (_description :: ServerResource s -> TF.Attribute s "description" Text)
-             (\s a -> s { _description = a } :: ServerResource s)
+        lens (_description :: ServerResource s -> TF.Attribute s Text)
+            (\s a -> s { _description = a } :: ServerResource s)
 
-instance HasName (ServerResource s) Text where
-    type HasNameThread (ServerResource s) Text = s
-
+instance HasName (ServerResource s) s Text where
     name =
-        lens (_name :: ServerResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: ServerResource s)
+        lens (_name :: ServerResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ServerResource s)
 
-instance HasSize (ServerResource s) Text where
-    type HasSizeThread (ServerResource s) Text = s
-
+instance HasSize (ServerResource s) s Text where
     size =
-        lens (_size :: ServerResource s -> TF.Attribute s "size" Text)
-             (\s a -> s { _size = a } :: ServerResource s)
+        lens (_size :: ServerResource s -> TF.Attribute s Text)
+            (\s a -> s { _size = a } :: ServerResource s)
 
-instance HasStorageServers (ServerResource s) Text where
-    type HasStorageServersThread (ServerResource s) Text = s
-
+instance HasStorageServers (ServerResource s) s Text where
     storageServers =
-        lens (_storage_servers :: ServerResource s -> TF.Attribute s "storage_servers" Text)
-             (\s a -> s { _storage_servers = a } :: ServerResource s)
+        lens (_storage_servers :: ServerResource s -> TF.Attribute s Text)
+            (\s a -> s { _storage_servers = a } :: ServerResource s)
 
 serverResource :: TF.Resource TF.OneAndOne (ServerResource s)
 serverResource =
@@ -287,61 +265,51 @@ serverResource =
 Manages a VPN on 1&1
 -}
 data VpnResource s = VpnResource {
-      _datacenter :: !(TF.Attribute s "datacenter" Text)
+      _datacenter :: !(TF.Attribute s Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
-    , _description :: !(TF.Attribute s "description" Text)
+    , _description :: !(TF.Attribute s Text)
     {- ^ (Optional) -}
-    , _download_path :: !(TF.Attribute s "download_path" Text)
+    , _download_path :: !(TF.Attribute s Text)
     {- ^ (Optional) -}
-    , _file_name :: !(TF.Attribute s "file_name" Text)
+    , _file_name :: !(TF.Attribute s Text)
     {- ^ (Optional) -}
-    , _name :: !(TF.Attribute s "name" Text)
+    , _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the VPN -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VpnResource s) where
     toHCL VpnResource{..} = TF.block $ catMaybes
-        [ TF.attribute _datacenter
-        , TF.attribute _description
-        , TF.attribute _download_path
-        , TF.attribute _file_name
-        , TF.attribute _name
+        [ TF.attribute "datacenter" _datacenter
+        , TF.attribute "description" _description
+        , TF.attribute "download_path" _download_path
+        , TF.attribute "file_name" _file_name
+        , TF.attribute "name" _name
         ]
 
-instance HasDatacenter (VpnResource s) Text where
-    type HasDatacenterThread (VpnResource s) Text = s
-
+instance HasDatacenter (VpnResource s) s Text where
     datacenter =
-        lens (_datacenter :: VpnResource s -> TF.Attribute s "datacenter" Text)
-             (\s a -> s { _datacenter = a } :: VpnResource s)
+        lens (_datacenter :: VpnResource s -> TF.Attribute s Text)
+            (\s a -> s { _datacenter = a } :: VpnResource s)
 
-instance HasDescription (VpnResource s) Text where
-    type HasDescriptionThread (VpnResource s) Text = s
-
+instance HasDescription (VpnResource s) s Text where
     description =
-        lens (_description :: VpnResource s -> TF.Attribute s "description" Text)
-             (\s a -> s { _description = a } :: VpnResource s)
+        lens (_description :: VpnResource s -> TF.Attribute s Text)
+            (\s a -> s { _description = a } :: VpnResource s)
 
-instance HasDownloadPath (VpnResource s) Text where
-    type HasDownloadPathThread (VpnResource s) Text = s
-
+instance HasDownloadPath (VpnResource s) s Text where
     downloadPath =
-        lens (_download_path :: VpnResource s -> TF.Attribute s "download_path" Text)
-             (\s a -> s { _download_path = a } :: VpnResource s)
+        lens (_download_path :: VpnResource s -> TF.Attribute s Text)
+            (\s a -> s { _download_path = a } :: VpnResource s)
 
-instance HasFileName (VpnResource s) Text where
-    type HasFileNameThread (VpnResource s) Text = s
-
+instance HasFileName (VpnResource s) s Text where
     fileName =
-        lens (_file_name :: VpnResource s -> TF.Attribute s "file_name" Text)
-             (\s a -> s { _file_name = a } :: VpnResource s)
+        lens (_file_name :: VpnResource s -> TF.Attribute s Text)
+            (\s a -> s { _file_name = a } :: VpnResource s)
 
-instance HasName (VpnResource s) Text where
-    type HasNameThread (VpnResource s) Text = s
-
+instance HasName (VpnResource s) s Text where
     name =
-        lens (_name :: VpnResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: VpnResource s)
+        lens (_name :: VpnResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: VpnResource s)
 
 vpnResource :: TF.Resource TF.OneAndOne (VpnResource s)
 vpnResource =
@@ -354,409 +322,224 @@ vpnResource =
             , _name = TF.Nil
             }
 
-class Has*diskSize a b | a -> b where
-    type Has*diskSizeThread a b :: *
+class Has*diskSize a s b | a -> s b where
+    *diskSize :: Lens' a (TF.Attribute s b)
 
-    *diskSize :: Lens' a (TF.Attribute (Has*diskSizeThread a b) "*disk_size" b)
-
-instance Has*diskSize a b => Has*diskSize (TF.Resource p a) b where
-    type Has*diskSizeThread (TF.Resource p a) b =
-         Has*diskSizeThread a b
-
+instance Has*diskSize a s b => Has*diskSize (TF.Resource p a) s b where
     *diskSize = TF.configuration . *diskSize
 
-class Has*isMain a b | a -> b where
-    type Has*isMainThread a b :: *
+class Has*isMain a s b | a -> s b where
+    *isMain :: Lens' a (TF.Attribute s b)
 
-    *isMain :: Lens' a (TF.Attribute (Has*isMainThread a b) "*is_main" b)
-
-instance Has*isMain a b => Has*isMain (TF.Resource p a) b where
-    type Has*isMainThread (TF.Resource p a) b =
-         Has*isMainThread a b
-
+instance Has*isMain a s b => Has*isMain (TF.Resource p a) s b where
     *isMain = TF.configuration . *isMain
 
-class HasAgent a b | a -> b where
-    type HasAgentThread a b :: *
+class HasAgent a s b | a -> s b where
+    agent :: Lens' a (TF.Attribute s b)
 
-    agent :: Lens' a (TF.Attribute (HasAgentThread a b) "agent" b)
-
-instance HasAgent a b => HasAgent (TF.Resource p a) b where
-    type HasAgentThread (TF.Resource p a) b =
-         HasAgentThread a b
-
+instance HasAgent a s b => HasAgent (TF.Resource p a) s b where
     agent = TF.configuration . agent
 
-class HasCoresPerProcessor a b | a -> b where
-    type HasCoresPerProcessorThread a b :: *
+class HasCoresPerProcessor a s b | a -> s b where
+    coresPerProcessor :: Lens' a (TF.Attribute s b)
 
-    coresPerProcessor :: Lens' a (TF.Attribute (HasCoresPerProcessorThread a b) "cores_per_processor" b)
-
-instance HasCoresPerProcessor a b => HasCoresPerProcessor (TF.Resource p a) b where
-    type HasCoresPerProcessorThread (TF.Resource p a) b =
-         HasCoresPerProcessorThread a b
-
+instance HasCoresPerProcessor a s b => HasCoresPerProcessor (TF.Resource p a) s b where
     coresPerProcessor = TF.configuration . coresPerProcessor
 
-class HasDatacenter a b | a -> b where
-    type HasDatacenterThread a b :: *
+class HasDatacenter a s b | a -> s b where
+    datacenter :: Lens' a (TF.Attribute s b)
 
-    datacenter :: Lens' a (TF.Attribute (HasDatacenterThread a b) "datacenter" b)
-
-instance HasDatacenter a b => HasDatacenter (TF.Resource p a) b where
-    type HasDatacenterThread (TF.Resource p a) b =
-         HasDatacenterThread a b
-
+instance HasDatacenter a s b => HasDatacenter (TF.Resource p a) s b where
     datacenter = TF.configuration . datacenter
 
-class HasDescription a b | a -> b where
-    type HasDescriptionThread a b :: *
+class HasDescription a s b | a -> s b where
+    description :: Lens' a (TF.Attribute s b)
 
-    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
-
-instance HasDescription a b => HasDescription (TF.Resource p a) b where
-    type HasDescriptionThread (TF.Resource p a) b =
-         HasDescriptionThread a b
-
+instance HasDescription a s b => HasDescription (TF.Resource p a) s b where
     description = TF.configuration . description
 
-class HasDownloadPath a b | a -> b where
-    type HasDownloadPathThread a b :: *
+class HasDownloadPath a s b | a -> s b where
+    downloadPath :: Lens' a (TF.Attribute s b)
 
-    downloadPath :: Lens' a (TF.Attribute (HasDownloadPathThread a b) "download_path" b)
-
-instance HasDownloadPath a b => HasDownloadPath (TF.Resource p a) b where
-    type HasDownloadPathThread (TF.Resource p a) b =
-         HasDownloadPathThread a b
-
+instance HasDownloadPath a s b => HasDownloadPath (TF.Resource p a) s b where
     downloadPath = TF.configuration . downloadPath
 
-class HasEmail a b | a -> b where
-    type HasEmailThread a b :: *
+class HasEmail a s b | a -> s b where
+    email :: Lens' a (TF.Attribute s b)
 
-    email :: Lens' a (TF.Attribute (HasEmailThread a b) "email" b)
-
-instance HasEmail a b => HasEmail (TF.Resource p a) b where
-    type HasEmailThread (TF.Resource p a) b =
-         HasEmailThread a b
-
+instance HasEmail a s b => HasEmail (TF.Resource p a) s b where
     email = TF.configuration . email
 
-class HasFileName a b | a -> b where
-    type HasFileNameThread a b :: *
+class HasFileName a s b | a -> s b where
+    fileName :: Lens' a (TF.Attribute s b)
 
-    fileName :: Lens' a (TF.Attribute (HasFileNameThread a b) "file_name" b)
-
-instance HasFileName a b => HasFileName (TF.Resource p a) b where
-    type HasFileNameThread (TF.Resource p a) b =
-         HasFileNameThread a b
-
+instance HasFileName a s b => HasFileName (TF.Resource p a) s b where
     fileName = TF.configuration . fileName
 
-class HasFirewallPolicyId a b | a -> b where
-    type HasFirewallPolicyIdThread a b :: *
+class HasFirewallPolicyId a s b | a -> s b where
+    firewallPolicyId :: Lens' a (TF.Attribute s b)
 
-    firewallPolicyId :: Lens' a (TF.Attribute (HasFirewallPolicyIdThread a b) "firewall_policy_id" b)
-
-instance HasFirewallPolicyId a b => HasFirewallPolicyId (TF.Resource p a) b where
-    type HasFirewallPolicyIdThread (TF.Resource p a) b =
-         HasFirewallPolicyIdThread a b
-
+instance HasFirewallPolicyId a s b => HasFirewallPolicyId (TF.Resource p a) s b where
     firewallPolicyId = TF.configuration . firewallPolicyId
 
-class HasFixedInstanceSize a b | a -> b where
-    type HasFixedInstanceSizeThread a b :: *
+class HasFixedInstanceSize a s b | a -> s b where
+    fixedInstanceSize :: Lens' a (TF.Attribute s b)
 
-    fixedInstanceSize :: Lens' a (TF.Attribute (HasFixedInstanceSizeThread a b) "fixed_instance_size" b)
-
-instance HasFixedInstanceSize a b => HasFixedInstanceSize (TF.Resource p a) b where
-    type HasFixedInstanceSizeThread (TF.Resource p a) b =
-         HasFixedInstanceSizeThread a b
-
+instance HasFixedInstanceSize a s b => HasFixedInstanceSize (TF.Resource p a) s b where
     fixedInstanceSize = TF.configuration . fixedInstanceSize
 
-class HasHdds a b | a -> b where
-    type HasHddsThread a b :: *
+class HasHdds a s b | a -> s b where
+    hdds :: Lens' a (TF.Attribute s b)
 
-    hdds :: Lens' a (TF.Attribute (HasHddsThread a b) "hdds" b)
-
-instance HasHdds a b => HasHdds (TF.Resource p a) b where
-    type HasHddsThread (TF.Resource p a) b =
-         HasHddsThread a b
-
+instance HasHdds a s b => HasHdds (TF.Resource p a) s b where
     hdds = TF.configuration . hdds
 
-class HasHealthCheckInterval a b | a -> b where
-    type HasHealthCheckIntervalThread a b :: *
+class HasHealthCheckInterval a s b | a -> s b where
+    healthCheckInterval :: Lens' a (TF.Attribute s b)
 
-    healthCheckInterval :: Lens' a (TF.Attribute (HasHealthCheckIntervalThread a b) "health_check_interval" b)
-
-instance HasHealthCheckInterval a b => HasHealthCheckInterval (TF.Resource p a) b where
-    type HasHealthCheckIntervalThread (TF.Resource p a) b =
-         HasHealthCheckIntervalThread a b
-
+instance HasHealthCheckInterval a s b => HasHealthCheckInterval (TF.Resource p a) s b where
     healthCheckInterval = TF.configuration . healthCheckInterval
 
-class HasHealthCheckPath a b | a -> b where
-    type HasHealthCheckPathThread a b :: *
+class HasHealthCheckPath a s b | a -> s b where
+    healthCheckPath :: Lens' a (TF.Attribute s b)
 
-    healthCheckPath :: Lens' a (TF.Attribute (HasHealthCheckPathThread a b) "health_check_path" b)
-
-instance HasHealthCheckPath a b => HasHealthCheckPath (TF.Resource p a) b where
-    type HasHealthCheckPathThread (TF.Resource p a) b =
-         HasHealthCheckPathThread a b
-
+instance HasHealthCheckPath a s b => HasHealthCheckPath (TF.Resource p a) s b where
     healthCheckPath = TF.configuration . healthCheckPath
 
-class HasHealthCheckPathParser a b | a -> b where
-    type HasHealthCheckPathParserThread a b :: *
+class HasHealthCheckPathParser a s b | a -> s b where
+    healthCheckPathParser :: Lens' a (TF.Attribute s b)
 
-    healthCheckPathParser :: Lens' a (TF.Attribute (HasHealthCheckPathParserThread a b) "health_check_path_parser" b)
-
-instance HasHealthCheckPathParser a b => HasHealthCheckPathParser (TF.Resource p a) b where
-    type HasHealthCheckPathParserThread (TF.Resource p a) b =
-         HasHealthCheckPathParserThread a b
-
+instance HasHealthCheckPathParser a s b => HasHealthCheckPathParser (TF.Resource p a) s b where
     healthCheckPathParser = TF.configuration . healthCheckPathParser
 
-class HasHealthCheckTest a b | a -> b where
-    type HasHealthCheckTestThread a b :: *
+class HasHealthCheckTest a s b | a -> s b where
+    healthCheckTest :: Lens' a (TF.Attribute s b)
 
-    healthCheckTest :: Lens' a (TF.Attribute (HasHealthCheckTestThread a b) "health_check_test" b)
-
-instance HasHealthCheckTest a b => HasHealthCheckTest (TF.Resource p a) b where
-    type HasHealthCheckTestThread (TF.Resource p a) b =
-         HasHealthCheckTestThread a b
-
+instance HasHealthCheckTest a s b => HasHealthCheckTest (TF.Resource p a) s b where
     healthCheckTest = TF.configuration . healthCheckTest
 
-class HasImage a b | a -> b where
-    type HasImageThread a b :: *
+class HasImage a s b | a -> s b where
+    image :: Lens' a (TF.Attribute s b)
 
-    image :: Lens' a (TF.Attribute (HasImageThread a b) "image" b)
-
-instance HasImage a b => HasImage (TF.Resource p a) b where
-    type HasImageThread (TF.Resource p a) b =
-         HasImageThread a b
-
+instance HasImage a s b => HasImage (TF.Resource p a) s b where
     image = TF.configuration . image
 
-class HasIp a b | a -> b where
-    type HasIpThread a b :: *
+class HasIp a s b | a -> s b where
+    ip :: Lens' a (TF.Attribute s b)
 
-    ip :: Lens' a (TF.Attribute (HasIpThread a b) "ip" b)
-
-instance HasIp a b => HasIp (TF.Resource p a) b where
-    type HasIpThread (TF.Resource p a) b =
-         HasIpThread a b
-
+instance HasIp a s b => HasIp (TF.Resource p a) s b where
     ip = TF.configuration . ip
 
-class HasIpAddress a b | a -> b where
-    type HasIpAddressThread a b :: *
+class HasIpAddress a s b | a -> s b where
+    ipAddress :: Lens' a (TF.Attribute s b)
 
-    ipAddress :: Lens' a (TF.Attribute (HasIpAddressThread a b) "ip_address" b)
-
-instance HasIpAddress a b => HasIpAddress (TF.Resource p a) b where
-    type HasIpAddressThread (TF.Resource p a) b =
-         HasIpAddressThread a b
-
+instance HasIpAddress a s b => HasIpAddress (TF.Resource p a) s b where
     ipAddress = TF.configuration . ipAddress
 
-class HasIpType a b | a -> b where
-    type HasIpTypeThread a b :: *
+class HasIpType a s b | a -> s b where
+    ipType :: Lens' a (TF.Attribute s b)
 
-    ipType :: Lens' a (TF.Attribute (HasIpTypeThread a b) "ip_type" b)
-
-instance HasIpType a b => HasIpType (TF.Resource p a) b where
-    type HasIpTypeThread (TF.Resource p a) b =
-         HasIpTypeThread a b
-
+instance HasIpType a s b => HasIpType (TF.Resource p a) s b where
     ipType = TF.configuration . ipType
 
-class HasLoadbalancerId a b | a -> b where
-    type HasLoadbalancerIdThread a b :: *
+class HasLoadbalancerId a s b | a -> s b where
+    loadbalancerId :: Lens' a (TF.Attribute s b)
 
-    loadbalancerId :: Lens' a (TF.Attribute (HasLoadbalancerIdThread a b) "loadbalancer_id" b)
-
-instance HasLoadbalancerId a b => HasLoadbalancerId (TF.Resource p a) b where
-    type HasLoadbalancerIdThread (TF.Resource p a) b =
-         HasLoadbalancerIdThread a b
-
+instance HasLoadbalancerId a s b => HasLoadbalancerId (TF.Resource p a) s b where
     loadbalancerId = TF.configuration . loadbalancerId
 
-class HasMethod a b | a -> b where
-    type HasMethodThread a b :: *
+class HasMethod a s b | a -> s b where
+    method :: Lens' a (TF.Attribute s b)
 
-    method :: Lens' a (TF.Attribute (HasMethodThread a b) "method" b)
-
-instance HasMethod a b => HasMethod (TF.Resource p a) b where
-    type HasMethodThread (TF.Resource p a) b =
-         HasMethodThread a b
-
+instance HasMethod a s b => HasMethod (TF.Resource p a) s b where
     method = TF.configuration . method
 
-class HasMonitoringPolicyId a b | a -> b where
-    type HasMonitoringPolicyIdThread a b :: *
+class HasMonitoringPolicyId a s b | a -> s b where
+    monitoringPolicyId :: Lens' a (TF.Attribute s b)
 
-    monitoringPolicyId :: Lens' a (TF.Attribute (HasMonitoringPolicyIdThread a b) "monitoring_policy_id" b)
-
-instance HasMonitoringPolicyId a b => HasMonitoringPolicyId (TF.Resource p a) b where
-    type HasMonitoringPolicyIdThread (TF.Resource p a) b =
-         HasMonitoringPolicyIdThread a b
-
+instance HasMonitoringPolicyId a s b => HasMonitoringPolicyId (TF.Resource p a) s b where
     monitoringPolicyId = TF.configuration . monitoringPolicyId
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.Resource p a) b where
-    type HasNameThread (TF.Resource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.Resource p a) s b where
     name = TF.configuration . name
 
-class HasNetworkAddress a b | a -> b where
-    type HasNetworkAddressThread a b :: *
+class HasNetworkAddress a s b | a -> s b where
+    networkAddress :: Lens' a (TF.Attribute s b)
 
-    networkAddress :: Lens' a (TF.Attribute (HasNetworkAddressThread a b) "network_address" b)
-
-instance HasNetworkAddress a b => HasNetworkAddress (TF.Resource p a) b where
-    type HasNetworkAddressThread (TF.Resource p a) b =
-         HasNetworkAddressThread a b
-
+instance HasNetworkAddress a s b => HasNetworkAddress (TF.Resource p a) s b where
     networkAddress = TF.configuration . networkAddress
 
-class HasPassword a b | a -> b where
-    type HasPasswordThread a b :: *
+class HasPassword a s b | a -> s b where
+    password :: Lens' a (TF.Attribute s b)
 
-    password :: Lens' a (TF.Attribute (HasPasswordThread a b) "password" b)
-
-instance HasPassword a b => HasPassword (TF.Resource p a) b where
-    type HasPasswordThread (TF.Resource p a) b =
-         HasPasswordThread a b
-
+instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
     password = TF.configuration . password
 
-class HasPersistence a b | a -> b where
-    type HasPersistenceThread a b :: *
+class HasPersistence a s b | a -> s b where
+    persistence :: Lens' a (TF.Attribute s b)
 
-    persistence :: Lens' a (TF.Attribute (HasPersistenceThread a b) "persistence" b)
-
-instance HasPersistence a b => HasPersistence (TF.Resource p a) b where
-    type HasPersistenceThread (TF.Resource p a) b =
-         HasPersistenceThread a b
-
+instance HasPersistence a s b => HasPersistence (TF.Resource p a) s b where
     persistence = TF.configuration . persistence
 
-class HasPersistenceTime a b | a -> b where
-    type HasPersistenceTimeThread a b :: *
+class HasPersistenceTime a s b | a -> s b where
+    persistenceTime :: Lens' a (TF.Attribute s b)
 
-    persistenceTime :: Lens' a (TF.Attribute (HasPersistenceTimeThread a b) "persistence_time" b)
-
-instance HasPersistenceTime a b => HasPersistenceTime (TF.Resource p a) b where
-    type HasPersistenceTimeThread (TF.Resource p a) b =
-         HasPersistenceTimeThread a b
-
+instance HasPersistenceTime a s b => HasPersistenceTime (TF.Resource p a) s b where
     persistenceTime = TF.configuration . persistenceTime
 
-class HasRam a b | a -> b where
-    type HasRamThread a b :: *
+class HasRam a s b | a -> s b where
+    ram :: Lens' a (TF.Attribute s b)
 
-    ram :: Lens' a (TF.Attribute (HasRamThread a b) "ram" b)
-
-instance HasRam a b => HasRam (TF.Resource p a) b where
-    type HasRamThread (TF.Resource p a) b =
-         HasRamThread a b
-
+instance HasRam a s b => HasRam (TF.Resource p a) s b where
     ram = TF.configuration . ram
 
-class HasReverseDns a b | a -> b where
-    type HasReverseDnsThread a b :: *
+class HasReverseDns a s b | a -> s b where
+    reverseDns :: Lens' a (TF.Attribute s b)
 
-    reverseDns :: Lens' a (TF.Attribute (HasReverseDnsThread a b) "reverse_dns" b)
-
-instance HasReverseDns a b => HasReverseDns (TF.Resource p a) b where
-    type HasReverseDnsThread (TF.Resource p a) b =
-         HasReverseDnsThread a b
-
+instance HasReverseDns a s b => HasReverseDns (TF.Resource p a) s b where
     reverseDns = TF.configuration . reverseDns
 
-class HasServerIds a b | a -> b where
-    type HasServerIdsThread a b :: *
+class HasServerIds a s b | a -> s b where
+    serverIds :: Lens' a (TF.Attribute s b)
 
-    serverIds :: Lens' a (TF.Attribute (HasServerIdsThread a b) "server_ids" b)
-
-instance HasServerIds a b => HasServerIds (TF.Resource p a) b where
-    type HasServerIdsThread (TF.Resource p a) b =
-         HasServerIdsThread a b
-
+instance HasServerIds a s b => HasServerIds (TF.Resource p a) s b where
     serverIds = TF.configuration . serverIds
 
-class HasSize a b | a -> b where
-    type HasSizeThread a b :: *
+class HasSize a s b | a -> s b where
+    size :: Lens' a (TF.Attribute s b)
 
-    size :: Lens' a (TF.Attribute (HasSizeThread a b) "size" b)
-
-instance HasSize a b => HasSize (TF.Resource p a) b where
-    type HasSizeThread (TF.Resource p a) b =
-         HasSizeThread a b
-
+instance HasSize a s b => HasSize (TF.Resource p a) s b where
     size = TF.configuration . size
 
-class HasSshKeyPath a b | a -> b where
-    type HasSshKeyPathThread a b :: *
+class HasSshKeyPath a s b | a -> s b where
+    sshKeyPath :: Lens' a (TF.Attribute s b)
 
-    sshKeyPath :: Lens' a (TF.Attribute (HasSshKeyPathThread a b) "ssh_key_path" b)
-
-instance HasSshKeyPath a b => HasSshKeyPath (TF.Resource p a) b where
-    type HasSshKeyPathThread (TF.Resource p a) b =
-         HasSshKeyPathThread a b
-
+instance HasSshKeyPath a s b => HasSshKeyPath (TF.Resource p a) s b where
     sshKeyPath = TF.configuration . sshKeyPath
 
-class HasSshKeyPublic a b | a -> b where
-    type HasSshKeyPublicThread a b :: *
+class HasSshKeyPublic a s b | a -> s b where
+    sshKeyPublic :: Lens' a (TF.Attribute s b)
 
-    sshKeyPublic :: Lens' a (TF.Attribute (HasSshKeyPublicThread a b) "ssh_key_public" b)
-
-instance HasSshKeyPublic a b => HasSshKeyPublic (TF.Resource p a) b where
-    type HasSshKeyPublicThread (TF.Resource p a) b =
-         HasSshKeyPublicThread a b
-
+instance HasSshKeyPublic a s b => HasSshKeyPublic (TF.Resource p a) s b where
     sshKeyPublic = TF.configuration . sshKeyPublic
 
-class HasStorageServers a b | a -> b where
-    type HasStorageServersThread a b :: *
+class HasStorageServers a s b | a -> s b where
+    storageServers :: Lens' a (TF.Attribute s b)
 
-    storageServers :: Lens' a (TF.Attribute (HasStorageServersThread a b) "storage_servers" b)
-
-instance HasStorageServers a b => HasStorageServers (TF.Resource p a) b where
-    type HasStorageServersThread (TF.Resource p a) b =
-         HasStorageServersThread a b
-
+instance HasStorageServers a s b => HasStorageServers (TF.Resource p a) s b where
     storageServers = TF.configuration . storageServers
 
-class HasSubnetMask a b | a -> b where
-    type HasSubnetMaskThread a b :: *
+class HasSubnetMask a s b | a -> s b where
+    subnetMask :: Lens' a (TF.Attribute s b)
 
-    subnetMask :: Lens' a (TF.Attribute (HasSubnetMaskThread a b) "subnet_mask" b)
-
-instance HasSubnetMask a b => HasSubnetMask (TF.Resource p a) b where
-    type HasSubnetMaskThread (TF.Resource p a) b =
-         HasSubnetMaskThread a b
-
+instance HasSubnetMask a s b => HasSubnetMask (TF.Resource p a) s b where
     subnetMask = TF.configuration . subnetMask
 
-class HasVcores a b | a -> b where
-    type HasVcoresThread a b :: *
+class HasVcores a s b | a -> s b where
+    vcores :: Lens' a (TF.Attribute s b)
 
-    vcores :: Lens' a (TF.Attribute (HasVcoresThread a b) "vcores" b)
-
-instance HasVcores a b => HasVcores (TF.Resource p a) b where
-    type HasVcoresThread (TF.Resource p a) b =
-         HasVcoresThread a b
-
+instance HasVcores a s b => HasVcores (TF.Resource p a) s b where
     vcores = TF.configuration . vcores

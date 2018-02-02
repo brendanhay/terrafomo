@@ -85,7 +85,7 @@ schemaParser rules = do
     P.skipManyTill node (P.lookAhead (void h1))
 
     -- resource/datasource name
-    schemaName  <- h1 >>> fmap titleName textual
+    schemaName  <- h1 >>> fmap (pure . titleName) textual
 
     -- about/documentation
     schemaAbout <- Just . Text.intercalate " " <$> many (paragraph >>> textual)

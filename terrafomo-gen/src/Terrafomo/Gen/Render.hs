@@ -12,7 +12,8 @@ module Terrafomo.Gen.Render where
 import Data.Aeson      ((.=))
 import Data.Bifunctor  (first, second)
 import Data.Map.Strict (Map)
-import Data.Maybe      (isJust)
+import Data.Maybe      (fromMaybe, isJust)
+import Data.Monoid     (getLast)
 import Data.Semigroup  ((<>))
 import Data.Text       (Text)
 
@@ -138,8 +139,8 @@ render tmpl =
 
 getTypeName :: SchemaType -> Schema -> Text
 getTypeName = \case
-    Resource   -> resourceName   . schemaName
-    DataSource -> dataSourceName . schemaName
+    Resource   -> resourceName   . fromMaybe "UnknownResource"   . getLast . schemaName
+    DataSource -> dataSourceName . fromMaybe "UnknownDataSource" . getLast . schemaName
 
 createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
 createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]

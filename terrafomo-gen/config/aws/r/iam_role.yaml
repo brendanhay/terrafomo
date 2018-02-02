@@ -1,0 +1,3 @@
+arguments:
+  _assume_role_policy:
+    type: 'TF.IamPolicy'

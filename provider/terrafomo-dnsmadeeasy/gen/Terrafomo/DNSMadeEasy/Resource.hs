@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -43,12 +42,15 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                      as TF
+import qualified GHC.Base                       as TF
+import qualified Numeric.Natural                as TF
 import qualified Terrafomo.Attribute            as TF
 import qualified Terrafomo.DNSMadeEasy.Provider as TF
 import qualified Terrafomo.DNSMadeEasy.Types    as TF
 import qualified Terrafomo.HCL                  as TF
 import qualified Terrafomo.IP                   as TF
-import qualified Terrafomo.Meta                 as TF (configuration)
+import qualified Terrafomo.Meta                 as TF
 import qualified Terrafomo.Name                 as TF
 import qualified Terrafomo.Resource             as TF
 import qualified Terrafomo.Resource             as TF

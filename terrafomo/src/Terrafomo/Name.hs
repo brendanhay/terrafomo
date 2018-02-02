@@ -20,7 +20,7 @@ import Data.Semigroup (Semigroup)
 import Data.String    (IsString)
 import Data.Text      (Text)
 
-import Formatting (Format, (%))
+import Formatting (Format)
 
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format

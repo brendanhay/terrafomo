@@ -12,6 +12,7 @@ import Data.Semigroup ((<>))
 
 import Terrafomo.Name (Name)
 
+import qualified Data.Text     as Text
 import qualified Terrafomo.HCL as HCL
 
 -- | Only one backend may be specified and the configuration may not contain
@@ -37,7 +38,7 @@ instance HCL.ToHCL a => HCL.ToHCL (Backend a) where
 newtype Local = Local FilePath
 
 instance HCL.ToHCL Local where
-    toHCL (Local path) = HCL.assign "path" path
+    toHCL (Local path) = HCL.assign "path" (Text.pack path)
 
 localBackend :: FilePath -> Backend Local
 localBackend path =

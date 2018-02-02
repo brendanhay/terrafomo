@@ -7,7 +7,6 @@
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE RecordWildCards            #-}
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE UndecidableInstances       #-}
 
@@ -33,8 +32,17 @@ module Terrafomo.AWS.Types
     , s3BucketVersioning
 
     -- * DynamoDB
-    , DynamoAttributeType   (..)
     , DynamoTableAttributes (..)
+    , DynamoAttributeType   (..)
+
+    -- * Beanstalk
+    , BeanstalkEnvSettings  (..)
+    , BeanstalkEnvSetting   (..)
+    , beanstalkEnvSetting
+
+    -- * IAM
+    , IamPolicy             (..)
+    , iamPolicy
 
     -- * Classy Fields
     , HasEnabled            (..)
@@ -44,17 +52,11 @@ module Terrafomo.AWS.Types
     , fregion
     , fzone
     , fzonesuf
-
-    -- * Re-exported Types
-    , Bool
-    , Natural
-    , Word16
     ) where
 
 import Data.Map.Strict (Map)
 import Data.Maybe      (catMaybes)
 import Data.Text       (Text)
-import Data.Word       (Word16)
 
 import GHC.Base (Bool)
 import GHC.Exts (IsList (..))
@@ -62,8 +64,6 @@ import GHC.Exts (IsList (..))
 import Lens.Micro (Lens', lens)
 
 import Network.AWS.Types (Region (..))
-
-import Numeric.Natural (Natural)
 
 import Terrafomo
 
@@ -125,17 +125,12 @@ data S3BucketVersioning s = S3BucketVersioning
     -- bucket or Permanently delete an object version. Default is false.
     } deriving (Show, Eq)
 
-s3BucketVersioning :: S3BucketVersioning s
-s3BucketVersioning = S3BucketVersioning
-    { _enabled    = constant False
-    , _mfa_delete = constant False
-    }
-
 instance HCL.ToHCL (S3BucketVersioning s) where
-    toHCL S3BucketVersioning{..} = HCL.block $ catMaybes
-        [ HCL.assign "enabled"    <$> HCL.attribute _enabled
-        , HCL.assign "mfa_delete" <$> HCL.attribute _mfa_delete
-        ]
+    toHCL x =
+        HCL.block $ catMaybes
+            [ HCL.attribute "enabled"    (_enabled    x)
+            , HCL.attribute "mfa_delete" (_mfa_delete x)
+            ]
 
 instance HasEnabled (S3BucketVersioning s) s Bool where
     enabled = lens _enabled (\s a -> s { _enabled = a })
@@ -143,20 +138,13 @@ instance HasEnabled (S3BucketVersioning s) s Bool where
 instance HasMfaDelete (S3BucketVersioning s) s Bool where
     mfaDelete = lens _mfa_delete (\s a -> s { _mfa_delete = a })
 
+s3BucketVersioning :: S3BucketVersioning s
+s3BucketVersioning = S3BucketVersioning
+    { _enabled    = constant False
+    , _mfa_delete = constant False
+    }
+
 -- DynamoDB
-
--- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
-data DynamoAttributeType
-    = DynamoString
-    | DynamoNumber
-    | DynamoBinary
-      deriving (Show, Eq)
-
-instance HCL.ToHCL DynamoAttributeType where
-    toHCL = HCL.string . \case
-        DynamoString -> "S"
-        DynamoNumber -> "N"
-        DynamoBinary -> "B"
 
 -- | Multiple pairings of attribute names to their types.
 newtype DynamoTableAttributes = DynamoTableAttributes
@@ -178,6 +166,75 @@ instance HCL.ToHCL DynamoTableAttributes where
                 , HCL.assign "type" v
                 ]
 
+-- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
+data DynamoAttributeType
+    = DynamoString
+    | DynamoNumber
+    | DynamoBinary
+      deriving (Show, Eq)
+
+instance HCL.ToHCL DynamoAttributeType where
+    toHCL = HCL.string . \case
+        DynamoString -> "S"
+        DynamoNumber -> "N"
+        DynamoBinary -> "B"
+
+-- Beanstalk
+
+newtype BeanstalkEnvSettings s = BeanstalkEnvSettings
+    { fromBeanstalkEnvSettings :: [BeanstalkEnvSetting s]
+    } deriving (Show, Eq)
+
+instance IsList (BeanstalkEnvSettings s) where
+    type Item (BeanstalkEnvSettings s) = BeanstalkEnvSetting s
+
+    toList   = toList . fromBeanstalkEnvSettings
+    fromList = BeanstalkEnvSettings . fromList
+
+instance HCL.ToHCL (BeanstalkEnvSettings s) where
+    toHCL = HCL.block . map HCL.toHCL . toList
+
+data BeanstalkEnvSetting s = BeanstalkEnvSetting
+    { _namespace :: !(Attribute s Text)
+    -- ^ Unique namespace identifying the option's associated AWS resource.
+    , _name      :: !(Attribute s Text)
+    -- ^ Name of the configuration option.
+    , _value     :: !(Attribute s Text)
+    -- ^ Value for the configuration option.
+    } deriving (Show, Eq)
+
+instance HCL.ToHCL (BeanstalkEnvSetting s) where
+    toHCL x =
+        HCL.block $ catMaybes
+            [ HCL.attribute "namespace" (_namespace x)
+            , HCL.attribute "name"      (_name      x)
+            , HCL.attribute "value"     (_value     x)
+            ]
+
+instance HasNamespace (BeanstalkEnvSetting s) s Text where
+    namespace = lens _namespace (\s a -> s { _namespace = a })
+
+instance HasName (BeanstalkEnvSetting s) s Text where
+    name = lens _name (\s a -> s { _name = a })
+
+instance HasValue (BeanstalkEnvSetting s) s Text where
+    value = lens _value (\s a -> s { _value = a })
+
+beanstalkEnvSetting :: BeanstalkEnvSetting s
+beanstalkEnvSetting = BeanstalkEnvSetting
+    { _namespace = nil
+    , _name      = nil
+    , _value     = nil
+    }
+
+-- IAM
+
+newtype IamPolicy = IamPolicy HCL.JSON
+    deriving (Show, Eq, HCL.ToHCL)
+
+iamPolicy :: HCL.ToJSON a => a -> IamPolicy
+iamPolicy = IamPolicy . HCL.toJSON
+
 -- Field Classes
 
 -- FIXME: This is not observed by the actual generated classes so duplicates
@@ -195,3 +252,21 @@ class HasMfaDelete a s b | a -> s b where
 
 instance HasMfaDelete a s b => HasMfaDelete (Resource p a) s b where
     mfaDelete = configuration . mfaDelete
+
+class HasNamespace a s b | a -> s b where
+    namespace :: Lens' a (Attribute s b)
+
+instance HasNamespace a s b => HasNamespace (Resource p a) s b where
+    namespace = configuration . namespace
+
+class HasName a s b | a -> s b where
+    name :: Lens' a (Attribute s b)
+
+instance HasName a s b => HasName (Resource p a) s b where
+    name = configuration . name
+
+class HasValue a s b | a -> s b where
+    value :: Lens' a (Attribute s b)
+
+instance HasValue a s b => HasValue (Resource p a) s b where
+    value = configuration . value

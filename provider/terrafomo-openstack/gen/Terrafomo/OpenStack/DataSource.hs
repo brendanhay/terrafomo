@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -131,11 +130,14 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                    as TF
+import qualified GHC.Base                     as TF
+import qualified Numeric.Natural              as TF
 import qualified Terrafomo.Attribute          as TF
 import qualified Terrafomo.DataSource         as TF
 import qualified Terrafomo.HCL                as TF
 import qualified Terrafomo.IP                 as TF
-import qualified Terrafomo.Meta               as TF (configuration)
+import qualified Terrafomo.Meta               as TF
 import qualified Terrafomo.Name               as TF
 import qualified Terrafomo.OpenStack.Provider as TF
 import qualified Terrafomo.OpenStack.Types    as TF
@@ -146,105 +148,85 @@ import qualified Terrafomo.Resource           as TF
 Use this data source to get the ID of an available OpenStack flavor.
 -}
 data ComputeFlavorV2DataSource s = ComputeFlavorV2DataSource {
-      _disk         :: !(TF.Attribute s "disk" Text)
+      _disk         :: !(TF.Attribute s Text)
     {- ^ (Optional) The exact amount of disk (in gigabytes). -}
-    , _min_disk     :: !(TF.Attribute s "min_disk" Text)
+    , _min_disk     :: !(TF.Attribute s Text)
     {- ^ (Optional) The minimum amount of disk (in gigabytes). -}
-    , _min_ram      :: !(TF.Attribute s "min_ram" Text)
+    , _min_ram      :: !(TF.Attribute s Text)
     {- ^ (Optional) The minimum amount of RAM (in megabytes). -}
-    , _name         :: !(TF.Attribute s "name" Text)
+    , _name         :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the flavor. -}
-    , _ram          :: !(TF.Attribute s "ram" Text)
+    , _ram          :: !(TF.Attribute s Text)
     {- ^ (Optional) The exact amount of RAM (in megabytes). -}
-    , _region       :: !(TF.Attribute s "region" Text)
+    , _region       :: !(TF.Attribute s Text)
     {- ^ (Optional) The region in which to obtain the V2 Compute client. If omitted, the @region@ argument of the provider is used. -}
-    , _rx_tx_factor :: !(TF.Attribute s "rx_tx_factor" Text)
+    , _rx_tx_factor :: !(TF.Attribute s Text)
     {- ^ (Optional) The @rx_tx_factor@ of the flavor. -}
-    , _swap         :: !(TF.Attribute s "swap" Text)
+    , _swap         :: !(TF.Attribute s Text)
     {- ^ (Optional) The amount of swap (in gigabytes). -}
-    , _vcpus        :: !(TF.Attribute s "vcpus" Text)
+    , _vcpus        :: !(TF.Attribute s Text)
     {- ^ (Optional) The amount of VCPUs. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeFlavorV2DataSource s) where
     toHCL ComputeFlavorV2DataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _disk
-        , TF.attribute _min_disk
-        , TF.attribute _min_ram
-        , TF.attribute _name
-        , TF.attribute _ram
-        , TF.attribute _region
-        , TF.attribute _rx_tx_factor
-        , TF.attribute _swap
-        , TF.attribute _vcpus
+        [ TF.attribute "disk" _disk
+        , TF.attribute "min_disk" _min_disk
+        , TF.attribute "min_ram" _min_ram
+        , TF.attribute "name" _name
+        , TF.attribute "ram" _ram
+        , TF.attribute "region" _region
+        , TF.attribute "rx_tx_factor" _rx_tx_factor
+        , TF.attribute "swap" _swap
+        , TF.attribute "vcpus" _vcpus
         ]
 
-instance HasDisk (ComputeFlavorV2DataSource s) Text where
-    type HasDiskThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasDisk (ComputeFlavorV2DataSource s) s Text where
     disk =
-        lens (_disk :: ComputeFlavorV2DataSource s -> TF.Attribute s "disk" Text)
-             (\s a -> s { _disk = a } :: ComputeFlavorV2DataSource s)
+        lens (_disk :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _disk = a } :: ComputeFlavorV2DataSource s)
 
-instance HasMinDisk (ComputeFlavorV2DataSource s) Text where
-    type HasMinDiskThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasMinDisk (ComputeFlavorV2DataSource s) s Text where
     minDisk =
-        lens (_min_disk :: ComputeFlavorV2DataSource s -> TF.Attribute s "min_disk" Text)
-             (\s a -> s { _min_disk = a } :: ComputeFlavorV2DataSource s)
+        lens (_min_disk :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _min_disk = a } :: ComputeFlavorV2DataSource s)
 
-instance HasMinRam (ComputeFlavorV2DataSource s) Text where
-    type HasMinRamThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasMinRam (ComputeFlavorV2DataSource s) s Text where
     minRam =
-        lens (_min_ram :: ComputeFlavorV2DataSource s -> TF.Attribute s "min_ram" Text)
-             (\s a -> s { _min_ram = a } :: ComputeFlavorV2DataSource s)
+        lens (_min_ram :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _min_ram = a } :: ComputeFlavorV2DataSource s)
 
-instance HasName (ComputeFlavorV2DataSource s) Text where
-    type HasNameThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasName (ComputeFlavorV2DataSource s) s Text where
     name =
-        lens (_name :: ComputeFlavorV2DataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: ComputeFlavorV2DataSource s)
+        lens (_name :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ComputeFlavorV2DataSource s)
 
-instance HasRam (ComputeFlavorV2DataSource s) Text where
-    type HasRamThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasRam (ComputeFlavorV2DataSource s) s Text where
     ram =
-        lens (_ram :: ComputeFlavorV2DataSource s -> TF.Attribute s "ram" Text)
-             (\s a -> s { _ram = a } :: ComputeFlavorV2DataSource s)
+        lens (_ram :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _ram = a } :: ComputeFlavorV2DataSource s)
 
-instance HasRegion (ComputeFlavorV2DataSource s) Text where
-    type HasRegionThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasRegion (ComputeFlavorV2DataSource s) s Text where
     region =
-        lens (_region :: ComputeFlavorV2DataSource s -> TF.Attribute s "region" Text)
-             (\s a -> s { _region = a } :: ComputeFlavorV2DataSource s)
+        lens (_region :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _region = a } :: ComputeFlavorV2DataSource s)
 
-instance HasRxTxFactor (ComputeFlavorV2DataSource s) Text where
-    type HasRxTxFactorThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasRxTxFactor (ComputeFlavorV2DataSource s) s Text where
     rxTxFactor =
-        lens (_rx_tx_factor :: ComputeFlavorV2DataSource s -> TF.Attribute s "rx_tx_factor" Text)
-             (\s a -> s { _rx_tx_factor = a } :: ComputeFlavorV2DataSource s)
+        lens (_rx_tx_factor :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _rx_tx_factor = a } :: ComputeFlavorV2DataSource s)
 
-instance HasSwap (ComputeFlavorV2DataSource s) Text where
-    type HasSwapThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasSwap (ComputeFlavorV2DataSource s) s Text where
     swap =
-        lens (_swap :: ComputeFlavorV2DataSource s -> TF.Attribute s "swap" Text)
-             (\s a -> s { _swap = a } :: ComputeFlavorV2DataSource s)
+        lens (_swap :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _swap = a } :: ComputeFlavorV2DataSource s)
 
-instance HasVcpus (ComputeFlavorV2DataSource s) Text where
-    type HasVcpusThread (ComputeFlavorV2DataSource s) Text = s
-
+instance HasVcpus (ComputeFlavorV2DataSource s) s Text where
     vcpus =
-        lens (_vcpus :: ComputeFlavorV2DataSource s -> TF.Attribute s "vcpus" Text)
-             (\s a -> s { _vcpus = a } :: ComputeFlavorV2DataSource s)
+        lens (_vcpus :: ComputeFlavorV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _vcpus = a } :: ComputeFlavorV2DataSource s)
 
-instance HasComputedIsPublic (ComputeFlavorV2DataSource s) Text where
-    computedIsPublic =
-        to (\x -> TF.Computed (TF.referenceKey x) "is_public")
+instance HasComputedIsPublic (ComputeFlavorV2DataSource s) Text
 
 computeFlavorV2DataSource :: TF.DataSource TF.OpenStack (ComputeFlavorV2DataSource s)
 computeFlavorV2DataSource =
@@ -266,145 +248,99 @@ computeFlavorV2DataSource =
 Use this data source to get the ID of an available OpenStack DNS zone.
 -}
 data DnsZoneV2DataSource s = DnsZoneV2DataSource {
-      _description :: !(TF.Attribute s "description" Text)
+      _description :: !(TF.Attribute s Text)
     {- ^ (Optional) A description of the zone. -}
-    , _email       :: !(TF.Attribute s "email" Text)
+    , _email       :: !(TF.Attribute s Text)
     {- ^ (Optional) The email contact for the zone record. -}
-    , _name        :: !(TF.Attribute s "name" Text)
+    , _name        :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the zone. -}
-    , _region      :: !(TF.Attribute s "region" Text)
+    , _region      :: !(TF.Attribute s Text)
     {- ^ (Optional) The region in which to obtain the V2 DNS client. A DNS client is needed to retrieve zone ids. If omitted, the @region@ argument of the provider is used. -}
-    , _status      :: !(TF.Attribute s "status" Text)
+    , _status      :: !(TF.Attribute s Text)
     {- ^ (Optional) The zone's status. -}
-    , _ttl         :: !(TF.Attribute s "ttl" Text)
+    , _ttl         :: !(TF.Attribute s Text)
     {- ^ (Optional) The time to live (TTL) of the zone. -}
-    , _type'       :: !(TF.Attribute s "type" Text)
+    , _type'       :: !(TF.Attribute s Text)
     {- ^ (Optional) The type of the zone. Can either be @PRIMARY@ or @SECONDARY@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsZoneV2DataSource s) where
     toHCL DnsZoneV2DataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _description
-        , TF.attribute _email
-        , TF.attribute _name
-        , TF.attribute _region
-        , TF.attribute _status
-        , TF.attribute _ttl
-        , TF.attribute _type'
+        [ TF.attribute "description" _description
+        , TF.attribute "email" _email
+        , TF.attribute "name" _name
+        , TF.attribute "region" _region
+        , TF.attribute "status" _status
+        , TF.attribute "ttl" _ttl
+        , TF.attribute "type" _type'
         ]
 
-instance HasDescription (DnsZoneV2DataSource s) Text where
-    type HasDescriptionThread (DnsZoneV2DataSource s) Text = s
-
+instance HasDescription (DnsZoneV2DataSource s) s Text where
     description =
-        lens (_description :: DnsZoneV2DataSource s -> TF.Attribute s "description" Text)
-             (\s a -> s { _description = a } :: DnsZoneV2DataSource s)
+        lens (_description :: DnsZoneV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _description = a } :: DnsZoneV2DataSource s)
 
-instance HasEmail (DnsZoneV2DataSource s) Text where
-    type HasEmailThread (DnsZoneV2DataSource s) Text = s
-
+instance HasEmail (DnsZoneV2DataSource s) s Text where
     email =
-        lens (_email :: DnsZoneV2DataSource s -> TF.Attribute s "email" Text)
-             (\s a -> s { _email = a } :: DnsZoneV2DataSource s)
+        lens (_email :: DnsZoneV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _email = a } :: DnsZoneV2DataSource s)
 
-instance HasName (DnsZoneV2DataSource s) Text where
-    type HasNameThread (DnsZoneV2DataSource s) Text = s
-
+instance HasName (DnsZoneV2DataSource s) s Text where
     name =
-        lens (_name :: DnsZoneV2DataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: DnsZoneV2DataSource s)
+        lens (_name :: DnsZoneV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: DnsZoneV2DataSource s)
 
-instance HasRegion (DnsZoneV2DataSource s) Text where
-    type HasRegionThread (DnsZoneV2DataSource s) Text = s
-
+instance HasRegion (DnsZoneV2DataSource s) s Text where
     region =
-        lens (_region :: DnsZoneV2DataSource s -> TF.Attribute s "region" Text)
-             (\s a -> s { _region = a } :: DnsZoneV2DataSource s)
+        lens (_region :: DnsZoneV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _region = a } :: DnsZoneV2DataSource s)
 
-instance HasStatus (DnsZoneV2DataSource s) Text where
-    type HasStatusThread (DnsZoneV2DataSource s) Text = s
-
+instance HasStatus (DnsZoneV2DataSource s) s Text where
     status =
-        lens (_status :: DnsZoneV2DataSource s -> TF.Attribute s "status" Text)
-             (\s a -> s { _status = a } :: DnsZoneV2DataSource s)
+        lens (_status :: DnsZoneV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _status = a } :: DnsZoneV2DataSource s)
 
-instance HasTtl (DnsZoneV2DataSource s) Text where
-    type HasTtlThread (DnsZoneV2DataSource s) Text = s
-
+instance HasTtl (DnsZoneV2DataSource s) s Text where
     ttl =
-        lens (_ttl :: DnsZoneV2DataSource s -> TF.Attribute s "ttl" Text)
-             (\s a -> s { _ttl = a } :: DnsZoneV2DataSource s)
+        lens (_ttl :: DnsZoneV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _ttl = a } :: DnsZoneV2DataSource s)
 
-instance HasType' (DnsZoneV2DataSource s) Text where
-    type HasType'Thread (DnsZoneV2DataSource s) Text = s
-
+instance HasType' (DnsZoneV2DataSource s) s Text where
     type' =
-        lens (_type' :: DnsZoneV2DataSource s -> TF.Attribute s "type" Text)
-             (\s a -> s { _type' = a } :: DnsZoneV2DataSource s)
+        lens (_type' :: DnsZoneV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _type' = a } :: DnsZoneV2DataSource s)
 
-instance HasComputedAttributes (DnsZoneV2DataSource s) Text where
-    computedAttributes =
-        to (\x -> TF.Computed (TF.referenceKey x) "attributes")
+instance HasComputedAttributes (DnsZoneV2DataSource s) Text
 
-instance HasComputedCreatedAt (DnsZoneV2DataSource s) Text where
-    computedCreatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
+instance HasComputedCreatedAt (DnsZoneV2DataSource s) Text
 
-instance HasComputedDescription (DnsZoneV2DataSource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+instance HasComputedDescription (DnsZoneV2DataSource s) Text
 
-instance HasComputedEmail (DnsZoneV2DataSource s) Text where
-    computedEmail =
-        to (\x -> TF.Computed (TF.referenceKey x) "email")
+instance HasComputedEmail (DnsZoneV2DataSource s) Text
 
-instance HasComputedMasters (DnsZoneV2DataSource s) Text where
-    computedMasters =
-        to (\x -> TF.Computed (TF.referenceKey x) "masters")
+instance HasComputedMasters (DnsZoneV2DataSource s) Text
 
-instance HasComputedName (DnsZoneV2DataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (DnsZoneV2DataSource s) Text
 
-instance HasComputedPoolId (DnsZoneV2DataSource s) Text where
-    computedPoolId =
-        to (\x -> TF.Computed (TF.referenceKey x) "pool_id")
+instance HasComputedPoolId (DnsZoneV2DataSource s) Text
 
-instance HasComputedProjectId (DnsZoneV2DataSource s) Text where
-    computedProjectId =
-        to (\x -> TF.Computed (TF.referenceKey x) "project_id")
+instance HasComputedProjectId (DnsZoneV2DataSource s) Text
 
-instance HasComputedRegion (DnsZoneV2DataSource s) Text where
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
+instance HasComputedRegion (DnsZoneV2DataSource s) Text
 
-instance HasComputedSerial (DnsZoneV2DataSource s) Text where
-    computedSerial =
-        to (\x -> TF.Computed (TF.referenceKey x) "serial")
+instance HasComputedSerial (DnsZoneV2DataSource s) Text
 
-instance HasComputedStatus (DnsZoneV2DataSource s) Text where
-    computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+instance HasComputedStatus (DnsZoneV2DataSource s) Text
 
-instance HasComputedTransferredAt (DnsZoneV2DataSource s) Text where
-    computedTransferredAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "transferred_at")
+instance HasComputedTransferredAt (DnsZoneV2DataSource s) Text
 
-instance HasComputedTtl (DnsZoneV2DataSource s) Text where
-    computedTtl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
+instance HasComputedTtl (DnsZoneV2DataSource s) Text
 
-instance HasComputedType' (DnsZoneV2DataSource s) Text where
-    computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+instance HasComputedType' (DnsZoneV2DataSource s) Text
 
-instance HasComputedUpdatedAt (DnsZoneV2DataSource s) Text where
-    computedUpdatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "updated_at")
+instance HasComputedUpdatedAt (DnsZoneV2DataSource s) Text
 
-instance HasComputedVersion (DnsZoneV2DataSource s) Text where
-    computedVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "version")
+instance HasComputedVersion (DnsZoneV2DataSource s) Text
 
 dnsZoneV2DataSource :: TF.DataSource TF.OpenStack (DnsZoneV2DataSource s)
 dnsZoneV2DataSource =
@@ -424,177 +360,127 @@ dnsZoneV2DataSource =
 Use this data source to get the ID of an available OpenStack image.
 -}
 data ImagesImageV2DataSource s = ImagesImageV2DataSource {
-      _most_recent    :: !(TF.Attribute s "most_recent" Text)
+      _most_recent    :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent image. -}
-    , _name           :: !(TF.Attribute s "name" Text)
+    , _name           :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the image. -}
-    , _owner          :: !(TF.Attribute s "owner" Text)
+    , _owner          :: !(TF.Attribute s Text)
     {- ^ (Optional) The owner (UUID) of the image. -}
-    , _properties     :: !(TF.Attribute s "properties" Text)
+    , _properties     :: !(TF.Attribute s Text)
     {- ^ (Optional) a map of key/value pairs to match an image with. All specified properties must be matched. -}
-    , _region         :: !(TF.Attribute s "region" Text)
+    , _region         :: !(TF.Attribute s Text)
     {- ^ (Optional) The region in which to obtain the V2 Glance client. A Glance client is needed to create an Image that can be used with a compute instance. If omitted, the @region@ argument of the provider is used. -}
-    , _size_max       :: !(TF.Attribute s "size_max" Text)
+    , _size_max       :: !(TF.Attribute s Text)
     {- ^ (Optional) The maximum size (in bytes) of the image to return. -}
-    , _size_min       :: !(TF.Attribute s "size_min" Text)
+    , _size_min       :: !(TF.Attribute s Text)
     {- ^ (Optional) The minimum size (in bytes) of the image to return. -}
-    , _sort_direction :: !(TF.Attribute s "sort_direction" Text)
+    , _sort_direction :: !(TF.Attribute s Text)
     {- ^ (Optional) Order the results in either @asc@ or @desc@ . -}
-    , _sort_key       :: !(TF.Attribute s "sort_key" Text)
+    , _sort_key       :: !(TF.Attribute s Text)
     {- ^ (Optional) Sort images based on a certain key. Defaults to @name@ . -}
-    , _tag            :: !(TF.Attribute s "tag" Text)
+    , _tag            :: !(TF.Attribute s Text)
     {- ^ (Optional) Search for images with a specific tag. -}
-    , _visibility     :: !(TF.Attribute s "visibility" Text)
+    , _visibility     :: !(TF.Attribute s Text)
     {- ^ (Optional) The visibility of the image. Must be one of "public", "private", "community", or "shared". Defaults to "private". -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ImagesImageV2DataSource s) where
     toHCL ImagesImageV2DataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _most_recent
-        , TF.attribute _name
-        , TF.attribute _owner
-        , TF.attribute _properties
-        , TF.attribute _region
-        , TF.attribute _size_max
-        , TF.attribute _size_min
-        , TF.attribute _sort_direction
-        , TF.attribute _sort_key
-        , TF.attribute _tag
-        , TF.attribute _visibility
+        [ TF.attribute "most_recent" _most_recent
+        , TF.attribute "name" _name
+        , TF.attribute "owner" _owner
+        , TF.attribute "properties" _properties
+        , TF.attribute "region" _region
+        , TF.attribute "size_max" _size_max
+        , TF.attribute "size_min" _size_min
+        , TF.attribute "sort_direction" _sort_direction
+        , TF.attribute "sort_key" _sort_key
+        , TF.attribute "tag" _tag
+        , TF.attribute "visibility" _visibility
         ]
 
-instance HasMostRecent (ImagesImageV2DataSource s) Text where
-    type HasMostRecentThread (ImagesImageV2DataSource s) Text = s
-
+instance HasMostRecent (ImagesImageV2DataSource s) s Text where
     mostRecent =
-        lens (_most_recent :: ImagesImageV2DataSource s -> TF.Attribute s "most_recent" Text)
-             (\s a -> s { _most_recent = a } :: ImagesImageV2DataSource s)
+        lens (_most_recent :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _most_recent = a } :: ImagesImageV2DataSource s)
 
-instance HasName (ImagesImageV2DataSource s) Text where
-    type HasNameThread (ImagesImageV2DataSource s) Text = s
-
+instance HasName (ImagesImageV2DataSource s) s Text where
     name =
-        lens (_name :: ImagesImageV2DataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: ImagesImageV2DataSource s)
+        lens (_name :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ImagesImageV2DataSource s)
 
-instance HasOwner (ImagesImageV2DataSource s) Text where
-    type HasOwnerThread (ImagesImageV2DataSource s) Text = s
-
+instance HasOwner (ImagesImageV2DataSource s) s Text where
     owner =
-        lens (_owner :: ImagesImageV2DataSource s -> TF.Attribute s "owner" Text)
-             (\s a -> s { _owner = a } :: ImagesImageV2DataSource s)
+        lens (_owner :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _owner = a } :: ImagesImageV2DataSource s)
 
-instance HasProperties (ImagesImageV2DataSource s) Text where
-    type HasPropertiesThread (ImagesImageV2DataSource s) Text = s
-
+instance HasProperties (ImagesImageV2DataSource s) s Text where
     properties =
-        lens (_properties :: ImagesImageV2DataSource s -> TF.Attribute s "properties" Text)
-             (\s a -> s { _properties = a } :: ImagesImageV2DataSource s)
+        lens (_properties :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _properties = a } :: ImagesImageV2DataSource s)
 
-instance HasRegion (ImagesImageV2DataSource s) Text where
-    type HasRegionThread (ImagesImageV2DataSource s) Text = s
-
+instance HasRegion (ImagesImageV2DataSource s) s Text where
     region =
-        lens (_region :: ImagesImageV2DataSource s -> TF.Attribute s "region" Text)
-             (\s a -> s { _region = a } :: ImagesImageV2DataSource s)
+        lens (_region :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _region = a } :: ImagesImageV2DataSource s)
 
-instance HasSizeMax (ImagesImageV2DataSource s) Text where
-    type HasSizeMaxThread (ImagesImageV2DataSource s) Text = s
-
+instance HasSizeMax (ImagesImageV2DataSource s) s Text where
     sizeMax =
-        lens (_size_max :: ImagesImageV2DataSource s -> TF.Attribute s "size_max" Text)
-             (\s a -> s { _size_max = a } :: ImagesImageV2DataSource s)
+        lens (_size_max :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _size_max = a } :: ImagesImageV2DataSource s)
 
-instance HasSizeMin (ImagesImageV2DataSource s) Text where
-    type HasSizeMinThread (ImagesImageV2DataSource s) Text = s
-
+instance HasSizeMin (ImagesImageV2DataSource s) s Text where
     sizeMin =
-        lens (_size_min :: ImagesImageV2DataSource s -> TF.Attribute s "size_min" Text)
-             (\s a -> s { _size_min = a } :: ImagesImageV2DataSource s)
+        lens (_size_min :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _size_min = a } :: ImagesImageV2DataSource s)
 
-instance HasSortDirection (ImagesImageV2DataSource s) Text where
-    type HasSortDirectionThread (ImagesImageV2DataSource s) Text = s
-
+instance HasSortDirection (ImagesImageV2DataSource s) s Text where
     sortDirection =
-        lens (_sort_direction :: ImagesImageV2DataSource s -> TF.Attribute s "sort_direction" Text)
-             (\s a -> s { _sort_direction = a } :: ImagesImageV2DataSource s)
+        lens (_sort_direction :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _sort_direction = a } :: ImagesImageV2DataSource s)
 
-instance HasSortKey (ImagesImageV2DataSource s) Text where
-    type HasSortKeyThread (ImagesImageV2DataSource s) Text = s
-
+instance HasSortKey (ImagesImageV2DataSource s) s Text where
     sortKey =
-        lens (_sort_key :: ImagesImageV2DataSource s -> TF.Attribute s "sort_key" Text)
-             (\s a -> s { _sort_key = a } :: ImagesImageV2DataSource s)
+        lens (_sort_key :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _sort_key = a } :: ImagesImageV2DataSource s)
 
-instance HasTag (ImagesImageV2DataSource s) Text where
-    type HasTagThread (ImagesImageV2DataSource s) Text = s
-
+instance HasTag (ImagesImageV2DataSource s) s Text where
     tag =
-        lens (_tag :: ImagesImageV2DataSource s -> TF.Attribute s "tag" Text)
-             (\s a -> s { _tag = a } :: ImagesImageV2DataSource s)
+        lens (_tag :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _tag = a } :: ImagesImageV2DataSource s)
 
-instance HasVisibility (ImagesImageV2DataSource s) Text where
-    type HasVisibilityThread (ImagesImageV2DataSource s) Text = s
-
+instance HasVisibility (ImagesImageV2DataSource s) s Text where
     visibility =
-        lens (_visibility :: ImagesImageV2DataSource s -> TF.Attribute s "visibility" Text)
-             (\s a -> s { _visibility = a } :: ImagesImageV2DataSource s)
+        lens (_visibility :: ImagesImageV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _visibility = a } :: ImagesImageV2DataSource s)
 
-instance HasComputedChecksum (ImagesImageV2DataSource s) Text where
-    computedChecksum =
-        to (\x -> TF.Computed (TF.referenceKey x) "checksum")
+instance HasComputedChecksum (ImagesImageV2DataSource s) Text
 
-instance HasComputedContainerFormat (ImagesImageV2DataSource s) Text where
-    computedContainerFormat =
-        to (\x -> TF.Computed (TF.referenceKey x) "container_format")
+instance HasComputedContainerFormat (ImagesImageV2DataSource s) Text
 
-instance HasComputedCreatedAt (ImagesImageV2DataSource s) Text where
-    computedCreatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
+instance HasComputedCreatedAt (ImagesImageV2DataSource s) Text
 
-instance HasComputedDiskFormat (ImagesImageV2DataSource s) Text where
-    computedDiskFormat =
-        to (\x -> TF.Computed (TF.referenceKey x) "disk_format")
+instance HasComputedDiskFormat (ImagesImageV2DataSource s) Text
 
-instance HasComputedFile (ImagesImageV2DataSource s) Text where
-    computedFile =
-        to (\x -> TF.Computed (TF.referenceKey x) "file")
+instance HasComputedFile (ImagesImageV2DataSource s) Text
 
-instance HasComputedMetadata (ImagesImageV2DataSource s) Text where
-    computedMetadata =
-        to (\x -> TF.Computed (TF.referenceKey x) "metadata")
+instance HasComputedMetadata (ImagesImageV2DataSource s) Text
 
-instance HasComputedMinDiskGb (ImagesImageV2DataSource s) Text where
-    computedMinDiskGb =
-        to (\x -> TF.Computed (TF.referenceKey x) "min_disk_gb")
+instance HasComputedMinDiskGb (ImagesImageV2DataSource s) Text
 
-instance HasComputedMinRamMb (ImagesImageV2DataSource s) Text where
-    computedMinRamMb =
-        to (\x -> TF.Computed (TF.referenceKey x) "min_ram_mb")
+instance HasComputedMinRamMb (ImagesImageV2DataSource s) Text
 
-instance HasComputedProperties (ImagesImageV2DataSource s) Text where
-    computedProperties =
-        to (\x -> TF.Computed (TF.referenceKey x) "properties")
+instance HasComputedProperties (ImagesImageV2DataSource s) Text
 
-instance HasComputedProtected (ImagesImageV2DataSource s) Text where
-    computedProtected =
-        to (\x -> TF.Computed (TF.referenceKey x) "protected")
+instance HasComputedProtected (ImagesImageV2DataSource s) Text
 
-instance HasComputedSchema (ImagesImageV2DataSource s) Text where
-    computedSchema =
-        to (\x -> TF.Computed (TF.referenceKey x) "schema")
+instance HasComputedSchema (ImagesImageV2DataSource s) Text
 
-instance HasComputedSizeBytes (ImagesImageV2DataSource s) Text where
-    computedSizeBytes =
-        to (\x -> TF.Computed (TF.referenceKey x) "size_bytes")
+instance HasComputedSizeBytes (ImagesImageV2DataSource s) Text
 
-instance HasComputedTags (ImagesImageV2DataSource s) Text where
-    computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+instance HasComputedTags (ImagesImageV2DataSource s) Text
 
-instance HasComputedUpdateAt (ImagesImageV2DataSource s) Text where
-    computedUpdateAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "update_at")
+instance HasComputedUpdateAt (ImagesImageV2DataSource s) Text
 
 imagesImageV2DataSource :: TF.DataSource TF.OpenStack (ImagesImageV2DataSource s)
 imagesImageV2DataSource =
@@ -618,101 +504,77 @@ imagesImageV2DataSource =
 Use this data source to get the ID of an available OpenStack network.
 -}
 data NetworkingNetworkV2DataSource s = NetworkingNetworkV2DataSource {
-      _availability_zone_hints :: !(TF.Attribute s "availability_zone_hints" Text)
+      _availability_zone_hints :: !(TF.Attribute s Text)
     {- ^ (Optional) The availability zone candidates for the network. -}
-    , _matching_subnet_cidr :: !(TF.Attribute s "matching_subnet_cidr" Text)
+    , _matching_subnet_cidr    :: !(TF.Attribute s Text)
     {- ^ (Optional) The CIDR of a subnet within the network. -}
-    , _name :: !(TF.Attribute s "name" Text)
+    , _name                    :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the network. -}
-    , _network_id :: !(TF.Attribute s "network_id" Text)
+    , _network_id              :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the network. -}
-    , _region :: !(TF.Attribute s "region" Text)
+    , _region                  :: !(TF.Attribute s Text)
     {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve networks ids. If omitted, the @region@ argument of the provider is used. -}
-    , _status :: !(TF.Attribute s "status" Text)
+    , _status                  :: !(TF.Attribute s Text)
     {- ^ (Optional) The status of the network. -}
-    , _tenant_id :: !(TF.Attribute s "tenant_id" Text)
+    , _tenant_id               :: !(TF.Attribute s Text)
     {- ^ (Optional) The owner of the network. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkingNetworkV2DataSource s) where
     toHCL NetworkingNetworkV2DataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _availability_zone_hints
-        , TF.attribute _matching_subnet_cidr
-        , TF.attribute _name
-        , TF.attribute _network_id
-        , TF.attribute _region
-        , TF.attribute _status
-        , TF.attribute _tenant_id
+        [ TF.attribute "availability_zone_hints" _availability_zone_hints
+        , TF.attribute "matching_subnet_cidr" _matching_subnet_cidr
+        , TF.attribute "name" _name
+        , TF.attribute "network_id" _network_id
+        , TF.attribute "region" _region
+        , TF.attribute "status" _status
+        , TF.attribute "tenant_id" _tenant_id
         ]
 
-instance HasAvailabilityZoneHints (NetworkingNetworkV2DataSource s) Text where
-    type HasAvailabilityZoneHintsThread (NetworkingNetworkV2DataSource s) Text = s
-
+instance HasAvailabilityZoneHints (NetworkingNetworkV2DataSource s) s Text where
     availabilityZoneHints =
-        lens (_availability_zone_hints :: NetworkingNetworkV2DataSource s -> TF.Attribute s "availability_zone_hints" Text)
-             (\s a -> s { _availability_zone_hints = a } :: NetworkingNetworkV2DataSource s)
+        lens (_availability_zone_hints :: NetworkingNetworkV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _availability_zone_hints = a } :: NetworkingNetworkV2DataSource s)
 
-instance HasMatchingSubnetCidr (NetworkingNetworkV2DataSource s) Text where
-    type HasMatchingSubnetCidrThread (NetworkingNetworkV2DataSource s) Text = s
-
+instance HasMatchingSubnetCidr (NetworkingNetworkV2DataSource s) s Text where
     matchingSubnetCidr =
-        lens (_matching_subnet_cidr :: NetworkingNetworkV2DataSource s -> TF.Attribute s "matching_subnet_cidr" Text)
-             (\s a -> s { _matching_subnet_cidr = a } :: NetworkingNetworkV2DataSource s)
+        lens (_matching_subnet_cidr :: NetworkingNetworkV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _matching_subnet_cidr = a } :: NetworkingNetworkV2DataSource s)
 
-instance HasName (NetworkingNetworkV2DataSource s) Text where
-    type HasNameThread (NetworkingNetworkV2DataSource s) Text = s
-
+instance HasName (NetworkingNetworkV2DataSource s) s Text where
     name =
-        lens (_name :: NetworkingNetworkV2DataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: NetworkingNetworkV2DataSource s)
+        lens (_name :: NetworkingNetworkV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: NetworkingNetworkV2DataSource s)
 
-instance HasNetworkId (NetworkingNetworkV2DataSource s) Text where
-    type HasNetworkIdThread (NetworkingNetworkV2DataSource s) Text = s
-
+instance HasNetworkId (NetworkingNetworkV2DataSource s) s Text where
     networkId =
-        lens (_network_id :: NetworkingNetworkV2DataSource s -> TF.Attribute s "network_id" Text)
-             (\s a -> s { _network_id = a } :: NetworkingNetworkV2DataSource s)
+        lens (_network_id :: NetworkingNetworkV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _network_id = a } :: NetworkingNetworkV2DataSource s)
 
-instance HasRegion (NetworkingNetworkV2DataSource s) Text where
-    type HasRegionThread (NetworkingNetworkV2DataSource s) Text = s
-
+instance HasRegion (NetworkingNetworkV2DataSource s) s Text where
     region =
-        lens (_region :: NetworkingNetworkV2DataSource s -> TF.Attribute s "region" Text)
-             (\s a -> s { _region = a } :: NetworkingNetworkV2DataSource s)
+        lens (_region :: NetworkingNetworkV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _region = a } :: NetworkingNetworkV2DataSource s)
 
-instance HasStatus (NetworkingNetworkV2DataSource s) Text where
-    type HasStatusThread (NetworkingNetworkV2DataSource s) Text = s
-
+instance HasStatus (NetworkingNetworkV2DataSource s) s Text where
     status =
-        lens (_status :: NetworkingNetworkV2DataSource s -> TF.Attribute s "status" Text)
-             (\s a -> s { _status = a } :: NetworkingNetworkV2DataSource s)
+        lens (_status :: NetworkingNetworkV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _status = a } :: NetworkingNetworkV2DataSource s)
 
-instance HasTenantId (NetworkingNetworkV2DataSource s) Text where
-    type HasTenantIdThread (NetworkingNetworkV2DataSource s) Text = s
-
+instance HasTenantId (NetworkingNetworkV2DataSource s) s Text where
     tenantId =
-        lens (_tenant_id :: NetworkingNetworkV2DataSource s -> TF.Attribute s "tenant_id" Text)
-             (\s a -> s { _tenant_id = a } :: NetworkingNetworkV2DataSource s)
+        lens (_tenant_id :: NetworkingNetworkV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _tenant_id = a } :: NetworkingNetworkV2DataSource s)
 
-instance HasComputedAdminStateUp (NetworkingNetworkV2DataSource s) Text where
-    computedAdminStateUp =
-        to (\x -> TF.Computed (TF.referenceKey x) "admin_state_up")
+instance HasComputedAdminStateUp (NetworkingNetworkV2DataSource s) Text
 
-instance HasComputedAvailabilityZoneHints (NetworkingNetworkV2DataSource s) Text where
-    computedAvailabilityZoneHints =
-        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone_hints")
+instance HasComputedAvailabilityZoneHints (NetworkingNetworkV2DataSource s) Text
 
-instance HasComputedName (NetworkingNetworkV2DataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (NetworkingNetworkV2DataSource s) Text
 
-instance HasComputedRegion (NetworkingNetworkV2DataSource s) Text where
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
+instance HasComputedRegion (NetworkingNetworkV2DataSource s) Text
 
-instance HasComputedShared (NetworkingNetworkV2DataSource s) Text where
-    computedShared =
-        to (\x -> TF.Computed (TF.referenceKey x) "shared")
+instance HasComputedShared (NetworkingNetworkV2DataSource s) Text
 
 networkingNetworkV2DataSource :: TF.DataSource TF.OpenStack (NetworkingNetworkV2DataSource s)
 networkingNetworkV2DataSource =
@@ -732,63 +594,49 @@ networkingNetworkV2DataSource =
 Use this data source to get the ID of an available OpenStack security group.
 -}
 data NetworkingSecgroupV2DataSource s = NetworkingSecgroupV2DataSource {
-      _name        :: !(TF.Attribute s "name" Text)
+      _name        :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the security group. -}
-    , _region      :: !(TF.Attribute s "region" Text)
+    , _region      :: !(TF.Attribute s Text)
     {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve security groups ids. If omitted, the @region@ argument of the provider is used. -}
-    , _secgroup_id :: !(TF.Attribute s "secgroup_id" Text)
+    , _secgroup_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the security group. -}
-    , _tenant_id   :: !(TF.Attribute s "tenant_id" Text)
+    , _tenant_id   :: !(TF.Attribute s Text)
     {- ^ (Optional) The owner of the security group. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkingSecgroupV2DataSource s) where
     toHCL NetworkingSecgroupV2DataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
-        , TF.attribute _region
-        , TF.attribute _secgroup_id
-        , TF.attribute _tenant_id
+        [ TF.attribute "name" _name
+        , TF.attribute "region" _region
+        , TF.attribute "secgroup_id" _secgroup_id
+        , TF.attribute "tenant_id" _tenant_id
         ]
 
-instance HasName (NetworkingSecgroupV2DataSource s) Text where
-    type HasNameThread (NetworkingSecgroupV2DataSource s) Text = s
-
+instance HasName (NetworkingSecgroupV2DataSource s) s Text where
     name =
-        lens (_name :: NetworkingSecgroupV2DataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: NetworkingSecgroupV2DataSource s)
+        lens (_name :: NetworkingSecgroupV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: NetworkingSecgroupV2DataSource s)
 
-instance HasRegion (NetworkingSecgroupV2DataSource s) Text where
-    type HasRegionThread (NetworkingSecgroupV2DataSource s) Text = s
-
+instance HasRegion (NetworkingSecgroupV2DataSource s) s Text where
     region =
-        lens (_region :: NetworkingSecgroupV2DataSource s -> TF.Attribute s "region" Text)
-             (\s a -> s { _region = a } :: NetworkingSecgroupV2DataSource s)
+        lens (_region :: NetworkingSecgroupV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _region = a } :: NetworkingSecgroupV2DataSource s)
 
-instance HasSecgroupId (NetworkingSecgroupV2DataSource s) Text where
-    type HasSecgroupIdThread (NetworkingSecgroupV2DataSource s) Text = s
-
+instance HasSecgroupId (NetworkingSecgroupV2DataSource s) s Text where
     secgroupId =
-        lens (_secgroup_id :: NetworkingSecgroupV2DataSource s -> TF.Attribute s "secgroup_id" Text)
-             (\s a -> s { _secgroup_id = a } :: NetworkingSecgroupV2DataSource s)
+        lens (_secgroup_id :: NetworkingSecgroupV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _secgroup_id = a } :: NetworkingSecgroupV2DataSource s)
 
-instance HasTenantId (NetworkingSecgroupV2DataSource s) Text where
-    type HasTenantIdThread (NetworkingSecgroupV2DataSource s) Text = s
-
+instance HasTenantId (NetworkingSecgroupV2DataSource s) s Text where
     tenantId =
-        lens (_tenant_id :: NetworkingSecgroupV2DataSource s -> TF.Attribute s "tenant_id" Text)
-             (\s a -> s { _tenant_id = a } :: NetworkingSecgroupV2DataSource s)
+        lens (_tenant_id :: NetworkingSecgroupV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _tenant_id = a } :: NetworkingSecgroupV2DataSource s)
 
-instance HasComputedDescription (NetworkingSecgroupV2DataSource s) Text where
-    computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+instance HasComputedDescription (NetworkingSecgroupV2DataSource s) Text
 
-instance HasComputedName (NetworkingSecgroupV2DataSource s) Text where
-    computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+instance HasComputedName (NetworkingSecgroupV2DataSource s) Text
 
-instance HasComputedRegion (NetworkingSecgroupV2DataSource s) Text where
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
+instance HasComputedRegion (NetworkingSecgroupV2DataSource s) Text
 
 networkingSecgroupV2DataSource :: TF.DataSource TF.OpenStack (NetworkingSecgroupV2DataSource s)
 networkingSecgroupV2DataSource =
@@ -805,151 +653,117 @@ networkingSecgroupV2DataSource =
 Use this data source to get the ID of an available OpenStack subnet.
 -}
 data NetworkingSubnetV2DataSource s = NetworkingSubnetV2DataSource {
-      _cidr              :: !(TF.Attribute s "cidr" Text)
+      _cidr              :: !(TF.Attribute s Text)
     {- ^ (Optional) The CIDR of the subnet. -}
-    , _dhcp_disabled     :: !(TF.Attribute s "dhcp_disabled" Text)
+    , _dhcp_disabled     :: !(TF.Attribute s Text)
     {- ^ (Optional) If the subnet has DHCP disabled. -}
-    , _dhcp_enabled      :: !(TF.Attribute s "dhcp_enabled" Text)
+    , _dhcp_enabled      :: !(TF.Attribute s Text)
     {- ^ (Optional) If the subnet has DHCP enabled. -}
-    , _gateway_ip        :: !(TF.Attribute s "gateway_ip" Text)
+    , _gateway_ip        :: !(TF.Attribute s Text)
     {- ^ (Optional) The IP of the subnet's gateway. -}
-    , _ip_version        :: !(TF.Attribute s "ip_version" Text)
+    , _ip_version        :: !(TF.Attribute s Text)
     {- ^ (Optional) The IP version of the subnet (either 4 or 6). -}
-    , _ipv6_address_mode :: !(TF.Attribute s "ipv6_address_mode" Text)
+    , _ipv6_address_mode :: !(TF.Attribute s Text)
     {- ^ (Optional) The IPv6 address mode. Valid values are @dhcpv6-stateful@ , @dhcpv6-stateless@ , or @slaac@ . -}
-    , _ipv6_ra_mode      :: !(TF.Attribute s "ipv6_ra_mode" Text)
+    , _ipv6_ra_mode      :: !(TF.Attribute s Text)
     {- ^ (Optional) The IPv6 Router Advertisement mode. Valid values are @dhcpv6-stateful@ , @dhcpv6-stateless@ , or @slaac@ . -}
-    , _name              :: !(TF.Attribute s "name" Text)
+    , _name              :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the subnet. -}
-    , _network_id        :: !(TF.Attribute s "network_id" Text)
+    , _network_id        :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the network the subnet belongs to. -}
-    , _region            :: !(TF.Attribute s "region" Text)
+    , _region            :: !(TF.Attribute s Text)
     {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve subnet ids. If omitted, the @region@ argument of the provider is used. -}
-    , _subnet_id         :: !(TF.Attribute s "subnet_id" Text)
+    , _subnet_id         :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the subnet. -}
-    , _tenant_id         :: !(TF.Attribute s "tenant_id" Text)
+    , _tenant_id         :: !(TF.Attribute s Text)
     {- ^ (Optional) The owner of the subnet. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkingSubnetV2DataSource s) where
     toHCL NetworkingSubnetV2DataSource{..} = TF.block $ catMaybes
-        [ TF.attribute _cidr
-        , TF.attribute _dhcp_disabled
-        , TF.attribute _dhcp_enabled
-        , TF.attribute _gateway_ip
-        , TF.attribute _ip_version
-        , TF.attribute _ipv6_address_mode
-        , TF.attribute _ipv6_ra_mode
-        , TF.attribute _name
-        , TF.attribute _network_id
-        , TF.attribute _region
-        , TF.attribute _subnet_id
-        , TF.attribute _tenant_id
+        [ TF.attribute "cidr" _cidr
+        , TF.attribute "dhcp_disabled" _dhcp_disabled
+        , TF.attribute "dhcp_enabled" _dhcp_enabled
+        , TF.attribute "gateway_ip" _gateway_ip
+        , TF.attribute "ip_version" _ip_version
+        , TF.attribute "ipv6_address_mode" _ipv6_address_mode
+        , TF.attribute "ipv6_ra_mode" _ipv6_ra_mode
+        , TF.attribute "name" _name
+        , TF.attribute "network_id" _network_id
+        , TF.attribute "region" _region
+        , TF.attribute "subnet_id" _subnet_id
+        , TF.attribute "tenant_id" _tenant_id
         ]
 
-instance HasCidr (NetworkingSubnetV2DataSource s) Text where
-    type HasCidrThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasCidr (NetworkingSubnetV2DataSource s) s Text where
     cidr =
-        lens (_cidr :: NetworkingSubnetV2DataSource s -> TF.Attribute s "cidr" Text)
-             (\s a -> s { _cidr = a } :: NetworkingSubnetV2DataSource s)
+        lens (_cidr :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _cidr = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasDhcpDisabled (NetworkingSubnetV2DataSource s) Text where
-    type HasDhcpDisabledThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasDhcpDisabled (NetworkingSubnetV2DataSource s) s Text where
     dhcpDisabled =
-        lens (_dhcp_disabled :: NetworkingSubnetV2DataSource s -> TF.Attribute s "dhcp_disabled" Text)
-             (\s a -> s { _dhcp_disabled = a } :: NetworkingSubnetV2DataSource s)
+        lens (_dhcp_disabled :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _dhcp_disabled = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasDhcpEnabled (NetworkingSubnetV2DataSource s) Text where
-    type HasDhcpEnabledThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasDhcpEnabled (NetworkingSubnetV2DataSource s) s Text where
     dhcpEnabled =
-        lens (_dhcp_enabled :: NetworkingSubnetV2DataSource s -> TF.Attribute s "dhcp_enabled" Text)
-             (\s a -> s { _dhcp_enabled = a } :: NetworkingSubnetV2DataSource s)
+        lens (_dhcp_enabled :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _dhcp_enabled = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasGatewayIp (NetworkingSubnetV2DataSource s) Text where
-    type HasGatewayIpThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasGatewayIp (NetworkingSubnetV2DataSource s) s Text where
     gatewayIp =
-        lens (_gateway_ip :: NetworkingSubnetV2DataSource s -> TF.Attribute s "gateway_ip" Text)
-             (\s a -> s { _gateway_ip = a } :: NetworkingSubnetV2DataSource s)
+        lens (_gateway_ip :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _gateway_ip = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasIpVersion (NetworkingSubnetV2DataSource s) Text where
-    type HasIpVersionThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasIpVersion (NetworkingSubnetV2DataSource s) s Text where
     ipVersion =
-        lens (_ip_version :: NetworkingSubnetV2DataSource s -> TF.Attribute s "ip_version" Text)
-             (\s a -> s { _ip_version = a } :: NetworkingSubnetV2DataSource s)
+        lens (_ip_version :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _ip_version = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasIpv6AddressMode (NetworkingSubnetV2DataSource s) Text where
-    type HasIpv6AddressModeThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasIpv6AddressMode (NetworkingSubnetV2DataSource s) s Text where
     ipv6AddressMode =
-        lens (_ipv6_address_mode :: NetworkingSubnetV2DataSource s -> TF.Attribute s "ipv6_address_mode" Text)
-             (\s a -> s { _ipv6_address_mode = a } :: NetworkingSubnetV2DataSource s)
+        lens (_ipv6_address_mode :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _ipv6_address_mode = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasIpv6RaMode (NetworkingSubnetV2DataSource s) Text where
-    type HasIpv6RaModeThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasIpv6RaMode (NetworkingSubnetV2DataSource s) s Text where
     ipv6RaMode =
-        lens (_ipv6_ra_mode :: NetworkingSubnetV2DataSource s -> TF.Attribute s "ipv6_ra_mode" Text)
-             (\s a -> s { _ipv6_ra_mode = a } :: NetworkingSubnetV2DataSource s)
+        lens (_ipv6_ra_mode :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _ipv6_ra_mode = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasName (NetworkingSubnetV2DataSource s) Text where
-    type HasNameThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasName (NetworkingSubnetV2DataSource s) s Text where
     name =
-        lens (_name :: NetworkingSubnetV2DataSource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: NetworkingSubnetV2DataSource s)
+        lens (_name :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasNetworkId (NetworkingSubnetV2DataSource s) Text where
-    type HasNetworkIdThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasNetworkId (NetworkingSubnetV2DataSource s) s Text where
     networkId =
-        lens (_network_id :: NetworkingSubnetV2DataSource s -> TF.Attribute s "network_id" Text)
-             (\s a -> s { _network_id = a } :: NetworkingSubnetV2DataSource s)
+        lens (_network_id :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _network_id = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasRegion (NetworkingSubnetV2DataSource s) Text where
-    type HasRegionThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasRegion (NetworkingSubnetV2DataSource s) s Text where
     region =
-        lens (_region :: NetworkingSubnetV2DataSource s -> TF.Attribute s "region" Text)
-             (\s a -> s { _region = a } :: NetworkingSubnetV2DataSource s)
+        lens (_region :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _region = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasSubnetId (NetworkingSubnetV2DataSource s) Text where
-    type HasSubnetIdThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasSubnetId (NetworkingSubnetV2DataSource s) s Text where
     subnetId =
-        lens (_subnet_id :: NetworkingSubnetV2DataSource s -> TF.Attribute s "subnet_id" Text)
-             (\s a -> s { _subnet_id = a } :: NetworkingSubnetV2DataSource s)
+        lens (_subnet_id :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _subnet_id = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasTenantId (NetworkingSubnetV2DataSource s) Text where
-    type HasTenantIdThread (NetworkingSubnetV2DataSource s) Text = s
-
+instance HasTenantId (NetworkingSubnetV2DataSource s) s Text where
     tenantId =
-        lens (_tenant_id :: NetworkingSubnetV2DataSource s -> TF.Attribute s "tenant_id" Text)
-             (\s a -> s { _tenant_id = a } :: NetworkingSubnetV2DataSource s)
+        lens (_tenant_id :: NetworkingSubnetV2DataSource s -> TF.Attribute s Text)
+            (\s a -> s { _tenant_id = a } :: NetworkingSubnetV2DataSource s)
 
-instance HasComputedAllocationPools (NetworkingSubnetV2DataSource s) Text where
-    computedAllocationPools =
-        to (\x -> TF.Computed (TF.referenceKey x) "allocation_pools")
+instance HasComputedAllocationPools (NetworkingSubnetV2DataSource s) Text
 
-instance HasComputedDnsNameservers (NetworkingSubnetV2DataSource s) Text where
-    computedDnsNameservers =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_nameservers")
+instance HasComputedDnsNameservers (NetworkingSubnetV2DataSource s) Text
 
-instance HasComputedEnableDhcp (NetworkingSubnetV2DataSource s) Text where
-    computedEnableDhcp =
-        to (\x -> TF.Computed (TF.referenceKey x) "enable_dhcp")
+instance HasComputedEnableDhcp (NetworkingSubnetV2DataSource s) Text
 
-instance HasComputedHostRoutes (NetworkingSubnetV2DataSource s) Text where
-    computedHostRoutes =
-        to (\x -> TF.Computed (TF.referenceKey x) "host_routes")
+instance HasComputedHostRoutes (NetworkingSubnetV2DataSource s) Text
 
-instance HasComputedRegion (NetworkingSubnetV2DataSource s) Text where
-    computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
+instance HasComputedRegion (NetworkingSubnetV2DataSource s) Text
 
 networkingSubnetV2DataSource :: TF.DataSource TF.OpenStack (NetworkingSubnetV2DataSource s)
 networkingSubnetV2DataSource =
@@ -969,509 +783,440 @@ networkingSubnetV2DataSource =
             , _tenant_id = TF.Nil
             }
 
-class HasAvailabilityZoneHints a b | a -> b where
-    type HasAvailabilityZoneHintsThread a b :: *
+class HasAvailabilityZoneHints a s b | a -> s b where
+    availabilityZoneHints :: Lens' a (TF.Attribute s b)
 
-    availabilityZoneHints :: Lens' a (TF.Attribute (HasAvailabilityZoneHintsThread a b) "availability_zone_hints" b)
-
-instance HasAvailabilityZoneHints a b => HasAvailabilityZoneHints (TF.DataSource p a) b where
-    type HasAvailabilityZoneHintsThread (TF.DataSource p a) b =
-         HasAvailabilityZoneHintsThread a b
-
+instance HasAvailabilityZoneHints a s b => HasAvailabilityZoneHints (TF.DataSource p a) s b where
     availabilityZoneHints = TF.configuration . availabilityZoneHints
 
-class HasCidr a b | a -> b where
-    type HasCidrThread a b :: *
+class HasCidr a s b | a -> s b where
+    cidr :: Lens' a (TF.Attribute s b)
 
-    cidr :: Lens' a (TF.Attribute (HasCidrThread a b) "cidr" b)
-
-instance HasCidr a b => HasCidr (TF.DataSource p a) b where
-    type HasCidrThread (TF.DataSource p a) b =
-         HasCidrThread a b
-
+instance HasCidr a s b => HasCidr (TF.DataSource p a) s b where
     cidr = TF.configuration . cidr
 
-class HasDescription a b | a -> b where
-    type HasDescriptionThread a b :: *
+class HasDescription a s b | a -> s b where
+    description :: Lens' a (TF.Attribute s b)
 
-    description :: Lens' a (TF.Attribute (HasDescriptionThread a b) "description" b)
-
-instance HasDescription a b => HasDescription (TF.DataSource p a) b where
-    type HasDescriptionThread (TF.DataSource p a) b =
-         HasDescriptionThread a b
-
+instance HasDescription a s b => HasDescription (TF.DataSource p a) s b where
     description = TF.configuration . description
 
-class HasDhcpDisabled a b | a -> b where
-    type HasDhcpDisabledThread a b :: *
+class HasDhcpDisabled a s b | a -> s b where
+    dhcpDisabled :: Lens' a (TF.Attribute s b)
 
-    dhcpDisabled :: Lens' a (TF.Attribute (HasDhcpDisabledThread a b) "dhcp_disabled" b)
-
-instance HasDhcpDisabled a b => HasDhcpDisabled (TF.DataSource p a) b where
-    type HasDhcpDisabledThread (TF.DataSource p a) b =
-         HasDhcpDisabledThread a b
-
+instance HasDhcpDisabled a s b => HasDhcpDisabled (TF.DataSource p a) s b where
     dhcpDisabled = TF.configuration . dhcpDisabled
 
-class HasDhcpEnabled a b | a -> b where
-    type HasDhcpEnabledThread a b :: *
+class HasDhcpEnabled a s b | a -> s b where
+    dhcpEnabled :: Lens' a (TF.Attribute s b)
 
-    dhcpEnabled :: Lens' a (TF.Attribute (HasDhcpEnabledThread a b) "dhcp_enabled" b)
-
-instance HasDhcpEnabled a b => HasDhcpEnabled (TF.DataSource p a) b where
-    type HasDhcpEnabledThread (TF.DataSource p a) b =
-         HasDhcpEnabledThread a b
-
+instance HasDhcpEnabled a s b => HasDhcpEnabled (TF.DataSource p a) s b where
     dhcpEnabled = TF.configuration . dhcpEnabled
 
-class HasDisk a b | a -> b where
-    type HasDiskThread a b :: *
+class HasDisk a s b | a -> s b where
+    disk :: Lens' a (TF.Attribute s b)
 
-    disk :: Lens' a (TF.Attribute (HasDiskThread a b) "disk" b)
-
-instance HasDisk a b => HasDisk (TF.DataSource p a) b where
-    type HasDiskThread (TF.DataSource p a) b =
-         HasDiskThread a b
-
+instance HasDisk a s b => HasDisk (TF.DataSource p a) s b where
     disk = TF.configuration . disk
 
-class HasEmail a b | a -> b where
-    type HasEmailThread a b :: *
+class HasEmail a s b | a -> s b where
+    email :: Lens' a (TF.Attribute s b)
 
-    email :: Lens' a (TF.Attribute (HasEmailThread a b) "email" b)
-
-instance HasEmail a b => HasEmail (TF.DataSource p a) b where
-    type HasEmailThread (TF.DataSource p a) b =
-         HasEmailThread a b
-
+instance HasEmail a s b => HasEmail (TF.DataSource p a) s b where
     email = TF.configuration . email
 
-class HasGatewayIp a b | a -> b where
-    type HasGatewayIpThread a b :: *
+class HasGatewayIp a s b | a -> s b where
+    gatewayIp :: Lens' a (TF.Attribute s b)
 
-    gatewayIp :: Lens' a (TF.Attribute (HasGatewayIpThread a b) "gateway_ip" b)
-
-instance HasGatewayIp a b => HasGatewayIp (TF.DataSource p a) b where
-    type HasGatewayIpThread (TF.DataSource p a) b =
-         HasGatewayIpThread a b
-
+instance HasGatewayIp a s b => HasGatewayIp (TF.DataSource p a) s b where
     gatewayIp = TF.configuration . gatewayIp
 
-class HasIpVersion a b | a -> b where
-    type HasIpVersionThread a b :: *
+class HasIpVersion a s b | a -> s b where
+    ipVersion :: Lens' a (TF.Attribute s b)
 
-    ipVersion :: Lens' a (TF.Attribute (HasIpVersionThread a b) "ip_version" b)
-
-instance HasIpVersion a b => HasIpVersion (TF.DataSource p a) b where
-    type HasIpVersionThread (TF.DataSource p a) b =
-         HasIpVersionThread a b
-
+instance HasIpVersion a s b => HasIpVersion (TF.DataSource p a) s b where
     ipVersion = TF.configuration . ipVersion
 
-class HasIpv6AddressMode a b | a -> b where
-    type HasIpv6AddressModeThread a b :: *
+class HasIpv6AddressMode a s b | a -> s b where
+    ipv6AddressMode :: Lens' a (TF.Attribute s b)
 
-    ipv6AddressMode :: Lens' a (TF.Attribute (HasIpv6AddressModeThread a b) "ipv6_address_mode" b)
-
-instance HasIpv6AddressMode a b => HasIpv6AddressMode (TF.DataSource p a) b where
-    type HasIpv6AddressModeThread (TF.DataSource p a) b =
-         HasIpv6AddressModeThread a b
-
+instance HasIpv6AddressMode a s b => HasIpv6AddressMode (TF.DataSource p a) s b where
     ipv6AddressMode = TF.configuration . ipv6AddressMode
 
-class HasIpv6RaMode a b | a -> b where
-    type HasIpv6RaModeThread a b :: *
+class HasIpv6RaMode a s b | a -> s b where
+    ipv6RaMode :: Lens' a (TF.Attribute s b)
 
-    ipv6RaMode :: Lens' a (TF.Attribute (HasIpv6RaModeThread a b) "ipv6_ra_mode" b)
-
-instance HasIpv6RaMode a b => HasIpv6RaMode (TF.DataSource p a) b where
-    type HasIpv6RaModeThread (TF.DataSource p a) b =
-         HasIpv6RaModeThread a b
-
+instance HasIpv6RaMode a s b => HasIpv6RaMode (TF.DataSource p a) s b where
     ipv6RaMode = TF.configuration . ipv6RaMode
 
-class HasMatchingSubnetCidr a b | a -> b where
-    type HasMatchingSubnetCidrThread a b :: *
+class HasMatchingSubnetCidr a s b | a -> s b where
+    matchingSubnetCidr :: Lens' a (TF.Attribute s b)
 
-    matchingSubnetCidr :: Lens' a (TF.Attribute (HasMatchingSubnetCidrThread a b) "matching_subnet_cidr" b)
-
-instance HasMatchingSubnetCidr a b => HasMatchingSubnetCidr (TF.DataSource p a) b where
-    type HasMatchingSubnetCidrThread (TF.DataSource p a) b =
-         HasMatchingSubnetCidrThread a b
-
+instance HasMatchingSubnetCidr a s b => HasMatchingSubnetCidr (TF.DataSource p a) s b where
     matchingSubnetCidr = TF.configuration . matchingSubnetCidr
 
-class HasMinDisk a b | a -> b where
-    type HasMinDiskThread a b :: *
+class HasMinDisk a s b | a -> s b where
+    minDisk :: Lens' a (TF.Attribute s b)
 
-    minDisk :: Lens' a (TF.Attribute (HasMinDiskThread a b) "min_disk" b)
-
-instance HasMinDisk a b => HasMinDisk (TF.DataSource p a) b where
-    type HasMinDiskThread (TF.DataSource p a) b =
-         HasMinDiskThread a b
-
+instance HasMinDisk a s b => HasMinDisk (TF.DataSource p a) s b where
     minDisk = TF.configuration . minDisk
 
-class HasMinRam a b | a -> b where
-    type HasMinRamThread a b :: *
+class HasMinRam a s b | a -> s b where
+    minRam :: Lens' a (TF.Attribute s b)
 
-    minRam :: Lens' a (TF.Attribute (HasMinRamThread a b) "min_ram" b)
-
-instance HasMinRam a b => HasMinRam (TF.DataSource p a) b where
-    type HasMinRamThread (TF.DataSource p a) b =
-         HasMinRamThread a b
-
+instance HasMinRam a s b => HasMinRam (TF.DataSource p a) s b where
     minRam = TF.configuration . minRam
 
-class HasMostRecent a b | a -> b where
-    type HasMostRecentThread a b :: *
+class HasMostRecent a s b | a -> s b where
+    mostRecent :: Lens' a (TF.Attribute s b)
 
-    mostRecent :: Lens' a (TF.Attribute (HasMostRecentThread a b) "most_recent" b)
-
-instance HasMostRecent a b => HasMostRecent (TF.DataSource p a) b where
-    type HasMostRecentThread (TF.DataSource p a) b =
-         HasMostRecentThread a b
-
+instance HasMostRecent a s b => HasMostRecent (TF.DataSource p a) s b where
     mostRecent = TF.configuration . mostRecent
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.DataSource p a) b where
-    type HasNameThread (TF.DataSource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
-class HasNetworkId a b | a -> b where
-    type HasNetworkIdThread a b :: *
+class HasNetworkId a s b | a -> s b where
+    networkId :: Lens' a (TF.Attribute s b)
 
-    networkId :: Lens' a (TF.Attribute (HasNetworkIdThread a b) "network_id" b)
-
-instance HasNetworkId a b => HasNetworkId (TF.DataSource p a) b where
-    type HasNetworkIdThread (TF.DataSource p a) b =
-         HasNetworkIdThread a b
-
+instance HasNetworkId a s b => HasNetworkId (TF.DataSource p a) s b where
     networkId = TF.configuration . networkId
 
-class HasOwner a b | a -> b where
-    type HasOwnerThread a b :: *
+class HasOwner a s b | a -> s b where
+    owner :: Lens' a (TF.Attribute s b)
 
-    owner :: Lens' a (TF.Attribute (HasOwnerThread a b) "owner" b)
-
-instance HasOwner a b => HasOwner (TF.DataSource p a) b where
-    type HasOwnerThread (TF.DataSource p a) b =
-         HasOwnerThread a b
-
+instance HasOwner a s b => HasOwner (TF.DataSource p a) s b where
     owner = TF.configuration . owner
 
-class HasProperties a b | a -> b where
-    type HasPropertiesThread a b :: *
+class HasProperties a s b | a -> s b where
+    properties :: Lens' a (TF.Attribute s b)
 
-    properties :: Lens' a (TF.Attribute (HasPropertiesThread a b) "properties" b)
-
-instance HasProperties a b => HasProperties (TF.DataSource p a) b where
-    type HasPropertiesThread (TF.DataSource p a) b =
-         HasPropertiesThread a b
-
+instance HasProperties a s b => HasProperties (TF.DataSource p a) s b where
     properties = TF.configuration . properties
 
-class HasRam a b | a -> b where
-    type HasRamThread a b :: *
+class HasRam a s b | a -> s b where
+    ram :: Lens' a (TF.Attribute s b)
 
-    ram :: Lens' a (TF.Attribute (HasRamThread a b) "ram" b)
-
-instance HasRam a b => HasRam (TF.DataSource p a) b where
-    type HasRamThread (TF.DataSource p a) b =
-         HasRamThread a b
-
+instance HasRam a s b => HasRam (TF.DataSource p a) s b where
     ram = TF.configuration . ram
 
-class HasRegion a b | a -> b where
-    type HasRegionThread a b :: *
+class HasRegion a s b | a -> s b where
+    region :: Lens' a (TF.Attribute s b)
 
-    region :: Lens' a (TF.Attribute (HasRegionThread a b) "region" b)
-
-instance HasRegion a b => HasRegion (TF.DataSource p a) b where
-    type HasRegionThread (TF.DataSource p a) b =
-         HasRegionThread a b
-
+instance HasRegion a s b => HasRegion (TF.DataSource p a) s b where
     region = TF.configuration . region
 
-class HasRxTxFactor a b | a -> b where
-    type HasRxTxFactorThread a b :: *
+class HasRxTxFactor a s b | a -> s b where
+    rxTxFactor :: Lens' a (TF.Attribute s b)
 
-    rxTxFactor :: Lens' a (TF.Attribute (HasRxTxFactorThread a b) "rx_tx_factor" b)
-
-instance HasRxTxFactor a b => HasRxTxFactor (TF.DataSource p a) b where
-    type HasRxTxFactorThread (TF.DataSource p a) b =
-         HasRxTxFactorThread a b
-
+instance HasRxTxFactor a s b => HasRxTxFactor (TF.DataSource p a) s b where
     rxTxFactor = TF.configuration . rxTxFactor
 
-class HasSecgroupId a b | a -> b where
-    type HasSecgroupIdThread a b :: *
+class HasSecgroupId a s b | a -> s b where
+    secgroupId :: Lens' a (TF.Attribute s b)
 
-    secgroupId :: Lens' a (TF.Attribute (HasSecgroupIdThread a b) "secgroup_id" b)
-
-instance HasSecgroupId a b => HasSecgroupId (TF.DataSource p a) b where
-    type HasSecgroupIdThread (TF.DataSource p a) b =
-         HasSecgroupIdThread a b
-
+instance HasSecgroupId a s b => HasSecgroupId (TF.DataSource p a) s b where
     secgroupId = TF.configuration . secgroupId
 
-class HasSizeMax a b | a -> b where
-    type HasSizeMaxThread a b :: *
+class HasSizeMax a s b | a -> s b where
+    sizeMax :: Lens' a (TF.Attribute s b)
 
-    sizeMax :: Lens' a (TF.Attribute (HasSizeMaxThread a b) "size_max" b)
-
-instance HasSizeMax a b => HasSizeMax (TF.DataSource p a) b where
-    type HasSizeMaxThread (TF.DataSource p a) b =
-         HasSizeMaxThread a b
-
+instance HasSizeMax a s b => HasSizeMax (TF.DataSource p a) s b where
     sizeMax = TF.configuration . sizeMax
 
-class HasSizeMin a b | a -> b where
-    type HasSizeMinThread a b :: *
+class HasSizeMin a s b | a -> s b where
+    sizeMin :: Lens' a (TF.Attribute s b)
 
-    sizeMin :: Lens' a (TF.Attribute (HasSizeMinThread a b) "size_min" b)
-
-instance HasSizeMin a b => HasSizeMin (TF.DataSource p a) b where
-    type HasSizeMinThread (TF.DataSource p a) b =
-         HasSizeMinThread a b
-
+instance HasSizeMin a s b => HasSizeMin (TF.DataSource p a) s b where
     sizeMin = TF.configuration . sizeMin
 
-class HasSortDirection a b | a -> b where
-    type HasSortDirectionThread a b :: *
+class HasSortDirection a s b | a -> s b where
+    sortDirection :: Lens' a (TF.Attribute s b)
 
-    sortDirection :: Lens' a (TF.Attribute (HasSortDirectionThread a b) "sort_direction" b)
-
-instance HasSortDirection a b => HasSortDirection (TF.DataSource p a) b where
-    type HasSortDirectionThread (TF.DataSource p a) b =
-         HasSortDirectionThread a b
-
+instance HasSortDirection a s b => HasSortDirection (TF.DataSource p a) s b where
     sortDirection = TF.configuration . sortDirection
 
-class HasSortKey a b | a -> b where
-    type HasSortKeyThread a b :: *
+class HasSortKey a s b | a -> s b where
+    sortKey :: Lens' a (TF.Attribute s b)
 
-    sortKey :: Lens' a (TF.Attribute (HasSortKeyThread a b) "sort_key" b)
-
-instance HasSortKey a b => HasSortKey (TF.DataSource p a) b where
-    type HasSortKeyThread (TF.DataSource p a) b =
-         HasSortKeyThread a b
-
+instance HasSortKey a s b => HasSortKey (TF.DataSource p a) s b where
     sortKey = TF.configuration . sortKey
 
-class HasStatus a b | a -> b where
-    type HasStatusThread a b :: *
+class HasStatus a s b | a -> s b where
+    status :: Lens' a (TF.Attribute s b)
 
-    status :: Lens' a (TF.Attribute (HasStatusThread a b) "status" b)
-
-instance HasStatus a b => HasStatus (TF.DataSource p a) b where
-    type HasStatusThread (TF.DataSource p a) b =
-         HasStatusThread a b
-
+instance HasStatus a s b => HasStatus (TF.DataSource p a) s b where
     status = TF.configuration . status
 
-class HasSubnetId a b | a -> b where
-    type HasSubnetIdThread a b :: *
+class HasSubnetId a s b | a -> s b where
+    subnetId :: Lens' a (TF.Attribute s b)
 
-    subnetId :: Lens' a (TF.Attribute (HasSubnetIdThread a b) "subnet_id" b)
-
-instance HasSubnetId a b => HasSubnetId (TF.DataSource p a) b where
-    type HasSubnetIdThread (TF.DataSource p a) b =
-         HasSubnetIdThread a b
-
+instance HasSubnetId a s b => HasSubnetId (TF.DataSource p a) s b where
     subnetId = TF.configuration . subnetId
 
-class HasSwap a b | a -> b where
-    type HasSwapThread a b :: *
+class HasSwap a s b | a -> s b where
+    swap :: Lens' a (TF.Attribute s b)
 
-    swap :: Lens' a (TF.Attribute (HasSwapThread a b) "swap" b)
-
-instance HasSwap a b => HasSwap (TF.DataSource p a) b where
-    type HasSwapThread (TF.DataSource p a) b =
-         HasSwapThread a b
-
+instance HasSwap a s b => HasSwap (TF.DataSource p a) s b where
     swap = TF.configuration . swap
 
-class HasTag a b | a -> b where
-    type HasTagThread a b :: *
+class HasTag a s b | a -> s b where
+    tag :: Lens' a (TF.Attribute s b)
 
-    tag :: Lens' a (TF.Attribute (HasTagThread a b) "tag" b)
-
-instance HasTag a b => HasTag (TF.DataSource p a) b where
-    type HasTagThread (TF.DataSource p a) b =
-         HasTagThread a b
-
+instance HasTag a s b => HasTag (TF.DataSource p a) s b where
     tag = TF.configuration . tag
 
-class HasTenantId a b | a -> b where
-    type HasTenantIdThread a b :: *
+class HasTenantId a s b | a -> s b where
+    tenantId :: Lens' a (TF.Attribute s b)
 
-    tenantId :: Lens' a (TF.Attribute (HasTenantIdThread a b) "tenant_id" b)
-
-instance HasTenantId a b => HasTenantId (TF.DataSource p a) b where
-    type HasTenantIdThread (TF.DataSource p a) b =
-         HasTenantIdThread a b
-
+instance HasTenantId a s b => HasTenantId (TF.DataSource p a) s b where
     tenantId = TF.configuration . tenantId
 
-class HasTtl a b | a -> b where
-    type HasTtlThread a b :: *
+class HasTtl a s b | a -> s b where
+    ttl :: Lens' a (TF.Attribute s b)
 
-    ttl :: Lens' a (TF.Attribute (HasTtlThread a b) "ttl" b)
-
-instance HasTtl a b => HasTtl (TF.DataSource p a) b where
-    type HasTtlThread (TF.DataSource p a) b =
-         HasTtlThread a b
-
+instance HasTtl a s b => HasTtl (TF.DataSource p a) s b where
     ttl = TF.configuration . ttl
 
-class HasType' a b | a -> b where
-    type HasType'Thread a b :: *
+class HasType' a s b | a -> s b where
+    type' :: Lens' a (TF.Attribute s b)
 
-    type' :: Lens' a (TF.Attribute (HasType'Thread a b) "type" b)
-
-instance HasType' a b => HasType' (TF.DataSource p a) b where
-    type HasType'Thread (TF.DataSource p a) b =
-         HasType'Thread a b
-
+instance HasType' a s b => HasType' (TF.DataSource p a) s b where
     type' = TF.configuration . type'
 
-class HasVcpus a b | a -> b where
-    type HasVcpusThread a b :: *
+class HasVcpus a s b | a -> s b where
+    vcpus :: Lens' a (TF.Attribute s b)
 
-    vcpus :: Lens' a (TF.Attribute (HasVcpusThread a b) "vcpus" b)
-
-instance HasVcpus a b => HasVcpus (TF.DataSource p a) b where
-    type HasVcpusThread (TF.DataSource p a) b =
-         HasVcpusThread a b
-
+instance HasVcpus a s b => HasVcpus (TF.DataSource p a) s b where
     vcpus = TF.configuration . vcpus
 
-class HasVisibility a b | a -> b where
-    type HasVisibilityThread a b :: *
+class HasVisibility a s b | a -> s b where
+    visibility :: Lens' a (TF.Attribute s b)
 
-    visibility :: Lens' a (TF.Attribute (HasVisibilityThread a b) "visibility" b)
-
-instance HasVisibility a b => HasVisibility (TF.DataSource p a) b where
-    type HasVisibilityThread (TF.DataSource p a) b =
-         HasVisibilityThread a b
-
+instance HasVisibility a s b => HasVisibility (TF.DataSource p a) s b where
     visibility = TF.configuration . visibility
 
 class HasComputedAdminStateUp a b | a -> b where
-    computedAdminStateUp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedAdminStateUp
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAdminStateUp =
+        to (\x -> TF.Computed (TF.referenceKey x) "admin_state_up")
 
 class HasComputedAllocationPools a b | a -> b where
-    computedAllocationPools :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedAllocationPools
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAllocationPools =
+        to (\x -> TF.Computed (TF.referenceKey x) "allocation_pools")
 
 class HasComputedAttributes a b | a -> b where
-    computedAttributes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedAttributes
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAttributes =
+        to (\x -> TF.Computed (TF.referenceKey x) "attributes")
 
 class HasComputedAvailabilityZoneHints a b | a -> b where
-    computedAvailabilityZoneHints :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedAvailabilityZoneHints
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAvailabilityZoneHints =
+        to (\x -> TF.Computed (TF.referenceKey x) "availability_zone_hints")
 
 class HasComputedChecksum a b | a -> b where
-    computedChecksum :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedChecksum
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedChecksum =
+        to (\x -> TF.Computed (TF.referenceKey x) "checksum")
 
 class HasComputedContainerFormat a b | a -> b where
-    computedContainerFormat :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedContainerFormat
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedContainerFormat =
+        to (\x -> TF.Computed (TF.referenceKey x) "container_format")
 
 class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedCreatedAt
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedCreatedAt =
+        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedDescription
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDescription =
+        to (\x -> TF.Computed (TF.referenceKey x) "description")
 
 class HasComputedDiskFormat a b | a -> b where
-    computedDiskFormat :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedDiskFormat
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDiskFormat =
+        to (\x -> TF.Computed (TF.referenceKey x) "disk_format")
 
 class HasComputedDnsNameservers a b | a -> b where
-    computedDnsNameservers :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedDnsNameservers
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDnsNameservers =
+        to (\x -> TF.Computed (TF.referenceKey x) "dns_nameservers")
 
 class HasComputedEmail a b | a -> b where
-    computedEmail :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedEmail
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedEmail =
+        to (\x -> TF.Computed (TF.referenceKey x) "email")
 
 class HasComputedEnableDhcp a b | a -> b where
-    computedEnableDhcp :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedEnableDhcp
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedEnableDhcp =
+        to (\x -> TF.Computed (TF.referenceKey x) "enable_dhcp")
 
 class HasComputedFile a b | a -> b where
-    computedFile :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedFile
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedFile =
+        to (\x -> TF.Computed (TF.referenceKey x) "file")
 
 class HasComputedHostRoutes a b | a -> b where
-    computedHostRoutes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedHostRoutes
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHostRoutes =
+        to (\x -> TF.Computed (TF.referenceKey x) "host_routes")
 
 class HasComputedIsPublic a b | a -> b where
-    computedIsPublic :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedIsPublic
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedIsPublic =
+        to (\x -> TF.Computed (TF.referenceKey x) "is_public")
 
 class HasComputedMasters a b | a -> b where
-    computedMasters :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedMasters
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedMasters =
+        to (\x -> TF.Computed (TF.referenceKey x) "masters")
 
 class HasComputedMetadata a b | a -> b where
-    computedMetadata :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedMetadata
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedMetadata =
+        to (\x -> TF.Computed (TF.referenceKey x) "metadata")
 
 class HasComputedMinDiskGb a b | a -> b where
-    computedMinDiskGb :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedMinDiskGb
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedMinDiskGb =
+        to (\x -> TF.Computed (TF.referenceKey x) "min_disk_gb")
 
 class HasComputedMinRamMb a b | a -> b where
-    computedMinRamMb :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedMinRamMb
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedMinRamMb =
+        to (\x -> TF.Computed (TF.referenceKey x) "min_ram_mb")
 
 class HasComputedName a b | a -> b where
-    computedName :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedName =
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
 
 class HasComputedPoolId a b | a -> b where
-    computedPoolId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedPoolId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPoolId =
+        to (\x -> TF.Computed (TF.referenceKey x) "pool_id")
 
 class HasComputedProjectId a b | a -> b where
-    computedProjectId :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedProjectId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedProjectId =
+        to (\x -> TF.Computed (TF.referenceKey x) "project_id")
 
 class HasComputedProperties a b | a -> b where
-    computedProperties :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedProperties
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedProperties =
+        to (\x -> TF.Computed (TF.referenceKey x) "properties")
 
 class HasComputedProtected a b | a -> b where
-    computedProtected :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedProtected
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedProtected =
+        to (\x -> TF.Computed (TF.referenceKey x) "protected")
 
 class HasComputedRegion a b | a -> b where
-    computedRegion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedRegion
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedRegion =
+        to (\x -> TF.Computed (TF.referenceKey x) "region")
 
 class HasComputedSchema a b | a -> b where
-    computedSchema :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedSchema
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSchema =
+        to (\x -> TF.Computed (TF.referenceKey x) "schema")
 
 class HasComputedSerial a b | a -> b where
-    computedSerial :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedSerial
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSerial =
+        to (\x -> TF.Computed (TF.referenceKey x) "serial")
 
 class HasComputedShared a b | a -> b where
-    computedShared :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedShared
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedShared =
+        to (\x -> TF.Computed (TF.referenceKey x) "shared")
 
 class HasComputedSizeBytes a b | a -> b where
-    computedSizeBytes :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedSizeBytes
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSizeBytes =
+        to (\x -> TF.Computed (TF.referenceKey x) "size_bytes")
 
 class HasComputedStatus a b | a -> b where
-    computedStatus :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedStatus
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedStatus =
+        to (\x -> TF.Computed (TF.referenceKey x) "status")
 
 class HasComputedTags a b | a -> b where
-    computedTags :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedTags
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedTags =
+        to (\x -> TF.Computed (TF.referenceKey x) "tags")
 
 class HasComputedTransferredAt a b | a -> b where
-    computedTransferredAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedTransferredAt
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedTransferredAt =
+        to (\x -> TF.Computed (TF.referenceKey x) "transferred_at")
 
 class HasComputedTtl a b | a -> b where
-    computedTtl :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedTtl
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedTtl =
+        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
 
 class HasComputedType' a b | a -> b where
-    computedType' :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedType'
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedType' =
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
 
 class HasComputedUpdateAt a b | a -> b where
-    computedUpdateAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedUpdateAt
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedUpdateAt =
+        to (\x -> TF.Computed (TF.referenceKey x) "update_at")
 
 class HasComputedUpdatedAt a b | a -> b where
-    computedUpdatedAt :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedUpdatedAt
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedUpdatedAt =
+        to (\x -> TF.Computed (TF.referenceKey x) "updated_at")
 
 class HasComputedVersion a b | a -> b where
-    computedVersion :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedVersion
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedVersion =
+        to (\x -> TF.Computed (TF.referenceKey x) "version")

@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -75,10 +74,13 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                   as TF
+import qualified GHC.Base                    as TF
+import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
-import qualified Terrafomo.Meta              as TF (configuration)
+import qualified Terrafomo.Meta              as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.RabbitMQ.Provider as TF
 import qualified Terrafomo.RabbitMQ.Types    as TF
@@ -91,75 +93,61 @@ The @rabbitmq_binding@ resource creates and manages a binding relationship
 between a queue an exchange.
 -}
 data BindingResource s = BindingResource {
-      _arguments        :: !(TF.Attribute s "arguments" Text)
+      _arguments        :: !(TF.Attribute s Text)
     {- ^ (Optional) Additional key/value arguments for the binding. -}
-    , _destination      :: !(TF.Attribute s "destination" Text)
+    , _destination      :: !(TF.Attribute s Text)
     {- ^ (Required) The destination queue or exchange. -}
-    , _destination_type :: !(TF.Attribute s "destination_type" Text)
+    , _destination_type :: !(TF.Attribute s Text)
     {- ^ (Required) The type of destination (queue or exchange). -}
-    , _routing_key      :: !(TF.Attribute s "routing_key" Text)
+    , _routing_key      :: !(TF.Attribute s Text)
     {- ^ (Optional) A routing key for the binding. -}
-    , _source           :: !(TF.Attribute s "source" Text)
+    , _source           :: !(TF.Attribute s Text)
     {- ^ (Required) The source exchange. -}
-    , _vhost            :: !(TF.Attribute s "vhost" Text)
+    , _vhost            :: !(TF.Attribute s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (BindingResource s) where
     toHCL BindingResource{..} = TF.block $ catMaybes
-        [ TF.attribute _arguments
-        , TF.attribute _destination
-        , TF.attribute _destination_type
-        , TF.attribute _routing_key
-        , TF.attribute _source
-        , TF.attribute _vhost
+        [ TF.attribute "arguments" _arguments
+        , TF.attribute "destination" _destination
+        , TF.attribute "destination_type" _destination_type
+        , TF.attribute "routing_key" _routing_key
+        , TF.attribute "source" _source
+        , TF.attribute "vhost" _vhost
         ]
 
-instance HasArguments (BindingResource s) Text where
-    type HasArgumentsThread (BindingResource s) Text = s
-
+instance HasArguments (BindingResource s) s Text where
     arguments =
-        lens (_arguments :: BindingResource s -> TF.Attribute s "arguments" Text)
-             (\s a -> s { _arguments = a } :: BindingResource s)
+        lens (_arguments :: BindingResource s -> TF.Attribute s Text)
+            (\s a -> s { _arguments = a } :: BindingResource s)
 
-instance HasDestination (BindingResource s) Text where
-    type HasDestinationThread (BindingResource s) Text = s
-
+instance HasDestination (BindingResource s) s Text where
     destination =
-        lens (_destination :: BindingResource s -> TF.Attribute s "destination" Text)
-             (\s a -> s { _destination = a } :: BindingResource s)
+        lens (_destination :: BindingResource s -> TF.Attribute s Text)
+            (\s a -> s { _destination = a } :: BindingResource s)
 
-instance HasDestinationType (BindingResource s) Text where
-    type HasDestinationTypeThread (BindingResource s) Text = s
-
+instance HasDestinationType (BindingResource s) s Text where
     destinationType =
-        lens (_destination_type :: BindingResource s -> TF.Attribute s "destination_type" Text)
-             (\s a -> s { _destination_type = a } :: BindingResource s)
+        lens (_destination_type :: BindingResource s -> TF.Attribute s Text)
+            (\s a -> s { _destination_type = a } :: BindingResource s)
 
-instance HasRoutingKey (BindingResource s) Text where
-    type HasRoutingKeyThread (BindingResource s) Text = s
-
+instance HasRoutingKey (BindingResource s) s Text where
     routingKey =
-        lens (_routing_key :: BindingResource s -> TF.Attribute s "routing_key" Text)
-             (\s a -> s { _routing_key = a } :: BindingResource s)
+        lens (_routing_key :: BindingResource s -> TF.Attribute s Text)
+            (\s a -> s { _routing_key = a } :: BindingResource s)
 
-instance HasSource (BindingResource s) Text where
-    type HasSourceThread (BindingResource s) Text = s
-
+instance HasSource (BindingResource s) s Text where
     source =
-        lens (_source :: BindingResource s -> TF.Attribute s "source" Text)
-             (\s a -> s { _source = a } :: BindingResource s)
+        lens (_source :: BindingResource s -> TF.Attribute s Text)
+            (\s a -> s { _source = a } :: BindingResource s)
 
-instance HasVhost (BindingResource s) Text where
-    type HasVhostThread (BindingResource s) Text = s
-
+instance HasVhost (BindingResource s) s Text where
     vhost =
-        lens (_vhost :: BindingResource s -> TF.Attribute s "vhost" Text)
-             (\s a -> s { _vhost = a } :: BindingResource s)
+        lens (_vhost :: BindingResource s -> TF.Attribute s Text)
+            (\s a -> s { _vhost = a } :: BindingResource s)
 
-instance HasComputedPropertiesKey (BindingResource s) Text where
-    computedPropertiesKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "properties_key")
+instance HasComputedPropertiesKey (BindingResource s) Text
 
 bindingResource :: TF.Resource TF.RabbitMQ (BindingResource s)
 bindingResource =
@@ -178,41 +166,35 @@ bindingResource =
 The @rabbitmq_exchange@ resource creates and manages an exchange.
 -}
 data ExchangeResource s = ExchangeResource {
-      _name     :: !(TF.Attribute s "name" Text)
+      _name     :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the exchange. -}
-    , _settings :: !(TF.Attribute s "settings" Text)
+    , _settings :: !(TF.Attribute s Text)
     {- ^ (Required) The settings of the exchange. The structure is described below. -}
-    , _vhost    :: !(TF.Attribute s "vhost" Text)
+    , _vhost    :: !(TF.Attribute s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ExchangeResource s) where
     toHCL ExchangeResource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
-        , TF.attribute _settings
-        , TF.attribute _vhost
+        [ TF.attribute "name" _name
+        , TF.attribute "settings" _settings
+        , TF.attribute "vhost" _vhost
         ]
 
-instance HasName (ExchangeResource s) Text where
-    type HasNameThread (ExchangeResource s) Text = s
-
+instance HasName (ExchangeResource s) s Text where
     name =
-        lens (_name :: ExchangeResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: ExchangeResource s)
+        lens (_name :: ExchangeResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: ExchangeResource s)
 
-instance HasSettings (ExchangeResource s) Text where
-    type HasSettingsThread (ExchangeResource s) Text = s
-
+instance HasSettings (ExchangeResource s) s Text where
     settings =
-        lens (_settings :: ExchangeResource s -> TF.Attribute s "settings" Text)
-             (\s a -> s { _settings = a } :: ExchangeResource s)
+        lens (_settings :: ExchangeResource s -> TF.Attribute s Text)
+            (\s a -> s { _settings = a } :: ExchangeResource s)
 
-instance HasVhost (ExchangeResource s) Text where
-    type HasVhostThread (ExchangeResource s) Text = s
-
+instance HasVhost (ExchangeResource s) s Text where
     vhost =
-        lens (_vhost :: ExchangeResource s -> TF.Attribute s "vhost" Text)
-             (\s a -> s { _vhost = a } :: ExchangeResource s)
+        lens (_vhost :: ExchangeResource s -> TF.Attribute s Text)
+            (\s a -> s { _vhost = a } :: ExchangeResource s)
 
 exchangeResource :: TF.Resource TF.RabbitMQ (ExchangeResource s)
 exchangeResource =
@@ -229,41 +211,35 @@ The @rabbitmq_permissions@ resource creates and manages a user's set of
 permissions.
 -}
 data PermissionsResource s = PermissionsResource {
-      _permissions :: !(TF.Attribute s "permissions" Text)
+      _permissions :: !(TF.Attribute s Text)
     {- ^ (Required) The settings of the permissions. The structure is described below. -}
-    , _user        :: !(TF.Attribute s "user" Text)
+    , _user        :: !(TF.Attribute s Text)
     {- ^ (Required) The user to apply the permissions to. -}
-    , _vhost       :: !(TF.Attribute s "vhost" Text)
+    , _vhost       :: !(TF.Attribute s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PermissionsResource s) where
     toHCL PermissionsResource{..} = TF.block $ catMaybes
-        [ TF.attribute _permissions
-        , TF.attribute _user
-        , TF.attribute _vhost
+        [ TF.attribute "permissions" _permissions
+        , TF.attribute "user" _user
+        , TF.attribute "vhost" _vhost
         ]
 
-instance HasPermissions (PermissionsResource s) Text where
-    type HasPermissionsThread (PermissionsResource s) Text = s
-
+instance HasPermissions (PermissionsResource s) s Text where
     permissions =
-        lens (_permissions :: PermissionsResource s -> TF.Attribute s "permissions" Text)
-             (\s a -> s { _permissions = a } :: PermissionsResource s)
+        lens (_permissions :: PermissionsResource s -> TF.Attribute s Text)
+            (\s a -> s { _permissions = a } :: PermissionsResource s)
 
-instance HasUser (PermissionsResource s) Text where
-    type HasUserThread (PermissionsResource s) Text = s
-
+instance HasUser (PermissionsResource s) s Text where
     user =
-        lens (_user :: PermissionsResource s -> TF.Attribute s "user" Text)
-             (\s a -> s { _user = a } :: PermissionsResource s)
+        lens (_user :: PermissionsResource s -> TF.Attribute s Text)
+            (\s a -> s { _user = a } :: PermissionsResource s)
 
-instance HasVhost (PermissionsResource s) Text where
-    type HasVhostThread (PermissionsResource s) Text = s
-
+instance HasVhost (PermissionsResource s) s Text where
     vhost =
-        lens (_vhost :: PermissionsResource s -> TF.Attribute s "vhost" Text)
-             (\s a -> s { _vhost = a } :: PermissionsResource s)
+        lens (_vhost :: PermissionsResource s -> TF.Attribute s Text)
+            (\s a -> s { _vhost = a } :: PermissionsResource s)
 
 permissionsResource :: TF.Resource TF.RabbitMQ (PermissionsResource s)
 permissionsResource =
@@ -280,41 +256,35 @@ The @rabbitmq_policy@ resource creates and manages policies for exchanges
 and queues.
 -}
 data PolicyResource s = PolicyResource {
-      _name   :: !(TF.Attribute s "name" Text)
+      _name   :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the policy. -}
-    , _policy :: !(TF.Attribute s "policy" Text)
+    , _policy :: !(TF.Attribute s Text)
     {- ^ (Required) The settings of the policy. The structure is described below. -}
-    , _vhost  :: !(TF.Attribute s "vhost" Text)
+    , _vhost  :: !(TF.Attribute s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PolicyResource s) where
     toHCL PolicyResource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
-        , TF.attribute _policy
-        , TF.attribute _vhost
+        [ TF.attribute "name" _name
+        , TF.attribute "policy" _policy
+        , TF.attribute "vhost" _vhost
         ]
 
-instance HasName (PolicyResource s) Text where
-    type HasNameThread (PolicyResource s) Text = s
-
+instance HasName (PolicyResource s) s Text where
     name =
-        lens (_name :: PolicyResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: PolicyResource s)
+        lens (_name :: PolicyResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: PolicyResource s)
 
-instance HasPolicy (PolicyResource s) Text where
-    type HasPolicyThread (PolicyResource s) Text = s
-
+instance HasPolicy (PolicyResource s) s Text where
     policy =
-        lens (_policy :: PolicyResource s -> TF.Attribute s "policy" Text)
-             (\s a -> s { _policy = a } :: PolicyResource s)
+        lens (_policy :: PolicyResource s -> TF.Attribute s Text)
+            (\s a -> s { _policy = a } :: PolicyResource s)
 
-instance HasVhost (PolicyResource s) Text where
-    type HasVhostThread (PolicyResource s) Text = s
-
+instance HasVhost (PolicyResource s) s Text where
     vhost =
-        lens (_vhost :: PolicyResource s -> TF.Attribute s "vhost" Text)
-             (\s a -> s { _vhost = a } :: PolicyResource s)
+        lens (_vhost :: PolicyResource s -> TF.Attribute s Text)
+            (\s a -> s { _vhost = a } :: PolicyResource s)
 
 policyResource :: TF.Resource TF.RabbitMQ (PolicyResource s)
 policyResource =
@@ -330,41 +300,35 @@ policyResource =
 The @rabbitmq_queue@ resource creates and manages a queue.
 -}
 data QueueResource s = QueueResource {
-      _name     :: !(TF.Attribute s "name" Text)
+      _name     :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the queue. -}
-    , _settings :: !(TF.Attribute s "settings" Text)
+    , _settings :: !(TF.Attribute s Text)
     {- ^ (Required) The settings of the queue. The structure is described below. -}
-    , _vhost    :: !(TF.Attribute s "vhost" Text)
+    , _vhost    :: !(TF.Attribute s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (QueueResource s) where
     toHCL QueueResource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
-        , TF.attribute _settings
-        , TF.attribute _vhost
+        [ TF.attribute "name" _name
+        , TF.attribute "settings" _settings
+        , TF.attribute "vhost" _vhost
         ]
 
-instance HasName (QueueResource s) Text where
-    type HasNameThread (QueueResource s) Text = s
-
+instance HasName (QueueResource s) s Text where
     name =
-        lens (_name :: QueueResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: QueueResource s)
+        lens (_name :: QueueResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: QueueResource s)
 
-instance HasSettings (QueueResource s) Text where
-    type HasSettingsThread (QueueResource s) Text = s
-
+instance HasSettings (QueueResource s) s Text where
     settings =
-        lens (_settings :: QueueResource s -> TF.Attribute s "settings" Text)
-             (\s a -> s { _settings = a } :: QueueResource s)
+        lens (_settings :: QueueResource s -> TF.Attribute s Text)
+            (\s a -> s { _settings = a } :: QueueResource s)
 
-instance HasVhost (QueueResource s) Text where
-    type HasVhostThread (QueueResource s) Text = s
-
+instance HasVhost (QueueResource s) s Text where
     vhost =
-        lens (_vhost :: QueueResource s -> TF.Attribute s "vhost" Text)
-             (\s a -> s { _vhost = a } :: QueueResource s)
+        lens (_vhost :: QueueResource s -> TF.Attribute s Text)
+            (\s a -> s { _vhost = a } :: QueueResource s)
 
 queueResource :: TF.Resource TF.RabbitMQ (QueueResource s)
 queueResource =
@@ -382,41 +346,35 @@ arguments including username and password will be stored in the raw state as
 plain-text. </docs/state/sensitive-data.html> .
 -}
 data UserResource s = UserResource {
-      _name     :: !(TF.Attribute s "name" Text)
+      _name     :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the user. -}
-    , _password :: !(TF.Attribute s "password" Text)
+    , _password :: !(TF.Attribute s Text)
     {- ^ (Required) The password of the user. The value of this argument is plain-text so make sure to secure where this is defined. -}
-    , _tags     :: !(TF.Attribute s "tags" Text)
+    , _tags     :: !(TF.Attribute s Text)
     {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
-        , TF.attribute _password
-        , TF.attribute _tags
+        [ TF.attribute "name" _name
+        , TF.attribute "password" _password
+        , TF.attribute "tags" _tags
         ]
 
-instance HasName (UserResource s) Text where
-    type HasNameThread (UserResource s) Text = s
-
+instance HasName (UserResource s) s Text where
     name =
-        lens (_name :: UserResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: UserResource s)
+        lens (_name :: UserResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: UserResource s)
 
-instance HasPassword (UserResource s) Text where
-    type HasPasswordThread (UserResource s) Text = s
-
+instance HasPassword (UserResource s) s Text where
     password =
-        lens (_password :: UserResource s -> TF.Attribute s "password" Text)
-             (\s a -> s { _password = a } :: UserResource s)
+        lens (_password :: UserResource s -> TF.Attribute s Text)
+            (\s a -> s { _password = a } :: UserResource s)
 
-instance HasTags (UserResource s) Text where
-    type HasTagsThread (UserResource s) Text = s
-
+instance HasTags (UserResource s) s Text where
     tags =
-        lens (_tags :: UserResource s -> TF.Attribute s "tags" Text)
-             (\s a -> s { _tags = a } :: UserResource s)
+        lens (_tags :: UserResource s -> TF.Attribute s Text)
+            (\s a -> s { _tags = a } :: UserResource s)
 
 userResource :: TF.Resource TF.RabbitMQ (UserResource s)
 userResource =
@@ -432,21 +390,19 @@ userResource =
 The @rabbitmq_vhost@ resource creates and manages a vhost.
 -}
 data VhostResource s = VhostResource {
-      _name :: !(TF.Attribute s "name" Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the vhost. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VhostResource s) where
     toHCL VhostResource{..} = TF.block $ catMaybes
-        [ TF.attribute _name
+        [ TF.attribute "name" _name
         ]
 
-instance HasName (VhostResource s) Text where
-    type HasNameThread (VhostResource s) Text = s
-
+instance HasName (VhostResource s) s Text where
     name =
-        lens (_name :: VhostResource s -> TF.Attribute s "name" Text)
-             (\s a -> s { _name = a } :: VhostResource s)
+        lens (_name :: VhostResource s -> TF.Attribute s Text)
+            (\s a -> s { _name = a } :: VhostResource s)
 
 vhostResource :: TF.Resource TF.RabbitMQ (VhostResource s)
 vhostResource =
@@ -455,148 +411,86 @@ vhostResource =
               _name = TF.Nil
             }
 
-class HasArguments a b | a -> b where
-    type HasArgumentsThread a b :: *
+class HasArguments a s b | a -> s b where
+    arguments :: Lens' a (TF.Attribute s b)
 
-    arguments :: Lens' a (TF.Attribute (HasArgumentsThread a b) "arguments" b)
-
-instance HasArguments a b => HasArguments (TF.Resource p a) b where
-    type HasArgumentsThread (TF.Resource p a) b =
-         HasArgumentsThread a b
-
+instance HasArguments a s b => HasArguments (TF.Resource p a) s b where
     arguments = TF.configuration . arguments
 
-class HasDestination a b | a -> b where
-    type HasDestinationThread a b :: *
+class HasDestination a s b | a -> s b where
+    destination :: Lens' a (TF.Attribute s b)
 
-    destination :: Lens' a (TF.Attribute (HasDestinationThread a b) "destination" b)
-
-instance HasDestination a b => HasDestination (TF.Resource p a) b where
-    type HasDestinationThread (TF.Resource p a) b =
-         HasDestinationThread a b
-
+instance HasDestination a s b => HasDestination (TF.Resource p a) s b where
     destination = TF.configuration . destination
 
-class HasDestinationType a b | a -> b where
-    type HasDestinationTypeThread a b :: *
+class HasDestinationType a s b | a -> s b where
+    destinationType :: Lens' a (TF.Attribute s b)
 
-    destinationType :: Lens' a (TF.Attribute (HasDestinationTypeThread a b) "destination_type" b)
-
-instance HasDestinationType a b => HasDestinationType (TF.Resource p a) b where
-    type HasDestinationTypeThread (TF.Resource p a) b =
-         HasDestinationTypeThread a b
-
+instance HasDestinationType a s b => HasDestinationType (TF.Resource p a) s b where
     destinationType = TF.configuration . destinationType
 
-class HasName a b | a -> b where
-    type HasNameThread a b :: *
+class HasName a s b | a -> s b where
+    name :: Lens' a (TF.Attribute s b)
 
-    name :: Lens' a (TF.Attribute (HasNameThread a b) "name" b)
-
-instance HasName a b => HasName (TF.Resource p a) b where
-    type HasNameThread (TF.Resource p a) b =
-         HasNameThread a b
-
+instance HasName a s b => HasName (TF.Resource p a) s b where
     name = TF.configuration . name
 
-class HasPassword a b | a -> b where
-    type HasPasswordThread a b :: *
+class HasPassword a s b | a -> s b where
+    password :: Lens' a (TF.Attribute s b)
 
-    password :: Lens' a (TF.Attribute (HasPasswordThread a b) "password" b)
-
-instance HasPassword a b => HasPassword (TF.Resource p a) b where
-    type HasPasswordThread (TF.Resource p a) b =
-         HasPasswordThread a b
-
+instance HasPassword a s b => HasPassword (TF.Resource p a) s b where
     password = TF.configuration . password
 
-class HasPermissions a b | a -> b where
-    type HasPermissionsThread a b :: *
+class HasPermissions a s b | a -> s b where
+    permissions :: Lens' a (TF.Attribute s b)
 
-    permissions :: Lens' a (TF.Attribute (HasPermissionsThread a b) "permissions" b)
-
-instance HasPermissions a b => HasPermissions (TF.Resource p a) b where
-    type HasPermissionsThread (TF.Resource p a) b =
-         HasPermissionsThread a b
-
+instance HasPermissions a s b => HasPermissions (TF.Resource p a) s b where
     permissions = TF.configuration . permissions
 
-class HasPolicy a b | a -> b where
-    type HasPolicyThread a b :: *
+class HasPolicy a s b | a -> s b where
+    policy :: Lens' a (TF.Attribute s b)
 
-    policy :: Lens' a (TF.Attribute (HasPolicyThread a b) "policy" b)
-
-instance HasPolicy a b => HasPolicy (TF.Resource p a) b where
-    type HasPolicyThread (TF.Resource p a) b =
-         HasPolicyThread a b
-
+instance HasPolicy a s b => HasPolicy (TF.Resource p a) s b where
     policy = TF.configuration . policy
 
-class HasRoutingKey a b | a -> b where
-    type HasRoutingKeyThread a b :: *
+class HasRoutingKey a s b | a -> s b where
+    routingKey :: Lens' a (TF.Attribute s b)
 
-    routingKey :: Lens' a (TF.Attribute (HasRoutingKeyThread a b) "routing_key" b)
-
-instance HasRoutingKey a b => HasRoutingKey (TF.Resource p a) b where
-    type HasRoutingKeyThread (TF.Resource p a) b =
-         HasRoutingKeyThread a b
-
+instance HasRoutingKey a s b => HasRoutingKey (TF.Resource p a) s b where
     routingKey = TF.configuration . routingKey
 
-class HasSettings a b | a -> b where
-    type HasSettingsThread a b :: *
+class HasSettings a s b | a -> s b where
+    settings :: Lens' a (TF.Attribute s b)
 
-    settings :: Lens' a (TF.Attribute (HasSettingsThread a b) "settings" b)
-
-instance HasSettings a b => HasSettings (TF.Resource p a) b where
-    type HasSettingsThread (TF.Resource p a) b =
-         HasSettingsThread a b
-
+instance HasSettings a s b => HasSettings (TF.Resource p a) s b where
     settings = TF.configuration . settings
 
-class HasSource a b | a -> b where
-    type HasSourceThread a b :: *
+class HasSource a s b | a -> s b where
+    source :: Lens' a (TF.Attribute s b)
 
-    source :: Lens' a (TF.Attribute (HasSourceThread a b) "source" b)
-
-instance HasSource a b => HasSource (TF.Resource p a) b where
-    type HasSourceThread (TF.Resource p a) b =
-         HasSourceThread a b
-
+instance HasSource a s b => HasSource (TF.Resource p a) s b where
     source = TF.configuration . source
 
-class HasTags a b | a -> b where
-    type HasTagsThread a b :: *
+class HasTags a s b | a -> s b where
+    tags :: Lens' a (TF.Attribute s b)
 
-    tags :: Lens' a (TF.Attribute (HasTagsThread a b) "tags" b)
-
-instance HasTags a b => HasTags (TF.Resource p a) b where
-    type HasTagsThread (TF.Resource p a) b =
-         HasTagsThread a b
-
+instance HasTags a s b => HasTags (TF.Resource p a) s b where
     tags = TF.configuration . tags
 
-class HasUser a b | a -> b where
-    type HasUserThread a b :: *
+class HasUser a s b | a -> s b where
+    user :: Lens' a (TF.Attribute s b)
 
-    user :: Lens' a (TF.Attribute (HasUserThread a b) "user" b)
-
-instance HasUser a b => HasUser (TF.Resource p a) b where
-    type HasUserThread (TF.Resource p a) b =
-         HasUserThread a b
-
+instance HasUser a s b => HasUser (TF.Resource p a) s b where
     user = TF.configuration . user
 
-class HasVhost a b | a -> b where
-    type HasVhostThread a b :: *
+class HasVhost a s b | a -> s b where
+    vhost :: Lens' a (TF.Attribute s b)
 
-    vhost :: Lens' a (TF.Attribute (HasVhostThread a b) "vhost" b)
-
-instance HasVhost a b => HasVhost (TF.Resource p a) b where
-    type HasVhostThread (TF.Resource p a) b =
-         HasVhostThread a b
-
+instance HasVhost a s b => HasVhost (TF.Resource p a) s b where
     vhost = TF.configuration . vhost
 
 class HasComputedPropertiesKey a b | a -> b where
-    computedPropertiesKey :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedPropertiesKey
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPropertiesKey =
+        to (\x -> TF.Computed (TF.referenceKey x) "properties_key")

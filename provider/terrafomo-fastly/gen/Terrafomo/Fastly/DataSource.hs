@@ -1,16 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DataKinds              #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
+{-# LANGUAGE PolyKinds              #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -44,13 +43,16 @@ import GHC.Show (Show)
 
 import Lens.Micro (Getting, Lens', lens, to)
 
+import qualified Data.Word                 as TF
+import qualified GHC.Base                  as TF
+import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
 import qualified Terrafomo.DataSource      as TF
 import qualified Terrafomo.Fastly.Provider as TF
 import qualified Terrafomo.Fastly.Types    as TF
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.IP              as TF
-import qualified Terrafomo.Meta            as TF (configuration)
+import qualified Terrafomo.Meta            as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Resource        as TF
 
@@ -66,9 +68,7 @@ data IpRangesDataSource s = IpRangesDataSource {
 instance TF.ToHCL (IpRangesDataSource s) where
     toHCL _ = TF.block []
 
-instance HasComputedCidrBlocks (IpRangesDataSource s) Text where
-    computedCidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
+instance HasComputedCidrBlocks (IpRangesDataSource s) Text
 
 ipRangesDataSource :: TF.DataSource TF.Fastly (IpRangesDataSource s)
 ipRangesDataSource =
@@ -77,4 +77,7 @@ ipRangesDataSource =
             }
 
 class HasComputedCidrBlocks a b | a -> b where
-    computedCidrBlocks :: forall r s n. Getting r (TF.Reference s a) (TF.Attribute s n b)
+    computedCidrBlocks
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedCidrBlocks =
+        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
