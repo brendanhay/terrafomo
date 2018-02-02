@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.OPC.Data
+-- Module      : Terrafomo.OPC.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OPC.Data
+module Terrafomo.OPC.DataSource
     (
     -- * Types
       ComputeImageListEntryData (..)
@@ -103,7 +103,7 @@ import qualified Data.Word              as TF
 import qualified GHC.Base               as TF
 import qualified Numeric.Natural        as TF
 import qualified Terrafomo.Attribute    as TF
-import qualified Terrafomo.Data         as TF
+import qualified Terrafomo.DataSource   as TF
 import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.IP           as TF
 import qualified Terrafomo.Meta         as TF
@@ -112,7 +112,7 @@ import qualified Terrafomo.OPC.Provider as TF
 import qualified Terrafomo.OPC.Types    as TF
 import qualified Terrafomo.Resource     as TF
 
-{- | The @opc_compute_image_list_entry@ OPC data.
+{- | The @opc_compute_image_list_entry@ OPC datasource.
 
 Use this data source to access the configuration of an Image List Entry.
 -}
@@ -147,16 +147,16 @@ instance HasVersion (ComputeImageListEntryData s) s Text where
         lens (_version :: ComputeImageListEntryData s -> TF.Attribute s Text)
             (\s a -> s { _version = a } :: ComputeImageListEntryData s)
 
-computeImageListEntryData :: TF.Data TF.OPC (ComputeImageListEntryData s)
+computeImageListEntryData :: TF.DataSource TF.OPC (ComputeImageListEntryData s)
 computeImageListEntryData =
-    TF.newData "opc_compute_image_list_entry" $
+    TF.newDataSource "opc_compute_image_list_entry" $
         ComputeImageListEntryData {
               _entry = TF.Nil
             , _image_list = TF.Nil
             , _version = TF.Nil
             }
 
-{- | The @opc_compute_machine_image@ OPC data.
+{- | The @opc_compute_machine_image@ OPC datasource.
 
 Use this data source to access the configuration of an Machine Image.
 -}
@@ -201,15 +201,15 @@ instance HasComputedState (ComputeMachineImageData s) Text
 
 instance HasComputedUri (ComputeMachineImageData s) Text
 
-computeMachineImageData :: TF.Data TF.OPC (ComputeMachineImageData s)
+computeMachineImageData :: TF.DataSource TF.OPC (ComputeMachineImageData s)
 computeMachineImageData =
-    TF.newData "opc_compute_machine_image" $
+    TF.newDataSource "opc_compute_machine_image" $
         ComputeMachineImageData {
               _account = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @opc_compute_network_interface@ OPC data.
+{- | The @opc_compute_network_interface@ OPC datasource.
 
 Use this data source to access the configuration of an instance's network
 interface
@@ -271,16 +271,16 @@ instance HasComputedVnic (ComputeNetworkInterfaceData s) Text
 
 instance HasComputedVnicSets (ComputeNetworkInterfaceData s) Text
 
-computeNetworkInterfaceData :: TF.Data TF.OPC (ComputeNetworkInterfaceData s)
+computeNetworkInterfaceData :: TF.DataSource TF.OPC (ComputeNetworkInterfaceData s)
 computeNetworkInterfaceData =
-    TF.newData "opc_compute_network_interface" $
+    TF.newDataSource "opc_compute_network_interface" $
         ComputeNetworkInterfaceData {
               _instance_id = TF.Nil
             , _instance_name = TF.Nil
             , _interface = TF.Nil
             }
 
-{- | The @opc_compute_storage_volume_snapshot@ OPC data.
+{- | The @opc_compute_storage_volume_snapshot@ OPC datasource.
 
 Use this data source to access the configuration of a storage volume
 snapshot.
@@ -334,14 +334,14 @@ instance HasComputedUri (ComputeStorageVolumeSnapshotData s) Text
 
 instance HasComputedVolumeName (ComputeStorageVolumeSnapshotData s) Text
 
-computeStorageVolumeSnapshotData :: TF.Data TF.OPC (ComputeStorageVolumeSnapshotData s)
+computeStorageVolumeSnapshotData :: TF.DataSource TF.OPC (ComputeStorageVolumeSnapshotData s)
 computeStorageVolumeSnapshotData =
-    TF.newData "opc_compute_storage_volume_snapshot" $
+    TF.newDataSource "opc_compute_storage_volume_snapshot" $
         ComputeStorageVolumeSnapshotData {
               _name = TF.Nil
             }
 
-{- | The @opc_compute_vnic@ OPC data.
+{- | The @opc_compute_vnic@ OPC datasource.
 
 Use this data source to access the configuration of a Virtual NIC.
 -}
@@ -370,9 +370,9 @@ instance HasComputedTransitFlag (ComputeVnicData s) Text
 
 instance HasComputedUri (ComputeVnicData s) Text
 
-computeVnicData :: TF.Data TF.OPC (ComputeVnicData s)
+computeVnicData :: TF.DataSource TF.OPC (ComputeVnicData s)
 computeVnicData =
-    TF.newData "opc_compute_vnic" $
+    TF.newDataSource "opc_compute_vnic" $
         ComputeVnicData {
               _name = TF.Nil
             }
@@ -380,49 +380,49 @@ computeVnicData =
 class HasAccount a s b | a -> s b where
     account :: Lens' a (TF.Attribute s b)
 
-instance HasAccount a s b => HasAccount (TF.Data p a) s b where
+instance HasAccount a s b => HasAccount (TF.DataSource p a) s b where
     account = TF.configuration . account
 
 class HasEntry a s b | a -> s b where
     entry :: Lens' a (TF.Attribute s b)
 
-instance HasEntry a s b => HasEntry (TF.Data p a) s b where
+instance HasEntry a s b => HasEntry (TF.DataSource p a) s b where
     entry = TF.configuration . entry
 
 class HasImageList a s b | a -> s b where
     imageList :: Lens' a (TF.Attribute s b)
 
-instance HasImageList a s b => HasImageList (TF.Data p a) s b where
+instance HasImageList a s b => HasImageList (TF.DataSource p a) s b where
     imageList = TF.configuration . imageList
 
 class HasInstanceId a s b | a -> s b where
     instanceId :: Lens' a (TF.Attribute s b)
 
-instance HasInstanceId a s b => HasInstanceId (TF.Data p a) s b where
+instance HasInstanceId a s b => HasInstanceId (TF.DataSource p a) s b where
     instanceId = TF.configuration . instanceId
 
 class HasInstanceName a s b | a -> s b where
     instanceName :: Lens' a (TF.Attribute s b)
 
-instance HasInstanceName a s b => HasInstanceName (TF.Data p a) s b where
+instance HasInstanceName a s b => HasInstanceName (TF.DataSource p a) s b where
     instanceName = TF.configuration . instanceName
 
 class HasInterface a s b | a -> s b where
     interface :: Lens' a (TF.Attribute s b)
 
-instance HasInterface a s b => HasInterface (TF.Data p a) s b where
+instance HasInterface a s b => HasInterface (TF.DataSource p a) s b where
     interface = TF.configuration . interface
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasVersion a s b | a -> s b where
     version :: Lens' a (TF.Attribute s b)
 
-instance HasVersion a s b => HasVersion (TF.Data p a) s b where
+instance HasVersion a s b => HasVersion (TF.DataSource p a) s b where
     version = TF.configuration . version
 
 class HasComputedAccount a b | a -> b where

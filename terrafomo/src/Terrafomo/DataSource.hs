@@ -2,9 +2,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
 
-module Terrafomo.Data
-    ( Data (..)
-    , newData
+module Terrafomo.DataSource
+    ( DataSource (..)
+    , newDataSource
     ) where
 
 import Data.Maybe (catMaybes)
@@ -18,22 +18,22 @@ import Terrafomo.Name
 
 import qualified Terrafomo.HCL as HCL
 
--- Data Source
+-- DataSource Source
 
-data Data p a = Data
+data DataSource p a = DataSource
     { dataProvider  :: !(Maybe p)
     , dataDependsOn :: !(Set Dependency)
     , dataType      :: !Type
     , dataConfig    :: !a
     } deriving (Show, Eq)
 
-instance HasMeta Data where
+instance HasMeta DataSource where
     provider      = lens dataProvider  (\s a -> s { dataProvider  = a })
     configuration = lens dataConfig    (\s a -> s { dataConfig    = a })
     dependsOn     = lens dataDependsOn (\s a -> s { dataDependsOn = a })
 
-instance HCL.ToHCL a => HCL.ToHCL (Key, Data Key a) where
-    toHCL (k, Data{..}) =
+instance HCL.ToHCL a => HCL.ToHCL (Key, DataSource Key a) where
+    toHCL (k, DataSource{..}) =
         HCL.object (HCL.key "data" k) $ catMaybes
             [ HCL.assign "provider" <$> dataProvider
             , Just (HCL.toHCL dataConfig)
@@ -42,8 +42,8 @@ instance HCL.ToHCL a => HCL.ToHCL (Key, Data Key a) where
                   else Just (HCL.assign "depends_on" (HCL.list dataDependsOn))
             ]
 
-newData :: Text -> a -> Data p a
-newData name cfg = Data
+newDataSource :: Text -> a -> DataSource p a
+newDataSource name cfg = DataSource
     { dataProvider  = Nothing
     , dataDependsOn = mempty
     , dataType      = Type (Just "data") name

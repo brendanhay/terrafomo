@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.OVH
-    - Terrafomo.OVH.Data
+    - Terrafomo.OVH.DataSource
     - Terrafomo.OVH.Resource
 
   reexported-modules: >

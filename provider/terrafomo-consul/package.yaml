@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Consul
-    - Terrafomo.Consul.Data
+    - Terrafomo.Consul.DataSource
     - Terrafomo.Consul.Resource
 
   reexported-modules: >

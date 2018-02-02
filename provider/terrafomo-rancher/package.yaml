@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Rancher
-    - Terrafomo.Rancher.Data
+    - Terrafomo.Rancher.DataSource
     - Terrafomo.Rancher.Resource
 
   reexported-modules: >

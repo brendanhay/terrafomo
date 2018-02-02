@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Fastly.Data
+-- Module      : Terrafomo.Fastly.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Fastly.Data
+module Terrafomo.Fastly.DataSource
     (
     -- * Types
       IpRangesData (..)
@@ -47,7 +47,7 @@ import qualified Data.Word                 as TF
 import qualified GHC.Base                  as TF
 import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.Data            as TF
+import qualified Terrafomo.DataSource      as TF
 import qualified Terrafomo.Fastly.Provider as TF
 import qualified Terrafomo.Fastly.Types    as TF
 import qualified Terrafomo.HCL             as TF
@@ -56,7 +56,7 @@ import qualified Terrafomo.Meta            as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Resource        as TF
 
-{- | The @fastly_ip_ranges@ Fastly data.
+{- | The @fastly_ip_ranges@ Fastly datasource.
 
 Use this data source to get the
 <https://docs.fastly.com/guides/securing-communications/accessing-fastlys-ip-ranges>
@@ -70,9 +70,9 @@ instance TF.ToHCL (IpRangesData s) where
 
 instance HasComputedCidrBlocks (IpRangesData s) Text
 
-ipRangesData :: TF.Data TF.Fastly (IpRangesData s)
+ipRangesData :: TF.DataSource TF.Fastly (IpRangesData s)
 ipRangesData =
-    TF.newData "fastly_ip_ranges" $
+    TF.newDataSource "fastly_ip_ranges" $
         IpRangesData {
             }
 

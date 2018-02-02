@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Packet.Data
+-- Module      : Terrafomo.Packet.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Packet.Data
+module Terrafomo.Packet.DataSource
     (
     -- * Types
       PrecreatedIpBlockData (..)
@@ -51,7 +51,7 @@ import qualified Data.Word                 as TF
 import qualified GHC.Base                  as TF
 import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.Data            as TF
+import qualified Terrafomo.DataSource      as TF
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.IP              as TF
 import qualified Terrafomo.Meta            as TF
@@ -60,7 +60,7 @@ import qualified Terrafomo.Packet.Provider as TF
 import qualified Terrafomo.Packet.Types    as TF
 import qualified Terrafomo.Resource        as TF
 
-{- | The @packet_precreated_ip_block@ Packet data.
+{- | The @packet_precreated_ip_block@ Packet datasource.
 
 Use this data source to get CIDR expression for precreated IPv6 and IPv4
 blocks in Packet. You can then use the cidrsubnet TF builtin function to
@@ -107,9 +107,9 @@ instance HasPublic (PrecreatedIpBlockData s) s Text where
 
 instance HasComputedCidrNotation (PrecreatedIpBlockData s) Text
 
-precreatedIpBlockData :: TF.Data TF.Packet (PrecreatedIpBlockData s)
+precreatedIpBlockData :: TF.DataSource TF.Packet (PrecreatedIpBlockData s)
 precreatedIpBlockData =
-    TF.newData "packet_precreated_ip_block" $
+    TF.newDataSource "packet_precreated_ip_block" $
         PrecreatedIpBlockData {
               _address_family = TF.Nil
             , _facility = TF.Nil
@@ -120,25 +120,25 @@ precreatedIpBlockData =
 class HasAddressFamily a s b | a -> s b where
     addressFamily :: Lens' a (TF.Attribute s b)
 
-instance HasAddressFamily a s b => HasAddressFamily (TF.Data p a) s b where
+instance HasAddressFamily a s b => HasAddressFamily (TF.DataSource p a) s b where
     addressFamily = TF.configuration . addressFamily
 
 class HasFacility a s b | a -> s b where
     facility :: Lens' a (TF.Attribute s b)
 
-instance HasFacility a s b => HasFacility (TF.Data p a) s b where
+instance HasFacility a s b => HasFacility (TF.DataSource p a) s b where
     facility = TF.configuration . facility
 
 class HasProjectId a s b | a -> s b where
     projectId :: Lens' a (TF.Attribute s b)
 
-instance HasProjectId a s b => HasProjectId (TF.Data p a) s b where
+instance HasProjectId a s b => HasProjectId (TF.DataSource p a) s b where
     projectId = TF.configuration . projectId
 
 class HasPublic a s b | a -> s b where
     public :: Lens' a (TF.Attribute s b)
 
-instance HasPublic a s b => HasPublic (TF.Data p a) s b where
+instance HasPublic a s b => HasPublic (TF.DataSource p a) s b where
     public = TF.configuration . public
 
 class HasComputedCidrNotation a b | a -> b where

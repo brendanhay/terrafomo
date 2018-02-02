@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.AzureRM.Data
+-- Module      : Terrafomo.AzureRM.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AzureRM.Data
+module Terrafomo.AzureRM.DataSource
     (
     -- * Types
       AppServicePlanData (..)
@@ -158,14 +158,14 @@ import qualified Numeric.Natural            as TF
 import qualified Terrafomo.Attribute        as TF
 import qualified Terrafomo.AzureRM.Provider as TF
 import qualified Terrafomo.AzureRM.Types    as TF
-import qualified Terrafomo.Data             as TF
+import qualified Terrafomo.DataSource       as TF
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.IP               as TF
 import qualified Terrafomo.Meta             as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Resource         as TF
 
-{- | The @azurerm_app_service_plan@ AzureRM data.
+{- | The @azurerm_app_service_plan@ AzureRM datasource.
 
 Use this data source to obtain information about an App Service Plan
 (formerly known as a @Server Farm@ ).
@@ -205,15 +205,15 @@ instance HasComputedSku (AppServicePlanData s) Text
 
 instance HasComputedTags (AppServicePlanData s) Text
 
-appServicePlanData :: TF.Data TF.AzureRM (AppServicePlanData s)
+appServicePlanData :: TF.DataSource TF.AzureRM (AppServicePlanData s)
 appServicePlanData =
-    TF.newData "azurerm_app_service_plan" $
+    TF.newDataSource "azurerm_app_service_plan" $
         AppServicePlanData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_builtin_role_definition@ AzureRM data.
+{- | The @azurerm_builtin_role_definition@ AzureRM datasource.
 
 Use this data source to access the properties of a built-in Role Definition.
 To access information about a custom Role Definition, <role_definition.html>
@@ -244,14 +244,14 @@ instance HasComputedPermissions (BuiltinRoleDefinitionData s) Text
 
 instance HasComputedType' (BuiltinRoleDefinitionData s) Text
 
-builtinRoleDefinitionData :: TF.Data TF.AzureRM (BuiltinRoleDefinitionData s)
+builtinRoleDefinitionData :: TF.DataSource TF.AzureRM (BuiltinRoleDefinitionData s)
 builtinRoleDefinitionData =
-    TF.newData "azurerm_builtin_role_definition" $
+    TF.newDataSource "azurerm_builtin_role_definition" $
         BuiltinRoleDefinitionData {
               _name = TF.Nil
             }
 
-{- | The @azurerm_client_config@ AzureRM data.
+{- | The @azurerm_client_config@ AzureRM datasource.
 
 Use this data source to access the configuration of the Azure Resource
 Manager provider.
@@ -287,16 +287,16 @@ instance HasTenantId (ClientConfigData s) s Text where
         lens (_tenant_id :: ClientConfigData s -> TF.Attribute s Text)
             (\s a -> s { _tenant_id = a } :: ClientConfigData s)
 
-clientConfigData :: TF.Data TF.AzureRM (ClientConfigData s)
+clientConfigData :: TF.DataSource TF.AzureRM (ClientConfigData s)
 clientConfigData =
-    TF.newData "azurerm_client_config" $
+    TF.newDataSource "azurerm_client_config" $
         ClientConfigData {
               _client_id = TF.Nil
             , _subscription_id = TF.Nil
             , _tenant_id = TF.Nil
             }
 
-{- | The @azurerm_dns_zone@ AzureRM data.
+{- | The @azurerm_dns_zone@ AzureRM datasource.
 
 Use this data source to obtain information about a DNS Zone.
 -}
@@ -333,15 +333,15 @@ instance HasComputedNumberOfRecordSets (DnsZoneData s) Text
 
 instance HasComputedTags (DnsZoneData s) Text
 
-dnsZoneData :: TF.Data TF.AzureRM (DnsZoneData s)
+dnsZoneData :: TF.DataSource TF.AzureRM (DnsZoneData s)
 dnsZoneData =
-    TF.newData "azurerm_dns_zone" $
+    TF.newDataSource "azurerm_dns_zone" $
         DnsZoneData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_eventhub_namespace@ AzureRM data.
+{- | The @azurerm_eventhub_namespace@ AzureRM datasource.
 
 Use this data source to obtain information about an EventHub Namespace.
 -}
@@ -382,15 +382,15 @@ instance HasComputedSku (EventhubNamespaceData s) Text
 
 instance HasComputedTags (EventhubNamespaceData s) Text
 
-eventhubNamespaceData :: TF.Data TF.AzureRM (EventhubNamespaceData s)
+eventhubNamespaceData :: TF.DataSource TF.AzureRM (EventhubNamespaceData s)
 eventhubNamespaceData =
-    TF.newData "azurerm_eventhub_namespace" $
+    TF.newDataSource "azurerm_eventhub_namespace" $
         EventhubNamespaceData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_image@ AzureRM data.
+{- | The @azurerm_image@ AzureRM datasource.
 
 Use this data source to access information about an Image.
 -}
@@ -443,9 +443,9 @@ instance HasComputedOsDisk (ImageData s) Text
 
 instance HasComputedTags (ImageData s) Text
 
-imageData :: TF.Data TF.AzureRM (ImageData s)
+imageData :: TF.DataSource TF.AzureRM (ImageData s)
 imageData =
-    TF.newData "azurerm_image" $
+    TF.newDataSource "azurerm_image" $
         ImageData {
               _name = TF.Nil
             , _name_regex = TF.Nil
@@ -453,7 +453,7 @@ imageData =
             , _sort_descending = TF.Nil
             }
 
-{- | The @azurerm_key_vault_access_policy@ AzureRM data.
+{- | The @azurerm_key_vault_access_policy@ AzureRM datasource.
 
 Use this data source to access information about the permissions from the
 Management Key Vault Templates.
@@ -481,14 +481,14 @@ instance HasComputedKeyPermissions (KeyVaultAccessPolicyData s) Text
 
 instance HasComputedSecretPermissions (KeyVaultAccessPolicyData s) Text
 
-keyVaultAccessPolicyData :: TF.Data TF.AzureRM (KeyVaultAccessPolicyData s)
+keyVaultAccessPolicyData :: TF.DataSource TF.AzureRM (KeyVaultAccessPolicyData s)
 keyVaultAccessPolicyData =
-    TF.newData "azurerm_key_vault_access_policy" $
+    TF.newDataSource "azurerm_key_vault_access_policy" $
         KeyVaultAccessPolicyData {
               _name = TF.Nil
             }
 
-{- | The @azurerm_managed_disk@ AzureRM data.
+{- | The @azurerm_managed_disk@ AzureRM datasource.
 
 Use this data source to access the properties of an existing Azure Managed
 Disk.
@@ -528,15 +528,15 @@ instance HasComputedStorageAccountType (ManagedDiskData s) Text
 
 instance HasComputedTags (ManagedDiskData s) Text
 
-managedDiskData :: TF.Data TF.AzureRM (ManagedDiskData s)
+managedDiskData :: TF.DataSource TF.AzureRM (ManagedDiskData s)
 managedDiskData =
-    TF.newData "azurerm_managed_disk" $
+    TF.newDataSource "azurerm_managed_disk" $
         ManagedDiskData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_network_security_group@ AzureRM data.
+{- | The @azurerm_network_security_group@ AzureRM datasource.
 
 Use this data source to access the properties of a Network Security Group.
 -}
@@ -571,15 +571,15 @@ instance HasComputedSecurityRule (NetworkSecurityGroupData s) Text
 
 instance HasComputedTags (NetworkSecurityGroupData s) Text
 
-networkSecurityGroupData :: TF.Data TF.AzureRM (NetworkSecurityGroupData s)
+networkSecurityGroupData :: TF.DataSource TF.AzureRM (NetworkSecurityGroupData s)
 networkSecurityGroupData =
-    TF.newData "azurerm_network_security_group" $
+    TF.newDataSource "azurerm_network_security_group" $
         NetworkSecurityGroupData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_platform_image@ AzureRM data.
+{- | The @azurerm_platform_image@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure Platform Image.
 -}
@@ -626,9 +626,9 @@ instance HasComputedId (PlatformImageData s) Text
 
 instance HasComputedVersion (PlatformImageData s) Text
 
-platformImageData :: TF.Data TF.AzureRM (PlatformImageData s)
+platformImageData :: TF.DataSource TF.AzureRM (PlatformImageData s)
 platformImageData =
-    TF.newData "azurerm_platform_image" $
+    TF.newDataSource "azurerm_platform_image" $
         PlatformImageData {
               _location = TF.Nil
             , _offer = TF.Nil
@@ -636,7 +636,7 @@ platformImageData =
             , _sku = TF.Nil
             }
 
-{- | The @azurerm_public_ip@ AzureRM data.
+{- | The @azurerm_public_ip@ AzureRM datasource.
 
 Use this data source to access the properties of an existing Azure Public IP
 Address.
@@ -674,15 +674,15 @@ instance HasComputedIpAddress (PublicIpData s) Text
 
 instance HasComputedTags (PublicIpData s) Text
 
-publicIpData :: TF.Data TF.AzureRM (PublicIpData s)
+publicIpData :: TF.DataSource TF.AzureRM (PublicIpData s)
 publicIpData =
-    TF.newData "azurerm_public_ip" $
+    TF.newDataSource "azurerm_public_ip" $
         PublicIpData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_resource_group@ AzureRM data.
+{- | The @azurerm_resource_group@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure resource group.
 -}
@@ -705,14 +705,14 @@ instance HasComputedLocation (ResourceGroupData s) Text
 
 instance HasComputedTags (ResourceGroupData s) Text
 
-resourceGroupData :: TF.Data TF.AzureRM (ResourceGroupData s)
+resourceGroupData :: TF.DataSource TF.AzureRM (ResourceGroupData s)
 resourceGroupData =
-    TF.newData "azurerm_resource_group" $
+    TF.newDataSource "azurerm_resource_group" $
         ResourceGroupData {
               _name = TF.Nil
             }
 
-{- | The @azurerm_role_definition@ AzureRM data.
+{- | The @azurerm_role_definition@ AzureRM datasource.
 
 Use this data source to access the properties of a custom Role Definition.
 To access information about a built-in Role Definition,
@@ -751,15 +751,15 @@ instance HasComputedPermissions (RoleDefinitionData s) Text
 
 instance HasComputedType' (RoleDefinitionData s) Text
 
-roleDefinitionData :: TF.Data TF.AzureRM (RoleDefinitionData s)
+roleDefinitionData :: TF.DataSource TF.AzureRM (RoleDefinitionData s)
 roleDefinitionData =
-    TF.newData "azurerm_role_definition" $
+    TF.newDataSource "azurerm_role_definition" $
         RoleDefinitionData {
               _role_definition_id = TF.Nil
             , _scope = TF.Nil
             }
 
-{- | The @azurerm_snapshot@ AzureRM data.
+{- | The @azurerm_snapshot@ AzureRM datasource.
 
 Use this data source to access the properties of a Snapshot of an Disk.
 -}
@@ -798,15 +798,15 @@ instance HasComputedSourceUri (SnapshotData s) Text
 
 instance HasComputedStorageAccountId (SnapshotData s) Text
 
-snapshotData :: TF.Data TF.AzureRM (SnapshotData s)
+snapshotData :: TF.DataSource TF.AzureRM (SnapshotData s)
 snapshotData =
-    TF.newData "azurerm_snapshot" $
+    TF.newDataSource "azurerm_snapshot" $
         SnapshotData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
 
-{- | The @azurerm_subnet@ AzureRM data.
+{- | The @azurerm_subnet@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure Subnet located
 within a Virtual Network.
@@ -852,16 +852,16 @@ instance HasComputedNetworkSecurityGroupId (SubnetData s) Text
 
 instance HasComputedRouteTableId (SubnetData s) Text
 
-subnetData :: TF.Data TF.AzureRM (SubnetData s)
+subnetData :: TF.DataSource TF.AzureRM (SubnetData s)
 subnetData =
-    TF.newData "azurerm_subnet" $
+    TF.newDataSource "azurerm_subnet" $
         SubnetData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             , _virtual_network_name = TF.Nil
             }
 
-{- | The @azurerm_subscription@ AzureRM data.
+{- | The @azurerm_subscription@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure subscription.
 -}
@@ -890,14 +890,14 @@ instance HasComputedSpendingLimit (SubscriptionData s) Text
 
 instance HasComputedState (SubscriptionData s) Text
 
-subscriptionData :: TF.Data TF.AzureRM (SubscriptionData s)
+subscriptionData :: TF.DataSource TF.AzureRM (SubscriptionData s)
 subscriptionData =
-    TF.newData "azurerm_subscription" $
+    TF.newDataSource "azurerm_subscription" $
         SubscriptionData {
               _subscription_id = TF.Nil
             }
 
-{- | The @azurerm_virtual_network@ AzureRM data.
+{- | The @azurerm_virtual_network@ AzureRM datasource.
 
 Use this data source to access the properties of an Azure Virtual Network.
 -}
@@ -934,9 +934,9 @@ instance HasComputedSubnets (VirtualNetworkData s) Text
 
 instance HasComputedVnetPeerings (VirtualNetworkData s) Text
 
-virtualNetworkData :: TF.Data TF.AzureRM (VirtualNetworkData s)
+virtualNetworkData :: TF.DataSource TF.AzureRM (VirtualNetworkData s)
 virtualNetworkData =
-    TF.newData "azurerm_virtual_network" $
+    TF.newDataSource "azurerm_virtual_network" $
         VirtualNetworkData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
@@ -945,85 +945,85 @@ virtualNetworkData =
 class HasClientId a s b | a -> s b where
     clientId :: Lens' a (TF.Attribute s b)
 
-instance HasClientId a s b => HasClientId (TF.Data p a) s b where
+instance HasClientId a s b => HasClientId (TF.DataSource p a) s b where
     clientId = TF.configuration . clientId
 
 class HasLocation a s b | a -> s b where
     location :: Lens' a (TF.Attribute s b)
 
-instance HasLocation a s b => HasLocation (TF.Data p a) s b where
+instance HasLocation a s b => HasLocation (TF.DataSource p a) s b where
     location = TF.configuration . location
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasNameRegex a s b | a -> s b where
     nameRegex :: Lens' a (TF.Attribute s b)
 
-instance HasNameRegex a s b => HasNameRegex (TF.Data p a) s b where
+instance HasNameRegex a s b => HasNameRegex (TF.DataSource p a) s b where
     nameRegex = TF.configuration . nameRegex
 
 class HasOffer a s b | a -> s b where
     offer :: Lens' a (TF.Attribute s b)
 
-instance HasOffer a s b => HasOffer (TF.Data p a) s b where
+instance HasOffer a s b => HasOffer (TF.DataSource p a) s b where
     offer = TF.configuration . offer
 
 class HasPublisher a s b | a -> s b where
     publisher :: Lens' a (TF.Attribute s b)
 
-instance HasPublisher a s b => HasPublisher (TF.Data p a) s b where
+instance HasPublisher a s b => HasPublisher (TF.DataSource p a) s b where
     publisher = TF.configuration . publisher
 
 class HasResourceGroupName a s b | a -> s b where
     resourceGroupName :: Lens' a (TF.Attribute s b)
 
-instance HasResourceGroupName a s b => HasResourceGroupName (TF.Data p a) s b where
+instance HasResourceGroupName a s b => HasResourceGroupName (TF.DataSource p a) s b where
     resourceGroupName = TF.configuration . resourceGroupName
 
 class HasRoleDefinitionId a s b | a -> s b where
     roleDefinitionId :: Lens' a (TF.Attribute s b)
 
-instance HasRoleDefinitionId a s b => HasRoleDefinitionId (TF.Data p a) s b where
+instance HasRoleDefinitionId a s b => HasRoleDefinitionId (TF.DataSource p a) s b where
     roleDefinitionId = TF.configuration . roleDefinitionId
 
 class HasScope a s b | a -> s b where
     scope :: Lens' a (TF.Attribute s b)
 
-instance HasScope a s b => HasScope (TF.Data p a) s b where
+instance HasScope a s b => HasScope (TF.DataSource p a) s b where
     scope = TF.configuration . scope
 
 class HasSku a s b | a -> s b where
     sku :: Lens' a (TF.Attribute s b)
 
-instance HasSku a s b => HasSku (TF.Data p a) s b where
+instance HasSku a s b => HasSku (TF.DataSource p a) s b where
     sku = TF.configuration . sku
 
 class HasSortDescending a s b | a -> s b where
     sortDescending :: Lens' a (TF.Attribute s b)
 
-instance HasSortDescending a s b => HasSortDescending (TF.Data p a) s b where
+instance HasSortDescending a s b => HasSortDescending (TF.DataSource p a) s b where
     sortDescending = TF.configuration . sortDescending
 
 class HasSubscriptionId a s b | a -> s b where
     subscriptionId :: Lens' a (TF.Attribute s b)
 
-instance HasSubscriptionId a s b => HasSubscriptionId (TF.Data p a) s b where
+instance HasSubscriptionId a s b => HasSubscriptionId (TF.DataSource p a) s b where
     subscriptionId = TF.configuration . subscriptionId
 
 class HasTenantId a s b | a -> s b where
     tenantId :: Lens' a (TF.Attribute s b)
 
-instance HasTenantId a s b => HasTenantId (TF.Data p a) s b where
+instance HasTenantId a s b => HasTenantId (TF.DataSource p a) s b where
     tenantId = TF.configuration . tenantId
 
 class HasVirtualNetworkName a s b | a -> s b where
     virtualNetworkName :: Lens' a (TF.Attribute s b)
 
-instance HasVirtualNetworkName a s b => HasVirtualNetworkName (TF.Data p a) s b where
+instance HasVirtualNetworkName a s b => HasVirtualNetworkName (TF.DataSource p a) s b where
     virtualNetworkName = TF.configuration . virtualNetworkName
 
 class HasComputedAddressPrefix a b | a -> b where

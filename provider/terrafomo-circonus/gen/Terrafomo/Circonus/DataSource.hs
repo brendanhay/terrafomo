@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Circonus.Data
+-- Module      : Terrafomo.Circonus.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Circonus.Data
+module Terrafomo.Circonus.DataSource
     (
     -- * Types
       AccountData (..)
@@ -74,14 +74,14 @@ import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.Circonus.Provider as TF
 import qualified Terrafomo.Circonus.Types    as TF
-import qualified Terrafomo.Data              as TF
+import qualified Terrafomo.DataSource        as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
 import qualified Terrafomo.Meta              as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Resource          as TF
 
-{- | The @circonus_account@ Circonus data.
+{- | The @circonus_account@ Circonus datasource.
 
 @circonus_account@ provides
 <https://login.circonus.com/resources/api/calls/account> about a specific
@@ -144,15 +144,15 @@ instance HasComputedUsage (AccountData s) Text
 
 instance HasComputedUsers (AccountData s) Text
 
-accountData :: TF.Data TF.Circonus (AccountData s)
+accountData :: TF.DataSource TF.Circonus (AccountData s)
 accountData =
-    TF.newData "circonus_account" $
+    TF.newDataSource "circonus_account" $
         AccountData {
               _current = TF.Nil
             , _id = TF.Nil
             }
 
-{- | The @circonus_collector@ Circonus data.
+{- | The @circonus_collector@ Circonus datasource.
 
 @circonus_collector@ provides
 <https://login.circonus.com/resources/api/calls/broker> about a specific
@@ -198,9 +198,9 @@ instance HasComputedTags (CollectorData s) Text
 
 instance HasComputedType' (CollectorData s) Text
 
-collectorData :: TF.Data TF.Circonus (CollectorData s)
+collectorData :: TF.DataSource TF.Circonus (CollectorData s)
 collectorData =
-    TF.newData "circonus_collector" $
+    TF.newDataSource "circonus_collector" $
         CollectorData {
               _id = TF.Nil
             }
@@ -208,13 +208,13 @@ collectorData =
 class HasCurrent a s b | a -> s b where
     current :: Lens' a (TF.Attribute s b)
 
-instance HasCurrent a s b => HasCurrent (TF.Data p a) s b where
+instance HasCurrent a s b => HasCurrent (TF.DataSource p a) s b where
     current = TF.configuration . current
 
 class HasId a s b | a -> s b where
     id :: Lens' a (TF.Attribute s b)
 
-instance HasId a s b => HasId (TF.Data p a) s b where
+instance HasId a s b => HasId (TF.DataSource p a) s b where
     id = TF.configuration . id
 
 class HasComputedAddress1 a b | a -> b where

@@ -124,7 +124,7 @@ schemas tmpls p typ xs =
             ( NS.types p
             : [NS.provider p <> "Provider" | isJust (providerDatatype p)]
            ++ ["Terrafomo.Resource"        | typ == Resource]
-           ++ ["Terrafomo.Data"            | typ == DataSource]
+           ++ ["Terrafomo.DataSource"      | typ == DataSource]
             )
         ]
 
@@ -139,8 +139,8 @@ render tmpl =
 
 getTypeName :: SchemaType -> Schema -> Text
 getTypeName = \case
-    Resource   -> resourceName   . fromMaybe "UnknownResource" . getLast . schemaName
-    DataSource -> dataSourceName . fromMaybe "UnknownData"     . getLast . schemaName
+    Resource   -> resourceName   . fromMaybe "UnknownResource"   . getLast . schemaName
+    DataSource -> dataSourceName . fromMaybe "UnknownDataSource" . getLast . schemaName
 
 createMap :: (Foldable f, Ord k) => (a -> k) -> f a -> Map k a
 createMap f xs = Map.fromList [(f x, x) | x <- Fold.toList xs]

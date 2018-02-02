@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.GitHub.Data
+-- Module      : Terrafomo.GitHub.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.GitHub.Data
+module Terrafomo.GitHub.DataSource
     (
     -- * Types
       TeamData (..)
@@ -74,7 +74,7 @@ import qualified Data.Word                 as TF
 import qualified GHC.Base                  as TF
 import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.Data            as TF
+import qualified Terrafomo.DataSource      as TF
 import qualified Terrafomo.GitHub.Provider as TF
 import qualified Terrafomo.GitHub.Types    as TF
 import qualified Terrafomo.HCL             as TF
@@ -83,7 +83,7 @@ import qualified Terrafomo.Meta            as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Resource        as TF
 
-{- | The @github_team@ GitHub data.
+{- | The @github_team@ GitHub datasource.
 
 Use this data source to retrieve information about a Github team.
 -}
@@ -114,14 +114,14 @@ instance HasComputedPermission (TeamData s) Text
 
 instance HasComputedPrivacy (TeamData s) Text
 
-teamData :: TF.Data TF.GitHub (TeamData s)
+teamData :: TF.DataSource TF.GitHub (TeamData s)
 teamData =
-    TF.newData "github_team" $
+    TF.newDataSource "github_team" $
         TeamData {
               _slug = TF.Nil
             }
 
-{- | The @github_user@ GitHub data.
+{- | The @github_user@ GitHub datasource.
 
 Use this data source to retrieve information about a Github user.
 -}
@@ -176,9 +176,9 @@ instance HasComputedSshKeys (UserData s) Text
 
 instance HasComputedUpdatedAt (UserData s) Text
 
-userData :: TF.Data TF.GitHub (UserData s)
+userData :: TF.DataSource TF.GitHub (UserData s)
 userData =
-    TF.newData "github_user" $
+    TF.newDataSource "github_user" $
         UserData {
               _username = TF.Nil
             }
@@ -186,13 +186,13 @@ userData =
 class HasSlug a s b | a -> s b where
     slug :: Lens' a (TF.Attribute s b)
 
-instance HasSlug a s b => HasSlug (TF.Data p a) s b where
+instance HasSlug a s b => HasSlug (TF.DataSource p a) s b where
     slug = TF.configuration . slug
 
 class HasUsername a s b | a -> s b where
     username :: Lens' a (TF.Attribute s b)
 
-instance HasUsername a s b => HasUsername (TF.Data p a) s b where
+instance HasUsername a s b => HasUsername (TF.DataSource p a) s b where
     username = TF.configuration . username
 
 class HasComputedAvatarUrl a b | a -> b where

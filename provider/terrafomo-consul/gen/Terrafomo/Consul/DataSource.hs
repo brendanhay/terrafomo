@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Consul.Data
+-- Module      : Terrafomo.Consul.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Consul.Data
+module Terrafomo.Consul.DataSource
     (
     -- * Types
       AgentSelfData (..)
@@ -73,7 +73,7 @@ import qualified GHC.Base as TF
 import qualified Numeric.Natural as TF
 import qualified Terrafomo.Consul.Types as TF
 import qualified Terrafomo.Consul.Provider as TF
-import qualified Terrafomo.Data as TF
+import qualified Terrafomo.DataSource as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.IP as TF
 import qualified Terrafomo.Meta as TF
@@ -81,7 +81,7 @@ import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Resource as TF
 import qualified Terrafomo.Attribute as TF
 
-{- | The @consul_agent_self@ Consul data.
+{- | The @consul_agent_self@ Consul datasource.
 
 The @consul_agent_self@ data source returns
 <https://www.consul.io/docs/agent/http/agent.html#agent_self> from the agent
@@ -93,13 +93,13 @@ data AgentSelfData s = AgentSelfData {
 instance TF.ToHCL (AgentSelfData s) where
     toHCL _ = TF.block []
 
-agentSelfData :: TF.Data TF.Consul (AgentSelfData s)
+agentSelfData :: TF.DataSource TF.Consul (AgentSelfData s)
 agentSelfData =
-    TF.newData "consul_agent_self" $
+    TF.newDataSource "consul_agent_self" $
         AgentSelfData {
             }
 
-{- | The @consul_catalog_nodes@ Consul data.
+{- | The @consul_catalog_nodes@ Consul datasource.
 
 The @consul_catalog_nodes@ data source returns a list of Consul nodes that
 have been registered with the Consul cluster in a given datacenter.  By
@@ -137,15 +137,15 @@ instance HasComputedNodeNames (CatalogNodesData s) Text
 
 instance HasComputedNodes (CatalogNodesData s) Text
 
-catalogNodesData :: TF.Data TF.Consul (CatalogNodesData s)
+catalogNodesData :: TF.DataSource TF.Consul (CatalogNodesData s)
 catalogNodesData =
-    TF.newData "consul_catalog_nodes" $
+    TF.newDataSource "consul_catalog_nodes" $
         CatalogNodesData {
               _datacenter = TF.Nil
             , _query_options = TF.Nil
             }
 
-{- | The @consul_catalog_service@ Consul data.
+{- | The @consul_catalog_service@ Consul datasource.
 
 @consul_catalog_service@ provides details about a specific Consul service in
 a given datacenter.  The results include a list of nodes advertising the
@@ -202,9 +202,9 @@ instance HasComputedService (CatalogServiceData s) Text
 
 instance HasComputedTag (CatalogServiceData s) Text
 
-catalogServiceData :: TF.Data TF.Consul (CatalogServiceData s)
+catalogServiceData :: TF.DataSource TF.Consul (CatalogServiceData s)
 catalogServiceData =
-    TF.newData "consul_catalog_service" $
+    TF.newDataSource "consul_catalog_service" $
         CatalogServiceData {
               _datacenter = TF.Nil
             , _name = TF.Nil
@@ -212,7 +212,7 @@ catalogServiceData =
             , _tag = TF.Nil
             }
 
-{- | The @consul_key_prefix@ Consul data.
+{- | The @consul_key_prefix@ Consul datasource.
 
 Allows Terraform to read values from a "namespace" of Consul keys that share
 a common name prefix.
@@ -264,9 +264,9 @@ instance HasComputedSubkeys (KeyPrefixData s) Text
 
 instance HasComputedVar<name> (KeyPrefixData s) Text
 
-keyPrefixData :: TF.Data TF.Consul (KeyPrefixData s)
+keyPrefixData :: TF.DataSource TF.Consul (KeyPrefixData s)
 keyPrefixData =
-    TF.newData "consul_key_prefix" $
+    TF.newDataSource "consul_key_prefix" $
         KeyPrefixData {
               _datacenter = TF.Nil
             , _path_prefix = TF.Nil
@@ -277,43 +277,43 @@ keyPrefixData =
 class HasDatacenter a s b | a -> s b where
     datacenter :: Lens' a (TF.Attribute s b)
 
-instance HasDatacenter a s b => HasDatacenter (TF.Data p a) s b where
+instance HasDatacenter a s b => HasDatacenter (TF.DataSource p a) s b where
     datacenter = TF.configuration . datacenter
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasPathPrefix a s b | a -> s b where
     pathPrefix :: Lens' a (TF.Attribute s b)
 
-instance HasPathPrefix a s b => HasPathPrefix (TF.Data p a) s b where
+instance HasPathPrefix a s b => HasPathPrefix (TF.DataSource p a) s b where
     pathPrefix = TF.configuration . pathPrefix
 
 class HasQueryOptions a s b | a -> s b where
     queryOptions :: Lens' a (TF.Attribute s b)
 
-instance HasQueryOptions a s b => HasQueryOptions (TF.Data p a) s b where
+instance HasQueryOptions a s b => HasQueryOptions (TF.DataSource p a) s b where
     queryOptions = TF.configuration . queryOptions
 
 class HasSubkey a s b | a -> s b where
     subkey :: Lens' a (TF.Attribute s b)
 
-instance HasSubkey a s b => HasSubkey (TF.Data p a) s b where
+instance HasSubkey a s b => HasSubkey (TF.DataSource p a) s b where
     subkey = TF.configuration . subkey
 
 class HasTag a s b | a -> s b where
     tag :: Lens' a (TF.Attribute s b)
 
-instance HasTag a s b => HasTag (TF.Data p a) s b where
+instance HasTag a s b => HasTag (TF.DataSource p a) s b where
     tag = TF.configuration . tag
 
 class HasToken a s b | a -> s b where
     token :: Lens' a (TF.Attribute s b)
 
-instance HasToken a s b => HasToken (TF.Data p a) s b where
+instance HasToken a s b => HasToken (TF.DataSource p a) s b where
     token = TF.configuration . token
 
 class HasComputedDatacenter a b | a -> b where

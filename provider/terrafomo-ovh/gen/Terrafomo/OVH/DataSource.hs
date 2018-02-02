@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.OVH.Data
+-- Module      : Terrafomo.OVH.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.OVH.Data
+module Terrafomo.OVH.DataSource
     (
     -- * Types
       RegionData (..)
@@ -57,7 +57,7 @@ import qualified Data.Word              as TF
 import qualified GHC.Base               as TF
 import qualified Numeric.Natural        as TF
 import qualified Terrafomo.Attribute    as TF
-import qualified Terrafomo.Data         as TF
+import qualified Terrafomo.DataSource   as TF
 import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.IP           as TF
 import qualified Terrafomo.Meta         as TF
@@ -66,7 +66,7 @@ import qualified Terrafomo.OVH.Provider as TF
 import qualified Terrafomo.OVH.Types    as TF
 import qualified Terrafomo.Resource     as TF
 
-{- | The @publiccloud_region@ OVH data.
+{- | The @publiccloud_region@ OVH datasource.
 
 Use this data source to retrieve information about a region associated with
 a public cloud project. The region must be associated with the project.
@@ -104,15 +104,15 @@ instance HasComputedDatacenterLocation (RegionData s) Text
 
 instance HasComputedServices (RegionData s) Text
 
-regionData :: TF.Data TF.OVH (RegionData s)
+regionData :: TF.DataSource TF.OVH (RegionData s)
 regionData =
-    TF.newData "publiccloud_region" $
+    TF.newDataSource "publiccloud_region" $
         RegionData {
               _project_id = TF.Nil
             , _region = TF.Nil
             }
 
-{- | The @publiccloud_regions@ OVH data.
+{- | The @publiccloud_regions@ OVH datasource.
 
 Use this data source to get the regions of a public cloud project.
 -}
@@ -133,9 +133,9 @@ instance HasProjectId (RegionsData s) s Text where
 
 instance HasComputedNames (RegionsData s) Text
 
-regionsData :: TF.Data TF.OVH (RegionsData s)
+regionsData :: TF.DataSource TF.OVH (RegionsData s)
 regionsData =
-    TF.newData "publiccloud_regions" $
+    TF.newDataSource "publiccloud_regions" $
         RegionsData {
               _project_id = TF.Nil
             }
@@ -143,13 +143,13 @@ regionsData =
 class HasProjectId a s b | a -> s b where
     projectId :: Lens' a (TF.Attribute s b)
 
-instance HasProjectId a s b => HasProjectId (TF.Data p a) s b where
+instance HasProjectId a s b => HasProjectId (TF.DataSource p a) s b where
     projectId = TF.configuration . projectId
 
 class HasRegion a s b | a -> s b where
     region :: Lens' a (TF.Attribute s b)
 
-instance HasRegion a s b => HasRegion (TF.Data p a) s b where
+instance HasRegion a s b => HasRegion (TF.DataSource p a) s b where
     region = TF.configuration . region
 
 class HasComputedContinentCode a b | a -> b where

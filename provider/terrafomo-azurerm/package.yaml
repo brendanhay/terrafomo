@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.AzureRM
-    - Terrafomo.AzureRM.Data
+    - Terrafomo.AzureRM.DataSource
     - Terrafomo.AzureRM.Resource
 
   reexported-modules: >

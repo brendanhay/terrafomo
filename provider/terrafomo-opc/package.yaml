@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.OPC
-    - Terrafomo.OPC.Data
+    - Terrafomo.OPC.DataSource
     - Terrafomo.OPC.Resource
 
   reexported-modules: >

@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Google.Data
+-- Module      : Terrafomo.Google.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Google.Data
+module Terrafomo.Google.DataSource
     (
     -- * Types
       ActiveFolderData (..)
@@ -187,7 +187,7 @@ import qualified Data.Word                 as TF
 import qualified GHC.Base                  as TF
 import qualified Numeric.Natural           as TF
 import qualified Terrafomo.Attribute       as TF
-import qualified Terrafomo.Data            as TF
+import qualified Terrafomo.DataSource      as TF
 import qualified Terrafomo.Google.Provider as TF
 import qualified Terrafomo.Google.Types    as TF
 import qualified Terrafomo.HCL             as TF
@@ -196,7 +196,7 @@ import qualified Terrafomo.Meta            as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Resource        as TF
 
-{- | The @google_active_folder@ Google data.
+{- | The @google_active_folder@ Google datasource.
 
 Get an active folder within GCP by @display_name@ and @parent@ .
 -}
@@ -225,15 +225,15 @@ instance HasParent (ActiveFolderData s) s Text where
 
 instance HasComputedName (ActiveFolderData s) Text
 
-activeFolderData :: TF.Data TF.Google (ActiveFolderData s)
+activeFolderData :: TF.DataSource TF.Google (ActiveFolderData s)
 activeFolderData =
-    TF.newData "google_active_folder" $
+    TF.newDataSource "google_active_folder" $
         ActiveFolderData {
               _display_name = TF.Nil
             , _parent = TF.Nil
             }
 
-{- | The @google_billing_account@ Google data.
+{- | The @google_billing_account@ Google datasource.
 
 Use this data source to get information about a Google Billing Account.
 -}
@@ -274,16 +274,16 @@ instance HasComputedName (BillingAccountData s) Text
 
 instance HasComputedProjectIds (BillingAccountData s) Text
 
-billingAccountData :: TF.Data TF.Google (BillingAccountData s)
+billingAccountData :: TF.DataSource TF.Google (BillingAccountData s)
 billingAccountData =
-    TF.newData "google_billing_account" $
+    TF.newDataSource "google_billing_account" $
         BillingAccountData {
               _billing_account = TF.Nil
             , _display_name = TF.Nil
             , _open = TF.Nil
             }
 
-{- | The @google_client_config@ Google data.
+{- | The @google_client_config@ Google datasource.
 
 Use this data source to access the configuration of the Google Cloud
 provider.
@@ -311,15 +311,15 @@ instance HasRegion (ClientConfigData s) s Text where
         lens (_region :: ClientConfigData s -> TF.Attribute s Text)
             (\s a -> s { _region = a } :: ClientConfigData s)
 
-clientConfigData :: TF.Data TF.Google (ClientConfigData s)
+clientConfigData :: TF.DataSource TF.Google (ClientConfigData s)
 clientConfigData =
-    TF.newData "google_client_config" $
+    TF.newDataSource "google_client_config" $
         ClientConfigData {
               _project = TF.Nil
             , _region = TF.Nil
             }
 
-{- | The @google_cloudfunctions_function@ Google data.
+{- | The @google_cloudfunctions_function@ Google datasource.
 
 Get information about a Google Cloud Function. For more information see the
 <https://cloud.google.com/functions/docs/> and
@@ -380,16 +380,16 @@ instance HasComputedTriggerHttp (CloudfunctionsFunctionData s) Text
 
 instance HasComputedTriggerTopic (CloudfunctionsFunctionData s) Text
 
-cloudfunctionsFunctionData :: TF.Data TF.Google (CloudfunctionsFunctionData s)
+cloudfunctionsFunctionData :: TF.DataSource TF.Google (CloudfunctionsFunctionData s)
 cloudfunctionsFunctionData =
-    TF.newData "google_cloudfunctions_function" $
+    TF.newDataSource "google_cloudfunctions_function" $
         CloudfunctionsFunctionData {
               _name = TF.Nil
             , _project = TF.Nil
             , _region = TF.Nil
             }
 
-{- | The @google_compute_address@ Google data.
+{- | The @google_compute_address@ Google datasource.
 
 Get the IP address from a static address. For more information see the
 official
@@ -433,16 +433,16 @@ instance HasComputedSelfLink (ComputeAddressData s) Text
 
 instance HasComputedStatus (ComputeAddressData s) Text
 
-computeAddressData :: TF.Data TF.Google (ComputeAddressData s)
+computeAddressData :: TF.DataSource TF.Google (ComputeAddressData s)
 computeAddressData =
-    TF.newData "google_compute_address" $
+    TF.newDataSource "google_compute_address" $
         ComputeAddressData {
               _name = TF.Nil
             , _project = TF.Nil
             , _region = TF.Nil
             }
 
-{- | The @google_compute_global_address@ Google data.
+{- | The @google_compute_global_address@ Google datasource.
 
 Get the IP address from a static address reserved for a Global Forwarding
 Rule which are only used for HTTP load balancing. For more information see
@@ -479,15 +479,15 @@ instance HasComputedSelfLink (ComputeGlobalAddressData s) Text
 
 instance HasComputedStatus (ComputeGlobalAddressData s) Text
 
-computeGlobalAddressData :: TF.Data TF.Google (ComputeGlobalAddressData s)
+computeGlobalAddressData :: TF.DataSource TF.Google (ComputeGlobalAddressData s)
 computeGlobalAddressData =
-    TF.newData "google_compute_global_address" $
+    TF.newDataSource "google_compute_global_address" $
         ComputeGlobalAddressData {
               _name = TF.Nil
             , _project = TF.Nil
             }
 
-{- | The @google_compute_image@ Google data.
+{- | The @google_compute_image@ Google datasource.
 
 Get information about a Google Compute Image. Check that your service
 account has the @compute.imageUser@ role if you want to share
@@ -555,15 +555,15 @@ instance HasComputedSourceImageId (ComputeImageData s) Text
 
 instance HasComputedStatus (ComputeImageData s) Text
 
-computeImageData :: TF.Data TF.Google (ComputeImageData s)
+computeImageData :: TF.DataSource TF.Google (ComputeImageData s)
 computeImageData =
-    TF.newData "google_compute_image" $
+    TF.newDataSource "google_compute_image" $
         ComputeImageData {
               _name = TF.Nil
             , _project = TF.Nil
             }
 
-{- | The @google_compute_instance_group@ Google data.
+{- | The @google_compute_instance_group@ Google datasource.
 
 Get a Compute Instance Group within GCE. For more information, see
 <https://cloud.google.com/compute/docs/instance-groups/#unmanaged_instance_groups>
@@ -612,16 +612,16 @@ instance HasComputedSelfLink (ComputeInstanceGroupData s) Text
 
 instance HasComputedSize (ComputeInstanceGroupData s) Text
 
-computeInstanceGroupData :: TF.Data TF.Google (ComputeInstanceGroupData s)
+computeInstanceGroupData :: TF.DataSource TF.Google (ComputeInstanceGroupData s)
 computeInstanceGroupData =
-    TF.newData "google_compute_instance_group" $
+    TF.newDataSource "google_compute_instance_group" $
         ComputeInstanceGroupData {
               _name = TF.Nil
             , _project = TF.Nil
             , _zone = TF.Nil
             }
 
-{- | The @google_compute_lb_ip_ranges@ Google data.
+{- | The @google_compute_lb_ip_ranges@ Google datasource.
 
 Use this data source to access IP ranges in your firewall rules.
 https://cloud.google.com/compute/docs/load-balancing/health-checks#health_check_source_ips_and_firewall_rules
@@ -649,15 +649,15 @@ instance HasNetwork (ComputeLbIpRangesData s) s Text where
         lens (_network :: ComputeLbIpRangesData s -> TF.Attribute s Text)
             (\s a -> s { _network = a } :: ComputeLbIpRangesData s)
 
-computeLbIpRangesData :: TF.Data TF.Google (ComputeLbIpRangesData s)
+computeLbIpRangesData :: TF.DataSource TF.Google (ComputeLbIpRangesData s)
 computeLbIpRangesData =
-    TF.newData "google_compute_lb_ip_ranges" $
+    TF.newDataSource "google_compute_lb_ip_ranges" $
         ComputeLbIpRangesData {
               _http_ssl_tcp_internal = TF.Nil
             , _network = TF.Nil
             }
 
-{- | The @google_compute_network@ Google data.
+{- | The @google_compute_network@ Google datasource.
 
 Get a network within GCE from its name.
 -}
@@ -694,15 +694,15 @@ instance HasComputedSelfLink (ComputeNetworkData s) Text
 
 instance HasComputedSubnetworksSelfLinks (ComputeNetworkData s) Text
 
-computeNetworkData :: TF.Data TF.Google (ComputeNetworkData s)
+computeNetworkData :: TF.DataSource TF.Google (ComputeNetworkData s)
 computeNetworkData =
-    TF.newData "google_compute_network" $
+    TF.newDataSource "google_compute_network" $
         ComputeNetworkData {
               _name = TF.Nil
             , _project = TF.Nil
             }
 
-{- | The @google_compute_region_instance_group@ Google data.
+{- | The @google_compute_region_instance_group@ Google datasource.
 
 Get a Compute Region Instance Group within GCE. For more information, see
 <https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups>
@@ -753,9 +753,9 @@ instance HasComputedInstances (ComputeRegionInstanceGroupData s) Text
 
 instance HasComputedSize (ComputeRegionInstanceGroupData s) Text
 
-computeRegionInstanceGroupData :: TF.Data TF.Google (ComputeRegionInstanceGroupData s)
+computeRegionInstanceGroupData :: TF.DataSource TF.Google (ComputeRegionInstanceGroupData s)
 computeRegionInstanceGroupData =
-    TF.newData "google_compute_region_instance_group" $
+    TF.newDataSource "google_compute_region_instance_group" $
         ComputeRegionInstanceGroupData {
               _name = TF.Nil
             , _project = TF.Nil
@@ -763,7 +763,7 @@ computeRegionInstanceGroupData =
             , _self_link = TF.Nil
             }
 
-{- | The @google_compute_subnetwork@ Google data.
+{- | The @google_compute_subnetwork@ Google datasource.
 
 Get a subnetwork within GCE from its name and region.
 -}
@@ -812,16 +812,16 @@ instance HasComputedSecondaryIpRange (ComputeSubnetworkData s) Text
 
 instance HasComputedSelfLink (ComputeSubnetworkData s) Text
 
-computeSubnetworkData :: TF.Data TF.Google (ComputeSubnetworkData s)
+computeSubnetworkData :: TF.DataSource TF.Google (ComputeSubnetworkData s)
 computeSubnetworkData =
-    TF.newData "google_compute_subnetwork" $
+    TF.newDataSource "google_compute_subnetwork" $
         ComputeSubnetworkData {
               _name = TF.Nil
             , _project = TF.Nil
             , _region = TF.Nil
             }
 
-{- | The @google_compute_zones@ Google data.
+{- | The @google_compute_zones@ Google datasource.
 
 Provides access to available Google Compute zones in a region for a given
 project. See more about
@@ -853,15 +853,15 @@ instance HasStatus (ComputeZonesData s) s Text where
 
 instance HasComputedNames (ComputeZonesData s) Text
 
-computeZonesData :: TF.Data TF.Google (ComputeZonesData s)
+computeZonesData :: TF.DataSource TF.Google (ComputeZonesData s)
 computeZonesData =
-    TF.newData "google_compute_zones" $
+    TF.newDataSource "google_compute_zones" $
         ComputeZonesData {
               _region = TF.Nil
             , _status = TF.Nil
             }
 
-{- | The @google_container_cluster@ Google data.
+{- | The @google_container_cluster@ Google datasource.
 
 Get info about a cluster within GKE from its name and zone.
 -}
@@ -896,16 +896,16 @@ instance HasZone (ContainerClusterData s) s Text where
         lens (_zone :: ContainerClusterData s -> TF.Attribute s Text)
             (\s a -> s { _zone = a } :: ContainerClusterData s)
 
-containerClusterData :: TF.Data TF.Google (ContainerClusterData s)
+containerClusterData :: TF.DataSource TF.Google (ContainerClusterData s)
 containerClusterData =
-    TF.newData "google_container_cluster" $
+    TF.newDataSource "google_container_cluster" $
         ContainerClusterData {
               _name = TF.Nil
             , _project = TF.Nil
             , _zone = TF.Nil
             }
 
-{- | The @google_container_engine_versions@ Google data.
+{- | The @google_container_engine_versions@ Google datasource.
 
 Provides access to available Google Container Engine versions in a zone for
 a given project.
@@ -941,15 +941,15 @@ instance HasComputedValidMasterVersions (ContainerEngineVersionsData s) Text
 
 instance HasComputedValidNodeVersions (ContainerEngineVersionsData s) Text
 
-containerEngineVersionsData :: TF.Data TF.Google (ContainerEngineVersionsData s)
+containerEngineVersionsData :: TF.DataSource TF.Google (ContainerEngineVersionsData s)
 containerEngineVersionsData =
-    TF.newData "google_container_engine_versions" $
+    TF.newDataSource "google_container_engine_versions" $
         ContainerEngineVersionsData {
               _project = TF.Nil
             , _zone = TF.Nil
             }
 
-{- | The @google_container_registry_image@ Google data.
+{- | The @google_container_registry_image@ Google datasource.
 
 This data source fetches the project name, and provides the appropriate URLs
 to use for container registry for this project. The URLs are computed
@@ -1006,9 +1006,9 @@ instance HasTag (ContainerRegistryImageData s) s Text where
 
 instance HasComputedImageUrl (ContainerRegistryImageData s) Text
 
-containerRegistryImageData :: TF.Data TF.Google (ContainerRegistryImageData s)
+containerRegistryImageData :: TF.DataSource TF.Google (ContainerRegistryImageData s)
 containerRegistryImageData =
-    TF.newData "google_container_registry_image" $
+    TF.newDataSource "google_container_registry_image" $
         ContainerRegistryImageData {
               _digest = TF.Nil
             , _name = TF.Nil
@@ -1017,7 +1017,7 @@ containerRegistryImageData =
             , _tag = TF.Nil
             }
 
-{- | The @google_container_registry_repository@ Google data.
+{- | The @google_container_registry_repository@ Google datasource.
 
 This data source fetches the project name, and provides the appropriate URLs
 to use for container registry for this project. The URLs are computed
@@ -1050,15 +1050,15 @@ instance HasRegion (ContainerRegistryRepositoryData s) s Text where
 
 instance HasComputedRepositoryUrl (ContainerRegistryRepositoryData s) Text
 
-containerRegistryRepositoryData :: TF.Data TF.Google (ContainerRegistryRepositoryData s)
+containerRegistryRepositoryData :: TF.DataSource TF.Google (ContainerRegistryRepositoryData s)
 containerRegistryRepositoryData =
-    TF.newData "google_container_registry_repository" $
+    TF.newDataSource "google_container_registry_repository" $
         ContainerRegistryRepositoryData {
               _project = TF.Nil
             , _region = TF.Nil
             }
 
-{- | The @google_dns_managed_zone@ Google data.
+{- | The @google_dns_managed_zone@ Google datasource.
 
 Provides access to a zone's attributes within Google Cloud DNS. For more
 information see <https://cloud.google.com/dns/zones/> and
@@ -1093,15 +1093,15 @@ instance HasComputedDnsName (DnsManagedZoneData s) Text
 
 instance HasComputedNameServers (DnsManagedZoneData s) Text
 
-dnsManagedZoneData :: TF.Data TF.Google (DnsManagedZoneData s)
+dnsManagedZoneData :: TF.DataSource TF.Google (DnsManagedZoneData s)
 dnsManagedZoneData =
-    TF.newData "google_dns_managed_zone" $
+    TF.newDataSource "google_dns_managed_zone" $
         DnsManagedZoneData {
               _name = TF.Nil
             , _project = TF.Nil
             }
 
-{- | The @google_iam_policy@ Google data.
+{- | The @google_iam_policy@ Google datasource.
 
 Generates an IAM policy document that may be referenced by and applied to
 other Google Cloud Platform resources, such as the @google_project@
@@ -1124,14 +1124,14 @@ instance HasBinding (IamPolicyData s) s Text where
 
 instance HasComputedPolicyData (IamPolicyData s) Text
 
-iamPolicyData :: TF.Data TF.Google (IamPolicyData s)
+iamPolicyData :: TF.DataSource TF.Google (IamPolicyData s)
 iamPolicyData =
-    TF.newData "google_iam_policy" $
+    TF.newDataSource "google_iam_policy" $
         IamPolicyData {
               _binding = TF.Nil
             }
 
-{- | The @google_kms_secret@ Google data.
+{- | The @google_kms_secret@ Google datasource.
 
 This data source allows you to use data encrypted with Google Cloud KMS
 within your resource definitions. For more information see
@@ -1166,15 +1166,15 @@ instance HasCryptoKey (KmsSecretData s) s Text where
 
 instance HasComputedPlaintext (KmsSecretData s) Text
 
-kmsSecretData :: TF.Data TF.Google (KmsSecretData s)
+kmsSecretData :: TF.DataSource TF.Google (KmsSecretData s)
 kmsSecretData =
-    TF.newData "google_kms_secret" $
+    TF.newDataSource "google_kms_secret" $
         KmsSecretData {
               _ciphertext = TF.Nil
             , _crypto_key = TF.Nil
             }
 
-{- | The @google_organization@ Google data.
+{- | The @google_organization@ Google datasource.
 
 Use this data source to get information about a Google Cloud Organization.
 -}
@@ -1211,15 +1211,15 @@ instance HasComputedLifecycleState (OrganizationData s) Text
 
 instance HasComputedName (OrganizationData s) Text
 
-organizationData :: TF.Data TF.Google (OrganizationData s)
+organizationData :: TF.DataSource TF.Google (OrganizationData s)
 organizationData =
-    TF.newData "google_organization" $
+    TF.newDataSource "google_organization" $
         OrganizationData {
               _domain = TF.Nil
             , _organization = TF.Nil
             }
 
-{- | The @google_storage_object_signed_url@ Google data.
+{- | The @google_storage_object_signed_url@ Google datasource.
 
 The Google Cloud storage signed URL data source generates a signed URL for a
 given storage object. Signed URLs provide a way to give time-limited read or
@@ -1276,9 +1276,9 @@ instance HasPath (StorageObjectSignedUrlData s) s Text where
 
 instance HasComputedSignedUrl (StorageObjectSignedUrlData s) Text
 
-storageObjectSignedUrlData :: TF.Data TF.Google (StorageObjectSignedUrlData s)
+storageObjectSignedUrlData :: TF.DataSource TF.Google (StorageObjectSignedUrlData s)
 storageObjectSignedUrlData =
-    TF.newData "google_storage_object_signed_url" $
+    TF.newDataSource "google_storage_object_signed_url" $
         StorageObjectSignedUrlData {
               _bucket = TF.Nil
             , _credentials = TF.Nil
@@ -1290,145 +1290,145 @@ storageObjectSignedUrlData =
 class HasBillingAccount a s b | a -> s b where
     billingAccount :: Lens' a (TF.Attribute s b)
 
-instance HasBillingAccount a s b => HasBillingAccount (TF.Data p a) s b where
+instance HasBillingAccount a s b => HasBillingAccount (TF.DataSource p a) s b where
     billingAccount = TF.configuration . billingAccount
 
 class HasBinding a s b | a -> s b where
     binding :: Lens' a (TF.Attribute s b)
 
-instance HasBinding a s b => HasBinding (TF.Data p a) s b where
+instance HasBinding a s b => HasBinding (TF.DataSource p a) s b where
     binding = TF.configuration . binding
 
 class HasBucket a s b | a -> s b where
     bucket :: Lens' a (TF.Attribute s b)
 
-instance HasBucket a s b => HasBucket (TF.Data p a) s b where
+instance HasBucket a s b => HasBucket (TF.DataSource p a) s b where
     bucket = TF.configuration . bucket
 
 class HasCiphertext a s b | a -> s b where
     ciphertext :: Lens' a (TF.Attribute s b)
 
-instance HasCiphertext a s b => HasCiphertext (TF.Data p a) s b where
+instance HasCiphertext a s b => HasCiphertext (TF.DataSource p a) s b where
     ciphertext = TF.configuration . ciphertext
 
 class HasCredentials a s b | a -> s b where
     credentials :: Lens' a (TF.Attribute s b)
 
-instance HasCredentials a s b => HasCredentials (TF.Data p a) s b where
+instance HasCredentials a s b => HasCredentials (TF.DataSource p a) s b where
     credentials = TF.configuration . credentials
 
 class HasCryptoKey a s b | a -> s b where
     cryptoKey :: Lens' a (TF.Attribute s b)
 
-instance HasCryptoKey a s b => HasCryptoKey (TF.Data p a) s b where
+instance HasCryptoKey a s b => HasCryptoKey (TF.DataSource p a) s b where
     cryptoKey = TF.configuration . cryptoKey
 
 class HasDigest a s b | a -> s b where
     digest :: Lens' a (TF.Attribute s b)
 
-instance HasDigest a s b => HasDigest (TF.Data p a) s b where
+instance HasDigest a s b => HasDigest (TF.DataSource p a) s b where
     digest = TF.configuration . digest
 
 class HasDisplayName a s b | a -> s b where
     displayName :: Lens' a (TF.Attribute s b)
 
-instance HasDisplayName a s b => HasDisplayName (TF.Data p a) s b where
+instance HasDisplayName a s b => HasDisplayName (TF.DataSource p a) s b where
     displayName = TF.configuration . displayName
 
 class HasDomain a s b | a -> s b where
     domain :: Lens' a (TF.Attribute s b)
 
-instance HasDomain a s b => HasDomain (TF.Data p a) s b where
+instance HasDomain a s b => HasDomain (TF.DataSource p a) s b where
     domain = TF.configuration . domain
 
 class HasDuration a s b | a -> s b where
     duration :: Lens' a (TF.Attribute s b)
 
-instance HasDuration a s b => HasDuration (TF.Data p a) s b where
+instance HasDuration a s b => HasDuration (TF.DataSource p a) s b where
     duration = TF.configuration . duration
 
 class HasHttpMethod a s b | a -> s b where
     httpMethod :: Lens' a (TF.Attribute s b)
 
-instance HasHttpMethod a s b => HasHttpMethod (TF.Data p a) s b where
+instance HasHttpMethod a s b => HasHttpMethod (TF.DataSource p a) s b where
     httpMethod = TF.configuration . httpMethod
 
 class HasHttpSslTcpInternal a s b | a -> s b where
     httpSslTcpInternal :: Lens' a (TF.Attribute s b)
 
-instance HasHttpSslTcpInternal a s b => HasHttpSslTcpInternal (TF.Data p a) s b where
+instance HasHttpSslTcpInternal a s b => HasHttpSslTcpInternal (TF.DataSource p a) s b where
     httpSslTcpInternal = TF.configuration . httpSslTcpInternal
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasNetwork a s b | a -> s b where
     network :: Lens' a (TF.Attribute s b)
 
-instance HasNetwork a s b => HasNetwork (TF.Data p a) s b where
+instance HasNetwork a s b => HasNetwork (TF.DataSource p a) s b where
     network = TF.configuration . network
 
 class HasOpen a s b | a -> s b where
     open :: Lens' a (TF.Attribute s b)
 
-instance HasOpen a s b => HasOpen (TF.Data p a) s b where
+instance HasOpen a s b => HasOpen (TF.DataSource p a) s b where
     open = TF.configuration . open
 
 class HasOrganization a s b | a -> s b where
     organization :: Lens' a (TF.Attribute s b)
 
-instance HasOrganization a s b => HasOrganization (TF.Data p a) s b where
+instance HasOrganization a s b => HasOrganization (TF.DataSource p a) s b where
     organization = TF.configuration . organization
 
 class HasParent a s b | a -> s b where
     parent :: Lens' a (TF.Attribute s b)
 
-instance HasParent a s b => HasParent (TF.Data p a) s b where
+instance HasParent a s b => HasParent (TF.DataSource p a) s b where
     parent = TF.configuration . parent
 
 class HasPath a s b | a -> s b where
     path :: Lens' a (TF.Attribute s b)
 
-instance HasPath a s b => HasPath (TF.Data p a) s b where
+instance HasPath a s b => HasPath (TF.DataSource p a) s b where
     path = TF.configuration . path
 
 class HasProject a s b | a -> s b where
     project :: Lens' a (TF.Attribute s b)
 
-instance HasProject a s b => HasProject (TF.Data p a) s b where
+instance HasProject a s b => HasProject (TF.DataSource p a) s b where
     project = TF.configuration . project
 
 class HasRegion a s b | a -> s b where
     region :: Lens' a (TF.Attribute s b)
 
-instance HasRegion a s b => HasRegion (TF.Data p a) s b where
+instance HasRegion a s b => HasRegion (TF.DataSource p a) s b where
     region = TF.configuration . region
 
 class HasSelfLink a s b | a -> s b where
     selfLink :: Lens' a (TF.Attribute s b)
 
-instance HasSelfLink a s b => HasSelfLink (TF.Data p a) s b where
+instance HasSelfLink a s b => HasSelfLink (TF.DataSource p a) s b where
     selfLink = TF.configuration . selfLink
 
 class HasStatus a s b | a -> s b where
     status :: Lens' a (TF.Attribute s b)
 
-instance HasStatus a s b => HasStatus (TF.Data p a) s b where
+instance HasStatus a s b => HasStatus (TF.DataSource p a) s b where
     status = TF.configuration . status
 
 class HasTag a s b | a -> s b where
     tag :: Lens' a (TF.Attribute s b)
 
-instance HasTag a s b => HasTag (TF.Data p a) s b where
+instance HasTag a s b => HasTag (TF.DataSource p a) s b where
     tag = TF.configuration . tag
 
 class HasZone a s b | a -> s b where
     zone :: Lens' a (TF.Attribute s b)
 
-instance HasZone a s b => HasZone (TF.Data p a) s b where
+instance HasZone a s b => HasZone (TF.DataSource p a) s b where
     zone = TF.configuration . zone
 
 class HasComputedAddress a b | a -> b where

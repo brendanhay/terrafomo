@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.OpsGenie
-    - Terrafomo.OpsGenie.Data
+    - Terrafomo.OpsGenie.DataSource
     - Terrafomo.OpsGenie.Resource
 
   reexported-modules: >

@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.AWS.Data
+-- Module      : Terrafomo.AWS.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AWS.Data
+module Terrafomo.AWS.DataSource
     (
     -- * Types
       AcmCertificateData (..)
@@ -555,14 +555,14 @@ import qualified Numeric.Natural        as TF
 import qualified Terrafomo.Attribute    as TF
 import qualified Terrafomo.AWS.Provider as TF
 import qualified Terrafomo.AWS.Types    as TF
-import qualified Terrafomo.Data         as TF
+import qualified Terrafomo.DataSource   as TF
 import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.IP           as TF
 import qualified Terrafomo.Meta         as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Resource     as TF
 
-{- | The @aws_acm_certificate@ AWS data.
+{- | The @aws_acm_certificate@ AWS datasource.
 
 Use this data source to get the ARN of a certificate in AWS Certificate
 Manager (ACM). The process of requesting and verifying a certificate in ACM
@@ -611,9 +611,9 @@ instance HasTypes (AcmCertificateData s) s Text where
 
 instance HasComputedArn (AcmCertificateData s) Text
 
-acmCertificateData :: TF.Data TF.AWS (AcmCertificateData s)
+acmCertificateData :: TF.DataSource TF.AWS (AcmCertificateData s)
 acmCertificateData =
-    TF.newData "aws_acm_certificate" $
+    TF.newDataSource "aws_acm_certificate" $
         AcmCertificateData {
               _domain = TF.Nil
             , _most_recent = TF.Nil
@@ -621,7 +621,7 @@ acmCertificateData =
             , _types = TF.Nil
             }
 
-{- | The @aws_ami@ AWS data.
+{- | The @aws_ami@ AWS datasource.
 
 Use this data source to get the ID of a registered AMI for use in other
 resources.
@@ -721,9 +721,9 @@ instance HasComputedTags (AmiData s) TF.Tags
 
 instance HasComputedVirtualizationType (AmiData s) Text
 
-amiData :: TF.Data TF.AWS (AmiData s)
+amiData :: TF.DataSource TF.AWS (AmiData s)
 amiData =
-    TF.newData "aws_ami" $
+    TF.newDataSource "aws_ami" $
         AmiData {
               _executable_users = TF.Nil
             , _filter = TF.Nil
@@ -732,7 +732,7 @@ amiData =
             , _owners = TF.Nil
             }
 
-{- | The @aws_ami_ids@ AWS data.
+{- | The @aws_ami_ids@ AWS datasource.
 
 Use this data source to get a list of AMI IDs matching the specified
 criteria.
@@ -776,9 +776,9 @@ instance HasOwners (AmiIdsData s) s Text where
         lens (_owners :: AmiIdsData s -> TF.Attribute s Text)
             (\s a -> s { _owners = a } :: AmiIdsData s)
 
-amiIdsData :: TF.Data TF.AWS (AmiIdsData s)
+amiIdsData :: TF.DataSource TF.AWS (AmiIdsData s)
 amiIdsData =
-    TF.newData "aws_ami_ids" $
+    TF.newDataSource "aws_ami_ids" $
         AmiIdsData {
               _executable_users = TF.Nil
             , _filter = TF.Nil
@@ -786,7 +786,7 @@ amiIdsData =
             , _owners = TF.Nil
             }
 
-{- | The @aws_autoscaling_groups@ AWS data.
+{- | The @aws_autoscaling_groups@ AWS datasource.
 
 The Autoscaling Groups data source allows access to the list of AWS ASGs
 within a specific region. This will allow you to pass a list of AutoScaling
@@ -809,14 +809,14 @@ instance HasFilter (AutoscalingGroupsData s) s Text where
 
 instance HasComputedNames (AutoscalingGroupsData s) Text
 
-autoscalingGroupsData :: TF.Data TF.AWS (AutoscalingGroupsData s)
+autoscalingGroupsData :: TF.DataSource TF.AWS (AutoscalingGroupsData s)
 autoscalingGroupsData =
-    TF.newData "aws_autoscaling_groups" $
+    TF.newDataSource "aws_autoscaling_groups" $
         AutoscalingGroupsData {
               _filter = TF.Nil
             }
 
-{- | The @aws_availability_zone@ AWS data.
+{- | The @aws_availability_zone@ AWS datasource.
 
 @aws_availability_zone@ provides details about a specific availability zone
 (AZ) in the current region. This can be used both to validate an
@@ -858,15 +858,15 @@ instance HasComputedRegion (AvailabilityZoneData s) TF.Region
 
 instance HasComputedState (AvailabilityZoneData s) Text
 
-availabilityZoneData :: TF.Data TF.AWS (AvailabilityZoneData s)
+availabilityZoneData :: TF.DataSource TF.AWS (AvailabilityZoneData s)
 availabilityZoneData =
-    TF.newData "aws_availability_zone" $
+    TF.newDataSource "aws_availability_zone" $
         AvailabilityZoneData {
               _name = TF.Nil
             , _state = TF.Nil
             }
 
-{- | The @aws_availability_zones@ AWS data.
+{- | The @aws_availability_zones@ AWS datasource.
 
 The Availability Zones data source allows access to the list of AWS
 Availability Zones which can be accessed by an AWS account within the region
@@ -891,14 +891,14 @@ instance HasState (AvailabilityZonesData s) s Text where
 
 instance HasComputedNames (AvailabilityZonesData s) Text
 
-availabilityZonesData :: TF.Data TF.AWS (AvailabilityZonesData s)
+availabilityZonesData :: TF.DataSource TF.AWS (AvailabilityZonesData s)
 availabilityZonesData =
-    TF.newData "aws_availability_zones" $
+    TF.newDataSource "aws_availability_zones" $
         AvailabilityZonesData {
               _state = TF.Nil
             }
 
-{- | The @aws_billing_service_account@ AWS data.
+{- | The @aws_billing_service_account@ AWS datasource.
 
 Use this data source to get the Account ID of the
 <http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-getting-started.html#step-2>
@@ -914,13 +914,13 @@ instance HasComputedArn (BillingServiceAccountData s) Text
 
 instance HasComputedId (BillingServiceAccountData s) Text
 
-billingServiceAccountData :: TF.Data TF.AWS (BillingServiceAccountData s)
+billingServiceAccountData :: TF.DataSource TF.AWS (BillingServiceAccountData s)
 billingServiceAccountData =
-    TF.newData "aws_billing_service_account" $
+    TF.newDataSource "aws_billing_service_account" $
         BillingServiceAccountData {
             }
 
-{- | The @aws_caller_identity@ AWS data.
+{- | The @aws_caller_identity@ AWS datasource.
 
 Use this data source to get the access to the effective Account ID, User ID,
 and ARN in which Terraform is authorized.
@@ -956,16 +956,16 @@ instance HasUserId (CallerIdentityData s) s Text where
         lens (_user_id :: CallerIdentityData s -> TF.Attribute s Text)
             (\s a -> s { _user_id = a } :: CallerIdentityData s)
 
-callerIdentityData :: TF.Data TF.AWS (CallerIdentityData s)
+callerIdentityData :: TF.DataSource TF.AWS (CallerIdentityData s)
 callerIdentityData =
-    TF.newData "aws_caller_identity" $
+    TF.newDataSource "aws_caller_identity" $
         CallerIdentityData {
               _account_id = TF.Nil
             , _arn = TF.Nil
             , _user_id = TF.Nil
             }
 
-{- | The @aws_canonical_user_id@ AWS data.
+{- | The @aws_canonical_user_id@ AWS datasource.
 
 The Canonical User ID data source allows access to the
 <http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html> for the
@@ -994,15 +994,15 @@ instance HasId (CanonicalUserIdData s) s Text where
         lens (_id :: CanonicalUserIdData s -> TF.Attribute s Text)
             (\s a -> s { _id = a } :: CanonicalUserIdData s)
 
-canonicalUserIdData :: TF.Data TF.AWS (CanonicalUserIdData s)
+canonicalUserIdData :: TF.DataSource TF.AWS (CanonicalUserIdData s)
 canonicalUserIdData =
-    TF.newData "aws_canonical_user_id" $
+    TF.newDataSource "aws_canonical_user_id" $
         CanonicalUserIdData {
               _display_name = TF.Nil
             , _id = TF.Nil
             }
 
-{- | The @aws_cloudformation_stack@ AWS data.
+{- | The @aws_cloudformation_stack@ AWS datasource.
 
 The CloudFormation Stack data source allows access to stack outputs and
 other useful data including the template body.
@@ -1042,14 +1042,14 @@ instance HasComputedTemplateBody (CloudformationStackData s) Text
 
 instance HasComputedTimeoutInMinutes (CloudformationStackData s) Text
 
-cloudformationStackData :: TF.Data TF.AWS (CloudformationStackData s)
+cloudformationStackData :: TF.DataSource TF.AWS (CloudformationStackData s)
 cloudformationStackData =
-    TF.newData "aws_cloudformation_stack" $
+    TF.newDataSource "aws_cloudformation_stack" $
         CloudformationStackData {
               _name = TF.Nil
             }
 
-{- | The @aws_cloudtrail_service_account@ AWS data.
+{- | The @aws_cloudtrail_service_account@ AWS datasource.
 
 Use this data source to get the Account ID of the
 <http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-supported-regions.html>
@@ -1075,14 +1075,14 @@ instance HasComputedArn (CloudtrailServiceAccountData s) Text
 
 instance HasComputedId (CloudtrailServiceAccountData s) Text
 
-cloudtrailServiceAccountData :: TF.Data TF.AWS (CloudtrailServiceAccountData s)
+cloudtrailServiceAccountData :: TF.DataSource TF.AWS (CloudtrailServiceAccountData s)
 cloudtrailServiceAccountData =
-    TF.newData "aws_cloudtrail_service_account" $
+    TF.newDataSource "aws_cloudtrail_service_account" $
         CloudtrailServiceAccountData {
               _region = TF.Nil
             }
 
-{- | The @aws_db_instance@ AWS data.
+{- | The @aws_db_instance@ AWS datasource.
 
 Use this data source to get information about an RDS instance
 -}
@@ -1171,14 +1171,14 @@ instance HasComputedTimezone (DbInstanceData s) Text
 
 instance HasComputedVpcSecurityGroups (DbInstanceData s) Text
 
-dbInstanceData :: TF.Data TF.AWS (DbInstanceData s)
+dbInstanceData :: TF.DataSource TF.AWS (DbInstanceData s)
 dbInstanceData =
-    TF.newData "aws_db_instance" $
+    TF.newDataSource "aws_db_instance" $
         DbInstanceData {
               _db_instance_identifier = TF.Nil
             }
 
-{- | The @aws_db_snapshot@ AWS data.
+{- | The @aws_db_snapshot@ AWS datasource.
 
 Use this data source to get information about a DB Snapshot for use when
 provisioning DB instances ~> NOTE: This data source does not apply to
@@ -1273,9 +1273,9 @@ instance HasComputedStorageType (DbSnapshotData s) Text
 
 instance HasComputedVpcId (DbSnapshotData s) Text
 
-dbSnapshotData :: TF.Data TF.AWS (DbSnapshotData s)
+dbSnapshotData :: TF.DataSource TF.AWS (DbSnapshotData s)
 dbSnapshotData =
-    TF.newData "aws_db_snapshot" $
+    TF.newDataSource "aws_db_snapshot" $
         DbSnapshotData {
               _db_instance_identifier = TF.Nil
             , _db_snapshot_identifier = TF.Nil
@@ -1285,7 +1285,7 @@ dbSnapshotData =
             , _snapshot_type = TF.Nil
             }
 
-{- | The @aws_dynamodb_table@ AWS data.
+{- | The @aws_dynamodb_table@ AWS datasource.
 
 Provides information about a DynamoDB table.
 -}
@@ -1304,14 +1304,14 @@ instance HasName (DynamodbTableData s) s Text where
         lens (_name :: DynamodbTableData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DynamodbTableData s)
 
-dynamodbTableData :: TF.Data TF.AWS (DynamodbTableData s)
+dynamodbTableData :: TF.DataSource TF.AWS (DynamodbTableData s)
 dynamodbTableData =
-    TF.newData "aws_dynamodb_table" $
+    TF.newDataSource "aws_dynamodb_table" $
         DynamodbTableData {
               _name = TF.Nil
             }
 
-{- | The @aws_ebs_snapshot@ AWS data.
+{- | The @aws_ebs_snapshot@ AWS datasource.
 
 Use this data source to get information about an EBS Snapshot for use when
 provisioning EBS Volumes
@@ -1387,9 +1387,9 @@ instance HasComputedVolumeId (EbsSnapshotData s) Text
 
 instance HasComputedVolumeSize (EbsSnapshotData s) Text
 
-ebsSnapshotData :: TF.Data TF.AWS (EbsSnapshotData s)
+ebsSnapshotData :: TF.DataSource TF.AWS (EbsSnapshotData s)
 ebsSnapshotData =
-    TF.newData "aws_ebs_snapshot" $
+    TF.newDataSource "aws_ebs_snapshot" $
         EbsSnapshotData {
               _filter = TF.Nil
             , _most_recent = TF.Nil
@@ -1398,7 +1398,7 @@ ebsSnapshotData =
             , _snapshot_ids = TF.Nil
             }
 
-{- | The @aws_ebs_snapshot_ids@ AWS data.
+{- | The @aws_ebs_snapshot_ids@ AWS datasource.
 
 Use this data source to get a list of EBS Snapshot IDs matching the
 specified criteria.
@@ -1434,16 +1434,16 @@ instance HasRestorableByUserIds (EbsSnapshotIdsData s) s Text where
         lens (_restorable_by_user_ids :: EbsSnapshotIdsData s -> TF.Attribute s Text)
             (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotIdsData s)
 
-ebsSnapshotIdsData :: TF.Data TF.AWS (EbsSnapshotIdsData s)
+ebsSnapshotIdsData :: TF.DataSource TF.AWS (EbsSnapshotIdsData s)
 ebsSnapshotIdsData =
-    TF.newData "aws_ebs_snapshot_ids" $
+    TF.newDataSource "aws_ebs_snapshot_ids" $
         EbsSnapshotIdsData {
               _filter = TF.Nil
             , _owners = TF.Nil
             , _restorable_by_user_ids = TF.Nil
             }
 
-{- | The @aws_ebs_volume@ AWS data.
+{- | The @aws_ebs_volume@ AWS datasource.
 
 Use this data source to get information about an EBS volume for use in other
 resources.
@@ -1493,15 +1493,15 @@ instance HasComputedVolumeId (EbsVolumeData s) Text
 
 instance HasComputedVolumeType (EbsVolumeData s) Text
 
-ebsVolumeData :: TF.Data TF.AWS (EbsVolumeData s)
+ebsVolumeData :: TF.DataSource TF.AWS (EbsVolumeData s)
 ebsVolumeData =
-    TF.newData "aws_ebs_volume" $
+    TF.newDataSource "aws_ebs_volume" $
         EbsVolumeData {
               _filter = TF.Nil
             , _most_recent = TF.Nil
             }
 
-{- | The @aws_ecr_repository@ AWS data.
+{- | The @aws_ecr_repository@ AWS datasource.
 
 The ECR Repository data source allows the ARN, Repository URI and Registry
 ID to be retrieved for an ECR repository.
@@ -1527,14 +1527,14 @@ instance HasComputedRegistryId (EcrRepositoryData s) Text
 
 instance HasComputedRepositoryUrl (EcrRepositoryData s) Text
 
-ecrRepositoryData :: TF.Data TF.AWS (EcrRepositoryData s)
+ecrRepositoryData :: TF.DataSource TF.AWS (EcrRepositoryData s)
 ecrRepositoryData =
-    TF.newData "aws_ecr_repository" $
+    TF.newDataSource "aws_ecr_repository" $
         EcrRepositoryData {
               _name = TF.Nil
             }
 
-{- | The @aws_ecs_cluster@ AWS data.
+{- | The @aws_ecs_cluster@ AWS datasource.
 
 The ECS Cluster data source allows access to details of a specific cluster
 within an AWS ECS service.
@@ -1564,14 +1564,14 @@ instance HasComputedRunningTasksCount (EcsClusterData s) Text
 
 instance HasComputedStatus (EcsClusterData s) Text
 
-ecsClusterData :: TF.Data TF.AWS (EcsClusterData s)
+ecsClusterData :: TF.DataSource TF.AWS (EcsClusterData s)
 ecsClusterData =
-    TF.newData "aws_ecs_cluster" $
+    TF.newDataSource "aws_ecs_cluster" $
         EcsClusterData {
               _cluster_name = TF.Nil
             }
 
-{- | The @aws_ecs_container_definition@ AWS data.
+{- | The @aws_ecs_container_definition@ AWS datasource.
 
 The ECS container definition data source allows access to details of a
 specific container within an AWS ECS service.
@@ -1615,15 +1615,15 @@ instance HasComputedMemory (EcsContainerDefinitionData s) Text
 
 instance HasComputedMemoryReservation (EcsContainerDefinitionData s) Text
 
-ecsContainerDefinitionData :: TF.Data TF.AWS (EcsContainerDefinitionData s)
+ecsContainerDefinitionData :: TF.DataSource TF.AWS (EcsContainerDefinitionData s)
 ecsContainerDefinitionData =
-    TF.newData "aws_ecs_container_definition" $
+    TF.newDataSource "aws_ecs_container_definition" $
         EcsContainerDefinitionData {
               _container_name = TF.Nil
             , _task_definition = TF.Nil
             }
 
-{- | The @aws_ecs_task_definition@ AWS data.
+{- | The @aws_ecs_task_definition@ AWS datasource.
 
 The ECS task definition data source allows access to details of a specific
 AWS ECS task definition.
@@ -1653,14 +1653,14 @@ instance HasComputedStatus (EcsTaskDefinitionData s) Text
 
 instance HasComputedTaskRoleArn (EcsTaskDefinitionData s) Text
 
-ecsTaskDefinitionData :: TF.Data TF.AWS (EcsTaskDefinitionData s)
+ecsTaskDefinitionData :: TF.DataSource TF.AWS (EcsTaskDefinitionData s)
 ecsTaskDefinitionData =
-    TF.newData "aws_ecs_task_definition" $
+    TF.newDataSource "aws_ecs_task_definition" $
         EcsTaskDefinitionData {
               _task_definition = TF.Nil
             }
 
-{- | The @aws_efs_file_system@ AWS data.
+{- | The @aws_efs_file_system@ AWS datasource.
 
 Provides information about an Elastic File System (EFS).
 -}
@@ -1697,15 +1697,15 @@ instance HasComputedPerformanceMode (EfsFileSystemData s) Text
 
 instance HasComputedTags (EfsFileSystemData s) TF.Tags
 
-efsFileSystemData :: TF.Data TF.AWS (EfsFileSystemData s)
+efsFileSystemData :: TF.DataSource TF.AWS (EfsFileSystemData s)
 efsFileSystemData =
-    TF.newData "aws_efs_file_system" $
+    TF.newDataSource "aws_efs_file_system" $
         EfsFileSystemData {
               _creation_token = TF.Nil
             , _file_system_id = TF.Nil
             }
 
-{- | The @aws_efs_mount_target@ AWS data.
+{- | The @aws_efs_mount_target@ AWS datasource.
 
 Provides information about an Elastic File System Mount Target (EFS).
 -}
@@ -1736,14 +1736,14 @@ instance HasComputedSecurityGroups (EfsMountTargetData s) Text
 
 instance HasComputedSubnetId (EfsMountTargetData s) Text
 
-efsMountTargetData :: TF.Data TF.AWS (EfsMountTargetData s)
+efsMountTargetData :: TF.DataSource TF.AWS (EfsMountTargetData s)
 efsMountTargetData =
-    TF.newData "aws_efs_mount_target" $
+    TF.newDataSource "aws_efs_mount_target" $
         EfsMountTargetData {
               _mount_target_id = TF.Nil
             }
 
-{- | The @aws_eip@ AWS data.
+{- | The @aws_eip@ AWS datasource.
 
 @aws_eip@ provides details about a specific Elastic IP. This resource can
 prove useful when a module accepts an allocation ID or public IP as an input
@@ -1772,15 +1772,15 @@ instance HasPublicIp (EipData s) s Text where
         lens (_public_ip :: EipData s -> TF.Attribute s Text)
             (\s a -> s { _public_ip = a } :: EipData s)
 
-eipData :: TF.Data TF.AWS (EipData s)
+eipData :: TF.DataSource TF.AWS (EipData s)
 eipData =
-    TF.newData "aws_eip" $
+    TF.newDataSource "aws_eip" $
         EipData {
               _id = TF.Nil
             , _public_ip = TF.Nil
             }
 
-{- | The @aws_elastic_beanstalk_solution_stack@ AWS data.
+{- | The @aws_elastic_beanstalk_solution_stack@ AWS datasource.
 
 Use this data source to get the name of a elastic beanstalk solution stack.
 -}
@@ -1809,15 +1809,15 @@ instance HasNameRegex (ElasticBeanstalkSolutionStackData s) s Text where
 
 instance HasComputedName (ElasticBeanstalkSolutionStackData s) Text
 
-elasticBeanstalkSolutionStackData :: TF.Data TF.AWS (ElasticBeanstalkSolutionStackData s)
+elasticBeanstalkSolutionStackData :: TF.DataSource TF.AWS (ElasticBeanstalkSolutionStackData s)
 elasticBeanstalkSolutionStackData =
-    TF.newData "aws_elastic_beanstalk_solution_stack" $
+    TF.newDataSource "aws_elastic_beanstalk_solution_stack" $
         ElasticBeanstalkSolutionStackData {
               _most_recent = TF.Nil
             , _name_regex = TF.Nil
             }
 
-{- | The @aws_elasticache_cluster@ AWS data.
+{- | The @aws_elasticache_cluster@ AWS datasource.
 
 Use this data source to get information about an Elasticache Cluster
 -}
@@ -1874,14 +1874,14 @@ instance HasComputedSubnetGroupName (ElasticacheClusterData s) Text
 
 instance HasComputedTags (ElasticacheClusterData s) TF.Tags
 
-elasticacheClusterData :: TF.Data TF.AWS (ElasticacheClusterData s)
+elasticacheClusterData :: TF.DataSource TF.AWS (ElasticacheClusterData s)
 elasticacheClusterData =
-    TF.newData "aws_elasticache_cluster" $
+    TF.newDataSource "aws_elasticache_cluster" $
         ElasticacheClusterData {
               _cluster_id = TF.Nil
             }
 
-{- | The @aws_elasticache_replication_group@ AWS data.
+{- | The @aws_elasticache_replication_group@ AWS datasource.
 
 Use this data source to get information about an Elasticache Replication
 Group.
@@ -1923,14 +1923,14 @@ instance HasComputedSnapshotRetentionLimit (ElasticacheReplicationGroupData s) T
 
 instance HasComputedSnapshotWindow (ElasticacheReplicationGroupData s) Text
 
-elasticacheReplicationGroupData :: TF.Data TF.AWS (ElasticacheReplicationGroupData s)
+elasticacheReplicationGroupData :: TF.DataSource TF.AWS (ElasticacheReplicationGroupData s)
 elasticacheReplicationGroupData =
-    TF.newData "aws_elasticache_replication_group" $
+    TF.newDataSource "aws_elasticache_replication_group" $
         ElasticacheReplicationGroupData {
               _replication_group_id = TF.Nil
             }
 
-{- | The @aws_elb@ AWS data.
+{- | The @aws_elb@ AWS datasource.
 
 Provides information about a "classic" Elastic Load Balancer (ELB). See
 </docs/providers/aws/d/lb.html> if you are looking for "v2" Application Load
@@ -1953,14 +1953,14 @@ instance HasName (ElbData s) s Text where
         lens (_name :: ElbData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ElbData s)
 
-elbData :: TF.Data TF.AWS (ElbData s)
+elbData :: TF.DataSource TF.AWS (ElbData s)
 elbData =
-    TF.newData "aws_elb" $
+    TF.newDataSource "aws_elb" $
         ElbData {
               _name = TF.Nil
             }
 
-{- | The @aws_elb_hosted_zone_id@ AWS data.
+{- | The @aws_elb_hosted_zone_id@ AWS datasource.
 
 Use this data source to get the HostedZoneId of the AWS Elastic Load
 Balancing HostedZoneId in a given region for the purpose of using in an AWS
@@ -1983,14 +1983,14 @@ instance HasRegion (ElbHostedZoneIdData s) s TF.Region where
 
 instance HasComputedId (ElbHostedZoneIdData s) Text
 
-elbHostedZoneIdData :: TF.Data TF.AWS (ElbHostedZoneIdData s)
+elbHostedZoneIdData :: TF.DataSource TF.AWS (ElbHostedZoneIdData s)
 elbHostedZoneIdData =
-    TF.newData "aws_elb_hosted_zone_id" $
+    TF.newDataSource "aws_elb_hosted_zone_id" $
         ElbHostedZoneIdData {
               _region = TF.Nil
             }
 
-{- | The @aws_elb_service_account@ AWS data.
+{- | The @aws_elb_service_account@ AWS datasource.
 
 Use this data source to get the Account ID of the
 <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html#attach-bucket-policy>
@@ -2015,14 +2015,14 @@ instance HasComputedArn (ElbServiceAccountData s) Text
 
 instance HasComputedId (ElbServiceAccountData s) Text
 
-elbServiceAccountData :: TF.Data TF.AWS (ElbServiceAccountData s)
+elbServiceAccountData :: TF.DataSource TF.AWS (ElbServiceAccountData s)
 elbServiceAccountData =
-    TF.newData "aws_elb_service_account" $
+    TF.newDataSource "aws_elb_service_account" $
         ElbServiceAccountData {
               _region = TF.Nil
             }
 
-{- | The @aws_iam_account_alias@ AWS data.
+{- | The @aws_iam_account_alias@ AWS datasource.
 
 The IAM Account Alias data source allows access to the account alias for the
 effective account in which Terraform is working.
@@ -2042,14 +2042,14 @@ instance HasAccountAlias (IamAccountAliasData s) s Text where
         lens (_account_alias :: IamAccountAliasData s -> TF.Attribute s Text)
             (\s a -> s { _account_alias = a } :: IamAccountAliasData s)
 
-iamAccountAliasData :: TF.Data TF.AWS (IamAccountAliasData s)
+iamAccountAliasData :: TF.DataSource TF.AWS (IamAccountAliasData s)
 iamAccountAliasData =
-    TF.newData "aws_iam_account_alias" $
+    TF.newDataSource "aws_iam_account_alias" $
         IamAccountAliasData {
               _account_alias = TF.Nil
             }
 
-{- | The @aws_iam_group@ AWS data.
+{- | The @aws_iam_group@ AWS datasource.
 
 This data source can be used to fetch information about a specific IAM
 group. By using this data source, you can reference IAM group properties
@@ -2076,14 +2076,14 @@ instance HasComputedGroupId (IamGroupData s) Text
 
 instance HasComputedPath (IamGroupData s) Text
 
-iamGroupData :: TF.Data TF.AWS (IamGroupData s)
+iamGroupData :: TF.DataSource TF.AWS (IamGroupData s)
 iamGroupData =
-    TF.newData "aws_iam_group" $
+    TF.newDataSource "aws_iam_group" $
         IamGroupData {
               _group_name = TF.Nil
             }
 
-{- | The @aws_iam_instance_profile@ AWS data.
+{- | The @aws_iam_instance_profile@ AWS datasource.
 
 This data source can be used to fetch information about a specific IAM
 instance profile. By using this data source, you can reference IAM instance
@@ -2112,14 +2112,14 @@ instance HasComputedPath (IamInstanceProfileData s) Text
 
 instance HasComputedRoleId (IamInstanceProfileData s) Text
 
-iamInstanceProfileData :: TF.Data TF.AWS (IamInstanceProfileData s)
+iamInstanceProfileData :: TF.DataSource TF.AWS (IamInstanceProfileData s)
 iamInstanceProfileData =
-    TF.newData "aws_iam_instance_profile" $
+    TF.newDataSource "aws_iam_instance_profile" $
         IamInstanceProfileData {
               _name = TF.Nil
             }
 
-{- | The @aws_iam_policy@ AWS data.
+{- | The @aws_iam_policy@ AWS datasource.
 
 This data source can be used to fetch information about a specific IAM
 policy.
@@ -2149,14 +2149,14 @@ instance HasComputedPath (IamPolicyData s) Text
 
 instance HasComputedPolicy (IamPolicyData s) Text
 
-iamPolicyData :: TF.Data TF.AWS (IamPolicyData s)
+iamPolicyData :: TF.DataSource TF.AWS (IamPolicyData s)
 iamPolicyData =
-    TF.newData "aws_iam_policy" $
+    TF.newDataSource "aws_iam_policy" $
         IamPolicyData {
               _arn = TF.Nil
             }
 
-{- | The @aws_iam_policy_document@ AWS data.
+{- | The @aws_iam_policy_document@ AWS datasource.
 
 Generates an IAM policy document in JSON format. This is a data source which
 can be used to construct a JSON representation of an IAM policy document,
@@ -2186,15 +2186,15 @@ instance HasStatement (IamPolicyDocumentData s) s Text where
         lens (_statement :: IamPolicyDocumentData s -> TF.Attribute s Text)
             (\s a -> s { _statement = a } :: IamPolicyDocumentData s)
 
-iamPolicyDocumentData :: TF.Data TF.AWS (IamPolicyDocumentData s)
+iamPolicyDocumentData :: TF.DataSource TF.AWS (IamPolicyDocumentData s)
 iamPolicyDocumentData =
-    TF.newData "aws_iam_policy_document" $
+    TF.newDataSource "aws_iam_policy_document" $
         IamPolicyDocumentData {
               _policy_id = TF.Nil
             , _statement = TF.Nil
             }
 
-{- | The @aws_iam_role@ AWS data.
+{- | The @aws_iam_role@ AWS datasource.
 
 This data source can be used to fetch information about a specific IAM role.
 By using this data source, you can reference IAM role properties without
@@ -2225,14 +2225,14 @@ instance HasComputedPath (IamRoleData s) Text
 
 instance HasComputedUniqueId (IamRoleData s) Text
 
-iamRoleData :: TF.Data TF.AWS (IamRoleData s)
+iamRoleData :: TF.DataSource TF.AWS (IamRoleData s)
 iamRoleData =
-    TF.newData "aws_iam_role" $
+    TF.newDataSource "aws_iam_role" $
         IamRoleData {
               _name = TF.Nil
             }
 
-{- | The @aws_iam_server_certificate@ AWS data.
+{- | The @aws_iam_server_certificate@ AWS datasource.
 
 Use this data source to lookup information about IAM Server Certificates.
 -}
@@ -2279,16 +2279,16 @@ instance HasComputedPath (IamServerCertificateData s) Text
 
 instance HasComputedUploadDate (IamServerCertificateData s) Text
 
-iamServerCertificateData :: TF.Data TF.AWS (IamServerCertificateData s)
+iamServerCertificateData :: TF.DataSource TF.AWS (IamServerCertificateData s)
 iamServerCertificateData =
-    TF.newData "aws_iam_server_certificate" $
+    TF.newDataSource "aws_iam_server_certificate" $
         IamServerCertificateData {
               _latest = TF.Nil
             , _name = TF.Nil
             , _name_prefix = TF.Nil
             }
 
-{- | The @aws_iam_user@ AWS data.
+{- | The @aws_iam_user@ AWS datasource.
 
 This data source can be used to fetch information about a specific IAM user.
 By using this data source, you can reference IAM user properties without
@@ -2315,14 +2315,14 @@ instance HasComputedPath (IamUserData s) Text
 
 instance HasComputedUserId (IamUserData s) Text
 
-iamUserData :: TF.Data TF.AWS (IamUserData s)
+iamUserData :: TF.DataSource TF.AWS (IamUserData s)
 iamUserData =
-    TF.newData "aws_iam_user" $
+    TF.newDataSource "aws_iam_user" $
         IamUserData {
               _user_name = TF.Nil
             }
 
-{- | The @aws_instance@ AWS data.
+{- | The @aws_instance@ AWS datasource.
 
 Use this data source to get the ID of an Amazon EC2 Instance for use in
 other resources.
@@ -2406,16 +2406,16 @@ instance HasComputedUserData (InstanceData s) Text
 
 instance HasComputedVpcSecurityGroupIds (InstanceData s) Text
 
-instanceData :: TF.Data TF.AWS (InstanceData s)
+instanceData :: TF.DataSource TF.AWS (InstanceData s)
 instanceData =
-    TF.newData "aws_instance" $
+    TF.newDataSource "aws_instance" $
         InstanceData {
               _filter = TF.Nil
             , _instance_id = TF.Nil
             , _instance_tags = TF.Nil
             }
 
-{- | The @aws_instances@ AWS data.
+{- | The @aws_instances@ AWS datasource.
 
 Use this data source to get IDs or IPs of Amazon EC2 instances to be
 referenced elsewhere, e.g. to allow easier migration from another management
@@ -2459,15 +2459,15 @@ instance HasComputedPrivateIps (InstancesData s) Text
 
 instance HasComputedPublicIps (InstancesData s) Text
 
-instancesData :: TF.Data TF.AWS (InstancesData s)
+instancesData :: TF.DataSource TF.AWS (InstancesData s)
 instancesData =
-    TF.newData "aws_instances" $
+    TF.newDataSource "aws_instances" $
         InstancesData {
               _filter = TF.Nil
             , _instance_tags = TF.Nil
             }
 
-{- | The @aws_internet_gateway@ AWS data.
+{- | The @aws_internet_gateway@ AWS datasource.
 
 @aws_internet_gateway@ provides details about a specific Internet Gateway.
 -}
@@ -2506,16 +2506,16 @@ instance HasComputedState (InternetGatewayData s) Text
 
 instance HasComputedVpcId (InternetGatewayData s) Text
 
-internetGatewayData :: TF.Data TF.AWS (InternetGatewayData s)
+internetGatewayData :: TF.DataSource TF.AWS (InternetGatewayData s)
 internetGatewayData =
-    TF.newData "aws_internet_gateway" $
+    TF.newDataSource "aws_internet_gateway" $
         InternetGatewayData {
               _filter = TF.Nil
             , _internet_gateway_id = TF.Nil
             , _tags = TF.Nil
             }
 
-{- | The @aws_ip_ranges@ AWS data.
+{- | The @aws_ip_ranges@ AWS datasource.
 
 Use this data source to get the
 <http://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html> of various
@@ -2550,15 +2550,15 @@ instance HasComputedCreateDate (IpRangesData s) Text
 
 instance HasComputedSyncToken (IpRangesData s) Text
 
-ipRangesData :: TF.Data TF.AWS (IpRangesData s)
+ipRangesData :: TF.DataSource TF.AWS (IpRangesData s)
 ipRangesData =
-    TF.newData "aws_ip_ranges" $
+    TF.newDataSource "aws_ip_ranges" $
         IpRangesData {
               _regions = TF.Nil
             , _services = TF.Nil
             }
 
-{- | The @aws_kinesis_stream@ AWS data.
+{- | The @aws_kinesis_stream@ AWS datasource.
 
 Use this data source to get information about a Kinesis Stream for use in
 other resources. For more details, see the
@@ -2597,14 +2597,14 @@ instance HasComputedStatus (KinesisStreamData s) Text
 
 instance HasComputedTags (KinesisStreamData s) TF.Tags
 
-kinesisStreamData :: TF.Data TF.AWS (KinesisStreamData s)
+kinesisStreamData :: TF.DataSource TF.AWS (KinesisStreamData s)
 kinesisStreamData =
-    TF.newData "aws_kinesis_stream" $
+    TF.newDataSource "aws_kinesis_stream" $
         KinesisStreamData {
               _name = TF.Nil
             }
 
-{- | The @aws_kms_alias@ AWS data.
+{- | The @aws_kms_alias@ AWS datasource.
 
 Use this data source to get the ARN of a KMS key alias. By using this data
 source, you can reference key alias without having to hard code the ARN as
@@ -2631,14 +2631,14 @@ instance HasComputedTargetKeyArn (KmsAliasData s) Text
 
 instance HasComputedTargetKeyId (KmsAliasData s) Text
 
-kmsAliasData :: TF.Data TF.AWS (KmsAliasData s)
+kmsAliasData :: TF.DataSource TF.AWS (KmsAliasData s)
 kmsAliasData =
-    TF.newData "aws_kms_alias" $
+    TF.newDataSource "aws_kms_alias" $
         KmsAliasData {
               _name = TF.Nil
             }
 
-{- | The @aws_kms_ciphertext@ AWS data.
+{- | The @aws_kms_ciphertext@ AWS datasource.
 
 The KMS ciphertext data source allows you to encrypt plaintext into
 ciphertext by using an AWS KMS customer master key. ~> Note: All arguments
@@ -2678,16 +2678,16 @@ instance HasPlaintext (KmsCiphertextData s) s Text where
 
 instance HasComputedCiphertextBlob (KmsCiphertextData s) Text
 
-kmsCiphertextData :: TF.Data TF.AWS (KmsCiphertextData s)
+kmsCiphertextData :: TF.DataSource TF.AWS (KmsCiphertextData s)
 kmsCiphertextData =
-    TF.newData "aws_kms_ciphertext" $
+    TF.newDataSource "aws_kms_ciphertext" $
         KmsCiphertextData {
               _context = TF.Nil
             , _key_id = TF.Nil
             , _plaintext = TF.Nil
             }
 
-{- | The @aws_kms_secret@ AWS data.
+{- | The @aws_kms_secret@ AWS datasource.
 
 The KMS secret data source allows you to use data encrypted with the AWS KMS
 service within your resource definitions. ~> NOTE : Using this data provider
@@ -2711,14 +2711,14 @@ instance HasSecret (KmsSecretData s) s Text where
         lens (_secret :: KmsSecretData s -> TF.Attribute s Text)
             (\s a -> s { _secret = a } :: KmsSecretData s)
 
-kmsSecretData :: TF.Data TF.AWS (KmsSecretData s)
+kmsSecretData :: TF.DataSource TF.AWS (KmsSecretData s)
 kmsSecretData =
-    TF.newData "aws_kms_secret" $
+    TF.newDataSource "aws_kms_secret" $
         KmsSecretData {
               _secret = TF.Nil
             }
 
-{- | The @aws_lb@ AWS data.
+{- | The @aws_lb@ AWS datasource.
 
 ~> Note:  @aws_alb@ is known as @aws_lb@ . The functionality is identical.
 Provides information about a Load Balancer. This data source can prove
@@ -2748,15 +2748,15 @@ instance HasName (LbData s) s Text where
         lens (_name :: LbData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbData s)
 
-lbData :: TF.Data TF.AWS (LbData s)
+lbData :: TF.DataSource TF.AWS (LbData s)
 lbData =
-    TF.newData "aws_lb" $
+    TF.newDataSource "aws_lb" $
         LbData {
               _arn = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @aws_lb_listener@ AWS data.
+{- | The @aws_lb_listener@ AWS datasource.
 
 ~> Note:  @aws_alb_listener@ is known as @aws_lb_listener@ . The
 functionality is identical. Provides information about a Load Balancer
@@ -2795,16 +2795,16 @@ instance HasPort (LbListenerData s) s Text where
         lens (_port :: LbListenerData s -> TF.Attribute s Text)
             (\s a -> s { _port = a } :: LbListenerData s)
 
-lbListenerData :: TF.Data TF.AWS (LbListenerData s)
+lbListenerData :: TF.DataSource TF.AWS (LbListenerData s)
 lbListenerData =
-    TF.newData "aws_lb_listener" $
+    TF.newDataSource "aws_lb_listener" $
         LbListenerData {
               _arn = TF.Nil
             , _load_balancer_arn = TF.Nil
             , _port = TF.Nil
             }
 
-{- | The @aws_lb_target_group@ AWS data.
+{- | The @aws_lb_target_group@ AWS datasource.
 
 ~> Note:  @aws_alb_target_group@ is known as @aws_lb_target_group@ . The
 functionality is identical. Provides information about a Load Balancer
@@ -2836,15 +2836,15 @@ instance HasName (LbTargetGroupData s) s Text where
         lens (_name :: LbTargetGroupData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: LbTargetGroupData s)
 
-lbTargetGroupData :: TF.Data TF.AWS (LbTargetGroupData s)
+lbTargetGroupData :: TF.DataSource TF.AWS (LbTargetGroupData s)
 lbTargetGroupData =
-    TF.newData "aws_lb_target_group" $
+    TF.newDataSource "aws_lb_target_group" $
         LbTargetGroupData {
               _arn = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @aws_nat_gateway@ AWS data.
+{- | The @aws_nat_gateway@ AWS datasource.
 
 Provides details about a specific Nat Gateway.
 -}
@@ -2919,9 +2919,9 @@ instance HasComputedPrivateIp (NatGatewayData s) Text
 
 instance HasComputedPublicIp (NatGatewayData s) Text
 
-natGatewayData :: TF.Data TF.AWS (NatGatewayData s)
+natGatewayData :: TF.DataSource TF.AWS (NatGatewayData s)
 natGatewayData =
-    TF.newData "aws_nat_gateway" $
+    TF.newDataSource "aws_nat_gateway" $
         NatGatewayData {
               _filter = TF.Nil
             , _id = TF.Nil
@@ -2932,7 +2932,7 @@ natGatewayData =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_network_interface@ AWS data.
+{- | The @aws_network_interface@ AWS datasource.
 
 Use this data source to get information about a Network Interface.
 -}
@@ -2973,15 +2973,15 @@ instance HasComputedOwnerId (NetworkInterfaceData s) Text
 
 instance HasComputedRequesterId (NetworkInterfaceData s) Text
 
-networkInterfaceData :: TF.Data TF.AWS (NetworkInterfaceData s)
+networkInterfaceData :: TF.DataSource TF.AWS (NetworkInterfaceData s)
 networkInterfaceData =
-    TF.newData "aws_network_interface" $
+    TF.newDataSource "aws_network_interface" $
         NetworkInterfaceData {
               _filter = TF.Nil
             , _id = TF.Nil
             }
 
-{- | The @aws_partition@ AWS data.
+{- | The @aws_partition@ AWS datasource.
 
 Use this data source to lookup current AWS partition in which Terraform is
 working
@@ -2992,13 +2992,13 @@ data PartitionData s = PartitionData {
 instance TF.ToHCL (PartitionData s) where
     toHCL _ = TF.block []
 
-partitionData :: TF.Data TF.AWS (PartitionData s)
+partitionData :: TF.DataSource TF.AWS (PartitionData s)
 partitionData =
-    TF.newData "aws_partition" $
+    TF.newDataSource "aws_partition" $
         PartitionData {
             }
 
-{- | The @aws_prefix_list@ AWS data.
+{- | The @aws_prefix_list@ AWS datasource.
 
 @aws_prefix_list@ provides details about a specific prefix list (PL) in the
 current region. This can be used both to validate a prefix list given in a
@@ -3035,15 +3035,15 @@ instance HasComputedId (PrefixListData s) Text
 
 instance HasComputedName (PrefixListData s) Text
 
-prefixListData :: TF.Data TF.AWS (PrefixListData s)
+prefixListData :: TF.DataSource TF.AWS (PrefixListData s)
 prefixListData =
-    TF.newData "aws_prefix_list" $
+    TF.newDataSource "aws_prefix_list" $
         PrefixListData {
               _name = TF.Nil
             , _prefix_list_id = TF.Nil
             }
 
-{- | The @aws_rds_cluster@ AWS data.
+{- | The @aws_rds_cluster@ AWS datasource.
 
 Provides information about a RDS cluster.
 -}
@@ -3062,14 +3062,14 @@ instance HasClusterIdentifier (RdsClusterData s) s Text where
         lens (_cluster_identifier :: RdsClusterData s -> TF.Attribute s Text)
             (\s a -> s { _cluster_identifier = a } :: RdsClusterData s)
 
-rdsClusterData :: TF.Data TF.AWS (RdsClusterData s)
+rdsClusterData :: TF.DataSource TF.AWS (RdsClusterData s)
 rdsClusterData =
-    TF.newData "aws_rds_cluster" $
+    TF.newDataSource "aws_rds_cluster" $
         RdsClusterData {
               _cluster_identifier = TF.Nil
             }
 
-{- | The @aws_redshift_service_account@ AWS data.
+{- | The @aws_redshift_service_account@ AWS datasource.
 
 Use this data source to get the Account ID of the
 <http://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html#db-auditing-enable-logging>
@@ -3095,14 +3095,14 @@ instance HasComputedArn (RedshiftServiceAccountData s) Text
 
 instance HasComputedId (RedshiftServiceAccountData s) Text
 
-redshiftServiceAccountData :: TF.Data TF.AWS (RedshiftServiceAccountData s)
+redshiftServiceAccountData :: TF.DataSource TF.AWS (RedshiftServiceAccountData s)
 redshiftServiceAccountData =
-    TF.newData "aws_redshift_service_account" $
+    TF.newDataSource "aws_redshift_service_account" $
         RedshiftServiceAccountData {
               _region = TF.Nil
             }
 
-{- | The @aws_region@ AWS data.
+{- | The @aws_region@ AWS datasource.
 
 @aws_region@ provides details about a specific AWS region. As well as
 validating a given region name (and optionally obtaining its endpoint) this
@@ -3147,16 +3147,16 @@ instance HasComputedEndpoint (RegionData s) Text
 
 instance HasComputedName (RegionData s) Text
 
-regionData :: TF.Data TF.AWS (RegionData s)
+regionData :: TF.DataSource TF.AWS (RegionData s)
 regionData =
-    TF.newData "aws_region" $
+    TF.newDataSource "aws_region" $
         RegionData {
               _current = TF.Nil
             , _endpoint = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @aws_route53_zone@ AWS data.
+{- | The @aws_route53_zone@ AWS datasource.
 
 @aws_route53_zone@ provides details about a specific Route 53 Hosted Zone.
 This data source allows to find a Hosted Zone ID given Hosted Zone name and
@@ -3215,9 +3215,9 @@ instance HasComputedComment (Route53ZoneData s) Text
 
 instance HasComputedResourceRecordSetCount (Route53ZoneData s) Text
 
-route53ZoneData :: TF.Data TF.AWS (Route53ZoneData s)
+route53ZoneData :: TF.DataSource TF.AWS (Route53ZoneData s)
 route53ZoneData =
-    TF.newData "aws_route53_zone" $
+    TF.newDataSource "aws_route53_zone" $
         Route53ZoneData {
               _name = TF.Nil
             , _private_zone = TF.Nil
@@ -3226,7 +3226,7 @@ route53ZoneData =
             , _zone_id = TF.Nil
             }
 
-{- | The @aws_route_table@ AWS data.
+{- | The @aws_route_table@ AWS datasource.
 
 @aws_route_table@ provides details about a specific Route Table. This
 resource can prove useful when a module accepts a Subnet id as an input
@@ -3295,9 +3295,9 @@ instance HasComputedNetworkInterfaceId (RouteTableData s) Text
 
 instance HasComputedVpcPeeringConnectionId (RouteTableData s) Text
 
-routeTableData :: TF.Data TF.AWS (RouteTableData s)
+routeTableData :: TF.DataSource TF.AWS (RouteTableData s)
 routeTableData =
-    TF.newData "aws_route_table" $
+    TF.newDataSource "aws_route_table" $
         RouteTableData {
               _filter = TF.Nil
             , _route_table_id = TF.Nil
@@ -3306,7 +3306,7 @@ routeTableData =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_s3_bucket@ AWS data.
+{- | The @aws_s3_bucket@ AWS datasource.
 
 Provides details about a specific S3 bucket. This resource may prove useful
 when setting up a Route53 record, or an origin for a CloudFront
@@ -3341,14 +3341,14 @@ instance HasComputedWebsiteDomain (S3BucketData s) Text
 
 instance HasComputedWebsiteEndpoint (S3BucketData s) Text
 
-s3BucketData :: TF.Data TF.AWS (S3BucketData s)
+s3BucketData :: TF.DataSource TF.AWS (S3BucketData s)
 s3BucketData =
-    TF.newData "aws_s3_bucket" $
+    TF.newDataSource "aws_s3_bucket" $
         S3BucketData {
               _bucket = TF.Nil
             }
 
-{- | The @aws_s3_bucket_object@ AWS data.
+{- | The @aws_s3_bucket_object@ AWS datasource.
 
 The S3 object data source allows access to the metadata and optionally (see
 below) content of an object stored inside S3 bucket. ~> Note: The content of
@@ -3424,16 +3424,16 @@ instance HasComputedVersionId (S3BucketObjectData s) Text
 
 instance HasComputedWebsiteRedirectLocation (S3BucketObjectData s) Text
 
-s3BucketObjectData :: TF.Data TF.AWS (S3BucketObjectData s)
+s3BucketObjectData :: TF.DataSource TF.AWS (S3BucketObjectData s)
 s3BucketObjectData =
-    TF.newData "aws_s3_bucket_object" $
+    TF.newDataSource "aws_s3_bucket_object" $
         S3BucketObjectData {
               _bucket = TF.Nil
             , _key = TF.Nil
             , _version_id = TF.Nil
             }
 
-{- | The @aws_security_group@ AWS data.
+{- | The @aws_security_group@ AWS datasource.
 
 @aws_security_group@ provides details about a specific Security Group. This
 resource can prove useful when a module accepts a Security Group id as an
@@ -3491,9 +3491,9 @@ instance HasComputedArn (SecurityGroupData s) Text
 
 instance HasComputedDescription (SecurityGroupData s) Text
 
-securityGroupData :: TF.Data TF.AWS (SecurityGroupData s)
+securityGroupData :: TF.DataSource TF.AWS (SecurityGroupData s)
 securityGroupData =
-    TF.newData "aws_security_group" $
+    TF.newDataSource "aws_security_group" $
         SecurityGroupData {
               _filter = TF.Nil
             , _id = TF.Nil
@@ -3502,7 +3502,7 @@ securityGroupData =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_sns_topic@ AWS data.
+{- | The @aws_sns_topic@ AWS datasource.
 
 Use this data source to get the ARN of a topic in AWS Simple Notification
 Service (SNS). By using this data source, you can reference SNS topics
@@ -3525,14 +3525,14 @@ instance HasName (SnsTopicData s) s Text where
 
 instance HasComputedArn (SnsTopicData s) Text
 
-snsTopicData :: TF.Data TF.AWS (SnsTopicData s)
+snsTopicData :: TF.DataSource TF.AWS (SnsTopicData s)
 snsTopicData =
-    TF.newData "aws_sns_topic" $
+    TF.newDataSource "aws_sns_topic" $
         SnsTopicData {
               _name = TF.Nil
             }
 
-{- | The @aws_ssm_parameter@ AWS data.
+{- | The @aws_ssm_parameter@ AWS datasource.
 
 Provides an SSM Parameter data source.
 -}
@@ -3559,15 +3559,15 @@ instance HasWithDecryption (SsmParameterData s) s Text where
         lens (_with_decryption :: SsmParameterData s -> TF.Attribute s Text)
             (\s a -> s { _with_decryption = a } :: SsmParameterData s)
 
-ssmParameterData :: TF.Data TF.AWS (SsmParameterData s)
+ssmParameterData :: TF.DataSource TF.AWS (SsmParameterData s)
 ssmParameterData =
-    TF.newData "aws_ssm_parameter" $
+    TF.newDataSource "aws_ssm_parameter" $
         SsmParameterData {
               _name = TF.Nil
             , _with_decryption = TF.Nil
             }
 
-{- | The @aws_subnet@ AWS data.
+{- | The @aws_subnet@ AWS datasource.
 
 @aws_subnet@ provides details about a specific VPC subnet. This resource can
 prove useful when a module accepts a subnet id as an input variable and
@@ -3653,9 +3653,9 @@ instance HasVpcId (SubnetData s) s Text where
         lens (_vpc_id :: SubnetData s -> TF.Attribute s Text)
             (\s a -> s { _vpc_id = a } :: SubnetData s)
 
-subnetData :: TF.Data TF.AWS (SubnetData s)
+subnetData :: TF.DataSource TF.AWS (SubnetData s)
 subnetData =
-    TF.newData "aws_subnet" $
+    TF.newDataSource "aws_subnet" $
         SubnetData {
               _availability_zone = TF.Nil
             , _cidr_block = TF.Nil
@@ -3668,7 +3668,7 @@ subnetData =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_subnet_ids@ AWS data.
+{- | The @aws_subnet_ids@ AWS datasource.
 
 @aws_subnet_ids@ provides a list of ids for a vpc_id This resource can be
 useful for getting back a list of subnet ids for a vpc.
@@ -3698,15 +3698,15 @@ instance HasVpcId (SubnetIdsData s) s Text where
 
 instance HasComputedIds (SubnetIdsData s) Text
 
-subnetIdsData :: TF.Data TF.AWS (SubnetIdsData s)
+subnetIdsData :: TF.DataSource TF.AWS (SubnetIdsData s)
 subnetIdsData =
-    TF.newData "aws_subnet_ids" $
+    TF.newDataSource "aws_subnet_ids" $
         SubnetIdsData {
               _tags = TF.Nil
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_vpc@ AWS data.
+{- | The @aws_vpc@ AWS datasource.
 
 @aws_vpc@ provides details about a specific VPC. This resource can prove
 useful when a module accepts a vpc id as an input variable and needs to, for
@@ -3785,9 +3785,9 @@ instance HasComputedIpv6AssociationId (VpcData s) Text
 
 instance HasComputedIpv6CidrBlock (VpcData s) TF.CIDR
 
-vpcData :: TF.Data TF.AWS (VpcData s)
+vpcData :: TF.DataSource TF.AWS (VpcData s)
 vpcData =
-    TF.newData "aws_vpc" $
+    TF.newDataSource "aws_vpc" $
         VpcData {
               _cidr_block = TF.Nil
             , _default' = TF.Nil
@@ -3798,7 +3798,7 @@ vpcData =
             , _tags = TF.Nil
             }
 
-{- | The @aws_vpc_endpoint@ AWS data.
+{- | The @aws_vpc_endpoint@ AWS datasource.
 
 The VPC Endpoint data source provides details about a specific VPC endpoint.
 -}
@@ -3847,9 +3847,9 @@ instance HasComputedPrefixListId (VpcEndpointData s) Text
 
 instance HasComputedRouteTableIds (VpcEndpointData s) Text
 
-vpcEndpointData :: TF.Data TF.AWS (VpcEndpointData s)
+vpcEndpointData :: TF.DataSource TF.AWS (VpcEndpointData s)
 vpcEndpointData =
-    TF.newData "aws_vpc_endpoint" $
+    TF.newDataSource "aws_vpc_endpoint" $
         VpcEndpointData {
               _id = TF.Nil
             , _service_name = TF.Nil
@@ -3857,7 +3857,7 @@ vpcEndpointData =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_vpc_endpoint_service@ AWS data.
+{- | The @aws_vpc_endpoint_service@ AWS datasource.
 
 The VPC Endpoint Service data source allows access to a specific AWS service
 that can be specified when creating a VPC endpoint within the region
@@ -3880,14 +3880,14 @@ instance HasService (VpcEndpointServiceData s) s Text where
 
 instance HasComputedServiceName (VpcEndpointServiceData s) Text
 
-vpcEndpointServiceData :: TF.Data TF.AWS (VpcEndpointServiceData s)
+vpcEndpointServiceData :: TF.DataSource TF.AWS (VpcEndpointServiceData s)
 vpcEndpointServiceData =
-    TF.newData "aws_vpc_endpoint_service" $
+    TF.newDataSource "aws_vpc_endpoint_service" $
         VpcEndpointServiceData {
               _service = TF.Nil
             }
 
-{- | The @aws_vpc_peering_connection@ AWS data.
+{- | The @aws_vpc_peering_connection@ AWS datasource.
 
 The VPC Peering Connection data source provides details about a specific VPC
 peering connection.
@@ -3999,9 +3999,9 @@ instance HasComputedAccepter (VpcPeeringConnectionData s) Text
 
 instance HasComputedRequester (VpcPeeringConnectionData s) Text
 
-vpcPeeringConnectionData :: TF.Data TF.AWS (VpcPeeringConnectionData s)
+vpcPeeringConnectionData :: TF.DataSource TF.AWS (VpcPeeringConnectionData s)
 vpcPeeringConnectionData =
-    TF.newData "aws_vpc_peering_connection" $
+    TF.newDataSource "aws_vpc_peering_connection" $
         VpcPeeringConnectionData {
               _cidr_block = TF.Nil
             , _filter = TF.Nil
@@ -4017,7 +4017,7 @@ vpcPeeringConnectionData =
             , _vpc_id = TF.Nil
             }
 
-{- | The @aws_vpn_gateway@ AWS data.
+{- | The @aws_vpn_gateway@ AWS datasource.
 
 The VPN Gateway data source provides details about a specific VPN gateway.
 -}
@@ -4076,9 +4076,9 @@ instance HasTags (VpnGatewayData s) s TF.Tags where
         lens (_tags :: VpnGatewayData s -> TF.Attribute s TF.Tags)
             (\s a -> s { _tags = a } :: VpnGatewayData s)
 
-vpnGatewayData :: TF.Data TF.AWS (VpnGatewayData s)
+vpnGatewayData :: TF.DataSource TF.AWS (VpnGatewayData s)
 vpnGatewayData =
-    TF.newData "aws_vpn_gateway" $
+    TF.newDataSource "aws_vpn_gateway" $
         VpnGatewayData {
               _attached_vpc_id = TF.Nil
             , _availability_zone = TF.Nil
@@ -4091,481 +4091,481 @@ vpnGatewayData =
 class HasAccountAlias a s b | a -> s b where
     accountAlias :: Lens' a (TF.Attribute s b)
 
-instance HasAccountAlias a s b => HasAccountAlias (TF.Data p a) s b where
+instance HasAccountAlias a s b => HasAccountAlias (TF.DataSource p a) s b where
     accountAlias = TF.configuration . accountAlias
 
 class HasAccountId a s b | a -> s b where
     accountId :: Lens' a (TF.Attribute s b)
 
-instance HasAccountId a s b => HasAccountId (TF.Data p a) s b where
+instance HasAccountId a s b => HasAccountId (TF.DataSource p a) s b where
     accountId = TF.configuration . accountId
 
 class HasArn a s b | a -> s b where
     arn :: Lens' a (TF.Attribute s b)
 
-instance HasArn a s b => HasArn (TF.Data p a) s b where
+instance HasArn a s b => HasArn (TF.DataSource p a) s b where
     arn = TF.configuration . arn
 
 class HasAttachedVpcId a s b | a -> s b where
     attachedVpcId :: Lens' a (TF.Attribute s b)
 
-instance HasAttachedVpcId a s b => HasAttachedVpcId (TF.Data p a) s b where
+instance HasAttachedVpcId a s b => HasAttachedVpcId (TF.DataSource p a) s b where
     attachedVpcId = TF.configuration . attachedVpcId
 
 class HasAvailabilityZone a s b | a -> s b where
     availabilityZone :: Lens' a (TF.Attribute s b)
 
-instance HasAvailabilityZone a s b => HasAvailabilityZone (TF.Data p a) s b where
+instance HasAvailabilityZone a s b => HasAvailabilityZone (TF.DataSource p a) s b where
     availabilityZone = TF.configuration . availabilityZone
 
 class HasBucket a s b | a -> s b where
     bucket :: Lens' a (TF.Attribute s b)
 
-instance HasBucket a s b => HasBucket (TF.Data p a) s b where
+instance HasBucket a s b => HasBucket (TF.DataSource p a) s b where
     bucket = TF.configuration . bucket
 
 class HasCidrBlock a s b | a -> s b where
     cidrBlock :: Lens' a (TF.Attribute s b)
 
-instance HasCidrBlock a s b => HasCidrBlock (TF.Data p a) s b where
+instance HasCidrBlock a s b => HasCidrBlock (TF.DataSource p a) s b where
     cidrBlock = TF.configuration . cidrBlock
 
 class HasClusterId a s b | a -> s b where
     clusterId :: Lens' a (TF.Attribute s b)
 
-instance HasClusterId a s b => HasClusterId (TF.Data p a) s b where
+instance HasClusterId a s b => HasClusterId (TF.DataSource p a) s b where
     clusterId = TF.configuration . clusterId
 
 class HasClusterIdentifier a s b | a -> s b where
     clusterIdentifier :: Lens' a (TF.Attribute s b)
 
-instance HasClusterIdentifier a s b => HasClusterIdentifier (TF.Data p a) s b where
+instance HasClusterIdentifier a s b => HasClusterIdentifier (TF.DataSource p a) s b where
     clusterIdentifier = TF.configuration . clusterIdentifier
 
 class HasClusterName a s b | a -> s b where
     clusterName :: Lens' a (TF.Attribute s b)
 
-instance HasClusterName a s b => HasClusterName (TF.Data p a) s b where
+instance HasClusterName a s b => HasClusterName (TF.DataSource p a) s b where
     clusterName = TF.configuration . clusterName
 
 class HasContainerName a s b | a -> s b where
     containerName :: Lens' a (TF.Attribute s b)
 
-instance HasContainerName a s b => HasContainerName (TF.Data p a) s b where
+instance HasContainerName a s b => HasContainerName (TF.DataSource p a) s b where
     containerName = TF.configuration . containerName
 
 class HasContext a s b | a -> s b where
     context :: Lens' a (TF.Attribute s b)
 
-instance HasContext a s b => HasContext (TF.Data p a) s b where
+instance HasContext a s b => HasContext (TF.DataSource p a) s b where
     context = TF.configuration . context
 
 class HasCreationToken a s b | a -> s b where
     creationToken :: Lens' a (TF.Attribute s b)
 
-instance HasCreationToken a s b => HasCreationToken (TF.Data p a) s b where
+instance HasCreationToken a s b => HasCreationToken (TF.DataSource p a) s b where
     creationToken = TF.configuration . creationToken
 
 class HasCurrent a s b | a -> s b where
     current :: Lens' a (TF.Attribute s b)
 
-instance HasCurrent a s b => HasCurrent (TF.Data p a) s b where
+instance HasCurrent a s b => HasCurrent (TF.DataSource p a) s b where
     current = TF.configuration . current
 
 class HasDbInstanceIdentifier a s b | a -> s b where
     dbInstanceIdentifier :: Lens' a (TF.Attribute s b)
 
-instance HasDbInstanceIdentifier a s b => HasDbInstanceIdentifier (TF.Data p a) s b where
+instance HasDbInstanceIdentifier a s b => HasDbInstanceIdentifier (TF.DataSource p a) s b where
     dbInstanceIdentifier = TF.configuration . dbInstanceIdentifier
 
 class HasDbSnapshotIdentifier a s b | a -> s b where
     dbSnapshotIdentifier :: Lens' a (TF.Attribute s b)
 
-instance HasDbSnapshotIdentifier a s b => HasDbSnapshotIdentifier (TF.Data p a) s b where
+instance HasDbSnapshotIdentifier a s b => HasDbSnapshotIdentifier (TF.DataSource p a) s b where
     dbSnapshotIdentifier = TF.configuration . dbSnapshotIdentifier
 
 class HasDefault' a s b | a -> s b where
     default' :: Lens' a (TF.Attribute s b)
 
-instance HasDefault' a s b => HasDefault' (TF.Data p a) s b where
+instance HasDefault' a s b => HasDefault' (TF.DataSource p a) s b where
     default' = TF.configuration . default'
 
 class HasDefaultForAz a s b | a -> s b where
     defaultForAz :: Lens' a (TF.Attribute s b)
 
-instance HasDefaultForAz a s b => HasDefaultForAz (TF.Data p a) s b where
+instance HasDefaultForAz a s b => HasDefaultForAz (TF.DataSource p a) s b where
     defaultForAz = TF.configuration . defaultForAz
 
 class HasDhcpOptionsId a s b | a -> s b where
     dhcpOptionsId :: Lens' a (TF.Attribute s b)
 
-instance HasDhcpOptionsId a s b => HasDhcpOptionsId (TF.Data p a) s b where
+instance HasDhcpOptionsId a s b => HasDhcpOptionsId (TF.DataSource p a) s b where
     dhcpOptionsId = TF.configuration . dhcpOptionsId
 
 class HasDisplayName a s b | a -> s b where
     displayName :: Lens' a (TF.Attribute s b)
 
-instance HasDisplayName a s b => HasDisplayName (TF.Data p a) s b where
+instance HasDisplayName a s b => HasDisplayName (TF.DataSource p a) s b where
     displayName = TF.configuration . displayName
 
 class HasDomain a s b | a -> s b where
     domain :: Lens' a (TF.Attribute s b)
 
-instance HasDomain a s b => HasDomain (TF.Data p a) s b where
+instance HasDomain a s b => HasDomain (TF.DataSource p a) s b where
     domain = TF.configuration . domain
 
 class HasEndpoint a s b | a -> s b where
     endpoint :: Lens' a (TF.Attribute s b)
 
-instance HasEndpoint a s b => HasEndpoint (TF.Data p a) s b where
+instance HasEndpoint a s b => HasEndpoint (TF.DataSource p a) s b where
     endpoint = TF.configuration . endpoint
 
 class HasExecutableUsers a s b | a -> s b where
     executableUsers :: Lens' a (TF.Attribute s b)
 
-instance HasExecutableUsers a s b => HasExecutableUsers (TF.Data p a) s b where
+instance HasExecutableUsers a s b => HasExecutableUsers (TF.DataSource p a) s b where
     executableUsers = TF.configuration . executableUsers
 
 class HasFileSystemId a s b | a -> s b where
     fileSystemId :: Lens' a (TF.Attribute s b)
 
-instance HasFileSystemId a s b => HasFileSystemId (TF.Data p a) s b where
+instance HasFileSystemId a s b => HasFileSystemId (TF.DataSource p a) s b where
     fileSystemId = TF.configuration . fileSystemId
 
 class HasFilter a s b | a -> s b where
     filter :: Lens' a (TF.Attribute s b)
 
-instance HasFilter a s b => HasFilter (TF.Data p a) s b where
+instance HasFilter a s b => HasFilter (TF.DataSource p a) s b where
     filter = TF.configuration . filter
 
 class HasGroupName a s b | a -> s b where
     groupName :: Lens' a (TF.Attribute s b)
 
-instance HasGroupName a s b => HasGroupName (TF.Data p a) s b where
+instance HasGroupName a s b => HasGroupName (TF.DataSource p a) s b where
     groupName = TF.configuration . groupName
 
 class HasId a s b | a -> s b where
     id :: Lens' a (TF.Attribute s b)
 
-instance HasId a s b => HasId (TF.Data p a) s b where
+instance HasId a s b => HasId (TF.DataSource p a) s b where
     id = TF.configuration . id
 
 class HasIncludePublic a s b | a -> s b where
     includePublic :: Lens' a (TF.Attribute s b)
 
-instance HasIncludePublic a s b => HasIncludePublic (TF.Data p a) s b where
+instance HasIncludePublic a s b => HasIncludePublic (TF.DataSource p a) s b where
     includePublic = TF.configuration . includePublic
 
 class HasIncludeShared a s b | a -> s b where
     includeShared :: Lens' a (TF.Attribute s b)
 
-instance HasIncludeShared a s b => HasIncludeShared (TF.Data p a) s b where
+instance HasIncludeShared a s b => HasIncludeShared (TF.DataSource p a) s b where
     includeShared = TF.configuration . includeShared
 
 class HasInstanceId a s b | a -> s b where
     instanceId :: Lens' a (TF.Attribute s b)
 
-instance HasInstanceId a s b => HasInstanceId (TF.Data p a) s b where
+instance HasInstanceId a s b => HasInstanceId (TF.DataSource p a) s b where
     instanceId = TF.configuration . instanceId
 
 class HasInstanceTags a s b | a -> s b where
     instanceTags :: Lens' a (TF.Attribute s b)
 
-instance HasInstanceTags a s b => HasInstanceTags (TF.Data p a) s b where
+instance HasInstanceTags a s b => HasInstanceTags (TF.DataSource p a) s b where
     instanceTags = TF.configuration . instanceTags
 
 class HasInternetGatewayId a s b | a -> s b where
     internetGatewayId :: Lens' a (TF.Attribute s b)
 
-instance HasInternetGatewayId a s b => HasInternetGatewayId (TF.Data p a) s b where
+instance HasInternetGatewayId a s b => HasInternetGatewayId (TF.DataSource p a) s b where
     internetGatewayId = TF.configuration . internetGatewayId
 
 class HasIpv6CidrBlock a s b | a -> s b where
     ipv6CidrBlock :: Lens' a (TF.Attribute s b)
 
-instance HasIpv6CidrBlock a s b => HasIpv6CidrBlock (TF.Data p a) s b where
+instance HasIpv6CidrBlock a s b => HasIpv6CidrBlock (TF.DataSource p a) s b where
     ipv6CidrBlock = TF.configuration . ipv6CidrBlock
 
 class HasKey a s b | a -> s b where
     key :: Lens' a (TF.Attribute s b)
 
-instance HasKey a s b => HasKey (TF.Data p a) s b where
+instance HasKey a s b => HasKey (TF.DataSource p a) s b where
     key = TF.configuration . key
 
 class HasKeyId a s b | a -> s b where
     keyId :: Lens' a (TF.Attribute s b)
 
-instance HasKeyId a s b => HasKeyId (TF.Data p a) s b where
+instance HasKeyId a s b => HasKeyId (TF.DataSource p a) s b where
     keyId = TF.configuration . keyId
 
 class HasLatest a s b | a -> s b where
     latest :: Lens' a (TF.Attribute s b)
 
-instance HasLatest a s b => HasLatest (TF.Data p a) s b where
+instance HasLatest a s b => HasLatest (TF.DataSource p a) s b where
     latest = TF.configuration . latest
 
 class HasLoadBalancerArn a s b | a -> s b where
     loadBalancerArn :: Lens' a (TF.Attribute s b)
 
-instance HasLoadBalancerArn a s b => HasLoadBalancerArn (TF.Data p a) s b where
+instance HasLoadBalancerArn a s b => HasLoadBalancerArn (TF.DataSource p a) s b where
     loadBalancerArn = TF.configuration . loadBalancerArn
 
 class HasMostRecent a s b | a -> s b where
     mostRecent :: Lens' a (TF.Attribute s b)
 
-instance HasMostRecent a s b => HasMostRecent (TF.Data p a) s b where
+instance HasMostRecent a s b => HasMostRecent (TF.DataSource p a) s b where
     mostRecent = TF.configuration . mostRecent
 
 class HasMountTargetId a s b | a -> s b where
     mountTargetId :: Lens' a (TF.Attribute s b)
 
-instance HasMountTargetId a s b => HasMountTargetId (TF.Data p a) s b where
+instance HasMountTargetId a s b => HasMountTargetId (TF.DataSource p a) s b where
     mountTargetId = TF.configuration . mountTargetId
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasNamePrefix a s b | a -> s b where
     namePrefix :: Lens' a (TF.Attribute s b)
 
-instance HasNamePrefix a s b => HasNamePrefix (TF.Data p a) s b where
+instance HasNamePrefix a s b => HasNamePrefix (TF.DataSource p a) s b where
     namePrefix = TF.configuration . namePrefix
 
 class HasNameRegex a s b | a -> s b where
     nameRegex :: Lens' a (TF.Attribute s b)
 
-instance HasNameRegex a s b => HasNameRegex (TF.Data p a) s b where
+instance HasNameRegex a s b => HasNameRegex (TF.DataSource p a) s b where
     nameRegex = TF.configuration . nameRegex
 
 class HasOwnerId a s b | a -> s b where
     ownerId :: Lens' a (TF.Attribute s b)
 
-instance HasOwnerId a s b => HasOwnerId (TF.Data p a) s b where
+instance HasOwnerId a s b => HasOwnerId (TF.DataSource p a) s b where
     ownerId = TF.configuration . ownerId
 
 class HasOwners a s b | a -> s b where
     owners :: Lens' a (TF.Attribute s b)
 
-instance HasOwners a s b => HasOwners (TF.Data p a) s b where
+instance HasOwners a s b => HasOwners (TF.DataSource p a) s b where
     owners = TF.configuration . owners
 
 class HasPeerCidrBlock a s b | a -> s b where
     peerCidrBlock :: Lens' a (TF.Attribute s b)
 
-instance HasPeerCidrBlock a s b => HasPeerCidrBlock (TF.Data p a) s b where
+instance HasPeerCidrBlock a s b => HasPeerCidrBlock (TF.DataSource p a) s b where
     peerCidrBlock = TF.configuration . peerCidrBlock
 
 class HasPeerOwnerId a s b | a -> s b where
     peerOwnerId :: Lens' a (TF.Attribute s b)
 
-instance HasPeerOwnerId a s b => HasPeerOwnerId (TF.Data p a) s b where
+instance HasPeerOwnerId a s b => HasPeerOwnerId (TF.DataSource p a) s b where
     peerOwnerId = TF.configuration . peerOwnerId
 
 class HasPeerRegion a s b | a -> s b where
     peerRegion :: Lens' a (TF.Attribute s b)
 
-instance HasPeerRegion a s b => HasPeerRegion (TF.Data p a) s b where
+instance HasPeerRegion a s b => HasPeerRegion (TF.DataSource p a) s b where
     peerRegion = TF.configuration . peerRegion
 
 class HasPeerVpcId a s b | a -> s b where
     peerVpcId :: Lens' a (TF.Attribute s b)
 
-instance HasPeerVpcId a s b => HasPeerVpcId (TF.Data p a) s b where
+instance HasPeerVpcId a s b => HasPeerVpcId (TF.DataSource p a) s b where
     peerVpcId = TF.configuration . peerVpcId
 
 class HasPlaintext a s b | a -> s b where
     plaintext :: Lens' a (TF.Attribute s b)
 
-instance HasPlaintext a s b => HasPlaintext (TF.Data p a) s b where
+instance HasPlaintext a s b => HasPlaintext (TF.DataSource p a) s b where
     plaintext = TF.configuration . plaintext
 
 class HasPolicyId a s b | a -> s b where
     policyId :: Lens' a (TF.Attribute s b)
 
-instance HasPolicyId a s b => HasPolicyId (TF.Data p a) s b where
+instance HasPolicyId a s b => HasPolicyId (TF.DataSource p a) s b where
     policyId = TF.configuration . policyId
 
 class HasPort a s b | a -> s b where
     port :: Lens' a (TF.Attribute s b)
 
-instance HasPort a s b => HasPort (TF.Data p a) s b where
+instance HasPort a s b => HasPort (TF.DataSource p a) s b where
     port = TF.configuration . port
 
 class HasPrefixListId a s b | a -> s b where
     prefixListId :: Lens' a (TF.Attribute s b)
 
-instance HasPrefixListId a s b => HasPrefixListId (TF.Data p a) s b where
+instance HasPrefixListId a s b => HasPrefixListId (TF.DataSource p a) s b where
     prefixListId = TF.configuration . prefixListId
 
 class HasPrivateZone a s b | a -> s b where
     privateZone :: Lens' a (TF.Attribute s b)
 
-instance HasPrivateZone a s b => HasPrivateZone (TF.Data p a) s b where
+instance HasPrivateZone a s b => HasPrivateZone (TF.DataSource p a) s b where
     privateZone = TF.configuration . privateZone
 
 class HasPublicIp a s b | a -> s b where
     publicIp :: Lens' a (TF.Attribute s b)
 
-instance HasPublicIp a s b => HasPublicIp (TF.Data p a) s b where
+instance HasPublicIp a s b => HasPublicIp (TF.DataSource p a) s b where
     publicIp = TF.configuration . publicIp
 
 class HasRegion a s b | a -> s b where
     region :: Lens' a (TF.Attribute s b)
 
-instance HasRegion a s b => HasRegion (TF.Data p a) s b where
+instance HasRegion a s b => HasRegion (TF.DataSource p a) s b where
     region = TF.configuration . region
 
 class HasRegions a s b | a -> s b where
     regions :: Lens' a (TF.Attribute s b)
 
-instance HasRegions a s b => HasRegions (TF.Data p a) s b where
+instance HasRegions a s b => HasRegions (TF.DataSource p a) s b where
     regions = TF.configuration . regions
 
 class HasReplicationGroupId a s b | a -> s b where
     replicationGroupId :: Lens' a (TF.Attribute s b)
 
-instance HasReplicationGroupId a s b => HasReplicationGroupId (TF.Data p a) s b where
+instance HasReplicationGroupId a s b => HasReplicationGroupId (TF.DataSource p a) s b where
     replicationGroupId = TF.configuration . replicationGroupId
 
 class HasRestorableByUserIds a s b | a -> s b where
     restorableByUserIds :: Lens' a (TF.Attribute s b)
 
-instance HasRestorableByUserIds a s b => HasRestorableByUserIds (TF.Data p a) s b where
+instance HasRestorableByUserIds a s b => HasRestorableByUserIds (TF.DataSource p a) s b where
     restorableByUserIds = TF.configuration . restorableByUserIds
 
 class HasRouteTableId a s b | a -> s b where
     routeTableId :: Lens' a (TF.Attribute s b)
 
-instance HasRouteTableId a s b => HasRouteTableId (TF.Data p a) s b where
+instance HasRouteTableId a s b => HasRouteTableId (TF.DataSource p a) s b where
     routeTableId = TF.configuration . routeTableId
 
 class HasSecret a s b | a -> s b where
     secret :: Lens' a (TF.Attribute s b)
 
-instance HasSecret a s b => HasSecret (TF.Data p a) s b where
+instance HasSecret a s b => HasSecret (TF.DataSource p a) s b where
     secret = TF.configuration . secret
 
 class HasService a s b | a -> s b where
     service :: Lens' a (TF.Attribute s b)
 
-instance HasService a s b => HasService (TF.Data p a) s b where
+instance HasService a s b => HasService (TF.DataSource p a) s b where
     service = TF.configuration . service
 
 class HasServiceName a s b | a -> s b where
     serviceName :: Lens' a (TF.Attribute s b)
 
-instance HasServiceName a s b => HasServiceName (TF.Data p a) s b where
+instance HasServiceName a s b => HasServiceName (TF.DataSource p a) s b where
     serviceName = TF.configuration . serviceName
 
 class HasServices a s b | a -> s b where
     services :: Lens' a (TF.Attribute s b)
 
-instance HasServices a s b => HasServices (TF.Data p a) s b where
+instance HasServices a s b => HasServices (TF.DataSource p a) s b where
     services = TF.configuration . services
 
 class HasSnapshotIds a s b | a -> s b where
     snapshotIds :: Lens' a (TF.Attribute s b)
 
-instance HasSnapshotIds a s b => HasSnapshotIds (TF.Data p a) s b where
+instance HasSnapshotIds a s b => HasSnapshotIds (TF.DataSource p a) s b where
     snapshotIds = TF.configuration . snapshotIds
 
 class HasSnapshotType a s b | a -> s b where
     snapshotType :: Lens' a (TF.Attribute s b)
 
-instance HasSnapshotType a s b => HasSnapshotType (TF.Data p a) s b where
+instance HasSnapshotType a s b => HasSnapshotType (TF.DataSource p a) s b where
     snapshotType = TF.configuration . snapshotType
 
 class HasState a s b | a -> s b where
     state :: Lens' a (TF.Attribute s b)
 
-instance HasState a s b => HasState (TF.Data p a) s b where
+instance HasState a s b => HasState (TF.DataSource p a) s b where
     state = TF.configuration . state
 
 class HasStatement a s b | a -> s b where
     statement :: Lens' a (TF.Attribute s b)
 
-instance HasStatement a s b => HasStatement (TF.Data p a) s b where
+instance HasStatement a s b => HasStatement (TF.DataSource p a) s b where
     statement = TF.configuration . statement
 
 class HasStatus a s b | a -> s b where
     status :: Lens' a (TF.Attribute s b)
 
-instance HasStatus a s b => HasStatus (TF.Data p a) s b where
+instance HasStatus a s b => HasStatus (TF.DataSource p a) s b where
     status = TF.configuration . status
 
 class HasStatuses a s b | a -> s b where
     statuses :: Lens' a (TF.Attribute s b)
 
-instance HasStatuses a s b => HasStatuses (TF.Data p a) s b where
+instance HasStatuses a s b => HasStatuses (TF.DataSource p a) s b where
     statuses = TF.configuration . statuses
 
 class HasSubnetId a s b | a -> s b where
     subnetId :: Lens' a (TF.Attribute s b)
 
-instance HasSubnetId a s b => HasSubnetId (TF.Data p a) s b where
+instance HasSubnetId a s b => HasSubnetId (TF.DataSource p a) s b where
     subnetId = TF.configuration . subnetId
 
 class HasTags a s b | a -> s b where
     tags :: Lens' a (TF.Attribute s b)
 
-instance HasTags a s b => HasTags (TF.Data p a) s b where
+instance HasTags a s b => HasTags (TF.DataSource p a) s b where
     tags = TF.configuration . tags
 
 class HasTaskDefinition a s b | a -> s b where
     taskDefinition :: Lens' a (TF.Attribute s b)
 
-instance HasTaskDefinition a s b => HasTaskDefinition (TF.Data p a) s b where
+instance HasTaskDefinition a s b => HasTaskDefinition (TF.DataSource p a) s b where
     taskDefinition = TF.configuration . taskDefinition
 
 class HasTypes a s b | a -> s b where
     types :: Lens' a (TF.Attribute s b)
 
-instance HasTypes a s b => HasTypes (TF.Data p a) s b where
+instance HasTypes a s b => HasTypes (TF.DataSource p a) s b where
     types = TF.configuration . types
 
 class HasUserId a s b | a -> s b where
     userId :: Lens' a (TF.Attribute s b)
 
-instance HasUserId a s b => HasUserId (TF.Data p a) s b where
+instance HasUserId a s b => HasUserId (TF.DataSource p a) s b where
     userId = TF.configuration . userId
 
 class HasUserName a s b | a -> s b where
     userName :: Lens' a (TF.Attribute s b)
 
-instance HasUserName a s b => HasUserName (TF.Data p a) s b where
+instance HasUserName a s b => HasUserName (TF.DataSource p a) s b where
     userName = TF.configuration . userName
 
 class HasValues a s b | a -> s b where
     values :: Lens' a (TF.Attribute s b)
 
-instance HasValues a s b => HasValues (TF.Data p a) s b where
+instance HasValues a s b => HasValues (TF.DataSource p a) s b where
     values = TF.configuration . values
 
 class HasVersionId a s b | a -> s b where
     versionId :: Lens' a (TF.Attribute s b)
 
-instance HasVersionId a s b => HasVersionId (TF.Data p a) s b where
+instance HasVersionId a s b => HasVersionId (TF.DataSource p a) s b where
     versionId = TF.configuration . versionId
 
 class HasVpcId a s b | a -> s b where
     vpcId :: Lens' a (TF.Attribute s b)
 
-instance HasVpcId a s b => HasVpcId (TF.Data p a) s b where
+instance HasVpcId a s b => HasVpcId (TF.DataSource p a) s b where
     vpcId = TF.configuration . vpcId
 
 class HasWithDecryption a s b | a -> s b where
     withDecryption :: Lens' a (TF.Attribute s b)
 
-instance HasWithDecryption a s b => HasWithDecryption (TF.Data p a) s b where
+instance HasWithDecryption a s b => HasWithDecryption (TF.DataSource p a) s b where
     withDecryption = TF.configuration . withDecryption
 
 class HasZoneId a s b | a -> s b where
     zoneId :: Lens' a (TF.Attribute s b)
 
-instance HasZoneId a s b => HasZoneId (TF.Data p a) s b where
+instance HasZoneId a s b => HasZoneId (TF.DataSource p a) s b where
     zoneId = TF.configuration . zoneId
 
 class HasComputedAccepter a b | a -> b where

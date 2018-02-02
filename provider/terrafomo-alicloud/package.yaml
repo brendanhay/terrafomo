@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.AliCloud
-    - Terrafomo.AliCloud.Data
+    - Terrafomo.AliCloud.DataSource
     - Terrafomo.AliCloud.Resource
 
   reexported-modules: >

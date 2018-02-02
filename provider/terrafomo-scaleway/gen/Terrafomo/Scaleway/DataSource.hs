@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Scaleway.Data
+-- Module      : Terrafomo.Scaleway.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Scaleway.Data
+module Terrafomo.Scaleway.DataSource
     (
     -- * Types
       BootscriptData (..)
@@ -60,7 +60,7 @@ import qualified Data.Word                   as TF
 import qualified GHC.Base                    as TF
 import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.Data              as TF
+import qualified Terrafomo.DataSource        as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
 import qualified Terrafomo.Meta              as TF
@@ -69,7 +69,7 @@ import qualified Terrafomo.Resource          as TF
 import qualified Terrafomo.Scaleway.Provider as TF
 import qualified Terrafomo.Scaleway.Types    as TF
 
-{- | The @scaleway_bootscript@ Scaleway data.
+{- | The @scaleway_bootscript@ Scaleway datasource.
 
 Use this data source to get the ID of a registered Bootscript for use with
 the @scaleway_server@ resource.
@@ -119,16 +119,16 @@ instance HasComputedOrganization (BootscriptData s) Text
 
 instance HasComputedPublic (BootscriptData s) Text
 
-bootscriptData :: TF.Data TF.Scaleway (BootscriptData s)
+bootscriptData :: TF.DataSource TF.Scaleway (BootscriptData s)
 bootscriptData =
-    TF.newData "scaleway_bootscript" $
+    TF.newDataSource "scaleway_bootscript" $
         BootscriptData {
               _architecture = TF.Nil
             , _name = TF.Nil
             , _name_filter = TF.Nil
             }
 
-{- | The @scaleway_image@ Scaleway data.
+{- | The @scaleway_image@ Scaleway datasource.
 
 Use this data source to get the ID of a registered Image for use with the
 @scaleway_server@ resource.
@@ -172,9 +172,9 @@ instance HasComputedOrganization (ImageData s) Text
 
 instance HasComputedPublic (ImageData s) Text
 
-imageData :: TF.Data TF.Scaleway (ImageData s)
+imageData :: TF.DataSource TF.Scaleway (ImageData s)
 imageData =
-    TF.newData "scaleway_image" $
+    TF.newDataSource "scaleway_image" $
         ImageData {
               _architecture = TF.Nil
             , _name = TF.Nil
@@ -184,19 +184,19 @@ imageData =
 class HasArchitecture a s b | a -> s b where
     architecture :: Lens' a (TF.Attribute s b)
 
-instance HasArchitecture a s b => HasArchitecture (TF.Data p a) s b where
+instance HasArchitecture a s b => HasArchitecture (TF.DataSource p a) s b where
     architecture = TF.configuration . architecture
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasNameFilter a s b | a -> s b where
     nameFilter :: Lens' a (TF.Attribute s b)
 
-instance HasNameFilter a s b => HasNameFilter (TF.Data p a) s b where
+instance HasNameFilter a s b => HasNameFilter (TF.DataSource p a) s b where
     nameFilter = TF.configuration . nameFilter
 
 class HasComputedArchitecture a b | a -> b where

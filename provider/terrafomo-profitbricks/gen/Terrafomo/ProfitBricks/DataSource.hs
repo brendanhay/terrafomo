@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.ProfitBricks.Data
+-- Module      : Terrafomo.ProfitBricks.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.ProfitBricks.Data
+module Terrafomo.ProfitBricks.DataSource
     (
     -- * Types
       DatacenterData (..)
@@ -67,7 +67,7 @@ import qualified Data.Word                       as TF
 import qualified GHC.Base                        as TF
 import qualified Numeric.Natural                 as TF
 import qualified Terrafomo.Attribute             as TF
-import qualified Terrafomo.Data                  as TF
+import qualified Terrafomo.DataSource            as TF
 import qualified Terrafomo.HCL                   as TF
 import qualified Terrafomo.IP                    as TF
 import qualified Terrafomo.Meta                  as TF
@@ -76,7 +76,7 @@ import qualified Terrafomo.ProfitBricks.Provider as TF
 import qualified Terrafomo.ProfitBricks.Types    as TF
 import qualified Terrafomo.Resource              as TF
 
-{- | The @profitbricks_datacenter@ ProfitBricks data.
+{- | The @profitbricks_datacenter@ ProfitBricks datasource.
 
 The data centers data source can be used to search for and return an
 existing Virtual Data Center. You can provide a string for the name and
@@ -111,15 +111,15 @@ instance HasName (DatacenterData s) s Text where
 
 instance HasComputedId (DatacenterData s) Text
 
-datacenterData :: TF.Data TF.ProfitBricks (DatacenterData s)
+datacenterData :: TF.DataSource TF.ProfitBricks (DatacenterData s)
 datacenterData =
-    TF.newData "profitbricks_datacenter" $
+    TF.newDataSource "profitbricks_datacenter" $
         DatacenterData {
               _location = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @profitbricks_image@ ProfitBricks data.
+{- | The @profitbricks_image@ ProfitBricks datasource.
 
 The images data source can be used to search for and return an existing
 image which can then be used to provision a server.
@@ -165,9 +165,9 @@ instance HasVersion (ImageData s) s Text where
 
 instance HasComputedId (ImageData s) Text
 
-imageData :: TF.Data TF.ProfitBricks (ImageData s)
+imageData :: TF.DataSource TF.ProfitBricks (ImageData s)
 imageData =
-    TF.newData "profitbricks_image" $
+    TF.newDataSource "profitbricks_image" $
         ImageData {
               _location = TF.Nil
             , _name = TF.Nil
@@ -175,7 +175,7 @@ imageData =
             , _version = TF.Nil
             }
 
-{- | The @profitbricks_location@ ProfitBricks data.
+{- | The @profitbricks_location@ ProfitBricks datasource.
 
 The locations data source can be used to search for and return an existing
 location which can then be used elsewhere in the configuration.
@@ -205,15 +205,15 @@ instance HasName (LocationData s) s Text where
 
 instance HasComputedId (LocationData s) Text
 
-locationData :: TF.Data TF.ProfitBricks (LocationData s)
+locationData :: TF.DataSource TF.ProfitBricks (LocationData s)
 locationData =
-    TF.newData "profitbricks_location" $
+    TF.newDataSource "profitbricks_location" $
         LocationData {
               _feature = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @profitbricks_resource@ ProfitBricks data.
+{- | The @profitbricks_resource@ ProfitBricks datasource.
 
 The resource data source can be used to search for and return any existing
 ProfitBricks resource and optionally their group associations. You can
@@ -249,15 +249,15 @@ instance HasResourceType (ResourceData s) s Text where
 
 instance HasComputedId (ResourceData s) Text
 
-resourceData :: TF.Data TF.ProfitBricks (ResourceData s)
+resourceData :: TF.DataSource TF.ProfitBricks (ResourceData s)
 resourceData =
-    TF.newData "profitbricks_resource" $
+    TF.newDataSource "profitbricks_resource" $
         ResourceData {
               _resource_id = TF.Nil
             , _resource_type = TF.Nil
             }
 
-{- | The @profitbricks_snapshot@ ProfitBricks data.
+{- | The @profitbricks_snapshot@ ProfitBricks datasource.
 
 The snapshots data source can be used to search for and return an existing
 snapshot which can then be used to provision a server.
@@ -295,9 +295,9 @@ instance HasSize (SnapshotData s) s Text where
 
 instance HasComputedId (SnapshotData s) Text
 
-snapshotData :: TF.Data TF.ProfitBricks (SnapshotData s)
+snapshotData :: TF.DataSource TF.ProfitBricks (SnapshotData s)
 snapshotData =
-    TF.newData "profitbricks_snapshot" $
+    TF.newDataSource "profitbricks_snapshot" $
         SnapshotData {
               _location = TF.Nil
             , _name = TF.Nil
@@ -307,49 +307,49 @@ snapshotData =
 class HasFeature a s b | a -> s b where
     feature :: Lens' a (TF.Attribute s b)
 
-instance HasFeature a s b => HasFeature (TF.Data p a) s b where
+instance HasFeature a s b => HasFeature (TF.DataSource p a) s b where
     feature = TF.configuration . feature
 
 class HasLocation a s b | a -> s b where
     location :: Lens' a (TF.Attribute s b)
 
-instance HasLocation a s b => HasLocation (TF.Data p a) s b where
+instance HasLocation a s b => HasLocation (TF.DataSource p a) s b where
     location = TF.configuration . location
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasResourceId a s b | a -> s b where
     resourceId :: Lens' a (TF.Attribute s b)
 
-instance HasResourceId a s b => HasResourceId (TF.Data p a) s b where
+instance HasResourceId a s b => HasResourceId (TF.DataSource p a) s b where
     resourceId = TF.configuration . resourceId
 
 class HasResourceType a s b | a -> s b where
     resourceType :: Lens' a (TF.Attribute s b)
 
-instance HasResourceType a s b => HasResourceType (TF.Data p a) s b where
+instance HasResourceType a s b => HasResourceType (TF.DataSource p a) s b where
     resourceType = TF.configuration . resourceType
 
 class HasSize a s b | a -> s b where
     size :: Lens' a (TF.Attribute s b)
 
-instance HasSize a s b => HasSize (TF.Data p a) s b where
+instance HasSize a s b => HasSize (TF.DataSource p a) s b where
     size = TF.configuration . size
 
 class HasType' a s b | a -> s b where
     type' :: Lens' a (TF.Attribute s b)
 
-instance HasType' a s b => HasType' (TF.Data p a) s b where
+instance HasType' a s b => HasType' (TF.DataSource p a) s b where
     type' = TF.configuration . type'
 
 class HasVersion a s b | a -> s b where
     version :: Lens' a (TF.Attribute s b)
 
-instance HasVersion a s b => HasVersion (TF.Data p a) s b where
+instance HasVersion a s b => HasVersion (TF.DataSource p a) s b where
     version = TF.configuration . version
 
 class HasComputedId a b | a -> b where

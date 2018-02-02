@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.AliCloud.Data
+-- Module      : Terrafomo.AliCloud.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.AliCloud.Data
+module Terrafomo.AliCloud.DataSource
     (
     -- * Types
       DnsDomainsData (..)
@@ -197,14 +197,14 @@ import qualified Numeric.Natural             as TF
 import qualified Terrafomo.AliCloud.Provider as TF
 import qualified Terrafomo.AliCloud.Types    as TF
 import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.Data              as TF
+import qualified Terrafomo.DataSource        as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
 import qualified Terrafomo.Meta              as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Resource          as TF
 
-{- | The @alicloud_dns_domains@ AliCloud data.
+{- | The @alicloud_dns_domains@ AliCloud datasource.
 
 The Dns Domains data source provides a list of Alicloud Dns Domains in an
 Alicloud account according to the specified filters.
@@ -282,9 +282,9 @@ instance HasComputedPunyCode (DnsDomainsData s) Text
 
 instance HasComputedVersionCode (DnsDomainsData s) Text
 
-dnsDomainsData :: TF.Data TF.AliCloud (DnsDomainsData s)
+dnsDomainsData :: TF.DataSource TF.AliCloud (DnsDomainsData s)
 dnsDomainsData =
-    TF.newData "alicloud_dns_domains" $
+    TF.newDataSource "alicloud_dns_domains" $
         DnsDomainsData {
               _ali_domain = TF.Nil
             , _domain_name_regex = TF.Nil
@@ -294,7 +294,7 @@ dnsDomainsData =
             , _version_code = TF.Nil
             }
 
-{- | The @alicloud_dns_groups@ AliCloud data.
+{- | The @alicloud_dns_groups@ AliCloud datasource.
 
 The Dns Domain Groups data source provides a list of Alicloud Dns Domain
 Groups in an Alicloud account according to the specified filters.
@@ -326,15 +326,15 @@ instance HasComputedGroupId (DnsGroupsData s) Text
 
 instance HasComputedGroupName (DnsGroupsData s) Text
 
-dnsGroupsData :: TF.Data TF.AliCloud (DnsGroupsData s)
+dnsGroupsData :: TF.DataSource TF.AliCloud (DnsGroupsData s)
 dnsGroupsData =
-    TF.newData "alicloud_dns_groups" $
+    TF.newDataSource "alicloud_dns_groups" $
         DnsGroupsData {
               _name_regex = TF.Nil
             , _output_file = TF.Nil
             }
 
-{- | The @alicloud_dns_records@ AliCloud data.
+{- | The @alicloud_dns_records@ AliCloud datasource.
 
 The Dns Domain Records data source provides a list of Alicloud Dns Domain
 Records in an Alicloud account according to the specified filters.
@@ -430,9 +430,9 @@ instance HasComputedType' (DnsRecordsData s) Text
 
 instance HasComputedValue (DnsRecordsData s) Text
 
-dnsRecordsData :: TF.Data TF.AliCloud (DnsRecordsData s)
+dnsRecordsData :: TF.DataSource TF.AliCloud (DnsRecordsData s)
 dnsRecordsData =
-    TF.newData "alicloud_dns_records" $
+    TF.newDataSource "alicloud_dns_records" $
         DnsRecordsData {
               _domain_name = TF.Nil
             , _host_record_regex = TF.Nil
@@ -444,7 +444,7 @@ dnsRecordsData =
             , _value_regex = TF.Nil
             }
 
-{- | The @alicloud_images@ AliCloud data.
+{- | The @alicloud_images@ AliCloud datasource.
 
 The Images data source list image resource list contains private images of
 the user and images of system resources provided by Alicloud, as well as
@@ -515,9 +515,9 @@ instance HasComputedSize (ImagesData s) Text
 
 instance HasComputedStatus (ImagesData s) Text
 
-imagesData :: TF.Data TF.AliCloud (ImagesData s)
+imagesData :: TF.DataSource TF.AliCloud (ImagesData s)
 imagesData =
-    TF.newData "alicloud_images" $
+    TF.newDataSource "alicloud_images" $
         ImagesData {
               _most_recent = TF.Nil
             , _name_regex = TF.Nil
@@ -525,7 +525,7 @@ imagesData =
             , _owners = TF.Nil
             }
 
-{- | The @alicloud_instance_types@ AliCloud data.
+{- | The @alicloud_instance_types@ AliCloud datasource.
 
 The Instance Types data source list the ecs_instance_types of Alicloud. ~>
 NOTE: Default to provide upgraded instance types. If you want to get
@@ -594,9 +594,9 @@ instance HasComputedId (InstanceTypesData s) Text
 
 instance HasComputedMemorySize (InstanceTypesData s) Text
 
-instanceTypesData :: TF.Data TF.AliCloud (InstanceTypesData s)
+instanceTypesData :: TF.DataSource TF.AliCloud (InstanceTypesData s)
 instanceTypesData =
-    TF.newData "alicloud_instance_types" $
+    TF.newDataSource "alicloud_instance_types" $
         InstanceTypesData {
               _availability_zone = TF.Nil
             , _cpu_core_count = TF.Nil
@@ -606,7 +606,7 @@ instanceTypesData =
             , _output_file = TF.Nil
             }
 
-{- | The @alicloud_instances@ AliCloud data.
+{- | The @alicloud_instances@ AliCloud datasource.
 
 The Instances data source list ECS instance resource accoring to its ID,
 name regex, image id, status and other fields.
@@ -692,9 +692,9 @@ instance HasVswitchId (InstancesData s) s Text where
 
 instance HasComputedInstances (InstancesData s) Text
 
-instancesData :: TF.Data TF.AliCloud (InstancesData s)
+instancesData :: TF.DataSource TF.AliCloud (InstancesData s)
 instancesData =
-    TF.newData "alicloud_instances" $
+    TF.newDataSource "alicloud_instances" $
         InstancesData {
               _availability_zone = TF.Nil
             , _ids = TF.Nil
@@ -707,7 +707,7 @@ instancesData =
             , _vswitch_id = TF.Nil
             }
 
-{- | The @alicloud_key_pairs@ AliCloud data.
+{- | The @alicloud_key_pairs@ AliCloud datasource.
 
 The Key Pairs data source provides a list of Alicloud Key Pairs in an
 Alicloud account according to the specified filters.
@@ -751,16 +751,16 @@ instance HasComputedInstances (KeyPairsData s) Text
 
 instance HasComputedKeyName (KeyPairsData s) Text
 
-keyPairsData :: TF.Data TF.AliCloud (KeyPairsData s)
+keyPairsData :: TF.DataSource TF.AliCloud (KeyPairsData s)
 keyPairsData =
-    TF.newData "alicloud_key_pairs" $
+    TF.newDataSource "alicloud_key_pairs" $
         KeyPairsData {
               _finger_print = TF.Nil
             , _name_regex = TF.Nil
             , _output_file = TF.Nil
             }
 
-{- | The @alicloud_kms_keys@ AliCloud data.
+{- | The @alicloud_kms_keys@ AliCloud datasource.
 
 The KMS keys data source provides a list of Alicloud KMS keys in an Alicloud
 account according to the specified filters.
@@ -818,9 +818,9 @@ instance HasComputedId (KmsKeysData s) Text
 
 instance HasComputedStatus (KmsKeysData s) Text
 
-kmsKeysData :: TF.Data TF.AliCloud (KmsKeysData s)
+kmsKeysData :: TF.DataSource TF.AliCloud (KmsKeysData s)
 kmsKeysData =
-    TF.newData "alicloud_kms_keys" $
+    TF.newDataSource "alicloud_kms_keys" $
         KmsKeysData {
               _description_regex = TF.Nil
             , _ids = TF.Nil
@@ -828,7 +828,7 @@ kmsKeysData =
             , _status = TF.Nil
             }
 
-{- | The @alicloud_ram_account_alias@ AliCloud data.
+{- | The @alicloud_ram_account_alias@ AliCloud datasource.
 
 ~> NOTE: This datasource has been deprecated from
 <https://github.com/alibaba/terraform-provider/releases/tag/V1.3.2> . New
@@ -840,13 +840,13 @@ data RamAccountAliasData s = RamAccountAliasData {
 instance TF.ToHCL (RamAccountAliasData s) where
     toHCL _ = TF.block []
 
-ramAccountAliasData :: TF.Data TF.AliCloud (RamAccountAliasData s)
+ramAccountAliasData :: TF.DataSource TF.AliCloud (RamAccountAliasData s)
 ramAccountAliasData =
-    TF.newData "alicloud_ram_account_alias" $
+    TF.newDataSource "alicloud_ram_account_alias" $
         RamAccountAliasData {
             }
 
-{- | The @alicloud_ram_account_aliases@ AliCloud data.
+{- | The @alicloud_ram_account_aliases@ AliCloud datasource.
 
 The Ram Account Alias data source provides an alias for the Alicloud
 account.
@@ -868,14 +868,14 @@ instance HasOutputFile (RamAccountAliasesData s) s Text where
 
 instance HasComputedAccountAlias (RamAccountAliasesData s) Text
 
-ramAccountAliasesData :: TF.Data TF.AliCloud (RamAccountAliasesData s)
+ramAccountAliasesData :: TF.DataSource TF.AliCloud (RamAccountAliasesData s)
 ramAccountAliasesData =
-    TF.newData "alicloud_ram_account_aliases" $
+    TF.newDataSource "alicloud_ram_account_aliases" $
         RamAccountAliasesData {
               _output_file = TF.Nil
             }
 
-{- | The @alicloud_ram_groups@ AliCloud data.
+{- | The @alicloud_ram_groups@ AliCloud datasource.
 
 The Ram Groups data source provides a list of Alicloud Ram Groups in an
 Alicloud account according to the specified filters.
@@ -931,9 +931,9 @@ instance HasComputedComments (RamGroupsData s) Text
 
 instance HasComputedName (RamGroupsData s) Text
 
-ramGroupsData :: TF.Data TF.AliCloud (RamGroupsData s)
+ramGroupsData :: TF.DataSource TF.AliCloud (RamGroupsData s)
 ramGroupsData =
-    TF.newData "alicloud_ram_groups" $
+    TF.newDataSource "alicloud_ram_groups" $
         RamGroupsData {
               _name_regex = TF.Nil
             , _output_file = TF.Nil
@@ -942,7 +942,7 @@ ramGroupsData =
             , _user_name = TF.Nil
             }
 
-{- | The @alicloud_ram_policies@ AliCloud data.
+{- | The @alicloud_ram_policies@ AliCloud datasource.
 
 The Ram Policies data source provides a list of Alicloud Ram Policies in an
 Alicloud account according to the specified filters.
@@ -1018,9 +1018,9 @@ instance HasComputedType' (RamPoliciesData s) Text
 
 instance HasComputedUpdateDate (RamPoliciesData s) Text
 
-ramPoliciesData :: TF.Data TF.AliCloud (RamPoliciesData s)
+ramPoliciesData :: TF.DataSource TF.AliCloud (RamPoliciesData s)
 ramPoliciesData =
-    TF.newData "alicloud_ram_policies" $
+    TF.newDataSource "alicloud_ram_policies" $
         RamPoliciesData {
               _group_name = TF.Nil
             , _name_regex = TF.Nil
@@ -1030,7 +1030,7 @@ ramPoliciesData =
             , _user_name = TF.Nil
             }
 
-{- | The @alicloud_ram_roles@ AliCloud data.
+{- | The @alicloud_ram_roles@ AliCloud datasource.
 
 The Ram Roles data source provides a list of Alicloud Ram Roles in an
 Alicloud account according to the specified filters.
@@ -1090,9 +1090,9 @@ instance HasComputedName (RamRolesData s) Text
 
 instance HasComputedUpdateDate (RamRolesData s) Text
 
-ramRolesData :: TF.Data TF.AliCloud (RamRolesData s)
+ramRolesData :: TF.DataSource TF.AliCloud (RamRolesData s)
 ramRolesData =
-    TF.newData "alicloud_ram_roles" $
+    TF.newDataSource "alicloud_ram_roles" $
         RamRolesData {
               _name_regex = TF.Nil
             , _output_file = TF.Nil
@@ -1100,7 +1100,7 @@ ramRolesData =
             , _policy_type = TF.Nil
             }
 
-{- | The @alicloud_ram_users@ AliCloud data.
+{- | The @alicloud_ram_users@ AliCloud datasource.
 
 The Ram Users data source provides a list of Alicloud Ram Users in an
 Alicloud account according to the specified filters.
@@ -1160,9 +1160,9 @@ instance HasComputedLastLoginDate (RamUsersData s) Text
 
 instance HasComputedName (RamUsersData s) Text
 
-ramUsersData :: TF.Data TF.AliCloud (RamUsersData s)
+ramUsersData :: TF.DataSource TF.AliCloud (RamUsersData s)
 ramUsersData =
-    TF.newData "alicloud_ram_users" $
+    TF.newDataSource "alicloud_ram_users" $
         RamUsersData {
               _group_name = TF.Nil
             , _name_regex = TF.Nil
@@ -1171,7 +1171,7 @@ ramUsersData =
             , _policy_type = TF.Nil
             }
 
-{- | The @alicloud_regions@ AliCloud data.
+{- | The @alicloud_regions@ AliCloud datasource.
 
 The Regions data source allows access to the list of Alicloud Regions.
 -}
@@ -1210,16 +1210,16 @@ instance HasComputedId (RegionsData s) Text
 
 instance HasComputedLocalName (RegionsData s) Text
 
-regionsData :: TF.Data TF.AliCloud (RegionsData s)
+regionsData :: TF.DataSource TF.AliCloud (RegionsData s)
 regionsData =
-    TF.newData "alicloud_regions" $
+    TF.newDataSource "alicloud_regions" $
         RegionsData {
               _current = TF.Nil
             , _name = TF.Nil
             , _output_file = TF.Nil
             }
 
-{- | The @alicloud_vpcs@ AliCloud data.
+{- | The @alicloud_vpcs@ AliCloud datasource.
 
 The VPCs data source lists a number of VPCs resource information owned by an
 Alicloud account.
@@ -1301,9 +1301,9 @@ instance HasComputedVrouterId (VpcsData s) Text
 
 instance HasComputedVswitchIds (VpcsData s) Text
 
-vpcsData :: TF.Data TF.AliCloud (VpcsData s)
+vpcsData :: TF.DataSource TF.AliCloud (VpcsData s)
 vpcsData =
-    TF.newData "alicloud_vpcs" $
+    TF.newDataSource "alicloud_vpcs" $
         VpcsData {
               _cidr_block = TF.Nil
             , _is_default = TF.Nil
@@ -1313,7 +1313,7 @@ vpcsData =
             , _vswitch_id = TF.Nil
             }
 
-{- | The @alicloud_zones@ AliCloud data.
+{- | The @alicloud_zones@ AliCloud datasource.
 
 The Zones data source allows access to the list of Alicloud Zones which can
 be accessed by an Alicloud account within the region configured in the
@@ -1368,9 +1368,9 @@ instance HasComputedId (ZonesData s) Text
 
 instance HasComputedLocalName (ZonesData s) Text
 
-zonesData :: TF.Data TF.AliCloud (ZonesData s)
+zonesData :: TF.DataSource TF.AliCloud (ZonesData s)
 zonesData =
-    TF.newData "alicloud_zones" $
+    TF.newDataSource "alicloud_zones" $
         ZonesData {
               _available_disk_category = TF.Nil
             , _available_instance_type = TF.Nil
@@ -1381,241 +1381,241 @@ zonesData =
 class HasAliDomain a s b | a -> s b where
     aliDomain :: Lens' a (TF.Attribute s b)
 
-instance HasAliDomain a s b => HasAliDomain (TF.Data p a) s b where
+instance HasAliDomain a s b => HasAliDomain (TF.DataSource p a) s b where
     aliDomain = TF.configuration . aliDomain
 
 class HasAvailabilityZone a s b | a -> s b where
     availabilityZone :: Lens' a (TF.Attribute s b)
 
-instance HasAvailabilityZone a s b => HasAvailabilityZone (TF.Data p a) s b where
+instance HasAvailabilityZone a s b => HasAvailabilityZone (TF.DataSource p a) s b where
     availabilityZone = TF.configuration . availabilityZone
 
 class HasAvailableDiskCategory a s b | a -> s b where
     availableDiskCategory :: Lens' a (TF.Attribute s b)
 
-instance HasAvailableDiskCategory a s b => HasAvailableDiskCategory (TF.Data p a) s b where
+instance HasAvailableDiskCategory a s b => HasAvailableDiskCategory (TF.DataSource p a) s b where
     availableDiskCategory = TF.configuration . availableDiskCategory
 
 class HasAvailableInstanceType a s b | a -> s b where
     availableInstanceType :: Lens' a (TF.Attribute s b)
 
-instance HasAvailableInstanceType a s b => HasAvailableInstanceType (TF.Data p a) s b where
+instance HasAvailableInstanceType a s b => HasAvailableInstanceType (TF.DataSource p a) s b where
     availableInstanceType = TF.configuration . availableInstanceType
 
 class HasAvailableResourceCreation a s b | a -> s b where
     availableResourceCreation :: Lens' a (TF.Attribute s b)
 
-instance HasAvailableResourceCreation a s b => HasAvailableResourceCreation (TF.Data p a) s b where
+instance HasAvailableResourceCreation a s b => HasAvailableResourceCreation (TF.DataSource p a) s b where
     availableResourceCreation = TF.configuration . availableResourceCreation
 
 class HasCidrBlock a s b | a -> s b where
     cidrBlock :: Lens' a (TF.Attribute s b)
 
-instance HasCidrBlock a s b => HasCidrBlock (TF.Data p a) s b where
+instance HasCidrBlock a s b => HasCidrBlock (TF.DataSource p a) s b where
     cidrBlock = TF.configuration . cidrBlock
 
 class HasCpuCoreCount a s b | a -> s b where
     cpuCoreCount :: Lens' a (TF.Attribute s b)
 
-instance HasCpuCoreCount a s b => HasCpuCoreCount (TF.Data p a) s b where
+instance HasCpuCoreCount a s b => HasCpuCoreCount (TF.DataSource p a) s b where
     cpuCoreCount = TF.configuration . cpuCoreCount
 
 class HasCurrent a s b | a -> s b where
     current :: Lens' a (TF.Attribute s b)
 
-instance HasCurrent a s b => HasCurrent (TF.Data p a) s b where
+instance HasCurrent a s b => HasCurrent (TF.DataSource p a) s b where
     current = TF.configuration . current
 
 class HasDescriptionRegex a s b | a -> s b where
     descriptionRegex :: Lens' a (TF.Attribute s b)
 
-instance HasDescriptionRegex a s b => HasDescriptionRegex (TF.Data p a) s b where
+instance HasDescriptionRegex a s b => HasDescriptionRegex (TF.DataSource p a) s b where
     descriptionRegex = TF.configuration . descriptionRegex
 
 class HasDomainName a s b | a -> s b where
     domainName :: Lens' a (TF.Attribute s b)
 
-instance HasDomainName a s b => HasDomainName (TF.Data p a) s b where
+instance HasDomainName a s b => HasDomainName (TF.DataSource p a) s b where
     domainName = TF.configuration . domainName
 
 class HasDomainNameRegex a s b | a -> s b where
     domainNameRegex :: Lens' a (TF.Attribute s b)
 
-instance HasDomainNameRegex a s b => HasDomainNameRegex (TF.Data p a) s b where
+instance HasDomainNameRegex a s b => HasDomainNameRegex (TF.DataSource p a) s b where
     domainNameRegex = TF.configuration . domainNameRegex
 
 class HasFingerPrint a s b | a -> s b where
     fingerPrint :: Lens' a (TF.Attribute s b)
 
-instance HasFingerPrint a s b => HasFingerPrint (TF.Data p a) s b where
+instance HasFingerPrint a s b => HasFingerPrint (TF.DataSource p a) s b where
     fingerPrint = TF.configuration . fingerPrint
 
 class HasGroupName a s b | a -> s b where
     groupName :: Lens' a (TF.Attribute s b)
 
-instance HasGroupName a s b => HasGroupName (TF.Data p a) s b where
+instance HasGroupName a s b => HasGroupName (TF.DataSource p a) s b where
     groupName = TF.configuration . groupName
 
 class HasGroupNameRegex a s b | a -> s b where
     groupNameRegex :: Lens' a (TF.Attribute s b)
 
-instance HasGroupNameRegex a s b => HasGroupNameRegex (TF.Data p a) s b where
+instance HasGroupNameRegex a s b => HasGroupNameRegex (TF.DataSource p a) s b where
     groupNameRegex = TF.configuration . groupNameRegex
 
 class HasHostRecordRegex a s b | a -> s b where
     hostRecordRegex :: Lens' a (TF.Attribute s b)
 
-instance HasHostRecordRegex a s b => HasHostRecordRegex (TF.Data p a) s b where
+instance HasHostRecordRegex a s b => HasHostRecordRegex (TF.DataSource p a) s b where
     hostRecordRegex = TF.configuration . hostRecordRegex
 
 class HasIds a s b | a -> s b where
     ids :: Lens' a (TF.Attribute s b)
 
-instance HasIds a s b => HasIds (TF.Data p a) s b where
+instance HasIds a s b => HasIds (TF.DataSource p a) s b where
     ids = TF.configuration . ids
 
 class HasImageId a s b | a -> s b where
     imageId :: Lens' a (TF.Attribute s b)
 
-instance HasImageId a s b => HasImageId (TF.Data p a) s b where
+instance HasImageId a s b => HasImageId (TF.DataSource p a) s b where
     imageId = TF.configuration . imageId
 
 class HasInstanceId a s b | a -> s b where
     instanceId :: Lens' a (TF.Attribute s b)
 
-instance HasInstanceId a s b => HasInstanceId (TF.Data p a) s b where
+instance HasInstanceId a s b => HasInstanceId (TF.DataSource p a) s b where
     instanceId = TF.configuration . instanceId
 
 class HasInstanceTypeFamily a s b | a -> s b where
     instanceTypeFamily :: Lens' a (TF.Attribute s b)
 
-instance HasInstanceTypeFamily a s b => HasInstanceTypeFamily (TF.Data p a) s b where
+instance HasInstanceTypeFamily a s b => HasInstanceTypeFamily (TF.DataSource p a) s b where
     instanceTypeFamily = TF.configuration . instanceTypeFamily
 
 class HasIsDefault a s b | a -> s b where
     isDefault :: Lens' a (TF.Attribute s b)
 
-instance HasIsDefault a s b => HasIsDefault (TF.Data p a) s b where
+instance HasIsDefault a s b => HasIsDefault (TF.DataSource p a) s b where
     isDefault = TF.configuration . isDefault
 
 class HasIsLocked a s b | a -> s b where
     isLocked :: Lens' a (TF.Attribute s b)
 
-instance HasIsLocked a s b => HasIsLocked (TF.Data p a) s b where
+instance HasIsLocked a s b => HasIsLocked (TF.DataSource p a) s b where
     isLocked = TF.configuration . isLocked
 
 class HasIsOutdated a s b | a -> s b where
     isOutdated :: Lens' a (TF.Attribute s b)
 
-instance HasIsOutdated a s b => HasIsOutdated (TF.Data p a) s b where
+instance HasIsOutdated a s b => HasIsOutdated (TF.DataSource p a) s b where
     isOutdated = TF.configuration . isOutdated
 
 class HasLine a s b | a -> s b where
     line :: Lens' a (TF.Attribute s b)
 
-instance HasLine a s b => HasLine (TF.Data p a) s b where
+instance HasLine a s b => HasLine (TF.DataSource p a) s b where
     line = TF.configuration . line
 
 class HasMemorySize a s b | a -> s b where
     memorySize :: Lens' a (TF.Attribute s b)
 
-instance HasMemorySize a s b => HasMemorySize (TF.Data p a) s b where
+instance HasMemorySize a s b => HasMemorySize (TF.DataSource p a) s b where
     memorySize = TF.configuration . memorySize
 
 class HasMostRecent a s b | a -> s b where
     mostRecent :: Lens' a (TF.Attribute s b)
 
-instance HasMostRecent a s b => HasMostRecent (TF.Data p a) s b where
+instance HasMostRecent a s b => HasMostRecent (TF.DataSource p a) s b where
     mostRecent = TF.configuration . mostRecent
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasNameRegex a s b | a -> s b where
     nameRegex :: Lens' a (TF.Attribute s b)
 
-instance HasNameRegex a s b => HasNameRegex (TF.Data p a) s b where
+instance HasNameRegex a s b => HasNameRegex (TF.DataSource p a) s b where
     nameRegex = TF.configuration . nameRegex
 
 class HasOutputFile a s b | a -> s b where
     outputFile :: Lens' a (TF.Attribute s b)
 
-instance HasOutputFile a s b => HasOutputFile (TF.Data p a) s b where
+instance HasOutputFile a s b => HasOutputFile (TF.DataSource p a) s b where
     outputFile = TF.configuration . outputFile
 
 class HasOwners a s b | a -> s b where
     owners :: Lens' a (TF.Attribute s b)
 
-instance HasOwners a s b => HasOwners (TF.Data p a) s b where
+instance HasOwners a s b => HasOwners (TF.DataSource p a) s b where
     owners = TF.configuration . owners
 
 class HasPolicyName a s b | a -> s b where
     policyName :: Lens' a (TF.Attribute s b)
 
-instance HasPolicyName a s b => HasPolicyName (TF.Data p a) s b where
+instance HasPolicyName a s b => HasPolicyName (TF.DataSource p a) s b where
     policyName = TF.configuration . policyName
 
 class HasPolicyType a s b | a -> s b where
     policyType :: Lens' a (TF.Attribute s b)
 
-instance HasPolicyType a s b => HasPolicyType (TF.Data p a) s b where
+instance HasPolicyType a s b => HasPolicyType (TF.DataSource p a) s b where
     policyType = TF.configuration . policyType
 
 class HasRoleName a s b | a -> s b where
     roleName :: Lens' a (TF.Attribute s b)
 
-instance HasRoleName a s b => HasRoleName (TF.Data p a) s b where
+instance HasRoleName a s b => HasRoleName (TF.DataSource p a) s b where
     roleName = TF.configuration . roleName
 
 class HasStatus a s b | a -> s b where
     status :: Lens' a (TF.Attribute s b)
 
-instance HasStatus a s b => HasStatus (TF.Data p a) s b where
+instance HasStatus a s b => HasStatus (TF.DataSource p a) s b where
     status = TF.configuration . status
 
 class HasTags a s b | a -> s b where
     tags :: Lens' a (TF.Attribute s b)
 
-instance HasTags a s b => HasTags (TF.Data p a) s b where
+instance HasTags a s b => HasTags (TF.DataSource p a) s b where
     tags = TF.configuration . tags
 
 class HasType' a s b | a -> s b where
     type' :: Lens' a (TF.Attribute s b)
 
-instance HasType' a s b => HasType' (TF.Data p a) s b where
+instance HasType' a s b => HasType' (TF.DataSource p a) s b where
     type' = TF.configuration . type'
 
 class HasUserName a s b | a -> s b where
     userName :: Lens' a (TF.Attribute s b)
 
-instance HasUserName a s b => HasUserName (TF.Data p a) s b where
+instance HasUserName a s b => HasUserName (TF.DataSource p a) s b where
     userName = TF.configuration . userName
 
 class HasValueRegex a s b | a -> s b where
     valueRegex :: Lens' a (TF.Attribute s b)
 
-instance HasValueRegex a s b => HasValueRegex (TF.Data p a) s b where
+instance HasValueRegex a s b => HasValueRegex (TF.DataSource p a) s b where
     valueRegex = TF.configuration . valueRegex
 
 class HasVersionCode a s b | a -> s b where
     versionCode :: Lens' a (TF.Attribute s b)
 
-instance HasVersionCode a s b => HasVersionCode (TF.Data p a) s b where
+instance HasVersionCode a s b => HasVersionCode (TF.DataSource p a) s b where
     versionCode = TF.configuration . versionCode
 
 class HasVpcId a s b | a -> s b where
     vpcId :: Lens' a (TF.Attribute s b)
 
-instance HasVpcId a s b => HasVpcId (TF.Data p a) s b where
+instance HasVpcId a s b => HasVpcId (TF.DataSource p a) s b where
     vpcId = TF.configuration . vpcId
 
 class HasVswitchId a s b | a -> s b where
     vswitchId :: Lens' a (TF.Attribute s b)
 
-instance HasVswitchId a s b => HasVswitchId (TF.Data p a) s b where
+instance HasVswitchId a s b => HasVswitchId (TF.DataSource p a) s b where
     vswitchId = TF.configuration . vswitchId
 
 class HasComputedAccountAlias a b | a -> b where

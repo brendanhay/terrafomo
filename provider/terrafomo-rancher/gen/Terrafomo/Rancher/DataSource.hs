@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Rancher.Data
+-- Module      : Terrafomo.Rancher.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Rancher.Data
+module Terrafomo.Rancher.DataSource
     (
     -- * Types
       CertificateData (..)
@@ -69,7 +69,7 @@ import qualified Data.Word                  as TF
 import qualified GHC.Base                   as TF
 import qualified Numeric.Natural            as TF
 import qualified Terrafomo.Attribute        as TF
-import qualified Terrafomo.Data             as TF
+import qualified Terrafomo.DataSource       as TF
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.IP               as TF
 import qualified Terrafomo.Meta             as TF
@@ -78,7 +78,7 @@ import qualified Terrafomo.Rancher.Provider as TF
 import qualified Terrafomo.Rancher.Types    as TF
 import qualified Terrafomo.Resource         as TF
 
-{- | The @rancher_certificate@ Rancher data.
+{- | The @rancher_certificate@ Rancher datasource.
 
 Use this data source to retrieve information about a Rancher certificate.
 -}
@@ -125,15 +125,15 @@ instance HasComputedSubjectAlternativeNames (CertificateData s) Text
 
 instance HasComputedVersion (CertificateData s) Text
 
-certificateData :: TF.Data TF.Rancher (CertificateData s)
+certificateData :: TF.DataSource TF.Rancher (CertificateData s)
 certificateData =
-    TF.newData "rancher_certificate" $
+    TF.newDataSource "rancher_certificate" $
         CertificateData {
               _environment_id = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @rancher_environment@ Rancher data.
+{- | The @rancher_environment@ Rancher datasource.
 
 Use this data source to retrieve information about a Rancher environment.
 -}
@@ -162,14 +162,14 @@ instance HasComputedOrchestration (EnvironmentData s) Text
 
 instance HasComputedProjectTemplateId (EnvironmentData s) Text
 
-environmentData :: TF.Data TF.Rancher (EnvironmentData s)
+environmentData :: TF.DataSource TF.Rancher (EnvironmentData s)
 environmentData =
-    TF.newData "rancher_environment" $
+    TF.newDataSource "rancher_environment" $
         EnvironmentData {
               _name = TF.Nil
             }
 
-{- | The @rancher_setting@ Rancher data.
+{- | The @rancher_setting@ Rancher datasource.
 
 Use this data source to retrieve information about a Rancher setting.
 -}
@@ -190,9 +190,9 @@ instance HasName (SettingData s) s Text where
 
 instance HasComputedValue (SettingData s) Text
 
-settingData :: TF.Data TF.Rancher (SettingData s)
+settingData :: TF.DataSource TF.Rancher (SettingData s)
 settingData =
-    TF.newData "rancher_setting" $
+    TF.newDataSource "rancher_setting" $
         SettingData {
               _name = TF.Nil
             }
@@ -200,13 +200,13 @@ settingData =
 class HasEnvironmentId a s b | a -> s b where
     environmentId :: Lens' a (TF.Attribute s b)
 
-instance HasEnvironmentId a s b => HasEnvironmentId (TF.Data p a) s b where
+instance HasEnvironmentId a s b => HasEnvironmentId (TF.DataSource p a) s b where
     environmentId = TF.configuration . environmentId
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasComputedAlgorithm a b | a -> b where

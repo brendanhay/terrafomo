@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.PagerDuty.Data
+-- Module      : Terrafomo.PagerDuty.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.PagerDuty.Data
+module Terrafomo.PagerDuty.DataSource
     (
     -- * Types
       EscalationPolicyData (..)
@@ -59,7 +59,7 @@ import qualified Data.Word                    as TF
 import qualified GHC.Base                     as TF
 import qualified Numeric.Natural              as TF
 import qualified Terrafomo.Attribute          as TF
-import qualified Terrafomo.Data               as TF
+import qualified Terrafomo.DataSource         as TF
 import qualified Terrafomo.HCL                as TF
 import qualified Terrafomo.IP                 as TF
 import qualified Terrafomo.Meta               as TF
@@ -68,7 +68,7 @@ import qualified Terrafomo.PagerDuty.Provider as TF
 import qualified Terrafomo.PagerDuty.Types    as TF
 import qualified Terrafomo.Resource           as TF
 
-{- | The @pagerduty_escalation_policy@ PagerDuty data.
+{- | The @pagerduty_escalation_policy@ PagerDuty datasource.
 
 Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Escalation_Policies/get_escalation_policies>
@@ -91,14 +91,14 @@ instance HasName (EscalationPolicyData s) s Text where
 
 instance HasComputedName (EscalationPolicyData s) Text
 
-escalationPolicyData :: TF.Data TF.PagerDuty (EscalationPolicyData s)
+escalationPolicyData :: TF.DataSource TF.PagerDuty (EscalationPolicyData s)
 escalationPolicyData =
-    TF.newData "pagerduty_escalation_policy" $
+    TF.newDataSource "pagerduty_escalation_policy" $
         EscalationPolicyData {
               _name = TF.Nil
             }
 
-{- | The @pagerduty_schedule@ PagerDuty data.
+{- | The @pagerduty_schedule@ PagerDuty datasource.
 
 Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Schedules/get_schedules>
@@ -121,14 +121,14 @@ instance HasName (ScheduleData s) s Text where
 
 instance HasComputedName (ScheduleData s) Text
 
-scheduleData :: TF.Data TF.PagerDuty (ScheduleData s)
+scheduleData :: TF.DataSource TF.PagerDuty (ScheduleData s)
 scheduleData =
-    TF.newData "pagerduty_schedule" $
+    TF.newDataSource "pagerduty_schedule" $
         ScheduleData {
               _name = TF.Nil
             }
 
-{- | The @pagerduty_user@ PagerDuty data.
+{- | The @pagerduty_user@ PagerDuty datasource.
 
 Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Users/get_users>
@@ -151,14 +151,14 @@ instance HasEmail (UserData s) s Text where
 
 instance HasComputedName (UserData s) Text
 
-userData :: TF.Data TF.PagerDuty (UserData s)
+userData :: TF.DataSource TF.PagerDuty (UserData s)
 userData =
-    TF.newData "pagerduty_user" $
+    TF.newDataSource "pagerduty_user" $
         UserData {
               _email = TF.Nil
             }
 
-{- | The @pagerduty_vendor@ PagerDuty data.
+{- | The @pagerduty_vendor@ PagerDuty datasource.
 
 Use this data source to get information about a specific
 <https://v2.developer.pagerduty.com/v2/page/api-reference#!/Vendors/get_vendors>
@@ -184,9 +184,9 @@ instance HasComputedName (VendorData s) Text
 
 instance HasComputedType' (VendorData s) Text
 
-vendorData :: TF.Data TF.PagerDuty (VendorData s)
+vendorData :: TF.DataSource TF.PagerDuty (VendorData s)
 vendorData =
-    TF.newData "pagerduty_vendor" $
+    TF.newDataSource "pagerduty_vendor" $
         VendorData {
               _name = TF.Nil
             }
@@ -194,13 +194,13 @@ vendorData =
 class HasEmail a s b | a -> s b where
     email :: Lens' a (TF.Attribute s b)
 
-instance HasEmail a s b => HasEmail (TF.Data p a) s b where
+instance HasEmail a s b => HasEmail (TF.DataSource p a) s b where
     email = TF.configuration . email
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasComputedName a b | a -> b where

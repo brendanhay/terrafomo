@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Cloudflare.Data
+-- Module      : Terrafomo.Cloudflare.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Cloudflare.Data
+module Terrafomo.Cloudflare.DataSource
     (
     -- * Types
       IpRangesData (..)
@@ -51,14 +51,14 @@ import qualified Numeric.Natural               as TF
 import qualified Terrafomo.Attribute           as TF
 import qualified Terrafomo.Cloudflare.Provider as TF
 import qualified Terrafomo.Cloudflare.Types    as TF
-import qualified Terrafomo.Data                as TF
+import qualified Terrafomo.DataSource          as TF
 import qualified Terrafomo.HCL                 as TF
 import qualified Terrafomo.IP                  as TF
 import qualified Terrafomo.Meta                as TF
 import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Resource            as TF
 
-{- | The @cloudflare_ip_ranges@ Cloudflare data.
+{- | The @cloudflare_ip_ranges@ Cloudflare datasource.
 
 Use this data source to get the <https://www.cloudflare.com/ips/> of
 CloudFlare edge nodes.
@@ -75,9 +75,9 @@ instance HasComputedIpv4CidrBlocks (IpRangesData s) Text
 
 instance HasComputedIpv6CidrBlocks (IpRangesData s) Text
 
-ipRangesData :: TF.Data TF.Cloudflare (IpRangesData s)
+ipRangesData :: TF.DataSource TF.Cloudflare (IpRangesData s)
 ipRangesData =
-    TF.newData "cloudflare_ip_ranges" $
+    TF.newDataSource "cloudflare_ip_ranges" $
         IpRangesData {
             }
 

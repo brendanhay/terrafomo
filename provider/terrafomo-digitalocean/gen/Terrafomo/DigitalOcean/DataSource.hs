@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.DigitalOcean.Data
+-- Module      : Terrafomo.DigitalOcean.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.DigitalOcean.Data
+module Terrafomo.DigitalOcean.DataSource
     (
     -- * Types
       ImageData (..)
@@ -54,7 +54,7 @@ import qualified Data.Word                       as TF
 import qualified GHC.Base                        as TF
 import qualified Numeric.Natural                 as TF
 import qualified Terrafomo.Attribute             as TF
-import qualified Terrafomo.Data                  as TF
+import qualified Terrafomo.DataSource            as TF
 import qualified Terrafomo.DigitalOcean.Provider as TF
 import qualified Terrafomo.DigitalOcean.Types    as TF
 import qualified Terrafomo.HCL                   as TF
@@ -63,7 +63,7 @@ import qualified Terrafomo.Meta                  as TF
 import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.Resource              as TF
 
-{- | The @digitalocean_image@ DigitalOcean data.
+{- | The @digitalocean_image@ DigitalOcean datasource.
 
 Get information on an snapshot images. The aim of this datasource is to
 enable you to build droplets based on snapshot names. An error is triggered
@@ -98,9 +98,9 @@ instance HasComputedSizeGigabytes (ImageData s) Text
 
 instance HasComputedType' (ImageData s) Text
 
-imageData :: TF.Data TF.DigitalOcean (ImageData s)
+imageData :: TF.DataSource TF.DigitalOcean (ImageData s)
 imageData =
-    TF.newData "digitalocean_image" $
+    TF.newDataSource "digitalocean_image" $
         ImageData {
               _name = TF.Nil
             }
@@ -108,7 +108,7 @@ imageData =
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasComputedImage a b | a -> b where

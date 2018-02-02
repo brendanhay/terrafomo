@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Vault.Data
+-- Module      : Terrafomo.Vault.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Vault.Data
+module Terrafomo.Vault.DataSource
     (
     -- * Types
       AwsAccessCredentialsData (..)
@@ -60,7 +60,7 @@ import qualified Data.Word                as TF
 import qualified GHC.Base                 as TF
 import qualified Numeric.Natural          as TF
 import qualified Terrafomo.Attribute      as TF
-import qualified Terrafomo.Data           as TF
+import qualified Terrafomo.DataSource     as TF
 import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.IP             as TF
 import qualified Terrafomo.Meta           as TF
@@ -69,7 +69,7 @@ import qualified Terrafomo.Resource       as TF
 import qualified Terrafomo.Vault.Provider as TF
 import qualified Terrafomo.Vault.Types    as TF
 
-{- | The @vault_aws_access_credentials@ Vault data.
+{- | The @vault_aws_access_credentials@ Vault datasource.
 
 Reads AWS credentials from an AWS secret backend in Vault. ~> Important All
 data retrieved from Vault will be written in cleartext to state file
@@ -123,16 +123,16 @@ instance HasComputedSecretKey (AwsAccessCredentialsData s) Text
 
 instance HasComputedSecurityToken (AwsAccessCredentialsData s) Text
 
-awsAccessCredentialsData :: TF.Data TF.Vault (AwsAccessCredentialsData s)
+awsAccessCredentialsData :: TF.DataSource TF.Vault (AwsAccessCredentialsData s)
 awsAccessCredentialsData =
-    TF.newData "vault_aws_access_credentials" $
+    TF.newDataSource "vault_aws_access_credentials" $
         AwsAccessCredentialsData {
               _backend = TF.Nil
             , _role = TF.Nil
             , _type' = TF.Nil
             }
 
-{- | The @vault_generic_secret@ Vault data.
+{- | The @vault_generic_secret@ Vault datasource.
 
 Reads arbitrary data from a given path in Vault. This resource is primarily
 intended to be used with
@@ -159,9 +159,9 @@ instance HasPath (GenericSecretData s) s Text where
         lens (_path :: GenericSecretData s -> TF.Attribute s Text)
             (\s a -> s { _path = a } :: GenericSecretData s)
 
-genericSecretData :: TF.Data TF.Vault (GenericSecretData s)
+genericSecretData :: TF.DataSource TF.Vault (GenericSecretData s)
 genericSecretData =
-    TF.newData "vault_generic_secret" $
+    TF.newDataSource "vault_generic_secret" $
         GenericSecretData {
               _path = TF.Nil
             }
@@ -169,25 +169,25 @@ genericSecretData =
 class HasBackend a s b | a -> s b where
     backend :: Lens' a (TF.Attribute s b)
 
-instance HasBackend a s b => HasBackend (TF.Data p a) s b where
+instance HasBackend a s b => HasBackend (TF.DataSource p a) s b where
     backend = TF.configuration . backend
 
 class HasPath a s b | a -> s b where
     path :: Lens' a (TF.Attribute s b)
 
-instance HasPath a s b => HasPath (TF.Data p a) s b where
+instance HasPath a s b => HasPath (TF.DataSource p a) s b where
     path = TF.configuration . path
 
 class HasRole a s b | a -> s b where
     role :: Lens' a (TF.Attribute s b)
 
-instance HasRole a s b => HasRole (TF.Data p a) s b where
+instance HasRole a s b => HasRole (TF.DataSource p a) s b where
     role = TF.configuration . role
 
 class HasType' a s b | a -> s b where
     type' :: Lens' a (TF.Attribute s b)
 
-instance HasType' a s b => HasType' (TF.Data p a) s b where
+instance HasType' a s b => HasType' (TF.DataSource p a) s b where
     type' = TF.configuration . type'
 
 class HasComputedAccessKey a b | a -> b where

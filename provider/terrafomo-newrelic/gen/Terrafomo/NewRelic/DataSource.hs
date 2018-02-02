@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.NewRelic.Data
+-- Module      : Terrafomo.NewRelic.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.NewRelic.Data
+module Terrafomo.NewRelic.DataSource
     (
     -- * Types
       ApplicationData (..)
@@ -50,7 +50,7 @@ import qualified Data.Word                   as TF
 import qualified GHC.Base                    as TF
 import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.Data              as TF
+import qualified Terrafomo.DataSource        as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.IP                as TF
 import qualified Terrafomo.Meta              as TF
@@ -59,7 +59,7 @@ import qualified Terrafomo.NewRelic.Provider as TF
 import qualified Terrafomo.NewRelic.Types    as TF
 import qualified Terrafomo.Resource          as TF
 
-{- | The @newrelic_application@ NewRelic data.
+{- | The @newrelic_application@ NewRelic datasource.
 
 Use this data source to get information about a specific application in New
 Relic.
@@ -85,9 +85,9 @@ instance HasComputedId (ApplicationData s) Text
 
 instance HasComputedInstanceIds (ApplicationData s) Text
 
-applicationData :: TF.Data TF.NewRelic (ApplicationData s)
+applicationData :: TF.DataSource TF.NewRelic (ApplicationData s)
 applicationData =
-    TF.newData "newrelic_application" $
+    TF.newDataSource "newrelic_application" $
         ApplicationData {
               _name = TF.Nil
             }
@@ -95,7 +95,7 @@ applicationData =
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasComputedHostIds a b | a -> b where

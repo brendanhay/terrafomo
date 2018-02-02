@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.LogicMonitor.Data
+-- Module      : Terrafomo.LogicMonitor.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.LogicMonitor.Data
+module Terrafomo.LogicMonitor.DataSource
     (
     -- * Types
       CollectorsData (..)
@@ -53,7 +53,7 @@ import qualified Data.Word                       as TF
 import qualified GHC.Base                        as TF
 import qualified Numeric.Natural                 as TF
 import qualified Terrafomo.Attribute             as TF
-import qualified Terrafomo.Data                  as TF
+import qualified Terrafomo.DataSource            as TF
 import qualified Terrafomo.HCL                   as TF
 import qualified Terrafomo.IP                    as TF
 import qualified Terrafomo.LogicMonitor.Provider as TF
@@ -62,7 +62,7 @@ import qualified Terrafomo.Meta                  as TF
 import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.Resource              as TF
 
-{- | The @logicmonitor_collectors@ LogicMonitor data.
+{- | The @logicmonitor_collectors@ LogicMonitor datasource.
 
 Use this datasource to get the ID of an available collector.
 -}
@@ -105,9 +105,9 @@ instance HasSize (CollectorsData s) s Text where
         lens (_size :: CollectorsData s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: CollectorsData s)
 
-collectorsData :: TF.Data TF.LogicMonitor (CollectorsData s)
+collectorsData :: TF.DataSource TF.LogicMonitor (CollectorsData s)
 collectorsData =
-    TF.newData "logicmonitor_collectors" $
+    TF.newDataSource "logicmonitor_collectors" $
         CollectorsData {
               _filters = TF.Nil
             , _most_recent = TF.Nil
@@ -115,7 +115,7 @@ collectorsData =
             , _size = TF.Nil
             }
 
-{- | The @logicmonitor_device_group@ LogicMonitor data.
+{- | The @logicmonitor_device_group@ LogicMonitor datasource.
 
 Use this datasource to get the ID of an available device group.
 -}
@@ -150,9 +150,9 @@ instance HasSize (DeviceGroupData s) s Text where
         lens (_size :: DeviceGroupData s -> TF.Attribute s Text)
             (\s a -> s { _size = a } :: DeviceGroupData s)
 
-deviceGroupData :: TF.Data TF.LogicMonitor (DeviceGroupData s)
+deviceGroupData :: TF.DataSource TF.LogicMonitor (DeviceGroupData s)
 deviceGroupData =
-    TF.newData "logicmonitor_device_group" $
+    TF.newDataSource "logicmonitor_device_group" $
         DeviceGroupData {
               _filters = TF.Nil
             , _offset = TF.Nil
@@ -162,23 +162,23 @@ deviceGroupData =
 class HasFilters a s b | a -> s b where
     filters :: Lens' a (TF.Attribute s b)
 
-instance HasFilters a s b => HasFilters (TF.Data p a) s b where
+instance HasFilters a s b => HasFilters (TF.DataSource p a) s b where
     filters = TF.configuration . filters
 
 class HasMostRecent a s b | a -> s b where
     mostRecent :: Lens' a (TF.Attribute s b)
 
-instance HasMostRecent a s b => HasMostRecent (TF.Data p a) s b where
+instance HasMostRecent a s b => HasMostRecent (TF.DataSource p a) s b where
     mostRecent = TF.configuration . mostRecent
 
 class HasOffset a s b | a -> s b where
     offset :: Lens' a (TF.Attribute s b)
 
-instance HasOffset a s b => HasOffset (TF.Data p a) s b where
+instance HasOffset a s b => HasOffset (TF.DataSource p a) s b where
     offset = TF.configuration . offset
 
 class HasSize a s b | a -> s b where
     size :: Lens' a (TF.Attribute s b)
 
-instance HasSize a s b => HasSize (TF.Data p a) s b where
+instance HasSize a s b => HasSize (TF.DataSource p a) s b where
     size = TF.configuration . size

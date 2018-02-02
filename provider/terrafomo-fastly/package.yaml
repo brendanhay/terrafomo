@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Fastly
-    - Terrafomo.Fastly.Data
+    - Terrafomo.Fastly.DataSource
     - Terrafomo.Fastly.Resource
 
   reexported-modules: >

@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Scaleway
-    - Terrafomo.Scaleway.Data
+    - Terrafomo.Scaleway.DataSource
     - Terrafomo.Scaleway.Resource
 
   reexported-modules: >

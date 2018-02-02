@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Circonus
-    - Terrafomo.Circonus.Data
+    - Terrafomo.Circonus.DataSource
     - Terrafomo.Circonus.Resource
 
   reexported-modules: >

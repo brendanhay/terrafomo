@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.VSphere.Data
+-- Module      : Terrafomo.VSphere.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.VSphere.Data
+module Terrafomo.VSphere.DataSource
     (
     -- * Types
       CustomAttributeData (..)
@@ -94,7 +94,7 @@ import qualified Data.Word                  as TF
 import qualified GHC.Base                   as TF
 import qualified Numeric.Natural            as TF
 import qualified Terrafomo.Attribute        as TF
-import qualified Terrafomo.Data             as TF
+import qualified Terrafomo.DataSource       as TF
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.IP               as TF
 import qualified Terrafomo.Meta             as TF
@@ -103,7 +103,7 @@ import qualified Terrafomo.Resource         as TF
 import qualified Terrafomo.VSphere.Provider as TF
 import qualified Terrafomo.VSphere.Types    as TF
 
-{- | The @vsphere_custom_attribute@ VSphere data.
+{- | The @vsphere_custom_attribute@ VSphere datasource.
 
 The @vsphere_custom_attribute@ data source can be used to reference custom
 attributes that are not managed by Terraform. Its attributes are exactly the
@@ -128,14 +128,14 @@ instance HasName (CustomAttributeData s) s Text where
         lens (_name :: CustomAttributeData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: CustomAttributeData s)
 
-customAttributeData :: TF.Data TF.VSphere (CustomAttributeData s)
+customAttributeData :: TF.DataSource TF.VSphere (CustomAttributeData s)
 customAttributeData =
-    TF.newData "vsphere_custom_attribute" $
+    TF.newDataSource "vsphere_custom_attribute" $
         CustomAttributeData {
               _name = TF.Nil
             }
 
-{- | The @vsphere_datacenter@ VSphere data.
+{- | The @vsphere_datacenter@ VSphere datasource.
 
 The @vsphere_datacenter@ data source can be used to discover the ID of a
 vSphere datacenter. This can then be used with resources or data sources
@@ -157,14 +157,14 @@ instance HasName (DatacenterData s) s Text where
         lens (_name :: DatacenterData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DatacenterData s)
 
-datacenterData :: TF.Data TF.VSphere (DatacenterData s)
+datacenterData :: TF.DataSource TF.VSphere (DatacenterData s)
 datacenterData =
-    TF.newData "vsphere_datacenter" $
+    TF.newDataSource "vsphere_datacenter" $
         DatacenterData {
               _name = TF.Nil
             }
 
-{- | The @vsphere_datastore@ VSphere data.
+{- | The @vsphere_datastore@ VSphere datasource.
 
 The @vsphere_datastore@ data source can be used to discover the ID of a
 datastore in vSphere. This is useful to fetch the ID of a datastore that you
@@ -194,15 +194,15 @@ instance HasName (DatastoreData s) s Text where
         lens (_name :: DatastoreData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: DatastoreData s)
 
-datastoreData :: TF.Data TF.VSphere (DatastoreData s)
+datastoreData :: TF.DataSource TF.VSphere (DatastoreData s)
 datastoreData =
-    TF.newData "vsphere_datastore" $
+    TF.newDataSource "vsphere_datastore" $
         DatastoreData {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @vsphere_distributed_virtual_switch@ VSphere data.
+{- | The @vsphere_distributed_virtual_switch@ VSphere datasource.
 
 The @vsphere_distributed_virtual_switch@ data source can be used to discover
 the ID and uplink data of a of a vSphere distributed virtual switch (DVS).
@@ -238,15 +238,15 @@ instance HasComputedId (DistributedVirtualSwitchData s) Text
 
 instance HasComputedUplinks (DistributedVirtualSwitchData s) Text
 
-distributedVirtualSwitchData :: TF.Data TF.VSphere (DistributedVirtualSwitchData s)
+distributedVirtualSwitchData :: TF.DataSource TF.VSphere (DistributedVirtualSwitchData s)
 distributedVirtualSwitchData =
-    TF.newData "vsphere_distributed_virtual_switch" $
+    TF.newDataSource "vsphere_distributed_virtual_switch" $
         DistributedVirtualSwitchData {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @vsphere_host@ VSphere data.
+{- | The @vsphere_host@ VSphere datasource.
 
 The @vsphere_host@ data source can be used to discover the ID of a vSphere
 host. This can then be used with resources or data sources that require a
@@ -275,15 +275,15 @@ instance HasName (HostData s) s Text where
         lens (_name :: HostData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: HostData s)
 
-hostData :: TF.Data TF.VSphere (HostData s)
+hostData :: TF.DataSource TF.VSphere (HostData s)
 hostData =
-    TF.newData "vsphere_host" $
+    TF.newDataSource "vsphere_host" $
         HostData {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @vsphere_network@ VSphere data.
+{- | The @vsphere_network@ VSphere datasource.
 
 The @vsphere_network@ data source can be used to discover the ID of a
 network in vSphere. This can be any network that can be used as the backing
@@ -318,15 +318,15 @@ instance HasComputedId (NetworkData s) Text
 
 instance HasComputedType' (NetworkData s) Text
 
-networkData :: TF.Data TF.VSphere (NetworkData s)
+networkData :: TF.DataSource TF.VSphere (NetworkData s)
 networkData =
-    TF.newData "vsphere_network" $
+    TF.newDataSource "vsphere_network" $
         NetworkData {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @vsphere_resource_pool@ VSphere data.
+{- | The @vsphere_resource_pool@ VSphere datasource.
 
 The @vsphere_resource_pool@ data source can be used to discover the ID of a
 resource pool in vSphere. This is useful to fetch the ID of a resource pool
@@ -356,15 +356,15 @@ instance HasName (ResourcePoolData s) s Text where
         lens (_name :: ResourcePoolData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: ResourcePoolData s)
 
-resourcePoolData :: TF.Data TF.VSphere (ResourcePoolData s)
+resourcePoolData :: TF.DataSource TF.VSphere (ResourcePoolData s)
 resourcePoolData =
-    TF.newData "vsphere_resource_pool" $
+    TF.newDataSource "vsphere_resource_pool" $
         ResourcePoolData {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @vsphere_tag_category@ VSphere data.
+{- | The @vsphere_tag_category@ VSphere datasource.
 
 The @vsphere_tag_category@ data source can be used to reference tag
 categories that are not managed by Terraform. Its attributes are exactly the
@@ -389,14 +389,14 @@ instance HasName (TagCategoryData s) s Text where
         lens (_name :: TagCategoryData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TagCategoryData s)
 
-tagCategoryData :: TF.Data TF.VSphere (TagCategoryData s)
+tagCategoryData :: TF.DataSource TF.VSphere (TagCategoryData s)
 tagCategoryData =
-    TF.newData "vsphere_tag_category" $
+    TF.newDataSource "vsphere_tag_category" $
         TagCategoryData {
               _name = TF.Nil
             }
 
-{- | The @vsphere_tag@ VSphere data.
+{- | The @vsphere_tag@ VSphere datasource.
 
 The @vsphere_tag@ data source can be used to reference tags that are not
 managed by Terraform. Its attributes are exactly the same as the
@@ -429,15 +429,15 @@ instance HasName (TagData s) s Text where
         lens (_name :: TagData s -> TF.Attribute s Text)
             (\s a -> s { _name = a } :: TagData s)
 
-tagData :: TF.Data TF.VSphere (TagData s)
+tagData :: TF.DataSource TF.VSphere (TagData s)
 tagData =
-    TF.newData "vsphere_tag" $
+    TF.newDataSource "vsphere_tag" $
         TagData {
               _category_id = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @vsphere_virtual_machine@ VSphere data.
+{- | The @vsphere_virtual_machine@ VSphere datasource.
 
 The @vsphere_virtual_machine@ data source can be used to find the UUID of an
 existing virtual machine or template. Its most relevant purpose is for
@@ -494,16 +494,16 @@ instance HasComputedSize (VirtualMachineData s) Text
 
 instance HasComputedThinProvisioned (VirtualMachineData s) Text
 
-virtualMachineData :: TF.Data TF.VSphere (VirtualMachineData s)
+virtualMachineData :: TF.DataSource TF.VSphere (VirtualMachineData s)
 virtualMachineData =
-    TF.newData "vsphere_virtual_machine" $
+    TF.newDataSource "vsphere_virtual_machine" $
         VirtualMachineData {
               _datacenter_id = TF.Nil
             , _name = TF.Nil
             , _scsi_controller_scan_count = TF.Nil
             }
 
-{- | The @vsphere_vmfs_disks@ VSphere data.
+{- | The @vsphere_vmfs_disks@ VSphere datasource.
 
 The @vsphere_vmfs_disks@ data source can be used to discover the storage
 devices available on an ESXi host. This data source can be combined with the
@@ -543,9 +543,9 @@ instance HasRescan (VmfsDisksData s) s Text where
 
 instance HasComputedDisks (VmfsDisksData s) Text
 
-vmfsDisksData :: TF.Data TF.VSphere (VmfsDisksData s)
+vmfsDisksData :: TF.DataSource TF.VSphere (VmfsDisksData s)
 vmfsDisksData =
-    TF.newData "vsphere_vmfs_disks" $
+    TF.newDataSource "vsphere_vmfs_disks" $
         VmfsDisksData {
               _filter = TF.Nil
             , _host_system_id = TF.Nil
@@ -555,43 +555,43 @@ vmfsDisksData =
 class HasCategoryId a s b | a -> s b where
     categoryId :: Lens' a (TF.Attribute s b)
 
-instance HasCategoryId a s b => HasCategoryId (TF.Data p a) s b where
+instance HasCategoryId a s b => HasCategoryId (TF.DataSource p a) s b where
     categoryId = TF.configuration . categoryId
 
 class HasDatacenterId a s b | a -> s b where
     datacenterId :: Lens' a (TF.Attribute s b)
 
-instance HasDatacenterId a s b => HasDatacenterId (TF.Data p a) s b where
+instance HasDatacenterId a s b => HasDatacenterId (TF.DataSource p a) s b where
     datacenterId = TF.configuration . datacenterId
 
 class HasFilter a s b | a -> s b where
     filter :: Lens' a (TF.Attribute s b)
 
-instance HasFilter a s b => HasFilter (TF.Data p a) s b where
+instance HasFilter a s b => HasFilter (TF.DataSource p a) s b where
     filter = TF.configuration . filter
 
 class HasHostSystemId a s b | a -> s b where
     hostSystemId :: Lens' a (TF.Attribute s b)
 
-instance HasHostSystemId a s b => HasHostSystemId (TF.Data p a) s b where
+instance HasHostSystemId a s b => HasHostSystemId (TF.DataSource p a) s b where
     hostSystemId = TF.configuration . hostSystemId
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasRescan a s b | a -> s b where
     rescan :: Lens' a (TF.Attribute s b)
 
-instance HasRescan a s b => HasRescan (TF.Data p a) s b where
+instance HasRescan a s b => HasRescan (TF.DataSource p a) s b where
     rescan = TF.configuration . rescan
 
 class HasScsiControllerScanCount a s b | a -> s b where
     scsiControllerScanCount :: Lens' a (TF.Attribute s b)
 
-instance HasScsiControllerScanCount a s b => HasScsiControllerScanCount (TF.Data p a) s b where
+instance HasScsiControllerScanCount a s b => HasScsiControllerScanCount (TF.DataSource p a) s b where
     scsiControllerScanCount = TF.configuration . scsiControllerScanCount
 
 class HasComputedAlternateGuestName a b | a -> b where

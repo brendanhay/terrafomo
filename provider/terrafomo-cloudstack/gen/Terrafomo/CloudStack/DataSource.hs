@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.CloudStack.Data
+-- Module      : Terrafomo.CloudStack.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.CloudStack.Data
+module Terrafomo.CloudStack.DataSource
     (
     -- * Types
       TemplateData (..)
@@ -59,14 +59,14 @@ import qualified Numeric.Natural               as TF
 import qualified Terrafomo.Attribute           as TF
 import qualified Terrafomo.CloudStack.Provider as TF
 import qualified Terrafomo.CloudStack.Types    as TF
-import qualified Terrafomo.Data                as TF
+import qualified Terrafomo.DataSource          as TF
 import qualified Terrafomo.HCL                 as TF
 import qualified Terrafomo.IP                  as TF
 import qualified Terrafomo.Meta                as TF
 import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Resource            as TF
 
-{- | The @cloudstack_template@ CloudStack data.
+{- | The @cloudstack_template@ CloudStack datasource.
 
 Use this datasource to get the ID of a template for use in other resources.
 -}
@@ -111,9 +111,9 @@ instance HasComputedSize (TemplateData s) Text
 
 instance HasComputedTags (TemplateData s) Text
 
-templateData :: TF.Data TF.CloudStack (TemplateData s)
+templateData :: TF.DataSource TF.CloudStack (TemplateData s)
 templateData =
-    TF.newData "cloudstack_template" $
+    TF.newDataSource "cloudstack_template" $
         TemplateData {
               _filter = TF.Nil
             , _template_filter = TF.Nil
@@ -122,13 +122,13 @@ templateData =
 class HasFilter a s b | a -> s b where
     filter :: Lens' a (TF.Attribute s b)
 
-instance HasFilter a s b => HasFilter (TF.Data p a) s b where
+instance HasFilter a s b => HasFilter (TF.DataSource p a) s b where
     filter = TF.configuration . filter
 
 class HasTemplateFilter a s b | a -> s b where
     templateFilter :: Lens' a (TF.Attribute s b)
 
-instance HasTemplateFilter a s b => HasTemplateFilter (TF.Data p a) s b where
+instance HasTemplateFilter a s b => HasTemplateFilter (TF.DataSource p a) s b where
     templateFilter = TF.configuration . templateFilter
 
 class HasComputedAccount a b | a -> b where

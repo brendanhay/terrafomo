@@ -15,14 +15,14 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
--- Module      : Terrafomo.Ignition.Data
+-- Module      : Terrafomo.Ignition.DataSource
 -- Copyright   : (c) 2017 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Ignition.Data
+module Terrafomo.Ignition.DataSource
     (
     -- * Types
       ConfigData (..)
@@ -120,7 +120,7 @@ import qualified Data.Word                   as TF
 import qualified GHC.Base                    as TF
 import qualified Numeric.Natural             as TF
 import qualified Terrafomo.Attribute         as TF
-import qualified Terrafomo.Data              as TF
+import qualified Terrafomo.DataSource        as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.Ignition.Provider as TF
 import qualified Terrafomo.Ignition.Types    as TF
@@ -129,7 +129,7 @@ import qualified Terrafomo.Meta              as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Resource          as TF
 
-{- | The @ignition_config@ Ignition data.
+{- | The @ignition_config@ Ignition datasource.
 
 Renders an ignition configuration as JSON. It  contains all the disks,
 partitions, arrays, filesystems, files, users, groups and units.
@@ -239,9 +239,9 @@ instance HasUsers (ConfigData s) s Text where
 
 instance HasComputedRendered (ConfigData s) Text
 
-configData :: TF.Data TF.Ignition (ConfigData s)
+configData :: TF.DataSource TF.Ignition (ConfigData s)
 configData =
-    TF.newData "ignition_config" $
+    TF.newDataSource "ignition_config" $
         ConfigData {
               _append = TF.Nil
             , _arrays = TF.Nil
@@ -257,7 +257,7 @@ configData =
             , _users = TF.Nil
             }
 
-{- | The @ignition_directory@ Ignition data.
+{- | The @ignition_directory@ Ignition datasource.
 
 Describes a directory to be created in a particular filesystem.
 -}
@@ -310,9 +310,9 @@ instance HasUid (DirectoryData s) s Text where
 
 instance HasComputedId (DirectoryData s) Text
 
-directoryData :: TF.Data TF.Ignition (DirectoryData s)
+directoryData :: TF.DataSource TF.Ignition (DirectoryData s)
 directoryData =
-    TF.newData "ignition_directory" $
+    TF.newDataSource "ignition_directory" $
         DirectoryData {
               _filesystem = TF.Nil
             , _gid = TF.Nil
@@ -321,7 +321,7 @@ directoryData =
             , _uid = TF.Nil
             }
 
-{- | The @ignition_disk@ Ignition data.
+{- | The @ignition_disk@ Ignition datasource.
 
 Describes the desired state of a system’s disk.
 -}
@@ -358,16 +358,16 @@ instance HasWipeTable (DiskData s) s Text where
 
 instance HasComputedId (DiskData s) Text
 
-diskData :: TF.Data TF.Ignition (DiskData s)
+diskData :: TF.DataSource TF.Ignition (DiskData s)
 diskData =
-    TF.newData "ignition_disk" $
+    TF.newDataSource "ignition_disk" $
         DiskData {
               _device = TF.Nil
             , _partition = TF.Nil
             , _wipe_table = TF.Nil
             }
 
-{- | The @ignition_file@ Ignition data.
+{- | The @ignition_file@ Ignition datasource.
 
 Describes a file to be written in a particular filesystem.
 -}
@@ -436,9 +436,9 @@ instance HasUid (FileData s) s Text where
 
 instance HasComputedId (FileData s) Text
 
-fileData :: TF.Data TF.Ignition (FileData s)
+fileData :: TF.DataSource TF.Ignition (FileData s)
 fileData =
-    TF.newData "ignition_file" $
+    TF.newDataSource "ignition_file" $
         FileData {
               _content = TF.Nil
             , _filesystem = TF.Nil
@@ -449,7 +449,7 @@ fileData =
             , _uid = TF.Nil
             }
 
-{- | The @ignition_filesystem@ Ignition data.
+{- | The @ignition_filesystem@ Ignition datasource.
 
 Describes the desired state of a the system’s filesystems to be configured
 and/or used with the ignition_file resource.
@@ -487,16 +487,16 @@ instance HasPath (FilesystemData s) s Text where
 
 instance HasComputedId (FilesystemData s) Text
 
-filesystemData :: TF.Data TF.Ignition (FilesystemData s)
+filesystemData :: TF.DataSource TF.Ignition (FilesystemData s)
 filesystemData =
-    TF.newData "ignition_filesystem" $
+    TF.newDataSource "ignition_filesystem" $
         FilesystemData {
               _mount = TF.Nil
             , _name = TF.Nil
             , _path = TF.Nil
             }
 
-{- | The @ignition_group@ Ignition data.
+{- | The @ignition_group@ Ignition datasource.
 
 Describes the desired group additions to the passwd database.
 -}
@@ -533,16 +533,16 @@ instance HasPasswordHash (GroupData s) s Text where
 
 instance HasComputedId (GroupData s) Text
 
-groupData :: TF.Data TF.Ignition (GroupData s)
+groupData :: TF.DataSource TF.Ignition (GroupData s)
 groupData =
-    TF.newData "ignition_group" $
+    TF.newDataSource "ignition_group" $
         GroupData {
               _gid = TF.Nil
             , _name = TF.Nil
             , _password_hash = TF.Nil
             }
 
-{- | The @ignition_link@ Ignition data.
+{- | The @ignition_link@ Ignition datasource.
 
 Describes a link to be created in a particular filesystem.
 -}
@@ -603,9 +603,9 @@ instance HasUid (LinkData s) s Text where
 
 instance HasComputedId (LinkData s) Text
 
-linkData :: TF.Data TF.Ignition (LinkData s)
+linkData :: TF.DataSource TF.Ignition (LinkData s)
 linkData =
-    TF.newData "ignition_link" $
+    TF.newDataSource "ignition_link" $
         LinkData {
               _filesystem = TF.Nil
             , _gid = TF.Nil
@@ -615,7 +615,7 @@ linkData =
             , _uid = TF.Nil
             }
 
-{- | The @ignition_networkd_unit@ Ignition data.
+{- | The @ignition_networkd_unit@ Ignition datasource.
 
 Describes the desired state of the networkd units.
 -}
@@ -644,15 +644,15 @@ instance HasName (NetworkdUnitData s) s Text where
 
 instance HasComputedId (NetworkdUnitData s) Text
 
-networkdUnitData :: TF.Data TF.Ignition (NetworkdUnitData s)
+networkdUnitData :: TF.DataSource TF.Ignition (NetworkdUnitData s)
 networkdUnitData =
-    TF.newData "ignition_networkd_unit" $
+    TF.newDataSource "ignition_networkd_unit" $
         NetworkdUnitData {
               _content = TF.Nil
             , _name = TF.Nil
             }
 
-{- | The @ignition_raid@ Ignition data.
+{- | The @ignition_raid@ Ignition datasource.
 
 Describes the desired state of the system’s RAID.
 -}
@@ -697,9 +697,9 @@ instance HasSpares (RaidData s) s Text where
 
 instance HasComputedId (RaidData s) Text
 
-raidData :: TF.Data TF.Ignition (RaidData s)
+raidData :: TF.DataSource TF.Ignition (RaidData s)
 raidData =
-    TF.newData "ignition_raid" $
+    TF.newDataSource "ignition_raid" $
         RaidData {
               _devices = TF.Nil
             , _level = TF.Nil
@@ -707,7 +707,7 @@ raidData =
             , _spares = TF.Nil
             }
 
-{- | The @ignition_systemd_unit@ Ignition data.
+{- | The @ignition_systemd_unit@ Ignition datasource.
 
 Describes the desired state of the systemd units.
 -}
@@ -760,9 +760,9 @@ instance HasName (SystemdUnitData s) s Text where
 
 instance HasComputedId (SystemdUnitData s) Text
 
-systemdUnitData :: TF.Data TF.Ignition (SystemdUnitData s)
+systemdUnitData :: TF.DataSource TF.Ignition (SystemdUnitData s)
 systemdUnitData =
-    TF.newData "ignition_systemd_unit" $
+    TF.newDataSource "ignition_systemd_unit" $
         SystemdUnitData {
               _content = TF.Nil
             , _dropin = TF.Nil
@@ -771,7 +771,7 @@ systemdUnitData =
             , _name = TF.Nil
             }
 
-{- | The @ignition_user@ Ignition data.
+{- | The @ignition_user@ Ignition datasource.
 
 Describes the desired user additions to the passwd database.
 -}
@@ -888,9 +888,9 @@ instance HasUid (UserData s) s Text where
 
 instance HasComputedId (UserData s) Text
 
-userData :: TF.Data TF.Ignition (UserData s)
+userData :: TF.DataSource TF.Ignition (UserData s)
 userData =
-    TF.newData "ignition_user" $
+    TF.newDataSource "ignition_user" $
         UserData {
               _gecos = TF.Nil
             , _groups = TF.Nil
@@ -910,253 +910,253 @@ userData =
 class HasAppend a s b | a -> s b where
     append :: Lens' a (TF.Attribute s b)
 
-instance HasAppend a s b => HasAppend (TF.Data p a) s b where
+instance HasAppend a s b => HasAppend (TF.DataSource p a) s b where
     append = TF.configuration . append
 
 class HasArrays a s b | a -> s b where
     arrays :: Lens' a (TF.Attribute s b)
 
-instance HasArrays a s b => HasArrays (TF.Data p a) s b where
+instance HasArrays a s b => HasArrays (TF.DataSource p a) s b where
     arrays = TF.configuration . arrays
 
 class HasContent a s b | a -> s b where
     content :: Lens' a (TF.Attribute s b)
 
-instance HasContent a s b => HasContent (TF.Data p a) s b where
+instance HasContent a s b => HasContent (TF.DataSource p a) s b where
     content = TF.configuration . content
 
 class HasDevice a s b | a -> s b where
     device :: Lens' a (TF.Attribute s b)
 
-instance HasDevice a s b => HasDevice (TF.Data p a) s b where
+instance HasDevice a s b => HasDevice (TF.DataSource p a) s b where
     device = TF.configuration . device
 
 class HasDevices a s b | a -> s b where
     devices :: Lens' a (TF.Attribute s b)
 
-instance HasDevices a s b => HasDevices (TF.Data p a) s b where
+instance HasDevices a s b => HasDevices (TF.DataSource p a) s b where
     devices = TF.configuration . devices
 
 class HasDirectories a s b | a -> s b where
     directories :: Lens' a (TF.Attribute s b)
 
-instance HasDirectories a s b => HasDirectories (TF.Data p a) s b where
+instance HasDirectories a s b => HasDirectories (TF.DataSource p a) s b where
     directories = TF.configuration . directories
 
 class HasDisks a s b | a -> s b where
     disks :: Lens' a (TF.Attribute s b)
 
-instance HasDisks a s b => HasDisks (TF.Data p a) s b where
+instance HasDisks a s b => HasDisks (TF.DataSource p a) s b where
     disks = TF.configuration . disks
 
 class HasDropin a s b | a -> s b where
     dropin :: Lens' a (TF.Attribute s b)
 
-instance HasDropin a s b => HasDropin (TF.Data p a) s b where
+instance HasDropin a s b => HasDropin (TF.DataSource p a) s b where
     dropin = TF.configuration . dropin
 
 class HasEnabled a s b | a -> s b where
     enabled :: Lens' a (TF.Attribute s b)
 
-instance HasEnabled a s b => HasEnabled (TF.Data p a) s b where
+instance HasEnabled a s b => HasEnabled (TF.DataSource p a) s b where
     enabled = TF.configuration . enabled
 
 class HasFiles a s b | a -> s b where
     files :: Lens' a (TF.Attribute s b)
 
-instance HasFiles a s b => HasFiles (TF.Data p a) s b where
+instance HasFiles a s b => HasFiles (TF.DataSource p a) s b where
     files = TF.configuration . files
 
 class HasFilesystem a s b | a -> s b where
     filesystem :: Lens' a (TF.Attribute s b)
 
-instance HasFilesystem a s b => HasFilesystem (TF.Data p a) s b where
+instance HasFilesystem a s b => HasFilesystem (TF.DataSource p a) s b where
     filesystem = TF.configuration . filesystem
 
 class HasFilesystems a s b | a -> s b where
     filesystems :: Lens' a (TF.Attribute s b)
 
-instance HasFilesystems a s b => HasFilesystems (TF.Data p a) s b where
+instance HasFilesystems a s b => HasFilesystems (TF.DataSource p a) s b where
     filesystems = TF.configuration . filesystems
 
 class HasGecos a s b | a -> s b where
     gecos :: Lens' a (TF.Attribute s b)
 
-instance HasGecos a s b => HasGecos (TF.Data p a) s b where
+instance HasGecos a s b => HasGecos (TF.DataSource p a) s b where
     gecos = TF.configuration . gecos
 
 class HasGid a s b | a -> s b where
     gid :: Lens' a (TF.Attribute s b)
 
-instance HasGid a s b => HasGid (TF.Data p a) s b where
+instance HasGid a s b => HasGid (TF.DataSource p a) s b where
     gid = TF.configuration . gid
 
 class HasGroups a s b | a -> s b where
     groups :: Lens' a (TF.Attribute s b)
 
-instance HasGroups a s b => HasGroups (TF.Data p a) s b where
+instance HasGroups a s b => HasGroups (TF.DataSource p a) s b where
     groups = TF.configuration . groups
 
 class HasHard a s b | a -> s b where
     hard :: Lens' a (TF.Attribute s b)
 
-instance HasHard a s b => HasHard (TF.Data p a) s b where
+instance HasHard a s b => HasHard (TF.DataSource p a) s b where
     hard = TF.configuration . hard
 
 class HasHomeDir a s b | a -> s b where
     homeDir :: Lens' a (TF.Attribute s b)
 
-instance HasHomeDir a s b => HasHomeDir (TF.Data p a) s b where
+instance HasHomeDir a s b => HasHomeDir (TF.DataSource p a) s b where
     homeDir = TF.configuration . homeDir
 
 class HasLevel a s b | a -> s b where
     level :: Lens' a (TF.Attribute s b)
 
-instance HasLevel a s b => HasLevel (TF.Data p a) s b where
+instance HasLevel a s b => HasLevel (TF.DataSource p a) s b where
     level = TF.configuration . level
 
 class HasLinks a s b | a -> s b where
     links :: Lens' a (TF.Attribute s b)
 
-instance HasLinks a s b => HasLinks (TF.Data p a) s b where
+instance HasLinks a s b => HasLinks (TF.DataSource p a) s b where
     links = TF.configuration . links
 
 class HasMask a s b | a -> s b where
     mask :: Lens' a (TF.Attribute s b)
 
-instance HasMask a s b => HasMask (TF.Data p a) s b where
+instance HasMask a s b => HasMask (TF.DataSource p a) s b where
     mask = TF.configuration . mask
 
 class HasMode a s b | a -> s b where
     mode :: Lens' a (TF.Attribute s b)
 
-instance HasMode a s b => HasMode (TF.Data p a) s b where
+instance HasMode a s b => HasMode (TF.DataSource p a) s b where
     mode = TF.configuration . mode
 
 class HasMount a s b | a -> s b where
     mount :: Lens' a (TF.Attribute s b)
 
-instance HasMount a s b => HasMount (TF.Data p a) s b where
+instance HasMount a s b => HasMount (TF.DataSource p a) s b where
     mount = TF.configuration . mount
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Data p a) s b where
+instance HasName a s b => HasName (TF.DataSource p a) s b where
     name = TF.configuration . name
 
 class HasNetworkd a s b | a -> s b where
     networkd :: Lens' a (TF.Attribute s b)
 
-instance HasNetworkd a s b => HasNetworkd (TF.Data p a) s b where
+instance HasNetworkd a s b => HasNetworkd (TF.DataSource p a) s b where
     networkd = TF.configuration . networkd
 
 class HasNoCreateHome a s b | a -> s b where
     noCreateHome :: Lens' a (TF.Attribute s b)
 
-instance HasNoCreateHome a s b => HasNoCreateHome (TF.Data p a) s b where
+instance HasNoCreateHome a s b => HasNoCreateHome (TF.DataSource p a) s b where
     noCreateHome = TF.configuration . noCreateHome
 
 class HasNoLogInit a s b | a -> s b where
     noLogInit :: Lens' a (TF.Attribute s b)
 
-instance HasNoLogInit a s b => HasNoLogInit (TF.Data p a) s b where
+instance HasNoLogInit a s b => HasNoLogInit (TF.DataSource p a) s b where
     noLogInit = TF.configuration . noLogInit
 
 class HasNoUserGroup a s b | a -> s b where
     noUserGroup :: Lens' a (TF.Attribute s b)
 
-instance HasNoUserGroup a s b => HasNoUserGroup (TF.Data p a) s b where
+instance HasNoUserGroup a s b => HasNoUserGroup (TF.DataSource p a) s b where
     noUserGroup = TF.configuration . noUserGroup
 
 class HasPartition a s b | a -> s b where
     partition :: Lens' a (TF.Attribute s b)
 
-instance HasPartition a s b => HasPartition (TF.Data p a) s b where
+instance HasPartition a s b => HasPartition (TF.DataSource p a) s b where
     partition = TF.configuration . partition
 
 class HasPasswordHash a s b | a -> s b where
     passwordHash :: Lens' a (TF.Attribute s b)
 
-instance HasPasswordHash a s b => HasPasswordHash (TF.Data p a) s b where
+instance HasPasswordHash a s b => HasPasswordHash (TF.DataSource p a) s b where
     passwordHash = TF.configuration . passwordHash
 
 class HasPath a s b | a -> s b where
     path :: Lens' a (TF.Attribute s b)
 
-instance HasPath a s b => HasPath (TF.Data p a) s b where
+instance HasPath a s b => HasPath (TF.DataSource p a) s b where
     path = TF.configuration . path
 
 class HasPrimaryGroup a s b | a -> s b where
     primaryGroup :: Lens' a (TF.Attribute s b)
 
-instance HasPrimaryGroup a s b => HasPrimaryGroup (TF.Data p a) s b where
+instance HasPrimaryGroup a s b => HasPrimaryGroup (TF.DataSource p a) s b where
     primaryGroup = TF.configuration . primaryGroup
 
 class HasReplace a s b | a -> s b where
     replace :: Lens' a (TF.Attribute s b)
 
-instance HasReplace a s b => HasReplace (TF.Data p a) s b where
+instance HasReplace a s b => HasReplace (TF.DataSource p a) s b where
     replace = TF.configuration . replace
 
 class HasShell a s b | a -> s b where
     shell :: Lens' a (TF.Attribute s b)
 
-instance HasShell a s b => HasShell (TF.Data p a) s b where
+instance HasShell a s b => HasShell (TF.DataSource p a) s b where
     shell = TF.configuration . shell
 
 class HasSource a s b | a -> s b where
     source :: Lens' a (TF.Attribute s b)
 
-instance HasSource a s b => HasSource (TF.Data p a) s b where
+instance HasSource a s b => HasSource (TF.DataSource p a) s b where
     source = TF.configuration . source
 
 class HasSpares a s b | a -> s b where
     spares :: Lens' a (TF.Attribute s b)
 
-instance HasSpares a s b => HasSpares (TF.Data p a) s b where
+instance HasSpares a s b => HasSpares (TF.DataSource p a) s b where
     spares = TF.configuration . spares
 
 class HasSshAuthorizedKeys a s b | a -> s b where
     sshAuthorizedKeys :: Lens' a (TF.Attribute s b)
 
-instance HasSshAuthorizedKeys a s b => HasSshAuthorizedKeys (TF.Data p a) s b where
+instance HasSshAuthorizedKeys a s b => HasSshAuthorizedKeys (TF.DataSource p a) s b where
     sshAuthorizedKeys = TF.configuration . sshAuthorizedKeys
 
 class HasSystem a s b | a -> s b where
     system :: Lens' a (TF.Attribute s b)
 
-instance HasSystem a s b => HasSystem (TF.Data p a) s b where
+instance HasSystem a s b => HasSystem (TF.DataSource p a) s b where
     system = TF.configuration . system
 
 class HasSystemd a s b | a -> s b where
     systemd :: Lens' a (TF.Attribute s b)
 
-instance HasSystemd a s b => HasSystemd (TF.Data p a) s b where
+instance HasSystemd a s b => HasSystemd (TF.DataSource p a) s b where
     systemd = TF.configuration . systemd
 
 class HasTarget a s b | a -> s b where
     target :: Lens' a (TF.Attribute s b)
 
-instance HasTarget a s b => HasTarget (TF.Data p a) s b where
+instance HasTarget a s b => HasTarget (TF.DataSource p a) s b where
     target = TF.configuration . target
 
 class HasUid a s b | a -> s b where
     uid :: Lens' a (TF.Attribute s b)
 
-instance HasUid a s b => HasUid (TF.Data p a) s b where
+instance HasUid a s b => HasUid (TF.DataSource p a) s b where
     uid = TF.configuration . uid
 
 class HasUsers a s b | a -> s b where
     users :: Lens' a (TF.Attribute s b)
 
-instance HasUsers a s b => HasUsers (TF.Data p a) s b where
+instance HasUsers a s b => HasUsers (TF.DataSource p a) s b where
     users = TF.configuration . users
 
 class HasWipeTable a s b | a -> s b where
     wipeTable :: Lens' a (TF.Attribute s b)
 
-instance HasWipeTable a s b => HasWipeTable (TF.Data p a) s b where
+instance HasWipeTable a s b => HasWipeTable (TF.DataSource p a) s b where
     wipeTable = TF.configuration . wipeTable
 
 class HasComputedId a b | a -> b where
