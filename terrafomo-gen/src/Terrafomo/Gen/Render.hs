@@ -48,10 +48,8 @@ data Templates a = Templates
 package
     :: Templates EDE.Template
     -> Provider a
-    -> Bool -- ^ Any datasource module?
-    -> Bool -- ^ Any resource module?
     -> Either Text LText.Text
-package tmpls p d r =
+package tmpls p =
     render (packageTemplate tmpls)
         [ "provider" .= fmap Just p
         , "package"  .= providerPackage p

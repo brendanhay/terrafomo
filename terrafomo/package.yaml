@@ -34,7 +34,6 @@ library:
     - aeson
     - base       >= 4.9
     - containers
-    - dlist
     - formatting >= 6.2.5
     - hashable
     - microlens
@@ -43,5 +42,4 @@ library:
     - random
     - text
     - transformers
-    - vector
     - wl-pprint-text

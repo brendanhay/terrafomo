@@ -29,8 +29,8 @@ module Terrafomo
 
     -- ** Attributes
     , Attribute
-    , constant
-    , nil
+    , just
+    , nothing
 
     -- * Providers
     , IsProvider      (..)

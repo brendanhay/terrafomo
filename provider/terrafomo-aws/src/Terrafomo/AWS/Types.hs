@@ -26,6 +26,10 @@ module Terrafomo.AWS.Types
     , Region                (..)
     , Zone                  (..)
 
+    -- * EC2
+    , SecurityGroupType     (..)
+    , Protocol              (..)
+
     -- * S3
     , S3BucketVersioning    (..)
     , s3BucketVersioning
@@ -112,6 +116,32 @@ fzonesuf :: Format r (Zone -> r)
 fzonesuf =
     Format.later $ \(Zone _ suf) ->
         Format.bprint Format.char suf
+
+-- EC2
+
+data SecurityGroupType
+    = Ingress
+    | Egress
+      deriving (Show, Eq)
+
+instance HCL.ToHCL SecurityGroupType where
+    toHCL = HCL.string . \case
+        Ingress -> "ingress"
+        Egress  -> "egress"
+
+data Protocol
+    = ICMP
+    | TCP
+    | UDP
+    | AllProtocols
+      deriving (Show, Eq)
+
+instance HCL.ToHCL Protocol where
+    toHCL = HCL.string . \case
+        ICMP         -> "icmp"
+        TCP          -> "tcp"
+        UDP          -> "udp"
+        AllProtocols -> "-1"
 
 -- S3
 

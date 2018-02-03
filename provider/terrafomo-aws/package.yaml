@@ -23,8 +23,7 @@ library:
 
   exposed-modules:
     - Terrafomo.AWS
-    - Terrafomo.AWS.DataSource
-    - Terrafomo.AWS.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

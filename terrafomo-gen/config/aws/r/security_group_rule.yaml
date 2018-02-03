@@ -1,3 +1,7 @@
 arguments:
   _cidr_blocks:
     type: '[P.CIDR]'
+  _type':
+    type: 'P.SecurityGroupType'
+  _protocol:
+    type: 'P.Protocol'

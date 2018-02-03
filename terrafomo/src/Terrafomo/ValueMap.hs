@@ -6,28 +6,26 @@ module Terrafomo.ValueMap
     , values
     ) where
 
-import Data.DList (DList)
-import Data.Set   (Set)
+import Data.Set (Set)
 
-import qualified Data.DList    as DList
-import qualified Data.Set      as Set
-import qualified Terrafomo.HCL as HCL
+import qualified Data.Set as Set
 
-data ValueMap k = ValueMap
-    { keys   :: !(Set   k)
-    , values :: !(DList HCL.Value)
-    }
+data ValueMap k v = ValueMap !(Set k) ![v]
 
-empty :: Ord k => ValueMap k
+empty :: Ord k => ValueMap k v
 empty = ValueMap mempty mempty
+{-# INLINE empty #-}
 
-member :: Ord k => k -> ValueMap k -> Bool
-member k = Set.member k . keys
+member :: Ord k => k -> ValueMap k v -> Bool
+member k (ValueMap ks _) = Set.member k ks
+{-# INLINE member #-}
 
-insert :: Ord k => k -> HCL.Value -> ValueMap k -> Maybe (ValueMap k)
-insert k v m
+insert :: Ord k => k -> v -> ValueMap k v -> Maybe (ValueMap k v)
+insert k v m@(ValueMap ks vs)
     | member k m = Nothing
-    | otherwise  =
-        Just $! m { keys   = Set.insert k (keys m)
-                  , values = DList.snoc (values m) v
-                  }
+    | otherwise  = Just (ValueMap (Set.insert k ks) (v : vs))
+{-# INLINE insert #-}
+
+values :: ValueMap k v -> [v]
+values (ValueMap _ vs) = reverse vs
+{-# INLINE values #-}

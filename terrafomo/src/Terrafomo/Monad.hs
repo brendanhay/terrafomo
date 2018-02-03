@@ -34,10 +34,6 @@ module Terrafomo.Monad
     , resource
     , output
     , remote
-
-    -- * Attribute Values
-    , constant
-    , nil
     ) where
 
 import Control.Exception    (Exception)
@@ -64,7 +60,6 @@ import Terrafomo.RemoteState
 import Terrafomo.Source      (DataSource, Resource, Source (..))
 import Terrafomo.ValueMap    (ValueMap)
 
-import qualified Data.DList                   as DList
 import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
 import qualified Terrafomo.Format             as Format
@@ -107,12 +102,12 @@ newtype TerraformConfig = TerraformConfig
 -- | Provides key uniquness invariants and ordering of output statements.
 data TerraformState = UnsafeTerraformState
     { supply      :: !Int
-    , backend     :: !(Backend  HCL.Value)
-    , providers   :: !(ValueMap Key)
-    , remotes     :: !(ValueMap Key)
-    , datasources :: !(ValueMap Key)
-    , resources   :: !(ValueMap Key)
-    , outputs     :: !(ValueMap Name)
+    , backend     :: !(Backend HCL.Value)
+    , providers   :: !(ValueMap Key  HCL.Value)
+    , remotes     :: !(ValueMap Key  HCL.Value)
+    , datasources :: !(ValueMap Key  HCL.Value)
+    , resources   :: !(ValueMap Key  HCL.Value)
+    , outputs     :: !(ValueMap Name HCL.Value)
     }
 
 renderState :: TerraformState -> LText.Text
@@ -120,9 +115,8 @@ renderState s =
       PP.displayT
     . PP.renderPretty 0.4 100
     . HCL.renderHCL
-    . DList.toList
-    . DList.cons (HCL.toHCL (backend s))
-    $ DList.concat
+    . (HCL.toHCL (backend s) :)
+    $ concat
          [ VMap.values (providers   s)
          , VMap.values (remotes     s)
          , VMap.values (datasources s)
@@ -282,15 +276,7 @@ instance ( MonadTerraform s m
          , Monoid w
          ) => MonadTerraform s (Lazy.RWST r w s m)
 
--- Syntax
-
--- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.
-constant :: a -> Attribute s a
-constant = Constant
-
--- | Omit an attribute. Equivalent to 'Nothing'.
-nil :: Attribute s a
-nil = Nil
+-- Providers
 
 withProvider
     :: forall s m p a.
@@ -439,9 +425,9 @@ insertValue
     -- ^ The key.
     -> HCL.Value
     -- ^ The raw HCL value.
-    -> (TerraformState -> ValueMap k)
+    -> (TerraformState -> ValueMap k HCL.Value)
     -- ^ Get the affected value map from the state.
-    -> (ValueMap k -> TerraformState -> TerraformState)
+    -> (ValueMap k HCL.Value -> TerraformState -> TerraformState)
     -- ^ Modify the state with the updated value map.
     -> m Bool
 insertValue key value state update =

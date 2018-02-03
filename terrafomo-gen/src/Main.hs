@@ -276,7 +276,7 @@ renderPackage tmpls dir p d r = do
 
     createDirectory dir
 
-    hoistEither (Render.package tmpls p d r)
+    hoistEither (Render.package tmpls p)
         >>= scriptIO . LText.writeFile packageFile
 
     hoistEither (Render.main tmpls p d r)

@@ -127,7 +127,12 @@ schemaParser rules = do
               ) <|> pure mempty
 
     -- skip any non-headers
-    P.skipManyTill node (P.lookAhead (void heading <|> P.eof))
+    P.skipManyTill node
+        . P.try
+        $ P.lookAhead
+              ( P.try (void attrHeader)
+            <|> P.eof
+              )
 
     -- attribute name/help
     (Map.fromList -> schemaAttributes) <-
