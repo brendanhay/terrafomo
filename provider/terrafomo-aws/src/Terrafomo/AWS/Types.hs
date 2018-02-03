@@ -170,8 +170,8 @@ instance HasMfaDelete (S3BucketVersioning s) s Bool where
 
 s3BucketVersioning :: S3BucketVersioning s
 s3BucketVersioning = S3BucketVersioning
-    { _enabled    = just False
-    , _mfa_delete = just False
+    { _enabled    = constant False
+    , _mfa_delete = constant False
     }
 
 -- DynamoDB
@@ -252,9 +252,9 @@ instance Lens.HasValue (BeanstalkEnvSetting s) s Text where
 
 beanstalkEnvSetting :: BeanstalkEnvSetting s
 beanstalkEnvSetting = BeanstalkEnvSetting
-    { _namespace = nothing
-    , _name      = nothing
-    , _value     = nothing
+    { _namespace = nil
+    , _name      = nil
+    , _value     = nil
     }
 
 -- IAM
