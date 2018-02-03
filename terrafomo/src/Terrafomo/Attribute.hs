@@ -42,6 +42,7 @@ constant = Constant
 nil :: Attribute s a
 nil = Nil
 
+-- Generalized 'fromMaybe'.
 class IsoMaybe a b | a -> b where
     isoMaybe :: Maybe b -> a
 
@@ -52,6 +53,8 @@ instance IsoMaybe (Attribute s a) a where
     isoMaybe = \case
         Nothing -> Nil
         Just  x -> Constant x
+
+infixr 4 ?~
 
 -- For better or worse this overrides lens' (?~), but provides instances
 -- that allow the setter's target to be either 'Maybe` or 'Attribute'.
