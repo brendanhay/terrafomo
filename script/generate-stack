@@ -6,7 +6,7 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 libraries=( $(${dir}/list-packages) )
 
-for config in stack-*.yaml; do
+for config in stack*.yaml; do
     echo "Updating ${config}"
 
     sed -i -e '/# GENERATED/,/# END GENERATED/d' "${config}"
