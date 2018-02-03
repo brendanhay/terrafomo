@@ -165,7 +165,7 @@ runTerraform x name m =
 
     state =
         UnsafeTerraformState
-            { supply      = 0
+            { supply      = 10000
             , backend     = HCL.toHCL <$> x
             , providers   = VMap.empty
             , remotes     = VMap.empty
@@ -379,13 +379,15 @@ output
 output attr = do
     liftTerraform $ do
         b    <- MTL.gets backend
-        name <- case attr of
-            Computed k v ->
-                pure $! nformat (Format.stext % "_" % fname) (Hash.base16 k) v
-            _            ->
-                getNextName
+        next <- getNextName
 
-        let out   = Output b name attr
+        let name = case attr of
+              Computed k v ->
+                  nformat (fname % "_" % ftype % "_" % fname) next (keyType k) v
+              _            ->
+                  next
+
+            out   = Output b name attr
             value = HCL.toHCL out
 
         unique <-
@@ -442,5 +444,5 @@ getNextName :: MonadTerraform s m => m Name
 getNextName =
     liftTerraform $ do
         MTL.modify' (\s -> s { supply = supply s + 1 })
-        nformat (Format.stext) . Hash.human
+        nformat (Format.stext) . Hash.hashid
             <$> MTL.gets supply
