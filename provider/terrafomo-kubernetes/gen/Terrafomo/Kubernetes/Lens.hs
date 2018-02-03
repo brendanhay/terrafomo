@@ -33,6 +33,7 @@ module Terrafomo.Kubernetes.Lens
     , HasWaitUntilBound (..)
 
     -- ** Computed Attributes
+    , HasComputedDefaultSecretName (..)
     ) where
 
 import GHC.Base ((.))
@@ -97,3 +98,9 @@ class HasWaitUntilBound a s b | a -> s b where
 
 instance HasWaitUntilBound a s b => HasWaitUntilBound (TF.Source l p a) s b where
     waitUntilBound = TF.configuration . waitUntilBound
+
+class HasComputedDefaultSecretName a b | a -> b where
+    computedDefaultSecretName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDefaultSecretName =
+        to (\x -> TF.Computed (TF.referenceKey x) "default_secret_name")

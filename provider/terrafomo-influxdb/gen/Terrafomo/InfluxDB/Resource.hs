@@ -91,17 +91,18 @@ instance TF.ToHCL (ContinuousQueryResource s) where
 instance P.HasDatabase (ContinuousQueryResource s) s Text where
     database =
         lens (_database :: ContinuousQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _database = a } :: ContinuousQueryResource s)
+             (\s a -> s { _database = a } :: ContinuousQueryResource s)
 
 instance P.HasName (ContinuousQueryResource s) s Text where
     name =
         lens (_name :: ContinuousQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ContinuousQueryResource s)
+             (\s a -> s { _name = a } :: ContinuousQueryResource s)
 
 instance P.HasQuery (ContinuousQueryResource s) s Text where
     query =
         lens (_query :: ContinuousQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _query = a } :: ContinuousQueryResource s)
+             (\s a -> s { _query = a } :: ContinuousQueryResource s)
+
 
 continuousQueryResource :: TF.Resource P.InfluxDB (ContinuousQueryResource s)
 continuousQueryResource =
@@ -129,7 +130,8 @@ instance TF.ToHCL (DatabaseResource s) where
 instance P.HasName (DatabaseResource s) s Text where
     name =
         lens (_name :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatabaseResource s)
+             (\s a -> s { _name = a } :: DatabaseResource s)
+
 
 databaseResource :: TF.Resource P.InfluxDB (DatabaseResource s)
 databaseResource =
@@ -164,22 +166,22 @@ instance TF.ToHCL (UserResource s) where
 instance P.HasAdmin (UserResource s) s Text where
     admin =
         lens (_admin :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _admin = a } :: UserResource s)
+             (\s a -> s { _admin = a } :: UserResource s)
 
 instance P.HasGrant (UserResource s) s Text where
     grant =
         lens (_grant :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _grant = a } :: UserResource s)
+             (\s a -> s { _grant = a } :: UserResource s)
 
 instance P.HasName (UserResource s) s Text where
     name =
         lens (_name :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: UserResource s)
+             (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasPassword (UserResource s) s Text where
     password =
         lens (_password :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _password = a } :: UserResource s)
+             (\s a -> s { _password = a } :: UserResource s)
 
 instance P.HasComputedAdmin (UserResource s) Text
 

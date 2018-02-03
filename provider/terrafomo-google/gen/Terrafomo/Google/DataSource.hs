@@ -215,12 +215,12 @@ instance TF.ToHCL (ActiveFolderData s) where
 instance P.HasDisplayName (ActiveFolderData s) s Text where
     displayName =
         lens (_display_name :: ActiveFolderData s -> TF.Attribute s Text)
-            (\s a -> s { _display_name = a } :: ActiveFolderData s)
+             (\s a -> s { _display_name = a } :: ActiveFolderData s)
 
 instance P.HasParent (ActiveFolderData s) s Text where
     parent =
         lens (_parent :: ActiveFolderData s -> TF.Attribute s Text)
-            (\s a -> s { _parent = a } :: ActiveFolderData s)
+             (\s a -> s { _parent = a } :: ActiveFolderData s)
 
 instance P.HasComputedName (ActiveFolderData s) Text
 
@@ -255,22 +255,20 @@ instance TF.ToHCL (BillingAccountData s) where
 instance P.HasBillingAccount (BillingAccountData s) s Text where
     billingAccount =
         lens (_billing_account :: BillingAccountData s -> TF.Attribute s Text)
-            (\s a -> s { _billing_account = a } :: BillingAccountData s)
+             (\s a -> s { _billing_account = a } :: BillingAccountData s)
 
 instance P.HasDisplayName (BillingAccountData s) s Text where
     displayName =
         lens (_display_name :: BillingAccountData s -> TF.Attribute s Text)
-            (\s a -> s { _display_name = a } :: BillingAccountData s)
+             (\s a -> s { _display_name = a } :: BillingAccountData s)
 
 instance P.HasOpen (BillingAccountData s) s Text where
     open =
         lens (_open :: BillingAccountData s -> TF.Attribute s Text)
-            (\s a -> s { _open = a } :: BillingAccountData s)
+             (\s a -> s { _open = a } :: BillingAccountData s)
 
 instance P.HasComputedId (BillingAccountData s) Text
-
 instance P.HasComputedName (BillingAccountData s) Text
-
 instance P.HasComputedProjectIds (BillingAccountData s) Text
 
 billingAccountData :: TF.DataSource P.Google (BillingAccountData s)
@@ -303,12 +301,13 @@ instance TF.ToHCL (ClientConfigData s) where
 instance P.HasProject (ClientConfigData s) s Text where
     project =
         lens (_project :: ClientConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ClientConfigData s)
+             (\s a -> s { _project = a } :: ClientConfigData s)
 
 instance P.HasRegion (ClientConfigData s) s Text where
     region =
         lens (_region :: ClientConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: ClientConfigData s)
+             (\s a -> s { _region = a } :: ClientConfigData s)
+
 
 clientConfigData :: TF.DataSource P.Google (ClientConfigData s)
 clientConfigData =
@@ -343,40 +342,29 @@ instance TF.ToHCL (CloudfunctionsFunctionData s) where
 instance P.HasName (CloudfunctionsFunctionData s) s Text where
     name =
         lens (_name :: CloudfunctionsFunctionData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CloudfunctionsFunctionData s)
+             (\s a -> s { _name = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasProject (CloudfunctionsFunctionData s) s Text where
     project =
         lens (_project :: CloudfunctionsFunctionData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: CloudfunctionsFunctionData s)
+             (\s a -> s { _project = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasRegion (CloudfunctionsFunctionData s) s Text where
     region =
         lens (_region :: CloudfunctionsFunctionData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: CloudfunctionsFunctionData s)
+             (\s a -> s { _region = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasComputedAvailableMemoryMb (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedDescription (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedEntryPoint (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedHttpsTriggerUrl (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedLabels (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedName (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedSourceArchiveBucket (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedSourceArchiveObject (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedTimeout (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedTriggerBucket (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedTriggerHttp (CloudfunctionsFunctionData s) Text
-
 instance P.HasComputedTriggerTopic (CloudfunctionsFunctionData s) Text
 
 cloudfunctionsFunctionData :: TF.DataSource P.Google (CloudfunctionsFunctionData s)
@@ -414,22 +402,20 @@ instance TF.ToHCL (ComputeAddressData s) where
 instance P.HasName (ComputeAddressData s) s Text where
     name =
         lens (_name :: ComputeAddressData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeAddressData s)
+             (\s a -> s { _name = a } :: ComputeAddressData s)
 
 instance P.HasProject (ComputeAddressData s) s Text where
     project =
         lens (_project :: ComputeAddressData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ComputeAddressData s)
+             (\s a -> s { _project = a } :: ComputeAddressData s)
 
 instance P.HasRegion (ComputeAddressData s) s Text where
     region =
         lens (_region :: ComputeAddressData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: ComputeAddressData s)
+             (\s a -> s { _region = a } :: ComputeAddressData s)
 
 instance P.HasComputedAddress (ComputeAddressData s) Text
-
 instance P.HasComputedSelfLink (ComputeAddressData s) Text
-
 instance P.HasComputedStatus (ComputeAddressData s) Text
 
 computeAddressData :: TF.DataSource P.Google (ComputeAddressData s)
@@ -465,17 +451,15 @@ instance TF.ToHCL (ComputeGlobalAddressData s) where
 instance P.HasName (ComputeGlobalAddressData s) s Text where
     name =
         lens (_name :: ComputeGlobalAddressData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeGlobalAddressData s)
+             (\s a -> s { _name = a } :: ComputeGlobalAddressData s)
 
 instance P.HasProject (ComputeGlobalAddressData s) s Text where
     project =
         lens (_project :: ComputeGlobalAddressData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ComputeGlobalAddressData s)
+             (\s a -> s { _project = a } :: ComputeGlobalAddressData s)
 
 instance P.HasComputedAddress (ComputeGlobalAddressData s) Text
-
 instance P.HasComputedSelfLink (ComputeGlobalAddressData s) Text
-
 instance P.HasComputedStatus (ComputeGlobalAddressData s) Text
 
 computeGlobalAddressData :: TF.DataSource P.Google (ComputeGlobalAddressData s)
@@ -513,45 +497,29 @@ instance TF.ToHCL (ComputeImageData s) where
 instance P.HasName (ComputeImageData s) s Text where
     name =
         lens (_name :: ComputeImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeImageData s)
+             (\s a -> s { _name = a } :: ComputeImageData s)
 
 instance P.HasProject (ComputeImageData s) s Text where
     project =
         lens (_project :: ComputeImageData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ComputeImageData s)
+             (\s a -> s { _project = a } :: ComputeImageData s)
 
 instance P.HasComputedArchiveSizeBytes (ComputeImageData s) Text
-
 instance P.HasComputedCreationTimestamp (ComputeImageData s) Text
-
 instance P.HasComputedDescription (ComputeImageData s) Text
-
 instance P.HasComputedDiskSizeGb (ComputeImageData s) Text
-
 instance P.HasComputedFamily' (ComputeImageData s) Text
-
 instance P.HasComputedImageEncryptionKeySha256 (ComputeImageData s) Text
-
 instance P.HasComputedImageId (ComputeImageData s) Text
-
 instance P.HasComputedLabelFingerprint (ComputeImageData s) Text
-
 instance P.HasComputedLabels (ComputeImageData s) Text
-
 instance P.HasComputedLicenses (ComputeImageData s) Text
-
 instance P.HasComputedName (ComputeImageData s) Text
-
 instance P.HasComputedSelfLink (ComputeImageData s) Text
-
 instance P.HasComputedSourceDisk (ComputeImageData s) Text
-
 instance P.HasComputedSourceDiskEncryptionKeySha256 (ComputeImageData s) Text
-
 instance P.HasComputedSourceDiskId (ComputeImageData s) Text
-
 instance P.HasComputedSourceImageId (ComputeImageData s) Text
-
 instance P.HasComputedStatus (ComputeImageData s) Text
 
 computeImageData :: TF.DataSource P.Google (ComputeImageData s)
@@ -587,28 +555,23 @@ instance TF.ToHCL (ComputeInstanceGroupData s) where
 instance P.HasName (ComputeInstanceGroupData s) s Text where
     name =
         lens (_name :: ComputeInstanceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeInstanceGroupData s)
+             (\s a -> s { _name = a } :: ComputeInstanceGroupData s)
 
 instance P.HasProject (ComputeInstanceGroupData s) s Text where
     project =
         lens (_project :: ComputeInstanceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ComputeInstanceGroupData s)
+             (\s a -> s { _project = a } :: ComputeInstanceGroupData s)
 
 instance P.HasZone (ComputeInstanceGroupData s) s Text where
     zone =
         lens (_zone :: ComputeInstanceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: ComputeInstanceGroupData s)
+             (\s a -> s { _zone = a } :: ComputeInstanceGroupData s)
 
 instance P.HasComputedDescription (ComputeInstanceGroupData s) Text
-
 instance P.HasComputedInstances (ComputeInstanceGroupData s) Text
-
 instance P.HasComputedNamedPort (ComputeInstanceGroupData s) Text
-
 instance P.HasComputedNetwork (ComputeInstanceGroupData s) Text
-
 instance P.HasComputedSelfLink (ComputeInstanceGroupData s) Text
-
 instance P.HasComputedSize (ComputeInstanceGroupData s) Text
 
 computeInstanceGroupData :: TF.DataSource P.Google (ComputeInstanceGroupData s)
@@ -641,12 +604,13 @@ instance TF.ToHCL (ComputeLbIpRangesData s) where
 instance P.HasHttpSslTcpInternal (ComputeLbIpRangesData s) s Text where
     httpSslTcpInternal =
         lens (_http_ssl_tcp_internal :: ComputeLbIpRangesData s -> TF.Attribute s Text)
-            (\s a -> s { _http_ssl_tcp_internal = a } :: ComputeLbIpRangesData s)
+             (\s a -> s { _http_ssl_tcp_internal = a } :: ComputeLbIpRangesData s)
 
 instance P.HasNetwork (ComputeLbIpRangesData s) s Text where
     network =
         lens (_network :: ComputeLbIpRangesData s -> TF.Attribute s Text)
-            (\s a -> s { _network = a } :: ComputeLbIpRangesData s)
+             (\s a -> s { _network = a } :: ComputeLbIpRangesData s)
+
 
 computeLbIpRangesData :: TF.DataSource P.Google (ComputeLbIpRangesData s)
 computeLbIpRangesData =
@@ -676,21 +640,17 @@ instance TF.ToHCL (ComputeNetworkData s) where
 instance P.HasName (ComputeNetworkData s) s Text where
     name =
         lens (_name :: ComputeNetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeNetworkData s)
+             (\s a -> s { _name = a } :: ComputeNetworkData s)
 
 instance P.HasProject (ComputeNetworkData s) s Text where
     project =
         lens (_project :: ComputeNetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ComputeNetworkData s)
+             (\s a -> s { _project = a } :: ComputeNetworkData s)
 
 instance P.HasComputedDescription (ComputeNetworkData s) Text
-
 instance P.HasComputedGatewayIpv4 (ComputeNetworkData s) Text
-
 instance P.HasComputedNetwork (ComputeNetworkData s) Text
-
 instance P.HasComputedSelfLink (ComputeNetworkData s) Text
-
 instance P.HasComputedSubnetworksSelfLinks (ComputeNetworkData s) Text
 
 computeNetworkData :: TF.DataSource P.Google (ComputeNetworkData s)
@@ -731,25 +691,24 @@ instance TF.ToHCL (ComputeRegionInstanceGroupData s) where
 instance P.HasName (ComputeRegionInstanceGroupData s) s Text where
     name =
         lens (_name :: ComputeRegionInstanceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeRegionInstanceGroupData s)
+             (\s a -> s { _name = a } :: ComputeRegionInstanceGroupData s)
 
 instance P.HasProject (ComputeRegionInstanceGroupData s) s Text where
     project =
         lens (_project :: ComputeRegionInstanceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ComputeRegionInstanceGroupData s)
+             (\s a -> s { _project = a } :: ComputeRegionInstanceGroupData s)
 
 instance P.HasRegion (ComputeRegionInstanceGroupData s) s Text where
     region =
         lens (_region :: ComputeRegionInstanceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: ComputeRegionInstanceGroupData s)
+             (\s a -> s { _region = a } :: ComputeRegionInstanceGroupData s)
 
 instance P.HasSelfLink (ComputeRegionInstanceGroupData s) s Text where
     selfLink =
         lens (_self_link :: ComputeRegionInstanceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _self_link = a } :: ComputeRegionInstanceGroupData s)
+             (\s a -> s { _self_link = a } :: ComputeRegionInstanceGroupData s)
 
 instance P.HasComputedInstances (ComputeRegionInstanceGroupData s) Text
-
 instance P.HasComputedSize (ComputeRegionInstanceGroupData s) Text
 
 computeRegionInstanceGroupData :: TF.DataSource P.Google (ComputeRegionInstanceGroupData s)
@@ -785,30 +744,24 @@ instance TF.ToHCL (ComputeSubnetworkData s) where
 instance P.HasName (ComputeSubnetworkData s) s Text where
     name =
         lens (_name :: ComputeSubnetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeSubnetworkData s)
+             (\s a -> s { _name = a } :: ComputeSubnetworkData s)
 
 instance P.HasProject (ComputeSubnetworkData s) s Text where
     project =
         lens (_project :: ComputeSubnetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ComputeSubnetworkData s)
+             (\s a -> s { _project = a } :: ComputeSubnetworkData s)
 
 instance P.HasRegion (ComputeSubnetworkData s) s Text where
     region =
         lens (_region :: ComputeSubnetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: ComputeSubnetworkData s)
+             (\s a -> s { _region = a } :: ComputeSubnetworkData s)
 
 instance P.HasComputedDescription (ComputeSubnetworkData s) Text
-
 instance P.HasComputedGatewayAddress (ComputeSubnetworkData s) Text
-
 instance P.HasComputedIpCidrRange (ComputeSubnetworkData s) Text
-
 instance P.HasComputedNetwork (ComputeSubnetworkData s) Text
-
 instance P.HasComputedPrivateIpGoogleAccess (ComputeSubnetworkData s) Text
-
 instance P.HasComputedSecondaryIpRange (ComputeSubnetworkData s) Text
-
 instance P.HasComputedSelfLink (ComputeSubnetworkData s) Text
 
 computeSubnetworkData :: TF.DataSource P.Google (ComputeSubnetworkData s)
@@ -843,12 +796,12 @@ instance TF.ToHCL (ComputeZonesData s) where
 instance P.HasRegion (ComputeZonesData s) s Text where
     region =
         lens (_region :: ComputeZonesData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: ComputeZonesData s)
+             (\s a -> s { _region = a } :: ComputeZonesData s)
 
 instance P.HasStatus (ComputeZonesData s) s Text where
     status =
         lens (_status :: ComputeZonesData s -> TF.Attribute s Text)
-            (\s a -> s { _status = a } :: ComputeZonesData s)
+             (\s a -> s { _status = a } :: ComputeZonesData s)
 
 instance P.HasComputedNames (ComputeZonesData s) Text
 
@@ -883,17 +836,18 @@ instance TF.ToHCL (ContainerClusterData s) where
 instance P.HasName (ContainerClusterData s) s Text where
     name =
         lens (_name :: ContainerClusterData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ContainerClusterData s)
+             (\s a -> s { _name = a } :: ContainerClusterData s)
 
 instance P.HasProject (ContainerClusterData s) s Text where
     project =
         lens (_project :: ContainerClusterData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ContainerClusterData s)
+             (\s a -> s { _project = a } :: ContainerClusterData s)
 
 instance P.HasZone (ContainerClusterData s) s Text where
     zone =
         lens (_zone :: ContainerClusterData s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: ContainerClusterData s)
+             (\s a -> s { _zone = a } :: ContainerClusterData s)
+
 
 containerClusterData :: TF.DataSource P.Google (ContainerClusterData s)
 containerClusterData =
@@ -925,19 +879,16 @@ instance TF.ToHCL (ContainerEngineVersionsData s) where
 instance P.HasProject (ContainerEngineVersionsData s) s Text where
     project =
         lens (_project :: ContainerEngineVersionsData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ContainerEngineVersionsData s)
+             (\s a -> s { _project = a } :: ContainerEngineVersionsData s)
 
 instance P.HasZone (ContainerEngineVersionsData s) s Text where
     zone =
         lens (_zone :: ContainerEngineVersionsData s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
+             (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
 
 instance P.HasComputedLatestMasterVersion (ContainerEngineVersionsData s) Text
-
 instance P.HasComputedLatestNodeVersion (ContainerEngineVersionsData s) Text
-
 instance P.HasComputedValidMasterVersions (ContainerEngineVersionsData s) Text
-
 instance P.HasComputedValidNodeVersions (ContainerEngineVersionsData s) Text
 
 containerEngineVersionsData :: TF.DataSource P.Google (ContainerEngineVersionsData s)
@@ -981,27 +932,27 @@ instance TF.ToHCL (ContainerRegistryImageData s) where
 instance P.HasDigest (ContainerRegistryImageData s) s Text where
     digest =
         lens (_digest :: ContainerRegistryImageData s -> TF.Attribute s Text)
-            (\s a -> s { _digest = a } :: ContainerRegistryImageData s)
+             (\s a -> s { _digest = a } :: ContainerRegistryImageData s)
 
 instance P.HasName (ContainerRegistryImageData s) s Text where
     name =
         lens (_name :: ContainerRegistryImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ContainerRegistryImageData s)
+             (\s a -> s { _name = a } :: ContainerRegistryImageData s)
 
 instance P.HasProject (ContainerRegistryImageData s) s Text where
     project =
         lens (_project :: ContainerRegistryImageData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ContainerRegistryImageData s)
+             (\s a -> s { _project = a } :: ContainerRegistryImageData s)
 
 instance P.HasRegion (ContainerRegistryImageData s) s Text where
     region =
         lens (_region :: ContainerRegistryImageData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: ContainerRegistryImageData s)
+             (\s a -> s { _region = a } :: ContainerRegistryImageData s)
 
 instance P.HasTag (ContainerRegistryImageData s) s Text where
     tag =
         lens (_tag :: ContainerRegistryImageData s -> TF.Attribute s Text)
-            (\s a -> s { _tag = a } :: ContainerRegistryImageData s)
+             (\s a -> s { _tag = a } :: ContainerRegistryImageData s)
 
 instance P.HasComputedImageUrl (ContainerRegistryImageData s) Text
 
@@ -1040,12 +991,12 @@ instance TF.ToHCL (ContainerRegistryRepositoryData s) where
 instance P.HasProject (ContainerRegistryRepositoryData s) s Text where
     project =
         lens (_project :: ContainerRegistryRepositoryData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ContainerRegistryRepositoryData s)
+             (\s a -> s { _project = a } :: ContainerRegistryRepositoryData s)
 
 instance P.HasRegion (ContainerRegistryRepositoryData s) s Text where
     region =
         lens (_region :: ContainerRegistryRepositoryData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: ContainerRegistryRepositoryData s)
+             (\s a -> s { _region = a } :: ContainerRegistryRepositoryData s)
 
 instance P.HasComputedRepositoryUrl (ContainerRegistryRepositoryData s) Text
 
@@ -1079,17 +1030,15 @@ instance TF.ToHCL (DnsManagedZoneData s) where
 instance P.HasName (DnsManagedZoneData s) s Text where
     name =
         lens (_name :: DnsManagedZoneData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DnsManagedZoneData s)
+             (\s a -> s { _name = a } :: DnsManagedZoneData s)
 
 instance P.HasProject (DnsManagedZoneData s) s Text where
     project =
         lens (_project :: DnsManagedZoneData s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: DnsManagedZoneData s)
+             (\s a -> s { _project = a } :: DnsManagedZoneData s)
 
 instance P.HasComputedDescription (DnsManagedZoneData s) Text
-
 instance P.HasComputedDnsName (DnsManagedZoneData s) Text
-
 instance P.HasComputedNameServers (DnsManagedZoneData s) Text
 
 dnsManagedZoneData :: TF.DataSource P.Google (DnsManagedZoneData s)
@@ -1119,7 +1068,7 @@ instance TF.ToHCL (IamPolicyData s) where
 instance P.HasBinding (IamPolicyData s) s Text where
     binding =
         lens (_binding :: IamPolicyData s -> TF.Attribute s Text)
-            (\s a -> s { _binding = a } :: IamPolicyData s)
+             (\s a -> s { _binding = a } :: IamPolicyData s)
 
 instance P.HasComputedPolicyData (IamPolicyData s) Text
 
@@ -1156,12 +1105,12 @@ instance TF.ToHCL (KmsSecretData s) where
 instance P.HasCiphertext (KmsSecretData s) s Text where
     ciphertext =
         lens (_ciphertext :: KmsSecretData s -> TF.Attribute s Text)
-            (\s a -> s { _ciphertext = a } :: KmsSecretData s)
+             (\s a -> s { _ciphertext = a } :: KmsSecretData s)
 
 instance P.HasCryptoKey (KmsSecretData s) s Text where
     cryptoKey =
         lens (_crypto_key :: KmsSecretData s -> TF.Attribute s Text)
-            (\s a -> s { _crypto_key = a } :: KmsSecretData s)
+             (\s a -> s { _crypto_key = a } :: KmsSecretData s)
 
 instance P.HasComputedPlaintext (KmsSecretData s) Text
 
@@ -1193,21 +1142,17 @@ instance TF.ToHCL (OrganizationData s) where
 instance P.HasDomain (OrganizationData s) s Text where
     domain =
         lens (_domain :: OrganizationData s -> TF.Attribute s Text)
-            (\s a -> s { _domain = a } :: OrganizationData s)
+             (\s a -> s { _domain = a } :: OrganizationData s)
 
 instance P.HasOrganization (OrganizationData s) s Text where
     organization =
         lens (_organization :: OrganizationData s -> TF.Attribute s Text)
-            (\s a -> s { _organization = a } :: OrganizationData s)
+             (\s a -> s { _organization = a } :: OrganizationData s)
 
 instance P.HasComputedCreateTime (OrganizationData s) Text
-
 instance P.HasComputedDirectoryCustomerId (OrganizationData s) Text
-
 instance P.HasComputedId (OrganizationData s) Text
-
 instance P.HasComputedLifecycleState (OrganizationData s) Text
-
 instance P.HasComputedName (OrganizationData s) Text
 
 organizationData :: TF.DataSource P.Google (OrganizationData s)
@@ -1251,27 +1196,27 @@ instance TF.ToHCL (StorageObjectSignedUrlData s) where
 instance P.HasBucket (StorageObjectSignedUrlData s) s Text where
     bucket =
         lens (_bucket :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
-            (\s a -> s { _bucket = a } :: StorageObjectSignedUrlData s)
+             (\s a -> s { _bucket = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasCredentials (StorageObjectSignedUrlData s) s Text where
     credentials =
         lens (_credentials :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
-            (\s a -> s { _credentials = a } :: StorageObjectSignedUrlData s)
+             (\s a -> s { _credentials = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasDuration (StorageObjectSignedUrlData s) s Text where
     duration =
         lens (_duration :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
-            (\s a -> s { _duration = a } :: StorageObjectSignedUrlData s)
+             (\s a -> s { _duration = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasHttpMethod (StorageObjectSignedUrlData s) s Text where
     httpMethod =
         lens (_http_method :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
-            (\s a -> s { _http_method = a } :: StorageObjectSignedUrlData s)
+             (\s a -> s { _http_method = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasPath (StorageObjectSignedUrlData s) s Text where
     path =
         lens (_path :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: StorageObjectSignedUrlData s)
+             (\s a -> s { _path = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasComputedSignedUrl (StorageObjectSignedUrlData s) Text
 

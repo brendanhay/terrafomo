@@ -85,29 +85,21 @@ instance TF.ToHCL (TemplateData s) where
 instance P.HasFilter (TemplateData s) s Text where
     filter =
         lens (_filter :: TemplateData s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: TemplateData s)
+             (\s a -> s { _filter = a } :: TemplateData s)
 
 instance P.HasTemplateFilter (TemplateData s) s Text where
     templateFilter =
         lens (_template_filter :: TemplateData s -> TF.Attribute s Text)
-            (\s a -> s { _template_filter = a } :: TemplateData s)
+             (\s a -> s { _template_filter = a } :: TemplateData s)
 
 instance P.HasComputedAccount (TemplateData s) Text
-
 instance P.HasComputedCreated (TemplateData s) Text
-
 instance P.HasComputedDisplayText (TemplateData s) Text
-
 instance P.HasComputedFormat (TemplateData s) Text
-
 instance P.HasComputedHypervisor (TemplateData s) Text
-
 instance P.HasComputedId (TemplateData s) Text
-
 instance P.HasComputedName (TemplateData s) Text
-
 instance P.HasComputedSize (TemplateData s) Text
-
 instance P.HasComputedTags (TemplateData s) Text
 
 templateData :: TF.DataSource P.CloudStack (TemplateData s)

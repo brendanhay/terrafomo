@@ -97,32 +97,32 @@ instance TF.ToHCL (LogResource s) where
 instance P.HasFilename (LogResource s) s Text where
     filename =
         lens (_filename :: LogResource s -> TF.Attribute s Text)
-            (\s a -> s { _filename = a } :: LogResource s)
+             (\s a -> s { _filename = a } :: LogResource s)
 
 instance P.HasLogsetId (LogResource s) s Text where
     logsetId =
         lens (_logset_id :: LogResource s -> TF.Attribute s Text)
-            (\s a -> s { _logset_id = a } :: LogResource s)
+             (\s a -> s { _logset_id = a } :: LogResource s)
 
 instance P.HasName (LogResource s) s Text where
     name =
         lens (_name :: LogResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: LogResource s)
+             (\s a -> s { _name = a } :: LogResource s)
 
 instance P.HasRetentionPeriod (LogResource s) s Text where
     retentionPeriod =
         lens (_retention_period :: LogResource s -> TF.Attribute s Text)
-            (\s a -> s { _retention_period = a } :: LogResource s)
+             (\s a -> s { _retention_period = a } :: LogResource s)
 
 instance P.HasSource (LogResource s) s Text where
     source =
         lens (_source :: LogResource s -> TF.Attribute s Text)
-            (\s a -> s { _source = a } :: LogResource s)
+             (\s a -> s { _source = a } :: LogResource s)
 
 instance P.HasType' (LogResource s) s Text where
     type' =
         lens (_type' :: LogResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: LogResource s)
+             (\s a -> s { _type' = a } :: LogResource s)
 
 instance P.HasComputedToken (LogResource s) Text
 
@@ -159,12 +159,13 @@ instance TF.ToHCL (LogsetResource s) where
 instance P.HasLocation (LogsetResource s) s Text where
     location =
         lens (_location :: LogsetResource s -> TF.Attribute s Text)
-            (\s a -> s { _location = a } :: LogsetResource s)
+             (\s a -> s { _location = a } :: LogsetResource s)
 
 instance P.HasName (LogsetResource s) s Text where
     name =
         lens (_name :: LogsetResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: LogsetResource s)
+             (\s a -> s { _name = a } :: LogsetResource s)
+
 
 logsetResource :: TF.Resource P.Logentries (LogsetResource s)
 logsetResource =

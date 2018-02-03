@@ -314,6 +314,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedMasters (..)
     , HasComputedMaxRetries (..)
     , HasComputedMember (..)
+    , HasComputedMembers (..)
     , HasComputedMetadata (..)
     , HasComputedMinDiskGb (..)
     , HasComputedMinRamMb (..)
@@ -332,6 +333,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedPassword (..)
     , HasComputedPassword (..)
     , HasComputedPersistence (..)
+    , HasComputedPolicies (..)
     , HasComputedPolicyId (..)
     , HasComputedPool (..)
     , HasComputedPoolId (..)
@@ -2148,6 +2150,12 @@ class HasComputedMember a b | a -> b where
     computedMember =
         to (\x -> TF.Computed (TF.referenceKey x) "member")
 
+class HasComputedMembers a b | a -> b where
+    computedMembers
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedMembers =
+        to (\x -> TF.Computed (TF.referenceKey x) "members")
+
 class HasComputedMetadata a b | a -> b where
     computedMetadata
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2255,6 +2263,12 @@ class HasComputedPersistence a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPersistence =
         to (\x -> TF.Computed (TF.referenceKey x) "persistence")
+
+class HasComputedPolicies a b | a -> b where
+    computedPolicies
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPolicies =
+        to (\x -> TF.Computed (TF.referenceKey x) "policies")
 
 class HasComputedPolicyId a b | a -> b where
     computedPolicyId

@@ -202,107 +202,108 @@ instance TF.ToHCL (CheckResource s) where
 instance P.HasActive (CheckResource s) s Text where
     active =
         lens (_active :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _active = a } :: CheckResource s)
+             (\s a -> s { _active = a } :: CheckResource s)
 
 instance P.HasCaql (CheckResource s) s Text where
     caql =
         lens (_caql :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _caql = a } :: CheckResource s)
+             (\s a -> s { _caql = a } :: CheckResource s)
 
 instance P.HasCloudwatch (CheckResource s) s Text where
     cloudwatch =
         lens (_cloudwatch :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _cloudwatch = a } :: CheckResource s)
+             (\s a -> s { _cloudwatch = a } :: CheckResource s)
 
 instance P.HasCollector (CheckResource s) s Text where
     collector =
         lens (_collector :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _collector = a } :: CheckResource s)
+             (\s a -> s { _collector = a } :: CheckResource s)
 
 instance P.HasConsul (CheckResource s) s Text where
     consul =
         lens (_consul :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _consul = a } :: CheckResource s)
+             (\s a -> s { _consul = a } :: CheckResource s)
 
 instance P.HasHttp (CheckResource s) s Text where
     http =
         lens (_http :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _http = a } :: CheckResource s)
+             (\s a -> s { _http = a } :: CheckResource s)
 
 instance P.HasHttptrap (CheckResource s) s Text where
     httptrap =
         lens (_httptrap :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _httptrap = a } :: CheckResource s)
+             (\s a -> s { _httptrap = a } :: CheckResource s)
 
 instance P.HasIcmpPing (CheckResource s) s Text where
     icmpPing =
         lens (_icmp_ping :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _icmp_ping = a } :: CheckResource s)
+             (\s a -> s { _icmp_ping = a } :: CheckResource s)
 
 instance P.HasJson (CheckResource s) s Text where
     json =
         lens (_json :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _json = a } :: CheckResource s)
+             (\s a -> s { _json = a } :: CheckResource s)
 
 instance P.HasMetric (CheckResource s) s Text where
     metric =
         lens (_metric :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _metric = a } :: CheckResource s)
+             (\s a -> s { _metric = a } :: CheckResource s)
 
 instance P.HasMetricLimit (CheckResource s) s Text where
     metricLimit =
         lens (_metric_limit :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _metric_limit = a } :: CheckResource s)
+             (\s a -> s { _metric_limit = a } :: CheckResource s)
 
 instance P.HasMysql (CheckResource s) s Text where
     mysql =
         lens (_mysql :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _mysql = a } :: CheckResource s)
+             (\s a -> s { _mysql = a } :: CheckResource s)
 
 instance P.HasName (CheckResource s) s Text where
     name =
         lens (_name :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CheckResource s)
+             (\s a -> s { _name = a } :: CheckResource s)
 
 instance P.HasNotes (CheckResource s) s Text where
     notes =
         lens (_notes :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _notes = a } :: CheckResource s)
+             (\s a -> s { _notes = a } :: CheckResource s)
 
 instance P.HasPeriod (CheckResource s) s Text where
     period =
         lens (_period :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _period = a } :: CheckResource s)
+             (\s a -> s { _period = a } :: CheckResource s)
 
 instance P.HasPostgresql (CheckResource s) s Text where
     postgresql =
         lens (_postgresql :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _postgresql = a } :: CheckResource s)
+             (\s a -> s { _postgresql = a } :: CheckResource s)
 
 instance P.HasStatsd (CheckResource s) s Text where
     statsd =
         lens (_statsd :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _statsd = a } :: CheckResource s)
+             (\s a -> s { _statsd = a } :: CheckResource s)
 
 instance P.HasTags (CheckResource s) s Text where
     tags =
         lens (_tags :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: CheckResource s)
+             (\s a -> s { _tags = a } :: CheckResource s)
 
 instance P.HasTarget (CheckResource s) s Text where
     target =
         lens (_target :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _target = a } :: CheckResource s)
+             (\s a -> s { _target = a } :: CheckResource s)
 
 instance P.HasTcp (CheckResource s) s Text where
     tcp =
         lens (_tcp :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _tcp = a } :: CheckResource s)
+             (\s a -> s { _tcp = a } :: CheckResource s)
 
 instance P.HasTimeout (CheckResource s) s Text where
     timeout =
         lens (_timeout :: CheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _timeout = a } :: CheckResource s)
+             (\s a -> s { _timeout = a } :: CheckResource s)
+
 
 checkResource :: TF.Resource P.Circonus (CheckResource s)
 checkResource =
@@ -394,82 +395,83 @@ instance TF.ToHCL (ContactGroupResource s) where
 instance P.HasAggregationWindow (ContactGroupResource s) s Text where
     aggregationWindow =
         lens (_aggregation_window :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _aggregation_window = a } :: ContactGroupResource s)
+             (\s a -> s { _aggregation_window = a } :: ContactGroupResource s)
 
 instance P.HasAlertOption (ContactGroupResource s) s Text where
     alertOption =
         lens (_alert_option :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _alert_option = a } :: ContactGroupResource s)
+             (\s a -> s { _alert_option = a } :: ContactGroupResource s)
 
 instance P.HasEmail (ContactGroupResource s) s Text where
     email =
         lens (_email :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _email = a } :: ContactGroupResource s)
+             (\s a -> s { _email = a } :: ContactGroupResource s)
 
 instance P.HasHttp (ContactGroupResource s) s Text where
     http =
         lens (_http :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _http = a } :: ContactGroupResource s)
+             (\s a -> s { _http = a } :: ContactGroupResource s)
 
 instance P.HasIrc (ContactGroupResource s) s Text where
     irc =
         lens (_irc :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _irc = a } :: ContactGroupResource s)
+             (\s a -> s { _irc = a } :: ContactGroupResource s)
 
 instance P.HasLongMessage (ContactGroupResource s) s Text where
     longMessage =
         lens (_long_message :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _long_message = a } :: ContactGroupResource s)
+             (\s a -> s { _long_message = a } :: ContactGroupResource s)
 
 instance P.HasLongSubject (ContactGroupResource s) s Text where
     longSubject =
         lens (_long_subject :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _long_subject = a } :: ContactGroupResource s)
+             (\s a -> s { _long_subject = a } :: ContactGroupResource s)
 
 instance P.HasLongSummary (ContactGroupResource s) s Text where
     longSummary =
         lens (_long_summary :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _long_summary = a } :: ContactGroupResource s)
+             (\s a -> s { _long_summary = a } :: ContactGroupResource s)
 
 instance P.HasName (ContactGroupResource s) s Text where
     name =
         lens (_name :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ContactGroupResource s)
+             (\s a -> s { _name = a } :: ContactGroupResource s)
 
 instance P.HasPagerDuty (ContactGroupResource s) s Text where
     pagerDuty =
         lens (_pager_duty :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _pager_duty = a } :: ContactGroupResource s)
+             (\s a -> s { _pager_duty = a } :: ContactGroupResource s)
 
 instance P.HasShortMessage (ContactGroupResource s) s Text where
     shortMessage =
         lens (_short_message :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _short_message = a } :: ContactGroupResource s)
+             (\s a -> s { _short_message = a } :: ContactGroupResource s)
 
 instance P.HasShortSummary (ContactGroupResource s) s Text where
     shortSummary =
         lens (_short_summary :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _short_summary = a } :: ContactGroupResource s)
+             (\s a -> s { _short_summary = a } :: ContactGroupResource s)
 
 instance P.HasSlack (ContactGroupResource s) s Text where
     slack =
         lens (_slack :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _slack = a } :: ContactGroupResource s)
+             (\s a -> s { _slack = a } :: ContactGroupResource s)
 
 instance P.HasSms (ContactGroupResource s) s Text where
     sms =
         lens (_sms :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _sms = a } :: ContactGroupResource s)
+             (\s a -> s { _sms = a } :: ContactGroupResource s)
 
 instance P.HasTags (ContactGroupResource s) s Text where
     tags =
         lens (_tags :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: ContactGroupResource s)
+             (\s a -> s { _tags = a } :: ContactGroupResource s)
 
 instance P.HasVictorops (ContactGroupResource s) s Text where
     victorops =
         lens (_victorops :: ContactGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _victorops = a } :: ContactGroupResource s)
+             (\s a -> s { _victorops = a } :: ContactGroupResource s)
+
 
 contactGroupResource :: TF.Resource P.Circonus (ContactGroupResource s)
 contactGroupResource =
@@ -539,52 +541,53 @@ instance TF.ToHCL (GraphResource s) where
 instance P.HasDescription (GraphResource s) s Text where
     description =
         lens (_description :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: GraphResource s)
+             (\s a -> s { _description = a } :: GraphResource s)
 
 instance P.HasGraphStyle (GraphResource s) s Text where
     graphStyle =
         lens (_graph_style :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _graph_style = a } :: GraphResource s)
+             (\s a -> s { _graph_style = a } :: GraphResource s)
 
 instance P.HasLeft (GraphResource s) s Text where
     left =
         lens (_left :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _left = a } :: GraphResource s)
+             (\s a -> s { _left = a } :: GraphResource s)
 
 instance P.HasLineStyle (GraphResource s) s Text where
     lineStyle =
         lens (_line_style :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _line_style = a } :: GraphResource s)
+             (\s a -> s { _line_style = a } :: GraphResource s)
 
 instance P.HasMetric (GraphResource s) s Text where
     metric =
         lens (_metric :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _metric = a } :: GraphResource s)
+             (\s a -> s { _metric = a } :: GraphResource s)
 
 instance P.HasMetricCluster (GraphResource s) s Text where
     metricCluster =
         lens (_metric_cluster :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _metric_cluster = a } :: GraphResource s)
+             (\s a -> s { _metric_cluster = a } :: GraphResource s)
 
 instance P.HasName (GraphResource s) s Text where
     name =
         lens (_name :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: GraphResource s)
+             (\s a -> s { _name = a } :: GraphResource s)
 
 instance P.HasNotes (GraphResource s) s Text where
     notes =
         lens (_notes :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _notes = a } :: GraphResource s)
+             (\s a -> s { _notes = a } :: GraphResource s)
 
 instance P.HasRight (GraphResource s) s Text where
     right =
         lens (_right :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _right = a } :: GraphResource s)
+             (\s a -> s { _right = a } :: GraphResource s)
 
 instance P.HasTags (GraphResource s) s Text where
     tags =
         lens (_tags :: GraphResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: GraphResource s)
+             (\s a -> s { _tags = a } :: GraphResource s)
+
 
 graphResource :: TF.Resource P.Circonus (GraphResource s)
 graphResource =
@@ -629,22 +632,23 @@ instance TF.ToHCL (MetricClusterResource s) where
 instance P.HasDescription (MetricClusterResource s) s Text where
     description =
         lens (_description :: MetricClusterResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: MetricClusterResource s)
+             (\s a -> s { _description = a } :: MetricClusterResource s)
 
 instance P.HasName (MetricClusterResource s) s Text where
     name =
         lens (_name :: MetricClusterResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: MetricClusterResource s)
+             (\s a -> s { _name = a } :: MetricClusterResource s)
 
 instance P.HasQuery (MetricClusterResource s) s Text where
     query =
         lens (_query :: MetricClusterResource s -> TF.Attribute s Text)
-            (\s a -> s { _query = a } :: MetricClusterResource s)
+             (\s a -> s { _query = a } :: MetricClusterResource s)
 
 instance P.HasTags (MetricClusterResource s) s Text where
     tags =
         lens (_tags :: MetricClusterResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: MetricClusterResource s)
+             (\s a -> s { _tags = a } :: MetricClusterResource s)
+
 
 metricClusterResource :: TF.Resource P.Circonus (MetricClusterResource s)
 metricClusterResource =
@@ -687,27 +691,28 @@ instance TF.ToHCL (MetricResource s) where
 instance P.HasActive (MetricResource s) s Text where
     active =
         lens (_active :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _active = a } :: MetricResource s)
+             (\s a -> s { _active = a } :: MetricResource s)
 
 instance P.HasName (MetricResource s) s Text where
     name =
         lens (_name :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: MetricResource s)
+             (\s a -> s { _name = a } :: MetricResource s)
 
 instance P.HasTags (MetricResource s) s Text where
     tags =
         lens (_tags :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: MetricResource s)
+             (\s a -> s { _tags = a } :: MetricResource s)
 
 instance P.HasType' (MetricResource s) s Text where
     type' =
         lens (_type' :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: MetricResource s)
+             (\s a -> s { _type' = a } :: MetricResource s)
 
 instance P.HasUnit (MetricResource s) s Text where
     unit =
         lens (_unit :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _unit = a } :: MetricResource s)
+             (\s a -> s { _unit = a } :: MetricResource s)
+
 
 metricResource :: TF.Resource P.Circonus (MetricResource s)
 metricResource =
@@ -759,42 +764,43 @@ instance TF.ToHCL (RuleSetResource s) where
 instance P.HasCheck (RuleSetResource s) s Text where
     check =
         lens (_check :: RuleSetResource s -> TF.Attribute s Text)
-            (\s a -> s { _check = a } :: RuleSetResource s)
+             (\s a -> s { _check = a } :: RuleSetResource s)
 
 instance P.HasIf' (RuleSetResource s) s Text where
     if' =
         lens (_if' :: RuleSetResource s -> TF.Attribute s Text)
-            (\s a -> s { _if' = a } :: RuleSetResource s)
+             (\s a -> s { _if' = a } :: RuleSetResource s)
 
 instance P.HasLink (RuleSetResource s) s Text where
     link =
         lens (_link :: RuleSetResource s -> TF.Attribute s Text)
-            (\s a -> s { _link = a } :: RuleSetResource s)
+             (\s a -> s { _link = a } :: RuleSetResource s)
 
 instance P.HasMetricName (RuleSetResource s) s Text where
     metricName =
         lens (_metric_name :: RuleSetResource s -> TF.Attribute s Text)
-            (\s a -> s { _metric_name = a } :: RuleSetResource s)
+             (\s a -> s { _metric_name = a } :: RuleSetResource s)
 
 instance P.HasMetricType (RuleSetResource s) s Text where
     metricType =
         lens (_metric_type :: RuleSetResource s -> TF.Attribute s Text)
-            (\s a -> s { _metric_type = a } :: RuleSetResource s)
+             (\s a -> s { _metric_type = a } :: RuleSetResource s)
 
 instance P.HasNotes (RuleSetResource s) s Text where
     notes =
         lens (_notes :: RuleSetResource s -> TF.Attribute s Text)
-            (\s a -> s { _notes = a } :: RuleSetResource s)
+             (\s a -> s { _notes = a } :: RuleSetResource s)
 
 instance P.HasParent (RuleSetResource s) s Text where
     parent =
         lens (_parent :: RuleSetResource s -> TF.Attribute s Text)
-            (\s a -> s { _parent = a } :: RuleSetResource s)
+             (\s a -> s { _parent = a } :: RuleSetResource s)
 
 instance P.HasTags (RuleSetResource s) s Text where
     tags =
         lens (_tags :: RuleSetResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: RuleSetResource s)
+             (\s a -> s { _tags = a } :: RuleSetResource s)
+
 
 ruleSetResource :: TF.Resource P.Circonus (RuleSetResource s)
 ruleSetResource =

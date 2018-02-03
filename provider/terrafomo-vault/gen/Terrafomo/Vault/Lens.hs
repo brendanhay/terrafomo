@@ -78,6 +78,8 @@ module Terrafomo.Vault.Lens
     , HasComputedAccessor (..)
     , HasComputedAuthType (..)
     , HasComputedClientToken (..)
+    , HasComputedData' (..)
+    , HasComputedDataJson (..)
     , HasComputedLeaseDuration (..)
     , HasComputedLeaseId (..)
     , HasComputedLeaseRenewable (..)
@@ -421,6 +423,18 @@ class HasComputedClientToken a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedClientToken =
         to (\x -> TF.Computed (TF.referenceKey x) "client_token")
+
+class HasComputedData' a b | a -> b where
+    computedData'
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedData' =
+        to (\x -> TF.Computed (TF.referenceKey x) "data")
+
+class HasComputedDataJson a b | a -> b where
+    computedDataJson
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDataJson =
+        to (\x -> TF.Computed (TF.referenceKey x) "data_json")
 
 class HasComputedLeaseDuration a b | a -> b where
     computedLeaseDuration

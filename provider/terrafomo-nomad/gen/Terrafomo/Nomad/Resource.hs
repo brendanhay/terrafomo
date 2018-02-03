@@ -92,17 +92,18 @@ instance TF.ToHCL (AclPolicyResource s) where
 instance P.HasDescription (AclPolicyResource s) s Text where
     description =
         lens (_description :: AclPolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: AclPolicyResource s)
+             (\s a -> s { _description = a } :: AclPolicyResource s)
 
 instance P.HasName (AclPolicyResource s) s Text where
     name =
         lens (_name :: AclPolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AclPolicyResource s)
+             (\s a -> s { _name = a } :: AclPolicyResource s)
 
 instance P.HasRulesHcl (AclPolicyResource s) s Text where
     rulesHcl =
         lens (_rules_hcl :: AclPolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
+             (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
+
 
 aclPolicyResource :: TF.Resource P.Nomad (AclPolicyResource s)
 aclPolicyResource =
@@ -141,22 +142,23 @@ instance TF.ToHCL (AclTokenResource s) where
 instance P.HasGlobal (AclTokenResource s) s Text where
     global =
         lens (_global :: AclTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _global = a } :: AclTokenResource s)
+             (\s a -> s { _global = a } :: AclTokenResource s)
 
 instance P.HasName (AclTokenResource s) s Text where
     name =
         lens (_name :: AclTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AclTokenResource s)
+             (\s a -> s { _name = a } :: AclTokenResource s)
 
 instance P.HasPolicies (AclTokenResource s) s Text where
     policies =
         lens (_policies :: AclTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _policies = a } :: AclTokenResource s)
+             (\s a -> s { _policies = a } :: AclTokenResource s)
 
 instance P.HasType' (AclTokenResource s) s Text where
     type' =
         lens (_type' :: AclTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: AclTokenResource s)
+             (\s a -> s { _type' = a } :: AclTokenResource s)
+
 
 aclTokenResource :: TF.Resource P.Nomad (AclTokenResource s)
 aclTokenResource =
@@ -197,17 +199,18 @@ instance TF.ToHCL (JobResource s) where
 instance P.HasDeregisterOnDestroy (JobResource s) s Text where
     deregisterOnDestroy =
         lens (_deregister_on_destroy :: JobResource s -> TF.Attribute s Text)
-            (\s a -> s { _deregister_on_destroy = a } :: JobResource s)
+             (\s a -> s { _deregister_on_destroy = a } :: JobResource s)
 
 instance P.HasDeregisterOnIdChange (JobResource s) s Text where
     deregisterOnIdChange =
         lens (_deregister_on_id_change :: JobResource s -> TF.Attribute s Text)
-            (\s a -> s { _deregister_on_id_change = a } :: JobResource s)
+             (\s a -> s { _deregister_on_id_change = a } :: JobResource s)
 
 instance P.HasJobspec (JobResource s) s Text where
     jobspec =
         lens (_jobspec :: JobResource s -> TF.Attribute s Text)
-            (\s a -> s { _jobspec = a } :: JobResource s)
+             (\s a -> s { _jobspec = a } :: JobResource s)
+
 
 jobResource :: TF.Resource P.Nomad (JobResource s)
 jobResource =

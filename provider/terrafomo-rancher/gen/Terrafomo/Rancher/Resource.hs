@@ -155,53 +155,43 @@ instance TF.ToHCL (CertificateResource s) where
 instance P.HasCert (CertificateResource s) s Text where
     cert =
         lens (_cert :: CertificateResource s -> TF.Attribute s Text)
-            (\s a -> s { _cert = a } :: CertificateResource s)
+             (\s a -> s { _cert = a } :: CertificateResource s)
 
 instance P.HasCertChain (CertificateResource s) s Text where
     certChain =
         lens (_cert_chain :: CertificateResource s -> TF.Attribute s Text)
-            (\s a -> s { _cert_chain = a } :: CertificateResource s)
+             (\s a -> s { _cert_chain = a } :: CertificateResource s)
 
 instance P.HasDescription (CertificateResource s) s Text where
     description =
         lens (_description :: CertificateResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: CertificateResource s)
+             (\s a -> s { _description = a } :: CertificateResource s)
 
 instance P.HasEnvironmentId (CertificateResource s) s Text where
     environmentId =
         lens (_environment_id :: CertificateResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: CertificateResource s)
+             (\s a -> s { _environment_id = a } :: CertificateResource s)
 
 instance P.HasKey (CertificateResource s) s Text where
     key =
         lens (_key :: CertificateResource s -> TF.Attribute s Text)
-            (\s a -> s { _key = a } :: CertificateResource s)
+             (\s a -> s { _key = a } :: CertificateResource s)
 
 instance P.HasName (CertificateResource s) s Text where
     name =
         lens (_name :: CertificateResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CertificateResource s)
+             (\s a -> s { _name = a } :: CertificateResource s)
 
 instance P.HasComputedAlgorithm (CertificateResource s) Text
-
 instance P.HasComputedCertFingerprint (CertificateResource s) Text
-
 instance P.HasComputedCn (CertificateResource s) Text
-
 instance P.HasComputedExpiresAt (CertificateResource s) Text
-
 instance P.HasComputedId (CertificateResource s) Text
-
 instance P.HasComputedIssuedAt (CertificateResource s) Text
-
 instance P.HasComputedIssuer (CertificateResource s) Text
-
 instance P.HasComputedKeySize (CertificateResource s) Text
-
 instance P.HasComputedSerialNumber (CertificateResource s) Text
-
 instance P.HasComputedSubjectAlternativeNames (CertificateResource s) Text
-
 instance P.HasComputedVersion (CertificateResource s) Text
 
 certificateResource :: TF.Resource P.Rancher (CertificateResource s)
@@ -246,27 +236,29 @@ instance TF.ToHCL (EnvironmentResource s) where
 instance P.HasDescription (EnvironmentResource s) s Text where
     description =
         lens (_description :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: EnvironmentResource s)
+             (\s a -> s { _description = a } :: EnvironmentResource s)
 
 instance P.HasMember (EnvironmentResource s) s Text where
     member =
         lens (_member :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _member = a } :: EnvironmentResource s)
+             (\s a -> s { _member = a } :: EnvironmentResource s)
 
 instance P.HasName (EnvironmentResource s) s Text where
     name =
         lens (_name :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EnvironmentResource s)
+             (\s a -> s { _name = a } :: EnvironmentResource s)
 
 instance P.HasOrchestration (EnvironmentResource s) s Text where
     orchestration =
         lens (_orchestration :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _orchestration = a } :: EnvironmentResource s)
+             (\s a -> s { _orchestration = a } :: EnvironmentResource s)
 
 instance P.HasProjectTemplateId (EnvironmentResource s) s Text where
     projectTemplateId =
         lens (_project_template_id :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_template_id = a } :: EnvironmentResource s)
+             (\s a -> s { _project_template_id = a } :: EnvironmentResource s)
+
+instance P.HasComputedId (EnvironmentResource s) Text
 
 environmentResource :: TF.Resource P.Rancher (EnvironmentResource s)
 environmentResource =
@@ -312,32 +304,33 @@ instance TF.ToHCL (HostResource s) where
 instance P.HasDescription (HostResource s) s Text where
     description =
         lens (_description :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: HostResource s)
+             (\s a -> s { _description = a } :: HostResource s)
 
 instance P.HasEnvironmentId (HostResource s) s Text where
     environmentId =
         lens (_environment_id :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: HostResource s)
+             (\s a -> s { _environment_id = a } :: HostResource s)
 
 instance P.HasHostname (HostResource s) s Text where
     hostname =
         lens (_hostname :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _hostname = a } :: HostResource s)
+             (\s a -> s { _hostname = a } :: HostResource s)
 
 instance P.HasId (HostResource s) s Text where
     id =
         lens (_id :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: HostResource s)
+             (\s a -> s { _id = a } :: HostResource s)
 
 instance P.HasLabels (HostResource s) s Text where
     labels =
         lens (_labels :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _labels = a } :: HostResource s)
+             (\s a -> s { _labels = a } :: HostResource s)
 
 instance P.HasName (HostResource s) s Text where
     name =
         lens (_name :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: HostResource s)
+             (\s a -> s { _name = a } :: HostResource s)
+
 
 hostResource :: TF.Resource P.Rancher (HostResource s)
 hostResource =
@@ -381,36 +374,32 @@ instance TF.ToHCL (RegistrationTokenResource s) where
 instance P.HasAgentIp (RegistrationTokenResource s) s Text where
     agentIp =
         lens (_agent_ip :: RegistrationTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _agent_ip = a } :: RegistrationTokenResource s)
+             (\s a -> s { _agent_ip = a } :: RegistrationTokenResource s)
 
 instance P.HasDescription (RegistrationTokenResource s) s Text where
     description =
         lens (_description :: RegistrationTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: RegistrationTokenResource s)
+             (\s a -> s { _description = a } :: RegistrationTokenResource s)
 
 instance P.HasEnvironmentId (RegistrationTokenResource s) s Text where
     environmentId =
         lens (_environment_id :: RegistrationTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: RegistrationTokenResource s)
+             (\s a -> s { _environment_id = a } :: RegistrationTokenResource s)
 
 instance P.HasHostLabels (RegistrationTokenResource s) s Text where
     hostLabels =
         lens (_host_labels :: RegistrationTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _host_labels = a } :: RegistrationTokenResource s)
+             (\s a -> s { _host_labels = a } :: RegistrationTokenResource s)
 
 instance P.HasName (RegistrationTokenResource s) s Text where
     name =
         lens (_name :: RegistrationTokenResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RegistrationTokenResource s)
+             (\s a -> s { _name = a } :: RegistrationTokenResource s)
 
 instance P.HasComputedCommand (RegistrationTokenResource s) Text
-
 instance P.HasComputedId (RegistrationTokenResource s) Text
-
 instance P.HasComputedImage (RegistrationTokenResource s) Text
-
 instance P.HasComputedRegistrationUrl (RegistrationTokenResource s) Text
-
 instance P.HasComputedToken (RegistrationTokenResource s) Text
 
 registrationTokenResource :: TF.Resource P.Rancher (RegistrationTokenResource s)
@@ -455,27 +444,27 @@ instance TF.ToHCL (RegistryCredentialResource s) where
 instance P.HasDescription (RegistryCredentialResource s) s Text where
     description =
         lens (_description :: RegistryCredentialResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: RegistryCredentialResource s)
+             (\s a -> s { _description = a } :: RegistryCredentialResource s)
 
 instance P.HasName (RegistryCredentialResource s) s Text where
     name =
         lens (_name :: RegistryCredentialResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RegistryCredentialResource s)
+             (\s a -> s { _name = a } :: RegistryCredentialResource s)
 
 instance P.HasPublicValue (RegistryCredentialResource s) s Text where
     publicValue =
         lens (_public_value :: RegistryCredentialResource s -> TF.Attribute s Text)
-            (\s a -> s { _public_value = a } :: RegistryCredentialResource s)
+             (\s a -> s { _public_value = a } :: RegistryCredentialResource s)
 
 instance P.HasRegistryId (RegistryCredentialResource s) s Text where
     registryId =
         lens (_registry_id :: RegistryCredentialResource s -> TF.Attribute s Text)
-            (\s a -> s { _registry_id = a } :: RegistryCredentialResource s)
+             (\s a -> s { _registry_id = a } :: RegistryCredentialResource s)
 
 instance P.HasSecretValue (RegistryCredentialResource s) s Text where
     secretValue =
         lens (_secret_value :: RegistryCredentialResource s -> TF.Attribute s Text)
-            (\s a -> s { _secret_value = a } :: RegistryCredentialResource s)
+             (\s a -> s { _secret_value = a } :: RegistryCredentialResource s)
 
 instance P.HasComputedId (RegistryCredentialResource s) Text
 
@@ -517,22 +506,22 @@ instance TF.ToHCL (RegistryResource s) where
 instance P.HasDescription (RegistryResource s) s Text where
     description =
         lens (_description :: RegistryResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: RegistryResource s)
+             (\s a -> s { _description = a } :: RegistryResource s)
 
 instance P.HasEnvironmentId (RegistryResource s) s Text where
     environmentId =
         lens (_environment_id :: RegistryResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: RegistryResource s)
+             (\s a -> s { _environment_id = a } :: RegistryResource s)
 
 instance P.HasName (RegistryResource s) s Text where
     name =
         lens (_name :: RegistryResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RegistryResource s)
+             (\s a -> s { _name = a } :: RegistryResource s)
 
 instance P.HasServerAddress (RegistryResource s) s Text where
     serverAddress =
         lens (_server_address :: RegistryResource s -> TF.Attribute s Text)
-            (\s a -> s { _server_address = a } :: RegistryResource s)
+             (\s a -> s { _server_address = a } :: RegistryResource s)
 
 instance P.HasComputedId (RegistryResource s) Text
 
@@ -573,22 +562,23 @@ instance TF.ToHCL (SecretsResource s) where
 instance P.HasDescription (SecretsResource s) s Text where
     description =
         lens (_description :: SecretsResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: SecretsResource s)
+             (\s a -> s { _description = a } :: SecretsResource s)
 
 instance P.HasEnvironmentId (SecretsResource s) s Text where
     environmentId =
         lens (_environment_id :: SecretsResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: SecretsResource s)
+             (\s a -> s { _environment_id = a } :: SecretsResource s)
 
 instance P.HasName (SecretsResource s) s Text where
     name =
         lens (_name :: SecretsResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SecretsResource s)
+             (\s a -> s { _name = a } :: SecretsResource s)
 
 instance P.HasValue (SecretsResource s) s Text where
     value =
         lens (_value :: SecretsResource s -> TF.Attribute s Text)
-            (\s a -> s { _value = a } :: SecretsResource s)
+             (\s a -> s { _value = a } :: SecretsResource s)
+
 
 secretsResource :: TF.Resource P.Rancher (SecretsResource s)
 secretsResource =
@@ -645,57 +635,55 @@ instance TF.ToHCL (StackResource s) where
 instance P.HasCatalogId (StackResource s) s Text where
     catalogId =
         lens (_catalog_id :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _catalog_id = a } :: StackResource s)
+             (\s a -> s { _catalog_id = a } :: StackResource s)
 
 instance P.HasDescription (StackResource s) s Text where
     description =
         lens (_description :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: StackResource s)
+             (\s a -> s { _description = a } :: StackResource s)
 
 instance P.HasDockerCompose (StackResource s) s Text where
     dockerCompose =
         lens (_docker_compose :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _docker_compose = a } :: StackResource s)
+             (\s a -> s { _docker_compose = a } :: StackResource s)
 
 instance P.HasEnvironment (StackResource s) s Text where
     environment =
         lens (_environment :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment = a } :: StackResource s)
+             (\s a -> s { _environment = a } :: StackResource s)
 
 instance P.HasEnvironmentId (StackResource s) s Text where
     environmentId =
         lens (_environment_id :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: StackResource s)
+             (\s a -> s { _environment_id = a } :: StackResource s)
 
 instance P.HasFinishUpgrade (StackResource s) s Text where
     finishUpgrade =
         lens (_finish_upgrade :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _finish_upgrade = a } :: StackResource s)
+             (\s a -> s { _finish_upgrade = a } :: StackResource s)
 
 instance P.HasName (StackResource s) s Text where
     name =
         lens (_name :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: StackResource s)
+             (\s a -> s { _name = a } :: StackResource s)
 
 instance P.HasRancherCompose (StackResource s) s Text where
     rancherCompose =
         lens (_rancher_compose :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _rancher_compose = a } :: StackResource s)
+             (\s a -> s { _rancher_compose = a } :: StackResource s)
 
 instance P.HasScope (StackResource s) s Text where
     scope =
         lens (_scope :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _scope = a } :: StackResource s)
+             (\s a -> s { _scope = a } :: StackResource s)
 
 instance P.HasStartOnCreate (StackResource s) s Text where
     startOnCreate =
         lens (_start_on_create :: StackResource s -> TF.Attribute s Text)
-            (\s a -> s { _start_on_create = a } :: StackResource s)
+             (\s a -> s { _start_on_create = a } :: StackResource s)
 
 instance P.HasComputedId (StackResource s) Text
-
 instance P.HasComputedRenderedDockerCompose (StackResource s) Text
-
 instance P.HasComputedRenderedRancherCompose (StackResource s) Text
 
 stackResource :: TF.Resource P.Rancher (StackResource s)
@@ -741,22 +729,23 @@ instance TF.ToHCL (VolumesResource s) where
 instance P.HasDescription (VolumesResource s) s Text where
     description =
         lens (_description :: VolumesResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: VolumesResource s)
+             (\s a -> s { _description = a } :: VolumesResource s)
 
 instance P.HasDriver (VolumesResource s) s Text where
     driver =
         lens (_driver :: VolumesResource s -> TF.Attribute s Text)
-            (\s a -> s { _driver = a } :: VolumesResource s)
+             (\s a -> s { _driver = a } :: VolumesResource s)
 
 instance P.HasEnvironmentId (VolumesResource s) s Text where
     environmentId =
         lens (_environment_id :: VolumesResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: VolumesResource s)
+             (\s a -> s { _environment_id = a } :: VolumesResource s)
 
 instance P.HasName (VolumesResource s) s Text where
     name =
         lens (_name :: VolumesResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VolumesResource s)
+             (\s a -> s { _name = a } :: VolumesResource s)
+
 
 volumesResource :: TF.Resource P.Rancher (VolumesResource s)
 volumesResource =

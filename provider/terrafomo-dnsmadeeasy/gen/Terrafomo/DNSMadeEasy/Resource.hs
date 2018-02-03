@@ -29,6 +29,11 @@ module Terrafomo.DNSMadeEasy.Resource
     -- ** Arguments
 
     -- ** Computed Attributes
+    , P.HasComputedGtdLocation (..)
+    , P.HasComputedName (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedValue (..)
 
     -- * Re-exported Types
     , module P
@@ -63,6 +68,12 @@ data RecordResource s = RecordResource {
 
 instance TF.ToHCL (RecordResource s) where
     toHCL _ = TF.block []
+
+instance P.HasComputedGtdLocation (RecordResource s) Text
+instance P.HasComputedName (RecordResource s) Text
+instance P.HasComputedTtl (RecordResource s) Text
+instance P.HasComputedType' (RecordResource s) Text
+instance P.HasComputedValue (RecordResource s) Text
 
 recordResource :: TF.Resource P.DNSMadeEasy (RecordResource s)
 recordResource =

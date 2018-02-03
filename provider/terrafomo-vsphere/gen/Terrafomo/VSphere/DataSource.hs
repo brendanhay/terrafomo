@@ -125,7 +125,8 @@ instance TF.ToHCL (CustomAttributeData s) where
 instance P.HasName (CustomAttributeData s) s Text where
     name =
         lens (_name :: CustomAttributeData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CustomAttributeData s)
+             (\s a -> s { _name = a } :: CustomAttributeData s)
+
 
 customAttributeData :: TF.DataSource P.VSphere (CustomAttributeData s)
 customAttributeData =
@@ -154,7 +155,8 @@ instance TF.ToHCL (DatacenterData s) where
 instance P.HasName (DatacenterData s) s Text where
     name =
         lens (_name :: DatacenterData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatacenterData s)
+             (\s a -> s { _name = a } :: DatacenterData s)
+
 
 datacenterData :: TF.DataSource P.VSphere (DatacenterData s)
 datacenterData =
@@ -186,12 +188,13 @@ instance TF.ToHCL (DatastoreData s) where
 instance P.HasDatacenterId (DatastoreData s) s Text where
     datacenterId =
         lens (_datacenter_id :: DatastoreData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter_id = a } :: DatastoreData s)
+             (\s a -> s { _datacenter_id = a } :: DatastoreData s)
 
 instance P.HasName (DatastoreData s) s Text where
     name =
         lens (_name :: DatastoreData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatastoreData s)
+             (\s a -> s { _name = a } :: DatastoreData s)
+
 
 datastoreData :: TF.DataSource P.VSphere (DatastoreData s)
 datastoreData =
@@ -226,15 +229,14 @@ instance TF.ToHCL (DistributedVirtualSwitchData s) where
 instance P.HasDatacenterId (DistributedVirtualSwitchData s) s Text where
     datacenterId =
         lens (_datacenter_id :: DistributedVirtualSwitchData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchData s)
+             (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchData s)
 
 instance P.HasName (DistributedVirtualSwitchData s) s Text where
     name =
         lens (_name :: DistributedVirtualSwitchData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DistributedVirtualSwitchData s)
+             (\s a -> s { _name = a } :: DistributedVirtualSwitchData s)
 
 instance P.HasComputedId (DistributedVirtualSwitchData s) Text
-
 instance P.HasComputedUplinks (DistributedVirtualSwitchData s) Text
 
 distributedVirtualSwitchData :: TF.DataSource P.VSphere (DistributedVirtualSwitchData s)
@@ -267,12 +269,13 @@ instance TF.ToHCL (HostData s) where
 instance P.HasDatacenterId (HostData s) s Text where
     datacenterId =
         lens (_datacenter_id :: HostData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter_id = a } :: HostData s)
+             (\s a -> s { _datacenter_id = a } :: HostData s)
 
 instance P.HasName (HostData s) s Text where
     name =
         lens (_name :: HostData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: HostData s)
+             (\s a -> s { _name = a } :: HostData s)
+
 
 hostData :: TF.DataSource P.VSphere (HostData s)
 hostData =
@@ -306,15 +309,14 @@ instance TF.ToHCL (NetworkData s) where
 instance P.HasDatacenterId (NetworkData s) s Text where
     datacenterId =
         lens (_datacenter_id :: NetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter_id = a } :: NetworkData s)
+             (\s a -> s { _datacenter_id = a } :: NetworkData s)
 
 instance P.HasName (NetworkData s) s Text where
     name =
         lens (_name :: NetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NetworkData s)
+             (\s a -> s { _name = a } :: NetworkData s)
 
 instance P.HasComputedId (NetworkData s) Text
-
 instance P.HasComputedType' (NetworkData s) Text
 
 networkData :: TF.DataSource P.VSphere (NetworkData s)
@@ -348,12 +350,13 @@ instance TF.ToHCL (ResourcePoolData s) where
 instance P.HasDatacenterId (ResourcePoolData s) s Text where
     datacenterId =
         lens (_datacenter_id :: ResourcePoolData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter_id = a } :: ResourcePoolData s)
+             (\s a -> s { _datacenter_id = a } :: ResourcePoolData s)
 
 instance P.HasName (ResourcePoolData s) s Text where
     name =
         lens (_name :: ResourcePoolData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ResourcePoolData s)
+             (\s a -> s { _name = a } :: ResourcePoolData s)
+
 
 resourcePoolData :: TF.DataSource P.VSphere (ResourcePoolData s)
 resourcePoolData =
@@ -386,7 +389,8 @@ instance TF.ToHCL (TagCategoryData s) where
 instance P.HasName (TagCategoryData s) s Text where
     name =
         lens (_name :: TagCategoryData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: TagCategoryData s)
+             (\s a -> s { _name = a } :: TagCategoryData s)
+
 
 tagCategoryData :: TF.DataSource P.VSphere (TagCategoryData s)
 tagCategoryData =
@@ -421,12 +425,13 @@ instance TF.ToHCL (TagData s) where
 instance P.HasCategoryId (TagData s) s Text where
     categoryId =
         lens (_category_id :: TagData s -> TF.Attribute s Text)
-            (\s a -> s { _category_id = a } :: TagData s)
+             (\s a -> s { _category_id = a } :: TagData s)
 
 instance P.HasName (TagData s) s Text where
     name =
         lens (_name :: TagData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: TagData s)
+             (\s a -> s { _name = a } :: TagData s)
+
 
 tagData :: TF.DataSource P.VSphere (TagData s)
 tagData =
@@ -463,34 +468,26 @@ instance TF.ToHCL (VirtualMachineData s) where
 instance P.HasDatacenterId (VirtualMachineData s) s Text where
     datacenterId =
         lens (_datacenter_id :: VirtualMachineData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter_id = a } :: VirtualMachineData s)
+             (\s a -> s { _datacenter_id = a } :: VirtualMachineData s)
 
 instance P.HasName (VirtualMachineData s) s Text where
     name =
         lens (_name :: VirtualMachineData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VirtualMachineData s)
+             (\s a -> s { _name = a } :: VirtualMachineData s)
 
 instance P.HasScsiControllerScanCount (VirtualMachineData s) s Text where
     scsiControllerScanCount =
         lens (_scsi_controller_scan_count :: VirtualMachineData s -> TF.Attribute s Text)
-            (\s a -> s { _scsi_controller_scan_count = a } :: VirtualMachineData s)
+             (\s a -> s { _scsi_controller_scan_count = a } :: VirtualMachineData s)
 
 instance P.HasComputedAlternateGuestName (VirtualMachineData s) Text
-
 instance P.HasComputedDisks (VirtualMachineData s) Text
-
 instance P.HasComputedEagerlyScrub (VirtualMachineData s) Text
-
 instance P.HasComputedGuestId (VirtualMachineData s) Text
-
 instance P.HasComputedId (VirtualMachineData s) Text
-
 instance P.HasComputedNetworkInterfaceTypes (VirtualMachineData s) Text
-
 instance P.HasComputedScsiType (VirtualMachineData s) Text
-
 instance P.HasComputedSize (VirtualMachineData s) Text
-
 instance P.HasComputedThinProvisioned (VirtualMachineData s) Text
 
 virtualMachineData :: TF.DataSource P.VSphere (VirtualMachineData s)
@@ -528,17 +525,17 @@ instance TF.ToHCL (VmfsDisksData s) where
 instance P.HasFilter (VmfsDisksData s) s Text where
     filter =
         lens (_filter :: VmfsDisksData s -> TF.Attribute s Text)
-            (\s a -> s { _filter = a } :: VmfsDisksData s)
+             (\s a -> s { _filter = a } :: VmfsDisksData s)
 
 instance P.HasHostSystemId (VmfsDisksData s) s Text where
     hostSystemId =
         lens (_host_system_id :: VmfsDisksData s -> TF.Attribute s Text)
-            (\s a -> s { _host_system_id = a } :: VmfsDisksData s)
+             (\s a -> s { _host_system_id = a } :: VmfsDisksData s)
 
 instance P.HasRescan (VmfsDisksData s) s Text where
     rescan =
         lens (_rescan :: VmfsDisksData s -> TF.Attribute s Text)
-            (\s a -> s { _rescan = a } :: VmfsDisksData s)
+             (\s a -> s { _rescan = a } :: VmfsDisksData s)
 
 instance P.HasComputedDisks (VmfsDisksData s) Text
 

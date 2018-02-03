@@ -114,12 +114,18 @@ module Terrafomo.OPC.Lens
     , HasComputedAccount (..)
     , HasComputedAdminDistance (..)
     , HasComputedAttributes (..)
+    , HasComputedAvailabilityDomain (..)
     , HasComputedCollocated (..)
     , HasComputedDescription (..)
     , HasComputedDns (..)
+    , HasComputedDomain (..)
+    , HasComputedEntry (..)
     , HasComputedErrorReason (..)
     , HasComputedFile (..)
+    , HasComputedFingerprint (..)
+    , HasComputedFqdn (..)
     , HasComputedHypervisor (..)
+    , HasComputedId (..)
     , HasComputedImageFormat (..)
     , HasComputedIpAddress (..)
     , HasComputedIpAddressPrefix (..)
@@ -129,6 +135,7 @@ module Terrafomo.OPC.Lens
     , HasComputedMacAddress (..)
     , HasComputedMachineImage (..)
     , HasComputedMachineImageName (..)
+    , HasComputedMachineImages (..)
     , HasComputedManaged (..)
     , HasComputedModel (..)
     , HasComputedName (..)
@@ -136,16 +143,23 @@ module Terrafomo.OPC.Lens
     , HasComputedNat (..)
     , HasComputedNextHopVnicSet (..)
     , HasComputedParentVolumeBootable (..)
+    , HasComputedPlacementRequirements (..)
     , HasComputedPlatform (..)
+    , HasComputedPriority (..)
     , HasComputedProperty (..)
     , HasComputedPublicNaptEnabled (..)
+    , HasComputedQuotaReservation (..)
     , HasComputedReadonly (..)
+    , HasComputedRelationships (..)
+    , HasComputedResolvers (..)
     , HasComputedSearchDomains (..)
     , HasComputedSecLists (..)
     , HasComputedSharedNetwork (..)
+    , HasComputedSite (..)
     , HasComputedSize (..)
     , HasComputedSnapshotId (..)
     , HasComputedSnapshotTimestamp (..)
+    , HasComputedStartTime (..)
     , HasComputedStartTimestamp (..)
     , HasComputedState (..)
     , HasComputedStatus (..)
@@ -155,6 +169,9 @@ module Terrafomo.OPC.Lens
     , HasComputedTags (..)
     , HasComputedTransitFlag (..)
     , HasComputedUri (..)
+    , HasComputedVcableId (..)
+    , HasComputedVirtio (..)
+    , HasComputedVncAddress (..)
     , HasComputedVnic (..)
     , HasComputedVnicSets (..)
     , HasComputedVolumeName (..)
@@ -709,6 +726,12 @@ class HasComputedAttributes a b | a -> b where
     computedAttributes =
         to (\x -> TF.Computed (TF.referenceKey x) "attributes")
 
+class HasComputedAvailabilityDomain a b | a -> b where
+    computedAvailabilityDomain
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAvailabilityDomain =
+        to (\x -> TF.Computed (TF.referenceKey x) "availability_domain")
+
 class HasComputedCollocated a b | a -> b where
     computedCollocated
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -727,6 +750,18 @@ class HasComputedDns a b | a -> b where
     computedDns =
         to (\x -> TF.Computed (TF.referenceKey x) "dns")
 
+class HasComputedDomain a b | a -> b where
+    computedDomain
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDomain =
+        to (\x -> TF.Computed (TF.referenceKey x) "domain")
+
+class HasComputedEntry a b | a -> b where
+    computedEntry
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedEntry =
+        to (\x -> TF.Computed (TF.referenceKey x) "entry")
+
 class HasComputedErrorReason a b | a -> b where
     computedErrorReason
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -739,11 +774,29 @@ class HasComputedFile a b | a -> b where
     computedFile =
         to (\x -> TF.Computed (TF.referenceKey x) "file")
 
+class HasComputedFingerprint a b | a -> b where
+    computedFingerprint
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedFingerprint =
+        to (\x -> TF.Computed (TF.referenceKey x) "fingerprint")
+
+class HasComputedFqdn a b | a -> b where
+    computedFqdn
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedFqdn =
+        to (\x -> TF.Computed (TF.referenceKey x) "fqdn")
+
 class HasComputedHypervisor a b | a -> b where
     computedHypervisor
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHypervisor =
         to (\x -> TF.Computed (TF.referenceKey x) "hypervisor")
+
+class HasComputedId a b | a -> b where
+    computedId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedId =
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
 
 class HasComputedImageFormat a b | a -> b where
     computedImageFormat
@@ -799,6 +852,12 @@ class HasComputedMachineImageName a b | a -> b where
     computedMachineImageName =
         to (\x -> TF.Computed (TF.referenceKey x) "machine_image_name")
 
+class HasComputedMachineImages a b | a -> b where
+    computedMachineImages
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedMachineImages =
+        to (\x -> TF.Computed (TF.referenceKey x) "machine_images")
+
 class HasComputedManaged a b | a -> b where
     computedManaged
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -841,11 +900,23 @@ class HasComputedParentVolumeBootable a b | a -> b where
     computedParentVolumeBootable =
         to (\x -> TF.Computed (TF.referenceKey x) "parent_volume_bootable")
 
+class HasComputedPlacementRequirements a b | a -> b where
+    computedPlacementRequirements
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPlacementRequirements =
+        to (\x -> TF.Computed (TF.referenceKey x) "placement_requirements")
+
 class HasComputedPlatform a b | a -> b where
     computedPlatform
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPlatform =
         to (\x -> TF.Computed (TF.referenceKey x) "platform")
+
+class HasComputedPriority a b | a -> b where
+    computedPriority
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPriority =
+        to (\x -> TF.Computed (TF.referenceKey x) "priority")
 
 class HasComputedProperty a b | a -> b where
     computedProperty
@@ -859,11 +930,29 @@ class HasComputedPublicNaptEnabled a b | a -> b where
     computedPublicNaptEnabled =
         to (\x -> TF.Computed (TF.referenceKey x) "public_napt_enabled")
 
+class HasComputedQuotaReservation a b | a -> b where
+    computedQuotaReservation
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedQuotaReservation =
+        to (\x -> TF.Computed (TF.referenceKey x) "quota_reservation")
+
 class HasComputedReadonly a b | a -> b where
     computedReadonly
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedReadonly =
         to (\x -> TF.Computed (TF.referenceKey x) "readonly")
+
+class HasComputedRelationships a b | a -> b where
+    computedRelationships
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedRelationships =
+        to (\x -> TF.Computed (TF.referenceKey x) "relationships")
+
+class HasComputedResolvers a b | a -> b where
+    computedResolvers
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedResolvers =
+        to (\x -> TF.Computed (TF.referenceKey x) "resolvers")
 
 class HasComputedSearchDomains a b | a -> b where
     computedSearchDomains
@@ -883,6 +972,12 @@ class HasComputedSharedNetwork a b | a -> b where
     computedSharedNetwork =
         to (\x -> TF.Computed (TF.referenceKey x) "shared_network")
 
+class HasComputedSite a b | a -> b where
+    computedSite
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSite =
+        to (\x -> TF.Computed (TF.referenceKey x) "site")
+
 class HasComputedSize a b | a -> b where
     computedSize
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -900,6 +995,12 @@ class HasComputedSnapshotTimestamp a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSnapshotTimestamp =
         to (\x -> TF.Computed (TF.referenceKey x) "snapshot_timestamp")
+
+class HasComputedStartTime a b | a -> b where
+    computedStartTime
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedStartTime =
+        to (\x -> TF.Computed (TF.referenceKey x) "start_time")
 
 class HasComputedStartTimestamp a b | a -> b where
     computedStartTimestamp
@@ -954,6 +1055,24 @@ class HasComputedUri a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUri =
         to (\x -> TF.Computed (TF.referenceKey x) "uri")
+
+class HasComputedVcableId a b | a -> b where
+    computedVcableId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedVcableId =
+        to (\x -> TF.Computed (TF.referenceKey x) "vcable_id")
+
+class HasComputedVirtio a b | a -> b where
+    computedVirtio
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedVirtio =
+        to (\x -> TF.Computed (TF.referenceKey x) "virtio")
+
+class HasComputedVncAddress a b | a -> b where
+    computedVncAddress
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedVncAddress =
+        to (\x -> TF.Computed (TF.referenceKey x) "vnc_address")
 
 class HasComputedVnic a b | a -> b where
     computedVnic

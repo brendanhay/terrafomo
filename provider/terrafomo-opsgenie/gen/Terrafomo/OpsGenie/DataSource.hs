@@ -75,10 +75,9 @@ instance TF.ToHCL (UserData s) where
 instance P.HasUsername (UserData s) s Text where
     username =
         lens (_username :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: UserData s)
+             (\s a -> s { _username = a } :: UserData s)
 
 instance P.HasComputedFullName (UserData s) Text
-
 instance P.HasComputedRole (UserData s) Text
 
 userData :: TF.DataSource P.OpsGenie (UserData s)

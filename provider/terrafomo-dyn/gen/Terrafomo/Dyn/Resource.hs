@@ -90,30 +90,29 @@ instance TF.ToHCL (RecordResource s) where
 instance P.HasName (RecordResource s) s Text where
     name =
         lens (_name :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RecordResource s)
+             (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) s Text where
     ttl =
         lens (_ttl :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _ttl = a } :: RecordResource s)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) s Text where
     type' =
         lens (_type' :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: RecordResource s)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasValue (RecordResource s) s Text where
     value =
         lens (_value :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _value = a } :: RecordResource s)
+             (\s a -> s { _value = a } :: RecordResource s)
 
 instance P.HasZone (RecordResource s) s Text where
     zone =
         lens (_zone :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: RecordResource s)
+             (\s a -> s { _zone = a } :: RecordResource s)
 
 instance P.HasComputedFqdn (RecordResource s) Text
-
 instance P.HasComputedId (RecordResource s) Text
 
 recordResource :: TF.Resource P.Dyn (RecordResource s)

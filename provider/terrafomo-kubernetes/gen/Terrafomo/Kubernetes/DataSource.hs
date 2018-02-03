@@ -77,7 +77,8 @@ instance TF.ToHCL (ServiceData s) where
 instance P.HasMetadata (ServiceData s) s Text where
     metadata =
         lens (_metadata :: ServiceData s -> TF.Attribute s Text)
-            (\s a -> s { _metadata = a } :: ServiceData s)
+             (\s a -> s { _metadata = a } :: ServiceData s)
+
 
 serviceData :: TF.DataSource P.Kubernetes (ServiceData s)
 serviceData =
@@ -106,7 +107,8 @@ instance TF.ToHCL (StorageClassData s) where
 instance P.HasMetadata (StorageClassData s) s Text where
     metadata =
         lens (_metadata :: StorageClassData s -> TF.Attribute s Text)
-            (\s a -> s { _metadata = a } :: StorageClassData s)
+             (\s a -> s { _metadata = a } :: StorageClassData s)
+
 
 storageClassData :: TF.DataSource P.Kubernetes (StorageClassData s)
 storageClassData =

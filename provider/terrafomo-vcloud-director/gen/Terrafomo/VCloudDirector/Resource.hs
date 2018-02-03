@@ -136,22 +136,23 @@ instance TF.ToHCL (DnatResource s) where
 instance P.HasEdgeGateway (DnatResource s) s Text where
     edgeGateway =
         lens (_edge_gateway :: DnatResource s -> TF.Attribute s Text)
-            (\s a -> s { _edge_gateway = a } :: DnatResource s)
+             (\s a -> s { _edge_gateway = a } :: DnatResource s)
 
 instance P.HasExternalIp (DnatResource s) s Text where
     externalIp =
         lens (_external_ip :: DnatResource s -> TF.Attribute s Text)
-            (\s a -> s { _external_ip = a } :: DnatResource s)
+             (\s a -> s { _external_ip = a } :: DnatResource s)
 
 instance P.HasInternalIp (DnatResource s) s Text where
     internalIp =
         lens (_internal_ip :: DnatResource s -> TF.Attribute s Text)
-            (\s a -> s { _internal_ip = a } :: DnatResource s)
+             (\s a -> s { _internal_ip = a } :: DnatResource s)
 
 instance P.HasPort (DnatResource s) s Text where
     port =
         lens (_port :: DnatResource s -> TF.Attribute s Text)
-            (\s a -> s { _port = a } :: DnatResource s)
+             (\s a -> s { _port = a } :: DnatResource s)
+
 
 dnatResource :: TF.Resource P.VCloudDirector (DnatResource s)
 dnatResource =
@@ -214,62 +215,63 @@ instance TF.ToHCL (EdgegatewayVpnResource s) where
 instance P.HasDescription (EdgegatewayVpnResource s) s Text where
     description =
         lens (_description :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _description = a } :: EdgegatewayVpnResource s)
 
 instance P.HasEdgeGateway (EdgegatewayVpnResource s) s Text where
     edgeGateway =
         lens (_edge_gateway :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _edge_gateway = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _edge_gateway = a } :: EdgegatewayVpnResource s)
 
 instance P.HasEncryptionProtocol (EdgegatewayVpnResource s) s Text where
     encryptionProtocol =
         lens (_encryption_protocol :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _encryption_protocol = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _encryption_protocol = a } :: EdgegatewayVpnResource s)
 
 instance P.HasLocalId (EdgegatewayVpnResource s) s Text where
     localId =
         lens (_local_id :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _local_id = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _local_id = a } :: EdgegatewayVpnResource s)
 
 instance P.HasLocalIpAddress (EdgegatewayVpnResource s) s Text where
     localIpAddress =
         lens (_local_ip_address :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _local_ip_address = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _local_ip_address = a } :: EdgegatewayVpnResource s)
 
 instance P.HasLocalSubnets (EdgegatewayVpnResource s) s Text where
     localSubnets =
         lens (_local_subnets :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _local_subnets = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _local_subnets = a } :: EdgegatewayVpnResource s)
 
 instance P.HasMtu (EdgegatewayVpnResource s) s Text where
     mtu =
         lens (_mtu :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _mtu = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _mtu = a } :: EdgegatewayVpnResource s)
 
 instance P.HasName (EdgegatewayVpnResource s) s Text where
     name =
         lens (_name :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _name = a } :: EdgegatewayVpnResource s)
 
 instance P.HasPeerId (EdgegatewayVpnResource s) s Text where
     peerId =
         lens (_peer_id :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _peer_id = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _peer_id = a } :: EdgegatewayVpnResource s)
 
 instance P.HasPeerIpAddress (EdgegatewayVpnResource s) s Text where
     peerIpAddress =
         lens (_peer_ip_address :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _peer_ip_address = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _peer_ip_address = a } :: EdgegatewayVpnResource s)
 
 instance P.HasPeerSubnets (EdgegatewayVpnResource s) s Text where
     peerSubnets =
         lens (_peer_subnets :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _peer_subnets = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _peer_subnets = a } :: EdgegatewayVpnResource s)
 
 instance P.HasSharedSecret (EdgegatewayVpnResource s) s Text where
     sharedSecret =
         lens (_shared_secret :: EdgegatewayVpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _shared_secret = a } :: EdgegatewayVpnResource s)
+             (\s a -> s { _shared_secret = a } :: EdgegatewayVpnResource s)
+
 
 edgegatewayVpnResource :: TF.Resource P.VCloudDirector (EdgegatewayVpnResource s)
 edgegatewayVpnResource =
@@ -313,17 +315,18 @@ instance TF.ToHCL (FirewallRulesResource s) where
 instance P.HasDefaultAction (FirewallRulesResource s) s Text where
     defaultAction =
         lens (_default_action :: FirewallRulesResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_action = a } :: FirewallRulesResource s)
+             (\s a -> s { _default_action = a } :: FirewallRulesResource s)
 
 instance P.HasEdgeGateway (FirewallRulesResource s) s Text where
     edgeGateway =
         lens (_edge_gateway :: FirewallRulesResource s -> TF.Attribute s Text)
-            (\s a -> s { _edge_gateway = a } :: FirewallRulesResource s)
+             (\s a -> s { _edge_gateway = a } :: FirewallRulesResource s)
 
 instance P.HasRule (FirewallRulesResource s) s Text where
     rule =
         lens (_rule :: FirewallRulesResource s -> TF.Attribute s Text)
-            (\s a -> s { _rule = a } :: FirewallRulesResource s)
+             (\s a -> s { _rule = a } :: FirewallRulesResource s)
+
 
 firewallRulesResource :: TF.Resource P.VCloudDirector (FirewallRulesResource s)
 firewallRulesResource =
@@ -379,52 +382,53 @@ instance TF.ToHCL (NetworkResource s) where
 instance P.HasDhcpPool (NetworkResource s) s Text where
     dhcpPool =
         lens (_dhcp_pool :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _dhcp_pool = a } :: NetworkResource s)
+             (\s a -> s { _dhcp_pool = a } :: NetworkResource s)
 
 instance P.HasDns1 (NetworkResource s) s Text where
     dns1 =
         lens (_dns1 :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _dns1 = a } :: NetworkResource s)
+             (\s a -> s { _dns1 = a } :: NetworkResource s)
 
 instance P.HasDns2 (NetworkResource s) s Text where
     dns2 =
         lens (_dns2 :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _dns2 = a } :: NetworkResource s)
+             (\s a -> s { _dns2 = a } :: NetworkResource s)
 
 instance P.HasDnsSuffix (NetworkResource s) s Text where
     dnsSuffix =
         lens (_dns_suffix :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _dns_suffix = a } :: NetworkResource s)
+             (\s a -> s { _dns_suffix = a } :: NetworkResource s)
 
 instance P.HasEdgeGateway (NetworkResource s) s Text where
     edgeGateway =
         lens (_edge_gateway :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _edge_gateway = a } :: NetworkResource s)
+             (\s a -> s { _edge_gateway = a } :: NetworkResource s)
 
 instance P.HasGateway (NetworkResource s) s Text where
     gateway =
         lens (_gateway :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _gateway = a } :: NetworkResource s)
+             (\s a -> s { _gateway = a } :: NetworkResource s)
 
 instance P.HasName (NetworkResource s) s Text where
     name =
         lens (_name :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NetworkResource s)
+             (\s a -> s { _name = a } :: NetworkResource s)
 
 instance P.HasNetmask (NetworkResource s) s Text where
     netmask =
         lens (_netmask :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _netmask = a } :: NetworkResource s)
+             (\s a -> s { _netmask = a } :: NetworkResource s)
 
 instance P.HasShared (NetworkResource s) s Text where
     shared =
         lens (_shared :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _shared = a } :: NetworkResource s)
+             (\s a -> s { _shared = a } :: NetworkResource s)
 
 instance P.HasStaticIpPool (NetworkResource s) s Text where
     staticIpPool =
         lens (_static_ip_pool :: NetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _static_ip_pool = a } :: NetworkResource s)
+             (\s a -> s { _static_ip_pool = a } :: NetworkResource s)
+
 
 networkResource :: TF.Resource P.VCloudDirector (NetworkResource s)
 networkResource =
@@ -466,17 +470,18 @@ instance TF.ToHCL (SnatResource s) where
 instance P.HasEdgeGateway (SnatResource s) s Text where
     edgeGateway =
         lens (_edge_gateway :: SnatResource s -> TF.Attribute s Text)
-            (\s a -> s { _edge_gateway = a } :: SnatResource s)
+             (\s a -> s { _edge_gateway = a } :: SnatResource s)
 
 instance P.HasExternalIp (SnatResource s) s Text where
     externalIp =
         lens (_external_ip :: SnatResource s -> TF.Attribute s Text)
-            (\s a -> s { _external_ip = a } :: SnatResource s)
+             (\s a -> s { _external_ip = a } :: SnatResource s)
 
 instance P.HasInternalIp (SnatResource s) s Text where
     internalIp =
         lens (_internal_ip :: SnatResource s -> TF.Attribute s Text)
-            (\s a -> s { _internal_ip = a } :: SnatResource s)
+             (\s a -> s { _internal_ip = a } :: SnatResource s)
+
 
 snatResource :: TF.Resource P.VCloudDirector (SnatResource s)
 snatResource =
@@ -535,57 +540,58 @@ instance TF.ToHCL (VappResource s) where
 instance P.HasCatalogName (VappResource s) s Text where
     catalogName =
         lens (_catalog_name :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _catalog_name = a } :: VappResource s)
+             (\s a -> s { _catalog_name = a } :: VappResource s)
 
 instance P.HasCpus (VappResource s) s Text where
     cpus =
         lens (_cpus :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _cpus = a } :: VappResource s)
+             (\s a -> s { _cpus = a } :: VappResource s)
 
 instance P.HasInitscript (VappResource s) s Text where
     initscript =
         lens (_initscript :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _initscript = a } :: VappResource s)
+             (\s a -> s { _initscript = a } :: VappResource s)
 
 instance P.HasIp (VappResource s) s Text where
     ip =
         lens (_ip :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _ip = a } :: VappResource s)
+             (\s a -> s { _ip = a } :: VappResource s)
 
 instance P.HasMemory (VappResource s) s Text where
     memory =
         lens (_memory :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _memory = a } :: VappResource s)
+             (\s a -> s { _memory = a } :: VappResource s)
 
 instance P.HasMetadata (VappResource s) s Text where
     metadata =
         lens (_metadata :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _metadata = a } :: VappResource s)
+             (\s a -> s { _metadata = a } :: VappResource s)
 
 instance P.HasName (VappResource s) s Text where
     name =
         lens (_name :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VappResource s)
+             (\s a -> s { _name = a } :: VappResource s)
 
 instance P.HasNetworkName (VappResource s) s Text where
     networkName =
         lens (_network_name :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _network_name = a } :: VappResource s)
+             (\s a -> s { _network_name = a } :: VappResource s)
 
 instance P.HasOvf (VappResource s) s Text where
     ovf =
         lens (_ovf :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _ovf = a } :: VappResource s)
+             (\s a -> s { _ovf = a } :: VappResource s)
 
 instance P.HasPowerOn (VappResource s) s Text where
     powerOn =
         lens (_power_on :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _power_on = a } :: VappResource s)
+             (\s a -> s { _power_on = a } :: VappResource s)
 
 instance P.HasTemplateName (VappResource s) s Text where
     templateName =
         lens (_template_name :: VappResource s -> TF.Attribute s Text)
-            (\s a -> s { _template_name = a } :: VappResource s)
+             (\s a -> s { _template_name = a } :: VappResource s)
+
 
 vappResource :: TF.Resource P.VCloudDirector (VappResource s)
 vappResource =
@@ -649,47 +655,48 @@ instance TF.ToHCL (VappVmResource s) where
 instance P.HasCatalogName (VappVmResource s) s Text where
     catalogName =
         lens (_catalog_name :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _catalog_name = a } :: VappVmResource s)
+             (\s a -> s { _catalog_name = a } :: VappVmResource s)
 
 instance P.HasCpus (VappVmResource s) s Text where
     cpus =
         lens (_cpus :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _cpus = a } :: VappVmResource s)
+             (\s a -> s { _cpus = a } :: VappVmResource s)
 
 instance P.HasInitscript (VappVmResource s) s Text where
     initscript =
         lens (_initscript :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _initscript = a } :: VappVmResource s)
+             (\s a -> s { _initscript = a } :: VappVmResource s)
 
 instance P.HasIp (VappVmResource s) s Text where
     ip =
         lens (_ip :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _ip = a } :: VappVmResource s)
+             (\s a -> s { _ip = a } :: VappVmResource s)
 
 instance P.HasMemory (VappVmResource s) s Text where
     memory =
         lens (_memory :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _memory = a } :: VappVmResource s)
+             (\s a -> s { _memory = a } :: VappVmResource s)
 
 instance P.HasName (VappVmResource s) s Text where
     name =
         lens (_name :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VappVmResource s)
+             (\s a -> s { _name = a } :: VappVmResource s)
 
 instance P.HasPowerOn (VappVmResource s) s Text where
     powerOn =
         lens (_power_on :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _power_on = a } :: VappVmResource s)
+             (\s a -> s { _power_on = a } :: VappVmResource s)
 
 instance P.HasTemplateName (VappVmResource s) s Text where
     templateName =
         lens (_template_name :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _template_name = a } :: VappVmResource s)
+             (\s a -> s { _template_name = a } :: VappVmResource s)
 
 instance P.HasVappName (VappVmResource s) s Text where
     vappName =
         lens (_vapp_name :: VappVmResource s -> TF.Attribute s Text)
-            (\s a -> s { _vapp_name = a } :: VappVmResource s)
+             (\s a -> s { _vapp_name = a } :: VappVmResource s)
+
 
 vappVmResource :: TF.Resource P.VCloudDirector (VappVmResource s)
 vappVmResource =

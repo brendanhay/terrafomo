@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.DNSimple
-    - Terrafomo.DNSimple.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

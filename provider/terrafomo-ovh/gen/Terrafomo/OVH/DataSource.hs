@@ -86,21 +86,17 @@ instance TF.ToHCL (RegionData s) where
 instance P.HasProjectId (RegionData s) s Text where
     projectId =
         lens (_project_id :: RegionData s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: RegionData s)
+             (\s a -> s { _project_id = a } :: RegionData s)
 
 instance P.HasRegion (RegionData s) s Text where
     region =
         lens (_region :: RegionData s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: RegionData s)
+             (\s a -> s { _region = a } :: RegionData s)
 
 instance P.HasComputedContinentCode (RegionData s) Text
-
 instance P.HasComputedContinentCode (RegionData s) Text
-
 instance P.HasComputedDatacenterLocation (RegionData s) Text
-
 instance P.HasComputedDatacenterLocation (RegionData s) Text
-
 instance P.HasComputedServices (RegionData s) Text
 
 regionData :: TF.DataSource P.OVH (RegionData s)
@@ -128,7 +124,7 @@ instance TF.ToHCL (RegionsData s) where
 instance P.HasProjectId (RegionsData s) s Text where
     projectId =
         lens (_project_id :: RegionsData s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: RegionsData s)
+             (\s a -> s { _project_id = a } :: RegionsData s)
 
 instance P.HasComputedNames (RegionsData s) Text
 

@@ -109,52 +109,52 @@ instance TF.ToHCL (TestResource s) where
 instance P.HasCheckRate (TestResource s) s Text where
     checkRate =
         lens (_check_rate :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _check_rate = a } :: TestResource s)
+             (\s a -> s { _check_rate = a } :: TestResource s)
 
 instance P.HasConfirmations (TestResource s) s Text where
     confirmations =
         lens (_confirmations :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _confirmations = a } :: TestResource s)
+             (\s a -> s { _confirmations = a } :: TestResource s)
 
 instance P.HasContactId (TestResource s) s Text where
     contactId =
         lens (_contact_id :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _contact_id = a } :: TestResource s)
+             (\s a -> s { _contact_id = a } :: TestResource s)
 
 instance P.HasPaused (TestResource s) s Text where
     paused =
         lens (_paused :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _paused = a } :: TestResource s)
+             (\s a -> s { _paused = a } :: TestResource s)
 
 instance P.HasPort (TestResource s) s Text where
     port =
         lens (_port :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _port = a } :: TestResource s)
+             (\s a -> s { _port = a } :: TestResource s)
 
 instance P.HasTestType (TestResource s) s Text where
     testType =
         lens (_test_type :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _test_type = a } :: TestResource s)
+             (\s a -> s { _test_type = a } :: TestResource s)
 
 instance P.HasTimeout (TestResource s) s Text where
     timeout =
         lens (_timeout :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _timeout = a } :: TestResource s)
+             (\s a -> s { _timeout = a } :: TestResource s)
 
 instance P.HasTriggerRate (TestResource s) s Text where
     triggerRate =
         lens (_trigger_rate :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _trigger_rate = a } :: TestResource s)
+             (\s a -> s { _trigger_rate = a } :: TestResource s)
 
 instance P.HasWebsiteName (TestResource s) s Text where
     websiteName =
         lens (_website_name :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _website_name = a } :: TestResource s)
+             (\s a -> s { _website_name = a } :: TestResource s)
 
 instance P.HasWebsiteUrl (TestResource s) s Text where
     websiteUrl =
         lens (_website_url :: TestResource s -> TF.Attribute s Text)
-            (\s a -> s { _website_url = a } :: TestResource s)
+             (\s a -> s { _website_url = a } :: TestResource s)
 
 instance P.HasComputedTestId (TestResource s) Text
 

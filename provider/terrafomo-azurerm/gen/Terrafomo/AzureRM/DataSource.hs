@@ -185,23 +185,18 @@ instance TF.ToHCL (AppServicePlanData s) where
 instance P.HasName (AppServicePlanData s) s Text where
     name =
         lens (_name :: AppServicePlanData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AppServicePlanData s)
+             (\s a -> s { _name = a } :: AppServicePlanData s)
 
 instance P.HasResourceGroupName (AppServicePlanData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: AppServicePlanData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: AppServicePlanData s)
+             (\s a -> s { _resource_group_name = a } :: AppServicePlanData s)
 
 instance P.HasComputedId (AppServicePlanData s) Text
-
 instance P.HasComputedKind (AppServicePlanData s) Text
-
 instance P.HasComputedLocation (AppServicePlanData s) Text
-
 instance P.HasComputedProperties (AppServicePlanData s) Text
-
 instance P.HasComputedSku (AppServicePlanData s) Text
-
 instance P.HasComputedTags (AppServicePlanData s) Text
 
 appServicePlanData :: TF.DataSource P.AzureRM (AppServicePlanData s)
@@ -231,16 +226,12 @@ instance TF.ToHCL (BuiltinRoleDefinitionData s) where
 instance P.HasName (BuiltinRoleDefinitionData s) s Text where
     name =
         lens (_name :: BuiltinRoleDefinitionData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: BuiltinRoleDefinitionData s)
+             (\s a -> s { _name = a } :: BuiltinRoleDefinitionData s)
 
 instance P.HasComputedAssignableScopes (BuiltinRoleDefinitionData s) Text
-
 instance P.HasComputedDescription (BuiltinRoleDefinitionData s) Text
-
 instance P.HasComputedId (BuiltinRoleDefinitionData s) Text
-
 instance P.HasComputedPermissions (BuiltinRoleDefinitionData s) Text
-
 instance P.HasComputedType' (BuiltinRoleDefinitionData s) Text
 
 builtinRoleDefinitionData :: TF.DataSource P.AzureRM (BuiltinRoleDefinitionData s)
@@ -274,17 +265,18 @@ instance TF.ToHCL (ClientConfigData s) where
 instance P.HasClientId (ClientConfigData s) s Text where
     clientId =
         lens (_client_id :: ClientConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _client_id = a } :: ClientConfigData s)
+             (\s a -> s { _client_id = a } :: ClientConfigData s)
 
 instance P.HasSubscriptionId (ClientConfigData s) s Text where
     subscriptionId =
         lens (_subscription_id :: ClientConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _subscription_id = a } :: ClientConfigData s)
+             (\s a -> s { _subscription_id = a } :: ClientConfigData s)
 
 instance P.HasTenantId (ClientConfigData s) s Text where
     tenantId =
         lens (_tenant_id :: ClientConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _tenant_id = a } :: ClientConfigData s)
+             (\s a -> s { _tenant_id = a } :: ClientConfigData s)
+
 
 clientConfigData :: TF.DataSource P.AzureRM (ClientConfigData s)
 clientConfigData =
@@ -315,21 +307,17 @@ instance TF.ToHCL (DnsZoneData s) where
 instance P.HasName (DnsZoneData s) s Text where
     name =
         lens (_name :: DnsZoneData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DnsZoneData s)
+             (\s a -> s { _name = a } :: DnsZoneData s)
 
 instance P.HasResourceGroupName (DnsZoneData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsZoneData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: DnsZoneData s)
+             (\s a -> s { _resource_group_name = a } :: DnsZoneData s)
 
 instance P.HasComputedId (DnsZoneData s) Text
-
 instance P.HasComputedMaxNumberOfRecordSets (DnsZoneData s) Text
-
 instance P.HasComputedNameServers (DnsZoneData s) Text
-
 instance P.HasComputedNumberOfRecordSets (DnsZoneData s) Text
-
 instance P.HasComputedTags (DnsZoneData s) Text
 
 dnsZoneData :: TF.DataSource P.AzureRM (DnsZoneData s)
@@ -360,25 +348,19 @@ instance TF.ToHCL (EventhubNamespaceData s) where
 instance P.HasName (EventhubNamespaceData s) s Text where
     name =
         lens (_name :: EventhubNamespaceData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EventhubNamespaceData s)
+             (\s a -> s { _name = a } :: EventhubNamespaceData s)
 
 instance P.HasResourceGroupName (EventhubNamespaceData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: EventhubNamespaceData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: EventhubNamespaceData s)
+             (\s a -> s { _resource_group_name = a } :: EventhubNamespaceData s)
 
 instance P.HasComputedAutoInflateEnabled (EventhubNamespaceData s) Text
-
 instance P.HasComputedCapacity (EventhubNamespaceData s) Text
-
 instance P.HasComputedId (EventhubNamespaceData s) Text
-
 instance P.HasComputedLocation (EventhubNamespaceData s) Text
-
 instance P.HasComputedMaximumThroughputUnits (EventhubNamespaceData s) Text
-
 instance P.HasComputedSku (EventhubNamespaceData s) Text
-
 instance P.HasComputedTags (EventhubNamespaceData s) Text
 
 eventhubNamespaceData :: TF.DataSource P.AzureRM (EventhubNamespaceData s)
@@ -415,31 +397,27 @@ instance TF.ToHCL (ImageData s) where
 instance P.HasName (ImageData s) s Text where
     name =
         lens (_name :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageData s)
+             (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasNameRegex (ImageData s) s Text where
     nameRegex =
         lens (_name_regex :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: ImageData s)
+             (\s a -> s { _name_regex = a } :: ImageData s)
 
 instance P.HasResourceGroupName (ImageData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: ImageData s)
+             (\s a -> s { _resource_group_name = a } :: ImageData s)
 
 instance P.HasSortDescending (ImageData s) s Text where
     sortDescending =
         lens (_sort_descending :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _sort_descending = a } :: ImageData s)
+             (\s a -> s { _sort_descending = a } :: ImageData s)
 
 instance P.HasComputedDataDisk (ImageData s) Text
-
 instance P.HasComputedLocation (ImageData s) Text
-
 instance P.HasComputedName (ImageData s) Text
-
 instance P.HasComputedOsDisk (ImageData s) Text
-
 instance P.HasComputedTags (ImageData s) Text
 
 imageData :: TF.DataSource P.AzureRM (ImageData s)
@@ -470,14 +448,11 @@ instance TF.ToHCL (KeyVaultAccessPolicyData s) where
 instance P.HasName (KeyVaultAccessPolicyData s) s Text where
     name =
         lens (_name :: KeyVaultAccessPolicyData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: KeyVaultAccessPolicyData s)
+             (\s a -> s { _name = a } :: KeyVaultAccessPolicyData s)
 
 instance P.HasComputedCertificatePermissions (KeyVaultAccessPolicyData s) Text
-
 instance P.HasComputedId (KeyVaultAccessPolicyData s) Text
-
 instance P.HasComputedKeyPermissions (KeyVaultAccessPolicyData s) Text
-
 instance P.HasComputedSecretPermissions (KeyVaultAccessPolicyData s) Text
 
 keyVaultAccessPolicyData :: TF.DataSource P.AzureRM (KeyVaultAccessPolicyData s)
@@ -508,23 +483,18 @@ instance TF.ToHCL (ManagedDiskData s) where
 instance P.HasName (ManagedDiskData s) s Text where
     name =
         lens (_name :: ManagedDiskData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ManagedDiskData s)
+             (\s a -> s { _name = a } :: ManagedDiskData s)
 
 instance P.HasResourceGroupName (ManagedDiskData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: ManagedDiskData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: ManagedDiskData s)
+             (\s a -> s { _resource_group_name = a } :: ManagedDiskData s)
 
 instance P.HasComputedDiskSizeGb (ManagedDiskData s) Text
-
 instance P.HasComputedOsType (ManagedDiskData s) Text
-
 instance P.HasComputedSourceResourceId (ManagedDiskData s) Text
-
 instance P.HasComputedSourceUri (ManagedDiskData s) Text
-
 instance P.HasComputedStorageAccountType (ManagedDiskData s) Text
-
 instance P.HasComputedTags (ManagedDiskData s) Text
 
 managedDiskData :: TF.DataSource P.AzureRM (ManagedDiskData s)
@@ -555,19 +525,16 @@ instance TF.ToHCL (NetworkSecurityGroupData s) where
 instance P.HasName (NetworkSecurityGroupData s) s Text where
     name =
         lens (_name :: NetworkSecurityGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NetworkSecurityGroupData s)
+             (\s a -> s { _name = a } :: NetworkSecurityGroupData s)
 
 instance P.HasResourceGroupName (NetworkSecurityGroupData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: NetworkSecurityGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: NetworkSecurityGroupData s)
+             (\s a -> s { _resource_group_name = a } :: NetworkSecurityGroupData s)
 
 instance P.HasComputedId (NetworkSecurityGroupData s) Text
-
 instance P.HasComputedLocation (NetworkSecurityGroupData s) Text
-
 instance P.HasComputedSecurityRule (NetworkSecurityGroupData s) Text
-
 instance P.HasComputedTags (NetworkSecurityGroupData s) Text
 
 networkSecurityGroupData :: TF.DataSource P.AzureRM (NetworkSecurityGroupData s)
@@ -604,25 +571,24 @@ instance TF.ToHCL (PlatformImageData s) where
 instance P.HasLocation (PlatformImageData s) s Text where
     location =
         lens (_location :: PlatformImageData s -> TF.Attribute s Text)
-            (\s a -> s { _location = a } :: PlatformImageData s)
+             (\s a -> s { _location = a } :: PlatformImageData s)
 
 instance P.HasOffer (PlatformImageData s) s Text where
     offer =
         lens (_offer :: PlatformImageData s -> TF.Attribute s Text)
-            (\s a -> s { _offer = a } :: PlatformImageData s)
+             (\s a -> s { _offer = a } :: PlatformImageData s)
 
 instance P.HasPublisher (PlatformImageData s) s Text where
     publisher =
         lens (_publisher :: PlatformImageData s -> TF.Attribute s Text)
-            (\s a -> s { _publisher = a } :: PlatformImageData s)
+             (\s a -> s { _publisher = a } :: PlatformImageData s)
 
 instance P.HasSku (PlatformImageData s) s Text where
     sku =
         lens (_sku :: PlatformImageData s -> TF.Attribute s Text)
-            (\s a -> s { _sku = a } :: PlatformImageData s)
+             (\s a -> s { _sku = a } :: PlatformImageData s)
 
 instance P.HasComputedId (PlatformImageData s) Text
-
 instance P.HasComputedVersion (PlatformImageData s) Text
 
 platformImageData :: TF.DataSource P.AzureRM (PlatformImageData s)
@@ -656,21 +622,17 @@ instance TF.ToHCL (PublicIpData s) where
 instance P.HasName (PublicIpData s) s Text where
     name =
         lens (_name :: PublicIpData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: PublicIpData s)
+             (\s a -> s { _name = a } :: PublicIpData s)
 
 instance P.HasResourceGroupName (PublicIpData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: PublicIpData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: PublicIpData s)
+             (\s a -> s { _resource_group_name = a } :: PublicIpData s)
 
 instance P.HasComputedDomainNameLabel (PublicIpData s) Text
-
 instance P.HasComputedFqdn (PublicIpData s) Text
-
 instance P.HasComputedIdleTimeoutInMinutes (PublicIpData s) Text
-
 instance P.HasComputedIpAddress (PublicIpData s) Text
-
 instance P.HasComputedTags (PublicIpData s) Text
 
 publicIpData :: TF.DataSource P.AzureRM (PublicIpData s)
@@ -698,10 +660,9 @@ instance TF.ToHCL (ResourceGroupData s) where
 instance P.HasName (ResourceGroupData s) s Text where
     name =
         lens (_name :: ResourceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ResourceGroupData s)
+             (\s a -> s { _name = a } :: ResourceGroupData s)
 
 instance P.HasComputedLocation (ResourceGroupData s) Text
-
 instance P.HasComputedTags (ResourceGroupData s) Text
 
 resourceGroupData :: TF.DataSource P.AzureRM (ResourceGroupData s)
@@ -733,21 +694,17 @@ instance TF.ToHCL (RoleDefinitionData s) where
 instance P.HasRoleDefinitionId (RoleDefinitionData s) s Text where
     roleDefinitionId =
         lens (_role_definition_id :: RoleDefinitionData s -> TF.Attribute s Text)
-            (\s a -> s { _role_definition_id = a } :: RoleDefinitionData s)
+             (\s a -> s { _role_definition_id = a } :: RoleDefinitionData s)
 
 instance P.HasScope (RoleDefinitionData s) s Text where
     scope =
         lens (_scope :: RoleDefinitionData s -> TF.Attribute s Text)
-            (\s a -> s { _scope = a } :: RoleDefinitionData s)
+             (\s a -> s { _scope = a } :: RoleDefinitionData s)
 
 instance P.HasComputedAssignableScopes (RoleDefinitionData s) Text
-
 instance P.HasComputedDescription (RoleDefinitionData s) Text
-
 instance P.HasComputedId (RoleDefinitionData s) Text
-
 instance P.HasComputedPermissions (RoleDefinitionData s) Text
-
 instance P.HasComputedType' (RoleDefinitionData s) Text
 
 roleDefinitionData :: TF.DataSource P.AzureRM (RoleDefinitionData s)
@@ -778,23 +735,18 @@ instance TF.ToHCL (SnapshotData s) where
 instance P.HasName (SnapshotData s) s Text where
     name =
         lens (_name :: SnapshotData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SnapshotData s)
+             (\s a -> s { _name = a } :: SnapshotData s)
 
 instance P.HasResourceGroupName (SnapshotData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SnapshotData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: SnapshotData s)
+             (\s a -> s { _resource_group_name = a } :: SnapshotData s)
 
 instance P.HasComputedCreateOption (SnapshotData s) Text
-
 instance P.HasComputedDiskSizeGb (SnapshotData s) Text
-
 instance P.HasComputedId (SnapshotData s) Text
-
 instance P.HasComputedSourceResourceId (SnapshotData s) Text
-
 instance P.HasComputedSourceUri (SnapshotData s) Text
-
 instance P.HasComputedStorageAccountId (SnapshotData s) Text
 
 snapshotData :: TF.DataSource P.AzureRM (SnapshotData s)
@@ -829,26 +781,22 @@ instance TF.ToHCL (SubnetData s) where
 instance P.HasName (SubnetData s) s Text where
     name =
         lens (_name :: SubnetData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SubnetData s)
+             (\s a -> s { _name = a } :: SubnetData s)
 
 instance P.HasResourceGroupName (SubnetData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: SubnetData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: SubnetData s)
+             (\s a -> s { _resource_group_name = a } :: SubnetData s)
 
 instance P.HasVirtualNetworkName (SubnetData s) s Text where
     virtualNetworkName =
         lens (_virtual_network_name :: SubnetData s -> TF.Attribute s Text)
-            (\s a -> s { _virtual_network_name = a } :: SubnetData s)
+             (\s a -> s { _virtual_network_name = a } :: SubnetData s)
 
 instance P.HasComputedAddressPrefix (SubnetData s) Text
-
 instance P.HasComputedId (SubnetData s) Text
-
 instance P.HasComputedIpConfigurations (SubnetData s) Text
-
 instance P.HasComputedNetworkSecurityGroupId (SubnetData s) Text
-
 instance P.HasComputedRouteTableId (SubnetData s) Text
 
 subnetData :: TF.DataSource P.AzureRM (SubnetData s)
@@ -877,16 +825,12 @@ instance TF.ToHCL (SubscriptionData s) where
 instance P.HasSubscriptionId (SubscriptionData s) s Text where
     subscriptionId =
         lens (_subscription_id :: SubscriptionData s -> TF.Attribute s Text)
-            (\s a -> s { _subscription_id = a } :: SubscriptionData s)
+             (\s a -> s { _subscription_id = a } :: SubscriptionData s)
 
 instance P.HasComputedDisplayName (SubscriptionData s) Text
-
 instance P.HasComputedLocationPlacementId (SubscriptionData s) Text
-
 instance P.HasComputedQuotaId (SubscriptionData s) Text
-
 instance P.HasComputedSpendingLimit (SubscriptionData s) Text
-
 instance P.HasComputedState (SubscriptionData s) Text
 
 subscriptionData :: TF.DataSource P.AzureRM (SubscriptionData s)
@@ -916,21 +860,17 @@ instance TF.ToHCL (VirtualNetworkData s) where
 instance P.HasName (VirtualNetworkData s) s Text where
     name =
         lens (_name :: VirtualNetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VirtualNetworkData s)
+             (\s a -> s { _name = a } :: VirtualNetworkData s)
 
 instance P.HasResourceGroupName (VirtualNetworkData s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: VirtualNetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_group_name = a } :: VirtualNetworkData s)
+             (\s a -> s { _resource_group_name = a } :: VirtualNetworkData s)
 
 instance P.HasComputedAddressSpaces (VirtualNetworkData s) Text
-
 instance P.HasComputedDnsServers (VirtualNetworkData s) Text
-
 instance P.HasComputedId (VirtualNetworkData s) Text
-
 instance P.HasComputedSubnets (VirtualNetworkData s) Text
-
 instance P.HasComputedVnetPeerings (VirtualNetworkData s) Text
 
 virtualNetworkData :: TF.DataSource P.AzureRM (VirtualNetworkData s)

@@ -91,12 +91,13 @@ instance TF.ToHCL (CollectorGroupResource s) where
 instance P.HasDescription (CollectorGroupResource s) s Text where
     description =
         lens (_description :: CollectorGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: CollectorGroupResource s)
+             (\s a -> s { _description = a } :: CollectorGroupResource s)
 
 instance P.HasName (CollectorGroupResource s) s Text where
     name =
         lens (_name :: CollectorGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CollectorGroupResource s)
+             (\s a -> s { _name = a } :: CollectorGroupResource s)
+
 
 collectorGroupResource :: TF.Resource P.LogicMonitor (CollectorGroupResource s)
 collectorGroupResource =
@@ -139,32 +140,33 @@ instance TF.ToHCL (DeviceGroupResource s) where
 instance P.HasAppliesTo (DeviceGroupResource s) s Text where
     appliesTo =
         lens (_applies_to :: DeviceGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
+             (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
 
 instance P.HasDescription (DeviceGroupResource s) s Text where
     description =
         lens (_description :: DeviceGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: DeviceGroupResource s)
+             (\s a -> s { _description = a } :: DeviceGroupResource s)
 
 instance P.HasDisableAlerting (DeviceGroupResource s) s Text where
     disableAlerting =
         lens (_disable_alerting :: DeviceGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
+             (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
 
 instance P.HasName (DeviceGroupResource s) s Text where
     name =
         lens (_name :: DeviceGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DeviceGroupResource s)
+             (\s a -> s { _name = a } :: DeviceGroupResource s)
 
 instance P.HasParentId (DeviceGroupResource s) s Text where
     parentId =
         lens (_parent_id :: DeviceGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
+             (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
 
 instance P.HasProperties (DeviceGroupResource s) s Text where
     properties =
         lens (_properties :: DeviceGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _properties = a } :: DeviceGroupResource s)
+             (\s a -> s { _properties = a } :: DeviceGroupResource s)
+
 
 deviceGroupResource :: TF.Resource P.LogicMonitor (DeviceGroupResource s)
 deviceGroupResource =
@@ -211,32 +213,33 @@ instance TF.ToHCL (DeviceResource s) where
 instance P.HasCollector (DeviceResource s) s Text where
     collector =
         lens (_collector :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _collector = a } :: DeviceResource s)
+             (\s a -> s { _collector = a } :: DeviceResource s)
 
 instance P.HasDisableAlerting (DeviceResource s) s Text where
     disableAlerting =
         lens (_disable_alerting :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _disable_alerting = a } :: DeviceResource s)
+             (\s a -> s { _disable_alerting = a } :: DeviceResource s)
 
 instance P.HasDisplayName (DeviceResource s) s Text where
     displayName =
         lens (_display_name :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _display_name = a } :: DeviceResource s)
+             (\s a -> s { _display_name = a } :: DeviceResource s)
 
 instance P.HasHostgroupId (DeviceResource s) s Text where
     hostgroupId =
         lens (_hostgroup_id :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
+             (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
 
 instance P.HasIpAddr (DeviceResource s) s Text where
     ipAddr =
         lens (_ip_addr :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _ip_addr = a } :: DeviceResource s)
+             (\s a -> s { _ip_addr = a } :: DeviceResource s)
 
 instance P.HasProperties (DeviceResource s) s Text where
     properties =
         lens (_properties :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _properties = a } :: DeviceResource s)
+             (\s a -> s { _properties = a } :: DeviceResource s)
+
 
 deviceResource :: TF.Resource P.LogicMonitor (DeviceResource s)
 deviceResource =

@@ -104,22 +104,22 @@ instance TF.ToHCL (AlertNotificationResource s) where
 instance P.HasIsDefault (AlertNotificationResource s) s Text where
     isDefault =
         lens (_is_default :: AlertNotificationResource s -> TF.Attribute s Text)
-            (\s a -> s { _is_default = a } :: AlertNotificationResource s)
+             (\s a -> s { _is_default = a } :: AlertNotificationResource s)
 
 instance P.HasName (AlertNotificationResource s) s Text where
     name =
         lens (_name :: AlertNotificationResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AlertNotificationResource s)
+             (\s a -> s { _name = a } :: AlertNotificationResource s)
 
 instance P.HasSettings (AlertNotificationResource s) s Text where
     settings =
         lens (_settings :: AlertNotificationResource s -> TF.Attribute s Text)
-            (\s a -> s { _settings = a } :: AlertNotificationResource s)
+             (\s a -> s { _settings = a } :: AlertNotificationResource s)
 
 instance P.HasType' (AlertNotificationResource s) s Text where
     type' =
         lens (_type' :: AlertNotificationResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: AlertNotificationResource s)
+             (\s a -> s { _type' = a } :: AlertNotificationResource s)
 
 instance P.HasComputedId (AlertNotificationResource s) Text
 
@@ -150,7 +150,7 @@ instance TF.ToHCL (DashboardResource s) where
 instance P.HasConfigJson (DashboardResource s) s Text where
     configJson =
         lens (_config_json :: DashboardResource s -> TF.Attribute s Text)
-            (\s a -> s { _config_json = a } :: DashboardResource s)
+             (\s a -> s { _config_json = a } :: DashboardResource s)
 
 instance P.HasComputedSlug (DashboardResource s) Text
 
@@ -215,67 +215,67 @@ instance TF.ToHCL (DataSourceResource s) where
 instance P.HasAccessMode (DataSourceResource s) s Text where
     accessMode =
         lens (_access_mode :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _access_mode = a } :: DataSourceResource s)
+             (\s a -> s { _access_mode = a } :: DataSourceResource s)
 
 instance P.HasBasicAuthEnabled (DataSourceResource s) s Text where
     basicAuthEnabled =
         lens (_basic_auth_enabled :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _basic_auth_enabled = a } :: DataSourceResource s)
+             (\s a -> s { _basic_auth_enabled = a } :: DataSourceResource s)
 
 instance P.HasBasicAuthPassword (DataSourceResource s) s Text where
     basicAuthPassword =
         lens (_basic_auth_password :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _basic_auth_password = a } :: DataSourceResource s)
+             (\s a -> s { _basic_auth_password = a } :: DataSourceResource s)
 
 instance P.HasBasicAuthUsername (DataSourceResource s) s Text where
     basicAuthUsername =
         lens (_basic_auth_username :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _basic_auth_username = a } :: DataSourceResource s)
+             (\s a -> s { _basic_auth_username = a } :: DataSourceResource s)
 
 instance P.HasDatabaseName (DataSourceResource s) s Text where
     databaseName =
         lens (_database_name :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _database_name = a } :: DataSourceResource s)
+             (\s a -> s { _database_name = a } :: DataSourceResource s)
 
 instance P.HasIsDefault (DataSourceResource s) s Text where
     isDefault =
         lens (_is_default :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _is_default = a } :: DataSourceResource s)
+             (\s a -> s { _is_default = a } :: DataSourceResource s)
 
 instance P.HasJsonData (DataSourceResource s) s Text where
     jsonData =
         lens (_json_data :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _json_data = a } :: DataSourceResource s)
+             (\s a -> s { _json_data = a } :: DataSourceResource s)
 
 instance P.HasName (DataSourceResource s) s Text where
     name =
         lens (_name :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DataSourceResource s)
+             (\s a -> s { _name = a } :: DataSourceResource s)
 
 instance P.HasPassword (DataSourceResource s) s Text where
     password =
         lens (_password :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _password = a } :: DataSourceResource s)
+             (\s a -> s { _password = a } :: DataSourceResource s)
 
 instance P.HasSecureJsonData (DataSourceResource s) s Text where
     secureJsonData =
         lens (_secure_json_data :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _secure_json_data = a } :: DataSourceResource s)
+             (\s a -> s { _secure_json_data = a } :: DataSourceResource s)
 
 instance P.HasType' (DataSourceResource s) s Text where
     type' =
         lens (_type' :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: DataSourceResource s)
+             (\s a -> s { _type' = a } :: DataSourceResource s)
 
 instance P.HasUrl (DataSourceResource s) s Text where
     url =
         lens (_url :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _url = a } :: DataSourceResource s)
+             (\s a -> s { _url = a } :: DataSourceResource s)
 
 instance P.HasUsername (DataSourceResource s) s Text where
     username =
         lens (_username :: DataSourceResource s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: DataSourceResource s)
+             (\s a -> s { _username = a } :: DataSourceResource s)
 
 instance P.HasComputedId (DataSourceResource s) Text
 

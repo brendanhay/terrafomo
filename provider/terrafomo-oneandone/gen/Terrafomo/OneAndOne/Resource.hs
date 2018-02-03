@@ -123,17 +123,18 @@ instance TF.ToHCL (InstanceSizeResource s) where
 instance P.HasName (InstanceSizeResource s) s Text where
     name =
         lens (_name :: InstanceSizeResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: InstanceSizeResource s)
+             (\s a -> s { _name = a } :: InstanceSizeResource s)
 
 instance P.HasRam (InstanceSizeResource s) s Text where
     ram =
         lens (_ram :: InstanceSizeResource s -> TF.Attribute s Text)
-            (\s a -> s { _ram = a } :: InstanceSizeResource s)
+             (\s a -> s { _ram = a } :: InstanceSizeResource s)
 
 instance P.HasVcores (InstanceSizeResource s) s Text where
     vcores =
         lens (_vcores :: InstanceSizeResource s -> TF.Attribute s Text)
-            (\s a -> s { _vcores = a } :: InstanceSizeResource s)
+             (\s a -> s { _vcores = a } :: InstanceSizeResource s)
+
 
 instanceSizeResource :: TF.Resource P.OneAndOne (InstanceSizeResource s)
 instanceSizeResource =
@@ -170,22 +171,23 @@ instance TF.ToHCL (IpResource s) where
 instance P.HasDatacenter (IpResource s) s Text where
     datacenter =
         lens (_datacenter :: IpResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: IpResource s)
+             (\s a -> s { _datacenter = a } :: IpResource s)
 
 instance P.HasIpAddress (IpResource s) s Text where
     ipAddress =
         lens (_ip_address :: IpResource s -> TF.Attribute s Text)
-            (\s a -> s { _ip_address = a } :: IpResource s)
+             (\s a -> s { _ip_address = a } :: IpResource s)
 
 instance P.HasIpType (IpResource s) s Text where
     ipType =
         lens (_ip_type :: IpResource s -> TF.Attribute s Text)
-            (\s a -> s { _ip_type = a } :: IpResource s)
+             (\s a -> s { _ip_type = a } :: IpResource s)
 
 instance P.HasReverseDns (IpResource s) s Text where
     reverseDns =
         lens (_reverse_dns :: IpResource s -> TF.Attribute s Text)
-            (\s a -> s { _reverse_dns = a } :: IpResource s)
+             (\s a -> s { _reverse_dns = a } :: IpResource s)
+
 
 ipResource :: TF.Resource P.OneAndOne (IpResource s)
 ipResource =
@@ -226,27 +228,28 @@ instance TF.ToHCL (ServerResource s) where
 instance P.HasDatacenter (ServerResource s) s Text where
     datacenter =
         lens (_datacenter :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: ServerResource s)
+             (\s a -> s { _datacenter = a } :: ServerResource s)
 
 instance P.HasDescription (ServerResource s) s Text where
     description =
         lens (_description :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: ServerResource s)
+             (\s a -> s { _description = a } :: ServerResource s)
 
 instance P.HasName (ServerResource s) s Text where
     name =
         lens (_name :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ServerResource s)
+             (\s a -> s { _name = a } :: ServerResource s)
 
 instance P.HasSize (ServerResource s) s Text where
     size =
         lens (_size :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _size = a } :: ServerResource s)
+             (\s a -> s { _size = a } :: ServerResource s)
 
 instance P.HasStorageServers (ServerResource s) s Text where
     storageServers =
         lens (_storage_servers :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _storage_servers = a } :: ServerResource s)
+             (\s a -> s { _storage_servers = a } :: ServerResource s)
+
 
 serverResource :: TF.Resource P.OneAndOne (ServerResource s)
 serverResource =
@@ -288,27 +291,28 @@ instance TF.ToHCL (VpnResource s) where
 instance P.HasDatacenter (VpnResource s) s Text where
     datacenter =
         lens (_datacenter :: VpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: VpnResource s)
+             (\s a -> s { _datacenter = a } :: VpnResource s)
 
 instance P.HasDescription (VpnResource s) s Text where
     description =
         lens (_description :: VpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: VpnResource s)
+             (\s a -> s { _description = a } :: VpnResource s)
 
 instance P.HasDownloadPath (VpnResource s) s Text where
     downloadPath =
         lens (_download_path :: VpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _download_path = a } :: VpnResource s)
+             (\s a -> s { _download_path = a } :: VpnResource s)
 
 instance P.HasFileName (VpnResource s) s Text where
     fileName =
         lens (_file_name :: VpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _file_name = a } :: VpnResource s)
+             (\s a -> s { _file_name = a } :: VpnResource s)
 
 instance P.HasName (VpnResource s) s Text where
     name =
         lens (_name :: VpnResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VpnResource s)
+             (\s a -> s { _name = a } :: VpnResource s)
+
 
 vpnResource :: TF.Resource P.OneAndOne (VpnResource s)
 vpnResource =

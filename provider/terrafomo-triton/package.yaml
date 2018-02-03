@@ -21,8 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Triton
-    - Terrafomo.Triton.DataSource
-    - Terrafomo.Triton.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

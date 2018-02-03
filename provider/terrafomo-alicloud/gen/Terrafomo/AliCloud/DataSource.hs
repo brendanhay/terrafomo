@@ -236,49 +236,41 @@ instance TF.ToHCL (DnsDomainsData s) where
 instance P.HasAliDomain (DnsDomainsData s) s Text where
     aliDomain =
         lens (_ali_domain :: DnsDomainsData s -> TF.Attribute s Text)
-            (\s a -> s { _ali_domain = a } :: DnsDomainsData s)
+             (\s a -> s { _ali_domain = a } :: DnsDomainsData s)
 
 instance P.HasDomainNameRegex (DnsDomainsData s) s Text where
     domainNameRegex =
         lens (_domain_name_regex :: DnsDomainsData s -> TF.Attribute s Text)
-            (\s a -> s { _domain_name_regex = a } :: DnsDomainsData s)
+             (\s a -> s { _domain_name_regex = a } :: DnsDomainsData s)
 
 instance P.HasGroupNameRegex (DnsDomainsData s) s Text where
     groupNameRegex =
         lens (_group_name_regex :: DnsDomainsData s -> TF.Attribute s Text)
-            (\s a -> s { _group_name_regex = a } :: DnsDomainsData s)
+             (\s a -> s { _group_name_regex = a } :: DnsDomainsData s)
 
 instance P.HasInstanceId (DnsDomainsData s) s Text where
     instanceId =
         lens (_instance_id :: DnsDomainsData s -> TF.Attribute s Text)
-            (\s a -> s { _instance_id = a } :: DnsDomainsData s)
+             (\s a -> s { _instance_id = a } :: DnsDomainsData s)
 
 instance P.HasOutputFile (DnsDomainsData s) s Text where
     outputFile =
         lens (_output_file :: DnsDomainsData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: DnsDomainsData s)
+             (\s a -> s { _output_file = a } :: DnsDomainsData s)
 
 instance P.HasVersionCode (DnsDomainsData s) s Text where
     versionCode =
         lens (_version_code :: DnsDomainsData s -> TF.Attribute s Text)
-            (\s a -> s { _version_code = a } :: DnsDomainsData s)
+             (\s a -> s { _version_code = a } :: DnsDomainsData s)
 
 instance P.HasComputedAliDomain (DnsDomainsData s) Text
-
 instance P.HasComputedDnsServers (DnsDomainsData s) Text
-
 instance P.HasComputedDomainId (DnsDomainsData s) Text
-
 instance P.HasComputedDomainName (DnsDomainsData s) Text
-
 instance P.HasComputedGroupId (DnsDomainsData s) Text
-
 instance P.HasComputedGroupName (DnsDomainsData s) Text
-
 instance P.HasComputedInstanceId (DnsDomainsData s) Text
-
 instance P.HasComputedPunyCode (DnsDomainsData s) Text
-
 instance P.HasComputedVersionCode (DnsDomainsData s) Text
 
 dnsDomainsData :: TF.DataSource P.AliCloud (DnsDomainsData s)
@@ -314,15 +306,14 @@ instance TF.ToHCL (DnsGroupsData s) where
 instance P.HasNameRegex (DnsGroupsData s) s Text where
     nameRegex =
         lens (_name_regex :: DnsGroupsData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: DnsGroupsData s)
+             (\s a -> s { _name_regex = a } :: DnsGroupsData s)
 
 instance P.HasOutputFile (DnsGroupsData s) s Text where
     outputFile =
         lens (_output_file :: DnsGroupsData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: DnsGroupsData s)
+             (\s a -> s { _output_file = a } :: DnsGroupsData s)
 
 instance P.HasComputedGroupId (DnsGroupsData s) Text
-
 instance P.HasComputedGroupName (DnsGroupsData s) Text
 
 dnsGroupsData :: TF.DataSource P.AliCloud (DnsGroupsData s)
@@ -372,61 +363,52 @@ instance TF.ToHCL (DnsRecordsData s) where
 instance P.HasDomainName (DnsRecordsData s) s Text where
     domainName =
         lens (_domain_name :: DnsRecordsData s -> TF.Attribute s Text)
-            (\s a -> s { _domain_name = a } :: DnsRecordsData s)
+             (\s a -> s { _domain_name = a } :: DnsRecordsData s)
 
 instance P.HasHostRecordRegex (DnsRecordsData s) s Text where
     hostRecordRegex =
         lens (_host_record_regex :: DnsRecordsData s -> TF.Attribute s Text)
-            (\s a -> s { _host_record_regex = a } :: DnsRecordsData s)
+             (\s a -> s { _host_record_regex = a } :: DnsRecordsData s)
 
 instance P.HasIsLocked (DnsRecordsData s) s Text where
     isLocked =
         lens (_is_locked :: DnsRecordsData s -> TF.Attribute s Text)
-            (\s a -> s { _is_locked = a } :: DnsRecordsData s)
+             (\s a -> s { _is_locked = a } :: DnsRecordsData s)
 
 instance P.HasLine (DnsRecordsData s) s Text where
     line =
         lens (_line :: DnsRecordsData s -> TF.Attribute s Text)
-            (\s a -> s { _line = a } :: DnsRecordsData s)
+             (\s a -> s { _line = a } :: DnsRecordsData s)
 
 instance P.HasOutputFile (DnsRecordsData s) s Text where
     outputFile =
         lens (_output_file :: DnsRecordsData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: DnsRecordsData s)
+             (\s a -> s { _output_file = a } :: DnsRecordsData s)
 
 instance P.HasStatus (DnsRecordsData s) s Text where
     status =
         lens (_status :: DnsRecordsData s -> TF.Attribute s Text)
-            (\s a -> s { _status = a } :: DnsRecordsData s)
+             (\s a -> s { _status = a } :: DnsRecordsData s)
 
 instance P.HasType' (DnsRecordsData s) s Text where
     type' =
         lens (_type' :: DnsRecordsData s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: DnsRecordsData s)
+             (\s a -> s { _type' = a } :: DnsRecordsData s)
 
 instance P.HasValueRegex (DnsRecordsData s) s Text where
     valueRegex =
         lens (_value_regex :: DnsRecordsData s -> TF.Attribute s Text)
-            (\s a -> s { _value_regex = a } :: DnsRecordsData s)
+             (\s a -> s { _value_regex = a } :: DnsRecordsData s)
 
 instance P.HasComputedDomainName (DnsRecordsData s) Text
-
 instance P.HasComputedHostRecord (DnsRecordsData s) Text
-
 instance P.HasComputedLine (DnsRecordsData s) Text
-
 instance P.HasComputedLocked (DnsRecordsData s) Text
-
 instance P.HasComputedPriority (DnsRecordsData s) Text
-
 instance P.HasComputedRecordId (DnsRecordsData s) Text
-
 instance P.HasComputedStatus (DnsRecordsData s) Text
-
 instance P.HasComputedTtl (DnsRecordsData s) Text
-
 instance P.HasComputedType' (DnsRecordsData s) Text
-
 instance P.HasComputedValue (DnsRecordsData s) Text
 
 dnsRecordsData :: TF.DataSource P.AliCloud (DnsRecordsData s)
@@ -471,47 +453,35 @@ instance TF.ToHCL (ImagesData s) where
 instance P.HasMostRecent (ImagesData s) s Text where
     mostRecent =
         lens (_most_recent :: ImagesData s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: ImagesData s)
+             (\s a -> s { _most_recent = a } :: ImagesData s)
 
 instance P.HasNameRegex (ImagesData s) s Text where
     nameRegex =
         lens (_name_regex :: ImagesData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: ImagesData s)
+             (\s a -> s { _name_regex = a } :: ImagesData s)
 
 instance P.HasOutputFile (ImagesData s) s Text where
     outputFile =
         lens (_output_file :: ImagesData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: ImagesData s)
+             (\s a -> s { _output_file = a } :: ImagesData s)
 
 instance P.HasOwners (ImagesData s) s Text where
     owners =
         lens (_owners :: ImagesData s -> TF.Attribute s Text)
-            (\s a -> s { _owners = a } :: ImagesData s)
+             (\s a -> s { _owners = a } :: ImagesData s)
 
 instance P.HasComputedArchitecture (ImagesData s) Text
-
 instance P.HasComputedCreationTime (ImagesData s) Text
-
 instance P.HasComputedDescription (ImagesData s) Text
-
 instance P.HasComputedDiskDeviceMappings (ImagesData s) Text
-
 instance P.HasComputedId (ImagesData s) Text
-
 instance P.HasComputedImageOwnerAlias (ImagesData s) Text
-
 instance P.HasComputedImageVersion (ImagesData s) Text
-
 instance P.HasComputedIsSubscribed (ImagesData s) Text
-
 instance P.HasComputedOsName (ImagesData s) Text
-
 instance P.HasComputedProductCode (ImagesData s) Text
-
 instance P.HasComputedProgress (ImagesData s) Text
-
 instance P.HasComputedSize (ImagesData s) Text
-
 instance P.HasComputedStatus (ImagesData s) Text
 
 imagesData :: TF.DataSource P.AliCloud (ImagesData s)
@@ -558,39 +528,36 @@ instance TF.ToHCL (InstanceTypesData s) where
 instance P.HasAvailabilityZone (InstanceTypesData s) s Text where
     availabilityZone =
         lens (_availability_zone :: InstanceTypesData s -> TF.Attribute s Text)
-            (\s a -> s { _availability_zone = a } :: InstanceTypesData s)
+             (\s a -> s { _availability_zone = a } :: InstanceTypesData s)
 
 instance P.HasCpuCoreCount (InstanceTypesData s) s Text where
     cpuCoreCount =
         lens (_cpu_core_count :: InstanceTypesData s -> TF.Attribute s Text)
-            (\s a -> s { _cpu_core_count = a } :: InstanceTypesData s)
+             (\s a -> s { _cpu_core_count = a } :: InstanceTypesData s)
 
 instance P.HasInstanceTypeFamily (InstanceTypesData s) s Text where
     instanceTypeFamily =
         lens (_instance_type_family :: InstanceTypesData s -> TF.Attribute s Text)
-            (\s a -> s { _instance_type_family = a } :: InstanceTypesData s)
+             (\s a -> s { _instance_type_family = a } :: InstanceTypesData s)
 
 instance P.HasIsOutdated (InstanceTypesData s) s Text where
     isOutdated =
         lens (_is_outdated :: InstanceTypesData s -> TF.Attribute s Text)
-            (\s a -> s { _is_outdated = a } :: InstanceTypesData s)
+             (\s a -> s { _is_outdated = a } :: InstanceTypesData s)
 
 instance P.HasMemorySize (InstanceTypesData s) s Text where
     memorySize =
         lens (_memory_size :: InstanceTypesData s -> TF.Attribute s Text)
-            (\s a -> s { _memory_size = a } :: InstanceTypesData s)
+             (\s a -> s { _memory_size = a } :: InstanceTypesData s)
 
 instance P.HasOutputFile (InstanceTypesData s) s Text where
     outputFile =
         lens (_output_file :: InstanceTypesData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: InstanceTypesData s)
+             (\s a -> s { _output_file = a } :: InstanceTypesData s)
 
 instance P.HasComputedCpuCoreCount (InstanceTypesData s) Text
-
 instance P.HasComputedFamily' (InstanceTypesData s) Text
-
 instance P.HasComputedId (InstanceTypesData s) Text
-
 instance P.HasComputedMemorySize (InstanceTypesData s) Text
 
 instanceTypesData :: TF.DataSource P.AliCloud (InstanceTypesData s)
@@ -647,47 +614,47 @@ instance TF.ToHCL (InstancesData s) where
 instance P.HasAvailabilityZone (InstancesData s) s Text where
     availabilityZone =
         lens (_availability_zone :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _availability_zone = a } :: InstancesData s)
+             (\s a -> s { _availability_zone = a } :: InstancesData s)
 
 instance P.HasIds (InstancesData s) s Text where
     ids =
         lens (_ids :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _ids = a } :: InstancesData s)
+             (\s a -> s { _ids = a } :: InstancesData s)
 
 instance P.HasImageId (InstancesData s) s Text where
     imageId =
         lens (_image_id :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _image_id = a } :: InstancesData s)
+             (\s a -> s { _image_id = a } :: InstancesData s)
 
 instance P.HasNameRegex (InstancesData s) s Text where
     nameRegex =
         lens (_name_regex :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: InstancesData s)
+             (\s a -> s { _name_regex = a } :: InstancesData s)
 
 instance P.HasOutputFile (InstancesData s) s Text where
     outputFile =
         lens (_output_file :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: InstancesData s)
+             (\s a -> s { _output_file = a } :: InstancesData s)
 
 instance P.HasStatus (InstancesData s) s Text where
     status =
         lens (_status :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _status = a } :: InstancesData s)
+             (\s a -> s { _status = a } :: InstancesData s)
 
 instance P.HasTags (InstancesData s) s Text where
     tags =
         lens (_tags :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: InstancesData s)
+             (\s a -> s { _tags = a } :: InstancesData s)
 
 instance P.HasVpcId (InstancesData s) s Text where
     vpcId =
         lens (_vpc_id :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _vpc_id = a } :: InstancesData s)
+             (\s a -> s { _vpc_id = a } :: InstancesData s)
 
 instance P.HasVswitchId (InstancesData s) s Text where
     vswitchId =
         lens (_vswitch_id :: InstancesData s -> TF.Attribute s Text)
-            (\s a -> s { _vswitch_id = a } :: InstancesData s)
+             (\s a -> s { _vswitch_id = a } :: InstancesData s)
 
 instance P.HasComputedInstances (InstancesData s) Text
 
@@ -730,24 +697,21 @@ instance TF.ToHCL (KeyPairsData s) where
 instance P.HasFingerPrint (KeyPairsData s) s Text where
     fingerPrint =
         lens (_finger_print :: KeyPairsData s -> TF.Attribute s Text)
-            (\s a -> s { _finger_print = a } :: KeyPairsData s)
+             (\s a -> s { _finger_print = a } :: KeyPairsData s)
 
 instance P.HasNameRegex (KeyPairsData s) s Text where
     nameRegex =
         lens (_name_regex :: KeyPairsData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: KeyPairsData s)
+             (\s a -> s { _name_regex = a } :: KeyPairsData s)
 
 instance P.HasOutputFile (KeyPairsData s) s Text where
     outputFile =
         lens (_output_file :: KeyPairsData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: KeyPairsData s)
+             (\s a -> s { _output_file = a } :: KeyPairsData s)
 
 instance P.HasComputedFingerPrint (KeyPairsData s) Text
-
 instance P.HasComputedId (KeyPairsData s) Text
-
 instance P.HasComputedInstances (KeyPairsData s) Text
-
 instance P.HasComputedKeyName (KeyPairsData s) Text
 
 keyPairsData :: TF.DataSource P.AliCloud (KeyPairsData s)
@@ -786,35 +750,29 @@ instance TF.ToHCL (KmsKeysData s) where
 instance P.HasDescriptionRegex (KmsKeysData s) s Text where
     descriptionRegex =
         lens (_description_regex :: KmsKeysData s -> TF.Attribute s Text)
-            (\s a -> s { _description_regex = a } :: KmsKeysData s)
+             (\s a -> s { _description_regex = a } :: KmsKeysData s)
 
 instance P.HasIds (KmsKeysData s) s Text where
     ids =
         lens (_ids :: KmsKeysData s -> TF.Attribute s Text)
-            (\s a -> s { _ids = a } :: KmsKeysData s)
+             (\s a -> s { _ids = a } :: KmsKeysData s)
 
 instance P.HasOutputFile (KmsKeysData s) s Text where
     outputFile =
         lens (_output_file :: KmsKeysData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: KmsKeysData s)
+             (\s a -> s { _output_file = a } :: KmsKeysData s)
 
 instance P.HasStatus (KmsKeysData s) s Text where
     status =
         lens (_status :: KmsKeysData s -> TF.Attribute s Text)
-            (\s a -> s { _status = a } :: KmsKeysData s)
+             (\s a -> s { _status = a } :: KmsKeysData s)
 
 instance P.HasComputedArn (KmsKeysData s) Text
-
 instance P.HasComputedCreationDate (KmsKeysData s) Text
-
 instance P.HasComputedCreator (KmsKeysData s) Text
-
 instance P.HasComputedDeleteDate (KmsKeysData s) Text
-
 instance P.HasComputedDescription (KmsKeysData s) Text
-
 instance P.HasComputedId (KmsKeysData s) Text
-
 instance P.HasComputedStatus (KmsKeysData s) Text
 
 kmsKeysData :: TF.DataSource P.AliCloud (KmsKeysData s)
@@ -838,6 +796,7 @@ data RamAccountAliasData s = RamAccountAliasData {
 
 instance TF.ToHCL (RamAccountAliasData s) where
     toHCL _ = TF.block []
+
 
 ramAccountAliasData :: TF.DataSource P.AliCloud (RamAccountAliasData s)
 ramAccountAliasData =
@@ -863,7 +822,7 @@ instance TF.ToHCL (RamAccountAliasesData s) where
 instance P.HasOutputFile (RamAccountAliasesData s) s Text where
     outputFile =
         lens (_output_file :: RamAccountAliasesData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: RamAccountAliasesData s)
+             (\s a -> s { _output_file = a } :: RamAccountAliasesData s)
 
 instance P.HasComputedAccountAlias (RamAccountAliasesData s) Text
 
@@ -904,30 +863,29 @@ instance TF.ToHCL (RamGroupsData s) where
 instance P.HasNameRegex (RamGroupsData s) s Text where
     nameRegex =
         lens (_name_regex :: RamGroupsData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: RamGroupsData s)
+             (\s a -> s { _name_regex = a } :: RamGroupsData s)
 
 instance P.HasOutputFile (RamGroupsData s) s Text where
     outputFile =
         lens (_output_file :: RamGroupsData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: RamGroupsData s)
+             (\s a -> s { _output_file = a } :: RamGroupsData s)
 
 instance P.HasPolicyName (RamGroupsData s) s Text where
     policyName =
         lens (_policy_name :: RamGroupsData s -> TF.Attribute s Text)
-            (\s a -> s { _policy_name = a } :: RamGroupsData s)
+             (\s a -> s { _policy_name = a } :: RamGroupsData s)
 
 instance P.HasPolicyType (RamGroupsData s) s Text where
     policyType =
         lens (_policy_type :: RamGroupsData s -> TF.Attribute s Text)
-            (\s a -> s { _policy_type = a } :: RamGroupsData s)
+             (\s a -> s { _policy_type = a } :: RamGroupsData s)
 
 instance P.HasUserName (RamGroupsData s) s Text where
     userName =
         lens (_user_name :: RamGroupsData s -> TF.Attribute s Text)
-            (\s a -> s { _user_name = a } :: RamGroupsData s)
+             (\s a -> s { _user_name = a } :: RamGroupsData s)
 
 instance P.HasComputedComments (RamGroupsData s) Text
-
 instance P.HasComputedName (RamGroupsData s) Text
 
 ramGroupsData :: TF.DataSource P.AliCloud (RamGroupsData s)
@@ -974,47 +932,40 @@ instance TF.ToHCL (RamPoliciesData s) where
 instance P.HasGroupName (RamPoliciesData s) s Text where
     groupName =
         lens (_group_name :: RamPoliciesData s -> TF.Attribute s Text)
-            (\s a -> s { _group_name = a } :: RamPoliciesData s)
+             (\s a -> s { _group_name = a } :: RamPoliciesData s)
 
 instance P.HasNameRegex (RamPoliciesData s) s Text where
     nameRegex =
         lens (_name_regex :: RamPoliciesData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: RamPoliciesData s)
+             (\s a -> s { _name_regex = a } :: RamPoliciesData s)
 
 instance P.HasOutputFile (RamPoliciesData s) s Text where
     outputFile =
         lens (_output_file :: RamPoliciesData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: RamPoliciesData s)
+             (\s a -> s { _output_file = a } :: RamPoliciesData s)
 
 instance P.HasRoleName (RamPoliciesData s) s Text where
     roleName =
         lens (_role_name :: RamPoliciesData s -> TF.Attribute s Text)
-            (\s a -> s { _role_name = a } :: RamPoliciesData s)
+             (\s a -> s { _role_name = a } :: RamPoliciesData s)
 
 instance P.HasType' (RamPoliciesData s) s Text where
     type' =
         lens (_type' :: RamPoliciesData s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: RamPoliciesData s)
+             (\s a -> s { _type' = a } :: RamPoliciesData s)
 
 instance P.HasUserName (RamPoliciesData s) s Text where
     userName =
         lens (_user_name :: RamPoliciesData s -> TF.Attribute s Text)
-            (\s a -> s { _user_name = a } :: RamPoliciesData s)
+             (\s a -> s { _user_name = a } :: RamPoliciesData s)
 
 instance P.HasComputedAttachmentCount (RamPoliciesData s) Text
-
 instance P.HasComputedCreateDate (RamPoliciesData s) Text
-
 instance P.HasComputedDefaultVersion (RamPoliciesData s) Text
-
 instance P.HasComputedDescription (RamPoliciesData s) Text
-
 instance P.HasComputedDocument (RamPoliciesData s) Text
-
 instance P.HasComputedName (RamPoliciesData s) Text
-
 instance P.HasComputedType' (RamPoliciesData s) Text
-
 instance P.HasComputedUpdateDate (RamPoliciesData s) Text
 
 ramPoliciesData :: TF.DataSource P.AliCloud (RamPoliciesData s)
@@ -1056,37 +1007,30 @@ instance TF.ToHCL (RamRolesData s) where
 instance P.HasNameRegex (RamRolesData s) s Text where
     nameRegex =
         lens (_name_regex :: RamRolesData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: RamRolesData s)
+             (\s a -> s { _name_regex = a } :: RamRolesData s)
 
 instance P.HasOutputFile (RamRolesData s) s Text where
     outputFile =
         lens (_output_file :: RamRolesData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: RamRolesData s)
+             (\s a -> s { _output_file = a } :: RamRolesData s)
 
 instance P.HasPolicyName (RamRolesData s) s Text where
     policyName =
         lens (_policy_name :: RamRolesData s -> TF.Attribute s Text)
-            (\s a -> s { _policy_name = a } :: RamRolesData s)
+             (\s a -> s { _policy_name = a } :: RamRolesData s)
 
 instance P.HasPolicyType (RamRolesData s) s Text where
     policyType =
         lens (_policy_type :: RamRolesData s -> TF.Attribute s Text)
-            (\s a -> s { _policy_type = a } :: RamRolesData s)
+             (\s a -> s { _policy_type = a } :: RamRolesData s)
 
 instance P.HasComputedArn (RamRolesData s) Text
-
 instance P.HasComputedAssumeRolePolicyDocument (RamRolesData s) Text
-
 instance P.HasComputedCreateDate (RamRolesData s) Text
-
 instance P.HasComputedDescription (RamRolesData s) Text
-
 instance P.HasComputedDocument (RamRolesData s) Text
-
 instance P.HasComputedId (RamRolesData s) Text
-
 instance P.HasComputedName (RamRolesData s) Text
-
 instance P.HasComputedUpdateDate (RamRolesData s) Text
 
 ramRolesData :: TF.DataSource P.AliCloud (RamRolesData s)
@@ -1129,34 +1073,31 @@ instance TF.ToHCL (RamUsersData s) where
 instance P.HasGroupName (RamUsersData s) s Text where
     groupName =
         lens (_group_name :: RamUsersData s -> TF.Attribute s Text)
-            (\s a -> s { _group_name = a } :: RamUsersData s)
+             (\s a -> s { _group_name = a } :: RamUsersData s)
 
 instance P.HasNameRegex (RamUsersData s) s Text where
     nameRegex =
         lens (_name_regex :: RamUsersData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: RamUsersData s)
+             (\s a -> s { _name_regex = a } :: RamUsersData s)
 
 instance P.HasOutputFile (RamUsersData s) s Text where
     outputFile =
         lens (_output_file :: RamUsersData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: RamUsersData s)
+             (\s a -> s { _output_file = a } :: RamUsersData s)
 
 instance P.HasPolicyName (RamUsersData s) s Text where
     policyName =
         lens (_policy_name :: RamUsersData s -> TF.Attribute s Text)
-            (\s a -> s { _policy_name = a } :: RamUsersData s)
+             (\s a -> s { _policy_name = a } :: RamUsersData s)
 
 instance P.HasPolicyType (RamUsersData s) s Text where
     policyType =
         lens (_policy_type :: RamUsersData s -> TF.Attribute s Text)
-            (\s a -> s { _policy_type = a } :: RamUsersData s)
+             (\s a -> s { _policy_type = a } :: RamUsersData s)
 
 instance P.HasComputedCreateDate (RamUsersData s) Text
-
 instance P.HasComputedId (RamUsersData s) Text
-
 instance P.HasComputedLastLoginDate (RamUsersData s) Text
-
 instance P.HasComputedName (RamUsersData s) Text
 
 ramUsersData :: TF.DataSource P.AliCloud (RamUsersData s)
@@ -1193,20 +1134,19 @@ instance TF.ToHCL (RegionsData s) where
 instance P.HasCurrent (RegionsData s) s Text where
     current =
         lens (_current :: RegionsData s -> TF.Attribute s Text)
-            (\s a -> s { _current = a } :: RegionsData s)
+             (\s a -> s { _current = a } :: RegionsData s)
 
 instance P.HasName (RegionsData s) s Text where
     name =
         lens (_name :: RegionsData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RegionsData s)
+             (\s a -> s { _name = a } :: RegionsData s)
 
 instance P.HasOutputFile (RegionsData s) s Text where
     outputFile =
         lens (_output_file :: RegionsData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: RegionsData s)
+             (\s a -> s { _output_file = a } :: RegionsData s)
 
 instance P.HasComputedId (RegionsData s) Text
-
 instance P.HasComputedLocalName (RegionsData s) Text
 
 regionsData :: TF.DataSource P.AliCloud (RegionsData s)
@@ -1251,53 +1191,43 @@ instance TF.ToHCL (VpcsData s) where
 instance P.HasCidrBlock (VpcsData s) s Text where
     cidrBlock =
         lens (_cidr_block :: VpcsData s -> TF.Attribute s Text)
-            (\s a -> s { _cidr_block = a } :: VpcsData s)
+             (\s a -> s { _cidr_block = a } :: VpcsData s)
 
 instance P.HasIsDefault (VpcsData s) s Text where
     isDefault =
         lens (_is_default :: VpcsData s -> TF.Attribute s Text)
-            (\s a -> s { _is_default = a } :: VpcsData s)
+             (\s a -> s { _is_default = a } :: VpcsData s)
 
 instance P.HasNameRegex (VpcsData s) s Text where
     nameRegex =
         lens (_name_regex :: VpcsData s -> TF.Attribute s Text)
-            (\s a -> s { _name_regex = a } :: VpcsData s)
+             (\s a -> s { _name_regex = a } :: VpcsData s)
 
 instance P.HasOutputFile (VpcsData s) s Text where
     outputFile =
         lens (_output_file :: VpcsData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: VpcsData s)
+             (\s a -> s { _output_file = a } :: VpcsData s)
 
 instance P.HasStatus (VpcsData s) s Text where
     status =
         lens (_status :: VpcsData s -> TF.Attribute s Text)
-            (\s a -> s { _status = a } :: VpcsData s)
+             (\s a -> s { _status = a } :: VpcsData s)
 
 instance P.HasVswitchId (VpcsData s) s Text where
     vswitchId =
         lens (_vswitch_id :: VpcsData s -> TF.Attribute s Text)
-            (\s a -> s { _vswitch_id = a } :: VpcsData s)
+             (\s a -> s { _vswitch_id = a } :: VpcsData s)
 
 instance P.HasComputedCidrBlock (VpcsData s) Text
-
 instance P.HasComputedCreationTime (VpcsData s) Text
-
 instance P.HasComputedDescription (VpcsData s) Text
-
 instance P.HasComputedId (VpcsData s) Text
-
 instance P.HasComputedIsDefault (VpcsData s) Text
-
 instance P.HasComputedRegionId (VpcsData s) Text
-
 instance P.HasComputedRouteTableId (VpcsData s) Text
-
 instance P.HasComputedStatus (VpcsData s) Text
-
 instance P.HasComputedVpcName (VpcsData s) Text
-
 instance P.HasComputedVrouterId (VpcsData s) Text
-
 instance P.HasComputedVswitchIds (VpcsData s) Text
 
 vpcsData :: TF.DataSource P.AliCloud (VpcsData s)
@@ -1340,31 +1270,27 @@ instance TF.ToHCL (ZonesData s) where
 instance P.HasAvailableDiskCategory (ZonesData s) s Text where
     availableDiskCategory =
         lens (_available_disk_category :: ZonesData s -> TF.Attribute s Text)
-            (\s a -> s { _available_disk_category = a } :: ZonesData s)
+             (\s a -> s { _available_disk_category = a } :: ZonesData s)
 
 instance P.HasAvailableInstanceType (ZonesData s) s Text where
     availableInstanceType =
         lens (_available_instance_type :: ZonesData s -> TF.Attribute s Text)
-            (\s a -> s { _available_instance_type = a } :: ZonesData s)
+             (\s a -> s { _available_instance_type = a } :: ZonesData s)
 
 instance P.HasAvailableResourceCreation (ZonesData s) s Text where
     availableResourceCreation =
         lens (_available_resource_creation :: ZonesData s -> TF.Attribute s Text)
-            (\s a -> s { _available_resource_creation = a } :: ZonesData s)
+             (\s a -> s { _available_resource_creation = a } :: ZonesData s)
 
 instance P.HasOutputFile (ZonesData s) s Text where
     outputFile =
         lens (_output_file :: ZonesData s -> TF.Attribute s Text)
-            (\s a -> s { _output_file = a } :: ZonesData s)
+             (\s a -> s { _output_file = a } :: ZonesData s)
 
 instance P.HasComputedAvailableDiskCategories (ZonesData s) Text
-
 instance P.HasComputedAvailableInstanceTypes (ZonesData s) Text
-
 instance P.HasComputedAvailableResourceCreation (ZonesData s) Text
-
 instance P.HasComputedId (ZonesData s) Text
-
 instance P.HasComputedLocalName (ZonesData s) Text
 
 zonesData :: TF.DataSource P.AliCloud (ZonesData s)

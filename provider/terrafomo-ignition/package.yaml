@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Ignition
-    - Terrafomo.Ignition.DataSource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

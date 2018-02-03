@@ -119,32 +119,32 @@ instance TF.ToHCL (BindingResource s) where
 instance P.HasArguments (BindingResource s) s Text where
     arguments =
         lens (_arguments :: BindingResource s -> TF.Attribute s Text)
-            (\s a -> s { _arguments = a } :: BindingResource s)
+             (\s a -> s { _arguments = a } :: BindingResource s)
 
 instance P.HasDestination (BindingResource s) s Text where
     destination =
         lens (_destination :: BindingResource s -> TF.Attribute s Text)
-            (\s a -> s { _destination = a } :: BindingResource s)
+             (\s a -> s { _destination = a } :: BindingResource s)
 
 instance P.HasDestinationType (BindingResource s) s Text where
     destinationType =
         lens (_destination_type :: BindingResource s -> TF.Attribute s Text)
-            (\s a -> s { _destination_type = a } :: BindingResource s)
+             (\s a -> s { _destination_type = a } :: BindingResource s)
 
 instance P.HasRoutingKey (BindingResource s) s Text where
     routingKey =
         lens (_routing_key :: BindingResource s -> TF.Attribute s Text)
-            (\s a -> s { _routing_key = a } :: BindingResource s)
+             (\s a -> s { _routing_key = a } :: BindingResource s)
 
 instance P.HasSource (BindingResource s) s Text where
     source =
         lens (_source :: BindingResource s -> TF.Attribute s Text)
-            (\s a -> s { _source = a } :: BindingResource s)
+             (\s a -> s { _source = a } :: BindingResource s)
 
 instance P.HasVhost (BindingResource s) s Text where
     vhost =
         lens (_vhost :: BindingResource s -> TF.Attribute s Text)
-            (\s a -> s { _vhost = a } :: BindingResource s)
+             (\s a -> s { _vhost = a } :: BindingResource s)
 
 instance P.HasComputedPropertiesKey (BindingResource s) Text
 
@@ -183,17 +183,18 @@ instance TF.ToHCL (ExchangeResource s) where
 instance P.HasName (ExchangeResource s) s Text where
     name =
         lens (_name :: ExchangeResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ExchangeResource s)
+             (\s a -> s { _name = a } :: ExchangeResource s)
 
 instance P.HasSettings (ExchangeResource s) s Text where
     settings =
         lens (_settings :: ExchangeResource s -> TF.Attribute s Text)
-            (\s a -> s { _settings = a } :: ExchangeResource s)
+             (\s a -> s { _settings = a } :: ExchangeResource s)
 
 instance P.HasVhost (ExchangeResource s) s Text where
     vhost =
         lens (_vhost :: ExchangeResource s -> TF.Attribute s Text)
-            (\s a -> s { _vhost = a } :: ExchangeResource s)
+             (\s a -> s { _vhost = a } :: ExchangeResource s)
+
 
 exchangeResource :: TF.Resource P.RabbitMQ (ExchangeResource s)
 exchangeResource =
@@ -228,17 +229,18 @@ instance TF.ToHCL (PermissionsResource s) where
 instance P.HasPermissions (PermissionsResource s) s Text where
     permissions =
         lens (_permissions :: PermissionsResource s -> TF.Attribute s Text)
-            (\s a -> s { _permissions = a } :: PermissionsResource s)
+             (\s a -> s { _permissions = a } :: PermissionsResource s)
 
 instance P.HasUser (PermissionsResource s) s Text where
     user =
         lens (_user :: PermissionsResource s -> TF.Attribute s Text)
-            (\s a -> s { _user = a } :: PermissionsResource s)
+             (\s a -> s { _user = a } :: PermissionsResource s)
 
 instance P.HasVhost (PermissionsResource s) s Text where
     vhost =
         lens (_vhost :: PermissionsResource s -> TF.Attribute s Text)
-            (\s a -> s { _vhost = a } :: PermissionsResource s)
+             (\s a -> s { _vhost = a } :: PermissionsResource s)
+
 
 permissionsResource :: TF.Resource P.RabbitMQ (PermissionsResource s)
 permissionsResource =
@@ -273,17 +275,18 @@ instance TF.ToHCL (PolicyResource s) where
 instance P.HasName (PolicyResource s) s Text where
     name =
         lens (_name :: PolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: PolicyResource s)
+             (\s a -> s { _name = a } :: PolicyResource s)
 
 instance P.HasPolicy (PolicyResource s) s Text where
     policy =
         lens (_policy :: PolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _policy = a } :: PolicyResource s)
+             (\s a -> s { _policy = a } :: PolicyResource s)
 
 instance P.HasVhost (PolicyResource s) s Text where
     vhost =
         lens (_vhost :: PolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _vhost = a } :: PolicyResource s)
+             (\s a -> s { _vhost = a } :: PolicyResource s)
+
 
 policyResource :: TF.Resource P.RabbitMQ (PolicyResource s)
 policyResource =
@@ -317,17 +320,18 @@ instance TF.ToHCL (QueueResource s) where
 instance P.HasName (QueueResource s) s Text where
     name =
         lens (_name :: QueueResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: QueueResource s)
+             (\s a -> s { _name = a } :: QueueResource s)
 
 instance P.HasSettings (QueueResource s) s Text where
     settings =
         lens (_settings :: QueueResource s -> TF.Attribute s Text)
-            (\s a -> s { _settings = a } :: QueueResource s)
+             (\s a -> s { _settings = a } :: QueueResource s)
 
 instance P.HasVhost (QueueResource s) s Text where
     vhost =
         lens (_vhost :: QueueResource s -> TF.Attribute s Text)
-            (\s a -> s { _vhost = a } :: QueueResource s)
+             (\s a -> s { _vhost = a } :: QueueResource s)
+
 
 queueResource :: TF.Resource P.RabbitMQ (QueueResource s)
 queueResource =
@@ -363,17 +367,18 @@ instance TF.ToHCL (UserResource s) where
 instance P.HasName (UserResource s) s Text where
     name =
         lens (_name :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: UserResource s)
+             (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasPassword (UserResource s) s Text where
     password =
         lens (_password :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _password = a } :: UserResource s)
+             (\s a -> s { _password = a } :: UserResource s)
 
 instance P.HasTags (UserResource s) s Text where
     tags =
         lens (_tags :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: UserResource s)
+             (\s a -> s { _tags = a } :: UserResource s)
+
 
 userResource :: TF.Resource P.RabbitMQ (UserResource s)
 userResource =
@@ -401,7 +406,8 @@ instance TF.ToHCL (VhostResource s) where
 instance P.HasName (VhostResource s) s Text where
     name =
         lens (_name :: VhostResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VhostResource s)
+             (\s a -> s { _name = a } :: VhostResource s)
+
 
 vhostResource :: TF.Resource P.RabbitMQ (VhostResource s)
 vhostResource =

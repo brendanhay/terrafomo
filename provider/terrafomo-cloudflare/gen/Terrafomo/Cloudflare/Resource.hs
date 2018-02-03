@@ -105,54 +105,46 @@ instance TF.ToHCL (RecordResource s) where
 instance P.HasDomain (RecordResource s) s Text where
     domain =
         lens (_domain :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _domain = a } :: RecordResource s)
+             (\s a -> s { _domain = a } :: RecordResource s)
 
 instance P.HasName (RecordResource s) s Text where
     name =
         lens (_name :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RecordResource s)
+             (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasPriority (RecordResource s) s Text where
     priority =
         lens (_priority :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _priority = a } :: RecordResource s)
+             (\s a -> s { _priority = a } :: RecordResource s)
 
 instance P.HasProxied (RecordResource s) s Text where
     proxied =
         lens (_proxied :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _proxied = a } :: RecordResource s)
+             (\s a -> s { _proxied = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) s Text where
     ttl =
         lens (_ttl :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _ttl = a } :: RecordResource s)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) s Text where
     type' =
         lens (_type' :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: RecordResource s)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasValue (RecordResource s) s Text where
     value =
         lens (_value :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _value = a } :: RecordResource s)
+             (\s a -> s { _value = a } :: RecordResource s)
 
 instance P.HasComputedHostname (RecordResource s) Text
-
 instance P.HasComputedId (RecordResource s) Text
-
 instance P.HasComputedName (RecordResource s) Text
-
 instance P.HasComputedPriority (RecordResource s) Text
-
 instance P.HasComputedProxied (RecordResource s) Text
-
 instance P.HasComputedTtl (RecordResource s) Text
-
 instance P.HasComputedType' (RecordResource s) Text
-
 instance P.HasComputedValue (RecordResource s) Text
-
 instance P.HasComputedZoneId (RecordResource s) Text
 
 recordResource :: TF.Resource P.Cloudflare (RecordResource s)

@@ -66,8 +66,14 @@ module Terrafomo.Docker.Lens
     , HasVolumes (..)
 
     -- ** Computed Attributes
+    , HasComputedBridge (..)
+    , HasComputedGateway (..)
+    , HasComputedId (..)
+    , HasComputedIpAddress (..)
+    , HasComputedIpPrefixLength (..)
     , HasComputedLatest (..)
     , HasComputedMountpoint (..)
+    , HasComputedScope (..)
     , HasComputedSha256Digest (..)
     ) where
 
@@ -332,6 +338,36 @@ class HasVolumes a s b | a -> s b where
 instance HasVolumes a s b => HasVolumes (TF.Source l p a) s b where
     volumes = TF.configuration . volumes
 
+class HasComputedBridge a b | a -> b where
+    computedBridge
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedBridge =
+        to (\x -> TF.Computed (TF.referenceKey x) "bridge")
+
+class HasComputedGateway a b | a -> b where
+    computedGateway
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedGateway =
+        to (\x -> TF.Computed (TF.referenceKey x) "gateway")
+
+class HasComputedId a b | a -> b where
+    computedId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedId =
+        to (\x -> TF.Computed (TF.referenceKey x) "id")
+
+class HasComputedIpAddress a b | a -> b where
+    computedIpAddress
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedIpAddress =
+        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
+
+class HasComputedIpPrefixLength a b | a -> b where
+    computedIpPrefixLength
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedIpPrefixLength =
+        to (\x -> TF.Computed (TF.referenceKey x) "ip_prefix_length")
+
 class HasComputedLatest a b | a -> b where
     computedLatest
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -343,6 +379,12 @@ class HasComputedMountpoint a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMountpoint =
         to (\x -> TF.Computed (TF.referenceKey x) "mountpoint")
+
+class HasComputedScope a b | a -> b where
+    computedScope
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedScope =
+        to (\x -> TF.Computed (TF.referenceKey x) "scope")
 
 class HasComputedSha256Digest a b | a -> b where
     computedSha256Digest

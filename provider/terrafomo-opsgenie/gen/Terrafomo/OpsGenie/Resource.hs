@@ -89,17 +89,17 @@ instance TF.ToHCL (TeamResource s) where
 instance P.HasDescription (TeamResource s) s Text where
     description =
         lens (_description :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: TeamResource s)
+             (\s a -> s { _description = a } :: TeamResource s)
 
 instance P.HasMember (TeamResource s) s Text where
     member =
         lens (_member :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _member = a } :: TeamResource s)
+             (\s a -> s { _member = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) s Text where
     name =
         lens (_name :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: TeamResource s)
+             (\s a -> s { _name = a } :: TeamResource s)
 
 instance P.HasComputedId (TeamResource s) Text
 
@@ -141,27 +141,27 @@ instance TF.ToHCL (UserResource s) where
 instance P.HasFullName (UserResource s) s Text where
     fullName =
         lens (_full_name :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _full_name = a } :: UserResource s)
+             (\s a -> s { _full_name = a } :: UserResource s)
 
 instance P.HasLocale (UserResource s) s Text where
     locale =
         lens (_locale :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _locale = a } :: UserResource s)
+             (\s a -> s { _locale = a } :: UserResource s)
 
 instance P.HasRole (UserResource s) s Text where
     role =
         lens (_role :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _role = a } :: UserResource s)
+             (\s a -> s { _role = a } :: UserResource s)
 
 instance P.HasTimezone (UserResource s) s Text where
     timezone =
         lens (_timezone :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _timezone = a } :: UserResource s)
+             (\s a -> s { _timezone = a } :: UserResource s)
 
 instance P.HasUsername (UserResource s) s Text where
     username =
         lens (_username :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: UserResource s)
+             (\s a -> s { _username = a } :: UserResource s)
 
 instance P.HasComputedId (UserResource s) Text
 

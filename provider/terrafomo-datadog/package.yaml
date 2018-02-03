@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Datadog
-    - Terrafomo.Datadog.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

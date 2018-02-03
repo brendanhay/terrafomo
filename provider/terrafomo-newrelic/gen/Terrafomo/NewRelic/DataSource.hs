@@ -76,12 +76,10 @@ instance TF.ToHCL (ApplicationData s) where
 instance P.HasName (ApplicationData s) s Text where
     name =
         lens (_name :: ApplicationData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ApplicationData s)
+             (\s a -> s { _name = a } :: ApplicationData s)
 
 instance P.HasComputedHostIds (ApplicationData s) Text
-
 instance P.HasComputedId (ApplicationData s) Text
-
 instance P.HasComputedInstanceIds (ApplicationData s) Text
 
 applicationData :: TF.DataSource P.NewRelic (ApplicationData s)

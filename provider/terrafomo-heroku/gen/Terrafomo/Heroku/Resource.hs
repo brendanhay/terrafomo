@@ -144,17 +144,17 @@ instance TF.ToHCL (AddonAttachmentResource s) where
 instance P.HasAddonId (AddonAttachmentResource s) s Text where
     addonId =
         lens (_addon_id :: AddonAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _addon_id = a } :: AddonAttachmentResource s)
+             (\s a -> s { _addon_id = a } :: AddonAttachmentResource s)
 
 instance P.HasAppId (AddonAttachmentResource s) s Text where
     appId =
         lens (_app_id :: AddonAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _app_id = a } :: AddonAttachmentResource s)
+             (\s a -> s { _app_id = a } :: AddonAttachmentResource s)
 
 instance P.HasName (AddonAttachmentResource s) s Text where
     name =
         lens (_name :: AddonAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AddonAttachmentResource s)
+             (\s a -> s { _name = a } :: AddonAttachmentResource s)
 
 instance P.HasComputedId (AddonAttachmentResource s) Text
 
@@ -191,26 +191,22 @@ instance TF.ToHCL (AddonResource s) where
 instance P.HasApp (AddonResource s) s Text where
     app =
         lens (_app :: AddonResource s -> TF.Attribute s Text)
-            (\s a -> s { _app = a } :: AddonResource s)
+             (\s a -> s { _app = a } :: AddonResource s)
 
 instance P.HasConfig (AddonResource s) s Text where
     config =
         lens (_config :: AddonResource s -> TF.Attribute s Text)
-            (\s a -> s { _config = a } :: AddonResource s)
+             (\s a -> s { _config = a } :: AddonResource s)
 
 instance P.HasPlan (AddonResource s) s Text where
     plan =
         lens (_plan :: AddonResource s -> TF.Attribute s Text)
-            (\s a -> s { _plan = a } :: AddonResource s)
+             (\s a -> s { _plan = a } :: AddonResource s)
 
 instance P.HasComputedConfigVars (AddonResource s) Text
-
 instance P.HasComputedId (AddonResource s) Text
-
 instance P.HasComputedName (AddonResource s) Text
-
 instance P.HasComputedPlan (AddonResource s) Text
-
 instance P.HasComputedProviderId (AddonResource s) Text
 
 addonResource :: TF.Resource P.Heroku (AddonResource s)
@@ -246,17 +242,18 @@ instance TF.ToHCL (AppFeatureResource s) where
 instance P.HasApp (AppFeatureResource s) s Text where
     app =
         lens (_app :: AppFeatureResource s -> TF.Attribute s Text)
-            (\s a -> s { _app = a } :: AppFeatureResource s)
+             (\s a -> s { _app = a } :: AppFeatureResource s)
 
 instance P.HasEnabled (AppFeatureResource s) s Text where
     enabled =
         lens (_enabled :: AppFeatureResource s -> TF.Attribute s Text)
-            (\s a -> s { _enabled = a } :: AppFeatureResource s)
+             (\s a -> s { _enabled = a } :: AppFeatureResource s)
 
 instance P.HasName (AppFeatureResource s) s Text where
     name =
         lens (_name :: AppFeatureResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AppFeatureResource s)
+             (\s a -> s { _name = a } :: AppFeatureResource s)
+
 
 appFeatureResource :: TF.Resource P.Heroku (AppFeatureResource s)
 appFeatureResource =
@@ -306,59 +303,51 @@ instance TF.ToHCL (AppResource s) where
 instance P.HasAcm (AppResource s) s Text where
     acm =
         lens (_acm :: AppResource s -> TF.Attribute s Text)
-            (\s a -> s { _acm = a } :: AppResource s)
+             (\s a -> s { _acm = a } :: AppResource s)
 
 instance P.HasBuildpacks (AppResource s) s Text where
     buildpacks =
         lens (_buildpacks :: AppResource s -> TF.Attribute s Text)
-            (\s a -> s { _buildpacks = a } :: AppResource s)
+             (\s a -> s { _buildpacks = a } :: AppResource s)
 
 instance P.HasConfigVars (AppResource s) s Text where
     configVars =
         lens (_config_vars :: AppResource s -> TF.Attribute s Text)
-            (\s a -> s { _config_vars = a } :: AppResource s)
+             (\s a -> s { _config_vars = a } :: AppResource s)
 
 instance P.HasName (AppResource s) s Text where
     name =
         lens (_name :: AppResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AppResource s)
+             (\s a -> s { _name = a } :: AppResource s)
 
 instance P.HasOrganization (AppResource s) s Text where
     organization =
         lens (_organization :: AppResource s -> TF.Attribute s Text)
-            (\s a -> s { _organization = a } :: AppResource s)
+             (\s a -> s { _organization = a } :: AppResource s)
 
 instance P.HasRegion (AppResource s) s Text where
     region =
         lens (_region :: AppResource s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: AppResource s)
+             (\s a -> s { _region = a } :: AppResource s)
 
 instance P.HasSpace (AppResource s) s Text where
     space =
         lens (_space :: AppResource s -> TF.Attribute s Text)
-            (\s a -> s { _space = a } :: AppResource s)
+             (\s a -> s { _space = a } :: AppResource s)
 
 instance P.HasStack (AppResource s) s Text where
     stack =
         lens (_stack :: AppResource s -> TF.Attribute s Text)
-            (\s a -> s { _stack = a } :: AppResource s)
+             (\s a -> s { _stack = a } :: AppResource s)
 
 instance P.HasComputedAllConfigVars (AppResource s) Text
-
 instance P.HasComputedGitUrl (AppResource s) Text
-
 instance P.HasComputedHerokuHostname (AppResource s) Text
-
 instance P.HasComputedId (AppResource s) Text
-
 instance P.HasComputedName (AppResource s) Text
-
 instance P.HasComputedRegion (AppResource s) Text
-
 instance P.HasComputedSpace (AppResource s) Text
-
 instance P.HasComputedStack (AppResource s) Text
-
 instance P.HasComputedWebUrl (AppResource s) Text
 
 appResource :: TF.Resource P.Heroku (AppResource s)
@@ -399,22 +388,20 @@ instance TF.ToHCL (CertResource s) where
 instance P.HasApp (CertResource s) s Text where
     app =
         lens (_app :: CertResource s -> TF.Attribute s Text)
-            (\s a -> s { _app = a } :: CertResource s)
+             (\s a -> s { _app = a } :: CertResource s)
 
 instance P.HasCertificateChain (CertResource s) s Text where
     certificateChain =
         lens (_certificate_chain :: CertResource s -> TF.Attribute s Text)
-            (\s a -> s { _certificate_chain = a } :: CertResource s)
+             (\s a -> s { _certificate_chain = a } :: CertResource s)
 
 instance P.HasPrivateKey (CertResource s) s Text where
     privateKey =
         lens (_private_key :: CertResource s -> TF.Attribute s Text)
-            (\s a -> s { _private_key = a } :: CertResource s)
+             (\s a -> s { _private_key = a } :: CertResource s)
 
 instance P.HasComputedCname (CertResource s) Text
-
 instance P.HasComputedId (CertResource s) Text
-
 instance P.HasComputedName (CertResource s) Text
 
 certResource :: TF.Resource P.Heroku (CertResource s)
@@ -447,17 +434,15 @@ instance TF.ToHCL (DomainResource s) where
 instance P.HasApp (DomainResource s) s Text where
     app =
         lens (_app :: DomainResource s -> TF.Attribute s Text)
-            (\s a -> s { _app = a } :: DomainResource s)
+             (\s a -> s { _app = a } :: DomainResource s)
 
 instance P.HasHostname (DomainResource s) s Text where
     hostname =
         lens (_hostname :: DomainResource s -> TF.Attribute s Text)
-            (\s a -> s { _hostname = a } :: DomainResource s)
+             (\s a -> s { _hostname = a } :: DomainResource s)
 
 instance P.HasComputedCname (DomainResource s) Text
-
 instance P.HasComputedHostname (DomainResource s) Text
-
 instance P.HasComputedId (DomainResource s) Text
 
 domainResource :: TF.Resource P.Heroku (DomainResource s)
@@ -489,12 +474,12 @@ instance TF.ToHCL (DrainResource s) where
 instance P.HasApp (DrainResource s) s Text where
     app =
         lens (_app :: DrainResource s -> TF.Attribute s Text)
-            (\s a -> s { _app = a } :: DrainResource s)
+             (\s a -> s { _app = a } :: DrainResource s)
 
 instance P.HasUrl (DrainResource s) s Text where
     url =
         lens (_url :: DrainResource s -> TF.Attribute s Text)
-            (\s a -> s { _url = a } :: DrainResource s)
+             (\s a -> s { _url = a } :: DrainResource s)
 
 instance P.HasComputedToken (DrainResource s) Text
 
@@ -533,26 +518,22 @@ instance TF.ToHCL (PipelineCouplingResource s) where
 instance P.HasApp (PipelineCouplingResource s) s Text where
     app =
         lens (_app :: PipelineCouplingResource s -> TF.Attribute s Text)
-            (\s a -> s { _app = a } :: PipelineCouplingResource s)
+             (\s a -> s { _app = a } :: PipelineCouplingResource s)
 
 instance P.HasPipeline (PipelineCouplingResource s) s Text where
     pipeline =
         lens (_pipeline :: PipelineCouplingResource s -> TF.Attribute s Text)
-            (\s a -> s { _pipeline = a } :: PipelineCouplingResource s)
+             (\s a -> s { _pipeline = a } :: PipelineCouplingResource s)
 
 instance P.HasStage (PipelineCouplingResource s) s Text where
     stage =
         lens (_stage :: PipelineCouplingResource s -> TF.Attribute s Text)
-            (\s a -> s { _stage = a } :: PipelineCouplingResource s)
+             (\s a -> s { _stage = a } :: PipelineCouplingResource s)
 
 instance P.HasComputedApp (PipelineCouplingResource s) Text
-
 instance P.HasComputedAppId (PipelineCouplingResource s) Text
-
 instance P.HasComputedId (PipelineCouplingResource s) Text
-
 instance P.HasComputedPipeline (PipelineCouplingResource s) Text
-
 instance P.HasComputedStage (PipelineCouplingResource s) Text
 
 pipelineCouplingResource :: TF.Resource P.Heroku (PipelineCouplingResource s)
@@ -584,10 +565,9 @@ instance TF.ToHCL (PipelineResource s) where
 instance P.HasName (PipelineResource s) s Text where
     name =
         lens (_name :: PipelineResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: PipelineResource s)
+             (\s a -> s { _name = a } :: PipelineResource s)
 
 instance P.HasComputedId (PipelineResource s) Text
-
 instance P.HasComputedName (PipelineResource s) Text
 
 pipelineResource :: TF.Resource P.Heroku (PipelineResource s)
@@ -621,24 +601,21 @@ instance TF.ToHCL (SpaceResource s) where
 instance P.HasName (SpaceResource s) s Text where
     name =
         lens (_name :: SpaceResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SpaceResource s)
+             (\s a -> s { _name = a } :: SpaceResource s)
 
 instance P.HasOrganization (SpaceResource s) s Text where
     organization =
         lens (_organization :: SpaceResource s -> TF.Attribute s Text)
-            (\s a -> s { _organization = a } :: SpaceResource s)
+             (\s a -> s { _organization = a } :: SpaceResource s)
 
 instance P.HasRegion (SpaceResource s) s Text where
     region =
         lens (_region :: SpaceResource s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: SpaceResource s)
+             (\s a -> s { _region = a } :: SpaceResource s)
 
 instance P.HasComputedId (SpaceResource s) Text
-
 instance P.HasComputedName (SpaceResource s) Text
-
 instance P.HasComputedOrganization (SpaceResource s) Text
-
 instance P.HasComputedRegion (SpaceResource s) Text
 
 spaceResource :: TF.Resource P.Heroku (SpaceResource s)

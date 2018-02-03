@@ -92,30 +92,24 @@ instance TF.ToHCL (BootscriptData s) where
 instance P.HasArchitecture (BootscriptData s) s Text where
     architecture =
         lens (_architecture :: BootscriptData s -> TF.Attribute s Text)
-            (\s a -> s { _architecture = a } :: BootscriptData s)
+             (\s a -> s { _architecture = a } :: BootscriptData s)
 
 instance P.HasName (BootscriptData s) s Text where
     name =
         lens (_name :: BootscriptData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: BootscriptData s)
+             (\s a -> s { _name = a } :: BootscriptData s)
 
 instance P.HasNameFilter (BootscriptData s) s Text where
     nameFilter =
         lens (_name_filter :: BootscriptData s -> TF.Attribute s Text)
-            (\s a -> s { _name_filter = a } :: BootscriptData s)
+             (\s a -> s { _name_filter = a } :: BootscriptData s)
 
 instance P.HasComputedArchitecture (BootscriptData s) Text
-
 instance P.HasComputedBootCmdArgs (BootscriptData s) Text
-
 instance P.HasComputedDtb (BootscriptData s) Text
-
 instance P.HasComputedInitrd (BootscriptData s) Text
-
 instance P.HasComputedKernel (BootscriptData s) Text
-
 instance P.HasComputedOrganization (BootscriptData s) Text
-
 instance P.HasComputedPublic (BootscriptData s) Text
 
 bootscriptData :: TF.DataSource P.Scaleway (BootscriptData s)
@@ -151,24 +145,21 @@ instance TF.ToHCL (ImageData s) where
 instance P.HasArchitecture (ImageData s) s Text where
     architecture =
         lens (_architecture :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _architecture = a } :: ImageData s)
+             (\s a -> s { _architecture = a } :: ImageData s)
 
 instance P.HasName (ImageData s) s Text where
     name =
         lens (_name :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageData s)
+             (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasNameFilter (ImageData s) s Text where
     nameFilter =
         lens (_name_filter :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name_filter = a } :: ImageData s)
+             (\s a -> s { _name_filter = a } :: ImageData s)
 
 instance P.HasComputedArchitecture (ImageData s) Text
-
 instance P.HasComputedCreationDate (ImageData s) Text
-
 instance P.HasComputedOrganization (ImageData s) Text
-
 instance P.HasComputedPublic (ImageData s) Text
 
 imageData :: TF.DataSource P.Scaleway (ImageData s)

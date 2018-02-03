@@ -21,8 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.VSphere
-    - Terrafomo.VSphere.DataSource
-    - Terrafomo.VSphere.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

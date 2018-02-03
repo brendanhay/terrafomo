@@ -337,6 +337,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedEndpoint (..)
     , HasComputedFqdn (..)
     , HasComputedFullyQualifiedDomainName (..)
+    , HasComputedHostname (..)
     , HasComputedId (..)
     , HasComputedIdleTimeoutInMinutes (..)
     , HasComputedInstrumentationKey (..)
@@ -364,6 +365,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedOutputs (..)
     , HasComputedPartitionIds (..)
     , HasComputedPermissions (..)
+    , HasComputedPort (..)
     , HasComputedPortalUrl (..)
     , HasComputedPrimaryAccessKey (..)
     , HasComputedPrimaryBlobConnectionString (..)
@@ -402,6 +404,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedSourceResourceId (..)
     , HasComputedSourceUri (..)
     , HasComputedSpendingLimit (..)
+    , HasComputedSslPort (..)
     , HasComputedState (..)
     , HasComputedStorageAccountId (..)
     , HasComputedStorageAccountType (..)
@@ -2304,6 +2307,12 @@ class HasComputedFullyQualifiedDomainName a b | a -> b where
     computedFullyQualifiedDomainName =
         to (\x -> TF.Computed (TF.referenceKey x) "fully_qualified_domain_name")
 
+class HasComputedHostname a b | a -> b where
+    computedHostname
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHostname =
+        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
+
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2465,6 +2474,12 @@ class HasComputedPermissions a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPermissions =
         to (\x -> TF.Computed (TF.referenceKey x) "permissions")
+
+class HasComputedPort a b | a -> b where
+    computedPort
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPort =
+        to (\x -> TF.Computed (TF.referenceKey x) "port")
 
 class HasComputedPortalUrl a b | a -> b where
     computedPortalUrl
@@ -2693,6 +2708,12 @@ class HasComputedSpendingLimit a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSpendingLimit =
         to (\x -> TF.Computed (TF.referenceKey x) "spending_limit")
+
+class HasComputedSslPort a b | a -> b where
+    computedSslPort
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSslPort =
+        to (\x -> TF.Computed (TF.referenceKey x) "ssl_port")
 
 class HasComputedState a b | a -> b where
     computedState

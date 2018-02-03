@@ -128,17 +128,29 @@ module Terrafomo.VSphere.Resource
     -- ** Computed Attributes
     , P.HasComputedAccessible (..)
     , P.HasComputedCapacity (..)
+    , P.HasComputedChangeVersion (..)
+    , P.HasComputedComputedPolicy (..)
+    , P.HasComputedConfigVersion (..)
+    , P.HasComputedDefaultIpAddress (..)
     , P.HasComputedEditionKey (..)
     , P.HasComputedFreeSpace (..)
+    , P.HasComputedGuestIpAddresses (..)
     , P.HasComputedId (..)
+    , P.HasComputedImported (..)
+    , P.HasComputedKey (..)
     , P.HasComputedMaintenanceMode (..)
     , P.HasComputedMultipleHostAccess (..)
     , P.HasComputedName (..)
+    , P.HasComputedPorts (..)
     , P.HasComputedProtocolEndpoint (..)
+    , P.HasComputedRebootRequired (..)
     , P.HasComputedTotal (..)
     , P.HasComputedUncommittedSpace (..)
     , P.HasComputedUrl (..)
     , P.HasComputedUsed (..)
+    , P.HasComputedUuid (..)
+    , P.HasComputedVmwareToolsStatus (..)
+    , P.HasComputedVmxPath (..)
 
     -- * Re-exported Types
     , module P
@@ -191,12 +203,13 @@ instance TF.ToHCL (CustomAttributeResource s) where
 instance P.HasManagedObjectType (CustomAttributeResource s) s Text where
     managedObjectType =
         lens (_managed_object_type :: CustomAttributeResource s -> TF.Attribute s Text)
-            (\s a -> s { _managed_object_type = a } :: CustomAttributeResource s)
+             (\s a -> s { _managed_object_type = a } :: CustomAttributeResource s)
 
 instance P.HasName (CustomAttributeResource s) s Text where
     name =
         lens (_name :: CustomAttributeResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CustomAttributeResource s)
+             (\s a -> s { _name = a } :: CustomAttributeResource s)
+
 
 customAttributeResource :: TF.Resource P.VSphere (CustomAttributeResource s)
 customAttributeResource =
@@ -230,17 +243,18 @@ instance TF.ToHCL (DatacenterResource s) where
 instance P.HasFolder (DatacenterResource s) s Text where
     folder =
         lens (_folder :: DatacenterResource s -> TF.Attribute s Text)
-            (\s a -> s { _folder = a } :: DatacenterResource s)
+             (\s a -> s { _folder = a } :: DatacenterResource s)
 
 instance P.HasName (DatacenterResource s) s Text where
     name =
         lens (_name :: DatacenterResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatacenterResource s)
+             (\s a -> s { _name = a } :: DatacenterResource s)
 
 instance P.HasTags (DatacenterResource s) s Text where
     tags =
         lens (_tags :: DatacenterResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: DatacenterResource s)
+             (\s a -> s { _tags = a } :: DatacenterResource s)
+
 
 datacenterResource :: TF.Resource P.VSphere (DatacenterResource s)
 datacenterResource =
@@ -295,32 +309,35 @@ instance TF.ToHCL (DistributedPortGroupResource s) where
 instance P.HasAutoExpand (DistributedPortGroupResource s) s Text where
     autoExpand =
         lens (_auto_expand :: DistributedPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _auto_expand = a } :: DistributedPortGroupResource s)
+             (\s a -> s { _auto_expand = a } :: DistributedPortGroupResource s)
 
 instance P.HasDescription (DistributedPortGroupResource s) s Text where
     description =
         lens (_description :: DistributedPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: DistributedPortGroupResource s)
+             (\s a -> s { _description = a } :: DistributedPortGroupResource s)
 
 instance P.HasDistributedVirtualSwitchUuid (DistributedPortGroupResource s) s Text where
     distributedVirtualSwitchUuid =
         lens (_distributed_virtual_switch_uuid :: DistributedPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _distributed_virtual_switch_uuid = a } :: DistributedPortGroupResource s)
+             (\s a -> s { _distributed_virtual_switch_uuid = a } :: DistributedPortGroupResource s)
 
 instance P.HasName (DistributedPortGroupResource s) s Text where
     name =
         lens (_name :: DistributedPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DistributedPortGroupResource s)
+             (\s a -> s { _name = a } :: DistributedPortGroupResource s)
 
 instance P.HasNumberOfPorts (DistributedPortGroupResource s) s Text where
     numberOfPorts =
         lens (_number_of_ports :: DistributedPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _number_of_ports = a } :: DistributedPortGroupResource s)
+             (\s a -> s { _number_of_ports = a } :: DistributedPortGroupResource s)
 
 instance P.HasType' (DistributedPortGroupResource s) s Text where
     type' =
         lens (_type' :: DistributedPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: DistributedPortGroupResource s)
+             (\s a -> s { _type' = a } :: DistributedPortGroupResource s)
+
+instance P.HasComputedId (DistributedPortGroupResource s) Text
+instance P.HasComputedKey (DistributedPortGroupResource s) Text
 
 distributedPortGroupResource :: TF.Resource P.VSphere (DistributedPortGroupResource s)
 distributedPortGroupResource =
@@ -404,72 +421,75 @@ instance TF.ToHCL (DistributedVirtualSwitchResource s) where
 instance P.HasContactDetail (DistributedVirtualSwitchResource s) s Text where
     contactDetail =
         lens (_contact_detail :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _contact_detail = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _contact_detail = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasContactName (DistributedVirtualSwitchResource s) s Text where
     contactName =
         lens (_contact_name :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _contact_name = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _contact_name = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasDatacenterId (DistributedVirtualSwitchResource s) s Text where
     datacenterId =
         lens (_datacenter_id :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasDescription (DistributedVirtualSwitchResource s) s Text where
     description =
         lens (_description :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _description = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasFolder (DistributedVirtualSwitchResource s) s Text where
     folder =
         lens (_folder :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasIpv4Address (DistributedVirtualSwitchResource s) s Text where
     ipv4Address =
         lens (_ipv4_address :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _ipv4_address = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _ipv4_address = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLacpApiVersion (DistributedVirtualSwitchResource s) s Text where
     lacpApiVersion =
         lens (_lacp_api_version :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _lacp_api_version = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _lacp_api_version = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLinkDiscoveryOperation (DistributedVirtualSwitchResource s) s Text where
     linkDiscoveryOperation =
         lens (_link_discovery_operation :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _link_discovery_operation = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _link_discovery_operation = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLinkDiscoveryProtocol (DistributedVirtualSwitchResource s) s Text where
     linkDiscoveryProtocol =
         lens (_link_discovery_protocol :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _link_discovery_protocol = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _link_discovery_protocol = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasMaxMtu (DistributedVirtualSwitchResource s) s Text where
     maxMtu =
         lens (_max_mtu :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _max_mtu = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _max_mtu = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasMulticastFilteringMode (DistributedVirtualSwitchResource s) s Text where
     multicastFilteringMode =
         lens (_multicast_filtering_mode :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _multicast_filtering_mode = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _multicast_filtering_mode = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasName (DistributedVirtualSwitchResource s) s Text where
     name =
         lens (_name :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _name = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasTags (DistributedVirtualSwitchResource s) s Text where
     tags =
         lens (_tags :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasVersion (DistributedVirtualSwitchResource s) s Text where
     version =
         lens (_version :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _version = a } :: DistributedVirtualSwitchResource s)
+             (\s a -> s { _version = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasComputedConfigVersion (DistributedVirtualSwitchResource s) Text
+instance P.HasComputedId (DistributedVirtualSwitchResource s) Text
 
 distributedVirtualSwitchResource :: TF.Resource P.VSphere (DistributedVirtualSwitchResource s)
 distributedVirtualSwitchResource =
@@ -536,37 +556,38 @@ instance TF.ToHCL (FileResource s) where
 instance P.HasCreateDirectories (FileResource s) s Text where
     createDirectories =
         lens (_create_directories :: FileResource s -> TF.Attribute s Text)
-            (\s a -> s { _create_directories = a } :: FileResource s)
+             (\s a -> s { _create_directories = a } :: FileResource s)
 
 instance P.HasDatacenter (FileResource s) s Text where
     datacenter =
         lens (_datacenter :: FileResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: FileResource s)
+             (\s a -> s { _datacenter = a } :: FileResource s)
 
 instance P.HasDatastore (FileResource s) s Text where
     datastore =
         lens (_datastore :: FileResource s -> TF.Attribute s Text)
-            (\s a -> s { _datastore = a } :: FileResource s)
+             (\s a -> s { _datastore = a } :: FileResource s)
 
 instance P.HasDestinationFile (FileResource s) s Text where
     destinationFile =
         lens (_destination_file :: FileResource s -> TF.Attribute s Text)
-            (\s a -> s { _destination_file = a } :: FileResource s)
+             (\s a -> s { _destination_file = a } :: FileResource s)
 
 instance P.HasSourceDatacenter (FileResource s) s Text where
     sourceDatacenter =
         lens (_source_datacenter :: FileResource s -> TF.Attribute s Text)
-            (\s a -> s { _source_datacenter = a } :: FileResource s)
+             (\s a -> s { _source_datacenter = a } :: FileResource s)
 
 instance P.HasSourceDatastore (FileResource s) s Text where
     sourceDatastore =
         lens (_source_datastore :: FileResource s -> TF.Attribute s Text)
-            (\s a -> s { _source_datastore = a } :: FileResource s)
+             (\s a -> s { _source_datastore = a } :: FileResource s)
 
 instance P.HasSourceFile (FileResource s) s Text where
     sourceFile =
         lens (_source_file :: FileResource s -> TF.Attribute s Text)
-            (\s a -> s { _source_file = a } :: FileResource s)
+             (\s a -> s { _source_file = a } :: FileResource s)
+
 
 fileResource :: TF.Resource P.VSphere (FileResource s)
 fileResource =
@@ -605,7 +626,8 @@ instance TF.ToHCL (FolderResource s) where
 instance P.HasPath (FolderResource s) s Text where
     path =
         lens (_path :: FolderResource s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: FolderResource s)
+             (\s a -> s { _path = a } :: FolderResource s)
+
 
 folderResource :: TF.Resource P.VSphere (FolderResource s)
 folderResource =
@@ -646,22 +668,27 @@ instance TF.ToHCL (HostPortGroupResource s) where
 instance P.HasHostSystemId (HostPortGroupResource s) s Text where
     hostSystemId =
         lens (_host_system_id :: HostPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _host_system_id = a } :: HostPortGroupResource s)
+             (\s a -> s { _host_system_id = a } :: HostPortGroupResource s)
 
 instance P.HasName (HostPortGroupResource s) s Text where
     name =
         lens (_name :: HostPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: HostPortGroupResource s)
+             (\s a -> s { _name = a } :: HostPortGroupResource s)
 
 instance P.HasVirtualSwitchName (HostPortGroupResource s) s Text where
     virtualSwitchName =
         lens (_virtual_switch_name :: HostPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _virtual_switch_name = a } :: HostPortGroupResource s)
+             (\s a -> s { _virtual_switch_name = a } :: HostPortGroupResource s)
 
 instance P.HasVlanId (HostPortGroupResource s) s Text where
     vlanId =
         lens (_vlan_id :: HostPortGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _vlan_id = a } :: HostPortGroupResource s)
+             (\s a -> s { _vlan_id = a } :: HostPortGroupResource s)
+
+instance P.HasComputedComputedPolicy (HostPortGroupResource s) Text
+instance P.HasComputedId (HostPortGroupResource s) Text
+instance P.HasComputedKey (HostPortGroupResource s) Text
+instance P.HasComputedPorts (HostPortGroupResource s) Text
 
 hostPortGroupResource :: TF.Resource P.VSphere (HostPortGroupResource s)
 hostPortGroupResource =
@@ -705,22 +732,23 @@ instance TF.ToHCL (HostVirtualSwitchResource s) where
 instance P.HasHostSystemId (HostVirtualSwitchResource s) s Text where
     hostSystemId =
         lens (_host_system_id :: HostVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _host_system_id = a } :: HostVirtualSwitchResource s)
+             (\s a -> s { _host_system_id = a } :: HostVirtualSwitchResource s)
 
 instance P.HasMtu (HostVirtualSwitchResource s) s Text where
     mtu =
         lens (_mtu :: HostVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _mtu = a } :: HostVirtualSwitchResource s)
+             (\s a -> s { _mtu = a } :: HostVirtualSwitchResource s)
 
 instance P.HasName (HostVirtualSwitchResource s) s Text where
     name =
         lens (_name :: HostVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: HostVirtualSwitchResource s)
+             (\s a -> s { _name = a } :: HostVirtualSwitchResource s)
 
 instance P.HasNumberOfPorts (HostVirtualSwitchResource s) s Text where
     numberOfPorts =
         lens (_number_of_ports :: HostVirtualSwitchResource s -> TF.Attribute s Text)
-            (\s a -> s { _number_of_ports = a } :: HostVirtualSwitchResource s)
+             (\s a -> s { _number_of_ports = a } :: HostVirtualSwitchResource s)
+
 
 hostVirtualSwitchResource :: TF.Resource P.VSphere (HostVirtualSwitchResource s)
 hostVirtualSwitchResource =
@@ -753,19 +781,16 @@ instance TF.ToHCL (LicenseResource s) where
 instance P.HasLabels (LicenseResource s) s Text where
     labels =
         lens (_labels :: LicenseResource s -> TF.Attribute s Text)
-            (\s a -> s { _labels = a } :: LicenseResource s)
+             (\s a -> s { _labels = a } :: LicenseResource s)
 
 instance P.HasLicenseKey (LicenseResource s) s Text where
     licenseKey =
         lens (_license_key :: LicenseResource s -> TF.Attribute s Text)
-            (\s a -> s { _license_key = a } :: LicenseResource s)
+             (\s a -> s { _license_key = a } :: LicenseResource s)
 
 instance P.HasComputedEditionKey (LicenseResource s) Text
-
 instance P.HasComputedName (LicenseResource s) Text
-
 instance P.HasComputedTotal (LicenseResource s) Text
-
 instance P.HasComputedUsed (LicenseResource s) Text
 
 licenseResource :: TF.Resource P.VSphere (LicenseResource s)
@@ -823,64 +848,56 @@ instance TF.ToHCL (NasDatastoreResource s) where
 instance P.HasAccessMode (NasDatastoreResource s) s Text where
     accessMode =
         lens (_access_mode :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _access_mode = a } :: NasDatastoreResource s)
+             (\s a -> s { _access_mode = a } :: NasDatastoreResource s)
 
 instance P.HasFolder (NasDatastoreResource s) s Text where
     folder =
         lens (_folder :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _folder = a } :: NasDatastoreResource s)
+             (\s a -> s { _folder = a } :: NasDatastoreResource s)
 
 instance P.HasHostSystemIds (NasDatastoreResource s) s Text where
     hostSystemIds =
         lens (_host_system_ids :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _host_system_ids = a } :: NasDatastoreResource s)
+             (\s a -> s { _host_system_ids = a } :: NasDatastoreResource s)
 
 instance P.HasName (NasDatastoreResource s) s Text where
     name =
         lens (_name :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NasDatastoreResource s)
+             (\s a -> s { _name = a } :: NasDatastoreResource s)
 
 instance P.HasRemoteHosts (NasDatastoreResource s) s Text where
     remoteHosts =
         lens (_remote_hosts :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _remote_hosts = a } :: NasDatastoreResource s)
+             (\s a -> s { _remote_hosts = a } :: NasDatastoreResource s)
 
 instance P.HasRemotePath (NasDatastoreResource s) s Text where
     remotePath =
         lens (_remote_path :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _remote_path = a } :: NasDatastoreResource s)
+             (\s a -> s { _remote_path = a } :: NasDatastoreResource s)
 
 instance P.HasSecurityType (NasDatastoreResource s) s Text where
     securityType =
         lens (_security_type :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _security_type = a } :: NasDatastoreResource s)
+             (\s a -> s { _security_type = a } :: NasDatastoreResource s)
 
 instance P.HasTags (NasDatastoreResource s) s Text where
     tags =
         lens (_tags :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: NasDatastoreResource s)
+             (\s a -> s { _tags = a } :: NasDatastoreResource s)
 
 instance P.HasType' (NasDatastoreResource s) s Text where
     type' =
         lens (_type' :: NasDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: NasDatastoreResource s)
+             (\s a -> s { _type' = a } :: NasDatastoreResource s)
 
 instance P.HasComputedAccessible (NasDatastoreResource s) Text
-
 instance P.HasComputedCapacity (NasDatastoreResource s) Text
-
 instance P.HasComputedFreeSpace (NasDatastoreResource s) Text
-
 instance P.HasComputedId (NasDatastoreResource s) Text
-
 instance P.HasComputedMaintenanceMode (NasDatastoreResource s) Text
-
 instance P.HasComputedMultipleHostAccess (NasDatastoreResource s) Text
-
 instance P.HasComputedProtocolEndpoint (NasDatastoreResource s) Text
-
 instance P.HasComputedUncommittedSpace (NasDatastoreResource s) Text
-
 instance P.HasComputedUrl (NasDatastoreResource s) Text
 
 nasDatastoreResource :: TF.Resource P.VSphere (NasDatastoreResource s)
@@ -931,22 +948,23 @@ instance TF.ToHCL (TagCategoryResource s) where
 instance P.HasAssociableTypes (TagCategoryResource s) s Text where
     associableTypes =
         lens (_associable_types :: TagCategoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _associable_types = a } :: TagCategoryResource s)
+             (\s a -> s { _associable_types = a } :: TagCategoryResource s)
 
 instance P.HasCardinality (TagCategoryResource s) s Text where
     cardinality =
         lens (_cardinality :: TagCategoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _cardinality = a } :: TagCategoryResource s)
+             (\s a -> s { _cardinality = a } :: TagCategoryResource s)
 
 instance P.HasDescription (TagCategoryResource s) s Text where
     description =
         lens (_description :: TagCategoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: TagCategoryResource s)
+             (\s a -> s { _description = a } :: TagCategoryResource s)
 
 instance P.HasName (TagCategoryResource s) s Text where
     name =
         lens (_name :: TagCategoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: TagCategoryResource s)
+             (\s a -> s { _name = a } :: TagCategoryResource s)
+
 
 tagCategoryResource :: TF.Resource P.VSphere (TagCategoryResource s)
 tagCategoryResource =
@@ -987,17 +1005,18 @@ instance TF.ToHCL (TagResource s) where
 instance P.HasCategoryId (TagResource s) s Text where
     categoryId =
         lens (_category_id :: TagResource s -> TF.Attribute s Text)
-            (\s a -> s { _category_id = a } :: TagResource s)
+             (\s a -> s { _category_id = a } :: TagResource s)
 
 instance P.HasDescription (TagResource s) s Text where
     description =
         lens (_description :: TagResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: TagResource s)
+             (\s a -> s { _description = a } :: TagResource s)
 
 instance P.HasName (TagResource s) s Text where
     name =
         lens (_name :: TagResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: TagResource s)
+             (\s a -> s { _name = a } :: TagResource s)
+
 
 tagResource :: TF.Resource P.VSphere (TagResource s)
 tagResource =
@@ -1044,32 +1063,33 @@ instance TF.ToHCL (VirtualDiskResource s) where
 instance P.HasAdapterType (VirtualDiskResource s) s Text where
     adapterType =
         lens (_adapter_type :: VirtualDiskResource s -> TF.Attribute s Text)
-            (\s a -> s { _adapter_type = a } :: VirtualDiskResource s)
+             (\s a -> s { _adapter_type = a } :: VirtualDiskResource s)
 
 instance P.HasDatacenter (VirtualDiskResource s) s Text where
     datacenter =
         lens (_datacenter :: VirtualDiskResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: VirtualDiskResource s)
+             (\s a -> s { _datacenter = a } :: VirtualDiskResource s)
 
 instance P.HasDatastore (VirtualDiskResource s) s Text where
     datastore =
         lens (_datastore :: VirtualDiskResource s -> TF.Attribute s Text)
-            (\s a -> s { _datastore = a } :: VirtualDiskResource s)
+             (\s a -> s { _datastore = a } :: VirtualDiskResource s)
 
 instance P.HasSize (VirtualDiskResource s) s Text where
     size =
         lens (_size :: VirtualDiskResource s -> TF.Attribute s Text)
-            (\s a -> s { _size = a } :: VirtualDiskResource s)
+             (\s a -> s { _size = a } :: VirtualDiskResource s)
 
 instance P.HasType' (VirtualDiskResource s) s Text where
     type' =
         lens (_type' :: VirtualDiskResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: VirtualDiskResource s)
+             (\s a -> s { _type' = a } :: VirtualDiskResource s)
 
 instance P.HasVmdkPath (VirtualDiskResource s) s Text where
     vmdkPath =
         lens (_vmdk_path :: VirtualDiskResource s -> TF.Attribute s Text)
-            (\s a -> s { _vmdk_path = a } :: VirtualDiskResource s)
+             (\s a -> s { _vmdk_path = a } :: VirtualDiskResource s)
+
 
 virtualDiskResource :: TF.Resource P.VSphere (VirtualDiskResource s)
 virtualDiskResource =
@@ -1109,12 +1129,22 @@ instance TF.ToHCL (VirtualMachineResource s) where
 instance P.HasName (VirtualMachineResource s) s Text where
     name =
         lens (_name :: VirtualMachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VirtualMachineResource s)
+             (\s a -> s { _name = a } :: VirtualMachineResource s)
 
 instance P.HasResourcePoolId (VirtualMachineResource s) s Text where
     resourcePoolId =
         lens (_resource_pool_id :: VirtualMachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_pool_id = a } :: VirtualMachineResource s)
+             (\s a -> s { _resource_pool_id = a } :: VirtualMachineResource s)
+
+instance P.HasComputedChangeVersion (VirtualMachineResource s) Text
+instance P.HasComputedDefaultIpAddress (VirtualMachineResource s) Text
+instance P.HasComputedGuestIpAddresses (VirtualMachineResource s) Text
+instance P.HasComputedId (VirtualMachineResource s) Text
+instance P.HasComputedImported (VirtualMachineResource s) Text
+instance P.HasComputedRebootRequired (VirtualMachineResource s) Text
+instance P.HasComputedUuid (VirtualMachineResource s) Text
+instance P.HasComputedVmwareToolsStatus (VirtualMachineResource s) Text
+instance P.HasComputedVmxPath (VirtualMachineResource s) Text
 
 virtualMachineResource :: TF.Resource P.VSphere (VirtualMachineResource s)
 virtualMachineResource =
@@ -1176,37 +1206,38 @@ instance TF.ToHCL (VirtualMachineSnapshotResource s) where
 instance P.HasConsolidate (VirtualMachineSnapshotResource s) s Text where
     consolidate =
         lens (_consolidate :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _consolidate = a } :: VirtualMachineSnapshotResource s)
+             (\s a -> s { _consolidate = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasDescription (VirtualMachineSnapshotResource s) s Text where
     description =
         lens (_description :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: VirtualMachineSnapshotResource s)
+             (\s a -> s { _description = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasMemory (VirtualMachineSnapshotResource s) s Text where
     memory =
         lens (_memory :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _memory = a } :: VirtualMachineSnapshotResource s)
+             (\s a -> s { _memory = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasQuiesce (VirtualMachineSnapshotResource s) s Text where
     quiesce =
         lens (_quiesce :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _quiesce = a } :: VirtualMachineSnapshotResource s)
+             (\s a -> s { _quiesce = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasRemoveChildren (VirtualMachineSnapshotResource s) s Text where
     removeChildren =
         lens (_remove_children :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _remove_children = a } :: VirtualMachineSnapshotResource s)
+             (\s a -> s { _remove_children = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasSnapshotName (VirtualMachineSnapshotResource s) s Text where
     snapshotName =
         lens (_snapshot_name :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _snapshot_name = a } :: VirtualMachineSnapshotResource s)
+             (\s a -> s { _snapshot_name = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasVirtualMachineUuid (VirtualMachineSnapshotResource s) s Text where
     virtualMachineUuid =
         lens (_virtual_machine_uuid :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource s)
+             (\s a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource s)
+
 
 virtualMachineSnapshotResource :: TF.Resource P.VSphere (VirtualMachineSnapshotResource s)
 virtualMachineSnapshotResource =
@@ -1255,42 +1286,35 @@ instance TF.ToHCL (VmfsDatastoreResource s) where
 instance P.HasDisks (VmfsDatastoreResource s) s Text where
     disks =
         lens (_disks :: VmfsDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _disks = a } :: VmfsDatastoreResource s)
+             (\s a -> s { _disks = a } :: VmfsDatastoreResource s)
 
 instance P.HasFolder (VmfsDatastoreResource s) s Text where
     folder =
         lens (_folder :: VmfsDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _folder = a } :: VmfsDatastoreResource s)
+             (\s a -> s { _folder = a } :: VmfsDatastoreResource s)
 
 instance P.HasHostSystemId (VmfsDatastoreResource s) s Text where
     hostSystemId =
         lens (_host_system_id :: VmfsDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _host_system_id = a } :: VmfsDatastoreResource s)
+             (\s a -> s { _host_system_id = a } :: VmfsDatastoreResource s)
 
 instance P.HasName (VmfsDatastoreResource s) s Text where
     name =
         lens (_name :: VmfsDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VmfsDatastoreResource s)
+             (\s a -> s { _name = a } :: VmfsDatastoreResource s)
 
 instance P.HasTags (VmfsDatastoreResource s) s Text where
     tags =
         lens (_tags :: VmfsDatastoreResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
+             (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
 
 instance P.HasComputedAccessible (VmfsDatastoreResource s) Text
-
 instance P.HasComputedCapacity (VmfsDatastoreResource s) Text
-
 instance P.HasComputedFreeSpace (VmfsDatastoreResource s) Text
-
 instance P.HasComputedId (VmfsDatastoreResource s) Text
-
 instance P.HasComputedMaintenanceMode (VmfsDatastoreResource s) Text
-
 instance P.HasComputedMultipleHostAccess (VmfsDatastoreResource s) Text
-
 instance P.HasComputedUncommittedSpace (VmfsDatastoreResource s) Text
-
 instance P.HasComputedUrl (VmfsDatastoreResource s) Text
 
 vmfsDatastoreResource :: TF.Resource P.VSphere (VmfsDatastoreResource s)

@@ -170,75 +170,64 @@ instance TF.ToHCL (FabricResource s) where
 instance P.HasDescription (FabricResource s) s Text where
     description =
         lens (_description :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: FabricResource s)
+             (\s a -> s { _description = a } :: FabricResource s)
 
 instance P.HasGateway (FabricResource s) s Text where
     gateway =
         lens (_gateway :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _gateway = a } :: FabricResource s)
+             (\s a -> s { _gateway = a } :: FabricResource s)
 
 instance P.HasInternetNat (FabricResource s) s Text where
     internetNat =
         lens (_internet_nat :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _internet_nat = a } :: FabricResource s)
+             (\s a -> s { _internet_nat = a } :: FabricResource s)
 
 instance P.HasName (FabricResource s) s Text where
     name =
         lens (_name :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: FabricResource s)
+             (\s a -> s { _name = a } :: FabricResource s)
 
 instance P.HasProvisionEndIp (FabricResource s) s Text where
     provisionEndIp =
         lens (_provision_end_ip :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _provision_end_ip = a } :: FabricResource s)
+             (\s a -> s { _provision_end_ip = a } :: FabricResource s)
 
 instance P.HasProvisionStartIp (FabricResource s) s Text where
     provisionStartIp =
         lens (_provision_start_ip :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _provision_start_ip = a } :: FabricResource s)
+             (\s a -> s { _provision_start_ip = a } :: FabricResource s)
 
 instance P.HasResolvers (FabricResource s) s Text where
     resolvers =
         lens (_resolvers :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _resolvers = a } :: FabricResource s)
+             (\s a -> s { _resolvers = a } :: FabricResource s)
 
 instance P.HasRoutes (FabricResource s) s Text where
     routes =
         lens (_routes :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _routes = a } :: FabricResource s)
+             (\s a -> s { _routes = a } :: FabricResource s)
 
 instance P.HasSubnet (FabricResource s) s Text where
     subnet =
         lens (_subnet :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _subnet = a } :: FabricResource s)
+             (\s a -> s { _subnet = a } :: FabricResource s)
 
 instance P.HasVlanId (FabricResource s) s Text where
     vlanId =
         lens (_vlan_id :: FabricResource s -> TF.Attribute s Text)
-            (\s a -> s { _vlan_id = a } :: FabricResource s)
+             (\s a -> s { _vlan_id = a } :: FabricResource s)
 
 instance P.HasComputedDescription (FabricResource s) Text
-
 instance P.HasComputedFabric (FabricResource s) Text
-
 instance P.HasComputedGateway (FabricResource s) Text
-
 instance P.HasComputedInternetNat (FabricResource s) Text
-
 instance P.HasComputedName (FabricResource s) Text
-
 instance P.HasComputedProvisionEndIp (FabricResource s) Text
-
 instance P.HasComputedProvisionStartIp (FabricResource s) Text
-
 instance P.HasComputedPublic (FabricResource s) Text
-
 instance P.HasComputedResolvers (FabricResource s) Text
-
 instance P.HasComputedRoutes (FabricResource s) Text
-
 instance P.HasComputedSubnet (FabricResource s) Text
-
 instance P.HasComputedVlanId (FabricResource s) Text
 
 fabricResource :: TF.Resource P.Triton (FabricResource s)
@@ -278,12 +267,12 @@ instance TF.ToHCL (FirewallRuleResource s) where
 instance P.HasEnabled (FirewallRuleResource s) s Text where
     enabled =
         lens (_enabled :: FirewallRuleResource s -> TF.Attribute s Text)
-            (\s a -> s { _enabled = a } :: FirewallRuleResource s)
+             (\s a -> s { _enabled = a } :: FirewallRuleResource s)
 
 instance P.HasRule (FirewallRuleResource s) s Text where
     rule =
         lens (_rule :: FirewallRuleResource s -> TF.Attribute s Text)
-            (\s a -> s { _rule = a } :: FirewallRuleResource s)
+             (\s a -> s { _rule = a } :: FirewallRuleResource s)
 
 instance P.HasComputedId (FirewallRuleResource s) Text
 
@@ -315,12 +304,13 @@ instance TF.ToHCL (KeyResource s) where
 instance P.HasKey (KeyResource s) s Text where
     key =
         lens (_key :: KeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _key = a } :: KeyResource s)
+             (\s a -> s { _key = a } :: KeyResource s)
 
 instance P.HasName (KeyResource s) s Text where
     name =
         lens (_name :: KeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: KeyResource s)
+             (\s a -> s { _name = a } :: KeyResource s)
+
 
 keyResource :: TF.Resource P.Triton (KeyResource s)
 keyResource =
@@ -392,110 +382,94 @@ instance TF.ToHCL (MachineResource s) where
 instance P.HasAdministratorPw (MachineResource s) s Text where
     administratorPw =
         lens (_administrator_pw :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _administrator_pw = a } :: MachineResource s)
+             (\s a -> s { _administrator_pw = a } :: MachineResource s)
 
 instance P.HasAffinity (MachineResource s) s Text where
     affinity =
         lens (_affinity :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _affinity = a } :: MachineResource s)
+             (\s a -> s { _affinity = a } :: MachineResource s)
 
 instance P.HasCloudConfig (MachineResource s) s Text where
     cloudConfig =
         lens (_cloud_config :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _cloud_config = a } :: MachineResource s)
+             (\s a -> s { _cloud_config = a } :: MachineResource s)
 
 instance P.HasCns (MachineResource s) s Text where
     cns =
         lens (_cns :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _cns = a } :: MachineResource s)
+             (\s a -> s { _cns = a } :: MachineResource s)
 
 instance P.HasFirewallEnabled (MachineResource s) s Text where
     firewallEnabled =
         lens (_firewall_enabled :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _firewall_enabled = a } :: MachineResource s)
+             (\s a -> s { _firewall_enabled = a } :: MachineResource s)
 
 instance P.HasImage (MachineResource s) s Text where
     image =
         lens (_image :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _image = a } :: MachineResource s)
+             (\s a -> s { _image = a } :: MachineResource s)
 
 instance P.HasLocality (MachineResource s) s Text where
     locality =
         lens (_locality :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _locality = a } :: MachineResource s)
+             (\s a -> s { _locality = a } :: MachineResource s)
 
 instance P.HasMetadata (MachineResource s) s Text where
     metadata =
         lens (_metadata :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _metadata = a } :: MachineResource s)
+             (\s a -> s { _metadata = a } :: MachineResource s)
 
 instance P.HasName (MachineResource s) s Text where
     name =
         lens (_name :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: MachineResource s)
+             (\s a -> s { _name = a } :: MachineResource s)
 
 instance P.HasNetworks (MachineResource s) s Text where
     networks =
         lens (_networks :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _networks = a } :: MachineResource s)
+             (\s a -> s { _networks = a } :: MachineResource s)
 
 instance P.HasPackage (MachineResource s) s Text where
     package =
         lens (_package :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _package = a } :: MachineResource s)
+             (\s a -> s { _package = a } :: MachineResource s)
 
 instance P.HasRootAuthorizedKeys (MachineResource s) s Text where
     rootAuthorizedKeys =
         lens (_root_authorized_keys :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _root_authorized_keys = a } :: MachineResource s)
+             (\s a -> s { _root_authorized_keys = a } :: MachineResource s)
 
 instance P.HasTags (MachineResource s) s Text where
     tags =
         lens (_tags :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: MachineResource s)
+             (\s a -> s { _tags = a } :: MachineResource s)
 
 instance P.HasUserData (MachineResource s) s Text where
     userData =
         lens (_user_data :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _user_data = a } :: MachineResource s)
+             (\s a -> s { _user_data = a } :: MachineResource s)
 
 instance P.HasUserScript (MachineResource s) s Text where
     userScript =
         lens (_user_script :: MachineResource s -> TF.Attribute s Text)
-            (\s a -> s { _user_script = a } :: MachineResource s)
+             (\s a -> s { _user_script = a } :: MachineResource s)
 
 instance P.HasComputedCreated (MachineResource s) Text
-
 instance P.HasComputedDataset (MachineResource s) Text
-
 instance P.HasComputedDisk (MachineResource s) Text
-
 instance P.HasComputedGateway (MachineResource s) Text
-
 instance P.HasComputedId (MachineResource s) Text
-
 instance P.HasComputedIp (MachineResource s) Text
-
 instance P.HasComputedIps (MachineResource s) Text
-
 instance P.HasComputedMac (MachineResource s) Text
-
 instance P.HasComputedMemory (MachineResource s) Text
-
 instance P.HasComputedNetmask (MachineResource s) Text
-
 instance P.HasComputedNetwork (MachineResource s) Text
-
 instance P.HasComputedNic (MachineResource s) Text
-
 instance P.HasComputedPrimary (MachineResource s) Text
-
 instance P.HasComputedPrimaryip (MachineResource s) Text
-
 instance P.HasComputedState (MachineResource s) Text
-
 instance P.HasComputedType' (MachineResource s) Text
-
 instance P.HasComputedUpdated (MachineResource s) Text
 
 machineResource :: TF.Resource P.Triton (MachineResource s)
@@ -542,15 +516,14 @@ instance TF.ToHCL (SnapshotResource s) where
 instance P.HasMachineId (SnapshotResource s) s Text where
     machineId =
         lens (_machine_id :: SnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _machine_id = a } :: SnapshotResource s)
+             (\s a -> s { _machine_id = a } :: SnapshotResource s)
 
 instance P.HasName (SnapshotResource s) s Text where
     name =
         lens (_name :: SnapshotResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SnapshotResource s)
+             (\s a -> s { _name = a } :: SnapshotResource s)
 
 instance P.HasComputedId (SnapshotResource s) Text
-
 instance P.HasComputedState (SnapshotResource s) Text
 
 snapshotResource :: TF.Resource P.Triton (SnapshotResource s)
@@ -586,17 +559,18 @@ instance TF.ToHCL (VlanResource s) where
 instance P.HasDescription (VlanResource s) s Text where
     description =
         lens (_description :: VlanResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: VlanResource s)
+             (\s a -> s { _description = a } :: VlanResource s)
 
 instance P.HasName (VlanResource s) s Text where
     name =
         lens (_name :: VlanResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VlanResource s)
+             (\s a -> s { _name = a } :: VlanResource s)
 
 instance P.HasVlanId (VlanResource s) s Text where
     vlanId =
         lens (_vlan_id :: VlanResource s -> TF.Attribute s Text)
-            (\s a -> s { _vlan_id = a } :: VlanResource s)
+             (\s a -> s { _vlan_id = a } :: VlanResource s)
+
 
 vlanResource :: TF.Resource P.Triton (VlanResource s)
 vlanResource =

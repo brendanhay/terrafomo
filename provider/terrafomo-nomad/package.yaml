@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Nomad
-    - Terrafomo.Nomad.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.DNSMadeEasy
-    - Terrafomo.DNSMadeEasy.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

@@ -99,22 +99,23 @@ instance TF.ToHCL (CheckcommandResource s) where
 instance P.HasArguments (CheckcommandResource s) s Text where
     arguments =
         lens (_arguments :: CheckcommandResource s -> TF.Attribute s Text)
-            (\s a -> s { _arguments = a } :: CheckcommandResource s)
+             (\s a -> s { _arguments = a } :: CheckcommandResource s)
 
 instance P.HasCommand (CheckcommandResource s) s Text where
     command =
         lens (_command :: CheckcommandResource s -> TF.Attribute s Text)
-            (\s a -> s { _command = a } :: CheckcommandResource s)
+             (\s a -> s { _command = a } :: CheckcommandResource s)
 
 instance P.HasName (CheckcommandResource s) s Text where
     name =
         lens (_name :: CheckcommandResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CheckcommandResource s)
+             (\s a -> s { _name = a } :: CheckcommandResource s)
 
 instance P.HasTemplates (CheckcommandResource s) s Text where
     templates =
         lens (_templates :: CheckcommandResource s -> TF.Attribute s Text)
-            (\s a -> s { _templates = a } :: CheckcommandResource s)
+             (\s a -> s { _templates = a } :: CheckcommandResource s)
+
 
 checkcommandResource :: TF.Resource P.Icinga2 (CheckcommandResource s)
 checkcommandResource =
@@ -156,27 +157,28 @@ instance TF.ToHCL (HostResource s) where
 instance P.HasAddress (HostResource s) s Text where
     address =
         lens (_address :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _address = a } :: HostResource s)
+             (\s a -> s { _address = a } :: HostResource s)
 
 instance P.HasCheckCommand (HostResource s) s Text where
     checkCommand =
         lens (_check_command :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _check_command = a } :: HostResource s)
+             (\s a -> s { _check_command = a } :: HostResource s)
 
 instance P.HasHostname (HostResource s) s Text where
     hostname =
         lens (_hostname :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _hostname = a } :: HostResource s)
+             (\s a -> s { _hostname = a } :: HostResource s)
 
 instance P.HasTemplates (HostResource s) s Text where
     templates =
         lens (_templates :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _templates = a } :: HostResource s)
+             (\s a -> s { _templates = a } :: HostResource s)
 
 instance P.HasVars (HostResource s) s Text where
     vars =
         lens (_vars :: HostResource s -> TF.Attribute s Text)
-            (\s a -> s { _vars = a } :: HostResource s)
+             (\s a -> s { _vars = a } :: HostResource s)
+
 
 hostResource :: TF.Resource P.Icinga2 (HostResource s)
 hostResource =
@@ -210,12 +212,13 @@ instance TF.ToHCL (HostgroupResource s) where
 instance P.HasDisplayName (HostgroupResource s) s Text where
     displayName =
         lens (_display_name :: HostgroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _display_name = a } :: HostgroupResource s)
+             (\s a -> s { _display_name = a } :: HostgroupResource s)
 
 instance P.HasName (HostgroupResource s) s Text where
     name =
         lens (_name :: HostgroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: HostgroupResource s)
+             (\s a -> s { _name = a } :: HostgroupResource s)
+
 
 hostgroupResource :: TF.Resource P.Icinga2 (HostgroupResource s)
 hostgroupResource =
@@ -249,17 +252,18 @@ instance TF.ToHCL (ServiceResource s) where
 instance P.HasCheckCommand (ServiceResource s) s Text where
     checkCommand =
         lens (_check_command :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _check_command = a } :: ServiceResource s)
+             (\s a -> s { _check_command = a } :: ServiceResource s)
 
 instance P.HasHostname (ServiceResource s) s Text where
     hostname =
         lens (_hostname :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _hostname = a } :: ServiceResource s)
+             (\s a -> s { _hostname = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) s Text where
     name =
         lens (_name :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ServiceResource s)
+             (\s a -> s { _name = a } :: ServiceResource s)
+
 
 serviceResource :: TF.Resource P.Icinga2 (ServiceResource s)
 serviceResource =

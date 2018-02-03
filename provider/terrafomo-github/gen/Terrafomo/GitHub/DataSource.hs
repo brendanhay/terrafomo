@@ -99,18 +99,13 @@ instance TF.ToHCL (TeamData s) where
 instance P.HasSlug (TeamData s) s Text where
     slug =
         lens (_slug :: TeamData s -> TF.Attribute s Text)
-            (\s a -> s { _slug = a } :: TeamData s)
+             (\s a -> s { _slug = a } :: TeamData s)
 
 instance P.HasComputedDescription (TeamData s) Text
-
 instance P.HasComputedId (TeamData s) Text
-
 instance P.HasComputedMembers (TeamData s) Text
-
 instance P.HasComputedName (TeamData s) Text
-
 instance P.HasComputedPermission (TeamData s) Text
-
 instance P.HasComputedPrivacy (TeamData s) Text
 
 teamData :: TF.DataSource P.GitHub (TeamData s)
@@ -137,42 +132,25 @@ instance TF.ToHCL (UserData s) where
 instance P.HasUsername (UserData s) s Text where
     username =
         lens (_username :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: UserData s)
+             (\s a -> s { _username = a } :: UserData s)
 
 instance P.HasComputedAvatarUrl (UserData s) Text
-
 instance P.HasComputedBio (UserData s) Text
-
 instance P.HasComputedBlog (UserData s) Text
-
 instance P.HasComputedCompany (UserData s) Text
-
 instance P.HasComputedCreatedAt (UserData s) Text
-
 instance P.HasComputedEmail (UserData s) Text
-
 instance P.HasComputedFollowers (UserData s) Text
-
 instance P.HasComputedFollowing (UserData s) Text
-
 instance P.HasComputedGpgKeys (UserData s) Text
-
 instance P.HasComputedGravatarId (UserData s) Text
-
 instance P.HasComputedLocation (UserData s) Text
-
 instance P.HasComputedLogin (UserData s) Text
-
 instance P.HasComputedName (UserData s) Text
-
 instance P.HasComputedPublicGists (UserData s) Text
-
 instance P.HasComputedPublicRepos (UserData s) Text
-
 instance P.HasComputedSiteAdmin (UserData s) Text
-
 instance P.HasComputedSshKeys (UserData s) Text
-
 instance P.HasComputedUpdatedAt (UserData s) Text
 
 userData :: TF.DataSource P.GitHub (UserData s)

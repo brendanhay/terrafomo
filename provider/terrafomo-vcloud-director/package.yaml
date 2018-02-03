@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.VCloudDirector
-    - Terrafomo.VCloudDirector.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

@@ -92,6 +92,7 @@ data AgentSelfData s = AgentSelfData {
 instance TF.ToHCL (AgentSelfData s) where
     toHCL _ = TF.block []
 
+
 agentSelfData :: TF.DataSource P.Consul (AgentSelfData s)
 agentSelfData =
     TF.newDataSource "consul_agent_self" $
@@ -121,19 +122,16 @@ instance TF.ToHCL (CatalogNodesData s) where
 instance P.HasDatacenter (CatalogNodesData s) s Text where
     datacenter =
         lens (_datacenter :: CatalogNodesData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: CatalogNodesData s)
+             (\s a -> s { _datacenter = a } :: CatalogNodesData s)
 
 instance P.HasQueryOptions (CatalogNodesData s) s Text where
     queryOptions =
         lens (_query_options :: CatalogNodesData s -> TF.Attribute s Text)
-            (\s a -> s { _query_options = a } :: CatalogNodesData s)
+             (\s a -> s { _query_options = a } :: CatalogNodesData s)
 
 instance P.HasComputedDatacenter (CatalogNodesData s) Text
-
 instance P.HasComputedNodeIds (CatalogNodesData s) Text
-
 instance P.HasComputedNodeNames (CatalogNodesData s) Text
-
 instance P.HasComputedNodes (CatalogNodesData s) Text
 
 catalogNodesData :: TF.DataSource P.Consul (CatalogNodesData s)
@@ -176,29 +174,26 @@ instance TF.ToHCL (CatalogServiceData s) where
 instance P.HasDatacenter (CatalogServiceData s) s Text where
     datacenter =
         lens (_datacenter :: CatalogServiceData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: CatalogServiceData s)
+             (\s a -> s { _datacenter = a } :: CatalogServiceData s)
 
 instance P.HasName (CatalogServiceData s) s Text where
     name =
         lens (_name :: CatalogServiceData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CatalogServiceData s)
+             (\s a -> s { _name = a } :: CatalogServiceData s)
 
 instance P.HasQueryOptions (CatalogServiceData s) s Text where
     queryOptions =
         lens (_query_options :: CatalogServiceData s -> TF.Attribute s Text)
-            (\s a -> s { _query_options = a } :: CatalogServiceData s)
+             (\s a -> s { _query_options = a } :: CatalogServiceData s)
 
 instance P.HasTag (CatalogServiceData s) s Text where
     tag =
         lens (_tag :: CatalogServiceData s -> TF.Attribute s Text)
-            (\s a -> s { _tag = a } :: CatalogServiceData s)
+             (\s a -> s { _tag = a } :: CatalogServiceData s)
 
 instance P.HasComputedDatacenter (CatalogServiceData s) Text
-
 instance P.HasComputedName (CatalogServiceData s) Text
-
 instance P.HasComputedService (CatalogServiceData s) Text
-
 instance P.HasComputedTag (CatalogServiceData s) Text
 
 catalogServiceData :: TF.DataSource P.Consul (CatalogServiceData s)
@@ -238,29 +233,26 @@ instance TF.ToHCL (KeyPrefixData s) where
 instance P.HasDatacenter (KeyPrefixData s) s Text where
     datacenter =
         lens (_datacenter :: KeyPrefixData s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: KeyPrefixData s)
+             (\s a -> s { _datacenter = a } :: KeyPrefixData s)
 
 instance P.HasPathPrefix (KeyPrefixData s) s Text where
     pathPrefix =
         lens (_path_prefix :: KeyPrefixData s -> TF.Attribute s Text)
-            (\s a -> s { _path_prefix = a } :: KeyPrefixData s)
+             (\s a -> s { _path_prefix = a } :: KeyPrefixData s)
 
 instance P.HasSubkey (KeyPrefixData s) s Text where
     subkey =
         lens (_subkey :: KeyPrefixData s -> TF.Attribute s Text)
-            (\s a -> s { _subkey = a } :: KeyPrefixData s)
+             (\s a -> s { _subkey = a } :: KeyPrefixData s)
 
 instance P.HasToken (KeyPrefixData s) s Text where
     token =
         lens (_token :: KeyPrefixData s -> TF.Attribute s Text)
-            (\s a -> s { _token = a } :: KeyPrefixData s)
+             (\s a -> s { _token = a } :: KeyPrefixData s)
 
 instance P.HasComputedDatacenter (KeyPrefixData s) Text
-
 instance P.HasComputedPathPrefix (KeyPrefixData s) Text
-
 instance P.HasComputedSubkeys (KeyPrefixData s) Text
-
 instance P.HasComputedVar<name> (KeyPrefixData s) Text
 
 keyPrefixData :: TF.DataSource P.Consul (KeyPrefixData s)

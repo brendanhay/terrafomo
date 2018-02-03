@@ -81,20 +81,14 @@ instance TF.ToHCL (ImageData s) where
 instance P.HasName (ImageData s) s Text where
     name =
         lens (_name :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageData s)
+             (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasComputedImage (ImageData s) Text
-
 instance P.HasComputedMinDiskSize (ImageData s) Text
-
 instance P.HasComputedName (ImageData s) Text
-
 instance P.HasComputedPrivate (ImageData s) Text
-
 instance P.HasComputedRegions (ImageData s) Text
-
 instance P.HasComputedSizeGigabytes (ImageData s) Text
-
 instance P.HasComputedType' (ImageData s) Text
 
 imageData :: TF.DataSource P.DigitalOcean (ImageData s)

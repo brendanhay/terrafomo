@@ -127,31 +127,27 @@ instance TF.ToHCL (AgentServiceResource s) where
 instance P.HasAddress (AgentServiceResource s) s Text where
     address =
         lens (_address :: AgentServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _address = a } :: AgentServiceResource s)
+             (\s a -> s { _address = a } :: AgentServiceResource s)
 
 instance P.HasName (AgentServiceResource s) s Text where
     name =
         lens (_name :: AgentServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AgentServiceResource s)
+             (\s a -> s { _name = a } :: AgentServiceResource s)
 
 instance P.HasPort (AgentServiceResource s) s Text where
     port =
         lens (_port :: AgentServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _port = a } :: AgentServiceResource s)
+             (\s a -> s { _port = a } :: AgentServiceResource s)
 
 instance P.HasTags (AgentServiceResource s) s Text where
     tags =
         lens (_tags :: AgentServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: AgentServiceResource s)
+             (\s a -> s { _tags = a } :: AgentServiceResource s)
 
 instance P.HasComputedAddress (AgentServiceResource s) Text
-
 instance P.HasComputedId (AgentServiceResource s) Text
-
 instance P.HasComputedName (AgentServiceResource s) Text
-
 instance P.HasComputedPort (AgentServiceResource s) Text
-
 instance P.HasComputedTags (AgentServiceResource s) Text
 
 agentServiceResource :: TF.Resource P.Consul (AgentServiceResource s)
@@ -195,30 +191,29 @@ instance TF.ToHCL (CatalogEntryResource s) where
 instance P.HasAddress (CatalogEntryResource s) s Text where
     address =
         lens (_address :: CatalogEntryResource s -> TF.Attribute s Text)
-            (\s a -> s { _address = a } :: CatalogEntryResource s)
+             (\s a -> s { _address = a } :: CatalogEntryResource s)
 
 instance P.HasDatacenter (CatalogEntryResource s) s Text where
     datacenter =
         lens (_datacenter :: CatalogEntryResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: CatalogEntryResource s)
+             (\s a -> s { _datacenter = a } :: CatalogEntryResource s)
 
 instance P.HasNode (CatalogEntryResource s) s Text where
     node =
         lens (_node :: CatalogEntryResource s -> TF.Attribute s Text)
-            (\s a -> s { _node = a } :: CatalogEntryResource s)
+             (\s a -> s { _node = a } :: CatalogEntryResource s)
 
 instance P.HasService (CatalogEntryResource s) s Text where
     service =
         lens (_service :: CatalogEntryResource s -> TF.Attribute s Text)
-            (\s a -> s { _service = a } :: CatalogEntryResource s)
+             (\s a -> s { _service = a } :: CatalogEntryResource s)
 
 instance P.HasToken (CatalogEntryResource s) s Text where
     token =
         lens (_token :: CatalogEntryResource s -> TF.Attribute s Text)
-            (\s a -> s { _token = a } :: CatalogEntryResource s)
+             (\s a -> s { _token = a } :: CatalogEntryResource s)
 
 instance P.HasComputedAddress (CatalogEntryResource s) Text
-
 instance P.HasComputedNode (CatalogEntryResource s) Text
 
 catalogEntryResource :: TF.Resource P.Consul (CatalogEntryResource s)
@@ -273,22 +268,22 @@ instance TF.ToHCL (KeyPrefixResource s) where
 instance P.HasDatacenter (KeyPrefixResource s) s Text where
     datacenter =
         lens (_datacenter :: KeyPrefixResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: KeyPrefixResource s)
+             (\s a -> s { _datacenter = a } :: KeyPrefixResource s)
 
 instance P.HasPathPrefix (KeyPrefixResource s) s Text where
     pathPrefix =
         lens (_path_prefix :: KeyPrefixResource s -> TF.Attribute s Text)
-            (\s a -> s { _path_prefix = a } :: KeyPrefixResource s)
+             (\s a -> s { _path_prefix = a } :: KeyPrefixResource s)
 
 instance P.HasSubkeys (KeyPrefixResource s) s Text where
     subkeys =
         lens (_subkeys :: KeyPrefixResource s -> TF.Attribute s Text)
-            (\s a -> s { _subkeys = a } :: KeyPrefixResource s)
+             (\s a -> s { _subkeys = a } :: KeyPrefixResource s)
 
 instance P.HasToken (KeyPrefixResource s) s Text where
     token =
         lens (_token :: KeyPrefixResource s -> TF.Attribute s Text)
-            (\s a -> s { _token = a } :: KeyPrefixResource s)
+             (\s a -> s { _token = a } :: KeyPrefixResource s)
 
 instance P.HasComputedDatacenter (KeyPrefixResource s) Text
 
@@ -332,17 +327,19 @@ instance TF.ToHCL (KeysResource s) where
 instance P.HasDatacenter (KeysResource s) s Text where
     datacenter =
         lens (_datacenter :: KeysResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: KeysResource s)
+             (\s a -> s { _datacenter = a } :: KeysResource s)
 
 instance P.HasKey (KeysResource s) s Text where
     key =
         lens (_key :: KeysResource s -> TF.Attribute s Text)
-            (\s a -> s { _key = a } :: KeysResource s)
+             (\s a -> s { _key = a } :: KeysResource s)
 
 instance P.HasToken (KeysResource s) s Text where
     token =
         lens (_token :: KeysResource s -> TF.Attribute s Text)
-            (\s a -> s { _token = a } :: KeysResource s)
+             (\s a -> s { _token = a } :: KeysResource s)
+
+instance P.HasComputedDatacenter (KeysResource s) Text
 
 keysResource :: TF.Resource P.Consul (KeysResource s)
 keysResource =
@@ -374,15 +371,14 @@ instance TF.ToHCL (NodeResource s) where
 instance P.HasAddress (NodeResource s) s Text where
     address =
         lens (_address :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _address = a } :: NodeResource s)
+             (\s a -> s { _address = a } :: NodeResource s)
 
 instance P.HasName (NodeResource s) s Text where
     name =
         lens (_name :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NodeResource s)
+             (\s a -> s { _name = a } :: NodeResource s)
 
 instance P.HasComputedAddress (NodeResource s) Text
-
 instance P.HasComputedName (NodeResource s) Text
 
 nodeResource :: TF.Resource P.Consul (NodeResource s)
@@ -446,62 +442,62 @@ instance TF.ToHCL (PreparedQueryResource s) where
 instance P.HasDatacenter (PreparedQueryResource s) s Text where
     datacenter =
         lens (_datacenter :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _datacenter = a } :: PreparedQueryResource s)
+             (\s a -> s { _datacenter = a } :: PreparedQueryResource s)
 
 instance P.HasDns (PreparedQueryResource s) s Text where
     dns =
         lens (_dns :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _dns = a } :: PreparedQueryResource s)
+             (\s a -> s { _dns = a } :: PreparedQueryResource s)
 
 instance P.HasFailover (PreparedQueryResource s) s Text where
     failover =
         lens (_failover :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _failover = a } :: PreparedQueryResource s)
+             (\s a -> s { _failover = a } :: PreparedQueryResource s)
 
 instance P.HasName (PreparedQueryResource s) s Text where
     name =
         lens (_name :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: PreparedQueryResource s)
+             (\s a -> s { _name = a } :: PreparedQueryResource s)
 
 instance P.HasNear (PreparedQueryResource s) s Text where
     near =
         lens (_near :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _near = a } :: PreparedQueryResource s)
+             (\s a -> s { _near = a } :: PreparedQueryResource s)
 
 instance P.HasOnlyPassing (PreparedQueryResource s) s Text where
     onlyPassing =
         lens (_only_passing :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _only_passing = a } :: PreparedQueryResource s)
+             (\s a -> s { _only_passing = a } :: PreparedQueryResource s)
 
 instance P.HasService (PreparedQueryResource s) s Text where
     service =
         lens (_service :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _service = a } :: PreparedQueryResource s)
+             (\s a -> s { _service = a } :: PreparedQueryResource s)
 
 instance P.HasSession (PreparedQueryResource s) s Text where
     session =
         lens (_session :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _session = a } :: PreparedQueryResource s)
+             (\s a -> s { _session = a } :: PreparedQueryResource s)
 
 instance P.HasStoredToken (PreparedQueryResource s) s Text where
     storedToken =
         lens (_stored_token :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _stored_token = a } :: PreparedQueryResource s)
+             (\s a -> s { _stored_token = a } :: PreparedQueryResource s)
 
 instance P.HasTags (PreparedQueryResource s) s Text where
     tags =
         lens (_tags :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: PreparedQueryResource s)
+             (\s a -> s { _tags = a } :: PreparedQueryResource s)
 
 instance P.HasTemplate (PreparedQueryResource s) s Text where
     template =
         lens (_template :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _template = a } :: PreparedQueryResource s)
+             (\s a -> s { _template = a } :: PreparedQueryResource s)
 
 instance P.HasToken (PreparedQueryResource s) s Text where
     token =
         lens (_token :: PreparedQueryResource s -> TF.Attribute s Text)
-            (\s a -> s { _token = a } :: PreparedQueryResource s)
+             (\s a -> s { _token = a } :: PreparedQueryResource s)
 
 instance P.HasComputedId (PreparedQueryResource s) Text
 
@@ -561,36 +557,32 @@ instance TF.ToHCL (ServiceResource s) where
 instance P.HasAddress (ServiceResource s) s Text where
     address =
         lens (_address :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _address = a } :: ServiceResource s)
+             (\s a -> s { _address = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) s Text where
     name =
         lens (_name :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ServiceResource s)
+             (\s a -> s { _name = a } :: ServiceResource s)
 
 instance P.HasPort (ServiceResource s) s Text where
     port =
         lens (_port :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _port = a } :: ServiceResource s)
+             (\s a -> s { _port = a } :: ServiceResource s)
 
 instance P.HasServiceId (ServiceResource s) s Text where
     serviceId =
         lens (_service_id :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _service_id = a } :: ServiceResource s)
+             (\s a -> s { _service_id = a } :: ServiceResource s)
 
 instance P.HasTags (ServiceResource s) s Text where
     tags =
         lens (_tags :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: ServiceResource s)
+             (\s a -> s { _tags = a } :: ServiceResource s)
 
 instance P.HasComputedAddress (ServiceResource s) Text
-
 instance P.HasComputedName (ServiceResource s) Text
-
 instance P.HasComputedPort (ServiceResource s) Text
-
 instance P.HasComputedServiceId (ServiceResource s) Text
-
 instance P.HasComputedTags (ServiceResource s) Text
 
 serviceResource :: TF.Resource P.Consul (ServiceResource s)

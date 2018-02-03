@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Chef
-    - Terrafomo.Chef.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

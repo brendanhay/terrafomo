@@ -102,12 +102,12 @@ instance TF.ToHCL (DataBagItemResource s) where
 instance P.HasContentJson (DataBagItemResource s) s Text where
     contentJson =
         lens (_content_json :: DataBagItemResource s -> TF.Attribute s Text)
-            (\s a -> s { _content_json = a } :: DataBagItemResource s)
+             (\s a -> s { _content_json = a } :: DataBagItemResource s)
 
 instance P.HasDataBagName (DataBagItemResource s) s Text where
     dataBagName =
         lens (_data_bag_name :: DataBagItemResource s -> TF.Attribute s Text)
-            (\s a -> s { _data_bag_name = a } :: DataBagItemResource s)
+             (\s a -> s { _data_bag_name = a } :: DataBagItemResource s)
 
 instance P.HasComputedId (DataBagItemResource s) Text
 
@@ -140,7 +140,7 @@ instance TF.ToHCL (DataBagResource s) where
 instance P.HasName (DataBagResource s) s Text where
     name =
         lens (_name :: DataBagResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DataBagResource s)
+             (\s a -> s { _name = a } :: DataBagResource s)
 
 instance P.HasComputedApiUri (DataBagResource s) Text
 
@@ -182,27 +182,28 @@ instance TF.ToHCL (EnvironmentResource s) where
 instance P.HasCookbookConstraints (EnvironmentResource s) s Text where
     cookbookConstraints =
         lens (_cookbook_constraints :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _cookbook_constraints = a } :: EnvironmentResource s)
+             (\s a -> s { _cookbook_constraints = a } :: EnvironmentResource s)
 
 instance P.HasDefaultAttributesJson (EnvironmentResource s) s Text where
     defaultAttributesJson =
         lens (_default_attributes_json :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_attributes_json = a } :: EnvironmentResource s)
+             (\s a -> s { _default_attributes_json = a } :: EnvironmentResource s)
 
 instance P.HasDescription (EnvironmentResource s) s Text where
     description =
         lens (_description :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: EnvironmentResource s)
+             (\s a -> s { _description = a } :: EnvironmentResource s)
 
 instance P.HasName (EnvironmentResource s) s Text where
     name =
         lens (_name :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EnvironmentResource s)
+             (\s a -> s { _name = a } :: EnvironmentResource s)
 
 instance P.HasOverrideAttributesJson (EnvironmentResource s) s Text where
     overrideAttributesJson =
         lens (_override_attributes_json :: EnvironmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
+             (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
+
 
 environmentResource :: TF.Resource P.Chef (EnvironmentResource s)
 environmentResource =
@@ -255,37 +256,38 @@ instance TF.ToHCL (NodeResource s) where
 instance P.HasAutomaticAttributesJson (NodeResource s) s Text where
     automaticAttributesJson =
         lens (_automatic_attributes_json :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _automatic_attributes_json = a } :: NodeResource s)
+             (\s a -> s { _automatic_attributes_json = a } :: NodeResource s)
 
 instance P.HasDefaultAttributesJson (NodeResource s) s Text where
     defaultAttributesJson =
         lens (_default_attributes_json :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_attributes_json = a } :: NodeResource s)
+             (\s a -> s { _default_attributes_json = a } :: NodeResource s)
 
 instance P.HasEnvironmentName (NodeResource s) s Text where
     environmentName =
         lens (_environment_name :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _environment_name = a } :: NodeResource s)
+             (\s a -> s { _environment_name = a } :: NodeResource s)
 
 instance P.HasName (NodeResource s) s Text where
     name =
         lens (_name :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NodeResource s)
+             (\s a -> s { _name = a } :: NodeResource s)
 
 instance P.HasNormalAttributesJson (NodeResource s) s Text where
     normalAttributesJson =
         lens (_normal_attributes_json :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _normal_attributes_json = a } :: NodeResource s)
+             (\s a -> s { _normal_attributes_json = a } :: NodeResource s)
 
 instance P.HasOverrideAttributesJson (NodeResource s) s Text where
     overrideAttributesJson =
         lens (_override_attributes_json :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _override_attributes_json = a } :: NodeResource s)
+             (\s a -> s { _override_attributes_json = a } :: NodeResource s)
 
 instance P.HasRunList (NodeResource s) s Text where
     runList =
         lens (_run_list :: NodeResource s -> TF.Attribute s Text)
-            (\s a -> s { _run_list = a } :: NodeResource s)
+             (\s a -> s { _run_list = a } :: NodeResource s)
+
 
 nodeResource :: TF.Resource P.Chef (NodeResource s)
 nodeResource =
@@ -330,27 +332,28 @@ instance TF.ToHCL (RoleResource s) where
 instance P.HasDefaultAttributesJson (RoleResource s) s Text where
     defaultAttributesJson =
         lens (_default_attributes_json :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_attributes_json = a } :: RoleResource s)
+             (\s a -> s { _default_attributes_json = a } :: RoleResource s)
 
 instance P.HasDescription (RoleResource s) s Text where
     description =
         lens (_description :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: RoleResource s)
+             (\s a -> s { _description = a } :: RoleResource s)
 
 instance P.HasName (RoleResource s) s Text where
     name =
         lens (_name :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RoleResource s)
+             (\s a -> s { _name = a } :: RoleResource s)
 
 instance P.HasOverrideAttributesJson (RoleResource s) s Text where
     overrideAttributesJson =
         lens (_override_attributes_json :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _override_attributes_json = a } :: RoleResource s)
+             (\s a -> s { _override_attributes_json = a } :: RoleResource s)
 
 instance P.HasRunList (RoleResource s) s Text where
     runList =
         lens (_run_list :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _run_list = a } :: RoleResource s)
+             (\s a -> s { _run_list = a } :: RoleResource s)
+
 
 roleResource :: TF.Resource P.Chef (RoleResource s)
 roleResource =

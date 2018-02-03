@@ -37,6 +37,8 @@ module Terrafomo.Vault.DataSource
 
     -- ** Computed Attributes
     , P.HasComputedAccessKey (..)
+    , P.HasComputedData' (..)
+    , P.HasComputedDataJson (..)
     , P.HasComputedLeaseDuration (..)
     , P.HasComputedLeaseId (..)
     , P.HasComputedLeaseRenewable (..)
@@ -96,30 +98,24 @@ instance TF.ToHCL (AwsAccessCredentialsData s) where
 instance P.HasBackend (AwsAccessCredentialsData s) s Text where
     backend =
         lens (_backend :: AwsAccessCredentialsData s -> TF.Attribute s Text)
-            (\s a -> s { _backend = a } :: AwsAccessCredentialsData s)
+             (\s a -> s { _backend = a } :: AwsAccessCredentialsData s)
 
 instance P.HasRole (AwsAccessCredentialsData s) s Text where
     role =
         lens (_role :: AwsAccessCredentialsData s -> TF.Attribute s Text)
-            (\s a -> s { _role = a } :: AwsAccessCredentialsData s)
+             (\s a -> s { _role = a } :: AwsAccessCredentialsData s)
 
 instance P.HasType' (AwsAccessCredentialsData s) s Text where
     type' =
         lens (_type' :: AwsAccessCredentialsData s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
+             (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
 
 instance P.HasComputedAccessKey (AwsAccessCredentialsData s) Text
-
 instance P.HasComputedLeaseDuration (AwsAccessCredentialsData s) Text
-
 instance P.HasComputedLeaseId (AwsAccessCredentialsData s) Text
-
 instance P.HasComputedLeaseRenewable (AwsAccessCredentialsData s) Text
-
 instance P.HasComputedLeaseStartTime (AwsAccessCredentialsData s) Text
-
 instance P.HasComputedSecretKey (AwsAccessCredentialsData s) Text
-
 instance P.HasComputedSecurityToken (AwsAccessCredentialsData s) Text
 
 awsAccessCredentialsData :: TF.DataSource P.Vault (AwsAccessCredentialsData s)
@@ -156,7 +152,14 @@ instance TF.ToHCL (GenericSecretData s) where
 instance P.HasPath (GenericSecretData s) s Text where
     path =
         lens (_path :: GenericSecretData s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: GenericSecretData s)
+             (\s a -> s { _path = a } :: GenericSecretData s)
+
+instance P.HasComputedData' (GenericSecretData s) Text
+instance P.HasComputedDataJson (GenericSecretData s) Text
+instance P.HasComputedLeaseDuration (GenericSecretData s) Text
+instance P.HasComputedLeaseId (GenericSecretData s) Text
+instance P.HasComputedLeaseRenewable (GenericSecretData s) Text
+instance P.HasComputedLeaseStartTime (GenericSecretData s) Text
 
 genericSecretData :: TF.DataSource P.Vault (GenericSecretData s)
 genericSecretData =

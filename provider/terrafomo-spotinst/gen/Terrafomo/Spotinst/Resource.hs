@@ -119,47 +119,49 @@ instance TF.ToHCL (AwsGroupResource s) where
 instance P.HasCapacity (AwsGroupResource s) s Text where
     capacity =
         lens (_capacity :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _capacity = a } :: AwsGroupResource s)
+             (\s a -> s { _capacity = a } :: AwsGroupResource s)
 
 instance P.HasDescription (AwsGroupResource s) s Text where
     description =
         lens (_description :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: AwsGroupResource s)
+             (\s a -> s { _description = a } :: AwsGroupResource s)
 
 instance P.HasElasticIps (AwsGroupResource s) s Text where
     elasticIps =
         lens (_elastic_ips :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _elastic_ips = a } :: AwsGroupResource s)
+             (\s a -> s { _elastic_ips = a } :: AwsGroupResource s)
 
 instance P.HasInstanceTypes (AwsGroupResource s) s Text where
     instanceTypes =
         lens (_instance_types :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _instance_types = a } :: AwsGroupResource s)
+             (\s a -> s { _instance_types = a } :: AwsGroupResource s)
 
 instance P.HasLaunchSpecification (AwsGroupResource s) s Text where
     launchSpecification =
         lens (_launch_specification :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _launch_specification = a } :: AwsGroupResource s)
+             (\s a -> s { _launch_specification = a } :: AwsGroupResource s)
 
 instance P.HasName (AwsGroupResource s) s Text where
     name =
         lens (_name :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AwsGroupResource s)
+             (\s a -> s { _name = a } :: AwsGroupResource s)
 
 instance P.HasProduct (AwsGroupResource s) s Text where
     product =
         lens (_product :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _product = a } :: AwsGroupResource s)
+             (\s a -> s { _product = a } :: AwsGroupResource s)
 
 instance P.HasStrategy (AwsGroupResource s) s Text where
     strategy =
         lens (_strategy :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _strategy = a } :: AwsGroupResource s)
+             (\s a -> s { _strategy = a } :: AwsGroupResource s)
 
 instance P.HasTags (AwsGroupResource s) s Text where
     tags =
         lens (_tags :: AwsGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: AwsGroupResource s)
+             (\s a -> s { _tags = a } :: AwsGroupResource s)
+
+instance P.HasComputedId (AwsGroupResource s) Text
 
 awsGroupResource :: TF.Resource P.Spotinst (AwsGroupResource s)
 awsGroupResource =
@@ -205,27 +207,27 @@ instance TF.ToHCL (HealthcheckResource s) where
 instance P.HasCheck (HealthcheckResource s) s Text where
     check =
         lens (_check :: HealthcheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _check = a } :: HealthcheckResource s)
+             (\s a -> s { _check = a } :: HealthcheckResource s)
 
 instance P.HasName (HealthcheckResource s) s Text where
     name =
         lens (_name :: HealthcheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: HealthcheckResource s)
+             (\s a -> s { _name = a } :: HealthcheckResource s)
 
 instance P.HasProxy (HealthcheckResource s) s Text where
     proxy =
         lens (_proxy :: HealthcheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _proxy = a } :: HealthcheckResource s)
+             (\s a -> s { _proxy = a } :: HealthcheckResource s)
 
 instance P.HasResourceId (HealthcheckResource s) s Text where
     resourceId =
         lens (_resource_id :: HealthcheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_id = a } :: HealthcheckResource s)
+             (\s a -> s { _resource_id = a } :: HealthcheckResource s)
 
 instance P.HasThreshold (HealthcheckResource s) s Text where
     threshold =
         lens (_threshold :: HealthcheckResource s -> TF.Attribute s Text)
-            (\s a -> s { _threshold = a } :: HealthcheckResource s)
+             (\s a -> s { _threshold = a } :: HealthcheckResource s)
 
 instance P.HasComputedId (HealthcheckResource s) Text
 
@@ -269,27 +271,27 @@ instance TF.ToHCL (SubscriptionResource s) where
 instance P.HasEndpoint (SubscriptionResource s) s Text where
     endpoint =
         lens (_endpoint :: SubscriptionResource s -> TF.Attribute s Text)
-            (\s a -> s { _endpoint = a } :: SubscriptionResource s)
+             (\s a -> s { _endpoint = a } :: SubscriptionResource s)
 
 instance P.HasEventType (SubscriptionResource s) s Text where
     eventType =
         lens (_event_type :: SubscriptionResource s -> TF.Attribute s Text)
-            (\s a -> s { _event_type = a } :: SubscriptionResource s)
+             (\s a -> s { _event_type = a } :: SubscriptionResource s)
 
 instance P.HasFormat (SubscriptionResource s) s Text where
     format =
         lens (_format :: SubscriptionResource s -> TF.Attribute s Text)
-            (\s a -> s { _format = a } :: SubscriptionResource s)
+             (\s a -> s { _format = a } :: SubscriptionResource s)
 
 instance P.HasProtocol (SubscriptionResource s) s Text where
     protocol =
         lens (_protocol :: SubscriptionResource s -> TF.Attribute s Text)
-            (\s a -> s { _protocol = a } :: SubscriptionResource s)
+             (\s a -> s { _protocol = a } :: SubscriptionResource s)
 
 instance P.HasResourceId (SubscriptionResource s) s Text where
     resourceId =
         lens (_resource_id :: SubscriptionResource s -> TF.Attribute s Text)
-            (\s a -> s { _resource_id = a } :: SubscriptionResource s)
+             (\s a -> s { _resource_id = a } :: SubscriptionResource s)
 
 instance P.HasComputedId (SubscriptionResource s) Text
 

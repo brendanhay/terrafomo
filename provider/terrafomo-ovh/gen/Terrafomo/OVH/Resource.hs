@@ -144,38 +144,33 @@ instance TF.ToHCL (DomainZoneRecordResource s) where
 instance P.HasFieldType (DomainZoneRecordResource s) s Text where
     fieldType =
         lens (_fieldType :: DomainZoneRecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _fieldType = a } :: DomainZoneRecordResource s)
+             (\s a -> s { _fieldType = a } :: DomainZoneRecordResource s)
 
 instance P.HasSubDomain (DomainZoneRecordResource s) s Text where
     subDomain =
         lens (_subDomain :: DomainZoneRecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _subDomain = a } :: DomainZoneRecordResource s)
+             (\s a -> s { _subDomain = a } :: DomainZoneRecordResource s)
 
 instance P.HasTarget (DomainZoneRecordResource s) s Text where
     target =
         lens (_target :: DomainZoneRecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _target = a } :: DomainZoneRecordResource s)
+             (\s a -> s { _target = a } :: DomainZoneRecordResource s)
 
 instance P.HasTtl (DomainZoneRecordResource s) s Text where
     ttl =
         lens (_ttl :: DomainZoneRecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _ttl = a } :: DomainZoneRecordResource s)
+             (\s a -> s { _ttl = a } :: DomainZoneRecordResource s)
 
 instance P.HasZone (DomainZoneRecordResource s) s Text where
     zone =
         lens (_zone :: DomainZoneRecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: DomainZoneRecordResource s)
+             (\s a -> s { _zone = a } :: DomainZoneRecordResource s)
 
 instance P.HasComputedFieldType (DomainZoneRecordResource s) Text
-
 instance P.HasComputedId (DomainZoneRecordResource s) Text
-
 instance P.HasComputedSubDomain (DomainZoneRecordResource s) Text
-
 instance P.HasComputedTarget (DomainZoneRecordResource s) Text
-
 instance P.HasComputedTtl (DomainZoneRecordResource s) Text
-
 instance P.HasComputedZone (DomainZoneRecordResource s) Text
 
 domainZoneRecordResource :: TF.Resource P.OVH (DomainZoneRecordResource s)
@@ -215,37 +210,30 @@ instance TF.ToHCL (PubliccloudPrivateNetworkResource s) where
 instance P.HasName (PubliccloudPrivateNetworkResource s) s Text where
     name =
         lens (_name :: PubliccloudPrivateNetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: PubliccloudPrivateNetworkResource s)
+             (\s a -> s { _name = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasProjectId (PubliccloudPrivateNetworkResource s) s Text where
     projectId =
         lens (_project_id :: PubliccloudPrivateNetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: PubliccloudPrivateNetworkResource s)
+             (\s a -> s { _project_id = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasRegions (PubliccloudPrivateNetworkResource s) s Text where
     regions =
         lens (_regions :: PubliccloudPrivateNetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _regions = a } :: PubliccloudPrivateNetworkResource s)
+             (\s a -> s { _regions = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasVlanId (PubliccloudPrivateNetworkResource s) s Text where
     vlanId =
         lens (_vlan_id :: PubliccloudPrivateNetworkResource s -> TF.Attribute s Text)
-            (\s a -> s { _vlan_id = a } :: PubliccloudPrivateNetworkResource s)
+             (\s a -> s { _vlan_id = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasComputedName (PubliccloudPrivateNetworkResource s) Text
-
 instance P.HasComputedProjectId (PubliccloudPrivateNetworkResource s) Text
-
 instance P.HasComputedRegion (PubliccloudPrivateNetworkResource s) Text
-
 instance P.HasComputedRegions (PubliccloudPrivateNetworkResource s) Text
-
 instance P.HasComputedRegionsStatus (PubliccloudPrivateNetworkResource s) Text
-
 instance P.HasComputedStatus (PubliccloudPrivateNetworkResource s) Text
-
 instance P.HasComputedType' (PubliccloudPrivateNetworkResource s) Text
-
 instance P.HasComputedVlanId (PubliccloudPrivateNetworkResource s) Text
 
 publiccloudPrivateNetworkResource :: TF.Resource P.OVH (PubliccloudPrivateNetworkResource s)
@@ -296,65 +284,54 @@ instance TF.ToHCL (PubliccloudPrivateNetworkSubnetResource s) where
 instance P.HasDhcp (PubliccloudPrivateNetworkSubnetResource s) s Text where
     dhcp =
         lens (_dhcp :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
-            (\s a -> s { _dhcp = a } :: PubliccloudPrivateNetworkSubnetResource s)
+             (\s a -> s { _dhcp = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasEnd (PubliccloudPrivateNetworkSubnetResource s) s Text where
     end =
         lens (_end :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
-            (\s a -> s { _end = a } :: PubliccloudPrivateNetworkSubnetResource s)
+             (\s a -> s { _end = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasNetwork (PubliccloudPrivateNetworkSubnetResource s) s Text where
     network =
         lens (_network :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
-            (\s a -> s { _network = a } :: PubliccloudPrivateNetworkSubnetResource s)
+             (\s a -> s { _network = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasNetworkId (PubliccloudPrivateNetworkSubnetResource s) s Text where
     networkId =
         lens (_network_id :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
-            (\s a -> s { _network_id = a } :: PubliccloudPrivateNetworkSubnetResource s)
+             (\s a -> s { _network_id = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasNoGateway (PubliccloudPrivateNetworkSubnetResource s) s Text where
     noGateway =
         lens (_no_gateway :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
-            (\s a -> s { _no_gateway = a } :: PubliccloudPrivateNetworkSubnetResource s)
+             (\s a -> s { _no_gateway = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasProjectId (PubliccloudPrivateNetworkSubnetResource s) s Text where
     projectId =
         lens (_project_id :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: PubliccloudPrivateNetworkSubnetResource s)
+             (\s a -> s { _project_id = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasRegion (PubliccloudPrivateNetworkSubnetResource s) s Text where
     region =
         lens (_region :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
-            (\s a -> s { _region = a } :: PubliccloudPrivateNetworkSubnetResource s)
+             (\s a -> s { _region = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasStart (PubliccloudPrivateNetworkSubnetResource s) s Text where
     start =
         lens (_start :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
-            (\s a -> s { _start = a } :: PubliccloudPrivateNetworkSubnetResource s)
+             (\s a -> s { _start = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasComputedCidr (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedDhcp (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedDhcpId (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedEnd (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedGatewayIp (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedIpPools (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedNetwork (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedNetworkId (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedNoGateway (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedProjectId (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedRegion (PubliccloudPrivateNetworkSubnetResource s) Text
-
 instance P.HasComputedStart (PubliccloudPrivateNetworkSubnetResource s) Text
 
 publiccloudPrivateNetworkSubnetResource :: TF.Resource P.OVH (PubliccloudPrivateNetworkSubnetResource s)
@@ -391,25 +368,19 @@ instance TF.ToHCL (PubliccloudUserResource s) where
 instance P.HasDescription (PubliccloudUserResource s) s Text where
     description =
         lens (_description :: PubliccloudUserResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: PubliccloudUserResource s)
+             (\s a -> s { _description = a } :: PubliccloudUserResource s)
 
 instance P.HasProjectId (PubliccloudUserResource s) s Text where
     projectId =
         lens (_project_id :: PubliccloudUserResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: PubliccloudUserResource s)
+             (\s a -> s { _project_id = a } :: PubliccloudUserResource s)
 
 instance P.HasComputedCreationDate (PubliccloudUserResource s) Text
-
 instance P.HasComputedDescription (PubliccloudUserResource s) Text
-
 instance P.HasComputedOpenstackRc (PubliccloudUserResource s) Text
-
 instance P.HasComputedPassword (PubliccloudUserResource s) Text
-
 instance P.HasComputedProjectId (PubliccloudUserResource s) Text
-
 instance P.HasComputedStatus (PubliccloudUserResource s) Text
-
 instance P.HasComputedUsername (PubliccloudUserResource s) Text
 
 publiccloudUserResource :: TF.Resource P.OVH (PubliccloudUserResource s)
@@ -440,15 +411,14 @@ instance TF.ToHCL (VrackPubliccloudAttachmentResource s) where
 instance P.HasProjectId (VrackPubliccloudAttachmentResource s) s Text where
     projectId =
         lens (_project_id :: VrackPubliccloudAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: VrackPubliccloudAttachmentResource s)
+             (\s a -> s { _project_id = a } :: VrackPubliccloudAttachmentResource s)
 
 instance P.HasVrackId (VrackPubliccloudAttachmentResource s) s Text where
     vrackId =
         lens (_vrack_id :: VrackPubliccloudAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _vrack_id = a } :: VrackPubliccloudAttachmentResource s)
+             (\s a -> s { _vrack_id = a } :: VrackPubliccloudAttachmentResource s)
 
 instance P.HasComputedProjectId (VrackPubliccloudAttachmentResource s) Text
-
 instance P.HasComputedVrackId (VrackPubliccloudAttachmentResource s) Text
 
 vrackPubliccloudAttachmentResource :: TF.Resource P.OVH (VrackPubliccloudAttachmentResource s)

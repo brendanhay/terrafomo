@@ -135,52 +135,53 @@ instance TF.ToHCL (DatabaseResource s) where
 instance P.HasAllowConnections (DatabaseResource s) s Text where
     allowConnections =
         lens (_allow_connections :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _allow_connections = a } :: DatabaseResource s)
+             (\s a -> s { _allow_connections = a } :: DatabaseResource s)
 
 instance P.HasConnectionLimit (DatabaseResource s) s Text where
     connectionLimit =
         lens (_connection_limit :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _connection_limit = a } :: DatabaseResource s)
+             (\s a -> s { _connection_limit = a } :: DatabaseResource s)
 
 instance P.HasEncoding (DatabaseResource s) s Text where
     encoding =
         lens (_encoding :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _encoding = a } :: DatabaseResource s)
+             (\s a -> s { _encoding = a } :: DatabaseResource s)
 
 instance P.HasIsTemplate (DatabaseResource s) s Text where
     isTemplate =
         lens (_is_template :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _is_template = a } :: DatabaseResource s)
+             (\s a -> s { _is_template = a } :: DatabaseResource s)
 
 instance P.HasLcCollate (DatabaseResource s) s Text where
     lcCollate =
         lens (_lc_collate :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _lc_collate = a } :: DatabaseResource s)
+             (\s a -> s { _lc_collate = a } :: DatabaseResource s)
 
 instance P.HasLcCtype (DatabaseResource s) s Text where
     lcCtype =
         lens (_lc_ctype :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _lc_ctype = a } :: DatabaseResource s)
+             (\s a -> s { _lc_ctype = a } :: DatabaseResource s)
 
 instance P.HasName (DatabaseResource s) s Text where
     name =
         lens (_name :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatabaseResource s)
+             (\s a -> s { _name = a } :: DatabaseResource s)
 
 instance P.HasOwner (DatabaseResource s) s Text where
     owner =
         lens (_owner :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _owner = a } :: DatabaseResource s)
+             (\s a -> s { _owner = a } :: DatabaseResource s)
 
 instance P.HasTablespaceName (DatabaseResource s) s Text where
     tablespaceName =
         lens (_tablespace_name :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _tablespace_name = a } :: DatabaseResource s)
+             (\s a -> s { _tablespace_name = a } :: DatabaseResource s)
 
 instance P.HasTemplate (DatabaseResource s) s Text where
     template =
         lens (_template :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _template = a } :: DatabaseResource s)
+             (\s a -> s { _template = a } :: DatabaseResource s)
+
 
 databaseResource :: TF.Resource P.PostgreSQL (DatabaseResource s)
 databaseResource =
@@ -222,17 +223,18 @@ instance TF.ToHCL (ExtensionResource s) where
 instance P.HasName (ExtensionResource s) s Text where
     name =
         lens (_name :: ExtensionResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ExtensionResource s)
+             (\s a -> s { _name = a } :: ExtensionResource s)
 
 instance P.HasSchema (ExtensionResource s) s Text where
     schema =
         lens (_schema :: ExtensionResource s -> TF.Attribute s Text)
-            (\s a -> s { _schema = a } :: ExtensionResource s)
+             (\s a -> s { _schema = a } :: ExtensionResource s)
 
 instance P.HasVersion (ExtensionResource s) s Text where
     version =
         lens (_version :: ExtensionResource s -> TF.Attribute s Text)
-            (\s a -> s { _version = a } :: ExtensionResource s)
+             (\s a -> s { _version = a } :: ExtensionResource s)
+
 
 extensionResource :: TF.Resource P.PostgreSQL (ExtensionResource s)
 extensionResource =
@@ -310,72 +312,73 @@ instance TF.ToHCL (RoleResource s) where
 instance P.HasBypassRowLevelSecurity (RoleResource s) s Text where
     bypassRowLevelSecurity =
         lens (_bypass_row_level_security :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bypass_row_level_security = a } :: RoleResource s)
+             (\s a -> s { _bypass_row_level_security = a } :: RoleResource s)
 
 instance P.HasConnectionLimit (RoleResource s) s Text where
     connectionLimit =
         lens (_connection_limit :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _connection_limit = a } :: RoleResource s)
+             (\s a -> s { _connection_limit = a } :: RoleResource s)
 
 instance P.HasCreateDatabase (RoleResource s) s Text where
     createDatabase =
         lens (_create_database :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _create_database = a } :: RoleResource s)
+             (\s a -> s { _create_database = a } :: RoleResource s)
 
 instance P.HasCreateRole (RoleResource s) s Text where
     createRole =
         lens (_create_role :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _create_role = a } :: RoleResource s)
+             (\s a -> s { _create_role = a } :: RoleResource s)
 
 instance P.HasEncryptedPassword (RoleResource s) s Text where
     encryptedPassword =
         lens (_encrypted_password :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _encrypted_password = a } :: RoleResource s)
+             (\s a -> s { _encrypted_password = a } :: RoleResource s)
 
 instance P.HasInherit (RoleResource s) s Text where
     inherit =
         lens (_inherit :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _inherit = a } :: RoleResource s)
+             (\s a -> s { _inherit = a } :: RoleResource s)
 
 instance P.HasLogin (RoleResource s) s Text where
     login =
         lens (_login :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _login = a } :: RoleResource s)
+             (\s a -> s { _login = a } :: RoleResource s)
 
 instance P.HasName (RoleResource s) s Text where
     name =
         lens (_name :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RoleResource s)
+             (\s a -> s { _name = a } :: RoleResource s)
 
 instance P.HasPassword (RoleResource s) s Text where
     password =
         lens (_password :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _password = a } :: RoleResource s)
+             (\s a -> s { _password = a } :: RoleResource s)
 
 instance P.HasReplication (RoleResource s) s Text where
     replication =
         lens (_replication :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _replication = a } :: RoleResource s)
+             (\s a -> s { _replication = a } :: RoleResource s)
 
 instance P.HasSkipDropRole (RoleResource s) s Text where
     skipDropRole =
         lens (_skip_drop_role :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _skip_drop_role = a } :: RoleResource s)
+             (\s a -> s { _skip_drop_role = a } :: RoleResource s)
 
 instance P.HasSkipReassignOwned (RoleResource s) s Text where
     skipReassignOwned =
         lens (_skip_reassign_owned :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _skip_reassign_owned = a } :: RoleResource s)
+             (\s a -> s { _skip_reassign_owned = a } :: RoleResource s)
 
 instance P.HasSuperuser (RoleResource s) s Text where
     superuser =
         lens (_superuser :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _superuser = a } :: RoleResource s)
+             (\s a -> s { _superuser = a } :: RoleResource s)
 
 instance P.HasValidUntil (RoleResource s) s Text where
     validUntil =
         lens (_valid_until :: RoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _valid_until = a } :: RoleResource s)
+             (\s a -> s { _valid_until = a } :: RoleResource s)
+
 
 roleResource :: TF.Resource P.PostgreSQL (RoleResource s)
 roleResource =
@@ -425,22 +428,23 @@ instance TF.ToHCL (SchemaResource s) where
 instance P.HasIfNotExists (SchemaResource s) s Text where
     ifNotExists =
         lens (_if_not_exists :: SchemaResource s -> TF.Attribute s Text)
-            (\s a -> s { _if_not_exists = a } :: SchemaResource s)
+             (\s a -> s { _if_not_exists = a } :: SchemaResource s)
 
 instance P.HasName (SchemaResource s) s Text where
     name =
         lens (_name :: SchemaResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SchemaResource s)
+             (\s a -> s { _name = a } :: SchemaResource s)
 
 instance P.HasOwner (SchemaResource s) s Text where
     owner =
         lens (_owner :: SchemaResource s -> TF.Attribute s Text)
-            (\s a -> s { _owner = a } :: SchemaResource s)
+             (\s a -> s { _owner = a } :: SchemaResource s)
 
 instance P.HasPolicy (SchemaResource s) s Text where
     policy =
         lens (_policy :: SchemaResource s -> TF.Attribute s Text)
-            (\s a -> s { _policy = a } :: SchemaResource s)
+             (\s a -> s { _policy = a } :: SchemaResource s)
+
 
 schemaResource :: TF.Resource P.PostgreSQL (SchemaResource s)
 schemaResource =

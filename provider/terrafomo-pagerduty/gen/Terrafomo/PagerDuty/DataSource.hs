@@ -86,7 +86,7 @@ instance TF.ToHCL (EscalationPolicyData s) where
 instance P.HasName (EscalationPolicyData s) s Text where
     name =
         lens (_name :: EscalationPolicyData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EscalationPolicyData s)
+             (\s a -> s { _name = a } :: EscalationPolicyData s)
 
 instance P.HasComputedName (EscalationPolicyData s) Text
 
@@ -116,7 +116,7 @@ instance TF.ToHCL (ScheduleData s) where
 instance P.HasName (ScheduleData s) s Text where
     name =
         lens (_name :: ScheduleData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ScheduleData s)
+             (\s a -> s { _name = a } :: ScheduleData s)
 
 instance P.HasComputedName (ScheduleData s) Text
 
@@ -146,7 +146,7 @@ instance TF.ToHCL (UserData s) where
 instance P.HasEmail (UserData s) s Text where
     email =
         lens (_email :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _email = a } :: UserData s)
+             (\s a -> s { _email = a } :: UserData s)
 
 instance P.HasComputedName (UserData s) Text
 
@@ -177,10 +177,9 @@ instance TF.ToHCL (VendorData s) where
 instance P.HasName (VendorData s) s Text where
     name =
         lens (_name :: VendorData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VendorData s)
+             (\s a -> s { _name = a } :: VendorData s)
 
 instance P.HasComputedName (VendorData s) Text
-
 instance P.HasComputedType' (VendorData s) Text
 
 vendorData :: TF.DataSource P.PagerDuty (VendorData s)

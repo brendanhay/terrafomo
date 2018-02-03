@@ -252,6 +252,8 @@ module Terrafomo.AliCloud.Lens
     , HasComputedAccessPointId (..)
     , HasComputedAccountAlias (..)
     , HasComputedAccountName (..)
+    , HasComputedAcl (..)
+    , HasComputedActive (..)
     , HasComputedAddress (..)
     , HasComputedAdjustmentType (..)
     , HasComputedAdjustmentValue (..)
@@ -262,17 +264,21 @@ module Terrafomo.AliCloud.Lens
     , HasComputedArn (..)
     , HasComputedAssumeRolePolicyDocument (..)
     , HasComputedAttachmentCount (..)
+    , HasComputedAuthConfig (..)
     , HasComputedAvailabilityZone (..)
     , HasComputedAvailableDiskCategories (..)
     , HasComputedAvailableInstanceTypes (..)
     , HasComputedAvailableResourceCreation (..)
+    , HasComputedBackendPort (..)
     , HasComputedBackendServers (..)
     , HasComputedBackupPeriod (..)
     , HasComputedBackupRetentionPeriod (..)
     , HasComputedBackupTime (..)
     , HasComputedBandwidth (..)
     , HasComputedBandwidthPackageIds (..)
+    , HasComputedCacheConfig (..)
     , HasComputedCategory (..)
+    , HasComputedCdnType (..)
     , HasComputedCharacterSet (..)
     , HasComputedCidrBlock (..)
     , HasComputedComments (..)
@@ -280,6 +286,8 @@ module Terrafomo.AliCloud.Lens
     , HasComputedConnectionString (..)
     , HasComputedConnections (..)
     , HasComputedContentLength (..)
+    , HasComputedCookie (..)
+    , HasComputedCookieTimeout (..)
     , HasComputedCooldown (..)
     , HasComputedCpuCoreCount (..)
     , HasComputedCreateDate (..)
@@ -313,18 +321,31 @@ module Terrafomo.AliCloud.Lens
     , HasComputedEngine (..)
     , HasComputedEngineVersion (..)
     , HasComputedEtag (..)
+    , HasComputedExtranetEndpoint (..)
     , HasComputedFamily' (..)
     , HasComputedFingerPrint (..)
     , HasComputedFingerprint (..)
     , HasComputedForce (..)
+    , HasComputedForceDelete (..)
     , HasComputedForntendPort (..)
     , HasComputedForwardTableIds (..)
+    , HasComputedFrontendPort (..)
     , HasComputedGroupId (..)
     , HasComputedGroupName (..)
+    , HasComputedHealthCheck (..)
+    , HasComputedHealthCheckConnectPort (..)
+    , HasComputedHealthCheckDomain (..)
+    , HasComputedHealthCheckHttpCode (..)
+    , HasComputedHealthCheckInterval (..)
     , HasComputedHealthCheckSourceIp (..)
     , HasComputedHealthCheckTargetIp (..)
+    , HasComputedHealthCheckTimeout (..)
+    , HasComputedHealthCheckType (..)
+    , HasComputedHealthCheckUri (..)
+    , HasComputedHealthyThreshold (..)
     , HasComputedHostName (..)
     , HasComputedHostRecord (..)
+    , HasComputedHttpHeaderConfig (..)
     , HasComputedId (..)
     , HasComputedImageId (..)
     , HasComputedImageOwnerAlias (..)
@@ -339,6 +360,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedInstances (..)
     , HasComputedInternet (..)
     , HasComputedInternetChargeType (..)
+    , HasComputedIntranetEndpoint (..)
     , HasComputedIpAddress (..)
     , HasComputedIpProtocol (..)
     , HasComputedIsDefault (..)
@@ -352,6 +374,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedLoadBalancerId (..)
     , HasComputedLoadbalancerIds (..)
     , HasComputedLocalName (..)
+    , HasComputedLocation (..)
     , HasComputedLocked (..)
     , HasComputedLocked (..)
     , HasComputedLogBackup (..)
@@ -370,10 +393,16 @@ module Terrafomo.AliCloud.Lens
     , HasComputedOppositeInterfaceOwnerId (..)
     , HasComputedOppositeRouterId (..)
     , HasComputedOppositeRouterType (..)
+    , HasComputedOptimizeEnable (..)
     , HasComputedOsName (..)
+    , HasComputedOwner (..)
+    , HasComputedPage404Config (..)
+    , HasComputedPageCompressEnable (..)
+    , HasComputedParameterFilterConfig (..)
     , HasComputedPasswordResetRequired (..)
     , HasComputedPeriod (..)
     , HasComputedPeriodUnit (..)
+    , HasComputedPersistenceTimeout (..)
     , HasComputedPolicyName (..)
     , HasComputedPolicyType (..)
     , HasComputedPort (..)
@@ -385,10 +414,13 @@ module Terrafomo.AliCloud.Lens
     , HasComputedPrivilege (..)
     , HasComputedProductCode (..)
     , HasComputedProgress (..)
+    , HasComputedProtocol (..)
     , HasComputedPublicIp (..)
     , HasComputedPunyCode (..)
     , HasComputedRamUsers (..)
+    , HasComputedRangeEnable (..)
     , HasComputedRecordId (..)
+    , HasComputedReferConfig (..)
     , HasComputedRegionId (..)
     , HasComputedRemovalPolicies (..)
     , HasComputedRetentionPeriod (..)
@@ -398,27 +430,39 @@ module Terrafomo.AliCloud.Lens
     , HasComputedRouterId (..)
     , HasComputedRouterType (..)
     , HasComputedRouting (..)
+    , HasComputedScalingConfigurationName (..)
     , HasComputedScalingGroupId (..)
     , HasComputedScalingGroupName (..)
     , HasComputedScalingRuleName (..)
     , HasComputedScheduledAction (..)
     , HasComputedScheduledTaskName (..)
+    , HasComputedScheduler (..)
+    , HasComputedScope (..)
+    , HasComputedSecurityGroupId (..)
     , HasComputedSecurityIps (..)
     , HasComputedServerGroupId (..)
+    , HasComputedServers (..)
     , HasComputedServices (..)
     , HasComputedSize (..)
     , HasComputedSnapshotId (..)
     , HasComputedSnatTableIds (..)
+    , HasComputedSourceType (..)
+    , HasComputedSources (..)
     , HasComputedSpec (..)
     , HasComputedSpecification (..)
     , HasComputedSpotPriceLimit (..)
     , HasComputedSpotStrategy (..)
+    , HasComputedSslCertificateId (..)
     , HasComputedStatement (..)
     , HasComputedStatus (..)
+    , HasComputedStickySession (..)
+    , HasComputedStickySessionType (..)
+    , HasComputedStorageClass (..)
     , HasComputedTags (..)
     , HasComputedTaskEnabled (..)
     , HasComputedTtl (..)
     , HasComputedType' (..)
+    , HasComputedUnhealthyThreshold (..)
     , HasComputedUpdateDate (..)
     , HasComputedUrl (..)
     , HasComputedUserData (..)
@@ -427,6 +471,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedValue (..)
     , HasComputedVersion (..)
     , HasComputedVersionCode (..)
+    , HasComputedVideoSeekEnable (..)
     , HasComputedVpcId (..)
     , HasComputedVpcName (..)
     , HasComputedVrouterId (..)
@@ -1813,6 +1858,18 @@ class HasComputedAccountName a b | a -> b where
     computedAccountName =
         to (\x -> TF.Computed (TF.referenceKey x) "account_name")
 
+class HasComputedAcl a b | a -> b where
+    computedAcl
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAcl =
+        to (\x -> TF.Computed (TF.referenceKey x) "acl")
+
+class HasComputedActive a b | a -> b where
+    computedActive
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedActive =
+        to (\x -> TF.Computed (TF.referenceKey x) "active")
+
 class HasComputedAddress a b | a -> b where
     computedAddress
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -1873,6 +1930,12 @@ class HasComputedAttachmentCount a b | a -> b where
     computedAttachmentCount =
         to (\x -> TF.Computed (TF.referenceKey x) "attachment_count")
 
+class HasComputedAuthConfig a b | a -> b where
+    computedAuthConfig
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAuthConfig =
+        to (\x -> TF.Computed (TF.referenceKey x) "auth_config")
+
 class HasComputedAvailabilityZone a b | a -> b where
     computedAvailabilityZone
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -1896,6 +1959,12 @@ class HasComputedAvailableResourceCreation a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAvailableResourceCreation =
         to (\x -> TF.Computed (TF.referenceKey x) "available_resource_creation")
+
+class HasComputedBackendPort a b | a -> b where
+    computedBackendPort
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedBackendPort =
+        to (\x -> TF.Computed (TF.referenceKey x) "backend_port")
 
 class HasComputedBackendServers a b | a -> b where
     computedBackendServers
@@ -1933,11 +2002,23 @@ class HasComputedBandwidthPackageIds a b | a -> b where
     computedBandwidthPackageIds =
         to (\x -> TF.Computed (TF.referenceKey x) "bandwidth_package_ids")
 
+class HasComputedCacheConfig a b | a -> b where
+    computedCacheConfig
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedCacheConfig =
+        to (\x -> TF.Computed (TF.referenceKey x) "cache_config")
+
 class HasComputedCategory a b | a -> b where
     computedCategory
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCategory =
         to (\x -> TF.Computed (TF.referenceKey x) "category")
+
+class HasComputedCdnType a b | a -> b where
+    computedCdnType
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedCdnType =
+        to (\x -> TF.Computed (TF.referenceKey x) "cdn_type")
 
 class HasComputedCharacterSet a b | a -> b where
     computedCharacterSet
@@ -1980,6 +2061,18 @@ class HasComputedContentLength a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedContentLength =
         to (\x -> TF.Computed (TF.referenceKey x) "content_length")
+
+class HasComputedCookie a b | a -> b where
+    computedCookie
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedCookie =
+        to (\x -> TF.Computed (TF.referenceKey x) "cookie")
+
+class HasComputedCookieTimeout a b | a -> b where
+    computedCookieTimeout
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedCookieTimeout =
+        to (\x -> TF.Computed (TF.referenceKey x) "cookie_timeout")
 
 class HasComputedCooldown a b | a -> b where
     computedCooldown
@@ -2179,6 +2272,12 @@ class HasComputedEtag a b | a -> b where
     computedEtag =
         to (\x -> TF.Computed (TF.referenceKey x) "etag")
 
+class HasComputedExtranetEndpoint a b | a -> b where
+    computedExtranetEndpoint
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedExtranetEndpoint =
+        to (\x -> TF.Computed (TF.referenceKey x) "extranet_endpoint")
+
 class HasComputedFamily' a b | a -> b where
     computedFamily'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2203,6 +2302,12 @@ class HasComputedForce a b | a -> b where
     computedForce =
         to (\x -> TF.Computed (TF.referenceKey x) "force")
 
+class HasComputedForceDelete a b | a -> b where
+    computedForceDelete
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedForceDelete =
+        to (\x -> TF.Computed (TF.referenceKey x) "force_delete")
+
 class HasComputedForntendPort a b | a -> b where
     computedForntendPort
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2214,6 +2319,12 @@ class HasComputedForwardTableIds a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedForwardTableIds =
         to (\x -> TF.Computed (TF.referenceKey x) "forward_table_ids")
+
+class HasComputedFrontendPort a b | a -> b where
+    computedFrontendPort
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedFrontendPort =
+        to (\x -> TF.Computed (TF.referenceKey x) "frontend_port")
 
 class HasComputedGroupId a b | a -> b where
     computedGroupId
@@ -2227,6 +2338,36 @@ class HasComputedGroupName a b | a -> b where
     computedGroupName =
         to (\x -> TF.Computed (TF.referenceKey x) "group_name")
 
+class HasComputedHealthCheck a b | a -> b where
+    computedHealthCheck
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthCheck =
+        to (\x -> TF.Computed (TF.referenceKey x) "health_check")
+
+class HasComputedHealthCheckConnectPort a b | a -> b where
+    computedHealthCheckConnectPort
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthCheckConnectPort =
+        to (\x -> TF.Computed (TF.referenceKey x) "health_check_connect_port")
+
+class HasComputedHealthCheckDomain a b | a -> b where
+    computedHealthCheckDomain
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthCheckDomain =
+        to (\x -> TF.Computed (TF.referenceKey x) "health_check_domain")
+
+class HasComputedHealthCheckHttpCode a b | a -> b where
+    computedHealthCheckHttpCode
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthCheckHttpCode =
+        to (\x -> TF.Computed (TF.referenceKey x) "health_check_http_code")
+
+class HasComputedHealthCheckInterval a b | a -> b where
+    computedHealthCheckInterval
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthCheckInterval =
+        to (\x -> TF.Computed (TF.referenceKey x) "health_check_interval")
+
 class HasComputedHealthCheckSourceIp a b | a -> b where
     computedHealthCheckSourceIp
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2239,6 +2380,30 @@ class HasComputedHealthCheckTargetIp a b | a -> b where
     computedHealthCheckTargetIp =
         to (\x -> TF.Computed (TF.referenceKey x) "health_check_target_ip")
 
+class HasComputedHealthCheckTimeout a b | a -> b where
+    computedHealthCheckTimeout
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthCheckTimeout =
+        to (\x -> TF.Computed (TF.referenceKey x) "health_check_timeout")
+
+class HasComputedHealthCheckType a b | a -> b where
+    computedHealthCheckType
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthCheckType =
+        to (\x -> TF.Computed (TF.referenceKey x) "health_check_type")
+
+class HasComputedHealthCheckUri a b | a -> b where
+    computedHealthCheckUri
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthCheckUri =
+        to (\x -> TF.Computed (TF.referenceKey x) "health_check_uri")
+
+class HasComputedHealthyThreshold a b | a -> b where
+    computedHealthyThreshold
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHealthyThreshold =
+        to (\x -> TF.Computed (TF.referenceKey x) "healthy_threshold")
+
 class HasComputedHostName a b | a -> b where
     computedHostName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2250,6 +2415,12 @@ class HasComputedHostRecord a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHostRecord =
         to (\x -> TF.Computed (TF.referenceKey x) "host_record")
+
+class HasComputedHttpHeaderConfig a b | a -> b where
+    computedHttpHeaderConfig
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedHttpHeaderConfig =
+        to (\x -> TF.Computed (TF.referenceKey x) "http_header_config")
 
 class HasComputedId a b | a -> b where
     computedId
@@ -2335,6 +2506,12 @@ class HasComputedInternetChargeType a b | a -> b where
     computedInternetChargeType =
         to (\x -> TF.Computed (TF.referenceKey x) "internet_charge_type")
 
+class HasComputedIntranetEndpoint a b | a -> b where
+    computedIntranetEndpoint
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedIntranetEndpoint =
+        to (\x -> TF.Computed (TF.referenceKey x) "intranet_endpoint")
+
 class HasComputedIpAddress a b | a -> b where
     computedIpAddress
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2412,6 +2589,12 @@ class HasComputedLocalName a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLocalName =
         to (\x -> TF.Computed (TF.referenceKey x) "local_name")
+
+class HasComputedLocation a b | a -> b where
+    computedLocation
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedLocation =
+        to (\x -> TF.Computed (TF.referenceKey x) "location")
 
 class HasComputedLocked a b | a -> b where
     computedLocked
@@ -2521,11 +2704,41 @@ class HasComputedOppositeRouterType a b | a -> b where
     computedOppositeRouterType =
         to (\x -> TF.Computed (TF.referenceKey x) "opposite_router_type")
 
+class HasComputedOptimizeEnable a b | a -> b where
+    computedOptimizeEnable
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedOptimizeEnable =
+        to (\x -> TF.Computed (TF.referenceKey x) "optimize_enable")
+
 class HasComputedOsName a b | a -> b where
     computedOsName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOsName =
         to (\x -> TF.Computed (TF.referenceKey x) "os_name")
+
+class HasComputedOwner a b | a -> b where
+    computedOwner
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedOwner =
+        to (\x -> TF.Computed (TF.referenceKey x) "owner")
+
+class HasComputedPage404Config a b | a -> b where
+    computedPage404Config
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPage404Config =
+        to (\x -> TF.Computed (TF.referenceKey x) "page_404_config")
+
+class HasComputedPageCompressEnable a b | a -> b where
+    computedPageCompressEnable
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPageCompressEnable =
+        to (\x -> TF.Computed (TF.referenceKey x) "page_compress_enable")
+
+class HasComputedParameterFilterConfig a b | a -> b where
+    computedParameterFilterConfig
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedParameterFilterConfig =
+        to (\x -> TF.Computed (TF.referenceKey x) "parameter_filter_config")
 
 class HasComputedPasswordResetRequired a b | a -> b where
     computedPasswordResetRequired
@@ -2544,6 +2757,12 @@ class HasComputedPeriodUnit a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPeriodUnit =
         to (\x -> TF.Computed (TF.referenceKey x) "period_unit")
+
+class HasComputedPersistenceTimeout a b | a -> b where
+    computedPersistenceTimeout
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPersistenceTimeout =
+        to (\x -> TF.Computed (TF.referenceKey x) "persistence_timeout")
 
 class HasComputedPolicyName a b | a -> b where
     computedPolicyName
@@ -2611,6 +2830,12 @@ class HasComputedProgress a b | a -> b where
     computedProgress =
         to (\x -> TF.Computed (TF.referenceKey x) "progress")
 
+class HasComputedProtocol a b | a -> b where
+    computedProtocol
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedProtocol =
+        to (\x -> TF.Computed (TF.referenceKey x) "protocol")
+
 class HasComputedPublicIp a b | a -> b where
     computedPublicIp
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2629,11 +2854,23 @@ class HasComputedRamUsers a b | a -> b where
     computedRamUsers =
         to (\x -> TF.Computed (TF.referenceKey x) "ram_users")
 
+class HasComputedRangeEnable a b | a -> b where
+    computedRangeEnable
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedRangeEnable =
+        to (\x -> TF.Computed (TF.referenceKey x) "range_enable")
+
 class HasComputedRecordId a b | a -> b where
     computedRecordId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRecordId =
         to (\x -> TF.Computed (TF.referenceKey x) "record_id")
+
+class HasComputedReferConfig a b | a -> b where
+    computedReferConfig
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedReferConfig =
+        to (\x -> TF.Computed (TF.referenceKey x) "refer_config")
 
 class HasComputedRegionId a b | a -> b where
     computedRegionId
@@ -2689,6 +2926,12 @@ class HasComputedRouting a b | a -> b where
     computedRouting =
         to (\x -> TF.Computed (TF.referenceKey x) "routing")
 
+class HasComputedScalingConfigurationName a b | a -> b where
+    computedScalingConfigurationName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedScalingConfigurationName =
+        to (\x -> TF.Computed (TF.referenceKey x) "scaling_configuration_name")
+
 class HasComputedScalingGroupId a b | a -> b where
     computedScalingGroupId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2719,6 +2962,24 @@ class HasComputedScheduledTaskName a b | a -> b where
     computedScheduledTaskName =
         to (\x -> TF.Computed (TF.referenceKey x) "scheduled_task_name")
 
+class HasComputedScheduler a b | a -> b where
+    computedScheduler
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedScheduler =
+        to (\x -> TF.Computed (TF.referenceKey x) "scheduler")
+
+class HasComputedScope a b | a -> b where
+    computedScope
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedScope =
+        to (\x -> TF.Computed (TF.referenceKey x) "scope")
+
+class HasComputedSecurityGroupId a b | a -> b where
+    computedSecurityGroupId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSecurityGroupId =
+        to (\x -> TF.Computed (TF.referenceKey x) "security_group_id")
+
 class HasComputedSecurityIps a b | a -> b where
     computedSecurityIps
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2730,6 +2991,12 @@ class HasComputedServerGroupId a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedServerGroupId =
         to (\x -> TF.Computed (TF.referenceKey x) "server_group_id")
+
+class HasComputedServers a b | a -> b where
+    computedServers
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedServers =
+        to (\x -> TF.Computed (TF.referenceKey x) "servers")
 
 class HasComputedServices a b | a -> b where
     computedServices
@@ -2755,6 +3022,18 @@ class HasComputedSnatTableIds a b | a -> b where
     computedSnatTableIds =
         to (\x -> TF.Computed (TF.referenceKey x) "snat_table_ids")
 
+class HasComputedSourceType a b | a -> b where
+    computedSourceType
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSourceType =
+        to (\x -> TF.Computed (TF.referenceKey x) "source_type")
+
+class HasComputedSources a b | a -> b where
+    computedSources
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSources =
+        to (\x -> TF.Computed (TF.referenceKey x) "sources")
+
 class HasComputedSpec a b | a -> b where
     computedSpec
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2779,6 +3058,12 @@ class HasComputedSpotStrategy a b | a -> b where
     computedSpotStrategy =
         to (\x -> TF.Computed (TF.referenceKey x) "spot_strategy")
 
+class HasComputedSslCertificateId a b | a -> b where
+    computedSslCertificateId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedSslCertificateId =
+        to (\x -> TF.Computed (TF.referenceKey x) "ssl_certificate_id")
+
 class HasComputedStatement a b | a -> b where
     computedStatement
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -2790,6 +3075,24 @@ class HasComputedStatus a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedStatus =
         to (\x -> TF.Computed (TF.referenceKey x) "status")
+
+class HasComputedStickySession a b | a -> b where
+    computedStickySession
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedStickySession =
+        to (\x -> TF.Computed (TF.referenceKey x) "sticky_session")
+
+class HasComputedStickySessionType a b | a -> b where
+    computedStickySessionType
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedStickySessionType =
+        to (\x -> TF.Computed (TF.referenceKey x) "sticky_session_type")
+
+class HasComputedStorageClass a b | a -> b where
+    computedStorageClass
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedStorageClass =
+        to (\x -> TF.Computed (TF.referenceKey x) "storage_class")
 
 class HasComputedTags a b | a -> b where
     computedTags
@@ -2814,6 +3117,12 @@ class HasComputedType' a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedType' =
         to (\x -> TF.Computed (TF.referenceKey x) "type")
+
+class HasComputedUnhealthyThreshold a b | a -> b where
+    computedUnhealthyThreshold
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedUnhealthyThreshold =
+        to (\x -> TF.Computed (TF.referenceKey x) "unhealthy_threshold")
 
 class HasComputedUpdateDate a b | a -> b where
     computedUpdateDate
@@ -2862,6 +3171,12 @@ class HasComputedVersionCode a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVersionCode =
         to (\x -> TF.Computed (TF.referenceKey x) "version_code")
+
+class HasComputedVideoSeekEnable a b | a -> b where
+    computedVideoSeekEnable
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedVideoSeekEnable =
+        to (\x -> TF.Computed (TF.referenceKey x) "video_seek_enable")
 
 class HasComputedVpcId a b | a -> b where
     computedVpcId

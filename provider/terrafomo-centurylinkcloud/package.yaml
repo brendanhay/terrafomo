@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.CenturyLinkCloud
-    - Terrafomo.CenturyLinkCloud.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

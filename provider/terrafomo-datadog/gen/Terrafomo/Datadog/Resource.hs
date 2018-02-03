@@ -147,42 +147,42 @@ instance TF.ToHCL (DowntimeResource s) where
 instance P.HasActive (DowntimeResource s) s Text where
     active =
         lens (_active :: DowntimeResource s -> TF.Attribute s Text)
-            (\s a -> s { _active = a } :: DowntimeResource s)
+             (\s a -> s { _active = a } :: DowntimeResource s)
 
 instance P.HasDisabled (DowntimeResource s) s Text where
     disabled =
         lens (_disabled :: DowntimeResource s -> TF.Attribute s Text)
-            (\s a -> s { _disabled = a } :: DowntimeResource s)
+             (\s a -> s { _disabled = a } :: DowntimeResource s)
 
 instance P.HasEnd (DowntimeResource s) s Text where
     end =
         lens (_end :: DowntimeResource s -> TF.Attribute s Text)
-            (\s a -> s { _end = a } :: DowntimeResource s)
+             (\s a -> s { _end = a } :: DowntimeResource s)
 
 instance P.HasMessage (DowntimeResource s) s Text where
     message =
         lens (_message :: DowntimeResource s -> TF.Attribute s Text)
-            (\s a -> s { _message = a } :: DowntimeResource s)
+             (\s a -> s { _message = a } :: DowntimeResource s)
 
 instance P.HasMonitorId (DowntimeResource s) s Text where
     monitorId =
         lens (_monitor_id :: DowntimeResource s -> TF.Attribute s Text)
-            (\s a -> s { _monitor_id = a } :: DowntimeResource s)
+             (\s a -> s { _monitor_id = a } :: DowntimeResource s)
 
 instance P.HasRecurrence (DowntimeResource s) s Text where
     recurrence =
         lens (_recurrence :: DowntimeResource s -> TF.Attribute s Text)
-            (\s a -> s { _recurrence = a } :: DowntimeResource s)
+             (\s a -> s { _recurrence = a } :: DowntimeResource s)
 
 instance P.HasScope (DowntimeResource s) s Text where
     scope =
         lens (_scope :: DowntimeResource s -> TF.Attribute s Text)
-            (\s a -> s { _scope = a } :: DowntimeResource s)
+             (\s a -> s { _scope = a } :: DowntimeResource s)
 
 instance P.HasStart (DowntimeResource s) s Text where
     start =
         lens (_start :: DowntimeResource s -> TF.Attribute s Text)
-            (\s a -> s { _start = a } :: DowntimeResource s)
+             (\s a -> s { _start = a } :: DowntimeResource s)
 
 instance P.HasComputedId (DowntimeResource s) Text
 
@@ -233,32 +233,33 @@ instance TF.ToHCL (MetricMetadataResource s) where
 instance P.HasDescription (MetricMetadataResource s) s Text where
     description =
         lens (_description :: MetricMetadataResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: MetricMetadataResource s)
+             (\s a -> s { _description = a } :: MetricMetadataResource s)
 
 instance P.HasMetric (MetricMetadataResource s) s Text where
     metric =
         lens (_metric :: MetricMetadataResource s -> TF.Attribute s Text)
-            (\s a -> s { _metric = a } :: MetricMetadataResource s)
+             (\s a -> s { _metric = a } :: MetricMetadataResource s)
 
 instance P.HasPerUnit (MetricMetadataResource s) s Text where
     perUnit =
         lens (_per_unit :: MetricMetadataResource s -> TF.Attribute s Text)
-            (\s a -> s { _per_unit = a } :: MetricMetadataResource s)
+             (\s a -> s { _per_unit = a } :: MetricMetadataResource s)
 
 instance P.HasShortName (MetricMetadataResource s) s Text where
     shortName =
         lens (_short_name :: MetricMetadataResource s -> TF.Attribute s Text)
-            (\s a -> s { _short_name = a } :: MetricMetadataResource s)
+             (\s a -> s { _short_name = a } :: MetricMetadataResource s)
 
 instance P.HasStatsdInterval (MetricMetadataResource s) s Text where
     statsdInterval =
         lens (_statsd_interval :: MetricMetadataResource s -> TF.Attribute s Text)
-            (\s a -> s { _statsd_interval = a } :: MetricMetadataResource s)
+             (\s a -> s { _statsd_interval = a } :: MetricMetadataResource s)
 
 instance P.HasUnit (MetricMetadataResource s) s Text where
     unit =
         lens (_unit :: MetricMetadataResource s -> TF.Attribute s Text)
-            (\s a -> s { _unit = a } :: MetricMetadataResource s)
+             (\s a -> s { _unit = a } :: MetricMetadataResource s)
+
 
 metricMetadataResource :: TF.Resource P.Datadog (MetricMetadataResource s)
 metricMetadataResource =
@@ -341,92 +342,92 @@ instance TF.ToHCL (MonitorResource s) where
 instance P.HasEscalationMessage (MonitorResource s) s Text where
     escalationMessage =
         lens (_escalation_message :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _escalation_message = a } :: MonitorResource s)
+             (\s a -> s { _escalation_message = a } :: MonitorResource s)
 
 instance P.HasEvaluationDelay (MonitorResource s) s Text where
     evaluationDelay =
         lens (_evaluation_delay :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _evaluation_delay = a } :: MonitorResource s)
+             (\s a -> s { _evaluation_delay = a } :: MonitorResource s)
 
 instance P.HasIncludeTags (MonitorResource s) s Text where
     includeTags =
         lens (_include_tags :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _include_tags = a } :: MonitorResource s)
+             (\s a -> s { _include_tags = a } :: MonitorResource s)
 
 instance P.HasLocked (MonitorResource s) s Text where
     locked =
         lens (_locked :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _locked = a } :: MonitorResource s)
+             (\s a -> s { _locked = a } :: MonitorResource s)
 
 instance P.HasMessage (MonitorResource s) s Text where
     message =
         lens (_message :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _message = a } :: MonitorResource s)
+             (\s a -> s { _message = a } :: MonitorResource s)
 
 instance P.HasName (MonitorResource s) s Text where
     name =
         lens (_name :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: MonitorResource s)
+             (\s a -> s { _name = a } :: MonitorResource s)
 
 instance P.HasNewHostDelay (MonitorResource s) s Text where
     newHostDelay =
         lens (_new_host_delay :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _new_host_delay = a } :: MonitorResource s)
+             (\s a -> s { _new_host_delay = a } :: MonitorResource s)
 
 instance P.HasNoDataTimeframe (MonitorResource s) s Text where
     noDataTimeframe =
         lens (_no_data_timeframe :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _no_data_timeframe = a } :: MonitorResource s)
+             (\s a -> s { _no_data_timeframe = a } :: MonitorResource s)
 
 instance P.HasNotifyAudit (MonitorResource s) s Text where
     notifyAudit =
         lens (_notify_audit :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _notify_audit = a } :: MonitorResource s)
+             (\s a -> s { _notify_audit = a } :: MonitorResource s)
 
 instance P.HasNotifyNoData (MonitorResource s) s Text where
     notifyNoData =
         lens (_notify_no_data :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _notify_no_data = a } :: MonitorResource s)
+             (\s a -> s { _notify_no_data = a } :: MonitorResource s)
 
 instance P.HasQuery (MonitorResource s) s Text where
     query =
         lens (_query :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _query = a } :: MonitorResource s)
+             (\s a -> s { _query = a } :: MonitorResource s)
 
 instance P.HasRenotifyInterval (MonitorResource s) s Text where
     renotifyInterval =
         lens (_renotify_interval :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _renotify_interval = a } :: MonitorResource s)
+             (\s a -> s { _renotify_interval = a } :: MonitorResource s)
 
 instance P.HasRequireFullWindow (MonitorResource s) s Text where
     requireFullWindow =
         lens (_require_full_window :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _require_full_window = a } :: MonitorResource s)
+             (\s a -> s { _require_full_window = a } :: MonitorResource s)
 
 instance P.HasSilenced (MonitorResource s) s Text where
     silenced =
         lens (_silenced :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _silenced = a } :: MonitorResource s)
+             (\s a -> s { _silenced = a } :: MonitorResource s)
 
 instance P.HasTags (MonitorResource s) s Text where
     tags =
         lens (_tags :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: MonitorResource s)
+             (\s a -> s { _tags = a } :: MonitorResource s)
 
 instance P.HasThresholds (MonitorResource s) s Text where
     thresholds =
         lens (_thresholds :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _thresholds = a } :: MonitorResource s)
+             (\s a -> s { _thresholds = a } :: MonitorResource s)
 
 instance P.HasTimeoutH (MonitorResource s) s Text where
     timeoutH =
         lens (_timeout_h :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _timeout_h = a } :: MonitorResource s)
+             (\s a -> s { _timeout_h = a } :: MonitorResource s)
 
 instance P.HasType' (MonitorResource s) s Text where
     type' =
         lens (_type' :: MonitorResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: MonitorResource s)
+             (\s a -> s { _type' = a } :: MonitorResource s)
 
 instance P.HasComputedId (MonitorResource s) Text
 
@@ -484,27 +485,28 @@ instance TF.ToHCL (TimeboardResource s) where
 instance P.HasDescription (TimeboardResource s) s Text where
     description =
         lens (_description :: TimeboardResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: TimeboardResource s)
+             (\s a -> s { _description = a } :: TimeboardResource s)
 
 instance P.HasGraph (TimeboardResource s) s Text where
     graph =
         lens (_graph :: TimeboardResource s -> TF.Attribute s Text)
-            (\s a -> s { _graph = a } :: TimeboardResource s)
+             (\s a -> s { _graph = a } :: TimeboardResource s)
 
 instance P.HasReadOnly (TimeboardResource s) s Text where
     readOnly =
         lens (_read_only :: TimeboardResource s -> TF.Attribute s Text)
-            (\s a -> s { _read_only = a } :: TimeboardResource s)
+             (\s a -> s { _read_only = a } :: TimeboardResource s)
 
 instance P.HasTemplateVariable (TimeboardResource s) s Text where
     templateVariable =
         lens (_template_variable :: TimeboardResource s -> TF.Attribute s Text)
-            (\s a -> s { _template_variable = a } :: TimeboardResource s)
+             (\s a -> s { _template_variable = a } :: TimeboardResource s)
 
 instance P.HasTitle (TimeboardResource s) s Text where
     title =
         lens (_title :: TimeboardResource s -> TF.Attribute s Text)
-            (\s a -> s { _title = a } :: TimeboardResource s)
+             (\s a -> s { _title = a } :: TimeboardResource s)
+
 
 timeboardResource :: TF.Resource P.Datadog (TimeboardResource s)
 timeboardResource =
@@ -550,37 +552,35 @@ instance TF.ToHCL (UserResource s) where
 instance P.HasDisabled (UserResource s) s Text where
     disabled =
         lens (_disabled :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _disabled = a } :: UserResource s)
+             (\s a -> s { _disabled = a } :: UserResource s)
 
 instance P.HasEmail (UserResource s) s Text where
     email =
         lens (_email :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _email = a } :: UserResource s)
+             (\s a -> s { _email = a } :: UserResource s)
 
 instance P.HasHandle (UserResource s) s Text where
     handle =
         lens (_handle :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _handle = a } :: UserResource s)
+             (\s a -> s { _handle = a } :: UserResource s)
 
 instance P.HasIsAdmin (UserResource s) s Text where
     isAdmin =
         lens (_is_admin :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _is_admin = a } :: UserResource s)
+             (\s a -> s { _is_admin = a } :: UserResource s)
 
 instance P.HasName (UserResource s) s Text where
     name =
         lens (_name :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: UserResource s)
+             (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasRole (UserResource s) s Text where
     role =
         lens (_role :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _role = a } :: UserResource s)
+             (\s a -> s { _role = a } :: UserResource s)
 
 instance P.HasComputedDisabled (UserResource s) Text
-
 instance P.HasComputedId (UserResource s) Text
-
 instance P.HasComputedVerified (UserResource s) Text
 
 userResource :: TF.Resource P.Datadog (UserResource s)

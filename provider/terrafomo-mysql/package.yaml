@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.MySQL
-    - Terrafomo.MySQL.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

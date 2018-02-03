@@ -104,43 +104,28 @@ instance TF.ToHCL (AccountData s) where
 instance P.HasCurrent (AccountData s) s Text where
     current =
         lens (_current :: AccountData s -> TF.Attribute s Text)
-            (\s a -> s { _current = a } :: AccountData s)
+             (\s a -> s { _current = a } :: AccountData s)
 
 instance P.HasId (AccountData s) s Text where
     id =
         lens (_id :: AccountData s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: AccountData s)
+             (\s a -> s { _id = a } :: AccountData s)
 
 instance P.HasComputedAddress1 (AccountData s) Text
-
 instance P.HasComputedAddress2 (AccountData s) Text
-
 instance P.HasComputedCcEmail (AccountData s) Text
-
 instance P.HasComputedCity (AccountData s) Text
-
 instance P.HasComputedContactGroups (AccountData s) Text
-
 instance P.HasComputedCountry (AccountData s) Text
-
 instance P.HasComputedDescription (AccountData s) Text
-
 instance P.HasComputedId (AccountData s) Text
-
 instance P.HasComputedInvites (AccountData s) Text
-
 instance P.HasComputedName (AccountData s) Text
-
 instance P.HasComputedOwner (AccountData s) Text
-
 instance P.HasComputedState (AccountData s) Text
-
 instance P.HasComputedTimezone (AccountData s) Text
-
 instance P.HasComputedUiBaseUrl (AccountData s) Text
-
 instance P.HasComputedUsage (AccountData s) Text
-
 instance P.HasComputedUsers (AccountData s) Text
 
 accountData :: TF.DataSource P.Circonus (AccountData s)
@@ -181,20 +166,14 @@ instance TF.ToHCL (CollectorData s) where
 instance P.HasId (CollectorData s) s Text where
     id =
         lens (_id :: CollectorData s -> TF.Attribute s Text)
-            (\s a -> s { _id = a } :: CollectorData s)
+             (\s a -> s { _id = a } :: CollectorData s)
 
 instance P.HasComputedDetails (CollectorData s) Text
-
 instance P.HasComputedId (CollectorData s) Text
-
 instance P.HasComputedLatitude (CollectorData s) Text
-
 instance P.HasComputedLongitude (CollectorData s) Text
-
 instance P.HasComputedName (CollectorData s) Text
-
 instance P.HasComputedTags (CollectorData s) Text
-
 instance P.HasComputedType' (CollectorData s) Text
 
 collectorData :: TF.DataSource P.Circonus (CollectorData s)

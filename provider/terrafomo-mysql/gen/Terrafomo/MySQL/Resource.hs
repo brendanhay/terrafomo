@@ -97,17 +97,18 @@ instance TF.ToHCL (DatabaseResource s) where
 instance P.HasDefaultCharacterSet (DatabaseResource s) s Text where
     defaultCharacterSet =
         lens (_default_character_set :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_character_set = a } :: DatabaseResource s)
+             (\s a -> s { _default_character_set = a } :: DatabaseResource s)
 
 instance P.HasDefaultCollation (DatabaseResource s) s Text where
     defaultCollation =
         lens (_default_collation :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_collation = a } :: DatabaseResource s)
+             (\s a -> s { _default_collation = a } :: DatabaseResource s)
 
 instance P.HasName (DatabaseResource s) s Text where
     name =
         lens (_name :: DatabaseResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatabaseResource s)
+             (\s a -> s { _name = a } :: DatabaseResource s)
+
 
 databaseResource :: TF.Resource P.MySQL (DatabaseResource s)
 databaseResource =
@@ -148,27 +149,28 @@ instance TF.ToHCL (GrantResource s) where
 instance P.HasDatabase (GrantResource s) s Text where
     database =
         lens (_database :: GrantResource s -> TF.Attribute s Text)
-            (\s a -> s { _database = a } :: GrantResource s)
+             (\s a -> s { _database = a } :: GrantResource s)
 
 instance P.HasGrant (GrantResource s) s Text where
     grant =
         lens (_grant :: GrantResource s -> TF.Attribute s Text)
-            (\s a -> s { _grant = a } :: GrantResource s)
+             (\s a -> s { _grant = a } :: GrantResource s)
 
 instance P.HasHost (GrantResource s) s Text where
     host =
         lens (_host :: GrantResource s -> TF.Attribute s Text)
-            (\s a -> s { _host = a } :: GrantResource s)
+             (\s a -> s { _host = a } :: GrantResource s)
 
 instance P.HasPrivileges (GrantResource s) s Text where
     privileges =
         lens (_privileges :: GrantResource s -> TF.Attribute s Text)
-            (\s a -> s { _privileges = a } :: GrantResource s)
+             (\s a -> s { _privileges = a } :: GrantResource s)
 
 instance P.HasUser (GrantResource s) s Text where
     user =
         lens (_user :: GrantResource s -> TF.Attribute s Text)
-            (\s a -> s { _user = a } :: GrantResource s)
+             (\s a -> s { _user = a } :: GrantResource s)
+
 
 grantResource :: TF.Resource P.MySQL (GrantResource s)
 grantResource =
@@ -210,22 +212,23 @@ instance TF.ToHCL (UserResource s) where
 instance P.HasHost (UserResource s) s Text where
     host =
         lens (_host :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _host = a } :: UserResource s)
+             (\s a -> s { _host = a } :: UserResource s)
 
 instance P.HasPassword (UserResource s) s Text where
     password =
         lens (_password :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _password = a } :: UserResource s)
+             (\s a -> s { _password = a } :: UserResource s)
 
 instance P.HasPlaintextPassword (UserResource s) s Text where
     plaintextPassword =
         lens (_plaintext_password :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _plaintext_password = a } :: UserResource s)
+             (\s a -> s { _plaintext_password = a } :: UserResource s)
 
 instance P.HasUser (UserResource s) s Text where
     user =
         lens (_user :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _user = a } :: UserResource s)
+             (\s a -> s { _user = a } :: UserResource s)
+
 
 userResource :: TF.Resource P.MySQL (UserResource s)
 userResource =

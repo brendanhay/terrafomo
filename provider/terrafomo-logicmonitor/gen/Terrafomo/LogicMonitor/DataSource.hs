@@ -87,22 +87,23 @@ instance TF.ToHCL (CollectorsData s) where
 instance P.HasFilters (CollectorsData s) s Text where
     filters =
         lens (_filters :: CollectorsData s -> TF.Attribute s Text)
-            (\s a -> s { _filters = a } :: CollectorsData s)
+             (\s a -> s { _filters = a } :: CollectorsData s)
 
 instance P.HasMostRecent (CollectorsData s) s Text where
     mostRecent =
         lens (_most_recent :: CollectorsData s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: CollectorsData s)
+             (\s a -> s { _most_recent = a } :: CollectorsData s)
 
 instance P.HasOffset (CollectorsData s) s Text where
     offset =
         lens (_offset :: CollectorsData s -> TF.Attribute s Text)
-            (\s a -> s { _offset = a } :: CollectorsData s)
+             (\s a -> s { _offset = a } :: CollectorsData s)
 
 instance P.HasSize (CollectorsData s) s Text where
     size =
         lens (_size :: CollectorsData s -> TF.Attribute s Text)
-            (\s a -> s { _size = a } :: CollectorsData s)
+             (\s a -> s { _size = a } :: CollectorsData s)
+
 
 collectorsData :: TF.DataSource P.LogicMonitor (CollectorsData s)
 collectorsData =
@@ -137,17 +138,18 @@ instance TF.ToHCL (DeviceGroupData s) where
 instance P.HasFilters (DeviceGroupData s) s Text where
     filters =
         lens (_filters :: DeviceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _filters = a } :: DeviceGroupData s)
+             (\s a -> s { _filters = a } :: DeviceGroupData s)
 
 instance P.HasOffset (DeviceGroupData s) s Text where
     offset =
         lens (_offset :: DeviceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _offset = a } :: DeviceGroupData s)
+             (\s a -> s { _offset = a } :: DeviceGroupData s)
 
 instance P.HasSize (DeviceGroupData s) s Text where
     size =
         lens (_size :: DeviceGroupData s -> TF.Attribute s Text)
-            (\s a -> s { _size = a } :: DeviceGroupData s)
+             (\s a -> s { _size = a } :: DeviceGroupData s)
+
 
 deviceGroupData :: TF.DataSource P.LogicMonitor (DeviceGroupData s)
 deviceGroupData =

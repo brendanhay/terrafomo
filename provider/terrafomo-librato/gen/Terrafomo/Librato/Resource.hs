@@ -136,50 +136,44 @@ instance TF.ToHCL (AlertResource s) where
 instance P.HasActive (AlertResource s) s Text where
     active =
         lens (_active :: AlertResource s -> TF.Attribute s Text)
-            (\s a -> s { _active = a } :: AlertResource s)
+             (\s a -> s { _active = a } :: AlertResource s)
 
 instance P.HasAttributes (AlertResource s) s Text where
     attributes =
         lens (_attributes :: AlertResource s -> TF.Attribute s Text)
-            (\s a -> s { _attributes = a } :: AlertResource s)
+             (\s a -> s { _attributes = a } :: AlertResource s)
 
 instance P.HasCondition (AlertResource s) s Text where
     condition =
         lens (_condition :: AlertResource s -> TF.Attribute s Text)
-            (\s a -> s { _condition = a } :: AlertResource s)
+             (\s a -> s { _condition = a } :: AlertResource s)
 
 instance P.HasDescription (AlertResource s) s Text where
     description =
         lens (_description :: AlertResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: AlertResource s)
+             (\s a -> s { _description = a } :: AlertResource s)
 
 instance P.HasName (AlertResource s) s Text where
     name =
         lens (_name :: AlertResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AlertResource s)
+             (\s a -> s { _name = a } :: AlertResource s)
 
 instance P.HasRearmSeconds (AlertResource s) s Text where
     rearmSeconds =
         lens (_rearm_seconds :: AlertResource s -> TF.Attribute s Text)
-            (\s a -> s { _rearm_seconds = a } :: AlertResource s)
+             (\s a -> s { _rearm_seconds = a } :: AlertResource s)
 
 instance P.HasServices (AlertResource s) s Text where
     services =
         lens (_services :: AlertResource s -> TF.Attribute s Text)
-            (\s a -> s { _services = a } :: AlertResource s)
+             (\s a -> s { _services = a } :: AlertResource s)
 
 instance P.HasComputedActive (AlertResource s) Text
-
 instance P.HasComputedCondition (AlertResource s) Text
-
 instance P.HasComputedDescription (AlertResource s) Text
-
 instance P.HasComputedId (AlertResource s) Text
-
 instance P.HasComputedName (AlertResource s) Text
-
 instance P.HasComputedRearmSeconds (AlertResource s) Text
-
 instance P.HasComputedServices (AlertResource s) Text
 
 alertResource :: TF.Resource P.Librato (AlertResource s)
@@ -231,50 +225,44 @@ instance TF.ToHCL (MetricResource s) where
 instance P.HasAttributes (MetricResource s) s Text where
     attributes =
         lens (_attributes :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _attributes = a } :: MetricResource s)
+             (\s a -> s { _attributes = a } :: MetricResource s)
 
 instance P.HasComposite (MetricResource s) s Text where
     composite =
         lens (_composite :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _composite = a } :: MetricResource s)
+             (\s a -> s { _composite = a } :: MetricResource s)
 
 instance P.HasDescription (MetricResource s) s Text where
     description =
         lens (_description :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: MetricResource s)
+             (\s a -> s { _description = a } :: MetricResource s)
 
 instance P.HasDisplayName (MetricResource s) s Text where
     displayName =
         lens (_display_name :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _display_name = a } :: MetricResource s)
+             (\s a -> s { _display_name = a } :: MetricResource s)
 
 instance P.HasName (MetricResource s) s Text where
     name =
         lens (_name :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: MetricResource s)
+             (\s a -> s { _name = a } :: MetricResource s)
 
 instance P.HasPeriod (MetricResource s) s Text where
     period =
         lens (_period :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _period = a } :: MetricResource s)
+             (\s a -> s { _period = a } :: MetricResource s)
 
 instance P.HasType' (MetricResource s) s Text where
     type' =
         lens (_type' :: MetricResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: MetricResource s)
+             (\s a -> s { _type' = a } :: MetricResource s)
 
 instance P.HasComputedComposite (MetricResource s) Text
-
 instance P.HasComputedDescription (MetricResource s) Text
-
 instance P.HasComputedDisplayName (MetricResource s) Text
-
 instance P.HasComputedName (MetricResource s) Text
-
 instance P.HasComputedPeriod (MetricResource s) Text
-
 instance P.HasComputedSourceLag (MetricResource s) Text
-
 instance P.HasComputedType' (MetricResource s) Text
 
 metricResource :: TF.Resource P.Librato (MetricResource s)
@@ -314,24 +302,21 @@ instance TF.ToHCL (ServiceResource s) where
 instance P.HasSettings (ServiceResource s) s Text where
     settings =
         lens (_settings :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _settings = a } :: ServiceResource s)
+             (\s a -> s { _settings = a } :: ServiceResource s)
 
 instance P.HasTitle (ServiceResource s) s Text where
     title =
         lens (_title :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _title = a } :: ServiceResource s)
+             (\s a -> s { _title = a } :: ServiceResource s)
 
 instance P.HasType' (ServiceResource s) s Text where
     type' =
         lens (_type' :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: ServiceResource s)
+             (\s a -> s { _type' = a } :: ServiceResource s)
 
 instance P.HasComputedId (ServiceResource s) Text
-
 instance P.HasComputedSettings (ServiceResource s) Text
-
 instance P.HasComputedTitle (ServiceResource s) Text
-
 instance P.HasComputedType' (ServiceResource s) Text
 
 serviceResource :: TF.Resource P.Librato (ServiceResource s)
@@ -382,47 +367,45 @@ instance TF.ToHCL (SpaceChartResource s) where
 instance P.HasLabel (SpaceChartResource s) s Text where
     label =
         lens (_label :: SpaceChartResource s -> TF.Attribute s Text)
-            (\s a -> s { _label = a } :: SpaceChartResource s)
+             (\s a -> s { _label = a } :: SpaceChartResource s)
 
 instance P.HasMax (SpaceChartResource s) s Text where
     max =
         lens (_max :: SpaceChartResource s -> TF.Attribute s Text)
-            (\s a -> s { _max = a } :: SpaceChartResource s)
+             (\s a -> s { _max = a } :: SpaceChartResource s)
 
 instance P.HasMin (SpaceChartResource s) s Text where
     min =
         lens (_min :: SpaceChartResource s -> TF.Attribute s Text)
-            (\s a -> s { _min = a } :: SpaceChartResource s)
+             (\s a -> s { _min = a } :: SpaceChartResource s)
 
 instance P.HasName (SpaceChartResource s) s Text where
     name =
         lens (_name :: SpaceChartResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SpaceChartResource s)
+             (\s a -> s { _name = a } :: SpaceChartResource s)
 
 instance P.HasRelatedSpace (SpaceChartResource s) s Text where
     relatedSpace =
         lens (_related_space :: SpaceChartResource s -> TF.Attribute s Text)
-            (\s a -> s { _related_space = a } :: SpaceChartResource s)
+             (\s a -> s { _related_space = a } :: SpaceChartResource s)
 
 instance P.HasSpaceId (SpaceChartResource s) s Text where
     spaceId =
         lens (_space_id :: SpaceChartResource s -> TF.Attribute s Text)
-            (\s a -> s { _space_id = a } :: SpaceChartResource s)
+             (\s a -> s { _space_id = a } :: SpaceChartResource s)
 
 instance P.HasStream (SpaceChartResource s) s Text where
     stream =
         lens (_stream :: SpaceChartResource s -> TF.Attribute s Text)
-            (\s a -> s { _stream = a } :: SpaceChartResource s)
+             (\s a -> s { _stream = a } :: SpaceChartResource s)
 
 instance P.HasType' (SpaceChartResource s) s Text where
     type' =
         lens (_type' :: SpaceChartResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: SpaceChartResource s)
+             (\s a -> s { _type' = a } :: SpaceChartResource s)
 
 instance P.HasComputedId (SpaceChartResource s) Text
-
 instance P.HasComputedSpaceId (SpaceChartResource s) Text
-
 instance P.HasComputedTitle (SpaceChartResource s) Text
 
 spaceChartResource :: TF.Resource P.Librato (SpaceChartResource s)
@@ -457,10 +440,9 @@ instance TF.ToHCL (SpaceResource s) where
 instance P.HasName (SpaceResource s) s Text where
     name =
         lens (_name :: SpaceResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SpaceResource s)
+             (\s a -> s { _name = a } :: SpaceResource s)
 
 instance P.HasComputedId (SpaceResource s) Text
-
 instance P.HasComputedName (SpaceResource s) Text
 
 spaceResource :: TF.Resource P.Librato (SpaceResource s)

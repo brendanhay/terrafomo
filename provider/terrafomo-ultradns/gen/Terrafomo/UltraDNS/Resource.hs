@@ -134,45 +134,44 @@ instance TF.ToHCL (DirpoolResource s) where
 instance P.HasConflictResolve (DirpoolResource s) s Text where
     conflictResolve =
         lens (_conflict_resolve :: DirpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _conflict_resolve = a } :: DirpoolResource s)
+             (\s a -> s { _conflict_resolve = a } :: DirpoolResource s)
 
 instance P.HasDescription (DirpoolResource s) s Text where
     description =
         lens (_description :: DirpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: DirpoolResource s)
+             (\s a -> s { _description = a } :: DirpoolResource s)
 
 instance P.HasName (DirpoolResource s) s Text where
     name =
         lens (_name :: DirpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DirpoolResource s)
+             (\s a -> s { _name = a } :: DirpoolResource s)
 
 instance P.HasNoResponse (DirpoolResource s) s Text where
     noResponse =
         lens (_no_response :: DirpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _no_response = a } :: DirpoolResource s)
+             (\s a -> s { _no_response = a } :: DirpoolResource s)
 
 instance P.HasRdata (DirpoolResource s) s Text where
     rdata =
         lens (_rdata :: DirpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _rdata = a } :: DirpoolResource s)
+             (\s a -> s { _rdata = a } :: DirpoolResource s)
 
 instance P.HasTtl (DirpoolResource s) s Text where
     ttl =
         lens (_ttl :: DirpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _ttl = a } :: DirpoolResource s)
+             (\s a -> s { _ttl = a } :: DirpoolResource s)
 
 instance P.HasType' (DirpoolResource s) s Text where
     type' =
         lens (_type' :: DirpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: DirpoolResource s)
+             (\s a -> s { _type' = a } :: DirpoolResource s)
 
 instance P.HasZone (DirpoolResource s) s Text where
     zone =
         lens (_zone :: DirpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: DirpoolResource s)
+             (\s a -> s { _zone = a } :: DirpoolResource s)
 
 instance P.HasComputedHostname (DirpoolResource s) Text
-
 instance P.HasComputedId (DirpoolResource s) Text
 
 dirpoolResource :: TF.Resource P.UltraDNS (DirpoolResource s)
@@ -224,37 +223,38 @@ instance TF.ToHCL (ProbeHttpResource s) where
 instance P.HasAgents (ProbeHttpResource s) s Text where
     agents =
         lens (_agents :: ProbeHttpResource s -> TF.Attribute s Text)
-            (\s a -> s { _agents = a } :: ProbeHttpResource s)
+             (\s a -> s { _agents = a } :: ProbeHttpResource s)
 
 instance P.HasHttpProbe (ProbeHttpResource s) s Text where
     httpProbe =
         lens (_http_probe :: ProbeHttpResource s -> TF.Attribute s Text)
-            (\s a -> s { _http_probe = a } :: ProbeHttpResource s)
+             (\s a -> s { _http_probe = a } :: ProbeHttpResource s)
 
 instance P.HasInterval (ProbeHttpResource s) s Text where
     interval =
         lens (_interval :: ProbeHttpResource s -> TF.Attribute s Text)
-            (\s a -> s { _interval = a } :: ProbeHttpResource s)
+             (\s a -> s { _interval = a } :: ProbeHttpResource s)
 
 instance P.HasName (ProbeHttpResource s) s Text where
     name =
         lens (_name :: ProbeHttpResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ProbeHttpResource s)
+             (\s a -> s { _name = a } :: ProbeHttpResource s)
 
 instance P.HasPoolRecord (ProbeHttpResource s) s Text where
     poolRecord =
         lens (_pool_record :: ProbeHttpResource s -> TF.Attribute s Text)
-            (\s a -> s { _pool_record = a } :: ProbeHttpResource s)
+             (\s a -> s { _pool_record = a } :: ProbeHttpResource s)
 
 instance P.HasThreshold (ProbeHttpResource s) s Text where
     threshold =
         lens (_threshold :: ProbeHttpResource s -> TF.Attribute s Text)
-            (\s a -> s { _threshold = a } :: ProbeHttpResource s)
+             (\s a -> s { _threshold = a } :: ProbeHttpResource s)
 
 instance P.HasZone (ProbeHttpResource s) s Text where
     zone =
         lens (_zone :: ProbeHttpResource s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: ProbeHttpResource s)
+             (\s a -> s { _zone = a } :: ProbeHttpResource s)
+
 
 probeHttpResource :: TF.Resource P.UltraDNS (ProbeHttpResource s)
 probeHttpResource =
@@ -304,37 +304,38 @@ instance TF.ToHCL (ProbePingResource s) where
 instance P.HasAgents (ProbePingResource s) s Text where
     agents =
         lens (_agents :: ProbePingResource s -> TF.Attribute s Text)
-            (\s a -> s { _agents = a } :: ProbePingResource s)
+             (\s a -> s { _agents = a } :: ProbePingResource s)
 
 instance P.HasInterval (ProbePingResource s) s Text where
     interval =
         lens (_interval :: ProbePingResource s -> TF.Attribute s Text)
-            (\s a -> s { _interval = a } :: ProbePingResource s)
+             (\s a -> s { _interval = a } :: ProbePingResource s)
 
 instance P.HasName (ProbePingResource s) s Text where
     name =
         lens (_name :: ProbePingResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ProbePingResource s)
+             (\s a -> s { _name = a } :: ProbePingResource s)
 
 instance P.HasPingProbe (ProbePingResource s) s Text where
     pingProbe =
         lens (_ping_probe :: ProbePingResource s -> TF.Attribute s Text)
-            (\s a -> s { _ping_probe = a } :: ProbePingResource s)
+             (\s a -> s { _ping_probe = a } :: ProbePingResource s)
 
 instance P.HasPoolRecord (ProbePingResource s) s Text where
     poolRecord =
         lens (_pool_record :: ProbePingResource s -> TF.Attribute s Text)
-            (\s a -> s { _pool_record = a } :: ProbePingResource s)
+             (\s a -> s { _pool_record = a } :: ProbePingResource s)
 
 instance P.HasThreshold (ProbePingResource s) s Text where
     threshold =
         lens (_threshold :: ProbePingResource s -> TF.Attribute s Text)
-            (\s a -> s { _threshold = a } :: ProbePingResource s)
+             (\s a -> s { _threshold = a } :: ProbePingResource s)
 
 instance P.HasZone (ProbePingResource s) s Text where
     zone =
         lens (_zone :: ProbePingResource s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: ProbePingResource s)
+             (\s a -> s { _zone = a } :: ProbePingResource s)
+
 
 probePingResource :: TF.Resource P.UltraDNS (ProbePingResource s)
 probePingResource =
@@ -383,35 +384,34 @@ instance TF.ToHCL (RdpoolResource s) where
 instance P.HasDescription (RdpoolResource s) s Text where
     description =
         lens (_description :: RdpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: RdpoolResource s)
+             (\s a -> s { _description = a } :: RdpoolResource s)
 
 instance P.HasName (RdpoolResource s) s Text where
     name =
         lens (_name :: RdpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RdpoolResource s)
+             (\s a -> s { _name = a } :: RdpoolResource s)
 
 instance P.HasOrder (RdpoolResource s) s Text where
     order =
         lens (_order :: RdpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _order = a } :: RdpoolResource s)
+             (\s a -> s { _order = a } :: RdpoolResource s)
 
 instance P.HasRdata (RdpoolResource s) s Text where
     rdata =
         lens (_rdata :: RdpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _rdata = a } :: RdpoolResource s)
+             (\s a -> s { _rdata = a } :: RdpoolResource s)
 
 instance P.HasTtl (RdpoolResource s) s Text where
     ttl =
         lens (_ttl :: RdpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _ttl = a } :: RdpoolResource s)
+             (\s a -> s { _ttl = a } :: RdpoolResource s)
 
 instance P.HasZone (RdpoolResource s) s Text where
     zone =
         lens (_zone :: RdpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: RdpoolResource s)
+             (\s a -> s { _zone = a } :: RdpoolResource s)
 
 instance P.HasComputedHostname (RdpoolResource s) Text
-
 instance P.HasComputedId (RdpoolResource s) Text
 
 rdpoolResource :: TF.Resource P.UltraDNS (RdpoolResource s)
@@ -455,40 +455,34 @@ instance TF.ToHCL (RecordResource s) where
 instance P.HasName (RecordResource s) s Text where
     name =
         lens (_name :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RecordResource s)
+             (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasRdata (RecordResource s) s Text where
     rdata =
         lens (_rdata :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _rdata = a } :: RecordResource s)
+             (\s a -> s { _rdata = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) s Text where
     ttl =
         lens (_ttl :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _ttl = a } :: RecordResource s)
+             (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) s Text where
     type' =
         lens (_type' :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: RecordResource s)
+             (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasZone (RecordResource s) s Text where
     zone =
         lens (_zone :: RecordResource s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: RecordResource s)
+             (\s a -> s { _zone = a } :: RecordResource s)
 
 instance P.HasComputedHostname (RecordResource s) Text
-
 instance P.HasComputedId (RecordResource s) Text
-
 instance P.HasComputedName (RecordResource s) Text
-
 instance P.HasComputedRdata (RecordResource s) Text
-
 instance P.HasComputedTtl (RecordResource s) Text
-
 instance P.HasComputedType' (RecordResource s) Text
-
 instance P.HasComputedZone (RecordResource s) Text
 
 recordResource :: TF.Resource P.UltraDNS (RecordResource s)
@@ -546,55 +540,54 @@ instance TF.ToHCL (TcpoolResource s) where
 instance P.HasActOnProbes (TcpoolResource s) s Text where
     actOnProbes =
         lens (_act_on_probes :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _act_on_probes = a } :: TcpoolResource s)
+             (\s a -> s { _act_on_probes = a } :: TcpoolResource s)
 
 instance P.HasBackupRecordFailoverDelay (TcpoolResource s) s Text where
     backupRecordFailoverDelay =
         lens (_backup_record_failover_delay :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _backup_record_failover_delay = a } :: TcpoolResource s)
+             (\s a -> s { _backup_record_failover_delay = a } :: TcpoolResource s)
 
 instance P.HasBackupRecordRdata (TcpoolResource s) s Text where
     backupRecordRdata =
         lens (_backup_record_rdata :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _backup_record_rdata = a } :: TcpoolResource s)
+             (\s a -> s { _backup_record_rdata = a } :: TcpoolResource s)
 
 instance P.HasDescription (TcpoolResource s) s Text where
     description =
         lens (_description :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: TcpoolResource s)
+             (\s a -> s { _description = a } :: TcpoolResource s)
 
 instance P.HasMaxToLb (TcpoolResource s) s Text where
     maxToLb =
         lens (_max_to_lb :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _max_to_lb = a } :: TcpoolResource s)
+             (\s a -> s { _max_to_lb = a } :: TcpoolResource s)
 
 instance P.HasName (TcpoolResource s) s Text where
     name =
         lens (_name :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: TcpoolResource s)
+             (\s a -> s { _name = a } :: TcpoolResource s)
 
 instance P.HasRdata (TcpoolResource s) s Text where
     rdata =
         lens (_rdata :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _rdata = a } :: TcpoolResource s)
+             (\s a -> s { _rdata = a } :: TcpoolResource s)
 
 instance P.HasRunProbes (TcpoolResource s) s Text where
     runProbes =
         lens (_run_probes :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _run_probes = a } :: TcpoolResource s)
+             (\s a -> s { _run_probes = a } :: TcpoolResource s)
 
 instance P.HasTtl (TcpoolResource s) s Text where
     ttl =
         lens (_ttl :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _ttl = a } :: TcpoolResource s)
+             (\s a -> s { _ttl = a } :: TcpoolResource s)
 
 instance P.HasZone (TcpoolResource s) s Text where
     zone =
         lens (_zone :: TcpoolResource s -> TF.Attribute s Text)
-            (\s a -> s { _zone = a } :: TcpoolResource s)
+             (\s a -> s { _zone = a } :: TcpoolResource s)
 
 instance P.HasComputedHostname (TcpoolResource s) Text
-
 instance P.HasComputedId (TcpoolResource s) Text
 
 tcpoolResource :: TF.Resource P.UltraDNS (TcpoolResource s)

@@ -150,12 +150,12 @@ instance TF.ToHCL (AddonResource s) where
 instance P.HasName (AddonResource s) s Text where
     name =
         lens (_name :: AddonResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AddonResource s)
+             (\s a -> s { _name = a } :: AddonResource s)
 
 instance P.HasSrc (AddonResource s) s Text where
     src =
         lens (_src :: AddonResource s -> TF.Attribute s Text)
-            (\s a -> s { _src = a } :: AddonResource s)
+             (\s a -> s { _src = a } :: AddonResource s)
 
 instance P.HasComputedId (AddonResource s) Text
 
@@ -200,27 +200,27 @@ instance TF.ToHCL (EscalationPolicyResource s) where
 instance P.HasDescription (EscalationPolicyResource s) s Text where
     description =
         lens (_description :: EscalationPolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: EscalationPolicyResource s)
+             (\s a -> s { _description = a } :: EscalationPolicyResource s)
 
 instance P.HasName (EscalationPolicyResource s) s Text where
     name =
         lens (_name :: EscalationPolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EscalationPolicyResource s)
+             (\s a -> s { _name = a } :: EscalationPolicyResource s)
 
 instance P.HasNumLoops (EscalationPolicyResource s) s Text where
     numLoops =
         lens (_num_loops :: EscalationPolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _num_loops = a } :: EscalationPolicyResource s)
+             (\s a -> s { _num_loops = a } :: EscalationPolicyResource s)
 
 instance P.HasRule (EscalationPolicyResource s) s Text where
     rule =
         lens (_rule :: EscalationPolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _rule = a } :: EscalationPolicyResource s)
+             (\s a -> s { _rule = a } :: EscalationPolicyResource s)
 
 instance P.HasTeams (EscalationPolicyResource s) s Text where
     teams =
         lens (_teams :: EscalationPolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _teams = a } :: EscalationPolicyResource s)
+             (\s a -> s { _teams = a } :: EscalationPolicyResource s)
 
 instance P.HasComputedId (EscalationPolicyResource s) Text
 
@@ -268,22 +268,22 @@ instance TF.ToHCL (MaintenanceWindowResource s) where
 instance P.HasDescription (MaintenanceWindowResource s) s Text where
     description =
         lens (_description :: MaintenanceWindowResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: MaintenanceWindowResource s)
+             (\s a -> s { _description = a } :: MaintenanceWindowResource s)
 
 instance P.HasEndTime (MaintenanceWindowResource s) s Text where
     endTime =
         lens (_end_time :: MaintenanceWindowResource s -> TF.Attribute s Text)
-            (\s a -> s { _end_time = a } :: MaintenanceWindowResource s)
+             (\s a -> s { _end_time = a } :: MaintenanceWindowResource s)
 
 instance P.HasServices (MaintenanceWindowResource s) s Text where
     services =
         lens (_services :: MaintenanceWindowResource s -> TF.Attribute s Text)
-            (\s a -> s { _services = a } :: MaintenanceWindowResource s)
+             (\s a -> s { _services = a } :: MaintenanceWindowResource s)
 
 instance P.HasStartTime (MaintenanceWindowResource s) s Text where
     startTime =
         lens (_start_time :: MaintenanceWindowResource s -> TF.Attribute s Text)
-            (\s a -> s { _start_time = a } :: MaintenanceWindowResource s)
+             (\s a -> s { _start_time = a } :: MaintenanceWindowResource s)
 
 instance P.HasComputedId (MaintenanceWindowResource s) Text
 
@@ -329,27 +329,27 @@ instance TF.ToHCL (ScheduleResource s) where
 instance P.HasDescription (ScheduleResource s) s Text where
     description =
         lens (_description :: ScheduleResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: ScheduleResource s)
+             (\s a -> s { _description = a } :: ScheduleResource s)
 
 instance P.HasLayer (ScheduleResource s) s Text where
     layer =
         lens (_layer :: ScheduleResource s -> TF.Attribute s Text)
-            (\s a -> s { _layer = a } :: ScheduleResource s)
+             (\s a -> s { _layer = a } :: ScheduleResource s)
 
 instance P.HasName (ScheduleResource s) s Text where
     name =
         lens (_name :: ScheduleResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ScheduleResource s)
+             (\s a -> s { _name = a } :: ScheduleResource s)
 
 instance P.HasOverflow (ScheduleResource s) s Text where
     overflow =
         lens (_overflow :: ScheduleResource s -> TF.Attribute s Text)
-            (\s a -> s { _overflow = a } :: ScheduleResource s)
+             (\s a -> s { _overflow = a } :: ScheduleResource s)
 
 instance P.HasTimeZone (ScheduleResource s) s Text where
     timeZone =
         lens (_time_zone :: ScheduleResource s -> TF.Attribute s Text)
-            (\s a -> s { _time_zone = a } :: ScheduleResource s)
+             (\s a -> s { _time_zone = a } :: ScheduleResource s)
 
 instance P.HasComputedId (ScheduleResource s) Text
 
@@ -398,37 +398,35 @@ instance TF.ToHCL (ServiceIntegrationResource s) where
 instance P.HasIntegrationEmail (ServiceIntegrationResource s) s Text where
     integrationEmail =
         lens (_integration_email :: ServiceIntegrationResource s -> TF.Attribute s Text)
-            (\s a -> s { _integration_email = a } :: ServiceIntegrationResource s)
+             (\s a -> s { _integration_email = a } :: ServiceIntegrationResource s)
 
 instance P.HasIntegrationKey (ServiceIntegrationResource s) s Text where
     integrationKey =
         lens (_integration_key :: ServiceIntegrationResource s -> TF.Attribute s Text)
-            (\s a -> s { _integration_key = a } :: ServiceIntegrationResource s)
+             (\s a -> s { _integration_key = a } :: ServiceIntegrationResource s)
 
 instance P.HasName (ServiceIntegrationResource s) s Text where
     name =
         lens (_name :: ServiceIntegrationResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ServiceIntegrationResource s)
+             (\s a -> s { _name = a } :: ServiceIntegrationResource s)
 
 instance P.HasService (ServiceIntegrationResource s) s Text where
     service =
         lens (_service :: ServiceIntegrationResource s -> TF.Attribute s Text)
-            (\s a -> s { _service = a } :: ServiceIntegrationResource s)
+             (\s a -> s { _service = a } :: ServiceIntegrationResource s)
 
 instance P.HasType' (ServiceIntegrationResource s) s Text where
     type' =
         lens (_type' :: ServiceIntegrationResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: ServiceIntegrationResource s)
+             (\s a -> s { _type' = a } :: ServiceIntegrationResource s)
 
 instance P.HasVendor (ServiceIntegrationResource s) s Text where
     vendor =
         lens (_vendor :: ServiceIntegrationResource s -> TF.Attribute s Text)
-            (\s a -> s { _vendor = a } :: ServiceIntegrationResource s)
+             (\s a -> s { _vendor = a } :: ServiceIntegrationResource s)
 
 instance P.HasComputedId (ServiceIntegrationResource s) Text
-
 instance P.HasComputedIntegrationEmail (ServiceIntegrationResource s) Text
-
 instance P.HasComputedIntegrationKey (ServiceIntegrationResource s) Text
 
 serviceIntegrationResource :: TF.Resource P.PagerDuty (ServiceIntegrationResource s)
@@ -479,39 +477,36 @@ instance TF.ToHCL (ServiceResource s) where
 instance P.HasAcknowledgementTimeout (ServiceResource s) s Text where
     acknowledgementTimeout =
         lens (_acknowledgement_timeout :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _acknowledgement_timeout = a } :: ServiceResource s)
+             (\s a -> s { _acknowledgement_timeout = a } :: ServiceResource s)
 
 instance P.HasAlertCreation (ServiceResource s) s Text where
     alertCreation =
         lens (_alert_creation :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _alert_creation = a } :: ServiceResource s)
+             (\s a -> s { _alert_creation = a } :: ServiceResource s)
 
 instance P.HasAutoResolveTimeout (ServiceResource s) s Text where
     autoResolveTimeout =
         lens (_auto_resolve_timeout :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _auto_resolve_timeout = a } :: ServiceResource s)
+             (\s a -> s { _auto_resolve_timeout = a } :: ServiceResource s)
 
 instance P.HasDescription (ServiceResource s) s Text where
     description =
         lens (_description :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: ServiceResource s)
+             (\s a -> s { _description = a } :: ServiceResource s)
 
 instance P.HasEscalationPolicy (ServiceResource s) s Text where
     escalationPolicy =
         lens (_escalation_policy :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _escalation_policy = a } :: ServiceResource s)
+             (\s a -> s { _escalation_policy = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) s Text where
     name =
         lens (_name :: ServiceResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ServiceResource s)
+             (\s a -> s { _name = a } :: ServiceResource s)
 
 instance P.HasComputedCreatedAt (ServiceResource s) Text
-
 instance P.HasComputedId (ServiceResource s) Text
-
 instance P.HasComputedLastIncidentTimestamp (ServiceResource s) Text
-
 instance P.HasComputedStatus (ServiceResource s) Text
 
 serviceResource :: TF.Resource P.PagerDuty (ServiceResource s)
@@ -548,15 +543,14 @@ instance TF.ToHCL (TeamMembershipResource s) where
 instance P.HasTeamId (TeamMembershipResource s) s Text where
     teamId =
         lens (_team_id :: TeamMembershipResource s -> TF.Attribute s Text)
-            (\s a -> s { _team_id = a } :: TeamMembershipResource s)
+             (\s a -> s { _team_id = a } :: TeamMembershipResource s)
 
 instance P.HasUserId (TeamMembershipResource s) s Text where
     userId =
         lens (_user_id :: TeamMembershipResource s -> TF.Attribute s Text)
-            (\s a -> s { _user_id = a } :: TeamMembershipResource s)
+             (\s a -> s { _user_id = a } :: TeamMembershipResource s)
 
 instance P.HasComputedTeamId (TeamMembershipResource s) Text
-
 instance P.HasComputedUserId (TeamMembershipResource s) Text
 
 teamMembershipResource :: TF.Resource P.PagerDuty (TeamMembershipResource s)
@@ -591,12 +585,12 @@ instance TF.ToHCL (TeamResource s) where
 instance P.HasDescription (TeamResource s) s Text where
     description =
         lens (_description :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: TeamResource s)
+             (\s a -> s { _description = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) s Text where
     name =
         lens (_name :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: TeamResource s)
+             (\s a -> s { _name = a } :: TeamResource s)
 
 instance P.HasComputedId (TeamResource s) Text
 
@@ -642,37 +636,35 @@ instance TF.ToHCL (UserContactMethodResource s) where
 instance P.HasAddress (UserContactMethodResource s) s Text where
     address =
         lens (_address :: UserContactMethodResource s -> TF.Attribute s Text)
-            (\s a -> s { _address = a } :: UserContactMethodResource s)
+             (\s a -> s { _address = a } :: UserContactMethodResource s)
 
 instance P.HasCountryCode (UserContactMethodResource s) s Text where
     countryCode =
         lens (_country_code :: UserContactMethodResource s -> TF.Attribute s Text)
-            (\s a -> s { _country_code = a } :: UserContactMethodResource s)
+             (\s a -> s { _country_code = a } :: UserContactMethodResource s)
 
 instance P.HasLabel (UserContactMethodResource s) s Text where
     label =
         lens (_label :: UserContactMethodResource s -> TF.Attribute s Text)
-            (\s a -> s { _label = a } :: UserContactMethodResource s)
+             (\s a -> s { _label = a } :: UserContactMethodResource s)
 
 instance P.HasSendShortEmail (UserContactMethodResource s) s Text where
     sendShortEmail =
         lens (_send_short_email :: UserContactMethodResource s -> TF.Attribute s Text)
-            (\s a -> s { _send_short_email = a } :: UserContactMethodResource s)
+             (\s a -> s { _send_short_email = a } :: UserContactMethodResource s)
 
 instance P.HasType' (UserContactMethodResource s) s Text where
     type' =
         lens (_type' :: UserContactMethodResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: UserContactMethodResource s)
+             (\s a -> s { _type' = a } :: UserContactMethodResource s)
 
 instance P.HasUserId (UserContactMethodResource s) s Text where
     userId =
         lens (_user_id :: UserContactMethodResource s -> TF.Attribute s Text)
-            (\s a -> s { _user_id = a } :: UserContactMethodResource s)
+             (\s a -> s { _user_id = a } :: UserContactMethodResource s)
 
 instance P.HasComputedBlacklisted (UserContactMethodResource s) Text
-
 instance P.HasComputedEnabled (UserContactMethodResource s) Text
-
 instance P.HasComputedId (UserContactMethodResource s) Text
 
 userContactMethodResource :: TF.Resource P.PagerDuty (UserContactMethodResource s)
@@ -725,46 +717,42 @@ instance TF.ToHCL (UserResource s) where
 instance P.HasColor (UserResource s) s Text where
     color =
         lens (_color :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _color = a } :: UserResource s)
+             (\s a -> s { _color = a } :: UserResource s)
 
 instance P.HasDescription (UserResource s) s Text where
     description =
         lens (_description :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: UserResource s)
+             (\s a -> s { _description = a } :: UserResource s)
 
 instance P.HasEmail (UserResource s) s Text where
     email =
         lens (_email :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _email = a } :: UserResource s)
+             (\s a -> s { _email = a } :: UserResource s)
 
 instance P.HasJobTitle (UserResource s) s Text where
     jobTitle =
         lens (_job_title :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _job_title = a } :: UserResource s)
+             (\s a -> s { _job_title = a } :: UserResource s)
 
 instance P.HasName (UserResource s) s Text where
     name =
         lens (_name :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: UserResource s)
+             (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasRole (UserResource s) s Text where
     role =
         lens (_role :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _role = a } :: UserResource s)
+             (\s a -> s { _role = a } :: UserResource s)
 
 instance P.HasTeams (UserResource s) s Text where
     teams =
         lens (_teams :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _teams = a } :: UserResource s)
+             (\s a -> s { _teams = a } :: UserResource s)
 
 instance P.HasComputedAvatarUrl (UserResource s) Text
-
 instance P.HasComputedHtmlUrl (UserResource s) Text
-
 instance P.HasComputedId (UserResource s) Text
-
 instance P.HasComputedInvitationSent (UserResource s) Text
-
 instance P.HasComputedTimeZone (UserResource s) Text
 
 userResource :: TF.Resource P.PagerDuty (UserResource s)

@@ -165,17 +165,18 @@ instance TF.ToHCL (AuthBackendResource s) where
 instance P.HasDescription (AuthBackendResource s) s Text where
     description =
         lens (_description :: AuthBackendResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: AuthBackendResource s)
+             (\s a -> s { _description = a } :: AuthBackendResource s)
 
 instance P.HasPath (AuthBackendResource s) s Text where
     path =
         lens (_path :: AuthBackendResource s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: AuthBackendResource s)
+             (\s a -> s { _path = a } :: AuthBackendResource s)
 
 instance P.HasType' (AuthBackendResource s) s Text where
     type' =
         lens (_type' :: AuthBackendResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: AuthBackendResource s)
+             (\s a -> s { _type' = a } :: AuthBackendResource s)
+
 
 authBackendResource :: TF.Resource P.Vault (AuthBackendResource s)
 authBackendResource =
@@ -220,22 +221,23 @@ instance TF.ToHCL (AwsAuthBackendCertResource s) where
 instance P.HasAwsPublicCert (AwsAuthBackendCertResource s) s Text where
     awsPublicCert =
         lens (_aws_public_cert :: AwsAuthBackendCertResource s -> TF.Attribute s Text)
-            (\s a -> s { _aws_public_cert = a } :: AwsAuthBackendCertResource s)
+             (\s a -> s { _aws_public_cert = a } :: AwsAuthBackendCertResource s)
 
 instance P.HasBackend (AwsAuthBackendCertResource s) s Text where
     backend =
         lens (_backend :: AwsAuthBackendCertResource s -> TF.Attribute s Text)
-            (\s a -> s { _backend = a } :: AwsAuthBackendCertResource s)
+             (\s a -> s { _backend = a } :: AwsAuthBackendCertResource s)
 
 instance P.HasCertName (AwsAuthBackendCertResource s) s Text where
     certName =
         lens (_cert_name :: AwsAuthBackendCertResource s -> TF.Attribute s Text)
-            (\s a -> s { _cert_name = a } :: AwsAuthBackendCertResource s)
+             (\s a -> s { _cert_name = a } :: AwsAuthBackendCertResource s)
 
 instance P.HasType' (AwsAuthBackendCertResource s) s Text where
     type' =
         lens (_type' :: AwsAuthBackendCertResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: AwsAuthBackendCertResource s)
+             (\s a -> s { _type' = a } :: AwsAuthBackendCertResource s)
+
 
 awsAuthBackendCertResource :: TF.Resource P.Vault (AwsAuthBackendCertResource s)
 awsAuthBackendCertResource =
@@ -291,37 +293,38 @@ instance TF.ToHCL (AwsAuthBackendClientResource s) where
 instance P.HasAccessKey (AwsAuthBackendClientResource s) s Text where
     accessKey =
         lens (_access_key :: AwsAuthBackendClientResource s -> TF.Attribute s Text)
-            (\s a -> s { _access_key = a } :: AwsAuthBackendClientResource s)
+             (\s a -> s { _access_key = a } :: AwsAuthBackendClientResource s)
 
 instance P.HasBackend (AwsAuthBackendClientResource s) s Text where
     backend =
         lens (_backend :: AwsAuthBackendClientResource s -> TF.Attribute s Text)
-            (\s a -> s { _backend = a } :: AwsAuthBackendClientResource s)
+             (\s a -> s { _backend = a } :: AwsAuthBackendClientResource s)
 
 instance P.HasEc2Endpoint (AwsAuthBackendClientResource s) s Text where
     ec2Endpoint =
         lens (_ec2_endpoint :: AwsAuthBackendClientResource s -> TF.Attribute s Text)
-            (\s a -> s { _ec2_endpoint = a } :: AwsAuthBackendClientResource s)
+             (\s a -> s { _ec2_endpoint = a } :: AwsAuthBackendClientResource s)
 
 instance P.HasIamEndpoint (AwsAuthBackendClientResource s) s Text where
     iamEndpoint =
         lens (_iam_endpoint :: AwsAuthBackendClientResource s -> TF.Attribute s Text)
-            (\s a -> s { _iam_endpoint = a } :: AwsAuthBackendClientResource s)
+             (\s a -> s { _iam_endpoint = a } :: AwsAuthBackendClientResource s)
 
 instance P.HasIamServerIdHeaderValue (AwsAuthBackendClientResource s) s Text where
     iamServerIdHeaderValue =
         lens (_iam_server_id_header_value :: AwsAuthBackendClientResource s -> TF.Attribute s Text)
-            (\s a -> s { _iam_server_id_header_value = a } :: AwsAuthBackendClientResource s)
+             (\s a -> s { _iam_server_id_header_value = a } :: AwsAuthBackendClientResource s)
 
 instance P.HasSecretKey (AwsAuthBackendClientResource s) s Text where
     secretKey =
         lens (_secret_key :: AwsAuthBackendClientResource s -> TF.Attribute s Text)
-            (\s a -> s { _secret_key = a } :: AwsAuthBackendClientResource s)
+             (\s a -> s { _secret_key = a } :: AwsAuthBackendClientResource s)
 
 instance P.HasStsEndpoint (AwsAuthBackendClientResource s) s Text where
     stsEndpoint =
         lens (_sts_endpoint :: AwsAuthBackendClientResource s -> TF.Attribute s Text)
-            (\s a -> s { _sts_endpoint = a } :: AwsAuthBackendClientResource s)
+             (\s a -> s { _sts_endpoint = a } :: AwsAuthBackendClientResource s)
+
 
 awsAuthBackendClientResource :: TF.Resource P.Vault (AwsAuthBackendClientResource s)
 awsAuthBackendClientResource =
@@ -383,67 +386,60 @@ instance TF.ToHCL (AwsAuthBackendLoginResource s) where
 instance P.HasBackend (AwsAuthBackendLoginResource s) s Text where
     backend =
         lens (_backend :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _backend = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _backend = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasIamHttpRequestMethod (AwsAuthBackendLoginResource s) s Text where
     iamHttpRequestMethod =
         lens (_iam_http_request_method :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _iam_http_request_method = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _iam_http_request_method = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasIamRequestBody (AwsAuthBackendLoginResource s) s Text where
     iamRequestBody =
         lens (_iam_request_body :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _iam_request_body = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _iam_request_body = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasIamRequestHeaders (AwsAuthBackendLoginResource s) s Text where
     iamRequestHeaders =
         lens (_iam_request_headers :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _iam_request_headers = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _iam_request_headers = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasIamRequestUrl (AwsAuthBackendLoginResource s) s Text where
     iamRequestUrl =
         lens (_iam_request_url :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _iam_request_url = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _iam_request_url = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasIdentity (AwsAuthBackendLoginResource s) s Text where
     identity =
         lens (_identity :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _identity = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _identity = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasNonce (AwsAuthBackendLoginResource s) s Text where
     nonce =
         lens (_nonce :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _nonce = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _nonce = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasPkcs7 (AwsAuthBackendLoginResource s) s Text where
     pkcs7 =
         lens (_pkcs7 :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _pkcs7 = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _pkcs7 = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasRole (AwsAuthBackendLoginResource s) s Text where
     role =
         lens (_role :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _role = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _role = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasSignature (AwsAuthBackendLoginResource s) s Text where
     signature =
         lens (_signature :: AwsAuthBackendLoginResource s -> TF.Attribute s Text)
-            (\s a -> s { _signature = a } :: AwsAuthBackendLoginResource s)
+             (\s a -> s { _signature = a } :: AwsAuthBackendLoginResource s)
 
 instance P.HasComputedAccessor (AwsAuthBackendLoginResource s) Text
-
 instance P.HasComputedAuthType (AwsAuthBackendLoginResource s) Text
-
 instance P.HasComputedClientToken (AwsAuthBackendLoginResource s) Text
-
 instance P.HasComputedLeaseDuration (AwsAuthBackendLoginResource s) Text
-
 instance P.HasComputedLeaseStartTime (AwsAuthBackendLoginResource s) Text
-
 instance P.HasComputedMetadata (AwsAuthBackendLoginResource s) Text
-
 instance P.HasComputedPolicies (AwsAuthBackendLoginResource s) Text
-
 instance P.HasComputedRenewable (AwsAuthBackendLoginResource s) Text
 
 awsAuthBackendLoginResource :: TF.Resource P.Vault (AwsAuthBackendLoginResource s)
@@ -539,102 +535,103 @@ instance TF.ToHCL (AwsAuthBackendRoleResource s) where
 instance P.HasAllowInstanceMigration (AwsAuthBackendRoleResource s) s Text where
     allowInstanceMigration =
         lens (_allow_instance_migration :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _allow_instance_migration = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _allow_instance_migration = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasAuthType (AwsAuthBackendRoleResource s) s Text where
     authType =
         lens (_auth_type :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _auth_type = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _auth_type = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasBoundAccountId (AwsAuthBackendRoleResource s) s Text where
     boundAccountId =
         lens (_bound_account_id :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bound_account_id = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _bound_account_id = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasBoundAmiId (AwsAuthBackendRoleResource s) s Text where
     boundAmiId =
         lens (_bound_ami_id :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bound_ami_id = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _bound_ami_id = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasBoundIamInstanceProfileArn (AwsAuthBackendRoleResource s) s Text where
     boundIamInstanceProfileArn =
         lens (_bound_iam_instance_profile_arn :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bound_iam_instance_profile_arn = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _bound_iam_instance_profile_arn = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasBoundIamPrincipalArn (AwsAuthBackendRoleResource s) s Text where
     boundIamPrincipalArn =
         lens (_bound_iam_principal_arn :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bound_iam_principal_arn = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _bound_iam_principal_arn = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasBoundIamRoleArn (AwsAuthBackendRoleResource s) s Text where
     boundIamRoleArn =
         lens (_bound_iam_role_arn :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bound_iam_role_arn = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _bound_iam_role_arn = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasBoundRegion (AwsAuthBackendRoleResource s) s Text where
     boundRegion =
         lens (_bound_region :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bound_region = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _bound_region = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasBoundSubnetId (AwsAuthBackendRoleResource s) s Text where
     boundSubnetId =
         lens (_bound_subnet_id :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bound_subnet_id = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _bound_subnet_id = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasBoundVpcId (AwsAuthBackendRoleResource s) s Text where
     boundVpcId =
         lens (_bound_vpc_id :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _bound_vpc_id = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _bound_vpc_id = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasDisallowReauthentication (AwsAuthBackendRoleResource s) s Text where
     disallowReauthentication =
         lens (_disallow_reauthentication :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _disallow_reauthentication = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _disallow_reauthentication = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasInferredAwsRegion (AwsAuthBackendRoleResource s) s Text where
     inferredAwsRegion =
         lens (_inferred_aws_region :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _inferred_aws_region = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _inferred_aws_region = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasInferredEntityType (AwsAuthBackendRoleResource s) s Text where
     inferredEntityType =
         lens (_inferred_entity_type :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _inferred_entity_type = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _inferred_entity_type = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasMaxTtl (AwsAuthBackendRoleResource s) s Text where
     maxTtl =
         lens (_max_ttl :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _max_ttl = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _max_ttl = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasPeriod (AwsAuthBackendRoleResource s) s Text where
     period =
         lens (_period :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _period = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _period = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasPolicies (AwsAuthBackendRoleResource s) s Text where
     policies =
         lens (_policies :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _policies = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _policies = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasResolveAwsUniqueIds (AwsAuthBackendRoleResource s) s Text where
     resolveAwsUniqueIds =
         lens (_resolve_aws_unique_ids :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _resolve_aws_unique_ids = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _resolve_aws_unique_ids = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasRole (AwsAuthBackendRoleResource s) s Text where
     role =
         lens (_role :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _role = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _role = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasRoleTag (AwsAuthBackendRoleResource s) s Text where
     roleTag =
         lens (_role_tag :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _role_tag = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _role_tag = a } :: AwsAuthBackendRoleResource s)
 
 instance P.HasTtl (AwsAuthBackendRoleResource s) s Text where
     ttl =
         lens (_ttl :: AwsAuthBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _ttl = a } :: AwsAuthBackendRoleResource s)
+             (\s a -> s { _ttl = a } :: AwsAuthBackendRoleResource s)
+
 
 awsAuthBackendRoleResource :: TF.Resource P.Vault (AwsAuthBackendRoleResource s)
 awsAuthBackendRoleResource =
@@ -693,17 +690,18 @@ instance TF.ToHCL (AwsAuthBackendStsRoleResource s) where
 instance P.HasAccountId (AwsAuthBackendStsRoleResource s) s Text where
     accountId =
         lens (_account_id :: AwsAuthBackendStsRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _account_id = a } :: AwsAuthBackendStsRoleResource s)
+             (\s a -> s { _account_id = a } :: AwsAuthBackendStsRoleResource s)
 
 instance P.HasBackend (AwsAuthBackendStsRoleResource s) s Text where
     backend =
         lens (_backend :: AwsAuthBackendStsRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _backend = a } :: AwsAuthBackendStsRoleResource s)
+             (\s a -> s { _backend = a } :: AwsAuthBackendStsRoleResource s)
 
 instance P.HasStsRole (AwsAuthBackendStsRoleResource s) s Text where
     stsRole =
         lens (_sts_role :: AwsAuthBackendStsRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _sts_role = a } :: AwsAuthBackendStsRoleResource s)
+             (\s a -> s { _sts_role = a } :: AwsAuthBackendStsRoleResource s)
+
 
 awsAuthBackendStsRoleResource :: TF.Resource P.Vault (AwsAuthBackendStsRoleResource s)
 awsAuthBackendStsRoleResource =
@@ -739,12 +737,13 @@ instance TF.ToHCL (AwsSecretBackendResource s) where
 instance P.HasAccessKey (AwsSecretBackendResource s) s Text where
     accessKey =
         lens (_access_key :: AwsSecretBackendResource s -> TF.Attribute s Text)
-            (\s a -> s { _access_key = a } :: AwsSecretBackendResource s)
+             (\s a -> s { _access_key = a } :: AwsSecretBackendResource s)
 
 instance P.HasSecretKey (AwsSecretBackendResource s) s Text where
     secretKey =
         lens (_secret_key :: AwsSecretBackendResource s -> TF.Attribute s Text)
-            (\s a -> s { _secret_key = a } :: AwsSecretBackendResource s)
+             (\s a -> s { _secret_key = a } :: AwsSecretBackendResource s)
+
 
 awsSecretBackendResource :: TF.Resource P.Vault (AwsSecretBackendResource s)
 awsSecretBackendResource =
@@ -785,22 +784,23 @@ instance TF.ToHCL (AwsSecretBackendRoleResource s) where
 instance P.HasBackend (AwsSecretBackendRoleResource s) s Text where
     backend =
         lens (_backend :: AwsSecretBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _backend = a } :: AwsSecretBackendRoleResource s)
+             (\s a -> s { _backend = a } :: AwsSecretBackendRoleResource s)
 
 instance P.HasName (AwsSecretBackendRoleResource s) s Text where
     name =
         lens (_name :: AwsSecretBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: AwsSecretBackendRoleResource s)
+             (\s a -> s { _name = a } :: AwsSecretBackendRoleResource s)
 
 instance P.HasPolicy (AwsSecretBackendRoleResource s) s Text where
     policy =
         lens (_policy :: AwsSecretBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _policy = a } :: AwsSecretBackendRoleResource s)
+             (\s a -> s { _policy = a } :: AwsSecretBackendRoleResource s)
 
 instance P.HasPolicyArn (AwsSecretBackendRoleResource s) s Text where
     policyArn =
         lens (_policy_arn :: AwsSecretBackendRoleResource s -> TF.Attribute s Text)
-            (\s a -> s { _policy_arn = a } :: AwsSecretBackendRoleResource s)
+             (\s a -> s { _policy_arn = a } :: AwsSecretBackendRoleResource s)
+
 
 awsSecretBackendRoleResource :: TF.Resource P.Vault (AwsSecretBackendRoleResource s)
 awsSecretBackendRoleResource =
@@ -846,22 +846,23 @@ instance TF.ToHCL (GenericSecretResource s) where
 instance P.HasAllowRead (GenericSecretResource s) s Text where
     allowRead =
         lens (_allow_read :: GenericSecretResource s -> TF.Attribute s Text)
-            (\s a -> s { _allow_read = a } :: GenericSecretResource s)
+             (\s a -> s { _allow_read = a } :: GenericSecretResource s)
 
 instance P.HasDataJson (GenericSecretResource s) s Text where
     dataJson =
         lens (_data_json :: GenericSecretResource s -> TF.Attribute s Text)
-            (\s a -> s { _data_json = a } :: GenericSecretResource s)
+             (\s a -> s { _data_json = a } :: GenericSecretResource s)
 
 instance P.HasDisableRead (GenericSecretResource s) s Text where
     disableRead =
         lens (_disable_read :: GenericSecretResource s -> TF.Attribute s Text)
-            (\s a -> s { _disable_read = a } :: GenericSecretResource s)
+             (\s a -> s { _disable_read = a } :: GenericSecretResource s)
 
 instance P.HasPath (GenericSecretResource s) s Text where
     path =
         lens (_path :: GenericSecretResource s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: GenericSecretResource s)
+             (\s a -> s { _path = a } :: GenericSecretResource s)
+
 
 genericSecretResource :: TF.Resource P.Vault (GenericSecretResource s)
 genericSecretResource =
@@ -902,27 +903,28 @@ instance TF.ToHCL (MountResource s) where
 instance P.HasDefaultLeaseTtlSeconds (MountResource s) s Text where
     defaultLeaseTtlSeconds =
         lens (_default_lease_ttl_seconds :: MountResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_lease_ttl_seconds = a } :: MountResource s)
+             (\s a -> s { _default_lease_ttl_seconds = a } :: MountResource s)
 
 instance P.HasDescription (MountResource s) s Text where
     description =
         lens (_description :: MountResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: MountResource s)
+             (\s a -> s { _description = a } :: MountResource s)
 
 instance P.HasMaxLeaseTtlSeconds (MountResource s) s Text where
     maxLeaseTtlSeconds =
         lens (_max_lease_ttl_seconds :: MountResource s -> TF.Attribute s Text)
-            (\s a -> s { _max_lease_ttl_seconds = a } :: MountResource s)
+             (\s a -> s { _max_lease_ttl_seconds = a } :: MountResource s)
 
 instance P.HasPath (MountResource s) s Text where
     path =
         lens (_path :: MountResource s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: MountResource s)
+             (\s a -> s { _path = a } :: MountResource s)
 
 instance P.HasType' (MountResource s) s Text where
     type' =
         lens (_type' :: MountResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: MountResource s)
+             (\s a -> s { _type' = a } :: MountResource s)
+
 
 mountResource :: TF.Resource P.Vault (MountResource s)
 mountResource =
@@ -955,12 +957,13 @@ instance TF.ToHCL (PolicyResource s) where
 instance P.HasName (PolicyResource s) s Text where
     name =
         lens (_name :: PolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: PolicyResource s)
+             (\s a -> s { _name = a } :: PolicyResource s)
 
 instance P.HasPolicy (PolicyResource s) s Text where
     policy =
         lens (_policy :: PolicyResource s -> TF.Attribute s Text)
-            (\s a -> s { _policy = a } :: PolicyResource s)
+             (\s a -> s { _policy = a } :: PolicyResource s)
+
 
 policyResource :: TF.Resource P.Vault (PolicyResource s)
 policyResource =

@@ -21,8 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Consul
-    - Terrafomo.Consul.DataSource
-    - Terrafomo.Consul.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

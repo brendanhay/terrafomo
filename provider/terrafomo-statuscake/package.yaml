@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.StatusCake
-    - Terrafomo.StatusCake.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

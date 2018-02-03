@@ -87,22 +87,22 @@ instance TF.ToHCL (PrecreatedIpBlockData s) where
 instance P.HasAddressFamily (PrecreatedIpBlockData s) s Text where
     addressFamily =
         lens (_address_family :: PrecreatedIpBlockData s -> TF.Attribute s Text)
-            (\s a -> s { _address_family = a } :: PrecreatedIpBlockData s)
+             (\s a -> s { _address_family = a } :: PrecreatedIpBlockData s)
 
 instance P.HasFacility (PrecreatedIpBlockData s) s Text where
     facility =
         lens (_facility :: PrecreatedIpBlockData s -> TF.Attribute s Text)
-            (\s a -> s { _facility = a } :: PrecreatedIpBlockData s)
+             (\s a -> s { _facility = a } :: PrecreatedIpBlockData s)
 
 instance P.HasProjectId (PrecreatedIpBlockData s) s Text where
     projectId =
         lens (_project_id :: PrecreatedIpBlockData s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: PrecreatedIpBlockData s)
+             (\s a -> s { _project_id = a } :: PrecreatedIpBlockData s)
 
 instance P.HasPublic (PrecreatedIpBlockData s) s Text where
     public =
         lens (_public :: PrecreatedIpBlockData s -> TF.Attribute s Text)
-            (\s a -> s { _public = a } :: PrecreatedIpBlockData s)
+             (\s a -> s { _public = a } :: PrecreatedIpBlockData s)
 
 instance P.HasComputedCidrNotation (PrecreatedIpBlockData s) Text
 

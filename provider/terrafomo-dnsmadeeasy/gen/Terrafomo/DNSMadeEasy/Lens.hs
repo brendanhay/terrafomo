@@ -24,6 +24,11 @@ module Terrafomo.DNSMadeEasy.Lens
     -- ** Arguments
 
     -- ** Computed Attributes
+    , HasComputedGtdLocation (..)
+    , HasComputedName (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedValue (..)
     ) where
 
 import GHC.Base ((.))
@@ -34,3 +39,33 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Source    as TF
+
+class HasComputedGtdLocation a b | a -> b where
+    computedGtdLocation
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedGtdLocation =
+        to (\x -> TF.Computed (TF.referenceKey x) "gtdLocation")
+
+class HasComputedName a b | a -> b where
+    computedName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedName =
+        to (\x -> TF.Computed (TF.referenceKey x) "name")
+
+class HasComputedTtl a b | a -> b where
+    computedTtl
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedTtl =
+        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
+
+class HasComputedType' a b | a -> b where
+    computedType'
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedType' =
+        to (\x -> TF.Computed (TF.referenceKey x) "type")
+
+class HasComputedValue a b | a -> b where
+    computedValue
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedValue =
+        to (\x -> TF.Computed (TF.referenceKey x) "value")

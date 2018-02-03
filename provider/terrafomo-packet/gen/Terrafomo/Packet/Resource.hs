@@ -178,97 +178,80 @@ instance TF.ToHCL (DeviceResource s) where
 instance P.HasAlwaysPxe (DeviceResource s) s Text where
     alwaysPxe =
         lens (_always_pxe :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _always_pxe = a } :: DeviceResource s)
+             (\s a -> s { _always_pxe = a } :: DeviceResource s)
 
 instance P.HasBillingCycle (DeviceResource s) s Text where
     billingCycle =
         lens (_billing_cycle :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _billing_cycle = a } :: DeviceResource s)
+             (\s a -> s { _billing_cycle = a } :: DeviceResource s)
 
 instance P.HasFacility (DeviceResource s) s Text where
     facility =
         lens (_facility :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _facility = a } :: DeviceResource s)
+             (\s a -> s { _facility = a } :: DeviceResource s)
 
 instance P.HasHardwareReservationId (DeviceResource s) s Text where
     hardwareReservationId =
         lens (_hardware_reservation_id :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _hardware_reservation_id = a } :: DeviceResource s)
+             (\s a -> s { _hardware_reservation_id = a } :: DeviceResource s)
 
 instance P.HasHostname (DeviceResource s) s Text where
     hostname =
         lens (_hostname :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _hostname = a } :: DeviceResource s)
+             (\s a -> s { _hostname = a } :: DeviceResource s)
 
 instance P.HasIpxeScriptUrl (DeviceResource s) s Text where
     ipxeScriptUrl =
         lens (_ipxe_script_url :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _ipxe_script_url = a } :: DeviceResource s)
+             (\s a -> s { _ipxe_script_url = a } :: DeviceResource s)
 
 instance P.HasOperatingSystem (DeviceResource s) s Text where
     operatingSystem =
         lens (_operating_system :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _operating_system = a } :: DeviceResource s)
+             (\s a -> s { _operating_system = a } :: DeviceResource s)
 
 instance P.HasPlan (DeviceResource s) s Text where
     plan =
         lens (_plan :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _plan = a } :: DeviceResource s)
+             (\s a -> s { _plan = a } :: DeviceResource s)
 
 instance P.HasProjectId (DeviceResource s) s Text where
     projectId =
         lens (_project_id :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: DeviceResource s)
+             (\s a -> s { _project_id = a } :: DeviceResource s)
 
 instance P.HasPublicIpv4SubnetSize (DeviceResource s) s Text where
     publicIpv4SubnetSize =
         lens (_public_ipv4_subnet_size :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _public_ipv4_subnet_size = a } :: DeviceResource s)
+             (\s a -> s { _public_ipv4_subnet_size = a } :: DeviceResource s)
 
 instance P.HasStorage (DeviceResource s) s Text where
     storage =
         lens (_storage :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _storage = a } :: DeviceResource s)
+             (\s a -> s { _storage = a } :: DeviceResource s)
 
 instance P.HasUserData (DeviceResource s) s Text where
     userData =
         lens (_user_data :: DeviceResource s -> TF.Attribute s Text)
-            (\s a -> s { _user_data = a } :: DeviceResource s)
+             (\s a -> s { _user_data = a } :: DeviceResource s)
 
 instance P.HasComputedAccessPrivateIpv4 (DeviceResource s) Text
-
 instance P.HasComputedAccessPublicIpv4 (DeviceResource s) Text
-
 instance P.HasComputedAccessPublicIpv6 (DeviceResource s) Text
-
 instance P.HasComputedBillingCycle (DeviceResource s) Text
-
 instance P.HasComputedCreated (DeviceResource s) Text
-
 instance P.HasComputedFacility (DeviceResource s) Text
-
 instance P.HasComputedHardwareReservationId (DeviceResource s) Text
-
 instance P.HasComputedHostname (DeviceResource s) Text
-
 instance P.HasComputedId (DeviceResource s) Text
-
 instance P.HasComputedLocked (DeviceResource s) Text
-
 instance P.HasComputedNetwork (DeviceResource s) Text
-
 instance P.HasComputedOperatingSystem (DeviceResource s) Text
-
 instance P.HasComputedPlan (DeviceResource s) Text
-
 instance P.HasComputedProjectId (DeviceResource s) Text
-
 instance P.HasComputedRootPassword (DeviceResource s) Text
-
 instance P.HasComputedState (DeviceResource s) Text
-
 instance P.HasComputedTags (DeviceResource s) Text
-
 instance P.HasComputedUpdated (DeviceResource s) Text
 
 deviceResource :: TF.Resource P.Packet (DeviceResource s)
@@ -318,29 +301,21 @@ instance TF.ToHCL (IpAttachmentResource s) where
 instance P.HasCidrNotation (IpAttachmentResource s) s Text where
     cidrNotation =
         lens (_cidr_notation :: IpAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _cidr_notation = a } :: IpAttachmentResource s)
+             (\s a -> s { _cidr_notation = a } :: IpAttachmentResource s)
 
 instance P.HasDeviceId (IpAttachmentResource s) s Text where
     deviceId =
         lens (_device_id :: IpAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _device_id = a } :: IpAttachmentResource s)
+             (\s a -> s { _device_id = a } :: IpAttachmentResource s)
 
 instance P.HasComputedAddressFamily (IpAttachmentResource s) Text
-
 instance P.HasComputedCidr (IpAttachmentResource s) Text
-
 instance P.HasComputedCidrNotation (IpAttachmentResource s) Text
-
 instance P.HasComputedDeviceId (IpAttachmentResource s) Text
-
 instance P.HasComputedGateway (IpAttachmentResource s) Text
-
 instance P.HasComputedId (IpAttachmentResource s) Text
-
 instance P.HasComputedNetmask (IpAttachmentResource s) Text
-
 instance P.HasComputedNetwork (IpAttachmentResource s) Text
-
 instance P.HasComputedPublic (IpAttachmentResource s) Text
 
 ipAttachmentResource :: TF.Resource P.Packet (IpAttachmentResource s)
@@ -369,12 +344,10 @@ instance TF.ToHCL (ProjectResource s) where
 instance P.HasName (ProjectResource s) s Text where
     name =
         lens (_name :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ProjectResource s)
+             (\s a -> s { _name = a } :: ProjectResource s)
 
 instance P.HasComputedCreated (ProjectResource s) Text
-
 instance P.HasComputedId (ProjectResource s) Text
-
 instance P.HasComputedUpdated (ProjectResource s) Text
 
 projectResource :: TF.Resource P.Packet (ProjectResource s)
@@ -417,36 +390,27 @@ instance TF.ToHCL (ReservedIpBlockResource s) where
 instance P.HasFacility (ReservedIpBlockResource s) s Text where
     facility =
         lens (_facility :: ReservedIpBlockResource s -> TF.Attribute s Text)
-            (\s a -> s { _facility = a } :: ReservedIpBlockResource s)
+             (\s a -> s { _facility = a } :: ReservedIpBlockResource s)
 
 instance P.HasProjectId (ReservedIpBlockResource s) s Text where
     projectId =
         lens (_project_id :: ReservedIpBlockResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: ReservedIpBlockResource s)
+             (\s a -> s { _project_id = a } :: ReservedIpBlockResource s)
 
 instance P.HasQuantity (ReservedIpBlockResource s) s Text where
     quantity =
         lens (_quantity :: ReservedIpBlockResource s -> TF.Attribute s Text)
-            (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
+             (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
 
 instance P.HasComputedAddressFamily (ReservedIpBlockResource s) Text
-
 instance P.HasComputedCidr (ReservedIpBlockResource s) Text
-
 instance P.HasComputedCidrNotation (ReservedIpBlockResource s) Text
-
 instance P.HasComputedFacility (ReservedIpBlockResource s) Text
-
 instance P.HasComputedId (ReservedIpBlockResource s) Text
-
 instance P.HasComputedNetmask (ReservedIpBlockResource s) Text
-
 instance P.HasComputedNetwork (ReservedIpBlockResource s) Text
-
 instance P.HasComputedProjectId (ReservedIpBlockResource s) Text
-
 instance P.HasComputedPublic (ReservedIpBlockResource s) Text
-
 instance P.HasComputedQuantity (ReservedIpBlockResource s) Text
 
 reservedIpBlockResource :: TF.Resource P.Packet (ReservedIpBlockResource s)
@@ -480,23 +444,18 @@ instance TF.ToHCL (SshKeyResource s) where
 instance P.HasName (SshKeyResource s) s Text where
     name =
         lens (_name :: SshKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SshKeyResource s)
+             (\s a -> s { _name = a } :: SshKeyResource s)
 
 instance P.HasPublicKey (SshKeyResource s) s Text where
     publicKey =
         lens (_public_key :: SshKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _public_key = a } :: SshKeyResource s)
+             (\s a -> s { _public_key = a } :: SshKeyResource s)
 
 instance P.HasComputedCreated (SshKeyResource s) Text
-
 instance P.HasComputedFingerprint (SshKeyResource s) Text
-
 instance P.HasComputedId (SshKeyResource s) Text
-
 instance P.HasComputedName (SshKeyResource s) Text
-
 instance P.HasComputedPublicKey (SshKeyResource s) Text
-
 instance P.HasComputedUpdated (SshKeyResource s) Text
 
 sshKeyResource :: TF.Resource P.Packet (SshKeyResource s)
@@ -530,12 +489,12 @@ instance TF.ToHCL (VolumeAttachmentResource s) where
 instance P.HasDeviceId (VolumeAttachmentResource s) s Text where
     deviceId =
         lens (_device_id :: VolumeAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _device_id = a } :: VolumeAttachmentResource s)
+             (\s a -> s { _device_id = a } :: VolumeAttachmentResource s)
 
 instance P.HasVolumeId (VolumeAttachmentResource s) s Text where
     volumeId =
         lens (_volume_id :: VolumeAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _volume_id = a } :: VolumeAttachmentResource s)
+             (\s a -> s { _volume_id = a } :: VolumeAttachmentResource s)
 
 instance P.HasComputedId (VolumeAttachmentResource s) Text
 
@@ -585,62 +544,50 @@ instance TF.ToHCL (VolumeResource s) where
 instance P.HasBillingCycle (VolumeResource s) s Text where
     billingCycle =
         lens (_billing_cycle :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _billing_cycle = a } :: VolumeResource s)
+             (\s a -> s { _billing_cycle = a } :: VolumeResource s)
 
 instance P.HasDescription (VolumeResource s) s Text where
     description =
         lens (_description :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: VolumeResource s)
+             (\s a -> s { _description = a } :: VolumeResource s)
 
 instance P.HasFacility (VolumeResource s) s Text where
     facility =
         lens (_facility :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _facility = a } :: VolumeResource s)
+             (\s a -> s { _facility = a } :: VolumeResource s)
 
 instance P.HasPlan (VolumeResource s) s Text where
     plan =
         lens (_plan :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _plan = a } :: VolumeResource s)
+             (\s a -> s { _plan = a } :: VolumeResource s)
 
 instance P.HasProjectId (VolumeResource s) s Text where
     projectId =
         lens (_project_id :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_id = a } :: VolumeResource s)
+             (\s a -> s { _project_id = a } :: VolumeResource s)
 
 instance P.HasSize (VolumeResource s) s Text where
     size =
         lens (_size :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _size = a } :: VolumeResource s)
+             (\s a -> s { _size = a } :: VolumeResource s)
 
 instance P.HasSnapshotPolicies (VolumeResource s) s Text where
     snapshotPolicies =
         lens (_snapshot_policies :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _snapshot_policies = a } :: VolumeResource s)
+             (\s a -> s { _snapshot_policies = a } :: VolumeResource s)
 
 instance P.HasComputedAttachments (VolumeResource s) Text
-
 instance P.HasComputedBillingCycle (VolumeResource s) Text
-
 instance P.HasComputedCreated (VolumeResource s) Text
-
 instance P.HasComputedDescription (VolumeResource s) Text
-
 instance P.HasComputedFacility (VolumeResource s) Text
-
 instance P.HasComputedId (VolumeResource s) Text
-
 instance P.HasComputedLocked (VolumeResource s) Text
-
 instance P.HasComputedName (VolumeResource s) Text
-
 instance P.HasComputedPlan (VolumeResource s) Text
-
 instance P.HasComputedProjectId (VolumeResource s) Text
-
 instance P.HasComputedSize (VolumeResource s) Text
-
 instance P.HasComputedState (VolumeResource s) Text
-
 instance P.HasComputedUpdated (VolumeResource s) Text
 
 volumeResource :: TF.Resource P.Packet (VolumeResource s)

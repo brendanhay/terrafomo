@@ -161,32 +161,33 @@ instance TF.ToHCL (BranchProtectionResource s) where
 instance P.HasBranch (BranchProtectionResource s) s Text where
     branch =
         lens (_branch :: BranchProtectionResource s -> TF.Attribute s Text)
-            (\s a -> s { _branch = a } :: BranchProtectionResource s)
+             (\s a -> s { _branch = a } :: BranchProtectionResource s)
 
 instance P.HasEnforceAdmins (BranchProtectionResource s) s Text where
     enforceAdmins =
         lens (_enforce_admins :: BranchProtectionResource s -> TF.Attribute s Text)
-            (\s a -> s { _enforce_admins = a } :: BranchProtectionResource s)
+             (\s a -> s { _enforce_admins = a } :: BranchProtectionResource s)
 
 instance P.HasRepository (BranchProtectionResource s) s Text where
     repository =
         lens (_repository :: BranchProtectionResource s -> TF.Attribute s Text)
-            (\s a -> s { _repository = a } :: BranchProtectionResource s)
+             (\s a -> s { _repository = a } :: BranchProtectionResource s)
 
 instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) s Text where
     requiredPullRequestReviews =
         lens (_required_pull_request_reviews :: BranchProtectionResource s -> TF.Attribute s Text)
-            (\s a -> s { _required_pull_request_reviews = a } :: BranchProtectionResource s)
+             (\s a -> s { _required_pull_request_reviews = a } :: BranchProtectionResource s)
 
 instance P.HasRequiredStatusChecks (BranchProtectionResource s) s Text where
     requiredStatusChecks =
         lens (_required_status_checks :: BranchProtectionResource s -> TF.Attribute s Text)
-            (\s a -> s { _required_status_checks = a } :: BranchProtectionResource s)
+             (\s a -> s { _required_status_checks = a } :: BranchProtectionResource s)
 
 instance P.HasRestrictions (BranchProtectionResource s) s Text where
     restrictions =
         lens (_restrictions :: BranchProtectionResource s -> TF.Attribute s Text)
-            (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
+             (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
+
 
 branchProtectionResource :: TF.Resource P.GitHub (BranchProtectionResource s)
 branchProtectionResource =
@@ -233,22 +234,23 @@ instance TF.ToHCL (IssueLabelResource s) where
 instance P.HasColor (IssueLabelResource s) s Text where
     color =
         lens (_color :: IssueLabelResource s -> TF.Attribute s Text)
-            (\s a -> s { _color = a } :: IssueLabelResource s)
+             (\s a -> s { _color = a } :: IssueLabelResource s)
 
 instance P.HasName (IssueLabelResource s) s Text where
     name =
         lens (_name :: IssueLabelResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: IssueLabelResource s)
+             (\s a -> s { _name = a } :: IssueLabelResource s)
 
 instance P.HasRepository (IssueLabelResource s) s Text where
     repository =
         lens (_repository :: IssueLabelResource s -> TF.Attribute s Text)
-            (\s a -> s { _repository = a } :: IssueLabelResource s)
+             (\s a -> s { _repository = a } :: IssueLabelResource s)
 
 instance P.HasUrl (IssueLabelResource s) s Text where
     url =
         lens (_url :: IssueLabelResource s -> TF.Attribute s Text)
-            (\s a -> s { _url = a } :: IssueLabelResource s)
+             (\s a -> s { _url = a } :: IssueLabelResource s)
+
 
 issueLabelResource :: TF.Resource P.GitHub (IssueLabelResource s)
 issueLabelResource =
@@ -283,12 +285,13 @@ instance TF.ToHCL (MembershipResource s) where
 instance P.HasRole (MembershipResource s) s Text where
     role =
         lens (_role :: MembershipResource s -> TF.Attribute s Text)
-            (\s a -> s { _role = a } :: MembershipResource s)
+             (\s a -> s { _role = a } :: MembershipResource s)
 
 instance P.HasUsername (MembershipResource s) s Text where
     username =
         lens (_username :: MembershipResource s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: MembershipResource s)
+             (\s a -> s { _username = a } :: MembershipResource s)
+
 
 membershipResource :: TF.Resource P.GitHub (MembershipResource s)
 membershipResource =
@@ -325,22 +328,22 @@ instance TF.ToHCL (OrganizationWebhookResource s) where
 instance P.HasActive (OrganizationWebhookResource s) s Text where
     active =
         lens (_active :: OrganizationWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _active = a } :: OrganizationWebhookResource s)
+             (\s a -> s { _active = a } :: OrganizationWebhookResource s)
 
 instance P.HasConfiguration (OrganizationWebhookResource s) s Text where
     configuration =
         lens (_configuration :: OrganizationWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _configuration = a } :: OrganizationWebhookResource s)
+             (\s a -> s { _configuration = a } :: OrganizationWebhookResource s)
 
 instance P.HasEvents (OrganizationWebhookResource s) s Text where
     events =
         lens (_events :: OrganizationWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _events = a } :: OrganizationWebhookResource s)
+             (\s a -> s { _events = a } :: OrganizationWebhookResource s)
 
 instance P.HasName (OrganizationWebhookResource s) s Text where
     name =
         lens (_name :: OrganizationWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: OrganizationWebhookResource s)
+             (\s a -> s { _name = a } :: OrganizationWebhookResource s)
 
 instance P.HasComputedUrl (OrganizationWebhookResource s) Text
 
@@ -385,17 +388,18 @@ instance TF.ToHCL (RepositoryCollaboratorResource s) where
 instance P.HasPermission (RepositoryCollaboratorResource s) s Text where
     permission =
         lens (_permission :: RepositoryCollaboratorResource s -> TF.Attribute s Text)
-            (\s a -> s { _permission = a } :: RepositoryCollaboratorResource s)
+             (\s a -> s { _permission = a } :: RepositoryCollaboratorResource s)
 
 instance P.HasRepository (RepositoryCollaboratorResource s) s Text where
     repository =
         lens (_repository :: RepositoryCollaboratorResource s -> TF.Attribute s Text)
-            (\s a -> s { _repository = a } :: RepositoryCollaboratorResource s)
+             (\s a -> s { _repository = a } :: RepositoryCollaboratorResource s)
 
 instance P.HasUsername (RepositoryCollaboratorResource s) s Text where
     username =
         lens (_username :: RepositoryCollaboratorResource s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
+             (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
+
 
 repositoryCollaboratorResource :: TF.Resource P.GitHub (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource =
@@ -436,22 +440,23 @@ instance TF.ToHCL (RepositoryDeployKeyResource s) where
 instance P.HasKey (RepositoryDeployKeyResource s) s Text where
     key =
         lens (_key :: RepositoryDeployKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _key = a } :: RepositoryDeployKeyResource s)
+             (\s a -> s { _key = a } :: RepositoryDeployKeyResource s)
 
 instance P.HasReadOnly (RepositoryDeployKeyResource s) s Text where
     readOnly =
         lens (_read_only :: RepositoryDeployKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _read_only = a } :: RepositoryDeployKeyResource s)
+             (\s a -> s { _read_only = a } :: RepositoryDeployKeyResource s)
 
 instance P.HasRepository (RepositoryDeployKeyResource s) s Text where
     repository =
         lens (_repository :: RepositoryDeployKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _repository = a } :: RepositoryDeployKeyResource s)
+             (\s a -> s { _repository = a } :: RepositoryDeployKeyResource s)
 
 instance P.HasTitle (RepositoryDeployKeyResource s) s Text where
     title =
         lens (_title :: RepositoryDeployKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
+             (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
+
 
 repositoryDeployKeyResource :: TF.Resource P.GitHub (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource =
@@ -521,81 +526,77 @@ instance TF.ToHCL (RepositoryResource s) where
 instance P.HasAllowMergeCommit (RepositoryResource s) s Text where
     allowMergeCommit =
         lens (_allow_merge_commit :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _allow_merge_commit = a } :: RepositoryResource s)
+             (\s a -> s { _allow_merge_commit = a } :: RepositoryResource s)
 
 instance P.HasAllowRebaseMerge (RepositoryResource s) s Text where
     allowRebaseMerge =
         lens (_allow_rebase_merge :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _allow_rebase_merge = a } :: RepositoryResource s)
+             (\s a -> s { _allow_rebase_merge = a } :: RepositoryResource s)
 
 instance P.HasAllowSquashMerge (RepositoryResource s) s Text where
     allowSquashMerge =
         lens (_allow_squash_merge :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _allow_squash_merge = a } :: RepositoryResource s)
+             (\s a -> s { _allow_squash_merge = a } :: RepositoryResource s)
 
 instance P.HasAutoInit (RepositoryResource s) s Text where
     autoInit =
         lens (_auto_init :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _auto_init = a } :: RepositoryResource s)
+             (\s a -> s { _auto_init = a } :: RepositoryResource s)
 
 instance P.HasDefaultBranch (RepositoryResource s) s Text where
     defaultBranch =
         lens (_default_branch :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_branch = a } :: RepositoryResource s)
+             (\s a -> s { _default_branch = a } :: RepositoryResource s)
 
 instance P.HasDescription (RepositoryResource s) s Text where
     description =
         lens (_description :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: RepositoryResource s)
+             (\s a -> s { _description = a } :: RepositoryResource s)
 
 instance P.HasGitignoreTemplate (RepositoryResource s) s Text where
     gitignoreTemplate =
         lens (_gitignore_template :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _gitignore_template = a } :: RepositoryResource s)
+             (\s a -> s { _gitignore_template = a } :: RepositoryResource s)
 
 instance P.HasHasDownloads (RepositoryResource s) s Text where
     hasDownloads =
         lens (_has_downloads :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _has_downloads = a } :: RepositoryResource s)
+             (\s a -> s { _has_downloads = a } :: RepositoryResource s)
 
 instance P.HasHasIssues (RepositoryResource s) s Text where
     hasIssues =
         lens (_has_issues :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _has_issues = a } :: RepositoryResource s)
+             (\s a -> s { _has_issues = a } :: RepositoryResource s)
 
 instance P.HasHasWiki (RepositoryResource s) s Text where
     hasWiki =
         lens (_has_wiki :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _has_wiki = a } :: RepositoryResource s)
+             (\s a -> s { _has_wiki = a } :: RepositoryResource s)
 
 instance P.HasHomepageUrl (RepositoryResource s) s Text where
     homepageUrl =
         lens (_homepage_url :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _homepage_url = a } :: RepositoryResource s)
+             (\s a -> s { _homepage_url = a } :: RepositoryResource s)
 
 instance P.HasLicenseTemplate (RepositoryResource s) s Text where
     licenseTemplate =
         lens (_license_template :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _license_template = a } :: RepositoryResource s)
+             (\s a -> s { _license_template = a } :: RepositoryResource s)
 
 instance P.HasName (RepositoryResource s) s Text where
     name =
         lens (_name :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RepositoryResource s)
+             (\s a -> s { _name = a } :: RepositoryResource s)
 
 instance P.HasPrivate (RepositoryResource s) s Text where
     private =
         lens (_private :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _private = a } :: RepositoryResource s)
+             (\s a -> s { _private = a } :: RepositoryResource s)
 
 instance P.HasComputedFullName (RepositoryResource s) Text
-
 instance P.HasComputedGitCloneUrl (RepositoryResource s) Text
-
 instance P.HasComputedHttpCloneUrl (RepositoryResource s) Text
-
 instance P.HasComputedSshCloneUrl (RepositoryResource s) Text
-
 instance P.HasComputedSvnUrl (RepositoryResource s) Text
 
 repositoryResource :: TF.Resource P.GitHub (RepositoryResource s)
@@ -649,27 +650,27 @@ instance TF.ToHCL (RepositoryWebhookResource s) where
 instance P.HasActive (RepositoryWebhookResource s) s Text where
     active =
         lens (_active :: RepositoryWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _active = a } :: RepositoryWebhookResource s)
+             (\s a -> s { _active = a } :: RepositoryWebhookResource s)
 
 instance P.HasConfiguration (RepositoryWebhookResource s) s Text where
     configuration =
         lens (_configuration :: RepositoryWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _configuration = a } :: RepositoryWebhookResource s)
+             (\s a -> s { _configuration = a } :: RepositoryWebhookResource s)
 
 instance P.HasEvents (RepositoryWebhookResource s) s Text where
     events =
         lens (_events :: RepositoryWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _events = a } :: RepositoryWebhookResource s)
+             (\s a -> s { _events = a } :: RepositoryWebhookResource s)
 
 instance P.HasName (RepositoryWebhookResource s) s Text where
     name =
         lens (_name :: RepositoryWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RepositoryWebhookResource s)
+             (\s a -> s { _name = a } :: RepositoryWebhookResource s)
 
 instance P.HasRepository (RepositoryWebhookResource s) s Text where
     repository =
         lens (_repository :: RepositoryWebhookResource s -> TF.Attribute s Text)
-            (\s a -> s { _repository = a } :: RepositoryWebhookResource s)
+             (\s a -> s { _repository = a } :: RepositoryWebhookResource s)
 
 instance P.HasComputedUrl (RepositoryWebhookResource s) Text
 
@@ -711,17 +712,18 @@ instance TF.ToHCL (TeamMembershipResource s) where
 instance P.HasRole (TeamMembershipResource s) s Text where
     role =
         lens (_role :: TeamMembershipResource s -> TF.Attribute s Text)
-            (\s a -> s { _role = a } :: TeamMembershipResource s)
+             (\s a -> s { _role = a } :: TeamMembershipResource s)
 
 instance P.HasTeamId (TeamMembershipResource s) s Text where
     teamId =
         lens (_team_id :: TeamMembershipResource s -> TF.Attribute s Text)
-            (\s a -> s { _team_id = a } :: TeamMembershipResource s)
+             (\s a -> s { _team_id = a } :: TeamMembershipResource s)
 
 instance P.HasUsername (TeamMembershipResource s) s Text where
     username =
         lens (_username :: TeamMembershipResource s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: TeamMembershipResource s)
+             (\s a -> s { _username = a } :: TeamMembershipResource s)
+
 
 teamMembershipResource :: TF.Resource P.GitHub (TeamMembershipResource s)
 teamMembershipResource =
@@ -759,17 +761,18 @@ instance TF.ToHCL (TeamRepositoryResource s) where
 instance P.HasPermission (TeamRepositoryResource s) s Text where
     permission =
         lens (_permission :: TeamRepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _permission = a } :: TeamRepositoryResource s)
+             (\s a -> s { _permission = a } :: TeamRepositoryResource s)
 
 instance P.HasRepository (TeamRepositoryResource s) s Text where
     repository =
         lens (_repository :: TeamRepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _repository = a } :: TeamRepositoryResource s)
+             (\s a -> s { _repository = a } :: TeamRepositoryResource s)
 
 instance P.HasTeamId (TeamRepositoryResource s) s Text where
     teamId =
         lens (_team_id :: TeamRepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _team_id = a } :: TeamRepositoryResource s)
+             (\s a -> s { _team_id = a } :: TeamRepositoryResource s)
+
 
 teamRepositoryResource :: TF.Resource P.GitHub (TeamRepositoryResource s)
 teamRepositoryResource =
@@ -808,22 +811,22 @@ instance TF.ToHCL (TeamResource s) where
 instance P.HasDescription (TeamResource s) s Text where
     description =
         lens (_description :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: TeamResource s)
+             (\s a -> s { _description = a } :: TeamResource s)
 
 instance P.HasLdapDn (TeamResource s) s Text where
     ldapDn =
         lens (_ldap_dn :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _ldap_dn = a } :: TeamResource s)
+             (\s a -> s { _ldap_dn = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) s Text where
     name =
         lens (_name :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: TeamResource s)
+             (\s a -> s { _name = a } :: TeamResource s)
 
 instance P.HasPrivacy (TeamResource s) s Text where
     privacy =
         lens (_privacy :: TeamResource s -> TF.Attribute s Text)
-            (\s a -> s { _privacy = a } :: TeamResource s)
+             (\s a -> s { _privacy = a } :: TeamResource s)
 
 instance P.HasComputedId (TeamResource s) Text
 

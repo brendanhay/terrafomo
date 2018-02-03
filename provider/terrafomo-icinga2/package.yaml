@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Icinga2
-    - Terrafomo.Icinga2.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

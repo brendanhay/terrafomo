@@ -136,22 +136,23 @@ instance TF.ToHCL (DeployKeyResource s) where
 instance P.HasCanPush (DeployKeyResource s) s Text where
     canPush =
         lens (_can_push :: DeployKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _can_push = a } :: DeployKeyResource s)
+             (\s a -> s { _can_push = a } :: DeployKeyResource s)
 
 instance P.HasKey (DeployKeyResource s) s Text where
     key =
         lens (_key :: DeployKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _key = a } :: DeployKeyResource s)
+             (\s a -> s { _key = a } :: DeployKeyResource s)
 
 instance P.HasProject (DeployKeyResource s) s Text where
     project =
         lens (_project :: DeployKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: DeployKeyResource s)
+             (\s a -> s { _project = a } :: DeployKeyResource s)
 
 instance P.HasTitle (DeployKeyResource s) s Text where
     title =
         lens (_title :: DeployKeyResource s -> TF.Attribute s Text)
-            (\s a -> s { _title = a } :: DeployKeyResource s)
+             (\s a -> s { _title = a } :: DeployKeyResource s)
+
 
 deployKeyResource :: TF.Resource P.Gitlab (DeployKeyResource s)
 deployKeyResource =
@@ -200,37 +201,37 @@ instance TF.ToHCL (GroupResource s) where
 instance P.HasDescription (GroupResource s) s Text where
     description =
         lens (_description :: GroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: GroupResource s)
+             (\s a -> s { _description = a } :: GroupResource s)
 
 instance P.HasLfsEnabled (GroupResource s) s Text where
     lfsEnabled =
         lens (_lfs_enabled :: GroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _lfs_enabled = a } :: GroupResource s)
+             (\s a -> s { _lfs_enabled = a } :: GroupResource s)
 
 instance P.HasName (GroupResource s) s Text where
     name =
         lens (_name :: GroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: GroupResource s)
+             (\s a -> s { _name = a } :: GroupResource s)
 
 instance P.HasParentId (GroupResource s) s Text where
     parentId =
         lens (_parent_id :: GroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _parent_id = a } :: GroupResource s)
+             (\s a -> s { _parent_id = a } :: GroupResource s)
 
 instance P.HasPath (GroupResource s) s Text where
     path =
         lens (_path :: GroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: GroupResource s)
+             (\s a -> s { _path = a } :: GroupResource s)
 
 instance P.HasRequestAccessEnabled (GroupResource s) s Text where
     requestAccessEnabled =
         lens (_request_access_enabled :: GroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _request_access_enabled = a } :: GroupResource s)
+             (\s a -> s { _request_access_enabled = a } :: GroupResource s)
 
 instance P.HasVisibilityLevel (GroupResource s) s Text where
     visibilityLevel =
         lens (_visibility_level :: GroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _visibility_level = a } :: GroupResource s)
+             (\s a -> s { _visibility_level = a } :: GroupResource s)
 
 instance P.HasComputedId (GroupResource s) Text
 
@@ -275,22 +276,22 @@ instance TF.ToHCL (LabelResource s) where
 instance P.HasColor (LabelResource s) s Text where
     color =
         lens (_color :: LabelResource s -> TF.Attribute s Text)
-            (\s a -> s { _color = a } :: LabelResource s)
+             (\s a -> s { _color = a } :: LabelResource s)
 
 instance P.HasDescription (LabelResource s) s Text where
     description =
         lens (_description :: LabelResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: LabelResource s)
+             (\s a -> s { _description = a } :: LabelResource s)
 
 instance P.HasName (LabelResource s) s Text where
     name =
         lens (_name :: LabelResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: LabelResource s)
+             (\s a -> s { _name = a } :: LabelResource s)
 
 instance P.HasProject (LabelResource s) s Text where
     project =
         lens (_project :: LabelResource s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: LabelResource s)
+             (\s a -> s { _project = a } :: LabelResource s)
 
 instance P.HasComputedId (LabelResource s) Text
 
@@ -356,62 +357,62 @@ instance TF.ToHCL (ProjectHookResource s) where
 instance P.HasEnableSslVerification (ProjectHookResource s) s Text where
     enableSslVerification =
         lens (_enable_ssl_verification :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _enable_ssl_verification = a } :: ProjectHookResource s)
+             (\s a -> s { _enable_ssl_verification = a } :: ProjectHookResource s)
 
 instance P.HasIssuesEvents (ProjectHookResource s) s Text where
     issuesEvents =
         lens (_issues_events :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _issues_events = a } :: ProjectHookResource s)
+             (\s a -> s { _issues_events = a } :: ProjectHookResource s)
 
 instance P.HasJobEvents (ProjectHookResource s) s Text where
     jobEvents =
         lens (_job_events :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _job_events = a } :: ProjectHookResource s)
+             (\s a -> s { _job_events = a } :: ProjectHookResource s)
 
 instance P.HasMergeRequestsEvents (ProjectHookResource s) s Text where
     mergeRequestsEvents =
         lens (_merge_requests_events :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _merge_requests_events = a } :: ProjectHookResource s)
+             (\s a -> s { _merge_requests_events = a } :: ProjectHookResource s)
 
 instance P.HasNoteEvents (ProjectHookResource s) s Text where
     noteEvents =
         lens (_note_events :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _note_events = a } :: ProjectHookResource s)
+             (\s a -> s { _note_events = a } :: ProjectHookResource s)
 
 instance P.HasPipelineEvents (ProjectHookResource s) s Text where
     pipelineEvents =
         lens (_pipeline_events :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _pipeline_events = a } :: ProjectHookResource s)
+             (\s a -> s { _pipeline_events = a } :: ProjectHookResource s)
 
 instance P.HasProject (ProjectHookResource s) s Text where
     project =
         lens (_project :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _project = a } :: ProjectHookResource s)
+             (\s a -> s { _project = a } :: ProjectHookResource s)
 
 instance P.HasPushEvents (ProjectHookResource s) s Text where
     pushEvents =
         lens (_push_events :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _push_events = a } :: ProjectHookResource s)
+             (\s a -> s { _push_events = a } :: ProjectHookResource s)
 
 instance P.HasTagPushEvents (ProjectHookResource s) s Text where
     tagPushEvents =
         lens (_tag_push_events :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _tag_push_events = a } :: ProjectHookResource s)
+             (\s a -> s { _tag_push_events = a } :: ProjectHookResource s)
 
 instance P.HasToken (ProjectHookResource s) s Text where
     token =
         lens (_token :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _token = a } :: ProjectHookResource s)
+             (\s a -> s { _token = a } :: ProjectHookResource s)
 
 instance P.HasUrl (ProjectHookResource s) s Text where
     url =
         lens (_url :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _url = a } :: ProjectHookResource s)
+             (\s a -> s { _url = a } :: ProjectHookResource s)
 
 instance P.HasWikiPageEvents (ProjectHookResource s) s Text where
     wikiPageEvents =
         lens (_wiki_page_events :: ProjectHookResource s -> TF.Attribute s Text)
-            (\s a -> s { _wiki_page_events = a } :: ProjectHookResource s)
+             (\s a -> s { _wiki_page_events = a } :: ProjectHookResource s)
 
 instance P.HasComputedId (ProjectHookResource s) Text
 
@@ -478,59 +479,56 @@ instance TF.ToHCL (ProjectResource s) where
 instance P.HasDefaultBranch (ProjectResource s) s Text where
     defaultBranch =
         lens (_default_branch :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _default_branch = a } :: ProjectResource s)
+             (\s a -> s { _default_branch = a } :: ProjectResource s)
 
 instance P.HasDescription (ProjectResource s) s Text where
     description =
         lens (_description :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: ProjectResource s)
+             (\s a -> s { _description = a } :: ProjectResource s)
 
 instance P.HasIssuesEnabled (ProjectResource s) s Text where
     issuesEnabled =
         lens (_issues_enabled :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _issues_enabled = a } :: ProjectResource s)
+             (\s a -> s { _issues_enabled = a } :: ProjectResource s)
 
 instance P.HasMergeRequestsEnabled (ProjectResource s) s Text where
     mergeRequestsEnabled =
         lens (_merge_requests_enabled :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _merge_requests_enabled = a } :: ProjectResource s)
+             (\s a -> s { _merge_requests_enabled = a } :: ProjectResource s)
 
 instance P.HasName (ProjectResource s) s Text where
     name =
         lens (_name :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ProjectResource s)
+             (\s a -> s { _name = a } :: ProjectResource s)
 
 instance P.HasNamespaceId (ProjectResource s) s Text where
     namespaceId =
         lens (_namespace_id :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _namespace_id = a } :: ProjectResource s)
+             (\s a -> s { _namespace_id = a } :: ProjectResource s)
 
 instance P.HasPath (ProjectResource s) s Text where
     path =
         lens (_path :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: ProjectResource s)
+             (\s a -> s { _path = a } :: ProjectResource s)
 
 instance P.HasSnippetsEnabled (ProjectResource s) s Text where
     snippetsEnabled =
         lens (_snippets_enabled :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _snippets_enabled = a } :: ProjectResource s)
+             (\s a -> s { _snippets_enabled = a } :: ProjectResource s)
 
 instance P.HasVisibilityLevel (ProjectResource s) s Text where
     visibilityLevel =
         lens (_visibility_level :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _visibility_level = a } :: ProjectResource s)
+             (\s a -> s { _visibility_level = a } :: ProjectResource s)
 
 instance P.HasWikiEnabled (ProjectResource s) s Text where
     wikiEnabled =
         lens (_wiki_enabled :: ProjectResource s -> TF.Attribute s Text)
-            (\s a -> s { _wiki_enabled = a } :: ProjectResource s)
+             (\s a -> s { _wiki_enabled = a } :: ProjectResource s)
 
 instance P.HasComputedHttpUrlToRepo (ProjectResource s) Text
-
 instance P.HasComputedId (ProjectResource s) Text
-
 instance P.HasComputedSshUrlToRepo (ProjectResource s) Text
-
 instance P.HasComputedWebUrl (ProjectResource s) Text
 
 projectResource :: TF.Resource P.Gitlab (ProjectResource s)
@@ -589,42 +587,42 @@ instance TF.ToHCL (UserResource s) where
 instance P.HasCanCreateGroup (UserResource s) s Text where
     canCreateGroup =
         lens (_can_create_group :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _can_create_group = a } :: UserResource s)
+             (\s a -> s { _can_create_group = a } :: UserResource s)
 
 instance P.HasEmail (UserResource s) s Text where
     email =
         lens (_email :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _email = a } :: UserResource s)
+             (\s a -> s { _email = a } :: UserResource s)
 
 instance P.HasIsAdmin (UserResource s) s Text where
     isAdmin =
         lens (_is_admin :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _is_admin = a } :: UserResource s)
+             (\s a -> s { _is_admin = a } :: UserResource s)
 
 instance P.HasName (UserResource s) s Text where
     name =
         lens (_name :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: UserResource s)
+             (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasPassword (UserResource s) s Text where
     password =
         lens (_password :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _password = a } :: UserResource s)
+             (\s a -> s { _password = a } :: UserResource s)
 
 instance P.HasProjectsLimit (UserResource s) s Text where
     projectsLimit =
         lens (_projects_limit :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _projects_limit = a } :: UserResource s)
+             (\s a -> s { _projects_limit = a } :: UserResource s)
 
 instance P.HasSkipConfirmation (UserResource s) s Text where
     skipConfirmation =
         lens (_skip_confirmation :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _skip_confirmation = a } :: UserResource s)
+             (\s a -> s { _skip_confirmation = a } :: UserResource s)
 
 instance P.HasUsername (UserResource s) s Text where
     username =
         lens (_username :: UserResource s -> TF.Attribute s Text)
-            (\s a -> s { _username = a } :: UserResource s)
+             (\s a -> s { _username = a } :: UserResource s)
 
 instance P.HasComputedId (UserResource s) Text
 

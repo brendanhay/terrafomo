@@ -21,8 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Google
-    - Terrafomo.Google.DataSource
-    - Terrafomo.Google.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

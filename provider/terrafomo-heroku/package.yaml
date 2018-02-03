@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.Heroku
-    - Terrafomo.Heroku.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

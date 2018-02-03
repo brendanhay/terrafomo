@@ -99,17 +99,18 @@ instance TF.ToHCL (DefaultReviewersResource s) where
 instance P.HasOwner (DefaultReviewersResource s) s Text where
     owner =
         lens (_owner :: DefaultReviewersResource s -> TF.Attribute s Text)
-            (\s a -> s { _owner = a } :: DefaultReviewersResource s)
+             (\s a -> s { _owner = a } :: DefaultReviewersResource s)
 
 instance P.HasRepository (DefaultReviewersResource s) s Text where
     repository =
         lens (_repository :: DefaultReviewersResource s -> TF.Attribute s Text)
-            (\s a -> s { _repository = a } :: DefaultReviewersResource s)
+             (\s a -> s { _repository = a } :: DefaultReviewersResource s)
 
 instance P.HasReviewers (DefaultReviewersResource s) s Text where
     reviewers =
         lens (_reviewers :: DefaultReviewersResource s -> TF.Attribute s Text)
-            (\s a -> s { _reviewers = a } :: DefaultReviewersResource s)
+             (\s a -> s { _reviewers = a } :: DefaultReviewersResource s)
+
 
 defaultReviewersResource :: TF.Resource P.Bitbucket (DefaultReviewersResource s)
 defaultReviewersResource =
@@ -150,27 +151,28 @@ instance TF.ToHCL (HookResource s) where
 instance P.HasDescription (HookResource s) s Text where
     description =
         lens (_description :: HookResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: HookResource s)
+             (\s a -> s { _description = a } :: HookResource s)
 
 instance P.HasEvents (HookResource s) s Text where
     events =
         lens (_events :: HookResource s -> TF.Attribute s Text)
-            (\s a -> s { _events = a } :: HookResource s)
+             (\s a -> s { _events = a } :: HookResource s)
 
 instance P.HasOwner (HookResource s) s Text where
     owner =
         lens (_owner :: HookResource s -> TF.Attribute s Text)
-            (\s a -> s { _owner = a } :: HookResource s)
+             (\s a -> s { _owner = a } :: HookResource s)
 
 instance P.HasRepository (HookResource s) s Text where
     repository =
         lens (_repository :: HookResource s -> TF.Attribute s Text)
-            (\s a -> s { _repository = a } :: HookResource s)
+             (\s a -> s { _repository = a } :: HookResource s)
 
 instance P.HasUrl (HookResource s) s Text where
     url =
         lens (_url :: HookResource s -> TF.Attribute s Text)
-            (\s a -> s { _url = a } :: HookResource s)
+             (\s a -> s { _url = a } :: HookResource s)
+
 
 hookResource :: TF.Resource P.Bitbucket (HookResource s)
 hookResource =
@@ -235,62 +237,63 @@ instance TF.ToHCL (RepositoryResource s) where
 instance P.HasDescription (RepositoryResource s) s Text where
     description =
         lens (_description :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: RepositoryResource s)
+             (\s a -> s { _description = a } :: RepositoryResource s)
 
 instance P.HasForkPolicy (RepositoryResource s) s Text where
     forkPolicy =
         lens (_fork_policy :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _fork_policy = a } :: RepositoryResource s)
+             (\s a -> s { _fork_policy = a } :: RepositoryResource s)
 
 instance P.HasHasIssues (RepositoryResource s) s Text where
     hasIssues =
         lens (_has_issues :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _has_issues = a } :: RepositoryResource s)
+             (\s a -> s { _has_issues = a } :: RepositoryResource s)
 
 instance P.HasHasWiki (RepositoryResource s) s Text where
     hasWiki =
         lens (_has_wiki :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _has_wiki = a } :: RepositoryResource s)
+             (\s a -> s { _has_wiki = a } :: RepositoryResource s)
 
 instance P.HasIsPrivate (RepositoryResource s) s Text where
     isPrivate =
         lens (_is_private :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _is_private = a } :: RepositoryResource s)
+             (\s a -> s { _is_private = a } :: RepositoryResource s)
 
 instance P.HasLanguage (RepositoryResource s) s Text where
     language =
         lens (_language :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _language = a } :: RepositoryResource s)
+             (\s a -> s { _language = a } :: RepositoryResource s)
 
 instance P.HasName (RepositoryResource s) s Text where
     name =
         lens (_name :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RepositoryResource s)
+             (\s a -> s { _name = a } :: RepositoryResource s)
 
 instance P.HasOwner (RepositoryResource s) s Text where
     owner =
         lens (_owner :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _owner = a } :: RepositoryResource s)
+             (\s a -> s { _owner = a } :: RepositoryResource s)
 
 instance P.HasProjectKey (RepositoryResource s) s Text where
     projectKey =
         lens (_project_key :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _project_key = a } :: RepositoryResource s)
+             (\s a -> s { _project_key = a } :: RepositoryResource s)
 
 instance P.HasScm (RepositoryResource s) s Text where
     scm =
         lens (_scm :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _scm = a } :: RepositoryResource s)
+             (\s a -> s { _scm = a } :: RepositoryResource s)
 
 instance P.HasSlug (RepositoryResource s) s Text where
     slug =
         lens (_slug :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _slug = a } :: RepositoryResource s)
+             (\s a -> s { _slug = a } :: RepositoryResource s)
 
 instance P.HasWebsite (RepositoryResource s) s Text where
     website =
         lens (_website :: RepositoryResource s -> TF.Attribute s Text)
-            (\s a -> s { _website = a } :: RepositoryResource s)
+             (\s a -> s { _website = a } :: RepositoryResource s)
+
 
 repositoryResource :: TF.Resource P.Bitbucket (RepositoryResource s)
 repositoryResource =

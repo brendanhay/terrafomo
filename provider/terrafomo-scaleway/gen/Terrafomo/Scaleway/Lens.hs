@@ -55,7 +55,9 @@ module Terrafomo.Scaleway.Lens
     , HasComputedIp (..)
     , HasComputedKernel (..)
     , HasComputedOrganization (..)
+    , HasComputedPrivateIp (..)
     , HasComputedPublic (..)
+    , HasComputedPublicIp (..)
     ) where
 
 import GHC.Base ((.))
@@ -253,8 +255,20 @@ class HasComputedOrganization a b | a -> b where
     computedOrganization =
         to (\x -> TF.Computed (TF.referenceKey x) "organization")
 
+class HasComputedPrivateIp a b | a -> b where
+    computedPrivateIp
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPrivateIp =
+        to (\x -> TF.Computed (TF.referenceKey x) "private_ip")
+
 class HasComputedPublic a b | a -> b where
     computedPublic
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPublic =
         to (\x -> TF.Computed (TF.referenceKey x) "public")
+
+class HasComputedPublicIp a b | a -> b where
+    computedPublicIp
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPublicIp =
+        to (\x -> TF.Computed (TF.referenceKey x) "public_ip")

@@ -69,9 +69,7 @@ instance TF.ToHCL (IpRangesData s) where
     toHCL _ = TF.block []
 
 instance P.HasComputedCidrBlocks (IpRangesData s) Text
-
 instance P.HasComputedIpv4CidrBlocks (IpRangesData s) Text
-
 instance P.HasComputedIpv6CidrBlocks (IpRangesData s) Text
 
 ipRangesData :: TF.DataSource P.Cloudflare (IpRangesData s)

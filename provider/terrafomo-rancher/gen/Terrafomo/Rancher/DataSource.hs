@@ -97,31 +97,22 @@ instance TF.ToHCL (CertificateData s) where
 instance P.HasEnvironmentId (CertificateData s) s Text where
     environmentId =
         lens (_environment_id :: CertificateData s -> TF.Attribute s Text)
-            (\s a -> s { _environment_id = a } :: CertificateData s)
+             (\s a -> s { _environment_id = a } :: CertificateData s)
 
 instance P.HasName (CertificateData s) s Text where
     name =
         lens (_name :: CertificateData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: CertificateData s)
+             (\s a -> s { _name = a } :: CertificateData s)
 
 instance P.HasComputedAlgorithm (CertificateData s) Text
-
 instance P.HasComputedCertFingerprint (CertificateData s) Text
-
 instance P.HasComputedCn (CertificateData s) Text
-
 instance P.HasComputedExpiresAt (CertificateData s) Text
-
 instance P.HasComputedId (CertificateData s) Text
-
 instance P.HasComputedIssuedAt (CertificateData s) Text
-
 instance P.HasComputedIssuer (CertificateData s) Text
-
 instance P.HasComputedSerialNumber (CertificateData s) Text
-
 instance P.HasComputedSubjectAlternativeNames (CertificateData s) Text
-
 instance P.HasComputedVersion (CertificateData s) Text
 
 certificateData :: TF.DataSource P.Rancher (CertificateData s)
@@ -149,16 +140,12 @@ instance TF.ToHCL (EnvironmentData s) where
 instance P.HasName (EnvironmentData s) s Text where
     name =
         lens (_name :: EnvironmentData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: EnvironmentData s)
+             (\s a -> s { _name = a } :: EnvironmentData s)
 
 instance P.HasComputedDescription (EnvironmentData s) Text
-
 instance P.HasComputedId (EnvironmentData s) Text
-
 instance P.HasComputedMember (EnvironmentData s) Text
-
 instance P.HasComputedOrchestration (EnvironmentData s) Text
-
 instance P.HasComputedProjectTemplateId (EnvironmentData s) Text
 
 environmentData :: TF.DataSource P.Rancher (EnvironmentData s)
@@ -185,7 +172,7 @@ instance TF.ToHCL (SettingData s) where
 instance P.HasName (SettingData s) s Text where
     name =
         lens (_name :: SettingData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SettingData s)
+             (\s a -> s { _name = a } :: SettingData s)
 
 instance P.HasComputedValue (SettingData s) Text
 

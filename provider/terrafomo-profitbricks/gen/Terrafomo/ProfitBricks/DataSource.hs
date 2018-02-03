@@ -101,12 +101,12 @@ instance TF.ToHCL (DatacenterData s) where
 instance P.HasLocation (DatacenterData s) s Text where
     location =
         lens (_location :: DatacenterData s -> TF.Attribute s Text)
-            (\s a -> s { _location = a } :: DatacenterData s)
+             (\s a -> s { _location = a } :: DatacenterData s)
 
 instance P.HasName (DatacenterData s) s Text where
     name =
         lens (_name :: DatacenterData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatacenterData s)
+             (\s a -> s { _name = a } :: DatacenterData s)
 
 instance P.HasComputedId (DatacenterData s) Text
 
@@ -145,22 +145,22 @@ instance TF.ToHCL (ImageData s) where
 instance P.HasLocation (ImageData s) s Text where
     location =
         lens (_location :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _location = a } :: ImageData s)
+             (\s a -> s { _location = a } :: ImageData s)
 
 instance P.HasName (ImageData s) s Text where
     name =
         lens (_name :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageData s)
+             (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasType' (ImageData s) s Text where
     type' =
         lens (_type' :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: ImageData s)
+             (\s a -> s { _type' = a } :: ImageData s)
 
 instance P.HasVersion (ImageData s) s Text where
     version =
         lens (_version :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _version = a } :: ImageData s)
+             (\s a -> s { _version = a } :: ImageData s)
 
 instance P.HasComputedId (ImageData s) Text
 
@@ -195,12 +195,12 @@ instance TF.ToHCL (LocationData s) where
 instance P.HasFeature (LocationData s) s Text where
     feature =
         lens (_feature :: LocationData s -> TF.Attribute s Text)
-            (\s a -> s { _feature = a } :: LocationData s)
+             (\s a -> s { _feature = a } :: LocationData s)
 
 instance P.HasName (LocationData s) s Text where
     name =
         lens (_name :: LocationData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: LocationData s)
+             (\s a -> s { _name = a } :: LocationData s)
 
 instance P.HasComputedId (LocationData s) Text
 
@@ -239,12 +239,12 @@ instance TF.ToHCL (ResourceData s) where
 instance P.HasResourceId (ResourceData s) s Text where
     resourceId =
         lens (_resource_id :: ResourceData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_id = a } :: ResourceData s)
+             (\s a -> s { _resource_id = a } :: ResourceData s)
 
 instance P.HasResourceType (ResourceData s) s Text where
     resourceType =
         lens (_resource_type :: ResourceData s -> TF.Attribute s Text)
-            (\s a -> s { _resource_type = a } :: ResourceData s)
+             (\s a -> s { _resource_type = a } :: ResourceData s)
 
 instance P.HasComputedId (ResourceData s) Text
 
@@ -280,17 +280,17 @@ instance TF.ToHCL (SnapshotData s) where
 instance P.HasLocation (SnapshotData s) s Text where
     location =
         lens (_location :: SnapshotData s -> TF.Attribute s Text)
-            (\s a -> s { _location = a } :: SnapshotData s)
+             (\s a -> s { _location = a } :: SnapshotData s)
 
 instance P.HasName (SnapshotData s) s Text where
     name =
         lens (_name :: SnapshotData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SnapshotData s)
+             (\s a -> s { _name = a } :: SnapshotData s)
 
 instance P.HasSize (SnapshotData s) s Text where
     size =
         lens (_size :: SnapshotData s -> TF.Attribute s Text)
-            (\s a -> s { _size = a } :: SnapshotData s)
+             (\s a -> s { _size = a } :: SnapshotData s)
 
 instance P.HasComputedId (SnapshotData s) Text
 

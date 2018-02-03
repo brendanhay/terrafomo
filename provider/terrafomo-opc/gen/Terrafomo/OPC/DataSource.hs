@@ -63,6 +63,7 @@ module Terrafomo.OPC.DataSource
     , P.HasComputedIsDefaultGateway (..)
     , P.HasComputedMacAddress (..)
     , P.HasComputedMachineImageName (..)
+    , P.HasComputedMachineImages (..)
     , P.HasComputedModel (..)
     , P.HasComputedNameServers (..)
     , P.HasComputedNat (..)
@@ -134,17 +135,22 @@ instance TF.ToHCL (ComputeImageListEntryData s) where
 instance P.HasEntry (ComputeImageListEntryData s) s Text where
     entry =
         lens (_entry :: ComputeImageListEntryData s -> TF.Attribute s Text)
-            (\s a -> s { _entry = a } :: ComputeImageListEntryData s)
+             (\s a -> s { _entry = a } :: ComputeImageListEntryData s)
 
 instance P.HasImageList (ComputeImageListEntryData s) s Text where
     imageList =
         lens (_image_list :: ComputeImageListEntryData s -> TF.Attribute s Text)
-            (\s a -> s { _image_list = a } :: ComputeImageListEntryData s)
+             (\s a -> s { _image_list = a } :: ComputeImageListEntryData s)
 
 instance P.HasVersion (ComputeImageListEntryData s) s Text where
     version =
         lens (_version :: ComputeImageListEntryData s -> TF.Attribute s Text)
-            (\s a -> s { _version = a } :: ComputeImageListEntryData s)
+             (\s a -> s { _version = a } :: ComputeImageListEntryData s)
+
+instance P.HasComputedAttributes (ComputeImageListEntryData s) Text
+instance P.HasComputedDns (ComputeImageListEntryData s) Text
+instance P.HasComputedMachineImages (ComputeImageListEntryData s) Text
+instance P.HasComputedUri (ComputeImageListEntryData s) Text
 
 computeImageListEntryData :: TF.DataSource P.OPC (ComputeImageListEntryData s)
 computeImageListEntryData =
@@ -175,29 +181,21 @@ instance TF.ToHCL (ComputeMachineImageData s) where
 instance P.HasAccount (ComputeMachineImageData s) s Text where
     account =
         lens (_account :: ComputeMachineImageData s -> TF.Attribute s Text)
-            (\s a -> s { _account = a } :: ComputeMachineImageData s)
+             (\s a -> s { _account = a } :: ComputeMachineImageData s)
 
 instance P.HasName (ComputeMachineImageData s) s Text where
     name =
         lens (_name :: ComputeMachineImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeMachineImageData s)
+             (\s a -> s { _name = a } :: ComputeMachineImageData s)
 
 instance P.HasComputedAttributes (ComputeMachineImageData s) Text
-
 instance P.HasComputedDescription (ComputeMachineImageData s) Text
-
 instance P.HasComputedErrorReason (ComputeMachineImageData s) Text
-
 instance P.HasComputedFile (ComputeMachineImageData s) Text
-
 instance P.HasComputedHypervisor (ComputeMachineImageData s) Text
-
 instance P.HasComputedImageFormat (ComputeMachineImageData s) Text
-
 instance P.HasComputedPlatform (ComputeMachineImageData s) Text
-
 instance P.HasComputedState (ComputeMachineImageData s) Text
-
 instance P.HasComputedUri (ComputeMachineImageData s) Text
 
 computeMachineImageData :: TF.DataSource P.OPC (ComputeMachineImageData s)
@@ -232,42 +230,30 @@ instance TF.ToHCL (ComputeNetworkInterfaceData s) where
 instance P.HasInstanceId (ComputeNetworkInterfaceData s) s Text where
     instanceId =
         lens (_instance_id :: ComputeNetworkInterfaceData s -> TF.Attribute s Text)
-            (\s a -> s { _instance_id = a } :: ComputeNetworkInterfaceData s)
+             (\s a -> s { _instance_id = a } :: ComputeNetworkInterfaceData s)
 
 instance P.HasInstanceName (ComputeNetworkInterfaceData s) s Text where
     instanceName =
         lens (_instance_name :: ComputeNetworkInterfaceData s -> TF.Attribute s Text)
-            (\s a -> s { _instance_name = a } :: ComputeNetworkInterfaceData s)
+             (\s a -> s { _instance_name = a } :: ComputeNetworkInterfaceData s)
 
 instance P.HasInterface (ComputeNetworkInterfaceData s) s Text where
     interface =
         lens (_interface :: ComputeNetworkInterfaceData s -> TF.Attribute s Text)
-            (\s a -> s { _interface = a } :: ComputeNetworkInterfaceData s)
+             (\s a -> s { _interface = a } :: ComputeNetworkInterfaceData s)
 
 instance P.HasComputedDns (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedIpAddress (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedIpNetwork (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedIsDefaultGateway (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedMacAddress (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedModel (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedNameServers (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedNat (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedSearchDomains (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedSecLists (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedSharedNetwork (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedVnic (ComputeNetworkInterfaceData s) Text
-
 instance P.HasComputedVnicSets (ComputeNetworkInterfaceData s) Text
 
 computeNetworkInterfaceData :: TF.DataSource P.OPC (ComputeNetworkInterfaceData s)
@@ -297,40 +283,24 @@ instance TF.ToHCL (ComputeStorageVolumeSnapshotData s) where
 instance P.HasName (ComputeStorageVolumeSnapshotData s) s Text where
     name =
         lens (_name :: ComputeStorageVolumeSnapshotData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotData s)
+             (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotData s)
 
 instance P.HasComputedAccount (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedCollocated (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedDescription (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedMachineImageName (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedParentVolumeBootable (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedPlatform (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedProperty (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedSize (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedSnapshotId (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedSnapshotTimestamp (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedStartTimestamp (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedStatus (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedStatusDetail (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedTags (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedUri (ComputeStorageVolumeSnapshotData s) Text
-
 instance P.HasComputedVolumeName (ComputeStorageVolumeSnapshotData s) Text
 
 computeStorageVolumeSnapshotData :: TF.DataSource P.OPC (ComputeStorageVolumeSnapshotData s)
@@ -357,16 +327,12 @@ instance TF.ToHCL (ComputeVnicData s) where
 instance P.HasName (ComputeVnicData s) s Text where
     name =
         lens (_name :: ComputeVnicData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ComputeVnicData s)
+             (\s a -> s { _name = a } :: ComputeVnicData s)
 
 instance P.HasComputedDescription (ComputeVnicData s) Text
-
 instance P.HasComputedMacAddress (ComputeVnicData s) Text
-
 instance P.HasComputedTags (ComputeVnicData s) Text
-
 instance P.HasComputedTransitFlag (ComputeVnicData s) Text
-
 instance P.HasComputedUri (ComputeVnicData s) Text
 
 computeVnicData :: TF.DataSource P.OPC (ComputeVnicData s)

@@ -66,6 +66,8 @@ module Terrafomo.Scaleway.Resource
     -- ** Computed Attributes
     , P.HasComputedId (..)
     , P.HasComputedIp (..)
+    , P.HasComputedPrivateIp (..)
+    , P.HasComputedPublicIp (..)
 
     -- * Re-exported Types
     , module P
@@ -110,10 +112,9 @@ instance TF.ToHCL (IpResource s) where
 instance P.HasServer (IpResource s) s Text where
     server =
         lens (_server :: IpResource s -> TF.Attribute s Text)
-            (\s a -> s { _server = a } :: IpResource s)
+             (\s a -> s { _server = a } :: IpResource s)
 
 instance P.HasComputedId (IpResource s) Text
-
 instance P.HasComputedIp (IpResource s) Text
 
 ipResource :: TF.Resource P.Scaleway (IpResource s)
@@ -145,12 +146,12 @@ instance TF.ToHCL (SecurityGroupResource s) where
 instance P.HasDescription (SecurityGroupResource s) s Text where
     description =
         lens (_description :: SecurityGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _description = a } :: SecurityGroupResource s)
+             (\s a -> s { _description = a } :: SecurityGroupResource s)
 
 instance P.HasName (SecurityGroupResource s) s Text where
     name =
         lens (_name :: SecurityGroupResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SecurityGroupResource s)
+             (\s a -> s { _name = a } :: SecurityGroupResource s)
 
 instance P.HasComputedId (SecurityGroupResource s) Text
 
@@ -196,32 +197,32 @@ instance TF.ToHCL (SecurityGroupRuleResource s) where
 instance P.HasAction (SecurityGroupRuleResource s) s Text where
     action =
         lens (_action :: SecurityGroupRuleResource s -> TF.Attribute s Text)
-            (\s a -> s { _action = a } :: SecurityGroupRuleResource s)
+             (\s a -> s { _action = a } :: SecurityGroupRuleResource s)
 
 instance P.HasDirection (SecurityGroupRuleResource s) s Text where
     direction =
         lens (_direction :: SecurityGroupRuleResource s -> TF.Attribute s Text)
-            (\s a -> s { _direction = a } :: SecurityGroupRuleResource s)
+             (\s a -> s { _direction = a } :: SecurityGroupRuleResource s)
 
 instance P.HasIpRange (SecurityGroupRuleResource s) s Text where
     ipRange =
         lens (_ip_range :: SecurityGroupRuleResource s -> TF.Attribute s Text)
-            (\s a -> s { _ip_range = a } :: SecurityGroupRuleResource s)
+             (\s a -> s { _ip_range = a } :: SecurityGroupRuleResource s)
 
 instance P.HasPort (SecurityGroupRuleResource s) s Text where
     port =
         lens (_port :: SecurityGroupRuleResource s -> TF.Attribute s Text)
-            (\s a -> s { _port = a } :: SecurityGroupRuleResource s)
+             (\s a -> s { _port = a } :: SecurityGroupRuleResource s)
 
 instance P.HasProtocol (SecurityGroupRuleResource s) s Text where
     protocol =
         lens (_protocol :: SecurityGroupRuleResource s -> TF.Attribute s Text)
-            (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
+             (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroup (SecurityGroupRuleResource s) s Text where
     securityGroup =
         lens (_security_group :: SecurityGroupRuleResource s -> TF.Attribute s Text)
-            (\s a -> s { _security_group = a } :: SecurityGroupRuleResource s)
+             (\s a -> s { _security_group = a } :: SecurityGroupRuleResource s)
 
 instance P.HasComputedId (SecurityGroupRuleResource s) Text
 
@@ -289,62 +290,66 @@ instance TF.ToHCL (ServerResource s) where
 instance P.HasBootscript (ServerResource s) s Text where
     bootscript =
         lens (_bootscript :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _bootscript = a } :: ServerResource s)
+             (\s a -> s { _bootscript = a } :: ServerResource s)
 
 instance P.HasDynamicIpRequired (ServerResource s) s Text where
     dynamicIpRequired =
         lens (_dynamic_ip_required :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _dynamic_ip_required = a } :: ServerResource s)
+             (\s a -> s { _dynamic_ip_required = a } :: ServerResource s)
 
 instance P.HasEnableIpv6 (ServerResource s) s Text where
     enableIpv6 =
         lens (_enable_ipv6 :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _enable_ipv6 = a } :: ServerResource s)
+             (\s a -> s { _enable_ipv6 = a } :: ServerResource s)
 
 instance P.HasImage (ServerResource s) s Text where
     image =
         lens (_image :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _image = a } :: ServerResource s)
+             (\s a -> s { _image = a } :: ServerResource s)
 
 instance P.HasName (ServerResource s) s Text where
     name =
         lens (_name :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ServerResource s)
+             (\s a -> s { _name = a } :: ServerResource s)
 
 instance P.HasPublicIpv6 (ServerResource s) s Text where
     publicIpv6 =
         lens (_public_ipv6 :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _public_ipv6 = a } :: ServerResource s)
+             (\s a -> s { _public_ipv6 = a } :: ServerResource s)
 
 instance P.HasSecurityGroup (ServerResource s) s Text where
     securityGroup =
         lens (_security_group :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _security_group = a } :: ServerResource s)
+             (\s a -> s { _security_group = a } :: ServerResource s)
 
 instance P.HasState (ServerResource s) s Text where
     state =
         lens (_state :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: ServerResource s)
+             (\s a -> s { _state = a } :: ServerResource s)
 
 instance P.HasStateDetail (ServerResource s) s Text where
     stateDetail =
         lens (_state_detail :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _state_detail = a } :: ServerResource s)
+             (\s a -> s { _state_detail = a } :: ServerResource s)
 
 instance P.HasTags (ServerResource s) s Text where
     tags =
         lens (_tags :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _tags = a } :: ServerResource s)
+             (\s a -> s { _tags = a } :: ServerResource s)
 
 instance P.HasType' (ServerResource s) s Text where
     type' =
         lens (_type' :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: ServerResource s)
+             (\s a -> s { _type' = a } :: ServerResource s)
 
 instance P.HasVolume (ServerResource s) s Text where
     volume =
         lens (_volume :: ServerResource s -> TF.Attribute s Text)
-            (\s a -> s { _volume = a } :: ServerResource s)
+             (\s a -> s { _volume = a } :: ServerResource s)
+
+instance P.HasComputedId (ServerResource s) Text
+instance P.HasComputedPrivateIp (ServerResource s) Text
+instance P.HasComputedPublicIp (ServerResource s) Text
 
 serverResource :: TF.Resource P.Scaleway (ServerResource s)
 serverResource =
@@ -386,12 +391,12 @@ instance TF.ToHCL (VolumeAttachmentResource s) where
 instance P.HasServer (VolumeAttachmentResource s) s Text where
     server =
         lens (_server :: VolumeAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _server = a } :: VolumeAttachmentResource s)
+             (\s a -> s { _server = a } :: VolumeAttachmentResource s)
 
 instance P.HasVolume (VolumeAttachmentResource s) s Text where
     volume =
         lens (_volume :: VolumeAttachmentResource s -> TF.Attribute s Text)
-            (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
+             (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
 
 instance P.HasComputedId (VolumeAttachmentResource s) Text
 
@@ -431,22 +436,22 @@ instance TF.ToHCL (VolumeResource s) where
 instance P.HasName (VolumeResource s) s Text where
     name =
         lens (_name :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: VolumeResource s)
+             (\s a -> s { _name = a } :: VolumeResource s)
 
 instance P.HasServer (VolumeResource s) s Text where
     server =
         lens (_server :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _server = a } :: VolumeResource s)
+             (\s a -> s { _server = a } :: VolumeResource s)
 
 instance P.HasSizeInGb (VolumeResource s) s Text where
     sizeInGb =
         lens (_size_in_gb :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _size_in_gb = a } :: VolumeResource s)
+             (\s a -> s { _size_in_gb = a } :: VolumeResource s)
 
 instance P.HasType' (VolumeResource s) s Text where
     type' =
         lens (_type' :: VolumeResource s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: VolumeResource s)
+             (\s a -> s { _type' = a } :: VolumeResource s)
 
 instance P.HasComputedId (VolumeResource s) Text
 

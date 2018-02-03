@@ -75,7 +75,7 @@ instance TF.ToHCL (RegistryImageData s) where
 instance P.HasName (RegistryImageData s) s Text where
     name =
         lens (_name :: RegistryImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RegistryImageData s)
+             (\s a -> s { _name = a } :: RegistryImageData s)
 
 instance P.HasComputedSha256Digest (RegistryImageData s) Text
 

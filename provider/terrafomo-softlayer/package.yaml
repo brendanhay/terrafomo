@@ -21,7 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.SoftLayer
-    - Terrafomo.SoftLayer.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

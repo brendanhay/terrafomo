@@ -179,62 +179,62 @@ instance TF.ToHCL (ConfigData s) where
 instance P.HasAppend (ConfigData s) s Text where
     append =
         lens (_append :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _append = a } :: ConfigData s)
+             (\s a -> s { _append = a } :: ConfigData s)
 
 instance P.HasArrays (ConfigData s) s Text where
     arrays =
         lens (_arrays :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _arrays = a } :: ConfigData s)
+             (\s a -> s { _arrays = a } :: ConfigData s)
 
 instance P.HasDirectories (ConfigData s) s Text where
     directories =
         lens (_directories :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _directories = a } :: ConfigData s)
+             (\s a -> s { _directories = a } :: ConfigData s)
 
 instance P.HasDisks (ConfigData s) s Text where
     disks =
         lens (_disks :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _disks = a } :: ConfigData s)
+             (\s a -> s { _disks = a } :: ConfigData s)
 
 instance P.HasFiles (ConfigData s) s Text where
     files =
         lens (_files :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _files = a } :: ConfigData s)
+             (\s a -> s { _files = a } :: ConfigData s)
 
 instance P.HasFilesystems (ConfigData s) s Text where
     filesystems =
         lens (_filesystems :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _filesystems = a } :: ConfigData s)
+             (\s a -> s { _filesystems = a } :: ConfigData s)
 
 instance P.HasGroups (ConfigData s) s Text where
     groups =
         lens (_groups :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _groups = a } :: ConfigData s)
+             (\s a -> s { _groups = a } :: ConfigData s)
 
 instance P.HasLinks (ConfigData s) s Text where
     links =
         lens (_links :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _links = a } :: ConfigData s)
+             (\s a -> s { _links = a } :: ConfigData s)
 
 instance P.HasNetworkd (ConfigData s) s Text where
     networkd =
         lens (_networkd :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _networkd = a } :: ConfigData s)
+             (\s a -> s { _networkd = a } :: ConfigData s)
 
 instance P.HasReplace (ConfigData s) s Text where
     replace =
         lens (_replace :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _replace = a } :: ConfigData s)
+             (\s a -> s { _replace = a } :: ConfigData s)
 
 instance P.HasSystemd (ConfigData s) s Text where
     systemd =
         lens (_systemd :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _systemd = a } :: ConfigData s)
+             (\s a -> s { _systemd = a } :: ConfigData s)
 
 instance P.HasUsers (ConfigData s) s Text where
     users =
         lens (_users :: ConfigData s -> TF.Attribute s Text)
-            (\s a -> s { _users = a } :: ConfigData s)
+             (\s a -> s { _users = a } :: ConfigData s)
 
 instance P.HasComputedRendered (ConfigData s) Text
 
@@ -285,27 +285,27 @@ instance TF.ToHCL (DirectoryData s) where
 instance P.HasFilesystem (DirectoryData s) s Text where
     filesystem =
         lens (_filesystem :: DirectoryData s -> TF.Attribute s Text)
-            (\s a -> s { _filesystem = a } :: DirectoryData s)
+             (\s a -> s { _filesystem = a } :: DirectoryData s)
 
 instance P.HasGid (DirectoryData s) s Text where
     gid =
         lens (_gid :: DirectoryData s -> TF.Attribute s Text)
-            (\s a -> s { _gid = a } :: DirectoryData s)
+             (\s a -> s { _gid = a } :: DirectoryData s)
 
 instance P.HasMode (DirectoryData s) s Text where
     mode =
         lens (_mode :: DirectoryData s -> TF.Attribute s Text)
-            (\s a -> s { _mode = a } :: DirectoryData s)
+             (\s a -> s { _mode = a } :: DirectoryData s)
 
 instance P.HasPath (DirectoryData s) s Text where
     path =
         lens (_path :: DirectoryData s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: DirectoryData s)
+             (\s a -> s { _path = a } :: DirectoryData s)
 
 instance P.HasUid (DirectoryData s) s Text where
     uid =
         lens (_uid :: DirectoryData s -> TF.Attribute s Text)
-            (\s a -> s { _uid = a } :: DirectoryData s)
+             (\s a -> s { _uid = a } :: DirectoryData s)
 
 instance P.HasComputedId (DirectoryData s) Text
 
@@ -343,17 +343,17 @@ instance TF.ToHCL (DiskData s) where
 instance P.HasDevice (DiskData s) s Text where
     device =
         lens (_device :: DiskData s -> TF.Attribute s Text)
-            (\s a -> s { _device = a } :: DiskData s)
+             (\s a -> s { _device = a } :: DiskData s)
 
 instance P.HasPartition (DiskData s) s Text where
     partition =
         lens (_partition :: DiskData s -> TF.Attribute s Text)
-            (\s a -> s { _partition = a } :: DiskData s)
+             (\s a -> s { _partition = a } :: DiskData s)
 
 instance P.HasWipeTable (DiskData s) s Text where
     wipeTable =
         lens (_wipe_table :: DiskData s -> TF.Attribute s Text)
-            (\s a -> s { _wipe_table = a } :: DiskData s)
+             (\s a -> s { _wipe_table = a } :: DiskData s)
 
 instance P.HasComputedId (DiskData s) Text
 
@@ -401,37 +401,37 @@ instance TF.ToHCL (FileData s) where
 instance P.HasContent (FileData s) s Text where
     content =
         lens (_content :: FileData s -> TF.Attribute s Text)
-            (\s a -> s { _content = a } :: FileData s)
+             (\s a -> s { _content = a } :: FileData s)
 
 instance P.HasFilesystem (FileData s) s Text where
     filesystem =
         lens (_filesystem :: FileData s -> TF.Attribute s Text)
-            (\s a -> s { _filesystem = a } :: FileData s)
+             (\s a -> s { _filesystem = a } :: FileData s)
 
 instance P.HasGid (FileData s) s Text where
     gid =
         lens (_gid :: FileData s -> TF.Attribute s Text)
-            (\s a -> s { _gid = a } :: FileData s)
+             (\s a -> s { _gid = a } :: FileData s)
 
 instance P.HasMode (FileData s) s Text where
     mode =
         lens (_mode :: FileData s -> TF.Attribute s Text)
-            (\s a -> s { _mode = a } :: FileData s)
+             (\s a -> s { _mode = a } :: FileData s)
 
 instance P.HasPath (FileData s) s Text where
     path =
         lens (_path :: FileData s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: FileData s)
+             (\s a -> s { _path = a } :: FileData s)
 
 instance P.HasSource (FileData s) s Text where
     source =
         lens (_source :: FileData s -> TF.Attribute s Text)
-            (\s a -> s { _source = a } :: FileData s)
+             (\s a -> s { _source = a } :: FileData s)
 
 instance P.HasUid (FileData s) s Text where
     uid =
         lens (_uid :: FileData s -> TF.Attribute s Text)
-            (\s a -> s { _uid = a } :: FileData s)
+             (\s a -> s { _uid = a } :: FileData s)
 
 instance P.HasComputedId (FileData s) Text
 
@@ -472,17 +472,17 @@ instance TF.ToHCL (FilesystemData s) where
 instance P.HasMount (FilesystemData s) s Text where
     mount =
         lens (_mount :: FilesystemData s -> TF.Attribute s Text)
-            (\s a -> s { _mount = a } :: FilesystemData s)
+             (\s a -> s { _mount = a } :: FilesystemData s)
 
 instance P.HasName (FilesystemData s) s Text where
     name =
         lens (_name :: FilesystemData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: FilesystemData s)
+             (\s a -> s { _name = a } :: FilesystemData s)
 
 instance P.HasPath (FilesystemData s) s Text where
     path =
         lens (_path :: FilesystemData s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: FilesystemData s)
+             (\s a -> s { _path = a } :: FilesystemData s)
 
 instance P.HasComputedId (FilesystemData s) Text
 
@@ -518,17 +518,17 @@ instance TF.ToHCL (GroupData s) where
 instance P.HasGid (GroupData s) s Text where
     gid =
         lens (_gid :: GroupData s -> TF.Attribute s Text)
-            (\s a -> s { _gid = a } :: GroupData s)
+             (\s a -> s { _gid = a } :: GroupData s)
 
 instance P.HasName (GroupData s) s Text where
     name =
         lens (_name :: GroupData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: GroupData s)
+             (\s a -> s { _name = a } :: GroupData s)
 
 instance P.HasPasswordHash (GroupData s) s Text where
     passwordHash =
         lens (_password_hash :: GroupData s -> TF.Attribute s Text)
-            (\s a -> s { _password_hash = a } :: GroupData s)
+             (\s a -> s { _password_hash = a } :: GroupData s)
 
 instance P.HasComputedId (GroupData s) Text
 
@@ -573,32 +573,32 @@ instance TF.ToHCL (LinkData s) where
 instance P.HasFilesystem (LinkData s) s Text where
     filesystem =
         lens (_filesystem :: LinkData s -> TF.Attribute s Text)
-            (\s a -> s { _filesystem = a } :: LinkData s)
+             (\s a -> s { _filesystem = a } :: LinkData s)
 
 instance P.HasGid (LinkData s) s Text where
     gid =
         lens (_gid :: LinkData s -> TF.Attribute s Text)
-            (\s a -> s { _gid = a } :: LinkData s)
+             (\s a -> s { _gid = a } :: LinkData s)
 
 instance P.HasHard (LinkData s) s Text where
     hard =
         lens (_hard :: LinkData s -> TF.Attribute s Text)
-            (\s a -> s { _hard = a } :: LinkData s)
+             (\s a -> s { _hard = a } :: LinkData s)
 
 instance P.HasPath (LinkData s) s Text where
     path =
         lens (_path :: LinkData s -> TF.Attribute s Text)
-            (\s a -> s { _path = a } :: LinkData s)
+             (\s a -> s { _path = a } :: LinkData s)
 
 instance P.HasTarget (LinkData s) s Text where
     target =
         lens (_target :: LinkData s -> TF.Attribute s Text)
-            (\s a -> s { _target = a } :: LinkData s)
+             (\s a -> s { _target = a } :: LinkData s)
 
 instance P.HasUid (LinkData s) s Text where
     uid =
         lens (_uid :: LinkData s -> TF.Attribute s Text)
-            (\s a -> s { _uid = a } :: LinkData s)
+             (\s a -> s { _uid = a } :: LinkData s)
 
 instance P.HasComputedId (LinkData s) Text
 
@@ -634,12 +634,12 @@ instance TF.ToHCL (NetworkdUnitData s) where
 instance P.HasContent (NetworkdUnitData s) s Text where
     content =
         lens (_content :: NetworkdUnitData s -> TF.Attribute s Text)
-            (\s a -> s { _content = a } :: NetworkdUnitData s)
+             (\s a -> s { _content = a } :: NetworkdUnitData s)
 
 instance P.HasName (NetworkdUnitData s) s Text where
     name =
         lens (_name :: NetworkdUnitData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NetworkdUnitData s)
+             (\s a -> s { _name = a } :: NetworkdUnitData s)
 
 instance P.HasComputedId (NetworkdUnitData s) Text
 
@@ -677,22 +677,22 @@ instance TF.ToHCL (RaidData s) where
 instance P.HasDevices (RaidData s) s Text where
     devices =
         lens (_devices :: RaidData s -> TF.Attribute s Text)
-            (\s a -> s { _devices = a } :: RaidData s)
+             (\s a -> s { _devices = a } :: RaidData s)
 
 instance P.HasLevel (RaidData s) s Text where
     level =
         lens (_level :: RaidData s -> TF.Attribute s Text)
-            (\s a -> s { _level = a } :: RaidData s)
+             (\s a -> s { _level = a } :: RaidData s)
 
 instance P.HasName (RaidData s) s Text where
     name =
         lens (_name :: RaidData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: RaidData s)
+             (\s a -> s { _name = a } :: RaidData s)
 
 instance P.HasSpares (RaidData s) s Text where
     spares =
         lens (_spares :: RaidData s -> TF.Attribute s Text)
-            (\s a -> s { _spares = a } :: RaidData s)
+             (\s a -> s { _spares = a } :: RaidData s)
 
 instance P.HasComputedId (RaidData s) Text
 
@@ -735,27 +735,27 @@ instance TF.ToHCL (SystemdUnitData s) where
 instance P.HasContent (SystemdUnitData s) s Text where
     content =
         lens (_content :: SystemdUnitData s -> TF.Attribute s Text)
-            (\s a -> s { _content = a } :: SystemdUnitData s)
+             (\s a -> s { _content = a } :: SystemdUnitData s)
 
 instance P.HasDropin (SystemdUnitData s) s Text where
     dropin =
         lens (_dropin :: SystemdUnitData s -> TF.Attribute s Text)
-            (\s a -> s { _dropin = a } :: SystemdUnitData s)
+             (\s a -> s { _dropin = a } :: SystemdUnitData s)
 
 instance P.HasEnabled (SystemdUnitData s) s Text where
     enabled =
         lens (_enabled :: SystemdUnitData s -> TF.Attribute s Text)
-            (\s a -> s { _enabled = a } :: SystemdUnitData s)
+             (\s a -> s { _enabled = a } :: SystemdUnitData s)
 
 instance P.HasMask (SystemdUnitData s) s Text where
     mask =
         lens (_mask :: SystemdUnitData s -> TF.Attribute s Text)
-            (\s a -> s { _mask = a } :: SystemdUnitData s)
+             (\s a -> s { _mask = a } :: SystemdUnitData s)
 
 instance P.HasName (SystemdUnitData s) s Text where
     name =
         lens (_name :: SystemdUnitData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: SystemdUnitData s)
+             (\s a -> s { _name = a } :: SystemdUnitData s)
 
 instance P.HasComputedId (SystemdUnitData s) Text
 
@@ -823,67 +823,67 @@ instance TF.ToHCL (UserData s) where
 instance P.HasGecos (UserData s) s Text where
     gecos =
         lens (_gecos :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _gecos = a } :: UserData s)
+             (\s a -> s { _gecos = a } :: UserData s)
 
 instance P.HasGroups (UserData s) s Text where
     groups =
         lens (_groups :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _groups = a } :: UserData s)
+             (\s a -> s { _groups = a } :: UserData s)
 
 instance P.HasHomeDir (UserData s) s Text where
     homeDir =
         lens (_home_dir :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _home_dir = a } :: UserData s)
+             (\s a -> s { _home_dir = a } :: UserData s)
 
 instance P.HasName (UserData s) s Text where
     name =
         lens (_name :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: UserData s)
+             (\s a -> s { _name = a } :: UserData s)
 
 instance P.HasNoCreateHome (UserData s) s Text where
     noCreateHome =
         lens (_no_create_home :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _no_create_home = a } :: UserData s)
+             (\s a -> s { _no_create_home = a } :: UserData s)
 
 instance P.HasNoLogInit (UserData s) s Text where
     noLogInit =
         lens (_no_log_init :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _no_log_init = a } :: UserData s)
+             (\s a -> s { _no_log_init = a } :: UserData s)
 
 instance P.HasNoUserGroup (UserData s) s Text where
     noUserGroup =
         lens (_no_user_group :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _no_user_group = a } :: UserData s)
+             (\s a -> s { _no_user_group = a } :: UserData s)
 
 instance P.HasPasswordHash (UserData s) s Text where
     passwordHash =
         lens (_password_hash :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _password_hash = a } :: UserData s)
+             (\s a -> s { _password_hash = a } :: UserData s)
 
 instance P.HasPrimaryGroup (UserData s) s Text where
     primaryGroup =
         lens (_primary_group :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _primary_group = a } :: UserData s)
+             (\s a -> s { _primary_group = a } :: UserData s)
 
 instance P.HasShell (UserData s) s Text where
     shell =
         lens (_shell :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _shell = a } :: UserData s)
+             (\s a -> s { _shell = a } :: UserData s)
 
 instance P.HasSshAuthorizedKeys (UserData s) s Text where
     sshAuthorizedKeys =
         lens (_ssh_authorized_keys :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _ssh_authorized_keys = a } :: UserData s)
+             (\s a -> s { _ssh_authorized_keys = a } :: UserData s)
 
 instance P.HasSystem (UserData s) s Text where
     system =
         lens (_system :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _system = a } :: UserData s)
+             (\s a -> s { _system = a } :: UserData s)
 
 instance P.HasUid (UserData s) s Text where
     uid =
         lens (_uid :: UserData s -> TF.Attribute s Text)
-            (\s a -> s { _uid = a } :: UserData s)
+             (\s a -> s { _uid = a } :: UserData s)
 
 instance P.HasComputedId (UserData s) Text
 

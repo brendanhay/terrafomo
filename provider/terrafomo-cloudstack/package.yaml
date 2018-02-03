@@ -21,8 +21,7 @@ library:
 
   exposed-modules:
     - Terrafomo.CloudStack
-    - Terrafomo.CloudStack.DataSource
-    - Terrafomo.CloudStack.Resource
 
   reexported-modules: >
+    terrafomo:Terrafomo,
     terrafomo:Terrafomo.Format

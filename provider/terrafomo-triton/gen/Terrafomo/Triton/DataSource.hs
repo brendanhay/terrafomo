@@ -92,7 +92,8 @@ instance TF.ToHCL (AccountData s) where
 instance P.HasCnsEnabled (AccountData s) s Text where
     cnsEnabled =
         lens (_cns_enabled :: AccountData s -> TF.Attribute s Text)
-            (\s a -> s { _cns_enabled = a } :: AccountData s)
+             (\s a -> s { _cns_enabled = a } :: AccountData s)
+
 
 accountData :: TF.DataSource P.Triton (AccountData s)
 accountData =
@@ -122,12 +123,13 @@ instance TF.ToHCL (DatacenterData s) where
 instance P.HasEndpoint (DatacenterData s) s Text where
     endpoint =
         lens (_endpoint :: DatacenterData s -> TF.Attribute s Text)
-            (\s a -> s { _endpoint = a } :: DatacenterData s)
+             (\s a -> s { _endpoint = a } :: DatacenterData s)
 
 instance P.HasName (DatacenterData s) s Text where
     name =
         lens (_name :: DatacenterData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DatacenterData s)
+             (\s a -> s { _name = a } :: DatacenterData s)
+
 
 datacenterData :: TF.DataSource P.Triton (DatacenterData s)
 datacenterData =
@@ -176,42 +178,43 @@ instance TF.ToHCL (ImageData s) where
 instance P.HasMostRecent (ImageData s) s Text where
     mostRecent =
         lens (_most_recent :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _most_recent = a } :: ImageData s)
+             (\s a -> s { _most_recent = a } :: ImageData s)
 
 instance P.HasName (ImageData s) s Text where
     name =
         lens (_name :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: ImageData s)
+             (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasOs (ImageData s) s Text where
     os =
         lens (_os :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _os = a } :: ImageData s)
+             (\s a -> s { _os = a } :: ImageData s)
 
 instance P.HasOwner (ImageData s) s Text where
     owner =
         lens (_owner :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _owner = a } :: ImageData s)
+             (\s a -> s { _owner = a } :: ImageData s)
 
 instance P.HasPublic (ImageData s) s Text where
     public =
         lens (_public :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _public = a } :: ImageData s)
+             (\s a -> s { _public = a } :: ImageData s)
 
 instance P.HasState (ImageData s) s Text where
     state =
         lens (_state :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _state = a } :: ImageData s)
+             (\s a -> s { _state = a } :: ImageData s)
 
 instance P.HasType' (ImageData s) s Text where
     type' =
         lens (_type' :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _type' = a } :: ImageData s)
+             (\s a -> s { _type' = a } :: ImageData s)
 
 instance P.HasVersion (ImageData s) s Text where
     version =
         lens (_version :: ImageData s -> TF.Attribute s Text)
-            (\s a -> s { _version = a } :: ImageData s)
+             (\s a -> s { _version = a } :: ImageData s)
+
 
 imageData :: TF.DataSource P.Triton (ImageData s)
 imageData =
@@ -245,7 +248,7 @@ instance TF.ToHCL (NetworkData s) where
 instance P.HasName (NetworkData s) s Text where
     name =
         lens (_name :: NetworkData s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: NetworkData s)
+             (\s a -> s { _name = a } :: NetworkData s)
 
 instance P.HasComputedId (NetworkData s) Text
 

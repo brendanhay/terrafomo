@@ -92,35 +92,29 @@ instance TF.ToHCL (DomainResource s) where
 instance P.HasName (DomainResource s) s Text where
     name =
         lens (_name :: DomainResource s -> TF.Attribute s Text)
-            (\s a -> s { _name = a } :: DomainResource s)
+             (\s a -> s { _name = a } :: DomainResource s)
 
 instance P.HasSmtpPassword (DomainResource s) s Text where
     smtpPassword =
         lens (_smtp_password :: DomainResource s -> TF.Attribute s Text)
-            (\s a -> s { _smtp_password = a } :: DomainResource s)
+             (\s a -> s { _smtp_password = a } :: DomainResource s)
 
 instance P.HasSpamAction (DomainResource s) s Text where
     spamAction =
         lens (_spam_action :: DomainResource s -> TF.Attribute s Text)
-            (\s a -> s { _spam_action = a } :: DomainResource s)
+             (\s a -> s { _spam_action = a } :: DomainResource s)
 
 instance P.HasWildcard (DomainResource s) s Text where
     wildcard =
         lens (_wildcard :: DomainResource s -> TF.Attribute s Text)
-            (\s a -> s { _wildcard = a } :: DomainResource s)
+             (\s a -> s { _wildcard = a } :: DomainResource s)
 
 instance P.HasComputedName (DomainResource s) Text
-
 instance P.HasComputedReceivingRecords (DomainResource s) Text
-
 instance P.HasComputedSendingRecords (DomainResource s) Text
-
 instance P.HasComputedSmtpLogin (DomainResource s) Text
-
 instance P.HasComputedSmtpPassword (DomainResource s) Text
-
 instance P.HasComputedSpamAction (DomainResource s) Text
-
 instance P.HasComputedWildcard (DomainResource s) Text
 
 domainResource :: TF.Resource P.Lailgun (DomainResource s)
