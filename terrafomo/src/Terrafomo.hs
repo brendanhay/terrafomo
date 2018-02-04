@@ -33,7 +33,7 @@ module Terrafomo
     , nil
 
     -- *** Setters
-    , (=~)
+    , (@~)
 
     -- * Providers
     , IsProvider      (..)

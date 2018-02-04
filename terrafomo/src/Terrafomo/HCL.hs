@@ -336,6 +336,14 @@ instance ( Selector s
          in maybeToList (attribute k v)
     {-# INLINEABLE gToValues #-}
 
+instance GToAttributes f => GToAttributes (D1 x f) where
+    gToValues = gToValues . unM1
+    {-# INLINEABLE gToValues #-}
+
+instance GToAttributes f => GToAttributes (C1 x f) where
+    gToValues = gToValues . unM1
+    {-# INLINEABLE gToValues #-}
+
 instance ( GToAttributes a
          , GToAttributes b
          ) => GToAttributes (a :*: b) where

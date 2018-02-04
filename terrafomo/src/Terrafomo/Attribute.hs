@@ -9,7 +9,7 @@ module Terrafomo.Attribute
     , nil
 
     -- * Setters
-    , (=~)
+    , (@~)
     ) where
 
 import Data.Hashable (Hashable)
@@ -45,7 +45,8 @@ nil :: Attribute s a
 nil = Nil
 {-# INLINE nil #-}
 
-infixr 4 =~
+infixr 4 @~
 
-(=~) :: Lens.ASetter' t (Attribute s a) -> a -> t -> t
-(=~) l x = Lens.set l (Constant x)
+(@~) :: Lens.ASetter' t (Attribute s a) -> a -> t -> t
+(@~) l x = Lens.set l (Constant x)
+{-# INLINE @~ #-}
