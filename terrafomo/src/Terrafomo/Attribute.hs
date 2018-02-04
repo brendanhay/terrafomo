@@ -1,10 +1,13 @@
+{-# LANGUAGE DeriveGeneric          #-}
 {-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE LambdaCase             #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE OverloadedStrings      #-}
 
 module Terrafomo.Attribute
     ( Attribute (..)
+    , computed
     , constant
     , nil
 
@@ -13,34 +16,46 @@ module Terrafomo.Attribute
     , (?~)
     ) where
 
-import Data.Hashable (Hashable (hashWithSalt))
--- import Data.Profunctor (Choice (right'), dimap)
+import Data.Hashable (Hashable)
+import Data.Monoid   ((<>))
 
-import Terrafomo.Name (Key, Name)
+import GHC.Generics (Generic)
+
+import Terrafomo.Name
 
 import qualified Lens.Micro as Lens
 
 -- | An argument is either a computed attribute of another terraform resource
 -- or data source, a constant value, or nil.
 data Attribute s a
-    = Computed !Key !Name
+    = Computed !Key !Name !Name
     | Constant !a
     | Nil
-      deriving (Show, Eq)
+      deriving (Show, Eq, Generic)
 
-instance Hashable a => Hashable (Attribute s a) where
-    hashWithSalt s = \case
-        Computed k x -> s `hashWithSalt` (0 :: Int) `hashWithSalt` k `hashWithSalt` x
-        Constant   x -> s `hashWithSalt` (1 :: Int) `hashWithSalt` x
-        Nil          -> s `hashWithSalt` (2 :: Int)
+instance Hashable a => Hashable (Attribute s a)
+
+computed :: Key -> Name -> Attribute s a
+computed k n = Computed k n (Name (typeName (keyType k) <> "_" <> fromName n))
+{-# INLINE computed #-}
+
+-- Remote   _ _ n -> Remote key (outputName x) n
+-- Computed k v   -> Remote key (outputName x) (nformat (ftype % "_" % fname) (keyType k) v)
+-- _              -> Remote key (outputName x) (outputName x)
+
+-- Remote   _ _ n -> nformat (fname % "_" % fname) next n
+-- Computed k v   -> nformat (ftype % "_" % fname) (keyType k) v
+-- _              -> next
 
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.
 constant :: a -> Attribute s a
 constant = Constant
+{-# INLINE constant #-}
 
 -- | Omit an attribute. Equivalent to 'Nothing'.
 nil :: Attribute s a
 nil = Nil
+{-# INLINE nil #-}
 
 -- Generalized 'fromMaybe'.
 class IsoMaybe a b | a -> b where

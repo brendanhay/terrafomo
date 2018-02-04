@@ -1,5 +1,4 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ViewPatterns      #-}
 
 module Terrafomo.Hash
     ( hashid
@@ -9,44 +8,24 @@ module Terrafomo.Hash
 import Data.Hashable (Hashable (hash))
 import Data.Text     (Text)
 
-import qualified Data.Char     as Char
 import qualified Data.Text     as Text
 import qualified System.Random as Random
 
+range :: Hashable a => a -> Int -> [b] -> [b]
+range x n rs =
+      map (rs !!)
+    . take n
+    . Random.randomRs (0, length rs - 1)
+    . Random.mkStdGen
+    $ hash x
+
 hashid :: Hashable a => a -> Text
-hashid (hash -> n) = Text.pack (sign : lottery : (separators !! chosen) : hashed)
-  where
-    value   = abs n
-    sign    = if signum n < 0 then 'n' else 'p'
-
-    lottery = alphabet !! (value `mod` 100 `mod` alphabetLen)
-    chosen  = value `mod` Char.ord (head hashed) `mod` separatorsLen
-
-    hashed = go value ""
-      where
-        go number str
-            | number <= 0 = str
-            | otherwise   =
-                let ratio :: Double
-                    ratio = fromIntegral number / fromIntegral alphabetLen
-                 in go (floor ratio) (alphabet !! (number `mod` alphabetLen) : str)
-
-    separators    = "cfhistuCFHISTU"
-    separatorsLen = length separators
-
-    alphabet      = "abdegjklmnopqrvwxyzABDEGJKLMOPQRVWXYZ1234567890"
-    alphabetLen   = length alphabet
+hashid x =
+    Text.pack $ range x 9 (['a' .. 'z'] ++ ['A' .. 'Z'] ++ ['0' .. '9'])
 
 human :: Hashable a => a -> Text
-human =
-     Text.intercalate "-"
-   . map (dictionary !!)
-   . take 5
-   . Random.randomRs (0, length dictionary)
-   . Random.mkStdGen
-   . hash
-  where
-    dictionary =
+human x =
+    Text.intercalate "-" $ range x 5
         [ "aardvark"
         , "absurd"
         , "accrue"

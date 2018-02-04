@@ -48,5 +48,5 @@ class {{ class.value.name }} a b | a -> b where
     {{ class.value.method }}
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     {{ class.value.method }} =
-        to (\x -> TF.Computed (TF.referenceKey x) "{{ class.value.symbol }}")
+        to (\x -> TF.computed (TF.referenceKey x) "{{ class.value.symbol }}")
 {% endfor %}

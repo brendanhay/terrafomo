@@ -60,6 +60,7 @@ import Terrafomo.RemoteState
 import Terrafomo.Source      (DataSource, Resource, Source (..))
 import Terrafomo.ValueMap    (ValueMap)
 
+import qualified Data.Hashable                as Hash
 import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
 import qualified Terrafomo.Format             as Format
@@ -101,7 +102,7 @@ newtype TerraformConfig = TerraformConfig
 
 -- | Provides key uniquness invariants and ordering of output statements.
 data TerraformState = UnsafeTerraformState
-    { supply      :: !Int
+    { supply      :: !Int -- Deliberately using an 'Int' for overflow.
     , backend     :: !(Backend HCL.Value)
     , providers   :: !(ValueMap Key  HCL.Value)
     , remotes     :: !(ValueMap Key  HCL.Value)
@@ -165,7 +166,7 @@ runTerraform x name m =
 
     state =
         UnsafeTerraformState
-            { supply      = 10000
+            { supply      = Hash.hash name
             , backend     = HCL.toHCL <$> x
             , providers   = VMap.empty
             , remotes     = VMap.empty
@@ -376,16 +377,15 @@ output
        )
     => Attribute s a
     -> m (Output a)
-output attr = do
+output attr =
     liftTerraform $ do
         b    <- MTL.gets backend
         next <- getNextName
 
-        let name = case attr of
-              Computed k v ->
-                  nformat (fname % "_" % ftype % "_" % fname) next (keyType k) v
-              _            ->
-                  next
+        let name =
+              case attr of
+                  Computed k v n -> nformat (fname % "_" % fname) next n
+                  _              -> next
 
             out   = Output b name attr
             value = HCL.toHCL out
@@ -404,7 +404,7 @@ remote
     :: MonadTerraform s m
     => Output a
     -> m (Attribute s a)
-remote x =
+remote x@(Output _ _ attr) =
     liftTerraform $ do
         let hash  = Name (Hash.human (outputBackend x))
             state = newRemoteState hash (outputBackend x)
@@ -417,7 +417,10 @@ remote x =
             then MTL.throwError (NonUniqueDataSource key value)
             else void (insertValue key value remotes (\s w -> w { remotes = s }))
 
-        pure (Computed key (outputName x))
+        pure $!
+            case attr of
+                Computed _ _ n -> Computed key (outputName x) n
+                _              -> Computed key (outputName x) (outputName x)
 
 insertValue
     :: ( MonadTerraform s m
@@ -436,8 +439,10 @@ insertValue key value state update =
     liftTerraform $ do
         vmap <- MTL.gets state
         case VMap.insert key value vmap of
-            Nothing    ->                               pure False
-            Just vmap' -> MTL.modify' (update vmap') >> pure True
+            Nothing    -> pure False
+            Just vmap' -> do
+                MTL.modify' (update vmap')
+                pure True
 
 -- | Generate a unique prefixed name for the current context.
 getNextName :: MonadTerraform s m => m Name
