@@ -39,6 +39,10 @@ module Terrafomo.HCL
     , ToJSON (..)
     , JSON
     , json
+
+    -- * Generics
+    , GToHCL (..)
+    , genericToHCL
     ) where
 
 import Data.Aeson             (ToJSON (..))
@@ -219,69 +223,92 @@ json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encode
 
 class ToHCL a where
     toHCL :: a -> Value
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Value where
     toHCL = id
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Bool where
     toHCL = Bool
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL a => ToHCL [a] where
     toHCL = list
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Float where
     toHCL = float
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Double where
     toHCL = float
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Int where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Natural where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Integer where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Int8 where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Int16 where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Int32 where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Int64 where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Word8 where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Word16 where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Word32 where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Word64 where
     toHCL = number
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Text where
     toHCL = string . LText.fromStrict
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL LText.Text where
     toHCL = string
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Builder where
     toHCL = string . Build.toLazyText
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL JSON where
     toHCL = json
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Name where
     toHCL = toHCL . Format.sformat fname
+    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Key where
     toHCL (Key t n) = toHCL (Format.sformat (ftype % "." % fname) t n)
+    {-# INLINEABLE toHCL #-}
