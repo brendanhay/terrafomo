@@ -131,4 +131,4 @@ class HasComputedPropertiesKey a b | a -> b where
     computedPropertiesKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPropertiesKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "properties_key")
+        to (\x -> TF.computed (TF.referenceKey x) "properties_key")

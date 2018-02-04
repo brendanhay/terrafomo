@@ -100,70 +100,70 @@ class HasComputedCidrBlocks a b | a -> b where
     computedCidrBlocks
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
+        to (\x -> TF.computed (TF.referenceKey x) "cidr_blocks")
 
 class HasComputedHostname a b | a -> b where
     computedHostname
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
+        to (\x -> TF.computed (TF.referenceKey x) "hostname")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedIpv4CidrBlocks a b | a -> b where
     computedIpv4CidrBlocks
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIpv4CidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv4_cidr_blocks")
+        to (\x -> TF.computed (TF.referenceKey x) "ipv4_cidr_blocks")
 
 class HasComputedIpv6CidrBlocks a b | a -> b where
     computedIpv6CidrBlocks
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIpv6CidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "ipv6_cidr_blocks")
+        to (\x -> TF.computed (TF.referenceKey x) "ipv6_cidr_blocks")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedPriority a b | a -> b where
     computedPriority
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPriority =
-        to (\x -> TF.Computed (TF.referenceKey x) "priority")
+        to (\x -> TF.computed (TF.referenceKey x) "priority")
 
 class HasComputedProxied a b | a -> b where
     computedProxied
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedProxied =
-        to (\x -> TF.Computed (TF.referenceKey x) "proxied")
+        to (\x -> TF.computed (TF.referenceKey x) "proxied")
 
 class HasComputedTtl a b | a -> b where
     computedTtl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTtl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
+        to (\x -> TF.computed (TF.referenceKey x) "ttl")
 
 class HasComputedType' a b | a -> b where
     computedType'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+        to (\x -> TF.computed (TF.referenceKey x) "type")
 
 class HasComputedValue a b | a -> b where
     computedValue
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
+        to (\x -> TF.computed (TF.referenceKey x) "value")
 
 class HasComputedZoneId a b | a -> b where
     computedZoneId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedZoneId =
-        to (\x -> TF.Computed (TF.referenceKey x) "zone_id")
+        to (\x -> TF.computed (TF.referenceKey x) "zone_id")

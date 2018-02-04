@@ -313,172 +313,172 @@ class HasComputedAvatarUrl a b | a -> b where
     computedAvatarUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAvatarUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "avatar_url")
+        to (\x -> TF.computed (TF.referenceKey x) "avatar_url")
 
 class HasComputedBio a b | a -> b where
     computedBio
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedBio =
-        to (\x -> TF.Computed (TF.referenceKey x) "bio")
+        to (\x -> TF.computed (TF.referenceKey x) "bio")
 
 class HasComputedBlog a b | a -> b where
     computedBlog
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedBlog =
-        to (\x -> TF.Computed (TF.referenceKey x) "blog")
+        to (\x -> TF.computed (TF.referenceKey x) "blog")
 
 class HasComputedCompany a b | a -> b where
     computedCompany
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCompany =
-        to (\x -> TF.Computed (TF.referenceKey x) "company")
+        to (\x -> TF.computed (TF.referenceKey x) "company")
 
 class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCreatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
+        to (\x -> TF.computed (TF.referenceKey x) "created_at")
 
 class HasComputedDescription a b | a -> b where
     computedDescription
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+        to (\x -> TF.computed (TF.referenceKey x) "description")
 
 class HasComputedEmail a b | a -> b where
     computedEmail
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedEmail =
-        to (\x -> TF.Computed (TF.referenceKey x) "email")
+        to (\x -> TF.computed (TF.referenceKey x) "email")
 
 class HasComputedFollowers a b | a -> b where
     computedFollowers
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedFollowers =
-        to (\x -> TF.Computed (TF.referenceKey x) "followers")
+        to (\x -> TF.computed (TF.referenceKey x) "followers")
 
 class HasComputedFollowing a b | a -> b where
     computedFollowing
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedFollowing =
-        to (\x -> TF.Computed (TF.referenceKey x) "following")
+        to (\x -> TF.computed (TF.referenceKey x) "following")
 
 class HasComputedFullName a b | a -> b where
     computedFullName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedFullName =
-        to (\x -> TF.Computed (TF.referenceKey x) "full_name")
+        to (\x -> TF.computed (TF.referenceKey x) "full_name")
 
 class HasComputedGitCloneUrl a b | a -> b where
     computedGitCloneUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedGitCloneUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "git_clone_url")
+        to (\x -> TF.computed (TF.referenceKey x) "git_clone_url")
 
 class HasComputedGpgKeys a b | a -> b where
     computedGpgKeys
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedGpgKeys =
-        to (\x -> TF.Computed (TF.referenceKey x) "gpg_keys")
+        to (\x -> TF.computed (TF.referenceKey x) "gpg_keys")
 
 class HasComputedGravatarId a b | a -> b where
     computedGravatarId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedGravatarId =
-        to (\x -> TF.Computed (TF.referenceKey x) "gravatar_id")
+        to (\x -> TF.computed (TF.referenceKey x) "gravatar_id")
 
 class HasComputedHttpCloneUrl a b | a -> b where
     computedHttpCloneUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHttpCloneUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "http_clone_url")
+        to (\x -> TF.computed (TF.referenceKey x) "http_clone_url")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedLocation a b | a -> b where
     computedLocation
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "location")
+        to (\x -> TF.computed (TF.referenceKey x) "location")
 
 class HasComputedLogin a b | a -> b where
     computedLogin
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLogin =
-        to (\x -> TF.Computed (TF.referenceKey x) "login")
+        to (\x -> TF.computed (TF.referenceKey x) "login")
 
 class HasComputedMembers a b | a -> b where
     computedMembers
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMembers =
-        to (\x -> TF.Computed (TF.referenceKey x) "members")
+        to (\x -> TF.computed (TF.referenceKey x) "members")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedPermission a b | a -> b where
     computedPermission
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPermission =
-        to (\x -> TF.Computed (TF.referenceKey x) "permission")
+        to (\x -> TF.computed (TF.referenceKey x) "permission")
 
 class HasComputedPrivacy a b | a -> b where
     computedPrivacy
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrivacy =
-        to (\x -> TF.Computed (TF.referenceKey x) "privacy")
+        to (\x -> TF.computed (TF.referenceKey x) "privacy")
 
 class HasComputedPublicGists a b | a -> b where
     computedPublicGists
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPublicGists =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_gists")
+        to (\x -> TF.computed (TF.referenceKey x) "public_gists")
 
 class HasComputedPublicRepos a b | a -> b where
     computedPublicRepos
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPublicRepos =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_repos")
+        to (\x -> TF.computed (TF.referenceKey x) "public_repos")
 
 class HasComputedSiteAdmin a b | a -> b where
     computedSiteAdmin
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSiteAdmin =
-        to (\x -> TF.Computed (TF.referenceKey x) "site_admin")
+        to (\x -> TF.computed (TF.referenceKey x) "site_admin")
 
 class HasComputedSshCloneUrl a b | a -> b where
     computedSshCloneUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSshCloneUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ssh_clone_url")
+        to (\x -> TF.computed (TF.referenceKey x) "ssh_clone_url")
 
 class HasComputedSshKeys a b | a -> b where
     computedSshKeys
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSshKeys =
-        to (\x -> TF.Computed (TF.referenceKey x) "ssh_keys")
+        to (\x -> TF.computed (TF.referenceKey x) "ssh_keys")
 
 class HasComputedSvnUrl a b | a -> b where
     computedSvnUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSvnUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "svn_url")
+        to (\x -> TF.computed (TF.referenceKey x) "svn_url")
 
 class HasComputedUpdatedAt a b | a -> b where
     computedUpdatedAt
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUpdatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "updated_at")
+        to (\x -> TF.computed (TF.referenceKey x) "updated_at")
 
 class HasComputedUrl a b | a -> b where
     computedUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "url")
+        to (\x -> TF.computed (TF.referenceKey x) "url")

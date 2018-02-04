@@ -89,4 +89,4 @@ class HasComputedToken a b | a -> b where
     computedToken
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "token")
+        to (\x -> TF.computed (TF.referenceKey x) "token")

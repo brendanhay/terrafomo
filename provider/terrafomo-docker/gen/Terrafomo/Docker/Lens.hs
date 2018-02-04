@@ -342,52 +342,52 @@ class HasComputedBridge a b | a -> b where
     computedBridge
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedBridge =
-        to (\x -> TF.Computed (TF.referenceKey x) "bridge")
+        to (\x -> TF.computed (TF.referenceKey x) "bridge")
 
 class HasComputedGateway a b | a -> b where
     computedGateway
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedGateway =
-        to (\x -> TF.Computed (TF.referenceKey x) "gateway")
+        to (\x -> TF.computed (TF.referenceKey x) "gateway")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedIpAddress a b | a -> b where
     computedIpAddress
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
+        to (\x -> TF.computed (TF.referenceKey x) "ip_address")
 
 class HasComputedIpPrefixLength a b | a -> b where
     computedIpPrefixLength
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIpPrefixLength =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_prefix_length")
+        to (\x -> TF.computed (TF.referenceKey x) "ip_prefix_length")
 
 class HasComputedLatest a b | a -> b where
     computedLatest
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLatest =
-        to (\x -> TF.Computed (TF.referenceKey x) "latest")
+        to (\x -> TF.computed (TF.referenceKey x) "latest")
 
 class HasComputedMountpoint a b | a -> b where
     computedMountpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMountpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "mountpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "mountpoint")
 
 class HasComputedScope a b | a -> b where
     computedScope
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedScope =
-        to (\x -> TF.Computed (TF.referenceKey x) "scope")
+        to (\x -> TF.computed (TF.referenceKey x) "scope")
 
 class HasComputedSha256Digest a b | a -> b where
     computedSha256Digest
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSha256Digest =
-        to (\x -> TF.Computed (TF.referenceKey x) "sha256_digest")
+        to (\x -> TF.computed (TF.referenceKey x) "sha256_digest")

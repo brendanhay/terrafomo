@@ -195,10 +195,10 @@ class HasComputedFingerprint a b | a -> b where
     computedFingerprint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "fingerprint")
+        to (\x -> TF.computed (TF.referenceKey x) "fingerprint")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")

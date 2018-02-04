@@ -315,16 +315,16 @@ class HasComputedDisabled a b | a -> b where
     computedDisabled
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDisabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "disabled")
+        to (\x -> TF.computed (TF.referenceKey x) "disabled")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedVerified a b | a -> b where
     computedVerified
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVerified =
-        to (\x -> TF.Computed (TF.referenceKey x) "verified")
+        to (\x -> TF.computed (TF.referenceKey x) "verified")

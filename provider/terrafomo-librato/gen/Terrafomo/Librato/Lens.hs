@@ -187,88 +187,88 @@ class HasComputedActive a b | a -> b where
     computedActive
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedActive =
-        to (\x -> TF.Computed (TF.referenceKey x) "active")
+        to (\x -> TF.computed (TF.referenceKey x) "active")
 
 class HasComputedComposite a b | a -> b where
     computedComposite
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedComposite =
-        to (\x -> TF.Computed (TF.referenceKey x) "composite")
+        to (\x -> TF.computed (TF.referenceKey x) "composite")
 
 class HasComputedCondition a b | a -> b where
     computedCondition
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCondition =
-        to (\x -> TF.Computed (TF.referenceKey x) "condition")
+        to (\x -> TF.computed (TF.referenceKey x) "condition")
 
 class HasComputedDescription a b | a -> b where
     computedDescription
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+        to (\x -> TF.computed (TF.referenceKey x) "description")
 
 class HasComputedDisplayName a b | a -> b where
     computedDisplayName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDisplayName =
-        to (\x -> TF.Computed (TF.referenceKey x) "display_name")
+        to (\x -> TF.computed (TF.referenceKey x) "display_name")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedPeriod a b | a -> b where
     computedPeriod
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPeriod =
-        to (\x -> TF.Computed (TF.referenceKey x) "period")
+        to (\x -> TF.computed (TF.referenceKey x) "period")
 
 class HasComputedRearmSeconds a b | a -> b where
     computedRearmSeconds
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRearmSeconds =
-        to (\x -> TF.Computed (TF.referenceKey x) "rearm_seconds")
+        to (\x -> TF.computed (TF.referenceKey x) "rearm_seconds")
 
 class HasComputedServices a b | a -> b where
     computedServices
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedServices =
-        to (\x -> TF.Computed (TF.referenceKey x) "services")
+        to (\x -> TF.computed (TF.referenceKey x) "services")
 
 class HasComputedSettings a b | a -> b where
     computedSettings
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSettings =
-        to (\x -> TF.Computed (TF.referenceKey x) "settings")
+        to (\x -> TF.computed (TF.referenceKey x) "settings")
 
 class HasComputedSourceLag a b | a -> b where
     computedSourceLag
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSourceLag =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_lag")
+        to (\x -> TF.computed (TF.referenceKey x) "source_lag")
 
 class HasComputedSpaceId a b | a -> b where
     computedSpaceId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSpaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "space_id")
+        to (\x -> TF.computed (TF.referenceKey x) "space_id")
 
 class HasComputedTitle a b | a -> b where
     computedTitle
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTitle =
-        to (\x -> TF.Computed (TF.referenceKey x) "title")
+        to (\x -> TF.computed (TF.referenceKey x) "title")
 
 class HasComputedType' a b | a -> b where
     computedType'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+        to (\x -> TF.computed (TF.referenceKey x) "type")

@@ -98,16 +98,16 @@ class HasComputedFullName a b | a -> b where
     computedFullName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedFullName =
-        to (\x -> TF.Computed (TF.referenceKey x) "full_name")
+        to (\x -> TF.computed (TF.referenceKey x) "full_name")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedRole a b | a -> b where
     computedRole
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRole =
-        to (\x -> TF.Computed (TF.referenceKey x) "role")
+        to (\x -> TF.computed (TF.referenceKey x) "role")

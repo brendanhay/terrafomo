@@ -193,82 +193,82 @@ class HasComputedActiveVersion a b | a -> b where
     computedActiveVersion
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedActiveVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "active_version")
+        to (\x -> TF.computed (TF.referenceKey x) "active_version")
 
 class HasComputedBackend a b | a -> b where
     computedBackend
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedBackend =
-        to (\x -> TF.Computed (TF.referenceKey x) "backend")
+        to (\x -> TF.computed (TF.referenceKey x) "backend")
 
 class HasComputedCidrBlocks a b | a -> b where
     computedCidrBlocks
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCidrBlocks =
-        to (\x -> TF.Computed (TF.referenceKey x) "cidr_blocks")
+        to (\x -> TF.computed (TF.referenceKey x) "cidr_blocks")
 
 class HasComputedDefaultHost a b | a -> b where
     computedDefaultHost
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDefaultHost =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_host")
+        to (\x -> TF.computed (TF.referenceKey x) "default_host")
 
 class HasComputedDefaultTtl a b | a -> b where
     computedDefaultTtl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDefaultTtl =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_ttl")
+        to (\x -> TF.computed (TF.referenceKey x) "default_ttl")
 
 class HasComputedDomain a b | a -> b where
     computedDomain
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDomain =
-        to (\x -> TF.Computed (TF.referenceKey x) "domain")
+        to (\x -> TF.computed (TF.referenceKey x) "domain")
 
 class HasComputedForceDestroy a b | a -> b where
     computedForceDestroy
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedForceDestroy =
-        to (\x -> TF.Computed (TF.referenceKey x) "force_destroy")
+        to (\x -> TF.computed (TF.referenceKey x) "force_destroy")
 
 class HasComputedHeader a b | a -> b where
     computedHeader
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHeader =
-        to (\x -> TF.Computed (TF.referenceKey x) "header")
+        to (\x -> TF.computed (TF.referenceKey x) "header")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedPapertrail a b | a -> b where
     computedPapertrail
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPapertrail =
-        to (\x -> TF.Computed (TF.referenceKey x) "papertrail")
+        to (\x -> TF.computed (TF.referenceKey x) "papertrail")
 
 class HasComputedResponseObject a b | a -> b where
     computedResponseObject
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedResponseObject =
-        to (\x -> TF.Computed (TF.referenceKey x) "response_object")
+        to (\x -> TF.computed (TF.referenceKey x) "response_object")
 
 class HasComputedS3logging a b | a -> b where
     computedS3logging
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedS3logging =
-        to (\x -> TF.Computed (TF.referenceKey x) "s3logging")
+        to (\x -> TF.computed (TF.referenceKey x) "s3logging")
 
 class HasComputedVcl a b | a -> b where
     computedVcl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVcl =
-        to (\x -> TF.Computed (TF.referenceKey x) "vcl")
+        to (\x -> TF.computed (TF.referenceKey x) "vcl")

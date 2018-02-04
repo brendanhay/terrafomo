@@ -404,88 +404,88 @@ class HasComputedAccessKey a b | a -> b where
     computedAccessKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAccessKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "access_key")
+        to (\x -> TF.computed (TF.referenceKey x) "access_key")
 
 class HasComputedAccessor a b | a -> b where
     computedAccessor
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAccessor =
-        to (\x -> TF.Computed (TF.referenceKey x) "accessor")
+        to (\x -> TF.computed (TF.referenceKey x) "accessor")
 
 class HasComputedAuthType a b | a -> b where
     computedAuthType
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAuthType =
-        to (\x -> TF.Computed (TF.referenceKey x) "auth_type")
+        to (\x -> TF.computed (TF.referenceKey x) "auth_type")
 
 class HasComputedClientToken a b | a -> b where
     computedClientToken
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedClientToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "client_token")
+        to (\x -> TF.computed (TF.referenceKey x) "client_token")
 
 class HasComputedData' a b | a -> b where
     computedData'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedData' =
-        to (\x -> TF.Computed (TF.referenceKey x) "data")
+        to (\x -> TF.computed (TF.referenceKey x) "data")
 
 class HasComputedDataJson a b | a -> b where
     computedDataJson
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDataJson =
-        to (\x -> TF.Computed (TF.referenceKey x) "data_json")
+        to (\x -> TF.computed (TF.referenceKey x) "data_json")
 
 class HasComputedLeaseDuration a b | a -> b where
     computedLeaseDuration
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLeaseDuration =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_duration")
+        to (\x -> TF.computed (TF.referenceKey x) "lease_duration")
 
 class HasComputedLeaseId a b | a -> b where
     computedLeaseId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLeaseId =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_id")
+        to (\x -> TF.computed (TF.referenceKey x) "lease_id")
 
 class HasComputedLeaseRenewable a b | a -> b where
     computedLeaseRenewable
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLeaseRenewable =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_renewable")
+        to (\x -> TF.computed (TF.referenceKey x) "lease_renewable")
 
 class HasComputedLeaseStartTime a b | a -> b where
     computedLeaseStartTime
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLeaseStartTime =
-        to (\x -> TF.Computed (TF.referenceKey x) "lease_start_time")
+        to (\x -> TF.computed (TF.referenceKey x) "lease_start_time")
 
 class HasComputedMetadata a b | a -> b where
     computedMetadata
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMetadata =
-        to (\x -> TF.Computed (TF.referenceKey x) "metadata")
+        to (\x -> TF.computed (TF.referenceKey x) "metadata")
 
 class HasComputedPolicies a b | a -> b where
     computedPolicies
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPolicies =
-        to (\x -> TF.Computed (TF.referenceKey x) "policies")
+        to (\x -> TF.computed (TF.referenceKey x) "policies")
 
 class HasComputedRenewable a b | a -> b where
     computedRenewable
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRenewable =
-        to (\x -> TF.Computed (TF.referenceKey x) "renewable")
+        to (\x -> TF.computed (TF.referenceKey x) "renewable")
 
 class HasComputedSecretKey a b | a -> b where
     computedSecretKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecretKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secret_key")
+        to (\x -> TF.computed (TF.referenceKey x) "secret_key")
 
 class HasComputedSecurityToken a b | a -> b where
     computedSecurityToken
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecurityToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_token")
+        to (\x -> TF.computed (TF.referenceKey x) "security_token")

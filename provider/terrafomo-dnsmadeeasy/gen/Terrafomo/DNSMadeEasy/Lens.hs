@@ -44,28 +44,28 @@ class HasComputedGtdLocation a b | a -> b where
     computedGtdLocation
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedGtdLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "gtdLocation")
+        to (\x -> TF.computed (TF.referenceKey x) "gtdLocation")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedTtl a b | a -> b where
     computedTtl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTtl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
+        to (\x -> TF.computed (TF.referenceKey x) "ttl")
 
 class HasComputedType' a b | a -> b where
     computedType'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+        to (\x -> TF.computed (TF.referenceKey x) "type")
 
 class HasComputedValue a b | a -> b where
     computedValue
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
+        to (\x -> TF.computed (TF.referenceKey x) "value")

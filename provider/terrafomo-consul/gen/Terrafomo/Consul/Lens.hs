@@ -209,94 +209,94 @@ class HasComputedAddress a b | a -> b where
     computedAddress
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "address")
+        to (\x -> TF.computed (TF.referenceKey x) "address")
 
 class HasComputedDatacenter a b | a -> b where
     computedDatacenter
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDatacenter =
-        to (\x -> TF.Computed (TF.referenceKey x) "datacenter")
+        to (\x -> TF.computed (TF.referenceKey x) "datacenter")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedNode a b | a -> b where
     computedNode
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedNode =
-        to (\x -> TF.Computed (TF.referenceKey x) "node")
+        to (\x -> TF.computed (TF.referenceKey x) "node")
 
 class HasComputedNodeIds a b | a -> b where
     computedNodeIds
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedNodeIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "node_ids")
+        to (\x -> TF.computed (TF.referenceKey x) "node_ids")
 
 class HasComputedNodeNames a b | a -> b where
     computedNodeNames
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedNodeNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "node_names")
+        to (\x -> TF.computed (TF.referenceKey x) "node_names")
 
 class HasComputedNodes a b | a -> b where
     computedNodes
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedNodes =
-        to (\x -> TF.Computed (TF.referenceKey x) "nodes")
+        to (\x -> TF.computed (TF.referenceKey x) "nodes")
 
 class HasComputedPathPrefix a b | a -> b where
     computedPathPrefix
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPathPrefix =
-        to (\x -> TF.Computed (TF.referenceKey x) "path_prefix")
+        to (\x -> TF.computed (TF.referenceKey x) "path_prefix")
 
 class HasComputedPort a b | a -> b where
     computedPort
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "port")
+        to (\x -> TF.computed (TF.referenceKey x) "port")
 
 class HasComputedService a b | a -> b where
     computedService
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedService =
-        to (\x -> TF.Computed (TF.referenceKey x) "service")
+        to (\x -> TF.computed (TF.referenceKey x) "service")
 
 class HasComputedServiceId a b | a -> b where
     computedServiceId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedServiceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "service_id")
+        to (\x -> TF.computed (TF.referenceKey x) "service_id")
 
 class HasComputedSubkeys a b | a -> b where
     computedSubkeys
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSubkeys =
-        to (\x -> TF.Computed (TF.referenceKey x) "subkeys")
+        to (\x -> TF.computed (TF.referenceKey x) "subkeys")
 
 class HasComputedTag a b | a -> b where
     computedTag
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTag =
-        to (\x -> TF.Computed (TF.referenceKey x) "tag")
+        to (\x -> TF.computed (TF.referenceKey x) "tag")
 
 class HasComputedTags a b | a -> b where
     computedTags
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+        to (\x -> TF.computed (TF.referenceKey x) "tags")
 
 class HasComputedVar<name> a b | a -> b where
     computedVar<name>
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVar<name> =
-        to (\x -> TF.Computed (TF.referenceKey x) "var.<name>")
+        to (\x -> TF.computed (TF.referenceKey x) "var.<name>")

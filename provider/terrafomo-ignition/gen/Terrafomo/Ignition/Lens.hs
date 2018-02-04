@@ -335,10 +335,10 @@ class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedRendered a b | a -> b where
     computedRendered
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRendered =
-        to (\x -> TF.Computed (TF.referenceKey x) "rendered")
+        to (\x -> TF.computed (TF.referenceKey x) "rendered")

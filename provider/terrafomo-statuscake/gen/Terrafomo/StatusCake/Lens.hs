@@ -110,4 +110,4 @@ class HasComputedTestId a b | a -> b where
     computedTestId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTestId =
-        to (\x -> TF.Computed (TF.referenceKey x) "test_id")
+        to (\x -> TF.computed (TF.referenceKey x) "test_id")

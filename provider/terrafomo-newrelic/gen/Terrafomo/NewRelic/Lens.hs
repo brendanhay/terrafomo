@@ -156,28 +156,28 @@ class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCreatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
+        to (\x -> TF.computed (TF.referenceKey x) "created_at")
 
 class HasComputedHostIds a b | a -> b where
     computedHostIds
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHostIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "host_ids")
+        to (\x -> TF.computed (TF.referenceKey x) "host_ids")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedInstanceIds a b | a -> b where
     computedInstanceIds
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedInstanceIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "instance_ids")
+        to (\x -> TF.computed (TF.referenceKey x) "instance_ids")
 
 class HasComputedUpdatedAt a b | a -> b where
     computedUpdatedAt
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUpdatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "updated_at")
+        to (\x -> TF.computed (TF.referenceKey x) "updated_at")

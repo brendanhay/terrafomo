@@ -250,130 +250,130 @@ class HasComputedAlgorithm a b | a -> b where
     computedAlgorithm
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAlgorithm =
-        to (\x -> TF.Computed (TF.referenceKey x) "algorithm")
+        to (\x -> TF.computed (TF.referenceKey x) "algorithm")
 
 class HasComputedCertFingerprint a b | a -> b where
     computedCertFingerprint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCertFingerprint =
-        to (\x -> TF.Computed (TF.referenceKey x) "cert_fingerprint")
+        to (\x -> TF.computed (TF.referenceKey x) "cert_fingerprint")
 
 class HasComputedCn a b | a -> b where
     computedCn
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCn =
-        to (\x -> TF.Computed (TF.referenceKey x) "cn")
+        to (\x -> TF.computed (TF.referenceKey x) "cn")
 
 class HasComputedCommand a b | a -> b where
     computedCommand
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCommand =
-        to (\x -> TF.Computed (TF.referenceKey x) "command")
+        to (\x -> TF.computed (TF.referenceKey x) "command")
 
 class HasComputedDescription a b | a -> b where
     computedDescription
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+        to (\x -> TF.computed (TF.referenceKey x) "description")
 
 class HasComputedExpiresAt a b | a -> b where
     computedExpiresAt
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedExpiresAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "expires_at")
+        to (\x -> TF.computed (TF.referenceKey x) "expires_at")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedImage a b | a -> b where
     computedImage
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedImage =
-        to (\x -> TF.Computed (TF.referenceKey x) "image")
+        to (\x -> TF.computed (TF.referenceKey x) "image")
 
 class HasComputedIssuedAt a b | a -> b where
     computedIssuedAt
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIssuedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "issued_at")
+        to (\x -> TF.computed (TF.referenceKey x) "issued_at")
 
 class HasComputedIssuer a b | a -> b where
     computedIssuer
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIssuer =
-        to (\x -> TF.Computed (TF.referenceKey x) "issuer")
+        to (\x -> TF.computed (TF.referenceKey x) "issuer")
 
 class HasComputedKeySize a b | a -> b where
     computedKeySize
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedKeySize =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_size")
+        to (\x -> TF.computed (TF.referenceKey x) "key_size")
 
 class HasComputedMember a b | a -> b where
     computedMember
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMember =
-        to (\x -> TF.Computed (TF.referenceKey x) "member")
+        to (\x -> TF.computed (TF.referenceKey x) "member")
 
 class HasComputedOrchestration a b | a -> b where
     computedOrchestration
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOrchestration =
-        to (\x -> TF.Computed (TF.referenceKey x) "orchestration")
+        to (\x -> TF.computed (TF.referenceKey x) "orchestration")
 
 class HasComputedProjectTemplateId a b | a -> b where
     computedProjectTemplateId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedProjectTemplateId =
-        to (\x -> TF.Computed (TF.referenceKey x) "project_template_id")
+        to (\x -> TF.computed (TF.referenceKey x) "project_template_id")
 
 class HasComputedRegistrationUrl a b | a -> b where
     computedRegistrationUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRegistrationUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "registration_url")
+        to (\x -> TF.computed (TF.referenceKey x) "registration_url")
 
 class HasComputedRenderedDockerCompose a b | a -> b where
     computedRenderedDockerCompose
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRenderedDockerCompose =
-        to (\x -> TF.Computed (TF.referenceKey x) "rendered_docker_compose")
+        to (\x -> TF.computed (TF.referenceKey x) "rendered_docker_compose")
 
 class HasComputedRenderedRancherCompose a b | a -> b where
     computedRenderedRancherCompose
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRenderedRancherCompose =
-        to (\x -> TF.Computed (TF.referenceKey x) "rendered_rancher_compose")
+        to (\x -> TF.computed (TF.referenceKey x) "rendered_rancher_compose")
 
 class HasComputedSerialNumber a b | a -> b where
     computedSerialNumber
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSerialNumber =
-        to (\x -> TF.Computed (TF.referenceKey x) "serial_number")
+        to (\x -> TF.computed (TF.referenceKey x) "serial_number")
 
 class HasComputedSubjectAlternativeNames a b | a -> b where
     computedSubjectAlternativeNames
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSubjectAlternativeNames =
-        to (\x -> TF.Computed (TF.referenceKey x) "subject_alternative_names")
+        to (\x -> TF.computed (TF.referenceKey x) "subject_alternative_names")
 
 class HasComputedToken a b | a -> b where
     computedToken
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "token")
+        to (\x -> TF.computed (TF.referenceKey x) "token")
 
 class HasComputedValue a b | a -> b where
     computedValue
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
+        to (\x -> TF.computed (TF.referenceKey x) "value")
 
 class HasComputedVersion a b | a -> b where
     computedVersion
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "version")
+        to (\x -> TF.computed (TF.referenceKey x) "version")

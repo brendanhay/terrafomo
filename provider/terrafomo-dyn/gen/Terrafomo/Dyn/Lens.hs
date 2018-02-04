@@ -76,10 +76,10 @@ class HasComputedFqdn a b | a -> b where
     computedFqdn
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "fqdn")
+        to (\x -> TF.computed (TF.referenceKey x) "fqdn")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")

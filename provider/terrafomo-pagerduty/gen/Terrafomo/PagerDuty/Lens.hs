@@ -272,94 +272,94 @@ class HasComputedAvatarUrl a b | a -> b where
     computedAvatarUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAvatarUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "avatar_url")
+        to (\x -> TF.computed (TF.referenceKey x) "avatar_url")
 
 class HasComputedBlacklisted a b | a -> b where
     computedBlacklisted
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedBlacklisted =
-        to (\x -> TF.Computed (TF.referenceKey x) "blacklisted")
+        to (\x -> TF.computed (TF.referenceKey x) "blacklisted")
 
 class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCreatedAt =
-        to (\x -> TF.Computed (TF.referenceKey x) "created_at")
+        to (\x -> TF.computed (TF.referenceKey x) "created_at")
 
 class HasComputedEnabled a b | a -> b where
     computedEnabled
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedEnabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "enabled")
+        to (\x -> TF.computed (TF.referenceKey x) "enabled")
 
 class HasComputedHtmlUrl a b | a -> b where
     computedHtmlUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHtmlUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "html_url")
+        to (\x -> TF.computed (TF.referenceKey x) "html_url")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedIntegrationEmail a b | a -> b where
     computedIntegrationEmail
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIntegrationEmail =
-        to (\x -> TF.Computed (TF.referenceKey x) "integration_email")
+        to (\x -> TF.computed (TF.referenceKey x) "integration_email")
 
 class HasComputedIntegrationKey a b | a -> b where
     computedIntegrationKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIntegrationKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "integration_key")
+        to (\x -> TF.computed (TF.referenceKey x) "integration_key")
 
 class HasComputedInvitationSent a b | a -> b where
     computedInvitationSent
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedInvitationSent =
-        to (\x -> TF.Computed (TF.referenceKey x) "invitation_sent")
+        to (\x -> TF.computed (TF.referenceKey x) "invitation_sent")
 
 class HasComputedLastIncidentTimestamp a b | a -> b where
     computedLastIncidentTimestamp
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLastIncidentTimestamp =
-        to (\x -> TF.Computed (TF.referenceKey x) "last_incident_timestamp")
+        to (\x -> TF.computed (TF.referenceKey x) "last_incident_timestamp")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedStatus a b | a -> b where
     computedStatus
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedStatus =
-        to (\x -> TF.Computed (TF.referenceKey x) "status")
+        to (\x -> TF.computed (TF.referenceKey x) "status")
 
 class HasComputedTeamId a b | a -> b where
     computedTeamId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTeamId =
-        to (\x -> TF.Computed (TF.referenceKey x) "team_id")
+        to (\x -> TF.computed (TF.referenceKey x) "team_id")
 
 class HasComputedTimeZone a b | a -> b where
     computedTimeZone
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTimeZone =
-        to (\x -> TF.Computed (TF.referenceKey x) "time_zone")
+        to (\x -> TF.computed (TF.referenceKey x) "time_zone")
 
 class HasComputedType' a b | a -> b where
     computedType'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+        to (\x -> TF.computed (TF.referenceKey x) "type")
 
 class HasComputedUserId a b | a -> b where
     computedUserId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUserId =
-        to (\x -> TF.Computed (TF.referenceKey x) "user_id")
+        to (\x -> TF.computed (TF.referenceKey x) "user_id")

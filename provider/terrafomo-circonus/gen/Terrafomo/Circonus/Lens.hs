@@ -417,124 +417,124 @@ class HasComputedAddress1 a b | a -> b where
     computedAddress1
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAddress1 =
-        to (\x -> TF.Computed (TF.referenceKey x) "address1")
+        to (\x -> TF.computed (TF.referenceKey x) "address1")
 
 class HasComputedAddress2 a b | a -> b where
     computedAddress2
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAddress2 =
-        to (\x -> TF.Computed (TF.referenceKey x) "address2")
+        to (\x -> TF.computed (TF.referenceKey x) "address2")
 
 class HasComputedCcEmail a b | a -> b where
     computedCcEmail
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCcEmail =
-        to (\x -> TF.Computed (TF.referenceKey x) "cc_email")
+        to (\x -> TF.computed (TF.referenceKey x) "cc_email")
 
 class HasComputedCity a b | a -> b where
     computedCity
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCity =
-        to (\x -> TF.Computed (TF.referenceKey x) "city")
+        to (\x -> TF.computed (TF.referenceKey x) "city")
 
 class HasComputedContactGroups a b | a -> b where
     computedContactGroups
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedContactGroups =
-        to (\x -> TF.Computed (TF.referenceKey x) "contact_groups")
+        to (\x -> TF.computed (TF.referenceKey x) "contact_groups")
 
 class HasComputedCountry a b | a -> b where
     computedCountry
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCountry =
-        to (\x -> TF.Computed (TF.referenceKey x) "country")
+        to (\x -> TF.computed (TF.referenceKey x) "country")
 
 class HasComputedDescription a b | a -> b where
     computedDescription
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+        to (\x -> TF.computed (TF.referenceKey x) "description")
 
 class HasComputedDetails a b | a -> b where
     computedDetails
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDetails =
-        to (\x -> TF.Computed (TF.referenceKey x) "details")
+        to (\x -> TF.computed (TF.referenceKey x) "details")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedInvites a b | a -> b where
     computedInvites
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedInvites =
-        to (\x -> TF.Computed (TF.referenceKey x) "invites")
+        to (\x -> TF.computed (TF.referenceKey x) "invites")
 
 class HasComputedLatitude a b | a -> b where
     computedLatitude
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLatitude =
-        to (\x -> TF.Computed (TF.referenceKey x) "latitude")
+        to (\x -> TF.computed (TF.referenceKey x) "latitude")
 
 class HasComputedLongitude a b | a -> b where
     computedLongitude
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLongitude =
-        to (\x -> TF.Computed (TF.referenceKey x) "longitude")
+        to (\x -> TF.computed (TF.referenceKey x) "longitude")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedOwner a b | a -> b where
     computedOwner
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOwner =
-        to (\x -> TF.Computed (TF.referenceKey x) "owner")
+        to (\x -> TF.computed (TF.referenceKey x) "owner")
 
 class HasComputedState a b | a -> b where
     computedState
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
+        to (\x -> TF.computed (TF.referenceKey x) "state")
 
 class HasComputedTags a b | a -> b where
     computedTags
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+        to (\x -> TF.computed (TF.referenceKey x) "tags")
 
 class HasComputedTimezone a b | a -> b where
     computedTimezone
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTimezone =
-        to (\x -> TF.Computed (TF.referenceKey x) "timezone")
+        to (\x -> TF.computed (TF.referenceKey x) "timezone")
 
 class HasComputedType' a b | a -> b where
     computedType'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+        to (\x -> TF.computed (TF.referenceKey x) "type")
 
 class HasComputedUiBaseUrl a b | a -> b where
     computedUiBaseUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUiBaseUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ui_base_url")
+        to (\x -> TF.computed (TF.referenceKey x) "ui_base_url")
 
 class HasComputedUsage a b | a -> b where
     computedUsage
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUsage =
-        to (\x -> TF.Computed (TF.referenceKey x) "usage")
+        to (\x -> TF.computed (TF.referenceKey x) "usage")
 
 class HasComputedUsers a b | a -> b where
     computedUsers
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUsers =
-        to (\x -> TF.Computed (TF.referenceKey x) "users")
+        to (\x -> TF.computed (TF.referenceKey x) "users")

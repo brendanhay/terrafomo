@@ -89,46 +89,46 @@ class HasComputedDomainId a b | a -> b where
     computedDomainId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDomainId =
-        to (\x -> TF.Computed (TF.referenceKey x) "domain_id")
+        to (\x -> TF.computed (TF.referenceKey x) "domain_id")
 
 class HasComputedHostname a b | a -> b where
     computedHostname
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
+        to (\x -> TF.computed (TF.referenceKey x) "hostname")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedPriority a b | a -> b where
     computedPriority
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPriority =
-        to (\x -> TF.Computed (TF.referenceKey x) "priority")
+        to (\x -> TF.computed (TF.referenceKey x) "priority")
 
 class HasComputedTtl a b | a -> b where
     computedTtl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTtl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ttl")
+        to (\x -> TF.computed (TF.referenceKey x) "ttl")
 
 class HasComputedType' a b | a -> b where
     computedType'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+        to (\x -> TF.computed (TF.referenceKey x) "type")
 
 class HasComputedValue a b | a -> b where
     computedValue
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedValue =
-        to (\x -> TF.Computed (TF.referenceKey x) "value")
+        to (\x -> TF.computed (TF.referenceKey x) "value")

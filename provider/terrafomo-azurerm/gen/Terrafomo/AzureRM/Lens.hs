@@ -2137,658 +2137,658 @@ class HasComputedAddressPrefix a b | a -> b where
     computedAddressPrefix
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAddressPrefix =
-        to (\x -> TF.Computed (TF.referenceKey x) "address_prefix")
+        to (\x -> TF.computed (TF.referenceKey x) "address_prefix")
 
 class HasComputedAddressSpace a b | a -> b where
     computedAddressSpace
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAddressSpace =
-        to (\x -> TF.Computed (TF.referenceKey x) "address_space")
+        to (\x -> TF.computed (TF.referenceKey x) "address_space")
 
 class HasComputedAddressSpaces a b | a -> b where
     computedAddressSpaces
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAddressSpaces =
-        to (\x -> TF.Computed (TF.referenceKey x) "address_spaces")
+        to (\x -> TF.computed (TF.referenceKey x) "address_spaces")
 
 class HasComputedAdminPassword a b | a -> b where
     computedAdminPassword
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAdminPassword =
-        to (\x -> TF.Computed (TF.referenceKey x) "admin_password")
+        to (\x -> TF.computed (TF.referenceKey x) "admin_password")
 
 class HasComputedAdminUsername a b | a -> b where
     computedAdminUsername
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAdminUsername =
-        to (\x -> TF.Computed (TF.referenceKey x) "admin_username")
+        to (\x -> TF.computed (TF.referenceKey x) "admin_username")
 
 class HasComputedAgentPoolProfileFqdn a b | a -> b where
     computedAgentPoolProfileFqdn
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAgentPoolProfileFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "agent_pool_profile.fqdn")
+        to (\x -> TF.computed (TF.referenceKey x) "agent_pool_profile.fqdn")
 
 class HasComputedAppId a b | a -> b where
     computedAppId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAppId =
-        to (\x -> TF.Computed (TF.referenceKey x) "app_id")
+        to (\x -> TF.computed (TF.referenceKey x) "app_id")
 
 class HasComputedAppliedDnsServers a b | a -> b where
     computedAppliedDnsServers
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAppliedDnsServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "applied_dns_servers")
+        to (\x -> TF.computed (TF.referenceKey x) "applied_dns_servers")
 
 class HasComputedAssignableScopes a b | a -> b where
     computedAssignableScopes
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAssignableScopes =
-        to (\x -> TF.Computed (TF.referenceKey x) "assignable_scopes")
+        to (\x -> TF.computed (TF.referenceKey x) "assignable_scopes")
 
 class HasComputedAutoInflateEnabled a b | a -> b where
     computedAutoInflateEnabled
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAutoInflateEnabled =
-        to (\x -> TF.Computed (TF.referenceKey x) "auto_inflate_enabled")
+        to (\x -> TF.computed (TF.referenceKey x) "auto_inflate_enabled")
 
 class HasComputedCapacity a b | a -> b where
     computedCapacity
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCapacity =
-        to (\x -> TF.Computed (TF.referenceKey x) "capacity")
+        to (\x -> TF.computed (TF.referenceKey x) "capacity")
 
 class HasComputedCertificatePermissions a b | a -> b where
     computedCertificatePermissions
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCertificatePermissions =
-        to (\x -> TF.Computed (TF.referenceKey x) "certificate_permissions")
+        to (\x -> TF.computed (TF.referenceKey x) "certificate_permissions")
 
 class HasComputedCreateOption a b | a -> b where
     computedCreateOption
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCreateOption =
-        to (\x -> TF.Computed (TF.referenceKey x) "create_option")
+        to (\x -> TF.computed (TF.referenceKey x) "create_option")
 
 class HasComputedCreationData a b | a -> b where
     computedCreationData
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCreationData =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_data")
+        to (\x -> TF.computed (TF.referenceKey x) "creation_data")
 
 class HasComputedCreationDate a b | a -> b where
     computedCreationDate
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCreationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_date")
+        to (\x -> TF.computed (TF.referenceKey x) "creation_date")
 
 class HasComputedDataDisk a b | a -> b where
     computedDataDisk
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDataDisk =
-        to (\x -> TF.Computed (TF.referenceKey x) "data_disk")
+        to (\x -> TF.computed (TF.referenceKey x) "data_disk")
 
 class HasComputedDefaultHostname a b | a -> b where
     computedDefaultHostname
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDefaultHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_hostname")
+        to (\x -> TF.computed (TF.referenceKey x) "default_hostname")
 
 class HasComputedDefaultSecondaryLocation a b | a -> b where
     computedDefaultSecondaryLocation
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDefaultSecondaryLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_secondary_location")
+        to (\x -> TF.computed (TF.referenceKey x) "default_secondary_location")
 
 class HasComputedDefaultSiteHostname a b | a -> b where
     computedDefaultSiteHostname
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDefaultSiteHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_site_hostname")
+        to (\x -> TF.computed (TF.referenceKey x) "default_site_hostname")
 
 class HasComputedDescription a b | a -> b where
     computedDescription
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDescription =
-        to (\x -> TF.Computed (TF.referenceKey x) "description")
+        to (\x -> TF.computed (TF.referenceKey x) "description")
 
 class HasComputedDiagnosticsProfileStorageUri a b | a -> b where
     computedDiagnosticsProfileStorageUri
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDiagnosticsProfileStorageUri =
-        to (\x -> TF.Computed (TF.referenceKey x) "diagnostics_profile.storage_uri")
+        to (\x -> TF.computed (TF.referenceKey x) "diagnostics_profile.storage_uri")
 
 class HasComputedDiskSizeGb a b | a -> b where
     computedDiskSizeGb
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDiskSizeGb =
-        to (\x -> TF.Computed (TF.referenceKey x) "disk_size_gb")
+        to (\x -> TF.computed (TF.referenceKey x) "disk_size_gb")
 
 class HasComputedDisplayName a b | a -> b where
     computedDisplayName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDisplayName =
-        to (\x -> TF.Computed (TF.referenceKey x) "display_name")
+        to (\x -> TF.computed (TF.referenceKey x) "display_name")
 
 class HasComputedDnsServers a b | a -> b where
     computedDnsServers
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDnsServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "dns_servers")
+        to (\x -> TF.computed (TF.referenceKey x) "dns_servers")
 
 class HasComputedDomainNameLabel a b | a -> b where
     computedDomainNameLabel
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDomainNameLabel =
-        to (\x -> TF.Computed (TF.referenceKey x) "domain_name_label")
+        to (\x -> TF.computed (TF.referenceKey x) "domain_name_label")
 
 class HasComputedE a b | a -> b where
     computedE
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedE =
-        to (\x -> TF.Computed (TF.referenceKey x) "e")
+        to (\x -> TF.computed (TF.referenceKey x) "e")
 
 class HasComputedEndpoint a b | a -> b where
     computedEndpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "endpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "endpoint")
 
 class HasComputedFqdn a b | a -> b where
     computedFqdn
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "fqdn")
+        to (\x -> TF.computed (TF.referenceKey x) "fqdn")
 
 class HasComputedFullyQualifiedDomainName a b | a -> b where
     computedFullyQualifiedDomainName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedFullyQualifiedDomainName =
-        to (\x -> TF.Computed (TF.referenceKey x) "fully_qualified_domain_name")
+        to (\x -> TF.computed (TF.referenceKey x) "fully_qualified_domain_name")
 
 class HasComputedHostname a b | a -> b where
     computedHostname
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
+        to (\x -> TF.computed (TF.referenceKey x) "hostname")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedIdleTimeoutInMinutes a b | a -> b where
     computedIdleTimeoutInMinutes
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIdleTimeoutInMinutes =
-        to (\x -> TF.Computed (TF.referenceKey x) "idle_timeout_in_minutes")
+        to (\x -> TF.computed (TF.referenceKey x) "idle_timeout_in_minutes")
 
 class HasComputedInstrumentationKey a b | a -> b where
     computedInstrumentationKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedInstrumentationKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "instrumentation_key")
+        to (\x -> TF.computed (TF.referenceKey x) "instrumentation_key")
 
 class HasComputedInternalFqdn a b | a -> b where
     computedInternalFqdn
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedInternalFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "internal_fqdn")
+        to (\x -> TF.computed (TF.referenceKey x) "internal_fqdn")
 
 class HasComputedIpAddress a b | a -> b where
     computedIpAddress
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_address")
+        to (\x -> TF.computed (TF.referenceKey x) "ip_address")
 
 class HasComputedIpConfigurations a b | a -> b where
     computedIpConfigurations
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIpConfigurations =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip_configurations")
+        to (\x -> TF.computed (TF.referenceKey x) "ip_configurations")
 
 class HasComputedKeyPermissions a b | a -> b where
     computedKeyPermissions
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedKeyPermissions =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_permissions")
+        to (\x -> TF.computed (TF.referenceKey x) "key_permissions")
 
 class HasComputedKind a b | a -> b where
     computedKind
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedKind =
-        to (\x -> TF.Computed (TF.referenceKey x) "kind")
+        to (\x -> TF.computed (TF.referenceKey x) "kind")
 
 class HasComputedLocation a b | a -> b where
     computedLocation
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "location")
+        to (\x -> TF.computed (TF.referenceKey x) "location")
 
 class HasComputedLocationPlacementId a b | a -> b where
     computedLocationPlacementId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLocationPlacementId =
-        to (\x -> TF.Computed (TF.referenceKey x) "location_placement_id")
+        to (\x -> TF.computed (TF.referenceKey x) "location_placement_id")
 
 class HasComputedLoginServer a b | a -> b where
     computedLoginServer
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedLoginServer =
-        to (\x -> TF.Computed (TF.referenceKey x) "login_server")
+        to (\x -> TF.computed (TF.referenceKey x) "login_server")
 
 class HasComputedMacAddress a b | a -> b where
     computedMacAddress
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMacAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "mac_address")
+        to (\x -> TF.computed (TF.referenceKey x) "mac_address")
 
 class HasComputedMasterProfileFqdn a b | a -> b where
     computedMasterProfileFqdn
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMasterProfileFqdn =
-        to (\x -> TF.Computed (TF.referenceKey x) "master_profile.fqdn")
+        to (\x -> TF.computed (TF.referenceKey x) "master_profile.fqdn")
 
 class HasComputedMaxNumberOfRecordSets a b | a -> b where
     computedMaxNumberOfRecordSets
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMaxNumberOfRecordSets =
-        to (\x -> TF.Computed (TF.referenceKey x) "max_number_of_record_sets")
+        to (\x -> TF.computed (TF.referenceKey x) "max_number_of_record_sets")
 
 class HasComputedMaximumNumberOfWorkers a b | a -> b where
     computedMaximumNumberOfWorkers
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMaximumNumberOfWorkers =
-        to (\x -> TF.Computed (TF.referenceKey x) "maximum_number_of_workers")
+        to (\x -> TF.computed (TF.referenceKey x) "maximum_number_of_workers")
 
 class HasComputedMaximumThroughputUnits a b | a -> b where
     computedMaximumThroughputUnits
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedMaximumThroughputUnits =
-        to (\x -> TF.Computed (TF.referenceKey x) "maximum_throughput_units")
+        to (\x -> TF.computed (TF.referenceKey x) "maximum_throughput_units")
 
 class HasComputedN a b | a -> b where
     computedN
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedN =
-        to (\x -> TF.Computed (TF.referenceKey x) "n")
+        to (\x -> TF.computed (TF.referenceKey x) "n")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedNameServers a b | a -> b where
     computedNameServers
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedNameServers =
-        to (\x -> TF.Computed (TF.referenceKey x) "name_servers")
+        to (\x -> TF.computed (TF.referenceKey x) "name_servers")
 
 class HasComputedNetworkSecurityGroupId a b | a -> b where
     computedNetworkSecurityGroupId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedNetworkSecurityGroupId =
-        to (\x -> TF.Computed (TF.referenceKey x) "network_security_group_id")
+        to (\x -> TF.computed (TF.referenceKey x) "network_security_group_id")
 
 class HasComputedNumberOfRecordSets a b | a -> b where
     computedNumberOfRecordSets
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedNumberOfRecordSets =
-        to (\x -> TF.Computed (TF.referenceKey x) "number_of_record_sets")
+        to (\x -> TF.computed (TF.referenceKey x) "number_of_record_sets")
 
 class HasComputedOsDisk a b | a -> b where
     computedOsDisk
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOsDisk =
-        to (\x -> TF.Computed (TF.referenceKey x) "os_disk")
+        to (\x -> TF.computed (TF.referenceKey x) "os_disk")
 
 class HasComputedOsType a b | a -> b where
     computedOsType
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOsType =
-        to (\x -> TF.Computed (TF.referenceKey x) "os_type")
+        to (\x -> TF.computed (TF.referenceKey x) "os_type")
 
 class HasComputedOutboundIpAddresses a b | a -> b where
     computedOutboundIpAddresses
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOutboundIpAddresses =
-        to (\x -> TF.Computed (TF.referenceKey x) "outbound_ip_addresses")
+        to (\x -> TF.computed (TF.referenceKey x) "outbound_ip_addresses")
 
 class HasComputedOutputs a b | a -> b where
     computedOutputs
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOutputs =
-        to (\x -> TF.Computed (TF.referenceKey x) "outputs")
+        to (\x -> TF.computed (TF.referenceKey x) "outputs")
 
 class HasComputedPartitionIds a b | a -> b where
     computedPartitionIds
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPartitionIds =
-        to (\x -> TF.Computed (TF.referenceKey x) "partition_ids")
+        to (\x -> TF.computed (TF.referenceKey x) "partition_ids")
 
 class HasComputedPermissions a b | a -> b where
     computedPermissions
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPermissions =
-        to (\x -> TF.Computed (TF.referenceKey x) "permissions")
+        to (\x -> TF.computed (TF.referenceKey x) "permissions")
 
 class HasComputedPort a b | a -> b where
     computedPort
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "port")
+        to (\x -> TF.computed (TF.referenceKey x) "port")
 
 class HasComputedPortalUrl a b | a -> b where
     computedPortalUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPortalUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "portal_url")
+        to (\x -> TF.computed (TF.referenceKey x) "portal_url")
 
 class HasComputedPrimaryAccessKey a b | a -> b where
     computedPrimaryAccessKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryAccessKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_access_key")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_access_key")
 
 class HasComputedPrimaryBlobConnectionString a b | a -> b where
     computedPrimaryBlobConnectionString
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryBlobConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_blob_connection_string")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_blob_connection_string")
 
 class HasComputedPrimaryBlobEndpoint a b | a -> b where
     computedPrimaryBlobEndpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryBlobEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_blob_endpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_blob_endpoint")
 
 class HasComputedPrimaryConnectionString a b | a -> b where
     computedPrimaryConnectionString
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_connection_string")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_connection_string")
 
 class HasComputedPrimaryFileEndpoint a b | a -> b where
     computedPrimaryFileEndpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryFileEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_file_endpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_file_endpoint")
 
 class HasComputedPrimaryKey a b | a -> b where
     computedPrimaryKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_key")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_key")
 
 class HasComputedPrimaryLocation a b | a -> b where
     computedPrimaryLocation
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_location")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_location")
 
 class HasComputedPrimaryMasterKey a b | a -> b where
     computedPrimaryMasterKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryMasterKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_master_key")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_master_key")
 
 class HasComputedPrimaryQueueEndpoint a b | a -> b where
     computedPrimaryQueueEndpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryQueueEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_queue_endpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_queue_endpoint")
 
 class HasComputedPrimaryReadonlyMasterKey a b | a -> b where
     computedPrimaryReadonlyMasterKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryReadonlyMasterKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_readonly_master_key")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_readonly_master_key")
 
 class HasComputedPrimarySharedKey a b | a -> b where
     computedPrimarySharedKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimarySharedKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_shared_key")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_shared_key")
 
 class HasComputedPrimaryTableEndpoint a b | a -> b where
     computedPrimaryTableEndpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrimaryTableEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "primary_table_endpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "primary_table_endpoint")
 
 class HasComputedPrivateIpAddress a b | a -> b where
     computedPrivateIpAddress
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrivateIpAddress =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip_address")
+        to (\x -> TF.computed (TF.referenceKey x) "private_ip_address")
 
 class HasComputedPrivateIpAddresses a b | a -> b where
     computedPrivateIpAddresses
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrivateIpAddresses =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip_addresses")
+        to (\x -> TF.computed (TF.referenceKey x) "private_ip_addresses")
 
 class HasComputedProperties a b | a -> b where
     computedProperties
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedProperties =
-        to (\x -> TF.Computed (TF.referenceKey x) "properties")
+        to (\x -> TF.computed (TF.referenceKey x) "properties")
 
 class HasComputedQuotaId a b | a -> b where
     computedQuotaId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedQuotaId =
-        to (\x -> TF.Computed (TF.referenceKey x) "quota_id")
+        to (\x -> TF.computed (TF.referenceKey x) "quota_id")
 
 class HasComputedResourceGroupName a b | a -> b where
     computedResourceGroupName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedResourceGroupName =
-        to (\x -> TF.Computed (TF.referenceKey x) "resource_group_name")
+        to (\x -> TF.computed (TF.referenceKey x) "resource_group_name")
 
 class HasComputedRouteTableId a b | a -> b where
     computedRouteTableId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRouteTableId =
-        to (\x -> TF.Computed (TF.referenceKey x) "route_table_id")
+        to (\x -> TF.computed (TF.referenceKey x) "route_table_id")
 
 class HasComputedSecondaryAccessKey a b | a -> b where
     computedSecondaryAccessKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryAccessKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_access_key")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_access_key")
 
 class HasComputedSecondaryBlobConnectionString a b | a -> b where
     computedSecondaryBlobConnectionString
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryBlobConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_blob_connection_string")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_blob_connection_string")
 
 class HasComputedSecondaryBlobEndpoint a b | a -> b where
     computedSecondaryBlobEndpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryBlobEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_blob_endpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_blob_endpoint")
 
 class HasComputedSecondaryConnectionString a b | a -> b where
     computedSecondaryConnectionString
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryConnectionString =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_connection_string")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_connection_string")
 
 class HasComputedSecondaryKey a b | a -> b where
     computedSecondaryKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_key")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_key")
 
 class HasComputedSecondaryLocation a b | a -> b where
     computedSecondaryLocation
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryLocation =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_location")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_location")
 
 class HasComputedSecondaryMasterKey a b | a -> b where
     computedSecondaryMasterKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryMasterKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_master_key")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_master_key")
 
 class HasComputedSecondaryQueueEndpoint a b | a -> b where
     computedSecondaryQueueEndpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryQueueEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_queue_endpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_queue_endpoint")
 
 class HasComputedSecondaryReadonlyMasterKey a b | a -> b where
     computedSecondaryReadonlyMasterKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryReadonlyMasterKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_readonly_master_key")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_readonly_master_key")
 
 class HasComputedSecondarySharedKey a b | a -> b where
     computedSecondarySharedKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondarySharedKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_shared_key")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_shared_key")
 
 class HasComputedSecondaryTableEndpoint a b | a -> b where
     computedSecondaryTableEndpoint
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecondaryTableEndpoint =
-        to (\x -> TF.Computed (TF.referenceKey x) "secondary_table_endpoint")
+        to (\x -> TF.computed (TF.referenceKey x) "secondary_table_endpoint")
 
 class HasComputedSecretPermissions a b | a -> b where
     computedSecretPermissions
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecretPermissions =
-        to (\x -> TF.Computed (TF.referenceKey x) "secret_permissions")
+        to (\x -> TF.computed (TF.referenceKey x) "secret_permissions")
 
 class HasComputedSecurityRule a b | a -> b where
     computedSecurityRule
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecurityRule =
-        to (\x -> TF.Computed (TF.referenceKey x) "security_rule")
+        to (\x -> TF.computed (TF.referenceKey x) "security_rule")
 
 class HasComputedServiceKey a b | a -> b where
     computedServiceKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedServiceKey =
-        to (\x -> TF.Computed (TF.referenceKey x) "service_key")
+        to (\x -> TF.computed (TF.referenceKey x) "service_key")
 
 class HasComputedServiceProviderProvisioningState a b | a -> b where
     computedServiceProviderProvisioningState
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedServiceProviderProvisioningState =
-        to (\x -> TF.Computed (TF.referenceKey x) "service_provider_provisioning_state")
+        to (\x -> TF.computed (TF.referenceKey x) "service_provider_provisioning_state")
 
 class HasComputedSku a b | a -> b where
     computedSku
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSku =
-        to (\x -> TF.Computed (TF.referenceKey x) "sku")
+        to (\x -> TF.computed (TF.referenceKey x) "sku")
 
 class HasComputedSourceResourceId a b | a -> b where
     computedSourceResourceId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSourceResourceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_resource_id")
+        to (\x -> TF.computed (TF.referenceKey x) "source_resource_id")
 
 class HasComputedSourceUri a b | a -> b where
     computedSourceUri
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSourceUri =
-        to (\x -> TF.Computed (TF.referenceKey x) "source_uri")
+        to (\x -> TF.computed (TF.referenceKey x) "source_uri")
 
 class HasComputedSpendingLimit a b | a -> b where
     computedSpendingLimit
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSpendingLimit =
-        to (\x -> TF.Computed (TF.referenceKey x) "spending_limit")
+        to (\x -> TF.computed (TF.referenceKey x) "spending_limit")
 
 class HasComputedSslPort a b | a -> b where
     computedSslPort
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSslPort =
-        to (\x -> TF.Computed (TF.referenceKey x) "ssl_port")
+        to (\x -> TF.computed (TF.referenceKey x) "ssl_port")
 
 class HasComputedState a b | a -> b where
     computedState
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedState =
-        to (\x -> TF.Computed (TF.referenceKey x) "state")
+        to (\x -> TF.computed (TF.referenceKey x) "state")
 
 class HasComputedStorageAccountId a b | a -> b where
     computedStorageAccountId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedStorageAccountId =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_account_id")
+        to (\x -> TF.computed (TF.referenceKey x) "storage_account_id")
 
 class HasComputedStorageAccountType a b | a -> b where
     computedStorageAccountType
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedStorageAccountType =
-        to (\x -> TF.Computed (TF.referenceKey x) "storage_account_type")
+        to (\x -> TF.computed (TF.referenceKey x) "storage_account_type")
 
 class HasComputedSubnets a b | a -> b where
     computedSubnets
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSubnets =
-        to (\x -> TF.Computed (TF.referenceKey x) "subnets")
+        to (\x -> TF.computed (TF.referenceKey x) "subnets")
 
 class HasComputedTags a b | a -> b where
     computedTags
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedTags =
-        to (\x -> TF.Computed (TF.referenceKey x) "tags")
+        to (\x -> TF.computed (TF.referenceKey x) "tags")
 
 class HasComputedType' a b | a -> b where
     computedType'
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedType' =
-        to (\x -> TF.Computed (TF.referenceKey x) "type")
+        to (\x -> TF.computed (TF.referenceKey x) "type")
 
 class HasComputedUrl a b | a -> b where
     computedUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "url")
+        to (\x -> TF.computed (TF.referenceKey x) "url")
 
 class HasComputedVaultUri a b | a -> b where
     computedVaultUri
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVaultUri =
-        to (\x -> TF.Computed (TF.referenceKey x) "vault_uri")
+        to (\x -> TF.computed (TF.referenceKey x) "vault_uri")
 
 class HasComputedVersion a b | a -> b where
     computedVersion
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVersion =
-        to (\x -> TF.Computed (TF.referenceKey x) "version")
+        to (\x -> TF.computed (TF.referenceKey x) "version")
 
 class HasComputedVirtualMachineId a b | a -> b where
     computedVirtualMachineId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVirtualMachineId =
-        to (\x -> TF.Computed (TF.referenceKey x) "virtual_machine_id")
+        to (\x -> TF.computed (TF.referenceKey x) "virtual_machine_id")
 
 class HasComputedVirtualNetworkName a b | a -> b where
     computedVirtualNetworkName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVirtualNetworkName =
-        to (\x -> TF.Computed (TF.referenceKey x) "virtual_network_name")
+        to (\x -> TF.computed (TF.referenceKey x) "virtual_network_name")
 
 class HasComputedVnetPeerings a b | a -> b where
     computedVnetPeerings
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVnetPeerings =
-        to (\x -> TF.Computed (TF.referenceKey x) "vnet_peerings")
+        to (\x -> TF.computed (TF.referenceKey x) "vnet_peerings")
 
 class HasComputedWorkspaceId a b | a -> b where
     computedWorkspaceId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedWorkspaceId =
-        to (\x -> TF.Computed (TF.referenceKey x) "workspace_id")
+        to (\x -> TF.computed (TF.referenceKey x) "workspace_id")

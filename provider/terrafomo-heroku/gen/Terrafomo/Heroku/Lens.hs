@@ -199,118 +199,118 @@ class HasComputedAllConfigVars a b | a -> b where
     computedAllConfigVars
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAllConfigVars =
-        to (\x -> TF.Computed (TF.referenceKey x) "all_config_vars")
+        to (\x -> TF.computed (TF.referenceKey x) "all_config_vars")
 
 class HasComputedApp a b | a -> b where
     computedApp
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedApp =
-        to (\x -> TF.Computed (TF.referenceKey x) "app")
+        to (\x -> TF.computed (TF.referenceKey x) "app")
 
 class HasComputedAppId a b | a -> b where
     computedAppId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAppId =
-        to (\x -> TF.Computed (TF.referenceKey x) "app_id")
+        to (\x -> TF.computed (TF.referenceKey x) "app_id")
 
 class HasComputedCname a b | a -> b where
     computedCname
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCname =
-        to (\x -> TF.Computed (TF.referenceKey x) "cname")
+        to (\x -> TF.computed (TF.referenceKey x) "cname")
 
 class HasComputedConfigVars a b | a -> b where
     computedConfigVars
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedConfigVars =
-        to (\x -> TF.Computed (TF.referenceKey x) "config_vars")
+        to (\x -> TF.computed (TF.referenceKey x) "config_vars")
 
 class HasComputedGitUrl a b | a -> b where
     computedGitUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedGitUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "git_url")
+        to (\x -> TF.computed (TF.referenceKey x) "git_url")
 
 class HasComputedHerokuHostname a b | a -> b where
     computedHerokuHostname
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHerokuHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "heroku_hostname")
+        to (\x -> TF.computed (TF.referenceKey x) "heroku_hostname")
 
 class HasComputedHostname a b | a -> b where
     computedHostname
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHostname =
-        to (\x -> TF.Computed (TF.referenceKey x) "hostname")
+        to (\x -> TF.computed (TF.referenceKey x) "hostname")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedOrganization a b | a -> b where
     computedOrganization
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOrganization =
-        to (\x -> TF.Computed (TF.referenceKey x) "organization")
+        to (\x -> TF.computed (TF.referenceKey x) "organization")
 
 class HasComputedPipeline a b | a -> b where
     computedPipeline
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPipeline =
-        to (\x -> TF.Computed (TF.referenceKey x) "pipeline")
+        to (\x -> TF.computed (TF.referenceKey x) "pipeline")
 
 class HasComputedPlan a b | a -> b where
     computedPlan
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPlan =
-        to (\x -> TF.Computed (TF.referenceKey x) "plan")
+        to (\x -> TF.computed (TF.referenceKey x) "plan")
 
 class HasComputedProviderId a b | a -> b where
     computedProviderId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedProviderId =
-        to (\x -> TF.Computed (TF.referenceKey x) "provider_id")
+        to (\x -> TF.computed (TF.referenceKey x) "provider_id")
 
 class HasComputedRegion a b | a -> b where
     computedRegion
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedRegion =
-        to (\x -> TF.Computed (TF.referenceKey x) "region")
+        to (\x -> TF.computed (TF.referenceKey x) "region")
 
 class HasComputedSpace a b | a -> b where
     computedSpace
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSpace =
-        to (\x -> TF.Computed (TF.referenceKey x) "space")
+        to (\x -> TF.computed (TF.referenceKey x) "space")
 
 class HasComputedStack a b | a -> b where
     computedStack
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedStack =
-        to (\x -> TF.Computed (TF.referenceKey x) "stack")
+        to (\x -> TF.computed (TF.referenceKey x) "stack")
 
 class HasComputedStage a b | a -> b where
     computedStage
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedStage =
-        to (\x -> TF.Computed (TF.referenceKey x) "stage")
+        to (\x -> TF.computed (TF.referenceKey x) "stage")
 
 class HasComputedToken a b | a -> b where
     computedToken
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedToken =
-        to (\x -> TF.Computed (TF.referenceKey x) "token")
+        to (\x -> TF.computed (TF.referenceKey x) "token")
 
 class HasComputedWebUrl a b | a -> b where
     computedWebUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedWebUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "web_url")
+        to (\x -> TF.computed (TF.referenceKey x) "web_url")

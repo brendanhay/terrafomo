@@ -205,70 +205,70 @@ class HasComputedArchitecture a b | a -> b where
     computedArchitecture
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedArchitecture =
-        to (\x -> TF.Computed (TF.referenceKey x) "architecture")
+        to (\x -> TF.computed (TF.referenceKey x) "architecture")
 
 class HasComputedBootCmdArgs a b | a -> b where
     computedBootCmdArgs
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedBootCmdArgs =
-        to (\x -> TF.Computed (TF.referenceKey x) "boot_cmd_args")
+        to (\x -> TF.computed (TF.referenceKey x) "boot_cmd_args")
 
 class HasComputedCreationDate a b | a -> b where
     computedCreationDate
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedCreationDate =
-        to (\x -> TF.Computed (TF.referenceKey x) "creation_date")
+        to (\x -> TF.computed (TF.referenceKey x) "creation_date")
 
 class HasComputedDtb a b | a -> b where
     computedDtb
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDtb =
-        to (\x -> TF.Computed (TF.referenceKey x) "dtb")
+        to (\x -> TF.computed (TF.referenceKey x) "dtb")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedInitrd a b | a -> b where
     computedInitrd
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedInitrd =
-        to (\x -> TF.Computed (TF.referenceKey x) "initrd")
+        to (\x -> TF.computed (TF.referenceKey x) "initrd")
 
 class HasComputedIp a b | a -> b where
     computedIp
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "ip")
+        to (\x -> TF.computed (TF.referenceKey x) "ip")
 
 class HasComputedKernel a b | a -> b where
     computedKernel
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedKernel =
-        to (\x -> TF.Computed (TF.referenceKey x) "kernel")
+        to (\x -> TF.computed (TF.referenceKey x) "kernel")
 
 class HasComputedOrganization a b | a -> b where
     computedOrganization
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedOrganization =
-        to (\x -> TF.Computed (TF.referenceKey x) "organization")
+        to (\x -> TF.computed (TF.referenceKey x) "organization")
 
 class HasComputedPrivateIp a b | a -> b where
     computedPrivateIp
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrivateIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "private_ip")
+        to (\x -> TF.computed (TF.referenceKey x) "private_ip")
 
 class HasComputedPublic a b | a -> b where
     computedPublic
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPublic =
-        to (\x -> TF.Computed (TF.referenceKey x) "public")
+        to (\x -> TF.computed (TF.referenceKey x) "public")
 
 class HasComputedPublicIp a b | a -> b where
     computedPublicIp
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPublicIp =
-        to (\x -> TF.Computed (TF.referenceKey x) "public_ip")
+        to (\x -> TF.computed (TF.referenceKey x) "public_ip")

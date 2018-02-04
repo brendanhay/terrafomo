@@ -103,4 +103,4 @@ class HasComputedDefaultSecretName a b | a -> b where
     computedDefaultSecretName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDefaultSecretName =
-        to (\x -> TF.Computed (TF.referenceKey x) "default_secret_name")
+        to (\x -> TF.computed (TF.referenceKey x) "default_secret_name")

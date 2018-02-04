@@ -295,22 +295,22 @@ class HasComputedHttpUrlToRepo a b | a -> b where
     computedHttpUrlToRepo
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedHttpUrlToRepo =
-        to (\x -> TF.Computed (TF.referenceKey x) "http_url_to_repo")
+        to (\x -> TF.computed (TF.referenceKey x) "http_url_to_repo")
 
 class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedSshUrlToRepo a b | a -> b where
     computedSshUrlToRepo
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSshUrlToRepo =
-        to (\x -> TF.Computed (TF.referenceKey x) "ssh_url_to_repo")
+        to (\x -> TF.computed (TF.referenceKey x) "ssh_url_to_repo")
 
 class HasComputedWebUrl a b | a -> b where
     computedWebUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedWebUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "web_url")
+        to (\x -> TF.computed (TF.referenceKey x) "web_url")

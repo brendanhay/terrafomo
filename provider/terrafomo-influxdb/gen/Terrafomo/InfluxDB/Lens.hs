@@ -82,4 +82,4 @@ class HasComputedAdmin a b | a -> b where
     computedAdmin
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAdmin =
-        to (\x -> TF.Computed (TF.referenceKey x) "admin")
+        to (\x -> TF.computed (TF.referenceKey x) "admin")

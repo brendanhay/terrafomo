@@ -233,28 +233,28 @@ class HasComputedId a b | a -> b where
     computedId
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedId =
-        to (\x -> TF.Computed (TF.referenceKey x) "id")
+        to (\x -> TF.computed (TF.referenceKey x) "id")
 
 class HasComputedKeyMaterial a b | a -> b where
     computedKeyMaterial
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedKeyMaterial =
-        to (\x -> TF.Computed (TF.referenceKey x) "key_material")
+        to (\x -> TF.computed (TF.referenceKey x) "key_material")
 
 class HasComputedName a b | a -> b where
     computedName
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedName =
-        to (\x -> TF.Computed (TF.referenceKey x) "name")
+        to (\x -> TF.computed (TF.referenceKey x) "name")
 
 class HasComputedUiUrl a b | a -> b where
     computedUiUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUiUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "ui_url")
+        to (\x -> TF.computed (TF.referenceKey x) "ui_url")
 
 class HasComputedUrl a b | a -> b where
     computedUrl
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedUrl =
-        to (\x -> TF.Computed (TF.referenceKey x) "url")
+        to (\x -> TF.computed (TF.referenceKey x) "url")
