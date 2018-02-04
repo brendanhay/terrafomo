@@ -31,7 +31,9 @@ module Terrafomo
     , Attribute
     , constant
     , nil
-    , (?~)
+
+    -- *** Setters
+    , (=~)
 
     -- * Providers
     , IsProvider      (..)

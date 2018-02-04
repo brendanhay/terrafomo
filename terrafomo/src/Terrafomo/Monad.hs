@@ -384,7 +384,7 @@ output attr =
 
         let name =
               case attr of
-                  Computed k v n -> nformat (fname % "_" % fname) next n
+                  Computed _ _ n -> nformat (fname % "_" % fname) next n
                   _              -> next
 
             out   = Output b name attr

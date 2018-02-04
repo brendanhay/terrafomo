@@ -13,8 +13,7 @@ import Data.Semigroup ((<>))
 
 import Terrafomo.Attribute (Attribute)
 import Terrafomo.Backend   (Backend)
-import Terrafomo.Format    (nformat, (%))
-import Terrafomo.Name      (Name, fname)
+import Terrafomo.Name      (Name)
 
 import qualified Terrafomo.HCL as HCL
 
@@ -41,9 +40,3 @@ instance HCL.ToHCL a => HCL.ToHCL (Output a) where
     toHCL (Output _ n v) =
         HCL.object (pure "output" <> pure (HCL.name n)) $
             maybeToList (HCL.attribute "value" v)
-
--- * two components to output names first is auto-generated/hash, second is stable
---   discard first somehow?
-
--- * use Generic for ToHCL instances in libraries for consistency and to ease
---   the writing of things like AWS.Types by hand.
