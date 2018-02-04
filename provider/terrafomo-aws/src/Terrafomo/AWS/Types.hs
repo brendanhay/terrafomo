@@ -1,5 +1,6 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
+{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE FunctionalDependencies     #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -60,8 +61,9 @@ import Data.Map.Strict (Map)
 import Data.Maybe      (catMaybes)
 import Data.Text       (Text)
 
-import GHC.Base (Bool)
-import GHC.Exts (IsList (..))
+import GHC.Base     (Bool)
+import GHC.Exts     (IsList (..))
+import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
@@ -153,14 +155,9 @@ data S3BucketVersioning s = S3BucketVersioning
     , _mfa_delete :: !(Attribute s Bool)
     -- ^ Enable MFA delete for either Change the versioning state of your
     -- bucket or Permanently delete an object version. Default is false.
-    } deriving (Show, Eq)
+    } deriving (Show, Eq, Generic)
 
-instance HCL.ToHCL (S3BucketVersioning s) where
-    toHCL x =
-        HCL.block $ catMaybes
-            [ HCL.attribute "enabled"    (_enabled    x)
-            , HCL.attribute "mfa_delete" (_mfa_delete x)
-            ]
+instance HCL.ToHCL (S3BucketVersioning s)
 
 instance Lens.HasEnabled (S3BucketVersioning s) s Bool where
     enabled = lens _enabled (\s a -> s { _enabled = a })
@@ -231,15 +228,9 @@ data BeanstalkEnvSetting s = BeanstalkEnvSetting
     -- ^ Name of the configuration option.
     , _value     :: !(Attribute s Text)
     -- ^ Value for the configuration option.
-    } deriving (Show, Eq)
+    } deriving (Show, Eq, Generic)
 
-instance HCL.ToHCL (BeanstalkEnvSetting s) where
-    toHCL x =
-        HCL.block $ catMaybes
-            [ HCL.attribute "namespace" (_namespace x)
-            , HCL.attribute "name"      (_name      x)
-            , HCL.attribute "value"     (_value     x)
-            ]
+instance HCL.ToHCL (BeanstalkEnvSetting s)
 
 instance Lens.HasNamespace (BeanstalkEnvSetting s) s Text where
     namespace = lens _namespace (\s a -> s { _namespace = a })

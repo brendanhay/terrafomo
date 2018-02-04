@@ -1,8 +1,11 @@
+{-# LANGUAGE DefaultSignatures #-}
 {-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE TypeOperators     #-}
 {-# LANGUAGE ViewPatterns      #-}
 
 module Terrafomo.HCL
@@ -41,8 +44,8 @@ module Terrafomo.HCL
     , json
 
     -- * Generics
-    , GToHCL (..)
-    , genericToHCL
+    , GToAttributes (..)
+    , genericToAttributes
     ) where
 
 import Data.Aeson             (ToJSON (..))
@@ -50,6 +53,7 @@ import Data.Hashable          (Hashable)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
 import Data.Map.Strict        (Map)
+import Data.Maybe             (maybeToList)
 import Data.Semigroup         ((<>))
 import Data.String            (IsString (fromString))
 import Data.Text              (Text)
@@ -58,7 +62,7 @@ import Data.Word
 
 import Formatting ((%))
 
-import GHC.Generics (Generic)
+import GHC.Generics
 
 import Numeric.Natural (Natural)
 
@@ -224,6 +228,10 @@ json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encode
 class ToHCL a where
     toHCL :: a -> Value
 
+    default toHCL :: (Generic a, GToAttributes (Rep a)) => a -> Value
+    toHCL = genericToAttributes
+    {-# INLINEABLE toHCL #-}
+
 instance ToHCL Value where
     toHCL = id
     {-# INLINEABLE toHCL #-}
@@ -311,3 +319,25 @@ instance ToHCL Name where
 instance ToHCL Key where
     toHCL (Key t n) = toHCL (Format.sformat (ftype % "." % fname) t n)
     {-# INLINEABLE toHCL #-}
+
+genericToAttributes :: (Generic a, GToAttributes (Rep a)) => a -> Value
+genericToAttributes = block . gToValues . from
+{-# INLINEABLE genericToAttributes #-}
+
+class GToAttributes f where
+    gToValues :: f a -> [Value]
+
+instance ( Selector s
+         , ToHCL a
+         ) => GToAttributes (S1 s (K1 i (Attribute t a))) where
+    gToValues p =
+        let k = fromString (selName p)
+            v = unK1 (unM1 p)
+         in maybeToList (attribute k v)
+    {-# INLINEABLE gToValues #-}
+
+instance ( GToAttributes a
+         , GToAttributes b
+         ) => GToAttributes (a :*: b) where
+    gToValues (a :*: b) = gToValues a ++ gToValues b
+    {-# INLINEABLE gToValues #-}
