@@ -25,7 +25,7 @@ hashid x =
 
 human :: Hashable a => a -> Text
 human x =
-    Text.intercalate "-" $ range x 5
+    Text.intercalate "_" $ range x 5
         [ "aardvark"
         , "absurd"
         , "accrue"
