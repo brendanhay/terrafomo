@@ -223,7 +223,6 @@ json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encode
 
 class ToHCL a where
     toHCL :: a -> Value
-    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Value where
     toHCL = id
