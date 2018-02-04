@@ -49,4 +49,4 @@ infixr 4 @~
 
 (@~) :: Lens.ASetter' t (Attribute s a) -> a -> t -> t
 (@~) l x = Lens.set l (Constant x)
-{-# INLINE @~ #-}
+{-# INLINE (@~) #-}
