@@ -83,7 +83,7 @@ import qualified Terrafomo.HCL          as HCL
 newtype Tags = Tags { fromTags :: Map Text Text }
     deriving (Show, Eq)
 
-instance HCL.ToHCL Tags where
+instance ToHCL Tags where
     toHCL = HCL.pairs . fromTags
 
 instance IsList Tags where
@@ -96,7 +96,7 @@ instance IsList Tags where
 data Zone = Zone !Region !Char
     deriving (Show, Eq)
 
-instance HCL.ToHCL Zone where
+instance ToHCL Zone where
     toHCL = HCL.toHCL . Format.bprint fzone
 
 -- | Format an AWS region name.
@@ -104,7 +104,7 @@ fregion :: Format r (Region -> r)
 fregion = Format.later (Build.fromText . AWS.toText)
 
 -- Orphan instance for amazonka types.
-instance HCL.ToHCL Region where
+instance ToHCL Region where
     toHCL = HCL.toHCL . Format.bprint fregion
 
 -- | Format an AWS availability zone name.
@@ -126,7 +126,7 @@ data SecurityGroupType
     | Egress
       deriving (Show, Eq)
 
-instance HCL.ToHCL SecurityGroupType where
+instance ToHCL SecurityGroupType where
     toHCL = HCL.string . \case
         Ingress -> "ingress"
         Egress  -> "egress"
@@ -138,7 +138,7 @@ data Protocol
     | AllProtocols
       deriving (Show, Eq)
 
-instance HCL.ToHCL Protocol where
+instance ToHCL Protocol where
     toHCL = HCL.string . \case
         ICMP         -> "icmp"
         TCP          -> "tcp"
@@ -157,7 +157,7 @@ data S3BucketVersioning s = S3BucketVersioning
     -- bucket or Permanently delete an object version. Default is false.
     } deriving (Show, Eq, Generic)
 
-instance HCL.ToHCL (S3BucketVersioning s)
+instance ToHCL (S3BucketVersioning s)
 
 instance Lens.HasEnabled (S3BucketVersioning s) s Bool where
     enabled = lens _enabled (\s a -> s { _enabled = a })
@@ -184,7 +184,7 @@ instance IsList DynamoTableAttributes where
     toList   = toList . fromDynamoTableAttributes
     fromList = DynamoTableAttributes . fromList
 
-instance HCL.ToHCL DynamoTableAttributes where
+instance ToHCL DynamoTableAttributes where
     toHCL = HCL.block . map (uncurry go) . toList
       where
         go k v =
@@ -200,7 +200,7 @@ data DynamoAttributeType
     | DynamoBinary
       deriving (Show, Eq)
 
-instance HCL.ToHCL DynamoAttributeType where
+instance ToHCL DynamoAttributeType where
     toHCL = HCL.string . \case
         DynamoString -> "S"
         DynamoNumber -> "N"
@@ -218,7 +218,7 @@ instance IsList (BeanstalkEnvSettings s) where
     toList   = toList . fromBeanstalkEnvSettings
     fromList = BeanstalkEnvSettings . fromList
 
-instance HCL.ToHCL (BeanstalkEnvSettings s) where
+instance ToHCL (BeanstalkEnvSettings s) where
     toHCL = HCL.block . map HCL.toHCL . toList
 
 data BeanstalkEnvSetting s = BeanstalkEnvSetting
@@ -230,7 +230,7 @@ data BeanstalkEnvSetting s = BeanstalkEnvSetting
     -- ^ Value for the configuration option.
     } deriving (Show, Eq, Generic)
 
-instance HCL.ToHCL (BeanstalkEnvSetting s)
+instance ToHCL (BeanstalkEnvSetting s)
 
 instance Lens.HasNamespace (BeanstalkEnvSetting s) s Text where
     namespace = lens _namespace (\s a -> s { _namespace = a })
@@ -251,7 +251,7 @@ beanstalkEnvSetting = BeanstalkEnvSetting
 -- IAM
 
 newtype IamPolicy = IamPolicy HCL.JSON
-    deriving (Show, Eq, HCL.ToHCL)
+    deriving (Show, Eq, ToHCL)
 
 iamPolicy :: HCL.ToJSON a => a -> IamPolicy
 iamPolicy = IamPolicy . HCL.toJSON

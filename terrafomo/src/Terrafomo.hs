@@ -68,10 +68,15 @@ module Terrafomo
     , Bits            (..)
     , IP              (..)
     , CIDR            (..)
+
+    -- * Serialization
+    , ToHCL           (..)
+    , renderHCL
     ) where
 
 import Terrafomo.Attribute
 import Terrafomo.Backend
+import Terrafomo.HCL       (ToHCL, renderHCL)
 import Terrafomo.IP
 import Terrafomo.Lifecycle
 import Terrafomo.Monad

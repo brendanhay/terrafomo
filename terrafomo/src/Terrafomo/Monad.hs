@@ -128,7 +128,7 @@ renderState s =
 -- External Output
 
 newtype TerraformOutput = TerraformOutput [(Name, LText.Text)]
-    deriving (Semigroup, Monoid)
+    deriving (Show, Eq, Semigroup, Monoid)
 
 instance IsList TerraformOutput where
     type Item TerraformOutput = (Name, LText.Text)
