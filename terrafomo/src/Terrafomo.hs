@@ -5,12 +5,14 @@
 module Terrafomo
     (
     -- * Terraform Monad
-      TerraformConfig
-    , TerraformOutput (..)
+      TerraformOutput (..)
+    , renderOutput
+
     , Terraform
     , runTerraform
 
     -- * Terraform Monad Class
+    , TerraformConfig
     , MonadTerraform  (..)
 
     -- * Errors

@@ -15,13 +15,14 @@
 module Terrafomo.Monad
     (
     -- * Terraform Monad
-      TerraformConfig
-    , TerraformOutput (..)
+      TerraformOutput
+    , renderOutput
 
     , Terraform
     , runTerraform
 
     -- * Terraform Monad Class
+    , TerraformConfig
     , MonadTerraform  (..)
 
     -- * Errors
@@ -42,13 +43,13 @@ import Control.Monad.Except (Except)
 import Control.Monad.Morph  (MFunctor (hoist))
 import Control.Monad.Trans  (MonadTrans (lift))
 
-import Data.Bifunctor  (second)
-import Data.Map.Strict (Map)
-import Data.Proxy      (Proxy (..))
-import Data.Semigroup  (Semigroup)
-import Data.Typeable   (Typeable)
-
-import GHC.Exts (IsList (..))
+import Data.Function      (on)
+import Data.List.NonEmpty (NonEmpty ((:|)))
+import Data.Map.Strict    (Map)
+import Data.Maybe         (mapMaybe)
+import Data.Proxy         (Proxy (..))
+import Data.Semigroup     (Semigroup)
+import Data.Typeable      (Typeable)
 
 import Terrafomo.Attribute
 import Terrafomo.Backend
@@ -61,6 +62,7 @@ import Terrafomo.Source      (DataSource, Resource, Source (..))
 import Terrafomo.ValueMap    (ValueMap)
 
 import qualified Data.Hashable                as Hash
+import qualified Data.List                    as List
 import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
 import qualified Terrafomo.Format             as Format
@@ -127,17 +129,21 @@ renderState s =
 
 -- External Output
 
+-- FIXME: Write up the laws for TerraformOutput's semigroup/monoid instances.
+
 newtype TerraformOutput = TerraformOutput [(Name, LText.Text)]
-    deriving (Show, Eq, Semigroup, Monoid)
+    deriving (Semigroup, Monoid)
 
-instance IsList TerraformOutput where
-    type Item TerraformOutput = (Name, LText.Text)
+singletonOutput :: Name -> TerraformState -> TerraformOutput
+singletonOutput name s = TerraformOutput [(name, renderState s)]
 
-    toList (TerraformOutput xs) = xs
-    fromList                    = TerraformOutput
-
-outputState :: Name -> TerraformState -> TerraformOutput
-outputState name = TerraformOutput . pure . (name,) . renderState
+renderOutput :: TerraformOutput -> [(Name, NonEmpty LText.Text)]
+renderOutput (TerraformOutput xs) =
+    mapMaybe go (List.groupBy (on (==) fst) xs)
+  where
+    go = \case
+        []          -> Nothing
+        (name, y):ys -> Just (name, y :| map snd ys)
 
 -- Terraform CPS Monad
 
@@ -156,8 +162,8 @@ runTerraform
     -> Name -- ^ The unique name of the rendered 'Terraform' block.
     -> (forall s. Terraform s a)
     -> Either TerraformError (a, TerraformOutput)
-runTerraform x name m =
-    second (outputState name) <$> MTL.runExcept (unTerraform m config state)
+runTerraform x name m = undefined
+    singletonOutput name <$> MTL.runExcept (unTerraform m config state)
   where
     config =
         TerraformConfig
