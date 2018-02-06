@@ -43,6 +43,7 @@ import Control.Monad.Except (Except)
 import Control.Monad.Morph  (MFunctor (hoist))
 import Control.Monad.Trans  (MonadTrans (lift))
 
+import Data.Bifunctor     (second)
 import Data.Function      (on)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Map.Strict    (Map)
@@ -162,8 +163,8 @@ runTerraform
     -> Name -- ^ The unique name of the rendered 'Terraform' block.
     -> (forall s. Terraform s a)
     -> Either TerraformError (a, TerraformOutput)
-runTerraform x name m = undefined
-    singletonOutput name <$> MTL.runExcept (unTerraform m config state)
+runTerraform x name m =
+    second (singletonOutput name) <$> MTL.runExcept (unTerraform m config state)
   where
     config =
         TerraformConfig

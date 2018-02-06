@@ -331,7 +331,7 @@ instance ( Selector s
          , ToHCL a
          ) => GToAttributes (S1 s (K1 i (Attribute t a))) where
     gToValues p =
-        let k = fromString (selName p)
+        let k = fromString (case selName p of '_':x -> x; x -> x)
             v = unK1 (unM1 p)
          in maybeToList (attribute k v)
     {-# INLINEABLE gToValues #-}
