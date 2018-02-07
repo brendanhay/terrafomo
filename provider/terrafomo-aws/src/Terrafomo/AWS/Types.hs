@@ -70,7 +70,7 @@ import Lens.Micro (Lens', lens)
 import Network.AWS.Types (Region (..))
 
 import Terrafomo
-import Terrafomo.Source (configuration)
+import Terrafomo.Schema (configuration)
 
 import Formatting (Format, (%))
 
@@ -261,8 +261,5 @@ iamPolicy = IamPolicy . HCL.toJSON
 class HasMfaDelete a s b | a -> s b where
     mfaDelete :: Lens' a (Attribute s b)
 
-instance HasMfaDelete a s b => HasMfaDelete (Resource p a) s b where
-    mfaDelete = configuration . mfaDelete
-
-instance HasMfaDelete a s b => HasMfaDelete (DataSource p a) s b where
+instance HasMfaDelete a s b => HasMfaDelete (Schema l p a) s b where
     mfaDelete = configuration . mfaDelete

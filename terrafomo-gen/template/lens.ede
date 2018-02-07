@@ -33,13 +33,13 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 {% for class in argumentClasses %}
 
 class {{ class.value.name }} a s b | a -> s b where
     {{ class.value.method }} :: Lens' a (TF.Attribute s b)
 
-instance {{ class.value.name }} a s b => {{ class.value.name}} (TF.Source l p a) s b where
+instance {{ class.value.name }} a s b => {{ class.value.name}} (TF.Schema l p a) s b where
     {{ class.value.method }} = TF.configuration . {{ class.value.method }}
 {% endfor %}
 {% for class in attributeClasses %}

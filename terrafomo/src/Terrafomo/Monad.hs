@@ -49,7 +49,7 @@ import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Map.Strict    (Map)
 import Data.Maybe         (mapMaybe)
 import Data.Proxy         (Proxy (..))
-import Data.Semigroup     (Semigroup)
+import Data.Semigroup     (Semigroup ((<>)))
 import Data.Typeable      (Typeable)
 
 import Terrafomo.Attribute
@@ -59,7 +59,7 @@ import Terrafomo.Name
 import Terrafomo.Output
 import Terrafomo.Provider
 import Terrafomo.RemoteState
-import Terrafomo.Source      (Source (..))
+import Terrafomo.Schema      (Schema (..))
 import Terrafomo.ValueMap    (ValueMap)
 
 import qualified Data.Hashable                as Hash
@@ -323,17 +323,22 @@ insertProvider = \case
 
 ref :: ( MonadTerraform s m
        , IsProvider p
-       , HCL.ToHCL (Key, Source l Key a)
+       , HCL.ToHCL (Schema l Key a)
        )
     => Name
-    -> Source l p a
+    -> Schema l p a
     -> m (Reference s a)
 ref name x =
     liftTerraform $ do
-        alias <- insertProvider (_sourceProvider x)
+        alias <- insertProvider (_schemaProvider x)
 
-        let key   = Key (_sourceType x) name
-            value = HCL.toHCL (key, x { _sourceProvider = alias })
+        let typ    = _schemaType x
+            key   = Key typ name
+            value = HCL.toHCL $
+                        x { _schemaProvider = alias
+                          , _schemaKeywords =
+                              _schemaKeywords x <> pure (HCL.type_ typ)
+                          }
 
         unique <- insertValue key value references (\s w -> w { references = s })
 

@@ -1,7 +1,7 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FlexibleInstances      #-}
+{-# LANGUAGE DuplicateRecordFields  #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
@@ -550,17 +550,17 @@ import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
-import qualified Data.Word              as P
-import qualified GHC.Base               as P
-import qualified Numeric.Natural        as P
-import qualified Terrafomo.AWS.Lens     as P
+import Terrafomo.AWS.Types as P
+import qualified Terrafomo.AWS.Lens as P
 import qualified Terrafomo.AWS.Provider as P
-import           Terrafomo.AWS.Types    as P
-import qualified Terrafomo.IP           as P
+import qualified Data.Word       as P
+import qualified GHC.Base        as P
+import qualified Numeric.Natural as P
+import qualified Terrafomo.IP    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @aws_acm_certificate@ AWS datasource.
 
@@ -571,13 +571,13 @@ creation of ACM certificates. But using this data source, you can reference
 them by domain without having to hard code the ARNs as input.
 -}
 data AcmCertificateData s = AcmCertificateData {
-      _domain      :: !(TF.Attribute s Text)
+      _domain :: !(TF.Attribute s Text)
     {- ^ (Required) The domain of the certificate to look up. If no certificate is found with this name, an error will be returned. -}
     , _most_recent :: !(TF.Attribute s Text)
     {- ^ (Optional) If set to true, it sorts the certificates matched by previous criteria by the NotBefore field, returning only the most recent one. If set to false, it returns an error if more than one certificate is found. Defaults to false. -}
-    , _statuses    :: !(TF.Attribute s Text)
+    , _statuses :: !(TF.Attribute s Text)
     {- ^ (Optional) A list of statuses on which to filter the returned list. Valid values are @PENDING_VALIDATION@ , @ISSUED@ , @INACTIVE@ , @EXPIRED@ , @VALIDATION_TIMED_OUT@ , @REVOKED@ and @FAILED@ . If no value is specified, only certificates in the @ISSUED@ state are returned. -}
-    , _types       :: !(TF.Attribute s Text)
+    , _types :: !(TF.Attribute s Text)
     {- ^ (Optional) A list of types on which to filter the returned list. Valid values are @AMAZON_ISSUED@ and @IMPORTED@ . -}
     } deriving (Show, Eq)
 
@@ -611,7 +611,7 @@ instance P.HasTypes (AcmCertificateData s) s Text where
 
 instance P.HasComputedArn (AcmCertificateData s) Text
 
-acmCertificateData :: TF.DataSource P.AWS (AcmCertificateData s)
+acmCertificateData :: TF.Schema TF.DataSource P.AWS (AcmCertificateData s)
 acmCertificateData =
     TF.newDataSource "aws_acm_certificate" $
         AcmCertificateData {
@@ -629,13 +629,13 @@ resources.
 data AmiData s = AmiData {
       _executable_users :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter           :: !(TF.Attribute s Text)
+    , _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _most_recent      :: !(TF.Attribute s Text)
+    , _most_recent :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent AMI. -}
-    , _name_regex       :: !(TF.Attribute s Text)
+    , _name_regex :: !(TF.Attribute s Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners           :: !(TF.Attribute s Text)
+    , _owners :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
@@ -698,7 +698,7 @@ instance P.HasComputedStateReason (AmiData s) Text
 instance P.HasComputedTags (AmiData s) P.Tags
 instance P.HasComputedVirtualizationType (AmiData s) Text
 
-amiData :: TF.DataSource P.AWS (AmiData s)
+amiData :: TF.Schema TF.DataSource P.AWS (AmiData s)
 amiData =
     TF.newDataSource "aws_ami" $
         AmiData {
@@ -717,11 +717,11 @@ criteria.
 data AmiIdsData s = AmiIdsData {
       _executable_users :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on  the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter           :: !(TF.Attribute s Text)
+    , _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _name_regex       :: !(TF.Attribute s Text)
+    , _name_regex :: !(TF.Attribute s Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners           :: !(TF.Attribute s Text)
+    , _owners :: !(TF.Attribute s Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
@@ -754,7 +754,7 @@ instance P.HasOwners (AmiIdsData s) s Text where
              (\s a -> s { _owners = a } :: AmiIdsData s)
 
 
-amiIdsData :: TF.DataSource P.AWS (AmiIdsData s)
+amiIdsData :: TF.Schema TF.DataSource P.AWS (AmiIdsData s)
 amiIdsData =
     TF.newDataSource "aws_ami_ids" $
         AmiIdsData {
@@ -787,7 +787,7 @@ instance P.HasFilter (AutoscalingGroupsData s) s Text where
 
 instance P.HasComputedNames (AutoscalingGroupsData s) Text
 
-autoscalingGroupsData :: TF.DataSource P.AWS (AutoscalingGroupsData s)
+autoscalingGroupsData :: TF.Schema TF.DataSource P.AWS (AutoscalingGroupsData s)
 autoscalingGroupsData =
     TF.newDataSource "aws_autoscaling_groups" $
         AutoscalingGroupsData {
@@ -806,7 +806,7 @@ numbers. This is different from the @aws_availability_zones@ (plural) data
 source, which provides a list of the available zones.
 -}
 data AvailabilityZoneData s = AvailabilityZoneData {
-      _name  :: !(TF.Attribute s Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The full name of the availability zone to select. -}
     , _state :: !(TF.Attribute s Text)
     {- ^ (Optional) A specific availability zone state to require. May be any of @"available"@ , @"information"@ or @"impaired"@ . -}
@@ -833,7 +833,7 @@ instance P.HasComputedNameSuffix (AvailabilityZoneData s) Text
 instance P.HasComputedRegion (AvailabilityZoneData s) P.Region
 instance P.HasComputedState (AvailabilityZoneData s) Text
 
-availabilityZoneData :: TF.DataSource P.AWS (AvailabilityZoneData s)
+availabilityZoneData :: TF.Schema TF.DataSource P.AWS (AvailabilityZoneData s)
 availabilityZoneData =
     TF.newDataSource "aws_availability_zone" $
         AvailabilityZoneData {
@@ -866,7 +866,7 @@ instance P.HasState (AvailabilityZonesData s) s Text where
 
 instance P.HasComputedNames (AvailabilityZonesData s) Text
 
-availabilityZonesData :: TF.DataSource P.AWS (AvailabilityZonesData s)
+availabilityZonesData :: TF.Schema TF.DataSource P.AWS (AvailabilityZonesData s)
 availabilityZonesData =
     TF.newDataSource "aws_availability_zones" $
         AvailabilityZonesData {
@@ -888,7 +888,7 @@ instance TF.ToHCL (BillingServiceAccountData s) where
 instance P.HasComputedArn (BillingServiceAccountData s) Text
 instance P.HasComputedId (BillingServiceAccountData s) Text
 
-billingServiceAccountData :: TF.DataSource P.AWS (BillingServiceAccountData s)
+billingServiceAccountData :: TF.Schema TF.DataSource P.AWS (BillingServiceAccountData s)
 billingServiceAccountData =
     TF.newDataSource "aws_billing_service_account" $
         BillingServiceAccountData {
@@ -902,9 +902,9 @@ and ARN in which Terraform is authorized.
 data CallerIdentityData s = CallerIdentityData {
       _account_id :: !(TF.Attribute s Text)
     {- ^ - The AWS Account ID number of the account that owns or contains the calling entity. -}
-    , _arn        :: !(TF.Attribute s Text)
+    , _arn :: !(TF.Attribute s Text)
     {- ^ - The AWS ARN associated with the calling entity. -}
-    , _user_id    :: !(TF.Attribute s Text)
+    , _user_id :: !(TF.Attribute s Text)
     {- ^ - The unique identifier of the calling entity. -}
     } deriving (Show, Eq)
 
@@ -931,7 +931,7 @@ instance P.HasUserId (CallerIdentityData s) s Text where
              (\s a -> s { _user_id = a } :: CallerIdentityData s)
 
 
-callerIdentityData :: TF.DataSource P.AWS (CallerIdentityData s)
+callerIdentityData :: TF.Schema TF.DataSource P.AWS (CallerIdentityData s)
 callerIdentityData =
     TF.newDataSource "aws_caller_identity" $
         CallerIdentityData {
@@ -949,7 +949,7 @@ effective account in which Terraform is working.
 data CanonicalUserIdData s = CanonicalUserIdData {
       _display_name :: !(TF.Attribute s Text)
     {- ^ - The human-friendly name linked to the canonical user ID. -}
-    , _id           :: !(TF.Attribute s Text)
+    , _id :: !(TF.Attribute s Text)
     {- ^ - The canonical user ID associated with the AWS account. -}
     } deriving (Show, Eq)
 
@@ -970,7 +970,7 @@ instance P.HasId (CanonicalUserIdData s) s Text where
              (\s a -> s { _id = a } :: CanonicalUserIdData s)
 
 
-canonicalUserIdData :: TF.DataSource P.AWS (CanonicalUserIdData s)
+canonicalUserIdData :: TF.Schema TF.DataSource P.AWS (CanonicalUserIdData s)
 canonicalUserIdData =
     TF.newDataSource "aws_canonical_user_id" $
         CanonicalUserIdData {
@@ -1009,7 +1009,7 @@ instance P.HasComputedTags (CloudformationStackData s) P.Tags
 instance P.HasComputedTemplateBody (CloudformationStackData s) Text
 instance P.HasComputedTimeoutInMinutes (CloudformationStackData s) Text
 
-cloudformationStackData :: TF.DataSource P.AWS (CloudformationStackData s)
+cloudformationStackData :: TF.Schema TF.DataSource P.AWS (CloudformationStackData s)
 cloudformationStackData =
     TF.newDataSource "aws_cloudformation_stack" $
         CloudformationStackData {
@@ -1041,7 +1041,7 @@ instance P.HasRegion (CloudtrailServiceAccountData s) s P.Region where
 instance P.HasComputedArn (CloudtrailServiceAccountData s) Text
 instance P.HasComputedId (CloudtrailServiceAccountData s) Text
 
-cloudtrailServiceAccountData :: TF.DataSource P.AWS (CloudtrailServiceAccountData s)
+cloudtrailServiceAccountData :: TF.Schema TF.DataSource P.AWS (CloudtrailServiceAccountData s)
 cloudtrailServiceAccountData =
     TF.newDataSource "aws_cloudtrail_service_account" $
         CloudtrailServiceAccountData {
@@ -1103,7 +1103,7 @@ instance P.HasComputedStorageType (DbInstanceData s) Text
 instance P.HasComputedTimezone (DbInstanceData s) Text
 instance P.HasComputedVpcSecurityGroups (DbInstanceData s) Text
 
-dbInstanceData :: TF.DataSource P.AWS (DbInstanceData s)
+dbInstanceData :: TF.Schema TF.DataSource P.AWS (DbInstanceData s)
 dbInstanceData =
     TF.newDataSource "aws_db_instance" $
         DbInstanceData {
@@ -1121,13 +1121,13 @@ data DbSnapshotData s = DbSnapshotData {
     {- ^ (Optional) Returns the list of snapshots created by the specific db_instance -}
     , _db_snapshot_identifier :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
-    , _include_public         :: !(TF.Attribute s Text)
+    , _include_public :: !(TF.Attribute s Text)
     {- ^ (Optional) Set this value to true to include manual DB snapshots that are public and can be copied or restored by any AWS account, otherwise set this value to false. The default is @false@ . -}
-    , _include_shared         :: !(TF.Attribute s Text)
+    , _include_shared :: !(TF.Attribute s Text)
     {- ^ (Optional) Set this value to true to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, otherwise set this value to false. The default is @false@ . -}
-    , _most_recent            :: !(TF.Attribute s Text)
+    , _most_recent :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Snapshot. -}
-    , _snapshot_type          :: !(TF.Attribute s Text)
+    , _snapshot_type :: !(TF.Attribute s Text)
     {- ^ (Optional) The type of snapshots to be returned. If you don't specify a SnapshotType value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. Possible values are, @automated@ , @manual@ , @shared@ and @public@ . -}
     } deriving (Show, Eq)
 
@@ -1189,7 +1189,7 @@ instance P.HasComputedStatus (DbSnapshotData s) Text
 instance P.HasComputedStorageType (DbSnapshotData s) Text
 instance P.HasComputedVpcId (DbSnapshotData s) Text
 
-dbSnapshotData :: TF.DataSource P.AWS (DbSnapshotData s)
+dbSnapshotData :: TF.Schema TF.DataSource P.AWS (DbSnapshotData s)
 dbSnapshotData =
     TF.newDataSource "aws_db_snapshot" $
         DbSnapshotData {
@@ -1221,7 +1221,7 @@ instance P.HasName (DynamodbTableData s) s Text where
              (\s a -> s { _name = a } :: DynamodbTableData s)
 
 
-dynamodbTableData :: TF.DataSource P.AWS (DynamodbTableData s)
+dynamodbTableData :: TF.Schema TF.DataSource P.AWS (DynamodbTableData s)
 dynamodbTableData =
     TF.newDataSource "aws_dynamodb_table" $
         DynamodbTableData {
@@ -1234,15 +1234,15 @@ Use this data source to get information about an EBS Snapshot for use when
 provisioning EBS Volumes
 -}
 data EbsSnapshotData s = EbsSnapshotData {
-      _filter                 :: !(TF.Attribute s Text)
+      _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _most_recent            :: !(TF.Attribute s Text)
+    , _most_recent :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent snapshot. -}
-    , _owners                 :: !(TF.Attribute s Text)
+    , _owners :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
-    , _snapshot_ids           :: !(TF.Attribute s Text)
+    , _snapshot_ids :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
     } deriving (Show, Eq)
 
@@ -1293,7 +1293,7 @@ instance P.HasComputedTags (EbsSnapshotData s) P.Tags
 instance P.HasComputedVolumeId (EbsSnapshotData s) Text
 instance P.HasComputedVolumeSize (EbsSnapshotData s) Text
 
-ebsSnapshotData :: TF.DataSource P.AWS (EbsSnapshotData s)
+ebsSnapshotData :: TF.Schema TF.DataSource P.AWS (EbsSnapshotData s)
 ebsSnapshotData =
     TF.newDataSource "aws_ebs_snapshot" $
         EbsSnapshotData {
@@ -1310,9 +1310,9 @@ Use this data source to get a list of EBS Snapshot IDs matching the
 specified criteria.
 -}
 data EbsSnapshotIdsData s = EbsSnapshotIdsData {
-      _filter                 :: !(TF.Attribute s Text)
+      _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _owners                 :: !(TF.Attribute s Text)
+    , _owners :: !(TF.Attribute s Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
@@ -1341,7 +1341,7 @@ instance P.HasRestorableByUserIds (EbsSnapshotIdsData s) s Text where
              (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotIdsData s)
 
 
-ebsSnapshotIdsData :: TF.DataSource P.AWS (EbsSnapshotIdsData s)
+ebsSnapshotIdsData :: TF.Schema TF.DataSource P.AWS (EbsSnapshotIdsData s)
 ebsSnapshotIdsData =
     TF.newDataSource "aws_ebs_snapshot_ids" $
         EbsSnapshotIdsData {
@@ -1356,7 +1356,7 @@ Use this data source to get information about an EBS volume for use in other
 resources.
 -}
 data EbsVolumeData s = EbsVolumeData {
-      _filter      :: !(TF.Attribute s Text)
+      _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html> . -}
     , _most_recent :: !(TF.Attribute s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Volume. -}
@@ -1390,7 +1390,7 @@ instance P.HasComputedTags (EbsVolumeData s) P.Tags
 instance P.HasComputedVolumeId (EbsVolumeData s) Text
 instance P.HasComputedVolumeType (EbsVolumeData s) Text
 
-ebsVolumeData :: TF.DataSource P.AWS (EbsVolumeData s)
+ebsVolumeData :: TF.Schema TF.DataSource P.AWS (EbsVolumeData s)
 ebsVolumeData =
     TF.newDataSource "aws_ebs_volume" $
         EbsVolumeData {
@@ -1422,7 +1422,7 @@ instance P.HasComputedArn (EcrRepositoryData s) Text
 instance P.HasComputedRegistryId (EcrRepositoryData s) Text
 instance P.HasComputedRepositoryUrl (EcrRepositoryData s) Text
 
-ecrRepositoryData :: TF.DataSource P.AWS (EcrRepositoryData s)
+ecrRepositoryData :: TF.Schema TF.DataSource P.AWS (EcrRepositoryData s)
 ecrRepositoryData =
     TF.newDataSource "aws_ecr_repository" $
         EcrRepositoryData {
@@ -1455,7 +1455,7 @@ instance P.HasComputedRegisteredContainerInstancesCount (EcsClusterData s) Text
 instance P.HasComputedRunningTasksCount (EcsClusterData s) Text
 instance P.HasComputedStatus (EcsClusterData s) Text
 
-ecsClusterData :: TF.DataSource P.AWS (EcsClusterData s)
+ecsClusterData :: TF.Schema TF.DataSource P.AWS (EcsClusterData s)
 ecsClusterData =
     TF.newDataSource "aws_ecs_cluster" $
         EcsClusterData {
@@ -1468,7 +1468,7 @@ The ECS container definition data source allows access to details of a
 specific container within an AWS ECS service.
 -}
 data EcsContainerDefinitionData s = EcsContainerDefinitionData {
-      _container_name  :: !(TF.Attribute s Text)
+      _container_name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the container definition -}
     , _task_definition :: !(TF.Attribute s Text)
     {- ^ (Required) The ARN of the task definition which contains the container -}
@@ -1499,7 +1499,7 @@ instance P.HasComputedImageDigest (EcsContainerDefinitionData s) Text
 instance P.HasComputedMemory (EcsContainerDefinitionData s) Text
 instance P.HasComputedMemoryReservation (EcsContainerDefinitionData s) Text
 
-ecsContainerDefinitionData :: TF.DataSource P.AWS (EcsContainerDefinitionData s)
+ecsContainerDefinitionData :: TF.Schema TF.DataSource P.AWS (EcsContainerDefinitionData s)
 ecsContainerDefinitionData =
     TF.newDataSource "aws_ecs_container_definition" $
         EcsContainerDefinitionData {
@@ -1533,7 +1533,7 @@ instance P.HasComputedRevision (EcsTaskDefinitionData s) Text
 instance P.HasComputedStatus (EcsTaskDefinitionData s) Text
 instance P.HasComputedTaskRoleArn (EcsTaskDefinitionData s) Text
 
-ecsTaskDefinitionData :: TF.DataSource P.AWS (EcsTaskDefinitionData s)
+ecsTaskDefinitionData :: TF.Schema TF.DataSource P.AWS (EcsTaskDefinitionData s)
 ecsTaskDefinitionData =
     TF.newDataSource "aws_ecs_task_definition" $
         EcsTaskDefinitionData {
@@ -1573,7 +1573,7 @@ instance P.HasComputedKmsKeyId (EfsFileSystemData s) Text
 instance P.HasComputedPerformanceMode (EfsFileSystemData s) Text
 instance P.HasComputedTags (EfsFileSystemData s) P.Tags
 
-efsFileSystemData :: TF.DataSource P.AWS (EfsFileSystemData s)
+efsFileSystemData :: TF.Schema TF.DataSource P.AWS (EfsFileSystemData s)
 efsFileSystemData =
     TF.newDataSource "aws_efs_file_system" $
         EfsFileSystemData {
@@ -1607,7 +1607,7 @@ instance P.HasComputedNetworkInterfaceId (EfsMountTargetData s) Text
 instance P.HasComputedSecurityGroups (EfsMountTargetData s) Text
 instance P.HasComputedSubnetId (EfsMountTargetData s) Text
 
-efsMountTargetData :: TF.DataSource P.AWS (EfsMountTargetData s)
+efsMountTargetData :: TF.Schema TF.DataSource P.AWS (EfsMountTargetData s)
 efsMountTargetData =
     TF.newDataSource "aws_efs_mount_target" $
         EfsMountTargetData {
@@ -1621,7 +1621,7 @@ prove useful when a module accepts an allocation ID or public IP as an input
 variable and needs to determine the other.
 -}
 data EipData s = EipData {
-      _id        :: !(TF.Attribute s Text)
+      _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The allocation id of the specific EIP to retrieve. -}
     , _public_ip :: !(TF.Attribute s Text)
     {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
@@ -1644,7 +1644,7 @@ instance P.HasPublicIp (EipData s) s Text where
              (\s a -> s { _public_ip = a } :: EipData s)
 
 
-eipData :: TF.DataSource P.AWS (EipData s)
+eipData :: TF.Schema TF.DataSource P.AWS (EipData s)
 eipData =
     TF.newDataSource "aws_eip" $
         EipData {
@@ -1659,7 +1659,7 @@ Use this data source to get the name of a elastic beanstalk solution stack.
 data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData {
       _most_recent :: !(TF.Attribute s P.Bool)
     {- ^ (Optional) If more than one result is returned, use the most recent solution stack. -}
-    , _name_regex  :: !(TF.Attribute s Text)
+    , _name_regex :: !(TF.Attribute s Text)
     {- ^ - A regex string to apply to the solution stack list returned by AWS. See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> from AWS documentation for reference solution stack names. -}
     } deriving (Show, Eq)
 
@@ -1681,7 +1681,7 @@ instance P.HasNameRegex (ElasticBeanstalkSolutionStackData s) s Text where
 
 instance P.HasComputedName (ElasticBeanstalkSolutionStackData s) Text
 
-elasticBeanstalkSolutionStackData :: TF.DataSource P.AWS (ElasticBeanstalkSolutionStackData s)
+elasticBeanstalkSolutionStackData :: TF.Schema TF.DataSource P.AWS (ElasticBeanstalkSolutionStackData s)
 elasticBeanstalkSolutionStackData =
     TF.newDataSource "aws_elastic_beanstalk_solution_stack" $
         ElasticBeanstalkSolutionStackData {
@@ -1728,7 +1728,7 @@ instance P.HasComputedSnapshotWindow (ElasticacheClusterData s) Text
 instance P.HasComputedSubnetGroupName (ElasticacheClusterData s) Text
 instance P.HasComputedTags (ElasticacheClusterData s) P.Tags
 
-elasticacheClusterData :: TF.DataSource P.AWS (ElasticacheClusterData s)
+elasticacheClusterData :: TF.Schema TF.DataSource P.AWS (ElasticacheClusterData s)
 elasticacheClusterData =
     TF.newDataSource "aws_elasticache_cluster" $
         ElasticacheClusterData {
@@ -1767,7 +1767,7 @@ instance P.HasComputedReplicationGroupId (ElasticacheReplicationGroupData s) Tex
 instance P.HasComputedSnapshotRetentionLimit (ElasticacheReplicationGroupData s) Text
 instance P.HasComputedSnapshotWindow (ElasticacheReplicationGroupData s) Text
 
-elasticacheReplicationGroupData :: TF.DataSource P.AWS (ElasticacheReplicationGroupData s)
+elasticacheReplicationGroupData :: TF.Schema TF.DataSource P.AWS (ElasticacheReplicationGroupData s)
 elasticacheReplicationGroupData =
     TF.newDataSource "aws_elasticache_replication_group" $
         ElasticacheReplicationGroupData {
@@ -1798,7 +1798,7 @@ instance P.HasName (ElbData s) s Text where
              (\s a -> s { _name = a } :: ElbData s)
 
 
-elbData :: TF.DataSource P.AWS (ElbData s)
+elbData :: TF.Schema TF.DataSource P.AWS (ElbData s)
 elbData =
     TF.newDataSource "aws_elb" $
         ElbData {
@@ -1828,7 +1828,7 @@ instance P.HasRegion (ElbHostedZoneIdData s) s P.Region where
 
 instance P.HasComputedId (ElbHostedZoneIdData s) Text
 
-elbHostedZoneIdData :: TF.DataSource P.AWS (ElbHostedZoneIdData s)
+elbHostedZoneIdData :: TF.Schema TF.DataSource P.AWS (ElbHostedZoneIdData s)
 elbHostedZoneIdData =
     TF.newDataSource "aws_elb_hosted_zone_id" $
         ElbHostedZoneIdData {
@@ -1859,7 +1859,7 @@ instance P.HasRegion (ElbServiceAccountData s) s P.Region where
 instance P.HasComputedArn (ElbServiceAccountData s) Text
 instance P.HasComputedId (ElbServiceAccountData s) Text
 
-elbServiceAccountData :: TF.DataSource P.AWS (ElbServiceAccountData s)
+elbServiceAccountData :: TF.Schema TF.DataSource P.AWS (ElbServiceAccountData s)
 elbServiceAccountData =
     TF.newDataSource "aws_elb_service_account" $
         ElbServiceAccountData {
@@ -1887,7 +1887,7 @@ instance P.HasAccountAlias (IamAccountAliasData s) s Text where
              (\s a -> s { _account_alias = a } :: IamAccountAliasData s)
 
 
-iamAccountAliasData :: TF.DataSource P.AWS (IamAccountAliasData s)
+iamAccountAliasData :: TF.Schema TF.DataSource P.AWS (IamAccountAliasData s)
 iamAccountAliasData =
     TF.newDataSource "aws_iam_account_alias" $
         IamAccountAliasData {
@@ -1919,7 +1919,7 @@ instance P.HasComputedArn (IamGroupData s) Text
 instance P.HasComputedGroupId (IamGroupData s) Text
 instance P.HasComputedPath (IamGroupData s) Text
 
-iamGroupData :: TF.DataSource P.AWS (IamGroupData s)
+iamGroupData :: TF.Schema TF.DataSource P.AWS (IamGroupData s)
 iamGroupData =
     TF.newDataSource "aws_iam_group" $
         IamGroupData {
@@ -1952,7 +1952,7 @@ instance P.HasComputedCreateDate (IamInstanceProfileData s) Text
 instance P.HasComputedPath (IamInstanceProfileData s) Text
 instance P.HasComputedRoleId (IamInstanceProfileData s) Text
 
-iamInstanceProfileData :: TF.DataSource P.AWS (IamInstanceProfileData s)
+iamInstanceProfileData :: TF.Schema TF.DataSource P.AWS (IamInstanceProfileData s)
 iamInstanceProfileData =
     TF.newDataSource "aws_iam_instance_profile" $
         IamInstanceProfileData {
@@ -1985,7 +1985,7 @@ instance P.HasComputedName (IamPolicyData s) Text
 instance P.HasComputedPath (IamPolicyData s) Text
 instance P.HasComputedPolicy (IamPolicyData s) Text
 
-iamPolicyData :: TF.DataSource P.AWS (IamPolicyData s)
+iamPolicyData :: TF.Schema TF.DataSource P.AWS (IamPolicyData s)
 iamPolicyData =
     TF.newDataSource "aws_iam_policy" $
         IamPolicyData {
@@ -2024,7 +2024,7 @@ instance P.HasStatement (IamPolicyDocumentData s) s Text where
 
 instance P.HasComputedJson (IamPolicyDocumentData s) Text
 
-iamPolicyDocumentData :: TF.DataSource P.AWS (IamPolicyDocumentData s)
+iamPolicyDocumentData :: TF.Schema TF.DataSource P.AWS (IamPolicyDocumentData s)
 iamPolicyDocumentData =
     TF.newDataSource "aws_iam_policy_document" $
         IamPolicyDocumentData {
@@ -2059,7 +2059,7 @@ instance P.HasComputedId (IamRoleData s) Text
 instance P.HasComputedPath (IamRoleData s) Text
 instance P.HasComputedUniqueId (IamRoleData s) Text
 
-iamRoleData :: TF.DataSource P.AWS (IamRoleData s)
+iamRoleData :: TF.Schema TF.DataSource P.AWS (IamRoleData s)
 iamRoleData =
     TF.newDataSource "aws_iam_role" $
         IamRoleData {
@@ -2071,9 +2071,9 @@ iamRoleData =
 Use this data source to lookup information about IAM Server Certificates.
 -}
 data IamServerCertificateData s = IamServerCertificateData {
-      _latest      :: !(TF.Attribute s Text)
+      _latest :: !(TF.Attribute s Text)
     {- ^ - sort results by expiration date. returns the certificate with expiration date in furthest in the future. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attribute s Text)
     {- ^ - exact name of the cert to lookup -}
     , _name_prefix :: !(TF.Attribute s Text)
     {- ^ - prefix of cert to filter by -}
@@ -2108,7 +2108,7 @@ instance P.HasComputedExpirationDate (IamServerCertificateData s) Text
 instance P.HasComputedPath (IamServerCertificateData s) Text
 instance P.HasComputedUploadDate (IamServerCertificateData s) Text
 
-iamServerCertificateData :: TF.DataSource P.AWS (IamServerCertificateData s)
+iamServerCertificateData :: TF.Schema TF.DataSource P.AWS (IamServerCertificateData s)
 iamServerCertificateData =
     TF.newDataSource "aws_iam_server_certificate" $
         IamServerCertificateData {
@@ -2142,7 +2142,7 @@ instance P.HasComputedArn (IamUserData s) Text
 instance P.HasComputedPath (IamUserData s) Text
 instance P.HasComputedUserId (IamUserData s) Text
 
-iamUserData :: TF.DataSource P.AWS (IamUserData s)
+iamUserData :: TF.Schema TF.DataSource P.AWS (IamUserData s)
 iamUserData =
     TF.newDataSource "aws_iam_user" $
         IamUserData {
@@ -2155,9 +2155,9 @@ Use this data source to get the ID of an Amazon EC2 Instance for use in
 other resources.
 -}
 data InstanceData s = InstanceData {
-      _filter        :: !(TF.Attribute s Text)
+      _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_id   :: !(TF.Attribute s Text)
+    , _instance_id :: !(TF.Attribute s Text)
     {- ^ (Optional) Specify the exact Instance ID with which to populate the data source. -}
     , _instance_tags :: !(TF.Attribute s Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
@@ -2210,7 +2210,7 @@ instance P.HasComputedTenancy (InstanceData s) Text
 instance P.HasComputedUserData (InstanceData s) Text
 instance P.HasComputedVpcSecurityGroupIds (InstanceData s) Text
 
-instanceData :: TF.DataSource P.AWS (InstanceData s)
+instanceData :: TF.Schema TF.DataSource P.AWS (InstanceData s)
 instanceData =
     TF.newDataSource "aws_instance" $
         InstanceData {
@@ -2235,7 +2235,7 @@ any time and you'd need to re-run @apply@ every time an instance comes up or
 dies.
 -}
 data InstancesData s = InstancesData {
-      _filter        :: !(TF.Attribute s Text)
+      _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
     , _instance_tags :: !(TF.Attribute s Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on desired instances. -}
@@ -2261,7 +2261,7 @@ instance P.HasComputedIds (InstancesData s) Text
 instance P.HasComputedPrivateIps (InstancesData s) Text
 instance P.HasComputedPublicIps (InstancesData s) Text
 
-instancesData :: TF.DataSource P.AWS (InstancesData s)
+instancesData :: TF.Schema TF.DataSource P.AWS (InstancesData s)
 instancesData =
     TF.newDataSource "aws_instances" $
         InstancesData {
@@ -2274,11 +2274,11 @@ instancesData =
 @aws_internet_gateway@ provides details about a specific Internet Gateway.
 -}
 data InternetGatewayData s = InternetGatewayData {
-      _filter              :: !(TF.Attribute s Text)
+      _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _internet_gateway_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific Internet Gateway to retrieve. -}
-    , _tags                :: !(TF.Attribute s P.Tags)
+    , _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Internet Gateway. -}
     } deriving (Show, Eq)
 
@@ -2307,7 +2307,7 @@ instance P.HasTags (InternetGatewayData s) s P.Tags where
 instance P.HasComputedState (InternetGatewayData s) Text
 instance P.HasComputedVpcId (InternetGatewayData s) Text
 
-internetGatewayData :: TF.DataSource P.AWS (InternetGatewayData s)
+internetGatewayData :: TF.Schema TF.DataSource P.AWS (InternetGatewayData s)
 internetGatewayData =
     TF.newDataSource "aws_internet_gateway" $
         InternetGatewayData {
@@ -2323,7 +2323,7 @@ Use this data source to get the
 AWS products and services.
 -}
 data IpRangesData s = IpRangesData {
-      _regions  :: !(TF.Attribute s Text)
+      _regions :: !(TF.Attribute s Text)
     {- ^ (Optional) Filter IP ranges by regions (or include all regions, if omitted). Valid items are @global@ (for @cloudfront@ ) as well as all AWS regions (e.g. @eu-central-1@ ) -}
     , _services :: !(TF.Attribute s Text)
     {- ^ (Required) Filter IP ranges by services. Valid items are @amazon@ (for amazon.com), @cloudfront@ , @codebuild@ , @ec2@ , @route53@ , @route53_healthchecks@ and @S3@ . -}
@@ -2349,7 +2349,7 @@ instance P.HasComputedCidrBlocks (IpRangesData s) Text
 instance P.HasComputedCreateDate (IpRangesData s) Text
 instance P.HasComputedSyncToken (IpRangesData s) Text
 
-ipRangesData :: TF.DataSource P.AWS (IpRangesData s)
+ipRangesData :: TF.Schema TF.DataSource P.AWS (IpRangesData s)
 ipRangesData =
     TF.newDataSource "aws_ip_ranges" $
         IpRangesData {
@@ -2388,7 +2388,7 @@ instance P.HasComputedShardLevelMetrics (KinesisStreamData s) Text
 instance P.HasComputedStatus (KinesisStreamData s) Text
 instance P.HasComputedTags (KinesisStreamData s) P.Tags
 
-kinesisStreamData :: TF.DataSource P.AWS (KinesisStreamData s)
+kinesisStreamData :: TF.Schema TF.DataSource P.AWS (KinesisStreamData s)
 kinesisStreamData =
     TF.newDataSource "aws_kinesis_stream" $
         KinesisStreamData {
@@ -2420,7 +2420,7 @@ instance P.HasComputedArn (KmsAliasData s) Text
 instance P.HasComputedTargetKeyArn (KmsAliasData s) Text
 instance P.HasComputedTargetKeyId (KmsAliasData s) Text
 
-kmsAliasData :: TF.DataSource P.AWS (KmsAliasData s)
+kmsAliasData :: TF.Schema TF.DataSource P.AWS (KmsAliasData s)
 kmsAliasData =
     TF.newDataSource "aws_kms_alias" $
         KmsAliasData {
@@ -2435,9 +2435,9 @@ including the plaintext be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data KmsCiphertextData s = KmsCiphertextData {
-      _context   :: !(TF.Attribute s Text)
+      _context :: !(TF.Attribute s Text)
     {- ^ (Optional) An optional mapping that makes up the encryption context. -}
-    , _key_id    :: !(TF.Attribute s Text)
+    , _key_id :: !(TF.Attribute s Text)
     {- ^ (Required) Globally unique key ID for the customer master key. -}
     , _plaintext :: !(TF.Attribute s Text)
     {- ^ (Required) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file. -}
@@ -2467,7 +2467,7 @@ instance P.HasPlaintext (KmsCiphertextData s) s Text where
 
 instance P.HasComputedCiphertextBlob (KmsCiphertextData s) Text
 
-kmsCiphertextData :: TF.DataSource P.AWS (KmsCiphertextData s)
+kmsCiphertextData :: TF.Schema TF.DataSource P.AWS (KmsCiphertextData s)
 kmsCiphertextData =
     TF.newDataSource "aws_kms_ciphertext" $
         KmsCiphertextData {
@@ -2501,7 +2501,7 @@ instance P.HasSecret (KmsSecretData s) s Text where
              (\s a -> s { _secret = a } :: KmsSecretData s)
 
 
-kmsSecretData :: TF.DataSource P.AWS (KmsSecretData s)
+kmsSecretData :: TF.Schema TF.DataSource P.AWS (KmsSecretData s)
 kmsSecretData =
     TF.newDataSource "aws_kms_secret" $
         KmsSecretData {
@@ -2516,7 +2516,7 @@ useful when a module accepts an LB as an input variable and needs to, for
 example, determine the security groups associated with it, etc.
 -}
 data LbData s = LbData {
-      _arn  :: !(TF.Attribute s Text)
+      _arn :: !(TF.Attribute s Text)
     {- ^ (Optional) The full ARN of the load balancer. -}
     , _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The unique name of the load balancer. -}
@@ -2539,7 +2539,7 @@ instance P.HasName (LbData s) s Text where
              (\s a -> s { _name = a } :: LbData s)
 
 
-lbData :: TF.DataSource P.AWS (LbData s)
+lbData :: TF.Schema TF.DataSource P.AWS (LbData s)
 lbData =
     TF.newDataSource "aws_lb" $
         LbData {
@@ -2556,11 +2556,11 @@ Listener as an input variable and needs to know the LB it is attached to, or
 other information specific to the listener in question.
 -}
 data LbListenerData s = LbListenerData {
-      _arn               :: !(TF.Attribute s Text)
+      _arn :: !(TF.Attribute s Text)
     {- ^ (Optional) The arn of the listener. Required if @load_balancer_arn@ and @port@ is not set. -}
     , _load_balancer_arn :: !(TF.Attribute s Text)
     {- ^ (Optional) The arn of the load balander. Required if @arn@ is not set. -}
-    , _port              :: !(TF.Attribute s Text)
+    , _port :: !(TF.Attribute s Text)
     {- ^ (Optional) The port of the listener. Required if @arn@ is not set. -}
     } deriving (Show, Eq)
 
@@ -2587,7 +2587,7 @@ instance P.HasPort (LbListenerData s) s Text where
              (\s a -> s { _port = a } :: LbListenerData s)
 
 
-lbListenerData :: TF.DataSource P.AWS (LbListenerData s)
+lbListenerData :: TF.Schema TF.DataSource P.AWS (LbListenerData s)
 lbListenerData =
     TF.newDataSource "aws_lb_listener" $
         LbListenerData {
@@ -2606,7 +2606,7 @@ also be used to get the ARN of an LB Target Group for use in other
 resources, given LB Target Group name.
 -}
 data LbTargetGroupData s = LbTargetGroupData {
-      _arn  :: !(TF.Attribute s Text)
+      _arn :: !(TF.Attribute s Text)
     {- ^ (Optional) The full ARN of the target group. -}
     , _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The unique name of the target group. -}
@@ -2629,7 +2629,7 @@ instance P.HasName (LbTargetGroupData s) s Text where
              (\s a -> s { _name = a } :: LbTargetGroupData s)
 
 
-lbTargetGroupData :: TF.DataSource P.AWS (LbTargetGroupData s)
+lbTargetGroupData :: TF.Schema TF.DataSource P.AWS (LbTargetGroupData s)
 lbTargetGroupData =
     TF.newDataSource "aws_lb_target_group" $
         LbTargetGroupData {
@@ -2642,19 +2642,19 @@ lbTargetGroupData =
 Provides details about a specific Nat Gateway.
 -}
 data NatGatewayData s = NatGatewayData {
-      _filter    :: !(TF.Attribute s Text)
+      _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. More complex filters can be expressed using one or more @filter@ sub-blocks, which take the following arguments: -}
-    , _id        :: !(TF.Attribute s Text)
+    , _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific Nat Gateway to retrieve. -}
-    , _name      :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the field to filter by, as defined by <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html> . -}
-    , _state     :: !(TF.Attribute s Text)
+    , _state :: !(TF.Attribute s Text)
     {- ^ (Optional) The state of the NAT gateway (pending | failed | available | deleting | deleted ). -}
     , _subnet_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of subnet that the Nat Gateway resides in. -}
-    , _values    :: !(TF.Attribute s Text)
+    , _values :: !(TF.Attribute s Text)
     {- ^ (Required) Set of values that are accepted for the given field. An Nat Gateway will be selected if any one of the given values matches. -}
-    , _vpc_id    :: !(TF.Attribute s Text)
+    , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the VPC that the Nat Gateway resides in. -}
     } deriving (Show, Eq)
 
@@ -2709,7 +2709,7 @@ instance P.HasComputedNetworkInterfaceId (NatGatewayData s) Text
 instance P.HasComputedPrivateIp (NatGatewayData s) Text
 instance P.HasComputedPublicIp (NatGatewayData s) Text
 
-natGatewayData :: TF.DataSource P.AWS (NatGatewayData s)
+natGatewayData :: TF.Schema TF.DataSource P.AWS (NatGatewayData s)
 natGatewayData =
     TF.newDataSource "aws_nat_gateway" $
         NatGatewayData {
@@ -2729,7 +2729,7 @@ Use this data source to get information about a Network Interface.
 data NetworkInterfaceData s = NetworkInterfaceData {
       _filter :: !(TF.Attribute s Text)
     {- ^ – (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-network-interfaces.html> in the AWS CLI reference. -}
-    , _id     :: !(TF.Attribute s Text)
+    , _id :: !(TF.Attribute s Text)
     {- ^ – (Optional) The identifier for the network interface. -}
     } deriving (Show, Eq)
 
@@ -2757,7 +2757,7 @@ instance P.HasComputedMacAddress (NetworkInterfaceData s) Text
 instance P.HasComputedOwnerId (NetworkInterfaceData s) Text
 instance P.HasComputedRequesterId (NetworkInterfaceData s) Text
 
-networkInterfaceData :: TF.DataSource P.AWS (NetworkInterfaceData s)
+networkInterfaceData :: TF.Schema TF.DataSource P.AWS (NetworkInterfaceData s)
 networkInterfaceData =
     TF.newDataSource "aws_network_interface" $
         NetworkInterfaceData {
@@ -2777,7 +2777,7 @@ instance TF.ToHCL (PartitionData s) where
     toHCL _ = TF.block []
 
 
-partitionData :: TF.DataSource P.AWS (PartitionData s)
+partitionData :: TF.Schema TF.DataSource P.AWS (PartitionData s)
 partitionData =
     TF.newDataSource "aws_partition" $
         PartitionData {
@@ -2792,7 +2792,7 @@ associated AWS service. The latter may be useful e.g. for adding network ACL
 rules.
 -}
 data PrefixListData s = PrefixListData {
-      _name           :: !(TF.Attribute s Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the prefix list to select. -}
     , _prefix_list_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the prefix list to select. -}
@@ -2818,7 +2818,7 @@ instance P.HasComputedCidrBlocks (PrefixListData s) Text
 instance P.HasComputedId (PrefixListData s) Text
 instance P.HasComputedName (PrefixListData s) Text
 
-prefixListData :: TF.DataSource P.AWS (PrefixListData s)
+prefixListData :: TF.Schema TF.DataSource P.AWS (PrefixListData s)
 prefixListData =
     TF.newDataSource "aws_prefix_list" $
         PrefixListData {
@@ -2846,7 +2846,7 @@ instance P.HasClusterIdentifier (RdsClusterData s) s Text where
              (\s a -> s { _cluster_identifier = a } :: RdsClusterData s)
 
 
-rdsClusterData :: TF.DataSource P.AWS (RdsClusterData s)
+rdsClusterData :: TF.Schema TF.DataSource P.AWS (RdsClusterData s)
 rdsClusterData =
     TF.newDataSource "aws_rds_cluster" $
         RdsClusterData {
@@ -2878,7 +2878,7 @@ instance P.HasRegion (RedshiftServiceAccountData s) s P.Region where
 instance P.HasComputedArn (RedshiftServiceAccountData s) Text
 instance P.HasComputedId (RedshiftServiceAccountData s) Text
 
-redshiftServiceAccountData :: TF.DataSource P.AWS (RedshiftServiceAccountData s)
+redshiftServiceAccountData :: TF.Schema TF.DataSource P.AWS (RedshiftServiceAccountData s)
 redshiftServiceAccountData =
     TF.newDataSource "aws_redshift_service_account" $
         RedshiftServiceAccountData {
@@ -2894,11 +2894,11 @@ the provider. The latter can be useful in a child module which is inheriting
 an AWS provider configuration from its parent module.
 -}
 data RegionData s = RegionData {
-      _current  :: !(TF.Attribute s Text)
+      _current :: !(TF.Attribute s Text)
     {- ^ (Optional) Set to @true@ to match only the region configured in the provider. (It is not meaningful to set this to @false@ .) -}
     , _endpoint :: !(TF.Attribute s Text)
     {- ^ (Optional) The endpoint of the region to select. -}
-    , _name     :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The full name of the region to select. -}
     } deriving (Show, Eq)
 
@@ -2928,7 +2928,7 @@ instance P.HasComputedCurrent (RegionData s) Text
 instance P.HasComputedEndpoint (RegionData s) Text
 instance P.HasComputedName (RegionData s) Text
 
-regionData :: TF.DataSource P.AWS (RegionData s)
+regionData :: TF.Schema TF.DataSource P.AWS (RegionData s)
 regionData =
     TF.newDataSource "aws_region" $
         RegionData {
@@ -2944,15 +2944,15 @@ This data source allows to find a Hosted Zone ID given Hosted Zone name and
 certain search criteria.
 -}
 data Route53ZoneData s = Route53ZoneData {
-      _name         :: !(TF.Attribute s Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The Hosted Zone name of the desired Hosted Zone. -}
     , _private_zone :: !(TF.Attribute s Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone. -}
-    , _tags         :: !(TF.Attribute s P.Tags)
+    , _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) Used with @name@ field. A mapping of tags, each pair of which must exactly match a pair on the desired Hosted Zone. -}
-    , _vpc_id       :: !(TF.Attribute s Text)
+    , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone associated with the vpc_id (in this case, private_zone is not mandatory). -}
-    , _zone_id      :: !(TF.Attribute s Text)
+    , _zone_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
     } deriving (Show, Eq)
 
@@ -2994,7 +2994,7 @@ instance P.HasComputedCallerReference (Route53ZoneData s) Text
 instance P.HasComputedComment (Route53ZoneData s) Text
 instance P.HasComputedResourceRecordSetCount (Route53ZoneData s) Text
 
-route53ZoneData :: TF.DataSource P.AWS (Route53ZoneData s)
+route53ZoneData :: TF.Schema TF.DataSource P.AWS (Route53ZoneData s)
 route53ZoneData =
     TF.newDataSource "aws_route53_zone" $
         Route53ZoneData {
@@ -3012,15 +3012,15 @@ resource can prove useful when a module accepts a Subnet id as an input
 variable and needs to, for example, add a route in the Route Table.
 -}
 data RouteTableData s = RouteTableData {
-      _filter         :: !(TF.Attribute s Text)
+      _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _route_table_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific Route Table to retrieve. -}
-    , _subnet_id      :: !(TF.Attribute s Text)
+    , _subnet_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of a Subnet which is connected to the Route Table (not be exported if not given in parameter). -}
-    , _tags           :: !(TF.Attribute s P.Tags)
+    , _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Route Table. -}
-    , _vpc_id         :: !(TF.Attribute s Text)
+    , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
     } deriving (Show, Eq)
 
@@ -3067,7 +3067,7 @@ instance P.HasComputedNatGatewayId (RouteTableData s) Text
 instance P.HasComputedNetworkInterfaceId (RouteTableData s) Text
 instance P.HasComputedVpcPeeringConnectionId (RouteTableData s) Text
 
-routeTableData :: TF.DataSource P.AWS (RouteTableData s)
+routeTableData :: TF.Schema TF.DataSource P.AWS (RouteTableData s)
 routeTableData =
     TF.newDataSource "aws_route_table" $
         RouteTableData {
@@ -3107,7 +3107,7 @@ instance P.HasComputedRegion (S3BucketData s) P.Region
 instance P.HasComputedWebsiteDomain (S3BucketData s) Text
 instance P.HasComputedWebsiteEndpoint (S3BucketData s) Text
 
-s3BucketData :: TF.DataSource P.AWS (S3BucketData s)
+s3BucketData :: TF.Schema TF.DataSource P.AWS (S3BucketData s)
 s3BucketData =
     TF.newDataSource "aws_s3_bucket" $
         S3BucketData {
@@ -3124,9 +3124,9 @@ to prevent printing unsafe characters and potentially downloading large
 amount of data which would be thrown away in favour of metadata.
 -}
 data S3BucketObjectData s = S3BucketObjectData {
-      _bucket     :: !(TF.Attribute s Text)
+      _bucket :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the bucket to read the object from -}
-    , _key        :: !(TF.Attribute s Text)
+    , _key :: !(TF.Attribute s Text)
     {- ^ (Required) The full path to the object inside the bucket -}
     , _version_id :: !(TF.Attribute s Text)
     {- ^ (Optional) Specific version ID of the object returned (defaults to latest version) -}
@@ -3173,7 +3173,7 @@ instance P.HasComputedTags (S3BucketObjectData s) P.Tags
 instance P.HasComputedVersionId (S3BucketObjectData s) Text
 instance P.HasComputedWebsiteRedirectLocation (S3BucketObjectData s) Text
 
-s3BucketObjectData :: TF.DataSource P.AWS (S3BucketObjectData s)
+s3BucketObjectData :: TF.Schema TF.DataSource P.AWS (S3BucketObjectData s)
 s3BucketObjectData =
     TF.newDataSource "aws_s3_bucket_object" $
         S3BucketObjectData {
@@ -3192,11 +3192,11 @@ the security group belongs to.
 data SecurityGroupData s = SecurityGroupData {
       _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id     :: !(TF.Attribute s Text)
+    , _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific security group to retrieve. -}
-    , _name   :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attribute s Text)
     {- ^ (Optional) The name that the desired security group must have. -}
-    , _tags   :: !(TF.Attribute s P.Tags)
+    , _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired security group. -}
     , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
@@ -3239,7 +3239,7 @@ instance P.HasVpcId (SecurityGroupData s) s Text where
 instance P.HasComputedArn (SecurityGroupData s) Text
 instance P.HasComputedDescription (SecurityGroupData s) Text
 
-securityGroupData :: TF.DataSource P.AWS (SecurityGroupData s)
+securityGroupData :: TF.Schema TF.DataSource P.AWS (SecurityGroupData s)
 securityGroupData =
     TF.newDataSource "aws_security_group" $
         SecurityGroupData {
@@ -3273,7 +3273,7 @@ instance P.HasName (SnsTopicData s) s Text where
 
 instance P.HasComputedArn (SnsTopicData s) Text
 
-snsTopicData :: TF.DataSource P.AWS (SnsTopicData s)
+snsTopicData :: TF.Schema TF.DataSource P.AWS (SnsTopicData s)
 snsTopicData =
     TF.newDataSource "aws_sns_topic" $
         SnsTopicData {
@@ -3285,7 +3285,7 @@ snsTopicData =
 Provides an SSM Parameter data source.
 -}
 data SsmParameterData s = SsmParameterData {
-      _name            :: !(TF.Attribute s Text)
+      _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the parameter. -}
     , _with_decryption :: !(TF.Attribute s Text)
     {- ^ (Optional) Whether to return decrypted @SecureString@ value. Defaults to @true@ . -}
@@ -3308,7 +3308,7 @@ instance P.HasWithDecryption (SsmParameterData s) s Text where
              (\s a -> s { _with_decryption = a } :: SsmParameterData s)
 
 
-ssmParameterData :: TF.DataSource P.AWS (SsmParameterData s)
+ssmParameterData :: TF.Schema TF.DataSource P.AWS (SsmParameterData s)
 ssmParameterData =
     TF.newDataSource "aws_ssm_parameter" $
         SsmParameterData {
@@ -3326,21 +3326,21 @@ to.
 data SubnetData s = SubnetData {
       _availability_zone :: !(TF.Attribute s P.Zone)
     {- ^ (Optional) The availability zone where the subnet must reside. -}
-    , _cidr_block        :: !(TF.Attribute s P.CIDR)
+    , _cidr_block :: !(TF.Attribute s P.CIDR)
     {- ^ (Optional) The cidr block of the desired subnet. -}
-    , _default_for_az    :: !(TF.Attribute s Text)
+    , _default_for_az :: !(TF.Attribute s Text)
     {- ^ (Optional) Boolean constraint for whether the desired subnet must be the default subnet for its associated availability zone. -}
-    , _filter            :: !(TF.Attribute s Text)
+    , _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                :: !(TF.Attribute s Text)
+    , _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific subnet to retrieve. -}
-    , _ipv6_cidr_block   :: !(TF.Attribute s P.CIDR)
+    , _ipv6_cidr_block :: !(TF.Attribute s P.CIDR)
     {- ^ (Optional) The Ipv6 cidr block of the desired subnet -}
-    , _state             :: !(TF.Attribute s Text)
+    , _state :: !(TF.Attribute s Text)
     {- ^ (Optional) The state that the desired subnet must have. -}
-    , _tags              :: !(TF.Attribute s P.Tags)
+    , _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnet. -}
-    , _vpc_id            :: !(TF.Attribute s Text)
+    , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the VPC that the desired subnet belongs to. -}
     } deriving (Show, Eq)
 
@@ -3403,7 +3403,7 @@ instance P.HasVpcId (SubnetData s) s Text where
              (\s a -> s { _vpc_id = a } :: SubnetData s)
 
 
-subnetData :: TF.DataSource P.AWS (SubnetData s)
+subnetData :: TF.Schema TF.DataSource P.AWS (SubnetData s)
 subnetData =
     TF.newDataSource "aws_subnet" $
         SubnetData {
@@ -3424,7 +3424,7 @@ subnetData =
 useful for getting back a list of subnet ids for a vpc.
 -}
 data SubnetIdsData s = SubnetIdsData {
-      _tags   :: !(TF.Attribute s P.Tags)
+      _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnets. -}
     , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Required) The VPC ID that you want to filter from. -}
@@ -3448,7 +3448,7 @@ instance P.HasVpcId (SubnetIdsData s) s Text where
 
 instance P.HasComputedIds (SubnetIdsData s) Text
 
-subnetIdsData :: TF.DataSource P.AWS (SubnetIdsData s)
+subnetIdsData :: TF.Schema TF.DataSource P.AWS (SubnetIdsData s)
 subnetIdsData =
     TF.newDataSource "aws_subnet_ids" $
         SubnetIdsData {
@@ -3463,19 +3463,19 @@ useful when a module accepts a vpc id as an input variable and needs to, for
 example, determine the CIDR block of that VPC.
 -}
 data VpcData s = VpcData {
-      _cidr_block      :: !(TF.Attribute s P.CIDR)
+      _cidr_block :: !(TF.Attribute s P.CIDR)
     {- ^ (Optional) The cidr block of the desired VPC. -}
-    , _default'        :: !(TF.Attribute s Text)
+    , _default' :: !(TF.Attribute s Text)
     {- ^ (Optional) Boolean constraint on whether the desired VPC is the default VPC for the region. -}
     , _dhcp_options_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The DHCP options id of the desired VPC. -}
-    , _filter          :: !(TF.Attribute s Text)
+    , _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id              :: !(TF.Attribute s Text)
+    , _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The id of the specific VPC to retrieve. -}
-    , _state           :: !(TF.Attribute s Text)
+    , _state :: !(TF.Attribute s Text)
     {- ^ (Optional) The current state of the desired VPC. Can be either @"pending"@ or @"available"@ . -}
-    , _tags            :: !(TF.Attribute s P.Tags)
+    , _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC. -}
     } deriving (Show, Eq)
 
@@ -3531,7 +3531,7 @@ instance P.HasComputedInstanceTenancy (VpcData s) Text
 instance P.HasComputedIpv6AssociationId (VpcData s) Text
 instance P.HasComputedIpv6CidrBlock (VpcData s) P.CIDR
 
-vpcData :: TF.DataSource P.AWS (VpcData s)
+vpcData :: TF.Schema TF.DataSource P.AWS (VpcData s)
 vpcData =
     TF.newDataSource "aws_vpc" $
         VpcData {
@@ -3549,13 +3549,13 @@ vpcData =
 The VPC Endpoint data source provides details about a specific VPC endpoint.
 -}
 data VpcEndpointData s = VpcEndpointData {
-      _id           :: !(TF.Attribute s Text)
+      _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the specific VPC Endpoint to retrieve. -}
     , _service_name :: !(TF.Attribute s Text)
     {- ^ (Optional) The AWS service name of the specific VPC Endpoint to retrieve. -}
-    , _state        :: !(TF.Attribute s Text)
+    , _state :: !(TF.Attribute s Text)
     {- ^ (Optional) The state of the specific VPC Endpoint to retrieve. -}
-    , _vpc_id       :: !(TF.Attribute s Text)
+    , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the VPC in which the specific VPC Endpoint is used. -}
     } deriving (Show, Eq)
 
@@ -3591,7 +3591,7 @@ instance P.HasComputedPolicy (VpcEndpointData s) Text
 instance P.HasComputedPrefixListId (VpcEndpointData s) Text
 instance P.HasComputedRouteTableIds (VpcEndpointData s) Text
 
-vpcEndpointData :: TF.DataSource P.AWS (VpcEndpointData s)
+vpcEndpointData :: TF.Schema TF.DataSource P.AWS (VpcEndpointData s)
 vpcEndpointData =
     TF.newDataSource "aws_vpc_endpoint" $
         VpcEndpointData {
@@ -3624,7 +3624,7 @@ instance P.HasService (VpcEndpointServiceData s) s Text where
 
 instance P.HasComputedServiceName (VpcEndpointServiceData s) Text
 
-vpcEndpointServiceData :: TF.DataSource P.AWS (VpcEndpointServiceData s)
+vpcEndpointServiceData :: TF.Schema TF.DataSource P.AWS (VpcEndpointServiceData s)
 vpcEndpointServiceData =
     TF.newDataSource "aws_vpc_endpoint_service" $
         VpcEndpointServiceData {
@@ -3637,29 +3637,29 @@ The VPC Peering Connection data source provides details about a specific VPC
 peering connection.
 -}
 data VpcPeeringConnectionData s = VpcPeeringConnectionData {
-      _cidr_block      :: !(TF.Attribute s P.CIDR)
+      _cidr_block :: !(TF.Attribute s P.CIDR)
     {- ^ (Optional) The CIDR block of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _filter          :: !(TF.Attribute s Text)
+    , _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id              :: !(TF.Attribute s Text)
+    , _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the specific VPC Peering Connection to retrieve. -}
-    , _owner_id        :: !(TF.Attribute s Text)
+    , _owner_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The AWS account ID of the owner of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     , _peer_cidr_block :: !(TF.Attribute s P.CIDR)
     {- ^ (Optional) The CIDR block of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_owner_id   :: !(TF.Attribute s Text)
+    , _peer_owner_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The AWS account ID of the owner of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_region     :: !(TF.Attribute s P.Region)
+    , _peer_region :: !(TF.Attribute s P.Region)
     {- ^ (Optional) The region of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_vpc_id     :: !(TF.Attribute s Text)
+    , _peer_vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _region          :: !(TF.Attribute s P.Region)
+    , _region :: !(TF.Attribute s P.Region)
     {- ^ (Optional) The region of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _status          :: !(TF.Attribute s Text)
+    , _status :: !(TF.Attribute s Text)
     {- ^ (Optional) The status of the specific VPC Peering Connection to retrieve. -}
-    , _tags            :: !(TF.Attribute s P.Tags)
+    , _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC Peering Connection. -}
-    , _vpc_id          :: !(TF.Attribute s Text)
+    , _vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     } deriving (Show, Eq)
 
@@ -3742,7 +3742,7 @@ instance P.HasVpcId (VpcPeeringConnectionData s) s Text where
 instance P.HasComputedAccepter (VpcPeeringConnectionData s) Text
 instance P.HasComputedRequester (VpcPeeringConnectionData s) Text
 
-vpcPeeringConnectionData :: TF.DataSource P.AWS (VpcPeeringConnectionData s)
+vpcPeeringConnectionData :: TF.Schema TF.DataSource P.AWS (VpcPeeringConnectionData s)
 vpcPeeringConnectionData =
     TF.newDataSource "aws_vpc_peering_connection" $
         VpcPeeringConnectionData {
@@ -3765,17 +3765,17 @@ vpcPeeringConnectionData =
 The VPN Gateway data source provides details about a specific VPN gateway.
 -}
 data VpnGatewayData s = VpnGatewayData {
-      _attached_vpc_id   :: !(TF.Attribute s Text)
+      _attached_vpc_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve. -}
     , _availability_zone :: !(TF.Attribute s P.Zone)
     {- ^ (Optional) The Availability Zone of the specific VPN Gateway to retrieve. -}
-    , _filter            :: !(TF.Attribute s Text)
+    , _filter :: !(TF.Attribute s Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id                :: !(TF.Attribute s Text)
+    , _id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the specific VPN Gateway to retrieve. -}
-    , _state             :: !(TF.Attribute s Text)
+    , _state :: !(TF.Attribute s Text)
     {- ^ (Optional) The state of the specific VPN Gateway to retrieve. -}
-    , _tags              :: !(TF.Attribute s P.Tags)
+    , _tags :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPN Gateway. -}
     } deriving (Show, Eq)
 
@@ -3820,7 +3820,7 @@ instance P.HasTags (VpnGatewayData s) s P.Tags where
              (\s a -> s { _tags = a } :: VpnGatewayData s)
 
 
-vpnGatewayData :: TF.DataSource P.AWS (VpnGatewayData s)
+vpnGatewayData :: TF.Schema TF.DataSource P.AWS (VpnGatewayData s)
 vpnGatewayData =
     TF.newDataSource "aws_vpn_gateway" $
         VpnGatewayData {

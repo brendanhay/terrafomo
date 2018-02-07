@@ -18,7 +18,7 @@ module Terrafomo.AWS
     , module Terrafomo.AWS.Resource
     ) where
 
-import Terrafomo.AWS.DataSource
-import Terrafomo.AWS.Provider
-import Terrafomo.AWS.Resource
 import Terrafomo.AWS.Types
+import Terrafomo.AWS.Provider
+import Terrafomo.AWS.DataSource
+import Terrafomo.AWS.Resource

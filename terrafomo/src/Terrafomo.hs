@@ -38,26 +38,28 @@ module Terrafomo
     , IsProvider      (..)
     , withProvider
 
-    -- * References
+    -- * Schema References
+    , Schema
     , Reference
     , ref
 
-    -- * Data Sources
+    -- ** Data Sources
     , DataSource
 
-    -- * Resources
+    -- ** Resources
     , Resource
 
     -- ** Lifecycles
     , HasLifecycle    (..)
     , Lifecycle       (..)
+    , NoLifecycle
 
-    -- *** Ignored Attributes
+    -- ** Ignored Attributes
     , Changes
     , ignoreAllChanges
     , ignore
 
-    -- * Dependencies
+    -- ** Dependencies
     , dependOn
 
     -- * Outputs and Remote State
@@ -84,4 +86,4 @@ import Terrafomo.Monad
 import Terrafomo.Name
 import Terrafomo.Output
 import Terrafomo.Provider
-import Terrafomo.Source
+import Terrafomo.Schema

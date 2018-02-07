@@ -28,7 +28,7 @@ library:
     - Terrafomo.Output
     - Terrafomo.Provider
     - Terrafomo.RemoteState
-    - Terrafomo.Source
+    - Terrafomo.Schema
 
   dependencies:
     - aeson
