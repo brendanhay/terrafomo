@@ -5,7 +5,7 @@
 module Terrafomo
     (
     -- * Terraform Monad
-      TerraformOutput (..)
+      TerraformOutput
     , renderOutput
 
     , Terraform
@@ -26,9 +26,6 @@ module Terrafomo
     -- * Terraform Syntax
     , Name            (..)
 
-    , Reference
-    , referenceKey
-
     -- ** Attributes
     , Attribute
     , constant
@@ -41,13 +38,15 @@ module Terrafomo
     , IsProvider      (..)
     , withProvider
 
+    -- * References
+    , Reference
+    , ref
+
     -- * Data Sources
     , DataSource
-    , datasource
 
     -- * Resources
     , Resource
-    , resource
 
     -- ** Lifecycles
     , HasLifecycle    (..)
@@ -72,7 +71,7 @@ module Terrafomo
     , CIDR            (..)
 
     -- * Serialization
-    , ToHCL           (..)
+    , ToHCL
     , renderHCL
     ) where
 

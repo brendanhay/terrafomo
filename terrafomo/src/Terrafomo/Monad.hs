@@ -1,5 +1,6 @@
 {-# LANGUAGE DefaultSignatures          #-}
 {-# LANGUAGE DeriveFunctor              #-}
+{-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE FunctionalDependencies     #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -31,8 +32,7 @@ module Terrafomo.Monad
     -- * Providers
     , withProvider
 
-    , datasource
-    , resource
+    , ref
     , output
     , remote
     ) where
@@ -59,7 +59,7 @@ import Terrafomo.Name
 import Terrafomo.Output
 import Terrafomo.Provider
 import Terrafomo.RemoteState
-import Terrafomo.Source      (DataSource, Resource, Source (..))
+import Terrafomo.Source      (Source (..))
 import Terrafomo.ValueMap    (ValueMap)
 
 import qualified Data.Hashable                as Hash
@@ -88,9 +88,8 @@ import qualified Control.Monad.Trans.Writer.Strict as Strict
 -- Errors
 
 data TerraformError
-    = NonUniqueDataSource !Key  !HCL.Value
-    | NonUniqueResource   !Key  !HCL.Value
-    | NonUniqueOutput     !Name !HCL.Value
+    = NonUniqueReference !Key  !HCL.Value
+    | NonUniqueOutput    !Name !HCL.Value
       deriving (Eq, Show, Typeable)
 
 instance Exception TerraformError
@@ -105,13 +104,12 @@ newtype TerraformConfig = TerraformConfig
 
 -- | Provides key uniquness invariants and ordering of output statements.
 data TerraformState = UnsafeTerraformState
-    { supply      :: !Int -- Deliberately using an 'Int' for overflow.
-    , backend     :: !(Backend HCL.Value)
-    , providers   :: !(ValueMap Key  HCL.Value)
-    , remotes     :: !(ValueMap Key  HCL.Value)
-    , datasources :: !(ValueMap Key  HCL.Value)
-    , resources   :: !(ValueMap Key  HCL.Value)
-    , outputs     :: !(ValueMap Name HCL.Value)
+    { supply     :: !Int -- Deliberately using an 'Int' for overflow.
+    , backend    :: !(Backend HCL.Value)
+    , providers  :: !(ValueMap Key  HCL.Value)
+    , remotes    :: !(ValueMap Key  HCL.Value)
+    , references :: !(ValueMap Key  HCL.Value)
+    , outputs    :: !(ValueMap Name HCL.Value)
     }
 
 renderState :: TerraformState -> LText.Text
@@ -121,11 +119,10 @@ renderState s =
     . HCL.renderHCL
     . (HCL.toHCL (backend s) :)
     $ concat
-         [ VMap.values (providers   s)
-         , VMap.values (remotes     s)
-         , VMap.values (datasources s)
-         , VMap.values (resources   s)
-         , VMap.values (outputs     s)
+         [ VMap.values (providers  s)
+         , VMap.values (remotes    s)
+         , VMap.values (references s)
+         , VMap.values (outputs    s)
          ]
 
 -- External Output
@@ -173,13 +170,12 @@ runTerraform x name m =
 
     state =
         UnsafeTerraformState
-            { supply      = Hash.hash name
-            , backend     = HCL.toHCL <$> x
-            , providers   = VMap.empty
-            , remotes     = VMap.empty
-            , datasources = VMap.empty
-            , resources   = VMap.empty
-            , outputs     = VMap.empty
+            { supply     = Hash.hash name
+            , backend    = HCL.toHCL <$> x
+            , providers  = VMap.empty
+            , remotes    = VMap.empty
+            , references = VMap.empty
+            , outputs    = VMap.empty
             }
 
 -- Instances
@@ -319,54 +315,30 @@ insertProvider = \case
         let key   = providerKey p
             value = HCL.toHCL p
 
-        Just key <$
-            insertValue key value providers (\s w -> w { providers = s })
+        void $ insertValue key value providers (\s w -> w { providers = s })
+
+        pure $! Just key
 
 -- Values
 
-datasource
-    :: ( MonadTerraform s m
+ref :: ( MonadTerraform s m
        , IsProvider p
-       , HCL.ToHCL a
+       , HCL.ToHCL (Key, Source l Key a)
        )
     => Name
-    -> DataSource p a
+    -> Source l p a
     -> m (Reference s a)
-datasource name x =
+ref name x =
     liftTerraform $ do
         alias <- insertProvider (_sourceProvider x)
 
         let key   = Key (_sourceType x) name
             value = HCL.toHCL (key, x { _sourceProvider = alias })
 
-        unique <-
-            insertValue key value datasources (\s w -> w { datasources = s })
+        unique <- insertValue key value references (\s w -> w { references = s })
 
         unless unique $
-            MTL.throwError (NonUniqueDataSource key value)
-
-        pure (UnsafeReference key)
-
-resource
-    :: ( MonadTerraform s m
-       , IsProvider p
-       , HCL.ToHCL a
-       )
-    => Name
-    -> Resource p a
-    -> m (Reference s a)
-resource name x =
-    liftTerraform $ do
-        alias <- insertProvider (_sourceProvider x)
-
-        let key   = Key (_sourceType x) name
-            value = HCL.toHCL (key, x { _sourceProvider = alias })
-
-        unique <-
-            insertValue key value resources (\s w -> w { resources = s })
-
-        unless unique $
-            MTL.throwError (NonUniqueResource key value)
+            MTL.throwError (NonUniqueReference key value)
 
         pure (UnsafeReference key)
 
@@ -397,8 +369,7 @@ output attr =
             out   = Output b name attr
             value = HCL.toHCL out
 
-        unique <-
-            insertValue name value outputs (\s w -> w { outputs = s })
+        unique <- insertValue name value outputs (\s w -> w { outputs = s })
 
         unless unique $
             MTL.throwError (NonUniqueOutput name value)
@@ -418,10 +389,10 @@ remote x@(Output _ _ attr) =
             key   = remoteStateKey state
             value = HCL.toHCL state
 
-        exists <- MTL.gets (VMap.member key . datasources)
+        exists <- MTL.gets (VMap.member key . remotes)
 
         if exists
-            then MTL.throwError (NonUniqueDataSource key value)
+            then MTL.throwError (NonUniqueReference key value)
             else void (insertValue key value remotes (\s w -> w { remotes = s }))
 
         pure $!

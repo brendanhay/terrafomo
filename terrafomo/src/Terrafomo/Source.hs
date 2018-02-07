@@ -12,7 +12,6 @@
 module Terrafomo.Source
     ( Dependency (..)
 
-    , Present (..)
     , Source (..)
 
     , DataSource
@@ -31,10 +30,10 @@ import Data.List.NonEmpty (NonEmpty)
 import Data.Maybe         (catMaybes)
 import Data.Set           (Set)
 import Data.Text          (Text)
-import Data.Void          (Void)
 
 import Lens.Micro (Lens, Lens', lens)
 
+import Terrafomo.HCL       (ToHCL)
 import Terrafomo.Lifecycle
 import Terrafomo.Name
 
@@ -47,53 +46,38 @@ import qualified Terrafomo.HCL as HCL
 newtype Dependency = Dependency Key
    deriving (Show, Eq, Ord)
 
-instance HCL.ToHCL Dependency where
+instance ToHCL Dependency where
     toHCL (Dependency k) = HCL.toHCL k
-
--- Present (Type-level Maybe)
-
-data Present a where
-    Present :: !a -> Present a
-    Absent  ::       Present Void
-
-deriving instance Show a => Show (Present a)
-deriving instance Eq   a => Eq   (Present a)
 
 -- Source Types
 
-instance HasLifecycle (Present (Lifecycle a)) a where
-    lifecycle =
-        lens (\(Present x) -> x) (\(Present _) x -> Present x)
-
 data Source l p a = Source
     { _sourceProvider  :: !(Maybe p)
-    , _sourceLifecycle :: !(Present l)
+    , _sourceLifecycle :: !l
     , _sourceDependsOn :: !(Set Dependency)
     , _sourceType      :: !Type
     , _sourceConfig    :: !a
     } deriving (Show, Eq)
 
-type DataSource p a = Source Void          p a
+type DataSource p a = Source ()            p a
 type Resource   p a = Source (Lifecycle a) p a
 
 instance HasLifecycle (Resource p a) a where
-    lifecycle =
-          lens _sourceLifecycle (\s a -> s { _sourceLifecycle = a })
-              . lifecycle
+    lifecycle = lens _sourceLifecycle (\s a -> s { _sourceLifecycle = a })
 
-instance HCL.ToHCL a => HCL.ToHCL (Key, DataSource Key a) where
+instance ToHCL a => ToHCL (Key, DataSource Key a) where
     toHCL (k, v) =
         sourceHCL (HCL.key "data" k) v Nothing
 
-instance HCL.ToHCL a => HCL.ToHCL (Key, Resource Key a) where
+instance ToHCL a => ToHCL (Key, Resource Key a) where
     toHCL (k, v) =
         sourceHCL (HCL.key "resource" k) v $
-            case _sourceLifecycle v of
-                Present x | x == mempty -> Nothing
-                          | otherwise   -> Just x
+            if _sourceLifecycle v == mempty
+                then Nothing
+                else Just (_sourceLifecycle v)
 
 sourceHCL
-    :: HCL.ToHCL a
+    :: ToHCL a
     => NonEmpty HCL.Id
     -> Source l Key a
     -> Maybe (Lifecycle a)
@@ -111,7 +95,7 @@ sourceHCL key Source{..} lcycle =
 newDataSource :: Text -> a -> DataSource p a
 newDataSource name cfg =
     Source { _sourceProvider  = Nothing
-           , _sourceLifecycle = Absent
+           , _sourceLifecycle = ()
            , _sourceDependsOn = mempty
            , _sourceType      = Type (Just "data") name
            , _sourceConfig    = cfg
@@ -120,7 +104,7 @@ newDataSource name cfg =
 newResource :: Text -> a -> Resource p a
 newResource name cfg =
     Source { _sourceProvider  = Nothing
-           , _sourceLifecycle = Present mempty
+           , _sourceLifecycle = mempty
            , _sourceDependsOn = mempty
            , _sourceType      = Type Nothing name
            , _sourceConfig    = cfg
@@ -143,7 +127,7 @@ configuration = lens _sourceConfig (\s a -> s { _sourceConfig = a })
 dependencies :: Lens' (Source l p a) (Set Dependency)
 dependencies = lens _sourceDependsOn (\s a -> s { _sourceDependsOn = a })
 
--- | Helper for explicitly depending upon a reference.
+-- | Helper for explicitly depending upon a ref.
 dependOn
     :: Reference s a
     -> Source l p b
