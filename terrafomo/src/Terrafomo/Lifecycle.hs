@@ -14,6 +14,7 @@ module Terrafomo.Lifecycle
 
     , HasLifecycle (..)
     , Lifecycle    (..)
+    , NoLifecycle  (..)
     )where
 
 import Data.Function  (on)
@@ -143,3 +144,13 @@ instance HCL.ToHCL (Lifecycle a) where
            , HCL.assign "create_before_destroy" _createBeforeDestroy
            , HCL.assign "ignore_changes"        _ignoreChanges
            ]
+
+data NoLifecycle = NoLifecycle
+    deriving (Show, Eq)
+
+instance Semigroup NoLifecycle where
+    (<>) a _ = a
+
+instance Monoid NoLifecycle where
+    mempty  = NoLifecycle
+    mappend = (<>)

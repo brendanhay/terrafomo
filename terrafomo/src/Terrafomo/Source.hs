@@ -26,10 +26,9 @@ module Terrafomo.Source
     , dependOn
     ) where
 
-import Data.List.NonEmpty (NonEmpty)
-import Data.Maybe         (catMaybes)
-import Data.Set           (Set)
-import Data.Text          (Text)
+import Data.Maybe (catMaybes)
+import Data.Set   (Set)
+import Data.Text  (Text)
 
 import Lens.Micro (Lens, Lens', lens)
 
@@ -59,43 +58,39 @@ data Source l p a = Source
     , _sourceConfig    :: !a
     } deriving (Show, Eq)
 
-type DataSource p a = Source ()            p a
+type DataSource p a = Source NoLifecycle   p a
 type Resource   p a = Source (Lifecycle a) p a
 
 instance HasLifecycle (Resource p a) a where
     lifecycle = lens _sourceLifecycle (\s a -> s { _sourceLifecycle = a })
 
 instance ToHCL a => ToHCL (Key, DataSource Key a) where
-    toHCL (k, v) =
-        sourceHCL (HCL.key "data" k) v Nothing
+    toHCL (k, Source{..}) =
+        HCL.object (HCL.key "data" k) $ catMaybes
+            [ HCL.assign "provider" <$> _sourceProvider
+            , Just (HCL.toHCL _sourceConfig)
+            , if _sourceDependsOn == mempty
+                  then Nothing
+                  else Just (HCL.assign "depends_on" (HCL.list _sourceDependsOn))
+             ]
 
 instance ToHCL a => ToHCL (Key, Resource Key a) where
-    toHCL (k, v) =
-        sourceHCL (HCL.key "resource" k) v $
-            if _sourceLifecycle v == mempty
-                then Nothing
-                else Just (_sourceLifecycle v)
-
-sourceHCL
-    :: ToHCL a
-    => NonEmpty HCL.Id
-    -> Source l Key a
-    -> Maybe (Lifecycle a)
-    -> HCL.Value
-sourceHCL key Source{..} lcycle =
-   HCL.object key $ catMaybes
-        [ HCL.assign "provider" <$> _sourceProvider
-        , Just (HCL.toHCL _sourceConfig)
-        , HCL.assign "lifecycle" <$> lcycle
-        , if _sourceDependsOn == mempty
-              then Nothing
-              else Just (HCL.assign "depends_on" (HCL.list _sourceDependsOn))
-        ]
+    toHCL (k, Source{..}) =
+        HCL.object (HCL.key "resource" k) $ catMaybes
+            [ HCL.assign "provider" <$> _sourceProvider
+            , Just (HCL.toHCL _sourceConfig)
+            , if _sourceLifecycle == mempty
+                  then Nothing
+                  else Just (HCL.assign "lifecycle" _sourceLifecycle)
+            , if _sourceDependsOn == mempty
+                  then Nothing
+                  else Just (HCL.assign "depends_on" (HCL.list _sourceDependsOn))
+             ]
 
 newDataSource :: Text -> a -> DataSource p a
 newDataSource name cfg =
     Source { _sourceProvider  = Nothing
-           , _sourceLifecycle = ()
+           , _sourceLifecycle = NoLifecycle
            , _sourceDependsOn = mempty
            , _sourceType      = Type (Just "data") name
            , _sourceConfig    = cfg
