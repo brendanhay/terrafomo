@@ -16,24 +16,27 @@
 module Terrafomo.Monad
     (
     -- * Terraform Monad
-      TerraformOutput
-    , renderOutput
+      Error          (..)
+    , Config
+    , Document
+    , renderDocument
 
     , Terraform
     , runTerraform
 
-    -- * Terraform Monad Class
-    , TerraformConfig
-    , MonadTerraform  (..)
-
-    -- * Errors
-    , TerraformError  (..)
+    -- ** Terraform Monad Class
+    , MonadTerraform (..)
 
     -- * Providers
     , withProvider
 
+    -- * References
     , ref
+
+    -- * Outputs
     , output
+
+    -- * Remote State
     , remote
     ) where
 
@@ -43,14 +46,11 @@ import Control.Monad.Except (Except)
 import Control.Monad.Morph  (MFunctor (hoist))
 import Control.Monad.Trans  (MonadTrans (lift))
 
-import Data.Bifunctor     (second)
-import Data.Function      (on)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Map.Strict    (Map)
-import Data.Maybe         (mapMaybe)
-import Data.Proxy         (Proxy (..))
-import Data.Semigroup     (Semigroup ((<>)))
-import Data.Typeable      (Typeable)
+import Data.Bifunctor  (second)
+import Data.Map.Strict (Map)
+import Data.Proxy      (Proxy (..))
+import Data.Semigroup  (Semigroup ((<>)))
+import Data.Typeable   (Typeable)
 
 import Terrafomo.Attribute
 import Terrafomo.Backend
@@ -62,8 +62,6 @@ import Terrafomo.RemoteState
 import Terrafomo.Schema      (Schema (..))
 import Terrafomo.ValueMap    (ValueMap)
 
-import qualified Data.Hashable                as Hash
-import qualified Data.List                    as List
 import qualified Data.Map.Strict              as Map
 import qualified Data.Text.Lazy               as LText
 import qualified Terrafomo.Format             as Format
@@ -85,25 +83,19 @@ import qualified Control.Monad.Trans.State.Strict  as Strict
 import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Strict
 
--- Errors
-
-data TerraformError
+data Error
     = NonUniqueReference !Key  !HCL.Value
     | NonUniqueOutput    !Name !HCL.Value
       deriving (Eq, Show, Typeable)
 
-instance Exception TerraformError
+instance Exception Error
 
--- Internal Configuration
-
-newtype TerraformConfig = TerraformConfig
+newtype Config = Config
     { aliases :: Map Type Key
     }
 
--- Internal State
-
 -- | Provides key uniquness invariants and ordering of output statements.
-data TerraformState = UnsafeTerraformState
+data InternalState = UnsafeInternalState
     { supply     :: !Int -- Deliberately using an 'Int' for overflow.
     , backend    :: !(Backend HCL.Value)
     , providers  :: !(ValueMap Key  HCL.Value)
@@ -112,7 +104,7 @@ data TerraformState = UnsafeTerraformState
     , outputs    :: !(ValueMap Name HCL.Value)
     }
 
-renderState :: TerraformState -> LText.Text
+renderState :: InternalState -> LText.Text
 renderState s =
       PP.displayT
     . PP.renderPretty 0.4 100
@@ -125,58 +117,39 @@ renderState s =
          , VMap.values (outputs    s)
          ]
 
--- External Output
-
--- FIXME: Write up the laws for TerraformOutput's semigroup/monoid instances.
-
-newtype TerraformOutput = TerraformOutput [(Name, LText.Text)]
-    deriving (Semigroup, Monoid)
-
-singletonOutput :: Name -> TerraformState -> TerraformOutput
-singletonOutput name s = TerraformOutput [(name, renderState s)]
-
-renderOutput :: TerraformOutput -> [(Name, NonEmpty LText.Text)]
-renderOutput (TerraformOutput xs) =
-    mapMaybe go (List.groupBy (on (==) fst) xs)
-  where
-    go = \case
-        []          -> Nothing
-        (name, y):ys -> Just (name, y :| map snd ys)
+newtype Document = Document { renderDocument :: LText.Text }
+    deriving (Show, Eq)
 
 -- Terraform CPS Monad
 
 newtype Terraform s a = Terraform
     { unTerraform
-        :: TerraformConfig
-        -> TerraformState
-        -> Except TerraformError (a, TerraformState)
+        :: Config
+        -> InternalState
+        -> Except Error (a, InternalState)
     } deriving (Functor)
-
--- Unwrapping
 
 runTerraform
     :: HCL.ToHCL b
     => Backend b
-    -> Name -- ^ The unique name of the rendered 'Terraform' block.
     -> (forall s. Terraform s a)
-    -> Either TerraformError (a, TerraformOutput)
-runTerraform x name m =
-    second (singletonOutput name) <$> MTL.runExcept (unTerraform m config state)
-  where
-    config =
-        TerraformConfig
-            { aliases = mempty
-            }
-
-    state =
-        UnsafeTerraformState
-            { supply     = Hash.hash name
-            , backend    = HCL.toHCL <$> x
-            , providers  = VMap.empty
-            , remotes    = VMap.empty
-            , references = VMap.empty
-            , outputs    = VMap.empty
-            }
+    -> Either Error (a, Document)
+runTerraform x m =
+    second (Document . renderState) <$>
+        MTL.runExcept
+            ( unTerraform m
+                Config
+                    { aliases = mempty
+                    }
+                UnsafeInternalState
+                    { supply     = 100000
+                    , backend    = HCL.toHCL <$> x
+                    , providers  = VMap.empty
+                    , remotes    = VMap.empty
+                    , references = VMap.empty
+                    , outputs    = VMap.empty
+                    }
+            )
 
 -- Instances
 
@@ -193,21 +166,21 @@ instance Monad (Terraform s) where
         unTerraform (k x) r w'
     {-# INLINEABLE (>>=) #-}
 
-instance MTL.MonadReader TerraformConfig (Terraform s) where
+instance MTL.MonadReader Config (Terraform s) where
     ask = Terraform (\r w -> pure (r, w))
     {-# INLINEABLE ask #-}
 
     local f m = Terraform (\r w -> unTerraform m (f r) w)
     {-# INLINEABLE local #-}
 
-instance MTL.MonadState TerraformState (Terraform s) where
+instance MTL.MonadState InternalState (Terraform s) where
     get = Terraform (\_ w -> pure (w, w))
     {-# INLINEABLE get #-}
 
     put w = Terraform (\_ _ -> pure ((), w))
     {-# INLINEABLE put #-}
 
-instance MTL.MonadError TerraformError (Terraform s) where
+instance MTL.MonadError Error (Terraform s) where
     throwError e = Terraform (\_ _ -> MTL.throwError e)
     {-# INLINEABLE throwError #-}
 
@@ -233,7 +206,7 @@ class Monad m => MonadTerraform s m | m -> s where
     liftTerraform = lift . liftTerraform
     {-# INLINEABLE liftTerraform #-}
 
-    localTerraform :: (TerraformConfig -> TerraformConfig) -> m a -> m a
+    localTerraform :: (Config -> Config) -> m a -> m a
 
     -- | Default instance for any transformer satisfying the 'MFunctor'
     -- constraint, with a 'MonadTerraform' instance for the wrapped monad.
@@ -242,7 +215,7 @@ class Monad m => MonadTerraform s m | m -> s where
            , MonadTerraform s n
            , t n ~ m
            )
-        => (TerraformConfig -> TerraformConfig)
+        => (Config -> Config)
         -> m a
         -> m a
     localTerraform f m = hoist (localTerraform f) m
@@ -415,9 +388,9 @@ insertValue
     -- ^ The key.
     -> HCL.Value
     -- ^ The raw HCL value.
-    -> (TerraformState -> ValueMap k HCL.Value)
+    -> (InternalState -> ValueMap k HCL.Value)
     -- ^ Get the affected value map from the state.
-    -> (ValueMap k HCL.Value -> TerraformState -> TerraformState)
+    -> (ValueMap k HCL.Value -> InternalState -> InternalState)
     -- ^ Modify the state with the updated value map.
     -> m Bool
 insertValue key value state update =

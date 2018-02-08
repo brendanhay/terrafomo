@@ -1,53 +1,41 @@
--- | The intention here is to have a somewhat bash-esque suite of
--- functionality.  Rather than requiring heavily curated imports etc. that a
--- batteries-included environment tailored to matching Terraform's builtin
--- functions + common system engineering tasks.
 module Terrafomo
     (
     -- * Terraform Monad
-      TerraformOutput
-    , renderOutput
+      Error (..)
+    , Config
+    , Document
+    , renderDocument
 
     , Terraform
     , runTerraform
 
-    -- * Terraform Monad Class
-    , TerraformConfig
+    -- ** Terraform Monad Class
     , MonadTerraform  (..)
 
-    -- * Errors
-    , TerraformError  (..)
-
-    -- * Terraform Backends
+    -- * Backends
     , Backend         (..)
     , Local           (..)
     , localBackend
-
-    -- * Terraform Syntax
-    , Name            (..)
-
-    -- ** Attributes
-    , Attribute
-    , constant
-    , nil
-
-    -- *** Setters
-    , (@~)
 
     -- * Providers
     , IsProvider      (..)
     , withProvider
 
+    -- * Syntax
+    , Name            (..)
+    , Attribute
+    , constant
+    , nil
+
+    -- ** Setters
+    , (@~)
+
     -- * Schema References
+    , DataSource
+    , Resource
     , Schema
     , Reference
     , ref
-
-    -- ** Data Sources
-    , DataSource
-
-    -- ** Resources
-    , Resource
 
     -- ** Lifecycles
     , HasLifecycle    (..)
