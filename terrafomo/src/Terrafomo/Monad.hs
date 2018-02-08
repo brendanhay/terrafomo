@@ -337,7 +337,9 @@ ref name x =
             value = HCL.toHCL $
                         x { _schemaProvider = alias
                           , _schemaKeywords =
-                              _schemaKeywords x <> pure (HCL.type_ typ)
+                                 _schemaKeywords x
+                              <> pure (HCL.type_ typ)
+                              <> pure (HCL.name  name)
                           }
 
         unique <- insertValue key value references (\s w -> w { references = s })
