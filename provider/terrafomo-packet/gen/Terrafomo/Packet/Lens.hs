@@ -88,144 +88,144 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 class HasAddressFamily a s b | a -> s b where
     addressFamily :: Lens' a (TF.Attribute s b)
 
-instance HasAddressFamily a s b => HasAddressFamily (TF.Source l p a) s b where
+instance HasAddressFamily a s b => HasAddressFamily (TF.Schema l p a) s b where
     addressFamily = TF.configuration . addressFamily
 
 class HasAlwaysPxe a s b | a -> s b where
     alwaysPxe :: Lens' a (TF.Attribute s b)
 
-instance HasAlwaysPxe a s b => HasAlwaysPxe (TF.Source l p a) s b where
+instance HasAlwaysPxe a s b => HasAlwaysPxe (TF.Schema l p a) s b where
     alwaysPxe = TF.configuration . alwaysPxe
 
 class HasBillingCycle a s b | a -> s b where
     billingCycle :: Lens' a (TF.Attribute s b)
 
-instance HasBillingCycle a s b => HasBillingCycle (TF.Source l p a) s b where
+instance HasBillingCycle a s b => HasBillingCycle (TF.Schema l p a) s b where
     billingCycle = TF.configuration . billingCycle
 
 class HasCidrNotation a s b | a -> s b where
     cidrNotation :: Lens' a (TF.Attribute s b)
 
-instance HasCidrNotation a s b => HasCidrNotation (TF.Source l p a) s b where
+instance HasCidrNotation a s b => HasCidrNotation (TF.Schema l p a) s b where
     cidrNotation = TF.configuration . cidrNotation
 
 class HasDescription a s b | a -> s b where
     description :: Lens' a (TF.Attribute s b)
 
-instance HasDescription a s b => HasDescription (TF.Source l p a) s b where
+instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
     description = TF.configuration . description
 
 class HasDeviceId a s b | a -> s b where
     deviceId :: Lens' a (TF.Attribute s b)
 
-instance HasDeviceId a s b => HasDeviceId (TF.Source l p a) s b where
+instance HasDeviceId a s b => HasDeviceId (TF.Schema l p a) s b where
     deviceId = TF.configuration . deviceId
 
 class HasFacility a s b | a -> s b where
     facility :: Lens' a (TF.Attribute s b)
 
-instance HasFacility a s b => HasFacility (TF.Source l p a) s b where
+instance HasFacility a s b => HasFacility (TF.Schema l p a) s b where
     facility = TF.configuration . facility
 
 class HasHardwareReservationId a s b | a -> s b where
     hardwareReservationId :: Lens' a (TF.Attribute s b)
 
-instance HasHardwareReservationId a s b => HasHardwareReservationId (TF.Source l p a) s b where
+instance HasHardwareReservationId a s b => HasHardwareReservationId (TF.Schema l p a) s b where
     hardwareReservationId = TF.configuration . hardwareReservationId
 
 class HasHostname a s b | a -> s b where
     hostname :: Lens' a (TF.Attribute s b)
 
-instance HasHostname a s b => HasHostname (TF.Source l p a) s b where
+instance HasHostname a s b => HasHostname (TF.Schema l p a) s b where
     hostname = TF.configuration . hostname
 
 class HasIpxeScriptUrl a s b | a -> s b where
     ipxeScriptUrl :: Lens' a (TF.Attribute s b)
 
-instance HasIpxeScriptUrl a s b => HasIpxeScriptUrl (TF.Source l p a) s b where
+instance HasIpxeScriptUrl a s b => HasIpxeScriptUrl (TF.Schema l p a) s b where
     ipxeScriptUrl = TF.configuration . ipxeScriptUrl
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Source l p a) s b where
+instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasOperatingSystem a s b | a -> s b where
     operatingSystem :: Lens' a (TF.Attribute s b)
 
-instance HasOperatingSystem a s b => HasOperatingSystem (TF.Source l p a) s b where
+instance HasOperatingSystem a s b => HasOperatingSystem (TF.Schema l p a) s b where
     operatingSystem = TF.configuration . operatingSystem
 
 class HasPlan a s b | a -> s b where
     plan :: Lens' a (TF.Attribute s b)
 
-instance HasPlan a s b => HasPlan (TF.Source l p a) s b where
+instance HasPlan a s b => HasPlan (TF.Schema l p a) s b where
     plan = TF.configuration . plan
 
 class HasProjectId a s b | a -> s b where
     projectId :: Lens' a (TF.Attribute s b)
 
-instance HasProjectId a s b => HasProjectId (TF.Source l p a) s b where
+instance HasProjectId a s b => HasProjectId (TF.Schema l p a) s b where
     projectId = TF.configuration . projectId
 
 class HasPublic a s b | a -> s b where
     public :: Lens' a (TF.Attribute s b)
 
-instance HasPublic a s b => HasPublic (TF.Source l p a) s b where
+instance HasPublic a s b => HasPublic (TF.Schema l p a) s b where
     public = TF.configuration . public
 
 class HasPublicIpv4SubnetSize a s b | a -> s b where
     publicIpv4SubnetSize :: Lens' a (TF.Attribute s b)
 
-instance HasPublicIpv4SubnetSize a s b => HasPublicIpv4SubnetSize (TF.Source l p a) s b where
+instance HasPublicIpv4SubnetSize a s b => HasPublicIpv4SubnetSize (TF.Schema l p a) s b where
     publicIpv4SubnetSize = TF.configuration . publicIpv4SubnetSize
 
 class HasPublicKey a s b | a -> s b where
     publicKey :: Lens' a (TF.Attribute s b)
 
-instance HasPublicKey a s b => HasPublicKey (TF.Source l p a) s b where
+instance HasPublicKey a s b => HasPublicKey (TF.Schema l p a) s b where
     publicKey = TF.configuration . publicKey
 
 class HasQuantity a s b | a -> s b where
     quantity :: Lens' a (TF.Attribute s b)
 
-instance HasQuantity a s b => HasQuantity (TF.Source l p a) s b where
+instance HasQuantity a s b => HasQuantity (TF.Schema l p a) s b where
     quantity = TF.configuration . quantity
 
 class HasSize a s b | a -> s b where
     size :: Lens' a (TF.Attribute s b)
 
-instance HasSize a s b => HasSize (TF.Source l p a) s b where
+instance HasSize a s b => HasSize (TF.Schema l p a) s b where
     size = TF.configuration . size
 
 class HasSnapshotPolicies a s b | a -> s b where
     snapshotPolicies :: Lens' a (TF.Attribute s b)
 
-instance HasSnapshotPolicies a s b => HasSnapshotPolicies (TF.Source l p a) s b where
+instance HasSnapshotPolicies a s b => HasSnapshotPolicies (TF.Schema l p a) s b where
     snapshotPolicies = TF.configuration . snapshotPolicies
 
 class HasStorage a s b | a -> s b where
     storage :: Lens' a (TF.Attribute s b)
 
-instance HasStorage a s b => HasStorage (TF.Source l p a) s b where
+instance HasStorage a s b => HasStorage (TF.Schema l p a) s b where
     storage = TF.configuration . storage
 
 class HasUserData a s b | a -> s b where
     userData :: Lens' a (TF.Attribute s b)
 
-instance HasUserData a s b => HasUserData (TF.Source l p a) s b where
+instance HasUserData a s b => HasUserData (TF.Schema l p a) s b where
     userData = TF.configuration . userData
 
 class HasVolumeId a s b | a -> s b where
     volumeId :: Lens' a (TF.Attribute s b)
 
-instance HasVolumeId a s b => HasVolumeId (TF.Source l p a) s b where
+instance HasVolumeId a s b => HasVolumeId (TF.Schema l p a) s b where
     volumeId = TF.configuration . volumeId
 
 class HasComputedAccessPrivateIpv4 a b | a -> b where

@@ -123,7 +123,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @github_branch_protection@ GitHub resource.
 
@@ -189,7 +189,7 @@ instance P.HasRestrictions (BranchProtectionResource s) s Text where
              (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
 
-branchProtectionResource :: TF.Resource P.GitHub (BranchProtectionResource s)
+branchProtectionResource :: TF.Schema TF.Resource P.GitHub (BranchProtectionResource s)
 branchProtectionResource =
     TF.newResource "github_branch_protection" $
         BranchProtectionResource {
@@ -252,7 +252,7 @@ instance P.HasUrl (IssueLabelResource s) s Text where
              (\s a -> s { _url = a } :: IssueLabelResource s)
 
 
-issueLabelResource :: TF.Resource P.GitHub (IssueLabelResource s)
+issueLabelResource :: TF.Schema TF.Resource P.GitHub (IssueLabelResource s)
 issueLabelResource =
     TF.newResource "github_issue_label" $
         IssueLabelResource {
@@ -293,7 +293,7 @@ instance P.HasUsername (MembershipResource s) s Text where
              (\s a -> s { _username = a } :: MembershipResource s)
 
 
-membershipResource :: TF.Resource P.GitHub (MembershipResource s)
+membershipResource :: TF.Schema TF.Resource P.GitHub (MembershipResource s)
 membershipResource =
     TF.newResource "github_membership" $
         MembershipResource {
@@ -347,7 +347,7 @@ instance P.HasName (OrganizationWebhookResource s) s Text where
 
 instance P.HasComputedUrl (OrganizationWebhookResource s) Text
 
-organizationWebhookResource :: TF.Resource P.GitHub (OrganizationWebhookResource s)
+organizationWebhookResource :: TF.Schema TF.Resource P.GitHub (OrganizationWebhookResource s)
 organizationWebhookResource =
     TF.newResource "github_organization_webhook" $
         OrganizationWebhookResource {
@@ -401,7 +401,7 @@ instance P.HasUsername (RepositoryCollaboratorResource s) s Text where
              (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
 
 
-repositoryCollaboratorResource :: TF.Resource P.GitHub (RepositoryCollaboratorResource s)
+repositoryCollaboratorResource :: TF.Schema TF.Resource P.GitHub (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource =
     TF.newResource "github_repository_collaborator" $
         RepositoryCollaboratorResource {
@@ -458,7 +458,7 @@ instance P.HasTitle (RepositoryDeployKeyResource s) s Text where
              (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
 
 
-repositoryDeployKeyResource :: TF.Resource P.GitHub (RepositoryDeployKeyResource s)
+repositoryDeployKeyResource :: TF.Schema TF.Resource P.GitHub (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource =
     TF.newResource "github_repository_deploy_key" $
         RepositoryDeployKeyResource {
@@ -599,7 +599,7 @@ instance P.HasComputedHttpCloneUrl (RepositoryResource s) Text
 instance P.HasComputedSshCloneUrl (RepositoryResource s) Text
 instance P.HasComputedSvnUrl (RepositoryResource s) Text
 
-repositoryResource :: TF.Resource P.GitHub (RepositoryResource s)
+repositoryResource :: TF.Schema TF.Resource P.GitHub (RepositoryResource s)
 repositoryResource =
     TF.newResource "github_repository" $
         RepositoryResource {
@@ -674,7 +674,7 @@ instance P.HasRepository (RepositoryWebhookResource s) s Text where
 
 instance P.HasComputedUrl (RepositoryWebhookResource s) Text
 
-repositoryWebhookResource :: TF.Resource P.GitHub (RepositoryWebhookResource s)
+repositoryWebhookResource :: TF.Schema TF.Resource P.GitHub (RepositoryWebhookResource s)
 repositoryWebhookResource =
     TF.newResource "github_repository_webhook" $
         RepositoryWebhookResource {
@@ -725,7 +725,7 @@ instance P.HasUsername (TeamMembershipResource s) s Text where
              (\s a -> s { _username = a } :: TeamMembershipResource s)
 
 
-teamMembershipResource :: TF.Resource P.GitHub (TeamMembershipResource s)
+teamMembershipResource :: TF.Schema TF.Resource P.GitHub (TeamMembershipResource s)
 teamMembershipResource =
     TF.newResource "github_team_membership" $
         TeamMembershipResource {
@@ -774,7 +774,7 @@ instance P.HasTeamId (TeamRepositoryResource s) s Text where
              (\s a -> s { _team_id = a } :: TeamRepositoryResource s)
 
 
-teamRepositoryResource :: TF.Resource P.GitHub (TeamRepositoryResource s)
+teamRepositoryResource :: TF.Schema TF.Resource P.GitHub (TeamRepositoryResource s)
 teamRepositoryResource =
     TF.newResource "github_team_repository" $
         TeamRepositoryResource {
@@ -830,7 +830,7 @@ instance P.HasPrivacy (TeamResource s) s Text where
 
 instance P.HasComputedId (TeamResource s) Text
 
-teamResource :: TF.Resource P.GitHub (TeamResource s)
+teamResource :: TF.Schema TF.Resource P.GitHub (TeamResource s)
 teamResource =
     TF.newResource "github_team" $
         TeamResource {

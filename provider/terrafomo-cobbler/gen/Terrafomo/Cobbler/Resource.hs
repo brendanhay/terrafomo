@@ -130,7 +130,7 @@ import qualified Terrafomo.IP               as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @cobbler_distro@ Cobbler resource.
 
@@ -272,7 +272,7 @@ instance P.HasTemplateFiles (DistroResource s) s Text where
              (\s a -> s { _template_files = a } :: DistroResource s)
 
 
-distroResource :: TF.Resource P.Cobbler (DistroResource s)
+distroResource :: TF.Schema TF.Resource P.Cobbler (DistroResource s)
 distroResource =
     TF.newResource "cobbler_distro" $
         DistroResource {
@@ -322,7 +322,7 @@ instance P.HasName (KickstartFileResource s) s Text where
              (\s a -> s { _name = a } :: KickstartFileResource s)
 
 
-kickstartFileResource :: TF.Resource P.Cobbler (KickstartFileResource s)
+kickstartFileResource :: TF.Schema TF.Resource P.Cobbler (KickstartFileResource s)
 kickstartFileResource =
     TF.newResource "cobbler_kickstart_file" $
         KickstartFileResource {
@@ -598,7 +598,7 @@ instance P.HasVirtType (ProfileResource s) s Text where
              (\s a -> s { _virt_type = a } :: ProfileResource s)
 
 
-profileResource :: TF.Resource P.Cobbler (ProfileResource s)
+profileResource :: TF.Schema TF.Resource P.Cobbler (ProfileResource s)
 profileResource =
     TF.newResource "cobbler_profile" $
         ProfileResource {
@@ -760,7 +760,7 @@ instance P.HasRpmList (RepoResource s) s Text where
              (\s a -> s { _rpm_list = a } :: RepoResource s)
 
 
-repoResource :: TF.Resource P.Cobbler (RepoResource s)
+repoResource :: TF.Schema TF.Resource P.Cobbler (RepoResource s)
 repoResource =
     TF.newResource "cobbler_repo" $
         RepoResource {
@@ -808,7 +808,7 @@ instance P.HasName (SnippetResource s) s Text where
              (\s a -> s { _name = a } :: SnippetResource s)
 
 
-snippetResource :: TF.Resource P.Cobbler (SnippetResource s)
+snippetResource :: TF.Schema TF.Resource P.Cobbler (SnippetResource s)
 snippetResource =
     TF.newResource "cobbler_snippet" $
         SnippetResource {
@@ -1172,7 +1172,7 @@ instance P.HasVirtType (SystemResource s) s Text where
              (\s a -> s { _virt_type = a } :: SystemResource s)
 
 
-systemResource :: TF.Resource P.Cobbler (SystemResource s)
+systemResource :: TF.Schema TF.Resource P.Cobbler (SystemResource s)
 systemResource =
     TF.newResource "cobbler_system" $
         SystemResource {

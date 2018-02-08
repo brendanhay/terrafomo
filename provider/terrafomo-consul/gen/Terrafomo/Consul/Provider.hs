@@ -28,6 +28,7 @@ module Terrafomo.Consul.Provider
     , providerCertFile
     , providerDatacenter
     , providerHttpAuth
+    , providerInsecureHttps
     , providerKeyFile
     , providerScheme
     , providerToken
@@ -59,21 +60,23 @@ defaults for all arguments. Use the navigation to the left to read about the
 available resources.
 -}
 data Consul = Consul {
-      _address    :: !(Maybe Text)
+      _address        :: !(Maybe Text)
     {- ^ (Optional) The HTTP(S) API address of the agent to use. Defaults to "127.0.0.1:8500". -}
-    , _ca_file    :: !(Maybe Text)
+    , _ca_file        :: !(Maybe Text)
     {- ^ (Optional) A path to a PEM-encoded certificate authority used to verify the remote agent's certificate. -}
-    , _cert_file  :: !(Maybe Text)
+    , _cert_file      :: !(Maybe Text)
     {- ^ (Optional) A path to a PEM-encoded certificate provided to the remote agent; requires use of @key_file@ . -}
-    , _datacenter :: !(Maybe Text)
+    , _datacenter     :: !(Maybe Text)
     {- ^ (Optional) The datacenter to use. Defaults to that of the agent. -}
-    , _http_auth  :: !(Maybe Text)
+    , _http_auth      :: !(Maybe Text)
     {- ^ (Optional) HTTP Basic Authentication credentials to be used when communicating with Consul, in the format of either @user@ or @user:pass@ . This may also be specified using the @CONSUL_HTTP_AUTH@ environment variable. -}
-    , _key_file   :: !(Maybe Text)
+    , _insecure_https :: !(Maybe Text)
+    {- ^ (Optional) Boolean value to disable SSL certificate verification; setting this value to true is not recommended for production use. Only use this with scheme set to "https". -}
+    , _key_file       :: !(Maybe Text)
     {- ^ (Optional) A path to a PEM-encoded private key, required if @cert_file@ is specified. -}
-    , _scheme     :: !(Maybe Text)
+    , _scheme         :: !(Maybe Text)
     {- ^ (Optional) The URL scheme of the agent to use ("http" or "https"). Defaults to "http". -}
-    , _token      :: !(Maybe Text)
+    , _token          :: !(Maybe Text)
     {- ^ (Optional) The ACL token to use by default when making requests to the agent. -}
     } deriving (Show, Eq, Generic)
 
@@ -90,6 +93,7 @@ instance TF.ToHCL Consul where
             , TF.assign "cert_file" <$> _cert_file x
             , TF.assign "datacenter" <$> _datacenter x
             , TF.assign "http_auth" <$> _http_auth x
+            , TF.assign "insecure_https" <$> _insecure_https x
             , TF.assign "key_file" <$> _key_file x
             , TF.assign "scheme" <$> _scheme x
             , TF.assign "token" <$> _token x
@@ -105,6 +109,7 @@ emptyConsul = Consul {
       , _cert_file = Nothing
       , _datacenter = Nothing
       , _http_auth = Nothing
+      , _insecure_https = Nothing
       , _key_file = Nothing
       , _scheme = Nothing
       , _token = Nothing
@@ -129,6 +134,10 @@ providerDatacenter =
 providerHttpAuth :: Lens' Consul (Maybe Text)
 providerHttpAuth =
     lens _http_auth (\s a -> s { _http_auth = a })
+
+providerInsecureHttps :: Lens' Consul (Maybe Text)
+providerInsecureHttps =
+    lens _insecure_https (\s a -> s { _insecure_https = a })
 
 providerKeyFile :: Lens' Consul (Maybe Text)
 providerKeyFile =

@@ -80,7 +80,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @github_team@ GitHub datasource.
 
@@ -108,7 +108,7 @@ instance P.HasComputedName (TeamData s) Text
 instance P.HasComputedPermission (TeamData s) Text
 instance P.HasComputedPrivacy (TeamData s) Text
 
-teamData :: TF.DataSource P.GitHub (TeamData s)
+teamData :: TF.Schema TF.DataSource P.GitHub (TeamData s)
 teamData =
     TF.newDataSource "github_team" $
         TeamData {
@@ -153,7 +153,7 @@ instance P.HasComputedSiteAdmin (UserData s) Text
 instance P.HasComputedSshKeys (UserData s) Text
 instance P.HasComputedUpdatedAt (UserData s) Text
 
-userData :: TF.DataSource P.GitHub (UserData s)
+userData :: TF.Schema TF.DataSource P.GitHub (UserData s)
 userData =
     TF.newDataSource "github_user" $
         UserData {

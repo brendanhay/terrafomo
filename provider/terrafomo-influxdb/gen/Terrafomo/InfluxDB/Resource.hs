@@ -65,7 +65,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @influxdb_continuous_query@ InfluxDB resource.
 
@@ -104,7 +104,7 @@ instance P.HasQuery (ContinuousQueryResource s) s Text where
              (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
 
-continuousQueryResource :: TF.Resource P.InfluxDB (ContinuousQueryResource s)
+continuousQueryResource :: TF.Schema TF.Resource P.InfluxDB (ContinuousQueryResource s)
 continuousQueryResource =
     TF.newResource "influxdb_continuous_query" $
         ContinuousQueryResource {
@@ -133,7 +133,7 @@ instance P.HasName (DatabaseResource s) s Text where
              (\s a -> s { _name = a } :: DatabaseResource s)
 
 
-databaseResource :: TF.Resource P.InfluxDB (DatabaseResource s)
+databaseResource :: TF.Schema TF.Resource P.InfluxDB (DatabaseResource s)
 databaseResource =
     TF.newResource "influxdb_database" $
         DatabaseResource {
@@ -185,7 +185,7 @@ instance P.HasPassword (UserResource s) s Text where
 
 instance P.HasComputedAdmin (UserResource s) Text
 
-userResource :: TF.Resource P.InfluxDB (UserResource s)
+userResource :: TF.Schema TF.Resource P.InfluxDB (UserResource s)
 userResource =
     TF.newResource "influxdb_user" $
         UserResource {

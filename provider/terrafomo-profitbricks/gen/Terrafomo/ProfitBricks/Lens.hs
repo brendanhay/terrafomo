@@ -43,60 +43,60 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 class HasDescription a s b | a -> s b where
     description :: Lens' a (TF.Attribute s b)
 
-instance HasDescription a s b => HasDescription (TF.Source l p a) s b where
+instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
     description = TF.configuration . description
 
 class HasFeature a s b | a -> s b where
     feature :: Lens' a (TF.Attribute s b)
 
-instance HasFeature a s b => HasFeature (TF.Source l p a) s b where
+instance HasFeature a s b => HasFeature (TF.Schema l p a) s b where
     feature = TF.configuration . feature
 
 class HasLocation a s b | a -> s b where
     location :: Lens' a (TF.Attribute s b)
 
-instance HasLocation a s b => HasLocation (TF.Source l p a) s b where
+instance HasLocation a s b => HasLocation (TF.Schema l p a) s b where
     location = TF.configuration . location
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Source l p a) s b where
+instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasResourceId a s b | a -> s b where
     resourceId :: Lens' a (TF.Attribute s b)
 
-instance HasResourceId a s b => HasResourceId (TF.Source l p a) s b where
+instance HasResourceId a s b => HasResourceId (TF.Schema l p a) s b where
     resourceId = TF.configuration . resourceId
 
 class HasResourceType a s b | a -> s b where
     resourceType :: Lens' a (TF.Attribute s b)
 
-instance HasResourceType a s b => HasResourceType (TF.Source l p a) s b where
+instance HasResourceType a s b => HasResourceType (TF.Schema l p a) s b where
     resourceType = TF.configuration . resourceType
 
 class HasSize a s b | a -> s b where
     size :: Lens' a (TF.Attribute s b)
 
-instance HasSize a s b => HasSize (TF.Source l p a) s b where
+instance HasSize a s b => HasSize (TF.Schema l p a) s b where
     size = TF.configuration . size
 
 class HasType' a s b | a -> s b where
     type' :: Lens' a (TF.Attribute s b)
 
-instance HasType' a s b => HasType' (TF.Source l p a) s b where
+instance HasType' a s b => HasType' (TF.Schema l p a) s b where
     type' = TF.configuration . type'
 
 class HasVersion a s b | a -> s b where
     version :: Lens' a (TF.Attribute s b)
 
-instance HasVersion a s b => HasVersion (TF.Source l p a) s b where
+instance HasVersion a s b => HasVersion (TF.Schema l p a) s b where
     version = TF.configuration . version
 
 class HasComputedId a b | a -> b where

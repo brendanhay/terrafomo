@@ -68,7 +68,7 @@ import           Terrafomo.Vault.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @vault_aws_access_credentials@ Vault datasource.
 
@@ -118,7 +118,7 @@ instance P.HasComputedLeaseStartTime (AwsAccessCredentialsData s) Text
 instance P.HasComputedSecretKey (AwsAccessCredentialsData s) Text
 instance P.HasComputedSecurityToken (AwsAccessCredentialsData s) Text
 
-awsAccessCredentialsData :: TF.DataSource P.Vault (AwsAccessCredentialsData s)
+awsAccessCredentialsData :: TF.Schema TF.DataSource P.Vault (AwsAccessCredentialsData s)
 awsAccessCredentialsData =
     TF.newDataSource "vault_aws_access_credentials" $
         AwsAccessCredentialsData {
@@ -161,7 +161,7 @@ instance P.HasComputedLeaseId (GenericSecretData s) Text
 instance P.HasComputedLeaseRenewable (GenericSecretData s) Text
 instance P.HasComputedLeaseStartTime (GenericSecretData s) Text
 
-genericSecretData :: TF.DataSource P.Vault (GenericSecretData s)
+genericSecretData :: TF.Schema TF.DataSource P.Vault (GenericSecretData s)
 genericSecretData =
     TF.newDataSource "vault_generic_secret" $
         GenericSecretData {

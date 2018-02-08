@@ -79,7 +79,7 @@ import           Terrafomo.SoftLayer.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @softlayer_ssh_key@ SoftLayer resource.
 
@@ -121,7 +121,7 @@ instance P.HasPublicKey (SshKeyResource s) s Text where
 instance P.HasComputedFingerprint (SshKeyResource s) Text
 instance P.HasComputedId (SshKeyResource s) Text
 
-sshKeyResource :: TF.Resource P.SoftLayer (SshKeyResource s)
+sshKeyResource :: TF.Schema TF.Resource P.SoftLayer (SshKeyResource s)
 sshKeyResource =
     TF.newResource "softlayer_ssh_key" $
         SshKeyResource {
@@ -305,7 +305,7 @@ instance P.HasUserData (VirtualGuestResource s) s Text where
 
 instance P.HasComputedId (VirtualGuestResource s) Text
 
-virtualGuestResource :: TF.Resource P.SoftLayer (VirtualGuestResource s)
+virtualGuestResource :: TF.Schema TF.Resource P.SoftLayer (VirtualGuestResource s)
 virtualGuestResource =
     TF.newResource "softlayer_virtual_guest" $
         VirtualGuestResource {

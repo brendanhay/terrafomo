@@ -140,7 +140,7 @@ import           Terrafomo.OpenStack.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @openstack_compute_flavor_v2@ OpenStack datasource.
 
@@ -227,7 +227,7 @@ instance P.HasVcpus (ComputeFlavorV2Data s) s Text where
 
 instance P.HasComputedIsPublic (ComputeFlavorV2Data s) Text
 
-computeFlavorV2Data :: TF.DataSource P.OpenStack (ComputeFlavorV2Data s)
+computeFlavorV2Data :: TF.Schema TF.DataSource P.OpenStack (ComputeFlavorV2Data s)
 computeFlavorV2Data =
     TF.newDataSource "openstack_compute_flavor_v2" $
         ComputeFlavorV2Data {
@@ -326,7 +326,7 @@ instance P.HasComputedType' (DnsZoneV2Data s) Text
 instance P.HasComputedUpdatedAt (DnsZoneV2Data s) Text
 instance P.HasComputedVersion (DnsZoneV2Data s) Text
 
-dnsZoneV2Data :: TF.DataSource P.OpenStack (DnsZoneV2Data s)
+dnsZoneV2Data :: TF.Schema TF.DataSource P.OpenStack (DnsZoneV2Data s)
 dnsZoneV2Data =
     TF.newDataSource "openstack_dns_zone_v2" $
         DnsZoneV2Data {
@@ -453,7 +453,7 @@ instance P.HasComputedSizeBytes (ImagesImageV2Data s) Text
 instance P.HasComputedTags (ImagesImageV2Data s) Text
 instance P.HasComputedUpdateAt (ImagesImageV2Data s) Text
 
-imagesImageV2Data :: TF.DataSource P.OpenStack (ImagesImageV2Data s)
+imagesImageV2Data :: TF.Schema TF.DataSource P.OpenStack (ImagesImageV2Data s)
 imagesImageV2Data =
     TF.newDataSource "openstack_images_image_v2" $
         ImagesImageV2Data {
@@ -543,7 +543,7 @@ instance P.HasComputedName (NetworkingNetworkV2Data s) Text
 instance P.HasComputedRegion (NetworkingNetworkV2Data s) Text
 instance P.HasComputedShared (NetworkingNetworkV2Data s) Text
 
-networkingNetworkV2Data :: TF.DataSource P.OpenStack (NetworkingNetworkV2Data s)
+networkingNetworkV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingNetworkV2Data s)
 networkingNetworkV2Data =
     TF.newDataSource "openstack_networking_network_v2" $
         NetworkingNetworkV2Data {
@@ -603,7 +603,7 @@ instance P.HasComputedDescription (NetworkingSecgroupV2Data s) Text
 instance P.HasComputedName (NetworkingSecgroupV2Data s) Text
 instance P.HasComputedRegion (NetworkingSecgroupV2Data s) Text
 
-networkingSecgroupV2Data :: TF.DataSource P.OpenStack (NetworkingSecgroupV2Data s)
+networkingSecgroupV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingSecgroupV2Data s)
 networkingSecgroupV2Data =
     TF.newDataSource "openstack_networking_secgroup_v2" $
         NetworkingSecgroupV2Data {
@@ -726,7 +726,7 @@ instance P.HasComputedEnableDhcp (NetworkingSubnetV2Data s) Text
 instance P.HasComputedHostRoutes (NetworkingSubnetV2Data s) Text
 instance P.HasComputedRegion (NetworkingSubnetV2Data s) Text
 
-networkingSubnetV2Data :: TF.DataSource P.OpenStack (NetworkingSubnetV2Data s)
+networkingSubnetV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingSubnetV2Data s)
 networkingSubnetV2Data =
     TF.newDataSource "openstack_networking_subnet_v2" $
         NetworkingSubnetV2Data {

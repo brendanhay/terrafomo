@@ -116,7 +116,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @circonus_check@ Circonus resource.
 
@@ -305,7 +305,7 @@ instance P.HasTimeout (CheckResource s) s Text where
              (\s a -> s { _timeout = a } :: CheckResource s)
 
 
-checkResource :: TF.Resource P.Circonus (CheckResource s)
+checkResource :: TF.Schema TF.Resource P.Circonus (CheckResource s)
 checkResource =
     TF.newResource "circonus_check" $
         CheckResource {
@@ -473,7 +473,7 @@ instance P.HasVictorops (ContactGroupResource s) s Text where
              (\s a -> s { _victorops = a } :: ContactGroupResource s)
 
 
-contactGroupResource :: TF.Resource P.Circonus (ContactGroupResource s)
+contactGroupResource :: TF.Schema TF.Resource P.Circonus (ContactGroupResource s)
 contactGroupResource =
     TF.newResource "circonus_contact_group" $
         ContactGroupResource {
@@ -589,7 +589,7 @@ instance P.HasTags (GraphResource s) s Text where
              (\s a -> s { _tags = a } :: GraphResource s)
 
 
-graphResource :: TF.Resource P.Circonus (GraphResource s)
+graphResource :: TF.Schema TF.Resource P.Circonus (GraphResource s)
 graphResource =
     TF.newResource "circonus_graph" $
         GraphResource {
@@ -650,7 +650,7 @@ instance P.HasTags (MetricClusterResource s) s Text where
              (\s a -> s { _tags = a } :: MetricClusterResource s)
 
 
-metricClusterResource :: TF.Resource P.Circonus (MetricClusterResource s)
+metricClusterResource :: TF.Schema TF.Resource P.Circonus (MetricClusterResource s)
 metricClusterResource =
     TF.newResource "circonus_metric_cluster" $
         MetricClusterResource {
@@ -714,7 +714,7 @@ instance P.HasUnit (MetricResource s) s Text where
              (\s a -> s { _unit = a } :: MetricResource s)
 
 
-metricResource :: TF.Resource P.Circonus (MetricResource s)
+metricResource :: TF.Schema TF.Resource P.Circonus (MetricResource s)
 metricResource =
     TF.newResource "circonus_metric" $
         MetricResource {
@@ -802,7 +802,7 @@ instance P.HasTags (RuleSetResource s) s Text where
              (\s a -> s { _tags = a } :: RuleSetResource s)
 
 
-ruleSetResource :: TF.Resource P.Circonus (RuleSetResource s)
+ruleSetResource :: TF.Schema TF.Resource P.Circonus (RuleSetResource s)
 ruleSetResource =
     TF.newResource "circonus_rule_set" $
         RuleSetResource {

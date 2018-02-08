@@ -124,7 +124,7 @@ import           Terrafomo.PagerDuty.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @pagerduty_addon@ PagerDuty resource.
 
@@ -159,7 +159,7 @@ instance P.HasSrc (AddonResource s) s Text where
 
 instance P.HasComputedId (AddonResource s) Text
 
-addonResource :: TF.Resource P.PagerDuty (AddonResource s)
+addonResource :: TF.Schema TF.Resource P.PagerDuty (AddonResource s)
 addonResource =
     TF.newResource "pagerduty_addon" $
         AddonResource {
@@ -224,7 +224,7 @@ instance P.HasTeams (EscalationPolicyResource s) s Text where
 
 instance P.HasComputedId (EscalationPolicyResource s) Text
 
-escalationPolicyResource :: TF.Resource P.PagerDuty (EscalationPolicyResource s)
+escalationPolicyResource :: TF.Schema TF.Resource P.PagerDuty (EscalationPolicyResource s)
 escalationPolicyResource =
     TF.newResource "pagerduty_escalation_policy" $
         EscalationPolicyResource {
@@ -287,7 +287,7 @@ instance P.HasStartTime (MaintenanceWindowResource s) s Text where
 
 instance P.HasComputedId (MaintenanceWindowResource s) Text
 
-maintenanceWindowResource :: TF.Resource P.PagerDuty (MaintenanceWindowResource s)
+maintenanceWindowResource :: TF.Schema TF.Resource P.PagerDuty (MaintenanceWindowResource s)
 maintenanceWindowResource =
     TF.newResource "pagerduty_maintenance_window" $
         MaintenanceWindowResource {
@@ -353,7 +353,7 @@ instance P.HasTimeZone (ScheduleResource s) s Text where
 
 instance P.HasComputedId (ScheduleResource s) Text
 
-scheduleResource :: TF.Resource P.PagerDuty (ScheduleResource s)
+scheduleResource :: TF.Schema TF.Resource P.PagerDuty (ScheduleResource s)
 scheduleResource =
     TF.newResource "pagerduty_schedule" $
         ScheduleResource {
@@ -429,7 +429,7 @@ instance P.HasComputedId (ServiceIntegrationResource s) Text
 instance P.HasComputedIntegrationEmail (ServiceIntegrationResource s) Text
 instance P.HasComputedIntegrationKey (ServiceIntegrationResource s) Text
 
-serviceIntegrationResource :: TF.Resource P.PagerDuty (ServiceIntegrationResource s)
+serviceIntegrationResource :: TF.Schema TF.Resource P.PagerDuty (ServiceIntegrationResource s)
 serviceIntegrationResource =
     TF.newResource "pagerduty_service_integration" $
         ServiceIntegrationResource {
@@ -509,7 +509,7 @@ instance P.HasComputedId (ServiceResource s) Text
 instance P.HasComputedLastIncidentTimestamp (ServiceResource s) Text
 instance P.HasComputedStatus (ServiceResource s) Text
 
-serviceResource :: TF.Resource P.PagerDuty (ServiceResource s)
+serviceResource :: TF.Schema TF.Resource P.PagerDuty (ServiceResource s)
 serviceResource =
     TF.newResource "pagerduty_service" $
         ServiceResource {
@@ -553,7 +553,7 @@ instance P.HasUserId (TeamMembershipResource s) s Text where
 instance P.HasComputedTeamId (TeamMembershipResource s) Text
 instance P.HasComputedUserId (TeamMembershipResource s) Text
 
-teamMembershipResource :: TF.Resource P.PagerDuty (TeamMembershipResource s)
+teamMembershipResource :: TF.Schema TF.Resource P.PagerDuty (TeamMembershipResource s)
 teamMembershipResource =
     TF.newResource "pagerduty_team_membership" $
         TeamMembershipResource {
@@ -594,7 +594,7 @@ instance P.HasName (TeamResource s) s Text where
 
 instance P.HasComputedId (TeamResource s) Text
 
-teamResource :: TF.Resource P.PagerDuty (TeamResource s)
+teamResource :: TF.Schema TF.Resource P.PagerDuty (TeamResource s)
 teamResource =
     TF.newResource "pagerduty_team" $
         TeamResource {
@@ -667,7 +667,7 @@ instance P.HasComputedBlacklisted (UserContactMethodResource s) Text
 instance P.HasComputedEnabled (UserContactMethodResource s) Text
 instance P.HasComputedId (UserContactMethodResource s) Text
 
-userContactMethodResource :: TF.Resource P.PagerDuty (UserContactMethodResource s)
+userContactMethodResource :: TF.Schema TF.Resource P.PagerDuty (UserContactMethodResource s)
 userContactMethodResource =
     TF.newResource "pagerduty_user_contact_method" $
         UserContactMethodResource {
@@ -755,7 +755,7 @@ instance P.HasComputedId (UserResource s) Text
 instance P.HasComputedInvitationSent (UserResource s) Text
 instance P.HasComputedTimeZone (UserResource s) Text
 
-userResource :: TF.Resource P.PagerDuty (UserResource s)
+userResource :: TF.Schema TF.Resource P.PagerDuty (UserResource s)
 userResource =
     TF.newResource "pagerduty_user" $
         UserResource {

@@ -123,7 +123,7 @@ import           Terrafomo.Triton.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @triton_fabric@ Triton resource.
 
@@ -230,7 +230,7 @@ instance P.HasComputedRoutes (FabricResource s) Text
 instance P.HasComputedSubnet (FabricResource s) Text
 instance P.HasComputedVlanId (FabricResource s) Text
 
-fabricResource :: TF.Resource P.Triton (FabricResource s)
+fabricResource :: TF.Schema TF.Resource P.Triton (FabricResource s)
 fabricResource =
     TF.newResource "triton_fabric" $
         FabricResource {
@@ -276,7 +276,7 @@ instance P.HasRule (FirewallRuleResource s) s Text where
 
 instance P.HasComputedId (FirewallRuleResource s) Text
 
-firewallRuleResource :: TF.Resource P.Triton (FirewallRuleResource s)
+firewallRuleResource :: TF.Schema TF.Resource P.Triton (FirewallRuleResource s)
 firewallRuleResource =
     TF.newResource "triton_firewall_rule" $
         FirewallRuleResource {
@@ -312,7 +312,7 @@ instance P.HasName (KeyResource s) s Text where
              (\s a -> s { _name = a } :: KeyResource s)
 
 
-keyResource :: TF.Resource P.Triton (KeyResource s)
+keyResource :: TF.Schema TF.Resource P.Triton (KeyResource s)
 keyResource =
     TF.newResource "triton_key" $
         KeyResource {
@@ -472,7 +472,7 @@ instance P.HasComputedState (MachineResource s) Text
 instance P.HasComputedType' (MachineResource s) Text
 instance P.HasComputedUpdated (MachineResource s) Text
 
-machineResource :: TF.Resource P.Triton (MachineResource s)
+machineResource :: TF.Schema TF.Resource P.Triton (MachineResource s)
 machineResource =
     TF.newResource "triton_machine" $
         MachineResource {
@@ -526,7 +526,7 @@ instance P.HasName (SnapshotResource s) s Text where
 instance P.HasComputedId (SnapshotResource s) Text
 instance P.HasComputedState (SnapshotResource s) Text
 
-snapshotResource :: TF.Resource P.Triton (SnapshotResource s)
+snapshotResource :: TF.Schema TF.Resource P.Triton (SnapshotResource s)
 snapshotResource =
     TF.newResource "triton_snapshot" $
         SnapshotResource {
@@ -572,7 +572,7 @@ instance P.HasVlanId (VlanResource s) s Text where
              (\s a -> s { _vlan_id = a } :: VlanResource s)
 
 
-vlanResource :: TF.Resource P.Triton (VlanResource s)
+vlanResource :: TF.Schema TF.Resource P.Triton (VlanResource s)
 vlanResource =
     TF.newResource "triton_vlan" $
         VlanResource {

@@ -600,7 +600,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @alicloud_cdn_domain@ AliCloud resource.
 
@@ -677,7 +677,7 @@ instance P.HasComputedSourceType (CdnDomainResource s) Text
 instance P.HasComputedSources (CdnDomainResource s) Text
 instance P.HasComputedVideoSeekEnable (CdnDomainResource s) Text
 
-cdnDomainResource :: TF.Resource P.AliCloud (CdnDomainResource s)
+cdnDomainResource :: TF.Schema TF.Resource P.AliCloud (CdnDomainResource s)
 cdnDomainResource =
     TF.newResource "alicloud_cdn_domain" $
         CdnDomainResource {
@@ -786,7 +786,7 @@ instance P.HasComputedSize (ContainerClusterResource s) Text
 instance P.HasComputedVpcId (ContainerClusterResource s) Text
 instance P.HasComputedVswitchId (ContainerClusterResource s) Text
 
-containerClusterResource :: TF.Resource P.AliCloud (ContainerClusterResource s)
+containerClusterResource :: TF.Schema TF.Resource P.AliCloud (ContainerClusterResource s)
 containerClusterResource =
     TF.newResource "alicloud_container_cluster" $
         ContainerClusterResource {
@@ -853,7 +853,7 @@ instance P.HasComputedId (DbAccountPrivilegeResource s) Text
 instance P.HasComputedInstanceId (DbAccountPrivilegeResource s) Text
 instance P.HasComputedPrivilege (DbAccountPrivilegeResource s) Text
 
-dbAccountPrivilegeResource :: TF.Resource P.AliCloud (DbAccountPrivilegeResource s)
+dbAccountPrivilegeResource :: TF.Schema TF.Resource P.AliCloud (DbAccountPrivilegeResource s)
 dbAccountPrivilegeResource =
     TF.newResource "alicloud_db_account_privilege" $
         DbAccountPrivilegeResource {
@@ -921,7 +921,7 @@ instance P.HasComputedInstanceId (DbAccountResource s) Text
 instance P.HasComputedName (DbAccountResource s) Text
 instance P.HasComputedType' (DbAccountResource s) Text
 
-dbAccountResource :: TF.Resource P.AliCloud (DbAccountResource s)
+dbAccountResource :: TF.Schema TF.Resource P.AliCloud (DbAccountResource s)
 dbAccountResource =
     TF.newResource "alicloud_db_account" $
         DbAccountResource {
@@ -1001,7 +1001,7 @@ instance P.HasComputedLogBackup (DbBackupPolicyResource s) Text
 instance P.HasComputedLogRetentionPeriod (DbBackupPolicyResource s) Text
 instance P.HasComputedRetentionPeriod (DbBackupPolicyResource s) Text
 
-dbBackupPolicyResource :: TF.Resource P.AliCloud (DbBackupPolicyResource s)
+dbBackupPolicyResource :: TF.Schema TF.Resource P.AliCloud (DbBackupPolicyResource s)
 dbBackupPolicyResource =
     TF.newResource "alicloud_db_backup_policy" $
         DbBackupPolicyResource {
@@ -1058,7 +1058,7 @@ instance P.HasComputedId (DbConnectionResource s) Text
 instance P.HasComputedIpAddress (DbConnectionResource s) Text
 instance P.HasComputedPort (DbConnectionResource s) Text
 
-dbConnectionResource :: TF.Resource P.AliCloud (DbConnectionResource s)
+dbConnectionResource :: TF.Schema TF.Resource P.AliCloud (DbConnectionResource s)
 dbConnectionResource =
     TF.newResource "alicloud_db_connection" $
         DbConnectionResource {
@@ -1117,7 +1117,7 @@ instance P.HasComputedId (DbDatabaseResource s) Text
 instance P.HasComputedInstanceId (DbDatabaseResource s) Text
 instance P.HasComputedName (DbDatabaseResource s) Text
 
-dbDatabaseResource :: TF.Resource P.AliCloud (DbDatabaseResource s)
+dbDatabaseResource :: TF.Schema TF.Resource P.AliCloud (DbDatabaseResource s)
 dbDatabaseResource =
     TF.newResource "alicloud_db_database" $
         DbDatabaseResource {
@@ -1252,7 +1252,7 @@ instance P.HasComputedSecurityIps (DbInstanceResource s) Text
 instance P.HasComputedVswitchId (DbInstanceResource s) Text
 instance P.HasComputedZoneId (DbInstanceResource s) Text
 
-dbInstanceResource :: TF.Resource P.AliCloud (DbInstanceResource s)
+dbInstanceResource :: TF.Schema TF.Resource P.AliCloud (DbInstanceResource s)
 dbInstanceResource =
     TF.newResource "alicloud_db_instance" $
         DbInstanceResource {
@@ -1301,7 +1301,7 @@ instance P.HasComputedDeviceName (DiskAttachmentResource s) Text
 instance P.HasComputedDiskId (DiskAttachmentResource s) Text
 instance P.HasComputedInstanceId (DiskAttachmentResource s) Text
 
-diskAttachmentResource :: TF.Resource P.AliCloud (DiskAttachmentResource s)
+diskAttachmentResource :: TF.Schema TF.Resource P.AliCloud (DiskAttachmentResource s)
 diskAttachmentResource =
     TF.newResource "alicloud_disk_attachment" $
         DiskAttachmentResource {
@@ -1389,7 +1389,7 @@ instance P.HasComputedSnapshotId (DiskResource s) Text
 instance P.HasComputedStatus (DiskResource s) Text
 instance P.HasComputedTags (DiskResource s) Text
 
-diskResource :: TF.Resource P.AliCloud (DiskResource s)
+diskResource :: TF.Schema TF.Resource P.AliCloud (DiskResource s)
 diskResource =
     TF.newResource "alicloud_disk" $
         DiskResource {
@@ -1424,7 +1424,7 @@ instance P.HasName (DnsGroupResource s) s Text where
 instance P.HasComputedId (DnsGroupResource s) Text
 instance P.HasComputedName (DnsGroupResource s) Text
 
-dnsGroupResource :: TF.Resource P.AliCloud (DnsGroupResource s)
+dnsGroupResource :: TF.Schema TF.Resource P.AliCloud (DnsGroupResource s)
 dnsGroupResource =
     TF.newResource "alicloud_dns_group" $
         DnsGroupResource {
@@ -1509,7 +1509,7 @@ instance P.HasComputedTtl (DnsResource s) Text
 instance P.HasComputedType' (DnsResource s) Text
 instance P.HasComputedValue (DnsResource s) Text
 
-dnsResource :: TF.Resource P.AliCloud (DnsResource s)
+dnsResource :: TF.Schema TF.Resource P.AliCloud (DnsResource s)
 dnsResource =
     TF.newResource "alicloud_dns" $
         DnsResource {
@@ -1558,7 +1558,7 @@ instance P.HasInstanceId (EipAssociationResource s) s Text where
 instance P.HasComputedAllocationId (EipAssociationResource s) Text
 instance P.HasComputedInstanceId (EipAssociationResource s) Text
 
-eipAssociationResource :: TF.Resource P.AliCloud (EipAssociationResource s)
+eipAssociationResource :: TF.Schema TF.Resource P.AliCloud (EipAssociationResource s)
 eipAssociationResource =
     TF.newResource "alicloud_eip_association" $
         EipAssociationResource {
@@ -1603,7 +1603,7 @@ instance P.HasComputedInternetChargeType (EipResource s) Text
 instance P.HasComputedIpAddress (EipResource s) Text
 instance P.HasComputedStatus (EipResource s) Text
 
-eipResource :: TF.Resource P.AliCloud (EipResource s)
+eipResource :: TF.Schema TF.Resource P.AliCloud (EipResource s)
 eipResource =
     TF.newResource "alicloud_eip" $
         EipResource {
@@ -1655,7 +1655,7 @@ instance P.HasComputedForce (EssAttachmentResource s) Text
 instance P.HasComputedId (EssAttachmentResource s) Text
 instance P.HasComputedInstanceIds (EssAttachmentResource s) Text
 
-essAttachmentResource :: TF.Resource P.AliCloud (EssAttachmentResource s)
+essAttachmentResource :: TF.Schema TF.Resource P.AliCloud (EssAttachmentResource s)
 essAttachmentResource =
     TF.newResource "alicloud_ess_attachment" $
         EssAttachmentResource {
@@ -1683,6 +1683,8 @@ data EssScalingConfigurationResource s = EssScalingConfigurationResource {
     {- ^ (Optional) The last scaling configuration will be deleted forcibly with deleting its scaling group. Default to false. -}
     , _image_id                   :: !(TF.Attribute s Text)
     {- ^ (Required) ID of an image file, indicating the image resource selected when an instance is enabled. -}
+    , _instance_name              :: !(TF.Attribute s Text)
+    {- ^ (Optional) Name of an ECS instance. Default to "ESS-Instance". It is valid from version 1.7.1. -}
     , _instance_type              :: !(TF.Attribute s Text)
     {- ^ (Required) Resource type of an ECS instance. -}
     , _internet_charge_type       :: !(TF.Attribute s Text)
@@ -1720,6 +1722,7 @@ instance TF.ToHCL (EssScalingConfigurationResource s) where
         , TF.attribute "enable" _enable
         , TF.attribute "force_delete" _force_delete
         , TF.attribute "image_id" _image_id
+        , TF.attribute "instance_name" _instance_name
         , TF.attribute "instance_type" _instance_type
         , TF.attribute "internet_charge_type" _internet_charge_type
         , TF.attribute "internet_max_bandwidth_in" _internet_max_bandwidth_in
@@ -1760,6 +1763,11 @@ instance P.HasImageId (EssScalingConfigurationResource s) s Text where
     imageId =
         lens (_image_id :: EssScalingConfigurationResource s -> TF.Attribute s Text)
              (\s a -> s { _image_id = a } :: EssScalingConfigurationResource s)
+
+instance P.HasInstanceName (EssScalingConfigurationResource s) s Text where
+    instanceName =
+        lens (_instance_name :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+             (\s a -> s { _instance_name = a } :: EssScalingConfigurationResource s)
 
 instance P.HasInstanceType (EssScalingConfigurationResource s) s Text where
     instanceType =
@@ -1835,6 +1843,7 @@ instance P.HasComputedActive (EssScalingConfigurationResource s) Text
 instance P.HasComputedForceDelete (EssScalingConfigurationResource s) Text
 instance P.HasComputedId (EssScalingConfigurationResource s) Text
 instance P.HasComputedImageId (EssScalingConfigurationResource s) Text
+instance P.HasComputedInstanceName (EssScalingConfigurationResource s) Text
 instance P.HasComputedInstanceType (EssScalingConfigurationResource s) Text
 instance P.HasComputedInternetChargeType (EssScalingConfigurationResource s) Text
 instance P.HasComputedKeyName (EssScalingConfigurationResource s) Text
@@ -1844,7 +1853,7 @@ instance P.HasComputedSecurityGroupId (EssScalingConfigurationResource s) Text
 instance P.HasComputedTags (EssScalingConfigurationResource s) Text
 instance P.HasComputedUserData (EssScalingConfigurationResource s) Text
 
-essScalingConfigurationResource :: TF.Resource P.AliCloud (EssScalingConfigurationResource s)
+essScalingConfigurationResource :: TF.Schema TF.Resource P.AliCloud (EssScalingConfigurationResource s)
 essScalingConfigurationResource =
     TF.newResource "alicloud_ess_scaling_configuration" $
         EssScalingConfigurationResource {
@@ -1853,6 +1862,7 @@ essScalingConfigurationResource =
             , _enable = TF.Nil
             , _force_delete = TF.Nil
             , _image_id = TF.Nil
+            , _instance_name = TF.Nil
             , _instance_type = TF.Nil
             , _internet_charge_type = TF.Nil
             , _internet_max_bandwidth_in = TF.Nil
@@ -1959,7 +1969,7 @@ instance P.HasComputedRemovalPolicies (EssScalingGroupResource s) Text
 instance P.HasComputedScalingGroupName (EssScalingGroupResource s) Text
 instance P.HasComputedVswitchIds (EssScalingGroupResource s) Text
 
-essScalingGroupResource :: TF.Resource P.AliCloud (EssScalingGroupResource s)
+essScalingGroupResource :: TF.Schema TF.Resource P.AliCloud (EssScalingGroupResource s)
 essScalingGroupResource =
     TF.newResource "alicloud_ess_scaling_group" $
         EssScalingGroupResource {
@@ -2032,7 +2042,7 @@ instance P.HasComputedId (EssScalingRuleResource s) Text
 instance P.HasComputedScalingGroupId (EssScalingRuleResource s) Text
 instance P.HasComputedScalingRuleName (EssScalingRuleResource s) Text
 
-essScalingRuleResource :: TF.Resource P.AliCloud (EssScalingRuleResource s)
+essScalingRuleResource :: TF.Schema TF.Resource P.AliCloud (EssScalingRuleResource s)
 essScalingRuleResource =
     TF.newResource "alicloud_ess_scaling_rule" $
         EssScalingRuleResource {
@@ -2133,7 +2143,7 @@ instance P.HasComputedScheduledAction (EssScheduleResource s) Text
 instance P.HasComputedScheduledTaskName (EssScheduleResource s) Text
 instance P.HasComputedTaskEnabled (EssScheduleResource s) Text
 
-essScheduleResource :: TF.Resource P.AliCloud (EssScheduleResource s)
+essScheduleResource :: TF.Schema TF.Resource P.AliCloud (EssScheduleResource s)
 essScheduleResource =
     TF.newResource "alicloud_ess_schedule" $
         EssScheduleResource {
@@ -2208,7 +2218,7 @@ instance P.HasIpProtocol (ForwardResource s) s Text where
              (\s a -> s { _ip_protocol = a } :: ForwardResource s)
 
 
-forwardResource :: TF.Resource P.AliCloud (ForwardResource s)
+forwardResource :: TF.Schema TF.Resource P.AliCloud (ForwardResource s)
 forwardResource =
     TF.newResource "alicloud_forward" $
         ForwardResource {
@@ -2478,7 +2488,7 @@ instance P.HasComputedTags (InstanceResource s) Text
 instance P.HasComputedUserData (InstanceResource s) Text
 instance P.HasComputedVswitchId (InstanceResource s) Text
 
-instanceResource :: TF.Resource P.AliCloud (InstanceResource s)
+instanceResource :: TF.Schema TF.Resource P.AliCloud (InstanceResource s)
 instanceResource =
     TF.newResource "alicloud_instance" $
         InstanceResource {
@@ -2542,7 +2552,7 @@ instance P.HasKeyName (KeyPairAttachmentResource s) s Text where
 instance P.HasComputedInstanceIds (KeyPairAttachmentResource s) Text
 instance P.HasComputedKeyName (KeyPairAttachmentResource s) Text
 
-keyPairAttachmentResource :: TF.Resource P.AliCloud (KeyPairAttachmentResource s)
+keyPairAttachmentResource :: TF.Schema TF.Resource P.AliCloud (KeyPairAttachmentResource s)
 keyPairAttachmentResource =
     TF.newResource "alicloud_key_pair_attachment" $
         KeyPairAttachmentResource {
@@ -2596,7 +2606,7 @@ instance P.HasPublicKey (KeyPairResource s) s Text where
 instance P.HasComputedFingerprint (KeyPairResource s) Text
 instance P.HasComputedKeyName (KeyPairResource s) Text
 
-keyPairResource :: TF.Resource P.AliCloud (KeyPairResource s)
+keyPairResource :: TF.Schema TF.Resource P.AliCloud (KeyPairResource s)
 keyPairResource =
     TF.newResource "alicloud_key_pair" $
         KeyPairResource {
@@ -2657,7 +2667,7 @@ instance P.HasComputedId (KmsKeyResource s) Text
 instance P.HasComputedIsEnabled (KmsKeyResource s) Text
 instance P.HasComputedKeyUsage (KmsKeyResource s) Text
 
-kmsKeyResource :: TF.Resource P.AliCloud (KmsKeyResource s)
+kmsKeyResource :: TF.Schema TF.Resource P.AliCloud (KmsKeyResource s)
 kmsKeyResource =
     TF.newResource "alicloud_kms_key" $
         KmsKeyResource {
@@ -2727,7 +2737,7 @@ instance P.HasComputedSpec (NatGatewayResource s) Text
 instance P.HasComputedSpecification (NatGatewayResource s) Text
 instance P.HasComputedVpcId (NatGatewayResource s) Text
 
-natGatewayResource :: TF.Resource P.AliCloud (NatGatewayResource s)
+natGatewayResource :: TF.Schema TF.Resource P.AliCloud (NatGatewayResource s)
 natGatewayResource =
     TF.newResource "alicloud_nat_gateway" $
         NatGatewayResource {
@@ -2848,7 +2858,7 @@ instance P.HasComputedContentLength (OssBucketObjectResource s) Text
 instance P.HasComputedEtag (OssBucketObjectResource s) Text
 instance P.HasComputedId (OssBucketObjectResource s) Text
 
-ossBucketObjectResource :: TF.Resource P.AliCloud (OssBucketObjectResource s)
+ossBucketObjectResource :: TF.Schema TF.Resource P.AliCloud (OssBucketObjectResource s)
 ossBucketObjectResource =
     TF.newResource "alicloud_oss_bucket_object" $
         OssBucketObjectResource {
@@ -2952,7 +2962,7 @@ instance P.HasComputedLocation (OssBucketResource s) Text
 instance P.HasComputedOwner (OssBucketResource s) Text
 instance P.HasComputedStorageClass (OssBucketResource s) Text
 
-ossBucketResource :: TF.Resource P.AliCloud (OssBucketResource s)
+ossBucketResource :: TF.Schema TF.Resource P.AliCloud (OssBucketResource s)
 ossBucketResource =
     TF.newResource "alicloud_oss_bucket" $
         OssBucketResource {
@@ -3005,7 +3015,7 @@ instance P.HasUserName (RamAccessKeyResource s) s Text where
 instance P.HasComputedId (RamAccessKeyResource s) Text
 instance P.HasComputedStatus (RamAccessKeyResource s) Text
 
-ramAccessKeyResource :: TF.Resource P.AliCloud (RamAccessKeyResource s)
+ramAccessKeyResource :: TF.Schema TF.Resource P.AliCloud (RamAccessKeyResource s)
 ramAccessKeyResource =
     TF.newResource "alicloud_ram_access_key" $
         RamAccessKeyResource {
@@ -3035,7 +3045,7 @@ instance P.HasAccountAlias (RamAccountAliasResource s) s Text where
 
 instance P.HasComputedAccountAlias (RamAccountAliasResource s) Text
 
-ramAccountAliasResource :: TF.Resource P.AliCloud (RamAccountAliasResource s)
+ramAccountAliasResource :: TF.Schema TF.Resource P.AliCloud (RamAccountAliasResource s)
 ramAccountAliasResource =
     TF.newResource "alicloud_ram_account_alias" $
         RamAccountAliasResource {
@@ -3055,7 +3065,7 @@ instance TF.ToHCL (RamAliasResource s) where
     toHCL _ = TF.block []
 
 
-ramAliasResource :: TF.Resource P.AliCloud (RamAliasResource s)
+ramAliasResource :: TF.Schema TF.Resource P.AliCloud (RamAliasResource s)
 ramAliasResource =
     TF.newResource "alicloud_ram_alias" $
         RamAliasResource {
@@ -3092,7 +3102,7 @@ instance P.HasComputedGroupName (RamGroupMembershipResource s) Text
 instance P.HasComputedId (RamGroupMembershipResource s) Text
 instance P.HasComputedUserNames (RamGroupMembershipResource s) Text
 
-ramGroupMembershipResource :: TF.Resource P.AliCloud (RamGroupMembershipResource s)
+ramGroupMembershipResource :: TF.Schema TF.Resource P.AliCloud (RamGroupMembershipResource s)
 ramGroupMembershipResource =
     TF.newResource "alicloud_ram_group_membership" $
         RamGroupMembershipResource {
@@ -3140,7 +3150,7 @@ instance P.HasComputedId (RamGroupPolicyAttachmentResource s) Text
 instance P.HasComputedPolicyName (RamGroupPolicyAttachmentResource s) Text
 instance P.HasComputedPolicyType (RamGroupPolicyAttachmentResource s) Text
 
-ramGroupPolicyAttachmentResource :: TF.Resource P.AliCloud (RamGroupPolicyAttachmentResource s)
+ramGroupPolicyAttachmentResource :: TF.Schema TF.Resource P.AliCloud (RamGroupPolicyAttachmentResource s)
 ramGroupPolicyAttachmentResource =
     TF.newResource "alicloud_ram_group_policy_attachment" $
         RamGroupPolicyAttachmentResource {
@@ -3192,7 +3202,7 @@ instance P.HasComputedComments (RamGroupResource s) Text
 instance P.HasComputedId (RamGroupResource s) Text
 instance P.HasComputedName (RamGroupResource s) Text
 
-ramGroupResource :: TF.Resource P.AliCloud (RamGroupResource s)
+ramGroupResource :: TF.Schema TF.Resource P.AliCloud (RamGroupResource s)
 ramGroupResource =
     TF.newResource "alicloud_ram_group" $
         RamGroupResource {
@@ -3249,7 +3259,7 @@ instance P.HasComputedMfaBindRequired (RamLoginProfileResource s) Text
 instance P.HasComputedPasswordResetRequired (RamLoginProfileResource s) Text
 instance P.HasComputedUserName (RamLoginProfileResource s) Text
 
-ramLoginProfileResource :: TF.Resource P.AliCloud (RamLoginProfileResource s)
+ramLoginProfileResource :: TF.Schema TF.Resource P.AliCloud (RamLoginProfileResource s)
 ramLoginProfileResource =
     TF.newResource "alicloud_ram_login_profile" $
         RamLoginProfileResource {
@@ -3331,7 +3341,7 @@ instance P.HasComputedStatement (RamPolicyResource s) Text
 instance P.HasComputedType' (RamPolicyResource s) Text
 instance P.HasComputedVersion (RamPolicyResource s) Text
 
-ramPolicyResource :: TF.Resource P.AliCloud (RamPolicyResource s)
+ramPolicyResource :: TF.Schema TF.Resource P.AliCloud (RamPolicyResource s)
 ramPolicyResource =
     TF.newResource "alicloud_ram_policy" $
         RamPolicyResource {
@@ -3374,7 +3384,7 @@ instance P.HasRoleName (RamRoleAttachmentResource s) s Text where
 instance P.HasComputedInstanceIds (RamRoleAttachmentResource s) Text
 instance P.HasComputedRoleName (RamRoleAttachmentResource s) Text
 
-ramRoleAttachmentResource :: TF.Resource P.AliCloud (RamRoleAttachmentResource s)
+ramRoleAttachmentResource :: TF.Schema TF.Resource P.AliCloud (RamRoleAttachmentResource s)
 ramRoleAttachmentResource =
     TF.newResource "alicloud_ram_role_attachment" $
         RamRoleAttachmentResource {
@@ -3422,7 +3432,7 @@ instance P.HasComputedPolicyName (RamRolePolicyAttachmentResource s) Text
 instance P.HasComputedPolicyType (RamRolePolicyAttachmentResource s) Text
 instance P.HasComputedRoleName (RamRolePolicyAttachmentResource s) Text
 
-ramRolePolicyAttachmentResource :: TF.Resource P.AliCloud (RamRolePolicyAttachmentResource s)
+ramRolePolicyAttachmentResource :: TF.Schema TF.Resource P.AliCloud (RamRolePolicyAttachmentResource s)
 ramRolePolicyAttachmentResource =
     TF.newResource "alicloud_ram_role_policy_attachment" $
         RamRolePolicyAttachmentResource {
@@ -3511,7 +3521,7 @@ instance P.HasComputedRamUsers (RamRoleResource s) Text
 instance P.HasComputedServices (RamRoleResource s) Text
 instance P.HasComputedVersion (RamRoleResource s) Text
 
-ramRoleResource :: TF.Resource P.AliCloud (RamRoleResource s)
+ramRoleResource :: TF.Schema TF.Resource P.AliCloud (RamRoleResource s)
 ramRoleResource =
     TF.newResource "alicloud_ram_role" $
         RamRoleResource {
@@ -3564,7 +3574,7 @@ instance P.HasComputedPolicyName (RamUserPolicyAttachmentResource s) Text
 instance P.HasComputedPolicyType (RamUserPolicyAttachmentResource s) Text
 instance P.HasComputedUserName (RamUserPolicyAttachmentResource s) Text
 
-ramUserPolicyAttachmentResource :: TF.Resource P.AliCloud (RamUserPolicyAttachmentResource s)
+ramUserPolicyAttachmentResource :: TF.Schema TF.Resource P.AliCloud (RamUserPolicyAttachmentResource s)
 ramUserPolicyAttachmentResource =
     TF.newResource "alicloud_ram_user_policy_attachment" $
         RamUserPolicyAttachmentResource {
@@ -3643,7 +3653,7 @@ instance P.HasComputedId (RamUserResource s) Text
 instance P.HasComputedMobile (RamUserResource s) Text
 instance P.HasComputedName (RamUserResource s) Text
 
-ramUserResource :: TF.Resource P.AliCloud (RamUserResource s)
+ramUserResource :: TF.Schema TF.Resource P.AliCloud (RamUserResource s)
 ramUserResource =
     TF.newResource "alicloud_ram_user" $
         RamUserResource {
@@ -3705,7 +3715,7 @@ instance P.HasComputedNexthopType (RouteEntryResource s) Text
 instance P.HasComputedRouteTableId (RouteEntryResource s) Text
 instance P.HasComputedRouterId (RouteEntryResource s) Text
 
-routeEntryResource :: TF.Resource P.AliCloud (RouteEntryResource s)
+routeEntryResource :: TF.Schema TF.Resource P.AliCloud (RouteEntryResource s)
 routeEntryResource =
     TF.newResource "alicloud_route_entry" $
         RouteEntryResource {
@@ -3865,7 +3875,7 @@ instance P.HasComputedRouterId (RouterInterfaceResource s) Text
 instance P.HasComputedRouterType (RouterInterfaceResource s) Text
 instance P.HasComputedSpecification (RouterInterfaceResource s) Text
 
-routerInterfaceResource :: TF.Resource P.AliCloud (RouterInterfaceResource s)
+routerInterfaceResource :: TF.Schema TF.Resource P.AliCloud (RouterInterfaceResource s)
 routerInterfaceResource =
     TF.newResource "alicloud_router_interface" $
         RouterInterfaceResource {
@@ -3928,7 +3938,7 @@ instance P.HasComputedId (SecurityGroupResource s) Text
 instance P.HasComputedName (SecurityGroupResource s) Text
 instance P.HasComputedVpcId (SecurityGroupResource s) Text
 
-securityGroupResource :: TF.Resource P.AliCloud (SecurityGroupResource s)
+securityGroupResource :: TF.Schema TF.Resource P.AliCloud (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "alicloud_security_group" $
         SecurityGroupResource {
@@ -4039,7 +4049,7 @@ instance P.HasComputedName (SecurityGroupRuleResource s) Text
 instance P.HasComputedPortRange (SecurityGroupRuleResource s) Text
 instance P.HasComputedType' (SecurityGroupRuleResource s) Text
 
-securityGroupRuleResource :: TF.Resource P.AliCloud (SecurityGroupRuleResource s)
+securityGroupRuleResource :: TF.Schema TF.Resource P.AliCloud (SecurityGroupRuleResource s)
 securityGroupRuleResource =
     TF.newResource "alicloud_security_group_rule" $
         SecurityGroupRuleResource {
@@ -4097,7 +4107,7 @@ instance P.HasComputedInstanceIds (SlbAttachmentResource s) Text
 instance P.HasComputedLoadBalancerId (SlbAttachmentResource s) Text
 instance P.HasComputedWeight (SlbAttachmentResource s) Text
 
-slbAttachmentResource :: TF.Resource P.AliCloud (SlbAttachmentResource s)
+slbAttachmentResource :: TF.Schema TF.Resource P.AliCloud (SlbAttachmentResource s)
 slbAttachmentResource =
     TF.newResource "alicloud_slb_attachment" $
         SlbAttachmentResource {
@@ -4317,7 +4327,7 @@ instance P.HasComputedStickySession (SlbListenerResource s) Text
 instance P.HasComputedStickySessionType (SlbListenerResource s) Text
 instance P.HasComputedUnhealthyThreshold (SlbListenerResource s) Text
 
-slbListenerResource :: TF.Resource P.AliCloud (SlbListenerResource s)
+slbListenerResource :: TF.Schema TF.Resource P.AliCloud (SlbListenerResource s)
 slbListenerResource =
     TF.newResource "alicloud_slb_listener" $
         SlbListenerResource {
@@ -4423,7 +4433,7 @@ instance P.HasComputedName (SlbResource s) Text
 instance P.HasComputedSpecification (SlbResource s) Text
 instance P.HasComputedVswitchId (SlbResource s) Text
 
-slbResource :: TF.Resource P.AliCloud (SlbResource s)
+slbResource :: TF.Schema TF.Resource P.AliCloud (SlbResource s)
 slbResource =
     TF.newResource "alicloud_slb" $
         SlbResource {
@@ -4511,7 +4521,7 @@ instance P.HasComputedName (SlbRuleResource s) Text
 instance P.HasComputedServerGroupId (SlbRuleResource s) Text
 instance P.HasComputedUrl (SlbRuleResource s) Text
 
-slbRuleResource :: TF.Resource P.AliCloud (SlbRuleResource s)
+slbRuleResource :: TF.Schema TF.Resource P.AliCloud (SlbRuleResource s)
 slbRuleResource =
     TF.newResource "alicloud_slb_rule" $
         SlbRuleResource {
@@ -4572,7 +4582,7 @@ instance P.HasComputedLoadBalancerId (SlbServerGroupResource s) Text
 instance P.HasComputedName (SlbServerGroupResource s) Text
 instance P.HasComputedServers (SlbServerGroupResource s) Text
 
-slbServerGroupResource :: TF.Resource P.AliCloud (SlbServerGroupResource s)
+slbServerGroupResource :: TF.Schema TF.Resource P.AliCloud (SlbServerGroupResource s)
 slbServerGroupResource =
     TF.newResource "alicloud_slb_server_group" $
         SlbServerGroupResource {
@@ -4617,7 +4627,7 @@ instance P.HasSourceVswitchId (SnatResource s) s Text where
              (\s a -> s { _source_vswitch_id = a } :: SnatResource s)
 
 
-snatResource :: TF.Resource P.AliCloud (SnatResource s)
+snatResource :: TF.Schema TF.Resource P.AliCloud (SnatResource s)
 snatResource =
     TF.newResource "alicloud_snat" $
         SnatResource {
@@ -4669,7 +4679,7 @@ instance P.HasComputedName (VpcResource s) Text
 instance P.HasComputedRouteTableId (VpcResource s) Text
 instance P.HasComputedRouterId (VpcResource s) Text
 
-vpcResource :: TF.Resource P.AliCloud (VpcResource s)
+vpcResource :: TF.Schema TF.Resource P.AliCloud (VpcResource s)
 vpcResource =
     TF.newResource "alicloud_vpc" $
         VpcResource {
@@ -4736,7 +4746,7 @@ instance P.HasComputedId (VswitchResource s) Text
 instance P.HasComputedName (VswitchResource s) Text
 instance P.HasComputedVpcId (VswitchResource s) Text
 
-vswitchResource :: TF.Resource P.AliCloud (VswitchResource s)
+vswitchResource :: TF.Schema TF.Resource P.AliCloud (VswitchResource s)
 vswitchResource =
     TF.newResource "alicloud_vswitch" $
         VswitchResource {

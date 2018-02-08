@@ -72,7 +72,7 @@ import           Terrafomo.Triton.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @triton_account@ Triton datasource.
 
@@ -95,7 +95,7 @@ instance P.HasCnsEnabled (AccountData s) s Text where
              (\s a -> s { _cns_enabled = a } :: AccountData s)
 
 
-accountData :: TF.DataSource P.Triton (AccountData s)
+accountData :: TF.Schema TF.DataSource P.Triton (AccountData s)
 accountData =
     TF.newDataSource "triton_account" $
         AccountData {
@@ -131,7 +131,7 @@ instance P.HasName (DatacenterData s) s Text where
              (\s a -> s { _name = a } :: DatacenterData s)
 
 
-datacenterData :: TF.DataSource P.Triton (DatacenterData s)
+datacenterData :: TF.Schema TF.DataSource P.Triton (DatacenterData s)
 datacenterData =
     TF.newDataSource "triton_datacenter" $
         DatacenterData {
@@ -216,7 +216,7 @@ instance P.HasVersion (ImageData s) s Text where
              (\s a -> s { _version = a } :: ImageData s)
 
 
-imageData :: TF.DataSource P.Triton (ImageData s)
+imageData :: TF.Schema TF.DataSource P.Triton (ImageData s)
 imageData =
     TF.newDataSource "triton_image" $
         ImageData {
@@ -252,7 +252,7 @@ instance P.HasName (NetworkData s) s Text where
 
 instance P.HasComputedId (NetworkData s) Text
 
-networkData :: TF.DataSource P.Triton (NetworkData s)
+networkData :: TF.Schema TF.DataSource P.Triton (NetworkData s)
 networkData =
     TF.newDataSource "triton_network" $
         NetworkData {

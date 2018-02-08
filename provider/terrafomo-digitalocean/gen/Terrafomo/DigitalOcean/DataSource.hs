@@ -60,7 +60,7 @@ import qualified Terrafomo.IP                    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @digitalocean_image@ DigitalOcean datasource.
 
@@ -91,7 +91,7 @@ instance P.HasComputedRegions (ImageData s) Text
 instance P.HasComputedSizeGigabytes (ImageData s) Text
 instance P.HasComputedType' (ImageData s) Text
 
-imageData :: TF.DataSource P.DigitalOcean (ImageData s)
+imageData :: TF.Schema TF.DataSource P.DigitalOcean (ImageData s)
 imageData =
     TF.newDataSource "digitalocean_image" $
         ImageData {

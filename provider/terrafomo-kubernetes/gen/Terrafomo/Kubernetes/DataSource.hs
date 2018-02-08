@@ -56,7 +56,7 @@ import           Terrafomo.Kubernetes.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @kubernetes_service@ Kubernetes datasource.
 
@@ -80,7 +80,7 @@ instance P.HasMetadata (ServiceData s) s Text where
              (\s a -> s { _metadata = a } :: ServiceData s)
 
 
-serviceData :: TF.DataSource P.Kubernetes (ServiceData s)
+serviceData :: TF.Schema TF.DataSource P.Kubernetes (ServiceData s)
 serviceData =
     TF.newDataSource "kubernetes_service" $
         ServiceData {
@@ -110,7 +110,7 @@ instance P.HasMetadata (StorageClassData s) s Text where
              (\s a -> s { _metadata = a } :: StorageClassData s)
 
 
-storageClassData :: TF.DataSource P.Kubernetes (StorageClassData s)
+storageClassData :: TF.Schema TF.DataSource P.Kubernetes (StorageClassData s)
 storageClassData =
     TF.newDataSource "kubernetes_storage_class" $
         StorageClassData {

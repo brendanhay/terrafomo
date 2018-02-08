@@ -59,7 +59,7 @@ import           Terrafomo.LogicMonitor.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @logicmonitor_collectors@ LogicMonitor datasource.
 
@@ -105,7 +105,7 @@ instance P.HasSize (CollectorsData s) s Text where
              (\s a -> s { _size = a } :: CollectorsData s)
 
 
-collectorsData :: TF.DataSource P.LogicMonitor (CollectorsData s)
+collectorsData :: TF.Schema TF.DataSource P.LogicMonitor (CollectorsData s)
 collectorsData =
     TF.newDataSource "logicmonitor_collectors" $
         CollectorsData {
@@ -151,7 +151,7 @@ instance P.HasSize (DeviceGroupData s) s Text where
              (\s a -> s { _size = a } :: DeviceGroupData s)
 
 
-deviceGroupData :: TF.DataSource P.LogicMonitor (DeviceGroupData s)
+deviceGroupData :: TF.Schema TF.DataSource P.LogicMonitor (DeviceGroupData s)
 deviceGroupData =
     TF.newDataSource "logicmonitor_device_group" $
         DeviceGroupData {

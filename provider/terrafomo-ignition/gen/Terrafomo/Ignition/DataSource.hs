@@ -126,7 +126,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @ignition_config@ Ignition datasource.
 
@@ -238,7 +238,7 @@ instance P.HasUsers (ConfigData s) s Text where
 
 instance P.HasComputedRendered (ConfigData s) Text
 
-configData :: TF.DataSource P.Ignition (ConfigData s)
+configData :: TF.Schema TF.DataSource P.Ignition (ConfigData s)
 configData =
     TF.newDataSource "ignition_config" $
         ConfigData {
@@ -309,7 +309,7 @@ instance P.HasUid (DirectoryData s) s Text where
 
 instance P.HasComputedId (DirectoryData s) Text
 
-directoryData :: TF.DataSource P.Ignition (DirectoryData s)
+directoryData :: TF.Schema TF.DataSource P.Ignition (DirectoryData s)
 directoryData =
     TF.newDataSource "ignition_directory" $
         DirectoryData {
@@ -357,7 +357,7 @@ instance P.HasWipeTable (DiskData s) s Text where
 
 instance P.HasComputedId (DiskData s) Text
 
-diskData :: TF.DataSource P.Ignition (DiskData s)
+diskData :: TF.Schema TF.DataSource P.Ignition (DiskData s)
 diskData =
     TF.newDataSource "ignition_disk" $
         DiskData {
@@ -435,7 +435,7 @@ instance P.HasUid (FileData s) s Text where
 
 instance P.HasComputedId (FileData s) Text
 
-fileData :: TF.DataSource P.Ignition (FileData s)
+fileData :: TF.Schema TF.DataSource P.Ignition (FileData s)
 fileData =
     TF.newDataSource "ignition_file" $
         FileData {
@@ -486,7 +486,7 @@ instance P.HasPath (FilesystemData s) s Text where
 
 instance P.HasComputedId (FilesystemData s) Text
 
-filesystemData :: TF.DataSource P.Ignition (FilesystemData s)
+filesystemData :: TF.Schema TF.DataSource P.Ignition (FilesystemData s)
 filesystemData =
     TF.newDataSource "ignition_filesystem" $
         FilesystemData {
@@ -532,7 +532,7 @@ instance P.HasPasswordHash (GroupData s) s Text where
 
 instance P.HasComputedId (GroupData s) Text
 
-groupData :: TF.DataSource P.Ignition (GroupData s)
+groupData :: TF.Schema TF.DataSource P.Ignition (GroupData s)
 groupData =
     TF.newDataSource "ignition_group" $
         GroupData {
@@ -602,7 +602,7 @@ instance P.HasUid (LinkData s) s Text where
 
 instance P.HasComputedId (LinkData s) Text
 
-linkData :: TF.DataSource P.Ignition (LinkData s)
+linkData :: TF.Schema TF.DataSource P.Ignition (LinkData s)
 linkData =
     TF.newDataSource "ignition_link" $
         LinkData {
@@ -643,7 +643,7 @@ instance P.HasName (NetworkdUnitData s) s Text where
 
 instance P.HasComputedId (NetworkdUnitData s) Text
 
-networkdUnitData :: TF.DataSource P.Ignition (NetworkdUnitData s)
+networkdUnitData :: TF.Schema TF.DataSource P.Ignition (NetworkdUnitData s)
 networkdUnitData =
     TF.newDataSource "ignition_networkd_unit" $
         NetworkdUnitData {
@@ -696,7 +696,7 @@ instance P.HasSpares (RaidData s) s Text where
 
 instance P.HasComputedId (RaidData s) Text
 
-raidData :: TF.DataSource P.Ignition (RaidData s)
+raidData :: TF.Schema TF.DataSource P.Ignition (RaidData s)
 raidData =
     TF.newDataSource "ignition_raid" $
         RaidData {
@@ -759,7 +759,7 @@ instance P.HasName (SystemdUnitData s) s Text where
 
 instance P.HasComputedId (SystemdUnitData s) Text
 
-systemdUnitData :: TF.DataSource P.Ignition (SystemdUnitData s)
+systemdUnitData :: TF.Schema TF.DataSource P.Ignition (SystemdUnitData s)
 systemdUnitData =
     TF.newDataSource "ignition_systemd_unit" $
         SystemdUnitData {
@@ -887,7 +887,7 @@ instance P.HasUid (UserData s) s Text where
 
 instance P.HasComputedId (UserData s) Text
 
-userData :: TF.DataSource P.Ignition (UserData s)
+userData :: TF.Schema TF.DataSource P.Ignition (UserData s)
 userData =
     TF.newDataSource "ignition_user" $
         UserData {

@@ -75,7 +75,7 @@ import           Terrafomo.Rancher.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @rancher_certificate@ Rancher datasource.
 
@@ -115,7 +115,7 @@ instance P.HasComputedSerialNumber (CertificateData s) Text
 instance P.HasComputedSubjectAlternativeNames (CertificateData s) Text
 instance P.HasComputedVersion (CertificateData s) Text
 
-certificateData :: TF.DataSource P.Rancher (CertificateData s)
+certificateData :: TF.Schema TF.DataSource P.Rancher (CertificateData s)
 certificateData =
     TF.newDataSource "rancher_certificate" $
         CertificateData {
@@ -148,7 +148,7 @@ instance P.HasComputedMember (EnvironmentData s) Text
 instance P.HasComputedOrchestration (EnvironmentData s) Text
 instance P.HasComputedProjectTemplateId (EnvironmentData s) Text
 
-environmentData :: TF.DataSource P.Rancher (EnvironmentData s)
+environmentData :: TF.Schema TF.DataSource P.Rancher (EnvironmentData s)
 environmentData =
     TF.newDataSource "rancher_environment" $
         EnvironmentData {
@@ -176,7 +176,7 @@ instance P.HasName (SettingData s) s Text where
 
 instance P.HasComputedValue (SettingData s) Text
 
-settingData :: TF.DataSource P.Rancher (SettingData s)
+settingData :: TF.Schema TF.DataSource P.Rancher (SettingData s)
 settingData =
     TF.newDataSource "rancher_setting" $
         SettingData {

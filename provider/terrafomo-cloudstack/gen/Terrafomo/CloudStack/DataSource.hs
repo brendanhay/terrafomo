@@ -63,7 +63,7 @@ import qualified Terrafomo.IP                  as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @cloudstack_template@ CloudStack datasource.
 
@@ -102,7 +102,7 @@ instance P.HasComputedName (TemplateData s) Text
 instance P.HasComputedSize (TemplateData s) Text
 instance P.HasComputedTags (TemplateData s) Text
 
-templateData :: TF.DataSource P.CloudStack (TemplateData s)
+templateData :: TF.Schema TF.DataSource P.CloudStack (TemplateData s)
 templateData =
     TF.newDataSource "cloudstack_template" $
         TemplateData {

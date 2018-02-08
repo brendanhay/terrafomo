@@ -68,7 +68,7 @@ import           Terrafomo.LogicMonitor.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @logicmonitor_collector_group@ LogicMonitor resource.
 
@@ -99,7 +99,7 @@ instance P.HasName (CollectorGroupResource s) s Text where
              (\s a -> s { _name = a } :: CollectorGroupResource s)
 
 
-collectorGroupResource :: TF.Resource P.LogicMonitor (CollectorGroupResource s)
+collectorGroupResource :: TF.Schema TF.Resource P.LogicMonitor (CollectorGroupResource s)
 collectorGroupResource =
     TF.newResource "logicmonitor_collector_group" $
         CollectorGroupResource {
@@ -168,7 +168,7 @@ instance P.HasProperties (DeviceGroupResource s) s Text where
              (\s a -> s { _properties = a } :: DeviceGroupResource s)
 
 
-deviceGroupResource :: TF.Resource P.LogicMonitor (DeviceGroupResource s)
+deviceGroupResource :: TF.Schema TF.Resource P.LogicMonitor (DeviceGroupResource s)
 deviceGroupResource =
     TF.newResource "logicmonitor_device_group" $
         DeviceGroupResource {
@@ -241,7 +241,7 @@ instance P.HasProperties (DeviceResource s) s Text where
              (\s a -> s { _properties = a } :: DeviceResource s)
 
 
-deviceResource :: TF.Resource P.LogicMonitor (DeviceResource s)
+deviceResource :: TF.Schema TF.Resource P.LogicMonitor (DeviceResource s)
 deviceResource =
     TF.newResource "logicmonitor_device" $
         DeviceResource {

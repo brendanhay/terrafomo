@@ -55,7 +55,7 @@ import qualified Terrafomo.IP                  as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @cloudflare_ip_ranges@ Cloudflare datasource.
 
@@ -72,7 +72,7 @@ instance P.HasComputedCidrBlocks (IpRangesData s) Text
 instance P.HasComputedIpv4CidrBlocks (IpRangesData s) Text
 instance P.HasComputedIpv6CidrBlocks (IpRangesData s) Text
 
-ipRangesData :: TF.DataSource P.Cloudflare (IpRangesData s)
+ipRangesData :: TF.Schema TF.DataSource P.Cloudflare (IpRangesData s)
 ipRangesData =
     TF.newDataSource "cloudflare_ip_ranges" $
         IpRangesData {

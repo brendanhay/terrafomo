@@ -106,7 +106,7 @@ import qualified Terrafomo.IP               as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @datadog_downtime@ Datadog resource.
 
@@ -186,7 +186,7 @@ instance P.HasStart (DowntimeResource s) s Text where
 
 instance P.HasComputedId (DowntimeResource s) Text
 
-downtimeResource :: TF.Resource P.Datadog (DowntimeResource s)
+downtimeResource :: TF.Schema TF.Resource P.Datadog (DowntimeResource s)
 downtimeResource =
     TF.newResource "datadog_downtime" $
         DowntimeResource {
@@ -261,7 +261,7 @@ instance P.HasUnit (MetricMetadataResource s) s Text where
              (\s a -> s { _unit = a } :: MetricMetadataResource s)
 
 
-metricMetadataResource :: TF.Resource P.Datadog (MetricMetadataResource s)
+metricMetadataResource :: TF.Schema TF.Resource P.Datadog (MetricMetadataResource s)
 metricMetadataResource =
     TF.newResource "datadog_metric_metadata" $
         MetricMetadataResource {
@@ -431,7 +431,7 @@ instance P.HasType' (MonitorResource s) s Text where
 
 instance P.HasComputedId (MonitorResource s) Text
 
-monitorResource :: TF.Resource P.Datadog (MonitorResource s)
+monitorResource :: TF.Schema TF.Resource P.Datadog (MonitorResource s)
 monitorResource =
     TF.newResource "datadog_monitor" $
         MonitorResource {
@@ -508,7 +508,7 @@ instance P.HasTitle (TimeboardResource s) s Text where
              (\s a -> s { _title = a } :: TimeboardResource s)
 
 
-timeboardResource :: TF.Resource P.Datadog (TimeboardResource s)
+timeboardResource :: TF.Schema TF.Resource P.Datadog (TimeboardResource s)
 timeboardResource =
     TF.newResource "datadog_timeboard" $
         TimeboardResource {
@@ -583,7 +583,7 @@ instance P.HasComputedDisabled (UserResource s) Text
 instance P.HasComputedId (UserResource s) Text
 instance P.HasComputedVerified (UserResource s) Text
 
-userResource :: TF.Resource P.Datadog (UserResource s)
+userResource :: TF.Schema TF.Resource P.Datadog (UserResource s)
 userResource =
     TF.newResource "datadog_user" $
         UserResource {

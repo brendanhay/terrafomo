@@ -76,7 +76,7 @@ import           Terrafomo.Spotinst.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @spotinst_aws_group@ Spotinst resource.
 
@@ -163,7 +163,7 @@ instance P.HasTags (AwsGroupResource s) s Text where
 
 instance P.HasComputedId (AwsGroupResource s) Text
 
-awsGroupResource :: TF.Resource P.Spotinst (AwsGroupResource s)
+awsGroupResource :: TF.Schema TF.Resource P.Spotinst (AwsGroupResource s)
 awsGroupResource =
     TF.newResource "spotinst_aws_group" $
         AwsGroupResource {
@@ -231,7 +231,7 @@ instance P.HasThreshold (HealthcheckResource s) s Text where
 
 instance P.HasComputedId (HealthcheckResource s) Text
 
-healthcheckResource :: TF.Resource P.Spotinst (HealthcheckResource s)
+healthcheckResource :: TF.Schema TF.Resource P.Spotinst (HealthcheckResource s)
 healthcheckResource =
     TF.newResource "spotinst_healthcheck" $
         HealthcheckResource {
@@ -295,7 +295,7 @@ instance P.HasResourceId (SubscriptionResource s) s Text where
 
 instance P.HasComputedId (SubscriptionResource s) Text
 
-subscriptionResource :: TF.Resource P.Spotinst (SubscriptionResource s)
+subscriptionResource :: TF.Schema TF.Resource P.Spotinst (SubscriptionResource s)
 subscriptionResource =
     TF.newResource "spotinst_subscription" $
         SubscriptionResource {

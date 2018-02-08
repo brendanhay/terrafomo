@@ -75,7 +75,7 @@ import qualified Terrafomo.IP               as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @grafana_alert_notification@ Grafana resource.
 
@@ -123,7 +123,7 @@ instance P.HasType' (AlertNotificationResource s) s Text where
 
 instance P.HasComputedId (AlertNotificationResource s) Text
 
-alertNotificationResource :: TF.Resource P.Grafana (AlertNotificationResource s)
+alertNotificationResource :: TF.Schema TF.Resource P.Grafana (AlertNotificationResource s)
 alertNotificationResource =
     TF.newResource "grafana_alert_notification" $
         AlertNotificationResource {
@@ -154,7 +154,7 @@ instance P.HasConfigJson (DashboardResource s) s Text where
 
 instance P.HasComputedSlug (DashboardResource s) Text
 
-dashboardResource :: TF.Resource P.Grafana (DashboardResource s)
+dashboardResource :: TF.Schema TF.Resource P.Grafana (DashboardResource s)
 dashboardResource =
     TF.newResource "grafana_dashboard" $
         DashboardResource {
@@ -279,7 +279,7 @@ instance P.HasUsername (DataSourceResource s) s Text where
 
 instance P.HasComputedId (DataSourceResource s) Text
 
-dataSourceResource :: TF.Resource P.Grafana (DataSourceResource s)
+dataSourceResource :: TF.Schema TF.Resource P.Grafana (DataSourceResource s)
 dataSourceResource =
     TF.newResource "grafana_data_source" $
         DataSourceResource {

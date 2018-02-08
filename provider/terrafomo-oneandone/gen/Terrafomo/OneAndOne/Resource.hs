@@ -91,14 +91,14 @@ import Lens.Micro (lens)
 import Terrafomo.OneAndOne.Types as P
 import qualified Terrafomo.OneAndOne.Lens as P
 import qualified Terrafomo.OneAndOne.Provider as P
-import qualified Data.Word as P
-import qualified GHC.Base as P
+import qualified Data.Word       as P
+import qualified GHC.Base        as P
 import qualified Numeric.Natural as P
-import qualified Terrafomo.IP as P
+import qualified Terrafomo.IP    as P
 
 import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Source as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @oneandone_instance_size@ OneAndOne resource.
 
@@ -136,7 +136,7 @@ instance P.HasVcores (InstanceSizeResource s) s Text where
              (\s a -> s { _vcores = a } :: InstanceSizeResource s)
 
 
-instanceSizeResource :: TF.Resource P.OneAndOne (InstanceSizeResource s)
+instanceSizeResource :: TF.Schema TF.Resource P.OneAndOne (InstanceSizeResource s)
 instanceSizeResource =
     TF.newResource "oneandone_instance_size" $
         InstanceSizeResource {
@@ -189,7 +189,7 @@ instance P.HasReverseDns (IpResource s) s Text where
              (\s a -> s { _reverse_dns = a } :: IpResource s)
 
 
-ipResource :: TF.Resource P.OneAndOne (IpResource s)
+ipResource :: TF.Schema TF.Resource P.OneAndOne (IpResource s)
 ipResource =
     TF.newResource "oneandone_ip" $
         IpResource {
@@ -251,7 +251,7 @@ instance P.HasStorageServers (ServerResource s) s Text where
              (\s a -> s { _storage_servers = a } :: ServerResource s)
 
 
-serverResource :: TF.Resource P.OneAndOne (ServerResource s)
+serverResource :: TF.Schema TF.Resource P.OneAndOne (ServerResource s)
 serverResource =
     TF.newResource "oneandone_server" $
         ServerResource {
@@ -314,7 +314,7 @@ instance P.HasName (VpnResource s) s Text where
              (\s a -> s { _name = a } :: VpnResource s)
 
 
-vpnResource :: TF.Resource P.OneAndOne (VpnResource s)
+vpnResource :: TF.Schema TF.Resource P.OneAndOne (VpnResource s)
 vpnResource =
     TF.newResource "oneandone_vpn" $
         VpnResource {

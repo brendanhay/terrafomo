@@ -111,7 +111,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @docker_container@ Docker resource.
 
@@ -385,7 +385,7 @@ instance P.HasComputedGateway (ContainerResource s) Text
 instance P.HasComputedIpAddress (ContainerResource s) Text
 instance P.HasComputedIpPrefixLength (ContainerResource s) Text
 
-containerResource :: TF.Resource P.Docker (ContainerResource s)
+containerResource :: TF.Schema TF.Resource P.Docker (ContainerResource s)
 containerResource =
     TF.newResource "docker_container" $
         ContainerResource {
@@ -471,7 +471,7 @@ instance P.HasPullTriggers (ImageResource s) s Text where
 
 instance P.HasComputedLatest (ImageResource s) Text
 
-imageResource :: TF.Resource P.Docker (ImageResource s)
+imageResource :: TF.Schema TF.Resource P.Docker (ImageResource s)
 imageResource =
     TF.newResource "docker_image" $
         ImageResource {
@@ -553,7 +553,7 @@ instance P.HasOptions (NetworkResource s) s Text where
 instance P.HasComputedId (NetworkResource s) Text
 instance P.HasComputedScope (NetworkResource s) Text
 
-networkResource :: TF.Resource P.Docker (NetworkResource s)
+networkResource :: TF.Schema TF.Resource P.Docker (NetworkResource s)
 networkResource =
     TF.newResource "docker_network" $
         NetworkResource {
@@ -605,7 +605,7 @@ instance P.HasName (VolumeResource s) s Text where
 
 instance P.HasComputedMountpoint (VolumeResource s) Text
 
-volumeResource :: TF.Resource P.Docker (VolumeResource s)
+volumeResource :: TF.Schema TF.Resource P.Docker (VolumeResource s)
 volumeResource =
     TF.newResource "docker_volume" $
         VolumeResource {

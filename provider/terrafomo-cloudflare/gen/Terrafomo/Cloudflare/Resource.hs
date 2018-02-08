@@ -68,7 +68,7 @@ import qualified Terrafomo.IP                  as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @cloudflare_record@ Cloudflare resource.
 
@@ -147,7 +147,7 @@ instance P.HasComputedType' (RecordResource s) Text
 instance P.HasComputedValue (RecordResource s) Text
 instance P.HasComputedZoneId (RecordResource s) Text
 
-recordResource :: TF.Resource P.Cloudflare (RecordResource s)
+recordResource :: TF.Schema TF.Resource P.Cloudflare (RecordResource s)
 recordResource =
     TF.newResource "cloudflare_record" $
         RecordResource {

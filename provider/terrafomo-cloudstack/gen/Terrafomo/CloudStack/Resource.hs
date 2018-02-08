@@ -215,7 +215,7 @@ import qualified Terrafomo.IP                  as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @cloudstack_affinity_group@ CloudStack resource.
 
@@ -263,7 +263,7 @@ instance P.HasType' (AffinityGroupResource s) s Text where
 instance P.HasComputedDescription (AffinityGroupResource s) Text
 instance P.HasComputedId (AffinityGroupResource s) Text
 
-affinityGroupResource :: TF.Resource P.CloudStack (AffinityGroupResource s)
+affinityGroupResource :: TF.Schema TF.Resource P.CloudStack (AffinityGroupResource s)
 affinityGroupResource =
     TF.newResource "cloudstack_affinity_group" $
         AffinityGroupResource {
@@ -360,7 +360,7 @@ instance P.HasZone (DiskResource s) s Text where
 instance P.HasComputedDeviceId (DiskResource s) Text
 instance P.HasComputedId (DiskResource s) Text
 
-diskResource :: TF.Resource P.CloudStack (DiskResource s)
+diskResource :: TF.Schema TF.Resource P.CloudStack (DiskResource s)
 diskResource =
     TF.newResource "cloudstack_disk" $
         DiskResource {
@@ -420,7 +420,7 @@ instance P.HasRule (EgressFirewallResource s) s Text where
 
 instance P.HasComputedId (EgressFirewallResource s) Text
 
-egressFirewallResource :: TF.Resource P.CloudStack (EgressFirewallResource s)
+egressFirewallResource :: TF.Schema TF.Resource P.CloudStack (EgressFirewallResource s)
 egressFirewallResource =
     TF.newResource "cloudstack_egress_firewall" $
         EgressFirewallResource {
@@ -475,7 +475,7 @@ instance P.HasRule (FirewallResource s) s Text where
 
 instance P.HasComputedId (FirewallResource s) Text
 
-firewallResource :: TF.Resource P.CloudStack (FirewallResource s)
+firewallResource :: TF.Schema TF.Resource P.CloudStack (FirewallResource s)
 firewallResource =
     TF.newResource "cloudstack_firewall" $
         FirewallResource {
@@ -636,7 +636,7 @@ instance P.HasZone (InstanceResource s) s Text where
 instance P.HasComputedDisplayName (InstanceResource s) Text
 instance P.HasComputedId (InstanceResource s) Text
 
-instanceResource :: TF.Resource P.CloudStack (InstanceResource s)
+instanceResource :: TF.Schema TF.Resource P.CloudStack (InstanceResource s)
 instanceResource =
     TF.newResource "cloudstack_instance" $
         InstanceResource {
@@ -713,7 +713,7 @@ instance P.HasZone (IpaddressResource s) s Text where
 instance P.HasComputedId (IpaddressResource s) Text
 instance P.HasComputedIpAddress (IpaddressResource s) Text
 
-ipaddressResource :: TF.Resource P.CloudStack (IpaddressResource s)
+ipaddressResource :: TF.Schema TF.Resource P.CloudStack (IpaddressResource s)
 ipaddressResource =
     TF.newResource "cloudstack_ipaddress" $
         IpaddressResource {
@@ -818,7 +818,7 @@ instance P.HasPublicPort (LoadbalancerRuleResource s) s Text where
 instance P.HasComputedDescription (LoadbalancerRuleResource s) Text
 instance P.HasComputedId (LoadbalancerRuleResource s) Text
 
-loadbalancerRuleResource :: TF.Resource P.CloudStack (LoadbalancerRuleResource s)
+loadbalancerRuleResource :: TF.Schema TF.Resource P.CloudStack (LoadbalancerRuleResource s)
 loadbalancerRuleResource =
     TF.newResource "cloudstack_loadbalancer_rule" $
         LoadbalancerRuleResource {
@@ -879,7 +879,7 @@ instance P.HasVpcId (NetworkAclResource s) s Text where
 
 instance P.HasComputedId (NetworkAclResource s) Text
 
-networkAclResource :: TF.Resource P.CloudStack (NetworkAclResource s)
+networkAclResource :: TF.Schema TF.Resource P.CloudStack (NetworkAclResource s)
 networkAclResource =
     TF.newResource "cloudstack_network_acl" $
         NetworkAclResource {
@@ -942,7 +942,7 @@ instance P.HasRule (NetworkAclRuleResource s) s Text where
 
 instance P.HasComputedId (NetworkAclRuleResource s) Text
 
-networkAclRuleResource :: TF.Resource P.CloudStack (NetworkAclRuleResource s)
+networkAclRuleResource :: TF.Schema TF.Resource P.CloudStack (NetworkAclRuleResource s)
 networkAclRuleResource =
     TF.newResource "cloudstack_network_acl_rule" $
         NetworkAclRuleResource {
@@ -1080,7 +1080,7 @@ instance P.HasComputedDisplayText (NetworkResource s) Text
 instance P.HasComputedId (NetworkResource s) Text
 instance P.HasComputedNetworkDomain (NetworkResource s) Text
 
-networkResource :: TF.Resource P.CloudStack (NetworkResource s)
+networkResource :: TF.Schema TF.Resource P.CloudStack (NetworkResource s)
 networkResource =
     TF.newResource "cloudstack_network" $
         NetworkResource {
@@ -1138,7 +1138,7 @@ instance P.HasVirtualMachineId (NicResource s) s Text where
 instance P.HasComputedId (NicResource s) Text
 instance P.HasComputedIpAddress (NicResource s) Text
 
-nicResource :: TF.Resource P.CloudStack (NicResource s)
+nicResource :: TF.Schema TF.Resource P.CloudStack (NicResource s)
 nicResource =
     TF.newResource "cloudstack_nic" $
         NicResource {
@@ -1193,7 +1193,7 @@ instance P.HasProject (PortForwardResource s) s Text where
 instance P.HasComputedId (PortForwardResource s) Text
 instance P.HasComputedVmGuestIp (PortForwardResource s) Text
 
-portForwardResource :: TF.Resource P.CloudStack (PortForwardResource s)
+portForwardResource :: TF.Schema TF.Resource P.CloudStack (PortForwardResource s)
 portForwardResource =
     TF.newResource "cloudstack_port_forward" $
         PortForwardResource {
@@ -1281,7 +1281,7 @@ instance P.HasVpcId (PrivateGatewayResource s) s Text where
 
 instance P.HasComputedId (PrivateGatewayResource s) Text
 
-privateGatewayResource :: TF.Resource P.CloudStack (PrivateGatewayResource s)
+privateGatewayResource :: TF.Schema TF.Resource P.CloudStack (PrivateGatewayResource s)
 privateGatewayResource =
     TF.newResource "cloudstack_private_gateway" $
         PrivateGatewayResource {
@@ -1332,7 +1332,7 @@ instance P.HasVirtualMachineId (SecondaryIpaddressResource s) s Text where
 
 instance P.HasComputedId (SecondaryIpaddressResource s) Text
 
-secondaryIpaddressResource :: TF.Resource P.CloudStack (SecondaryIpaddressResource s)
+secondaryIpaddressResource :: TF.Schema TF.Resource P.CloudStack (SecondaryIpaddressResource s)
 secondaryIpaddressResource =
     TF.newResource "cloudstack_secondary_ipaddress" $
         SecondaryIpaddressResource {
@@ -1378,7 +1378,7 @@ instance P.HasProject (SecurityGroupResource s) s Text where
 
 instance P.HasComputedId (SecurityGroupResource s) Text
 
-securityGroupResource :: TF.Resource P.CloudStack (SecurityGroupResource s)
+securityGroupResource :: TF.Schema TF.Resource P.CloudStack (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "cloudstack_security_group" $
         SecurityGroupResource {
@@ -1433,7 +1433,7 @@ instance P.HasSecurityGroupId (SecurityGroupRuleResource s) s Text where
 
 instance P.HasComputedId (SecurityGroupRuleResource s) Text
 
-securityGroupRuleResource :: TF.Resource P.CloudStack (SecurityGroupRuleResource s)
+securityGroupRuleResource :: TF.Schema TF.Resource P.CloudStack (SecurityGroupRuleResource s)
 securityGroupRuleResource =
     TF.newResource "cloudstack_security_group_rule" $
         SecurityGroupRuleResource {
@@ -1482,7 +1482,7 @@ instance P.HasComputedFingerprint (SshKeypairResource s) Text
 instance P.HasComputedId (SshKeypairResource s) Text
 instance P.HasComputedPrivateKey (SshKeypairResource s) Text
 
-sshKeypairResource :: TF.Resource P.CloudStack (SshKeypairResource s)
+sshKeypairResource :: TF.Schema TF.Resource P.CloudStack (SshKeypairResource s)
 sshKeypairResource =
     TF.newResource "cloudstack_ssh_keypair" $
         SshKeypairResource {
@@ -1537,7 +1537,7 @@ instance P.HasVmGuestIp (StaticNatResource s) s Text where
 instance P.HasComputedId (StaticNatResource s) Text
 instance P.HasComputedVmGuestIp (StaticNatResource s) Text
 
-staticNatResource :: TF.Resource P.CloudStack (StaticNatResource s)
+staticNatResource :: TF.Schema TF.Resource P.CloudStack (StaticNatResource s)
 staticNatResource =
     TF.newResource "cloudstack_static_nat" $
         StaticNatResource {
@@ -1576,7 +1576,7 @@ instance P.HasGatewayId (StaticRouteResource s) s Text where
 
 instance P.HasComputedId (StaticRouteResource s) Text
 
-staticRouteResource :: TF.Resource P.CloudStack (StaticRouteResource s)
+staticRouteResource :: TF.Schema TF.Resource P.CloudStack (StaticRouteResource s)
 staticRouteResource =
     TF.newResource "cloudstack_static_route" $
         StaticRouteResource {
@@ -1716,7 +1716,7 @@ instance P.HasComputedIsPublic (TemplateResource s) Text
 instance P.HasComputedIsReady (TemplateResource s) Text
 instance P.HasComputedPasswordEnabled (TemplateResource s) Text
 
-templateResource :: TF.Resource P.CloudStack (TemplateResource s)
+templateResource :: TF.Schema TF.Resource P.CloudStack (TemplateResource s)
 templateResource =
     TF.newResource "cloudstack_template" $
         TemplateResource {
@@ -1807,7 +1807,7 @@ instance P.HasComputedDisplayText (VpcResource s) Text
 instance P.HasComputedId (VpcResource s) Text
 instance P.HasComputedSourceNatIp (VpcResource s) Text
 
-vpcResource :: TF.Resource P.CloudStack (VpcResource s)
+vpcResource :: TF.Schema TF.Resource P.CloudStack (VpcResource s)
 vpcResource =
     TF.newResource "cloudstack_vpc" $
         VpcResource {
@@ -1849,7 +1849,7 @@ instance P.HasVpnGatewayId (VpnConnectionResource s) s Text where
 
 instance P.HasComputedId (VpnConnectionResource s) Text
 
-vpnConnectionResource :: TF.Resource P.CloudStack (VpnConnectionResource s)
+vpnConnectionResource :: TF.Schema TF.Resource P.CloudStack (VpnConnectionResource s)
 vpnConnectionResource =
     TF.newResource "cloudstack_vpn_connection" $
         VpnConnectionResource {
@@ -1953,7 +1953,7 @@ instance P.HasComputedEspLifetime (VpnCustomerGatewayResource s) Text
 instance P.HasComputedId (VpnCustomerGatewayResource s) Text
 instance P.HasComputedIkeLifetime (VpnCustomerGatewayResource s) Text
 
-vpnCustomerGatewayResource :: TF.Resource P.CloudStack (VpnCustomerGatewayResource s)
+vpnCustomerGatewayResource :: TF.Schema TF.Resource P.CloudStack (VpnCustomerGatewayResource s)
 vpnCustomerGatewayResource =
     TF.newResource "cloudstack_vpn_customer_gateway" $
         VpnCustomerGatewayResource {
@@ -1991,7 +1991,7 @@ instance P.HasVpcId (VpnGatewayResource s) s Text where
 instance P.HasComputedId (VpnGatewayResource s) Text
 instance P.HasComputedPublicIp (VpnGatewayResource s) Text
 
-vpnGatewayResource :: TF.Resource P.CloudStack (VpnGatewayResource s)
+vpnGatewayResource :: TF.Schema TF.Resource P.CloudStack (VpnGatewayResource s)
 vpnGatewayResource =
     TF.newResource "cloudstack_vpn_gateway" $
         VpnGatewayResource {

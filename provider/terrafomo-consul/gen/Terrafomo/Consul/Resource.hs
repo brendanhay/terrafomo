@@ -97,7 +97,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @consul_agent_service@ Consul resource.
 
@@ -150,7 +150,7 @@ instance P.HasComputedName (AgentServiceResource s) Text
 instance P.HasComputedPort (AgentServiceResource s) Text
 instance P.HasComputedTags (AgentServiceResource s) Text
 
-agentServiceResource :: TF.Resource P.Consul (AgentServiceResource s)
+agentServiceResource :: TF.Schema TF.Resource P.Consul (AgentServiceResource s)
 agentServiceResource =
     TF.newResource "consul_agent_service" $
         AgentServiceResource {
@@ -216,7 +216,7 @@ instance P.HasToken (CatalogEntryResource s) s Text where
 instance P.HasComputedAddress (CatalogEntryResource s) Text
 instance P.HasComputedNode (CatalogEntryResource s) Text
 
-catalogEntryResource :: TF.Resource P.Consul (CatalogEntryResource s)
+catalogEntryResource :: TF.Schema TF.Resource P.Consul (CatalogEntryResource s)
 catalogEntryResource =
     TF.newResource "consul_catalog_entry" $
         CatalogEntryResource {
@@ -287,7 +287,7 @@ instance P.HasToken (KeyPrefixResource s) s Text where
 
 instance P.HasComputedDatacenter (KeyPrefixResource s) Text
 
-keyPrefixResource :: TF.Resource P.Consul (KeyPrefixResource s)
+keyPrefixResource :: TF.Schema TF.Resource P.Consul (KeyPrefixResource s)
 keyPrefixResource =
     TF.newResource "consul_key_prefix" $
         KeyPrefixResource {
@@ -341,7 +341,7 @@ instance P.HasToken (KeysResource s) s Text where
 
 instance P.HasComputedDatacenter (KeysResource s) Text
 
-keysResource :: TF.Resource P.Consul (KeysResource s)
+keysResource :: TF.Schema TF.Resource P.Consul (KeysResource s)
 keysResource =
     TF.newResource "consul_keys" $
         KeysResource {
@@ -381,7 +381,7 @@ instance P.HasName (NodeResource s) s Text where
 instance P.HasComputedAddress (NodeResource s) Text
 instance P.HasComputedName (NodeResource s) Text
 
-nodeResource :: TF.Resource P.Consul (NodeResource s)
+nodeResource :: TF.Schema TF.Resource P.Consul (NodeResource s)
 nodeResource =
     TF.newResource "consul_node" $
         NodeResource {
@@ -501,7 +501,7 @@ instance P.HasToken (PreparedQueryResource s) s Text where
 
 instance P.HasComputedId (PreparedQueryResource s) Text
 
-preparedQueryResource :: TF.Resource P.Consul (PreparedQueryResource s)
+preparedQueryResource :: TF.Schema TF.Resource P.Consul (PreparedQueryResource s)
 preparedQueryResource =
     TF.newResource "consul_prepared_query" $
         PreparedQueryResource {
@@ -585,7 +585,7 @@ instance P.HasComputedPort (ServiceResource s) Text
 instance P.HasComputedServiceId (ServiceResource s) Text
 instance P.HasComputedTags (ServiceResource s) Text
 
-serviceResource :: TF.Resource P.Consul (ServiceResource s)
+serviceResource :: TF.Schema TF.Resource P.Consul (ServiceResource s)
 serviceResource =
     TF.newResource "consul_service" $
         ServiceResource {

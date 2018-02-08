@@ -65,7 +65,7 @@ import           Terrafomo.PagerDuty.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @pagerduty_escalation_policy@ PagerDuty datasource.
 
@@ -90,7 +90,7 @@ instance P.HasName (EscalationPolicyData s) s Text where
 
 instance P.HasComputedName (EscalationPolicyData s) Text
 
-escalationPolicyData :: TF.DataSource P.PagerDuty (EscalationPolicyData s)
+escalationPolicyData :: TF.Schema TF.DataSource P.PagerDuty (EscalationPolicyData s)
 escalationPolicyData =
     TF.newDataSource "pagerduty_escalation_policy" $
         EscalationPolicyData {
@@ -120,7 +120,7 @@ instance P.HasName (ScheduleData s) s Text where
 
 instance P.HasComputedName (ScheduleData s) Text
 
-scheduleData :: TF.DataSource P.PagerDuty (ScheduleData s)
+scheduleData :: TF.Schema TF.DataSource P.PagerDuty (ScheduleData s)
 scheduleData =
     TF.newDataSource "pagerduty_schedule" $
         ScheduleData {
@@ -150,7 +150,7 @@ instance P.HasEmail (UserData s) s Text where
 
 instance P.HasComputedName (UserData s) Text
 
-userData :: TF.DataSource P.PagerDuty (UserData s)
+userData :: TF.Schema TF.DataSource P.PagerDuty (UserData s)
 userData =
     TF.newDataSource "pagerduty_user" $
         UserData {
@@ -182,7 +182,7 @@ instance P.HasName (VendorData s) s Text where
 instance P.HasComputedName (VendorData s) Text
 instance P.HasComputedType' (VendorData s) Text
 
-vendorData :: TF.DataSource P.PagerDuty (VendorData s)
+vendorData :: TF.Schema TF.DataSource P.PagerDuty (VendorData s)
 vendorData =
     TF.newDataSource "pagerduty_vendor" $
         VendorData {

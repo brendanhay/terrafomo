@@ -65,168 +65,168 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 class HasAllowConcurrentExecutions a s b | a -> s b where
     allowConcurrentExecutions :: Lens' a (TF.Attribute s b)
 
-instance HasAllowConcurrentExecutions a s b => HasAllowConcurrentExecutions (TF.Source l p a) s b where
+instance HasAllowConcurrentExecutions a s b => HasAllowConcurrentExecutions (TF.Schema l p a) s b where
     allowConcurrentExecutions = TF.configuration . allowConcurrentExecutions
 
 class HasCommand a s b | a -> s b where
     command :: Lens' a (TF.Attribute s b)
 
-instance HasCommand a s b => HasCommand (TF.Source l p a) s b where
+instance HasCommand a s b => HasCommand (TF.Schema l p a) s b where
     command = TF.configuration . command
 
 class HasCommandOrderingStrategy a s b | a -> s b where
     commandOrderingStrategy :: Lens' a (TF.Attribute s b)
 
-instance HasCommandOrderingStrategy a s b => HasCommandOrderingStrategy (TF.Source l p a) s b where
+instance HasCommandOrderingStrategy a s b => HasCommandOrderingStrategy (TF.Schema l p a) s b where
     commandOrderingStrategy = TF.configuration . commandOrderingStrategy
 
 class HasContinueOnError a s b | a -> s b where
     continueOnError :: Lens' a (TF.Attribute s b)
 
-instance HasContinueOnError a s b => HasContinueOnError (TF.Source l p a) s b where
+instance HasContinueOnError a s b => HasContinueOnError (TF.Schema l p a) s b where
     continueOnError = TF.configuration . continueOnError
 
 class HasDefaultNodeExecutorPlugin a s b | a -> s b where
     defaultNodeExecutorPlugin :: Lens' a (TF.Attribute s b)
 
-instance HasDefaultNodeExecutorPlugin a s b => HasDefaultNodeExecutorPlugin (TF.Source l p a) s b where
+instance HasDefaultNodeExecutorPlugin a s b => HasDefaultNodeExecutorPlugin (TF.Schema l p a) s b where
     defaultNodeExecutorPlugin = TF.configuration . defaultNodeExecutorPlugin
 
 class HasDefaultNodeFileCopierPlugin a s b | a -> s b where
     defaultNodeFileCopierPlugin :: Lens' a (TF.Attribute s b)
 
-instance HasDefaultNodeFileCopierPlugin a s b => HasDefaultNodeFileCopierPlugin (TF.Source l p a) s b where
+instance HasDefaultNodeFileCopierPlugin a s b => HasDefaultNodeFileCopierPlugin (TF.Schema l p a) s b where
     defaultNodeFileCopierPlugin = TF.configuration . defaultNodeFileCopierPlugin
 
 class HasDelete a s b | a -> s b where
     delete :: Lens' a (TF.Attribute s b)
 
-instance HasDelete a s b => HasDelete (TF.Source l p a) s b where
+instance HasDelete a s b => HasDelete (TF.Schema l p a) s b where
     delete = TF.configuration . delete
 
 class HasDescription a s b | a -> s b where
     description :: Lens' a (TF.Attribute s b)
 
-instance HasDescription a s b => HasDescription (TF.Source l p a) s b where
+instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
     description = TF.configuration . description
 
 class HasExtraConfig a s b | a -> s b where
     extraConfig :: Lens' a (TF.Attribute s b)
 
-instance HasExtraConfig a s b => HasExtraConfig (TF.Source l p a) s b where
+instance HasExtraConfig a s b => HasExtraConfig (TF.Schema l p a) s b where
     extraConfig = TF.configuration . extraConfig
 
 class HasGroupName a s b | a -> s b where
     groupName :: Lens' a (TF.Attribute s b)
 
-instance HasGroupName a s b => HasGroupName (TF.Source l p a) s b where
+instance HasGroupName a s b => HasGroupName (TF.Schema l p a) s b where
     groupName = TF.configuration . groupName
 
 class HasKeyMaterial a s b | a -> s b where
     keyMaterial :: Lens' a (TF.Attribute s b)
 
-instance HasKeyMaterial a s b => HasKeyMaterial (TF.Source l p a) s b where
+instance HasKeyMaterial a s b => HasKeyMaterial (TF.Schema l p a) s b where
     keyMaterial = TF.configuration . keyMaterial
 
 class HasLogLevel a s b | a -> s b where
     logLevel :: Lens' a (TF.Attribute s b)
 
-instance HasLogLevel a s b => HasLogLevel (TF.Source l p a) s b where
+instance HasLogLevel a s b => HasLogLevel (TF.Schema l p a) s b where
     logLevel = TF.configuration . logLevel
 
 class HasMaxThreadCount a s b | a -> s b where
     maxThreadCount :: Lens' a (TF.Attribute s b)
 
-instance HasMaxThreadCount a s b => HasMaxThreadCount (TF.Source l p a) s b where
+instance HasMaxThreadCount a s b => HasMaxThreadCount (TF.Schema l p a) s b where
     maxThreadCount = TF.configuration . maxThreadCount
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Source l p a) s b where
+instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasNodeFilterExcludePrecedence a s b | a -> s b where
     nodeFilterExcludePrecedence :: Lens' a (TF.Attribute s b)
 
-instance HasNodeFilterExcludePrecedence a s b => HasNodeFilterExcludePrecedence (TF.Source l p a) s b where
+instance HasNodeFilterExcludePrecedence a s b => HasNodeFilterExcludePrecedence (TF.Schema l p a) s b where
     nodeFilterExcludePrecedence = TF.configuration . nodeFilterExcludePrecedence
 
 class HasNodeFilterQuery a s b | a -> s b where
     nodeFilterQuery :: Lens' a (TF.Attribute s b)
 
-instance HasNodeFilterQuery a s b => HasNodeFilterQuery (TF.Source l p a) s b where
+instance HasNodeFilterQuery a s b => HasNodeFilterQuery (TF.Schema l p a) s b where
     nodeFilterQuery = TF.configuration . nodeFilterQuery
 
 class HasOption a s b | a -> s b where
     option :: Lens' a (TF.Attribute s b)
 
-instance HasOption a s b => HasOption (TF.Source l p a) s b where
+instance HasOption a s b => HasOption (TF.Schema l p a) s b where
     option = TF.configuration . option
 
 class HasPath a s b | a -> s b where
     path :: Lens' a (TF.Attribute s b)
 
-instance HasPath a s b => HasPath (TF.Source l p a) s b where
+instance HasPath a s b => HasPath (TF.Schema l p a) s b where
     path = TF.configuration . path
 
 class HasPreserveOptionsOrder a s b | a -> s b where
     preserveOptionsOrder :: Lens' a (TF.Attribute s b)
 
-instance HasPreserveOptionsOrder a s b => HasPreserveOptionsOrder (TF.Source l p a) s b where
+instance HasPreserveOptionsOrder a s b => HasPreserveOptionsOrder (TF.Schema l p a) s b where
     preserveOptionsOrder = TF.configuration . preserveOptionsOrder
 
 class HasProjectName a s b | a -> s b where
     projectName :: Lens' a (TF.Attribute s b)
 
-instance HasProjectName a s b => HasProjectName (TF.Source l p a) s b where
+instance HasProjectName a s b => HasProjectName (TF.Schema l p a) s b where
     projectName = TF.configuration . projectName
 
 class HasRankAttribute a s b | a -> s b where
     rankAttribute :: Lens' a (TF.Attribute s b)
 
-instance HasRankAttribute a s b => HasRankAttribute (TF.Source l p a) s b where
+instance HasRankAttribute a s b => HasRankAttribute (TF.Schema l p a) s b where
     rankAttribute = TF.configuration . rankAttribute
 
 class HasRankOrder a s b | a -> s b where
     rankOrder :: Lens' a (TF.Attribute s b)
 
-instance HasRankOrder a s b => HasRankOrder (TF.Source l p a) s b where
+instance HasRankOrder a s b => HasRankOrder (TF.Schema l p a) s b where
     rankOrder = TF.configuration . rankOrder
 
 class HasResourceModelSource a s b | a -> s b where
     resourceModelSource :: Lens' a (TF.Attribute s b)
 
-instance HasResourceModelSource a s b => HasResourceModelSource (TF.Source l p a) s b where
+instance HasResourceModelSource a s b => HasResourceModelSource (TF.Schema l p a) s b where
     resourceModelSource = TF.configuration . resourceModelSource
 
 class HasSchedule a s b | a -> s b where
     schedule :: Lens' a (TF.Attribute s b)
 
-instance HasSchedule a s b => HasSchedule (TF.Source l p a) s b where
+instance HasSchedule a s b => HasSchedule (TF.Schema l p a) s b where
     schedule = TF.configuration . schedule
 
 class HasSshAuthenticationType a s b | a -> s b where
     sshAuthenticationType :: Lens' a (TF.Attribute s b)
 
-instance HasSshAuthenticationType a s b => HasSshAuthenticationType (TF.Source l p a) s b where
+instance HasSshAuthenticationType a s b => HasSshAuthenticationType (TF.Schema l p a) s b where
     sshAuthenticationType = TF.configuration . sshAuthenticationType
 
 class HasSshKeyFilePath a s b | a -> s b where
     sshKeyFilePath :: Lens' a (TF.Attribute s b)
 
-instance HasSshKeyFilePath a s b => HasSshKeyFilePath (TF.Source l p a) s b where
+instance HasSshKeyFilePath a s b => HasSshKeyFilePath (TF.Schema l p a) s b where
     sshKeyFilePath = TF.configuration . sshKeyFilePath
 
 class HasSshKeyStoragePath a s b | a -> s b where
     sshKeyStoragePath :: Lens' a (TF.Attribute s b)
 
-instance HasSshKeyStoragePath a s b => HasSshKeyStoragePath (TF.Source l p a) s b where
+instance HasSshKeyStoragePath a s b => HasSshKeyStoragePath (TF.Schema l p a) s b where
     sshKeyStoragePath = TF.configuration . sshKeyStoragePath
 
 class HasComputedId a b | a -> b where

@@ -68,7 +68,7 @@ import           Terrafomo.MySQL.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @mysql_database@ MySQL resource.
 
@@ -110,7 +110,7 @@ instance P.HasName (DatabaseResource s) s Text where
              (\s a -> s { _name = a } :: DatabaseResource s)
 
 
-databaseResource :: TF.Resource P.MySQL (DatabaseResource s)
+databaseResource :: TF.Schema TF.Resource P.MySQL (DatabaseResource s)
 databaseResource =
     TF.newResource "mysql_database" $
         DatabaseResource {
@@ -172,7 +172,7 @@ instance P.HasUser (GrantResource s) s Text where
              (\s a -> s { _user = a } :: GrantResource s)
 
 
-grantResource :: TF.Resource P.MySQL (GrantResource s)
+grantResource :: TF.Schema TF.Resource P.MySQL (GrantResource s)
 grantResource =
     TF.newResource "mysql_grant" $
         GrantResource {
@@ -230,7 +230,7 @@ instance P.HasUser (UserResource s) s Text where
              (\s a -> s { _user = a } :: UserResource s)
 
 
-userResource :: TF.Resource P.MySQL (UserResource s)
+userResource :: TF.Schema TF.Resource P.MySQL (UserResource s)
 userResource =
     TF.newResource "mysql_user" $
         UserResource {

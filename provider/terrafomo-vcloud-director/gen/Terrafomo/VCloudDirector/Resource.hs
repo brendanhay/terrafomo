@@ -106,7 +106,7 @@ import           Terrafomo.VCloudDirector.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @vcd_dnat@ VCloudDirector resource.
 
@@ -154,7 +154,7 @@ instance P.HasPort (DnatResource s) s Text where
              (\s a -> s { _port = a } :: DnatResource s)
 
 
-dnatResource :: TF.Resource P.VCloudDirector (DnatResource s)
+dnatResource :: TF.Schema TF.Resource P.VCloudDirector (DnatResource s)
 dnatResource =
     TF.newResource "vcd_dnat" $
         DnatResource {
@@ -273,7 +273,7 @@ instance P.HasSharedSecret (EdgegatewayVpnResource s) s Text where
              (\s a -> s { _shared_secret = a } :: EdgegatewayVpnResource s)
 
 
-edgegatewayVpnResource :: TF.Resource P.VCloudDirector (EdgegatewayVpnResource s)
+edgegatewayVpnResource :: TF.Schema TF.Resource P.VCloudDirector (EdgegatewayVpnResource s)
 edgegatewayVpnResource =
     TF.newResource "vcd_edgegateway_vpn" $
         EdgegatewayVpnResource {
@@ -328,7 +328,7 @@ instance P.HasRule (FirewallRulesResource s) s Text where
              (\s a -> s { _rule = a } :: FirewallRulesResource s)
 
 
-firewallRulesResource :: TF.Resource P.VCloudDirector (FirewallRulesResource s)
+firewallRulesResource :: TF.Schema TF.Resource P.VCloudDirector (FirewallRulesResource s)
 firewallRulesResource =
     TF.newResource "vcd_firewall_rules" $
         FirewallRulesResource {
@@ -430,7 +430,7 @@ instance P.HasStaticIpPool (NetworkResource s) s Text where
              (\s a -> s { _static_ip_pool = a } :: NetworkResource s)
 
 
-networkResource :: TF.Resource P.VCloudDirector (NetworkResource s)
+networkResource :: TF.Schema TF.Resource P.VCloudDirector (NetworkResource s)
 networkResource =
     TF.newResource "vcd_network" $
         NetworkResource {
@@ -483,7 +483,7 @@ instance P.HasInternalIp (SnatResource s) s Text where
              (\s a -> s { _internal_ip = a } :: SnatResource s)
 
 
-snatResource :: TF.Resource P.VCloudDirector (SnatResource s)
+snatResource :: TF.Schema TF.Resource P.VCloudDirector (SnatResource s)
 snatResource =
     TF.newResource "vcd_snat" $
         SnatResource {
@@ -593,7 +593,7 @@ instance P.HasTemplateName (VappResource s) s Text where
              (\s a -> s { _template_name = a } :: VappResource s)
 
 
-vappResource :: TF.Resource P.VCloudDirector (VappResource s)
+vappResource :: TF.Schema TF.Resource P.VCloudDirector (VappResource s)
 vappResource =
     TF.newResource "vcd_vapp" $
         VappResource {
@@ -698,7 +698,7 @@ instance P.HasVappName (VappVmResource s) s Text where
              (\s a -> s { _vapp_name = a } :: VappVmResource s)
 
 
-vappVmResource :: TF.Resource P.VCloudDirector (VappVmResource s)
+vappVmResource :: TF.Schema TF.Resource P.VCloudDirector (VappVmResource s)
 vappVmResource =
     TF.newResource "vcd_vapp_vm" $
         VappVmResource {

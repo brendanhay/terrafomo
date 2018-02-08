@@ -85,7 +85,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @fastly_service_v1@ Fastly resource.
 
@@ -278,7 +278,7 @@ instance P.HasComputedResponseObject (ServiceV1Resource s) Text
 instance P.HasComputedS3logging (ServiceV1Resource s) Text
 instance P.HasComputedVcl (ServiceV1Resource s) Text
 
-serviceV1Resource :: TF.Resource P.Fastly (ServiceV1Resource s)
+serviceV1Resource :: TF.Schema TF.Resource P.Fastly (ServiceV1Resource s)
 serviceV1Resource =
     TF.newResource "fastly_service_v1" $
         ServiceV1Resource {

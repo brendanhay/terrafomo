@@ -101,7 +101,7 @@ import qualified Terrafomo.IP                        as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @clc_group@ CenturyLinkCloud resource.
 
@@ -164,7 +164,7 @@ instance P.HasParentGroupId (GroupResource s) s Text where
              (\s a -> s { _parent_group_id = a } :: GroupResource s)
 
 
-groupResource :: TF.Resource P.CenturyLinkCloud (GroupResource s)
+groupResource :: TF.Schema TF.Resource P.CenturyLinkCloud (GroupResource s)
 groupResource =
     TF.newResource "clc_group" $
         GroupResource {
@@ -238,7 +238,7 @@ instance P.HasPort (LoadBalancerPoolResource s) s Text where
              (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
 
 
-loadBalancerPoolResource :: TF.Resource P.CenturyLinkCloud (LoadBalancerPoolResource s)
+loadBalancerPoolResource :: TF.Schema TF.Resource P.CenturyLinkCloud (LoadBalancerPoolResource s)
 loadBalancerPoolResource =
     TF.newResource "clc_load_balancer_pool" $
         LoadBalancerPoolResource {
@@ -304,7 +304,7 @@ instance P.HasStatus (LoadBalancerResource s) s Text where
              (\s a -> s { _status = a } :: LoadBalancerResource s)
 
 
-loadBalancerResource :: TF.Resource P.CenturyLinkCloud (LoadBalancerResource s)
+loadBalancerResource :: TF.Schema TF.Resource P.CenturyLinkCloud (LoadBalancerResource s)
 loadBalancerResource =
     TF.newResource "clc_load_balancer" $
         LoadBalancerResource {
@@ -360,7 +360,7 @@ instance P.HasSourceRestrictions (PublicIpResource s) s Text where
              (\s a -> s { _source_restrictions = a } :: PublicIpResource s)
 
 
-publicIpResource :: TF.Resource P.CenturyLinkCloud (PublicIpResource s)
+publicIpResource :: TF.Schema TF.Resource P.CenturyLinkCloud (PublicIpResource s)
 publicIpResource =
     TF.newResource "clc_public_ip" $
         PublicIpResource {
@@ -558,7 +558,7 @@ instance P.HasType' (ServerResource s) s Text where
              (\s a -> s { _type' = a } :: ServerResource s)
 
 
-serverResource :: TF.Resource P.CenturyLinkCloud (ServerResource s)
+serverResource :: TF.Schema TF.Resource P.CenturyLinkCloud (ServerResource s)
 serverResource =
     TF.newResource "clc_server" $
         ServerResource {

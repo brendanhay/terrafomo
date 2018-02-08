@@ -66,7 +66,7 @@ import           Terrafomo.Scaleway.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @scaleway_bootscript@ Scaleway datasource.
 
@@ -112,7 +112,7 @@ instance P.HasComputedKernel (BootscriptData s) Text
 instance P.HasComputedOrganization (BootscriptData s) Text
 instance P.HasComputedPublic (BootscriptData s) Text
 
-bootscriptData :: TF.DataSource P.Scaleway (BootscriptData s)
+bootscriptData :: TF.Schema TF.DataSource P.Scaleway (BootscriptData s)
 bootscriptData =
     TF.newDataSource "scaleway_bootscript" $
         BootscriptData {
@@ -162,7 +162,7 @@ instance P.HasComputedCreationDate (ImageData s) Text
 instance P.HasComputedOrganization (ImageData s) Text
 instance P.HasComputedPublic (ImageData s) Text
 
-imageData :: TF.DataSource P.Scaleway (ImageData s)
+imageData :: TF.Schema TF.DataSource P.Scaleway (ImageData s)
 imageData =
     TF.newDataSource "scaleway_image" $
         ImageData {

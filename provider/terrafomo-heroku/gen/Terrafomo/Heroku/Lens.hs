@@ -73,126 +73,126 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 class HasAcm a s b | a -> s b where
     acm :: Lens' a (TF.Attribute s b)
 
-instance HasAcm a s b => HasAcm (TF.Source l p a) s b where
+instance HasAcm a s b => HasAcm (TF.Schema l p a) s b where
     acm = TF.configuration . acm
 
 class HasAddonId a s b | a -> s b where
     addonId :: Lens' a (TF.Attribute s b)
 
-instance HasAddonId a s b => HasAddonId (TF.Source l p a) s b where
+instance HasAddonId a s b => HasAddonId (TF.Schema l p a) s b where
     addonId = TF.configuration . addonId
 
 class HasApp a s b | a -> s b where
     app :: Lens' a (TF.Attribute s b)
 
-instance HasApp a s b => HasApp (TF.Source l p a) s b where
+instance HasApp a s b => HasApp (TF.Schema l p a) s b where
     app = TF.configuration . app
 
 class HasAppId a s b | a -> s b where
     appId :: Lens' a (TF.Attribute s b)
 
-instance HasAppId a s b => HasAppId (TF.Source l p a) s b where
+instance HasAppId a s b => HasAppId (TF.Schema l p a) s b where
     appId = TF.configuration . appId
 
 class HasBuildpacks a s b | a -> s b where
     buildpacks :: Lens' a (TF.Attribute s b)
 
-instance HasBuildpacks a s b => HasBuildpacks (TF.Source l p a) s b where
+instance HasBuildpacks a s b => HasBuildpacks (TF.Schema l p a) s b where
     buildpacks = TF.configuration . buildpacks
 
 class HasCertificateChain a s b | a -> s b where
     certificateChain :: Lens' a (TF.Attribute s b)
 
-instance HasCertificateChain a s b => HasCertificateChain (TF.Source l p a) s b where
+instance HasCertificateChain a s b => HasCertificateChain (TF.Schema l p a) s b where
     certificateChain = TF.configuration . certificateChain
 
 class HasConfig a s b | a -> s b where
     config :: Lens' a (TF.Attribute s b)
 
-instance HasConfig a s b => HasConfig (TF.Source l p a) s b where
+instance HasConfig a s b => HasConfig (TF.Schema l p a) s b where
     config = TF.configuration . config
 
 class HasConfigVars a s b | a -> s b where
     configVars :: Lens' a (TF.Attribute s b)
 
-instance HasConfigVars a s b => HasConfigVars (TF.Source l p a) s b where
+instance HasConfigVars a s b => HasConfigVars (TF.Schema l p a) s b where
     configVars = TF.configuration . configVars
 
 class HasEnabled a s b | a -> s b where
     enabled :: Lens' a (TF.Attribute s b)
 
-instance HasEnabled a s b => HasEnabled (TF.Source l p a) s b where
+instance HasEnabled a s b => HasEnabled (TF.Schema l p a) s b where
     enabled = TF.configuration . enabled
 
 class HasHostname a s b | a -> s b where
     hostname :: Lens' a (TF.Attribute s b)
 
-instance HasHostname a s b => HasHostname (TF.Source l p a) s b where
+instance HasHostname a s b => HasHostname (TF.Schema l p a) s b where
     hostname = TF.configuration . hostname
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Source l p a) s b where
+instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasOrganization a s b | a -> s b where
     organization :: Lens' a (TF.Attribute s b)
 
-instance HasOrganization a s b => HasOrganization (TF.Source l p a) s b where
+instance HasOrganization a s b => HasOrganization (TF.Schema l p a) s b where
     organization = TF.configuration . organization
 
 class HasPipeline a s b | a -> s b where
     pipeline :: Lens' a (TF.Attribute s b)
 
-instance HasPipeline a s b => HasPipeline (TF.Source l p a) s b where
+instance HasPipeline a s b => HasPipeline (TF.Schema l p a) s b where
     pipeline = TF.configuration . pipeline
 
 class HasPlan a s b | a -> s b where
     plan :: Lens' a (TF.Attribute s b)
 
-instance HasPlan a s b => HasPlan (TF.Source l p a) s b where
+instance HasPlan a s b => HasPlan (TF.Schema l p a) s b where
     plan = TF.configuration . plan
 
 class HasPrivateKey a s b | a -> s b where
     privateKey :: Lens' a (TF.Attribute s b)
 
-instance HasPrivateKey a s b => HasPrivateKey (TF.Source l p a) s b where
+instance HasPrivateKey a s b => HasPrivateKey (TF.Schema l p a) s b where
     privateKey = TF.configuration . privateKey
 
 class HasRegion a s b | a -> s b where
     region :: Lens' a (TF.Attribute s b)
 
-instance HasRegion a s b => HasRegion (TF.Source l p a) s b where
+instance HasRegion a s b => HasRegion (TF.Schema l p a) s b where
     region = TF.configuration . region
 
 class HasSpace a s b | a -> s b where
     space :: Lens' a (TF.Attribute s b)
 
-instance HasSpace a s b => HasSpace (TF.Source l p a) s b where
+instance HasSpace a s b => HasSpace (TF.Schema l p a) s b where
     space = TF.configuration . space
 
 class HasStack a s b | a -> s b where
     stack :: Lens' a (TF.Attribute s b)
 
-instance HasStack a s b => HasStack (TF.Source l p a) s b where
+instance HasStack a s b => HasStack (TF.Schema l p a) s b where
     stack = TF.configuration . stack
 
 class HasStage a s b | a -> s b where
     stage :: Lens' a (TF.Attribute s b)
 
-instance HasStage a s b => HasStage (TF.Source l p a) s b where
+instance HasStage a s b => HasStage (TF.Schema l p a) s b where
     stage = TF.configuration . stage
 
 class HasUrl a s b | a -> s b where
     url :: Lens' a (TF.Attribute s b)
 
-instance HasUrl a s b => HasUrl (TF.Source l p a) s b where
+instance HasUrl a s b => HasUrl (TF.Schema l p a) s b where
     url = TF.configuration . url
 
 class HasComputedAllConfigVars a b | a -> b where

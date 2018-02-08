@@ -98,7 +98,7 @@ import           Terrafomo.Librato.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @librato_alert@ Librato resource.
 
@@ -176,7 +176,7 @@ instance P.HasComputedName (AlertResource s) Text
 instance P.HasComputedRearmSeconds (AlertResource s) Text
 instance P.HasComputedServices (AlertResource s) Text
 
-alertResource :: TF.Resource P.Librato (AlertResource s)
+alertResource :: TF.Schema TF.Resource P.Librato (AlertResource s)
 alertResource =
     TF.newResource "librato_alert" $
         AlertResource {
@@ -265,7 +265,7 @@ instance P.HasComputedPeriod (MetricResource s) Text
 instance P.HasComputedSourceLag (MetricResource s) Text
 instance P.HasComputedType' (MetricResource s) Text
 
-metricResource :: TF.Resource P.Librato (MetricResource s)
+metricResource :: TF.Schema TF.Resource P.Librato (MetricResource s)
 metricResource =
     TF.newResource "librato_metric" $
         MetricResource {
@@ -319,7 +319,7 @@ instance P.HasComputedSettings (ServiceResource s) Text
 instance P.HasComputedTitle (ServiceResource s) Text
 instance P.HasComputedType' (ServiceResource s) Text
 
-serviceResource :: TF.Resource P.Librato (ServiceResource s)
+serviceResource :: TF.Schema TF.Resource P.Librato (ServiceResource s)
 serviceResource =
     TF.newResource "librato_service" $
         ServiceResource {
@@ -408,7 +408,7 @@ instance P.HasComputedId (SpaceChartResource s) Text
 instance P.HasComputedSpaceId (SpaceChartResource s) Text
 instance P.HasComputedTitle (SpaceChartResource s) Text
 
-spaceChartResource :: TF.Resource P.Librato (SpaceChartResource s)
+spaceChartResource :: TF.Schema TF.Resource P.Librato (SpaceChartResource s)
 spaceChartResource =
     TF.newResource "librato_space_chart" $
         SpaceChartResource {
@@ -445,7 +445,7 @@ instance P.HasName (SpaceResource s) s Text where
 instance P.HasComputedId (SpaceResource s) Text
 instance P.HasComputedName (SpaceResource s) Text
 
-spaceResource :: TF.Resource P.Librato (SpaceResource s)
+spaceResource :: TF.Schema TF.Resource P.Librato (SpaceResource s)
 spaceResource =
     TF.newResource "librato_space" $
         SpaceResource {

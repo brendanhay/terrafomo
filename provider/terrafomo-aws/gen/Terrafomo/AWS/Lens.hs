@@ -23,6 +23,7 @@ module Terrafomo.AWS.Lens
     -- * Overloaded Fields
     -- ** Arguments
       HasAccelerationStatus (..)
+    , HasAcceptanceRequired (..)
     , HasAccepter (..)
     , HasAccessLogs (..)
     , HasAccessPolicies (..)
@@ -64,6 +65,7 @@ module Terrafomo.AWS.Lens
     , HasAllowedOauthFlows (..)
     , HasAllowedOauthFlowsUserPoolClient (..)
     , HasAllowedOauthScopes (..)
+    , HasAllowedPrincipals (..)
     , HasAmi (..)
     , HasAmiId (..)
     , HasApiId (..)
@@ -74,6 +76,9 @@ module Terrafomo.AWS.Lens
     , HasAppServerVersion (..)
     , HasAppSource (..)
     , HasApplication (..)
+    , HasApplicationFailureFeedbackRoleArn (..)
+    , HasApplicationSuccessFeedbackRoleArn (..)
+    , HasApplicationSuccessFeedbackSampleRate (..)
     , HasApplications (..)
     , HasApplyImmediately (..)
     , HasApprovalRule (..)
@@ -207,7 +212,9 @@ module Terrafomo.AWS.Lens
     , HasConnectSettings (..)
     , HasConnectionDraining (..)
     , HasConnectionDrainingTimeout (..)
+    , HasConnectionEvents (..)
     , HasConnectionId (..)
+    , HasConnectionNotificationArn (..)
     , HasConnectionsBandwidth (..)
     , HasContainer (..)
     , HasContainerDefinitions (..)
@@ -429,7 +436,10 @@ module Terrafomo.AWS.Lens
     , HasHostname (..)
     , HasHostnameTheme (..)
     , HasHtml (..)
+    , HasHttpFailureFeedbackRoleArn (..)
     , HasHttpMethod (..)
+    , HasHttpSuccessFeedbackRoleArn (..)
+    , HasHttpSuccessFeedbackSampleRate (..)
     , HasHttpVersion (..)
     , HasIamDatabaseAuthenticationEnabled (..)
     , HasIamFleetRole (..)
@@ -512,7 +522,10 @@ module Terrafomo.AWS.Lens
     , HasLagId (..)
     , HasLambdaAction (..)
     , HasLambdaConfig (..)
+    , HasLambdaFailureFeedbackRoleArn (..)
     , HasLambdaFunction (..)
+    , HasLambdaSuccessFeedbackRoleArn (..)
+    , HasLambdaSuccessFeedbackSampleRate (..)
     , HasLatencyRoutingPolicy (..)
     , HasLatest (..)
     , HasLaunchConfiguration (..)
@@ -593,6 +606,7 @@ module Terrafomo.AWS.Lens
     , HasNetworkConfiguration (..)
     , HasNetworkInterface (..)
     , HasNetworkInterfaceId (..)
+    , HasNetworkLoadBalancerArns (..)
     , HasNodeType (..)
     , HasNodejsVersion (..)
     , HasNotification (..)
@@ -618,6 +632,7 @@ module Terrafomo.AWS.Lens
     , HasOs (..)
     , HasOutputBucket (..)
     , HasOutputLocation (..)
+    , HasOverrideJson (..)
     , HasOverwrite (..)
     , HasOwnerAccount (..)
     , HasOwnerId (..)
@@ -666,6 +681,7 @@ module Terrafomo.AWS.Lens
     , HasPolicyUrl (..)
     , HasPollInterval (..)
     , HasPort (..)
+    , HasPrecedence (..)
     , HasPredicates (..)
     , HasPreferredBackupWindow (..)
     , HasPreferredMaintenanceWindow (..)
@@ -674,7 +690,9 @@ module Terrafomo.AWS.Lens
     , HasPrefixListIds (..)
     , HasPriceClass (..)
     , HasPrincipal (..)
+    , HasPrincipalArn (..)
     , HasPriority (..)
+    , HasPrivateDnsEnabled (..)
     , HasPrivateIp (..)
     , HasPrivateIpAddress (..)
     , HasPrivateIps (..)
@@ -865,6 +883,7 @@ module Terrafomo.AWS.Lens
     , HasSourceEndpointArn (..)
     , HasSourceIds (..)
     , HasSourceInstanceId (..)
+    , HasSourceJson (..)
     , HasSourceSecurityGroupId (..)
     , HasSourceType (..)
     , HasSpotPrice (..)
@@ -872,6 +891,9 @@ module Terrafomo.AWS.Lens
     , HasSql (..)
     , HasSqlInjectionMatchTuples (..)
     , HasSqlVersion (..)
+    , HasSqsFailureFeedbackRoleArn (..)
+    , HasSqsSuccessFeedbackRoleArn (..)
+    , HasSqsSuccessFeedbackSampleRate (..)
     , HasSshKeyName (..)
     , HasSshPublicKey (..)
     , HasSshUsername (..)
@@ -909,6 +931,7 @@ module Terrafomo.AWS.Lens
     , HasStreamEnabled (..)
     , HasStreamViewType (..)
     , HasSubject (..)
+    , HasSubjectAlternativeNames (..)
     , HasSubnetGroupName (..)
     , HasSubnetId (..)
     , HasSubnetIds (..)
@@ -986,6 +1009,8 @@ module Terrafomo.AWS.Lens
     , HasUsernameAttributes (..)
     , HasUsers (..)
     , HasValidUntil (..)
+    , HasValidationMethod (..)
+    , HasValidationRecordFqdns (..)
     , HasValue (..)
     , HasValues (..)
     , HasVariables (..)
@@ -1008,6 +1033,8 @@ module Terrafomo.AWS.Lens
     , HasVpcClassicLinkSecurityGroups (..)
     , HasVpcConfig (..)
     , HasVpcEndpointId (..)
+    , HasVpcEndpointServiceId (..)
+    , HasVpcEndpointType (..)
     , HasVpcId (..)
     , HasVpcOptions (..)
     , HasVpcPeeringConnectionId (..)
@@ -1035,6 +1062,7 @@ module Terrafomo.AWS.Lens
 
     -- ** Computed Attributes
     , HasComputedAcceptStatus (..)
+    , HasComputedAcceptanceRequired (..)
     , HasComputedAccepter (..)
     , HasComputedAccessUrl (..)
     , HasComputedAccountId (..)
@@ -1073,6 +1101,7 @@ module Terrafomo.AWS.Lens
     , HasComputedAwsAccountId (..)
     , HasComputedBackupRetentionPeriod (..)
     , HasComputedBackupWindow (..)
+    , HasComputedBaseEndpointDnsNames (..)
     , HasComputedBgpAsn (..)
     , HasComputedBlockDeviceMappings (..)
     , HasComputedBody (..)
@@ -1166,12 +1195,14 @@ module Terrafomo.AWS.Lens
     , HasComputedDisableNetworking (..)
     , HasComputedDisableRollback (..)
     , HasComputedDkimTokens (..)
+    , HasComputedDnsEntry (..)
     , HasComputedDnsIpAddresses (..)
     , HasComputedDnsName (..)
     , HasComputedDockerLabels (..)
     , HasComputedDocumentType (..)
     , HasComputedDomainId (..)
     , HasComputedDomainName (..)
+    , HasComputedDomainValidationOptions (..)
     , HasComputedEbsBlockDevice (..)
     , HasComputedEbsOptimized (..)
     , HasComputedEc2Attributes (..)
@@ -1297,10 +1328,12 @@ module Terrafomo.AWS.Lens
     , HasComputedNatGatewayId (..)
     , HasComputedNetworkInterface (..)
     , HasComputedNetworkInterfaceId (..)
+    , HasComputedNetworkInterfaceIds (..)
     , HasComputedNetworkMode (..)
     , HasComputedNodeType (..)
     , HasComputedNotificationArns (..)
     , HasComputedNotificationTopicArn (..)
+    , HasComputedNotificationType (..)
     , HasComputedNumCacheNodes (..)
     , HasComputedNumberCacheClusters (..)
     , HasComputedOpenShards (..)
@@ -1338,6 +1371,8 @@ module Terrafomo.AWS.Lens
     , HasComputedPrimaryEndpointAddress (..)
     , HasComputedPrimaryNetworkInterfaceId (..)
     , HasComputedPrivateDns (..)
+    , HasComputedPrivateDnsEnabled (..)
+    , HasComputedPrivateDnsName (..)
     , HasComputedPrivateIp (..)
     , HasComputedPrivateIpAddress (..)
     , HasComputedPrivateIps (..)
@@ -1405,6 +1440,7 @@ module Terrafomo.AWS.Lens
     , HasComputedServiceName (..)
     , HasComputedServiceRole (..)
     , HasComputedServiceRoleArn (..)
+    , HasComputedServiceType (..)
     , HasComputedSesSmtpPassword (..)
     , HasComputedSetting (..)
     , HasComputedShardCount (..)
@@ -1478,6 +1514,7 @@ module Terrafomo.AWS.Lens
     , HasComputedUsers (..)
     , HasComputedUuid (..)
     , HasComputedValidUntil (..)
+    , HasComputedValidationEmails (..)
     , HasComputedValue (..)
     , HasComputedVerificationToken (..)
     , HasComputedVersion (..)
@@ -1487,6 +1524,8 @@ module Terrafomo.AWS.Lens
     , HasComputedVolumeId (..)
     , HasComputedVolumeSize (..)
     , HasComputedVolumeType (..)
+    , HasComputedVpcEndpointPolicySupported (..)
+    , HasComputedVpcEndpointType (..)
     , HasComputedVpcId (..)
     , HasComputedVpcOptions0AvailabilityZones (..)
     , HasComputedVpcOptions0VpcId (..)
@@ -1518,6 +1557,12 @@ class HasAccelerationStatus a s b | a -> s b where
 
 instance HasAccelerationStatus a s b => HasAccelerationStatus (TF.Schema l p a) s b where
     accelerationStatus = TF.configuration . accelerationStatus
+
+class HasAcceptanceRequired a s b | a -> s b where
+    acceptanceRequired :: Lens' a (TF.Attribute s b)
+
+instance HasAcceptanceRequired a s b => HasAcceptanceRequired (TF.Schema l p a) s b where
+    acceptanceRequired = TF.configuration . acceptanceRequired
 
 class HasAccepter a s b | a -> s b where
     accepter :: Lens' a (TF.Attribute s b)
@@ -1765,6 +1810,12 @@ class HasAllowedOauthScopes a s b | a -> s b where
 instance HasAllowedOauthScopes a s b => HasAllowedOauthScopes (TF.Schema l p a) s b where
     allowedOauthScopes = TF.configuration . allowedOauthScopes
 
+class HasAllowedPrincipals a s b | a -> s b where
+    allowedPrincipals :: Lens' a (TF.Attribute s b)
+
+instance HasAllowedPrincipals a s b => HasAllowedPrincipals (TF.Schema l p a) s b where
+    allowedPrincipals = TF.configuration . allowedPrincipals
+
 class HasAmi a s b | a -> s b where
     ami :: Lens' a (TF.Attribute s b)
 
@@ -1824,6 +1875,24 @@ class HasApplication a s b | a -> s b where
 
 instance HasApplication a s b => HasApplication (TF.Schema l p a) s b where
     application = TF.configuration . application
+
+class HasApplicationFailureFeedbackRoleArn a s b | a -> s b where
+    applicationFailureFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasApplicationFailureFeedbackRoleArn a s b => HasApplicationFailureFeedbackRoleArn (TF.Schema l p a) s b where
+    applicationFailureFeedbackRoleArn = TF.configuration . applicationFailureFeedbackRoleArn
+
+class HasApplicationSuccessFeedbackRoleArn a s b | a -> s b where
+    applicationSuccessFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasApplicationSuccessFeedbackRoleArn a s b => HasApplicationSuccessFeedbackRoleArn (TF.Schema l p a) s b where
+    applicationSuccessFeedbackRoleArn = TF.configuration . applicationSuccessFeedbackRoleArn
+
+class HasApplicationSuccessFeedbackSampleRate a s b | a -> s b where
+    applicationSuccessFeedbackSampleRate :: Lens' a (TF.Attribute s b)
+
+instance HasApplicationSuccessFeedbackSampleRate a s b => HasApplicationSuccessFeedbackSampleRate (TF.Schema l p a) s b where
+    applicationSuccessFeedbackSampleRate = TF.configuration . applicationSuccessFeedbackSampleRate
 
 class HasApplications a s b | a -> s b where
     applications :: Lens' a (TF.Attribute s b)
@@ -2623,11 +2692,23 @@ class HasConnectionDrainingTimeout a s b | a -> s b where
 instance HasConnectionDrainingTimeout a s b => HasConnectionDrainingTimeout (TF.Schema l p a) s b where
     connectionDrainingTimeout = TF.configuration . connectionDrainingTimeout
 
+class HasConnectionEvents a s b | a -> s b where
+    connectionEvents :: Lens' a (TF.Attribute s b)
+
+instance HasConnectionEvents a s b => HasConnectionEvents (TF.Schema l p a) s b where
+    connectionEvents = TF.configuration . connectionEvents
+
 class HasConnectionId a s b | a -> s b where
     connectionId :: Lens' a (TF.Attribute s b)
 
 instance HasConnectionId a s b => HasConnectionId (TF.Schema l p a) s b where
     connectionId = TF.configuration . connectionId
+
+class HasConnectionNotificationArn a s b | a -> s b where
+    connectionNotificationArn :: Lens' a (TF.Attribute s b)
+
+instance HasConnectionNotificationArn a s b => HasConnectionNotificationArn (TF.Schema l p a) s b where
+    connectionNotificationArn = TF.configuration . connectionNotificationArn
 
 class HasConnectionsBandwidth a s b | a -> s b where
     connectionsBandwidth :: Lens' a (TF.Attribute s b)
@@ -3955,11 +4036,29 @@ class HasHtml a s b | a -> s b where
 instance HasHtml a s b => HasHtml (TF.Schema l p a) s b where
     html = TF.configuration . html
 
+class HasHttpFailureFeedbackRoleArn a s b | a -> s b where
+    httpFailureFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasHttpFailureFeedbackRoleArn a s b => HasHttpFailureFeedbackRoleArn (TF.Schema l p a) s b where
+    httpFailureFeedbackRoleArn = TF.configuration . httpFailureFeedbackRoleArn
+
 class HasHttpMethod a s b | a -> s b where
     httpMethod :: Lens' a (TF.Attribute s b)
 
 instance HasHttpMethod a s b => HasHttpMethod (TF.Schema l p a) s b where
     httpMethod = TF.configuration . httpMethod
+
+class HasHttpSuccessFeedbackRoleArn a s b | a -> s b where
+    httpSuccessFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasHttpSuccessFeedbackRoleArn a s b => HasHttpSuccessFeedbackRoleArn (TF.Schema l p a) s b where
+    httpSuccessFeedbackRoleArn = TF.configuration . httpSuccessFeedbackRoleArn
+
+class HasHttpSuccessFeedbackSampleRate a s b | a -> s b where
+    httpSuccessFeedbackSampleRate :: Lens' a (TF.Attribute s b)
+
+instance HasHttpSuccessFeedbackSampleRate a s b => HasHttpSuccessFeedbackSampleRate (TF.Schema l p a) s b where
+    httpSuccessFeedbackSampleRate = TF.configuration . httpSuccessFeedbackSampleRate
 
 class HasHttpVersion a s b | a -> s b where
     httpVersion :: Lens' a (TF.Attribute s b)
@@ -4453,11 +4552,29 @@ class HasLambdaConfig a s b | a -> s b where
 instance HasLambdaConfig a s b => HasLambdaConfig (TF.Schema l p a) s b where
     lambdaConfig = TF.configuration . lambdaConfig
 
+class HasLambdaFailureFeedbackRoleArn a s b | a -> s b where
+    lambdaFailureFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasLambdaFailureFeedbackRoleArn a s b => HasLambdaFailureFeedbackRoleArn (TF.Schema l p a) s b where
+    lambdaFailureFeedbackRoleArn = TF.configuration . lambdaFailureFeedbackRoleArn
+
 class HasLambdaFunction a s b | a -> s b where
     lambdaFunction :: Lens' a (TF.Attribute s b)
 
 instance HasLambdaFunction a s b => HasLambdaFunction (TF.Schema l p a) s b where
     lambdaFunction = TF.configuration . lambdaFunction
+
+class HasLambdaSuccessFeedbackRoleArn a s b | a -> s b where
+    lambdaSuccessFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasLambdaSuccessFeedbackRoleArn a s b => HasLambdaSuccessFeedbackRoleArn (TF.Schema l p a) s b where
+    lambdaSuccessFeedbackRoleArn = TF.configuration . lambdaSuccessFeedbackRoleArn
+
+class HasLambdaSuccessFeedbackSampleRate a s b | a -> s b where
+    lambdaSuccessFeedbackSampleRate :: Lens' a (TF.Attribute s b)
+
+instance HasLambdaSuccessFeedbackSampleRate a s b => HasLambdaSuccessFeedbackSampleRate (TF.Schema l p a) s b where
+    lambdaSuccessFeedbackSampleRate = TF.configuration . lambdaSuccessFeedbackSampleRate
 
 class HasLatencyRoutingPolicy a s b | a -> s b where
     latencyRoutingPolicy :: Lens' a (TF.Attribute s b)
@@ -4939,6 +5056,12 @@ class HasNetworkInterfaceId a s b | a -> s b where
 instance HasNetworkInterfaceId a s b => HasNetworkInterfaceId (TF.Schema l p a) s b where
     networkInterfaceId = TF.configuration . networkInterfaceId
 
+class HasNetworkLoadBalancerArns a s b | a -> s b where
+    networkLoadBalancerArns :: Lens' a (TF.Attribute s b)
+
+instance HasNetworkLoadBalancerArns a s b => HasNetworkLoadBalancerArns (TF.Schema l p a) s b where
+    networkLoadBalancerArns = TF.configuration . networkLoadBalancerArns
+
 class HasNodeType a s b | a -> s b where
     nodeType :: Lens' a (TF.Attribute s b)
 
@@ -5088,6 +5211,12 @@ class HasOutputLocation a s b | a -> s b where
 
 instance HasOutputLocation a s b => HasOutputLocation (TF.Schema l p a) s b where
     outputLocation = TF.configuration . outputLocation
+
+class HasOverrideJson a s b | a -> s b where
+    overrideJson :: Lens' a (TF.Attribute s b)
+
+instance HasOverrideJson a s b => HasOverrideJson (TF.Schema l p a) s b where
+    overrideJson = TF.configuration . overrideJson
 
 class HasOverwrite a s b | a -> s b where
     overwrite :: Lens' a (TF.Attribute s b)
@@ -5377,6 +5506,12 @@ class HasPort a s b | a -> s b where
 instance HasPort a s b => HasPort (TF.Schema l p a) s b where
     port = TF.configuration . port
 
+class HasPrecedence a s b | a -> s b where
+    precedence :: Lens' a (TF.Attribute s b)
+
+instance HasPrecedence a s b => HasPrecedence (TF.Schema l p a) s b where
+    precedence = TF.configuration . precedence
+
 class HasPredicates a s b | a -> s b where
     predicates :: Lens' a (TF.Attribute s b)
 
@@ -5425,11 +5560,23 @@ class HasPrincipal a s b | a -> s b where
 instance HasPrincipal a s b => HasPrincipal (TF.Schema l p a) s b where
     principal = TF.configuration . principal
 
+class HasPrincipalArn a s b | a -> s b where
+    principalArn :: Lens' a (TF.Attribute s b)
+
+instance HasPrincipalArn a s b => HasPrincipalArn (TF.Schema l p a) s b where
+    principalArn = TF.configuration . principalArn
+
 class HasPriority a s b | a -> s b where
     priority :: Lens' a (TF.Attribute s b)
 
 instance HasPriority a s b => HasPriority (TF.Schema l p a) s b where
     priority = TF.configuration . priority
+
+class HasPrivateDnsEnabled a s b | a -> s b where
+    privateDnsEnabled :: Lens' a (TF.Attribute s b)
+
+instance HasPrivateDnsEnabled a s b => HasPrivateDnsEnabled (TF.Schema l p a) s b where
+    privateDnsEnabled = TF.configuration . privateDnsEnabled
 
 class HasPrivateIp a s b | a -> s b where
     privateIp :: Lens' a (TF.Attribute s b)
@@ -6571,6 +6718,12 @@ class HasSourceInstanceId a s b | a -> s b where
 instance HasSourceInstanceId a s b => HasSourceInstanceId (TF.Schema l p a) s b where
     sourceInstanceId = TF.configuration . sourceInstanceId
 
+class HasSourceJson a s b | a -> s b where
+    sourceJson :: Lens' a (TF.Attribute s b)
+
+instance HasSourceJson a s b => HasSourceJson (TF.Schema l p a) s b where
+    sourceJson = TF.configuration . sourceJson
+
 class HasSourceSecurityGroupId a s b | a -> s b where
     sourceSecurityGroupId :: Lens' a (TF.Attribute s b)
 
@@ -6612,6 +6765,24 @@ class HasSqlVersion a s b | a -> s b where
 
 instance HasSqlVersion a s b => HasSqlVersion (TF.Schema l p a) s b where
     sqlVersion = TF.configuration . sqlVersion
+
+class HasSqsFailureFeedbackRoleArn a s b | a -> s b where
+    sqsFailureFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasSqsFailureFeedbackRoleArn a s b => HasSqsFailureFeedbackRoleArn (TF.Schema l p a) s b where
+    sqsFailureFeedbackRoleArn = TF.configuration . sqsFailureFeedbackRoleArn
+
+class HasSqsSuccessFeedbackRoleArn a s b | a -> s b where
+    sqsSuccessFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasSqsSuccessFeedbackRoleArn a s b => HasSqsSuccessFeedbackRoleArn (TF.Schema l p a) s b where
+    sqsSuccessFeedbackRoleArn = TF.configuration . sqsSuccessFeedbackRoleArn
+
+class HasSqsSuccessFeedbackSampleRate a s b | a -> s b where
+    sqsSuccessFeedbackSampleRate :: Lens' a (TF.Attribute s b)
+
+instance HasSqsSuccessFeedbackSampleRate a s b => HasSqsSuccessFeedbackSampleRate (TF.Schema l p a) s b where
+    sqsSuccessFeedbackSampleRate = TF.configuration . sqsSuccessFeedbackSampleRate
 
 class HasSshKeyName a s b | a -> s b where
     sshKeyName :: Lens' a (TF.Attribute s b)
@@ -6834,6 +7005,12 @@ class HasSubject a s b | a -> s b where
 
 instance HasSubject a s b => HasSubject (TF.Schema l p a) s b where
     subject = TF.configuration . subject
+
+class HasSubjectAlternativeNames a s b | a -> s b where
+    subjectAlternativeNames :: Lens' a (TF.Attribute s b)
+
+instance HasSubjectAlternativeNames a s b => HasSubjectAlternativeNames (TF.Schema l p a) s b where
+    subjectAlternativeNames = TF.configuration . subjectAlternativeNames
 
 class HasSubnetGroupName a s b | a -> s b where
     subnetGroupName :: Lens' a (TF.Attribute s b)
@@ -7297,6 +7474,18 @@ class HasValidUntil a s b | a -> s b where
 instance HasValidUntil a s b => HasValidUntil (TF.Schema l p a) s b where
     validUntil = TF.configuration . validUntil
 
+class HasValidationMethod a s b | a -> s b where
+    validationMethod :: Lens' a (TF.Attribute s b)
+
+instance HasValidationMethod a s b => HasValidationMethod (TF.Schema l p a) s b where
+    validationMethod = TF.configuration . validationMethod
+
+class HasValidationRecordFqdns a s b | a -> s b where
+    validationRecordFqdns :: Lens' a (TF.Attribute s b)
+
+instance HasValidationRecordFqdns a s b => HasValidationRecordFqdns (TF.Schema l p a) s b where
+    validationRecordFqdns = TF.configuration . validationRecordFqdns
+
 class HasValue a s b | a -> s b where
     value :: Lens' a (TF.Attribute s b)
 
@@ -7428,6 +7617,18 @@ class HasVpcEndpointId a s b | a -> s b where
 
 instance HasVpcEndpointId a s b => HasVpcEndpointId (TF.Schema l p a) s b where
     vpcEndpointId = TF.configuration . vpcEndpointId
+
+class HasVpcEndpointServiceId a s b | a -> s b where
+    vpcEndpointServiceId :: Lens' a (TF.Attribute s b)
+
+instance HasVpcEndpointServiceId a s b => HasVpcEndpointServiceId (TF.Schema l p a) s b where
+    vpcEndpointServiceId = TF.configuration . vpcEndpointServiceId
+
+class HasVpcEndpointType a s b | a -> s b where
+    vpcEndpointType :: Lens' a (TF.Attribute s b)
+
+instance HasVpcEndpointType a s b => HasVpcEndpointType (TF.Schema l p a) s b where
+    vpcEndpointType = TF.configuration . vpcEndpointType
 
 class HasVpcId a s b | a -> s b where
     vpcId :: Lens' a (TF.Attribute s b)
@@ -7578,6 +7779,12 @@ class HasComputedAcceptStatus a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedAcceptStatus =
         to (\x -> TF.computed (TF.referenceKey x) "accept_status")
+
+class HasComputedAcceptanceRequired a b | a -> b where
+    computedAcceptanceRequired
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedAcceptanceRequired =
+        to (\x -> TF.computed (TF.referenceKey x) "acceptance_required")
 
 class HasComputedAccepter a b | a -> b where
     computedAccepter
@@ -7806,6 +8013,12 @@ class HasComputedBackupWindow a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedBackupWindow =
         to (\x -> TF.computed (TF.referenceKey x) "backup_window")
+
+class HasComputedBaseEndpointDnsNames a b | a -> b where
+    computedBaseEndpointDnsNames
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedBaseEndpointDnsNames =
+        to (\x -> TF.computed (TF.referenceKey x) "base_endpoint_dns_names")
 
 class HasComputedBgpAsn a b | a -> b where
     computedBgpAsn
@@ -8365,6 +8578,12 @@ class HasComputedDkimTokens a b | a -> b where
     computedDkimTokens =
         to (\x -> TF.computed (TF.referenceKey x) "dkim_tokens")
 
+class HasComputedDnsEntry a b | a -> b where
+    computedDnsEntry
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDnsEntry =
+        to (\x -> TF.computed (TF.referenceKey x) "dns_entry")
+
 class HasComputedDnsIpAddresses a b | a -> b where
     computedDnsIpAddresses
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -8400,6 +8619,12 @@ class HasComputedDomainName a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedDomainName =
         to (\x -> TF.computed (TF.referenceKey x) "domain_name")
+
+class HasComputedDomainValidationOptions a b | a -> b where
+    computedDomainValidationOptions
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedDomainValidationOptions =
+        to (\x -> TF.computed (TF.referenceKey x) "domain_validation_options")
 
 class HasComputedEbsBlockDevice a b | a -> b where
     computedEbsBlockDevice
@@ -9151,6 +9376,12 @@ class HasComputedNetworkInterfaceId a b | a -> b where
     computedNetworkInterfaceId =
         to (\x -> TF.computed (TF.referenceKey x) "network_interface_id")
 
+class HasComputedNetworkInterfaceIds a b | a -> b where
+    computedNetworkInterfaceIds
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedNetworkInterfaceIds =
+        to (\x -> TF.computed (TF.referenceKey x) "network_interface_ids")
+
 class HasComputedNetworkMode a b | a -> b where
     computedNetworkMode
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -9174,6 +9405,12 @@ class HasComputedNotificationTopicArn a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedNotificationTopicArn =
         to (\x -> TF.computed (TF.referenceKey x) "notification_topic_arn")
+
+class HasComputedNotificationType a b | a -> b where
+    computedNotificationType
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedNotificationType =
+        to (\x -> TF.computed (TF.referenceKey x) "notification_type")
 
 class HasComputedNumCacheNodes a b | a -> b where
     computedNumCacheNodes
@@ -9396,6 +9633,18 @@ class HasComputedPrivateDns a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedPrivateDns =
         to (\x -> TF.computed (TF.referenceKey x) "private_dns")
+
+class HasComputedPrivateDnsEnabled a b | a -> b where
+    computedPrivateDnsEnabled
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPrivateDnsEnabled =
+        to (\x -> TF.computed (TF.referenceKey x) "private_dns_enabled")
+
+class HasComputedPrivateDnsName a b | a -> b where
+    computedPrivateDnsName
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedPrivateDnsName =
+        to (\x -> TF.computed (TF.referenceKey x) "private_dns_name")
 
 class HasComputedPrivateIp a b | a -> b where
     computedPrivateIp
@@ -9798,6 +10047,12 @@ class HasComputedServiceRoleArn a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedServiceRoleArn =
         to (\x -> TF.computed (TF.referenceKey x) "service_role_arn")
+
+class HasComputedServiceType a b | a -> b where
+    computedServiceType
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedServiceType =
+        to (\x -> TF.computed (TF.referenceKey x) "service_type")
 
 class HasComputedSesSmtpPassword a b | a -> b where
     computedSesSmtpPassword
@@ -10237,6 +10492,12 @@ class HasComputedValidUntil a b | a -> b where
     computedValidUntil =
         to (\x -> TF.computed (TF.referenceKey x) "valid_until")
 
+class HasComputedValidationEmails a b | a -> b where
+    computedValidationEmails
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedValidationEmails =
+        to (\x -> TF.computed (TF.referenceKey x) "validation_emails")
+
 class HasComputedValue a b | a -> b where
     computedValue
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -10290,6 +10551,18 @@ class HasComputedVolumeType a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedVolumeType =
         to (\x -> TF.computed (TF.referenceKey x) "volume_type")
+
+class HasComputedVpcEndpointPolicySupported a b | a -> b where
+    computedVpcEndpointPolicySupported
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedVpcEndpointPolicySupported =
+        to (\x -> TF.computed (TF.referenceKey x) "vpc_endpoint_policy_supported")
+
+class HasComputedVpcEndpointType a b | a -> b where
+    computedVpcEndpointType
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedVpcEndpointType =
+        to (\x -> TF.computed (TF.referenceKey x) "vpc_endpoint_type")
 
 class HasComputedVpcId a b | a -> b where
     computedVpcId

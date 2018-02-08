@@ -73,7 +73,7 @@ import           Terrafomo.ProfitBricks.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @profitbricks_datacenter@ ProfitBricks datasource.
 
@@ -110,7 +110,7 @@ instance P.HasName (DatacenterData s) s Text where
 
 instance P.HasComputedId (DatacenterData s) Text
 
-datacenterData :: TF.DataSource P.ProfitBricks (DatacenterData s)
+datacenterData :: TF.Schema TF.DataSource P.ProfitBricks (DatacenterData s)
 datacenterData =
     TF.newDataSource "profitbricks_datacenter" $
         DatacenterData {
@@ -164,7 +164,7 @@ instance P.HasVersion (ImageData s) s Text where
 
 instance P.HasComputedId (ImageData s) Text
 
-imageData :: TF.DataSource P.ProfitBricks (ImageData s)
+imageData :: TF.Schema TF.DataSource P.ProfitBricks (ImageData s)
 imageData =
     TF.newDataSource "profitbricks_image" $
         ImageData {
@@ -204,7 +204,7 @@ instance P.HasName (LocationData s) s Text where
 
 instance P.HasComputedId (LocationData s) Text
 
-locationData :: TF.DataSource P.ProfitBricks (LocationData s)
+locationData :: TF.Schema TF.DataSource P.ProfitBricks (LocationData s)
 locationData =
     TF.newDataSource "profitbricks_location" $
         LocationData {
@@ -248,7 +248,7 @@ instance P.HasResourceType (ResourceData s) s Text where
 
 instance P.HasComputedId (ResourceData s) Text
 
-resourceData :: TF.DataSource P.ProfitBricks (ResourceData s)
+resourceData :: TF.Schema TF.DataSource P.ProfitBricks (ResourceData s)
 resourceData =
     TF.newDataSource "profitbricks_resource" $
         ResourceData {
@@ -294,7 +294,7 @@ instance P.HasSize (SnapshotData s) s Text where
 
 instance P.HasComputedId (SnapshotData s) Text
 
-snapshotData :: TF.DataSource P.ProfitBricks (SnapshotData s)
+snapshotData :: TF.Schema TF.DataSource P.ProfitBricks (SnapshotData s)
 snapshotData =
     TF.newDataSource "profitbricks_snapshot" $
         SnapshotData {

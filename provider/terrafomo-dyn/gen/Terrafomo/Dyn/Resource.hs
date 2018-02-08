@@ -59,7 +59,7 @@ import qualified Terrafomo.IP           as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @dyn_record@ Dyn resource.
 
@@ -115,7 +115,7 @@ instance P.HasZone (RecordResource s) s Text where
 instance P.HasComputedFqdn (RecordResource s) Text
 instance P.HasComputedId (RecordResource s) Text
 
-recordResource :: TF.Resource P.Dyn (RecordResource s)
+recordResource :: TF.Schema TF.Resource P.Dyn (RecordResource s)
 recordResource =
     TF.newResource "dyn_record" $
         RecordResource {

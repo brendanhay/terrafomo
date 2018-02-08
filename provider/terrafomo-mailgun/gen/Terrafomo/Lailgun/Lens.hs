@@ -44,30 +44,30 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Source l p a) s b where
+instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasSmtpPassword a s b | a -> s b where
     smtpPassword :: Lens' a (TF.Attribute s b)
 
-instance HasSmtpPassword a s b => HasSmtpPassword (TF.Source l p a) s b where
+instance HasSmtpPassword a s b => HasSmtpPassword (TF.Schema l p a) s b where
     smtpPassword = TF.configuration . smtpPassword
 
 class HasSpamAction a s b | a -> s b where
     spamAction :: Lens' a (TF.Attribute s b)
 
-instance HasSpamAction a s b => HasSpamAction (TF.Source l p a) s b where
+instance HasSpamAction a s b => HasSpamAction (TF.Schema l p a) s b where
     spamAction = TF.configuration . spamAction
 
 class HasWildcard a s b | a -> s b where
     wildcard :: Lens' a (TF.Attribute s b)
 
-instance HasWildcard a s b => HasWildcard (TF.Source l p a) s b where
+instance HasWildcard a s b => HasWildcard (TF.Schema l p a) s b where
     wildcard = TF.configuration . wildcard
 
 class HasComputedName a b | a -> b where

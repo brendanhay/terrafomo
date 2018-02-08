@@ -57,7 +57,7 @@ import           Terrafomo.Packet.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @packet_precreated_ip_block@ Packet datasource.
 
@@ -106,7 +106,7 @@ instance P.HasPublic (PrecreatedIpBlockData s) s Text where
 
 instance P.HasComputedCidrNotation (PrecreatedIpBlockData s) Text
 
-precreatedIpBlockData :: TF.DataSource P.Packet (PrecreatedIpBlockData s)
+precreatedIpBlockData :: TF.Schema TF.DataSource P.Packet (PrecreatedIpBlockData s)
 precreatedIpBlockData =
     TF.newDataSource "packet_precreated_ip_block" $
         PrecreatedIpBlockData {

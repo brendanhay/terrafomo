@@ -54,7 +54,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @docker_registry_image@ Docker datasource.
 
@@ -79,7 +79,7 @@ instance P.HasName (RegistryImageData s) s Text where
 
 instance P.HasComputedSha256Digest (RegistryImageData s) Text
 
-registryImageData :: TF.DataSource P.Docker (RegistryImageData s)
+registryImageData :: TF.Schema TF.DataSource P.Docker (RegistryImageData s)
 registryImageData =
     TF.newDataSource "docker_registry_image" $
         RegistryImageData {

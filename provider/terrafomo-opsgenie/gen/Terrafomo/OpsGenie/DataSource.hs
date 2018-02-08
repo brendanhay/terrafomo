@@ -55,7 +55,7 @@ import           Terrafomo.OpsGenie.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @opsgenie_user@ OpsGenie datasource.
 
@@ -80,7 +80,7 @@ instance P.HasUsername (UserData s) s Text where
 instance P.HasComputedFullName (UserData s) Text
 instance P.HasComputedRole (UserData s) Text
 
-userData :: TF.DataSource P.OpsGenie (UserData s)
+userData :: TF.Schema TF.DataSource P.OpsGenie (UserData s)
 userData =
     TF.newDataSource "opsgenie_user" $
         UserData {

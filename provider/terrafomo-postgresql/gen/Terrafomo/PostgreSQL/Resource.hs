@@ -87,7 +87,7 @@ import           Terrafomo.PostgreSQL.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @postgresql_database@ PostgreSQL resource.
 
@@ -183,7 +183,7 @@ instance P.HasTemplate (DatabaseResource s) s Text where
              (\s a -> s { _template = a } :: DatabaseResource s)
 
 
-databaseResource :: TF.Resource P.PostgreSQL (DatabaseResource s)
+databaseResource :: TF.Schema TF.Resource P.PostgreSQL (DatabaseResource s)
 databaseResource =
     TF.newResource "postgresql_database" $
         DatabaseResource {
@@ -236,7 +236,7 @@ instance P.HasVersion (ExtensionResource s) s Text where
              (\s a -> s { _version = a } :: ExtensionResource s)
 
 
-extensionResource :: TF.Resource P.PostgreSQL (ExtensionResource s)
+extensionResource :: TF.Schema TF.Resource P.PostgreSQL (ExtensionResource s)
 extensionResource =
     TF.newResource "postgresql_extension" $
         ExtensionResource {
@@ -380,7 +380,7 @@ instance P.HasValidUntil (RoleResource s) s Text where
              (\s a -> s { _valid_until = a } :: RoleResource s)
 
 
-roleResource :: TF.Resource P.PostgreSQL (RoleResource s)
+roleResource :: TF.Schema TF.Resource P.PostgreSQL (RoleResource s)
 roleResource =
     TF.newResource "postgresql_role" $
         RoleResource {
@@ -446,7 +446,7 @@ instance P.HasPolicy (SchemaResource s) s Text where
              (\s a -> s { _policy = a } :: SchemaResource s)
 
 
-schemaResource :: TF.Resource P.PostgreSQL (SchemaResource s)
+schemaResource :: TF.Schema TF.Resource P.PostgreSQL (SchemaResource s)
 schemaResource =
     TF.newResource "postgresql_schema" $
         SchemaResource {

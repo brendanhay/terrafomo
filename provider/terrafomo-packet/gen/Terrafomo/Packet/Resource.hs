@@ -123,7 +123,7 @@ import           Terrafomo.Packet.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @packet_device@ Packet resource.
 
@@ -254,7 +254,7 @@ instance P.HasComputedState (DeviceResource s) Text
 instance P.HasComputedTags (DeviceResource s) Text
 instance P.HasComputedUpdated (DeviceResource s) Text
 
-deviceResource :: TF.Resource P.Packet (DeviceResource s)
+deviceResource :: TF.Schema TF.Resource P.Packet (DeviceResource s)
 deviceResource =
     TF.newResource "packet_device" $
         DeviceResource {
@@ -318,7 +318,7 @@ instance P.HasComputedNetmask (IpAttachmentResource s) Text
 instance P.HasComputedNetwork (IpAttachmentResource s) Text
 instance P.HasComputedPublic (IpAttachmentResource s) Text
 
-ipAttachmentResource :: TF.Resource P.Packet (IpAttachmentResource s)
+ipAttachmentResource :: TF.Schema TF.Resource P.Packet (IpAttachmentResource s)
 ipAttachmentResource =
     TF.newResource "packet_ip_attachment" $
         IpAttachmentResource {
@@ -350,7 +350,7 @@ instance P.HasComputedCreated (ProjectResource s) Text
 instance P.HasComputedId (ProjectResource s) Text
 instance P.HasComputedUpdated (ProjectResource s) Text
 
-projectResource :: TF.Resource P.Packet (ProjectResource s)
+projectResource :: TF.Schema TF.Resource P.Packet (ProjectResource s)
 projectResource =
     TF.newResource "packet_project" $
         ProjectResource {
@@ -413,7 +413,7 @@ instance P.HasComputedProjectId (ReservedIpBlockResource s) Text
 instance P.HasComputedPublic (ReservedIpBlockResource s) Text
 instance P.HasComputedQuantity (ReservedIpBlockResource s) Text
 
-reservedIpBlockResource :: TF.Resource P.Packet (ReservedIpBlockResource s)
+reservedIpBlockResource :: TF.Schema TF.Resource P.Packet (ReservedIpBlockResource s)
 reservedIpBlockResource =
     TF.newResource "packet_reserved_ip_block" $
         ReservedIpBlockResource {
@@ -458,7 +458,7 @@ instance P.HasComputedName (SshKeyResource s) Text
 instance P.HasComputedPublicKey (SshKeyResource s) Text
 instance P.HasComputedUpdated (SshKeyResource s) Text
 
-sshKeyResource :: TF.Resource P.Packet (SshKeyResource s)
+sshKeyResource :: TF.Schema TF.Resource P.Packet (SshKeyResource s)
 sshKeyResource =
     TF.newResource "packet_ssh_key" $
         SshKeyResource {
@@ -498,7 +498,7 @@ instance P.HasVolumeId (VolumeAttachmentResource s) s Text where
 
 instance P.HasComputedId (VolumeAttachmentResource s) Text
 
-volumeAttachmentResource :: TF.Resource P.Packet (VolumeAttachmentResource s)
+volumeAttachmentResource :: TF.Schema TF.Resource P.Packet (VolumeAttachmentResource s)
 volumeAttachmentResource =
     TF.newResource "packet_volume_attachment" $
         VolumeAttachmentResource {
@@ -590,7 +590,7 @@ instance P.HasComputedSize (VolumeResource s) Text
 instance P.HasComputedState (VolumeResource s) Text
 instance P.HasComputedUpdated (VolumeResource s) Text
 
-volumeResource :: TF.Resource P.Packet (VolumeResource s)
+volumeResource :: TF.Schema TF.Resource P.Packet (VolumeResource s)
 volumeResource =
     TF.newResource "packet_volume" $
         VolumeResource {

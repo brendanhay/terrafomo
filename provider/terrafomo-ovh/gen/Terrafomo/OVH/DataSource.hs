@@ -63,7 +63,7 @@ import           Terrafomo.OVH.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @publiccloud_region@ OVH datasource.
 
@@ -99,7 +99,7 @@ instance P.HasComputedDatacenterLocation (RegionData s) Text
 instance P.HasComputedDatacenterLocation (RegionData s) Text
 instance P.HasComputedServices (RegionData s) Text
 
-regionData :: TF.DataSource P.OVH (RegionData s)
+regionData :: TF.Schema TF.DataSource P.OVH (RegionData s)
 regionData =
     TF.newDataSource "publiccloud_region" $
         RegionData {
@@ -128,7 +128,7 @@ instance P.HasProjectId (RegionsData s) s Text where
 
 instance P.HasComputedNames (RegionsData s) Text
 
-regionsData :: TF.DataSource P.OVH (RegionsData s)
+regionsData :: TF.Schema TF.DataSource P.OVH (RegionsData s)
 regionsData =
     TF.newDataSource "publiccloud_regions" $
         RegionsData {

@@ -405,6 +405,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedExternalGateway (..)
     , P.HasComputedExternalNetworkId (..)
     , P.HasComputedFile (..)
+    , P.HasComputedFingerprint (..)
     , P.HasComputedFixedIp (..)
     , P.HasComputedFixedIpV4 (..)
     , P.HasComputedFixedIpV6 (..)
@@ -459,6 +460,7 @@ module Terrafomo.OpenStack.Resource
     , P.HasComputedPortId (..)
     , P.HasComputedPortRangeMax (..)
     , P.HasComputedPortRangeMin (..)
+    , P.HasComputedPrivateKey (..)
     , P.HasComputedProperties (..)
     , P.HasComputedProtected (..)
     , P.HasComputedProtocol (..)
@@ -534,7 +536,7 @@ import           Terrafomo.OpenStack.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @openstack_blockstorage_volume_attach_v2@ OpenStack resource.
 
@@ -655,7 +657,7 @@ instance P.HasComputedData' (BlockstorageVolumeAttachV2Resource s) Text
 instance P.HasComputedDriverVolumeType (BlockstorageVolumeAttachV2Resource s) Text
 instance P.HasComputedMountPointBase (BlockstorageVolumeAttachV2Resource s) Text
 
-blockstorageVolumeAttachV2Resource :: TF.Resource P.OpenStack (BlockstorageVolumeAttachV2Resource s)
+blockstorageVolumeAttachV2Resource :: TF.Schema TF.Resource P.OpenStack (BlockstorageVolumeAttachV2Resource s)
 blockstorageVolumeAttachV2Resource =
     TF.newResource "openstack_blockstorage_volume_attach_v2" $
         BlockstorageVolumeAttachV2Resource {
@@ -776,7 +778,7 @@ instance P.HasComputedSnapshotId (BlockstorageVolumeV1Resource s) Text
 instance P.HasComputedSourceVolId (BlockstorageVolumeV1Resource s) Text
 instance P.HasComputedVolumeType (BlockstorageVolumeV1Resource s) Text
 
-blockstorageVolumeV1Resource :: TF.Resource P.OpenStack (BlockstorageVolumeV1Resource s)
+blockstorageVolumeV1Resource :: TF.Schema TF.Resource P.OpenStack (BlockstorageVolumeV1Resource s)
 blockstorageVolumeV1Resource =
     TF.newResource "openstack_blockstorage_volume_v1" $
         BlockstorageVolumeV1Resource {
@@ -911,7 +913,7 @@ instance P.HasComputedSnapshotId (BlockstorageVolumeV2Resource s) Text
 instance P.HasComputedSourceVolId (BlockstorageVolumeV2Resource s) Text
 instance P.HasComputedVolumeType (BlockstorageVolumeV2Resource s) Text
 
-blockstorageVolumeV2Resource :: TF.Resource P.OpenStack (BlockstorageVolumeV2Resource s)
+blockstorageVolumeV2Resource :: TF.Schema TF.Resource P.OpenStack (BlockstorageVolumeV2Resource s)
 blockstorageVolumeV2Resource =
     TF.newResource "openstack_blockstorage_volume_v2" $
         BlockstorageVolumeV2Resource {
@@ -1013,7 +1015,7 @@ instance P.HasComputedRxTxFactor (ComputeFlavorV2Resource s) Text
 instance P.HasComputedSwap (ComputeFlavorV2Resource s) Text
 instance P.HasComputedVcpus (ComputeFlavorV2Resource s) Text
 
-computeFlavorV2Resource :: TF.Resource P.OpenStack (ComputeFlavorV2Resource s)
+computeFlavorV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeFlavorV2Resource s)
 computeFlavorV2Resource =
     TF.newResource "openstack_compute_flavor_v2" $
         ComputeFlavorV2Resource {
@@ -1076,7 +1078,7 @@ instance P.HasComputedFloatingIp (ComputeFloatingipAssociateV2Resource s) Text
 instance P.HasComputedInstanceId (ComputeFloatingipAssociateV2Resource s) Text
 instance P.HasComputedRegion (ComputeFloatingipAssociateV2Resource s) Text
 
-computeFloatingipAssociateV2Resource :: TF.Resource P.OpenStack (ComputeFloatingipAssociateV2Resource s)
+computeFloatingipAssociateV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeFloatingipAssociateV2Resource s)
 computeFloatingipAssociateV2Resource =
     TF.newResource "openstack_compute_floatingip_associate_v2" $
         ComputeFloatingipAssociateV2Resource {
@@ -1124,7 +1126,7 @@ instance P.HasComputedInstanceId (ComputeFloatingipV2Resource s) Text
 instance P.HasComputedPool (ComputeFloatingipV2Resource s) Text
 instance P.HasComputedRegion (ComputeFloatingipV2Resource s) Text
 
-computeFloatingipV2Resource :: TF.Resource P.OpenStack (ComputeFloatingipV2Resource s)
+computeFloatingipV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeFloatingipV2Resource s)
 computeFloatingipV2Resource =
     TF.newResource "openstack_compute_floatingip_v2" $
         ComputeFloatingipV2Resource {
@@ -1310,7 +1312,7 @@ instance P.HasComputedRegion (ComputeInstanceV2Resource s) Text
 instance P.HasComputedSecurityGroups (ComputeInstanceV2Resource s) Text
 instance P.HasComputedUuid (ComputeInstanceV2Resource s) Text
 
-computeInstanceV2Resource :: TF.Resource P.OpenStack (ComputeInstanceV2Resource s)
+computeInstanceV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeInstanceV2Resource s)
 computeInstanceV2Resource =
     TF.newResource "openstack_compute_instance_v2" $
         ComputeInstanceV2Resource {
@@ -1337,13 +1339,18 @@ computeInstanceV2Resource =
 
 {- | The @openstack_compute_keypair_v2@ OpenStack resource.
 
-Manages a V2 keypair resource within OpenStack.
+Manages a V2 keypair resource within OpenStack. ~> Important Security Notice
+The private key generated by this resource will be stored unencrypted in
+your Terraform state file. Use of this resource for production deployments
+is not recommended . Instead, generate a private key file outside of
+Terraform and distribute it securely to the system where Terraform will be
+run.
 -}
 data ComputeKeypairV2Resource s = ComputeKeypairV2Resource {
       _name        :: !(TF.Attribute s Text)
     {- ^ (Required) A unique name for the keypair. Changing this creates a new keypair. -}
     , _public_key  :: !(TF.Attribute s Text)
-    {- ^ (Required) A pregenerated OpenSSH-formatted public key. Changing this creates a new keypair. -}
+    {- ^ (Optional) A pregenerated OpenSSH-formatted public key. Changing this creates a new keypair. If a public key is not specified, then a public/private key pair will be automatically generated. If a pair is created, then destroying this resource means you will lose access to that keypair forever. -}
     , _region      :: !(TF.Attribute s Text)
     {- ^ (Optional) The region in which to obtain the V2 Compute client. Keypairs are associated with accounts, but a Compute client is needed to create one. If omitted, the @region@ argument of the provider is used. Changing this creates a new keypair. -}
     , _value_specs :: !(TF.Attribute s Text)
@@ -1378,11 +1385,13 @@ instance P.HasValueSpecs (ComputeKeypairV2Resource s) s Text where
         lens (_value_specs :: ComputeKeypairV2Resource s -> TF.Attribute s Text)
              (\s a -> s { _value_specs = a } :: ComputeKeypairV2Resource s)
 
+instance P.HasComputedFingerprint (ComputeKeypairV2Resource s) Text
 instance P.HasComputedName (ComputeKeypairV2Resource s) Text
+instance P.HasComputedPrivateKey (ComputeKeypairV2Resource s) Text
 instance P.HasComputedPublicKey (ComputeKeypairV2Resource s) Text
 instance P.HasComputedRegion (ComputeKeypairV2Resource s) Text
 
-computeKeypairV2Resource :: TF.Resource P.OpenStack (ComputeKeypairV2Resource s)
+computeKeypairV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeKeypairV2Resource s)
 computeKeypairV2Resource =
     TF.newResource "openstack_compute_keypair_v2" $
         ComputeKeypairV2Resource {
@@ -1445,7 +1454,7 @@ instance P.HasComputedName (ComputeSecgroupV2Resource s) Text
 instance P.HasComputedRegion (ComputeSecgroupV2Resource s) Text
 instance P.HasComputedRule (ComputeSecgroupV2Resource s) Text
 
-computeSecgroupV2Resource :: TF.Resource P.OpenStack (ComputeSecgroupV2Resource s)
+computeSecgroupV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeSecgroupV2Resource s)
 computeSecgroupV2Resource =
     TF.newResource "openstack_compute_secgroup_v2" $
         ComputeSecgroupV2Resource {
@@ -1503,7 +1512,7 @@ instance P.HasComputedName (ComputeServergroupV2Resource s) Text
 instance P.HasComputedPolicies (ComputeServergroupV2Resource s) Text
 instance P.HasComputedRegion (ComputeServergroupV2Resource s) Text
 
-computeServergroupV2Resource :: TF.Resource P.OpenStack (ComputeServergroupV2Resource s)
+computeServergroupV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeServergroupV2Resource s)
 computeServergroupV2Resource =
     TF.newResource "openstack_compute_servergroup_v2" $
         ComputeServergroupV2Resource {
@@ -1562,7 +1571,7 @@ instance P.HasComputedInstanceId (ComputeVolumeAttachV2Resource s) Text
 instance P.HasComputedRegion (ComputeVolumeAttachV2Resource s) Text
 instance P.HasComputedVolumeId (ComputeVolumeAttachV2Resource s) Text
 
-computeVolumeAttachV2Resource :: TF.Resource P.OpenStack (ComputeVolumeAttachV2Resource s)
+computeVolumeAttachV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeVolumeAttachV2Resource s)
 computeVolumeAttachV2Resource =
     TF.newResource "openstack_compute_volume_attach_v2" $
         ComputeVolumeAttachV2Resource {
@@ -1630,7 +1639,7 @@ instance P.HasComputedType' (DbConfigurationV1Resource s) Text
 instance P.HasComputedValue (DbConfigurationV1Resource s) Text
 instance P.HasComputedVersion (DbConfigurationV1Resource s) Text
 
-dbConfigurationV1Resource :: TF.Resource P.OpenStack (DbConfigurationV1Resource s)
+dbConfigurationV1Resource :: TF.Schema TF.Resource P.OpenStack (DbConfigurationV1Resource s)
 dbConfigurationV1Resource =
     TF.newResource "openstack_db_configuration_v1" $
         DbConfigurationV1Resource {
@@ -1672,7 +1681,7 @@ instance P.HasComputedInstanceId (DbDatabaseV1Resource s) Text
 instance P.HasComputedName (DbDatabaseV1Resource s) Text
 instance P.HasComputedRegion (DbDatabaseV1Resource s) Text
 
-dbDatabaseV1Resource :: TF.Resource P.OpenStack (DbDatabaseV1Resource s)
+dbDatabaseV1Resource :: TF.Schema TF.Resource P.OpenStack (DbDatabaseV1Resource s)
 dbDatabaseV1Resource =
     TF.newResource "openstack_db_database_v1" $
         DbDatabaseV1Resource {
@@ -1780,7 +1789,7 @@ instance P.HasComputedType' (DbInstanceV1Resource s) Text
 instance P.HasComputedUuid (DbInstanceV1Resource s) Text
 instance P.HasComputedVersion (DbInstanceV1Resource s) Text
 
-dbInstanceV1Resource :: TF.Resource P.OpenStack (DbInstanceV1Resource s)
+dbInstanceV1Resource :: TF.Schema TF.Resource P.OpenStack (DbInstanceV1Resource s)
 dbInstanceV1Resource =
     TF.newResource "openstack_db_instance_v1" $
         DbInstanceV1Resource {
@@ -1844,7 +1853,7 @@ instance P.HasComputedName (DbUserV1Resource s) Text
 instance P.HasComputedPassword (DbUserV1Resource s) Text
 instance P.HasComputedRegion (DbUserV1Resource s) Text
 
-dbUserV1Resource :: TF.Resource P.OpenStack (DbUserV1Resource s)
+dbUserV1Resource :: TF.Schema TF.Resource P.OpenStack (DbUserV1Resource s)
 dbUserV1Resource =
     TF.newResource "openstack_db_user_v1" $
         DbUserV1Resource {
@@ -1938,7 +1947,7 @@ instance P.HasComputedType' (DnsRecordsetV2Resource s) Text
 instance P.HasComputedValueSpecs (DnsRecordsetV2Resource s) Text
 instance P.HasComputedZoneId (DnsRecordsetV2Resource s) Text
 
-dnsRecordsetV2Resource :: TF.Resource P.OpenStack (DnsRecordsetV2Resource s)
+dnsRecordsetV2Resource :: TF.Schema TF.Resource P.OpenStack (DnsRecordsetV2Resource s)
 dnsRecordsetV2Resource =
     TF.newResource "openstack_dns_recordset_v2" $
         DnsRecordsetV2Resource {
@@ -2045,7 +2054,7 @@ instance P.HasComputedTtl (DnsZoneV2Resource s) Text
 instance P.HasComputedType' (DnsZoneV2Resource s) Text
 instance P.HasComputedValueSpecs (DnsZoneV2Resource s) Text
 
-dnsZoneV2Resource :: TF.Resource P.OpenStack (DnsZoneV2Resource s)
+dnsZoneV2Resource :: TF.Schema TF.Resource P.OpenStack (DnsZoneV2Resource s)
 dnsZoneV2Resource =
     TF.newResource "openstack_dns_zone_v2" $
         DnsZoneV2Resource {
@@ -2152,7 +2161,7 @@ instance P.HasComputedPolicyId (FwFirewallV1Resource s) Text
 instance P.HasComputedRegion (FwFirewallV1Resource s) Text
 instance P.HasComputedTenantId (FwFirewallV1Resource s) Text
 
-fwFirewallV1Resource :: TF.Resource P.OpenStack (FwFirewallV1Resource s)
+fwFirewallV1Resource :: TF.Schema TF.Resource P.OpenStack (FwFirewallV1Resource s)
 fwFirewallV1Resource =
     TF.newResource "openstack_fw_firewall_v1" $
         FwFirewallV1Resource {
@@ -2240,7 +2249,7 @@ instance P.HasComputedName (FwPolicyV1Resource s) Text
 instance P.HasComputedRegion (FwPolicyV1Resource s) Text
 instance P.HasComputedShared (FwPolicyV1Resource s) Text
 
-fwPolicyV1Resource :: TF.Resource P.OpenStack (FwPolicyV1Resource s)
+fwPolicyV1Resource :: TF.Schema TF.Resource P.OpenStack (FwPolicyV1Resource s)
 fwPolicyV1Resource =
     TF.newResource "openstack_fw_policy_v1" $
         FwPolicyV1Resource {
@@ -2381,7 +2390,7 @@ instance P.HasComputedSourceIpAddress (FwRuleV1Resource s) Text
 instance P.HasComputedSourcePort (FwRuleV1Resource s) Text
 instance P.HasComputedTenantId (FwRuleV1Resource s) Text
 
-fwRuleV1Resource :: TF.Resource P.OpenStack (FwRuleV1Resource s)
+fwRuleV1Resource :: TF.Schema TF.Resource P.OpenStack (FwRuleV1Resource s)
 fwRuleV1Resource =
     TF.newResource "openstack_fw_rule_v1" $
         FwRuleV1Resource {
@@ -2471,7 +2480,7 @@ instance P.HasRegion (IdentityProjectV3Resource s) s Text where
 instance P.HasComputedDomainId (IdentityProjectV3Resource s) Text
 instance P.HasComputedParentId (IdentityProjectV3Resource s) Text
 
-identityProjectV3Resource :: TF.Resource P.OpenStack (IdentityProjectV3Resource s)
+identityProjectV3Resource :: TF.Schema TF.Resource P.OpenStack (IdentityProjectV3Resource s)
 identityProjectV3Resource =
     TF.newResource "openstack_identity_project_v3" $
         IdentityProjectV3Resource {
@@ -2602,7 +2611,7 @@ instance P.HasRegion (IdentityUserV3Resource s) s Text where
 
 instance P.HasComputedDomainId (IdentityUserV3Resource s) Text
 
-identityUserV3Resource :: TF.Resource P.OpenStack (IdentityUserV3Resource s)
+identityUserV3Resource :: TF.Schema TF.Resource P.OpenStack (IdentityUserV3Resource s)
 identityUserV3Resource =
     TF.newResource "openstack_identity_user_v3" $
         IdentityUserV3Resource {
@@ -2757,7 +2766,7 @@ instance P.HasComputedTags (ImagesImageV2Resource s) Text
 instance P.HasComputedUpdateAt (ImagesImageV2Resource s) Text
 instance P.HasComputedVisibility (ImagesImageV2Resource s) Text
 
-imagesImageV2Resource :: TF.Resource P.OpenStack (ImagesImageV2Resource s)
+imagesImageV2Resource :: TF.Schema TF.Resource P.OpenStack (ImagesImageV2Resource s)
 imagesImageV2Resource =
     TF.newResource "openstack_images_image_v2" $
         ImagesImageV2Resource {
@@ -2895,7 +2904,7 @@ instance P.HasComputedProtocolPort (LbListenerV2Resource s) Text
 instance P.HasComputedSniContainerRefs (LbListenerV2Resource s) Text
 instance P.HasComputedTenantId (LbListenerV2Resource s) Text
 
-lbListenerV2Resource :: TF.Resource P.OpenStack (LbListenerV2Resource s)
+lbListenerV2Resource :: TF.Schema TF.Resource P.OpenStack (LbListenerV2Resource s)
 lbListenerV2Resource =
     TF.newResource "openstack_lb_listener_v2" $
         LbListenerV2Resource {
@@ -3016,7 +3025,7 @@ instance P.HasComputedVipAddress (LbLoadbalancerV2Resource s) Text
 instance P.HasComputedVipPortId (LbLoadbalancerV2Resource s) Text
 instance P.HasComputedVipSubnetId (LbLoadbalancerV2Resource s) Text
 
-lbLoadbalancerV2Resource :: TF.Resource P.OpenStack (LbLoadbalancerV2Resource s)
+lbLoadbalancerV2Resource :: TF.Schema TF.Resource P.OpenStack (LbLoadbalancerV2Resource s)
 lbLoadbalancerV2Resource =
     TF.newResource "openstack_lb_loadbalancer_v2" $
         LbLoadbalancerV2Resource {
@@ -3098,7 +3107,7 @@ instance P.HasComputedPort (LbMemberV1Resource s) Text
 instance P.HasComputedRegion (LbMemberV1Resource s) Text
 instance P.HasComputedWeight (LbMemberV1Resource s) Text
 
-lbMemberV1Resource :: TF.Resource P.OpenStack (LbMemberV1Resource s)
+lbMemberV1Resource :: TF.Schema TF.Resource P.OpenStack (LbMemberV1Resource s)
 lbMemberV1Resource =
     TF.newResource "openstack_lb_member_v1" $
         LbMemberV1Resource {
@@ -3203,7 +3212,7 @@ instance P.HasComputedSubnetId (LbMemberV2Resource s) Text
 instance P.HasComputedTenantId (LbMemberV2Resource s) Text
 instance P.HasComputedWeight (LbMemberV2Resource s) Text
 
-lbMemberV2Resource :: TF.Resource P.OpenStack (LbMemberV2Resource s)
+lbMemberV2Resource :: TF.Schema TF.Resource P.OpenStack (LbMemberV2Resource s)
 lbMemberV2Resource =
     TF.newResource "openstack_lb_member_v2" $
         LbMemberV2Resource {
@@ -3320,7 +3329,7 @@ instance P.HasComputedTimeout (LbMonitorV1Resource s) Text
 instance P.HasComputedType' (LbMonitorV1Resource s) Text
 instance P.HasComputedUrlPath (LbMonitorV1Resource s) Text
 
-lbMonitorV1Resource :: TF.Resource P.OpenStack (LbMonitorV1Resource s)
+lbMonitorV1Resource :: TF.Schema TF.Resource P.OpenStack (LbMonitorV1Resource s)
 lbMonitorV1Resource =
     TF.newResource "openstack_lb_monitor_v1" $
         LbMonitorV1Resource {
@@ -3454,7 +3463,7 @@ instance P.HasComputedTimeout (LbMonitorV2Resource s) Text
 instance P.HasComputedType' (LbMonitorV2Resource s) Text
 instance P.HasComputedUrlPath (LbMonitorV2Resource s) Text
 
-lbMonitorV2Resource :: TF.Resource P.OpenStack (LbMonitorV2Resource s)
+lbMonitorV2Resource :: TF.Schema TF.Resource P.OpenStack (LbMonitorV2Resource s)
 lbMonitorV2Resource =
     TF.newResource "openstack_lb_monitor_v2" $
         LbMonitorV2Resource {
@@ -3565,7 +3574,7 @@ instance P.HasComputedRegion (LbPoolV1Resource s) Text
 instance P.HasComputedSubnetId (LbPoolV1Resource s) Text
 instance P.HasComputedTenantId (LbPoolV1Resource s) Text
 
-lbPoolV1Resource :: TF.Resource P.OpenStack (LbPoolV1Resource s)
+lbPoolV1Resource :: TF.Schema TF.Resource P.OpenStack (LbPoolV1Resource s)
 lbPoolV1Resource =
     TF.newResource "openstack_lb_pool_v1" $
         LbPoolV1Resource {
@@ -3680,7 +3689,7 @@ instance P.HasComputedPersistence (LbPoolV2Resource s) Text
 instance P.HasComputedProtocol (LbPoolV2Resource s) Text
 instance P.HasComputedTenantId (LbPoolV2Resource s) Text
 
-lbPoolV2Resource :: TF.Resource P.OpenStack (LbPoolV2Resource s)
+lbPoolV2Resource :: TF.Schema TF.Resource P.OpenStack (LbPoolV2Resource s)
 lbPoolV2Resource =
     TF.newResource "openstack_lb_pool_v2" $
         LbPoolV2Resource {
@@ -3826,7 +3835,7 @@ instance P.HasComputedRegion (LbVipV1Resource s) Text
 instance P.HasComputedSubnetId (LbVipV1Resource s) Text
 instance P.HasComputedTenantId (LbVipV1Resource s) Text
 
-lbVipV1Resource :: TF.Resource P.OpenStack (LbVipV1Resource s)
+lbVipV1Resource :: TF.Schema TF.Resource P.OpenStack (LbVipV1Resource s)
 lbVipV1Resource =
     TF.newResource "openstack_lb_vip_v1" $
         LbVipV1Resource {
@@ -3914,7 +3923,7 @@ instance P.HasComputedPortId (NetworkingFloatingipV2Resource s) Text
 instance P.HasComputedRegion (NetworkingFloatingipV2Resource s) Text
 instance P.HasComputedTenantId (NetworkingFloatingipV2Resource s) Text
 
-networkingFloatingipV2Resource :: TF.Resource P.OpenStack (NetworkingFloatingipV2Resource s)
+networkingFloatingipV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingFloatingipV2Resource s)
 networkingFloatingipV2Resource =
     TF.newResource "openstack_networking_floatingip_v2" $
         NetworkingFloatingipV2Resource {
@@ -4008,7 +4017,7 @@ instance P.HasComputedRegion (NetworkingNetworkV2Resource s) Text
 instance P.HasComputedShared (NetworkingNetworkV2Resource s) Text
 instance P.HasComputedTenantId (NetworkingNetworkV2Resource s) Text
 
-networkingNetworkV2Resource :: TF.Resource P.OpenStack (NetworkingNetworkV2Resource s)
+networkingNetworkV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingNetworkV2Resource s)
 networkingNetworkV2Resource =
     TF.newResource "openstack_networking_network_v2" $
         NetworkingNetworkV2Resource {
@@ -4148,7 +4157,7 @@ instance P.HasComputedRegion (NetworkingPortV2Resource s) Text
 instance P.HasComputedSecurityGroupIds (NetworkingPortV2Resource s) Text
 instance P.HasComputedTenantId (NetworkingPortV2Resource s) Text
 
-networkingPortV2Resource :: TF.Resource P.OpenStack (NetworkingPortV2Resource s)
+networkingPortV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingPortV2Resource s)
 networkingPortV2Resource =
     TF.newResource "openstack_networking_port_v2" $
         NetworkingPortV2Resource {
@@ -4215,7 +4224,7 @@ instance P.HasComputedRegion (NetworkingRouterInterfaceV2Resource s) Text
 instance P.HasComputedRouterId (NetworkingRouterInterfaceV2Resource s) Text
 instance P.HasComputedSubnetId (NetworkingRouterInterfaceV2Resource s) Text
 
-networkingRouterInterfaceV2Resource :: TF.Resource P.OpenStack (NetworkingRouterInterfaceV2Resource s)
+networkingRouterInterfaceV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingRouterInterfaceV2Resource s)
 networkingRouterInterfaceV2Resource =
     TF.newResource "openstack_networking_router_interface_v2" $
         NetworkingRouterInterfaceV2Resource {
@@ -4273,7 +4282,7 @@ instance P.HasComputedNextHop (NetworkingRouterRouteV2Resource s) Text
 instance P.HasComputedRegion (NetworkingRouterRouteV2Resource s) Text
 instance P.HasComputedRouterId (NetworkingRouterRouteV2Resource s) Text
 
-networkingRouterRouteV2Resource :: TF.Resource P.OpenStack (NetworkingRouterRouteV2Resource s)
+networkingRouterRouteV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingRouterRouteV2Resource s)
 networkingRouterRouteV2Resource =
     TF.newResource "openstack_networking_router_route_v2" $
         NetworkingRouterRouteV2Resource {
@@ -4386,7 +4395,7 @@ instance P.HasComputedRegion (NetworkingRouterV2Resource s) Text
 instance P.HasComputedTenantId (NetworkingRouterV2Resource s) Text
 instance P.HasComputedValueSpecs (NetworkingRouterV2Resource s) Text
 
-networkingRouterV2Resource :: TF.Resource P.OpenStack (NetworkingRouterV2Resource s)
+networkingRouterV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingRouterV2Resource s)
 networkingRouterV2Resource =
     TF.newResource "openstack_networking_router_v2" $
         NetworkingRouterV2Resource {
@@ -4506,7 +4515,7 @@ instance P.HasComputedRemoteIpPrefix (NetworkingSecgroupRuleV2Resource s) Text
 instance P.HasComputedSecurityGroupId (NetworkingSecgroupRuleV2Resource s) Text
 instance P.HasComputedTenantId (NetworkingSecgroupRuleV2Resource s) Text
 
-networkingSecgroupRuleV2Resource :: TF.Resource P.OpenStack (NetworkingSecgroupRuleV2Resource s)
+networkingSecgroupRuleV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingSecgroupRuleV2Resource s)
 networkingSecgroupRuleV2Resource =
     TF.newResource "openstack_networking_secgroup_rule_v2" $
         NetworkingSecgroupRuleV2Resource {
@@ -4580,7 +4589,7 @@ instance P.HasComputedName (NetworkingSecgroupV2Resource s) Text
 instance P.HasComputedRegion (NetworkingSecgroupV2Resource s) Text
 instance P.HasComputedTenantId (NetworkingSecgroupV2Resource s) Text
 
-networkingSecgroupV2Resource :: TF.Resource P.OpenStack (NetworkingSecgroupV2Resource s)
+networkingSecgroupV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingSecgroupV2Resource s)
 networkingSecgroupV2Resource =
     TF.newResource "openstack_networking_secgroup_v2" $
         NetworkingSecgroupV2Resource {
@@ -4734,7 +4743,7 @@ instance P.HasComputedNetworkId (NetworkingSubnetV2Resource s) Text
 instance P.HasComputedRegion (NetworkingSubnetV2Resource s) Text
 instance P.HasComputedTenantId (NetworkingSubnetV2Resource s) Text
 
-networkingSubnetV2Resource :: TF.Resource P.OpenStack (NetworkingSubnetV2Resource s)
+networkingSubnetV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingSubnetV2Resource s)
 networkingSubnetV2Resource =
     TF.newResource "openstack_networking_subnet_v2" $
         NetworkingSubnetV2Resource {
@@ -4839,7 +4848,7 @@ instance P.HasComputedMetadata (ObjectstorageContainerV1Resource s) Text
 instance P.HasComputedName (ObjectstorageContainerV1Resource s) Text
 instance P.HasComputedRegion (ObjectstorageContainerV1Resource s) Text
 
-objectstorageContainerV1Resource :: TF.Resource P.OpenStack (ObjectstorageContainerV1Resource s)
+objectstorageContainerV1Resource :: TF.Schema TF.Resource P.OpenStack (ObjectstorageContainerV1Resource s)
 objectstorageContainerV1Resource =
     TF.newResource "openstack_objectstorage_container_v1" $
         ObjectstorageContainerV1Resource {
@@ -4996,7 +5005,7 @@ instance P.HasComputedSource (ObjectstorageObjectV1Resource s) Text
 instance P.HasComputedStaticLargeObject (ObjectstorageObjectV1Resource s) Text
 instance P.HasComputedTransId (ObjectstorageObjectV1Resource s) Text
 
-objectstorageObjectV1Resource :: TF.Resource P.OpenStack (ObjectstorageObjectV1Resource s)
+objectstorageObjectV1Resource :: TF.Schema TF.Resource P.OpenStack (ObjectstorageObjectV1Resource s)
 objectstorageObjectV1Resource =
     TF.newResource "openstack_objectstorage_object_v1" $
         ObjectstorageObjectV1Resource {

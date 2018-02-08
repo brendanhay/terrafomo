@@ -298,6 +298,9 @@ module Terrafomo.Google.Resource
     , StorageDefaultObjectAclResource (..)
     , storageDefaultObjectAclResource
 
+    , StorageNotificationResource (..)
+    , storageNotificationResource
+
     , StorageObjectAclResource (..)
     , storageObjectAclResource
 
@@ -347,6 +350,7 @@ module Terrafomo.Google.Resource
     , P.HasCreateTimeout (..)
     , P.HasCredentials (..)
     , P.HasCryptoKeyId (..)
+    , P.HasCustomAttributes (..)
     , P.HasDatabaseVersion (..)
     , P.HasDatasetId (..)
     , P.HasDdl (..)
@@ -371,8 +375,10 @@ module Terrafomo.Google.Resource
     , P.HasEnableLegacyAbac (..)
     , P.HasEntryPoint (..)
     , P.HasEventNotificationConfig (..)
+    , P.HasEventTypes (..)
     , P.HasExpirationTime (..)
     , P.HasFailoverRatio (..)
+    , P.HasFamily' (..)
     , P.HasFolder (..)
     , P.HasFolderId (..)
     , P.HasForceDelete (..)
@@ -452,6 +458,7 @@ module Terrafomo.Google.Resource
     , P.HasNodeVersion (..)
     , P.HasNumNodes (..)
     , P.HasObject (..)
+    , P.HasObjectNamePrefix (..)
     , P.HasOnDelete (..)
     , P.HasOpenapiConfig (..)
     , P.HasOrgId (..)
@@ -459,6 +466,7 @@ module Terrafomo.Google.Resource
     , P.HasParent (..)
     , P.HasPassword (..)
     , P.HasPathMatcher (..)
+    , P.HasPayloadFormat (..)
     , P.HasPeerAsn (..)
     , P.HasPeerIp (..)
     , P.HasPeerIpAddress (..)
@@ -669,14 +677,14 @@ import Lens.Micro (lens)
 import Terrafomo.Google.Types as P
 import qualified Terrafomo.Google.Lens as P
 import qualified Terrafomo.Google.Provider as P
-import qualified Data.Word as P
-import qualified GHC.Base as P
+import qualified Data.Word       as P
+import qualified GHC.Base        as P
 import qualified Numeric.Natural as P
-import qualified Terrafomo.IP as P
+import qualified Terrafomo.IP    as P
 
 import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Source as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @google_bigquery_dataset@ Google resource.
 
@@ -752,7 +760,7 @@ instance P.HasComputedEtag (BigqueryDatasetResource s) Text
 instance P.HasComputedLastModifiedTime (BigqueryDatasetResource s) Text
 instance P.HasComputedSelfLink (BigqueryDatasetResource s) Text
 
-bigqueryDatasetResource :: TF.Resource P.Google (BigqueryDatasetResource s)
+bigqueryDatasetResource :: TF.Schema TF.Resource P.Google (BigqueryDatasetResource s)
 bigqueryDatasetResource =
     TF.newResource "google_bigquery_dataset" $
         BigqueryDatasetResource {
@@ -868,7 +876,7 @@ instance P.HasComputedNumRows (BigqueryTableResource s) Text
 instance P.HasComputedSelfLink (BigqueryTableResource s) Text
 instance P.HasComputedType' (BigqueryTableResource s) Text
 
-bigqueryTableResource :: TF.Resource P.Google (BigqueryTableResource s)
+bigqueryTableResource :: TF.Schema TF.Resource P.Google (BigqueryTableResource s)
 bigqueryTableResource =
     TF.newResource "google_bigquery_table" $
         BigqueryTableResource {
@@ -962,7 +970,7 @@ instance P.HasZone (BigtableInstanceResource s) s Text where
              (\s a -> s { _zone = a } :: BigtableInstanceResource s)
 
 
-bigtableInstanceResource :: TF.Resource P.Google (BigtableInstanceResource s)
+bigtableInstanceResource :: TF.Schema TF.Resource P.Google (BigtableInstanceResource s)
 bigtableInstanceResource =
     TF.newResource "google_bigtable_instance" $
         BigtableInstanceResource {
@@ -1022,7 +1030,7 @@ instance P.HasSplitKeys (BigtableTableResource s) s Text where
              (\s a -> s { _split_keys = a } :: BigtableTableResource s)
 
 
-bigtableTableResource :: TF.Resource P.Google (BigtableTableResource s)
+bigtableTableResource :: TF.Schema TF.Resource P.Google (BigtableTableResource s)
 bigtableTableResource =
     TF.newResource "google_bigtable_table" $
         BigtableTableResource {
@@ -1137,7 +1145,7 @@ instance P.HasComputedHttpsTriggerUrl (CloudfunctionsFunctionResource s) Text
 instance P.HasComputedProject (CloudfunctionsFunctionResource s) Text
 instance P.HasComputedRegion (CloudfunctionsFunctionResource s) Text
 
-cloudfunctionsFunctionResource :: TF.Resource P.Google (CloudfunctionsFunctionResource s)
+cloudfunctionsFunctionResource :: TF.Schema TF.Resource P.Google (CloudfunctionsFunctionResource s)
 cloudfunctionsFunctionResource =
     TF.newResource "google_cloudfunctions_function" $
         CloudfunctionsFunctionResource {
@@ -1221,7 +1229,7 @@ instance P.HasSubnetwork (ComputeAddressResource s) s Text where
 instance P.HasComputedAddress (ComputeAddressResource s) Text
 instance P.HasComputedSelfLink (ComputeAddressResource s) Text
 
-computeAddressResource :: TF.Resource P.Google (ComputeAddressResource s)
+computeAddressResource :: TF.Schema TF.Resource P.Google (ComputeAddressResource s)
 computeAddressResource =
     TF.newResource "google_compute_address" $
         ComputeAddressResource {
@@ -1301,7 +1309,7 @@ instance P.HasZone (ComputeAutoscalerResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeAutoscalerResource s) Text
 
-computeAutoscalerResource :: TF.Resource P.Google (ComputeAutoscalerResource s)
+computeAutoscalerResource :: TF.Schema TF.Resource P.Google (ComputeAutoscalerResource s)
 computeAutoscalerResource =
     TF.newResource "google_compute_autoscaler" $
         ComputeAutoscalerResource {
@@ -1370,7 +1378,7 @@ instance P.HasProject (ComputeBackendBucketResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeBackendBucketResource s) Text
 
-computeBackendBucketResource :: TF.Resource P.Google (ComputeBackendBucketResource s)
+computeBackendBucketResource :: TF.Schema TF.Resource P.Google (ComputeBackendBucketResource s)
 computeBackendBucketResource =
     TF.newResource "google_compute_backend_bucket" $
         ComputeBackendBucketResource {
@@ -1497,7 +1505,7 @@ instance P.HasTimeoutSec (ComputeBackendServiceResource s) s Text where
 instance P.HasComputedFingerprint (ComputeBackendServiceResource s) Text
 instance P.HasComputedSelfLink (ComputeBackendServiceResource s) Text
 
-computeBackendServiceResource :: TF.Resource P.Google (ComputeBackendServiceResource s)
+computeBackendServiceResource :: TF.Schema TF.Resource P.Google (ComputeBackendServiceResource s)
 computeBackendServiceResource =
     TF.newResource "google_compute_backend_service" $
         ComputeBackendServiceResource {
@@ -1608,7 +1616,7 @@ instance P.HasComputedLabelFingerprint (ComputeDiskResource s) Text
 instance P.HasComputedSelfLink (ComputeDiskResource s) Text
 instance P.HasComputedUsers (ComputeDiskResource s) Text
 
-computeDiskResource :: TF.Resource P.Google (ComputeDiskResource s)
+computeDiskResource :: TF.Schema TF.Resource P.Google (ComputeDiskResource s)
 computeDiskResource =
     TF.newResource "google_compute_disk" $
         ComputeDiskResource {
@@ -1750,7 +1758,7 @@ instance P.HasTargetTags (ComputeFirewallResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeFirewallResource s) Text
 
-computeFirewallResource :: TF.Resource P.Google (ComputeFirewallResource s)
+computeFirewallResource :: TF.Schema TF.Resource P.Google (ComputeFirewallResource s)
 computeFirewallResource =
     TF.newResource "google_compute_firewall" $
         ComputeFirewallResource {
@@ -1891,7 +1899,7 @@ instance P.HasTarget (ComputeForwardingRuleResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeForwardingRuleResource s) Text
 
-computeForwardingRuleResource :: TF.Resource P.Google (ComputeForwardingRuleResource s)
+computeForwardingRuleResource :: TF.Schema TF.Resource P.Google (ComputeForwardingRuleResource s)
 computeForwardingRuleResource =
     TF.newResource "google_compute_forwarding_rule" $
         ComputeForwardingRuleResource {
@@ -1951,7 +1959,7 @@ instance P.HasProject (ComputeGlobalAddressResource s) s Text where
 instance P.HasComputedAddress (ComputeGlobalAddressResource s) Text
 instance P.HasComputedSelfLink (ComputeGlobalAddressResource s) Text
 
-computeGlobalAddressResource :: TF.Resource P.Google (ComputeGlobalAddressResource s)
+computeGlobalAddressResource :: TF.Schema TF.Resource P.Google (ComputeGlobalAddressResource s)
 computeGlobalAddressResource =
     TF.newResource "google_compute_global_address" $
         ComputeGlobalAddressResource {
@@ -2051,7 +2059,7 @@ instance P.HasTarget (ComputeGlobalForwardingRuleResource s) s Text where
 instance P.HasComputedLabelFingerprint (ComputeGlobalForwardingRuleResource s) Text
 instance P.HasComputedSelfLink (ComputeGlobalForwardingRuleResource s) Text
 
-computeGlobalForwardingRuleResource :: TF.Resource P.Google (ComputeGlobalForwardingRuleResource s)
+computeGlobalForwardingRuleResource :: TF.Schema TF.Resource P.Google (ComputeGlobalForwardingRuleResource s)
 computeGlobalForwardingRuleResource =
     TF.newResource "google_compute_global_forwarding_rule" $
         ComputeGlobalForwardingRuleResource {
@@ -2171,7 +2179,7 @@ instance P.HasUnhealthyThreshold (ComputeHealthCheckResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeHealthCheckResource s) Text
 
-computeHealthCheckResource :: TF.Resource P.Google (ComputeHealthCheckResource s)
+computeHealthCheckResource :: TF.Schema TF.Resource P.Google (ComputeHealthCheckResource s)
 computeHealthCheckResource =
     TF.newResource "google_compute_health_check" $
         ComputeHealthCheckResource {
@@ -2291,7 +2299,7 @@ instance P.HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeHttpHealthCheckResource s) Text
 
-computeHttpHealthCheckResource :: TF.Resource P.Google (ComputeHttpHealthCheckResource s)
+computeHttpHealthCheckResource :: TF.Schema TF.Resource P.Google (ComputeHttpHealthCheckResource s)
 computeHttpHealthCheckResource =
     TF.newResource "google_compute_http_health_check" $
         ComputeHttpHealthCheckResource {
@@ -2410,7 +2418,7 @@ instance P.HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) s Text wher
 
 instance P.HasComputedSelfLink (ComputeHttpsHealthCheckResource s) Text
 
-computeHttpsHealthCheckResource :: TF.Resource P.Google (ComputeHttpsHealthCheckResource s)
+computeHttpsHealthCheckResource :: TF.Schema TF.Resource P.Google (ComputeHttpsHealthCheckResource s)
 computeHttpsHealthCheckResource =
     TF.newResource "google_compute_https_health_check" $
         ComputeHttpsHealthCheckResource {
@@ -2434,33 +2442,57 @@ existing tarball. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/images> .
 -}
 data ComputeImageResource s = ComputeImageResource {
-      _create_timeout :: !(TF.Attribute s Text)
-    {- ^ - Configurable timeout in minutes for creating images. Default is 4 minutes. Changing this forces a new resource to be created. -}
+      _description :: !(TF.Attribute s Text)
+    {- ^ (Optional) The description of the image to be created -}
+    , _family' :: !(TF.Attribute s Text)
+    {- ^ (Optional) The name of the image family to which this image belongs. -}
+    , _labels :: !(TF.Attribute s Text)
+    {- ^ (Optional) A set of key/value label pairs to assign to the image. -}
     , _name :: !(TF.Attribute s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
+    , _project :: !(TF.Attribute s Text)
+    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     , _raw_disk :: !(TF.Attribute s Text)
-    {- ^ - The raw disk that will be used as the source of the image. Changing this forces a new resource to be created. Structure is documented below. -}
+    {- ^ (Optional) The raw disk that will be used as the source of the image. Changing this forces a new resource to be created. Structure is documented below. -}
     , _source_disk :: !(TF.Attribute s Text)
-    {- ^ - The URL of a disk that will be used as the source of the image. Changing this forces a new resource to be created. -}
+    {- ^ (Optional) The URL of a disk that will be used as the source of the image. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeImageResource s) where
     toHCL ComputeImageResource{..} = TF.block $ catMaybes
-        [ TF.attribute "create_timeout" _create_timeout
+        [ TF.attribute "description" _description
+        , TF.attribute "family" _family'
+        , TF.attribute "labels" _labels
         , TF.attribute "name" _name
+        , TF.attribute "project" _project
         , TF.attribute "raw_disk" _raw_disk
         , TF.attribute "source_disk" _source_disk
         ]
 
-instance P.HasCreateTimeout (ComputeImageResource s) s Text where
-    createTimeout =
-        lens (_create_timeout :: ComputeImageResource s -> TF.Attribute s Text)
-             (\s a -> s { _create_timeout = a } :: ComputeImageResource s)
+instance P.HasDescription (ComputeImageResource s) s Text where
+    description =
+        lens (_description :: ComputeImageResource s -> TF.Attribute s Text)
+             (\s a -> s { _description = a } :: ComputeImageResource s)
+
+instance P.HasFamily' (ComputeImageResource s) s Text where
+    family' =
+        lens (_family' :: ComputeImageResource s -> TF.Attribute s Text)
+             (\s a -> s { _family' = a } :: ComputeImageResource s)
+
+instance P.HasLabels (ComputeImageResource s) s Text where
+    labels =
+        lens (_labels :: ComputeImageResource s -> TF.Attribute s Text)
+             (\s a -> s { _labels = a } :: ComputeImageResource s)
 
 instance P.HasName (ComputeImageResource s) s Text where
     name =
         lens (_name :: ComputeImageResource s -> TF.Attribute s Text)
              (\s a -> s { _name = a } :: ComputeImageResource s)
+
+instance P.HasProject (ComputeImageResource s) s Text where
+    project =
+        lens (_project :: ComputeImageResource s -> TF.Attribute s Text)
+             (\s a -> s { _project = a } :: ComputeImageResource s)
 
 instance P.HasRawDisk (ComputeImageResource s) s Text where
     rawDisk =
@@ -2475,12 +2507,15 @@ instance P.HasSourceDisk (ComputeImageResource s) s Text where
 instance P.HasComputedLabelFingerprint (ComputeImageResource s) Text
 instance P.HasComputedSelfLink (ComputeImageResource s) Text
 
-computeImageResource :: TF.Resource P.Google (ComputeImageResource s)
+computeImageResource :: TF.Schema TF.Resource P.Google (ComputeImageResource s)
 computeImageResource =
     TF.newResource "google_compute_image" $
         ComputeImageResource {
-              _create_timeout = TF.Nil
+              _description = TF.Nil
+            , _family' = TF.Nil
+            , _labels = TF.Nil
             , _name = TF.Nil
+            , _project = TF.Nil
             , _raw_disk = TF.Nil
             , _source_disk = TF.Nil
             }
@@ -2595,7 +2630,7 @@ instance P.HasComputedFingerprint (ComputeInstanceGroupManagerResource s) Text
 instance P.HasComputedInstanceGroup (ComputeInstanceGroupManagerResource s) Text
 instance P.HasComputedSelfLink (ComputeInstanceGroupManagerResource s) Text
 
-computeInstanceGroupManagerResource :: TF.Resource P.Google (ComputeInstanceGroupManagerResource s)
+computeInstanceGroupManagerResource :: TF.Schema TF.Resource P.Google (ComputeInstanceGroupManagerResource s)
 computeInstanceGroupManagerResource =
     TF.newResource "google_compute_instance_group_manager" $
         ComputeInstanceGroupManagerResource {
@@ -2685,7 +2720,7 @@ instance P.HasZone (ComputeInstanceGroupResource s) s Text where
 instance P.HasComputedSelfLink (ComputeInstanceGroupResource s) Text
 instance P.HasComputedSize (ComputeInstanceGroupResource s) Text
 
-computeInstanceGroupResource :: TF.Resource P.Google (ComputeInstanceGroupResource s)
+computeInstanceGroupResource :: TF.Schema TF.Resource P.Google (ComputeInstanceGroupResource s)
 computeInstanceGroupResource =
     TF.newResource "google_compute_instance_group" $
         ComputeInstanceGroupResource {
@@ -2883,7 +2918,7 @@ instance P.HasComputedNetworkInterface0Address (ComputeInstanceResource s) Text
 instance P.HasComputedSelfLink (ComputeInstanceResource s) Text
 instance P.HasComputedTagsFingerprint (ComputeInstanceResource s) Text
 
-computeInstanceResource :: TF.Resource P.Google (ComputeInstanceResource s)
+computeInstanceResource :: TF.Schema TF.Resource P.Google (ComputeInstanceResource s)
 computeInstanceResource =
     TF.newResource "google_compute_instance" $
         ComputeInstanceResource {
@@ -3070,7 +3105,7 @@ instance P.HasComputedMetadataFingerprint (ComputeInstanceTemplateResource s) Te
 instance P.HasComputedSelfLink (ComputeInstanceTemplateResource s) Text
 instance P.HasComputedTagsFingerprint (ComputeInstanceTemplateResource s) Text
 
-computeInstanceTemplateResource :: TF.Resource P.Google (ComputeInstanceTemplateResource s)
+computeInstanceTemplateResource :: TF.Schema TF.Resource P.Google (ComputeInstanceTemplateResource s)
 computeInstanceTemplateResource =
     TF.newResource "google_compute_instance_template" $
         ComputeInstanceTemplateResource {
@@ -3145,7 +3180,7 @@ instance P.HasPeerNetwork (ComputeNetworkPeeringResource s) s Text where
 instance P.HasComputedState (ComputeNetworkPeeringResource s) Text
 instance P.HasComputedStateDetails (ComputeNetworkPeeringResource s) Text
 
-computeNetworkPeeringResource :: TF.Resource P.Google (ComputeNetworkPeeringResource s)
+computeNetworkPeeringResource :: TF.Schema TF.Resource P.Google (ComputeNetworkPeeringResource s)
 computeNetworkPeeringResource =
     TF.newResource "google_compute_network_peering" $
         ComputeNetworkPeeringResource {
@@ -3220,7 +3255,7 @@ instance P.HasComputedGatewayIpv4 (ComputeNetworkResource s) Text
 instance P.HasComputedName (ComputeNetworkResource s) Text
 instance P.HasComputedSelfLink (ComputeNetworkResource s) Text
 
-computeNetworkResource :: TF.Resource P.Google (ComputeNetworkResource s)
+computeNetworkResource :: TF.Schema TF.Resource P.Google (ComputeNetworkResource s)
 computeNetworkResource =
     TF.newResource "google_compute_network" $
         ComputeNetworkResource {
@@ -3271,7 +3306,7 @@ instance P.HasValue (ComputeProjectMetadataItemResource s) s Text where
              (\s a -> s { _value = a } :: ComputeProjectMetadataItemResource s)
 
 
-computeProjectMetadataItemResource :: TF.Resource P.Google (ComputeProjectMetadataItemResource s)
+computeProjectMetadataItemResource :: TF.Schema TF.Resource P.Google (ComputeProjectMetadataItemResource s)
 computeProjectMetadataItemResource =
     TF.newResource "google_compute_project_metadata_item" $
         ComputeProjectMetadataItemResource {
@@ -3314,7 +3349,7 @@ instance P.HasProject (ComputeProjectMetadataResource s) s Text where
              (\s a -> s { _project = a } :: ComputeProjectMetadataResource s)
 
 
-computeProjectMetadataResource :: TF.Resource P.Google (ComputeProjectMetadataResource s)
+computeProjectMetadataResource :: TF.Schema TF.Resource P.Google (ComputeProjectMetadataResource s)
 computeProjectMetadataResource =
     TF.newResource "google_compute_project_metadata" $
         ComputeProjectMetadataResource {
@@ -3390,7 +3425,7 @@ instance P.HasTarget (ComputeRegionAutoscalerResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeRegionAutoscalerResource s) Text
 
-computeRegionAutoscalerResource :: TF.Resource P.Google (ComputeRegionAutoscalerResource s)
+computeRegionAutoscalerResource :: TF.Schema TF.Resource P.Google (ComputeRegionAutoscalerResource s)
 computeRegionAutoscalerResource =
     TF.newResource "google_compute_region_autoscaler" $
         ComputeRegionAutoscalerResource {
@@ -3499,7 +3534,7 @@ instance P.HasTimeoutSec (ComputeRegionBackendServiceResource s) s Text where
 instance P.HasComputedFingerprint (ComputeRegionBackendServiceResource s) Text
 instance P.HasComputedSelfLink (ComputeRegionBackendServiceResource s) Text
 
-computeRegionBackendServiceResource :: TF.Resource P.Google (ComputeRegionBackendServiceResource s)
+computeRegionBackendServiceResource :: TF.Schema TF.Resource P.Google (ComputeRegionBackendServiceResource s)
 computeRegionBackendServiceResource =
     TF.newResource "google_compute_region_backend_service" $
         ComputeRegionBackendServiceResource {
@@ -3617,7 +3652,7 @@ instance P.HasComputedFingerprint (ComputeRegionInstanceGroupManagerResource s) 
 instance P.HasComputedInstanceGroup (ComputeRegionInstanceGroupManagerResource s) Text
 instance P.HasComputedSelfLink (ComputeRegionInstanceGroupManagerResource s) Text
 
-computeRegionInstanceGroupManagerResource :: TF.Resource P.Google (ComputeRegionInstanceGroupManagerResource s)
+computeRegionInstanceGroupManagerResource :: TF.Schema TF.Resource P.Google (ComputeRegionInstanceGroupManagerResource s)
 computeRegionInstanceGroupManagerResource =
     TF.newResource "google_compute_region_instance_group_manager" $
         ComputeRegionInstanceGroupManagerResource {
@@ -3737,7 +3772,7 @@ instance P.HasTags (ComputeRouteResource s) s Text where
 instance P.HasComputedNextHopNetwork (ComputeRouteResource s) Text
 instance P.HasComputedSelfLink (ComputeRouteResource s) Text
 
-computeRouteResource :: TF.Resource P.Google (ComputeRouteResource s)
+computeRouteResource :: TF.Schema TF.Resource P.Google (ComputeRouteResource s)
 computeRouteResource =
     TF.newResource "google_compute_route" $
         ComputeRouteResource {
@@ -3816,7 +3851,7 @@ instance P.HasVpnTunnel (ComputeRouterInterfaceResource s) s Text where
              (\s a -> s { _vpn_tunnel = a } :: ComputeRouterInterfaceResource s)
 
 
-computeRouterInterfaceResource :: TF.Resource P.Google (ComputeRouterInterfaceResource s)
+computeRouterInterfaceResource :: TF.Schema TF.Resource P.Google (ComputeRouterInterfaceResource s)
 computeRouterInterfaceResource =
     TF.newResource "google_compute_router_interface" $
         ComputeRouterInterfaceResource {
@@ -3891,7 +3926,7 @@ instance P.HasRegion (ComputeRouterResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeRouterResource s) Text
 
-computeRouterResource :: TF.Resource P.Google (ComputeRouterResource s)
+computeRouterResource :: TF.Schema TF.Resource P.Google (ComputeRouterResource s)
 computeRouterResource =
     TF.newResource "google_compute_router" $
         ComputeRouterResource {
@@ -3927,7 +3962,7 @@ instance P.HasProject (ComputeSharedVpcHostProjectResource s) s Text where
              (\s a -> s { _project = a } :: ComputeSharedVpcHostProjectResource s)
 
 
-computeSharedVpcHostProjectResource :: TF.Resource P.Google (ComputeSharedVpcHostProjectResource s)
+computeSharedVpcHostProjectResource :: TF.Schema TF.Resource P.Google (ComputeSharedVpcHostProjectResource s)
 computeSharedVpcHostProjectResource =
     TF.newResource "google_compute_shared_vpc_host_project" $
         ComputeSharedVpcHostProjectResource {
@@ -3967,7 +4002,7 @@ instance P.HasServiceProject (ComputeSharedVpcServiceProjectResource s) s Text w
              (\s a -> s { _service_project = a } :: ComputeSharedVpcServiceProjectResource s)
 
 
-computeSharedVpcServiceProjectResource :: TF.Resource P.Google (ComputeSharedVpcServiceProjectResource s)
+computeSharedVpcServiceProjectResource :: TF.Schema TF.Resource P.Google (ComputeSharedVpcServiceProjectResource s)
 computeSharedVpcServiceProjectResource =
     TF.newResource "google_compute_shared_vpc_service_project" $
         ComputeSharedVpcServiceProjectResource {
@@ -4050,7 +4085,7 @@ instance P.HasComputedSnapshotEncryptionKeySha256 (ComputeSnapshotResource s) Te
 instance P.HasComputedSourceDiskEncryptionKeySha256 (ComputeSnapshotResource s) Text
 instance P.HasComputedSourceDiskLink (ComputeSnapshotResource s) Text
 
-computeSnapshotResource :: TF.Resource P.Google (ComputeSnapshotResource s)
+computeSnapshotResource :: TF.Schema TF.Resource P.Google (ComputeSnapshotResource s)
 computeSnapshotResource =
     TF.newResource "google_compute_snapshot" $
         ComputeSnapshotResource {
@@ -4129,7 +4164,7 @@ instance P.HasProject (ComputeSslCertificateResource s) s Text where
 instance P.HasComputedCertificateId (ComputeSslCertificateResource s) Text
 instance P.HasComputedSelfLink (ComputeSslCertificateResource s) Text
 
-computeSslCertificateResource :: TF.Resource P.Google (ComputeSslCertificateResource s)
+computeSslCertificateResource :: TF.Schema TF.Resource P.Google (ComputeSslCertificateResource s)
 computeSslCertificateResource =
     TF.newResource "google_compute_ssl_certificate" $
         ComputeSslCertificateResource {
@@ -4221,7 +4256,7 @@ instance P.HasSecondaryIpRange (ComputeSubnetworkResource s) s Text where
 instance P.HasComputedGatewayAddress (ComputeSubnetworkResource s) Text
 instance P.HasComputedSelfLink (ComputeSubnetworkResource s) Text
 
-computeSubnetworkResource :: TF.Resource P.Google (ComputeSubnetworkResource s)
+computeSubnetworkResource :: TF.Schema TF.Resource P.Google (ComputeSubnetworkResource s)
 computeSubnetworkResource =
     TF.newResource "google_compute_subnetwork" $
         ComputeSubnetworkResource {
@@ -4284,7 +4319,7 @@ instance P.HasUrlMap (ComputeTargetHttpProxyResource s) s Text where
 instance P.HasComputedProxyId (ComputeTargetHttpProxyResource s) Text
 instance P.HasComputedSelfLink (ComputeTargetHttpProxyResource s) Text
 
-computeTargetHttpProxyResource :: TF.Resource P.Google (ComputeTargetHttpProxyResource s)
+computeTargetHttpProxyResource :: TF.Schema TF.Resource P.Google (ComputeTargetHttpProxyResource s)
 computeTargetHttpProxyResource =
     TF.newResource "google_compute_target_http_proxy" $
         ComputeTargetHttpProxyResource {
@@ -4352,7 +4387,7 @@ instance P.HasUrlMap (ComputeTargetHttpsProxyResource s) s Text where
 instance P.HasComputedProxyId (ComputeTargetHttpsProxyResource s) Text
 instance P.HasComputedSelfLink (ComputeTargetHttpsProxyResource s) Text
 
-computeTargetHttpsProxyResource :: TF.Resource P.Google (ComputeTargetHttpsProxyResource s)
+computeTargetHttpsProxyResource :: TF.Schema TF.Resource P.Google (ComputeTargetHttpsProxyResource s)
 computeTargetHttpsProxyResource =
     TF.newResource "google_compute_target_https_proxy" $
         ComputeTargetHttpsProxyResource {
@@ -4452,7 +4487,7 @@ instance P.HasSessionAffinity (ComputeTargetPoolResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeTargetPoolResource s) Text
 
-computeTargetPoolResource :: TF.Resource P.Google (ComputeTargetPoolResource s)
+computeTargetPoolResource :: TF.Schema TF.Resource P.Google (ComputeTargetPoolResource s)
 computeTargetPoolResource =
     TF.newResource "google_compute_target_pool" $
         ComputeTargetPoolResource {
@@ -4531,7 +4566,7 @@ instance P.HasSslCertificates (ComputeTargetSslProxyResource s) s Text where
 instance P.HasComputedProxyId (ComputeTargetSslProxyResource s) Text
 instance P.HasComputedSelfLink (ComputeTargetSslProxyResource s) Text
 
-computeTargetSslProxyResource :: TF.Resource P.Google (ComputeTargetSslProxyResource s)
+computeTargetSslProxyResource :: TF.Schema TF.Resource P.Google (ComputeTargetSslProxyResource s)
 computeTargetSslProxyResource =
     TF.newResource "google_compute_target_ssl_proxy" $
         ComputeTargetSslProxyResource {
@@ -4599,7 +4634,7 @@ instance P.HasProxyHeader (ComputeTargetTcpProxyResource s) s Text where
 instance P.HasComputedProxyId (ComputeTargetTcpProxyResource s) Text
 instance P.HasComputedSelfLink (ComputeTargetTcpProxyResource s) Text
 
-computeTargetTcpProxyResource :: TF.Resource P.Google (ComputeTargetTcpProxyResource s)
+computeTargetTcpProxyResource :: TF.Schema TF.Resource P.Google (ComputeTargetTcpProxyResource s)
 computeTargetTcpProxyResource =
     TF.newResource "google_compute_target_tcp_proxy" $
         ComputeTargetTcpProxyResource {
@@ -4683,7 +4718,7 @@ instance P.HasComputedFingerprint (ComputeUrlMapResource s) Text
 instance P.HasComputedMapId (ComputeUrlMapResource s) Text
 instance P.HasComputedSelfLink (ComputeUrlMapResource s) Text
 
-computeUrlMapResource :: TF.Resource P.Google (ComputeUrlMapResource s)
+computeUrlMapResource :: TF.Schema TF.Resource P.Google (ComputeUrlMapResource s)
 computeUrlMapResource =
     TF.newResource "google_compute_url_map" $
         ComputeUrlMapResource {
@@ -4750,7 +4785,7 @@ instance P.HasRegion (ComputeVpnGatewayResource s) s Text where
 
 instance P.HasComputedSelfLink (ComputeVpnGatewayResource s) Text
 
-computeVpnGatewayResource :: TF.Resource P.Google (ComputeVpnGatewayResource s)
+computeVpnGatewayResource :: TF.Schema TF.Resource P.Google (ComputeVpnGatewayResource s)
 computeVpnGatewayResource =
     TF.newResource "google_compute_vpn_gateway" $
         ComputeVpnGatewayResource {
@@ -4866,7 +4901,7 @@ instance P.HasTargetVpnGateway (ComputeVpnTunnelResource s) s Text where
 instance P.HasComputedDetailedStatus (ComputeVpnTunnelResource s) Text
 instance P.HasComputedSelfLink (ComputeVpnTunnelResource s) Text
 
-computeVpnTunnelResource :: TF.Resource P.Google (ComputeVpnTunnelResource s)
+computeVpnTunnelResource :: TF.Schema TF.Resource P.Google (ComputeVpnTunnelResource s)
 computeVpnTunnelResource =
     TF.newResource "google_compute_vpn_tunnel" $
         ComputeVpnTunnelResource {
@@ -5090,7 +5125,7 @@ instance P.HasComputedMasterAuth0ClientKey (ContainerClusterResource s) Text
 instance P.HasComputedMasterAuth0ClusterCaCertificate (ContainerClusterResource s) Text
 instance P.HasComputedMasterVersion (ContainerClusterResource s) Text
 
-containerClusterResource :: TF.Resource P.Google (ContainerClusterResource s)
+containerClusterResource :: TF.Schema TF.Resource P.Google (ContainerClusterResource s)
 containerClusterResource =
     TF.newResource "google_container_cluster" $
         ContainerClusterResource {
@@ -5206,7 +5241,7 @@ instance P.HasZone (ContainerNodePoolResource s) s Text where
              (\s a -> s { _zone = a } :: ContainerNodePoolResource s)
 
 
-containerNodePoolResource :: TF.Resource P.Google (ContainerNodePoolResource s)
+containerNodePoolResource :: TF.Schema TF.Resource P.Google (ContainerNodePoolResource s)
 containerNodePoolResource =
     TF.newResource "google_container_node_pool" $
         ContainerNodePoolResource {
@@ -5301,7 +5336,7 @@ instance P.HasZone (DataflowJobResource s) s Text where
 
 instance P.HasComputedState (DataflowJobResource s) Text
 
-dataflowJobResource :: TF.Resource P.Google (DataflowJobResource s)
+dataflowJobResource :: TF.Schema TF.Resource P.Google (DataflowJobResource s)
 dataflowJobResource =
     TF.newResource "google_dataflow_job" $
         DataflowJobResource {
@@ -5377,7 +5412,7 @@ instance P.HasComputedClusterConfigPreemptibleWorkerConfigInstanceNames (Datapro
 instance P.HasComputedClusterConfigSoftwareConfigProperties (DataprocClusterResource s) Text
 instance P.HasComputedClusterConfigWorkerConfigInstanceNames (DataprocClusterResource s) Text
 
-dataprocClusterResource :: TF.Resource P.Google (DataprocClusterResource s)
+dataprocClusterResource :: TF.Schema TF.Resource P.Google (DataprocClusterResource s)
 dataprocClusterResource =
     TF.newResource "google_dataproc_cluster" $
         DataprocClusterResource {
@@ -5466,7 +5501,7 @@ instance P.HasComputedStatus0State (DataprocJobResource s) Text
 instance P.HasComputedStatus0StateStartTime (DataprocJobResource s) Text
 instance P.HasComputedStatus0Substate (DataprocJobResource s) Text
 
-dataprocJobResource :: TF.Resource P.Google (DataprocJobResource s)
+dataprocJobResource :: TF.Schema TF.Resource P.Google (DataprocJobResource s)
 dataprocJobResource =
     TF.newResource "google_dataproc_job" $
         DataprocJobResource {
@@ -5526,7 +5561,7 @@ instance P.HasProject (DnsManagedZoneResource s) s Text where
 
 instance P.HasComputedNameServers (DnsManagedZoneResource s) Text
 
-dnsManagedZoneResource :: TF.Resource P.Google (DnsManagedZoneResource s)
+dnsManagedZoneResource :: TF.Schema TF.Resource P.Google (DnsManagedZoneResource s)
 dnsManagedZoneResource =
     TF.newResource "google_dns_managed_zone" $
         DnsManagedZoneResource {
@@ -5603,7 +5638,7 @@ instance P.HasType' (DnsRecordSetResource s) s Text where
              (\s a -> s { _type' = a } :: DnsRecordSetResource s)
 
 
-dnsRecordSetResource :: TF.Resource P.Google (DnsRecordSetResource s)
+dnsRecordSetResource :: TF.Schema TF.Resource P.Google (DnsRecordSetResource s)
 dnsRecordSetResource =
     TF.newResource "google_dns_record_set" $
         DnsRecordSetResource {
@@ -5674,7 +5709,7 @@ instance P.HasComputedConfigId (EndpointsServiceResource s) Text
 instance P.HasComputedDnsAddress (EndpointsServiceResource s) Text
 instance P.HasComputedEndpoints (EndpointsServiceResource s) Text
 
-endpointsServiceResource :: TF.Resource P.Google (EndpointsServiceResource s)
+endpointsServiceResource :: TF.Schema TF.Resource P.Google (EndpointsServiceResource s)
 endpointsServiceResource =
     TF.newResource "google_endpoints_service" $
         EndpointsServiceResource {
@@ -5715,7 +5750,7 @@ instance P.HasPolicyData (FolderIamPolicyResource s) s Text where
 
 instance P.HasComputedEtag (FolderIamPolicyResource s) Text
 
-folderIamPolicyResource :: TF.Resource P.Google (FolderIamPolicyResource s)
+folderIamPolicyResource :: TF.Schema TF.Resource P.Google (FolderIamPolicyResource s)
 folderIamPolicyResource =
     TF.newResource "google_folder_iam_policy" $
         FolderIamPolicyResource {
@@ -5782,7 +5817,7 @@ instance P.HasVersion (FolderOrganizationPolicyResource s) s Text where
 instance P.HasComputedEtag (FolderOrganizationPolicyResource s) Text
 instance P.HasComputedUpdateTime (FolderOrganizationPolicyResource s) Text
 
-folderOrganizationPolicyResource :: TF.Resource P.Google (FolderOrganizationPolicyResource s)
+folderOrganizationPolicyResource :: TF.Schema TF.Resource P.Google (FolderOrganizationPolicyResource s)
 folderOrganizationPolicyResource =
     TF.newResource "google_folder_organization_policy" $
         FolderOrganizationPolicyResource {
@@ -5839,7 +5874,7 @@ instance P.HasComputedCreateTime (FolderResource s) Text
 instance P.HasComputedLifecycleState (FolderResource s) Text
 instance P.HasComputedName (FolderResource s) Text
 
-folderResource :: TF.Resource P.Google (FolderResource s)
+folderResource :: TF.Schema TF.Resource P.Google (FolderResource s)
 folderResource =
     TF.newResource "google_folder" $
         FolderResource {
@@ -5885,7 +5920,7 @@ instance P.HasRole (KmsCryptoKeyIamBindingResource s) s Text where
 
 instance P.HasComputedEtag (KmsCryptoKeyIamBindingResource s) Text
 
-kmsCryptoKeyIamBindingResource :: TF.Resource P.Google (KmsCryptoKeyIamBindingResource s)
+kmsCryptoKeyIamBindingResource :: TF.Schema TF.Resource P.Google (KmsCryptoKeyIamBindingResource s)
 kmsCryptoKeyIamBindingResource =
     TF.newResource "google_kms_crypto_key_iam_binding" $
         KmsCryptoKeyIamBindingResource {
@@ -5937,7 +5972,7 @@ instance P.HasRole (KmsCryptoKeyIamMemberResource s) s Text where
 
 instance P.HasComputedEtag (KmsCryptoKeyIamMemberResource s) Text
 
-kmsCryptoKeyIamMemberResource :: TF.Resource P.Google (KmsCryptoKeyIamMemberResource s)
+kmsCryptoKeyIamMemberResource :: TF.Schema TF.Resource P.Google (KmsCryptoKeyIamMemberResource s)
 kmsCryptoKeyIamMemberResource =
     TF.newResource "google_kms_crypto_key_iam_member" $
         KmsCryptoKeyIamMemberResource {
@@ -5992,7 +6027,7 @@ instance P.HasRotationPeriod (KmsCryptoKeyResource s) s Text where
 
 instance P.HasComputedId (KmsCryptoKeyResource s) Text
 
-kmsCryptoKeyResource :: TF.Resource P.Google (KmsCryptoKeyResource s)
+kmsCryptoKeyResource :: TF.Schema TF.Resource P.Google (KmsCryptoKeyResource s)
 kmsCryptoKeyResource =
     TF.newResource "google_kms_crypto_key" $
         KmsCryptoKeyResource {
@@ -6045,7 +6080,7 @@ instance P.HasProject (KmsKeyRingResource s) s Text where
 
 instance P.HasComputedId (KmsKeyRingResource s) Text
 
-kmsKeyRingResource :: TF.Resource P.Google (KmsKeyRingResource s)
+kmsKeyRingResource :: TF.Schema TF.Resource P.Google (KmsKeyRingResource s)
 kmsKeyRingResource =
     TF.newResource "google_kms_key_ring" $
         KmsKeyRingResource {
@@ -6096,7 +6131,7 @@ instance P.HasName (LoggingBillingAccountSinkResource s) s Text where
 
 instance P.HasComputedWriterIdentity (LoggingBillingAccountSinkResource s) Text
 
-loggingBillingAccountSinkResource :: TF.Resource P.Google (LoggingBillingAccountSinkResource s)
+loggingBillingAccountSinkResource :: TF.Schema TF.Resource P.Google (LoggingBillingAccountSinkResource s)
 loggingBillingAccountSinkResource =
     TF.newResource "google_logging_billing_account_sink" $
         LoggingBillingAccountSinkResource {
@@ -6147,7 +6182,7 @@ instance P.HasName (LoggingFolderSinkResource s) s Text where
 
 instance P.HasComputedWriterIdentity (LoggingFolderSinkResource s) Text
 
-loggingFolderSinkResource :: TF.Resource P.Google (LoggingFolderSinkResource s)
+loggingFolderSinkResource :: TF.Schema TF.Resource P.Google (LoggingFolderSinkResource s)
 loggingFolderSinkResource =
     TF.newResource "google_logging_folder_sink" $
         LoggingFolderSinkResource {
@@ -6198,7 +6233,7 @@ instance P.HasOrgId (LoggingOrganizationSinkResource s) s Text where
 
 instance P.HasComputedWriterIdentity (LoggingOrganizationSinkResource s) Text
 
-loggingOrganizationSinkResource :: TF.Resource P.Google (LoggingOrganizationSinkResource s)
+loggingOrganizationSinkResource :: TF.Schema TF.Resource P.Google (LoggingOrganizationSinkResource s)
 loggingOrganizationSinkResource =
     TF.newResource "google_logging_organization_sink" $
         LoggingOrganizationSinkResource {
@@ -6242,7 +6277,7 @@ instance P.HasName (LoggingProjectSinkResource s) s Text where
 
 instance P.HasComputedWriterIdentity (LoggingProjectSinkResource s) Text
 
-loggingProjectSinkResource :: TF.Resource P.Google (LoggingProjectSinkResource s)
+loggingProjectSinkResource :: TF.Schema TF.Resource P.Google (LoggingProjectSinkResource s)
 loggingProjectSinkResource =
     TF.newResource "google_logging_project_sink" $
         LoggingProjectSinkResource {
@@ -6290,7 +6325,7 @@ instance P.HasRole (OrganizationIamBindingResource s) s Text where
 
 instance P.HasComputedEtag (OrganizationIamBindingResource s) Text
 
-organizationIamBindingResource :: TF.Resource P.Google (OrganizationIamBindingResource s)
+organizationIamBindingResource :: TF.Schema TF.Resource P.Google (OrganizationIamBindingResource s)
 organizationIamBindingResource =
     TF.newResource "google_organization_iam_binding" $
         OrganizationIamBindingResource {
@@ -6370,7 +6405,7 @@ instance P.HasTitle (OrganizationIamCustomRoleResource s) s Text where
              (\s a -> s { _title = a } :: OrganizationIamCustomRoleResource s)
 
 
-organizationIamCustomRoleResource :: TF.Resource P.Google (OrganizationIamCustomRoleResource s)
+organizationIamCustomRoleResource :: TF.Schema TF.Resource P.Google (OrganizationIamCustomRoleResource s)
 organizationIamCustomRoleResource =
     TF.newResource "google_organization_iam_custom_role" $
         OrganizationIamCustomRoleResource {
@@ -6424,7 +6459,7 @@ instance P.HasRole (OrganizationIamMemberResource s) s Text where
 
 instance P.HasComputedEtag (OrganizationIamMemberResource s) Text
 
-organizationIamMemberResource :: TF.Resource P.Google (OrganizationIamMemberResource s)
+organizationIamMemberResource :: TF.Schema TF.Resource P.Google (OrganizationIamMemberResource s)
 organizationIamMemberResource =
     TF.newResource "google_organization_iam_member" $
         OrganizationIamMemberResource {
@@ -6492,7 +6527,7 @@ instance P.HasVersion (OrganizationPolicyResource s) s Text where
 instance P.HasComputedEtag (OrganizationPolicyResource s) Text
 instance P.HasComputedUpdateTime (OrganizationPolicyResource s) Text
 
-organizationPolicyResource :: TF.Resource P.Google (OrganizationPolicyResource s)
+organizationPolicyResource :: TF.Schema TF.Resource P.Google (OrganizationPolicyResource s)
 organizationPolicyResource =
     TF.newResource "google_organization_policy" $
         OrganizationPolicyResource {
@@ -6543,7 +6578,7 @@ instance P.HasRole (ProjectIamBindingResource s) s Text where
 
 instance P.HasComputedEtag (ProjectIamBindingResource s) Text
 
-projectIamBindingResource :: TF.Resource P.Google (ProjectIamBindingResource s)
+projectIamBindingResource :: TF.Schema TF.Resource P.Google (ProjectIamBindingResource s)
 projectIamBindingResource =
     TF.newResource "google_project_iam_binding" $
         ProjectIamBindingResource {
@@ -6623,7 +6658,7 @@ instance P.HasTitle (ProjectIamCustomRoleResource s) s Text where
              (\s a -> s { _title = a } :: ProjectIamCustomRoleResource s)
 
 
-projectIamCustomRoleResource :: TF.Resource P.Google (ProjectIamCustomRoleResource s)
+projectIamCustomRoleResource :: TF.Schema TF.Resource P.Google (ProjectIamCustomRoleResource s)
 projectIamCustomRoleResource =
     TF.newResource "google_project_iam_custom_role" $
         ProjectIamCustomRoleResource {
@@ -6678,7 +6713,7 @@ instance P.HasRole (ProjectIamMemberResource s) s Text where
 
 instance P.HasComputedEtag (ProjectIamMemberResource s) Text
 
-projectIamMemberResource :: TF.Resource P.Google (ProjectIamMemberResource s)
+projectIamMemberResource :: TF.Schema TF.Resource P.Google (ProjectIamMemberResource s)
 projectIamMemberResource =
     TF.newResource "google_project_iam_member" $
         ProjectIamMemberResource {
@@ -6735,7 +6770,7 @@ instance P.HasProject (ProjectIamPolicyResource s) s Text where
 instance P.HasComputedEtag (ProjectIamPolicyResource s) Text
 instance P.HasComputedRestorePolicy (ProjectIamPolicyResource s) Text
 
-projectIamPolicyResource :: TF.Resource P.Google (ProjectIamPolicyResource s)
+projectIamPolicyResource :: TF.Schema TF.Resource P.Google (ProjectIamPolicyResource s)
 projectIamPolicyResource =
     TF.newResource "google_project_iam_policy" $
         ProjectIamPolicyResource {
@@ -6825,7 +6860,7 @@ instance P.HasSkipDelete (ProjectResource s) s Text where
 instance P.HasComputedNumber (ProjectResource s) Text
 instance P.HasComputedPolicyEtag (ProjectResource s) Text
 
-projectResource :: TF.Resource P.Google (ProjectResource s)
+projectResource :: TF.Schema TF.Resource P.Google (ProjectResource s)
 projectResource =
     TF.newResource "google_project" $
         ProjectResource {
@@ -6879,7 +6914,7 @@ instance P.HasService (ProjectServiceResource s) s Text where
              (\s a -> s { _service = a } :: ProjectServiceResource s)
 
 
-projectServiceResource :: TF.Resource P.Google (ProjectServiceResource s)
+projectServiceResource :: TF.Schema TF.Resource P.Google (ProjectServiceResource s)
 projectServiceResource =
     TF.newResource "google_project_service" $
         ProjectServiceResource {
@@ -6923,7 +6958,7 @@ instance P.HasServices (ProjectServicesResource s) s Text where
              (\s a -> s { _services = a } :: ProjectServicesResource s)
 
 
-projectServicesResource :: TF.Resource P.Google (ProjectServicesResource s)
+projectServicesResource :: TF.Schema TF.Resource P.Google (ProjectServicesResource s)
 projectServicesResource =
     TF.newResource "google_project_services" $
         ProjectServicesResource {
@@ -6987,7 +7022,7 @@ instance P.HasTopic (PubsubSubscriptionResource s) s Text where
 
 instance P.HasComputedPath (PubsubSubscriptionResource s) Text
 
-pubsubSubscriptionResource :: TF.Resource P.Google (PubsubSubscriptionResource s)
+pubsubSubscriptionResource :: TF.Schema TF.Resource P.Google (PubsubSubscriptionResource s)
 pubsubSubscriptionResource =
     TF.newResource "google_pubsub_subscription" $
         PubsubSubscriptionResource {
@@ -7028,7 +7063,7 @@ instance P.HasProject (PubsubTopicResource s) s Text where
              (\s a -> s { _project = a } :: PubsubTopicResource s)
 
 
-pubsubTopicResource :: TF.Resource P.Google (PubsubTopicResource s)
+pubsubTopicResource :: TF.Schema TF.Resource P.Google (PubsubTopicResource s)
 pubsubTopicResource =
     TF.newResource "google_pubsub_topic" $
         PubsubTopicResource {
@@ -7115,7 +7150,7 @@ instance P.HasStateNotificationConfig (RegistryResource s) s Text where
              (\s a -> s { _state_notification_config = a } :: RegistryResource s)
 
 
-registryResource :: TF.Resource P.Google (RegistryResource s)
+registryResource :: TF.Schema TF.Resource P.Google (RegistryResource s)
 registryResource =
     TF.newResource "google\cloudiot_registry" $
         RegistryResource {
@@ -7167,7 +7202,7 @@ instance P.HasRole (Resource s) s Text where
 
 instance P.HasComputedEtag (Resource s) Text
 
-resource :: TF.Resource P.Google (Resource s)
+resource :: TF.Schema TF.Resource P.Google (Resource s)
 resource =
     TF.newResource "IAMpolicyforGooglestoragebucket" $
         Resource {
@@ -7216,7 +7251,7 @@ instance P.HasProject (RuntimeconfigConfigResource s) s Text where
              (\s a -> s { _project = a } :: RuntimeconfigConfigResource s)
 
 
-runtimeconfigConfigResource :: TF.Resource P.Google (RuntimeconfigConfigResource s)
+runtimeconfigConfigResource :: TF.Schema TF.Resource P.Google (RuntimeconfigConfigResource s)
 runtimeconfigConfigResource =
     TF.newResource "google_runtimeconfig_config" $
         RuntimeconfigConfigResource {
@@ -7274,7 +7309,7 @@ instance P.HasText (RuntimeconfigVariableResource s) s Text where
 
 instance P.HasComputedUpdateTime (RuntimeconfigVariableResource s) Text
 
-runtimeconfigVariableResource :: TF.Resource P.Google (RuntimeconfigVariableResource s)
+runtimeconfigVariableResource :: TF.Schema TF.Resource P.Google (RuntimeconfigVariableResource s)
 runtimeconfigVariableResource =
     TF.newResource "google_runtimeconfig_variable" $
         RuntimeconfigVariableResource {
@@ -7349,7 +7384,7 @@ instance P.HasComputedPublicKey (ServiceAccountKeyResource s) Text
 instance P.HasComputedValidAfter (ServiceAccountKeyResource s) Text
 instance P.HasComputedValidBefore (ServiceAccountKeyResource s) Text
 
-serviceAccountKeyResource :: TF.Resource P.Google (ServiceAccountKeyResource s)
+serviceAccountKeyResource :: TF.Schema TF.Resource P.Google (ServiceAccountKeyResource s)
 serviceAccountKeyResource =
     TF.newResource "google_service_account_key" $
         ServiceAccountKeyResource {
@@ -7408,7 +7443,7 @@ instance P.HasComputedEmail (ServiceAccountResource s) Text
 instance P.HasComputedName (ServiceAccountResource s) Text
 instance P.HasComputedUniqueId (ServiceAccountResource s) Text
 
-serviceAccountResource :: TF.Resource P.Google (ServiceAccountResource s)
+serviceAccountResource :: TF.Schema TF.Resource P.Google (ServiceAccountResource s)
 serviceAccountResource =
     TF.newResource "google_service_account" $
         ServiceAccountResource {
@@ -7450,7 +7485,7 @@ instance P.HasProject (SourcerepoRepositoryResource s) s Text where
 instance P.HasComputedSize (SourcerepoRepositoryResource s) Text
 instance P.HasComputedUrl (SourcerepoRepositoryResource s) Text
 
-sourcerepoRepositoryResource :: TF.Resource P.Google (SourcerepoRepositoryResource s)
+sourcerepoRepositoryResource :: TF.Schema TF.Resource P.Google (SourcerepoRepositoryResource s)
 sourcerepoRepositoryResource =
     TF.newResource "google_sourcerepo_repository" $
         SourcerepoRepositoryResource {
@@ -7522,7 +7557,7 @@ instance P.HasProject (SpannerInstanceResource s) s Text where
 
 instance P.HasComputedState (SpannerInstanceResource s) Text
 
-spannerInstanceResource :: TF.Resource P.Google (SpannerInstanceResource s)
+spannerInstanceResource :: TF.Schema TF.Resource P.Google (SpannerInstanceResource s)
 spannerInstanceResource =
     TF.newResource "google_spanner_instance" $
         SpannerInstanceResource {
@@ -7622,7 +7657,7 @@ instance P.HasComputedIpAddress0TimeToRetire (SqlDatabaseInstanceResource s) Tex
 instance P.HasComputedSelfLink (SqlDatabaseInstanceResource s) Text
 instance P.HasComputedSettingsVersion (SqlDatabaseInstanceResource s) Text
 
-sqlDatabaseInstanceResource :: TF.Resource P.Google (SqlDatabaseInstanceResource s)
+sqlDatabaseInstanceResource :: TF.Schema TF.Resource P.Google (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource =
     TF.newResource "google_sql_database_instance" $
         SqlDatabaseInstanceResource {
@@ -7693,7 +7728,7 @@ instance P.HasProject (SqlDatabaseResource s) s Text where
 
 instance P.HasComputedSelfLink (SqlDatabaseResource s) Text
 
-sqlDatabaseResource :: TF.Resource P.Google (SqlDatabaseResource s)
+sqlDatabaseResource :: TF.Schema TF.Resource P.Google (SqlDatabaseResource s)
 sqlDatabaseResource =
     TF.newResource "google_sql_database" $
         SqlDatabaseResource {
@@ -7721,7 +7756,7 @@ data SqlUserResource s = SqlUserResource {
     , _name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the user. Changing this forces a new resource to be created. -}
     , _password :: !(TF.Attribute s Text)
-    {- ^ (Required) The users password. Can be updated. -}
+    {- ^ (Optional) The password for the user. Can be updated. -}
     , _project :: !(TF.Attribute s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
@@ -7761,7 +7796,7 @@ instance P.HasProject (SqlUserResource s) s Text where
              (\s a -> s { _project = a } :: SqlUserResource s)
 
 
-sqlUserResource :: TF.Resource P.Google (SqlUserResource s)
+sqlUserResource :: TF.Schema TF.Resource P.Google (SqlUserResource s)
 sqlUserResource =
     TF.newResource "google_sql_user" $
         SqlUserResource {
@@ -7819,7 +7854,7 @@ instance P.HasRoleEntity (StorageBucketAclResource s) s Text where
              (\s a -> s { _role_entity = a } :: StorageBucketAclResource s)
 
 
-storageBucketAclResource :: TF.Resource P.Google (StorageBucketAclResource s)
+storageBucketAclResource :: TF.Schema TF.Resource P.Google (StorageBucketAclResource s)
 storageBucketAclResource =
     TF.newResource "google_storage_bucket_acl" $
         StorageBucketAclResource {
@@ -7863,7 +7898,7 @@ instance P.HasName (StorageBucketObjectResource s) s Text where
 instance P.HasComputedCrc32c (StorageBucketObjectResource s) Text
 instance P.HasComputedMd5hash (StorageBucketObjectResource s) Text
 
-storageBucketObjectResource :: TF.Resource P.Google (StorageBucketObjectResource s)
+storageBucketObjectResource :: TF.Schema TF.Resource P.Google (StorageBucketObjectResource s)
 storageBucketObjectResource =
     TF.newResource "google_storage_bucket_object" $
         StorageBucketObjectResource {
@@ -7978,7 +8013,7 @@ instance P.HasWebsite (StorageBucketResource s) s Text where
 instance P.HasComputedSelfLink (StorageBucketResource s) Text
 instance P.HasComputedUrl (StorageBucketResource s) Text
 
-storageBucketResource :: TF.Resource P.Google (StorageBucketResource s)
+storageBucketResource :: TF.Schema TF.Resource P.Google (StorageBucketResource s)
 storageBucketResource =
     TF.newResource "google_storage_bucket" $
         StorageBucketResource {
@@ -8027,12 +8062,88 @@ instance P.HasRoleEntity (StorageDefaultObjectAclResource s) s Text where
              (\s a -> s { _role_entity = a } :: StorageDefaultObjectAclResource s)
 
 
-storageDefaultObjectAclResource :: TF.Resource P.Google (StorageDefaultObjectAclResource s)
+storageDefaultObjectAclResource :: TF.Schema TF.Resource P.Google (StorageDefaultObjectAclResource s)
 storageDefaultObjectAclResource =
     TF.newResource "google_storage_default_object_acl" $
         StorageDefaultObjectAclResource {
               _bucket = TF.Nil
             , _role_entity = TF.Nil
+            }
+
+{- | The @google_storage_notification@ Google resource.
+
+Creates a new notification configuration on a specified bucket, establishing
+a flow of event notifications from GCS to a Cloud Pub/Sub topic. For more
+information see <https://cloud.google.com/storage/docs/pubsub-notifications>
+and <https://cloud.google.com/storage/docs/json_api/v1/notifications> .
+-}
+data StorageNotificationResource s = StorageNotificationResource {
+      _bucket :: !(TF.Attribute s Text)
+    {- ^ (Required) The name of the bucket. -}
+    , _custom_attributes :: !(TF.Attribute s Text)
+    {- ^ (Optional)  A set of key/value attribute pairs to attach to each Cloud PubSub message published for this notification subscription -}
+    , _event_types :: !(TF.Attribute s Text)
+    {- ^ (Optional) List of event type filters for this notification config. If not specified, Cloud Storage will send notifications for all event types. The valid types are: @"OBJECT_FINALIZE"@ , @"OBJECT_METADATA_UPDATE"@ , @"OBJECT_DELETE"@ , @"OBJECT_ARCHIVE"@ -}
+    , _object_name_prefix :: !(TF.Attribute s Text)
+    {- ^ (Optional) Specifies a prefix path filter for this notification config. Cloud Storage will only send notifications for objects in this bucket whose names begin with the specified prefix. -}
+    , _payload_format :: !(TF.Attribute s Text)
+    {- ^ (Required) The desired content of the Payload. One of @"JSON_API_V1"@ or @"NONE"@ . -}
+    , _topic :: !(TF.Attribute s Text)
+    {- ^ (Required) The Cloud PubSub topic to which this subscription publishes. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (StorageNotificationResource s) where
+    toHCL StorageNotificationResource{..} = TF.block $ catMaybes
+        [ TF.attribute "bucket" _bucket
+        , TF.attribute "custom_attributes" _custom_attributes
+        , TF.attribute "event_types" _event_types
+        , TF.attribute "object_name_prefix" _object_name_prefix
+        , TF.attribute "payload_format" _payload_format
+        , TF.attribute "topic" _topic
+        ]
+
+instance P.HasBucket (StorageNotificationResource s) s Text where
+    bucket =
+        lens (_bucket :: StorageNotificationResource s -> TF.Attribute s Text)
+             (\s a -> s { _bucket = a } :: StorageNotificationResource s)
+
+instance P.HasCustomAttributes (StorageNotificationResource s) s Text where
+    customAttributes =
+        lens (_custom_attributes :: StorageNotificationResource s -> TF.Attribute s Text)
+             (\s a -> s { _custom_attributes = a } :: StorageNotificationResource s)
+
+instance P.HasEventTypes (StorageNotificationResource s) s Text where
+    eventTypes =
+        lens (_event_types :: StorageNotificationResource s -> TF.Attribute s Text)
+             (\s a -> s { _event_types = a } :: StorageNotificationResource s)
+
+instance P.HasObjectNamePrefix (StorageNotificationResource s) s Text where
+    objectNamePrefix =
+        lens (_object_name_prefix :: StorageNotificationResource s -> TF.Attribute s Text)
+             (\s a -> s { _object_name_prefix = a } :: StorageNotificationResource s)
+
+instance P.HasPayloadFormat (StorageNotificationResource s) s Text where
+    payloadFormat =
+        lens (_payload_format :: StorageNotificationResource s -> TF.Attribute s Text)
+             (\s a -> s { _payload_format = a } :: StorageNotificationResource s)
+
+instance P.HasTopic (StorageNotificationResource s) s Text where
+    topic =
+        lens (_topic :: StorageNotificationResource s -> TF.Attribute s Text)
+             (\s a -> s { _topic = a } :: StorageNotificationResource s)
+
+instance P.HasComputedSelfLink (StorageNotificationResource s) Text
+
+storageNotificationResource :: TF.Schema TF.Resource P.Google (StorageNotificationResource s)
+storageNotificationResource =
+    TF.newResource "google_storage_notification" $
+        StorageNotificationResource {
+              _bucket = TF.Nil
+            , _custom_attributes = TF.Nil
+            , _event_types = TF.Nil
+            , _object_name_prefix = TF.Nil
+            , _payload_format = TF.Nil
+            , _topic = TF.Nil
             }
 
 {- | The @google_storage_object_acl@ Google resource.
@@ -8082,7 +8193,7 @@ instance P.HasRoleEntity (StorageObjectAclResource s) s Text where
              (\s a -> s { _role_entity = a } :: StorageObjectAclResource s)
 
 
-storageObjectAclResource :: TF.Resource P.Google (StorageObjectAclResource s)
+storageObjectAclResource :: TF.Schema TF.Resource P.Google (StorageObjectAclResource s)
 storageObjectAclResource =
     TF.newResource "google_storage_object_acl" $
         StorageObjectAclResource {

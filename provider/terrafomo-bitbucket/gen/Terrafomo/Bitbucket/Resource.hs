@@ -74,7 +74,7 @@ import qualified Terrafomo.IP                 as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @bitbucket_default_reviewers@ Bitbucket resource.
 
@@ -112,7 +112,7 @@ instance P.HasReviewers (DefaultReviewersResource s) s Text where
              (\s a -> s { _reviewers = a } :: DefaultReviewersResource s)
 
 
-defaultReviewersResource :: TF.Resource P.Bitbucket (DefaultReviewersResource s)
+defaultReviewersResource :: TF.Schema TF.Resource P.Bitbucket (DefaultReviewersResource s)
 defaultReviewersResource =
     TF.newResource "bitbucket_default_reviewers" $
         DefaultReviewersResource {
@@ -174,7 +174,7 @@ instance P.HasUrl (HookResource s) s Text where
              (\s a -> s { _url = a } :: HookResource s)
 
 
-hookResource :: TF.Resource P.Bitbucket (HookResource s)
+hookResource :: TF.Schema TF.Resource P.Bitbucket (HookResource s)
 hookResource =
     TF.newResource "bitbucket_hook" $
         HookResource {
@@ -295,7 +295,7 @@ instance P.HasWebsite (RepositoryResource s) s Text where
              (\s a -> s { _website = a } :: RepositoryResource s)
 
 
-repositoryResource :: TF.Resource P.Bitbucket (RepositoryResource s)
+repositoryResource :: TF.Schema TF.Resource P.Bitbucket (RepositoryResource s)
 repositoryResource =
     TF.newResource "bitbucket_repository" $
         RepositoryResource {

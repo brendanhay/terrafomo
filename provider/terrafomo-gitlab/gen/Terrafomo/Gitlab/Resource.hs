@@ -107,7 +107,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @gitlab_deploy_key@ Gitlab resource.
 
@@ -154,7 +154,7 @@ instance P.HasTitle (DeployKeyResource s) s Text where
              (\s a -> s { _title = a } :: DeployKeyResource s)
 
 
-deployKeyResource :: TF.Resource P.Gitlab (DeployKeyResource s)
+deployKeyResource :: TF.Schema TF.Resource P.Gitlab (DeployKeyResource s)
 deployKeyResource =
     TF.newResource "gitlab_deploy_key" $
         DeployKeyResource {
@@ -235,7 +235,7 @@ instance P.HasVisibilityLevel (GroupResource s) s Text where
 
 instance P.HasComputedId (GroupResource s) Text
 
-groupResource :: TF.Resource P.Gitlab (GroupResource s)
+groupResource :: TF.Schema TF.Resource P.Gitlab (GroupResource s)
 groupResource =
     TF.newResource "gitlab_group" $
         GroupResource {
@@ -295,7 +295,7 @@ instance P.HasProject (LabelResource s) s Text where
 
 instance P.HasComputedId (LabelResource s) Text
 
-labelResource :: TF.Resource P.Gitlab (LabelResource s)
+labelResource :: TF.Schema TF.Resource P.Gitlab (LabelResource s)
 labelResource =
     TF.newResource "gitlab_label" $
         LabelResource {
@@ -416,7 +416,7 @@ instance P.HasWikiPageEvents (ProjectHookResource s) s Text where
 
 instance P.HasComputedId (ProjectHookResource s) Text
 
-projectHookResource :: TF.Resource P.Gitlab (ProjectHookResource s)
+projectHookResource :: TF.Schema TF.Resource P.Gitlab (ProjectHookResource s)
 projectHookResource =
     TF.newResource "gitlab_project_hook" $
         ProjectHookResource {
@@ -531,7 +531,7 @@ instance P.HasComputedId (ProjectResource s) Text
 instance P.HasComputedSshUrlToRepo (ProjectResource s) Text
 instance P.HasComputedWebUrl (ProjectResource s) Text
 
-projectResource :: TF.Resource P.Gitlab (ProjectResource s)
+projectResource :: TF.Schema TF.Resource P.Gitlab (ProjectResource s)
 projectResource =
     TF.newResource "gitlab_project" $
         ProjectResource {
@@ -626,7 +626,7 @@ instance P.HasUsername (UserResource s) s Text where
 
 instance P.HasComputedId (UserResource s) Text
 
-userResource :: TF.Resource P.Gitlab (UserResource s)
+userResource :: TF.Schema TF.Resource P.Gitlab (UserResource s)
 userResource =
     TF.newResource "gitlab_user" $
         UserResource {

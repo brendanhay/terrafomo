@@ -119,7 +119,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @heroku_addon_attachment@ Heroku resource.
 
@@ -158,7 +158,7 @@ instance P.HasName (AddonAttachmentResource s) s Text where
 
 instance P.HasComputedId (AddonAttachmentResource s) Text
 
-addonAttachmentResource :: TF.Resource P.Heroku (AddonAttachmentResource s)
+addonAttachmentResource :: TF.Schema TF.Resource P.Heroku (AddonAttachmentResource s)
 addonAttachmentResource =
     TF.newResource "heroku_addon_attachment" $
         AddonAttachmentResource {
@@ -209,7 +209,7 @@ instance P.HasComputedName (AddonResource s) Text
 instance P.HasComputedPlan (AddonResource s) Text
 instance P.HasComputedProviderId (AddonResource s) Text
 
-addonResource :: TF.Resource P.Heroku (AddonResource s)
+addonResource :: TF.Schema TF.Resource P.Heroku (AddonResource s)
 addonResource =
     TF.newResource "heroku_addon" $
         AddonResource {
@@ -255,7 +255,7 @@ instance P.HasName (AppFeatureResource s) s Text where
              (\s a -> s { _name = a } :: AppFeatureResource s)
 
 
-appFeatureResource :: TF.Resource P.Heroku (AppFeatureResource s)
+appFeatureResource :: TF.Schema TF.Resource P.Heroku (AppFeatureResource s)
 appFeatureResource =
     TF.newResource "heroku_app_feature" $
         AppFeatureResource {
@@ -350,7 +350,7 @@ instance P.HasComputedSpace (AppResource s) Text
 instance P.HasComputedStack (AppResource s) Text
 instance P.HasComputedWebUrl (AppResource s) Text
 
-appResource :: TF.Resource P.Heroku (AppResource s)
+appResource :: TF.Schema TF.Resource P.Heroku (AppResource s)
 appResource =
     TF.newResource "heroku_app" $
         AppResource {
@@ -404,7 +404,7 @@ instance P.HasComputedCname (CertResource s) Text
 instance P.HasComputedId (CertResource s) Text
 instance P.HasComputedName (CertResource s) Text
 
-certResource :: TF.Resource P.Heroku (CertResource s)
+certResource :: TF.Schema TF.Resource P.Heroku (CertResource s)
 certResource =
     TF.newResource "heroku_cert" $
         CertResource {
@@ -445,7 +445,7 @@ instance P.HasComputedCname (DomainResource s) Text
 instance P.HasComputedHostname (DomainResource s) Text
 instance P.HasComputedId (DomainResource s) Text
 
-domainResource :: TF.Resource P.Heroku (DomainResource s)
+domainResource :: TF.Schema TF.Resource P.Heroku (DomainResource s)
 domainResource =
     TF.newResource "heroku_domain" $
         DomainResource {
@@ -483,7 +483,7 @@ instance P.HasUrl (DrainResource s) s Text where
 
 instance P.HasComputedToken (DrainResource s) Text
 
-drainResource :: TF.Resource P.Heroku (DrainResource s)
+drainResource :: TF.Schema TF.Resource P.Heroku (DrainResource s)
 drainResource =
     TF.newResource "heroku_drain" $
         DrainResource {
@@ -536,7 +536,7 @@ instance P.HasComputedId (PipelineCouplingResource s) Text
 instance P.HasComputedPipeline (PipelineCouplingResource s) Text
 instance P.HasComputedStage (PipelineCouplingResource s) Text
 
-pipelineCouplingResource :: TF.Resource P.Heroku (PipelineCouplingResource s)
+pipelineCouplingResource :: TF.Schema TF.Resource P.Heroku (PipelineCouplingResource s)
 pipelineCouplingResource =
     TF.newResource "heroku_pipeline_coupling" $
         PipelineCouplingResource {
@@ -570,7 +570,7 @@ instance P.HasName (PipelineResource s) s Text where
 instance P.HasComputedId (PipelineResource s) Text
 instance P.HasComputedName (PipelineResource s) Text
 
-pipelineResource :: TF.Resource P.Heroku (PipelineResource s)
+pipelineResource :: TF.Schema TF.Resource P.Heroku (PipelineResource s)
 pipelineResource =
     TF.newResource "heroku_pipeline" $
         PipelineResource {
@@ -618,7 +618,7 @@ instance P.HasComputedName (SpaceResource s) Text
 instance P.HasComputedOrganization (SpaceResource s) Text
 instance P.HasComputedRegion (SpaceResource s) Text
 
-spaceResource :: TF.Resource P.Heroku (SpaceResource s)
+spaceResource :: TF.Schema TF.Resource P.Heroku (SpaceResource s)
 spaceResource =
     TF.newResource "heroku_space" $
         SpaceResource {

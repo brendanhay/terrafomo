@@ -57,7 +57,7 @@ import           Terrafomo.PowerDNS.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @powerdns_record@ PowerDNS resource.
 
@@ -111,7 +111,7 @@ instance P.HasZone (RecordResource s) s Text where
              (\s a -> s { _zone = a } :: RecordResource s)
 
 
-recordResource :: TF.Resource P.PowerDNS (RecordResource s)
+recordResource :: TF.Schema TF.Resource P.PowerDNS (RecordResource s)
 recordResource =
     TF.newResource "powerdns_record" $
         RecordResource {

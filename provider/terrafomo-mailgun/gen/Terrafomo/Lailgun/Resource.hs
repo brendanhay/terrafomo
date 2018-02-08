@@ -63,7 +63,7 @@ import           Terrafomo.Lailgun.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @mailgun_domain@ Lailgun resource.
 
@@ -117,7 +117,7 @@ instance P.HasComputedSmtpPassword (DomainResource s) Text
 instance P.HasComputedSpamAction (DomainResource s) Text
 instance P.HasComputedWildcard (DomainResource s) Text
 
-domainResource :: TF.Resource P.Lailgun (DomainResource s)
+domainResource :: TF.Schema TF.Resource P.Lailgun (DomainResource s)
 domainResource =
     TF.newResource "mailgun_domain" $
         DomainResource {

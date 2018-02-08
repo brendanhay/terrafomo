@@ -84,7 +84,7 @@ import           Terrafomo.RabbitMQ.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @rabbitmq_binding@ RabbitMQ resource.
 
@@ -148,7 +148,7 @@ instance P.HasVhost (BindingResource s) s Text where
 
 instance P.HasComputedPropertiesKey (BindingResource s) Text
 
-bindingResource :: TF.Resource P.RabbitMQ (BindingResource s)
+bindingResource :: TF.Schema TF.Resource P.RabbitMQ (BindingResource s)
 bindingResource =
     TF.newResource "rabbitmq_binding" $
         BindingResource {
@@ -196,7 +196,7 @@ instance P.HasVhost (ExchangeResource s) s Text where
              (\s a -> s { _vhost = a } :: ExchangeResource s)
 
 
-exchangeResource :: TF.Resource P.RabbitMQ (ExchangeResource s)
+exchangeResource :: TF.Schema TF.Resource P.RabbitMQ (ExchangeResource s)
 exchangeResource =
     TF.newResource "rabbitmq_exchange" $
         ExchangeResource {
@@ -242,7 +242,7 @@ instance P.HasVhost (PermissionsResource s) s Text where
              (\s a -> s { _vhost = a } :: PermissionsResource s)
 
 
-permissionsResource :: TF.Resource P.RabbitMQ (PermissionsResource s)
+permissionsResource :: TF.Schema TF.Resource P.RabbitMQ (PermissionsResource s)
 permissionsResource =
     TF.newResource "rabbitmq_permissions" $
         PermissionsResource {
@@ -288,7 +288,7 @@ instance P.HasVhost (PolicyResource s) s Text where
              (\s a -> s { _vhost = a } :: PolicyResource s)
 
 
-policyResource :: TF.Resource P.RabbitMQ (PolicyResource s)
+policyResource :: TF.Schema TF.Resource P.RabbitMQ (PolicyResource s)
 policyResource =
     TF.newResource "rabbitmq_policy" $
         PolicyResource {
@@ -333,7 +333,7 @@ instance P.HasVhost (QueueResource s) s Text where
              (\s a -> s { _vhost = a } :: QueueResource s)
 
 
-queueResource :: TF.Resource P.RabbitMQ (QueueResource s)
+queueResource :: TF.Schema TF.Resource P.RabbitMQ (QueueResource s)
 queueResource =
     TF.newResource "rabbitmq_queue" $
         QueueResource {
@@ -380,7 +380,7 @@ instance P.HasTags (UserResource s) s Text where
              (\s a -> s { _tags = a } :: UserResource s)
 
 
-userResource :: TF.Resource P.RabbitMQ (UserResource s)
+userResource :: TF.Schema TF.Resource P.RabbitMQ (UserResource s)
 userResource =
     TF.newResource "rabbitmq_user" $
         UserResource {
@@ -409,7 +409,7 @@ instance P.HasName (VhostResource s) s Text where
              (\s a -> s { _name = a } :: VhostResource s)
 
 
-vhostResource :: TF.Resource P.RabbitMQ (VhostResource s)
+vhostResource :: TF.Schema TF.Resource P.RabbitMQ (VhostResource s)
 vhostResource =
     TF.newResource "rabbitmq_vhost" $
         VhostResource {

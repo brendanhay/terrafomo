@@ -113,7 +113,7 @@ import           Terrafomo.OVH.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @ovh_domain_zone_record@ OVH resource.
 
@@ -173,7 +173,7 @@ instance P.HasComputedTarget (DomainZoneRecordResource s) Text
 instance P.HasComputedTtl (DomainZoneRecordResource s) Text
 instance P.HasComputedZone (DomainZoneRecordResource s) Text
 
-domainZoneRecordResource :: TF.Resource P.OVH (DomainZoneRecordResource s)
+domainZoneRecordResource :: TF.Schema TF.Resource P.OVH (DomainZoneRecordResource s)
 domainZoneRecordResource =
     TF.newResource "ovh_domain_zone_record" $
         DomainZoneRecordResource {
@@ -236,7 +236,7 @@ instance P.HasComputedStatus (PubliccloudPrivateNetworkResource s) Text
 instance P.HasComputedType' (PubliccloudPrivateNetworkResource s) Text
 instance P.HasComputedVlanId (PubliccloudPrivateNetworkResource s) Text
 
-publiccloudPrivateNetworkResource :: TF.Resource P.OVH (PubliccloudPrivateNetworkResource s)
+publiccloudPrivateNetworkResource :: TF.Schema TF.Resource P.OVH (PubliccloudPrivateNetworkResource s)
 publiccloudPrivateNetworkResource =
     TF.newResource "ovh_publiccloud_private_network" $
         PubliccloudPrivateNetworkResource {
@@ -334,7 +334,7 @@ instance P.HasComputedProjectId (PubliccloudPrivateNetworkSubnetResource s) Text
 instance P.HasComputedRegion (PubliccloudPrivateNetworkSubnetResource s) Text
 instance P.HasComputedStart (PubliccloudPrivateNetworkSubnetResource s) Text
 
-publiccloudPrivateNetworkSubnetResource :: TF.Resource P.OVH (PubliccloudPrivateNetworkSubnetResource s)
+publiccloudPrivateNetworkSubnetResource :: TF.Schema TF.Resource P.OVH (PubliccloudPrivateNetworkSubnetResource s)
 publiccloudPrivateNetworkSubnetResource =
     TF.newResource "ovh_publiccloud_private_network_subnet" $
         PubliccloudPrivateNetworkSubnetResource {
@@ -383,7 +383,7 @@ instance P.HasComputedProjectId (PubliccloudUserResource s) Text
 instance P.HasComputedStatus (PubliccloudUserResource s) Text
 instance P.HasComputedUsername (PubliccloudUserResource s) Text
 
-publiccloudUserResource :: TF.Resource P.OVH (PubliccloudUserResource s)
+publiccloudUserResource :: TF.Schema TF.Resource P.OVH (PubliccloudUserResource s)
 publiccloudUserResource =
     TF.newResource "ovh_publiccloud_user" $
         PubliccloudUserResource {
@@ -421,7 +421,7 @@ instance P.HasVrackId (VrackPubliccloudAttachmentResource s) s Text where
 instance P.HasComputedProjectId (VrackPubliccloudAttachmentResource s) Text
 instance P.HasComputedVrackId (VrackPubliccloudAttachmentResource s) Text
 
-vrackPubliccloudAttachmentResource :: TF.Resource P.OVH (VrackPubliccloudAttachmentResource s)
+vrackPubliccloudAttachmentResource :: TF.Schema TF.Resource P.OVH (VrackPubliccloudAttachmentResource s)
 vrackPubliccloudAttachmentResource =
     TF.newResource "ovh_vrack_publiccloud_attachment" $
         VrackPubliccloudAttachmentResource {

@@ -67,7 +67,7 @@ import           Terrafomo.Nomad.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @nomad_acl_policy@ Nomad resource.
 
@@ -105,7 +105,7 @@ instance P.HasRulesHcl (AclPolicyResource s) s Text where
              (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
 
 
-aclPolicyResource :: TF.Resource P.Nomad (AclPolicyResource s)
+aclPolicyResource :: TF.Schema TF.Resource P.Nomad (AclPolicyResource s)
 aclPolicyResource =
     TF.newResource "nomad_acl_policy" $
         AclPolicyResource {
@@ -160,7 +160,7 @@ instance P.HasType' (AclTokenResource s) s Text where
              (\s a -> s { _type' = a } :: AclTokenResource s)
 
 
-aclTokenResource :: TF.Resource P.Nomad (AclTokenResource s)
+aclTokenResource :: TF.Schema TF.Resource P.Nomad (AclTokenResource s)
 aclTokenResource =
     TF.newResource "nomad_acl_token" $
         AclTokenResource {
@@ -212,7 +212,7 @@ instance P.HasJobspec (JobResource s) s Text where
              (\s a -> s { _jobspec = a } :: JobResource s)
 
 
-jobResource :: TF.Resource P.Nomad (JobResource s)
+jobResource :: TF.Schema TF.Resource P.Nomad (JobResource s)
 jobResource =
     TF.newResource "nomad_job" $
         JobResource {

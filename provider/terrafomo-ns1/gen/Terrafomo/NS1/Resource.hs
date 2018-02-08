@@ -113,7 +113,7 @@ import           Terrafomo.NS1.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @ns1_apikey@ NS1 resource.
 
@@ -160,7 +160,7 @@ instance P.HasTeams (ApikeyResource s) s Text where
              (\s a -> s { _teams = a } :: ApikeyResource s)
 
 
-apikeyResource :: TF.Resource P.NS1 (ApikeyResource s)
+apikeyResource :: TF.Schema TF.Resource P.NS1 (ApikeyResource s)
 apikeyResource =
     TF.newResource "ns1_apikey" $
         ApikeyResource {
@@ -207,7 +207,7 @@ instance P.HasSourceId (DatafeedResource s) s Text where
              (\s a -> s { _source_id = a } :: DatafeedResource s)
 
 
-datafeedResource :: TF.Resource P.NS1 (DatafeedResource s)
+datafeedResource :: TF.Schema TF.Resource P.NS1 (DatafeedResource s)
 datafeedResource =
     TF.newResource "ns1_datafeed" $
         DatafeedResource {
@@ -253,7 +253,7 @@ instance P.HasSourcetype (DatasourceResource s) s Text where
              (\s a -> s { _sourcetype = a } :: DatasourceResource s)
 
 
-datasourceResource :: TF.Resource P.NS1 (DatasourceResource s)
+datasourceResource :: TF.Schema TF.Resource P.NS1 (DatasourceResource s)
 datasourceResource =
     TF.newResource "ns1_datasource" $
         DatasourceResource {
@@ -395,7 +395,7 @@ instance P.HasRules (MonitoringjobResource s) s Text where
              (\s a -> s { _rules = a } :: MonitoringjobResource s)
 
 
-monitoringjobResource :: TF.Resource P.NS1 (MonitoringjobResource s)
+monitoringjobResource :: TF.Schema TF.Resource P.NS1 (MonitoringjobResource s)
 monitoringjobResource =
     TF.newResource "ns1_monitoringjob" $
         MonitoringjobResource {
@@ -445,7 +445,7 @@ instance P.HasNotifications (NotifylistResource s) s Text where
              (\s a -> s { _notifications = a } :: NotifylistResource s)
 
 
-notifylistResource :: TF.Resource P.NS1 (NotifylistResource s)
+notifylistResource :: TF.Schema TF.Resource P.NS1 (NotifylistResource s)
 notifylistResource =
     TF.newResource "ns1_notifylist" $
         NotifylistResource {
@@ -530,7 +530,7 @@ instance P.HasZone (RecordResource s) s Text where
              (\s a -> s { _zone = a } :: RecordResource s)
 
 
-recordResource :: TF.Resource P.NS1 (RecordResource s)
+recordResource :: TF.Schema TF.Resource P.NS1 (RecordResource s)
 recordResource =
     TF.newResource "ns1_record" $
         RecordResource {
@@ -573,7 +573,7 @@ instance P.HasPermissions (TeamResource s) s Text where
              (\s a -> s { _permissions = a } :: TeamResource s)
 
 
-teamResource :: TF.Resource P.NS1 (TeamResource s)
+teamResource :: TF.Schema TF.Resource P.NS1 (TeamResource s)
 teamResource =
     TF.newResource "ns1_team" $
         TeamResource {
@@ -643,7 +643,7 @@ instance P.HasUsername (UserResource s) s Text where
              (\s a -> s { _username = a } :: UserResource s)
 
 
-userResource :: TF.Resource P.NS1 (UserResource s)
+userResource :: TF.Schema TF.Resource P.NS1 (UserResource s)
 userResource =
     TF.newResource "ns1_user" $
         UserResource {
@@ -732,7 +732,7 @@ instance P.HasZone (ZoneResource s) s Text where
              (\s a -> s { _zone = a } :: ZoneResource s)
 
 
-zoneResource :: TF.Resource P.NS1 (ZoneResource s)
+zoneResource :: TF.Schema TF.Resource P.NS1 (ZoneResource s)
 zoneResource =
     TF.newResource "ns1_zone" $
         ZoneResource {

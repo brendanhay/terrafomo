@@ -100,7 +100,7 @@ import           Terrafomo.VSphere.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @vsphere_custom_attribute@ VSphere datasource.
 
@@ -128,7 +128,7 @@ instance P.HasName (CustomAttributeData s) s Text where
              (\s a -> s { _name = a } :: CustomAttributeData s)
 
 
-customAttributeData :: TF.DataSource P.VSphere (CustomAttributeData s)
+customAttributeData :: TF.Schema TF.DataSource P.VSphere (CustomAttributeData s)
 customAttributeData =
     TF.newDataSource "vsphere_custom_attribute" $
         CustomAttributeData {
@@ -158,7 +158,7 @@ instance P.HasName (DatacenterData s) s Text where
              (\s a -> s { _name = a } :: DatacenterData s)
 
 
-datacenterData :: TF.DataSource P.VSphere (DatacenterData s)
+datacenterData :: TF.Schema TF.DataSource P.VSphere (DatacenterData s)
 datacenterData =
     TF.newDataSource "vsphere_datacenter" $
         DatacenterData {
@@ -196,7 +196,7 @@ instance P.HasName (DatastoreData s) s Text where
              (\s a -> s { _name = a } :: DatastoreData s)
 
 
-datastoreData :: TF.DataSource P.VSphere (DatastoreData s)
+datastoreData :: TF.Schema TF.DataSource P.VSphere (DatastoreData s)
 datastoreData =
     TF.newDataSource "vsphere_datastore" $
         DatastoreData {
@@ -239,7 +239,7 @@ instance P.HasName (DistributedVirtualSwitchData s) s Text where
 instance P.HasComputedId (DistributedVirtualSwitchData s) Text
 instance P.HasComputedUplinks (DistributedVirtualSwitchData s) Text
 
-distributedVirtualSwitchData :: TF.DataSource P.VSphere (DistributedVirtualSwitchData s)
+distributedVirtualSwitchData :: TF.Schema TF.DataSource P.VSphere (DistributedVirtualSwitchData s)
 distributedVirtualSwitchData =
     TF.newDataSource "vsphere_distributed_virtual_switch" $
         DistributedVirtualSwitchData {
@@ -277,7 +277,7 @@ instance P.HasName (HostData s) s Text where
              (\s a -> s { _name = a } :: HostData s)
 
 
-hostData :: TF.DataSource P.VSphere (HostData s)
+hostData :: TF.Schema TF.DataSource P.VSphere (HostData s)
 hostData =
     TF.newDataSource "vsphere_host" $
         HostData {
@@ -319,7 +319,7 @@ instance P.HasName (NetworkData s) s Text where
 instance P.HasComputedId (NetworkData s) Text
 instance P.HasComputedType' (NetworkData s) Text
 
-networkData :: TF.DataSource P.VSphere (NetworkData s)
+networkData :: TF.Schema TF.DataSource P.VSphere (NetworkData s)
 networkData =
     TF.newDataSource "vsphere_network" $
         NetworkData {
@@ -358,7 +358,7 @@ instance P.HasName (ResourcePoolData s) s Text where
              (\s a -> s { _name = a } :: ResourcePoolData s)
 
 
-resourcePoolData :: TF.DataSource P.VSphere (ResourcePoolData s)
+resourcePoolData :: TF.Schema TF.DataSource P.VSphere (ResourcePoolData s)
 resourcePoolData =
     TF.newDataSource "vsphere_resource_pool" $
         ResourcePoolData {
@@ -392,7 +392,7 @@ instance P.HasName (TagCategoryData s) s Text where
              (\s a -> s { _name = a } :: TagCategoryData s)
 
 
-tagCategoryData :: TF.DataSource P.VSphere (TagCategoryData s)
+tagCategoryData :: TF.Schema TF.DataSource P.VSphere (TagCategoryData s)
 tagCategoryData =
     TF.newDataSource "vsphere_tag_category" $
         TagCategoryData {
@@ -433,7 +433,7 @@ instance P.HasName (TagData s) s Text where
              (\s a -> s { _name = a } :: TagData s)
 
 
-tagData :: TF.DataSource P.VSphere (TagData s)
+tagData :: TF.Schema TF.DataSource P.VSphere (TagData s)
 tagData =
     TF.newDataSource "vsphere_tag" $
         TagData {
@@ -490,7 +490,7 @@ instance P.HasComputedScsiType (VirtualMachineData s) Text
 instance P.HasComputedSize (VirtualMachineData s) Text
 instance P.HasComputedThinProvisioned (VirtualMachineData s) Text
 
-virtualMachineData :: TF.DataSource P.VSphere (VirtualMachineData s)
+virtualMachineData :: TF.Schema TF.DataSource P.VSphere (VirtualMachineData s)
 virtualMachineData =
     TF.newDataSource "vsphere_virtual_machine" $
         VirtualMachineData {
@@ -539,7 +539,7 @@ instance P.HasRescan (VmfsDisksData s) s Text where
 
 instance P.HasComputedDisks (VmfsDisksData s) Text
 
-vmfsDisksData :: TF.DataSource P.VSphere (VmfsDisksData s)
+vmfsDisksData :: TF.Schema TF.DataSource P.VSphere (VmfsDisksData s)
 vmfsDisksData =
     TF.newDataSource "vsphere_vmfs_disks" $
         VmfsDisksData {

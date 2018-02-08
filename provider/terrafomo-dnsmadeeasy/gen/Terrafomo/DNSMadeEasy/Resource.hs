@@ -57,7 +57,7 @@ import qualified Terrafomo.IP                   as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @dme_record@ DNSMadeEasy resource.
 
@@ -75,7 +75,7 @@ instance P.HasComputedTtl (RecordResource s) Text
 instance P.HasComputedType' (RecordResource s) Text
 instance P.HasComputedValue (RecordResource s) Text
 
-recordResource :: TF.Resource P.DNSMadeEasy (RecordResource s)
+recordResource :: TF.Schema TF.Resource P.DNSMadeEasy (RecordResource s)
 recordResource =
     TF.newResource "dme_record" $
         RecordResource {

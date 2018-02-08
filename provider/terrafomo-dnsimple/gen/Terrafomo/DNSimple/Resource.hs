@@ -66,7 +66,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @dnsimple_record@ DNSimple resource.
 
@@ -136,7 +136,7 @@ instance P.HasComputedTtl (RecordResource s) Text
 instance P.HasComputedType' (RecordResource s) Text
 instance P.HasComputedValue (RecordResource s) Text
 
-recordResource :: TF.Resource P.DNSimple (RecordResource s)
+recordResource :: TF.Schema TF.Resource P.DNSimple (RecordResource s)
 recordResource =
     TF.newResource "dnsimple_record" $
         RecordResource {

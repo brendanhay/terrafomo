@@ -193,7 +193,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @google_active_folder@ Google datasource.
 
@@ -224,7 +224,7 @@ instance P.HasParent (ActiveFolderData s) s Text where
 
 instance P.HasComputedName (ActiveFolderData s) Text
 
-activeFolderData :: TF.DataSource P.Google (ActiveFolderData s)
+activeFolderData :: TF.Schema TF.DataSource P.Google (ActiveFolderData s)
 activeFolderData =
     TF.newDataSource "google_active_folder" $
         ActiveFolderData {
@@ -271,7 +271,7 @@ instance P.HasComputedId (BillingAccountData s) Text
 instance P.HasComputedName (BillingAccountData s) Text
 instance P.HasComputedProjectIds (BillingAccountData s) Text
 
-billingAccountData :: TF.DataSource P.Google (BillingAccountData s)
+billingAccountData :: TF.Schema TF.DataSource P.Google (BillingAccountData s)
 billingAccountData =
     TF.newDataSource "google_billing_account" $
         BillingAccountData {
@@ -309,7 +309,7 @@ instance P.HasRegion (ClientConfigData s) s Text where
              (\s a -> s { _region = a } :: ClientConfigData s)
 
 
-clientConfigData :: TF.DataSource P.Google (ClientConfigData s)
+clientConfigData :: TF.Schema TF.DataSource P.Google (ClientConfigData s)
 clientConfigData =
     TF.newDataSource "google_client_config" $
         ClientConfigData {
@@ -367,7 +367,7 @@ instance P.HasComputedTriggerBucket (CloudfunctionsFunctionData s) Text
 instance P.HasComputedTriggerHttp (CloudfunctionsFunctionData s) Text
 instance P.HasComputedTriggerTopic (CloudfunctionsFunctionData s) Text
 
-cloudfunctionsFunctionData :: TF.DataSource P.Google (CloudfunctionsFunctionData s)
+cloudfunctionsFunctionData :: TF.Schema TF.DataSource P.Google (CloudfunctionsFunctionData s)
 cloudfunctionsFunctionData =
     TF.newDataSource "google_cloudfunctions_function" $
         CloudfunctionsFunctionData {
@@ -418,7 +418,7 @@ instance P.HasComputedAddress (ComputeAddressData s) Text
 instance P.HasComputedSelfLink (ComputeAddressData s) Text
 instance P.HasComputedStatus (ComputeAddressData s) Text
 
-computeAddressData :: TF.DataSource P.Google (ComputeAddressData s)
+computeAddressData :: TF.Schema TF.DataSource P.Google (ComputeAddressData s)
 computeAddressData =
     TF.newDataSource "google_compute_address" $
         ComputeAddressData {
@@ -462,7 +462,7 @@ instance P.HasComputedAddress (ComputeGlobalAddressData s) Text
 instance P.HasComputedSelfLink (ComputeGlobalAddressData s) Text
 instance P.HasComputedStatus (ComputeGlobalAddressData s) Text
 
-computeGlobalAddressData :: TF.DataSource P.Google (ComputeGlobalAddressData s)
+computeGlobalAddressData :: TF.Schema TF.DataSource P.Google (ComputeGlobalAddressData s)
 computeGlobalAddressData =
     TF.newDataSource "google_compute_global_address" $
         ComputeGlobalAddressData {
@@ -522,7 +522,7 @@ instance P.HasComputedSourceDiskId (ComputeImageData s) Text
 instance P.HasComputedSourceImageId (ComputeImageData s) Text
 instance P.HasComputedStatus (ComputeImageData s) Text
 
-computeImageData :: TF.DataSource P.Google (ComputeImageData s)
+computeImageData :: TF.Schema TF.DataSource P.Google (ComputeImageData s)
 computeImageData =
     TF.newDataSource "google_compute_image" $
         ComputeImageData {
@@ -574,7 +574,7 @@ instance P.HasComputedNetwork (ComputeInstanceGroupData s) Text
 instance P.HasComputedSelfLink (ComputeInstanceGroupData s) Text
 instance P.HasComputedSize (ComputeInstanceGroupData s) Text
 
-computeInstanceGroupData :: TF.DataSource P.Google (ComputeInstanceGroupData s)
+computeInstanceGroupData :: TF.Schema TF.DataSource P.Google (ComputeInstanceGroupData s)
 computeInstanceGroupData =
     TF.newDataSource "google_compute_instance_group" $
         ComputeInstanceGroupData {
@@ -612,7 +612,7 @@ instance P.HasNetwork (ComputeLbIpRangesData s) s Text where
              (\s a -> s { _network = a } :: ComputeLbIpRangesData s)
 
 
-computeLbIpRangesData :: TF.DataSource P.Google (ComputeLbIpRangesData s)
+computeLbIpRangesData :: TF.Schema TF.DataSource P.Google (ComputeLbIpRangesData s)
 computeLbIpRangesData =
     TF.newDataSource "google_compute_lb_ip_ranges" $
         ComputeLbIpRangesData {
@@ -653,7 +653,7 @@ instance P.HasComputedNetwork (ComputeNetworkData s) Text
 instance P.HasComputedSelfLink (ComputeNetworkData s) Text
 instance P.HasComputedSubnetworksSelfLinks (ComputeNetworkData s) Text
 
-computeNetworkData :: TF.DataSource P.Google (ComputeNetworkData s)
+computeNetworkData :: TF.Schema TF.DataSource P.Google (ComputeNetworkData s)
 computeNetworkData =
     TF.newDataSource "google_compute_network" $
         ComputeNetworkData {
@@ -711,7 +711,7 @@ instance P.HasSelfLink (ComputeRegionInstanceGroupData s) s Text where
 instance P.HasComputedInstances (ComputeRegionInstanceGroupData s) Text
 instance P.HasComputedSize (ComputeRegionInstanceGroupData s) Text
 
-computeRegionInstanceGroupData :: TF.DataSource P.Google (ComputeRegionInstanceGroupData s)
+computeRegionInstanceGroupData :: TF.Schema TF.DataSource P.Google (ComputeRegionInstanceGroupData s)
 computeRegionInstanceGroupData =
     TF.newDataSource "google_compute_region_instance_group" $
         ComputeRegionInstanceGroupData {
@@ -764,7 +764,7 @@ instance P.HasComputedPrivateIpGoogleAccess (ComputeSubnetworkData s) Text
 instance P.HasComputedSecondaryIpRange (ComputeSubnetworkData s) Text
 instance P.HasComputedSelfLink (ComputeSubnetworkData s) Text
 
-computeSubnetworkData :: TF.DataSource P.Google (ComputeSubnetworkData s)
+computeSubnetworkData :: TF.Schema TF.DataSource P.Google (ComputeSubnetworkData s)
 computeSubnetworkData =
     TF.newDataSource "google_compute_subnetwork" $
         ComputeSubnetworkData {
@@ -805,7 +805,7 @@ instance P.HasStatus (ComputeZonesData s) s Text where
 
 instance P.HasComputedNames (ComputeZonesData s) Text
 
-computeZonesData :: TF.DataSource P.Google (ComputeZonesData s)
+computeZonesData :: TF.Schema TF.DataSource P.Google (ComputeZonesData s)
 computeZonesData =
     TF.newDataSource "google_compute_zones" $
         ComputeZonesData {
@@ -849,7 +849,7 @@ instance P.HasZone (ContainerClusterData s) s Text where
              (\s a -> s { _zone = a } :: ContainerClusterData s)
 
 
-containerClusterData :: TF.DataSource P.Google (ContainerClusterData s)
+containerClusterData :: TF.Schema TF.DataSource P.Google (ContainerClusterData s)
 containerClusterData =
     TF.newDataSource "google_container_cluster" $
         ContainerClusterData {
@@ -891,7 +891,7 @@ instance P.HasComputedLatestNodeVersion (ContainerEngineVersionsData s) Text
 instance P.HasComputedValidMasterVersions (ContainerEngineVersionsData s) Text
 instance P.HasComputedValidNodeVersions (ContainerEngineVersionsData s) Text
 
-containerEngineVersionsData :: TF.DataSource P.Google (ContainerEngineVersionsData s)
+containerEngineVersionsData :: TF.Schema TF.DataSource P.Google (ContainerEngineVersionsData s)
 containerEngineVersionsData =
     TF.newDataSource "google_container_engine_versions" $
         ContainerEngineVersionsData {
@@ -956,7 +956,7 @@ instance P.HasTag (ContainerRegistryImageData s) s Text where
 
 instance P.HasComputedImageUrl (ContainerRegistryImageData s) Text
 
-containerRegistryImageData :: TF.DataSource P.Google (ContainerRegistryImageData s)
+containerRegistryImageData :: TF.Schema TF.DataSource P.Google (ContainerRegistryImageData s)
 containerRegistryImageData =
     TF.newDataSource "google_container_registry_image" $
         ContainerRegistryImageData {
@@ -1000,7 +1000,7 @@ instance P.HasRegion (ContainerRegistryRepositoryData s) s Text where
 
 instance P.HasComputedRepositoryUrl (ContainerRegistryRepositoryData s) Text
 
-containerRegistryRepositoryData :: TF.DataSource P.Google (ContainerRegistryRepositoryData s)
+containerRegistryRepositoryData :: TF.Schema TF.DataSource P.Google (ContainerRegistryRepositoryData s)
 containerRegistryRepositoryData =
     TF.newDataSource "google_container_registry_repository" $
         ContainerRegistryRepositoryData {
@@ -1041,7 +1041,7 @@ instance P.HasComputedDescription (DnsManagedZoneData s) Text
 instance P.HasComputedDnsName (DnsManagedZoneData s) Text
 instance P.HasComputedNameServers (DnsManagedZoneData s) Text
 
-dnsManagedZoneData :: TF.DataSource P.Google (DnsManagedZoneData s)
+dnsManagedZoneData :: TF.Schema TF.DataSource P.Google (DnsManagedZoneData s)
 dnsManagedZoneData =
     TF.newDataSource "google_dns_managed_zone" $
         DnsManagedZoneData {
@@ -1072,7 +1072,7 @@ instance P.HasBinding (IamPolicyData s) s Text where
 
 instance P.HasComputedPolicyData (IamPolicyData s) Text
 
-iamPolicyData :: TF.DataSource P.Google (IamPolicyData s)
+iamPolicyData :: TF.Schema TF.DataSource P.Google (IamPolicyData s)
 iamPolicyData =
     TF.newDataSource "google_iam_policy" $
         IamPolicyData {
@@ -1114,7 +1114,7 @@ instance P.HasCryptoKey (KmsSecretData s) s Text where
 
 instance P.HasComputedPlaintext (KmsSecretData s) Text
 
-kmsSecretData :: TF.DataSource P.Google (KmsSecretData s)
+kmsSecretData :: TF.Schema TF.DataSource P.Google (KmsSecretData s)
 kmsSecretData =
     TF.newDataSource "google_kms_secret" $
         KmsSecretData {
@@ -1155,7 +1155,7 @@ instance P.HasComputedId (OrganizationData s) Text
 instance P.HasComputedLifecycleState (OrganizationData s) Text
 instance P.HasComputedName (OrganizationData s) Text
 
-organizationData :: TF.DataSource P.Google (OrganizationData s)
+organizationData :: TF.Schema TF.DataSource P.Google (OrganizationData s)
 organizationData =
     TF.newDataSource "google_organization" $
         OrganizationData {
@@ -1220,7 +1220,7 @@ instance P.HasPath (StorageObjectSignedUrlData s) s Text where
 
 instance P.HasComputedSignedUrl (StorageObjectSignedUrlData s) Text
 
-storageObjectSignedUrlData :: TF.DataSource P.Google (StorageObjectSignedUrlData s)
+storageObjectSignedUrlData :: TF.Schema TF.DataSource P.Google (StorageObjectSignedUrlData s)
 storageObjectSignedUrlData =
     TF.newDataSource "google_storage_object_signed_url" $
         StorageObjectSignedUrlData {

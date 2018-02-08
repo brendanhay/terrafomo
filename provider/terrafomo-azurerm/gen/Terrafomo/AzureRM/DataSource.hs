@@ -64,6 +64,9 @@ module Terrafomo.AzureRM.DataSource
     , SnapshotData (..)
     , snapshotData
 
+    , StorageAccountData (..)
+    , storageAccountData
+
     , SubnetData (..)
     , subnetData
 
@@ -72,6 +75,9 @@ module Terrafomo.AzureRM.DataSource
 
     , VirtualNetworkData (..)
     , virtualNetworkData
+
+    , VirtualNetworkGatewayData (..)
+    , virtualNetworkGatewayData
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -91,6 +97,12 @@ module Terrafomo.AzureRM.DataSource
     , P.HasVirtualNetworkName (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAccessTier (..)
+    , P.HasComputedAccountEncryptionSource (..)
+    , P.HasComputedAccountKind (..)
+    , P.HasComputedAccountReplicationType (..)
+    , P.HasComputedAccountTier (..)
+    , P.HasComputedActiveActive (..)
     , P.HasComputedAddressPrefix (..)
     , P.HasComputedAddressSpaces (..)
     , P.HasComputedAssignableScopes (..)
@@ -98,16 +110,23 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedCapacity (..)
     , P.HasComputedCertificatePermissions (..)
     , P.HasComputedCreateOption (..)
+    , P.HasComputedCustomDomain (..)
     , P.HasComputedDataDisk (..)
+    , P.HasComputedDefaultLocalNetworkGatewayId (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDiskSizeGb (..)
     , P.HasComputedDisplayName (..)
     , P.HasComputedDnsServers (..)
     , P.HasComputedDomainNameLabel (..)
+    , P.HasComputedEnableBgp (..)
+    , P.HasComputedEnableBlobEncryption (..)
+    , P.HasComputedEnableFileEncryption (..)
+    , P.HasComputedEnableHttpsTrafficOnly (..)
     , P.HasComputedFqdn (..)
     , P.HasComputedId (..)
     , P.HasComputedIdleTimeoutInMinutes (..)
     , P.HasComputedIpAddress (..)
+    , P.HasComputedIpConfiguration (..)
     , P.HasComputedIpConfigurations (..)
     , P.HasComputedKeyPermissions (..)
     , P.HasComputedKind (..)
@@ -122,9 +141,24 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedOsDisk (..)
     , P.HasComputedOsType (..)
     , P.HasComputedPermissions (..)
+    , P.HasComputedPrimaryAccessKey (..)
+    , P.HasComputedPrimaryBlobConnectionString (..)
+    , P.HasComputedPrimaryBlobEndpoint (..)
+    , P.HasComputedPrimaryConnectionString (..)
+    , P.HasComputedPrimaryFileEndpoint (..)
+    , P.HasComputedPrimaryLocation (..)
+    , P.HasComputedPrimaryQueueEndpoint (..)
+    , P.HasComputedPrimaryTableEndpoint (..)
     , P.HasComputedProperties (..)
     , P.HasComputedQuotaId (..)
     , P.HasComputedRouteTableId (..)
+    , P.HasComputedSecondaryAccessKey (..)
+    , P.HasComputedSecondaryBlobConnectionString (..)
+    , P.HasComputedSecondaryBlobEndpoint (..)
+    , P.HasComputedSecondaryConnectionString (..)
+    , P.HasComputedSecondaryLocation (..)
+    , P.HasComputedSecondaryQueueEndpoint (..)
+    , P.HasComputedSecondaryTableEndpoint (..)
     , P.HasComputedSecretPermissions (..)
     , P.HasComputedSecurityRule (..)
     , P.HasComputedSku (..)
@@ -139,6 +173,8 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedType' (..)
     , P.HasComputedVersion (..)
     , P.HasComputedVnetPeerings (..)
+    , P.HasComputedVpnClientConfiguration (..)
+    , P.HasComputedVpnType (..)
 
     -- * Re-exported Types
     , module P
@@ -162,7 +198,7 @@ import qualified Terrafomo.IP               as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @azurerm_app_service_plan@ AzureRM datasource.
 
@@ -199,7 +235,7 @@ instance P.HasComputedProperties (AppServicePlanData s) Text
 instance P.HasComputedSku (AppServicePlanData s) Text
 instance P.HasComputedTags (AppServicePlanData s) Text
 
-appServicePlanData :: TF.DataSource P.AzureRM (AppServicePlanData s)
+appServicePlanData :: TF.Schema TF.DataSource P.AzureRM (AppServicePlanData s)
 appServicePlanData =
     TF.newDataSource "azurerm_app_service_plan" $
         AppServicePlanData {
@@ -234,7 +270,7 @@ instance P.HasComputedId (BuiltinRoleDefinitionData s) Text
 instance P.HasComputedPermissions (BuiltinRoleDefinitionData s) Text
 instance P.HasComputedType' (BuiltinRoleDefinitionData s) Text
 
-builtinRoleDefinitionData :: TF.DataSource P.AzureRM (BuiltinRoleDefinitionData s)
+builtinRoleDefinitionData :: TF.Schema TF.DataSource P.AzureRM (BuiltinRoleDefinitionData s)
 builtinRoleDefinitionData =
     TF.newDataSource "azurerm_builtin_role_definition" $
         BuiltinRoleDefinitionData {
@@ -278,7 +314,7 @@ instance P.HasTenantId (ClientConfigData s) s Text where
              (\s a -> s { _tenant_id = a } :: ClientConfigData s)
 
 
-clientConfigData :: TF.DataSource P.AzureRM (ClientConfigData s)
+clientConfigData :: TF.Schema TF.DataSource P.AzureRM (ClientConfigData s)
 clientConfigData =
     TF.newDataSource "azurerm_client_config" $
         ClientConfigData {
@@ -320,7 +356,7 @@ instance P.HasComputedNameServers (DnsZoneData s) Text
 instance P.HasComputedNumberOfRecordSets (DnsZoneData s) Text
 instance P.HasComputedTags (DnsZoneData s) Text
 
-dnsZoneData :: TF.DataSource P.AzureRM (DnsZoneData s)
+dnsZoneData :: TF.Schema TF.DataSource P.AzureRM (DnsZoneData s)
 dnsZoneData =
     TF.newDataSource "azurerm_dns_zone" $
         DnsZoneData {
@@ -363,7 +399,7 @@ instance P.HasComputedMaximumThroughputUnits (EventhubNamespaceData s) Text
 instance P.HasComputedSku (EventhubNamespaceData s) Text
 instance P.HasComputedTags (EventhubNamespaceData s) Text
 
-eventhubNamespaceData :: TF.DataSource P.AzureRM (EventhubNamespaceData s)
+eventhubNamespaceData :: TF.Schema TF.DataSource P.AzureRM (EventhubNamespaceData s)
 eventhubNamespaceData =
     TF.newDataSource "azurerm_eventhub_namespace" $
         EventhubNamespaceData {
@@ -420,7 +456,7 @@ instance P.HasComputedName (ImageData s) Text
 instance P.HasComputedOsDisk (ImageData s) Text
 instance P.HasComputedTags (ImageData s) Text
 
-imageData :: TF.DataSource P.AzureRM (ImageData s)
+imageData :: TF.Schema TF.DataSource P.AzureRM (ImageData s)
 imageData =
     TF.newDataSource "azurerm_image" $
         ImageData {
@@ -455,7 +491,7 @@ instance P.HasComputedId (KeyVaultAccessPolicyData s) Text
 instance P.HasComputedKeyPermissions (KeyVaultAccessPolicyData s) Text
 instance P.HasComputedSecretPermissions (KeyVaultAccessPolicyData s) Text
 
-keyVaultAccessPolicyData :: TF.DataSource P.AzureRM (KeyVaultAccessPolicyData s)
+keyVaultAccessPolicyData :: TF.Schema TF.DataSource P.AzureRM (KeyVaultAccessPolicyData s)
 keyVaultAccessPolicyData =
     TF.newDataSource "azurerm_key_vault_access_policy" $
         KeyVaultAccessPolicyData {
@@ -497,7 +533,7 @@ instance P.HasComputedSourceUri (ManagedDiskData s) Text
 instance P.HasComputedStorageAccountType (ManagedDiskData s) Text
 instance P.HasComputedTags (ManagedDiskData s) Text
 
-managedDiskData :: TF.DataSource P.AzureRM (ManagedDiskData s)
+managedDiskData :: TF.Schema TF.DataSource P.AzureRM (ManagedDiskData s)
 managedDiskData =
     TF.newDataSource "azurerm_managed_disk" $
         ManagedDiskData {
@@ -537,7 +573,7 @@ instance P.HasComputedLocation (NetworkSecurityGroupData s) Text
 instance P.HasComputedSecurityRule (NetworkSecurityGroupData s) Text
 instance P.HasComputedTags (NetworkSecurityGroupData s) Text
 
-networkSecurityGroupData :: TF.DataSource P.AzureRM (NetworkSecurityGroupData s)
+networkSecurityGroupData :: TF.Schema TF.DataSource P.AzureRM (NetworkSecurityGroupData s)
 networkSecurityGroupData =
     TF.newDataSource "azurerm_network_security_group" $
         NetworkSecurityGroupData {
@@ -591,7 +627,7 @@ instance P.HasSku (PlatformImageData s) s Text where
 instance P.HasComputedId (PlatformImageData s) Text
 instance P.HasComputedVersion (PlatformImageData s) Text
 
-platformImageData :: TF.DataSource P.AzureRM (PlatformImageData s)
+platformImageData :: TF.Schema TF.DataSource P.AzureRM (PlatformImageData s)
 platformImageData =
     TF.newDataSource "azurerm_platform_image" $
         PlatformImageData {
@@ -635,7 +671,7 @@ instance P.HasComputedIdleTimeoutInMinutes (PublicIpData s) Text
 instance P.HasComputedIpAddress (PublicIpData s) Text
 instance P.HasComputedTags (PublicIpData s) Text
 
-publicIpData :: TF.DataSource P.AzureRM (PublicIpData s)
+publicIpData :: TF.Schema TF.DataSource P.AzureRM (PublicIpData s)
 publicIpData =
     TF.newDataSource "azurerm_public_ip" $
         PublicIpData {
@@ -665,7 +701,7 @@ instance P.HasName (ResourceGroupData s) s Text where
 instance P.HasComputedLocation (ResourceGroupData s) Text
 instance P.HasComputedTags (ResourceGroupData s) Text
 
-resourceGroupData :: TF.DataSource P.AzureRM (ResourceGroupData s)
+resourceGroupData :: TF.Schema TF.DataSource P.AzureRM (ResourceGroupData s)
 resourceGroupData =
     TF.newDataSource "azurerm_resource_group" $
         ResourceGroupData {
@@ -707,7 +743,7 @@ instance P.HasComputedId (RoleDefinitionData s) Text
 instance P.HasComputedPermissions (RoleDefinitionData s) Text
 instance P.HasComputedType' (RoleDefinitionData s) Text
 
-roleDefinitionData :: TF.DataSource P.AzureRM (RoleDefinitionData s)
+roleDefinitionData :: TF.Schema TF.DataSource P.AzureRM (RoleDefinitionData s)
 roleDefinitionData =
     TF.newDataSource "azurerm_role_definition" $
         RoleDefinitionData {
@@ -749,10 +785,74 @@ instance P.HasComputedSourceResourceId (SnapshotData s) Text
 instance P.HasComputedSourceUri (SnapshotData s) Text
 instance P.HasComputedStorageAccountId (SnapshotData s) Text
 
-snapshotData :: TF.DataSource P.AzureRM (SnapshotData s)
+snapshotData :: TF.Schema TF.DataSource P.AzureRM (SnapshotData s)
 snapshotData =
     TF.newDataSource "azurerm_snapshot" $
         SnapshotData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
+{- | The @azurerm_storage_account@ AzureRM datasource.
+
+Gets information about the specified Storage Account.
+-}
+data StorageAccountData s = StorageAccountData {
+      _name                :: !(TF.Attribute s Text)
+    {- ^ (Required) Specifies the name of the Storage Account -}
+    , _resource_group_name :: !(TF.Attribute s Text)
+    {- ^ (Required) Specifies the name of the resource group the Storage Account is located in. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (StorageAccountData s) where
+    toHCL StorageAccountData{..} = TF.block $ catMaybes
+        [ TF.attribute "name" _name
+        , TF.attribute "resource_group_name" _resource_group_name
+        ]
+
+instance P.HasName (StorageAccountData s) s Text where
+    name =
+        lens (_name :: StorageAccountData s -> TF.Attribute s Text)
+             (\s a -> s { _name = a } :: StorageAccountData s)
+
+instance P.HasResourceGroupName (StorageAccountData s) s Text where
+    resourceGroupName =
+        lens (_resource_group_name :: StorageAccountData s -> TF.Attribute s Text)
+             (\s a -> s { _resource_group_name = a } :: StorageAccountData s)
+
+instance P.HasComputedAccessTier (StorageAccountData s) Text
+instance P.HasComputedAccountEncryptionSource (StorageAccountData s) Text
+instance P.HasComputedAccountKind (StorageAccountData s) Text
+instance P.HasComputedAccountReplicationType (StorageAccountData s) Text
+instance P.HasComputedAccountTier (StorageAccountData s) Text
+instance P.HasComputedCustomDomain (StorageAccountData s) Text
+instance P.HasComputedEnableBlobEncryption (StorageAccountData s) Text
+instance P.HasComputedEnableFileEncryption (StorageAccountData s) Text
+instance P.HasComputedEnableHttpsTrafficOnly (StorageAccountData s) Text
+instance P.HasComputedId (StorageAccountData s) Text
+instance P.HasComputedLocation (StorageAccountData s) Text
+instance P.HasComputedName (StorageAccountData s) Text
+instance P.HasComputedPrimaryAccessKey (StorageAccountData s) Text
+instance P.HasComputedPrimaryBlobConnectionString (StorageAccountData s) Text
+instance P.HasComputedPrimaryBlobEndpoint (StorageAccountData s) Text
+instance P.HasComputedPrimaryConnectionString (StorageAccountData s) Text
+instance P.HasComputedPrimaryFileEndpoint (StorageAccountData s) Text
+instance P.HasComputedPrimaryLocation (StorageAccountData s) Text
+instance P.HasComputedPrimaryQueueEndpoint (StorageAccountData s) Text
+instance P.HasComputedPrimaryTableEndpoint (StorageAccountData s) Text
+instance P.HasComputedSecondaryAccessKey (StorageAccountData s) Text
+instance P.HasComputedSecondaryBlobConnectionString (StorageAccountData s) Text
+instance P.HasComputedSecondaryBlobEndpoint (StorageAccountData s) Text
+instance P.HasComputedSecondaryConnectionString (StorageAccountData s) Text
+instance P.HasComputedSecondaryLocation (StorageAccountData s) Text
+instance P.HasComputedSecondaryQueueEndpoint (StorageAccountData s) Text
+instance P.HasComputedSecondaryTableEndpoint (StorageAccountData s) Text
+instance P.HasComputedTags (StorageAccountData s) Text
+
+storageAccountData :: TF.Schema TF.DataSource P.AzureRM (StorageAccountData s)
+storageAccountData =
+    TF.newDataSource "azurerm_storage_account" $
+        StorageAccountData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }
@@ -799,7 +899,7 @@ instance P.HasComputedIpConfigurations (SubnetData s) Text
 instance P.HasComputedNetworkSecurityGroupId (SubnetData s) Text
 instance P.HasComputedRouteTableId (SubnetData s) Text
 
-subnetData :: TF.DataSource P.AzureRM (SubnetData s)
+subnetData :: TF.Schema TF.DataSource P.AzureRM (SubnetData s)
 subnetData =
     TF.newDataSource "azurerm_subnet" $
         SubnetData {
@@ -833,7 +933,7 @@ instance P.HasComputedQuotaId (SubscriptionData s) Text
 instance P.HasComputedSpendingLimit (SubscriptionData s) Text
 instance P.HasComputedState (SubscriptionData s) Text
 
-subscriptionData :: TF.DataSource P.AzureRM (SubscriptionData s)
+subscriptionData :: TF.Schema TF.DataSource P.AzureRM (SubscriptionData s)
 subscriptionData =
     TF.newDataSource "azurerm_subscription" $
         SubscriptionData {
@@ -873,10 +973,58 @@ instance P.HasComputedId (VirtualNetworkData s) Text
 instance P.HasComputedSubnets (VirtualNetworkData s) Text
 instance P.HasComputedVnetPeerings (VirtualNetworkData s) Text
 
-virtualNetworkData :: TF.DataSource P.AzureRM (VirtualNetworkData s)
+virtualNetworkData :: TF.Schema TF.DataSource P.AzureRM (VirtualNetworkData s)
 virtualNetworkData =
     TF.newDataSource "azurerm_virtual_network" $
         VirtualNetworkData {
+              _name = TF.Nil
+            , _resource_group_name = TF.Nil
+            }
+
+{- | The @azurerm_virtual_network_gateway@ AzureRM datasource.
+
+Use this data source to access the properties of an Azure Virtual Network
+Gateway.
+-}
+data VirtualNetworkGatewayData s = VirtualNetworkGatewayData {
+      _name                :: !(TF.Attribute s Text)
+    {- ^ (Required) Specifies the name of the Virtual Network Gateway. -}
+    , _resource_group_name :: !(TF.Attribute s Text)
+    {- ^ (Required) Specifies the name of the resource group the Virtual Network Gateway is located in. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VirtualNetworkGatewayData s) where
+    toHCL VirtualNetworkGatewayData{..} = TF.block $ catMaybes
+        [ TF.attribute "name" _name
+        , TF.attribute "resource_group_name" _resource_group_name
+        ]
+
+instance P.HasName (VirtualNetworkGatewayData s) s Text where
+    name =
+        lens (_name :: VirtualNetworkGatewayData s -> TF.Attribute s Text)
+             (\s a -> s { _name = a } :: VirtualNetworkGatewayData s)
+
+instance P.HasResourceGroupName (VirtualNetworkGatewayData s) s Text where
+    resourceGroupName =
+        lens (_resource_group_name :: VirtualNetworkGatewayData s -> TF.Attribute s Text)
+             (\s a -> s { _resource_group_name = a } :: VirtualNetworkGatewayData s)
+
+instance P.HasComputedActiveActive (VirtualNetworkGatewayData s) Text
+instance P.HasComputedDefaultLocalNetworkGatewayId (VirtualNetworkGatewayData s) Text
+instance P.HasComputedEnableBgp (VirtualNetworkGatewayData s) Text
+instance P.HasComputedId (VirtualNetworkGatewayData s) Text
+instance P.HasComputedIpConfiguration (VirtualNetworkGatewayData s) Text
+instance P.HasComputedLocation (VirtualNetworkGatewayData s) Text
+instance P.HasComputedSku (VirtualNetworkGatewayData s) Text
+instance P.HasComputedTags (VirtualNetworkGatewayData s) Text
+instance P.HasComputedType' (VirtualNetworkGatewayData s) Text
+instance P.HasComputedVpnClientConfiguration (VirtualNetworkGatewayData s) Text
+instance P.HasComputedVpnType (VirtualNetworkGatewayData s) Text
+
+virtualNetworkGatewayData :: TF.Schema TF.DataSource P.AzureRM (VirtualNetworkGatewayData s)
+virtualNetworkGatewayData =
+    TF.newDataSource "azurerm_virtual_network_gateway" $
+        VirtualNetworkGatewayData {
               _name = TF.Nil
             , _resource_group_name = TF.Nil
             }

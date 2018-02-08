@@ -110,7 +110,7 @@ import           Terrafomo.OPC.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @opc_compute_image_list_entry@ OPC datasource.
 
@@ -152,7 +152,7 @@ instance P.HasComputedDns (ComputeImageListEntryData s) Text
 instance P.HasComputedMachineImages (ComputeImageListEntryData s) Text
 instance P.HasComputedUri (ComputeImageListEntryData s) Text
 
-computeImageListEntryData :: TF.DataSource P.OPC (ComputeImageListEntryData s)
+computeImageListEntryData :: TF.Schema TF.DataSource P.OPC (ComputeImageListEntryData s)
 computeImageListEntryData =
     TF.newDataSource "opc_compute_image_list_entry" $
         ComputeImageListEntryData {
@@ -198,7 +198,7 @@ instance P.HasComputedPlatform (ComputeMachineImageData s) Text
 instance P.HasComputedState (ComputeMachineImageData s) Text
 instance P.HasComputedUri (ComputeMachineImageData s) Text
 
-computeMachineImageData :: TF.DataSource P.OPC (ComputeMachineImageData s)
+computeMachineImageData :: TF.Schema TF.DataSource P.OPC (ComputeMachineImageData s)
 computeMachineImageData =
     TF.newDataSource "opc_compute_machine_image" $
         ComputeMachineImageData {
@@ -256,7 +256,7 @@ instance P.HasComputedSharedNetwork (ComputeNetworkInterfaceData s) Text
 instance P.HasComputedVnic (ComputeNetworkInterfaceData s) Text
 instance P.HasComputedVnicSets (ComputeNetworkInterfaceData s) Text
 
-computeNetworkInterfaceData :: TF.DataSource P.OPC (ComputeNetworkInterfaceData s)
+computeNetworkInterfaceData :: TF.Schema TF.DataSource P.OPC (ComputeNetworkInterfaceData s)
 computeNetworkInterfaceData =
     TF.newDataSource "opc_compute_network_interface" $
         ComputeNetworkInterfaceData {
@@ -303,7 +303,7 @@ instance P.HasComputedTags (ComputeStorageVolumeSnapshotData s) Text
 instance P.HasComputedUri (ComputeStorageVolumeSnapshotData s) Text
 instance P.HasComputedVolumeName (ComputeStorageVolumeSnapshotData s) Text
 
-computeStorageVolumeSnapshotData :: TF.DataSource P.OPC (ComputeStorageVolumeSnapshotData s)
+computeStorageVolumeSnapshotData :: TF.Schema TF.DataSource P.OPC (ComputeStorageVolumeSnapshotData s)
 computeStorageVolumeSnapshotData =
     TF.newDataSource "opc_compute_storage_volume_snapshot" $
         ComputeStorageVolumeSnapshotData {
@@ -335,7 +335,7 @@ instance P.HasComputedTags (ComputeVnicData s) Text
 instance P.HasComputedTransitFlag (ComputeVnicData s) Text
 instance P.HasComputedUri (ComputeVnicData s) Text
 
-computeVnicData :: TF.DataSource P.OPC (ComputeVnicData s)
+computeVnicData :: TF.Schema TF.DataSource P.OPC (ComputeVnicData s)
 computeVnicData =
     TF.newDataSource "opc_compute_vnic" $
         ComputeVnicData {

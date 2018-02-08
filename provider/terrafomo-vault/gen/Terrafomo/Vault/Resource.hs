@@ -140,7 +140,7 @@ import           Terrafomo.Vault.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @vault_auth_backend@ Vault resource.
 
@@ -178,7 +178,7 @@ instance P.HasType' (AuthBackendResource s) s Text where
              (\s a -> s { _type' = a } :: AuthBackendResource s)
 
 
-authBackendResource :: TF.Resource P.Vault (AuthBackendResource s)
+authBackendResource :: TF.Schema TF.Resource P.Vault (AuthBackendResource s)
 authBackendResource =
     TF.newResource "vault_auth_backend" $
         AuthBackendResource {
@@ -239,7 +239,7 @@ instance P.HasType' (AwsAuthBackendCertResource s) s Text where
              (\s a -> s { _type' = a } :: AwsAuthBackendCertResource s)
 
 
-awsAuthBackendCertResource :: TF.Resource P.Vault (AwsAuthBackendCertResource s)
+awsAuthBackendCertResource :: TF.Schema TF.Resource P.Vault (AwsAuthBackendCertResource s)
 awsAuthBackendCertResource =
     TF.newResource "vault_aws_auth_backend_cert" $
         AwsAuthBackendCertResource {
@@ -326,7 +326,7 @@ instance P.HasStsEndpoint (AwsAuthBackendClientResource s) s Text where
              (\s a -> s { _sts_endpoint = a } :: AwsAuthBackendClientResource s)
 
 
-awsAuthBackendClientResource :: TF.Resource P.Vault (AwsAuthBackendClientResource s)
+awsAuthBackendClientResource :: TF.Schema TF.Resource P.Vault (AwsAuthBackendClientResource s)
 awsAuthBackendClientResource =
     TF.newResource "vault_aws_auth_backend_client" $
         AwsAuthBackendClientResource {
@@ -442,7 +442,7 @@ instance P.HasComputedMetadata (AwsAuthBackendLoginResource s) Text
 instance P.HasComputedPolicies (AwsAuthBackendLoginResource s) Text
 instance P.HasComputedRenewable (AwsAuthBackendLoginResource s) Text
 
-awsAuthBackendLoginResource :: TF.Resource P.Vault (AwsAuthBackendLoginResource s)
+awsAuthBackendLoginResource :: TF.Schema TF.Resource P.Vault (AwsAuthBackendLoginResource s)
 awsAuthBackendLoginResource =
     TF.newResource "vault_aws_auth_backend_login" $
         AwsAuthBackendLoginResource {
@@ -633,7 +633,7 @@ instance P.HasTtl (AwsAuthBackendRoleResource s) s Text where
              (\s a -> s { _ttl = a } :: AwsAuthBackendRoleResource s)
 
 
-awsAuthBackendRoleResource :: TF.Resource P.Vault (AwsAuthBackendRoleResource s)
+awsAuthBackendRoleResource :: TF.Schema TF.Resource P.Vault (AwsAuthBackendRoleResource s)
 awsAuthBackendRoleResource =
     TF.newResource "vault_aws_auth_backend_role" $
         AwsAuthBackendRoleResource {
@@ -703,7 +703,7 @@ instance P.HasStsRole (AwsAuthBackendStsRoleResource s) s Text where
              (\s a -> s { _sts_role = a } :: AwsAuthBackendStsRoleResource s)
 
 
-awsAuthBackendStsRoleResource :: TF.Resource P.Vault (AwsAuthBackendStsRoleResource s)
+awsAuthBackendStsRoleResource :: TF.Schema TF.Resource P.Vault (AwsAuthBackendStsRoleResource s)
 awsAuthBackendStsRoleResource =
     TF.newResource "vault_aws_auth_backend_sts_role" $
         AwsAuthBackendStsRoleResource {
@@ -745,7 +745,7 @@ instance P.HasSecretKey (AwsSecretBackendResource s) s Text where
              (\s a -> s { _secret_key = a } :: AwsSecretBackendResource s)
 
 
-awsSecretBackendResource :: TF.Resource P.Vault (AwsSecretBackendResource s)
+awsSecretBackendResource :: TF.Schema TF.Resource P.Vault (AwsSecretBackendResource s)
 awsSecretBackendResource =
     TF.newResource "vault_aws_secret_backend" $
         AwsSecretBackendResource {
@@ -802,7 +802,7 @@ instance P.HasPolicyArn (AwsSecretBackendRoleResource s) s Text where
              (\s a -> s { _policy_arn = a } :: AwsSecretBackendRoleResource s)
 
 
-awsSecretBackendRoleResource :: TF.Resource P.Vault (AwsSecretBackendRoleResource s)
+awsSecretBackendRoleResource :: TF.Schema TF.Resource P.Vault (AwsSecretBackendRoleResource s)
 awsSecretBackendRoleResource =
     TF.newResource "vault_aws_secret_backend_role" $
         AwsSecretBackendRoleResource {
@@ -864,7 +864,7 @@ instance P.HasPath (GenericSecretResource s) s Text where
              (\s a -> s { _path = a } :: GenericSecretResource s)
 
 
-genericSecretResource :: TF.Resource P.Vault (GenericSecretResource s)
+genericSecretResource :: TF.Schema TF.Resource P.Vault (GenericSecretResource s)
 genericSecretResource =
     TF.newResource "vault_generic_secret" $
         GenericSecretResource {
@@ -926,7 +926,7 @@ instance P.HasType' (MountResource s) s Text where
              (\s a -> s { _type' = a } :: MountResource s)
 
 
-mountResource :: TF.Resource P.Vault (MountResource s)
+mountResource :: TF.Schema TF.Resource P.Vault (MountResource s)
 mountResource =
     TF.newResource "vault_mount" $
         MountResource {
@@ -965,7 +965,7 @@ instance P.HasPolicy (PolicyResource s) s Text where
              (\s a -> s { _policy = a } :: PolicyResource s)
 
 
-policyResource :: TF.Resource P.Vault (PolicyResource s)
+policyResource :: TF.Schema TF.Resource P.Vault (PolicyResource s)
 policyResource =
     TF.newResource "vault_policy" $
         PolicyResource {

@@ -78,7 +78,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @circonus_account@ Circonus datasource.
 
@@ -128,7 +128,7 @@ instance P.HasComputedUiBaseUrl (AccountData s) Text
 instance P.HasComputedUsage (AccountData s) Text
 instance P.HasComputedUsers (AccountData s) Text
 
-accountData :: TF.DataSource P.Circonus (AccountData s)
+accountData :: TF.Schema TF.DataSource P.Circonus (AccountData s)
 accountData =
     TF.newDataSource "circonus_account" $
         AccountData {
@@ -176,7 +176,7 @@ instance P.HasComputedName (CollectorData s) Text
 instance P.HasComputedTags (CollectorData s) Text
 instance P.HasComputedType' (CollectorData s) Text
 
-collectorData :: TF.DataSource P.Circonus (CollectorData s)
+collectorData :: TF.Schema TF.DataSource P.Circonus (CollectorData s)
 collectorData =
     TF.newDataSource "circonus_collector" $
         CollectorData {

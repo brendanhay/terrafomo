@@ -63,7 +63,7 @@ import           Terrafomo.StatusCake.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @statuscake_test@ StatusCake resource.
 
@@ -158,7 +158,7 @@ instance P.HasWebsiteUrl (TestResource s) s Text where
 
 instance P.HasComputedTestId (TestResource s) Text
 
-testResource :: TF.Resource P.StatusCake (TestResource s)
+testResource :: TF.Schema TF.Resource P.StatusCake (TestResource s)
 testResource =
     TF.newResource "statuscake_test" $
         TestResource {

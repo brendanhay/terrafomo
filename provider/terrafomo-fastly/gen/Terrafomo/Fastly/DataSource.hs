@@ -53,7 +53,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @fastly_ip_ranges@ Fastly datasource.
 
@@ -69,7 +69,7 @@ instance TF.ToHCL (IpRangesData s) where
 
 instance P.HasComputedCidrBlocks (IpRangesData s) Text
 
-ipRangesData :: TF.DataSource P.Fastly (IpRangesData s)
+ipRangesData :: TF.Schema TF.DataSource P.Fastly (IpRangesData s)
 ipRangesData =
     TF.newDataSource "fastly_ip_ranges" $
         IpRangesData {

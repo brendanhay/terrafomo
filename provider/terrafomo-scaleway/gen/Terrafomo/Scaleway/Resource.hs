@@ -91,7 +91,7 @@ import           Terrafomo.Scaleway.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @scaleway_ip@ Scaleway resource.
 
@@ -117,7 +117,7 @@ instance P.HasServer (IpResource s) s Text where
 instance P.HasComputedId (IpResource s) Text
 instance P.HasComputedIp (IpResource s) Text
 
-ipResource :: TF.Resource P.Scaleway (IpResource s)
+ipResource :: TF.Schema TF.Resource P.Scaleway (IpResource s)
 ipResource =
     TF.newResource "scaleway_ip" $
         IpResource {
@@ -155,7 +155,7 @@ instance P.HasName (SecurityGroupResource s) s Text where
 
 instance P.HasComputedId (SecurityGroupResource s) Text
 
-securityGroupResource :: TF.Resource P.Scaleway (SecurityGroupResource s)
+securityGroupResource :: TF.Schema TF.Resource P.Scaleway (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "scaleway_security_group" $
         SecurityGroupResource {
@@ -226,7 +226,7 @@ instance P.HasSecurityGroup (SecurityGroupRuleResource s) s Text where
 
 instance P.HasComputedId (SecurityGroupRuleResource s) Text
 
-securityGroupRuleResource :: TF.Resource P.Scaleway (SecurityGroupRuleResource s)
+securityGroupRuleResource :: TF.Schema TF.Resource P.Scaleway (SecurityGroupRuleResource s)
 securityGroupRuleResource =
     TF.newResource "scaleway_security_group_rule" $
         SecurityGroupRuleResource {
@@ -351,7 +351,7 @@ instance P.HasComputedId (ServerResource s) Text
 instance P.HasComputedPrivateIp (ServerResource s) Text
 instance P.HasComputedPublicIp (ServerResource s) Text
 
-serverResource :: TF.Resource P.Scaleway (ServerResource s)
+serverResource :: TF.Schema TF.Resource P.Scaleway (ServerResource s)
 serverResource =
     TF.newResource "scaleway_server" $
         ServerResource {
@@ -400,7 +400,7 @@ instance P.HasVolume (VolumeAttachmentResource s) s Text where
 
 instance P.HasComputedId (VolumeAttachmentResource s) Text
 
-volumeAttachmentResource :: TF.Resource P.Scaleway (VolumeAttachmentResource s)
+volumeAttachmentResource :: TF.Schema TF.Resource P.Scaleway (VolumeAttachmentResource s)
 volumeAttachmentResource =
     TF.newResource "scaleway_volume_attachment" $
         VolumeAttachmentResource {
@@ -455,7 +455,7 @@ instance P.HasType' (VolumeResource s) s Text where
 
 instance P.HasComputedId (VolumeResource s) Text
 
-volumeResource :: TF.Resource P.Scaleway (VolumeResource s)
+volumeResource :: TF.Schema TF.Resource P.Scaleway (VolumeResource s)
 volumeResource =
     TF.newResource "scaleway_volume" $
         VolumeResource {

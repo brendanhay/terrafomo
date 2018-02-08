@@ -98,7 +98,7 @@ import           Terrafomo.Kubernetes.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @kubernetes_config_map@ Kubernetes resource.
 
@@ -131,7 +131,7 @@ instance P.HasMetadata (ConfigMapResource s) s Text where
              (\s a -> s { _metadata = a } :: ConfigMapResource s)
 
 
-configMapResource :: TF.Resource P.Kubernetes (ConfigMapResource s)
+configMapResource :: TF.Schema TF.Resource P.Kubernetes (ConfigMapResource s)
 configMapResource =
     TF.newResource "kubernetes_config_map" $
         ConfigMapResource {
@@ -169,7 +169,7 @@ instance P.HasSpec (HorizontalPodAutoscalerResource s) s Text where
              (\s a -> s { _spec = a } :: HorizontalPodAutoscalerResource s)
 
 
-horizontalPodAutoscalerResource :: TF.Resource P.Kubernetes (HorizontalPodAutoscalerResource s)
+horizontalPodAutoscalerResource :: TF.Schema TF.Resource P.Kubernetes (HorizontalPodAutoscalerResource s)
 horizontalPodAutoscalerResource =
     TF.newResource "kubernetes_horizontal_pod_autoscaler" $
         HorizontalPodAutoscalerResource {
@@ -208,7 +208,7 @@ instance P.HasSpec (LimitRangeResource s) s Text where
              (\s a -> s { _spec = a } :: LimitRangeResource s)
 
 
-limitRangeResource :: TF.Resource P.Kubernetes (LimitRangeResource s)
+limitRangeResource :: TF.Schema TF.Resource P.Kubernetes (LimitRangeResource s)
 limitRangeResource =
     TF.newResource "kubernetes_limit_range" $
         LimitRangeResource {
@@ -238,7 +238,7 @@ instance P.HasMetadata (NamespaceResource s) s Text where
              (\s a -> s { _metadata = a } :: NamespaceResource s)
 
 
-namespaceResource :: TF.Resource P.Kubernetes (NamespaceResource s)
+namespaceResource :: TF.Schema TF.Resource P.Kubernetes (NamespaceResource s)
 namespaceResource =
     TF.newResource "kubernetes_namespace" $
         NamespaceResource {
@@ -282,7 +282,7 @@ instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) s Text where
              (\s a -> s { _wait_until_bound = a } :: PersistentVolumeClaimResource s)
 
 
-persistentVolumeClaimResource :: TF.Resource P.Kubernetes (PersistentVolumeClaimResource s)
+persistentVolumeClaimResource :: TF.Schema TF.Resource P.Kubernetes (PersistentVolumeClaimResource s)
 persistentVolumeClaimResource =
     TF.newResource "kubernetes_persistent_volume_claim" $
         PersistentVolumeClaimResource {
@@ -323,7 +323,7 @@ instance P.HasSpec (PersistentVolumeResource s) s Text where
              (\s a -> s { _spec = a } :: PersistentVolumeResource s)
 
 
-persistentVolumeResource :: TF.Resource P.Kubernetes (PersistentVolumeResource s)
+persistentVolumeResource :: TF.Schema TF.Resource P.Kubernetes (PersistentVolumeResource s)
 persistentVolumeResource =
     TF.newResource "kubernetes_persistent_volume" $
         PersistentVolumeResource {
@@ -362,7 +362,7 @@ instance P.HasSpec (PodResource s) s Text where
              (\s a -> s { _spec = a } :: PodResource s)
 
 
-podResource :: TF.Resource P.Kubernetes (PodResource s)
+podResource :: TF.Schema TF.Resource P.Kubernetes (PodResource s)
 podResource =
     TF.newResource "kubernetes_pod" $
         PodResource {
@@ -402,7 +402,7 @@ instance P.HasSpec (ReplicationControllerResource s) s Text where
              (\s a -> s { _spec = a } :: ReplicationControllerResource s)
 
 
-replicationControllerResource :: TF.Resource P.Kubernetes (ReplicationControllerResource s)
+replicationControllerResource :: TF.Schema TF.Resource P.Kubernetes (ReplicationControllerResource s)
 replicationControllerResource =
     TF.newResource "kubernetes_replication_controller" $
         ReplicationControllerResource {
@@ -441,7 +441,7 @@ instance P.HasSpec (ResourceQuotaResource s) s Text where
              (\s a -> s { _spec = a } :: ResourceQuotaResource s)
 
 
-resourceQuotaResource :: TF.Resource P.Kubernetes (ResourceQuotaResource s)
+resourceQuotaResource :: TF.Schema TF.Resource P.Kubernetes (ResourceQuotaResource s)
 resourceQuotaResource =
     TF.newResource "kubernetes_resource_quota" $
         ResourceQuotaResource {
@@ -494,7 +494,7 @@ instance P.HasType' (SecretResource s) s Text where
              (\s a -> s { _type' = a } :: SecretResource s)
 
 
-secretResource :: TF.Resource P.Kubernetes (SecretResource s)
+secretResource :: TF.Schema TF.Resource P.Kubernetes (SecretResource s)
 secretResource =
     TF.newResource "kubernetes_secret" $
         SecretResource {
@@ -541,7 +541,7 @@ instance P.HasSecret (ServiceAccountResource s) s Text where
 
 instance P.HasComputedDefaultSecretName (ServiceAccountResource s) Text
 
-serviceAccountResource :: TF.Resource P.Kubernetes (ServiceAccountResource s)
+serviceAccountResource :: TF.Schema TF.Resource P.Kubernetes (ServiceAccountResource s)
 serviceAccountResource =
     TF.newResource "kubernetes_service_account" $
         ServiceAccountResource {
@@ -579,7 +579,7 @@ instance P.HasSpec (ServiceResource s) s Text where
              (\s a -> s { _spec = a } :: ServiceResource s)
 
 
-serviceResource :: TF.Resource P.Kubernetes (ServiceResource s)
+serviceResource :: TF.Schema TF.Resource P.Kubernetes (ServiceResource s)
 serviceResource =
     TF.newResource "kubernetes_service" $
         ServiceResource {
@@ -626,7 +626,7 @@ instance P.HasStorageProvisioner (StorageClassResource s) s Text where
              (\s a -> s { _storage_provisioner = a } :: StorageClassResource s)
 
 
-storageClassResource :: TF.Resource P.Kubernetes (StorageClassResource s)
+storageClassResource :: TF.Schema TF.Resource P.Kubernetes (StorageClassResource s)
 storageClassResource =
     TF.newResource "kubernetes_storage_class" $
         StorageClassResource {

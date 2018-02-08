@@ -120,7 +120,7 @@ import           Terrafomo.Rancher.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @rancher_certificate@ Rancher resource.
 
@@ -194,7 +194,7 @@ instance P.HasComputedSerialNumber (CertificateResource s) Text
 instance P.HasComputedSubjectAlternativeNames (CertificateResource s) Text
 instance P.HasComputedVersion (CertificateResource s) Text
 
-certificateResource :: TF.Resource P.Rancher (CertificateResource s)
+certificateResource :: TF.Schema TF.Resource P.Rancher (CertificateResource s)
 certificateResource =
     TF.newResource "rancher_certificate" $
         CertificateResource {
@@ -260,7 +260,7 @@ instance P.HasProjectTemplateId (EnvironmentResource s) s Text where
 
 instance P.HasComputedId (EnvironmentResource s) Text
 
-environmentResource :: TF.Resource P.Rancher (EnvironmentResource s)
+environmentResource :: TF.Schema TF.Resource P.Rancher (EnvironmentResource s)
 environmentResource =
     TF.newResource "rancher_environment" $
         EnvironmentResource {
@@ -332,7 +332,7 @@ instance P.HasName (HostResource s) s Text where
              (\s a -> s { _name = a } :: HostResource s)
 
 
-hostResource :: TF.Resource P.Rancher (HostResource s)
+hostResource :: TF.Schema TF.Resource P.Rancher (HostResource s)
 hostResource =
     TF.newResource "rancher_host" $
         HostResource {
@@ -402,7 +402,7 @@ instance P.HasComputedImage (RegistrationTokenResource s) Text
 instance P.HasComputedRegistrationUrl (RegistrationTokenResource s) Text
 instance P.HasComputedToken (RegistrationTokenResource s) Text
 
-registrationTokenResource :: TF.Resource P.Rancher (RegistrationTokenResource s)
+registrationTokenResource :: TF.Schema TF.Resource P.Rancher (RegistrationTokenResource s)
 registrationTokenResource =
     TF.newResource "rancher_registration_token" $
         RegistrationTokenResource {
@@ -468,7 +468,7 @@ instance P.HasSecretValue (RegistryCredentialResource s) s Text where
 
 instance P.HasComputedId (RegistryCredentialResource s) Text
 
-registryCredentialResource :: TF.Resource P.Rancher (RegistryCredentialResource s)
+registryCredentialResource :: TF.Schema TF.Resource P.Rancher (RegistryCredentialResource s)
 registryCredentialResource =
     TF.newResource "rancher_registry_credential" $
         RegistryCredentialResource {
@@ -525,7 +525,7 @@ instance P.HasServerAddress (RegistryResource s) s Text where
 
 instance P.HasComputedId (RegistryResource s) Text
 
-registryResource :: TF.Resource P.Rancher (RegistryResource s)
+registryResource :: TF.Schema TF.Resource P.Rancher (RegistryResource s)
 registryResource =
     TF.newResource "rancher_registry" $
         RegistryResource {
@@ -580,7 +580,7 @@ instance P.HasValue (SecretsResource s) s Text where
              (\s a -> s { _value = a } :: SecretsResource s)
 
 
-secretsResource :: TF.Resource P.Rancher (SecretsResource s)
+secretsResource :: TF.Schema TF.Resource P.Rancher (SecretsResource s)
 secretsResource =
     TF.newResource "rancher_secrets" $
         SecretsResource {
@@ -686,7 +686,7 @@ instance P.HasComputedId (StackResource s) Text
 instance P.HasComputedRenderedDockerCompose (StackResource s) Text
 instance P.HasComputedRenderedRancherCompose (StackResource s) Text
 
-stackResource :: TF.Resource P.Rancher (StackResource s)
+stackResource :: TF.Schema TF.Resource P.Rancher (StackResource s)
 stackResource =
     TF.newResource "rancher_stack" $
         StackResource {
@@ -747,7 +747,7 @@ instance P.HasName (VolumesResource s) s Text where
              (\s a -> s { _name = a } :: VolumesResource s)
 
 
-volumesResource :: TF.Resource P.Rancher (VolumesResource s)
+volumesResource :: TF.Schema TF.Resource P.Rancher (VolumesResource s)
 volumesResource =
     TF.newResource "rancher_volumes" $
         VolumesResource {

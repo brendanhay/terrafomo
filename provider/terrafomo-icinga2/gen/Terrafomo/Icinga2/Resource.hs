@@ -70,7 +70,7 @@ import qualified Terrafomo.IP               as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @icinga2_checkcommand@ Icinga2 resource.
 
@@ -117,7 +117,7 @@ instance P.HasTemplates (CheckcommandResource s) s Text where
              (\s a -> s { _templates = a } :: CheckcommandResource s)
 
 
-checkcommandResource :: TF.Resource P.Icinga2 (CheckcommandResource s)
+checkcommandResource :: TF.Schema TF.Resource P.Icinga2 (CheckcommandResource s)
 checkcommandResource =
     TF.newResource "icinga2_checkcommand" $
         CheckcommandResource {
@@ -180,7 +180,7 @@ instance P.HasVars (HostResource s) s Text where
              (\s a -> s { _vars = a } :: HostResource s)
 
 
-hostResource :: TF.Resource P.Icinga2 (HostResource s)
+hostResource :: TF.Schema TF.Resource P.Icinga2 (HostResource s)
 hostResource =
     TF.newResource "icinga2_host" $
         HostResource {
@@ -220,7 +220,7 @@ instance P.HasName (HostgroupResource s) s Text where
              (\s a -> s { _name = a } :: HostgroupResource s)
 
 
-hostgroupResource :: TF.Resource P.Icinga2 (HostgroupResource s)
+hostgroupResource :: TF.Schema TF.Resource P.Icinga2 (HostgroupResource s)
 hostgroupResource =
     TF.newResource "icinga2_hostgroup" $
         HostgroupResource {
@@ -265,7 +265,7 @@ instance P.HasName (ServiceResource s) s Text where
              (\s a -> s { _name = a } :: ServiceResource s)
 
 
-serviceResource :: TF.Resource P.Icinga2 (ServiceResource s)
+serviceResource :: TF.Schema TF.Resource P.Icinga2 (ServiceResource s)
 serviceResource =
     TF.newResource "icinga2_service" $
         ServiceResource {

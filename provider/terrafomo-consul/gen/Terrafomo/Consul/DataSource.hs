@@ -71,14 +71,14 @@ import Lens.Micro (lens)
 import Terrafomo.Consul.Types as P
 import qualified Terrafomo.Consul.Lens as P
 import qualified Terrafomo.Consul.Provider as P
-import qualified Data.Word as P
-import qualified GHC.Base as P
+import qualified Data.Word       as P
+import qualified GHC.Base        as P
 import qualified Numeric.Natural as P
-import qualified Terrafomo.IP as P
+import qualified Terrafomo.IP    as P
 
 import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Source as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @consul_agent_self@ Consul datasource.
 
@@ -93,7 +93,7 @@ instance TF.ToHCL (AgentSelfData s) where
     toHCL _ = TF.block []
 
 
-agentSelfData :: TF.DataSource P.Consul (AgentSelfData s)
+agentSelfData :: TF.Schema TF.DataSource P.Consul (AgentSelfData s)
 agentSelfData =
     TF.newDataSource "consul_agent_self" $
         AgentSelfData {
@@ -134,7 +134,7 @@ instance P.HasComputedNodeIds (CatalogNodesData s) Text
 instance P.HasComputedNodeNames (CatalogNodesData s) Text
 instance P.HasComputedNodes (CatalogNodesData s) Text
 
-catalogNodesData :: TF.DataSource P.Consul (CatalogNodesData s)
+catalogNodesData :: TF.Schema TF.DataSource P.Consul (CatalogNodesData s)
 catalogNodesData =
     TF.newDataSource "consul_catalog_nodes" $
         CatalogNodesData {
@@ -196,7 +196,7 @@ instance P.HasComputedName (CatalogServiceData s) Text
 instance P.HasComputedService (CatalogServiceData s) Text
 instance P.HasComputedTag (CatalogServiceData s) Text
 
-catalogServiceData :: TF.DataSource P.Consul (CatalogServiceData s)
+catalogServiceData :: TF.Schema TF.DataSource P.Consul (CatalogServiceData s)
 catalogServiceData =
     TF.newDataSource "consul_catalog_service" $
         CatalogServiceData {
@@ -255,7 +255,7 @@ instance P.HasComputedPathPrefix (KeyPrefixData s) Text
 instance P.HasComputedSubkeys (KeyPrefixData s) Text
 instance P.HasComputedVar<name> (KeyPrefixData s) Text
 
-keyPrefixData :: TF.DataSource P.Consul (KeyPrefixData s)
+keyPrefixData :: TF.Schema TF.DataSource P.Consul (KeyPrefixData s)
 keyPrefixData =
     TF.newDataSource "consul_key_prefix" $
         KeyPrefixData {

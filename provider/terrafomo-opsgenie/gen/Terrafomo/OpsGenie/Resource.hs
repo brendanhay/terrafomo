@@ -64,7 +64,7 @@ import           Terrafomo.OpsGenie.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @opsgenie_team@ OpsGenie resource.
 
@@ -103,7 +103,7 @@ instance P.HasName (TeamResource s) s Text where
 
 instance P.HasComputedId (TeamResource s) Text
 
-teamResource :: TF.Resource P.OpsGenie (TeamResource s)
+teamResource :: TF.Schema TF.Resource P.OpsGenie (TeamResource s)
 teamResource =
     TF.newResource "opsgenie_team" $
         TeamResource {
@@ -165,7 +165,7 @@ instance P.HasUsername (UserResource s) s Text where
 
 instance P.HasComputedId (UserResource s) Text
 
-userResource :: TF.Resource P.OpsGenie (UserResource s)
+userResource :: TF.Schema TF.Resource P.OpsGenie (UserResource s)
 userResource =
     TF.newResource "opsgenie_user" $
         UserResource {

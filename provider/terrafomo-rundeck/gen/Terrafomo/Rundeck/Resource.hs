@@ -93,7 +93,7 @@ import           Terrafomo.Rundeck.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @rundeck_job@ Rundeck resource.
 
@@ -247,7 +247,7 @@ instance P.HasSchedule (JobResource s) s Text where
 
 instance P.HasComputedId (JobResource s) Text
 
-jobResource :: TF.Resource P.Rundeck (JobResource s)
+jobResource :: TF.Schema TF.Resource P.Rundeck (JobResource s)
 jobResource =
     TF.newResource "rundeck_job" $
         JobResource {
@@ -300,7 +300,7 @@ instance P.HasPath (PrivateKeyResource s) s Text where
              (\s a -> s { _path = a } :: PrivateKeyResource s)
 
 
-privateKeyResource :: TF.Resource P.Rundeck (PrivateKeyResource s)
+privateKeyResource :: TF.Schema TF.Resource P.Rundeck (PrivateKeyResource s)
 privateKeyResource =
     TF.newResource "rundeck_private_key" $
         PrivateKeyResource {
@@ -396,7 +396,7 @@ instance P.HasSshKeyStoragePath (ProjectResource s) s Text where
 instance P.HasComputedName (ProjectResource s) Text
 instance P.HasComputedUiUrl (ProjectResource s) Text
 
-projectResource :: TF.Resource P.Rundeck (ProjectResource s)
+projectResource :: TF.Schema TF.Resource P.Rundeck (ProjectResource s)
 projectResource =
     TF.newResource "rundeck_project" $
         ProjectResource {
@@ -453,7 +453,7 @@ instance P.HasPath (PublicKeyResource s) s Text where
 instance P.HasComputedKeyMaterial (PublicKeyResource s) Text
 instance P.HasComputedUrl (PublicKeyResource s) Text
 
-publicKeyResource :: TF.Resource P.Rundeck (PublicKeyResource s)
+publicKeyResource :: TF.Schema TF.Resource P.Rundeck (PublicKeyResource s)
 publicKeyResource =
     TF.newResource "rundeck_public_key" $
         PublicKeyResource {

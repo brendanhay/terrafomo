@@ -77,7 +77,7 @@ import qualified Terrafomo.IP            as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @chef_data_bag_item@ Chef resource.
 
@@ -111,7 +111,7 @@ instance P.HasDataBagName (DataBagItemResource s) s Text where
 
 instance P.HasComputedId (DataBagItemResource s) Text
 
-dataBagItemResource :: TF.Resource P.Chef (DataBagItemResource s)
+dataBagItemResource :: TF.Schema TF.Resource P.Chef (DataBagItemResource s)
 dataBagItemResource =
     TF.newResource "chef_data_bag_item" $
         DataBagItemResource {
@@ -144,7 +144,7 @@ instance P.HasName (DataBagResource s) s Text where
 
 instance P.HasComputedApiUri (DataBagResource s) Text
 
-dataBagResource :: TF.Resource P.Chef (DataBagResource s)
+dataBagResource :: TF.Schema TF.Resource P.Chef (DataBagResource s)
 dataBagResource =
     TF.newResource "chef_data_bag" $
         DataBagResource {
@@ -205,7 +205,7 @@ instance P.HasOverrideAttributesJson (EnvironmentResource s) s Text where
              (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
 
 
-environmentResource :: TF.Resource P.Chef (EnvironmentResource s)
+environmentResource :: TF.Schema TF.Resource P.Chef (EnvironmentResource s)
 environmentResource =
     TF.newResource "chef_environment" $
         EnvironmentResource {
@@ -289,7 +289,7 @@ instance P.HasRunList (NodeResource s) s Text where
              (\s a -> s { _run_list = a } :: NodeResource s)
 
 
-nodeResource :: TF.Resource P.Chef (NodeResource s)
+nodeResource :: TF.Schema TF.Resource P.Chef (NodeResource s)
 nodeResource =
     TF.newResource "chef_node" $
         NodeResource {
@@ -355,7 +355,7 @@ instance P.HasRunList (RoleResource s) s Text where
              (\s a -> s { _run_list = a } :: RoleResource s)
 
 
-roleResource :: TF.Resource P.Chef (RoleResource s)
+roleResource :: TF.Schema TF.Resource P.Chef (RoleResource s)
 roleResource =
     TF.newResource "chef_role" $
         RoleResource {

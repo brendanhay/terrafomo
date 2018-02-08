@@ -31,6 +31,9 @@ module Terrafomo.AliCloud.DataSource
     , DnsRecordsData (..)
     , dnsRecordsData
 
+    , EipsData (..)
+    , eipsData
+
     , ImagesData (..)
     , imagesData
 
@@ -70,6 +73,9 @@ module Terrafomo.AliCloud.DataSource
     , VpcsData (..)
     , vpcsData
 
+    , VswitchesData (..)
+    , vswitchesData
+
     , ZonesData (..)
     , zonesData
 
@@ -92,8 +98,10 @@ module Terrafomo.AliCloud.DataSource
     , P.HasHostRecordRegex (..)
     , P.HasIds (..)
     , P.HasImageId (..)
+    , P.HasInUse (..)
     , P.HasInstanceId (..)
     , P.HasInstanceTypeFamily (..)
+    , P.HasIpAddresses (..)
     , P.HasIsDefault (..)
     , P.HasIsLocked (..)
     , P.HasIsOutdated (..)
@@ -115,6 +123,7 @@ module Terrafomo.AliCloud.DataSource
     , P.HasVersionCode (..)
     , P.HasVpcId (..)
     , P.HasVswitchId (..)
+    , P.HasZoneId (..)
 
     -- ** Computed Attributes
     , P.HasComputedAccountAlias (..)
@@ -141,6 +150,7 @@ module Terrafomo.AliCloud.DataSource
     , P.HasComputedDocument (..)
     , P.HasComputedDomainId (..)
     , P.HasComputedDomainName (..)
+    , P.HasComputedEips (..)
     , P.HasComputedFamily' (..)
     , P.HasComputedFingerPrint (..)
     , P.HasComputedGroupId (..)
@@ -178,6 +188,7 @@ module Terrafomo.AliCloud.DataSource
     , P.HasComputedVpcName (..)
     , P.HasComputedVrouterId (..)
     , P.HasComputedVswitchIds (..)
+    , P.HasComputedVswitches (..)
 
     -- * Re-exported Types
     , module P
@@ -201,7 +212,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @alicloud_dns_domains@ AliCloud datasource.
 
@@ -273,7 +284,7 @@ instance P.HasComputedInstanceId (DnsDomainsData s) Text
 instance P.HasComputedPunyCode (DnsDomainsData s) Text
 instance P.HasComputedVersionCode (DnsDomainsData s) Text
 
-dnsDomainsData :: TF.DataSource P.AliCloud (DnsDomainsData s)
+dnsDomainsData :: TF.Schema TF.DataSource P.AliCloud (DnsDomainsData s)
 dnsDomainsData =
     TF.newDataSource "alicloud_dns_domains" $
         DnsDomainsData {
@@ -316,7 +327,7 @@ instance P.HasOutputFile (DnsGroupsData s) s Text where
 instance P.HasComputedGroupId (DnsGroupsData s) Text
 instance P.HasComputedGroupName (DnsGroupsData s) Text
 
-dnsGroupsData :: TF.DataSource P.AliCloud (DnsGroupsData s)
+dnsGroupsData :: TF.Schema TF.DataSource P.AliCloud (DnsGroupsData s)
 dnsGroupsData =
     TF.newDataSource "alicloud_dns_groups" $
         DnsGroupsData {
@@ -411,7 +422,7 @@ instance P.HasComputedTtl (DnsRecordsData s) Text
 instance P.HasComputedType' (DnsRecordsData s) Text
 instance P.HasComputedValue (DnsRecordsData s) Text
 
-dnsRecordsData :: TF.DataSource P.AliCloud (DnsRecordsData s)
+dnsRecordsData :: TF.Schema TF.DataSource P.AliCloud (DnsRecordsData s)
 dnsRecordsData =
     TF.newDataSource "alicloud_dns_records" $
         DnsRecordsData {
@@ -423,6 +434,63 @@ dnsRecordsData =
             , _status = TF.Nil
             , _type' = TF.Nil
             , _value_regex = TF.Nil
+            }
+
+{- | The @alicloud_eips@ AliCloud datasource.
+
+The elastic ip address data source lists a list of eips resource information
+owned by an Alicloud account, and each EIP including its basic attribution
+and association instance.
+-}
+data EipsData s = EipsData {
+      _ids          :: !(TF.Attribute s Text)
+    {- ^ (Optional) A list of EIP allocation ID. -}
+    , _in_use       :: !(TF.Attribute s Text)
+    {- ^ (Optional) Whether the EIP is in use. Default to "false" indicates the EIP is available. -}
+    , _ip_addresses :: !(TF.Attribute s Text)
+    {- ^ (Optional) A list of EIP ip address ID. -}
+    , _output_file  :: !(TF.Attribute s Text)
+    {- ^ (Optional) The name of file that can save eips data source after running @terraform plan@ . -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (EipsData s) where
+    toHCL EipsData{..} = TF.block $ catMaybes
+        [ TF.attribute "ids" _ids
+        , TF.attribute "in_use" _in_use
+        , TF.attribute "ip_addresses" _ip_addresses
+        , TF.attribute "output_file" _output_file
+        ]
+
+instance P.HasIds (EipsData s) s Text where
+    ids =
+        lens (_ids :: EipsData s -> TF.Attribute s Text)
+             (\s a -> s { _ids = a } :: EipsData s)
+
+instance P.HasInUse (EipsData s) s Text where
+    inUse =
+        lens (_in_use :: EipsData s -> TF.Attribute s Text)
+             (\s a -> s { _in_use = a } :: EipsData s)
+
+instance P.HasIpAddresses (EipsData s) s Text where
+    ipAddresses =
+        lens (_ip_addresses :: EipsData s -> TF.Attribute s Text)
+             (\s a -> s { _ip_addresses = a } :: EipsData s)
+
+instance P.HasOutputFile (EipsData s) s Text where
+    outputFile =
+        lens (_output_file :: EipsData s -> TF.Attribute s Text)
+             (\s a -> s { _output_file = a } :: EipsData s)
+
+instance P.HasComputedEips (EipsData s) Text
+
+eipsData :: TF.Schema TF.DataSource P.AliCloud (EipsData s)
+eipsData =
+    TF.newDataSource "alicloud_eips" $
+        EipsData {
+              _ids = TF.Nil
+            , _in_use = TF.Nil
+            , _ip_addresses = TF.Nil
+            , _output_file = TF.Nil
             }
 
 {- | The @alicloud_images@ AliCloud datasource.
@@ -484,7 +552,7 @@ instance P.HasComputedProgress (ImagesData s) Text
 instance P.HasComputedSize (ImagesData s) Text
 instance P.HasComputedStatus (ImagesData s) Text
 
-imagesData :: TF.DataSource P.AliCloud (ImagesData s)
+imagesData :: TF.Schema TF.DataSource P.AliCloud (ImagesData s)
 imagesData =
     TF.newDataSource "alicloud_images" $
         ImagesData {
@@ -560,7 +628,7 @@ instance P.HasComputedFamily' (InstanceTypesData s) Text
 instance P.HasComputedId (InstanceTypesData s) Text
 instance P.HasComputedMemorySize (InstanceTypesData s) Text
 
-instanceTypesData :: TF.DataSource P.AliCloud (InstanceTypesData s)
+instanceTypesData :: TF.Schema TF.DataSource P.AliCloud (InstanceTypesData s)
 instanceTypesData =
     TF.newDataSource "alicloud_instance_types" $
         InstanceTypesData {
@@ -658,7 +726,7 @@ instance P.HasVswitchId (InstancesData s) s Text where
 
 instance P.HasComputedInstances (InstancesData s) Text
 
-instancesData :: TF.DataSource P.AliCloud (InstancesData s)
+instancesData :: TF.Schema TF.DataSource P.AliCloud (InstancesData s)
 instancesData =
     TF.newDataSource "alicloud_instances" $
         InstancesData {
@@ -714,7 +782,7 @@ instance P.HasComputedId (KeyPairsData s) Text
 instance P.HasComputedInstances (KeyPairsData s) Text
 instance P.HasComputedKeyName (KeyPairsData s) Text
 
-keyPairsData :: TF.DataSource P.AliCloud (KeyPairsData s)
+keyPairsData :: TF.Schema TF.DataSource P.AliCloud (KeyPairsData s)
 keyPairsData =
     TF.newDataSource "alicloud_key_pairs" $
         KeyPairsData {
@@ -775,7 +843,7 @@ instance P.HasComputedDescription (KmsKeysData s) Text
 instance P.HasComputedId (KmsKeysData s) Text
 instance P.HasComputedStatus (KmsKeysData s) Text
 
-kmsKeysData :: TF.DataSource P.AliCloud (KmsKeysData s)
+kmsKeysData :: TF.Schema TF.DataSource P.AliCloud (KmsKeysData s)
 kmsKeysData =
     TF.newDataSource "alicloud_kms_keys" $
         KmsKeysData {
@@ -798,7 +866,7 @@ instance TF.ToHCL (RamAccountAliasData s) where
     toHCL _ = TF.block []
 
 
-ramAccountAliasData :: TF.DataSource P.AliCloud (RamAccountAliasData s)
+ramAccountAliasData :: TF.Schema TF.DataSource P.AliCloud (RamAccountAliasData s)
 ramAccountAliasData =
     TF.newDataSource "alicloud_ram_account_alias" $
         RamAccountAliasData {
@@ -826,7 +894,7 @@ instance P.HasOutputFile (RamAccountAliasesData s) s Text where
 
 instance P.HasComputedAccountAlias (RamAccountAliasesData s) Text
 
-ramAccountAliasesData :: TF.DataSource P.AliCloud (RamAccountAliasesData s)
+ramAccountAliasesData :: TF.Schema TF.DataSource P.AliCloud (RamAccountAliasesData s)
 ramAccountAliasesData =
     TF.newDataSource "alicloud_ram_account_aliases" $
         RamAccountAliasesData {
@@ -888,7 +956,7 @@ instance P.HasUserName (RamGroupsData s) s Text where
 instance P.HasComputedComments (RamGroupsData s) Text
 instance P.HasComputedName (RamGroupsData s) Text
 
-ramGroupsData :: TF.DataSource P.AliCloud (RamGroupsData s)
+ramGroupsData :: TF.Schema TF.DataSource P.AliCloud (RamGroupsData s)
 ramGroupsData =
     TF.newDataSource "alicloud_ram_groups" $
         RamGroupsData {
@@ -968,7 +1036,7 @@ instance P.HasComputedName (RamPoliciesData s) Text
 instance P.HasComputedType' (RamPoliciesData s) Text
 instance P.HasComputedUpdateDate (RamPoliciesData s) Text
 
-ramPoliciesData :: TF.DataSource P.AliCloud (RamPoliciesData s)
+ramPoliciesData :: TF.Schema TF.DataSource P.AliCloud (RamPoliciesData s)
 ramPoliciesData =
     TF.newDataSource "alicloud_ram_policies" $
         RamPoliciesData {
@@ -1033,7 +1101,7 @@ instance P.HasComputedId (RamRolesData s) Text
 instance P.HasComputedName (RamRolesData s) Text
 instance P.HasComputedUpdateDate (RamRolesData s) Text
 
-ramRolesData :: TF.DataSource P.AliCloud (RamRolesData s)
+ramRolesData :: TF.Schema TF.DataSource P.AliCloud (RamRolesData s)
 ramRolesData =
     TF.newDataSource "alicloud_ram_roles" $
         RamRolesData {
@@ -1100,7 +1168,7 @@ instance P.HasComputedId (RamUsersData s) Text
 instance P.HasComputedLastLoginDate (RamUsersData s) Text
 instance P.HasComputedName (RamUsersData s) Text
 
-ramUsersData :: TF.DataSource P.AliCloud (RamUsersData s)
+ramUsersData :: TF.Schema TF.DataSource P.AliCloud (RamUsersData s)
 ramUsersData =
     TF.newDataSource "alicloud_ram_users" $
         RamUsersData {
@@ -1149,7 +1217,7 @@ instance P.HasOutputFile (RegionsData s) s Text where
 instance P.HasComputedId (RegionsData s) Text
 instance P.HasComputedLocalName (RegionsData s) Text
 
-regionsData :: TF.DataSource P.AliCloud (RegionsData s)
+regionsData :: TF.Schema TF.DataSource P.AliCloud (RegionsData s)
 regionsData =
     TF.newDataSource "alicloud_regions" $
         RegionsData {
@@ -1230,7 +1298,7 @@ instance P.HasComputedVpcName (VpcsData s) Text
 instance P.HasComputedVrouterId (VpcsData s) Text
 instance P.HasComputedVswitchIds (VpcsData s) Text
 
-vpcsData :: TF.DataSource P.AliCloud (VpcsData s)
+vpcsData :: TF.Schema TF.DataSource P.AliCloud (VpcsData s)
 vpcsData =
     TF.newDataSource "alicloud_vpcs" $
         VpcsData {
@@ -1240,6 +1308,81 @@ vpcsData =
             , _output_file = TF.Nil
             , _status = TF.Nil
             , _vswitch_id = TF.Nil
+            }
+
+{- | The @alicloud_vswitches@ AliCloud datasource.
+
+The Virtual sunbet data source lists a list of vswitches resource
+information owned by an Alicloud account, and each vswitch including its
+basic attribution, VPC ID and containing ECS instance IDs.
+-}
+data VswitchesData s = VswitchesData {
+      _cidr_block  :: !(TF.Attribute s Text)
+    {- ^ (Optional) Limit search to specific cidr block,like "172.16.0.0/12". -}
+    , _is_default  :: !(TF.Attribute s Text)
+    {- ^ (Optional) Whether the Vswitch is created by system - valid value is true or false. -}
+    , _name_regex  :: !(TF.Attribute s Text)
+    {- ^ (Optional) A regex string of VSwitch name. -}
+    , _output_file :: !(TF.Attribute s Text)
+    {- ^ (Optional) The name of file that can save vswitches data source after running @terraform plan@ . -}
+    , _vpc_id      :: !(TF.Attribute s Text)
+    {- ^ (Optional) VPC ID in which vswitch belongs. -}
+    , _zone_id     :: !(TF.Attribute s Text)
+    {- ^ (Optional) The availability zone for one vswitch. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (VswitchesData s) where
+    toHCL VswitchesData{..} = TF.block $ catMaybes
+        [ TF.attribute "cidr_block" _cidr_block
+        , TF.attribute "is_default" _is_default
+        , TF.attribute "name_regex" _name_regex
+        , TF.attribute "output_file" _output_file
+        , TF.attribute "vpc_id" _vpc_id
+        , TF.attribute "zone_id" _zone_id
+        ]
+
+instance P.HasCidrBlock (VswitchesData s) s Text where
+    cidrBlock =
+        lens (_cidr_block :: VswitchesData s -> TF.Attribute s Text)
+             (\s a -> s { _cidr_block = a } :: VswitchesData s)
+
+instance P.HasIsDefault (VswitchesData s) s Text where
+    isDefault =
+        lens (_is_default :: VswitchesData s -> TF.Attribute s Text)
+             (\s a -> s { _is_default = a } :: VswitchesData s)
+
+instance P.HasNameRegex (VswitchesData s) s Text where
+    nameRegex =
+        lens (_name_regex :: VswitchesData s -> TF.Attribute s Text)
+             (\s a -> s { _name_regex = a } :: VswitchesData s)
+
+instance P.HasOutputFile (VswitchesData s) s Text where
+    outputFile =
+        lens (_output_file :: VswitchesData s -> TF.Attribute s Text)
+             (\s a -> s { _output_file = a } :: VswitchesData s)
+
+instance P.HasVpcId (VswitchesData s) s Text where
+    vpcId =
+        lens (_vpc_id :: VswitchesData s -> TF.Attribute s Text)
+             (\s a -> s { _vpc_id = a } :: VswitchesData s)
+
+instance P.HasZoneId (VswitchesData s) s Text where
+    zoneId =
+        lens (_zone_id :: VswitchesData s -> TF.Attribute s Text)
+             (\s a -> s { _zone_id = a } :: VswitchesData s)
+
+instance P.HasComputedVswitches (VswitchesData s) Text
+
+vswitchesData :: TF.Schema TF.DataSource P.AliCloud (VswitchesData s)
+vswitchesData =
+    TF.newDataSource "alicloud_vswitches" $
+        VswitchesData {
+              _cidr_block = TF.Nil
+            , _is_default = TF.Nil
+            , _name_regex = TF.Nil
+            , _output_file = TF.Nil
+            , _vpc_id = TF.Nil
+            , _zone_id = TF.Nil
             }
 
 {- | The @alicloud_zones@ AliCloud datasource.
@@ -1293,7 +1436,7 @@ instance P.HasComputedAvailableResourceCreation (ZonesData s) Text
 instance P.HasComputedId (ZonesData s) Text
 instance P.HasComputedLocalName (ZonesData s) Text
 
-zonesData :: TF.DataSource P.AliCloud (ZonesData s)
+zonesData :: TF.Schema TF.DataSource P.AliCloud (ZonesData s)
 zonesData =
     TF.newDataSource "alicloud_zones" $
         ZonesData {

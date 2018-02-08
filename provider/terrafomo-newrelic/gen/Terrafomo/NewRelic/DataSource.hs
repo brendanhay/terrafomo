@@ -56,7 +56,7 @@ import           Terrafomo.NewRelic.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @newrelic_application@ NewRelic datasource.
 
@@ -82,7 +82,7 @@ instance P.HasComputedHostIds (ApplicationData s) Text
 instance P.HasComputedId (ApplicationData s) Text
 instance P.HasComputedInstanceIds (ApplicationData s) Text
 
-applicationData :: TF.DataSource P.NewRelic (ApplicationData s)
+applicationData :: TF.Schema TF.DataSource P.NewRelic (ApplicationData s)
 applicationData =
     TF.newDataSource "newrelic_application" $
         ApplicationData {

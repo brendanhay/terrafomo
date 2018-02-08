@@ -94,7 +94,7 @@ import           Terrafomo.UltraDNS.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @ultradns_dirpool@ UltraDNS resource.
 
@@ -174,7 +174,7 @@ instance P.HasZone (DirpoolResource s) s Text where
 instance P.HasComputedHostname (DirpoolResource s) Text
 instance P.HasComputedId (DirpoolResource s) Text
 
-dirpoolResource :: TF.Resource P.UltraDNS (DirpoolResource s)
+dirpoolResource :: TF.Schema TF.Resource P.UltraDNS (DirpoolResource s)
 dirpoolResource =
     TF.newResource "ultradns_dirpool" $
         DirpoolResource {
@@ -256,7 +256,7 @@ instance P.HasZone (ProbeHttpResource s) s Text where
              (\s a -> s { _zone = a } :: ProbeHttpResource s)
 
 
-probeHttpResource :: TF.Resource P.UltraDNS (ProbeHttpResource s)
+probeHttpResource :: TF.Schema TF.Resource P.UltraDNS (ProbeHttpResource s)
 probeHttpResource =
     TF.newResource "ultradns_probe_http" $
         ProbeHttpResource {
@@ -337,7 +337,7 @@ instance P.HasZone (ProbePingResource s) s Text where
              (\s a -> s { _zone = a } :: ProbePingResource s)
 
 
-probePingResource :: TF.Resource P.UltraDNS (ProbePingResource s)
+probePingResource :: TF.Schema TF.Resource P.UltraDNS (ProbePingResource s)
 probePingResource =
     TF.newResource "ultradns_probe_ping" $
         ProbePingResource {
@@ -414,7 +414,7 @@ instance P.HasZone (RdpoolResource s) s Text where
 instance P.HasComputedHostname (RdpoolResource s) Text
 instance P.HasComputedId (RdpoolResource s) Text
 
-rdpoolResource :: TF.Resource P.UltraDNS (RdpoolResource s)
+rdpoolResource :: TF.Schema TF.Resource P.UltraDNS (RdpoolResource s)
 rdpoolResource =
     TF.newResource "ultradns_rdpool" $
         RdpoolResource {
@@ -485,7 +485,7 @@ instance P.HasComputedTtl (RecordResource s) Text
 instance P.HasComputedType' (RecordResource s) Text
 instance P.HasComputedZone (RecordResource s) Text
 
-recordResource :: TF.Resource P.UltraDNS (RecordResource s)
+recordResource :: TF.Schema TF.Resource P.UltraDNS (RecordResource s)
 recordResource =
     TF.newResource "ultradns_record" $
         RecordResource {
@@ -590,7 +590,7 @@ instance P.HasZone (TcpoolResource s) s Text where
 instance P.HasComputedHostname (TcpoolResource s) Text
 instance P.HasComputedId (TcpoolResource s) Text
 
-tcpoolResource :: TF.Resource P.UltraDNS (TcpoolResource s)
+tcpoolResource :: TF.Schema TF.Resource P.UltraDNS (TcpoolResource s)
 tcpoolResource =
     TF.newResource "ultradns_tcpool" $
         TcpoolResource {

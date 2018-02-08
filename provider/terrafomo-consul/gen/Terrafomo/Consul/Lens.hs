@@ -71,138 +71,138 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 class HasAddress a s b | a -> s b where
     address :: Lens' a (TF.Attribute s b)
 
-instance HasAddress a s b => HasAddress (TF.Source l p a) s b where
+instance HasAddress a s b => HasAddress (TF.Schema l p a) s b where
     address = TF.configuration . address
 
 class HasDatacenter a s b | a -> s b where
     datacenter :: Lens' a (TF.Attribute s b)
 
-instance HasDatacenter a s b => HasDatacenter (TF.Source l p a) s b where
+instance HasDatacenter a s b => HasDatacenter (TF.Schema l p a) s b where
     datacenter = TF.configuration . datacenter
 
 class HasDns a s b | a -> s b where
     dns :: Lens' a (TF.Attribute s b)
 
-instance HasDns a s b => HasDns (TF.Source l p a) s b where
+instance HasDns a s b => HasDns (TF.Schema l p a) s b where
     dns = TF.configuration . dns
 
 class HasFailover a s b | a -> s b where
     failover :: Lens' a (TF.Attribute s b)
 
-instance HasFailover a s b => HasFailover (TF.Source l p a) s b where
+instance HasFailover a s b => HasFailover (TF.Schema l p a) s b where
     failover = TF.configuration . failover
 
 class HasKey a s b | a -> s b where
     key :: Lens' a (TF.Attribute s b)
 
-instance HasKey a s b => HasKey (TF.Source l p a) s b where
+instance HasKey a s b => HasKey (TF.Schema l p a) s b where
     key = TF.configuration . key
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Source l p a) s b where
+instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasNear a s b | a -> s b where
     near :: Lens' a (TF.Attribute s b)
 
-instance HasNear a s b => HasNear (TF.Source l p a) s b where
+instance HasNear a s b => HasNear (TF.Schema l p a) s b where
     near = TF.configuration . near
 
 class HasNode a s b | a -> s b where
     node :: Lens' a (TF.Attribute s b)
 
-instance HasNode a s b => HasNode (TF.Source l p a) s b where
+instance HasNode a s b => HasNode (TF.Schema l p a) s b where
     node = TF.configuration . node
 
 class HasOnlyPassing a s b | a -> s b where
     onlyPassing :: Lens' a (TF.Attribute s b)
 
-instance HasOnlyPassing a s b => HasOnlyPassing (TF.Source l p a) s b where
+instance HasOnlyPassing a s b => HasOnlyPassing (TF.Schema l p a) s b where
     onlyPassing = TF.configuration . onlyPassing
 
 class HasPathPrefix a s b | a -> s b where
     pathPrefix :: Lens' a (TF.Attribute s b)
 
-instance HasPathPrefix a s b => HasPathPrefix (TF.Source l p a) s b where
+instance HasPathPrefix a s b => HasPathPrefix (TF.Schema l p a) s b where
     pathPrefix = TF.configuration . pathPrefix
 
 class HasPort a s b | a -> s b where
     port :: Lens' a (TF.Attribute s b)
 
-instance HasPort a s b => HasPort (TF.Source l p a) s b where
+instance HasPort a s b => HasPort (TF.Schema l p a) s b where
     port = TF.configuration . port
 
 class HasQueryOptions a s b | a -> s b where
     queryOptions :: Lens' a (TF.Attribute s b)
 
-instance HasQueryOptions a s b => HasQueryOptions (TF.Source l p a) s b where
+instance HasQueryOptions a s b => HasQueryOptions (TF.Schema l p a) s b where
     queryOptions = TF.configuration . queryOptions
 
 class HasService a s b | a -> s b where
     service :: Lens' a (TF.Attribute s b)
 
-instance HasService a s b => HasService (TF.Source l p a) s b where
+instance HasService a s b => HasService (TF.Schema l p a) s b where
     service = TF.configuration . service
 
 class HasServiceId a s b | a -> s b where
     serviceId :: Lens' a (TF.Attribute s b)
 
-instance HasServiceId a s b => HasServiceId (TF.Source l p a) s b where
+instance HasServiceId a s b => HasServiceId (TF.Schema l p a) s b where
     serviceId = TF.configuration . serviceId
 
 class HasSession a s b | a -> s b where
     session :: Lens' a (TF.Attribute s b)
 
-instance HasSession a s b => HasSession (TF.Source l p a) s b where
+instance HasSession a s b => HasSession (TF.Schema l p a) s b where
     session = TF.configuration . session
 
 class HasStoredToken a s b | a -> s b where
     storedToken :: Lens' a (TF.Attribute s b)
 
-instance HasStoredToken a s b => HasStoredToken (TF.Source l p a) s b where
+instance HasStoredToken a s b => HasStoredToken (TF.Schema l p a) s b where
     storedToken = TF.configuration . storedToken
 
 class HasSubkey a s b | a -> s b where
     subkey :: Lens' a (TF.Attribute s b)
 
-instance HasSubkey a s b => HasSubkey (TF.Source l p a) s b where
+instance HasSubkey a s b => HasSubkey (TF.Schema l p a) s b where
     subkey = TF.configuration . subkey
 
 class HasSubkeys a s b | a -> s b where
     subkeys :: Lens' a (TF.Attribute s b)
 
-instance HasSubkeys a s b => HasSubkeys (TF.Source l p a) s b where
+instance HasSubkeys a s b => HasSubkeys (TF.Schema l p a) s b where
     subkeys = TF.configuration . subkeys
 
 class HasTag a s b | a -> s b where
     tag :: Lens' a (TF.Attribute s b)
 
-instance HasTag a s b => HasTag (TF.Source l p a) s b where
+instance HasTag a s b => HasTag (TF.Schema l p a) s b where
     tag = TF.configuration . tag
 
 class HasTags a s b | a -> s b where
     tags :: Lens' a (TF.Attribute s b)
 
-instance HasTags a s b => HasTags (TF.Source l p a) s b where
+instance HasTags a s b => HasTags (TF.Schema l p a) s b where
     tags = TF.configuration . tags
 
 class HasTemplate a s b | a -> s b where
     template :: Lens' a (TF.Attribute s b)
 
-instance HasTemplate a s b => HasTemplate (TF.Source l p a) s b where
+instance HasTemplate a s b => HasTemplate (TF.Schema l p a) s b where
     template = TF.configuration . template
 
 class HasToken a s b | a -> s b where
     token :: Lens' a (TF.Attribute s b)
 
-instance HasToken a s b => HasToken (TF.Source l p a) s b where
+instance HasToken a s b => HasToken (TF.Schema l p a) s b where
     token = TF.configuration . token
 
 class HasComputedAddress a b | a -> b where

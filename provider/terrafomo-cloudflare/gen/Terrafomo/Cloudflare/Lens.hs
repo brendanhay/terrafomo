@@ -52,48 +52,48 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 class HasDomain a s b | a -> s b where
     domain :: Lens' a (TF.Attribute s b)
 
-instance HasDomain a s b => HasDomain (TF.Source l p a) s b where
+instance HasDomain a s b => HasDomain (TF.Schema l p a) s b where
     domain = TF.configuration . domain
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Source l p a) s b where
+instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasPriority a s b | a -> s b where
     priority :: Lens' a (TF.Attribute s b)
 
-instance HasPriority a s b => HasPriority (TF.Source l p a) s b where
+instance HasPriority a s b => HasPriority (TF.Schema l p a) s b where
     priority = TF.configuration . priority
 
 class HasProxied a s b | a -> s b where
     proxied :: Lens' a (TF.Attribute s b)
 
-instance HasProxied a s b => HasProxied (TF.Source l p a) s b where
+instance HasProxied a s b => HasProxied (TF.Schema l p a) s b where
     proxied = TF.configuration . proxied
 
 class HasTtl a s b | a -> s b where
     ttl :: Lens' a (TF.Attribute s b)
 
-instance HasTtl a s b => HasTtl (TF.Source l p a) s b where
+instance HasTtl a s b => HasTtl (TF.Schema l p a) s b where
     ttl = TF.configuration . ttl
 
 class HasType' a s b | a -> s b where
     type' :: Lens' a (TF.Attribute s b)
 
-instance HasType' a s b => HasType' (TF.Source l p a) s b where
+instance HasType' a s b => HasType' (TF.Schema l p a) s b where
     type' = TF.configuration . type'
 
 class HasValue a s b | a -> s b where
     value :: Lens' a (TF.Attribute s b)
 
-instance HasValue a s b => HasValue (TF.Source l p a) s b where
+instance HasValue a s b => HasValue (TF.Schema l p a) s b where
     value = TF.configuration . value
 
 class HasComputedCidrBlocks a b | a -> b where

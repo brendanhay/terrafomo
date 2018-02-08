@@ -174,7 +174,7 @@ import           Terrafomo.VSphere.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @vsphere_custom_attribute@ VSphere resource.
 
@@ -211,7 +211,7 @@ instance P.HasName (CustomAttributeResource s) s Text where
              (\s a -> s { _name = a } :: CustomAttributeResource s)
 
 
-customAttributeResource :: TF.Resource P.VSphere (CustomAttributeResource s)
+customAttributeResource :: TF.Schema TF.Resource P.VSphere (CustomAttributeResource s)
 customAttributeResource =
     TF.newResource "vsphere_custom_attribute" $
         CustomAttributeResource {
@@ -256,7 +256,7 @@ instance P.HasTags (DatacenterResource s) s Text where
              (\s a -> s { _tags = a } :: DatacenterResource s)
 
 
-datacenterResource :: TF.Resource P.VSphere (DatacenterResource s)
+datacenterResource :: TF.Schema TF.Resource P.VSphere (DatacenterResource s)
 datacenterResource =
     TF.newResource "vsphere_datacenter" $
         DatacenterResource {
@@ -339,7 +339,7 @@ instance P.HasType' (DistributedPortGroupResource s) s Text where
 instance P.HasComputedId (DistributedPortGroupResource s) Text
 instance P.HasComputedKey (DistributedPortGroupResource s) Text
 
-distributedPortGroupResource :: TF.Resource P.VSphere (DistributedPortGroupResource s)
+distributedPortGroupResource :: TF.Schema TF.Resource P.VSphere (DistributedPortGroupResource s)
 distributedPortGroupResource =
     TF.newResource "vsphere_distributed_port_group" $
         DistributedPortGroupResource {
@@ -491,7 +491,7 @@ instance P.HasVersion (DistributedVirtualSwitchResource s) s Text where
 instance P.HasComputedConfigVersion (DistributedVirtualSwitchResource s) Text
 instance P.HasComputedId (DistributedVirtualSwitchResource s) Text
 
-distributedVirtualSwitchResource :: TF.Resource P.VSphere (DistributedVirtualSwitchResource s)
+distributedVirtualSwitchResource :: TF.Schema TF.Resource P.VSphere (DistributedVirtualSwitchResource s)
 distributedVirtualSwitchResource =
     TF.newResource "vsphere_distributed_virtual_switch" $
         DistributedVirtualSwitchResource {
@@ -589,7 +589,7 @@ instance P.HasSourceFile (FileResource s) s Text where
              (\s a -> s { _source_file = a } :: FileResource s)
 
 
-fileResource :: TF.Resource P.VSphere (FileResource s)
+fileResource :: TF.Schema TF.Resource P.VSphere (FileResource s)
 fileResource =
     TF.newResource "vsphere_file" $
         FileResource {
@@ -629,7 +629,7 @@ instance P.HasPath (FolderResource s) s Text where
              (\s a -> s { _path = a } :: FolderResource s)
 
 
-folderResource :: TF.Resource P.VSphere (FolderResource s)
+folderResource :: TF.Schema TF.Resource P.VSphere (FolderResource s)
 folderResource =
     TF.newResource "vsphere_folder" $
         FolderResource {
@@ -690,7 +690,7 @@ instance P.HasComputedId (HostPortGroupResource s) Text
 instance P.HasComputedKey (HostPortGroupResource s) Text
 instance P.HasComputedPorts (HostPortGroupResource s) Text
 
-hostPortGroupResource :: TF.Resource P.VSphere (HostPortGroupResource s)
+hostPortGroupResource :: TF.Schema TF.Resource P.VSphere (HostPortGroupResource s)
 hostPortGroupResource =
     TF.newResource "vsphere_host_port_group" $
         HostPortGroupResource {
@@ -750,7 +750,7 @@ instance P.HasNumberOfPorts (HostVirtualSwitchResource s) s Text where
              (\s a -> s { _number_of_ports = a } :: HostVirtualSwitchResource s)
 
 
-hostVirtualSwitchResource :: TF.Resource P.VSphere (HostVirtualSwitchResource s)
+hostVirtualSwitchResource :: TF.Schema TF.Resource P.VSphere (HostVirtualSwitchResource s)
 hostVirtualSwitchResource =
     TF.newResource "vsphere_host_virtual_switch" $
         HostVirtualSwitchResource {
@@ -793,7 +793,7 @@ instance P.HasComputedName (LicenseResource s) Text
 instance P.HasComputedTotal (LicenseResource s) Text
 instance P.HasComputedUsed (LicenseResource s) Text
 
-licenseResource :: TF.Resource P.VSphere (LicenseResource s)
+licenseResource :: TF.Schema TF.Resource P.VSphere (LicenseResource s)
 licenseResource =
     TF.newResource "vsphere_license" $
         LicenseResource {
@@ -900,7 +900,7 @@ instance P.HasComputedProtocolEndpoint (NasDatastoreResource s) Text
 instance P.HasComputedUncommittedSpace (NasDatastoreResource s) Text
 instance P.HasComputedUrl (NasDatastoreResource s) Text
 
-nasDatastoreResource :: TF.Resource P.VSphere (NasDatastoreResource s)
+nasDatastoreResource :: TF.Schema TF.Resource P.VSphere (NasDatastoreResource s)
 nasDatastoreResource =
     TF.newResource "vsphere_nas_datastore" $
         NasDatastoreResource {
@@ -966,7 +966,7 @@ instance P.HasName (TagCategoryResource s) s Text where
              (\s a -> s { _name = a } :: TagCategoryResource s)
 
 
-tagCategoryResource :: TF.Resource P.VSphere (TagCategoryResource s)
+tagCategoryResource :: TF.Schema TF.Resource P.VSphere (TagCategoryResource s)
 tagCategoryResource =
     TF.newResource "vsphere_tag_category" $
         TagCategoryResource {
@@ -1018,7 +1018,7 @@ instance P.HasName (TagResource s) s Text where
              (\s a -> s { _name = a } :: TagResource s)
 
 
-tagResource :: TF.Resource P.VSphere (TagResource s)
+tagResource :: TF.Schema TF.Resource P.VSphere (TagResource s)
 tagResource =
     TF.newResource "vsphere_tag" $
         TagResource {
@@ -1091,7 +1091,7 @@ instance P.HasVmdkPath (VirtualDiskResource s) s Text where
              (\s a -> s { _vmdk_path = a } :: VirtualDiskResource s)
 
 
-virtualDiskResource :: TF.Resource P.VSphere (VirtualDiskResource s)
+virtualDiskResource :: TF.Schema TF.Resource P.VSphere (VirtualDiskResource s)
 virtualDiskResource =
     TF.newResource "vsphere_virtual_disk" $
         VirtualDiskResource {
@@ -1146,7 +1146,7 @@ instance P.HasComputedUuid (VirtualMachineResource s) Text
 instance P.HasComputedVmwareToolsStatus (VirtualMachineResource s) Text
 instance P.HasComputedVmxPath (VirtualMachineResource s) Text
 
-virtualMachineResource :: TF.Resource P.VSphere (VirtualMachineResource s)
+virtualMachineResource :: TF.Schema TF.Resource P.VSphere (VirtualMachineResource s)
 virtualMachineResource =
     TF.newResource "vsphere_virtual_machine" $
         VirtualMachineResource {
@@ -1239,7 +1239,7 @@ instance P.HasVirtualMachineUuid (VirtualMachineSnapshotResource s) s Text where
              (\s a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource s)
 
 
-virtualMachineSnapshotResource :: TF.Resource P.VSphere (VirtualMachineSnapshotResource s)
+virtualMachineSnapshotResource :: TF.Schema TF.Resource P.VSphere (VirtualMachineSnapshotResource s)
 virtualMachineSnapshotResource =
     TF.newResource "vsphere_virtual_machine_snapshot" $
         VirtualMachineSnapshotResource {
@@ -1317,7 +1317,7 @@ instance P.HasComputedMultipleHostAccess (VmfsDatastoreResource s) Text
 instance P.HasComputedUncommittedSpace (VmfsDatastoreResource s) Text
 instance P.HasComputedUrl (VmfsDatastoreResource s) Text
 
-vmfsDatastoreResource :: TF.Resource P.VSphere (VmfsDatastoreResource s)
+vmfsDatastoreResource :: TF.Schema TF.Resource P.VSphere (VmfsDatastoreResource s)
 vmfsDatastoreResource =
     TF.newResource "vsphere_vmfs_datastore" $
         VmfsDatastoreResource {

@@ -146,7 +146,7 @@ import qualified Terrafomo.IP                    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @digitalocean_certificate@ DigitalOcean resource.
 
@@ -199,7 +199,7 @@ instance P.HasComputedName (CertificateResource s) Text
 instance P.HasComputedNotAfter (CertificateResource s) Text
 instance P.HasComputedSha1Fingerprint (CertificateResource s) Text
 
-certificateResource :: TF.Resource P.DigitalOcean (CertificateResource s)
+certificateResource :: TF.Schema TF.Resource P.DigitalOcean (CertificateResource s)
 certificateResource =
     TF.newResource "digitalocean_certificate" $
         CertificateResource {
@@ -238,7 +238,7 @@ instance P.HasName (DomainResource s) s Text where
 
 instance P.HasComputedId (DomainResource s) Text
 
-domainResource :: TF.Resource P.DigitalOcean (DomainResource s)
+domainResource :: TF.Schema TF.Resource P.DigitalOcean (DomainResource s)
 domainResource =
     TF.newResource "digitalocean_domain" $
         DomainResource {
@@ -383,7 +383,7 @@ instance P.HasComputedTags (DropletResource s) Text
 instance P.HasComputedVcpus (DropletResource s) Text
 instance P.HasComputedVolumeIds (DropletResource s) Text
 
-dropletResource :: TF.Resource P.DigitalOcean (DropletResource s)
+dropletResource :: TF.Schema TF.Resource P.DigitalOcean (DropletResource s)
 dropletResource =
     TF.newResource "digitalocean_droplet" $
         DropletResource {
@@ -464,7 +464,7 @@ instance P.HasComputedPendingChanges (FirewallResource s) Text
 instance P.HasComputedStatus (FirewallResource s) Text
 instance P.HasComputedTags (FirewallResource s) Text
 
-firewallResource :: TF.Resource P.DigitalOcean (FirewallResource s)
+firewallResource :: TF.Schema TF.Resource P.DigitalOcean (FirewallResource s)
 firewallResource =
     TF.newResource "digitalocean_firewall" $
         FirewallResource {
@@ -505,7 +505,7 @@ instance P.HasRegion (FloatingIpResource s) s Text where
 
 instance P.HasComputedIpAddress (FloatingIpResource s) Text
 
-floatingIpResource :: TF.Resource P.DigitalOcean (FloatingIpResource s)
+floatingIpResource :: TF.Schema TF.Resource P.DigitalOcean (FloatingIpResource s)
 floatingIpResource =
     TF.newResource "digitalocean_floating_ip" $
         FloatingIpResource {
@@ -600,7 +600,7 @@ instance P.HasStickySessions (LoadbalancerResource s) s Text where
 instance P.HasComputedId (LoadbalancerResource s) Text
 instance P.HasComputedIp (LoadbalancerResource s) Text
 
-loadbalancerResource :: TF.Resource P.DigitalOcean (LoadbalancerResource s)
+loadbalancerResource :: TF.Schema TF.Resource P.DigitalOcean (LoadbalancerResource s)
 loadbalancerResource =
     TF.newResource "digitalocean_loadbalancer" $
         LoadbalancerResource {
@@ -693,7 +693,7 @@ instance P.HasWeight (RecordResource s) s Text where
 instance P.HasComputedFqdn (RecordResource s) Text
 instance P.HasComputedId (RecordResource s) Text
 
-recordResource :: TF.Resource P.DigitalOcean (RecordResource s)
+recordResource :: TF.Schema TF.Resource P.DigitalOcean (RecordResource s)
 recordResource =
     TF.newResource "digitalocean_record" $
         RecordResource {
@@ -741,7 +741,7 @@ instance P.HasComputedId (SshKeyResource s) Text
 instance P.HasComputedName (SshKeyResource s) Text
 instance P.HasComputedPublicKey (SshKeyResource s) Text
 
-sshKeyResource :: TF.Resource P.DigitalOcean (SshKeyResource s)
+sshKeyResource :: TF.Schema TF.Resource P.DigitalOcean (SshKeyResource s)
 sshKeyResource =
     TF.newResource "digitalocean_ssh_key" $
         SshKeyResource {
@@ -774,7 +774,7 @@ instance P.HasName (TagResource s) s Text where
 instance P.HasComputedId (TagResource s) Text
 instance P.HasComputedName (TagResource s) Text
 
-tagResource :: TF.Resource P.DigitalOcean (TagResource s)
+tagResource :: TF.Schema TF.Resource P.DigitalOcean (TagResource s)
 tagResource =
     TF.newResource "digitalocean_tag" $
         TagResource {
@@ -835,7 +835,7 @@ instance P.HasSize (VolumeResource s) s Text where
 
 instance P.HasComputedId (VolumeResource s) Text
 
-volumeResource :: TF.Resource P.DigitalOcean (VolumeResource s)
+volumeResource :: TF.Schema TF.Resource P.DigitalOcean (VolumeResource s)
 volumeResource =
     TF.newResource "digitalocean_volume" $
         VolumeResource {

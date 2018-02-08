@@ -63,7 +63,7 @@ import           Terrafomo.Logentries.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @logentries_log@ Logentries resource.
 
@@ -126,7 +126,7 @@ instance P.HasType' (LogResource s) s Text where
 
 instance P.HasComputedToken (LogResource s) Text
 
-logResource :: TF.Resource P.Logentries (LogResource s)
+logResource :: TF.Schema TF.Resource P.Logentries (LogResource s)
 logResource =
     TF.newResource "logentries_log" $
         LogResource {
@@ -167,7 +167,7 @@ instance P.HasName (LogsetResource s) s Text where
              (\s a -> s { _name = a } :: LogsetResource s)
 
 
-logsetResource :: TF.Resource P.Logentries (LogsetResource s)
+logsetResource :: TF.Schema TF.Resource P.Logentries (LogsetResource s)
 logsetResource =
     TF.newResource "logentries_logset" $
         LogsetResource {

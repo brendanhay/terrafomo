@@ -34,6 +34,9 @@ module Terrafomo.NewRelic.Resource
     , AlertPolicyResource (..)
     , alertPolicyResource
 
+    , DashboardResource (..)
+    , dashboardResource
+
     , NrqlAlertConditionResource (..)
     , nrqlAlertConditionResource
 
@@ -42,8 +45,10 @@ module Terrafomo.NewRelic.Resource
     , P.HasChannelId (..)
     , P.HasConditionScope (..)
     , P.HasConfiguration (..)
+    , P.HasEditable (..)
     , P.HasEnabled (..)
     , P.HasEntities (..)
+    , P.HasIcon (..)
     , P.HasIncidentPreference (..)
     , P.HasMetric (..)
     , P.HasName (..)
@@ -51,10 +56,13 @@ module Terrafomo.NewRelic.Resource
     , P.HasPolicyId (..)
     , P.HasRunbookUrl (..)
     , P.HasTerm (..)
+    , P.HasTitle (..)
     , P.HasType' (..)
     , P.HasUserDefinedMetric (..)
     , P.HasUserDefinedValueFunction (..)
     , P.HasValueFunction (..)
+    , P.HasVisibility (..)
+    , P.HasWidget (..)
 
     -- ** Computed Attributes
     , P.HasComputedCreatedAt (..)
@@ -83,7 +91,7 @@ import           Terrafomo.NewRelic.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @newrelic_alert_channel@ NewRelic resource.
 
@@ -122,7 +130,7 @@ instance P.HasType' (AlertChannelResource s) s Text where
 
 instance P.HasComputedId (AlertChannelResource s) Text
 
-alertChannelResource :: TF.Resource P.NewRelic (AlertChannelResource s)
+alertChannelResource :: TF.Schema TF.Resource P.NewRelic (AlertChannelResource s)
 alertChannelResource =
     TF.newResource "newrelic_alert_channel" $
         AlertChannelResource {
@@ -224,7 +232,7 @@ instance P.HasUserDefinedValueFunction (AlertConditionResource s) s Text where
 
 instance P.HasComputedId (AlertConditionResource s) Text
 
-alertConditionResource :: TF.Resource P.NewRelic (AlertConditionResource s)
+alertConditionResource :: TF.Schema TF.Resource P.NewRelic (AlertConditionResource s)
 alertConditionResource =
     TF.newResource "newrelic_alert_condition" $
         AlertConditionResource {
@@ -268,7 +276,7 @@ instance P.HasPolicyId (AlertPolicyChannelResource s) s Text where
              (\s a -> s { _policy_id = a } :: AlertPolicyChannelResource s)
 
 
-alertPolicyChannelResource :: TF.Resource P.NewRelic (AlertPolicyChannelResource s)
+alertPolicyChannelResource :: TF.Schema TF.Resource P.NewRelic (AlertPolicyChannelResource s)
 alertPolicyChannelResource =
     TF.newResource "newrelic_alert_policy_channel" $
         AlertPolicyChannelResource {
@@ -307,12 +315,76 @@ instance P.HasComputedCreatedAt (AlertPolicyResource s) Text
 instance P.HasComputedId (AlertPolicyResource s) Text
 instance P.HasComputedUpdatedAt (AlertPolicyResource s) Text
 
-alertPolicyResource :: TF.Resource P.NewRelic (AlertPolicyResource s)
+alertPolicyResource :: TF.Schema TF.Resource P.NewRelic (AlertPolicyResource s)
 alertPolicyResource =
     TF.newResource "newrelic_alert_policy" $
         AlertPolicyResource {
               _incident_preference = TF.Nil
             , _name = TF.Nil
+            }
+
+{- | The @newrelic_dashboard@ NewRelic resource.
+
+
+-}
+data DashboardResource s = DashboardResource {
+      _editable   :: !(TF.Attribute s Text)
+    {- ^ (Optional) Who can edit the dashboard in an account. Must be @read_only@ , @editable_by_owner@ , @editable_by_all@ , or @all@ . Defaults to @editable_by_all@ . -}
+    , _icon       :: !(TF.Attribute s Text)
+    {- ^ (Optional) The icon for the dashboard.  Defaults to @bar-chart@ . -}
+    , _title      :: !(TF.Attribute s Text)
+    {- ^ (Required) The title of the dashboard. -}
+    , _visibility :: !(TF.Attribute s Text)
+    {- ^ (Optional) Who can see the dashboard in an account. Must be @owner@ or @all@ . Defaults to @all@ . -}
+    , _widget     :: !(TF.Attribute s Text)
+    {- ^ (Optional) A widget that describes a visualization. See <#widgets> below for details. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DashboardResource s) where
+    toHCL DashboardResource{..} = TF.block $ catMaybes
+        [ TF.attribute "editable" _editable
+        , TF.attribute "icon" _icon
+        , TF.attribute "title" _title
+        , TF.attribute "visibility" _visibility
+        , TF.attribute "widget" _widget
+        ]
+
+instance P.HasEditable (DashboardResource s) s Text where
+    editable =
+        lens (_editable :: DashboardResource s -> TF.Attribute s Text)
+             (\s a -> s { _editable = a } :: DashboardResource s)
+
+instance P.HasIcon (DashboardResource s) s Text where
+    icon =
+        lens (_icon :: DashboardResource s -> TF.Attribute s Text)
+             (\s a -> s { _icon = a } :: DashboardResource s)
+
+instance P.HasTitle (DashboardResource s) s Text where
+    title =
+        lens (_title :: DashboardResource s -> TF.Attribute s Text)
+             (\s a -> s { _title = a } :: DashboardResource s)
+
+instance P.HasVisibility (DashboardResource s) s Text where
+    visibility =
+        lens (_visibility :: DashboardResource s -> TF.Attribute s Text)
+             (\s a -> s { _visibility = a } :: DashboardResource s)
+
+instance P.HasWidget (DashboardResource s) s Text where
+    widget =
+        lens (_widget :: DashboardResource s -> TF.Attribute s Text)
+             (\s a -> s { _widget = a } :: DashboardResource s)
+
+instance P.HasComputedId (DashboardResource s) Text
+
+dashboardResource :: TF.Schema TF.Resource P.NewRelic (DashboardResource s)
+dashboardResource =
+    TF.newResource "newrelic_dashboard" $
+        DashboardResource {
+              _editable = TF.Nil
+            , _icon = TF.Nil
+            , _title = TF.Nil
+            , _visibility = TF.Nil
+            , _widget = TF.Nil
             }
 
 {- | The @newrelic_nrql_alert_condition@ NewRelic resource.
@@ -384,7 +456,7 @@ instance P.HasValueFunction (NrqlAlertConditionResource s) s Text where
 
 instance P.HasComputedId (NrqlAlertConditionResource s) Text
 
-nrqlAlertConditionResource :: TF.Resource P.NewRelic (NrqlAlertConditionResource s)
+nrqlAlertConditionResource :: TF.Schema TF.Resource P.NewRelic (NrqlAlertConditionResource s)
 nrqlAlertConditionResource =
     TF.newResource "newrelic_nrql_alert_condition" $
         NrqlAlertConditionResource {

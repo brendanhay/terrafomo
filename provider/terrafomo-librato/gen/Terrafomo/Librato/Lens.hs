@@ -67,120 +67,120 @@ import Lens.Micro (Getting, Lens', to)
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 class HasActive a s b | a -> s b where
     active :: Lens' a (TF.Attribute s b)
 
-instance HasActive a s b => HasActive (TF.Source l p a) s b where
+instance HasActive a s b => HasActive (TF.Schema l p a) s b where
     active = TF.configuration . active
 
 class HasAttributes a s b | a -> s b where
     attributes :: Lens' a (TF.Attribute s b)
 
-instance HasAttributes a s b => HasAttributes (TF.Source l p a) s b where
+instance HasAttributes a s b => HasAttributes (TF.Schema l p a) s b where
     attributes = TF.configuration . attributes
 
 class HasComposite a s b | a -> s b where
     composite :: Lens' a (TF.Attribute s b)
 
-instance HasComposite a s b => HasComposite (TF.Source l p a) s b where
+instance HasComposite a s b => HasComposite (TF.Schema l p a) s b where
     composite = TF.configuration . composite
 
 class HasCondition a s b | a -> s b where
     condition :: Lens' a (TF.Attribute s b)
 
-instance HasCondition a s b => HasCondition (TF.Source l p a) s b where
+instance HasCondition a s b => HasCondition (TF.Schema l p a) s b where
     condition = TF.configuration . condition
 
 class HasDescription a s b | a -> s b where
     description :: Lens' a (TF.Attribute s b)
 
-instance HasDescription a s b => HasDescription (TF.Source l p a) s b where
+instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
     description = TF.configuration . description
 
 class HasDisplayName a s b | a -> s b where
     displayName :: Lens' a (TF.Attribute s b)
 
-instance HasDisplayName a s b => HasDisplayName (TF.Source l p a) s b where
+instance HasDisplayName a s b => HasDisplayName (TF.Schema l p a) s b where
     displayName = TF.configuration . displayName
 
 class HasLabel a s b | a -> s b where
     label :: Lens' a (TF.Attribute s b)
 
-instance HasLabel a s b => HasLabel (TF.Source l p a) s b where
+instance HasLabel a s b => HasLabel (TF.Schema l p a) s b where
     label = TF.configuration . label
 
 class HasMax a s b | a -> s b where
     max :: Lens' a (TF.Attribute s b)
 
-instance HasMax a s b => HasMax (TF.Source l p a) s b where
+instance HasMax a s b => HasMax (TF.Schema l p a) s b where
     max = TF.configuration . max
 
 class HasMin a s b | a -> s b where
     min :: Lens' a (TF.Attribute s b)
 
-instance HasMin a s b => HasMin (TF.Source l p a) s b where
+instance HasMin a s b => HasMin (TF.Schema l p a) s b where
     min = TF.configuration . min
 
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
-instance HasName a s b => HasName (TF.Source l p a) s b where
+instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasPeriod a s b | a -> s b where
     period :: Lens' a (TF.Attribute s b)
 
-instance HasPeriod a s b => HasPeriod (TF.Source l p a) s b where
+instance HasPeriod a s b => HasPeriod (TF.Schema l p a) s b where
     period = TF.configuration . period
 
 class HasRearmSeconds a s b | a -> s b where
     rearmSeconds :: Lens' a (TF.Attribute s b)
 
-instance HasRearmSeconds a s b => HasRearmSeconds (TF.Source l p a) s b where
+instance HasRearmSeconds a s b => HasRearmSeconds (TF.Schema l p a) s b where
     rearmSeconds = TF.configuration . rearmSeconds
 
 class HasRelatedSpace a s b | a -> s b where
     relatedSpace :: Lens' a (TF.Attribute s b)
 
-instance HasRelatedSpace a s b => HasRelatedSpace (TF.Source l p a) s b where
+instance HasRelatedSpace a s b => HasRelatedSpace (TF.Schema l p a) s b where
     relatedSpace = TF.configuration . relatedSpace
 
 class HasServices a s b | a -> s b where
     services :: Lens' a (TF.Attribute s b)
 
-instance HasServices a s b => HasServices (TF.Source l p a) s b where
+instance HasServices a s b => HasServices (TF.Schema l p a) s b where
     services = TF.configuration . services
 
 class HasSettings a s b | a -> s b where
     settings :: Lens' a (TF.Attribute s b)
 
-instance HasSettings a s b => HasSettings (TF.Source l p a) s b where
+instance HasSettings a s b => HasSettings (TF.Schema l p a) s b where
     settings = TF.configuration . settings
 
 class HasSpaceId a s b | a -> s b where
     spaceId :: Lens' a (TF.Attribute s b)
 
-instance HasSpaceId a s b => HasSpaceId (TF.Source l p a) s b where
+instance HasSpaceId a s b => HasSpaceId (TF.Schema l p a) s b where
     spaceId = TF.configuration . spaceId
 
 class HasStream a s b | a -> s b where
     stream :: Lens' a (TF.Attribute s b)
 
-instance HasStream a s b => HasStream (TF.Source l p a) s b where
+instance HasStream a s b => HasStream (TF.Schema l p a) s b where
     stream = TF.configuration . stream
 
 class HasTitle a s b | a -> s b where
     title :: Lens' a (TF.Attribute s b)
 
-instance HasTitle a s b => HasTitle (TF.Source l p a) s b where
+instance HasTitle a s b => HasTitle (TF.Schema l p a) s b where
     title = TF.configuration . title
 
 class HasType' a s b | a -> s b where
     type' :: Lens' a (TF.Attribute s b)
 
-instance HasType' a s b => HasType' (TF.Source l p a) s b where
+instance HasType' a s b => HasType' (TF.Schema l p a) s b where
     type' = TF.configuration . type'
 
 class HasComputedActive a b | a -> b where

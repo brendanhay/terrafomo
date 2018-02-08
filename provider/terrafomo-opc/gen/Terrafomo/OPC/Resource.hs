@@ -260,7 +260,7 @@ import           Terrafomo.OPC.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Source    as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @opc_compute_acl@ OPC resource.
 
@@ -307,7 +307,7 @@ instance P.HasTags (ComputeAclResource s) s Text where
              (\s a -> s { _tags = a } :: ComputeAclResource s)
 
 
-computeAclResource :: TF.Resource P.OPC (ComputeAclResource s)
+computeAclResource :: TF.Schema TF.Resource P.OPC (ComputeAclResource s)
 computeAclResource =
     TF.newResource "opc_compute_acl" $
         ComputeAclResource {
@@ -363,7 +363,7 @@ instance P.HasVersion (ComputeImageListEntryResource s) s Text where
 
 instance P.HasComputedUri (ComputeImageListEntryResource s) Text
 
-computeImageListEntryResource :: TF.Resource P.OPC (ComputeImageListEntryResource s)
+computeImageListEntryResource :: TF.Schema TF.Resource P.OPC (ComputeImageListEntryResource s)
 computeImageListEntryResource =
     TF.newResource "opc_compute_image_list_entry" $
         ComputeImageListEntryResource {
@@ -410,7 +410,7 @@ instance P.HasName (ComputeImageListResource s) s Text where
              (\s a -> s { _name = a } :: ComputeImageListResource s)
 
 
-computeImageListResource :: TF.Resource P.OPC (ComputeImageListResource s)
+computeImageListResource :: TF.Schema TF.Resource P.OPC (ComputeImageListResource s)
 computeImageListResource =
     TF.newResource "opc_compute_image_list" $
         ComputeImageListResource {
@@ -561,7 +561,7 @@ instance P.HasComputedVcableId (ComputeInstanceResource s) Text
 instance P.HasComputedVirtio (ComputeInstanceResource s) Text
 instance P.HasComputedVncAddress (ComputeInstanceResource s) Text
 
-computeInstanceResource :: TF.Resource P.OPC (ComputeInstanceResource s)
+computeInstanceResource :: TF.Schema TF.Resource P.OPC (ComputeInstanceResource s)
 computeInstanceResource =
     TF.newResource "opc_compute_instance" $
         ComputeInstanceResource {
@@ -634,7 +634,7 @@ instance P.HasVnic (ComputeIpAddressAssociationResource s) s Text where
              (\s a -> s { _vnic = a } :: ComputeIpAddressAssociationResource s)
 
 
-computeIpAddressAssociationResource :: TF.Resource P.OPC (ComputeIpAddressAssociationResource s)
+computeIpAddressAssociationResource :: TF.Schema TF.Resource P.OPC (ComputeIpAddressAssociationResource s)
 computeIpAddressAssociationResource =
     TF.newResource "opc_compute_ip_address_association" $
         ComputeIpAddressAssociationResource {
@@ -690,7 +690,7 @@ instance P.HasTags (ComputeIpAddressPrefixSetResource s) s Text where
              (\s a -> s { _tags = a } :: ComputeIpAddressPrefixSetResource s)
 
 
-computeIpAddressPrefixSetResource :: TF.Resource P.OPC (ComputeIpAddressPrefixSetResource s)
+computeIpAddressPrefixSetResource :: TF.Schema TF.Resource P.OPC (ComputeIpAddressPrefixSetResource s)
 computeIpAddressPrefixSetResource =
     TF.newResource "opc_compute_ip_address_prefix_set" $
         ComputeIpAddressPrefixSetResource {
@@ -745,7 +745,7 @@ instance P.HasTags (ComputeIpAddressReservationResource s) s Text where
              (\s a -> s { _tags = a } :: ComputeIpAddressReservationResource s)
 
 
-computeIpAddressReservationResource :: TF.Resource P.OPC (ComputeIpAddressReservationResource s)
+computeIpAddressReservationResource :: TF.Schema TF.Resource P.OPC (ComputeIpAddressReservationResource s)
 computeIpAddressReservationResource =
     TF.newResource "opc_compute_ip_address_reservation" $
         ComputeIpAddressReservationResource {
@@ -786,7 +786,7 @@ instance P.HasVcable (ComputeIpAssociationResource s) s Text where
 
 instance P.HasComputedName (ComputeIpAssociationResource s) Text
 
-computeIpAssociationResource :: TF.Resource P.OPC (ComputeIpAssociationResource s)
+computeIpAssociationResource :: TF.Schema TF.Resource P.OPC (ComputeIpAssociationResource s)
 computeIpAssociationResource =
     TF.newResource "opc_compute_ip_association" $
         ComputeIpAssociationResource {
@@ -831,7 +831,7 @@ instance P.HasTags (ComputeIpNetworkExchangeResource s) s Text where
              (\s a -> s { _tags = a } :: ComputeIpNetworkExchangeResource s)
 
 
-computeIpNetworkExchangeResource :: TF.Resource P.OPC (ComputeIpNetworkExchangeResource s)
+computeIpNetworkExchangeResource :: TF.Schema TF.Resource P.OPC (ComputeIpNetworkExchangeResource s)
 computeIpNetworkExchangeResource =
     TF.newResource "opc_compute_ip_network_exchange" $
         ComputeIpNetworkExchangeResource {
@@ -898,7 +898,7 @@ instance P.HasComputedName (ComputeIpNetworkResource s) Text
 instance P.HasComputedPublicNaptEnabled (ComputeIpNetworkResource s) Text
 instance P.HasComputedUri (ComputeIpNetworkResource s) Text
 
-computeIpNetworkResource :: TF.Resource P.OPC (ComputeIpNetworkResource s)
+computeIpNetworkResource :: TF.Schema TF.Resource P.OPC (ComputeIpNetworkResource s)
 computeIpNetworkResource =
     TF.newResource "opc_compute_ip_network" $
         ComputeIpNetworkResource {
@@ -954,7 +954,7 @@ instance P.HasTags (ComputeIpReservationResource s) s Text where
              (\s a -> s { _tags = a } :: ComputeIpReservationResource s)
 
 
-computeIpReservationResource :: TF.Resource P.OPC (ComputeIpReservationResource s)
+computeIpReservationResource :: TF.Schema TF.Resource P.OPC (ComputeIpReservationResource s)
 computeIpReservationResource =
     TF.newResource "opc_compute_ip_reservation" $
         ComputeIpReservationResource {
@@ -1020,7 +1020,7 @@ instance P.HasName (ComputeMachineImageResource s) s Text where
              (\s a -> s { _name = a } :: ComputeMachineImageResource s)
 
 
-computeMachineImageResource :: TF.Resource P.OPC (ComputeMachineImageResource s)
+computeMachineImageResource :: TF.Schema TF.Resource P.OPC (ComputeMachineImageResource s)
 computeMachineImageResource =
     TF.newResource "opc_compute_machine_image" $
         ComputeMachineImageResource {
@@ -1076,7 +1076,7 @@ instance P.HasName (ComputeOrchestratedInstanceResource s) s Text where
              (\s a -> s { _name = a } :: ComputeOrchestratedInstanceResource s)
 
 
-computeOrchestratedInstanceResource :: TF.Resource P.OPC (ComputeOrchestratedInstanceResource s)
+computeOrchestratedInstanceResource :: TF.Schema TF.Resource P.OPC (ComputeOrchestratedInstanceResource s)
 computeOrchestratedInstanceResource =
     TF.newResource "opc_compute_orchestrated_instance" $
         ComputeOrchestratedInstanceResource {
@@ -1144,7 +1144,7 @@ instance P.HasComputedIpAddressPrefix (ComputeRouteResource s) Text
 instance P.HasComputedName (ComputeRouteResource s) Text
 instance P.HasComputedNextHopVnicSet (ComputeRouteResource s) Text
 
-computeRouteResource :: TF.Resource P.OPC (ComputeRouteResource s)
+computeRouteResource :: TF.Schema TF.Resource P.OPC (ComputeRouteResource s)
 computeRouteResource =
     TF.newResource "opc_compute_route" $
         ComputeRouteResource {
@@ -1226,7 +1226,7 @@ instance P.HasSourceList (ComputeSecRuleResource s) s Text where
              (\s a -> s { _source_list = a } :: ComputeSecRuleResource s)
 
 
-computeSecRuleResource :: TF.Resource P.OPC (ComputeSecRuleResource s)
+computeSecRuleResource :: TF.Schema TF.Resource P.OPC (ComputeSecRuleResource s)
 computeSecRuleResource =
     TF.newResource "opc_compute_sec_rule" $
         ComputeSecRuleResource {
@@ -1292,7 +1292,7 @@ instance P.HasProtocol (ComputeSecurityApplicationResource s) s Text where
              (\s a -> s { _protocol = a } :: ComputeSecurityApplicationResource s)
 
 
-computeSecurityApplicationResource :: TF.Resource P.OPC (ComputeSecurityApplicationResource s)
+computeSecurityApplicationResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityApplicationResource s)
 computeSecurityApplicationResource =
     TF.newResource "opc_compute_security_application" $
         ComputeSecurityApplicationResource {
@@ -1341,7 +1341,7 @@ instance P.HasVcable (ComputeSecurityAssociationResource s) s Text where
              (\s a -> s { _vcable = a } :: ComputeSecurityAssociationResource s)
 
 
-computeSecurityAssociationResource :: TF.Resource P.OPC (ComputeSecurityAssociationResource s)
+computeSecurityAssociationResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityAssociationResource s)
 computeSecurityAssociationResource =
     TF.newResource "opc_compute_security_association" $
         ComputeSecurityAssociationResource {
@@ -1387,7 +1387,7 @@ instance P.HasName (ComputeSecurityIpListResource s) s Text where
              (\s a -> s { _name = a } :: ComputeSecurityIpListResource s)
 
 
-computeSecurityIpListResource :: TF.Resource P.OPC (ComputeSecurityIpListResource s)
+computeSecurityIpListResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityIpListResource s)
 computeSecurityIpListResource =
     TF.newResource "opc_compute_security_ip_list" $
         ComputeSecurityIpListResource {
@@ -1433,7 +1433,7 @@ instance P.HasPolicy (ComputeSecurityListResource s) s Text where
              (\s a -> s { _policy = a } :: ComputeSecurityListResource s)
 
 
-computeSecurityListResource :: TF.Resource P.OPC (ComputeSecurityListResource s)
+computeSecurityListResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityListResource s)
 computeSecurityListResource =
     TF.newResource "opc_compute_security_list" $
         ComputeSecurityListResource {
@@ -1503,7 +1503,7 @@ instance P.HasTags (ComputeSecurityProtocolResource s) s Text where
              (\s a -> s { _tags = a } :: ComputeSecurityProtocolResource s)
 
 
-computeSecurityProtocolResource :: TF.Resource P.OPC (ComputeSecurityProtocolResource s)
+computeSecurityProtocolResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityProtocolResource s)
 computeSecurityProtocolResource =
     TF.newResource "opc_compute_security_protocol" $
         ComputeSecurityProtocolResource {
@@ -1617,7 +1617,7 @@ instance P.HasTags (ComputeSecurityRuleResource s) s Text where
 
 instance P.HasComputedUri (ComputeSecurityRuleResource s) Text
 
-computeSecurityRuleResource :: TF.Resource P.OPC (ComputeSecurityRuleResource s)
+computeSecurityRuleResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityRuleResource s)
 computeSecurityRuleResource =
     TF.newResource "opc_compute_security_rule" $
         ComputeSecurityRuleResource {
@@ -1671,7 +1671,7 @@ instance P.HasName (ComputeSshKeyResource s) s Text where
              (\s a -> s { _name = a } :: ComputeSshKeyResource s)
 
 
-computeSshKeyResource :: TF.Resource P.OPC (ComputeSshKeyResource s)
+computeSshKeyResource :: TF.Schema TF.Resource P.OPC (ComputeSshKeyResource s)
 computeSshKeyResource =
     TF.newResource "opc_compute_ssh_key" $
         ComputeSshKeyResource {
@@ -1717,7 +1717,7 @@ instance P.HasStorageVolume (ComputeStorageVolumeAttachmentResource s) s Text wh
              (\s a -> s { _storage_volume = a } :: ComputeStorageVolumeAttachmentResource s)
 
 
-computeStorageVolumeAttachmentResource :: TF.Resource P.OPC (ComputeStorageVolumeAttachmentResource s)
+computeStorageVolumeAttachmentResource :: TF.Schema TF.Resource P.OPC (ComputeStorageVolumeAttachmentResource s)
 computeStorageVolumeAttachmentResource =
     TF.newResource "opc_compute_storage_volume_attachment" $
         ComputeStorageVolumeAttachmentResource {
@@ -1839,7 +1839,7 @@ instance P.HasComputedStatus (ComputeStorageVolumeResource s) Text
 instance P.HasComputedStoragePool (ComputeStorageVolumeResource s) Text
 instance P.HasComputedUri (ComputeStorageVolumeResource s) Text
 
-computeStorageVolumeResource :: TF.Resource P.OPC (ComputeStorageVolumeResource s)
+computeStorageVolumeResource :: TF.Schema TF.Resource P.OPC (ComputeStorageVolumeResource s)
 computeStorageVolumeResource =
     TF.newResource "opc_compute_storage_volume" $
         ComputeStorageVolumeResource {
@@ -1929,7 +1929,7 @@ instance P.HasComputedStatusDetail (ComputeStorageVolumeSnapshotResource s) Text
 instance P.HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotResource s) Text
 instance P.HasComputedUri (ComputeStorageVolumeSnapshotResource s) Text
 
-computeStorageVolumeSnapshotResource :: TF.Resource P.OPC (ComputeStorageVolumeSnapshotResource s)
+computeStorageVolumeSnapshotResource :: TF.Schema TF.Resource P.OPC (ComputeStorageVolumeSnapshotResource s)
 computeStorageVolumeSnapshotResource =
     TF.newResource "opc_compute_storage_volume_snapshot" $
         ComputeStorageVolumeSnapshotResource {
@@ -1994,7 +1994,7 @@ instance P.HasVirtualNics (ComputeVnicSetResource s) s Text where
              (\s a -> s { _virtual_nics = a } :: ComputeVnicSetResource s)
 
 
-computeVnicSetResource :: TF.Resource P.OPC (ComputeVnicSetResource s)
+computeVnicSetResource :: TF.Schema TF.Resource P.OPC (ComputeVnicSetResource s)
 computeVnicSetResource =
     TF.newResource "opc_compute_vnic_set" $
         ComputeVnicSetResource {
@@ -2107,7 +2107,7 @@ instance P.HasWriteAcls (StorageContainerResource s) s Text where
              (\s a -> s { _write_acls = a } :: StorageContainerResource s)
 
 
-storageContainerResource :: TF.Resource P.OPC (StorageContainerResource s)
+storageContainerResource :: TF.Schema TF.Resource P.OPC (StorageContainerResource s)
 storageContainerResource =
     TF.newResource "opc_storage_container" $
         StorageContainerResource {
@@ -2154,7 +2154,7 @@ instance P.HasName (StorageObjectResource s) s Text where
              (\s a -> s { _name = a } :: StorageObjectResource s)
 
 
-storageObjectResource :: TF.Resource P.OPC (StorageObjectResource s)
+storageObjectResource :: TF.Schema TF.Resource P.OPC (StorageObjectResource s)
 storageObjectResource =
     TF.newResource "opc_storage_object" $
         StorageObjectResource {

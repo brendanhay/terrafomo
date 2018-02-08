@@ -520,6 +520,7 @@ module Terrafomo.AzureRM.Resource
     , P.HasScope (..)
     , P.HasSecurityRule (..)
     , P.HasServerName (..)
+    , P.HasServiceEndpoints (..)
     , P.HasServicePrincipal (..)
     , P.HasServiceProviderName (..)
     , P.HasSharedKey (..)
@@ -679,14 +680,14 @@ import Lens.Micro (lens)
 import Terrafomo.AzureRM.Types as P
 import qualified Terrafomo.AzureRM.Lens as P
 import qualified Terrafomo.AzureRM.Provider as P
-import qualified Data.Word as P
-import qualified GHC.Base as P
+import qualified Data.Word       as P
+import qualified GHC.Base        as P
 import qualified Numeric.Natural as P
-import qualified Terrafomo.IP as P
+import qualified Terrafomo.IP    as P
 
 import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Source as TF
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Schema    as TF
 
 {- | The @azurerm_app_service_plan@ AzureRM resource.
 
@@ -758,7 +759,7 @@ instance P.HasTags (AppServicePlanResource s) s Text where
 instance P.HasComputedId (AppServicePlanResource s) Text
 instance P.HasComputedMaximumNumberOfWorkers (AppServicePlanResource s) Text
 
-appServicePlanResource :: TF.Resource P.AzureRM (AppServicePlanResource s)
+appServicePlanResource :: TF.Schema TF.Resource P.AzureRM (AppServicePlanResource s)
 appServicePlanResource =
     TF.newResource "azurerm_app_service_plan" $
         AppServicePlanResource {
@@ -866,7 +867,7 @@ instance P.HasComputedDefaultSiteHostname (AppServiceResource s) Text
 instance P.HasComputedId (AppServiceResource s) Text
 instance P.HasComputedOutboundIpAddresses (AppServiceResource s) Text
 
-appServiceResource :: TF.Resource P.AzureRM (AppServiceResource s)
+appServiceResource :: TF.Schema TF.Resource P.AzureRM (AppServiceResource s)
 appServiceResource =
     TF.newResource "azurerm_app_service" $
         AppServiceResource {
@@ -1035,7 +1036,7 @@ instance P.HasComputedLocation (ApplicationGatewayResource s) Text
 instance P.HasComputedName (ApplicationGatewayResource s) Text
 instance P.HasComputedResourceGroupName (ApplicationGatewayResource s) Text
 
-applicationGatewayResource :: TF.Resource P.AzureRM (ApplicationGatewayResource s)
+applicationGatewayResource :: TF.Schema TF.Resource P.AzureRM (ApplicationGatewayResource s)
 applicationGatewayResource =
     TF.newResource "azurerm_application_gateway" $
         ApplicationGatewayResource {
@@ -1113,7 +1114,7 @@ instance P.HasComputedAppId (ApplicationInsightsResource s) Text
 instance P.HasComputedId (ApplicationInsightsResource s) Text
 instance P.HasComputedInstrumentationKey (ApplicationInsightsResource s) Text
 
-applicationInsightsResource :: TF.Resource P.AzureRM (ApplicationInsightsResource s)
+applicationInsightsResource :: TF.Schema TF.Resource P.AzureRM (ApplicationInsightsResource s)
 applicationInsightsResource =
     TF.newResource "azurerm_application_insights" $
         ApplicationInsightsResource {
@@ -1177,7 +1178,7 @@ instance P.HasTags (AutomationAccountResource s) s Text where
 
 instance P.HasComputedId (AutomationAccountResource s) Text
 
-automationAccountResource :: TF.Resource P.AzureRM (AutomationAccountResource s)
+automationAccountResource :: TF.Schema TF.Resource P.AzureRM (AutomationAccountResource s)
 automationAccountResource =
     TF.newResource "azurerm_automation_account" $
         AutomationAccountResource {
@@ -1249,7 +1250,7 @@ instance P.HasUsername (AutomationCredentialResource s) s Text where
 
 instance P.HasComputedId (AutomationCredentialResource s) Text
 
-automationCredentialResource :: TF.Resource P.AzureRM (AutomationCredentialResource s)
+automationCredentialResource :: TF.Schema TF.Resource P.AzureRM (AutomationCredentialResource s)
 automationCredentialResource =
     TF.newResource "azurerm_automation_credential" $
         AutomationCredentialResource {
@@ -1346,7 +1347,7 @@ instance P.HasRunbookType (AutomationRunbookResource s) s Text where
 
 instance P.HasComputedId (AutomationRunbookResource s) Text
 
-automationRunbookResource :: TF.Resource P.AzureRM (AutomationRunbookResource s)
+automationRunbookResource :: TF.Schema TF.Resource P.AzureRM (AutomationRunbookResource s)
 automationRunbookResource =
     TF.newResource "azurerm_automation_runbook" $
         AutomationRunbookResource {
@@ -1438,7 +1439,7 @@ instance P.HasTimezone (AutomationScheduleResource s) s Text where
 
 instance P.HasComputedId (AutomationScheduleResource s) Text
 
-automationScheduleResource :: TF.Resource P.AzureRM (AutomationScheduleResource s)
+automationScheduleResource :: TF.Schema TF.Resource P.AzureRM (AutomationScheduleResource s)
 automationScheduleResource =
     TF.newResource "azurerm_automation_schedule" $
         AutomationScheduleResource {
@@ -1521,7 +1522,7 @@ instance P.HasTags (AvailabilitySetResource s) s Text where
 
 instance P.HasComputedId (AvailabilitySetResource s) Text
 
-availabilitySetResource :: TF.Resource P.AzureRM (AvailabilitySetResource s)
+availabilitySetResource :: TF.Schema TF.Resource P.AzureRM (AvailabilitySetResource s)
 availabilitySetResource =
     TF.newResource "azurerm_availability_set" $
         AvailabilitySetResource {
@@ -1654,7 +1655,7 @@ instance P.HasTags (CdnEndpointResource s) s Text where
 
 instance P.HasComputedId (CdnEndpointResource s) Text
 
-cdnEndpointResource :: TF.Resource P.AzureRM (CdnEndpointResource s)
+cdnEndpointResource :: TF.Schema TF.Resource P.AzureRM (CdnEndpointResource s)
 cdnEndpointResource =
     TF.newResource "azurerm_cdn_endpoint" $
         CdnEndpointResource {
@@ -1726,7 +1727,7 @@ instance P.HasTags (CdnProfileResource s) s Text where
 
 instance P.HasComputedId (CdnProfileResource s) Text
 
-cdnProfileResource :: TF.Resource P.AzureRM (CdnProfileResource s)
+cdnProfileResource :: TF.Schema TF.Resource P.AzureRM (CdnProfileResource s)
 cdnProfileResource =
     TF.newResource "azurerm_cdn_profile" $
         CdnProfileResource {
@@ -1799,7 +1800,7 @@ instance P.HasResourceGroupName (ContainerGroupResource s) s Text where
 instance P.HasComputedId (ContainerGroupResource s) Text
 instance P.HasComputedIpAddress (ContainerGroupResource s) Text
 
-containerGroupResource :: TF.Resource P.AzureRM (ContainerGroupResource s)
+containerGroupResource :: TF.Schema TF.Resource P.AzureRM (ContainerGroupResource s)
 containerGroupResource =
     TF.newResource "azurerm_container_group" $
         ContainerGroupResource {
@@ -1885,7 +1886,7 @@ instance P.HasComputedAdminUsername (ContainerRegistryResource s) Text
 instance P.HasComputedId (ContainerRegistryResource s) Text
 instance P.HasComputedLoginServer (ContainerRegistryResource s) Text
 
-containerRegistryResource :: TF.Resource P.AzureRM (ContainerRegistryResource s)
+containerRegistryResource :: TF.Schema TF.Resource P.AzureRM (ContainerRegistryResource s)
 containerRegistryResource =
     TF.newResource "azurerm_container_registry" $
         ContainerRegistryResource {
@@ -1996,7 +1997,7 @@ instance P.HasComputedDiagnosticsProfileStorageUri (ContainerServiceResource s) 
 instance P.HasComputedId (ContainerServiceResource s) Text
 instance P.HasComputedMasterProfileFqdn (ContainerServiceResource s) Text
 
-containerServiceResource :: TF.Resource P.AzureRM (ContainerServiceResource s)
+containerServiceResource :: TF.Schema TF.Resource P.AzureRM (ContainerServiceResource s)
 containerServiceResource =
     TF.newResource "azurerm_container_service" $
         ContainerServiceResource {
@@ -2101,7 +2102,7 @@ instance P.HasComputedPrimaryReadonlyMasterKey (CosmosDbAccountResource s) Text
 instance P.HasComputedSecondaryMasterKey (CosmosDbAccountResource s) Text
 instance P.HasComputedSecondaryReadonlyMasterKey (CosmosDbAccountResource s) Text
 
-cosmosDbAccountResource :: TF.Resource P.AzureRM (CosmosDbAccountResource s)
+cosmosDbAccountResource :: TF.Schema TF.Resource P.AzureRM (CosmosDbAccountResource s)
 cosmosDbAccountResource =
     TF.newResource "azurerm_cosmos_db_account" $
         CosmosDbAccountResource {
@@ -2177,7 +2178,7 @@ instance P.HasZoneName (DnsARecordResource s) s Text where
 
 instance P.HasComputedId (DnsARecordResource s) Text
 
-dnsARecordResource :: TF.Resource P.AzureRM (DnsARecordResource s)
+dnsARecordResource :: TF.Schema TF.Resource P.AzureRM (DnsARecordResource s)
 dnsARecordResource =
     TF.newResource "azurerm_dns_a_record" $
         DnsARecordResource {
@@ -2250,7 +2251,7 @@ instance P.HasZoneName (DnsAaaaRecordResource s) s Text where
 
 instance P.HasComputedId (DnsAaaaRecordResource s) Text
 
-dnsAaaaRecordResource :: TF.Resource P.AzureRM (DnsAaaaRecordResource s)
+dnsAaaaRecordResource :: TF.Schema TF.Resource P.AzureRM (DnsAaaaRecordResource s)
 dnsAaaaRecordResource =
     TF.newResource "azurerm_dns_aaaa_record" $
         DnsAaaaRecordResource {
@@ -2323,7 +2324,7 @@ instance P.HasZoneName (DnsCnameRecordResource s) s Text where
 
 instance P.HasComputedId (DnsCnameRecordResource s) Text
 
-dnsCnameRecordResource :: TF.Resource P.AzureRM (DnsCnameRecordResource s)
+dnsCnameRecordResource :: TF.Schema TF.Resource P.AzureRM (DnsCnameRecordResource s)
 dnsCnameRecordResource =
     TF.newResource "azurerm_dns_cname_record" $
         DnsCnameRecordResource {
@@ -2396,7 +2397,7 @@ instance P.HasZoneName (DnsMxRecordResource s) s Text where
 
 instance P.HasComputedId (DnsMxRecordResource s) Text
 
-dnsMxRecordResource :: TF.Resource P.AzureRM (DnsMxRecordResource s)
+dnsMxRecordResource :: TF.Schema TF.Resource P.AzureRM (DnsMxRecordResource s)
 dnsMxRecordResource =
     TF.newResource "azurerm_dns_mx_record" $
         DnsMxRecordResource {
@@ -2469,7 +2470,7 @@ instance P.HasZoneName (DnsNsRecordResource s) s Text where
 
 instance P.HasComputedId (DnsNsRecordResource s) Text
 
-dnsNsRecordResource :: TF.Resource P.AzureRM (DnsNsRecordResource s)
+dnsNsRecordResource :: TF.Schema TF.Resource P.AzureRM (DnsNsRecordResource s)
 dnsNsRecordResource =
     TF.newResource "azurerm_dns_ns_record" $
         DnsNsRecordResource {
@@ -2542,7 +2543,7 @@ instance P.HasZoneName (DnsPtrRecordResource s) s Text where
 
 instance P.HasComputedId (DnsPtrRecordResource s) Text
 
-dnsPtrRecordResource :: TF.Resource P.AzureRM (DnsPtrRecordResource s)
+dnsPtrRecordResource :: TF.Schema TF.Resource P.AzureRM (DnsPtrRecordResource s)
 dnsPtrRecordResource =
     TF.newResource "azurerm_dns_ptr_record" $
         DnsPtrRecordResource {
@@ -2615,7 +2616,7 @@ instance P.HasZoneName (DnsSrvRecordResource s) s Text where
 
 instance P.HasComputedId (DnsSrvRecordResource s) Text
 
-dnsSrvRecordResource :: TF.Resource P.AzureRM (DnsSrvRecordResource s)
+dnsSrvRecordResource :: TF.Schema TF.Resource P.AzureRM (DnsSrvRecordResource s)
 dnsSrvRecordResource =
     TF.newResource "azurerm_dns_srv_record" $
         DnsSrvRecordResource {
@@ -2688,7 +2689,7 @@ instance P.HasZoneName (DnsTxtRecordResource s) s Text where
 
 instance P.HasComputedId (DnsTxtRecordResource s) Text
 
-dnsTxtRecordResource :: TF.Resource P.AzureRM (DnsTxtRecordResource s)
+dnsTxtRecordResource :: TF.Schema TF.Resource P.AzureRM (DnsTxtRecordResource s)
 dnsTxtRecordResource =
     TF.newResource "azurerm_dns_txt_record" $
         DnsTxtRecordResource {
@@ -2742,7 +2743,7 @@ instance P.HasComputedMaxNumberOfRecordSets (DnsZoneResource s) Text
 instance P.HasComputedNameServers (DnsZoneResource s) Text
 instance P.HasComputedNumberOfRecordSets (DnsZoneResource s) Text
 
-dnsZoneResource :: TF.Resource P.AzureRM (DnsZoneResource s)
+dnsZoneResource :: TF.Schema TF.Resource P.AzureRM (DnsZoneResource s)
 dnsZoneResource =
     TF.newResource "azurerm_dns_zone" $
         DnsZoneResource {
@@ -2800,7 +2801,7 @@ instance P.HasComputedId (EventgridTopicResource s) Text
 instance P.HasComputedPrimaryAccessKey (EventgridTopicResource s) Text
 instance P.HasComputedSecondaryAccessKey (EventgridTopicResource s) Text
 
-eventgridTopicResource :: TF.Resource P.AzureRM (EventgridTopicResource s)
+eventgridTopicResource :: TF.Schema TF.Resource P.AzureRM (EventgridTopicResource s)
 eventgridTopicResource =
     TF.newResource "azurerm_eventgrid_topic" $
         EventgridTopicResource {
@@ -2859,7 +2860,7 @@ instance P.HasComputedPrimaryKey (EventhubAuthorizationRuleResource s) Text
 instance P.HasComputedSecondaryConnectionString (EventhubAuthorizationRuleResource s) Text
 instance P.HasComputedSecondaryKey (EventhubAuthorizationRuleResource s) Text
 
-eventhubAuthorizationRuleResource :: TF.Resource P.AzureRM (EventhubAuthorizationRuleResource s)
+eventhubAuthorizationRuleResource :: TF.Schema TF.Resource P.AzureRM (EventhubAuthorizationRuleResource s)
 eventhubAuthorizationRuleResource =
     TF.newResource "azurerm_eventhub_authorization_rule" $
         EventhubAuthorizationRuleResource {
@@ -2923,7 +2924,7 @@ instance P.HasUserMetadata (EventhubConsumerGroupResource s) s Text where
 
 instance P.HasComputedId (EventhubConsumerGroupResource s) Text
 
-eventhubConsumerGroupResource :: TF.Resource P.AzureRM (EventhubConsumerGroupResource s)
+eventhubConsumerGroupResource :: TF.Schema TF.Resource P.AzureRM (EventhubConsumerGroupResource s)
 eventhubConsumerGroupResource =
     TF.newResource "azurerm_eventhub_consumer_group" $
         EventhubConsumerGroupResource {
@@ -3011,7 +3012,7 @@ instance P.HasTags (EventhubNamespaceResource s) s Text where
 
 instance P.HasComputedId (EventhubNamespaceResource s) Text
 
-eventhubNamespaceResource :: TF.Resource P.AzureRM (EventhubNamespaceResource s)
+eventhubNamespaceResource :: TF.Schema TF.Resource P.AzureRM (EventhubNamespaceResource s)
 eventhubNamespaceResource =
     TF.newResource "azurerm_eventhub_namespace" $
         EventhubNamespaceResource {
@@ -3087,7 +3088,7 @@ instance P.HasResourceGroupName (EventhubResource s) s Text where
 instance P.HasComputedId (EventhubResource s) Text
 instance P.HasComputedPartitionIds (EventhubResource s) Text
 
-eventhubResource :: TF.Resource P.AzureRM (EventhubResource s)
+eventhubResource :: TF.Schema TF.Resource P.AzureRM (EventhubResource s)
 eventhubResource =
     TF.newResource "azurerm_eventhub" $
         EventhubResource {
@@ -3186,7 +3187,7 @@ instance P.HasComputedId (ExpressRouteCircuitResource s) Text
 instance P.HasComputedServiceKey (ExpressRouteCircuitResource s) Text
 instance P.HasComputedServiceProviderProvisioningState (ExpressRouteCircuitResource s) Text
 
-expressRouteCircuitResource :: TF.Resource P.AzureRM (ExpressRouteCircuitResource s)
+expressRouteCircuitResource :: TF.Schema TF.Resource P.AzureRM (ExpressRouteCircuitResource s)
 expressRouteCircuitResource =
     TF.newResource "azurerm_express_route_circuit" $
         ExpressRouteCircuitResource {
@@ -3310,7 +3311,7 @@ instance P.HasComputedDefaultHostname (FunctionAppResource s) Text
 instance P.HasComputedId (FunctionAppResource s) Text
 instance P.HasComputedOutboundIpAddresses (FunctionAppResource s) Text
 
-functionAppResource :: TF.Resource P.AzureRM (FunctionAppResource s)
+functionAppResource :: TF.Schema TF.Resource P.AzureRM (FunctionAppResource s)
 functionAppResource =
     TF.newResource "azurerm_function_app" $
         FunctionAppResource {
@@ -3397,7 +3398,7 @@ instance P.HasTags (ImageResource s) s Text where
 
 instance P.HasComputedId (ImageResource s) Text
 
-imageResource :: TF.Resource P.AzureRM (ImageResource s)
+imageResource :: TF.Schema TF.Resource P.AzureRM (ImageResource s)
 imageResource =
     TF.newResource "azurerm_image" $
         ImageResource {
@@ -3464,7 +3465,7 @@ instance P.HasVaultUri (KeyVaultCertificateResource s) s Text where
 instance P.HasComputedId (KeyVaultCertificateResource s) Text
 instance P.HasComputedVersion (KeyVaultCertificateResource s) Text
 
-keyVaultCertificateResource :: TF.Resource P.AzureRM (KeyVaultCertificateResource s)
+keyVaultCertificateResource :: TF.Schema TF.Resource P.AzureRM (KeyVaultCertificateResource s)
 keyVaultCertificateResource =
     TF.newResource "azurerm_key_vault_certificate" $
         KeyVaultCertificateResource {
@@ -3539,7 +3540,7 @@ instance P.HasComputedId (KeyVaultKeyResource s) Text
 instance P.HasComputedN (KeyVaultKeyResource s) Text
 instance P.HasComputedVersion (KeyVaultKeyResource s) Text
 
-keyVaultKeyResource :: TF.Resource P.AzureRM (KeyVaultKeyResource s)
+keyVaultKeyResource :: TF.Schema TF.Resource P.AzureRM (KeyVaultKeyResource s)
 keyVaultKeyResource =
     TF.newResource "azurerm_key_vault_key" $
         KeyVaultKeyResource {
@@ -3645,7 +3646,7 @@ instance P.HasTenantId (KeyVaultResource s) s Text where
 instance P.HasComputedId (KeyVaultResource s) Text
 instance P.HasComputedVaultUri (KeyVaultResource s) Text
 
-keyVaultResource :: TF.Resource P.AzureRM (KeyVaultResource s)
+keyVaultResource :: TF.Schema TF.Resource P.AzureRM (KeyVaultResource s)
 keyVaultResource =
     TF.newResource "azurerm_key_vault" $
         KeyVaultResource {
@@ -3715,7 +3716,7 @@ instance P.HasVaultUri (KeyVaultSecretResource s) s Text where
 instance P.HasComputedId (KeyVaultSecretResource s) Text
 instance P.HasComputedVersion (KeyVaultSecretResource s) Text
 
-keyVaultSecretResource :: TF.Resource P.AzureRM (KeyVaultSecretResource s)
+keyVaultSecretResource :: TF.Schema TF.Resource P.AzureRM (KeyVaultSecretResource s)
 keyVaultSecretResource =
     TF.newResource "azurerm_key_vault_secret" $
         KeyVaultSecretResource {
@@ -3765,7 +3766,7 @@ instance P.HasResourceGroupName (LbBackendAddressPoolResource s) s Text where
 
 instance P.HasComputedId (LbBackendAddressPoolResource s) Text
 
-lbBackendAddressPoolResource :: TF.Resource P.AzureRM (LbBackendAddressPoolResource s)
+lbBackendAddressPoolResource :: TF.Schema TF.Resource P.AzureRM (LbBackendAddressPoolResource s)
 lbBackendAddressPoolResource =
     TF.newResource "azurerm_lb_backend_address_pool" $
         LbBackendAddressPoolResource {
@@ -3852,7 +3853,7 @@ instance P.HasResourceGroupName (LbNatPoolResource s) s Text where
 
 instance P.HasComputedId (LbNatPoolResource s) Text
 
-lbNatPoolResource :: TF.Resource P.AzureRM (LbNatPoolResource s)
+lbNatPoolResource :: TF.Schema TF.Resource P.AzureRM (LbNatPoolResource s)
 lbNatPoolResource =
     TF.newResource "azurerm_lb_nat_pool" $
         LbNatPoolResource {
@@ -3944,7 +3945,7 @@ instance P.HasResourceGroupName (LbNatRuleResource s) s Text where
 
 instance P.HasComputedId (LbNatRuleResource s) Text
 
-lbNatRuleResource :: TF.Resource P.AzureRM (LbNatRuleResource s)
+lbNatRuleResource :: TF.Schema TF.Resource P.AzureRM (LbNatRuleResource s)
 lbNatRuleResource =
     TF.newResource "azurerm_lb_nat_rule" $
         LbNatRuleResource {
@@ -4036,7 +4037,7 @@ instance P.HasResourceGroupName (LbProbeResource s) s Text where
 
 instance P.HasComputedId (LbProbeResource s) Text
 
-lbProbeResource :: TF.Resource P.AzureRM (LbProbeResource s)
+lbProbeResource :: TF.Schema TF.Resource P.AzureRM (LbProbeResource s)
 lbProbeResource =
     TF.newResource "azurerm_lb_probe" $
         LbProbeResource {
@@ -4105,7 +4106,7 @@ instance P.HasComputedId (LbResource s) Text
 instance P.HasComputedPrivateIpAddress (LbResource s) Text
 instance P.HasComputedPrivateIpAddresses (LbResource s) Text
 
-lbResource :: TF.Resource P.AzureRM (LbResource s)
+lbResource :: TF.Schema TF.Resource P.AzureRM (LbResource s)
 lbResource =
     TF.newResource "azurerm_lb" $
         LbResource {
@@ -4226,7 +4227,7 @@ instance P.HasResourceGroupName (LbRuleResource s) s Text where
 
 instance P.HasComputedId (LbRuleResource s) Text
 
-lbRuleResource :: TF.Resource P.AzureRM (LbRuleResource s)
+lbRuleResource :: TF.Schema TF.Resource P.AzureRM (LbRuleResource s)
 lbRuleResource =
     TF.newResource "azurerm_lb_rule" $
         LbRuleResource {
@@ -4314,7 +4315,7 @@ instance P.HasTags (LocalNetworkGatewayResource s) s Text where
 
 instance P.HasComputedId (LocalNetworkGatewayResource s) Text
 
-localNetworkGatewayResource :: TF.Resource P.AzureRM (LocalNetworkGatewayResource s)
+localNetworkGatewayResource :: TF.Schema TF.Resource P.AzureRM (LocalNetworkGatewayResource s)
 localNetworkGatewayResource =
     TF.newResource "azurerm_local_network_gateway" $
         LocalNetworkGatewayResource {
@@ -4392,7 +4393,7 @@ instance P.HasComputedPrimarySharedKey (LogAnalyticsWorkspaceResource s) Text
 instance P.HasComputedSecondarySharedKey (LogAnalyticsWorkspaceResource s) Text
 instance P.HasComputedWorkspaceId (LogAnalyticsWorkspaceResource s) Text
 
-logAnalyticsWorkspaceResource :: TF.Resource P.AzureRM (LogAnalyticsWorkspaceResource s)
+logAnalyticsWorkspaceResource :: TF.Schema TF.Resource P.AzureRM (LogAnalyticsWorkspaceResource s)
 logAnalyticsWorkspaceResource =
     TF.newResource "azurerm_log_analytics_workspace" $
         LogAnalyticsWorkspaceResource {
@@ -4513,7 +4514,7 @@ instance P.HasTags (ManagedDiskResource s) s Text where
 
 instance P.HasComputedId (ManagedDiskResource s) Text
 
-managedDiskResource :: TF.Resource P.AzureRM (ManagedDiskResource s)
+managedDiskResource :: TF.Schema TF.Resource P.AzureRM (ManagedDiskResource s)
 managedDiskResource =
     TF.newResource "azurerm_managed_disk" $
         ManagedDiskResource {
@@ -4569,7 +4570,7 @@ instance P.HasScope (ManagementLockResource s) s Text where
 
 instance P.HasComputedId (ManagementLockResource s) Text
 
-managementLockResource :: TF.Resource P.AzureRM (ManagementLockResource s)
+managementLockResource :: TF.Schema TF.Resource P.AzureRM (ManagementLockResource s)
 managementLockResource =
     TF.newResource "azurerm_management_lock" $
         ManagementLockResource {
@@ -4649,7 +4650,7 @@ instance P.HasResourceId (MetricAlertruleResource s) s Text where
 
 instance P.HasComputedId (MetricAlertruleResource s) Text
 
-metricAlertruleResource :: TF.Resource P.AzureRM (MetricAlertruleResource s)
+metricAlertruleResource :: TF.Schema TF.Resource P.AzureRM (MetricAlertruleResource s)
 metricAlertruleResource =
     TF.newResource "azurerm_metric_alertrule" $
         MetricAlertruleResource {
@@ -4707,7 +4708,7 @@ instance P.HasValue (MysqlConfigurationResource s) s Text where
 
 instance P.HasComputedId (MysqlConfigurationResource s) Text
 
-mysqlConfigurationResource :: TF.Resource P.AzureRM (MysqlConfigurationResource s)
+mysqlConfigurationResource :: TF.Schema TF.Resource P.AzureRM (MysqlConfigurationResource s)
 mysqlConfigurationResource =
     TF.newResource "azurerm_mysql_configuration" $
         MysqlConfigurationResource {
@@ -4770,7 +4771,7 @@ instance P.HasServerName (MysqlDatabaseResource s) s Text where
 
 instance P.HasComputedId (MysqlDatabaseResource s) Text
 
-mysqlDatabaseResource :: TF.Resource P.AzureRM (MysqlDatabaseResource s)
+mysqlDatabaseResource :: TF.Schema TF.Resource P.AzureRM (MysqlDatabaseResource s)
 mysqlDatabaseResource =
     TF.newResource "azurerm_mysql_database" $
         MysqlDatabaseResource {
@@ -4834,7 +4835,7 @@ instance P.HasStartIpAddress (MysqlFirewallRuleResource s) s Text where
 
 instance P.HasComputedId (MysqlFirewallRuleResource s) Text
 
-mysqlFirewallRuleResource :: TF.Resource P.AzureRM (MysqlFirewallRuleResource s)
+mysqlFirewallRuleResource :: TF.Schema TF.Resource P.AzureRM (MysqlFirewallRuleResource s)
 mysqlFirewallRuleResource =
     TF.newResource "azurerm_mysql_firewall_rule" $
         MysqlFirewallRuleResource {
@@ -4923,7 +4924,7 @@ instance P.HasVersion (MysqlServerResource s) s Text where
 instance P.HasComputedFqdn (MysqlServerResource s) Text
 instance P.HasComputedId (MysqlServerResource s) Text
 
-mysqlServerResource :: TF.Resource P.AzureRM (MysqlServerResource s)
+mysqlServerResource :: TF.Schema TF.Resource P.AzureRM (MysqlServerResource s)
 mysqlServerResource =
     TF.newResource "azurerm_mysql_server" $
         MysqlServerResource {
@@ -5036,7 +5037,7 @@ instance P.HasComputedMacAddress (NetworkInterfaceResource s) Text
 instance P.HasComputedPrivateIpAddress (NetworkInterfaceResource s) Text
 instance P.HasComputedVirtualMachineId (NetworkInterfaceResource s) Text
 
-networkInterfaceResource :: TF.Resource P.AzureRM (NetworkInterfaceResource s)
+networkInterfaceResource :: TF.Schema TF.Resource P.AzureRM (NetworkInterfaceResource s)
 networkInterfaceResource =
     TF.newResource "azurerm_network_interface" $
         NetworkInterfaceResource {
@@ -5113,7 +5114,7 @@ instance P.HasTags (NetworkSecurityGroupResource s) s Text where
 
 instance P.HasComputedId (NetworkSecurityGroupResource s) Text
 
-networkSecurityGroupResource :: TF.Resource P.AzureRM (NetworkSecurityGroupResource s)
+networkSecurityGroupResource :: TF.Schema TF.Resource P.AzureRM (NetworkSecurityGroupResource s)
 networkSecurityGroupResource =
     TF.newResource "azurerm_network_security_group" $
         NetworkSecurityGroupResource {
@@ -5271,7 +5272,7 @@ instance P.HasSourcePortRanges (NetworkSecurityRuleResource s) s Text where
 
 instance P.HasComputedId (NetworkSecurityRuleResource s) Text
 
-networkSecurityRuleResource :: TF.Resource P.AzureRM (NetworkSecurityRuleResource s)
+networkSecurityRuleResource :: TF.Schema TF.Resource P.AzureRM (NetworkSecurityRuleResource s)
 networkSecurityRuleResource =
     TF.newResource "azurerm_network_security_rule" $
         NetworkSecurityRuleResource {
@@ -5338,7 +5339,7 @@ instance P.HasTags (NetworkWatcherResource s) s Text where
 
 instance P.HasComputedId (NetworkWatcherResource s) Text
 
-networkWatcherResource :: TF.Resource P.AzureRM (NetworkWatcherResource s)
+networkWatcherResource :: TF.Schema TF.Resource P.AzureRM (NetworkWatcherResource s)
 networkWatcherResource =
     TF.newResource "azurerm_network_watcher" $
         NetworkWatcherResource {
@@ -5393,7 +5394,7 @@ instance P.HasValue (PostgresqlConfigurationResource s) s Text where
 
 instance P.HasComputedId (PostgresqlConfigurationResource s) Text
 
-postgresqlConfigurationResource :: TF.Resource P.AzureRM (PostgresqlConfigurationResource s)
+postgresqlConfigurationResource :: TF.Schema TF.Resource P.AzureRM (PostgresqlConfigurationResource s)
 postgresqlConfigurationResource =
     TF.newResource "azurerm_postgresql_configuration" $
         PostgresqlConfigurationResource {
@@ -5456,7 +5457,7 @@ instance P.HasServerName (PostgresqlDatabaseResource s) s Text where
 
 instance P.HasComputedId (PostgresqlDatabaseResource s) Text
 
-postgresqlDatabaseResource :: TF.Resource P.AzureRM (PostgresqlDatabaseResource s)
+postgresqlDatabaseResource :: TF.Schema TF.Resource P.AzureRM (PostgresqlDatabaseResource s)
 postgresqlDatabaseResource =
     TF.newResource "azurerm_postgresql_database" $
         PostgresqlDatabaseResource {
@@ -5520,7 +5521,7 @@ instance P.HasStartIpAddress (PostgresqlFirewallRuleResource s) s Text where
 
 instance P.HasComputedId (PostgresqlFirewallRuleResource s) Text
 
-postgresqlFirewallRuleResource :: TF.Resource P.AzureRM (PostgresqlFirewallRuleResource s)
+postgresqlFirewallRuleResource :: TF.Schema TF.Resource P.AzureRM (PostgresqlFirewallRuleResource s)
 postgresqlFirewallRuleResource =
     TF.newResource "azurerm_postgresql_firewall_rule" $
         PostgresqlFirewallRuleResource {
@@ -5609,7 +5610,7 @@ instance P.HasVersion (PostgresqlServerResource s) s Text where
 instance P.HasComputedFqdn (PostgresqlServerResource s) Text
 instance P.HasComputedId (PostgresqlServerResource s) Text
 
-postgresqlServerResource :: TF.Resource P.AzureRM (PostgresqlServerResource s)
+postgresqlServerResource :: TF.Schema TF.Resource P.AzureRM (PostgresqlServerResource s)
 postgresqlServerResource =
     TF.newResource "azurerm_postgresql_server" $
         PostgresqlServerResource {
@@ -5669,7 +5670,7 @@ instance P.HasSku (PublicIpResource s) s Text where
 instance P.HasComputedId (PublicIpResource s) Text
 instance P.HasComputedIpAddress (PublicIpResource s) Text
 
-publicIpResource :: TF.Resource P.AzureRM (PublicIpResource s)
+publicIpResource :: TF.Schema TF.Resource P.AzureRM (PublicIpResource s)
 publicIpResource =
     TF.newResource "azurerm_public_ip" $
         PublicIpResource {
@@ -5737,7 +5738,7 @@ instance P.HasComputedPrimaryAccessKey (RedisCacheResource s) Text
 instance P.HasComputedSecondaryAccessKey (RedisCacheResource s) Text
 instance P.HasComputedSslPort (RedisCacheResource s) Text
 
-redisCacheResource :: TF.Resource P.AzureRM (RedisCacheResource s)
+redisCacheResource :: TF.Schema TF.Resource P.AzureRM (RedisCacheResource s)
 redisCacheResource =
     TF.newResource "azurerm_redis_cache" $
         RedisCacheResource {
@@ -5803,7 +5804,7 @@ instance P.HasStartIp (RedisFirewallRuleResource s) s Text where
 
 instance P.HasComputedId (RedisFirewallRuleResource s) Text
 
-redisFirewallRuleResource :: TF.Resource P.AzureRM (RedisFirewallRuleResource s)
+redisFirewallRuleResource :: TF.Schema TF.Resource P.AzureRM (RedisFirewallRuleResource s)
 redisFirewallRuleResource =
     TF.newResource "azurerm_redis_firewall_rule" $
         RedisFirewallRuleResource {
@@ -5851,7 +5852,7 @@ instance P.HasTags (ResourceGroupResource s) s Text where
 
 instance P.HasComputedId (ResourceGroupResource s) Text
 
-resourceGroupResource :: TF.Resource P.AzureRM (ResourceGroupResource s)
+resourceGroupResource :: TF.Schema TF.Resource P.AzureRM (ResourceGroupResource s)
 resourceGroupResource =
     TF.newResource "azurerm_resource_group" $
         ResourceGroupResource {
@@ -5905,7 +5906,7 @@ instance P.HasScope (RoleAssignmentResource s) s Text where
 
 instance P.HasComputedId (RoleAssignmentResource s) Text
 
-roleAssignmentResource :: TF.Resource P.AzureRM (RoleAssignmentResource s)
+roleAssignmentResource :: TF.Schema TF.Resource P.AzureRM (RoleAssignmentResource s)
 roleAssignmentResource =
     TF.newResource "azurerm_role_assignment" $
         RoleAssignmentResource {
@@ -5976,7 +5977,7 @@ instance P.HasScope (RoleDefinitionResource s) s Text where
 
 instance P.HasComputedId (RoleDefinitionResource s) Text
 
-roleDefinitionResource :: TF.Resource P.AzureRM (RoleDefinitionResource s)
+roleDefinitionResource :: TF.Schema TF.Resource P.AzureRM (RoleDefinitionResource s)
 roleDefinitionResource =
     TF.newResource "azurerm_role_definition" $
         RoleDefinitionResource {
@@ -6049,7 +6050,7 @@ instance P.HasRouteTableName (RouteResource s) s Text where
 
 instance P.HasComputedId (RouteResource s) Text
 
-routeResource :: TF.Resource P.AzureRM (RouteResource s)
+routeResource :: TF.Schema TF.Resource P.AzureRM (RouteResource s)
 routeResource =
     TF.newResource "azurerm_route" $
         RouteResource {
@@ -6115,7 +6116,7 @@ instance P.HasTags (RouteTableResource s) s Text where
 instance P.HasComputedId (RouteTableResource s) Text
 instance P.HasComputedSubnets (RouteTableResource s) Text
 
-routeTableResource :: TF.Resource P.AzureRM (RouteTableResource s)
+routeTableResource :: TF.Schema TF.Resource P.AzureRM (RouteTableResource s)
 routeTableResource =
     TF.newResource "azurerm_route_table" $
         RouteTableResource {
@@ -6195,7 +6196,7 @@ instance P.HasTags (SearchServiceResource s) s Text where
 
 instance P.HasComputedId (SearchServiceResource s) Text
 
-searchServiceResource :: TF.Resource P.AzureRM (SearchServiceResource s)
+searchServiceResource :: TF.Schema TF.Resource P.AzureRM (SearchServiceResource s)
 searchServiceResource =
     TF.newResource "azurerm_search_service" $
         SearchServiceResource {
@@ -6269,7 +6270,7 @@ instance P.HasTags (ServicebusNamespaceResource s) s Text where
 
 instance P.HasComputedId (ServicebusNamespaceResource s) Text
 
-servicebusNamespaceResource :: TF.Resource P.AzureRM (ServicebusNamespaceResource s)
+servicebusNamespaceResource :: TF.Schema TF.Resource P.AzureRM (ServicebusNamespaceResource s)
 servicebusNamespaceResource =
     TF.newResource "azurerm_servicebus_namespace" $
         ServicebusNamespaceResource {
@@ -6358,7 +6359,7 @@ instance P.HasResourceGroupName (ServicebusQueueResource s) s Text where
 
 instance P.HasComputedId (ServicebusQueueResource s) Text
 
-servicebusQueueResource :: TF.Resource P.AzureRM (ServicebusQueueResource s)
+servicebusQueueResource :: TF.Schema TF.Resource P.AzureRM (ServicebusQueueResource s)
 servicebusQueueResource =
     TF.newResource "azurerm_servicebus_queue" $
         ServicebusQueueResource {
@@ -6481,7 +6482,7 @@ instance P.HasTopicName (ServicebusSubscriptionResource s) s Text where
 
 instance P.HasComputedId (ServicebusSubscriptionResource s) Text
 
-servicebusSubscriptionResource :: TF.Resource P.AzureRM (ServicebusSubscriptionResource s)
+servicebusSubscriptionResource :: TF.Schema TF.Resource P.AzureRM (ServicebusSubscriptionResource s)
 servicebusSubscriptionResource =
     TF.newResource "azurerm_servicebus_subscription" $
         ServicebusSubscriptionResource {
@@ -6625,7 +6626,7 @@ instance P.HasSupportOrdering (ServicebusTopicResource s) s Text where
 
 instance P.HasComputedId (ServicebusTopicResource s) Text
 
-servicebusTopicResource :: TF.Resource P.AzureRM (ServicebusTopicResource s)
+servicebusTopicResource :: TF.Schema TF.Resource P.AzureRM (ServicebusTopicResource s)
 servicebusTopicResource =
     TF.newResource "azurerm_servicebus_topic" $
         ServicebusTopicResource {
@@ -6691,7 +6692,7 @@ instance P.HasResourceGroupName (SnapshotResource s) s Text where
 instance P.HasComputedDiskSizeGb (SnapshotResource s) Text
 instance P.HasComputedId (SnapshotResource s) Text
 
-snapshotResource :: TF.Resource P.AzureRM (SnapshotResource s)
+snapshotResource :: TF.Schema TF.Resource P.AzureRM (SnapshotResource s)
 snapshotResource =
     TF.newResource "azurerm_snapshot" $
         SnapshotResource {
@@ -6836,7 +6837,7 @@ instance P.HasComputedCreationData (SqlDatabaseResource s) Text
 instance P.HasComputedDefaultSecondaryLocation (SqlDatabaseResource s) Text
 instance P.HasComputedId (SqlDatabaseResource s) Text
 
-sqlDatabaseResource :: TF.Resource P.AzureRM (SqlDatabaseResource s)
+sqlDatabaseResource :: TF.Schema TF.Resource P.AzureRM (SqlDatabaseResource s)
 sqlDatabaseResource =
     TF.newResource "azurerm_sql_database" $
         SqlDatabaseResource {
@@ -6951,7 +6952,7 @@ instance P.HasTags (SqlElasticpoolResource s) s Text where
 instance P.HasComputedCreationDate (SqlElasticpoolResource s) Text
 instance P.HasComputedId (SqlElasticpoolResource s) Text
 
-sqlElasticpoolResource :: TF.Resource P.AzureRM (SqlElasticpoolResource s)
+sqlElasticpoolResource :: TF.Schema TF.Resource P.AzureRM (SqlElasticpoolResource s)
 sqlElasticpoolResource =
     TF.newResource "azurerm_sql_elasticpool" $
         SqlElasticpoolResource {
@@ -7020,7 +7021,7 @@ instance P.HasStartIpAddress (SqlFirewallRuleResource s) s Text where
 
 instance P.HasComputedId (SqlFirewallRuleResource s) Text
 
-sqlFirewallRuleResource :: TF.Resource P.AzureRM (SqlFirewallRuleResource s)
+sqlFirewallRuleResource :: TF.Schema TF.Resource P.AzureRM (SqlFirewallRuleResource s)
 sqlFirewallRuleResource =
     TF.newResource "azurerm_sql_firewall_rule" $
         SqlFirewallRuleResource {
@@ -7103,7 +7104,7 @@ instance P.HasVersion (SqlServerResource s) s Text where
 instance P.HasComputedFullyQualifiedDomainName (SqlServerResource s) Text
 instance P.HasComputedId (SqlServerResource s) Text
 
-sqlServerResource :: TF.Resource P.AzureRM (SqlServerResource s)
+sqlServerResource :: TF.Schema TF.Resource P.AzureRM (SqlServerResource s)
 sqlServerResource =
     TF.newResource "azurerm_sql_server" $
         SqlServerResource {
@@ -7256,7 +7257,7 @@ instance P.HasComputedSecondaryLocation (StorageAccountResource s) Text
 instance P.HasComputedSecondaryQueueEndpoint (StorageAccountResource s) Text
 instance P.HasComputedSecondaryTableEndpoint (StorageAccountResource s) Text
 
-storageAccountResource :: TF.Resource P.AzureRM (StorageAccountResource s)
+storageAccountResource :: TF.Schema TF.Resource P.AzureRM (StorageAccountResource s)
 storageAccountResource =
     TF.newResource "azurerm_storage_account" $
         StorageAccountResource {
@@ -7370,7 +7371,7 @@ instance P.HasType' (StorageBlobResource s) s Text where
 instance P.HasComputedId (StorageBlobResource s) Text
 instance P.HasComputedUrl (StorageBlobResource s) Text
 
-storageBlobResource :: TF.Resource P.AzureRM (StorageBlobResource s)
+storageBlobResource :: TF.Schema TF.Resource P.AzureRM (StorageBlobResource s)
 storageBlobResource =
     TF.newResource "azurerm_storage_blob" $
         StorageBlobResource {
@@ -7432,7 +7433,7 @@ instance P.HasStorageAccountName (StorageContainerResource s) s Text where
 instance P.HasComputedId (StorageContainerResource s) Text
 instance P.HasComputedProperties (StorageContainerResource s) Text
 
-storageContainerResource :: TF.Resource P.AzureRM (StorageContainerResource s)
+storageContainerResource :: TF.Schema TF.Resource P.AzureRM (StorageContainerResource s)
 storageContainerResource =
     TF.newResource "azurerm_storage_container" $
         StorageContainerResource {
@@ -7479,7 +7480,7 @@ instance P.HasStorageAccountName (StorageQueueResource s) s Text where
 
 instance P.HasComputedId (StorageQueueResource s) Text
 
-storageQueueResource :: TF.Resource P.AzureRM (StorageQueueResource s)
+storageQueueResource :: TF.Schema TF.Resource P.AzureRM (StorageQueueResource s)
 storageQueueResource =
     TF.newResource "azurerm_storage_queue" $
         StorageQueueResource {
@@ -7534,7 +7535,7 @@ instance P.HasStorageAccountName (StorageShareResource s) s Text where
 instance P.HasComputedId (StorageShareResource s) Text
 instance P.HasComputedUrl (StorageShareResource s) Text
 
-storageShareResource :: TF.Resource P.AzureRM (StorageShareResource s)
+storageShareResource :: TF.Schema TF.Resource P.AzureRM (StorageShareResource s)
 storageShareResource =
     TF.newResource "azurerm_storage_share" $
         StorageShareResource {
@@ -7581,7 +7582,7 @@ instance P.HasStorageAccountName (StorageTableResource s) s Text where
 
 instance P.HasComputedId (StorageTableResource s) Text
 
-storageTableResource :: TF.Resource P.AzureRM (StorageTableResource s)
+storageTableResource :: TF.Schema TF.Resource P.AzureRM (StorageTableResource s)
 storageTableResource =
     TF.newResource "azurerm_storage_table" $
         StorageTableResource {
@@ -7611,6 +7612,8 @@ data SubnetResource s = SubnetResource {
     {- ^ (Required) The name of the resource group in which to create the subnet. Changing this forces a new resource to be created. -}
     , _route_table_id :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of the Route Table to associate with the subnet. -}
+    , _service_endpoints :: !(TF.Attribute s Text)
+    {- ^ (Optional) The list of Service endpoints to associate with the subnet. Possible values include: @Microsoft.Storage@ , @Microsoft.Sql@ . -}
     , _virtual_network_name :: !(TF.Attribute s Text)
     {- ^ (Required) The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
@@ -7622,6 +7625,7 @@ instance TF.ToHCL (SubnetResource s) where
         , TF.attribute "network_security_group_id" _network_security_group_id
         , TF.attribute "resource_group_name" _resource_group_name
         , TF.attribute "route_table_id" _route_table_id
+        , TF.attribute "service_endpoints" _service_endpoints
         , TF.attribute "virtual_network_name" _virtual_network_name
         ]
 
@@ -7650,6 +7654,11 @@ instance P.HasRouteTableId (SubnetResource s) s Text where
         lens (_route_table_id :: SubnetResource s -> TF.Attribute s Text)
              (\s a -> s { _route_table_id = a } :: SubnetResource s)
 
+instance P.HasServiceEndpoints (SubnetResource s) s Text where
+    serviceEndpoints =
+        lens (_service_endpoints :: SubnetResource s -> TF.Attribute s Text)
+             (\s a -> s { _service_endpoints = a } :: SubnetResource s)
+
 instance P.HasVirtualNetworkName (SubnetResource s) s Text where
     virtualNetworkName =
         lens (_virtual_network_name :: SubnetResource s -> TF.Attribute s Text)
@@ -7662,7 +7671,7 @@ instance P.HasComputedName (SubnetResource s) Text
 instance P.HasComputedResourceGroupName (SubnetResource s) Text
 instance P.HasComputedVirtualNetworkName (SubnetResource s) Text
 
-subnetResource :: TF.Resource P.AzureRM (SubnetResource s)
+subnetResource :: TF.Schema TF.Resource P.AzureRM (SubnetResource s)
 subnetResource =
     TF.newResource "azurerm_subnet" $
         SubnetResource {
@@ -7671,6 +7680,7 @@ subnetResource =
             , _network_security_group_id = TF.Nil
             , _resource_group_name = TF.Nil
             , _route_table_id = TF.Nil
+            , _service_endpoints = TF.Nil
             , _virtual_network_name = TF.Nil
             }
 
@@ -7731,7 +7741,7 @@ instance P.HasTemplateBody (TemplateDeploymentResource s) s Text where
 instance P.HasComputedId (TemplateDeploymentResource s) Text
 instance P.HasComputedOutputs (TemplateDeploymentResource s) Text
 
-templateDeploymentResource :: TF.Resource P.AzureRM (TemplateDeploymentResource s)
+templateDeploymentResource :: TF.Schema TF.Resource P.AzureRM (TemplateDeploymentResource s)
 templateDeploymentResource =
     TF.newResource "azurerm_template_deployment" $
         TemplateDeploymentResource {
@@ -7842,7 +7852,7 @@ instance P.HasWeight (TrafficManagerEndpointResource s) s Text where
 
 instance P.HasComputedId (TrafficManagerEndpointResource s) Text
 
-trafficManagerEndpointResource :: TF.Resource P.AzureRM (TrafficManagerEndpointResource s)
+trafficManagerEndpointResource :: TF.Schema TF.Resource P.AzureRM (TrafficManagerEndpointResource s)
 trafficManagerEndpointResource =
     TF.newResource "azurerm_traffic_manager_endpoint" $
         TrafficManagerEndpointResource {
@@ -7930,7 +7940,7 @@ instance P.HasTrafficRoutingMethod (TrafficManagerProfileResource s) s Text wher
 instance P.HasComputedFqdn (TrafficManagerProfileResource s) Text
 instance P.HasComputedId (TrafficManagerProfileResource s) Text
 
-trafficManagerProfileResource :: TF.Resource P.AzureRM (TrafficManagerProfileResource s)
+trafficManagerProfileResource :: TF.Schema TF.Resource P.AzureRM (TrafficManagerProfileResource s)
 trafficManagerProfileResource =
     TF.newResource "azurerm_traffic_manager_profile" $
         TrafficManagerProfileResource {
@@ -8005,7 +8015,7 @@ instance P.HasVirtualMachineName (VirtualMachineExtensionResource s) s Text wher
 
 instance P.HasComputedId (VirtualMachineExtensionResource s) Text
 
-virtualMachineExtensionResource :: TF.Resource P.AzureRM (VirtualMachineExtensionResource s)
+virtualMachineExtensionResource :: TF.Schema TF.Resource P.AzureRM (VirtualMachineExtensionResource s)
 virtualMachineExtensionResource =
     TF.newResource "azurerm_virtual_machine_extension" $
         VirtualMachineExtensionResource {
@@ -8198,7 +8208,7 @@ instance P.HasVmSize (VirtualMachineResource s) s Text where
 
 instance P.HasComputedId (VirtualMachineResource s) Text
 
-virtualMachineResource :: TF.Resource P.AzureRM (VirtualMachineResource s)
+virtualMachineResource :: TF.Schema TF.Resource P.AzureRM (VirtualMachineResource s)
 virtualMachineResource =
     TF.newResource "azurerm_virtual_machine" $
         VirtualMachineResource {
@@ -8392,7 +8402,7 @@ instance P.HasUpgradePolicyMode (VirtualMachineScaleSetResource s) s Text where
 
 instance P.HasComputedId (VirtualMachineScaleSetResource s) Text
 
-virtualMachineScaleSetResource :: TF.Resource P.AzureRM (VirtualMachineScaleSetResource s)
+virtualMachineScaleSetResource :: TF.Schema TF.Resource P.AzureRM (VirtualMachineScaleSetResource s)
 virtualMachineScaleSetResource =
     TF.newResource "azurerm_virtual_machine_scale_set" $
         VirtualMachineScaleSetResource {
@@ -8534,7 +8544,7 @@ instance P.HasVirtualNetworkGatewayId (VirtualNetworkGatewayConnectionResource s
 
 instance P.HasComputedId (VirtualNetworkGatewayConnectionResource s) Text
 
-virtualNetworkGatewayConnectionResource :: TF.Resource P.AzureRM (VirtualNetworkGatewayConnectionResource s)
+virtualNetworkGatewayConnectionResource :: TF.Schema TF.Resource P.AzureRM (VirtualNetworkGatewayConnectionResource s)
 virtualNetworkGatewayConnectionResource =
     TF.newResource "azurerm_virtual_network_gateway_connection" $
         VirtualNetworkGatewayConnectionResource {
@@ -8664,7 +8674,7 @@ instance P.HasVpnType (VirtualNetworkGatewayResource s) s Text where
 
 instance P.HasComputedId (VirtualNetworkGatewayResource s) Text
 
-virtualNetworkGatewayResource :: TF.Resource P.AzureRM (VirtualNetworkGatewayResource s)
+virtualNetworkGatewayResource :: TF.Schema TF.Resource P.AzureRM (VirtualNetworkGatewayResource s)
 virtualNetworkGatewayResource =
     TF.newResource "azurerm_virtual_network_gateway" $
         VirtualNetworkGatewayResource {
@@ -8760,7 +8770,7 @@ instance P.HasVirtualNetworkName (VirtualNetworkPeeringResource s) s Text where
 
 instance P.HasComputedId (VirtualNetworkPeeringResource s) Text
 
-virtualNetworkPeeringResource :: TF.Resource P.AzureRM (VirtualNetworkPeeringResource s)
+virtualNetworkPeeringResource :: TF.Schema TF.Resource P.AzureRM (VirtualNetworkPeeringResource s)
 virtualNetworkPeeringResource =
     TF.newResource "azurerm_virtual_network_peering" $
         VirtualNetworkPeeringResource {
@@ -8854,7 +8864,7 @@ instance P.HasComputedLocation (VirtualNetworkResource s) Text
 instance P.HasComputedName (VirtualNetworkResource s) Text
 instance P.HasComputedResourceGroupName (VirtualNetworkResource s) Text
 
-virtualNetworkResource :: TF.Resource P.AzureRM (VirtualNetworkResource s)
+virtualNetworkResource :: TF.Schema TF.Resource P.AzureRM (VirtualNetworkResource s)
 virtualNetworkResource =
     TF.newResource "azurerm_virtual_network" $
         VirtualNetworkResource {
