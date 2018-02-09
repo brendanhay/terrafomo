@@ -11,6 +11,7 @@ import Data.Aeson      (FromJSON, ToJSON, (.!=), (.:?), (.=))
 import Data.Bifunctor  (bimap)
 import Data.Function   (on)
 import Data.Map.Strict (Map)
+import Data.Maybe      (mapMaybe)
 import Data.Monoid     (Last (..))
 import Data.Semigroup  (Semigroup ((<>)))
 import Data.Set        (Set)
@@ -37,38 +38,43 @@ instance ToJSON SchemaType where
     toJSON = JSON.toJSON . show
 
 data Field = Field
-    { fieldClass    :: !Text
-    , fieldMethod   :: !Text
-    , fieldLabel    :: !Text
-    , fieldName     :: !(Last Text)
-    , fieldType     :: !(Last Text)
-    , fieldRequired :: !Bool
+    { fieldClass  :: !Text
+    , fieldMethod :: !Text
+    , fieldLabel  :: !Text
+    , fieldName   :: !Text
+    , fieldType   :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
 
 instance ToJSON Field where
     toJSON = JSON.genericToJSON (JSON.options "field")
 
-getFields :: Schema -> ([Field], [Field])
-getFields Schema{..} =
-    ( map (\(k, v) -> go k (argName  v) (argType  v) (argRequired v))
-          (Map.toList schemaArguments)
-    , map (\(k, v) -> go k (attrName v) (attrType v) False)
-          (Map.toList schemaAttributes)
-    )
+getFields :: Schema -> (Set Field, Set Field)
+getFields Schema{..} = (args, attrs)
   where
-    go k name ty req =
-        Field { fieldClass    = fieldClassName  k
-              , fieldMethod   = fieldMethodName k
-              , fieldLabel    = k
-              , fieldName     = name
-              , fieldType     = ty
-              , fieldRequired = req
+    args =  Set.fromList
+          . mapMaybe (\(k, v) -> do
+                         n <- getLast (argName v)
+                         pure $! go k n (argType v))
+          $ Map.toList schemaArguments
+
+    attrs = Set.fromList
+          . mapMaybe (\(k, v) -> do
+                         n <- getLast (attrName v)
+                         pure $! go k n (attrType v))
+          $ Map.toList schemaAttributes
+
+    go k name ty =
+        Field { fieldClass  = fieldClassName  k
+              , fieldMethod = fieldMethodName k
+              , fieldLabel  = k
+              , fieldName   = name
+              , fieldType   = ty
               }
 
 data Class = Class
     { className   :: !Text
     , classMethod :: !Text
-    , classSymbol :: !(Last Text)
+    , classSymbol :: !Text
     } deriving (Show, Eq, Ord, Generic)
 
 instance ToJSON Class where
@@ -78,11 +84,11 @@ getClasses :: [Schema] -> (Set Class, Set Class)
 getClasses =
     bimap Set.unions Set.unions . unzip . map (bimap go go . getFields)
   where
-    go = Set.fromList . map (\x ->
+    go = Set.map $ \x ->
         Class { className   = fieldClass  x
               , classMethod = fieldMethod x
               , classSymbol = fieldName   x
-              })
+              }
 
 data Schema = Schema
     { schemaName       :: !(Last Text)

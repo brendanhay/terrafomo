@@ -28,6 +28,7 @@ module Terrafomo.InfluxDB.Lens
     , HasName (..)
     , HasPassword (..)
     , HasQuery (..)
+    , HasRetentionPolicies (..)
 
     -- ** Computed Attributes
     , HasComputedAdmin (..)
@@ -77,6 +78,12 @@ class HasQuery a s b | a -> s b where
 
 instance HasQuery a s b => HasQuery (TF.Schema l p a) s b where
     query = TF.configuration . query
+
+class HasRetentionPolicies a s b | a -> s b where
+    retentionPolicies :: Lens' a (TF.Attribute s b)
+
+instance HasRetentionPolicies a s b => HasRetentionPolicies (TF.Schema l p a) s b where
+    retentionPolicies = TF.configuration . retentionPolicies
 
 class HasComputedAdmin a b | a -> b where
     computedAdmin

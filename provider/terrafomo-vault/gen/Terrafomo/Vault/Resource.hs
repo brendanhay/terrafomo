@@ -22,7 +22,10 @@
 module Terrafomo.Vault.Resource
     (
     -- * Types
-      AuthBackendResource (..)
+      ApproleAuthBackendRoleResource (..)
+    , approleAuthBackendRoleResource
+
+    , AuthBackendResource (..)
     , authBackendResource
 
     , AwsAuthBackendCertResource (..)
@@ -31,11 +34,17 @@ module Terrafomo.Vault.Resource
     , AwsAuthBackendClientResource (..)
     , awsAuthBackendClientResource
 
+    , AwsAuthBackendIdentityWhitelistResource (..)
+    , awsAuthBackendIdentityWhitelistResource
+
     , AwsAuthBackendLoginResource (..)
     , awsAuthBackendLoginResource
 
     , AwsAuthBackendRoleResource (..)
     , awsAuthBackendRoleResource
+
+    , AwsAuthBackendRoleTagResource (..)
+    , awsAuthBackendRoleTagResource
 
     , AwsAuthBackendStsRoleResource (..)
     , awsAuthBackendStsRoleResource
@@ -45,6 +54,12 @@ module Terrafomo.Vault.Resource
 
     , AwsSecretBackendRoleResource (..)
     , awsSecretBackendRoleResource
+
+    , DatabaseSecretBackendConnectionResource (..)
+    , databaseSecretBackendConnectionResource
+
+    , DatabaseSecretBackendRoleResource (..)
+    , databaseSecretBackendRoleResource
 
     , GenericSecretResource (..)
     , genericSecretResource
@@ -61,24 +76,33 @@ module Terrafomo.Vault.Resource
     , P.HasAccountId (..)
     , P.HasAllowInstanceMigration (..)
     , P.HasAllowRead (..)
+    , P.HasAllowedRoles (..)
     , P.HasAuthType (..)
     , P.HasAwsPublicCert (..)
     , P.HasBackend (..)
+    , P.HasBindSecretId (..)
     , P.HasBoundAccountId (..)
     , P.HasBoundAmiId (..)
+    , P.HasBoundCidrList (..)
     , P.HasBoundIamInstanceProfileArn (..)
     , P.HasBoundIamPrincipalArn (..)
     , P.HasBoundIamRoleArn (..)
     , P.HasBoundRegion (..)
     , P.HasBoundSubnetId (..)
     , P.HasBoundVpcId (..)
+    , P.HasCassandra (..)
     , P.HasCertName (..)
+    , P.HasCreationStatements (..)
     , P.HasDataJson (..)
+    , P.HasDbName (..)
     , P.HasDefaultLeaseTtlSeconds (..)
+    , P.HasDefaultTtl (..)
     , P.HasDescription (..)
+    , P.HasDisablePeriodicTidy (..)
     , P.HasDisableRead (..)
     , P.HasDisallowReauthentication (..)
     , P.HasEc2Endpoint (..)
+    , P.HasHana (..)
     , P.HasIamEndpoint (..)
     , P.HasIamHttpRequestMethod (..)
     , P.HasIamRequestBody (..)
@@ -88,25 +112,43 @@ module Terrafomo.Vault.Resource
     , P.HasIdentity (..)
     , P.HasInferredAwsRegion (..)
     , P.HasInferredEntityType (..)
+    , P.HasInstanceId (..)
     , P.HasMaxLeaseTtlSeconds (..)
     , P.HasMaxTtl (..)
+    , P.HasMongodb (..)
+    , P.HasMssql (..)
+    , P.HasMysql (..)
     , P.HasName (..)
     , P.HasNonce (..)
+    , P.HasOracle (..)
     , P.HasPath (..)
     , P.HasPeriod (..)
     , P.HasPkcs7 (..)
     , P.HasPolicies (..)
     , P.HasPolicy (..)
     , P.HasPolicyArn (..)
+    , P.HasPostgresql (..)
+    , P.HasRenewStatements (..)
     , P.HasResolveAwsUniqueIds (..)
+    , P.HasRevocationStatements (..)
     , P.HasRole (..)
+    , P.HasRoleId (..)
+    , P.HasRoleName (..)
     , P.HasRoleTag (..)
+    , P.HasRollbackStatements (..)
+    , P.HasSafetyBuffer (..)
+    , P.HasSecretIdNumUses (..)
+    , P.HasSecretIdTtl (..)
     , P.HasSecretKey (..)
     , P.HasSignature (..)
     , P.HasStsEndpoint (..)
     , P.HasStsRole (..)
+    , P.HasTokenMaxTtl (..)
+    , P.HasTokenNumUses (..)
+    , P.HasTokenTtl (..)
     , P.HasTtl (..)
     , P.HasType' (..)
+    , P.HasVerifyConnection (..)
 
     -- ** Computed Attributes
     , P.HasComputedAccessor (..)
@@ -117,6 +159,8 @@ module Terrafomo.Vault.Resource
     , P.HasComputedMetadata (..)
     , P.HasComputedPolicies (..)
     , P.HasComputedRenewable (..)
+    , P.HasComputedTagKey (..)
+    , P.HasComputedTagValue (..)
 
     -- * Re-exported Types
     , module P
@@ -141,6 +185,124 @@ import           Terrafomo.Vault.Types    as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Schema    as TF
+
+{- | The @vault_approle_auth_backend_role@ Vault resource.
+
+Manages an AppRole auth backend role in a Vault server. See the
+<https://www.vaultproject.io/docs/auth/approle.html> for more information.
+-}
+data ApproleAuthBackendRoleResource s = ApproleAuthBackendRoleResource {
+      _bind_secret_id     :: !(TF.Attribute s Text)
+    {- ^ (Optional) Whether or not to require @secret_id@ to be presented when logging in using this AppRole. Defaults to @true@ . -}
+    , _bound_cidr_list    :: !(TF.Attribute s Text)
+    {- ^ (Optional) If set, specifies blocks of IP addresses which can perform the login operation. -}
+    , _period             :: !(TF.Attribute s Text)
+    {- ^ (Optional) If set, indicates that the token generated using this role should never expire. The token should be renewed within the duration specified by this value. At each renewal, the token's TTL will be set to the value of this field. The maximum allowed lifetime of token issued using this role. Specified as a number of seconds. -}
+    , _policies           :: !(TF.Attribute s Text)
+    {- ^ (Optional) An array of strings specifying the policies to be set on tokens issued using this role. -}
+    , _role_id            :: !(TF.Attribute s Text)
+    {- ^ (Optional) The RoleID of this role. If not specified, one will be auto-generated. -}
+    , _role_name          :: !(TF.Attribute s Text)
+    {- ^ (Required) The name of the role. -}
+    , _secret_id_num_uses :: !(TF.Attribute s Text)
+    {- ^ (Optional) The number of times any particular SecretID can be used to fetch a token from this AppRole, after which the SecretID will expire. A value of zero will allow unlimited uses. -}
+    , _secret_id_ttl      :: !(TF.Attribute s Text)
+    {- ^ (Optional) The number of seconds after which any SecretID expires. -}
+    , _token_max_ttl      :: !(TF.Attribute s Text)
+    {- ^ (Optional) The maximum allowed lifetime of tokens issued using this role, provided as a number of seconds. -}
+    , _token_num_uses     :: !(TF.Attribute s Text)
+    {- ^ (Optional) The number of times issued tokens can be used. A value of 0 means unlimited uses. -}
+    , _token_ttl          :: !(TF.Attribute s Text)
+    {- ^ (Optional) The TTL period of tokens issued using this role, provided as a number of seconds. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ApproleAuthBackendRoleResource s) where
+    toHCL ApproleAuthBackendRoleResource{..} = TF.block $ catMaybes
+        [ TF.attribute "bind_secret_id" _bind_secret_id
+        , TF.attribute "bound_cidr_list" _bound_cidr_list
+        , TF.attribute "period" _period
+        , TF.attribute "policies" _policies
+        , TF.attribute "role_id" _role_id
+        , TF.attribute "role_name" _role_name
+        , TF.attribute "secret_id_num_uses" _secret_id_num_uses
+        , TF.attribute "secret_id_ttl" _secret_id_ttl
+        , TF.attribute "token_max_ttl" _token_max_ttl
+        , TF.attribute "token_num_uses" _token_num_uses
+        , TF.attribute "token_ttl" _token_ttl
+        ]
+
+instance P.HasBindSecretId (ApproleAuthBackendRoleResource s) s Text where
+    bindSecretId =
+        lens (_bind_secret_id :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _bind_secret_id = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasBoundCidrList (ApproleAuthBackendRoleResource s) s Text where
+    boundCidrList =
+        lens (_bound_cidr_list :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _bound_cidr_list = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasPeriod (ApproleAuthBackendRoleResource s) s Text where
+    period =
+        lens (_period :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _period = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasPolicies (ApproleAuthBackendRoleResource s) s Text where
+    policies =
+        lens (_policies :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _policies = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasRoleId (ApproleAuthBackendRoleResource s) s Text where
+    roleId =
+        lens (_role_id :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _role_id = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasRoleName (ApproleAuthBackendRoleResource s) s Text where
+    roleName =
+        lens (_role_name :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _role_name = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasSecretIdNumUses (ApproleAuthBackendRoleResource s) s Text where
+    secretIdNumUses =
+        lens (_secret_id_num_uses :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _secret_id_num_uses = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasSecretIdTtl (ApproleAuthBackendRoleResource s) s Text where
+    secretIdTtl =
+        lens (_secret_id_ttl :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _secret_id_ttl = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasTokenMaxTtl (ApproleAuthBackendRoleResource s) s Text where
+    tokenMaxTtl =
+        lens (_token_max_ttl :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _token_max_ttl = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasTokenNumUses (ApproleAuthBackendRoleResource s) s Text where
+    tokenNumUses =
+        lens (_token_num_uses :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _token_num_uses = a } :: ApproleAuthBackendRoleResource s)
+
+instance P.HasTokenTtl (ApproleAuthBackendRoleResource s) s Text where
+    tokenTtl =
+        lens (_token_ttl :: ApproleAuthBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _token_ttl = a } :: ApproleAuthBackendRoleResource s)
+
+
+approleAuthBackendRoleResource :: TF.Schema TF.Resource P.Vault (ApproleAuthBackendRoleResource s)
+approleAuthBackendRoleResource =
+    TF.newResource "vault_approle_auth_backend_role" $
+        ApproleAuthBackendRoleResource {
+              _bind_secret_id = TF.Nil
+            , _bound_cidr_list = TF.Nil
+            , _period = TF.Nil
+            , _policies = TF.Nil
+            , _role_id = TF.Nil
+            , _role_name = TF.Nil
+            , _secret_id_num_uses = TF.Nil
+            , _secret_id_ttl = TF.Nil
+            , _token_max_ttl = TF.Nil
+            , _token_num_uses = TF.Nil
+            , _token_ttl = TF.Nil
+            }
 
 {- | The @vault_auth_backend@ Vault resource.
 
@@ -337,6 +499,54 @@ awsAuthBackendClientResource =
             , _iam_server_id_header_value = TF.Nil
             , _secret_key = TF.Nil
             , _sts_endpoint = TF.Nil
+            }
+
+{- | The @vault_aws_auth_backend_identity_whitelist@ Vault resource.
+
+Configures the periodic tidying operation of the whitelisted identity
+entries. For more information, see the
+<https://www.vaultproject.io/api/auth/aws/index.html#configure-identity-whitelist-tidy-operation>
+.
+-}
+data AwsAuthBackendIdentityWhitelistResource s = AwsAuthBackendIdentityWhitelistResource {
+      _backend               :: !(TF.Attribute s Text)
+    {- ^ (Optional) The path of the AWS backend being configured. -}
+    , _disable_periodic_tidy :: !(TF.Attribute s Text)
+    {- ^ (Optional) If set to true, disables the periodic tidying of the identity-whitelist entries. -}
+    , _safety_buffer         :: !(TF.Attribute s Text)
+    {- ^ (Optional) The amount of extra time, in minutes, that must have passed beyond the roletag expiration, before it is removed from the backend storage. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AwsAuthBackendIdentityWhitelistResource s) where
+    toHCL AwsAuthBackendIdentityWhitelistResource{..} = TF.block $ catMaybes
+        [ TF.attribute "backend" _backend
+        , TF.attribute "disable_periodic_tidy" _disable_periodic_tidy
+        , TF.attribute "safety_buffer" _safety_buffer
+        ]
+
+instance P.HasBackend (AwsAuthBackendIdentityWhitelistResource s) s Text where
+    backend =
+        lens (_backend :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attribute s Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendIdentityWhitelistResource s)
+
+instance P.HasDisablePeriodicTidy (AwsAuthBackendIdentityWhitelistResource s) s Text where
+    disablePeriodicTidy =
+        lens (_disable_periodic_tidy :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attribute s Text)
+             (\s a -> s { _disable_periodic_tidy = a } :: AwsAuthBackendIdentityWhitelistResource s)
+
+instance P.HasSafetyBuffer (AwsAuthBackendIdentityWhitelistResource s) s Text where
+    safetyBuffer =
+        lens (_safety_buffer :: AwsAuthBackendIdentityWhitelistResource s -> TF.Attribute s Text)
+             (\s a -> s { _safety_buffer = a } :: AwsAuthBackendIdentityWhitelistResource s)
+
+
+awsAuthBackendIdentityWhitelistResource :: TF.Schema TF.Resource P.Vault (AwsAuthBackendIdentityWhitelistResource s)
+awsAuthBackendIdentityWhitelistResource =
+    TF.newResource "vault_aws_auth_backend_identity_whitelist" $
+        AwsAuthBackendIdentityWhitelistResource {
+              _backend = TF.Nil
+            , _disable_periodic_tidy = TF.Nil
+            , _safety_buffer = TF.Nil
             }
 
 {- | The @vault_aws_auth_backend_login@ Vault resource.
@@ -659,6 +869,89 @@ awsAuthBackendRoleResource =
             , _ttl = TF.Nil
             }
 
+{- | The @vault_aws_auth_backend_role_tag@ Vault resource.
+
+Reads role tag information from an AWS auth backend in Vault.
+-}
+data AwsAuthBackendRoleTagResource s = AwsAuthBackendRoleTagResource {
+      _allow_instance_migration  :: !(TF.Attribute s Text)
+    {- ^ (Optional) If set, allows migration of the underlying instances where the client resides. Use with caution. -}
+    , _backend                   :: !(TF.Attribute s Text)
+    {- ^ (Optional) The path to the AWS auth backend to read role tags from, with no leading or trailing @/@ s. Defaults to "aws". -}
+    , _disallow_reauthentication :: !(TF.Attribute s Text)
+    {- ^ (Optional) If set, only allows a single token to be granted per instance ID. -}
+    , _instance_id               :: !(TF.Attribute s Text)
+    {- ^ (Optional) Instance ID for which this tag is intended for. If set, the created tag can only be used by the instance with the given ID. -}
+    , _max_ttl                   :: !(TF.Attribute s Text)
+    {- ^ (Optional) The maximum TTL of the tokens issued using this role. -}
+    , _policies                  :: !(TF.Attribute s Text)
+    {- ^ (Optional) The policies to be associated with the tag. Must be a subset of the policies associated with the role. -}
+    , _role                      :: !(TF.Attribute s Text)
+    {- ^ (Required) The name of the AWS auth backend role to read role tags from, with no leading or trailing @/@ s. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (AwsAuthBackendRoleTagResource s) where
+    toHCL AwsAuthBackendRoleTagResource{..} = TF.block $ catMaybes
+        [ TF.attribute "allow_instance_migration" _allow_instance_migration
+        , TF.attribute "backend" _backend
+        , TF.attribute "disallow_reauthentication" _disallow_reauthentication
+        , TF.attribute "instance_id" _instance_id
+        , TF.attribute "max_ttl" _max_ttl
+        , TF.attribute "policies" _policies
+        , TF.attribute "role" _role
+        ]
+
+instance P.HasAllowInstanceMigration (AwsAuthBackendRoleTagResource s) s Text where
+    allowInstanceMigration =
+        lens (_allow_instance_migration :: AwsAuthBackendRoleTagResource s -> TF.Attribute s Text)
+             (\s a -> s { _allow_instance_migration = a } :: AwsAuthBackendRoleTagResource s)
+
+instance P.HasBackend (AwsAuthBackendRoleTagResource s) s Text where
+    backend =
+        lens (_backend :: AwsAuthBackendRoleTagResource s -> TF.Attribute s Text)
+             (\s a -> s { _backend = a } :: AwsAuthBackendRoleTagResource s)
+
+instance P.HasDisallowReauthentication (AwsAuthBackendRoleTagResource s) s Text where
+    disallowReauthentication =
+        lens (_disallow_reauthentication :: AwsAuthBackendRoleTagResource s -> TF.Attribute s Text)
+             (\s a -> s { _disallow_reauthentication = a } :: AwsAuthBackendRoleTagResource s)
+
+instance P.HasInstanceId (AwsAuthBackendRoleTagResource s) s Text where
+    instanceId =
+        lens (_instance_id :: AwsAuthBackendRoleTagResource s -> TF.Attribute s Text)
+             (\s a -> s { _instance_id = a } :: AwsAuthBackendRoleTagResource s)
+
+instance P.HasMaxTtl (AwsAuthBackendRoleTagResource s) s Text where
+    maxTtl =
+        lens (_max_ttl :: AwsAuthBackendRoleTagResource s -> TF.Attribute s Text)
+             (\s a -> s { _max_ttl = a } :: AwsAuthBackendRoleTagResource s)
+
+instance P.HasPolicies (AwsAuthBackendRoleTagResource s) s Text where
+    policies =
+        lens (_policies :: AwsAuthBackendRoleTagResource s -> TF.Attribute s Text)
+             (\s a -> s { _policies = a } :: AwsAuthBackendRoleTagResource s)
+
+instance P.HasRole (AwsAuthBackendRoleTagResource s) s Text where
+    role =
+        lens (_role :: AwsAuthBackendRoleTagResource s -> TF.Attribute s Text)
+             (\s a -> s { _role = a } :: AwsAuthBackendRoleTagResource s)
+
+instance P.HasComputedTagKey (AwsAuthBackendRoleTagResource s) Text
+instance P.HasComputedTagValue (AwsAuthBackendRoleTagResource s) Text
+
+awsAuthBackendRoleTagResource :: TF.Schema TF.Resource P.Vault (AwsAuthBackendRoleTagResource s)
+awsAuthBackendRoleTagResource =
+    TF.newResource "vault_aws_auth_backend_role_tag" $
+        AwsAuthBackendRoleTagResource {
+              _allow_instance_migration = TF.Nil
+            , _backend = TF.Nil
+            , _disallow_reauthentication = TF.Nil
+            , _instance_id = TF.Nil
+            , _max_ttl = TF.Nil
+            , _policies = TF.Nil
+            , _role = TF.Nil
+            }
+
 {- | The @vault_aws_auth_backend_sts_role@ Vault resource.
 
 Manages an STS role in a Vault server. STS roles are mappings between
@@ -810,6 +1103,232 @@ awsSecretBackendRoleResource =
             , _name = TF.Nil
             , _policy = TF.Nil
             , _policy_arn = TF.Nil
+            }
+
+{- | The @vault_database_secret_backend_connection@ Vault resource.
+
+Creates a Database Secret Backend connection in Vault. Database secret
+backend connections can be used to generate dynamic credentials for the
+database. ~> Important All data provided in the resource configuration will
+be written in cleartext to state and plan files generated by Terraform, and
+will appear in the console output when Terraform runs. Protect these
+artifacts accordingly. See <../index.html> for more details.
+-}
+data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnectionResource {
+      _allowed_roles     :: !(TF.Attribute s Text)
+    {- ^ (Optional) A list of roles that are allowed to use this connection. -}
+    , _backend           :: !(TF.Attribute s Text)
+    {- ^ (Required) The unique name of the Vault mount to configure. -}
+    , _cassandra         :: !(TF.Attribute s Text)
+    {- ^ (Optional) Configuration options for Cassandra connections. -}
+    , _hana              :: !(TF.Attribute s Text)
+    {- ^ (Optional) Configuration options for SAP HanaDB connections. -}
+    , _mongodb           :: !(TF.Attribute s Text)
+    {- ^ (Optional) Configuration options for MongoDB connections. -}
+    , _mssql             :: !(TF.Attribute s Text)
+    {- ^ (Optional) Configuration options for MSSQL connections. -}
+    , _mysql             :: !(TF.Attribute s Text)
+    {- ^ (Optional) Configuration options for MySQL connections. -}
+    , _name              :: !(TF.Attribute s Text)
+    {- ^ (Required) A unique name to give the database connection. -}
+    , _oracle            :: !(TF.Attribute s Text)
+    {- ^ (Optional) Configuration options for Oracle connections. -}
+    , _postgresql        :: !(TF.Attribute s Text)
+    {- ^ (Optional) Configuration options for PostgreSQL connections. -}
+    , _verify_connection :: !(TF.Attribute s Text)
+    {- ^ (Optional) Whether the connection should be verified on initial configuration or not. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DatabaseSecretBackendConnectionResource s) where
+    toHCL DatabaseSecretBackendConnectionResource{..} = TF.block $ catMaybes
+        [ TF.attribute "allowed_roles" _allowed_roles
+        , TF.attribute "backend" _backend
+        , TF.attribute "cassandra" _cassandra
+        , TF.attribute "hana" _hana
+        , TF.attribute "mongodb" _mongodb
+        , TF.attribute "mssql" _mssql
+        , TF.attribute "mysql" _mysql
+        , TF.attribute "name" _name
+        , TF.attribute "oracle" _oracle
+        , TF.attribute "postgresql" _postgresql
+        , TF.attribute "verify_connection" _verify_connection
+        ]
+
+instance P.HasAllowedRoles (DatabaseSecretBackendConnectionResource s) s Text where
+    allowedRoles =
+        lens (_allowed_roles :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _allowed_roles = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasBackend (DatabaseSecretBackendConnectionResource s) s Text where
+    backend =
+        lens (_backend :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _backend = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasCassandra (DatabaseSecretBackendConnectionResource s) s Text where
+    cassandra =
+        lens (_cassandra :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _cassandra = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasHana (DatabaseSecretBackendConnectionResource s) s Text where
+    hana =
+        lens (_hana :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _hana = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasMongodb (DatabaseSecretBackendConnectionResource s) s Text where
+    mongodb =
+        lens (_mongodb :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _mongodb = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasMssql (DatabaseSecretBackendConnectionResource s) s Text where
+    mssql =
+        lens (_mssql :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _mssql = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasMysql (DatabaseSecretBackendConnectionResource s) s Text where
+    mysql =
+        lens (_mysql :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _mysql = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasName (DatabaseSecretBackendConnectionResource s) s Text where
+    name =
+        lens (_name :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _name = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasOracle (DatabaseSecretBackendConnectionResource s) s Text where
+    oracle =
+        lens (_oracle :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _oracle = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasPostgresql (DatabaseSecretBackendConnectionResource s) s Text where
+    postgresql =
+        lens (_postgresql :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _postgresql = a } :: DatabaseSecretBackendConnectionResource s)
+
+instance P.HasVerifyConnection (DatabaseSecretBackendConnectionResource s) s Text where
+    verifyConnection =
+        lens (_verify_connection :: DatabaseSecretBackendConnectionResource s -> TF.Attribute s Text)
+             (\s a -> s { _verify_connection = a } :: DatabaseSecretBackendConnectionResource s)
+
+
+databaseSecretBackendConnectionResource :: TF.Schema TF.Resource P.Vault (DatabaseSecretBackendConnectionResource s)
+databaseSecretBackendConnectionResource =
+    TF.newResource "vault_database_secret_backend_connection" $
+        DatabaseSecretBackendConnectionResource {
+              _allowed_roles = TF.Nil
+            , _backend = TF.Nil
+            , _cassandra = TF.Nil
+            , _hana = TF.Nil
+            , _mongodb = TF.Nil
+            , _mssql = TF.Nil
+            , _mysql = TF.Nil
+            , _name = TF.Nil
+            , _oracle = TF.Nil
+            , _postgresql = TF.Nil
+            , _verify_connection = TF.Nil
+            }
+
+{- | The @vault_database_secret_backend_role@ Vault resource.
+
+Creates a Database Secret Backend role in Vault. Database secret backend
+roles can be used to generate dynamic credentials for the database. ~>
+Important All data provided in the resource configuration will be written in
+cleartext to state and plan files generated by Terraform, and will appear in
+the console output when Terraform runs. Protect these artifacts accordingly.
+See <../index.html> for more details.
+-}
+data DatabaseSecretBackendRoleResource s = DatabaseSecretBackendRoleResource {
+      _backend               :: !(TF.Attribute s Text)
+    {- ^ (Required) The unique name of the Vault mount to configure. -}
+    , _creation_statements   :: !(TF.Attribute s Text)
+    {- ^ (Required) The database statements to execute when creating a user. -}
+    , _db_name               :: !(TF.Attribute s Text)
+    {- ^ (Required) The unique name of the database connection to use for the role. -}
+    , _default_ttl           :: !(TF.Attribute s Text)
+    {- ^ (Optional) The default number of seconds for leases for this role. -}
+    , _max_ttl               :: !(TF.Attribute s Text)
+    {- ^ (Optional) The maximum number of seconds for leases for this role. -}
+    , _name                  :: !(TF.Attribute s Text)
+    {- ^ (Required) A unique name to give the role. -}
+    , _renew_statements      :: !(TF.Attribute s Text)
+    {- ^ (Optional) The database statements to execute when renewing a user. -}
+    , _revocation_statements :: !(TF.Attribute s Text)
+    {- ^ (Optional) The database statements to execute when revoking a user. -}
+    , _rollback_statements   :: !(TF.Attribute s Text)
+    {- ^ (Optional) The database statements to execute when rolling back creation due to an error. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DatabaseSecretBackendRoleResource s) where
+    toHCL DatabaseSecretBackendRoleResource{..} = TF.block $ catMaybes
+        [ TF.attribute "backend" _backend
+        , TF.attribute "creation_statements" _creation_statements
+        , TF.attribute "db_name" _db_name
+        , TF.attribute "default_ttl" _default_ttl
+        , TF.attribute "max_ttl" _max_ttl
+        , TF.attribute "name" _name
+        , TF.attribute "renew_statements" _renew_statements
+        , TF.attribute "revocation_statements" _revocation_statements
+        , TF.attribute "rollback_statements" _rollback_statements
+        ]
+
+instance P.HasBackend (DatabaseSecretBackendRoleResource s) s Text where
+    backend =
+        lens (_backend :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _backend = a } :: DatabaseSecretBackendRoleResource s)
+
+instance P.HasCreationStatements (DatabaseSecretBackendRoleResource s) s Text where
+    creationStatements =
+        lens (_creation_statements :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _creation_statements = a } :: DatabaseSecretBackendRoleResource s)
+
+instance P.HasDbName (DatabaseSecretBackendRoleResource s) s Text where
+    dbName =
+        lens (_db_name :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _db_name = a } :: DatabaseSecretBackendRoleResource s)
+
+instance P.HasDefaultTtl (DatabaseSecretBackendRoleResource s) s Text where
+    defaultTtl =
+        lens (_default_ttl :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _default_ttl = a } :: DatabaseSecretBackendRoleResource s)
+
+instance P.HasMaxTtl (DatabaseSecretBackendRoleResource s) s Text where
+    maxTtl =
+        lens (_max_ttl :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _max_ttl = a } :: DatabaseSecretBackendRoleResource s)
+
+instance P.HasName (DatabaseSecretBackendRoleResource s) s Text where
+    name =
+        lens (_name :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _name = a } :: DatabaseSecretBackendRoleResource s)
+
+instance P.HasRenewStatements (DatabaseSecretBackendRoleResource s) s Text where
+    renewStatements =
+        lens (_renew_statements :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _renew_statements = a } :: DatabaseSecretBackendRoleResource s)
+
+instance P.HasRevocationStatements (DatabaseSecretBackendRoleResource s) s Text where
+    revocationStatements =
+        lens (_revocation_statements :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _revocation_statements = a } :: DatabaseSecretBackendRoleResource s)
+
+instance P.HasRollbackStatements (DatabaseSecretBackendRoleResource s) s Text where
+    rollbackStatements =
+        lens (_rollback_statements :: DatabaseSecretBackendRoleResource s -> TF.Attribute s Text)
+             (\s a -> s { _rollback_statements = a } :: DatabaseSecretBackendRoleResource s)
+
+
+databaseSecretBackendRoleResource :: TF.Schema TF.Resource P.Vault (DatabaseSecretBackendRoleResource s)
+databaseSecretBackendRoleResource =
+    TF.newResource "vault_database_secret_backend_role" $
+        DatabaseSecretBackendRoleResource {
+              _backend = TF.Nil
+            , _creation_statements = TF.Nil
+            , _db_name = TF.Nil
+            , _default_ttl = TF.Nil
+            , _max_ttl = TF.Nil
+            , _name = TF.Nil
+            , _renew_statements = TF.Nil
+            , _revocation_statements = TF.Nil
+            , _rollback_statements = TF.Nil
             }
 
 {- | The @vault_generic_secret@ Vault resource.

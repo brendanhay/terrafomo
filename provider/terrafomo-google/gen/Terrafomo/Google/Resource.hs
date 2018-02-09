@@ -587,6 +587,7 @@ module Terrafomo.Google.Resource
     , P.HasComputedCrc32c (..)
     , P.HasComputedCreateTime (..)
     , P.HasComputedCreationTime (..)
+    , P.HasComputedCreationTimestamp (..)
     , P.HasComputedDetailedStatus (..)
     , P.HasComputedDisk0DiskEncryptionKeySha256 (..)
     , P.HasComputedDiskEncryptionKeySha256 (..)
@@ -1376,6 +1377,7 @@ instance P.HasProject (ComputeBackendBucketResource s) s Text where
         lens (_project :: ComputeBackendBucketResource s -> TF.Attribute s Text)
              (\s a -> s { _project = a } :: ComputeBackendBucketResource s)
 
+instance P.HasComputedCreationTimestamp (ComputeBackendBucketResource s) Text
 instance P.HasComputedSelfLink (ComputeBackendBucketResource s) Text
 
 computeBackendBucketResource :: TF.Schema TF.Resource P.Google (ComputeBackendBucketResource s)
@@ -5468,6 +5470,11 @@ instance P.HasLabels (DataprocJobResource s) s Text where
         lens (_labels :: DataprocJobResource s -> TF.Attribute s Text)
              (\s a -> s { _labels = a } :: DataprocJobResource s)
 
+instance P.HasPlacement (DataprocJobResource s) s P.PlacementType where
+    placement =
+        lens (placement :: DataprocJobResource s -> TF.Attribute s P.PlacementType)
+             (\s a -> s { placement = a } :: DataprocJobResource s)
+
 instance P.HasProject (DataprocJobResource s) s Text where
     project =
         lens (_project :: DataprocJobResource s -> TF.Attribute s Text)
@@ -5478,20 +5485,15 @@ instance P.HasRegion (DataprocJobResource s) s Text where
         lens (_region :: DataprocJobResource s -> TF.Attribute s Text)
              (\s a -> s { _region = a } :: DataprocJobResource s)
 
-instance P.HasXxxConfig (DataprocJobResource s) s Text where
-    xxxConfig =
-        lens (_xxx_config :: DataprocJobResource s -> TF.Attribute s Text)
-             (\s a -> s { _xxx_config = a } :: DataprocJobResource s)
-
-instance P.HasPlacement (DataprocJobResource s) s P.PlacementType where
-    placement =
-        lens (placement :: DataprocJobResource s -> TF.Attribute s P.PlacementType)
-             (\s a -> s { placement = a } :: DataprocJobResource s)
-
 instance P.HasScheduling (DataprocJobResource s) s P.SchedulingType where
     scheduling =
         lens (scheduling :: DataprocJobResource s -> TF.Attribute s P.SchedulingType)
              (\s a -> s { scheduling = a } :: DataprocJobResource s)
+
+instance P.HasXxxConfig (DataprocJobResource s) s Text where
+    xxxConfig =
+        lens (_xxx_config :: DataprocJobResource s -> TF.Attribute s Text)
+             (\s a -> s { _xxx_config = a } :: DataprocJobResource s)
 
 instance P.HasComputedDriverControlsFilesUri (DataprocJobResource s) Text
 instance P.HasComputedDriverOutputResourceUri (DataprocJobResource s) Text

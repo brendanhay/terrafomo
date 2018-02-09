@@ -254,6 +254,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasHostRecord (..)
     , P.HasImageId (..)
     , P.HasIncludeDataDisks (..)
+    , P.HasInnerAccess (..)
     , P.HasInstanceChargeType (..)
     , P.HasInstanceId (..)
     , P.HasInstanceIds (..)
@@ -466,6 +467,7 @@ module Terrafomo.AliCloud.Resource
     , P.HasComputedHttpHeaderConfig (..)
     , P.HasComputedId (..)
     , P.HasComputedImageId (..)
+    , P.HasComputedInnerAccess (..)
     , P.HasComputedInstanceChargeType (..)
     , P.HasComputedInstanceId (..)
     , P.HasComputedInstanceIds (..)
@@ -1498,9 +1500,9 @@ instance P.HasValue (DnsResource s) s Text where
         lens (_value :: DnsResource s -> TF.Attribute s Text)
              (\s a -> s { _value = a } :: DnsResource s)
 
-instance P.HasComputedLocked (DnsResource s) Text
 instance P.HasComputedHostRecord (DnsResource s) Text
 instance P.HasComputedId (DnsResource s) Text
+instance P.HasComputedLocked (DnsResource s) Text
 instance P.HasComputedName (DnsResource s) Text
 instance P.HasComputedPriority (DnsResource s) Text
 instance P.HasComputedRouting (DnsResource s) Text
@@ -3900,20 +3902,25 @@ routerInterfaceResource =
 
 Provides a security group resource. ~> NOTE:  @alicloud_security_group@ is
 used to build and manage a security group, and
-@alicloud_security_group_rule@ can define ingress or egress rules for it.
+@alicloud_security_group_rule@ can define ingress or egress rules for it. ~>
+NOTE: From version 1.7.2, @alicloud_security_group@ has supported to
+segregate different ECS instance in which the same security group.
 -}
 data SecurityGroupResource s = SecurityGroupResource {
-      _description :: !(TF.Attribute s Text)
+      _description  :: !(TF.Attribute s Text)
     {- ^ (Optional, Forces new resource) The security group description. Defaults to null. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _inner_access :: !(TF.Attribute s Text)
+    {- ^ (Optional) Whether to allow both machines to access each other on all ports in the same security group. Combining security group rules, the policy can define multiple application scenario. Default to true. It is valid from verison @1.7.2@ . -}
+    , _name         :: !(TF.Attribute s Text)
     {- ^ (Optional) The name of the security group. Defaults to null. -}
-    , _vpc_id      :: !(TF.Attribute s Text)
+    , _vpc_id       :: !(TF.Attribute s Text)
     {- ^ (Optional, Forces new resource) The VPC ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SecurityGroupResource s) where
     toHCL SecurityGroupResource{..} = TF.block $ catMaybes
         [ TF.attribute "description" _description
+        , TF.attribute "inner_access" _inner_access
         , TF.attribute "name" _name
         , TF.attribute "vpc_id" _vpc_id
         ]
@@ -3922,6 +3929,11 @@ instance P.HasDescription (SecurityGroupResource s) s Text where
     description =
         lens (_description :: SecurityGroupResource s -> TF.Attribute s Text)
              (\s a -> s { _description = a } :: SecurityGroupResource s)
+
+instance P.HasInnerAccess (SecurityGroupResource s) s Text where
+    innerAccess =
+        lens (_inner_access :: SecurityGroupResource s -> TF.Attribute s Text)
+             (\s a -> s { _inner_access = a } :: SecurityGroupResource s)
 
 instance P.HasName (SecurityGroupResource s) s Text where
     name =
@@ -3935,6 +3947,7 @@ instance P.HasVpcId (SecurityGroupResource s) s Text where
 
 instance P.HasComputedDescription (SecurityGroupResource s) Text
 instance P.HasComputedId (SecurityGroupResource s) Text
+instance P.HasComputedInnerAccess (SecurityGroupResource s) Text
 instance P.HasComputedName (SecurityGroupResource s) Text
 instance P.HasComputedVpcId (SecurityGroupResource s) Text
 
@@ -3943,6 +3956,7 @@ securityGroupResource =
     TF.newResource "alicloud_security_group" $
         SecurityGroupResource {
               _description = TF.Nil
+            , _inner_access = TF.Nil
             , _name = TF.Nil
             , _vpc_id = TF.Nil
             }

@@ -64,6 +64,9 @@ module Terrafomo.AWS.Resource
     , ApiGatewayDocumentationPartResource (..)
     , apiGatewayDocumentationPartResource
 
+    , ApiGatewayDocumentationVersionResource (..)
+    , apiGatewayDocumentationVersionResource
+
     , ApiGatewayDomainNameResource (..)
     , apiGatewayDomainNameResource
 
@@ -147,6 +150,9 @@ module Terrafomo.AWS.Resource
 
     , BatchJobQueueResource (..)
     , batchJobQueueResource
+
+    , Cloud9EnvironmentEc2Resource (..)
+    , cloud9EnvironmentEc2Resource
 
     , CloudformationStackResource (..)
     , cloudformationStackResource
@@ -321,6 +327,9 @@ module Terrafomo.AWS.Resource
 
     , DynamodbGlobalTableResource (..)
     , dynamodbGlobalTableResource
+
+    , DynamodbTableItemResource (..)
+    , dynamodbTableItemResource
 
     , DynamodbTableResource (..)
     , dynamodbTableResource
@@ -799,6 +808,9 @@ module Terrafomo.AWS.Resource
     , SnapshotCreateVolumePermissionResource (..)
     , snapshotCreateVolumePermissionResource
 
+    , SnsPlatformApplicationResource (..)
+    , snsPlatformApplicationResource
+
     , SnsTopicPolicyResource (..)
     , snsTopicPolicyResource
 
@@ -983,6 +995,7 @@ module Terrafomo.AWS.Resource
     , P.HasAllowedOauthFlowsUserPoolClient (..)
     , P.HasAllowedOauthScopes (..)
     , P.HasAllowedPrincipals (..)
+    , P.HasAmazonSideAsn (..)
     , P.HasAmi (..)
     , P.HasAmiId (..)
     , P.HasApiId (..)
@@ -1033,6 +1046,7 @@ module Terrafomo.AWS.Resource
     , P.HasAutoVerifiedAttributes (..)
     , P.HasAutomatedSnapshotRetentionPeriod (..)
     , P.HasAutomaticFailoverEnabled (..)
+    , P.HasAutomaticStopTimeMinutes (..)
     , P.HasAutoscalingGroupName (..)
     , P.HasAutoscalingGroups (..)
     , P.HasAutoscalingRole (..)
@@ -1294,6 +1308,10 @@ module Terrafomo.AWS.Resource
     , P.HasEvaluateLowSampleCountPercentiles (..)
     , P.HasEvaluationPeriods (..)
     , P.HasEventCategories (..)
+    , P.HasEventDeliveryFailureTopicArn (..)
+    , P.HasEventEndpointCreatedTopicArn (..)
+    , P.HasEventEndpointDeletedTopicArn (..)
+    , P.HasEventEndpointUpdatedTopic (..)
     , P.HasEventPattern (..)
     , P.HasEventSourceArn (..)
     , P.HasEvents (..)
@@ -1304,6 +1322,7 @@ module Terrafomo.AWS.Resource
     , P.HasExtendedStatistic (..)
     , P.HasExtraConnectionAttributes (..)
     , P.HasFailoverRoutingPolicy (..)
+    , P.HasFailureFeedbackRoleArn (..)
     , P.HasFailureThreshold (..)
     , P.HasFamily' (..)
     , P.HasFifoQueue (..)
@@ -1404,6 +1423,7 @@ module Terrafomo.AWS.Resource
     , P.HasIsEnabled (..)
     , P.HasIsIpv6Enabled (..)
     , P.HasIsMultiRegionTrail (..)
+    , P.HasItem (..)
     , P.HasJvmOptions (..)
     , P.HasJvmType (..)
     , P.HasJvmVersion (..)
@@ -1532,6 +1552,7 @@ module Terrafomo.AWS.Resource
     , P.HasOutputLocation (..)
     , P.HasOverwrite (..)
     , P.HasOwnerAccount (..)
+    , P.HasOwnerArn (..)
     , P.HasOwnerInformation (..)
     , P.HasParameter (..)
     , P.HasParameterGroupName (..)
@@ -1561,6 +1582,9 @@ module Terrafomo.AWS.Resource
     , P.HasPlacementGroup (..)
     , P.HasPlacementStrategy (..)
     , P.HasPlacementTenancy (..)
+    , P.HasPlatform (..)
+    , P.HasPlatformCredential (..)
+    , P.HasPlatformPrincipal (..)
     , P.HasPolicy (..)
     , P.HasPolicyArn (..)
     , P.HasPolicyAttribute (..)
@@ -1818,11 +1842,14 @@ module Terrafomo.AWS.Resource
     , P.HasSubnetIds (..)
     , P.HasSubnetMapping (..)
     , P.HasSubnets (..)
+    , P.HasSuccessFeedbackRoleArn (..)
+    , P.HasSuccessFeedbackSampleRate (..)
     , P.HasSupportedIdentityProviders (..)
     , P.HasSupportedLoginProviders (..)
     , P.HasSuspendedProcesses (..)
     , P.HasSystemPackages (..)
     , P.HasTableMappings (..)
+    , P.HasTableName (..)
     , P.HasTag (..)
     , P.HasTags (..)
     , P.HasTargetArn (..)
@@ -3101,6 +3128,51 @@ apiGatewayDocumentationPartResource =
               _location = TF.Nil
             , _properties = TF.Nil
             , _rest_api_id = TF.Nil
+            }
+
+{- | The @aws_api_gateway_documentation_version@ AWS resource.
+
+Provides a resource to manage an API Gateway Documentation Version.
+-}
+data ApiGatewayDocumentationVersionResource s = ApiGatewayDocumentationVersionResource {
+      _description :: !(TF.Attribute s Text)
+    {- ^ (Optional) The description of the API documentation version. -}
+    , _rest_api_id :: !(TF.Attribute s Text)
+    {- ^ (Required) The ID of the associated Rest API -}
+    , _version     :: !(TF.Attribute s Text)
+    {- ^ (Required) The version identifier of the API documentation snapshot. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ApiGatewayDocumentationVersionResource s) where
+    toHCL ApiGatewayDocumentationVersionResource{..} = TF.block $ catMaybes
+        [ TF.attribute "description" _description
+        , TF.attribute "rest_api_id" _rest_api_id
+        , TF.attribute "version" _version
+        ]
+
+instance P.HasDescription (ApiGatewayDocumentationVersionResource s) s Text where
+    description =
+        lens (_description :: ApiGatewayDocumentationVersionResource s -> TF.Attribute s Text)
+             (\s a -> s { _description = a } :: ApiGatewayDocumentationVersionResource s)
+
+instance P.HasRestApiId (ApiGatewayDocumentationVersionResource s) s Text where
+    restApiId =
+        lens (_rest_api_id :: ApiGatewayDocumentationVersionResource s -> TF.Attribute s Text)
+             (\s a -> s { _rest_api_id = a } :: ApiGatewayDocumentationVersionResource s)
+
+instance P.HasVersion (ApiGatewayDocumentationVersionResource s) s Text where
+    version =
+        lens (_version :: ApiGatewayDocumentationVersionResource s -> TF.Attribute s Text)
+             (\s a -> s { _version = a } :: ApiGatewayDocumentationVersionResource s)
+
+
+apiGatewayDocumentationVersionResource :: TF.Schema TF.Resource P.AWS (ApiGatewayDocumentationVersionResource s)
+apiGatewayDocumentationVersionResource =
+    TF.newResource "aws_api_gateway_documentation_version" $
+        ApiGatewayDocumentationVersionResource {
+              _description = TF.Nil
+            , _rest_api_id = TF.Nil
+            , _version = TF.Nil
             }
 
 {- | The @aws_api_gateway_domain_name@ AWS resource.
@@ -5345,6 +5417,81 @@ batchJobQueueResource =
             , _name = TF.Nil
             , _priority = TF.Nil
             , _state = TF.Nil
+            }
+
+{- | The @aws_cloud9_environment_ec2@ AWS resource.
+
+Provides a Cloud9 EC2 Development Environment.
+-}
+data Cloud9EnvironmentEc2Resource s = Cloud9EnvironmentEc2Resource {
+      _automatic_stop_time_minutes :: !(TF.Attribute s Text)
+    {- ^ (Optional) The number of minutes until the running instance is shut down after the environment has last been used. -}
+    , _description                 :: !(TF.Attribute s Text)
+    {- ^ (Optional) The description of the environment. -}
+    , _instance_type               :: !(TF.Attribute s Text)
+    {- ^ (Required) The type of instance to connect to the environment, e.g. @t2.micro@ . -}
+    , _name                        :: !(TF.Attribute s Text)
+    {- ^ (Required) The name of the environment. -}
+    , _owner_arn                   :: !(TF.Attribute s Text)
+    {- ^ (Optional) The ARN of the environment owner. This can be ARN of any AWS IAM principal. Defaults to the environment's creator. -}
+    , _subnet_id                   :: !(TF.Attribute s Text)
+    {- ^ (Optional) The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (Cloud9EnvironmentEc2Resource s) where
+    toHCL Cloud9EnvironmentEc2Resource{..} = TF.block $ catMaybes
+        [ TF.attribute "automatic_stop_time_minutes" _automatic_stop_time_minutes
+        , TF.attribute "description" _description
+        , TF.attribute "instance_type" _instance_type
+        , TF.attribute "name" _name
+        , TF.attribute "owner_arn" _owner_arn
+        , TF.attribute "subnet_id" _subnet_id
+        ]
+
+instance P.HasAutomaticStopTimeMinutes (Cloud9EnvironmentEc2Resource s) s Text where
+    automaticStopTimeMinutes =
+        lens (_automatic_stop_time_minutes :: Cloud9EnvironmentEc2Resource s -> TF.Attribute s Text)
+             (\s a -> s { _automatic_stop_time_minutes = a } :: Cloud9EnvironmentEc2Resource s)
+
+instance P.HasDescription (Cloud9EnvironmentEc2Resource s) s Text where
+    description =
+        lens (_description :: Cloud9EnvironmentEc2Resource s -> TF.Attribute s Text)
+             (\s a -> s { _description = a } :: Cloud9EnvironmentEc2Resource s)
+
+instance P.HasInstanceType (Cloud9EnvironmentEc2Resource s) s Text where
+    instanceType =
+        lens (_instance_type :: Cloud9EnvironmentEc2Resource s -> TF.Attribute s Text)
+             (\s a -> s { _instance_type = a } :: Cloud9EnvironmentEc2Resource s)
+
+instance P.HasName (Cloud9EnvironmentEc2Resource s) s Text where
+    name =
+        lens (_name :: Cloud9EnvironmentEc2Resource s -> TF.Attribute s Text)
+             (\s a -> s { _name = a } :: Cloud9EnvironmentEc2Resource s)
+
+instance P.HasOwnerArn (Cloud9EnvironmentEc2Resource s) s Text where
+    ownerArn =
+        lens (_owner_arn :: Cloud9EnvironmentEc2Resource s -> TF.Attribute s Text)
+             (\s a -> s { _owner_arn = a } :: Cloud9EnvironmentEc2Resource s)
+
+instance P.HasSubnetId (Cloud9EnvironmentEc2Resource s) s Text where
+    subnetId =
+        lens (_subnet_id :: Cloud9EnvironmentEc2Resource s -> TF.Attribute s Text)
+             (\s a -> s { _subnet_id = a } :: Cloud9EnvironmentEc2Resource s)
+
+instance P.HasComputedArn (Cloud9EnvironmentEc2Resource s) Text
+instance P.HasComputedId (Cloud9EnvironmentEc2Resource s) Text
+instance P.HasComputedType' (Cloud9EnvironmentEc2Resource s) Text
+
+cloud9EnvironmentEc2Resource :: TF.Schema TF.Resource P.AWS (Cloud9EnvironmentEc2Resource s)
+cloud9EnvironmentEc2Resource =
+    TF.newResource "aws_cloud9_environment_ec2" $
+        Cloud9EnvironmentEc2Resource {
+              _automatic_stop_time_minutes = TF.Nil
+            , _description = TF.Nil
+            , _instance_type = TF.Nil
+            , _name = TF.Nil
+            , _owner_arn = TF.Nil
+            , _subnet_id = TF.Nil
             }
 
 {- | The @aws_cloudformation_stack@ AWS resource.
@@ -10064,6 +10211,65 @@ dynamodbGlobalTableResource =
         DynamodbGlobalTableResource {
               _name = TF.Nil
             , _replica = TF.Nil
+            }
+
+{- | The @aws_dynamodb_table_item@ AWS resource.
+
+Provides a DynamoDB table item resource -> Note: This resource is not meant
+to be used for managing large amounts of data in your table, it is not
+designed to scale. You should perform regular backups of all data in the
+table, see
+<https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/BackupRestore.html>
+.
+-}
+data DynamodbTableItemResource s = DynamodbTableItemResource {
+      _hash_key   :: !(TF.Attribute s Text)
+    {- ^ (Required) Hash key to use for lookups and identification of the item -}
+    , _item       :: !(TF.Attribute s Text)
+    {- ^ (Required) JSON representation of a map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required; you can optionally provide other attribute name-value pairs for the item. -}
+    , _range_key  :: !(TF.Attribute s Text)
+    {- ^ (Optional) Range key to use for lookups and identification of the item. Required if there is range key defined in the table. -}
+    , _table_name :: !(TF.Attribute s Text)
+    {- ^ (Required) The name of the table to contain the item. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (DynamodbTableItemResource s) where
+    toHCL DynamodbTableItemResource{..} = TF.block $ catMaybes
+        [ TF.attribute "hash_key" _hash_key
+        , TF.attribute "item" _item
+        , TF.attribute "range_key" _range_key
+        , TF.attribute "table_name" _table_name
+        ]
+
+instance P.HasHashKey (DynamodbTableItemResource s) s Text where
+    hashKey =
+        lens (_hash_key :: DynamodbTableItemResource s -> TF.Attribute s Text)
+             (\s a -> s { _hash_key = a } :: DynamodbTableItemResource s)
+
+instance P.HasItem (DynamodbTableItemResource s) s Text where
+    item =
+        lens (_item :: DynamodbTableItemResource s -> TF.Attribute s Text)
+             (\s a -> s { _item = a } :: DynamodbTableItemResource s)
+
+instance P.HasRangeKey (DynamodbTableItemResource s) s Text where
+    rangeKey =
+        lens (_range_key :: DynamodbTableItemResource s -> TF.Attribute s Text)
+             (\s a -> s { _range_key = a } :: DynamodbTableItemResource s)
+
+instance P.HasTableName (DynamodbTableItemResource s) s Text where
+    tableName =
+        lens (_table_name :: DynamodbTableItemResource s -> TF.Attribute s Text)
+             (\s a -> s { _table_name = a } :: DynamodbTableItemResource s)
+
+
+dynamodbTableItemResource :: TF.Schema TF.Resource P.AWS (DynamodbTableItemResource s)
+dynamodbTableItemResource =
+    TF.newResource "aws_dynamodb_table_item" $
+        DynamodbTableItemResource {
+              _hash_key = TF.Nil
+            , _item = TF.Nil
+            , _range_key = TF.Nil
+            , _table_name = TF.Nil
             }
 
 {- | The @aws_dynamodb_table@ AWS resource.
@@ -23475,6 +23681,125 @@ snapshotCreateVolumePermissionResource =
             , _snapshot_id = TF.Nil
             }
 
+{- | The @aws_sns_platform_application@ AWS resource.
+
+Provides an SNS platform application resource
+-}
+data SnsPlatformApplicationResource s = SnsPlatformApplicationResource {
+      _event_delivery_failure_topic_arn :: !(TF.Attribute s Text)
+    {- ^ (Optional) SNS Topic triggered when a delivery to any of the platform endpoints associated with your platform application encounters a permanent failure. -}
+    , _event_endpoint_created_topic_arn :: !(TF.Attribute s Text)
+    {- ^ (Optional) SNS Topic triggered when a new platform endpoint is added to your platform application. -}
+    , _event_endpoint_deleted_topic_arn :: !(TF.Attribute s Text)
+    {- ^ (Optional) SNS Topic triggered when an existing platform endpoint is deleted from your platform application. -}
+    , _event_endpoint_updated_topic     :: !(TF.Attribute s Text)
+    {- ^ (Optional) SNS Topic triggered when an existing platform endpoint is changed from your platform application. -}
+    , _failure_feedback_role_arn        :: !(TF.Attribute s Text)
+    {- ^ (Optional) The IAM role permitted to receive failure feedback for this application. -}
+    , _name                             :: !(TF.Attribute s Text)
+    {- ^ (Required) The friendly name for the SNS platform application -}
+    , _platform                         :: !(TF.Attribute s Text)
+    {- ^ (Required) The platform that the app is registered with. See <http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-register.html> for supported platforms. -}
+    , _platform_credential              :: !(TF.Attribute s Text)
+    {- ^ (Required) Application Platform credential. See <http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-register.html> for type of credential required for platform. The value of this attribute when stored into the Terraform state is only a hash of the real value, so therefore it is not practical to use this as an attribute for other resources. -}
+    , _platform_principal               :: !(TF.Attribute s Text)
+    {- ^ (Optional) Application Platform principal. See <http://docs.aws.amazon.com/sns/latest/api/API_CreatePlatformApplication.html> for type of principal required for platform. The value of this attribute when stored into the Terraform state is only a hash of the real value, so therefore it is not practical to use this as an attribute for other resources. -}
+    , _success_feedback_role_arn        :: !(TF.Attribute s Text)
+    {- ^ (Optional) The IAM role permitted to receive success feedback for this application. -}
+    , _success_feedback_sample_rate     :: !(TF.Attribute s Text)
+    {- ^ (Optional) The percentage of success to sample (0-100) -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SnsPlatformApplicationResource s) where
+    toHCL SnsPlatformApplicationResource{..} = TF.block $ catMaybes
+        [ TF.attribute "event_delivery_failure_topic_arn" _event_delivery_failure_topic_arn
+        , TF.attribute "event_endpoint_created_topic_arn" _event_endpoint_created_topic_arn
+        , TF.attribute "event_endpoint_deleted_topic_arn" _event_endpoint_deleted_topic_arn
+        , TF.attribute "event_endpoint_updated_topic" _event_endpoint_updated_topic
+        , TF.attribute "failure_feedback_role_arn" _failure_feedback_role_arn
+        , TF.attribute "name" _name
+        , TF.attribute "platform" _platform
+        , TF.attribute "platform_credential" _platform_credential
+        , TF.attribute "platform_principal" _platform_principal
+        , TF.attribute "success_feedback_role_arn" _success_feedback_role_arn
+        , TF.attribute "success_feedback_sample_rate" _success_feedback_sample_rate
+        ]
+
+instance P.HasEventDeliveryFailureTopicArn (SnsPlatformApplicationResource s) s Text where
+    eventDeliveryFailureTopicArn =
+        lens (_event_delivery_failure_topic_arn :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _event_delivery_failure_topic_arn = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasEventEndpointCreatedTopicArn (SnsPlatformApplicationResource s) s Text where
+    eventEndpointCreatedTopicArn =
+        lens (_event_endpoint_created_topic_arn :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _event_endpoint_created_topic_arn = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasEventEndpointDeletedTopicArn (SnsPlatformApplicationResource s) s Text where
+    eventEndpointDeletedTopicArn =
+        lens (_event_endpoint_deleted_topic_arn :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _event_endpoint_deleted_topic_arn = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasEventEndpointUpdatedTopic (SnsPlatformApplicationResource s) s Text where
+    eventEndpointUpdatedTopic =
+        lens (_event_endpoint_updated_topic :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _event_endpoint_updated_topic = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasFailureFeedbackRoleArn (SnsPlatformApplicationResource s) s Text where
+    failureFeedbackRoleArn =
+        lens (_failure_feedback_role_arn :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _failure_feedback_role_arn = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasName (SnsPlatformApplicationResource s) s Text where
+    name =
+        lens (_name :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _name = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasPlatform (SnsPlatformApplicationResource s) s Text where
+    platform =
+        lens (_platform :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _platform = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasPlatformCredential (SnsPlatformApplicationResource s) s Text where
+    platformCredential =
+        lens (_platform_credential :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _platform_credential = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasPlatformPrincipal (SnsPlatformApplicationResource s) s Text where
+    platformPrincipal =
+        lens (_platform_principal :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _platform_principal = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasSuccessFeedbackRoleArn (SnsPlatformApplicationResource s) s Text where
+    successFeedbackRoleArn =
+        lens (_success_feedback_role_arn :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _success_feedback_role_arn = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasSuccessFeedbackSampleRate (SnsPlatformApplicationResource s) s Text where
+    successFeedbackSampleRate =
+        lens (_success_feedback_sample_rate :: SnsPlatformApplicationResource s -> TF.Attribute s Text)
+             (\s a -> s { _success_feedback_sample_rate = a } :: SnsPlatformApplicationResource s)
+
+instance P.HasComputedArn (SnsPlatformApplicationResource s) Text
+instance P.HasComputedId (SnsPlatformApplicationResource s) Text
+
+snsPlatformApplicationResource :: TF.Schema TF.Resource P.AWS (SnsPlatformApplicationResource s)
+snsPlatformApplicationResource =
+    TF.newResource "aws_sns_platform_application" $
+        SnsPlatformApplicationResource {
+              _event_delivery_failure_topic_arn = TF.Nil
+            , _event_endpoint_created_topic_arn = TF.Nil
+            , _event_endpoint_deleted_topic_arn = TF.Nil
+            , _event_endpoint_updated_topic = TF.Nil
+            , _failure_feedback_role_arn = TF.Nil
+            , _name = TF.Nil
+            , _platform = TF.Nil
+            , _platform_credential = TF.Nil
+            , _platform_principal = TF.Nil
+            , _success_feedback_role_arn = TF.Nil
+            , _success_feedback_sample_rate = TF.Nil
+            }
+
 {- | The @aws_sns_topic_policy@ AWS resource.
 
 Provides an SNS topic policy resource ~> NOTE: If a Principal is specified
@@ -26029,7 +26354,9 @@ vpnGatewayAttachmentResource =
 Provides a resource to create a VPC VPN Gateway.
 -}
 data VpnGatewayResource s = VpnGatewayResource {
-      _availability_zone :: !(TF.Attribute s P.Zone)
+      _amazon_side_asn   :: !(TF.Attribute s Text)
+    {- ^ (Optional) The Autonomous System Number (ASN) for the Amazon side of the gateway. If you don't specify an ASN, the virtual private gateway is created with the default ASN. -}
+    , _availability_zone :: !(TF.Attribute s P.Zone)
     {- ^ (Optional) The Availability Zone for the virtual private gateway. -}
     , _tags              :: !(TF.Attribute s P.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
@@ -26039,10 +26366,16 @@ data VpnGatewayResource s = VpnGatewayResource {
 
 instance TF.ToHCL (VpnGatewayResource s) where
     toHCL VpnGatewayResource{..} = TF.block $ catMaybes
-        [ TF.attribute "availability_zone" _availability_zone
+        [ TF.attribute "amazon_side_asn" _amazon_side_asn
+        , TF.attribute "availability_zone" _availability_zone
         , TF.attribute "tags" _tags
         , TF.attribute "vpc_id" _vpc_id
         ]
+
+instance P.HasAmazonSideAsn (VpnGatewayResource s) s Text where
+    amazonSideAsn =
+        lens (_amazon_side_asn :: VpnGatewayResource s -> TF.Attribute s Text)
+             (\s a -> s { _amazon_side_asn = a } :: VpnGatewayResource s)
 
 instance P.HasAvailabilityZone (VpnGatewayResource s) s P.Zone where
     availabilityZone =
@@ -26065,7 +26398,8 @@ vpnGatewayResource :: TF.Schema TF.Resource P.AWS (VpnGatewayResource s)
 vpnGatewayResource =
     TF.newResource "aws_vpn_gateway" $
         VpnGatewayResource {
-              _availability_zone = TF.Nil
+              _amazon_side_asn = TF.Nil
+            , _availability_zone = TF.Nil
             , _tags = TF.Nil
             , _vpc_id = TF.Nil
             }

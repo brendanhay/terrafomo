@@ -39,6 +39,7 @@ module Terrafomo.InfluxDB.Resource
     , P.HasName (..)
     , P.HasPassword (..)
     , P.HasQuery (..)
+    , P.HasRetentionPolicies (..)
 
     -- ** Computed Attributes
     , P.HasComputedAdmin (..)
@@ -118,13 +119,16 @@ continuousQueryResource =
 The database resource allows a database to be created on an InfluxDB server.
 -}
 data DatabaseResource s = DatabaseResource {
-      _name :: !(TF.Attribute s Text)
+      _name               :: !(TF.Attribute s Text)
     {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
+    , _retention_policies :: !(TF.Attribute s Text)
+    {- ^ (Optional) A list of retention policies for specified database -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DatabaseResource s) where
     toHCL DatabaseResource{..} = TF.block $ catMaybes
         [ TF.attribute "name" _name
+        , TF.attribute "retention_policies" _retention_policies
         ]
 
 instance P.HasName (DatabaseResource s) s Text where
@@ -132,12 +136,18 @@ instance P.HasName (DatabaseResource s) s Text where
         lens (_name :: DatabaseResource s -> TF.Attribute s Text)
              (\s a -> s { _name = a } :: DatabaseResource s)
 
+instance P.HasRetentionPolicies (DatabaseResource s) s Text where
+    retentionPolicies =
+        lens (_retention_policies :: DatabaseResource s -> TF.Attribute s Text)
+             (\s a -> s { _retention_policies = a } :: DatabaseResource s)
+
 
 databaseResource :: TF.Schema TF.Resource P.InfluxDB (DatabaseResource s)
 databaseResource =
     TF.newResource "influxdb_database" $
         DatabaseResource {
               _name = TF.Nil
+            , _retention_policies = TF.Nil
             }
 
 {- | The @influxdb_user@ InfluxDB resource.

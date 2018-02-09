@@ -26,24 +26,33 @@ module Terrafomo.Vault.Lens
     , HasAccountId (..)
     , HasAllowInstanceMigration (..)
     , HasAllowRead (..)
+    , HasAllowedRoles (..)
     , HasAuthType (..)
     , HasAwsPublicCert (..)
     , HasBackend (..)
+    , HasBindSecretId (..)
     , HasBoundAccountId (..)
     , HasBoundAmiId (..)
+    , HasBoundCidrList (..)
     , HasBoundIamInstanceProfileArn (..)
     , HasBoundIamPrincipalArn (..)
     , HasBoundIamRoleArn (..)
     , HasBoundRegion (..)
     , HasBoundSubnetId (..)
     , HasBoundVpcId (..)
+    , HasCassandra (..)
     , HasCertName (..)
+    , HasCreationStatements (..)
     , HasDataJson (..)
+    , HasDbName (..)
     , HasDefaultLeaseTtlSeconds (..)
+    , HasDefaultTtl (..)
     , HasDescription (..)
+    , HasDisablePeriodicTidy (..)
     , HasDisableRead (..)
     , HasDisallowReauthentication (..)
     , HasEc2Endpoint (..)
+    , HasHana (..)
     , HasIamEndpoint (..)
     , HasIamHttpRequestMethod (..)
     , HasIamRequestBody (..)
@@ -53,25 +62,43 @@ module Terrafomo.Vault.Lens
     , HasIdentity (..)
     , HasInferredAwsRegion (..)
     , HasInferredEntityType (..)
+    , HasInstanceId (..)
     , HasMaxLeaseTtlSeconds (..)
     , HasMaxTtl (..)
+    , HasMongodb (..)
+    , HasMssql (..)
+    , HasMysql (..)
     , HasName (..)
     , HasNonce (..)
+    , HasOracle (..)
     , HasPath (..)
     , HasPeriod (..)
     , HasPkcs7 (..)
     , HasPolicies (..)
     , HasPolicy (..)
     , HasPolicyArn (..)
+    , HasPostgresql (..)
+    , HasRenewStatements (..)
     , HasResolveAwsUniqueIds (..)
+    , HasRevocationStatements (..)
     , HasRole (..)
+    , HasRoleId (..)
+    , HasRoleName (..)
     , HasRoleTag (..)
+    , HasRollbackStatements (..)
+    , HasSafetyBuffer (..)
+    , HasSecretIdNumUses (..)
+    , HasSecretIdTtl (..)
     , HasSecretKey (..)
     , HasSignature (..)
     , HasStsEndpoint (..)
     , HasStsRole (..)
+    , HasTokenMaxTtl (..)
+    , HasTokenNumUses (..)
+    , HasTokenTtl (..)
     , HasTtl (..)
     , HasType' (..)
+    , HasVerifyConnection (..)
 
     -- ** Computed Attributes
     , HasComputedAccessKey (..)
@@ -87,8 +114,11 @@ module Terrafomo.Vault.Lens
     , HasComputedMetadata (..)
     , HasComputedPolicies (..)
     , HasComputedRenewable (..)
+    , HasComputedRoleId (..)
     , HasComputedSecretKey (..)
     , HasComputedSecurityToken (..)
+    , HasComputedTagKey (..)
+    , HasComputedTagValue (..)
     ) where
 
 import GHC.Base ((.))
@@ -124,6 +154,12 @@ class HasAllowRead a s b | a -> s b where
 instance HasAllowRead a s b => HasAllowRead (TF.Schema l p a) s b where
     allowRead = TF.configuration . allowRead
 
+class HasAllowedRoles a s b | a -> s b where
+    allowedRoles :: Lens' a (TF.Attribute s b)
+
+instance HasAllowedRoles a s b => HasAllowedRoles (TF.Schema l p a) s b where
+    allowedRoles = TF.configuration . allowedRoles
+
 class HasAuthType a s b | a -> s b where
     authType :: Lens' a (TF.Attribute s b)
 
@@ -142,6 +178,12 @@ class HasBackend a s b | a -> s b where
 instance HasBackend a s b => HasBackend (TF.Schema l p a) s b where
     backend = TF.configuration . backend
 
+class HasBindSecretId a s b | a -> s b where
+    bindSecretId :: Lens' a (TF.Attribute s b)
+
+instance HasBindSecretId a s b => HasBindSecretId (TF.Schema l p a) s b where
+    bindSecretId = TF.configuration . bindSecretId
+
 class HasBoundAccountId a s b | a -> s b where
     boundAccountId :: Lens' a (TF.Attribute s b)
 
@@ -153,6 +195,12 @@ class HasBoundAmiId a s b | a -> s b where
 
 instance HasBoundAmiId a s b => HasBoundAmiId (TF.Schema l p a) s b where
     boundAmiId = TF.configuration . boundAmiId
+
+class HasBoundCidrList a s b | a -> s b where
+    boundCidrList :: Lens' a (TF.Attribute s b)
+
+instance HasBoundCidrList a s b => HasBoundCidrList (TF.Schema l p a) s b where
+    boundCidrList = TF.configuration . boundCidrList
 
 class HasBoundIamInstanceProfileArn a s b | a -> s b where
     boundIamInstanceProfileArn :: Lens' a (TF.Attribute s b)
@@ -190,11 +238,23 @@ class HasBoundVpcId a s b | a -> s b where
 instance HasBoundVpcId a s b => HasBoundVpcId (TF.Schema l p a) s b where
     boundVpcId = TF.configuration . boundVpcId
 
+class HasCassandra a s b | a -> s b where
+    cassandra :: Lens' a (TF.Attribute s b)
+
+instance HasCassandra a s b => HasCassandra (TF.Schema l p a) s b where
+    cassandra = TF.configuration . cassandra
+
 class HasCertName a s b | a -> s b where
     certName :: Lens' a (TF.Attribute s b)
 
 instance HasCertName a s b => HasCertName (TF.Schema l p a) s b where
     certName = TF.configuration . certName
+
+class HasCreationStatements a s b | a -> s b where
+    creationStatements :: Lens' a (TF.Attribute s b)
+
+instance HasCreationStatements a s b => HasCreationStatements (TF.Schema l p a) s b where
+    creationStatements = TF.configuration . creationStatements
 
 class HasDataJson a s b | a -> s b where
     dataJson :: Lens' a (TF.Attribute s b)
@@ -202,17 +262,35 @@ class HasDataJson a s b | a -> s b where
 instance HasDataJson a s b => HasDataJson (TF.Schema l p a) s b where
     dataJson = TF.configuration . dataJson
 
+class HasDbName a s b | a -> s b where
+    dbName :: Lens' a (TF.Attribute s b)
+
+instance HasDbName a s b => HasDbName (TF.Schema l p a) s b where
+    dbName = TF.configuration . dbName
+
 class HasDefaultLeaseTtlSeconds a s b | a -> s b where
     defaultLeaseTtlSeconds :: Lens' a (TF.Attribute s b)
 
 instance HasDefaultLeaseTtlSeconds a s b => HasDefaultLeaseTtlSeconds (TF.Schema l p a) s b where
     defaultLeaseTtlSeconds = TF.configuration . defaultLeaseTtlSeconds
 
+class HasDefaultTtl a s b | a -> s b where
+    defaultTtl :: Lens' a (TF.Attribute s b)
+
+instance HasDefaultTtl a s b => HasDefaultTtl (TF.Schema l p a) s b where
+    defaultTtl = TF.configuration . defaultTtl
+
 class HasDescription a s b | a -> s b where
     description :: Lens' a (TF.Attribute s b)
 
 instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
     description = TF.configuration . description
+
+class HasDisablePeriodicTidy a s b | a -> s b where
+    disablePeriodicTidy :: Lens' a (TF.Attribute s b)
+
+instance HasDisablePeriodicTidy a s b => HasDisablePeriodicTidy (TF.Schema l p a) s b where
+    disablePeriodicTidy = TF.configuration . disablePeriodicTidy
 
 class HasDisableRead a s b | a -> s b where
     disableRead :: Lens' a (TF.Attribute s b)
@@ -231,6 +309,12 @@ class HasEc2Endpoint a s b | a -> s b where
 
 instance HasEc2Endpoint a s b => HasEc2Endpoint (TF.Schema l p a) s b where
     ec2Endpoint = TF.configuration . ec2Endpoint
+
+class HasHana a s b | a -> s b where
+    hana :: Lens' a (TF.Attribute s b)
+
+instance HasHana a s b => HasHana (TF.Schema l p a) s b where
+    hana = TF.configuration . hana
 
 class HasIamEndpoint a s b | a -> s b where
     iamEndpoint :: Lens' a (TF.Attribute s b)
@@ -286,6 +370,12 @@ class HasInferredEntityType a s b | a -> s b where
 instance HasInferredEntityType a s b => HasInferredEntityType (TF.Schema l p a) s b where
     inferredEntityType = TF.configuration . inferredEntityType
 
+class HasInstanceId a s b | a -> s b where
+    instanceId :: Lens' a (TF.Attribute s b)
+
+instance HasInstanceId a s b => HasInstanceId (TF.Schema l p a) s b where
+    instanceId = TF.configuration . instanceId
+
 class HasMaxLeaseTtlSeconds a s b | a -> s b where
     maxLeaseTtlSeconds :: Lens' a (TF.Attribute s b)
 
@@ -298,6 +388,24 @@ class HasMaxTtl a s b | a -> s b where
 instance HasMaxTtl a s b => HasMaxTtl (TF.Schema l p a) s b where
     maxTtl = TF.configuration . maxTtl
 
+class HasMongodb a s b | a -> s b where
+    mongodb :: Lens' a (TF.Attribute s b)
+
+instance HasMongodb a s b => HasMongodb (TF.Schema l p a) s b where
+    mongodb = TF.configuration . mongodb
+
+class HasMssql a s b | a -> s b where
+    mssql :: Lens' a (TF.Attribute s b)
+
+instance HasMssql a s b => HasMssql (TF.Schema l p a) s b where
+    mssql = TF.configuration . mssql
+
+class HasMysql a s b | a -> s b where
+    mysql :: Lens' a (TF.Attribute s b)
+
+instance HasMysql a s b => HasMysql (TF.Schema l p a) s b where
+    mysql = TF.configuration . mysql
+
 class HasName a s b | a -> s b where
     name :: Lens' a (TF.Attribute s b)
 
@@ -309,6 +417,12 @@ class HasNonce a s b | a -> s b where
 
 instance HasNonce a s b => HasNonce (TF.Schema l p a) s b where
     nonce = TF.configuration . nonce
+
+class HasOracle a s b | a -> s b where
+    oracle :: Lens' a (TF.Attribute s b)
+
+instance HasOracle a s b => HasOracle (TF.Schema l p a) s b where
+    oracle = TF.configuration . oracle
 
 class HasPath a s b | a -> s b where
     path :: Lens' a (TF.Attribute s b)
@@ -346,11 +460,29 @@ class HasPolicyArn a s b | a -> s b where
 instance HasPolicyArn a s b => HasPolicyArn (TF.Schema l p a) s b where
     policyArn = TF.configuration . policyArn
 
+class HasPostgresql a s b | a -> s b where
+    postgresql :: Lens' a (TF.Attribute s b)
+
+instance HasPostgresql a s b => HasPostgresql (TF.Schema l p a) s b where
+    postgresql = TF.configuration . postgresql
+
+class HasRenewStatements a s b | a -> s b where
+    renewStatements :: Lens' a (TF.Attribute s b)
+
+instance HasRenewStatements a s b => HasRenewStatements (TF.Schema l p a) s b where
+    renewStatements = TF.configuration . renewStatements
+
 class HasResolveAwsUniqueIds a s b | a -> s b where
     resolveAwsUniqueIds :: Lens' a (TF.Attribute s b)
 
 instance HasResolveAwsUniqueIds a s b => HasResolveAwsUniqueIds (TF.Schema l p a) s b where
     resolveAwsUniqueIds = TF.configuration . resolveAwsUniqueIds
+
+class HasRevocationStatements a s b | a -> s b where
+    revocationStatements :: Lens' a (TF.Attribute s b)
+
+instance HasRevocationStatements a s b => HasRevocationStatements (TF.Schema l p a) s b where
+    revocationStatements = TF.configuration . revocationStatements
 
 class HasRole a s b | a -> s b where
     role :: Lens' a (TF.Attribute s b)
@@ -358,11 +490,47 @@ class HasRole a s b | a -> s b where
 instance HasRole a s b => HasRole (TF.Schema l p a) s b where
     role = TF.configuration . role
 
+class HasRoleId a s b | a -> s b where
+    roleId :: Lens' a (TF.Attribute s b)
+
+instance HasRoleId a s b => HasRoleId (TF.Schema l p a) s b where
+    roleId = TF.configuration . roleId
+
+class HasRoleName a s b | a -> s b where
+    roleName :: Lens' a (TF.Attribute s b)
+
+instance HasRoleName a s b => HasRoleName (TF.Schema l p a) s b where
+    roleName = TF.configuration . roleName
+
 class HasRoleTag a s b | a -> s b where
     roleTag :: Lens' a (TF.Attribute s b)
 
 instance HasRoleTag a s b => HasRoleTag (TF.Schema l p a) s b where
     roleTag = TF.configuration . roleTag
+
+class HasRollbackStatements a s b | a -> s b where
+    rollbackStatements :: Lens' a (TF.Attribute s b)
+
+instance HasRollbackStatements a s b => HasRollbackStatements (TF.Schema l p a) s b where
+    rollbackStatements = TF.configuration . rollbackStatements
+
+class HasSafetyBuffer a s b | a -> s b where
+    safetyBuffer :: Lens' a (TF.Attribute s b)
+
+instance HasSafetyBuffer a s b => HasSafetyBuffer (TF.Schema l p a) s b where
+    safetyBuffer = TF.configuration . safetyBuffer
+
+class HasSecretIdNumUses a s b | a -> s b where
+    secretIdNumUses :: Lens' a (TF.Attribute s b)
+
+instance HasSecretIdNumUses a s b => HasSecretIdNumUses (TF.Schema l p a) s b where
+    secretIdNumUses = TF.configuration . secretIdNumUses
+
+class HasSecretIdTtl a s b | a -> s b where
+    secretIdTtl :: Lens' a (TF.Attribute s b)
+
+instance HasSecretIdTtl a s b => HasSecretIdTtl (TF.Schema l p a) s b where
+    secretIdTtl = TF.configuration . secretIdTtl
 
 class HasSecretKey a s b | a -> s b where
     secretKey :: Lens' a (TF.Attribute s b)
@@ -388,6 +556,24 @@ class HasStsRole a s b | a -> s b where
 instance HasStsRole a s b => HasStsRole (TF.Schema l p a) s b where
     stsRole = TF.configuration . stsRole
 
+class HasTokenMaxTtl a s b | a -> s b where
+    tokenMaxTtl :: Lens' a (TF.Attribute s b)
+
+instance HasTokenMaxTtl a s b => HasTokenMaxTtl (TF.Schema l p a) s b where
+    tokenMaxTtl = TF.configuration . tokenMaxTtl
+
+class HasTokenNumUses a s b | a -> s b where
+    tokenNumUses :: Lens' a (TF.Attribute s b)
+
+instance HasTokenNumUses a s b => HasTokenNumUses (TF.Schema l p a) s b where
+    tokenNumUses = TF.configuration . tokenNumUses
+
+class HasTokenTtl a s b | a -> s b where
+    tokenTtl :: Lens' a (TF.Attribute s b)
+
+instance HasTokenTtl a s b => HasTokenTtl (TF.Schema l p a) s b where
+    tokenTtl = TF.configuration . tokenTtl
+
 class HasTtl a s b | a -> s b where
     ttl :: Lens' a (TF.Attribute s b)
 
@@ -399,6 +585,12 @@ class HasType' a s b | a -> s b where
 
 instance HasType' a s b => HasType' (TF.Schema l p a) s b where
     type' = TF.configuration . type'
+
+class HasVerifyConnection a s b | a -> s b where
+    verifyConnection :: Lens' a (TF.Attribute s b)
+
+instance HasVerifyConnection a s b => HasVerifyConnection (TF.Schema l p a) s b where
+    verifyConnection = TF.configuration . verifyConnection
 
 class HasComputedAccessKey a b | a -> b where
     computedAccessKey
@@ -478,6 +670,12 @@ class HasComputedRenewable a b | a -> b where
     computedRenewable =
         to (\x -> TF.computed (TF.referenceKey x) "renewable")
 
+class HasComputedRoleId a b | a -> b where
+    computedRoleId
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedRoleId =
+        to (\x -> TF.computed (TF.referenceKey x) "role_id")
+
 class HasComputedSecretKey a b | a -> b where
     computedSecretKey
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
@@ -489,3 +687,15 @@ class HasComputedSecurityToken a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedSecurityToken =
         to (\x -> TF.computed (TF.referenceKey x) "security_token")
+
+class HasComputedTagKey a b | a -> b where
+    computedTagKey
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedTagKey =
+        to (\x -> TF.computed (TF.referenceKey x) "tag_key")
+
+class HasComputedTagValue a b | a -> b where
+    computedTagValue
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedTagValue =
+        to (\x -> TF.computed (TF.referenceKey x) "tag_value")

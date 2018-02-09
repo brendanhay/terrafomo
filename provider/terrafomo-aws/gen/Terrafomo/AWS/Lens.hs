@@ -66,6 +66,7 @@ module Terrafomo.AWS.Lens
     , HasAllowedOauthFlowsUserPoolClient (..)
     , HasAllowedOauthScopes (..)
     , HasAllowedPrincipals (..)
+    , HasAmazonSideAsn (..)
     , HasAmi (..)
     , HasAmiId (..)
     , HasApiId (..)
@@ -117,6 +118,7 @@ module Terrafomo.AWS.Lens
     , HasAutoVerifiedAttributes (..)
     , HasAutomatedSnapshotRetentionPeriod (..)
     , HasAutomaticFailoverEnabled (..)
+    , HasAutomaticStopTimeMinutes (..)
     , HasAutoscalingGroupName (..)
     , HasAutoscalingGroups (..)
     , HasAutoscalingRole (..)
@@ -240,7 +242,6 @@ module Terrafomo.AWS.Lens
     , HasCredentials (..)
     , HasCrossZoneLoadBalancing (..)
     , HasCsr (..)
-    , HasCurrent (..)
     , HasCustomAmiId (..)
     , HasCustomCookbooksSource (..)
     , HasCustomData (..)
@@ -384,6 +385,10 @@ module Terrafomo.AWS.Lens
     , HasEvaluateLowSampleCountPercentiles (..)
     , HasEvaluationPeriods (..)
     , HasEventCategories (..)
+    , HasEventDeliveryFailureTopicArn (..)
+    , HasEventEndpointCreatedTopicArn (..)
+    , HasEventEndpointDeletedTopicArn (..)
+    , HasEventEndpointUpdatedTopic (..)
     , HasEventPattern (..)
     , HasEventSourceArn (..)
     , HasEvents (..)
@@ -395,6 +400,7 @@ module Terrafomo.AWS.Lens
     , HasExtendedStatistic (..)
     , HasExtraConnectionAttributes (..)
     , HasFailoverRoutingPolicy (..)
+    , HasFailureFeedbackRoleArn (..)
     , HasFailureThreshold (..)
     , HasFamily' (..)
     , HasFifoQueue (..)
@@ -502,6 +508,7 @@ module Terrafomo.AWS.Lens
     , HasIsEnabled (..)
     , HasIsIpv6Enabled (..)
     , HasIsMultiRegionTrail (..)
+    , HasItem (..)
     , HasJvmOptions (..)
     , HasJvmType (..)
     , HasJvmVersion (..)
@@ -635,6 +642,7 @@ module Terrafomo.AWS.Lens
     , HasOverrideJson (..)
     , HasOverwrite (..)
     , HasOwnerAccount (..)
+    , HasOwnerArn (..)
     , HasOwnerId (..)
     , HasOwnerInformation (..)
     , HasOwners (..)
@@ -668,6 +676,9 @@ module Terrafomo.AWS.Lens
     , HasPlacementStrategy (..)
     , HasPlacementTenancy (..)
     , HasPlaintext (..)
+    , HasPlatform (..)
+    , HasPlatformCredential (..)
+    , HasPlatformPrincipal (..)
     , HasPolicy (..)
     , HasPolicyArn (..)
     , HasPolicyAttribute (..)
@@ -937,11 +948,14 @@ module Terrafomo.AWS.Lens
     , HasSubnetIds (..)
     , HasSubnetMapping (..)
     , HasSubnets (..)
+    , HasSuccessFeedbackRoleArn (..)
+    , HasSuccessFeedbackSampleRate (..)
     , HasSupportedIdentityProviders (..)
     , HasSupportedLoginProviders (..)
     , HasSuspendedProcesses (..)
     , HasSystemPackages (..)
     , HasTableMappings (..)
+    , HasTableName (..)
     , HasTag (..)
     , HasTags (..)
     , HasTargetArn (..)
@@ -1816,6 +1830,12 @@ class HasAllowedPrincipals a s b | a -> s b where
 instance HasAllowedPrincipals a s b => HasAllowedPrincipals (TF.Schema l p a) s b where
     allowedPrincipals = TF.configuration . allowedPrincipals
 
+class HasAmazonSideAsn a s b | a -> s b where
+    amazonSideAsn :: Lens' a (TF.Attribute s b)
+
+instance HasAmazonSideAsn a s b => HasAmazonSideAsn (TF.Schema l p a) s b where
+    amazonSideAsn = TF.configuration . amazonSideAsn
+
 class HasAmi a s b | a -> s b where
     ami :: Lens' a (TF.Attribute s b)
 
@@ -2121,6 +2141,12 @@ class HasAutomaticFailoverEnabled a s b | a -> s b where
 
 instance HasAutomaticFailoverEnabled a s b => HasAutomaticFailoverEnabled (TF.Schema l p a) s b where
     automaticFailoverEnabled = TF.configuration . automaticFailoverEnabled
+
+class HasAutomaticStopTimeMinutes a s b | a -> s b where
+    automaticStopTimeMinutes :: Lens' a (TF.Attribute s b)
+
+instance HasAutomaticStopTimeMinutes a s b => HasAutomaticStopTimeMinutes (TF.Schema l p a) s b where
+    automaticStopTimeMinutes = TF.configuration . automaticStopTimeMinutes
 
 class HasAutoscalingGroupName a s b | a -> s b where
     autoscalingGroupName :: Lens' a (TF.Attribute s b)
@@ -2859,12 +2885,6 @@ class HasCsr a s b | a -> s b where
 
 instance HasCsr a s b => HasCsr (TF.Schema l p a) s b where
     csr = TF.configuration . csr
-
-class HasCurrent a s b | a -> s b where
-    current :: Lens' a (TF.Attribute s b)
-
-instance HasCurrent a s b => HasCurrent (TF.Schema l p a) s b where
-    current = TF.configuration . current
 
 class HasCustomAmiId a s b | a -> s b where
     customAmiId :: Lens' a (TF.Attribute s b)
@@ -3724,6 +3744,30 @@ class HasEventCategories a s b | a -> s b where
 instance HasEventCategories a s b => HasEventCategories (TF.Schema l p a) s b where
     eventCategories = TF.configuration . eventCategories
 
+class HasEventDeliveryFailureTopicArn a s b | a -> s b where
+    eventDeliveryFailureTopicArn :: Lens' a (TF.Attribute s b)
+
+instance HasEventDeliveryFailureTopicArn a s b => HasEventDeliveryFailureTopicArn (TF.Schema l p a) s b where
+    eventDeliveryFailureTopicArn = TF.configuration . eventDeliveryFailureTopicArn
+
+class HasEventEndpointCreatedTopicArn a s b | a -> s b where
+    eventEndpointCreatedTopicArn :: Lens' a (TF.Attribute s b)
+
+instance HasEventEndpointCreatedTopicArn a s b => HasEventEndpointCreatedTopicArn (TF.Schema l p a) s b where
+    eventEndpointCreatedTopicArn = TF.configuration . eventEndpointCreatedTopicArn
+
+class HasEventEndpointDeletedTopicArn a s b | a -> s b where
+    eventEndpointDeletedTopicArn :: Lens' a (TF.Attribute s b)
+
+instance HasEventEndpointDeletedTopicArn a s b => HasEventEndpointDeletedTopicArn (TF.Schema l p a) s b where
+    eventEndpointDeletedTopicArn = TF.configuration . eventEndpointDeletedTopicArn
+
+class HasEventEndpointUpdatedTopic a s b | a -> s b where
+    eventEndpointUpdatedTopic :: Lens' a (TF.Attribute s b)
+
+instance HasEventEndpointUpdatedTopic a s b => HasEventEndpointUpdatedTopic (TF.Schema l p a) s b where
+    eventEndpointUpdatedTopic = TF.configuration . eventEndpointUpdatedTopic
+
 class HasEventPattern a s b | a -> s b where
     eventPattern :: Lens' a (TF.Attribute s b)
 
@@ -3789,6 +3833,12 @@ class HasFailoverRoutingPolicy a s b | a -> s b where
 
 instance HasFailoverRoutingPolicy a s b => HasFailoverRoutingPolicy (TF.Schema l p a) s b where
     failoverRoutingPolicy = TF.configuration . failoverRoutingPolicy
+
+class HasFailureFeedbackRoleArn a s b | a -> s b where
+    failureFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasFailureFeedbackRoleArn a s b => HasFailureFeedbackRoleArn (TF.Schema l p a) s b where
+    failureFeedbackRoleArn = TF.configuration . failureFeedbackRoleArn
 
 class HasFailureThreshold a s b | a -> s b where
     failureThreshold :: Lens' a (TF.Attribute s b)
@@ -4431,6 +4481,12 @@ class HasIsMultiRegionTrail a s b | a -> s b where
 
 instance HasIsMultiRegionTrail a s b => HasIsMultiRegionTrail (TF.Schema l p a) s b where
     isMultiRegionTrail = TF.configuration . isMultiRegionTrail
+
+class HasItem a s b | a -> s b where
+    item :: Lens' a (TF.Attribute s b)
+
+instance HasItem a s b => HasItem (TF.Schema l p a) s b where
+    item = TF.configuration . item
 
 class HasJvmOptions a s b | a -> s b where
     jvmOptions :: Lens' a (TF.Attribute s b)
@@ -5230,6 +5286,12 @@ class HasOwnerAccount a s b | a -> s b where
 instance HasOwnerAccount a s b => HasOwnerAccount (TF.Schema l p a) s b where
     ownerAccount = TF.configuration . ownerAccount
 
+class HasOwnerArn a s b | a -> s b where
+    ownerArn :: Lens' a (TF.Attribute s b)
+
+instance HasOwnerArn a s b => HasOwnerArn (TF.Schema l p a) s b where
+    ownerArn = TF.configuration . ownerArn
+
 class HasOwnerId a s b | a -> s b where
     ownerId :: Lens' a (TF.Attribute s b)
 
@@ -5427,6 +5489,24 @@ class HasPlaintext a s b | a -> s b where
 
 instance HasPlaintext a s b => HasPlaintext (TF.Schema l p a) s b where
     plaintext = TF.configuration . plaintext
+
+class HasPlatform a s b | a -> s b where
+    platform :: Lens' a (TF.Attribute s b)
+
+instance HasPlatform a s b => HasPlatform (TF.Schema l p a) s b where
+    platform = TF.configuration . platform
+
+class HasPlatformCredential a s b | a -> s b where
+    platformCredential :: Lens' a (TF.Attribute s b)
+
+instance HasPlatformCredential a s b => HasPlatformCredential (TF.Schema l p a) s b where
+    platformCredential = TF.configuration . platformCredential
+
+class HasPlatformPrincipal a s b | a -> s b where
+    platformPrincipal :: Lens' a (TF.Attribute s b)
+
+instance HasPlatformPrincipal a s b => HasPlatformPrincipal (TF.Schema l p a) s b where
+    platformPrincipal = TF.configuration . platformPrincipal
 
 class HasPolicy a s b | a -> s b where
     policy :: Lens' a (TF.Attribute s b)
@@ -7042,6 +7122,18 @@ class HasSubnets a s b | a -> s b where
 instance HasSubnets a s b => HasSubnets (TF.Schema l p a) s b where
     subnets = TF.configuration . subnets
 
+class HasSuccessFeedbackRoleArn a s b | a -> s b where
+    successFeedbackRoleArn :: Lens' a (TF.Attribute s b)
+
+instance HasSuccessFeedbackRoleArn a s b => HasSuccessFeedbackRoleArn (TF.Schema l p a) s b where
+    successFeedbackRoleArn = TF.configuration . successFeedbackRoleArn
+
+class HasSuccessFeedbackSampleRate a s b | a -> s b where
+    successFeedbackSampleRate :: Lens' a (TF.Attribute s b)
+
+instance HasSuccessFeedbackSampleRate a s b => HasSuccessFeedbackSampleRate (TF.Schema l p a) s b where
+    successFeedbackSampleRate = TF.configuration . successFeedbackSampleRate
+
 class HasSupportedIdentityProviders a s b | a -> s b where
     supportedIdentityProviders :: Lens' a (TF.Attribute s b)
 
@@ -7071,6 +7163,12 @@ class HasTableMappings a s b | a -> s b where
 
 instance HasTableMappings a s b => HasTableMappings (TF.Schema l p a) s b where
     tableMappings = TF.configuration . tableMappings
+
+class HasTableName a s b | a -> s b where
+    tableName :: Lens' a (TF.Attribute s b)
+
+instance HasTableName a s b => HasTableName (TF.Schema l p a) s b where
+    tableName = TF.configuration . tableName
 
 class HasTag a s b | a -> s b where
     tag :: Lens' a (TF.Attribute s b)

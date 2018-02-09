@@ -52,10 +52,10 @@ import qualified Terrafomo.Provider as TF
 {- | AzureRM Terraform provider.
 
 The Azure Provider is used to interact with the many resources supported by
-Azure Resource Manager (AzureRM) through it's API's. ~> Note: This
-supercedes the </docs/providers/azure/index.html> , which interacts with
-Azure using the Service Management API. Use the navigation to the left to
-read about the available resources.
+Azure Resource Manager (AzureRM) through its APIs. ~> Note: This supercedes
+the </docs/providers/azure/index.html> , which interacts with Azure using
+the Service Management API. Use the navigation to the left to read about the
+available resources.
 -}
 data AzureRM = AzureRM {
       _client_id                   :: !(Maybe Text)
@@ -65,9 +65,9 @@ data AzureRM = AzureRM {
     , _environment                 :: !(Maybe Text)
     {- ^ (Optional) The cloud environment to use. It can also be sourced from the @ARM_ENVIRONMENT@ environment variable. Supported values are: -}
     , _skip_credentials_validation :: !(Maybe Text)
-    {- ^ (Optional) Prevents the provider from validating the given credentials. When set to @true@ , @skip_provider_registration@ is assumed. It can also be sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable, defaults to @false@ . -}
+    {- ^ (Optional) Prevents the provider from validating the given credentials. When set to @true@ , @skip_provider_registration@ is assumed. It can also be sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable; defaults to @false@ . -}
     , _skip_provider_registration  :: !(Maybe Text)
-    {- ^ (Optional) Prevents the provider from registering the ARM provider namespaces, this can be used if you don't wish to give the Active Directory Application permission to register resource providers. It can also be sourced from the @ARM_SKIP_PROVIDER_REGISTRATION@ environment variable, defaults to @false@ . -}
+    {- ^ (Optional) Prevents the provider from registering the ARM provider namespaces, this can be used if you don't wish to give the Active Directory Application permission to register resource providers. It can also be sourced from the @ARM_SKIP_PROVIDER_REGISTRATION@ environment variable; defaults to @false@ . -}
     , _subscription_id             :: !(Maybe Text)
     {- ^ (Optional) The subscription ID to use. It can also be sourced from the @ARM_SUBSCRIPTION_ID@ environment variable. -}
     , _tenant_id                   :: !(Maybe Text)

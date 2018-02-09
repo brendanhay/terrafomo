@@ -239,6 +239,7 @@ module Terrafomo.AWS.DataSource
     -- ** Arguments
     , P.HasAccountAlias (..)
     , P.HasAccountId (..)
+    , P.HasAmazonSideAsn (..)
     , P.HasArn (..)
     , P.HasAttachedVpcId (..)
     , P.HasAvailabilityZone (..)
@@ -250,7 +251,6 @@ module Terrafomo.AWS.DataSource
     , P.HasContainerName (..)
     , P.HasContext (..)
     , P.HasCreationToken (..)
-    , P.HasCurrent (..)
     , P.HasDbInstanceIdentifier (..)
     , P.HasDbSnapshotIdentifier (..)
     , P.HasDefault' (..)
@@ -2953,31 +2953,23 @@ redshiftServiceAccountData =
 {- | The @aws_region@ AWS datasource.
 
 @aws_region@ provides details about a specific AWS region. As well as
-validating a given region name (and optionally obtaining its endpoint) this
-resource can be used to discover the name of the region configured within
-the provider. The latter can be useful in a child module which is inheriting
-an AWS provider configuration from its parent module.
+validating a given region name this resource can be used to discover the
+name of the region configured within the provider. The latter can be useful
+in a child module which is inheriting an AWS provider configuration from its
+parent module.
 -}
 data RegionData s = RegionData {
-      _current  :: !(TF.Attribute s Text)
-    {- ^ (Optional) Set to @true@ to match only the region configured in the provider. (It is not meaningful to set this to @false@ .) -}
-    , _endpoint :: !(TF.Attribute s Text)
-    {- ^ (Optional) The endpoint of the region to select. -}
+      _endpoint :: !(TF.Attribute s Text)
+    {- ^ (Optional) The EC2 endpoint of the region to select. -}
     , _name     :: !(TF.Attribute s Text)
     {- ^ (Optional) The full name of the region to select. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RegionData s) where
     toHCL RegionData{..} = TF.block $ catMaybes
-        [ TF.attribute "current" _current
-        , TF.attribute "endpoint" _endpoint
+        [ TF.attribute "endpoint" _endpoint
         , TF.attribute "name" _name
         ]
-
-instance P.HasCurrent (RegionData s) s Text where
-    current =
-        lens (_current :: RegionData s -> TF.Attribute s Text)
-             (\s a -> s { _current = a } :: RegionData s)
 
 instance P.HasEndpoint (RegionData s) s Text where
     endpoint =
@@ -2997,8 +2989,7 @@ regionData :: TF.Schema TF.DataSource P.AWS (RegionData s)
 regionData =
     TF.newDataSource "aws_region" $
         RegionData {
-              _current = TF.Nil
-            , _endpoint = TF.Nil
+              _endpoint = TF.Nil
             , _name = TF.Nil
             }
 
@@ -3852,7 +3843,9 @@ vpcPeeringConnectionData =
 The VPN Gateway data source provides details about a specific VPN gateway.
 -}
 data VpnGatewayData s = VpnGatewayData {
-      _attached_vpc_id   :: !(TF.Attribute s Text)
+      _amazon_side_asn   :: !(TF.Attribute s Text)
+    {- ^ (Optional) The Autonomous System Number (ASN) for the Amazon side of the specific VPN Gateway to retrieve. -}
+    , _attached_vpc_id   :: !(TF.Attribute s Text)
     {- ^ (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve. -}
     , _availability_zone :: !(TF.Attribute s P.Zone)
     {- ^ (Optional) The Availability Zone of the specific VPN Gateway to retrieve. -}
@@ -3868,13 +3861,19 @@ data VpnGatewayData s = VpnGatewayData {
 
 instance TF.ToHCL (VpnGatewayData s) where
     toHCL VpnGatewayData{..} = TF.block $ catMaybes
-        [ TF.attribute "attached_vpc_id" _attached_vpc_id
+        [ TF.attribute "amazon_side_asn" _amazon_side_asn
+        , TF.attribute "attached_vpc_id" _attached_vpc_id
         , TF.attribute "availability_zone" _availability_zone
         , TF.attribute "filter" _filter
         , TF.attribute "id" _id
         , TF.attribute "state" _state
         , TF.attribute "tags" _tags
         ]
+
+instance P.HasAmazonSideAsn (VpnGatewayData s) s Text where
+    amazonSideAsn =
+        lens (_amazon_side_asn :: VpnGatewayData s -> TF.Attribute s Text)
+             (\s a -> s { _amazon_side_asn = a } :: VpnGatewayData s)
 
 instance P.HasAttachedVpcId (VpnGatewayData s) s Text where
     attachedVpcId =
@@ -3911,7 +3910,8 @@ vpnGatewayData :: TF.Schema TF.DataSource P.AWS (VpnGatewayData s)
 vpnGatewayData =
     TF.newDataSource "aws_vpn_gateway" $
         VpnGatewayData {
-              _attached_vpc_id = TF.Nil
+              _amazon_side_asn = TF.Nil
+            , _attached_vpc_id = TF.Nil
             , _availability_zone = TF.Nil
             , _filter = TF.Nil
             , _id = TF.Nil

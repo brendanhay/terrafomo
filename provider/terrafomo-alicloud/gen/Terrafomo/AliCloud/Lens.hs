@@ -109,6 +109,7 @@ module Terrafomo.AliCloud.Lens
     , HasImageId (..)
     , HasInUse (..)
     , HasIncludeDataDisks (..)
+    , HasInnerAccess (..)
     , HasInstanceChargeType (..)
     , HasInstanceId (..)
     , HasInstanceIds (..)
@@ -353,6 +354,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedImageId (..)
     , HasComputedImageOwnerAlias (..)
     , HasComputedImageVersion (..)
+    , HasComputedInnerAccess (..)
     , HasComputedInstanceChargeType (..)
     , HasComputedInstanceId (..)
     , HasComputedInstanceIds (..)
@@ -1015,6 +1017,12 @@ class HasIncludeDataDisks a s b | a -> s b where
 
 instance HasIncludeDataDisks a s b => HasIncludeDataDisks (TF.Schema l p a) s b where
     includeDataDisks = TF.configuration . includeDataDisks
+
+class HasInnerAccess a s b | a -> s b where
+    innerAccess :: Lens' a (TF.Attribute s b)
+
+instance HasInnerAccess a s b => HasInnerAccess (TF.Schema l p a) s b where
+    innerAccess = TF.configuration . innerAccess
 
 class HasInstanceChargeType a s b | a -> s b where
     instanceChargeType :: Lens' a (TF.Attribute s b)
@@ -2467,6 +2475,12 @@ class HasComputedImageVersion a b | a -> b where
         :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
     computedImageVersion =
         to (\x -> TF.computed (TF.referenceKey x) "image_version")
+
+class HasComputedInnerAccess a b | a -> b where
+    computedInnerAccess
+        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+    computedInnerAccess =
+        to (\x -> TF.computed (TF.referenceKey x) "inner_access")
 
 class HasComputedInstanceChargeType a b | a -> b where
     computedInstanceChargeType

@@ -2146,11 +2146,6 @@ instance TF.ToHCL (DnsARecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance P.HasTTL (DnsARecordResource s) s Text where
-    TTL =
-        lens (_TTL :: DnsARecordResource s -> TF.Attribute s Text)
-             (\s a -> s { _TTL = a } :: DnsARecordResource s)
-
 instance P.HasName (DnsARecordResource s) s Text where
     name =
         lens (_name :: DnsARecordResource s -> TF.Attribute s Text)
@@ -2165,6 +2160,11 @@ instance P.HasResourceGroupName (DnsARecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsARecordResource s -> TF.Attribute s Text)
              (\s a -> s { _resource_group_name = a } :: DnsARecordResource s)
+
+instance P.HasTTL (DnsARecordResource s) s Text where
+    TTL =
+        lens (_TTL :: DnsARecordResource s -> TF.Attribute s Text)
+             (\s a -> s { _TTL = a } :: DnsARecordResource s)
 
 instance P.HasTags (DnsARecordResource s) s Text where
     tags =
@@ -2219,11 +2219,6 @@ instance TF.ToHCL (DnsAaaaRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance P.HasTTL (DnsAaaaRecordResource s) s Text where
-    TTL =
-        lens (_TTL :: DnsAaaaRecordResource s -> TF.Attribute s Text)
-             (\s a -> s { _TTL = a } :: DnsAaaaRecordResource s)
-
 instance P.HasName (DnsAaaaRecordResource s) s Text where
     name =
         lens (_name :: DnsAaaaRecordResource s -> TF.Attribute s Text)
@@ -2238,6 +2233,11 @@ instance P.HasResourceGroupName (DnsAaaaRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsAaaaRecordResource s -> TF.Attribute s Text)
              (\s a -> s { _resource_group_name = a } :: DnsAaaaRecordResource s)
+
+instance P.HasTTL (DnsAaaaRecordResource s) s Text where
+    TTL =
+        lens (_TTL :: DnsAaaaRecordResource s -> TF.Attribute s Text)
+             (\s a -> s { _TTL = a } :: DnsAaaaRecordResource s)
 
 instance P.HasTags (DnsAaaaRecordResource s) s Text where
     tags =
@@ -2292,11 +2292,6 @@ instance TF.ToHCL (DnsCnameRecordResource s) where
         , TF.attribute "zone_name" _zone_name
         ]
 
-instance P.HasTTL (DnsCnameRecordResource s) s Text where
-    TTL =
-        lens (_TTL :: DnsCnameRecordResource s -> TF.Attribute s Text)
-             (\s a -> s { _TTL = a } :: DnsCnameRecordResource s)
-
 instance P.HasName (DnsCnameRecordResource s) s Text where
     name =
         lens (_name :: DnsCnameRecordResource s -> TF.Attribute s Text)
@@ -2311,6 +2306,11 @@ instance P.HasResourceGroupName (DnsCnameRecordResource s) s Text where
     resourceGroupName =
         lens (_resource_group_name :: DnsCnameRecordResource s -> TF.Attribute s Text)
              (\s a -> s { _resource_group_name = a } :: DnsCnameRecordResource s)
+
+instance P.HasTTL (DnsCnameRecordResource s) s Text where
+    TTL =
+        lens (_TTL :: DnsCnameRecordResource s -> TF.Attribute s Text)
+             (\s a -> s { _TTL = a } :: DnsCnameRecordResource s)
 
 instance P.HasTags (DnsCnameRecordResource s) s Text where
     tags =

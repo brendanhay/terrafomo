@@ -22,7 +22,10 @@
 module Terrafomo.Vault.DataSource
     (
     -- * Types
-      AwsAccessCredentialsData (..)
+      ApproleAuthBackendRoleData (..)
+    , approleAuthBackendRoleData
+
+    , AwsAccessCredentialsData (..)
     , awsAccessCredentialsData
 
     , GenericSecretData (..)
@@ -33,6 +36,7 @@ module Terrafomo.Vault.DataSource
     , P.HasBackend (..)
     , P.HasPath (..)
     , P.HasRole (..)
+    , P.HasRoleName (..)
     , P.HasType' (..)
 
     -- ** Computed Attributes
@@ -43,6 +47,7 @@ module Terrafomo.Vault.DataSource
     , P.HasComputedLeaseId (..)
     , P.HasComputedLeaseRenewable (..)
     , P.HasComputedLeaseStartTime (..)
+    , P.HasComputedRoleId (..)
     , P.HasComputedSecretKey (..)
     , P.HasComputedSecurityToken (..)
 
@@ -69,6 +74,43 @@ import           Terrafomo.Vault.Types    as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Schema    as TF
+
+{- | The @vault_approle_auth_backend_role@ Vault datasource.
+
+Reads the Role ID of an AppRole from a Vault server.
+-}
+data ApproleAuthBackendRoleData s = ApproleAuthBackendRoleData {
+      _backend   :: !(TF.Attribute s Text)
+    {- ^ (Optional) The unique name for the AppRole backend the role to retrieve a RoleID for resides in. Defaults to "approle". -}
+    , _role_name :: !(TF.Attribute s Text)
+    {- ^ (Required) The name of the role to retrieve the Role ID for. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (ApproleAuthBackendRoleData s) where
+    toHCL ApproleAuthBackendRoleData{..} = TF.block $ catMaybes
+        [ TF.attribute "backend" _backend
+        , TF.attribute "role_name" _role_name
+        ]
+
+instance P.HasBackend (ApproleAuthBackendRoleData s) s Text where
+    backend =
+        lens (_backend :: ApproleAuthBackendRoleData s -> TF.Attribute s Text)
+             (\s a -> s { _backend = a } :: ApproleAuthBackendRoleData s)
+
+instance P.HasRoleName (ApproleAuthBackendRoleData s) s Text where
+    roleName =
+        lens (_role_name :: ApproleAuthBackendRoleData s -> TF.Attribute s Text)
+             (\s a -> s { _role_name = a } :: ApproleAuthBackendRoleData s)
+
+instance P.HasComputedRoleId (ApproleAuthBackendRoleData s) Text
+
+approleAuthBackendRoleData :: TF.Schema TF.DataSource P.Vault (ApproleAuthBackendRoleData s)
+approleAuthBackendRoleData =
+    TF.newDataSource "vault_approle_auth_backend_role" $
+        ApproleAuthBackendRoleData {
+              _backend = TF.Nil
+            , _role_name = TF.Nil
+            }
 
 {- | The @vault_aws_access_credentials@ Vault datasource.
 
