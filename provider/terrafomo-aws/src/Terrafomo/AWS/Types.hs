@@ -58,7 +58,6 @@ module Terrafomo.AWS.Types
     ) where
 
 import Data.Map.Strict (Map)
-import Data.Maybe      (catMaybes)
 import Data.Text       (Text)
 
 import GHC.Base     (Bool)
