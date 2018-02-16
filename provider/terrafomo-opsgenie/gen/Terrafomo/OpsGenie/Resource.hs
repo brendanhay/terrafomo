@@ -71,16 +71,16 @@ import qualified Terrafomo.Schema    as TF
 Manages a Team within OpsGenie.
 -}
 data TeamResource s = TeamResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description for this team. -}
-    , _member      :: !(TF.Attribute s Text)
+    , _member      :: !(TF.Attr s Text)
     {- ^ (Optional) A Member block as documented below. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) The name associated with this team. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (TeamResource s) where
-    toHCL TeamResource{..} = TF.block $ catMaybes
+    toHCL TeamResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "member" _member
         , TF.attribute "name" _name
@@ -88,17 +88,17 @@ instance TF.ToHCL (TeamResource s) where
 
 instance P.HasDescription (TeamResource s) s Text where
     description =
-        lens (_description :: TeamResource s -> TF.Attribute s Text)
+        lens (_description :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: TeamResource s)
 
 instance P.HasMember (TeamResource s) s Text where
     member =
-        lens (_member :: TeamResource s -> TF.Attribute s Text)
+        lens (_member :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _member = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) s Text where
     name =
-        lens (_name :: TeamResource s -> TF.Attribute s Text)
+        lens (_name :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TeamResource s)
 
 instance P.HasComputedId (TeamResource s) Text
@@ -117,20 +117,20 @@ teamResource =
 Manages a User within OpsGenie.
 -}
 data UserResource s = UserResource {
-      _full_name :: !(TF.Attribute s Text)
+      _full_name :: !(TF.Attr s Text)
     {- ^ (Required) The Full Name of the User. -}
-    , _locale    :: !(TF.Attribute s Text)
+    , _locale    :: !(TF.Attr s Text)
     {- ^ (Optional) Location information for the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-locales> for available locales - Defaults to "en_US". -}
-    , _role      :: !(TF.Attribute s Text)
+    , _role      :: !(TF.Attr s Text)
     {- ^ (Required) The Role assigned to the User. Either a built-in such as 'Owner', 'Admin' or 'User' - or the name of a custom role. -}
-    , _timezone  :: !(TF.Attribute s Text)
+    , _timezone  :: !(TF.Attr s Text)
     {- ^ (Optional) Timezone information of the user. Please look at <https://www.opsgenie.com/docs/miscellaneous/supported-timezone-ids> for available timezones - Defaults to "America/New_York". -}
-    , _username  :: !(TF.Attribute s Text)
+    , _username  :: !(TF.Attr s Text)
     {- ^ (Required) The email address associated with this user. OpsGenie defines that this must not be longer than 100 characters. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.block $ catMaybes
+    toHCL UserResource{..} = TF.inline $ catMaybes
         [ TF.attribute "full_name" _full_name
         , TF.attribute "locale" _locale
         , TF.attribute "role" _role
@@ -140,27 +140,27 @@ instance TF.ToHCL (UserResource s) where
 
 instance P.HasFullName (UserResource s) s Text where
     fullName =
-        lens (_full_name :: UserResource s -> TF.Attribute s Text)
+        lens (_full_name :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _full_name = a } :: UserResource s)
 
 instance P.HasLocale (UserResource s) s Text where
     locale =
-        lens (_locale :: UserResource s -> TF.Attribute s Text)
+        lens (_locale :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _locale = a } :: UserResource s)
 
 instance P.HasRole (UserResource s) s Text where
     role =
-        lens (_role :: UserResource s -> TF.Attribute s Text)
+        lens (_role :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: UserResource s)
 
 instance P.HasTimezone (UserResource s) s Text where
     timezone =
-        lens (_timezone :: UserResource s -> TF.Attribute s Text)
+        lens (_timezone :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _timezone = a } :: UserResource s)
 
 instance P.HasUsername (UserResource s) s Text where
     username =
-        lens (_username :: UserResource s -> TF.Attribute s Text)
+        lens (_username :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserResource s)
 
 instance P.HasComputedId (UserResource s) Text

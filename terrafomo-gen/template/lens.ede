@@ -36,7 +36,7 @@ import qualified Terrafomo.Schema    as TF
 {% for class in argumentClasses %}
 
 class {{ class.value.name }} a s b | a -> s b where
-    {{ class.value.method }} :: Lens' a (TF.Attribute s b)
+    {{ class.value.method }} :: Lens' a (TF.Attr s b)
 
 instance {{ class.value.name }} a s b => {{ class.value.name}} (TF.Schema l p a) s b where
     {{ class.value.method }} = TF.configuration . {{ class.value.method }}
@@ -45,7 +45,7 @@ instance {{ class.value.name }} a s b => {{ class.value.name}} (TF.Schema l p a)
 
 class {{ class.value.name }} a b | a -> b where
     {{ class.value.method }}
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     {{ class.value.method }} =
-        to (\x -> TF.computed (TF.referenceKey x) "{{ class.value.symbol }}")
+        to (\x -> TF.compute (TF.refKey x) "{{ class.value.symbol }}")
 {% endfor %}

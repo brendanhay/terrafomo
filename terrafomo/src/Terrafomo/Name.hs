@@ -2,17 +2,17 @@
 {-# LANGUAGE OverloadedStrings          #-}
 
 module Terrafomo.Name
-    ( Name      (..)
+    ( Name (..)
     , fname
 
-    , Type      (..)
+    , Type (..)
     , ftype
 
-    , Key       (..)
+    , Key  (..)
 
-    , Reference (..)
-    , referenceName
-    , freference
+    , Ref  (..)
+    , refName
+    , fref
     ) where
 
 import Data.Hashable  (Hashable (hashWithSalt))
@@ -58,14 +58,14 @@ instance Hashable Key where
         s `hashWithSalt` keyType x
           `hashWithSalt` keyName x
 
--- | Opaque Named Reference.
-newtype Reference s a = UnsafeReference
-    { referenceKey :: Key
+-- | Opaque Named Ref.
+newtype Ref s a = UnsafeRef
+    { refKey :: Key
     } deriving (Show)
 
-referenceName :: Reference s a -> Name
-referenceName = keyName . referenceKey
+refName :: Ref s a -> Name
+refName = keyName . refKey
 
--- | Format the @NAME@ from the @TYPE.NAME@ Terraform key reference.
-freference :: Format r (Reference s a -> r)
-freference = Format.mapf referenceName fname
+-- | Format the @NAME@ from the @TYPE.NAME@ Terraform key ref.
+fref :: Format r (Ref s a -> r)
+fref = Format.mapf refName fname

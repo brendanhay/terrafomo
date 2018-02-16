@@ -200,26 +200,26 @@ import qualified Terrafomo.Schema    as TF
 Get an active folder within GCP by @display_name@ and @parent@ .
 -}
 data ActiveFolderData s = ActiveFolderData {
-      _display_name :: !(TF.Attribute s Text)
+      _display_name :: !(TF.Attr s Text)
     {- ^ (Required) The folder's display name. -}
-    , _parent       :: !(TF.Attribute s Text)
+    , _parent       :: !(TF.Attr s Text)
     {- ^ (Required) The resource name of the parent Folder or Organization. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ActiveFolderData s) where
-    toHCL ActiveFolderData{..} = TF.block $ catMaybes
+    toHCL ActiveFolderData{..} = TF.inline $ catMaybes
         [ TF.attribute "display_name" _display_name
         , TF.attribute "parent" _parent
         ]
 
 instance P.HasDisplayName (ActiveFolderData s) s Text where
     displayName =
-        lens (_display_name :: ActiveFolderData s -> TF.Attribute s Text)
+        lens (_display_name :: ActiveFolderData s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: ActiveFolderData s)
 
 instance P.HasParent (ActiveFolderData s) s Text where
     parent =
-        lens (_parent :: ActiveFolderData s -> TF.Attribute s Text)
+        lens (_parent :: ActiveFolderData s -> TF.Attr s Text)
              (\s a -> s { _parent = a } :: ActiveFolderData s)
 
 instance P.HasComputedName (ActiveFolderData s) Text
@@ -237,16 +237,16 @@ activeFolderData =
 Use this data source to get information about a Google Billing Account.
 -}
 data BillingAccountData s = BillingAccountData {
-      _billing_account :: !(TF.Attribute s Text)
+      _billing_account :: !(TF.Attr s Text)
     {- ^ (Optional) - The name of the billing account in the form @{billing_account_id}@ or @billingAccounts/{billing_account_id}@ . -}
-    , _display_name    :: !(TF.Attribute s Text)
+    , _display_name    :: !(TF.Attr s Text)
     {- ^ (Optional) - The display name of the billing account. -}
-    , _open            :: !(TF.Attribute s Text)
+    , _open            :: !(TF.Attr s Text)
     {- ^ (Optional) - @true@ if the billing account is open, @false@ if the billing account is closed. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (BillingAccountData s) where
-    toHCL BillingAccountData{..} = TF.block $ catMaybes
+    toHCL BillingAccountData{..} = TF.inline $ catMaybes
         [ TF.attribute "billing_account" _billing_account
         , TF.attribute "display_name" _display_name
         , TF.attribute "open" _open
@@ -254,17 +254,17 @@ instance TF.ToHCL (BillingAccountData s) where
 
 instance P.HasBillingAccount (BillingAccountData s) s Text where
     billingAccount =
-        lens (_billing_account :: BillingAccountData s -> TF.Attribute s Text)
+        lens (_billing_account :: BillingAccountData s -> TF.Attr s Text)
              (\s a -> s { _billing_account = a } :: BillingAccountData s)
 
 instance P.HasDisplayName (BillingAccountData s) s Text where
     displayName =
-        lens (_display_name :: BillingAccountData s -> TF.Attribute s Text)
+        lens (_display_name :: BillingAccountData s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: BillingAccountData s)
 
 instance P.HasOpen (BillingAccountData s) s Text where
     open =
-        lens (_open :: BillingAccountData s -> TF.Attribute s Text)
+        lens (_open :: BillingAccountData s -> TF.Attr s Text)
              (\s a -> s { _open = a } :: BillingAccountData s)
 
 instance P.HasComputedId (BillingAccountData s) Text
@@ -286,26 +286,26 @@ Use this data source to access the configuration of the Google Cloud
 provider.
 -}
 data ClientConfigData s = ClientConfigData {
-      _project :: !(TF.Attribute s Text)
+      _project :: !(TF.Attr s Text)
     {- ^ - The ID of the project to apply any resources to. -}
-    , _region  :: !(TF.Attribute s Text)
+    , _region  :: !(TF.Attr s Text)
     {- ^ - The region to operate under. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ClientConfigData s) where
-    toHCL ClientConfigData{..} = TF.block $ catMaybes
+    toHCL ClientConfigData{..} = TF.inline $ catMaybes
         [ TF.attribute "project" _project
         , TF.attribute "region" _region
         ]
 
 instance P.HasProject (ClientConfigData s) s Text where
     project =
-        lens (_project :: ClientConfigData s -> TF.Attribute s Text)
+        lens (_project :: ClientConfigData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ClientConfigData s)
 
 instance P.HasRegion (ClientConfigData s) s Text where
     region =
-        lens (_region :: ClientConfigData s -> TF.Attribute s Text)
+        lens (_region :: ClientConfigData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ClientConfigData s)
 
 
@@ -324,16 +324,16 @@ Get information about a Google Cloud Function. For more information see the
 <https://cloud.google.com/functions/docs/apis> .
 -}
 data CloudfunctionsFunctionData s = CloudfunctionsFunctionData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ (Required) The name of a Cloud Function. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region  :: !(TF.Attribute s Text)
+    , _region  :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which the resource belongs. If it is not provided, the provider region is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CloudfunctionsFunctionData s) where
-    toHCL CloudfunctionsFunctionData{..} = TF.block $ catMaybes
+    toHCL CloudfunctionsFunctionData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         , TF.attribute "region" _region
@@ -341,17 +341,17 @@ instance TF.ToHCL (CloudfunctionsFunctionData s) where
 
 instance P.HasName (CloudfunctionsFunctionData s) s Text where
     name =
-        lens (_name :: CloudfunctionsFunctionData s -> TF.Attribute s Text)
+        lens (_name :: CloudfunctionsFunctionData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasProject (CloudfunctionsFunctionData s) s Text where
     project =
-        lens (_project :: CloudfunctionsFunctionData s -> TF.Attribute s Text)
+        lens (_project :: CloudfunctionsFunctionData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasRegion (CloudfunctionsFunctionData s) s Text where
     region =
-        lens (_region :: CloudfunctionsFunctionData s -> TF.Attribute s Text)
+        lens (_region :: CloudfunctionsFunctionData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasComputedAvailableMemoryMb (CloudfunctionsFunctionData s) Text
@@ -384,16 +384,16 @@ official
 documentation.
 -}
 data ComputeAddressData s = ComputeAddressData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region  :: !(TF.Attribute s Text)
+    , _region  :: !(TF.Attr s Text)
     {- ^ (Optional) The Region in which the created address reside. If it is not provided, the provider region is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeAddressData s) where
-    toHCL ComputeAddressData{..} = TF.block $ catMaybes
+    toHCL ComputeAddressData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         , TF.attribute "region" _region
@@ -401,17 +401,17 @@ instance TF.ToHCL (ComputeAddressData s) where
 
 instance P.HasName (ComputeAddressData s) s Text where
     name =
-        lens (_name :: ComputeAddressData s -> TF.Attribute s Text)
+        lens (_name :: ComputeAddressData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeAddressData s)
 
 instance P.HasProject (ComputeAddressData s) s Text where
     project =
-        lens (_project :: ComputeAddressData s -> TF.Attribute s Text)
+        lens (_project :: ComputeAddressData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeAddressData s)
 
 instance P.HasRegion (ComputeAddressData s) s Text where
     region =
-        lens (_region :: ComputeAddressData s -> TF.Attribute s Text)
+        lens (_region :: ComputeAddressData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeAddressData s)
 
 instance P.HasComputedAddress (ComputeAddressData s) Text
@@ -436,26 +436,26 @@ the official
 documentation.
 -}
 data ComputeGlobalAddressData s = ComputeGlobalAddressData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeGlobalAddressData s) where
-    toHCL ComputeGlobalAddressData{..} = TF.block $ catMaybes
+    toHCL ComputeGlobalAddressData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         ]
 
 instance P.HasName (ComputeGlobalAddressData s) s Text where
     name =
-        lens (_name :: ComputeGlobalAddressData s -> TF.Attribute s Text)
+        lens (_name :: ComputeGlobalAddressData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeGlobalAddressData s)
 
 instance P.HasProject (ComputeGlobalAddressData s) s Text where
     project =
-        lens (_project :: ComputeGlobalAddressData s -> TF.Attribute s Text)
+        lens (_project :: ComputeGlobalAddressData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeGlobalAddressData s)
 
 instance P.HasComputedAddress (ComputeGlobalAddressData s) Text
@@ -482,26 +482,26 @@ forget to specify the dedicated project. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/images> .
 -}
 data ComputeImageData s = ComputeImageData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ or @family@ - (Required) The name of a specific image or a family. Exactly one of @name@ of @family@ must be specified. If @name@ is specified, it will fetch the corresponding image. If @family@ is specified, it will returns the latest image that is part of an image family and is not deprecated. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeImageData s) where
-    toHCL ComputeImageData{..} = TF.block $ catMaybes
+    toHCL ComputeImageData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         ]
 
 instance P.HasName (ComputeImageData s) s Text where
     name =
-        lens (_name :: ComputeImageData s -> TF.Attribute s Text)
+        lens (_name :: ComputeImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeImageData s)
 
 instance P.HasProject (ComputeImageData s) s Text where
     project =
-        lens (_project :: ComputeImageData s -> TF.Attribute s Text)
+        lens (_project :: ComputeImageData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeImageData s)
 
 instance P.HasComputedArchiveSizeBytes (ComputeImageData s) Text
@@ -537,16 +537,16 @@ Get a Compute Instance Group within GCE. For more information, see
 and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
 -}
 data ComputeInstanceGroupData s = ComputeInstanceGroupData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ (Required) The name of the instance group. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _zone    :: !(TF.Attribute s Text)
+    , _zone    :: !(TF.Attr s Text)
     {- ^ (Required) The zone of the instance group. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeInstanceGroupData s) where
-    toHCL ComputeInstanceGroupData{..} = TF.block $ catMaybes
+    toHCL ComputeInstanceGroupData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         , TF.attribute "zone" _zone
@@ -554,17 +554,17 @@ instance TF.ToHCL (ComputeInstanceGroupData s) where
 
 instance P.HasName (ComputeInstanceGroupData s) s Text where
     name =
-        lens (_name :: ComputeInstanceGroupData s -> TF.Attribute s Text)
+        lens (_name :: ComputeInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeInstanceGroupData s)
 
 instance P.HasProject (ComputeInstanceGroupData s) s Text where
     project =
-        lens (_project :: ComputeInstanceGroupData s -> TF.Attribute s Text)
+        lens (_project :: ComputeInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeInstanceGroupData s)
 
 instance P.HasZone (ComputeInstanceGroupData s) s Text where
     zone =
-        lens (_zone :: ComputeInstanceGroupData s -> TF.Attribute s Text)
+        lens (_zone :: ComputeInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ComputeInstanceGroupData s)
 
 instance P.HasComputedDescription (ComputeInstanceGroupData s) Text
@@ -589,26 +589,26 @@ Use this data source to access IP ranges in your firewall rules.
 https://cloud.google.com/compute/docs/load-balancing/health-checks#health_check_source_ips_and_firewall_rules
 -}
 data ComputeLbIpRangesData s = ComputeLbIpRangesData {
-      _http_ssl_tcp_internal :: !(TF.Attribute s Text)
+      _http_ssl_tcp_internal :: !(TF.Attr s Text)
     {- ^ - The IP ranges used for health checks when HTTP(S), SSL proxy, TCP proxy, and Internal load balancing is used -}
-    , _network               :: !(TF.Attribute s Text)
+    , _network               :: !(TF.Attr s Text)
     {- ^ - The IP ranges used for health checks when Network load balancing is used -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeLbIpRangesData s) where
-    toHCL ComputeLbIpRangesData{..} = TF.block $ catMaybes
+    toHCL ComputeLbIpRangesData{..} = TF.inline $ catMaybes
         [ TF.attribute "http_ssl_tcp_internal" _http_ssl_tcp_internal
         , TF.attribute "network" _network
         ]
 
 instance P.HasHttpSslTcpInternal (ComputeLbIpRangesData s) s Text where
     httpSslTcpInternal =
-        lens (_http_ssl_tcp_internal :: ComputeLbIpRangesData s -> TF.Attribute s Text)
+        lens (_http_ssl_tcp_internal :: ComputeLbIpRangesData s -> TF.Attr s Text)
              (\s a -> s { _http_ssl_tcp_internal = a } :: ComputeLbIpRangesData s)
 
 instance P.HasNetwork (ComputeLbIpRangesData s) s Text where
     network =
-        lens (_network :: ComputeLbIpRangesData s -> TF.Attribute s Text)
+        lens (_network :: ComputeLbIpRangesData s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeLbIpRangesData s)
 
 
@@ -625,26 +625,26 @@ computeLbIpRangesData =
 Get a network within GCE from its name.
 -}
 data ComputeNetworkData s = ComputeNetworkData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ (Required) The name of the network. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeNetworkData s) where
-    toHCL ComputeNetworkData{..} = TF.block $ catMaybes
+    toHCL ComputeNetworkData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         ]
 
 instance P.HasName (ComputeNetworkData s) s Text where
     name =
-        lens (_name :: ComputeNetworkData s -> TF.Attribute s Text)
+        lens (_name :: ComputeNetworkData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeNetworkData s)
 
 instance P.HasProject (ComputeNetworkData s) s Text where
     project =
-        lens (_project :: ComputeNetworkData s -> TF.Attribute s Text)
+        lens (_project :: ComputeNetworkData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeNetworkData s)
 
 instance P.HasComputedDescription (ComputeNetworkData s) Text
@@ -670,18 +670,18 @@ and
 .
 -}
 data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData {
-      _name      :: !(TF.Attribute s Text)
+      _name      :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the instance group.  One of @name@ or @self_link@ must be provided. -}
-    , _project   :: !(TF.Attribute s Text)
+    , _project   :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region    :: !(TF.Attribute s Text)
+    , _region    :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which the resource belongs.  If @self_link@ is provided, this value is ignored.  If neither @self_link@ nor @region@ are provided, the provider region is used. -}
-    , _self_link :: !(TF.Attribute s Text)
+    , _self_link :: !(TF.Attr s Text)
     {- ^ (Optional) The link to the instance group.  One of @name@ or @self_link@ must be provided. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeRegionInstanceGroupData s) where
-    toHCL ComputeRegionInstanceGroupData{..} = TF.block $ catMaybes
+    toHCL ComputeRegionInstanceGroupData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         , TF.attribute "region" _region
@@ -690,22 +690,22 @@ instance TF.ToHCL (ComputeRegionInstanceGroupData s) where
 
 instance P.HasName (ComputeRegionInstanceGroupData s) s Text where
     name =
-        lens (_name :: ComputeRegionInstanceGroupData s -> TF.Attribute s Text)
+        lens (_name :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeRegionInstanceGroupData s)
 
 instance P.HasProject (ComputeRegionInstanceGroupData s) s Text where
     project =
-        lens (_project :: ComputeRegionInstanceGroupData s -> TF.Attribute s Text)
+        lens (_project :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeRegionInstanceGroupData s)
 
 instance P.HasRegion (ComputeRegionInstanceGroupData s) s Text where
     region =
-        lens (_region :: ComputeRegionInstanceGroupData s -> TF.Attribute s Text)
+        lens (_region :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeRegionInstanceGroupData s)
 
 instance P.HasSelfLink (ComputeRegionInstanceGroupData s) s Text where
     selfLink =
-        lens (_self_link :: ComputeRegionInstanceGroupData s -> TF.Attribute s Text)
+        lens (_self_link :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _self_link = a } :: ComputeRegionInstanceGroupData s)
 
 instance P.HasComputedInstances (ComputeRegionInstanceGroupData s) Text
@@ -726,16 +726,16 @@ computeRegionInstanceGroupData =
 Get a subnetwork within GCE from its name and region.
 -}
 data ComputeSubnetworkData s = ComputeSubnetworkData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ - The name of the subnetwork. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region  :: !(TF.Attribute s Text)
+    , _region  :: !(TF.Attr s Text)
     {- ^ (Optional) The region this subnetwork has been created in. If unspecified, this defaults to the region configured in the provider. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeSubnetworkData s) where
-    toHCL ComputeSubnetworkData{..} = TF.block $ catMaybes
+    toHCL ComputeSubnetworkData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         , TF.attribute "region" _region
@@ -743,17 +743,17 @@ instance TF.ToHCL (ComputeSubnetworkData s) where
 
 instance P.HasName (ComputeSubnetworkData s) s Text where
     name =
-        lens (_name :: ComputeSubnetworkData s -> TF.Attribute s Text)
+        lens (_name :: ComputeSubnetworkData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSubnetworkData s)
 
 instance P.HasProject (ComputeSubnetworkData s) s Text where
     project =
-        lens (_project :: ComputeSubnetworkData s -> TF.Attribute s Text)
+        lens (_project :: ComputeSubnetworkData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeSubnetworkData s)
 
 instance P.HasRegion (ComputeSubnetworkData s) s Text where
     region =
-        lens (_region :: ComputeSubnetworkData s -> TF.Attribute s Text)
+        lens (_region :: ComputeSubnetworkData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeSubnetworkData s)
 
 instance P.HasComputedDescription (ComputeSubnetworkData s) Text
@@ -781,26 +781,26 @@ project. See more about
 upstream docs.
 -}
 data ComputeZonesData s = ComputeZonesData {
-      _region :: !(TF.Attribute s Text)
+      _region :: !(TF.Attr s Text)
     {- ^ (Optional) - Region from which to list available zones. Defaults to region declared in the provider. -}
-    , _status :: !(TF.Attribute s Text)
+    , _status :: !(TF.Attr s Text)
     {- ^ (Optional) - Allows to filter list of zones based on their current status. Status can be either @UP@ or @DOWN@ . Defaults to no filtering (all available zones - both @UP@ and @DOWN@ ). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeZonesData s) where
-    toHCL ComputeZonesData{..} = TF.block $ catMaybes
+    toHCL ComputeZonesData{..} = TF.inline $ catMaybes
         [ TF.attribute "region" _region
         , TF.attribute "status" _status
         ]
 
 instance P.HasRegion (ComputeZonesData s) s Text where
     region =
-        lens (_region :: ComputeZonesData s -> TF.Attribute s Text)
+        lens (_region :: ComputeZonesData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeZonesData s)
 
 instance P.HasStatus (ComputeZonesData s) s Text where
     status =
-        lens (_status :: ComputeZonesData s -> TF.Attribute s Text)
+        lens (_status :: ComputeZonesData s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: ComputeZonesData s)
 
 instance P.HasComputedNames (ComputeZonesData s) Text
@@ -818,16 +818,16 @@ computeZonesData =
 Get info about a cluster within GKE from its name and zone.
 -}
 data ContainerClusterData s = ContainerClusterData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ - The name of the cluster. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _zone    :: !(TF.Attribute s Text)
+    , _zone    :: !(TF.Attr s Text)
     {- ^ - The zones this cluster has been created in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerClusterData s) where
-    toHCL ContainerClusterData{..} = TF.block $ catMaybes
+    toHCL ContainerClusterData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         , TF.attribute "zone" _zone
@@ -835,17 +835,17 @@ instance TF.ToHCL (ContainerClusterData s) where
 
 instance P.HasName (ContainerClusterData s) s Text where
     name =
-        lens (_name :: ContainerClusterData s -> TF.Attribute s Text)
+        lens (_name :: ContainerClusterData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ContainerClusterData s)
 
 instance P.HasProject (ContainerClusterData s) s Text where
     project =
-        lens (_project :: ContainerClusterData s -> TF.Attribute s Text)
+        lens (_project :: ContainerClusterData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ContainerClusterData s)
 
 instance P.HasZone (ContainerClusterData s) s Text where
     zone =
-        lens (_zone :: ContainerClusterData s -> TF.Attribute s Text)
+        lens (_zone :: ContainerClusterData s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ContainerClusterData s)
 
 
@@ -864,26 +864,26 @@ Provides access to available Google Container Engine versions in a zone for
 a given project.
 -}
 data ContainerEngineVersionsData s = ContainerEngineVersionsData {
-      _project :: !(TF.Attribute s Text)
+      _project :: !(TF.Attr s Text)
     {- ^ (optional) - ID of the project to list available cluster versions for. Should match the project the cluster will be deployed to. Defaults to the project that the provider is authenticated with. -}
-    , _zone    :: !(TF.Attribute s Text)
+    , _zone    :: !(TF.Attr s Text)
     {- ^ (required) - Zone to list available cluster versions for. Should match the zone the cluster will be deployed in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerEngineVersionsData s) where
-    toHCL ContainerEngineVersionsData{..} = TF.block $ catMaybes
+    toHCL ContainerEngineVersionsData{..} = TF.inline $ catMaybes
         [ TF.attribute "project" _project
         , TF.attribute "zone" _zone
         ]
 
 instance P.HasProject (ContainerEngineVersionsData s) s Text where
     project =
-        lens (_project :: ContainerEngineVersionsData s -> TF.Attribute s Text)
+        lens (_project :: ContainerEngineVersionsData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ContainerEngineVersionsData s)
 
 instance P.HasZone (ContainerEngineVersionsData s) s Text where
     zone =
-        lens (_zone :: ContainerEngineVersionsData s -> TF.Attribute s Text)
+        lens (_zone :: ContainerEngineVersionsData s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
 
 instance P.HasComputedLatestMasterVersion (ContainerEngineVersionsData s) Text
@@ -908,20 +908,20 @@ this data source does not contact Google Container Registry (GCR) at any
 point.
 -}
 data ContainerRegistryImageData s = ContainerRegistryImageData {
-      _digest  :: !(TF.Attribute s Text)
+      _digest  :: !(TF.Attr s Text)
     {- ^ : (Optional) The image digest to fetch, if any. -}
-    , _name    :: !(TF.Attribute s Text)
+    , _name    :: !(TF.Attr s Text)
     {- ^ : (Required) The image name. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ : (Optional) The project ID that this image is attached to.  If not provider, provider project will be used instead. -}
-    , _region  :: !(TF.Attribute s Text)
+    , _region  :: !(TF.Attr s Text)
     {- ^ : (Optional) The GCR region to use.  As of this writing, one of @asia@ , @eu@ , and @us@ .  See <https://cloud.google.com/container-registry/docs/pushing-and-pulling> for additional information. -}
-    , _tag     :: !(TF.Attribute s Text)
+    , _tag     :: !(TF.Attr s Text)
     {- ^ : (Optional) The tag to fetch, if any. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerRegistryImageData s) where
-    toHCL ContainerRegistryImageData{..} = TF.block $ catMaybes
+    toHCL ContainerRegistryImageData{..} = TF.inline $ catMaybes
         [ TF.attribute "digest" _digest
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -931,27 +931,27 @@ instance TF.ToHCL (ContainerRegistryImageData s) where
 
 instance P.HasDigest (ContainerRegistryImageData s) s Text where
     digest =
-        lens (_digest :: ContainerRegistryImageData s -> TF.Attribute s Text)
+        lens (_digest :: ContainerRegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _digest = a } :: ContainerRegistryImageData s)
 
 instance P.HasName (ContainerRegistryImageData s) s Text where
     name =
-        lens (_name :: ContainerRegistryImageData s -> TF.Attribute s Text)
+        lens (_name :: ContainerRegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ContainerRegistryImageData s)
 
 instance P.HasProject (ContainerRegistryImageData s) s Text where
     project =
-        lens (_project :: ContainerRegistryImageData s -> TF.Attribute s Text)
+        lens (_project :: ContainerRegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ContainerRegistryImageData s)
 
 instance P.HasRegion (ContainerRegistryImageData s) s Text where
     region =
-        lens (_region :: ContainerRegistryImageData s -> TF.Attribute s Text)
+        lens (_region :: ContainerRegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ContainerRegistryImageData s)
 
 instance P.HasTag (ContainerRegistryImageData s) s Text where
     tag =
-        lens (_tag :: ContainerRegistryImageData s -> TF.Attribute s Text)
+        lens (_tag :: ContainerRegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _tag = a } :: ContainerRegistryImageData s)
 
 instance P.HasComputedImageUrl (ContainerRegistryImageData s) Text
@@ -976,26 +976,26 @@ this data source does not contact Google Container Registry (GCR) at any
 point.
 -}
 data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData {
-      _project :: !(TF.Attribute s Text)
+      _project :: !(TF.Attr s Text)
     {- ^ : (Optional) The project ID that this repository is attached to.  If not provider, provider project will be used instead. -}
-    , _region  :: !(TF.Attribute s Text)
+    , _region  :: !(TF.Attr s Text)
     {- ^ : (Optional) The GCR region to use.  As of this writing, one of @asia@ , @eu@ , and @us@ .  See <https://cloud.google.com/container-registry/docs/pushing-and-pulling> for additional information. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerRegistryRepositoryData s) where
-    toHCL ContainerRegistryRepositoryData{..} = TF.block $ catMaybes
+    toHCL ContainerRegistryRepositoryData{..} = TF.inline $ catMaybes
         [ TF.attribute "project" _project
         , TF.attribute "region" _region
         ]
 
 instance P.HasProject (ContainerRegistryRepositoryData s) s Text where
     project =
-        lens (_project :: ContainerRegistryRepositoryData s -> TF.Attribute s Text)
+        lens (_project :: ContainerRegistryRepositoryData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ContainerRegistryRepositoryData s)
 
 instance P.HasRegion (ContainerRegistryRepositoryData s) s Text where
     region =
-        lens (_region :: ContainerRegistryRepositoryData s -> TF.Attribute s Text)
+        lens (_region :: ContainerRegistryRepositoryData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ContainerRegistryRepositoryData s)
 
 instance P.HasComputedRepositoryUrl (ContainerRegistryRepositoryData s) Text
@@ -1015,26 +1015,26 @@ information see <https://cloud.google.com/dns/zones/> and
 <https://cloud.google.com/dns/api/v1/managedZones> .
 -}
 data DnsManagedZoneData s = DnsManagedZoneData {
-      _name    :: !(TF.Attribute s Text)
+      _name    :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) ID of the project for the Google Cloud DNS zone. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsManagedZoneData s) where
-    toHCL DnsManagedZoneData{..} = TF.block $ catMaybes
+    toHCL DnsManagedZoneData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         ]
 
 instance P.HasName (DnsManagedZoneData s) s Text where
     name =
-        lens (_name :: DnsManagedZoneData s -> TF.Attribute s Text)
+        lens (_name :: DnsManagedZoneData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsManagedZoneData s)
 
 instance P.HasProject (DnsManagedZoneData s) s Text where
     project =
-        lens (_project :: DnsManagedZoneData s -> TF.Attribute s Text)
+        lens (_project :: DnsManagedZoneData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DnsManagedZoneData s)
 
 instance P.HasComputedDescription (DnsManagedZoneData s) Text
@@ -1056,18 +1056,18 @@ other Google Cloud Platform resources, such as the @google_project@
 resource.
 -}
 data IamPolicyData s = IamPolicyData {
-      _binding :: !(TF.Attribute s Text)
+      _binding :: !(TF.Attr s Text)
     {- ^ (Required) - A nested configuration block (described below) defining a binding to be included in the policy document. Multiple @binding@ arguments are supported. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IamPolicyData s) where
-    toHCL IamPolicyData{..} = TF.block $ catMaybes
+    toHCL IamPolicyData{..} = TF.inline $ catMaybes
         [ TF.attribute "binding" _binding
         ]
 
 instance P.HasBinding (IamPolicyData s) s Text where
     binding =
-        lens (_binding :: IamPolicyData s -> TF.Attribute s Text)
+        lens (_binding :: IamPolicyData s -> TF.Attr s Text)
              (\s a -> s { _binding = a } :: IamPolicyData s)
 
 instance P.HasComputedPolicyData (IamPolicyData s) Text
@@ -1090,26 +1090,26 @@ logging output, plan output, or state output.  Please take care to secure
 your secret data outside of resource definitions.
 -}
 data KmsSecretData s = KmsSecretData {
-      _ciphertext :: !(TF.Attribute s Text)
+      _ciphertext :: !(TF.Attr s Text)
     {- ^ (Required) - The ciphertext to be decrypted, encoded in base64 -}
-    , _crypto_key :: !(TF.Attribute s Text)
+    , _crypto_key :: !(TF.Attr s Text)
     {- ^ (Required) - The id of the CryptoKey that will be used to decrypt the provided ciphertext. This is represented by the format @{projectId}/{location}/{keyRingName}/{cryptoKeyName}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KmsSecretData s) where
-    toHCL KmsSecretData{..} = TF.block $ catMaybes
+    toHCL KmsSecretData{..} = TF.inline $ catMaybes
         [ TF.attribute "ciphertext" _ciphertext
         , TF.attribute "crypto_key" _crypto_key
         ]
 
 instance P.HasCiphertext (KmsSecretData s) s Text where
     ciphertext =
-        lens (_ciphertext :: KmsSecretData s -> TF.Attribute s Text)
+        lens (_ciphertext :: KmsSecretData s -> TF.Attr s Text)
              (\s a -> s { _ciphertext = a } :: KmsSecretData s)
 
 instance P.HasCryptoKey (KmsSecretData s) s Text where
     cryptoKey =
-        lens (_crypto_key :: KmsSecretData s -> TF.Attribute s Text)
+        lens (_crypto_key :: KmsSecretData s -> TF.Attr s Text)
              (\s a -> s { _crypto_key = a } :: KmsSecretData s)
 
 instance P.HasComputedPlaintext (KmsSecretData s) Text
@@ -1127,26 +1127,26 @@ kmsSecretData =
 Use this data source to get information about a Google Cloud Organization.
 -}
 data OrganizationData s = OrganizationData {
-      _domain       :: !(TF.Attribute s Text)
+      _domain       :: !(TF.Attr s Text)
     {- ^ (Optional) - The domain name of the Organization. -}
-    , _organization :: !(TF.Attribute s Text)
+    , _organization :: !(TF.Attr s Text)
     {- ^ (Optional) - The name of the Organization in the form @{organization_id}@ or @organizations/{organization_id}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (OrganizationData s) where
-    toHCL OrganizationData{..} = TF.block $ catMaybes
+    toHCL OrganizationData{..} = TF.inline $ catMaybes
         [ TF.attribute "domain" _domain
         , TF.attribute "organization" _organization
         ]
 
 instance P.HasDomain (OrganizationData s) s Text where
     domain =
-        lens (_domain :: OrganizationData s -> TF.Attribute s Text)
+        lens (_domain :: OrganizationData s -> TF.Attr s Text)
              (\s a -> s { _domain = a } :: OrganizationData s)
 
 instance P.HasOrganization (OrganizationData s) s Text where
     organization =
-        lens (_organization :: OrganizationData s -> TF.Attribute s Text)
+        lens (_organization :: OrganizationData s -> TF.Attr s Text)
              (\s a -> s { _organization = a } :: OrganizationData s)
 
 instance P.HasComputedCreateTime (OrganizationData s) Text
@@ -1172,20 +1172,20 @@ have a Google account. For more info about signed URL's is available
 <https://cloud.google.com/storage/docs/access-control/signed-urls> .
 -}
 data StorageObjectSignedUrlData s = StorageObjectSignedUrlData {
-      _bucket      :: !(TF.Attribute s Text)
+      _bucket      :: !(TF.Attr s Text)
     {- ^ (Required) The name of the bucket to read the object from -}
-    , _credentials :: !(TF.Attribute s Text)
+    , _credentials :: !(TF.Attr s Text)
     {- ^ (Optional) What Google service account credentials json should be used to sign the URL. This data source checks the following locations for credentials, in order of preference: data source @credentials@ attribute, provider @credentials@ attribute and finally the GOOGLE_APPLICATION_CREDENTIALS environment variable. -}
-    , _duration    :: !(TF.Attribute s Text)
+    , _duration    :: !(TF.Attr s Text)
     {- ^ (Optional) For how long shall the signed URL be valid (defaults to 1 hour - i.e. @1h@ ). See <https://golang.org/pkg/time/#ParseDuration> for info on valid duration formats. -}
-    , _http_method :: !(TF.Attribute s Text)
+    , _http_method :: !(TF.Attr s Text)
     {- ^ (Optional) What HTTP Method will the signed URL allow (defaults to @GET@ ) -}
-    , _path        :: !(TF.Attribute s Text)
+    , _path        :: !(TF.Attr s Text)
     {- ^ (Required) The full path to the object inside the bucket -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageObjectSignedUrlData s) where
-    toHCL StorageObjectSignedUrlData{..} = TF.block $ catMaybes
+    toHCL StorageObjectSignedUrlData{..} = TF.inline $ catMaybes
         [ TF.attribute "bucket" _bucket
         , TF.attribute "credentials" _credentials
         , TF.attribute "duration" _duration
@@ -1195,27 +1195,27 @@ instance TF.ToHCL (StorageObjectSignedUrlData s) where
 
 instance P.HasBucket (StorageObjectSignedUrlData s) s Text where
     bucket =
-        lens (_bucket :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
+        lens (_bucket :: StorageObjectSignedUrlData s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasCredentials (StorageObjectSignedUrlData s) s Text where
     credentials =
-        lens (_credentials :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
+        lens (_credentials :: StorageObjectSignedUrlData s -> TF.Attr s Text)
              (\s a -> s { _credentials = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasDuration (StorageObjectSignedUrlData s) s Text where
     duration =
-        lens (_duration :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
+        lens (_duration :: StorageObjectSignedUrlData s -> TF.Attr s Text)
              (\s a -> s { _duration = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasHttpMethod (StorageObjectSignedUrlData s) s Text where
     httpMethod =
-        lens (_http_method :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
+        lens (_http_method :: StorageObjectSignedUrlData s -> TF.Attr s Text)
              (\s a -> s { _http_method = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasPath (StorageObjectSignedUrlData s) s Text where
     path =
-        lens (_path :: StorageObjectSignedUrlData s -> TF.Attribute s Text)
+        lens (_path :: StorageObjectSignedUrlData s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasComputedSignedUrl (StorageObjectSignedUrlData s) Text

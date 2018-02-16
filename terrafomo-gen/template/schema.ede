@@ -64,39 +64,27 @@ import qualified Terrafomo.Schema    as TF
 
 {{ schema.value.about | wrap }}
 {% endif %}
-{% for example in schema.value.examples %}
-
-{% if example.value.title %}
-{{ example.value.title }}
-
-{% endif %}
-@
-{% for line in example.value.code %}
-{{ line.value }}
-{% endfor %}
-@
-{% endfor %}
 -}
 data {{ schema.key }} s = {{ schema.key }} {
   {% for arg in schema.value.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Attribute s {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(TF.Attr s {{ arg.value.type }})
     {- ^ {{ arg.value.help }} -}
   {% endfor %}
     } deriving (Show, Eq)
 
 instance TF.ToHCL ({{ schema.key }} s) where
   {% for arg in schema.value.arguments %}
-    {% if arg.first %}toHCL {{ schema.key }}{..} = TF.block $ catMaybes
+    {% if arg.first %}toHCL {{ schema.key }}{..} = TF.inline $ catMaybes
         [{% else %}    ,{% endif %} TF.attribute "{{ arg.value.name }}" {{ arg.key }}{% if arg.last %}
         ]{% endif %}
   {% else %}
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
   {% endfor %}
 
   {% for field in schema.value.argumentFields %}
 instance P.{{ field.value.class }} ({{ schema.key }} s) s {{ field.value.type }} where
     {{ field.value.method }} =
-        lens ({{ field.value.label }} :: {{ schema.key }} s -> TF.Attribute s {{ field.value.type }})
+        lens ({{ field.value.label }} :: {{ schema.key }} s -> TF.Attr s {{ field.value.type }})
              (\s a -> s { {{ field.value.label }} = a } :: {{ schema.key }} s)
 
   {% endfor %}

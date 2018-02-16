@@ -87,26 +87,26 @@ in Chef recipes. This resource creates objects within an existing data bag.
 To create the data bag itself, use the @chef_data_bag@ resource.
 -}
 data DataBagItemResource s = DataBagItemResource {
-      _content_json  :: !(TF.Attribute s Text)
+      _content_json  :: !(TF.Attr s Text)
     {- ^ (Required) A string containing a JSON object that will be the content of the item. Must at minimum contain a property called "id" that is unique within the data bag, which will become the identifier of the created item. -}
-    , _data_bag_name :: !(TF.Attribute s Text)
+    , _data_bag_name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the data bag into which this item will be placed. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DataBagItemResource s) where
-    toHCL DataBagItemResource{..} = TF.block $ catMaybes
+    toHCL DataBagItemResource{..} = TF.inline $ catMaybes
         [ TF.attribute "content_json" _content_json
         , TF.attribute "data_bag_name" _data_bag_name
         ]
 
 instance P.HasContentJson (DataBagItemResource s) s Text where
     contentJson =
-        lens (_content_json :: DataBagItemResource s -> TF.Attribute s Text)
+        lens (_content_json :: DataBagItemResource s -> TF.Attr s Text)
              (\s a -> s { _content_json = a } :: DataBagItemResource s)
 
 instance P.HasDataBagName (DataBagItemResource s) s Text where
     dataBagName =
-        lens (_data_bag_name :: DataBagItemResource s -> TF.Attribute s Text)
+        lens (_data_bag_name :: DataBagItemResource s -> TF.Attr s Text)
              (\s a -> s { _data_bag_name = a } :: DataBagItemResource s)
 
 instance P.HasComputedId (DataBagItemResource s) Text
@@ -128,18 +128,18 @@ bag is a collection of items which can be created using the
 @chef_data_bag_item@ resource.
 -}
 data DataBagResource s = DataBagResource {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) The unique name to assign to the data bag. This is the name that other server clients will use to find and retrieve data from the data bag. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DataBagResource s) where
-    toHCL DataBagResource{..} = TF.block $ catMaybes
+    toHCL DataBagResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (DataBagResource s) s Text where
     name =
-        lens (_name :: DataBagResource s -> TF.Attribute s Text)
+        lens (_name :: DataBagResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DataBagResource s)
 
 instance P.HasComputedApiUri (DataBagResource s) Text
@@ -158,20 +158,20 @@ that share a set of attribute values and may have a set of version
 constraints for which cookbook versions may be used on its nodes.
 -}
 data EnvironmentResource s = EnvironmentResource {
-      _cookbook_constraints     :: !(TF.Attribute s Text)
+      _cookbook_constraints     :: !(TF.Attr s Text)
     {- ^ (Optional) Mapping of cookbook names to cookbook version constraints that should apply for this environment. -}
-    , _default_attributes_json  :: !(TF.Attribute s Text)
+    , _default_attributes_json  :: !(TF.Attr s Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the environment. -}
-    , _description              :: !(TF.Attribute s Text)
+    , _description              :: !(TF.Attr s Text)
     {- ^ (Optional) A human-friendly description of the environment. If not set, a placeholder of "Managed by Terraform" will be set. -}
-    , _name                     :: !(TF.Attribute s Text)
+    , _name                     :: !(TF.Attr s Text)
     {- ^ (Required) The unique name to assign to the environment. This name will be used when nodes are created within the environment. -}
-    , _override_attributes_json :: !(TF.Attribute s Text)
+    , _override_attributes_json :: !(TF.Attr s Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the environment. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EnvironmentResource s) where
-    toHCL EnvironmentResource{..} = TF.block $ catMaybes
+    toHCL EnvironmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cookbook_constraints" _cookbook_constraints
         , TF.attribute "default_attributes_json" _default_attributes_json
         , TF.attribute "description" _description
@@ -181,27 +181,27 @@ instance TF.ToHCL (EnvironmentResource s) where
 
 instance P.HasCookbookConstraints (EnvironmentResource s) s Text where
     cookbookConstraints =
-        lens (_cookbook_constraints :: EnvironmentResource s -> TF.Attribute s Text)
+        lens (_cookbook_constraints :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _cookbook_constraints = a } :: EnvironmentResource s)
 
 instance P.HasDefaultAttributesJson (EnvironmentResource s) s Text where
     defaultAttributesJson =
-        lens (_default_attributes_json :: EnvironmentResource s -> TF.Attribute s Text)
+        lens (_default_attributes_json :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _default_attributes_json = a } :: EnvironmentResource s)
 
 instance P.HasDescription (EnvironmentResource s) s Text where
     description =
-        lens (_description :: EnvironmentResource s -> TF.Attribute s Text)
+        lens (_description :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: EnvironmentResource s)
 
 instance P.HasName (EnvironmentResource s) s Text where
     name =
-        lens (_name :: EnvironmentResource s -> TF.Attribute s Text)
+        lens (_name :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: EnvironmentResource s)
 
 instance P.HasOverrideAttributesJson (EnvironmentResource s) s Text where
     overrideAttributesJson =
-        lens (_override_attributes_json :: EnvironmentResource s -> TF.Attribute s Text)
+        lens (_override_attributes_json :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
 
 
@@ -226,24 +226,24 @@ configure the Chef client on a computer and have it register itself with the
 Chef server.
 -}
 data NodeResource s = NodeResource {
-      _automatic_attributes_json :: !(TF.Attribute s Text)
+      _automatic_attributes_json :: !(TF.Attr s Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the automatic attributes for the node. -}
-    , _default_attributes_json   :: !(TF.Attribute s Text)
+    , _default_attributes_json   :: !(TF.Attr s Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the node. -}
-    , _environment_name          :: !(TF.Attribute s Text)
+    , _environment_name          :: !(TF.Attr s Text)
     {- ^ (Optional) the nodes environment name (default: _default) -}
-    , _name                      :: !(TF.Attribute s Text)
+    , _name                      :: !(TF.Attr s Text)
     {- ^ (Required) The unique name to assign to the node. -}
-    , _normal_attributes_json    :: !(TF.Attribute s Text)
+    , _normal_attributes_json    :: !(TF.Attr s Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the normal attributes for the node. -}
-    , _override_attributes_json  :: !(TF.Attribute s Text)
+    , _override_attributes_json  :: !(TF.Attr s Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the node. -}
-    , _run_list                  :: !(TF.Attribute s Text)
+    , _run_list                  :: !(TF.Attr s Text)
     {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for the node. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NodeResource s) where
-    toHCL NodeResource{..} = TF.block $ catMaybes
+    toHCL NodeResource{..} = TF.inline $ catMaybes
         [ TF.attribute "automatic_attributes_json" _automatic_attributes_json
         , TF.attribute "default_attributes_json" _default_attributes_json
         , TF.attribute "environment_name" _environment_name
@@ -255,37 +255,37 @@ instance TF.ToHCL (NodeResource s) where
 
 instance P.HasAutomaticAttributesJson (NodeResource s) s Text where
     automaticAttributesJson =
-        lens (_automatic_attributes_json :: NodeResource s -> TF.Attribute s Text)
+        lens (_automatic_attributes_json :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _automatic_attributes_json = a } :: NodeResource s)
 
 instance P.HasDefaultAttributesJson (NodeResource s) s Text where
     defaultAttributesJson =
-        lens (_default_attributes_json :: NodeResource s -> TF.Attribute s Text)
+        lens (_default_attributes_json :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _default_attributes_json = a } :: NodeResource s)
 
 instance P.HasEnvironmentName (NodeResource s) s Text where
     environmentName =
-        lens (_environment_name :: NodeResource s -> TF.Attribute s Text)
+        lens (_environment_name :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _environment_name = a } :: NodeResource s)
 
 instance P.HasName (NodeResource s) s Text where
     name =
-        lens (_name :: NodeResource s -> TF.Attribute s Text)
+        lens (_name :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NodeResource s)
 
 instance P.HasNormalAttributesJson (NodeResource s) s Text where
     normalAttributesJson =
-        lens (_normal_attributes_json :: NodeResource s -> TF.Attribute s Text)
+        lens (_normal_attributes_json :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _normal_attributes_json = a } :: NodeResource s)
 
 instance P.HasOverrideAttributesJson (NodeResource s) s Text where
     overrideAttributesJson =
-        lens (_override_attributes_json :: NodeResource s -> TF.Attribute s Text)
+        lens (_override_attributes_json :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _override_attributes_json = a } :: NodeResource s)
 
 instance P.HasRunList (NodeResource s) s Text where
     runList =
-        lens (_run_list :: NodeResource s -> TF.Attribute s Text)
+        lens (_run_list :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _run_list = a } :: NodeResource s)
 
 
@@ -308,20 +308,20 @@ A <http://docs.chef.io/roles.html> is a set of standard configuration that
 can apply across multiple nodes that perform the same function.
 -}
 data RoleResource s = RoleResource {
-      _default_attributes_json  :: !(TF.Attribute s Text)
+      _default_attributes_json  :: !(TF.Attr s Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the default attributes for the role. -}
-    , _description              :: !(TF.Attribute s Text)
+    , _description              :: !(TF.Attr s Text)
     {- ^ (Optional) A human-friendly description of the role. If not set, a placeholder of "Managed by Terraform" will be set. -}
-    , _name                     :: !(TF.Attribute s Text)
+    , _name                     :: !(TF.Attr s Text)
     {- ^ (Required) The unique name to assign to the role. -}
-    , _override_attributes_json :: !(TF.Attribute s Text)
+    , _override_attributes_json :: !(TF.Attr s Text)
     {- ^ (Optional) String containing a JSON-serialized object containing the override attributes for the role. -}
-    , _run_list                 :: !(TF.Attribute s Text)
+    , _run_list                 :: !(TF.Attr s Text)
     {- ^ (Optional) List of strings to set as the <https://docs.chef.io/run_lists.html> for any nodes that belong to this role. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RoleResource s) where
-    toHCL RoleResource{..} = TF.block $ catMaybes
+    toHCL RoleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "default_attributes_json" _default_attributes_json
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -331,27 +331,27 @@ instance TF.ToHCL (RoleResource s) where
 
 instance P.HasDefaultAttributesJson (RoleResource s) s Text where
     defaultAttributesJson =
-        lens (_default_attributes_json :: RoleResource s -> TF.Attribute s Text)
+        lens (_default_attributes_json :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _default_attributes_json = a } :: RoleResource s)
 
 instance P.HasDescription (RoleResource s) s Text where
     description =
-        lens (_description :: RoleResource s -> TF.Attribute s Text)
+        lens (_description :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: RoleResource s)
 
 instance P.HasName (RoleResource s) s Text where
     name =
-        lens (_name :: RoleResource s -> TF.Attribute s Text)
+        lens (_name :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RoleResource s)
 
 instance P.HasOverrideAttributesJson (RoleResource s) s Text where
     overrideAttributesJson =
-        lens (_override_attributes_json :: RoleResource s -> TF.Attribute s Text)
+        lens (_override_attributes_json :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _override_attributes_json = a } :: RoleResource s)
 
 instance P.HasRunList (RoleResource s) s Text where
     runList =
-        lens (_run_list :: RoleResource s -> TF.Attribute s Text)
+        lens (_run_list :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _run_list = a } :: RoleResource s)
 
 

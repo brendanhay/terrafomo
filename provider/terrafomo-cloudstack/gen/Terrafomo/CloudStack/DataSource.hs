@@ -70,26 +70,26 @@ import qualified Terrafomo.Schema    as TF
 Use this datasource to get the ID of a template for use in other resources.
 -}
 data TemplateData s = TemplateData {
-      _filter          :: !(TF.Attribute s Text)
+      _filter          :: !(TF.Attr s Text)
     {- ^ (Required) One or more name/value pairs to filter off of. You can apply filters on any exported attributes. -}
-    , _template_filter :: !(TF.Attribute s Text)
+    , _template_filter :: !(TF.Attr s Text)
     {- ^ (Required) The template filter. Possible values are @featured@ , @self@ , @selfexecutable@ , @sharedexecutable@ , @executable@ and @community@ (see the Cloudstack API listTemplate command documentation). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (TemplateData s) where
-    toHCL TemplateData{..} = TF.block $ catMaybes
+    toHCL TemplateData{..} = TF.inline $ catMaybes
         [ TF.attribute "filter" _filter
         , TF.attribute "template_filter" _template_filter
         ]
 
 instance P.HasFilter (TemplateData s) s Text where
     filter =
-        lens (_filter :: TemplateData s -> TF.Attribute s Text)
+        lens (_filter :: TemplateData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: TemplateData s)
 
 instance P.HasTemplateFilter (TemplateData s) s Text where
     templateFilter =
-        lens (_template_filter :: TemplateData s -> TF.Attribute s Text)
+        lens (_template_filter :: TemplateData s -> TF.Attr s Text)
              (\s a -> s { _template_filter = a } :: TemplateData s)
 
 instance P.HasComputedAccount (TemplateData s) Text

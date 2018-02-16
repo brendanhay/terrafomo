@@ -63,18 +63,18 @@ Use this data source to get information about a specific user within
 OpsGenie.
 -}
 data UserData s = UserData {
-      _username :: !(TF.Attribute s Text)
+      _username :: !(TF.Attr s Text)
     {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserData s) where
-    toHCL UserData{..} = TF.block $ catMaybes
+    toHCL UserData{..} = TF.inline $ catMaybes
         [ TF.attribute "username" _username
         ]
 
 instance P.HasUsername (UserData s) s Text where
     username =
-        lens (_username :: UserData s -> TF.Attribute s Text)
+        lens (_username :: UserData s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserData s)
 
 instance P.HasComputedFullName (UserData s) Text

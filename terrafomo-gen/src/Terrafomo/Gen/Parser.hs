@@ -108,8 +108,7 @@ schemaParser rules = do
 
     -- example usage
 --    schemaExamples <- catMaybes <$> example
-    let schemaExamples   = mempty
-        schemaDeprecated = False
+    let schemaDeprecated = False
 
     -- skip any non-headers
     P.skipManyTill node
@@ -168,6 +167,7 @@ argItem rules = item >>> paragraph >>> argument
                     arg { argName     = pure name
                         , argHelp     = pure "(Optional) See datatype documentation."
                         , argRequired = False
+                        , argRepeated = False
                         , argIgnored  = False
                         , argType     = pure ("P." <> dataTypeName x <> "Type")
                         }
@@ -183,6 +183,7 @@ argItem rules = item >>> paragraph >>> argument
             Arg { argName     = pure mempty
                 , argHelp     = pure h'
                 , argRequired = require
+                , argRepeated = False
                 , argIgnored  = deprecate
                 , argType     = guessType rules name
                 }

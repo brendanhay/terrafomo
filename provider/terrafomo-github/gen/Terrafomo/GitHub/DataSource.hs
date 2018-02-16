@@ -87,18 +87,18 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to retrieve information about a Github team.
 -}
 data TeamData s = TeamData {
-      _slug :: !(TF.Attribute s Text)
+      _slug :: !(TF.Attr s Text)
     {- ^ (Required) The team slug. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (TeamData s) where
-    toHCL TeamData{..} = TF.block $ catMaybes
+    toHCL TeamData{..} = TF.inline $ catMaybes
         [ TF.attribute "slug" _slug
         ]
 
 instance P.HasSlug (TeamData s) s Text where
     slug =
-        lens (_slug :: TeamData s -> TF.Attribute s Text)
+        lens (_slug :: TeamData s -> TF.Attr s Text)
              (\s a -> s { _slug = a } :: TeamData s)
 
 instance P.HasComputedDescription (TeamData s) Text
@@ -120,18 +120,18 @@ teamData =
 Use this data source to retrieve information about a Github user.
 -}
 data UserData s = UserData {
-      _username :: !(TF.Attribute s Text)
+      _username :: !(TF.Attr s Text)
     {- ^ (Required) The username. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserData s) where
-    toHCL UserData{..} = TF.block $ catMaybes
+    toHCL UserData{..} = TF.inline $ catMaybes
         [ TF.attribute "username" _username
         ]
 
 instance P.HasUsername (UserData s) s Text where
     username =
-        lens (_username :: UserData s -> TF.Attribute s Text)
+        lens (_username :: UserData s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserData s)
 
 instance P.HasComputedAvatarUrl (UserData s) Text

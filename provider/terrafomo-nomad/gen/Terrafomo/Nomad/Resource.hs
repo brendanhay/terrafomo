@@ -74,16 +74,16 @@ import qualified Terrafomo.Schema    as TF
 Manages an ACL policy registered in Nomad.
 -}
 data AclPolicyResource s = AclPolicyResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^  @(string: "")@ - A description of the policy. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^  @(string: <required>)@ - A unique name for the policy. -}
-    , _rules_hcl   :: !(TF.Attribute s Text)
+    , _rules_hcl   :: !(TF.Attr s Text)
     {- ^  @(string: <required>)@ - The contents of the policy to register, as HCL or JSON. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AclPolicyResource s) where
-    toHCL AclPolicyResource{..} = TF.block $ catMaybes
+    toHCL AclPolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         , TF.attribute "rules_hcl" _rules_hcl
@@ -91,17 +91,17 @@ instance TF.ToHCL (AclPolicyResource s) where
 
 instance P.HasDescription (AclPolicyResource s) s Text where
     description =
-        lens (_description :: AclPolicyResource s -> TF.Attribute s Text)
+        lens (_description :: AclPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: AclPolicyResource s)
 
 instance P.HasName (AclPolicyResource s) s Text where
     name =
-        lens (_name :: AclPolicyResource s -> TF.Attribute s Text)
+        lens (_name :: AclPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AclPolicyResource s)
 
 instance P.HasRulesHcl (AclPolicyResource s) s Text where
     rulesHcl =
-        lens (_rules_hcl :: AclPolicyResource s -> TF.Attribute s Text)
+        lens (_rules_hcl :: AclPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
 
 
@@ -121,18 +121,18 @@ tokens it creates in Terraform's state file. Take care to
 </docs/state/sensitive-data.html> .
 -}
 data AclTokenResource s = AclTokenResource {
-      _global   :: !(TF.Attribute s Text)
+      _global   :: !(TF.Attr s Text)
     {- ^  @(bool: false)@ - Whether the token should be replicated to all regions, or if it will only be used in the region it was created in. -}
-    , _name     :: !(TF.Attribute s Text)
+    , _name     :: !(TF.Attr s Text)
     {- ^  @(string: "")@ - A human-friendly name for this token. -}
-    , _policies :: !(TF.Attribute s Text)
+    , _policies :: !(TF.Attr s Text)
     {- ^  @(set: [])@ - A set of policy names to associate with this token. Must be set on @client@ -type tokens, must not be set on @management@ -type tokens. Policies do not need to exist before being used here. -}
-    , _type'    :: !(TF.Attribute s Text)
+    , _type'    :: !(TF.Attr s Text)
     {- ^  @(string: <required>)@ - The type of token this is. Use @client@ for tokens that will have policies associated with them. Use @management@ for tokens that can perform any action. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AclTokenResource s) where
-    toHCL AclTokenResource{..} = TF.block $ catMaybes
+    toHCL AclTokenResource{..} = TF.inline $ catMaybes
         [ TF.attribute "global" _global
         , TF.attribute "name" _name
         , TF.attribute "policies" _policies
@@ -141,22 +141,22 @@ instance TF.ToHCL (AclTokenResource s) where
 
 instance P.HasGlobal (AclTokenResource s) s Text where
     global =
-        lens (_global :: AclTokenResource s -> TF.Attribute s Text)
+        lens (_global :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _global = a } :: AclTokenResource s)
 
 instance P.HasName (AclTokenResource s) s Text where
     name =
-        lens (_name :: AclTokenResource s -> TF.Attribute s Text)
+        lens (_name :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AclTokenResource s)
 
 instance P.HasPolicies (AclTokenResource s) s Text where
     policies =
-        lens (_policies :: AclTokenResource s -> TF.Attribute s Text)
+        lens (_policies :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _policies = a } :: AclTokenResource s)
 
 instance P.HasType' (AclTokenResource s) s Text where
     type' =
-        lens (_type' :: AclTokenResource s -> TF.Attribute s Text)
+        lens (_type' :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: AclTokenResource s)
 
 
@@ -181,16 +181,16 @@ creation. This resource is ideal for the latter type of job, but can be used
 to manage any job within Nomad.
 -}
 data JobResource s = JobResource {
-      _deregister_on_destroy   :: !(TF.Attribute s Text)
+      _deregister_on_destroy   :: !(TF.Attr s Text)
     {- ^  @(bool: true)@ - Determines if the job will be deregistered when this resource is destroyed in Terraform. -}
-    , _deregister_on_id_change :: !(TF.Attribute s Text)
+    , _deregister_on_id_change :: !(TF.Attr s Text)
     {- ^  @(bool: true)@ - Determines if the job will be deregistered if the ID of the job in the jobspec changes. -}
-    , _jobspec                 :: !(TF.Attribute s Text)
+    , _jobspec                 :: !(TF.Attr s Text)
     {- ^  @(string: <required>)@ - The contents of the jobspec to register. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (JobResource s) where
-    toHCL JobResource{..} = TF.block $ catMaybes
+    toHCL JobResource{..} = TF.inline $ catMaybes
         [ TF.attribute "deregister_on_destroy" _deregister_on_destroy
         , TF.attribute "deregister_on_id_change" _deregister_on_id_change
         , TF.attribute "jobspec" _jobspec
@@ -198,17 +198,17 @@ instance TF.ToHCL (JobResource s) where
 
 instance P.HasDeregisterOnDestroy (JobResource s) s Text where
     deregisterOnDestroy =
-        lens (_deregister_on_destroy :: JobResource s -> TF.Attribute s Text)
+        lens (_deregister_on_destroy :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _deregister_on_destroy = a } :: JobResource s)
 
 instance P.HasDeregisterOnIdChange (JobResource s) s Text where
     deregisterOnIdChange =
-        lens (_deregister_on_id_change :: JobResource s -> TF.Attribute s Text)
+        lens (_deregister_on_id_change :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _deregister_on_id_change = a } :: JobResource s)
 
 instance P.HasJobspec (JobResource s) s Text where
     jobspec =
-        lens (_jobspec :: JobResource s -> TF.Attribute s Text)
+        lens (_jobspec :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _jobspec = a } :: JobResource s)
 
 

@@ -66,18 +66,18 @@ blocks in Packet. You can then use the cidrsubnet TF builtin function to
 derive subnets.
 -}
 data PrecreatedIpBlockData s = PrecreatedIpBlockData {
-      _address_family :: !(TF.Attribute s Text)
+      _address_family :: !(TF.Attr s Text)
     {- ^ (Required) 4 or 6, depending on which block you are looking for. -}
-    , _facility       :: !(TF.Attribute s Text)
+    , _facility       :: !(TF.Attr s Text)
     {- ^ (Required) Facility of the searched block. -}
-    , _project_id     :: !(TF.Attribute s Text)
+    , _project_id     :: !(TF.Attr s Text)
     {- ^ (Required) ID of the project where the searched block should be. -}
-    , _public         :: !(TF.Attribute s Text)
+    , _public         :: !(TF.Attr s Text)
     {- ^ (Required) Whether to look for public or private block. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PrecreatedIpBlockData s) where
-    toHCL PrecreatedIpBlockData{..} = TF.block $ catMaybes
+    toHCL PrecreatedIpBlockData{..} = TF.inline $ catMaybes
         [ TF.attribute "address_family" _address_family
         , TF.attribute "facility" _facility
         , TF.attribute "project_id" _project_id
@@ -86,22 +86,22 @@ instance TF.ToHCL (PrecreatedIpBlockData s) where
 
 instance P.HasAddressFamily (PrecreatedIpBlockData s) s Text where
     addressFamily =
-        lens (_address_family :: PrecreatedIpBlockData s -> TF.Attribute s Text)
+        lens (_address_family :: PrecreatedIpBlockData s -> TF.Attr s Text)
              (\s a -> s { _address_family = a } :: PrecreatedIpBlockData s)
 
 instance P.HasFacility (PrecreatedIpBlockData s) s Text where
     facility =
-        lens (_facility :: PrecreatedIpBlockData s -> TF.Attribute s Text)
+        lens (_facility :: PrecreatedIpBlockData s -> TF.Attr s Text)
              (\s a -> s { _facility = a } :: PrecreatedIpBlockData s)
 
 instance P.HasProjectId (PrecreatedIpBlockData s) s Text where
     projectId =
-        lens (_project_id :: PrecreatedIpBlockData s -> TF.Attribute s Text)
+        lens (_project_id :: PrecreatedIpBlockData s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: PrecreatedIpBlockData s)
 
 instance P.HasPublic (PrecreatedIpBlockData s) s Text where
     public =
-        lens (_public :: PrecreatedIpBlockData s -> TF.Attribute s Text)
+        lens (_public :: PrecreatedIpBlockData s -> TF.Attr s Text)
              (\s a -> s { _public = a } :: PrecreatedIpBlockData s)
 
 instance P.HasComputedCidrNotation (PrecreatedIpBlockData s) Text

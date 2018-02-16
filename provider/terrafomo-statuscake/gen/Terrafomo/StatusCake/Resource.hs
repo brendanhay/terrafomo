@@ -70,30 +70,30 @@ import qualified Terrafomo.Schema    as TF
 The test resource allows StatusCake tests to be managed by Terraform.
 -}
 data TestResource s = TestResource {
-      _check_rate    :: !(TF.Attribute s Text)
+      _check_rate    :: !(TF.Attr s Text)
     {- ^ (Optional) Test check rate in seconds. Defaults to 300 -}
-    , _confirmations :: !(TF.Attribute s Text)
+    , _confirmations :: !(TF.Attr s Text)
     {- ^ (Optional) The number of confirmation servers to use in order to detect downtime. Defaults to 0. -}
-    , _contact_id    :: !(TF.Attribute s Text)
+    , _contact_id    :: !(TF.Attr s Text)
     {- ^ (Optional) The id of the contact group to be add to the test.  Each test can have only one. -}
-    , _paused        :: !(TF.Attribute s Text)
+    , _paused        :: !(TF.Attr s Text)
     {- ^ (Optional) Whether or not the test is paused. Defaults to false. -}
-    , _port          :: !(TF.Attribute s Text)
+    , _port          :: !(TF.Attr s Text)
     {- ^ (Optional) The port to use when specifying a TCP test. -}
-    , _test_type     :: !(TF.Attribute s Text)
+    , _test_type     :: !(TF.Attr s Text)
     {- ^ (Required) The type of Test. Either HTTP or TCP -}
-    , _timeout       :: !(TF.Attribute s Text)
+    , _timeout       :: !(TF.Attr s Text)
     {- ^ (Optional) The timeout of the test in seconds. -}
-    , _trigger_rate  :: !(TF.Attribute s Text)
+    , _trigger_rate  :: !(TF.Attr s Text)
     {- ^ (Optional) The number of minutes to wait before sending an alert. Default is @5@ . -}
-    , _website_name  :: !(TF.Attribute s Text)
+    , _website_name  :: !(TF.Attr s Text)
     {- ^ (Required) This is the name of the test and the website to be monitored. -}
-    , _website_url   :: !(TF.Attribute s Text)
+    , _website_url   :: !(TF.Attr s Text)
     {- ^ (Required) The URL of the website to be monitored -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (TestResource s) where
-    toHCL TestResource{..} = TF.block $ catMaybes
+    toHCL TestResource{..} = TF.inline $ catMaybes
         [ TF.attribute "check_rate" _check_rate
         , TF.attribute "confirmations" _confirmations
         , TF.attribute "contact_id" _contact_id
@@ -108,52 +108,52 @@ instance TF.ToHCL (TestResource s) where
 
 instance P.HasCheckRate (TestResource s) s Text where
     checkRate =
-        lens (_check_rate :: TestResource s -> TF.Attribute s Text)
+        lens (_check_rate :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _check_rate = a } :: TestResource s)
 
 instance P.HasConfirmations (TestResource s) s Text where
     confirmations =
-        lens (_confirmations :: TestResource s -> TF.Attribute s Text)
+        lens (_confirmations :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _confirmations = a } :: TestResource s)
 
 instance P.HasContactId (TestResource s) s Text where
     contactId =
-        lens (_contact_id :: TestResource s -> TF.Attribute s Text)
+        lens (_contact_id :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _contact_id = a } :: TestResource s)
 
 instance P.HasPaused (TestResource s) s Text where
     paused =
-        lens (_paused :: TestResource s -> TF.Attribute s Text)
+        lens (_paused :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _paused = a } :: TestResource s)
 
 instance P.HasPort (TestResource s) s Text where
     port =
-        lens (_port :: TestResource s -> TF.Attribute s Text)
+        lens (_port :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: TestResource s)
 
 instance P.HasTestType (TestResource s) s Text where
     testType =
-        lens (_test_type :: TestResource s -> TF.Attribute s Text)
+        lens (_test_type :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _test_type = a } :: TestResource s)
 
 instance P.HasTimeout (TestResource s) s Text where
     timeout =
-        lens (_timeout :: TestResource s -> TF.Attribute s Text)
+        lens (_timeout :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _timeout = a } :: TestResource s)
 
 instance P.HasTriggerRate (TestResource s) s Text where
     triggerRate =
-        lens (_trigger_rate :: TestResource s -> TF.Attribute s Text)
+        lens (_trigger_rate :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _trigger_rate = a } :: TestResource s)
 
 instance P.HasWebsiteName (TestResource s) s Text where
     websiteName =
-        lens (_website_name :: TestResource s -> TF.Attribute s Text)
+        lens (_website_name :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _website_name = a } :: TestResource s)
 
 instance P.HasWebsiteUrl (TestResource s) s Text where
     websiteUrl =
-        lens (_website_url :: TestResource s -> TF.Attribute s Text)
+        lens (_website_url :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _website_url = a } :: TestResource s)
 
 instance P.HasComputedTestId (TestResource s) Text

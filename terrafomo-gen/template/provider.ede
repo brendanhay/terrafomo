@@ -37,8 +37,8 @@ import qualified {{ import.value }} as P
 {% endfor %}
 import qualified Terrafomo.IP as P
 
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
+import qualified Terrafomo.HCL      as TF
+import qualified Terrafomo.Name     as TF
 import qualified Terrafomo.Provider as TF
 
 {- | {{ provider.name }} Terraform provider.
@@ -46,18 +46,6 @@ import qualified Terrafomo.Provider as TF
 
 {{ schema.about | wrap }}
 {% endif %}
-{% for example in schema.examples %}
-
-{% if example.value.title %}
-{{ example.value.title }}
-
-{% endif %}
-@
-{% for line in example.value.code %}
-{{ line.value }}
-{% endfor %}
-@
-{% endfor %}
 -}
 data {{ provider.name }} = {{ provider.name }} {
   {% for arg in schema.arguments %}

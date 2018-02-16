@@ -109,22 +109,22 @@ Manages a CLC server group. Either provisions or resolves to an existing
 group. See also <https://www.ctl.io/api-docs/v2/#groups> .
 -}
 data GroupResource s = GroupResource {
-      _custom_fields   :: !(TF.Attribute s Text)
+      _custom_fields   :: !(TF.Attr s Text)
     {- ^ (Optional) See <#custom_fields> below for details. -}
-    , _description     :: !(TF.Attribute s Text)
+    , _description     :: !(TF.Attr s Text)
     {- ^ (Optional, string) Description for server group (visible in control portal only) -}
-    , _location_id     :: !(TF.Attribute s Text)
+    , _location_id     :: !(TF.Attr s Text)
     {- ^ (Required, string) The datacenter location of both parent group and this group. Examples: "WA1", "VA1" -}
-    , _name            :: !(TF.Attribute s Text)
+    , _name            :: !(TF.Attr s Text)
     {- ^ (Required, string) The name (or GUID) of this server group. Will resolve to existing if present. -}
-    , _parent          :: !(TF.Attribute s Text)
+    , _parent          :: !(TF.Attr s Text)
     {- ^ (Required, string) The name or ID of the parent group. Will error if absent or unable to resolve. -}
-    , _parent_group_id :: !(TF.Attribute s Text)
+    , _parent_group_id :: !(TF.Attr s Text)
     {- ^ - (Computed) The ID of the parent group. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (GroupResource s) where
-    toHCL GroupResource{..} = TF.block $ catMaybes
+    toHCL GroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "custom_fields" _custom_fields
         , TF.attribute "description" _description
         , TF.attribute "location_id" _location_id
@@ -135,32 +135,32 @@ instance TF.ToHCL (GroupResource s) where
 
 instance P.HasCustomFields (GroupResource s) s Text where
     customFields =
-        lens (_custom_fields :: GroupResource s -> TF.Attribute s Text)
+        lens (_custom_fields :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _custom_fields = a } :: GroupResource s)
 
 instance P.HasDescription (GroupResource s) s Text where
     description =
-        lens (_description :: GroupResource s -> TF.Attribute s Text)
+        lens (_description :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: GroupResource s)
 
 instance P.HasLocationId (GroupResource s) s Text where
     locationId =
-        lens (_location_id :: GroupResource s -> TF.Attribute s Text)
+        lens (_location_id :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _location_id = a } :: GroupResource s)
 
 instance P.HasName (GroupResource s) s Text where
     name =
-        lens (_name :: GroupResource s -> TF.Attribute s Text)
+        lens (_name :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: GroupResource s)
 
 instance P.HasParent (GroupResource s) s Text where
     parent =
-        lens (_parent :: GroupResource s -> TF.Attribute s Text)
+        lens (_parent :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _parent = a } :: GroupResource s)
 
 instance P.HasParentGroupId (GroupResource s) s Text where
     parentGroupId =
-        lens (_parent_group_id :: GroupResource s -> TF.Attribute s Text)
+        lens (_parent_group_id :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _parent_group_id = a } :: GroupResource s)
 
 
@@ -183,22 +183,22 @@ Manages a CLC load balancer pool. Manage related frontend with
 <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
 -}
 data LoadBalancerPoolResource s = LoadBalancerPoolResource {
-      _data_center   :: !(TF.Attribute s Text)
+      _data_center   :: !(TF.Attr s Text)
     {- ^ (Required, string) The datacenter location for this pool. -}
-    , _load_balancer :: !(TF.Attribute s Text)
+    , _load_balancer :: !(TF.Attr s Text)
     {- ^ (Required, string) The id of the load balancer. -}
-    , _method        :: !(TF.Attribute s Text)
+    , _method        :: !(TF.Attr s Text)
     {- ^ (Optional, string) The configured balancing method. Either "roundRobin" (default) or "leastConnection". -}
-    , _nodes         :: !(TF.Attribute s Text)
+    , _nodes         :: !(TF.Attr s Text)
     {- ^ (Optional) See <#nodes> below for details. -}
-    , _persistence   :: !(TF.Attribute s Text)
+    , _persistence   :: !(TF.Attr s Text)
     {- ^ (Optional, string) The configured persistence method. Either "standard" (default) or "sticky". -}
-    , _port          :: !(TF.Attribute s Text)
+    , _port          :: !(TF.Attr s Text)
     {- ^ (Required, int) Either 80 or 443 -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LoadBalancerPoolResource s) where
-    toHCL LoadBalancerPoolResource{..} = TF.block $ catMaybes
+    toHCL LoadBalancerPoolResource{..} = TF.inline $ catMaybes
         [ TF.attribute "data_center" _data_center
         , TF.attribute "load_balancer" _load_balancer
         , TF.attribute "method" _method
@@ -209,32 +209,32 @@ instance TF.ToHCL (LoadBalancerPoolResource s) where
 
 instance P.HasDataCenter (LoadBalancerPoolResource s) s Text where
     dataCenter =
-        lens (_data_center :: LoadBalancerPoolResource s -> TF.Attribute s Text)
+        lens (_data_center :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _data_center = a } :: LoadBalancerPoolResource s)
 
 instance P.HasLoadBalancer (LoadBalancerPoolResource s) s Text where
     loadBalancer =
-        lens (_load_balancer :: LoadBalancerPoolResource s -> TF.Attribute s Text)
+        lens (_load_balancer :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _load_balancer = a } :: LoadBalancerPoolResource s)
 
 instance P.HasMethod (LoadBalancerPoolResource s) s Text where
     method =
-        lens (_method :: LoadBalancerPoolResource s -> TF.Attribute s Text)
+        lens (_method :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _method = a } :: LoadBalancerPoolResource s)
 
 instance P.HasNodes (LoadBalancerPoolResource s) s Text where
     nodes =
-        lens (_nodes :: LoadBalancerPoolResource s -> TF.Attribute s Text)
+        lens (_nodes :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _nodes = a } :: LoadBalancerPoolResource s)
 
 instance P.HasPersistence (LoadBalancerPoolResource s) s Text where
     persistence =
-        lens (_persistence :: LoadBalancerPoolResource s -> TF.Attribute s Text)
+        lens (_persistence :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _persistence = a } :: LoadBalancerPoolResource s)
 
 instance P.HasPort (LoadBalancerPoolResource s) s Text where
     port =
-        lens (_port :: LoadBalancerPoolResource s -> TF.Attribute s Text)
+        lens (_port :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
 
 
@@ -257,20 +257,20 @@ Manages a CLC load balancer. Manage connected backends with
 <https://www.ctl.io/api-docs/v2/#shared-load-balancer> .
 -}
 data LoadBalancerResource s = LoadBalancerResource {
-      _data_center :: !(TF.Attribute s Text)
+      _data_center :: !(TF.Attr s Text)
     {- ^ (Required, string) The datacenter location of both parent group and this group. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional, string) Description for server group (visible in control portal only) -}
-    , _ip_address  :: !(TF.Attribute s Text)
+    , _ip_address  :: !(TF.Attr s Text)
     {- ^ - (Computed) The IP of the load balancer. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required, string) The name of the load balancer. -}
-    , _status      :: !(TF.Attribute s Text)
+    , _status      :: !(TF.Attr s Text)
     {- ^ (Required, string) Either "enabled" or "disabled" -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LoadBalancerResource s) where
-    toHCL LoadBalancerResource{..} = TF.block $ catMaybes
+    toHCL LoadBalancerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "data_center" _data_center
         , TF.attribute "description" _description
         , TF.attribute "ip_address" _ip_address
@@ -280,27 +280,27 @@ instance TF.ToHCL (LoadBalancerResource s) where
 
 instance P.HasDataCenter (LoadBalancerResource s) s Text where
     dataCenter =
-        lens (_data_center :: LoadBalancerResource s -> TF.Attribute s Text)
+        lens (_data_center :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _data_center = a } :: LoadBalancerResource s)
 
 instance P.HasDescription (LoadBalancerResource s) s Text where
     description =
-        lens (_description :: LoadBalancerResource s -> TF.Attribute s Text)
+        lens (_description :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: LoadBalancerResource s)
 
 instance P.HasIpAddress (LoadBalancerResource s) s Text where
     ipAddress =
-        lens (_ip_address :: LoadBalancerResource s -> TF.Attribute s Text)
+        lens (_ip_address :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: LoadBalancerResource s)
 
 instance P.HasName (LoadBalancerResource s) s Text where
     name =
-        lens (_name :: LoadBalancerResource s -> TF.Attribute s Text)
+        lens (_name :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LoadBalancerResource s)
 
 instance P.HasStatus (LoadBalancerResource s) s Text where
     status =
-        lens (_status :: LoadBalancerResource s -> TF.Attribute s Text)
+        lens (_status :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: LoadBalancerResource s)
 
 
@@ -321,18 +321,18 @@ Manages a CLC public ip (for an existing server). See also
 <https://www.ctl.io/api-docs/v2/#public-ip> .
 -}
 data PublicIpResource s = PublicIpResource {
-      _internal_ip_address :: !(TF.Attribute s Text)
+      _internal_ip_address :: !(TF.Attr s Text)
     {- ^ (Required, string) The internal IP of the NIC to attach to. If not provided, a new internal NIC will be provisioned and used. -}
-    , _ports               :: !(TF.Attribute s Text)
+    , _ports               :: !(TF.Attr s Text)
     {- ^ (Optional) See <#ports> below for details. -}
-    , _server_id           :: !(TF.Attribute s Text)
+    , _server_id           :: !(TF.Attr s Text)
     {- ^ (Required, string) The name or ID of the server to bind IP to. -}
-    , _source_restrictions :: !(TF.Attribute s Text)
+    , _source_restrictions :: !(TF.Attr s Text)
     {- ^ (Optional) See <#source_restrictions> below for details. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PublicIpResource s) where
-    toHCL PublicIpResource{..} = TF.block $ catMaybes
+    toHCL PublicIpResource{..} = TF.inline $ catMaybes
         [ TF.attribute "internal_ip_address" _internal_ip_address
         , TF.attribute "ports" _ports
         , TF.attribute "server_id" _server_id
@@ -341,22 +341,22 @@ instance TF.ToHCL (PublicIpResource s) where
 
 instance P.HasInternalIpAddress (PublicIpResource s) s Text where
     internalIpAddress =
-        lens (_internal_ip_address :: PublicIpResource s -> TF.Attribute s Text)
+        lens (_internal_ip_address :: PublicIpResource s -> TF.Attr s Text)
              (\s a -> s { _internal_ip_address = a } :: PublicIpResource s)
 
 instance P.HasPorts (PublicIpResource s) s Text where
     ports =
-        lens (_ports :: PublicIpResource s -> TF.Attribute s Text)
+        lens (_ports :: PublicIpResource s -> TF.Attr s Text)
              (\s a -> s { _ports = a } :: PublicIpResource s)
 
 instance P.HasServerId (PublicIpResource s) s Text where
     serverId =
-        lens (_server_id :: PublicIpResource s -> TF.Attribute s Text)
+        lens (_server_id :: PublicIpResource s -> TF.Attr s Text)
              (\s a -> s { _server_id = a } :: PublicIpResource s)
 
 instance P.HasSourceRestrictions (PublicIpResource s) s Text where
     sourceRestrictions =
-        lens (_source_restrictions :: PublicIpResource s -> TF.Attribute s Text)
+        lens (_source_restrictions :: PublicIpResource s -> TF.Attr s Text)
              (\s a -> s { _source_restrictions = a } :: PublicIpResource s)
 
 
@@ -375,54 +375,54 @@ publicIpResource =
 Manages a CLC server. Resources and Documentation:
 -}
 data ServerResource s = ServerResource {
-      _aa_policy_id       :: !(TF.Attribute s Text)
+      _aa_policy_id       :: !(TF.Attr s Text)
     {- ^ (Optional, string | hyperscale) Anti-Affinity policy ID -}
-    , _additional_disks   :: !(TF.Attribute s Text)
+    , _additional_disks   :: !(TF.Attr s Text)
     {- ^ (Optional) See <#disks> below for details. -}
-    , _configuration_id   :: !(TF.Attribute s Text)
+    , _configuration_id   :: !(TF.Attr s Text)
     {- ^ (Optional, string | bareMetal) Hardware configuration ID -}
-    , _cpu                :: !(TF.Attribute s Text)
+    , _cpu                :: !(TF.Attr s Text)
     {- ^ (Required, int) The number of virtual cores -}
-    , _created_dat        :: !(TF.Attribute s Text)
+    , _created_dat        :: !(TF.Attr s Text)
     {- ^ - (Computed) The creation date of the server. -}
-    , _custom_fields      :: !(TF.Attribute s Text)
+    , _custom_fields      :: !(TF.Attr s Text)
     {- ^ (Optional) See <#custom_fields> below for details. -}
-    , _description        :: !(TF.Attribute s Text)
+    , _description        :: !(TF.Attr s Text)
     {- ^ (Optional, string) Description for server (visible in control portal only) -}
-    , _group_id           :: !(TF.Attribute s Text)
+    , _group_id           :: !(TF.Attr s Text)
     {- ^ (Required, string) The name or ID of the server group to spawn server into. -}
-    , _memory_mb          :: !(TF.Attribute s Text)
+    , _memory_mb          :: !(TF.Attr s Text)
     {- ^ (Required, int) Provisioned RAM -}
-    , _metadata           :: !(TF.Attribute s Text)
+    , _metadata           :: !(TF.Attr s Text)
     {- ^ (Optional) Misc state storage for non-CLC metadata. -}
-    , _modified_dat       :: !(TF.Attribute s Text)
+    , _modified_dat       :: !(TF.Attr s Text)
     {- ^ - (Computed) The last modification date of the server. -}
-    , _name               :: !(TF.Attribute s Text)
+    , _name               :: !(TF.Attr s Text)
     {- ^ - (Computed) the unique name of the server, as generated by the platform. -}
-    , _name_template      :: !(TF.Attribute s Text)
+    , _name_template      :: !(TF.Attr s Text)
     {- ^ (Required, string) The basename of the server. A unique name will be generated by the platform. -}
-    , _network_id         :: !(TF.Attribute s Text)
+    , _network_id         :: !(TF.Attr s Text)
     {- ^ (Optional, string) GUID of network to use. (Must be set up in advance from control portal.) When absent, the default network will be used. -}
-    , _os_type            :: !(TF.Attribute s Text)
+    , _os_type            :: !(TF.Attr s Text)
     {- ^ (Optional, string | bareMetal) Operating system to install. -}
-    , _password           :: !(TF.Attribute s Text)
+    , _password           :: !(TF.Attr s Text)
     {- ^ (Optional, string) The root/administrator password. Will be generated by platform if not provided. -}
-    , _power_state        :: !(TF.Attribute s Text)
+    , _power_state        :: !(TF.Attr s Text)
     {- ^ (Optional, string) See <#power_states> below for details. If absent, defaults to @started@ . -}
-    , _private_ip_address :: !(TF.Attribute s Text)
+    , _private_ip_address :: !(TF.Attr s Text)
     {- ^ (Optional, string) Set internal IP address. If absent, allocated and assigned from pool. -}
-    , _public_ip_address  :: !(TF.Attribute s Text)
+    , _public_ip_address  :: !(TF.Attr s Text)
     {- ^ - (Computed) The public IP address of the server. -}
-    , _source_server_id   :: !(TF.Attribute s Text)
+    , _source_server_id   :: !(TF.Attr s Text)
     {- ^ (Required, string) The name or ID of the base OS image. Examples: "ubuntu-14-64-template", "rhel-7-64-template", "win2012r2dtc-64" -}
-    , _storage_type       :: !(TF.Attribute s Text)
+    , _storage_type       :: !(TF.Attr s Text)
     {- ^ (Optional, string) Backup and replication strategy for disks. One of "standard", "premium" -}
-    , _type'              :: !(TF.Attribute s Text)
+    , _type'              :: !(TF.Attr s Text)
     {- ^ (Required, string) The virtualization type One of "standard", "hyperscale", "bareMetal" -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServerResource s) where
-    toHCL ServerResource{..} = TF.block $ catMaybes
+    toHCL ServerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "aa_policy_id" _aa_policy_id
         , TF.attribute "additional_disks" _additional_disks
         , TF.attribute "configuration_id" _configuration_id
@@ -449,112 +449,112 @@ instance TF.ToHCL (ServerResource s) where
 
 instance P.HasAaPolicyId (ServerResource s) s Text where
     aaPolicyId =
-        lens (_aa_policy_id :: ServerResource s -> TF.Attribute s Text)
+        lens (_aa_policy_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _aa_policy_id = a } :: ServerResource s)
 
 instance P.HasAdditionalDisks (ServerResource s) s Text where
     additionalDisks =
-        lens (_additional_disks :: ServerResource s -> TF.Attribute s Text)
+        lens (_additional_disks :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _additional_disks = a } :: ServerResource s)
 
 instance P.HasConfigurationId (ServerResource s) s Text where
     configurationId =
-        lens (_configuration_id :: ServerResource s -> TF.Attribute s Text)
+        lens (_configuration_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _configuration_id = a } :: ServerResource s)
 
 instance P.HasCpu (ServerResource s) s Text where
     cpu =
-        lens (_cpu :: ServerResource s -> TF.Attribute s Text)
+        lens (_cpu :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _cpu = a } :: ServerResource s)
 
 instance P.HasCreatedDat (ServerResource s) s Text where
     createdDat =
-        lens (_created_dat :: ServerResource s -> TF.Attribute s Text)
+        lens (_created_dat :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _created_dat = a } :: ServerResource s)
 
 instance P.HasCustomFields (ServerResource s) s Text where
     customFields =
-        lens (_custom_fields :: ServerResource s -> TF.Attribute s Text)
+        lens (_custom_fields :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _custom_fields = a } :: ServerResource s)
 
 instance P.HasDescription (ServerResource s) s Text where
     description =
-        lens (_description :: ServerResource s -> TF.Attribute s Text)
+        lens (_description :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ServerResource s)
 
 instance P.HasGroupId (ServerResource s) s Text where
     groupId =
-        lens (_group_id :: ServerResource s -> TF.Attribute s Text)
+        lens (_group_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _group_id = a } :: ServerResource s)
 
 instance P.HasMemoryMb (ServerResource s) s Text where
     memoryMb =
-        lens (_memory_mb :: ServerResource s -> TF.Attribute s Text)
+        lens (_memory_mb :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _memory_mb = a } :: ServerResource s)
 
 instance P.HasMetadata (ServerResource s) s Text where
     metadata =
-        lens (_metadata :: ServerResource s -> TF.Attribute s Text)
+        lens (_metadata :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ServerResource s)
 
 instance P.HasModifiedDat (ServerResource s) s Text where
     modifiedDat =
-        lens (_modified_dat :: ServerResource s -> TF.Attribute s Text)
+        lens (_modified_dat :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _modified_dat = a } :: ServerResource s)
 
 instance P.HasName (ServerResource s) s Text where
     name =
-        lens (_name :: ServerResource s -> TF.Attribute s Text)
+        lens (_name :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ServerResource s)
 
 instance P.HasNameTemplate (ServerResource s) s Text where
     nameTemplate =
-        lens (_name_template :: ServerResource s -> TF.Attribute s Text)
+        lens (_name_template :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _name_template = a } :: ServerResource s)
 
 instance P.HasNetworkId (ServerResource s) s Text where
     networkId =
-        lens (_network_id :: ServerResource s -> TF.Attribute s Text)
+        lens (_network_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: ServerResource s)
 
 instance P.HasOsType (ServerResource s) s Text where
     osType =
-        lens (_os_type :: ServerResource s -> TF.Attribute s Text)
+        lens (_os_type :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _os_type = a } :: ServerResource s)
 
 instance P.HasPassword (ServerResource s) s Text where
     password =
-        lens (_password :: ServerResource s -> TF.Attribute s Text)
+        lens (_password :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: ServerResource s)
 
 instance P.HasPowerState (ServerResource s) s Text where
     powerState =
-        lens (_power_state :: ServerResource s -> TF.Attribute s Text)
+        lens (_power_state :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _power_state = a } :: ServerResource s)
 
 instance P.HasPrivateIpAddress (ServerResource s) s Text where
     privateIpAddress =
-        lens (_private_ip_address :: ServerResource s -> TF.Attribute s Text)
+        lens (_private_ip_address :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _private_ip_address = a } :: ServerResource s)
 
 instance P.HasPublicIpAddress (ServerResource s) s Text where
     publicIpAddress =
-        lens (_public_ip_address :: ServerResource s -> TF.Attribute s Text)
+        lens (_public_ip_address :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _public_ip_address = a } :: ServerResource s)
 
 instance P.HasSourceServerId (ServerResource s) s Text where
     sourceServerId =
-        lens (_source_server_id :: ServerResource s -> TF.Attribute s Text)
+        lens (_source_server_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _source_server_id = a } :: ServerResource s)
 
 instance P.HasStorageType (ServerResource s) s Text where
     storageType =
-        lens (_storage_type :: ServerResource s -> TF.Attribute s Text)
+        lens (_storage_type :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _storage_type = a } :: ServerResource s)
 
 instance P.HasType' (ServerResource s) s Text where
     type' =
-        lens (_type' :: ServerResource s -> TF.Attribute s Text)
+        lens (_type' :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: ServerResource s)
 
 

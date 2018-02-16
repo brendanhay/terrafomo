@@ -137,9 +137,7 @@ dependencies = lens _schemaDependsOn (\s a -> s { _schemaDependsOn = a })
 
 -- | Helper for explicitly depending upon a ref.
 dependOn
-    :: Reference s a
+    :: Ref s a
     -> Schema l p b
     -> Schema l p b
-dependOn x =
-    Lens.over dependencies $
-        Set.insert (Dependency (referenceKey x))
+dependOn x = Lens.over dependencies $ Set.insert (Dependency (refKey x))

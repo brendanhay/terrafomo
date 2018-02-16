@@ -19,7 +19,6 @@ import Data.Text       (Text)
 
 import GHC.Generics (Generic)
 
-import Terrafomo.Gen.Example
 import Terrafomo.Gen.Text
 
 import qualified Data.Aeson         as JSON
@@ -93,7 +92,6 @@ getClasses =
 data Schema = Schema
     { schemaName       :: !(Last Text)
     , schemaAbout      :: !(Maybe Text)
-    , schemaExamples   :: ![Example]
     , schemaDeprecated :: !Bool
     , schemaArguments  :: !(Map Text Arg)
     , schemaAttributes :: !(Map Text Attr)
@@ -103,7 +101,6 @@ instance Semigroup Schema where
     (<>) parsed saved = Schema
         { schemaName       = schemaName     parsed
         , schemaAbout      = schemaAbout    parsed
-        , schemaExamples   = schemaExamples parsed
         , schemaDeprecated = on (||) schemaDeprecated parsed saved
         , schemaArguments  =
             on (Map.unionWith (<>)) schemaArguments  parsed saved
@@ -118,7 +115,6 @@ instance ToJSON Schema where
          in JSON.object
             [ "name"            .= schemaName
             , "about"           .= schemaAbout
-            , "examples"        .= schemaExamples
             , "deprecated"      .= schemaDeprecated
             , "arguments"       .= schemaArguments
             , "attributes"      .= schemaAttributes
@@ -130,7 +126,6 @@ instance FromJSON Schema where
     parseJSON = JSON.withObject "Schema" $ \o -> do
         schemaName       <- o .:? "name"       .!= mempty
         schemaAbout      <- o .:? "about"
-        schemaExamples   <- o .:? "examples"   .!= []
         schemaDeprecated <- o .:? "deprecated" .!= False
         schemaArguments  <- o .:? "arguments"  .!= mempty
         schemaAttributes <- o .:? "attributes" .!= mempty
@@ -149,6 +144,7 @@ data Arg = Arg
     { argName     :: !(Last Text)
     , argHelp     :: !(Last Text)
     , argRequired :: !Bool
+    , argRepeated :: !Bool
     , argIgnored  :: !Bool
     , argType     :: !(Last Text)
     } deriving (Show, Eq, Ord, Generic)
@@ -158,6 +154,7 @@ instance Semigroup Arg where
         { argName     = on (<>) argName     parsed saved
         , argHelp     = on (<>) argHelp     parsed saved
         , argRequired = on (||) argRequired parsed saved
+        , argRepeated = on (||) argRepeated parsed saved
         , argIgnored  = on (||) argIgnored  parsed saved
         , argType     = on (<>) argType     parsed saved
         }
@@ -170,8 +167,17 @@ instance FromJSON Arg where
         argName     <- o .:? "name"     .!= mempty
         argHelp     <- o .:? "help"     .!= mempty
         argRequired <- o .:? "required" .!= False
+        argRepeated <- o .:? "repeated" .!= False
         argIgnored  <- o .:? "ignored"  .!= False
-        argType     <- o .:? "type"     .!= mempty
+        argType'    <- o .:? "type"     .!= mempty
+
+        let argType = Last $ do
+                ty <- argType'
+                pure $!
+                    if argRepeated
+                        then ("[" <> ty <> "]")
+                        else ty
+
         pure Arg{..}
 
 -- > * `name` - documentation

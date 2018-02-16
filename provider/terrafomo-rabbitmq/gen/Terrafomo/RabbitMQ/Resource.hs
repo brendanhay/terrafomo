@@ -92,22 +92,22 @@ The @rabbitmq_binding@ resource creates and manages a binding relationship
 between a queue an exchange.
 -}
 data BindingResource s = BindingResource {
-      _arguments        :: !(TF.Attribute s Text)
+      _arguments        :: !(TF.Attr s Text)
     {- ^ (Optional) Additional key/value arguments for the binding. -}
-    , _destination      :: !(TF.Attribute s Text)
+    , _destination      :: !(TF.Attr s Text)
     {- ^ (Required) The destination queue or exchange. -}
-    , _destination_type :: !(TF.Attribute s Text)
+    , _destination_type :: !(TF.Attr s Text)
     {- ^ (Required) The type of destination (queue or exchange). -}
-    , _routing_key      :: !(TF.Attribute s Text)
+    , _routing_key      :: !(TF.Attr s Text)
     {- ^ (Optional) A routing key for the binding. -}
-    , _source           :: !(TF.Attribute s Text)
+    , _source           :: !(TF.Attr s Text)
     {- ^ (Required) The source exchange. -}
-    , _vhost            :: !(TF.Attribute s Text)
+    , _vhost            :: !(TF.Attr s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (BindingResource s) where
-    toHCL BindingResource{..} = TF.block $ catMaybes
+    toHCL BindingResource{..} = TF.inline $ catMaybes
         [ TF.attribute "arguments" _arguments
         , TF.attribute "destination" _destination
         , TF.attribute "destination_type" _destination_type
@@ -118,32 +118,32 @@ instance TF.ToHCL (BindingResource s) where
 
 instance P.HasArguments (BindingResource s) s Text where
     arguments =
-        lens (_arguments :: BindingResource s -> TF.Attribute s Text)
+        lens (_arguments :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _arguments = a } :: BindingResource s)
 
 instance P.HasDestination (BindingResource s) s Text where
     destination =
-        lens (_destination :: BindingResource s -> TF.Attribute s Text)
+        lens (_destination :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _destination = a } :: BindingResource s)
 
 instance P.HasDestinationType (BindingResource s) s Text where
     destinationType =
-        lens (_destination_type :: BindingResource s -> TF.Attribute s Text)
+        lens (_destination_type :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _destination_type = a } :: BindingResource s)
 
 instance P.HasRoutingKey (BindingResource s) s Text where
     routingKey =
-        lens (_routing_key :: BindingResource s -> TF.Attribute s Text)
+        lens (_routing_key :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _routing_key = a } :: BindingResource s)
 
 instance P.HasSource (BindingResource s) s Text where
     source =
-        lens (_source :: BindingResource s -> TF.Attribute s Text)
+        lens (_source :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _source = a } :: BindingResource s)
 
 instance P.HasVhost (BindingResource s) s Text where
     vhost =
-        lens (_vhost :: BindingResource s -> TF.Attribute s Text)
+        lens (_vhost :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: BindingResource s)
 
 instance P.HasComputedPropertiesKey (BindingResource s) Text
@@ -165,16 +165,16 @@ bindingResource =
 The @rabbitmq_exchange@ resource creates and manages an exchange.
 -}
 data ExchangeResource s = ExchangeResource {
-      _name     :: !(TF.Attribute s Text)
+      _name     :: !(TF.Attr s Text)
     {- ^ (Required) The name of the exchange. -}
-    , _settings :: !(TF.Attribute s Text)
+    , _settings :: !(TF.Attr s Text)
     {- ^ (Required) The settings of the exchange. The structure is described below. -}
-    , _vhost    :: !(TF.Attribute s Text)
+    , _vhost    :: !(TF.Attr s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ExchangeResource s) where
-    toHCL ExchangeResource{..} = TF.block $ catMaybes
+    toHCL ExchangeResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "settings" _settings
         , TF.attribute "vhost" _vhost
@@ -182,17 +182,17 @@ instance TF.ToHCL (ExchangeResource s) where
 
 instance P.HasName (ExchangeResource s) s Text where
     name =
-        lens (_name :: ExchangeResource s -> TF.Attribute s Text)
+        lens (_name :: ExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ExchangeResource s)
 
 instance P.HasSettings (ExchangeResource s) s Text where
     settings =
-        lens (_settings :: ExchangeResource s -> TF.Attribute s Text)
+        lens (_settings :: ExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _settings = a } :: ExchangeResource s)
 
 instance P.HasVhost (ExchangeResource s) s Text where
     vhost =
-        lens (_vhost :: ExchangeResource s -> TF.Attribute s Text)
+        lens (_vhost :: ExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: ExchangeResource s)
 
 
@@ -211,16 +211,16 @@ The @rabbitmq_permissions@ resource creates and manages a user's set of
 permissions.
 -}
 data PermissionsResource s = PermissionsResource {
-      _permissions :: !(TF.Attribute s Text)
+      _permissions :: !(TF.Attr s Text)
     {- ^ (Required) The settings of the permissions. The structure is described below. -}
-    , _user        :: !(TF.Attribute s Text)
+    , _user        :: !(TF.Attr s Text)
     {- ^ (Required) The user to apply the permissions to. -}
-    , _vhost       :: !(TF.Attribute s Text)
+    , _vhost       :: !(TF.Attr s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PermissionsResource s) where
-    toHCL PermissionsResource{..} = TF.block $ catMaybes
+    toHCL PermissionsResource{..} = TF.inline $ catMaybes
         [ TF.attribute "permissions" _permissions
         , TF.attribute "user" _user
         , TF.attribute "vhost" _vhost
@@ -228,17 +228,17 @@ instance TF.ToHCL (PermissionsResource s) where
 
 instance P.HasPermissions (PermissionsResource s) s Text where
     permissions =
-        lens (_permissions :: PermissionsResource s -> TF.Attribute s Text)
+        lens (_permissions :: PermissionsResource s -> TF.Attr s Text)
              (\s a -> s { _permissions = a } :: PermissionsResource s)
 
 instance P.HasUser (PermissionsResource s) s Text where
     user =
-        lens (_user :: PermissionsResource s -> TF.Attribute s Text)
+        lens (_user :: PermissionsResource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: PermissionsResource s)
 
 instance P.HasVhost (PermissionsResource s) s Text where
     vhost =
-        lens (_vhost :: PermissionsResource s -> TF.Attribute s Text)
+        lens (_vhost :: PermissionsResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: PermissionsResource s)
 
 
@@ -257,16 +257,16 @@ The @rabbitmq_policy@ resource creates and manages policies for exchanges
 and queues.
 -}
 data PolicyResource s = PolicyResource {
-      _name   :: !(TF.Attribute s Text)
+      _name   :: !(TF.Attr s Text)
     {- ^ (Required) The name of the policy. -}
-    , _policy :: !(TF.Attribute s Text)
+    , _policy :: !(TF.Attr s Text)
     {- ^ (Required) The settings of the policy. The structure is described below. -}
-    , _vhost  :: !(TF.Attribute s Text)
+    , _vhost  :: !(TF.Attr s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PolicyResource s) where
-    toHCL PolicyResource{..} = TF.block $ catMaybes
+    toHCL PolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "policy" _policy
         , TF.attribute "vhost" _vhost
@@ -274,17 +274,17 @@ instance TF.ToHCL (PolicyResource s) where
 
 instance P.HasName (PolicyResource s) s Text where
     name =
-        lens (_name :: PolicyResource s -> TF.Attribute s Text)
+        lens (_name :: PolicyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PolicyResource s)
 
 instance P.HasPolicy (PolicyResource s) s Text where
     policy =
-        lens (_policy :: PolicyResource s -> TF.Attribute s Text)
+        lens (_policy :: PolicyResource s -> TF.Attr s Text)
              (\s a -> s { _policy = a } :: PolicyResource s)
 
 instance P.HasVhost (PolicyResource s) s Text where
     vhost =
-        lens (_vhost :: PolicyResource s -> TF.Attribute s Text)
+        lens (_vhost :: PolicyResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: PolicyResource s)
 
 
@@ -302,16 +302,16 @@ policyResource =
 The @rabbitmq_queue@ resource creates and manages a queue.
 -}
 data QueueResource s = QueueResource {
-      _name     :: !(TF.Attribute s Text)
+      _name     :: !(TF.Attr s Text)
     {- ^ (Required) The name of the queue. -}
-    , _settings :: !(TF.Attribute s Text)
+    , _settings :: !(TF.Attr s Text)
     {- ^ (Required) The settings of the queue. The structure is described below. -}
-    , _vhost    :: !(TF.Attribute s Text)
+    , _vhost    :: !(TF.Attr s Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (QueueResource s) where
-    toHCL QueueResource{..} = TF.block $ catMaybes
+    toHCL QueueResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "settings" _settings
         , TF.attribute "vhost" _vhost
@@ -319,17 +319,17 @@ instance TF.ToHCL (QueueResource s) where
 
 instance P.HasName (QueueResource s) s Text where
     name =
-        lens (_name :: QueueResource s -> TF.Attribute s Text)
+        lens (_name :: QueueResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: QueueResource s)
 
 instance P.HasSettings (QueueResource s) s Text where
     settings =
-        lens (_settings :: QueueResource s -> TF.Attribute s Text)
+        lens (_settings :: QueueResource s -> TF.Attr s Text)
              (\s a -> s { _settings = a } :: QueueResource s)
 
 instance P.HasVhost (QueueResource s) s Text where
     vhost =
-        lens (_vhost :: QueueResource s -> TF.Attribute s Text)
+        lens (_vhost :: QueueResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: QueueResource s)
 
 
@@ -349,16 +349,16 @@ arguments including username and password will be stored in the raw state as
 plain-text. </docs/state/sensitive-data.html> .
 -}
 data UserResource s = UserResource {
-      _name     :: !(TF.Attribute s Text)
+      _name     :: !(TF.Attr s Text)
     {- ^ (Required) The name of the user. -}
-    , _password :: !(TF.Attribute s Text)
+    , _password :: !(TF.Attr s Text)
     {- ^ (Required) The password of the user. The value of this argument is plain-text so make sure to secure where this is defined. -}
-    , _tags     :: !(TF.Attribute s Text)
+    , _tags     :: !(TF.Attr s Text)
     {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.block $ catMaybes
+    toHCL UserResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "password" _password
         , TF.attribute "tags" _tags
@@ -366,17 +366,17 @@ instance TF.ToHCL (UserResource s) where
 
 instance P.HasName (UserResource s) s Text where
     name =
-        lens (_name :: UserResource s -> TF.Attribute s Text)
+        lens (_name :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasPassword (UserResource s) s Text where
     password =
-        lens (_password :: UserResource s -> TF.Attribute s Text)
+        lens (_password :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: UserResource s)
 
 instance P.HasTags (UserResource s) s Text where
     tags =
-        lens (_tags :: UserResource s -> TF.Attribute s Text)
+        lens (_tags :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: UserResource s)
 
 
@@ -394,18 +394,18 @@ userResource =
 The @rabbitmq_vhost@ resource creates and manages a vhost.
 -}
 data VhostResource s = VhostResource {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the vhost. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VhostResource s) where
-    toHCL VhostResource{..} = TF.block $ catMaybes
+    toHCL VhostResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (VhostResource s) s Text where
     name =
-        lens (_name :: VhostResource s -> TF.Attribute s Text)
+        lens (_name :: VhostResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VhostResource s)
 
 

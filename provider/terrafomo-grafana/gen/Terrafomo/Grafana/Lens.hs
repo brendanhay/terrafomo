@@ -52,103 +52,103 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 class HasAccessMode a s b | a -> s b where
-    accessMode :: Lens' a (TF.Attribute s b)
+    accessMode :: Lens' a (TF.Attr s b)
 
 instance HasAccessMode a s b => HasAccessMode (TF.Schema l p a) s b where
     accessMode = TF.configuration . accessMode
 
 class HasBasicAuthEnabled a s b | a -> s b where
-    basicAuthEnabled :: Lens' a (TF.Attribute s b)
+    basicAuthEnabled :: Lens' a (TF.Attr s b)
 
 instance HasBasicAuthEnabled a s b => HasBasicAuthEnabled (TF.Schema l p a) s b where
     basicAuthEnabled = TF.configuration . basicAuthEnabled
 
 class HasBasicAuthPassword a s b | a -> s b where
-    basicAuthPassword :: Lens' a (TF.Attribute s b)
+    basicAuthPassword :: Lens' a (TF.Attr s b)
 
 instance HasBasicAuthPassword a s b => HasBasicAuthPassword (TF.Schema l p a) s b where
     basicAuthPassword = TF.configuration . basicAuthPassword
 
 class HasBasicAuthUsername a s b | a -> s b where
-    basicAuthUsername :: Lens' a (TF.Attribute s b)
+    basicAuthUsername :: Lens' a (TF.Attr s b)
 
 instance HasBasicAuthUsername a s b => HasBasicAuthUsername (TF.Schema l p a) s b where
     basicAuthUsername = TF.configuration . basicAuthUsername
 
 class HasConfigJson a s b | a -> s b where
-    configJson :: Lens' a (TF.Attribute s b)
+    configJson :: Lens' a (TF.Attr s b)
 
 instance HasConfigJson a s b => HasConfigJson (TF.Schema l p a) s b where
     configJson = TF.configuration . configJson
 
 class HasDatabaseName a s b | a -> s b where
-    databaseName :: Lens' a (TF.Attribute s b)
+    databaseName :: Lens' a (TF.Attr s b)
 
 instance HasDatabaseName a s b => HasDatabaseName (TF.Schema l p a) s b where
     databaseName = TF.configuration . databaseName
 
 class HasIsDefault a s b | a -> s b where
-    isDefault :: Lens' a (TF.Attribute s b)
+    isDefault :: Lens' a (TF.Attr s b)
 
 instance HasIsDefault a s b => HasIsDefault (TF.Schema l p a) s b where
     isDefault = TF.configuration . isDefault
 
 class HasJsonData a s b | a -> s b where
-    jsonData :: Lens' a (TF.Attribute s b)
+    jsonData :: Lens' a (TF.Attr s b)
 
 instance HasJsonData a s b => HasJsonData (TF.Schema l p a) s b where
     jsonData = TF.configuration . jsonData
 
 class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
+    name :: Lens' a (TF.Attr s b)
 
 instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
+    password :: Lens' a (TF.Attr s b)
 
 instance HasPassword a s b => HasPassword (TF.Schema l p a) s b where
     password = TF.configuration . password
 
 class HasSecureJsonData a s b | a -> s b where
-    secureJsonData :: Lens' a (TF.Attribute s b)
+    secureJsonData :: Lens' a (TF.Attr s b)
 
 instance HasSecureJsonData a s b => HasSecureJsonData (TF.Schema l p a) s b where
     secureJsonData = TF.configuration . secureJsonData
 
 class HasSettings a s b | a -> s b where
-    settings :: Lens' a (TF.Attribute s b)
+    settings :: Lens' a (TF.Attr s b)
 
 instance HasSettings a s b => HasSettings (TF.Schema l p a) s b where
     settings = TF.configuration . settings
 
 class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
+    type' :: Lens' a (TF.Attr s b)
 
 instance HasType' a s b => HasType' (TF.Schema l p a) s b where
     type' = TF.configuration . type'
 
 class HasUrl a s b | a -> s b where
-    url :: Lens' a (TF.Attribute s b)
+    url :: Lens' a (TF.Attr s b)
 
 instance HasUrl a s b => HasUrl (TF.Schema l p a) s b where
     url = TF.configuration . url
 
 class HasUsername a s b | a -> s b where
-    username :: Lens' a (TF.Attribute s b)
+    username :: Lens' a (TF.Attr s b)
 
 instance HasUsername a s b => HasUsername (TF.Schema l p a) s b where
     username = TF.configuration . username
 
 class HasComputedId a b | a -> b where
     computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedId =
-        to (\x -> TF.computed (TF.referenceKey x) "id")
+        to (\x -> TF.compute (TF.refKey x) "id")
 
 class HasComputedSlug a b | a -> b where
     computedSlug
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedSlug =
-        to (\x -> TF.computed (TF.referenceKey x) "slug")
+        to (\x -> TF.compute (TF.refKey x) "slug")

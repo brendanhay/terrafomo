@@ -100,18 +100,18 @@ deleted. For additional details please refer to
 <https://developer.scaleway.com/#ips> .
 -}
 data IpResource s = IpResource {
-      _server :: !(TF.Attribute s Text)
+      _server :: !(TF.Attr s Text)
     {- ^ (Optional) ID of server to associate IP with -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IpResource s) where
-    toHCL IpResource{..} = TF.block $ catMaybes
+    toHCL IpResource{..} = TF.inline $ catMaybes
         [ TF.attribute "server" _server
         ]
 
 instance P.HasServer (IpResource s) s Text where
     server =
-        lens (_server :: IpResource s -> TF.Attribute s Text)
+        lens (_server :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _server = a } :: IpResource s)
 
 instance P.HasComputedId (IpResource s) Text
@@ -131,26 +131,26 @@ and deleted. For additional details please refer to
 <https://developer.scaleway.com/#security-groups> .
 -}
 data SecurityGroupResource s = SecurityGroupResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Required) description of security group -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) name of security group -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SecurityGroupResource s) where
-    toHCL SecurityGroupResource{..} = TF.block $ catMaybes
+    toHCL SecurityGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         ]
 
 instance P.HasDescription (SecurityGroupResource s) s Text where
     description =
-        lens (_description :: SecurityGroupResource s -> TF.Attribute s Text)
+        lens (_description :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: SecurityGroupResource s)
 
 instance P.HasName (SecurityGroupResource s) s Text where
     name =
-        lens (_name :: SecurityGroupResource s -> TF.Attribute s Text)
+        lens (_name :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SecurityGroupResource s)
 
 instance P.HasComputedId (SecurityGroupResource s) Text
@@ -170,22 +170,22 @@ created, updated and deleted. For additional details please refer to
 <https://developer.scaleway.com/#security-groups-manage-rules> .
 -}
 data SecurityGroupRuleResource s = SecurityGroupRuleResource {
-      _action         :: !(TF.Attribute s Text)
+      _action         :: !(TF.Attr s Text)
     {- ^ (Required) action of rule ( @accept@ , @drop@ ) -}
-    , _direction      :: !(TF.Attribute s Text)
+    , _direction      :: !(TF.Attr s Text)
     {- ^ (Required) direction of rule ( @inbound@ , @outbound@ ) -}
-    , _ip_range       :: !(TF.Attribute s Text)
+    , _ip_range       :: !(TF.Attr s Text)
     {- ^ (Required) ip_range of rule -}
-    , _port           :: !(TF.Attribute s Text)
+    , _port           :: !(TF.Attr s Text)
     {- ^ (Optional) port of the rule -}
-    , _protocol       :: !(TF.Attribute s Text)
+    , _protocol       :: !(TF.Attr s Text)
     {- ^ (Required) protocol of rule ( @ICMP@ , @TCP@ , @UDP@ ) -}
-    , _security_group :: !(TF.Attribute s Text)
+    , _security_group :: !(TF.Attr s Text)
     {- ^ (Required) the security group which should be associated with this rule -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SecurityGroupRuleResource s) where
-    toHCL SecurityGroupRuleResource{..} = TF.block $ catMaybes
+    toHCL SecurityGroupRuleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "action" _action
         , TF.attribute "direction" _direction
         , TF.attribute "ip_range" _ip_range
@@ -196,32 +196,32 @@ instance TF.ToHCL (SecurityGroupRuleResource s) where
 
 instance P.HasAction (SecurityGroupRuleResource s) s Text where
     action =
-        lens (_action :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_action :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _action = a } :: SecurityGroupRuleResource s)
 
 instance P.HasDirection (SecurityGroupRuleResource s) s Text where
     direction =
-        lens (_direction :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_direction :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _direction = a } :: SecurityGroupRuleResource s)
 
 instance P.HasIpRange (SecurityGroupRuleResource s) s Text where
     ipRange =
-        lens (_ip_range :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_ip_range :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ip_range = a } :: SecurityGroupRuleResource s)
 
 instance P.HasPort (SecurityGroupRuleResource s) s Text where
     port =
-        lens (_port :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_port :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: SecurityGroupRuleResource s)
 
 instance P.HasProtocol (SecurityGroupRuleResource s) s Text where
     protocol =
-        lens (_protocol :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_protocol :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroup (SecurityGroupRuleResource s) s Text where
     securityGroup =
-        lens (_security_group :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_security_group :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _security_group = a } :: SecurityGroupRuleResource s)
 
 instance P.HasComputedId (SecurityGroupRuleResource s) Text
@@ -245,34 +245,34 @@ For additional details please refer to
 <https://developer.scaleway.com/#servers> .
 -}
 data ServerResource s = ServerResource {
-      _bootscript          :: !(TF.Attribute s Text)
+      _bootscript          :: !(TF.Attr s Text)
     {- ^ (Optional) server bootscript -}
-    , _dynamic_ip_required :: !(TF.Attribute s Text)
+    , _dynamic_ip_required :: !(TF.Attr s Text)
     {- ^ (Optional) make server publicly available -}
-    , _enable_ipv6         :: !(TF.Attribute s Text)
+    , _enable_ipv6         :: !(TF.Attr s Text)
     {- ^ (Optional) enable ipv6 -}
-    , _image               :: !(TF.Attribute s Text)
+    , _image               :: !(TF.Attr s Text)
     {- ^ (Required) base image of server -}
-    , _name                :: !(TF.Attribute s Text)
+    , _name                :: !(TF.Attr s Text)
     {- ^ (Required) name of server -}
-    , _public_ipv6         :: !(TF.Attribute s Text)
+    , _public_ipv6         :: !(TF.Attr s Text)
     {- ^ - (Read Only) if @enable_ipv6@ is set this contains the ipv6 address of your instance -}
-    , _security_group      :: !(TF.Attribute s Text)
+    , _security_group      :: !(TF.Attr s Text)
     {- ^ (Optional) assign security group to server -}
-    , _state               :: !(TF.Attribute s Text)
+    , _state               :: !(TF.Attr s Text)
     {- ^ (Optional) allows you to define the desired state of your server. Valid values include ( @stopped@ , @running@ ) -}
-    , _state_detail        :: !(TF.Attribute s Text)
+    , _state_detail        :: !(TF.Attr s Text)
     {- ^ - (Read Only) contains details from the scaleway API the state of your instance -}
-    , _tags                :: !(TF.Attribute s Text)
+    , _tags                :: !(TF.Attr s Text)
     {- ^ (Optional) list of tags for server -}
-    , _type'               :: !(TF.Attribute s Text)
+    , _type'               :: !(TF.Attr s Text)
     {- ^ (Required) type of server -}
-    , _volume              :: !(TF.Attribute s Text)
+    , _volume              :: !(TF.Attr s Text)
     {- ^ (Optional) attach additional volumes to your instance (see below) -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServerResource s) where
-    toHCL ServerResource{..} = TF.block $ catMaybes
+    toHCL ServerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bootscript" _bootscript
         , TF.attribute "dynamic_ip_required" _dynamic_ip_required
         , TF.attribute "enable_ipv6" _enable_ipv6
@@ -289,62 +289,62 @@ instance TF.ToHCL (ServerResource s) where
 
 instance P.HasBootscript (ServerResource s) s Text where
     bootscript =
-        lens (_bootscript :: ServerResource s -> TF.Attribute s Text)
+        lens (_bootscript :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _bootscript = a } :: ServerResource s)
 
 instance P.HasDynamicIpRequired (ServerResource s) s Text where
     dynamicIpRequired =
-        lens (_dynamic_ip_required :: ServerResource s -> TF.Attribute s Text)
+        lens (_dynamic_ip_required :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _dynamic_ip_required = a } :: ServerResource s)
 
 instance P.HasEnableIpv6 (ServerResource s) s Text where
     enableIpv6 =
-        lens (_enable_ipv6 :: ServerResource s -> TF.Attribute s Text)
+        lens (_enable_ipv6 :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _enable_ipv6 = a } :: ServerResource s)
 
 instance P.HasImage (ServerResource s) s Text where
     image =
-        lens (_image :: ServerResource s -> TF.Attribute s Text)
+        lens (_image :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _image = a } :: ServerResource s)
 
 instance P.HasName (ServerResource s) s Text where
     name =
-        lens (_name :: ServerResource s -> TF.Attribute s Text)
+        lens (_name :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ServerResource s)
 
 instance P.HasPublicIpv6 (ServerResource s) s Text where
     publicIpv6 =
-        lens (_public_ipv6 :: ServerResource s -> TF.Attribute s Text)
+        lens (_public_ipv6 :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _public_ipv6 = a } :: ServerResource s)
 
 instance P.HasSecurityGroup (ServerResource s) s Text where
     securityGroup =
-        lens (_security_group :: ServerResource s -> TF.Attribute s Text)
+        lens (_security_group :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _security_group = a } :: ServerResource s)
 
 instance P.HasState (ServerResource s) s Text where
     state =
-        lens (_state :: ServerResource s -> TF.Attribute s Text)
+        lens (_state :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: ServerResource s)
 
 instance P.HasStateDetail (ServerResource s) s Text where
     stateDetail =
-        lens (_state_detail :: ServerResource s -> TF.Attribute s Text)
+        lens (_state_detail :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _state_detail = a } :: ServerResource s)
 
 instance P.HasTags (ServerResource s) s Text where
     tags =
-        lens (_tags :: ServerResource s -> TF.Attribute s Text)
+        lens (_tags :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ServerResource s)
 
 instance P.HasType' (ServerResource s) s Text where
     type' =
-        lens (_type' :: ServerResource s -> TF.Attribute s Text)
+        lens (_type' :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: ServerResource s)
 
 instance P.HasVolume (ServerResource s) s Text where
     volume =
-        lens (_volume :: ServerResource s -> TF.Attribute s Text)
+        lens (_volume :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _volume = a } :: ServerResource s)
 
 instance P.HasComputedId (ServerResource s) Text
@@ -376,26 +376,26 @@ requires the servers to be powered off. This will lead to downtime if the
 server is already in use.
 -}
 data VolumeAttachmentResource s = VolumeAttachmentResource {
-      _server :: !(TF.Attribute s Text)
+      _server :: !(TF.Attr s Text)
     {- ^ (Required) id of the server -}
-    , _volume :: !(TF.Attribute s Text)
+    , _volume :: !(TF.Attr s Text)
     {- ^ (Required) id of the volume to be attached -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VolumeAttachmentResource s) where
-    toHCL VolumeAttachmentResource{..} = TF.block $ catMaybes
+    toHCL VolumeAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "server" _server
         , TF.attribute "volume" _volume
         ]
 
 instance P.HasServer (VolumeAttachmentResource s) s Text where
     server =
-        lens (_server :: VolumeAttachmentResource s -> TF.Attribute s Text)
+        lens (_server :: VolumeAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _server = a } :: VolumeAttachmentResource s)
 
 instance P.HasVolume (VolumeAttachmentResource s) s Text where
     volume =
-        lens (_volume :: VolumeAttachmentResource s -> TF.Attribute s Text)
+        lens (_volume :: VolumeAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
 
 instance P.HasComputedId (VolumeAttachmentResource s) Text
@@ -415,18 +415,18 @@ For additional details please refer to
 <https://developer.scaleway.com/#volumes> .
 -}
 data VolumeResource s = VolumeResource {
-      _name       :: !(TF.Attribute s Text)
+      _name       :: !(TF.Attr s Text)
     {- ^ (Required) name of volume -}
-    , _server     :: !(TF.Attribute s Text)
+    , _server     :: !(TF.Attr s Text)
     {- ^ - (Read Only) the @scaleway_server@ instance which has this volume mounted right now -}
-    , _size_in_gb :: !(TF.Attribute s Text)
+    , _size_in_gb :: !(TF.Attr s Text)
     {- ^ (Required) size of the volume in GB -}
-    , _type'      :: !(TF.Attribute s Text)
+    , _type'      :: !(TF.Attr s Text)
     {- ^ (Required) type of volume -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VolumeResource s) where
-    toHCL VolumeResource{..} = TF.block $ catMaybes
+    toHCL VolumeResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "server" _server
         , TF.attribute "size_in_gb" _size_in_gb
@@ -435,22 +435,22 @@ instance TF.ToHCL (VolumeResource s) where
 
 instance P.HasName (VolumeResource s) s Text where
     name =
-        lens (_name :: VolumeResource s -> TF.Attribute s Text)
+        lens (_name :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VolumeResource s)
 
 instance P.HasServer (VolumeResource s) s Text where
     server =
-        lens (_server :: VolumeResource s -> TF.Attribute s Text)
+        lens (_server :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _server = a } :: VolumeResource s)
 
 instance P.HasSizeInGb (VolumeResource s) s Text where
     sizeInGb =
-        lens (_size_in_gb :: VolumeResource s -> TF.Attribute s Text)
+        lens (_size_in_gb :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _size_in_gb = a } :: VolumeResource s)
 
 instance P.HasType' (VolumeResource s) s Text where
     type' =
-        lens (_type' :: VolumeResource s -> TF.Attribute s Text)
+        lens (_type' :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: VolumeResource s)
 
 instance P.HasComputedId (VolumeResource s) Text

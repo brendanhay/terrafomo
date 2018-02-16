@@ -46,67 +46,67 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
+    name :: Lens' a (TF.Attr s b)
 
 instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasSmtpPassword a s b | a -> s b where
-    smtpPassword :: Lens' a (TF.Attribute s b)
+    smtpPassword :: Lens' a (TF.Attr s b)
 
 instance HasSmtpPassword a s b => HasSmtpPassword (TF.Schema l p a) s b where
     smtpPassword = TF.configuration . smtpPassword
 
 class HasSpamAction a s b | a -> s b where
-    spamAction :: Lens' a (TF.Attribute s b)
+    spamAction :: Lens' a (TF.Attr s b)
 
 instance HasSpamAction a s b => HasSpamAction (TF.Schema l p a) s b where
     spamAction = TF.configuration . spamAction
 
 class HasWildcard a s b | a -> s b where
-    wildcard :: Lens' a (TF.Attribute s b)
+    wildcard :: Lens' a (TF.Attr s b)
 
 instance HasWildcard a s b => HasWildcard (TF.Schema l p a) s b where
     wildcard = TF.configuration . wildcard
 
 class HasComputedName a b | a -> b where
     computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedName =
-        to (\x -> TF.computed (TF.referenceKey x) "name")
+        to (\x -> TF.compute (TF.refKey x) "name")
 
 class HasComputedReceivingRecords a b | a -> b where
     computedReceivingRecords
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedReceivingRecords =
-        to (\x -> TF.computed (TF.referenceKey x) "receiving_records")
+        to (\x -> TF.compute (TF.refKey x) "receiving_records")
 
 class HasComputedSendingRecords a b | a -> b where
     computedSendingRecords
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedSendingRecords =
-        to (\x -> TF.computed (TF.referenceKey x) "sending_records")
+        to (\x -> TF.compute (TF.refKey x) "sending_records")
 
 class HasComputedSmtpLogin a b | a -> b where
     computedSmtpLogin
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedSmtpLogin =
-        to (\x -> TF.computed (TF.referenceKey x) "smtp_login")
+        to (\x -> TF.compute (TF.refKey x) "smtp_login")
 
 class HasComputedSmtpPassword a b | a -> b where
     computedSmtpPassword
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedSmtpPassword =
-        to (\x -> TF.computed (TF.referenceKey x) "smtp_password")
+        to (\x -> TF.compute (TF.refKey x) "smtp_password")
 
 class HasComputedSpamAction a b | a -> b where
     computedSpamAction
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedSpamAction =
-        to (\x -> TF.computed (TF.referenceKey x) "spam_action")
+        to (\x -> TF.compute (TF.refKey x) "spam_action")
 
 class HasComputedWildcard a b | a -> b where
     computedWildcard
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedWildcard =
-        to (\x -> TF.computed (TF.referenceKey x) "wildcard")
+        to (\x -> TF.compute (TF.refKey x) "wildcard")

@@ -75,24 +75,24 @@ import qualified Terrafomo.Schema    as TF
 Provides a Cloudflare record resource.
 -}
 data RecordResource s = RecordResource {
-      _domain   :: !(TF.Attribute s Text)
+      _domain   :: !(TF.Attr s Text)
     {- ^ (Required) The domain to add the record to -}
-    , _name     :: !(TF.Attribute s Text)
+    , _name     :: !(TF.Attr s Text)
     {- ^ (Required) The name of the record -}
-    , _priority :: !(TF.Attribute s Text)
+    , _priority :: !(TF.Attr s Text)
     {- ^ (Optional) The priority of the record -}
-    , _proxied  :: !(TF.Attribute s Text)
+    , _proxied  :: !(TF.Attr s Text)
     {- ^ (Optional) Whether the record gets Cloudflare's origin protection. -}
-    , _ttl      :: !(TF.Attribute s Text)
+    , _ttl      :: !(TF.Attr s Text)
     {- ^ (Optional) The TTL of the record ( <https://api.cloudflare.com/#dns-records-for-a-zone-create-dns-record> ) -}
-    , _type'    :: !(TF.Attribute s Text)
+    , _type'    :: !(TF.Attr s Text)
     {- ^ (Required) The type of the record -}
-    , _value    :: !(TF.Attribute s Text)
+    , _value    :: !(TF.Attr s Text)
     {- ^ (Required) The value of the record -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RecordResource s) where
-    toHCL RecordResource{..} = TF.block $ catMaybes
+    toHCL RecordResource{..} = TF.inline $ catMaybes
         [ TF.attribute "domain" _domain
         , TF.attribute "name" _name
         , TF.attribute "priority" _priority
@@ -104,37 +104,37 @@ instance TF.ToHCL (RecordResource s) where
 
 instance P.HasDomain (RecordResource s) s Text where
     domain =
-        lens (_domain :: RecordResource s -> TF.Attribute s Text)
+        lens (_domain :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _domain = a } :: RecordResource s)
 
 instance P.HasName (RecordResource s) s Text where
     name =
-        lens (_name :: RecordResource s -> TF.Attribute s Text)
+        lens (_name :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasPriority (RecordResource s) s Text where
     priority =
-        lens (_priority :: RecordResource s -> TF.Attribute s Text)
+        lens (_priority :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _priority = a } :: RecordResource s)
 
 instance P.HasProxied (RecordResource s) s Text where
     proxied =
-        lens (_proxied :: RecordResource s -> TF.Attribute s Text)
+        lens (_proxied :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _proxied = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) s Text where
     ttl =
-        lens (_ttl :: RecordResource s -> TF.Attribute s Text)
+        lens (_ttl :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) s Text where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attribute s Text)
+        lens (_type' :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasValue (RecordResource s) s Text where
     value =
-        lens (_value :: RecordResource s -> TF.Attribute s Text)
+        lens (_value :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _value = a } :: RecordResource s)
 
 instance P.HasComputedHostname (RecordResource s) Text

@@ -66,20 +66,20 @@ import qualified Terrafomo.Schema    as TF
 Provides a Dyn DNS record resource.
 -}
 data RecordResource s = RecordResource {
-      _name  :: !(TF.Attribute s Text)
+      _name  :: !(TF.Attr s Text)
     {- ^ (Required) The name of the record. -}
-    , _ttl   :: !(TF.Attribute s Text)
+    , _ttl   :: !(TF.Attr s Text)
     {- ^ (Optional) The TTL of the record. Default uses the zone default. -}
-    , _type' :: !(TF.Attribute s Text)
+    , _type' :: !(TF.Attr s Text)
     {- ^ (Required) The type of the record. -}
-    , _value :: !(TF.Attribute s Text)
+    , _value :: !(TF.Attr s Text)
     {- ^ (Required) The value of the record. -}
-    , _zone  :: !(TF.Attribute s Text)
+    , _zone  :: !(TF.Attr s Text)
     {- ^ (Required) The DNS zone to add the record to. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RecordResource s) where
-    toHCL RecordResource{..} = TF.block $ catMaybes
+    toHCL RecordResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "ttl" _ttl
         , TF.attribute "type" _type'
@@ -89,27 +89,27 @@ instance TF.ToHCL (RecordResource s) where
 
 instance P.HasName (RecordResource s) s Text where
     name =
-        lens (_name :: RecordResource s -> TF.Attribute s Text)
+        lens (_name :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) s Text where
     ttl =
-        lens (_ttl :: RecordResource s -> TF.Attribute s Text)
+        lens (_ttl :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) s Text where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attribute s Text)
+        lens (_type' :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasValue (RecordResource s) s Text where
     value =
-        lens (_value :: RecordResource s -> TF.Attribute s Text)
+        lens (_value :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _value = a } :: RecordResource s)
 
 instance P.HasZone (RecordResource s) s Text where
     zone =
-        lens (_zone :: RecordResource s -> TF.Attribute s Text)
+        lens (_zone :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
 instance P.HasComputedFqdn (RecordResource s) Text

@@ -83,28 +83,28 @@ import qualified Terrafomo.Schema    as TF
 Provides a Spotinst AWS group resource.
 -}
 data AwsGroupResource s = AwsGroupResource {
-      _capacity             :: !(TF.Attribute s Text)
+      _capacity             :: !(TF.Attr s Text)
     {- ^ (Required) The group capacity. Only a single block is allowed. -}
-    , _description          :: !(TF.Attribute s Text)
+    , _description          :: !(TF.Attr s Text)
     {- ^ (Optional) The group description. -}
-    , _elastic_ips          :: !(TF.Attribute s Text)
+    , _elastic_ips          :: !(TF.Attr s Text)
     {- ^ (Optional) A list of <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html> allocation IDs to associate to the group instances. -}
-    , _instance_types       :: !(TF.Attribute s Text)
+    , _instance_types       :: !(TF.Attr s Text)
     {- ^ - The type of instance determines your instance's CPU capacity, memory and storage (e.g., m1.small, c1.xlarge). -}
-    , _launch_specification :: !(TF.Attribute s Text)
+    , _launch_specification :: !(TF.Attr s Text)
     {- ^ (Required) Describes the launch specification for an instance. -}
-    , _name                 :: !(TF.Attribute s Text)
+    , _name                 :: !(TF.Attr s Text)
     {- ^ (Optional) The group description. -}
-    , _product              :: !(TF.Attribute s Text)
+    , _product              :: !(TF.Attr s Text)
     {- ^ (Required) Operation system type. -}
-    , _strategy             :: !(TF.Attribute s Text)
+    , _strategy             :: !(TF.Attr s Text)
     {- ^ (Required) This determines how your group request is fulfilled from the possible On-Demand and Spot pools selected for launch. Only a single block is allowed. -}
-    , _tags                 :: !(TF.Attribute s Text)
+    , _tags                 :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AwsGroupResource s) where
-    toHCL AwsGroupResource{..} = TF.block $ catMaybes
+    toHCL AwsGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "capacity" _capacity
         , TF.attribute "description" _description
         , TF.attribute "elastic_ips" _elastic_ips
@@ -118,47 +118,47 @@ instance TF.ToHCL (AwsGroupResource s) where
 
 instance P.HasCapacity (AwsGroupResource s) s Text where
     capacity =
-        lens (_capacity :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_capacity :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _capacity = a } :: AwsGroupResource s)
 
 instance P.HasDescription (AwsGroupResource s) s Text where
     description =
-        lens (_description :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_description :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: AwsGroupResource s)
 
 instance P.HasElasticIps (AwsGroupResource s) s Text where
     elasticIps =
-        lens (_elastic_ips :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_elastic_ips :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _elastic_ips = a } :: AwsGroupResource s)
 
 instance P.HasInstanceTypes (AwsGroupResource s) s Text where
     instanceTypes =
-        lens (_instance_types :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_instance_types :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _instance_types = a } :: AwsGroupResource s)
 
 instance P.HasLaunchSpecification (AwsGroupResource s) s Text where
     launchSpecification =
-        lens (_launch_specification :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_launch_specification :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _launch_specification = a } :: AwsGroupResource s)
 
 instance P.HasName (AwsGroupResource s) s Text where
     name =
-        lens (_name :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_name :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AwsGroupResource s)
 
 instance P.HasProduct (AwsGroupResource s) s Text where
     product =
-        lens (_product :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_product :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _product = a } :: AwsGroupResource s)
 
 instance P.HasStrategy (AwsGroupResource s) s Text where
     strategy =
-        lens (_strategy :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_strategy :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _strategy = a } :: AwsGroupResource s)
 
 instance P.HasTags (AwsGroupResource s) s Text where
     tags =
-        lens (_tags :: AwsGroupResource s -> TF.Attribute s Text)
+        lens (_tags :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: AwsGroupResource s)
 
 instance P.HasComputedId (AwsGroupResource s) Text
@@ -183,20 +183,20 @@ awsGroupResource =
 Provides a Spotinst healthcheck resource.
 -}
 data HealthcheckResource s = HealthcheckResource {
-      _check       :: !(TF.Attribute s Text)
+      _check       :: !(TF.Attr s Text)
     {- ^ (Required) Describes the check to execute. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Optional) the name of the healthcheck -}
-    , _proxy       :: !(TF.Attribute s Text)
+    , _proxy       :: !(TF.Attr s Text)
     {- ^ (Required) -}
-    , _resource_id :: !(TF.Attribute s Text)
+    , _resource_id :: !(TF.Attr s Text)
     {- ^ (Required) The resource to health check -}
-    , _threshold   :: !(TF.Attribute s Text)
+    , _threshold   :: !(TF.Attr s Text)
     {- ^ (Required) -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (HealthcheckResource s) where
-    toHCL HealthcheckResource{..} = TF.block $ catMaybes
+    toHCL HealthcheckResource{..} = TF.inline $ catMaybes
         [ TF.attribute "check" _check
         , TF.attribute "name" _name
         , TF.attribute "proxy" _proxy
@@ -206,27 +206,27 @@ instance TF.ToHCL (HealthcheckResource s) where
 
 instance P.HasCheck (HealthcheckResource s) s Text where
     check =
-        lens (_check :: HealthcheckResource s -> TF.Attribute s Text)
+        lens (_check :: HealthcheckResource s -> TF.Attr s Text)
              (\s a -> s { _check = a } :: HealthcheckResource s)
 
 instance P.HasName (HealthcheckResource s) s Text where
     name =
-        lens (_name :: HealthcheckResource s -> TF.Attribute s Text)
+        lens (_name :: HealthcheckResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: HealthcheckResource s)
 
 instance P.HasProxy (HealthcheckResource s) s Text where
     proxy =
-        lens (_proxy :: HealthcheckResource s -> TF.Attribute s Text)
+        lens (_proxy :: HealthcheckResource s -> TF.Attr s Text)
              (\s a -> s { _proxy = a } :: HealthcheckResource s)
 
 instance P.HasResourceId (HealthcheckResource s) s Text where
     resourceId =
-        lens (_resource_id :: HealthcheckResource s -> TF.Attribute s Text)
+        lens (_resource_id :: HealthcheckResource s -> TF.Attr s Text)
              (\s a -> s { _resource_id = a } :: HealthcheckResource s)
 
 instance P.HasThreshold (HealthcheckResource s) s Text where
     threshold =
-        lens (_threshold :: HealthcheckResource s -> TF.Attribute s Text)
+        lens (_threshold :: HealthcheckResource s -> TF.Attr s Text)
              (\s a -> s { _threshold = a } :: HealthcheckResource s)
 
 instance P.HasComputedId (HealthcheckResource s) Text
@@ -247,20 +247,20 @@ healthcheckResource =
 Provides a Spotinst subscription resource.
 -}
 data SubscriptionResource s = SubscriptionResource {
-      _endpoint    :: !(TF.Attribute s Text)
+      _endpoint    :: !(TF.Attr s Text)
     {- ^ (Required) The destination for the request -}
-    , _event_type  :: !(TF.Attribute s Text)
+    , _event_type  :: !(TF.Attr s Text)
     {- ^ (Required) The events to subscribe to -}
-    , _format      :: !(TF.Attribute s Text)
+    , _format      :: !(TF.Attr s Text)
     {- ^ (Optional) The structure of the payload. -}
-    , _protocol    :: !(TF.Attribute s Text)
+    , _protocol    :: !(TF.Attr s Text)
     {- ^ (Required) The protocol to use to connect with the instance. Valid values: http, https -}
-    , _resource_id :: !(TF.Attribute s Text)
+    , _resource_id :: !(TF.Attr s Text)
     {- ^ (Required) The resource to subscribe to -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SubscriptionResource s) where
-    toHCL SubscriptionResource{..} = TF.block $ catMaybes
+    toHCL SubscriptionResource{..} = TF.inline $ catMaybes
         [ TF.attribute "endpoint" _endpoint
         , TF.attribute "event_type" _event_type
         , TF.attribute "format" _format
@@ -270,27 +270,27 @@ instance TF.ToHCL (SubscriptionResource s) where
 
 instance P.HasEndpoint (SubscriptionResource s) s Text where
     endpoint =
-        lens (_endpoint :: SubscriptionResource s -> TF.Attribute s Text)
+        lens (_endpoint :: SubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _endpoint = a } :: SubscriptionResource s)
 
 instance P.HasEventType (SubscriptionResource s) s Text where
     eventType =
-        lens (_event_type :: SubscriptionResource s -> TF.Attribute s Text)
+        lens (_event_type :: SubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _event_type = a } :: SubscriptionResource s)
 
 instance P.HasFormat (SubscriptionResource s) s Text where
     format =
-        lens (_format :: SubscriptionResource s -> TF.Attribute s Text)
+        lens (_format :: SubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _format = a } :: SubscriptionResource s)
 
 instance P.HasProtocol (SubscriptionResource s) s Text where
     protocol =
-        lens (_protocol :: SubscriptionResource s -> TF.Attribute s Text)
+        lens (_protocol :: SubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: SubscriptionResource s)
 
 instance P.HasResourceId (SubscriptionResource s) s Text where
     resourceId =
-        lens (_resource_id :: SubscriptionResource s -> TF.Attribute s Text)
+        lens (_resource_id :: SubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _resource_id = a } :: SubscriptionResource s)
 
 instance P.HasComputedId (SubscriptionResource s) Text

@@ -61,157 +61,157 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 class HasAllowConnections a s b | a -> s b where
-    allowConnections :: Lens' a (TF.Attribute s b)
+    allowConnections :: Lens' a (TF.Attr s b)
 
 instance HasAllowConnections a s b => HasAllowConnections (TF.Schema l p a) s b where
     allowConnections = TF.configuration . allowConnections
 
 class HasBypassRowLevelSecurity a s b | a -> s b where
-    bypassRowLevelSecurity :: Lens' a (TF.Attribute s b)
+    bypassRowLevelSecurity :: Lens' a (TF.Attr s b)
 
 instance HasBypassRowLevelSecurity a s b => HasBypassRowLevelSecurity (TF.Schema l p a) s b where
     bypassRowLevelSecurity = TF.configuration . bypassRowLevelSecurity
 
 class HasConnectionLimit a s b | a -> s b where
-    connectionLimit :: Lens' a (TF.Attribute s b)
+    connectionLimit :: Lens' a (TF.Attr s b)
 
 instance HasConnectionLimit a s b => HasConnectionLimit (TF.Schema l p a) s b where
     connectionLimit = TF.configuration . connectionLimit
 
 class HasCreateDatabase a s b | a -> s b where
-    createDatabase :: Lens' a (TF.Attribute s b)
+    createDatabase :: Lens' a (TF.Attr s b)
 
 instance HasCreateDatabase a s b => HasCreateDatabase (TF.Schema l p a) s b where
     createDatabase = TF.configuration . createDatabase
 
 class HasCreateRole a s b | a -> s b where
-    createRole :: Lens' a (TF.Attribute s b)
+    createRole :: Lens' a (TF.Attr s b)
 
 instance HasCreateRole a s b => HasCreateRole (TF.Schema l p a) s b where
     createRole = TF.configuration . createRole
 
 class HasEncoding a s b | a -> s b where
-    encoding :: Lens' a (TF.Attribute s b)
+    encoding :: Lens' a (TF.Attr s b)
 
 instance HasEncoding a s b => HasEncoding (TF.Schema l p a) s b where
     encoding = TF.configuration . encoding
 
 class HasEncryptedPassword a s b | a -> s b where
-    encryptedPassword :: Lens' a (TF.Attribute s b)
+    encryptedPassword :: Lens' a (TF.Attr s b)
 
 instance HasEncryptedPassword a s b => HasEncryptedPassword (TF.Schema l p a) s b where
     encryptedPassword = TF.configuration . encryptedPassword
 
 class HasIfNotExists a s b | a -> s b where
-    ifNotExists :: Lens' a (TF.Attribute s b)
+    ifNotExists :: Lens' a (TF.Attr s b)
 
 instance HasIfNotExists a s b => HasIfNotExists (TF.Schema l p a) s b where
     ifNotExists = TF.configuration . ifNotExists
 
 class HasInherit a s b | a -> s b where
-    inherit :: Lens' a (TF.Attribute s b)
+    inherit :: Lens' a (TF.Attr s b)
 
 instance HasInherit a s b => HasInherit (TF.Schema l p a) s b where
     inherit = TF.configuration . inherit
 
 class HasIsTemplate a s b | a -> s b where
-    isTemplate :: Lens' a (TF.Attribute s b)
+    isTemplate :: Lens' a (TF.Attr s b)
 
 instance HasIsTemplate a s b => HasIsTemplate (TF.Schema l p a) s b where
     isTemplate = TF.configuration . isTemplate
 
 class HasLcCollate a s b | a -> s b where
-    lcCollate :: Lens' a (TF.Attribute s b)
+    lcCollate :: Lens' a (TF.Attr s b)
 
 instance HasLcCollate a s b => HasLcCollate (TF.Schema l p a) s b where
     lcCollate = TF.configuration . lcCollate
 
 class HasLcCtype a s b | a -> s b where
-    lcCtype :: Lens' a (TF.Attribute s b)
+    lcCtype :: Lens' a (TF.Attr s b)
 
 instance HasLcCtype a s b => HasLcCtype (TF.Schema l p a) s b where
     lcCtype = TF.configuration . lcCtype
 
 class HasLogin a s b | a -> s b where
-    login :: Lens' a (TF.Attribute s b)
+    login :: Lens' a (TF.Attr s b)
 
 instance HasLogin a s b => HasLogin (TF.Schema l p a) s b where
     login = TF.configuration . login
 
 class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
+    name :: Lens' a (TF.Attr s b)
 
 instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasOwner a s b | a -> s b where
-    owner :: Lens' a (TF.Attribute s b)
+    owner :: Lens' a (TF.Attr s b)
 
 instance HasOwner a s b => HasOwner (TF.Schema l p a) s b where
     owner = TF.configuration . owner
 
 class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
+    password :: Lens' a (TF.Attr s b)
 
 instance HasPassword a s b => HasPassword (TF.Schema l p a) s b where
     password = TF.configuration . password
 
 class HasPolicy a s b | a -> s b where
-    policy :: Lens' a (TF.Attribute s b)
+    policy :: Lens' a (TF.Attr s b)
 
 instance HasPolicy a s b => HasPolicy (TF.Schema l p a) s b where
     policy = TF.configuration . policy
 
 class HasReplication a s b | a -> s b where
-    replication :: Lens' a (TF.Attribute s b)
+    replication :: Lens' a (TF.Attr s b)
 
 instance HasReplication a s b => HasReplication (TF.Schema l p a) s b where
     replication = TF.configuration . replication
 
 class HasSchema a s b | a -> s b where
-    schema :: Lens' a (TF.Attribute s b)
+    schema :: Lens' a (TF.Attr s b)
 
 instance HasSchema a s b => HasSchema (TF.Schema l p a) s b where
     schema = TF.configuration . schema
 
 class HasSkipDropRole a s b | a -> s b where
-    skipDropRole :: Lens' a (TF.Attribute s b)
+    skipDropRole :: Lens' a (TF.Attr s b)
 
 instance HasSkipDropRole a s b => HasSkipDropRole (TF.Schema l p a) s b where
     skipDropRole = TF.configuration . skipDropRole
 
 class HasSkipReassignOwned a s b | a -> s b where
-    skipReassignOwned :: Lens' a (TF.Attribute s b)
+    skipReassignOwned :: Lens' a (TF.Attr s b)
 
 instance HasSkipReassignOwned a s b => HasSkipReassignOwned (TF.Schema l p a) s b where
     skipReassignOwned = TF.configuration . skipReassignOwned
 
 class HasSuperuser a s b | a -> s b where
-    superuser :: Lens' a (TF.Attribute s b)
+    superuser :: Lens' a (TF.Attr s b)
 
 instance HasSuperuser a s b => HasSuperuser (TF.Schema l p a) s b where
     superuser = TF.configuration . superuser
 
 class HasTablespaceName a s b | a -> s b where
-    tablespaceName :: Lens' a (TF.Attribute s b)
+    tablespaceName :: Lens' a (TF.Attr s b)
 
 instance HasTablespaceName a s b => HasTablespaceName (TF.Schema l p a) s b where
     tablespaceName = TF.configuration . tablespaceName
 
 class HasTemplate a s b | a -> s b where
-    template :: Lens' a (TF.Attribute s b)
+    template :: Lens' a (TF.Attr s b)
 
 instance HasTemplate a s b => HasTemplate (TF.Schema l p a) s b where
     template = TF.configuration . template
 
 class HasValidUntil a s b | a -> s b where
-    validUntil :: Lens' a (TF.Attribute s b)
+    validUntil :: Lens' a (TF.Attr s b)
 
 instance HasValidUntil a s b => HasValidUntil (TF.Schema l p a) s b where
     validUntil = TF.configuration . validUntil
 
 class HasVersion a s b | a -> s b where
-    version :: Lens' a (TF.Attribute s b)
+    version :: Lens' a (TF.Attr s b)
 
 instance HasVersion a s b => HasVersion (TF.Schema l p a) s b where
     version = TF.configuration . version

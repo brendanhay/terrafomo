@@ -89,26 +89,26 @@ import qualified Terrafomo.Schema    as TF
 about a specific Circonus Account.
 -}
 data AccountData s = AccountData {
-      _current :: !(TF.Attribute s Text)
+      _current :: !(TF.Attr s Text)
     {- ^ (Optional) Automatically use the current Circonus Account attached to the API token making the request. -}
-    , _id      :: !(TF.Attribute s Text)
+    , _id      :: !(TF.Attr s Text)
     {- ^ (Optional) The Circonus ID of a given account. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AccountData s) where
-    toHCL AccountData{..} = TF.block $ catMaybes
+    toHCL AccountData{..} = TF.inline $ catMaybes
         [ TF.attribute "current" _current
         , TF.attribute "id" _id
         ]
 
 instance P.HasCurrent (AccountData s) s Text where
     current =
-        lens (_current :: AccountData s -> TF.Attribute s Text)
+        lens (_current :: AccountData s -> TF.Attr s Text)
              (\s a -> s { _current = a } :: AccountData s)
 
 instance P.HasId (AccountData s) s Text where
     id =
-        lens (_id :: AccountData s -> TF.Attribute s Text)
+        lens (_id :: AccountData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: AccountData s)
 
 instance P.HasComputedAddress1 (AccountData s) Text
@@ -154,18 +154,18 @@ act as a fan-in agent that either pulls or has metrics pushed into it and
 funneled back through Circonus.
 -}
 data CollectorData s = CollectorData {
-      _id :: !(TF.Attribute s Text)
+      _id :: !(TF.Attr s Text)
     {- ^ (Optional) The Circonus ID of a given collector. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CollectorData s) where
-    toHCL CollectorData{..} = TF.block $ catMaybes
+    toHCL CollectorData{..} = TF.inline $ catMaybes
         [ TF.attribute "id" _id
         ]
 
 instance P.HasId (CollectorData s) s Text where
     id =
-        lens (_id :: CollectorData s -> TF.Attribute s Text)
+        lens (_id :: CollectorData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: CollectorData s)
 
 instance P.HasComputedDetails (CollectorData s) Text

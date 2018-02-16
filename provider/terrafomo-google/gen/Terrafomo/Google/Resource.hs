@@ -694,24 +694,24 @@ Creates a dataset resource for Google BigQuery. For more information see
 <https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets> .
 -}
 data BigqueryDatasetResource s = BigqueryDatasetResource {
-      _dataset_id :: !(TF.Attribute s Text)
+      _dataset_id :: !(TF.Attr s Text)
     {- ^ (Required) A unique ID for the resource. Changing this forces a new resource to be created. -}
-    , _default_table_expiration_ms :: !(TF.Attribute s Text)
+    , _default_table_expiration_ms :: !(TF.Attr s Text)
     {- ^ (Optional) The default lifetime of all tables in the dataset, in milliseconds. The minimum value is 3600000 milliseconds (one hour). -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A user-friendly description of the dataset. -}
-    , _friendly_name :: !(TF.Attribute s Text)
+    , _friendly_name :: !(TF.Attr s Text)
     {- ^ (Optional) A descriptive name for the dataset. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of labels to assign to the resource. -}
-    , _location :: !(TF.Attribute s Text)
+    , _location :: !(TF.Attr s Text)
     {- ^ (Optional) The geographic location where the dataset should reside. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (BigqueryDatasetResource s) where
-    toHCL BigqueryDatasetResource{..} = TF.block $ catMaybes
+    toHCL BigqueryDatasetResource{..} = TF.inline $ catMaybes
         [ TF.attribute "dataset_id" _dataset_id
         , TF.attribute "default_table_expiration_ms" _default_table_expiration_ms
         , TF.attribute "description" _description
@@ -723,37 +723,37 @@ instance TF.ToHCL (BigqueryDatasetResource s) where
 
 instance P.HasDatasetId (BigqueryDatasetResource s) s Text where
     datasetId =
-        lens (_dataset_id :: BigqueryDatasetResource s -> TF.Attribute s Text)
+        lens (_dataset_id :: BigqueryDatasetResource s -> TF.Attr s Text)
              (\s a -> s { _dataset_id = a } :: BigqueryDatasetResource s)
 
 instance P.HasDefaultTableExpirationMs (BigqueryDatasetResource s) s Text where
     defaultTableExpirationMs =
-        lens (_default_table_expiration_ms :: BigqueryDatasetResource s -> TF.Attribute s Text)
+        lens (_default_table_expiration_ms :: BigqueryDatasetResource s -> TF.Attr s Text)
              (\s a -> s { _default_table_expiration_ms = a } :: BigqueryDatasetResource s)
 
 instance P.HasDescription (BigqueryDatasetResource s) s Text where
     description =
-        lens (_description :: BigqueryDatasetResource s -> TF.Attribute s Text)
+        lens (_description :: BigqueryDatasetResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: BigqueryDatasetResource s)
 
 instance P.HasFriendlyName (BigqueryDatasetResource s) s Text where
     friendlyName =
-        lens (_friendly_name :: BigqueryDatasetResource s -> TF.Attribute s Text)
+        lens (_friendly_name :: BigqueryDatasetResource s -> TF.Attr s Text)
              (\s a -> s { _friendly_name = a } :: BigqueryDatasetResource s)
 
 instance P.HasLabels (BigqueryDatasetResource s) s Text where
     labels =
-        lens (_labels :: BigqueryDatasetResource s -> TF.Attribute s Text)
+        lens (_labels :: BigqueryDatasetResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: BigqueryDatasetResource s)
 
 instance P.HasLocation (BigqueryDatasetResource s) s Text where
     location =
-        lens (_location :: BigqueryDatasetResource s -> TF.Attribute s Text)
+        lens (_location :: BigqueryDatasetResource s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: BigqueryDatasetResource s)
 
 instance P.HasProject (BigqueryDatasetResource s) s Text where
     project =
-        lens (_project :: BigqueryDatasetResource s -> TF.Attribute s Text)
+        lens (_project :: BigqueryDatasetResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: BigqueryDatasetResource s)
 
 instance P.HasComputedCreationTime (BigqueryDatasetResource s) Text
@@ -781,30 +781,30 @@ information see <https://cloud.google.com/bigquery/docs/> and
 <https://cloud.google.com/bigquery/docs/reference/rest/v2/tables> .
 -}
 data BigqueryTableResource s = BigqueryTableResource {
-      _dataset_id :: !(TF.Attribute s Text)
+      _dataset_id :: !(TF.Attr s Text)
     {- ^ (Required) The dataset ID to create the table in. Changing this forces a new resource to be created. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) The field description. -}
-    , _expiration_time :: !(TF.Attribute s Text)
+    , _expiration_time :: !(TF.Attr s Text)
     {- ^ (Optional) The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed. -}
-    , _friendly_name :: !(TF.Attribute s Text)
+    , _friendly_name :: !(TF.Attr s Text)
     {- ^ (Optional) A descriptive name for the table. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of labels to assign to the resource. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _schema :: !(TF.Attribute s Text)
+    , _schema :: !(TF.Attr s Text)
     {- ^ (Optional) A JSON schema for the table. -}
-    , _table_id :: !(TF.Attribute s Text)
+    , _table_id :: !(TF.Attr s Text)
     {- ^ (Required) A unique ID for the resource. Changing this forces a new resource to be created. -}
-    , _time_partitioning :: !(TF.Attribute s Text)
+    , _time_partitioning :: !(TF.Attr s Text)
     {- ^ (Optional) If specified, configures time-based partitioning for this table. Structure is documented below. -}
-    , _view :: !(TF.Attribute s Text)
+    , _view :: !(TF.Attr s Text)
     {- ^ (Optional) If specified, configures this table as a view. Structure is documented below. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (BigqueryTableResource s) where
-    toHCL BigqueryTableResource{..} = TF.block $ catMaybes
+    toHCL BigqueryTableResource{..} = TF.inline $ catMaybes
         [ TF.attribute "dataset_id" _dataset_id
         , TF.attribute "description" _description
         , TF.attribute "expiration_time" _expiration_time
@@ -819,52 +819,52 @@ instance TF.ToHCL (BigqueryTableResource s) where
 
 instance P.HasDatasetId (BigqueryTableResource s) s Text where
     datasetId =
-        lens (_dataset_id :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_dataset_id :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _dataset_id = a } :: BigqueryTableResource s)
 
 instance P.HasDescription (BigqueryTableResource s) s Text where
     description =
-        lens (_description :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_description :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: BigqueryTableResource s)
 
 instance P.HasExpirationTime (BigqueryTableResource s) s Text where
     expirationTime =
-        lens (_expiration_time :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_expiration_time :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _expiration_time = a } :: BigqueryTableResource s)
 
 instance P.HasFriendlyName (BigqueryTableResource s) s Text where
     friendlyName =
-        lens (_friendly_name :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_friendly_name :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _friendly_name = a } :: BigqueryTableResource s)
 
 instance P.HasLabels (BigqueryTableResource s) s Text where
     labels =
-        lens (_labels :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_labels :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: BigqueryTableResource s)
 
 instance P.HasProject (BigqueryTableResource s) s Text where
     project =
-        lens (_project :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_project :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: BigqueryTableResource s)
 
 instance P.HasSchema (BigqueryTableResource s) s Text where
     schema =
-        lens (_schema :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_schema :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _schema = a } :: BigqueryTableResource s)
 
 instance P.HasTableId (BigqueryTableResource s) s Text where
     tableId =
-        lens (_table_id :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_table_id :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _table_id = a } :: BigqueryTableResource s)
 
 instance P.HasTimePartitioning (BigqueryTableResource s) s Text where
     timePartitioning =
-        lens (_time_partitioning :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_time_partitioning :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _time_partitioning = a } :: BigqueryTableResource s)
 
 instance P.HasView (BigqueryTableResource s) s Text where
     view =
-        lens (_view :: BigqueryTableResource s -> TF.Attribute s Text)
+        lens (_view :: BigqueryTableResource s -> TF.Attr s Text)
              (\s a -> s { _view = a } :: BigqueryTableResource s)
 
 instance P.HasComputedCreationTime (BigqueryTableResource s) Text
@@ -900,26 +900,26 @@ Creates a Google Bigtable instance. For more information see
 <https://cloud.google.com/bigtable/docs/go/reference> .
 -}
 data BigtableInstanceResource s = BigtableInstanceResource {
-      _cluster_id :: !(TF.Attribute s Text)
+      _cluster_id :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Bigtable instance's cluster. -}
-    , _display_name :: !(TF.Attribute s Text)
+    , _display_name :: !(TF.Attr s Text)
     {- ^ (Optional) The human-readable display name of the Bigtable instance. Defaults to the instance @name@ . -}
-    , _instance_type :: !(TF.Attribute s Text)
+    , _instance_type :: !(TF.Attr s Text)
     {- ^ (Optional) The instance type to create. One of @"DEVELOPMENT"@ or @"PRODUCTION"@ . Defaults to @PRODUCTION@ . -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Bigtable instance. -}
-    , _num_nodes :: !(TF.Attribute s Text)
+    , _num_nodes :: !(TF.Attr s Text)
     {- ^ (Optional) The number of nodes in your Bigtable instance. Minimum of @3@ for a @PRODUCTION@ instance. Cannot be set for a @DEVELOPMENT@ instance. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _storage_type :: !(TF.Attribute s Text)
+    , _storage_type :: !(TF.Attr s Text)
     {- ^ (Optional) The storage type to use. One of @"SSD"@ or @"HDD"@ . Defaults to @SSD@ . -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone to create the Bigtable instance in. Zones that support Bigtable instances are noted on the <https://cloud.google.com/about/locations/> . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (BigtableInstanceResource s) where
-    toHCL BigtableInstanceResource{..} = TF.block $ catMaybes
+    toHCL BigtableInstanceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cluster_id" _cluster_id
         , TF.attribute "display_name" _display_name
         , TF.attribute "instance_type" _instance_type
@@ -932,42 +932,42 @@ instance TF.ToHCL (BigtableInstanceResource s) where
 
 instance P.HasClusterId (BigtableInstanceResource s) s Text where
     clusterId =
-        lens (_cluster_id :: BigtableInstanceResource s -> TF.Attribute s Text)
+        lens (_cluster_id :: BigtableInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _cluster_id = a } :: BigtableInstanceResource s)
 
 instance P.HasDisplayName (BigtableInstanceResource s) s Text where
     displayName =
-        lens (_display_name :: BigtableInstanceResource s -> TF.Attribute s Text)
+        lens (_display_name :: BigtableInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: BigtableInstanceResource s)
 
 instance P.HasInstanceType (BigtableInstanceResource s) s Text where
     instanceType =
-        lens (_instance_type :: BigtableInstanceResource s -> TF.Attribute s Text)
+        lens (_instance_type :: BigtableInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_type = a } :: BigtableInstanceResource s)
 
 instance P.HasName (BigtableInstanceResource s) s Text where
     name =
-        lens (_name :: BigtableInstanceResource s -> TF.Attribute s Text)
+        lens (_name :: BigtableInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: BigtableInstanceResource s)
 
 instance P.HasNumNodes (BigtableInstanceResource s) s Text where
     numNodes =
-        lens (_num_nodes :: BigtableInstanceResource s -> TF.Attribute s Text)
+        lens (_num_nodes :: BigtableInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _num_nodes = a } :: BigtableInstanceResource s)
 
 instance P.HasProject (BigtableInstanceResource s) s Text where
     project =
-        lens (_project :: BigtableInstanceResource s -> TF.Attribute s Text)
+        lens (_project :: BigtableInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: BigtableInstanceResource s)
 
 instance P.HasStorageType (BigtableInstanceResource s) s Text where
     storageType =
-        lens (_storage_type :: BigtableInstanceResource s -> TF.Attribute s Text)
+        lens (_storage_type :: BigtableInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _storage_type = a } :: BigtableInstanceResource s)
 
 instance P.HasZone (BigtableInstanceResource s) s Text where
     zone =
-        lens (_zone :: BigtableInstanceResource s -> TF.Attribute s Text)
+        lens (_zone :: BigtableInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: BigtableInstanceResource s)
 
 
@@ -992,18 +992,18 @@ Creates a Google Bigtable table inside an instance. For more information see
 <https://cloud.google.com/bigtable/docs/go/reference> .
 -}
 data BigtableTableResource s = BigtableTableResource {
-      _instance_name :: !(TF.Attribute s Text)
+      _instance_name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Bigtable instance. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the table. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _split_keys :: !(TF.Attribute s Text)
+    , _split_keys :: !(TF.Attr s Text)
     {- ^ (Optional) A list of predefined keys to split the table on. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (BigtableTableResource s) where
-    toHCL BigtableTableResource{..} = TF.block $ catMaybes
+    toHCL BigtableTableResource{..} = TF.inline $ catMaybes
         [ TF.attribute "instance_name" _instance_name
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -1012,22 +1012,22 @@ instance TF.ToHCL (BigtableTableResource s) where
 
 instance P.HasInstanceName (BigtableTableResource s) s Text where
     instanceName =
-        lens (_instance_name :: BigtableTableResource s -> TF.Attribute s Text)
+        lens (_instance_name :: BigtableTableResource s -> TF.Attr s Text)
              (\s a -> s { _instance_name = a } :: BigtableTableResource s)
 
 instance P.HasName (BigtableTableResource s) s Text where
     name =
-        lens (_name :: BigtableTableResource s -> TF.Attribute s Text)
+        lens (_name :: BigtableTableResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: BigtableTableResource s)
 
 instance P.HasProject (BigtableTableResource s) s Text where
     project =
-        lens (_project :: BigtableTableResource s -> TF.Attribute s Text)
+        lens (_project :: BigtableTableResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: BigtableTableResource s)
 
 instance P.HasSplitKeys (BigtableTableResource s) s Text where
     splitKeys =
-        lens (_split_keys :: BigtableTableResource s -> TF.Attribute s Text)
+        lens (_split_keys :: BigtableTableResource s -> TF.Attr s Text)
              (\s a -> s { _split_keys = a } :: BigtableTableResource s)
 
 
@@ -1048,32 +1048,32 @@ Creates a new Cloud Function. For more information see
 <https://cloud.google.com/functions/docs/apis> .
 -}
 data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource {
-      _available_memory_mb :: !(TF.Attribute s Text)
+      _available_memory_mb :: !(TF.Attr s Text)
     {- ^ (Optional) Memory (in MB), available to the function. Default value is 256MB. Allowed values are: 128MB, 256MB, 512MB, 1024MB, and 2048MB. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Description of the function. -}
-    , _entry_point :: !(TF.Attribute s Text)
+    , _entry_point :: !(TF.Attr s Text)
     {- ^ (Optional) Name of a JavaScript function that will be executed when the Google Cloud Function is triggered. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the function. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A user-defined name of the function. Function names must be unique globally. -}
-    , _source_archive_bucket :: !(TF.Attribute s Text)
+    , _source_archive_bucket :: !(TF.Attr s Text)
     {- ^ (Required) The GCS bucket containing the zip archive which contains the function. -}
-    , _source_archive_object :: !(TF.Attribute s Text)
+    , _source_archive_object :: !(TF.Attr s Text)
     {- ^ (Required) The source archive object (file) in archive bucket. -}
-    , _timeout :: !(TF.Attribute s Text)
+    , _timeout :: !(TF.Attr s Text)
     {- ^ (Optional) Timeout (in seconds) for the function. Default value is 60 seconds. Cannot be more than 540 seconds. -}
-    , _trigger_bucket :: !(TF.Attribute s Text)
+    , _trigger_bucket :: !(TF.Attr s Text)
     {- ^ (Optional) Google Cloud Storage bucket name. Every change in files in this bucket will trigger function execution. Cannot be used with @trigger_http@ and @trigger_topic@ . -}
-    , _trigger_http :: !(TF.Attribute s Text)
+    , _trigger_http :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean variable. Any HTTP request (of a supported type) to the endpoint will trigger function execution. Supported HTTP request types are: POST, PUT, GET, DELETE, and OPTIONS. Endpoint is returned as @https_trigger_url@ . Cannot be used with @trigger_bucket@ and @trigger_topic@ . -}
-    , _trigger_topic :: !(TF.Attribute s Text)
+    , _trigger_topic :: !(TF.Attr s Text)
     {- ^ (Optional) Name of Pub/Sub topic. Every message published in this topic will trigger function execution with message contents passed as input data. Cannot be used with @trigger_http@ and @trigger_bucket@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CloudfunctionsFunctionResource s) where
-    toHCL CloudfunctionsFunctionResource{..} = TF.block $ catMaybes
+    toHCL CloudfunctionsFunctionResource{..} = TF.inline $ catMaybes
         [ TF.attribute "available_memory_mb" _available_memory_mb
         , TF.attribute "description" _description
         , TF.attribute "entry_point" _entry_point
@@ -1089,57 +1089,57 @@ instance TF.ToHCL (CloudfunctionsFunctionResource s) where
 
 instance P.HasAvailableMemoryMb (CloudfunctionsFunctionResource s) s Text where
     availableMemoryMb =
-        lens (_available_memory_mb :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_available_memory_mb :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _available_memory_mb = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasDescription (CloudfunctionsFunctionResource s) s Text where
     description =
-        lens (_description :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_description :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasEntryPoint (CloudfunctionsFunctionResource s) s Text where
     entryPoint =
-        lens (_entry_point :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_entry_point :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _entry_point = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasLabels (CloudfunctionsFunctionResource s) s Text where
     labels =
-        lens (_labels :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_labels :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasName (CloudfunctionsFunctionResource s) s Text where
     name =
-        lens (_name :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_name :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasSourceArchiveBucket (CloudfunctionsFunctionResource s) s Text where
     sourceArchiveBucket =
-        lens (_source_archive_bucket :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_source_archive_bucket :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _source_archive_bucket = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasSourceArchiveObject (CloudfunctionsFunctionResource s) s Text where
     sourceArchiveObject =
-        lens (_source_archive_object :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_source_archive_object :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _source_archive_object = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasTimeout (CloudfunctionsFunctionResource s) s Text where
     timeout =
-        lens (_timeout :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_timeout :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _timeout = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasTriggerBucket (CloudfunctionsFunctionResource s) s Text where
     triggerBucket =
-        lens (_trigger_bucket :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_trigger_bucket :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _trigger_bucket = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasTriggerHttp (CloudfunctionsFunctionResource s) s Text where
     triggerHttp =
-        lens (_trigger_http :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_trigger_http :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _trigger_http = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasTriggerTopic (CloudfunctionsFunctionResource s) s Text where
     triggerTopic =
-        lens (_trigger_topic :: CloudfunctionsFunctionResource s -> TF.Attribute s Text)
+        lens (_trigger_topic :: CloudfunctionsFunctionResource s -> TF.Attr s Text)
              (\s a -> s { _trigger_topic = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasComputedHttpsTriggerUrl (CloudfunctionsFunctionResource s) Text
@@ -1173,22 +1173,22 @@ static IP reservations, as well as the
 <https://cloud.google.com/compute/docs/reference/beta/addresses/insert> .
 -}
 data ComputeAddressResource s = ComputeAddressResource {
-      _address :: !(TF.Attribute s Text)
+      _address :: !(TF.Attr s Text)
     {- ^ (Optional) The IP address to reserve. An address may only be specified for INTERNAL address types. The IP address must be inside the specified subnetwork, if any. -}
-    , _address_type :: !(TF.Attribute s Text)
+    , _address_type :: !(TF.Attr s Text)
     {- ^ (Optional) The Address Type that should be configured. Specify INTERNAL to reserve an internal static IP address EXTERNAL to specify an external static IP address. Defaults to EXTERNAL if omitted. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The Region in which the created address should reside. If it is not provided, the provider region is used. -}
-    , _subnetwork :: !(TF.Attribute s Text)
+    , _subnetwork :: !(TF.Attr s Text)
     {- ^ (Optional) The self link URI of the subnetwork in which to create the address. A subnetwork may only be specified for INTERNAL address types. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeAddressResource s) where
-    toHCL ComputeAddressResource{..} = TF.block $ catMaybes
+    toHCL ComputeAddressResource{..} = TF.inline $ catMaybes
         [ TF.attribute "address" _address
         , TF.attribute "address_type" _address_type
         , TF.attribute "name" _name
@@ -1199,32 +1199,32 @@ instance TF.ToHCL (ComputeAddressResource s) where
 
 instance P.HasAddress (ComputeAddressResource s) s Text where
     address =
-        lens (_address :: ComputeAddressResource s -> TF.Attribute s Text)
+        lens (_address :: ComputeAddressResource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: ComputeAddressResource s)
 
 instance P.HasAddressType (ComputeAddressResource s) s Text where
     addressType =
-        lens (_address_type :: ComputeAddressResource s -> TF.Attribute s Text)
+        lens (_address_type :: ComputeAddressResource s -> TF.Attr s Text)
              (\s a -> s { _address_type = a } :: ComputeAddressResource s)
 
 instance P.HasName (ComputeAddressResource s) s Text where
     name =
-        lens (_name :: ComputeAddressResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeAddressResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeAddressResource s)
 
 instance P.HasProject (ComputeAddressResource s) s Text where
     project =
-        lens (_project :: ComputeAddressResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeAddressResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeAddressResource s)
 
 instance P.HasRegion (ComputeAddressResource s) s Text where
     region =
-        lens (_region :: ComputeAddressResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeAddressResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeAddressResource s)
 
 instance P.HasSubnetwork (ComputeAddressResource s) s Text where
     subnetwork =
-        lens (_subnetwork :: ComputeAddressResource s -> TF.Attribute s Text)
+        lens (_subnetwork :: ComputeAddressResource s -> TF.Attr s Text)
              (\s a -> s { _subnetwork = a } :: ComputeAddressResource s)
 
 instance P.HasComputedAddress (ComputeAddressResource s) Text
@@ -1254,22 +1254,22 @@ the measured load. For more information, see
 <https://cloud.google.com/compute/docs/reference/latest/autoscalers>
 -}
 data ComputeAutoscalerResource s = ComputeAutoscalerResource {
-      _autoscaling_policy :: !(TF.Attribute s Text)
+      _autoscaling_policy :: !(TF.Attr s Text)
     {- ^ (Required) The parameters of the autoscaling algorithm. Structure is documented below. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) An optional textual description of the instance group manager. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the autoscaler. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _target :: !(TF.Attribute s Text)
+    , _target :: !(TF.Attr s Text)
     {- ^ (Required) The full URL to the instance group manager whose size we control. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone of the target. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeAutoscalerResource s) where
-    toHCL ComputeAutoscalerResource{..} = TF.block $ catMaybes
+    toHCL ComputeAutoscalerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "autoscaling_policy" _autoscaling_policy
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -1280,32 +1280,32 @@ instance TF.ToHCL (ComputeAutoscalerResource s) where
 
 instance P.HasAutoscalingPolicy (ComputeAutoscalerResource s) s Text where
     autoscalingPolicy =
-        lens (_autoscaling_policy :: ComputeAutoscalerResource s -> TF.Attribute s Text)
+        lens (_autoscaling_policy :: ComputeAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _autoscaling_policy = a } :: ComputeAutoscalerResource s)
 
 instance P.HasDescription (ComputeAutoscalerResource s) s Text where
     description =
-        lens (_description :: ComputeAutoscalerResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeAutoscalerResource s)
 
 instance P.HasName (ComputeAutoscalerResource s) s Text where
     name =
-        lens (_name :: ComputeAutoscalerResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeAutoscalerResource s)
 
 instance P.HasProject (ComputeAutoscalerResource s) s Text where
     project =
-        lens (_project :: ComputeAutoscalerResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeAutoscalerResource s)
 
 instance P.HasTarget (ComputeAutoscalerResource s) s Text where
     target =
-        lens (_target :: ComputeAutoscalerResource s -> TF.Attribute s Text)
+        lens (_target :: ComputeAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _target = a } :: ComputeAutoscalerResource s)
 
 instance P.HasZone (ComputeAutoscalerResource s) s Text where
     zone =
-        lens (_zone :: ComputeAutoscalerResource s -> TF.Attribute s Text)
+        lens (_zone :: ComputeAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ComputeAutoscalerResource s)
 
 instance P.HasComputedSelfLink (ComputeAutoscalerResource s) Text
@@ -1331,20 +1331,20 @@ and <https://cloud.google.com/compute/docs/reference/latest/backendBuckets>
 .
 -}
 data ComputeBackendBucketResource s = ComputeBackendBucketResource {
-      _bucket_name :: !(TF.Attribute s Text)
+      _bucket_name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Google Cloud Storage bucket to be used as a backend bucket. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) The textual description for the backend bucket. -}
-    , _enable_cdn :: !(TF.Attribute s Text)
+    , _enable_cdn :: !(TF.Attr s Text)
     {- ^ (Optional) Whether or not to enable the Cloud CDN on the backend bucket. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the backend bucket. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeBackendBucketResource s) where
-    toHCL ComputeBackendBucketResource{..} = TF.block $ catMaybes
+    toHCL ComputeBackendBucketResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bucket_name" _bucket_name
         , TF.attribute "description" _description
         , TF.attribute "enable_cdn" _enable_cdn
@@ -1354,27 +1354,27 @@ instance TF.ToHCL (ComputeBackendBucketResource s) where
 
 instance P.HasBucketName (ComputeBackendBucketResource s) s Text where
     bucketName =
-        lens (_bucket_name :: ComputeBackendBucketResource s -> TF.Attribute s Text)
+        lens (_bucket_name :: ComputeBackendBucketResource s -> TF.Attr s Text)
              (\s a -> s { _bucket_name = a } :: ComputeBackendBucketResource s)
 
 instance P.HasDescription (ComputeBackendBucketResource s) s Text where
     description =
-        lens (_description :: ComputeBackendBucketResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeBackendBucketResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeBackendBucketResource s)
 
 instance P.HasEnableCdn (ComputeBackendBucketResource s) s Text where
     enableCdn =
-        lens (_enable_cdn :: ComputeBackendBucketResource s -> TF.Attribute s Text)
+        lens (_enable_cdn :: ComputeBackendBucketResource s -> TF.Attr s Text)
              (\s a -> s { _enable_cdn = a } :: ComputeBackendBucketResource s)
 
 instance P.HasName (ComputeBackendBucketResource s) s Text where
     name =
-        lens (_name :: ComputeBackendBucketResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeBackendBucketResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeBackendBucketResource s)
 
 instance P.HasProject (ComputeBackendBucketResource s) s Text where
     project =
-        lens (_project :: ComputeBackendBucketResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeBackendBucketResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeBackendBucketResource s)
 
 instance P.HasComputedCreationTimestamp (ComputeBackendBucketResource s) Text
@@ -1402,34 +1402,34 @@ For internal load balancing, use a
 </docs/providers/google/r/compute_region_backend_service.html> .
 -}
 data ComputeBackendServiceResource s = ComputeBackendServiceResource {
-      _backend :: !(TF.Attribute s Text)
+      _backend :: !(TF.Attr s Text)
     {- ^ (Optional) The list of backends that serve this BackendService. Structure is documented below. -}
-    , _connection_draining_timeout_sec :: !(TF.Attribute s Text)
+    , _connection_draining_timeout_sec :: !(TF.Attr s Text)
     {- ^ (Optional) Time for which instance will be drained (not accept new connections, but still work to finish started ones). Defaults to @300@ . -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) The textual description for the backend service. -}
-    , _enable_cdn :: !(TF.Attribute s Text)
+    , _enable_cdn :: !(TF.Attr s Text)
     {- ^ (Optional) Whether or not to enable the Cloud CDN on the backend service. -}
-    , _health_checks :: !(TF.Attribute s Text)
+    , _health_checks :: !(TF.Attr s Text)
     {- ^ (Required) Specifies a list of HTTP/HTTPS health checks for checking the health of the backend service. Currently at most one health check can be specified, and a health check is required. -}
-    , _iap :: !(TF.Attribute s Text)
+    , _iap :: !(TF.Attr s Text)
     {- ^ (Optional) Specification for the Identity-Aware proxy. Disabled if not specified. Structure is documented below. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the backend service. -}
-    , _port_name :: !(TF.Attribute s Text)
+    , _port_name :: !(TF.Attr s Text)
     {- ^ (Optional) The name of a service that has been added to an instance group in this backend. See <https://cloud.google.com/compute/docs/instance-groups/#specifying_service_endpoints> for details. Defaults to http. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _protocol :: !(TF.Attribute s Text)
+    , _protocol :: !(TF.Attr s Text)
     {- ^ (Optional) The protocol for incoming requests. Defaults to @HTTP@ . -}
-    , _session_affinity :: !(TF.Attribute s Text)
+    , _session_affinity :: !(TF.Attr s Text)
     {- ^ (Optional) How to distribute load. Options are @NONE@ (no affinity), @CLIENT_IP@ (hash of the source/dest addresses / ports), and @GENERATED_COOKIE@ (distribute load using a generated session cookie). -}
-    , _timeout_sec :: !(TF.Attribute s Text)
+    , _timeout_sec :: !(TF.Attr s Text)
     {- ^ (Optional) The number of secs to wait for a backend to respond to a request before considering the request failed. Defaults to @30@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeBackendServiceResource s) where
-    toHCL ComputeBackendServiceResource{..} = TF.block $ catMaybes
+    toHCL ComputeBackendServiceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "backend" _backend
         , TF.attribute "connection_draining_timeout_sec" _connection_draining_timeout_sec
         , TF.attribute "description" _description
@@ -1446,62 +1446,62 @@ instance TF.ToHCL (ComputeBackendServiceResource s) where
 
 instance P.HasBackend (ComputeBackendServiceResource s) s Text where
     backend =
-        lens (_backend :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_backend :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _backend = a } :: ComputeBackendServiceResource s)
 
 instance P.HasConnectionDrainingTimeoutSec (ComputeBackendServiceResource s) s Text where
     connectionDrainingTimeoutSec =
-        lens (_connection_draining_timeout_sec :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_connection_draining_timeout_sec :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _connection_draining_timeout_sec = a } :: ComputeBackendServiceResource s)
 
 instance P.HasDescription (ComputeBackendServiceResource s) s Text where
     description =
-        lens (_description :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeBackendServiceResource s)
 
 instance P.HasEnableCdn (ComputeBackendServiceResource s) s Text where
     enableCdn =
-        lens (_enable_cdn :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_enable_cdn :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _enable_cdn = a } :: ComputeBackendServiceResource s)
 
 instance P.HasHealthChecks (ComputeBackendServiceResource s) s Text where
     healthChecks =
-        lens (_health_checks :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_health_checks :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _health_checks = a } :: ComputeBackendServiceResource s)
 
 instance P.HasIap (ComputeBackendServiceResource s) s Text where
     iap =
-        lens (_iap :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_iap :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _iap = a } :: ComputeBackendServiceResource s)
 
 instance P.HasName (ComputeBackendServiceResource s) s Text where
     name =
-        lens (_name :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeBackendServiceResource s)
 
 instance P.HasPortName (ComputeBackendServiceResource s) s Text where
     portName =
-        lens (_port_name :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_port_name :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _port_name = a } :: ComputeBackendServiceResource s)
 
 instance P.HasProject (ComputeBackendServiceResource s) s Text where
     project =
-        lens (_project :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeBackendServiceResource s)
 
 instance P.HasProtocol (ComputeBackendServiceResource s) s Text where
     protocol =
-        lens (_protocol :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_protocol :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: ComputeBackendServiceResource s)
 
 instance P.HasSessionAffinity (ComputeBackendServiceResource s) s Text where
     sessionAffinity =
-        lens (_session_affinity :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_session_affinity :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _session_affinity = a } :: ComputeBackendServiceResource s)
 
 instance P.HasTimeoutSec (ComputeBackendServiceResource s) s Text where
     timeoutSec =
-        lens (_timeout_sec :: ComputeBackendServiceResource s -> TF.Attribute s Text)
+        lens (_timeout_sec :: ComputeBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _timeout_sec = a } :: ComputeBackendServiceResource s)
 
 instance P.HasComputedFingerprint (ComputeBackendServiceResource s) Text
@@ -1535,28 +1535,28 @@ All arguments including the disk encryption key will be stored in the raw
 state as plain-text. </docs/state/sensitive-data.html> .
 -}
 data ComputeDiskResource s = ComputeDiskResource {
-      _disk_encryption_key_raw :: !(TF.Attribute s Text)
+      _disk_encryption_key_raw :: !(TF.Attr s Text)
     {- ^ (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption), encoded in <https://tools.ietf.org/html/rfc4648#section-4> to encrypt this disk. -}
-    , _image :: !(TF.Attribute s Text)
+    , _image :: !(TF.Attr s Text)
     {- ^ (Optional) The image from which to initialize this disk. This can be one of: the image's @self_link@ , @projects/{project}/global/images/{image}@ , @projects/{project}/global/images/family/{family}@ , @global/images/{image}@ , @global/images/family/{family}@ , @family/{family}@ , @{project}/{family}@ , @{project}/{image}@ , @{family}@ , or @{image}@ . If referred by family, the images names must include the family name. If they don't, use the </docs/providers/google/d/datasource_compute_image.html> . For instance, the image @centos-6-v20180104@ includes its family name @centos-6@ . These images can be referred by family name here. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the image. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _size :: !(TF.Attribute s Text)
+    , _size :: !(TF.Attr s Text)
     {- ^ (Optional) The size of the image in gigabytes. If not specified, it will inherit the size of its base image. -}
-    , _snapshot :: !(TF.Attribute s Text)
+    , _snapshot :: !(TF.Attr s Text)
     {- ^ (Optional) Name of snapshot from which to initialize this disk. -}
-    , _type' :: !(TF.Attribute s Text)
+    , _type' :: !(TF.Attr s Text)
     {- ^ (Optional) The GCE disk type. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone where this disk will be available. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeDiskResource s) where
-    toHCL ComputeDiskResource{..} = TF.block $ catMaybes
+    toHCL ComputeDiskResource{..} = TF.inline $ catMaybes
         [ TF.attribute "disk_encryption_key_raw" _disk_encryption_key_raw
         , TF.attribute "image" _image
         , TF.attribute "labels" _labels
@@ -1570,47 +1570,47 @@ instance TF.ToHCL (ComputeDiskResource s) where
 
 instance P.HasDiskEncryptionKeyRaw (ComputeDiskResource s) s Text where
     diskEncryptionKeyRaw =
-        lens (_disk_encryption_key_raw :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_disk_encryption_key_raw :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _disk_encryption_key_raw = a } :: ComputeDiskResource s)
 
 instance P.HasImage (ComputeDiskResource s) s Text where
     image =
-        lens (_image :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_image :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _image = a } :: ComputeDiskResource s)
 
 instance P.HasLabels (ComputeDiskResource s) s Text where
     labels =
-        lens (_labels :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_labels :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ComputeDiskResource s)
 
 instance P.HasName (ComputeDiskResource s) s Text where
     name =
-        lens (_name :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeDiskResource s)
 
 instance P.HasProject (ComputeDiskResource s) s Text where
     project =
-        lens (_project :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeDiskResource s)
 
 instance P.HasSize (ComputeDiskResource s) s Text where
     size =
-        lens (_size :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_size :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: ComputeDiskResource s)
 
 instance P.HasSnapshot (ComputeDiskResource s) s Text where
     snapshot =
-        lens (_snapshot :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_snapshot :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot = a } :: ComputeDiskResource s)
 
 instance P.HasType' (ComputeDiskResource s) s Text where
     type' =
-        lens (_type' :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_type' :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: ComputeDiskResource s)
 
 instance P.HasZone (ComputeDiskResource s) s Text where
     zone =
-        lens (_zone :: ComputeDiskResource s -> TF.Attribute s Text)
+        lens (_zone :: ComputeDiskResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ComputeDiskResource s)
 
 instance P.HasComputedDiskEncryptionKeySha256 (ComputeDiskResource s) Text
@@ -1640,38 +1640,38 @@ Manages a firewall resource within GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/firewalls> .
 -}
 data ComputeFirewallResource s = ComputeFirewallResource {
-      _allow :: !(TF.Attribute s Text)
+      _allow :: !(TF.Attr s Text)
     {- ^ (Required) Can be specified multiple times for each allow rule. Each allow block supports fields documented below. -}
-    , _deny :: !(TF.Attribute s Text)
+    , _deny :: !(TF.Attr s Text)
     {- ^ (Optional) Can be specified multiple times for each deny rule. Each deny block supports fields documented below. Can be specified instead of allow. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Textual description field. -}
-    , _destination_ranges :: !(TF.Attribute s Text)
+    , _destination_ranges :: !(TF.Attr s Text)
     {- ^ (Optional) A list of destination CIDR ranges that this firewall applies to. Can't be used for @INGRESS@ . -}
-    , _direction :: !(TF.Attribute s Text)
+    , _direction :: !(TF.Attr s Text)
     {- ^ (Optional) Direction of traffic to which this firewall applies; One of @INGRESS@ or @EGRESS@ . Defaults to @INGRESS@ . -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Required) The name or self_link of the network to attach this firewall to. -}
-    , _priority :: !(TF.Attribute s Text)
+    , _priority :: !(TF.Attr s Text)
     {- ^ (Optional) The priority for this firewall. Ranges from 0-65535, inclusive. Defaults to 1000. Firewall resources with lower priority values have higher precedence (e.g. a firewall resource with a priority value of 0 takes effect over all other firewall rules with a non-zero priority). -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _source_ranges :: !(TF.Attribute s Text)
+    , _source_ranges :: !(TF.Attr s Text)
     {- ^ (Optional) A list of source CIDR ranges that this firewall applies to. Can't be used for @EGRESS@ . -}
-    , _source_service_accounts :: !(TF.Attribute s Text)
+    , _source_service_accounts :: !(TF.Attr s Text)
     {- ^ (Optional) A list of service accounts such that the firewall will apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. @source_ranges@ can be set at the same time as @source_service_accounts@ . If both are set, the firewall will apply to traffic that has source IP address within @source_ranges@ OR the source IP belongs to an instance with service account listed in @source_service_accounts@ . The connection does not need to match both properties for the firewall to apply. @source_service_accounts@ cannot be used at the same time as @source_tags@ or @target_tags@ . -}
-    , _source_tags :: !(TF.Attribute s Text)
+    , _source_tags :: !(TF.Attr s Text)
     {- ^ (Optional) A list of source tags for this firewall. Can't be used for @EGRESS@ . -}
-    , _target_service_accounts :: !(TF.Attribute s Text)
+    , _target_service_accounts :: !(TF.Attr s Text)
     {- ^ (Optional) A list of service accounts indicating sets of instances located in the network that may make network connections as specified in @allow@ . @target_service_accounts@ cannot be used at the same time as @source_tags@ or @target_tags@ . If neither @target_service_accounts@ nor @target_tags@ are specified, the firewall rule applies to all instances on the specified network. -}
-    , _target_tags :: !(TF.Attribute s Text)
+    , _target_tags :: !(TF.Attr s Text)
     {- ^ (Optional) A list of target tags for this firewall. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeFirewallResource s) where
-    toHCL ComputeFirewallResource{..} = TF.block $ catMaybes
+    toHCL ComputeFirewallResource{..} = TF.inline $ catMaybes
         [ TF.attribute "allow" _allow
         , TF.attribute "deny" _deny
         , TF.attribute "description" _description
@@ -1690,72 +1690,72 @@ instance TF.ToHCL (ComputeFirewallResource s) where
 
 instance P.HasAllow (ComputeFirewallResource s) s Text where
     allow =
-        lens (_allow :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_allow :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _allow = a } :: ComputeFirewallResource s)
 
 instance P.HasDeny (ComputeFirewallResource s) s Text where
     deny =
-        lens (_deny :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_deny :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _deny = a } :: ComputeFirewallResource s)
 
 instance P.HasDescription (ComputeFirewallResource s) s Text where
     description =
-        lens (_description :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeFirewallResource s)
 
 instance P.HasDestinationRanges (ComputeFirewallResource s) s Text where
     destinationRanges =
-        lens (_destination_ranges :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_destination_ranges :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _destination_ranges = a } :: ComputeFirewallResource s)
 
 instance P.HasDirection (ComputeFirewallResource s) s Text where
     direction =
-        lens (_direction :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_direction :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _direction = a } :: ComputeFirewallResource s)
 
 instance P.HasName (ComputeFirewallResource s) s Text where
     name =
-        lens (_name :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeFirewallResource s)
 
 instance P.HasNetwork (ComputeFirewallResource s) s Text where
     network =
-        lens (_network :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_network :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeFirewallResource s)
 
 instance P.HasPriority (ComputeFirewallResource s) s Text where
     priority =
-        lens (_priority :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_priority :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _priority = a } :: ComputeFirewallResource s)
 
 instance P.HasProject (ComputeFirewallResource s) s Text where
     project =
-        lens (_project :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeFirewallResource s)
 
 instance P.HasSourceRanges (ComputeFirewallResource s) s Text where
     sourceRanges =
-        lens (_source_ranges :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_source_ranges :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _source_ranges = a } :: ComputeFirewallResource s)
 
 instance P.HasSourceServiceAccounts (ComputeFirewallResource s) s Text where
     sourceServiceAccounts =
-        lens (_source_service_accounts :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_source_service_accounts :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _source_service_accounts = a } :: ComputeFirewallResource s)
 
 instance P.HasSourceTags (ComputeFirewallResource s) s Text where
     sourceTags =
-        lens (_source_tags :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_source_tags :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _source_tags = a } :: ComputeFirewallResource s)
 
 instance P.HasTargetServiceAccounts (ComputeFirewallResource s) s Text where
     targetServiceAccounts =
-        lens (_target_service_accounts :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_target_service_accounts :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _target_service_accounts = a } :: ComputeFirewallResource s)
 
 instance P.HasTargetTags (ComputeFirewallResource s) s Text where
     targetTags =
-        lens (_target_tags :: ComputeFirewallResource s -> TF.Attribute s Text)
+        lens (_target_tags :: ComputeFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _target_tags = a } :: ComputeFirewallResource s)
 
 instance P.HasComputedSelfLink (ComputeFirewallResource s) Text
@@ -1789,36 +1789,36 @@ and <https://cloud.google.com/compute/docs/reference/latest/forwardingRules>
 .
 -}
 data ComputeForwardingRuleResource s = ComputeForwardingRuleResource {
-      _backend_service :: !(TF.Attribute s Text)
+      _backend_service :: !(TF.Attr s Text)
     {- ^ (Optional) BackendService resource to receive the matched traffic. Only used for internal load balancing. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Textual description field. -}
-    , _ip_address :: !(TF.Attribute s Text)
+    , _ip_address :: !(TF.Attr s Text)
     {- ^ (Optional) The static IP. (if not set, an ephemeral IP is used). -}
-    , _ip_protocol :: !(TF.Attribute s Text)
+    , _ip_protocol :: !(TF.Attr s Text)
     {- ^ (Optional) The IP protocol to route, one of "TCP" "UDP" "AH" "ESP" or "SCTP" for external load balancing, "TCP" or "UDP" for internal (default "TCP"). -}
-    , _load_balancing_scheme :: !(TF.Attribute s Text)
+    , _load_balancing_scheme :: !(TF.Attr s Text)
     {- ^ (Optional) Type of load balancing to use. Can be set to "INTERNAL" or "EXTERNAL" (default "EXTERNAL"). -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Optional) Network name or self_link that the load balanced IP should belong to. Only used for internal load balancing. If it is not provided, the default network is used. -}
-    , _port_range :: !(TF.Attribute s Text)
+    , _port_range :: !(TF.Attr s Text)
     {- ^ (Optional) A range e.g. "1024-2048" or a single port "1024" (defaults to all ports!). Only used for external load balancing. Some types of forwarding targets have constraints on the acceptable ports: -}
-    , _ports :: !(TF.Attribute s Text)
+    , _ports :: !(TF.Attr s Text)
     {- ^ (Optional) A list of ports (maximum of 5) to use for internal load balancing. Packets addressed to these ports will be forwarded to the backends configured with this forwarding rule. Required for internal load balancing. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The Region in which the created address should reside. If it is not provided, the provider region is used. -}
-    , _subnetwork :: !(TF.Attribute s Text)
+    , _subnetwork :: !(TF.Attr s Text)
     {- ^ (Optional) Subnetwork that the load balanced IP should belong to. Only used for internal load balancing. Must be specified if the network is in custom subnet mode. -}
-    , _target :: !(TF.Attribute s Text)
+    , _target :: !(TF.Attr s Text)
     {- ^ (Optional) URL of target pool. Required for external load balancing. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeForwardingRuleResource s) where
-    toHCL ComputeForwardingRuleResource{..} = TF.block $ catMaybes
+    toHCL ComputeForwardingRuleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "backend_service" _backend_service
         , TF.attribute "description" _description
         , TF.attribute "ip_address" _ip_address
@@ -1836,67 +1836,67 @@ instance TF.ToHCL (ComputeForwardingRuleResource s) where
 
 instance P.HasBackendService (ComputeForwardingRuleResource s) s Text where
     backendService =
-        lens (_backend_service :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_backend_service :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _backend_service = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasDescription (ComputeForwardingRuleResource s) s Text where
     description =
-        lens (_description :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasIpAddress (ComputeForwardingRuleResource s) s Text where
     ipAddress =
-        lens (_ip_address :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_ip_address :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasIpProtocol (ComputeForwardingRuleResource s) s Text where
     ipProtocol =
-        lens (_ip_protocol :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_ip_protocol :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ip_protocol = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasLoadBalancingScheme (ComputeForwardingRuleResource s) s Text where
     loadBalancingScheme =
-        lens (_load_balancing_scheme :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_load_balancing_scheme :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _load_balancing_scheme = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasName (ComputeForwardingRuleResource s) s Text where
     name =
-        lens (_name :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasNetwork (ComputeForwardingRuleResource s) s Text where
     network =
-        lens (_network :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_network :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasPortRange (ComputeForwardingRuleResource s) s Text where
     portRange =
-        lens (_port_range :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_port_range :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _port_range = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasPorts (ComputeForwardingRuleResource s) s Text where
     ports =
-        lens (_ports :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_ports :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ports = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasProject (ComputeForwardingRuleResource s) s Text where
     project =
-        lens (_project :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasRegion (ComputeForwardingRuleResource s) s Text where
     region =
-        lens (_region :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasSubnetwork (ComputeForwardingRuleResource s) s Text where
     subnetwork =
-        lens (_subnetwork :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_subnetwork :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _subnetwork = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasTarget (ComputeForwardingRuleResource s) s Text where
     target =
-        lens (_target :: ComputeForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_target :: ComputeForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _target = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasComputedSelfLink (ComputeForwardingRuleResource s) Text
@@ -1928,16 +1928,16 @@ project. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/globalAddresses> .
 -}
 data ComputeGlobalAddressResource s = ComputeGlobalAddressResource {
-      _ip_version :: !(TF.Attribute s Text)
+      _ip_version :: !(TF.Attr s Text)
     {- ^ (Optional) The IP Version that will be used by this address. One of @"IPV4"@ or @"IPV6"@ . -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeGlobalAddressResource s) where
-    toHCL ComputeGlobalAddressResource{..} = TF.block $ catMaybes
+    toHCL ComputeGlobalAddressResource{..} = TF.inline $ catMaybes
         [ TF.attribute "ip_version" _ip_version
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -1945,17 +1945,17 @@ instance TF.ToHCL (ComputeGlobalAddressResource s) where
 
 instance P.HasIpVersion (ComputeGlobalAddressResource s) s Text where
     ipVersion =
-        lens (_ip_version :: ComputeGlobalAddressResource s -> TF.Attribute s Text)
+        lens (_ip_version :: ComputeGlobalAddressResource s -> TF.Attr s Text)
              (\s a -> s { _ip_version = a } :: ComputeGlobalAddressResource s)
 
 instance P.HasName (ComputeGlobalAddressResource s) s Text where
     name =
-        lens (_name :: ComputeGlobalAddressResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeGlobalAddressResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeGlobalAddressResource s)
 
 instance P.HasProject (ComputeGlobalAddressResource s) s Text where
     project =
-        lens (_project :: ComputeGlobalAddressResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeGlobalAddressResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeGlobalAddressResource s)
 
 instance P.HasComputedAddress (ComputeGlobalAddressResource s) Text
@@ -1980,28 +1980,28 @@ and
 .
 -}
 data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) Textual description field. -}
-    , _ip_address :: !(TF.Attribute s Text)
+    , _ip_address :: !(TF.Attr s Text)
     {- ^ (Optional) The static IP. (if not set, an ephemeral IP is used). This should be the literal IP address to be used, not the @self_link@ to a @google_compute_global_address@ resource. (If using a @google_compute_global_address@ resource, use the @address@ property instead of the @self_link@ property.) -}
-    , _ip_protocol :: !(TF.Attribute s Text)
+    , _ip_protocol :: !(TF.Attr s Text)
     {- ^ (Optional) The IP protocol to route, one of "TCP" "UDP" "AH" "ESP" or "SCTP". (default "TCP"). -}
-    , _ip_version :: !(TF.Attribute s Text)
+    , _ip_version :: !(TF.Attr s Text)
     {- ^ (Optional) The IP Version that will be used by this resource's address. One of @"IPV4"@ or @"IPV6"@ . -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) A set of key/value label pairs to assign to the resource. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _port_range :: !(TF.Attribute s Text)
+    , _port_range :: !(TF.Attr s Text)
     {- ^ (Optional) A range e.g. "1024-2048" or a single port "1024" (defaults to all ports!). Some types of forwarding targets have constraints on the acceptable ports: -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _target :: !(TF.Attribute s Text)
+    , _target :: !(TF.Attr s Text)
     {- ^ (Required) URL of target HTTP or HTTPS proxy. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeGlobalForwardingRuleResource s) where
-    toHCL ComputeGlobalForwardingRuleResource{..} = TF.block $ catMaybes
+    toHCL ComputeGlobalForwardingRuleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "ip_address" _ip_address
         , TF.attribute "ip_protocol" _ip_protocol
@@ -2015,47 +2015,47 @@ instance TF.ToHCL (ComputeGlobalForwardingRuleResource s) where
 
 instance P.HasDescription (ComputeGlobalForwardingRuleResource s) s Text where
     description =
-        lens (_description :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasIpAddress (ComputeGlobalForwardingRuleResource s) s Text where
     ipAddress =
-        lens (_ip_address :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_ip_address :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasIpProtocol (ComputeGlobalForwardingRuleResource s) s Text where
     ipProtocol =
-        lens (_ip_protocol :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_ip_protocol :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ip_protocol = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasIpVersion (ComputeGlobalForwardingRuleResource s) s Text where
     ipVersion =
-        lens (_ip_version :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_ip_version :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ip_version = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasLabels (ComputeGlobalForwardingRuleResource s) s Text where
     labels =
-        lens (_labels :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_labels :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasName (ComputeGlobalForwardingRuleResource s) s Text where
     name =
-        lens (_name :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasPortRange (ComputeGlobalForwardingRuleResource s) s Text where
     portRange =
-        lens (_port_range :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_port_range :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _port_range = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasProject (ComputeGlobalForwardingRuleResource s) s Text where
     project =
-        lens (_project :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasTarget (ComputeGlobalForwardingRuleResource s) s Text where
     target =
-        lens (_target :: ComputeGlobalForwardingRuleResource s -> TF.Attribute s Text)
+        lens (_target :: ComputeGlobalForwardingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _target = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasComputedLabelFingerprint (ComputeGlobalForwardingRuleResource s) Text
@@ -2085,32 +2085,32 @@ from the pool. For more information, see
 <https://cloud.google.com/compute/docs/reference/latest/healthChecks> .
 -}
 data ComputeHealthCheckResource s = ComputeHealthCheckResource {
-      _check_interval_sec :: !(TF.Attribute s Text)
+      _check_interval_sec :: !(TF.Attr s Text)
     {- ^ (Optional) The number of seconds between each poll of the instance instance (default 5). -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Textual description field. -}
-    , _healthy_threshold :: !(TF.Attribute s Text)
+    , _healthy_threshold :: !(TF.Attr s Text)
     {- ^ (Optional) Consecutive successes required (default 2). -}
-    , _http_health_check :: !(TF.Attribute s Text)
+    , _http_health_check :: !(TF.Attr s Text)
     {- ^ (Optional) An HTTP Health Check. Only one kind of Health Check can be added. Structure is documented below. -}
-    , _https_health_check :: !(TF.Attribute s Text)
+    , _https_health_check :: !(TF.Attr s Text)
     {- ^ (Optional) An HTTPS Health Check. Only one kind of Health Check can be added. Structure is documented below. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _ssl_health_check :: !(TF.Attribute s Text)
+    , _ssl_health_check :: !(TF.Attr s Text)
     {- ^ (Optional) An SSL Health Check. Only one kind of Health Check can be added. Structure is documented below. -}
-    , _tcp_health_check :: !(TF.Attribute s Text)
+    , _tcp_health_check :: !(TF.Attr s Text)
     {- ^ (Optional) A TCP Health Check. Only one kind of Health Check can be added. Structure is documented below. -}
-    , _timeout_sec :: !(TF.Attribute s Text)
+    , _timeout_sec :: !(TF.Attr s Text)
     {- ^ (Optional) The number of seconds to wait before declaring failure (default 5). -}
-    , _unhealthy_threshold :: !(TF.Attribute s Text)
+    , _unhealthy_threshold :: !(TF.Attr s Text)
     {- ^ (Optional) Consecutive failures required (default 2). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeHealthCheckResource s) where
-    toHCL ComputeHealthCheckResource{..} = TF.block $ catMaybes
+    toHCL ComputeHealthCheckResource{..} = TF.inline $ catMaybes
         [ TF.attribute "check_interval_sec" _check_interval_sec
         , TF.attribute "description" _description
         , TF.attribute "healthy_threshold" _healthy_threshold
@@ -2126,57 +2126,57 @@ instance TF.ToHCL (ComputeHealthCheckResource s) where
 
 instance P.HasCheckIntervalSec (ComputeHealthCheckResource s) s Text where
     checkIntervalSec =
-        lens (_check_interval_sec :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_check_interval_sec :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _check_interval_sec = a } :: ComputeHealthCheckResource s)
 
 instance P.HasDescription (ComputeHealthCheckResource s) s Text where
     description =
-        lens (_description :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeHealthCheckResource s)
 
 instance P.HasHealthyThreshold (ComputeHealthCheckResource s) s Text where
     healthyThreshold =
-        lens (_healthy_threshold :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_healthy_threshold :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _healthy_threshold = a } :: ComputeHealthCheckResource s)
 
 instance P.HasHttpHealthCheck (ComputeHealthCheckResource s) s Text where
     httpHealthCheck =
-        lens (_http_health_check :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_http_health_check :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _http_health_check = a } :: ComputeHealthCheckResource s)
 
 instance P.HasHttpsHealthCheck (ComputeHealthCheckResource s) s Text where
     httpsHealthCheck =
-        lens (_https_health_check :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_https_health_check :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _https_health_check = a } :: ComputeHealthCheckResource s)
 
 instance P.HasName (ComputeHealthCheckResource s) s Text where
     name =
-        lens (_name :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeHealthCheckResource s)
 
 instance P.HasProject (ComputeHealthCheckResource s) s Text where
     project =
-        lens (_project :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeHealthCheckResource s)
 
 instance P.HasSslHealthCheck (ComputeHealthCheckResource s) s Text where
     sslHealthCheck =
-        lens (_ssl_health_check :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_ssl_health_check :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _ssl_health_check = a } :: ComputeHealthCheckResource s)
 
 instance P.HasTcpHealthCheck (ComputeHealthCheckResource s) s Text where
     tcpHealthCheck =
-        lens (_tcp_health_check :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_tcp_health_check :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _tcp_health_check = a } :: ComputeHealthCheckResource s)
 
 instance P.HasTimeoutSec (ComputeHealthCheckResource s) s Text where
     timeoutSec =
-        lens (_timeout_sec :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_timeout_sec :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _timeout_sec = a } :: ComputeHealthCheckResource s)
 
 instance P.HasUnhealthyThreshold (ComputeHealthCheckResource s) s Text where
     unhealthyThreshold =
-        lens (_unhealthy_threshold :: ComputeHealthCheckResource s -> TF.Attribute s Text)
+        lens (_unhealthy_threshold :: ComputeHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _unhealthy_threshold = a } :: ComputeHealthCheckResource s)
 
 instance P.HasComputedSelfLink (ComputeHealthCheckResource s) Text
@@ -2213,30 +2213,30 @@ preferred for all uses except except
 require the legacy HttpHealthChecks.
 -}
 data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource {
-      _check_interval_sec :: !(TF.Attribute s Text)
+      _check_interval_sec :: !(TF.Attr s Text)
     {- ^ (Optional) The number of seconds between each poll of the instance instance (default 5). -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Textual description field. -}
-    , _healthy_threshold :: !(TF.Attribute s Text)
+    , _healthy_threshold :: !(TF.Attr s Text)
     {- ^ (Optional) Consecutive successes required (default 2). -}
-    , _host :: !(TF.Attribute s Text)
+    , _host :: !(TF.Attr s Text)
     {- ^ (Optional) HTTP host header field (default instance's public ip). -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _port :: !(TF.Attribute s Text)
+    , _port :: !(TF.Attr s Text)
     {- ^ (Optional) TCP port to connect to (default 80). -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _request_path :: !(TF.Attribute s Text)
+    , _request_path :: !(TF.Attr s Text)
     {- ^ (Optional) URL path to query (default /). -}
-    , _timeout_sec :: !(TF.Attribute s Text)
+    , _timeout_sec :: !(TF.Attr s Text)
     {- ^ (Optional) The number of seconds to wait before declaring failure (default 5). -}
-    , _unhealthy_threshold :: !(TF.Attribute s Text)
+    , _unhealthy_threshold :: !(TF.Attr s Text)
     {- ^ (Optional) Consecutive failures required (default 2). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeHttpHealthCheckResource s) where
-    toHCL ComputeHttpHealthCheckResource{..} = TF.block $ catMaybes
+    toHCL ComputeHttpHealthCheckResource{..} = TF.inline $ catMaybes
         [ TF.attribute "check_interval_sec" _check_interval_sec
         , TF.attribute "description" _description
         , TF.attribute "healthy_threshold" _healthy_threshold
@@ -2251,52 +2251,52 @@ instance TF.ToHCL (ComputeHttpHealthCheckResource s) where
 
 instance P.HasCheckIntervalSec (ComputeHttpHealthCheckResource s) s Text where
     checkIntervalSec =
-        lens (_check_interval_sec :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_check_interval_sec :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _check_interval_sec = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasDescription (ComputeHttpHealthCheckResource s) s Text where
     description =
-        lens (_description :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasHealthyThreshold (ComputeHttpHealthCheckResource s) s Text where
     healthyThreshold =
-        lens (_healthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_healthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _healthy_threshold = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasHost (ComputeHttpHealthCheckResource s) s Text where
     host =
-        lens (_host :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_host :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _host = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasName (ComputeHttpHealthCheckResource s) s Text where
     name =
-        lens (_name :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasPort (ComputeHttpHealthCheckResource s) s Text where
     port =
-        lens (_port :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_port :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasProject (ComputeHttpHealthCheckResource s) s Text where
     project =
-        lens (_project :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasRequestPath (ComputeHttpHealthCheckResource s) s Text where
     requestPath =
-        lens (_request_path :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_request_path :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _request_path = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasTimeoutSec (ComputeHttpHealthCheckResource s) s Text where
     timeoutSec =
-        lens (_timeout_sec :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_timeout_sec :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _timeout_sec = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) s Text where
     unhealthyThreshold =
-        lens (_unhealthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attribute s Text)
+        lens (_unhealthy_threshold :: ComputeHttpHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _unhealthy_threshold = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasComputedSelfLink (ComputeHttpHealthCheckResource s) Text
@@ -2332,30 +2332,30 @@ preferred for all uses except except
 require the legacy HttpHealthChecks.
 -}
 data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource {
-      _check_interval_sec :: !(TF.Attribute s Text)
+      _check_interval_sec :: !(TF.Attr s Text)
     {- ^ (Optional) How often to poll each instance (default 5). -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Textual description field. -}
-    , _healthy_threshold :: !(TF.Attribute s Text)
+    , _healthy_threshold :: !(TF.Attr s Text)
     {- ^ (Optional) Consecutive successes required (default 2). -}
-    , _host :: !(TF.Attribute s Text)
+    , _host :: !(TF.Attr s Text)
     {- ^ (Optional) HTTPS host header field (default instance's public ip). -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _port :: !(TF.Attribute s Text)
+    , _port :: !(TF.Attr s Text)
     {- ^ (Optional) TCP port to connect to (default 443). -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _request_path :: !(TF.Attribute s Text)
+    , _request_path :: !(TF.Attr s Text)
     {- ^ (Optional) URL path to query (default /). -}
-    , _timeout_sec :: !(TF.Attribute s Text)
+    , _timeout_sec :: !(TF.Attr s Text)
     {- ^ (Optional) How long before declaring failure (default 5). -}
-    , _unhealthy_threshold :: !(TF.Attribute s Text)
+    , _unhealthy_threshold :: !(TF.Attr s Text)
     {- ^ (Optional) Consecutive failures required (default 2). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeHttpsHealthCheckResource s) where
-    toHCL ComputeHttpsHealthCheckResource{..} = TF.block $ catMaybes
+    toHCL ComputeHttpsHealthCheckResource{..} = TF.inline $ catMaybes
         [ TF.attribute "check_interval_sec" _check_interval_sec
         , TF.attribute "description" _description
         , TF.attribute "healthy_threshold" _healthy_threshold
@@ -2370,52 +2370,52 @@ instance TF.ToHCL (ComputeHttpsHealthCheckResource s) where
 
 instance P.HasCheckIntervalSec (ComputeHttpsHealthCheckResource s) s Text where
     checkIntervalSec =
-        lens (_check_interval_sec :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_check_interval_sec :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _check_interval_sec = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasDescription (ComputeHttpsHealthCheckResource s) s Text where
     description =
-        lens (_description :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasHealthyThreshold (ComputeHttpsHealthCheckResource s) s Text where
     healthyThreshold =
-        lens (_healthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_healthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _healthy_threshold = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasHost (ComputeHttpsHealthCheckResource s) s Text where
     host =
-        lens (_host :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_host :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _host = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasName (ComputeHttpsHealthCheckResource s) s Text where
     name =
-        lens (_name :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasPort (ComputeHttpsHealthCheckResource s) s Text where
     port =
-        lens (_port :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_port :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasProject (ComputeHttpsHealthCheckResource s) s Text where
     project =
-        lens (_project :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasRequestPath (ComputeHttpsHealthCheckResource s) s Text where
     requestPath =
-        lens (_request_path :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_request_path :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _request_path = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasTimeoutSec (ComputeHttpsHealthCheckResource s) s Text where
     timeoutSec =
-        lens (_timeout_sec :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_timeout_sec :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _timeout_sec = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) s Text where
     unhealthyThreshold =
-        lens (_unhealthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attribute s Text)
+        lens (_unhealthy_threshold :: ComputeHttpsHealthCheckResource s -> TF.Attr s Text)
              (\s a -> s { _unhealthy_threshold = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasComputedSelfLink (ComputeHttpsHealthCheckResource s) Text
@@ -2444,24 +2444,24 @@ existing tarball. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/images> .
 -}
 data ComputeImageResource s = ComputeImageResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) The description of the image to be created -}
-    , _family' :: !(TF.Attribute s Text)
+    , _family' :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the image family to which this image belongs. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the image. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _raw_disk :: !(TF.Attribute s Text)
+    , _raw_disk :: !(TF.Attr s Text)
     {- ^ (Optional) The raw disk that will be used as the source of the image. Changing this forces a new resource to be created. Structure is documented below. -}
-    , _source_disk :: !(TF.Attribute s Text)
+    , _source_disk :: !(TF.Attr s Text)
     {- ^ (Optional) The URL of a disk that will be used as the source of the image. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeImageResource s) where
-    toHCL ComputeImageResource{..} = TF.block $ catMaybes
+    toHCL ComputeImageResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "family" _family'
         , TF.attribute "labels" _labels
@@ -2473,37 +2473,37 @@ instance TF.ToHCL (ComputeImageResource s) where
 
 instance P.HasDescription (ComputeImageResource s) s Text where
     description =
-        lens (_description :: ComputeImageResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeImageResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeImageResource s)
 
 instance P.HasFamily' (ComputeImageResource s) s Text where
     family' =
-        lens (_family' :: ComputeImageResource s -> TF.Attribute s Text)
+        lens (_family' :: ComputeImageResource s -> TF.Attr s Text)
              (\s a -> s { _family' = a } :: ComputeImageResource s)
 
 instance P.HasLabels (ComputeImageResource s) s Text where
     labels =
-        lens (_labels :: ComputeImageResource s -> TF.Attribute s Text)
+        lens (_labels :: ComputeImageResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ComputeImageResource s)
 
 instance P.HasName (ComputeImageResource s) s Text where
     name =
-        lens (_name :: ComputeImageResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeImageResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeImageResource s)
 
 instance P.HasProject (ComputeImageResource s) s Text where
     project =
-        lens (_project :: ComputeImageResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeImageResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeImageResource s)
 
 instance P.HasRawDisk (ComputeImageResource s) s Text where
     rawDisk =
-        lens (_raw_disk :: ComputeImageResource s -> TF.Attribute s Text)
+        lens (_raw_disk :: ComputeImageResource s -> TF.Attr s Text)
              (\s a -> s { _raw_disk = a } :: ComputeImageResource s)
 
 instance P.HasSourceDisk (ComputeImageResource s) s Text where
     sourceDisk =
-        lens (_source_disk :: ComputeImageResource s -> TF.Attribute s Text)
+        lens (_source_disk :: ComputeImageResource s -> TF.Attr s Text)
              (\s a -> s { _source_disk = a } :: ComputeImageResource s)
 
 instance P.HasComputedLabelFingerprint (ComputeImageResource s) Text
@@ -2534,32 +2534,32 @@ instance template. For more information, see
 create a regional (multi-zone) instance group manager.
 -}
 data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource {
-      _auto_healing_policies :: !(TF.Attribute s Text)
+      _auto_healing_policies :: !(TF.Attr s Text)
     {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) The autohealing policies for this managed instance group. You can specify only one value. Structure is documented below. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances#monitoring_groups> . -}
-    , _base_instance_name :: !(TF.Attribute s Text)
+    , _base_instance_name :: !(TF.Attr s Text)
     {- ^ (Required) The base instance name to use for instances in this group. The value must be a valid <https://www.ietf.org/rfc/rfc1035.txt> name. Supported characters are lowercase letters, numbers, and hyphens (-). Instances are named by appending a hyphen and a random four-character string to the base instance name. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) An optional textual description of the instance group manager. -}
-    , _instance_template :: !(TF.Attribute s Text)
+    , _instance_template :: !(TF.Attr s Text)
     {- ^ (Required) The full URL to an instance template from which all new instances will be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the instance group manager. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
-    , _named_port :: !(TF.Attribute s Text)
+    , _named_port :: !(TF.Attr s Text)
     {- ^ (Optional) The named port configuration. See the section below for details on configuration. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _target_pools :: !(TF.Attribute s Text)
+    , _target_pools :: !(TF.Attr s Text)
     {- ^ (Optional) The full URL of all target pools to which new instances in the group are added. Updating the target pools attribute does not affect existing instances. -}
-    , _target_size :: !(TF.Attribute s Text)
+    , _target_size :: !(TF.Attr s Text)
     {- ^ (Optional) The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. Defaults to @0@ . -}
-    , _update_strategy :: !(TF.Attribute s Text)
+    , _update_strategy :: !(TF.Attr s Text)
     {- ^ (Optional, Default @"RESTART"@ ) If the @instance_template@ resource is modified, a value of @"NONE"@ will prevent any of the managed instances from being restarted by Terraform. A value of @"RESTART"@ will restart all of the instances at once. In the future, as the GCE API matures we will support @"ROLLING_UPDATE"@ as well. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone that instances in this group should be created in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeInstanceGroupManagerResource s) where
-    toHCL ComputeInstanceGroupManagerResource{..} = TF.block $ catMaybes
+    toHCL ComputeInstanceGroupManagerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "auto_healing_policies" _auto_healing_policies
         , TF.attribute "base_instance_name" _base_instance_name
         , TF.attribute "description" _description
@@ -2575,57 +2575,57 @@ instance TF.ToHCL (ComputeInstanceGroupManagerResource s) where
 
 instance P.HasAutoHealingPolicies (ComputeInstanceGroupManagerResource s) s Text where
     autoHealingPolicies =
-        lens (_auto_healing_policies :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_auto_healing_policies :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _auto_healing_policies = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasBaseInstanceName (ComputeInstanceGroupManagerResource s) s Text where
     baseInstanceName =
-        lens (_base_instance_name :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_base_instance_name :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _base_instance_name = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasDescription (ComputeInstanceGroupManagerResource s) s Text where
     description =
-        lens (_description :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasInstanceTemplate (ComputeInstanceGroupManagerResource s) s Text where
     instanceTemplate =
-        lens (_instance_template :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_instance_template :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _instance_template = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasName (ComputeInstanceGroupManagerResource s) s Text where
     name =
-        lens (_name :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasNamedPort (ComputeInstanceGroupManagerResource s) s Text where
     namedPort =
-        lens (_named_port :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_named_port :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _named_port = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasProject (ComputeInstanceGroupManagerResource s) s Text where
     project =
-        lens (_project :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasTargetPools (ComputeInstanceGroupManagerResource s) s Text where
     targetPools =
-        lens (_target_pools :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_target_pools :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _target_pools = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasTargetSize (ComputeInstanceGroupManagerResource s) s Text where
     targetSize =
-        lens (_target_size :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_target_size :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _target_size = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasUpdateStrategy (ComputeInstanceGroupManagerResource s) s Text where
     updateStrategy =
-        lens (_update_strategy :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_update_strategy :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _update_strategy = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasZone (ComputeInstanceGroupManagerResource s) s Text where
     zone =
-        lens (_zone :: ComputeInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_zone :: ComputeInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasComputedFingerprint (ComputeInstanceGroupManagerResource s) Text
@@ -2657,24 +2657,24 @@ more information, see
 and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
 -}
 data ComputeInstanceGroupResource s = ComputeInstanceGroupResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) An optional textual description of the instance group. -}
-    , _instances :: !(TF.Attribute s Text)
+    , _instances :: !(TF.Attr s Text)
     {- ^ (Optional) List of instances in the group. They should be given as self_link URLs. When adding instances they must all be in the same network and zone as the instance group. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the instance group. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
-    , _named_port :: !(TF.Attribute s Text)
+    , _named_port :: !(TF.Attr s Text)
     {- ^ (Optional) The named port configuration. See the section below for details on configuration. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Optional) The URL of the network the instance group is in. If this is different from the network where the instances are in, the creation fails. Defaults to the network where the instances are in (if neither @network@ nor @instances@ is specified, this field will be blank). -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone that this instance group should be created in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeInstanceGroupResource s) where
-    toHCL ComputeInstanceGroupResource{..} = TF.block $ catMaybes
+    toHCL ComputeInstanceGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "instances" _instances
         , TF.attribute "name" _name
@@ -2686,37 +2686,37 @@ instance TF.ToHCL (ComputeInstanceGroupResource s) where
 
 instance P.HasDescription (ComputeInstanceGroupResource s) s Text where
     description =
-        lens (_description :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeInstanceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeInstanceGroupResource s)
 
 instance P.HasInstances (ComputeInstanceGroupResource s) s Text where
     instances =
-        lens (_instances :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
+        lens (_instances :: ComputeInstanceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _instances = a } :: ComputeInstanceGroupResource s)
 
 instance P.HasName (ComputeInstanceGroupResource s) s Text where
     name =
-        lens (_name :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeInstanceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeInstanceGroupResource s)
 
 instance P.HasNamedPort (ComputeInstanceGroupResource s) s Text where
     namedPort =
-        lens (_named_port :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
+        lens (_named_port :: ComputeInstanceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _named_port = a } :: ComputeInstanceGroupResource s)
 
 instance P.HasNetwork (ComputeInstanceGroupResource s) s Text where
     network =
-        lens (_network :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
+        lens (_network :: ComputeInstanceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeInstanceGroupResource s)
 
 instance P.HasProject (ComputeInstanceGroupResource s) s Text where
     project =
-        lens (_project :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeInstanceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeInstanceGroupResource s)
 
 instance P.HasZone (ComputeInstanceGroupResource s) s Text where
     zone =
-        lens (_zone :: ComputeInstanceGroupResource s -> TF.Attribute s Text)
+        lens (_zone :: ComputeInstanceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ComputeInstanceGroupResource s)
 
 instance P.HasComputedSelfLink (ComputeInstanceGroupResource s) Text
@@ -2742,50 +2742,50 @@ Manages a VM instance resource within GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/instances> .
 -}
 data ComputeInstanceResource s = ComputeInstanceResource {
-      _allow_stopping_for_update :: !(TF.Attribute s Text)
+      _allow_stopping_for_update :: !(TF.Attr s Text)
     {- ^ (Optional) If true, allows Terraform to stop the instance to update its properties. If you try to update a property that requires stopping the instance without setting this field, the update will fail. -}
-    , _attached_disk :: !(TF.Attribute s Text)
+    , _attached_disk :: !(TF.Attr s Text)
     {- ^ (Optional) List of disks to attach to the instance. Structure is documented below. -}
-    , _boot_disk :: !(TF.Attribute s Text)
+    , _boot_disk :: !(TF.Attr s Text)
     {- ^ (Required) The boot disk for the instance. Structure is documented below. -}
-    , _can_ip_forward :: !(TF.Attribute s Text)
+    , _can_ip_forward :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to allow sending and receiving of packets with non-matching source or destination IPs. This defaults to false. -}
-    , _create_timeout :: !(TF.Attribute s Text)
+    , _create_timeout :: !(TF.Attr s Text)
     {- ^ (Optional) Configurable timeout in minutes for creating instances. Default is 4 minutes. Changing this forces a new resource to be created. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A brief description of this resource. -}
-    , _guest_accelerator :: !(TF.Attribute s Text)
+    , _guest_accelerator :: !(TF.Attr s Text)
     {- ^ (Optional) List of the type and count of accelerator cards attached to the instance. Structure documented below. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the instance. -}
-    , _machine_type :: !(TF.Attribute s Text)
+    , _machine_type :: !(TF.Attr s Text)
     {- ^ (Required) The machine type to create. To create a custom machine type, value should be set as specified <https://cloud.google.com/compute/docs/reference/latest/instances#machineType> . Note : <#allow_stopping_for_update> must be set to true in order to update this field. -}
-    , _metadata :: !(TF.Attribute s Text)
+    , _metadata :: !(TF.Attr s Text)
     {- ^ (Optional) Metadata key/value pairs to make available from within the instance. -}
-    , _metadata_startup_script :: !(TF.Attribute s Text)
+    , _metadata_startup_script :: !(TF.Attr s Text)
     {- ^ (Optional) An alternative to using the startup-script metadata key, except this one forces the instance to be recreated (thus re-running the script) if it is changed. This replaces the startup-script metadata key on the created instance and thus the two mechanisms are not allowed to be used simultaneously. -}
-    , _min_cpu_platform :: !(TF.Attribute s Text)
+    , _min_cpu_platform :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies a minimum CPU platform for the VM instance. Applicable values are the friendly names of CPU platforms, such as @Intel Haswell@ or @Intel Skylake@ . See the complete list <https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform> . Note : <#allow_stopping_for_update> must be set to true in order to update this field. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _network_interface :: !(TF.Attribute s Text)
+    , _network_interface :: !(TF.Attr s Text)
     {- ^ (Required) Networks to attach to the instance. This can be specified multiple times. Structure is documented below. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _scheduling :: !(TF.Attribute s Text)
+    , _scheduling :: !(TF.Attr s Text)
     {- ^ (Optional) The scheduling strategy to use. More details about this configuration option are detailed below. -}
-    , _scratch_disk :: !(TF.Attribute s Text)
+    , _scratch_disk :: !(TF.Attr s Text)
     {- ^ (Optional) Scratch disks to attach to the instance. This can be specified multiple times for multiple scratch disks. Structure is documented below. -}
-    , _service_account :: !(TF.Attribute s Text)
+    , _service_account :: !(TF.Attr s Text)
     {- ^ (Optional) Service account to attach to the instance. Structure is documented below. Note : <#allow_stopping_for_update> must be set to true in order to update this field. -}
-    , _tags :: !(TF.Attribute s Text)
+    , _tags :: !(TF.Attr s Text)
     {- ^ (Optional) A list of tags to attach to the instance. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone that the machine should be created in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeInstanceResource s) where
-    toHCL ComputeInstanceResource{..} = TF.block $ catMaybes
+    toHCL ComputeInstanceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "allow_stopping_for_update" _allow_stopping_for_update
         , TF.attribute "attached_disk" _attached_disk
         , TF.attribute "boot_disk" _boot_disk
@@ -2810,102 +2810,102 @@ instance TF.ToHCL (ComputeInstanceResource s) where
 
 instance P.HasAllowStoppingForUpdate (ComputeInstanceResource s) s Text where
     allowStoppingForUpdate =
-        lens (_allow_stopping_for_update :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_allow_stopping_for_update :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _allow_stopping_for_update = a } :: ComputeInstanceResource s)
 
 instance P.HasAttachedDisk (ComputeInstanceResource s) s Text where
     attachedDisk =
-        lens (_attached_disk :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_attached_disk :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _attached_disk = a } :: ComputeInstanceResource s)
 
 instance P.HasBootDisk (ComputeInstanceResource s) s Text where
     bootDisk =
-        lens (_boot_disk :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_boot_disk :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _boot_disk = a } :: ComputeInstanceResource s)
 
 instance P.HasCanIpForward (ComputeInstanceResource s) s Text where
     canIpForward =
-        lens (_can_ip_forward :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_can_ip_forward :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _can_ip_forward = a } :: ComputeInstanceResource s)
 
 instance P.HasCreateTimeout (ComputeInstanceResource s) s Text where
     createTimeout =
-        lens (_create_timeout :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_create_timeout :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _create_timeout = a } :: ComputeInstanceResource s)
 
 instance P.HasDescription (ComputeInstanceResource s) s Text where
     description =
-        lens (_description :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeInstanceResource s)
 
 instance P.HasGuestAccelerator (ComputeInstanceResource s) s Text where
     guestAccelerator =
-        lens (_guest_accelerator :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_guest_accelerator :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _guest_accelerator = a } :: ComputeInstanceResource s)
 
 instance P.HasLabels (ComputeInstanceResource s) s Text where
     labels =
-        lens (_labels :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_labels :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ComputeInstanceResource s)
 
 instance P.HasMachineType (ComputeInstanceResource s) s Text where
     machineType =
-        lens (_machine_type :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_machine_type :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _machine_type = a } :: ComputeInstanceResource s)
 
 instance P.HasMetadata (ComputeInstanceResource s) s Text where
     metadata =
-        lens (_metadata :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_metadata :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ComputeInstanceResource s)
 
 instance P.HasMetadataStartupScript (ComputeInstanceResource s) s Text where
     metadataStartupScript =
-        lens (_metadata_startup_script :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_metadata_startup_script :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _metadata_startup_script = a } :: ComputeInstanceResource s)
 
 instance P.HasMinCpuPlatform (ComputeInstanceResource s) s Text where
     minCpuPlatform =
-        lens (_min_cpu_platform :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_min_cpu_platform :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _min_cpu_platform = a } :: ComputeInstanceResource s)
 
 instance P.HasName (ComputeInstanceResource s) s Text where
     name =
-        lens (_name :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeInstanceResource s)
 
 instance P.HasNetworkInterface (ComputeInstanceResource s) s Text where
     networkInterface =
-        lens (_network_interface :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_network_interface :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _network_interface = a } :: ComputeInstanceResource s)
 
 instance P.HasProject (ComputeInstanceResource s) s Text where
     project =
-        lens (_project :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeInstanceResource s)
 
 instance P.HasScheduling (ComputeInstanceResource s) s Text where
     scheduling =
-        lens (_scheduling :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_scheduling :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _scheduling = a } :: ComputeInstanceResource s)
 
 instance P.HasScratchDisk (ComputeInstanceResource s) s Text where
     scratchDisk =
-        lens (_scratch_disk :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_scratch_disk :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _scratch_disk = a } :: ComputeInstanceResource s)
 
 instance P.HasServiceAccount (ComputeInstanceResource s) s Text where
     serviceAccount =
-        lens (_service_account :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_service_account :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _service_account = a } :: ComputeInstanceResource s)
 
 instance P.HasTags (ComputeInstanceResource s) s Text where
     tags =
-        lens (_tags :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_tags :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeInstanceResource s)
 
 instance P.HasZone (ComputeInstanceResource s) s Text where
     zone =
-        lens (_zone :: ComputeInstanceResource s -> TF.Attribute s Text)
+        lens (_zone :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ComputeInstanceResource s)
 
 instance P.HasComputedAttachedDisk0DiskEncryptionKeySha256 (ComputeInstanceResource s) Text
@@ -2953,46 +2953,46 @@ Manages a VM instance template resource within GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/instanceTemplates> .
 -}
 data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource {
-      _can_ip_forward :: !(TF.Attribute s Text)
+      _can_ip_forward :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to allow sending and receiving of packets with non-matching source or destination IPs. This defaults to false. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A brief description of this resource. -}
-    , _disk :: !(TF.Attribute s Text)
+    , _disk :: !(TF.Attr s Text)
     {- ^ (Required) Disks to attach to instances created from this template. This can be specified multiple times for multiple disks. Structure is documented below. -}
-    , _guest_accelerator :: !(TF.Attribute s Text)
+    , _guest_accelerator :: !(TF.Attr s Text)
     {- ^ (Optional) List of the type and count of accelerator cards attached to the instance. Structure documented below. -}
-    , _instance_description :: !(TF.Attribute s Text)
+    , _instance_description :: !(TF.Attr s Text)
     {- ^ (Optional) A brief description to use for instances created from this template. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A set of key/value label pairs to assign to instances created from this template, -}
-    , _machine_type :: !(TF.Attribute s Text)
+    , _machine_type :: !(TF.Attr s Text)
     {- ^ (Required) The machine type to create. -}
-    , _metadata :: !(TF.Attribute s Text)
+    , _metadata :: !(TF.Attr s Text)
     {- ^ (Optional) Metadata key/value pairs to make available from within instances created from this template. -}
-    , _metadata_startup_script :: !(TF.Attribute s Text)
+    , _metadata_startup_script :: !(TF.Attr s Text)
     {- ^ (Optional) An alternative to using the startup-script metadata key, mostly to match the compute_instance resource. This replaces the startup-script metadata key on the created instance and thus the two mechanisms are not allowed to be used simultaneously. -}
-    , _min_cpu_platform :: !(TF.Attribute s Text)
+    , _min_cpu_platform :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies a minimum CPU platform. Applicable values are the friendly names of CPU platforms, such as @Intel Haswell@ or @Intel Skylake@ . See the complete list <https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform> . -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the instance template. If you leave this blank, Terraform will auto-generate a unique name. -}
-    , _name_prefix :: !(TF.Attribute s Text)
+    , _name_prefix :: !(TF.Attr s Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _network_interface :: !(TF.Attribute s Text)
+    , _network_interface :: !(TF.Attr s Text)
     {- ^ (Required) Networks to attach to instances created from this template. This can be specified multiple times for multiple networks. Structure is documented below. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) An instance template is a global resource that is not bound to a zone or a region. However, you can still specify some regional resources in an instance template, which restricts the template to the region where that resource resides. For example, a custom @subnetwork@ resource is tied to a specific region. Defaults to the region of the Provider if no value is given. -}
-    , _scheduling :: !(TF.Attribute s Text)
+    , _scheduling :: !(TF.Attr s Text)
     {- ^ (Optional) The scheduling strategy to use. More details about this configuration option are detailed below. -}
-    , _service_account :: !(TF.Attribute s Text)
+    , _service_account :: !(TF.Attr s Text)
     {- ^ (Optional) Service account to attach to the instance. Structure is documented below. -}
-    , _tags :: !(TF.Attribute s Text)
+    , _tags :: !(TF.Attr s Text)
     {- ^ (Optional) Tags to attach to the instance. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeInstanceTemplateResource s) where
-    toHCL ComputeInstanceTemplateResource{..} = TF.block $ catMaybes
+    toHCL ComputeInstanceTemplateResource{..} = TF.inline $ catMaybes
         [ TF.attribute "can_ip_forward" _can_ip_forward
         , TF.attribute "description" _description
         , TF.attribute "disk" _disk
@@ -3015,92 +3015,92 @@ instance TF.ToHCL (ComputeInstanceTemplateResource s) where
 
 instance P.HasCanIpForward (ComputeInstanceTemplateResource s) s Text where
     canIpForward =
-        lens (_can_ip_forward :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_can_ip_forward :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _can_ip_forward = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasDescription (ComputeInstanceTemplateResource s) s Text where
     description =
-        lens (_description :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasDisk (ComputeInstanceTemplateResource s) s Text where
     disk =
-        lens (_disk :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_disk :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _disk = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasGuestAccelerator (ComputeInstanceTemplateResource s) s Text where
     guestAccelerator =
-        lens (_guest_accelerator :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_guest_accelerator :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _guest_accelerator = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasInstanceDescription (ComputeInstanceTemplateResource s) s Text where
     instanceDescription =
-        lens (_instance_description :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_instance_description :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _instance_description = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasLabels (ComputeInstanceTemplateResource s) s Text where
     labels =
-        lens (_labels :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_labels :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasMachineType (ComputeInstanceTemplateResource s) s Text where
     machineType =
-        lens (_machine_type :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_machine_type :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _machine_type = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasMetadata (ComputeInstanceTemplateResource s) s Text where
     metadata =
-        lens (_metadata :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_metadata :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasMetadataStartupScript (ComputeInstanceTemplateResource s) s Text where
     metadataStartupScript =
-        lens (_metadata_startup_script :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_metadata_startup_script :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _metadata_startup_script = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasMinCpuPlatform (ComputeInstanceTemplateResource s) s Text where
     minCpuPlatform =
-        lens (_min_cpu_platform :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_min_cpu_platform :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _min_cpu_platform = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasName (ComputeInstanceTemplateResource s) s Text where
     name =
-        lens (_name :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasNamePrefix (ComputeInstanceTemplateResource s) s Text where
     namePrefix =
-        lens (_name_prefix :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_name_prefix :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _name_prefix = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasNetworkInterface (ComputeInstanceTemplateResource s) s Text where
     networkInterface =
-        lens (_network_interface :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_network_interface :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _network_interface = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasProject (ComputeInstanceTemplateResource s) s Text where
     project =
-        lens (_project :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasRegion (ComputeInstanceTemplateResource s) s Text where
     region =
-        lens (_region :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasScheduling (ComputeInstanceTemplateResource s) s Text where
     scheduling =
-        lens (_scheduling :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_scheduling :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _scheduling = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasServiceAccount (ComputeInstanceTemplateResource s) s Text where
     serviceAccount =
-        lens (_service_account :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_service_account :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _service_account = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasTags (ComputeInstanceTemplateResource s) s Text where
     tags =
-        lens (_tags :: ComputeInstanceTemplateResource s -> TF.Attribute s Text)
+        lens (_tags :: ComputeInstanceTemplateResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasComputedMetadataFingerprint (ComputeInstanceTemplateResource s) Text
@@ -3141,18 +3141,18 @@ functional. ~> Note: Subnets IP ranges across peered VPC networks cannot
 overlap.
 -}
 data ComputeNetworkPeeringResource s = ComputeNetworkPeeringResource {
-      _auto_create_routes :: !(TF.Attribute s Text)
+      _auto_create_routes :: !(TF.Attr s Text)
     {- ^ (Optional) If set to @true@ , the routes between the two networks will be created and managed automatically. Defaults to @true@ . -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) Name of the peering. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Required) Resource link of the network to add a peering to. -}
-    , _peer_network :: !(TF.Attribute s Text)
+    , _peer_network :: !(TF.Attr s Text)
     {- ^ (Required) Resource link of the peer network. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeNetworkPeeringResource s) where
-    toHCL ComputeNetworkPeeringResource{..} = TF.block $ catMaybes
+    toHCL ComputeNetworkPeeringResource{..} = TF.inline $ catMaybes
         [ TF.attribute "auto_create_routes" _auto_create_routes
         , TF.attribute "name" _name
         , TF.attribute "network" _network
@@ -3161,22 +3161,22 @@ instance TF.ToHCL (ComputeNetworkPeeringResource s) where
 
 instance P.HasAutoCreateRoutes (ComputeNetworkPeeringResource s) s Text where
     autoCreateRoutes =
-        lens (_auto_create_routes :: ComputeNetworkPeeringResource s -> TF.Attribute s Text)
+        lens (_auto_create_routes :: ComputeNetworkPeeringResource s -> TF.Attr s Text)
              (\s a -> s { _auto_create_routes = a } :: ComputeNetworkPeeringResource s)
 
 instance P.HasName (ComputeNetworkPeeringResource s) s Text where
     name =
-        lens (_name :: ComputeNetworkPeeringResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeNetworkPeeringResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeNetworkPeeringResource s)
 
 instance P.HasNetwork (ComputeNetworkPeeringResource s) s Text where
     network =
-        lens (_network :: ComputeNetworkPeeringResource s -> TF.Attribute s Text)
+        lens (_network :: ComputeNetworkPeeringResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeNetworkPeeringResource s)
 
 instance P.HasPeerNetwork (ComputeNetworkPeeringResource s) s Text where
     peerNetwork =
-        lens (_peer_network :: ComputeNetworkPeeringResource s -> TF.Attribute s Text)
+        lens (_peer_network :: ComputeNetworkPeeringResource s -> TF.Attr s Text)
              (\s a -> s { _peer_network = a } :: ComputeNetworkPeeringResource s)
 
 instance P.HasComputedState (ComputeNetworkPeeringResource s) Text
@@ -3199,22 +3199,22 @@ Manages a network within GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/networks> .
 -}
 data ComputeNetworkResource s = ComputeNetworkResource {
-      _auto_create_subnetworks :: !(TF.Attribute s Text)
+      _auto_create_subnetworks :: !(TF.Attr s Text)
     {- ^ (Optional) If set to true, this network will be created in auto subnet mode, and Google will create a subnet for each region automatically. If set to false, a custom subnetted network will be created that can support @google_compute_subnetwork@ resources. Defaults to true. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A brief description of this resource. -}
-    , _ipv4_range :: !(TF.Attribute s Text)
+    , _ipv4_range :: !(TF.Attr s Text)
     {- ^ (Optional) If set to a CIDR block, uses the legacy VPC API with the specified range. This API is deprecated. If set, @auto_create_subnetworks@ must be explicitly set to false. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _routing_mode :: !(TF.Attribute s Text)
+    , _routing_mode :: !(TF.Attr s Text)
     {- ^ (Optional) Sets the network-wide routing mode for Cloud Routers to use. Accepted values are @"GLOBAL"@ or @"REGIONAL"@ . Defaults to @"REGIONAL"@ . Refer to the <https://cloud.google.com/router/docs/concepts/overview#dynamic-routing-mode> for more details. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeNetworkResource s) where
-    toHCL ComputeNetworkResource{..} = TF.block $ catMaybes
+    toHCL ComputeNetworkResource{..} = TF.inline $ catMaybes
         [ TF.attribute "auto_create_subnetworks" _auto_create_subnetworks
         , TF.attribute "description" _description
         , TF.attribute "ipv4_range" _ipv4_range
@@ -3225,32 +3225,32 @@ instance TF.ToHCL (ComputeNetworkResource s) where
 
 instance P.HasAutoCreateSubnetworks (ComputeNetworkResource s) s Text where
     autoCreateSubnetworks =
-        lens (_auto_create_subnetworks :: ComputeNetworkResource s -> TF.Attribute s Text)
+        lens (_auto_create_subnetworks :: ComputeNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _auto_create_subnetworks = a } :: ComputeNetworkResource s)
 
 instance P.HasDescription (ComputeNetworkResource s) s Text where
     description =
-        lens (_description :: ComputeNetworkResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeNetworkResource s)
 
 instance P.HasIpv4Range (ComputeNetworkResource s) s Text where
     ipv4Range =
-        lens (_ipv4_range :: ComputeNetworkResource s -> TF.Attribute s Text)
+        lens (_ipv4_range :: ComputeNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _ipv4_range = a } :: ComputeNetworkResource s)
 
 instance P.HasName (ComputeNetworkResource s) s Text where
     name =
-        lens (_name :: ComputeNetworkResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeNetworkResource s)
 
 instance P.HasProject (ComputeNetworkResource s) s Text where
     project =
-        lens (_project :: ComputeNetworkResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeNetworkResource s)
 
 instance P.HasRoutingMode (ComputeNetworkResource s) s Text where
     routingMode =
-        lens (_routing_mode :: ComputeNetworkResource s -> TF.Attribute s Text)
+        lens (_routing_mode :: ComputeNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _routing_mode = a } :: ComputeNetworkResource s)
 
 instance P.HasComputedGatewayIpv4 (ComputeNetworkResource s) Text
@@ -3277,16 +3277,16 @@ a single key/value setting in Terraform rather than the entire project
 metadata map.
 -}
 data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource {
-      _key :: !(TF.Attribute s Text)
+      _key :: !(TF.Attr s Text)
     {- ^ (Required) The metadata key to set. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _value :: !(TF.Attribute s Text)
+    , _value :: !(TF.Attr s Text)
     {- ^ (Required) The value to set for the given metadata key. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeProjectMetadataItemResource s) where
-    toHCL ComputeProjectMetadataItemResource{..} = TF.block $ catMaybes
+    toHCL ComputeProjectMetadataItemResource{..} = TF.inline $ catMaybes
         [ TF.attribute "key" _key
         , TF.attribute "project" _project
         , TF.attribute "value" _value
@@ -3294,17 +3294,17 @@ instance TF.ToHCL (ComputeProjectMetadataItemResource s) where
 
 instance P.HasKey (ComputeProjectMetadataItemResource s) s Text where
     key =
-        lens (_key :: ComputeProjectMetadataItemResource s -> TF.Attribute s Text)
+        lens (_key :: ComputeProjectMetadataItemResource s -> TF.Attr s Text)
              (\s a -> s { _key = a } :: ComputeProjectMetadataItemResource s)
 
 instance P.HasProject (ComputeProjectMetadataItemResource s) s Text where
     project =
-        lens (_project :: ComputeProjectMetadataItemResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeProjectMetadataItemResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeProjectMetadataItemResource s)
 
 instance P.HasValue (ComputeProjectMetadataItemResource s) s Text where
     value =
-        lens (_value :: ComputeProjectMetadataItemResource s -> TF.Attribute s Text)
+        lens (_value :: ComputeProjectMetadataItemResource s -> TF.Attr s Text)
              (\s a -> s { _value = a } :: ComputeProjectMetadataItemResource s)
 
 
@@ -3328,26 +3328,26 @@ project metadata rather than the entire set, then use
 <compute_project_metadata_item.html> .
 -}
 data ComputeProjectMetadataResource s = ComputeProjectMetadataResource {
-      _metadata :: !(TF.Attribute s Text)
+      _metadata :: !(TF.Attr s Text)
     {- ^ (Required) A series of key value pairs. Changing this resource updates the GCE state. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeProjectMetadataResource s) where
-    toHCL ComputeProjectMetadataResource{..} = TF.block $ catMaybes
+    toHCL ComputeProjectMetadataResource{..} = TF.inline $ catMaybes
         [ TF.attribute "metadata" _metadata
         , TF.attribute "project" _project
         ]
 
 instance P.HasMetadata (ComputeProjectMetadataResource s) s Text where
     metadata =
-        lens (_metadata :: ComputeProjectMetadataResource s -> TF.Attribute s Text)
+        lens (_metadata :: ComputeProjectMetadataResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ComputeProjectMetadataResource s)
 
 instance P.HasProject (ComputeProjectMetadataResource s) s Text where
     project =
-        lens (_project :: ComputeProjectMetadataResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeProjectMetadataResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeProjectMetadataResource s)
 
 
@@ -3371,22 +3371,22 @@ based on the measured load. For more information, see
 <https://cloud.google.com/compute/docs/reference/latest/regionAutoscalers>
 -}
 data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource {
-      _autoscaling_policy :: !(TF.Attribute s Text)
+      _autoscaling_policy :: !(TF.Attr s Text)
     {- ^ (Required) The parameters of the autoscaling algorithm. Structure is documented below. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) An optional textual description of the instance group manager. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the autoscaler. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Required) The region of the target. -}
-    , _target :: !(TF.Attribute s Text)
+    , _target :: !(TF.Attr s Text)
     {- ^ (Required) The full URL to the instance group manager whose size we control. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeRegionAutoscalerResource s) where
-    toHCL ComputeRegionAutoscalerResource{..} = TF.block $ catMaybes
+    toHCL ComputeRegionAutoscalerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "autoscaling_policy" _autoscaling_policy
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -3397,32 +3397,32 @@ instance TF.ToHCL (ComputeRegionAutoscalerResource s) where
 
 instance P.HasAutoscalingPolicy (ComputeRegionAutoscalerResource s) s Text where
     autoscalingPolicy =
-        lens (_autoscaling_policy :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
+        lens (_autoscaling_policy :: ComputeRegionAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _autoscaling_policy = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasDescription (ComputeRegionAutoscalerResource s) s Text where
     description =
-        lens (_description :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeRegionAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasName (ComputeRegionAutoscalerResource s) s Text where
     name =
-        lens (_name :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeRegionAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasProject (ComputeRegionAutoscalerResource s) s Text where
     project =
-        lens (_project :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeRegionAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasRegion (ComputeRegionAutoscalerResource s) s Text where
     region =
-        lens (_region :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeRegionAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasTarget (ComputeRegionAutoscalerResource s) s Text where
     target =
-        lens (_target :: ComputeRegionAutoscalerResource s -> TF.Attribute s Text)
+        lens (_target :: ComputeRegionAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _target = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasComputedSelfLink (ComputeRegionAutoscalerResource s) Text
@@ -3447,30 +3447,30 @@ see <https://cloud.google.com/compute/docs/load-balancing/internal/> and
 <https://cloud.google.com/compute/docs/reference/latest/backendServices> .
 -}
 data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource {
-      _backend :: !(TF.Attribute s Text)
+      _backend :: !(TF.Attr s Text)
     {- ^ (Optional) The list of backends that serve this BackendService. Structure is documented below. -}
-    , _connection_draining_timeout_sec :: !(TF.Attribute s Text)
+    , _connection_draining_timeout_sec :: !(TF.Attr s Text)
     {- ^ (Optional) Time for which instance will be drained (not accept new connections, but still work to finish started ones). Defaults to @0@ . -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) The textual description for the backend service. -}
-    , _health_checks :: !(TF.Attribute s Text)
+    , _health_checks :: !(TF.Attr s Text)
     {- ^ (Required) Specifies a list of health checks for checking the health of the backend service. Currently at most one health check can be specified, and a health check is required. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the backend service. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _protocol :: !(TF.Attribute s Text)
+    , _protocol :: !(TF.Attr s Text)
     {- ^ (Optional) The protocol for incoming requests. Defaults to @HTTP@ . -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The Region in which the created address should reside. If it is not provided, the provider region is used. -}
-    , _session_affinity :: !(TF.Attribute s Text)
+    , _session_affinity :: !(TF.Attr s Text)
     {- ^ (Optional) How to distribute load. Options are @NONE@ (no affinity), @CLIENT_IP@ , @CLIENT_IP_PROTO@ , or @CLIENT_IP_PORT_PROTO@ . Defaults to @NONE@ . -}
-    , _timeout_sec :: !(TF.Attribute s Text)
+    , _timeout_sec :: !(TF.Attr s Text)
     {- ^ (Optional) The number of secs to wait for a backend to respond to a request before considering the request failed. Defaults to @30@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeRegionBackendServiceResource s) where
-    toHCL ComputeRegionBackendServiceResource{..} = TF.block $ catMaybes
+    toHCL ComputeRegionBackendServiceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "backend" _backend
         , TF.attribute "connection_draining_timeout_sec" _connection_draining_timeout_sec
         , TF.attribute "description" _description
@@ -3485,52 +3485,52 @@ instance TF.ToHCL (ComputeRegionBackendServiceResource s) where
 
 instance P.HasBackend (ComputeRegionBackendServiceResource s) s Text where
     backend =
-        lens (_backend :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_backend :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _backend = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasConnectionDrainingTimeoutSec (ComputeRegionBackendServiceResource s) s Text where
     connectionDrainingTimeoutSec =
-        lens (_connection_draining_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_connection_draining_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _connection_draining_timeout_sec = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasDescription (ComputeRegionBackendServiceResource s) s Text where
     description =
-        lens (_description :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasHealthChecks (ComputeRegionBackendServiceResource s) s Text where
     healthChecks =
-        lens (_health_checks :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_health_checks :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _health_checks = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasName (ComputeRegionBackendServiceResource s) s Text where
     name =
-        lens (_name :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasProject (ComputeRegionBackendServiceResource s) s Text where
     project =
-        lens (_project :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasProtocol (ComputeRegionBackendServiceResource s) s Text where
     protocol =
-        lens (_protocol :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_protocol :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasRegion (ComputeRegionBackendServiceResource s) s Text where
     region =
-        lens (_region :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasSessionAffinity (ComputeRegionBackendServiceResource s) s Text where
     sessionAffinity =
-        lens (_session_affinity :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_session_affinity :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _session_affinity = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasTimeoutSec (ComputeRegionBackendServiceResource s) s Text where
     timeoutSec =
-        lens (_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attribute s Text)
+        lens (_timeout_sec :: ComputeRegionBackendServiceResource s -> TF.Attr s Text)
              (\s a -> s { _timeout_sec = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasComputedFingerprint (ComputeRegionBackendServiceResource s) Text
@@ -3564,30 +3564,30 @@ and
 to create a single-zone instance group manager.
 -}
 data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupManagerResource {
-      _auto_healing_policies :: !(TF.Attribute s Text)
+      _auto_healing_policies :: !(TF.Attr s Text)
     {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) The autohealing policies for this managed instance group. You can specify only one value. Structure is documented below. For more information, see the <https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances#monitoring_groups> . -}
-    , _base_instance_name :: !(TF.Attribute s Text)
+    , _base_instance_name :: !(TF.Attr s Text)
     {- ^ (Required) The base instance name to use for instances in this group. The value must be a valid <https://www.ietf.org/rfc/rfc1035.txt> name. Supported characters are lowercase letters, numbers, and hyphens (-). Instances are named by appending a hyphen and a random four-character string to the base instance name. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) An optional textual description of the instance group manager. -}
-    , _instance_template :: !(TF.Attribute s Text)
+    , _instance_template :: !(TF.Attr s Text)
     {- ^ (Required) The full URL to an instance template from which all new instances will be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the instance group manager. Must be 1-63 characters long and comply with <https://www.ietf.org/rfc/rfc1035.txt> . Supported characters include lowercase letters, numbers, and hyphens. -}
-    , _named_port :: !(TF.Attribute s Text)
+    , _named_port :: !(TF.Attr s Text)
     {- ^ (Optional) The named port configuration. See the section below for details on configuration. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Required) The region where the managed instance group resides. -}
-    , _target_pools :: !(TF.Attribute s Text)
+    , _target_pools :: !(TF.Attr s Text)
     {- ^ (Optional) The full URL of all target pools to which new instances in the group are added. Updating the target pools attribute does not affect existing instances. -}
-    , _target_size :: !(TF.Attribute s Text)
+    , _target_size :: !(TF.Attr s Text)
     {- ^ (Optional) The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. Defaults to @0@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeRegionInstanceGroupManagerResource s) where
-    toHCL ComputeRegionInstanceGroupManagerResource{..} = TF.block $ catMaybes
+    toHCL ComputeRegionInstanceGroupManagerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "auto_healing_policies" _auto_healing_policies
         , TF.attribute "base_instance_name" _base_instance_name
         , TF.attribute "description" _description
@@ -3602,52 +3602,52 @@ instance TF.ToHCL (ComputeRegionInstanceGroupManagerResource s) where
 
 instance P.HasAutoHealingPolicies (ComputeRegionInstanceGroupManagerResource s) s Text where
     autoHealingPolicies =
-        lens (_auto_healing_policies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_auto_healing_policies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _auto_healing_policies = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasBaseInstanceName (ComputeRegionInstanceGroupManagerResource s) s Text where
     baseInstanceName =
-        lens (_base_instance_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_base_instance_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _base_instance_name = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasDescription (ComputeRegionInstanceGroupManagerResource s) s Text where
     description =
-        lens (_description :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasInstanceTemplate (ComputeRegionInstanceGroupManagerResource s) s Text where
     instanceTemplate =
-        lens (_instance_template :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_instance_template :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _instance_template = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasName (ComputeRegionInstanceGroupManagerResource s) s Text where
     name =
-        lens (_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasNamedPort (ComputeRegionInstanceGroupManagerResource s) s Text where
     namedPort =
-        lens (_named_port :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_named_port :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _named_port = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasProject (ComputeRegionInstanceGroupManagerResource s) s Text where
     project =
-        lens (_project :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasRegion (ComputeRegionInstanceGroupManagerResource s) s Text where
     region =
-        lens (_region :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasTargetPools (ComputeRegionInstanceGroupManagerResource s) s Text where
     targetPools =
-        lens (_target_pools :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_target_pools :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _target_pools = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasTargetSize (ComputeRegionInstanceGroupManagerResource s) s Text where
     targetSize =
-        lens (_target_size :: ComputeRegionInstanceGroupManagerResource s -> TF.Attribute s Text)
+        lens (_target_size :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s Text)
              (\s a -> s { _target_size = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasComputedFingerprint (ComputeRegionInstanceGroupManagerResource s) Text
@@ -3677,32 +3677,32 @@ Manages a network route within GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/routes> .
 -}
 data ComputeRouteResource s = ComputeRouteResource {
-      _dest_range :: !(TF.Attribute s Text)
+      _dest_range :: !(TF.Attr s Text)
     {- ^ (Required) The destination IPv4 address range that this route applies to. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Required) The name or self_link of the network to attach this route to. -}
-    , _next_hop_gateway :: !(TF.Attribute s Text)
+    , _next_hop_gateway :: !(TF.Attr s Text)
     {- ^ (Optional) The URL of the internet gateway to route to if this route is matched. The alias "default-internet-gateway" can also be used. -}
-    , _next_hop_instance :: !(TF.Attribute s Text)
+    , _next_hop_instance :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the VM instance to route to if this route is matched. -}
-    , _next_hop_instance_zone :: !(TF.Attribute s Text)
+    , _next_hop_instance_zone :: !(TF.Attr s Text)
     {- ^ (Required when @next_hop_instance@ is specified) The zone of the instance specified in @next_hop_instance@ . -}
-    , _next_hop_ip :: !(TF.Attribute s Text)
+    , _next_hop_ip :: !(TF.Attr s Text)
     {- ^ (Optional) The IP address of the next hop if this route is matched. -}
-    , _next_hop_vpn_tunnel :: !(TF.Attribute s Text)
+    , _next_hop_vpn_tunnel :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the VPN to route to if this route is matched. -}
-    , _priority :: !(TF.Attribute s Text)
+    , _priority :: !(TF.Attr s Text)
     {- ^ (Optional) The priority of this route, used to break ties. Defaults to 1000. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _tags :: !(TF.Attribute s Text)
+    , _tags :: !(TF.Attr s Text)
     {- ^ (Optional) The tags that this route applies to. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeRouteResource s) where
-    toHCL ComputeRouteResource{..} = TF.block $ catMaybes
+    toHCL ComputeRouteResource{..} = TF.inline $ catMaybes
         [ TF.attribute "dest_range" _dest_range
         , TF.attribute "name" _name
         , TF.attribute "network" _network
@@ -3718,57 +3718,57 @@ instance TF.ToHCL (ComputeRouteResource s) where
 
 instance P.HasDestRange (ComputeRouteResource s) s Text where
     destRange =
-        lens (_dest_range :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_dest_range :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _dest_range = a } :: ComputeRouteResource s)
 
 instance P.HasName (ComputeRouteResource s) s Text where
     name =
-        lens (_name :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeRouteResource s)
 
 instance P.HasNetwork (ComputeRouteResource s) s Text where
     network =
-        lens (_network :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_network :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeRouteResource s)
 
 instance P.HasNextHopGateway (ComputeRouteResource s) s Text where
     nextHopGateway =
-        lens (_next_hop_gateway :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_next_hop_gateway :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _next_hop_gateway = a } :: ComputeRouteResource s)
 
 instance P.HasNextHopInstance (ComputeRouteResource s) s Text where
     nextHopInstance =
-        lens (_next_hop_instance :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_next_hop_instance :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _next_hop_instance = a } :: ComputeRouteResource s)
 
 instance P.HasNextHopInstanceZone (ComputeRouteResource s) s Text where
     nextHopInstanceZone =
-        lens (_next_hop_instance_zone :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_next_hop_instance_zone :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _next_hop_instance_zone = a } :: ComputeRouteResource s)
 
 instance P.HasNextHopIp (ComputeRouteResource s) s Text where
     nextHopIp =
-        lens (_next_hop_ip :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_next_hop_ip :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _next_hop_ip = a } :: ComputeRouteResource s)
 
 instance P.HasNextHopVpnTunnel (ComputeRouteResource s) s Text where
     nextHopVpnTunnel =
-        lens (_next_hop_vpn_tunnel :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_next_hop_vpn_tunnel :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _next_hop_vpn_tunnel = a } :: ComputeRouteResource s)
 
 instance P.HasPriority (ComputeRouteResource s) s Text where
     priority =
-        lens (_priority :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_priority :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _priority = a } :: ComputeRouteResource s)
 
 instance P.HasProject (ComputeRouteResource s) s Text where
     project =
-        lens (_project :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeRouteResource s)
 
 instance P.HasTags (ComputeRouteResource s) s Text where
     tags =
-        lens (_tags :: ComputeRouteResource s -> TF.Attribute s Text)
+        lens (_tags :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeRouteResource s)
 
 instance P.HasComputedNextHopNetwork (ComputeRouteResource s) Text
@@ -3798,22 +3798,22 @@ Manages a Cloud Router interface. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/routers> .
 -}
 data ComputeRouterInterfaceResource s = ComputeRouterInterfaceResource {
-      _ip_range :: !(TF.Attribute s Text)
+      _ip_range :: !(TF.Attr s Text)
     {- ^ (Optional) IP address and range of the interface. The IP range must be in the RFC3927 link-local IP space. Changing this forces a new interface to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the interface, required by GCE. Changing this forces a new interface to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which this interface's router belongs. If it is not provided, the provider project is used. Changing this forces a new interface to be created. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The region this interface's router sits in. If not specified, the project region will be used. Changing this forces a new interface to be created. -}
-    , _router :: !(TF.Attribute s Text)
+    , _router :: !(TF.Attr s Text)
     {- ^ (Required) The name of the router this interface will be attached to. Changing this forces a new interface to be created. -}
-    , _vpn_tunnel :: !(TF.Attribute s Text)
+    , _vpn_tunnel :: !(TF.Attr s Text)
     {- ^ (Required) The name or resource link to the VPN tunnel this interface will be linked to. Changing this forces a new interface to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeRouterInterfaceResource s) where
-    toHCL ComputeRouterInterfaceResource{..} = TF.block $ catMaybes
+    toHCL ComputeRouterInterfaceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "ip_range" _ip_range
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -3824,32 +3824,32 @@ instance TF.ToHCL (ComputeRouterInterfaceResource s) where
 
 instance P.HasIpRange (ComputeRouterInterfaceResource s) s Text where
     ipRange =
-        lens (_ip_range :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_ip_range :: ComputeRouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _ip_range = a } :: ComputeRouterInterfaceResource s)
 
 instance P.HasName (ComputeRouterInterfaceResource s) s Text where
     name =
-        lens (_name :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeRouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeRouterInterfaceResource s)
 
 instance P.HasProject (ComputeRouterInterfaceResource s) s Text where
     project =
-        lens (_project :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeRouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeRouterInterfaceResource s)
 
 instance P.HasRegion (ComputeRouterInterfaceResource s) s Text where
     region =
-        lens (_region :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeRouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeRouterInterfaceResource s)
 
 instance P.HasRouter (ComputeRouterInterfaceResource s) s Text where
     router =
-        lens (_router :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_router :: ComputeRouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _router = a } :: ComputeRouterInterfaceResource s)
 
 instance P.HasVpnTunnel (ComputeRouterInterfaceResource s) s Text where
     vpnTunnel =
-        lens (_vpn_tunnel :: ComputeRouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_vpn_tunnel :: ComputeRouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _vpn_tunnel = a } :: ComputeRouterInterfaceResource s)
 
 
@@ -3872,22 +3872,22 @@ Manages a Cloud Router resource. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/routers> .
 -}
 data ComputeRouterResource s = ComputeRouterResource {
-      _bgp :: !(TF.Attribute s Text)
+      _bgp :: !(TF.Attr s Text)
     {- ^ (Required) BGP information specific to this router. Changing this forces a new router to be created. Structure is documented below. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description of the resource. Changing this forces a new router to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the router, required by GCE. Changing this forces a new router to be created. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Required) The name or resource link to the network this Cloud Router will use to learn and announce routes. Changing this forces a new router to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. Changing this forces a new router to be created. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The region this router should sit in. If not specified, the project region will be used. Changing this forces a new router to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeRouterResource s) where
-    toHCL ComputeRouterResource{..} = TF.block $ catMaybes
+    toHCL ComputeRouterResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bgp" _bgp
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -3898,32 +3898,32 @@ instance TF.ToHCL (ComputeRouterResource s) where
 
 instance P.HasBgp (ComputeRouterResource s) s Text where
     bgp =
-        lens (_bgp :: ComputeRouterResource s -> TF.Attribute s Text)
+        lens (_bgp :: ComputeRouterResource s -> TF.Attr s Text)
              (\s a -> s { _bgp = a } :: ComputeRouterResource s)
 
 instance P.HasDescription (ComputeRouterResource s) s Text where
     description =
-        lens (_description :: ComputeRouterResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeRouterResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeRouterResource s)
 
 instance P.HasName (ComputeRouterResource s) s Text where
     name =
-        lens (_name :: ComputeRouterResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeRouterResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeRouterResource s)
 
 instance P.HasNetwork (ComputeRouterResource s) s Text where
     network =
-        lens (_network :: ComputeRouterResource s -> TF.Attribute s Text)
+        lens (_network :: ComputeRouterResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeRouterResource s)
 
 instance P.HasProject (ComputeRouterResource s) s Text where
     project =
-        lens (_project :: ComputeRouterResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeRouterResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeRouterResource s)
 
 instance P.HasRegion (ComputeRouterResource s) s Text where
     region =
-        lens (_region :: ComputeRouterResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeRouterResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeRouterResource s)
 
 instance P.HasComputedSelfLink (ComputeRouterResource s) Text
@@ -3949,18 +3949,18 @@ assigning it as a Shared VPC host project. For more information, see,
 the Shared VPC feature is referred to by its former name "XPN".
 -}
 data ComputeSharedVpcHostProjectResource s = ComputeSharedVpcHostProjectResource {
-      _project :: !(TF.Attribute s Text)
+      _project :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the project that will serve as a Shared VPC host project -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeSharedVpcHostProjectResource s) where
-    toHCL ComputeSharedVpcHostProjectResource{..} = TF.block $ catMaybes
+    toHCL ComputeSharedVpcHostProjectResource{..} = TF.inline $ catMaybes
         [ TF.attribute "project" _project
         ]
 
 instance P.HasProject (ComputeSharedVpcHostProjectResource s) s Text where
     project =
-        lens (_project :: ComputeSharedVpcHostProjectResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeSharedVpcHostProjectResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeSharedVpcHostProjectResource s)
 
 
@@ -3981,26 +3981,26 @@ project. For more information, see,
 the Shared VPC feature is referred to by its former name "XPN".
 -}
 data ComputeSharedVpcServiceProjectResource s = ComputeSharedVpcServiceProjectResource {
-      _host_project :: !(TF.Attribute s Text)
+      _host_project :: !(TF.Attr s Text)
     {- ^ (Required) The ID of a host project to associate. -}
-    , _service_project :: !(TF.Attribute s Text)
+    , _service_project :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the project that will serve as a Shared VPC service project. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeSharedVpcServiceProjectResource s) where
-    toHCL ComputeSharedVpcServiceProjectResource{..} = TF.block $ catMaybes
+    toHCL ComputeSharedVpcServiceProjectResource{..} = TF.inline $ catMaybes
         [ TF.attribute "host_project" _host_project
         , TF.attribute "service_project" _service_project
         ]
 
 instance P.HasHostProject (ComputeSharedVpcServiceProjectResource s) s Text where
     hostProject =
-        lens (_host_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attribute s Text)
+        lens (_host_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attr s Text)
              (\s a -> s { _host_project = a } :: ComputeSharedVpcServiceProjectResource s)
 
 instance P.HasServiceProject (ComputeSharedVpcServiceProjectResource s) s Text where
     serviceProject =
-        lens (_service_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attribute s Text)
+        lens (_service_project :: ComputeSharedVpcServiceProjectResource s -> TF.Attr s Text)
              (\s a -> s { _service_project = a } :: ComputeSharedVpcServiceProjectResource s)
 
 
@@ -4019,24 +4019,24 @@ Creates a new snapshot of a disk within GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/snapshots> .
 -}
 data ComputeSnapshotResource s = ComputeSnapshotResource {
-      _labels :: !(TF.Attribute s Text)
+      _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the snapshot. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _snapshot_encryption_key_raw :: !(TF.Attribute s Text)
+    , _snapshot_encryption_key_raw :: !(TF.Attr s Text)
     {- ^ (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption), encoded in <https://tools.ietf.org/html/rfc4648#section-4> to encrypt this snapshot. -}
-    , _source_disk :: !(TF.Attribute s Text)
+    , _source_disk :: !(TF.Attr s Text)
     {- ^ (Required) The disk which will be used as the source of the snapshot. -}
-    , _source_disk_encryption_key_raw :: !(TF.Attribute s Text)
+    , _source_disk_encryption_key_raw :: !(TF.Attr s Text)
     {- ^ (Optional) A 256-bit [customer-supplied encryption key] (https://cloud.google.com/compute/docs/disks/customer-supplied-encryption), encoded in <https://tools.ietf.org/html/rfc4648#section-4> to decrypt the source disk. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone where the source disk is located. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeSnapshotResource s) where
-    toHCL ComputeSnapshotResource{..} = TF.block $ catMaybes
+    toHCL ComputeSnapshotResource{..} = TF.inline $ catMaybes
         [ TF.attribute "labels" _labels
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -4048,37 +4048,37 @@ instance TF.ToHCL (ComputeSnapshotResource s) where
 
 instance P.HasLabels (ComputeSnapshotResource s) s Text where
     labels =
-        lens (_labels :: ComputeSnapshotResource s -> TF.Attribute s Text)
+        lens (_labels :: ComputeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ComputeSnapshotResource s)
 
 instance P.HasName (ComputeSnapshotResource s) s Text where
     name =
-        lens (_name :: ComputeSnapshotResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSnapshotResource s)
 
 instance P.HasProject (ComputeSnapshotResource s) s Text where
     project =
-        lens (_project :: ComputeSnapshotResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeSnapshotResource s)
 
 instance P.HasSnapshotEncryptionKeyRaw (ComputeSnapshotResource s) s Text where
     snapshotEncryptionKeyRaw =
-        lens (_snapshot_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attribute s Text)
+        lens (_snapshot_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_encryption_key_raw = a } :: ComputeSnapshotResource s)
 
 instance P.HasSourceDisk (ComputeSnapshotResource s) s Text where
     sourceDisk =
-        lens (_source_disk :: ComputeSnapshotResource s -> TF.Attribute s Text)
+        lens (_source_disk :: ComputeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _source_disk = a } :: ComputeSnapshotResource s)
 
 instance P.HasSourceDiskEncryptionKeyRaw (ComputeSnapshotResource s) s Text where
     sourceDiskEncryptionKeyRaw =
-        lens (_source_disk_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attribute s Text)
+        lens (_source_disk_encryption_key_raw :: ComputeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _source_disk_encryption_key_raw = a } :: ComputeSnapshotResource s)
 
 instance P.HasZone (ComputeSnapshotResource s) s Text where
     zone =
-        lens (_zone :: ComputeSnapshotResource s -> TF.Attribute s Text)
+        lens (_zone :: ComputeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ComputeSnapshotResource s)
 
 instance P.HasComputedLabelFingerprint (ComputeSnapshotResource s) Text
@@ -4109,22 +4109,22 @@ and <https://cloud.google.com/compute/docs/reference/latest/sslCertificates>
 .
 -}
 data ComputeSslCertificateResource s = ComputeSslCertificateResource {
-      _certificate :: !(TF.Attribute s Text)
+      _certificate :: !(TF.Attr s Text)
     {- ^ (Required) A local certificate file in PEM format. The chain may be at most 5 certs long, and must include at least one intermediate cert. Changing this forces a new resource to be created. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) An optional description of this resource. Changing this forces a new resource to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Optional) A unique name for the SSL certificate. If you leave this blank, Terraform will auto-generate a unique name. -}
-    , _name_prefix :: !(TF.Attribute s Text)
+    , _name_prefix :: !(TF.Attr s Text)
     {- ^ (Optional) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
-    , _private_key :: !(TF.Attribute s Text)
+    , _private_key :: !(TF.Attr s Text)
     {- ^ (Required) Write only private key in PEM format. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeSslCertificateResource s) where
-    toHCL ComputeSslCertificateResource{..} = TF.block $ catMaybes
+    toHCL ComputeSslCertificateResource{..} = TF.inline $ catMaybes
         [ TF.attribute "certificate" _certificate
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -4135,32 +4135,32 @@ instance TF.ToHCL (ComputeSslCertificateResource s) where
 
 instance P.HasCertificate (ComputeSslCertificateResource s) s Text where
     certificate =
-        lens (_certificate :: ComputeSslCertificateResource s -> TF.Attribute s Text)
+        lens (_certificate :: ComputeSslCertificateResource s -> TF.Attr s Text)
              (\s a -> s { _certificate = a } :: ComputeSslCertificateResource s)
 
 instance P.HasDescription (ComputeSslCertificateResource s) s Text where
     description =
-        lens (_description :: ComputeSslCertificateResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeSslCertificateResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeSslCertificateResource s)
 
 instance P.HasName (ComputeSslCertificateResource s) s Text where
     name =
-        lens (_name :: ComputeSslCertificateResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeSslCertificateResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSslCertificateResource s)
 
 instance P.HasNamePrefix (ComputeSslCertificateResource s) s Text where
     namePrefix =
-        lens (_name_prefix :: ComputeSslCertificateResource s -> TF.Attribute s Text)
+        lens (_name_prefix :: ComputeSslCertificateResource s -> TF.Attr s Text)
              (\s a -> s { _name_prefix = a } :: ComputeSslCertificateResource s)
 
 instance P.HasPrivateKey (ComputeSslCertificateResource s) s Text where
     privateKey =
-        lens (_private_key :: ComputeSslCertificateResource s -> TF.Attribute s Text)
+        lens (_private_key :: ComputeSslCertificateResource s -> TF.Attr s Text)
              (\s a -> s { _private_key = a } :: ComputeSslCertificateResource s)
 
 instance P.HasProject (ComputeSslCertificateResource s) s Text where
     project =
-        lens (_project :: ComputeSslCertificateResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeSslCertificateResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeSslCertificateResource s)
 
 instance P.HasComputedCertificateId (ComputeSslCertificateResource s) Text
@@ -4185,26 +4185,26 @@ Manages a subnetwork within GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/subnetworks> .
 -}
 data ComputeSubnetworkResource s = ComputeSubnetworkResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) Description of this subnetwork. -}
-    , _ip_cidr_range :: !(TF.Attribute s Text)
+    , _ip_cidr_range :: !(TF.Attr s Text)
     {- ^ (Required) The IP address range that machines in this network are assigned to, represented as a CIDR block. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Required) The network name or resource link to the parent network of this subnetwork. The parent network must have been created in custom subnet mode. -}
-    , _private_ip_google_access :: !(TF.Attribute s Text)
+    , _private_ip_google_access :: !(TF.Attr s Text)
     {- ^ (Optional) Whether the VMs in this subnet can access Google services without assigned external IP addresses. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The region this subnetwork will be created in. If unspecified, this defaults to the region configured in the provider. -}
-    , _secondary_ip_range :: !(TF.Attribute s Text)
+    , _secondary_ip_range :: !(TF.Attr s Text)
     {- ^ (Optional, </docs/providers/google/index.html#beta-features> ) An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. Structure is documented below. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeSubnetworkResource s) where
-    toHCL ComputeSubnetworkResource{..} = TF.block $ catMaybes
+    toHCL ComputeSubnetworkResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "ip_cidr_range" _ip_cidr_range
         , TF.attribute "name" _name
@@ -4217,42 +4217,42 @@ instance TF.ToHCL (ComputeSubnetworkResource s) where
 
 instance P.HasDescription (ComputeSubnetworkResource s) s Text where
     description =
-        lens (_description :: ComputeSubnetworkResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeSubnetworkResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeSubnetworkResource s)
 
 instance P.HasIpCidrRange (ComputeSubnetworkResource s) s Text where
     ipCidrRange =
-        lens (_ip_cidr_range :: ComputeSubnetworkResource s -> TF.Attribute s Text)
+        lens (_ip_cidr_range :: ComputeSubnetworkResource s -> TF.Attr s Text)
              (\s a -> s { _ip_cidr_range = a } :: ComputeSubnetworkResource s)
 
 instance P.HasName (ComputeSubnetworkResource s) s Text where
     name =
-        lens (_name :: ComputeSubnetworkResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeSubnetworkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSubnetworkResource s)
 
 instance P.HasNetwork (ComputeSubnetworkResource s) s Text where
     network =
-        lens (_network :: ComputeSubnetworkResource s -> TF.Attribute s Text)
+        lens (_network :: ComputeSubnetworkResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeSubnetworkResource s)
 
 instance P.HasPrivateIpGoogleAccess (ComputeSubnetworkResource s) s Text where
     privateIpGoogleAccess =
-        lens (_private_ip_google_access :: ComputeSubnetworkResource s -> TF.Attribute s Text)
+        lens (_private_ip_google_access :: ComputeSubnetworkResource s -> TF.Attr s Text)
              (\s a -> s { _private_ip_google_access = a } :: ComputeSubnetworkResource s)
 
 instance P.HasProject (ComputeSubnetworkResource s) s Text where
     project =
-        lens (_project :: ComputeSubnetworkResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeSubnetworkResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeSubnetworkResource s)
 
 instance P.HasRegion (ComputeSubnetworkResource s) s Text where
     region =
-        lens (_region :: ComputeSubnetworkResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeSubnetworkResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeSubnetworkResource s)
 
 instance P.HasSecondaryIpRange (ComputeSubnetworkResource s) s Text where
     secondaryIpRange =
-        lens (_secondary_ip_range :: ComputeSubnetworkResource s -> TF.Attribute s Text)
+        lens (_secondary_ip_range :: ComputeSubnetworkResource s -> TF.Attr s Text)
              (\s a -> s { _secondary_ip_range = a } :: ComputeSubnetworkResource s)
 
 instance P.HasComputedGatewayAddress (ComputeSubnetworkResource s) Text
@@ -4280,18 +4280,18 @@ and
 <https://cloud.google.com/compute/docs/reference/latest/targetHttpProxies> .
 -}
 data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description of this resource. Changing this forces a new resource to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _url_map :: !(TF.Attribute s Text)
+    , _url_map :: !(TF.Attr s Text)
     {- ^ (Required) The URL of a URL Map resource that defines the mapping from the URL to the BackendService. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeTargetHttpProxyResource s) where
-    toHCL ComputeTargetHttpProxyResource{..} = TF.block $ catMaybes
+    toHCL ComputeTargetHttpProxyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -4300,22 +4300,22 @@ instance TF.ToHCL (ComputeTargetHttpProxyResource s) where
 
 instance P.HasDescription (ComputeTargetHttpProxyResource s) s Text where
     description =
-        lens (_description :: ComputeTargetHttpProxyResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeTargetHttpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeTargetHttpProxyResource s)
 
 instance P.HasName (ComputeTargetHttpProxyResource s) s Text where
     name =
-        lens (_name :: ComputeTargetHttpProxyResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeTargetHttpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeTargetHttpProxyResource s)
 
 instance P.HasProject (ComputeTargetHttpProxyResource s) s Text where
     project =
-        lens (_project :: ComputeTargetHttpProxyResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeTargetHttpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeTargetHttpProxyResource s)
 
 instance P.HasUrlMap (ComputeTargetHttpProxyResource s) s Text where
     urlMap =
-        lens (_url_map :: ComputeTargetHttpProxyResource s -> TF.Attribute s Text)
+        lens (_url_map :: ComputeTargetHttpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _url_map = a } :: ComputeTargetHttpProxyResource s)
 
 instance P.HasComputedProxyId (ComputeTargetHttpProxyResource s) Text
@@ -4340,20 +4340,20 @@ and
 .
 -}
 data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description of this resource. Changing this forces a new resource to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _ssl_certificates :: !(TF.Attribute s Text)
+    , _ssl_certificates :: !(TF.Attr s Text)
     {- ^ (Required) The URLs or names of the SSL Certificate resources that authenticate connections between users and load balancing. -}
-    , _url_map :: !(TF.Attribute s Text)
+    , _url_map :: !(TF.Attr s Text)
     {- ^ (Required) The URL of a URL Map resource that defines the mapping from the URL to the BackendService. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeTargetHttpsProxyResource s) where
-    toHCL ComputeTargetHttpsProxyResource{..} = TF.block $ catMaybes
+    toHCL ComputeTargetHttpsProxyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -4363,27 +4363,27 @@ instance TF.ToHCL (ComputeTargetHttpsProxyResource s) where
 
 instance P.HasDescription (ComputeTargetHttpsProxyResource s) s Text where
     description =
-        lens (_description :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeTargetHttpsProxyResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeTargetHttpsProxyResource s)
 
 instance P.HasName (ComputeTargetHttpsProxyResource s) s Text where
     name =
-        lens (_name :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeTargetHttpsProxyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeTargetHttpsProxyResource s)
 
 instance P.HasProject (ComputeTargetHttpsProxyResource s) s Text where
     project =
-        lens (_project :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeTargetHttpsProxyResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeTargetHttpsProxyResource s)
 
 instance P.HasSslCertificates (ComputeTargetHttpsProxyResource s) s Text where
     sslCertificates =
-        lens (_ssl_certificates :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
+        lens (_ssl_certificates :: ComputeTargetHttpsProxyResource s -> TF.Attr s Text)
              (\s a -> s { _ssl_certificates = a } :: ComputeTargetHttpsProxyResource s)
 
 instance P.HasUrlMap (ComputeTargetHttpsProxyResource s) s Text where
     urlMap =
-        lens (_url_map :: ComputeTargetHttpsProxyResource s -> TF.Attribute s Text)
+        lens (_url_map :: ComputeTargetHttpsProxyResource s -> TF.Attr s Text)
              (\s a -> s { _url_map = a } :: ComputeTargetHttpsProxyResource s)
 
 instance P.HasComputedProxyId (ComputeTargetHttpsProxyResource s) Text
@@ -4409,28 +4409,28 @@ see
 and <https://cloud.google.com/compute/docs/reference/latest/targetPools> .
 -}
 data ComputeTargetPoolResource s = ComputeTargetPoolResource {
-      _backup_pool :: !(TF.Attribute s Text)
+      _backup_pool :: !(TF.Attr s Text)
     {- ^ (Optional) URL to the backup target pool. Must also set failover_ratio. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Textual description field. -}
-    , _failover_ratio :: !(TF.Attribute s Text)
+    , _failover_ratio :: !(TF.Attr s Text)
     {- ^ (Optional) Ratio (0 to 1) of failed nodes before using the backup pool (which must also be set). -}
-    , _health_checks :: !(TF.Attribute s Text)
+    , _health_checks :: !(TF.Attr s Text)
     {- ^ (Optional) List of zero or one health check name or self_link. Only legacy @google_compute_http_health_check@ is supported. -}
-    , _instances :: !(TF.Attribute s Text)
+    , _instances :: !(TF.Attr s Text)
     {- ^ (Optional) List of instances in the pool. They can be given as URLs, or in the form of "zone/name". Note that the instances need not exist at the time of target pool creation, so there is no need to use the Terraform interpolators to create a dependency on the instances from the target pool. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) Where the target pool resides. Defaults to project region. -}
-    , _session_affinity :: !(TF.Attribute s Text)
+    , _session_affinity :: !(TF.Attr s Text)
     {- ^ (Optional) How to distribute load. Options are "NONE" (no affinity). "CLIENT_IP" (hash of the source/dest addresses / ports), and "CLIENT_IP_PROTO" also includes the protocol (default "NONE"). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeTargetPoolResource s) where
-    toHCL ComputeTargetPoolResource{..} = TF.block $ catMaybes
+    toHCL ComputeTargetPoolResource{..} = TF.inline $ catMaybes
         [ TF.attribute "backup_pool" _backup_pool
         , TF.attribute "description" _description
         , TF.attribute "failover_ratio" _failover_ratio
@@ -4444,47 +4444,47 @@ instance TF.ToHCL (ComputeTargetPoolResource s) where
 
 instance P.HasBackupPool (ComputeTargetPoolResource s) s Text where
     backupPool =
-        lens (_backup_pool :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_backup_pool :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _backup_pool = a } :: ComputeTargetPoolResource s)
 
 instance P.HasDescription (ComputeTargetPoolResource s) s Text where
     description =
-        lens (_description :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeTargetPoolResource s)
 
 instance P.HasFailoverRatio (ComputeTargetPoolResource s) s Text where
     failoverRatio =
-        lens (_failover_ratio :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_failover_ratio :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _failover_ratio = a } :: ComputeTargetPoolResource s)
 
 instance P.HasHealthChecks (ComputeTargetPoolResource s) s Text where
     healthChecks =
-        lens (_health_checks :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_health_checks :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _health_checks = a } :: ComputeTargetPoolResource s)
 
 instance P.HasInstances (ComputeTargetPoolResource s) s Text where
     instances =
-        lens (_instances :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_instances :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _instances = a } :: ComputeTargetPoolResource s)
 
 instance P.HasName (ComputeTargetPoolResource s) s Text where
     name =
-        lens (_name :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeTargetPoolResource s)
 
 instance P.HasProject (ComputeTargetPoolResource s) s Text where
     project =
-        lens (_project :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeTargetPoolResource s)
 
 instance P.HasRegion (ComputeTargetPoolResource s) s Text where
     region =
-        lens (_region :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeTargetPoolResource s)
 
 instance P.HasSessionAffinity (ComputeTargetPoolResource s) s Text where
     sessionAffinity =
-        lens (_session_affinity :: ComputeTargetPoolResource s -> TF.Attribute s Text)
+        lens (_session_affinity :: ComputeTargetPoolResource s -> TF.Attr s Text)
              (\s a -> s { _session_affinity = a } :: ComputeTargetPoolResource s)
 
 instance P.HasComputedSelfLink (ComputeTargetPoolResource s) Text
@@ -4511,22 +4511,22 @@ Creates a target SSL proxy resource in GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/targetSslProxies> .
 -}
 data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource {
-      _backend_service :: !(TF.Attribute s Text)
+      _backend_service :: !(TF.Attr s Text)
     {- ^ (Required) The URL of a Backend Service resource to receive the matched traffic. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description of this resource. Changing this forces a new resource to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _proxy_header :: !(TF.Attribute s Text)
+    , _proxy_header :: !(TF.Attr s Text)
     {- ^ (Optional) Type of proxy header to append before sending data to the backend, either NONE or PROXY_V1 (default NONE). -}
-    , _ssl_certificates :: !(TF.Attribute s Text)
+    , _ssl_certificates :: !(TF.Attr s Text)
     {- ^ (Required) The URLs or names of the SSL Certificate resources that authenticate connections between users and load balancing. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeTargetSslProxyResource s) where
-    toHCL ComputeTargetSslProxyResource{..} = TF.block $ catMaybes
+    toHCL ComputeTargetSslProxyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "backend_service" _backend_service
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -4537,32 +4537,32 @@ instance TF.ToHCL (ComputeTargetSslProxyResource s) where
 
 instance P.HasBackendService (ComputeTargetSslProxyResource s) s Text where
     backendService =
-        lens (_backend_service :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
+        lens (_backend_service :: ComputeTargetSslProxyResource s -> TF.Attr s Text)
              (\s a -> s { _backend_service = a } :: ComputeTargetSslProxyResource s)
 
 instance P.HasDescription (ComputeTargetSslProxyResource s) s Text where
     description =
-        lens (_description :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeTargetSslProxyResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeTargetSslProxyResource s)
 
 instance P.HasName (ComputeTargetSslProxyResource s) s Text where
     name =
-        lens (_name :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeTargetSslProxyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeTargetSslProxyResource s)
 
 instance P.HasProject (ComputeTargetSslProxyResource s) s Text where
     project =
-        lens (_project :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeTargetSslProxyResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeTargetSslProxyResource s)
 
 instance P.HasProxyHeader (ComputeTargetSslProxyResource s) s Text where
     proxyHeader =
-        lens (_proxy_header :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
+        lens (_proxy_header :: ComputeTargetSslProxyResource s -> TF.Attr s Text)
              (\s a -> s { _proxy_header = a } :: ComputeTargetSslProxyResource s)
 
 instance P.HasSslCertificates (ComputeTargetSslProxyResource s) s Text where
     sslCertificates =
-        lens (_ssl_certificates :: ComputeTargetSslProxyResource s -> TF.Attribute s Text)
+        lens (_ssl_certificates :: ComputeTargetSslProxyResource s -> TF.Attr s Text)
              (\s a -> s { _ssl_certificates = a } :: ComputeTargetSslProxyResource s)
 
 instance P.HasComputedProxyId (ComputeTargetSslProxyResource s) Text
@@ -4587,20 +4587,20 @@ Creates a target TCP proxy resource in GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/targetTcpProxies> .
 -}
 data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource {
-      _backend_service :: !(TF.Attribute s Text)
+      _backend_service :: !(TF.Attr s Text)
     {- ^ (Required) The URL of a Backend Service resource to receive the matched traffic. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description of this resource. Changing this forces a new resource to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _proxy_header :: !(TF.Attribute s Text)
+    , _proxy_header :: !(TF.Attr s Text)
     {- ^ (Optional) Type of proxy header to append before sending data to the backend, either NONE or PROXY_V1 (default NONE). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeTargetTcpProxyResource s) where
-    toHCL ComputeTargetTcpProxyResource{..} = TF.block $ catMaybes
+    toHCL ComputeTargetTcpProxyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "backend_service" _backend_service
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -4610,27 +4610,27 @@ instance TF.ToHCL (ComputeTargetTcpProxyResource s) where
 
 instance P.HasBackendService (ComputeTargetTcpProxyResource s) s Text where
     backendService =
-        lens (_backend_service :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
+        lens (_backend_service :: ComputeTargetTcpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _backend_service = a } :: ComputeTargetTcpProxyResource s)
 
 instance P.HasDescription (ComputeTargetTcpProxyResource s) s Text where
     description =
-        lens (_description :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeTargetTcpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeTargetTcpProxyResource s)
 
 instance P.HasName (ComputeTargetTcpProxyResource s) s Text where
     name =
-        lens (_name :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeTargetTcpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeTargetTcpProxyResource s)
 
 instance P.HasProject (ComputeTargetTcpProxyResource s) s Text where
     project =
-        lens (_project :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeTargetTcpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeTargetTcpProxyResource s)
 
 instance P.HasProxyHeader (ComputeTargetTcpProxyResource s) s Text where
     proxyHeader =
-        lens (_proxy_header :: ComputeTargetTcpProxyResource s -> TF.Attribute s Text)
+        lens (_proxy_header :: ComputeTargetTcpProxyResource s -> TF.Attr s Text)
              (\s a -> s { _proxy_header = a } :: ComputeTargetTcpProxyResource s)
 
 instance P.HasComputedProxyId (ComputeTargetTcpProxyResource s) Text
@@ -4654,24 +4654,24 @@ Manages a URL Map resource within GCE. For more information see
 <https://cloud.google.com/compute/docs/reference/latest/urlMaps> .
 -}
 data ComputeUrlMapResource s = ComputeUrlMapResource {
-      _default_service :: !(TF.Attribute s Text)
+      _default_service :: !(TF.Attr s Text)
     {- ^ (Required) The backend service or backend bucket to use when none of the given rules match. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A brief description of this resource. -}
-    , _host_rule :: !(TF.Attribute s Text)
+    , _host_rule :: !(TF.Attr s Text)
     {- ^ (Optional) A list of host rules. Multiple blocks of this type are permitted. Structure is documented below. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _path_matcher :: !(TF.Attribute s Text)
+    , _path_matcher :: !(TF.Attr s Text)
     {- ^ (Optional) A list of paths to match. Structure is documented below. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _test :: !(TF.Attribute s Text)
+    , _test :: !(TF.Attr s Text)
     {- ^ (Optional) The test to perform.  Multiple blocks of this type are permitted. Structure is documented below. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeUrlMapResource s) where
-    toHCL ComputeUrlMapResource{..} = TF.block $ catMaybes
+    toHCL ComputeUrlMapResource{..} = TF.inline $ catMaybes
         [ TF.attribute "default_service" _default_service
         , TF.attribute "description" _description
         , TF.attribute "host_rule" _host_rule
@@ -4683,37 +4683,37 @@ instance TF.ToHCL (ComputeUrlMapResource s) where
 
 instance P.HasDefaultService (ComputeUrlMapResource s) s Text where
     defaultService =
-        lens (_default_service :: ComputeUrlMapResource s -> TF.Attribute s Text)
+        lens (_default_service :: ComputeUrlMapResource s -> TF.Attr s Text)
              (\s a -> s { _default_service = a } :: ComputeUrlMapResource s)
 
 instance P.HasDescription (ComputeUrlMapResource s) s Text where
     description =
-        lens (_description :: ComputeUrlMapResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeUrlMapResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeUrlMapResource s)
 
 instance P.HasHostRule (ComputeUrlMapResource s) s Text where
     hostRule =
-        lens (_host_rule :: ComputeUrlMapResource s -> TF.Attribute s Text)
+        lens (_host_rule :: ComputeUrlMapResource s -> TF.Attr s Text)
              (\s a -> s { _host_rule = a } :: ComputeUrlMapResource s)
 
 instance P.HasName (ComputeUrlMapResource s) s Text where
     name =
-        lens (_name :: ComputeUrlMapResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeUrlMapResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeUrlMapResource s)
 
 instance P.HasPathMatcher (ComputeUrlMapResource s) s Text where
     pathMatcher =
-        lens (_path_matcher :: ComputeUrlMapResource s -> TF.Attribute s Text)
+        lens (_path_matcher :: ComputeUrlMapResource s -> TF.Attr s Text)
              (\s a -> s { _path_matcher = a } :: ComputeUrlMapResource s)
 
 instance P.HasProject (ComputeUrlMapResource s) s Text where
     project =
-        lens (_project :: ComputeUrlMapResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeUrlMapResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeUrlMapResource s)
 
 instance P.HasTest (ComputeUrlMapResource s) s Text where
     test =
-        lens (_test :: ComputeUrlMapResource s -> TF.Attribute s Text)
+        lens (_test :: ComputeUrlMapResource s -> TF.Attr s Text)
              (\s a -> s { _test = a } :: ComputeUrlMapResource s)
 
 instance P.HasComputedFingerprint (ComputeUrlMapResource s) Text
@@ -4739,20 +4739,20 @@ Manages a VPN Gateway in the GCE network. For more info, read the
 <https://cloud.google.com/compute/docs/vpn> .
 -}
 data ComputeVpnGatewayResource s = ComputeVpnGatewayResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description of the resource. Changing this forces a new resource to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Required) The name or resource link to the network this VPN gateway is accepting traffic for. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The region this gateway should sit in. If not specified, the project region will be used. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeVpnGatewayResource s) where
-    toHCL ComputeVpnGatewayResource{..} = TF.block $ catMaybes
+    toHCL ComputeVpnGatewayResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         , TF.attribute "network" _network
@@ -4762,27 +4762,27 @@ instance TF.ToHCL (ComputeVpnGatewayResource s) where
 
 instance P.HasDescription (ComputeVpnGatewayResource s) s Text where
     description =
-        lens (_description :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeVpnGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeVpnGatewayResource s)
 
 instance P.HasName (ComputeVpnGatewayResource s) s Text where
     name =
-        lens (_name :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeVpnGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeVpnGatewayResource s)
 
 instance P.HasNetwork (ComputeVpnGatewayResource s) s Text where
     network =
-        lens (_network :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
+        lens (_network :: ComputeVpnGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeVpnGatewayResource s)
 
 instance P.HasProject (ComputeVpnGatewayResource s) s Text where
     project =
-        lens (_project :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeVpnGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeVpnGatewayResource s)
 
 instance P.HasRegion (ComputeVpnGatewayResource s) s Text where
     region =
-        lens (_region :: ComputeVpnGatewayResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeVpnGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeVpnGatewayResource s)
 
 instance P.HasComputedSelfLink (ComputeVpnGatewayResource s) Text
@@ -4806,32 +4806,32 @@ including the @shared_secret@ will be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data ComputeVpnTunnelResource s = ComputeVpnTunnelResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description of the resource. Changing this forces a new resource to be created. -}
-    , _ike_version :: !(TF.Attribute s Text)
+    , _ike_version :: !(TF.Attr s Text)
     {- ^ (Optional) Either version 1 or 2. Default is 2. Changing this forces a new resource to be created. -}
-    , _local_traffic_selector :: !(TF.Attribute s Text)
+    , _local_traffic_selector :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies which CIDR ranges are announced to the VPN peer. Mandatory if the VPN gateway is attached to a custom subnetted network. Refer to Google documentation for more information. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _peer_ip :: !(TF.Attribute s Text)
+    , _peer_ip :: !(TF.Attr s Text)
     {- ^ (Required) The VPN gateway sitting outside of GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The region this tunnel should sit in. If not specified, the project region will be used. Changing this forces a new resource to be created. -}
-    , _remote_traffic_selector :: !(TF.Attribute s Text)
+    , _remote_traffic_selector :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies which CIDR ranges the VPN tunnel can route to the remote side. Mandatory if the VPN gateway is attached to a custom subnetted network. Refer to Google documentation for more information. -}
-    , _router :: !(TF.Attribute s Text)
+    , _router :: !(TF.Attr s Text)
     {- ^ (Optional) Name of a Cloud Router in the same region to be used for dynamic routing. Refer to Google documentation for more information. -}
-    , _shared_secret :: !(TF.Attribute s Text)
+    , _shared_secret :: !(TF.Attr s Text)
     {- ^ (Required) A passphrase shared between the two VPN gateways. Changing this forces a new resource to be created. -}
-    , _target_vpn_gateway :: !(TF.Attribute s Text)
+    , _target_vpn_gateway :: !(TF.Attr s Text)
     {- ^ (Required) A link to the VPN gateway sitting inside GCE. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeVpnTunnelResource s) where
-    toHCL ComputeVpnTunnelResource{..} = TF.block $ catMaybes
+    toHCL ComputeVpnTunnelResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "ike_version" _ike_version
         , TF.attribute "local_traffic_selector" _local_traffic_selector
@@ -4847,57 +4847,57 @@ instance TF.ToHCL (ComputeVpnTunnelResource s) where
 
 instance P.HasDescription (ComputeVpnTunnelResource s) s Text where
     description =
-        lens (_description :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_description :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasIkeVersion (ComputeVpnTunnelResource s) s Text where
     ikeVersion =
-        lens (_ike_version :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_ike_version :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _ike_version = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasLocalTrafficSelector (ComputeVpnTunnelResource s) s Text where
     localTrafficSelector =
-        lens (_local_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_local_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _local_traffic_selector = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasName (ComputeVpnTunnelResource s) s Text where
     name =
-        lens (_name :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_name :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasPeerIp (ComputeVpnTunnelResource s) s Text where
     peerIp =
-        lens (_peer_ip :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_peer_ip :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _peer_ip = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasProject (ComputeVpnTunnelResource s) s Text where
     project =
-        lens (_project :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_project :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasRegion (ComputeVpnTunnelResource s) s Text where
     region =
-        lens (_region :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_region :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasRemoteTrafficSelector (ComputeVpnTunnelResource s) s Text where
     remoteTrafficSelector =
-        lens (_remote_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_remote_traffic_selector :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _remote_traffic_selector = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasRouter (ComputeVpnTunnelResource s) s Text where
     router =
-        lens (_router :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_router :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _router = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasSharedSecret (ComputeVpnTunnelResource s) s Text where
     sharedSecret =
-        lens (_shared_secret :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_shared_secret :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _shared_secret = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasTargetVpnGateway (ComputeVpnTunnelResource s) s Text where
     targetVpnGateway =
-        lens (_target_vpn_gateway :: ComputeVpnTunnelResource s -> TF.Attribute s Text)
+        lens (_target_vpn_gateway :: ComputeVpnTunnelResource s -> TF.Attr s Text)
              (\s a -> s { _target_vpn_gateway = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasComputedDetailedStatus (ComputeVpnTunnelResource s) Text
@@ -4929,56 +4929,56 @@ Creates a Google Kubernetes Engine (GKE) cluster. For more information see
 in the raw state as plain-text. </docs/state/sensitive-data.html> .
 -}
 data ContainerClusterResource s = ContainerClusterResource {
-      _additional_zones :: !(TF.Attribute s Text)
+      _additional_zones :: !(TF.Attr s Text)
     {- ^ (Optional) The list of additional Google Compute Engine locations in which the cluster's nodes should be located. If additional zones are configured, the number of nodes specified in @initial_node_count@ is created in all specified zones. -}
-    , _addons_config :: !(TF.Attribute s Text)
+    , _addons_config :: !(TF.Attr s Text)
     {- ^ (Optional) The configuration for addons supported by GKE. Structure is documented below. -}
-    , _cluster_ipv4_cidr :: !(TF.Attribute s Text)
+    , _cluster_ipv4_cidr :: !(TF.Attr s Text)
     {- ^ (Optional) The IP address range of the kubernetes pods in this cluster. Default is an automatically assigned CIDR. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Description of the cluster. -}
-    , _enable_kubernetes_alpha :: !(TF.Attribute s Text)
+    , _enable_kubernetes_alpha :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to enable Kubernetes Alpha features for this cluster. Note that when this option is enabled, the cluster cannot be upgraded and will be automatically deleted after 30 days. -}
-    , _enable_legacy_abac :: !(TF.Attribute s Text)
+    , _enable_legacy_abac :: !(TF.Attr s Text)
     {- ^ (Optional) Whether the ABAC authorizer is enabled for this cluster. When enabled, identities in the system, including service accounts, nodes, and controllers, will have statically granted permissions beyond those provided by the RBAC configuration or IAM. -}
-    , _initial_node_count :: !(TF.Attribute s Text)
+    , _initial_node_count :: !(TF.Attr s Text)
     {- ^ (Optional) The number of nodes to create in this cluster (not including the Kubernetes master). Must be set if @node_pool@ is not set. -}
-    , _ip_allocation_policy :: !(TF.Attribute s Text)
+    , _ip_allocation_policy :: !(TF.Attr s Text)
     {- ^ (Optional) Configuration for cluster IP allocation. As of now, only pre-allocated subnetworks (custom type with secondary ranges) are supported. -}
-    , _logging_service :: !(TF.Attribute s Text)
+    , _logging_service :: !(TF.Attr s Text)
     {- ^ (Optional) The logging service that the cluster should write logs to. Available options include @logging.googleapis.com@ and @none@ . Defaults to @logging.googleapis.com@ -}
-    , _maintenance_policy :: !(TF.Attribute s Text)
+    , _maintenance_policy :: !(TF.Attr s Text)
     {- ^ (Optional) The maintenance policy to use for the cluster. Structure is documented below. -}
-    , _master_auth :: !(TF.Attribute s Text)
+    , _master_auth :: !(TF.Attr s Text)
     {- ^ (Optional) The authentication information for accessing the Kubernetes master. Structure is documented below. -}
-    , _master_authorized_networks_config :: !(TF.Attribute s Text)
+    , _master_authorized_networks_config :: !(TF.Attr s Text)
     {- ^ (Optional) The desired configuration options for master authorized networks. Omit the nested @cidr_blocks@ attribute to disallow external access (except the cluster node IPs, which GKE automatically whitelists). -}
-    , _min_master_version :: !(TF.Attribute s Text)
+    , _min_master_version :: !(TF.Attr s Text)
     {- ^ (Optional) The minimum version of the master. GKE will auto-update the master to new versions, so this does not guarantee the current master version--use the read-only @master_version@ field to obtain that. If unset, the cluster's version will be set by GKE to the version of the most recent official release (which is not necessarily the latest version). -}
-    , _monitoring_service :: !(TF.Attribute s Text)
+    , _monitoring_service :: !(TF.Attr s Text)
     {- ^ (Optional) The monitoring service that the cluster should write metrics to. Available options include @monitoring.googleapis.com@ and @none@ . Defaults to @monitoring.googleapis.com@ -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the cluster, unique within the project and zone. -}
-    , _network :: !(TF.Attribute s Text)
+    , _network :: !(TF.Attr s Text)
     {- ^ (Optional) The name or self_link of the Google Compute Engine network to which the cluster is connected. -}
-    , _network_policy :: !(TF.Attribute s Text)
+    , _network_policy :: !(TF.Attr s Text)
     {- ^ (Optional) Configuration options for the <https://kubernetes.io/docs/concepts/services-networking/networkpolicies/> feature. Structure is documented below. -}
-    , _node_config :: !(TF.Attribute s Text)
+    , _node_config :: !(TF.Attr s Text)
     {- ^ -  (Optional) Parameters used in creating the cluster's nodes. Structure is documented below. -}
-    , _node_pool :: !(TF.Attribute s Text)
+    , _node_pool :: !(TF.Attr s Text)
     {- ^ (Optional) List of node pools associated with this cluster. See <container_node_pool.html> for schema. -}
-    , _node_version :: !(TF.Attribute s Text)
+    , _node_version :: !(TF.Attr s Text)
     {- ^ (Optional) The Kubernetes version on the nodes. Must either be unset or set to the same value as @min_master_version@ on create. Defaults to the default version set by GKE which is not necessarily the latest version. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _subnetwork :: !(TF.Attribute s Text)
+    , _subnetwork :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the Google Compute Engine subnetwork in which the cluster's instances are launched. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone that the master and the number of nodes specified in @initial_node_count@ should be created in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerClusterResource s) where
-    toHCL ContainerClusterResource{..} = TF.block $ catMaybes
+    toHCL ContainerClusterResource{..} = TF.inline $ catMaybes
         [ TF.attribute "additional_zones" _additional_zones
         , TF.attribute "addons_config" _addons_config
         , TF.attribute "cluster_ipv4_cidr" _cluster_ipv4_cidr
@@ -5006,117 +5006,117 @@ instance TF.ToHCL (ContainerClusterResource s) where
 
 instance P.HasAdditionalZones (ContainerClusterResource s) s Text where
     additionalZones =
-        lens (_additional_zones :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_additional_zones :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _additional_zones = a } :: ContainerClusterResource s)
 
 instance P.HasAddonsConfig (ContainerClusterResource s) s Text where
     addonsConfig =
-        lens (_addons_config :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_addons_config :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _addons_config = a } :: ContainerClusterResource s)
 
 instance P.HasClusterIpv4Cidr (ContainerClusterResource s) s Text where
     clusterIpv4Cidr =
-        lens (_cluster_ipv4_cidr :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_cluster_ipv4_cidr :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _cluster_ipv4_cidr = a } :: ContainerClusterResource s)
 
 instance P.HasDescription (ContainerClusterResource s) s Text where
     description =
-        lens (_description :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_description :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ContainerClusterResource s)
 
 instance P.HasEnableKubernetesAlpha (ContainerClusterResource s) s Text where
     enableKubernetesAlpha =
-        lens (_enable_kubernetes_alpha :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_enable_kubernetes_alpha :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _enable_kubernetes_alpha = a } :: ContainerClusterResource s)
 
 instance P.HasEnableLegacyAbac (ContainerClusterResource s) s Text where
     enableLegacyAbac =
-        lens (_enable_legacy_abac :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_enable_legacy_abac :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _enable_legacy_abac = a } :: ContainerClusterResource s)
 
 instance P.HasInitialNodeCount (ContainerClusterResource s) s Text where
     initialNodeCount =
-        lens (_initial_node_count :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_initial_node_count :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _initial_node_count = a } :: ContainerClusterResource s)
 
 instance P.HasIpAllocationPolicy (ContainerClusterResource s) s Text where
     ipAllocationPolicy =
-        lens (_ip_allocation_policy :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_ip_allocation_policy :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _ip_allocation_policy = a } :: ContainerClusterResource s)
 
 instance P.HasLoggingService (ContainerClusterResource s) s Text where
     loggingService =
-        lens (_logging_service :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_logging_service :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _logging_service = a } :: ContainerClusterResource s)
 
 instance P.HasMaintenancePolicy (ContainerClusterResource s) s Text where
     maintenancePolicy =
-        lens (_maintenance_policy :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_maintenance_policy :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _maintenance_policy = a } :: ContainerClusterResource s)
 
 instance P.HasMasterAuth (ContainerClusterResource s) s Text where
     masterAuth =
-        lens (_master_auth :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_master_auth :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _master_auth = a } :: ContainerClusterResource s)
 
 instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) s Text where
     masterAuthorizedNetworksConfig =
-        lens (_master_authorized_networks_config :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_master_authorized_networks_config :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _master_authorized_networks_config = a } :: ContainerClusterResource s)
 
 instance P.HasMinMasterVersion (ContainerClusterResource s) s Text where
     minMasterVersion =
-        lens (_min_master_version :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_min_master_version :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _min_master_version = a } :: ContainerClusterResource s)
 
 instance P.HasMonitoringService (ContainerClusterResource s) s Text where
     monitoringService =
-        lens (_monitoring_service :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_monitoring_service :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _monitoring_service = a } :: ContainerClusterResource s)
 
 instance P.HasName (ContainerClusterResource s) s Text where
     name =
-        lens (_name :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_name :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ContainerClusterResource s)
 
 instance P.HasNetwork (ContainerClusterResource s) s Text where
     network =
-        lens (_network :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_network :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ContainerClusterResource s)
 
 instance P.HasNetworkPolicy (ContainerClusterResource s) s Text where
     networkPolicy =
-        lens (_network_policy :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_network_policy :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _network_policy = a } :: ContainerClusterResource s)
 
 instance P.HasNodeConfig (ContainerClusterResource s) s Text where
     nodeConfig =
-        lens (_node_config :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_node_config :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _node_config = a } :: ContainerClusterResource s)
 
 instance P.HasNodePool (ContainerClusterResource s) s Text where
     nodePool =
-        lens (_node_pool :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_node_pool :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _node_pool = a } :: ContainerClusterResource s)
 
 instance P.HasNodeVersion (ContainerClusterResource s) s Text where
     nodeVersion =
-        lens (_node_version :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_node_version :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _node_version = a } :: ContainerClusterResource s)
 
 instance P.HasProject (ContainerClusterResource s) s Text where
     project =
-        lens (_project :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_project :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ContainerClusterResource s)
 
 instance P.HasSubnetwork (ContainerClusterResource s) s Text where
     subnetwork =
-        lens (_subnetwork :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_subnetwork :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _subnetwork = a } :: ContainerClusterResource s)
 
 instance P.HasZone (ContainerClusterResource s) s Text where
     zone =
-        lens (_zone :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_zone :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ContainerClusterResource s)
 
 instance P.HasComputedEndpoint (ContainerClusterResource s) Text
@@ -5164,28 +5164,28 @@ Manages a Node Pool resource within GKE. For more information see
 .
 -}
 data ContainerNodePoolResource s = ContainerNodePoolResource {
-      _autoscaling :: !(TF.Attribute s Text)
+      _autoscaling :: !(TF.Attr s Text)
     {- ^ (Optional) Configuration required by cluster autoscaler to adjust the size of the node pool to the current cluster usage. Structure is documented below. -}
-    , _cluster :: !(TF.Attribute s Text)
+    , _cluster :: !(TF.Attr s Text)
     {- ^ (Required) The cluster to create the node pool for.  Cluster must be present in @zone@ provided for this resource. -}
-    , _management :: !(TF.Attribute s Text)
+    , _management :: !(TF.Attr s Text)
     {- ^ (Optional) Node management configuration, wherein auto-repair and auto-upgrade is configured. Structure is documented below. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the node pool. If left blank, Terraform will auto-generate a unique name. -}
-    , _name_prefix :: !(TF.Attribute s Text)
+    , _name_prefix :: !(TF.Attr s Text)
     {- ^ (Optional) Creates a unique name for the node pool beginning with the specified prefix. Conflicts with @name@ . -}
-    , _node_config :: !(TF.Attribute s Text)
+    , _node_config :: !(TF.Attr s Text)
     {- ^ (Optional) The node configuration of the pool. See <container_cluster.html> for schema. -}
-    , _node_count :: !(TF.Attribute s Text)
+    , _node_count :: !(TF.Attr s Text)
     {- ^ (Optional) The number of nodes per instance group. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which to create the node pool. If blank, the provider-configured project will be used. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Required) The zone in which the cluster resides. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerNodePoolResource s) where
-    toHCL ContainerNodePoolResource{..} = TF.block $ catMaybes
+    toHCL ContainerNodePoolResource{..} = TF.inline $ catMaybes
         [ TF.attribute "autoscaling" _autoscaling
         , TF.attribute "cluster" _cluster
         , TF.attribute "management" _management
@@ -5199,47 +5199,47 @@ instance TF.ToHCL (ContainerNodePoolResource s) where
 
 instance P.HasAutoscaling (ContainerNodePoolResource s) s Text where
     autoscaling =
-        lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _autoscaling = a } :: ContainerNodePoolResource s)
 
 instance P.HasCluster (ContainerNodePoolResource s) s Text where
     cluster =
-        lens (_cluster :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_cluster :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _cluster = a } :: ContainerNodePoolResource s)
 
 instance P.HasManagement (ContainerNodePoolResource s) s Text where
     management =
-        lens (_management :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_management :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _management = a } :: ContainerNodePoolResource s)
 
 instance P.HasName (ContainerNodePoolResource s) s Text where
     name =
-        lens (_name :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_name :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ContainerNodePoolResource s)
 
 instance P.HasNamePrefix (ContainerNodePoolResource s) s Text where
     namePrefix =
-        lens (_name_prefix :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_name_prefix :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _name_prefix = a } :: ContainerNodePoolResource s)
 
 instance P.HasNodeConfig (ContainerNodePoolResource s) s Text where
     nodeConfig =
-        lens (_node_config :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_node_config :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _node_config = a } :: ContainerNodePoolResource s)
 
 instance P.HasNodeCount (ContainerNodePoolResource s) s Text where
     nodeCount =
-        lens (_node_count :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_node_count :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _node_count = a } :: ContainerNodePoolResource s)
 
 instance P.HasProject (ContainerNodePoolResource s) s Text where
     project =
-        lens (_project :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_project :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ContainerNodePoolResource s)
 
 instance P.HasZone (ContainerNodePoolResource s) s Text where
     zone =
-        lens (_zone :: ContainerNodePoolResource s -> TF.Attribute s Text)
+        lens (_zone :: ContainerNodePoolResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ContainerNodePoolResource s)
 
 
@@ -5266,26 +5266,26 @@ documentation for <https://beam.apache.org> and
 <https://cloud.google.com/dataflow/> .
 -}
 data DataflowJobResource s = DataflowJobResource {
-      _max_workers :: !(TF.Attribute s Text)
+      _max_workers :: !(TF.Attr s Text)
     {- ^ (Optional) The number of workers permitted to work on the job.  More workers may improve processing speed at additional cost. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by Dataflow. -}
-    , _on_delete :: !(TF.Attribute s Text)
+    , _on_delete :: !(TF.Attr s Text)
     {- ^ (Optional) One of "drain" or "cancel".  Specifies behavior of deletion during @terraform destroy@ .  See above note. -}
-    , _parameters :: !(TF.Attribute s Text)
+    , _parameters :: !(TF.Attr s Text)
     {- ^ (Optional) Key/Value pairs to be passed to the Dataflow job (as used in the template). -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _temp_gcs_location :: !(TF.Attribute s Text)
+    , _temp_gcs_location :: !(TF.Attr s Text)
     {- ^ (Required) A writeable location on GCS for the Dataflow job to dump its temporary data. -}
-    , _template_gcs_path :: !(TF.Attribute s Text)
+    , _template_gcs_path :: !(TF.Attr s Text)
     {- ^ (Required) The GCS path to the Dataflow job template. -}
-    , _zone :: !(TF.Attribute s Text)
+    , _zone :: !(TF.Attr s Text)
     {- ^ (Optional) The zone in which the created job should run. If it is not provided, the provider zone is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DataflowJobResource s) where
-    toHCL DataflowJobResource{..} = TF.block $ catMaybes
+    toHCL DataflowJobResource{..} = TF.inline $ catMaybes
         [ TF.attribute "max_workers" _max_workers
         , TF.attribute "name" _name
         , TF.attribute "on_delete" _on_delete
@@ -5298,42 +5298,42 @@ instance TF.ToHCL (DataflowJobResource s) where
 
 instance P.HasMaxWorkers (DataflowJobResource s) s Text where
     maxWorkers =
-        lens (_max_workers :: DataflowJobResource s -> TF.Attribute s Text)
+        lens (_max_workers :: DataflowJobResource s -> TF.Attr s Text)
              (\s a -> s { _max_workers = a } :: DataflowJobResource s)
 
 instance P.HasName (DataflowJobResource s) s Text where
     name =
-        lens (_name :: DataflowJobResource s -> TF.Attribute s Text)
+        lens (_name :: DataflowJobResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DataflowJobResource s)
 
 instance P.HasOnDelete (DataflowJobResource s) s Text where
     onDelete =
-        lens (_on_delete :: DataflowJobResource s -> TF.Attribute s Text)
+        lens (_on_delete :: DataflowJobResource s -> TF.Attr s Text)
              (\s a -> s { _on_delete = a } :: DataflowJobResource s)
 
 instance P.HasParameters (DataflowJobResource s) s Text where
     parameters =
-        lens (_parameters :: DataflowJobResource s -> TF.Attribute s Text)
+        lens (_parameters :: DataflowJobResource s -> TF.Attr s Text)
              (\s a -> s { _parameters = a } :: DataflowJobResource s)
 
 instance P.HasProject (DataflowJobResource s) s Text where
     project =
-        lens (_project :: DataflowJobResource s -> TF.Attribute s Text)
+        lens (_project :: DataflowJobResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DataflowJobResource s)
 
 instance P.HasTempGcsLocation (DataflowJobResource s) s Text where
     tempGcsLocation =
-        lens (_temp_gcs_location :: DataflowJobResource s -> TF.Attribute s Text)
+        lens (_temp_gcs_location :: DataflowJobResource s -> TF.Attr s Text)
              (\s a -> s { _temp_gcs_location = a } :: DataflowJobResource s)
 
 instance P.HasTemplateGcsPath (DataflowJobResource s) s Text where
     templateGcsPath =
-        lens (_template_gcs_path :: DataflowJobResource s -> TF.Attribute s Text)
+        lens (_template_gcs_path :: DataflowJobResource s -> TF.Attr s Text)
              (\s a -> s { _template_gcs_path = a } :: DataflowJobResource s)
 
 instance P.HasZone (DataflowJobResource s) s Text where
     zone =
-        lens (_zone :: DataflowJobResource s -> TF.Attribute s Text)
+        lens (_zone :: DataflowJobResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: DataflowJobResource s)
 
 instance P.HasComputedState (DataflowJobResource s) Text
@@ -5362,20 +5362,20 @@ the API, all arguments except @labels@ ,
 Changing others will cause recreation of the whole cluster!
 -}
 data DataprocClusterResource s = DataprocClusterResource {
-      _cluster_config :: !(TF.Attribute s Text)
+      _cluster_config :: !(TF.Attr s Text)
     {- ^ (Optional) Allows you to configure various aspects of the cluster. Structure defined below. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional, Computed) The list of labels (key/value pairs) to be applied to instances in the cluster. GCP generates some itself including @goog-dataproc-cluster-name@ which is the name of the cluster. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the cluster, unique within the project and zone. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the @cluster@ will exist. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which the cluster and associated nodes will be created in. Defaults to @global@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DataprocClusterResource s) where
-    toHCL DataprocClusterResource{..} = TF.block $ catMaybes
+    toHCL DataprocClusterResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cluster_config" _cluster_config
         , TF.attribute "labels" _labels
         , TF.attribute "name" _name
@@ -5385,27 +5385,27 @@ instance TF.ToHCL (DataprocClusterResource s) where
 
 instance P.HasClusterConfig (DataprocClusterResource s) s Text where
     clusterConfig =
-        lens (_cluster_config :: DataprocClusterResource s -> TF.Attribute s Text)
+        lens (_cluster_config :: DataprocClusterResource s -> TF.Attr s Text)
              (\s a -> s { _cluster_config = a } :: DataprocClusterResource s)
 
 instance P.HasLabels (DataprocClusterResource s) s Text where
     labels =
-        lens (_labels :: DataprocClusterResource s -> TF.Attribute s Text)
+        lens (_labels :: DataprocClusterResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: DataprocClusterResource s)
 
 instance P.HasName (DataprocClusterResource s) s Text where
     name =
-        lens (_name :: DataprocClusterResource s -> TF.Attribute s Text)
+        lens (_name :: DataprocClusterResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DataprocClusterResource s)
 
 instance P.HasProject (DataprocClusterResource s) s Text where
     project =
-        lens (_project :: DataprocClusterResource s -> TF.Attribute s Text)
+        lens (_project :: DataprocClusterResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DataprocClusterResource s)
 
 instance P.HasRegion (DataprocClusterResource s) s Text where
     region =
-        lens (_region :: DataprocClusterResource s -> TF.Attribute s Text)
+        lens (_region :: DataprocClusterResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DataprocClusterResource s)
 
 instance P.HasComputedClusterConfigBucket (DataprocClusterResource s) Text
@@ -5433,24 +5433,24 @@ resource does not support 'update' and changing any attributes will cause
 the resource to be recreated.
 -}
 data DataprocJobResource s = DataprocJobResource {
-      _force_delete :: !(TF.Attribute s Text)
+      _force_delete :: !(TF.Attr s Text)
     {- ^ (Optional) By default, you can only delete inactive jobs within Dataproc. Setting this to true, and calling destroy, will ensure that the job is first cancelled before issuing the delete. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) The list of labels (key/value pairs) to add to the job. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the @cluster@ can be found and jobs subsequently run against. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The Cloud Dataproc region. This essentially determines which clusters are available for this job to be submitted to. If not specified, defaults to @global@ . -}
-    , _xxx_config :: !(TF.Attribute s Text)
+    , _xxx_config :: !(TF.Attr s Text)
     {- ^ (Required) Exactly one of the specific job types to run on the cluster should be specified. If you want to submit multiple jobs, this will currently require the definition of multiple @google_dataproc_job@ resources as shown in the example above, or by setting the @count@ attribute. The following job configs are supported: -}
-    , placement :: !(TF.Attribute s P.PlacementType)
+    , placement :: !(TF.Attr s P.PlacementType)
     {- ^ (Optional) See datatype documentation. -}
-    , scheduling :: !(TF.Attribute s P.SchedulingType)
+    , scheduling :: !(TF.Attr s P.SchedulingType)
     {- ^ (Optional) See datatype documentation. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DataprocJobResource s) where
-    toHCL DataprocJobResource{..} = TF.block $ catMaybes
+    toHCL DataprocJobResource{..} = TF.inline $ catMaybes
         [ TF.attribute "force_delete" _force_delete
         , TF.attribute "labels" _labels
         , TF.attribute "project" _project
@@ -5462,37 +5462,37 @@ instance TF.ToHCL (DataprocJobResource s) where
 
 instance P.HasForceDelete (DataprocJobResource s) s Text where
     forceDelete =
-        lens (_force_delete :: DataprocJobResource s -> TF.Attribute s Text)
+        lens (_force_delete :: DataprocJobResource s -> TF.Attr s Text)
              (\s a -> s { _force_delete = a } :: DataprocJobResource s)
 
 instance P.HasLabels (DataprocJobResource s) s Text where
     labels =
-        lens (_labels :: DataprocJobResource s -> TF.Attribute s Text)
+        lens (_labels :: DataprocJobResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: DataprocJobResource s)
 
 instance P.HasPlacement (DataprocJobResource s) s P.PlacementType where
     placement =
-        lens (placement :: DataprocJobResource s -> TF.Attribute s P.PlacementType)
+        lens (placement :: DataprocJobResource s -> TF.Attr s P.PlacementType)
              (\s a -> s { placement = a } :: DataprocJobResource s)
 
 instance P.HasProject (DataprocJobResource s) s Text where
     project =
-        lens (_project :: DataprocJobResource s -> TF.Attribute s Text)
+        lens (_project :: DataprocJobResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DataprocJobResource s)
 
 instance P.HasRegion (DataprocJobResource s) s Text where
     region =
-        lens (_region :: DataprocJobResource s -> TF.Attribute s Text)
+        lens (_region :: DataprocJobResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DataprocJobResource s)
 
 instance P.HasScheduling (DataprocJobResource s) s P.SchedulingType where
     scheduling =
-        lens (scheduling :: DataprocJobResource s -> TF.Attribute s P.SchedulingType)
+        lens (scheduling :: DataprocJobResource s -> TF.Attr s P.SchedulingType)
              (\s a -> s { scheduling = a } :: DataprocJobResource s)
 
 instance P.HasXxxConfig (DataprocJobResource s) s Text where
     xxxConfig =
-        lens (_xxx_config :: DataprocJobResource s -> TF.Attribute s Text)
+        lens (_xxx_config :: DataprocJobResource s -> TF.Attr s Text)
              (\s a -> s { _xxx_config = a } :: DataprocJobResource s)
 
 instance P.HasComputedDriverControlsFilesUri (DataprocJobResource s) Text
@@ -5523,18 +5523,18 @@ Manages a zone within Google Cloud DNS. For more information see
 <https://cloud.google.com/dns/api/v1/managedZones> .
 -}
 data DnsManagedZoneResource s = DnsManagedZoneResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) A textual description field. Defaults to 'Managed by Terraform'. -}
-    , _dns_name :: !(TF.Attribute s Text)
+    , _dns_name :: !(TF.Attr s Text)
     {- ^ (Required) The DNS name of this zone, e.g. "terraform.io". -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by GCE. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsManagedZoneResource s) where
-    toHCL DnsManagedZoneResource{..} = TF.block $ catMaybes
+    toHCL DnsManagedZoneResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "dns_name" _dns_name
         , TF.attribute "name" _name
@@ -5543,22 +5543,22 @@ instance TF.ToHCL (DnsManagedZoneResource s) where
 
 instance P.HasDescription (DnsManagedZoneResource s) s Text where
     description =
-        lens (_description :: DnsManagedZoneResource s -> TF.Attribute s Text)
+        lens (_description :: DnsManagedZoneResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DnsManagedZoneResource s)
 
 instance P.HasDnsName (DnsManagedZoneResource s) s Text where
     dnsName =
-        lens (_dns_name :: DnsManagedZoneResource s -> TF.Attribute s Text)
+        lens (_dns_name :: DnsManagedZoneResource s -> TF.Attr s Text)
              (\s a -> s { _dns_name = a } :: DnsManagedZoneResource s)
 
 instance P.HasName (DnsManagedZoneResource s) s Text where
     name =
-        lens (_name :: DnsManagedZoneResource s -> TF.Attribute s Text)
+        lens (_name :: DnsManagedZoneResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsManagedZoneResource s)
 
 instance P.HasProject (DnsManagedZoneResource s) s Text where
     project =
-        lens (_project :: DnsManagedZoneResource s -> TF.Attribute s Text)
+        lens (_project :: DnsManagedZoneResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DnsManagedZoneResource s)
 
 instance P.HasComputedNameServers (DnsManagedZoneResource s) Text
@@ -5585,22 +5585,22 @@ NS records, Terraform will not actually remove NS records, but will report
 that it did.
 -}
 data DnsRecordSetResource s = DnsRecordSetResource {
-      _managed_zone :: !(TF.Attribute s Text)
+      _managed_zone :: !(TF.Attr s Text)
     {- ^ (Required) The name of the zone in which this record set will reside. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The DNS name this record set will apply to. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _rrdatas :: !(TF.Attribute s Text)
+    , _rrdatas :: !(TF.Attr s Text)
     {- ^ (Required) The string data for the records in this record set whose meaning depends on the DNS type. For TXT record, if the string data contains spaces, add surrounding @\"@ if you don't want your string to get split on spaces. -}
-    , _ttl :: !(TF.Attribute s Text)
+    , _ttl :: !(TF.Attr s Text)
     {- ^ (Required) The time-to-live of this record set (seconds). -}
-    , _type' :: !(TF.Attribute s Text)
+    , _type' :: !(TF.Attr s Text)
     {- ^ (Required) The DNS record set type. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsRecordSetResource s) where
-    toHCL DnsRecordSetResource{..} = TF.block $ catMaybes
+    toHCL DnsRecordSetResource{..} = TF.inline $ catMaybes
         [ TF.attribute "managed_zone" _managed_zone
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -5611,32 +5611,32 @@ instance TF.ToHCL (DnsRecordSetResource s) where
 
 instance P.HasManagedZone (DnsRecordSetResource s) s Text where
     managedZone =
-        lens (_managed_zone :: DnsRecordSetResource s -> TF.Attribute s Text)
+        lens (_managed_zone :: DnsRecordSetResource s -> TF.Attr s Text)
              (\s a -> s { _managed_zone = a } :: DnsRecordSetResource s)
 
 instance P.HasName (DnsRecordSetResource s) s Text where
     name =
-        lens (_name :: DnsRecordSetResource s -> TF.Attribute s Text)
+        lens (_name :: DnsRecordSetResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsRecordSetResource s)
 
 instance P.HasProject (DnsRecordSetResource s) s Text where
     project =
-        lens (_project :: DnsRecordSetResource s -> TF.Attribute s Text)
+        lens (_project :: DnsRecordSetResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DnsRecordSetResource s)
 
 instance P.HasRrdatas (DnsRecordSetResource s) s Text where
     rrdatas =
-        lens (_rrdatas :: DnsRecordSetResource s -> TF.Attribute s Text)
+        lens (_rrdatas :: DnsRecordSetResource s -> TF.Attr s Text)
              (\s a -> s { _rrdatas = a } :: DnsRecordSetResource s)
 
 instance P.HasTtl (DnsRecordSetResource s) s Text where
     ttl =
-        lens (_ttl :: DnsRecordSetResource s -> TF.Attribute s Text)
+        lens (_ttl :: DnsRecordSetResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: DnsRecordSetResource s)
 
 instance P.HasType' (DnsRecordSetResource s) s Text where
     type' =
-        lens (_type' :: DnsRecordSetResource s -> TF.Attribute s Text)
+        lens (_type' :: DnsRecordSetResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DnsRecordSetResource s)
 
 
@@ -5660,20 +5660,20 @@ or gRPC.  View the relevant docs for
 <https://cloud.google.com/endpoints/docs/grpc/> .
 -}
 data EndpointsServiceResource s = EndpointsServiceResource {
-      _grpc_config :: !(TF.Attribute s Text)
+      _grpc_config :: !(TF.Attr s Text)
     {- ^ : (Optional) The full text of the Service Config YAML file (Example located <https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/endpoints/bookstore-grpc/api_config.yaml> ).  If provided, must also provide @protoc_output@ . @open_api@ config must not be provided. -}
-    , _openapi_config :: !(TF.Attribute s Text)
+    , _openapi_config :: !(TF.Attr s Text)
     {- ^ : (Optional) The full text of the OpenAPI YAML configuration as described <https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md> .  Either this, or both of @grpc_config@ and @protoc_output@ must be specified. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ : (Optional) The project ID that the service belongs to.  If not provided, provider project is used. -}
-    , _protoc_output :: !(TF.Attribute s Text)
+    , _protoc_output :: !(TF.Attr s Text)
     {- ^ : (Optional) The full contents of the Service Descriptor File generated by protoc.  This should be a compiled .pb file. -}
-    , _service_name :: !(TF.Attribute s Text)
+    , _service_name :: !(TF.Attr s Text)
     {- ^ : (Required) The name of the service.  Usually of the form @$apiname.endpoints.$projectid.cloud.goog@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EndpointsServiceResource s) where
-    toHCL EndpointsServiceResource{..} = TF.block $ catMaybes
+    toHCL EndpointsServiceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "grpc_config" _grpc_config
         , TF.attribute "openapi_config" _openapi_config
         , TF.attribute "project" _project
@@ -5683,27 +5683,27 @@ instance TF.ToHCL (EndpointsServiceResource s) where
 
 instance P.HasGrpcConfig (EndpointsServiceResource s) s Text where
     grpcConfig =
-        lens (_grpc_config :: EndpointsServiceResource s -> TF.Attribute s Text)
+        lens (_grpc_config :: EndpointsServiceResource s -> TF.Attr s Text)
              (\s a -> s { _grpc_config = a } :: EndpointsServiceResource s)
 
 instance P.HasOpenapiConfig (EndpointsServiceResource s) s Text where
     openapiConfig =
-        lens (_openapi_config :: EndpointsServiceResource s -> TF.Attribute s Text)
+        lens (_openapi_config :: EndpointsServiceResource s -> TF.Attr s Text)
              (\s a -> s { _openapi_config = a } :: EndpointsServiceResource s)
 
 instance P.HasProject (EndpointsServiceResource s) s Text where
     project =
-        lens (_project :: EndpointsServiceResource s -> TF.Attribute s Text)
+        lens (_project :: EndpointsServiceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: EndpointsServiceResource s)
 
 instance P.HasProtocOutput (EndpointsServiceResource s) s Text where
     protocOutput =
-        lens (_protoc_output :: EndpointsServiceResource s -> TF.Attribute s Text)
+        lens (_protoc_output :: EndpointsServiceResource s -> TF.Attr s Text)
              (\s a -> s { _protoc_output = a } :: EndpointsServiceResource s)
 
 instance P.HasServiceName (EndpointsServiceResource s) s Text where
     serviceName =
-        lens (_service_name :: EndpointsServiceResource s -> TF.Attribute s Text)
+        lens (_service_name :: EndpointsServiceResource s -> TF.Attr s Text)
              (\s a -> s { _service_name = a } :: EndpointsServiceResource s)
 
 instance P.HasComputedApis (EndpointsServiceResource s) Text
@@ -5728,26 +5728,26 @@ Allows creation and management of the IAM policy for an existing Google
 Cloud Platform folder.
 -}
 data FolderIamPolicyResource s = FolderIamPolicyResource {
-      _folder :: !(TF.Attribute s Text)
+      _folder :: !(TF.Attr s Text)
     {- ^ (Required) The resource name of the folder the policy is attached to. Its format is folders/{folder_id}. -}
-    , _policy_data :: !(TF.Attribute s Text)
+    , _policy_data :: !(TF.Attr s Text)
     {- ^ (Required) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FolderIamPolicyResource s) where
-    toHCL FolderIamPolicyResource{..} = TF.block $ catMaybes
+    toHCL FolderIamPolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "folder" _folder
         , TF.attribute "policy_data" _policy_data
         ]
 
 instance P.HasFolder (FolderIamPolicyResource s) s Text where
     folder =
-        lens (_folder :: FolderIamPolicyResource s -> TF.Attribute s Text)
+        lens (_folder :: FolderIamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _folder = a } :: FolderIamPolicyResource s)
 
 instance P.HasPolicyData (FolderIamPolicyResource s) s Text where
     policyData =
-        lens (_policy_data :: FolderIamPolicyResource s -> TF.Attribute s Text)
+        lens (_policy_data :: FolderIamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _policy_data = a } :: FolderIamPolicyResource s)
 
 instance P.HasComputedEtag (FolderIamPolicyResource s) Text
@@ -5770,20 +5770,20 @@ and
 .
 -}
 data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource {
-      _boolean_policy :: !(TF.Attribute s Text)
+      _boolean_policy :: !(TF.Attr s Text)
     {- ^ (Optional) A boolean policy is a constraint that is either enforced or not. Structure is documented below. -}
-    , _constraint :: !(TF.Attribute s Text)
+    , _constraint :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Constraint the Policy is configuring, for example, @serviceuser.services@ . Check out the <https://cloud.google.com/resource-manager/docs/organization-policy/understanding-constraints#available_constraints> . -}
-    , _folder :: !(TF.Attribute s Text)
+    , _folder :: !(TF.Attr s Text)
     {- ^ (Required) The resource name of the folder to set the policy for. Its format is folders/{folder_id}. -}
-    , _list_policy :: !(TF.Attribute s Text)
+    , _list_policy :: !(TF.Attr s Text)
     {- ^ (Optional) A policy that can define specific values that are allowed or denied for the given constraint. It can also be used to allow or deny all values. Structure is documented below. -}
-    , _version :: !(TF.Attribute s Text)
+    , _version :: !(TF.Attr s Text)
     {- ^ (Optional) Version of the Policy. Default version is 0. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FolderOrganizationPolicyResource s) where
-    toHCL FolderOrganizationPolicyResource{..} = TF.block $ catMaybes
+    toHCL FolderOrganizationPolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "boolean_policy" _boolean_policy
         , TF.attribute "constraint" _constraint
         , TF.attribute "folder" _folder
@@ -5793,27 +5793,27 @@ instance TF.ToHCL (FolderOrganizationPolicyResource s) where
 
 instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) s Text where
     booleanPolicy =
-        lens (_boolean_policy :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_boolean_policy :: FolderOrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _boolean_policy = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasConstraint (FolderOrganizationPolicyResource s) s Text where
     constraint =
-        lens (_constraint :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_constraint :: FolderOrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _constraint = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasFolder (FolderOrganizationPolicyResource s) s Text where
     folder =
-        lens (_folder :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_folder :: FolderOrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _folder = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasListPolicy (FolderOrganizationPolicyResource s) s Text where
     listPolicy =
-        lens (_list_policy :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_list_policy :: FolderOrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _list_policy = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasVersion (FolderOrganizationPolicyResource s) s Text where
     version =
-        lens (_version :: FolderOrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_version :: FolderOrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasComputedEtag (FolderOrganizationPolicyResource s) Text
@@ -5850,26 +5850,26 @@ See the
 for more information.
 -}
 data FolderResource s = FolderResource {
-      _display_name :: !(TF.Attribute s Text)
+      _display_name :: !(TF.Attr s Text)
     {- ^ (Required) The folder’s display name. A folder’s display name must be unique amongst its siblings, e.g. no two folders with the same parent can share the same display name. The display name must start and end with a letter or digit, may contain letters, digits, spaces, hyphens and underscores and can be no longer than 30 characters. -}
-    , _parent :: !(TF.Attribute s Text)
+    , _parent :: !(TF.Attr s Text)
     {- ^ (Required) The resource name of the parent Folder or Organization. Must be of the form @folders/{folder_id}@ or @organizations/{org_id}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FolderResource s) where
-    toHCL FolderResource{..} = TF.block $ catMaybes
+    toHCL FolderResource{..} = TF.inline $ catMaybes
         [ TF.attribute "display_name" _display_name
         , TF.attribute "parent" _parent
         ]
 
 instance P.HasDisplayName (FolderResource s) s Text where
     displayName =
-        lens (_display_name :: FolderResource s -> TF.Attribute s Text)
+        lens (_display_name :: FolderResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: FolderResource s)
 
 instance P.HasParent (FolderResource s) s Text where
     parent =
-        lens (_parent :: FolderResource s -> TF.Attribute s Text)
+        lens (_parent :: FolderResource s -> TF.Attr s Text)
              (\s a -> s { _parent = a } :: FolderResource s)
 
 instance P.HasComputedCreateTime (FolderResource s) Text
@@ -5890,16 +5890,16 @@ Allows creation and management of a single binding within IAM policy for an
 existing Google Cloud KMS crypto key.
 -}
 data KmsCryptoKeyIamBindingResource s = KmsCryptoKeyIamBindingResource {
-      _crypto_key_id :: !(TF.Attribute s Text)
+      _crypto_key_id :: !(TF.Attr s Text)
     {- ^ (Required) The crypto key ID, in the form @{project_id}/{location_name}/{key_ring_name}/{crypto_key_name}@ or @{location_name}/{key_ring_name}/{crypto_key_name}@ . In the second form, the provider's project setting will be used as a fallback. -}
-    , _members :: !(TF.Attribute s Text)
+    , _members :: !(TF.Attr s Text)
     {- ^ (Required) A list of users that the role should apply to. -}
-    , _role :: !(TF.Attribute s Text)
+    , _role :: !(TF.Attr s Text)
     {- ^ (Required) The role that should be applied. Only one @google_kms_crypto_key_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KmsCryptoKeyIamBindingResource s) where
-    toHCL KmsCryptoKeyIamBindingResource{..} = TF.block $ catMaybes
+    toHCL KmsCryptoKeyIamBindingResource{..} = TF.inline $ catMaybes
         [ TF.attribute "crypto_key_id" _crypto_key_id
         , TF.attribute "members" _members
         , TF.attribute "role" _role
@@ -5907,17 +5907,17 @@ instance TF.ToHCL (KmsCryptoKeyIamBindingResource s) where
 
 instance P.HasCryptoKeyId (KmsCryptoKeyIamBindingResource s) s Text where
     cryptoKeyId =
-        lens (_crypto_key_id :: KmsCryptoKeyIamBindingResource s -> TF.Attribute s Text)
+        lens (_crypto_key_id :: KmsCryptoKeyIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _crypto_key_id = a } :: KmsCryptoKeyIamBindingResource s)
 
 instance P.HasMembers (KmsCryptoKeyIamBindingResource s) s Text where
     members =
-        lens (_members :: KmsCryptoKeyIamBindingResource s -> TF.Attribute s Text)
+        lens (_members :: KmsCryptoKeyIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _members = a } :: KmsCryptoKeyIamBindingResource s)
 
 instance P.HasRole (KmsCryptoKeyIamBindingResource s) s Text where
     role =
-        lens (_role :: KmsCryptoKeyIamBindingResource s -> TF.Attribute s Text)
+        lens (_role :: KmsCryptoKeyIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: KmsCryptoKeyIamBindingResource s)
 
 instance P.HasComputedEtag (KmsCryptoKeyIamBindingResource s) Text
@@ -5942,16 +5942,16 @@ should be. Similarly, roles controlled by
 @google_kms_crypto_key_iam_member@ .
 -}
 data KmsCryptoKeyIamMemberResource s = KmsCryptoKeyIamMemberResource {
-      _crypto_key_id :: !(TF.Attribute s Text)
+      _crypto_key_id :: !(TF.Attr s Text)
     {- ^ (Required) The key ring ID, in the form @{project_id}/{location_name}/{key_ring_name}/{crypto_key_name}@ or @{location_name}/{key_ring_name}/{crypto_key_name}@ . In the second form, the provider's project setting will be used as a fallback. -}
-    , _member :: !(TF.Attribute s Text)
+    , _member :: !(TF.Attr s Text)
     {- ^ (Required) The user that the role should apply to. -}
-    , _role :: !(TF.Attribute s Text)
+    , _role :: !(TF.Attr s Text)
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KmsCryptoKeyIamMemberResource s) where
-    toHCL KmsCryptoKeyIamMemberResource{..} = TF.block $ catMaybes
+    toHCL KmsCryptoKeyIamMemberResource{..} = TF.inline $ catMaybes
         [ TF.attribute "crypto_key_id" _crypto_key_id
         , TF.attribute "member" _member
         , TF.attribute "role" _role
@@ -5959,17 +5959,17 @@ instance TF.ToHCL (KmsCryptoKeyIamMemberResource s) where
 
 instance P.HasCryptoKeyId (KmsCryptoKeyIamMemberResource s) s Text where
     cryptoKeyId =
-        lens (_crypto_key_id :: KmsCryptoKeyIamMemberResource s -> TF.Attribute s Text)
+        lens (_crypto_key_id :: KmsCryptoKeyIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _crypto_key_id = a } :: KmsCryptoKeyIamMemberResource s)
 
 instance P.HasMember (KmsCryptoKeyIamMemberResource s) s Text where
     member =
-        lens (_member :: KmsCryptoKeyIamMemberResource s -> TF.Attribute s Text)
+        lens (_member :: KmsCryptoKeyIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _member = a } :: KmsCryptoKeyIamMemberResource s)
 
 instance P.HasRole (KmsCryptoKeyIamMemberResource s) s Text where
     role =
-        lens (_role :: KmsCryptoKeyIamMemberResource s -> TF.Attribute s Text)
+        lens (_role :: KmsCryptoKeyIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: KmsCryptoKeyIamMemberResource s)
 
 instance P.HasComputedEtag (KmsCryptoKeyIamMemberResource s) Text
@@ -5997,16 +5997,16 @@ CryptoKeyVersions, rendering the key unusable, but will not delete the
 resource on the server .
 -}
 data KmsCryptoKeyResource s = KmsCryptoKeyResource {
-      _key_ring :: !(TF.Attribute s Text)
+      _key_ring :: !(TF.Attr s Text)
     {- ^ (Required) The id of the Google Cloud Platform KeyRing to which the key shall belong. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The CryptoKey's name. A CryptoKey’s name must be unique within a location and match the regular expression @[a-zA-Z0-9_-]{1,63}@ -}
-    , _rotation_period :: !(TF.Attribute s Text)
+    , _rotation_period :: !(TF.Attr s Text)
     {- ^ (Optional) Every time this period passes, generate a new CryptoKeyVersion and set it as the primary. The first rotation will take place after the specified period. The rotation period has the format of a decimal number with up to 9 fractional digits, followed by the letter s (seconds). It must be greater than a day (ie, 83400). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KmsCryptoKeyResource s) where
-    toHCL KmsCryptoKeyResource{..} = TF.block $ catMaybes
+    toHCL KmsCryptoKeyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "key_ring" _key_ring
         , TF.attribute "name" _name
         , TF.attribute "rotation_period" _rotation_period
@@ -6014,17 +6014,17 @@ instance TF.ToHCL (KmsCryptoKeyResource s) where
 
 instance P.HasKeyRing (KmsCryptoKeyResource s) s Text where
     keyRing =
-        lens (_key_ring :: KmsCryptoKeyResource s -> TF.Attribute s Text)
+        lens (_key_ring :: KmsCryptoKeyResource s -> TF.Attr s Text)
              (\s a -> s { _key_ring = a } :: KmsCryptoKeyResource s)
 
 instance P.HasName (KmsCryptoKeyResource s) s Text where
     name =
-        lens (_name :: KmsCryptoKeyResource s -> TF.Attribute s Text)
+        lens (_name :: KmsCryptoKeyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KmsCryptoKeyResource s)
 
 instance P.HasRotationPeriod (KmsCryptoKeyResource s) s Text where
     rotationPeriod =
-        lens (_rotation_period :: KmsCryptoKeyResource s -> TF.Attribute s Text)
+        lens (_rotation_period :: KmsCryptoKeyResource s -> TF.Attr s Text)
              (\s a -> s { _rotation_period = a } :: KmsCryptoKeyResource s)
 
 instance P.HasComputedId (KmsCryptoKeyResource s) Text
@@ -6050,16 +6050,16 @@ Destroying a Terraform-managed KeyRing will remove it from state but will
 not delete the resource on the server .
 -}
 data KmsKeyRingResource s = KmsKeyRingResource {
-      _location :: !(TF.Attribute s Text)
+      _location :: !(TF.Attr s Text)
     {- ^ (Required) The Google Cloud Platform location for the KeyRing. A full list of valid locations can be found by running @gcloud kms locations list@ . -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The KeyRing's name. A KeyRing’s name must be unique within a location and match the regular expression @[a-zA-Z0-9_-]{1,63}@ -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KmsKeyRingResource s) where
-    toHCL KmsKeyRingResource{..} = TF.block $ catMaybes
+    toHCL KmsKeyRingResource{..} = TF.inline $ catMaybes
         [ TF.attribute "location" _location
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -6067,17 +6067,17 @@ instance TF.ToHCL (KmsKeyRingResource s) where
 
 instance P.HasLocation (KmsKeyRingResource s) s Text where
     location =
-        lens (_location :: KmsKeyRingResource s -> TF.Attribute s Text)
+        lens (_location :: KmsKeyRingResource s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: KmsKeyRingResource s)
 
 instance P.HasName (KmsKeyRingResource s) s Text where
     name =
-        lens (_name :: KmsKeyRingResource s -> TF.Attribute s Text)
+        lens (_name :: KmsKeyRingResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KmsKeyRingResource s)
 
 instance P.HasProject (KmsKeyRingResource s) s Text where
     project =
-        lens (_project :: KmsKeyRingResource s -> TF.Attribute s Text)
+        lens (_project :: KmsKeyRingResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: KmsKeyRingResource s)
 
 instance P.HasComputedId (KmsKeyRingResource s) Text
@@ -6101,16 +6101,16 @@ you must have the "Logs Configuration Writer" IAM role (
 terraform.
 -}
 data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource {
-      _billing_account :: !(TF.Attribute s Text)
+      _billing_account :: !(TF.Attr s Text)
     {- ^ (Required) The billing account exported to the sink. -}
-    , _destination :: !(TF.Attribute s Text)
+    , _destination :: !(TF.Attr s Text)
     {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LoggingBillingAccountSinkResource s) where
-    toHCL LoggingBillingAccountSinkResource{..} = TF.block $ catMaybes
+    toHCL LoggingBillingAccountSinkResource{..} = TF.inline $ catMaybes
         [ TF.attribute "billing_account" _billing_account
         , TF.attribute "destination" _destination
         , TF.attribute "name" _name
@@ -6118,17 +6118,17 @@ instance TF.ToHCL (LoggingBillingAccountSinkResource s) where
 
 instance P.HasBillingAccount (LoggingBillingAccountSinkResource s) s Text where
     billingAccount =
-        lens (_billing_account :: LoggingBillingAccountSinkResource s -> TF.Attribute s Text)
+        lens (_billing_account :: LoggingBillingAccountSinkResource s -> TF.Attr s Text)
              (\s a -> s { _billing_account = a } :: LoggingBillingAccountSinkResource s)
 
 instance P.HasDestination (LoggingBillingAccountSinkResource s) s Text where
     destination =
-        lens (_destination :: LoggingBillingAccountSinkResource s -> TF.Attribute s Text)
+        lens (_destination :: LoggingBillingAccountSinkResource s -> TF.Attr s Text)
              (\s a -> s { _destination = a } :: LoggingBillingAccountSinkResource s)
 
 instance P.HasName (LoggingBillingAccountSinkResource s) s Text where
     name =
-        lens (_name :: LoggingBillingAccountSinkResource s -> TF.Attribute s Text)
+        lens (_name :: LoggingBillingAccountSinkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LoggingBillingAccountSinkResource s)
 
 instance P.HasComputedWriterIdentity (LoggingBillingAccountSinkResource s) Text
@@ -6152,16 +6152,16 @@ you must have the "Logs Configuration Writer" IAM role (
 terraform.
 -}
 data LoggingFolderSinkResource s = LoggingFolderSinkResource {
-      _destination :: !(TF.Attribute s Text)
+      _destination :: !(TF.Attr s Text)
     {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
-    , _folder :: !(TF.Attribute s Text)
+    , _folder :: !(TF.Attr s Text)
     {- ^ (Required) The folder to be exported to the sink. Note that either [FOLDER_ID] or "folders/[FOLDER_ID]" is accepted. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LoggingFolderSinkResource s) where
-    toHCL LoggingFolderSinkResource{..} = TF.block $ catMaybes
+    toHCL LoggingFolderSinkResource{..} = TF.inline $ catMaybes
         [ TF.attribute "destination" _destination
         , TF.attribute "folder" _folder
         , TF.attribute "name" _name
@@ -6169,17 +6169,17 @@ instance TF.ToHCL (LoggingFolderSinkResource s) where
 
 instance P.HasDestination (LoggingFolderSinkResource s) s Text where
     destination =
-        lens (_destination :: LoggingFolderSinkResource s -> TF.Attribute s Text)
+        lens (_destination :: LoggingFolderSinkResource s -> TF.Attr s Text)
              (\s a -> s { _destination = a } :: LoggingFolderSinkResource s)
 
 instance P.HasFolder (LoggingFolderSinkResource s) s Text where
     folder =
-        lens (_folder :: LoggingFolderSinkResource s -> TF.Attribute s Text)
+        lens (_folder :: LoggingFolderSinkResource s -> TF.Attr s Text)
              (\s a -> s { _folder = a } :: LoggingFolderSinkResource s)
 
 instance P.HasName (LoggingFolderSinkResource s) s Text where
     name =
-        lens (_name :: LoggingFolderSinkResource s -> TF.Attribute s Text)
+        lens (_name :: LoggingFolderSinkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LoggingFolderSinkResource s)
 
 instance P.HasComputedWriterIdentity (LoggingFolderSinkResource s) Text
@@ -6203,16 +6203,16 @@ you must have the "Logs Configuration Writer" IAM role (
 terraform.
 -}
 data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource {
-      _destination :: !(TF.Attribute s Text)
+      _destination :: !(TF.Attr s Text)
     {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the logging sink. -}
-    , _org_id :: !(TF.Attribute s Text)
+    , _org_id :: !(TF.Attr s Text)
     {- ^ (Required) The numeric ID of the organization to be exported to the sink. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LoggingOrganizationSinkResource s) where
-    toHCL LoggingOrganizationSinkResource{..} = TF.block $ catMaybes
+    toHCL LoggingOrganizationSinkResource{..} = TF.inline $ catMaybes
         [ TF.attribute "destination" _destination
         , TF.attribute "name" _name
         , TF.attribute "org_id" _org_id
@@ -6220,17 +6220,17 @@ instance TF.ToHCL (LoggingOrganizationSinkResource s) where
 
 instance P.HasDestination (LoggingOrganizationSinkResource s) s Text where
     destination =
-        lens (_destination :: LoggingOrganizationSinkResource s -> TF.Attribute s Text)
+        lens (_destination :: LoggingOrganizationSinkResource s -> TF.Attr s Text)
              (\s a -> s { _destination = a } :: LoggingOrganizationSinkResource s)
 
 instance P.HasName (LoggingOrganizationSinkResource s) s Text where
     name =
-        lens (_name :: LoggingOrganizationSinkResource s -> TF.Attribute s Text)
+        lens (_name :: LoggingOrganizationSinkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LoggingOrganizationSinkResource s)
 
 instance P.HasOrgId (LoggingOrganizationSinkResource s) s Text where
     orgId =
-        lens (_org_id :: LoggingOrganizationSinkResource s -> TF.Attribute s Text)
+        lens (_org_id :: LoggingOrganizationSinkResource s -> TF.Attr s Text)
              (\s a -> s { _org_id = a } :: LoggingOrganizationSinkResource s)
 
 instance P.HasComputedWriterIdentity (LoggingOrganizationSinkResource s) Text
@@ -6255,26 +6255,26 @@ that you must have the "Logs Configuration Writer" IAM role (
 terraform.
 -}
 data LoggingProjectSinkResource s = LoggingProjectSinkResource {
-      _destination :: !(TF.Attribute s Text)
+      _destination :: !(TF.Attr s Text)
     {- ^ (Required) The destination of the sink (or, in other words, where logs are written to). Can be a Cloud Storage bucket, a PubSub topic, or a BigQuery dataset. Examples: -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the logging sink. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LoggingProjectSinkResource s) where
-    toHCL LoggingProjectSinkResource{..} = TF.block $ catMaybes
+    toHCL LoggingProjectSinkResource{..} = TF.inline $ catMaybes
         [ TF.attribute "destination" _destination
         , TF.attribute "name" _name
         ]
 
 instance P.HasDestination (LoggingProjectSinkResource s) s Text where
     destination =
-        lens (_destination :: LoggingProjectSinkResource s -> TF.Attribute s Text)
+        lens (_destination :: LoggingProjectSinkResource s -> TF.Attr s Text)
              (\s a -> s { _destination = a } :: LoggingProjectSinkResource s)
 
 instance P.HasName (LoggingProjectSinkResource s) s Text where
     name =
-        lens (_name :: LoggingProjectSinkResource s -> TF.Attribute s Text)
+        lens (_name :: LoggingProjectSinkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LoggingProjectSinkResource s)
 
 instance P.HasComputedWriterIdentity (LoggingProjectSinkResource s) Text
@@ -6295,16 +6295,16 @@ be used in conjunction with @google_organization_iam_member@ for the same
 role or they will fight over what your policy should be.
 -}
 data OrganizationIamBindingResource s = OrganizationIamBindingResource {
-      _members :: !(TF.Attribute s Text)
+      _members :: !(TF.Attr s Text)
     {- ^ (Required) A list of users that the role should apply to. -}
-    , _org_id :: !(TF.Attribute s Text)
+    , _org_id :: !(TF.Attr s Text)
     {- ^ (Required) The numeric ID of the organization in which you want to create a custom role. -}
-    , _role :: !(TF.Attribute s Text)
+    , _role :: !(TF.Attr s Text)
     {- ^ (Required) The role that should be applied. Only one @google_organization_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (OrganizationIamBindingResource s) where
-    toHCL OrganizationIamBindingResource{..} = TF.block $ catMaybes
+    toHCL OrganizationIamBindingResource{..} = TF.inline $ catMaybes
         [ TF.attribute "members" _members
         , TF.attribute "org_id" _org_id
         , TF.attribute "role" _role
@@ -6312,17 +6312,17 @@ instance TF.ToHCL (OrganizationIamBindingResource s) where
 
 instance P.HasMembers (OrganizationIamBindingResource s) s Text where
     members =
-        lens (_members :: OrganizationIamBindingResource s -> TF.Attribute s Text)
+        lens (_members :: OrganizationIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _members = a } :: OrganizationIamBindingResource s)
 
 instance P.HasOrgId (OrganizationIamBindingResource s) s Text where
     orgId =
-        lens (_org_id :: OrganizationIamBindingResource s -> TF.Attribute s Text)
+        lens (_org_id :: OrganizationIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _org_id = a } :: OrganizationIamBindingResource s)
 
 instance P.HasRole (OrganizationIamBindingResource s) s Text where
     role =
-        lens (_role :: OrganizationIamBindingResource s -> TF.Attribute s Text)
+        lens (_role :: OrganizationIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: OrganizationIamBindingResource s)
 
 instance P.HasComputedEtag (OrganizationIamBindingResource s) Text
@@ -6344,24 +6344,24 @@ information see
 <https://cloud.google.com/iam/reference/rest/v1/organizations.roles> .
 -}
 data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource {
-      _deleted :: !(TF.Attribute s Text)
+      _deleted :: !(TF.Attr s Text)
     {- ^ (Optional) The current deleted state of the role. Defaults to @false@ . -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A human-readable description for the role. -}
-    , _org_id :: !(TF.Attribute s Text)
+    , _org_id :: !(TF.Attr s Text)
     {- ^ (Required) The numeric ID of the organization in which you want to create a custom role. -}
-    , _permissions :: !(TF.Attribute s Text)
+    , _permissions :: !(TF.Attr s Text)
     {- ^ (Required) The names of the permissions this role grants when bound in an IAM policy. At least one permission must be specified. -}
-    , _role_id :: !(TF.Attribute s Text)
+    , _role_id :: !(TF.Attr s Text)
     {- ^ (Required) The role id to use for this role. -}
-    , _stage :: !(TF.Attribute s Text)
+    , _stage :: !(TF.Attr s Text)
     {- ^ (Optional) The current launch stage of the role. Defaults to @GA@ . List of possible stages is <https://cloud.google.com/iam/reference/rest/v1/organizations.roles#Role.RoleLaunchStage> . -}
-    , _title :: !(TF.Attribute s Text)
+    , _title :: !(TF.Attr s Text)
     {- ^ (Required) A human-readable title for the role. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (OrganizationIamCustomRoleResource s) where
-    toHCL OrganizationIamCustomRoleResource{..} = TF.block $ catMaybes
+    toHCL OrganizationIamCustomRoleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "deleted" _deleted
         , TF.attribute "description" _description
         , TF.attribute "org_id" _org_id
@@ -6373,37 +6373,37 @@ instance TF.ToHCL (OrganizationIamCustomRoleResource s) where
 
 instance P.HasDeleted (OrganizationIamCustomRoleResource s) s Text where
     deleted =
-        lens (_deleted :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_deleted :: OrganizationIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _deleted = a } :: OrganizationIamCustomRoleResource s)
 
 instance P.HasDescription (OrganizationIamCustomRoleResource s) s Text where
     description =
-        lens (_description :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_description :: OrganizationIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: OrganizationIamCustomRoleResource s)
 
 instance P.HasOrgId (OrganizationIamCustomRoleResource s) s Text where
     orgId =
-        lens (_org_id :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_org_id :: OrganizationIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _org_id = a } :: OrganizationIamCustomRoleResource s)
 
 instance P.HasPermissions (OrganizationIamCustomRoleResource s) s Text where
     permissions =
-        lens (_permissions :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_permissions :: OrganizationIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _permissions = a } :: OrganizationIamCustomRoleResource s)
 
 instance P.HasRoleId (OrganizationIamCustomRoleResource s) s Text where
     roleId =
-        lens (_role_id :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_role_id :: OrganizationIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _role_id = a } :: OrganizationIamCustomRoleResource s)
 
 instance P.HasStage (OrganizationIamCustomRoleResource s) s Text where
     stage =
-        lens (_stage :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_stage :: OrganizationIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _stage = a } :: OrganizationIamCustomRoleResource s)
 
 instance P.HasTitle (OrganizationIamCustomRoleResource s) s Text where
     title =
-        lens (_title :: OrganizationIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_title :: OrganizationIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _title = a } :: OrganizationIamCustomRoleResource s)
 
 
@@ -6429,16 +6429,16 @@ Note: This resource must not be used in conjunction with
 what your policy should be.
 -}
 data OrganizationIamMemberResource s = OrganizationIamMemberResource {
-      _member :: !(TF.Attribute s Text)
+      _member :: !(TF.Attr s Text)
     {- ^ (Required) The user that the role should apply to. -}
-    , _org_id :: !(TF.Attribute s Text)
+    , _org_id :: !(TF.Attr s Text)
     {- ^ (Required) The numeric ID of the organization in which you want to create a custom role. -}
-    , _role :: !(TF.Attribute s Text)
+    , _role :: !(TF.Attr s Text)
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (OrganizationIamMemberResource s) where
-    toHCL OrganizationIamMemberResource{..} = TF.block $ catMaybes
+    toHCL OrganizationIamMemberResource{..} = TF.inline $ catMaybes
         [ TF.attribute "member" _member
         , TF.attribute "org_id" _org_id
         , TF.attribute "role" _role
@@ -6446,17 +6446,17 @@ instance TF.ToHCL (OrganizationIamMemberResource s) where
 
 instance P.HasMember (OrganizationIamMemberResource s) s Text where
     member =
-        lens (_member :: OrganizationIamMemberResource s -> TF.Attribute s Text)
+        lens (_member :: OrganizationIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _member = a } :: OrganizationIamMemberResource s)
 
 instance P.HasOrgId (OrganizationIamMemberResource s) s Text where
     orgId =
-        lens (_org_id :: OrganizationIamMemberResource s -> TF.Attribute s Text)
+        lens (_org_id :: OrganizationIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _org_id = a } :: OrganizationIamMemberResource s)
 
 instance P.HasRole (OrganizationIamMemberResource s) s Text where
     role =
-        lens (_role :: OrganizationIamMemberResource s -> TF.Attribute s Text)
+        lens (_role :: OrganizationIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: OrganizationIamMemberResource s)
 
 instance P.HasComputedEtag (OrganizationIamMemberResource s) Text
@@ -6480,20 +6480,20 @@ and
 .
 -}
 data OrganizationPolicyResource s = OrganizationPolicyResource {
-      _boolean_policy :: !(TF.Attribute s Text)
+      _boolean_policy :: !(TF.Attr s Text)
     {- ^ (Optional) A boolean policy is a constraint that is either enforced or not. Structure is documented below. -}
-    , _constraint :: !(TF.Attribute s Text)
+    , _constraint :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Constraint the Policy is configuring, for example, @serviceuser.services@ . Check out the <https://cloud.google.com/resource-manager/docs/organization-policy/understanding-constraints#available_constraints> . -}
-    , _list_policy :: !(TF.Attribute s Text)
+    , _list_policy :: !(TF.Attr s Text)
     {- ^ (Optional) A policy that can define specific values that are allowed or denied for the given constraint. It can also be used to allow or deny all values. Structure is documented below. -}
-    , _org_id :: !(TF.Attribute s Text)
+    , _org_id :: !(TF.Attr s Text)
     {- ^ (Required) The numeric ID of the organization to set the policy for. -}
-    , _version :: !(TF.Attribute s Text)
+    , _version :: !(TF.Attr s Text)
     {- ^ (Optional) Version of the Policy. Default version is 0. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (OrganizationPolicyResource s) where
-    toHCL OrganizationPolicyResource{..} = TF.block $ catMaybes
+    toHCL OrganizationPolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "boolean_policy" _boolean_policy
         , TF.attribute "constraint" _constraint
         , TF.attribute "list_policy" _list_policy
@@ -6503,27 +6503,27 @@ instance TF.ToHCL (OrganizationPolicyResource s) where
 
 instance P.HasBooleanPolicy (OrganizationPolicyResource s) s Text where
     booleanPolicy =
-        lens (_boolean_policy :: OrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_boolean_policy :: OrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _boolean_policy = a } :: OrganizationPolicyResource s)
 
 instance P.HasConstraint (OrganizationPolicyResource s) s Text where
     constraint =
-        lens (_constraint :: OrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_constraint :: OrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _constraint = a } :: OrganizationPolicyResource s)
 
 instance P.HasListPolicy (OrganizationPolicyResource s) s Text where
     listPolicy =
-        lens (_list_policy :: OrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_list_policy :: OrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _list_policy = a } :: OrganizationPolicyResource s)
 
 instance P.HasOrgId (OrganizationPolicyResource s) s Text where
     orgId =
-        lens (_org_id :: OrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_org_id :: OrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _org_id = a } :: OrganizationPolicyResource s)
 
 instance P.HasVersion (OrganizationPolicyResource s) s Text where
     version =
-        lens (_version :: OrganizationPolicyResource s -> TF.Attribute s Text)
+        lens (_version :: OrganizationPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: OrganizationPolicyResource s)
 
 instance P.HasComputedEtag (OrganizationPolicyResource s) Text
@@ -6548,16 +6548,16 @@ used in conjunction with @google_project_iam_policy@ or they will fight over
 what your policy should be.
 -}
 data ProjectIamBindingResource s = ProjectIamBindingResource {
-      _members :: !(TF.Attribute s Text)
+      _members :: !(TF.Attr s Text)
     {- ^ (Required) - An array of identites that will be granted the privilege in the @role@ . Each entry can have one of the following values: -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project ID. If not specified, uses the ID of the project configured with the provider. -}
-    , _role :: !(TF.Attribute s Text)
+    , _role :: !(TF.Attr s Text)
     {- ^ (Required) The role that should be applied. Only one @google_project_iam_binding@ can be used per role. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectIamBindingResource s) where
-    toHCL ProjectIamBindingResource{..} = TF.block $ catMaybes
+    toHCL ProjectIamBindingResource{..} = TF.inline $ catMaybes
         [ TF.attribute "members" _members
         , TF.attribute "project" _project
         , TF.attribute "role" _role
@@ -6565,17 +6565,17 @@ instance TF.ToHCL (ProjectIamBindingResource s) where
 
 instance P.HasMembers (ProjectIamBindingResource s) s Text where
     members =
-        lens (_members :: ProjectIamBindingResource s -> TF.Attribute s Text)
+        lens (_members :: ProjectIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _members = a } :: ProjectIamBindingResource s)
 
 instance P.HasProject (ProjectIamBindingResource s) s Text where
     project =
-        lens (_project :: ProjectIamBindingResource s -> TF.Attribute s Text)
+        lens (_project :: ProjectIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ProjectIamBindingResource s)
 
 instance P.HasRole (ProjectIamBindingResource s) s Text where
     role =
-        lens (_role :: ProjectIamBindingResource s -> TF.Attribute s Text)
+        lens (_role :: ProjectIamBindingResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: ProjectIamBindingResource s)
 
 instance P.HasComputedEtag (ProjectIamBindingResource s) Text
@@ -6597,24 +6597,24 @@ information see
 <https://cloud.google.com/iam/reference/rest/v1/projects.roles> .
 -}
 data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource {
-      _deleted :: !(TF.Attribute s Text)
+      _deleted :: !(TF.Attr s Text)
     {- ^ (Optional) The current deleted state of the role. Defaults to @false@ . -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A human-readable description for the role. -}
-    , _permissions :: !(TF.Attribute s Text)
+    , _permissions :: !(TF.Attr s Text)
     {- ^ (Required) The names of the permissions this role grants when bound in an IAM policy. At least one permission must be specified. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project that the service account will be created in. Defaults to the provider project configuration. -}
-    , _role_id :: !(TF.Attribute s Text)
+    , _role_id :: !(TF.Attr s Text)
     {- ^ (Required) The role id to use for this role. -}
-    , _stage :: !(TF.Attribute s Text)
+    , _stage :: !(TF.Attr s Text)
     {- ^ (Optional) The current launch stage of the role. Defaults to @GA@ . List of possible stages is <https://cloud.google.com/iam/reference/rest/v1/organizations.roles#Role.RoleLaunchStage> . -}
-    , _title :: !(TF.Attribute s Text)
+    , _title :: !(TF.Attr s Text)
     {- ^ (Required) A human-readable title for the role. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectIamCustomRoleResource s) where
-    toHCL ProjectIamCustomRoleResource{..} = TF.block $ catMaybes
+    toHCL ProjectIamCustomRoleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "deleted" _deleted
         , TF.attribute "description" _description
         , TF.attribute "permissions" _permissions
@@ -6626,37 +6626,37 @@ instance TF.ToHCL (ProjectIamCustomRoleResource s) where
 
 instance P.HasDeleted (ProjectIamCustomRoleResource s) s Text where
     deleted =
-        lens (_deleted :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_deleted :: ProjectIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _deleted = a } :: ProjectIamCustomRoleResource s)
 
 instance P.HasDescription (ProjectIamCustomRoleResource s) s Text where
     description =
-        lens (_description :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_description :: ProjectIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ProjectIamCustomRoleResource s)
 
 instance P.HasPermissions (ProjectIamCustomRoleResource s) s Text where
     permissions =
-        lens (_permissions :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_permissions :: ProjectIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _permissions = a } :: ProjectIamCustomRoleResource s)
 
 instance P.HasProject (ProjectIamCustomRoleResource s) s Text where
     project =
-        lens (_project :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_project :: ProjectIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ProjectIamCustomRoleResource s)
 
 instance P.HasRoleId (ProjectIamCustomRoleResource s) s Text where
     roleId =
-        lens (_role_id :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_role_id :: ProjectIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _role_id = a } :: ProjectIamCustomRoleResource s)
 
 instance P.HasStage (ProjectIamCustomRoleResource s) s Text where
     stage =
-        lens (_stage :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_stage :: ProjectIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _stage = a } :: ProjectIamCustomRoleResource s)
 
 instance P.HasTitle (ProjectIamCustomRoleResource s) s Text where
     title =
-        lens (_title :: ProjectIamCustomRoleResource s -> TF.Attribute s Text)
+        lens (_title :: ProjectIamCustomRoleResource s -> TF.Attr s Text)
              (\s a -> s { _title = a } :: ProjectIamCustomRoleResource s)
 
 
@@ -6683,16 +6683,16 @@ be. Similarly, roles controlled by @google_project_iam_binding@ should not
 be assigned to using @google_project_iam_member@ .
 -}
 data ProjectIamMemberResource s = ProjectIamMemberResource {
-      _member :: !(TF.Attribute s Text)
+      _member :: !(TF.Attr s Text)
     {- ^ (Required) The identity that will be granted the privilege in the @role@ . This field can have one of the following values: -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project ID. If not specified, uses the ID of the project configured with the provider. -}
-    , _role :: !(TF.Attribute s Text)
+    , _role :: !(TF.Attr s Text)
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectIamMemberResource s) where
-    toHCL ProjectIamMemberResource{..} = TF.block $ catMaybes
+    toHCL ProjectIamMemberResource{..} = TF.inline $ catMaybes
         [ TF.attribute "member" _member
         , TF.attribute "project" _project
         , TF.attribute "role" _role
@@ -6700,17 +6700,17 @@ instance TF.ToHCL (ProjectIamMemberResource s) where
 
 instance P.HasMember (ProjectIamMemberResource s) s Text where
     member =
-        lens (_member :: ProjectIamMemberResource s -> TF.Attribute s Text)
+        lens (_member :: ProjectIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _member = a } :: ProjectIamMemberResource s)
 
 instance P.HasProject (ProjectIamMemberResource s) s Text where
     project =
-        lens (_project :: ProjectIamMemberResource s -> TF.Attribute s Text)
+        lens (_project :: ProjectIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ProjectIamMemberResource s)
 
 instance P.HasRole (ProjectIamMemberResource s) s Text where
     role =
-        lens (_role :: ProjectIamMemberResource s -> TF.Attribute s Text)
+        lens (_role :: ProjectIamMemberResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: ProjectIamMemberResource s)
 
 instance P.HasComputedEtag (ProjectIamMemberResource s) Text
@@ -6731,18 +6731,18 @@ Platform project. ~> Be careful! You can accidentally lock yourself out of
 your project using this resource. Proceed with caution.
 -}
 data ProjectIamPolicyResource s = ProjectIamPolicyResource {
-      _authoritative :: !(TF.Attribute s Text)
+      _authoritative :: !(TF.Attr s Text)
     {- ^ - (DEPRECATED) (Optional) A boolean value indicating if this policy should overwrite any existing IAM policy on the project. When set to true, any policies not in your config file will be removed . This can lock you out of your project until an Organization Administrator grants you access again, so please exercise caution. If this argument is @true@ and you want to delete the resource, you must set the @disable_project@ argument to @true@ , acknowledging that the project will be inaccessible to anyone but the Organization Admins, as it will no longer have an IAM policy. Rather than using this, you should use @google_project_iam_policy_binding@ and @google_project_iam_policy_member@ . -}
-    , _disable_project :: !(TF.Attribute s Text)
+    , _disable_project :: !(TF.Attr s Text)
     {- ^ - (DEPRECATED) (Optional) A boolean value that must be set to @true@ if you want to delete a @google_project_iam_policy@ that is authoritative. -}
-    , _policy_data :: !(TF.Attribute s Text)
+    , _policy_data :: !(TF.Attr s Text)
     {- ^ (Required) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the project. The policy will be merged with any existing policy applied to the project. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Required) The project ID. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectIamPolicyResource s) where
-    toHCL ProjectIamPolicyResource{..} = TF.block $ catMaybes
+    toHCL ProjectIamPolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "authoritative" _authoritative
         , TF.attribute "disable_project" _disable_project
         , TF.attribute "policy_data" _policy_data
@@ -6751,22 +6751,22 @@ instance TF.ToHCL (ProjectIamPolicyResource s) where
 
 instance P.HasAuthoritative (ProjectIamPolicyResource s) s Text where
     authoritative =
-        lens (_authoritative :: ProjectIamPolicyResource s -> TF.Attribute s Text)
+        lens (_authoritative :: ProjectIamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _authoritative = a } :: ProjectIamPolicyResource s)
 
 instance P.HasDisableProject (ProjectIamPolicyResource s) s Text where
     disableProject =
-        lens (_disable_project :: ProjectIamPolicyResource s -> TF.Attribute s Text)
+        lens (_disable_project :: ProjectIamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _disable_project = a } :: ProjectIamPolicyResource s)
 
 instance P.HasPolicyData (ProjectIamPolicyResource s) s Text where
     policyData =
-        lens (_policy_data :: ProjectIamPolicyResource s -> TF.Attribute s Text)
+        lens (_policy_data :: ProjectIamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _policy_data = a } :: ProjectIamPolicyResource s)
 
 instance P.HasProject (ProjectIamPolicyResource s) s Text where
     project =
-        lens (_project :: ProjectIamPolicyResource s -> TF.Attribute s Text)
+        lens (_project :: ProjectIamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ProjectIamPolicyResource s)
 
 instance P.HasComputedEtag (ProjectIamPolicyResource s) Text
@@ -6797,24 +6797,24 @@ functions like any other Terraform resource, with Terraform creating and
 managing the project. To replicate the old behavior, either:
 -}
 data ProjectResource s = ProjectResource {
-      _billing_account :: !(TF.Attribute s Text)
+      _billing_account :: !(TF.Attr s Text)
     {- ^ (Optional) The alphanumeric ID of the billing account this project belongs to. The user or service account performing this operation with Terraform must have Billing Account Administrator privileges ( @roles/billing.admin@ ) in the organization. See <https://cloud.google.com/billing/v1/how-tos/access-control> for more details. -}
-    , _folder_id :: !(TF.Attribute s Text)
+    , _folder_id :: !(TF.Attr s Text)
     {- ^ (Optional) The numeric ID of the folder this project should be created under. Only one of @org_id@ or @folder_id@ may be specified. If the @folder_id@ is specified, then the project is created under the specified folder. Changing this forces the project to be migrated to the newly specified folder. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the project. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The display name of the project. -}
-    , _org_id :: !(TF.Attribute s Text)
+    , _org_id :: !(TF.Attr s Text)
     {- ^ (Optional) The numeric ID of the organization this project belongs to. Changing this forces a new project to be created.  Only one of @org_id@ or @folder_id@ may be specified. If the @org_id@ is specified then the project is created at the top level. Changing this forces the project to be migrated to the newly specified organization. -}
-    , _project_id :: !(TF.Attribute s Text)
+    , _project_id :: !(TF.Attr s Text)
     {- ^ (Required) The project ID. Changing this forces a new project to be created. -}
-    , _skip_delete :: !(TF.Attribute s Text)
+    , _skip_delete :: !(TF.Attr s Text)
     {- ^ (Optional) If true, the Terraform resource can be deleted without deleting the Project via the Google API. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.block $ catMaybes
+    toHCL ProjectResource{..} = TF.inline $ catMaybes
         [ TF.attribute "billing_account" _billing_account
         , TF.attribute "folder_id" _folder_id
         , TF.attribute "labels" _labels
@@ -6826,37 +6826,37 @@ instance TF.ToHCL (ProjectResource s) where
 
 instance P.HasBillingAccount (ProjectResource s) s Text where
     billingAccount =
-        lens (_billing_account :: ProjectResource s -> TF.Attribute s Text)
+        lens (_billing_account :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _billing_account = a } :: ProjectResource s)
 
 instance P.HasFolderId (ProjectResource s) s Text where
     folderId =
-        lens (_folder_id :: ProjectResource s -> TF.Attribute s Text)
+        lens (_folder_id :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _folder_id = a } :: ProjectResource s)
 
 instance P.HasLabels (ProjectResource s) s Text where
     labels =
-        lens (_labels :: ProjectResource s -> TF.Attribute s Text)
+        lens (_labels :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ProjectResource s)
 
 instance P.HasName (ProjectResource s) s Text where
     name =
-        lens (_name :: ProjectResource s -> TF.Attribute s Text)
+        lens (_name :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ProjectResource s)
 
 instance P.HasOrgId (ProjectResource s) s Text where
     orgId =
-        lens (_org_id :: ProjectResource s -> TF.Attribute s Text)
+        lens (_org_id :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _org_id = a } :: ProjectResource s)
 
 instance P.HasProjectId (ProjectResource s) s Text where
     projectId =
-        lens (_project_id :: ProjectResource s -> TF.Attribute s Text)
+        lens (_project_id :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: ProjectResource s)
 
 instance P.HasSkipDelete (ProjectResource s) s Text where
     skipDelete =
-        lens (_skip_delete :: ProjectResource s -> TF.Attribute s Text)
+        lens (_skip_delete :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _skip_delete = a } :: ProjectResource s)
 
 instance P.HasComputedNumber (ProjectResource s) Text
@@ -6885,16 +6885,16 @@ conjunction with @google_project_services@ or they will fight over which
 services should be enabled.
 -}
 data ProjectServiceResource s = ProjectServiceResource {
-      _disable_on_destroy :: !(TF.Attribute s Text)
+      _disable_on_destroy :: !(TF.Attr s Text)
     {- ^ (Optional) If true, disable the service when the terraform resource is destroyed.  Defaults to true.  May be useful in the event that a project is long-lived but the infrastructure running in that project changes frequently. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project ID. If not provided, the provider project is used. -}
-    , _service :: !(TF.Attribute s Text)
+    , _service :: !(TF.Attr s Text)
     {- ^ (Required) The service to enable. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectServiceResource s) where
-    toHCL ProjectServiceResource{..} = TF.block $ catMaybes
+    toHCL ProjectServiceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "disable_on_destroy" _disable_on_destroy
         , TF.attribute "project" _project
         , TF.attribute "service" _service
@@ -6902,17 +6902,17 @@ instance TF.ToHCL (ProjectServiceResource s) where
 
 instance P.HasDisableOnDestroy (ProjectServiceResource s) s Text where
     disableOnDestroy =
-        lens (_disable_on_destroy :: ProjectServiceResource s -> TF.Attribute s Text)
+        lens (_disable_on_destroy :: ProjectServiceResource s -> TF.Attr s Text)
              (\s a -> s { _disable_on_destroy = a } :: ProjectServiceResource s)
 
 instance P.HasProject (ProjectServiceResource s) s Text where
     project =
-        lens (_project :: ProjectServiceResource s -> TF.Attribute s Text)
+        lens (_project :: ProjectServiceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ProjectServiceResource s)
 
 instance P.HasService (ProjectServiceResource s) s Text where
     service =
-        lens (_service :: ProjectServiceResource s -> TF.Attribute s Text)
+        lens (_service :: ProjectServiceResource s -> TF.Attr s Text)
              (\s a -> s { _service = a } :: ProjectServiceResource s)
 
 
@@ -6937,26 +6937,26 @@ when certain APIs or actions enable other APIs. To just ensure that a
 specific API is enabled, use the <google_project_service.html> resource.
 -}
 data ProjectServicesResource s = ProjectServicesResource {
-      _project :: !(TF.Attribute s Text)
+      _project :: !(TF.Attr s Text)
     {- ^ (Required) The project ID. Changing this forces Terraform to attempt to disable all previously managed API services in the previous project. -}
-    , _services :: !(TF.Attribute s Text)
+    , _services :: !(TF.Attr s Text)
     {- ^ (Required) The list of services that are enabled. Supports update. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectServicesResource s) where
-    toHCL ProjectServicesResource{..} = TF.block $ catMaybes
+    toHCL ProjectServicesResource{..} = TF.inline $ catMaybes
         [ TF.attribute "project" _project
         , TF.attribute "services" _services
         ]
 
 instance P.HasProject (ProjectServicesResource s) s Text where
     project =
-        lens (_project :: ProjectServicesResource s -> TF.Attribute s Text)
+        lens (_project :: ProjectServicesResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ProjectServicesResource s)
 
 instance P.HasServices (ProjectServicesResource s) s Text where
     services =
-        lens (_services :: ProjectServicesResource s -> TF.Attribute s Text)
+        lens (_services :: ProjectServicesResource s -> TF.Attr s Text)
              (\s a -> s { _services = a } :: ProjectServicesResource s)
 
 
@@ -6976,20 +6976,20 @@ information see <https://cloud.google.com/pubsub/docs> and
 .
 -}
 data PubsubSubscriptionResource s = PubsubSubscriptionResource {
-      _ack_deadline_seconds :: !(TF.Attribute s Text)
+      _ack_deadline_seconds :: !(TF.Attr s Text)
     {- ^ (Optional) The maximum number of seconds a subscriber has to acknowledge a received message, otherwise the message is redelivered. Changing this forces a new resource to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by pubsub. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _push_config :: !(TF.Attribute s Text)
+    , _push_config :: !(TF.Attr s Text)
     {- ^ (Optional) Block configuration for push options. More configuration options are detailed below. -}
-    , _topic :: !(TF.Attribute s Text)
+    , _topic :: !(TF.Attr s Text)
     {- ^ (Required) The topic name or id to bind this subscription to, required by pubsub. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PubsubSubscriptionResource s) where
-    toHCL PubsubSubscriptionResource{..} = TF.block $ catMaybes
+    toHCL PubsubSubscriptionResource{..} = TF.inline $ catMaybes
         [ TF.attribute "ack_deadline_seconds" _ack_deadline_seconds
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -6999,27 +6999,27 @@ instance TF.ToHCL (PubsubSubscriptionResource s) where
 
 instance P.HasAckDeadlineSeconds (PubsubSubscriptionResource s) s Text where
     ackDeadlineSeconds =
-        lens (_ack_deadline_seconds :: PubsubSubscriptionResource s -> TF.Attribute s Text)
+        lens (_ack_deadline_seconds :: PubsubSubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _ack_deadline_seconds = a } :: PubsubSubscriptionResource s)
 
 instance P.HasName (PubsubSubscriptionResource s) s Text where
     name =
-        lens (_name :: PubsubSubscriptionResource s -> TF.Attribute s Text)
+        lens (_name :: PubsubSubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PubsubSubscriptionResource s)
 
 instance P.HasProject (PubsubSubscriptionResource s) s Text where
     project =
-        lens (_project :: PubsubSubscriptionResource s -> TF.Attribute s Text)
+        lens (_project :: PubsubSubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: PubsubSubscriptionResource s)
 
 instance P.HasPushConfig (PubsubSubscriptionResource s) s Text where
     pushConfig =
-        lens (_push_config :: PubsubSubscriptionResource s -> TF.Attribute s Text)
+        lens (_push_config :: PubsubSubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _push_config = a } :: PubsubSubscriptionResource s)
 
 instance P.HasTopic (PubsubSubscriptionResource s) s Text where
     topic =
-        lens (_topic :: PubsubSubscriptionResource s -> TF.Attribute s Text)
+        lens (_topic :: PubsubSubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _topic = a } :: PubsubSubscriptionResource s)
 
 instance P.HasComputedPath (PubsubSubscriptionResource s) Text
@@ -7042,26 +7042,26 @@ Creates a topic in Google's pubsub queueing system. For more information see
 <https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics> .
 -}
 data PubsubTopicResource s = PubsubTopicResource {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by pubsub. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PubsubTopicResource s) where
-    toHCL PubsubTopicResource{..} = TF.block $ catMaybes
+    toHCL PubsubTopicResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         ]
 
 instance P.HasName (PubsubTopicResource s) s Text where
     name =
-        lens (_name :: PubsubTopicResource s -> TF.Attribute s Text)
+        lens (_name :: PubsubTopicResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PubsubTopicResource s)
 
 instance P.HasProject (PubsubTopicResource s) s Text where
     project =
-        lens (_project :: PubsubTopicResource s -> TF.Attribute s Text)
+        lens (_project :: PubsubTopicResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: PubsubTopicResource s)
 
 
@@ -7081,26 +7081,26 @@ information see <https://cloud.google.com/iot/docs/> and
 .
 -}
 data RegistryResource s = RegistryResource {
-      _credentials :: !(TF.Attribute s Text)
+      _credentials :: !(TF.Attr s Text)
     {- ^ (Optional) List of public key certificates to authenticate devices. Structure is documented below. -}
-    , _event_notification_config :: !(TF.Attribute s Text)
+    , _event_notification_config :: !(TF.Attr s Text)
     {- ^ (Optional) A PubSub topics to publish device events. Structure is documented below. -}
-    , _http_config :: !(TF.Attribute s Text)
+    , _http_config :: !(TF.Attr s Text)
     {- ^ (Optional) Activate or deactivate HTTP. Structure is documented below. -}
-    , _mqtt_config :: !(TF.Attribute s Text)
+    , _mqtt_config :: !(TF.Attr s Text)
     {- ^ (Optional) Activate or deactivate MQTT. Structure is documented below. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) A unique name for the resource, required by device registry. Changing this forces a new resource to be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Optional) The Region in which the created address should reside. If it is not provided, the provider region is used. -}
-    , _state_notification_config :: !(TF.Attribute s Text)
+    , _state_notification_config :: !(TF.Attr s Text)
     {- ^ (Optional) A PubSub topic to publish device state updates. Structure is documented below. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RegistryResource s) where
-    toHCL RegistryResource{..} = TF.block $ catMaybes
+    toHCL RegistryResource{..} = TF.inline $ catMaybes
         [ TF.attribute "credentials" _credentials
         , TF.attribute "event_notification_config" _event_notification_config
         , TF.attribute "http_config" _http_config
@@ -7113,42 +7113,42 @@ instance TF.ToHCL (RegistryResource s) where
 
 instance P.HasCredentials (RegistryResource s) s Text where
     credentials =
-        lens (_credentials :: RegistryResource s -> TF.Attribute s Text)
+        lens (_credentials :: RegistryResource s -> TF.Attr s Text)
              (\s a -> s { _credentials = a } :: RegistryResource s)
 
 instance P.HasEventNotificationConfig (RegistryResource s) s Text where
     eventNotificationConfig =
-        lens (_event_notification_config :: RegistryResource s -> TF.Attribute s Text)
+        lens (_event_notification_config :: RegistryResource s -> TF.Attr s Text)
              (\s a -> s { _event_notification_config = a } :: RegistryResource s)
 
 instance P.HasHttpConfig (RegistryResource s) s Text where
     httpConfig =
-        lens (_http_config :: RegistryResource s -> TF.Attribute s Text)
+        lens (_http_config :: RegistryResource s -> TF.Attr s Text)
              (\s a -> s { _http_config = a } :: RegistryResource s)
 
 instance P.HasMqttConfig (RegistryResource s) s Text where
     mqttConfig =
-        lens (_mqtt_config :: RegistryResource s -> TF.Attribute s Text)
+        lens (_mqtt_config :: RegistryResource s -> TF.Attr s Text)
              (\s a -> s { _mqtt_config = a } :: RegistryResource s)
 
 instance P.HasName (RegistryResource s) s Text where
     name =
-        lens (_name :: RegistryResource s -> TF.Attribute s Text)
+        lens (_name :: RegistryResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RegistryResource s)
 
 instance P.HasProject (RegistryResource s) s Text where
     project =
-        lens (_project :: RegistryResource s -> TF.Attribute s Text)
+        lens (_project :: RegistryResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: RegistryResource s)
 
 instance P.HasRegion (RegistryResource s) s Text where
     region =
-        lens (_region :: RegistryResource s -> TF.Attribute s Text)
+        lens (_region :: RegistryResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: RegistryResource s)
 
 instance P.HasStateNotificationConfig (RegistryResource s) s Text where
     stateNotificationConfig =
-        lens (_state_notification_config :: RegistryResource s -> TF.Attribute s Text)
+        lens (_state_notification_config :: RegistryResource s -> TF.Attr s Text)
              (\s a -> s { _state_notification_config = a } :: RegistryResource s)
 
 
@@ -7172,16 +7172,16 @@ Two different resources help you manage your IAM policy for storage bucket.
 Each of these resources serves a different use case:
 -}
 data Resource s = Resource {
-      _bucket :: !(TF.Attribute s Text)
+      _bucket :: !(TF.Attr s Text)
     {- ^ (Required) The name of the bucket it applies to. -}
-    , _members :: !(TF.Attribute s Text)
+    , _members :: !(TF.Attr s Text)
     {- ^ (Required) Identities that will be granted the privilege in @role@ . Each entry can have one of the following values: -}
-    , _role :: !(TF.Attribute s Text)
+    , _role :: !(TF.Attr s Text)
     {- ^ (Required) The role that should be applied. Note that custom roles must be of the format @[projects|organizations]/{parent-name}/roles/{role-name}@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (Resource s) where
-    toHCL Resource{..} = TF.block $ catMaybes
+    toHCL Resource{..} = TF.inline $ catMaybes
         [ TF.attribute "bucket" _bucket
         , TF.attribute "member/members" _members
         , TF.attribute "role" _role
@@ -7189,17 +7189,17 @@ instance TF.ToHCL (Resource s) where
 
 instance P.HasBucket (Resource s) s Text where
     bucket =
-        lens (_bucket :: Resource s -> TF.Attribute s Text)
+        lens (_bucket :: Resource s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: Resource s)
 
 instance P.HasMembers (Resource s) s Text where
     members =
-        lens (_members :: Resource s -> TF.Attribute s Text)
+        lens (_members :: Resource s -> TF.Attr s Text)
              (\s a -> s { _members = a } :: Resource s)
 
 instance P.HasRole (Resource s) s Text where
     role =
-        lens (_role :: Resource s -> TF.Attribute s Text)
+        lens (_role :: Resource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: Resource s)
 
 instance P.HasComputedEtag (Resource s) Text
@@ -7222,16 +7222,16 @@ the
 .
 -}
 data RuntimeconfigConfigResource s = RuntimeconfigConfigResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) The description to associate with the runtime config. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the runtime config. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RuntimeconfigConfigResource s) where
-    toHCL RuntimeconfigConfigResource{..} = TF.block $ catMaybes
+    toHCL RuntimeconfigConfigResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         , TF.attribute "project" _project
@@ -7239,17 +7239,17 @@ instance TF.ToHCL (RuntimeconfigConfigResource s) where
 
 instance P.HasDescription (RuntimeconfigConfigResource s) s Text where
     description =
-        lens (_description :: RuntimeconfigConfigResource s -> TF.Attribute s Text)
+        lens (_description :: RuntimeconfigConfigResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: RuntimeconfigConfigResource s)
 
 instance P.HasName (RuntimeconfigConfigResource s) s Text where
     name =
-        lens (_name :: RuntimeconfigConfigResource s -> TF.Attribute s Text)
+        lens (_name :: RuntimeconfigConfigResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RuntimeconfigConfigResource s)
 
 instance P.HasProject (RuntimeconfigConfigResource s) s Text where
     project =
-        lens (_project :: RuntimeconfigConfigResource s -> TF.Attribute s Text)
+        lens (_project :: RuntimeconfigConfigResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: RuntimeconfigConfigResource s)
 
 
@@ -7271,18 +7271,18 @@ the
 .
 -}
 data RuntimeconfigVariableResource s = RuntimeconfigVariableResource {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the variable to manage. Note that variable names can be hierarchical using slashes (e.g. "prod-variables/hostname"). -}
-    , _parent :: !(TF.Attribute s Text)
+    , _parent :: !(TF.Attr s Text)
     {- ^ (Required) The name of the RuntimeConfig resource containing this variable. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _text :: !(TF.Attribute s Text)
+    , _text :: !(TF.Attr s Text)
     {- ^ or @value@ - (Required) The content to associate with the variable. Exactly one of @text@ or @variable@ must be specified. If @text@ is specified, it must be a valid UTF-8 string and less than 4096 bytes in length. If @value@ is specified, it must be base64 encoded and less than 4096 bytes in length. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RuntimeconfigVariableResource s) where
-    toHCL RuntimeconfigVariableResource{..} = TF.block $ catMaybes
+    toHCL RuntimeconfigVariableResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "parent" _parent
         , TF.attribute "project" _project
@@ -7291,22 +7291,22 @@ instance TF.ToHCL (RuntimeconfigVariableResource s) where
 
 instance P.HasName (RuntimeconfigVariableResource s) s Text where
     name =
-        lens (_name :: RuntimeconfigVariableResource s -> TF.Attribute s Text)
+        lens (_name :: RuntimeconfigVariableResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RuntimeconfigVariableResource s)
 
 instance P.HasParent (RuntimeconfigVariableResource s) s Text where
     parent =
-        lens (_parent :: RuntimeconfigVariableResource s -> TF.Attribute s Text)
+        lens (_parent :: RuntimeconfigVariableResource s -> TF.Attr s Text)
              (\s a -> s { _parent = a } :: RuntimeconfigVariableResource s)
 
 instance P.HasProject (RuntimeconfigVariableResource s) s Text where
     project =
-        lens (_project :: RuntimeconfigVariableResource s -> TF.Attribute s Text)
+        lens (_project :: RuntimeconfigVariableResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: RuntimeconfigVariableResource s)
 
 instance P.HasText (RuntimeconfigVariableResource s) s Text where
     text =
-        lens (_text :: RuntimeconfigVariableResource s -> TF.Attribute s Text)
+        lens (_text :: RuntimeconfigVariableResource s -> TF.Attr s Text)
              (\s a -> s { _text = a } :: RuntimeconfigVariableResource s)
 
 instance P.HasComputedUpdateTime (RuntimeconfigVariableResource s) Text
@@ -7332,20 +7332,20 @@ and
 .
 -}
 data ServiceAccountKeyResource s = ServiceAccountKeyResource {
-      _key_algorithm :: !(TF.Attribute s Text)
+      _key_algorithm :: !(TF.Attr s Text)
     {- ^ (Optional) The algorithm used to generate the key. KEY_ALG_RSA_2048 is the default algorithm. Valid values are listed at <https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys#ServiceAccountKeyAlgorithm> (only used on create) -}
-    , _pgp_key :: !(TF.Attribute s Text)
+    , _pgp_key :: !(TF.Attr s Text)
     {- ^ – (Optional) An optional PGP key to encrypt the resulting private key material. Only used when creating or importing a new key pair. May either be a base64-encoded public key or a @keybase:keybaseusername@ string for looking up in Vault. -}
-    , _private_key_type :: !(TF.Attribute s Text)
+    , _private_key_type :: !(TF.Attr s Text)
     {- ^ (Optional) The output format of the private key. GOOGLE_CREDENTIALS_FILE is the default output format. -}
-    , _public_key_type :: !(TF.Attribute s Text)
+    , _public_key_type :: !(TF.Attr s Text)
     {- ^ (Optional) The output format of the public key requested. X509_PEM is the default output format. -}
-    , _service_account_id :: !(TF.Attribute s Text)
+    , _service_account_id :: !(TF.Attr s Text)
     {- ^ (Required) The Service account id of the Key Pair. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServiceAccountKeyResource s) where
-    toHCL ServiceAccountKeyResource{..} = TF.block $ catMaybes
+    toHCL ServiceAccountKeyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "key_algorithm" _key_algorithm
         , TF.attribute "pgp_key" _pgp_key
         , TF.attribute "private_key_type" _private_key_type
@@ -7355,27 +7355,27 @@ instance TF.ToHCL (ServiceAccountKeyResource s) where
 
 instance P.HasKeyAlgorithm (ServiceAccountKeyResource s) s Text where
     keyAlgorithm =
-        lens (_key_algorithm :: ServiceAccountKeyResource s -> TF.Attribute s Text)
+        lens (_key_algorithm :: ServiceAccountKeyResource s -> TF.Attr s Text)
              (\s a -> s { _key_algorithm = a } :: ServiceAccountKeyResource s)
 
 instance P.HasPgpKey (ServiceAccountKeyResource s) s Text where
     pgpKey =
-        lens (_pgp_key :: ServiceAccountKeyResource s -> TF.Attribute s Text)
+        lens (_pgp_key :: ServiceAccountKeyResource s -> TF.Attr s Text)
              (\s a -> s { _pgp_key = a } :: ServiceAccountKeyResource s)
 
 instance P.HasPrivateKeyType (ServiceAccountKeyResource s) s Text where
     privateKeyType =
-        lens (_private_key_type :: ServiceAccountKeyResource s -> TF.Attribute s Text)
+        lens (_private_key_type :: ServiceAccountKeyResource s -> TF.Attr s Text)
              (\s a -> s { _private_key_type = a } :: ServiceAccountKeyResource s)
 
 instance P.HasPublicKeyType (ServiceAccountKeyResource s) s Text where
     publicKeyType =
-        lens (_public_key_type :: ServiceAccountKeyResource s -> TF.Attribute s Text)
+        lens (_public_key_type :: ServiceAccountKeyResource s -> TF.Attr s Text)
              (\s a -> s { _public_key_type = a } :: ServiceAccountKeyResource s)
 
 instance P.HasServiceAccountId (ServiceAccountKeyResource s) s Text where
     serviceAccountId =
-        lens (_service_account_id :: ServiceAccountKeyResource s -> TF.Attribute s Text)
+        lens (_service_account_id :: ServiceAccountKeyResource s -> TF.Attr s Text)
              (\s a -> s { _service_account_id = a } :: ServiceAccountKeyResource s)
 
 instance P.HasComputedName (ServiceAccountKeyResource s) Text
@@ -7403,18 +7403,18 @@ Allows management of a
 <https://cloud.google.com/compute/docs/access/service-accounts>
 -}
 data ServiceAccountResource s = ServiceAccountResource {
-      _account_id :: !(TF.Attribute s Text)
+      _account_id :: !(TF.Attr s Text)
     {- ^ (Required) The service account ID. Changing this forces a new service account to be created. -}
-    , _display_name :: !(TF.Attribute s Text)
+    , _display_name :: !(TF.Attr s Text)
     {- ^ (Optional) The display name for the service account. Can be updated without creating a new resource. -}
-    , _policy_data :: !(TF.Attribute s Text)
+    , _policy_data :: !(TF.Attr s Text)
     {- ^ - (DEPRECATED, Optional) The @google_iam_policy@ data source that represents the IAM policy that will be applied to the service account. The policy will be merged with any existing policy. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project that the service account will be created in. Defaults to the provider project configuration. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServiceAccountResource s) where
-    toHCL ServiceAccountResource{..} = TF.block $ catMaybes
+    toHCL ServiceAccountResource{..} = TF.inline $ catMaybes
         [ TF.attribute "account_id" _account_id
         , TF.attribute "display_name" _display_name
         , TF.attribute "policy_data" _policy_data
@@ -7423,22 +7423,22 @@ instance TF.ToHCL (ServiceAccountResource s) where
 
 instance P.HasAccountId (ServiceAccountResource s) s Text where
     accountId =
-        lens (_account_id :: ServiceAccountResource s -> TF.Attribute s Text)
+        lens (_account_id :: ServiceAccountResource s -> TF.Attr s Text)
              (\s a -> s { _account_id = a } :: ServiceAccountResource s)
 
 instance P.HasDisplayName (ServiceAccountResource s) s Text where
     displayName =
-        lens (_display_name :: ServiceAccountResource s -> TF.Attribute s Text)
+        lens (_display_name :: ServiceAccountResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: ServiceAccountResource s)
 
 instance P.HasPolicyData (ServiceAccountResource s) s Text where
     policyData =
-        lens (_policy_data :: ServiceAccountResource s -> TF.Attribute s Text)
+        lens (_policy_data :: ServiceAccountResource s -> TF.Attr s Text)
              (\s a -> s { _policy_data = a } :: ServiceAccountResource s)
 
 instance P.HasProject (ServiceAccountResource s) s Text where
     project =
-        lens (_project :: ServiceAccountResource s -> TF.Attribute s Text)
+        lens (_project :: ServiceAccountResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ServiceAccountResource s)
 
 instance P.HasComputedEmail (ServiceAccountResource s) Text
@@ -7462,26 +7462,26 @@ and
 <https://cloud.google.com/source-repositories/docs/reference/rest/v1/projects.repos>
 -}
 data SourcerepoRepositoryResource s = SourcerepoRepositoryResource {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the repository that will be created. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SourcerepoRepositoryResource s) where
-    toHCL SourcerepoRepositoryResource{..} = TF.block $ catMaybes
+    toHCL SourcerepoRepositoryResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project" _project
         ]
 
 instance P.HasName (SourcerepoRepositoryResource s) s Text where
     name =
-        lens (_name :: SourcerepoRepositoryResource s -> TF.Attribute s Text)
+        lens (_name :: SourcerepoRepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SourcerepoRepositoryResource s)
 
 instance P.HasProject (SourcerepoRepositoryResource s) s Text where
     project =
-        lens (_project :: SourcerepoRepositoryResource s -> TF.Attribute s Text)
+        lens (_project :: SourcerepoRepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: SourcerepoRepositoryResource s)
 
 instance P.HasComputedSize (SourcerepoRepositoryResource s) Text
@@ -7503,22 +7503,22 @@ Creates and manages a Google Spanner Instance. For more information, see the
 .
 -}
 data SpannerInstanceResource s = SpannerInstanceResource {
-      _config :: !(TF.Attribute s Text)
+      _config :: !(TF.Attr s Text)
     {- ^ (Required) The name of the instance's configuration (similar but not quite the same as a region) which defines defines the geographic placement and replication of your databases in this instance. It determines where your data is stored. Values are typically of the form @regional-europe-west1@ , @us-central@ etc. In order to obtain a valid list please consult the <https://cloud.google.com/spanner/docs/instances> . -}
-    , _display_name :: !(TF.Attribute s Text)
+    , _display_name :: !(TF.Attr s Text)
     {- ^ (Required) The descriptive name for this instance as it appears in UIs. Can be updated, however should be kept globally unique to avoid confusion. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping (key/value pairs) of labels to assign to the instance. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Optional, Computed) The unique name (ID) of the instance. If the name is left blank, Terraform will randomly generate one when the instance is first created. -}
-    , _num_nodes :: !(TF.Attribute s Text)
+    , _num_nodes :: !(TF.Attr s Text)
     {- ^ (Optional, Computed) The number of nodes allocated to this instance. Defaults to @1@ . This can be updated after creation. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SpannerInstanceResource s) where
-    toHCL SpannerInstanceResource{..} = TF.block $ catMaybes
+    toHCL SpannerInstanceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "config" _config
         , TF.attribute "display_name" _display_name
         , TF.attribute "labels" _labels
@@ -7529,32 +7529,32 @@ instance TF.ToHCL (SpannerInstanceResource s) where
 
 instance P.HasConfig (SpannerInstanceResource s) s Text where
     config =
-        lens (_config :: SpannerInstanceResource s -> TF.Attribute s Text)
+        lens (_config :: SpannerInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _config = a } :: SpannerInstanceResource s)
 
 instance P.HasDisplayName (SpannerInstanceResource s) s Text where
     displayName =
-        lens (_display_name :: SpannerInstanceResource s -> TF.Attribute s Text)
+        lens (_display_name :: SpannerInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: SpannerInstanceResource s)
 
 instance P.HasLabels (SpannerInstanceResource s) s Text where
     labels =
-        lens (_labels :: SpannerInstanceResource s -> TF.Attribute s Text)
+        lens (_labels :: SpannerInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: SpannerInstanceResource s)
 
 instance P.HasName (SpannerInstanceResource s) s Text where
     name =
-        lens (_name :: SpannerInstanceResource s -> TF.Attribute s Text)
+        lens (_name :: SpannerInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SpannerInstanceResource s)
 
 instance P.HasNumNodes (SpannerInstanceResource s) s Text where
     numNodes =
-        lens (_num_nodes :: SpannerInstanceResource s -> TF.Attribute s Text)
+        lens (_num_nodes :: SpannerInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _num_nodes = a } :: SpannerInstanceResource s)
 
 instance P.HasProject (SpannerInstanceResource s) s Text where
     project =
-        lens (_project :: SpannerInstanceResource s -> TF.Attribute s Text)
+        lens (_project :: SpannerInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: SpannerInstanceResource s)
 
 instance P.HasComputedState (SpannerInstanceResource s) Text
@@ -7584,26 +7584,26 @@ Terraform on instance creation. You should use @google_sql_user@ to define a
 custom user with a restricted host and strong password.
 -}
 data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource {
-      _connection_name :: !(TF.Attribute s Text)
+      _connection_name :: !(TF.Attr s Text)
     {- ^ (Optional) The connection name of the instance to be used in connection strings. -}
-    , _database_version :: !(TF.Attribute s Text)
+    , _database_version :: !(TF.Attr s Text)
     {- ^ (Optional, Default: @MYSQL_5_6@ ) The MySQL version to use. Can be @MYSQL_5_6@ , @MYSQL_5_7@ or @POSTGRES_9_6@ for second-generation instances, or @MYSQL_5_5@ or @MYSQL_5_6@ for first-generation instances. See <https://cloud.google.com/sql/docs/1st-2nd-gen-differences> for more information. @POSTGRES_9_6@ support is in </docs/providers/google/index.html#beta-features> . -}
-    , _master_instance_name :: !(TF.Attribute s Text)
+    , _master_instance_name :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the instance that will act as the master in the replication setup. Note, this requires the master to have @binary_log_enabled@ set, as well as existing backups. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Optional, Computed) The name of the instance. If the name is left blank, Terraform will randomly generate one when the instance is first created. This is done because after a name is used, it cannot be reused for up to <https://cloud.google.com/sql/docs/delete-instance> . -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region :: !(TF.Attribute s Text)
+    , _region :: !(TF.Attr s Text)
     {- ^ (Required) The region the instance will sit in. Note, first-generation Cloud SQL instance regions do not line up with the Google Compute Engine (GCE) regions, and Cloud SQL is not available in all regions - choose from one of the options listed <https://cloud.google.com/sql/docs/mysql/instance-locations> . -}
-    , _replica_configuration :: !(TF.Attribute s Text)
+    , _replica_configuration :: !(TF.Attr s Text)
     {- ^ (Optional) The configuration for replication. The configuration is detailed below. -}
-    , _settings :: !(TF.Attribute s Text)
+    , _settings :: !(TF.Attr s Text)
     {- ^ (Required) The settings to use for the database. The configuration is detailed below. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SqlDatabaseInstanceResource s) where
-    toHCL SqlDatabaseInstanceResource{..} = TF.block $ catMaybes
+    toHCL SqlDatabaseInstanceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "connection_name" _connection_name
         , TF.attribute "database_version" _database_version
         , TF.attribute "master_instance_name" _master_instance_name
@@ -7616,42 +7616,42 @@ instance TF.ToHCL (SqlDatabaseInstanceResource s) where
 
 instance P.HasConnectionName (SqlDatabaseInstanceResource s) s Text where
     connectionName =
-        lens (_connection_name :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
+        lens (_connection_name :: SqlDatabaseInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _connection_name = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasDatabaseVersion (SqlDatabaseInstanceResource s) s Text where
     databaseVersion =
-        lens (_database_version :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
+        lens (_database_version :: SqlDatabaseInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _database_version = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasMasterInstanceName (SqlDatabaseInstanceResource s) s Text where
     masterInstanceName =
-        lens (_master_instance_name :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
+        lens (_master_instance_name :: SqlDatabaseInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _master_instance_name = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasName (SqlDatabaseInstanceResource s) s Text where
     name =
-        lens (_name :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
+        lens (_name :: SqlDatabaseInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasProject (SqlDatabaseInstanceResource s) s Text where
     project =
-        lens (_project :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
+        lens (_project :: SqlDatabaseInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasRegion (SqlDatabaseInstanceResource s) s Text where
     region =
-        lens (_region :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
+        lens (_region :: SqlDatabaseInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasReplicaConfiguration (SqlDatabaseInstanceResource s) s Text where
     replicaConfiguration =
-        lens (_replica_configuration :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
+        lens (_replica_configuration :: SqlDatabaseInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _replica_configuration = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasSettings (SqlDatabaseInstanceResource s) s Text where
     settings =
-        lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attribute s Text)
+        lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _settings = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasComputedIpAddress0IpAddress (SqlDatabaseInstanceResource s) Text
@@ -7682,20 +7682,20 @@ support for @google_sql_database@ is in
 </docs/providers/google/index.html#beta-features> .
 -}
 data SqlDatabaseResource s = SqlDatabaseResource {
-      _charset :: !(TF.Attribute s Text)
+      _charset :: !(TF.Attr s Text)
     {- ^ (Optional) The charset value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html> and Postgres' <https://www.postgresql.org/docs/9.6/static/multibyte.html> for more details and supported values. Postgres databases are in </docs/providers/google/index.html#beta-features> , and have limited @charset@ support; they only support a value of @UTF8@ at creation time. -}
-    , _collation :: !(TF.Attribute s Text)
+    , _collation :: !(TF.Attr s Text)
     {- ^ (Optional) The collation value. See MySQL's <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html> and Postgres' <https://www.postgresql.org/docs/9.6/static/collation.html> for more details and supported values. Postgres databases are in </docs/providers/google/index.html#beta-features> , and have limited @collation@ support; they only support a value of @en_US.UTF8@ at creation time. -}
-    , _instance' :: !(TF.Attribute s Text)
+    , _instance' :: !(TF.Attr s Text)
     {- ^ (Required) The name of containing instance. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the database. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SqlDatabaseResource s) where
-    toHCL SqlDatabaseResource{..} = TF.block $ catMaybes
+    toHCL SqlDatabaseResource{..} = TF.inline $ catMaybes
         [ TF.attribute "charset" _charset
         , TF.attribute "collation" _collation
         , TF.attribute "instance" _instance'
@@ -7705,27 +7705,27 @@ instance TF.ToHCL (SqlDatabaseResource s) where
 
 instance P.HasCharset (SqlDatabaseResource s) s Text where
     charset =
-        lens (_charset :: SqlDatabaseResource s -> TF.Attribute s Text)
+        lens (_charset :: SqlDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _charset = a } :: SqlDatabaseResource s)
 
 instance P.HasCollation (SqlDatabaseResource s) s Text where
     collation =
-        lens (_collation :: SqlDatabaseResource s -> TF.Attribute s Text)
+        lens (_collation :: SqlDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _collation = a } :: SqlDatabaseResource s)
 
 instance P.HasInstance' (SqlDatabaseResource s) s Text where
     instance' =
-        lens (_instance' :: SqlDatabaseResource s -> TF.Attribute s Text)
+        lens (_instance' :: SqlDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _instance' = a } :: SqlDatabaseResource s)
 
 instance P.HasName (SqlDatabaseResource s) s Text where
     name =
-        lens (_name :: SqlDatabaseResource s -> TF.Attribute s Text)
+        lens (_name :: SqlDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SqlDatabaseResource s)
 
 instance P.HasProject (SqlDatabaseResource s) s Text where
     project =
-        lens (_project :: SqlDatabaseResource s -> TF.Attribute s Text)
+        lens (_project :: SqlDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: SqlDatabaseResource s)
 
 instance P.HasComputedSelfLink (SqlDatabaseResource s) Text
@@ -7751,20 +7751,20 @@ state as plain-text. </docs/state/sensitive-data.html> . Passwords will not
 be retrieved when running "terraform import".
 -}
 data SqlUserResource s = SqlUserResource {
-      _host :: !(TF.Attribute s Text)
+      _host :: !(TF.Attr s Text)
     {- ^ (Required) The host the user can connect from. Can be an IP address. Changing this forces a new resource to be created. -}
-    , _instance' :: !(TF.Attribute s Text)
+    , _instance' :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Cloud SQL instance. Changing this forces a new resource to be created. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the user. Changing this forces a new resource to be created. -}
-    , _password :: !(TF.Attribute s Text)
+    , _password :: !(TF.Attr s Text)
     {- ^ (Optional) The password for the user. Can be updated. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SqlUserResource s) where
-    toHCL SqlUserResource{..} = TF.block $ catMaybes
+    toHCL SqlUserResource{..} = TF.inline $ catMaybes
         [ TF.attribute "host" _host
         , TF.attribute "instance" _instance'
         , TF.attribute "name" _name
@@ -7774,27 +7774,27 @@ instance TF.ToHCL (SqlUserResource s) where
 
 instance P.HasHost (SqlUserResource s) s Text where
     host =
-        lens (_host :: SqlUserResource s -> TF.Attribute s Text)
+        lens (_host :: SqlUserResource s -> TF.Attr s Text)
              (\s a -> s { _host = a } :: SqlUserResource s)
 
 instance P.HasInstance' (SqlUserResource s) s Text where
     instance' =
-        lens (_instance' :: SqlUserResource s -> TF.Attribute s Text)
+        lens (_instance' :: SqlUserResource s -> TF.Attr s Text)
              (\s a -> s { _instance' = a } :: SqlUserResource s)
 
 instance P.HasName (SqlUserResource s) s Text where
     name =
-        lens (_name :: SqlUserResource s -> TF.Attribute s Text)
+        lens (_name :: SqlUserResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SqlUserResource s)
 
 instance P.HasPassword (SqlUserResource s) s Text where
     password =
-        lens (_password :: SqlUserResource s -> TF.Attribute s Text)
+        lens (_password :: SqlUserResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: SqlUserResource s)
 
 instance P.HasProject (SqlUserResource s) s Text where
     project =
-        lens (_project :: SqlUserResource s -> TF.Attribute s Text)
+        lens (_project :: SqlUserResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: SqlUserResource s)
 
 
@@ -7817,18 +7817,18 @@ and <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls>
 .
 -}
 data StorageBucketAclResource s = StorageBucketAclResource {
-      _bucket :: !(TF.Attribute s Text)
+      _bucket :: !(TF.Attr s Text)
     {- ^ (Required) The name of the bucket it applies to. -}
-    , _default_acl :: !(TF.Attribute s Text)
+    , _default_acl :: !(TF.Attr s Text)
     {- ^ (Optional) Configure this ACL to be the default ACL. -}
-    , _predefined_acl :: !(TF.Attribute s Text)
+    , _predefined_acl :: !(TF.Attr s Text)
     {- ^ (Optional) The <https://cloud.google.com/storage/docs/access-control/lists#predefined-acl> to apply. Must be set if @role_entity@ is not. -}
-    , _role_entity :: !(TF.Attribute s Text)
+    , _role_entity :: !(TF.Attr s Text)
     {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageBucketAclResource s) where
-    toHCL StorageBucketAclResource{..} = TF.block $ catMaybes
+    toHCL StorageBucketAclResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bucket" _bucket
         , TF.attribute "default_acl" _default_acl
         , TF.attribute "predefined_acl" _predefined_acl
@@ -7837,22 +7837,22 @@ instance TF.ToHCL (StorageBucketAclResource s) where
 
 instance P.HasBucket (StorageBucketAclResource s) s Text where
     bucket =
-        lens (_bucket :: StorageBucketAclResource s -> TF.Attribute s Text)
+        lens (_bucket :: StorageBucketAclResource s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: StorageBucketAclResource s)
 
 instance P.HasDefaultAcl (StorageBucketAclResource s) s Text where
     defaultAcl =
-        lens (_default_acl :: StorageBucketAclResource s -> TF.Attribute s Text)
+        lens (_default_acl :: StorageBucketAclResource s -> TF.Attr s Text)
              (\s a -> s { _default_acl = a } :: StorageBucketAclResource s)
 
 instance P.HasPredefinedAcl (StorageBucketAclResource s) s Text where
     predefinedAcl =
-        lens (_predefined_acl :: StorageBucketAclResource s -> TF.Attribute s Text)
+        lens (_predefined_acl :: StorageBucketAclResource s -> TF.Attr s Text)
              (\s a -> s { _predefined_acl = a } :: StorageBucketAclResource s)
 
 instance P.HasRoleEntity (StorageBucketAclResource s) s Text where
     roleEntity =
-        lens (_role_entity :: StorageBucketAclResource s -> TF.Attribute s Text)
+        lens (_role_entity :: StorageBucketAclResource s -> TF.Attr s Text)
              (\s a -> s { _role_entity = a } :: StorageBucketAclResource s)
 
 
@@ -7875,26 +7875,26 @@ information see <https://cloud.google.com/storage/docs/key-terms#objects>
 and <https://cloud.google.com/storage/docs/json_api/v1/objects> .
 -}
 data StorageBucketObjectResource s = StorageBucketObjectResource {
-      _bucket :: !(TF.Attribute s Text)
+      _bucket :: !(TF.Attr s Text)
     {- ^ (Required) The name of the containing bucket. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the object. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageBucketObjectResource s) where
-    toHCL StorageBucketObjectResource{..} = TF.block $ catMaybes
+    toHCL StorageBucketObjectResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bucket" _bucket
         , TF.attribute "name" _name
         ]
 
 instance P.HasBucket (StorageBucketObjectResource s) s Text where
     bucket =
-        lens (_bucket :: StorageBucketObjectResource s -> TF.Attribute s Text)
+        lens (_bucket :: StorageBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: StorageBucketObjectResource s)
 
 instance P.HasName (StorageBucketObjectResource s) s Text where
     name =
-        lens (_name :: StorageBucketObjectResource s -> TF.Attribute s Text)
+        lens (_name :: StorageBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: StorageBucketObjectResource s)
 
 instance P.HasComputedCrc32c (StorageBucketObjectResource s) Text
@@ -7918,32 +7918,32 @@ using the @google_storage_bucket_acl@ resource. For more information see
 <https://cloud.google.com/storage/docs/json_api/v1/buckets> .
 -}
 data StorageBucketResource s = StorageBucketResource {
-      _cors :: !(TF.Attribute s Text)
+      _cors :: !(TF.Attr s Text)
     {- ^ (Optional) The bucket's <https://www.w3.org/TR/cors/> configuration. Multiple blocks of this type are permitted. Structure is documented below. -}
-    , _force_destroy :: !(TF.Attribute s Text)
+    , _force_destroy :: !(TF.Attr s Text)
     {- ^ (Optional, Default: false) When deleting a bucket, this boolean option will delete all contained objects. If you try to delete a bucket that contains objects, Terraform will fail that run. -}
-    , _labels :: !(TF.Attribute s Text)
+    , _labels :: !(TF.Attr s Text)
     {- ^ (Optional) A set of key/value label pairs to assign to the bucket. -}
-    , _lifecycle_rule :: !(TF.Attribute s Text)
+    , _lifecycle_rule :: !(TF.Attr s Text)
     {- ^ (Optional) The bucket's <https://cloud.google.com/storage/docs/lifecycle#configuration> configuration. Multiple blocks of this type are permitted. Structure is documented below. -}
-    , _location :: !(TF.Attribute s Text)
+    , _location :: !(TF.Attr s Text)
     {- ^ (Optional, Default: 'US') The <https://cloud.google.com/storage/docs/bucket-locations> -}
-    , _logging :: !(TF.Attribute s Text)
+    , _logging :: !(TF.Attr s Text)
     {- ^ (Optional) The bucket's <https://cloud.google.com/storage/docs/access-logs> configuration. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the bucket. -}
-    , _project :: !(TF.Attribute s Text)
+    , _project :: !(TF.Attr s Text)
     {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _storage_class :: !(TF.Attribute s Text)
+    , _storage_class :: !(TF.Attr s Text)
     {- ^ (Optional) The <https://cloud.google.com/storage/docs/storage-classes> of the new bucket. Supported values include: @MULTI_REGIONAL@ , @REGIONAL@ , @NEARLINE@ , @COLDLINE@ . -}
-    , _versioning :: !(TF.Attribute s Text)
+    , _versioning :: !(TF.Attr s Text)
     {- ^ (Optional) The bucket's <https://cloud.google.com/storage/docs/object-versioning> configuration. -}
-    , _website :: !(TF.Attribute s Text)
+    , _website :: !(TF.Attr s Text)
     {- ^ (Optional) Configuration if the bucket acts as a website. Structure is documented below. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageBucketResource s) where
-    toHCL StorageBucketResource{..} = TF.block $ catMaybes
+    toHCL StorageBucketResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cors" _cors
         , TF.attribute "force_destroy" _force_destroy
         , TF.attribute "labels" _labels
@@ -7959,57 +7959,57 @@ instance TF.ToHCL (StorageBucketResource s) where
 
 instance P.HasCors (StorageBucketResource s) s Text where
     cors =
-        lens (_cors :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_cors :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _cors = a } :: StorageBucketResource s)
 
 instance P.HasForceDestroy (StorageBucketResource s) s Text where
     forceDestroy =
-        lens (_force_destroy :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_force_destroy :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _force_destroy = a } :: StorageBucketResource s)
 
 instance P.HasLabels (StorageBucketResource s) s Text where
     labels =
-        lens (_labels :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_labels :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: StorageBucketResource s)
 
 instance P.HasLifecycleRule (StorageBucketResource s) s Text where
     lifecycleRule =
-        lens (_lifecycle_rule :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_lifecycle_rule :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _lifecycle_rule = a } :: StorageBucketResource s)
 
 instance P.HasLocation (StorageBucketResource s) s Text where
     location =
-        lens (_location :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_location :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: StorageBucketResource s)
 
 instance P.HasLogging (StorageBucketResource s) s Text where
     logging =
-        lens (_logging :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_logging :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _logging = a } :: StorageBucketResource s)
 
 instance P.HasName (StorageBucketResource s) s Text where
     name =
-        lens (_name :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_name :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: StorageBucketResource s)
 
 instance P.HasProject (StorageBucketResource s) s Text where
     project =
-        lens (_project :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_project :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: StorageBucketResource s)
 
 instance P.HasStorageClass (StorageBucketResource s) s Text where
     storageClass =
-        lens (_storage_class :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_storage_class :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _storage_class = a } :: StorageBucketResource s)
 
 instance P.HasVersioning (StorageBucketResource s) s Text where
     versioning =
-        lens (_versioning :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_versioning :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _versioning = a } :: StorageBucketResource s)
 
 instance P.HasWebsite (StorageBucketResource s) s Text where
     website =
-        lens (_website :: StorageBucketResource s -> TF.Attribute s Text)
+        lens (_website :: StorageBucketResource s -> TF.Attr s Text)
              (\s a -> s { _website = a } :: StorageBucketResource s)
 
 instance P.HasComputedSelfLink (StorageBucketResource s) Text
@@ -8041,26 +8041,26 @@ more information see
 .
 -}
 data StorageDefaultObjectAclResource s = StorageDefaultObjectAclResource {
-      _bucket :: !(TF.Attribute s Text)
+      _bucket :: !(TF.Attr s Text)
     {- ^ (Required) The name of the bucket it applies to. -}
-    , _role_entity :: !(TF.Attribute s Text)
+    , _role_entity :: !(TF.Attr s Text)
     {- ^ (Required) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls> for more details. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageDefaultObjectAclResource s) where
-    toHCL StorageDefaultObjectAclResource{..} = TF.block $ catMaybes
+    toHCL StorageDefaultObjectAclResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bucket" _bucket
         , TF.attribute "role_entity" _role_entity
         ]
 
 instance P.HasBucket (StorageDefaultObjectAclResource s) s Text where
     bucket =
-        lens (_bucket :: StorageDefaultObjectAclResource s -> TF.Attribute s Text)
+        lens (_bucket :: StorageDefaultObjectAclResource s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: StorageDefaultObjectAclResource s)
 
 instance P.HasRoleEntity (StorageDefaultObjectAclResource s) s Text where
     roleEntity =
-        lens (_role_entity :: StorageDefaultObjectAclResource s -> TF.Attribute s Text)
+        lens (_role_entity :: StorageDefaultObjectAclResource s -> TF.Attr s Text)
              (\s a -> s { _role_entity = a } :: StorageDefaultObjectAclResource s)
 
 
@@ -8080,22 +8080,22 @@ information see <https://cloud.google.com/storage/docs/pubsub-notifications>
 and <https://cloud.google.com/storage/docs/json_api/v1/notifications> .
 -}
 data StorageNotificationResource s = StorageNotificationResource {
-      _bucket :: !(TF.Attribute s Text)
+      _bucket :: !(TF.Attr s Text)
     {- ^ (Required) The name of the bucket. -}
-    , _custom_attributes :: !(TF.Attribute s Text)
+    , _custom_attributes :: !(TF.Attr s Text)
     {- ^ (Optional)  A set of key/value attribute pairs to attach to each Cloud PubSub message published for this notification subscription -}
-    , _event_types :: !(TF.Attribute s Text)
+    , _event_types :: !(TF.Attr s Text)
     {- ^ (Optional) List of event type filters for this notification config. If not specified, Cloud Storage will send notifications for all event types. The valid types are: @"OBJECT_FINALIZE"@ , @"OBJECT_METADATA_UPDATE"@ , @"OBJECT_DELETE"@ , @"OBJECT_ARCHIVE"@ -}
-    , _object_name_prefix :: !(TF.Attribute s Text)
+    , _object_name_prefix :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies a prefix path filter for this notification config. Cloud Storage will only send notifications for objects in this bucket whose names begin with the specified prefix. -}
-    , _payload_format :: !(TF.Attribute s Text)
+    , _payload_format :: !(TF.Attr s Text)
     {- ^ (Required) The desired content of the Payload. One of @"JSON_API_V1"@ or @"NONE"@ . -}
-    , _topic :: !(TF.Attribute s Text)
+    , _topic :: !(TF.Attr s Text)
     {- ^ (Required) The Cloud PubSub topic to which this subscription publishes. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageNotificationResource s) where
-    toHCL StorageNotificationResource{..} = TF.block $ catMaybes
+    toHCL StorageNotificationResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bucket" _bucket
         , TF.attribute "custom_attributes" _custom_attributes
         , TF.attribute "event_types" _event_types
@@ -8106,32 +8106,32 @@ instance TF.ToHCL (StorageNotificationResource s) where
 
 instance P.HasBucket (StorageNotificationResource s) s Text where
     bucket =
-        lens (_bucket :: StorageNotificationResource s -> TF.Attribute s Text)
+        lens (_bucket :: StorageNotificationResource s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: StorageNotificationResource s)
 
 instance P.HasCustomAttributes (StorageNotificationResource s) s Text where
     customAttributes =
-        lens (_custom_attributes :: StorageNotificationResource s -> TF.Attribute s Text)
+        lens (_custom_attributes :: StorageNotificationResource s -> TF.Attr s Text)
              (\s a -> s { _custom_attributes = a } :: StorageNotificationResource s)
 
 instance P.HasEventTypes (StorageNotificationResource s) s Text where
     eventTypes =
-        lens (_event_types :: StorageNotificationResource s -> TF.Attribute s Text)
+        lens (_event_types :: StorageNotificationResource s -> TF.Attr s Text)
              (\s a -> s { _event_types = a } :: StorageNotificationResource s)
 
 instance P.HasObjectNamePrefix (StorageNotificationResource s) s Text where
     objectNamePrefix =
-        lens (_object_name_prefix :: StorageNotificationResource s -> TF.Attribute s Text)
+        lens (_object_name_prefix :: StorageNotificationResource s -> TF.Attr s Text)
              (\s a -> s { _object_name_prefix = a } :: StorageNotificationResource s)
 
 instance P.HasPayloadFormat (StorageNotificationResource s) s Text where
     payloadFormat =
-        lens (_payload_format :: StorageNotificationResource s -> TF.Attribute s Text)
+        lens (_payload_format :: StorageNotificationResource s -> TF.Attr s Text)
              (\s a -> s { _payload_format = a } :: StorageNotificationResource s)
 
 instance P.HasTopic (StorageNotificationResource s) s Text where
     topic =
-        lens (_topic :: StorageNotificationResource s -> TF.Attribute s Text)
+        lens (_topic :: StorageNotificationResource s -> TF.Attr s Text)
              (\s a -> s { _topic = a } :: StorageNotificationResource s)
 
 instance P.HasComputedSelfLink (StorageNotificationResource s) Text
@@ -8156,18 +8156,18 @@ and <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls>
 .
 -}
 data StorageObjectAclResource s = StorageObjectAclResource {
-      _bucket :: !(TF.Attribute s Text)
+      _bucket :: !(TF.Attr s Text)
     {- ^ (Required) The name of the bucket it applies to. -}
-    , _object :: !(TF.Attribute s Text)
+    , _object :: !(TF.Attr s Text)
     {- ^ (Required) The name of the object it applies to. -}
-    , _predefined_acl :: !(TF.Attribute s Text)
+    , _predefined_acl :: !(TF.Attr s Text)
     {- ^ (Optional) The <https://cloud.google.com/storage/docs/access-control#predefined-acl> to apply. Must be set if @role_entity@ is not. -}
-    , _role_entity :: !(TF.Attribute s Text)
+    , _role_entity :: !(TF.Attr s Text)
     {- ^ (Optional) List of role/entity pairs in the form @ROLE:entity@ . See <https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls> for more details. Must be set if @predefined_acl@ is not. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageObjectAclResource s) where
-    toHCL StorageObjectAclResource{..} = TF.block $ catMaybes
+    toHCL StorageObjectAclResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bucket" _bucket
         , TF.attribute "object" _object
         , TF.attribute "predefined_acl" _predefined_acl
@@ -8176,22 +8176,22 @@ instance TF.ToHCL (StorageObjectAclResource s) where
 
 instance P.HasBucket (StorageObjectAclResource s) s Text where
     bucket =
-        lens (_bucket :: StorageObjectAclResource s -> TF.Attribute s Text)
+        lens (_bucket :: StorageObjectAclResource s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: StorageObjectAclResource s)
 
 instance P.HasObject (StorageObjectAclResource s) s Text where
     object =
-        lens (_object :: StorageObjectAclResource s -> TF.Attribute s Text)
+        lens (_object :: StorageObjectAclResource s -> TF.Attr s Text)
              (\s a -> s { _object = a } :: StorageObjectAclResource s)
 
 instance P.HasPredefinedAcl (StorageObjectAclResource s) s Text where
     predefinedAcl =
-        lens (_predefined_acl :: StorageObjectAclResource s -> TF.Attribute s Text)
+        lens (_predefined_acl :: StorageObjectAclResource s -> TF.Attr s Text)
              (\s a -> s { _predefined_acl = a } :: StorageObjectAclResource s)
 
 instance P.HasRoleEntity (StorageObjectAclResource s) s Text where
     roleEntity =
-        lens (_role_entity :: StorageObjectAclResource s -> TF.Attribute s Text)
+        lens (_role_entity :: StorageObjectAclResource s -> TF.Attr s Text)
              (\s a -> s { _role_entity = a } :: StorageObjectAclResource s)
 
 

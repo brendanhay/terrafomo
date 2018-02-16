@@ -98,16 +98,16 @@ import qualified Terrafomo.Schema    as TF
 
 -}
 data AlertChannelResource s = AlertChannelResource {
-      _configuration :: !(TF.Attribute s Text)
+      _configuration :: !(TF.Attr s Text)
     {- ^ (Required) A map of key / value pairs with channel type specific values. -}
-    , _name          :: !(TF.Attribute s Text)
+    , _name          :: !(TF.Attr s Text)
     {- ^ (Required) The name of the channel. -}
-    , _type'         :: !(TF.Attribute s Text)
+    , _type'         :: !(TF.Attr s Text)
     {- ^ (Required) The type of channel.  One of: @campfire@ , @email@ , @hipchat@ , @opsgenie@ , @pagerduty@ , @slack@ , @victorops@ , or @webhook@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AlertChannelResource s) where
-    toHCL AlertChannelResource{..} = TF.block $ catMaybes
+    toHCL AlertChannelResource{..} = TF.inline $ catMaybes
         [ TF.attribute "configuration" _configuration
         , TF.attribute "name" _name
         , TF.attribute "type" _type'
@@ -115,17 +115,17 @@ instance TF.ToHCL (AlertChannelResource s) where
 
 instance P.HasConfiguration (AlertChannelResource s) s Text where
     configuration =
-        lens (_configuration :: AlertChannelResource s -> TF.Attribute s Text)
+        lens (_configuration :: AlertChannelResource s -> TF.Attr s Text)
              (\s a -> s { _configuration = a } :: AlertChannelResource s)
 
 instance P.HasName (AlertChannelResource s) s Text where
     name =
-        lens (_name :: AlertChannelResource s -> TF.Attribute s Text)
+        lens (_name :: AlertChannelResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AlertChannelResource s)
 
 instance P.HasType' (AlertChannelResource s) s Text where
     type' =
-        lens (_type' :: AlertChannelResource s -> TF.Attribute s Text)
+        lens (_type' :: AlertChannelResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: AlertChannelResource s)
 
 instance P.HasComputedId (AlertChannelResource s) Text
@@ -144,30 +144,30 @@ alertChannelResource =
 
 -}
 data AlertConditionResource s = AlertConditionResource {
-      _condition_scope             :: !(TF.Attribute s Text)
+      _condition_scope             :: !(TF.Attr s Text)
     {- ^ (Optional) @instance@ or @application@ .  This is required if you are using the JVM plugin in New Relic. -}
-    , _entities                    :: !(TF.Attribute s Text)
+    , _entities                    :: !(TF.Attr s Text)
     {- ^ (Required) The instance IDS associated with this condition. -}
-    , _metric                      :: !(TF.Attribute s Text)
+    , _metric                      :: !(TF.Attr s Text)
     {- ^ (Required) The metric field accepts parameters based on the @type@ set. -}
-    , _name                        :: !(TF.Attribute s Text)
+    , _name                        :: !(TF.Attr s Text)
     {- ^ (Required) The title of the condition -}
-    , _policy_id                   :: !(TF.Attribute s Text)
+    , _policy_id                   :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the policy where this condition should be used. -}
-    , _runbook_url                 :: !(TF.Attribute s Text)
+    , _runbook_url                 :: !(TF.Attr s Text)
     {- ^ (Optional) Runbook URL to display in notifications. -}
-    , _term                        :: !(TF.Attribute s Text)
+    , _term                        :: !(TF.Attr s Text)
     {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
-    , _type'                       :: !(TF.Attribute s Text)
+    , _type'                       :: !(TF.Attr s Text)
     {- ^ (Required) The type of condition. One of: @apm_app_metric@ , @apm_kt_metric@ , @servers_metric@ , @browser_metric@ , @mobile_metric@ -}
-    , _user_defined_metric         :: !(TF.Attribute s Text)
+    , _user_defined_metric         :: !(TF.Attr s Text)
     {- ^ (Optional) A custom metric to be evaluated. -}
-    , _user_defined_value_function :: !(TF.Attribute s Text)
+    , _user_defined_value_function :: !(TF.Attr s Text)
     {- ^ (Optional) One of: @average@ , @min@ , @max@ , @total@ , or @sample_size@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AlertConditionResource s) where
-    toHCL AlertConditionResource{..} = TF.block $ catMaybes
+    toHCL AlertConditionResource{..} = TF.inline $ catMaybes
         [ TF.attribute "condition_scope" _condition_scope
         , TF.attribute "entities" _entities
         , TF.attribute "metric" _metric
@@ -182,52 +182,52 @@ instance TF.ToHCL (AlertConditionResource s) where
 
 instance P.HasConditionScope (AlertConditionResource s) s Text where
     conditionScope =
-        lens (_condition_scope :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_condition_scope :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _condition_scope = a } :: AlertConditionResource s)
 
 instance P.HasEntities (AlertConditionResource s) s Text where
     entities =
-        lens (_entities :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_entities :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _entities = a } :: AlertConditionResource s)
 
 instance P.HasMetric (AlertConditionResource s) s Text where
     metric =
-        lens (_metric :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_metric :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _metric = a } :: AlertConditionResource s)
 
 instance P.HasName (AlertConditionResource s) s Text where
     name =
-        lens (_name :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_name :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AlertConditionResource s)
 
 instance P.HasPolicyId (AlertConditionResource s) s Text where
     policyId =
-        lens (_policy_id :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_policy_id :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _policy_id = a } :: AlertConditionResource s)
 
 instance P.HasRunbookUrl (AlertConditionResource s) s Text where
     runbookUrl =
-        lens (_runbook_url :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_runbook_url :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _runbook_url = a } :: AlertConditionResource s)
 
 instance P.HasTerm (AlertConditionResource s) s Text where
     term =
-        lens (_term :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_term :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _term = a } :: AlertConditionResource s)
 
 instance P.HasType' (AlertConditionResource s) s Text where
     type' =
-        lens (_type' :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_type' :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: AlertConditionResource s)
 
 instance P.HasUserDefinedMetric (AlertConditionResource s) s Text where
     userDefinedMetric =
-        lens (_user_defined_metric :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_user_defined_metric :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _user_defined_metric = a } :: AlertConditionResource s)
 
 instance P.HasUserDefinedValueFunction (AlertConditionResource s) s Text where
     userDefinedValueFunction =
-        lens (_user_defined_value_function :: AlertConditionResource s -> TF.Attribute s Text)
+        lens (_user_defined_value_function :: AlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _user_defined_value_function = a } :: AlertConditionResource s)
 
 instance P.HasComputedId (AlertConditionResource s) Text
@@ -253,26 +253,26 @@ alertConditionResource =
 
 -}
 data AlertPolicyChannelResource s = AlertPolicyChannelResource {
-      _channel_id :: !(TF.Attribute s Text)
+      _channel_id :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the channel. -}
-    , _policy_id  :: !(TF.Attribute s Text)
+    , _policy_id  :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the policy. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AlertPolicyChannelResource s) where
-    toHCL AlertPolicyChannelResource{..} = TF.block $ catMaybes
+    toHCL AlertPolicyChannelResource{..} = TF.inline $ catMaybes
         [ TF.attribute "channel_id" _channel_id
         , TF.attribute "policy_id" _policy_id
         ]
 
 instance P.HasChannelId (AlertPolicyChannelResource s) s Text where
     channelId =
-        lens (_channel_id :: AlertPolicyChannelResource s -> TF.Attribute s Text)
+        lens (_channel_id :: AlertPolicyChannelResource s -> TF.Attr s Text)
              (\s a -> s { _channel_id = a } :: AlertPolicyChannelResource s)
 
 instance P.HasPolicyId (AlertPolicyChannelResource s) s Text where
     policyId =
-        lens (_policy_id :: AlertPolicyChannelResource s -> TF.Attribute s Text)
+        lens (_policy_id :: AlertPolicyChannelResource s -> TF.Attr s Text)
              (\s a -> s { _policy_id = a } :: AlertPolicyChannelResource s)
 
 
@@ -289,26 +289,26 @@ alertPolicyChannelResource =
 
 -}
 data AlertPolicyResource s = AlertPolicyResource {
-      _incident_preference :: !(TF.Attribute s Text)
+      _incident_preference :: !(TF.Attr s Text)
     {- ^ (Optional) The rollup strategy for the policy.  Options include: @PER_POLICY@ , @PER_CONDITION@ , or @PER_CONDITION_AND_TARGET@ .  The default is @PER_POLICY@ . -}
-    , _name                :: !(TF.Attribute s Text)
+    , _name                :: !(TF.Attr s Text)
     {- ^ (Required) The name of the policy. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AlertPolicyResource s) where
-    toHCL AlertPolicyResource{..} = TF.block $ catMaybes
+    toHCL AlertPolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "incident_preference" _incident_preference
         , TF.attribute "name" _name
         ]
 
 instance P.HasIncidentPreference (AlertPolicyResource s) s Text where
     incidentPreference =
-        lens (_incident_preference :: AlertPolicyResource s -> TF.Attribute s Text)
+        lens (_incident_preference :: AlertPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _incident_preference = a } :: AlertPolicyResource s)
 
 instance P.HasName (AlertPolicyResource s) s Text where
     name =
-        lens (_name :: AlertPolicyResource s -> TF.Attribute s Text)
+        lens (_name :: AlertPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AlertPolicyResource s)
 
 instance P.HasComputedCreatedAt (AlertPolicyResource s) Text
@@ -328,20 +328,20 @@ alertPolicyResource =
 
 -}
 data DashboardResource s = DashboardResource {
-      _editable   :: !(TF.Attribute s Text)
+      _editable   :: !(TF.Attr s Text)
     {- ^ (Optional) Who can edit the dashboard in an account. Must be @read_only@ , @editable_by_owner@ , @editable_by_all@ , or @all@ . Defaults to @editable_by_all@ . -}
-    , _icon       :: !(TF.Attribute s Text)
+    , _icon       :: !(TF.Attr s Text)
     {- ^ (Optional) The icon for the dashboard.  Defaults to @bar-chart@ . -}
-    , _title      :: !(TF.Attribute s Text)
+    , _title      :: !(TF.Attr s Text)
     {- ^ (Required) The title of the dashboard. -}
-    , _visibility :: !(TF.Attribute s Text)
+    , _visibility :: !(TF.Attr s Text)
     {- ^ (Optional) Who can see the dashboard in an account. Must be @owner@ or @all@ . Defaults to @all@ . -}
-    , _widget     :: !(TF.Attribute s Text)
+    , _widget     :: !(TF.Attr s Text)
     {- ^ (Optional) A widget that describes a visualization. See <#widgets> below for details. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DashboardResource s) where
-    toHCL DashboardResource{..} = TF.block $ catMaybes
+    toHCL DashboardResource{..} = TF.inline $ catMaybes
         [ TF.attribute "editable" _editable
         , TF.attribute "icon" _icon
         , TF.attribute "title" _title
@@ -351,27 +351,27 @@ instance TF.ToHCL (DashboardResource s) where
 
 instance P.HasEditable (DashboardResource s) s Text where
     editable =
-        lens (_editable :: DashboardResource s -> TF.Attribute s Text)
+        lens (_editable :: DashboardResource s -> TF.Attr s Text)
              (\s a -> s { _editable = a } :: DashboardResource s)
 
 instance P.HasIcon (DashboardResource s) s Text where
     icon =
-        lens (_icon :: DashboardResource s -> TF.Attribute s Text)
+        lens (_icon :: DashboardResource s -> TF.Attr s Text)
              (\s a -> s { _icon = a } :: DashboardResource s)
 
 instance P.HasTitle (DashboardResource s) s Text where
     title =
-        lens (_title :: DashboardResource s -> TF.Attribute s Text)
+        lens (_title :: DashboardResource s -> TF.Attr s Text)
              (\s a -> s { _title = a } :: DashboardResource s)
 
 instance P.HasVisibility (DashboardResource s) s Text where
     visibility =
-        lens (_visibility :: DashboardResource s -> TF.Attribute s Text)
+        lens (_visibility :: DashboardResource s -> TF.Attr s Text)
              (\s a -> s { _visibility = a } :: DashboardResource s)
 
 instance P.HasWidget (DashboardResource s) s Text where
     widget =
-        lens (_widget :: DashboardResource s -> TF.Attribute s Text)
+        lens (_widget :: DashboardResource s -> TF.Attr s Text)
              (\s a -> s { _widget = a } :: DashboardResource s)
 
 instance P.HasComputedId (DashboardResource s) Text
@@ -392,24 +392,24 @@ dashboardResource =
 
 -}
 data NrqlAlertConditionResource s = NrqlAlertConditionResource {
-      _enabled        :: !(TF.Attribute s Text)
+      _enabled        :: !(TF.Attr s Text)
     {- ^ (Optional) Set whether to enable the alert condition. Defaults to @true@ . -}
-    , _name           :: !(TF.Attribute s Text)
+    , _name           :: !(TF.Attr s Text)
     {- ^ (Required) The title of the condition -}
-    , _nrql           :: !(TF.Attribute s Text)
+    , _nrql           :: !(TF.Attr s Text)
     {- ^ (Required) A NRQL query. See <#nrql> below for details. -}
-    , _policy_id      :: !(TF.Attribute s Text)
+    , _policy_id      :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the policy where this condition should be used. -}
-    , _runbook_url    :: !(TF.Attribute s Text)
+    , _runbook_url    :: !(TF.Attr s Text)
     {- ^ (Optional) Runbook URL to display in notifications. -}
-    , _term           :: !(TF.Attribute s Text)
+    , _term           :: !(TF.Attr s Text)
     {- ^ (Required) A list of terms for this condition. See <#terms> below for details. -}
-    , _value_function :: !(TF.Attribute s Text)
+    , _value_function :: !(TF.Attr s Text)
     {- ^ (Optional) Possible values are @single_value@ , @sum@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NrqlAlertConditionResource s) where
-    toHCL NrqlAlertConditionResource{..} = TF.block $ catMaybes
+    toHCL NrqlAlertConditionResource{..} = TF.inline $ catMaybes
         [ TF.attribute "enabled" _enabled
         , TF.attribute "name" _name
         , TF.attribute "nrql" _nrql
@@ -421,37 +421,37 @@ instance TF.ToHCL (NrqlAlertConditionResource s) where
 
 instance P.HasEnabled (NrqlAlertConditionResource s) s Text where
     enabled =
-        lens (_enabled :: NrqlAlertConditionResource s -> TF.Attribute s Text)
+        lens (_enabled :: NrqlAlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _enabled = a } :: NrqlAlertConditionResource s)
 
 instance P.HasName (NrqlAlertConditionResource s) s Text where
     name =
-        lens (_name :: NrqlAlertConditionResource s -> TF.Attribute s Text)
+        lens (_name :: NrqlAlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NrqlAlertConditionResource s)
 
 instance P.HasNrql (NrqlAlertConditionResource s) s Text where
     nrql =
-        lens (_nrql :: NrqlAlertConditionResource s -> TF.Attribute s Text)
+        lens (_nrql :: NrqlAlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _nrql = a } :: NrqlAlertConditionResource s)
 
 instance P.HasPolicyId (NrqlAlertConditionResource s) s Text where
     policyId =
-        lens (_policy_id :: NrqlAlertConditionResource s -> TF.Attribute s Text)
+        lens (_policy_id :: NrqlAlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _policy_id = a } :: NrqlAlertConditionResource s)
 
 instance P.HasRunbookUrl (NrqlAlertConditionResource s) s Text where
     runbookUrl =
-        lens (_runbook_url :: NrqlAlertConditionResource s -> TF.Attribute s Text)
+        lens (_runbook_url :: NrqlAlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _runbook_url = a } :: NrqlAlertConditionResource s)
 
 instance P.HasTerm (NrqlAlertConditionResource s) s Text where
     term =
-        lens (_term :: NrqlAlertConditionResource s -> TF.Attribute s Text)
+        lens (_term :: NrqlAlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _term = a } :: NrqlAlertConditionResource s)
 
 instance P.HasValueFunction (NrqlAlertConditionResource s) s Text where
     valueFunction =
-        lens (_value_function :: NrqlAlertConditionResource s -> TF.Attribute s Text)
+        lens (_value_function :: NrqlAlertConditionResource s -> TF.Attr s Text)
              (\s a -> s { _value_function = a } :: NrqlAlertConditionResource s)
 
 instance P.HasComputedId (NrqlAlertConditionResource s) Text

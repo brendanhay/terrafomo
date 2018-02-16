@@ -20,7 +20,7 @@ module Terrafomo.Format
     -- ** Terraform Syntax
     , fname
     , ftype
-    , freference
+    , fref
     , fbool
     , fbits
     , fcidr
@@ -45,7 +45,7 @@ import Data.Text (Text)
 
 import Formatting (Format, (%), (%.))
 
-import Terrafomo.Attribute (Attribute (Constant))
+import Terrafomo.Attribute (Attr (Constant))
 import Terrafomo.IP
 import Terrafomo.Name
 
@@ -67,20 +67,9 @@ nformat fmt =
     Format.runFormat fmt (Name . LText.toStrict . Build.toLazyText)
 
 -- | Given a textual formatter and a constant, produce a Terraform attribute.
-aformat :: Format (Attribute s Text) r -> r
+aformat :: Format (Attr s Text) r -> r
 aformat fmt =
     Format.runFormat fmt (Constant . LText.toStrict . Build.toLazyText)
-
--- -- | Given a lazy textual formatter and a list of constants, produce a
--- -- delimited Terraform attribute list.
--- aformatList :: Format (Attribute Text) r -> r
--- aformatList fmt =
---       Constant
---     . LText.toStrict
---     . Build.toLazyText
---     . mconcat
---     . List.intersperse ","
---     . map (Format.bprint fmt)
 
 -- Formatters
 

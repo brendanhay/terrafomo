@@ -66,7 +66,7 @@ data IpRangesData s = IpRangesData {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IpRangesData s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 instance P.HasComputedCidrBlocks (IpRangesData s) Text
 instance P.HasComputedIpv4CidrBlocks (IpRangesData s) Text

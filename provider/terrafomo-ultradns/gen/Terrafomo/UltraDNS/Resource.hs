@@ -101,26 +101,26 @@ import qualified Terrafomo.Schema    as TF
 Provides an UltraDNS Directional Controller pool resource.
 -}
 data DirpoolResource s = DirpoolResource {
-      _conflict_resolve :: !(TF.Attribute s Text)
+      _conflict_resolve :: !(TF.Attr s Text)
     {- ^ (Optional) String. Valid: @"GEO"@ or @"IP"@ . Default: @"GEO"@ . -}
-    , _description      :: !(TF.Attribute s Text)
+    , _description      :: !(TF.Attr s Text)
     {- ^ (Required) Description of the Traffic Controller pool. Valid values are strings less than 256 characters. -}
-    , _name             :: !(TF.Attribute s Text)
+    , _name             :: !(TF.Attr s Text)
     {- ^ (Required) The name of the record -}
-    , _no_response      :: !(TF.Attribute s Text)
+    , _no_response      :: !(TF.Attr s Text)
     {- ^ (Optional) a single Record Data block, without any @host@ attribute. Record Data documented below. -}
-    , _rdata            :: !(TF.Attribute s Text)
+    , _rdata            :: !(TF.Attr s Text)
     {- ^ (Required) a list of Record Data blocks, one for each member in the pool. Record Data documented below. -}
-    , _ttl              :: !(TF.Attribute s Text)
+    , _ttl              :: !(TF.Attr s Text)
     {- ^ (Optional) The TTL of the record. Default: @3600@ . -}
-    , _type'            :: !(TF.Attribute s Text)
+    , _type'            :: !(TF.Attr s Text)
     {- ^ (Required) The Record Type of the record -}
-    , _zone             :: !(TF.Attribute s Text)
+    , _zone             :: !(TF.Attr s Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DirpoolResource s) where
-    toHCL DirpoolResource{..} = TF.block $ catMaybes
+    toHCL DirpoolResource{..} = TF.inline $ catMaybes
         [ TF.attribute "conflict_resolve" _conflict_resolve
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -133,42 +133,42 @@ instance TF.ToHCL (DirpoolResource s) where
 
 instance P.HasConflictResolve (DirpoolResource s) s Text where
     conflictResolve =
-        lens (_conflict_resolve :: DirpoolResource s -> TF.Attribute s Text)
+        lens (_conflict_resolve :: DirpoolResource s -> TF.Attr s Text)
              (\s a -> s { _conflict_resolve = a } :: DirpoolResource s)
 
 instance P.HasDescription (DirpoolResource s) s Text where
     description =
-        lens (_description :: DirpoolResource s -> TF.Attribute s Text)
+        lens (_description :: DirpoolResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DirpoolResource s)
 
 instance P.HasName (DirpoolResource s) s Text where
     name =
-        lens (_name :: DirpoolResource s -> TF.Attribute s Text)
+        lens (_name :: DirpoolResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DirpoolResource s)
 
 instance P.HasNoResponse (DirpoolResource s) s Text where
     noResponse =
-        lens (_no_response :: DirpoolResource s -> TF.Attribute s Text)
+        lens (_no_response :: DirpoolResource s -> TF.Attr s Text)
              (\s a -> s { _no_response = a } :: DirpoolResource s)
 
 instance P.HasRdata (DirpoolResource s) s Text where
     rdata =
-        lens (_rdata :: DirpoolResource s -> TF.Attribute s Text)
+        lens (_rdata :: DirpoolResource s -> TF.Attr s Text)
              (\s a -> s { _rdata = a } :: DirpoolResource s)
 
 instance P.HasTtl (DirpoolResource s) s Text where
     ttl =
-        lens (_ttl :: DirpoolResource s -> TF.Attribute s Text)
+        lens (_ttl :: DirpoolResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: DirpoolResource s)
 
 instance P.HasType' (DirpoolResource s) s Text where
     type' =
-        lens (_type' :: DirpoolResource s -> TF.Attribute s Text)
+        lens (_type' :: DirpoolResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DirpoolResource s)
 
 instance P.HasZone (DirpoolResource s) s Text where
     zone =
-        lens (_zone :: DirpoolResource s -> TF.Attribute s Text)
+        lens (_zone :: DirpoolResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: DirpoolResource s)
 
 instance P.HasComputedHostname (DirpoolResource s) Text
@@ -193,24 +193,24 @@ dirpoolResource =
 Provides an UltraDNS HTTP probe
 -}
 data ProbeHttpResource s = ProbeHttpResource {
-      _agents      :: !(TF.Attribute s Text)
+      _agents      :: !(TF.Attr s Text)
     {- ^ (Required) List of locations that will be used for probing. One or more values must be specified. Valid values are @"NEW_YORK"@ , @"PALO_ALTO"@ , @"DALLAS"@ & @"AMSTERDAM"@ . -}
-    , _http_probe  :: !(TF.Attribute s Text)
+    , _http_probe  :: !(TF.Attr s Text)
     {- ^ (Required) an HTTP Probe block. -}
-    , _interval    :: !(TF.Attribute s Text)
+    , _interval    :: !(TF.Attr s Text)
     {- ^ (Optional) Length of time between probes in minutes. Valid values are @"HALF_MINUTE"@ , @"ONE_MINUTE"@ , @"TWO_MINUTES"@ , @"FIVE_MINUTES"@ , @"TEN_MINUTES"@ & @"FIFTEEN_MINUTE"@ . Default: @"FIVE_MINUTES"@ . -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) The name of the pool to probe. -}
-    , _pool_record :: !(TF.Attribute s Text)
+    , _pool_record :: !(TF.Attr s Text)
     {- ^ - (optional) IP address or domain. If provided, a record-level probe is created, otherwise a pool-level probe is created. -}
-    , _threshold   :: !(TF.Attribute s Text)
+    , _threshold   :: !(TF.Attr s Text)
     {- ^ (Required) Number of agents that must agree for a probe state to be changed. -}
-    , _zone        :: !(TF.Attribute s Text)
+    , _zone        :: !(TF.Attr s Text)
     {- ^ (Required) The domain of the pool to probe. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProbeHttpResource s) where
-    toHCL ProbeHttpResource{..} = TF.block $ catMaybes
+    toHCL ProbeHttpResource{..} = TF.inline $ catMaybes
         [ TF.attribute "agents" _agents
         , TF.attribute "http_probe" _http_probe
         , TF.attribute "interval" _interval
@@ -222,37 +222,37 @@ instance TF.ToHCL (ProbeHttpResource s) where
 
 instance P.HasAgents (ProbeHttpResource s) s Text where
     agents =
-        lens (_agents :: ProbeHttpResource s -> TF.Attribute s Text)
+        lens (_agents :: ProbeHttpResource s -> TF.Attr s Text)
              (\s a -> s { _agents = a } :: ProbeHttpResource s)
 
 instance P.HasHttpProbe (ProbeHttpResource s) s Text where
     httpProbe =
-        lens (_http_probe :: ProbeHttpResource s -> TF.Attribute s Text)
+        lens (_http_probe :: ProbeHttpResource s -> TF.Attr s Text)
              (\s a -> s { _http_probe = a } :: ProbeHttpResource s)
 
 instance P.HasInterval (ProbeHttpResource s) s Text where
     interval =
-        lens (_interval :: ProbeHttpResource s -> TF.Attribute s Text)
+        lens (_interval :: ProbeHttpResource s -> TF.Attr s Text)
              (\s a -> s { _interval = a } :: ProbeHttpResource s)
 
 instance P.HasName (ProbeHttpResource s) s Text where
     name =
-        lens (_name :: ProbeHttpResource s -> TF.Attribute s Text)
+        lens (_name :: ProbeHttpResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ProbeHttpResource s)
 
 instance P.HasPoolRecord (ProbeHttpResource s) s Text where
     poolRecord =
-        lens (_pool_record :: ProbeHttpResource s -> TF.Attribute s Text)
+        lens (_pool_record :: ProbeHttpResource s -> TF.Attr s Text)
              (\s a -> s { _pool_record = a } :: ProbeHttpResource s)
 
 instance P.HasThreshold (ProbeHttpResource s) s Text where
     threshold =
-        lens (_threshold :: ProbeHttpResource s -> TF.Attribute s Text)
+        lens (_threshold :: ProbeHttpResource s -> TF.Attr s Text)
              (\s a -> s { _threshold = a } :: ProbeHttpResource s)
 
 instance P.HasZone (ProbeHttpResource s) s Text where
     zone =
-        lens (_zone :: ProbeHttpResource s -> TF.Attribute s Text)
+        lens (_zone :: ProbeHttpResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ProbeHttpResource s)
 
 
@@ -274,24 +274,24 @@ probeHttpResource =
 Provides an UltraDNS ping probe
 -}
 data ProbePingResource s = ProbePingResource {
-      _agents      :: !(TF.Attribute s Text)
+      _agents      :: !(TF.Attr s Text)
     {- ^ (Required) List of locations that will be used for probing. One or more values must be specified. Valid values are @"NEW_YORK"@ , @"PALO_ALTO"@ , @"DALLAS"@ & @"AMSTERDAM"@ . -}
-    , _interval    :: !(TF.Attribute s Text)
+    , _interval    :: !(TF.Attr s Text)
     {- ^ (Optional) Length of time between probes in minutes. Valid values are @"HALF_MINUTE"@ , @"ONE_MINUTE"@ , @"TWO_MINUTES"@ , @"FIVE_MINUTES"@ , @"TEN_MINUTES"@ & @"FIFTEEN_MINUTE"@ . Default: @"FIVE_MINUTES"@ . -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) The name of the pool to probe. -}
-    , _ping_probe  :: !(TF.Attribute s Text)
+    , _ping_probe  :: !(TF.Attr s Text)
     {- ^ (Required) a Ping Probe block. -}
-    , _pool_record :: !(TF.Attribute s Text)
+    , _pool_record :: !(TF.Attr s Text)
     {- ^ - (optional) IP address or domain. If provided, a record-level probe is created, otherwise a pool-level probe is created. -}
-    , _threshold   :: !(TF.Attribute s Text)
+    , _threshold   :: !(TF.Attr s Text)
     {- ^ (Required) Number of agents that must agree for a probe state to be changed. -}
-    , _zone        :: !(TF.Attribute s Text)
+    , _zone        :: !(TF.Attr s Text)
     {- ^ (Required) The domain of the pool to probe. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProbePingResource s) where
-    toHCL ProbePingResource{..} = TF.block $ catMaybes
+    toHCL ProbePingResource{..} = TF.inline $ catMaybes
         [ TF.attribute "agents" _agents
         , TF.attribute "interval" _interval
         , TF.attribute "name" _name
@@ -303,37 +303,37 @@ instance TF.ToHCL (ProbePingResource s) where
 
 instance P.HasAgents (ProbePingResource s) s Text where
     agents =
-        lens (_agents :: ProbePingResource s -> TF.Attribute s Text)
+        lens (_agents :: ProbePingResource s -> TF.Attr s Text)
              (\s a -> s { _agents = a } :: ProbePingResource s)
 
 instance P.HasInterval (ProbePingResource s) s Text where
     interval =
-        lens (_interval :: ProbePingResource s -> TF.Attribute s Text)
+        lens (_interval :: ProbePingResource s -> TF.Attr s Text)
              (\s a -> s { _interval = a } :: ProbePingResource s)
 
 instance P.HasName (ProbePingResource s) s Text where
     name =
-        lens (_name :: ProbePingResource s -> TF.Attribute s Text)
+        lens (_name :: ProbePingResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ProbePingResource s)
 
 instance P.HasPingProbe (ProbePingResource s) s Text where
     pingProbe =
-        lens (_ping_probe :: ProbePingResource s -> TF.Attribute s Text)
+        lens (_ping_probe :: ProbePingResource s -> TF.Attr s Text)
              (\s a -> s { _ping_probe = a } :: ProbePingResource s)
 
 instance P.HasPoolRecord (ProbePingResource s) s Text where
     poolRecord =
-        lens (_pool_record :: ProbePingResource s -> TF.Attribute s Text)
+        lens (_pool_record :: ProbePingResource s -> TF.Attr s Text)
              (\s a -> s { _pool_record = a } :: ProbePingResource s)
 
 instance P.HasThreshold (ProbePingResource s) s Text where
     threshold =
-        lens (_threshold :: ProbePingResource s -> TF.Attribute s Text)
+        lens (_threshold :: ProbePingResource s -> TF.Attr s Text)
              (\s a -> s { _threshold = a } :: ProbePingResource s)
 
 instance P.HasZone (ProbePingResource s) s Text where
     zone =
-        lens (_zone :: ProbePingResource s -> TF.Attribute s Text)
+        lens (_zone :: ProbePingResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ProbePingResource s)
 
 
@@ -357,22 +357,22 @@ used to define rules for returning multiple A or AAAA records for a given
 owner name. Ordering can be FIXED, RANDOM or ROUND_ROBIN.
 -}
 data RdpoolResource s = RdpoolResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) Description of the Resource Distribution pool. Valid values are strings less than 256 characters. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) The name of the record -}
-    , _order       :: !(TF.Attribute s Text)
+    , _order       :: !(TF.Attr s Text)
     {- ^ (Optional) Ordering rule, one of FIXED, RANDOM or ROUND_ROBIN. Default: 'ROUND_ROBIN'. -}
-    , _rdata       :: !(TF.Attribute s Text)
+    , _rdata       :: !(TF.Attr s Text)
     {- ^ (Required) list ip addresses. -}
-    , _ttl         :: !(TF.Attribute s Text)
+    , _ttl         :: !(TF.Attr s Text)
     {- ^ (Optional) The TTL of the pool in seconds. Default: @3600@ . -}
-    , _zone        :: !(TF.Attribute s Text)
+    , _zone        :: !(TF.Attr s Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RdpoolResource s) where
-    toHCL RdpoolResource{..} = TF.block $ catMaybes
+    toHCL RdpoolResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         , TF.attribute "order" _order
@@ -383,32 +383,32 @@ instance TF.ToHCL (RdpoolResource s) where
 
 instance P.HasDescription (RdpoolResource s) s Text where
     description =
-        lens (_description :: RdpoolResource s -> TF.Attribute s Text)
+        lens (_description :: RdpoolResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: RdpoolResource s)
 
 instance P.HasName (RdpoolResource s) s Text where
     name =
-        lens (_name :: RdpoolResource s -> TF.Attribute s Text)
+        lens (_name :: RdpoolResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RdpoolResource s)
 
 instance P.HasOrder (RdpoolResource s) s Text where
     order =
-        lens (_order :: RdpoolResource s -> TF.Attribute s Text)
+        lens (_order :: RdpoolResource s -> TF.Attr s Text)
              (\s a -> s { _order = a } :: RdpoolResource s)
 
 instance P.HasRdata (RdpoolResource s) s Text where
     rdata =
-        lens (_rdata :: RdpoolResource s -> TF.Attribute s Text)
+        lens (_rdata :: RdpoolResource s -> TF.Attr s Text)
              (\s a -> s { _rdata = a } :: RdpoolResource s)
 
 instance P.HasTtl (RdpoolResource s) s Text where
     ttl =
-        lens (_ttl :: RdpoolResource s -> TF.Attribute s Text)
+        lens (_ttl :: RdpoolResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: RdpoolResource s)
 
 instance P.HasZone (RdpoolResource s) s Text where
     zone =
-        lens (_zone :: RdpoolResource s -> TF.Attribute s Text)
+        lens (_zone :: RdpoolResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: RdpoolResource s)
 
 instance P.HasComputedHostname (RdpoolResource s) Text
@@ -431,20 +431,20 @@ rdpoolResource =
 Provides an UltraDNS record resource.
 -}
 data RecordResource s = RecordResource {
-      _name  :: !(TF.Attribute s Text)
+      _name  :: !(TF.Attr s Text)
     {- ^ (Required) The name of the record -}
-    , _rdata :: !(TF.Attribute s Text)
+    , _rdata :: !(TF.Attr s Text)
     {- ^ (Required) An array containing the values of the record -}
-    , _ttl   :: !(TF.Attribute s Text)
+    , _ttl   :: !(TF.Attr s Text)
     {- ^ (Optional) The TTL of the record -}
-    , _type' :: !(TF.Attribute s Text)
+    , _type' :: !(TF.Attr s Text)
     {- ^ (Required) The type of the record -}
-    , _zone  :: !(TF.Attribute s Text)
+    , _zone  :: !(TF.Attr s Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RecordResource s) where
-    toHCL RecordResource{..} = TF.block $ catMaybes
+    toHCL RecordResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "rdata" _rdata
         , TF.attribute "ttl" _ttl
@@ -454,27 +454,27 @@ instance TF.ToHCL (RecordResource s) where
 
 instance P.HasName (RecordResource s) s Text where
     name =
-        lens (_name :: RecordResource s -> TF.Attribute s Text)
+        lens (_name :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasRdata (RecordResource s) s Text where
     rdata =
-        lens (_rdata :: RecordResource s -> TF.Attribute s Text)
+        lens (_rdata :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _rdata = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) s Text where
     ttl =
-        lens (_ttl :: RecordResource s -> TF.Attribute s Text)
+        lens (_ttl :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) s Text where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attribute s Text)
+        lens (_type' :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasZone (RecordResource s) s Text where
     zone =
-        lens (_zone :: RecordResource s -> TF.Attribute s Text)
+        lens (_zone :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
 instance P.HasComputedHostname (RecordResource s) Text
@@ -501,30 +501,30 @@ recordResource =
 Provides an UltraDNS Traffic Controller pool resource.
 -}
 data TcpoolResource s = TcpoolResource {
-      _act_on_probes                :: !(TF.Attribute s Text)
+      _act_on_probes                :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean to enable and disable pool records when probes are run. Default: @true@ . -}
-    , _backup_record_failover_delay :: !(TF.Attribute s Text)
+    , _backup_record_failover_delay :: !(TF.Attr s Text)
     {- ^ (Optional) Time in minutes that Traffic Controller waits after detecting that the pool record has failed before activating primary records. Valid values are integers @0@ - @30@ . Default: @0@ . -}
-    , _backup_record_rdata          :: !(TF.Attribute s Text)
+    , _backup_record_rdata          :: !(TF.Attr s Text)
     {- ^ (Optional) IPv4 address or CNAME for the backup record. Default: @nil@ . -}
-    , _description                  :: !(TF.Attribute s Text)
+    , _description                  :: !(TF.Attr s Text)
     {- ^ (Required) Description of the Traffic Controller pool. Valid values are strings less than 256 characters. -}
-    , _max_to_lb                    :: !(TF.Attribute s Text)
+    , _max_to_lb                    :: !(TF.Attr s Text)
     {- ^ (Optional) Determines the number of records to balance between. Valid values are integers @0@ - @len(rdata)@ . Default: @0@ . -}
-    , _name                         :: !(TF.Attribute s Text)
+    , _name                         :: !(TF.Attr s Text)
     {- ^ (Required) The name of the record -}
-    , _rdata                        :: !(TF.Attribute s Text)
+    , _rdata                        :: !(TF.Attr s Text)
     {- ^ (Required) a list of rdata blocks, one for each member in the pool. Record Data documented below. -}
-    , _run_probes                   :: !(TF.Attribute s Text)
+    , _run_probes                   :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean to run probes for this pool. Default: @true@ . -}
-    , _ttl                          :: !(TF.Attribute s Text)
+    , _ttl                          :: !(TF.Attr s Text)
     {- ^ (Optional) The TTL of the record. Default: @3600@ . -}
-    , _zone                         :: !(TF.Attribute s Text)
+    , _zone                         :: !(TF.Attr s Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (TcpoolResource s) where
-    toHCL TcpoolResource{..} = TF.block $ catMaybes
+    toHCL TcpoolResource{..} = TF.inline $ catMaybes
         [ TF.attribute "act_on_probes" _act_on_probes
         , TF.attribute "backup_record_failover_delay" _backup_record_failover_delay
         , TF.attribute "backup_record_rdata" _backup_record_rdata
@@ -539,52 +539,52 @@ instance TF.ToHCL (TcpoolResource s) where
 
 instance P.HasActOnProbes (TcpoolResource s) s Text where
     actOnProbes =
-        lens (_act_on_probes :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_act_on_probes :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _act_on_probes = a } :: TcpoolResource s)
 
 instance P.HasBackupRecordFailoverDelay (TcpoolResource s) s Text where
     backupRecordFailoverDelay =
-        lens (_backup_record_failover_delay :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_backup_record_failover_delay :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _backup_record_failover_delay = a } :: TcpoolResource s)
 
 instance P.HasBackupRecordRdata (TcpoolResource s) s Text where
     backupRecordRdata =
-        lens (_backup_record_rdata :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_backup_record_rdata :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _backup_record_rdata = a } :: TcpoolResource s)
 
 instance P.HasDescription (TcpoolResource s) s Text where
     description =
-        lens (_description :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_description :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: TcpoolResource s)
 
 instance P.HasMaxToLb (TcpoolResource s) s Text where
     maxToLb =
-        lens (_max_to_lb :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_max_to_lb :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _max_to_lb = a } :: TcpoolResource s)
 
 instance P.HasName (TcpoolResource s) s Text where
     name =
-        lens (_name :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_name :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TcpoolResource s)
 
 instance P.HasRdata (TcpoolResource s) s Text where
     rdata =
-        lens (_rdata :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_rdata :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _rdata = a } :: TcpoolResource s)
 
 instance P.HasRunProbes (TcpoolResource s) s Text where
     runProbes =
-        lens (_run_probes :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_run_probes :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _run_probes = a } :: TcpoolResource s)
 
 instance P.HasTtl (TcpoolResource s) s Text where
     ttl =
-        lens (_ttl :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_ttl :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: TcpoolResource s)
 
 instance P.HasZone (TcpoolResource s) s Text where
     zone =
-        lens (_zone :: TcpoolResource s -> TF.Attribute s Text)
+        lens (_zone :: TcpoolResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: TcpoolResource s)
 
 instance P.HasComputedHostname (TcpoolResource s) Text

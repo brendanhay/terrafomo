@@ -67,7 +67,7 @@ data RecordResource s = RecordResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RecordResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 instance P.HasComputedGtdLocation (RecordResource s) Text
 instance P.HasComputedName (RecordResource s) Text

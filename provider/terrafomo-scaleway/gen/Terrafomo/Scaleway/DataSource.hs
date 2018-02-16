@@ -74,16 +74,16 @@ Use this data source to get the ID of a registered Bootscript for use with
 the @scaleway_server@ resource.
 -}
 data BootscriptData s = BootscriptData {
-      _architecture :: !(TF.Attribute s Text)
+      _architecture :: !(TF.Attr s Text)
     {- ^ (Optional) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
-    , _name         :: !(TF.Attribute s Text)
+    , _name         :: !(TF.Attr s Text)
     {- ^ (Optional) Exact name of desired Bootscript -}
-    , _name_filter  :: !(TF.Attribute s Text)
+    , _name_filter  :: !(TF.Attr s Text)
     {- ^ (Optional) Regexp to match Bootscript name by -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (BootscriptData s) where
-    toHCL BootscriptData{..} = TF.block $ catMaybes
+    toHCL BootscriptData{..} = TF.inline $ catMaybes
         [ TF.attribute "architecture" _architecture
         , TF.attribute "name" _name
         , TF.attribute "name_filter" _name_filter
@@ -91,17 +91,17 @@ instance TF.ToHCL (BootscriptData s) where
 
 instance P.HasArchitecture (BootscriptData s) s Text where
     architecture =
-        lens (_architecture :: BootscriptData s -> TF.Attribute s Text)
+        lens (_architecture :: BootscriptData s -> TF.Attr s Text)
              (\s a -> s { _architecture = a } :: BootscriptData s)
 
 instance P.HasName (BootscriptData s) s Text where
     name =
-        lens (_name :: BootscriptData s -> TF.Attribute s Text)
+        lens (_name :: BootscriptData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: BootscriptData s)
 
 instance P.HasNameFilter (BootscriptData s) s Text where
     nameFilter =
-        lens (_name_filter :: BootscriptData s -> TF.Attribute s Text)
+        lens (_name_filter :: BootscriptData s -> TF.Attr s Text)
              (\s a -> s { _name_filter = a } :: BootscriptData s)
 
 instance P.HasComputedArchitecture (BootscriptData s) Text
@@ -127,16 +127,16 @@ Use this data source to get the ID of a registered Image for use with the
 @scaleway_server@ resource.
 -}
 data ImageData s = ImageData {
-      _architecture :: !(TF.Attribute s Text)
+      _architecture :: !(TF.Attr s Text)
     {- ^ (Required) any supported Scaleway architecture, e.g. @x86_64@ , @arm@ -}
-    , _name         :: !(TF.Attribute s Text)
+    , _name         :: !(TF.Attr s Text)
     {- ^ (Optional) Exact name of desired Image -}
-    , _name_filter  :: !(TF.Attribute s Text)
+    , _name_filter  :: !(TF.Attr s Text)
     {- ^ (Optional) Regexp to match Image name by -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ImageData s) where
-    toHCL ImageData{..} = TF.block $ catMaybes
+    toHCL ImageData{..} = TF.inline $ catMaybes
         [ TF.attribute "architecture" _architecture
         , TF.attribute "name" _name
         , TF.attribute "name_filter" _name_filter
@@ -144,17 +144,17 @@ instance TF.ToHCL (ImageData s) where
 
 instance P.HasArchitecture (ImageData s) s Text where
     architecture =
-        lens (_architecture :: ImageData s -> TF.Attribute s Text)
+        lens (_architecture :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _architecture = a } :: ImageData s)
 
 instance P.HasName (ImageData s) s Text where
     name =
-        lens (_name :: ImageData s -> TF.Attribute s Text)
+        lens (_name :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasNameFilter (ImageData s) s Text where
     nameFilter =
-        lens (_name_filter :: ImageData s -> TF.Attribute s Text)
+        lens (_name_filter :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name_filter = a } :: ImageData s)
 
 instance P.HasComputedArchitecture (ImageData s) Text

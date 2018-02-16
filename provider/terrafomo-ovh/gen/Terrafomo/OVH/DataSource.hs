@@ -71,26 +71,26 @@ Use this data source to retrieve information about a region associated with
 a public cloud project. The region must be associated with the project.
 -}
 data RegionData s = RegionData {
-      _project_id :: !(TF.Attribute s Text)
+      _project_id :: !(TF.Attr s Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _region     :: !(TF.Attribute s Text)
+    , _region     :: !(TF.Attr s Text)
     {- ^ (Required) The name of the region associated with the public cloud project. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RegionData s) where
-    toHCL RegionData{..} = TF.block $ catMaybes
+    toHCL RegionData{..} = TF.inline $ catMaybes
         [ TF.attribute "project_id" _project_id
         , TF.attribute "region" _region
         ]
 
 instance P.HasProjectId (RegionData s) s Text where
     projectId =
-        lens (_project_id :: RegionData s -> TF.Attribute s Text)
+        lens (_project_id :: RegionData s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: RegionData s)
 
 instance P.HasRegion (RegionData s) s Text where
     region =
-        lens (_region :: RegionData s -> TF.Attribute s Text)
+        lens (_region :: RegionData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: RegionData s)
 
 instance P.HasComputedContinentCode (RegionData s) Text
@@ -112,18 +112,18 @@ regionData =
 Use this data source to get the regions of a public cloud project.
 -}
 data RegionsData s = RegionsData {
-      _project_id :: !(TF.Attribute s Text)
+      _project_id :: !(TF.Attr s Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RegionsData s) where
-    toHCL RegionsData{..} = TF.block $ catMaybes
+    toHCL RegionsData{..} = TF.inline $ catMaybes
         [ TF.attribute "project_id" _project_id
         ]
 
 instance P.HasProjectId (RegionsData s) s Text where
     projectId =
-        lens (_project_id :: RegionsData s -> TF.Attribute s Text)
+        lens (_project_id :: RegionsData s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: RegionsData s)
 
 instance P.HasComputedNames (RegionsData s) Text

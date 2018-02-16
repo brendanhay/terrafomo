@@ -609,22 +609,22 @@ import qualified Terrafomo.Schema    as TF
 Provides a CDN Accelerated Domain resource.
 -}
 data CdnDomainResource s = CdnDomainResource {
-      _cdn_type    :: !(TF.Attribute s Text)
+      _cdn_type    :: !(TF.Attr s Text)
     {- ^ (Required) Cdn type of the accelerated domain. Valid values are @web@ , @download@ , @video@ , @liveStream@ . -}
-    , _domain_name :: !(TF.Attribute s Text)
+    , _domain_name :: !(TF.Attr s Text)
     {- ^ (Required) Name of the accelerated domain. This name without suffix can have a string of 1 to 63 characters, must contain only alphanumeric characters or "-", and must not begin or end with "-", and "-" must not in the 3th and 4th character positions at the same time. Suffix @.sh@ and @.tel@ are not supported. -}
-    , _scope       :: !(TF.Attribute s Text)
+    , _scope       :: !(TF.Attr s Text)
     {- ^ (Optional) Scope of the accelerated domain. Valid values are @domestic@ , @overseas@ , @global@ . Default value is @domestic@ . This parameter's setting is valid Only for the international users and domestic L3 and above users . -}
-    , _source_port :: !(TF.Attribute s Text)
+    , _source_port :: !(TF.Attr s Text)
     {- ^ (Optional) Source port of the accelerated domain. Valid values are @80@ and @443@ . Default value is @80@ . You must use @80@ when the @source_type@ is @oss@ . -}
-    , _source_type :: !(TF.Attribute s Text)
+    , _source_type :: !(TF.Attr s Text)
     {- ^ (Optional) Source type of the accelerated domain. Valid values are @ipaddr@ , @domain@ , @oss@ . You must set this parameter when @cdn_type@ value is not @liveStream@ . -}
-    , _sources     :: !(TF.Attribute s Text)
+    , _sources     :: !(TF.Attr s Text)
     {- ^ (Optional, Type: list) Sources of the accelerated domain. It's a list of domain names or IP address and consists of at most 20 items. You must set this parameter when @cdn_type@ value is not @liveStream@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CdnDomainResource s) where
-    toHCL CdnDomainResource{..} = TF.block $ catMaybes
+    toHCL CdnDomainResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cdn_type" _cdn_type
         , TF.attribute "domain_name" _domain_name
         , TF.attribute "scope" _scope
@@ -635,32 +635,32 @@ instance TF.ToHCL (CdnDomainResource s) where
 
 instance P.HasCdnType (CdnDomainResource s) s Text where
     cdnType =
-        lens (_cdn_type :: CdnDomainResource s -> TF.Attribute s Text)
+        lens (_cdn_type :: CdnDomainResource s -> TF.Attr s Text)
              (\s a -> s { _cdn_type = a } :: CdnDomainResource s)
 
 instance P.HasDomainName (CdnDomainResource s) s Text where
     domainName =
-        lens (_domain_name :: CdnDomainResource s -> TF.Attribute s Text)
+        lens (_domain_name :: CdnDomainResource s -> TF.Attr s Text)
              (\s a -> s { _domain_name = a } :: CdnDomainResource s)
 
 instance P.HasScope (CdnDomainResource s) s Text where
     scope =
-        lens (_scope :: CdnDomainResource s -> TF.Attribute s Text)
+        lens (_scope :: CdnDomainResource s -> TF.Attr s Text)
              (\s a -> s { _scope = a } :: CdnDomainResource s)
 
 instance P.HasSourcePort (CdnDomainResource s) s Text where
     sourcePort =
-        lens (_source_port :: CdnDomainResource s -> TF.Attribute s Text)
+        lens (_source_port :: CdnDomainResource s -> TF.Attr s Text)
              (\s a -> s { _source_port = a } :: CdnDomainResource s)
 
 instance P.HasSourceType (CdnDomainResource s) s Text where
     sourceType =
-        lens (_source_type :: CdnDomainResource s -> TF.Attribute s Text)
+        lens (_source_type :: CdnDomainResource s -> TF.Attr s Text)
              (\s a -> s { _source_type = a } :: CdnDomainResource s)
 
 instance P.HasSources (CdnDomainResource s) s Text where
     sources =
-        lens (_sources :: CdnDomainResource s -> TF.Attribute s Text)
+        lens (_sources :: CdnDomainResource s -> TF.Attr s Text)
              (\s a -> s { _sources = a } :: CdnDomainResource s)
 
 instance P.HasComputedAuthConfig (CdnDomainResource s) Text
@@ -696,30 +696,30 @@ cdnDomainResource =
 Provides a container cluster resource.
 -}
 data ContainerClusterResource s = ContainerClusterResource {
-      _cidr_block    :: !(TF.Attribute s Text)
+      _cidr_block    :: !(TF.Attr s Text)
     {- ^ (Required, Force new resource) The CIDR block for the Container. Its valid value are @192.168.X.0/24@ or @172.18.X.0/24@ ~ @172.31.X.0/24@ . And it cannot be equal to vswitch's cidr_block and sub cidr block. -}
-    , _disk_category :: !(TF.Attribute s Text)
+    , _disk_category :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The data disk category of ECS instance node. Its valid value are @cloud_ssd@ and @cloud_efficiency@ . Default to @cloud_efficiency@ . -}
-    , _disk_size     :: !(TF.Attribute s Text)
+    , _disk_size     :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The data disk size of ECS instance node. Its valid value is 20~32768 GB. Default to 20. -}
-    , _image_id      :: !(TF.Attribute s Text)
+    , _image_id      :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The image ID of ECS instance node used. Default to System automate allocated. -}
-    , _instance_type :: !(TF.Attribute s Text)
+    , _instance_type :: !(TF.Attr s Text)
     {- ^ (Required, Force new resource) The type of ECS instance node. -}
-    , _name          :: !(TF.Attribute s Text)
+    , _name          :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The container cluster's name. It is the only in one Alicloud account. -}
-    , _name_prefix   :: !(TF.Attribute s Text)
+    , _name_prefix   :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The container cluster name's prefix. It is conflict with @name@ . If it is specified, terraform will using it to build the only cluster name. -}
-    , _password      :: !(TF.Attribute s Text)
+    , _password      :: !(TF.Attr s Text)
     {- ^ (Required, Force new resource) The password of ECS instance node. -}
-    , _size          :: !(TF.Attribute s Text)
+    , _size          :: !(TF.Attr s Text)
     {- ^ - The ECS node number of the container cluster. Its value choices are 1~20, and default to 1. -}
-    , _vswitch_id    :: !(TF.Attribute s Text)
+    , _vswitch_id    :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The password of ECS instance node. If it is not specified, the container cluster's network mode will be @Classic@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerClusterResource s) where
-    toHCL ContainerClusterResource{..} = TF.block $ catMaybes
+    toHCL ContainerClusterResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cidr_block" _cidr_block
         , TF.attribute "disk_category" _disk_category
         , TF.attribute "disk_size" _disk_size
@@ -734,52 +734,52 @@ instance TF.ToHCL (ContainerClusterResource s) where
 
 instance P.HasCidrBlock (ContainerClusterResource s) s Text where
     cidrBlock =
-        lens (_cidr_block :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_cidr_block :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _cidr_block = a } :: ContainerClusterResource s)
 
 instance P.HasDiskCategory (ContainerClusterResource s) s Text where
     diskCategory =
-        lens (_disk_category :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_disk_category :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _disk_category = a } :: ContainerClusterResource s)
 
 instance P.HasDiskSize (ContainerClusterResource s) s Text where
     diskSize =
-        lens (_disk_size :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_disk_size :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _disk_size = a } :: ContainerClusterResource s)
 
 instance P.HasImageId (ContainerClusterResource s) s Text where
     imageId =
-        lens (_image_id :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_image_id :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _image_id = a } :: ContainerClusterResource s)
 
 instance P.HasInstanceType (ContainerClusterResource s) s Text where
     instanceType =
-        lens (_instance_type :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_instance_type :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _instance_type = a } :: ContainerClusterResource s)
 
 instance P.HasName (ContainerClusterResource s) s Text where
     name =
-        lens (_name :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_name :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ContainerClusterResource s)
 
 instance P.HasNamePrefix (ContainerClusterResource s) s Text where
     namePrefix =
-        lens (_name_prefix :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_name_prefix :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _name_prefix = a } :: ContainerClusterResource s)
 
 instance P.HasPassword (ContainerClusterResource s) s Text where
     password =
-        lens (_password :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_password :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: ContainerClusterResource s)
 
 instance P.HasSize (ContainerClusterResource s) s Text where
     size =
-        lens (_size :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_size :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: ContainerClusterResource s)
 
 instance P.HasVswitchId (ContainerClusterResource s) s Text where
     vswitchId =
-        lens (_vswitch_id :: ContainerClusterResource s -> TF.Attribute s Text)
+        lens (_vswitch_id :: ContainerClusterResource s -> TF.Attr s Text)
              (\s a -> s { _vswitch_id = a } :: ContainerClusterResource s)
 
 instance P.HasComputedId (ContainerClusterResource s) Text
@@ -811,18 +811,18 @@ database some access privilege. A database can be granted by multiple
 account.
 -}
 data DbAccountPrivilegeResource s = DbAccountPrivilegeResource {
-      _account_name :: !(TF.Attribute s Text)
+      _account_name :: !(TF.Attr s Text)
     {- ^ (Required) A specified account name. -}
-    , _db_names     :: !(TF.Attribute s Text)
+    , _db_names     :: !(TF.Attr s Text)
     {- ^ (Optional) List of specified database name. -}
-    , _instance_id  :: !(TF.Attribute s Text)
+    , _instance_id  :: !(TF.Attr s Text)
     {- ^ (Required) The Id of instance in which account belongs. -}
-    , _privilege    :: !(TF.Attribute s Text)
+    , _privilege    :: !(TF.Attr s Text)
     {- ^ - The privilege of one account access database. Valid values: ["ReadOnly", "ReadWrite"]. Default to "ReadOnly". -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DbAccountPrivilegeResource s) where
-    toHCL DbAccountPrivilegeResource{..} = TF.block $ catMaybes
+    toHCL DbAccountPrivilegeResource{..} = TF.inline $ catMaybes
         [ TF.attribute "account_name" _account_name
         , TF.attribute "db_names" _db_names
         , TF.attribute "instance_id" _instance_id
@@ -831,22 +831,22 @@ instance TF.ToHCL (DbAccountPrivilegeResource s) where
 
 instance P.HasAccountName (DbAccountPrivilegeResource s) s Text where
     accountName =
-        lens (_account_name :: DbAccountPrivilegeResource s -> TF.Attribute s Text)
+        lens (_account_name :: DbAccountPrivilegeResource s -> TF.Attr s Text)
              (\s a -> s { _account_name = a } :: DbAccountPrivilegeResource s)
 
 instance P.HasDbNames (DbAccountPrivilegeResource s) s Text where
     dbNames =
-        lens (_db_names :: DbAccountPrivilegeResource s -> TF.Attribute s Text)
+        lens (_db_names :: DbAccountPrivilegeResource s -> TF.Attr s Text)
              (\s a -> s { _db_names = a } :: DbAccountPrivilegeResource s)
 
 instance P.HasInstanceId (DbAccountPrivilegeResource s) s Text where
     instanceId =
-        lens (_instance_id :: DbAccountPrivilegeResource s -> TF.Attribute s Text)
+        lens (_instance_id :: DbAccountPrivilegeResource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: DbAccountPrivilegeResource s)
 
 instance P.HasPrivilege (DbAccountPrivilegeResource s) s Text where
     privilege =
-        lens (_privilege :: DbAccountPrivilegeResource s -> TF.Attribute s Text)
+        lens (_privilege :: DbAccountPrivilegeResource s -> TF.Attr s Text)
              (\s a -> s { _privilege = a } :: DbAccountPrivilegeResource s)
 
 instance P.HasComputedAccountName (DbAccountPrivilegeResource s) Text
@@ -871,20 +871,20 @@ Provides an RDS account resource and used to manage databases. A RDS
 instance supports multiple database account.
 -}
 data DbAccountResource s = DbAccountResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) Database description. It cannot begin with https://. It must start with a Chinese character or English letter. It can include Chinese and English characters, underlines (_), hyphens (-), and numbers. The length may be 2-256 characters. -}
-    , _instance_id :: !(TF.Attribute s Text)
+    , _instance_id :: !(TF.Attr s Text)
     {- ^ (Required) The Id of instance in which account belongs. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters. -}
-    , _password    :: !(TF.Attribute s Text)
+    , _password    :: !(TF.Attr s Text)
     {- ^ (Required) Operation password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters. -}
-    , _type'       :: !(TF.Attribute s Text)
+    , _type'       :: !(TF.Attr s Text)
     {- ^ - Privilege type of account. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DbAccountResource s) where
-    toHCL DbAccountResource{..} = TF.block $ catMaybes
+    toHCL DbAccountResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "instance_id" _instance_id
         , TF.attribute "name" _name
@@ -894,27 +894,27 @@ instance TF.ToHCL (DbAccountResource s) where
 
 instance P.HasDescription (DbAccountResource s) s Text where
     description =
-        lens (_description :: DbAccountResource s -> TF.Attribute s Text)
+        lens (_description :: DbAccountResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DbAccountResource s)
 
 instance P.HasInstanceId (DbAccountResource s) s Text where
     instanceId =
-        lens (_instance_id :: DbAccountResource s -> TF.Attribute s Text)
+        lens (_instance_id :: DbAccountResource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: DbAccountResource s)
 
 instance P.HasName (DbAccountResource s) s Text where
     name =
-        lens (_name :: DbAccountResource s -> TF.Attribute s Text)
+        lens (_name :: DbAccountResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DbAccountResource s)
 
 instance P.HasPassword (DbAccountResource s) s Text where
     password =
-        lens (_password :: DbAccountResource s -> TF.Attribute s Text)
+        lens (_password :: DbAccountResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: DbAccountResource s)
 
 instance P.HasType' (DbAccountResource s) s Text where
     type' =
-        lens (_type' :: DbAccountResource s -> TF.Attribute s Text)
+        lens (_type' :: DbAccountResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DbAccountResource s)
 
 instance P.HasComputedDescription (DbAccountResource s) Text
@@ -941,22 +941,22 @@ instance backup policy. ~> NOTE: Each DB instance has a backup policy and it
 will be set default values when destroying the resource.
 -}
 data DbBackupPolicyResource s = DbBackupPolicyResource {
-      _backup_period        :: !(TF.Attribute s Text)
+      _backup_period        :: !(TF.Attr s Text)
     {- ^ (Optional) DB Instance backup period. Valid values: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]. Default to ["Tuesday", "Thursday", "Saturday"]. -}
-    , _backup_time          :: !(TF.Attribute s Text)
+    , _backup_time          :: !(TF.Attr s Text)
     {- ^ (Optional) DB instance backup time, in the format of HH:mmZ- HH:mmZ. Time setting interval is one hour. Default to "02:00Z-03:00Z". China time is 8 hours behind it. -}
-    , _instance_id          :: !(TF.Attribute s Text)
+    , _instance_id          :: !(TF.Attr s Text)
     {- ^ (Required) The Id of instance that can run database. -}
-    , _log_backup           :: !(TF.Attribute s Text)
+    , _log_backup           :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to backup instance log. Default to true. -}
-    , _log_retention_period :: !(TF.Attribute s Text)
+    , _log_retention_period :: !(TF.Attr s Text)
     {- ^ (Optional) Instance log backup retention days. Valid values: [7-730]. Default to 7. It can be larger than 'retention_period'. -}
-    , _retention_period     :: !(TF.Attribute s Text)
+    , _retention_period     :: !(TF.Attr s Text)
     {- ^ (Optional) Instance backup retention days. Valid values: [7-730]. Default to 7. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DbBackupPolicyResource s) where
-    toHCL DbBackupPolicyResource{..} = TF.block $ catMaybes
+    toHCL DbBackupPolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "backup_period" _backup_period
         , TF.attribute "backup_time" _backup_time
         , TF.attribute "instance_id" _instance_id
@@ -967,32 +967,32 @@ instance TF.ToHCL (DbBackupPolicyResource s) where
 
 instance P.HasBackupPeriod (DbBackupPolicyResource s) s Text where
     backupPeriod =
-        lens (_backup_period :: DbBackupPolicyResource s -> TF.Attribute s Text)
+        lens (_backup_period :: DbBackupPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _backup_period = a } :: DbBackupPolicyResource s)
 
 instance P.HasBackupTime (DbBackupPolicyResource s) s Text where
     backupTime =
-        lens (_backup_time :: DbBackupPolicyResource s -> TF.Attribute s Text)
+        lens (_backup_time :: DbBackupPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _backup_time = a } :: DbBackupPolicyResource s)
 
 instance P.HasInstanceId (DbBackupPolicyResource s) s Text where
     instanceId =
-        lens (_instance_id :: DbBackupPolicyResource s -> TF.Attribute s Text)
+        lens (_instance_id :: DbBackupPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: DbBackupPolicyResource s)
 
 instance P.HasLogBackup (DbBackupPolicyResource s) s Text where
     logBackup =
-        lens (_log_backup :: DbBackupPolicyResource s -> TF.Attribute s Text)
+        lens (_log_backup :: DbBackupPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _log_backup = a } :: DbBackupPolicyResource s)
 
 instance P.HasLogRetentionPeriod (DbBackupPolicyResource s) s Text where
     logRetentionPeriod =
-        lens (_log_retention_period :: DbBackupPolicyResource s -> TF.Attribute s Text)
+        lens (_log_retention_period :: DbBackupPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _log_retention_period = a } :: DbBackupPolicyResource s)
 
 instance P.HasRetentionPeriod (DbBackupPolicyResource s) s Text where
     retentionPeriod =
-        lens (_retention_period :: DbBackupPolicyResource s -> TF.Attribute s Text)
+        lens (_retention_period :: DbBackupPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _retention_period = a } :: DbBackupPolicyResource s)
 
 instance P.HasComputedBackupPeriod (DbBackupPolicyResource s) Text
@@ -1024,16 +1024,16 @@ unnecessary conflict, please specified a internet connection prefix before
 applying the resource.
 -}
 data DbConnectionResource s = DbConnectionResource {
-      _connection_prefix :: !(TF.Attribute s Text)
+      _connection_prefix :: !(TF.Attr s Text)
     {- ^ (Optional) Prefix of an Internet connection string. It must be checked for uniqueness. It may consist of lowercase letters, numbers, and underlines, and must start with a letter and have no more than 30 characters. Default to <instance_id> + 'tf'. -}
-    , _instance_id       :: !(TF.Attribute s Text)
+    , _instance_id       :: !(TF.Attr s Text)
     {- ^ (Required) The Id of instance that can run database. -}
-    , _port              :: !(TF.Attribute s Text)
+    , _port              :: !(TF.Attr s Text)
     {- ^ (Optional) Internet connection port. Valid value: [3001-3999]. Default to 3306. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DbConnectionResource s) where
-    toHCL DbConnectionResource{..} = TF.block $ catMaybes
+    toHCL DbConnectionResource{..} = TF.inline $ catMaybes
         [ TF.attribute "connection_prefix" _connection_prefix
         , TF.attribute "instance_id" _instance_id
         , TF.attribute "port" _port
@@ -1041,17 +1041,17 @@ instance TF.ToHCL (DbConnectionResource s) where
 
 instance P.HasConnectionPrefix (DbConnectionResource s) s Text where
     connectionPrefix =
-        lens (_connection_prefix :: DbConnectionResource s -> TF.Attribute s Text)
+        lens (_connection_prefix :: DbConnectionResource s -> TF.Attr s Text)
              (\s a -> s { _connection_prefix = a } :: DbConnectionResource s)
 
 instance P.HasInstanceId (DbConnectionResource s) s Text where
     instanceId =
-        lens (_instance_id :: DbConnectionResource s -> TF.Attribute s Text)
+        lens (_instance_id :: DbConnectionResource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: DbConnectionResource s)
 
 instance P.HasPort (DbConnectionResource s) s Text where
     port =
-        lens (_port :: DbConnectionResource s -> TF.Attribute s Text)
+        lens (_port :: DbConnectionResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: DbConnectionResource s)
 
 instance P.HasComputedConnectionPrefix (DbConnectionResource s) Text
@@ -1075,18 +1075,18 @@ Provides an RDS database resource. A DB database deployed in a DB instance.
 A DB instance can own multiple databases.
 -}
 data DbDatabaseResource s = DbDatabaseResource {
-      _character_set :: !(TF.Attribute s Text)
+      _character_set :: !(TF.Attr s Text)
     {- ^ (Required) Character set. The value range is limited to the following: -}
-    , _description   :: !(TF.Attribute s Text)
+    , _description   :: !(TF.Attr s Text)
     {- ^ (Optional) Database description. It cannot begin with https://. It must start with a Chinese character or English letter. It can include Chinese and English characters, underlines (_), hyphens (-), and numbers. The length may be 2-256 characters. -}
-    , _instance_id   :: !(TF.Attribute s Text)
+    , _instance_id   :: !(TF.Attr s Text)
     {- ^ (Required) The Id of instance that can run database. -}
-    , _name          :: !(TF.Attribute s Text)
+    , _name          :: !(TF.Attr s Text)
     {- ^ (Required) Name of the database requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 64 characters. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DbDatabaseResource s) where
-    toHCL DbDatabaseResource{..} = TF.block $ catMaybes
+    toHCL DbDatabaseResource{..} = TF.inline $ catMaybes
         [ TF.attribute "character_set" _character_set
         , TF.attribute "description" _description
         , TF.attribute "instance_id" _instance_id
@@ -1095,22 +1095,22 @@ instance TF.ToHCL (DbDatabaseResource s) where
 
 instance P.HasCharacterSet (DbDatabaseResource s) s Text where
     characterSet =
-        lens (_character_set :: DbDatabaseResource s -> TF.Attribute s Text)
+        lens (_character_set :: DbDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _character_set = a } :: DbDatabaseResource s)
 
 instance P.HasDescription (DbDatabaseResource s) s Text where
     description =
-        lens (_description :: DbDatabaseResource s -> TF.Attribute s Text)
+        lens (_description :: DbDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DbDatabaseResource s)
 
 instance P.HasInstanceId (DbDatabaseResource s) s Text where
     instanceId =
-        lens (_instance_id :: DbDatabaseResource s -> TF.Attribute s Text)
+        lens (_instance_id :: DbDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: DbDatabaseResource s)
 
 instance P.HasName (DbDatabaseResource s) s Text where
     name =
-        lens (_name :: DbDatabaseResource s -> TF.Attribute s Text)
+        lens (_name :: DbDatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DbDatabaseResource s)
 
 instance P.HasComputedCharacterSet (DbDatabaseResource s) Text
@@ -1136,32 +1136,32 @@ environment in the cloud. A DB instance can contain multiple user-created
 databases.
 -}
 data DbInstanceResource s = DbInstanceResource {
-      _engine               :: !(TF.Attribute s Text)
+      _engine               :: !(TF.Attr s Text)
     {- ^ (Required) Database type. Value options: MySQL, SQLServer, PostgreSQL, and PPAS. -}
-    , _engine_version       :: !(TF.Attribute s Text)
+    , _engine_version       :: !(TF.Attr s Text)
     {- ^ (Required) Database version. Value options: -}
-    , _instance_charge_type :: !(TF.Attribute s Text)
+    , _instance_charge_type :: !(TF.Attr s Text)
     {- ^ (Optional) Valid values are @Prepaid@ , @Postpaid@ , Default to @Postpaid@ . -}
-    , _instance_name        :: !(TF.Attribute s Text)
+    , _instance_name        :: !(TF.Attr s Text)
     {- ^ (Optional) The name of DB instance. It a string of 2 to 256 characters. -}
-    , _instance_storage     :: !(TF.Attribute s Text)
+    , _instance_storage     :: !(TF.Attr s Text)
     {- ^ (Required) User-defined DB instance storage space. Value range: -}
-    , _instance_type        :: !(TF.Attribute s Text)
+    , _instance_type        :: !(TF.Attr s Text)
     {- ^ (Required) DB Instance type. For details, see <https://www.alibabacloud.com/help/doc-detail/26312.htm> . -}
-    , _multi_az             :: !(TF.Attribute s Text)
+    , _multi_az             :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to use multiple availability zone in specified region. It conflict with @zone_id@ . -}
-    , _period               :: !(TF.Attribute s Text)
+    , _period               :: !(TF.Attr s Text)
     {- ^ (Optional) The duration that you will buy DB instance (in month). It is valid when instance_charge_type is @PrePaid@ . Valid values: [1~9], 12, 24, 36. Default to 1. -}
-    , _security_ips         :: !(TF.Attribute s Text)
+    , _security_ips         :: !(TF.Attr s Text)
     {- ^ (Optional) List of IP addresses allowed to access all databases of an instance. The list contains up to 1,000 IP addresses, separated by commas. Supported formats include 0.0.0.0/0, 10.23.12.24 (IP), and 10.23.12.24/24 (Classless Inter-Domain Routing (CIDR) mode. /24 represents the length of the prefix in an IP address. The range of the prefix length is [1,32]). -}
-    , _vswitch_id           :: !(TF.Attribute s Text)
+    , _vswitch_id           :: !(TF.Attr s Text)
     {- ^ (Optional) The virtual switch ID to launch DB instances in one VPC. -}
-    , _zone_id              :: !(TF.Attribute s Text)
+    , _zone_id              :: !(TF.Attr s Text)
     {- ^ (Optional) The Zone to launch the DB instance. It is ignored and will be computed when set @vswitch_id@ . It conflict with @multi_az@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DbInstanceResource s) where
-    toHCL DbInstanceResource{..} = TF.block $ catMaybes
+    toHCL DbInstanceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "engine" _engine
         , TF.attribute "engine_version" _engine_version
         , TF.attribute "instance_charge_type" _instance_charge_type
@@ -1177,57 +1177,57 @@ instance TF.ToHCL (DbInstanceResource s) where
 
 instance P.HasEngine (DbInstanceResource s) s Text where
     engine =
-        lens (_engine :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_engine :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _engine = a } :: DbInstanceResource s)
 
 instance P.HasEngineVersion (DbInstanceResource s) s Text where
     engineVersion =
-        lens (_engine_version :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_engine_version :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _engine_version = a } :: DbInstanceResource s)
 
 instance P.HasInstanceChargeType (DbInstanceResource s) s Text where
     instanceChargeType =
-        lens (_instance_charge_type :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_instance_charge_type :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_charge_type = a } :: DbInstanceResource s)
 
 instance P.HasInstanceName (DbInstanceResource s) s Text where
     instanceName =
-        lens (_instance_name :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_instance_name :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_name = a } :: DbInstanceResource s)
 
 instance P.HasInstanceStorage (DbInstanceResource s) s Text where
     instanceStorage =
-        lens (_instance_storage :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_instance_storage :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_storage = a } :: DbInstanceResource s)
 
 instance P.HasInstanceType (DbInstanceResource s) s Text where
     instanceType =
-        lens (_instance_type :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_instance_type :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_type = a } :: DbInstanceResource s)
 
 instance P.HasMultiAz (DbInstanceResource s) s Text where
     multiAz =
-        lens (_multi_az :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_multi_az :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _multi_az = a } :: DbInstanceResource s)
 
 instance P.HasPeriod (DbInstanceResource s) s Text where
     period =
-        lens (_period :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_period :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _period = a } :: DbInstanceResource s)
 
 instance P.HasSecurityIps (DbInstanceResource s) s Text where
     securityIps =
-        lens (_security_ips :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_security_ips :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _security_ips = a } :: DbInstanceResource s)
 
 instance P.HasVswitchId (DbInstanceResource s) s Text where
     vswitchId =
-        lens (_vswitch_id :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_vswitch_id :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _vswitch_id = a } :: DbInstanceResource s)
 
 instance P.HasZoneId (DbInstanceResource s) s Text where
     zoneId =
-        lens (_zone_id :: DbInstanceResource s -> TF.Attribute s Text)
+        lens (_zone_id :: DbInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _zone_id = a } :: DbInstanceResource s)
 
 instance P.HasComputedBackupRetentionPeriod (DbInstanceResource s) Text
@@ -1277,26 +1277,26 @@ Provides an Alicloud ECS Disk Attachment as a resource, to attach and detach
 disks from ECS Instances.
 -}
 data DiskAttachmentResource s = DiskAttachmentResource {
-      _disk_id     :: !(TF.Attribute s Text)
+      _disk_id     :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) ID of the Disk to be attached. -}
-    , _instance_id :: !(TF.Attribute s Text)
+    , _instance_id :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) ID of the Instance to attach to. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DiskAttachmentResource s) where
-    toHCL DiskAttachmentResource{..} = TF.block $ catMaybes
+    toHCL DiskAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "disk_id" _disk_id
         , TF.attribute "instance_id" _instance_id
         ]
 
 instance P.HasDiskId (DiskAttachmentResource s) s Text where
     diskId =
-        lens (_disk_id :: DiskAttachmentResource s -> TF.Attribute s Text)
+        lens (_disk_id :: DiskAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _disk_id = a } :: DiskAttachmentResource s)
 
 instance P.HasInstanceId (DiskAttachmentResource s) s Text where
     instanceId =
-        lens (_instance_id :: DiskAttachmentResource s -> TF.Attribute s Text)
+        lens (_instance_id :: DiskAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: DiskAttachmentResource s)
 
 instance P.HasComputedDeviceName (DiskAttachmentResource s) Text
@@ -1319,24 +1319,24 @@ must more than the size of snapshot which @snapshot_id@ represents.
 Currently, @alicloud_disk@ doesn't resize disk.
 -}
 data DiskResource s = DiskResource {
-      _availability_zone :: !(TF.Attribute s Text)
+      _availability_zone :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The Zone to create the disk in. -}
-    , _category          :: !(TF.Attribute s Text)
+    , _category          :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) Category of the disk. Valid values are @cloud@ , @cloud_efficiency@ and @cloud_ssd@ . Default is @cloud_efficiency@ . -}
-    , _description       :: !(TF.Attribute s Text)
+    , _description       :: !(TF.Attr s Text)
     {- ^ (Optional) Description of the disk. This description can have a string of 2 to 256 characters, It cannot begin with http:// or https://. Default value is null. -}
-    , _name              :: !(TF.Attribute s Text)
+    , _name              :: !(TF.Attr s Text)
     {- ^ (Optional) Name of the ECS disk. This name can have a string of 2 to 128 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin or end with a hyphen, and must not begin with http:// or https://. Default value is null. -}
-    , _size              :: !(TF.Attribute s Text)
+    , _size              :: !(TF.Attr s Text)
     {- ^ (Required) The size of the disk in GiBs, and it value range: 20 ~ 32768. -}
-    , _snapshot_id       :: !(TF.Attribute s Text)
+    , _snapshot_id       :: !(TF.Attr s Text)
     {- ^ (Optional) A snapshot to base the disk off of. If it is specified, @size@ will be invalid and the disk size is equals to the snapshot size. -}
-    , _tags              :: !(TF.Attribute s Text)
+    , _tags              :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DiskResource s) where
-    toHCL DiskResource{..} = TF.block $ catMaybes
+    toHCL DiskResource{..} = TF.inline $ catMaybes
         [ TF.attribute "availability_zone" _availability_zone
         , TF.attribute "category" _category
         , TF.attribute "description" _description
@@ -1348,37 +1348,37 @@ instance TF.ToHCL (DiskResource s) where
 
 instance P.HasAvailabilityZone (DiskResource s) s Text where
     availabilityZone =
-        lens (_availability_zone :: DiskResource s -> TF.Attribute s Text)
+        lens (_availability_zone :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _availability_zone = a } :: DiskResource s)
 
 instance P.HasCategory (DiskResource s) s Text where
     category =
-        lens (_category :: DiskResource s -> TF.Attribute s Text)
+        lens (_category :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _category = a } :: DiskResource s)
 
 instance P.HasDescription (DiskResource s) s Text where
     description =
-        lens (_description :: DiskResource s -> TF.Attribute s Text)
+        lens (_description :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DiskResource s)
 
 instance P.HasName (DiskResource s) s Text where
     name =
-        lens (_name :: DiskResource s -> TF.Attribute s Text)
+        lens (_name :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DiskResource s)
 
 instance P.HasSize (DiskResource s) s Text where
     size =
-        lens (_size :: DiskResource s -> TF.Attribute s Text)
+        lens (_size :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: DiskResource s)
 
 instance P.HasSnapshotId (DiskResource s) s Text where
     snapshotId =
-        lens (_snapshot_id :: DiskResource s -> TF.Attribute s Text)
+        lens (_snapshot_id :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_id = a } :: DiskResource s)
 
 instance P.HasTags (DiskResource s) s Text where
     tags =
-        lens (_tags :: DiskResource s -> TF.Attribute s Text)
+        lens (_tags :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: DiskResource s)
 
 instance P.HasComputedAvailabilityZone (DiskResource s) Text
@@ -1409,18 +1409,18 @@ diskResource =
 Provides a DNS Group resource.
 -}
 data DnsGroupResource s = DnsGroupResource {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) Name of the domain group. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsGroupResource s) where
-    toHCL DnsGroupResource{..} = TF.block $ catMaybes
+    toHCL DnsGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (DnsGroupResource s) s Text where
     name =
-        lens (_name :: DnsGroupResource s -> TF.Attribute s Text)
+        lens (_name :: DnsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsGroupResource s)
 
 instance P.HasComputedId (DnsGroupResource s) Text
@@ -1438,24 +1438,24 @@ dnsGroupResource =
 Provides a DNS Record resource.
 -}
 data DnsResource s = DnsResource {
-      _host_record :: !(TF.Attribute s Text)
+      _host_record :: !(TF.Attr s Text)
     {- ^ (Required) Host record for the domain record. This host_record can have at most 253 characters, and each part split with "." can have at most 63 characters, and must contain only alphanumeric characters or hyphens, such as "-",".","*","@",  and must not begin or end with "-". -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) Name of the domain. This name without suffix can have a string of 1 to 63 characters, must contain only alphanumeric characters or "-", and must not begin or end with "-", and "-" must not in the 3th and 4th character positions at the same time. Suffix @.sh@ and @.tel@ are not supported. -}
-    , _priority    :: !(TF.Attribute s Text)
+    , _priority    :: !(TF.Attr s Text)
     {- ^ (Optional) The priority of domain record. Valid values are @[1-10]@ . When the @type@ is @MX@ , this parameter is required. -}
-    , _routing     :: !(TF.Attribute s Text)
+    , _routing     :: !(TF.Attr s Text)
     {- ^ (Optional) The parsing line of domain record. Valid values are @default@ , @telecom@ , @unicom@ , @mobile@ , @oversea@ and @edu@ . When the @type@ is @FORWORD_URL@ , this parameter must be @default@ . Default value is @default@ . -}
-    , _ttl         :: !(TF.Attribute s Text)
+    , _ttl         :: !(TF.Attr s Text)
     {- ^ (Optional) The effective time of domain record. Its scope depends on the edition of the cloud resolution. Free is @[600, 86400]@ , Basic is @[120, 86400]@ , Standard is @[60, 86400]@ , Ultimate is @[10, 86400]@ , Exclusive is @[1, 86400]@ . Default value is @600@ . -}
-    , _type'       :: !(TF.Attribute s Text)
+    , _type'       :: !(TF.Attr s Text)
     {- ^ (Required) The type of domain record. Valid values are @A@ , @NS@ , @MX@ , @TXT@ , @CNAME@ , @SRV@ , @AAAA@ , @REDIRECT_URL@ and @FORWORD_URL@ . -}
-    , _value       :: !(TF.Attribute s Text)
+    , _value       :: !(TF.Attr s Text)
     {- ^ (Required) The value of domain record. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsResource s) where
-    toHCL DnsResource{..} = TF.block $ catMaybes
+    toHCL DnsResource{..} = TF.inline $ catMaybes
         [ TF.attribute "host_record" _host_record
         , TF.attribute "name" _name
         , TF.attribute "priority" _priority
@@ -1467,37 +1467,37 @@ instance TF.ToHCL (DnsResource s) where
 
 instance P.HasHostRecord (DnsResource s) s Text where
     hostRecord =
-        lens (_host_record :: DnsResource s -> TF.Attribute s Text)
+        lens (_host_record :: DnsResource s -> TF.Attr s Text)
              (\s a -> s { _host_record = a } :: DnsResource s)
 
 instance P.HasName (DnsResource s) s Text where
     name =
-        lens (_name :: DnsResource s -> TF.Attribute s Text)
+        lens (_name :: DnsResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsResource s)
 
 instance P.HasPriority (DnsResource s) s Text where
     priority =
-        lens (_priority :: DnsResource s -> TF.Attribute s Text)
+        lens (_priority :: DnsResource s -> TF.Attr s Text)
              (\s a -> s { _priority = a } :: DnsResource s)
 
 instance P.HasRouting (DnsResource s) s Text where
     routing =
-        lens (_routing :: DnsResource s -> TF.Attribute s Text)
+        lens (_routing :: DnsResource s -> TF.Attr s Text)
              (\s a -> s { _routing = a } :: DnsResource s)
 
 instance P.HasTtl (DnsResource s) s Text where
     ttl =
-        lens (_ttl :: DnsResource s -> TF.Attribute s Text)
+        lens (_ttl :: DnsResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: DnsResource s)
 
 instance P.HasType' (DnsResource s) s Text where
     type' =
-        lens (_type' :: DnsResource s -> TF.Attribute s Text)
+        lens (_type' :: DnsResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DnsResource s)
 
 instance P.HasValue (DnsResource s) s Text where
     value =
-        lens (_value :: DnsResource s -> TF.Attribute s Text)
+        lens (_value :: DnsResource s -> TF.Attr s Text)
              (\s a -> s { _value = a } :: DnsResource s)
 
 instance P.HasComputedHostRecord (DnsResource s) Text
@@ -1535,26 +1535,26 @@ to SLB Instance or Nat Gateway. ~> NOTE: One EIP can only be associated with
 ECS or SLB instance which in the VPC.
 -}
 data EipAssociationResource s = EipAssociationResource {
-      _allocation_id :: !(TF.Attribute s Text)
+      _allocation_id :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) The allocation EIP ID. -}
-    , _instance_id   :: !(TF.Attribute s Text)
+    , _instance_id   :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) The ID of the ECS or SLB instance or Nat Gateway. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EipAssociationResource s) where
-    toHCL EipAssociationResource{..} = TF.block $ catMaybes
+    toHCL EipAssociationResource{..} = TF.inline $ catMaybes
         [ TF.attribute "allocation_id" _allocation_id
         , TF.attribute "instance_id" _instance_id
         ]
 
 instance P.HasAllocationId (EipAssociationResource s) s Text where
     allocationId =
-        lens (_allocation_id :: EipAssociationResource s -> TF.Attribute s Text)
+        lens (_allocation_id :: EipAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _allocation_id = a } :: EipAssociationResource s)
 
 instance P.HasInstanceId (EipAssociationResource s) s Text where
     instanceId =
-        lens (_instance_id :: EipAssociationResource s -> TF.Attribute s Text)
+        lens (_instance_id :: EipAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: EipAssociationResource s)
 
 instance P.HasComputedAllocationId (EipAssociationResource s) Text
@@ -1577,26 +1577,26 @@ international if you can use it to login in
 <https://account.alibabacloud.com/login/login.htm> .
 -}
 data EipResource s = EipResource {
-      _bandwidth            :: !(TF.Attribute s Text)
+      _bandwidth            :: !(TF.Attr s Text)
     {- ^ (Optional) Maximum bandwidth to the elastic public network, measured in Mbps (Mega bit per second). If this value is not specified, then automatically sets it to 5 Mbps. -}
-    , _internet_charge_type :: !(TF.Attribute s Text)
+    , _internet_charge_type :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) Internet charge type of the EIP, Valid values are @PayByBandwidth@ , @PayByTraffic@ . Default is @PayByBandwidth@ . From version @1.7.1@ , default to @PayByTraffic@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EipResource s) where
-    toHCL EipResource{..} = TF.block $ catMaybes
+    toHCL EipResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bandwidth" _bandwidth
         , TF.attribute "internet_charge_type" _internet_charge_type
         ]
 
 instance P.HasBandwidth (EipResource s) s Text where
     bandwidth =
-        lens (_bandwidth :: EipResource s -> TF.Attribute s Text)
+        lens (_bandwidth :: EipResource s -> TF.Attr s Text)
              (\s a -> s { _bandwidth = a } :: EipResource s)
 
 instance P.HasInternetChargeType (EipResource s) s Text where
     internetChargeType =
-        lens (_internet_charge_type :: EipResource s -> TF.Attribute s Text)
+        lens (_internet_charge_type :: EipResource s -> TF.Attr s Text)
              (\s a -> s { _internet_charge_type = a } :: EipResource s)
 
 instance P.HasComputedBandwidth (EipResource s) Text
@@ -1623,16 +1623,16 @@ There are two types ECS instances in a scaling group: "AutoCreated" and
 "MaxSize".
 -}
 data EssAttachmentResource s = EssAttachmentResource {
-      _force            :: !(TF.Attribute s Text)
+      _force            :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to remove forcibly "AutoCreated" ECS instances in order to release scaling group capacity "MaxSize" for attaching ECS instances. Default to false. -}
-    , _instance_ids     :: !(TF.Attribute s Text)
+    , _instance_ids     :: !(TF.Attr s Text)
     {- ^ (Required) ID of the ECS instance to be attached to the scaling group. You can input up to 20 IDs. -}
-    , _scaling_group_id :: !(TF.Attribute s Text)
+    , _scaling_group_id :: !(TF.Attr s Text)
     {- ^ (Required) ID of the scaling group of a scaling configuration. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EssAttachmentResource s) where
-    toHCL EssAttachmentResource{..} = TF.block $ catMaybes
+    toHCL EssAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "force" _force
         , TF.attribute "instance_ids" _instance_ids
         , TF.attribute "scaling_group_id" _scaling_group_id
@@ -1640,17 +1640,17 @@ instance TF.ToHCL (EssAttachmentResource s) where
 
 instance P.HasForce (EssAttachmentResource s) s Text where
     force =
-        lens (_force :: EssAttachmentResource s -> TF.Attribute s Text)
+        lens (_force :: EssAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _force = a } :: EssAttachmentResource s)
 
 instance P.HasInstanceIds (EssAttachmentResource s) s Text where
     instanceIds =
-        lens (_instance_ids :: EssAttachmentResource s -> TF.Attribute s Text)
+        lens (_instance_ids :: EssAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _instance_ids = a } :: EssAttachmentResource s)
 
 instance P.HasScalingGroupId (EssAttachmentResource s) s Text where
     scalingGroupId =
-        lens (_scaling_group_id :: EssAttachmentResource s -> TF.Attribute s Text)
+        lens (_scaling_group_id :: EssAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _scaling_group_id = a } :: EssAttachmentResource s)
 
 instance P.HasComputedForce (EssAttachmentResource s) Text
@@ -1675,50 +1675,50 @@ you should set @is_outdated@ to true. For more about the upgraded instance
 type, refer to @alicloud_instance_types@ datasource.
 -}
 data EssScalingConfigurationResource s = EssScalingConfigurationResource {
-      _active                     :: !(TF.Attribute s Text)
+      _active                     :: !(TF.Attr s Text)
     {- ^ (Optional) Whether active current scaling configuration in the specified scaling group. Default to @false@ . -}
-    , _data_disk                  :: !(TF.Attribute s Text)
+    , _data_disk                  :: !(TF.Attr s Text)
     {- ^ (Optional) DataDisk mappings to attach to ecs instance. See <#block-datadisk> below for details. -}
-    , _enable                     :: !(TF.Attribute s Text)
+    , _enable                     :: !(TF.Attr s Text)
     {- ^ (Optional) Whether enable the specified scaling group(make it active) to which the current scaling configuration belongs. -}
-    , _force_delete               :: !(TF.Attribute s Text)
+    , _force_delete               :: !(TF.Attr s Text)
     {- ^ (Optional) The last scaling configuration will be deleted forcibly with deleting its scaling group. Default to false. -}
-    , _image_id                   :: !(TF.Attribute s Text)
+    , _image_id                   :: !(TF.Attr s Text)
     {- ^ (Required) ID of an image file, indicating the image resource selected when an instance is enabled. -}
-    , _instance_name              :: !(TF.Attribute s Text)
+    , _instance_name              :: !(TF.Attr s Text)
     {- ^ (Optional) Name of an ECS instance. Default to "ESS-Instance". It is valid from version 1.7.1. -}
-    , _instance_type              :: !(TF.Attribute s Text)
+    , _instance_type              :: !(TF.Attr s Text)
     {- ^ (Required) Resource type of an ECS instance. -}
-    , _internet_charge_type       :: !(TF.Attribute s Text)
+    , _internet_charge_type       :: !(TF.Attr s Text)
     {- ^ (Optional) Network billing type, Values: PayByBandwidth or PayByTraffic. Default to @PayByBandwidth@ . -}
-    , _internet_max_bandwidth_in  :: !(TF.Attribute s Text)
+    , _internet_max_bandwidth_in  :: !(TF.Attr s Text)
     {- ^ (Optional) Maximum incoming bandwidth from the public network, measured in Mbps (Mega bit per second). The value range is [1,200]. -}
-    , _internet_max_bandwidth_out :: !(TF.Attribute s Text)
+    , _internet_max_bandwidth_out :: !(TF.Attr s Text)
     {- ^ (Optional) Maximum outgoing bandwidth from the public network, measured in Mbps (Mega bit per second). The value range for PayByBandwidth is [0,100]. -}
-    , _is_outdated                :: !(TF.Attribute s Text)
+    , _is_outdated                :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to use outdated instance type. Default to false. -}
-    , _key_name                   :: !(TF.Attribute s Text)
+    , _key_name                   :: !(TF.Attr s Text)
     {- ^ (Optional) The name of key pair that can login ECS instance successfully without password. If it is specified, the password would be invalid. -}
-    , _role_name                  :: !(TF.Attribute s Text)
+    , _role_name                  :: !(TF.Attr s Text)
     {- ^ (Optional) Instance RAM role name. The name is provided and maintained by RAM. You can use @alicloud_ram_role@ to create a new one. -}
-    , _scaling_configuration_name :: !(TF.Attribute s Text)
+    , _scaling_configuration_name :: !(TF.Attr s Text)
     {- ^ (Optional) Name shown for the scheduled task. If this parameter value is not specified, the default value is ScalingConfigurationId. -}
-    , _scaling_group_id           :: !(TF.Attribute s Text)
+    , _scaling_group_id           :: !(TF.Attr s Text)
     {- ^ (Required) ID of the scaling group of a scaling configuration. -}
-    , _security_group_id          :: !(TF.Attribute s Text)
+    , _security_group_id          :: !(TF.Attr s Text)
     {- ^ (Required) ID of the security group to which a newly created instance belongs. -}
-    , _substitute                 :: !(TF.Attribute s Text)
+    , _substitute                 :: !(TF.Attr s Text)
     {- ^ (Optional) The another scaling configuration which will be active automatically and replace current configuration when setting @active@ to 'false'. It is invalid when @active@ is 'true' -}
-    , _system_disk_category       :: !(TF.Attribute s Text)
+    , _system_disk_category       :: !(TF.Attr s Text)
     {- ^ (Optional) Category of the system disk. The parameter value options are @cloud_efficiency@ , @cloud_ssd@ and @cloud@ . @cloud@ only is used to some no I/O optimized instance. Default to @cloud_efficiency@ . -}
-    , _tags                       :: !(TF.Attribute s Text)
+    , _tags                       :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of tags to assign to the resource. It will be applied for ECS instances finally. -}
-    , _user_data                  :: !(TF.Attribute s Text)
+    , _user_data                  :: !(TF.Attr s Text)
     {- ^ (Optional) User-defined data to customize the startup behaviors of the ECS instance and to pass data into the ECS instance. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EssScalingConfigurationResource s) where
-    toHCL EssScalingConfigurationResource{..} = TF.block $ catMaybes
+    toHCL EssScalingConfigurationResource{..} = TF.inline $ catMaybes
         [ TF.attribute "active" _active
         , TF.attribute "data_disk" _data_disk
         , TF.attribute "enable" _enable
@@ -1743,102 +1743,102 @@ instance TF.ToHCL (EssScalingConfigurationResource s) where
 
 instance P.HasActive (EssScalingConfigurationResource s) s Text where
     active =
-        lens (_active :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_active :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _active = a } :: EssScalingConfigurationResource s)
 
 instance P.HasDataDisk (EssScalingConfigurationResource s) s Text where
     dataDisk =
-        lens (_data_disk :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_data_disk :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _data_disk = a } :: EssScalingConfigurationResource s)
 
 instance P.HasEnable (EssScalingConfigurationResource s) s Text where
     enable =
-        lens (_enable :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_enable :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _enable = a } :: EssScalingConfigurationResource s)
 
 instance P.HasForceDelete (EssScalingConfigurationResource s) s Text where
     forceDelete =
-        lens (_force_delete :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_force_delete :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _force_delete = a } :: EssScalingConfigurationResource s)
 
 instance P.HasImageId (EssScalingConfigurationResource s) s Text where
     imageId =
-        lens (_image_id :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_image_id :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _image_id = a } :: EssScalingConfigurationResource s)
 
 instance P.HasInstanceName (EssScalingConfigurationResource s) s Text where
     instanceName =
-        lens (_instance_name :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_instance_name :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _instance_name = a } :: EssScalingConfigurationResource s)
 
 instance P.HasInstanceType (EssScalingConfigurationResource s) s Text where
     instanceType =
-        lens (_instance_type :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_instance_type :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _instance_type = a } :: EssScalingConfigurationResource s)
 
 instance P.HasInternetChargeType (EssScalingConfigurationResource s) s Text where
     internetChargeType =
-        lens (_internet_charge_type :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_internet_charge_type :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _internet_charge_type = a } :: EssScalingConfigurationResource s)
 
 instance P.HasInternetMaxBandwidthIn (EssScalingConfigurationResource s) s Text where
     internetMaxBandwidthIn =
-        lens (_internet_max_bandwidth_in :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_internet_max_bandwidth_in :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _internet_max_bandwidth_in = a } :: EssScalingConfigurationResource s)
 
 instance P.HasInternetMaxBandwidthOut (EssScalingConfigurationResource s) s Text where
     internetMaxBandwidthOut =
-        lens (_internet_max_bandwidth_out :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_internet_max_bandwidth_out :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _internet_max_bandwidth_out = a } :: EssScalingConfigurationResource s)
 
 instance P.HasIsOutdated (EssScalingConfigurationResource s) s Text where
     isOutdated =
-        lens (_is_outdated :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_is_outdated :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _is_outdated = a } :: EssScalingConfigurationResource s)
 
 instance P.HasKeyName (EssScalingConfigurationResource s) s Text where
     keyName =
-        lens (_key_name :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_key_name :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _key_name = a } :: EssScalingConfigurationResource s)
 
 instance P.HasRoleName (EssScalingConfigurationResource s) s Text where
     roleName =
-        lens (_role_name :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_role_name :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _role_name = a } :: EssScalingConfigurationResource s)
 
 instance P.HasScalingConfigurationName (EssScalingConfigurationResource s) s Text where
     scalingConfigurationName =
-        lens (_scaling_configuration_name :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_scaling_configuration_name :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _scaling_configuration_name = a } :: EssScalingConfigurationResource s)
 
 instance P.HasScalingGroupId (EssScalingConfigurationResource s) s Text where
     scalingGroupId =
-        lens (_scaling_group_id :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_scaling_group_id :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _scaling_group_id = a } :: EssScalingConfigurationResource s)
 
 instance P.HasSecurityGroupId (EssScalingConfigurationResource s) s Text where
     securityGroupId =
-        lens (_security_group_id :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_security_group_id :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _security_group_id = a } :: EssScalingConfigurationResource s)
 
 instance P.HasSubstitute (EssScalingConfigurationResource s) s Text where
     substitute =
-        lens (_substitute :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_substitute :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _substitute = a } :: EssScalingConfigurationResource s)
 
 instance P.HasSystemDiskCategory (EssScalingConfigurationResource s) s Text where
     systemDiskCategory =
-        lens (_system_disk_category :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_system_disk_category :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _system_disk_category = a } :: EssScalingConfigurationResource s)
 
 instance P.HasTags (EssScalingConfigurationResource s) s Text where
     tags =
-        lens (_tags :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_tags :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: EssScalingConfigurationResource s)
 
 instance P.HasUserData (EssScalingConfigurationResource s) s Text where
     userData =
-        lens (_user_data :: EssScalingConfigurationResource s -> TF.Attribute s Text)
+        lens (_user_data :: EssScalingConfigurationResource s -> TF.Attr s Text)
              (\s a -> s { _user_data = a } :: EssScalingConfigurationResource s)
 
 instance P.HasComputedActive (EssScalingConfigurationResource s) Text
@@ -1891,26 +1891,26 @@ launch an ESS scaling group for a VPC network via specifying parameter
 @vswitch_ids@ .
 -}
 data EssScalingGroupResource s = EssScalingGroupResource {
-      _db_instance_ids    :: !(TF.Attribute s Text)
+      _db_instance_ids    :: !(TF.Attr s Text)
     {- ^ (Optional) If an RDS instance is specified in the scaling group, the scaling group automatically attaches the Intranet IP addresses of its ECS instances to the RDS access whitelist. -}
-    , _default_cooldown   :: !(TF.Attribute s Text)
+    , _default_cooldown   :: !(TF.Attr s Text)
     {- ^ (Optional) Default cool-down time (in seconds) of the scaling group. Value range: [0, 86400]. The default value is 300s. -}
-    , _loadbalancer_ids   :: !(TF.Attribute s Text)
+    , _loadbalancer_ids   :: !(TF.Attr s Text)
     {- ^ (Optional) If a Server Load Balancer instance is specified in the scaling group, the scaling group automatically attaches its ECS instances to the Server Load Balancer instance. -}
-    , _max_size           :: !(TF.Attribute s Text)
+    , _max_size           :: !(TF.Attr s Text)
     {- ^ (Required) Maximum number of ECS instances in the scaling group. Value range: [0, 100]. -}
-    , _min_size           :: !(TF.Attribute s Text)
+    , _min_size           :: !(TF.Attr s Text)
     {- ^ (Required) Minimum number of ECS instances in the scaling group. Value range: [0, 100]. -}
-    , _removal_policies   :: !(TF.Attribute s Text)
+    , _removal_policies   :: !(TF.Attr s Text)
     {- ^ (Optional) RemovalPolicy is used to select the ECS instances you want to remove from the scaling group when multiple candidates for removal exist. Optional values: -}
-    , _scaling_group_name :: !(TF.Attribute s Text)
+    , _scaling_group_name :: !(TF.Attr s Text)
     {- ^ (Optional) Name shown for the scaling group, which must contain 2-40 characters (English or Chinese). If this parameter is not specified, the default value is ScalingGroupId. -}
-    , _vswitch_ids        :: !(TF.Attribute s Text)
+    , _vswitch_ids        :: !(TF.Attr s Text)
     {- ^ (Optional) List of virtual switch IDs in which the ecs instances to be launched. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EssScalingGroupResource s) where
-    toHCL EssScalingGroupResource{..} = TF.block $ catMaybes
+    toHCL EssScalingGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "db_instance_ids" _db_instance_ids
         , TF.attribute "default_cooldown" _default_cooldown
         , TF.attribute "loadbalancer_ids" _loadbalancer_ids
@@ -1923,42 +1923,42 @@ instance TF.ToHCL (EssScalingGroupResource s) where
 
 instance P.HasDbInstanceIds (EssScalingGroupResource s) s Text where
     dbInstanceIds =
-        lens (_db_instance_ids :: EssScalingGroupResource s -> TF.Attribute s Text)
+        lens (_db_instance_ids :: EssScalingGroupResource s -> TF.Attr s Text)
              (\s a -> s { _db_instance_ids = a } :: EssScalingGroupResource s)
 
 instance P.HasDefaultCooldown (EssScalingGroupResource s) s Text where
     defaultCooldown =
-        lens (_default_cooldown :: EssScalingGroupResource s -> TF.Attribute s Text)
+        lens (_default_cooldown :: EssScalingGroupResource s -> TF.Attr s Text)
              (\s a -> s { _default_cooldown = a } :: EssScalingGroupResource s)
 
 instance P.HasLoadbalancerIds (EssScalingGroupResource s) s Text where
     loadbalancerIds =
-        lens (_loadbalancer_ids :: EssScalingGroupResource s -> TF.Attribute s Text)
+        lens (_loadbalancer_ids :: EssScalingGroupResource s -> TF.Attr s Text)
              (\s a -> s { _loadbalancer_ids = a } :: EssScalingGroupResource s)
 
 instance P.HasMaxSize (EssScalingGroupResource s) s Text where
     maxSize =
-        lens (_max_size :: EssScalingGroupResource s -> TF.Attribute s Text)
+        lens (_max_size :: EssScalingGroupResource s -> TF.Attr s Text)
              (\s a -> s { _max_size = a } :: EssScalingGroupResource s)
 
 instance P.HasMinSize (EssScalingGroupResource s) s Text where
     minSize =
-        lens (_min_size :: EssScalingGroupResource s -> TF.Attribute s Text)
+        lens (_min_size :: EssScalingGroupResource s -> TF.Attr s Text)
              (\s a -> s { _min_size = a } :: EssScalingGroupResource s)
 
 instance P.HasRemovalPolicies (EssScalingGroupResource s) s Text where
     removalPolicies =
-        lens (_removal_policies :: EssScalingGroupResource s -> TF.Attribute s Text)
+        lens (_removal_policies :: EssScalingGroupResource s -> TF.Attr s Text)
              (\s a -> s { _removal_policies = a } :: EssScalingGroupResource s)
 
 instance P.HasScalingGroupName (EssScalingGroupResource s) s Text where
     scalingGroupName =
-        lens (_scaling_group_name :: EssScalingGroupResource s -> TF.Attribute s Text)
+        lens (_scaling_group_name :: EssScalingGroupResource s -> TF.Attr s Text)
              (\s a -> s { _scaling_group_name = a } :: EssScalingGroupResource s)
 
 instance P.HasVswitchIds (EssScalingGroupResource s) s Text where
     vswitchIds =
-        lens (_vswitch_ids :: EssScalingGroupResource s -> TF.Attribute s Text)
+        lens (_vswitch_ids :: EssScalingGroupResource s -> TF.Attr s Text)
              (\s a -> s { _vswitch_ids = a } :: EssScalingGroupResource s)
 
 instance P.HasComputedDbInstanceIds (EssScalingGroupResource s) Text
@@ -1990,20 +1990,20 @@ essScalingGroupResource =
 Provides a ESS scaling rule resource.
 -}
 data EssScalingRuleResource s = EssScalingRuleResource {
-      _adjustment_type   :: !(TF.Attribute s Text)
+      _adjustment_type   :: !(TF.Attr s Text)
     {- ^ (Required) Adjustment mode of a scaling rule. Optional values: -}
-    , _adjustment_value  :: !(TF.Attribute s Text)
+    , _adjustment_value  :: !(TF.Attr s Text)
     {- ^ (Required) Adjusted value of a scaling rule. Value range: -}
-    , _cooldown          :: !(TF.Attribute s Text)
+    , _cooldown          :: !(TF.Attr s Text)
     {- ^ (Optional) Cool-down time of a scaling rule. Value range: [0, 86,400], in seconds. The default value is empty. -}
-    , _scaling_group_id  :: !(TF.Attribute s Text)
+    , _scaling_group_id  :: !(TF.Attr s Text)
     {- ^ (Required) ID of the scaling group of a scaling rule. -}
-    , _scaling_rule_name :: !(TF.Attribute s Text)
+    , _scaling_rule_name :: !(TF.Attr s Text)
     {- ^ (Optional) Name shown for the scaling rule, which is a string containing 2 to 40 English or Chinese characters. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EssScalingRuleResource s) where
-    toHCL EssScalingRuleResource{..} = TF.block $ catMaybes
+    toHCL EssScalingRuleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "adjustment_type" _adjustment_type
         , TF.attribute "adjustment_value" _adjustment_value
         , TF.attribute "cooldown" _cooldown
@@ -2013,27 +2013,27 @@ instance TF.ToHCL (EssScalingRuleResource s) where
 
 instance P.HasAdjustmentType (EssScalingRuleResource s) s Text where
     adjustmentType =
-        lens (_adjustment_type :: EssScalingRuleResource s -> TF.Attribute s Text)
+        lens (_adjustment_type :: EssScalingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _adjustment_type = a } :: EssScalingRuleResource s)
 
 instance P.HasAdjustmentValue (EssScalingRuleResource s) s Text where
     adjustmentValue =
-        lens (_adjustment_value :: EssScalingRuleResource s -> TF.Attribute s Text)
+        lens (_adjustment_value :: EssScalingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _adjustment_value = a } :: EssScalingRuleResource s)
 
 instance P.HasCooldown (EssScalingRuleResource s) s Text where
     cooldown =
-        lens (_cooldown :: EssScalingRuleResource s -> TF.Attribute s Text)
+        lens (_cooldown :: EssScalingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _cooldown = a } :: EssScalingRuleResource s)
 
 instance P.HasScalingGroupId (EssScalingRuleResource s) s Text where
     scalingGroupId =
-        lens (_scaling_group_id :: EssScalingRuleResource s -> TF.Attribute s Text)
+        lens (_scaling_group_id :: EssScalingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _scaling_group_id = a } :: EssScalingRuleResource s)
 
 instance P.HasScalingRuleName (EssScalingRuleResource s) s Text where
     scalingRuleName =
-        lens (_scaling_rule_name :: EssScalingRuleResource s -> TF.Attribute s Text)
+        lens (_scaling_rule_name :: EssScalingRuleResource s -> TF.Attr s Text)
              (\s a -> s { _scaling_rule_name = a } :: EssScalingRuleResource s)
 
 instance P.HasComputedAdjustmentType (EssScalingRuleResource s) Text
@@ -2060,28 +2060,28 @@ essScalingRuleResource =
 Provides a ESS schedule resource.
 -}
 data EssScheduleResource s = EssScheduleResource {
-      _description            :: !(TF.Attribute s Text)
+      _description            :: !(TF.Attr s Text)
     {- ^ (Optional) Description of the scheduled task, which is 2-200 characters (English or Chinese) long. -}
-    , _launch_expiration_time :: !(TF.Attribute s Text)
+    , _launch_expiration_time :: !(TF.Attr s Text)
     {- ^ (Optional) Time period within which the failed scheduled task is retried. The default value is 600s. Value range: [0, 21600] -}
-    , _launch_time            :: !(TF.Attribute s Text)
+    , _launch_time            :: !(TF.Attr s Text)
     {- ^ (Required) Operations performed when the scheduled task is triggered. Fill in the unique identifier of the scaling rule. -}
-    , _recurrence_end_time    :: !(TF.Attribute s Text)
+    , _recurrence_end_time    :: !(TF.Attr s Text)
     {- ^ (Optional) End time of the scheduled task to be repeated. The date format follows the ISO8601 standard and uses UTC time. It is in the format of YYYY-MM-DDThh:mmZ. A time point 90 days after creation or modification cannot be entered. RecurrenceType, RecurrenceValue and RecurrenceEndTime must be specified. -}
-    , _recurrence_type        :: !(TF.Attribute s Text)
+    , _recurrence_type        :: !(TF.Attr s Text)
     {- ^ (Optional) Type of the scheduled task to be repeated. RecurrenceType, RecurrenceValue and RecurrenceEndTime must be specified. Optional values: -}
-    , _recurrence_value       :: !(TF.Attribute s Text)
+    , _recurrence_value       :: !(TF.Attr s Text)
     {- ^ (Optional) Value of the scheduled task to be repeated. RecurrenceType, RecurrenceValue and RecurrenceEndTime must be specified. -}
-    , _scheduled_action       :: !(TF.Attribute s Text)
+    , _scheduled_action       :: !(TF.Attr s Text)
     {- ^ (Required) Operations performed when the scheduled task is triggered. Fill in the unique identifier of the scaling rule. -}
-    , _scheduled_task_name    :: !(TF.Attribute s Text)
+    , _scheduled_task_name    :: !(TF.Attr s Text)
     {- ^ (Optional) Display name of the scheduled task, which must be 2-40 characters (English or Chinese) long. -}
-    , _task_enabled           :: !(TF.Attribute s Text)
+    , _task_enabled           :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to enable the scheduled task. The default value is true. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EssScheduleResource s) where
-    toHCL EssScheduleResource{..} = TF.block $ catMaybes
+    toHCL EssScheduleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "launch_expiration_time" _launch_expiration_time
         , TF.attribute "launch_time" _launch_time
@@ -2095,47 +2095,47 @@ instance TF.ToHCL (EssScheduleResource s) where
 
 instance P.HasDescription (EssScheduleResource s) s Text where
     description =
-        lens (_description :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_description :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: EssScheduleResource s)
 
 instance P.HasLaunchExpirationTime (EssScheduleResource s) s Text where
     launchExpirationTime =
-        lens (_launch_expiration_time :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_launch_expiration_time :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _launch_expiration_time = a } :: EssScheduleResource s)
 
 instance P.HasLaunchTime (EssScheduleResource s) s Text where
     launchTime =
-        lens (_launch_time :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_launch_time :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _launch_time = a } :: EssScheduleResource s)
 
 instance P.HasRecurrenceEndTime (EssScheduleResource s) s Text where
     recurrenceEndTime =
-        lens (_recurrence_end_time :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_recurrence_end_time :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _recurrence_end_time = a } :: EssScheduleResource s)
 
 instance P.HasRecurrenceType (EssScheduleResource s) s Text where
     recurrenceType =
-        lens (_recurrence_type :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_recurrence_type :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _recurrence_type = a } :: EssScheduleResource s)
 
 instance P.HasRecurrenceValue (EssScheduleResource s) s Text where
     recurrenceValue =
-        lens (_recurrence_value :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_recurrence_value :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _recurrence_value = a } :: EssScheduleResource s)
 
 instance P.HasScheduledAction (EssScheduleResource s) s Text where
     scheduledAction =
-        lens (_scheduled_action :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_scheduled_action :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _scheduled_action = a } :: EssScheduleResource s)
 
 instance P.HasScheduledTaskName (EssScheduleResource s) s Text where
     scheduledTaskName =
-        lens (_scheduled_task_name :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_scheduled_task_name :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _scheduled_task_name = a } :: EssScheduleResource s)
 
 instance P.HasTaskEnabled (EssScheduleResource s) s Text where
     taskEnabled =
-        lens (_task_enabled :: EssScheduleResource s -> TF.Attribute s Text)
+        lens (_task_enabled :: EssScheduleResource s -> TF.Attr s Text)
              (\s a -> s { _task_enabled = a } :: EssScheduleResource s)
 
 instance P.HasComputedDescription (EssScheduleResource s) Text
@@ -2165,22 +2165,22 @@ essScheduleResource =
 Provides a forward resource.
 -}
 data ForwardResource s = ForwardResource {
-      _external_ip      :: !(TF.Attribute s Text)
+      _external_ip      :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The external ip address, the ip must along bandwidth package public ip which @alicloud_nat_gateway@ argument @bandwidth_packages@ . -}
-    , _external_port    :: !(TF.Attribute s Text)
+    , _external_port    :: !(TF.Attr s Text)
     {- ^ (Required) The external port, valid value is 1~65535|any. -}
-    , _forward_table_id :: !(TF.Attribute s Text)
+    , _forward_table_id :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The value can get from @alicloud_nat_gateway@ Attributes "forward_table_ids". -}
-    , _internal_ip      :: !(TF.Attribute s Text)
+    , _internal_ip      :: !(TF.Attr s Text)
     {- ^ (Required) The internal ip, must a private ip. -}
-    , _internal_port    :: !(TF.Attribute s Text)
+    , _internal_port    :: !(TF.Attr s Text)
     {- ^ (Required) The internal port, valid value is 1~65535|any. -}
-    , _ip_protocol      :: !(TF.Attribute s Text)
+    , _ip_protocol      :: !(TF.Attr s Text)
     {- ^ (Required) The ip protocal, valid value is tcp|udp|any. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ForwardResource s) where
-    toHCL ForwardResource{..} = TF.block $ catMaybes
+    toHCL ForwardResource{..} = TF.inline $ catMaybes
         [ TF.attribute "external_ip" _external_ip
         , TF.attribute "external_port" _external_port
         , TF.attribute "forward_table_id" _forward_table_id
@@ -2191,32 +2191,32 @@ instance TF.ToHCL (ForwardResource s) where
 
 instance P.HasExternalIp (ForwardResource s) s Text where
     externalIp =
-        lens (_external_ip :: ForwardResource s -> TF.Attribute s Text)
+        lens (_external_ip :: ForwardResource s -> TF.Attr s Text)
              (\s a -> s { _external_ip = a } :: ForwardResource s)
 
 instance P.HasExternalPort (ForwardResource s) s Text where
     externalPort =
-        lens (_external_port :: ForwardResource s -> TF.Attribute s Text)
+        lens (_external_port :: ForwardResource s -> TF.Attr s Text)
              (\s a -> s { _external_port = a } :: ForwardResource s)
 
 instance P.HasForwardTableId (ForwardResource s) s Text where
     forwardTableId =
-        lens (_forward_table_id :: ForwardResource s -> TF.Attribute s Text)
+        lens (_forward_table_id :: ForwardResource s -> TF.Attr s Text)
              (\s a -> s { _forward_table_id = a } :: ForwardResource s)
 
 instance P.HasInternalIp (ForwardResource s) s Text where
     internalIp =
-        lens (_internal_ip :: ForwardResource s -> TF.Attribute s Text)
+        lens (_internal_ip :: ForwardResource s -> TF.Attr s Text)
              (\s a -> s { _internal_ip = a } :: ForwardResource s)
 
 instance P.HasInternalPort (ForwardResource s) s Text where
     internalPort =
-        lens (_internal_port :: ForwardResource s -> TF.Attribute s Text)
+        lens (_internal_port :: ForwardResource s -> TF.Attr s Text)
              (\s a -> s { _internal_port = a } :: ForwardResource s)
 
 instance P.HasIpProtocol (ForwardResource s) s Text where
     ipProtocol =
-        lens (_ip_protocol :: ForwardResource s -> TF.Attribute s Text)
+        lens (_ip_protocol :: ForwardResource s -> TF.Attr s Text)
              (\s a -> s { _ip_protocol = a } :: ForwardResource s)
 
 
@@ -2247,64 +2247,64 @@ must wait it to be outdated and release it automatically. ~> NOTE: The
 resource supports Spot Instance from version 1.5.4.
 -}
 data InstanceResource s = InstanceResource {
-      _availability_zone          :: !(TF.Attribute s Text)
+      _availability_zone          :: !(TF.Attr s Text)
     {- ^ (Optional) The Zone to start the instance in. It is ignored and will be computed when set @vswitch_id@ . -}
-    , _description                :: !(TF.Attribute s Text)
+    , _description                :: !(TF.Attr s Text)
     {- ^ (Optional) Description of the instance, This description can have a string of 2 to 256 characters, It cannot begin with http:// or https://. Default value is null. -}
-    , _dry_run                    :: !(TF.Attribute s Text)
+    , _dry_run                    :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to pre-detection. When it is true, only pre-detection and not actually modify the payment type operation. It is valid when @instance_charge_type@ is 'PrePaid'. Default to false. -}
-    , _host_name                  :: !(TF.Attribute s Text)
+    , _host_name                  :: !(TF.Attr s Text)
     {- ^ (Optional) Host name of the ECS, which is a string of at least two characters. “hostname” cannot start or end with “.” or “-“. In addition, two or more consecutive “.” or “-“ symbols are not allowed. On Windows, the host name can contain a maximum of 15 characters, which can be a combination of uppercase/lowercase letters, numerals, and “-“. The host name cannot contain dots (“.”) or contain only numeric characters. On other OSs such as Linux, the host name can contain a maximum of 30 characters, which can be segments separated by dots (“.”), where each segment can contain uppercase/lowercase letters, numerals, or “_“. -}
-    , _image_id                   :: !(TF.Attribute s Text)
+    , _image_id                   :: !(TF.Attr s Text)
     {- ^ (Required) The Image to use for the instance. ECS instance's image can be replaced via changing 'image_id'. When it is changed, the instance will reboot to make the change take effect. -}
-    , _include_data_disks         :: !(TF.Attribute s Text)
+    , _include_data_disks         :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to change instance disks charge type when changing instance charge type. -}
-    , _instance_charge_type       :: !(TF.Attribute s Text)
+    , _instance_charge_type       :: !(TF.Attr s Text)
     {- ^ (Optional) Valid values are @PrePaid@ , @PostPaid@ , The default is @PostPaid@ . -}
-    , _instance_name              :: !(TF.Attribute s Text)
+    , _instance_name              :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the ECS. This instance_name can have a string of 2 to 128 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin or end with a hyphen, and must not begin with http:// or https://. If not specified, Terraform will autogenerate a default name is @ECS-Instance@ . -}
-    , _instance_type              :: !(TF.Attribute s Text)
+    , _instance_type              :: !(TF.Attr s Text)
     {- ^ (Required) The type of instance to start. -}
-    , _internet_charge_type       :: !(TF.Attribute s Text)
+    , _internet_charge_type       :: !(TF.Attr s Text)
     {- ^ (Optional) Internet charge type of the instance, Valid values are @PayByBandwidth@ , @PayByTraffic@ . Default is @PayByTraffic@ . At present, 'PrePaid' instance cannot change the value to "PayByBandwidth" from "PayByTraffic". -}
-    , _internet_max_bandwidth_in  :: !(TF.Attribute s Text)
+    , _internet_max_bandwidth_in  :: !(TF.Attr s Text)
     {- ^ (Optional) Maximum incoming bandwidth from the public network, measured in Mbps (Mega bit per second). Value range: [1, 200]. If this value is not specified, then automatically sets it to 200 Mbps. -}
-    , _internet_max_bandwidth_out :: !(TF.Attribute s Text)
+    , _internet_max_bandwidth_out :: !(TF.Attr s Text)
     {- ^ (Optional) Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bit per second). Value range:  [0, 100]. Default to 0 Mbps. -}
-    , _is_outdated                :: !(TF.Attribute s Text)
+    , _is_outdated                :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to use outdated instance type. Default to false. -}
-    , _key_name                   :: !(TF.Attribute s Text)
+    , _key_name                   :: !(TF.Attr s Text)
     {- ^ (Optional, Force new resource) The name of key pair that can login ECS instance successfully without password. If it is specified, the password would be invalid. -}
-    , _password                   :: !(TF.Attribute s Text)
+    , _password                   :: !(TF.Attr s Text)
     {- ^ (Optional) Password to an instance is a string of 8 to 30 characters. It must contain uppercase/lowercase letters and numerals, but cannot contain special symbols. When it is changed, the instance will reboot to make the change take effect. -}
-    , _period                     :: !(TF.Attribute s Text)
+    , _period                     :: !(TF.Attr s Text)
     {- ^ (Optional) The duration that you will buy the resource, in month. It is valid when instance_charge_type is set as @PrePaid@ . Default to 1. Valid values: -}
-    , _period_unit                :: !(TF.Attribute s Text)
+    , _period_unit                :: !(TF.Attr s Text)
     {- ^ (Optional) The duration unit that you will buy the resource. It is valid when @instance_charge_type@ is 'PrePaid'. Valid value: ["Week", "Month"]. Default to "Month". -}
-    , _private_ip                 :: !(TF.Attribute s Text)
+    , _private_ip                 :: !(TF.Attr s Text)
     {- ^ (Optional) Instance private IP address can be specified when you creating new instance. It is valid when @vswitch_id@ is specified. -}
-    , _role_name                  :: !(TF.Attribute s Text)
+    , _role_name                  :: !(TF.Attr s Text)
     {- ^ (Optional, Force new resource) Instance RAM role name. The name is provided and maintained by RAM. You can use @alicloud_ram_role@ to create a new one. -}
-    , _security_groups            :: !(TF.Attribute s Text)
+    , _security_groups            :: !(TF.Attr s Text)
     {- ^ (Required)  A list of security group ids to associate with. -}
-    , _spot_price_limit           :: !(TF.Attribute s Text)
+    , _spot_price_limit           :: !(TF.Attr s Text)
     {- ^ (Optional, Float, Force New) The hourly price threshold of a instance, and it takes effect only when parameter 'spot_strategy' is 'SpotWithPriceLimit'. Three decimals is allowed at most. -}
-    , _spot_strategy              :: !(TF.Attribute s Text)
+    , _spot_strategy              :: !(TF.Attr s Text)
     {- ^ (Optional, Force New) The spot strategy of a Pay-As-You-Go instance, and it takes effect only when parameter @instance_charge_type@ is 'PostPaid'. Value range: -}
-    , _system_disk_category       :: !(TF.Attribute s Text)
+    , _system_disk_category       :: !(TF.Attr s Text)
     {- ^ (Optional) Valid values are @cloud_efficiency@ , @cloud_ssd@ and @cloud@ . @cloud@ only is used to some none I/O optimized instance. Default to @cloud_efficiency@ . -}
-    , _system_disk_size           :: !(TF.Attribute s Text)
+    , _system_disk_size           :: !(TF.Attr s Text)
     {- ^ (Optional) Size of the system disk, value range: 40GB ~ 500GB. Default is 40GB. ECS instance's system disk can be reset when replacing system disk. -}
-    , _tags                       :: !(TF.Attribute s Text)
+    , _tags                       :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _user_data                  :: !(TF.Attribute s Text)
+    , _user_data                  :: !(TF.Attr s Text)
     {- ^ (Optional) User-defined data to customize the startup behaviors of an ECS instance and to pass data into an ECS instance. -}
-    , _vswitch_id                 :: !(TF.Attribute s Text)
+    , _vswitch_id                 :: !(TF.Attr s Text)
     {- ^ (Optional) The virtual switch ID to launch in VPC. If you want to create instances in VPC network, this parameter must be set. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (InstanceResource s) where
-    toHCL InstanceResource{..} = TF.block $ catMaybes
+    toHCL InstanceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "availability_zone" _availability_zone
         , TF.attribute "description" _description
         , TF.attribute "dry_run" _dry_run
@@ -2336,137 +2336,137 @@ instance TF.ToHCL (InstanceResource s) where
 
 instance P.HasAvailabilityZone (InstanceResource s) s Text where
     availabilityZone =
-        lens (_availability_zone :: InstanceResource s -> TF.Attribute s Text)
+        lens (_availability_zone :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _availability_zone = a } :: InstanceResource s)
 
 instance P.HasDescription (InstanceResource s) s Text where
     description =
-        lens (_description :: InstanceResource s -> TF.Attribute s Text)
+        lens (_description :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: InstanceResource s)
 
 instance P.HasDryRun (InstanceResource s) s Text where
     dryRun =
-        lens (_dry_run :: InstanceResource s -> TF.Attribute s Text)
+        lens (_dry_run :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _dry_run = a } :: InstanceResource s)
 
 instance P.HasHostName (InstanceResource s) s Text where
     hostName =
-        lens (_host_name :: InstanceResource s -> TF.Attribute s Text)
+        lens (_host_name :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _host_name = a } :: InstanceResource s)
 
 instance P.HasImageId (InstanceResource s) s Text where
     imageId =
-        lens (_image_id :: InstanceResource s -> TF.Attribute s Text)
+        lens (_image_id :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _image_id = a } :: InstanceResource s)
 
 instance P.HasIncludeDataDisks (InstanceResource s) s Text where
     includeDataDisks =
-        lens (_include_data_disks :: InstanceResource s -> TF.Attribute s Text)
+        lens (_include_data_disks :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _include_data_disks = a } :: InstanceResource s)
 
 instance P.HasInstanceChargeType (InstanceResource s) s Text where
     instanceChargeType =
-        lens (_instance_charge_type :: InstanceResource s -> TF.Attribute s Text)
+        lens (_instance_charge_type :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_charge_type = a } :: InstanceResource s)
 
 instance P.HasInstanceName (InstanceResource s) s Text where
     instanceName =
-        lens (_instance_name :: InstanceResource s -> TF.Attribute s Text)
+        lens (_instance_name :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_name = a } :: InstanceResource s)
 
 instance P.HasInstanceType (InstanceResource s) s Text where
     instanceType =
-        lens (_instance_type :: InstanceResource s -> TF.Attribute s Text)
+        lens (_instance_type :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_type = a } :: InstanceResource s)
 
 instance P.HasInternetChargeType (InstanceResource s) s Text where
     internetChargeType =
-        lens (_internet_charge_type :: InstanceResource s -> TF.Attribute s Text)
+        lens (_internet_charge_type :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _internet_charge_type = a } :: InstanceResource s)
 
 instance P.HasInternetMaxBandwidthIn (InstanceResource s) s Text where
     internetMaxBandwidthIn =
-        lens (_internet_max_bandwidth_in :: InstanceResource s -> TF.Attribute s Text)
+        lens (_internet_max_bandwidth_in :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _internet_max_bandwidth_in = a } :: InstanceResource s)
 
 instance P.HasInternetMaxBandwidthOut (InstanceResource s) s Text where
     internetMaxBandwidthOut =
-        lens (_internet_max_bandwidth_out :: InstanceResource s -> TF.Attribute s Text)
+        lens (_internet_max_bandwidth_out :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _internet_max_bandwidth_out = a } :: InstanceResource s)
 
 instance P.HasIsOutdated (InstanceResource s) s Text where
     isOutdated =
-        lens (_is_outdated :: InstanceResource s -> TF.Attribute s Text)
+        lens (_is_outdated :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _is_outdated = a } :: InstanceResource s)
 
 instance P.HasKeyName (InstanceResource s) s Text where
     keyName =
-        lens (_key_name :: InstanceResource s -> TF.Attribute s Text)
+        lens (_key_name :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _key_name = a } :: InstanceResource s)
 
 instance P.HasPassword (InstanceResource s) s Text where
     password =
-        lens (_password :: InstanceResource s -> TF.Attribute s Text)
+        lens (_password :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: InstanceResource s)
 
 instance P.HasPeriod (InstanceResource s) s Text where
     period =
-        lens (_period :: InstanceResource s -> TF.Attribute s Text)
+        lens (_period :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _period = a } :: InstanceResource s)
 
 instance P.HasPeriodUnit (InstanceResource s) s Text where
     periodUnit =
-        lens (_period_unit :: InstanceResource s -> TF.Attribute s Text)
+        lens (_period_unit :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _period_unit = a } :: InstanceResource s)
 
 instance P.HasPrivateIp (InstanceResource s) s Text where
     privateIp =
-        lens (_private_ip :: InstanceResource s -> TF.Attribute s Text)
+        lens (_private_ip :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _private_ip = a } :: InstanceResource s)
 
 instance P.HasRoleName (InstanceResource s) s Text where
     roleName =
-        lens (_role_name :: InstanceResource s -> TF.Attribute s Text)
+        lens (_role_name :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _role_name = a } :: InstanceResource s)
 
 instance P.HasSecurityGroups (InstanceResource s) s Text where
     securityGroups =
-        lens (_security_groups :: InstanceResource s -> TF.Attribute s Text)
+        lens (_security_groups :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _security_groups = a } :: InstanceResource s)
 
 instance P.HasSpotPriceLimit (InstanceResource s) s Text where
     spotPriceLimit =
-        lens (_spot_price_limit :: InstanceResource s -> TF.Attribute s Text)
+        lens (_spot_price_limit :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _spot_price_limit = a } :: InstanceResource s)
 
 instance P.HasSpotStrategy (InstanceResource s) s Text where
     spotStrategy =
-        lens (_spot_strategy :: InstanceResource s -> TF.Attribute s Text)
+        lens (_spot_strategy :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _spot_strategy = a } :: InstanceResource s)
 
 instance P.HasSystemDiskCategory (InstanceResource s) s Text where
     systemDiskCategory =
-        lens (_system_disk_category :: InstanceResource s -> TF.Attribute s Text)
+        lens (_system_disk_category :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _system_disk_category = a } :: InstanceResource s)
 
 instance P.HasSystemDiskSize (InstanceResource s) s Text where
     systemDiskSize =
-        lens (_system_disk_size :: InstanceResource s -> TF.Attribute s Text)
+        lens (_system_disk_size :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _system_disk_size = a } :: InstanceResource s)
 
 instance P.HasTags (InstanceResource s) s Text where
     tags =
-        lens (_tags :: InstanceResource s -> TF.Attribute s Text)
+        lens (_tags :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: InstanceResource s)
 
 instance P.HasUserData (InstanceResource s) s Text where
     userData =
-        lens (_user_data :: InstanceResource s -> TF.Attribute s Text)
+        lens (_user_data :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _user_data = a } :: InstanceResource s)
 
 instance P.HasVswitchId (InstanceResource s) s Text where
     vswitchId =
-        lens (_vswitch_id :: InstanceResource s -> TF.Attribute s Text)
+        lens (_vswitch_id :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _vswitch_id = a } :: InstanceResource s)
 
 instance P.HasComputedAvailabilityZone (InstanceResource s) Text
@@ -2529,26 +2529,26 @@ Provides a key pair attachment resource to bind key pair for several ECS
 instances.
 -}
 data KeyPairAttachmentResource s = KeyPairAttachmentResource {
-      _instance_ids :: !(TF.Attribute s Text)
+      _instance_ids :: !(TF.Attr s Text)
     {- ^ (Required, Force new resource) The list of ECS instance's IDs. -}
-    , _key_name     :: !(TF.Attribute s Text)
+    , _key_name     :: !(TF.Attr s Text)
     {- ^ (Required, Force new resource) The name of key pair used to bind. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KeyPairAttachmentResource s) where
-    toHCL KeyPairAttachmentResource{..} = TF.block $ catMaybes
+    toHCL KeyPairAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "instance_ids" _instance_ids
         , TF.attribute "key_name" _key_name
         ]
 
 instance P.HasInstanceIds (KeyPairAttachmentResource s) s Text where
     instanceIds =
-        lens (_instance_ids :: KeyPairAttachmentResource s -> TF.Attribute s Text)
+        lens (_instance_ids :: KeyPairAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _instance_ids = a } :: KeyPairAttachmentResource s)
 
 instance P.HasKeyName (KeyPairAttachmentResource s) s Text where
     keyName =
-        lens (_key_name :: KeyPairAttachmentResource s -> TF.Attribute s Text)
+        lens (_key_name :: KeyPairAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _key_name = a } :: KeyPairAttachmentResource s)
 
 instance P.HasComputedInstanceIds (KeyPairAttachmentResource s) Text
@@ -2567,18 +2567,18 @@ keyPairAttachmentResource =
 Provides a key pair resource.
 -}
 data KeyPairResource s = KeyPairResource {
-      _key_file        :: !(TF.Attribute s Text)
+      _key_file        :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The name of file to save your new key pair's private key. Strongly suggest you to specified it when you creating key pair, otherwise, you wouldn't get its private key ever. -}
-    , _key_name        :: !(TF.Attribute s Text)
+    , _key_name        :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The key pair's name. It is the only in one Alicloud account. -}
-    , _key_name_prefix :: !(TF.Attribute s Text)
+    , _key_name_prefix :: !(TF.Attr s Text)
     {- ^ - (Force new resource) The key pair name's prefix. It is conflict with @key_name@ . If it is specified, terraform will using it to build the only key name. -}
-    , _public_key      :: !(TF.Attribute s Text)
+    , _public_key      :: !(TF.Attr s Text)
     {- ^ - (Force new resource) You can import an existing public key and using Alicloud key pair to manage it. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KeyPairResource s) where
-    toHCL KeyPairResource{..} = TF.block $ catMaybes
+    toHCL KeyPairResource{..} = TF.inline $ catMaybes
         [ TF.attribute "key_file" _key_file
         , TF.attribute "key_name" _key_name
         , TF.attribute "key_name_prefix" _key_name_prefix
@@ -2587,22 +2587,22 @@ instance TF.ToHCL (KeyPairResource s) where
 
 instance P.HasKeyFile (KeyPairResource s) s Text where
     keyFile =
-        lens (_key_file :: KeyPairResource s -> TF.Attribute s Text)
+        lens (_key_file :: KeyPairResource s -> TF.Attr s Text)
              (\s a -> s { _key_file = a } :: KeyPairResource s)
 
 instance P.HasKeyName (KeyPairResource s) s Text where
     keyName =
-        lens (_key_name :: KeyPairResource s -> TF.Attribute s Text)
+        lens (_key_name :: KeyPairResource s -> TF.Attr s Text)
              (\s a -> s { _key_name = a } :: KeyPairResource s)
 
 instance P.HasKeyNamePrefix (KeyPairResource s) s Text where
     keyNamePrefix =
-        lens (_key_name_prefix :: KeyPairResource s -> TF.Attribute s Text)
+        lens (_key_name_prefix :: KeyPairResource s -> TF.Attr s Text)
              (\s a -> s { _key_name_prefix = a } :: KeyPairResource s)
 
 instance P.HasPublicKey (KeyPairResource s) s Text where
     publicKey =
-        lens (_public_key :: KeyPairResource s -> TF.Attribute s Text)
+        lens (_public_key :: KeyPairResource s -> TF.Attr s Text)
              (\s a -> s { _public_key = a } :: KeyPairResource s)
 
 instance P.HasComputedFingerprint (KeyPairResource s) Text
@@ -2624,18 +2624,18 @@ A kms key can help user to protect data security in the transmission
 process.
 -}
 data KmsKeyResource s = KmsKeyResource {
-      _deletion_window_in_days :: !(TF.Attribute s Text)
+      _deletion_window_in_days :: !(TF.Attr s Text)
     {- ^ (Optional) Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 30 days. -}
-    , _description             :: !(TF.Attribute s Text)
+    , _description             :: !(TF.Attr s Text)
     {- ^ (Optional) The description of the key as viewed in Alicloud console. Default to "From Terraform". -}
-    , _is_enabled              :: !(TF.Attribute s Text)
+    , _is_enabled              :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies whether the key is enabled. Defaults to true. -}
-    , _key_usage               :: !(TF.Attribute s Text)
+    , _key_usage               :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies the usage of CMK. Currently, default to 'ENCRYPT/DECRYPT', indicating that CMK is used for encryption and decryption. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KmsKeyResource s) where
-    toHCL KmsKeyResource{..} = TF.block $ catMaybes
+    toHCL KmsKeyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "deletion_window_in_days" _deletion_window_in_days
         , TF.attribute "description" _description
         , TF.attribute "is_enabled" _is_enabled
@@ -2644,22 +2644,22 @@ instance TF.ToHCL (KmsKeyResource s) where
 
 instance P.HasDeletionWindowInDays (KmsKeyResource s) s Text where
     deletionWindowInDays =
-        lens (_deletion_window_in_days :: KmsKeyResource s -> TF.Attribute s Text)
+        lens (_deletion_window_in_days :: KmsKeyResource s -> TF.Attr s Text)
              (\s a -> s { _deletion_window_in_days = a } :: KmsKeyResource s)
 
 instance P.HasDescription (KmsKeyResource s) s Text where
     description =
-        lens (_description :: KmsKeyResource s -> TF.Attribute s Text)
+        lens (_description :: KmsKeyResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: KmsKeyResource s)
 
 instance P.HasIsEnabled (KmsKeyResource s) s Text where
     isEnabled =
-        lens (_is_enabled :: KmsKeyResource s -> TF.Attribute s Text)
+        lens (_is_enabled :: KmsKeyResource s -> TF.Attr s Text)
              (\s a -> s { _is_enabled = a } :: KmsKeyResource s)
 
 instance P.HasKeyUsage (KmsKeyResource s) s Text where
     keyUsage =
-        lens (_key_usage :: KmsKeyResource s -> TF.Attribute s Text)
+        lens (_key_usage :: KmsKeyResource s -> TF.Attr s Text)
              (\s a -> s { _key_usage = a } :: KmsKeyResource s)
 
 instance P.HasComputedArn (KmsKeyResource s) Text
@@ -2691,18 +2691,18 @@ packages, it can not bind elastic IP and you have to submit the
 <https://selfservice.console.aliyun.com/ticket/createIndex> to solve.
 -}
 data NatGatewayResource s = NatGatewayResource {
-      _description   :: !(TF.Attribute s Text)
+      _description   :: !(TF.Attr s Text)
     {- ^ (Optional) Description of the nat gateway, This description can have a string of 2 to 256 characters, It cannot begin with http:// or https://. Defaults to null. -}
-    , _name          :: !(TF.Attribute s Text)
+    , _name          :: !(TF.Attr s Text)
     {- ^ (Optional) Name of the nat gateway. The value can have a string of 2 to 128 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin or end with a hyphen, and must not begin with http:// or https://. Defaults to null. -}
-    , _specification :: !(TF.Attribute s Text)
+    , _specification :: !(TF.Attr s Text)
     {- ^ (Optional) The specification of the nat gateway. Valid values are @Small@ , @Middle@ and @Large@ . Default to @Small@ . Details refer to <https://www.alibabacloud.com/help/doc-detail/42757.htm> . -}
-    , _vpc_id        :: !(TF.Attribute s Text)
+    , _vpc_id        :: !(TF.Attr s Text)
     {- ^ (Required, Forces New Resorce) The VPC ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NatGatewayResource s) where
-    toHCL NatGatewayResource{..} = TF.block $ catMaybes
+    toHCL NatGatewayResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         , TF.attribute "specification" _specification
@@ -2711,22 +2711,22 @@ instance TF.ToHCL (NatGatewayResource s) where
 
 instance P.HasDescription (NatGatewayResource s) s Text where
     description =
-        lens (_description :: NatGatewayResource s -> TF.Attribute s Text)
+        lens (_description :: NatGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: NatGatewayResource s)
 
 instance P.HasName (NatGatewayResource s) s Text where
     name =
-        lens (_name :: NatGatewayResource s -> TF.Attribute s Text)
+        lens (_name :: NatGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NatGatewayResource s)
 
 instance P.HasSpecification (NatGatewayResource s) s Text where
     specification =
-        lens (_specification :: NatGatewayResource s -> TF.Attribute s Text)
+        lens (_specification :: NatGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _specification = a } :: NatGatewayResource s)
 
 instance P.HasVpcId (NatGatewayResource s) s Text where
     vpcId =
-        lens (_vpc_id :: NatGatewayResource s -> TF.Attribute s Text)
+        lens (_vpc_id :: NatGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: NatGatewayResource s)
 
 instance P.HasComputedBandwidthPackageIds (NatGatewayResource s) Text
@@ -2754,34 +2754,34 @@ natGatewayResource =
 Provides a resource to put a object(content or file) to a oss bucket.
 -}
 data OssBucketObjectResource s = OssBucketObjectResource {
-      _acl                    :: !(TF.Attribute s Text)
+      _acl                    :: !(TF.Attr s Text)
     {- ^ (Optional) The <https://help.aliyun.com/document_detail/31843.html?spm=5176.doc31842.2.2.j7C2nn> to apply. Defaults to "private". -}
-    , _bucket                 :: !(TF.Attribute s Text)
+    , _bucket                 :: !(TF.Attr s Text)
     {- ^ (Required) The name of the bucket to put the file in. -}
-    , _cache_control          :: !(TF.Attribute s Text)
+    , _cache_control          :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies caching behavior along the request/reply chain. Read <https://www.ietf.org/rfc/rfc2616.txt?spm=5176.doc31978.2.1.iLEoOM&file=rfc2616.txt> for further details. -}
-    , _content                :: !(TF.Attribute s Text)
+    , _content                :: !(TF.Attr s Text)
     {- ^ (Required unless @source@ given) The literal content being uploaded to the bucket. -}
-    , _content_disposition    :: !(TF.Attribute s Text)
+    , _content_disposition    :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies presentational information for the object. Read <https://www.ietf.org/rfc/rfc2616.txt?spm=5176.doc31978.2.1.iLEoOM&file=rfc2616.txt> for further details. -}
-    , _content_encoding       :: !(TF.Attribute s Text)
+    , _content_encoding       :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read <https://www.ietf.org/rfc/rfc2616.txt?spm=5176.doc31978.2.1.iLEoOM&file=rfc2616.txt> for further details. -}
-    , _content_md5            :: !(TF.Attribute s Text)
+    , _content_md5            :: !(TF.Attr s Text)
     {- ^ (Optional) The MD5 value of the content. Read <https://help.aliyun.com/document_detail/31978.html?spm=5176.product31815.6.861.upTmI0> for computing method. -}
-    , _content_type           :: !(TF.Attribute s Text)
+    , _content_type           :: !(TF.Attr s Text)
     {- ^ (Optional) A standard MIME type describing the format of the object data, e.g. application/octet-stream. All Valid MIME Types are valid for this input. -}
-    , _expires                :: !(TF.Attribute s Text)
+    , _expires                :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies expire date for the the request/response. Read <https://www.ietf.org/rfc/rfc2616.txt?spm=5176.doc31978.2.1.iLEoOM&file=rfc2616.txt> for further details. -}
-    , _key                    :: !(TF.Attribute s Text)
+    , _key                    :: !(TF.Attr s Text)
     {- ^ (Required) The name of the object once it is in the bucket. -}
-    , _server_side_encryption :: !(TF.Attribute s Text)
+    , _server_side_encryption :: !(TF.Attr s Text)
     {- ^ (Optional) Specifies server-side encryption of the object in OSS. At present, it valid value is " @AES256@ ". -}
-    , _source                 :: !(TF.Attribute s Text)
+    , _source                 :: !(TF.Attr s Text)
     {- ^ (Required) The path to the source file being uploaded to the bucket. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (OssBucketObjectResource s) where
-    toHCL OssBucketObjectResource{..} = TF.block $ catMaybes
+    toHCL OssBucketObjectResource{..} = TF.inline $ catMaybes
         [ TF.attribute "acl" _acl
         , TF.attribute "bucket" _bucket
         , TF.attribute "cache_control" _cache_control
@@ -2798,62 +2798,62 @@ instance TF.ToHCL (OssBucketObjectResource s) where
 
 instance P.HasAcl (OssBucketObjectResource s) s Text where
     acl =
-        lens (_acl :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_acl :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _acl = a } :: OssBucketObjectResource s)
 
 instance P.HasBucket (OssBucketObjectResource s) s Text where
     bucket =
-        lens (_bucket :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_bucket :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: OssBucketObjectResource s)
 
 instance P.HasCacheControl (OssBucketObjectResource s) s Text where
     cacheControl =
-        lens (_cache_control :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_cache_control :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _cache_control = a } :: OssBucketObjectResource s)
 
 instance P.HasContent (OssBucketObjectResource s) s Text where
     content =
-        lens (_content :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_content :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _content = a } :: OssBucketObjectResource s)
 
 instance P.HasContentDisposition (OssBucketObjectResource s) s Text where
     contentDisposition =
-        lens (_content_disposition :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_content_disposition :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _content_disposition = a } :: OssBucketObjectResource s)
 
 instance P.HasContentEncoding (OssBucketObjectResource s) s Text where
     contentEncoding =
-        lens (_content_encoding :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_content_encoding :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _content_encoding = a } :: OssBucketObjectResource s)
 
 instance P.HasContentMd5 (OssBucketObjectResource s) s Text where
     contentMd5 =
-        lens (_content_md5 :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_content_md5 :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _content_md5 = a } :: OssBucketObjectResource s)
 
 instance P.HasContentType (OssBucketObjectResource s) s Text where
     contentType =
-        lens (_content_type :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_content_type :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _content_type = a } :: OssBucketObjectResource s)
 
 instance P.HasExpires (OssBucketObjectResource s) s Text where
     expires =
-        lens (_expires :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_expires :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _expires = a } :: OssBucketObjectResource s)
 
 instance P.HasKey (OssBucketObjectResource s) s Text where
     key =
-        lens (_key :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_key :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _key = a } :: OssBucketObjectResource s)
 
 instance P.HasServerSideEncryption (OssBucketObjectResource s) s Text where
     serverSideEncryption =
-        lens (_server_side_encryption :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_server_side_encryption :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _server_side_encryption = a } :: OssBucketObjectResource s)
 
 instance P.HasSource (OssBucketObjectResource s) s Text where
     source =
-        lens (_source :: OssBucketObjectResource s -> TF.Attribute s Text)
+        lens (_source :: OssBucketObjectResource s -> TF.Attr s Text)
              (\s a -> s { _source = a } :: OssBucketObjectResource s)
 
 instance P.HasComputedContentLength (OssBucketObjectResource s) Text
@@ -2885,26 +2885,26 @@ The bucket namespace is shared by all users of the OSS system. Please set
 bucket name as unique as possible.
 -}
 data OssBucketResource s = OssBucketResource {
-      _acl              :: !(TF.Attribute s Text)
+      _acl              :: !(TF.Attr s Text)
     {- ^ (Optional) The <https://help.aliyun.com/document_detail/31843.html?spm=5176.doc31842.2.2.j7C2nn> to apply. Defaults to "private". -}
-    , _bucket           :: !(TF.Attribute s Text)
+    , _bucket           :: !(TF.Attr s Text)
     {- ^ (Optional, Forces New Resorce) The name of the bucket. If omitted, Terraform will assign a random and unique name. -}
-    , _core_rule        :: !(TF.Attribute s Text)
+    , _core_rule        :: !(TF.Attr s Text)
     {- ^ (Optional) A rule of <https://help.aliyun.com/document_detail/32001.html?spm=5176.doc32000.6.886.Hd5dYP> (documented below). The items of core rule are no more than 10 for every OSS bucket. -}
-    , _lifecycle_rule   :: !(TF.Attribute s Text)
+    , _lifecycle_rule   :: !(TF.Attr s Text)
     {- ^ (Optional) A configuration of <https://help.aliyun.com/document_detail/31964.html?spm=5176.doc31869.6.846.ZxpE3x> (documented below). -}
-    , _logging          :: !(TF.Attribute s Text)
+    , _logging          :: !(TF.Attr s Text)
     {- ^ (Optional) A Settings of <https://help.aliyun.com/document_detail/31961.html?spm=5176.doc31868.2.4.jjuG5O> (documented below). -}
-    , _logging_isenable :: !(TF.Attribute s Text)
+    , _logging_isenable :: !(TF.Attr s Text)
     {- ^ (Optional) The flag of using logging enable container. Defaults true. -}
-    , _referer_config   :: !(TF.Attribute s Text)
+    , _referer_config   :: !(TF.Attr s Text)
     {- ^ (Optional) The configuration of <https://help.aliyun.com/document_detail/31869.html?spm=5176.doc31963.2.2.a3LZzH> (documented below). -}
-    , _website          :: !(TF.Attribute s Text)
+    , _website          :: !(TF.Attr s Text)
     {- ^ (Optional) A website object(documented below). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (OssBucketResource s) where
-    toHCL OssBucketResource{..} = TF.block $ catMaybes
+    toHCL OssBucketResource{..} = TF.inline $ catMaybes
         [ TF.attribute "acl" _acl
         , TF.attribute "bucket" _bucket
         , TF.attribute "core_rule" _core_rule
@@ -2917,42 +2917,42 @@ instance TF.ToHCL (OssBucketResource s) where
 
 instance P.HasAcl (OssBucketResource s) s Text where
     acl =
-        lens (_acl :: OssBucketResource s -> TF.Attribute s Text)
+        lens (_acl :: OssBucketResource s -> TF.Attr s Text)
              (\s a -> s { _acl = a } :: OssBucketResource s)
 
 instance P.HasBucket (OssBucketResource s) s Text where
     bucket =
-        lens (_bucket :: OssBucketResource s -> TF.Attribute s Text)
+        lens (_bucket :: OssBucketResource s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: OssBucketResource s)
 
 instance P.HasCoreRule (OssBucketResource s) s Text where
     coreRule =
-        lens (_core_rule :: OssBucketResource s -> TF.Attribute s Text)
+        lens (_core_rule :: OssBucketResource s -> TF.Attr s Text)
              (\s a -> s { _core_rule = a } :: OssBucketResource s)
 
 instance P.HasLifecycleRule (OssBucketResource s) s Text where
     lifecycleRule =
-        lens (_lifecycle_rule :: OssBucketResource s -> TF.Attribute s Text)
+        lens (_lifecycle_rule :: OssBucketResource s -> TF.Attr s Text)
              (\s a -> s { _lifecycle_rule = a } :: OssBucketResource s)
 
 instance P.HasLogging (OssBucketResource s) s Text where
     logging =
-        lens (_logging :: OssBucketResource s -> TF.Attribute s Text)
+        lens (_logging :: OssBucketResource s -> TF.Attr s Text)
              (\s a -> s { _logging = a } :: OssBucketResource s)
 
 instance P.HasLoggingIsenable (OssBucketResource s) s Text where
     loggingIsenable =
-        lens (_logging_isenable :: OssBucketResource s -> TF.Attribute s Text)
+        lens (_logging_isenable :: OssBucketResource s -> TF.Attr s Text)
              (\s a -> s { _logging_isenable = a } :: OssBucketResource s)
 
 instance P.HasRefererConfig (OssBucketResource s) s Text where
     refererConfig =
-        lens (_referer_config :: OssBucketResource s -> TF.Attribute s Text)
+        lens (_referer_config :: OssBucketResource s -> TF.Attr s Text)
              (\s a -> s { _referer_config = a } :: OssBucketResource s)
 
 instance P.HasWebsite (OssBucketResource s) s Text where
     website =
-        lens (_website :: OssBucketResource s -> TF.Attribute s Text)
+        lens (_website :: OssBucketResource s -> TF.Attr s Text)
              (\s a -> s { _website = a } :: OssBucketResource s)
 
 instance P.HasComputedAcl (OssBucketResource s) Text
@@ -2984,16 +2984,16 @@ Provides a RAM User access key resource. ~> NOTE: You should set the
 @secret_file@ if you want to get the access key.
 -}
 data RamAccessKeyResource s = RamAccessKeyResource {
-      _secret_file :: !(TF.Attribute s Text)
+      _secret_file :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) The name of file that can save access key id and access key secret. Strongly suggest you to specified it when you creating access key, otherwise, you wouldn't get its secret ever. -}
-    , _status      :: !(TF.Attribute s Text)
+    , _status      :: !(TF.Attr s Text)
     {- ^ (Optional) Status of access key. It must be @Active@ or @Inactive@ . Default value is @Active@ . -}
-    , _user_name   :: !(TF.Attribute s Text)
+    , _user_name   :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM user. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamAccessKeyResource s) where
-    toHCL RamAccessKeyResource{..} = TF.block $ catMaybes
+    toHCL RamAccessKeyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "secret_file" _secret_file
         , TF.attribute "status" _status
         , TF.attribute "user_name" _user_name
@@ -3001,17 +3001,17 @@ instance TF.ToHCL (RamAccessKeyResource s) where
 
 instance P.HasSecretFile (RamAccessKeyResource s) s Text where
     secretFile =
-        lens (_secret_file :: RamAccessKeyResource s -> TF.Attribute s Text)
+        lens (_secret_file :: RamAccessKeyResource s -> TF.Attr s Text)
              (\s a -> s { _secret_file = a } :: RamAccessKeyResource s)
 
 instance P.HasStatus (RamAccessKeyResource s) s Text where
     status =
-        lens (_status :: RamAccessKeyResource s -> TF.Attribute s Text)
+        lens (_status :: RamAccessKeyResource s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: RamAccessKeyResource s)
 
 instance P.HasUserName (RamAccessKeyResource s) s Text where
     userName =
-        lens (_user_name :: RamAccessKeyResource s -> TF.Attribute s Text)
+        lens (_user_name :: RamAccessKeyResource s -> TF.Attr s Text)
              (\s a -> s { _user_name = a } :: RamAccessKeyResource s)
 
 instance P.HasComputedId (RamAccessKeyResource s) Text
@@ -3031,18 +3031,18 @@ ramAccessKeyResource =
 Provides a RAM cloud account alias.
 -}
 data RamAccountAliasResource s = RamAccountAliasResource {
-      _account_alias :: !(TF.Attribute s Text)
+      _account_alias :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Alias of cloud account. This name can have a string of 3 to 32 characters, must contain only alphanumeric characters or hyphens, such as "-", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamAccountAliasResource s) where
-    toHCL RamAccountAliasResource{..} = TF.block $ catMaybes
+    toHCL RamAccountAliasResource{..} = TF.inline $ catMaybes
         [ TF.attribute "account_alias" _account_alias
         ]
 
 instance P.HasAccountAlias (RamAccountAliasResource s) s Text where
     accountAlias =
-        lens (_account_alias :: RamAccountAliasResource s -> TF.Attribute s Text)
+        lens (_account_alias :: RamAccountAliasResource s -> TF.Attr s Text)
              (\s a -> s { _account_alias = a } :: RamAccountAliasResource s)
 
 instance P.HasComputedAccountAlias (RamAccountAliasResource s) Text
@@ -3064,7 +3064,7 @@ data RamAliasResource s = RamAliasResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamAliasResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 ramAliasResource :: TF.Schema TF.Resource P.AliCloud (RamAliasResource s)
@@ -3078,26 +3078,26 @@ ramAliasResource =
 Provides a RAM Group membership resource.
 -}
 data RamGroupMembershipResource s = RamGroupMembershipResource {
-      _group_name :: !(TF.Attribute s Text)
+      _group_name :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM group. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphen "-", and must not begin with a hyphen. -}
-    , _user_names :: !(TF.Attribute s Text)
+    , _user_names :: !(TF.Attr s Text)
     {- ^ (Required) Set of user name which will be added to group. Each name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamGroupMembershipResource s) where
-    toHCL RamGroupMembershipResource{..} = TF.block $ catMaybes
+    toHCL RamGroupMembershipResource{..} = TF.inline $ catMaybes
         [ TF.attribute "group_name" _group_name
         , TF.attribute "user_names" _user_names
         ]
 
 instance P.HasGroupName (RamGroupMembershipResource s) s Text where
     groupName =
-        lens (_group_name :: RamGroupMembershipResource s -> TF.Attribute s Text)
+        lens (_group_name :: RamGroupMembershipResource s -> TF.Attr s Text)
              (\s a -> s { _group_name = a } :: RamGroupMembershipResource s)
 
 instance P.HasUserNames (RamGroupMembershipResource s) s Text where
     userNames =
-        lens (_user_names :: RamGroupMembershipResource s -> TF.Attribute s Text)
+        lens (_user_names :: RamGroupMembershipResource s -> TF.Attr s Text)
              (\s a -> s { _user_names = a } :: RamGroupMembershipResource s)
 
 instance P.HasComputedGroupName (RamGroupMembershipResource s) Text
@@ -3117,16 +3117,16 @@ ramGroupMembershipResource =
 Provides a RAM Group Policy attachment resource.
 -}
 data RamGroupPolicyAttachmentResource s = RamGroupPolicyAttachmentResource {
-      _group_name  :: !(TF.Attribute s Text)
+      _group_name  :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM group. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphen "-", and must not begin with a hyphen. -}
-    , _policy_name :: !(TF.Attribute s Text)
+    , _policy_name :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM policy. This name can have a string of 1 to 128 characters, must contain only alphanumeric characters or hyphen "-", and must not begin with a hyphen. -}
-    , _policy_type :: !(TF.Attribute s Text)
+    , _policy_type :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Type of the RAM policy. It must be @Custom@ or @System@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamGroupPolicyAttachmentResource s) where
-    toHCL RamGroupPolicyAttachmentResource{..} = TF.block $ catMaybes
+    toHCL RamGroupPolicyAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "group_name" _group_name
         , TF.attribute "policy_name" _policy_name
         , TF.attribute "policy_type" _policy_type
@@ -3134,17 +3134,17 @@ instance TF.ToHCL (RamGroupPolicyAttachmentResource s) where
 
 instance P.HasGroupName (RamGroupPolicyAttachmentResource s) s Text where
     groupName =
-        lens (_group_name :: RamGroupPolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_group_name :: RamGroupPolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _group_name = a } :: RamGroupPolicyAttachmentResource s)
 
 instance P.HasPolicyName (RamGroupPolicyAttachmentResource s) s Text where
     policyName =
-        lens (_policy_name :: RamGroupPolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_policy_name :: RamGroupPolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _policy_name = a } :: RamGroupPolicyAttachmentResource s)
 
 instance P.HasPolicyType (RamGroupPolicyAttachmentResource s) s Text where
     policyType =
-        lens (_policy_type :: RamGroupPolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_policy_type :: RamGroupPolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _policy_type = a } :: RamGroupPolicyAttachmentResource s)
 
 instance P.HasComputedGroupName (RamGroupPolicyAttachmentResource s) Text
@@ -3170,16 +3170,16 @@ beginning, you need add @force = true@ to configuration file and run
 @terraform plan@ , then you can delete resource forcefully.
 -}
 data RamGroupResource s = RamGroupResource {
-      _comments :: !(TF.Attribute s Text)
+      _comments :: !(TF.Attr s Text)
     {- ^ (Optional) Comment of the RAM group. This parameter can have a string of 1 to 128 characters. -}
-    , _force    :: !(TF.Attribute s Text)
+    , _force    :: !(TF.Attr s Text)
     {- ^ (Optional) This parameter is used for resource destroy. Default value is @false@ . -}
-    , _name     :: !(TF.Attribute s Text)
+    , _name     :: !(TF.Attr s Text)
     {- ^ (Required) Name of the RAM group. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphen "-", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamGroupResource s) where
-    toHCL RamGroupResource{..} = TF.block $ catMaybes
+    toHCL RamGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "comments" _comments
         , TF.attribute "force" _force
         , TF.attribute "name" _name
@@ -3187,17 +3187,17 @@ instance TF.ToHCL (RamGroupResource s) where
 
 instance P.HasComments (RamGroupResource s) s Text where
     comments =
-        lens (_comments :: RamGroupResource s -> TF.Attribute s Text)
+        lens (_comments :: RamGroupResource s -> TF.Attr s Text)
              (\s a -> s { _comments = a } :: RamGroupResource s)
 
 instance P.HasForce (RamGroupResource s) s Text where
     force =
-        lens (_force :: RamGroupResource s -> TF.Attribute s Text)
+        lens (_force :: RamGroupResource s -> TF.Attr s Text)
              (\s a -> s { _force = a } :: RamGroupResource s)
 
 instance P.HasName (RamGroupResource s) s Text where
     name =
-        lens (_name :: RamGroupResource s -> TF.Attribute s Text)
+        lens (_name :: RamGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RamGroupResource s)
 
 instance P.HasComputedComments (RamGroupResource s) Text
@@ -3218,18 +3218,18 @@ ramGroupResource =
 Provides a RAM User Login Profile resource.
 -}
 data RamLoginProfileResource s = RamLoginProfileResource {
-      _mfa_bind_required       :: !(TF.Attribute s Text)
+      _mfa_bind_required       :: !(TF.Attr s Text)
     {- ^ (Optional) This parameter indicates whether the MFA needs to be bind when the user first logs in. Default value is @false@ . -}
-    , _password                :: !(TF.Attribute s Text)
+    , _password                :: !(TF.Attr s Text)
     {- ^ (Required) Password of the RAM user. -}
-    , _password_reset_required :: !(TF.Attribute s Text)
+    , _password_reset_required :: !(TF.Attr s Text)
     {- ^ (Optional) This parameter indicates whether the password needs to be reset when the user first logs in. Default value is @false@ . -}
-    , _user_name               :: !(TF.Attribute s Text)
+    , _user_name               :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM user. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamLoginProfileResource s) where
-    toHCL RamLoginProfileResource{..} = TF.block $ catMaybes
+    toHCL RamLoginProfileResource{..} = TF.inline $ catMaybes
         [ TF.attribute "mfa_bind_required" _mfa_bind_required
         , TF.attribute "password" _password
         , TF.attribute "password_reset_required" _password_reset_required
@@ -3238,22 +3238,22 @@ instance TF.ToHCL (RamLoginProfileResource s) where
 
 instance P.HasMfaBindRequired (RamLoginProfileResource s) s Text where
     mfaBindRequired =
-        lens (_mfa_bind_required :: RamLoginProfileResource s -> TF.Attribute s Text)
+        lens (_mfa_bind_required :: RamLoginProfileResource s -> TF.Attr s Text)
              (\s a -> s { _mfa_bind_required = a } :: RamLoginProfileResource s)
 
 instance P.HasPassword (RamLoginProfileResource s) s Text where
     password =
-        lens (_password :: RamLoginProfileResource s -> TF.Attribute s Text)
+        lens (_password :: RamLoginProfileResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: RamLoginProfileResource s)
 
 instance P.HasPasswordResetRequired (RamLoginProfileResource s) s Text where
     passwordResetRequired =
-        lens (_password_reset_required :: RamLoginProfileResource s -> TF.Attribute s Text)
+        lens (_password_reset_required :: RamLoginProfileResource s -> TF.Attr s Text)
              (\s a -> s { _password_reset_required = a } :: RamLoginProfileResource s)
 
 instance P.HasUserName (RamLoginProfileResource s) s Text where
     userName =
-        lens (_user_name :: RamLoginProfileResource s -> TF.Attribute s Text)
+        lens (_user_name :: RamLoginProfileResource s -> TF.Attr s Text)
              (\s a -> s { _user_name = a } :: RamLoginProfileResource s)
 
 instance P.HasComputedId (RamLoginProfileResource s) Text
@@ -3280,22 +3280,22 @@ beginning, you need add @force = true@ to configuration file and run
 @terraform plan@ , then you can delete resource forcefully.
 -}
 data RamPolicyResource s = RamPolicyResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) Description of the RAM policy. This name can have a string of 1 to 1024 characters. -}
-    , _document    :: !(TF.Attribute s Text)
+    , _document    :: !(TF.Attr s Text)
     {- ^ (Optional, Conflicts with @statement@ and @version@ ) Document of the RAM policy. It is required when the @statement@ is not specified. -}
-    , _force       :: !(TF.Attribute s Text)
+    , _force       :: !(TF.Attr s Text)
     {- ^ (Optional) This parameter is used for resource destroy. Default value is @false@ . -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM policy. This name can have a string of 1 to 128 characters, must contain only alphanumeric characters or hyphen "-", and must not begin with a hyphen. -}
-    , _statement   :: !(TF.Attribute s Text)
+    , _statement   :: !(TF.Attr s Text)
     {- ^ (Optional,  Type: list, Conflicts with @document@ ) Statements of the RAM policy document. It is required when the @document@ is not specified. -}
-    , _version     :: !(TF.Attribute s Text)
+    , _version     :: !(TF.Attr s Text)
     {- ^ (Optional, Conflicts with @document@ ) Version of the RAM policy document. Valid value is @1@ . Default value is @1@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamPolicyResource s) where
-    toHCL RamPolicyResource{..} = TF.block $ catMaybes
+    toHCL RamPolicyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "document" _document
         , TF.attribute "force" _force
@@ -3306,32 +3306,32 @@ instance TF.ToHCL (RamPolicyResource s) where
 
 instance P.HasDescription (RamPolicyResource s) s Text where
     description =
-        lens (_description :: RamPolicyResource s -> TF.Attribute s Text)
+        lens (_description :: RamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: RamPolicyResource s)
 
 instance P.HasDocument (RamPolicyResource s) s Text where
     document =
-        lens (_document :: RamPolicyResource s -> TF.Attribute s Text)
+        lens (_document :: RamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _document = a } :: RamPolicyResource s)
 
 instance P.HasForce (RamPolicyResource s) s Text where
     force =
-        lens (_force :: RamPolicyResource s -> TF.Attribute s Text)
+        lens (_force :: RamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _force = a } :: RamPolicyResource s)
 
 instance P.HasName (RamPolicyResource s) s Text where
     name =
-        lens (_name :: RamPolicyResource s -> TF.Attribute s Text)
+        lens (_name :: RamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RamPolicyResource s)
 
 instance P.HasStatement (RamPolicyResource s) s Text where
     statement =
-        lens (_statement :: RamPolicyResource s -> TF.Attribute s Text)
+        lens (_statement :: RamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _statement = a } :: RamPolicyResource s)
 
 instance P.HasVersion (RamPolicyResource s) s Text where
     version =
-        lens (_version :: RamPolicyResource s -> TF.Attribute s Text)
+        lens (_version :: RamPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: RamPolicyResource s)
 
 instance P.HasComputedAttachmentCount (RamPolicyResource s) Text
@@ -3361,26 +3361,26 @@ Provides a RAM role attachment resource to bind role for several ECS
 instances.
 -}
 data RamRoleAttachmentResource s = RamRoleAttachmentResource {
-      _instance_ids :: !(TF.Attribute s Text)
+      _instance_ids :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The list of ECS instance's IDs. -}
-    , _role_name    :: !(TF.Attribute s Text)
+    , _role_name    :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The name of role used to bind. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-", "_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamRoleAttachmentResource s) where
-    toHCL RamRoleAttachmentResource{..} = TF.block $ catMaybes
+    toHCL RamRoleAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "instance_ids" _instance_ids
         , TF.attribute "role_name" _role_name
         ]
 
 instance P.HasInstanceIds (RamRoleAttachmentResource s) s Text where
     instanceIds =
-        lens (_instance_ids :: RamRoleAttachmentResource s -> TF.Attribute s Text)
+        lens (_instance_ids :: RamRoleAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _instance_ids = a } :: RamRoleAttachmentResource s)
 
 instance P.HasRoleName (RamRoleAttachmentResource s) s Text where
     roleName =
-        lens (_role_name :: RamRoleAttachmentResource s -> TF.Attribute s Text)
+        lens (_role_name :: RamRoleAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _role_name = a } :: RamRoleAttachmentResource s)
 
 instance P.HasComputedInstanceIds (RamRoleAttachmentResource s) Text
@@ -3399,16 +3399,16 @@ ramRoleAttachmentResource =
 Provides a RAM Role attachment resource.
 -}
 data RamRolePolicyAttachmentResource s = RamRolePolicyAttachmentResource {
-      _policy_name :: !(TF.Attribute s Text)
+      _policy_name :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM policy. This name can have a string of 1 to 128 characters, must contain only alphanumeric characters or hyphen "-", and must not begin with a hyphen. -}
-    , _policy_type :: !(TF.Attribute s Text)
+    , _policy_type :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Type of the RAM policy. It must be @Custom@ or @System@ . -}
-    , _role_name   :: !(TF.Attribute s Text)
+    , _role_name   :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM Role. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-", "_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamRolePolicyAttachmentResource s) where
-    toHCL RamRolePolicyAttachmentResource{..} = TF.block $ catMaybes
+    toHCL RamRolePolicyAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "policy_name" _policy_name
         , TF.attribute "policy_type" _policy_type
         , TF.attribute "role_name" _role_name
@@ -3416,17 +3416,17 @@ instance TF.ToHCL (RamRolePolicyAttachmentResource s) where
 
 instance P.HasPolicyName (RamRolePolicyAttachmentResource s) s Text where
     policyName =
-        lens (_policy_name :: RamRolePolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_policy_name :: RamRolePolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _policy_name = a } :: RamRolePolicyAttachmentResource s)
 
 instance P.HasPolicyType (RamRolePolicyAttachmentResource s) s Text where
     policyType =
-        lens (_policy_type :: RamRolePolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_policy_type :: RamRolePolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _policy_type = a } :: RamRolePolicyAttachmentResource s)
 
 instance P.HasRoleName (RamRolePolicyAttachmentResource s) s Text where
     roleName =
-        lens (_role_name :: RamRolePolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_role_name :: RamRolePolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _role_name = a } :: RamRolePolicyAttachmentResource s)
 
 instance P.HasComputedId (RamRolePolicyAttachmentResource s) Text
@@ -3452,24 +3452,24 @@ beginning, you need add @force = true@ to configuration file and run
 @terraform plan@ , then you can delete resource forcefully.
 -}
 data RamRoleResource s = RamRoleResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) Description of the RAM role. This name can have a string of 1 to 1024 characters. -}
-    , _document    :: !(TF.Attribute s Text)
+    , _document    :: !(TF.Attr s Text)
     {- ^ (Optional, Conflicts with @services@ , @ram_users@ and @version@ ) Authorization strategy of the RAM role. It is required when the @services@ and @ram_users@ are not specified. -}
-    , _force       :: !(TF.Attribute s Text)
+    , _force       :: !(TF.Attr s Text)
     {- ^ (Optional) This parameter is used for resource destroy. Default value is @false@ . -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM role. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-", "_", and must not begin with a hyphen. -}
-    , _ram_users   :: !(TF.Attribute s Text)
+    , _ram_users   :: !(TF.Attr s Text)
     {- ^ (Optional, Type: list, Conflicts with @document@ ) List of ram users who can assume the RAM role. The format of each item in this list is @acs:ram::${account_id}:root@ or @acs:ram::${account_id}:user/${user_name}@ , such as @acs:ram::1234567890000:root@ and @acs:ram::1234567890001:user/Mary@ . The @${user_name}@ is the name of a RAM user which must exists in the Alicloud account indicated by the @${account_id}@ . -}
-    , _services    :: !(TF.Attribute s Text)
+    , _services    :: !(TF.Attr s Text)
     {- ^ (Optional, Type: list, Conflicts with @document@ ) List of services which can assume the RAM role. The format of each item in this list is @${service}.aliyuncs.com@ or @${account_id}@${service}.aliyuncs.com@ , such as @ecs.aliyuncs.com@ and @1234567890000@ots.aliyuncs.com@ . The @${service}@ can be @ecs@ , @log@ , @apigateway@ and so on, the @${account_id}@ refers to someone's Alicloud account id. -}
-    , _version     :: !(TF.Attribute s Text)
+    , _version     :: !(TF.Attr s Text)
     {- ^ (Optional, Conflicts with @document@ ) Version of the RAM role policy document. Valid value is @1@ . Default value is @1@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamRoleResource s) where
-    toHCL RamRoleResource{..} = TF.block $ catMaybes
+    toHCL RamRoleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "document" _document
         , TF.attribute "force" _force
@@ -3481,37 +3481,37 @@ instance TF.ToHCL (RamRoleResource s) where
 
 instance P.HasDescription (RamRoleResource s) s Text where
     description =
-        lens (_description :: RamRoleResource s -> TF.Attribute s Text)
+        lens (_description :: RamRoleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: RamRoleResource s)
 
 instance P.HasDocument (RamRoleResource s) s Text where
     document =
-        lens (_document :: RamRoleResource s -> TF.Attribute s Text)
+        lens (_document :: RamRoleResource s -> TF.Attr s Text)
              (\s a -> s { _document = a } :: RamRoleResource s)
 
 instance P.HasForce (RamRoleResource s) s Text where
     force =
-        lens (_force :: RamRoleResource s -> TF.Attribute s Text)
+        lens (_force :: RamRoleResource s -> TF.Attr s Text)
              (\s a -> s { _force = a } :: RamRoleResource s)
 
 instance P.HasName (RamRoleResource s) s Text where
     name =
-        lens (_name :: RamRoleResource s -> TF.Attribute s Text)
+        lens (_name :: RamRoleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RamRoleResource s)
 
 instance P.HasRamUsers (RamRoleResource s) s Text where
     ramUsers =
-        lens (_ram_users :: RamRoleResource s -> TF.Attribute s Text)
+        lens (_ram_users :: RamRoleResource s -> TF.Attr s Text)
              (\s a -> s { _ram_users = a } :: RamRoleResource s)
 
 instance P.HasServices (RamRoleResource s) s Text where
     services =
-        lens (_services :: RamRoleResource s -> TF.Attribute s Text)
+        lens (_services :: RamRoleResource s -> TF.Attr s Text)
              (\s a -> s { _services = a } :: RamRoleResource s)
 
 instance P.HasVersion (RamRoleResource s) s Text where
     version =
-        lens (_version :: RamRoleResource s -> TF.Attribute s Text)
+        lens (_version :: RamRoleResource s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: RamRoleResource s)
 
 instance P.HasComputedArn (RamRoleResource s) Text
@@ -3541,16 +3541,16 @@ ramRoleResource =
 Provides a RAM User Policy attachment resource.
 -}
 data RamUserPolicyAttachmentResource s = RamUserPolicyAttachmentResource {
-      _policy_name :: !(TF.Attribute s Text)
+      _policy_name :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM policy. This name can have a string of 1 to 128 characters, must contain only alphanumeric characters or hyphen "-", and must not begin with a hyphen. -}
-    , _policy_type :: !(TF.Attribute s Text)
+    , _policy_type :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Type of the RAM policy. It must be @Custom@ or @System@ . -}
-    , _user_name   :: !(TF.Attribute s Text)
+    , _user_name   :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) Name of the RAM user. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamUserPolicyAttachmentResource s) where
-    toHCL RamUserPolicyAttachmentResource{..} = TF.block $ catMaybes
+    toHCL RamUserPolicyAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "policy_name" _policy_name
         , TF.attribute "policy_type" _policy_type
         , TF.attribute "user_name" _user_name
@@ -3558,17 +3558,17 @@ instance TF.ToHCL (RamUserPolicyAttachmentResource s) where
 
 instance P.HasPolicyName (RamUserPolicyAttachmentResource s) s Text where
     policyName =
-        lens (_policy_name :: RamUserPolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_policy_name :: RamUserPolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _policy_name = a } :: RamUserPolicyAttachmentResource s)
 
 instance P.HasPolicyType (RamUserPolicyAttachmentResource s) s Text where
     policyType =
-        lens (_policy_type :: RamUserPolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_policy_type :: RamUserPolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _policy_type = a } :: RamUserPolicyAttachmentResource s)
 
 instance P.HasUserName (RamUserPolicyAttachmentResource s) s Text where
     userName =
-        lens (_user_name :: RamUserPolicyAttachmentResource s -> TF.Attribute s Text)
+        lens (_user_name :: RamUserPolicyAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _user_name = a } :: RamUserPolicyAttachmentResource s)
 
 instance P.HasComputedId (RamUserPolicyAttachmentResource s) Text
@@ -3594,22 +3594,22 @@ beginning, you need add @force = true@ to configuration file and run
 @terraform plan@ , then you can delete resource forcefully.
 -}
 data RamUserResource s = RamUserResource {
-      _comments     :: !(TF.Attribute s Text)
+      _comments     :: !(TF.Attr s Text)
     {- ^ (Optional) Comment of the RAM user. This parameter can have a string of 1 to 128 characters. -}
-    , _display_name :: !(TF.Attribute s Text)
+    , _display_name :: !(TF.Attr s Text)
     {- ^ (Optional) Name of the RAM user which for display. This name can have a string of 1 to 12 characters or Chinese characters, must contain only alphanumeric characters or Chinese characters or hyphens, such as "-",".", and must not end with a hyphen. -}
-    , _email        :: !(TF.Attribute s Text)
+    , _email        :: !(TF.Attr s Text)
     {- ^ (Optional) Email of the RAM user. -}
-    , _force        :: !(TF.Attribute s Text)
+    , _force        :: !(TF.Attr s Text)
     {- ^ (Optional) This parameter is used for resource destroy. Default value is @false@ . -}
-    , _mobile       :: !(TF.Attribute s Text)
+    , _mobile       :: !(TF.Attr s Text)
     {- ^ (Optional) Phone number of the RAM user. This number must contain an international area code prefix, just look like this: 86-18600008888. -}
-    , _name         :: !(TF.Attribute s Text)
+    , _name         :: !(TF.Attr s Text)
     {- ^ (Required) Name of the RAM user. This name can have a string of 1 to 64 characters, must contain only alphanumeric characters or hyphens, such as "-",".","_", and must not begin with a hyphen. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RamUserResource s) where
-    toHCL RamUserResource{..} = TF.block $ catMaybes
+    toHCL RamUserResource{..} = TF.inline $ catMaybes
         [ TF.attribute "comments" _comments
         , TF.attribute "display_name" _display_name
         , TF.attribute "email" _email
@@ -3620,32 +3620,32 @@ instance TF.ToHCL (RamUserResource s) where
 
 instance P.HasComments (RamUserResource s) s Text where
     comments =
-        lens (_comments :: RamUserResource s -> TF.Attribute s Text)
+        lens (_comments :: RamUserResource s -> TF.Attr s Text)
              (\s a -> s { _comments = a } :: RamUserResource s)
 
 instance P.HasDisplayName (RamUserResource s) s Text where
     displayName =
-        lens (_display_name :: RamUserResource s -> TF.Attribute s Text)
+        lens (_display_name :: RamUserResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: RamUserResource s)
 
 instance P.HasEmail (RamUserResource s) s Text where
     email =
-        lens (_email :: RamUserResource s -> TF.Attribute s Text)
+        lens (_email :: RamUserResource s -> TF.Attr s Text)
              (\s a -> s { _email = a } :: RamUserResource s)
 
 instance P.HasForce (RamUserResource s) s Text where
     force =
-        lens (_force :: RamUserResource s -> TF.Attribute s Text)
+        lens (_force :: RamUserResource s -> TF.Attr s Text)
              (\s a -> s { _force = a } :: RamUserResource s)
 
 instance P.HasMobile (RamUserResource s) s Text where
     mobile =
-        lens (_mobile :: RamUserResource s -> TF.Attribute s Text)
+        lens (_mobile :: RamUserResource s -> TF.Attr s Text)
              (\s a -> s { _mobile = a } :: RamUserResource s)
 
 instance P.HasName (RamUserResource s) s Text where
     name =
-        lens (_name :: RamUserResource s -> TF.Attribute s Text)
+        lens (_name :: RamUserResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RamUserResource s)
 
 instance P.HasComputedComments (RamUserResource s) Text
@@ -3673,18 +3673,18 @@ Provides a route entry resource. A route entry represents a route item of
 one VPC route table.
 -}
 data RouteEntryResource s = RouteEntryResource {
-      _destination_cidrblock :: !(TF.Attribute s Text)
+      _destination_cidrblock :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The RouteEntry's target network segment. -}
-    , _nexthop_id            :: !(TF.Attribute s Text)
+    , _nexthop_id            :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The route entry's next hop. ECS instance ID or VPC router interface ID. -}
-    , _nexthop_type          :: !(TF.Attribute s Text)
+    , _nexthop_type          :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The next hop type. Available value is @Instance@ and @RouterInterface@ . @Instance@ points to ECS Instance. -}
-    , _route_table_id        :: !(TF.Attribute s Text)
+    , _route_table_id        :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The ID of the route table. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RouteEntryResource s) where
-    toHCL RouteEntryResource{..} = TF.block $ catMaybes
+    toHCL RouteEntryResource{..} = TF.inline $ catMaybes
         [ TF.attribute "destination_cidrblock" _destination_cidrblock
         , TF.attribute "nexthop_id" _nexthop_id
         , TF.attribute "nexthop_type" _nexthop_type
@@ -3693,22 +3693,22 @@ instance TF.ToHCL (RouteEntryResource s) where
 
 instance P.HasDestinationCidrblock (RouteEntryResource s) s Text where
     destinationCidrblock =
-        lens (_destination_cidrblock :: RouteEntryResource s -> TF.Attribute s Text)
+        lens (_destination_cidrblock :: RouteEntryResource s -> TF.Attr s Text)
              (\s a -> s { _destination_cidrblock = a } :: RouteEntryResource s)
 
 instance P.HasNexthopId (RouteEntryResource s) s Text where
     nexthopId =
-        lens (_nexthop_id :: RouteEntryResource s -> TF.Attribute s Text)
+        lens (_nexthop_id :: RouteEntryResource s -> TF.Attr s Text)
              (\s a -> s { _nexthop_id = a } :: RouteEntryResource s)
 
 instance P.HasNexthopType (RouteEntryResource s) s Text where
     nexthopType =
-        lens (_nexthop_type :: RouteEntryResource s -> TF.Attribute s Text)
+        lens (_nexthop_type :: RouteEntryResource s -> TF.Attr s Text)
              (\s a -> s { _nexthop_type = a } :: RouteEntryResource s)
 
 instance P.HasRouteTableId (RouteEntryResource s) s Text where
     routeTableId =
-        lens (_route_table_id :: RouteEntryResource s -> TF.Attribute s Text)
+        lens (_route_table_id :: RouteEntryResource s -> TF.Attr s Text)
              (\s a -> s { _route_table_id = a } :: RouteEntryResource s)
 
 instance P.HasComputedDestinationCidrblock (RouteEntryResource s) Text
@@ -3735,40 +3735,40 @@ interfaces can exist between two routers. Up to 5 router interfaces can be
 created for each router and each account.
 -}
 data RouterInterfaceResource s = RouterInterfaceResource {
-      _access_point_id             :: !(TF.Attribute s Text)
+      _access_point_id             :: !(TF.Attr s Text)
     {- ^ (Optional, Force New) Access point ID. Required when @router_type@ is @VBR@ . Prohibited when @router_type@ is @VRouter@ . -}
-    , _description                 :: !(TF.Attribute s Text)
+    , _description                 :: !(TF.Attr s Text)
     {- ^ (Optional) Description of the router interface. It can be 2-256 characters long or left blank. It cannot start with http:// and https://. -}
-    , _health_check_source_ip      :: !(TF.Attribute s Text)
+    , _health_check_source_ip      :: !(TF.Attr s Text)
     {- ^ (Optional) Used as the Packet Source IP of health check for disaster recovery or ECMP. It is only valid when @router_type@ is @VRouter@ and @opposite_router_type@ is @VBR@ . The IP must be an unused IP in the local VPC. It and @health_check_target_ip@ must be specified at the same time. -}
-    , _health_check_target_ip      :: !(TF.Attribute s Text)
+    , _health_check_target_ip      :: !(TF.Attr s Text)
     {- ^ (Optional) Used as the Packet Target IP of health check for disaster recovery or ECMP. It is only valid when @router_type@ is @VRouter@ and @opposite_router_type@ is @VBR@ . The IP must be an unused IP in the local VPC. It and @health_check_source_ip@ must be specified at the same time. -}
-    , _name                        :: !(TF.Attribute s Text)
+    , _name                        :: !(TF.Attr s Text)
     {- ^ (Optional) Name of the router interface. Length must be 2-80 characters long. Only Chinese characters, English letters, numbers, period (.), underline (_), or dash (-) are permitted. If it is not specified, the default value is interface ID. The name cannot start with http:// and https://. -}
-    , _opposite_access_point_id    :: !(TF.Attribute s Text)
+    , _opposite_access_point_id    :: !(TF.Attr s Text)
     {- ^ (Optional, Force New) Access point ID of peer side. Required when @opposite_router_type@ is @VBR@ . Prohibited when @opposite_router_type@ is @VRouter@ . -}
-    , _opposite_interface_id       :: !(TF.Attribute s Text)
+    , _opposite_interface_id       :: !(TF.Attr s Text)
     {- ^ (Optional) Peer router interface ID. -}
-    , _opposite_interface_owner_id :: !(TF.Attribute s Text)
+    , _opposite_interface_owner_id :: !(TF.Attr s Text)
     {- ^ (Optional) Peer account ID. Log on to the Alibaba Cloud console, select User Info > Account Management to check your account ID. -}
-    , _opposite_region             :: !(TF.Attribute s Text)
+    , _opposite_region             :: !(TF.Attr s Text)
     {- ^ (Required, Force New) The Region of peer side. At present, optional value: @cn-beijing@ , @cn-hangzhou@ , @cn-shanghai@ , @cn-shenzhen@ , @cn-hongkong@ , @ap-southeast-1@ , @us-east-1@ , @us-west-1@ . -}
-    , _opposite_router_id          :: !(TF.Attribute s Text)
+    , _opposite_router_id          :: !(TF.Attr s Text)
     {- ^ (Optional) Peer router ID. When @opposite_router_type@ is VBR, the @opposite_router_id@ must be in the access point specified by @opposite_access_point_id@ . -}
-    , _opposite_router_type        :: !(TF.Attribute s Text)
+    , _opposite_router_type        :: !(TF.Attr s Text)
     {- ^ (Optional, Force New) Peer router type. Optional value: @VRouter@ , @VBR@ . Default to @VRouter@ . -}
-    , _role                        :: !(TF.Attribute s Text)
+    , _role                        :: !(TF.Attr s Text)
     {- ^ (Required, Force New) The role the router interface plays. Optional value: @InitiatingSide@ , @AcceptingSide@ . -}
-    , _router_id                   :: !(TF.Attribute s Text)
+    , _router_id                   :: !(TF.Attr s Text)
     {- ^ (Required, Force New) Router ID. When @router_type@ is VBR, the VBR specified by the @router_id@ must be in the access point specified by @access_point_id@ . -}
-    , _router_type                 :: !(TF.Attribute s Text)
+    , _router_type                 :: !(TF.Attr s Text)
     {- ^ (Required, Forces New) Router Type. Optional value: VRouter, VBR. -}
-    , _specification               :: !(TF.Attribute s Text)
+    , _specification               :: !(TF.Attr s Text)
     {- ^ (Optional) Specification of router interfaces. If @role@ is @AcceptingSide@ , the value can be ignore or must be @Negative@ . For more about the specification, refer to <https://www.alibabacloud.com/help/doc-detail/52415.htm?spm=a3c0i.o52412zh.b99.10.698e566fdVCfKD> . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RouterInterfaceResource s) where
-    toHCL RouterInterfaceResource{..} = TF.block $ catMaybes
+    toHCL RouterInterfaceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "access_point_id" _access_point_id
         , TF.attribute "description" _description
         , TF.attribute "health_check_source_ip" _health_check_source_ip
@@ -3788,77 +3788,77 @@ instance TF.ToHCL (RouterInterfaceResource s) where
 
 instance P.HasAccessPointId (RouterInterfaceResource s) s Text where
     accessPointId =
-        lens (_access_point_id :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_access_point_id :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _access_point_id = a } :: RouterInterfaceResource s)
 
 instance P.HasDescription (RouterInterfaceResource s) s Text where
     description =
-        lens (_description :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_description :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: RouterInterfaceResource s)
 
 instance P.HasHealthCheckSourceIp (RouterInterfaceResource s) s Text where
     healthCheckSourceIp =
-        lens (_health_check_source_ip :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_health_check_source_ip :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_source_ip = a } :: RouterInterfaceResource s)
 
 instance P.HasHealthCheckTargetIp (RouterInterfaceResource s) s Text where
     healthCheckTargetIp =
-        lens (_health_check_target_ip :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_health_check_target_ip :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_target_ip = a } :: RouterInterfaceResource s)
 
 instance P.HasName (RouterInterfaceResource s) s Text where
     name =
-        lens (_name :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_name :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RouterInterfaceResource s)
 
 instance P.HasOppositeAccessPointId (RouterInterfaceResource s) s Text where
     oppositeAccessPointId =
-        lens (_opposite_access_point_id :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_opposite_access_point_id :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _opposite_access_point_id = a } :: RouterInterfaceResource s)
 
 instance P.HasOppositeInterfaceId (RouterInterfaceResource s) s Text where
     oppositeInterfaceId =
-        lens (_opposite_interface_id :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_opposite_interface_id :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _opposite_interface_id = a } :: RouterInterfaceResource s)
 
 instance P.HasOppositeInterfaceOwnerId (RouterInterfaceResource s) s Text where
     oppositeInterfaceOwnerId =
-        lens (_opposite_interface_owner_id :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_opposite_interface_owner_id :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _opposite_interface_owner_id = a } :: RouterInterfaceResource s)
 
 instance P.HasOppositeRegion (RouterInterfaceResource s) s Text where
     oppositeRegion =
-        lens (_opposite_region :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_opposite_region :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _opposite_region = a } :: RouterInterfaceResource s)
 
 instance P.HasOppositeRouterId (RouterInterfaceResource s) s Text where
     oppositeRouterId =
-        lens (_opposite_router_id :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_opposite_router_id :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _opposite_router_id = a } :: RouterInterfaceResource s)
 
 instance P.HasOppositeRouterType (RouterInterfaceResource s) s Text where
     oppositeRouterType =
-        lens (_opposite_router_type :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_opposite_router_type :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _opposite_router_type = a } :: RouterInterfaceResource s)
 
 instance P.HasRole (RouterInterfaceResource s) s Text where
     role =
-        lens (_role :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_role :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: RouterInterfaceResource s)
 
 instance P.HasRouterId (RouterInterfaceResource s) s Text where
     routerId =
-        lens (_router_id :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_router_id :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _router_id = a } :: RouterInterfaceResource s)
 
 instance P.HasRouterType (RouterInterfaceResource s) s Text where
     routerType =
-        lens (_router_type :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_router_type :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _router_type = a } :: RouterInterfaceResource s)
 
 instance P.HasSpecification (RouterInterfaceResource s) s Text where
     specification =
-        lens (_specification :: RouterInterfaceResource s -> TF.Attribute s Text)
+        lens (_specification :: RouterInterfaceResource s -> TF.Attr s Text)
              (\s a -> s { _specification = a } :: RouterInterfaceResource s)
 
 instance P.HasComputedAccessPointId (RouterInterfaceResource s) Text
@@ -3907,18 +3907,18 @@ NOTE: From version 1.7.2, @alicloud_security_group@ has supported to
 segregate different ECS instance in which the same security group.
 -}
 data SecurityGroupResource s = SecurityGroupResource {
-      _description  :: !(TF.Attribute s Text)
+      _description  :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) The security group description. Defaults to null. -}
-    , _inner_access :: !(TF.Attribute s Text)
+    , _inner_access :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to allow both machines to access each other on all ports in the same security group. Combining security group rules, the policy can define multiple application scenario. Default to true. It is valid from verison @1.7.2@ . -}
-    , _name         :: !(TF.Attribute s Text)
+    , _name         :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the security group. Defaults to null. -}
-    , _vpc_id       :: !(TF.Attribute s Text)
+    , _vpc_id       :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) The VPC ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SecurityGroupResource s) where
-    toHCL SecurityGroupResource{..} = TF.block $ catMaybes
+    toHCL SecurityGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "inner_access" _inner_access
         , TF.attribute "name" _name
@@ -3927,22 +3927,22 @@ instance TF.ToHCL (SecurityGroupResource s) where
 
 instance P.HasDescription (SecurityGroupResource s) s Text where
     description =
-        lens (_description :: SecurityGroupResource s -> TF.Attribute s Text)
+        lens (_description :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: SecurityGroupResource s)
 
 instance P.HasInnerAccess (SecurityGroupResource s) s Text where
     innerAccess =
-        lens (_inner_access :: SecurityGroupResource s -> TF.Attribute s Text)
+        lens (_inner_access :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _inner_access = a } :: SecurityGroupResource s)
 
 instance P.HasName (SecurityGroupResource s) s Text where
     name =
-        lens (_name :: SecurityGroupResource s -> TF.Attribute s Text)
+        lens (_name :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SecurityGroupResource s)
 
 instance P.HasVpcId (SecurityGroupResource s) s Text where
     vpcId =
-        lens (_vpc_id :: SecurityGroupResource s -> TF.Attribute s Text)
+        lens (_vpc_id :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: SecurityGroupResource s)
 
 instance P.HasComputedDescription (SecurityGroupResource s) Text
@@ -3971,30 +3971,30 @@ distinguish between intranet and internet, the rule is effective on them
 both.
 -}
 data SecurityGroupRuleResource s = SecurityGroupRuleResource {
-      _cidr_ip                    :: !(TF.Attribute s Text)
+      _cidr_ip                    :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported. -}
-    , _ip_protocol                :: !(TF.Attribute s Text)
+    , _ip_protocol                :: !(TF.Attr s Text)
     {- ^ (Required) The protocol. Can be @tcp@ , @udp@ , @icmp@ , @gre@ or @all@ . -}
-    , _nic_type                   :: !(TF.Attribute s Text)
+    , _nic_type                   :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) Network type, can be either @internet@ or @intranet@ , the default value is @internet@ . -}
-    , _policy                     :: !(TF.Attribute s Text)
+    , _policy                     :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) Authorization policy, can be either @accept@ or @drop@ , the default value is @accept@ . -}
-    , _port_range                 :: !(TF.Attribute s Text)
+    , _port_range                 :: !(TF.Attr s Text)
     {- ^ (Required) The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid. For example, @1/200@ means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid. -}
-    , _priority                   :: !(TF.Attribute s Text)
+    , _priority                   :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) Authorization policy priority, with parameter values: @1-100@ , default value: 1. -}
-    , _security_group_id          :: !(TF.Attribute s Text)
+    , _security_group_id          :: !(TF.Attr s Text)
     {- ^ (Required) The security group to apply this rule to. -}
-    , _source_group_owner_account :: !(TF.Attribute s Text)
+    , _source_group_owner_account :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if @cidr_ip@ has already been set. -}
-    , _source_security_group_id   :: !(TF.Attribute s Text)
+    , _source_security_group_id   :: !(TF.Attr s Text)
     {- ^ (Optional, Forces new resource) The target security group ID within the same region. If this field is specified, the @nic_type@ can only select @intranet@ . -}
-    , _type'                      :: !(TF.Attribute s Text)
+    , _type'                      :: !(TF.Attr s Text)
     {- ^ (Required) The type of rule being created. Valid options are @ingress@ (inbound) or @egress@ (outbound). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SecurityGroupRuleResource s) where
-    toHCL SecurityGroupRuleResource{..} = TF.block $ catMaybes
+    toHCL SecurityGroupRuleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cidr_ip" _cidr_ip
         , TF.attribute "ip_protocol" _ip_protocol
         , TF.attribute "nic_type" _nic_type
@@ -4009,52 +4009,52 @@ instance TF.ToHCL (SecurityGroupRuleResource s) where
 
 instance P.HasCidrIp (SecurityGroupRuleResource s) s Text where
     cidrIp =
-        lens (_cidr_ip :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_cidr_ip :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _cidr_ip = a } :: SecurityGroupRuleResource s)
 
 instance P.HasIpProtocol (SecurityGroupRuleResource s) s Text where
     ipProtocol =
-        lens (_ip_protocol :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_ip_protocol :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ip_protocol = a } :: SecurityGroupRuleResource s)
 
 instance P.HasNicType (SecurityGroupRuleResource s) s Text where
     nicType =
-        lens (_nic_type :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_nic_type :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _nic_type = a } :: SecurityGroupRuleResource s)
 
 instance P.HasPolicy (SecurityGroupRuleResource s) s Text where
     policy =
-        lens (_policy :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_policy :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _policy = a } :: SecurityGroupRuleResource s)
 
 instance P.HasPortRange (SecurityGroupRuleResource s) s Text where
     portRange =
-        lens (_port_range :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_port_range :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _port_range = a } :: SecurityGroupRuleResource s)
 
 instance P.HasPriority (SecurityGroupRuleResource s) s Text where
     priority =
-        lens (_priority :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_priority :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _priority = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroupId (SecurityGroupRuleResource s) s Text where
     securityGroupId =
-        lens (_security_group_id :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_security_group_id :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _security_group_id = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSourceGroupOwnerAccount (SecurityGroupRuleResource s) s Text where
     sourceGroupOwnerAccount =
-        lens (_source_group_owner_account :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_source_group_owner_account :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _source_group_owner_account = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSourceSecurityGroupId (SecurityGroupRuleResource s) s Text where
     sourceSecurityGroupId =
-        lens (_source_security_group_id :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_source_security_group_id :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _source_security_group_id = a } :: SecurityGroupRuleResource s)
 
 instance P.HasType' (SecurityGroupRuleResource s) s Text where
     type' =
-        lens (_type' :: SecurityGroupRuleResource s -> TF.Attribute s Text)
+        lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
 instance P.HasComputedId (SecurityGroupRuleResource s) Text
@@ -4085,16 +4085,16 @@ Add a group of backend servers (ECS instance) to the Server Load Balancer or
 remove them from it.
 -}
 data SlbAttachmentResource s = SlbAttachmentResource {
-      _instance_ids     :: !(TF.Attribute s Text)
+      _instance_ids     :: !(TF.Attr s Text)
     {- ^ (Required) A list of instance ids to added backend server in the SLB. -}
-    , _load_balancer_id :: !(TF.Attribute s Text)
+    , _load_balancer_id :: !(TF.Attr s Text)
     {- ^ (Required) ID of the load balancer. -}
-    , _weight           :: !(TF.Attribute s Text)
+    , _weight           :: !(TF.Attr s Text)
     {- ^ (Optional) Weight of the instances. Valid value range: [0-100]. Default to 100. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SlbAttachmentResource s) where
-    toHCL SlbAttachmentResource{..} = TF.block $ catMaybes
+    toHCL SlbAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "instance_ids" _instance_ids
         , TF.attribute "load_balancer_id" _load_balancer_id
         , TF.attribute "weight" _weight
@@ -4102,17 +4102,17 @@ instance TF.ToHCL (SlbAttachmentResource s) where
 
 instance P.HasInstanceIds (SlbAttachmentResource s) s Text where
     instanceIds =
-        lens (_instance_ids :: SlbAttachmentResource s -> TF.Attribute s Text)
+        lens (_instance_ids :: SlbAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _instance_ids = a } :: SlbAttachmentResource s)
 
 instance P.HasLoadBalancerId (SlbAttachmentResource s) s Text where
     loadBalancerId =
-        lens (_load_balancer_id :: SlbAttachmentResource s -> TF.Attribute s Text)
+        lens (_load_balancer_id :: SlbAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _load_balancer_id = a } :: SlbAttachmentResource s)
 
 instance P.HasWeight (SlbAttachmentResource s) s Text where
     weight =
-        lens (_weight :: SlbAttachmentResource s -> TF.Attribute s Text)
+        lens (_weight :: SlbAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _weight = a } :: SlbAttachmentResource s)
 
 instance P.HasComputedBackendServers (SlbAttachmentResource s) Text
@@ -4135,54 +4135,54 @@ slbAttachmentResource =
 Provides an Application Load Balancer Listener resource.
 -}
 data SlbListenerResource s = SlbListenerResource {
-      _backend_port              :: !(TF.Attribute s Text)
+      _backend_port              :: !(TF.Attr s Text)
     {- ^ (Required, ForceNew) Port used by the Server Load Balancer instance backend. Valid value range: [1-65535]. -}
-    , _bandwidth                 :: !(TF.Attribute s Text)
+    , _bandwidth                 :: !(TF.Attr s Text)
     {- ^ (Required) Bandwidth peak of Listener. For the public network instance charged per traffic consumed, the Bandwidth on Listener can be set to -1, indicating the bandwidth peak is unlimited. Valid values are [-1, 1-1000] in Mbps. -}
-    , _cookie                    :: !(TF.Attribute s Text)
+    , _cookie                    :: !(TF.Attr s Text)
     {- ^ - (Optinal) The cookie configured on the server. It is mandatory when @sticky_session@ is "on" and @sticky_session_type@ is "server". Otherwise, it will be ignored. Valid value：String in line with RFC 2965, with length being 1- 200. It only contains characters such as ASCII codes, English letters and digits instead of the comma, semicolon or spacing, and it cannot start with $. -}
-    , _cookie_timeout            :: !(TF.Attribute s Text)
+    , _cookie_timeout            :: !(TF.Attr s Text)
     {- ^ - (Optinal) Cookie timeout. It is mandatory when @sticky_session@ is "on" and @sticky_session_type@ is "insert". Otherwise, it will be ignored. Valid value range: [1-86400] in seconds. -}
-    , _frontend_port             :: !(TF.Attribute s Text)
+    , _frontend_port             :: !(TF.Attr s Text)
     {- ^ (Required, ForceNew) Port used by the Server Load Balancer instance frontend. Valid value range: [1-65535]. -}
-    , _health_check              :: !(TF.Attribute s Text)
+    , _health_check              :: !(TF.Attr s Text)
     {- ^ - (Optinal) Whether to enable health check. Valid values are @on@ and @off@ . TCP and UDP listener's HealthCheck is always on, so it will be ignore when launching TCP or UDP listener. -}
-    , _health_check_connect_port :: !(TF.Attribute s Text)
+    , _health_check_connect_port :: !(TF.Attr s Text)
     {- ^ - (Optinal) Port used for health check. Valid value range: [1-65535]. Default to "None" means the backend server port is used. -}
-    , _health_check_domain       :: !(TF.Attribute s Text)
+    , _health_check_domain       :: !(TF.Attr s Text)
     {- ^ - (Optinal) Domain name used for health check. When it used to launch TCP listener, @health_check_type@ must be "http". Its length is limited to 1-80 and only characters such as letters, digits, ‘-‘ and ‘.’ are allowed. When it is not set or empty,  Server Load Balancer uses the private network IP address of each backend server as Domain used for health check. -}
-    , _health_check_http_code    :: !(TF.Attribute s Text)
+    , _health_check_http_code    :: !(TF.Attr s Text)
     {- ^ - (Optinal) Regular health check HTTP status code. Multiple codes are segmented by “,”. It is required when @health_check@ is on. Default to @http_2xx@ .  Valid values are: @http_2xx@ , @http_3xx@ , @http_4xx@ and @http_5xx@ . -}
-    , _health_check_interval     :: !(TF.Attribute s Text)
+    , _health_check_interval     :: !(TF.Attr s Text)
     {- ^ - (Optinal) Time interval of health checks. It is required when @health_check@ is on. Valid value range: [1-50] in seconds. Default to 2. -}
-    , _health_check_timeout      :: !(TF.Attribute s Text)
+    , _health_check_timeout      :: !(TF.Attr s Text)
     {- ^ - (Optinal) Maximum timeout of each health check response. It is required when @health_check@ is on. Valid value range: [1-300] in seconds. Default to 5. Note: If @health_check_timeout@ < @health_check_interval@ , its will be replaced by @health_check_interval@ . -}
-    , _health_check_type         :: !(TF.Attribute s Text)
+    , _health_check_type         :: !(TF.Attr s Text)
     {- ^ - (Optinal) Type of health check. Valid values are: @tcp@ and @http@ . Default to @tcp@ . TCP supports TCP and HTTP health check mode, you can select the particular mode depending on your application. -}
-    , _health_check_uri          :: !(TF.Attribute s Text)
+    , _health_check_uri          :: !(TF.Attr s Text)
     {- ^ - (Optinal) URI used for health check. When it used to launch TCP listener, @health_check_type@ must be "http". Its length is limited to 1-80 and it must start with /. Only characters such as letters, digits, ‘-’, ‘/’, ‘.’, ‘%’, ‘?’, #’ and ‘&’ are allowed. -}
-    , _healthy_threshold         :: !(TF.Attribute s Text)
+    , _healthy_threshold         :: !(TF.Attr s Text)
     {- ^ - (Optinal) Threshold determining the result of the health check is success. It is required when @health_check@ is on. Valid value range: [1-10] in seconds. Default to 3. -}
-    , _load_balancer_id          :: !(TF.Attribute s Text)
+    , _load_balancer_id          :: !(TF.Attr s Text)
     {- ^ (Required, ForceNew) The Load Balancer ID which is used to launch a new listener. -}
-    , _persistence_timeout       :: !(TF.Attribute s Text)
+    , _persistence_timeout       :: !(TF.Attr s Text)
     {- ^ - (Optinal) Timeout of connection persistence. Valid value range: [0-3600] in seconds. Default to 0 and means closing it. -}
-    , _protocol                  :: !(TF.Attribute s Text)
+    , _protocol                  :: !(TF.Attr s Text)
     {- ^ (Required, ForceNew) The protocol to listen on. Valid values are [ @http@ , @https@ , @tcp@ , @udp@ ]. -}
-    , _scheduler                 :: !(TF.Attribute s Text)
+    , _scheduler                 :: !(TF.Attr s Text)
     {- ^ - (Optinal) Scheduling algorithm, Valid values are @wrr@ and @wlc@ .  Default to "wrr". -}
-    , _ssl_certificate_id        :: !(TF.Attribute s Text)
+    , _ssl_certificate_id        :: !(TF.Attr s Text)
     {- ^ - (Optinal) Security certificate ID. -}
-    , _sticky_session            :: !(TF.Attribute s Text)
+    , _sticky_session            :: !(TF.Attr s Text)
     {- ^ - (Optinal) Whether to enable session persistence, Valid values are @on@ and @off@ . Default to @off@ . -}
-    , _sticky_session_type       :: !(TF.Attribute s Text)
+    , _sticky_session_type       :: !(TF.Attr s Text)
     {- ^ - (Optinal) Mode for handling the cookie. If @sticky_session@ is "on", it is mandatory. Otherwise, it will be ignored. Valid values are @insert@ and @server@ . @insert@ means it is inserted from Server Load Balancer; @server@ means the Server Load Balancer learns from the backend server. -}
-    , _unhealthy_threshold       :: !(TF.Attribute s Text)
+    , _unhealthy_threshold       :: !(TF.Attr s Text)
     {- ^ - (Optinal) Threshold determining the result of the health check is fail. It is required when @health_check@ is on. Valid value range: [1-10] in seconds. Default to 3. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SlbListenerResource s) where
-    toHCL SlbListenerResource{..} = TF.block $ catMaybes
+    toHCL SlbListenerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "backend_port" _backend_port
         , TF.attribute "bandwidth" _bandwidth
         , TF.attribute "cookie" _cookie
@@ -4209,112 +4209,112 @@ instance TF.ToHCL (SlbListenerResource s) where
 
 instance P.HasBackendPort (SlbListenerResource s) s Text where
     backendPort =
-        lens (_backend_port :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_backend_port :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _backend_port = a } :: SlbListenerResource s)
 
 instance P.HasBandwidth (SlbListenerResource s) s Text where
     bandwidth =
-        lens (_bandwidth :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_bandwidth :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _bandwidth = a } :: SlbListenerResource s)
 
 instance P.HasCookie (SlbListenerResource s) s Text where
     cookie =
-        lens (_cookie :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_cookie :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _cookie = a } :: SlbListenerResource s)
 
 instance P.HasCookieTimeout (SlbListenerResource s) s Text where
     cookieTimeout =
-        lens (_cookie_timeout :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_cookie_timeout :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _cookie_timeout = a } :: SlbListenerResource s)
 
 instance P.HasFrontendPort (SlbListenerResource s) s Text where
     frontendPort =
-        lens (_frontend_port :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_frontend_port :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _frontend_port = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheck (SlbListenerResource s) s Text where
     healthCheck =
-        lens (_health_check :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_health_check :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _health_check = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheckConnectPort (SlbListenerResource s) s Text where
     healthCheckConnectPort =
-        lens (_health_check_connect_port :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_health_check_connect_port :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_connect_port = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheckDomain (SlbListenerResource s) s Text where
     healthCheckDomain =
-        lens (_health_check_domain :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_health_check_domain :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_domain = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheckHttpCode (SlbListenerResource s) s Text where
     healthCheckHttpCode =
-        lens (_health_check_http_code :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_health_check_http_code :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_http_code = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheckInterval (SlbListenerResource s) s Text where
     healthCheckInterval =
-        lens (_health_check_interval :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_health_check_interval :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_interval = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheckTimeout (SlbListenerResource s) s Text where
     healthCheckTimeout =
-        lens (_health_check_timeout :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_health_check_timeout :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_timeout = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheckType (SlbListenerResource s) s Text where
     healthCheckType =
-        lens (_health_check_type :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_health_check_type :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_type = a } :: SlbListenerResource s)
 
 instance P.HasHealthCheckUri (SlbListenerResource s) s Text where
     healthCheckUri =
-        lens (_health_check_uri :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_health_check_uri :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _health_check_uri = a } :: SlbListenerResource s)
 
 instance P.HasHealthyThreshold (SlbListenerResource s) s Text where
     healthyThreshold =
-        lens (_healthy_threshold :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_healthy_threshold :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _healthy_threshold = a } :: SlbListenerResource s)
 
 instance P.HasLoadBalancerId (SlbListenerResource s) s Text where
     loadBalancerId =
-        lens (_load_balancer_id :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_load_balancer_id :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _load_balancer_id = a } :: SlbListenerResource s)
 
 instance P.HasPersistenceTimeout (SlbListenerResource s) s Text where
     persistenceTimeout =
-        lens (_persistence_timeout :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_persistence_timeout :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _persistence_timeout = a } :: SlbListenerResource s)
 
 instance P.HasProtocol (SlbListenerResource s) s Text where
     protocol =
-        lens (_protocol :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_protocol :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: SlbListenerResource s)
 
 instance P.HasScheduler (SlbListenerResource s) s Text where
     scheduler =
-        lens (_scheduler :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_scheduler :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _scheduler = a } :: SlbListenerResource s)
 
 instance P.HasSslCertificateId (SlbListenerResource s) s Text where
     sslCertificateId =
-        lens (_ssl_certificate_id :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_ssl_certificate_id :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _ssl_certificate_id = a } :: SlbListenerResource s)
 
 instance P.HasStickySession (SlbListenerResource s) s Text where
     stickySession =
-        lens (_sticky_session :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_sticky_session :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _sticky_session = a } :: SlbListenerResource s)
 
 instance P.HasStickySessionType (SlbListenerResource s) s Text where
     stickySessionType =
-        lens (_sticky_session_type :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_sticky_session_type :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _sticky_session_type = a } :: SlbListenerResource s)
 
 instance P.HasUnhealthyThreshold (SlbListenerResource s) s Text where
     unhealthyThreshold =
-        lens (_unhealthy_threshold :: SlbListenerResource s -> TF.Attribute s Text)
+        lens (_unhealthy_threshold :: SlbListenerResource s -> TF.Attr s Text)
              (\s a -> s { _unhealthy_threshold = a } :: SlbListenerResource s)
 
 instance P.HasComputedBackendPort (SlbListenerResource s) Text
@@ -4384,22 +4384,22 @@ At present, to avoid some unnecessary regulation confusion, SLB can not
 support alicloud international account to create "paybybandwidth" instance.
 -}
 data SlbResource s = SlbResource {
-      _bandwidth            :: !(TF.Attribute s Text)
+      _bandwidth            :: !(TF.Attr s Text)
     {- ^ (Optional) Valid value is between 1 and 1000, If argument "internet_charge_type" is "paybytraffic", then this value will be ignore. -}
-    , _internet             :: !(TF.Attribute s Text)
+    , _internet             :: !(TF.Attr s Text)
     {- ^ (Optional, Forces New Resource) If true, the SLB addressType will be internet, false will be intranet, Default is false. If load balancer launched in VPC, this value must be "false". -}
-    , _internet_charge_type :: !(TF.Attribute s Text)
+    , _internet_charge_type :: !(TF.Attr s Text)
     {- ^ (Optional, Forces New Resource) Valid values are @paybybandwidth@ , @paybytraffic@ . If this value is "paybybandwidth", then argument "internet" must be "true". Default is "paybytraffic". If load balancer launched in VPC, this value must be "paybytraffic". -}
-    , _name                 :: !(TF.Attribute s Text)
+    , _name                 :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the SLB. This name must be unique within your AliCloud account, can have a maximum of 80 characters, must contain only alphanumeric characters or hyphens, such as "-","/",".","_", and must not begin or end with a hyphen. If not specified, Terraform will autogenerate a name beginning with @tf-lb@ . -}
-    , _specification        :: !(TF.Attribute s Text)
+    , _specification        :: !(TF.Attr s Text)
     {- ^ (Optional) The specification of the Server Load Balancer instance. Default to empty string indicating it is "Shared-Performance" instance. Launching " <https://www.alibabacloud.com/help/doc-detail/27657.htm> " instance, it is must be specified and it valid values are: "slb.s1.small", "slb.s2.small", "slb.s2.medium", "slb.s3.small", "slb.s3.medium" and "slb.s3.large". -}
-    , _vswitch_id           :: !(TF.Attribute s Text)
+    , _vswitch_id           :: !(TF.Attr s Text)
     {- ^ (Required for a VPC SLB, Forces New Resource) The VSwitch ID to launch in. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SlbResource s) where
-    toHCL SlbResource{..} = TF.block $ catMaybes
+    toHCL SlbResource{..} = TF.inline $ catMaybes
         [ TF.attribute "bandwidth" _bandwidth
         , TF.attribute "internet" _internet
         , TF.attribute "internet_charge_type" _internet_charge_type
@@ -4410,32 +4410,32 @@ instance TF.ToHCL (SlbResource s) where
 
 instance P.HasBandwidth (SlbResource s) s Text where
     bandwidth =
-        lens (_bandwidth :: SlbResource s -> TF.Attribute s Text)
+        lens (_bandwidth :: SlbResource s -> TF.Attr s Text)
              (\s a -> s { _bandwidth = a } :: SlbResource s)
 
 instance P.HasInternet (SlbResource s) s Text where
     internet =
-        lens (_internet :: SlbResource s -> TF.Attribute s Text)
+        lens (_internet :: SlbResource s -> TF.Attr s Text)
              (\s a -> s { _internet = a } :: SlbResource s)
 
 instance P.HasInternetChargeType (SlbResource s) s Text where
     internetChargeType =
-        lens (_internet_charge_type :: SlbResource s -> TF.Attribute s Text)
+        lens (_internet_charge_type :: SlbResource s -> TF.Attr s Text)
              (\s a -> s { _internet_charge_type = a } :: SlbResource s)
 
 instance P.HasName (SlbResource s) s Text where
     name =
-        lens (_name :: SlbResource s -> TF.Attribute s Text)
+        lens (_name :: SlbResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SlbResource s)
 
 instance P.HasSpecification (SlbResource s) s Text where
     specification =
-        lens (_specification :: SlbResource s -> TF.Attribute s Text)
+        lens (_specification :: SlbResource s -> TF.Attr s Text)
              (\s a -> s { _specification = a } :: SlbResource s)
 
 instance P.HasVswitchId (SlbResource s) s Text where
     vswitchId =
-        lens (_vswitch_id :: SlbResource s -> TF.Attribute s Text)
+        lens (_vswitch_id :: SlbResource s -> TF.Attr s Text)
              (\s a -> s { _vswitch_id = a } :: SlbResource s)
 
 instance P.HasComputedAddress (SlbResource s) Text
@@ -4473,22 +4473,22 @@ or @HTTPS@ listener. ~> NOTE: Only rule's virtual server group can be
 modified.
 -}
 data SlbRuleResource s = SlbRuleResource {
-      _domain           :: !(TF.Attribute s Text)
+      _domain           :: !(TF.Attr s Text)
     {- ^ (Optional, ForceNew) Domain name of the forwarding rule. It can contain letters a-z, numbers 0-9, hyphens (-), and periods (.), and wildcard characters. The following two domain name formats are supported: -}
-    , _frontend_port    :: !(TF.Attribute s Text)
+    , _frontend_port    :: !(TF.Attr s Text)
     {- ^ (Required, ForceNew) The listener frontend port which is used to launch the new forwarding rule. Valid range: [1-65535]. -}
-    , _load_balancer_id :: !(TF.Attribute s Text)
+    , _load_balancer_id :: !(TF.Attr s Text)
     {- ^ (Required, ForceNew) The Load Balancer ID which is used to launch the new forwarding rule. -}
-    , _name             :: !(TF.Attribute s Text)
+    , _name             :: !(TF.Attr s Text)
     {- ^ (Optional, ForceNew) Name of the forwarding rule. Our plugin provides a default name: "tf-slb-rule". -}
-    , _server_group_id  :: !(TF.Attribute s Text)
+    , _server_group_id  :: !(TF.Attr s Text)
     {- ^ (Required) ID of a virtual server group that will be forwarded. -}
-    , _url              :: !(TF.Attribute s Text)
+    , _url              :: !(TF.Attr s Text)
     {- ^ (Optional, ForceNew) Domain of the forwarding rule. It must be 2-80 characters in length. Only letters a-z, numbers 0-9, and characters '-' '/' '?' '%' '#' and '&' are allowed. URLs must be started with the character '/', but cannot be '/' alone. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SlbRuleResource s) where
-    toHCL SlbRuleResource{..} = TF.block $ catMaybes
+    toHCL SlbRuleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "domain" _domain
         , TF.attribute "frontend_port" _frontend_port
         , TF.attribute "load_balancer_id" _load_balancer_id
@@ -4499,32 +4499,32 @@ instance TF.ToHCL (SlbRuleResource s) where
 
 instance P.HasDomain (SlbRuleResource s) s Text where
     domain =
-        lens (_domain :: SlbRuleResource s -> TF.Attribute s Text)
+        lens (_domain :: SlbRuleResource s -> TF.Attr s Text)
              (\s a -> s { _domain = a } :: SlbRuleResource s)
 
 instance P.HasFrontendPort (SlbRuleResource s) s Text where
     frontendPort =
-        lens (_frontend_port :: SlbRuleResource s -> TF.Attribute s Text)
+        lens (_frontend_port :: SlbRuleResource s -> TF.Attr s Text)
              (\s a -> s { _frontend_port = a } :: SlbRuleResource s)
 
 instance P.HasLoadBalancerId (SlbRuleResource s) s Text where
     loadBalancerId =
-        lens (_load_balancer_id :: SlbRuleResource s -> TF.Attribute s Text)
+        lens (_load_balancer_id :: SlbRuleResource s -> TF.Attr s Text)
              (\s a -> s { _load_balancer_id = a } :: SlbRuleResource s)
 
 instance P.HasName (SlbRuleResource s) s Text where
     name =
-        lens (_name :: SlbRuleResource s -> TF.Attribute s Text)
+        lens (_name :: SlbRuleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SlbRuleResource s)
 
 instance P.HasServerGroupId (SlbRuleResource s) s Text where
     serverGroupId =
-        lens (_server_group_id :: SlbRuleResource s -> TF.Attribute s Text)
+        lens (_server_group_id :: SlbRuleResource s -> TF.Attr s Text)
              (\s a -> s { _server_group_id = a } :: SlbRuleResource s)
 
 instance P.HasUrl (SlbRuleResource s) s Text where
     url =
-        lens (_url :: SlbRuleResource s -> TF.Attribute s Text)
+        lens (_url :: SlbRuleResource s -> TF.Attr s Text)
              (\s a -> s { _url = a } :: SlbRuleResource s)
 
 instance P.HasComputedDomain (SlbRuleResource s) Text
@@ -4561,16 +4561,16 @@ instances. ~> NOTE: One VPC load balancer, its virtual server group can only
 add the same VPC ECS instances.
 -}
 data SlbServerGroupResource s = SlbServerGroupResource {
-      _load_balancer_id :: !(TF.Attribute s Text)
+      _load_balancer_id :: !(TF.Attr s Text)
     {- ^ (Required, ForceNew) The Load Balancer ID which is used to launch a new virtual server group. -}
-    , _name             :: !(TF.Attribute s Text)
+    , _name             :: !(TF.Attr s Text)
     {- ^ (Optional) Name of the virtual server group. Our plugin provides a default name: "tf-server-group". -}
-    , _servers          :: !(TF.Attribute s Text)
+    , _servers          :: !(TF.Attr s Text)
     {- ^ (Required) A list of ECS instances to be added. At most 20 ECS instances can be supported in one resource. It contains three sub-fields as @Block server@ follows. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SlbServerGroupResource s) where
-    toHCL SlbServerGroupResource{..} = TF.block $ catMaybes
+    toHCL SlbServerGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "load_balancer_id" _load_balancer_id
         , TF.attribute "name" _name
         , TF.attribute "servers" _servers
@@ -4578,17 +4578,17 @@ instance TF.ToHCL (SlbServerGroupResource s) where
 
 instance P.HasLoadBalancerId (SlbServerGroupResource s) s Text where
     loadBalancerId =
-        lens (_load_balancer_id :: SlbServerGroupResource s -> TF.Attribute s Text)
+        lens (_load_balancer_id :: SlbServerGroupResource s -> TF.Attr s Text)
              (\s a -> s { _load_balancer_id = a } :: SlbServerGroupResource s)
 
 instance P.HasName (SlbServerGroupResource s) s Text where
     name =
-        lens (_name :: SlbServerGroupResource s -> TF.Attribute s Text)
+        lens (_name :: SlbServerGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SlbServerGroupResource s)
 
 instance P.HasServers (SlbServerGroupResource s) s Text where
     servers =
-        lens (_servers :: SlbServerGroupResource s -> TF.Attribute s Text)
+        lens (_servers :: SlbServerGroupResource s -> TF.Attr s Text)
              (\s a -> s { _servers = a } :: SlbServerGroupResource s)
 
 instance P.HasComputedId (SlbServerGroupResource s) Text
@@ -4610,16 +4610,16 @@ slbServerGroupResource =
 Provides a snat resource.
 -}
 data SnatResource s = SnatResource {
-      _snat_ip           :: !(TF.Attribute s Text)
+      _snat_ip           :: !(TF.Attr s Text)
     {- ^ (Required) The SNAT ip address, the ip must along bandwidth package public ip which @alicloud_nat_gateway@ argument @bandwidth_packages@ . -}
-    , _snat_table_id     :: !(TF.Attribute s Text)
+    , _snat_table_id     :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The value can get from @alicloud_nat_gateway@ Attributes "snat_table_ids". -}
-    , _source_vswitch_id :: !(TF.Attribute s Text)
+    , _source_vswitch_id :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The vswitch ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SnatResource s) where
-    toHCL SnatResource{..} = TF.block $ catMaybes
+    toHCL SnatResource{..} = TF.inline $ catMaybes
         [ TF.attribute "snat_ip" _snat_ip
         , TF.attribute "snat_table_id" _snat_table_id
         , TF.attribute "source_vswitch_id" _source_vswitch_id
@@ -4627,17 +4627,17 @@ instance TF.ToHCL (SnatResource s) where
 
 instance P.HasSnatIp (SnatResource s) s Text where
     snatIp =
-        lens (_snat_ip :: SnatResource s -> TF.Attribute s Text)
+        lens (_snat_ip :: SnatResource s -> TF.Attr s Text)
              (\s a -> s { _snat_ip = a } :: SnatResource s)
 
 instance P.HasSnatTableId (SnatResource s) s Text where
     snatTableId =
-        lens (_snat_table_id :: SnatResource s -> TF.Attribute s Text)
+        lens (_snat_table_id :: SnatResource s -> TF.Attr s Text)
              (\s a -> s { _snat_table_id = a } :: SnatResource s)
 
 instance P.HasSourceVswitchId (SnatResource s) s Text where
     sourceVswitchId =
-        lens (_source_vswitch_id :: SnatResource s -> TF.Attribute s Text)
+        lens (_source_vswitch_id :: SnatResource s -> TF.Attr s Text)
              (\s a -> s { _source_vswitch_id = a } :: SnatResource s)
 
 
@@ -4656,16 +4656,16 @@ Provides a VPC resource. ~> NOTE: Terraform will auto build a router and a
 route table while it uses @alicloud_vpc@ to build a vpc resource.
 -}
 data VpcResource s = VpcResource {
-      _cidr_block  :: !(TF.Attribute s Text)
+      _cidr_block  :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The CIDR block for the VPC. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) The VPC description. Defaults to null. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the VPC. Defaults to null. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VpcResource s) where
-    toHCL VpcResource{..} = TF.block $ catMaybes
+    toHCL VpcResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cidr_block" _cidr_block
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -4673,17 +4673,17 @@ instance TF.ToHCL (VpcResource s) where
 
 instance P.HasCidrBlock (VpcResource s) s Text where
     cidrBlock =
-        lens (_cidr_block :: VpcResource s -> TF.Attribute s Text)
+        lens (_cidr_block :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _cidr_block = a } :: VpcResource s)
 
 instance P.HasDescription (VpcResource s) s Text where
     description =
-        lens (_description :: VpcResource s -> TF.Attribute s Text)
+        lens (_description :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: VpcResource s)
 
 instance P.HasName (VpcResource s) s Text where
     name =
-        lens (_name :: VpcResource s -> TF.Attribute s Text)
+        lens (_name :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VpcResource s)
 
 instance P.HasComputedCidrBlock (VpcResource s) Text
@@ -4707,20 +4707,20 @@ vpcResource =
 Provides a VPC switch resource.
 -}
 data VswitchResource s = VswitchResource {
-      _availability_zone :: !(TF.Attribute s Text)
+      _availability_zone :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The AZ for the switch. -}
-    , _cidr_block        :: !(TF.Attribute s Text)
+    , _cidr_block        :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The CIDR block for the switch. -}
-    , _description       :: !(TF.Attribute s Text)
+    , _description       :: !(TF.Attr s Text)
     {- ^ (Optional) The switch description. Defaults to null. -}
-    , _name              :: !(TF.Attribute s Text)
+    , _name              :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the switch. Defaults to null. -}
-    , _vpc_id            :: !(TF.Attribute s Text)
+    , _vpc_id            :: !(TF.Attr s Text)
     {- ^ (Required, Forces new resource) The VPC ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VswitchResource s) where
-    toHCL VswitchResource{..} = TF.block $ catMaybes
+    toHCL VswitchResource{..} = TF.inline $ catMaybes
         [ TF.attribute "availability_zone" _availability_zone
         , TF.attribute "cidr_block" _cidr_block
         , TF.attribute "description" _description
@@ -4730,27 +4730,27 @@ instance TF.ToHCL (VswitchResource s) where
 
 instance P.HasAvailabilityZone (VswitchResource s) s Text where
     availabilityZone =
-        lens (_availability_zone :: VswitchResource s -> TF.Attribute s Text)
+        lens (_availability_zone :: VswitchResource s -> TF.Attr s Text)
              (\s a -> s { _availability_zone = a } :: VswitchResource s)
 
 instance P.HasCidrBlock (VswitchResource s) s Text where
     cidrBlock =
-        lens (_cidr_block :: VswitchResource s -> TF.Attribute s Text)
+        lens (_cidr_block :: VswitchResource s -> TF.Attr s Text)
              (\s a -> s { _cidr_block = a } :: VswitchResource s)
 
 instance P.HasDescription (VswitchResource s) s Text where
     description =
-        lens (_description :: VswitchResource s -> TF.Attribute s Text)
+        lens (_description :: VswitchResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: VswitchResource s)
 
 instance P.HasName (VswitchResource s) s Text where
     name =
-        lens (_name :: VswitchResource s -> TF.Attribute s Text)
+        lens (_name :: VswitchResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VswitchResource s)
 
 instance P.HasVpcId (VswitchResource s) s Text where
     vpcId =
-        lens (_vpc_id :: VswitchResource s -> TF.Attribute s Text)
+        lens (_vpc_id :: VswitchResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: VswitchResource s)
 
 instance P.HasComputedAvailabilityZone (VswitchResource s) Text

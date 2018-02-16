@@ -64,18 +64,18 @@ Use this data source to get information about a specific application in New
 Relic.
 -}
 data ApplicationData s = ApplicationData {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the application in New Relic. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ApplicationData s) where
-    toHCL ApplicationData{..} = TF.block $ catMaybes
+    toHCL ApplicationData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (ApplicationData s) s Text where
     name =
-        lens (_name :: ApplicationData s -> TF.Attribute s Text)
+        lens (_name :: ApplicationData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ApplicationData s)
 
 instance P.HasComputedHostIds (ApplicationData s) Text

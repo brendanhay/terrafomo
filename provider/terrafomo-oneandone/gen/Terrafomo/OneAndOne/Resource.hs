@@ -105,16 +105,16 @@ import qualified Terrafomo.Schema    as TF
 Fetches a predefined instance type for 1&1 servers
 -}
 data InstanceSizeResource s = InstanceSizeResource {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ -(Optional) Number of cores per processor -}
-    , _ram :: !(TF.Attribute s Text)
+    , _ram :: !(TF.Attr s Text)
     {- ^ (Optional) Size of ram in GB -}
-    , _vcores :: !(TF.Attribute s Text)
+    , _vcores :: !(TF.Attr s Text)
     {- ^ (Optional)  Number of vcores -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (InstanceSizeResource s) where
-    toHCL InstanceSizeResource{..} = TF.block $ catMaybes
+    toHCL InstanceSizeResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "ram" _ram
         , TF.attribute "vcores" _vcores
@@ -122,17 +122,17 @@ instance TF.ToHCL (InstanceSizeResource s) where
 
 instance P.HasName (InstanceSizeResource s) s Text where
     name =
-        lens (_name :: InstanceSizeResource s -> TF.Attribute s Text)
+        lens (_name :: InstanceSizeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: InstanceSizeResource s)
 
 instance P.HasRam (InstanceSizeResource s) s Text where
     ram =
-        lens (_ram :: InstanceSizeResource s -> TF.Attribute s Text)
+        lens (_ram :: InstanceSizeResource s -> TF.Attr s Text)
              (\s a -> s { _ram = a } :: InstanceSizeResource s)
 
 instance P.HasVcores (InstanceSizeResource s) s Text where
     vcores =
-        lens (_vcores :: InstanceSizeResource s -> TF.Attribute s Text)
+        lens (_vcores :: InstanceSizeResource s -> TF.Attr s Text)
              (\s a -> s { _vcores = a } :: InstanceSizeResource s)
 
 
@@ -150,18 +150,18 @@ instanceSizeResource =
 Manages a Public IP on 1&1
 -}
 data IpResource s = IpResource {
-      _datacenter :: !(TF.Attribute s Text)
+      _datacenter :: !(TF.Attr s Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
-    , _ip_address :: !(TF.Attribute s Text)
+    , _ip_address :: !(TF.Attr s Text)
     {- ^ - (Computed) The IP address. -}
-    , _ip_type :: !(TF.Attribute s Text)
+    , _ip_type :: !(TF.Attr s Text)
     {- ^ (Required) IP type. Can be @IPV4@ or @IPV6@ -}
-    , _reverse_dns :: !(TF.Attribute s Text)
+    , _reverse_dns :: !(TF.Attr s Text)
     {- ^ (Optional) -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IpResource s) where
-    toHCL IpResource{..} = TF.block $ catMaybes
+    toHCL IpResource{..} = TF.inline $ catMaybes
         [ TF.attribute "datacenter" _datacenter
         , TF.attribute "ip_address" _ip_address
         , TF.attribute "ip_type" _ip_type
@@ -170,22 +170,22 @@ instance TF.ToHCL (IpResource s) where
 
 instance P.HasDatacenter (IpResource s) s Text where
     datacenter =
-        lens (_datacenter :: IpResource s -> TF.Attribute s Text)
+        lens (_datacenter :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: IpResource s)
 
 instance P.HasIpAddress (IpResource s) s Text where
     ipAddress =
-        lens (_ip_address :: IpResource s -> TF.Attribute s Text)
+        lens (_ip_address :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: IpResource s)
 
 instance P.HasIpType (IpResource s) s Text where
     ipType =
-        lens (_ip_type :: IpResource s -> TF.Attribute s Text)
+        lens (_ip_type :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _ip_type = a } :: IpResource s)
 
 instance P.HasReverseDns (IpResource s) s Text where
     reverseDns =
-        lens (_reverse_dns :: IpResource s -> TF.Attribute s Text)
+        lens (_reverse_dns :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _reverse_dns = a } :: IpResource s)
 
 
@@ -204,20 +204,20 @@ ipResource =
 Manages a Shared Storage on 1&1
 -}
 data ServerResource s = ServerResource {
-      _datacenter :: !(TF.Attribute s Text)
+      _datacenter :: !(TF.Attr s Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) Description for the shared storage -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the storage -}
-    , _size :: !(TF.Attribute s Text)
+    , _size :: !(TF.Attr s Text)
     {- ^ (Required) Size of the shared storage -}
-    , _storage_servers :: !(TF.Attribute s Text)
+    , _storage_servers :: !(TF.Attr s Text)
     {- ^ (Optional) List of servers that will have access to the stored storage -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServerResource s) where
-    toHCL ServerResource{..} = TF.block $ catMaybes
+    toHCL ServerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "datacenter" _datacenter
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -227,27 +227,27 @@ instance TF.ToHCL (ServerResource s) where
 
 instance P.HasDatacenter (ServerResource s) s Text where
     datacenter =
-        lens (_datacenter :: ServerResource s -> TF.Attribute s Text)
+        lens (_datacenter :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: ServerResource s)
 
 instance P.HasDescription (ServerResource s) s Text where
     description =
-        lens (_description :: ServerResource s -> TF.Attribute s Text)
+        lens (_description :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ServerResource s)
 
 instance P.HasName (ServerResource s) s Text where
     name =
-        lens (_name :: ServerResource s -> TF.Attribute s Text)
+        lens (_name :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ServerResource s)
 
 instance P.HasSize (ServerResource s) s Text where
     size =
-        lens (_size :: ServerResource s -> TF.Attribute s Text)
+        lens (_size :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: ServerResource s)
 
 instance P.HasStorageServers (ServerResource s) s Text where
     storageServers =
-        lens (_storage_servers :: ServerResource s -> TF.Attribute s Text)
+        lens (_storage_servers :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _storage_servers = a } :: ServerResource s)
 
 
@@ -267,20 +267,20 @@ serverResource =
 Manages a VPN on 1&1
 -}
 data VpnResource s = VpnResource {
-      _datacenter :: !(TF.Attribute s Text)
+      _datacenter :: !(TF.Attr s Text)
     {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) -}
-    , _download_path :: !(TF.Attribute s Text)
+    , _download_path :: !(TF.Attr s Text)
     {- ^ (Optional) -}
-    , _file_name :: !(TF.Attribute s Text)
+    , _file_name :: !(TF.Attr s Text)
     {- ^ (Optional) -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the VPN -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VpnResource s) where
-    toHCL VpnResource{..} = TF.block $ catMaybes
+    toHCL VpnResource{..} = TF.inline $ catMaybes
         [ TF.attribute "datacenter" _datacenter
         , TF.attribute "description" _description
         , TF.attribute "download_path" _download_path
@@ -290,27 +290,27 @@ instance TF.ToHCL (VpnResource s) where
 
 instance P.HasDatacenter (VpnResource s) s Text where
     datacenter =
-        lens (_datacenter :: VpnResource s -> TF.Attribute s Text)
+        lens (_datacenter :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: VpnResource s)
 
 instance P.HasDescription (VpnResource s) s Text where
     description =
-        lens (_description :: VpnResource s -> TF.Attribute s Text)
+        lens (_description :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: VpnResource s)
 
 instance P.HasDownloadPath (VpnResource s) s Text where
     downloadPath =
-        lens (_download_path :: VpnResource s -> TF.Attribute s Text)
+        lens (_download_path :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _download_path = a } :: VpnResource s)
 
 instance P.HasFileName (VpnResource s) s Text where
     fileName =
-        lens (_file_name :: VpnResource s -> TF.Attribute s Text)
+        lens (_file_name :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _file_name = a } :: VpnResource s)
 
 instance P.HasName (VpnResource s) s Text where
     name =
-        lens (_name :: VpnResource s -> TF.Attribute s Text)
+        lens (_name :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VpnResource s)
 
 

@@ -1,4 +1,3 @@
-{-# LANGUAGE DefaultSignatures #-}
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE FlexibleInstances #-}
@@ -23,9 +22,11 @@ module Terrafomo.HCL
     , attribute
 
     , object
-    , block
-    , list
     , pairs
+    , block
+    , inline
+    , list
+    , empty
 
     , unquoted
     , quoted
@@ -37,6 +38,7 @@ module Terrafomo.HCL
     , number
     , float
     , string
+    , flatten
 
     -- ** JSON Heredocs
     , ToJSON (..)
@@ -45,15 +47,18 @@ module Terrafomo.HCL
 
     -- * Generics
     , GToAttributes (..)
-    , genericToAttributes
+    , genericBlockAttributes
+    , genericInlineAttributes
     ) where
+
+import Prelude hiding (repeat)
 
 import Data.Aeson             (ToJSON (..))
 import Data.Hashable          (Hashable)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
 import Data.Map.Strict        (Map)
-import Data.Maybe             (maybeToList)
+import Data.Maybe             (mapMaybe, maybeToList)
 import Data.Semigroup         ((<>))
 import Data.String            (IsString (fromString))
 import Data.Text              (Text)
@@ -69,10 +74,11 @@ import Numeric.Natural (Natural)
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
-import Terrafomo.Attribute
+import Terrafomo.Attribute (Attr)
 import Terrafomo.Name
 
 import qualified Data.Aeson                   as JSON
+import qualified Data.Aeson.Encode.Pretty     as JSON (encodePretty)
 import qualified Data.Foldable                as Fold
 import qualified Data.List                    as List
 import qualified Data.Map.Strict              as Map
@@ -80,6 +86,7 @@ import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import qualified Data.Text.Lazy.Encoding      as LText (decodeUtf8)
 import qualified Formatting                   as Format
+import qualified Terrafomo.Attribute          as Attr
 import qualified Text.PrettyPrint.Leijen.Text as PP
 
 -- FIXME: Alternative JSON serialization.
@@ -104,8 +111,9 @@ instance Pretty Id where
 data Value
     = Assign  !Id            !Value   -- foo = bar
     | Object  !(NonEmpty Id) ![Value] -- foo bar { ... }
-    | Block   ![Value]                 -- { ... }
-    | List    ![Value]                 -- [ ... ]
+    | Block   ![Value]                -- { ... }
+    | List    ![Value]                -- [ ... ]
+    | Inline  ![Value]                -- ...
     | Bool    !Bool
     | Number  !Integer
     | Float   !Double
@@ -119,10 +127,19 @@ instance Hashable Value
 instance Pretty Value where
     prettyList = pretty . List
     pretty     = \case
-        Assign k (Block vs) -> pretty k <+> prettyBlock vs
-        Assign k v          -> pretty k <+> "=" <+> pretty v
-        Object ks vs        -> prettyList (Fold.toList ks) <+> prettyBlock vs
-        Block  vs           -> PP.vcat (map pretty vs)
+        Assign  k  (Block vs) -> pretty k <+> prettyBlock vs
+        Assign  k  v          -> pretty k <+> "=" <+> pretty v
+        Object  ks vs         -> prettyList (Fold.toList ks) <+> prettyBlock vs
+        Block   vs            -> prettyBlock vs
+        Inline  vs            -> PP.vcat (map pretty vs)
+        Bool    x             -> prettyBool x
+        Number  x             -> pretty x
+        Float   x             -> pretty x
+        String  x             -> PP.dquotes (pretty x)
+        Comment x             -> "//" <+> pretty x
+
+        HereDoc (pretty -> k) x ->
+            "<<" <> k <$$> pretty x <$$> k
 
         List (reverse -> vs) ->
             case vs of
@@ -132,29 +149,27 @@ instance Pretty Value where
                         y  = pretty x
                      in PP.nest 2 ("[" <$$> PP.vcat (reverse (y : ys))) <$$> "]"
 
-        Bool   x -> prettyBool x
-        Number x -> pretty x
-        Float  x -> pretty x
-        String x -> PP.dquotes (pretty x)
-
-        HereDoc (pretty -> k) x ->
-            "<<" <> k <$$> pretty x <$$> k
-
-        Comment x -> "//" <+> pretty x
-
 data Interpolate
-    = Chunks   ![Interpolate]
-    | Chunk    !LText.Text
-    | Template !LText.Text
+    = Escape  !Value
+    | Chunk   !LText.Text
+    | Flatten ![Interpolate]
       deriving (Show, Eq, Generic)
 
 instance Hashable Interpolate
 
+instance IsString Interpolate where
+    fromString = Chunk . fromString
+
 instance Pretty Interpolate where
     pretty = \case
-        Chunks   xs -> PP.hcat (map pretty xs)
-        Chunk    s  -> pretty s
-        Template s  -> "${" <> pretty s <> "}"
+        Escape  (String x) -> "${" <> pretty x <> "}"
+        Escape  x          -> "${" <> pretty x <> "}"
+        Chunk   x          -> pretty x
+        Flatten xs         -> mconcat (List.intersperse "," (map go xs))
+          where
+            go = \case
+                Escape (String x) -> pretty x
+                x                 -> pretty x
 
 type JSON = JSON.Value
 
@@ -172,31 +187,64 @@ prettyBool = \case
 assign :: ToHCL a => Id -> a -> Value
 assign k v = Assign k (toHCL v)
 
+-- repeat :: ToHCL a => Id -> Attr s [a] -> Maybe Value
+-- repeat k = \case
+--     Attr.Constant v  ->
+--     Attr.Flatten  vs ->
+--     Attr.Nil         ->
+--     x                -> attribute k x
+    -- We want to support the following:
+      -- setting = ["${var.additional_settings}"]
+      --
+      -- setting {
+      --   namespace = "aws:autoscaling:launchconfiguration"
+      --   name      = "RootVolumeSize"
+      --   value     = "${var.root_volume_size}"
+      -- }
+      --
+      -- setting {
+      --   namespace = "aws:elasticbeanstalk:environment"
+      --   name      = "LoadBalancerType"
+      --   value     = "application"
+      -- }
+
 -- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
 -- we need to filter it out here.
-attribute :: ToHCL a => Id -> Attribute s a -> Maybe Value
-attribute k =
-    fmap (assign k) . \case
-        Computed k' v _ -> Just (compute k' v)
-        Constant    v   -> Just (toHCL      v)
-        _               -> Nothing
+attribute :: ToHCL a => Id -> Attr s a -> Maybe Value
+attribute k = fmap (assign k) . go
+  where
+    go = \case
+        Attr.Compute  k' v _ -> Just (compute k' v)
+        Attr.Constant    v   -> Just (toHCL      v)
+        Attr.Flatten    vs   ->
+            case mapMaybe go vs of
+                [] -> Nothing
+                xs -> Just (flatten xs)
+        _                    -> Nothing
 
 compute :: Key -> Name -> Value
 compute (Key t n) v =
-    let fmt = "${" % Format.stext % ftype % "." % fname % "." % fname % "}"
-     in toHCL $ Format.sformat fmt (maybe mempty (<> ".") (typePrefix t)) t n v
+    String . Escape . string $
+        Format.format (Format.stext % ftype % "." % fname % "." % fname)
+            (maybe mempty (<> ".") (typePrefix t)) t n v
 
 object :: NonEmpty Id -> [Value] -> Value
 object = Object
 
+pairs :: ToHCL a => Map Text a -> Value
+pairs = block . map (\(k, v) -> assign (unquoted k) v) . Map.toList
+
 block :: [Value] -> Value
 block = Block
+
+inline :: [Value] -> Value
+inline = Inline
 
 list :: (Foldable f, ToHCL a) => f a -> Value
 list = List . map toHCL . Fold.toList
 
-pairs :: ToHCL a => Map Text a -> Value
-pairs = block . map (\(k, v) -> assign (unquoted k) v) . Map.toList
+empty :: Value
+empty = Inline []
 
 unquoted :: Text -> Id
 unquoted = Unquoted
@@ -222,15 +270,14 @@ float = Float . realToFrac
 string :: LText.Text -> Value
 string = String . Chunk
 
+flatten :: [Value] -> Value
+flatten = String . Flatten . map Escape
+
 json :: ToJSON a => a -> Value
-json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encode
+json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encodePretty
 
 class ToHCL a where
     toHCL :: a -> Value
-
-    default toHCL :: (Generic a, GToAttributes (Rep a)) => a -> Value
-    toHCL = genericToAttributes
-    {-# INLINEABLE toHCL #-}
 
 instance ToHCL Value where
     toHCL = id
@@ -320,16 +367,20 @@ instance ToHCL Key where
     toHCL (Key t n) = toHCL (Format.sformat (ftype % "." % fname) t n)
     {-# INLINEABLE toHCL #-}
 
-genericToAttributes :: (Generic a, GToAttributes (Rep a)) => a -> Value
-genericToAttributes = block . gToValues . from
-{-# INLINEABLE genericToAttributes #-}
+genericBlockAttributes :: (Generic a, GToAttributes (Rep a)) => a -> Value
+genericBlockAttributes = block . gToValues . from
+{-# INLINEABLE genericBlockAttributes #-}
+
+genericInlineAttributes :: (Generic a, GToAttributes (Rep a)) => a -> Value
+genericInlineAttributes = inline . gToValues . from
+{-# INLINEABLE genericInlineAttributes #-}
 
 class GToAttributes f where
     gToValues :: f a -> [Value]
 
 instance ( Selector s
          , ToHCL a
-         ) => GToAttributes (S1 s (K1 i (Attribute t a))) where
+         ) => GToAttributes (S1 s (K1 i (Attr t a))) where
     gToValues p =
         let k = fromString (case selName p of '_':x -> x; x -> x)
             v = unK1 (unM1 p)

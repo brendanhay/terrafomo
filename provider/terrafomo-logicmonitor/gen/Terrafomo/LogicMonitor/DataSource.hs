@@ -66,18 +66,18 @@ import qualified Terrafomo.Schema    as TF
 Use this datasource to get the ID of an available collector.
 -}
 data CollectorsData s = CollectorsData {
-      _filters     :: !(TF.Attribute s Text)
+      _filters     :: !(TF.Attr s Text)
     {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
-    , _most_recent :: !(TF.Attribute s Text)
+    , _most_recent :: !(TF.Attr s Text)
     {- ^ (Optional) The most recent collector installed that is online -}
-    , _offset      :: !(TF.Attribute s Text)
+    , _offset      :: !(TF.Attr s Text)
     {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
-    , _size        :: !(TF.Attribute s Text)
+    , _size        :: !(TF.Attr s Text)
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CollectorsData s) where
-    toHCL CollectorsData{..} = TF.block $ catMaybes
+    toHCL CollectorsData{..} = TF.inline $ catMaybes
         [ TF.attribute "filters" _filters
         , TF.attribute "most_recent" _most_recent
         , TF.attribute "offset" _offset
@@ -86,22 +86,22 @@ instance TF.ToHCL (CollectorsData s) where
 
 instance P.HasFilters (CollectorsData s) s Text where
     filters =
-        lens (_filters :: CollectorsData s -> TF.Attribute s Text)
+        lens (_filters :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _filters = a } :: CollectorsData s)
 
 instance P.HasMostRecent (CollectorsData s) s Text where
     mostRecent =
-        lens (_most_recent :: CollectorsData s -> TF.Attribute s Text)
+        lens (_most_recent :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: CollectorsData s)
 
 instance P.HasOffset (CollectorsData s) s Text where
     offset =
-        lens (_offset :: CollectorsData s -> TF.Attribute s Text)
+        lens (_offset :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _offset = a } :: CollectorsData s)
 
 instance P.HasSize (CollectorsData s) s Text where
     size =
-        lens (_size :: CollectorsData s -> TF.Attribute s Text)
+        lens (_size :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: CollectorsData s)
 
 
@@ -120,16 +120,16 @@ collectorsData =
 Use this datasource to get the ID of an available device group.
 -}
 data DeviceGroupData s = DeviceGroupData {
-      _filters :: !(TF.Attribute s Text)
+      _filters :: !(TF.Attr s Text)
     {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
-    , _offset  :: !(TF.Attribute s Text)
+    , _offset  :: !(TF.Attr s Text)
     {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
-    , _size    :: !(TF.Attribute s Text)
+    , _size    :: !(TF.Attr s Text)
     {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DeviceGroupData s) where
-    toHCL DeviceGroupData{..} = TF.block $ catMaybes
+    toHCL DeviceGroupData{..} = TF.inline $ catMaybes
         [ TF.attribute "filters" _filters
         , TF.attribute "offset" _offset
         , TF.attribute "size" _size
@@ -137,17 +137,17 @@ instance TF.ToHCL (DeviceGroupData s) where
 
 instance P.HasFilters (DeviceGroupData s) s Text where
     filters =
-        lens (_filters :: DeviceGroupData s -> TF.Attribute s Text)
+        lens (_filters :: DeviceGroupData s -> TF.Attr s Text)
              (\s a -> s { _filters = a } :: DeviceGroupData s)
 
 instance P.HasOffset (DeviceGroupData s) s Text where
     offset =
-        lens (_offset :: DeviceGroupData s -> TF.Attribute s Text)
+        lens (_offset :: DeviceGroupData s -> TF.Attr s Text)
              (\s a -> s { _offset = a } :: DeviceGroupData s)
 
 instance P.HasSize (DeviceGroupData s) s Text where
     size =
-        lens (_size :: DeviceGroupData s -> TF.Attribute s Text)
+        lens (_size :: DeviceGroupData s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: DeviceGroupData s)
 
 

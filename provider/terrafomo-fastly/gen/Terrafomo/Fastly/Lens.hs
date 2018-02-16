@@ -69,205 +69,205 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 class HasBackend a s b | a -> s b where
-    backend :: Lens' a (TF.Attribute s b)
+    backend :: Lens' a (TF.Attr s b)
 
 instance HasBackend a s b => HasBackend (TF.Schema l p a) s b where
     backend = TF.configuration . backend
 
 class HasCacheSetting a s b | a -> s b where
-    cacheSetting :: Lens' a (TF.Attribute s b)
+    cacheSetting :: Lens' a (TF.Attr s b)
 
 instance HasCacheSetting a s b => HasCacheSetting (TF.Schema l p a) s b where
     cacheSetting = TF.configuration . cacheSetting
 
 class HasCondition a s b | a -> s b where
-    condition :: Lens' a (TF.Attribute s b)
+    condition :: Lens' a (TF.Attr s b)
 
 instance HasCondition a s b => HasCondition (TF.Schema l p a) s b where
     condition = TF.configuration . condition
 
 class HasDefaultHost a s b | a -> s b where
-    defaultHost :: Lens' a (TF.Attribute s b)
+    defaultHost :: Lens' a (TF.Attr s b)
 
 instance HasDefaultHost a s b => HasDefaultHost (TF.Schema l p a) s b where
     defaultHost = TF.configuration . defaultHost
 
 class HasDefaultTtl a s b | a -> s b where
-    defaultTtl :: Lens' a (TF.Attribute s b)
+    defaultTtl :: Lens' a (TF.Attr s b)
 
 instance HasDefaultTtl a s b => HasDefaultTtl (TF.Schema l p a) s b where
     defaultTtl = TF.configuration . defaultTtl
 
 class HasDomain a s b | a -> s b where
-    domain :: Lens' a (TF.Attribute s b)
+    domain :: Lens' a (TF.Attr s b)
 
 instance HasDomain a s b => HasDomain (TF.Schema l p a) s b where
     domain = TF.configuration . domain
 
 class HasForceDestroy a s b | a -> s b where
-    forceDestroy :: Lens' a (TF.Attribute s b)
+    forceDestroy :: Lens' a (TF.Attr s b)
 
 instance HasForceDestroy a s b => HasForceDestroy (TF.Schema l p a) s b where
     forceDestroy = TF.configuration . forceDestroy
 
 class HasGcslogging a s b | a -> s b where
-    gcslogging :: Lens' a (TF.Attribute s b)
+    gcslogging :: Lens' a (TF.Attr s b)
 
 instance HasGcslogging a s b => HasGcslogging (TF.Schema l p a) s b where
     gcslogging = TF.configuration . gcslogging
 
 class HasGzip a s b | a -> s b where
-    gzip :: Lens' a (TF.Attribute s b)
+    gzip :: Lens' a (TF.Attr s b)
 
 instance HasGzip a s b => HasGzip (TF.Schema l p a) s b where
     gzip = TF.configuration . gzip
 
 class HasHeader a s b | a -> s b where
-    header :: Lens' a (TF.Attribute s b)
+    header :: Lens' a (TF.Attr s b)
 
 instance HasHeader a s b => HasHeader (TF.Schema l p a) s b where
     header = TF.configuration . header
 
 class HasHealthcheck a s b | a -> s b where
-    healthcheck :: Lens' a (TF.Attribute s b)
+    healthcheck :: Lens' a (TF.Attr s b)
 
 instance HasHealthcheck a s b => HasHealthcheck (TF.Schema l p a) s b where
     healthcheck = TF.configuration . healthcheck
 
 class HasLogentries a s b | a -> s b where
-    logentries :: Lens' a (TF.Attribute s b)
+    logentries :: Lens' a (TF.Attr s b)
 
 instance HasLogentries a s b => HasLogentries (TF.Schema l p a) s b where
     logentries = TF.configuration . logentries
 
 class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
+    name :: Lens' a (TF.Attr s b)
 
 instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasPapertrail a s b | a -> s b where
-    papertrail :: Lens' a (TF.Attribute s b)
+    papertrail :: Lens' a (TF.Attr s b)
 
 instance HasPapertrail a s b => HasPapertrail (TF.Schema l p a) s b where
     papertrail = TF.configuration . papertrail
 
 class HasRequestSetting a s b | a -> s b where
-    requestSetting :: Lens' a (TF.Attribute s b)
+    requestSetting :: Lens' a (TF.Attr s b)
 
 instance HasRequestSetting a s b => HasRequestSetting (TF.Schema l p a) s b where
     requestSetting = TF.configuration . requestSetting
 
 class HasResponseObject a s b | a -> s b where
-    responseObject :: Lens' a (TF.Attribute s b)
+    responseObject :: Lens' a (TF.Attr s b)
 
 instance HasResponseObject a s b => HasResponseObject (TF.Schema l p a) s b where
     responseObject = TF.configuration . responseObject
 
 class HasS3logging a s b | a -> s b where
-    s3logging :: Lens' a (TF.Attribute s b)
+    s3logging :: Lens' a (TF.Attr s b)
 
 instance HasS3logging a s b => HasS3logging (TF.Schema l p a) s b where
     s3logging = TF.configuration . s3logging
 
 class HasSumologic a s b | a -> s b where
-    sumologic :: Lens' a (TF.Attribute s b)
+    sumologic :: Lens' a (TF.Attr s b)
 
 instance HasSumologic a s b => HasSumologic (TF.Schema l p a) s b where
     sumologic = TF.configuration . sumologic
 
 class HasSyslog a s b | a -> s b where
-    syslog :: Lens' a (TF.Attribute s b)
+    syslog :: Lens' a (TF.Attr s b)
 
 instance HasSyslog a s b => HasSyslog (TF.Schema l p a) s b where
     syslog = TF.configuration . syslog
 
 class HasVcl a s b | a -> s b where
-    vcl :: Lens' a (TF.Attribute s b)
+    vcl :: Lens' a (TF.Attr s b)
 
 instance HasVcl a s b => HasVcl (TF.Schema l p a) s b where
     vcl = TF.configuration . vcl
 
 class HasComputedActiveVersion a b | a -> b where
     computedActiveVersion
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedActiveVersion =
-        to (\x -> TF.computed (TF.referenceKey x) "active_version")
+        to (\x -> TF.compute (TF.refKey x) "active_version")
 
 class HasComputedBackend a b | a -> b where
     computedBackend
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedBackend =
-        to (\x -> TF.computed (TF.referenceKey x) "backend")
+        to (\x -> TF.compute (TF.refKey x) "backend")
 
 class HasComputedCidrBlocks a b | a -> b where
     computedCidrBlocks
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedCidrBlocks =
-        to (\x -> TF.computed (TF.referenceKey x) "cidr_blocks")
+        to (\x -> TF.compute (TF.refKey x) "cidr_blocks")
 
 class HasComputedDefaultHost a b | a -> b where
     computedDefaultHost
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedDefaultHost =
-        to (\x -> TF.computed (TF.referenceKey x) "default_host")
+        to (\x -> TF.compute (TF.refKey x) "default_host")
 
 class HasComputedDefaultTtl a b | a -> b where
     computedDefaultTtl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedDefaultTtl =
-        to (\x -> TF.computed (TF.referenceKey x) "default_ttl")
+        to (\x -> TF.compute (TF.refKey x) "default_ttl")
 
 class HasComputedDomain a b | a -> b where
     computedDomain
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedDomain =
-        to (\x -> TF.computed (TF.referenceKey x) "domain")
+        to (\x -> TF.compute (TF.refKey x) "domain")
 
 class HasComputedForceDestroy a b | a -> b where
     computedForceDestroy
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedForceDestroy =
-        to (\x -> TF.computed (TF.referenceKey x) "force_destroy")
+        to (\x -> TF.compute (TF.refKey x) "force_destroy")
 
 class HasComputedHeader a b | a -> b where
     computedHeader
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedHeader =
-        to (\x -> TF.computed (TF.referenceKey x) "header")
+        to (\x -> TF.compute (TF.refKey x) "header")
 
 class HasComputedId a b | a -> b where
     computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedId =
-        to (\x -> TF.computed (TF.referenceKey x) "id")
+        to (\x -> TF.compute (TF.refKey x) "id")
 
 class HasComputedName a b | a -> b where
     computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedName =
-        to (\x -> TF.computed (TF.referenceKey x) "name")
+        to (\x -> TF.compute (TF.refKey x) "name")
 
 class HasComputedPapertrail a b | a -> b where
     computedPapertrail
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedPapertrail =
-        to (\x -> TF.computed (TF.referenceKey x) "papertrail")
+        to (\x -> TF.compute (TF.refKey x) "papertrail")
 
 class HasComputedResponseObject a b | a -> b where
     computedResponseObject
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedResponseObject =
-        to (\x -> TF.computed (TF.referenceKey x) "response_object")
+        to (\x -> TF.compute (TF.refKey x) "response_object")
 
 class HasComputedS3logging a b | a -> b where
     computedS3logging
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedS3logging =
-        to (\x -> TF.computed (TF.referenceKey x) "s3logging")
+        to (\x -> TF.compute (TF.refKey x) "s3logging")
 
 class HasComputedVcl a b | a -> b where
     computedVcl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedVcl =
-        to (\x -> TF.computed (TF.referenceKey x) "vcl")
+        to (\x -> TF.compute (TF.refKey x) "vcl")

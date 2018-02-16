@@ -63,18 +63,18 @@ the </docs/providers/docker/r/image.html> resource to keep an image up to
 date on the latest available version of the tag.
 -}
 data RegistryImageData s = RegistryImageData {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required, string) The name of the Docker image, including any tags. e.g. @alpine:latest@ -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RegistryImageData s) where
-    toHCL RegistryImageData{..} = TF.block $ catMaybes
+    toHCL RegistryImageData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (RegistryImageData s) s Text where
     name =
-        lens (_name :: RegistryImageData s -> TF.Attribute s Text)
+        lens (_name :: RegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RegistryImageData s)
 
 instance P.HasComputedSha256Digest (RegistryImageData s) Text

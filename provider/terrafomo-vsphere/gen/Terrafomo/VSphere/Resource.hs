@@ -188,26 +188,26 @@ For more information about custom attributes, click
 require vCenter.
 -}
 data CustomAttributeResource s = CustomAttributeResource {
-      _managed_object_type :: !(TF.Attribute s Text)
+      _managed_object_type :: !(TF.Attr s Text)
     {- ^ (Optional) The object type that this attribute may be applied to. If not set, the custom attribute may be applied to any object type. For a full list, click <#managed-object-types> . Forces a new resource if changed. -}
-    , _name                :: !(TF.Attribute s Text)
+    , _name                :: !(TF.Attr s Text)
     {- ^ (Required) The name of the custom attribute. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CustomAttributeResource s) where
-    toHCL CustomAttributeResource{..} = TF.block $ catMaybes
+    toHCL CustomAttributeResource{..} = TF.inline $ catMaybes
         [ TF.attribute "managed_object_type" _managed_object_type
         , TF.attribute "name" _name
         ]
 
 instance P.HasManagedObjectType (CustomAttributeResource s) s Text where
     managedObjectType =
-        lens (_managed_object_type :: CustomAttributeResource s -> TF.Attribute s Text)
+        lens (_managed_object_type :: CustomAttributeResource s -> TF.Attr s Text)
              (\s a -> s { _managed_object_type = a } :: CustomAttributeResource s)
 
 instance P.HasName (CustomAttributeResource s) s Text where
     name =
-        lens (_name :: CustomAttributeResource s -> TF.Attribute s Text)
+        lens (_name :: CustomAttributeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CustomAttributeResource s)
 
 
@@ -225,16 +225,16 @@ Provides a VMware vSphere datacenter resource. This can be used as the
 primary container of inventory objects such as hosts and virtual machines.
 -}
 data DatacenterResource s = DatacenterResource {
-      _folder :: !(TF.Attribute s Text)
+      _folder :: !(TF.Attr s Text)
     {- ^ (Optional) The folder where the datacenter should be created. Forces a new resource if changed. -}
-    , _name   :: !(TF.Attribute s Text)
+    , _name   :: !(TF.Attr s Text)
     {- ^ (Required) The name of the datacenter. This name needs to be unique within the folder. Forces a new resource if changed. -}
-    , _tags   :: !(TF.Attribute s Text)
+    , _tags   :: !(TF.Attr s Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DatacenterResource s) where
-    toHCL DatacenterResource{..} = TF.block $ catMaybes
+    toHCL DatacenterResource{..} = TF.inline $ catMaybes
         [ TF.attribute "folder" _folder
         , TF.attribute "name" _name
         , TF.attribute "tags" _tags
@@ -242,17 +242,17 @@ instance TF.ToHCL (DatacenterResource s) where
 
 instance P.HasFolder (DatacenterResource s) s Text where
     folder =
-        lens (_folder :: DatacenterResource s -> TF.Attribute s Text)
+        lens (_folder :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _folder = a } :: DatacenterResource s)
 
 instance P.HasName (DatacenterResource s) s Text where
     name =
-        lens (_name :: DatacenterResource s -> TF.Attribute s Text)
+        lens (_name :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatacenterResource s)
 
 instance P.HasTags (DatacenterResource s) s Text where
     tags =
-        lens (_tags :: DatacenterResource s -> TF.Attribute s Text)
+        lens (_tags :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: DatacenterResource s)
 
 
@@ -282,22 +282,22 @@ desired. For an overview on vSphere networking concepts, see
 ESXi connections.
 -}
 data DistributedPortGroupResource s = DistributedPortGroupResource {
-      _auto_expand                     :: !(TF.Attribute s Text)
+      _auto_expand                     :: !(TF.Attr s Text)
     {- ^ (Optional) Allows the port group to create additional ports past the limit specified in @number_of_ports@ if necessary. Default: @true@ . -}
-    , _description                     :: !(TF.Attribute s Text)
+    , _description                     :: !(TF.Attr s Text)
     {- ^ (Optional) An optional description for the port group. -}
-    , _distributed_virtual_switch_uuid :: !(TF.Attribute s Text)
+    , _distributed_virtual_switch_uuid :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the DVS to add the port group to. Forces a new resource if changed. -}
-    , _name                            :: !(TF.Attribute s Text)
+    , _name                            :: !(TF.Attr s Text)
     {- ^ (Required) The name of the port group. -}
-    , _number_of_ports                 :: !(TF.Attribute s Text)
+    , _number_of_ports                 :: !(TF.Attr s Text)
     {- ^ (Optional) The number of ports available on this port group. Cannot be decreased below the amount of used ports on the port group. -}
-    , _type'                           :: !(TF.Attribute s Text)
+    , _type'                           :: !(TF.Attr s Text)
     {- ^ (Optional) The port group type. Can be one of @earlyBinding@ (static binding) or @ephemeral@ . Default: @earlyBinding@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DistributedPortGroupResource s) where
-    toHCL DistributedPortGroupResource{..} = TF.block $ catMaybes
+    toHCL DistributedPortGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "auto_expand" _auto_expand
         , TF.attribute "description" _description
         , TF.attribute "distributed_virtual_switch_uuid" _distributed_virtual_switch_uuid
@@ -308,32 +308,32 @@ instance TF.ToHCL (DistributedPortGroupResource s) where
 
 instance P.HasAutoExpand (DistributedPortGroupResource s) s Text where
     autoExpand =
-        lens (_auto_expand :: DistributedPortGroupResource s -> TF.Attribute s Text)
+        lens (_auto_expand :: DistributedPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _auto_expand = a } :: DistributedPortGroupResource s)
 
 instance P.HasDescription (DistributedPortGroupResource s) s Text where
     description =
-        lens (_description :: DistributedPortGroupResource s -> TF.Attribute s Text)
+        lens (_description :: DistributedPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DistributedPortGroupResource s)
 
 instance P.HasDistributedVirtualSwitchUuid (DistributedPortGroupResource s) s Text where
     distributedVirtualSwitchUuid =
-        lens (_distributed_virtual_switch_uuid :: DistributedPortGroupResource s -> TF.Attribute s Text)
+        lens (_distributed_virtual_switch_uuid :: DistributedPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _distributed_virtual_switch_uuid = a } :: DistributedPortGroupResource s)
 
 instance P.HasName (DistributedPortGroupResource s) s Text where
     name =
-        lens (_name :: DistributedPortGroupResource s -> TF.Attribute s Text)
+        lens (_name :: DistributedPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DistributedPortGroupResource s)
 
 instance P.HasNumberOfPorts (DistributedPortGroupResource s) s Text where
     numberOfPorts =
-        lens (_number_of_ports :: DistributedPortGroupResource s -> TF.Attribute s Text)
+        lens (_number_of_ports :: DistributedPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _number_of_ports = a } :: DistributedPortGroupResource s)
 
 instance P.HasType' (DistributedPortGroupResource s) s Text where
     type' =
-        lens (_type' :: DistributedPortGroupResource s -> TF.Attribute s Text)
+        lens (_type' :: DistributedPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DistributedPortGroupResource s)
 
 instance P.HasComputedId (DistributedPortGroupResource s) Text
@@ -370,38 +370,38 @@ For an overview on vSphere networking concepts, see
 ESXi connections.
 -}
 data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource {
-      _contact_detail           :: !(TF.Attribute s Text)
+      _contact_detail           :: !(TF.Attr s Text)
     {- ^ (Optional) The detailed contact information for the person who is responsible for the DVS. -}
-    , _contact_name             :: !(TF.Attribute s Text)
+    , _contact_name             :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the person who is responsible for the DVS. -}
-    , _datacenter_id            :: !(TF.Attribute s Text)
+    , _datacenter_id            :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the datacenter where the distributed virtual switch will be created. Forces a new resource if changed. -}
-    , _description              :: !(TF.Attribute s Text)
+    , _description              :: !(TF.Attr s Text)
     {- ^ (Optional) A detailed description for the DVS. -}
-    , _folder                   :: !(TF.Attribute s Text)
+    , _folder                   :: !(TF.Attr s Text)
     {- ^ (Optional) The folder to create the DVS in. Forces a new resource if changed. -}
-    , _ipv4_address             :: !(TF.Attribute s Text)
+    , _ipv4_address             :: !(TF.Attr s Text)
     {- ^ (Optional) An IPv4 address to identify the switch. This is mostly useful when used with the <#netflow-arguments> found below. -}
-    , _lacp_api_version         :: !(TF.Attribute s Text)
+    , _lacp_api_version         :: !(TF.Attr s Text)
     {- ^ (Optional) The Link Aggregation Control Protocol group version to use with the switch. Possible values are @singleLag@ and @multipleLag@ . -}
-    , _link_discovery_operation :: !(TF.Attribute s Text)
+    , _link_discovery_operation :: !(TF.Attr s Text)
     {- ^ (Optional) Whether to @advertise@ or @listen@ for link discovery traffic. -}
-    , _link_discovery_protocol  :: !(TF.Attribute s Text)
+    , _link_discovery_protocol  :: !(TF.Attr s Text)
     {- ^ (Optional) The discovery protocol type. Valid types are @cdp@ and @lldp@ . -}
-    , _max_mtu                  :: !(TF.Attribute s Text)
+    , _max_mtu                  :: !(TF.Attr s Text)
     {- ^ (Optional) The maximum transmission unit (MTU) for the virtual switch. -}
-    , _multicast_filtering_mode :: !(TF.Attribute s Text)
+    , _multicast_filtering_mode :: !(TF.Attr s Text)
     {- ^ (Optional) The multicast filtering mode to use with the switch. Can be one of @legacyFiltering@ or @snooping@ . -}
-    , _name                     :: !(TF.Attribute s Text)
+    , _name                     :: !(TF.Attr s Text)
     {- ^ (Required) The name of the distributed virtual switch. -}
-    , _tags                     :: !(TF.Attribute s Text)
+    , _tags                     :: !(TF.Attr s Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _version                  :: !(TF.Attribute s Text)
+    , _version                  :: !(TF.Attr s Text)
     {- ^ (Optional) - The version of the DVS to create. The default is to create the DVS at the latest version supported by the version of vSphere being used. A DVS can be upgraded to another version, but cannot be downgraded. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DistributedVirtualSwitchResource s) where
-    toHCL DistributedVirtualSwitchResource{..} = TF.block $ catMaybes
+    toHCL DistributedVirtualSwitchResource{..} = TF.inline $ catMaybes
         [ TF.attribute "contact_detail" _contact_detail
         , TF.attribute "contact_name" _contact_name
         , TF.attribute "datacenter_id" _datacenter_id
@@ -420,72 +420,72 @@ instance TF.ToHCL (DistributedVirtualSwitchResource s) where
 
 instance P.HasContactDetail (DistributedVirtualSwitchResource s) s Text where
     contactDetail =
-        lens (_contact_detail :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_contact_detail :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _contact_detail = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasContactName (DistributedVirtualSwitchResource s) s Text where
     contactName =
-        lens (_contact_name :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_contact_name :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _contact_name = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasDatacenterId (DistributedVirtualSwitchResource s) s Text where
     datacenterId =
-        lens (_datacenter_id :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_datacenter_id :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasDescription (DistributedVirtualSwitchResource s) s Text where
     description =
-        lens (_description :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_description :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasFolder (DistributedVirtualSwitchResource s) s Text where
     folder =
-        lens (_folder :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_folder :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasIpv4Address (DistributedVirtualSwitchResource s) s Text where
     ipv4Address =
-        lens (_ipv4_address :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_ipv4_address :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _ipv4_address = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLacpApiVersion (DistributedVirtualSwitchResource s) s Text where
     lacpApiVersion =
-        lens (_lacp_api_version :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_lacp_api_version :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _lacp_api_version = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLinkDiscoveryOperation (DistributedVirtualSwitchResource s) s Text where
     linkDiscoveryOperation =
-        lens (_link_discovery_operation :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_link_discovery_operation :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _link_discovery_operation = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLinkDiscoveryProtocol (DistributedVirtualSwitchResource s) s Text where
     linkDiscoveryProtocol =
-        lens (_link_discovery_protocol :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_link_discovery_protocol :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _link_discovery_protocol = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasMaxMtu (DistributedVirtualSwitchResource s) s Text where
     maxMtu =
-        lens (_max_mtu :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_max_mtu :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _max_mtu = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasMulticastFilteringMode (DistributedVirtualSwitchResource s) s Text where
     multicastFilteringMode =
-        lens (_multicast_filtering_mode :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_multicast_filtering_mode :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _multicast_filtering_mode = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasName (DistributedVirtualSwitchResource s) s Text where
     name =
-        lens (_name :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_name :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasTags (DistributedVirtualSwitchResource s) s Text where
     tags =
-        lens (_tags :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_tags :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasVersion (DistributedVirtualSwitchResource s) s Text where
     version =
-        lens (_version :: DistributedVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_version :: DistributedVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasComputedConfigVersion (DistributedVirtualSwitchResource s) Text
@@ -526,24 +526,24 @@ as well, this may result in the destination file either being overwritten or
 deleted at the old location.
 -}
 data FileResource s = FileResource {
-      _create_directories :: !(TF.Attribute s Text)
+      _create_directories :: !(TF.Attr s Text)
     {- ^ (Optional) Create directories in @destination_file@ path parameter if any missing for copy operation. -}
-    , _datacenter         :: !(TF.Attribute s Text)
+    , _datacenter         :: !(TF.Attr s Text)
     {- ^ (Optional) The name of a datacenter in which the file will be uploaded to. -}
-    , _datastore          :: !(TF.Attribute s Text)
+    , _datastore          :: !(TF.Attr s Text)
     {- ^ (Required) The name of the datastore in which to upload the file to. -}
-    , _destination_file   :: !(TF.Attribute s Text)
+    , _destination_file   :: !(TF.Attr s Text)
     {- ^ (Required) The path to where the file should be uploaded or copied to on vSphere. -}
-    , _source_datacenter  :: !(TF.Attribute s Text)
+    , _source_datacenter  :: !(TF.Attr s Text)
     {- ^ (Optional) The name of a datacenter in which the file will be copied from. Forces a new resource if changed. -}
-    , _source_datastore   :: !(TF.Attribute s Text)
+    , _source_datastore   :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the datastore in which file will be copied from. Forces a new resource if changed. -}
-    , _source_file        :: !(TF.Attribute s Text)
+    , _source_file        :: !(TF.Attr s Text)
     {- ^ (Required) The path to the file being uploaded from the Terraform host to vSphere or copied within vSphere. Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FileResource s) where
-    toHCL FileResource{..} = TF.block $ catMaybes
+    toHCL FileResource{..} = TF.inline $ catMaybes
         [ TF.attribute "create_directories" _create_directories
         , TF.attribute "datacenter" _datacenter
         , TF.attribute "datastore" _datastore
@@ -555,37 +555,37 @@ instance TF.ToHCL (FileResource s) where
 
 instance P.HasCreateDirectories (FileResource s) s Text where
     createDirectories =
-        lens (_create_directories :: FileResource s -> TF.Attribute s Text)
+        lens (_create_directories :: FileResource s -> TF.Attr s Text)
              (\s a -> s { _create_directories = a } :: FileResource s)
 
 instance P.HasDatacenter (FileResource s) s Text where
     datacenter =
-        lens (_datacenter :: FileResource s -> TF.Attribute s Text)
+        lens (_datacenter :: FileResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: FileResource s)
 
 instance P.HasDatastore (FileResource s) s Text where
     datastore =
-        lens (_datastore :: FileResource s -> TF.Attribute s Text)
+        lens (_datastore :: FileResource s -> TF.Attr s Text)
              (\s a -> s { _datastore = a } :: FileResource s)
 
 instance P.HasDestinationFile (FileResource s) s Text where
     destinationFile =
-        lens (_destination_file :: FileResource s -> TF.Attribute s Text)
+        lens (_destination_file :: FileResource s -> TF.Attr s Text)
              (\s a -> s { _destination_file = a } :: FileResource s)
 
 instance P.HasSourceDatacenter (FileResource s) s Text where
     sourceDatacenter =
-        lens (_source_datacenter :: FileResource s -> TF.Attribute s Text)
+        lens (_source_datacenter :: FileResource s -> TF.Attr s Text)
              (\s a -> s { _source_datacenter = a } :: FileResource s)
 
 instance P.HasSourceDatastore (FileResource s) s Text where
     sourceDatastore =
-        lens (_source_datastore :: FileResource s -> TF.Attribute s Text)
+        lens (_source_datastore :: FileResource s -> TF.Attr s Text)
              (\s a -> s { _source_datastore = a } :: FileResource s)
 
 instance P.HasSourceFile (FileResource s) s Text where
     sourceFile =
-        lens (_source_file :: FileResource s -> TF.Attribute s Text)
+        lens (_source_file :: FileResource s -> TF.Attr s Text)
              (\s a -> s { _source_file = a } :: FileResource s)
 
 
@@ -614,18 +614,18 @@ folder named @bar@ in the parent folder @foo@ , as long as that folder
 exists.
 -}
 data FolderResource s = FolderResource {
-      _path :: !(TF.Attribute s Text)
+      _path :: !(TF.Attr s Text)
     {- ^ (Required) The path of the folder to be created. This is relative to the root of the type of folder you are creating, and the supplied datacenter. For example, given a default datacenter of @default-dc@ , a folder of type @vm@ (denoting a virtual machine folder), and a supplied folder of @terraform-test-folder@ , the resulting path would be @/default-dc/vm/terraform-test-folder@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FolderResource s) where
-    toHCL FolderResource{..} = TF.block $ catMaybes
+    toHCL FolderResource{..} = TF.inline $ catMaybes
         [ TF.attribute "path" _path
         ]
 
 instance P.HasPath (FolderResource s) s Text where
     path =
-        lens (_path :: FolderResource s -> TF.Attribute s Text)
+        lens (_path :: FolderResource s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: FolderResource s)
 
 
@@ -647,18 +647,18 @@ overview on vSphere networking concepts, see
 .
 -}
 data HostPortGroupResource s = HostPortGroupResource {
-      _host_system_id      :: !(TF.Attribute s Text)
+      _host_system_id      :: !(TF.Attr s Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the port group up on. Forces a new resource if changed. -}
-    , _name                :: !(TF.Attribute s Text)
+    , _name                :: !(TF.Attr s Text)
     {- ^ (Required) The name of the port group.  Forces a new resource if changed. -}
-    , _virtual_switch_name :: !(TF.Attribute s Text)
+    , _virtual_switch_name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the virtual switch to bind this port group to. Forces a new resource if changed. -}
-    , _vlan_id             :: !(TF.Attribute s Text)
+    , _vlan_id             :: !(TF.Attr s Text)
     {- ^ (Optional) The VLAN ID/trunk mode for this port group.  An ID of @0@ denotes no tagging, an ID of @1@ - @4094@ tags with the specific ID, and an ID of @4095@ enables trunk mode, allowing the guest to manage its own tagging. Default: @0@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (HostPortGroupResource s) where
-    toHCL HostPortGroupResource{..} = TF.block $ catMaybes
+    toHCL HostPortGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "host_system_id" _host_system_id
         , TF.attribute "name" _name
         , TF.attribute "virtual_switch_name" _virtual_switch_name
@@ -667,22 +667,22 @@ instance TF.ToHCL (HostPortGroupResource s) where
 
 instance P.HasHostSystemId (HostPortGroupResource s) s Text where
     hostSystemId =
-        lens (_host_system_id :: HostPortGroupResource s -> TF.Attribute s Text)
+        lens (_host_system_id :: HostPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _host_system_id = a } :: HostPortGroupResource s)
 
 instance P.HasName (HostPortGroupResource s) s Text where
     name =
-        lens (_name :: HostPortGroupResource s -> TF.Attribute s Text)
+        lens (_name :: HostPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: HostPortGroupResource s)
 
 instance P.HasVirtualSwitchName (HostPortGroupResource s) s Text where
     virtualSwitchName =
-        lens (_virtual_switch_name :: HostPortGroupResource s -> TF.Attribute s Text)
+        lens (_virtual_switch_name :: HostPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _virtual_switch_name = a } :: HostPortGroupResource s)
 
 instance P.HasVlanId (HostPortGroupResource s) s Text where
     vlanId =
-        lens (_vlan_id :: HostPortGroupResource s -> TF.Attribute s Text)
+        lens (_vlan_id :: HostPortGroupResource s -> TF.Attr s Text)
              (\s a -> s { _vlan_id = a } :: HostPortGroupResource s)
 
 instance P.HasComputedComputedPolicy (HostPortGroupResource s) Text
@@ -711,18 +711,18 @@ on vSphere networking concepts, see
 .
 -}
 data HostVirtualSwitchResource s = HostVirtualSwitchResource {
-      _host_system_id  :: !(TF.Attribute s Text)
+      _host_system_id  :: !(TF.Attr s Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the virtual switch up on. Forces a new resource if changed. -}
-    , _mtu             :: !(TF.Attribute s Text)
+    , _mtu             :: !(TF.Attr s Text)
     {- ^ (Optional) The maximum transmission unit (MTU) for the virtual switch. Default: @1500@ . -}
-    , _name            :: !(TF.Attribute s Text)
+    , _name            :: !(TF.Attr s Text)
     {- ^ (Required) The name of the virtual switch. Forces a new resource if changed. -}
-    , _number_of_ports :: !(TF.Attribute s Text)
+    , _number_of_ports :: !(TF.Attr s Text)
     {- ^ (Optional) The number of ports to create with this virtual switch. Default: @128@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (HostVirtualSwitchResource s) where
-    toHCL HostVirtualSwitchResource{..} = TF.block $ catMaybes
+    toHCL HostVirtualSwitchResource{..} = TF.inline $ catMaybes
         [ TF.attribute "host_system_id" _host_system_id
         , TF.attribute "mtu" _mtu
         , TF.attribute "name" _name
@@ -731,22 +731,22 @@ instance TF.ToHCL (HostVirtualSwitchResource s) where
 
 instance P.HasHostSystemId (HostVirtualSwitchResource s) s Text where
     hostSystemId =
-        lens (_host_system_id :: HostVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_host_system_id :: HostVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _host_system_id = a } :: HostVirtualSwitchResource s)
 
 instance P.HasMtu (HostVirtualSwitchResource s) s Text where
     mtu =
-        lens (_mtu :: HostVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_mtu :: HostVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _mtu = a } :: HostVirtualSwitchResource s)
 
 instance P.HasName (HostVirtualSwitchResource s) s Text where
     name =
-        lens (_name :: HostVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_name :: HostVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: HostVirtualSwitchResource s)
 
 instance P.HasNumberOfPorts (HostVirtualSwitchResource s) s Text where
     numberOfPorts =
-        lens (_number_of_ports :: HostVirtualSwitchResource s -> TF.Attribute s Text)
+        lens (_number_of_ports :: HostVirtualSwitchResource s -> TF.Attr s Text)
              (\s a -> s { _number_of_ports = a } :: HostVirtualSwitchResource s)
 
 
@@ -766,26 +766,26 @@ Provides a VMware vSphere license resource. This can be used to add and
 remove license keys.
 -}
 data LicenseResource s = LicenseResource {
-      _labels      :: !(TF.Attribute s Text)
+      _labels      :: !(TF.Attr s Text)
     {- ^ (Optional) A map of key/value pairs to be attached as labels (tags) to the license key. -}
-    , _license_key :: !(TF.Attribute s Text)
+    , _license_key :: !(TF.Attr s Text)
     {- ^ (Required) The license key to add. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LicenseResource s) where
-    toHCL LicenseResource{..} = TF.block $ catMaybes
+    toHCL LicenseResource{..} = TF.inline $ catMaybes
         [ TF.attribute "labels" _labels
         , TF.attribute "license_key" _license_key
         ]
 
 instance P.HasLabels (LicenseResource s) s Text where
     labels =
-        lens (_labels :: LicenseResource s -> TF.Attribute s Text)
+        lens (_labels :: LicenseResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: LicenseResource s)
 
 instance P.HasLicenseKey (LicenseResource s) s Text where
     licenseKey =
-        lens (_license_key :: LicenseResource s -> TF.Attribute s Text)
+        lens (_license_key :: LicenseResource s -> TF.Attr s Text)
              (\s a -> s { _license_key = a } :: LicenseResource s)
 
 instance P.HasComputedEditionKey (LicenseResource s) Text
@@ -812,28 +812,28 @@ you must specify each host that you want to add in the @host_system_ids@
 argument.
 -}
 data NasDatastoreResource s = NasDatastoreResource {
-      _access_mode     :: !(TF.Attribute s Text)
+      _access_mode     :: !(TF.Attr s Text)
     {- ^ (Optional) Access mode for the mount point. Can be one of @readOnly@ or @readWrite@ . Note that @readWrite@ does not necessarily mean that the datastore will be read-write depending on the permissions of the actual share. Default: @readWrite@ . Forces a new resource if changed. -}
-    , _folder          :: !(TF.Attribute s Text)
+    , _folder          :: !(TF.Attr s Text)
     {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . -}
-    , _host_system_ids :: !(TF.Attribute s Text)
+    , _host_system_ids :: !(TF.Attr s Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the hosts to mount the datastore on. -}
-    , _name            :: !(TF.Attribute s Text)
+    , _name            :: !(TF.Attr s Text)
     {- ^ (Required) The name of the datastore. Forces a new resource if changed. -}
-    , _remote_hosts    :: !(TF.Attribute s Text)
+    , _remote_hosts    :: !(TF.Attr s Text)
     {- ^ (Required) The hostnames or IP addresses of the remote server or servers. Only one element should be present for NFS v3 but multiple can be present for NFS v4.1. Forces a new resource if changed. -}
-    , _remote_path     :: !(TF.Attribute s Text)
+    , _remote_path     :: !(TF.Attr s Text)
     {- ^ (Required) The remote path of the mount point. Forces a new resource if changed. -}
-    , _security_type   :: !(TF.Attribute s Text)
+    , _security_type   :: !(TF.Attr s Text)
     {- ^ (Optional) The security type to use when using NFS v4.1. Can be one of @AUTH_SYS@ , @SEC_KRB5@ , or @SEC_KRB5I@ . Forces a new resource if changed. -}
-    , _tags            :: !(TF.Attribute s Text)
+    , _tags            :: !(TF.Attr s Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _type'           :: !(TF.Attribute s Text)
+    , _type'           :: !(TF.Attr s Text)
     {- ^ (Optional) The type of NAS volume. Can be one of @NFS@ (to denote v3) or @NFS41@ (to denote NFS v4.1). Default: @NFS@ . Forces a new resource if changed. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NasDatastoreResource s) where
-    toHCL NasDatastoreResource{..} = TF.block $ catMaybes
+    toHCL NasDatastoreResource{..} = TF.inline $ catMaybes
         [ TF.attribute "access_mode" _access_mode
         , TF.attribute "folder" _folder
         , TF.attribute "host_system_ids" _host_system_ids
@@ -847,47 +847,47 @@ instance TF.ToHCL (NasDatastoreResource s) where
 
 instance P.HasAccessMode (NasDatastoreResource s) s Text where
     accessMode =
-        lens (_access_mode :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_access_mode :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _access_mode = a } :: NasDatastoreResource s)
 
 instance P.HasFolder (NasDatastoreResource s) s Text where
     folder =
-        lens (_folder :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_folder :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _folder = a } :: NasDatastoreResource s)
 
 instance P.HasHostSystemIds (NasDatastoreResource s) s Text where
     hostSystemIds =
-        lens (_host_system_ids :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_host_system_ids :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _host_system_ids = a } :: NasDatastoreResource s)
 
 instance P.HasName (NasDatastoreResource s) s Text where
     name =
-        lens (_name :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_name :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NasDatastoreResource s)
 
 instance P.HasRemoteHosts (NasDatastoreResource s) s Text where
     remoteHosts =
-        lens (_remote_hosts :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_remote_hosts :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _remote_hosts = a } :: NasDatastoreResource s)
 
 instance P.HasRemotePath (NasDatastoreResource s) s Text where
     remotePath =
-        lens (_remote_path :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_remote_path :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _remote_path = a } :: NasDatastoreResource s)
 
 instance P.HasSecurityType (NasDatastoreResource s) s Text where
     securityType =
-        lens (_security_type :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_security_type :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _security_type = a } :: NasDatastoreResource s)
 
 instance P.HasTags (NasDatastoreResource s) s Text where
     tags =
-        lens (_tags :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_tags :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: NasDatastoreResource s)
 
 instance P.HasType' (NasDatastoreResource s) s Text where
     type' =
-        lens (_type' :: NasDatastoreResource s -> TF.Attribute s Text)
+        lens (_type' :: NasDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: NasDatastoreResource s)
 
 instance P.HasComputedAccessible (NasDatastoreResource s) Text
@@ -927,18 +927,18 @@ specific objects. For more information about tags, click
 requires vCenter 6.0 or higher.
 -}
 data TagCategoryResource s = TagCategoryResource {
-      _associable_types :: !(TF.Attribute s Text)
+      _associable_types :: !(TF.Attr s Text)
     {- ^ (Required) A list object types that this category is valid to be assigned to. For a full list, click <#associable-object-types> . -}
-    , _cardinality      :: !(TF.Attribute s Text)
+    , _cardinality      :: !(TF.Attr s Text)
     {- ^ (Required) The number of tags that can be assigned from this category to a single object at once. Can be one of @SINGLE@ (object can only be assigned one tag in this category), to @MULTIPLE@ (object can be assigned multiple tags in this category). Forces a new resource if changed. -}
-    , _description      :: !(TF.Attribute s Text)
+    , _description      :: !(TF.Attr s Text)
     {- ^ (Optional) A description for the category. -}
-    , _name             :: !(TF.Attribute s Text)
+    , _name             :: !(TF.Attr s Text)
     {- ^ (Required) The name of the category. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (TagCategoryResource s) where
-    toHCL TagCategoryResource{..} = TF.block $ catMaybes
+    toHCL TagCategoryResource{..} = TF.inline $ catMaybes
         [ TF.attribute "associable_types" _associable_types
         , TF.attribute "cardinality" _cardinality
         , TF.attribute "description" _description
@@ -947,22 +947,22 @@ instance TF.ToHCL (TagCategoryResource s) where
 
 instance P.HasAssociableTypes (TagCategoryResource s) s Text where
     associableTypes =
-        lens (_associable_types :: TagCategoryResource s -> TF.Attribute s Text)
+        lens (_associable_types :: TagCategoryResource s -> TF.Attr s Text)
              (\s a -> s { _associable_types = a } :: TagCategoryResource s)
 
 instance P.HasCardinality (TagCategoryResource s) s Text where
     cardinality =
-        lens (_cardinality :: TagCategoryResource s -> TF.Attribute s Text)
+        lens (_cardinality :: TagCategoryResource s -> TF.Attr s Text)
              (\s a -> s { _cardinality = a } :: TagCategoryResource s)
 
 instance P.HasDescription (TagCategoryResource s) s Text where
     description =
-        lens (_description :: TagCategoryResource s -> TF.Attribute s Text)
+        lens (_description :: TagCategoryResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: TagCategoryResource s)
 
 instance P.HasName (TagCategoryResource s) s Text where
     name =
-        lens (_name :: TagCategoryResource s -> TF.Attribute s Text)
+        lens (_name :: TagCategoryResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TagCategoryResource s)
 
 
@@ -987,16 +987,16 @@ click
 requires vCenter 6.0 or higher.
 -}
 data TagResource s = TagResource {
-      _category_id :: !(TF.Attribute s Text)
+      _category_id :: !(TF.Attr s Text)
     {- ^ (Required) The unique identifier of the parent category in which this tag will be created. Forces a new resource if changed. -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description for the tag. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) The display name of the tag. The name must be unique within its category. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (TagResource s) where
-    toHCL TagResource{..} = TF.block $ catMaybes
+    toHCL TagResource{..} = TF.inline $ catMaybes
         [ TF.attribute "category_id" _category_id
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -1004,17 +1004,17 @@ instance TF.ToHCL (TagResource s) where
 
 instance P.HasCategoryId (TagResource s) s Text where
     categoryId =
-        lens (_category_id :: TagResource s -> TF.Attribute s Text)
+        lens (_category_id :: TagResource s -> TF.Attr s Text)
              (\s a -> s { _category_id = a } :: TagResource s)
 
 instance P.HasDescription (TagResource s) s Text where
     description =
-        lens (_description :: TagResource s -> TF.Attribute s Text)
+        lens (_description :: TagResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: TagResource s)
 
 instance P.HasName (TagResource s) s Text where
     name =
-        lens (_name :: TagResource s -> TF.Attribute s Text)
+        lens (_name :: TagResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TagResource s)
 
 
@@ -1036,22 +1036,22 @@ disk sub-resource with the
 </docs/providers/vsphere/r/virtual_machine.html#attach> parameter.
 -}
 data VirtualDiskResource s = VirtualDiskResource {
-      _adapter_type :: !(TF.Attribute s Text)
+      _adapter_type :: !(TF.Attr s Text)
     {- ^ (Optional) The adapter type for this virtual disk. Can be one of @ide@ , @lsiLogic@ , or @busLogic@ .  Default: @lsiLogic@ . -}
-    , _datacenter   :: !(TF.Attribute s Text)
+    , _datacenter   :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the datacenter in which to create the disk. Can be omitted when when ESXi or if there is only one datacenter in your infrastructure. -}
-    , _datastore    :: !(TF.Attribute s Text)
+    , _datastore    :: !(TF.Attr s Text)
     {- ^ (Required) The name of the datastore in which to create the disk. -}
-    , _size         :: !(TF.Attribute s Text)
+    , _size         :: !(TF.Attr s Text)
     {- ^ (Required) Size of the disk (in GB). -}
-    , _type'        :: !(TF.Attribute s Text)
+    , _type'        :: !(TF.Attr s Text)
     {- ^ (Optional) The type of disk to create. Can be one of @eagerZeroedThick@ , @lazy@ , or @thin@ . Default: @eagerZeroedThick@ . For information on what each kind of disk provisioning policy means, click <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-4C0F4D73-82F2-4B81-8AA7-1DD752A8A5AC.html> . -}
-    , _vmdk_path    :: !(TF.Attribute s Text)
+    , _vmdk_path    :: !(TF.Attr s Text)
     {- ^ (Required) The path, including filename, of the virtual disk to be created.  This needs to end in @.vmdk@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VirtualDiskResource s) where
-    toHCL VirtualDiskResource{..} = TF.block $ catMaybes
+    toHCL VirtualDiskResource{..} = TF.inline $ catMaybes
         [ TF.attribute "adapter_type" _adapter_type
         , TF.attribute "datacenter" _datacenter
         , TF.attribute "datastore" _datastore
@@ -1062,32 +1062,32 @@ instance TF.ToHCL (VirtualDiskResource s) where
 
 instance P.HasAdapterType (VirtualDiskResource s) s Text where
     adapterType =
-        lens (_adapter_type :: VirtualDiskResource s -> TF.Attribute s Text)
+        lens (_adapter_type :: VirtualDiskResource s -> TF.Attr s Text)
              (\s a -> s { _adapter_type = a } :: VirtualDiskResource s)
 
 instance P.HasDatacenter (VirtualDiskResource s) s Text where
     datacenter =
-        lens (_datacenter :: VirtualDiskResource s -> TF.Attribute s Text)
+        lens (_datacenter :: VirtualDiskResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: VirtualDiskResource s)
 
 instance P.HasDatastore (VirtualDiskResource s) s Text where
     datastore =
-        lens (_datastore :: VirtualDiskResource s -> TF.Attribute s Text)
+        lens (_datastore :: VirtualDiskResource s -> TF.Attr s Text)
              (\s a -> s { _datastore = a } :: VirtualDiskResource s)
 
 instance P.HasSize (VirtualDiskResource s) s Text where
     size =
-        lens (_size :: VirtualDiskResource s -> TF.Attribute s Text)
+        lens (_size :: VirtualDiskResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: VirtualDiskResource s)
 
 instance P.HasType' (VirtualDiskResource s) s Text where
     type' =
-        lens (_type' :: VirtualDiskResource s -> TF.Attribute s Text)
+        lens (_type' :: VirtualDiskResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: VirtualDiskResource s)
 
 instance P.HasVmdkPath (VirtualDiskResource s) s Text where
     vmdkPath =
-        lens (_vmdk_path :: VirtualDiskResource s -> TF.Attribute s Text)
+        lens (_vmdk_path :: VirtualDiskResource s -> TF.Attr s Text)
              (\s a -> s { _vmdk_path = a } :: VirtualDiskResource s)
 
 
@@ -1114,26 +1114,26 @@ details on working with virtual machines in vSphere, see
 .
 -}
 data VirtualMachineResource s = VirtualMachineResource {
-      _name             :: !(TF.Attribute s Text)
+      _name             :: !(TF.Attr s Text)
     {- ^ (Required) The name of the virtual machine. -}
-    , _resource_pool_id :: !(TF.Attribute s Text)
+    , _resource_pool_id :: !(TF.Attr s Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the resource pool to put this virtual machine in. See the section on <#virtual-machine-migration> for details on changing this value. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VirtualMachineResource s) where
-    toHCL VirtualMachineResource{..} = TF.block $ catMaybes
+    toHCL VirtualMachineResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "resource_pool_id" _resource_pool_id
         ]
 
 instance P.HasName (VirtualMachineResource s) s Text where
     name =
-        lens (_name :: VirtualMachineResource s -> TF.Attribute s Text)
+        lens (_name :: VirtualMachineResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VirtualMachineResource s)
 
 instance P.HasResourcePoolId (VirtualMachineResource s) s Text where
     resourcePoolId =
-        lens (_resource_pool_id :: VirtualMachineResource s -> TF.Attribute s Text)
+        lens (_resource_pool_id :: VirtualMachineResource s -> TF.Attr s Text)
              (\s a -> s { _resource_pool_id = a } :: VirtualMachineResource s)
 
 instance P.HasComputedChangeVersion (VirtualMachineResource s) Text
@@ -1176,24 +1176,24 @@ limitation of virtual machine snapshots, see
 .
 -}
 data VirtualMachineSnapshotResource s = VirtualMachineSnapshotResource {
-      _consolidate          :: !(TF.Attribute s Text)
+      _consolidate          :: !(TF.Attr s Text)
     {- ^ (Optional) If set to @true@ , the delta disks involved in this snapshot will be consolidated into the parent when this resource is destroyed. -}
-    , _description          :: !(TF.Attribute s Text)
+    , _description          :: !(TF.Attr s Text)
     {- ^ (Required) A description for the snapshot. -}
-    , _memory               :: !(TF.Attribute s Text)
+    , _memory               :: !(TF.Attr s Text)
     {- ^ (Required) If set to @true@ , a dump of the internal state of the virtual machine is included in the snapshot. -}
-    , _quiesce              :: !(TF.Attribute s Text)
+    , _quiesce              :: !(TF.Attr s Text)
     {- ^ (Required) If set to @true@ , and the virtual machine is powered on when the snapshot is taken, VMware Tools is used to quiesce the file system in the virtual machine. -}
-    , _remove_children      :: !(TF.Attribute s Text)
+    , _remove_children      :: !(TF.Attr s Text)
     {- ^ (Optional) If set to @true@ , the entire snapshot subtree is removed when this resource is destroyed. -}
-    , _snapshot_name        :: !(TF.Attribute s Text)
+    , _snapshot_name        :: !(TF.Attr s Text)
     {- ^ (Required) The name of the snapshot. -}
-    , _virtual_machine_uuid :: !(TF.Attribute s Text)
+    , _virtual_machine_uuid :: !(TF.Attr s Text)
     {- ^ (Required) The virtual machine UUID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VirtualMachineSnapshotResource s) where
-    toHCL VirtualMachineSnapshotResource{..} = TF.block $ catMaybes
+    toHCL VirtualMachineSnapshotResource{..} = TF.inline $ catMaybes
         [ TF.attribute "consolidate" _consolidate
         , TF.attribute "description" _description
         , TF.attribute "memory" _memory
@@ -1205,37 +1205,37 @@ instance TF.ToHCL (VirtualMachineSnapshotResource s) where
 
 instance P.HasConsolidate (VirtualMachineSnapshotResource s) s Text where
     consolidate =
-        lens (_consolidate :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
+        lens (_consolidate :: VirtualMachineSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _consolidate = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasDescription (VirtualMachineSnapshotResource s) s Text where
     description =
-        lens (_description :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
+        lens (_description :: VirtualMachineSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasMemory (VirtualMachineSnapshotResource s) s Text where
     memory =
-        lens (_memory :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
+        lens (_memory :: VirtualMachineSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _memory = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasQuiesce (VirtualMachineSnapshotResource s) s Text where
     quiesce =
-        lens (_quiesce :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
+        lens (_quiesce :: VirtualMachineSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _quiesce = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasRemoveChildren (VirtualMachineSnapshotResource s) s Text where
     removeChildren =
-        lens (_remove_children :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
+        lens (_remove_children :: VirtualMachineSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _remove_children = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasSnapshotName (VirtualMachineSnapshotResource s) s Text where
     snapshotName =
-        lens (_snapshot_name :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
+        lens (_snapshot_name :: VirtualMachineSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_name = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasVirtualMachineUuid (VirtualMachineSnapshotResource s) s Text where
     virtualMachineUuid =
-        lens (_virtual_machine_uuid :: VirtualMachineSnapshotResource s -> TF.Attribute s Text)
+        lens (_virtual_machine_uuid :: VirtualMachineSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource s)
 
 
@@ -1262,20 +1262,20 @@ iSCSI. Devices can be specified manually, or discovered using the
 </docs/providers/vsphere/d/vmfs_disks.html> data source.
 -}
 data VmfsDatastoreResource s = VmfsDatastoreResource {
-      _disks          :: !(TF.Attribute s Text)
+      _disks          :: !(TF.Attr s Text)
     {- ^ (Required) The disks to use with the datastore. -}
-    , _folder         :: !(TF.Attribute s Text)
+    , _folder         :: !(TF.Attr s Text)
     {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . -}
-    , _host_system_id :: !(TF.Attribute s Text)
+    , _host_system_id :: !(TF.Attr s Text)
     {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the datastore up on. Note that this is not necessarily the only host that the datastore will be set up on - see <#auto-mounting-of-datastores-within-vcenter> for more info. Forces a new resource if changed. -}
-    , _name           :: !(TF.Attribute s Text)
+    , _name           :: !(TF.Attr s Text)
     {- ^ (Required) The name of the datastore. Forces a new resource if changed. -}
-    , _tags           :: !(TF.Attribute s Text)
+    , _tags           :: !(TF.Attr s Text)
     {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VmfsDatastoreResource s) where
-    toHCL VmfsDatastoreResource{..} = TF.block $ catMaybes
+    toHCL VmfsDatastoreResource{..} = TF.inline $ catMaybes
         [ TF.attribute "disks" _disks
         , TF.attribute "folder" _folder
         , TF.attribute "host_system_id" _host_system_id
@@ -1285,27 +1285,27 @@ instance TF.ToHCL (VmfsDatastoreResource s) where
 
 instance P.HasDisks (VmfsDatastoreResource s) s Text where
     disks =
-        lens (_disks :: VmfsDatastoreResource s -> TF.Attribute s Text)
+        lens (_disks :: VmfsDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _disks = a } :: VmfsDatastoreResource s)
 
 instance P.HasFolder (VmfsDatastoreResource s) s Text where
     folder =
-        lens (_folder :: VmfsDatastoreResource s -> TF.Attribute s Text)
+        lens (_folder :: VmfsDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _folder = a } :: VmfsDatastoreResource s)
 
 instance P.HasHostSystemId (VmfsDatastoreResource s) s Text where
     hostSystemId =
-        lens (_host_system_id :: VmfsDatastoreResource s -> TF.Attribute s Text)
+        lens (_host_system_id :: VmfsDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _host_system_id = a } :: VmfsDatastoreResource s)
 
 instance P.HasName (VmfsDatastoreResource s) s Text where
     name =
-        lens (_name :: VmfsDatastoreResource s -> TF.Attribute s Text)
+        lens (_name :: VmfsDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VmfsDatastoreResource s)
 
 instance P.HasTags (VmfsDatastoreResource s) s Text where
     tags =
-        lens (_tags :: VmfsDatastoreResource s -> TF.Attribute s Text)
+        lens (_tags :: VmfsDatastoreResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
 
 instance P.HasComputedAccessible (VmfsDatastoreResource s) Text

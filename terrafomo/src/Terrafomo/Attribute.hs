@@ -1,52 +1,67 @@
+{-# LANGUAGE DeriveFunctor     #-}
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Terrafomo.Attribute
-    ( Attribute (..)
-    , computed
-    , constant
+    ( Attr (..)
+    , compute
+    , flatten
+    , attr
     , nil
-
-    -- * Setters
-    , (@~)
+    , true
+    , false
     ) where
 
 import Data.Hashable (Hashable)
 import Data.Monoid   ((<>))
+import Data.String   (IsString (fromString))
 
 import GHC.Generics (Generic)
 
 import Terrafomo.Name
 
-import qualified Lens.Micro as Lens
-
 -- | An argument is either a computed attribute of another terraform resource
 -- or data source, a constant value, or nil.
-data Attribute s a
-    = Computed !Key !Name !Name
-    | Constant !a
+data Attr s a
+    = Compute  !Key !Name !Name -- ^ A computed @TYPE.NAME.FIELD@ attribute.
+    | Flatten  ![Attr s a]      -- ^ A flattened comma-seperated list of attributes.
+    | Constant !a               -- ^ A constant Haskell-value.
     | Nil
-      deriving (Show, Eq, Generic)
+      deriving (Show, Eq, Generic, Functor)
+    -- FIXME: This Functor instance was added as a hack and needs to be
+    -- very seriously reconsidered.
 
-instance Hashable a => Hashable (Attribute s a)
+instance Hashable a => Hashable (Attr s a)
 
-computed :: Key -> Name -> Attribute s a
-computed k v = Computed k v (Name (typeName (keyType k) <> "_" <> fromName v))
-{-# INLINE computed #-}
+instance IsString a => IsString (Attr s a) where
+    fromString = attr . fromString
+
+compute :: Key -> Name -> Attr s a
+compute k v = Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))
+{-# INLINE compute #-}
+
+-- list :: [Attr s a] -> Attr s [a]
+-- list =
+
+flatten :: [Attr s a] -> Attr s a
+flatten = Flatten
+{-# INLINE flatten #-}
 
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.
-constant :: a -> Attribute s a
-constant = Constant
-{-# INLINE constant #-}
+attr :: a -> Attr s a
+attr = Constant
+{-# INLINE attr #-}
 
 -- | Omit an attribute. Equivalent to 'Nothing'.
-nil :: Attribute s a
+nil :: Attr s a
 nil = Nil
 {-# INLINE nil #-}
 
-infixr 4 @~
+true :: Attr s Bool
+true = Constant True
+{-# INLINE true #-}
 
-(@~) :: Lens.ASetter' t (Attribute s a) -> a -> t -> t
-(@~) l x = Lens.set l (Constant x)
-{-# INLINE (@~) #-}
+false :: Attr s Bool
+false = Constant False
+{-# INLINE false #-}

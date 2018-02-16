@@ -98,16 +98,16 @@ import qualified Terrafomo.Schema    as TF
 Manages a Virtual Data Center on ProfitBricks
 -}
 data DatacenterResource s = DatacenterResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional)[string] Description for the data center. -}
-    , _location    :: !(TF.Attribute s Text)
+    , _location    :: !(TF.Attr s Text)
     {- ^ (Required)[string] The physical location where the data center will be created. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DatacenterResource s) where
-    toHCL DatacenterResource{..} = TF.block $ catMaybes
+    toHCL DatacenterResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "location" _location
         , TF.attribute "name" _name
@@ -115,17 +115,17 @@ instance TF.ToHCL (DatacenterResource s) where
 
 instance P.HasDescription (DatacenterResource s) s Text where
     description =
-        lens (_description :: DatacenterResource s -> TF.Attribute s Text)
+        lens (_description :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DatacenterResource s)
 
 instance P.HasLocation (DatacenterResource s) s Text where
     location =
-        lens (_location :: DatacenterResource s -> TF.Attribute s Text)
+        lens (_location :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: DatacenterResource s)
 
 instance P.HasName (DatacenterResource s) s Text where
     name =
-        lens (_name :: DatacenterResource s -> TF.Attribute s Text)
+        lens (_name :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatacenterResource s)
 
 
@@ -146,7 +146,7 @@ data FirewallResource s = FirewallResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FirewallResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 firewallResource :: TF.Schema TF.Resource P.ProfitBricks (FirewallResource s)
@@ -163,7 +163,7 @@ data GroupResource s = GroupResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (GroupResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 groupResource :: TF.Schema TF.Resource P.ProfitBricks (GroupResource s)
@@ -180,7 +180,7 @@ data IpblockResource s = IpblockResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IpblockResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 ipblockResource :: TF.Schema TF.Resource P.ProfitBricks (IpblockResource s)
@@ -197,7 +197,7 @@ data IpfailoverResource s = IpfailoverResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IpfailoverResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 ipfailoverResource :: TF.Schema TF.Resource P.ProfitBricks (IpfailoverResource s)
@@ -214,7 +214,7 @@ data LanResource s = LanResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LanResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 lanResource :: TF.Schema TF.Resource P.ProfitBricks (LanResource s)
@@ -231,7 +231,7 @@ data LoadbalancerResource s = LoadbalancerResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LoadbalancerResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 loadbalancerResource :: TF.Schema TF.Resource P.ProfitBricks (LoadbalancerResource s)
@@ -248,7 +248,7 @@ data NicResource s = NicResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NicResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 nicResource :: TF.Schema TF.Resource P.ProfitBricks (NicResource s)
@@ -265,7 +265,7 @@ data ServerResource s = ServerResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServerResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 serverResource :: TF.Schema TF.Resource P.ProfitBricks (ServerResource s)
@@ -283,7 +283,7 @@ data ShareResource s = ShareResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ShareResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 shareResource :: TF.Schema TF.Resource P.ProfitBricks (ShareResource s)
@@ -300,7 +300,7 @@ data SnapshotResource s = SnapshotResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SnapshotResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 snapshotResource :: TF.Schema TF.Resource P.ProfitBricks (SnapshotResource s)
@@ -317,7 +317,7 @@ data UserResource s = UserResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 userResource :: TF.Schema TF.Resource P.ProfitBricks (UserResource s)
@@ -334,7 +334,7 @@ data VolumeResource s = VolumeResource {
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VolumeResource s) where
-    toHCL _ = TF.block []
+    toHCL _ = TF.empty
 
 
 volumeResource :: TF.Schema TF.Resource P.ProfitBricks (VolumeResource s)

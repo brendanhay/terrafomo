@@ -131,30 +131,30 @@ The @triton_fabric@ resource represents an fabric for a Triton account. The
 fabric is a logical set of interconnected switches.
 -}
 data FabricResource s = FabricResource {
-      _description        :: !(TF.Attribute s Text)
+      _description        :: !(TF.Attr s Text)
     {- ^ - (String, Optional, Change forces new resource) Optional description of network. -}
-    , _gateway            :: !(TF.Attribute s Text)
+    , _gateway            :: !(TF.Attr s Text)
     {- ^ - (String, Optional, Change forces new resource) Optional gateway IP. -}
-    , _internet_nat       :: !(TF.Attribute s Text)
+    , _internet_nat       :: !(TF.Attr s Text)
     {- ^ - (Bool, Optional, Change forces new resource) If a NAT zone is provisioned at Gateway IP address. Default is @false@ . This differs from <https://apidocs.joyent.com/cloudapi/#CreateFabricNetwork> which implicitly creates a NAT instance by default. NOTE: There is a known issue in Triton that prevents deletion of fabric networks when @internet_nat@ is enabled. -}
-    , _name               :: !(TF.Attribute s Text)
+    , _name               :: !(TF.Attr s Text)
     {- ^ - (String, Required, Change forces new resource) Network name. -}
-    , _provision_end_ip   :: !(TF.Attribute s Text)
+    , _provision_end_ip   :: !(TF.Attr s Text)
     {- ^ - (String, Required, Change forces new resource) Last assignable IP on the network. -}
-    , _provision_start_ip :: !(TF.Attribute s Text)
+    , _provision_start_ip :: !(TF.Attr s Text)
     {- ^ - (String, Required, Change forces new resource) First IP on the network that can be assigned. -}
-    , _resolvers          :: !(TF.Attribute s Text)
+    , _resolvers          :: !(TF.Attr s Text)
     {- ^ - (List, Optional) Array of IP addresses for resolvers. -}
-    , _routes             :: !(TF.Attribute s Text)
+    , _routes             :: !(TF.Attr s Text)
     {- ^ - (Map, Optional, Change forces new resource) Map of CIDR block to Gateway IP address. -}
-    , _subnet             :: !(TF.Attribute s Text)
+    , _subnet             :: !(TF.Attr s Text)
     {- ^ - (String, Required, Change forces new resource) CIDR formatted string describing network. -}
-    , _vlan_id            :: !(TF.Attribute s Text)
+    , _vlan_id            :: !(TF.Attr s Text)
     {- ^ - (Int, Required, Change forces new resource) VLAN id the network is on. Number between 0-4095 indicating VLAN ID. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FabricResource s) where
-    toHCL FabricResource{..} = TF.block $ catMaybes
+    toHCL FabricResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "gateway" _gateway
         , TF.attribute "internet_nat" _internet_nat
@@ -169,52 +169,52 @@ instance TF.ToHCL (FabricResource s) where
 
 instance P.HasDescription (FabricResource s) s Text where
     description =
-        lens (_description :: FabricResource s -> TF.Attribute s Text)
+        lens (_description :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: FabricResource s)
 
 instance P.HasGateway (FabricResource s) s Text where
     gateway =
-        lens (_gateway :: FabricResource s -> TF.Attribute s Text)
+        lens (_gateway :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _gateway = a } :: FabricResource s)
 
 instance P.HasInternetNat (FabricResource s) s Text where
     internetNat =
-        lens (_internet_nat :: FabricResource s -> TF.Attribute s Text)
+        lens (_internet_nat :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _internet_nat = a } :: FabricResource s)
 
 instance P.HasName (FabricResource s) s Text where
     name =
-        lens (_name :: FabricResource s -> TF.Attribute s Text)
+        lens (_name :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: FabricResource s)
 
 instance P.HasProvisionEndIp (FabricResource s) s Text where
     provisionEndIp =
-        lens (_provision_end_ip :: FabricResource s -> TF.Attribute s Text)
+        lens (_provision_end_ip :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _provision_end_ip = a } :: FabricResource s)
 
 instance P.HasProvisionStartIp (FabricResource s) s Text where
     provisionStartIp =
-        lens (_provision_start_ip :: FabricResource s -> TF.Attribute s Text)
+        lens (_provision_start_ip :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _provision_start_ip = a } :: FabricResource s)
 
 instance P.HasResolvers (FabricResource s) s Text where
     resolvers =
-        lens (_resolvers :: FabricResource s -> TF.Attribute s Text)
+        lens (_resolvers :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _resolvers = a } :: FabricResource s)
 
 instance P.HasRoutes (FabricResource s) s Text where
     routes =
-        lens (_routes :: FabricResource s -> TF.Attribute s Text)
+        lens (_routes :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _routes = a } :: FabricResource s)
 
 instance P.HasSubnet (FabricResource s) s Text where
     subnet =
-        lens (_subnet :: FabricResource s -> TF.Attribute s Text)
+        lens (_subnet :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _subnet = a } :: FabricResource s)
 
 instance P.HasVlanId (FabricResource s) s Text where
     vlanId =
-        lens (_vlan_id :: FabricResource s -> TF.Attribute s Text)
+        lens (_vlan_id :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _vlan_id = a } :: FabricResource s)
 
 instance P.HasComputedDescription (FabricResource s) Text
@@ -252,26 +252,26 @@ The @triton_firewall_rule@ resource represents a rule for the Triton cloud
 firewall.
 -}
 data FirewallRuleResource s = FirewallRuleResource {
-      _enabled :: !(TF.Attribute s Text)
+      _enabled :: !(TF.Attr s Text)
     {- ^ - (boolean)  Default: @false@ Whether the rule should be effective. -}
-    , _rule    :: !(TF.Attribute s Text)
+    , _rule    :: !(TF.Attr s Text)
     {- ^ - (string, Required) The firewall rule described using the Cloud API rule syntax defined at https://docs.joyent.com/public-cloud/network/firewall/cloud-firewall-rules-reference. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FirewallRuleResource s) where
-    toHCL FirewallRuleResource{..} = TF.block $ catMaybes
+    toHCL FirewallRuleResource{..} = TF.inline $ catMaybes
         [ TF.attribute "enabled" _enabled
         , TF.attribute "rule" _rule
         ]
 
 instance P.HasEnabled (FirewallRuleResource s) s Text where
     enabled =
-        lens (_enabled :: FirewallRuleResource s -> TF.Attribute s Text)
+        lens (_enabled :: FirewallRuleResource s -> TF.Attr s Text)
              (\s a -> s { _enabled = a } :: FirewallRuleResource s)
 
 instance P.HasRule (FirewallRuleResource s) s Text where
     rule =
-        lens (_rule :: FirewallRuleResource s -> TF.Attribute s Text)
+        lens (_rule :: FirewallRuleResource s -> TF.Attr s Text)
              (\s a -> s { _rule = a } :: FirewallRuleResource s)
 
 instance P.HasComputedId (FirewallRuleResource s) Text
@@ -289,26 +289,26 @@ firewallRuleResource =
 The @triton_key@ resource represents an SSH key for a Triton account.
 -}
 data KeyResource s = KeyResource {
-      _key  :: !(TF.Attribute s Text)
+      _key  :: !(TF.Attr s Text)
     {- ^ - (string, Required, Change forces new resource) The SSH key material. In order to read this from a file, use the @file@ interpolation. -}
-    , _name :: !(TF.Attribute s Text)
+    , _name :: !(TF.Attr s Text)
     {- ^ - (string, Change forces new resource) The name of the key. If this is left empty, the name is inferred from the comment in the SSH key material. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (KeyResource s) where
-    toHCL KeyResource{..} = TF.block $ catMaybes
+    toHCL KeyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "key" _key
         , TF.attribute "name" _name
         ]
 
 instance P.HasKey (KeyResource s) s Text where
     key =
-        lens (_key :: KeyResource s -> TF.Attribute s Text)
+        lens (_key :: KeyResource s -> TF.Attr s Text)
              (\s a -> s { _key = a } :: KeyResource s)
 
 instance P.HasName (KeyResource s) s Text where
     name =
-        lens (_name :: KeyResource s -> TF.Attribute s Text)
+        lens (_name :: KeyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KeyResource s)
 
 
@@ -328,40 +328,40 @@ note that when you want to specify the networks that you want the machine to
 be attached to, use the @networks@ parameter and not the @nic@ parameter.
 -}
 data MachineResource s = MachineResource {
-      _administrator_pw     :: !(TF.Attribute s Text)
+      _administrator_pw     :: !(TF.Attr s Text)
     {- ^ - (string) The initial password for the Administrator user. Only used for Windows virtual machines. -}
-    , _affinity             :: !(TF.Attribute s Text)
+    , _affinity             :: !(TF.Attr s Text)
     {- ^ - (list of Affinity rules, Optional) A list of valid <https://apidocs.joyent.com/cloudapi/#affinity-rules> to apply to the machine which assist in data center placement. Using this attribute will force resource creation to be serial. NOTE: Affinity rules are best guess and assist in placing instances across a data center. They're used at creation and not referenced after. -}
-    , _cloud_config         :: !(TF.Attribute s Text)
+    , _cloud_config         :: !(TF.Attr s Text)
     {- ^ - (string) Cloud-init configuration for Linux brand machines, used instead of @user_data@ . -}
-    , _cns                  :: !(TF.Attribute s Text)
+    , _cns                  :: !(TF.Attr s Text)
     {- ^ - (map of CNS attributes, Optional) A mapping of <https://docs.joyent.com/public-cloud/network/cns> attributes to apply to the machine. -}
-    , _firewall_enabled     :: !(TF.Attribute s Text)
+    , _firewall_enabled     :: !(TF.Attr s Text)
     {- ^ - (boolean)  Default: @false@ Whether the cloud firewall should be enabled for this machine. -}
-    , _image                :: !(TF.Attribute s Text)
+    , _image                :: !(TF.Attr s Text)
     {- ^ - (string, Required) The UUID of the image to provision. -}
-    , _locality             :: !(TF.Attribute s Text)
+    , _locality             :: !(TF.Attr s Text)
     {- ^ - (map of Locality hints, Optional) A mapping of <https://apidocs.joyent.com/cloudapi/#CreateMachine> attributes to apply to the machine that assist in data center placement. NOTE: Locality hints are only used at the time of machine creation and not referenced after. -}
-    , _metadata             :: !(TF.Attribute s Text)
+    , _metadata             :: !(TF.Attr s Text)
     {- ^ - (map, optional) A mapping of metadata to apply to the machine. -}
-    , _name                 :: !(TF.Attribute s Text)
+    , _name                 :: !(TF.Attr s Text)
     {- ^ - (string) The friendly name for the machine. Triton will generate a name if one is not specified. -}
-    , _networks             :: !(TF.Attribute s Text)
+    , _networks             :: !(TF.Attr s Text)
     {- ^ - (list, optional) The list of networks to associate with the machine. The network ID will be in hex form, e.g @xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx@ . -}
-    , _package              :: !(TF.Attribute s Text)
+    , _package              :: !(TF.Attr s Text)
     {- ^ - (string, Required) The name of the package to use for provisioning. -}
-    , _root_authorized_keys :: !(TF.Attribute s Text)
+    , _root_authorized_keys :: !(TF.Attr s Text)
     {- ^ - (string) The public keys authorized for root access via SSH to the machine. -}
-    , _tags                 :: !(TF.Attribute s Text)
+    , _tags                 :: !(TF.Attr s Text)
     {- ^ - (map) A mapping of tags to apply to the machine. -}
-    , _user_data            :: !(TF.Attribute s Text)
+    , _user_data            :: !(TF.Attr s Text)
     {- ^ - (string) Data to be copied to the machine on boot. -}
-    , _user_script          :: !(TF.Attribute s Text)
+    , _user_script          :: !(TF.Attr s Text)
     {- ^ - (string) The user script to run on boot (every boot on SmartMachines). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (MachineResource s) where
-    toHCL MachineResource{..} = TF.block $ catMaybes
+    toHCL MachineResource{..} = TF.inline $ catMaybes
         [ TF.attribute "administrator_pw" _administrator_pw
         , TF.attribute "affinity" _affinity
         , TF.attribute "cloud_config" _cloud_config
@@ -381,77 +381,77 @@ instance TF.ToHCL (MachineResource s) where
 
 instance P.HasAdministratorPw (MachineResource s) s Text where
     administratorPw =
-        lens (_administrator_pw :: MachineResource s -> TF.Attribute s Text)
+        lens (_administrator_pw :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _administrator_pw = a } :: MachineResource s)
 
 instance P.HasAffinity (MachineResource s) s Text where
     affinity =
-        lens (_affinity :: MachineResource s -> TF.Attribute s Text)
+        lens (_affinity :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _affinity = a } :: MachineResource s)
 
 instance P.HasCloudConfig (MachineResource s) s Text where
     cloudConfig =
-        lens (_cloud_config :: MachineResource s -> TF.Attribute s Text)
+        lens (_cloud_config :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _cloud_config = a } :: MachineResource s)
 
 instance P.HasCns (MachineResource s) s Text where
     cns =
-        lens (_cns :: MachineResource s -> TF.Attribute s Text)
+        lens (_cns :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _cns = a } :: MachineResource s)
 
 instance P.HasFirewallEnabled (MachineResource s) s Text where
     firewallEnabled =
-        lens (_firewall_enabled :: MachineResource s -> TF.Attribute s Text)
+        lens (_firewall_enabled :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _firewall_enabled = a } :: MachineResource s)
 
 instance P.HasImage (MachineResource s) s Text where
     image =
-        lens (_image :: MachineResource s -> TF.Attribute s Text)
+        lens (_image :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _image = a } :: MachineResource s)
 
 instance P.HasLocality (MachineResource s) s Text where
     locality =
-        lens (_locality :: MachineResource s -> TF.Attribute s Text)
+        lens (_locality :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _locality = a } :: MachineResource s)
 
 instance P.HasMetadata (MachineResource s) s Text where
     metadata =
-        lens (_metadata :: MachineResource s -> TF.Attribute s Text)
+        lens (_metadata :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: MachineResource s)
 
 instance P.HasName (MachineResource s) s Text where
     name =
-        lens (_name :: MachineResource s -> TF.Attribute s Text)
+        lens (_name :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: MachineResource s)
 
 instance P.HasNetworks (MachineResource s) s Text where
     networks =
-        lens (_networks :: MachineResource s -> TF.Attribute s Text)
+        lens (_networks :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _networks = a } :: MachineResource s)
 
 instance P.HasPackage (MachineResource s) s Text where
     package =
-        lens (_package :: MachineResource s -> TF.Attribute s Text)
+        lens (_package :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _package = a } :: MachineResource s)
 
 instance P.HasRootAuthorizedKeys (MachineResource s) s Text where
     rootAuthorizedKeys =
-        lens (_root_authorized_keys :: MachineResource s -> TF.Attribute s Text)
+        lens (_root_authorized_keys :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _root_authorized_keys = a } :: MachineResource s)
 
 instance P.HasTags (MachineResource s) s Text where
     tags =
-        lens (_tags :: MachineResource s -> TF.Attribute s Text)
+        lens (_tags :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: MachineResource s)
 
 instance P.HasUserData (MachineResource s) s Text where
     userData =
-        lens (_user_data :: MachineResource s -> TF.Attribute s Text)
+        lens (_user_data :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _user_data = a } :: MachineResource s)
 
 instance P.HasUserScript (MachineResource s) s Text where
     userScript =
-        lens (_user_script :: MachineResource s -> TF.Attribute s Text)
+        lens (_user_script :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _user_script = a } :: MachineResource s)
 
 instance P.HasComputedCreated (MachineResource s) Text
@@ -501,26 +501,26 @@ snapshot of the current instance. Snapshots can also only be taken of
 instances that are not of brand @kvm@ .
 -}
 data SnapshotResource s = SnapshotResource {
-      _machine_id :: !(TF.Attribute s Text)
+      _machine_id :: !(TF.Attr s Text)
     {- ^ - (string, Required) The ID of the machine of which to take a snapshot. -}
-    , _name       :: !(TF.Attribute s Text)
+    , _name       :: !(TF.Attr s Text)
     {- ^ - (string) The name for the snapshot. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SnapshotResource s) where
-    toHCL SnapshotResource{..} = TF.block $ catMaybes
+    toHCL SnapshotResource{..} = TF.inline $ catMaybes
         [ TF.attribute "machine_id" _machine_id
         , TF.attribute "name" _name
         ]
 
 instance P.HasMachineId (SnapshotResource s) s Text where
     machineId =
-        lens (_machine_id :: SnapshotResource s -> TF.Attribute s Text)
+        lens (_machine_id :: SnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _machine_id = a } :: SnapshotResource s)
 
 instance P.HasName (SnapshotResource s) s Text where
     name =
-        lens (_name :: SnapshotResource s -> TF.Attribute s Text)
+        lens (_name :: SnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SnapshotResource s)
 
 instance P.HasComputedId (SnapshotResource s) Text
@@ -541,16 +541,16 @@ level way to segregate and subdivide the network. Traffic on one VLAN
 cannot, on its own , reach another VLAN.
 -}
 data VlanResource s = VlanResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ - (string, Optional) Description of the VLAN -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ - (string, Required) Unique name to identify VLAN -}
-    , _vlan_id     :: !(TF.Attribute s Text)
+    , _vlan_id     :: !(TF.Attr s Text)
     {- ^ - (int, Required, Change forces new resource) Number between 0-4095 indicating VLAN ID -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VlanResource s) where
-    toHCL VlanResource{..} = TF.block $ catMaybes
+    toHCL VlanResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         , TF.attribute "vlan_id" _vlan_id
@@ -558,17 +558,17 @@ instance TF.ToHCL (VlanResource s) where
 
 instance P.HasDescription (VlanResource s) s Text where
     description =
-        lens (_description :: VlanResource s -> TF.Attribute s Text)
+        lens (_description :: VlanResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: VlanResource s)
 
 instance P.HasName (VlanResource s) s Text where
     name =
-        lens (_name :: VlanResource s -> TF.Attribute s Text)
+        lens (_name :: VlanResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VlanResource s)
 
 instance P.HasVlanId (VlanResource s) s Text where
     vlanId =
-        lens (_vlan_id :: VlanResource s -> TF.Attribute s Text)
+        lens (_vlan_id :: VlanResource s -> TF.Attr s Text)
              (\s a -> s { _vlan_id = a } :: VlanResource s)
 
 

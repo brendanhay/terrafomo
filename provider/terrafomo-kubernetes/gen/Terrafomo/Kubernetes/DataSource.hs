@@ -65,18 +65,18 @@ by which to access them - sometimes called a micro-service. This data source
 allows you to pull data about such service.
 -}
 data ServiceData s = ServiceData {
-      _metadata :: !(TF.Attribute s Text)
+      _metadata :: !(TF.Attr s Text)
     {- ^ (Required) Standard service's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServiceData s) where
-    toHCL ServiceData{..} = TF.block $ catMaybes
+    toHCL ServiceData{..} = TF.inline $ catMaybes
         [ TF.attribute "metadata" _metadata
         ]
 
 instance P.HasMetadata (ServiceData s) s Text where
     metadata =
-        lens (_metadata :: ServiceData s -> TF.Attribute s Text)
+        lens (_metadata :: ServiceData s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ServiceData s)
 
 
@@ -95,18 +95,18 @@ Read more at
 http://blog.kubernetes.io/2017/03/dynamic-provisioning-and-storage-classes-kubernetes.html
 -}
 data StorageClassData s = StorageClassData {
-      _metadata :: !(TF.Attribute s Text)
+      _metadata :: !(TF.Attr s Text)
     {- ^ (Required) Standard storage class's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (StorageClassData s) where
-    toHCL StorageClassData{..} = TF.block $ catMaybes
+    toHCL StorageClassData{..} = TF.inline $ catMaybes
         [ TF.attribute "metadata" _metadata
         ]
 
 instance P.HasMetadata (StorageClassData s) s Text where
     metadata =
-        lens (_metadata :: StorageClassData s -> TF.Attribute s Text)
+        lens (_metadata :: StorageClassData s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: StorageClassData s)
 
 

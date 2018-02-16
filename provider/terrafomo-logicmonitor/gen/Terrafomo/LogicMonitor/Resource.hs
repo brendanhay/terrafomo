@@ -76,26 +76,26 @@ Provides a LogicMonitor collector group resource. This can be used to create
 and manage LogicMonitor users
 -}
 data CollectorGroupResource s = CollectorGroupResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) Set description of collector group -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) Name of collector group -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CollectorGroupResource s) where
-    toHCL CollectorGroupResource{..} = TF.block $ catMaybes
+    toHCL CollectorGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "name" _name
         ]
 
 instance P.HasDescription (CollectorGroupResource s) s Text where
     description =
-        lens (_description :: CollectorGroupResource s -> TF.Attribute s Text)
+        lens (_description :: CollectorGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: CollectorGroupResource s)
 
 instance P.HasName (CollectorGroupResource s) s Text where
     name =
-        lens (_name :: CollectorGroupResource s -> TF.Attribute s Text)
+        lens (_name :: CollectorGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CollectorGroupResource s)
 
 
@@ -113,22 +113,22 @@ Provides a LogicMonitor device group resource. This can be used to create
 and manage LogicMonitor device groups
 -}
 data DeviceGroupResource s = DeviceGroupResource {
-      _applies_to       :: !(TF.Attribute s Text)
+      _applies_to       :: !(TF.Attr s Text)
     {- ^ (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group. -}
-    , _description      :: !(TF.Attribute s Text)
+    , _description      :: !(TF.Attr s Text)
     {- ^ (Optional) Description of device group -}
-    , _disable_alerting :: !(TF.Attribute s Text)
+    , _disable_alerting :: !(TF.Attr s Text)
     {- ^ (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group -}
-    , _name             :: !(TF.Attribute s Text)
+    , _name             :: !(TF.Attr s Text)
     {- ^ (Required) Name of device group -}
-    , _parent_id        :: !(TF.Attribute s Text)
+    , _parent_id        :: !(TF.Attr s Text)
     {- ^ (Optional) The id of the parent group for this device group (the root device group has an Id of 1) -}
-    , _properties       :: !(TF.Attribute s Text)
+    , _properties       :: !(TF.Attr s Text)
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DeviceGroupResource s) where
-    toHCL DeviceGroupResource{..} = TF.block $ catMaybes
+    toHCL DeviceGroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "applies_to" _applies_to
         , TF.attribute "description" _description
         , TF.attribute "disable_alerting" _disable_alerting
@@ -139,32 +139,32 @@ instance TF.ToHCL (DeviceGroupResource s) where
 
 instance P.HasAppliesTo (DeviceGroupResource s) s Text where
     appliesTo =
-        lens (_applies_to :: DeviceGroupResource s -> TF.Attribute s Text)
+        lens (_applies_to :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
 
 instance P.HasDescription (DeviceGroupResource s) s Text where
     description =
-        lens (_description :: DeviceGroupResource s -> TF.Attribute s Text)
+        lens (_description :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DeviceGroupResource s)
 
 instance P.HasDisableAlerting (DeviceGroupResource s) s Text where
     disableAlerting =
-        lens (_disable_alerting :: DeviceGroupResource s -> TF.Attribute s Text)
+        lens (_disable_alerting :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
 
 instance P.HasName (DeviceGroupResource s) s Text where
     name =
-        lens (_name :: DeviceGroupResource s -> TF.Attribute s Text)
+        lens (_name :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DeviceGroupResource s)
 
 instance P.HasParentId (DeviceGroupResource s) s Text where
     parentId =
-        lens (_parent_id :: DeviceGroupResource s -> TF.Attribute s Text)
+        lens (_parent_id :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
 
 instance P.HasProperties (DeviceGroupResource s) s Text where
     properties =
-        lens (_properties :: DeviceGroupResource s -> TF.Attribute s Text)
+        lens (_properties :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _properties = a } :: DeviceGroupResource s)
 
 
@@ -186,22 +186,22 @@ Provides a LogicMonitor device resource. This can be used to create and
 manage LogicMonitor devices
 -}
 data DeviceResource s = DeviceResource {
-      _collector        :: !(TF.Attribute s Text)
+      _collector        :: !(TF.Attr s Text)
     {- ^ - (required) The id of the collector that will monitoring the device -}
-    , _disable_alerting :: !(TF.Attribute s Text)
+    , _disable_alerting :: !(TF.Attr s Text)
     {- ^ (Optional) The host is created with alerting disabled (default is true) -}
-    , _display_name     :: !(TF.Attribute s Text)
+    , _display_name     :: !(TF.Attr s Text)
     {- ^ (Optional) Display name of device, (default is ip_addr) -}
-    , _hostgroup_id     :: !(TF.Attribute s Text)
+    , _hostgroup_id     :: !(TF.Attr s Text)
     {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
-    , _ip_addr          :: !(TF.Attribute s Text)
+    , _ip_addr          :: !(TF.Attr s Text)
     {- ^ (Required) Ip Address/Hostname of device -}
-    , _properties       :: !(TF.Attribute s Text)
+    , _properties       :: !(TF.Attr s Text)
     {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DeviceResource s) where
-    toHCL DeviceResource{..} = TF.block $ catMaybes
+    toHCL DeviceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "collector" _collector
         , TF.attribute "disable_alerting" _disable_alerting
         , TF.attribute "display_name" _display_name
@@ -212,32 +212,32 @@ instance TF.ToHCL (DeviceResource s) where
 
 instance P.HasCollector (DeviceResource s) s Text where
     collector =
-        lens (_collector :: DeviceResource s -> TF.Attribute s Text)
+        lens (_collector :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _collector = a } :: DeviceResource s)
 
 instance P.HasDisableAlerting (DeviceResource s) s Text where
     disableAlerting =
-        lens (_disable_alerting :: DeviceResource s -> TF.Attribute s Text)
+        lens (_disable_alerting :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _disable_alerting = a } :: DeviceResource s)
 
 instance P.HasDisplayName (DeviceResource s) s Text where
     displayName =
-        lens (_display_name :: DeviceResource s -> TF.Attribute s Text)
+        lens (_display_name :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: DeviceResource s)
 
 instance P.HasHostgroupId (DeviceResource s) s Text where
     hostgroupId =
-        lens (_hostgroup_id :: DeviceResource s -> TF.Attribute s Text)
+        lens (_hostgroup_id :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
 
 instance P.HasIpAddr (DeviceResource s) s Text where
     ipAddr =
-        lens (_ip_addr :: DeviceResource s -> TF.Attribute s Text)
+        lens (_ip_addr :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _ip_addr = a } :: DeviceResource s)
 
 instance P.HasProperties (DeviceResource s) s Text where
     properties =
-        lens (_properties :: DeviceResource s -> TF.Attribute s Text)
+        lens (_properties :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _properties = a } :: DeviceResource s)
 
 

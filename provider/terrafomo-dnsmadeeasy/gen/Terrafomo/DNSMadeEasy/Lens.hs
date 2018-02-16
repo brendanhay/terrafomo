@@ -41,30 +41,30 @@ import qualified Terrafomo.Schema    as TF
 
 class HasComputedGtdLocation a b | a -> b where
     computedGtdLocation
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedGtdLocation =
-        to (\x -> TF.computed (TF.referenceKey x) "gtdLocation")
+        to (\x -> TF.compute (TF.refKey x) "gtdLocation")
 
 class HasComputedName a b | a -> b where
     computedName
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedName =
-        to (\x -> TF.computed (TF.referenceKey x) "name")
+        to (\x -> TF.compute (TF.refKey x) "name")
 
 class HasComputedTtl a b | a -> b where
     computedTtl
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedTtl =
-        to (\x -> TF.computed (TF.referenceKey x) "ttl")
+        to (\x -> TF.compute (TF.refKey x) "ttl")
 
 class HasComputedType' a b | a -> b where
     computedType'
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedType' =
-        to (\x -> TF.computed (TF.referenceKey x) "type")
+        to (\x -> TF.compute (TF.refKey x) "type")
 
 class HasComputedValue a b | a -> b where
     computedValue
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedValue =
-        to (\x -> TF.computed (TF.referenceKey x) "value")
+        to (\x -> TF.compute (TF.refKey x) "value")

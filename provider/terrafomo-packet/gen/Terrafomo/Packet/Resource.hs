@@ -133,34 +133,34 @@ user_data will be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data DeviceResource s = DeviceResource {
-      _always_pxe              :: !(TF.Attribute s Text)
+      _always_pxe              :: !(TF.Attr s Text)
     {- ^ (Optional) - If true, a device with OS @custom_ipxe@ will continue to boot via iPXE on reboots. -}
-    , _billing_cycle           :: !(TF.Attribute s Text)
+    , _billing_cycle           :: !(TF.Attr s Text)
     {- ^ (Required) monthly or hourly -}
-    , _facility                :: !(TF.Attribute s Text)
+    , _facility                :: !(TF.Attr s Text)
     {- ^ (Required) The facility in which to create the device -}
-    , _hardware_reservation_id :: !(TF.Attribute s Text)
+    , _hardware_reservation_id :: !(TF.Attr s Text)
     {- ^ (Optional) - The id of hardware reservation where you want this device deployed, or @next-available@ if you want to pick your next available reservation automatically. -}
-    , _hostname                :: !(TF.Attribute s Text)
+    , _hostname                :: !(TF.Attr s Text)
     {- ^ (Required) The device name -}
-    , _ipxe_script_url         :: !(TF.Attribute s Text)
+    , _ipxe_script_url         :: !(TF.Attr s Text)
     {- ^ (Optional) - URL pointing to a hosted iPXE script. More information is in the <https://help.packet.net/technical/infrastructure/custom-ipxe> doc. -}
-    , _operating_system        :: !(TF.Attribute s Text)
+    , _operating_system        :: !(TF.Attr s Text)
     {- ^ (Required) The operating system slug -}
-    , _plan                    :: !(TF.Attribute s Text)
+    , _plan                    :: !(TF.Attr s Text)
     {- ^ (Required) The hardware config slug -}
-    , _project_id              :: !(TF.Attribute s Text)
+    , _project_id              :: !(TF.Attr s Text)
     {- ^ (Required) The id of the project in which to create the device -}
-    , _public_ipv4_subnet_size :: !(TF.Attribute s Text)
+    , _public_ipv4_subnet_size :: !(TF.Attr s Text)
     {- ^ (Optional) - Size of allocated subnet, more information is in the <https://help.packet.net/technical/networking/custom-subnet-size> doc. -}
-    , _storage                 :: !(TF.Attribute s Text)
+    , _storage                 :: !(TF.Attr s Text)
     {- ^ (Optional) - JSON for custom partitioning. Only usable on reserved hardware. More information in in the <https://help.packet.net/technical/storage/custom-partitioning-raid> doc. -}
-    , _user_data               :: !(TF.Attribute s Text)
+    , _user_data               :: !(TF.Attr s Text)
     {- ^ (Optional) - A string of the desired User Data for the device. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DeviceResource s) where
-    toHCL DeviceResource{..} = TF.block $ catMaybes
+    toHCL DeviceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "always_pxe" _always_pxe
         , TF.attribute "billing_cycle" _billing_cycle
         , TF.attribute "facility" _facility
@@ -177,62 +177,62 @@ instance TF.ToHCL (DeviceResource s) where
 
 instance P.HasAlwaysPxe (DeviceResource s) s Text where
     alwaysPxe =
-        lens (_always_pxe :: DeviceResource s -> TF.Attribute s Text)
+        lens (_always_pxe :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _always_pxe = a } :: DeviceResource s)
 
 instance P.HasBillingCycle (DeviceResource s) s Text where
     billingCycle =
-        lens (_billing_cycle :: DeviceResource s -> TF.Attribute s Text)
+        lens (_billing_cycle :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _billing_cycle = a } :: DeviceResource s)
 
 instance P.HasFacility (DeviceResource s) s Text where
     facility =
-        lens (_facility :: DeviceResource s -> TF.Attribute s Text)
+        lens (_facility :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _facility = a } :: DeviceResource s)
 
 instance P.HasHardwareReservationId (DeviceResource s) s Text where
     hardwareReservationId =
-        lens (_hardware_reservation_id :: DeviceResource s -> TF.Attribute s Text)
+        lens (_hardware_reservation_id :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _hardware_reservation_id = a } :: DeviceResource s)
 
 instance P.HasHostname (DeviceResource s) s Text where
     hostname =
-        lens (_hostname :: DeviceResource s -> TF.Attribute s Text)
+        lens (_hostname :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: DeviceResource s)
 
 instance P.HasIpxeScriptUrl (DeviceResource s) s Text where
     ipxeScriptUrl =
-        lens (_ipxe_script_url :: DeviceResource s -> TF.Attribute s Text)
+        lens (_ipxe_script_url :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _ipxe_script_url = a } :: DeviceResource s)
 
 instance P.HasOperatingSystem (DeviceResource s) s Text where
     operatingSystem =
-        lens (_operating_system :: DeviceResource s -> TF.Attribute s Text)
+        lens (_operating_system :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _operating_system = a } :: DeviceResource s)
 
 instance P.HasPlan (DeviceResource s) s Text where
     plan =
-        lens (_plan :: DeviceResource s -> TF.Attribute s Text)
+        lens (_plan :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _plan = a } :: DeviceResource s)
 
 instance P.HasProjectId (DeviceResource s) s Text where
     projectId =
-        lens (_project_id :: DeviceResource s -> TF.Attribute s Text)
+        lens (_project_id :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: DeviceResource s)
 
 instance P.HasPublicIpv4SubnetSize (DeviceResource s) s Text where
     publicIpv4SubnetSize =
-        lens (_public_ipv4_subnet_size :: DeviceResource s -> TF.Attribute s Text)
+        lens (_public_ipv4_subnet_size :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _public_ipv4_subnet_size = a } :: DeviceResource s)
 
 instance P.HasStorage (DeviceResource s) s Text where
     storage =
-        lens (_storage :: DeviceResource s -> TF.Attribute s Text)
+        lens (_storage :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _storage = a } :: DeviceResource s)
 
 instance P.HasUserData (DeviceResource s) s Text where
     userData =
-        lens (_user_data :: DeviceResource s -> TF.Attribute s Text)
+        lens (_user_data :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _user_data = a } :: DeviceResource s)
 
 instance P.HasComputedAccessPrivateIpv4 (DeviceResource s) Text
@@ -286,26 +286,26 @@ elastic IP subnets is
 reserved block must be in the same facility.
 -}
 data IpAttachmentResource s = IpAttachmentResource {
-      _cidr_notation :: !(TF.Attribute s Text)
+      _cidr_notation :: !(TF.Attr s Text)
     {- ^ (Required) CIDR notation of subnet from block reserved in the same project and facility as the device -}
-    , _device_id     :: !(TF.Attribute s Text)
+    , _device_id     :: !(TF.Attr s Text)
     {- ^ (Required) ID of device to which to assign the subnet -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (IpAttachmentResource s) where
-    toHCL IpAttachmentResource{..} = TF.block $ catMaybes
+    toHCL IpAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "cidr_notation" _cidr_notation
         , TF.attribute "device_id" _device_id
         ]
 
 instance P.HasCidrNotation (IpAttachmentResource s) s Text where
     cidrNotation =
-        lens (_cidr_notation :: IpAttachmentResource s -> TF.Attribute s Text)
+        lens (_cidr_notation :: IpAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _cidr_notation = a } :: IpAttachmentResource s)
 
 instance P.HasDeviceId (IpAttachmentResource s) s Text where
     deviceId =
-        lens (_device_id :: IpAttachmentResource s -> TF.Attribute s Text)
+        lens (_device_id :: IpAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _device_id = a } :: IpAttachmentResource s)
 
 instance P.HasComputedAddressFamily (IpAttachmentResource s) Text
@@ -332,18 +332,18 @@ Provides a Packet Project resource to allow you manage devices in your
 projects.
 -}
 data ProjectResource s = ProjectResource {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Project on Packet.net -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.block $ catMaybes
+    toHCL ProjectResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (ProjectResource s) s Text where
     name =
-        lens (_name :: ProjectResource s -> TF.Attribute s Text)
+        lens (_name :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ProjectResource s)
 
 instance P.HasComputedCreated (ProjectResource s) Text
@@ -372,16 +372,16 @@ address from it can be assigned to device with the @packet_ip_attachment@
 resource.
 -}
 data ReservedIpBlockResource s = ReservedIpBlockResource {
-      _facility   :: !(TF.Attribute s Text)
+      _facility   :: !(TF.Attr s Text)
     {- ^ (Required) The facility where to allocate the address block -}
-    , _project_id :: !(TF.Attribute s Text)
+    , _project_id :: !(TF.Attr s Text)
     {- ^ (Required) The packet project ID where to allocate the address block -}
-    , _quantity   :: !(TF.Attribute s Text)
+    , _quantity   :: !(TF.Attr s Text)
     {- ^ (Required) The number of allocated /32 addresses, a power of 2 -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ReservedIpBlockResource s) where
-    toHCL ReservedIpBlockResource{..} = TF.block $ catMaybes
+    toHCL ReservedIpBlockResource{..} = TF.inline $ catMaybes
         [ TF.attribute "facility" _facility
         , TF.attribute "project_id" _project_id
         , TF.attribute "quantity" _quantity
@@ -389,17 +389,17 @@ instance TF.ToHCL (ReservedIpBlockResource s) where
 
 instance P.HasFacility (ReservedIpBlockResource s) s Text where
     facility =
-        lens (_facility :: ReservedIpBlockResource s -> TF.Attribute s Text)
+        lens (_facility :: ReservedIpBlockResource s -> TF.Attr s Text)
              (\s a -> s { _facility = a } :: ReservedIpBlockResource s)
 
 instance P.HasProjectId (ReservedIpBlockResource s) s Text where
     projectId =
-        lens (_project_id :: ReservedIpBlockResource s -> TF.Attribute s Text)
+        lens (_project_id :: ReservedIpBlockResource s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: ReservedIpBlockResource s)
 
 instance P.HasQuantity (ReservedIpBlockResource s) s Text where
     quantity =
-        lens (_quantity :: ReservedIpBlockResource s -> TF.Attribute s Text)
+        lens (_quantity :: ReservedIpBlockResource s -> TF.Attr s Text)
              (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
 
 instance P.HasComputedAddressFamily (ReservedIpBlockResource s) Text
@@ -429,26 +429,26 @@ account. All SSH keys on your account are loaded on all new devices, they do
 not have to be explicitly declared on device creation.
 -}
 data SshKeyResource s = SshKeyResource {
-      _name       :: !(TF.Attribute s Text)
+      _name       :: !(TF.Attr s Text)
     {- ^ (Required) The name of the SSH key for identification -}
-    , _public_key :: !(TF.Attribute s Text)
+    , _public_key :: !(TF.Attr s Text)
     {- ^ (Required) The public key. If this is a file, it can be read using the file interpolation function -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SshKeyResource s) where
-    toHCL SshKeyResource{..} = TF.block $ catMaybes
+    toHCL SshKeyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "public_key" _public_key
         ]
 
 instance P.HasName (SshKeyResource s) s Text where
     name =
-        lens (_name :: SshKeyResource s -> TF.Attribute s Text)
+        lens (_name :: SshKeyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SshKeyResource s)
 
 instance P.HasPublicKey (SshKeyResource s) s Text where
     publicKey =
-        lens (_public_key :: SshKeyResource s -> TF.Attribute s Text)
+        lens (_public_key :: SshKeyResource s -> TF.Attr s Text)
              (\s a -> s { _public_key = a } :: SshKeyResource s)
 
 instance P.HasComputedCreated (SshKeyResource s) Text
@@ -474,26 +474,26 @@ they must then be mounted using the @packet_block_attach@ and
 @packet_block_detach@ scripts.
 -}
 data VolumeAttachmentResource s = VolumeAttachmentResource {
-      _device_id :: !(TF.Attribute s Text)
+      _device_id :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the device to which the volume should be attached -}
-    , _volume_id :: !(TF.Attribute s Text)
+    , _volume_id :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the volume to attach -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VolumeAttachmentResource s) where
-    toHCL VolumeAttachmentResource{..} = TF.block $ catMaybes
+    toHCL VolumeAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "device_id" _device_id
         , TF.attribute "volume_id" _volume_id
         ]
 
 instance P.HasDeviceId (VolumeAttachmentResource s) s Text where
     deviceId =
-        lens (_device_id :: VolumeAttachmentResource s -> TF.Attribute s Text)
+        lens (_device_id :: VolumeAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _device_id = a } :: VolumeAttachmentResource s)
 
 instance P.HasVolumeId (VolumeAttachmentResource s) s Text where
     volumeId =
-        lens (_volume_id :: VolumeAttachmentResource s -> TF.Attribute s Text)
+        lens (_volume_id :: VolumeAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _volume_id = a } :: VolumeAttachmentResource s)
 
 instance P.HasComputedId (VolumeAttachmentResource s) Text
@@ -514,24 +514,24 @@ attached and mounted using the api and @packet_block_attach@ and
 @packet_block_detach@ scripts.
 -}
 data VolumeResource s = VolumeResource {
-      _billing_cycle     :: !(TF.Attribute s Text)
+      _billing_cycle     :: !(TF.Attr s Text)
     {- ^ - The billing cycle, defaults to "hourly" -}
-    , _description       :: !(TF.Attribute s Text)
+    , _description       :: !(TF.Attr s Text)
     {- ^ - Optional description for the volume -}
-    , _facility          :: !(TF.Attribute s Text)
+    , _facility          :: !(TF.Attr s Text)
     {- ^ (Required) The facility to create the volume in -}
-    , _plan              :: !(TF.Attribute s Text)
+    , _plan              :: !(TF.Attr s Text)
     {- ^ (Required) The service plan slug of the volume -}
-    , _project_id        :: !(TF.Attribute s Text)
+    , _project_id        :: !(TF.Attr s Text)
     {- ^ (Required) The packet project ID to deploy the volume in -}
-    , _size              :: !(TF.Attribute s Text)
+    , _size              :: !(TF.Attr s Text)
     {- ^ (Required) The size in GB to make the volume -}
-    , _snapshot_policies :: !(TF.Attribute s Text)
+    , _snapshot_policies :: !(TF.Attr s Text)
     {- ^ - Optional list of snapshot policies -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VolumeResource s) where
-    toHCL VolumeResource{..} = TF.block $ catMaybes
+    toHCL VolumeResource{..} = TF.inline $ catMaybes
         [ TF.attribute "billing_cycle" _billing_cycle
         , TF.attribute "description" _description
         , TF.attribute "facility" _facility
@@ -543,37 +543,37 @@ instance TF.ToHCL (VolumeResource s) where
 
 instance P.HasBillingCycle (VolumeResource s) s Text where
     billingCycle =
-        lens (_billing_cycle :: VolumeResource s -> TF.Attribute s Text)
+        lens (_billing_cycle :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _billing_cycle = a } :: VolumeResource s)
 
 instance P.HasDescription (VolumeResource s) s Text where
     description =
-        lens (_description :: VolumeResource s -> TF.Attribute s Text)
+        lens (_description :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: VolumeResource s)
 
 instance P.HasFacility (VolumeResource s) s Text where
     facility =
-        lens (_facility :: VolumeResource s -> TF.Attribute s Text)
+        lens (_facility :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _facility = a } :: VolumeResource s)
 
 instance P.HasPlan (VolumeResource s) s Text where
     plan =
-        lens (_plan :: VolumeResource s -> TF.Attribute s Text)
+        lens (_plan :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _plan = a } :: VolumeResource s)
 
 instance P.HasProjectId (VolumeResource s) s Text where
     projectId =
-        lens (_project_id :: VolumeResource s -> TF.Attribute s Text)
+        lens (_project_id :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: VolumeResource s)
 
 instance P.HasSize (VolumeResource s) s Text where
     size =
-        lens (_size :: VolumeResource s -> TF.Attribute s Text)
+        lens (_size :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: VolumeResource s)
 
 instance P.HasSnapshotPolicies (VolumeResource s) s Text where
     snapshotPolicies =
-        lens (_snapshot_policies :: VolumeResource s -> TF.Attribute s Text)
+        lens (_snapshot_policies :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_policies = a } :: VolumeResource s)
 
 instance P.HasComputedAttachments (VolumeResource s) Text

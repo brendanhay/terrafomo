@@ -82,26 +82,26 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to retrieve information about a Rancher certificate.
 -}
 data CertificateData s = CertificateData {
-      _environment_id :: !(TF.Attribute s Text)
+      _environment_id :: !(TF.Attr s Text)
     {- ^ (Required) The ID of the environment. -}
-    , _name           :: !(TF.Attribute s Text)
+    , _name           :: !(TF.Attr s Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CertificateData s) where
-    toHCL CertificateData{..} = TF.block $ catMaybes
+    toHCL CertificateData{..} = TF.inline $ catMaybes
         [ TF.attribute "environment_id" _environment_id
         , TF.attribute "name" _name
         ]
 
 instance P.HasEnvironmentId (CertificateData s) s Text where
     environmentId =
-        lens (_environment_id :: CertificateData s -> TF.Attribute s Text)
+        lens (_environment_id :: CertificateData s -> TF.Attr s Text)
              (\s a -> s { _environment_id = a } :: CertificateData s)
 
 instance P.HasName (CertificateData s) s Text where
     name =
-        lens (_name :: CertificateData s -> TF.Attribute s Text)
+        lens (_name :: CertificateData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CertificateData s)
 
 instance P.HasComputedAlgorithm (CertificateData s) Text
@@ -128,18 +128,18 @@ certificateData =
 Use this data source to retrieve information about a Rancher environment.
 -}
 data EnvironmentData s = EnvironmentData {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (EnvironmentData s) where
-    toHCL EnvironmentData{..} = TF.block $ catMaybes
+    toHCL EnvironmentData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (EnvironmentData s) s Text where
     name =
-        lens (_name :: EnvironmentData s -> TF.Attribute s Text)
+        lens (_name :: EnvironmentData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: EnvironmentData s)
 
 instance P.HasComputedDescription (EnvironmentData s) Text
@@ -160,18 +160,18 @@ environmentData =
 Use this data source to retrieve information about a Rancher setting.
 -}
 data SettingData s = SettingData {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ (Required) The setting name. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SettingData s) where
-    toHCL SettingData{..} = TF.block $ catMaybes
+    toHCL SettingData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (SettingData s) s Text where
     name =
-        lens (_name :: SettingData s -> TF.Attribute s Text)
+        lens (_name :: SettingData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SettingData s)
 
 instance P.HasComputedValue (SettingData s) Text

@@ -78,18 +78,18 @@ Configures an Icinga2 checkcommand resource. This allows checkcommands to be
 configured, updated, and deleted.
 -}
 data CheckcommandResource s = CheckcommandResource {
-      _arguments :: !(TF.Attribute s Text)
+      _arguments :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of arguments to include with the command. -}
-    , _command   :: !(TF.Attribute s Text)
+    , _command   :: !(TF.Attr s Text)
     {- ^ (Required) Path to the command te be executed. -}
-    , _name      :: !(TF.Attribute s Text)
+    , _name      :: !(TF.Attr s Text)
     {- ^ (Required) Name by which to reference the checkcommand -}
-    , _templates :: !(TF.Attribute s Text)
+    , _templates :: !(TF.Attr s Text)
     {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (CheckcommandResource s) where
-    toHCL CheckcommandResource{..} = TF.block $ catMaybes
+    toHCL CheckcommandResource{..} = TF.inline $ catMaybes
         [ TF.attribute "arguments" _arguments
         , TF.attribute "command" _command
         , TF.attribute "name" _name
@@ -98,22 +98,22 @@ instance TF.ToHCL (CheckcommandResource s) where
 
 instance P.HasArguments (CheckcommandResource s) s Text where
     arguments =
-        lens (_arguments :: CheckcommandResource s -> TF.Attribute s Text)
+        lens (_arguments :: CheckcommandResource s -> TF.Attr s Text)
              (\s a -> s { _arguments = a } :: CheckcommandResource s)
 
 instance P.HasCommand (CheckcommandResource s) s Text where
     command =
-        lens (_command :: CheckcommandResource s -> TF.Attribute s Text)
+        lens (_command :: CheckcommandResource s -> TF.Attr s Text)
              (\s a -> s { _command = a } :: CheckcommandResource s)
 
 instance P.HasName (CheckcommandResource s) s Text where
     name =
-        lens (_name :: CheckcommandResource s -> TF.Attribute s Text)
+        lens (_name :: CheckcommandResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CheckcommandResource s)
 
 instance P.HasTemplates (CheckcommandResource s) s Text where
     templates =
-        lens (_templates :: CheckcommandResource s -> TF.Attribute s Text)
+        lens (_templates :: CheckcommandResource s -> TF.Attr s Text)
              (\s a -> s { _templates = a } :: CheckcommandResource s)
 
 
@@ -133,20 +133,20 @@ Configures an Icinga2 host resource. This allows hosts to be configured,
 updated, and deleted.
 -}
 data HostResource s = HostResource {
-      _address       :: !(TF.Attribute s Text)
+      _address       :: !(TF.Attr s Text)
     {- ^ (Required) The address of the host. -}
-    , _check_command :: !(TF.Attribute s Text)
+    , _check_command :: !(TF.Attr s Text)
     {- ^ (Required) The name of an existing Icinga2 CheckCommand object that is used to determine if the host is available or not. -}
-    , _hostname      :: !(TF.Attribute s Text)
+    , _hostname      :: !(TF.Attr s Text)
     {- ^ (Required) The hostname of the host. -}
-    , _templates     :: !(TF.Attribute s Text)
+    , _templates     :: !(TF.Attr s Text)
     {- ^ (Optional) A list of Icinga2 templates to assign to the host. -}
-    , _vars          :: !(TF.Attribute s Text)
+    , _vars          :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of variables to assign to the host. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (HostResource s) where
-    toHCL HostResource{..} = TF.block $ catMaybes
+    toHCL HostResource{..} = TF.inline $ catMaybes
         [ TF.attribute "address" _address
         , TF.attribute "check_command" _check_command
         , TF.attribute "hostname" _hostname
@@ -156,27 +156,27 @@ instance TF.ToHCL (HostResource s) where
 
 instance P.HasAddress (HostResource s) s Text where
     address =
-        lens (_address :: HostResource s -> TF.Attribute s Text)
+        lens (_address :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: HostResource s)
 
 instance P.HasCheckCommand (HostResource s) s Text where
     checkCommand =
-        lens (_check_command :: HostResource s -> TF.Attribute s Text)
+        lens (_check_command :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _check_command = a } :: HostResource s)
 
 instance P.HasHostname (HostResource s) s Text where
     hostname =
-        lens (_hostname :: HostResource s -> TF.Attribute s Text)
+        lens (_hostname :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: HostResource s)
 
 instance P.HasTemplates (HostResource s) s Text where
     templates =
-        lens (_templates :: HostResource s -> TF.Attribute s Text)
+        lens (_templates :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _templates = a } :: HostResource s)
 
 instance P.HasVars (HostResource s) s Text where
     vars =
-        lens (_vars :: HostResource s -> TF.Attribute s Text)
+        lens (_vars :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _vars = a } :: HostResource s)
 
 
@@ -197,26 +197,26 @@ Configures an Icinga2 hostgroup resource. This allows hostgroup to be
 configured, updated, and deleted.
 -}
 data HostgroupResource s = HostgroupResource {
-      _display_name :: !(TF.Attribute s Text)
+      _display_name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the hostgroup to display in the Icinga2 interface. -}
-    , _name         :: !(TF.Attribute s Text)
+    , _name         :: !(TF.Attr s Text)
     {- ^ (Required) The name of the hostgroup. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (HostgroupResource s) where
-    toHCL HostgroupResource{..} = TF.block $ catMaybes
+    toHCL HostgroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "display_name" _display_name
         , TF.attribute "name" _name
         ]
 
 instance P.HasDisplayName (HostgroupResource s) s Text where
     displayName =
-        lens (_display_name :: HostgroupResource s -> TF.Attribute s Text)
+        lens (_display_name :: HostgroupResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: HostgroupResource s)
 
 instance P.HasName (HostgroupResource s) s Text where
     name =
-        lens (_name :: HostgroupResource s -> TF.Attribute s Text)
+        lens (_name :: HostgroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: HostgroupResource s)
 
 
@@ -234,16 +234,16 @@ Configures an Icinga2 service resource. This allows service to be
 configured, updated, and deleted.
 -}
 data ServiceResource s = ServiceResource {
-      _check_command :: !(TF.Attribute s Text)
+      _check_command :: !(TF.Attr s Text)
     {- ^ (Required) The name of an existing Icinga2 CheckCommand object that is used to determine if the service is available on the host. -}
-    , _hostname      :: !(TF.Attribute s Text)
+    , _hostname      :: !(TF.Attr s Text)
     {- ^ (Required) The host to check the service's status on -}
-    , _name          :: !(TF.Attribute s Text)
+    , _name          :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Service object. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ServiceResource s) where
-    toHCL ServiceResource{..} = TF.block $ catMaybes
+    toHCL ServiceResource{..} = TF.inline $ catMaybes
         [ TF.attribute "check_command" _check_command
         , TF.attribute "hostname" _hostname
         , TF.attribute "name" _name
@@ -251,17 +251,17 @@ instance TF.ToHCL (ServiceResource s) where
 
 instance P.HasCheckCommand (ServiceResource s) s Text where
     checkCommand =
-        lens (_check_command :: ServiceResource s -> TF.Attribute s Text)
+        lens (_check_command :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _check_command = a } :: ServiceResource s)
 
 instance P.HasHostname (ServiceResource s) s Text where
     hostname =
-        lens (_hostname :: ServiceResource s -> TF.Attribute s Text)
+        lens (_hostname :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) s Text where
     name =
-        lens (_name :: ServiceResource s -> TF.Attribute s Text)
+        lens (_name :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ServiceResource s)
 
 

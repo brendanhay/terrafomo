@@ -45,61 +45,61 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 class HasDatabase a s b | a -> s b where
-    database :: Lens' a (TF.Attribute s b)
+    database :: Lens' a (TF.Attr s b)
 
 instance HasDatabase a s b => HasDatabase (TF.Schema l p a) s b where
     database = TF.configuration . database
 
 class HasDefaultCharacterSet a s b | a -> s b where
-    defaultCharacterSet :: Lens' a (TF.Attribute s b)
+    defaultCharacterSet :: Lens' a (TF.Attr s b)
 
 instance HasDefaultCharacterSet a s b => HasDefaultCharacterSet (TF.Schema l p a) s b where
     defaultCharacterSet = TF.configuration . defaultCharacterSet
 
 class HasDefaultCollation a s b | a -> s b where
-    defaultCollation :: Lens' a (TF.Attribute s b)
+    defaultCollation :: Lens' a (TF.Attr s b)
 
 instance HasDefaultCollation a s b => HasDefaultCollation (TF.Schema l p a) s b where
     defaultCollation = TF.configuration . defaultCollation
 
 class HasGrant a s b | a -> s b where
-    grant :: Lens' a (TF.Attribute s b)
+    grant :: Lens' a (TF.Attr s b)
 
 instance HasGrant a s b => HasGrant (TF.Schema l p a) s b where
     grant = TF.configuration . grant
 
 class HasHost a s b | a -> s b where
-    host :: Lens' a (TF.Attribute s b)
+    host :: Lens' a (TF.Attr s b)
 
 instance HasHost a s b => HasHost (TF.Schema l p a) s b where
     host = TF.configuration . host
 
 class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
+    name :: Lens' a (TF.Attr s b)
 
 instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attribute s b)
+    password :: Lens' a (TF.Attr s b)
 
 instance HasPassword a s b => HasPassword (TF.Schema l p a) s b where
     password = TF.configuration . password
 
 class HasPlaintextPassword a s b | a -> s b where
-    plaintextPassword :: Lens' a (TF.Attribute s b)
+    plaintextPassword :: Lens' a (TF.Attr s b)
 
 instance HasPlaintextPassword a s b => HasPlaintextPassword (TF.Schema l p a) s b where
     plaintextPassword = TF.configuration . plaintextPassword
 
 class HasPrivileges a s b | a -> s b where
-    privileges :: Lens' a (TF.Attribute s b)
+    privileges :: Lens' a (TF.Attr s b)
 
 instance HasPrivileges a s b => HasPrivileges (TF.Schema l p a) s b where
     privileges = TF.configuration . privileges
 
 class HasUser a s b | a -> s b where
-    user :: Lens' a (TF.Attribute s b)
+    user :: Lens' a (TF.Attr s b)
 
 instance HasUser a s b => HasUser (TF.Schema l p a) s b where
     user = TF.configuration . user

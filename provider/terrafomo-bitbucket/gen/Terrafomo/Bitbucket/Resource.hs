@@ -81,16 +81,16 @@ import qualified Terrafomo.Schema    as TF
 Provides support for setting up default reviewers for your repository.
 -}
 data DefaultReviewersResource s = DefaultReviewersResource {
-      _owner      :: !(TF.Attribute s Text)
+      _owner      :: !(TF.Attr s Text)
     {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
-    , _repository :: !(TF.Attribute s Text)
+    , _repository :: !(TF.Attr s Text)
     {- ^ (Required) The name of the repository. -}
-    , _reviewers  :: !(TF.Attribute s Text)
+    , _reviewers  :: !(TF.Attr s Text)
     {- ^ (Required) A list of reviewers to use. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DefaultReviewersResource s) where
-    toHCL DefaultReviewersResource{..} = TF.block $ catMaybes
+    toHCL DefaultReviewersResource{..} = TF.inline $ catMaybes
         [ TF.attribute "owner" _owner
         , TF.attribute "repository" _repository
         , TF.attribute "reviewers" _reviewers
@@ -98,17 +98,17 @@ instance TF.ToHCL (DefaultReviewersResource s) where
 
 instance P.HasOwner (DefaultReviewersResource s) s Text where
     owner =
-        lens (_owner :: DefaultReviewersResource s -> TF.Attribute s Text)
+        lens (_owner :: DefaultReviewersResource s -> TF.Attr s Text)
              (\s a -> s { _owner = a } :: DefaultReviewersResource s)
 
 instance P.HasRepository (DefaultReviewersResource s) s Text where
     repository =
-        lens (_repository :: DefaultReviewersResource s -> TF.Attribute s Text)
+        lens (_repository :: DefaultReviewersResource s -> TF.Attr s Text)
              (\s a -> s { _repository = a } :: DefaultReviewersResource s)
 
 instance P.HasReviewers (DefaultReviewersResource s) s Text where
     reviewers =
-        lens (_reviewers :: DefaultReviewersResource s -> TF.Attribute s Text)
+        lens (_reviewers :: DefaultReviewersResource s -> TF.Attr s Text)
              (\s a -> s { _reviewers = a } :: DefaultReviewersResource s)
 
 
@@ -127,20 +127,20 @@ Provides a Bitbucket hook resource. This allows you to manage your webhooks
 on a repository.
 -}
 data HookResource s = HookResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Required) The name / description to show in the UI. -}
-    , _events      :: !(TF.Attribute s Text)
+    , _events      :: !(TF.Attr s Text)
     {- ^ (Required) The event you want to react on. -}
-    , _owner       :: !(TF.Attribute s Text)
+    , _owner       :: !(TF.Attr s Text)
     {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
-    , _repository  :: !(TF.Attribute s Text)
+    , _repository  :: !(TF.Attr s Text)
     {- ^ (Required) The name of the repository. -}
-    , _url         :: !(TF.Attribute s Text)
+    , _url         :: !(TF.Attr s Text)
     {- ^ (Required) Where to POST to. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (HookResource s) where
-    toHCL HookResource{..} = TF.block $ catMaybes
+    toHCL HookResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "events" _events
         , TF.attribute "owner" _owner
@@ -150,27 +150,27 @@ instance TF.ToHCL (HookResource s) where
 
 instance P.HasDescription (HookResource s) s Text where
     description =
-        lens (_description :: HookResource s -> TF.Attribute s Text)
+        lens (_description :: HookResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: HookResource s)
 
 instance P.HasEvents (HookResource s) s Text where
     events =
-        lens (_events :: HookResource s -> TF.Attribute s Text)
+        lens (_events :: HookResource s -> TF.Attr s Text)
              (\s a -> s { _events = a } :: HookResource s)
 
 instance P.HasOwner (HookResource s) s Text where
     owner =
-        lens (_owner :: HookResource s -> TF.Attribute s Text)
+        lens (_owner :: HookResource s -> TF.Attr s Text)
              (\s a -> s { _owner = a } :: HookResource s)
 
 instance P.HasRepository (HookResource s) s Text where
     repository =
-        lens (_repository :: HookResource s -> TF.Attribute s Text)
+        lens (_repository :: HookResource s -> TF.Attr s Text)
              (\s a -> s { _repository = a } :: HookResource s)
 
 instance P.HasUrl (HookResource s) s Text where
     url =
-        lens (_url :: HookResource s -> TF.Attribute s Text)
+        lens (_url :: HookResource s -> TF.Attr s Text)
              (\s a -> s { _url = a } :: HookResource s)
 
 
@@ -192,34 +192,34 @@ your repositories such as scm type, if it is private, how to fork the
 repository and other options.
 -}
 data RepositoryResource s = RepositoryResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) What the description of the repo is. -}
-    , _fork_policy :: !(TF.Attribute s Text)
+    , _fork_policy :: !(TF.Attr s Text)
     {- ^ (Optional) What the fork policy should be. Defaults to allow_forks. -}
-    , _has_issues  :: !(TF.Attribute s Text)
+    , _has_issues  :: !(TF.Attr s Text)
     {- ^ (Optional) If this should have issues turned on or not. -}
-    , _has_wiki    :: !(TF.Attribute s Text)
+    , _has_wiki    :: !(TF.Attr s Text)
     {- ^ (Optional) If this should have wiki turned on or not. -}
-    , _is_private  :: !(TF.Attribute s Text)
+    , _is_private  :: !(TF.Attr s Text)
     {- ^ (Optional) If this should be private or not. Defaults to @true@ . -}
-    , _language    :: !(TF.Attribute s Text)
+    , _language    :: !(TF.Attr s Text)
     {- ^ (Optional) What the language of this repository should be. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) The name of the repository. -}
-    , _owner       :: !(TF.Attribute s Text)
+    , _owner       :: !(TF.Attr s Text)
     {- ^ (Required) The owner of this repository. Can be you or any team you have write access to. -}
-    , _project_key :: !(TF.Attribute s Text)
+    , _project_key :: !(TF.Attr s Text)
     {- ^ (Optional) If you want to have this repo associated with a project. -}
-    , _scm         :: !(TF.Attribute s Text)
+    , _scm         :: !(TF.Attr s Text)
     {- ^ (Optional) What SCM you want to use. Valid options are hg or git. Defaults to git. -}
-    , _slug        :: !(TF.Attribute s Text)
+    , _slug        :: !(TF.Attr s Text)
     {- ^ (Optional) The slug of the repository. -}
-    , _website     :: !(TF.Attribute s Text)
+    , _website     :: !(TF.Attr s Text)
     {- ^ (Optional) URL of website associated with this repository. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (RepositoryResource s) where
-    toHCL RepositoryResource{..} = TF.block $ catMaybes
+    toHCL RepositoryResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "fork_policy" _fork_policy
         , TF.attribute "has_issues" _has_issues
@@ -236,62 +236,62 @@ instance TF.ToHCL (RepositoryResource s) where
 
 instance P.HasDescription (RepositoryResource s) s Text where
     description =
-        lens (_description :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_description :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: RepositoryResource s)
 
 instance P.HasForkPolicy (RepositoryResource s) s Text where
     forkPolicy =
-        lens (_fork_policy :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_fork_policy :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _fork_policy = a } :: RepositoryResource s)
 
 instance P.HasHasIssues (RepositoryResource s) s Text where
     hasIssues =
-        lens (_has_issues :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_has_issues :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _has_issues = a } :: RepositoryResource s)
 
 instance P.HasHasWiki (RepositoryResource s) s Text where
     hasWiki =
-        lens (_has_wiki :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_has_wiki :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _has_wiki = a } :: RepositoryResource s)
 
 instance P.HasIsPrivate (RepositoryResource s) s Text where
     isPrivate =
-        lens (_is_private :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_is_private :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _is_private = a } :: RepositoryResource s)
 
 instance P.HasLanguage (RepositoryResource s) s Text where
     language =
-        lens (_language :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_language :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _language = a } :: RepositoryResource s)
 
 instance P.HasName (RepositoryResource s) s Text where
     name =
-        lens (_name :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_name :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RepositoryResource s)
 
 instance P.HasOwner (RepositoryResource s) s Text where
     owner =
-        lens (_owner :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_owner :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _owner = a } :: RepositoryResource s)
 
 instance P.HasProjectKey (RepositoryResource s) s Text where
     projectKey =
-        lens (_project_key :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_project_key :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _project_key = a } :: RepositoryResource s)
 
 instance P.HasScm (RepositoryResource s) s Text where
     scm =
-        lens (_scm :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_scm :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _scm = a } :: RepositoryResource s)
 
 instance P.HasSlug (RepositoryResource s) s Text where
     slug =
-        lens (_slug :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_slug :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _slug = a } :: RepositoryResource s)
 
 instance P.HasWebsite (RepositoryResource s) s Text where
     website =
-        lens (_website :: RepositoryResource s -> TF.Attribute s Text)
+        lens (_website :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _website = a } :: RepositoryResource s)
 
 

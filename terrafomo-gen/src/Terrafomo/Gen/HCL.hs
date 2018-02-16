@@ -110,18 +110,16 @@ quotedParser =
     Text.pack <$> (P.char '"' >> P.manyTill P.charLiteral (P.char '"'))
 
 stringLiteral :: Parser Interpolate
-stringLiteral =
-    Chunks <$> (P.char '"' >> P.manyTill (b <|> a) (P.char '"'))
+stringLiteral = P.char '"' *> go <* P.char '"'
   where
-    a = Chunk . fromString <$> P.some (P.noneOf ("${}\n\"" :: [Char]))
-    b = stringTemplate
+    go = Chunk . fromString <$> P.some (P.noneOf ("\n\"" :: [Char]))
 
-stringTemplate :: Parser Interpolate
-stringTemplate =
-    Template . fromString <$> (start >> P.manyTill P.anyChar (P.try end))
-  where
-    start = P.string "${"
-    end   = P.string "}"
+-- stringTemplate :: Parser Interpolate
+-- stringTemplate =
+--     Escape . pure . fromString <$> (start >> P.manyTill P.anyChar (P.try end))
+--   where
+--     start = P.string "${"
+--     end   = P.string "}"
 
 between :: Char -> Char -> Parser a -> Parser a
 between start end p =

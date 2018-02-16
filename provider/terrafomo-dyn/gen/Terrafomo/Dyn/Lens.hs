@@ -42,43 +42,43 @@ import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attribute s b)
+    name :: Lens' a (TF.Attr s b)
 
 instance HasName a s b => HasName (TF.Schema l p a) s b where
     name = TF.configuration . name
 
 class HasTtl a s b | a -> s b where
-    ttl :: Lens' a (TF.Attribute s b)
+    ttl :: Lens' a (TF.Attr s b)
 
 instance HasTtl a s b => HasTtl (TF.Schema l p a) s b where
     ttl = TF.configuration . ttl
 
 class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attribute s b)
+    type' :: Lens' a (TF.Attr s b)
 
 instance HasType' a s b => HasType' (TF.Schema l p a) s b where
     type' = TF.configuration . type'
 
 class HasValue a s b | a -> s b where
-    value :: Lens' a (TF.Attribute s b)
+    value :: Lens' a (TF.Attr s b)
 
 instance HasValue a s b => HasValue (TF.Schema l p a) s b where
     value = TF.configuration . value
 
 class HasZone a s b | a -> s b where
-    zone :: Lens' a (TF.Attribute s b)
+    zone :: Lens' a (TF.Attr s b)
 
 instance HasZone a s b => HasZone (TF.Schema l p a) s b where
     zone = TF.configuration . zone
 
 class HasComputedFqdn a b | a -> b where
     computedFqdn
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedFqdn =
-        to (\x -> TF.computed (TF.referenceKey x) "fqdn")
+        to (\x -> TF.compute (TF.refKey x) "fqdn")
 
 class HasComputedId a b | a -> b where
     computedId
-        :: forall r s. Getting r (TF.Reference s a) (TF.Attribute s b)
+        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
     computedId =
-        to (\x -> TF.computed (TF.referenceKey x) "id")
+        to (\x -> TF.compute (TF.refKey x) "id")

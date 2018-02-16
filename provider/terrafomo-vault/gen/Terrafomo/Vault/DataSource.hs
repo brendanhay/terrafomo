@@ -80,26 +80,26 @@ import qualified Terrafomo.Schema    as TF
 Reads the Role ID of an AppRole from a Vault server.
 -}
 data ApproleAuthBackendRoleData s = ApproleAuthBackendRoleData {
-      _backend   :: !(TF.Attribute s Text)
+      _backend   :: !(TF.Attr s Text)
     {- ^ (Optional) The unique name for the AppRole backend the role to retrieve a RoleID for resides in. Defaults to "approle". -}
-    , _role_name :: !(TF.Attribute s Text)
+    , _role_name :: !(TF.Attr s Text)
     {- ^ (Required) The name of the role to retrieve the Role ID for. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ApproleAuthBackendRoleData s) where
-    toHCL ApproleAuthBackendRoleData{..} = TF.block $ catMaybes
+    toHCL ApproleAuthBackendRoleData{..} = TF.inline $ catMaybes
         [ TF.attribute "backend" _backend
         , TF.attribute "role_name" _role_name
         ]
 
 instance P.HasBackend (ApproleAuthBackendRoleData s) s Text where
     backend =
-        lens (_backend :: ApproleAuthBackendRoleData s -> TF.Attribute s Text)
+        lens (_backend :: ApproleAuthBackendRoleData s -> TF.Attr s Text)
              (\s a -> s { _backend = a } :: ApproleAuthBackendRoleData s)
 
 instance P.HasRoleName (ApproleAuthBackendRoleData s) s Text where
     roleName =
-        lens (_role_name :: ApproleAuthBackendRoleData s -> TF.Attribute s Text)
+        lens (_role_name :: ApproleAuthBackendRoleData s -> TF.Attr s Text)
              (\s a -> s { _role_name = a } :: ApproleAuthBackendRoleData s)
 
 instance P.HasComputedRoleId (ApproleAuthBackendRoleData s) Text
@@ -122,16 +122,16 @@ resource attributes. Protect these artifacts accordingly. See
 <../index.html> for more details.
 -}
 data AwsAccessCredentialsData s = AwsAccessCredentialsData {
-      _backend :: !(TF.Attribute s Text)
+      _backend :: !(TF.Attr s Text)
     {- ^ (Required) The path to the AWS secret backend to read credentials from, with no leading or trailing @/@ s. -}
-    , _role    :: !(TF.Attribute s Text)
+    , _role    :: !(TF.Attr s Text)
     {- ^ (Required) The name of the AWS secret backend role to read credentials from, with no leading or trailing @/@ s. -}
-    , _type'   :: !(TF.Attribute s Text)
+    , _type'   :: !(TF.Attr s Text)
     {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AwsAccessCredentialsData s) where
-    toHCL AwsAccessCredentialsData{..} = TF.block $ catMaybes
+    toHCL AwsAccessCredentialsData{..} = TF.inline $ catMaybes
         [ TF.attribute "backend" _backend
         , TF.attribute "role" _role
         , TF.attribute "type" _type'
@@ -139,17 +139,17 @@ instance TF.ToHCL (AwsAccessCredentialsData s) where
 
 instance P.HasBackend (AwsAccessCredentialsData s) s Text where
     backend =
-        lens (_backend :: AwsAccessCredentialsData s -> TF.Attribute s Text)
+        lens (_backend :: AwsAccessCredentialsData s -> TF.Attr s Text)
              (\s a -> s { _backend = a } :: AwsAccessCredentialsData s)
 
 instance P.HasRole (AwsAccessCredentialsData s) s Text where
     role =
-        lens (_role :: AwsAccessCredentialsData s -> TF.Attribute s Text)
+        lens (_role :: AwsAccessCredentialsData s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: AwsAccessCredentialsData s)
 
 instance P.HasType' (AwsAccessCredentialsData s) s Text where
     type' =
-        lens (_type' :: AwsAccessCredentialsData s -> TF.Attribute s Text)
+        lens (_type' :: AwsAccessCredentialsData s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
 
 instance P.HasComputedAccessKey (AwsAccessCredentialsData s) Text
@@ -182,18 +182,18 @@ interpolated into any resource attributes. Protect these artifacts
 accordingly. See <../index.html> for more details.
 -}
 data GenericSecretData s = GenericSecretData {
-      _path :: !(TF.Attribute s Text)
+      _path :: !(TF.Attr s Text)
     {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (GenericSecretData s) where
-    toHCL GenericSecretData{..} = TF.block $ catMaybes
+    toHCL GenericSecretData{..} = TF.inline $ catMaybes
         [ TF.attribute "path" _path
         ]
 
 instance P.HasPath (GenericSecretData s) s Text where
     path =
-        lens (_path :: GenericSecretData s -> TF.Attribute s Text)
+        lens (_path :: GenericSecretData s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: GenericSecretData s)
 
 instance P.HasComputedData' (GenericSecretData s) Text

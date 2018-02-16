@@ -117,16 +117,16 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to access the configuration of an Image List Entry.
 -}
 data ComputeImageListEntryData s = ComputeImageListEntryData {
-      _entry      :: !(TF.Attribute s Text)
+      _entry      :: !(TF.Attr s Text)
     {- ^ (Optional) - Which machine image to use. See <#entry> below for more details -}
-    , _image_list :: !(TF.Attribute s Text)
+    , _image_list :: !(TF.Attr s Text)
     {- ^ (Required) - The name of the image list to lookup. -}
-    , _version    :: !(TF.Attribute s Text)
+    , _version    :: !(TF.Attr s Text)
     {- ^ (Required) - The version (integer) of the Image List to use. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeImageListEntryData s) where
-    toHCL ComputeImageListEntryData{..} = TF.block $ catMaybes
+    toHCL ComputeImageListEntryData{..} = TF.inline $ catMaybes
         [ TF.attribute "entry" _entry
         , TF.attribute "image_list" _image_list
         , TF.attribute "version" _version
@@ -134,17 +134,17 @@ instance TF.ToHCL (ComputeImageListEntryData s) where
 
 instance P.HasEntry (ComputeImageListEntryData s) s Text where
     entry =
-        lens (_entry :: ComputeImageListEntryData s -> TF.Attribute s Text)
+        lens (_entry :: ComputeImageListEntryData s -> TF.Attr s Text)
              (\s a -> s { _entry = a } :: ComputeImageListEntryData s)
 
 instance P.HasImageList (ComputeImageListEntryData s) s Text where
     imageList =
-        lens (_image_list :: ComputeImageListEntryData s -> TF.Attribute s Text)
+        lens (_image_list :: ComputeImageListEntryData s -> TF.Attr s Text)
              (\s a -> s { _image_list = a } :: ComputeImageListEntryData s)
 
 instance P.HasVersion (ComputeImageListEntryData s) s Text where
     version =
-        lens (_version :: ComputeImageListEntryData s -> TF.Attribute s Text)
+        lens (_version :: ComputeImageListEntryData s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ComputeImageListEntryData s)
 
 instance P.HasComputedAttributes (ComputeImageListEntryData s) Text
@@ -166,26 +166,26 @@ computeImageListEntryData =
 Use this data source to access the configuration of an Machine Image.
 -}
 data ComputeMachineImageData s = ComputeMachineImageData {
-      _account :: !(TF.Attribute s Text)
+      _account :: !(TF.Attr s Text)
     {- ^ (Required) The two part name of the compute object storage account in the format @/Compute-{identity_domain}/cloud_storage@ -}
-    , _name    :: !(TF.Attribute s Text)
+    , _name    :: !(TF.Attr s Text)
     {- ^ (Required) The name of the Machine Image. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeMachineImageData s) where
-    toHCL ComputeMachineImageData{..} = TF.block $ catMaybes
+    toHCL ComputeMachineImageData{..} = TF.inline $ catMaybes
         [ TF.attribute "account" _account
         , TF.attribute "name" _name
         ]
 
 instance P.HasAccount (ComputeMachineImageData s) s Text where
     account =
-        lens (_account :: ComputeMachineImageData s -> TF.Attribute s Text)
+        lens (_account :: ComputeMachineImageData s -> TF.Attr s Text)
              (\s a -> s { _account = a } :: ComputeMachineImageData s)
 
 instance P.HasName (ComputeMachineImageData s) s Text where
     name =
-        lens (_name :: ComputeMachineImageData s -> TF.Attribute s Text)
+        lens (_name :: ComputeMachineImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeMachineImageData s)
 
 instance P.HasComputedAttributes (ComputeMachineImageData s) Text
@@ -212,16 +212,16 @@ Use this data source to access the configuration of an instance's network
 interface
 -}
 data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData {
-      _instance_id   :: !(TF.Attribute s Text)
+      _instance_id   :: !(TF.Attr s Text)
     {- ^ is the id of the instance. -}
-    , _instance_name :: !(TF.Attribute s Text)
+    , _instance_name :: !(TF.Attr s Text)
     {- ^ is the name of the instance. -}
-    , _interface     :: !(TF.Attribute s Text)
+    , _interface     :: !(TF.Attr s Text)
     {- ^ is the name of the attached interface. @eth0@ , @eth1@ , ... @eth9@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeNetworkInterfaceData s) where
-    toHCL ComputeNetworkInterfaceData{..} = TF.block $ catMaybes
+    toHCL ComputeNetworkInterfaceData{..} = TF.inline $ catMaybes
         [ TF.attribute "instance_id" _instance_id
         , TF.attribute "instance_name" _instance_name
         , TF.attribute "interface" _interface
@@ -229,17 +229,17 @@ instance TF.ToHCL (ComputeNetworkInterfaceData s) where
 
 instance P.HasInstanceId (ComputeNetworkInterfaceData s) s Text where
     instanceId =
-        lens (_instance_id :: ComputeNetworkInterfaceData s -> TF.Attribute s Text)
+        lens (_instance_id :: ComputeNetworkInterfaceData s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: ComputeNetworkInterfaceData s)
 
 instance P.HasInstanceName (ComputeNetworkInterfaceData s) s Text where
     instanceName =
-        lens (_instance_name :: ComputeNetworkInterfaceData s -> TF.Attribute s Text)
+        lens (_instance_name :: ComputeNetworkInterfaceData s -> TF.Attr s Text)
              (\s a -> s { _instance_name = a } :: ComputeNetworkInterfaceData s)
 
 instance P.HasInterface (ComputeNetworkInterfaceData s) s Text where
     interface =
-        lens (_interface :: ComputeNetworkInterfaceData s -> TF.Attribute s Text)
+        lens (_interface :: ComputeNetworkInterfaceData s -> TF.Attr s Text)
              (\s a -> s { _interface = a } :: ComputeNetworkInterfaceData s)
 
 instance P.HasComputedDns (ComputeNetworkInterfaceData s) Text
@@ -271,18 +271,18 @@ Use this data source to access the configuration of a storage volume
 snapshot.
 -}
 data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ is the name of the storage volume snapshot. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeStorageVolumeSnapshotData s) where
-    toHCL ComputeStorageVolumeSnapshotData{..} = TF.block $ catMaybes
+    toHCL ComputeStorageVolumeSnapshotData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (ComputeStorageVolumeSnapshotData s) s Text where
     name =
-        lens (_name :: ComputeStorageVolumeSnapshotData s -> TF.Attribute s Text)
+        lens (_name :: ComputeStorageVolumeSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotData s)
 
 instance P.HasComputedAccount (ComputeStorageVolumeSnapshotData s) Text
@@ -315,18 +315,18 @@ computeStorageVolumeSnapshotData =
 Use this data source to access the configuration of a Virtual NIC.
 -}
 data ComputeVnicData s = ComputeVnicData {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ is the name of the Virtual NIC. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeVnicData s) where
-    toHCL ComputeVnicData{..} = TF.block $ catMaybes
+    toHCL ComputeVnicData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (ComputeVnicData s) s Text where
     name =
-        lens (_name :: ComputeVnicData s -> TF.Attribute s Text)
+        lens (_name :: ComputeVnicData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeVnicData s)
 
 instance P.HasComputedDescription (ComputeVnicData s) Text

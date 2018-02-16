@@ -147,28 +147,28 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to get the ID of an available OpenStack flavor.
 -}
 data ComputeFlavorV2Data s = ComputeFlavorV2Data {
-      _disk         :: !(TF.Attribute s Text)
+      _disk         :: !(TF.Attr s Text)
     {- ^ (Optional) The exact amount of disk (in gigabytes). -}
-    , _min_disk     :: !(TF.Attribute s Text)
+    , _min_disk     :: !(TF.Attr s Text)
     {- ^ (Optional) The minimum amount of disk (in gigabytes). -}
-    , _min_ram      :: !(TF.Attribute s Text)
+    , _min_ram      :: !(TF.Attr s Text)
     {- ^ (Optional) The minimum amount of RAM (in megabytes). -}
-    , _name         :: !(TF.Attribute s Text)
+    , _name         :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the flavor. -}
-    , _ram          :: !(TF.Attribute s Text)
+    , _ram          :: !(TF.Attr s Text)
     {- ^ (Optional) The exact amount of RAM (in megabytes). -}
-    , _region       :: !(TF.Attribute s Text)
+    , _region       :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which to obtain the V2 Compute client. If omitted, the @region@ argument of the provider is used. -}
-    , _rx_tx_factor :: !(TF.Attribute s Text)
+    , _rx_tx_factor :: !(TF.Attr s Text)
     {- ^ (Optional) The @rx_tx_factor@ of the flavor. -}
-    , _swap         :: !(TF.Attribute s Text)
+    , _swap         :: !(TF.Attr s Text)
     {- ^ (Optional) The amount of swap (in gigabytes). -}
-    , _vcpus        :: !(TF.Attribute s Text)
+    , _vcpus        :: !(TF.Attr s Text)
     {- ^ (Optional) The amount of VCPUs. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ComputeFlavorV2Data s) where
-    toHCL ComputeFlavorV2Data{..} = TF.block $ catMaybes
+    toHCL ComputeFlavorV2Data{..} = TF.inline $ catMaybes
         [ TF.attribute "disk" _disk
         , TF.attribute "min_disk" _min_disk
         , TF.attribute "min_ram" _min_ram
@@ -182,47 +182,47 @@ instance TF.ToHCL (ComputeFlavorV2Data s) where
 
 instance P.HasDisk (ComputeFlavorV2Data s) s Text where
     disk =
-        lens (_disk :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_disk :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _disk = a } :: ComputeFlavorV2Data s)
 
 instance P.HasMinDisk (ComputeFlavorV2Data s) s Text where
     minDisk =
-        lens (_min_disk :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_min_disk :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _min_disk = a } :: ComputeFlavorV2Data s)
 
 instance P.HasMinRam (ComputeFlavorV2Data s) s Text where
     minRam =
-        lens (_min_ram :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_min_ram :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _min_ram = a } :: ComputeFlavorV2Data s)
 
 instance P.HasName (ComputeFlavorV2Data s) s Text where
     name =
-        lens (_name :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_name :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeFlavorV2Data s)
 
 instance P.HasRam (ComputeFlavorV2Data s) s Text where
     ram =
-        lens (_ram :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_ram :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _ram = a } :: ComputeFlavorV2Data s)
 
 instance P.HasRegion (ComputeFlavorV2Data s) s Text where
     region =
-        lens (_region :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_region :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeFlavorV2Data s)
 
 instance P.HasRxTxFactor (ComputeFlavorV2Data s) s Text where
     rxTxFactor =
-        lens (_rx_tx_factor :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_rx_tx_factor :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _rx_tx_factor = a } :: ComputeFlavorV2Data s)
 
 instance P.HasSwap (ComputeFlavorV2Data s) s Text where
     swap =
-        lens (_swap :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_swap :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _swap = a } :: ComputeFlavorV2Data s)
 
 instance P.HasVcpus (ComputeFlavorV2Data s) s Text where
     vcpus =
-        lens (_vcpus :: ComputeFlavorV2Data s -> TF.Attribute s Text)
+        lens (_vcpus :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _vcpus = a } :: ComputeFlavorV2Data s)
 
 instance P.HasComputedIsPublic (ComputeFlavorV2Data s) Text
@@ -247,24 +247,24 @@ computeFlavorV2Data =
 Use this data source to get the ID of an available OpenStack DNS zone.
 -}
 data DnsZoneV2Data s = DnsZoneV2Data {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ (Optional) A description of the zone. -}
-    , _email       :: !(TF.Attribute s Text)
+    , _email       :: !(TF.Attr s Text)
     {- ^ (Optional) The email contact for the zone record. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the zone. -}
-    , _region      :: !(TF.Attribute s Text)
+    , _region      :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which to obtain the V2 DNS client. A DNS client is needed to retrieve zone ids. If omitted, the @region@ argument of the provider is used. -}
-    , _status      :: !(TF.Attribute s Text)
+    , _status      :: !(TF.Attr s Text)
     {- ^ (Optional) The zone's status. -}
-    , _ttl         :: !(TF.Attribute s Text)
+    , _ttl         :: !(TF.Attr s Text)
     {- ^ (Optional) The time to live (TTL) of the zone. -}
-    , _type'       :: !(TF.Attribute s Text)
+    , _type'       :: !(TF.Attr s Text)
     {- ^ (Optional) The type of the zone. Can either be @PRIMARY@ or @SECONDARY@ . -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DnsZoneV2Data s) where
-    toHCL DnsZoneV2Data{..} = TF.block $ catMaybes
+    toHCL DnsZoneV2Data{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "email" _email
         , TF.attribute "name" _name
@@ -276,37 +276,37 @@ instance TF.ToHCL (DnsZoneV2Data s) where
 
 instance P.HasDescription (DnsZoneV2Data s) s Text where
     description =
-        lens (_description :: DnsZoneV2Data s -> TF.Attribute s Text)
+        lens (_description :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DnsZoneV2Data s)
 
 instance P.HasEmail (DnsZoneV2Data s) s Text where
     email =
-        lens (_email :: DnsZoneV2Data s -> TF.Attribute s Text)
+        lens (_email :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _email = a } :: DnsZoneV2Data s)
 
 instance P.HasName (DnsZoneV2Data s) s Text where
     name =
-        lens (_name :: DnsZoneV2Data s -> TF.Attribute s Text)
+        lens (_name :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsZoneV2Data s)
 
 instance P.HasRegion (DnsZoneV2Data s) s Text where
     region =
-        lens (_region :: DnsZoneV2Data s -> TF.Attribute s Text)
+        lens (_region :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DnsZoneV2Data s)
 
 instance P.HasStatus (DnsZoneV2Data s) s Text where
     status =
-        lens (_status :: DnsZoneV2Data s -> TF.Attribute s Text)
+        lens (_status :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: DnsZoneV2Data s)
 
 instance P.HasTtl (DnsZoneV2Data s) s Text where
     ttl =
-        lens (_ttl :: DnsZoneV2Data s -> TF.Attribute s Text)
+        lens (_ttl :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: DnsZoneV2Data s)
 
 instance P.HasType' (DnsZoneV2Data s) s Text where
     type' =
-        lens (_type' :: DnsZoneV2Data s -> TF.Attribute s Text)
+        lens (_type' :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DnsZoneV2Data s)
 
 instance P.HasComputedAttributes (DnsZoneV2Data s) Text
@@ -344,32 +344,32 @@ dnsZoneV2Data =
 Use this data source to get the ID of an available OpenStack image.
 -}
 data ImagesImageV2Data s = ImagesImageV2Data {
-      _most_recent    :: !(TF.Attribute s Text)
+      _most_recent    :: !(TF.Attr s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent image. -}
-    , _name           :: !(TF.Attribute s Text)
+    , _name           :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the image. -}
-    , _owner          :: !(TF.Attribute s Text)
+    , _owner          :: !(TF.Attr s Text)
     {- ^ (Optional) The owner (UUID) of the image. -}
-    , _properties     :: !(TF.Attribute s Text)
+    , _properties     :: !(TF.Attr s Text)
     {- ^ (Optional) a map of key/value pairs to match an image with. All specified properties must be matched. -}
-    , _region         :: !(TF.Attribute s Text)
+    , _region         :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which to obtain the V2 Glance client. A Glance client is needed to create an Image that can be used with a compute instance. If omitted, the @region@ argument of the provider is used. -}
-    , _size_max       :: !(TF.Attribute s Text)
+    , _size_max       :: !(TF.Attr s Text)
     {- ^ (Optional) The maximum size (in bytes) of the image to return. -}
-    , _size_min       :: !(TF.Attribute s Text)
+    , _size_min       :: !(TF.Attr s Text)
     {- ^ (Optional) The minimum size (in bytes) of the image to return. -}
-    , _sort_direction :: !(TF.Attribute s Text)
+    , _sort_direction :: !(TF.Attr s Text)
     {- ^ (Optional) Order the results in either @asc@ or @desc@ . -}
-    , _sort_key       :: !(TF.Attribute s Text)
+    , _sort_key       :: !(TF.Attr s Text)
     {- ^ (Optional) Sort images based on a certain key. Defaults to @name@ . -}
-    , _tag            :: !(TF.Attribute s Text)
+    , _tag            :: !(TF.Attr s Text)
     {- ^ (Optional) Search for images with a specific tag. -}
-    , _visibility     :: !(TF.Attribute s Text)
+    , _visibility     :: !(TF.Attr s Text)
     {- ^ (Optional) The visibility of the image. Must be one of "public", "private", "community", or "shared". Defaults to "private". -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ImagesImageV2Data s) where
-    toHCL ImagesImageV2Data{..} = TF.block $ catMaybes
+    toHCL ImagesImageV2Data{..} = TF.inline $ catMaybes
         [ TF.attribute "most_recent" _most_recent
         , TF.attribute "name" _name
         , TF.attribute "owner" _owner
@@ -385,57 +385,57 @@ instance TF.ToHCL (ImagesImageV2Data s) where
 
 instance P.HasMostRecent (ImagesImageV2Data s) s Text where
     mostRecent =
-        lens (_most_recent :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_most_recent :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: ImagesImageV2Data s)
 
 instance P.HasName (ImagesImageV2Data s) s Text where
     name =
-        lens (_name :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_name :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImagesImageV2Data s)
 
 instance P.HasOwner (ImagesImageV2Data s) s Text where
     owner =
-        lens (_owner :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_owner :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _owner = a } :: ImagesImageV2Data s)
 
 instance P.HasProperties (ImagesImageV2Data s) s Text where
     properties =
-        lens (_properties :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_properties :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _properties = a } :: ImagesImageV2Data s)
 
 instance P.HasRegion (ImagesImageV2Data s) s Text where
     region =
-        lens (_region :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_region :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ImagesImageV2Data s)
 
 instance P.HasSizeMax (ImagesImageV2Data s) s Text where
     sizeMax =
-        lens (_size_max :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_size_max :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _size_max = a } :: ImagesImageV2Data s)
 
 instance P.HasSizeMin (ImagesImageV2Data s) s Text where
     sizeMin =
-        lens (_size_min :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_size_min :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _size_min = a } :: ImagesImageV2Data s)
 
 instance P.HasSortDirection (ImagesImageV2Data s) s Text where
     sortDirection =
-        lens (_sort_direction :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_sort_direction :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _sort_direction = a } :: ImagesImageV2Data s)
 
 instance P.HasSortKey (ImagesImageV2Data s) s Text where
     sortKey =
-        lens (_sort_key :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_sort_key :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _sort_key = a } :: ImagesImageV2Data s)
 
 instance P.HasTag (ImagesImageV2Data s) s Text where
     tag =
-        lens (_tag :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_tag :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _tag = a } :: ImagesImageV2Data s)
 
 instance P.HasVisibility (ImagesImageV2Data s) s Text where
     visibility =
-        lens (_visibility :: ImagesImageV2Data s -> TF.Attribute s Text)
+        lens (_visibility :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _visibility = a } :: ImagesImageV2Data s)
 
 instance P.HasComputedChecksum (ImagesImageV2Data s) Text
@@ -475,24 +475,24 @@ imagesImageV2Data =
 Use this data source to get the ID of an available OpenStack network.
 -}
 data NetworkingNetworkV2Data s = NetworkingNetworkV2Data {
-      _availability_zone_hints :: !(TF.Attribute s Text)
+      _availability_zone_hints :: !(TF.Attr s Text)
     {- ^ (Optional) The availability zone candidates for the network. -}
-    , _matching_subnet_cidr    :: !(TF.Attribute s Text)
+    , _matching_subnet_cidr    :: !(TF.Attr s Text)
     {- ^ (Optional) The CIDR of a subnet within the network. -}
-    , _name                    :: !(TF.Attribute s Text)
+    , _name                    :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the network. -}
-    , _network_id              :: !(TF.Attribute s Text)
+    , _network_id              :: !(TF.Attr s Text)
     {- ^ (Optional) The ID of the network. -}
-    , _region                  :: !(TF.Attribute s Text)
+    , _region                  :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve networks ids. If omitted, the @region@ argument of the provider is used. -}
-    , _status                  :: !(TF.Attribute s Text)
+    , _status                  :: !(TF.Attr s Text)
     {- ^ (Optional) The status of the network. -}
-    , _tenant_id               :: !(TF.Attribute s Text)
+    , _tenant_id               :: !(TF.Attr s Text)
     {- ^ (Optional) The owner of the network. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkingNetworkV2Data s) where
-    toHCL NetworkingNetworkV2Data{..} = TF.block $ catMaybes
+    toHCL NetworkingNetworkV2Data{..} = TF.inline $ catMaybes
         [ TF.attribute "availability_zone_hints" _availability_zone_hints
         , TF.attribute "matching_subnet_cidr" _matching_subnet_cidr
         , TF.attribute "name" _name
@@ -504,37 +504,37 @@ instance TF.ToHCL (NetworkingNetworkV2Data s) where
 
 instance P.HasAvailabilityZoneHints (NetworkingNetworkV2Data s) s Text where
     availabilityZoneHints =
-        lens (_availability_zone_hints :: NetworkingNetworkV2Data s -> TF.Attribute s Text)
+        lens (_availability_zone_hints :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _availability_zone_hints = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasMatchingSubnetCidr (NetworkingNetworkV2Data s) s Text where
     matchingSubnetCidr =
-        lens (_matching_subnet_cidr :: NetworkingNetworkV2Data s -> TF.Attribute s Text)
+        lens (_matching_subnet_cidr :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _matching_subnet_cidr = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasName (NetworkingNetworkV2Data s) s Text where
     name =
-        lens (_name :: NetworkingNetworkV2Data s -> TF.Attribute s Text)
+        lens (_name :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasNetworkId (NetworkingNetworkV2Data s) s Text where
     networkId =
-        lens (_network_id :: NetworkingNetworkV2Data s -> TF.Attribute s Text)
+        lens (_network_id :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasRegion (NetworkingNetworkV2Data s) s Text where
     region =
-        lens (_region :: NetworkingNetworkV2Data s -> TF.Attribute s Text)
+        lens (_region :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasStatus (NetworkingNetworkV2Data s) s Text where
     status =
-        lens (_status :: NetworkingNetworkV2Data s -> TF.Attribute s Text)
+        lens (_status :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasTenantId (NetworkingNetworkV2Data s) s Text where
     tenantId =
-        lens (_tenant_id :: NetworkingNetworkV2Data s -> TF.Attribute s Text)
+        lens (_tenant_id :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingNetworkV2Data s)
 
 instance P.HasComputedAdminStateUp (NetworkingNetworkV2Data s) Text
@@ -561,18 +561,18 @@ networkingNetworkV2Data =
 Use this data source to get the ID of an available OpenStack security group.
 -}
 data NetworkingSecgroupV2Data s = NetworkingSecgroupV2Data {
-      _name        :: !(TF.Attribute s Text)
+      _name        :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the security group. -}
-    , _region      :: !(TF.Attribute s Text)
+    , _region      :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve security groups ids. If omitted, the @region@ argument of the provider is used. -}
-    , _secgroup_id :: !(TF.Attribute s Text)
+    , _secgroup_id :: !(TF.Attr s Text)
     {- ^ (Optional) The ID of the security group. -}
-    , _tenant_id   :: !(TF.Attribute s Text)
+    , _tenant_id   :: !(TF.Attr s Text)
     {- ^ (Optional) The owner of the security group. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkingSecgroupV2Data s) where
-    toHCL NetworkingSecgroupV2Data{..} = TF.block $ catMaybes
+    toHCL NetworkingSecgroupV2Data{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "region" _region
         , TF.attribute "secgroup_id" _secgroup_id
@@ -581,22 +581,22 @@ instance TF.ToHCL (NetworkingSecgroupV2Data s) where
 
 instance P.HasName (NetworkingSecgroupV2Data s) s Text where
     name =
-        lens (_name :: NetworkingSecgroupV2Data s -> TF.Attribute s Text)
+        lens (_name :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingSecgroupV2Data s)
 
 instance P.HasRegion (NetworkingSecgroupV2Data s) s Text where
     region =
-        lens (_region :: NetworkingSecgroupV2Data s -> TF.Attribute s Text)
+        lens (_region :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingSecgroupV2Data s)
 
 instance P.HasSecgroupId (NetworkingSecgroupV2Data s) s Text where
     secgroupId =
-        lens (_secgroup_id :: NetworkingSecgroupV2Data s -> TF.Attribute s Text)
+        lens (_secgroup_id :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _secgroup_id = a } :: NetworkingSecgroupV2Data s)
 
 instance P.HasTenantId (NetworkingSecgroupV2Data s) s Text where
     tenantId =
-        lens (_tenant_id :: NetworkingSecgroupV2Data s -> TF.Attribute s Text)
+        lens (_tenant_id :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSecgroupV2Data s)
 
 instance P.HasComputedDescription (NetworkingSecgroupV2Data s) Text
@@ -618,34 +618,34 @@ networkingSecgroupV2Data =
 Use this data source to get the ID of an available OpenStack subnet.
 -}
 data NetworkingSubnetV2Data s = NetworkingSubnetV2Data {
-      _cidr              :: !(TF.Attribute s Text)
+      _cidr              :: !(TF.Attr s Text)
     {- ^ (Optional) The CIDR of the subnet. -}
-    , _dhcp_disabled     :: !(TF.Attribute s Text)
+    , _dhcp_disabled     :: !(TF.Attr s Text)
     {- ^ (Optional) If the subnet has DHCP disabled. -}
-    , _dhcp_enabled      :: !(TF.Attribute s Text)
+    , _dhcp_enabled      :: !(TF.Attr s Text)
     {- ^ (Optional) If the subnet has DHCP enabled. -}
-    , _gateway_ip        :: !(TF.Attribute s Text)
+    , _gateway_ip        :: !(TF.Attr s Text)
     {- ^ (Optional) The IP of the subnet's gateway. -}
-    , _ip_version        :: !(TF.Attribute s Text)
+    , _ip_version        :: !(TF.Attr s Text)
     {- ^ (Optional) The IP version of the subnet (either 4 or 6). -}
-    , _ipv6_address_mode :: !(TF.Attribute s Text)
+    , _ipv6_address_mode :: !(TF.Attr s Text)
     {- ^ (Optional) The IPv6 address mode. Valid values are @dhcpv6-stateful@ , @dhcpv6-stateless@ , or @slaac@ . -}
-    , _ipv6_ra_mode      :: !(TF.Attribute s Text)
+    , _ipv6_ra_mode      :: !(TF.Attr s Text)
     {- ^ (Optional) The IPv6 Router Advertisement mode. Valid values are @dhcpv6-stateful@ , @dhcpv6-stateless@ , or @slaac@ . -}
-    , _name              :: !(TF.Attribute s Text)
+    , _name              :: !(TF.Attr s Text)
     {- ^ (Optional) The name of the subnet. -}
-    , _network_id        :: !(TF.Attribute s Text)
+    , _network_id        :: !(TF.Attr s Text)
     {- ^ (Optional) The ID of the network the subnet belongs to. -}
-    , _region            :: !(TF.Attribute s Text)
+    , _region            :: !(TF.Attr s Text)
     {- ^ (Optional) The region in which to obtain the V2 Neutron client. A Neutron client is needed to retrieve subnet ids. If omitted, the @region@ argument of the provider is used. -}
-    , _subnet_id         :: !(TF.Attribute s Text)
+    , _subnet_id         :: !(TF.Attr s Text)
     {- ^ (Optional) The ID of the subnet. -}
-    , _tenant_id         :: !(TF.Attribute s Text)
+    , _tenant_id         :: !(TF.Attr s Text)
     {- ^ (Optional) The owner of the subnet. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkingSubnetV2Data s) where
-    toHCL NetworkingSubnetV2Data{..} = TF.block $ catMaybes
+    toHCL NetworkingSubnetV2Data{..} = TF.inline $ catMaybes
         [ TF.attribute "cidr" _cidr
         , TF.attribute "dhcp_disabled" _dhcp_disabled
         , TF.attribute "dhcp_enabled" _dhcp_enabled
@@ -662,62 +662,62 @@ instance TF.ToHCL (NetworkingSubnetV2Data s) where
 
 instance P.HasCidr (NetworkingSubnetV2Data s) s Text where
     cidr =
-        lens (_cidr :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_cidr :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _cidr = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasDhcpDisabled (NetworkingSubnetV2Data s) s Text where
     dhcpDisabled =
-        lens (_dhcp_disabled :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_dhcp_disabled :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _dhcp_disabled = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasDhcpEnabled (NetworkingSubnetV2Data s) s Text where
     dhcpEnabled =
-        lens (_dhcp_enabled :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_dhcp_enabled :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _dhcp_enabled = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasGatewayIp (NetworkingSubnetV2Data s) s Text where
     gatewayIp =
-        lens (_gateway_ip :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_gateway_ip :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _gateway_ip = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasIpVersion (NetworkingSubnetV2Data s) s Text where
     ipVersion =
-        lens (_ip_version :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_ip_version :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _ip_version = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasIpv6AddressMode (NetworkingSubnetV2Data s) s Text where
     ipv6AddressMode =
-        lens (_ipv6_address_mode :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_ipv6_address_mode :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _ipv6_address_mode = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasIpv6RaMode (NetworkingSubnetV2Data s) s Text where
     ipv6RaMode =
-        lens (_ipv6_ra_mode :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_ipv6_ra_mode :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _ipv6_ra_mode = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasName (NetworkingSubnetV2Data s) s Text where
     name =
-        lens (_name :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_name :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasNetworkId (NetworkingSubnetV2Data s) s Text where
     networkId =
-        lens (_network_id :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_network_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasRegion (NetworkingSubnetV2Data s) s Text where
     region =
-        lens (_region :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_region :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasSubnetId (NetworkingSubnetV2Data s) s Text where
     subnetId =
-        lens (_subnet_id :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_subnet_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _subnet_id = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasTenantId (NetworkingSubnetV2Data s) s Text where
     tenantId =
-        lens (_tenant_id :: NetworkingSubnetV2Data s -> TF.Attribute s Text)
+        lens (_tenant_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSubnetV2Data s)
 
 instance P.HasComputedAllocationPools (NetworkingSubnetV2Data s) Text

@@ -11,7 +11,7 @@ module Terrafomo.Output
 import Data.Maybe     (maybeToList)
 import Data.Semigroup ((<>))
 
-import Terrafomo.Attribute (Attribute)
+import Terrafomo.Attribute (Attr)
 import Terrafomo.Backend   (Backend)
 import Terrafomo.Name      (Name)
 
@@ -23,10 +23,7 @@ import qualified Terrafomo.HCL as HCL
 -- >   value = "${aws_eip.ip.public_ip}"
 -- > }
 data Output a where
-    Output :: !(Backend HCL.Value)
-           -> !Name
-           -> !(Attribute s a)
-           -> Output a
+    Output :: !(Backend HCL.Value) -> !Name -> !(Attr s a) -> Output a
 
 outputBackend :: Output a -> Backend HCL.Value
 outputBackend (Output b _ _) = b

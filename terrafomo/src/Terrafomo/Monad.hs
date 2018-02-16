@@ -30,7 +30,7 @@ module Terrafomo.Monad
     -- * Providers
     , withProvider
 
-    -- * References
+    -- * Refs
     , ref
 
     -- * Outputs
@@ -52,7 +52,7 @@ import Data.Proxy      (Proxy (..))
 import Data.Semigroup  (Semigroup ((<>)))
 import Data.Typeable   (Typeable)
 
-import Terrafomo.Attribute
+import Terrafomo.Attribute   (Attr (Compute))
 import Terrafomo.Backend
 import Terrafomo.Format      (nformat, (%))
 import Terrafomo.Name
@@ -84,7 +84,7 @@ import qualified Control.Monad.Trans.Writer.Lazy   as Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Strict
 
 data Error
-    = NonUniqueReference !Key  !HCL.Value
+    = NonUniqueRef !Key  !HCL.Value
     | NonUniqueOutput    !Name !HCL.Value
       deriving (Eq, Show, Typeable)
 
@@ -300,7 +300,7 @@ ref :: ( MonadTerraform s m
        )
     => Name
     -> Schema l p a
-    -> m (Reference s a)
+    -> m (Ref s a)
 ref name x =
     liftTerraform $ do
         alias <- insertProvider (_schemaProvider x)
@@ -318,9 +318,9 @@ ref name x =
         unique <- insertValue key value references (\s w -> w { references = s })
 
         unless unique $
-            MTL.throwError (NonUniqueReference key value)
+            MTL.throwError (NonUniqueRef key value)
 
-        pure (UnsafeReference key)
+        pure (UnsafeRef key)
 
 -- * Use a unique supply / incrementing counter to generate unique output names
 --   for values and key/name for computed attributes.
@@ -334,7 +334,7 @@ output
     :: ( MonadTerraform s m
        , HCL.ToHCL a
        )
-    => Attribute s a
+    => Attr s a
     -> m (Output a)
 output attr =
     liftTerraform $ do
@@ -343,8 +343,8 @@ output attr =
 
         let name =
               case attr of
-                  Computed _ _ n -> nformat (fname % "_" % fname) next n
-                  _              -> next
+                  Compute _ _ n -> nformat (fname % "_" % fname) next n
+                  _             -> next
 
             out   = Output b name attr
             value = HCL.toHCL out
@@ -361,7 +361,7 @@ output attr =
 remote
     :: MonadTerraform s m
     => Output a
-    -> m (Attribute s a)
+    -> m (Attr s a)
 remote x@(Output _ _ attr) =
     liftTerraform $ do
         let hash  = Name (Hash.human (outputBackend x))
@@ -372,13 +372,13 @@ remote x@(Output _ _ attr) =
         exists <- MTL.gets (VMap.member key . remotes)
 
         if exists
-            then MTL.throwError (NonUniqueReference key value)
+            then MTL.throwError (NonUniqueRef key value)
             else void (insertValue key value remotes (\s w -> w { remotes = s }))
 
         pure $!
             case attr of
-                Computed _ _ n -> Computed key (outputName x) n
-                _              -> Computed key (outputName x) (outputName x)
+                Compute _ _ n -> Compute key (outputName x) n
+                _             -> Compute key (outputName x) (outputName x)
 
 insertValue
     :: ( MonadTerraform s m

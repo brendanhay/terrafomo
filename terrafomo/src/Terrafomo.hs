@@ -23,18 +23,18 @@ module Terrafomo
 
     -- * Syntax
     , Name            (..)
-    , Attribute
-    , constant
+    , Attr
+    , flatten
+    , attr
     , nil
-
-    -- ** Setters
-    , (@~)
+    , true
+    , false
 
     -- * Schema References
     , DataSource
     , Resource
     , Schema
-    , Reference
+    , Ref
     , ref
 
     -- ** Lifecycles

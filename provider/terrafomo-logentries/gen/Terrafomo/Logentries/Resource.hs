@@ -70,22 +70,22 @@ import qualified Terrafomo.Schema    as TF
 Provides a Logentries log resource.
 -}
 data LogResource s = LogResource {
-      _filename         :: !(TF.Attribute s Text)
+      _filename         :: !(TF.Attr s Text)
     {- ^ (Optional) the filename of the log. -}
-    , _logset_id        :: !(TF.Attribute s Text)
+    , _logset_id        :: !(TF.Attr s Text)
     {- ^ (Required) The id of the @logentries_logset@ resource. -}
-    , _name             :: !(TF.Attribute s Text)
+    , _name             :: !(TF.Attr s Text)
     {- ^ (Required) The name of the log. The name should be short and descriptive. For example, Apache Access, Hadoop Namenode. -}
-    , _retention_period :: !(TF.Attribute s Text)
+    , _retention_period :: !(TF.Attr s Text)
     {- ^ (Optional, default @ACCOUNT_DEFAULT@ ) The retention period ( @1W@ , @2W@ , @1M@ , @2M@ , @6M@ , @1Y@ , @2Y@ , @UNLIMITED@ , @ACCOUNT_DEFAULT@ ) -}
-    , _source           :: !(TF.Attribute s Text)
+    , _source           :: !(TF.Attr s Text)
     {- ^ (Optional, default @token@ ) The log source ( @token@ , @syslog@ , @agent@ , @api@ ). Review the Logentries <https://docs.logentries.com/docs/> for more information. -}
-    , _type'            :: !(TF.Attribute s Text)
+    , _type'            :: !(TF.Attr s Text)
     {- ^ (Optional) The log type. See the Logentries <https://logentries.com/doc/log-types/> for more information. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LogResource s) where
-    toHCL LogResource{..} = TF.block $ catMaybes
+    toHCL LogResource{..} = TF.inline $ catMaybes
         [ TF.attribute "filename" _filename
         , TF.attribute "logset_id" _logset_id
         , TF.attribute "name" _name
@@ -96,32 +96,32 @@ instance TF.ToHCL (LogResource s) where
 
 instance P.HasFilename (LogResource s) s Text where
     filename =
-        lens (_filename :: LogResource s -> TF.Attribute s Text)
+        lens (_filename :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _filename = a } :: LogResource s)
 
 instance P.HasLogsetId (LogResource s) s Text where
     logsetId =
-        lens (_logset_id :: LogResource s -> TF.Attribute s Text)
+        lens (_logset_id :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _logset_id = a } :: LogResource s)
 
 instance P.HasName (LogResource s) s Text where
     name =
-        lens (_name :: LogResource s -> TF.Attribute s Text)
+        lens (_name :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LogResource s)
 
 instance P.HasRetentionPeriod (LogResource s) s Text where
     retentionPeriod =
-        lens (_retention_period :: LogResource s -> TF.Attribute s Text)
+        lens (_retention_period :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _retention_period = a } :: LogResource s)
 
 instance P.HasSource (LogResource s) s Text where
     source =
-        lens (_source :: LogResource s -> TF.Attribute s Text)
+        lens (_source :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _source = a } :: LogResource s)
 
 instance P.HasType' (LogResource s) s Text where
     type' =
-        lens (_type' :: LogResource s -> TF.Attribute s Text)
+        lens (_type' :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: LogResource s)
 
 instance P.HasComputedToken (LogResource s) Text
@@ -144,26 +144,26 @@ Provides a Logentries logset resource. A logset is a collection of
 @logentries_log@ resources.
 -}
 data LogsetResource s = LogsetResource {
-      _location :: !(TF.Attribute s Text)
+      _location :: !(TF.Attr s Text)
     {- ^ (Optional, default "nonlocation") A location is for your convenience only. You can specify a DNS entry such as web.example.com, IP address or arbitrary comment. -}
-    , _name     :: !(TF.Attribute s Text)
+    , _name     :: !(TF.Attr s Text)
     {- ^ (Required) The log set name, which should be short and descriptive. For example, www, db1. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LogsetResource s) where
-    toHCL LogsetResource{..} = TF.block $ catMaybes
+    toHCL LogsetResource{..} = TF.inline $ catMaybes
         [ TF.attribute "location" _location
         , TF.attribute "name" _name
         ]
 
 instance P.HasLocation (LogsetResource s) s Text where
     location =
-        lens (_location :: LogsetResource s -> TF.Attribute s Text)
+        lens (_location :: LogsetResource s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: LogsetResource s)
 
 instance P.HasName (LogsetResource s) s Text where
     name =
-        lens (_name :: LogsetResource s -> TF.Attribute s Text)
+        lens (_name :: LogsetResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LogsetResource s)
 
 

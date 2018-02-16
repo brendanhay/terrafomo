@@ -118,74 +118,74 @@ import qualified Terrafomo.Schema    as TF
 Manages the lifecycle of a Docker container.
 -}
 data ContainerResource s = ContainerResource {
-      _capabilities          :: !(TF.Attribute s Text)
+      _capabilities          :: !(TF.Attr s Text)
     {- ^ (Optional, block) See <#capabilities> below for details. -}
-    , _command               :: !(TF.Attribute s Text)
+    , _command               :: !(TF.Attr s Text)
     {- ^ (Optional, list of strings) The command to use to start the container. For example, to run @/usr/bin/myprogram -f baz.conf@ set the command to be @["/usr/bin/myprogram", "-f", "baz.conf"]@ . -}
-    , _cpu_shares            :: !(TF.Attribute s Text)
+    , _cpu_shares            :: !(TF.Attr s Text)
     {- ^ (Optional, int) CPU shares (relative weight) for the container. -}
-    , _destroy_grace_seconds :: !(TF.Attribute s Text)
+    , _destroy_grace_seconds :: !(TF.Attr s Text)
     {- ^ (Optional, int) If defined will attempt to stop the container before destroying. Container will be destroyed after @n@ seconds or on successful stop. -}
-    , _dns                   :: !(TF.Attribute s Text)
+    , _dns                   :: !(TF.Attr s Text)
     {- ^ (Optional, set of strings) Set of DNS servers. -}
-    , _dns_opts              :: !(TF.Attribute s Text)
+    , _dns_opts              :: !(TF.Attr s Text)
     {- ^ (Optional, set of strings) Set of DNS options used by the DNS provider(s), see @resolv.conf@ documentation for valid list of options. -}
-    , _dns_search            :: !(TF.Attribute s Text)
+    , _dns_search            :: !(TF.Attr s Text)
     {- ^ (Optional, set of strings) Set of DNS search domains that are used when bare unqualified hostnames are used inside of the container. -}
-    , _domainname            :: !(TF.Attribute s Text)
+    , _domainname            :: !(TF.Attr s Text)
     {- ^ (Optional, string) Domain name of the container. -}
-    , _entrypoint            :: !(TF.Attribute s Text)
+    , _entrypoint            :: !(TF.Attr s Text)
     {- ^ (Optional, list of strings) The command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run @/usr/bin/myprogram@ when starting a container, set the entrypoint to be @["/usr/bin/myprogram"]@ . -}
-    , _env                   :: !(TF.Attribute s Text)
+    , _env                   :: !(TF.Attr s Text)
     {- ^ (Optional, set of strings) Environment variables to set. -}
-    , _host                  :: !(TF.Attribute s Text)
+    , _host                  :: !(TF.Attr s Text)
     {- ^ (Optional, block) See <#extra_hosts> below for details. -}
-    , _hostname              :: !(TF.Attribute s Text)
+    , _hostname              :: !(TF.Attr s Text)
     {- ^ (Optional, string) Hostname of the container. -}
-    , _image                 :: !(TF.Attribute s Text)
+    , _image                 :: !(TF.Attr s Text)
     {- ^ (Required, string) The ID of the image to back this container. The easiest way to get this value is to use the @docker_image@ resource as is shown in the example above. -}
-    , _labels                :: !(TF.Attribute s Text)
+    , _labels                :: !(TF.Attr s Text)
     {- ^ (Optional, map of strings) Key/value pairs to set as labels on the container. -}
-    , _links                 :: !(TF.Attribute s Text)
+    , _links                 :: !(TF.Attr s Text)
     {- ^ (Optional, set of strings) Set of links for link based connectivity between containers that are running on the same host. -}
-    , _log_driver            :: !(TF.Attribute s Text)
+    , _log_driver            :: !(TF.Attr s Text)
     {- ^ (Optional, string) The logging driver to use for the container. Defaults to "json-file". -}
-    , _log_opts              :: !(TF.Attribute s Text)
+    , _log_opts              :: !(TF.Attr s Text)
     {- ^ (Optional, map of strings) Key/value pairs to use as options for the logging driver. -}
-    , _max_retry_count       :: !(TF.Attribute s Text)
+    , _max_retry_count       :: !(TF.Attr s Text)
     {- ^ (Optional, int) The maximum amount of times to an attempt a restart when @restart@ is set to "on-failure" -}
-    , _memory                :: !(TF.Attribute s Text)
+    , _memory                :: !(TF.Attr s Text)
     {- ^ (Optional, int) The memory limit for the container in MBs. -}
-    , _memory_swap           :: !(TF.Attribute s Text)
+    , _memory_swap           :: !(TF.Attr s Text)
     {- ^ (Optional, int) The total memory limit (memory + swap) for the container in MBs. This setting may compute to @-1@ after @terraform apply@ if the target host doesn't support memory swap, when that is the case docker will use a soft limitation. -}
-    , _must_run              :: !(TF.Attribute s Text)
+    , _must_run              :: !(TF.Attr s Text)
     {- ^ (Optional, bool) If true, then the Docker container will be kept running. If false, then as long as the container exists, Terraform assumes it is successful. -}
-    , _name                  :: !(TF.Attribute s Text)
+    , _name                  :: !(TF.Attr s Text)
     {- ^ (Required, string) The name of the Docker container. -}
-    , _network_alias         :: !(TF.Attribute s Text)
+    , _network_alias         :: !(TF.Attr s Text)
     {- ^ (Optional, set of strings) Network aliases of the container for user-defined networks only. -}
-    , _network_mode          :: !(TF.Attribute s Text)
+    , _network_mode          :: !(TF.Attr s Text)
     {- ^ (Optional, string) Network mode of the container. -}
-    , _networks              :: !(TF.Attribute s Text)
+    , _networks              :: !(TF.Attr s Text)
     {- ^ (Optional, set of strings) Id of the networks in which the container is. -}
-    , _ports                 :: !(TF.Attribute s Text)
+    , _ports                 :: !(TF.Attr s Text)
     {- ^ (Optional, block) See <#ports> below for details. -}
-    , _privileged            :: !(TF.Attribute s Text)
+    , _privileged            :: !(TF.Attr s Text)
     {- ^ (Optional, bool) Run container in privileged mode. -}
-    , _publish_all_ports     :: !(TF.Attribute s Text)
+    , _publish_all_ports     :: !(TF.Attr s Text)
     {- ^ (Optional, bool) Publish all ports of the container. -}
-    , _restart               :: !(TF.Attribute s Text)
+    , _restart               :: !(TF.Attr s Text)
     {- ^ (Optional, string) The restart policy for the container. Must be one of "no", "on-failure", "always", "unless-stopped". -}
-    , _upload                :: !(TF.Attribute s Text)
+    , _upload                :: !(TF.Attr s Text)
     {- ^ (Optional, block) See <#upload> below for details. -}
-    , _user                  :: !(TF.Attribute s Text)
+    , _user                  :: !(TF.Attr s Text)
     {- ^ (Optional, string) User used for run the first process. Format is @user@ or @user:group@ which user and group can be passed literraly or by name. -}
-    , _volumes               :: !(TF.Attribute s Text)
+    , _volumes               :: !(TF.Attr s Text)
     {- ^ (Optional, block) See <#volumes> below for details. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ContainerResource s) where
-    toHCL ContainerResource{..} = TF.block $ catMaybes
+    toHCL ContainerResource{..} = TF.inline $ catMaybes
         [ TF.attribute "capabilities" _capabilities
         , TF.attribute "command" _command
         , TF.attribute "cpu_shares" _cpu_shares
@@ -222,162 +222,162 @@ instance TF.ToHCL (ContainerResource s) where
 
 instance P.HasCapabilities (ContainerResource s) s Text where
     capabilities =
-        lens (_capabilities :: ContainerResource s -> TF.Attribute s Text)
+        lens (_capabilities :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _capabilities = a } :: ContainerResource s)
 
 instance P.HasCommand (ContainerResource s) s Text where
     command =
-        lens (_command :: ContainerResource s -> TF.Attribute s Text)
+        lens (_command :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _command = a } :: ContainerResource s)
 
 instance P.HasCpuShares (ContainerResource s) s Text where
     cpuShares =
-        lens (_cpu_shares :: ContainerResource s -> TF.Attribute s Text)
+        lens (_cpu_shares :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _cpu_shares = a } :: ContainerResource s)
 
 instance P.HasDestroyGraceSeconds (ContainerResource s) s Text where
     destroyGraceSeconds =
-        lens (_destroy_grace_seconds :: ContainerResource s -> TF.Attribute s Text)
+        lens (_destroy_grace_seconds :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _destroy_grace_seconds = a } :: ContainerResource s)
 
 instance P.HasDns (ContainerResource s) s Text where
     dns =
-        lens (_dns :: ContainerResource s -> TF.Attribute s Text)
+        lens (_dns :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _dns = a } :: ContainerResource s)
 
 instance P.HasDnsOpts (ContainerResource s) s Text where
     dnsOpts =
-        lens (_dns_opts :: ContainerResource s -> TF.Attribute s Text)
+        lens (_dns_opts :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _dns_opts = a } :: ContainerResource s)
 
 instance P.HasDnsSearch (ContainerResource s) s Text where
     dnsSearch =
-        lens (_dns_search :: ContainerResource s -> TF.Attribute s Text)
+        lens (_dns_search :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _dns_search = a } :: ContainerResource s)
 
 instance P.HasDomainname (ContainerResource s) s Text where
     domainname =
-        lens (_domainname :: ContainerResource s -> TF.Attribute s Text)
+        lens (_domainname :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _domainname = a } :: ContainerResource s)
 
 instance P.HasEntrypoint (ContainerResource s) s Text where
     entrypoint =
-        lens (_entrypoint :: ContainerResource s -> TF.Attribute s Text)
+        lens (_entrypoint :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _entrypoint = a } :: ContainerResource s)
 
 instance P.HasEnv (ContainerResource s) s Text where
     env =
-        lens (_env :: ContainerResource s -> TF.Attribute s Text)
+        lens (_env :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _env = a } :: ContainerResource s)
 
 instance P.HasHost (ContainerResource s) s Text where
     host =
-        lens (_host :: ContainerResource s -> TF.Attribute s Text)
+        lens (_host :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _host = a } :: ContainerResource s)
 
 instance P.HasHostname (ContainerResource s) s Text where
     hostname =
-        lens (_hostname :: ContainerResource s -> TF.Attribute s Text)
+        lens (_hostname :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: ContainerResource s)
 
 instance P.HasImage (ContainerResource s) s Text where
     image =
-        lens (_image :: ContainerResource s -> TF.Attribute s Text)
+        lens (_image :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _image = a } :: ContainerResource s)
 
 instance P.HasLabels (ContainerResource s) s Text where
     labels =
-        lens (_labels :: ContainerResource s -> TF.Attribute s Text)
+        lens (_labels :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ContainerResource s)
 
 instance P.HasLinks (ContainerResource s) s Text where
     links =
-        lens (_links :: ContainerResource s -> TF.Attribute s Text)
+        lens (_links :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _links = a } :: ContainerResource s)
 
 instance P.HasLogDriver (ContainerResource s) s Text where
     logDriver =
-        lens (_log_driver :: ContainerResource s -> TF.Attribute s Text)
+        lens (_log_driver :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _log_driver = a } :: ContainerResource s)
 
 instance P.HasLogOpts (ContainerResource s) s Text where
     logOpts =
-        lens (_log_opts :: ContainerResource s -> TF.Attribute s Text)
+        lens (_log_opts :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _log_opts = a } :: ContainerResource s)
 
 instance P.HasMaxRetryCount (ContainerResource s) s Text where
     maxRetryCount =
-        lens (_max_retry_count :: ContainerResource s -> TF.Attribute s Text)
+        lens (_max_retry_count :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _max_retry_count = a } :: ContainerResource s)
 
 instance P.HasMemory (ContainerResource s) s Text where
     memory =
-        lens (_memory :: ContainerResource s -> TF.Attribute s Text)
+        lens (_memory :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _memory = a } :: ContainerResource s)
 
 instance P.HasMemorySwap (ContainerResource s) s Text where
     memorySwap =
-        lens (_memory_swap :: ContainerResource s -> TF.Attribute s Text)
+        lens (_memory_swap :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _memory_swap = a } :: ContainerResource s)
 
 instance P.HasMustRun (ContainerResource s) s Text where
     mustRun =
-        lens (_must_run :: ContainerResource s -> TF.Attribute s Text)
+        lens (_must_run :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _must_run = a } :: ContainerResource s)
 
 instance P.HasName (ContainerResource s) s Text where
     name =
-        lens (_name :: ContainerResource s -> TF.Attribute s Text)
+        lens (_name :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ContainerResource s)
 
 instance P.HasNetworkAlias (ContainerResource s) s Text where
     networkAlias =
-        lens (_network_alias :: ContainerResource s -> TF.Attribute s Text)
+        lens (_network_alias :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _network_alias = a } :: ContainerResource s)
 
 instance P.HasNetworkMode (ContainerResource s) s Text where
     networkMode =
-        lens (_network_mode :: ContainerResource s -> TF.Attribute s Text)
+        lens (_network_mode :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _network_mode = a } :: ContainerResource s)
 
 instance P.HasNetworks (ContainerResource s) s Text where
     networks =
-        lens (_networks :: ContainerResource s -> TF.Attribute s Text)
+        lens (_networks :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _networks = a } :: ContainerResource s)
 
 instance P.HasPorts (ContainerResource s) s Text where
     ports =
-        lens (_ports :: ContainerResource s -> TF.Attribute s Text)
+        lens (_ports :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _ports = a } :: ContainerResource s)
 
 instance P.HasPrivileged (ContainerResource s) s Text where
     privileged =
-        lens (_privileged :: ContainerResource s -> TF.Attribute s Text)
+        lens (_privileged :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _privileged = a } :: ContainerResource s)
 
 instance P.HasPublishAllPorts (ContainerResource s) s Text where
     publishAllPorts =
-        lens (_publish_all_ports :: ContainerResource s -> TF.Attribute s Text)
+        lens (_publish_all_ports :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _publish_all_ports = a } :: ContainerResource s)
 
 instance P.HasRestart (ContainerResource s) s Text where
     restart =
-        lens (_restart :: ContainerResource s -> TF.Attribute s Text)
+        lens (_restart :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _restart = a } :: ContainerResource s)
 
 instance P.HasUpload (ContainerResource s) s Text where
     upload =
-        lens (_upload :: ContainerResource s -> TF.Attribute s Text)
+        lens (_upload :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _upload = a } :: ContainerResource s)
 
 instance P.HasUser (ContainerResource s) s Text where
     user =
-        lens (_user :: ContainerResource s -> TF.Attribute s Text)
+        lens (_user :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: ContainerResource s)
 
 instance P.HasVolumes (ContainerResource s) s Text where
     volumes =
-        lens (_volumes :: ContainerResource s -> TF.Attribute s Text)
+        lens (_volumes :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _volumes = a } :: ContainerResource s)
 
 instance P.HasComputedBridge (ContainerResource s) Text
@@ -431,18 +431,18 @@ conjunction with </docs/providers/docker/d/registry_image.html> data source
 to update the @pull_triggers@ field.
 -}
 data ImageResource s = ImageResource {
-      _keep_locally  :: !(TF.Attribute s Text)
+      _keep_locally  :: !(TF.Attr s Text)
     {- ^ (Optional, boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation. -}
-    , _name          :: !(TF.Attribute s Text)
+    , _name          :: !(TF.Attr s Text)
     {- ^ (Required, string) The name of the Docker image, including any tags. -}
-    , _pull_trigger  :: !(TF.Attribute s Text)
+    , _pull_trigger  :: !(TF.Attr s Text)
     {- ^ - Deprecated , use @pull_triggers@ instead. -}
-    , _pull_triggers :: !(TF.Attribute s Text)
+    , _pull_triggers :: !(TF.Attr s Text)
     {- ^ (Optional, list of strings) List of values which cause an image pull when changed. This is used to store the image digest from the registry when using the @docker_registry_image@  </docs/providers/docker/d/registry_image.html> to trigger an image update. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ImageResource s) where
-    toHCL ImageResource{..} = TF.block $ catMaybes
+    toHCL ImageResource{..} = TF.inline $ catMaybes
         [ TF.attribute "keep_locally" _keep_locally
         , TF.attribute "name" _name
         , TF.attribute "pull_trigger" _pull_trigger
@@ -451,22 +451,22 @@ instance TF.ToHCL (ImageResource s) where
 
 instance P.HasKeepLocally (ImageResource s) s Text where
     keepLocally =
-        lens (_keep_locally :: ImageResource s -> TF.Attribute s Text)
+        lens (_keep_locally :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _keep_locally = a } :: ImageResource s)
 
 instance P.HasName (ImageResource s) s Text where
     name =
-        lens (_name :: ImageResource s -> TF.Attribute s Text)
+        lens (_name :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageResource s)
 
 instance P.HasPullTrigger (ImageResource s) s Text where
     pullTrigger =
-        lens (_pull_trigger :: ImageResource s -> TF.Attribute s Text)
+        lens (_pull_trigger :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _pull_trigger = a } :: ImageResource s)
 
 instance P.HasPullTriggers (ImageResource s) s Text where
     pullTriggers =
-        lens (_pull_triggers :: ImageResource s -> TF.Attribute s Text)
+        lens (_pull_triggers :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _pull_triggers = a } :: ImageResource s)
 
 instance P.HasComputedLatest (ImageResource s) Text
@@ -488,24 +488,24 @@ Manages a Docker Network. This can be used alongside
 the docker environment.
 -}
 data NetworkResource s = NetworkResource {
-      _check_duplicate :: !(TF.Attribute s Text)
+      _check_duplicate :: !(TF.Attr s Text)
     {- ^ (Optional, boolean) Requests daemon to check for networks with same name. -}
-    , _driver          :: !(TF.Attribute s Text)
+    , _driver          :: !(TF.Attr s Text)
     {- ^ (Optional, string) Name of the network driver to use. Defaults to @bridge@ driver. -}
-    , _internal        :: !(TF.Attribute s Text)
+    , _internal        :: !(TF.Attr s Text)
     {- ^ (Optional, boolean) Restrict external access to the network. Defaults to @false@ . -}
-    , _ipam_config     :: !(TF.Attribute s Text)
+    , _ipam_config     :: !(TF.Attr s Text)
     {- ^ (Optional, block) See <#ipam_config> below for details. -}
-    , _ipam_driver     :: !(TF.Attribute s Text)
+    , _ipam_driver     :: !(TF.Attr s Text)
     {- ^ (Optional, string) Driver used by the custom IP scheme of the network. -}
-    , _name            :: !(TF.Attribute s Text)
+    , _name            :: !(TF.Attr s Text)
     {- ^ (Required, string) The name of the Docker network. -}
-    , _options         :: !(TF.Attribute s Text)
+    , _options         :: !(TF.Attr s Text)
     {- ^ (Optional, map of strings) Network specific options to be used by the drivers. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (NetworkResource s) where
-    toHCL NetworkResource{..} = TF.block $ catMaybes
+    toHCL NetworkResource{..} = TF.inline $ catMaybes
         [ TF.attribute "check_duplicate" _check_duplicate
         , TF.attribute "driver" _driver
         , TF.attribute "internal" _internal
@@ -517,37 +517,37 @@ instance TF.ToHCL (NetworkResource s) where
 
 instance P.HasCheckDuplicate (NetworkResource s) s Text where
     checkDuplicate =
-        lens (_check_duplicate :: NetworkResource s -> TF.Attribute s Text)
+        lens (_check_duplicate :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _check_duplicate = a } :: NetworkResource s)
 
 instance P.HasDriver (NetworkResource s) s Text where
     driver =
-        lens (_driver :: NetworkResource s -> TF.Attribute s Text)
+        lens (_driver :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _driver = a } :: NetworkResource s)
 
 instance P.HasInternal (NetworkResource s) s Text where
     internal =
-        lens (_internal :: NetworkResource s -> TF.Attribute s Text)
+        lens (_internal :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _internal = a } :: NetworkResource s)
 
 instance P.HasIpamConfig (NetworkResource s) s Text where
     ipamConfig =
-        lens (_ipam_config :: NetworkResource s -> TF.Attribute s Text)
+        lens (_ipam_config :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _ipam_config = a } :: NetworkResource s)
 
 instance P.HasIpamDriver (NetworkResource s) s Text where
     ipamDriver =
-        lens (_ipam_driver :: NetworkResource s -> TF.Attribute s Text)
+        lens (_ipam_driver :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _ipam_driver = a } :: NetworkResource s)
 
 instance P.HasName (NetworkResource s) s Text where
     name =
-        lens (_name :: NetworkResource s -> TF.Attribute s Text)
+        lens (_name :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkResource s)
 
 instance P.HasOptions (NetworkResource s) s Text where
     options =
-        lens (_options :: NetworkResource s -> TF.Attribute s Text)
+        lens (_options :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _options = a } :: NetworkResource s)
 
 instance P.HasComputedId (NetworkResource s) Text
@@ -573,16 +573,16 @@ Creates and destroys a volume in Docker. This can be used alongside
 shared across containers.
 -}
 data VolumeResource s = VolumeResource {
-      _driver      :: !(TF.Attribute s Text)
+      _driver      :: !(TF.Attr s Text)
     {- ^ (Optional, string) Driver type for the volume (defaults to local). -}
-    , _driver_opts :: !(TF.Attribute s Text)
+    , _driver_opts :: !(TF.Attr s Text)
     {- ^ (Optional, map of strings) Options specific to the driver. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Optional, string) The name of the Docker volume (generated if not provided). -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VolumeResource s) where
-    toHCL VolumeResource{..} = TF.block $ catMaybes
+    toHCL VolumeResource{..} = TF.inline $ catMaybes
         [ TF.attribute "driver" _driver
         , TF.attribute "driver_opts" _driver_opts
         , TF.attribute "name" _name
@@ -590,17 +590,17 @@ instance TF.ToHCL (VolumeResource s) where
 
 instance P.HasDriver (VolumeResource s) s Text where
     driver =
-        lens (_driver :: VolumeResource s -> TF.Attribute s Text)
+        lens (_driver :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _driver = a } :: VolumeResource s)
 
 instance P.HasDriverOpts (VolumeResource s) s Text where
     driverOpts =
-        lens (_driver_opts :: VolumeResource s -> TF.Attribute s Text)
+        lens (_driver_opts :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _driver_opts = a } :: VolumeResource s)
 
 instance P.HasName (VolumeResource s) s Text where
     name =
-        lens (_name :: VolumeResource s -> TF.Attribute s Text)
+        lens (_name :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VolumeResource s)
 
 instance P.HasComputedMountpoint (VolumeResource s) Text

@@ -120,20 +120,20 @@ import qualified Terrafomo.Schema    as TF
 Provides a OVH domain zone record.
 -}
 data DomainZoneRecordResource s = DomainZoneRecordResource {
-      _fieldType :: !(TF.Attribute s Text)
+      _fieldType :: !(TF.Attr s Text)
     {- ^ (Required) The type of the record -}
-    , _subDomain :: !(TF.Attribute s Text)
+    , _subDomain :: !(TF.Attr s Text)
     {- ^ (Required) The name of the record -}
-    , _target    :: !(TF.Attribute s Text)
+    , _target    :: !(TF.Attr s Text)
     {- ^ (Required) The value of the record -}
-    , _ttl       :: !(TF.Attribute s Text)
+    , _ttl       :: !(TF.Attr s Text)
     {- ^ (Optional) The TTL of the record -}
-    , _zone      :: !(TF.Attribute s Text)
+    , _zone      :: !(TF.Attr s Text)
     {- ^ (Required) The domain to add the record to -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DomainZoneRecordResource s) where
-    toHCL DomainZoneRecordResource{..} = TF.block $ catMaybes
+    toHCL DomainZoneRecordResource{..} = TF.inline $ catMaybes
         [ TF.attribute "fieldType" _fieldType
         , TF.attribute "subDomain" _subDomain
         , TF.attribute "target" _target
@@ -143,27 +143,27 @@ instance TF.ToHCL (DomainZoneRecordResource s) where
 
 instance P.HasFieldType (DomainZoneRecordResource s) s Text where
     fieldType =
-        lens (_fieldType :: DomainZoneRecordResource s -> TF.Attribute s Text)
+        lens (_fieldType :: DomainZoneRecordResource s -> TF.Attr s Text)
              (\s a -> s { _fieldType = a } :: DomainZoneRecordResource s)
 
 instance P.HasSubDomain (DomainZoneRecordResource s) s Text where
     subDomain =
-        lens (_subDomain :: DomainZoneRecordResource s -> TF.Attribute s Text)
+        lens (_subDomain :: DomainZoneRecordResource s -> TF.Attr s Text)
              (\s a -> s { _subDomain = a } :: DomainZoneRecordResource s)
 
 instance P.HasTarget (DomainZoneRecordResource s) s Text where
     target =
-        lens (_target :: DomainZoneRecordResource s -> TF.Attribute s Text)
+        lens (_target :: DomainZoneRecordResource s -> TF.Attr s Text)
              (\s a -> s { _target = a } :: DomainZoneRecordResource s)
 
 instance P.HasTtl (DomainZoneRecordResource s) s Text where
     ttl =
-        lens (_ttl :: DomainZoneRecordResource s -> TF.Attribute s Text)
+        lens (_ttl :: DomainZoneRecordResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: DomainZoneRecordResource s)
 
 instance P.HasZone (DomainZoneRecordResource s) s Text where
     zone =
-        lens (_zone :: DomainZoneRecordResource s -> TF.Attribute s Text)
+        lens (_zone :: DomainZoneRecordResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: DomainZoneRecordResource s)
 
 instance P.HasComputedFieldType (DomainZoneRecordResource s) Text
@@ -189,18 +189,18 @@ domainZoneRecordResource =
 Creates a private network in a public cloud project.
 -}
 data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource {
-      _name       :: !(TF.Attribute s Text)
+      _name       :: !(TF.Attr s Text)
     {- ^ (Required) The name of the network. -}
-    , _project_id :: !(TF.Attribute s Text)
+    , _project_id :: !(TF.Attr s Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _regions    :: !(TF.Attribute s Text)
+    , _regions    :: !(TF.Attr s Text)
     {- ^ - an array of valid OVH public cloud region ID in which the network will be available. Ex.: "GRA1". Defaults to all public cloud regions. -}
-    , _vlan_id    :: !(TF.Attribute s Text)
+    , _vlan_id    :: !(TF.Attr s Text)
     {- ^ - a vlan id to associate with the network. Changing this value recreates the resource. Defaults to 0. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PubliccloudPrivateNetworkResource s) where
-    toHCL PubliccloudPrivateNetworkResource{..} = TF.block $ catMaybes
+    toHCL PubliccloudPrivateNetworkResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "project_id" _project_id
         , TF.attribute "regions" _regions
@@ -209,22 +209,22 @@ instance TF.ToHCL (PubliccloudPrivateNetworkResource s) where
 
 instance P.HasName (PubliccloudPrivateNetworkResource s) s Text where
     name =
-        lens (_name :: PubliccloudPrivateNetworkResource s -> TF.Attribute s Text)
+        lens (_name :: PubliccloudPrivateNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasProjectId (PubliccloudPrivateNetworkResource s) s Text where
     projectId =
-        lens (_project_id :: PubliccloudPrivateNetworkResource s -> TF.Attribute s Text)
+        lens (_project_id :: PubliccloudPrivateNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasRegions (PubliccloudPrivateNetworkResource s) s Text where
     regions =
-        lens (_regions :: PubliccloudPrivateNetworkResource s -> TF.Attribute s Text)
+        lens (_regions :: PubliccloudPrivateNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _regions = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasVlanId (PubliccloudPrivateNetworkResource s) s Text where
     vlanId =
-        lens (_vlan_id :: PubliccloudPrivateNetworkResource s -> TF.Attribute s Text)
+        lens (_vlan_id :: PubliccloudPrivateNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _vlan_id = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasComputedName (PubliccloudPrivateNetworkResource s) Text
@@ -251,26 +251,26 @@ publiccloudPrivateNetworkResource =
 Creates a subnet in a private network of a public cloud project.
 -}
 data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnetResource {
-      _dhcp       :: !(TF.Attribute s Text)
+      _dhcp       :: !(TF.Attr s Text)
     {- ^ (Optional) Enable DHCP. Changing this forces a new resource to be created. Defaults to false. _ -}
-    , _end        :: !(TF.Attribute s Text)
+    , _end        :: !(TF.Attr s Text)
     {- ^ (Required) Last ip for this region. Changing this value recreates the subnet. -}
-    , _network    :: !(TF.Attribute s Text)
+    , _network    :: !(TF.Attr s Text)
     {- ^ (Required) Global network in CIDR format. Changing this value recreates the subnet -}
-    , _network_id :: !(TF.Attribute s Text)
+    , _network_id :: !(TF.Attr s Text)
     {- ^ (Required) The id of the network. Changing this forces a new resource to be created. -}
-    , _no_gateway :: !(TF.Attribute s Text)
+    , _no_gateway :: !(TF.Attr s Text)
     {- ^ - Set to true if you don't want to set a default gateway IP. Changing this value recreates the resource. Defaults to false. -}
-    , _project_id :: !(TF.Attribute s Text)
+    , _project_id :: !(TF.Attr s Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. Changing this forces a new resource to be created. -}
-    , _region     :: !(TF.Attribute s Text)
+    , _region     :: !(TF.Attr s Text)
     {- ^ - The region in which the network subnet will be created. Ex.: "GRA1". Changing this value recreates the resource. -}
-    , _start      :: !(TF.Attribute s Text)
+    , _start      :: !(TF.Attr s Text)
     {- ^ (Required) First ip for this region. Changing this value recreates the subnet. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PubliccloudPrivateNetworkSubnetResource s) where
-    toHCL PubliccloudPrivateNetworkSubnetResource{..} = TF.block $ catMaybes
+    toHCL PubliccloudPrivateNetworkSubnetResource{..} = TF.inline $ catMaybes
         [ TF.attribute "dhcp" _dhcp
         , TF.attribute "end" _end
         , TF.attribute "network" _network
@@ -283,42 +283,42 @@ instance TF.ToHCL (PubliccloudPrivateNetworkSubnetResource s) where
 
 instance P.HasDhcp (PubliccloudPrivateNetworkSubnetResource s) s Text where
     dhcp =
-        lens (_dhcp :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
+        lens (_dhcp :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s Text)
              (\s a -> s { _dhcp = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasEnd (PubliccloudPrivateNetworkSubnetResource s) s Text where
     end =
-        lens (_end :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
+        lens (_end :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s Text)
              (\s a -> s { _end = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasNetwork (PubliccloudPrivateNetworkSubnetResource s) s Text where
     network =
-        lens (_network :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
+        lens (_network :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasNetworkId (PubliccloudPrivateNetworkSubnetResource s) s Text where
     networkId =
-        lens (_network_id :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
+        lens (_network_id :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasNoGateway (PubliccloudPrivateNetworkSubnetResource s) s Text where
     noGateway =
-        lens (_no_gateway :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
+        lens (_no_gateway :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s Text)
              (\s a -> s { _no_gateway = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasProjectId (PubliccloudPrivateNetworkSubnetResource s) s Text where
     projectId =
-        lens (_project_id :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
+        lens (_project_id :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasRegion (PubliccloudPrivateNetworkSubnetResource s) s Text where
     region =
-        lens (_region :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
+        lens (_region :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasStart (PubliccloudPrivateNetworkSubnetResource s) s Text where
     start =
-        lens (_start :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attribute s Text)
+        lens (_start :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s Text)
              (\s a -> s { _start = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasComputedCidr (PubliccloudPrivateNetworkSubnetResource s) Text
@@ -353,26 +353,26 @@ publiccloudPrivateNetworkSubnetResource =
 Creates a user in a public cloud project.
 -}
 data PubliccloudUserResource s = PubliccloudUserResource {
-      _description :: !(TF.Attribute s Text)
+      _description :: !(TF.Attr s Text)
     {- ^ - A description associated with the user. -}
-    , _project_id  :: !(TF.Attribute s Text)
+    , _project_id  :: !(TF.Attr s Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (PubliccloudUserResource s) where
-    toHCL PubliccloudUserResource{..} = TF.block $ catMaybes
+    toHCL PubliccloudUserResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "project_id" _project_id
         ]
 
 instance P.HasDescription (PubliccloudUserResource s) s Text where
     description =
-        lens (_description :: PubliccloudUserResource s -> TF.Attribute s Text)
+        lens (_description :: PubliccloudUserResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: PubliccloudUserResource s)
 
 instance P.HasProjectId (PubliccloudUserResource s) s Text where
     projectId =
-        lens (_project_id :: PubliccloudUserResource s -> TF.Attribute s Text)
+        lens (_project_id :: PubliccloudUserResource s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: PubliccloudUserResource s)
 
 instance P.HasComputedCreationDate (PubliccloudUserResource s) Text
@@ -396,26 +396,26 @@ publiccloudUserResource =
 Attach an existing PublicCloud project to an existing VRack.
 -}
 data VrackPubliccloudAttachmentResource s = VrackPubliccloudAttachmentResource {
-      _project_id :: !(TF.Attribute s Text)
+      _project_id :: !(TF.Attr s Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _vrack_id   :: !(TF.Attribute s Text)
+    , _vrack_id   :: !(TF.Attr s Text)
     {- ^ (Required) The id of the vrack. If omitted, the @OVH_VRACK_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (VrackPubliccloudAttachmentResource s) where
-    toHCL VrackPubliccloudAttachmentResource{..} = TF.block $ catMaybes
+    toHCL VrackPubliccloudAttachmentResource{..} = TF.inline $ catMaybes
         [ TF.attribute "project_id" _project_id
         , TF.attribute "vrack_id" _vrack_id
         ]
 
 instance P.HasProjectId (VrackPubliccloudAttachmentResource s) s Text where
     projectId =
-        lens (_project_id :: VrackPubliccloudAttachmentResource s -> TF.Attribute s Text)
+        lens (_project_id :: VrackPubliccloudAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: VrackPubliccloudAttachmentResource s)
 
 instance P.HasVrackId (VrackPubliccloudAttachmentResource s) s Text where
     vrackId =
-        lens (_vrack_id :: VrackPubliccloudAttachmentResource s -> TF.Attribute s Text)
+        lens (_vrack_id :: VrackPubliccloudAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _vrack_id = a } :: VrackPubliccloudAttachmentResource s)
 
 instance P.HasComputedProjectId (VrackPubliccloudAttachmentResource s) Text

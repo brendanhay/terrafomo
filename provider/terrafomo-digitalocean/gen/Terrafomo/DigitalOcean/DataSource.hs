@@ -69,18 +69,18 @@ enable you to build droplets based on snapshot names. An error is triggered
 if zero or more than one result is returned by the query.
 -}
 data ImageData s = ImageData {
-      _name :: !(TF.Attribute s Text)
+      _name :: !(TF.Attr s Text)
     {- ^ - The name of the image. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ImageData s) where
-    toHCL ImageData{..} = TF.block $ catMaybes
+    toHCL ImageData{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         ]
 
 instance P.HasName (ImageData s) s Text where
     name =
-        lens (_name :: ImageData s -> TF.Attribute s Text)
+        lens (_name :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasComputedImage (ImageData s) Text

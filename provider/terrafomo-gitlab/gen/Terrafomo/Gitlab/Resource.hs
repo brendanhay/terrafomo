@@ -115,18 +115,18 @@ This resource allows you to create and manage deploy keys for your GitLab
 projects.
 -}
 data DeployKeyResource s = DeployKeyResource {
-      _can_push :: !(TF.Attribute s Text)
+      _can_push :: !(TF.Attr s Text)
     {- ^ (Optional, boolean) Allow this deploy key to be used to push changes to the project.  Defaults to @false@ . NOTE:: this cannot currently be managed. -}
-    , _key      :: !(TF.Attribute s Text)
+    , _key      :: !(TF.Attr s Text)
     {- ^ (Required, string) The public ssh key body. -}
-    , _project  :: !(TF.Attribute s Text)
+    , _project  :: !(TF.Attr s Text)
     {- ^ (Required, string) The name or id of the project to add the deploy key to. -}
-    , _title    :: !(TF.Attribute s Text)
+    , _title    :: !(TF.Attr s Text)
     {- ^ (Required, string) A title to describe the deploy key with. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DeployKeyResource s) where
-    toHCL DeployKeyResource{..} = TF.block $ catMaybes
+    toHCL DeployKeyResource{..} = TF.inline $ catMaybes
         [ TF.attribute "can_push" _can_push
         , TF.attribute "key" _key
         , TF.attribute "project" _project
@@ -135,22 +135,22 @@ instance TF.ToHCL (DeployKeyResource s) where
 
 instance P.HasCanPush (DeployKeyResource s) s Text where
     canPush =
-        lens (_can_push :: DeployKeyResource s -> TF.Attribute s Text)
+        lens (_can_push :: DeployKeyResource s -> TF.Attr s Text)
              (\s a -> s { _can_push = a } :: DeployKeyResource s)
 
 instance P.HasKey (DeployKeyResource s) s Text where
     key =
-        lens (_key :: DeployKeyResource s -> TF.Attribute s Text)
+        lens (_key :: DeployKeyResource s -> TF.Attr s Text)
              (\s a -> s { _key = a } :: DeployKeyResource s)
 
 instance P.HasProject (DeployKeyResource s) s Text where
     project =
-        lens (_project :: DeployKeyResource s -> TF.Attribute s Text)
+        lens (_project :: DeployKeyResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DeployKeyResource s)
 
 instance P.HasTitle (DeployKeyResource s) s Text where
     title =
-        lens (_title :: DeployKeyResource s -> TF.Attribute s Text)
+        lens (_title :: DeployKeyResource s -> TF.Attr s Text)
              (\s a -> s { _title = a } :: DeployKeyResource s)
 
 
@@ -171,24 +171,24 @@ provider will need to be configured with admin-level access for this
 resource to work.
 -}
 data GroupResource s = GroupResource {
-      _description            :: !(TF.Attribute s Text)
+      _description            :: !(TF.Attr s Text)
     {- ^ (Optional) The description of the group. -}
-    , _lfs_enabled            :: !(TF.Attribute s Text)
+    , _lfs_enabled            :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean, defaults to true.  Whether to enable LFS support for projects in this group. -}
-    , _name                   :: !(TF.Attribute s Text)
+    , _name                   :: !(TF.Attr s Text)
     {- ^ (Required) The name of this group. -}
-    , _parent_id              :: !(TF.Attribute s Text)
+    , _parent_id              :: !(TF.Attr s Text)
     {- ^ (Optional) Integer, id of the parent group (creates a nested group). -}
-    , _path                   :: !(TF.Attribute s Text)
+    , _path                   :: !(TF.Attr s Text)
     {- ^ (Required) The url of the hook to invoke. -}
-    , _request_access_enabled :: !(TF.Attribute s Text)
+    , _request_access_enabled :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean, defaults to false.  Whether to enable users to request access to the group. -}
-    , _visibility_level       :: !(TF.Attribute s Text)
+    , _visibility_level       :: !(TF.Attr s Text)
     {- ^ (Optional) Set to @public@ to create a public group. Valid values are @private@ , @internal@ , @public@ . Groups are created as private by default. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (GroupResource s) where
-    toHCL GroupResource{..} = TF.block $ catMaybes
+    toHCL GroupResource{..} = TF.inline $ catMaybes
         [ TF.attribute "description" _description
         , TF.attribute "lfs_enabled" _lfs_enabled
         , TF.attribute "name" _name
@@ -200,37 +200,37 @@ instance TF.ToHCL (GroupResource s) where
 
 instance P.HasDescription (GroupResource s) s Text where
     description =
-        lens (_description :: GroupResource s -> TF.Attribute s Text)
+        lens (_description :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: GroupResource s)
 
 instance P.HasLfsEnabled (GroupResource s) s Text where
     lfsEnabled =
-        lens (_lfs_enabled :: GroupResource s -> TF.Attribute s Text)
+        lens (_lfs_enabled :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _lfs_enabled = a } :: GroupResource s)
 
 instance P.HasName (GroupResource s) s Text where
     name =
-        lens (_name :: GroupResource s -> TF.Attribute s Text)
+        lens (_name :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: GroupResource s)
 
 instance P.HasParentId (GroupResource s) s Text where
     parentId =
-        lens (_parent_id :: GroupResource s -> TF.Attribute s Text)
+        lens (_parent_id :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _parent_id = a } :: GroupResource s)
 
 instance P.HasPath (GroupResource s) s Text where
     path =
-        lens (_path :: GroupResource s -> TF.Attribute s Text)
+        lens (_path :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: GroupResource s)
 
 instance P.HasRequestAccessEnabled (GroupResource s) s Text where
     requestAccessEnabled =
-        lens (_request_access_enabled :: GroupResource s -> TF.Attribute s Text)
+        lens (_request_access_enabled :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _request_access_enabled = a } :: GroupResource s)
 
 instance P.HasVisibilityLevel (GroupResource s) s Text where
     visibilityLevel =
-        lens (_visibility_level :: GroupResource s -> TF.Attribute s Text)
+        lens (_visibility_level :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _visibility_level = a } :: GroupResource s)
 
 instance P.HasComputedId (GroupResource s) Text
@@ -255,18 +255,18 @@ projects. For further information on labels, consult the
 <https://docs.gitlab.com/ee/user/project/labels.htm> .
 -}
 data LabelResource s = LabelResource {
-      _color       :: !(TF.Attribute s Text)
+      _color       :: !(TF.Attr s Text)
     {- ^ (Required) The color of the label given in 6-digit hex notation with leading '#' sign (e.g. #FFAABB) or one of the <https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords> . -}
-    , _description :: !(TF.Attribute s Text)
+    , _description :: !(TF.Attr s Text)
     {- ^ (Optional) The description of the label. -}
-    , _name        :: !(TF.Attribute s Text)
+    , _name        :: !(TF.Attr s Text)
     {- ^ (Required) The name of the label. -}
-    , _project     :: !(TF.Attribute s Text)
+    , _project     :: !(TF.Attr s Text)
     {- ^ (Required) The name or id of the project to add the label to. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (LabelResource s) where
-    toHCL LabelResource{..} = TF.block $ catMaybes
+    toHCL LabelResource{..} = TF.inline $ catMaybes
         [ TF.attribute "color" _color
         , TF.attribute "description" _description
         , TF.attribute "name" _name
@@ -275,22 +275,22 @@ instance TF.ToHCL (LabelResource s) where
 
 instance P.HasColor (LabelResource s) s Text where
     color =
-        lens (_color :: LabelResource s -> TF.Attribute s Text)
+        lens (_color :: LabelResource s -> TF.Attr s Text)
              (\s a -> s { _color = a } :: LabelResource s)
 
 instance P.HasDescription (LabelResource s) s Text where
     description =
-        lens (_description :: LabelResource s -> TF.Attribute s Text)
+        lens (_description :: LabelResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: LabelResource s)
 
 instance P.HasName (LabelResource s) s Text where
     name =
-        lens (_name :: LabelResource s -> TF.Attribute s Text)
+        lens (_name :: LabelResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LabelResource s)
 
 instance P.HasProject (LabelResource s) s Text where
     project =
-        lens (_project :: LabelResource s -> TF.Attribute s Text)
+        lens (_project :: LabelResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: LabelResource s)
 
 instance P.HasComputedId (LabelResource s) Text
@@ -312,34 +312,34 @@ projects. For further information on hooks, consult the
 <https://docs.gitlab.com/ce/user/project/integrations/webhooks.html> .
 -}
 data ProjectHookResource s = ProjectHookResource {
-      _enable_ssl_verification :: !(TF.Attribute s Text)
+      _enable_ssl_verification :: !(TF.Attr s Text)
     {- ^ (Optional) Enable ssl verification when invoking the hook. -}
-    , _issues_events           :: !(TF.Attribute s Text)
+    , _issues_events           :: !(TF.Attr s Text)
     {- ^ (Optional) Invoke the hook for issues events. -}
-    , _job_events              :: !(TF.Attribute s Text)
+    , _job_events              :: !(TF.Attr s Text)
     {- ^ (Optional) Invoke the hook for job events. -}
-    , _merge_requests_events   :: !(TF.Attribute s Text)
+    , _merge_requests_events   :: !(TF.Attr s Text)
     {- ^ (Optional) Invoke the hook for merge requests. -}
-    , _note_events             :: !(TF.Attribute s Text)
+    , _note_events             :: !(TF.Attr s Text)
     {- ^ (Optional) Invoke the hook for notes events. -}
-    , _pipeline_events         :: !(TF.Attribute s Text)
+    , _pipeline_events         :: !(TF.Attr s Text)
     {- ^ (Optional) Invoke the hook for pipeline events. -}
-    , _project                 :: !(TF.Attribute s Text)
+    , _project                 :: !(TF.Attr s Text)
     {- ^ (Required) The name or id of the project to add the hook to. -}
-    , _push_events             :: !(TF.Attribute s Text)
+    , _push_events             :: !(TF.Attr s Text)
     {- ^ (Optional) Invoke the hook for push events. -}
-    , _tag_push_events         :: !(TF.Attribute s Text)
+    , _tag_push_events         :: !(TF.Attr s Text)
     {- ^ (Optional) Invoke the hook for tag push events. -}
-    , _token                   :: !(TF.Attribute s Text)
+    , _token                   :: !(TF.Attr s Text)
     {- ^ (Optional) A token to present when invoking the hook. -}
-    , _url                     :: !(TF.Attribute s Text)
+    , _url                     :: !(TF.Attr s Text)
     {- ^ (Required) The url of the hook to invoke. -}
-    , _wiki_page_events        :: !(TF.Attribute s Text)
+    , _wiki_page_events        :: !(TF.Attr s Text)
     {- ^ (Optional) Invoke the hook for wiki page events. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectHookResource s) where
-    toHCL ProjectHookResource{..} = TF.block $ catMaybes
+    toHCL ProjectHookResource{..} = TF.inline $ catMaybes
         [ TF.attribute "enable_ssl_verification" _enable_ssl_verification
         , TF.attribute "issues_events" _issues_events
         , TF.attribute "job_events" _job_events
@@ -356,62 +356,62 @@ instance TF.ToHCL (ProjectHookResource s) where
 
 instance P.HasEnableSslVerification (ProjectHookResource s) s Text where
     enableSslVerification =
-        lens (_enable_ssl_verification :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_enable_ssl_verification :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _enable_ssl_verification = a } :: ProjectHookResource s)
 
 instance P.HasIssuesEvents (ProjectHookResource s) s Text where
     issuesEvents =
-        lens (_issues_events :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_issues_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _issues_events = a } :: ProjectHookResource s)
 
 instance P.HasJobEvents (ProjectHookResource s) s Text where
     jobEvents =
-        lens (_job_events :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_job_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _job_events = a } :: ProjectHookResource s)
 
 instance P.HasMergeRequestsEvents (ProjectHookResource s) s Text where
     mergeRequestsEvents =
-        lens (_merge_requests_events :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_merge_requests_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _merge_requests_events = a } :: ProjectHookResource s)
 
 instance P.HasNoteEvents (ProjectHookResource s) s Text where
     noteEvents =
-        lens (_note_events :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_note_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _note_events = a } :: ProjectHookResource s)
 
 instance P.HasPipelineEvents (ProjectHookResource s) s Text where
     pipelineEvents =
-        lens (_pipeline_events :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_pipeline_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _pipeline_events = a } :: ProjectHookResource s)
 
 instance P.HasProject (ProjectHookResource s) s Text where
     project =
-        lens (_project :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_project :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ProjectHookResource s)
 
 instance P.HasPushEvents (ProjectHookResource s) s Text where
     pushEvents =
-        lens (_push_events :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_push_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _push_events = a } :: ProjectHookResource s)
 
 instance P.HasTagPushEvents (ProjectHookResource s) s Text where
     tagPushEvents =
-        lens (_tag_push_events :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_tag_push_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _tag_push_events = a } :: ProjectHookResource s)
 
 instance P.HasToken (ProjectHookResource s) s Text where
     token =
-        lens (_token :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_token :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: ProjectHookResource s)
 
 instance P.HasUrl (ProjectHookResource s) s Text where
     url =
-        lens (_url :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_url :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _url = a } :: ProjectHookResource s)
 
 instance P.HasWikiPageEvents (ProjectHookResource s) s Text where
     wikiPageEvents =
-        lens (_wiki_page_events :: ProjectHookResource s -> TF.Attribute s Text)
+        lens (_wiki_page_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _wiki_page_events = a } :: ProjectHookResource s)
 
 instance P.HasComputedId (ProjectHookResource s) Text
@@ -440,30 +440,30 @@ This resource allows you to create and manage projects within your GitLab
 group or within your user.
 -}
 data ProjectResource s = ProjectResource {
-      _default_branch         :: !(TF.Attribute s Text)
+      _default_branch         :: !(TF.Attr s Text)
     {- ^ (Optional) The default branch for the project. -}
-    , _description            :: !(TF.Attribute s Text)
+    , _description            :: !(TF.Attr s Text)
     {- ^ (Optional) A description of the project. -}
-    , _issues_enabled         :: !(TF.Attribute s Text)
+    , _issues_enabled         :: !(TF.Attr s Text)
     {- ^ (Optional) Enable issue tracking for the project. -}
-    , _merge_requests_enabled :: !(TF.Attribute s Text)
+    , _merge_requests_enabled :: !(TF.Attr s Text)
     {- ^ (Optional) Enable merge requests for the project. -}
-    , _name                   :: !(TF.Attribute s Text)
+    , _name                   :: !(TF.Attr s Text)
     {- ^ (Required) The name of the project. -}
-    , _namespace_id           :: !(TF.Attribute s Text)
+    , _namespace_id           :: !(TF.Attr s Text)
     {- ^ (Optional) The namespace (group or user) of the project. Defaults to your user. See <group.html> for an example. -}
-    , _path                   :: !(TF.Attribute s Text)
+    , _path                   :: !(TF.Attr s Text)
     {- ^ (Optional) The path of the repository. -}
-    , _snippets_enabled       :: !(TF.Attribute s Text)
+    , _snippets_enabled       :: !(TF.Attr s Text)
     {- ^ (Optional) Enable snippets for the project. -}
-    , _visibility_level       :: !(TF.Attribute s Text)
+    , _visibility_level       :: !(TF.Attr s Text)
     {- ^ (Optional) Set to @public@ to create a public project. Valid values are @private@ , @internal@ , @public@ . Repositories are created as private by default. -}
-    , _wiki_enabled           :: !(TF.Attribute s Text)
+    , _wiki_enabled           :: !(TF.Attr s Text)
     {- ^ (Optional) Enable wiki for the project. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (ProjectResource s) where
-    toHCL ProjectResource{..} = TF.block $ catMaybes
+    toHCL ProjectResource{..} = TF.inline $ catMaybes
         [ TF.attribute "default_branch" _default_branch
         , TF.attribute "description" _description
         , TF.attribute "issues_enabled" _issues_enabled
@@ -478,52 +478,52 @@ instance TF.ToHCL (ProjectResource s) where
 
 instance P.HasDefaultBranch (ProjectResource s) s Text where
     defaultBranch =
-        lens (_default_branch :: ProjectResource s -> TF.Attribute s Text)
+        lens (_default_branch :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _default_branch = a } :: ProjectResource s)
 
 instance P.HasDescription (ProjectResource s) s Text where
     description =
-        lens (_description :: ProjectResource s -> TF.Attribute s Text)
+        lens (_description :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ProjectResource s)
 
 instance P.HasIssuesEnabled (ProjectResource s) s Text where
     issuesEnabled =
-        lens (_issues_enabled :: ProjectResource s -> TF.Attribute s Text)
+        lens (_issues_enabled :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _issues_enabled = a } :: ProjectResource s)
 
 instance P.HasMergeRequestsEnabled (ProjectResource s) s Text where
     mergeRequestsEnabled =
-        lens (_merge_requests_enabled :: ProjectResource s -> TF.Attribute s Text)
+        lens (_merge_requests_enabled :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _merge_requests_enabled = a } :: ProjectResource s)
 
 instance P.HasName (ProjectResource s) s Text where
     name =
-        lens (_name :: ProjectResource s -> TF.Attribute s Text)
+        lens (_name :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ProjectResource s)
 
 instance P.HasNamespaceId (ProjectResource s) s Text where
     namespaceId =
-        lens (_namespace_id :: ProjectResource s -> TF.Attribute s Text)
+        lens (_namespace_id :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _namespace_id = a } :: ProjectResource s)
 
 instance P.HasPath (ProjectResource s) s Text where
     path =
-        lens (_path :: ProjectResource s -> TF.Attribute s Text)
+        lens (_path :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: ProjectResource s)
 
 instance P.HasSnippetsEnabled (ProjectResource s) s Text where
     snippetsEnabled =
-        lens (_snippets_enabled :: ProjectResource s -> TF.Attribute s Text)
+        lens (_snippets_enabled :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _snippets_enabled = a } :: ProjectResource s)
 
 instance P.HasVisibilityLevel (ProjectResource s) s Text where
     visibilityLevel =
-        lens (_visibility_level :: ProjectResource s -> TF.Attribute s Text)
+        lens (_visibility_level :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _visibility_level = a } :: ProjectResource s)
 
 instance P.HasWikiEnabled (ProjectResource s) s Text where
     wikiEnabled =
-        lens (_wiki_enabled :: ProjectResource s -> TF.Attribute s Text)
+        lens (_wiki_enabled :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _wiki_enabled = a } :: ProjectResource s)
 
 instance P.HasComputedHttpUrlToRepo (ProjectResource s) Text
@@ -554,26 +554,26 @@ provider will need to be configured with admin-level access for this
 resource to work.
 -}
 data UserResource s = UserResource {
-      _can_create_group  :: !(TF.Attribute s Text)
+      _can_create_group  :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean, defaults to false. Whether to allow the user to create groups. -}
-    , _email             :: !(TF.Attribute s Text)
+    , _email             :: !(TF.Attr s Text)
     {- ^ (Required) The e-mail address of the user. -}
-    , _is_admin          :: !(TF.Attribute s Text)
+    , _is_admin          :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean, defaults to false.  Whether to enable administrative priviledges for the user. -}
-    , _name              :: !(TF.Attribute s Text)
+    , _name              :: !(TF.Attr s Text)
     {- ^ (Required) The name of the user. -}
-    , _password          :: !(TF.Attribute s Text)
+    , _password          :: !(TF.Attr s Text)
     {- ^ (Required) The password of the user. -}
-    , _projects_limit    :: !(TF.Attribute s Text)
+    , _projects_limit    :: !(TF.Attr s Text)
     {- ^ (Optional) Integer, defaults to 0.  Number of projects user can create. -}
-    , _skip_confirmation :: !(TF.Attribute s Text)
+    , _skip_confirmation :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean, defaults to true. Whether to skip confirmation. -}
-    , _username          :: !(TF.Attribute s Text)
+    , _username          :: !(TF.Attr s Text)
     {- ^ (Required) The username of the user. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (UserResource s) where
-    toHCL UserResource{..} = TF.block $ catMaybes
+    toHCL UserResource{..} = TF.inline $ catMaybes
         [ TF.attribute "can_create_group" _can_create_group
         , TF.attribute "email" _email
         , TF.attribute "is_admin" _is_admin
@@ -586,42 +586,42 @@ instance TF.ToHCL (UserResource s) where
 
 instance P.HasCanCreateGroup (UserResource s) s Text where
     canCreateGroup =
-        lens (_can_create_group :: UserResource s -> TF.Attribute s Text)
+        lens (_can_create_group :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _can_create_group = a } :: UserResource s)
 
 instance P.HasEmail (UserResource s) s Text where
     email =
-        lens (_email :: UserResource s -> TF.Attribute s Text)
+        lens (_email :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _email = a } :: UserResource s)
 
 instance P.HasIsAdmin (UserResource s) s Text where
     isAdmin =
-        lens (_is_admin :: UserResource s -> TF.Attribute s Text)
+        lens (_is_admin :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _is_admin = a } :: UserResource s)
 
 instance P.HasName (UserResource s) s Text where
     name =
-        lens (_name :: UserResource s -> TF.Attribute s Text)
+        lens (_name :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasPassword (UserResource s) s Text where
     password =
-        lens (_password :: UserResource s -> TF.Attribute s Text)
+        lens (_password :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: UserResource s)
 
 instance P.HasProjectsLimit (UserResource s) s Text where
     projectsLimit =
-        lens (_projects_limit :: UserResource s -> TF.Attribute s Text)
+        lens (_projects_limit :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _projects_limit = a } :: UserResource s)
 
 instance P.HasSkipConfirmation (UserResource s) s Text where
     skipConfirmation =
-        lens (_skip_confirmation :: UserResource s -> TF.Attribute s Text)
+        lens (_skip_confirmation :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _skip_confirmation = a } :: UserResource s)
 
 instance P.HasUsername (UserResource s) s Text where
     username =
-        lens (_username :: UserResource s -> TF.Attribute s Text)
+        lens (_username :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserResource s)
 
 instance P.HasComputedId (UserResource s) Text

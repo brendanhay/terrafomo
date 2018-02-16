@@ -71,18 +71,18 @@ Provides a Mailgun App resource. This can be used to create and manage
 applications on Mailgun.
 -}
 data DomainResource s = DomainResource {
-      _name          :: !(TF.Attribute s Text)
+      _name          :: !(TF.Attr s Text)
     {- ^ (Required) The domain to add to Mailgun -}
-    , _smtp_password :: !(TF.Attribute s Text)
+    , _smtp_password :: !(TF.Attr s Text)
     {- ^ (Required) Password for SMTP authentication -}
-    , _spam_action   :: !(TF.Attribute s Text)
+    , _spam_action   :: !(TF.Attr s Text)
     {- ^ (Optional) @disabled@ or @tag@ Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged with a spam header. -}
-    , _wildcard      :: !(TF.Attribute s Text)
+    , _wildcard      :: !(TF.Attr s Text)
     {- ^ (Optional) Boolean that determines whether the domain will accept email for sub-domains. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (DomainResource s) where
-    toHCL DomainResource{..} = TF.block $ catMaybes
+    toHCL DomainResource{..} = TF.inline $ catMaybes
         [ TF.attribute "name" _name
         , TF.attribute "smtp_password" _smtp_password
         , TF.attribute "spam_action" _spam_action
@@ -91,22 +91,22 @@ instance TF.ToHCL (DomainResource s) where
 
 instance P.HasName (DomainResource s) s Text where
     name =
-        lens (_name :: DomainResource s -> TF.Attribute s Text)
+        lens (_name :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DomainResource s)
 
 instance P.HasSmtpPassword (DomainResource s) s Text where
     smtpPassword =
-        lens (_smtp_password :: DomainResource s -> TF.Attribute s Text)
+        lens (_smtp_password :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _smtp_password = a } :: DomainResource s)
 
 instance P.HasSpamAction (DomainResource s) s Text where
     spamAction =
-        lens (_spam_action :: DomainResource s -> TF.Attribute s Text)
+        lens (_spam_action :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _spam_action = a } :: DomainResource s)
 
 instance P.HasWildcard (DomainResource s) s Text where
     wildcard =
-        lens (_wildcard :: DomainResource s -> TF.Attribute s Text)
+        lens (_wildcard :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _wildcard = a } :: DomainResource s)
 
 instance P.HasComputedName (DomainResource s) Text
