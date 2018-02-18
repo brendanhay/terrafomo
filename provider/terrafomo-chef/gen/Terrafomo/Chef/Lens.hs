@@ -36,12 +36,23 @@ module Terrafomo.Chef.Lens
 
     -- ** Computed Attributes
     , HasComputedApiUri (..)
+    , HasComputedAutomaticAttributesJson (..)
+    , HasComputedContentJson (..)
+    , HasComputedCookbookConstraints (..)
+    , HasComputedDataBagName (..)
+    , HasComputedDefaultAttributesJson (..)
+    , HasComputedDescription (..)
+    , HasComputedEnvironmentName (..)
     , HasComputedId (..)
+    , HasComputedName (..)
+    , HasComputedNormalAttributesJson (..)
+    , HasComputedOverrideAttributesJson (..)
+    , HasComputedRunList (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -113,14 +124,41 @@ class HasRunList a b | a -> b where
 instance HasRunList a b => HasRunList (TF.Schema l p a) b where
     runList = TF.configuration . runList
 
-class HasComputedApiUri a b | a -> b where
-    computedApiUri
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedApiUri =
-        to (\x -> TF.compute (TF.refKey x) "api_uri")
+class HasComputedApiUri a s b | a -> s b where
+    computedApiUri :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedAutomaticAttributesJson a s b | a -> s b where
+    computedAutomaticAttributesJson :: TF.Ref s a -> b
+
+class HasComputedContentJson a s b | a -> s b where
+    computedContentJson :: TF.Ref s a -> b
+
+class HasComputedCookbookConstraints a s b | a -> s b where
+    computedCookbookConstraints :: TF.Ref s a -> b
+
+class HasComputedDataBagName a s b | a -> s b where
+    computedDataBagName :: TF.Ref s a -> b
+
+class HasComputedDefaultAttributesJson a s b | a -> s b where
+    computedDefaultAttributesJson :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedEnvironmentName a s b | a -> s b where
+    computedEnvironmentName :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNormalAttributesJson a s b | a -> s b where
+    computedNormalAttributesJson :: TF.Ref s a -> b
+
+class HasComputedOverrideAttributesJson a s b | a -> s b where
+    computedOverrideAttributesJson :: TF.Ref s a -> b
+
+class HasComputedRunList a s b | a -> s b where
+    computedRunList :: TF.Ref s a -> b

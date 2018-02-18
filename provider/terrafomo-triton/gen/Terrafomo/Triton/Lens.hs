@@ -61,39 +61,63 @@ module Terrafomo.Triton.Lens
     , HasVlanId (..)
 
     -- ** Computed Attributes
+    , HasComputedAdministratorPw (..)
+    , HasComputedAffinity (..)
+    , HasComputedCloudConfig (..)
+    , HasComputedCns (..)
+    , HasComputedCnsEnabled (..)
     , HasComputedCreated (..)
     , HasComputedDataset (..)
     , HasComputedDescription (..)
     , HasComputedDisk (..)
+    , HasComputedEnabled (..)
+    , HasComputedEndpoint (..)
     , HasComputedFabric (..)
+    , HasComputedFirewallEnabled (..)
     , HasComputedGateway (..)
     , HasComputedId (..)
+    , HasComputedImage (..)
     , HasComputedInternetNat (..)
     , HasComputedIp (..)
     , HasComputedIps (..)
+    , HasComputedKey (..)
+    , HasComputedLocality (..)
     , HasComputedMac (..)
+    , HasComputedMachineId (..)
     , HasComputedMemory (..)
+    , HasComputedMetadata (..)
+    , HasComputedMostRecent (..)
     , HasComputedName (..)
     , HasComputedNetmask (..)
     , HasComputedNetwork (..)
+    , HasComputedNetworks (..)
     , HasComputedNic (..)
+    , HasComputedOs (..)
+    , HasComputedOwner (..)
+    , HasComputedPackage (..)
     , HasComputedPrimary (..)
     , HasComputedPrimaryip (..)
     , HasComputedProvisionEndIp (..)
     , HasComputedProvisionStartIp (..)
     , HasComputedPublic (..)
     , HasComputedResolvers (..)
+    , HasComputedRootAuthorizedKeys (..)
     , HasComputedRoutes (..)
+    , HasComputedRule (..)
     , HasComputedState (..)
     , HasComputedSubnet (..)
+    , HasComputedTags (..)
     , HasComputedType' (..)
     , HasComputedUpdated (..)
+    , HasComputedUserData (..)
+    , HasComputedUserScript (..)
+    , HasComputedVersion (..)
     , HasComputedVlanId (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -321,170 +345,158 @@ class HasVlanId a b | a -> b where
 instance HasVlanId a b => HasVlanId (TF.Schema l p a) b where
     vlanId = TF.configuration . vlanId
 
-class HasComputedCreated a b | a -> b where
-    computedCreated
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreated =
-        to (\x -> TF.compute (TF.refKey x) "created")
+class HasComputedAdministratorPw a s b | a -> s b where
+    computedAdministratorPw :: TF.Ref s a -> b
 
-class HasComputedDataset a b | a -> b where
-    computedDataset
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDataset =
-        to (\x -> TF.compute (TF.refKey x) "dataset")
+class HasComputedAffinity a s b | a -> s b where
+    computedAffinity :: TF.Ref s a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDescription =
-        to (\x -> TF.compute (TF.refKey x) "description")
+class HasComputedCloudConfig a s b | a -> s b where
+    computedCloudConfig :: TF.Ref s a -> b
 
-class HasComputedDisk a b | a -> b where
-    computedDisk
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDisk =
-        to (\x -> TF.compute (TF.refKey x) "disk")
+class HasComputedCns a s b | a -> s b where
+    computedCns :: TF.Ref s a -> b
 
-class HasComputedFabric a b | a -> b where
-    computedFabric
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFabric =
-        to (\x -> TF.compute (TF.refKey x) "fabric")
+class HasComputedCnsEnabled a s b | a -> s b where
+    computedCnsEnabled :: TF.Ref s a -> b
 
-class HasComputedGateway a b | a -> b where
-    computedGateway
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedGateway =
-        to (\x -> TF.compute (TF.refKey x) "gateway")
+class HasComputedCreated a s b | a -> s b where
+    computedCreated :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedDataset a s b | a -> s b where
+    computedDataset :: TF.Ref s a -> b
 
-class HasComputedInternetNat a b | a -> b where
-    computedInternetNat
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedInternetNat =
-        to (\x -> TF.compute (TF.refKey x) "internet_nat")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedIp a b | a -> b where
-    computedIp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIp =
-        to (\x -> TF.compute (TF.refKey x) "ip")
+class HasComputedDisk a s b | a -> s b where
+    computedDisk :: TF.Ref s a -> b
 
-class HasComputedIps a b | a -> b where
-    computedIps
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIps =
-        to (\x -> TF.compute (TF.refKey x) "ips")
+class HasComputedEnabled a s b | a -> s b where
+    computedEnabled :: TF.Ref s a -> b
 
-class HasComputedMac a b | a -> b where
-    computedMac
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMac =
-        to (\x -> TF.compute (TF.refKey x) "mac")
+class HasComputedEndpoint a s b | a -> s b where
+    computedEndpoint :: TF.Ref s a -> b
 
-class HasComputedMemory a b | a -> b where
-    computedMemory
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMemory =
-        to (\x -> TF.compute (TF.refKey x) "memory")
+class HasComputedFabric a s b | a -> s b where
+    computedFabric :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedFirewallEnabled a s b | a -> s b where
+    computedFirewallEnabled :: TF.Ref s a -> b
 
-class HasComputedNetmask a b | a -> b where
-    computedNetmask
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNetmask =
-        to (\x -> TF.compute (TF.refKey x) "netmask")
+class HasComputedGateway a s b | a -> s b where
+    computedGateway :: TF.Ref s a -> b
 
-class HasComputedNetwork a b | a -> b where
-    computedNetwork
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNetwork =
-        to (\x -> TF.compute (TF.refKey x) "network")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
 
-class HasComputedNic a b | a -> b where
-    computedNic
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNic =
-        to (\x -> TF.compute (TF.refKey x) "nic")
+class HasComputedImage a s b | a -> s b where
+    computedImage :: TF.Ref s a -> b
 
-class HasComputedPrimary a b | a -> b where
-    computedPrimary
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimary =
-        to (\x -> TF.compute (TF.refKey x) "primary")
+class HasComputedInternetNat a s b | a -> s b where
+    computedInternetNat :: TF.Ref s a -> b
 
-class HasComputedPrimaryip a b | a -> b where
-    computedPrimaryip
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryip =
-        to (\x -> TF.compute (TF.refKey x) "primaryip")
+class HasComputedIp a s b | a -> s b where
+    computedIp :: TF.Ref s a -> b
 
-class HasComputedProvisionEndIp a b | a -> b where
-    computedProvisionEndIp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedProvisionEndIp =
-        to (\x -> TF.compute (TF.refKey x) "provision_end_ip")
+class HasComputedIps a s b | a -> s b where
+    computedIps :: TF.Ref s a -> b
 
-class HasComputedProvisionStartIp a b | a -> b where
-    computedProvisionStartIp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedProvisionStartIp =
-        to (\x -> TF.compute (TF.refKey x) "provision_start_ip")
+class HasComputedKey a s b | a -> s b where
+    computedKey :: TF.Ref s a -> b
 
-class HasComputedPublic a b | a -> b where
-    computedPublic
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPublic =
-        to (\x -> TF.compute (TF.refKey x) "public")
+class HasComputedLocality a s b | a -> s b where
+    computedLocality :: TF.Ref s a -> b
 
-class HasComputedResolvers a b | a -> b where
-    computedResolvers
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedResolvers =
-        to (\x -> TF.compute (TF.refKey x) "resolvers")
+class HasComputedMac a s b | a -> s b where
+    computedMac :: TF.Ref s a -> b
 
-class HasComputedRoutes a b | a -> b where
-    computedRoutes
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRoutes =
-        to (\x -> TF.compute (TF.refKey x) "routes")
+class HasComputedMachineId a s b | a -> s b where
+    computedMachineId :: TF.Ref s a -> b
 
-class HasComputedState a b | a -> b where
-    computedState
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedState =
-        to (\x -> TF.compute (TF.refKey x) "state")
+class HasComputedMemory a s b | a -> s b where
+    computedMemory :: TF.Ref s a -> b
 
-class HasComputedSubnet a b | a -> b where
-    computedSubnet
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSubnet =
-        to (\x -> TF.compute (TF.refKey x) "subnet")
+class HasComputedMetadata a s b | a -> s b where
+    computedMetadata :: TF.Ref s a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
+class HasComputedMostRecent a s b | a -> s b where
+    computedMostRecent :: TF.Ref s a -> b
 
-class HasComputedUpdated a b | a -> b where
-    computedUpdated
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUpdated =
-        to (\x -> TF.compute (TF.refKey x) "updated")
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
 
-class HasComputedVlanId a b | a -> b where
-    computedVlanId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVlanId =
-        to (\x -> TF.compute (TF.refKey x) "vlan_id")
+class HasComputedNetmask a s b | a -> s b where
+    computedNetmask :: TF.Ref s a -> b
+
+class HasComputedNetwork a s b | a -> s b where
+    computedNetwork :: TF.Ref s a -> b
+
+class HasComputedNetworks a s b | a -> s b where
+    computedNetworks :: TF.Ref s a -> b
+
+class HasComputedNic a s b | a -> s b where
+    computedNic :: TF.Ref s a -> b
+
+class HasComputedOs a s b | a -> s b where
+    computedOs :: TF.Ref s a -> b
+
+class HasComputedOwner a s b | a -> s b where
+    computedOwner :: TF.Ref s a -> b
+
+class HasComputedPackage a s b | a -> s b where
+    computedPackage :: TF.Ref s a -> b
+
+class HasComputedPrimary a s b | a -> s b where
+    computedPrimary :: TF.Ref s a -> b
+
+class HasComputedPrimaryip a s b | a -> s b where
+    computedPrimaryip :: TF.Ref s a -> b
+
+class HasComputedProvisionEndIp a s b | a -> s b where
+    computedProvisionEndIp :: TF.Ref s a -> b
+
+class HasComputedProvisionStartIp a s b | a -> s b where
+    computedProvisionStartIp :: TF.Ref s a -> b
+
+class HasComputedPublic a s b | a -> s b where
+    computedPublic :: TF.Ref s a -> b
+
+class HasComputedResolvers a s b | a -> s b where
+    computedResolvers :: TF.Ref s a -> b
+
+class HasComputedRootAuthorizedKeys a s b | a -> s b where
+    computedRootAuthorizedKeys :: TF.Ref s a -> b
+
+class HasComputedRoutes a s b | a -> s b where
+    computedRoutes :: TF.Ref s a -> b
+
+class HasComputedRule a s b | a -> s b where
+    computedRule :: TF.Ref s a -> b
+
+class HasComputedState a s b | a -> s b where
+    computedState :: TF.Ref s a -> b
+
+class HasComputedSubnet a s b | a -> s b where
+    computedSubnet :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUpdated a s b | a -> s b where
+    computedUpdated :: TF.Ref s a -> b
+
+class HasComputedUserData a s b | a -> s b where
+    computedUserData :: TF.Ref s a -> b
+
+class HasComputedUserScript a s b | a -> s b where
+    computedUserScript :: TF.Ref s a -> b
+
+class HasComputedVersion a s b | a -> s b where
+    computedVersion :: TF.Ref s a -> b
+
+class HasComputedVlanId a s b | a -> s b where
+    computedVlanId :: TF.Ref s a -> b

@@ -41,12 +41,29 @@ module Terrafomo.Spotinst.Lens
     , HasThreshold (..)
 
     -- ** Computed Attributes
+    , HasComputedCapacity (..)
+    , HasComputedCheck (..)
+    , HasComputedDescription (..)
+    , HasComputedElasticIps (..)
+    , HasComputedEndpoint (..)
+    , HasComputedEventType (..)
+    , HasComputedFormat (..)
     , HasComputedId (..)
+    , HasComputedInstanceTypes (..)
+    , HasComputedLaunchSpecification (..)
+    , HasComputedName (..)
+    , HasComputedProduct (..)
+    , HasComputedProtocol (..)
+    , HasComputedProxy (..)
+    , HasComputedResourceId (..)
+    , HasComputedStrategy (..)
+    , HasComputedTags (..)
+    , HasComputedThreshold (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -154,8 +171,56 @@ class HasThreshold a b | a -> b where
 instance HasThreshold a b => HasThreshold (TF.Schema l p a) b where
     threshold = TF.configuration . threshold
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedCapacity a s b | a -> s b where
+    computedCapacity :: TF.Ref s a -> b
+
+class HasComputedCheck a s b | a -> s b where
+    computedCheck :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedElasticIps a s b | a -> s b where
+    computedElasticIps :: TF.Ref s a -> b
+
+class HasComputedEndpoint a s b | a -> s b where
+    computedEndpoint :: TF.Ref s a -> b
+
+class HasComputedEventType a s b | a -> s b where
+    computedEventType :: TF.Ref s a -> b
+
+class HasComputedFormat a s b | a -> s b where
+    computedFormat :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedInstanceTypes a s b | a -> s b where
+    computedInstanceTypes :: TF.Ref s a -> b
+
+class HasComputedLaunchSpecification a s b | a -> s b where
+    computedLaunchSpecification :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedProduct a s b | a -> s b where
+    computedProduct :: TF.Ref s a -> b
+
+class HasComputedProtocol a s b | a -> s b where
+    computedProtocol :: TF.Ref s a -> b
+
+class HasComputedProxy a s b | a -> s b where
+    computedProxy :: TF.Ref s a -> b
+
+class HasComputedResourceId a s b | a -> s b where
+    computedResourceId :: TF.Ref s a -> b
+
+class HasComputedStrategy a s b | a -> s b where
+    computedStrategy :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedThreshold a s b | a -> s b where
+    computedThreshold :: TF.Ref s a -> b

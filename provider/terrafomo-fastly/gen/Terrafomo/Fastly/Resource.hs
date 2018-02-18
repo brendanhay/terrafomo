@@ -51,16 +51,25 @@ module Terrafomo.Fastly.Resource
     -- ** Computed Attributes
     , P.HasComputedActiveVersion (..)
     , P.HasComputedBackend (..)
+    , P.HasComputedCacheSetting (..)
+    , P.HasComputedCondition (..)
     , P.HasComputedDefaultHost (..)
     , P.HasComputedDefaultTtl (..)
     , P.HasComputedDomain (..)
     , P.HasComputedForceDestroy (..)
+    , P.HasComputedGcslogging (..)
+    , P.HasComputedGzip (..)
     , P.HasComputedHeader (..)
+    , P.HasComputedHealthcheck (..)
     , P.HasComputedId (..)
+    , P.HasComputedLogentries (..)
     , P.HasComputedName (..)
     , P.HasComputedPapertrail (..)
+    , P.HasComputedRequestSetting (..)
     , P.HasComputedResponseObject (..)
     , P.HasComputedS3logging (..)
+    , P.HasComputedSumologic (..)
+    , P.HasComputedSyslog (..)
     , P.HasComputedVcl (..)
 
     -- * Re-exported Types
@@ -71,7 +80,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -86,6 +95,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @fastly_service_v1@ Fastly resource.
@@ -265,19 +275,89 @@ instance P.HasVcl (ServiceV1Resource s) (TF.Attr s Text) where
         lens (_vcl :: ServiceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _vcl = a } :: ServiceV1Resource s)
 
-instance P.HasComputedActiveVersion (ServiceV1Resource s) (Text)
-instance P.HasComputedBackend (ServiceV1Resource s) (Text)
-instance P.HasComputedDefaultHost (ServiceV1Resource s) (Text)
-instance P.HasComputedDefaultTtl (ServiceV1Resource s) (Text)
-instance P.HasComputedDomain (ServiceV1Resource s) (Text)
-instance P.HasComputedForceDestroy (ServiceV1Resource s) (Text)
-instance P.HasComputedHeader (ServiceV1Resource s) (Text)
-instance P.HasComputedId (ServiceV1Resource s) (Text)
-instance P.HasComputedName (ServiceV1Resource s) (Text)
-instance P.HasComputedPapertrail (ServiceV1Resource s) (Text)
-instance P.HasComputedResponseObject (ServiceV1Resource s) (Text)
-instance P.HasComputedS3logging (ServiceV1Resource s) (Text)
-instance P.HasComputedVcl (ServiceV1Resource s) (Text)
+instance P.HasComputedActiveVersion (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedActiveVersion x = TF.compute (TF.refKey x) "active_version"
+
+instance P.HasComputedBackend (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedBackend x = TF.compute (TF.refKey x) "backend"
+
+instance P.HasComputedCacheSetting (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedCacheSetting =
+        (_cache_setting :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCondition (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedCondition =
+        (_condition :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDefaultHost (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedDefaultHost x = TF.compute (TF.refKey x) "default_host"
+
+instance P.HasComputedDefaultTtl (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedDefaultTtl x = TF.compute (TF.refKey x) "default_ttl"
+
+instance P.HasComputedDomain (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedDomain x = TF.compute (TF.refKey x) "domain"
+
+instance P.HasComputedForceDestroy (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedForceDestroy x = TF.compute (TF.refKey x) "force_destroy"
+
+instance P.HasComputedGcslogging (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedGcslogging =
+        (_gcslogging :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGzip (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedGzip =
+        (_gzip :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHeader (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedHeader x = TF.compute (TF.refKey x) "header"
+
+instance P.HasComputedHealthcheck (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedHealthcheck =
+        (_healthcheck :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLogentries (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedLogentries =
+        (_logentries :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPapertrail (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedPapertrail x = TF.compute (TF.refKey x) "papertrail"
+
+instance P.HasComputedRequestSetting (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedRequestSetting =
+        (_request_setting :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedResponseObject (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedResponseObject x = TF.compute (TF.refKey x) "response_object"
+
+instance P.HasComputedS3logging (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedS3logging x = TF.compute (TF.refKey x) "s3logging"
+
+instance P.HasComputedSumologic (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedSumologic =
+        (_sumologic :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSyslog (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedSyslog =
+        (_syslog :: ServiceV1Resource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedVcl (ServiceV1Resource s) s (TF.Attr s Text) where
+    computedVcl x = TF.compute (TF.refKey x) "vcl"
 
 serviceV1Resource :: TF.Schema TF.Resource P.Fastly (ServiceV1Resource s)
 serviceV1Resource =

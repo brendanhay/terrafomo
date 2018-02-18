@@ -34,12 +34,14 @@ module Terrafomo.CloudStack.DataSource
     , P.HasComputedAccount (..)
     , P.HasComputedCreated (..)
     , P.HasComputedDisplayText (..)
+    , P.HasComputedFilter (..)
     , P.HasComputedFormat (..)
     , P.HasComputedHypervisor (..)
     , P.HasComputedId (..)
     , P.HasComputedName (..)
     , P.HasComputedSize (..)
     , P.HasComputedTags (..)
+    , P.HasComputedTemplateFilter (..)
 
     -- * Re-exported Types
     , module P
@@ -49,7 +51,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -64,6 +66,7 @@ import qualified Terrafomo.IP                  as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @cloudstack_template@ CloudStack datasource.
@@ -93,15 +96,42 @@ instance P.HasTemplateFilter (TemplateData s) (TF.Attr s Text) where
         lens (_template_filter :: TemplateData s -> TF.Attr s Text)
              (\s a -> s { _template_filter = a } :: TemplateData s)
 
-instance P.HasComputedAccount (TemplateData s) (Text)
-instance P.HasComputedCreated (TemplateData s) (Text)
-instance P.HasComputedDisplayText (TemplateData s) (Text)
-instance P.HasComputedFormat (TemplateData s) (Text)
-instance P.HasComputedHypervisor (TemplateData s) (Text)
-instance P.HasComputedId (TemplateData s) (Text)
-instance P.HasComputedName (TemplateData s) (Text)
-instance P.HasComputedSize (TemplateData s) (Text)
-instance P.HasComputedTags (TemplateData s) (Text)
+instance P.HasComputedAccount (TemplateData s) s (TF.Attr s Text) where
+    computedAccount x = TF.compute (TF.refKey x) "account"
+
+instance P.HasComputedCreated (TemplateData s) s (TF.Attr s Text) where
+    computedCreated x = TF.compute (TF.refKey x) "created"
+
+instance P.HasComputedDisplayText (TemplateData s) s (TF.Attr s Text) where
+    computedDisplayText x = TF.compute (TF.refKey x) "display_text"
+
+instance P.HasComputedFilter (TemplateData s) s (TF.Attr s Text) where
+    computedFilter =
+        (_filter :: TemplateData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFormat (TemplateData s) s (TF.Attr s Text) where
+    computedFormat x = TF.compute (TF.refKey x) "format"
+
+instance P.HasComputedHypervisor (TemplateData s) s (TF.Attr s Text) where
+    computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
+
+instance P.HasComputedId (TemplateData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (TemplateData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedSize (TemplateData s) s (TF.Attr s Text) where
+    computedSize x = TF.compute (TF.refKey x) "size"
+
+instance P.HasComputedTags (TemplateData s) s (TF.Attr s Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance P.HasComputedTemplateFilter (TemplateData s) s (TF.Attr s Text) where
+    computedTemplateFilter =
+        (_template_filter :: TemplateData s -> TF.Attr s Text)
+            . TF.refValue
 
 templateData :: TF.Schema TF.DataSource P.CloudStack (TemplateData s)
 templateData =

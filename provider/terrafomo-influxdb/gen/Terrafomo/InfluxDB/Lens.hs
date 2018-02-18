@@ -32,11 +32,17 @@ module Terrafomo.InfluxDB.Lens
 
     -- ** Computed Attributes
     , HasComputedAdmin (..)
+    , HasComputedDatabase (..)
+    , HasComputedGrant (..)
+    , HasComputedName (..)
+    , HasComputedPassword (..)
+    , HasComputedQuery (..)
+    , HasComputedRetentionPolicies (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -84,8 +90,23 @@ class HasRetentionPolicies a b | a -> b where
 instance HasRetentionPolicies a b => HasRetentionPolicies (TF.Schema l p a) b where
     retentionPolicies = TF.configuration . retentionPolicies
 
-class HasComputedAdmin a b | a -> b where
-    computedAdmin
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAdmin =
-        to (\x -> TF.compute (TF.refKey x) "admin")
+class HasComputedAdmin a s b | a -> s b where
+    computedAdmin :: TF.Ref s a -> b
+
+class HasComputedDatabase a s b | a -> s b where
+    computedDatabase :: TF.Ref s a -> b
+
+class HasComputedGrant a s b | a -> s b where
+    computedGrant :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedPassword a s b | a -> s b where
+    computedPassword :: TF.Ref s a -> b
+
+class HasComputedQuery a s b | a -> s b where
+    computedQuery :: TF.Ref s a -> b
+
+class HasComputedRetentionPolicies a s b | a -> s b where
+    computedRetentionPolicies :: TF.Ref s a -> b

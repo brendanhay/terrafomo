@@ -67,19 +67,61 @@ module Terrafomo.Docker.Lens
 
     -- ** Computed Attributes
     , HasComputedBridge (..)
+    , HasComputedCapabilities (..)
+    , HasComputedCheckDuplicate (..)
+    , HasComputedCommand (..)
+    , HasComputedCpuShares (..)
+    , HasComputedDestroyGraceSeconds (..)
+    , HasComputedDns (..)
+    , HasComputedDnsOpts (..)
+    , HasComputedDnsSearch (..)
+    , HasComputedDomainname (..)
+    , HasComputedDriver (..)
+    , HasComputedDriverOpts (..)
+    , HasComputedEntrypoint (..)
+    , HasComputedEnv (..)
     , HasComputedGateway (..)
+    , HasComputedHost (..)
+    , HasComputedHostname (..)
     , HasComputedId (..)
+    , HasComputedImage (..)
+    , HasComputedInternal (..)
     , HasComputedIpAddress (..)
     , HasComputedIpPrefixLength (..)
+    , HasComputedIpamConfig (..)
+    , HasComputedIpamDriver (..)
+    , HasComputedKeepLocally (..)
+    , HasComputedLabels (..)
     , HasComputedLatest (..)
+    , HasComputedLinks (..)
+    , HasComputedLogDriver (..)
+    , HasComputedLogOpts (..)
+    , HasComputedMaxRetryCount (..)
+    , HasComputedMemory (..)
+    , HasComputedMemorySwap (..)
     , HasComputedMountpoint (..)
+    , HasComputedMustRun (..)
+    , HasComputedName (..)
+    , HasComputedNetworkAlias (..)
+    , HasComputedNetworkMode (..)
+    , HasComputedNetworks (..)
+    , HasComputedOptions (..)
+    , HasComputedPorts (..)
+    , HasComputedPrivileged (..)
+    , HasComputedPublishAllPorts (..)
+    , HasComputedPullTrigger (..)
+    , HasComputedPullTriggers (..)
+    , HasComputedRestart (..)
     , HasComputedScope (..)
     , HasComputedSha256Digest (..)
+    , HasComputedUpload (..)
+    , HasComputedUser (..)
+    , HasComputedVolumes (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -337,56 +379,155 @@ class HasVolumes a b | a -> b where
 instance HasVolumes a b => HasVolumes (TF.Schema l p a) b where
     volumes = TF.configuration . volumes
 
-class HasComputedBridge a b | a -> b where
-    computedBridge
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedBridge =
-        to (\x -> TF.compute (TF.refKey x) "bridge")
+class HasComputedBridge a s b | a -> s b where
+    computedBridge :: TF.Ref s a -> b
 
-class HasComputedGateway a b | a -> b where
-    computedGateway
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedGateway =
-        to (\x -> TF.compute (TF.refKey x) "gateway")
+class HasComputedCapabilities a s b | a -> s b where
+    computedCapabilities :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedCheckDuplicate a s b | a -> s b where
+    computedCheckDuplicate :: TF.Ref s a -> b
 
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpAddress =
-        to (\x -> TF.compute (TF.refKey x) "ip_address")
+class HasComputedCommand a s b | a -> s b where
+    computedCommand :: TF.Ref s a -> b
 
-class HasComputedIpPrefixLength a b | a -> b where
-    computedIpPrefixLength
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpPrefixLength =
-        to (\x -> TF.compute (TF.refKey x) "ip_prefix_length")
+class HasComputedCpuShares a s b | a -> s b where
+    computedCpuShares :: TF.Ref s a -> b
 
-class HasComputedLatest a b | a -> b where
-    computedLatest
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLatest =
-        to (\x -> TF.compute (TF.refKey x) "latest")
+class HasComputedDestroyGraceSeconds a s b | a -> s b where
+    computedDestroyGraceSeconds :: TF.Ref s a -> b
 
-class HasComputedMountpoint a b | a -> b where
-    computedMountpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMountpoint =
-        to (\x -> TF.compute (TF.refKey x) "mountpoint")
+class HasComputedDns a s b | a -> s b where
+    computedDns :: TF.Ref s a -> b
 
-class HasComputedScope a b | a -> b where
-    computedScope
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedScope =
-        to (\x -> TF.compute (TF.refKey x) "scope")
+class HasComputedDnsOpts a s b | a -> s b where
+    computedDnsOpts :: TF.Ref s a -> b
 
-class HasComputedSha256Digest a b | a -> b where
-    computedSha256Digest
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSha256Digest =
-        to (\x -> TF.compute (TF.refKey x) "sha256_digest")
+class HasComputedDnsSearch a s b | a -> s b where
+    computedDnsSearch :: TF.Ref s a -> b
+
+class HasComputedDomainname a s b | a -> s b where
+    computedDomainname :: TF.Ref s a -> b
+
+class HasComputedDriver a s b | a -> s b where
+    computedDriver :: TF.Ref s a -> b
+
+class HasComputedDriverOpts a s b | a -> s b where
+    computedDriverOpts :: TF.Ref s a -> b
+
+class HasComputedEntrypoint a s b | a -> s b where
+    computedEntrypoint :: TF.Ref s a -> b
+
+class HasComputedEnv a s b | a -> s b where
+    computedEnv :: TF.Ref s a -> b
+
+class HasComputedGateway a s b | a -> s b where
+    computedGateway :: TF.Ref s a -> b
+
+class HasComputedHost a s b | a -> s b where
+    computedHost :: TF.Ref s a -> b
+
+class HasComputedHostname a s b | a -> s b where
+    computedHostname :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedImage a s b | a -> s b where
+    computedImage :: TF.Ref s a -> b
+
+class HasComputedInternal a s b | a -> s b where
+    computedInternal :: TF.Ref s a -> b
+
+class HasComputedIpAddress a s b | a -> s b where
+    computedIpAddress :: TF.Ref s a -> b
+
+class HasComputedIpPrefixLength a s b | a -> s b where
+    computedIpPrefixLength :: TF.Ref s a -> b
+
+class HasComputedIpamConfig a s b | a -> s b where
+    computedIpamConfig :: TF.Ref s a -> b
+
+class HasComputedIpamDriver a s b | a -> s b where
+    computedIpamDriver :: TF.Ref s a -> b
+
+class HasComputedKeepLocally a s b | a -> s b where
+    computedKeepLocally :: TF.Ref s a -> b
+
+class HasComputedLabels a s b | a -> s b where
+    computedLabels :: TF.Ref s a -> b
+
+class HasComputedLatest a s b | a -> s b where
+    computedLatest :: TF.Ref s a -> b
+
+class HasComputedLinks a s b | a -> s b where
+    computedLinks :: TF.Ref s a -> b
+
+class HasComputedLogDriver a s b | a -> s b where
+    computedLogDriver :: TF.Ref s a -> b
+
+class HasComputedLogOpts a s b | a -> s b where
+    computedLogOpts :: TF.Ref s a -> b
+
+class HasComputedMaxRetryCount a s b | a -> s b where
+    computedMaxRetryCount :: TF.Ref s a -> b
+
+class HasComputedMemory a s b | a -> s b where
+    computedMemory :: TF.Ref s a -> b
+
+class HasComputedMemorySwap a s b | a -> s b where
+    computedMemorySwap :: TF.Ref s a -> b
+
+class HasComputedMountpoint a s b | a -> s b where
+    computedMountpoint :: TF.Ref s a -> b
+
+class HasComputedMustRun a s b | a -> s b where
+    computedMustRun :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNetworkAlias a s b | a -> s b where
+    computedNetworkAlias :: TF.Ref s a -> b
+
+class HasComputedNetworkMode a s b | a -> s b where
+    computedNetworkMode :: TF.Ref s a -> b
+
+class HasComputedNetworks a s b | a -> s b where
+    computedNetworks :: TF.Ref s a -> b
+
+class HasComputedOptions a s b | a -> s b where
+    computedOptions :: TF.Ref s a -> b
+
+class HasComputedPorts a s b | a -> s b where
+    computedPorts :: TF.Ref s a -> b
+
+class HasComputedPrivileged a s b | a -> s b where
+    computedPrivileged :: TF.Ref s a -> b
+
+class HasComputedPublishAllPorts a s b | a -> s b where
+    computedPublishAllPorts :: TF.Ref s a -> b
+
+class HasComputedPullTrigger a s b | a -> s b where
+    computedPullTrigger :: TF.Ref s a -> b
+
+class HasComputedPullTriggers a s b | a -> s b where
+    computedPullTriggers :: TF.Ref s a -> b
+
+class HasComputedRestart a s b | a -> s b where
+    computedRestart :: TF.Ref s a -> b
+
+class HasComputedScope a s b | a -> s b where
+    computedScope :: TF.Ref s a -> b
+
+class HasComputedSha256Digest a s b | a -> s b where
+    computedSha256Digest :: TF.Ref s a -> b
+
+class HasComputedUpload a s b | a -> s b where
+    computedUpload :: TF.Ref s a -> b
+
+class HasComputedUser a s b | a -> s b where
+    computedUser :: TF.Ref s a -> b
+
+class HasComputedVolumes a s b | a -> s b where
+    computedVolumes :: TF.Ref s a -> b

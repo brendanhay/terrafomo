@@ -29,11 +29,16 @@ module Terrafomo.PowerDNS.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
+    , HasComputedName (..)
+    , HasComputedRecords (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedZone (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -68,3 +73,18 @@ class HasZone a b | a -> b where
 
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedRecords a s b | a -> s b where
+    computedRecords :: TF.Ref s a -> b
+
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedZone a s b | a -> s b where
+    computedZone :: TF.Ref s a -> b

@@ -63,14 +63,52 @@ module Terrafomo.Datadog.Lens
     , HasUnit (..)
 
     -- ** Computed Attributes
+    , HasComputedActive (..)
+    , HasComputedDescription (..)
     , HasComputedDisabled (..)
+    , HasComputedEmail (..)
+    , HasComputedEnd (..)
+    , HasComputedEscalationMessage (..)
+    , HasComputedEvaluationDelay (..)
+    , HasComputedGraph (..)
+    , HasComputedHandle (..)
     , HasComputedId (..)
+    , HasComputedIncludeTags (..)
+    , HasComputedIsAdmin (..)
+    , HasComputedLocked (..)
+    , HasComputedMessage (..)
+    , HasComputedMetric (..)
+    , HasComputedMonitorId (..)
+    , HasComputedName (..)
+    , HasComputedNewHostDelay (..)
+    , HasComputedNoDataTimeframe (..)
+    , HasComputedNotifyAudit (..)
+    , HasComputedNotifyNoData (..)
+    , HasComputedPerUnit (..)
+    , HasComputedQuery (..)
+    , HasComputedReadOnly (..)
+    , HasComputedRecurrence (..)
+    , HasComputedRenotifyInterval (..)
+    , HasComputedRequireFullWindow (..)
+    , HasComputedRole (..)
+    , HasComputedScope (..)
+    , HasComputedShortName (..)
+    , HasComputedSilenced (..)
+    , HasComputedStart (..)
+    , HasComputedStatsdInterval (..)
+    , HasComputedTags (..)
+    , HasComputedTemplateVariable (..)
+    , HasComputedThresholds (..)
+    , HasComputedTimeoutH (..)
+    , HasComputedTitle (..)
+    , HasComputedType' (..)
+    , HasComputedUnit (..)
     , HasComputedVerified (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -310,20 +348,125 @@ class HasUnit a b | a -> b where
 instance HasUnit a b => HasUnit (TF.Schema l p a) b where
     unit = TF.configuration . unit
 
-class HasComputedDisabled a b | a -> b where
-    computedDisabled
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDisabled =
-        to (\x -> TF.compute (TF.refKey x) "disabled")
+class HasComputedActive a s b | a -> s b where
+    computedActive :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedVerified a b | a -> b where
-    computedVerified
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVerified =
-        to (\x -> TF.compute (TF.refKey x) "verified")
+class HasComputedDisabled a s b | a -> s b where
+    computedDisabled :: TF.Ref s a -> b
+
+class HasComputedEmail a s b | a -> s b where
+    computedEmail :: TF.Ref s a -> b
+
+class HasComputedEnd a s b | a -> s b where
+    computedEnd :: TF.Ref s a -> b
+
+class HasComputedEscalationMessage a s b | a -> s b where
+    computedEscalationMessage :: TF.Ref s a -> b
+
+class HasComputedEvaluationDelay a s b | a -> s b where
+    computedEvaluationDelay :: TF.Ref s a -> b
+
+class HasComputedGraph a s b | a -> s b where
+    computedGraph :: TF.Ref s a -> b
+
+class HasComputedHandle a s b | a -> s b where
+    computedHandle :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedIncludeTags a s b | a -> s b where
+    computedIncludeTags :: TF.Ref s a -> b
+
+class HasComputedIsAdmin a s b | a -> s b where
+    computedIsAdmin :: TF.Ref s a -> b
+
+class HasComputedLocked a s b | a -> s b where
+    computedLocked :: TF.Ref s a -> b
+
+class HasComputedMessage a s b | a -> s b where
+    computedMessage :: TF.Ref s a -> b
+
+class HasComputedMetric a s b | a -> s b where
+    computedMetric :: TF.Ref s a -> b
+
+class HasComputedMonitorId a s b | a -> s b where
+    computedMonitorId :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNewHostDelay a s b | a -> s b where
+    computedNewHostDelay :: TF.Ref s a -> b
+
+class HasComputedNoDataTimeframe a s b | a -> s b where
+    computedNoDataTimeframe :: TF.Ref s a -> b
+
+class HasComputedNotifyAudit a s b | a -> s b where
+    computedNotifyAudit :: TF.Ref s a -> b
+
+class HasComputedNotifyNoData a s b | a -> s b where
+    computedNotifyNoData :: TF.Ref s a -> b
+
+class HasComputedPerUnit a s b | a -> s b where
+    computedPerUnit :: TF.Ref s a -> b
+
+class HasComputedQuery a s b | a -> s b where
+    computedQuery :: TF.Ref s a -> b
+
+class HasComputedReadOnly a s b | a -> s b where
+    computedReadOnly :: TF.Ref s a -> b
+
+class HasComputedRecurrence a s b | a -> s b where
+    computedRecurrence :: TF.Ref s a -> b
+
+class HasComputedRenotifyInterval a s b | a -> s b where
+    computedRenotifyInterval :: TF.Ref s a -> b
+
+class HasComputedRequireFullWindow a s b | a -> s b where
+    computedRequireFullWindow :: TF.Ref s a -> b
+
+class HasComputedRole a s b | a -> s b where
+    computedRole :: TF.Ref s a -> b
+
+class HasComputedScope a s b | a -> s b where
+    computedScope :: TF.Ref s a -> b
+
+class HasComputedShortName a s b | a -> s b where
+    computedShortName :: TF.Ref s a -> b
+
+class HasComputedSilenced a s b | a -> s b where
+    computedSilenced :: TF.Ref s a -> b
+
+class HasComputedStart a s b | a -> s b where
+    computedStart :: TF.Ref s a -> b
+
+class HasComputedStatsdInterval a s b | a -> s b where
+    computedStatsdInterval :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedTemplateVariable a s b | a -> s b where
+    computedTemplateVariable :: TF.Ref s a -> b
+
+class HasComputedThresholds a s b | a -> s b where
+    computedThresholds :: TF.Ref s a -> b
+
+class HasComputedTimeoutH a s b | a -> s b where
+    computedTimeoutH :: TF.Ref s a -> b
+
+class HasComputedTitle a s b | a -> s b where
+    computedTitle :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUnit a s b | a -> s b where
+    computedUnit :: TF.Ref s a -> b
+
+class HasComputedVerified a s b | a -> s b where
+    computedVerified :: TF.Ref s a -> b

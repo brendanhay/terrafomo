@@ -46,7 +46,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -61,6 +61,7 @@ import qualified Terrafomo.IP                    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @digitalocean_image@ DigitalOcean datasource.
@@ -84,13 +85,26 @@ instance P.HasName (ImageData s) (TF.Attr s Text) where
         lens (_name :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageData s)
 
-instance P.HasComputedImage (ImageData s) (Text)
-instance P.HasComputedMinDiskSize (ImageData s) (Text)
-instance P.HasComputedName (ImageData s) (Text)
-instance P.HasComputedPrivate (ImageData s) (Text)
-instance P.HasComputedRegions (ImageData s) (Text)
-instance P.HasComputedSizeGigabytes (ImageData s) (Text)
-instance P.HasComputedType' (ImageData s) (Text)
+instance P.HasComputedImage (ImageData s) s (TF.Attr s Text) where
+    computedImage x = TF.compute (TF.refKey x) "image"
+
+instance P.HasComputedMinDiskSize (ImageData s) s (TF.Attr s Text) where
+    computedMinDiskSize x = TF.compute (TF.refKey x) "min_disk_size"
+
+instance P.HasComputedName (ImageData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPrivate (ImageData s) s (TF.Attr s Text) where
+    computedPrivate x = TF.compute (TF.refKey x) "private"
+
+instance P.HasComputedRegions (ImageData s) s (TF.Attr s Text) where
+    computedRegions x = TF.compute (TF.refKey x) "regions"
+
+instance P.HasComputedSizeGigabytes (ImageData s) s (TF.Attr s Text) where
+    computedSizeGigabytes x = TF.compute (TF.refKey x) "size_gigabytes"
+
+instance P.HasComputedType' (ImageData s) s (TF.Attr s Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
 imageData :: TF.Schema TF.DataSource P.DigitalOcean (ImageData s)
 imageData =

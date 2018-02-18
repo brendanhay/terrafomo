@@ -90,6 +90,43 @@ module Terrafomo.NS1.Resource
     , P.HasZone (..)
 
     -- ** Computed Attributes
+    , P.HasComputedActive (..)
+    , P.HasComputedAnswers (..)
+    , P.HasComputedConfig (..)
+    , P.HasComputedDomain (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedExpiry (..)
+    , P.HasComputedFilters (..)
+    , P.HasComputedFrequency (..)
+    , P.HasComputedJobType (..)
+    , P.HasComputedKey (..)
+    , P.HasComputedLink (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNotes (..)
+    , P.HasComputedNotifications (..)
+    , P.HasComputedNotify (..)
+    , P.HasComputedNotifyDelay (..)
+    , P.HasComputedNotifyFailback (..)
+    , P.HasComputedNotifyList (..)
+    , P.HasComputedNotifyRegional (..)
+    , P.HasComputedNotifyRepeat (..)
+    , P.HasComputedNxTtl (..)
+    , P.HasComputedPermissions (..)
+    , P.HasComputedPolicy (..)
+    , P.HasComputedPrimary (..)
+    , P.HasComputedRapidRecheck (..)
+    , P.HasComputedRefresh (..)
+    , P.HasComputedRegions (..)
+    , P.HasComputedRetry (..)
+    , P.HasComputedRules (..)
+    , P.HasComputedSourceId (..)
+    , P.HasComputedSourcetype (..)
+    , P.HasComputedTeams (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUseClientSubnet (..)
+    , P.HasComputedUsername (..)
+    , P.HasComputedZone (..)
 
     -- * Re-exported Types
     , module P
@@ -99,7 +136,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -114,6 +151,7 @@ import           Terrafomo.NS1.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @ns1_apikey@ NS1 resource.
@@ -160,6 +198,25 @@ instance P.HasTeams (ApikeyResource s) (TF.Attr s Text) where
         lens (_teams :: ApikeyResource s -> TF.Attr s Text)
              (\s a -> s { _teams = a } :: ApikeyResource s)
 
+instance P.HasComputedKey (ApikeyResource s) s (TF.Attr s Text) where
+    computedKey =
+        (_key :: ApikeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ApikeyResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ApikeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPermissions (ApikeyResource s) s (TF.Attr s Text) where
+    computedPermissions =
+        (_permissions :: ApikeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTeams (ApikeyResource s) s (TF.Attr s Text) where
+    computedTeams =
+        (_teams :: ApikeyResource s -> TF.Attr s Text)
+            . TF.refValue
 
 apikeyResource :: TF.Schema TF.Resource P.NS1 (ApikeyResource s)
 apikeyResource =
@@ -207,6 +264,20 @@ instance P.HasSourceId (DatafeedResource s) (TF.Attr s Text) where
         lens (_source_id :: DatafeedResource s -> TF.Attr s Text)
              (\s a -> s { _source_id = a } :: DatafeedResource s)
 
+instance P.HasComputedConfig (DatafeedResource s) s (TF.Attr s Text) where
+    computedConfig =
+        (_config :: DatafeedResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (DatafeedResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: DatafeedResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSourceId (DatafeedResource s) s (TF.Attr s Text) where
+    computedSourceId =
+        (_source_id :: DatafeedResource s -> TF.Attr s Text)
+            . TF.refValue
 
 datafeedResource :: TF.Schema TF.Resource P.NS1 (DatafeedResource s)
 datafeedResource =
@@ -253,6 +324,20 @@ instance P.HasSourcetype (DatasourceResource s) (TF.Attr s Text) where
         lens (_sourcetype :: DatasourceResource s -> TF.Attr s Text)
              (\s a -> s { _sourcetype = a } :: DatasourceResource s)
 
+instance P.HasComputedConfig (DatasourceResource s) s (TF.Attr s Text) where
+    computedConfig =
+        (_config :: DatasourceResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (DatasourceResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: DatasourceResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSourcetype (DatasourceResource s) s (TF.Attr s Text) where
+    computedSourcetype =
+        (_sourcetype :: DatasourceResource s -> TF.Attr s Text)
+            . TF.refValue
 
 datasourceResource :: TF.Schema TF.Resource P.NS1 (DatasourceResource s)
 datasourceResource =
@@ -395,6 +480,80 @@ instance P.HasRules (MonitoringjobResource s) (TF.Attr s Text) where
         lens (_rules :: MonitoringjobResource s -> TF.Attr s Text)
              (\s a -> s { _rules = a } :: MonitoringjobResource s)
 
+instance P.HasComputedActive (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedActive =
+        (_active :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedConfig (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedConfig =
+        (_config :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFrequency (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedFrequency =
+        (_frequency :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedJobType (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedJobType =
+        (_job_type :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotes (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedNotes =
+        (_notes :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotifyDelay (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedNotifyDelay =
+        (_notify_delay :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotifyFailback (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedNotifyFailback =
+        (_notify_failback :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotifyList (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedNotifyList =
+        (_notify_list :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotifyRegional (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedNotifyRegional =
+        (_notify_regional :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotifyRepeat (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedNotifyRepeat =
+        (_notify_repeat :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPolicy (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedPolicy =
+        (_policy :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRapidRecheck (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedRapidRecheck =
+        (_rapid_recheck :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegions (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedRegions =
+        (_regions :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRules (MonitoringjobResource s) s (TF.Attr s Text) where
+    computedRules =
+        (_rules :: MonitoringjobResource s -> TF.Attr s Text)
+            . TF.refValue
 
 monitoringjobResource :: TF.Schema TF.Resource P.NS1 (MonitoringjobResource s)
 monitoringjobResource =
@@ -445,6 +604,15 @@ instance P.HasNotifications (NotifylistResource s) (TF.Attr s Text) where
         lens (_notifications :: NotifylistResource s -> TF.Attr s Text)
              (\s a -> s { _notifications = a } :: NotifylistResource s)
 
+instance P.HasComputedName (NotifylistResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: NotifylistResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotifications (NotifylistResource s) s (TF.Attr s Text) where
+    computedNotifications =
+        (_notifications :: NotifylistResource s -> TF.Attr s Text)
+            . TF.refValue
 
 notifylistResource :: TF.Schema TF.Resource P.NS1 (NotifylistResource s)
 notifylistResource =
@@ -530,6 +698,45 @@ instance P.HasZone (RecordResource s) (TF.Attr s Text) where
         lens (_zone :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
+instance P.HasComputedAnswers (RecordResource s) s (TF.Attr s Text) where
+    computedAnswers =
+        (_answers :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDomain (RecordResource s) s (TF.Attr s Text) where
+    computedDomain =
+        (_domain :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFilters (RecordResource s) s (TF.Attr s Text) where
+    computedFilters =
+        (_filters :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLink (RecordResource s) s (TF.Attr s Text) where
+    computedLink =
+        (_link :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTtl (RecordResource s) s (TF.Attr s Text) where
+    computedTtl =
+        (_ttl :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (RecordResource s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUseClientSubnet (RecordResource s) s (TF.Attr s Text) where
+    computedUseClientSubnet =
+        (_use_client_subnet :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedZone (RecordResource s) s (TF.Attr s Text) where
+    computedZone =
+        (_zone :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
 
 recordResource :: TF.Schema TF.Resource P.NS1 (RecordResource s)
 recordResource =
@@ -573,6 +780,15 @@ instance P.HasPermissions (TeamResource s) (TF.Attr s Text) where
         lens (_permissions :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _permissions = a } :: TeamResource s)
 
+instance P.HasComputedName (TeamResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPermissions (TeamResource s) s (TF.Attr s Text) where
+    computedPermissions =
+        (_permissions :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
 
 teamResource :: TF.Schema TF.Resource P.NS1 (TeamResource s)
 teamResource =
@@ -643,6 +859,35 @@ instance P.HasUsername (UserResource s) (TF.Attr s Text) where
         lens (_username :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserResource s)
 
+instance P.HasComputedEmail (UserResource s) s (TF.Attr s Text) where
+    computedEmail =
+        (_email :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (UserResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotify (UserResource s) s (TF.Attr s Text) where
+    computedNotify =
+        (_notify :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPermissions (UserResource s) s (TF.Attr s Text) where
+    computedPermissions =
+        (_permissions :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTeams (UserResource s) s (TF.Attr s Text) where
+    computedTeams =
+        (_teams :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUsername (UserResource s) s (TF.Attr s Text) where
+    computedUsername =
+        (_username :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
 
 userResource :: TF.Schema TF.Resource P.NS1 (UserResource s)
 userResource =
@@ -732,6 +977,45 @@ instance P.HasZone (ZoneResource s) (TF.Attr s Text) where
         lens (_zone :: ZoneResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ZoneResource s)
 
+instance P.HasComputedExpiry (ZoneResource s) s (TF.Attr s Text) where
+    computedExpiry =
+        (_expiry :: ZoneResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLink (ZoneResource s) s (TF.Attr s Text) where
+    computedLink =
+        (_link :: ZoneResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNxTtl (ZoneResource s) s (TF.Attr s Text) where
+    computedNxTtl =
+        (_nx_ttl :: ZoneResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPrimary (ZoneResource s) s (TF.Attr s Text) where
+    computedPrimary =
+        (_primary :: ZoneResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRefresh (ZoneResource s) s (TF.Attr s Text) where
+    computedRefresh =
+        (_refresh :: ZoneResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRetry (ZoneResource s) s (TF.Attr s Text) where
+    computedRetry =
+        (_retry :: ZoneResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTtl (ZoneResource s) s (TF.Attr s Text) where
+    computedTtl =
+        (_ttl :: ZoneResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedZone (ZoneResource s) s (TF.Attr s Text) where
+    computedZone =
+        (_zone :: ZoneResource s -> TF.Attr s Text)
+            . TF.refValue
 
 zoneResource :: TF.Schema TF.Resource P.NS1 (ZoneResource s)
 zoneResource =

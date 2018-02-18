@@ -24,7 +24,7 @@ module Terrafomo
     -- * Syntax
     , Name            (..)
     , Attr
-    , flatten
+    , join
     , attr
     , nil
     , true

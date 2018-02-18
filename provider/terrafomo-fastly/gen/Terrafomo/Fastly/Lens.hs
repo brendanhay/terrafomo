@@ -46,23 +46,32 @@ module Terrafomo.Fastly.Lens
     -- ** Computed Attributes
     , HasComputedActiveVersion (..)
     , HasComputedBackend (..)
+    , HasComputedCacheSetting (..)
     , HasComputedCidrBlocks (..)
+    , HasComputedCondition (..)
     , HasComputedDefaultHost (..)
     , HasComputedDefaultTtl (..)
     , HasComputedDomain (..)
     , HasComputedForceDestroy (..)
+    , HasComputedGcslogging (..)
+    , HasComputedGzip (..)
     , HasComputedHeader (..)
+    , HasComputedHealthcheck (..)
     , HasComputedId (..)
+    , HasComputedLogentries (..)
     , HasComputedName (..)
     , HasComputedPapertrail (..)
+    , HasComputedRequestSetting (..)
     , HasComputedResponseObject (..)
     , HasComputedS3logging (..)
+    , HasComputedSumologic (..)
+    , HasComputedSyslog (..)
     , HasComputedVcl (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -188,86 +197,71 @@ class HasVcl a b | a -> b where
 instance HasVcl a b => HasVcl (TF.Schema l p a) b where
     vcl = TF.configuration . vcl
 
-class HasComputedActiveVersion a b | a -> b where
-    computedActiveVersion
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedActiveVersion =
-        to (\x -> TF.compute (TF.refKey x) "active_version")
+class HasComputedActiveVersion a s b | a -> s b where
+    computedActiveVersion :: TF.Ref s a -> b
 
-class HasComputedBackend a b | a -> b where
-    computedBackend
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedBackend =
-        to (\x -> TF.compute (TF.refKey x) "backend")
+class HasComputedBackend a s b | a -> s b where
+    computedBackend :: TF.Ref s a -> b
 
-class HasComputedCidrBlocks a b | a -> b where
-    computedCidrBlocks
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCidrBlocks =
-        to (\x -> TF.compute (TF.refKey x) "cidr_blocks")
+class HasComputedCacheSetting a s b | a -> s b where
+    computedCacheSetting :: TF.Ref s a -> b
 
-class HasComputedDefaultHost a b | a -> b where
-    computedDefaultHost
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDefaultHost =
-        to (\x -> TF.compute (TF.refKey x) "default_host")
+class HasComputedCidrBlocks a s b | a -> s b where
+    computedCidrBlocks :: TF.Ref s a -> b
 
-class HasComputedDefaultTtl a b | a -> b where
-    computedDefaultTtl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDefaultTtl =
-        to (\x -> TF.compute (TF.refKey x) "default_ttl")
+class HasComputedCondition a s b | a -> s b where
+    computedCondition :: TF.Ref s a -> b
 
-class HasComputedDomain a b | a -> b where
-    computedDomain
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDomain =
-        to (\x -> TF.compute (TF.refKey x) "domain")
+class HasComputedDefaultHost a s b | a -> s b where
+    computedDefaultHost :: TF.Ref s a -> b
 
-class HasComputedForceDestroy a b | a -> b where
-    computedForceDestroy
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedForceDestroy =
-        to (\x -> TF.compute (TF.refKey x) "force_destroy")
+class HasComputedDefaultTtl a s b | a -> s b where
+    computedDefaultTtl :: TF.Ref s a -> b
 
-class HasComputedHeader a b | a -> b where
-    computedHeader
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedHeader =
-        to (\x -> TF.compute (TF.refKey x) "header")
+class HasComputedDomain a s b | a -> s b where
+    computedDomain :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedForceDestroy a s b | a -> s b where
+    computedForceDestroy :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedGcslogging a s b | a -> s b where
+    computedGcslogging :: TF.Ref s a -> b
 
-class HasComputedPapertrail a b | a -> b where
-    computedPapertrail
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPapertrail =
-        to (\x -> TF.compute (TF.refKey x) "papertrail")
+class HasComputedGzip a s b | a -> s b where
+    computedGzip :: TF.Ref s a -> b
 
-class HasComputedResponseObject a b | a -> b where
-    computedResponseObject
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedResponseObject =
-        to (\x -> TF.compute (TF.refKey x) "response_object")
+class HasComputedHeader a s b | a -> s b where
+    computedHeader :: TF.Ref s a -> b
 
-class HasComputedS3logging a b | a -> b where
-    computedS3logging
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedS3logging =
-        to (\x -> TF.compute (TF.refKey x) "s3logging")
+class HasComputedHealthcheck a s b | a -> s b where
+    computedHealthcheck :: TF.Ref s a -> b
 
-class HasComputedVcl a b | a -> b where
-    computedVcl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVcl =
-        to (\x -> TF.compute (TF.refKey x) "vcl")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedLogentries a s b | a -> s b where
+    computedLogentries :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedPapertrail a s b | a -> s b where
+    computedPapertrail :: TF.Ref s a -> b
+
+class HasComputedRequestSetting a s b | a -> s b where
+    computedRequestSetting :: TF.Ref s a -> b
+
+class HasComputedResponseObject a s b | a -> s b where
+    computedResponseObject :: TF.Ref s a -> b
+
+class HasComputedS3logging a s b | a -> s b where
+    computedS3logging :: TF.Ref s a -> b
+
+class HasComputedSumologic a s b | a -> s b where
+    computedSumologic :: TF.Ref s a -> b
+
+class HasComputedSyslog a s b | a -> s b where
+    computedSyslog :: TF.Ref s a -> b
+
+class HasComputedVcl a s b | a -> s b where
+    computedVcl :: TF.Ref s a -> b

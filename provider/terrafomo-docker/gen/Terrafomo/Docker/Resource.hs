@@ -81,13 +81,55 @@ module Terrafomo.Docker.Resource
 
     -- ** Computed Attributes
     , P.HasComputedBridge (..)
+    , P.HasComputedCapabilities (..)
+    , P.HasComputedCheckDuplicate (..)
+    , P.HasComputedCommand (..)
+    , P.HasComputedCpuShares (..)
+    , P.HasComputedDestroyGraceSeconds (..)
+    , P.HasComputedDns (..)
+    , P.HasComputedDnsOpts (..)
+    , P.HasComputedDnsSearch (..)
+    , P.HasComputedDomainname (..)
+    , P.HasComputedDriver (..)
+    , P.HasComputedDriverOpts (..)
+    , P.HasComputedEntrypoint (..)
+    , P.HasComputedEnv (..)
     , P.HasComputedGateway (..)
+    , P.HasComputedHost (..)
+    , P.HasComputedHostname (..)
     , P.HasComputedId (..)
+    , P.HasComputedImage (..)
+    , P.HasComputedInternal (..)
     , P.HasComputedIpAddress (..)
     , P.HasComputedIpPrefixLength (..)
+    , P.HasComputedIpamConfig (..)
+    , P.HasComputedIpamDriver (..)
+    , P.HasComputedKeepLocally (..)
+    , P.HasComputedLabels (..)
     , P.HasComputedLatest (..)
+    , P.HasComputedLinks (..)
+    , P.HasComputedLogDriver (..)
+    , P.HasComputedLogOpts (..)
+    , P.HasComputedMaxRetryCount (..)
+    , P.HasComputedMemory (..)
+    , P.HasComputedMemorySwap (..)
     , P.HasComputedMountpoint (..)
+    , P.HasComputedMustRun (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNetworkAlias (..)
+    , P.HasComputedNetworkMode (..)
+    , P.HasComputedNetworks (..)
+    , P.HasComputedOptions (..)
+    , P.HasComputedPorts (..)
+    , P.HasComputedPrivileged (..)
+    , P.HasComputedPublishAllPorts (..)
+    , P.HasComputedPullTrigger (..)
+    , P.HasComputedPullTriggers (..)
+    , P.HasComputedRestart (..)
     , P.HasComputedScope (..)
+    , P.HasComputedUpload (..)
+    , P.HasComputedUser (..)
+    , P.HasComputedVolumes (..)
 
     -- * Re-exported Types
     , module P
@@ -97,7 +139,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -112,6 +154,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @docker_container@ Docker resource.
@@ -381,10 +424,177 @@ instance P.HasVolumes (ContainerResource s) (TF.Attr s Text) where
         lens (_volumes :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _volumes = a } :: ContainerResource s)
 
-instance P.HasComputedBridge (ContainerResource s) (Text)
-instance P.HasComputedGateway (ContainerResource s) (Text)
-instance P.HasComputedIpAddress (ContainerResource s) (Text)
-instance P.HasComputedIpPrefixLength (ContainerResource s) (Text)
+instance P.HasComputedBridge (ContainerResource s) s (TF.Attr s Text) where
+    computedBridge x = TF.compute (TF.refKey x) "bridge"
+
+instance P.HasComputedCapabilities (ContainerResource s) s (TF.Attr s Text) where
+    computedCapabilities =
+        (_capabilities :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCommand (ContainerResource s) s (TF.Attr s Text) where
+    computedCommand =
+        (_command :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCpuShares (ContainerResource s) s (TF.Attr s Text) where
+    computedCpuShares =
+        (_cpu_shares :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDestroyGraceSeconds (ContainerResource s) s (TF.Attr s Text) where
+    computedDestroyGraceSeconds =
+        (_destroy_grace_seconds :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDns (ContainerResource s) s (TF.Attr s Text) where
+    computedDns =
+        (_dns :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDnsOpts (ContainerResource s) s (TF.Attr s Text) where
+    computedDnsOpts =
+        (_dns_opts :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDnsSearch (ContainerResource s) s (TF.Attr s Text) where
+    computedDnsSearch =
+        (_dns_search :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDomainname (ContainerResource s) s (TF.Attr s Text) where
+    computedDomainname =
+        (_domainname :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEntrypoint (ContainerResource s) s (TF.Attr s Text) where
+    computedEntrypoint =
+        (_entrypoint :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEnv (ContainerResource s) s (TF.Attr s Text) where
+    computedEnv =
+        (_env :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGateway (ContainerResource s) s (TF.Attr s Text) where
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
+
+instance P.HasComputedHost (ContainerResource s) s (TF.Attr s Text) where
+    computedHost =
+        (_host :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHostname (ContainerResource s) s (TF.Attr s Text) where
+    computedHostname =
+        (_hostname :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedImage (ContainerResource s) s (TF.Attr s Text) where
+    computedImage =
+        (_image :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedIpAddress (ContainerResource s) s (TF.Attr s Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+
+instance P.HasComputedIpPrefixLength (ContainerResource s) s (TF.Attr s Text) where
+    computedIpPrefixLength x = TF.compute (TF.refKey x) "ip_prefix_length"
+
+instance P.HasComputedLabels (ContainerResource s) s (TF.Attr s Text) where
+    computedLabels =
+        (_labels :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLinks (ContainerResource s) s (TF.Attr s Text) where
+    computedLinks =
+        (_links :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLogDriver (ContainerResource s) s (TF.Attr s Text) where
+    computedLogDriver =
+        (_log_driver :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLogOpts (ContainerResource s) s (TF.Attr s Text) where
+    computedLogOpts =
+        (_log_opts :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMaxRetryCount (ContainerResource s) s (TF.Attr s Text) where
+    computedMaxRetryCount =
+        (_max_retry_count :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMemory (ContainerResource s) s (TF.Attr s Text) where
+    computedMemory =
+        (_memory :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMemorySwap (ContainerResource s) s (TF.Attr s Text) where
+    computedMemorySwap =
+        (_memory_swap :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMustRun (ContainerResource s) s (TF.Attr s Text) where
+    computedMustRun =
+        (_must_run :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ContainerResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetworkAlias (ContainerResource s) s (TF.Attr s Text) where
+    computedNetworkAlias =
+        (_network_alias :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetworkMode (ContainerResource s) s (TF.Attr s Text) where
+    computedNetworkMode =
+        (_network_mode :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetworks (ContainerResource s) s (TF.Attr s Text) where
+    computedNetworks =
+        (_networks :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPorts (ContainerResource s) s (TF.Attr s Text) where
+    computedPorts =
+        (_ports :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPrivileged (ContainerResource s) s (TF.Attr s Text) where
+    computedPrivileged =
+        (_privileged :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPublishAllPorts (ContainerResource s) s (TF.Attr s Text) where
+    computedPublishAllPorts =
+        (_publish_all_ports :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRestart (ContainerResource s) s (TF.Attr s Text) where
+    computedRestart =
+        (_restart :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUpload (ContainerResource s) s (TF.Attr s Text) where
+    computedUpload =
+        (_upload :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUser (ContainerResource s) s (TF.Attr s Text) where
+    computedUser =
+        (_user :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedVolumes (ContainerResource s) s (TF.Attr s Text) where
+    computedVolumes =
+        (_volumes :: ContainerResource s -> TF.Attr s Text)
+            . TF.refValue
 
 containerResource :: TF.Schema TF.Resource P.Docker (ContainerResource s)
 containerResource =
@@ -470,7 +680,28 @@ instance P.HasPullTriggers (ImageResource s) (TF.Attr s Text) where
         lens (_pull_triggers :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _pull_triggers = a } :: ImageResource s)
 
-instance P.HasComputedLatest (ImageResource s) (Text)
+instance P.HasComputedKeepLocally (ImageResource s) s (TF.Attr s Text) where
+    computedKeepLocally =
+        (_keep_locally :: ImageResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLatest (ImageResource s) s (TF.Attr s Text) where
+    computedLatest x = TF.compute (TF.refKey x) "latest"
+
+instance P.HasComputedName (ImageResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ImageResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPullTrigger (ImageResource s) s (TF.Attr s Text) where
+    computedPullTrigger =
+        (_pull_trigger :: ImageResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPullTriggers (ImageResource s) s (TF.Attr s Text) where
+    computedPullTriggers =
+        (_pull_triggers :: ImageResource s -> TF.Attr s Text)
+            . TF.refValue
 
 imageResource :: TF.Schema TF.Resource P.Docker (ImageResource s)
 imageResource =
@@ -551,8 +782,46 @@ instance P.HasOptions (NetworkResource s) (TF.Attr s Text) where
         lens (_options :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _options = a } :: NetworkResource s)
 
-instance P.HasComputedId (NetworkResource s) (Text)
-instance P.HasComputedScope (NetworkResource s) (Text)
+instance P.HasComputedCheckDuplicate (NetworkResource s) s (TF.Attr s Text) where
+    computedCheckDuplicate =
+        (_check_duplicate :: NetworkResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDriver (NetworkResource s) s (TF.Attr s Text) where
+    computedDriver =
+        (_driver :: NetworkResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (NetworkResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedInternal (NetworkResource s) s (TF.Attr s Text) where
+    computedInternal =
+        (_internal :: NetworkResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedIpamConfig (NetworkResource s) s (TF.Attr s Text) where
+    computedIpamConfig =
+        (_ipam_config :: NetworkResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedIpamDriver (NetworkResource s) s (TF.Attr s Text) where
+    computedIpamDriver =
+        (_ipam_driver :: NetworkResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (NetworkResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: NetworkResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOptions (NetworkResource s) s (TF.Attr s Text) where
+    computedOptions =
+        (_options :: NetworkResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedScope (NetworkResource s) s (TF.Attr s Text) where
+    computedScope x = TF.compute (TF.refKey x) "scope"
 
 networkResource :: TF.Schema TF.Resource P.Docker (NetworkResource s)
 networkResource =
@@ -604,7 +873,23 @@ instance P.HasName (VolumeResource s) (TF.Attr s Text) where
         lens (_name :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VolumeResource s)
 
-instance P.HasComputedMountpoint (VolumeResource s) (Text)
+instance P.HasComputedDriver (VolumeResource s) s (TF.Attr s Text) where
+    computedDriver =
+        (_driver :: VolumeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDriverOpts (VolumeResource s) s (TF.Attr s Text) where
+    computedDriverOpts =
+        (_driver_opts :: VolumeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMountpoint (VolumeResource s) s (TF.Attr s Text) where
+    computedMountpoint x = TF.compute (TF.refKey x) "mountpoint"
+
+instance P.HasComputedName (VolumeResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: VolumeResource s -> TF.Attr s Text)
+            . TF.refValue
 
 volumeResource :: TF.Schema TF.Resource P.Docker (VolumeResource s)
 volumeResource =

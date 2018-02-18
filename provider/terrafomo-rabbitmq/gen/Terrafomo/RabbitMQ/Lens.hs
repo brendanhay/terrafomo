@@ -37,12 +37,25 @@ module Terrafomo.RabbitMQ.Lens
     , HasVhost (..)
 
     -- ** Computed Attributes
+    , HasComputedArguments (..)
+    , HasComputedDestination (..)
+    , HasComputedDestinationType (..)
+    , HasComputedName (..)
+    , HasComputedPassword (..)
+    , HasComputedPermissions (..)
+    , HasComputedPolicy (..)
     , HasComputedPropertiesKey (..)
+    , HasComputedRoutingKey (..)
+    , HasComputedSettings (..)
+    , HasComputedSource (..)
+    , HasComputedTags (..)
+    , HasComputedUser (..)
+    , HasComputedVhost (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -126,8 +139,44 @@ class HasVhost a b | a -> b where
 instance HasVhost a b => HasVhost (TF.Schema l p a) b where
     vhost = TF.configuration . vhost
 
-class HasComputedPropertiesKey a b | a -> b where
-    computedPropertiesKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPropertiesKey =
-        to (\x -> TF.compute (TF.refKey x) "properties_key")
+class HasComputedArguments a s b | a -> s b where
+    computedArguments :: TF.Ref s a -> b
+
+class HasComputedDestination a s b | a -> s b where
+    computedDestination :: TF.Ref s a -> b
+
+class HasComputedDestinationType a s b | a -> s b where
+    computedDestinationType :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedPassword a s b | a -> s b where
+    computedPassword :: TF.Ref s a -> b
+
+class HasComputedPermissions a s b | a -> s b where
+    computedPermissions :: TF.Ref s a -> b
+
+class HasComputedPolicy a s b | a -> s b where
+    computedPolicy :: TF.Ref s a -> b
+
+class HasComputedPropertiesKey a s b | a -> s b where
+    computedPropertiesKey :: TF.Ref s a -> b
+
+class HasComputedRoutingKey a s b | a -> s b where
+    computedRoutingKey :: TF.Ref s a -> b
+
+class HasComputedSettings a s b | a -> s b where
+    computedSettings :: TF.Ref s a -> b
+
+class HasComputedSource a s b | a -> s b where
+    computedSource :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedUser a s b | a -> s b where
+    computedUser :: TF.Ref s a -> b
+
+class HasComputedVhost a s b | a -> s b where
+    computedVhost :: TF.Ref s a -> b

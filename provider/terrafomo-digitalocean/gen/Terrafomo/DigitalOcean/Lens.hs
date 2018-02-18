@@ -60,13 +60,23 @@ module Terrafomo.DigitalOcean.Lens
     , HasWeight (..)
 
     -- ** Computed Attributes
+    , HasComputedAlgorithm (..)
+    , HasComputedBackups (..)
+    , HasComputedCertificateChain (..)
     , HasComputedCreatedAt (..)
+    , HasComputedDescription (..)
     , HasComputedDisk (..)
+    , HasComputedDomain (..)
+    , HasComputedDropletId (..)
     , HasComputedDropletIds (..)
+    , HasComputedDropletTag (..)
     , HasComputedFingerprint (..)
+    , HasComputedForwardingRule (..)
     , HasComputedFqdn (..)
+    , HasComputedHealthcheck (..)
     , HasComputedId (..)
     , HasComputedImage (..)
+    , HasComputedInboundRule (..)
     , HasComputedInboundRules (..)
     , HasComputedIp (..)
     , HasComputedIpAddress (..)
@@ -75,32 +85,46 @@ module Terrafomo.DigitalOcean.Lens
     , HasComputedIpv6 (..)
     , HasComputedIpv6Address (..)
     , HasComputedIpv6AddressPrivate (..)
+    , HasComputedLeafCertificate (..)
     , HasComputedLocked (..)
     , HasComputedMinDiskSize (..)
+    , HasComputedMonitoring (..)
     , HasComputedName (..)
     , HasComputedNotAfter (..)
+    , HasComputedOutboundRule (..)
     , HasComputedOutboundRules (..)
     , HasComputedPendingChanges (..)
+    , HasComputedPort (..)
     , HasComputedPriceHourly (..)
     , HasComputedPriceMonthly (..)
+    , HasComputedPriority (..)
     , HasComputedPrivate (..)
+    , HasComputedPrivateKey (..)
     , HasComputedPrivateNetworking (..)
     , HasComputedPublicKey (..)
+    , HasComputedRedirectHttpToHttps (..)
     , HasComputedRegion (..)
     , HasComputedRegions (..)
+    , HasComputedResizeDisk (..)
     , HasComputedSha1Fingerprint (..)
     , HasComputedSize (..)
     , HasComputedSizeGigabytes (..)
+    , HasComputedSshKeys (..)
     , HasComputedStatus (..)
+    , HasComputedStickySessions (..)
     , HasComputedTags (..)
+    , HasComputedTtl (..)
     , HasComputedType' (..)
+    , HasComputedUserData (..)
+    , HasComputedValue (..)
     , HasComputedVcpus (..)
     , HasComputedVolumeIds (..)
+    , HasComputedWeight (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -322,218 +346,182 @@ class HasWeight a b | a -> b where
 instance HasWeight a b => HasWeight (TF.Schema l p a) b where
     weight = TF.configuration . weight
 
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreatedAt =
-        to (\x -> TF.compute (TF.refKey x) "created_at")
+class HasComputedAlgorithm a s b | a -> s b where
+    computedAlgorithm :: TF.Ref s a -> b
 
-class HasComputedDisk a b | a -> b where
-    computedDisk
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDisk =
-        to (\x -> TF.compute (TF.refKey x) "disk")
+class HasComputedBackups a s b | a -> s b where
+    computedBackups :: TF.Ref s a -> b
 
-class HasComputedDropletIds a b | a -> b where
-    computedDropletIds
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDropletIds =
-        to (\x -> TF.compute (TF.refKey x) "droplet_ids")
+class HasComputedCertificateChain a s b | a -> s b where
+    computedCertificateChain :: TF.Ref s a -> b
 
-class HasComputedFingerprint a b | a -> b where
-    computedFingerprint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFingerprint =
-        to (\x -> TF.compute (TF.refKey x) "fingerprint")
+class HasComputedCreatedAt a s b | a -> s b where
+    computedCreatedAt :: TF.Ref s a -> b
 
-class HasComputedFqdn a b | a -> b where
-    computedFqdn
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFqdn =
-        to (\x -> TF.compute (TF.refKey x) "fqdn")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedDisk a s b | a -> s b where
+    computedDisk :: TF.Ref s a -> b
 
-class HasComputedImage a b | a -> b where
-    computedImage
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedImage =
-        to (\x -> TF.compute (TF.refKey x) "image")
+class HasComputedDomain a s b | a -> s b where
+    computedDomain :: TF.Ref s a -> b
 
-class HasComputedInboundRules a b | a -> b where
-    computedInboundRules
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedInboundRules =
-        to (\x -> TF.compute (TF.refKey x) "inbound_rules")
+class HasComputedDropletId a s b | a -> s b where
+    computedDropletId :: TF.Ref s a -> b
 
-class HasComputedIp a b | a -> b where
-    computedIp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIp =
-        to (\x -> TF.compute (TF.refKey x) "ip")
+class HasComputedDropletIds a s b | a -> s b where
+    computedDropletIds :: TF.Ref s a -> b
 
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpAddress =
-        to (\x -> TF.compute (TF.refKey x) "ip_address")
+class HasComputedDropletTag a s b | a -> s b where
+    computedDropletTag :: TF.Ref s a -> b
 
-class HasComputedIpv4Address a b | a -> b where
-    computedIpv4Address
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpv4Address =
-        to (\x -> TF.compute (TF.refKey x) "ipv4_address")
+class HasComputedFingerprint a s b | a -> s b where
+    computedFingerprint :: TF.Ref s a -> b
 
-class HasComputedIpv4AddressPrivate a b | a -> b where
-    computedIpv4AddressPrivate
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpv4AddressPrivate =
-        to (\x -> TF.compute (TF.refKey x) "ipv4_address_private")
+class HasComputedForwardingRule a s b | a -> s b where
+    computedForwardingRule :: TF.Ref s a -> b
 
-class HasComputedIpv6 a b | a -> b where
-    computedIpv6
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpv6 =
-        to (\x -> TF.compute (TF.refKey x) "ipv6")
+class HasComputedFqdn a s b | a -> s b where
+    computedFqdn :: TF.Ref s a -> b
 
-class HasComputedIpv6Address a b | a -> b where
-    computedIpv6Address
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpv6Address =
-        to (\x -> TF.compute (TF.refKey x) "ipv6_address")
+class HasComputedHealthcheck a s b | a -> s b where
+    computedHealthcheck :: TF.Ref s a -> b
 
-class HasComputedIpv6AddressPrivate a b | a -> b where
-    computedIpv6AddressPrivate
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpv6AddressPrivate =
-        to (\x -> TF.compute (TF.refKey x) "ipv6_address_private")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
 
-class HasComputedLocked a b | a -> b where
-    computedLocked
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLocked =
-        to (\x -> TF.compute (TF.refKey x) "locked")
+class HasComputedImage a s b | a -> s b where
+    computedImage :: TF.Ref s a -> b
 
-class HasComputedMinDiskSize a b | a -> b where
-    computedMinDiskSize
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMinDiskSize =
-        to (\x -> TF.compute (TF.refKey x) "min_disk_size")
+class HasComputedInboundRule a s b | a -> s b where
+    computedInboundRule :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedInboundRules a s b | a -> s b where
+    computedInboundRules :: TF.Ref s a -> b
 
-class HasComputedNotAfter a b | a -> b where
-    computedNotAfter
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNotAfter =
-        to (\x -> TF.compute (TF.refKey x) "not_after")
+class HasComputedIp a s b | a -> s b where
+    computedIp :: TF.Ref s a -> b
 
-class HasComputedOutboundRules a b | a -> b where
-    computedOutboundRules
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedOutboundRules =
-        to (\x -> TF.compute (TF.refKey x) "outbound_rules")
+class HasComputedIpAddress a s b | a -> s b where
+    computedIpAddress :: TF.Ref s a -> b
 
-class HasComputedPendingChanges a b | a -> b where
-    computedPendingChanges
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPendingChanges =
-        to (\x -> TF.compute (TF.refKey x) "pending_changes")
+class HasComputedIpv4Address a s b | a -> s b where
+    computedIpv4Address :: TF.Ref s a -> b
 
-class HasComputedPriceHourly a b | a -> b where
-    computedPriceHourly
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPriceHourly =
-        to (\x -> TF.compute (TF.refKey x) "price_hourly")
+class HasComputedIpv4AddressPrivate a s b | a -> s b where
+    computedIpv4AddressPrivate :: TF.Ref s a -> b
 
-class HasComputedPriceMonthly a b | a -> b where
-    computedPriceMonthly
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPriceMonthly =
-        to (\x -> TF.compute (TF.refKey x) "price_monthly")
+class HasComputedIpv6 a s b | a -> s b where
+    computedIpv6 :: TF.Ref s a -> b
 
-class HasComputedPrivate a b | a -> b where
-    computedPrivate
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrivate =
-        to (\x -> TF.compute (TF.refKey x) "private")
+class HasComputedIpv6Address a s b | a -> s b where
+    computedIpv6Address :: TF.Ref s a -> b
 
-class HasComputedPrivateNetworking a b | a -> b where
-    computedPrivateNetworking
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrivateNetworking =
-        to (\x -> TF.compute (TF.refKey x) "private_networking")
+class HasComputedIpv6AddressPrivate a s b | a -> s b where
+    computedIpv6AddressPrivate :: TF.Ref s a -> b
 
-class HasComputedPublicKey a b | a -> b where
-    computedPublicKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPublicKey =
-        to (\x -> TF.compute (TF.refKey x) "public_key")
+class HasComputedLeafCertificate a s b | a -> s b where
+    computedLeafCertificate :: TF.Ref s a -> b
 
-class HasComputedRegion a b | a -> b where
-    computedRegion
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRegion =
-        to (\x -> TF.compute (TF.refKey x) "region")
+class HasComputedLocked a s b | a -> s b where
+    computedLocked :: TF.Ref s a -> b
 
-class HasComputedRegions a b | a -> b where
-    computedRegions
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRegions =
-        to (\x -> TF.compute (TF.refKey x) "regions")
+class HasComputedMinDiskSize a s b | a -> s b where
+    computedMinDiskSize :: TF.Ref s a -> b
 
-class HasComputedSha1Fingerprint a b | a -> b where
-    computedSha1Fingerprint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSha1Fingerprint =
-        to (\x -> TF.compute (TF.refKey x) "sha1_fingerprint")
+class HasComputedMonitoring a s b | a -> s b where
+    computedMonitoring :: TF.Ref s a -> b
 
-class HasComputedSize a b | a -> b where
-    computedSize
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSize =
-        to (\x -> TF.compute (TF.refKey x) "size")
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
 
-class HasComputedSizeGigabytes a b | a -> b where
-    computedSizeGigabytes
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSizeGigabytes =
-        to (\x -> TF.compute (TF.refKey x) "size_gigabytes")
+class HasComputedNotAfter a s b | a -> s b where
+    computedNotAfter :: TF.Ref s a -> b
 
-class HasComputedStatus a b | a -> b where
-    computedStatus
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedStatus =
-        to (\x -> TF.compute (TF.refKey x) "status")
+class HasComputedOutboundRule a s b | a -> s b where
+    computedOutboundRule :: TF.Ref s a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTags =
-        to (\x -> TF.compute (TF.refKey x) "tags")
+class HasComputedOutboundRules a s b | a -> s b where
+    computedOutboundRules :: TF.Ref s a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
+class HasComputedPendingChanges a s b | a -> s b where
+    computedPendingChanges :: TF.Ref s a -> b
 
-class HasComputedVcpus a b | a -> b where
-    computedVcpus
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVcpus =
-        to (\x -> TF.compute (TF.refKey x) "vcpus")
+class HasComputedPort a s b | a -> s b where
+    computedPort :: TF.Ref s a -> b
 
-class HasComputedVolumeIds a b | a -> b where
-    computedVolumeIds
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVolumeIds =
-        to (\x -> TF.compute (TF.refKey x) "volume_ids")
+class HasComputedPriceHourly a s b | a -> s b where
+    computedPriceHourly :: TF.Ref s a -> b
+
+class HasComputedPriceMonthly a s b | a -> s b where
+    computedPriceMonthly :: TF.Ref s a -> b
+
+class HasComputedPriority a s b | a -> s b where
+    computedPriority :: TF.Ref s a -> b
+
+class HasComputedPrivate a s b | a -> s b where
+    computedPrivate :: TF.Ref s a -> b
+
+class HasComputedPrivateKey a s b | a -> s b where
+    computedPrivateKey :: TF.Ref s a -> b
+
+class HasComputedPrivateNetworking a s b | a -> s b where
+    computedPrivateNetworking :: TF.Ref s a -> b
+
+class HasComputedPublicKey a s b | a -> s b where
+    computedPublicKey :: TF.Ref s a -> b
+
+class HasComputedRedirectHttpToHttps a s b | a -> s b where
+    computedRedirectHttpToHttps :: TF.Ref s a -> b
+
+class HasComputedRegion a s b | a -> s b where
+    computedRegion :: TF.Ref s a -> b
+
+class HasComputedRegions a s b | a -> s b where
+    computedRegions :: TF.Ref s a -> b
+
+class HasComputedResizeDisk a s b | a -> s b where
+    computedResizeDisk :: TF.Ref s a -> b
+
+class HasComputedSha1Fingerprint a s b | a -> s b where
+    computedSha1Fingerprint :: TF.Ref s a -> b
+
+class HasComputedSize a s b | a -> s b where
+    computedSize :: TF.Ref s a -> b
+
+class HasComputedSizeGigabytes a s b | a -> s b where
+    computedSizeGigabytes :: TF.Ref s a -> b
+
+class HasComputedSshKeys a s b | a -> s b where
+    computedSshKeys :: TF.Ref s a -> b
+
+class HasComputedStatus a s b | a -> s b where
+    computedStatus :: TF.Ref s a -> b
+
+class HasComputedStickySessions a s b | a -> s b where
+    computedStickySessions :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUserData a s b | a -> s b where
+    computedUserData :: TF.Ref s a -> b
+
+class HasComputedValue a s b | a -> s b where
+    computedValue :: TF.Ref s a -> b
+
+class HasComputedVcpus a s b | a -> s b where
+    computedVcpus :: TF.Ref s a -> b
+
+class HasComputedVolumeIds a s b | a -> s b where
+    computedVolumeIds :: TF.Ref s a -> b
+
+class HasComputedWeight a s b | a -> s b where
+    computedWeight :: TF.Ref s a -> b

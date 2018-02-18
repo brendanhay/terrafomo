@@ -51,24 +51,45 @@ module Terrafomo.Rancher.Lens
     , HasValue (..)
 
     -- ** Computed Attributes
+    , HasComputedAgentIp (..)
     , HasComputedAlgorithm (..)
+    , HasComputedCatalogId (..)
+    , HasComputedCert (..)
+    , HasComputedCertChain (..)
     , HasComputedCertFingerprint (..)
     , HasComputedCn (..)
     , HasComputedCommand (..)
     , HasComputedDescription (..)
+    , HasComputedDockerCompose (..)
+    , HasComputedDriver (..)
+    , HasComputedEnvironment (..)
+    , HasComputedEnvironmentId (..)
     , HasComputedExpiresAt (..)
+    , HasComputedFinishUpgrade (..)
+    , HasComputedHostLabels (..)
+    , HasComputedHostname (..)
     , HasComputedId (..)
     , HasComputedImage (..)
     , HasComputedIssuedAt (..)
     , HasComputedIssuer (..)
+    , HasComputedKey (..)
     , HasComputedKeySize (..)
+    , HasComputedLabels (..)
     , HasComputedMember (..)
+    , HasComputedName (..)
     , HasComputedOrchestration (..)
     , HasComputedProjectTemplateId (..)
+    , HasComputedPublicValue (..)
+    , HasComputedRancherCompose (..)
     , HasComputedRegistrationUrl (..)
+    , HasComputedRegistryId (..)
     , HasComputedRenderedDockerCompose (..)
     , HasComputedRenderedRancherCompose (..)
+    , HasComputedScope (..)
+    , HasComputedSecretValue (..)
     , HasComputedSerialNumber (..)
+    , HasComputedServerAddress (..)
+    , HasComputedStartOnCreate (..)
     , HasComputedSubjectAlternativeNames (..)
     , HasComputedToken (..)
     , HasComputedValue (..)
@@ -77,7 +98,7 @@ module Terrafomo.Rancher.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -245,134 +266,131 @@ class HasValue a b | a -> b where
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
-class HasComputedAlgorithm a b | a -> b where
-    computedAlgorithm
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAlgorithm =
-        to (\x -> TF.compute (TF.refKey x) "algorithm")
+class HasComputedAgentIp a s b | a -> s b where
+    computedAgentIp :: TF.Ref s a -> b
 
-class HasComputedCertFingerprint a b | a -> b where
-    computedCertFingerprint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCertFingerprint =
-        to (\x -> TF.compute (TF.refKey x) "cert_fingerprint")
+class HasComputedAlgorithm a s b | a -> s b where
+    computedAlgorithm :: TF.Ref s a -> b
 
-class HasComputedCn a b | a -> b where
-    computedCn
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCn =
-        to (\x -> TF.compute (TF.refKey x) "cn")
+class HasComputedCatalogId a s b | a -> s b where
+    computedCatalogId :: TF.Ref s a -> b
 
-class HasComputedCommand a b | a -> b where
-    computedCommand
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCommand =
-        to (\x -> TF.compute (TF.refKey x) "command")
+class HasComputedCert a s b | a -> s b where
+    computedCert :: TF.Ref s a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDescription =
-        to (\x -> TF.compute (TF.refKey x) "description")
+class HasComputedCertChain a s b | a -> s b where
+    computedCertChain :: TF.Ref s a -> b
 
-class HasComputedExpiresAt a b | a -> b where
-    computedExpiresAt
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedExpiresAt =
-        to (\x -> TF.compute (TF.refKey x) "expires_at")
+class HasComputedCertFingerprint a s b | a -> s b where
+    computedCertFingerprint :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedCn a s b | a -> s b where
+    computedCn :: TF.Ref s a -> b
 
-class HasComputedImage a b | a -> b where
-    computedImage
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedImage =
-        to (\x -> TF.compute (TF.refKey x) "image")
+class HasComputedCommand a s b | a -> s b where
+    computedCommand :: TF.Ref s a -> b
 
-class HasComputedIssuedAt a b | a -> b where
-    computedIssuedAt
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIssuedAt =
-        to (\x -> TF.compute (TF.refKey x) "issued_at")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedIssuer a b | a -> b where
-    computedIssuer
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIssuer =
-        to (\x -> TF.compute (TF.refKey x) "issuer")
+class HasComputedDockerCompose a s b | a -> s b where
+    computedDockerCompose :: TF.Ref s a -> b
 
-class HasComputedKeySize a b | a -> b where
-    computedKeySize
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedKeySize =
-        to (\x -> TF.compute (TF.refKey x) "key_size")
+class HasComputedDriver a s b | a -> s b where
+    computedDriver :: TF.Ref s a -> b
 
-class HasComputedMember a b | a -> b where
-    computedMember
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMember =
-        to (\x -> TF.compute (TF.refKey x) "member")
+class HasComputedEnvironment a s b | a -> s b where
+    computedEnvironment :: TF.Ref s a -> b
 
-class HasComputedOrchestration a b | a -> b where
-    computedOrchestration
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedOrchestration =
-        to (\x -> TF.compute (TF.refKey x) "orchestration")
+class HasComputedEnvironmentId a s b | a -> s b where
+    computedEnvironmentId :: TF.Ref s a -> b
 
-class HasComputedProjectTemplateId a b | a -> b where
-    computedProjectTemplateId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedProjectTemplateId =
-        to (\x -> TF.compute (TF.refKey x) "project_template_id")
+class HasComputedExpiresAt a s b | a -> s b where
+    computedExpiresAt :: TF.Ref s a -> b
 
-class HasComputedRegistrationUrl a b | a -> b where
-    computedRegistrationUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRegistrationUrl =
-        to (\x -> TF.compute (TF.refKey x) "registration_url")
+class HasComputedFinishUpgrade a s b | a -> s b where
+    computedFinishUpgrade :: TF.Ref s a -> b
 
-class HasComputedRenderedDockerCompose a b | a -> b where
-    computedRenderedDockerCompose
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRenderedDockerCompose =
-        to (\x -> TF.compute (TF.refKey x) "rendered_docker_compose")
+class HasComputedHostLabels a s b | a -> s b where
+    computedHostLabels :: TF.Ref s a -> b
 
-class HasComputedRenderedRancherCompose a b | a -> b where
-    computedRenderedRancherCompose
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRenderedRancherCompose =
-        to (\x -> TF.compute (TF.refKey x) "rendered_rancher_compose")
+class HasComputedHostname a s b | a -> s b where
+    computedHostname :: TF.Ref s a -> b
 
-class HasComputedSerialNumber a b | a -> b where
-    computedSerialNumber
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSerialNumber =
-        to (\x -> TF.compute (TF.refKey x) "serial_number")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
 
-class HasComputedSubjectAlternativeNames a b | a -> b where
-    computedSubjectAlternativeNames
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSubjectAlternativeNames =
-        to (\x -> TF.compute (TF.refKey x) "subject_alternative_names")
+class HasComputedImage a s b | a -> s b where
+    computedImage :: TF.Ref s a -> b
 
-class HasComputedToken a b | a -> b where
-    computedToken
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedToken =
-        to (\x -> TF.compute (TF.refKey x) "token")
+class HasComputedIssuedAt a s b | a -> s b where
+    computedIssuedAt :: TF.Ref s a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedValue =
-        to (\x -> TF.compute (TF.refKey x) "value")
+class HasComputedIssuer a s b | a -> s b where
+    computedIssuer :: TF.Ref s a -> b
 
-class HasComputedVersion a b | a -> b where
-    computedVersion
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVersion =
-        to (\x -> TF.compute (TF.refKey x) "version")
+class HasComputedKey a s b | a -> s b where
+    computedKey :: TF.Ref s a -> b
+
+class HasComputedKeySize a s b | a -> s b where
+    computedKeySize :: TF.Ref s a -> b
+
+class HasComputedLabels a s b | a -> s b where
+    computedLabels :: TF.Ref s a -> b
+
+class HasComputedMember a s b | a -> s b where
+    computedMember :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedOrchestration a s b | a -> s b where
+    computedOrchestration :: TF.Ref s a -> b
+
+class HasComputedProjectTemplateId a s b | a -> s b where
+    computedProjectTemplateId :: TF.Ref s a -> b
+
+class HasComputedPublicValue a s b | a -> s b where
+    computedPublicValue :: TF.Ref s a -> b
+
+class HasComputedRancherCompose a s b | a -> s b where
+    computedRancherCompose :: TF.Ref s a -> b
+
+class HasComputedRegistrationUrl a s b | a -> s b where
+    computedRegistrationUrl :: TF.Ref s a -> b
+
+class HasComputedRegistryId a s b | a -> s b where
+    computedRegistryId :: TF.Ref s a -> b
+
+class HasComputedRenderedDockerCompose a s b | a -> s b where
+    computedRenderedDockerCompose :: TF.Ref s a -> b
+
+class HasComputedRenderedRancherCompose a s b | a -> s b where
+    computedRenderedRancherCompose :: TF.Ref s a -> b
+
+class HasComputedScope a s b | a -> s b where
+    computedScope :: TF.Ref s a -> b
+
+class HasComputedSecretValue a s b | a -> s b where
+    computedSecretValue :: TF.Ref s a -> b
+
+class HasComputedSerialNumber a s b | a -> s b where
+    computedSerialNumber :: TF.Ref s a -> b
+
+class HasComputedServerAddress a s b | a -> s b where
+    computedServerAddress :: TF.Ref s a -> b
+
+class HasComputedStartOnCreate a s b | a -> s b where
+    computedStartOnCreate :: TF.Ref s a -> b
+
+class HasComputedSubjectAlternativeNames a s b | a -> s b where
+    computedSubjectAlternativeNames :: TF.Ref s a -> b
+
+class HasComputedToken a s b | a -> s b where
+    computedToken :: TF.Ref s a -> b
+
+class HasComputedValue a s b | a -> s b where
+    computedValue :: TF.Ref s a -> b
+
+class HasComputedVersion a s b | a -> s b where
+    computedVersion :: TF.Ref s a -> b

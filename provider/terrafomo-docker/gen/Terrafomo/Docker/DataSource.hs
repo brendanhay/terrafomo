@@ -30,6 +30,7 @@ module Terrafomo.Docker.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
+    , P.HasComputedName (..)
     , P.HasComputedSha256Digest (..)
 
     -- * Re-exported Types
@@ -40,7 +41,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -55,6 +56,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @docker_registry_image@ Docker datasource.
@@ -78,7 +80,13 @@ instance P.HasName (RegistryImageData s) (TF.Attr s Text) where
         lens (_name :: RegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RegistryImageData s)
 
-instance P.HasComputedSha256Digest (RegistryImageData s) (Text)
+instance P.HasComputedName (RegistryImageData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: RegistryImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSha256Digest (RegistryImageData s) s (TF.Attr s Text) where
+    computedSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"
 
 registryImageData :: TF.Schema TF.DataSource P.Docker (RegistryImageData s)
 registryImageData =

@@ -40,7 +40,15 @@ module Terrafomo.OpsGenie.Resource
     , P.HasUsername (..)
 
     -- ** Computed Attributes
+    , P.HasComputedDescription (..)
+    , P.HasComputedFullName (..)
     , P.HasComputedId (..)
+    , P.HasComputedLocale (..)
+    , P.HasComputedMember (..)
+    , P.HasComputedName (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedTimezone (..)
+    , P.HasComputedUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -50,7 +58,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -65,6 +73,7 @@ import           Terrafomo.OpsGenie.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @opsgenie_team@ OpsGenie resource.
@@ -102,7 +111,23 @@ instance P.HasName (TeamResource s) (TF.Attr s Text) where
         lens (_name :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TeamResource s)
 
-instance P.HasComputedId (TeamResource s) (Text)
+instance P.HasComputedDescription (TeamResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (TeamResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMember (TeamResource s) s (TF.Attr s Text) where
+    computedMember =
+        (_member :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (TeamResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
 
 teamResource :: TF.Schema TF.Resource P.OpsGenie (TeamResource s)
 teamResource =
@@ -164,7 +189,33 @@ instance P.HasUsername (UserResource s) (TF.Attr s Text) where
         lens (_username :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserResource s)
 
-instance P.HasComputedId (UserResource s) (Text)
+instance P.HasComputedFullName (UserResource s) s (TF.Attr s Text) where
+    computedFullName =
+        (_full_name :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (UserResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLocale (UserResource s) s (TF.Attr s Text) where
+    computedLocale =
+        (_locale :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRole (UserResource s) s (TF.Attr s Text) where
+    computedRole =
+        (_role :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTimezone (UserResource s) s (TF.Attr s Text) where
+    computedTimezone =
+        (_timezone :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUsername (UserResource s) s (TF.Attr s Text) where
+    computedUsername =
+        (_username :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
 
 userResource :: TF.Schema TF.Resource P.OpsGenie (UserResource s)
 userResource =

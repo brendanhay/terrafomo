@@ -35,10 +35,10 @@ module Terrafomo.OVH.DataSource
 
     -- ** Computed Attributes
     , P.HasComputedContinentCode (..)
-    , P.HasComputedContinentCode (..)
-    , P.HasComputedDatacenterLocation (..)
     , P.HasComputedDatacenterLocation (..)
     , P.HasComputedNames (..)
+    , P.HasComputedProjectId (..)
+    , P.HasComputedRegion (..)
     , P.HasComputedServices (..)
 
     -- * Re-exported Types
@@ -49,7 +49,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -64,6 +64,7 @@ import           Terrafomo.OVH.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @publiccloud_region@ OVH datasource.
@@ -94,11 +95,30 @@ instance P.HasRegion (RegionData s) (TF.Attr s Text) where
         lens (_region :: RegionData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: RegionData s)
 
-instance P.HasComputedContinentCode (RegionData s) (Text)
-instance P.HasComputedContinentCode (RegionData s) (Text)
-instance P.HasComputedDatacenterLocation (RegionData s) (Text)
-instance P.HasComputedDatacenterLocation (RegionData s) (Text)
-instance P.HasComputedServices (RegionData s) (Text)
+instance P.HasComputedContinentCode (RegionData s) s (TF.Attr s Text) where
+    computedContinentCode x = TF.compute (TF.refKey x) "continentCode"
+
+instance P.HasComputedContinentCode (RegionData s) s (TF.Attr s Text) where
+    computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
+
+instance P.HasComputedDatacenterLocation (RegionData s) s (TF.Attr s Text) where
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenterLocation"
+
+instance P.HasComputedDatacenterLocation (RegionData s) s (TF.Attr s Text) where
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
+
+instance P.HasComputedProjectId (RegionData s) s (TF.Attr s Text) where
+    computedProjectId =
+        (_project_id :: RegionData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (RegionData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: RegionData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedServices (RegionData s) s (TF.Attr s Text) where
+    computedServices x = TF.compute (TF.refKey x) "services"
 
 regionData :: TF.Schema TF.DataSource P.OVH (RegionData s)
 regionData =
@@ -127,7 +147,13 @@ instance P.HasProjectId (RegionsData s) (TF.Attr s Text) where
         lens (_project_id :: RegionsData s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: RegionsData s)
 
-instance P.HasComputedNames (RegionsData s) (Text)
+instance P.HasComputedNames (RegionsData s) s (TF.Attr s Text) where
+    computedNames x = TF.compute (TF.refKey x) "names"
+
+instance P.HasComputedProjectId (RegionsData s) s (TF.Attr s Text) where
+    computedProjectId =
+        (_project_id :: RegionsData s -> TF.Attr s Text)
+            . TF.refValue
 
 regionsData :: TF.Schema TF.DataSource P.OVH (RegionsData s)
 regionsData =

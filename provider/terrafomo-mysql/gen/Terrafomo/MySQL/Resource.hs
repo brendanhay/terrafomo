@@ -45,6 +45,16 @@ module Terrafomo.MySQL.Resource
     , P.HasUser (..)
 
     -- ** Computed Attributes
+    , P.HasComputedDatabase (..)
+    , P.HasComputedDefaultCharacterSet (..)
+    , P.HasComputedDefaultCollation (..)
+    , P.HasComputedGrant (..)
+    , P.HasComputedHost (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPassword (..)
+    , P.HasComputedPlaintextPassword (..)
+    , P.HasComputedPrivileges (..)
+    , P.HasComputedUser (..)
 
     -- * Re-exported Types
     , module P
@@ -54,7 +64,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -69,6 +79,7 @@ import           Terrafomo.MySQL.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @mysql_database@ MySQL resource.
@@ -110,6 +121,20 @@ instance P.HasName (DatabaseResource s) (TF.Attr s Text) where
         lens (_name :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatabaseResource s)
 
+instance P.HasComputedDefaultCharacterSet (DatabaseResource s) s (TF.Attr s Text) where
+    computedDefaultCharacterSet =
+        (_default_character_set :: DatabaseResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDefaultCollation (DatabaseResource s) s (TF.Attr s Text) where
+    computedDefaultCollation =
+        (_default_collation :: DatabaseResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (DatabaseResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: DatabaseResource s -> TF.Attr s Text)
+            . TF.refValue
 
 databaseResource :: TF.Schema TF.Resource P.MySQL (DatabaseResource s)
 databaseResource =
@@ -172,6 +197,30 @@ instance P.HasUser (GrantResource s) (TF.Attr s Text) where
         lens (_user :: GrantResource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: GrantResource s)
 
+instance P.HasComputedDatabase (GrantResource s) s (TF.Attr s Text) where
+    computedDatabase =
+        (_database :: GrantResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGrant (GrantResource s) s (TF.Attr s Text) where
+    computedGrant =
+        (_grant :: GrantResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHost (GrantResource s) s (TF.Attr s Text) where
+    computedHost =
+        (_host :: GrantResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPrivileges (GrantResource s) s (TF.Attr s Text) where
+    computedPrivileges =
+        (_privileges :: GrantResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUser (GrantResource s) s (TF.Attr s Text) where
+    computedUser =
+        (_user :: GrantResource s -> TF.Attr s Text)
+            . TF.refValue
 
 grantResource :: TF.Schema TF.Resource P.MySQL (GrantResource s)
 grantResource =
@@ -230,6 +279,25 @@ instance P.HasUser (UserResource s) (TF.Attr s Text) where
         lens (_user :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: UserResource s)
 
+instance P.HasComputedHost (UserResource s) s (TF.Attr s Text) where
+    computedHost =
+        (_host :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPassword (UserResource s) s (TF.Attr s Text) where
+    computedPassword =
+        (_password :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPlaintextPassword (UserResource s) s (TF.Attr s Text) where
+    computedPlaintextPassword =
+        (_plaintext_password :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUser (UserResource s) s (TF.Attr s Text) where
+    computedUser =
+        (_user :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
 
 userResource :: TF.Schema TF.Resource P.MySQL (UserResource s)
 userResource =

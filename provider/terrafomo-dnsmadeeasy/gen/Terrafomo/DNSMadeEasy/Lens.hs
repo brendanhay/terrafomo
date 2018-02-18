@@ -33,38 +33,23 @@ module Terrafomo.DNSMadeEasy.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasComputedGtdLocation a b | a -> b where
-    computedGtdLocation
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedGtdLocation =
-        to (\x -> TF.compute (TF.refKey x) "gtdLocation")
+class HasComputedGtdLocation a s b | a -> s b where
+    computedGtdLocation :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTtl =
-        to (\x -> TF.compute (TF.refKey x) "ttl")
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedValue =
-        to (\x -> TF.compute (TF.refKey x) "value")
+class HasComputedValue a s b | a -> s b where
+    computedValue :: TF.Ref s a -> b

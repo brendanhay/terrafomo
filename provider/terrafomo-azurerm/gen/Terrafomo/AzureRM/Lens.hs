@@ -315,76 +315,227 @@ module Terrafomo.AzureRM.Lens
     , HasZoneName (..)
 
     -- ** Computed Attributes
+    , HasComputedAccess (..)
+    , HasComputedAccessPolicy (..)
     , HasComputedAccessTier (..)
     , HasComputedAccountEncryptionSource (..)
     , HasComputedAccountKind (..)
+    , HasComputedAccountName (..)
     , HasComputedAccountReplicationType (..)
     , HasComputedAccountTier (..)
     , HasComputedActiveActive (..)
     , HasComputedAddressPrefix (..)
     , HasComputedAddressSpace (..)
     , HasComputedAddressSpaces (..)
+    , HasComputedAdminEnabled (..)
     , HasComputedAdminPassword (..)
     , HasComputedAdminUsername (..)
+    , HasComputedAdministratorLogin (..)
+    , HasComputedAdministratorLoginPassword (..)
+    , HasComputedAgentPoolProfile (..)
     , HasComputedAgentPoolProfileFqdn (..)
+    , HasComputedAllowClassicOperations (..)
+    , HasComputedAllowForwardedTraffic (..)
+    , HasComputedAllowGatewayTransit (..)
+    , HasComputedAllowVirtualNetworkAccess (..)
     , HasComputedAppId (..)
+    , HasComputedAppServiceName (..)
+    , HasComputedAppServicePlanId (..)
+    , HasComputedAppServiceSlotName (..)
+    , HasComputedAppSettings (..)
+    , HasComputedApplicationType (..)
     , HasComputedAppliedDnsServers (..)
     , HasComputedAssignableScopes (..)
+    , HasComputedAttempts (..)
+    , HasComputedAuthenticationCertificate (..)
+    , HasComputedAuthorizationKey (..)
+    , HasComputedAutoDeleteOnIdle (..)
     , HasComputedAutoInflateEnabled (..)
+    , HasComputedAvailabilitySetId (..)
+    , HasComputedBackendAddressPool (..)
+    , HasComputedBackendAddressPoolId (..)
+    , HasComputedBackendHttpSettings (..)
+    , HasComputedBackendPort (..)
+    , HasComputedBandwidthInMbps (..)
+    , HasComputedBgpSettings (..)
+    , HasComputedBootDiagnostics (..)
     , HasComputedCapacity (..)
+    , HasComputedCaptureDescription (..)
+    , HasComputedCertificate (..)
     , HasComputedCertificatePermissions (..)
+    , HasComputedCertificatePolicy (..)
+    , HasComputedCharset (..)
+    , HasComputedClientAffinityEnabled (..)
+    , HasComputedClientId (..)
+    , HasComputedCollation (..)
+    , HasComputedConnectionString (..)
+    , HasComputedConsistencyPolicy (..)
+    , HasComputedContainer (..)
+    , HasComputedContainerAccessType (..)
+    , HasComputedContentType (..)
+    , HasComputedContentTypesToCompress (..)
+    , HasComputedCreateMode (..)
     , HasComputedCreateOption (..)
     , HasComputedCreationData (..)
     , HasComputedCreationDate (..)
     , HasComputedCustomDomain (..)
     , HasComputedDataDisk (..)
+    , HasComputedDbDtuMax (..)
+    , HasComputedDbDtuMin (..)
+    , HasComputedDeadLetteringOnMessageExpiration (..)
     , HasComputedDefaultHostname (..)
     , HasComputedDefaultLocalNetworkGatewayId (..)
+    , HasComputedDefaultMessageTtl (..)
     , HasComputedDefaultSecondaryLocation (..)
     , HasComputedDefaultSiteHostname (..)
+    , HasComputedDeleteDataDisksOnTermination (..)
+    , HasComputedDeleteOsDiskOnTermination (..)
+    , HasComputedDeploymentMode (..)
     , HasComputedDescription (..)
+    , HasComputedDestinationAddressPrefix (..)
+    , HasComputedDestinationAddressPrefixes (..)
+    , HasComputedDestinationPortRange (..)
+    , HasComputedDestinationPortRanges (..)
+    , HasComputedDiagnosticsProfile (..)
     , HasComputedDiagnosticsProfileStorageUri (..)
+    , HasComputedDirection (..)
+    , HasComputedDisabledSslProtocols (..)
     , HasComputedDiskSizeGb (..)
     , HasComputedDisplayName (..)
+    , HasComputedDnsConfig (..)
+    , HasComputedDnsPrefix (..)
     , HasComputedDnsServers (..)
     , HasComputedDomainNameLabel (..)
+    , HasComputedDtu (..)
+    , HasComputedDuplicateDetectionHistoryTimeWindow (..)
     , HasComputedE (..)
+    , HasComputedEdition (..)
+    , HasComputedElasticPoolName (..)
+    , HasComputedEnableAcceleratedNetworking (..)
+    , HasComputedEnableBatchedOperations (..)
     , HasComputedEnableBgp (..)
     , HasComputedEnableBlobEncryption (..)
+    , HasComputedEnableExpress (..)
     , HasComputedEnableFileEncryption (..)
+    , HasComputedEnableFloatingIp (..)
     , HasComputedEnableHttpsTrafficOnly (..)
+    , HasComputedEnableIpForwarding (..)
+    , HasComputedEnablePartitioning (..)
+    , HasComputedEnabled (..)
+    , HasComputedEnabledForDeployment (..)
+    , HasComputedEnabledForDiskEncryption (..)
+    , HasComputedEnabledForTemplateDeployment (..)
+    , HasComputedEncryptionSettings (..)
+    , HasComputedEndIp (..)
+    , HasComputedEndIpAddress (..)
     , HasComputedEndpoint (..)
+    , HasComputedEndpointLocation (..)
+    , HasComputedEndpointStatus (..)
+    , HasComputedEventhubName (..)
+    , HasComputedExpiryTime (..)
+    , HasComputedExpressRouteCircuitId (..)
+    , HasComputedExtension (..)
+    , HasComputedFailoverPolicy (..)
+    , HasComputedFamily' (..)
     , HasComputedFqdn (..)
+    , HasComputedFrequency (..)
+    , HasComputedFrontendIpConfiguration (..)
+    , HasComputedFrontendIpConfigurationName (..)
+    , HasComputedFrontendPort (..)
+    , HasComputedFrontendPortEnd (..)
+    , HasComputedFrontendPortStart (..)
     , HasComputedFullyQualifiedDomainName (..)
+    , HasComputedGatewayAddress (..)
+    , HasComputedGatewayIpConfiguration (..)
     , HasComputedHostname (..)
+    , HasComputedHttpListener (..)
     , HasComputedId (..)
+    , HasComputedIdentity (..)
     , HasComputedIdleTimeoutInMinutes (..)
+    , HasComputedImageReferenceId (..)
     , HasComputedInstrumentationKey (..)
+    , HasComputedInternalDnsNameLabel (..)
     , HasComputedInternalFqdn (..)
+    , HasComputedIntervalInSeconds (..)
     , HasComputedIpAddress (..)
+    , HasComputedIpAddressType (..)
     , HasComputedIpConfiguration (..)
     , HasComputedIpConfigurations (..)
+    , HasComputedIpRangeFilter (..)
+    , HasComputedIsCompressionEnabled (..)
+    , HasComputedIsHttpAllowed (..)
+    , HasComputedIsHttpsAllowed (..)
+    , HasComputedKeyOpts (..)
     , HasComputedKeyPermissions (..)
+    , HasComputedKeySize (..)
+    , HasComputedKeyType (..)
     , HasComputedKind (..)
+    , HasComputedKubernetesVersion (..)
+    , HasComputedLicenseType (..)
+    , HasComputedLinuxProfile (..)
+    , HasComputedLoadDistribution (..)
+    , HasComputedLoadbalancerId (..)
+    , HasComputedLocalNetworkGatewayId (..)
     , HasComputedLocation (..)
     , HasComputedLocationPlacementId (..)
+    , HasComputedLockDuration (..)
+    , HasComputedLockLevel (..)
+    , HasComputedLogProgress (..)
+    , HasComputedLogVerbose (..)
     , HasComputedLoginServer (..)
     , HasComputedMacAddress (..)
+    , HasComputedManaged (..)
+    , HasComputedMasterProfile (..)
     , HasComputedMasterProfileFqdn (..)
+    , HasComputedMaxDeliveryCount (..)
     , HasComputedMaxNumberOfRecordSets (..)
+    , HasComputedMaxSizeBytes (..)
+    , HasComputedMaxSizeInMegabytes (..)
     , HasComputedMaximumNumberOfWorkers (..)
     , HasComputedMaximumThroughputUnits (..)
+    , HasComputedMessageRetention (..)
+    , HasComputedMetricName (..)
+    , HasComputedMinChildEndpoints (..)
+    , HasComputedMonitorConfig (..)
     , HasComputedN (..)
     , HasComputedName (..)
+    , HasComputedNameRegex (..)
     , HasComputedNameServers (..)
+    , HasComputedNamespaceName (..)
+    , HasComputedNetworkInterfaceIds (..)
+    , HasComputedNetworkProfile (..)
     , HasComputedNetworkSecurityGroupId (..)
+    , HasComputedNetworkSecurityGroupName (..)
+    , HasComputedNextHopInIpAddress (..)
+    , HasComputedNextHopType (..)
+    , HasComputedNumberOfProbes (..)
     , HasComputedNumberOfRecordSets (..)
+    , HasComputedOffer (..)
+    , HasComputedOfferType (..)
+    , HasComputedOrchestrationPlatform (..)
+    , HasComputedOrigin (..)
+    , HasComputedOriginHostHeader (..)
+    , HasComputedOriginPath (..)
     , HasComputedOsDisk (..)
+    , HasComputedOsProfile (..)
+    , HasComputedOsProfileLinuxConfig (..)
+    , HasComputedOsProfileSecrets (..)
+    , HasComputedOsProfileWindowsConfig (..)
     , HasComputedOsType (..)
     , HasComputedOutboundIpAddresses (..)
     , HasComputedOutputs (..)
+    , HasComputedOverprovision (..)
+    , HasComputedParallelism (..)
+    , HasComputedPartitionCount (..)
     , HasComputedPartitionIds (..)
+    , HasComputedPassword (..)
+    , HasComputedPeerVirtualNetworkGatewayId (..)
+    , HasComputedPeeringLocation (..)
     , HasComputedPermissions (..)
+    , HasComputedPlan (..)
+    , HasComputedPlatformFaultDomainCount (..)
+    , HasComputedPlatformUpdateDomainCount (..)
+    , HasComputedPoolSize (..)
     , HasComputedPort (..)
     , HasComputedPortalUrl (..)
     , HasComputedPrimaryAccessKey (..)
@@ -395,16 +546,50 @@ module Terrafomo.AzureRM.Lens
     , HasComputedPrimaryKey (..)
     , HasComputedPrimaryLocation (..)
     , HasComputedPrimaryMasterKey (..)
+    , HasComputedPrimaryNetworkInterfaceId (..)
     , HasComputedPrimaryQueueEndpoint (..)
     , HasComputedPrimaryReadonlyMasterKey (..)
     , HasComputedPrimarySharedKey (..)
     , HasComputedPrimaryTableEndpoint (..)
+    , HasComputedPrincipalId (..)
+    , HasComputedPriority (..)
     , HasComputedPrivateIpAddress (..)
     , HasComputedPrivateIpAddresses (..)
+    , HasComputedProbe (..)
+    , HasComputedProbeId (..)
+    , HasComputedProfileName (..)
+    , HasComputedProfileStatus (..)
     , HasComputedProperties (..)
+    , HasComputedProtocol (..)
+    , HasComputedPublishContentLink (..)
+    , HasComputedPublisher (..)
+    , HasComputedQuerystringCachingBehaviour (..)
+    , HasComputedQuota (..)
     , HasComputedQuotaId (..)
+    , HasComputedRecord (..)
+    , HasComputedRecords (..)
+    , HasComputedRedisCacheName (..)
+    , HasComputedRemoteVirtualNetworkId (..)
+    , HasComputedReplicaCount (..)
+    , HasComputedRequestPath (..)
+    , HasComputedRequestRoutingRule (..)
+    , HasComputedRequestedServiceObjectiveId (..)
+    , HasComputedRequestedServiceObjectiveName (..)
+    , HasComputedRequiresDuplicateDetection (..)
+    , HasComputedRequiresSession (..)
     , HasComputedResourceGroupName (..)
+    , HasComputedResourceId (..)
+    , HasComputedRestartPolicy (..)
+    , HasComputedRestorePointInTime (..)
+    , HasComputedRetentionInDays (..)
+    , HasComputedRoleDefinitionId (..)
+    , HasComputedRoleDefinitionName (..)
+    , HasComputedRoute (..)
     , HasComputedRouteTableId (..)
+    , HasComputedRouteTableName (..)
+    , HasComputedRoutingWeight (..)
+    , HasComputedRunbookType (..)
+    , HasComputedScope (..)
     , HasComputedSecondaryAccessKey (..)
     , HasComputedSecondaryBlobConnectionString (..)
     , HasComputedSecondaryBlobEndpoint (..)
@@ -418,33 +603,90 @@ module Terrafomo.AzureRM.Lens
     , HasComputedSecondaryTableEndpoint (..)
     , HasComputedSecretPermissions (..)
     , HasComputedSecurityRule (..)
+    , HasComputedServerName (..)
+    , HasComputedServiceEndpoints (..)
     , HasComputedServiceKey (..)
+    , HasComputedServicePrincipal (..)
+    , HasComputedServiceProviderName (..)
     , HasComputedServiceProviderProvisioningState (..)
+    , HasComputedSharedKey (..)
+    , HasComputedSinglePlacementGroup (..)
+    , HasComputedSiteConfig (..)
+    , HasComputedSize (..)
     , HasComputedSku (..)
+    , HasComputedSortDescending (..)
+    , HasComputedSource (..)
+    , HasComputedSourceAddressPrefix (..)
+    , HasComputedSourceAddressPrefixes (..)
+    , HasComputedSourceDatabaseDeletionDate (..)
+    , HasComputedSourceDatabaseId (..)
+    , HasComputedSourcePortRange (..)
+    , HasComputedSourcePortRanges (..)
     , HasComputedSourceResourceId (..)
     , HasComputedSourceUri (..)
+    , HasComputedSourceVirtualMachineId (..)
     , HasComputedSpendingLimit (..)
+    , HasComputedSslCertificate (..)
     , HasComputedSslPort (..)
+    , HasComputedStartIp (..)
+    , HasComputedStartIpAddress (..)
+    , HasComputedStartTime (..)
     , HasComputedState (..)
+    , HasComputedStatus (..)
     , HasComputedStorageAccountId (..)
+    , HasComputedStorageAccountName (..)
     , HasComputedStorageAccountType (..)
+    , HasComputedStorageConnectionString (..)
+    , HasComputedStorageContainerName (..)
+    , HasComputedStorageDataDisk (..)
+    , HasComputedStorageImageReference (..)
+    , HasComputedStorageMb (..)
+    , HasComputedStorageOsDisk (..)
+    , HasComputedStorageProfileDataDisk (..)
+    , HasComputedStorageProfileImageReference (..)
+    , HasComputedStorageProfileOsDisk (..)
+    , HasComputedSubnet (..)
     , HasComputedSubnets (..)
+    , HasComputedSubscriptionId (..)
+    , HasComputedSupportOrdering (..)
+    , HasComputedTTL (..)
     , HasComputedTags (..)
+    , HasComputedTarget (..)
+    , HasComputedTargetResourceId (..)
+    , HasComputedTemplateBody (..)
+    , HasComputedTenantId (..)
+    , HasComputedTimezone (..)
+    , HasComputedTopicName (..)
+    , HasComputedTrafficRoutingMethod (..)
+    , HasComputedTtl (..)
     , HasComputedType' (..)
+    , HasComputedUpgradePolicyMode (..)
     , HasComputedUrl (..)
+    , HasComputedUrlPathMap (..)
+    , HasComputedUseRemoteGateways (..)
+    , HasComputedUseSubdomain (..)
+    , HasComputedUserMetadata (..)
+    , HasComputedUsername (..)
+    , HasComputedValue (..)
     , HasComputedVaultUri (..)
     , HasComputedVersion (..)
     , HasComputedVirtualMachineId (..)
+    , HasComputedVirtualMachineName (..)
+    , HasComputedVirtualNetworkGatewayId (..)
     , HasComputedVirtualNetworkName (..)
+    , HasComputedVmSize (..)
     , HasComputedVnetPeerings (..)
     , HasComputedVpnClientConfiguration (..)
     , HasComputedVpnType (..)
+    , HasComputedWafConfiguration (..)
+    , HasComputedWeight (..)
     , HasComputedWorkspaceId (..)
+    , HasComputedZoneName (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -2196,752 +2438,1103 @@ class HasZoneName a b | a -> b where
 instance HasZoneName a b => HasZoneName (TF.Schema l p a) b where
     zoneName = TF.configuration . zoneName
 
-class HasComputedAccessTier a b | a -> b where
-    computedAccessTier
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAccessTier =
-        to (\x -> TF.compute (TF.refKey x) "access_tier")
-
-class HasComputedAccountEncryptionSource a b | a -> b where
-    computedAccountEncryptionSource
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAccountEncryptionSource =
-        to (\x -> TF.compute (TF.refKey x) "account_encryption_source")
-
-class HasComputedAccountKind a b | a -> b where
-    computedAccountKind
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAccountKind =
-        to (\x -> TF.compute (TF.refKey x) "account_kind")
-
-class HasComputedAccountReplicationType a b | a -> b where
-    computedAccountReplicationType
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAccountReplicationType =
-        to (\x -> TF.compute (TF.refKey x) "account_replication_type")
-
-class HasComputedAccountTier a b | a -> b where
-    computedAccountTier
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAccountTier =
-        to (\x -> TF.compute (TF.refKey x) "account_tier")
-
-class HasComputedActiveActive a b | a -> b where
-    computedActiveActive
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedActiveActive =
-        to (\x -> TF.compute (TF.refKey x) "active_active")
-
-class HasComputedAddressPrefix a b | a -> b where
-    computedAddressPrefix
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAddressPrefix =
-        to (\x -> TF.compute (TF.refKey x) "address_prefix")
-
-class HasComputedAddressSpace a b | a -> b where
-    computedAddressSpace
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAddressSpace =
-        to (\x -> TF.compute (TF.refKey x) "address_space")
-
-class HasComputedAddressSpaces a b | a -> b where
-    computedAddressSpaces
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAddressSpaces =
-        to (\x -> TF.compute (TF.refKey x) "address_spaces")
-
-class HasComputedAdminPassword a b | a -> b where
-    computedAdminPassword
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAdminPassword =
-        to (\x -> TF.compute (TF.refKey x) "admin_password")
-
-class HasComputedAdminUsername a b | a -> b where
-    computedAdminUsername
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAdminUsername =
-        to (\x -> TF.compute (TF.refKey x) "admin_username")
-
-class HasComputedAgentPoolProfileFqdn a b | a -> b where
-    computedAgentPoolProfileFqdn
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAgentPoolProfileFqdn =
-        to (\x -> TF.compute (TF.refKey x) "agent_pool_profile.fqdn")
-
-class HasComputedAppId a b | a -> b where
-    computedAppId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAppId =
-        to (\x -> TF.compute (TF.refKey x) "app_id")
-
-class HasComputedAppliedDnsServers a b | a -> b where
-    computedAppliedDnsServers
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAppliedDnsServers =
-        to (\x -> TF.compute (TF.refKey x) "applied_dns_servers")
-
-class HasComputedAssignableScopes a b | a -> b where
-    computedAssignableScopes
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAssignableScopes =
-        to (\x -> TF.compute (TF.refKey x) "assignable_scopes")
-
-class HasComputedAutoInflateEnabled a b | a -> b where
-    computedAutoInflateEnabled
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAutoInflateEnabled =
-        to (\x -> TF.compute (TF.refKey x) "auto_inflate_enabled")
-
-class HasComputedCapacity a b | a -> b where
-    computedCapacity
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCapacity =
-        to (\x -> TF.compute (TF.refKey x) "capacity")
-
-class HasComputedCertificatePermissions a b | a -> b where
-    computedCertificatePermissions
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCertificatePermissions =
-        to (\x -> TF.compute (TF.refKey x) "certificate_permissions")
-
-class HasComputedCreateOption a b | a -> b where
-    computedCreateOption
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreateOption =
-        to (\x -> TF.compute (TF.refKey x) "create_option")
-
-class HasComputedCreationData a b | a -> b where
-    computedCreationData
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreationData =
-        to (\x -> TF.compute (TF.refKey x) "creation_data")
-
-class HasComputedCreationDate a b | a -> b where
-    computedCreationDate
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreationDate =
-        to (\x -> TF.compute (TF.refKey x) "creation_date")
-
-class HasComputedCustomDomain a b | a -> b where
-    computedCustomDomain
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCustomDomain =
-        to (\x -> TF.compute (TF.refKey x) "custom_domain")
-
-class HasComputedDataDisk a b | a -> b where
-    computedDataDisk
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDataDisk =
-        to (\x -> TF.compute (TF.refKey x) "data_disk")
-
-class HasComputedDefaultHostname a b | a -> b where
-    computedDefaultHostname
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDefaultHostname =
-        to (\x -> TF.compute (TF.refKey x) "default_hostname")
-
-class HasComputedDefaultLocalNetworkGatewayId a b | a -> b where
-    computedDefaultLocalNetworkGatewayId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDefaultLocalNetworkGatewayId =
-        to (\x -> TF.compute (TF.refKey x) "default_local_network_gateway_id")
-
-class HasComputedDefaultSecondaryLocation a b | a -> b where
-    computedDefaultSecondaryLocation
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDefaultSecondaryLocation =
-        to (\x -> TF.compute (TF.refKey x) "default_secondary_location")
-
-class HasComputedDefaultSiteHostname a b | a -> b where
-    computedDefaultSiteHostname
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDefaultSiteHostname =
-        to (\x -> TF.compute (TF.refKey x) "default_site_hostname")
-
-class HasComputedDescription a b | a -> b where
-    computedDescription
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDescription =
-        to (\x -> TF.compute (TF.refKey x) "description")
-
-class HasComputedDiagnosticsProfileStorageUri a b | a -> b where
-    computedDiagnosticsProfileStorageUri
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDiagnosticsProfileStorageUri =
-        to (\x -> TF.compute (TF.refKey x) "diagnostics_profile.storage_uri")
-
-class HasComputedDiskSizeGb a b | a -> b where
-    computedDiskSizeGb
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDiskSizeGb =
-        to (\x -> TF.compute (TF.refKey x) "disk_size_gb")
-
-class HasComputedDisplayName a b | a -> b where
-    computedDisplayName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDisplayName =
-        to (\x -> TF.compute (TF.refKey x) "display_name")
-
-class HasComputedDnsServers a b | a -> b where
-    computedDnsServers
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDnsServers =
-        to (\x -> TF.compute (TF.refKey x) "dns_servers")
-
-class HasComputedDomainNameLabel a b | a -> b where
-    computedDomainNameLabel
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDomainNameLabel =
-        to (\x -> TF.compute (TF.refKey x) "domain_name_label")
-
-class HasComputedE a b | a -> b where
-    computedE
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedE =
-        to (\x -> TF.compute (TF.refKey x) "e")
-
-class HasComputedEnableBgp a b | a -> b where
-    computedEnableBgp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedEnableBgp =
-        to (\x -> TF.compute (TF.refKey x) "enable_bgp")
-
-class HasComputedEnableBlobEncryption a b | a -> b where
-    computedEnableBlobEncryption
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedEnableBlobEncryption =
-        to (\x -> TF.compute (TF.refKey x) "enable_blob_encryption")
-
-class HasComputedEnableFileEncryption a b | a -> b where
-    computedEnableFileEncryption
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedEnableFileEncryption =
-        to (\x -> TF.compute (TF.refKey x) "enable_file_encryption")
-
-class HasComputedEnableHttpsTrafficOnly a b | a -> b where
-    computedEnableHttpsTrafficOnly
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedEnableHttpsTrafficOnly =
-        to (\x -> TF.compute (TF.refKey x) "enable_https_traffic_only")
-
-class HasComputedEndpoint a b | a -> b where
-    computedEndpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedEndpoint =
-        to (\x -> TF.compute (TF.refKey x) "endpoint")
-
-class HasComputedFqdn a b | a -> b where
-    computedFqdn
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFqdn =
-        to (\x -> TF.compute (TF.refKey x) "fqdn")
-
-class HasComputedFullyQualifiedDomainName a b | a -> b where
-    computedFullyQualifiedDomainName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFullyQualifiedDomainName =
-        to (\x -> TF.compute (TF.refKey x) "fully_qualified_domain_name")
-
-class HasComputedHostname a b | a -> b where
-    computedHostname
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedHostname =
-        to (\x -> TF.compute (TF.refKey x) "hostname")
-
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
-
-class HasComputedIdleTimeoutInMinutes a b | a -> b where
-    computedIdleTimeoutInMinutes
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIdleTimeoutInMinutes =
-        to (\x -> TF.compute (TF.refKey x) "idle_timeout_in_minutes")
-
-class HasComputedInstrumentationKey a b | a -> b where
-    computedInstrumentationKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedInstrumentationKey =
-        to (\x -> TF.compute (TF.refKey x) "instrumentation_key")
-
-class HasComputedInternalFqdn a b | a -> b where
-    computedInternalFqdn
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedInternalFqdn =
-        to (\x -> TF.compute (TF.refKey x) "internal_fqdn")
-
-class HasComputedIpAddress a b | a -> b where
-    computedIpAddress
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpAddress =
-        to (\x -> TF.compute (TF.refKey x) "ip_address")
-
-class HasComputedIpConfiguration a b | a -> b where
-    computedIpConfiguration
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpConfiguration =
-        to (\x -> TF.compute (TF.refKey x) "ip_configuration")
-
-class HasComputedIpConfigurations a b | a -> b where
-    computedIpConfigurations
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpConfigurations =
-        to (\x -> TF.compute (TF.refKey x) "ip_configurations")
-
-class HasComputedKeyPermissions a b | a -> b where
-    computedKeyPermissions
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedKeyPermissions =
-        to (\x -> TF.compute (TF.refKey x) "key_permissions")
-
-class HasComputedKind a b | a -> b where
-    computedKind
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedKind =
-        to (\x -> TF.compute (TF.refKey x) "kind")
-
-class HasComputedLocation a b | a -> b where
-    computedLocation
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLocation =
-        to (\x -> TF.compute (TF.refKey x) "location")
-
-class HasComputedLocationPlacementId a b | a -> b where
-    computedLocationPlacementId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLocationPlacementId =
-        to (\x -> TF.compute (TF.refKey x) "location_placement_id")
-
-class HasComputedLoginServer a b | a -> b where
-    computedLoginServer
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLoginServer =
-        to (\x -> TF.compute (TF.refKey x) "login_server")
-
-class HasComputedMacAddress a b | a -> b where
-    computedMacAddress
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMacAddress =
-        to (\x -> TF.compute (TF.refKey x) "mac_address")
-
-class HasComputedMasterProfileFqdn a b | a -> b where
-    computedMasterProfileFqdn
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMasterProfileFqdn =
-        to (\x -> TF.compute (TF.refKey x) "master_profile.fqdn")
-
-class HasComputedMaxNumberOfRecordSets a b | a -> b where
-    computedMaxNumberOfRecordSets
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMaxNumberOfRecordSets =
-        to (\x -> TF.compute (TF.refKey x) "max_number_of_record_sets")
-
-class HasComputedMaximumNumberOfWorkers a b | a -> b where
-    computedMaximumNumberOfWorkers
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMaximumNumberOfWorkers =
-        to (\x -> TF.compute (TF.refKey x) "maximum_number_of_workers")
-
-class HasComputedMaximumThroughputUnits a b | a -> b where
-    computedMaximumThroughputUnits
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMaximumThroughputUnits =
-        to (\x -> TF.compute (TF.refKey x) "maximum_throughput_units")
-
-class HasComputedN a b | a -> b where
-    computedN
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedN =
-        to (\x -> TF.compute (TF.refKey x) "n")
-
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
-
-class HasComputedNameServers a b | a -> b where
-    computedNameServers
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNameServers =
-        to (\x -> TF.compute (TF.refKey x) "name_servers")
-
-class HasComputedNetworkSecurityGroupId a b | a -> b where
-    computedNetworkSecurityGroupId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNetworkSecurityGroupId =
-        to (\x -> TF.compute (TF.refKey x) "network_security_group_id")
-
-class HasComputedNumberOfRecordSets a b | a -> b where
-    computedNumberOfRecordSets
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNumberOfRecordSets =
-        to (\x -> TF.compute (TF.refKey x) "number_of_record_sets")
-
-class HasComputedOsDisk a b | a -> b where
-    computedOsDisk
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedOsDisk =
-        to (\x -> TF.compute (TF.refKey x) "os_disk")
-
-class HasComputedOsType a b | a -> b where
-    computedOsType
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedOsType =
-        to (\x -> TF.compute (TF.refKey x) "os_type")
-
-class HasComputedOutboundIpAddresses a b | a -> b where
-    computedOutboundIpAddresses
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedOutboundIpAddresses =
-        to (\x -> TF.compute (TF.refKey x) "outbound_ip_addresses")
-
-class HasComputedOutputs a b | a -> b where
-    computedOutputs
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedOutputs =
-        to (\x -> TF.compute (TF.refKey x) "outputs")
-
-class HasComputedPartitionIds a b | a -> b where
-    computedPartitionIds
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPartitionIds =
-        to (\x -> TF.compute (TF.refKey x) "partition_ids")
-
-class HasComputedPermissions a b | a -> b where
-    computedPermissions
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPermissions =
-        to (\x -> TF.compute (TF.refKey x) "permissions")
-
-class HasComputedPort a b | a -> b where
-    computedPort
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPort =
-        to (\x -> TF.compute (TF.refKey x) "port")
-
-class HasComputedPortalUrl a b | a -> b where
-    computedPortalUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPortalUrl =
-        to (\x -> TF.compute (TF.refKey x) "portal_url")
-
-class HasComputedPrimaryAccessKey a b | a -> b where
-    computedPrimaryAccessKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryAccessKey =
-        to (\x -> TF.compute (TF.refKey x) "primary_access_key")
-
-class HasComputedPrimaryBlobConnectionString a b | a -> b where
-    computedPrimaryBlobConnectionString
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryBlobConnectionString =
-        to (\x -> TF.compute (TF.refKey x) "primary_blob_connection_string")
-
-class HasComputedPrimaryBlobEndpoint a b | a -> b where
-    computedPrimaryBlobEndpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryBlobEndpoint =
-        to (\x -> TF.compute (TF.refKey x) "primary_blob_endpoint")
-
-class HasComputedPrimaryConnectionString a b | a -> b where
-    computedPrimaryConnectionString
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryConnectionString =
-        to (\x -> TF.compute (TF.refKey x) "primary_connection_string")
-
-class HasComputedPrimaryFileEndpoint a b | a -> b where
-    computedPrimaryFileEndpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryFileEndpoint =
-        to (\x -> TF.compute (TF.refKey x) "primary_file_endpoint")
-
-class HasComputedPrimaryKey a b | a -> b where
-    computedPrimaryKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryKey =
-        to (\x -> TF.compute (TF.refKey x) "primary_key")
-
-class HasComputedPrimaryLocation a b | a -> b where
-    computedPrimaryLocation
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryLocation =
-        to (\x -> TF.compute (TF.refKey x) "primary_location")
-
-class HasComputedPrimaryMasterKey a b | a -> b where
-    computedPrimaryMasterKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryMasterKey =
-        to (\x -> TF.compute (TF.refKey x) "primary_master_key")
-
-class HasComputedPrimaryQueueEndpoint a b | a -> b where
-    computedPrimaryQueueEndpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryQueueEndpoint =
-        to (\x -> TF.compute (TF.refKey x) "primary_queue_endpoint")
-
-class HasComputedPrimaryReadonlyMasterKey a b | a -> b where
-    computedPrimaryReadonlyMasterKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryReadonlyMasterKey =
-        to (\x -> TF.compute (TF.refKey x) "primary_readonly_master_key")
-
-class HasComputedPrimarySharedKey a b | a -> b where
-    computedPrimarySharedKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimarySharedKey =
-        to (\x -> TF.compute (TF.refKey x) "primary_shared_key")
-
-class HasComputedPrimaryTableEndpoint a b | a -> b where
-    computedPrimaryTableEndpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrimaryTableEndpoint =
-        to (\x -> TF.compute (TF.refKey x) "primary_table_endpoint")
-
-class HasComputedPrivateIpAddress a b | a -> b where
-    computedPrivateIpAddress
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrivateIpAddress =
-        to (\x -> TF.compute (TF.refKey x) "private_ip_address")
-
-class HasComputedPrivateIpAddresses a b | a -> b where
-    computedPrivateIpAddresses
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrivateIpAddresses =
-        to (\x -> TF.compute (TF.refKey x) "private_ip_addresses")
-
-class HasComputedProperties a b | a -> b where
-    computedProperties
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedProperties =
-        to (\x -> TF.compute (TF.refKey x) "properties")
-
-class HasComputedQuotaId a b | a -> b where
-    computedQuotaId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedQuotaId =
-        to (\x -> TF.compute (TF.refKey x) "quota_id")
-
-class HasComputedResourceGroupName a b | a -> b where
-    computedResourceGroupName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedResourceGroupName =
-        to (\x -> TF.compute (TF.refKey x) "resource_group_name")
-
-class HasComputedRouteTableId a b | a -> b where
-    computedRouteTableId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRouteTableId =
-        to (\x -> TF.compute (TF.refKey x) "route_table_id")
-
-class HasComputedSecondaryAccessKey a b | a -> b where
-    computedSecondaryAccessKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryAccessKey =
-        to (\x -> TF.compute (TF.refKey x) "secondary_access_key")
-
-class HasComputedSecondaryBlobConnectionString a b | a -> b where
-    computedSecondaryBlobConnectionString
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryBlobConnectionString =
-        to (\x -> TF.compute (TF.refKey x) "secondary_blob_connection_string")
-
-class HasComputedSecondaryBlobEndpoint a b | a -> b where
-    computedSecondaryBlobEndpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryBlobEndpoint =
-        to (\x -> TF.compute (TF.refKey x) "secondary_blob_endpoint")
-
-class HasComputedSecondaryConnectionString a b | a -> b where
-    computedSecondaryConnectionString
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryConnectionString =
-        to (\x -> TF.compute (TF.refKey x) "secondary_connection_string")
-
-class HasComputedSecondaryKey a b | a -> b where
-    computedSecondaryKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryKey =
-        to (\x -> TF.compute (TF.refKey x) "secondary_key")
-
-class HasComputedSecondaryLocation a b | a -> b where
-    computedSecondaryLocation
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryLocation =
-        to (\x -> TF.compute (TF.refKey x) "secondary_location")
-
-class HasComputedSecondaryMasterKey a b | a -> b where
-    computedSecondaryMasterKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryMasterKey =
-        to (\x -> TF.compute (TF.refKey x) "secondary_master_key")
-
-class HasComputedSecondaryQueueEndpoint a b | a -> b where
-    computedSecondaryQueueEndpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryQueueEndpoint =
-        to (\x -> TF.compute (TF.refKey x) "secondary_queue_endpoint")
-
-class HasComputedSecondaryReadonlyMasterKey a b | a -> b where
-    computedSecondaryReadonlyMasterKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryReadonlyMasterKey =
-        to (\x -> TF.compute (TF.refKey x) "secondary_readonly_master_key")
-
-class HasComputedSecondarySharedKey a b | a -> b where
-    computedSecondarySharedKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondarySharedKey =
-        to (\x -> TF.compute (TF.refKey x) "secondary_shared_key")
-
-class HasComputedSecondaryTableEndpoint a b | a -> b where
-    computedSecondaryTableEndpoint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecondaryTableEndpoint =
-        to (\x -> TF.compute (TF.refKey x) "secondary_table_endpoint")
-
-class HasComputedSecretPermissions a b | a -> b where
-    computedSecretPermissions
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecretPermissions =
-        to (\x -> TF.compute (TF.refKey x) "secret_permissions")
-
-class HasComputedSecurityRule a b | a -> b where
-    computedSecurityRule
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecurityRule =
-        to (\x -> TF.compute (TF.refKey x) "security_rule")
-
-class HasComputedServiceKey a b | a -> b where
-    computedServiceKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedServiceKey =
-        to (\x -> TF.compute (TF.refKey x) "service_key")
-
-class HasComputedServiceProviderProvisioningState a b | a -> b where
-    computedServiceProviderProvisioningState
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedServiceProviderProvisioningState =
-        to (\x -> TF.compute (TF.refKey x) "service_provider_provisioning_state")
-
-class HasComputedSku a b | a -> b where
-    computedSku
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSku =
-        to (\x -> TF.compute (TF.refKey x) "sku")
-
-class HasComputedSourceResourceId a b | a -> b where
-    computedSourceResourceId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSourceResourceId =
-        to (\x -> TF.compute (TF.refKey x) "source_resource_id")
-
-class HasComputedSourceUri a b | a -> b where
-    computedSourceUri
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSourceUri =
-        to (\x -> TF.compute (TF.refKey x) "source_uri")
-
-class HasComputedSpendingLimit a b | a -> b where
-    computedSpendingLimit
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSpendingLimit =
-        to (\x -> TF.compute (TF.refKey x) "spending_limit")
-
-class HasComputedSslPort a b | a -> b where
-    computedSslPort
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSslPort =
-        to (\x -> TF.compute (TF.refKey x) "ssl_port")
-
-class HasComputedState a b | a -> b where
-    computedState
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedState =
-        to (\x -> TF.compute (TF.refKey x) "state")
-
-class HasComputedStorageAccountId a b | a -> b where
-    computedStorageAccountId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedStorageAccountId =
-        to (\x -> TF.compute (TF.refKey x) "storage_account_id")
-
-class HasComputedStorageAccountType a b | a -> b where
-    computedStorageAccountType
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedStorageAccountType =
-        to (\x -> TF.compute (TF.refKey x) "storage_account_type")
-
-class HasComputedSubnets a b | a -> b where
-    computedSubnets
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSubnets =
-        to (\x -> TF.compute (TF.refKey x) "subnets")
-
-class HasComputedTags a b | a -> b where
-    computedTags
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTags =
-        to (\x -> TF.compute (TF.refKey x) "tags")
-
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
-
-class HasComputedUrl a b | a -> b where
-    computedUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUrl =
-        to (\x -> TF.compute (TF.refKey x) "url")
-
-class HasComputedVaultUri a b | a -> b where
-    computedVaultUri
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVaultUri =
-        to (\x -> TF.compute (TF.refKey x) "vault_uri")
-
-class HasComputedVersion a b | a -> b where
-    computedVersion
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVersion =
-        to (\x -> TF.compute (TF.refKey x) "version")
-
-class HasComputedVirtualMachineId a b | a -> b where
-    computedVirtualMachineId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVirtualMachineId =
-        to (\x -> TF.compute (TF.refKey x) "virtual_machine_id")
-
-class HasComputedVirtualNetworkName a b | a -> b where
-    computedVirtualNetworkName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVirtualNetworkName =
-        to (\x -> TF.compute (TF.refKey x) "virtual_network_name")
-
-class HasComputedVnetPeerings a b | a -> b where
-    computedVnetPeerings
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVnetPeerings =
-        to (\x -> TF.compute (TF.refKey x) "vnet_peerings")
-
-class HasComputedVpnClientConfiguration a b | a -> b where
-    computedVpnClientConfiguration
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVpnClientConfiguration =
-        to (\x -> TF.compute (TF.refKey x) "vpn_client_configuration")
-
-class HasComputedVpnType a b | a -> b where
-    computedVpnType
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVpnType =
-        to (\x -> TF.compute (TF.refKey x) "vpn_type")
-
-class HasComputedWorkspaceId a b | a -> b where
-    computedWorkspaceId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedWorkspaceId =
-        to (\x -> TF.compute (TF.refKey x) "workspace_id")
+class HasComputedAccess a s b | a -> s b where
+    computedAccess :: TF.Ref s a -> b
+
+class HasComputedAccessPolicy a s b | a -> s b where
+    computedAccessPolicy :: TF.Ref s a -> b
+
+class HasComputedAccessTier a s b | a -> s b where
+    computedAccessTier :: TF.Ref s a -> b
+
+class HasComputedAccountEncryptionSource a s b | a -> s b where
+    computedAccountEncryptionSource :: TF.Ref s a -> b
+
+class HasComputedAccountKind a s b | a -> s b where
+    computedAccountKind :: TF.Ref s a -> b
+
+class HasComputedAccountName a s b | a -> s b where
+    computedAccountName :: TF.Ref s a -> b
+
+class HasComputedAccountReplicationType a s b | a -> s b where
+    computedAccountReplicationType :: TF.Ref s a -> b
+
+class HasComputedAccountTier a s b | a -> s b where
+    computedAccountTier :: TF.Ref s a -> b
+
+class HasComputedActiveActive a s b | a -> s b where
+    computedActiveActive :: TF.Ref s a -> b
+
+class HasComputedAddressPrefix a s b | a -> s b where
+    computedAddressPrefix :: TF.Ref s a -> b
+
+class HasComputedAddressSpace a s b | a -> s b where
+    computedAddressSpace :: TF.Ref s a -> b
+
+class HasComputedAddressSpaces a s b | a -> s b where
+    computedAddressSpaces :: TF.Ref s a -> b
+
+class HasComputedAdminEnabled a s b | a -> s b where
+    computedAdminEnabled :: TF.Ref s a -> b
+
+class HasComputedAdminPassword a s b | a -> s b where
+    computedAdminPassword :: TF.Ref s a -> b
+
+class HasComputedAdminUsername a s b | a -> s b where
+    computedAdminUsername :: TF.Ref s a -> b
+
+class HasComputedAdministratorLogin a s b | a -> s b where
+    computedAdministratorLogin :: TF.Ref s a -> b
+
+class HasComputedAdministratorLoginPassword a s b | a -> s b where
+    computedAdministratorLoginPassword :: TF.Ref s a -> b
+
+class HasComputedAgentPoolProfile a s b | a -> s b where
+    computedAgentPoolProfile :: TF.Ref s a -> b
+
+class HasComputedAgentPoolProfileFqdn a s b | a -> s b where
+    computedAgentPoolProfileFqdn :: TF.Ref s a -> b
+
+class HasComputedAllowClassicOperations a s b | a -> s b where
+    computedAllowClassicOperations :: TF.Ref s a -> b
+
+class HasComputedAllowForwardedTraffic a s b | a -> s b where
+    computedAllowForwardedTraffic :: TF.Ref s a -> b
+
+class HasComputedAllowGatewayTransit a s b | a -> s b where
+    computedAllowGatewayTransit :: TF.Ref s a -> b
+
+class HasComputedAllowVirtualNetworkAccess a s b | a -> s b where
+    computedAllowVirtualNetworkAccess :: TF.Ref s a -> b
+
+class HasComputedAppId a s b | a -> s b where
+    computedAppId :: TF.Ref s a -> b
+
+class HasComputedAppServiceName a s b | a -> s b where
+    computedAppServiceName :: TF.Ref s a -> b
+
+class HasComputedAppServicePlanId a s b | a -> s b where
+    computedAppServicePlanId :: TF.Ref s a -> b
+
+class HasComputedAppServiceSlotName a s b | a -> s b where
+    computedAppServiceSlotName :: TF.Ref s a -> b
+
+class HasComputedAppSettings a s b | a -> s b where
+    computedAppSettings :: TF.Ref s a -> b
+
+class HasComputedApplicationType a s b | a -> s b where
+    computedApplicationType :: TF.Ref s a -> b
+
+class HasComputedAppliedDnsServers a s b | a -> s b where
+    computedAppliedDnsServers :: TF.Ref s a -> b
+
+class HasComputedAssignableScopes a s b | a -> s b where
+    computedAssignableScopes :: TF.Ref s a -> b
+
+class HasComputedAttempts a s b | a -> s b where
+    computedAttempts :: TF.Ref s a -> b
+
+class HasComputedAuthenticationCertificate a s b | a -> s b where
+    computedAuthenticationCertificate :: TF.Ref s a -> b
+
+class HasComputedAuthorizationKey a s b | a -> s b where
+    computedAuthorizationKey :: TF.Ref s a -> b
+
+class HasComputedAutoDeleteOnIdle a s b | a -> s b where
+    computedAutoDeleteOnIdle :: TF.Ref s a -> b
+
+class HasComputedAutoInflateEnabled a s b | a -> s b where
+    computedAutoInflateEnabled :: TF.Ref s a -> b
+
+class HasComputedAvailabilitySetId a s b | a -> s b where
+    computedAvailabilitySetId :: TF.Ref s a -> b
+
+class HasComputedBackendAddressPool a s b | a -> s b where
+    computedBackendAddressPool :: TF.Ref s a -> b
+
+class HasComputedBackendAddressPoolId a s b | a -> s b where
+    computedBackendAddressPoolId :: TF.Ref s a -> b
+
+class HasComputedBackendHttpSettings a s b | a -> s b where
+    computedBackendHttpSettings :: TF.Ref s a -> b
+
+class HasComputedBackendPort a s b | a -> s b where
+    computedBackendPort :: TF.Ref s a -> b
+
+class HasComputedBandwidthInMbps a s b | a -> s b where
+    computedBandwidthInMbps :: TF.Ref s a -> b
+
+class HasComputedBgpSettings a s b | a -> s b where
+    computedBgpSettings :: TF.Ref s a -> b
+
+class HasComputedBootDiagnostics a s b | a -> s b where
+    computedBootDiagnostics :: TF.Ref s a -> b
+
+class HasComputedCapacity a s b | a -> s b where
+    computedCapacity :: TF.Ref s a -> b
+
+class HasComputedCaptureDescription a s b | a -> s b where
+    computedCaptureDescription :: TF.Ref s a -> b
+
+class HasComputedCertificate a s b | a -> s b where
+    computedCertificate :: TF.Ref s a -> b
+
+class HasComputedCertificatePermissions a s b | a -> s b where
+    computedCertificatePermissions :: TF.Ref s a -> b
+
+class HasComputedCertificatePolicy a s b | a -> s b where
+    computedCertificatePolicy :: TF.Ref s a -> b
+
+class HasComputedCharset a s b | a -> s b where
+    computedCharset :: TF.Ref s a -> b
+
+class HasComputedClientAffinityEnabled a s b | a -> s b where
+    computedClientAffinityEnabled :: TF.Ref s a -> b
+
+class HasComputedClientId a s b | a -> s b where
+    computedClientId :: TF.Ref s a -> b
+
+class HasComputedCollation a s b | a -> s b where
+    computedCollation :: TF.Ref s a -> b
+
+class HasComputedConnectionString a s b | a -> s b where
+    computedConnectionString :: TF.Ref s a -> b
+
+class HasComputedConsistencyPolicy a s b | a -> s b where
+    computedConsistencyPolicy :: TF.Ref s a -> b
+
+class HasComputedContainer a s b | a -> s b where
+    computedContainer :: TF.Ref s a -> b
+
+class HasComputedContainerAccessType a s b | a -> s b where
+    computedContainerAccessType :: TF.Ref s a -> b
+
+class HasComputedContentType a s b | a -> s b where
+    computedContentType :: TF.Ref s a -> b
+
+class HasComputedContentTypesToCompress a s b | a -> s b where
+    computedContentTypesToCompress :: TF.Ref s a -> b
+
+class HasComputedCreateMode a s b | a -> s b where
+    computedCreateMode :: TF.Ref s a -> b
+
+class HasComputedCreateOption a s b | a -> s b where
+    computedCreateOption :: TF.Ref s a -> b
+
+class HasComputedCreationData a s b | a -> s b where
+    computedCreationData :: TF.Ref s a -> b
+
+class HasComputedCreationDate a s b | a -> s b where
+    computedCreationDate :: TF.Ref s a -> b
+
+class HasComputedCustomDomain a s b | a -> s b where
+    computedCustomDomain :: TF.Ref s a -> b
+
+class HasComputedDataDisk a s b | a -> s b where
+    computedDataDisk :: TF.Ref s a -> b
+
+class HasComputedDbDtuMax a s b | a -> s b where
+    computedDbDtuMax :: TF.Ref s a -> b
+
+class HasComputedDbDtuMin a s b | a -> s b where
+    computedDbDtuMin :: TF.Ref s a -> b
+
+class HasComputedDeadLetteringOnMessageExpiration a s b | a -> s b where
+    computedDeadLetteringOnMessageExpiration :: TF.Ref s a -> b
+
+class HasComputedDefaultHostname a s b | a -> s b where
+    computedDefaultHostname :: TF.Ref s a -> b
+
+class HasComputedDefaultLocalNetworkGatewayId a s b | a -> s b where
+    computedDefaultLocalNetworkGatewayId :: TF.Ref s a -> b
+
+class HasComputedDefaultMessageTtl a s b | a -> s b where
+    computedDefaultMessageTtl :: TF.Ref s a -> b
+
+class HasComputedDefaultSecondaryLocation a s b | a -> s b where
+    computedDefaultSecondaryLocation :: TF.Ref s a -> b
+
+class HasComputedDefaultSiteHostname a s b | a -> s b where
+    computedDefaultSiteHostname :: TF.Ref s a -> b
+
+class HasComputedDeleteDataDisksOnTermination a s b | a -> s b where
+    computedDeleteDataDisksOnTermination :: TF.Ref s a -> b
+
+class HasComputedDeleteOsDiskOnTermination a s b | a -> s b where
+    computedDeleteOsDiskOnTermination :: TF.Ref s a -> b
+
+class HasComputedDeploymentMode a s b | a -> s b where
+    computedDeploymentMode :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedDestinationAddressPrefix a s b | a -> s b where
+    computedDestinationAddressPrefix :: TF.Ref s a -> b
+
+class HasComputedDestinationAddressPrefixes a s b | a -> s b where
+    computedDestinationAddressPrefixes :: TF.Ref s a -> b
+
+class HasComputedDestinationPortRange a s b | a -> s b where
+    computedDestinationPortRange :: TF.Ref s a -> b
+
+class HasComputedDestinationPortRanges a s b | a -> s b where
+    computedDestinationPortRanges :: TF.Ref s a -> b
+
+class HasComputedDiagnosticsProfile a s b | a -> s b where
+    computedDiagnosticsProfile :: TF.Ref s a -> b
+
+class HasComputedDiagnosticsProfileStorageUri a s b | a -> s b where
+    computedDiagnosticsProfileStorageUri :: TF.Ref s a -> b
+
+class HasComputedDirection a s b | a -> s b where
+    computedDirection :: TF.Ref s a -> b
+
+class HasComputedDisabledSslProtocols a s b | a -> s b where
+    computedDisabledSslProtocols :: TF.Ref s a -> b
+
+class HasComputedDiskSizeGb a s b | a -> s b where
+    computedDiskSizeGb :: TF.Ref s a -> b
+
+class HasComputedDisplayName a s b | a -> s b where
+    computedDisplayName :: TF.Ref s a -> b
+
+class HasComputedDnsConfig a s b | a -> s b where
+    computedDnsConfig :: TF.Ref s a -> b
+
+class HasComputedDnsPrefix a s b | a -> s b where
+    computedDnsPrefix :: TF.Ref s a -> b
+
+class HasComputedDnsServers a s b | a -> s b where
+    computedDnsServers :: TF.Ref s a -> b
+
+class HasComputedDomainNameLabel a s b | a -> s b where
+    computedDomainNameLabel :: TF.Ref s a -> b
+
+class HasComputedDtu a s b | a -> s b where
+    computedDtu :: TF.Ref s a -> b
+
+class HasComputedDuplicateDetectionHistoryTimeWindow a s b | a -> s b where
+    computedDuplicateDetectionHistoryTimeWindow :: TF.Ref s a -> b
+
+class HasComputedE a s b | a -> s b where
+    computedE :: TF.Ref s a -> b
+
+class HasComputedEdition a s b | a -> s b where
+    computedEdition :: TF.Ref s a -> b
+
+class HasComputedElasticPoolName a s b | a -> s b where
+    computedElasticPoolName :: TF.Ref s a -> b
+
+class HasComputedEnableAcceleratedNetworking a s b | a -> s b where
+    computedEnableAcceleratedNetworking :: TF.Ref s a -> b
+
+class HasComputedEnableBatchedOperations a s b | a -> s b where
+    computedEnableBatchedOperations :: TF.Ref s a -> b
+
+class HasComputedEnableBgp a s b | a -> s b where
+    computedEnableBgp :: TF.Ref s a -> b
+
+class HasComputedEnableBlobEncryption a s b | a -> s b where
+    computedEnableBlobEncryption :: TF.Ref s a -> b
+
+class HasComputedEnableExpress a s b | a -> s b where
+    computedEnableExpress :: TF.Ref s a -> b
+
+class HasComputedEnableFileEncryption a s b | a -> s b where
+    computedEnableFileEncryption :: TF.Ref s a -> b
+
+class HasComputedEnableFloatingIp a s b | a -> s b where
+    computedEnableFloatingIp :: TF.Ref s a -> b
+
+class HasComputedEnableHttpsTrafficOnly a s b | a -> s b where
+    computedEnableHttpsTrafficOnly :: TF.Ref s a -> b
+
+class HasComputedEnableIpForwarding a s b | a -> s b where
+    computedEnableIpForwarding :: TF.Ref s a -> b
+
+class HasComputedEnablePartitioning a s b | a -> s b where
+    computedEnablePartitioning :: TF.Ref s a -> b
+
+class HasComputedEnabled a s b | a -> s b where
+    computedEnabled :: TF.Ref s a -> b
+
+class HasComputedEnabledForDeployment a s b | a -> s b where
+    computedEnabledForDeployment :: TF.Ref s a -> b
+
+class HasComputedEnabledForDiskEncryption a s b | a -> s b where
+    computedEnabledForDiskEncryption :: TF.Ref s a -> b
+
+class HasComputedEnabledForTemplateDeployment a s b | a -> s b where
+    computedEnabledForTemplateDeployment :: TF.Ref s a -> b
+
+class HasComputedEncryptionSettings a s b | a -> s b where
+    computedEncryptionSettings :: TF.Ref s a -> b
+
+class HasComputedEndIp a s b | a -> s b where
+    computedEndIp :: TF.Ref s a -> b
+
+class HasComputedEndIpAddress a s b | a -> s b where
+    computedEndIpAddress :: TF.Ref s a -> b
+
+class HasComputedEndpoint a s b | a -> s b where
+    computedEndpoint :: TF.Ref s a -> b
+
+class HasComputedEndpointLocation a s b | a -> s b where
+    computedEndpointLocation :: TF.Ref s a -> b
+
+class HasComputedEndpointStatus a s b | a -> s b where
+    computedEndpointStatus :: TF.Ref s a -> b
+
+class HasComputedEventhubName a s b | a -> s b where
+    computedEventhubName :: TF.Ref s a -> b
+
+class HasComputedExpiryTime a s b | a -> s b where
+    computedExpiryTime :: TF.Ref s a -> b
+
+class HasComputedExpressRouteCircuitId a s b | a -> s b where
+    computedExpressRouteCircuitId :: TF.Ref s a -> b
+
+class HasComputedExtension a s b | a -> s b where
+    computedExtension :: TF.Ref s a -> b
+
+class HasComputedFailoverPolicy a s b | a -> s b where
+    computedFailoverPolicy :: TF.Ref s a -> b
+
+class HasComputedFamily' a s b | a -> s b where
+    computedFamily' :: TF.Ref s a -> b
+
+class HasComputedFqdn a s b | a -> s b where
+    computedFqdn :: TF.Ref s a -> b
+
+class HasComputedFrequency a s b | a -> s b where
+    computedFrequency :: TF.Ref s a -> b
+
+class HasComputedFrontendIpConfiguration a s b | a -> s b where
+    computedFrontendIpConfiguration :: TF.Ref s a -> b
+
+class HasComputedFrontendIpConfigurationName a s b | a -> s b where
+    computedFrontendIpConfigurationName :: TF.Ref s a -> b
+
+class HasComputedFrontendPort a s b | a -> s b where
+    computedFrontendPort :: TF.Ref s a -> b
+
+class HasComputedFrontendPortEnd a s b | a -> s b where
+    computedFrontendPortEnd :: TF.Ref s a -> b
+
+class HasComputedFrontendPortStart a s b | a -> s b where
+    computedFrontendPortStart :: TF.Ref s a -> b
+
+class HasComputedFullyQualifiedDomainName a s b | a -> s b where
+    computedFullyQualifiedDomainName :: TF.Ref s a -> b
+
+class HasComputedGatewayAddress a s b | a -> s b where
+    computedGatewayAddress :: TF.Ref s a -> b
+
+class HasComputedGatewayIpConfiguration a s b | a -> s b where
+    computedGatewayIpConfiguration :: TF.Ref s a -> b
+
+class HasComputedHostname a s b | a -> s b where
+    computedHostname :: TF.Ref s a -> b
+
+class HasComputedHttpListener a s b | a -> s b where
+    computedHttpListener :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedIdentity a s b | a -> s b where
+    computedIdentity :: TF.Ref s a -> b
+
+class HasComputedIdleTimeoutInMinutes a s b | a -> s b where
+    computedIdleTimeoutInMinutes :: TF.Ref s a -> b
+
+class HasComputedImageReferenceId a s b | a -> s b where
+    computedImageReferenceId :: TF.Ref s a -> b
+
+class HasComputedInstrumentationKey a s b | a -> s b where
+    computedInstrumentationKey :: TF.Ref s a -> b
+
+class HasComputedInternalDnsNameLabel a s b | a -> s b where
+    computedInternalDnsNameLabel :: TF.Ref s a -> b
+
+class HasComputedInternalFqdn a s b | a -> s b where
+    computedInternalFqdn :: TF.Ref s a -> b
+
+class HasComputedIntervalInSeconds a s b | a -> s b where
+    computedIntervalInSeconds :: TF.Ref s a -> b
+
+class HasComputedIpAddress a s b | a -> s b where
+    computedIpAddress :: TF.Ref s a -> b
+
+class HasComputedIpAddressType a s b | a -> s b where
+    computedIpAddressType :: TF.Ref s a -> b
+
+class HasComputedIpConfiguration a s b | a -> s b where
+    computedIpConfiguration :: TF.Ref s a -> b
+
+class HasComputedIpConfigurations a s b | a -> s b where
+    computedIpConfigurations :: TF.Ref s a -> b
+
+class HasComputedIpRangeFilter a s b | a -> s b where
+    computedIpRangeFilter :: TF.Ref s a -> b
+
+class HasComputedIsCompressionEnabled a s b | a -> s b where
+    computedIsCompressionEnabled :: TF.Ref s a -> b
+
+class HasComputedIsHttpAllowed a s b | a -> s b where
+    computedIsHttpAllowed :: TF.Ref s a -> b
+
+class HasComputedIsHttpsAllowed a s b | a -> s b where
+    computedIsHttpsAllowed :: TF.Ref s a -> b
+
+class HasComputedKeyOpts a s b | a -> s b where
+    computedKeyOpts :: TF.Ref s a -> b
+
+class HasComputedKeyPermissions a s b | a -> s b where
+    computedKeyPermissions :: TF.Ref s a -> b
+
+class HasComputedKeySize a s b | a -> s b where
+    computedKeySize :: TF.Ref s a -> b
+
+class HasComputedKeyType a s b | a -> s b where
+    computedKeyType :: TF.Ref s a -> b
+
+class HasComputedKind a s b | a -> s b where
+    computedKind :: TF.Ref s a -> b
+
+class HasComputedKubernetesVersion a s b | a -> s b where
+    computedKubernetesVersion :: TF.Ref s a -> b
+
+class HasComputedLicenseType a s b | a -> s b where
+    computedLicenseType :: TF.Ref s a -> b
+
+class HasComputedLinuxProfile a s b | a -> s b where
+    computedLinuxProfile :: TF.Ref s a -> b
+
+class HasComputedLoadDistribution a s b | a -> s b where
+    computedLoadDistribution :: TF.Ref s a -> b
+
+class HasComputedLoadbalancerId a s b | a -> s b where
+    computedLoadbalancerId :: TF.Ref s a -> b
+
+class HasComputedLocalNetworkGatewayId a s b | a -> s b where
+    computedLocalNetworkGatewayId :: TF.Ref s a -> b
+
+class HasComputedLocation a s b | a -> s b where
+    computedLocation :: TF.Ref s a -> b
+
+class HasComputedLocationPlacementId a s b | a -> s b where
+    computedLocationPlacementId :: TF.Ref s a -> b
+
+class HasComputedLockDuration a s b | a -> s b where
+    computedLockDuration :: TF.Ref s a -> b
+
+class HasComputedLockLevel a s b | a -> s b where
+    computedLockLevel :: TF.Ref s a -> b
+
+class HasComputedLogProgress a s b | a -> s b where
+    computedLogProgress :: TF.Ref s a -> b
+
+class HasComputedLogVerbose a s b | a -> s b where
+    computedLogVerbose :: TF.Ref s a -> b
+
+class HasComputedLoginServer a s b | a -> s b where
+    computedLoginServer :: TF.Ref s a -> b
+
+class HasComputedMacAddress a s b | a -> s b where
+    computedMacAddress :: TF.Ref s a -> b
+
+class HasComputedManaged a s b | a -> s b where
+    computedManaged :: TF.Ref s a -> b
+
+class HasComputedMasterProfile a s b | a -> s b where
+    computedMasterProfile :: TF.Ref s a -> b
+
+class HasComputedMasterProfileFqdn a s b | a -> s b where
+    computedMasterProfileFqdn :: TF.Ref s a -> b
+
+class HasComputedMaxDeliveryCount a s b | a -> s b where
+    computedMaxDeliveryCount :: TF.Ref s a -> b
+
+class HasComputedMaxNumberOfRecordSets a s b | a -> s b where
+    computedMaxNumberOfRecordSets :: TF.Ref s a -> b
+
+class HasComputedMaxSizeBytes a s b | a -> s b where
+    computedMaxSizeBytes :: TF.Ref s a -> b
+
+class HasComputedMaxSizeInMegabytes a s b | a -> s b where
+    computedMaxSizeInMegabytes :: TF.Ref s a -> b
+
+class HasComputedMaximumNumberOfWorkers a s b | a -> s b where
+    computedMaximumNumberOfWorkers :: TF.Ref s a -> b
+
+class HasComputedMaximumThroughputUnits a s b | a -> s b where
+    computedMaximumThroughputUnits :: TF.Ref s a -> b
+
+class HasComputedMessageRetention a s b | a -> s b where
+    computedMessageRetention :: TF.Ref s a -> b
+
+class HasComputedMetricName a s b | a -> s b where
+    computedMetricName :: TF.Ref s a -> b
+
+class HasComputedMinChildEndpoints a s b | a -> s b where
+    computedMinChildEndpoints :: TF.Ref s a -> b
+
+class HasComputedMonitorConfig a s b | a -> s b where
+    computedMonitorConfig :: TF.Ref s a -> b
+
+class HasComputedN a s b | a -> s b where
+    computedN :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNameRegex a s b | a -> s b where
+    computedNameRegex :: TF.Ref s a -> b
+
+class HasComputedNameServers a s b | a -> s b where
+    computedNameServers :: TF.Ref s a -> b
+
+class HasComputedNamespaceName a s b | a -> s b where
+    computedNamespaceName :: TF.Ref s a -> b
+
+class HasComputedNetworkInterfaceIds a s b | a -> s b where
+    computedNetworkInterfaceIds :: TF.Ref s a -> b
+
+class HasComputedNetworkProfile a s b | a -> s b where
+    computedNetworkProfile :: TF.Ref s a -> b
+
+class HasComputedNetworkSecurityGroupId a s b | a -> s b where
+    computedNetworkSecurityGroupId :: TF.Ref s a -> b
+
+class HasComputedNetworkSecurityGroupName a s b | a -> s b where
+    computedNetworkSecurityGroupName :: TF.Ref s a -> b
+
+class HasComputedNextHopInIpAddress a s b | a -> s b where
+    computedNextHopInIpAddress :: TF.Ref s a -> b
+
+class HasComputedNextHopType a s b | a -> s b where
+    computedNextHopType :: TF.Ref s a -> b
+
+class HasComputedNumberOfProbes a s b | a -> s b where
+    computedNumberOfProbes :: TF.Ref s a -> b
+
+class HasComputedNumberOfRecordSets a s b | a -> s b where
+    computedNumberOfRecordSets :: TF.Ref s a -> b
+
+class HasComputedOffer a s b | a -> s b where
+    computedOffer :: TF.Ref s a -> b
+
+class HasComputedOfferType a s b | a -> s b where
+    computedOfferType :: TF.Ref s a -> b
+
+class HasComputedOrchestrationPlatform a s b | a -> s b where
+    computedOrchestrationPlatform :: TF.Ref s a -> b
+
+class HasComputedOrigin a s b | a -> s b where
+    computedOrigin :: TF.Ref s a -> b
+
+class HasComputedOriginHostHeader a s b | a -> s b where
+    computedOriginHostHeader :: TF.Ref s a -> b
+
+class HasComputedOriginPath a s b | a -> s b where
+    computedOriginPath :: TF.Ref s a -> b
+
+class HasComputedOsDisk a s b | a -> s b where
+    computedOsDisk :: TF.Ref s a -> b
+
+class HasComputedOsProfile a s b | a -> s b where
+    computedOsProfile :: TF.Ref s a -> b
+
+class HasComputedOsProfileLinuxConfig a s b | a -> s b where
+    computedOsProfileLinuxConfig :: TF.Ref s a -> b
+
+class HasComputedOsProfileSecrets a s b | a -> s b where
+    computedOsProfileSecrets :: TF.Ref s a -> b
+
+class HasComputedOsProfileWindowsConfig a s b | a -> s b where
+    computedOsProfileWindowsConfig :: TF.Ref s a -> b
+
+class HasComputedOsType a s b | a -> s b where
+    computedOsType :: TF.Ref s a -> b
+
+class HasComputedOutboundIpAddresses a s b | a -> s b where
+    computedOutboundIpAddresses :: TF.Ref s a -> b
+
+class HasComputedOutputs a s b | a -> s b where
+    computedOutputs :: TF.Ref s a -> b
+
+class HasComputedOverprovision a s b | a -> s b where
+    computedOverprovision :: TF.Ref s a -> b
+
+class HasComputedParallelism a s b | a -> s b where
+    computedParallelism :: TF.Ref s a -> b
+
+class HasComputedPartitionCount a s b | a -> s b where
+    computedPartitionCount :: TF.Ref s a -> b
+
+class HasComputedPartitionIds a s b | a -> s b where
+    computedPartitionIds :: TF.Ref s a -> b
+
+class HasComputedPassword a s b | a -> s b where
+    computedPassword :: TF.Ref s a -> b
+
+class HasComputedPeerVirtualNetworkGatewayId a s b | a -> s b where
+    computedPeerVirtualNetworkGatewayId :: TF.Ref s a -> b
+
+class HasComputedPeeringLocation a s b | a -> s b where
+    computedPeeringLocation :: TF.Ref s a -> b
+
+class HasComputedPermissions a s b | a -> s b where
+    computedPermissions :: TF.Ref s a -> b
+
+class HasComputedPlan a s b | a -> s b where
+    computedPlan :: TF.Ref s a -> b
+
+class HasComputedPlatformFaultDomainCount a s b | a -> s b where
+    computedPlatformFaultDomainCount :: TF.Ref s a -> b
+
+class HasComputedPlatformUpdateDomainCount a s b | a -> s b where
+    computedPlatformUpdateDomainCount :: TF.Ref s a -> b
+
+class HasComputedPoolSize a s b | a -> s b where
+    computedPoolSize :: TF.Ref s a -> b
+
+class HasComputedPort a s b | a -> s b where
+    computedPort :: TF.Ref s a -> b
+
+class HasComputedPortalUrl a s b | a -> s b where
+    computedPortalUrl :: TF.Ref s a -> b
+
+class HasComputedPrimaryAccessKey a s b | a -> s b where
+    computedPrimaryAccessKey :: TF.Ref s a -> b
+
+class HasComputedPrimaryBlobConnectionString a s b | a -> s b where
+    computedPrimaryBlobConnectionString :: TF.Ref s a -> b
+
+class HasComputedPrimaryBlobEndpoint a s b | a -> s b where
+    computedPrimaryBlobEndpoint :: TF.Ref s a -> b
+
+class HasComputedPrimaryConnectionString a s b | a -> s b where
+    computedPrimaryConnectionString :: TF.Ref s a -> b
+
+class HasComputedPrimaryFileEndpoint a s b | a -> s b where
+    computedPrimaryFileEndpoint :: TF.Ref s a -> b
+
+class HasComputedPrimaryKey a s b | a -> s b where
+    computedPrimaryKey :: TF.Ref s a -> b
+
+class HasComputedPrimaryLocation a s b | a -> s b where
+    computedPrimaryLocation :: TF.Ref s a -> b
+
+class HasComputedPrimaryMasterKey a s b | a -> s b where
+    computedPrimaryMasterKey :: TF.Ref s a -> b
+
+class HasComputedPrimaryNetworkInterfaceId a s b | a -> s b where
+    computedPrimaryNetworkInterfaceId :: TF.Ref s a -> b
+
+class HasComputedPrimaryQueueEndpoint a s b | a -> s b where
+    computedPrimaryQueueEndpoint :: TF.Ref s a -> b
+
+class HasComputedPrimaryReadonlyMasterKey a s b | a -> s b where
+    computedPrimaryReadonlyMasterKey :: TF.Ref s a -> b
+
+class HasComputedPrimarySharedKey a s b | a -> s b where
+    computedPrimarySharedKey :: TF.Ref s a -> b
+
+class HasComputedPrimaryTableEndpoint a s b | a -> s b where
+    computedPrimaryTableEndpoint :: TF.Ref s a -> b
+
+class HasComputedPrincipalId a s b | a -> s b where
+    computedPrincipalId :: TF.Ref s a -> b
+
+class HasComputedPriority a s b | a -> s b where
+    computedPriority :: TF.Ref s a -> b
+
+class HasComputedPrivateIpAddress a s b | a -> s b where
+    computedPrivateIpAddress :: TF.Ref s a -> b
+
+class HasComputedPrivateIpAddresses a s b | a -> s b where
+    computedPrivateIpAddresses :: TF.Ref s a -> b
+
+class HasComputedProbe a s b | a -> s b where
+    computedProbe :: TF.Ref s a -> b
+
+class HasComputedProbeId a s b | a -> s b where
+    computedProbeId :: TF.Ref s a -> b
+
+class HasComputedProfileName a s b | a -> s b where
+    computedProfileName :: TF.Ref s a -> b
+
+class HasComputedProfileStatus a s b | a -> s b where
+    computedProfileStatus :: TF.Ref s a -> b
+
+class HasComputedProperties a s b | a -> s b where
+    computedProperties :: TF.Ref s a -> b
+
+class HasComputedProtocol a s b | a -> s b where
+    computedProtocol :: TF.Ref s a -> b
+
+class HasComputedPublishContentLink a s b | a -> s b where
+    computedPublishContentLink :: TF.Ref s a -> b
+
+class HasComputedPublisher a s b | a -> s b where
+    computedPublisher :: TF.Ref s a -> b
+
+class HasComputedQuerystringCachingBehaviour a s b | a -> s b where
+    computedQuerystringCachingBehaviour :: TF.Ref s a -> b
+
+class HasComputedQuota a s b | a -> s b where
+    computedQuota :: TF.Ref s a -> b
+
+class HasComputedQuotaId a s b | a -> s b where
+    computedQuotaId :: TF.Ref s a -> b
+
+class HasComputedRecord a s b | a -> s b where
+    computedRecord :: TF.Ref s a -> b
+
+class HasComputedRecords a s b | a -> s b where
+    computedRecords :: TF.Ref s a -> b
+
+class HasComputedRedisCacheName a s b | a -> s b where
+    computedRedisCacheName :: TF.Ref s a -> b
+
+class HasComputedRemoteVirtualNetworkId a s b | a -> s b where
+    computedRemoteVirtualNetworkId :: TF.Ref s a -> b
+
+class HasComputedReplicaCount a s b | a -> s b where
+    computedReplicaCount :: TF.Ref s a -> b
+
+class HasComputedRequestPath a s b | a -> s b where
+    computedRequestPath :: TF.Ref s a -> b
+
+class HasComputedRequestRoutingRule a s b | a -> s b where
+    computedRequestRoutingRule :: TF.Ref s a -> b
+
+class HasComputedRequestedServiceObjectiveId a s b | a -> s b where
+    computedRequestedServiceObjectiveId :: TF.Ref s a -> b
+
+class HasComputedRequestedServiceObjectiveName a s b | a -> s b where
+    computedRequestedServiceObjectiveName :: TF.Ref s a -> b
+
+class HasComputedRequiresDuplicateDetection a s b | a -> s b where
+    computedRequiresDuplicateDetection :: TF.Ref s a -> b
+
+class HasComputedRequiresSession a s b | a -> s b where
+    computedRequiresSession :: TF.Ref s a -> b
+
+class HasComputedResourceGroupName a s b | a -> s b where
+    computedResourceGroupName :: TF.Ref s a -> b
+
+class HasComputedResourceId a s b | a -> s b where
+    computedResourceId :: TF.Ref s a -> b
+
+class HasComputedRestartPolicy a s b | a -> s b where
+    computedRestartPolicy :: TF.Ref s a -> b
+
+class HasComputedRestorePointInTime a s b | a -> s b where
+    computedRestorePointInTime :: TF.Ref s a -> b
+
+class HasComputedRetentionInDays a s b | a -> s b where
+    computedRetentionInDays :: TF.Ref s a -> b
+
+class HasComputedRoleDefinitionId a s b | a -> s b where
+    computedRoleDefinitionId :: TF.Ref s a -> b
+
+class HasComputedRoleDefinitionName a s b | a -> s b where
+    computedRoleDefinitionName :: TF.Ref s a -> b
+
+class HasComputedRoute a s b | a -> s b where
+    computedRoute :: TF.Ref s a -> b
+
+class HasComputedRouteTableId a s b | a -> s b where
+    computedRouteTableId :: TF.Ref s a -> b
+
+class HasComputedRouteTableName a s b | a -> s b where
+    computedRouteTableName :: TF.Ref s a -> b
+
+class HasComputedRoutingWeight a s b | a -> s b where
+    computedRoutingWeight :: TF.Ref s a -> b
+
+class HasComputedRunbookType a s b | a -> s b where
+    computedRunbookType :: TF.Ref s a -> b
+
+class HasComputedScope a s b | a -> s b where
+    computedScope :: TF.Ref s a -> b
+
+class HasComputedSecondaryAccessKey a s b | a -> s b where
+    computedSecondaryAccessKey :: TF.Ref s a -> b
+
+class HasComputedSecondaryBlobConnectionString a s b | a -> s b where
+    computedSecondaryBlobConnectionString :: TF.Ref s a -> b
+
+class HasComputedSecondaryBlobEndpoint a s b | a -> s b where
+    computedSecondaryBlobEndpoint :: TF.Ref s a -> b
+
+class HasComputedSecondaryConnectionString a s b | a -> s b where
+    computedSecondaryConnectionString :: TF.Ref s a -> b
+
+class HasComputedSecondaryKey a s b | a -> s b where
+    computedSecondaryKey :: TF.Ref s a -> b
+
+class HasComputedSecondaryLocation a s b | a -> s b where
+    computedSecondaryLocation :: TF.Ref s a -> b
+
+class HasComputedSecondaryMasterKey a s b | a -> s b where
+    computedSecondaryMasterKey :: TF.Ref s a -> b
+
+class HasComputedSecondaryQueueEndpoint a s b | a -> s b where
+    computedSecondaryQueueEndpoint :: TF.Ref s a -> b
+
+class HasComputedSecondaryReadonlyMasterKey a s b | a -> s b where
+    computedSecondaryReadonlyMasterKey :: TF.Ref s a -> b
+
+class HasComputedSecondarySharedKey a s b | a -> s b where
+    computedSecondarySharedKey :: TF.Ref s a -> b
+
+class HasComputedSecondaryTableEndpoint a s b | a -> s b where
+    computedSecondaryTableEndpoint :: TF.Ref s a -> b
+
+class HasComputedSecretPermissions a s b | a -> s b where
+    computedSecretPermissions :: TF.Ref s a -> b
+
+class HasComputedSecurityRule a s b | a -> s b where
+    computedSecurityRule :: TF.Ref s a -> b
+
+class HasComputedServerName a s b | a -> s b where
+    computedServerName :: TF.Ref s a -> b
+
+class HasComputedServiceEndpoints a s b | a -> s b where
+    computedServiceEndpoints :: TF.Ref s a -> b
+
+class HasComputedServiceKey a s b | a -> s b where
+    computedServiceKey :: TF.Ref s a -> b
+
+class HasComputedServicePrincipal a s b | a -> s b where
+    computedServicePrincipal :: TF.Ref s a -> b
+
+class HasComputedServiceProviderName a s b | a -> s b where
+    computedServiceProviderName :: TF.Ref s a -> b
+
+class HasComputedServiceProviderProvisioningState a s b | a -> s b where
+    computedServiceProviderProvisioningState :: TF.Ref s a -> b
+
+class HasComputedSharedKey a s b | a -> s b where
+    computedSharedKey :: TF.Ref s a -> b
+
+class HasComputedSinglePlacementGroup a s b | a -> s b where
+    computedSinglePlacementGroup :: TF.Ref s a -> b
+
+class HasComputedSiteConfig a s b | a -> s b where
+    computedSiteConfig :: TF.Ref s a -> b
+
+class HasComputedSize a s b | a -> s b where
+    computedSize :: TF.Ref s a -> b
+
+class HasComputedSku a s b | a -> s b where
+    computedSku :: TF.Ref s a -> b
+
+class HasComputedSortDescending a s b | a -> s b where
+    computedSortDescending :: TF.Ref s a -> b
+
+class HasComputedSource a s b | a -> s b where
+    computedSource :: TF.Ref s a -> b
+
+class HasComputedSourceAddressPrefix a s b | a -> s b where
+    computedSourceAddressPrefix :: TF.Ref s a -> b
+
+class HasComputedSourceAddressPrefixes a s b | a -> s b where
+    computedSourceAddressPrefixes :: TF.Ref s a -> b
+
+class HasComputedSourceDatabaseDeletionDate a s b | a -> s b where
+    computedSourceDatabaseDeletionDate :: TF.Ref s a -> b
+
+class HasComputedSourceDatabaseId a s b | a -> s b where
+    computedSourceDatabaseId :: TF.Ref s a -> b
+
+class HasComputedSourcePortRange a s b | a -> s b where
+    computedSourcePortRange :: TF.Ref s a -> b
+
+class HasComputedSourcePortRanges a s b | a -> s b where
+    computedSourcePortRanges :: TF.Ref s a -> b
+
+class HasComputedSourceResourceId a s b | a -> s b where
+    computedSourceResourceId :: TF.Ref s a -> b
+
+class HasComputedSourceUri a s b | a -> s b where
+    computedSourceUri :: TF.Ref s a -> b
+
+class HasComputedSourceVirtualMachineId a s b | a -> s b where
+    computedSourceVirtualMachineId :: TF.Ref s a -> b
+
+class HasComputedSpendingLimit a s b | a -> s b where
+    computedSpendingLimit :: TF.Ref s a -> b
+
+class HasComputedSslCertificate a s b | a -> s b where
+    computedSslCertificate :: TF.Ref s a -> b
+
+class HasComputedSslPort a s b | a -> s b where
+    computedSslPort :: TF.Ref s a -> b
+
+class HasComputedStartIp a s b | a -> s b where
+    computedStartIp :: TF.Ref s a -> b
+
+class HasComputedStartIpAddress a s b | a -> s b where
+    computedStartIpAddress :: TF.Ref s a -> b
+
+class HasComputedStartTime a s b | a -> s b where
+    computedStartTime :: TF.Ref s a -> b
+
+class HasComputedState a s b | a -> s b where
+    computedState :: TF.Ref s a -> b
+
+class HasComputedStatus a s b | a -> s b where
+    computedStatus :: TF.Ref s a -> b
+
+class HasComputedStorageAccountId a s b | a -> s b where
+    computedStorageAccountId :: TF.Ref s a -> b
+
+class HasComputedStorageAccountName a s b | a -> s b where
+    computedStorageAccountName :: TF.Ref s a -> b
+
+class HasComputedStorageAccountType a s b | a -> s b where
+    computedStorageAccountType :: TF.Ref s a -> b
+
+class HasComputedStorageConnectionString a s b | a -> s b where
+    computedStorageConnectionString :: TF.Ref s a -> b
+
+class HasComputedStorageContainerName a s b | a -> s b where
+    computedStorageContainerName :: TF.Ref s a -> b
+
+class HasComputedStorageDataDisk a s b | a -> s b where
+    computedStorageDataDisk :: TF.Ref s a -> b
+
+class HasComputedStorageImageReference a s b | a -> s b where
+    computedStorageImageReference :: TF.Ref s a -> b
+
+class HasComputedStorageMb a s b | a -> s b where
+    computedStorageMb :: TF.Ref s a -> b
+
+class HasComputedStorageOsDisk a s b | a -> s b where
+    computedStorageOsDisk :: TF.Ref s a -> b
+
+class HasComputedStorageProfileDataDisk a s b | a -> s b where
+    computedStorageProfileDataDisk :: TF.Ref s a -> b
+
+class HasComputedStorageProfileImageReference a s b | a -> s b where
+    computedStorageProfileImageReference :: TF.Ref s a -> b
+
+class HasComputedStorageProfileOsDisk a s b | a -> s b where
+    computedStorageProfileOsDisk :: TF.Ref s a -> b
+
+class HasComputedSubnet a s b | a -> s b where
+    computedSubnet :: TF.Ref s a -> b
+
+class HasComputedSubnets a s b | a -> s b where
+    computedSubnets :: TF.Ref s a -> b
+
+class HasComputedSubscriptionId a s b | a -> s b where
+    computedSubscriptionId :: TF.Ref s a -> b
+
+class HasComputedSupportOrdering a s b | a -> s b where
+    computedSupportOrdering :: TF.Ref s a -> b
+
+class HasComputedTTL a s b | a -> s b where
+    computedTTL :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedTarget a s b | a -> s b where
+    computedTarget :: TF.Ref s a -> b
+
+class HasComputedTargetResourceId a s b | a -> s b where
+    computedTargetResourceId :: TF.Ref s a -> b
+
+class HasComputedTemplateBody a s b | a -> s b where
+    computedTemplateBody :: TF.Ref s a -> b
+
+class HasComputedTenantId a s b | a -> s b where
+    computedTenantId :: TF.Ref s a -> b
+
+class HasComputedTimezone a s b | a -> s b where
+    computedTimezone :: TF.Ref s a -> b
+
+class HasComputedTopicName a s b | a -> s b where
+    computedTopicName :: TF.Ref s a -> b
+
+class HasComputedTrafficRoutingMethod a s b | a -> s b where
+    computedTrafficRoutingMethod :: TF.Ref s a -> b
+
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUpgradePolicyMode a s b | a -> s b where
+    computedUpgradePolicyMode :: TF.Ref s a -> b
+
+class HasComputedUrl a s b | a -> s b where
+    computedUrl :: TF.Ref s a -> b
+
+class HasComputedUrlPathMap a s b | a -> s b where
+    computedUrlPathMap :: TF.Ref s a -> b
+
+class HasComputedUseRemoteGateways a s b | a -> s b where
+    computedUseRemoteGateways :: TF.Ref s a -> b
+
+class HasComputedUseSubdomain a s b | a -> s b where
+    computedUseSubdomain :: TF.Ref s a -> b
+
+class HasComputedUserMetadata a s b | a -> s b where
+    computedUserMetadata :: TF.Ref s a -> b
+
+class HasComputedUsername a s b | a -> s b where
+    computedUsername :: TF.Ref s a -> b
+
+class HasComputedValue a s b | a -> s b where
+    computedValue :: TF.Ref s a -> b
+
+class HasComputedVaultUri a s b | a -> s b where
+    computedVaultUri :: TF.Ref s a -> b
+
+class HasComputedVersion a s b | a -> s b where
+    computedVersion :: TF.Ref s a -> b
+
+class HasComputedVirtualMachineId a s b | a -> s b where
+    computedVirtualMachineId :: TF.Ref s a -> b
+
+class HasComputedVirtualMachineName a s b | a -> s b where
+    computedVirtualMachineName :: TF.Ref s a -> b
+
+class HasComputedVirtualNetworkGatewayId a s b | a -> s b where
+    computedVirtualNetworkGatewayId :: TF.Ref s a -> b
+
+class HasComputedVirtualNetworkName a s b | a -> s b where
+    computedVirtualNetworkName :: TF.Ref s a -> b
+
+class HasComputedVmSize a s b | a -> s b where
+    computedVmSize :: TF.Ref s a -> b
+
+class HasComputedVnetPeerings a s b | a -> s b where
+    computedVnetPeerings :: TF.Ref s a -> b
+
+class HasComputedVpnClientConfiguration a s b | a -> s b where
+    computedVpnClientConfiguration :: TF.Ref s a -> b
+
+class HasComputedVpnType a s b | a -> s b where
+    computedVpnType :: TF.Ref s a -> b
+
+class HasComputedWafConfiguration a s b | a -> s b where
+    computedWafConfiguration :: TF.Ref s a -> b
+
+class HasComputedWeight a s b | a -> s b where
+    computedWeight :: TF.Ref s a -> b
+
+class HasComputedWorkspaceId a s b | a -> s b where
+    computedWorkspaceId :: TF.Ref s a -> b
+
+class HasComputedZoneName a s b | a -> s b where
+    computedZoneName :: TF.Ref s a -> b

@@ -34,11 +34,21 @@ module Terrafomo.MySQL.Lens
     , HasUser (..)
 
     -- ** Computed Attributes
+    , HasComputedDatabase (..)
+    , HasComputedDefaultCharacterSet (..)
+    , HasComputedDefaultCollation (..)
+    , HasComputedGrant (..)
+    , HasComputedHost (..)
+    , HasComputedName (..)
+    , HasComputedPassword (..)
+    , HasComputedPlaintextPassword (..)
+    , HasComputedPrivileges (..)
+    , HasComputedUser (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -103,3 +113,33 @@ class HasUser a b | a -> b where
 
 instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user
+
+class HasComputedDatabase a s b | a -> s b where
+    computedDatabase :: TF.Ref s a -> b
+
+class HasComputedDefaultCharacterSet a s b | a -> s b where
+    computedDefaultCharacterSet :: TF.Ref s a -> b
+
+class HasComputedDefaultCollation a s b | a -> s b where
+    computedDefaultCollation :: TF.Ref s a -> b
+
+class HasComputedGrant a s b | a -> s b where
+    computedGrant :: TF.Ref s a -> b
+
+class HasComputedHost a s b | a -> s b where
+    computedHost :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedPassword a s b | a -> s b where
+    computedPassword :: TF.Ref s a -> b
+
+class HasComputedPlaintextPassword a s b | a -> s b where
+    computedPlaintextPassword :: TF.Ref s a -> b
+
+class HasComputedPrivileges a s b | a -> s b where
+    computedPrivileges :: TF.Ref s a -> b
+
+class HasComputedUser a s b | a -> s b where
+    computedUser :: TF.Ref s a -> b

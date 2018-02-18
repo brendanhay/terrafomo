@@ -31,12 +31,19 @@ module Terrafomo.Logentries.Lens
     , HasType' (..)
 
     -- ** Computed Attributes
+    , HasComputedFilename (..)
+    , HasComputedLocation (..)
+    , HasComputedLogsetId (..)
+    , HasComputedName (..)
+    , HasComputedRetentionPeriod (..)
+    , HasComputedSource (..)
     , HasComputedToken (..)
+    , HasComputedType' (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -84,8 +91,26 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputedToken a b | a -> b where
-    computedToken
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedToken =
-        to (\x -> TF.compute (TF.refKey x) "token")
+class HasComputedFilename a s b | a -> s b where
+    computedFilename :: TF.Ref s a -> b
+
+class HasComputedLocation a s b | a -> s b where
+    computedLocation :: TF.Ref s a -> b
+
+class HasComputedLogsetId a s b | a -> s b where
+    computedLogsetId :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedRetentionPeriod a s b | a -> s b where
+    computedRetentionPeriod :: TF.Ref s a -> b
+
+class HasComputedSource a s b | a -> s b where
+    computedSource :: TF.Ref s a -> b
+
+class HasComputedToken a s b | a -> s b where
+    computedToken :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b

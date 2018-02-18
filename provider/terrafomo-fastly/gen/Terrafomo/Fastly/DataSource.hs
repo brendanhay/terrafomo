@@ -39,7 +39,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -54,6 +54,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @fastly_ip_ranges@ Fastly datasource.
@@ -68,7 +69,8 @@ data IpRangesData s = IpRangesData {
 instance TF.ToHCL (IpRangesData s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedCidrBlocks (IpRangesData s) (Text)
+instance P.HasComputedCidrBlocks (IpRangesData s) s (TF.Attr s Text) where
+    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
 ipRangesData :: TF.Schema TF.DataSource P.Fastly (IpRangesData s)
 ipRangesData =

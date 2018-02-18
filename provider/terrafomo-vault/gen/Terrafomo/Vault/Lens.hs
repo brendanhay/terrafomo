@@ -114,27 +114,108 @@ module Terrafomo.Vault.Lens
     -- ** Computed Attributes
     , HasComputedAccessKey (..)
     , HasComputedAccessor (..)
+    , HasComputedAccountId (..)
+    , HasComputedAllowInstanceMigration (..)
+    , HasComputedAllowRead (..)
+    , HasComputedAllowedRoles (..)
     , HasComputedAuthType (..)
+    , HasComputedAwsPublicCert (..)
+    , HasComputedBackend (..)
+    , HasComputedBaseUrl (..)
+    , HasComputedBindSecretId (..)
+    , HasComputedBoundAccountId (..)
+    , HasComputedBoundAmiId (..)
+    , HasComputedBoundCidrList (..)
+    , HasComputedBoundIamInstanceProfileArn (..)
+    , HasComputedBoundIamPrincipalArn (..)
+    , HasComputedBoundIamRoleArn (..)
+    , HasComputedBoundRegion (..)
+    , HasComputedBoundSubnetId (..)
+    , HasComputedBoundVpcId (..)
+    , HasComputedCassandra (..)
+    , HasComputedCertName (..)
+    , HasComputedCidrList (..)
     , HasComputedClientToken (..)
+    , HasComputedCreationStatements (..)
     , HasComputedData' (..)
     , HasComputedDataJson (..)
+    , HasComputedDbName (..)
+    , HasComputedDefaultLeaseTtlSeconds (..)
+    , HasComputedDefaultTtl (..)
+    , HasComputedDescription (..)
+    , HasComputedDisablePeriodicTidy (..)
+    , HasComputedDisableRead (..)
+    , HasComputedDisallowReauthentication (..)
+    , HasComputedEc2Endpoint (..)
+    , HasComputedGroup (..)
+    , HasComputedGroupName (..)
+    , HasComputedGroups (..)
+    , HasComputedHana (..)
+    , HasComputedIamEndpoint (..)
+    , HasComputedIamHttpRequestMethod (..)
+    , HasComputedIamRequestBody (..)
+    , HasComputedIamRequestHeaders (..)
+    , HasComputedIamRequestUrl (..)
+    , HasComputedIamServerIdHeaderValue (..)
+    , HasComputedIdentity (..)
+    , HasComputedInferredAwsRegion (..)
+    , HasComputedInferredEntityType (..)
+    , HasComputedInstanceId (..)
     , HasComputedLeaseDuration (..)
     , HasComputedLeaseId (..)
     , HasComputedLeaseRenewable (..)
     , HasComputedLeaseStartTime (..)
+    , HasComputedMaxLeaseTtlSeconds (..)
+    , HasComputedMaxTtl (..)
     , HasComputedMetadata (..)
+    , HasComputedMongodb (..)
+    , HasComputedMssql (..)
+    , HasComputedMysql (..)
+    , HasComputedName (..)
+    , HasComputedNonce (..)
+    , HasComputedOracle (..)
+    , HasComputedOrganization (..)
+    , HasComputedPath (..)
+    , HasComputedPeriod (..)
+    , HasComputedPkcs7 (..)
     , HasComputedPolicies (..)
+    , HasComputedPolicy (..)
+    , HasComputedPolicyArn (..)
+    , HasComputedPostgresql (..)
+    , HasComputedRenewStatements (..)
     , HasComputedRenewable (..)
+    , HasComputedResolveAwsUniqueIds (..)
+    , HasComputedRevocationStatements (..)
+    , HasComputedRole (..)
     , HasComputedRoleId (..)
+    , HasComputedRoleName (..)
+    , HasComputedRoleTag (..)
+    , HasComputedRollbackStatements (..)
+    , HasComputedSafetyBuffer (..)
+    , HasComputedSecretId (..)
+    , HasComputedSecretIdNumUses (..)
+    , HasComputedSecretIdTtl (..)
     , HasComputedSecretKey (..)
     , HasComputedSecurityToken (..)
+    , HasComputedSignature (..)
+    , HasComputedStsEndpoint (..)
+    , HasComputedStsRole (..)
     , HasComputedTagKey (..)
     , HasComputedTagValue (..)
+    , HasComputedToken (..)
+    , HasComputedTokenMaxTtl (..)
+    , HasComputedTokenNumUses (..)
+    , HasComputedTokenTtl (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedUser (..)
+    , HasComputedUsername (..)
+    , HasComputedVerifyConnection (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -668,110 +749,299 @@ class HasVerifyConnection a b | a -> b where
 instance HasVerifyConnection a b => HasVerifyConnection (TF.Schema l p a) b where
     verifyConnection = TF.configuration . verifyConnection
 
-class HasComputedAccessKey a b | a -> b where
-    computedAccessKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAccessKey =
-        to (\x -> TF.compute (TF.refKey x) "access_key")
+class HasComputedAccessKey a s b | a -> s b where
+    computedAccessKey :: TF.Ref s a -> b
 
-class HasComputedAccessor a b | a -> b where
-    computedAccessor
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAccessor =
-        to (\x -> TF.compute (TF.refKey x) "accessor")
+class HasComputedAccessor a s b | a -> s b where
+    computedAccessor :: TF.Ref s a -> b
 
-class HasComputedAuthType a b | a -> b where
-    computedAuthType
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAuthType =
-        to (\x -> TF.compute (TF.refKey x) "auth_type")
+class HasComputedAccountId a s b | a -> s b where
+    computedAccountId :: TF.Ref s a -> b
 
-class HasComputedClientToken a b | a -> b where
-    computedClientToken
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedClientToken =
-        to (\x -> TF.compute (TF.refKey x) "client_token")
+class HasComputedAllowInstanceMigration a s b | a -> s b where
+    computedAllowInstanceMigration :: TF.Ref s a -> b
 
-class HasComputedData' a b | a -> b where
-    computedData'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedData' =
-        to (\x -> TF.compute (TF.refKey x) "data")
+class HasComputedAllowRead a s b | a -> s b where
+    computedAllowRead :: TF.Ref s a -> b
 
-class HasComputedDataJson a b | a -> b where
-    computedDataJson
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDataJson =
-        to (\x -> TF.compute (TF.refKey x) "data_json")
+class HasComputedAllowedRoles a s b | a -> s b where
+    computedAllowedRoles :: TF.Ref s a -> b
 
-class HasComputedLeaseDuration a b | a -> b where
-    computedLeaseDuration
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLeaseDuration =
-        to (\x -> TF.compute (TF.refKey x) "lease_duration")
+class HasComputedAuthType a s b | a -> s b where
+    computedAuthType :: TF.Ref s a -> b
 
-class HasComputedLeaseId a b | a -> b where
-    computedLeaseId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLeaseId =
-        to (\x -> TF.compute (TF.refKey x) "lease_id")
+class HasComputedAwsPublicCert a s b | a -> s b where
+    computedAwsPublicCert :: TF.Ref s a -> b
 
-class HasComputedLeaseRenewable a b | a -> b where
-    computedLeaseRenewable
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLeaseRenewable =
-        to (\x -> TF.compute (TF.refKey x) "lease_renewable")
+class HasComputedBackend a s b | a -> s b where
+    computedBackend :: TF.Ref s a -> b
 
-class HasComputedLeaseStartTime a b | a -> b where
-    computedLeaseStartTime
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLeaseStartTime =
-        to (\x -> TF.compute (TF.refKey x) "lease_start_time")
+class HasComputedBaseUrl a s b | a -> s b where
+    computedBaseUrl :: TF.Ref s a -> b
 
-class HasComputedMetadata a b | a -> b where
-    computedMetadata
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMetadata =
-        to (\x -> TF.compute (TF.refKey x) "metadata")
+class HasComputedBindSecretId a s b | a -> s b where
+    computedBindSecretId :: TF.Ref s a -> b
 
-class HasComputedPolicies a b | a -> b where
-    computedPolicies
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPolicies =
-        to (\x -> TF.compute (TF.refKey x) "policies")
+class HasComputedBoundAccountId a s b | a -> s b where
+    computedBoundAccountId :: TF.Ref s a -> b
 
-class HasComputedRenewable a b | a -> b where
-    computedRenewable
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRenewable =
-        to (\x -> TF.compute (TF.refKey x) "renewable")
+class HasComputedBoundAmiId a s b | a -> s b where
+    computedBoundAmiId :: TF.Ref s a -> b
 
-class HasComputedRoleId a b | a -> b where
-    computedRoleId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRoleId =
-        to (\x -> TF.compute (TF.refKey x) "role_id")
+class HasComputedBoundCidrList a s b | a -> s b where
+    computedBoundCidrList :: TF.Ref s a -> b
 
-class HasComputedSecretKey a b | a -> b where
-    computedSecretKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecretKey =
-        to (\x -> TF.compute (TF.refKey x) "secret_key")
+class HasComputedBoundIamInstanceProfileArn a s b | a -> s b where
+    computedBoundIamInstanceProfileArn :: TF.Ref s a -> b
 
-class HasComputedSecurityToken a b | a -> b where
-    computedSecurityToken
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSecurityToken =
-        to (\x -> TF.compute (TF.refKey x) "security_token")
+class HasComputedBoundIamPrincipalArn a s b | a -> s b where
+    computedBoundIamPrincipalArn :: TF.Ref s a -> b
 
-class HasComputedTagKey a b | a -> b where
-    computedTagKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTagKey =
-        to (\x -> TF.compute (TF.refKey x) "tag_key")
+class HasComputedBoundIamRoleArn a s b | a -> s b where
+    computedBoundIamRoleArn :: TF.Ref s a -> b
 
-class HasComputedTagValue a b | a -> b where
-    computedTagValue
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTagValue =
-        to (\x -> TF.compute (TF.refKey x) "tag_value")
+class HasComputedBoundRegion a s b | a -> s b where
+    computedBoundRegion :: TF.Ref s a -> b
+
+class HasComputedBoundSubnetId a s b | a -> s b where
+    computedBoundSubnetId :: TF.Ref s a -> b
+
+class HasComputedBoundVpcId a s b | a -> s b where
+    computedBoundVpcId :: TF.Ref s a -> b
+
+class HasComputedCassandra a s b | a -> s b where
+    computedCassandra :: TF.Ref s a -> b
+
+class HasComputedCertName a s b | a -> s b where
+    computedCertName :: TF.Ref s a -> b
+
+class HasComputedCidrList a s b | a -> s b where
+    computedCidrList :: TF.Ref s a -> b
+
+class HasComputedClientToken a s b | a -> s b where
+    computedClientToken :: TF.Ref s a -> b
+
+class HasComputedCreationStatements a s b | a -> s b where
+    computedCreationStatements :: TF.Ref s a -> b
+
+class HasComputedData' a s b | a -> s b where
+    computedData' :: TF.Ref s a -> b
+
+class HasComputedDataJson a s b | a -> s b where
+    computedDataJson :: TF.Ref s a -> b
+
+class HasComputedDbName a s b | a -> s b where
+    computedDbName :: TF.Ref s a -> b
+
+class HasComputedDefaultLeaseTtlSeconds a s b | a -> s b where
+    computedDefaultLeaseTtlSeconds :: TF.Ref s a -> b
+
+class HasComputedDefaultTtl a s b | a -> s b where
+    computedDefaultTtl :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedDisablePeriodicTidy a s b | a -> s b where
+    computedDisablePeriodicTidy :: TF.Ref s a -> b
+
+class HasComputedDisableRead a s b | a -> s b where
+    computedDisableRead :: TF.Ref s a -> b
+
+class HasComputedDisallowReauthentication a s b | a -> s b where
+    computedDisallowReauthentication :: TF.Ref s a -> b
+
+class HasComputedEc2Endpoint a s b | a -> s b where
+    computedEc2Endpoint :: TF.Ref s a -> b
+
+class HasComputedGroup a s b | a -> s b where
+    computedGroup :: TF.Ref s a -> b
+
+class HasComputedGroupName a s b | a -> s b where
+    computedGroupName :: TF.Ref s a -> b
+
+class HasComputedGroups a s b | a -> s b where
+    computedGroups :: TF.Ref s a -> b
+
+class HasComputedHana a s b | a -> s b where
+    computedHana :: TF.Ref s a -> b
+
+class HasComputedIamEndpoint a s b | a -> s b where
+    computedIamEndpoint :: TF.Ref s a -> b
+
+class HasComputedIamHttpRequestMethod a s b | a -> s b where
+    computedIamHttpRequestMethod :: TF.Ref s a -> b
+
+class HasComputedIamRequestBody a s b | a -> s b where
+    computedIamRequestBody :: TF.Ref s a -> b
+
+class HasComputedIamRequestHeaders a s b | a -> s b where
+    computedIamRequestHeaders :: TF.Ref s a -> b
+
+class HasComputedIamRequestUrl a s b | a -> s b where
+    computedIamRequestUrl :: TF.Ref s a -> b
+
+class HasComputedIamServerIdHeaderValue a s b | a -> s b where
+    computedIamServerIdHeaderValue :: TF.Ref s a -> b
+
+class HasComputedIdentity a s b | a -> s b where
+    computedIdentity :: TF.Ref s a -> b
+
+class HasComputedInferredAwsRegion a s b | a -> s b where
+    computedInferredAwsRegion :: TF.Ref s a -> b
+
+class HasComputedInferredEntityType a s b | a -> s b where
+    computedInferredEntityType :: TF.Ref s a -> b
+
+class HasComputedInstanceId a s b | a -> s b where
+    computedInstanceId :: TF.Ref s a -> b
+
+class HasComputedLeaseDuration a s b | a -> s b where
+    computedLeaseDuration :: TF.Ref s a -> b
+
+class HasComputedLeaseId a s b | a -> s b where
+    computedLeaseId :: TF.Ref s a -> b
+
+class HasComputedLeaseRenewable a s b | a -> s b where
+    computedLeaseRenewable :: TF.Ref s a -> b
+
+class HasComputedLeaseStartTime a s b | a -> s b where
+    computedLeaseStartTime :: TF.Ref s a -> b
+
+class HasComputedMaxLeaseTtlSeconds a s b | a -> s b where
+    computedMaxLeaseTtlSeconds :: TF.Ref s a -> b
+
+class HasComputedMaxTtl a s b | a -> s b where
+    computedMaxTtl :: TF.Ref s a -> b
+
+class HasComputedMetadata a s b | a -> s b where
+    computedMetadata :: TF.Ref s a -> b
+
+class HasComputedMongodb a s b | a -> s b where
+    computedMongodb :: TF.Ref s a -> b
+
+class HasComputedMssql a s b | a -> s b where
+    computedMssql :: TF.Ref s a -> b
+
+class HasComputedMysql a s b | a -> s b where
+    computedMysql :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNonce a s b | a -> s b where
+    computedNonce :: TF.Ref s a -> b
+
+class HasComputedOracle a s b | a -> s b where
+    computedOracle :: TF.Ref s a -> b
+
+class HasComputedOrganization a s b | a -> s b where
+    computedOrganization :: TF.Ref s a -> b
+
+class HasComputedPath a s b | a -> s b where
+    computedPath :: TF.Ref s a -> b
+
+class HasComputedPeriod a s b | a -> s b where
+    computedPeriod :: TF.Ref s a -> b
+
+class HasComputedPkcs7 a s b | a -> s b where
+    computedPkcs7 :: TF.Ref s a -> b
+
+class HasComputedPolicies a s b | a -> s b where
+    computedPolicies :: TF.Ref s a -> b
+
+class HasComputedPolicy a s b | a -> s b where
+    computedPolicy :: TF.Ref s a -> b
+
+class HasComputedPolicyArn a s b | a -> s b where
+    computedPolicyArn :: TF.Ref s a -> b
+
+class HasComputedPostgresql a s b | a -> s b where
+    computedPostgresql :: TF.Ref s a -> b
+
+class HasComputedRenewStatements a s b | a -> s b where
+    computedRenewStatements :: TF.Ref s a -> b
+
+class HasComputedRenewable a s b | a -> s b where
+    computedRenewable :: TF.Ref s a -> b
+
+class HasComputedResolveAwsUniqueIds a s b | a -> s b where
+    computedResolveAwsUniqueIds :: TF.Ref s a -> b
+
+class HasComputedRevocationStatements a s b | a -> s b where
+    computedRevocationStatements :: TF.Ref s a -> b
+
+class HasComputedRole a s b | a -> s b where
+    computedRole :: TF.Ref s a -> b
+
+class HasComputedRoleId a s b | a -> s b where
+    computedRoleId :: TF.Ref s a -> b
+
+class HasComputedRoleName a s b | a -> s b where
+    computedRoleName :: TF.Ref s a -> b
+
+class HasComputedRoleTag a s b | a -> s b where
+    computedRoleTag :: TF.Ref s a -> b
+
+class HasComputedRollbackStatements a s b | a -> s b where
+    computedRollbackStatements :: TF.Ref s a -> b
+
+class HasComputedSafetyBuffer a s b | a -> s b where
+    computedSafetyBuffer :: TF.Ref s a -> b
+
+class HasComputedSecretId a s b | a -> s b where
+    computedSecretId :: TF.Ref s a -> b
+
+class HasComputedSecretIdNumUses a s b | a -> s b where
+    computedSecretIdNumUses :: TF.Ref s a -> b
+
+class HasComputedSecretIdTtl a s b | a -> s b where
+    computedSecretIdTtl :: TF.Ref s a -> b
+
+class HasComputedSecretKey a s b | a -> s b where
+    computedSecretKey :: TF.Ref s a -> b
+
+class HasComputedSecurityToken a s b | a -> s b where
+    computedSecurityToken :: TF.Ref s a -> b
+
+class HasComputedSignature a s b | a -> s b where
+    computedSignature :: TF.Ref s a -> b
+
+class HasComputedStsEndpoint a s b | a -> s b where
+    computedStsEndpoint :: TF.Ref s a -> b
+
+class HasComputedStsRole a s b | a -> s b where
+    computedStsRole :: TF.Ref s a -> b
+
+class HasComputedTagKey a s b | a -> s b where
+    computedTagKey :: TF.Ref s a -> b
+
+class HasComputedTagValue a s b | a -> s b where
+    computedTagValue :: TF.Ref s a -> b
+
+class HasComputedToken a s b | a -> s b where
+    computedToken :: TF.Ref s a -> b
+
+class HasComputedTokenMaxTtl a s b | a -> s b where
+    computedTokenMaxTtl :: TF.Ref s a -> b
+
+class HasComputedTokenNumUses a s b | a -> s b where
+    computedTokenNumUses :: TF.Ref s a -> b
+
+class HasComputedTokenTtl a s b | a -> s b where
+    computedTokenTtl :: TF.Ref s a -> b
+
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUser a s b | a -> s b where
+    computedUser :: TF.Ref s a -> b
+
+class HasComputedUsername a s b | a -> s b where
+    computedUsername :: TF.Ref s a -> b
+
+class HasComputedVerifyConnection a s b | a -> s b where
+    computedVerifyConnection :: TF.Ref s a -> b

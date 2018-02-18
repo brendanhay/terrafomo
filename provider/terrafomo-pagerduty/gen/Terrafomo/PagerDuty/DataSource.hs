@@ -40,6 +40,7 @@ module Terrafomo.PagerDuty.DataSource
     , P.HasName (..)
 
     -- ** Computed Attributes
+    , P.HasComputedEmail (..)
     , P.HasComputedName (..)
     , P.HasComputedType' (..)
 
@@ -51,7 +52,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -66,6 +67,7 @@ import           Terrafomo.PagerDuty.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @pagerduty_escalation_policy@ PagerDuty datasource.
@@ -89,7 +91,8 @@ instance P.HasName (EscalationPolicyData s) (TF.Attr s Text) where
         lens (_name :: EscalationPolicyData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: EscalationPolicyData s)
 
-instance P.HasComputedName (EscalationPolicyData s) (Text)
+instance P.HasComputedName (EscalationPolicyData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 escalationPolicyData :: TF.Schema TF.DataSource P.PagerDuty (EscalationPolicyData s)
 escalationPolicyData =
@@ -119,7 +122,8 @@ instance P.HasName (ScheduleData s) (TF.Attr s Text) where
         lens (_name :: ScheduleData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ScheduleData s)
 
-instance P.HasComputedName (ScheduleData s) (Text)
+instance P.HasComputedName (ScheduleData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 scheduleData :: TF.Schema TF.DataSource P.PagerDuty (ScheduleData s)
 scheduleData =
@@ -149,7 +153,13 @@ instance P.HasEmail (UserData s) (TF.Attr s Text) where
         lens (_email :: UserData s -> TF.Attr s Text)
              (\s a -> s { _email = a } :: UserData s)
 
-instance P.HasComputedName (UserData s) (Text)
+instance P.HasComputedEmail (UserData s) s (TF.Attr s Text) where
+    computedEmail =
+        (_email :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (UserData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 userData :: TF.Schema TF.DataSource P.PagerDuty (UserData s)
 userData =
@@ -180,8 +190,11 @@ instance P.HasName (VendorData s) (TF.Attr s Text) where
         lens (_name :: VendorData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VendorData s)
 
-instance P.HasComputedName (VendorData s) (Text)
-instance P.HasComputedType' (VendorData s) (Text)
+instance P.HasComputedName (VendorData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedType' (VendorData s) s (TF.Attr s Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
 
 vendorData :: TF.Schema TF.DataSource P.PagerDuty (VendorData s)
 vendorData =

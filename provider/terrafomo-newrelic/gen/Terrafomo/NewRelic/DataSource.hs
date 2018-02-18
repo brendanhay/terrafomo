@@ -36,6 +36,7 @@ module Terrafomo.NewRelic.DataSource
     , P.HasComputedHostIds (..)
     , P.HasComputedId (..)
     , P.HasComputedInstanceIds (..)
+    , P.HasComputedName (..)
 
     -- * Re-exported Types
     , module P
@@ -45,7 +46,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -60,6 +61,7 @@ import           Terrafomo.NewRelic.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @newrelic_application@ NewRelic datasource.
@@ -82,9 +84,19 @@ instance P.HasName (ApplicationData s) (TF.Attr s Text) where
         lens (_name :: ApplicationData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ApplicationData s)
 
-instance P.HasComputedHostIds (ApplicationData s) (Text)
-instance P.HasComputedId (ApplicationData s) (Text)
-instance P.HasComputedInstanceIds (ApplicationData s) (Text)
+instance P.HasComputedHostIds (ApplicationData s) s (TF.Attr s Text) where
+    computedHostIds x = TF.compute (TF.refKey x) "host_ids"
+
+instance P.HasComputedId (ApplicationData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedInstanceIds (ApplicationData s) s (TF.Attr s Text) where
+    computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
+
+instance P.HasComputedName (ApplicationData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ApplicationData s -> TF.Attr s Text)
+            . TF.refValue
 
 applicationData :: TF.Schema TF.DataSource P.NewRelic (ApplicationData s)
 applicationData =
@@ -113,7 +125,13 @@ instance P.HasName (KeyTransactionData s) (TF.Attr s Text) where
         lens (_name :: KeyTransactionData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KeyTransactionData s)
 
-instance P.HasComputedId (KeyTransactionData s) (Text)
+instance P.HasComputedId (KeyTransactionData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (KeyTransactionData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: KeyTransactionData s -> TF.Attr s Text)
+            . TF.refValue
 
 keyTransactionData :: TF.Schema TF.DataSource P.NewRelic (KeyTransactionData s)
 keyTransactionData =

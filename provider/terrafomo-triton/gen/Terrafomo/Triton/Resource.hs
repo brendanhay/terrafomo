@@ -72,33 +72,51 @@ module Terrafomo.Triton.Resource
     , P.HasVlanId (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAdministratorPw (..)
+    , P.HasComputedAffinity (..)
+    , P.HasComputedCloudConfig (..)
+    , P.HasComputedCns (..)
     , P.HasComputedCreated (..)
     , P.HasComputedDataset (..)
     , P.HasComputedDescription (..)
     , P.HasComputedDisk (..)
+    , P.HasComputedEnabled (..)
     , P.HasComputedFabric (..)
+    , P.HasComputedFirewallEnabled (..)
     , P.HasComputedGateway (..)
     , P.HasComputedId (..)
+    , P.HasComputedImage (..)
     , P.HasComputedInternetNat (..)
     , P.HasComputedIp (..)
     , P.HasComputedIps (..)
+    , P.HasComputedKey (..)
+    , P.HasComputedLocality (..)
     , P.HasComputedMac (..)
+    , P.HasComputedMachineId (..)
     , P.HasComputedMemory (..)
+    , P.HasComputedMetadata (..)
     , P.HasComputedName (..)
     , P.HasComputedNetmask (..)
     , P.HasComputedNetwork (..)
+    , P.HasComputedNetworks (..)
     , P.HasComputedNic (..)
+    , P.HasComputedPackage (..)
     , P.HasComputedPrimary (..)
     , P.HasComputedPrimaryip (..)
     , P.HasComputedProvisionEndIp (..)
     , P.HasComputedProvisionStartIp (..)
     , P.HasComputedPublic (..)
     , P.HasComputedResolvers (..)
+    , P.HasComputedRootAuthorizedKeys (..)
     , P.HasComputedRoutes (..)
+    , P.HasComputedRule (..)
     , P.HasComputedState (..)
     , P.HasComputedSubnet (..)
+    , P.HasComputedTags (..)
     , P.HasComputedType' (..)
     , P.HasComputedUpdated (..)
+    , P.HasComputedUserData (..)
+    , P.HasComputedUserScript (..)
     , P.HasComputedVlanId (..)
 
     -- * Re-exported Types
@@ -109,7 +127,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -124,6 +142,7 @@ import           Terrafomo.Triton.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @triton_fabric@ Triton resource.
@@ -218,18 +237,41 @@ instance P.HasVlanId (FabricResource s) (TF.Attr s Text) where
         lens (_vlan_id :: FabricResource s -> TF.Attr s Text)
              (\s a -> s { _vlan_id = a } :: FabricResource s)
 
-instance P.HasComputedDescription (FabricResource s) (Text)
-instance P.HasComputedFabric (FabricResource s) (Text)
-instance P.HasComputedGateway (FabricResource s) (Text)
-instance P.HasComputedInternetNat (FabricResource s) (Text)
-instance P.HasComputedName (FabricResource s) (Text)
-instance P.HasComputedProvisionEndIp (FabricResource s) (Text)
-instance P.HasComputedProvisionStartIp (FabricResource s) (Text)
-instance P.HasComputedPublic (FabricResource s) (Text)
-instance P.HasComputedResolvers (FabricResource s) (Text)
-instance P.HasComputedRoutes (FabricResource s) (Text)
-instance P.HasComputedSubnet (FabricResource s) (Text)
-instance P.HasComputedVlanId (FabricResource s) (Text)
+instance P.HasComputedDescription (FabricResource s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedFabric (FabricResource s) s (TF.Attr s Text) where
+    computedFabric x = TF.compute (TF.refKey x) "fabric"
+
+instance P.HasComputedGateway (FabricResource s) s (TF.Attr s Text) where
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
+
+instance P.HasComputedInternetNat (FabricResource s) s (TF.Attr s Text) where
+    computedInternetNat x = TF.compute (TF.refKey x) "internet_nat"
+
+instance P.HasComputedName (FabricResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedProvisionEndIp (FabricResource s) s (TF.Attr s Text) where
+    computedProvisionEndIp x = TF.compute (TF.refKey x) "provision_end_ip"
+
+instance P.HasComputedProvisionStartIp (FabricResource s) s (TF.Attr s Text) where
+    computedProvisionStartIp x = TF.compute (TF.refKey x) "provision_start_ip"
+
+instance P.HasComputedPublic (FabricResource s) s (TF.Attr s Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
+
+instance P.HasComputedResolvers (FabricResource s) s (TF.Attr s Text) where
+    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
+
+instance P.HasComputedRoutes (FabricResource s) s (TF.Attr s Text) where
+    computedRoutes x = TF.compute (TF.refKey x) "routes"
+
+instance P.HasComputedSubnet (FabricResource s) s (TF.Attr s Text) where
+    computedSubnet x = TF.compute (TF.refKey x) "subnet"
+
+instance P.HasComputedVlanId (FabricResource s) s (TF.Attr s Text) where
+    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
 
 fabricResource :: TF.Schema TF.Resource P.Triton (FabricResource s)
 fabricResource =
@@ -275,7 +317,18 @@ instance P.HasRule (FirewallRuleResource s) (TF.Attr s Text) where
         lens (_rule :: FirewallRuleResource s -> TF.Attr s Text)
              (\s a -> s { _rule = a } :: FirewallRuleResource s)
 
-instance P.HasComputedId (FirewallRuleResource s) (Text)
+instance P.HasComputedEnabled (FirewallRuleResource s) s (TF.Attr s Text) where
+    computedEnabled =
+        (_enabled :: FirewallRuleResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (FirewallRuleResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedRule (FirewallRuleResource s) s (TF.Attr s Text) where
+    computedRule =
+        (_rule :: FirewallRuleResource s -> TF.Attr s Text)
+            . TF.refValue
 
 firewallRuleResource :: TF.Schema TF.Resource P.Triton (FirewallRuleResource s)
 firewallRuleResource =
@@ -312,6 +365,15 @@ instance P.HasName (KeyResource s) (TF.Attr s Text) where
         lens (_name :: KeyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KeyResource s)
 
+instance P.HasComputedKey (KeyResource s) s (TF.Attr s Text) where
+    computedKey =
+        (_key :: KeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (KeyResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: KeyResource s -> TF.Attr s Text)
+            . TF.refValue
 
 keyResource :: TF.Schema TF.Resource P.Triton (KeyResource s)
 keyResource =
@@ -455,23 +517,131 @@ instance P.HasUserScript (MachineResource s) (TF.Attr s Text) where
         lens (_user_script :: MachineResource s -> TF.Attr s Text)
              (\s a -> s { _user_script = a } :: MachineResource s)
 
-instance P.HasComputedCreated (MachineResource s) (Text)
-instance P.HasComputedDataset (MachineResource s) (Text)
-instance P.HasComputedDisk (MachineResource s) (Text)
-instance P.HasComputedGateway (MachineResource s) (Text)
-instance P.HasComputedId (MachineResource s) (Text)
-instance P.HasComputedIp (MachineResource s) (Text)
-instance P.HasComputedIps (MachineResource s) (Text)
-instance P.HasComputedMac (MachineResource s) (Text)
-instance P.HasComputedMemory (MachineResource s) (Text)
-instance P.HasComputedNetmask (MachineResource s) (Text)
-instance P.HasComputedNetwork (MachineResource s) (Text)
-instance P.HasComputedNic (MachineResource s) (Text)
-instance P.HasComputedPrimary (MachineResource s) (Text)
-instance P.HasComputedPrimaryip (MachineResource s) (Text)
-instance P.HasComputedState (MachineResource s) (Text)
-instance P.HasComputedType' (MachineResource s) (Text)
-instance P.HasComputedUpdated (MachineResource s) (Text)
+instance P.HasComputedAdministratorPw (MachineResource s) s (TF.Attr s Text) where
+    computedAdministratorPw =
+        (_administrator_pw :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedAffinity (MachineResource s) s (TF.Attr s Text) where
+    computedAffinity =
+        (_affinity :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCloudConfig (MachineResource s) s (TF.Attr s Text) where
+    computedCloudConfig =
+        (_cloud_config :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCns (MachineResource s) s (TF.Attr s Text) where
+    computedCns =
+        (_cns :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCreated (MachineResource s) s (TF.Attr s Text) where
+    computedCreated x = TF.compute (TF.refKey x) "created"
+
+instance P.HasComputedDataset (MachineResource s) s (TF.Attr s Text) where
+    computedDataset x = TF.compute (TF.refKey x) "dataset"
+
+instance P.HasComputedDisk (MachineResource s) s (TF.Attr s Text) where
+    computedDisk x = TF.compute (TF.refKey x) "disk"
+
+instance P.HasComputedFirewallEnabled (MachineResource s) s (TF.Attr s Text) where
+    computedFirewallEnabled =
+        (_firewall_enabled :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGateway (MachineResource s) s (TF.Attr s Text) where
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
+
+instance P.HasComputedId (MachineResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedImage (MachineResource s) s (TF.Attr s Text) where
+    computedImage =
+        (_image :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedIp (MachineResource s) s (TF.Attr s Text) where
+    computedIp x = TF.compute (TF.refKey x) "ip"
+
+instance P.HasComputedIps (MachineResource s) s (TF.Attr s Text) where
+    computedIps x = TF.compute (TF.refKey x) "ips"
+
+instance P.HasComputedLocality (MachineResource s) s (TF.Attr s Text) where
+    computedLocality =
+        (_locality :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMac (MachineResource s) s (TF.Attr s Text) where
+    computedMac x = TF.compute (TF.refKey x) "mac"
+
+instance P.HasComputedMemory (MachineResource s) s (TF.Attr s Text) where
+    computedMemory x = TF.compute (TF.refKey x) "memory"
+
+instance P.HasComputedMetadata (MachineResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (MachineResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetmask (MachineResource s) s (TF.Attr s Text) where
+    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+
+instance P.HasComputedNetwork (MachineResource s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedNetworks (MachineResource s) s (TF.Attr s Text) where
+    computedNetworks =
+        (_networks :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNic (MachineResource s) s (TF.Attr s Text) where
+    computedNic x = TF.compute (TF.refKey x) "nic"
+
+instance P.HasComputedPackage (MachineResource s) s (TF.Attr s Text) where
+    computedPackage =
+        (_package :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPrimary (MachineResource s) s (TF.Attr s Text) where
+    computedPrimary x = TF.compute (TF.refKey x) "primary"
+
+instance P.HasComputedPrimaryip (MachineResource s) s (TF.Attr s Text) where
+    computedPrimaryip x = TF.compute (TF.refKey x) "primaryip"
+
+instance P.HasComputedRootAuthorizedKeys (MachineResource s) s (TF.Attr s Text) where
+    computedRootAuthorizedKeys =
+        (_root_authorized_keys :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedState (MachineResource s) s (TF.Attr s Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
+
+instance P.HasComputedTags (MachineResource s) s (TF.Attr s Text) where
+    computedTags =
+        (_tags :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (MachineResource s) s (TF.Attr s Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+instance P.HasComputedUpdated (MachineResource s) s (TF.Attr s Text) where
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
+
+instance P.HasComputedUserData (MachineResource s) s (TF.Attr s Text) where
+    computedUserData =
+        (_user_data :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUserScript (MachineResource s) s (TF.Attr s Text) where
+    computedUserScript =
+        (_user_script :: MachineResource s -> TF.Attr s Text)
+            . TF.refValue
 
 machineResource :: TF.Schema TF.Resource P.Triton (MachineResource s)
 machineResource =
@@ -524,8 +694,21 @@ instance P.HasName (SnapshotResource s) (TF.Attr s Text) where
         lens (_name :: SnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SnapshotResource s)
 
-instance P.HasComputedId (SnapshotResource s) (Text)
-instance P.HasComputedState (SnapshotResource s) (Text)
+instance P.HasComputedId (SnapshotResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMachineId (SnapshotResource s) s (TF.Attr s Text) where
+    computedMachineId =
+        (_machine_id :: SnapshotResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (SnapshotResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: SnapshotResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedState (SnapshotResource s) s (TF.Attr s Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
 
 snapshotResource :: TF.Schema TF.Resource P.Triton (SnapshotResource s)
 snapshotResource =
@@ -572,6 +755,20 @@ instance P.HasVlanId (VlanResource s) (TF.Attr s Text) where
         lens (_vlan_id :: VlanResource s -> TF.Attr s Text)
              (\s a -> s { _vlan_id = a } :: VlanResource s)
 
+instance P.HasComputedDescription (VlanResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: VlanResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (VlanResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: VlanResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedVlanId (VlanResource s) s (TF.Attr s Text) where
+    computedVlanId =
+        (_vlan_id :: VlanResource s -> TF.Attr s Text)
+            . TF.refValue
 
 vlanResource :: TF.Schema TF.Resource P.Triton (VlanResource s)
 vlanResource =

@@ -40,11 +40,27 @@ module Terrafomo.Bitbucket.Lens
     , HasWebsite (..)
 
     -- ** Computed Attributes
+    , HasComputedDescription (..)
+    , HasComputedEvents (..)
+    , HasComputedForkPolicy (..)
+    , HasComputedHasIssues (..)
+    , HasComputedHasWiki (..)
+    , HasComputedIsPrivate (..)
+    , HasComputedLanguage (..)
+    , HasComputedName (..)
+    , HasComputedOwner (..)
+    , HasComputedProjectKey (..)
+    , HasComputedRepository (..)
+    , HasComputedReviewers (..)
+    , HasComputedScm (..)
+    , HasComputedSlug (..)
+    , HasComputedUrl (..)
+    , HasComputedWebsite (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -145,3 +161,51 @@ class HasWebsite a b | a -> b where
 
 instance HasWebsite a b => HasWebsite (TF.Schema l p a) b where
     website = TF.configuration . website
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedEvents a s b | a -> s b where
+    computedEvents :: TF.Ref s a -> b
+
+class HasComputedForkPolicy a s b | a -> s b where
+    computedForkPolicy :: TF.Ref s a -> b
+
+class HasComputedHasIssues a s b | a -> s b where
+    computedHasIssues :: TF.Ref s a -> b
+
+class HasComputedHasWiki a s b | a -> s b where
+    computedHasWiki :: TF.Ref s a -> b
+
+class HasComputedIsPrivate a s b | a -> s b where
+    computedIsPrivate :: TF.Ref s a -> b
+
+class HasComputedLanguage a s b | a -> s b where
+    computedLanguage :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedOwner a s b | a -> s b where
+    computedOwner :: TF.Ref s a -> b
+
+class HasComputedProjectKey a s b | a -> s b where
+    computedProjectKey :: TF.Ref s a -> b
+
+class HasComputedRepository a s b | a -> s b where
+    computedRepository :: TF.Ref s a -> b
+
+class HasComputedReviewers a s b | a -> s b where
+    computedReviewers :: TF.Ref s a -> b
+
+class HasComputedScm a s b | a -> s b where
+    computedScm :: TF.Ref s a -> b
+
+class HasComputedSlug a s b | a -> s b where
+    computedSlug :: TF.Ref s a -> b
+
+class HasComputedUrl a s b | a -> s b where
+    computedUrl :: TF.Ref s a -> b
+
+class HasComputedWebsite a s b | a -> s b where
+    computedWebsite :: TF.Ref s a -> b

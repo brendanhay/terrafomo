@@ -59,40 +59,70 @@ module Terrafomo.GitHub.Lens
     , HasUsername (..)
 
     -- ** Computed Attributes
+    , HasComputedActive (..)
+    , HasComputedAllowMergeCommit (..)
+    , HasComputedAllowRebaseMerge (..)
+    , HasComputedAllowSquashMerge (..)
+    , HasComputedAutoInit (..)
     , HasComputedAvatarUrl (..)
     , HasComputedBio (..)
     , HasComputedBlog (..)
+    , HasComputedBranch (..)
+    , HasComputedColor (..)
     , HasComputedCompany (..)
+    , HasComputedConfiguration (..)
     , HasComputedCreatedAt (..)
+    , HasComputedDefaultBranch (..)
     , HasComputedDescription (..)
     , HasComputedEmail (..)
+    , HasComputedEnforceAdmins (..)
+    , HasComputedEvents (..)
     , HasComputedFollowers (..)
     , HasComputedFollowing (..)
     , HasComputedFullName (..)
     , HasComputedGitCloneUrl (..)
+    , HasComputedGitignoreTemplate (..)
     , HasComputedGpgKeys (..)
     , HasComputedGravatarId (..)
+    , HasComputedHasDownloads (..)
+    , HasComputedHasIssues (..)
+    , HasComputedHasWiki (..)
+    , HasComputedHomepageUrl (..)
     , HasComputedHttpCloneUrl (..)
     , HasComputedId (..)
+    , HasComputedKey (..)
+    , HasComputedLdapDn (..)
+    , HasComputedLicenseTemplate (..)
     , HasComputedLocation (..)
     , HasComputedLogin (..)
     , HasComputedMembers (..)
     , HasComputedName (..)
     , HasComputedPermission (..)
     , HasComputedPrivacy (..)
+    , HasComputedPrivate (..)
     , HasComputedPublicGists (..)
     , HasComputedPublicRepos (..)
+    , HasComputedReadOnly (..)
+    , HasComputedRepository (..)
+    , HasComputedRequiredPullRequestReviews (..)
+    , HasComputedRequiredStatusChecks (..)
+    , HasComputedRestrictions (..)
+    , HasComputedRole (..)
     , HasComputedSiteAdmin (..)
+    , HasComputedSlug (..)
     , HasComputedSshCloneUrl (..)
     , HasComputedSshKeys (..)
     , HasComputedSvnUrl (..)
+    , HasComputedTeamId (..)
+    , HasComputedTitle (..)
     , HasComputedUpdatedAt (..)
     , HasComputedUrl (..)
+    , HasComputedUsername (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -308,176 +338,179 @@ class HasUsername a b | a -> b where
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputedAvatarUrl a b | a -> b where
-    computedAvatarUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAvatarUrl =
-        to (\x -> TF.compute (TF.refKey x) "avatar_url")
+class HasComputedActive a s b | a -> s b where
+    computedActive :: TF.Ref s a -> b
 
-class HasComputedBio a b | a -> b where
-    computedBio
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedBio =
-        to (\x -> TF.compute (TF.refKey x) "bio")
+class HasComputedAllowMergeCommit a s b | a -> s b where
+    computedAllowMergeCommit :: TF.Ref s a -> b
 
-class HasComputedBlog a b | a -> b where
-    computedBlog
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedBlog =
-        to (\x -> TF.compute (TF.refKey x) "blog")
+class HasComputedAllowRebaseMerge a s b | a -> s b where
+    computedAllowRebaseMerge :: TF.Ref s a -> b
 
-class HasComputedCompany a b | a -> b where
-    computedCompany
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCompany =
-        to (\x -> TF.compute (TF.refKey x) "company")
+class HasComputedAllowSquashMerge a s b | a -> s b where
+    computedAllowSquashMerge :: TF.Ref s a -> b
 
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreatedAt =
-        to (\x -> TF.compute (TF.refKey x) "created_at")
+class HasComputedAutoInit a s b | a -> s b where
+    computedAutoInit :: TF.Ref s a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDescription =
-        to (\x -> TF.compute (TF.refKey x) "description")
+class HasComputedAvatarUrl a s b | a -> s b where
+    computedAvatarUrl :: TF.Ref s a -> b
 
-class HasComputedEmail a b | a -> b where
-    computedEmail
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedEmail =
-        to (\x -> TF.compute (TF.refKey x) "email")
+class HasComputedBio a s b | a -> s b where
+    computedBio :: TF.Ref s a -> b
 
-class HasComputedFollowers a b | a -> b where
-    computedFollowers
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFollowers =
-        to (\x -> TF.compute (TF.refKey x) "followers")
+class HasComputedBlog a s b | a -> s b where
+    computedBlog :: TF.Ref s a -> b
 
-class HasComputedFollowing a b | a -> b where
-    computedFollowing
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFollowing =
-        to (\x -> TF.compute (TF.refKey x) "following")
+class HasComputedBranch a s b | a -> s b where
+    computedBranch :: TF.Ref s a -> b
 
-class HasComputedFullName a b | a -> b where
-    computedFullName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFullName =
-        to (\x -> TF.compute (TF.refKey x) "full_name")
+class HasComputedColor a s b | a -> s b where
+    computedColor :: TF.Ref s a -> b
 
-class HasComputedGitCloneUrl a b | a -> b where
-    computedGitCloneUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedGitCloneUrl =
-        to (\x -> TF.compute (TF.refKey x) "git_clone_url")
+class HasComputedCompany a s b | a -> s b where
+    computedCompany :: TF.Ref s a -> b
 
-class HasComputedGpgKeys a b | a -> b where
-    computedGpgKeys
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedGpgKeys =
-        to (\x -> TF.compute (TF.refKey x) "gpg_keys")
+class HasComputedConfiguration a s b | a -> s b where
+    computedConfiguration :: TF.Ref s a -> b
 
-class HasComputedGravatarId a b | a -> b where
-    computedGravatarId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedGravatarId =
-        to (\x -> TF.compute (TF.refKey x) "gravatar_id")
+class HasComputedCreatedAt a s b | a -> s b where
+    computedCreatedAt :: TF.Ref s a -> b
 
-class HasComputedHttpCloneUrl a b | a -> b where
-    computedHttpCloneUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedHttpCloneUrl =
-        to (\x -> TF.compute (TF.refKey x) "http_clone_url")
+class HasComputedDefaultBranch a s b | a -> s b where
+    computedDefaultBranch :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedLocation a b | a -> b where
-    computedLocation
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLocation =
-        to (\x -> TF.compute (TF.refKey x) "location")
+class HasComputedEmail a s b | a -> s b where
+    computedEmail :: TF.Ref s a -> b
 
-class HasComputedLogin a b | a -> b where
-    computedLogin
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLogin =
-        to (\x -> TF.compute (TF.refKey x) "login")
+class HasComputedEnforceAdmins a s b | a -> s b where
+    computedEnforceAdmins :: TF.Ref s a -> b
 
-class HasComputedMembers a b | a -> b where
-    computedMembers
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedMembers =
-        to (\x -> TF.compute (TF.refKey x) "members")
+class HasComputedEvents a s b | a -> s b where
+    computedEvents :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedFollowers a s b | a -> s b where
+    computedFollowers :: TF.Ref s a -> b
 
-class HasComputedPermission a b | a -> b where
-    computedPermission
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPermission =
-        to (\x -> TF.compute (TF.refKey x) "permission")
+class HasComputedFollowing a s b | a -> s b where
+    computedFollowing :: TF.Ref s a -> b
 
-class HasComputedPrivacy a b | a -> b where
-    computedPrivacy
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrivacy =
-        to (\x -> TF.compute (TF.refKey x) "privacy")
+class HasComputedFullName a s b | a -> s b where
+    computedFullName :: TF.Ref s a -> b
 
-class HasComputedPublicGists a b | a -> b where
-    computedPublicGists
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPublicGists =
-        to (\x -> TF.compute (TF.refKey x) "public_gists")
+class HasComputedGitCloneUrl a s b | a -> s b where
+    computedGitCloneUrl :: TF.Ref s a -> b
 
-class HasComputedPublicRepos a b | a -> b where
-    computedPublicRepos
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPublicRepos =
-        to (\x -> TF.compute (TF.refKey x) "public_repos")
+class HasComputedGitignoreTemplate a s b | a -> s b where
+    computedGitignoreTemplate :: TF.Ref s a -> b
 
-class HasComputedSiteAdmin a b | a -> b where
-    computedSiteAdmin
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSiteAdmin =
-        to (\x -> TF.compute (TF.refKey x) "site_admin")
+class HasComputedGpgKeys a s b | a -> s b where
+    computedGpgKeys :: TF.Ref s a -> b
 
-class HasComputedSshCloneUrl a b | a -> b where
-    computedSshCloneUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSshCloneUrl =
-        to (\x -> TF.compute (TF.refKey x) "ssh_clone_url")
+class HasComputedGravatarId a s b | a -> s b where
+    computedGravatarId :: TF.Ref s a -> b
 
-class HasComputedSshKeys a b | a -> b where
-    computedSshKeys
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSshKeys =
-        to (\x -> TF.compute (TF.refKey x) "ssh_keys")
+class HasComputedHasDownloads a s b | a -> s b where
+    computedHasDownloads :: TF.Ref s a -> b
 
-class HasComputedSvnUrl a b | a -> b where
-    computedSvnUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSvnUrl =
-        to (\x -> TF.compute (TF.refKey x) "svn_url")
+class HasComputedHasIssues a s b | a -> s b where
+    computedHasIssues :: TF.Ref s a -> b
 
-class HasComputedUpdatedAt a b | a -> b where
-    computedUpdatedAt
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUpdatedAt =
-        to (\x -> TF.compute (TF.refKey x) "updated_at")
+class HasComputedHasWiki a s b | a -> s b where
+    computedHasWiki :: TF.Ref s a -> b
 
-class HasComputedUrl a b | a -> b where
-    computedUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUrl =
-        to (\x -> TF.compute (TF.refKey x) "url")
+class HasComputedHomepageUrl a s b | a -> s b where
+    computedHomepageUrl :: TF.Ref s a -> b
+
+class HasComputedHttpCloneUrl a s b | a -> s b where
+    computedHttpCloneUrl :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedKey a s b | a -> s b where
+    computedKey :: TF.Ref s a -> b
+
+class HasComputedLdapDn a s b | a -> s b where
+    computedLdapDn :: TF.Ref s a -> b
+
+class HasComputedLicenseTemplate a s b | a -> s b where
+    computedLicenseTemplate :: TF.Ref s a -> b
+
+class HasComputedLocation a s b | a -> s b where
+    computedLocation :: TF.Ref s a -> b
+
+class HasComputedLogin a s b | a -> s b where
+    computedLogin :: TF.Ref s a -> b
+
+class HasComputedMembers a s b | a -> s b where
+    computedMembers :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedPermission a s b | a -> s b where
+    computedPermission :: TF.Ref s a -> b
+
+class HasComputedPrivacy a s b | a -> s b where
+    computedPrivacy :: TF.Ref s a -> b
+
+class HasComputedPrivate a s b | a -> s b where
+    computedPrivate :: TF.Ref s a -> b
+
+class HasComputedPublicGists a s b | a -> s b where
+    computedPublicGists :: TF.Ref s a -> b
+
+class HasComputedPublicRepos a s b | a -> s b where
+    computedPublicRepos :: TF.Ref s a -> b
+
+class HasComputedReadOnly a s b | a -> s b where
+    computedReadOnly :: TF.Ref s a -> b
+
+class HasComputedRepository a s b | a -> s b where
+    computedRepository :: TF.Ref s a -> b
+
+class HasComputedRequiredPullRequestReviews a s b | a -> s b where
+    computedRequiredPullRequestReviews :: TF.Ref s a -> b
+
+class HasComputedRequiredStatusChecks a s b | a -> s b where
+    computedRequiredStatusChecks :: TF.Ref s a -> b
+
+class HasComputedRestrictions a s b | a -> s b where
+    computedRestrictions :: TF.Ref s a -> b
+
+class HasComputedRole a s b | a -> s b where
+    computedRole :: TF.Ref s a -> b
+
+class HasComputedSiteAdmin a s b | a -> s b where
+    computedSiteAdmin :: TF.Ref s a -> b
+
+class HasComputedSlug a s b | a -> s b where
+    computedSlug :: TF.Ref s a -> b
+
+class HasComputedSshCloneUrl a s b | a -> s b where
+    computedSshCloneUrl :: TF.Ref s a -> b
+
+class HasComputedSshKeys a s b | a -> s b where
+    computedSshKeys :: TF.Ref s a -> b
+
+class HasComputedSvnUrl a s b | a -> s b where
+    computedSvnUrl :: TF.Ref s a -> b
+
+class HasComputedTeamId a s b | a -> s b where
+    computedTeamId :: TF.Ref s a -> b
+
+class HasComputedTitle a s b | a -> s b where
+    computedTitle :: TF.Ref s a -> b
+
+class HasComputedUpdatedAt a s b | a -> s b where
+    computedUpdatedAt :: TF.Ref s a -> b
+
+class HasComputedUrl a s b | a -> s b where
+    computedUrl :: TF.Ref s a -> b
+
+class HasComputedUsername a s b | a -> s b where
+    computedUsername :: TF.Ref s a -> b

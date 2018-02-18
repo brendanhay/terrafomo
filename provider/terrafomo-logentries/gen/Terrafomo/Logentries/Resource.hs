@@ -39,7 +39,14 @@ module Terrafomo.Logentries.Resource
     , P.HasType' (..)
 
     -- ** Computed Attributes
+    , P.HasComputedFilename (..)
+    , P.HasComputedLocation (..)
+    , P.HasComputedLogsetId (..)
+    , P.HasComputedName (..)
+    , P.HasComputedRetentionPeriod (..)
+    , P.HasComputedSource (..)
     , P.HasComputedToken (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -49,7 +56,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -64,6 +71,7 @@ import           Terrafomo.Logentries.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @logentries_log@ Logentries resource.
@@ -125,7 +133,38 @@ instance P.HasType' (LogResource s) (TF.Attr s Text) where
         lens (_type' :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: LogResource s)
 
-instance P.HasComputedToken (LogResource s) (Text)
+instance P.HasComputedFilename (LogResource s) s (TF.Attr s Text) where
+    computedFilename =
+        (_filename :: LogResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLogsetId (LogResource s) s (TF.Attr s Text) where
+    computedLogsetId =
+        (_logset_id :: LogResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (LogResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: LogResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRetentionPeriod (LogResource s) s (TF.Attr s Text) where
+    computedRetentionPeriod =
+        (_retention_period :: LogResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSource (LogResource s) s (TF.Attr s Text) where
+    computedSource =
+        (_source :: LogResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedToken (LogResource s) s (TF.Attr s Text) where
+    computedToken x = TF.compute (TF.refKey x) "token"
+
+instance P.HasComputedType' (LogResource s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: LogResource s -> TF.Attr s Text)
+            . TF.refValue
 
 logResource :: TF.Schema TF.Resource P.Logentries (LogResource s)
 logResource =
@@ -167,6 +206,15 @@ instance P.HasName (LogsetResource s) (TF.Attr s Text) where
         lens (_name :: LogsetResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LogsetResource s)
 
+instance P.HasComputedLocation (LogsetResource s) s (TF.Attr s Text) where
+    computedLocation =
+        (_location :: LogsetResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (LogsetResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: LogsetResource s -> TF.Attr s Text)
+            . TF.refValue
 
 logsetResource :: TF.Schema TF.Resource P.Logentries (LogsetResource s)
 logsetResource =

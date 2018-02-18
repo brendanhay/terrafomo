@@ -50,11 +50,37 @@ module Terrafomo.PostgreSQL.Lens
     , HasVersion (..)
 
     -- ** Computed Attributes
+    , HasComputedAllowConnections (..)
+    , HasComputedBypassRowLevelSecurity (..)
+    , HasComputedConnectionLimit (..)
+    , HasComputedCreateDatabase (..)
+    , HasComputedCreateRole (..)
+    , HasComputedEncoding (..)
+    , HasComputedEncryptedPassword (..)
+    , HasComputedIfNotExists (..)
+    , HasComputedInherit (..)
+    , HasComputedIsTemplate (..)
+    , HasComputedLcCollate (..)
+    , HasComputedLcCtype (..)
+    , HasComputedLogin (..)
+    , HasComputedName (..)
+    , HasComputedOwner (..)
+    , HasComputedPassword (..)
+    , HasComputedPolicy (..)
+    , HasComputedReplication (..)
+    , HasComputedSchema (..)
+    , HasComputedSkipDropRole (..)
+    , HasComputedSkipReassignOwned (..)
+    , HasComputedSuperuser (..)
+    , HasComputedTablespaceName (..)
+    , HasComputedTemplate (..)
+    , HasComputedValidUntil (..)
+    , HasComputedVersion (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -215,3 +241,81 @@ class HasVersion a b | a -> b where
 
 instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
+
+class HasComputedAllowConnections a s b | a -> s b where
+    computedAllowConnections :: TF.Ref s a -> b
+
+class HasComputedBypassRowLevelSecurity a s b | a -> s b where
+    computedBypassRowLevelSecurity :: TF.Ref s a -> b
+
+class HasComputedConnectionLimit a s b | a -> s b where
+    computedConnectionLimit :: TF.Ref s a -> b
+
+class HasComputedCreateDatabase a s b | a -> s b where
+    computedCreateDatabase :: TF.Ref s a -> b
+
+class HasComputedCreateRole a s b | a -> s b where
+    computedCreateRole :: TF.Ref s a -> b
+
+class HasComputedEncoding a s b | a -> s b where
+    computedEncoding :: TF.Ref s a -> b
+
+class HasComputedEncryptedPassword a s b | a -> s b where
+    computedEncryptedPassword :: TF.Ref s a -> b
+
+class HasComputedIfNotExists a s b | a -> s b where
+    computedIfNotExists :: TF.Ref s a -> b
+
+class HasComputedInherit a s b | a -> s b where
+    computedInherit :: TF.Ref s a -> b
+
+class HasComputedIsTemplate a s b | a -> s b where
+    computedIsTemplate :: TF.Ref s a -> b
+
+class HasComputedLcCollate a s b | a -> s b where
+    computedLcCollate :: TF.Ref s a -> b
+
+class HasComputedLcCtype a s b | a -> s b where
+    computedLcCtype :: TF.Ref s a -> b
+
+class HasComputedLogin a s b | a -> s b where
+    computedLogin :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedOwner a s b | a -> s b where
+    computedOwner :: TF.Ref s a -> b
+
+class HasComputedPassword a s b | a -> s b where
+    computedPassword :: TF.Ref s a -> b
+
+class HasComputedPolicy a s b | a -> s b where
+    computedPolicy :: TF.Ref s a -> b
+
+class HasComputedReplication a s b | a -> s b where
+    computedReplication :: TF.Ref s a -> b
+
+class HasComputedSchema a s b | a -> s b where
+    computedSchema :: TF.Ref s a -> b
+
+class HasComputedSkipDropRole a s b | a -> s b where
+    computedSkipDropRole :: TF.Ref s a -> b
+
+class HasComputedSkipReassignOwned a s b | a -> s b where
+    computedSkipReassignOwned :: TF.Ref s a -> b
+
+class HasComputedSuperuser a s b | a -> s b where
+    computedSuperuser :: TF.Ref s a -> b
+
+class HasComputedTablespaceName a s b | a -> s b where
+    computedTablespaceName :: TF.Ref s a -> b
+
+class HasComputedTemplate a s b | a -> s b where
+    computedTemplate :: TF.Ref s a -> b
+
+class HasComputedValidUntil a s b | a -> s b where
+    computedValidUntil :: TF.Ref s a -> b
+
+class HasComputedVersion a s b | a -> s b where
+    computedVersion :: TF.Ref s a -> b

@@ -33,7 +33,11 @@ module Terrafomo.Packet.DataSource
     , P.HasPublic (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAddressFamily (..)
     , P.HasComputedCidrNotation (..)
+    , P.HasComputedFacility (..)
+    , P.HasComputedProjectId (..)
+    , P.HasComputedPublic (..)
 
     -- * Re-exported Types
     , module P
@@ -43,7 +47,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -58,6 +62,7 @@ import           Terrafomo.Packet.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @packet_precreated_ip_block@ Packet datasource.
@@ -105,7 +110,28 @@ instance P.HasPublic (PrecreatedIpBlockData s) (TF.Attr s Text) where
         lens (_public :: PrecreatedIpBlockData s -> TF.Attr s Text)
              (\s a -> s { _public = a } :: PrecreatedIpBlockData s)
 
-instance P.HasComputedCidrNotation (PrecreatedIpBlockData s) (Text)
+instance P.HasComputedAddressFamily (PrecreatedIpBlockData s) s (TF.Attr s Text) where
+    computedAddressFamily =
+        (_address_family :: PrecreatedIpBlockData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCidrNotation (PrecreatedIpBlockData s) s (TF.Attr s Text) where
+    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
+
+instance P.HasComputedFacility (PrecreatedIpBlockData s) s (TF.Attr s Text) where
+    computedFacility =
+        (_facility :: PrecreatedIpBlockData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProjectId (PrecreatedIpBlockData s) s (TF.Attr s Text) where
+    computedProjectId =
+        (_project_id :: PrecreatedIpBlockData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPublic (PrecreatedIpBlockData s) s (TF.Attr s Text) where
+    computedPublic =
+        (_public :: PrecreatedIpBlockData s -> TF.Attr s Text)
+            . TF.refValue
 
 precreatedIpBlockData :: TF.Schema TF.DataSource P.Packet (PrecreatedIpBlockData s)
 precreatedIpBlockData =

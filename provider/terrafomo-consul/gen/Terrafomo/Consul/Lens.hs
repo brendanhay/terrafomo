@@ -48,25 +48,36 @@ module Terrafomo.Consul.Lens
     -- ** Computed Attributes
     , HasComputedAddress (..)
     , HasComputedDatacenter (..)
+    , HasComputedDns (..)
+    , HasComputedFailover (..)
     , HasComputedId (..)
+    , HasComputedKey (..)
     , HasComputedName (..)
+    , HasComputedNear (..)
     , HasComputedNode (..)
     , HasComputedNodeIds (..)
     , HasComputedNodeNames (..)
     , HasComputedNodes (..)
+    , HasComputedOnlyPassing (..)
     , HasComputedPathPrefix (..)
     , HasComputedPort (..)
+    , HasComputedQueryOptions (..)
     , HasComputedService (..)
     , HasComputedServiceId (..)
+    , HasComputedSession (..)
+    , HasComputedStoredToken (..)
+    , HasComputedSubkey (..)
     , HasComputedSubkeys (..)
     , HasComputedTag (..)
     , HasComputedTags (..)
+    , HasComputedTemplate (..)
+    , HasComputedToken (..)
     , HasComputedVar<name> (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -204,98 +215,83 @@ class HasToken a b | a -> b where
 instance HasToken a b => HasToken (TF.Schema l p a) b where
     token = TF.configuration . token
 
-class HasComputedAddress a b | a -> b where
-    computedAddress
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAddress =
-        to (\x -> TF.compute (TF.refKey x) "address")
+class HasComputedAddress a s b | a -> s b where
+    computedAddress :: TF.Ref s a -> b
 
-class HasComputedDatacenter a b | a -> b where
-    computedDatacenter
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDatacenter =
-        to (\x -> TF.compute (TF.refKey x) "datacenter")
+class HasComputedDatacenter a s b | a -> s b where
+    computedDatacenter :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedDns a s b | a -> s b where
+    computedDns :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedFailover a s b | a -> s b where
+    computedFailover :: TF.Ref s a -> b
 
-class HasComputedNode a b | a -> b where
-    computedNode
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNode =
-        to (\x -> TF.compute (TF.refKey x) "node")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
 
-class HasComputedNodeIds a b | a -> b where
-    computedNodeIds
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNodeIds =
-        to (\x -> TF.compute (TF.refKey x) "node_ids")
+class HasComputedKey a s b | a -> s b where
+    computedKey :: TF.Ref s a -> b
 
-class HasComputedNodeNames a b | a -> b where
-    computedNodeNames
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNodeNames =
-        to (\x -> TF.compute (TF.refKey x) "node_names")
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
 
-class HasComputedNodes a b | a -> b where
-    computedNodes
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedNodes =
-        to (\x -> TF.compute (TF.refKey x) "nodes")
+class HasComputedNear a s b | a -> s b where
+    computedNear :: TF.Ref s a -> b
 
-class HasComputedPathPrefix a b | a -> b where
-    computedPathPrefix
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPathPrefix =
-        to (\x -> TF.compute (TF.refKey x) "path_prefix")
+class HasComputedNode a s b | a -> s b where
+    computedNode :: TF.Ref s a -> b
 
-class HasComputedPort a b | a -> b where
-    computedPort
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPort =
-        to (\x -> TF.compute (TF.refKey x) "port")
+class HasComputedNodeIds a s b | a -> s b where
+    computedNodeIds :: TF.Ref s a -> b
 
-class HasComputedService a b | a -> b where
-    computedService
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedService =
-        to (\x -> TF.compute (TF.refKey x) "service")
+class HasComputedNodeNames a s b | a -> s b where
+    computedNodeNames :: TF.Ref s a -> b
 
-class HasComputedServiceId a b | a -> b where
-    computedServiceId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedServiceId =
-        to (\x -> TF.compute (TF.refKey x) "service_id")
+class HasComputedNodes a s b | a -> s b where
+    computedNodes :: TF.Ref s a -> b
 
-class HasComputedSubkeys a b | a -> b where
-    computedSubkeys
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSubkeys =
-        to (\x -> TF.compute (TF.refKey x) "subkeys")
+class HasComputedOnlyPassing a s b | a -> s b where
+    computedOnlyPassing :: TF.Ref s a -> b
 
-class HasComputedTag a b | a -> b where
-    computedTag
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTag =
-        to (\x -> TF.compute (TF.refKey x) "tag")
+class HasComputedPathPrefix a s b | a -> s b where
+    computedPathPrefix :: TF.Ref s a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTags =
-        to (\x -> TF.compute (TF.refKey x) "tags")
+class HasComputedPort a s b | a -> s b where
+    computedPort :: TF.Ref s a -> b
 
-class HasComputedVar<name> a b | a -> b where
-    computedVar<name>
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedVar<name> =
-        to (\x -> TF.compute (TF.refKey x) "var.<name>")
+class HasComputedQueryOptions a s b | a -> s b where
+    computedQueryOptions :: TF.Ref s a -> b
+
+class HasComputedService a s b | a -> s b where
+    computedService :: TF.Ref s a -> b
+
+class HasComputedServiceId a s b | a -> s b where
+    computedServiceId :: TF.Ref s a -> b
+
+class HasComputedSession a s b | a -> s b where
+    computedSession :: TF.Ref s a -> b
+
+class HasComputedStoredToken a s b | a -> s b where
+    computedStoredToken :: TF.Ref s a -> b
+
+class HasComputedSubkey a s b | a -> s b where
+    computedSubkey :: TF.Ref s a -> b
+
+class HasComputedSubkeys a s b | a -> s b where
+    computedSubkeys :: TF.Ref s a -> b
+
+class HasComputedTag a s b | a -> s b where
+    computedTag :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedTemplate a s b | a -> s b where
+    computedTemplate :: TF.Ref s a -> b
+
+class HasComputedToken a s b | a -> s b where
+    computedToken :: TF.Ref s a -> b
+
+class HasComputedVar<name> a s b | a -> s b where
+    computedVar<name> :: TF.Ref s a -> b

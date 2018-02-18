@@ -49,7 +49,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -64,6 +64,7 @@ import           Terrafomo.Lailgun.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @mailgun_domain@ Lailgun resource.
@@ -110,13 +111,26 @@ instance P.HasWildcard (DomainResource s) (TF.Attr s Text) where
         lens (_wildcard :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _wildcard = a } :: DomainResource s)
 
-instance P.HasComputedName (DomainResource s) (Text)
-instance P.HasComputedReceivingRecords (DomainResource s) (Text)
-instance P.HasComputedSendingRecords (DomainResource s) (Text)
-instance P.HasComputedSmtpLogin (DomainResource s) (Text)
-instance P.HasComputedSmtpPassword (DomainResource s) (Text)
-instance P.HasComputedSpamAction (DomainResource s) (Text)
-instance P.HasComputedWildcard (DomainResource s) (Text)
+instance P.HasComputedName (DomainResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedReceivingRecords (DomainResource s) s (TF.Attr s Text) where
+    computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
+
+instance P.HasComputedSendingRecords (DomainResource s) s (TF.Attr s Text) where
+    computedSendingRecords x = TF.compute (TF.refKey x) "sending_records"
+
+instance P.HasComputedSmtpLogin (DomainResource s) s (TF.Attr s Text) where
+    computedSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
+
+instance P.HasComputedSmtpPassword (DomainResource s) s (TF.Attr s Text) where
+    computedSmtpPassword x = TF.compute (TF.refKey x) "smtp_password"
+
+instance P.HasComputedSpamAction (DomainResource s) s (TF.Attr s Text) where
+    computedSpamAction x = TF.compute (TF.refKey x) "spam_action"
+
+instance P.HasComputedWildcard (DomainResource s) s (TF.Attr s Text) where
+    computedWildcard x = TF.compute (TF.refKey x) "wildcard"
 
 domainResource :: TF.Schema TF.Resource P.Lailgun (DomainResource s)
 domainResource =

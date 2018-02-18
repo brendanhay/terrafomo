@@ -44,10 +44,25 @@ module Terrafomo.UltraDNS.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
+    , HasComputedActOnProbes (..)
+    , HasComputedAgents (..)
+    , HasComputedBackupRecordFailoverDelay (..)
+    , HasComputedBackupRecordRdata (..)
+    , HasComputedConflictResolve (..)
+    , HasComputedDescription (..)
     , HasComputedHostname (..)
+    , HasComputedHttpProbe (..)
     , HasComputedId (..)
+    , HasComputedInterval (..)
+    , HasComputedMaxToLb (..)
     , HasComputedName (..)
+    , HasComputedNoResponse (..)
+    , HasComputedOrder (..)
+    , HasComputedPingProbe (..)
+    , HasComputedPoolRecord (..)
     , HasComputedRdata (..)
+    , HasComputedRunProbes (..)
+    , HasComputedThreshold (..)
     , HasComputedTtl (..)
     , HasComputedType' (..)
     , HasComputedZone (..)
@@ -55,7 +70,7 @@ module Terrafomo.UltraDNS.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -181,44 +196,68 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedHostname a b | a -> b where
-    computedHostname
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedHostname =
-        to (\x -> TF.compute (TF.refKey x) "hostname")
+class HasComputedActOnProbes a s b | a -> s b where
+    computedActOnProbes :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedAgents a s b | a -> s b where
+    computedAgents :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedBackupRecordFailoverDelay a s b | a -> s b where
+    computedBackupRecordFailoverDelay :: TF.Ref s a -> b
 
-class HasComputedRdata a b | a -> b where
-    computedRdata
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRdata =
-        to (\x -> TF.compute (TF.refKey x) "rdata")
+class HasComputedBackupRecordRdata a s b | a -> s b where
+    computedBackupRecordRdata :: TF.Ref s a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTtl =
-        to (\x -> TF.compute (TF.refKey x) "ttl")
+class HasComputedConflictResolve a s b | a -> s b where
+    computedConflictResolve :: TF.Ref s a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedZone a b | a -> b where
-    computedZone
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedZone =
-        to (\x -> TF.compute (TF.refKey x) "zone")
+class HasComputedHostname a s b | a -> s b where
+    computedHostname :: TF.Ref s a -> b
+
+class HasComputedHttpProbe a s b | a -> s b where
+    computedHttpProbe :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedInterval a s b | a -> s b where
+    computedInterval :: TF.Ref s a -> b
+
+class HasComputedMaxToLb a s b | a -> s b where
+    computedMaxToLb :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNoResponse a s b | a -> s b where
+    computedNoResponse :: TF.Ref s a -> b
+
+class HasComputedOrder a s b | a -> s b where
+    computedOrder :: TF.Ref s a -> b
+
+class HasComputedPingProbe a s b | a -> s b where
+    computedPingProbe :: TF.Ref s a -> b
+
+class HasComputedPoolRecord a s b | a -> s b where
+    computedPoolRecord :: TF.Ref s a -> b
+
+class HasComputedRdata a s b | a -> s b where
+    computedRdata :: TF.Ref s a -> b
+
+class HasComputedRunProbes a s b | a -> s b where
+    computedRunProbes :: TF.Ref s a -> b
+
+class HasComputedThreshold a s b | a -> s b where
+    computedThreshold :: TF.Ref s a -> b
+
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedZone a s b | a -> s b where
+    computedZone :: TF.Ref s a -> b

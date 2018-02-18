@@ -46,23 +46,44 @@ module Terrafomo.Scaleway.Lens
     , HasVolume (..)
 
     -- ** Computed Attributes
+    , HasComputedAction (..)
     , HasComputedArchitecture (..)
     , HasComputedBootCmdArgs (..)
+    , HasComputedBootscript (..)
     , HasComputedCreationDate (..)
+    , HasComputedDescription (..)
+    , HasComputedDirection (..)
     , HasComputedDtb (..)
+    , HasComputedDynamicIpRequired (..)
+    , HasComputedEnableIpv6 (..)
     , HasComputedId (..)
+    , HasComputedImage (..)
     , HasComputedInitrd (..)
     , HasComputedIp (..)
+    , HasComputedIpRange (..)
     , HasComputedKernel (..)
+    , HasComputedName (..)
+    , HasComputedNameFilter (..)
     , HasComputedOrganization (..)
+    , HasComputedPort (..)
     , HasComputedPrivateIp (..)
+    , HasComputedProtocol (..)
     , HasComputedPublic (..)
     , HasComputedPublicIp (..)
+    , HasComputedPublicIpv6 (..)
+    , HasComputedSecurityGroup (..)
+    , HasComputedServer (..)
+    , HasComputedSizeInGb (..)
+    , HasComputedState (..)
+    , HasComputedStateDetail (..)
+    , HasComputedTags (..)
+    , HasComputedType' (..)
+    , HasComputedVolume (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -200,74 +221,101 @@ class HasVolume a b | a -> b where
 instance HasVolume a b => HasVolume (TF.Schema l p a) b where
     volume = TF.configuration . volume
 
-class HasComputedArchitecture a b | a -> b where
-    computedArchitecture
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedArchitecture =
-        to (\x -> TF.compute (TF.refKey x) "architecture")
+class HasComputedAction a s b | a -> s b where
+    computedAction :: TF.Ref s a -> b
 
-class HasComputedBootCmdArgs a b | a -> b where
-    computedBootCmdArgs
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedBootCmdArgs =
-        to (\x -> TF.compute (TF.refKey x) "boot_cmd_args")
+class HasComputedArchitecture a s b | a -> s b where
+    computedArchitecture :: TF.Ref s a -> b
 
-class HasComputedCreationDate a b | a -> b where
-    computedCreationDate
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreationDate =
-        to (\x -> TF.compute (TF.refKey x) "creation_date")
+class HasComputedBootCmdArgs a s b | a -> s b where
+    computedBootCmdArgs :: TF.Ref s a -> b
 
-class HasComputedDtb a b | a -> b where
-    computedDtb
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDtb =
-        to (\x -> TF.compute (TF.refKey x) "dtb")
+class HasComputedBootscript a s b | a -> s b where
+    computedBootscript :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedCreationDate a s b | a -> s b where
+    computedCreationDate :: TF.Ref s a -> b
 
-class HasComputedInitrd a b | a -> b where
-    computedInitrd
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedInitrd =
-        to (\x -> TF.compute (TF.refKey x) "initrd")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedIp a b | a -> b where
-    computedIp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIp =
-        to (\x -> TF.compute (TF.refKey x) "ip")
+class HasComputedDirection a s b | a -> s b where
+    computedDirection :: TF.Ref s a -> b
 
-class HasComputedKernel a b | a -> b where
-    computedKernel
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedKernel =
-        to (\x -> TF.compute (TF.refKey x) "kernel")
+class HasComputedDtb a s b | a -> s b where
+    computedDtb :: TF.Ref s a -> b
 
-class HasComputedOrganization a b | a -> b where
-    computedOrganization
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedOrganization =
-        to (\x -> TF.compute (TF.refKey x) "organization")
+class HasComputedDynamicIpRequired a s b | a -> s b where
+    computedDynamicIpRequired :: TF.Ref s a -> b
 
-class HasComputedPrivateIp a b | a -> b where
-    computedPrivateIp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPrivateIp =
-        to (\x -> TF.compute (TF.refKey x) "private_ip")
+class HasComputedEnableIpv6 a s b | a -> s b where
+    computedEnableIpv6 :: TF.Ref s a -> b
 
-class HasComputedPublic a b | a -> b where
-    computedPublic
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPublic =
-        to (\x -> TF.compute (TF.refKey x) "public")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
 
-class HasComputedPublicIp a b | a -> b where
-    computedPublicIp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPublicIp =
-        to (\x -> TF.compute (TF.refKey x) "public_ip")
+class HasComputedImage a s b | a -> s b where
+    computedImage :: TF.Ref s a -> b
+
+class HasComputedInitrd a s b | a -> s b where
+    computedInitrd :: TF.Ref s a -> b
+
+class HasComputedIp a s b | a -> s b where
+    computedIp :: TF.Ref s a -> b
+
+class HasComputedIpRange a s b | a -> s b where
+    computedIpRange :: TF.Ref s a -> b
+
+class HasComputedKernel a s b | a -> s b where
+    computedKernel :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNameFilter a s b | a -> s b where
+    computedNameFilter :: TF.Ref s a -> b
+
+class HasComputedOrganization a s b | a -> s b where
+    computedOrganization :: TF.Ref s a -> b
+
+class HasComputedPort a s b | a -> s b where
+    computedPort :: TF.Ref s a -> b
+
+class HasComputedPrivateIp a s b | a -> s b where
+    computedPrivateIp :: TF.Ref s a -> b
+
+class HasComputedProtocol a s b | a -> s b where
+    computedProtocol :: TF.Ref s a -> b
+
+class HasComputedPublic a s b | a -> s b where
+    computedPublic :: TF.Ref s a -> b
+
+class HasComputedPublicIp a s b | a -> s b where
+    computedPublicIp :: TF.Ref s a -> b
+
+class HasComputedPublicIpv6 a s b | a -> s b where
+    computedPublicIpv6 :: TF.Ref s a -> b
+
+class HasComputedSecurityGroup a s b | a -> s b where
+    computedSecurityGroup :: TF.Ref s a -> b
+
+class HasComputedServer a s b | a -> s b where
+    computedServer :: TF.Ref s a -> b
+
+class HasComputedSizeInGb a s b | a -> s b where
+    computedSizeInGb :: TF.Ref s a -> b
+
+class HasComputedState a s b | a -> s b where
+    computedState :: TF.Ref s a -> b
+
+class HasComputedStateDetail a s b | a -> s b where
+    computedStateDetail :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedVolume a s b | a -> s b where
+    computedVolume :: TF.Ref s a -> b

@@ -31,11 +31,16 @@ module Terrafomo.Dyn.Lens
     -- ** Computed Attributes
     , HasComputedFqdn (..)
     , HasComputedId (..)
+    , HasComputedName (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedValue (..)
+    , HasComputedZone (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -71,14 +76,23 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedFqdn a b | a -> b where
-    computedFqdn
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFqdn =
-        to (\x -> TF.compute (TF.refKey x) "fqdn")
+class HasComputedFqdn a s b | a -> s b where
+    computedFqdn :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedValue a s b | a -> s b where
+    computedValue :: TF.Ref s a -> b
+
+class HasComputedZone a s b | a -> s b where
+    computedZone :: TF.Ref s a -> b

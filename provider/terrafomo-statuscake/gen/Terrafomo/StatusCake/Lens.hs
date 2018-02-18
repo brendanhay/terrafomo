@@ -34,12 +34,22 @@ module Terrafomo.StatusCake.Lens
     , HasWebsiteUrl (..)
 
     -- ** Computed Attributes
+    , HasComputedCheckRate (..)
+    , HasComputedConfirmations (..)
+    , HasComputedContactId (..)
+    , HasComputedPaused (..)
+    , HasComputedPort (..)
     , HasComputedTestId (..)
+    , HasComputedTestType (..)
+    , HasComputedTimeout (..)
+    , HasComputedTriggerRate (..)
+    , HasComputedWebsiteName (..)
+    , HasComputedWebsiteUrl (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -105,8 +115,35 @@ class HasWebsiteUrl a b | a -> b where
 instance HasWebsiteUrl a b => HasWebsiteUrl (TF.Schema l p a) b where
     websiteUrl = TF.configuration . websiteUrl
 
-class HasComputedTestId a b | a -> b where
-    computedTestId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTestId =
-        to (\x -> TF.compute (TF.refKey x) "test_id")
+class HasComputedCheckRate a s b | a -> s b where
+    computedCheckRate :: TF.Ref s a -> b
+
+class HasComputedConfirmations a s b | a -> s b where
+    computedConfirmations :: TF.Ref s a -> b
+
+class HasComputedContactId a s b | a -> s b where
+    computedContactId :: TF.Ref s a -> b
+
+class HasComputedPaused a s b | a -> s b where
+    computedPaused :: TF.Ref s a -> b
+
+class HasComputedPort a s b | a -> s b where
+    computedPort :: TF.Ref s a -> b
+
+class HasComputedTestId a s b | a -> s b where
+    computedTestId :: TF.Ref s a -> b
+
+class HasComputedTestType a s b | a -> s b where
+    computedTestType :: TF.Ref s a -> b
+
+class HasComputedTimeout a s b | a -> s b where
+    computedTimeout :: TF.Ref s a -> b
+
+class HasComputedTriggerRate a s b | a -> s b where
+    computedTriggerRate :: TF.Ref s a -> b
+
+class HasComputedWebsiteName a s b | a -> s b where
+    computedWebsiteName :: TF.Ref s a -> b
+
+class HasComputedWebsiteUrl a s b | a -> s b where
+    computedWebsiteUrl :: TF.Ref s a -> b

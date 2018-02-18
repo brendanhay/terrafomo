@@ -46,8 +46,6 @@ runParser p file source =
 
 type Parser = P.Parsec Void [Node]
 
--- Megaparsec Orphan instances
-
 instance P.ShowToken Node where
     showTokens = ppShow
 
@@ -158,14 +156,12 @@ argItem rules = item >>> paragraph >>> argument
   where
     argument = do
         name <- code
-        let field = safeArgName name
         arg  <- fmap (required name) textual
         pure $!
             case Text.break (== '.') name of
-                (_, "") -> (,) field (arg { argName = pure name })
-                (x, _)  -> (,) x $
-                    arg { argName     = pure name
-                        , argHelp     = pure "(Optional) See datatype documentation."
+                (_, "") -> (,) (safeArgName name) arg
+                (x, _)  -> (,) (safeArgName x) $
+                    arg { argHelp     = pure "(Optional) See datatype documentation."
                         , argRequired = False
                         , argIgnored  = False
                         , argType     =
@@ -182,7 +178,7 @@ argItem rules = item >>> paragraph >>> argument
         | otherwise                         = mk h               True  False
       where
         mk h' require deprecate =
-            Arg { argName     = pure mempty
+            Arg { argName     = pure name
                 , argHelp     = pure h'
                 , argRequired = require
                 , argIgnored  = deprecate
@@ -197,7 +193,7 @@ attrItem rules = item >>> paragraph >>> attribute
         attr <- Attr (pure name)
             <$> fmap (pure . strip) textual
             <*> pure (pure $ matchTypeRule rules name)
-        pure (safeAttrName name, attr)
+        pure (safeArgName name, attr)
 
     strip x = fromMaybe x (Text.stripPrefix " - " x)
 

@@ -34,6 +34,11 @@ module Terrafomo.PowerDNS.Resource
     , P.HasZone (..)
 
     -- ** Computed Attributes
+    , P.HasComputedName (..)
+    , P.HasComputedRecords (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedZone (..)
 
     -- * Re-exported Types
     , module P
@@ -43,7 +48,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -58,6 +63,7 @@ import           Terrafomo.PowerDNS.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @powerdns_record@ PowerDNS resource.
@@ -111,6 +117,30 @@ instance P.HasZone (RecordResource s) (TF.Attr s Text) where
         lens (_zone :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
+instance P.HasComputedName (RecordResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRecords (RecordResource s) s (TF.Attr s Text) where
+    computedRecords =
+        (_records :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTtl (RecordResource s) s (TF.Attr s Text) where
+    computedTtl =
+        (_ttl :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (RecordResource s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedZone (RecordResource s) s (TF.Attr s Text) where
+    computedZone =
+        (_zone :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
 
 recordResource :: TF.Schema TF.Resource P.PowerDNS (RecordResource s)
 recordResource =

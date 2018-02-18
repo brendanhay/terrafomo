@@ -74,7 +74,16 @@ module Terrafomo.Kubernetes.Resource
     , P.HasWaitUntilBound (..)
 
     -- ** Computed Attributes
+    , P.HasComputedData' (..)
     , P.HasComputedDefaultSecretName (..)
+    , P.HasComputedImagePullSecret (..)
+    , P.HasComputedMetadata (..)
+    , P.HasComputedParameters (..)
+    , P.HasComputedSecret (..)
+    , P.HasComputedSpec (..)
+    , P.HasComputedStorageProvisioner (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedWaitUntilBound (..)
 
     -- * Re-exported Types
     , module P
@@ -84,7 +93,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -99,6 +108,7 @@ import           Terrafomo.Kubernetes.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @kubernetes_config_map@ Kubernetes resource.
@@ -131,6 +141,15 @@ instance P.HasMetadata (ConfigMapResource s) (TF.Attr s Text) where
         lens (_metadata :: ConfigMapResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ConfigMapResource s)
 
+instance P.HasComputedData' (ConfigMapResource s) s (TF.Attr s Text) where
+    computedData' =
+        (_data' :: ConfigMapResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMetadata (ConfigMapResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: ConfigMapResource s -> TF.Attr s Text)
+            . TF.refValue
 
 configMapResource :: TF.Schema TF.Resource P.Kubernetes (ConfigMapResource s)
 configMapResource =
@@ -169,6 +188,15 @@ instance P.HasSpec (HorizontalPodAutoscalerResource s) (TF.Attr s Text) where
         lens (_spec :: HorizontalPodAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: HorizontalPodAutoscalerResource s)
 
+instance P.HasComputedMetadata (HorizontalPodAutoscalerResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: HorizontalPodAutoscalerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpec (HorizontalPodAutoscalerResource s) s (TF.Attr s Text) where
+    computedSpec =
+        (_spec :: HorizontalPodAutoscalerResource s -> TF.Attr s Text)
+            . TF.refValue
 
 horizontalPodAutoscalerResource :: TF.Schema TF.Resource P.Kubernetes (HorizontalPodAutoscalerResource s)
 horizontalPodAutoscalerResource =
@@ -208,6 +236,15 @@ instance P.HasSpec (LimitRangeResource s) (TF.Attr s Text) where
         lens (_spec :: LimitRangeResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: LimitRangeResource s)
 
+instance P.HasComputedMetadata (LimitRangeResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: LimitRangeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpec (LimitRangeResource s) s (TF.Attr s Text) where
+    computedSpec =
+        (_spec :: LimitRangeResource s -> TF.Attr s Text)
+            . TF.refValue
 
 limitRangeResource :: TF.Schema TF.Resource P.Kubernetes (LimitRangeResource s)
 limitRangeResource =
@@ -238,6 +275,10 @@ instance P.HasMetadata (NamespaceResource s) (TF.Attr s Text) where
         lens (_metadata :: NamespaceResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: NamespaceResource s)
 
+instance P.HasComputedMetadata (NamespaceResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: NamespaceResource s -> TF.Attr s Text)
+            . TF.refValue
 
 namespaceResource :: TF.Schema TF.Resource P.Kubernetes (NamespaceResource s)
 namespaceResource =
@@ -282,6 +323,20 @@ instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) (TF.Attr s Text) 
         lens (_wait_until_bound :: PersistentVolumeClaimResource s -> TF.Attr s Text)
              (\s a -> s { _wait_until_bound = a } :: PersistentVolumeClaimResource s)
 
+instance P.HasComputedMetadata (PersistentVolumeClaimResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: PersistentVolumeClaimResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpec (PersistentVolumeClaimResource s) s (TF.Attr s Text) where
+    computedSpec =
+        (_spec :: PersistentVolumeClaimResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedWaitUntilBound (PersistentVolumeClaimResource s) s (TF.Attr s Text) where
+    computedWaitUntilBound =
+        (_wait_until_bound :: PersistentVolumeClaimResource s -> TF.Attr s Text)
+            . TF.refValue
 
 persistentVolumeClaimResource :: TF.Schema TF.Resource P.Kubernetes (PersistentVolumeClaimResource s)
 persistentVolumeClaimResource =
@@ -323,6 +378,15 @@ instance P.HasSpec (PersistentVolumeResource s) (TF.Attr s Text) where
         lens (_spec :: PersistentVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: PersistentVolumeResource s)
 
+instance P.HasComputedMetadata (PersistentVolumeResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: PersistentVolumeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpec (PersistentVolumeResource s) s (TF.Attr s Text) where
+    computedSpec =
+        (_spec :: PersistentVolumeResource s -> TF.Attr s Text)
+            . TF.refValue
 
 persistentVolumeResource :: TF.Schema TF.Resource P.Kubernetes (PersistentVolumeResource s)
 persistentVolumeResource =
@@ -362,6 +426,15 @@ instance P.HasSpec (PodResource s) (TF.Attr s Text) where
         lens (_spec :: PodResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: PodResource s)
 
+instance P.HasComputedMetadata (PodResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: PodResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpec (PodResource s) s (TF.Attr s Text) where
+    computedSpec =
+        (_spec :: PodResource s -> TF.Attr s Text)
+            . TF.refValue
 
 podResource :: TF.Schema TF.Resource P.Kubernetes (PodResource s)
 podResource =
@@ -402,6 +475,15 @@ instance P.HasSpec (ReplicationControllerResource s) (TF.Attr s Text) where
         lens (_spec :: ReplicationControllerResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: ReplicationControllerResource s)
 
+instance P.HasComputedMetadata (ReplicationControllerResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: ReplicationControllerResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpec (ReplicationControllerResource s) s (TF.Attr s Text) where
+    computedSpec =
+        (_spec :: ReplicationControllerResource s -> TF.Attr s Text)
+            . TF.refValue
 
 replicationControllerResource :: TF.Schema TF.Resource P.Kubernetes (ReplicationControllerResource s)
 replicationControllerResource =
@@ -441,6 +523,15 @@ instance P.HasSpec (ResourceQuotaResource s) (TF.Attr s Text) where
         lens (_spec :: ResourceQuotaResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: ResourceQuotaResource s)
 
+instance P.HasComputedMetadata (ResourceQuotaResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: ResourceQuotaResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpec (ResourceQuotaResource s) s (TF.Attr s Text) where
+    computedSpec =
+        (_spec :: ResourceQuotaResource s -> TF.Attr s Text)
+            . TF.refValue
 
 resourceQuotaResource :: TF.Schema TF.Resource P.Kubernetes (ResourceQuotaResource s)
 resourceQuotaResource =
@@ -494,6 +585,20 @@ instance P.HasType' (SecretResource s) (TF.Attr s Text) where
         lens (_type' :: SecretResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: SecretResource s)
 
+instance P.HasComputedData' (SecretResource s) s (TF.Attr s Text) where
+    computedData' =
+        (_data' :: SecretResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMetadata (SecretResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: SecretResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (SecretResource s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: SecretResource s -> TF.Attr s Text)
+            . TF.refValue
 
 secretResource :: TF.Schema TF.Resource P.Kubernetes (SecretResource s)
 secretResource =
@@ -540,7 +645,23 @@ instance P.HasSecret (ServiceAccountResource s) (TF.Attr s Text) where
         lens (_secret :: ServiceAccountResource s -> TF.Attr s Text)
              (\s a -> s { _secret = a } :: ServiceAccountResource s)
 
-instance P.HasComputedDefaultSecretName (ServiceAccountResource s) (Text)
+instance P.HasComputedDefaultSecretName (ServiceAccountResource s) s (TF.Attr s Text) where
+    computedDefaultSecretName x = TF.compute (TF.refKey x) "default_secret_name"
+
+instance P.HasComputedImagePullSecret (ServiceAccountResource s) s (TF.Attr s Text) where
+    computedImagePullSecret =
+        (_image_pull_secret :: ServiceAccountResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMetadata (ServiceAccountResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: ServiceAccountResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSecret (ServiceAccountResource s) s (TF.Attr s Text) where
+    computedSecret =
+        (_secret :: ServiceAccountResource s -> TF.Attr s Text)
+            . TF.refValue
 
 serviceAccountResource :: TF.Schema TF.Resource P.Kubernetes (ServiceAccountResource s)
 serviceAccountResource =
@@ -579,6 +700,15 @@ instance P.HasSpec (ServiceResource s) (TF.Attr s Text) where
         lens (_spec :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: ServiceResource s)
 
+instance P.HasComputedMetadata (ServiceResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: ServiceResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpec (ServiceResource s) s (TF.Attr s Text) where
+    computedSpec =
+        (_spec :: ServiceResource s -> TF.Attr s Text)
+            . TF.refValue
 
 serviceResource :: TF.Schema TF.Resource P.Kubernetes (ServiceResource s)
 serviceResource =
@@ -626,6 +756,20 @@ instance P.HasStorageProvisioner (StorageClassResource s) (TF.Attr s Text) where
         lens (_storage_provisioner :: StorageClassResource s -> TF.Attr s Text)
              (\s a -> s { _storage_provisioner = a } :: StorageClassResource s)
 
+instance P.HasComputedMetadata (StorageClassResource s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: StorageClassResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedParameters (StorageClassResource s) s (TF.Attr s Text) where
+    computedParameters =
+        (_parameters :: StorageClassResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedStorageProvisioner (StorageClassResource s) s (TF.Attr s Text) where
+    computedStorageProvisioner =
+        (_storage_provisioner :: StorageClassResource s -> TF.Attr s Text)
+            . TF.refValue
 
 storageClassResource :: TF.Schema TF.Resource P.Kubernetes (StorageClassResource s)
 storageClassResource =

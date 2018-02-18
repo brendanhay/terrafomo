@@ -61,11 +61,48 @@ module Terrafomo.OneAndOne.Lens
     , HasVcores (..)
 
     -- ** Computed Attributes
+    , HasComputed*diskSize (..)
+    , HasComputed*isMain (..)
+    , HasComputedAgent (..)
+    , HasComputedCoresPerProcessor (..)
+    , HasComputedDatacenter (..)
+    , HasComputedDescription (..)
+    , HasComputedDownloadPath (..)
+    , HasComputedEmail (..)
+    , HasComputedFileName (..)
+    , HasComputedFirewallPolicyId (..)
+    , HasComputedFixedInstanceSize (..)
+    , HasComputedHdds (..)
+    , HasComputedHealthCheckInterval (..)
+    , HasComputedHealthCheckPath (..)
+    , HasComputedHealthCheckPathParser (..)
+    , HasComputedHealthCheckTest (..)
+    , HasComputedImage (..)
+    , HasComputedIp (..)
+    , HasComputedIpAddress (..)
+    , HasComputedIpType (..)
+    , HasComputedLoadbalancerId (..)
+    , HasComputedMethod (..)
+    , HasComputedMonitoringPolicyId (..)
+    , HasComputedName (..)
+    , HasComputedNetworkAddress (..)
+    , HasComputedPassword (..)
+    , HasComputedPersistence (..)
+    , HasComputedPersistenceTime (..)
+    , HasComputedRam (..)
+    , HasComputedReverseDns (..)
+    , HasComputedServerIds (..)
+    , HasComputedSize (..)
+    , HasComputedSshKeyPath (..)
+    , HasComputedSshKeyPublic (..)
+    , HasComputedStorageServers (..)
+    , HasComputedSubnetMask (..)
+    , HasComputedVcores (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -292,3 +329,114 @@ class HasVcores a b | a -> b where
 
 instance HasVcores a b => HasVcores (TF.Schema l p a) b where
     vcores = TF.configuration . vcores
+
+class HasComputed*diskSize a s b | a -> s b where
+    computed*diskSize :: TF.Ref s a -> b
+
+class HasComputed*isMain a s b | a -> s b where
+    computed*isMain :: TF.Ref s a -> b
+
+class HasComputedAgent a s b | a -> s b where
+    computedAgent :: TF.Ref s a -> b
+
+class HasComputedCoresPerProcessor a s b | a -> s b where
+    computedCoresPerProcessor :: TF.Ref s a -> b
+
+class HasComputedDatacenter a s b | a -> s b where
+    computedDatacenter :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedDownloadPath a s b | a -> s b where
+    computedDownloadPath :: TF.Ref s a -> b
+
+class HasComputedEmail a s b | a -> s b where
+    computedEmail :: TF.Ref s a -> b
+
+class HasComputedFileName a s b | a -> s b where
+    computedFileName :: TF.Ref s a -> b
+
+class HasComputedFirewallPolicyId a s b | a -> s b where
+    computedFirewallPolicyId :: TF.Ref s a -> b
+
+class HasComputedFixedInstanceSize a s b | a -> s b where
+    computedFixedInstanceSize :: TF.Ref s a -> b
+
+class HasComputedHdds a s b | a -> s b where
+    computedHdds :: TF.Ref s a -> b
+
+class HasComputedHealthCheckInterval a s b | a -> s b where
+    computedHealthCheckInterval :: TF.Ref s a -> b
+
+class HasComputedHealthCheckPath a s b | a -> s b where
+    computedHealthCheckPath :: TF.Ref s a -> b
+
+class HasComputedHealthCheckPathParser a s b | a -> s b where
+    computedHealthCheckPathParser :: TF.Ref s a -> b
+
+class HasComputedHealthCheckTest a s b | a -> s b where
+    computedHealthCheckTest :: TF.Ref s a -> b
+
+class HasComputedImage a s b | a -> s b where
+    computedImage :: TF.Ref s a -> b
+
+class HasComputedIp a s b | a -> s b where
+    computedIp :: TF.Ref s a -> b
+
+class HasComputedIpAddress a s b | a -> s b where
+    computedIpAddress :: TF.Ref s a -> b
+
+class HasComputedIpType a s b | a -> s b where
+    computedIpType :: TF.Ref s a -> b
+
+class HasComputedLoadbalancerId a s b | a -> s b where
+    computedLoadbalancerId :: TF.Ref s a -> b
+
+class HasComputedMethod a s b | a -> s b where
+    computedMethod :: TF.Ref s a -> b
+
+class HasComputedMonitoringPolicyId a s b | a -> s b where
+    computedMonitoringPolicyId :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNetworkAddress a s b | a -> s b where
+    computedNetworkAddress :: TF.Ref s a -> b
+
+class HasComputedPassword a s b | a -> s b where
+    computedPassword :: TF.Ref s a -> b
+
+class HasComputedPersistence a s b | a -> s b where
+    computedPersistence :: TF.Ref s a -> b
+
+class HasComputedPersistenceTime a s b | a -> s b where
+    computedPersistenceTime :: TF.Ref s a -> b
+
+class HasComputedRam a s b | a -> s b where
+    computedRam :: TF.Ref s a -> b
+
+class HasComputedReverseDns a s b | a -> s b where
+    computedReverseDns :: TF.Ref s a -> b
+
+class HasComputedServerIds a s b | a -> s b where
+    computedServerIds :: TF.Ref s a -> b
+
+class HasComputedSize a s b | a -> s b where
+    computedSize :: TF.Ref s a -> b
+
+class HasComputedSshKeyPath a s b | a -> s b where
+    computedSshKeyPath :: TF.Ref s a -> b
+
+class HasComputedSshKeyPublic a s b | a -> s b where
+    computedSshKeyPublic :: TF.Ref s a -> b
+
+class HasComputedStorageServers a s b | a -> s b where
+    computedStorageServers :: TF.Ref s a -> b
+
+class HasComputedSubnetMask a s b | a -> s b where
+    computedSubnetMask :: TF.Ref s a -> b
+
+class HasComputedVcores a s b | a -> s b where
+    computedVcores :: TF.Ref s a -> b

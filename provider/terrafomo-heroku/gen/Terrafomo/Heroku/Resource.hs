@@ -76,11 +76,17 @@ module Terrafomo.Heroku.Resource
     , P.HasUrl (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAcm (..)
+    , P.HasComputedAddonId (..)
     , P.HasComputedAllConfigVars (..)
     , P.HasComputedApp (..)
     , P.HasComputedAppId (..)
+    , P.HasComputedBuildpacks (..)
+    , P.HasComputedCertificateChain (..)
     , P.HasComputedCname (..)
+    , P.HasComputedConfig (..)
     , P.HasComputedConfigVars (..)
+    , P.HasComputedEnabled (..)
     , P.HasComputedGitUrl (..)
     , P.HasComputedHerokuHostname (..)
     , P.HasComputedHostname (..)
@@ -89,12 +95,14 @@ module Terrafomo.Heroku.Resource
     , P.HasComputedOrganization (..)
     , P.HasComputedPipeline (..)
     , P.HasComputedPlan (..)
+    , P.HasComputedPrivateKey (..)
     , P.HasComputedProviderId (..)
     , P.HasComputedRegion (..)
     , P.HasComputedSpace (..)
     , P.HasComputedStack (..)
     , P.HasComputedStage (..)
     , P.HasComputedToken (..)
+    , P.HasComputedUrl (..)
     , P.HasComputedWebUrl (..)
 
     -- * Re-exported Types
@@ -105,7 +113,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -120,6 +128,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @heroku_addon_attachment@ Heroku resource.
@@ -157,7 +166,23 @@ instance P.HasName (AddonAttachmentResource s) (TF.Attr s Text) where
         lens (_name :: AddonAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AddonAttachmentResource s)
 
-instance P.HasComputedId (AddonAttachmentResource s) (Text)
+instance P.HasComputedAddonId (AddonAttachmentResource s) s (TF.Attr s Text) where
+    computedAddonId =
+        (_addon_id :: AddonAttachmentResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedAppId (AddonAttachmentResource s) s (TF.Attr s Text) where
+    computedAppId =
+        (_app_id :: AddonAttachmentResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (AddonAttachmentResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (AddonAttachmentResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: AddonAttachmentResource s -> TF.Attr s Text)
+            . TF.refValue
 
 addonAttachmentResource :: TF.Schema TF.Resource P.Heroku (AddonAttachmentResource s)
 addonAttachmentResource =
@@ -204,11 +229,30 @@ instance P.HasPlan (AddonResource s) (TF.Attr s Text) where
         lens (_plan :: AddonResource s -> TF.Attr s Text)
              (\s a -> s { _plan = a } :: AddonResource s)
 
-instance P.HasComputedConfigVars (AddonResource s) (Text)
-instance P.HasComputedId (AddonResource s) (Text)
-instance P.HasComputedName (AddonResource s) (Text)
-instance P.HasComputedPlan (AddonResource s) (Text)
-instance P.HasComputedProviderId (AddonResource s) (Text)
+instance P.HasComputedApp (AddonResource s) s (TF.Attr s Text) where
+    computedApp =
+        (_app :: AddonResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedConfig (AddonResource s) s (TF.Attr s Text) where
+    computedConfig =
+        (_config :: AddonResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedConfigVars (AddonResource s) s (TF.Attr s Text) where
+    computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
+
+instance P.HasComputedId (AddonResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (AddonResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPlan (AddonResource s) s (TF.Attr s Text) where
+    computedPlan x = TF.compute (TF.refKey x) "plan"
+
+instance P.HasComputedProviderId (AddonResource s) s (TF.Attr s Text) where
+    computedProviderId x = TF.compute (TF.refKey x) "provider_id"
 
 addonResource :: TF.Schema TF.Resource P.Heroku (AddonResource s)
 addonResource =
@@ -255,6 +299,20 @@ instance P.HasName (AppFeatureResource s) (TF.Attr s Text) where
         lens (_name :: AppFeatureResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AppFeatureResource s)
 
+instance P.HasComputedApp (AppFeatureResource s) s (TF.Attr s Text) where
+    computedApp =
+        (_app :: AppFeatureResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEnabled (AppFeatureResource s) s (TF.Attr s Text) where
+    computedEnabled =
+        (_enabled :: AppFeatureResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (AppFeatureResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: AppFeatureResource s -> TF.Attr s Text)
+            . TF.refValue
 
 appFeatureResource :: TF.Schema TF.Resource P.Heroku (AppFeatureResource s)
 appFeatureResource =
@@ -341,15 +399,52 @@ instance P.HasStack (AppResource s) (TF.Attr s Text) where
         lens (_stack :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _stack = a } :: AppResource s)
 
-instance P.HasComputedAllConfigVars (AppResource s) (Text)
-instance P.HasComputedGitUrl (AppResource s) (Text)
-instance P.HasComputedHerokuHostname (AppResource s) (Text)
-instance P.HasComputedId (AppResource s) (Text)
-instance P.HasComputedName (AppResource s) (Text)
-instance P.HasComputedRegion (AppResource s) (Text)
-instance P.HasComputedSpace (AppResource s) (Text)
-instance P.HasComputedStack (AppResource s) (Text)
-instance P.HasComputedWebUrl (AppResource s) (Text)
+instance P.HasComputedAcm (AppResource s) s (TF.Attr s Text) where
+    computedAcm =
+        (_acm :: AppResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedAllConfigVars (AppResource s) s (TF.Attr s Text) where
+    computedAllConfigVars x = TF.compute (TF.refKey x) "all_config_vars"
+
+instance P.HasComputedBuildpacks (AppResource s) s (TF.Attr s Text) where
+    computedBuildpacks =
+        (_buildpacks :: AppResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedConfigVars (AppResource s) s (TF.Attr s Text) where
+    computedConfigVars =
+        (_config_vars :: AppResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGitUrl (AppResource s) s (TF.Attr s Text) where
+    computedGitUrl x = TF.compute (TF.refKey x) "git_url"
+
+instance P.HasComputedHerokuHostname (AppResource s) s (TF.Attr s Text) where
+    computedHerokuHostname x = TF.compute (TF.refKey x) "heroku_hostname"
+
+instance P.HasComputedId (AppResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (AppResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedOrganization (AppResource s) s (TF.Attr s Text) where
+    computedOrganization =
+        (_organization :: AppResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (AppResource s) s (TF.Attr s Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance P.HasComputedSpace (AppResource s) s (TF.Attr s Text) where
+    computedSpace x = TF.compute (TF.refKey x) "space"
+
+instance P.HasComputedStack (AppResource s) s (TF.Attr s Text) where
+    computedStack x = TF.compute (TF.refKey x) "stack"
+
+instance P.HasComputedWebUrl (AppResource s) s (TF.Attr s Text) where
+    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
 
 appResource :: TF.Schema TF.Resource P.Heroku (AppResource s)
 appResource =
@@ -401,9 +496,29 @@ instance P.HasPrivateKey (CertResource s) (TF.Attr s Text) where
         lens (_private_key :: CertResource s -> TF.Attr s Text)
              (\s a -> s { _private_key = a } :: CertResource s)
 
-instance P.HasComputedCname (CertResource s) (Text)
-instance P.HasComputedId (CertResource s) (Text)
-instance P.HasComputedName (CertResource s) (Text)
+instance P.HasComputedApp (CertResource s) s (TF.Attr s Text) where
+    computedApp =
+        (_app :: CertResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCertificateChain (CertResource s) s (TF.Attr s Text) where
+    computedCertificateChain =
+        (_certificate_chain :: CertResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCname (CertResource s) s (TF.Attr s Text) where
+    computedCname x = TF.compute (TF.refKey x) "cname"
+
+instance P.HasComputedId (CertResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (CertResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPrivateKey (CertResource s) s (TF.Attr s Text) where
+    computedPrivateKey =
+        (_private_key :: CertResource s -> TF.Attr s Text)
+            . TF.refValue
 
 certResource :: TF.Schema TF.Resource P.Heroku (CertResource s)
 certResource =
@@ -442,9 +557,19 @@ instance P.HasHostname (DomainResource s) (TF.Attr s Text) where
         lens (_hostname :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: DomainResource s)
 
-instance P.HasComputedCname (DomainResource s) (Text)
-instance P.HasComputedHostname (DomainResource s) (Text)
-instance P.HasComputedId (DomainResource s) (Text)
+instance P.HasComputedApp (DomainResource s) s (TF.Attr s Text) where
+    computedApp =
+        (_app :: DomainResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCname (DomainResource s) s (TF.Attr s Text) where
+    computedCname x = TF.compute (TF.refKey x) "cname"
+
+instance P.HasComputedHostname (DomainResource s) s (TF.Attr s Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
+
+instance P.HasComputedId (DomainResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 domainResource :: TF.Schema TF.Resource P.Heroku (DomainResource s)
 domainResource =
@@ -482,7 +607,18 @@ instance P.HasUrl (DrainResource s) (TF.Attr s Text) where
         lens (_url :: DrainResource s -> TF.Attr s Text)
              (\s a -> s { _url = a } :: DrainResource s)
 
-instance P.HasComputedToken (DrainResource s) (Text)
+instance P.HasComputedApp (DrainResource s) s (TF.Attr s Text) where
+    computedApp =
+        (_app :: DrainResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedToken (DrainResource s) s (TF.Attr s Text) where
+    computedToken x = TF.compute (TF.refKey x) "token"
+
+instance P.HasComputedUrl (DrainResource s) s (TF.Attr s Text) where
+    computedUrl =
+        (_url :: DrainResource s -> TF.Attr s Text)
+            . TF.refValue
 
 drainResource :: TF.Schema TF.Resource P.Heroku (DrainResource s)
 drainResource =
@@ -531,11 +667,20 @@ instance P.HasStage (PipelineCouplingResource s) (TF.Attr s Text) where
         lens (_stage :: PipelineCouplingResource s -> TF.Attr s Text)
              (\s a -> s { _stage = a } :: PipelineCouplingResource s)
 
-instance P.HasComputedApp (PipelineCouplingResource s) (Text)
-instance P.HasComputedAppId (PipelineCouplingResource s) (Text)
-instance P.HasComputedId (PipelineCouplingResource s) (Text)
-instance P.HasComputedPipeline (PipelineCouplingResource s) (Text)
-instance P.HasComputedStage (PipelineCouplingResource s) (Text)
+instance P.HasComputedApp (PipelineCouplingResource s) s (TF.Attr s Text) where
+    computedApp x = TF.compute (TF.refKey x) "app"
+
+instance P.HasComputedAppId (PipelineCouplingResource s) s (TF.Attr s Text) where
+    computedAppId x = TF.compute (TF.refKey x) "app_id"
+
+instance P.HasComputedId (PipelineCouplingResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedPipeline (PipelineCouplingResource s) s (TF.Attr s Text) where
+    computedPipeline x = TF.compute (TF.refKey x) "pipeline"
+
+instance P.HasComputedStage (PipelineCouplingResource s) s (TF.Attr s Text) where
+    computedStage x = TF.compute (TF.refKey x) "stage"
 
 pipelineCouplingResource :: TF.Schema TF.Resource P.Heroku (PipelineCouplingResource s)
 pipelineCouplingResource =
@@ -568,8 +713,11 @@ instance P.HasName (PipelineResource s) (TF.Attr s Text) where
         lens (_name :: PipelineResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PipelineResource s)
 
-instance P.HasComputedId (PipelineResource s) (Text)
-instance P.HasComputedName (PipelineResource s) (Text)
+instance P.HasComputedId (PipelineResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (PipelineResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 pipelineResource :: TF.Schema TF.Resource P.Heroku (PipelineResource s)
 pipelineResource =
@@ -614,10 +762,17 @@ instance P.HasRegion (SpaceResource s) (TF.Attr s Text) where
         lens (_region :: SpaceResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: SpaceResource s)
 
-instance P.HasComputedId (SpaceResource s) (Text)
-instance P.HasComputedName (SpaceResource s) (Text)
-instance P.HasComputedOrganization (SpaceResource s) (Text)
-instance P.HasComputedRegion (SpaceResource s) (Text)
+instance P.HasComputedId (SpaceResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (SpaceResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedOrganization (SpaceResource s) s (TF.Attr s Text) where
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
+
+instance P.HasComputedRegion (SpaceResource s) s (TF.Attr s Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 spaceResource :: TF.Schema TF.Resource P.Heroku (SpaceResource s)
 spaceResource =

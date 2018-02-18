@@ -39,7 +39,17 @@ module Terrafomo.StatusCake.Resource
     , P.HasWebsiteUrl (..)
 
     -- ** Computed Attributes
+    , P.HasComputedCheckRate (..)
+    , P.HasComputedConfirmations (..)
+    , P.HasComputedContactId (..)
+    , P.HasComputedPaused (..)
+    , P.HasComputedPort (..)
     , P.HasComputedTestId (..)
+    , P.HasComputedTestType (..)
+    , P.HasComputedTimeout (..)
+    , P.HasComputedTriggerRate (..)
+    , P.HasComputedWebsiteName (..)
+    , P.HasComputedWebsiteUrl (..)
 
     -- * Re-exported Types
     , module P
@@ -49,7 +59,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -64,6 +74,7 @@ import           Terrafomo.StatusCake.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @statuscake_test@ StatusCake resource.
@@ -157,7 +168,58 @@ instance P.HasWebsiteUrl (TestResource s) (TF.Attr s Text) where
         lens (_website_url :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _website_url = a } :: TestResource s)
 
-instance P.HasComputedTestId (TestResource s) (Text)
+instance P.HasComputedCheckRate (TestResource s) s (TF.Attr s Text) where
+    computedCheckRate =
+        (_check_rate :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedConfirmations (TestResource s) s (TF.Attr s Text) where
+    computedConfirmations =
+        (_confirmations :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedContactId (TestResource s) s (TF.Attr s Text) where
+    computedContactId =
+        (_contact_id :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPaused (TestResource s) s (TF.Attr s Text) where
+    computedPaused =
+        (_paused :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPort (TestResource s) s (TF.Attr s Text) where
+    computedPort =
+        (_port :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTestId (TestResource s) s (TF.Attr s Text) where
+    computedTestId x = TF.compute (TF.refKey x) "test_id"
+
+instance P.HasComputedTestType (TestResource s) s (TF.Attr s Text) where
+    computedTestType =
+        (_test_type :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTimeout (TestResource s) s (TF.Attr s Text) where
+    computedTimeout =
+        (_timeout :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTriggerRate (TestResource s) s (TF.Attr s Text) where
+    computedTriggerRate =
+        (_trigger_rate :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedWebsiteName (TestResource s) s (TF.Attr s Text) where
+    computedWebsiteName =
+        (_website_name :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedWebsiteUrl (TestResource s) s (TF.Attr s Text) where
+    computedWebsiteUrl =
+        (_website_url :: TestResource s -> TF.Attr s Text)
+            . TF.refValue
 
 testResource :: TF.Schema TF.Resource P.StatusCake (TestResource s)
 testResource =

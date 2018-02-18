@@ -51,16 +51,41 @@ module Terrafomo.Rundeck.Lens
     , HasSshKeyStoragePath (..)
 
     -- ** Computed Attributes
+    , HasComputedAllowConcurrentExecutions (..)
+    , HasComputedCommand (..)
+    , HasComputedCommandOrderingStrategy (..)
+    , HasComputedContinueOnError (..)
+    , HasComputedDefaultNodeExecutorPlugin (..)
+    , HasComputedDefaultNodeFileCopierPlugin (..)
+    , HasComputedDelete (..)
+    , HasComputedDescription (..)
+    , HasComputedExtraConfig (..)
+    , HasComputedGroupName (..)
     , HasComputedId (..)
     , HasComputedKeyMaterial (..)
+    , HasComputedLogLevel (..)
+    , HasComputedMaxThreadCount (..)
     , HasComputedName (..)
+    , HasComputedNodeFilterExcludePrecedence (..)
+    , HasComputedNodeFilterQuery (..)
+    , HasComputedOption (..)
+    , HasComputedPath (..)
+    , HasComputedPreserveOptionsOrder (..)
+    , HasComputedProjectName (..)
+    , HasComputedRankAttribute (..)
+    , HasComputedRankOrder (..)
+    , HasComputedResourceModelSource (..)
+    , HasComputedSchedule (..)
+    , HasComputedSshAuthenticationType (..)
+    , HasComputedSshKeyFilePath (..)
+    , HasComputedSshKeyStoragePath (..)
     , HasComputedUiUrl (..)
     , HasComputedUrl (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -228,32 +253,92 @@ class HasSshKeyStoragePath a b | a -> b where
 instance HasSshKeyStoragePath a b => HasSshKeyStoragePath (TF.Schema l p a) b where
     sshKeyStoragePath = TF.configuration . sshKeyStoragePath
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedAllowConcurrentExecutions a s b | a -> s b where
+    computedAllowConcurrentExecutions :: TF.Ref s a -> b
 
-class HasComputedKeyMaterial a b | a -> b where
-    computedKeyMaterial
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedKeyMaterial =
-        to (\x -> TF.compute (TF.refKey x) "key_material")
+class HasComputedCommand a s b | a -> s b where
+    computedCommand :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedCommandOrderingStrategy a s b | a -> s b where
+    computedCommandOrderingStrategy :: TF.Ref s a -> b
 
-class HasComputedUiUrl a b | a -> b where
-    computedUiUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUiUrl =
-        to (\x -> TF.compute (TF.refKey x) "ui_url")
+class HasComputedContinueOnError a s b | a -> s b where
+    computedContinueOnError :: TF.Ref s a -> b
 
-class HasComputedUrl a b | a -> b where
-    computedUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUrl =
-        to (\x -> TF.compute (TF.refKey x) "url")
+class HasComputedDefaultNodeExecutorPlugin a s b | a -> s b where
+    computedDefaultNodeExecutorPlugin :: TF.Ref s a -> b
+
+class HasComputedDefaultNodeFileCopierPlugin a s b | a -> s b where
+    computedDefaultNodeFileCopierPlugin :: TF.Ref s a -> b
+
+class HasComputedDelete a s b | a -> s b where
+    computedDelete :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedExtraConfig a s b | a -> s b where
+    computedExtraConfig :: TF.Ref s a -> b
+
+class HasComputedGroupName a s b | a -> s b where
+    computedGroupName :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedKeyMaterial a s b | a -> s b where
+    computedKeyMaterial :: TF.Ref s a -> b
+
+class HasComputedLogLevel a s b | a -> s b where
+    computedLogLevel :: TF.Ref s a -> b
+
+class HasComputedMaxThreadCount a s b | a -> s b where
+    computedMaxThreadCount :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNodeFilterExcludePrecedence a s b | a -> s b where
+    computedNodeFilterExcludePrecedence :: TF.Ref s a -> b
+
+class HasComputedNodeFilterQuery a s b | a -> s b where
+    computedNodeFilterQuery :: TF.Ref s a -> b
+
+class HasComputedOption a s b | a -> s b where
+    computedOption :: TF.Ref s a -> b
+
+class HasComputedPath a s b | a -> s b where
+    computedPath :: TF.Ref s a -> b
+
+class HasComputedPreserveOptionsOrder a s b | a -> s b where
+    computedPreserveOptionsOrder :: TF.Ref s a -> b
+
+class HasComputedProjectName a s b | a -> s b where
+    computedProjectName :: TF.Ref s a -> b
+
+class HasComputedRankAttribute a s b | a -> s b where
+    computedRankAttribute :: TF.Ref s a -> b
+
+class HasComputedRankOrder a s b | a -> s b where
+    computedRankOrder :: TF.Ref s a -> b
+
+class HasComputedResourceModelSource a s b | a -> s b where
+    computedResourceModelSource :: TF.Ref s a -> b
+
+class HasComputedSchedule a s b | a -> s b where
+    computedSchedule :: TF.Ref s a -> b
+
+class HasComputedSshAuthenticationType a s b | a -> s b where
+    computedSshAuthenticationType :: TF.Ref s a -> b
+
+class HasComputedSshKeyFilePath a s b | a -> s b where
+    computedSshKeyFilePath :: TF.Ref s a -> b
+
+class HasComputedSshKeyStoragePath a s b | a -> s b where
+    computedSshKeyStoragePath :: TF.Ref s a -> b
+
+class HasComputedUiUrl a s b | a -> s b where
+    computedUiUrl :: TF.Ref s a -> b
+
+class HasComputedUrl a s b | a -> s b where
+    computedUrl :: TF.Ref s a -> b

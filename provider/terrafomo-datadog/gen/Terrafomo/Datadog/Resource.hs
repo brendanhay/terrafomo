@@ -80,8 +80,46 @@ module Terrafomo.Datadog.Resource
     , P.HasUnit (..)
 
     -- ** Computed Attributes
+    , P.HasComputedActive (..)
+    , P.HasComputedDescription (..)
     , P.HasComputedDisabled (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEnd (..)
+    , P.HasComputedEscalationMessage (..)
+    , P.HasComputedEvaluationDelay (..)
+    , P.HasComputedGraph (..)
+    , P.HasComputedHandle (..)
     , P.HasComputedId (..)
+    , P.HasComputedIncludeTags (..)
+    , P.HasComputedIsAdmin (..)
+    , P.HasComputedLocked (..)
+    , P.HasComputedMessage (..)
+    , P.HasComputedMetric (..)
+    , P.HasComputedMonitorId (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNewHostDelay (..)
+    , P.HasComputedNoDataTimeframe (..)
+    , P.HasComputedNotifyAudit (..)
+    , P.HasComputedNotifyNoData (..)
+    , P.HasComputedPerUnit (..)
+    , P.HasComputedQuery (..)
+    , P.HasComputedReadOnly (..)
+    , P.HasComputedRecurrence (..)
+    , P.HasComputedRenotifyInterval (..)
+    , P.HasComputedRequireFullWindow (..)
+    , P.HasComputedRole (..)
+    , P.HasComputedScope (..)
+    , P.HasComputedShortName (..)
+    , P.HasComputedSilenced (..)
+    , P.HasComputedStart (..)
+    , P.HasComputedStatsdInterval (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedTemplateVariable (..)
+    , P.HasComputedThresholds (..)
+    , P.HasComputedTimeoutH (..)
+    , P.HasComputedTitle (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedUnit (..)
     , P.HasComputedVerified (..)
 
     -- * Re-exported Types
@@ -92,7 +130,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -107,6 +145,7 @@ import qualified Terrafomo.IP               as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @datadog_downtime@ Datadog resource.
@@ -185,7 +224,48 @@ instance P.HasStart (DowntimeResource s) (TF.Attr s Text) where
         lens (_start :: DowntimeResource s -> TF.Attr s Text)
              (\s a -> s { _start = a } :: DowntimeResource s)
 
-instance P.HasComputedId (DowntimeResource s) (Text)
+instance P.HasComputedActive (DowntimeResource s) s (TF.Attr s Text) where
+    computedActive =
+        (_active :: DowntimeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDisabled (DowntimeResource s) s (TF.Attr s Text) where
+    computedDisabled =
+        (_disabled :: DowntimeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEnd (DowntimeResource s) s (TF.Attr s Text) where
+    computedEnd =
+        (_end :: DowntimeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (DowntimeResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMessage (DowntimeResource s) s (TF.Attr s Text) where
+    computedMessage =
+        (_message :: DowntimeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMonitorId (DowntimeResource s) s (TF.Attr s Text) where
+    computedMonitorId =
+        (_monitor_id :: DowntimeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRecurrence (DowntimeResource s) s (TF.Attr s Text) where
+    computedRecurrence =
+        (_recurrence :: DowntimeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedScope (DowntimeResource s) s (TF.Attr s Text) where
+    computedScope =
+        (_scope :: DowntimeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedStart (DowntimeResource s) s (TF.Attr s Text) where
+    computedStart =
+        (_start :: DowntimeResource s -> TF.Attr s Text)
+            . TF.refValue
 
 downtimeResource :: TF.Schema TF.Resource P.Datadog (DowntimeResource s)
 downtimeResource =
@@ -261,6 +341,35 @@ instance P.HasUnit (MetricMetadataResource s) (TF.Attr s Text) where
         lens (_unit :: MetricMetadataResource s -> TF.Attr s Text)
              (\s a -> s { _unit = a } :: MetricMetadataResource s)
 
+instance P.HasComputedDescription (MetricMetadataResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: MetricMetadataResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMetric (MetricMetadataResource s) s (TF.Attr s Text) where
+    computedMetric =
+        (_metric :: MetricMetadataResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPerUnit (MetricMetadataResource s) s (TF.Attr s Text) where
+    computedPerUnit =
+        (_per_unit :: MetricMetadataResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedShortName (MetricMetadataResource s) s (TF.Attr s Text) where
+    computedShortName =
+        (_short_name :: MetricMetadataResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedStatsdInterval (MetricMetadataResource s) s (TF.Attr s Text) where
+    computedStatsdInterval =
+        (_statsd_interval :: MetricMetadataResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUnit (MetricMetadataResource s) s (TF.Attr s Text) where
+    computedUnit =
+        (_unit :: MetricMetadataResource s -> TF.Attr s Text)
+            . TF.refValue
 
 metricMetadataResource :: TF.Schema TF.Resource P.Datadog (MetricMetadataResource s)
 metricMetadataResource =
@@ -430,7 +539,98 @@ instance P.HasType' (MonitorResource s) (TF.Attr s Text) where
         lens (_type' :: MonitorResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: MonitorResource s)
 
-instance P.HasComputedId (MonitorResource s) (Text)
+instance P.HasComputedEscalationMessage (MonitorResource s) s (TF.Attr s Text) where
+    computedEscalationMessage =
+        (_escalation_message :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEvaluationDelay (MonitorResource s) s (TF.Attr s Text) where
+    computedEvaluationDelay =
+        (_evaluation_delay :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (MonitorResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedIncludeTags (MonitorResource s) s (TF.Attr s Text) where
+    computedIncludeTags =
+        (_include_tags :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLocked (MonitorResource s) s (TF.Attr s Text) where
+    computedLocked =
+        (_locked :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMessage (MonitorResource s) s (TF.Attr s Text) where
+    computedMessage =
+        (_message :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (MonitorResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNewHostDelay (MonitorResource s) s (TF.Attr s Text) where
+    computedNewHostDelay =
+        (_new_host_delay :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNoDataTimeframe (MonitorResource s) s (TF.Attr s Text) where
+    computedNoDataTimeframe =
+        (_no_data_timeframe :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotifyAudit (MonitorResource s) s (TF.Attr s Text) where
+    computedNotifyAudit =
+        (_notify_audit :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNotifyNoData (MonitorResource s) s (TF.Attr s Text) where
+    computedNotifyNoData =
+        (_notify_no_data :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedQuery (MonitorResource s) s (TF.Attr s Text) where
+    computedQuery =
+        (_query :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRenotifyInterval (MonitorResource s) s (TF.Attr s Text) where
+    computedRenotifyInterval =
+        (_renotify_interval :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRequireFullWindow (MonitorResource s) s (TF.Attr s Text) where
+    computedRequireFullWindow =
+        (_require_full_window :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSilenced (MonitorResource s) s (TF.Attr s Text) where
+    computedSilenced =
+        (_silenced :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTags (MonitorResource s) s (TF.Attr s Text) where
+    computedTags =
+        (_tags :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedThresholds (MonitorResource s) s (TF.Attr s Text) where
+    computedThresholds =
+        (_thresholds :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTimeoutH (MonitorResource s) s (TF.Attr s Text) where
+    computedTimeoutH =
+        (_timeout_h :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (MonitorResource s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: MonitorResource s -> TF.Attr s Text)
+            . TF.refValue
 
 monitorResource :: TF.Schema TF.Resource P.Datadog (MonitorResource s)
 monitorResource =
@@ -508,6 +708,30 @@ instance P.HasTitle (TimeboardResource s) (TF.Attr s Text) where
         lens (_title :: TimeboardResource s -> TF.Attr s Text)
              (\s a -> s { _title = a } :: TimeboardResource s)
 
+instance P.HasComputedDescription (TimeboardResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: TimeboardResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGraph (TimeboardResource s) s (TF.Attr s Text) where
+    computedGraph =
+        (_graph :: TimeboardResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedReadOnly (TimeboardResource s) s (TF.Attr s Text) where
+    computedReadOnly =
+        (_read_only :: TimeboardResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTemplateVariable (TimeboardResource s) s (TF.Attr s Text) where
+    computedTemplateVariable =
+        (_template_variable :: TimeboardResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTitle (TimeboardResource s) s (TF.Attr s Text) where
+    computedTitle =
+        (_title :: TimeboardResource s -> TF.Attr s Text)
+            . TF.refValue
 
 timeboardResource :: TF.Schema TF.Resource P.Datadog (TimeboardResource s)
 timeboardResource =
@@ -580,9 +804,39 @@ instance P.HasRole (UserResource s) (TF.Attr s Text) where
         lens (_role :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: UserResource s)
 
-instance P.HasComputedDisabled (UserResource s) (Text)
-instance P.HasComputedId (UserResource s) (Text)
-instance P.HasComputedVerified (UserResource s) (Text)
+instance P.HasComputedDisabled (UserResource s) s (TF.Attr s Text) where
+    computedDisabled x = TF.compute (TF.refKey x) "disabled"
+
+instance P.HasComputedEmail (UserResource s) s (TF.Attr s Text) where
+    computedEmail =
+        (_email :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHandle (UserResource s) s (TF.Attr s Text) where
+    computedHandle =
+        (_handle :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (UserResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedIsAdmin (UserResource s) s (TF.Attr s Text) where
+    computedIsAdmin =
+        (_is_admin :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (UserResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRole (UserResource s) s (TF.Attr s Text) where
+    computedRole =
+        (_role :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedVerified (UserResource s) s (TF.Attr s Text) where
+    computedVerified x = TF.compute (TF.refKey x) "verified"
 
 userResource :: TF.Schema TF.Resource P.Datadog (UserResource s)
 userResource =

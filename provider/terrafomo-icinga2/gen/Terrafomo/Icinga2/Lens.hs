@@ -33,11 +33,20 @@ module Terrafomo.Icinga2.Lens
     , HasVars (..)
 
     -- ** Computed Attributes
+    , HasComputedAddress (..)
+    , HasComputedArguments (..)
+    , HasComputedCheckCommand (..)
+    , HasComputedCommand (..)
+    , HasComputedDisplayName (..)
+    , HasComputedHostname (..)
+    , HasComputedName (..)
+    , HasComputedTemplates (..)
+    , HasComputedVars (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -96,3 +105,30 @@ class HasVars a b | a -> b where
 
 instance HasVars a b => HasVars (TF.Schema l p a) b where
     vars = TF.configuration . vars
+
+class HasComputedAddress a s b | a -> s b where
+    computedAddress :: TF.Ref s a -> b
+
+class HasComputedArguments a s b | a -> s b where
+    computedArguments :: TF.Ref s a -> b
+
+class HasComputedCheckCommand a s b | a -> s b where
+    computedCheckCommand :: TF.Ref s a -> b
+
+class HasComputedCommand a s b | a -> s b where
+    computedCommand :: TF.Ref s a -> b
+
+class HasComputedDisplayName a s b | a -> s b where
+    computedDisplayName :: TF.Ref s a -> b
+
+class HasComputedHostname a s b | a -> s b where
+    computedHostname :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedTemplates a s b | a -> s b where
+    computedTemplates :: TF.Ref s a -> b
+
+class HasComputedVars a s b | a -> s b where
+    computedVars :: TF.Ref s a -> b

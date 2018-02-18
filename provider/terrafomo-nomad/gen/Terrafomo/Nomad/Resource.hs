@@ -44,6 +44,15 @@ module Terrafomo.Nomad.Resource
     , P.HasType' (..)
 
     -- ** Computed Attributes
+    , P.HasComputedDeregisterOnDestroy (..)
+    , P.HasComputedDeregisterOnIdChange (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedGlobal (..)
+    , P.HasComputedJobspec (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPolicies (..)
+    , P.HasComputedRulesHcl (..)
+    , P.HasComputedType' (..)
 
     -- * Re-exported Types
     , module P
@@ -53,7 +62,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -68,6 +77,7 @@ import           Terrafomo.Nomad.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @nomad_acl_policy@ Nomad resource.
@@ -105,6 +115,20 @@ instance P.HasRulesHcl (AclPolicyResource s) (TF.Attr s Text) where
         lens (_rules_hcl :: AclPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
 
+instance P.HasComputedDescription (AclPolicyResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: AclPolicyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (AclPolicyResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: AclPolicyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRulesHcl (AclPolicyResource s) s (TF.Attr s Text) where
+    computedRulesHcl =
+        (_rules_hcl :: AclPolicyResource s -> TF.Attr s Text)
+            . TF.refValue
 
 aclPolicyResource :: TF.Schema TF.Resource P.Nomad (AclPolicyResource s)
 aclPolicyResource =
@@ -160,6 +184,25 @@ instance P.HasType' (AclTokenResource s) (TF.Attr s Text) where
         lens (_type' :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: AclTokenResource s)
 
+instance P.HasComputedGlobal (AclTokenResource s) s (TF.Attr s Text) where
+    computedGlobal =
+        (_global :: AclTokenResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (AclTokenResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: AclTokenResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPolicies (AclTokenResource s) s (TF.Attr s Text) where
+    computedPolicies =
+        (_policies :: AclTokenResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (AclTokenResource s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: AclTokenResource s -> TF.Attr s Text)
+            . TF.refValue
 
 aclTokenResource :: TF.Schema TF.Resource P.Nomad (AclTokenResource s)
 aclTokenResource =
@@ -212,6 +255,20 @@ instance P.HasJobspec (JobResource s) (TF.Attr s Text) where
         lens (_jobspec :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _jobspec = a } :: JobResource s)
 
+instance P.HasComputedDeregisterOnDestroy (JobResource s) s (TF.Attr s Text) where
+    computedDeregisterOnDestroy =
+        (_deregister_on_destroy :: JobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDeregisterOnIdChange (JobResource s) s (TF.Attr s Text) where
+    computedDeregisterOnIdChange =
+        (_deregister_on_id_change :: JobResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedJobspec (JobResource s) s (TF.Attr s Text) where
+    computedJobspec =
+        (_jobspec :: JobResource s -> TF.Attr s Text)
+            . TF.refValue
 
 jobResource :: TF.Schema TF.Resource P.Nomad (JobResource s)
 jobResource =

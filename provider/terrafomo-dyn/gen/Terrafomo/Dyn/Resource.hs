@@ -36,6 +36,11 @@ module Terrafomo.Dyn.Resource
     -- ** Computed Attributes
     , P.HasComputedFqdn (..)
     , P.HasComputedId (..)
+    , P.HasComputedName (..)
+    , P.HasComputedTtl (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedValue (..)
+    , P.HasComputedZone (..)
 
     -- * Re-exported Types
     , module P
@@ -45,7 +50,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -60,6 +65,7 @@ import qualified Terrafomo.IP           as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @dyn_record@ Dyn resource.
@@ -113,8 +119,36 @@ instance P.HasZone (RecordResource s) (TF.Attr s Text) where
         lens (_zone :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
-instance P.HasComputedFqdn (RecordResource s) (Text)
-instance P.HasComputedId (RecordResource s) (Text)
+instance P.HasComputedFqdn (RecordResource s) s (TF.Attr s Text) where
+    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+
+instance P.HasComputedId (RecordResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (RecordResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTtl (RecordResource s) s (TF.Attr s Text) where
+    computedTtl =
+        (_ttl :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (RecordResource s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedValue (RecordResource s) s (TF.Attr s Text) where
+    computedValue =
+        (_value :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedZone (RecordResource s) s (TF.Attr s Text) where
+    computedZone =
+        (_zone :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
 
 recordResource :: TF.Schema TF.Resource P.Dyn (RecordResource s)
 recordResource =

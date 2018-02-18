@@ -60,11 +60,47 @@ module Terrafomo.VCloudDirector.Lens
     , HasVappName (..)
 
     -- ** Computed Attributes
+    , HasComputedCatalogName (..)
+    , HasComputedCpus (..)
+    , HasComputedDefaultAction (..)
+    , HasComputedDescription (..)
+    , HasComputedDhcpPool (..)
+    , HasComputedDns1 (..)
+    , HasComputedDns2 (..)
+    , HasComputedDnsSuffix (..)
+    , HasComputedEdgeGateway (..)
+    , HasComputedEncryptionProtocol (..)
+    , HasComputedExternalIp (..)
+    , HasComputedGateway (..)
+    , HasComputedInitscript (..)
+    , HasComputedInternalIp (..)
+    , HasComputedIp (..)
+    , HasComputedLocalId (..)
+    , HasComputedLocalIpAddress (..)
+    , HasComputedLocalSubnets (..)
+    , HasComputedMemory (..)
+    , HasComputedMetadata (..)
+    , HasComputedMtu (..)
+    , HasComputedName (..)
+    , HasComputedNetmask (..)
+    , HasComputedNetworkName (..)
+    , HasComputedOvf (..)
+    , HasComputedPeerId (..)
+    , HasComputedPeerIpAddress (..)
+    , HasComputedPeerSubnets (..)
+    , HasComputedPort (..)
+    , HasComputedPowerOn (..)
+    , HasComputedRule (..)
+    , HasComputedShared (..)
+    , HasComputedSharedSecret (..)
+    , HasComputedStaticIpPool (..)
+    , HasComputedTemplateName (..)
+    , HasComputedVappName (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -285,3 +321,111 @@ class HasVappName a b | a -> b where
 
 instance HasVappName a b => HasVappName (TF.Schema l p a) b where
     vappName = TF.configuration . vappName
+
+class HasComputedCatalogName a s b | a -> s b where
+    computedCatalogName :: TF.Ref s a -> b
+
+class HasComputedCpus a s b | a -> s b where
+    computedCpus :: TF.Ref s a -> b
+
+class HasComputedDefaultAction a s b | a -> s b where
+    computedDefaultAction :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedDhcpPool a s b | a -> s b where
+    computedDhcpPool :: TF.Ref s a -> b
+
+class HasComputedDns1 a s b | a -> s b where
+    computedDns1 :: TF.Ref s a -> b
+
+class HasComputedDns2 a s b | a -> s b where
+    computedDns2 :: TF.Ref s a -> b
+
+class HasComputedDnsSuffix a s b | a -> s b where
+    computedDnsSuffix :: TF.Ref s a -> b
+
+class HasComputedEdgeGateway a s b | a -> s b where
+    computedEdgeGateway :: TF.Ref s a -> b
+
+class HasComputedEncryptionProtocol a s b | a -> s b where
+    computedEncryptionProtocol :: TF.Ref s a -> b
+
+class HasComputedExternalIp a s b | a -> s b where
+    computedExternalIp :: TF.Ref s a -> b
+
+class HasComputedGateway a s b | a -> s b where
+    computedGateway :: TF.Ref s a -> b
+
+class HasComputedInitscript a s b | a -> s b where
+    computedInitscript :: TF.Ref s a -> b
+
+class HasComputedInternalIp a s b | a -> s b where
+    computedInternalIp :: TF.Ref s a -> b
+
+class HasComputedIp a s b | a -> s b where
+    computedIp :: TF.Ref s a -> b
+
+class HasComputedLocalId a s b | a -> s b where
+    computedLocalId :: TF.Ref s a -> b
+
+class HasComputedLocalIpAddress a s b | a -> s b where
+    computedLocalIpAddress :: TF.Ref s a -> b
+
+class HasComputedLocalSubnets a s b | a -> s b where
+    computedLocalSubnets :: TF.Ref s a -> b
+
+class HasComputedMemory a s b | a -> s b where
+    computedMemory :: TF.Ref s a -> b
+
+class HasComputedMetadata a s b | a -> s b where
+    computedMetadata :: TF.Ref s a -> b
+
+class HasComputedMtu a s b | a -> s b where
+    computedMtu :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNetmask a s b | a -> s b where
+    computedNetmask :: TF.Ref s a -> b
+
+class HasComputedNetworkName a s b | a -> s b where
+    computedNetworkName :: TF.Ref s a -> b
+
+class HasComputedOvf a s b | a -> s b where
+    computedOvf :: TF.Ref s a -> b
+
+class HasComputedPeerId a s b | a -> s b where
+    computedPeerId :: TF.Ref s a -> b
+
+class HasComputedPeerIpAddress a s b | a -> s b where
+    computedPeerIpAddress :: TF.Ref s a -> b
+
+class HasComputedPeerSubnets a s b | a -> s b where
+    computedPeerSubnets :: TF.Ref s a -> b
+
+class HasComputedPort a s b | a -> s b where
+    computedPort :: TF.Ref s a -> b
+
+class HasComputedPowerOn a s b | a -> s b where
+    computedPowerOn :: TF.Ref s a -> b
+
+class HasComputedRule a s b | a -> s b where
+    computedRule :: TF.Ref s a -> b
+
+class HasComputedShared a s b | a -> s b where
+    computedShared :: TF.Ref s a -> b
+
+class HasComputedSharedSecret a s b | a -> s b where
+    computedSharedSecret :: TF.Ref s a -> b
+
+class HasComputedStaticIpPool a s b | a -> s b where
+    computedStaticIpPool :: TF.Ref s a -> b
+
+class HasComputedTemplateName a s b | a -> s b where
+    computedTemplateName :: TF.Ref s a -> b
+
+class HasComputedVappName a s b | a -> s b where
+    computedVappName :: TF.Ref s a -> b

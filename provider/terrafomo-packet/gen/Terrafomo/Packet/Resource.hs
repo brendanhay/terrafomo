@@ -72,6 +72,7 @@ module Terrafomo.Packet.Resource
     , P.HasComputedAccessPublicIpv4 (..)
     , P.HasComputedAccessPublicIpv6 (..)
     , P.HasComputedAddressFamily (..)
+    , P.HasComputedAlwaysPxe (..)
     , P.HasComputedAttachments (..)
     , P.HasComputedBillingCycle (..)
     , P.HasComputedCidr (..)
@@ -85,6 +86,7 @@ module Terrafomo.Packet.Resource
     , P.HasComputedHardwareReservationId (..)
     , P.HasComputedHostname (..)
     , P.HasComputedId (..)
+    , P.HasComputedIpxeScriptUrl (..)
     , P.HasComputedLocked (..)
     , P.HasComputedName (..)
     , P.HasComputedNetmask (..)
@@ -93,13 +95,18 @@ module Terrafomo.Packet.Resource
     , P.HasComputedPlan (..)
     , P.HasComputedProjectId (..)
     , P.HasComputedPublic (..)
+    , P.HasComputedPublicIpv4SubnetSize (..)
     , P.HasComputedPublicKey (..)
     , P.HasComputedQuantity (..)
     , P.HasComputedRootPassword (..)
     , P.HasComputedSize (..)
+    , P.HasComputedSnapshotPolicies (..)
     , P.HasComputedState (..)
+    , P.HasComputedStorage (..)
     , P.HasComputedTags (..)
     , P.HasComputedUpdated (..)
+    , P.HasComputedUserData (..)
+    , P.HasComputedVolumeId (..)
 
     -- * Re-exported Types
     , module P
@@ -109,7 +116,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -124,6 +131,7 @@ import           Terrafomo.Packet.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @packet_device@ Packet resource.
@@ -236,24 +244,84 @@ instance P.HasUserData (DeviceResource s) (TF.Attr s Text) where
         lens (_user_data :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _user_data = a } :: DeviceResource s)
 
-instance P.HasComputedAccessPrivateIpv4 (DeviceResource s) (Text)
-instance P.HasComputedAccessPublicIpv4 (DeviceResource s) (Text)
-instance P.HasComputedAccessPublicIpv6 (DeviceResource s) (Text)
-instance P.HasComputedBillingCycle (DeviceResource s) (Text)
-instance P.HasComputedCreated (DeviceResource s) (Text)
-instance P.HasComputedFacility (DeviceResource s) (Text)
-instance P.HasComputedHardwareReservationId (DeviceResource s) (Text)
-instance P.HasComputedHostname (DeviceResource s) (Text)
-instance P.HasComputedId (DeviceResource s) (Text)
-instance P.HasComputedLocked (DeviceResource s) (Text)
-instance P.HasComputedNetwork (DeviceResource s) (Text)
-instance P.HasComputedOperatingSystem (DeviceResource s) (Text)
-instance P.HasComputedPlan (DeviceResource s) (Text)
-instance P.HasComputedProjectId (DeviceResource s) (Text)
-instance P.HasComputedRootPassword (DeviceResource s) (Text)
-instance P.HasComputedState (DeviceResource s) (Text)
-instance P.HasComputedTags (DeviceResource s) (Text)
-instance P.HasComputedUpdated (DeviceResource s) (Text)
+instance P.HasComputedAccessPrivateIpv4 (DeviceResource s) s (TF.Attr s Text) where
+    computedAccessPrivateIpv4 x = TF.compute (TF.refKey x) "access_private_ipv4"
+
+instance P.HasComputedAccessPublicIpv4 (DeviceResource s) s (TF.Attr s Text) where
+    computedAccessPublicIpv4 x = TF.compute (TF.refKey x) "access_public_ipv4"
+
+instance P.HasComputedAccessPublicIpv6 (DeviceResource s) s (TF.Attr s Text) where
+    computedAccessPublicIpv6 x = TF.compute (TF.refKey x) "access_public_ipv6"
+
+instance P.HasComputedAlwaysPxe (DeviceResource s) s (TF.Attr s Text) where
+    computedAlwaysPxe =
+        (_always_pxe :: DeviceResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedBillingCycle (DeviceResource s) s (TF.Attr s Text) where
+    computedBillingCycle x = TF.compute (TF.refKey x) "billing_cycle"
+
+instance P.HasComputedCreated (DeviceResource s) s (TF.Attr s Text) where
+    computedCreated x = TF.compute (TF.refKey x) "created"
+
+instance P.HasComputedFacility (DeviceResource s) s (TF.Attr s Text) where
+    computedFacility x = TF.compute (TF.refKey x) "facility"
+
+instance P.HasComputedHardwareReservationId (DeviceResource s) s (TF.Attr s Text) where
+    computedHardwareReservationId x = TF.compute (TF.refKey x) "hardware_reservation_id"
+
+instance P.HasComputedHostname (DeviceResource s) s (TF.Attr s Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
+
+instance P.HasComputedId (DeviceResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedIpxeScriptUrl (DeviceResource s) s (TF.Attr s Text) where
+    computedIpxeScriptUrl =
+        (_ipxe_script_url :: DeviceResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLocked (DeviceResource s) s (TF.Attr s Text) where
+    computedLocked x = TF.compute (TF.refKey x) "locked"
+
+instance P.HasComputedNetwork (DeviceResource s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedOperatingSystem (DeviceResource s) s (TF.Attr s Text) where
+    computedOperatingSystem x = TF.compute (TF.refKey x) "operating_system"
+
+instance P.HasComputedPlan (DeviceResource s) s (TF.Attr s Text) where
+    computedPlan x = TF.compute (TF.refKey x) "plan"
+
+instance P.HasComputedProjectId (DeviceResource s) s (TF.Attr s Text) where
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+
+instance P.HasComputedPublicIpv4SubnetSize (DeviceResource s) s (TF.Attr s Text) where
+    computedPublicIpv4SubnetSize =
+        (_public_ipv4_subnet_size :: DeviceResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRootPassword (DeviceResource s) s (TF.Attr s Text) where
+    computedRootPassword x = TF.compute (TF.refKey x) "root_password"
+
+instance P.HasComputedState (DeviceResource s) s (TF.Attr s Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
+
+instance P.HasComputedStorage (DeviceResource s) s (TF.Attr s Text) where
+    computedStorage =
+        (_storage :: DeviceResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTags (DeviceResource s) s (TF.Attr s Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance P.HasComputedUpdated (DeviceResource s) s (TF.Attr s Text) where
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
+
+instance P.HasComputedUserData (DeviceResource s) s (TF.Attr s Text) where
+    computedUserData =
+        (_user_data :: DeviceResource s -> TF.Attr s Text)
+            . TF.refValue
 
 deviceResource :: TF.Schema TF.Resource P.Packet (DeviceResource s)
 deviceResource =
@@ -309,15 +377,32 @@ instance P.HasDeviceId (IpAttachmentResource s) (TF.Attr s Text) where
         lens (_device_id :: IpAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _device_id = a } :: IpAttachmentResource s)
 
-instance P.HasComputedAddressFamily (IpAttachmentResource s) (Text)
-instance P.HasComputedCidr (IpAttachmentResource s) (Text)
-instance P.HasComputedCidrNotation (IpAttachmentResource s) (Text)
-instance P.HasComputedDeviceId (IpAttachmentResource s) (Text)
-instance P.HasComputedGateway (IpAttachmentResource s) (Text)
-instance P.HasComputedId (IpAttachmentResource s) (Text)
-instance P.HasComputedNetmask (IpAttachmentResource s) (Text)
-instance P.HasComputedNetwork (IpAttachmentResource s) (Text)
-instance P.HasComputedPublic (IpAttachmentResource s) (Text)
+instance P.HasComputedAddressFamily (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
+
+instance P.HasComputedCidr (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedCidr x = TF.compute (TF.refKey x) "cidr"
+
+instance P.HasComputedCidrNotation (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
+
+instance P.HasComputedDeviceId (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedDeviceId x = TF.compute (TF.refKey x) "device_id"
+
+instance P.HasComputedGateway (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
+
+instance P.HasComputedId (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedNetmask (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+
+instance P.HasComputedNetwork (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedPublic (IpAttachmentResource s) s (TF.Attr s Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 ipAttachmentResource :: TF.Schema TF.Resource P.Packet (IpAttachmentResource s)
 ipAttachmentResource =
@@ -347,9 +432,19 @@ instance P.HasName (ProjectResource s) (TF.Attr s Text) where
         lens (_name :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ProjectResource s)
 
-instance P.HasComputedCreated (ProjectResource s) (Text)
-instance P.HasComputedId (ProjectResource s) (Text)
-instance P.HasComputedUpdated (ProjectResource s) (Text)
+instance P.HasComputedCreated (ProjectResource s) s (TF.Attr s Text) where
+    computedCreated x = TF.compute (TF.refKey x) "created"
+
+instance P.HasComputedId (ProjectResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (ProjectResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUpdated (ProjectResource s) s (TF.Attr s Text) where
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 projectResource :: TF.Schema TF.Resource P.Packet (ProjectResource s)
 projectResource =
@@ -403,16 +498,35 @@ instance P.HasQuantity (ReservedIpBlockResource s) (TF.Attr s Text) where
         lens (_quantity :: ReservedIpBlockResource s -> TF.Attr s Text)
              (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
 
-instance P.HasComputedAddressFamily (ReservedIpBlockResource s) (Text)
-instance P.HasComputedCidr (ReservedIpBlockResource s) (Text)
-instance P.HasComputedCidrNotation (ReservedIpBlockResource s) (Text)
-instance P.HasComputedFacility (ReservedIpBlockResource s) (Text)
-instance P.HasComputedId (ReservedIpBlockResource s) (Text)
-instance P.HasComputedNetmask (ReservedIpBlockResource s) (Text)
-instance P.HasComputedNetwork (ReservedIpBlockResource s) (Text)
-instance P.HasComputedProjectId (ReservedIpBlockResource s) (Text)
-instance P.HasComputedPublic (ReservedIpBlockResource s) (Text)
-instance P.HasComputedQuantity (ReservedIpBlockResource s) (Text)
+instance P.HasComputedAddressFamily (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
+
+instance P.HasComputedCidr (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedCidr x = TF.compute (TF.refKey x) "cidr"
+
+instance P.HasComputedCidrNotation (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
+
+instance P.HasComputedFacility (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedFacility x = TF.compute (TF.refKey x) "facility"
+
+instance P.HasComputedId (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedNetmask (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+
+instance P.HasComputedNetwork (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedProjectId (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+
+instance P.HasComputedPublic (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
+
+instance P.HasComputedQuantity (ReservedIpBlockResource s) s (TF.Attr s Text) where
+    computedQuantity x = TF.compute (TF.refKey x) "quantity"
 
 reservedIpBlockResource :: TF.Schema TF.Resource P.Packet (ReservedIpBlockResource s)
 reservedIpBlockResource =
@@ -452,12 +566,23 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s Text) where
         lens (_public_key :: SshKeyResource s -> TF.Attr s Text)
              (\s a -> s { _public_key = a } :: SshKeyResource s)
 
-instance P.HasComputedCreated (SshKeyResource s) (Text)
-instance P.HasComputedFingerprint (SshKeyResource s) (Text)
-instance P.HasComputedId (SshKeyResource s) (Text)
-instance P.HasComputedName (SshKeyResource s) (Text)
-instance P.HasComputedPublicKey (SshKeyResource s) (Text)
-instance P.HasComputedUpdated (SshKeyResource s) (Text)
+instance P.HasComputedCreated (SshKeyResource s) s (TF.Attr s Text) where
+    computedCreated x = TF.compute (TF.refKey x) "created"
+
+instance P.HasComputedFingerprint (SshKeyResource s) s (TF.Attr s Text) where
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+
+instance P.HasComputedId (SshKeyResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (SshKeyResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPublicKey (SshKeyResource s) s (TF.Attr s Text) where
+    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+
+instance P.HasComputedUpdated (SshKeyResource s) s (TF.Attr s Text) where
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 sshKeyResource :: TF.Schema TF.Resource P.Packet (SshKeyResource s)
 sshKeyResource =
@@ -497,7 +622,18 @@ instance P.HasVolumeId (VolumeAttachmentResource s) (TF.Attr s Text) where
         lens (_volume_id :: VolumeAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _volume_id = a } :: VolumeAttachmentResource s)
 
-instance P.HasComputedId (VolumeAttachmentResource s) (Text)
+instance P.HasComputedDeviceId (VolumeAttachmentResource s) s (TF.Attr s Text) where
+    computedDeviceId =
+        (_device_id :: VolumeAttachmentResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (VolumeAttachmentResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedVolumeId (VolumeAttachmentResource s) s (TF.Attr s Text) where
+    computedVolumeId =
+        (_volume_id :: VolumeAttachmentResource s -> TF.Attr s Text)
+            . TF.refValue
 
 volumeAttachmentResource :: TF.Schema TF.Resource P.Packet (VolumeAttachmentResource s)
 volumeAttachmentResource =
@@ -577,19 +713,49 @@ instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s Text) where
         lens (_snapshot_policies :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_policies = a } :: VolumeResource s)
 
-instance P.HasComputedAttachments (VolumeResource s) (Text)
-instance P.HasComputedBillingCycle (VolumeResource s) (Text)
-instance P.HasComputedCreated (VolumeResource s) (Text)
-instance P.HasComputedDescription (VolumeResource s) (Text)
-instance P.HasComputedFacility (VolumeResource s) (Text)
-instance P.HasComputedId (VolumeResource s) (Text)
-instance P.HasComputedLocked (VolumeResource s) (Text)
-instance P.HasComputedName (VolumeResource s) (Text)
-instance P.HasComputedPlan (VolumeResource s) (Text)
-instance P.HasComputedProjectId (VolumeResource s) (Text)
-instance P.HasComputedSize (VolumeResource s) (Text)
-instance P.HasComputedState (VolumeResource s) (Text)
-instance P.HasComputedUpdated (VolumeResource s) (Text)
+instance P.HasComputedAttachments (VolumeResource s) s (TF.Attr s Text) where
+    computedAttachments x = TF.compute (TF.refKey x) "attachments"
+
+instance P.HasComputedBillingCycle (VolumeResource s) s (TF.Attr s Text) where
+    computedBillingCycle x = TF.compute (TF.refKey x) "billing_cycle"
+
+instance P.HasComputedCreated (VolumeResource s) s (TF.Attr s Text) where
+    computedCreated x = TF.compute (TF.refKey x) "created"
+
+instance P.HasComputedDescription (VolumeResource s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedFacility (VolumeResource s) s (TF.Attr s Text) where
+    computedFacility x = TF.compute (TF.refKey x) "facility"
+
+instance P.HasComputedId (VolumeResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLocked (VolumeResource s) s (TF.Attr s Text) where
+    computedLocked x = TF.compute (TF.refKey x) "locked"
+
+instance P.HasComputedName (VolumeResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPlan (VolumeResource s) s (TF.Attr s Text) where
+    computedPlan x = TF.compute (TF.refKey x) "plan"
+
+instance P.HasComputedProjectId (VolumeResource s) s (TF.Attr s Text) where
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+
+instance P.HasComputedSize (VolumeResource s) s (TF.Attr s Text) where
+    computedSize x = TF.compute (TF.refKey x) "size"
+
+instance P.HasComputedSnapshotPolicies (VolumeResource s) s (TF.Attr s Text) where
+    computedSnapshotPolicies =
+        (_snapshot_policies :: VolumeResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedState (VolumeResource s) s (TF.Attr s Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
+
+instance P.HasComputedUpdated (VolumeResource s) s (TF.Attr s Text) where
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 volumeResource :: TF.Schema TF.Resource P.Packet (VolumeResource s)
 volumeResource =

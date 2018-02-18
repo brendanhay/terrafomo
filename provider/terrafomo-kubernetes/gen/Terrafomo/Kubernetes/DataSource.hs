@@ -33,6 +33,7 @@ module Terrafomo.Kubernetes.DataSource
     , P.HasMetadata (..)
 
     -- ** Computed Attributes
+    , P.HasComputedMetadata (..)
 
     -- * Re-exported Types
     , module P
@@ -42,7 +43,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -57,6 +58,7 @@ import           Terrafomo.Kubernetes.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @kubernetes_service@ Kubernetes datasource.
@@ -80,6 +82,10 @@ instance P.HasMetadata (ServiceData s) (TF.Attr s Text) where
         lens (_metadata :: ServiceData s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ServiceData s)
 
+instance P.HasComputedMetadata (ServiceData s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: ServiceData s -> TF.Attr s Text)
+            . TF.refValue
 
 serviceData :: TF.Schema TF.DataSource P.Kubernetes (ServiceData s)
 serviceData =
@@ -110,6 +116,10 @@ instance P.HasMetadata (StorageClassData s) (TF.Attr s Text) where
         lens (_metadata :: StorageClassData s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: StorageClassData s)
 
+instance P.HasComputedMetadata (StorageClassData s) s (TF.Attr s Text) where
+    computedMetadata =
+        (_metadata :: StorageClassData s -> TF.Attr s Text)
+            . TF.refValue
 
 storageClassData :: TF.Schema TF.DataSource P.Kubernetes (StorageClassData s)
 storageClassData =

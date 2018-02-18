@@ -85,38 +85,65 @@ module Terrafomo.OpenStack.DataSource
     , P.HasComputedAttributes (..)
     , P.HasComputedAvailabilityZoneHints (..)
     , P.HasComputedChecksum (..)
+    , P.HasComputedCidr (..)
     , P.HasComputedContainerFormat (..)
     , P.HasComputedCreatedAt (..)
     , P.HasComputedDescription (..)
+    , P.HasComputedDhcpDisabled (..)
+    , P.HasComputedDhcpEnabled (..)
+    , P.HasComputedDisk (..)
     , P.HasComputedDiskFormat (..)
     , P.HasComputedDnsNameservers (..)
     , P.HasComputedEmail (..)
     , P.HasComputedEnableDhcp (..)
     , P.HasComputedFile (..)
+    , P.HasComputedGatewayIp (..)
     , P.HasComputedHostRoutes (..)
+    , P.HasComputedIpVersion (..)
+    , P.HasComputedIpv6AddressMode (..)
+    , P.HasComputedIpv6RaMode (..)
     , P.HasComputedIsPublic (..)
     , P.HasComputedMasters (..)
+    , P.HasComputedMatchingSubnetCidr (..)
     , P.HasComputedMetadata (..)
+    , P.HasComputedMinDisk (..)
     , P.HasComputedMinDiskGb (..)
+    , P.HasComputedMinRam (..)
     , P.HasComputedMinRamMb (..)
+    , P.HasComputedMostRecent (..)
     , P.HasComputedName (..)
+    , P.HasComputedNetworkId (..)
+    , P.HasComputedOwner (..)
     , P.HasComputedPoolId (..)
     , P.HasComputedProjectId (..)
     , P.HasComputedProperties (..)
     , P.HasComputedProtected (..)
+    , P.HasComputedRam (..)
     , P.HasComputedRegion (..)
+    , P.HasComputedRxTxFactor (..)
     , P.HasComputedSchema (..)
+    , P.HasComputedSecgroupId (..)
     , P.HasComputedSerial (..)
     , P.HasComputedShared (..)
     , P.HasComputedSizeBytes (..)
+    , P.HasComputedSizeMax (..)
+    , P.HasComputedSizeMin (..)
+    , P.HasComputedSortDirection (..)
+    , P.HasComputedSortKey (..)
     , P.HasComputedStatus (..)
+    , P.HasComputedSubnetId (..)
+    , P.HasComputedSwap (..)
+    , P.HasComputedTag (..)
     , P.HasComputedTags (..)
+    , P.HasComputedTenantId (..)
     , P.HasComputedTransferredAt (..)
     , P.HasComputedTtl (..)
     , P.HasComputedType' (..)
     , P.HasComputedUpdateAt (..)
     , P.HasComputedUpdatedAt (..)
+    , P.HasComputedVcpus (..)
     , P.HasComputedVersion (..)
+    , P.HasComputedVisibility (..)
 
     -- * Re-exported Types
     , module P
@@ -126,7 +153,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -141,6 +168,7 @@ import           Terrafomo.OpenStack.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @openstack_compute_flavor_v2@ OpenStack datasource.
@@ -226,7 +254,53 @@ instance P.HasVcpus (ComputeFlavorV2Data s) (TF.Attr s Text) where
         lens (_vcpus :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _vcpus = a } :: ComputeFlavorV2Data s)
 
-instance P.HasComputedIsPublic (ComputeFlavorV2Data s) (Text)
+instance P.HasComputedDisk (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedDisk =
+        (_disk :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedIsPublic (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedIsPublic x = TF.compute (TF.refKey x) "is_public"
+
+instance P.HasComputedMinDisk (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedMinDisk =
+        (_min_disk :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMinRam (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedMinRam =
+        (_min_ram :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRam (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedRam =
+        (_ram :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRxTxFactor (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedRxTxFactor =
+        (_rx_tx_factor :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSwap (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedSwap =
+        (_swap :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedVcpus (ComputeFlavorV2Data s) s (TF.Attr s Text) where
+    computedVcpus =
+        (_vcpus :: ComputeFlavorV2Data s -> TF.Attr s Text)
+            . TF.refValue
 
 computeFlavorV2Data :: TF.Schema TF.DataSource P.OpenStack (ComputeFlavorV2Data s)
 computeFlavorV2Data =
@@ -310,22 +384,53 @@ instance P.HasType' (DnsZoneV2Data s) (TF.Attr s Text) where
         lens (_type' :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DnsZoneV2Data s)
 
-instance P.HasComputedAttributes (DnsZoneV2Data s) (Text)
-instance P.HasComputedCreatedAt (DnsZoneV2Data s) (Text)
-instance P.HasComputedDescription (DnsZoneV2Data s) (Text)
-instance P.HasComputedEmail (DnsZoneV2Data s) (Text)
-instance P.HasComputedMasters (DnsZoneV2Data s) (Text)
-instance P.HasComputedName (DnsZoneV2Data s) (Text)
-instance P.HasComputedPoolId (DnsZoneV2Data s) (Text)
-instance P.HasComputedProjectId (DnsZoneV2Data s) (Text)
-instance P.HasComputedRegion (DnsZoneV2Data s) (Text)
-instance P.HasComputedSerial (DnsZoneV2Data s) (Text)
-instance P.HasComputedStatus (DnsZoneV2Data s) (Text)
-instance P.HasComputedTransferredAt (DnsZoneV2Data s) (Text)
-instance P.HasComputedTtl (DnsZoneV2Data s) (Text)
-instance P.HasComputedType' (DnsZoneV2Data s) (Text)
-instance P.HasComputedUpdatedAt (DnsZoneV2Data s) (Text)
-instance P.HasComputedVersion (DnsZoneV2Data s) (Text)
+instance P.HasComputedAttributes (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedAttributes x = TF.compute (TF.refKey x) "attributes"
+
+instance P.HasComputedCreatedAt (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+
+instance P.HasComputedDescription (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedEmail (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedEmail x = TF.compute (TF.refKey x) "email"
+
+instance P.HasComputedMasters (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedMasters x = TF.compute (TF.refKey x) "masters"
+
+instance P.HasComputedName (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPoolId (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedPoolId x = TF.compute (TF.refKey x) "pool_id"
+
+instance P.HasComputedProjectId (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+
+instance P.HasComputedRegion (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance P.HasComputedSerial (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedSerial x = TF.compute (TF.refKey x) "serial"
+
+instance P.HasComputedStatus (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance P.HasComputedTransferredAt (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedTransferredAt x = TF.compute (TF.refKey x) "transferred_at"
+
+instance P.HasComputedTtl (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
+
+instance P.HasComputedType' (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+instance P.HasComputedUpdatedAt (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+
+instance P.HasComputedVersion (DnsZoneV2Data s) s (TF.Attr s Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 dnsZoneV2Data :: TF.Schema TF.DataSource P.OpenStack (DnsZoneV2Data s)
 dnsZoneV2Data =
@@ -439,20 +544,97 @@ instance P.HasVisibility (ImagesImageV2Data s) (TF.Attr s Text) where
         lens (_visibility :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _visibility = a } :: ImagesImageV2Data s)
 
-instance P.HasComputedChecksum (ImagesImageV2Data s) (Text)
-instance P.HasComputedContainerFormat (ImagesImageV2Data s) (Text)
-instance P.HasComputedCreatedAt (ImagesImageV2Data s) (Text)
-instance P.HasComputedDiskFormat (ImagesImageV2Data s) (Text)
-instance P.HasComputedFile (ImagesImageV2Data s) (Text)
-instance P.HasComputedMetadata (ImagesImageV2Data s) (Text)
-instance P.HasComputedMinDiskGb (ImagesImageV2Data s) (Text)
-instance P.HasComputedMinRamMb (ImagesImageV2Data s) (Text)
-instance P.HasComputedProperties (ImagesImageV2Data s) (Text)
-instance P.HasComputedProtected (ImagesImageV2Data s) (Text)
-instance P.HasComputedSchema (ImagesImageV2Data s) (Text)
-instance P.HasComputedSizeBytes (ImagesImageV2Data s) (Text)
-instance P.HasComputedTags (ImagesImageV2Data s) (Text)
-instance P.HasComputedUpdateAt (ImagesImageV2Data s) (Text)
+instance P.HasComputedChecksum (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedChecksum x = TF.compute (TF.refKey x) "checksum"
+
+instance P.HasComputedContainerFormat (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedContainerFormat x = TF.compute (TF.refKey x) "container_format"
+
+instance P.HasComputedCreatedAt (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+
+instance P.HasComputedDiskFormat (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedDiskFormat x = TF.compute (TF.refKey x) "disk_format"
+
+instance P.HasComputedFile (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedFile x = TF.compute (TF.refKey x) "file"
+
+instance P.HasComputedMetadata (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+
+instance P.HasComputedMinDiskGb (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedMinDiskGb x = TF.compute (TF.refKey x) "min_disk_gb"
+
+instance P.HasComputedMinRamMb (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedMinRamMb x = TF.compute (TF.refKey x) "min_ram_mb"
+
+instance P.HasComputedMostRecent (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedMostRecent =
+        (_most_recent :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOwner (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedOwner =
+        (_owner :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProperties (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedProperties x = TF.compute (TF.refKey x) "properties"
+
+instance P.HasComputedProtected (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedProtected x = TF.compute (TF.refKey x) "protected"
+
+instance P.HasComputedRegion (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSchema (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedSchema x = TF.compute (TF.refKey x) "schema"
+
+instance P.HasComputedSizeBytes (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedSizeBytes x = TF.compute (TF.refKey x) "size_bytes"
+
+instance P.HasComputedSizeMax (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedSizeMax =
+        (_size_max :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSizeMin (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedSizeMin =
+        (_size_min :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSortDirection (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedSortDirection =
+        (_sort_direction :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSortKey (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedSortKey =
+        (_sort_key :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTag (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedTag =
+        (_tag :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTags (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
+
+instance P.HasComputedUpdateAt (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedUpdateAt x = TF.compute (TF.refKey x) "update_at"
+
+instance P.HasComputedVisibility (ImagesImageV2Data s) s (TF.Attr s Text) where
+    computedVisibility =
+        (_visibility :: ImagesImageV2Data s -> TF.Attr s Text)
+            . TF.refValue
 
 imagesImageV2Data :: TF.Schema TF.DataSource P.OpenStack (ImagesImageV2Data s)
 imagesImageV2Data =
@@ -538,11 +720,40 @@ instance P.HasTenantId (NetworkingNetworkV2Data s) (TF.Attr s Text) where
         lens (_tenant_id :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasComputedAdminStateUp (NetworkingNetworkV2Data s) (Text)
-instance P.HasComputedAvailabilityZoneHints (NetworkingNetworkV2Data s) (Text)
-instance P.HasComputedName (NetworkingNetworkV2Data s) (Text)
-instance P.HasComputedRegion (NetworkingNetworkV2Data s) (Text)
-instance P.HasComputedShared (NetworkingNetworkV2Data s) (Text)
+instance P.HasComputedAdminStateUp (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedAdminStateUp x = TF.compute (TF.refKey x) "admin_state_up"
+
+instance P.HasComputedAvailabilityZoneHints (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedAvailabilityZoneHints x = TF.compute (TF.refKey x) "availability_zone_hints"
+
+instance P.HasComputedMatchingSubnetCidr (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedMatchingSubnetCidr =
+        (_matching_subnet_cidr :: NetworkingNetworkV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedNetworkId (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedNetworkId =
+        (_network_id :: NetworkingNetworkV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance P.HasComputedShared (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedShared x = TF.compute (TF.refKey x) "shared"
+
+instance P.HasComputedStatus (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedStatus =
+        (_status :: NetworkingNetworkV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTenantId (NetworkingNetworkV2Data s) s (TF.Attr s Text) where
+    computedTenantId =
+        (_tenant_id :: NetworkingNetworkV2Data s -> TF.Attr s Text)
+            . TF.refValue
 
 networkingNetworkV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingNetworkV2Data s)
 networkingNetworkV2Data =
@@ -600,9 +811,24 @@ instance P.HasTenantId (NetworkingSecgroupV2Data s) (TF.Attr s Text) where
         lens (_tenant_id :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSecgroupV2Data s)
 
-instance P.HasComputedDescription (NetworkingSecgroupV2Data s) (Text)
-instance P.HasComputedName (NetworkingSecgroupV2Data s) (Text)
-instance P.HasComputedRegion (NetworkingSecgroupV2Data s) (Text)
+instance P.HasComputedDescription (NetworkingSecgroupV2Data s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedName (NetworkingSecgroupV2Data s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedRegion (NetworkingSecgroupV2Data s) s (TF.Attr s Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance P.HasComputedSecgroupId (NetworkingSecgroupV2Data s) s (TF.Attr s Text) where
+    computedSecgroupId =
+        (_secgroup_id :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTenantId (NetworkingSecgroupV2Data s) s (TF.Attr s Text) where
+    computedTenantId =
+        (_tenant_id :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
+            . TF.refValue
 
 networkingSecgroupV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingSecgroupV2Data s)
 networkingSecgroupV2Data =
@@ -721,11 +947,75 @@ instance P.HasTenantId (NetworkingSubnetV2Data s) (TF.Attr s Text) where
         lens (_tenant_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasComputedAllocationPools (NetworkingSubnetV2Data s) (Text)
-instance P.HasComputedDnsNameservers (NetworkingSubnetV2Data s) (Text)
-instance P.HasComputedEnableDhcp (NetworkingSubnetV2Data s) (Text)
-instance P.HasComputedHostRoutes (NetworkingSubnetV2Data s) (Text)
-instance P.HasComputedRegion (NetworkingSubnetV2Data s) (Text)
+instance P.HasComputedAllocationPools (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedAllocationPools x = TF.compute (TF.refKey x) "allocation_pools"
+
+instance P.HasComputedCidr (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedCidr =
+        (_cidr :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDhcpDisabled (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedDhcpDisabled =
+        (_dhcp_disabled :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDhcpEnabled (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedDhcpEnabled =
+        (_dhcp_enabled :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDnsNameservers (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedDnsNameservers x = TF.compute (TF.refKey x) "dns_nameservers"
+
+instance P.HasComputedEnableDhcp (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedEnableDhcp x = TF.compute (TF.refKey x) "enable_dhcp"
+
+instance P.HasComputedGatewayIp (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedGatewayIp =
+        (_gateway_ip :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHostRoutes (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedHostRoutes x = TF.compute (TF.refKey x) "host_routes"
+
+instance P.HasComputedIpVersion (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedIpVersion =
+        (_ip_version :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedIpv6AddressMode (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedIpv6AddressMode =
+        (_ipv6_address_mode :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedIpv6RaMode (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedIpv6RaMode =
+        (_ipv6_ra_mode :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetworkId (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedNetworkId =
+        (_network_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance P.HasComputedSubnetId (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedSubnetId =
+        (_subnet_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTenantId (NetworkingSubnetV2Data s) s (TF.Attr s Text) where
+    computedTenantId =
+        (_tenant_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
+            . TF.refValue
 
 networkingSubnetV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingSubnetV2Data s)
 networkingSubnetV2Data =

@@ -32,14 +32,20 @@ module Terrafomo.OpsGenie.Lens
     , HasUsername (..)
 
     -- ** Computed Attributes
+    , HasComputedDescription (..)
     , HasComputedFullName (..)
     , HasComputedId (..)
+    , HasComputedLocale (..)
+    , HasComputedMember (..)
+    , HasComputedName (..)
     , HasComputedRole (..)
+    , HasComputedTimezone (..)
+    , HasComputedUsername (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -93,20 +99,29 @@ class HasUsername a b | a -> b where
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputedFullName a b | a -> b where
-    computedFullName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFullName =
-        to (\x -> TF.compute (TF.refKey x) "full_name")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedFullName a s b | a -> s b where
+    computedFullName :: TF.Ref s a -> b
 
-class HasComputedRole a b | a -> b where
-    computedRole
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRole =
-        to (\x -> TF.compute (TF.refKey x) "role")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedLocale a s b | a -> s b where
+    computedLocale :: TF.Ref s a -> b
+
+class HasComputedMember a s b | a -> s b where
+    computedMember :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedRole a s b | a -> s b where
+    computedRole :: TF.Ref s a -> b
+
+class HasComputedTimezone a s b | a -> s b where
+    computedTimezone :: TF.Ref s a -> b
+
+class HasComputedUsername a s b | a -> s b where
+    computedUsername :: TF.Ref s a -> b

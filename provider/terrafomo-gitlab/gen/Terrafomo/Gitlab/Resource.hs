@@ -80,10 +80,46 @@ module Terrafomo.Gitlab.Resource
     , P.HasWikiPageEvents (..)
 
     -- ** Computed Attributes
+    , P.HasComputedCanCreateGroup (..)
+    , P.HasComputedCanPush (..)
+    , P.HasComputedColor (..)
+    , P.HasComputedDefaultBranch (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedEmail (..)
+    , P.HasComputedEnableSslVerification (..)
     , P.HasComputedHttpUrlToRepo (..)
     , P.HasComputedId (..)
+    , P.HasComputedIsAdmin (..)
+    , P.HasComputedIssuesEnabled (..)
+    , P.HasComputedIssuesEvents (..)
+    , P.HasComputedJobEvents (..)
+    , P.HasComputedKey (..)
+    , P.HasComputedLfsEnabled (..)
+    , P.HasComputedMergeRequestsEnabled (..)
+    , P.HasComputedMergeRequestsEvents (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNamespaceId (..)
+    , P.HasComputedNoteEvents (..)
+    , P.HasComputedParentId (..)
+    , P.HasComputedPassword (..)
+    , P.HasComputedPath (..)
+    , P.HasComputedPipelineEvents (..)
+    , P.HasComputedProject (..)
+    , P.HasComputedProjectsLimit (..)
+    , P.HasComputedPushEvents (..)
+    , P.HasComputedRequestAccessEnabled (..)
+    , P.HasComputedSkipConfirmation (..)
+    , P.HasComputedSnippetsEnabled (..)
     , P.HasComputedSshUrlToRepo (..)
+    , P.HasComputedTagPushEvents (..)
+    , P.HasComputedTitle (..)
+    , P.HasComputedToken (..)
+    , P.HasComputedUrl (..)
+    , P.HasComputedUsername (..)
+    , P.HasComputedVisibilityLevel (..)
     , P.HasComputedWebUrl (..)
+    , P.HasComputedWikiEnabled (..)
+    , P.HasComputedWikiPageEvents (..)
 
     -- * Re-exported Types
     , module P
@@ -93,7 +129,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -108,6 +144,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @gitlab_deploy_key@ Gitlab resource.
@@ -154,6 +191,25 @@ instance P.HasTitle (DeployKeyResource s) (TF.Attr s Text) where
         lens (_title :: DeployKeyResource s -> TF.Attr s Text)
              (\s a -> s { _title = a } :: DeployKeyResource s)
 
+instance P.HasComputedCanPush (DeployKeyResource s) s (TF.Attr s Text) where
+    computedCanPush =
+        (_can_push :: DeployKeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedKey (DeployKeyResource s) s (TF.Attr s Text) where
+    computedKey =
+        (_key :: DeployKeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProject (DeployKeyResource s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: DeployKeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTitle (DeployKeyResource s) s (TF.Attr s Text) where
+    computedTitle =
+        (_title :: DeployKeyResource s -> TF.Attr s Text)
+            . TF.refValue
 
 deployKeyResource :: TF.Schema TF.Resource P.Gitlab (DeployKeyResource s)
 deployKeyResource =
@@ -234,7 +290,43 @@ instance P.HasVisibilityLevel (GroupResource s) (TF.Attr s Text) where
         lens (_visibility_level :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _visibility_level = a } :: GroupResource s)
 
-instance P.HasComputedId (GroupResource s) (Text)
+instance P.HasComputedDescription (GroupResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: GroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (GroupResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLfsEnabled (GroupResource s) s (TF.Attr s Text) where
+    computedLfsEnabled =
+        (_lfs_enabled :: GroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (GroupResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: GroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedParentId (GroupResource s) s (TF.Attr s Text) where
+    computedParentId =
+        (_parent_id :: GroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPath (GroupResource s) s (TF.Attr s Text) where
+    computedPath =
+        (_path :: GroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRequestAccessEnabled (GroupResource s) s (TF.Attr s Text) where
+    computedRequestAccessEnabled =
+        (_request_access_enabled :: GroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedVisibilityLevel (GroupResource s) s (TF.Attr s Text) where
+    computedVisibilityLevel =
+        (_visibility_level :: GroupResource s -> TF.Attr s Text)
+            . TF.refValue
 
 groupResource :: TF.Schema TF.Resource P.Gitlab (GroupResource s)
 groupResource =
@@ -294,7 +386,28 @@ instance P.HasProject (LabelResource s) (TF.Attr s Text) where
         lens (_project :: LabelResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: LabelResource s)
 
-instance P.HasComputedId (LabelResource s) (Text)
+instance P.HasComputedColor (LabelResource s) s (TF.Attr s Text) where
+    computedColor =
+        (_color :: LabelResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDescription (LabelResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: LabelResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (LabelResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (LabelResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: LabelResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProject (LabelResource s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: LabelResource s -> TF.Attr s Text)
+            . TF.refValue
 
 labelResource :: TF.Schema TF.Resource P.Gitlab (LabelResource s)
 labelResource =
@@ -415,7 +528,68 @@ instance P.HasWikiPageEvents (ProjectHookResource s) (TF.Attr s Text) where
         lens (_wiki_page_events :: ProjectHookResource s -> TF.Attr s Text)
              (\s a -> s { _wiki_page_events = a } :: ProjectHookResource s)
 
-instance P.HasComputedId (ProjectHookResource s) (Text)
+instance P.HasComputedEnableSslVerification (ProjectHookResource s) s (TF.Attr s Text) where
+    computedEnableSslVerification =
+        (_enable_ssl_verification :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (ProjectHookResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedIssuesEvents (ProjectHookResource s) s (TF.Attr s Text) where
+    computedIssuesEvents =
+        (_issues_events :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedJobEvents (ProjectHookResource s) s (TF.Attr s Text) where
+    computedJobEvents =
+        (_job_events :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMergeRequestsEvents (ProjectHookResource s) s (TF.Attr s Text) where
+    computedMergeRequestsEvents =
+        (_merge_requests_events :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNoteEvents (ProjectHookResource s) s (TF.Attr s Text) where
+    computedNoteEvents =
+        (_note_events :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPipelineEvents (ProjectHookResource s) s (TF.Attr s Text) where
+    computedPipelineEvents =
+        (_pipeline_events :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProject (ProjectHookResource s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPushEvents (ProjectHookResource s) s (TF.Attr s Text) where
+    computedPushEvents =
+        (_push_events :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTagPushEvents (ProjectHookResource s) s (TF.Attr s Text) where
+    computedTagPushEvents =
+        (_tag_push_events :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedToken (ProjectHookResource s) s (TF.Attr s Text) where
+    computedToken =
+        (_token :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUrl (ProjectHookResource s) s (TF.Attr s Text) where
+    computedUrl =
+        (_url :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedWikiPageEvents (ProjectHookResource s) s (TF.Attr s Text) where
+    computedWikiPageEvents =
+        (_wiki_page_events :: ProjectHookResource s -> TF.Attr s Text)
+            . TF.refValue
 
 projectHookResource :: TF.Schema TF.Resource P.Gitlab (ProjectHookResource s)
 projectHookResource =
@@ -527,10 +701,67 @@ instance P.HasWikiEnabled (ProjectResource s) (TF.Attr s Text) where
         lens (_wiki_enabled :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _wiki_enabled = a } :: ProjectResource s)
 
-instance P.HasComputedHttpUrlToRepo (ProjectResource s) (Text)
-instance P.HasComputedId (ProjectResource s) (Text)
-instance P.HasComputedSshUrlToRepo (ProjectResource s) (Text)
-instance P.HasComputedWebUrl (ProjectResource s) (Text)
+instance P.HasComputedDefaultBranch (ProjectResource s) s (TF.Attr s Text) where
+    computedDefaultBranch =
+        (_default_branch :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDescription (ProjectResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHttpUrlToRepo (ProjectResource s) s (TF.Attr s Text) where
+    computedHttpUrlToRepo x = TF.compute (TF.refKey x) "http_url_to_repo"
+
+instance P.HasComputedId (ProjectResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedIssuesEnabled (ProjectResource s) s (TF.Attr s Text) where
+    computedIssuesEnabled =
+        (_issues_enabled :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMergeRequestsEnabled (ProjectResource s) s (TF.Attr s Text) where
+    computedMergeRequestsEnabled =
+        (_merge_requests_enabled :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ProjectResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNamespaceId (ProjectResource s) s (TF.Attr s Text) where
+    computedNamespaceId =
+        (_namespace_id :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPath (ProjectResource s) s (TF.Attr s Text) where
+    computedPath =
+        (_path :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSnippetsEnabled (ProjectResource s) s (TF.Attr s Text) where
+    computedSnippetsEnabled =
+        (_snippets_enabled :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSshUrlToRepo (ProjectResource s) s (TF.Attr s Text) where
+    computedSshUrlToRepo x = TF.compute (TF.refKey x) "ssh_url_to_repo"
+
+instance P.HasComputedVisibilityLevel (ProjectResource s) s (TF.Attr s Text) where
+    computedVisibilityLevel =
+        (_visibility_level :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedWebUrl (ProjectResource s) s (TF.Attr s Text) where
+    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
+
+instance P.HasComputedWikiEnabled (ProjectResource s) s (TF.Attr s Text) where
+    computedWikiEnabled =
+        (_wiki_enabled :: ProjectResource s -> TF.Attr s Text)
+            . TF.refValue
 
 projectResource :: TF.Schema TF.Resource P.Gitlab (ProjectResource s)
 projectResource =
@@ -625,7 +856,48 @@ instance P.HasUsername (UserResource s) (TF.Attr s Text) where
         lens (_username :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserResource s)
 
-instance P.HasComputedId (UserResource s) (Text)
+instance P.HasComputedCanCreateGroup (UserResource s) s (TF.Attr s Text) where
+    computedCanCreateGroup =
+        (_can_create_group :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEmail (UserResource s) s (TF.Attr s Text) where
+    computedEmail =
+        (_email :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (UserResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedIsAdmin (UserResource s) s (TF.Attr s Text) where
+    computedIsAdmin =
+        (_is_admin :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (UserResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPassword (UserResource s) s (TF.Attr s Text) where
+    computedPassword =
+        (_password :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProjectsLimit (UserResource s) s (TF.Attr s Text) where
+    computedProjectsLimit =
+        (_projects_limit :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSkipConfirmation (UserResource s) s (TF.Attr s Text) where
+    computedSkipConfirmation =
+        (_skip_confirmation :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUsername (UserResource s) s (TF.Attr s Text) where
+    computedUsername =
+        (_username :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
 
 userResource :: TF.Schema TF.Resource P.Gitlab (UserResource s)
 userResource =

@@ -47,16 +47,39 @@ module Terrafomo.NewRelic.Lens
     , HasWidget (..)
 
     -- ** Computed Attributes
+    , HasComputedChannelId (..)
+    , HasComputedConditionScope (..)
+    , HasComputedConfiguration (..)
     , HasComputedCreatedAt (..)
+    , HasComputedEditable (..)
+    , HasComputedEnabled (..)
+    , HasComputedEntities (..)
+    , HasComputedGcMetric (..)
     , HasComputedHostIds (..)
+    , HasComputedIcon (..)
     , HasComputedId (..)
+    , HasComputedIncidentPreference (..)
     , HasComputedInstanceIds (..)
+    , HasComputedMetric (..)
+    , HasComputedName (..)
+    , HasComputedNrql (..)
+    , HasComputedPolicyId (..)
+    , HasComputedRunbookUrl (..)
+    , HasComputedTerm (..)
+    , HasComputedTitle (..)
+    , HasComputedType' (..)
     , HasComputedUpdatedAt (..)
+    , HasComputedUserDefinedMetric (..)
+    , HasComputedUserDefinedValueFunction (..)
+    , HasComputedValueFunction (..)
+    , HasComputedViolationCloseTimer (..)
+    , HasComputedVisibility (..)
+    , HasComputedWidget (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -200,32 +223,86 @@ class HasWidget a b | a -> b where
 instance HasWidget a b => HasWidget (TF.Schema l p a) b where
     widget = TF.configuration . widget
 
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreatedAt =
-        to (\x -> TF.compute (TF.refKey x) "created_at")
+class HasComputedChannelId a s b | a -> s b where
+    computedChannelId :: TF.Ref s a -> b
 
-class HasComputedHostIds a b | a -> b where
-    computedHostIds
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedHostIds =
-        to (\x -> TF.compute (TF.refKey x) "host_ids")
+class HasComputedConditionScope a s b | a -> s b where
+    computedConditionScope :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedConfiguration a s b | a -> s b where
+    computedConfiguration :: TF.Ref s a -> b
 
-class HasComputedInstanceIds a b | a -> b where
-    computedInstanceIds
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedInstanceIds =
-        to (\x -> TF.compute (TF.refKey x) "instance_ids")
+class HasComputedCreatedAt a s b | a -> s b where
+    computedCreatedAt :: TF.Ref s a -> b
 
-class HasComputedUpdatedAt a b | a -> b where
-    computedUpdatedAt
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUpdatedAt =
-        to (\x -> TF.compute (TF.refKey x) "updated_at")
+class HasComputedEditable a s b | a -> s b where
+    computedEditable :: TF.Ref s a -> b
+
+class HasComputedEnabled a s b | a -> s b where
+    computedEnabled :: TF.Ref s a -> b
+
+class HasComputedEntities a s b | a -> s b where
+    computedEntities :: TF.Ref s a -> b
+
+class HasComputedGcMetric a s b | a -> s b where
+    computedGcMetric :: TF.Ref s a -> b
+
+class HasComputedHostIds a s b | a -> s b where
+    computedHostIds :: TF.Ref s a -> b
+
+class HasComputedIcon a s b | a -> s b where
+    computedIcon :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedIncidentPreference a s b | a -> s b where
+    computedIncidentPreference :: TF.Ref s a -> b
+
+class HasComputedInstanceIds a s b | a -> s b where
+    computedInstanceIds :: TF.Ref s a -> b
+
+class HasComputedMetric a s b | a -> s b where
+    computedMetric :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNrql a s b | a -> s b where
+    computedNrql :: TF.Ref s a -> b
+
+class HasComputedPolicyId a s b | a -> s b where
+    computedPolicyId :: TF.Ref s a -> b
+
+class HasComputedRunbookUrl a s b | a -> s b where
+    computedRunbookUrl :: TF.Ref s a -> b
+
+class HasComputedTerm a s b | a -> s b where
+    computedTerm :: TF.Ref s a -> b
+
+class HasComputedTitle a s b | a -> s b where
+    computedTitle :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUpdatedAt a s b | a -> s b where
+    computedUpdatedAt :: TF.Ref s a -> b
+
+class HasComputedUserDefinedMetric a s b | a -> s b where
+    computedUserDefinedMetric :: TF.Ref s a -> b
+
+class HasComputedUserDefinedValueFunction a s b | a -> s b where
+    computedUserDefinedValueFunction :: TF.Ref s a -> b
+
+class HasComputedValueFunction a s b | a -> s b where
+    computedValueFunction :: TF.Ref s a -> b
+
+class HasComputedViolationCloseTimer a s b | a -> s b where
+    computedViolationCloseTimer :: TF.Ref s a -> b
+
+class HasComputedVisibility a s b | a -> s b where
+    computedVisibility :: TF.Ref s a -> b
+
+class HasComputedWidget a s b | a -> s b where
+    computedWidget :: TF.Ref s a -> b

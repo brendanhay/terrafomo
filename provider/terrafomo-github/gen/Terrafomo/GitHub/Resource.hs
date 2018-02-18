@@ -93,13 +93,46 @@ module Terrafomo.GitHub.Resource
     , P.HasUsername (..)
 
     -- ** Computed Attributes
+    , P.HasComputedActive (..)
+    , P.HasComputedAllowMergeCommit (..)
+    , P.HasComputedAllowRebaseMerge (..)
+    , P.HasComputedAllowSquashMerge (..)
+    , P.HasComputedAutoInit (..)
+    , P.HasComputedBranch (..)
+    , P.HasComputedColor (..)
+    , P.HasComputedConfiguration (..)
+    , P.HasComputedDefaultBranch (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedEnforceAdmins (..)
+    , P.HasComputedEvents (..)
     , P.HasComputedFullName (..)
     , P.HasComputedGitCloneUrl (..)
+    , P.HasComputedGitignoreTemplate (..)
+    , P.HasComputedHasDownloads (..)
+    , P.HasComputedHasIssues (..)
+    , P.HasComputedHasWiki (..)
+    , P.HasComputedHomepageUrl (..)
     , P.HasComputedHttpCloneUrl (..)
     , P.HasComputedId (..)
+    , P.HasComputedKey (..)
+    , P.HasComputedLdapDn (..)
+    , P.HasComputedLicenseTemplate (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPermission (..)
+    , P.HasComputedPrivacy (..)
+    , P.HasComputedPrivate (..)
+    , P.HasComputedReadOnly (..)
+    , P.HasComputedRepository (..)
+    , P.HasComputedRequiredPullRequestReviews (..)
+    , P.HasComputedRequiredStatusChecks (..)
+    , P.HasComputedRestrictions (..)
+    , P.HasComputedRole (..)
     , P.HasComputedSshCloneUrl (..)
     , P.HasComputedSvnUrl (..)
+    , P.HasComputedTeamId (..)
+    , P.HasComputedTitle (..)
     , P.HasComputedUrl (..)
+    , P.HasComputedUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -109,7 +142,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -124,6 +157,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @github_branch_protection@ GitHub resource.
@@ -189,6 +223,35 @@ instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s Text) where
         lens (_restrictions :: BranchProtectionResource s -> TF.Attr s Text)
              (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
+instance P.HasComputedBranch (BranchProtectionResource s) s (TF.Attr s Text) where
+    computedBranch =
+        (_branch :: BranchProtectionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEnforceAdmins (BranchProtectionResource s) s (TF.Attr s Text) where
+    computedEnforceAdmins =
+        (_enforce_admins :: BranchProtectionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepository (BranchProtectionResource s) s (TF.Attr s Text) where
+    computedRepository =
+        (_repository :: BranchProtectionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRequiredPullRequestReviews (BranchProtectionResource s) s (TF.Attr s Text) where
+    computedRequiredPullRequestReviews =
+        (_required_pull_request_reviews :: BranchProtectionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRequiredStatusChecks (BranchProtectionResource s) s (TF.Attr s Text) where
+    computedRequiredStatusChecks =
+        (_required_status_checks :: BranchProtectionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRestrictions (BranchProtectionResource s) s (TF.Attr s Text) where
+    computedRestrictions =
+        (_restrictions :: BranchProtectionResource s -> TF.Attr s Text)
+            . TF.refValue
 
 branchProtectionResource :: TF.Schema TF.Resource P.GitHub (BranchProtectionResource s)
 branchProtectionResource =
@@ -252,6 +315,25 @@ instance P.HasUrl (IssueLabelResource s) (TF.Attr s Text) where
         lens (_url :: IssueLabelResource s -> TF.Attr s Text)
              (\s a -> s { _url = a } :: IssueLabelResource s)
 
+instance P.HasComputedColor (IssueLabelResource s) s (TF.Attr s Text) where
+    computedColor =
+        (_color :: IssueLabelResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (IssueLabelResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: IssueLabelResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepository (IssueLabelResource s) s (TF.Attr s Text) where
+    computedRepository =
+        (_repository :: IssueLabelResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUrl (IssueLabelResource s) s (TF.Attr s Text) where
+    computedUrl =
+        (_url :: IssueLabelResource s -> TF.Attr s Text)
+            . TF.refValue
 
 issueLabelResource :: TF.Schema TF.Resource P.GitHub (IssueLabelResource s)
 issueLabelResource =
@@ -293,6 +375,15 @@ instance P.HasUsername (MembershipResource s) (TF.Attr s Text) where
         lens (_username :: MembershipResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: MembershipResource s)
 
+instance P.HasComputedRole (MembershipResource s) s (TF.Attr s Text) where
+    computedRole =
+        (_role :: MembershipResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUsername (MembershipResource s) s (TF.Attr s Text) where
+    computedUsername =
+        (_username :: MembershipResource s -> TF.Attr s Text)
+            . TF.refValue
 
 membershipResource :: TF.Schema TF.Resource P.GitHub (MembershipResource s)
 membershipResource =
@@ -346,7 +437,28 @@ instance P.HasName (OrganizationWebhookResource s) (TF.Attr s Text) where
         lens (_name :: OrganizationWebhookResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: OrganizationWebhookResource s)
 
-instance P.HasComputedUrl (OrganizationWebhookResource s) (Text)
+instance P.HasComputedActive (OrganizationWebhookResource s) s (TF.Attr s Text) where
+    computedActive =
+        (_active :: OrganizationWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedConfiguration (OrganizationWebhookResource s) s (TF.Attr s Text) where
+    computedConfiguration =
+        (_configuration :: OrganizationWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEvents (OrganizationWebhookResource s) s (TF.Attr s Text) where
+    computedEvents =
+        (_events :: OrganizationWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (OrganizationWebhookResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: OrganizationWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUrl (OrganizationWebhookResource s) s (TF.Attr s Text) where
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 organizationWebhookResource :: TF.Schema TF.Resource P.GitHub (OrganizationWebhookResource s)
 organizationWebhookResource =
@@ -401,6 +513,20 @@ instance P.HasUsername (RepositoryCollaboratorResource s) (TF.Attr s Text) where
         lens (_username :: RepositoryCollaboratorResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
 
+instance P.HasComputedPermission (RepositoryCollaboratorResource s) s (TF.Attr s Text) where
+    computedPermission =
+        (_permission :: RepositoryCollaboratorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepository (RepositoryCollaboratorResource s) s (TF.Attr s Text) where
+    computedRepository =
+        (_repository :: RepositoryCollaboratorResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUsername (RepositoryCollaboratorResource s) s (TF.Attr s Text) where
+    computedUsername =
+        (_username :: RepositoryCollaboratorResource s -> TF.Attr s Text)
+            . TF.refValue
 
 repositoryCollaboratorResource :: TF.Schema TF.Resource P.GitHub (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource =
@@ -458,6 +584,25 @@ instance P.HasTitle (RepositoryDeployKeyResource s) (TF.Attr s Text) where
         lens (_title :: RepositoryDeployKeyResource s -> TF.Attr s Text)
              (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
 
+instance P.HasComputedKey (RepositoryDeployKeyResource s) s (TF.Attr s Text) where
+    computedKey =
+        (_key :: RepositoryDeployKeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedReadOnly (RepositoryDeployKeyResource s) s (TF.Attr s Text) where
+    computedReadOnly =
+        (_read_only :: RepositoryDeployKeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepository (RepositoryDeployKeyResource s) s (TF.Attr s Text) where
+    computedRepository =
+        (_repository :: RepositoryDeployKeyResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTitle (RepositoryDeployKeyResource s) s (TF.Attr s Text) where
+    computedTitle =
+        (_title :: RepositoryDeployKeyResource s -> TF.Attr s Text)
+            . TF.refValue
 
 repositoryDeployKeyResource :: TF.Schema TF.Resource P.GitHub (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource =
@@ -594,11 +739,90 @@ instance P.HasPrivate (RepositoryResource s) (TF.Attr s Text) where
         lens (_private :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _private = a } :: RepositoryResource s)
 
-instance P.HasComputedFullName (RepositoryResource s) (Text)
-instance P.HasComputedGitCloneUrl (RepositoryResource s) (Text)
-instance P.HasComputedHttpCloneUrl (RepositoryResource s) (Text)
-instance P.HasComputedSshCloneUrl (RepositoryResource s) (Text)
-instance P.HasComputedSvnUrl (RepositoryResource s) (Text)
+instance P.HasComputedAllowMergeCommit (RepositoryResource s) s (TF.Attr s Text) where
+    computedAllowMergeCommit =
+        (_allow_merge_commit :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedAllowRebaseMerge (RepositoryResource s) s (TF.Attr s Text) where
+    computedAllowRebaseMerge =
+        (_allow_rebase_merge :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedAllowSquashMerge (RepositoryResource s) s (TF.Attr s Text) where
+    computedAllowSquashMerge =
+        (_allow_squash_merge :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedAutoInit (RepositoryResource s) s (TF.Attr s Text) where
+    computedAutoInit =
+        (_auto_init :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDefaultBranch (RepositoryResource s) s (TF.Attr s Text) where
+    computedDefaultBranch =
+        (_default_branch :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDescription (RepositoryResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFullName (RepositoryResource s) s (TF.Attr s Text) where
+    computedFullName x = TF.compute (TF.refKey x) "full_name"
+
+instance P.HasComputedGitCloneUrl (RepositoryResource s) s (TF.Attr s Text) where
+    computedGitCloneUrl x = TF.compute (TF.refKey x) "git_clone_url"
+
+instance P.HasComputedGitignoreTemplate (RepositoryResource s) s (TF.Attr s Text) where
+    computedGitignoreTemplate =
+        (_gitignore_template :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHasDownloads (RepositoryResource s) s (TF.Attr s Text) where
+    computedHasDownloads =
+        (_has_downloads :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHasIssues (RepositoryResource s) s (TF.Attr s Text) where
+    computedHasIssues =
+        (_has_issues :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHasWiki (RepositoryResource s) s (TF.Attr s Text) where
+    computedHasWiki =
+        (_has_wiki :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHomepageUrl (RepositoryResource s) s (TF.Attr s Text) where
+    computedHomepageUrl =
+        (_homepage_url :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHttpCloneUrl (RepositoryResource s) s (TF.Attr s Text) where
+    computedHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
+
+instance P.HasComputedLicenseTemplate (RepositoryResource s) s (TF.Attr s Text) where
+    computedLicenseTemplate =
+        (_license_template :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (RepositoryResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPrivate (RepositoryResource s) s (TF.Attr s Text) where
+    computedPrivate =
+        (_private :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSshCloneUrl (RepositoryResource s) s (TF.Attr s Text) where
+    computedSshCloneUrl x = TF.compute (TF.refKey x) "ssh_clone_url"
+
+instance P.HasComputedSvnUrl (RepositoryResource s) s (TF.Attr s Text) where
+    computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
 
 repositoryResource :: TF.Schema TF.Resource P.GitHub (RepositoryResource s)
 repositoryResource =
@@ -673,7 +897,33 @@ instance P.HasRepository (RepositoryWebhookResource s) (TF.Attr s Text) where
         lens (_repository :: RepositoryWebhookResource s -> TF.Attr s Text)
              (\s a -> s { _repository = a } :: RepositoryWebhookResource s)
 
-instance P.HasComputedUrl (RepositoryWebhookResource s) (Text)
+instance P.HasComputedActive (RepositoryWebhookResource s) s (TF.Attr s Text) where
+    computedActive =
+        (_active :: RepositoryWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedConfiguration (RepositoryWebhookResource s) s (TF.Attr s Text) where
+    computedConfiguration =
+        (_configuration :: RepositoryWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEvents (RepositoryWebhookResource s) s (TF.Attr s Text) where
+    computedEvents =
+        (_events :: RepositoryWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (RepositoryWebhookResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: RepositoryWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepository (RepositoryWebhookResource s) s (TF.Attr s Text) where
+    computedRepository =
+        (_repository :: RepositoryWebhookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUrl (RepositoryWebhookResource s) s (TF.Attr s Text) where
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 repositoryWebhookResource :: TF.Schema TF.Resource P.GitHub (RepositoryWebhookResource s)
 repositoryWebhookResource =
@@ -725,6 +975,20 @@ instance P.HasUsername (TeamMembershipResource s) (TF.Attr s Text) where
         lens (_username :: TeamMembershipResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: TeamMembershipResource s)
 
+instance P.HasComputedRole (TeamMembershipResource s) s (TF.Attr s Text) where
+    computedRole =
+        (_role :: TeamMembershipResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTeamId (TeamMembershipResource s) s (TF.Attr s Text) where
+    computedTeamId =
+        (_team_id :: TeamMembershipResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUsername (TeamMembershipResource s) s (TF.Attr s Text) where
+    computedUsername =
+        (_username :: TeamMembershipResource s -> TF.Attr s Text)
+            . TF.refValue
 
 teamMembershipResource :: TF.Schema TF.Resource P.GitHub (TeamMembershipResource s)
 teamMembershipResource =
@@ -774,6 +1038,20 @@ instance P.HasTeamId (TeamRepositoryResource s) (TF.Attr s Text) where
         lens (_team_id :: TeamRepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _team_id = a } :: TeamRepositoryResource s)
 
+instance P.HasComputedPermission (TeamRepositoryResource s) s (TF.Attr s Text) where
+    computedPermission =
+        (_permission :: TeamRepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepository (TeamRepositoryResource s) s (TF.Attr s Text) where
+    computedRepository =
+        (_repository :: TeamRepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTeamId (TeamRepositoryResource s) s (TF.Attr s Text) where
+    computedTeamId =
+        (_team_id :: TeamRepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
 
 teamRepositoryResource :: TF.Schema TF.Resource P.GitHub (TeamRepositoryResource s)
 teamRepositoryResource =
@@ -829,7 +1107,28 @@ instance P.HasPrivacy (TeamResource s) (TF.Attr s Text) where
         lens (_privacy :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _privacy = a } :: TeamResource s)
 
-instance P.HasComputedId (TeamResource s) (Text)
+instance P.HasComputedDescription (TeamResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (TeamResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLdapDn (TeamResource s) s (TF.Attr s Text) where
+    computedLdapDn =
+        (_ldap_dn :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (TeamResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPrivacy (TeamResource s) s (TF.Attr s Text) where
+    computedPrivacy =
+        (_privacy :: TeamResource s -> TF.Attr s Text)
+            . TF.refValue
 
 teamResource :: TF.Schema TF.Resource P.GitHub (TeamResource s)
 teamResource =

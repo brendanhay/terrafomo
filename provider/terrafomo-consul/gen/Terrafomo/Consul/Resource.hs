@@ -68,12 +68,24 @@ module Terrafomo.Consul.Resource
     -- ** Computed Attributes
     , P.HasComputedAddress (..)
     , P.HasComputedDatacenter (..)
+    , P.HasComputedDns (..)
+    , P.HasComputedFailover (..)
     , P.HasComputedId (..)
+    , P.HasComputedKey (..)
     , P.HasComputedName (..)
+    , P.HasComputedNear (..)
     , P.HasComputedNode (..)
+    , P.HasComputedOnlyPassing (..)
+    , P.HasComputedPathPrefix (..)
     , P.HasComputedPort (..)
+    , P.HasComputedService (..)
     , P.HasComputedServiceId (..)
+    , P.HasComputedSession (..)
+    , P.HasComputedStoredToken (..)
+    , P.HasComputedSubkeys (..)
     , P.HasComputedTags (..)
+    , P.HasComputedTemplate (..)
+    , P.HasComputedToken (..)
 
     -- * Re-exported Types
     , module P
@@ -83,7 +95,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -98,6 +110,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @consul_agent_service@ Consul resource.
@@ -145,11 +158,20 @@ instance P.HasTags (AgentServiceResource s) (TF.Attr s Text) where
         lens (_tags :: AgentServiceResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: AgentServiceResource s)
 
-instance P.HasComputedAddress (AgentServiceResource s) (Text)
-instance P.HasComputedId (AgentServiceResource s) (Text)
-instance P.HasComputedName (AgentServiceResource s) (Text)
-instance P.HasComputedPort (AgentServiceResource s) (Text)
-instance P.HasComputedTags (AgentServiceResource s) (Text)
+instance P.HasComputedAddress (AgentServiceResource s) s (TF.Attr s Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
+
+instance P.HasComputedId (AgentServiceResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (AgentServiceResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPort (AgentServiceResource s) s (TF.Attr s Text) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance P.HasComputedTags (AgentServiceResource s) s (TF.Attr s Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 agentServiceResource :: TF.Schema TF.Resource P.Consul (AgentServiceResource s)
 agentServiceResource =
@@ -214,8 +236,26 @@ instance P.HasToken (CatalogEntryResource s) (TF.Attr s Text) where
         lens (_token :: CatalogEntryResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: CatalogEntryResource s)
 
-instance P.HasComputedAddress (CatalogEntryResource s) (Text)
-instance P.HasComputedNode (CatalogEntryResource s) (Text)
+instance P.HasComputedAddress (CatalogEntryResource s) s (TF.Attr s Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
+
+instance P.HasComputedDatacenter (CatalogEntryResource s) s (TF.Attr s Text) where
+    computedDatacenter =
+        (_datacenter :: CatalogEntryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNode (CatalogEntryResource s) s (TF.Attr s Text) where
+    computedNode x = TF.compute (TF.refKey x) "node"
+
+instance P.HasComputedService (CatalogEntryResource s) s (TF.Attr s Text) where
+    computedService =
+        (_service :: CatalogEntryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedToken (CatalogEntryResource s) s (TF.Attr s Text) where
+    computedToken =
+        (_token :: CatalogEntryResource s -> TF.Attr s Text)
+            . TF.refValue
 
 catalogEntryResource :: TF.Schema TF.Resource P.Consul (CatalogEntryResource s)
 catalogEntryResource =
@@ -286,7 +326,23 @@ instance P.HasToken (KeyPrefixResource s) (TF.Attr s Text) where
         lens (_token :: KeyPrefixResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: KeyPrefixResource s)
 
-instance P.HasComputedDatacenter (KeyPrefixResource s) (Text)
+instance P.HasComputedDatacenter (KeyPrefixResource s) s (TF.Attr s Text) where
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+
+instance P.HasComputedPathPrefix (KeyPrefixResource s) s (TF.Attr s Text) where
+    computedPathPrefix =
+        (_path_prefix :: KeyPrefixResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSubkeys (KeyPrefixResource s) s (TF.Attr s Text) where
+    computedSubkeys =
+        (_subkeys :: KeyPrefixResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedToken (KeyPrefixResource s) s (TF.Attr s Text) where
+    computedToken =
+        (_token :: KeyPrefixResource s -> TF.Attr s Text)
+            . TF.refValue
 
 keyPrefixResource :: TF.Schema TF.Resource P.Consul (KeyPrefixResource s)
 keyPrefixResource =
@@ -340,7 +396,18 @@ instance P.HasToken (KeysResource s) (TF.Attr s Text) where
         lens (_token :: KeysResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: KeysResource s)
 
-instance P.HasComputedDatacenter (KeysResource s) (Text)
+instance P.HasComputedDatacenter (KeysResource s) s (TF.Attr s Text) where
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+
+instance P.HasComputedKey (KeysResource s) s (TF.Attr s Text) where
+    computedKey =
+        (_key :: KeysResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedToken (KeysResource s) s (TF.Attr s Text) where
+    computedToken =
+        (_token :: KeysResource s -> TF.Attr s Text)
+            . TF.refValue
 
 keysResource :: TF.Schema TF.Resource P.Consul (KeysResource s)
 keysResource =
@@ -379,8 +446,11 @@ instance P.HasName (NodeResource s) (TF.Attr s Text) where
         lens (_name :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NodeResource s)
 
-instance P.HasComputedAddress (NodeResource s) (Text)
-instance P.HasComputedName (NodeResource s) (Text)
+instance P.HasComputedAddress (NodeResource s) s (TF.Attr s Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
+
+instance P.HasComputedName (NodeResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
 nodeResource :: TF.Schema TF.Resource P.Consul (NodeResource s)
 nodeResource =
@@ -500,7 +570,68 @@ instance P.HasToken (PreparedQueryResource s) (TF.Attr s Text) where
         lens (_token :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: PreparedQueryResource s)
 
-instance P.HasComputedId (PreparedQueryResource s) (Text)
+instance P.HasComputedDatacenter (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedDatacenter =
+        (_datacenter :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDns (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedDns =
+        (_dns :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFailover (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedFailover =
+        (_failover :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNear (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedNear =
+        (_near :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOnlyPassing (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedOnlyPassing =
+        (_only_passing :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedService (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedService =
+        (_service :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSession (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedSession =
+        (_session :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedStoredToken (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedStoredToken =
+        (_stored_token :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTags (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedTags =
+        (_tags :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTemplate (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedTemplate =
+        (_template :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedToken (PreparedQueryResource s) s (TF.Attr s Text) where
+    computedToken =
+        (_token :: PreparedQueryResource s -> TF.Attr s Text)
+            . TF.refValue
 
 preparedQueryResource :: TF.Schema TF.Resource P.Consul (PreparedQueryResource s)
 preparedQueryResource =
@@ -580,11 +711,20 @@ instance P.HasTags (ServiceResource s) (TF.Attr s Text) where
         lens (_tags :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ServiceResource s)
 
-instance P.HasComputedAddress (ServiceResource s) (Text)
-instance P.HasComputedName (ServiceResource s) (Text)
-instance P.HasComputedPort (ServiceResource s) (Text)
-instance P.HasComputedServiceId (ServiceResource s) (Text)
-instance P.HasComputedTags (ServiceResource s) (Text)
+instance P.HasComputedAddress (ServiceResource s) s (TF.Attr s Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
+
+instance P.HasComputedName (ServiceResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPort (ServiceResource s) s (TF.Attr s Text) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance P.HasComputedServiceId (ServiceResource s) s (TF.Attr s Text) where
+    computedServiceId x = TF.compute (TF.refKey x) "service_id"
+
+instance P.HasComputedTags (ServiceResource s) s (TF.Attr s Text) where
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 serviceResource :: TF.Schema TF.Resource P.Consul (ServiceResource s)
 serviceResource =

@@ -32,6 +32,7 @@ module Terrafomo.Cloudflare.Lens
 
     -- ** Computed Attributes
     , HasComputedCidrBlocks (..)
+    , HasComputedDomain (..)
     , HasComputedHostname (..)
     , HasComputedId (..)
     , HasComputedIpv4CidrBlocks (..)
@@ -47,7 +48,7 @@ module Terrafomo.Cloudflare.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -95,74 +96,41 @@ class HasValue a b | a -> b where
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
-class HasComputedCidrBlocks a b | a -> b where
-    computedCidrBlocks
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCidrBlocks =
-        to (\x -> TF.compute (TF.refKey x) "cidr_blocks")
+class HasComputedCidrBlocks a s b | a -> s b where
+    computedCidrBlocks :: TF.Ref s a -> b
 
-class HasComputedHostname a b | a -> b where
-    computedHostname
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedHostname =
-        to (\x -> TF.compute (TF.refKey x) "hostname")
+class HasComputedDomain a s b | a -> s b where
+    computedDomain :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedHostname a s b | a -> s b where
+    computedHostname :: TF.Ref s a -> b
 
-class HasComputedIpv4CidrBlocks a b | a -> b where
-    computedIpv4CidrBlocks
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpv4CidrBlocks =
-        to (\x -> TF.compute (TF.refKey x) "ipv4_cidr_blocks")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
 
-class HasComputedIpv6CidrBlocks a b | a -> b where
-    computedIpv6CidrBlocks
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIpv6CidrBlocks =
-        to (\x -> TF.compute (TF.refKey x) "ipv6_cidr_blocks")
+class HasComputedIpv4CidrBlocks a s b | a -> s b where
+    computedIpv4CidrBlocks :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedIpv6CidrBlocks a s b | a -> s b where
+    computedIpv6CidrBlocks :: TF.Ref s a -> b
 
-class HasComputedPriority a b | a -> b where
-    computedPriority
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPriority =
-        to (\x -> TF.compute (TF.refKey x) "priority")
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
 
-class HasComputedProxied a b | a -> b where
-    computedProxied
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedProxied =
-        to (\x -> TF.compute (TF.refKey x) "proxied")
+class HasComputedPriority a s b | a -> s b where
+    computedPriority :: TF.Ref s a -> b
 
-class HasComputedTtl a b | a -> b where
-    computedTtl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTtl =
-        to (\x -> TF.compute (TF.refKey x) "ttl")
+class HasComputedProxied a s b | a -> s b where
+    computedProxied :: TF.Ref s a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
 
-class HasComputedValue a b | a -> b where
-    computedValue
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedValue =
-        to (\x -> TF.compute (TF.refKey x) "value")
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
 
-class HasComputedZoneId a b | a -> b where
-    computedZoneId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedZoneId =
-        to (\x -> TF.compute (TF.refKey x) "zone_id")
+class HasComputedValue a s b | a -> s b where
+    computedValue :: TF.Ref s a -> b
+
+class HasComputedZoneId a s b | a -> s b where
+    computedZoneId :: TF.Ref s a -> b

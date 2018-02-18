@@ -126,16 +126,28 @@ module Terrafomo.Google.DataSource
     , P.HasComputedArchiveSizeBytes (..)
     , P.HasComputedAvailableMemoryMb (..)
     , P.HasComputedBackendService (..)
+    , P.HasComputedBillingAccount (..)
+    , P.HasComputedBinding (..)
+    , P.HasComputedBucket (..)
+    , P.HasComputedCiphertext (..)
     , P.HasComputedCreateTime (..)
     , P.HasComputedCreationTimestamp (..)
+    , P.HasComputedCredentials (..)
+    , P.HasComputedCryptoKey (..)
     , P.HasComputedDescription (..)
+    , P.HasComputedDigest (..)
     , P.HasComputedDirectoryCustomerId (..)
     , P.HasComputedDiskSizeGb (..)
+    , P.HasComputedDisplayName (..)
     , P.HasComputedDnsName (..)
+    , P.HasComputedDomain (..)
+    , P.HasComputedDuration (..)
     , P.HasComputedEntryPoint (..)
     , P.HasComputedFamily' (..)
     , P.HasComputedGatewayAddress (..)
     , P.HasComputedGatewayIpv4 (..)
+    , P.HasComputedHttpMethod (..)
+    , P.HasComputedHttpSslTcpInternal (..)
     , P.HasComputedHttpsTriggerUrl (..)
     , P.HasComputedId (..)
     , P.HasComputedImageEncryptionKeySha256 (..)
@@ -157,11 +169,16 @@ module Terrafomo.Google.DataSource
     , P.HasComputedNamedPort (..)
     , P.HasComputedNames (..)
     , P.HasComputedNetwork (..)
+    , P.HasComputedOpen (..)
+    , P.HasComputedOrganization (..)
+    , P.HasComputedParent (..)
+    , P.HasComputedPath (..)
     , P.HasComputedPlaintext (..)
     , P.HasComputedPolicyData (..)
     , P.HasComputedPortRange (..)
     , P.HasComputedPorts (..)
     , P.HasComputedPrivateIpGoogleAccess (..)
+    , P.HasComputedProject (..)
     , P.HasComputedProjectIds (..)
     , P.HasComputedRegion (..)
     , P.HasComputedRepositoryUrl (..)
@@ -178,6 +195,7 @@ module Terrafomo.Google.DataSource
     , P.HasComputedStatus (..)
     , P.HasComputedSubnetwork (..)
     , P.HasComputedSubnetworksSelfLinks (..)
+    , P.HasComputedTag (..)
     , P.HasComputedTarget (..)
     , P.HasComputedTimeout (..)
     , P.HasComputedTriggerBucket (..)
@@ -185,6 +203,7 @@ module Terrafomo.Google.DataSource
     , P.HasComputedTriggerTopic (..)
     , P.HasComputedValidMasterVersions (..)
     , P.HasComputedValidNodeVersions (..)
+    , P.HasComputedZone (..)
 
     -- * Re-exported Types
     , module P
@@ -194,7 +213,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -209,6 +228,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @google_active_folder@ Google datasource.
@@ -238,7 +258,18 @@ instance P.HasParent (ActiveFolderData s) (TF.Attr s Text) where
         lens (_parent :: ActiveFolderData s -> TF.Attr s Text)
              (\s a -> s { _parent = a } :: ActiveFolderData s)
 
-instance P.HasComputedName (ActiveFolderData s) (Text)
+instance P.HasComputedDisplayName (ActiveFolderData s) s (TF.Attr s Text) where
+    computedDisplayName =
+        (_display_name :: ActiveFolderData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ActiveFolderData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedParent (ActiveFolderData s) s (TF.Attr s Text) where
+    computedParent =
+        (_parent :: ActiveFolderData s -> TF.Attr s Text)
+            . TF.refValue
 
 activeFolderData :: TF.Schema TF.DataSource P.Google (ActiveFolderData s)
 activeFolderData =
@@ -283,9 +314,29 @@ instance P.HasOpen (BillingAccountData s) (TF.Attr s Text) where
         lens (_open :: BillingAccountData s -> TF.Attr s Text)
              (\s a -> s { _open = a } :: BillingAccountData s)
 
-instance P.HasComputedId (BillingAccountData s) (Text)
-instance P.HasComputedName (BillingAccountData s) (Text)
-instance P.HasComputedProjectIds (BillingAccountData s) (Text)
+instance P.HasComputedBillingAccount (BillingAccountData s) s (TF.Attr s Text) where
+    computedBillingAccount =
+        (_billing_account :: BillingAccountData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDisplayName (BillingAccountData s) s (TF.Attr s Text) where
+    computedDisplayName =
+        (_display_name :: BillingAccountData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (BillingAccountData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (BillingAccountData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedOpen (BillingAccountData s) s (TF.Attr s Text) where
+    computedOpen =
+        (_open :: BillingAccountData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProjectIds (BillingAccountData s) s (TF.Attr s Text) where
+    computedProjectIds x = TF.compute (TF.refKey x) "project_ids"
 
 billingAccountData :: TF.Schema TF.DataSource P.Google (BillingAccountData s)
 billingAccountData =
@@ -324,6 +375,15 @@ instance P.HasRegion (ClientConfigData s) (TF.Attr s Text) where
         lens (_region :: ClientConfigData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ClientConfigData s)
 
+instance P.HasComputedProject (ClientConfigData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ClientConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ClientConfigData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ClientConfigData s -> TF.Attr s Text)
+            . TF.refValue
 
 clientConfigData :: TF.Schema TF.DataSource P.Google (ClientConfigData s)
 clientConfigData =
@@ -370,18 +430,51 @@ instance P.HasRegion (CloudfunctionsFunctionData s) (TF.Attr s Text) where
         lens (_region :: CloudfunctionsFunctionData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: CloudfunctionsFunctionData s)
 
-instance P.HasComputedAvailableMemoryMb (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedDescription (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedEntryPoint (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedHttpsTriggerUrl (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedLabels (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedName (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedSourceArchiveBucket (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedSourceArchiveObject (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedTimeout (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedTriggerBucket (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedTriggerHttp (CloudfunctionsFunctionData s) (Text)
-instance P.HasComputedTriggerTopic (CloudfunctionsFunctionData s) (Text)
+instance P.HasComputedAvailableMemoryMb (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedAvailableMemoryMb x = TF.compute (TF.refKey x) "available_memory_mb"
+
+instance P.HasComputedDescription (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedEntryPoint (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedEntryPoint x = TF.compute (TF.refKey x) "entry_point"
+
+instance P.HasComputedHttpsTriggerUrl (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedHttpsTriggerUrl x = TF.compute (TF.refKey x) "https_trigger_url"
+
+instance P.HasComputedLabels (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedLabels x = TF.compute (TF.refKey x) "labels"
+
+instance P.HasComputedName (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedProject (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: CloudfunctionsFunctionData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: CloudfunctionsFunctionData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSourceArchiveBucket (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedSourceArchiveBucket x = TF.compute (TF.refKey x) "source_archive_bucket"
+
+instance P.HasComputedSourceArchiveObject (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedSourceArchiveObject x = TF.compute (TF.refKey x) "source_archive_object"
+
+instance P.HasComputedTimeout (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedTimeout x = TF.compute (TF.refKey x) "timeout"
+
+instance P.HasComputedTriggerBucket (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedTriggerBucket x = TF.compute (TF.refKey x) "trigger_bucket"
+
+instance P.HasComputedTriggerHttp (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedTriggerHttp x = TF.compute (TF.refKey x) "trigger_http"
+
+instance P.HasComputedTriggerTopic (CloudfunctionsFunctionData s) s (TF.Attr s Text) where
+    computedTriggerTopic x = TF.compute (TF.refKey x) "trigger_topic"
 
 cloudfunctionsFunctionData :: TF.Schema TF.DataSource P.Google (CloudfunctionsFunctionData s)
 cloudfunctionsFunctionData =
@@ -430,9 +523,29 @@ instance P.HasRegion (ComputeAddressData s) (TF.Attr s Text) where
         lens (_region :: ComputeAddressData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeAddressData s)
 
-instance P.HasComputedAddress (ComputeAddressData s) (Text)
-instance P.HasComputedSelfLink (ComputeAddressData s) (Text)
-instance P.HasComputedStatus (ComputeAddressData s) (Text)
+instance P.HasComputedAddress (ComputeAddressData s) s (TF.Attr s Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
+
+instance P.HasComputedName (ComputeAddressData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeAddressData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProject (ComputeAddressData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeAddressData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ComputeAddressData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ComputeAddressData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSelfLink (ComputeAddressData s) s (TF.Attr s Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance P.HasComputedStatus (ComputeAddressData s) s (TF.Attr s Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 computeAddressData :: TF.Schema TF.DataSource P.Google (ComputeAddressData s)
 computeAddressData =
@@ -478,18 +591,51 @@ instance P.HasRegion (ComputeForwardingRuleData s) (TF.Attr s Text) where
         lens (_region :: ComputeForwardingRuleData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeForwardingRuleData s)
 
-instance P.HasComputedBackendService (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedDescription (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedIpAddress (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedIpProtocol (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedLoadBalancingScheme (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedNetwork (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedPortRange (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedPorts (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedRegion (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedSelfLink (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedSubnetwork (ComputeForwardingRuleData s) (Text)
-instance P.HasComputedTarget (ComputeForwardingRuleData s) (Text)
+instance P.HasComputedBackendService (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedBackendService x = TF.compute (TF.refKey x) "backend_service"
+
+instance P.HasComputedDescription (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedIpAddress (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+
+instance P.HasComputedIpProtocol (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedIpProtocol x = TF.compute (TF.refKey x) "ip_protocol"
+
+instance P.HasComputedLoadBalancingScheme (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedLoadBalancingScheme x = TF.compute (TF.refKey x) "load_balancing_scheme"
+
+instance P.HasComputedName (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeForwardingRuleData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetwork (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedPortRange (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedPortRange x = TF.compute (TF.refKey x) "port_range"
+
+instance P.HasComputedPorts (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedPorts x = TF.compute (TF.refKey x) "ports"
+
+instance P.HasComputedProject (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeForwardingRuleData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance P.HasComputedSelfLink (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance P.HasComputedSubnetwork (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedSubnetwork x = TF.compute (TF.refKey x) "subnetwork"
+
+instance P.HasComputedTarget (ComputeForwardingRuleData s) s (TF.Attr s Text) where
+    computedTarget x = TF.compute (TF.refKey x) "target"
 
 computeForwardingRuleData :: TF.Schema TF.DataSource P.Google (ComputeForwardingRuleData s)
 computeForwardingRuleData =
@@ -531,9 +677,24 @@ instance P.HasProject (ComputeGlobalAddressData s) (TF.Attr s Text) where
         lens (_project :: ComputeGlobalAddressData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeGlobalAddressData s)
 
-instance P.HasComputedAddress (ComputeGlobalAddressData s) (Text)
-instance P.HasComputedSelfLink (ComputeGlobalAddressData s) (Text)
-instance P.HasComputedStatus (ComputeGlobalAddressData s) (Text)
+instance P.HasComputedAddress (ComputeGlobalAddressData s) s (TF.Attr s Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
+
+instance P.HasComputedName (ComputeGlobalAddressData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeGlobalAddressData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProject (ComputeGlobalAddressData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeGlobalAddressData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSelfLink (ComputeGlobalAddressData s) s (TF.Attr s Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance P.HasComputedStatus (ComputeGlobalAddressData s) s (TF.Attr s Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 computeGlobalAddressData :: TF.Schema TF.DataSource P.Google (ComputeGlobalAddressData s)
 computeGlobalAddressData =
@@ -577,23 +738,61 @@ instance P.HasProject (ComputeImageData s) (TF.Attr s Text) where
         lens (_project :: ComputeImageData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeImageData s)
 
-instance P.HasComputedArchiveSizeBytes (ComputeImageData s) (Text)
-instance P.HasComputedCreationTimestamp (ComputeImageData s) (Text)
-instance P.HasComputedDescription (ComputeImageData s) (Text)
-instance P.HasComputedDiskSizeGb (ComputeImageData s) (Text)
-instance P.HasComputedFamily' (ComputeImageData s) (Text)
-instance P.HasComputedImageEncryptionKeySha256 (ComputeImageData s) (Text)
-instance P.HasComputedImageId (ComputeImageData s) (Text)
-instance P.HasComputedLabelFingerprint (ComputeImageData s) (Text)
-instance P.HasComputedLabels (ComputeImageData s) (Text)
-instance P.HasComputedLicenses (ComputeImageData s) (Text)
-instance P.HasComputedName (ComputeImageData s) (Text)
-instance P.HasComputedSelfLink (ComputeImageData s) (Text)
-instance P.HasComputedSourceDisk (ComputeImageData s) (Text)
-instance P.HasComputedSourceDiskEncryptionKeySha256 (ComputeImageData s) (Text)
-instance P.HasComputedSourceDiskId (ComputeImageData s) (Text)
-instance P.HasComputedSourceImageId (ComputeImageData s) (Text)
-instance P.HasComputedStatus (ComputeImageData s) (Text)
+instance P.HasComputedArchiveSizeBytes (ComputeImageData s) s (TF.Attr s Text) where
+    computedArchiveSizeBytes x = TF.compute (TF.refKey x) "archive_size_bytes"
+
+instance P.HasComputedCreationTimestamp (ComputeImageData s) s (TF.Attr s Text) where
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
+
+instance P.HasComputedDescription (ComputeImageData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedDiskSizeGb (ComputeImageData s) s (TF.Attr s Text) where
+    computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
+
+instance P.HasComputedFamily' (ComputeImageData s) s (TF.Attr s Text) where
+    computedFamily' x = TF.compute (TF.refKey x) "family"
+
+instance P.HasComputedImageEncryptionKeySha256 (ComputeImageData s) s (TF.Attr s Text) where
+    computedImageEncryptionKeySha256 x = TF.compute (TF.refKey x) "image_encryption_key_sha256"
+
+instance P.HasComputedImageId (ComputeImageData s) s (TF.Attr s Text) where
+    computedImageId x = TF.compute (TF.refKey x) "image_id"
+
+instance P.HasComputedLabelFingerprint (ComputeImageData s) s (TF.Attr s Text) where
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
+
+instance P.HasComputedLabels (ComputeImageData s) s (TF.Attr s Text) where
+    computedLabels x = TF.compute (TF.refKey x) "labels"
+
+instance P.HasComputedLicenses (ComputeImageData s) s (TF.Attr s Text) where
+    computedLicenses x = TF.compute (TF.refKey x) "licenses"
+
+instance P.HasComputedName (ComputeImageData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedProject (ComputeImageData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSelfLink (ComputeImageData s) s (TF.Attr s Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance P.HasComputedSourceDisk (ComputeImageData s) s (TF.Attr s Text) where
+    computedSourceDisk x = TF.compute (TF.refKey x) "source_disk"
+
+instance P.HasComputedSourceDiskEncryptionKeySha256 (ComputeImageData s) s (TF.Attr s Text) where
+    computedSourceDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "source_disk_encryption_key_sha256"
+
+instance P.HasComputedSourceDiskId (ComputeImageData s) s (TF.Attr s Text) where
+    computedSourceDiskId x = TF.compute (TF.refKey x) "source_disk_id"
+
+instance P.HasComputedSourceImageId (ComputeImageData s) s (TF.Attr s Text) where
+    computedSourceImageId x = TF.compute (TF.refKey x) "source_image_id"
+
+instance P.HasComputedStatus (ComputeImageData s) s (TF.Attr s Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 computeImageData :: TF.Schema TF.DataSource P.Google (ComputeImageData s)
 computeImageData =
@@ -640,12 +839,38 @@ instance P.HasZone (ComputeInstanceGroupData s) (TF.Attr s Text) where
         lens (_zone :: ComputeInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ComputeInstanceGroupData s)
 
-instance P.HasComputedDescription (ComputeInstanceGroupData s) (Text)
-instance P.HasComputedInstances (ComputeInstanceGroupData s) (Text)
-instance P.HasComputedNamedPort (ComputeInstanceGroupData s) (Text)
-instance P.HasComputedNetwork (ComputeInstanceGroupData s) (Text)
-instance P.HasComputedSelfLink (ComputeInstanceGroupData s) (Text)
-instance P.HasComputedSize (ComputeInstanceGroupData s) (Text)
+instance P.HasComputedDescription (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedInstances (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedInstances x = TF.compute (TF.refKey x) "instances"
+
+instance P.HasComputedName (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeInstanceGroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNamedPort (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedNamedPort x = TF.compute (TF.refKey x) "named_port"
+
+instance P.HasComputedNetwork (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedProject (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeInstanceGroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSelfLink (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance P.HasComputedSize (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedSize x = TF.compute (TF.refKey x) "size"
+
+instance P.HasComputedZone (ComputeInstanceGroupData s) s (TF.Attr s Text) where
+    computedZone =
+        (_zone :: ComputeInstanceGroupData s -> TF.Attr s Text)
+            . TF.refValue
 
 computeInstanceGroupData :: TF.Schema TF.DataSource P.Google (ComputeInstanceGroupData s)
 computeInstanceGroupData =
@@ -684,6 +909,15 @@ instance P.HasNetwork (ComputeLbIpRangesData s) (TF.Attr s Text) where
         lens (_network :: ComputeLbIpRangesData s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeLbIpRangesData s)
 
+instance P.HasComputedHttpSslTcpInternal (ComputeLbIpRangesData s) s (TF.Attr s Text) where
+    computedHttpSslTcpInternal =
+        (_http_ssl_tcp_internal :: ComputeLbIpRangesData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetwork (ComputeLbIpRangesData s) s (TF.Attr s Text) where
+    computedNetwork =
+        (_network :: ComputeLbIpRangesData s -> TF.Attr s Text)
+            . TF.refValue
 
 computeLbIpRangesData :: TF.Schema TF.DataSource P.Google (ComputeLbIpRangesData s)
 computeLbIpRangesData =
@@ -720,11 +954,30 @@ instance P.HasProject (ComputeNetworkData s) (TF.Attr s Text) where
         lens (_project :: ComputeNetworkData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: ComputeNetworkData s)
 
-instance P.HasComputedDescription (ComputeNetworkData s) (Text)
-instance P.HasComputedGatewayIpv4 (ComputeNetworkData s) (Text)
-instance P.HasComputedNetwork (ComputeNetworkData s) (Text)
-instance P.HasComputedSelfLink (ComputeNetworkData s) (Text)
-instance P.HasComputedSubnetworksSelfLinks (ComputeNetworkData s) (Text)
+instance P.HasComputedDescription (ComputeNetworkData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedGatewayIpv4 (ComputeNetworkData s) s (TF.Attr s Text) where
+    computedGatewayIpv4 x = TF.compute (TF.refKey x) "gateway_ipv4"
+
+instance P.HasComputedName (ComputeNetworkData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeNetworkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetwork (ComputeNetworkData s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedProject (ComputeNetworkData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeNetworkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSelfLink (ComputeNetworkData s) s (TF.Attr s Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+
+instance P.HasComputedSubnetworksSelfLinks (ComputeNetworkData s) s (TF.Attr s Text) where
+    computedSubnetworksSelfLinks x = TF.compute (TF.refKey x) "subnetworks_self_links"
 
 computeNetworkData :: TF.Schema TF.DataSource P.Google (ComputeNetworkData s)
 computeNetworkData =
@@ -781,8 +1034,31 @@ instance P.HasSelfLink (ComputeRegionInstanceGroupData s) (TF.Attr s Text) where
         lens (_self_link :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
              (\s a -> s { _self_link = a } :: ComputeRegionInstanceGroupData s)
 
-instance P.HasComputedInstances (ComputeRegionInstanceGroupData s) (Text)
-instance P.HasComputedSize (ComputeRegionInstanceGroupData s) (Text)
+instance P.HasComputedInstances (ComputeRegionInstanceGroupData s) s (TF.Attr s Text) where
+    computedInstances x = TF.compute (TF.refKey x) "instances"
+
+instance P.HasComputedName (ComputeRegionInstanceGroupData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProject (ComputeRegionInstanceGroupData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ComputeRegionInstanceGroupData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSelfLink (ComputeRegionInstanceGroupData s) s (TF.Attr s Text) where
+    computedSelfLink =
+        (_self_link :: ComputeRegionInstanceGroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSize (ComputeRegionInstanceGroupData s) s (TF.Attr s Text) where
+    computedSize x = TF.compute (TF.refKey x) "size"
 
 computeRegionInstanceGroupData :: TF.Schema TF.DataSource P.Google (ComputeRegionInstanceGroupData s)
 computeRegionInstanceGroupData =
@@ -829,13 +1105,41 @@ instance P.HasRegion (ComputeSubnetworkData s) (TF.Attr s Text) where
         lens (_region :: ComputeSubnetworkData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeSubnetworkData s)
 
-instance P.HasComputedDescription (ComputeSubnetworkData s) (Text)
-instance P.HasComputedGatewayAddress (ComputeSubnetworkData s) (Text)
-instance P.HasComputedIpCidrRange (ComputeSubnetworkData s) (Text)
-instance P.HasComputedNetwork (ComputeSubnetworkData s) (Text)
-instance P.HasComputedPrivateIpGoogleAccess (ComputeSubnetworkData s) (Text)
-instance P.HasComputedSecondaryIpRange (ComputeSubnetworkData s) (Text)
-instance P.HasComputedSelfLink (ComputeSubnetworkData s) (Text)
+instance P.HasComputedDescription (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedGatewayAddress (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedGatewayAddress x = TF.compute (TF.refKey x) "gateway_address"
+
+instance P.HasComputedIpCidrRange (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedIpCidrRange x = TF.compute (TF.refKey x) "ip_cidr_range"
+
+instance P.HasComputedName (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeSubnetworkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetwork (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedPrivateIpGoogleAccess (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedPrivateIpGoogleAccess x = TF.compute (TF.refKey x) "private_ip_google_access"
+
+instance P.HasComputedProject (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeSubnetworkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ComputeSubnetworkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSecondaryIpRange (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedSecondaryIpRange x = TF.compute (TF.refKey x) "secondary_ip_range"
+
+instance P.HasComputedSelfLink (ComputeSubnetworkData s) s (TF.Attr s Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 computeSubnetworkData :: TF.Schema TF.DataSource P.Google (ComputeSubnetworkData s)
 computeSubnetworkData =
@@ -881,10 +1185,27 @@ instance P.HasRegion (ComputeVpnGatewayData s) (TF.Attr s Text) where
         lens (_region :: ComputeVpnGatewayData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeVpnGatewayData s)
 
-instance P.HasComputedDescription (ComputeVpnGatewayData s) (Text)
-instance P.HasComputedNetwork (ComputeVpnGatewayData s) (Text)
-instance P.HasComputedRegion (ComputeVpnGatewayData s) (Text)
-instance P.HasComputedSelfLink (ComputeVpnGatewayData s) (Text)
+instance P.HasComputedDescription (ComputeVpnGatewayData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedName (ComputeVpnGatewayData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ComputeVpnGatewayData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetwork (ComputeVpnGatewayData s) s (TF.Attr s Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance P.HasComputedProject (ComputeVpnGatewayData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ComputeVpnGatewayData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ComputeVpnGatewayData s) s (TF.Attr s Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance P.HasComputedSelfLink (ComputeVpnGatewayData s) s (TF.Attr s Text) where
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 computeVpnGatewayData :: TF.Schema TF.DataSource P.Google (ComputeVpnGatewayData s)
 computeVpnGatewayData =
@@ -925,7 +1246,18 @@ instance P.HasStatus (ComputeZonesData s) (TF.Attr s Text) where
         lens (_status :: ComputeZonesData s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: ComputeZonesData s)
 
-instance P.HasComputedNames (ComputeZonesData s) (Text)
+instance P.HasComputedNames (ComputeZonesData s) s (TF.Attr s Text) where
+    computedNames x = TF.compute (TF.refKey x) "names"
+
+instance P.HasComputedRegion (ComputeZonesData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ComputeZonesData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedStatus (ComputeZonesData s) s (TF.Attr s Text) where
+    computedStatus =
+        (_status :: ComputeZonesData s -> TF.Attr s Text)
+            . TF.refValue
 
 computeZonesData :: TF.Schema TF.DataSource P.Google (ComputeZonesData s)
 computeZonesData =
@@ -970,6 +1302,20 @@ instance P.HasZone (ContainerClusterData s) (TF.Attr s Text) where
         lens (_zone :: ContainerClusterData s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ContainerClusterData s)
 
+instance P.HasComputedName (ContainerClusterData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ContainerClusterData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProject (ContainerClusterData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ContainerClusterData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedZone (ContainerClusterData s) s (TF.Attr s Text) where
+    computedZone =
+        (_zone :: ContainerClusterData s -> TF.Attr s Text)
+            . TF.refValue
 
 containerClusterData :: TF.Schema TF.DataSource P.Google (ContainerClusterData s)
 containerClusterData =
@@ -1008,10 +1354,27 @@ instance P.HasZone (ContainerEngineVersionsData s) (TF.Attr s Text) where
         lens (_zone :: ContainerEngineVersionsData s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
 
-instance P.HasComputedLatestMasterVersion (ContainerEngineVersionsData s) (Text)
-instance P.HasComputedLatestNodeVersion (ContainerEngineVersionsData s) (Text)
-instance P.HasComputedValidMasterVersions (ContainerEngineVersionsData s) (Text)
-instance P.HasComputedValidNodeVersions (ContainerEngineVersionsData s) (Text)
+instance P.HasComputedLatestMasterVersion (ContainerEngineVersionsData s) s (TF.Attr s Text) where
+    computedLatestMasterVersion x = TF.compute (TF.refKey x) "latest_master_version"
+
+instance P.HasComputedLatestNodeVersion (ContainerEngineVersionsData s) s (TF.Attr s Text) where
+    computedLatestNodeVersion x = TF.compute (TF.refKey x) "latest_node_version"
+
+instance P.HasComputedProject (ContainerEngineVersionsData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ContainerEngineVersionsData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedValidMasterVersions (ContainerEngineVersionsData s) s (TF.Attr s Text) where
+    computedValidMasterVersions x = TF.compute (TF.refKey x) "valid_master_versions"
+
+instance P.HasComputedValidNodeVersions (ContainerEngineVersionsData s) s (TF.Attr s Text) where
+    computedValidNodeVersions x = TF.compute (TF.refKey x) "valid_node_versions"
+
+instance P.HasComputedZone (ContainerEngineVersionsData s) s (TF.Attr s Text) where
+    computedZone =
+        (_zone :: ContainerEngineVersionsData s -> TF.Attr s Text)
+            . TF.refValue
 
 containerEngineVersionsData :: TF.Schema TF.DataSource P.Google (ContainerEngineVersionsData s)
 containerEngineVersionsData =
@@ -1076,7 +1439,33 @@ instance P.HasTag (ContainerRegistryImageData s) (TF.Attr s Text) where
         lens (_tag :: ContainerRegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _tag = a } :: ContainerRegistryImageData s)
 
-instance P.HasComputedImageUrl (ContainerRegistryImageData s) (Text)
+instance P.HasComputedDigest (ContainerRegistryImageData s) s (TF.Attr s Text) where
+    computedDigest =
+        (_digest :: ContainerRegistryImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedImageUrl (ContainerRegistryImageData s) s (TF.Attr s Text) where
+    computedImageUrl x = TF.compute (TF.refKey x) "image_url"
+
+instance P.HasComputedName (ContainerRegistryImageData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ContainerRegistryImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProject (ContainerRegistryImageData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ContainerRegistryImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ContainerRegistryImageData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ContainerRegistryImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTag (ContainerRegistryImageData s) s (TF.Attr s Text) where
+    computedTag =
+        (_tag :: ContainerRegistryImageData s -> TF.Attr s Text)
+            . TF.refValue
 
 containerRegistryImageData :: TF.Schema TF.DataSource P.Google (ContainerRegistryImageData s)
 containerRegistryImageData =
@@ -1120,7 +1509,18 @@ instance P.HasRegion (ContainerRegistryRepositoryData s) (TF.Attr s Text) where
         lens (_region :: ContainerRegistryRepositoryData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ContainerRegistryRepositoryData s)
 
-instance P.HasComputedRepositoryUrl (ContainerRegistryRepositoryData s) (Text)
+instance P.HasComputedProject (ContainerRegistryRepositoryData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: ContainerRegistryRepositoryData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRegion (ContainerRegistryRepositoryData s) s (TF.Attr s Text) where
+    computedRegion =
+        (_region :: ContainerRegistryRepositoryData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepositoryUrl (ContainerRegistryRepositoryData s) s (TF.Attr s Text) where
+    computedRepositoryUrl x = TF.compute (TF.refKey x) "repository_url"
 
 containerRegistryRepositoryData :: TF.Schema TF.DataSource P.Google (ContainerRegistryRepositoryData s)
 containerRegistryRepositoryData =
@@ -1159,9 +1559,24 @@ instance P.HasProject (DnsManagedZoneData s) (TF.Attr s Text) where
         lens (_project :: DnsManagedZoneData s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DnsManagedZoneData s)
 
-instance P.HasComputedDescription (DnsManagedZoneData s) (Text)
-instance P.HasComputedDnsName (DnsManagedZoneData s) (Text)
-instance P.HasComputedNameServers (DnsManagedZoneData s) (Text)
+instance P.HasComputedDescription (DnsManagedZoneData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedDnsName (DnsManagedZoneData s) s (TF.Attr s Text) where
+    computedDnsName x = TF.compute (TF.refKey x) "dns_name"
+
+instance P.HasComputedName (DnsManagedZoneData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: DnsManagedZoneData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNameServers (DnsManagedZoneData s) s (TF.Attr s Text) where
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
+
+instance P.HasComputedProject (DnsManagedZoneData s) s (TF.Attr s Text) where
+    computedProject =
+        (_project :: DnsManagedZoneData s -> TF.Attr s Text)
+            . TF.refValue
 
 dnsManagedZoneData :: TF.Schema TF.DataSource P.Google (DnsManagedZoneData s)
 dnsManagedZoneData =
@@ -1192,7 +1607,13 @@ instance P.HasBinding (IamPolicyData s) (TF.Attr s Text) where
         lens (_binding :: IamPolicyData s -> TF.Attr s Text)
              (\s a -> s { _binding = a } :: IamPolicyData s)
 
-instance P.HasComputedPolicyData (IamPolicyData s) (Text)
+instance P.HasComputedBinding (IamPolicyData s) s (TF.Attr s Text) where
+    computedBinding =
+        (_binding :: IamPolicyData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPolicyData (IamPolicyData s) s (TF.Attr s Text) where
+    computedPolicyData x = TF.compute (TF.refKey x) "policy_data"
 
 iamPolicyData :: TF.Schema TF.DataSource P.Google (IamPolicyData s)
 iamPolicyData =
@@ -1234,7 +1655,18 @@ instance P.HasCryptoKey (KmsSecretData s) (TF.Attr s Text) where
         lens (_crypto_key :: KmsSecretData s -> TF.Attr s Text)
              (\s a -> s { _crypto_key = a } :: KmsSecretData s)
 
-instance P.HasComputedPlaintext (KmsSecretData s) (Text)
+instance P.HasComputedCiphertext (KmsSecretData s) s (TF.Attr s Text) where
+    computedCiphertext =
+        (_ciphertext :: KmsSecretData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCryptoKey (KmsSecretData s) s (TF.Attr s Text) where
+    computedCryptoKey =
+        (_crypto_key :: KmsSecretData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPlaintext (KmsSecretData s) s (TF.Attr s Text) where
+    computedPlaintext x = TF.compute (TF.refKey x) "plaintext"
 
 kmsSecretData :: TF.Schema TF.DataSource P.Google (KmsSecretData s)
 kmsSecretData =
@@ -1271,11 +1703,30 @@ instance P.HasOrganization (OrganizationData s) (TF.Attr s Text) where
         lens (_organization :: OrganizationData s -> TF.Attr s Text)
              (\s a -> s { _organization = a } :: OrganizationData s)
 
-instance P.HasComputedCreateTime (OrganizationData s) (Text)
-instance P.HasComputedDirectoryCustomerId (OrganizationData s) (Text)
-instance P.HasComputedId (OrganizationData s) (Text)
-instance P.HasComputedLifecycleState (OrganizationData s) (Text)
-instance P.HasComputedName (OrganizationData s) (Text)
+instance P.HasComputedCreateTime (OrganizationData s) s (TF.Attr s Text) where
+    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+
+instance P.HasComputedDirectoryCustomerId (OrganizationData s) s (TF.Attr s Text) where
+    computedDirectoryCustomerId x = TF.compute (TF.refKey x) "directory_customer_id"
+
+instance P.HasComputedDomain (OrganizationData s) s (TF.Attr s Text) where
+    computedDomain =
+        (_domain :: OrganizationData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (OrganizationData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLifecycleState (OrganizationData s) s (TF.Attr s Text) where
+    computedLifecycleState x = TF.compute (TF.refKey x) "lifecycle_state"
+
+instance P.HasComputedName (OrganizationData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedOrganization (OrganizationData s) s (TF.Attr s Text) where
+    computedOrganization =
+        (_organization :: OrganizationData s -> TF.Attr s Text)
+            . TF.refValue
 
 organizationData :: TF.Schema TF.DataSource P.Google (OrganizationData s)
 organizationData =
@@ -1340,7 +1791,33 @@ instance P.HasPath (StorageObjectSignedUrlData s) (TF.Attr s Text) where
         lens (_path :: StorageObjectSignedUrlData s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: StorageObjectSignedUrlData s)
 
-instance P.HasComputedSignedUrl (StorageObjectSignedUrlData s) (Text)
+instance P.HasComputedBucket (StorageObjectSignedUrlData s) s (TF.Attr s Text) where
+    computedBucket =
+        (_bucket :: StorageObjectSignedUrlData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedCredentials (StorageObjectSignedUrlData s) s (TF.Attr s Text) where
+    computedCredentials =
+        (_credentials :: StorageObjectSignedUrlData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDuration (StorageObjectSignedUrlData s) s (TF.Attr s Text) where
+    computedDuration =
+        (_duration :: StorageObjectSignedUrlData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHttpMethod (StorageObjectSignedUrlData s) s (TF.Attr s Text) where
+    computedHttpMethod =
+        (_http_method :: StorageObjectSignedUrlData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPath (StorageObjectSignedUrlData s) s (TF.Attr s Text) where
+    computedPath =
+        (_path :: StorageObjectSignedUrlData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSignedUrl (StorageObjectSignedUrlData s) s (TF.Attr s Text) where
+    computedSignedUrl x = TF.compute (TF.refKey x) "signed_url"
 
 storageObjectSignedUrlData :: TF.Schema TF.DataSource P.Google (StorageObjectSignedUrlData s)
 storageObjectSignedUrlData =

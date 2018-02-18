@@ -75,32 +75,78 @@ module Terrafomo.Circonus.Lens
     , HasVictorops (..)
 
     -- ** Computed Attributes
+    , HasComputedActive (..)
     , HasComputedAddress1 (..)
     , HasComputedAddress2 (..)
+    , HasComputedAggregationWindow (..)
+    , HasComputedAlertOption (..)
+    , HasComputedCaql (..)
     , HasComputedCcEmail (..)
+    , HasComputedCheck (..)
     , HasComputedCity (..)
+    , HasComputedCloudwatch (..)
+    , HasComputedCollector (..)
+    , HasComputedConsul (..)
     , HasComputedContactGroups (..)
     , HasComputedCountry (..)
+    , HasComputedCurrent (..)
     , HasComputedDescription (..)
     , HasComputedDetails (..)
+    , HasComputedEmail (..)
+    , HasComputedGraphStyle (..)
+    , HasComputedHttp (..)
+    , HasComputedHttptrap (..)
+    , HasComputedIcmpPing (..)
     , HasComputedId (..)
+    , HasComputedIf' (..)
     , HasComputedInvites (..)
+    , HasComputedIrc (..)
+    , HasComputedJson (..)
     , HasComputedLatitude (..)
+    , HasComputedLeft (..)
+    , HasComputedLineStyle (..)
+    , HasComputedLink (..)
+    , HasComputedLongMessage (..)
+    , HasComputedLongSubject (..)
+    , HasComputedLongSummary (..)
     , HasComputedLongitude (..)
+    , HasComputedMetric (..)
+    , HasComputedMetricCluster (..)
+    , HasComputedMetricLimit (..)
+    , HasComputedMetricName (..)
+    , HasComputedMetricType (..)
+    , HasComputedMysql (..)
     , HasComputedName (..)
+    , HasComputedNotes (..)
     , HasComputedOwner (..)
+    , HasComputedPagerDuty (..)
+    , HasComputedParent (..)
+    , HasComputedPeriod (..)
+    , HasComputedPostgresql (..)
+    , HasComputedQuery (..)
+    , HasComputedRight (..)
+    , HasComputedShortMessage (..)
+    , HasComputedShortSummary (..)
+    , HasComputedSlack (..)
+    , HasComputedSms (..)
     , HasComputedState (..)
+    , HasComputedStatsd (..)
     , HasComputedTags (..)
+    , HasComputedTarget (..)
+    , HasComputedTcp (..)
+    , HasComputedTimeout (..)
     , HasComputedTimezone (..)
     , HasComputedType' (..)
     , HasComputedUiBaseUrl (..)
+    , HasComputedUnit (..)
     , HasComputedUsage (..)
     , HasComputedUsers (..)
+    , HasComputedVictorops (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -412,128 +458,203 @@ class HasVictorops a b | a -> b where
 instance HasVictorops a b => HasVictorops (TF.Schema l p a) b where
     victorops = TF.configuration . victorops
 
-class HasComputedAddress1 a b | a -> b where
-    computedAddress1
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAddress1 =
-        to (\x -> TF.compute (TF.refKey x) "address1")
+class HasComputedActive a s b | a -> s b where
+    computedActive :: TF.Ref s a -> b
 
-class HasComputedAddress2 a b | a -> b where
-    computedAddress2
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAddress2 =
-        to (\x -> TF.compute (TF.refKey x) "address2")
+class HasComputedAddress1 a s b | a -> s b where
+    computedAddress1 :: TF.Ref s a -> b
 
-class HasComputedCcEmail a b | a -> b where
-    computedCcEmail
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCcEmail =
-        to (\x -> TF.compute (TF.refKey x) "cc_email")
+class HasComputedAddress2 a s b | a -> s b where
+    computedAddress2 :: TF.Ref s a -> b
 
-class HasComputedCity a b | a -> b where
-    computedCity
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCity =
-        to (\x -> TF.compute (TF.refKey x) "city")
+class HasComputedAggregationWindow a s b | a -> s b where
+    computedAggregationWindow :: TF.Ref s a -> b
 
-class HasComputedContactGroups a b | a -> b where
-    computedContactGroups
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedContactGroups =
-        to (\x -> TF.compute (TF.refKey x) "contact_groups")
+class HasComputedAlertOption a s b | a -> s b where
+    computedAlertOption :: TF.Ref s a -> b
 
-class HasComputedCountry a b | a -> b where
-    computedCountry
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCountry =
-        to (\x -> TF.compute (TF.refKey x) "country")
+class HasComputedCaql a s b | a -> s b where
+    computedCaql :: TF.Ref s a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDescription =
-        to (\x -> TF.compute (TF.refKey x) "description")
+class HasComputedCcEmail a s b | a -> s b where
+    computedCcEmail :: TF.Ref s a -> b
 
-class HasComputedDetails a b | a -> b where
-    computedDetails
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDetails =
-        to (\x -> TF.compute (TF.refKey x) "details")
+class HasComputedCheck a s b | a -> s b where
+    computedCheck :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedCity a s b | a -> s b where
+    computedCity :: TF.Ref s a -> b
 
-class HasComputedInvites a b | a -> b where
-    computedInvites
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedInvites =
-        to (\x -> TF.compute (TF.refKey x) "invites")
+class HasComputedCloudwatch a s b | a -> s b where
+    computedCloudwatch :: TF.Ref s a -> b
 
-class HasComputedLatitude a b | a -> b where
-    computedLatitude
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLatitude =
-        to (\x -> TF.compute (TF.refKey x) "latitude")
+class HasComputedCollector a s b | a -> s b where
+    computedCollector :: TF.Ref s a -> b
 
-class HasComputedLongitude a b | a -> b where
-    computedLongitude
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLongitude =
-        to (\x -> TF.compute (TF.refKey x) "longitude")
+class HasComputedConsul a s b | a -> s b where
+    computedConsul :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedContactGroups a s b | a -> s b where
+    computedContactGroups :: TF.Ref s a -> b
 
-class HasComputedOwner a b | a -> b where
-    computedOwner
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedOwner =
-        to (\x -> TF.compute (TF.refKey x) "owner")
+class HasComputedCountry a s b | a -> s b where
+    computedCountry :: TF.Ref s a -> b
 
-class HasComputedState a b | a -> b where
-    computedState
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedState =
-        to (\x -> TF.compute (TF.refKey x) "state")
+class HasComputedCurrent a s b | a -> s b where
+    computedCurrent :: TF.Ref s a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTags =
-        to (\x -> TF.compute (TF.refKey x) "tags")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedTimezone a b | a -> b where
-    computedTimezone
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTimezone =
-        to (\x -> TF.compute (TF.refKey x) "timezone")
+class HasComputedDetails a s b | a -> s b where
+    computedDetails :: TF.Ref s a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
+class HasComputedEmail a s b | a -> s b where
+    computedEmail :: TF.Ref s a -> b
 
-class HasComputedUiBaseUrl a b | a -> b where
-    computedUiBaseUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUiBaseUrl =
-        to (\x -> TF.compute (TF.refKey x) "ui_base_url")
+class HasComputedGraphStyle a s b | a -> s b where
+    computedGraphStyle :: TF.Ref s a -> b
 
-class HasComputedUsage a b | a -> b where
-    computedUsage
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUsage =
-        to (\x -> TF.compute (TF.refKey x) "usage")
+class HasComputedHttp a s b | a -> s b where
+    computedHttp :: TF.Ref s a -> b
 
-class HasComputedUsers a b | a -> b where
-    computedUsers
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUsers =
-        to (\x -> TF.compute (TF.refKey x) "users")
+class HasComputedHttptrap a s b | a -> s b where
+    computedHttptrap :: TF.Ref s a -> b
+
+class HasComputedIcmpPing a s b | a -> s b where
+    computedIcmpPing :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedIf' a s b | a -> s b where
+    computedIf' :: TF.Ref s a -> b
+
+class HasComputedInvites a s b | a -> s b where
+    computedInvites :: TF.Ref s a -> b
+
+class HasComputedIrc a s b | a -> s b where
+    computedIrc :: TF.Ref s a -> b
+
+class HasComputedJson a s b | a -> s b where
+    computedJson :: TF.Ref s a -> b
+
+class HasComputedLatitude a s b | a -> s b where
+    computedLatitude :: TF.Ref s a -> b
+
+class HasComputedLeft a s b | a -> s b where
+    computedLeft :: TF.Ref s a -> b
+
+class HasComputedLineStyle a s b | a -> s b where
+    computedLineStyle :: TF.Ref s a -> b
+
+class HasComputedLink a s b | a -> s b where
+    computedLink :: TF.Ref s a -> b
+
+class HasComputedLongMessage a s b | a -> s b where
+    computedLongMessage :: TF.Ref s a -> b
+
+class HasComputedLongSubject a s b | a -> s b where
+    computedLongSubject :: TF.Ref s a -> b
+
+class HasComputedLongSummary a s b | a -> s b where
+    computedLongSummary :: TF.Ref s a -> b
+
+class HasComputedLongitude a s b | a -> s b where
+    computedLongitude :: TF.Ref s a -> b
+
+class HasComputedMetric a s b | a -> s b where
+    computedMetric :: TF.Ref s a -> b
+
+class HasComputedMetricCluster a s b | a -> s b where
+    computedMetricCluster :: TF.Ref s a -> b
+
+class HasComputedMetricLimit a s b | a -> s b where
+    computedMetricLimit :: TF.Ref s a -> b
+
+class HasComputedMetricName a s b | a -> s b where
+    computedMetricName :: TF.Ref s a -> b
+
+class HasComputedMetricType a s b | a -> s b where
+    computedMetricType :: TF.Ref s a -> b
+
+class HasComputedMysql a s b | a -> s b where
+    computedMysql :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNotes a s b | a -> s b where
+    computedNotes :: TF.Ref s a -> b
+
+class HasComputedOwner a s b | a -> s b where
+    computedOwner :: TF.Ref s a -> b
+
+class HasComputedPagerDuty a s b | a -> s b where
+    computedPagerDuty :: TF.Ref s a -> b
+
+class HasComputedParent a s b | a -> s b where
+    computedParent :: TF.Ref s a -> b
+
+class HasComputedPeriod a s b | a -> s b where
+    computedPeriod :: TF.Ref s a -> b
+
+class HasComputedPostgresql a s b | a -> s b where
+    computedPostgresql :: TF.Ref s a -> b
+
+class HasComputedQuery a s b | a -> s b where
+    computedQuery :: TF.Ref s a -> b
+
+class HasComputedRight a s b | a -> s b where
+    computedRight :: TF.Ref s a -> b
+
+class HasComputedShortMessage a s b | a -> s b where
+    computedShortMessage :: TF.Ref s a -> b
+
+class HasComputedShortSummary a s b | a -> s b where
+    computedShortSummary :: TF.Ref s a -> b
+
+class HasComputedSlack a s b | a -> s b where
+    computedSlack :: TF.Ref s a -> b
+
+class HasComputedSms a s b | a -> s b where
+    computedSms :: TF.Ref s a -> b
+
+class HasComputedState a s b | a -> s b where
+    computedState :: TF.Ref s a -> b
+
+class HasComputedStatsd a s b | a -> s b where
+    computedStatsd :: TF.Ref s a -> b
+
+class HasComputedTags a s b | a -> s b where
+    computedTags :: TF.Ref s a -> b
+
+class HasComputedTarget a s b | a -> s b where
+    computedTarget :: TF.Ref s a -> b
+
+class HasComputedTcp a s b | a -> s b where
+    computedTcp :: TF.Ref s a -> b
+
+class HasComputedTimeout a s b | a -> s b where
+    computedTimeout :: TF.Ref s a -> b
+
+class HasComputedTimezone a s b | a -> s b where
+    computedTimezone :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUiBaseUrl a s b | a -> s b where
+    computedUiBaseUrl :: TF.Ref s a -> b
+
+class HasComputedUnit a s b | a -> s b where
+    computedUnit :: TF.Ref s a -> b
+
+class HasComputedUsage a s b | a -> s b where
+    computedUsage :: TF.Ref s a -> b
+
+class HasComputedUsers a s b | a -> s b where
+    computedUsers :: TF.Ref s a -> b
+
+class HasComputedVictorops a s b | a -> s b where
+    computedVictorops :: TF.Ref s a -> b

@@ -20,17 +20,13 @@ titleName x
 
 safeArgName :: Text -> Text
 safeArgName x =
-    Text.cons '_' . unreserved $
-        case Text.split (== '/') x of
+    Text.cons '_' . unreserved . Text.replace "." "_" $
+        case Text.split (== '/') (fromMaybe x (Text.stripPrefix "_" x)) of
             [] -> x
             xs -> last xs
 
 safeAttrName :: Text -> Text
-safeAttrName x =
-    mappend "_computed_" . unreserved . Text.replace "." "_" $
-        case Text.split (== '/') x of
-            [] -> x
-            xs -> last xs
+safeAttrName = mappend "_computed" . safeArgName
 
 resourceName :: Text -> Text
 resourceName = (<> "Resource") . schemaTypeName

@@ -60,15 +60,51 @@ module Terrafomo.Gitlab.Lens
     , HasWikiPageEvents (..)
 
     -- ** Computed Attributes
+    , HasComputedCanCreateGroup (..)
+    , HasComputedCanPush (..)
+    , HasComputedColor (..)
+    , HasComputedDefaultBranch (..)
+    , HasComputedDescription (..)
+    , HasComputedEmail (..)
+    , HasComputedEnableSslVerification (..)
     , HasComputedHttpUrlToRepo (..)
     , HasComputedId (..)
+    , HasComputedIsAdmin (..)
+    , HasComputedIssuesEnabled (..)
+    , HasComputedIssuesEvents (..)
+    , HasComputedJobEvents (..)
+    , HasComputedKey (..)
+    , HasComputedLfsEnabled (..)
+    , HasComputedMergeRequestsEnabled (..)
+    , HasComputedMergeRequestsEvents (..)
+    , HasComputedName (..)
+    , HasComputedNamespaceId (..)
+    , HasComputedNoteEvents (..)
+    , HasComputedParentId (..)
+    , HasComputedPassword (..)
+    , HasComputedPath (..)
+    , HasComputedPipelineEvents (..)
+    , HasComputedProject (..)
+    , HasComputedProjectsLimit (..)
+    , HasComputedPushEvents (..)
+    , HasComputedRequestAccessEnabled (..)
+    , HasComputedSkipConfirmation (..)
+    , HasComputedSnippetsEnabled (..)
     , HasComputedSshUrlToRepo (..)
+    , HasComputedTagPushEvents (..)
+    , HasComputedTitle (..)
+    , HasComputedToken (..)
+    , HasComputedUrl (..)
+    , HasComputedUsername (..)
+    , HasComputedVisibilityLevel (..)
     , HasComputedWebUrl (..)
+    , HasComputedWikiEnabled (..)
+    , HasComputedWikiPageEvents (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -290,26 +326,122 @@ class HasWikiPageEvents a b | a -> b where
 instance HasWikiPageEvents a b => HasWikiPageEvents (TF.Schema l p a) b where
     wikiPageEvents = TF.configuration . wikiPageEvents
 
-class HasComputedHttpUrlToRepo a b | a -> b where
-    computedHttpUrlToRepo
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedHttpUrlToRepo =
-        to (\x -> TF.compute (TF.refKey x) "http_url_to_repo")
+class HasComputedCanCreateGroup a s b | a -> s b where
+    computedCanCreateGroup :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedCanPush a s b | a -> s b where
+    computedCanPush :: TF.Ref s a -> b
 
-class HasComputedSshUrlToRepo a b | a -> b where
-    computedSshUrlToRepo
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSshUrlToRepo =
-        to (\x -> TF.compute (TF.refKey x) "ssh_url_to_repo")
+class HasComputedColor a s b | a -> s b where
+    computedColor :: TF.Ref s a -> b
 
-class HasComputedWebUrl a b | a -> b where
-    computedWebUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedWebUrl =
-        to (\x -> TF.compute (TF.refKey x) "web_url")
+class HasComputedDefaultBranch a s b | a -> s b where
+    computedDefaultBranch :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedEmail a s b | a -> s b where
+    computedEmail :: TF.Ref s a -> b
+
+class HasComputedEnableSslVerification a s b | a -> s b where
+    computedEnableSslVerification :: TF.Ref s a -> b
+
+class HasComputedHttpUrlToRepo a s b | a -> s b where
+    computedHttpUrlToRepo :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedIsAdmin a s b | a -> s b where
+    computedIsAdmin :: TF.Ref s a -> b
+
+class HasComputedIssuesEnabled a s b | a -> s b where
+    computedIssuesEnabled :: TF.Ref s a -> b
+
+class HasComputedIssuesEvents a s b | a -> s b where
+    computedIssuesEvents :: TF.Ref s a -> b
+
+class HasComputedJobEvents a s b | a -> s b where
+    computedJobEvents :: TF.Ref s a -> b
+
+class HasComputedKey a s b | a -> s b where
+    computedKey :: TF.Ref s a -> b
+
+class HasComputedLfsEnabled a s b | a -> s b where
+    computedLfsEnabled :: TF.Ref s a -> b
+
+class HasComputedMergeRequestsEnabled a s b | a -> s b where
+    computedMergeRequestsEnabled :: TF.Ref s a -> b
+
+class HasComputedMergeRequestsEvents a s b | a -> s b where
+    computedMergeRequestsEvents :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNamespaceId a s b | a -> s b where
+    computedNamespaceId :: TF.Ref s a -> b
+
+class HasComputedNoteEvents a s b | a -> s b where
+    computedNoteEvents :: TF.Ref s a -> b
+
+class HasComputedParentId a s b | a -> s b where
+    computedParentId :: TF.Ref s a -> b
+
+class HasComputedPassword a s b | a -> s b where
+    computedPassword :: TF.Ref s a -> b
+
+class HasComputedPath a s b | a -> s b where
+    computedPath :: TF.Ref s a -> b
+
+class HasComputedPipelineEvents a s b | a -> s b where
+    computedPipelineEvents :: TF.Ref s a -> b
+
+class HasComputedProject a s b | a -> s b where
+    computedProject :: TF.Ref s a -> b
+
+class HasComputedProjectsLimit a s b | a -> s b where
+    computedProjectsLimit :: TF.Ref s a -> b
+
+class HasComputedPushEvents a s b | a -> s b where
+    computedPushEvents :: TF.Ref s a -> b
+
+class HasComputedRequestAccessEnabled a s b | a -> s b where
+    computedRequestAccessEnabled :: TF.Ref s a -> b
+
+class HasComputedSkipConfirmation a s b | a -> s b where
+    computedSkipConfirmation :: TF.Ref s a -> b
+
+class HasComputedSnippetsEnabled a s b | a -> s b where
+    computedSnippetsEnabled :: TF.Ref s a -> b
+
+class HasComputedSshUrlToRepo a s b | a -> s b where
+    computedSshUrlToRepo :: TF.Ref s a -> b
+
+class HasComputedTagPushEvents a s b | a -> s b where
+    computedTagPushEvents :: TF.Ref s a -> b
+
+class HasComputedTitle a s b | a -> s b where
+    computedTitle :: TF.Ref s a -> b
+
+class HasComputedToken a s b | a -> s b where
+    computedToken :: TF.Ref s a -> b
+
+class HasComputedUrl a s b | a -> s b where
+    computedUrl :: TF.Ref s a -> b
+
+class HasComputedUsername a s b | a -> s b where
+    computedUsername :: TF.Ref s a -> b
+
+class HasComputedVisibilityLevel a s b | a -> s b where
+    computedVisibilityLevel :: TF.Ref s a -> b
+
+class HasComputedWebUrl a s b | a -> s b where
+    computedWebUrl :: TF.Ref s a -> b
+
+class HasComputedWikiEnabled a s b | a -> s b where
+    computedWikiEnabled :: TF.Ref s a -> b
+
+class HasComputedWikiPageEvents a s b | a -> s b where
+    computedWikiPageEvents :: TF.Ref s a -> b

@@ -51,6 +51,22 @@ module Terrafomo.Bitbucket.Resource
     , P.HasWebsite (..)
 
     -- ** Computed Attributes
+    , P.HasComputedDescription (..)
+    , P.HasComputedEvents (..)
+    , P.HasComputedForkPolicy (..)
+    , P.HasComputedHasIssues (..)
+    , P.HasComputedHasWiki (..)
+    , P.HasComputedIsPrivate (..)
+    , P.HasComputedLanguage (..)
+    , P.HasComputedName (..)
+    , P.HasComputedOwner (..)
+    , P.HasComputedProjectKey (..)
+    , P.HasComputedRepository (..)
+    , P.HasComputedReviewers (..)
+    , P.HasComputedScm (..)
+    , P.HasComputedSlug (..)
+    , P.HasComputedUrl (..)
+    , P.HasComputedWebsite (..)
 
     -- * Re-exported Types
     , module P
@@ -60,7 +76,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -75,6 +91,7 @@ import qualified Terrafomo.IP                 as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @bitbucket_default_reviewers@ Bitbucket resource.
@@ -112,6 +129,20 @@ instance P.HasReviewers (DefaultReviewersResource s) (TF.Attr s Text) where
         lens (_reviewers :: DefaultReviewersResource s -> TF.Attr s Text)
              (\s a -> s { _reviewers = a } :: DefaultReviewersResource s)
 
+instance P.HasComputedOwner (DefaultReviewersResource s) s (TF.Attr s Text) where
+    computedOwner =
+        (_owner :: DefaultReviewersResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepository (DefaultReviewersResource s) s (TF.Attr s Text) where
+    computedRepository =
+        (_repository :: DefaultReviewersResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedReviewers (DefaultReviewersResource s) s (TF.Attr s Text) where
+    computedReviewers =
+        (_reviewers :: DefaultReviewersResource s -> TF.Attr s Text)
+            . TF.refValue
 
 defaultReviewersResource :: TF.Schema TF.Resource P.Bitbucket (DefaultReviewersResource s)
 defaultReviewersResource =
@@ -174,6 +205,30 @@ instance P.HasUrl (HookResource s) (TF.Attr s Text) where
         lens (_url :: HookResource s -> TF.Attr s Text)
              (\s a -> s { _url = a } :: HookResource s)
 
+instance P.HasComputedDescription (HookResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: HookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEvents (HookResource s) s (TF.Attr s Text) where
+    computedEvents =
+        (_events :: HookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOwner (HookResource s) s (TF.Attr s Text) where
+    computedOwner =
+        (_owner :: HookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRepository (HookResource s) s (TF.Attr s Text) where
+    computedRepository =
+        (_repository :: HookResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUrl (HookResource s) s (TF.Attr s Text) where
+    computedUrl =
+        (_url :: HookResource s -> TF.Attr s Text)
+            . TF.refValue
 
 hookResource :: TF.Schema TF.Resource P.Bitbucket (HookResource s)
 hookResource =
@@ -295,6 +350,65 @@ instance P.HasWebsite (RepositoryResource s) (TF.Attr s Text) where
         lens (_website :: RepositoryResource s -> TF.Attr s Text)
              (\s a -> s { _website = a } :: RepositoryResource s)
 
+instance P.HasComputedDescription (RepositoryResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedForkPolicy (RepositoryResource s) s (TF.Attr s Text) where
+    computedForkPolicy =
+        (_fork_policy :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHasIssues (RepositoryResource s) s (TF.Attr s Text) where
+    computedHasIssues =
+        (_has_issues :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHasWiki (RepositoryResource s) s (TF.Attr s Text) where
+    computedHasWiki =
+        (_has_wiki :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedIsPrivate (RepositoryResource s) s (TF.Attr s Text) where
+    computedIsPrivate =
+        (_is_private :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLanguage (RepositoryResource s) s (TF.Attr s Text) where
+    computedLanguage =
+        (_language :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (RepositoryResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOwner (RepositoryResource s) s (TF.Attr s Text) where
+    computedOwner =
+        (_owner :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProjectKey (RepositoryResource s) s (TF.Attr s Text) where
+    computedProjectKey =
+        (_project_key :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedScm (RepositoryResource s) s (TF.Attr s Text) where
+    computedScm =
+        (_scm :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSlug (RepositoryResource s) s (TF.Attr s Text) where
+    computedSlug =
+        (_slug :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedWebsite (RepositoryResource s) s (TF.Attr s Text) where
+    computedWebsite =
+        (_website :: RepositoryResource s -> TF.Attr s Text)
+            . TF.refValue
 
 repositoryResource :: TF.Schema TF.Resource P.Bitbucket (RepositoryResource s)
 repositoryResource =

@@ -52,7 +52,24 @@ module Terrafomo.Spotinst.Resource
     , P.HasThreshold (..)
 
     -- ** Computed Attributes
+    , P.HasComputedCapacity (..)
+    , P.HasComputedCheck (..)
+    , P.HasComputedDescription (..)
+    , P.HasComputedElasticIps (..)
+    , P.HasComputedEndpoint (..)
+    , P.HasComputedEventType (..)
+    , P.HasComputedFormat (..)
     , P.HasComputedId (..)
+    , P.HasComputedInstanceTypes (..)
+    , P.HasComputedLaunchSpecification (..)
+    , P.HasComputedName (..)
+    , P.HasComputedProduct (..)
+    , P.HasComputedProtocol (..)
+    , P.HasComputedProxy (..)
+    , P.HasComputedResourceId (..)
+    , P.HasComputedStrategy (..)
+    , P.HasComputedTags (..)
+    , P.HasComputedThreshold (..)
 
     -- * Re-exported Types
     , module P
@@ -62,7 +79,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -77,6 +94,7 @@ import           Terrafomo.Spotinst.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @spotinst_aws_group@ Spotinst resource.
@@ -162,7 +180,53 @@ instance P.HasTags (AwsGroupResource s) (TF.Attr s Text) where
         lens (_tags :: AwsGroupResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: AwsGroupResource s)
 
-instance P.HasComputedId (AwsGroupResource s) (Text)
+instance P.HasComputedCapacity (AwsGroupResource s) s (TF.Attr s Text) where
+    computedCapacity =
+        (_capacity :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDescription (AwsGroupResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedElasticIps (AwsGroupResource s) s (TF.Attr s Text) where
+    computedElasticIps =
+        (_elastic_ips :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (AwsGroupResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedInstanceTypes (AwsGroupResource s) s (TF.Attr s Text) where
+    computedInstanceTypes =
+        (_instance_types :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLaunchSpecification (AwsGroupResource s) s (TF.Attr s Text) where
+    computedLaunchSpecification =
+        (_launch_specification :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (AwsGroupResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProduct (AwsGroupResource s) s (TF.Attr s Text) where
+    computedProduct =
+        (_product :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedStrategy (AwsGroupResource s) s (TF.Attr s Text) where
+    computedStrategy =
+        (_strategy :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTags (AwsGroupResource s) s (TF.Attr s Text) where
+    computedTags =
+        (_tags :: AwsGroupResource s -> TF.Attr s Text)
+            . TF.refValue
 
 awsGroupResource :: TF.Schema TF.Resource P.Spotinst (AwsGroupResource s)
 awsGroupResource =
@@ -230,7 +294,33 @@ instance P.HasThreshold (HealthcheckResource s) (TF.Attr s Text) where
         lens (_threshold :: HealthcheckResource s -> TF.Attr s Text)
              (\s a -> s { _threshold = a } :: HealthcheckResource s)
 
-instance P.HasComputedId (HealthcheckResource s) (Text)
+instance P.HasComputedCheck (HealthcheckResource s) s (TF.Attr s Text) where
+    computedCheck =
+        (_check :: HealthcheckResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (HealthcheckResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (HealthcheckResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: HealthcheckResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedProxy (HealthcheckResource s) s (TF.Attr s Text) where
+    computedProxy =
+        (_proxy :: HealthcheckResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedResourceId (HealthcheckResource s) s (TF.Attr s Text) where
+    computedResourceId =
+        (_resource_id :: HealthcheckResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedThreshold (HealthcheckResource s) s (TF.Attr s Text) where
+    computedThreshold =
+        (_threshold :: HealthcheckResource s -> TF.Attr s Text)
+            . TF.refValue
 
 healthcheckResource :: TF.Schema TF.Resource P.Spotinst (HealthcheckResource s)
 healthcheckResource =
@@ -294,7 +384,33 @@ instance P.HasResourceId (SubscriptionResource s) (TF.Attr s Text) where
         lens (_resource_id :: SubscriptionResource s -> TF.Attr s Text)
              (\s a -> s { _resource_id = a } :: SubscriptionResource s)
 
-instance P.HasComputedId (SubscriptionResource s) (Text)
+instance P.HasComputedEndpoint (SubscriptionResource s) s (TF.Attr s Text) where
+    computedEndpoint =
+        (_endpoint :: SubscriptionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEventType (SubscriptionResource s) s (TF.Attr s Text) where
+    computedEventType =
+        (_event_type :: SubscriptionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFormat (SubscriptionResource s) s (TF.Attr s Text) where
+    computedFormat =
+        (_format :: SubscriptionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (SubscriptionResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedProtocol (SubscriptionResource s) s (TF.Attr s Text) where
+    computedProtocol =
+        (_protocol :: SubscriptionResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedResourceId (SubscriptionResource s) s (TF.Attr s Text) where
+    computedResourceId =
+        (_resource_id :: SubscriptionResource s -> TF.Attr s Text)
+            . TF.refValue
 
 subscriptionResource :: TF.Schema TF.Resource P.Spotinst (SubscriptionResource s)
 subscriptionResource =

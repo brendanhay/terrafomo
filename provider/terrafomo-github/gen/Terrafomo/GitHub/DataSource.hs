@@ -55,8 +55,10 @@ module Terrafomo.GitHub.DataSource
     , P.HasComputedPublicGists (..)
     , P.HasComputedPublicRepos (..)
     , P.HasComputedSiteAdmin (..)
+    , P.HasComputedSlug (..)
     , P.HasComputedSshKeys (..)
     , P.HasComputedUpdatedAt (..)
+    , P.HasComputedUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -66,7 +68,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -81,6 +83,7 @@ import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @github_team@ GitHub datasource.
@@ -102,12 +105,28 @@ instance P.HasSlug (TeamData s) (TF.Attr s Text) where
         lens (_slug :: TeamData s -> TF.Attr s Text)
              (\s a -> s { _slug = a } :: TeamData s)
 
-instance P.HasComputedDescription (TeamData s) (Text)
-instance P.HasComputedId (TeamData s) (Text)
-instance P.HasComputedMembers (TeamData s) (Text)
-instance P.HasComputedName (TeamData s) (Text)
-instance P.HasComputedPermission (TeamData s) (Text)
-instance P.HasComputedPrivacy (TeamData s) (Text)
+instance P.HasComputedDescription (TeamData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedId (TeamData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMembers (TeamData s) s (TF.Attr s Text) where
+    computedMembers x = TF.compute (TF.refKey x) "members"
+
+instance P.HasComputedName (TeamData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPermission (TeamData s) s (TF.Attr s Text) where
+    computedPermission x = TF.compute (TF.refKey x) "permission"
+
+instance P.HasComputedPrivacy (TeamData s) s (TF.Attr s Text) where
+    computedPrivacy x = TF.compute (TF.refKey x) "privacy"
+
+instance P.HasComputedSlug (TeamData s) s (TF.Attr s Text) where
+    computedSlug =
+        (_slug :: TeamData s -> TF.Attr s Text)
+            . TF.refValue
 
 teamData :: TF.Schema TF.DataSource P.GitHub (TeamData s)
 teamData =
@@ -135,24 +154,64 @@ instance P.HasUsername (UserData s) (TF.Attr s Text) where
         lens (_username :: UserData s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserData s)
 
-instance P.HasComputedAvatarUrl (UserData s) (Text)
-instance P.HasComputedBio (UserData s) (Text)
-instance P.HasComputedBlog (UserData s) (Text)
-instance P.HasComputedCompany (UserData s) (Text)
-instance P.HasComputedCreatedAt (UserData s) (Text)
-instance P.HasComputedEmail (UserData s) (Text)
-instance P.HasComputedFollowers (UserData s) (Text)
-instance P.HasComputedFollowing (UserData s) (Text)
-instance P.HasComputedGpgKeys (UserData s) (Text)
-instance P.HasComputedGravatarId (UserData s) (Text)
-instance P.HasComputedLocation (UserData s) (Text)
-instance P.HasComputedLogin (UserData s) (Text)
-instance P.HasComputedName (UserData s) (Text)
-instance P.HasComputedPublicGists (UserData s) (Text)
-instance P.HasComputedPublicRepos (UserData s) (Text)
-instance P.HasComputedSiteAdmin (UserData s) (Text)
-instance P.HasComputedSshKeys (UserData s) (Text)
-instance P.HasComputedUpdatedAt (UserData s) (Text)
+instance P.HasComputedAvatarUrl (UserData s) s (TF.Attr s Text) where
+    computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
+
+instance P.HasComputedBio (UserData s) s (TF.Attr s Text) where
+    computedBio x = TF.compute (TF.refKey x) "bio"
+
+instance P.HasComputedBlog (UserData s) s (TF.Attr s Text) where
+    computedBlog x = TF.compute (TF.refKey x) "blog"
+
+instance P.HasComputedCompany (UserData s) s (TF.Attr s Text) where
+    computedCompany x = TF.compute (TF.refKey x) "company"
+
+instance P.HasComputedCreatedAt (UserData s) s (TF.Attr s Text) where
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+
+instance P.HasComputedEmail (UserData s) s (TF.Attr s Text) where
+    computedEmail x = TF.compute (TF.refKey x) "email"
+
+instance P.HasComputedFollowers (UserData s) s (TF.Attr s Text) where
+    computedFollowers x = TF.compute (TF.refKey x) "followers"
+
+instance P.HasComputedFollowing (UserData s) s (TF.Attr s Text) where
+    computedFollowing x = TF.compute (TF.refKey x) "following"
+
+instance P.HasComputedGpgKeys (UserData s) s (TF.Attr s Text) where
+    computedGpgKeys x = TF.compute (TF.refKey x) "gpg_keys"
+
+instance P.HasComputedGravatarId (UserData s) s (TF.Attr s Text) where
+    computedGravatarId x = TF.compute (TF.refKey x) "gravatar_id"
+
+instance P.HasComputedLocation (UserData s) s (TF.Attr s Text) where
+    computedLocation x = TF.compute (TF.refKey x) "location"
+
+instance P.HasComputedLogin (UserData s) s (TF.Attr s Text) where
+    computedLogin x = TF.compute (TF.refKey x) "login"
+
+instance P.HasComputedName (UserData s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPublicGists (UserData s) s (TF.Attr s Text) where
+    computedPublicGists x = TF.compute (TF.refKey x) "public_gists"
+
+instance P.HasComputedPublicRepos (UserData s) s (TF.Attr s Text) where
+    computedPublicRepos x = TF.compute (TF.refKey x) "public_repos"
+
+instance P.HasComputedSiteAdmin (UserData s) s (TF.Attr s Text) where
+    computedSiteAdmin x = TF.compute (TF.refKey x) "site_admin"
+
+instance P.HasComputedSshKeys (UserData s) s (TF.Attr s Text) where
+    computedSshKeys x = TF.compute (TF.refKey x) "ssh_keys"
+
+instance P.HasComputedUpdatedAt (UserData s) s (TF.Attr s Text) where
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+
+instance P.HasComputedUsername (UserData s) s (TF.Attr s Text) where
+    computedUsername =
+        (_username :: UserData s -> TF.Attr s Text)
+            . TF.refValue
 
 userData :: TF.Schema TF.DataSource P.GitHub (UserData s)
 userData =

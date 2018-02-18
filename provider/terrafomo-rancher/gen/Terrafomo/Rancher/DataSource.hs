@@ -41,11 +41,13 @@ module Terrafomo.Rancher.DataSource
     , P.HasComputedCertFingerprint (..)
     , P.HasComputedCn (..)
     , P.HasComputedDescription (..)
+    , P.HasComputedEnvironmentId (..)
     , P.HasComputedExpiresAt (..)
     , P.HasComputedId (..)
     , P.HasComputedIssuedAt (..)
     , P.HasComputedIssuer (..)
     , P.HasComputedMember (..)
+    , P.HasComputedName (..)
     , P.HasComputedOrchestration (..)
     , P.HasComputedProjectTemplateId (..)
     , P.HasComputedSerialNumber (..)
@@ -61,7 +63,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -76,6 +78,7 @@ import           Terrafomo.Rancher.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @rancher_certificate@ Rancher datasource.
@@ -105,16 +108,45 @@ instance P.HasName (CertificateData s) (TF.Attr s Text) where
         lens (_name :: CertificateData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CertificateData s)
 
-instance P.HasComputedAlgorithm (CertificateData s) (Text)
-instance P.HasComputedCertFingerprint (CertificateData s) (Text)
-instance P.HasComputedCn (CertificateData s) (Text)
-instance P.HasComputedExpiresAt (CertificateData s) (Text)
-instance P.HasComputedId (CertificateData s) (Text)
-instance P.HasComputedIssuedAt (CertificateData s) (Text)
-instance P.HasComputedIssuer (CertificateData s) (Text)
-instance P.HasComputedSerialNumber (CertificateData s) (Text)
-instance P.HasComputedSubjectAlternativeNames (CertificateData s) (Text)
-instance P.HasComputedVersion (CertificateData s) (Text)
+instance P.HasComputedAlgorithm (CertificateData s) s (TF.Attr s Text) where
+    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
+
+instance P.HasComputedCertFingerprint (CertificateData s) s (TF.Attr s Text) where
+    computedCertFingerprint x = TF.compute (TF.refKey x) "cert_fingerprint"
+
+instance P.HasComputedCn (CertificateData s) s (TF.Attr s Text) where
+    computedCn x = TF.compute (TF.refKey x) "cn"
+
+instance P.HasComputedEnvironmentId (CertificateData s) s (TF.Attr s Text) where
+    computedEnvironmentId =
+        (_environment_id :: CertificateData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedExpiresAt (CertificateData s) s (TF.Attr s Text) where
+    computedExpiresAt x = TF.compute (TF.refKey x) "expires_at"
+
+instance P.HasComputedId (CertificateData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedIssuedAt (CertificateData s) s (TF.Attr s Text) where
+    computedIssuedAt x = TF.compute (TF.refKey x) "issued_at"
+
+instance P.HasComputedIssuer (CertificateData s) s (TF.Attr s Text) where
+    computedIssuer x = TF.compute (TF.refKey x) "issuer"
+
+instance P.HasComputedName (CertificateData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: CertificateData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSerialNumber (CertificateData s) s (TF.Attr s Text) where
+    computedSerialNumber x = TF.compute (TF.refKey x) "serial_number"
+
+instance P.HasComputedSubjectAlternativeNames (CertificateData s) s (TF.Attr s Text) where
+    computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "subject_alternative_names"
+
+instance P.HasComputedVersion (CertificateData s) s (TF.Attr s Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 certificateData :: TF.Schema TF.DataSource P.Rancher (CertificateData s)
 certificateData =
@@ -143,11 +175,25 @@ instance P.HasName (EnvironmentData s) (TF.Attr s Text) where
         lens (_name :: EnvironmentData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: EnvironmentData s)
 
-instance P.HasComputedDescription (EnvironmentData s) (Text)
-instance P.HasComputedId (EnvironmentData s) (Text)
-instance P.HasComputedMember (EnvironmentData s) (Text)
-instance P.HasComputedOrchestration (EnvironmentData s) (Text)
-instance P.HasComputedProjectTemplateId (EnvironmentData s) (Text)
+instance P.HasComputedDescription (EnvironmentData s) s (TF.Attr s Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance P.HasComputedId (EnvironmentData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMember (EnvironmentData s) s (TF.Attr s Text) where
+    computedMember x = TF.compute (TF.refKey x) "member"
+
+instance P.HasComputedName (EnvironmentData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: EnvironmentData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOrchestration (EnvironmentData s) s (TF.Attr s Text) where
+    computedOrchestration x = TF.compute (TF.refKey x) "orchestration"
+
+instance P.HasComputedProjectTemplateId (EnvironmentData s) s (TF.Attr s Text) where
+    computedProjectTemplateId x = TF.compute (TF.refKey x) "project_template_id"
 
 environmentData :: TF.Schema TF.DataSource P.Rancher (EnvironmentData s)
 environmentData =
@@ -175,7 +221,13 @@ instance P.HasName (SettingData s) (TF.Attr s Text) where
         lens (_name :: SettingData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SettingData s)
 
-instance P.HasComputedValue (SettingData s) (Text)
+instance P.HasComputedName (SettingData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: SettingData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedValue (SettingData s) s (TF.Attr s Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
 
 settingData :: TF.Schema TF.DataSource P.Rancher (SettingData s)
 settingData =

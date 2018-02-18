@@ -87,11 +87,74 @@ module Terrafomo.Cobbler.Lens
     , HasVirtType (..)
 
     -- ** Computed Attributes
+    , HasComputedAptComponents (..)
+    , HasComputedAptDists (..)
+    , HasComputedArch (..)
+    , HasComputedBody (..)
+    , HasComputedBootFiles (..)
+    , HasComputedBreed (..)
+    , HasComputedComment (..)
+    , HasComputedCreaterepoFlags (..)
+    , HasComputedDistro (..)
+    , HasComputedEnableGpxe (..)
+    , HasComputedEnableMenu (..)
+    , HasComputedEnvironment (..)
+    , HasComputedFetchableFiles (..)
+    , HasComputedGateway (..)
+    , HasComputedHostname (..)
+    , HasComputedImage (..)
+    , HasComputedInitrd (..)
+    , HasComputedInterface (..)
+    , HasComputedIpv6DefaultDevice (..)
+    , HasComputedKeepUpdated (..)
+    , HasComputedKernel (..)
+    , HasComputedKernelOptions (..)
+    , HasComputedKernelOptionsPost (..)
+    , HasComputedKickstart (..)
+    , HasComputedKsMeta (..)
+    , HasComputedLdapEnabled (..)
+    , HasComputedLdapType (..)
+    , HasComputedMgmtClasses (..)
+    , HasComputedMgmtParameters (..)
+    , HasComputedMirror (..)
+    , HasComputedMirrorLocally (..)
+    , HasComputedMonitEnabled (..)
+    , HasComputedName (..)
+    , HasComputedNameServers (..)
+    , HasComputedNameServersSearch (..)
+    , HasComputedNetbootEnabled (..)
+    , HasComputedOsVersion (..)
+    , HasComputedOwners (..)
+    , HasComputedParent (..)
+    , HasComputedPowerAddress (..)
+    , HasComputedPowerId (..)
+    , HasComputedPowerPass (..)
+    , HasComputedPowerType (..)
+    , HasComputedPowerUser (..)
+    , HasComputedProfile (..)
+    , HasComputedProxy (..)
+    , HasComputedRedhatManagementKey (..)
+    , HasComputedRedhatManagementServer (..)
+    , HasComputedRepos (..)
+    , HasComputedRpmList (..)
+    , HasComputedServer (..)
+    , HasComputedStatus (..)
+    , HasComputedTemplateFiles (..)
+    , HasComputedTemplateRemoteKickstarts (..)
+    , HasComputedVirtAutoBoot (..)
+    , HasComputedVirtBridge (..)
+    , HasComputedVirtCpus (..)
+    , HasComputedVirtDiskDriver (..)
+    , HasComputedVirtFileSize (..)
+    , HasComputedVirtPath (..)
+    , HasComputedVirtPxeBoot (..)
+    , HasComputedVirtRam (..)
+    , HasComputedVirtType (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -474,3 +537,192 @@ class HasVirtType a b | a -> b where
 
 instance HasVirtType a b => HasVirtType (TF.Schema l p a) b where
     virtType = TF.configuration . virtType
+
+class HasComputedAptComponents a s b | a -> s b where
+    computedAptComponents :: TF.Ref s a -> b
+
+class HasComputedAptDists a s b | a -> s b where
+    computedAptDists :: TF.Ref s a -> b
+
+class HasComputedArch a s b | a -> s b where
+    computedArch :: TF.Ref s a -> b
+
+class HasComputedBody a s b | a -> s b where
+    computedBody :: TF.Ref s a -> b
+
+class HasComputedBootFiles a s b | a -> s b where
+    computedBootFiles :: TF.Ref s a -> b
+
+class HasComputedBreed a s b | a -> s b where
+    computedBreed :: TF.Ref s a -> b
+
+class HasComputedComment a s b | a -> s b where
+    computedComment :: TF.Ref s a -> b
+
+class HasComputedCreaterepoFlags a s b | a -> s b where
+    computedCreaterepoFlags :: TF.Ref s a -> b
+
+class HasComputedDistro a s b | a -> s b where
+    computedDistro :: TF.Ref s a -> b
+
+class HasComputedEnableGpxe a s b | a -> s b where
+    computedEnableGpxe :: TF.Ref s a -> b
+
+class HasComputedEnableMenu a s b | a -> s b where
+    computedEnableMenu :: TF.Ref s a -> b
+
+class HasComputedEnvironment a s b | a -> s b where
+    computedEnvironment :: TF.Ref s a -> b
+
+class HasComputedFetchableFiles a s b | a -> s b where
+    computedFetchableFiles :: TF.Ref s a -> b
+
+class HasComputedGateway a s b | a -> s b where
+    computedGateway :: TF.Ref s a -> b
+
+class HasComputedHostname a s b | a -> s b where
+    computedHostname :: TF.Ref s a -> b
+
+class HasComputedImage a s b | a -> s b where
+    computedImage :: TF.Ref s a -> b
+
+class HasComputedInitrd a s b | a -> s b where
+    computedInitrd :: TF.Ref s a -> b
+
+class HasComputedInterface a s b | a -> s b where
+    computedInterface :: TF.Ref s a -> b
+
+class HasComputedIpv6DefaultDevice a s b | a -> s b where
+    computedIpv6DefaultDevice :: TF.Ref s a -> b
+
+class HasComputedKeepUpdated a s b | a -> s b where
+    computedKeepUpdated :: TF.Ref s a -> b
+
+class HasComputedKernel a s b | a -> s b where
+    computedKernel :: TF.Ref s a -> b
+
+class HasComputedKernelOptions a s b | a -> s b where
+    computedKernelOptions :: TF.Ref s a -> b
+
+class HasComputedKernelOptionsPost a s b | a -> s b where
+    computedKernelOptionsPost :: TF.Ref s a -> b
+
+class HasComputedKickstart a s b | a -> s b where
+    computedKickstart :: TF.Ref s a -> b
+
+class HasComputedKsMeta a s b | a -> s b where
+    computedKsMeta :: TF.Ref s a -> b
+
+class HasComputedLdapEnabled a s b | a -> s b where
+    computedLdapEnabled :: TF.Ref s a -> b
+
+class HasComputedLdapType a s b | a -> s b where
+    computedLdapType :: TF.Ref s a -> b
+
+class HasComputedMgmtClasses a s b | a -> s b where
+    computedMgmtClasses :: TF.Ref s a -> b
+
+class HasComputedMgmtParameters a s b | a -> s b where
+    computedMgmtParameters :: TF.Ref s a -> b
+
+class HasComputedMirror a s b | a -> s b where
+    computedMirror :: TF.Ref s a -> b
+
+class HasComputedMirrorLocally a s b | a -> s b where
+    computedMirrorLocally :: TF.Ref s a -> b
+
+class HasComputedMonitEnabled a s b | a -> s b where
+    computedMonitEnabled :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNameServers a s b | a -> s b where
+    computedNameServers :: TF.Ref s a -> b
+
+class HasComputedNameServersSearch a s b | a -> s b where
+    computedNameServersSearch :: TF.Ref s a -> b
+
+class HasComputedNetbootEnabled a s b | a -> s b where
+    computedNetbootEnabled :: TF.Ref s a -> b
+
+class HasComputedOsVersion a s b | a -> s b where
+    computedOsVersion :: TF.Ref s a -> b
+
+class HasComputedOwners a s b | a -> s b where
+    computedOwners :: TF.Ref s a -> b
+
+class HasComputedParent a s b | a -> s b where
+    computedParent :: TF.Ref s a -> b
+
+class HasComputedPowerAddress a s b | a -> s b where
+    computedPowerAddress :: TF.Ref s a -> b
+
+class HasComputedPowerId a s b | a -> s b where
+    computedPowerId :: TF.Ref s a -> b
+
+class HasComputedPowerPass a s b | a -> s b where
+    computedPowerPass :: TF.Ref s a -> b
+
+class HasComputedPowerType a s b | a -> s b where
+    computedPowerType :: TF.Ref s a -> b
+
+class HasComputedPowerUser a s b | a -> s b where
+    computedPowerUser :: TF.Ref s a -> b
+
+class HasComputedProfile a s b | a -> s b where
+    computedProfile :: TF.Ref s a -> b
+
+class HasComputedProxy a s b | a -> s b where
+    computedProxy :: TF.Ref s a -> b
+
+class HasComputedRedhatManagementKey a s b | a -> s b where
+    computedRedhatManagementKey :: TF.Ref s a -> b
+
+class HasComputedRedhatManagementServer a s b | a -> s b where
+    computedRedhatManagementServer :: TF.Ref s a -> b
+
+class HasComputedRepos a s b | a -> s b where
+    computedRepos :: TF.Ref s a -> b
+
+class HasComputedRpmList a s b | a -> s b where
+    computedRpmList :: TF.Ref s a -> b
+
+class HasComputedServer a s b | a -> s b where
+    computedServer :: TF.Ref s a -> b
+
+class HasComputedStatus a s b | a -> s b where
+    computedStatus :: TF.Ref s a -> b
+
+class HasComputedTemplateFiles a s b | a -> s b where
+    computedTemplateFiles :: TF.Ref s a -> b
+
+class HasComputedTemplateRemoteKickstarts a s b | a -> s b where
+    computedTemplateRemoteKickstarts :: TF.Ref s a -> b
+
+class HasComputedVirtAutoBoot a s b | a -> s b where
+    computedVirtAutoBoot :: TF.Ref s a -> b
+
+class HasComputedVirtBridge a s b | a -> s b where
+    computedVirtBridge :: TF.Ref s a -> b
+
+class HasComputedVirtCpus a s b | a -> s b where
+    computedVirtCpus :: TF.Ref s a -> b
+
+class HasComputedVirtDiskDriver a s b | a -> s b where
+    computedVirtDiskDriver :: TF.Ref s a -> b
+
+class HasComputedVirtFileSize a s b | a -> s b where
+    computedVirtFileSize :: TF.Ref s a -> b
+
+class HasComputedVirtPath a s b | a -> s b where
+    computedVirtPath :: TF.Ref s a -> b
+
+class HasComputedVirtPxeBoot a s b | a -> s b where
+    computedVirtPxeBoot :: TF.Ref s a -> b
+
+class HasComputedVirtRam a s b | a -> s b where
+    computedVirtRam :: TF.Ref s a -> b
+
+class HasComputedVirtType a s b | a -> s b where
+    computedVirtType :: TF.Ref s a -> b

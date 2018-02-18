@@ -33,11 +33,20 @@ module Terrafomo.Nomad.Lens
     , HasType' (..)
 
     -- ** Computed Attributes
+    , HasComputedDeregisterOnDestroy (..)
+    , HasComputedDeregisterOnIdChange (..)
+    , HasComputedDescription (..)
+    , HasComputedGlobal (..)
+    , HasComputedJobspec (..)
+    , HasComputedName (..)
+    , HasComputedPolicies (..)
+    , HasComputedRulesHcl (..)
+    , HasComputedType' (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -96,3 +105,30 @@ class HasType' a b | a -> b where
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
+
+class HasComputedDeregisterOnDestroy a s b | a -> s b where
+    computedDeregisterOnDestroy :: TF.Ref s a -> b
+
+class HasComputedDeregisterOnIdChange a s b | a -> s b where
+    computedDeregisterOnIdChange :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedGlobal a s b | a -> s b where
+    computedGlobal :: TF.Ref s a -> b
+
+class HasComputedJobspec a s b | a -> s b where
+    computedJobspec :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedPolicies a s b | a -> s b where
+    computedPolicies :: TF.Ref s a -> b
+
+class HasComputedRulesHcl a s b | a -> s b where
+    computedRulesHcl :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b

@@ -41,6 +41,8 @@ module Terrafomo.Scaleway.DataSource
     , P.HasComputedDtb (..)
     , P.HasComputedInitrd (..)
     , P.HasComputedKernel (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNameFilter (..)
     , P.HasComputedOrganization (..)
     , P.HasComputedPublic (..)
 
@@ -52,7 +54,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -67,6 +69,7 @@ import           Terrafomo.Scaleway.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @scaleway_bootscript@ Scaleway datasource.
@@ -105,13 +108,36 @@ instance P.HasNameFilter (BootscriptData s) (TF.Attr s Text) where
         lens (_name_filter :: BootscriptData s -> TF.Attr s Text)
              (\s a -> s { _name_filter = a } :: BootscriptData s)
 
-instance P.HasComputedArchitecture (BootscriptData s) (Text)
-instance P.HasComputedBootCmdArgs (BootscriptData s) (Text)
-instance P.HasComputedDtb (BootscriptData s) (Text)
-instance P.HasComputedInitrd (BootscriptData s) (Text)
-instance P.HasComputedKernel (BootscriptData s) (Text)
-instance P.HasComputedOrganization (BootscriptData s) (Text)
-instance P.HasComputedPublic (BootscriptData s) (Text)
+instance P.HasComputedArchitecture (BootscriptData s) s (TF.Attr s Text) where
+    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
+
+instance P.HasComputedBootCmdArgs (BootscriptData s) s (TF.Attr s Text) where
+    computedBootCmdArgs x = TF.compute (TF.refKey x) "boot_cmd_args"
+
+instance P.HasComputedDtb (BootscriptData s) s (TF.Attr s Text) where
+    computedDtb x = TF.compute (TF.refKey x) "dtb"
+
+instance P.HasComputedInitrd (BootscriptData s) s (TF.Attr s Text) where
+    computedInitrd x = TF.compute (TF.refKey x) "initrd"
+
+instance P.HasComputedKernel (BootscriptData s) s (TF.Attr s Text) where
+    computedKernel x = TF.compute (TF.refKey x) "kernel"
+
+instance P.HasComputedName (BootscriptData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: BootscriptData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNameFilter (BootscriptData s) s (TF.Attr s Text) where
+    computedNameFilter =
+        (_name_filter :: BootscriptData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOrganization (BootscriptData s) s (TF.Attr s Text) where
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
+
+instance P.HasComputedPublic (BootscriptData s) s (TF.Attr s Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 bootscriptData :: TF.Schema TF.DataSource P.Scaleway (BootscriptData s)
 bootscriptData =
@@ -158,10 +184,27 @@ instance P.HasNameFilter (ImageData s) (TF.Attr s Text) where
         lens (_name_filter :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name_filter = a } :: ImageData s)
 
-instance P.HasComputedArchitecture (ImageData s) (Text)
-instance P.HasComputedCreationDate (ImageData s) (Text)
-instance P.HasComputedOrganization (ImageData s) (Text)
-instance P.HasComputedPublic (ImageData s) (Text)
+instance P.HasComputedArchitecture (ImageData s) s (TF.Attr s Text) where
+    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
+
+instance P.HasComputedCreationDate (ImageData s) s (TF.Attr s Text) where
+    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+
+instance P.HasComputedName (ImageData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNameFilter (ImageData s) s (TF.Attr s Text) where
+    computedNameFilter =
+        (_name_filter :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOrganization (ImageData s) s (TF.Attr s Text) where
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
+
+instance P.HasComputedPublic (ImageData s) s (TF.Attr s Text) where
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 imageData :: TF.Schema TF.DataSource P.Scaleway (ImageData s)
 imageData =

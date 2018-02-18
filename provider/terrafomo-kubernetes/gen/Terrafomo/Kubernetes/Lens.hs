@@ -33,12 +33,21 @@ module Terrafomo.Kubernetes.Lens
     , HasWaitUntilBound (..)
 
     -- ** Computed Attributes
+    , HasComputedData' (..)
     , HasComputedDefaultSecretName (..)
+    , HasComputedImagePullSecret (..)
+    , HasComputedMetadata (..)
+    , HasComputedParameters (..)
+    , HasComputedSecret (..)
+    , HasComputedSpec (..)
+    , HasComputedStorageProvisioner (..)
+    , HasComputedType' (..)
+    , HasComputedWaitUntilBound (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -98,8 +107,32 @@ class HasWaitUntilBound a b | a -> b where
 instance HasWaitUntilBound a b => HasWaitUntilBound (TF.Schema l p a) b where
     waitUntilBound = TF.configuration . waitUntilBound
 
-class HasComputedDefaultSecretName a b | a -> b where
-    computedDefaultSecretName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDefaultSecretName =
-        to (\x -> TF.compute (TF.refKey x) "default_secret_name")
+class HasComputedData' a s b | a -> s b where
+    computedData' :: TF.Ref s a -> b
+
+class HasComputedDefaultSecretName a s b | a -> s b where
+    computedDefaultSecretName :: TF.Ref s a -> b
+
+class HasComputedImagePullSecret a s b | a -> s b where
+    computedImagePullSecret :: TF.Ref s a -> b
+
+class HasComputedMetadata a s b | a -> s b where
+    computedMetadata :: TF.Ref s a -> b
+
+class HasComputedParameters a s b | a -> s b where
+    computedParameters :: TF.Ref s a -> b
+
+class HasComputedSecret a s b | a -> s b where
+    computedSecret :: TF.Ref s a -> b
+
+class HasComputedSpec a s b | a -> s b where
+    computedSpec :: TF.Ref s a -> b
+
+class HasComputedStorageProvisioner a s b | a -> s b where
+    computedStorageProvisioner :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedWaitUntilBound a s b | a -> s b where
+    computedWaitUntilBound :: TF.Ref s a -> b

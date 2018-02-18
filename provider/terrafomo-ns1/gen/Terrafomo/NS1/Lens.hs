@@ -61,11 +61,48 @@ module Terrafomo.NS1.Lens
     , HasZone (..)
 
     -- ** Computed Attributes
+    , HasComputedActive (..)
+    , HasComputedAnswers (..)
+    , HasComputedConfig (..)
+    , HasComputedDomain (..)
+    , HasComputedEmail (..)
+    , HasComputedExpiry (..)
+    , HasComputedFilters (..)
+    , HasComputedFrequency (..)
+    , HasComputedJobType (..)
+    , HasComputedKey (..)
+    , HasComputedLink (..)
+    , HasComputedName (..)
+    , HasComputedNotes (..)
+    , HasComputedNotifications (..)
+    , HasComputedNotify (..)
+    , HasComputedNotifyDelay (..)
+    , HasComputedNotifyFailback (..)
+    , HasComputedNotifyList (..)
+    , HasComputedNotifyRegional (..)
+    , HasComputedNotifyRepeat (..)
+    , HasComputedNxTtl (..)
+    , HasComputedPermissions (..)
+    , HasComputedPolicy (..)
+    , HasComputedPrimary (..)
+    , HasComputedRapidRecheck (..)
+    , HasComputedRefresh (..)
+    , HasComputedRegions (..)
+    , HasComputedRetry (..)
+    , HasComputedRules (..)
+    , HasComputedSourceId (..)
+    , HasComputedSourcetype (..)
+    , HasComputedTeams (..)
+    , HasComputedTtl (..)
+    , HasComputedType' (..)
+    , HasComputedUseClientSubnet (..)
+    , HasComputedUsername (..)
+    , HasComputedZone (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -292,3 +329,114 @@ class HasZone a b | a -> b where
 
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
+
+class HasComputedActive a s b | a -> s b where
+    computedActive :: TF.Ref s a -> b
+
+class HasComputedAnswers a s b | a -> s b where
+    computedAnswers :: TF.Ref s a -> b
+
+class HasComputedConfig a s b | a -> s b where
+    computedConfig :: TF.Ref s a -> b
+
+class HasComputedDomain a s b | a -> s b where
+    computedDomain :: TF.Ref s a -> b
+
+class HasComputedEmail a s b | a -> s b where
+    computedEmail :: TF.Ref s a -> b
+
+class HasComputedExpiry a s b | a -> s b where
+    computedExpiry :: TF.Ref s a -> b
+
+class HasComputedFilters a s b | a -> s b where
+    computedFilters :: TF.Ref s a -> b
+
+class HasComputedFrequency a s b | a -> s b where
+    computedFrequency :: TF.Ref s a -> b
+
+class HasComputedJobType a s b | a -> s b where
+    computedJobType :: TF.Ref s a -> b
+
+class HasComputedKey a s b | a -> s b where
+    computedKey :: TF.Ref s a -> b
+
+class HasComputedLink a s b | a -> s b where
+    computedLink :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNotes a s b | a -> s b where
+    computedNotes :: TF.Ref s a -> b
+
+class HasComputedNotifications a s b | a -> s b where
+    computedNotifications :: TF.Ref s a -> b
+
+class HasComputedNotify a s b | a -> s b where
+    computedNotify :: TF.Ref s a -> b
+
+class HasComputedNotifyDelay a s b | a -> s b where
+    computedNotifyDelay :: TF.Ref s a -> b
+
+class HasComputedNotifyFailback a s b | a -> s b where
+    computedNotifyFailback :: TF.Ref s a -> b
+
+class HasComputedNotifyList a s b | a -> s b where
+    computedNotifyList :: TF.Ref s a -> b
+
+class HasComputedNotifyRegional a s b | a -> s b where
+    computedNotifyRegional :: TF.Ref s a -> b
+
+class HasComputedNotifyRepeat a s b | a -> s b where
+    computedNotifyRepeat :: TF.Ref s a -> b
+
+class HasComputedNxTtl a s b | a -> s b where
+    computedNxTtl :: TF.Ref s a -> b
+
+class HasComputedPermissions a s b | a -> s b where
+    computedPermissions :: TF.Ref s a -> b
+
+class HasComputedPolicy a s b | a -> s b where
+    computedPolicy :: TF.Ref s a -> b
+
+class HasComputedPrimary a s b | a -> s b where
+    computedPrimary :: TF.Ref s a -> b
+
+class HasComputedRapidRecheck a s b | a -> s b where
+    computedRapidRecheck :: TF.Ref s a -> b
+
+class HasComputedRefresh a s b | a -> s b where
+    computedRefresh :: TF.Ref s a -> b
+
+class HasComputedRegions a s b | a -> s b where
+    computedRegions :: TF.Ref s a -> b
+
+class HasComputedRetry a s b | a -> s b where
+    computedRetry :: TF.Ref s a -> b
+
+class HasComputedRules a s b | a -> s b where
+    computedRules :: TF.Ref s a -> b
+
+class HasComputedSourceId a s b | a -> s b where
+    computedSourceId :: TF.Ref s a -> b
+
+class HasComputedSourcetype a s b | a -> s b where
+    computedSourcetype :: TF.Ref s a -> b
+
+class HasComputedTeams a s b | a -> s b where
+    computedTeams :: TF.Ref s a -> b
+
+class HasComputedTtl a s b | a -> s b where
+    computedTtl :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUseClientSubnet a s b | a -> s b where
+    computedUseClientSubnet :: TF.Ref s a -> b
+
+class HasComputedUsername a s b | a -> s b where
+    computedUsername :: TF.Ref s a -> b
+
+class HasComputedZone a s b | a -> s b where
+    computedZone :: TF.Ref s a -> b

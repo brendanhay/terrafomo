@@ -66,13 +66,55 @@ module Terrafomo.Ignition.Lens
     , HasWipeTable (..)
 
     -- ** Computed Attributes
+    , HasComputedAppend (..)
+    , HasComputedArrays (..)
+    , HasComputedContent (..)
+    , HasComputedDevice (..)
+    , HasComputedDevices (..)
+    , HasComputedDirectories (..)
+    , HasComputedDisks (..)
+    , HasComputedDropin (..)
+    , HasComputedEnabled (..)
+    , HasComputedFiles (..)
+    , HasComputedFilesystem (..)
+    , HasComputedFilesystems (..)
+    , HasComputedGecos (..)
+    , HasComputedGid (..)
+    , HasComputedGroups (..)
+    , HasComputedHard (..)
+    , HasComputedHomeDir (..)
     , HasComputedId (..)
+    , HasComputedLevel (..)
+    , HasComputedLinks (..)
+    , HasComputedMask (..)
+    , HasComputedMode (..)
+    , HasComputedMount (..)
+    , HasComputedName (..)
+    , HasComputedNetworkd (..)
+    , HasComputedNoCreateHome (..)
+    , HasComputedNoLogInit (..)
+    , HasComputedNoUserGroup (..)
+    , HasComputedPartition (..)
+    , HasComputedPasswordHash (..)
+    , HasComputedPath (..)
+    , HasComputedPrimaryGroup (..)
     , HasComputedRendered (..)
+    , HasComputedReplace (..)
+    , HasComputedShell (..)
+    , HasComputedSource (..)
+    , HasComputedSpares (..)
+    , HasComputedSshAuthorizedKeys (..)
+    , HasComputedSystem (..)
+    , HasComputedSystemd (..)
+    , HasComputedTarget (..)
+    , HasComputedUid (..)
+    , HasComputedUsers (..)
+    , HasComputedWipeTable (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -330,14 +372,134 @@ class HasWipeTable a b | a -> b where
 instance HasWipeTable a b => HasWipeTable (TF.Schema l p a) b where
     wipeTable = TF.configuration . wipeTable
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedAppend a s b | a -> s b where
+    computedAppend :: TF.Ref s a -> b
 
-class HasComputedRendered a b | a -> b where
-    computedRendered
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRendered =
-        to (\x -> TF.compute (TF.refKey x) "rendered")
+class HasComputedArrays a s b | a -> s b where
+    computedArrays :: TF.Ref s a -> b
+
+class HasComputedContent a s b | a -> s b where
+    computedContent :: TF.Ref s a -> b
+
+class HasComputedDevice a s b | a -> s b where
+    computedDevice :: TF.Ref s a -> b
+
+class HasComputedDevices a s b | a -> s b where
+    computedDevices :: TF.Ref s a -> b
+
+class HasComputedDirectories a s b | a -> s b where
+    computedDirectories :: TF.Ref s a -> b
+
+class HasComputedDisks a s b | a -> s b where
+    computedDisks :: TF.Ref s a -> b
+
+class HasComputedDropin a s b | a -> s b where
+    computedDropin :: TF.Ref s a -> b
+
+class HasComputedEnabled a s b | a -> s b where
+    computedEnabled :: TF.Ref s a -> b
+
+class HasComputedFiles a s b | a -> s b where
+    computedFiles :: TF.Ref s a -> b
+
+class HasComputedFilesystem a s b | a -> s b where
+    computedFilesystem :: TF.Ref s a -> b
+
+class HasComputedFilesystems a s b | a -> s b where
+    computedFilesystems :: TF.Ref s a -> b
+
+class HasComputedGecos a s b | a -> s b where
+    computedGecos :: TF.Ref s a -> b
+
+class HasComputedGid a s b | a -> s b where
+    computedGid :: TF.Ref s a -> b
+
+class HasComputedGroups a s b | a -> s b where
+    computedGroups :: TF.Ref s a -> b
+
+class HasComputedHard a s b | a -> s b where
+    computedHard :: TF.Ref s a -> b
+
+class HasComputedHomeDir a s b | a -> s b where
+    computedHomeDir :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedLevel a s b | a -> s b where
+    computedLevel :: TF.Ref s a -> b
+
+class HasComputedLinks a s b | a -> s b where
+    computedLinks :: TF.Ref s a -> b
+
+class HasComputedMask a s b | a -> s b where
+    computedMask :: TF.Ref s a -> b
+
+class HasComputedMode a s b | a -> s b where
+    computedMode :: TF.Ref s a -> b
+
+class HasComputedMount a s b | a -> s b where
+    computedMount :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNetworkd a s b | a -> s b where
+    computedNetworkd :: TF.Ref s a -> b
+
+class HasComputedNoCreateHome a s b | a -> s b where
+    computedNoCreateHome :: TF.Ref s a -> b
+
+class HasComputedNoLogInit a s b | a -> s b where
+    computedNoLogInit :: TF.Ref s a -> b
+
+class HasComputedNoUserGroup a s b | a -> s b where
+    computedNoUserGroup :: TF.Ref s a -> b
+
+class HasComputedPartition a s b | a -> s b where
+    computedPartition :: TF.Ref s a -> b
+
+class HasComputedPasswordHash a s b | a -> s b where
+    computedPasswordHash :: TF.Ref s a -> b
+
+class HasComputedPath a s b | a -> s b where
+    computedPath :: TF.Ref s a -> b
+
+class HasComputedPrimaryGroup a s b | a -> s b where
+    computedPrimaryGroup :: TF.Ref s a -> b
+
+class HasComputedRendered a s b | a -> s b where
+    computedRendered :: TF.Ref s a -> b
+
+class HasComputedReplace a s b | a -> s b where
+    computedReplace :: TF.Ref s a -> b
+
+class HasComputedShell a s b | a -> s b where
+    computedShell :: TF.Ref s a -> b
+
+class HasComputedSource a s b | a -> s b where
+    computedSource :: TF.Ref s a -> b
+
+class HasComputedSpares a s b | a -> s b where
+    computedSpares :: TF.Ref s a -> b
+
+class HasComputedSshAuthorizedKeys a s b | a -> s b where
+    computedSshAuthorizedKeys :: TF.Ref s a -> b
+
+class HasComputedSystem a s b | a -> s b where
+    computedSystem :: TF.Ref s a -> b
+
+class HasComputedSystemd a s b | a -> s b where
+    computedSystemd :: TF.Ref s a -> b
+
+class HasComputedTarget a s b | a -> s b where
+    computedTarget :: TF.Ref s a -> b
+
+class HasComputedUid a s b | a -> s b where
+    computedUid :: TF.Ref s a -> b
+
+class HasComputedUsers a s b | a -> s b where
+    computedUsers :: TF.Ref s a -> b
+
+class HasComputedWipeTable a s b | a -> s b where
+    computedWipeTable :: TF.Ref s a -> b

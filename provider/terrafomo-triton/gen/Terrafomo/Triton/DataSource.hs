@@ -48,7 +48,17 @@ module Terrafomo.Triton.DataSource
     , P.HasVersion (..)
 
     -- ** Computed Attributes
+    , P.HasComputedCnsEnabled (..)
+    , P.HasComputedEndpoint (..)
     , P.HasComputedId (..)
+    , P.HasComputedMostRecent (..)
+    , P.HasComputedName (..)
+    , P.HasComputedOs (..)
+    , P.HasComputedOwner (..)
+    , P.HasComputedPublic (..)
+    , P.HasComputedState (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedVersion (..)
 
     -- * Re-exported Types
     , module P
@@ -58,7 +68,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -73,6 +83,7 @@ import           Terrafomo.Triton.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @triton_account@ Triton datasource.
@@ -95,6 +106,10 @@ instance P.HasCnsEnabled (AccountData s) (TF.Attr s Text) where
         lens (_cns_enabled :: AccountData s -> TF.Attr s Text)
              (\s a -> s { _cns_enabled = a } :: AccountData s)
 
+instance P.HasComputedCnsEnabled (AccountData s) s (TF.Attr s Text) where
+    computedCnsEnabled =
+        (_cns_enabled :: AccountData s -> TF.Attr s Text)
+            . TF.refValue
 
 accountData :: TF.Schema TF.DataSource P.Triton (AccountData s)
 accountData =
@@ -131,6 +146,15 @@ instance P.HasName (DatacenterData s) (TF.Attr s Text) where
         lens (_name :: DatacenterData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatacenterData s)
 
+instance P.HasComputedEndpoint (DatacenterData s) s (TF.Attr s Text) where
+    computedEndpoint =
+        (_endpoint :: DatacenterData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (DatacenterData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: DatacenterData s -> TF.Attr s Text)
+            . TF.refValue
 
 datacenterData :: TF.Schema TF.DataSource P.Triton (DatacenterData s)
 datacenterData =
@@ -216,6 +240,45 @@ instance P.HasVersion (ImageData s) (TF.Attr s Text) where
         lens (_version :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ImageData s)
 
+instance P.HasComputedMostRecent (ImageData s) s (TF.Attr s Text) where
+    computedMostRecent =
+        (_most_recent :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ImageData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOs (ImageData s) s (TF.Attr s Text) where
+    computedOs =
+        (_os :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOwner (ImageData s) s (TF.Attr s Text) where
+    computedOwner =
+        (_owner :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPublic (ImageData s) s (TF.Attr s Text) where
+    computedPublic =
+        (_public :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedState (ImageData s) s (TF.Attr s Text) where
+    computedState =
+        (_state :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (ImageData s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedVersion (ImageData s) s (TF.Attr s Text) where
+    computedVersion =
+        (_version :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
 
 imageData :: TF.Schema TF.DataSource P.Triton (ImageData s)
 imageData =
@@ -251,7 +314,13 @@ instance P.HasName (NetworkData s) (TF.Attr s Text) where
         lens (_name :: NetworkData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkData s)
 
-instance P.HasComputedId (NetworkData s) (Text)
+instance P.HasComputedId (NetworkData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (NetworkData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: NetworkData s -> TF.Attr s Text)
+            . TF.refValue
 
 networkData :: TF.Schema TF.DataSource P.Triton (NetworkData s)
 networkData =

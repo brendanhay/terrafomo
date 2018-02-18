@@ -44,25 +44,31 @@ module Terrafomo.Librato.Lens
 
     -- ** Computed Attributes
     , HasComputedActive (..)
+    , HasComputedAttributes (..)
     , HasComputedComposite (..)
     , HasComputedCondition (..)
     , HasComputedDescription (..)
     , HasComputedDisplayName (..)
     , HasComputedId (..)
+    , HasComputedLabel (..)
+    , HasComputedMax (..)
+    , HasComputedMin (..)
     , HasComputedName (..)
     , HasComputedPeriod (..)
     , HasComputedRearmSeconds (..)
+    , HasComputedRelatedSpace (..)
     , HasComputedServices (..)
     , HasComputedSettings (..)
     , HasComputedSourceLag (..)
     , HasComputedSpaceId (..)
+    , HasComputedStream (..)
     , HasComputedTitle (..)
     , HasComputedType' (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -182,92 +188,65 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputedActive a b | a -> b where
-    computedActive
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedActive =
-        to (\x -> TF.compute (TF.refKey x) "active")
+class HasComputedActive a s b | a -> s b where
+    computedActive :: TF.Ref s a -> b
 
-class HasComputedComposite a b | a -> b where
-    computedComposite
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedComposite =
-        to (\x -> TF.compute (TF.refKey x) "composite")
+class HasComputedAttributes a s b | a -> s b where
+    computedAttributes :: TF.Ref s a -> b
 
-class HasComputedCondition a b | a -> b where
-    computedCondition
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCondition =
-        to (\x -> TF.compute (TF.refKey x) "condition")
+class HasComputedComposite a s b | a -> s b where
+    computedComposite :: TF.Ref s a -> b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDescription =
-        to (\x -> TF.compute (TF.refKey x) "description")
+class HasComputedCondition a s b | a -> s b where
+    computedCondition :: TF.Ref s a -> b
 
-class HasComputedDisplayName a b | a -> b where
-    computedDisplayName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedDisplayName =
-        to (\x -> TF.compute (TF.refKey x) "display_name")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedDisplayName a s b | a -> s b where
+    computedDisplayName :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
 
-class HasComputedPeriod a b | a -> b where
-    computedPeriod
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedPeriod =
-        to (\x -> TF.compute (TF.refKey x) "period")
+class HasComputedLabel a s b | a -> s b where
+    computedLabel :: TF.Ref s a -> b
 
-class HasComputedRearmSeconds a b | a -> b where
-    computedRearmSeconds
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedRearmSeconds =
-        to (\x -> TF.compute (TF.refKey x) "rearm_seconds")
+class HasComputedMax a s b | a -> s b where
+    computedMax :: TF.Ref s a -> b
 
-class HasComputedServices a b | a -> b where
-    computedServices
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedServices =
-        to (\x -> TF.compute (TF.refKey x) "services")
+class HasComputedMin a s b | a -> s b where
+    computedMin :: TF.Ref s a -> b
 
-class HasComputedSettings a b | a -> b where
-    computedSettings
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSettings =
-        to (\x -> TF.compute (TF.refKey x) "settings")
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
 
-class HasComputedSourceLag a b | a -> b where
-    computedSourceLag
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSourceLag =
-        to (\x -> TF.compute (TF.refKey x) "source_lag")
+class HasComputedPeriod a s b | a -> s b where
+    computedPeriod :: TF.Ref s a -> b
 
-class HasComputedSpaceId a b | a -> b where
-    computedSpaceId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedSpaceId =
-        to (\x -> TF.compute (TF.refKey x) "space_id")
+class HasComputedRearmSeconds a s b | a -> s b where
+    computedRearmSeconds :: TF.Ref s a -> b
 
-class HasComputedTitle a b | a -> b where
-    computedTitle
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTitle =
-        to (\x -> TF.compute (TF.refKey x) "title")
+class HasComputedRelatedSpace a s b | a -> s b where
+    computedRelatedSpace :: TF.Ref s a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
+class HasComputedServices a s b | a -> s b where
+    computedServices :: TF.Ref s a -> b
+
+class HasComputedSettings a s b | a -> s b where
+    computedSettings :: TF.Ref s a -> b
+
+class HasComputedSourceLag a s b | a -> s b where
+    computedSourceLag :: TF.Ref s a -> b
+
+class HasComputedSpaceId a s b | a -> s b where
+    computedSpaceId :: TF.Ref s a -> b
+
+class HasComputedStream a s b | a -> s b where
+    computedStream :: TF.Ref s a -> b
+
+class HasComputedTitle a s b | a -> s b where
+    computedTitle :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b

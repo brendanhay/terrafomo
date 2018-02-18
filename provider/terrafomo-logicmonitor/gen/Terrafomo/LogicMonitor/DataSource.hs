@@ -36,6 +36,10 @@ module Terrafomo.LogicMonitor.DataSource
     , P.HasSize (..)
 
     -- ** Computed Attributes
+    , P.HasComputedFilters (..)
+    , P.HasComputedMostRecent (..)
+    , P.HasComputedOffset (..)
+    , P.HasComputedSize (..)
 
     -- * Re-exported Types
     , module P
@@ -45,7 +49,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -60,6 +64,7 @@ import           Terrafomo.LogicMonitor.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @logicmonitor_collectors@ LogicMonitor datasource.
@@ -105,6 +110,25 @@ instance P.HasSize (CollectorsData s) (TF.Attr s Text) where
         lens (_size :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: CollectorsData s)
 
+instance P.HasComputedFilters (CollectorsData s) s (TF.Attr s Text) where
+    computedFilters =
+        (_filters :: CollectorsData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedMostRecent (CollectorsData s) s (TF.Attr s Text) where
+    computedMostRecent =
+        (_most_recent :: CollectorsData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOffset (CollectorsData s) s (TF.Attr s Text) where
+    computedOffset =
+        (_offset :: CollectorsData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSize (CollectorsData s) s (TF.Attr s Text) where
+    computedSize =
+        (_size :: CollectorsData s -> TF.Attr s Text)
+            . TF.refValue
 
 collectorsData :: TF.Schema TF.DataSource P.LogicMonitor (CollectorsData s)
 collectorsData =
@@ -151,6 +175,20 @@ instance P.HasSize (DeviceGroupData s) (TF.Attr s Text) where
         lens (_size :: DeviceGroupData s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: DeviceGroupData s)
 
+instance P.HasComputedFilters (DeviceGroupData s) s (TF.Attr s Text) where
+    computedFilters =
+        (_filters :: DeviceGroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedOffset (DeviceGroupData s) s (TF.Attr s Text) where
+    computedOffset =
+        (_offset :: DeviceGroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSize (DeviceGroupData s) s (TF.Attr s Text) where
+    computedSize =
+        (_size :: DeviceGroupData s -> TF.Attr s Text)
+            . TF.refValue
 
 deviceGroupData :: TF.Schema TF.DataSource P.LogicMonitor (DeviceGroupData s)
 deviceGroupData =

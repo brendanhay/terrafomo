@@ -55,27 +55,51 @@ module Terrafomo.PagerDuty.Lens
     , HasVendor (..)
 
     -- ** Computed Attributes
+    , HasComputedAcknowledgementTimeout (..)
+    , HasComputedAddress (..)
+    , HasComputedAlertCreation (..)
+    , HasComputedAutoResolveTimeout (..)
     , HasComputedAvatarUrl (..)
     , HasComputedBlacklisted (..)
+    , HasComputedColor (..)
+    , HasComputedCountryCode (..)
     , HasComputedCreatedAt (..)
+    , HasComputedDescription (..)
+    , HasComputedEmail (..)
     , HasComputedEnabled (..)
+    , HasComputedEndTime (..)
+    , HasComputedEscalationPolicy (..)
     , HasComputedHtmlUrl (..)
     , HasComputedId (..)
     , HasComputedIntegrationEmail (..)
     , HasComputedIntegrationKey (..)
     , HasComputedInvitationSent (..)
+    , HasComputedJobTitle (..)
+    , HasComputedLabel (..)
     , HasComputedLastIncidentTimestamp (..)
+    , HasComputedLayer (..)
     , HasComputedName (..)
+    , HasComputedNumLoops (..)
+    , HasComputedOverflow (..)
+    , HasComputedRole (..)
+    , HasComputedRule (..)
+    , HasComputedSendShortEmail (..)
+    , HasComputedService (..)
+    , HasComputedServices (..)
+    , HasComputedSrc (..)
+    , HasComputedStartTime (..)
     , HasComputedStatus (..)
     , HasComputedTeamId (..)
+    , HasComputedTeams (..)
     , HasComputedTimeZone (..)
     , HasComputedType' (..)
     , HasComputedUserId (..)
+    , HasComputedVendor (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -267,98 +291,122 @@ class HasVendor a b | a -> b where
 instance HasVendor a b => HasVendor (TF.Schema l p a) b where
     vendor = TF.configuration . vendor
 
-class HasComputedAvatarUrl a b | a -> b where
-    computedAvatarUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedAvatarUrl =
-        to (\x -> TF.compute (TF.refKey x) "avatar_url")
+class HasComputedAcknowledgementTimeout a s b | a -> s b where
+    computedAcknowledgementTimeout :: TF.Ref s a -> b
 
-class HasComputedBlacklisted a b | a -> b where
-    computedBlacklisted
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedBlacklisted =
-        to (\x -> TF.compute (TF.refKey x) "blacklisted")
+class HasComputedAddress a s b | a -> s b where
+    computedAddress :: TF.Ref s a -> b
 
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedCreatedAt =
-        to (\x -> TF.compute (TF.refKey x) "created_at")
+class HasComputedAlertCreation a s b | a -> s b where
+    computedAlertCreation :: TF.Ref s a -> b
 
-class HasComputedEnabled a b | a -> b where
-    computedEnabled
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedEnabled =
-        to (\x -> TF.compute (TF.refKey x) "enabled")
+class HasComputedAutoResolveTimeout a s b | a -> s b where
+    computedAutoResolveTimeout :: TF.Ref s a -> b
 
-class HasComputedHtmlUrl a b | a -> b where
-    computedHtmlUrl
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedHtmlUrl =
-        to (\x -> TF.compute (TF.refKey x) "html_url")
+class HasComputedAvatarUrl a s b | a -> s b where
+    computedAvatarUrl :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedBlacklisted a s b | a -> s b where
+    computedBlacklisted :: TF.Ref s a -> b
 
-class HasComputedIntegrationEmail a b | a -> b where
-    computedIntegrationEmail
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIntegrationEmail =
-        to (\x -> TF.compute (TF.refKey x) "integration_email")
+class HasComputedColor a s b | a -> s b where
+    computedColor :: TF.Ref s a -> b
 
-class HasComputedIntegrationKey a b | a -> b where
-    computedIntegrationKey
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedIntegrationKey =
-        to (\x -> TF.compute (TF.refKey x) "integration_key")
+class HasComputedCountryCode a s b | a -> s b where
+    computedCountryCode :: TF.Ref s a -> b
 
-class HasComputedInvitationSent a b | a -> b where
-    computedInvitationSent
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedInvitationSent =
-        to (\x -> TF.compute (TF.refKey x) "invitation_sent")
+class HasComputedCreatedAt a s b | a -> s b where
+    computedCreatedAt :: TF.Ref s a -> b
 
-class HasComputedLastIncidentTimestamp a b | a -> b where
-    computedLastIncidentTimestamp
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedLastIncidentTimestamp =
-        to (\x -> TF.compute (TF.refKey x) "last_incident_timestamp")
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
 
-class HasComputedName a b | a -> b where
-    computedName
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedName =
-        to (\x -> TF.compute (TF.refKey x) "name")
+class HasComputedEmail a s b | a -> s b where
+    computedEmail :: TF.Ref s a -> b
 
-class HasComputedStatus a b | a -> b where
-    computedStatus
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedStatus =
-        to (\x -> TF.compute (TF.refKey x) "status")
+class HasComputedEnabled a s b | a -> s b where
+    computedEnabled :: TF.Ref s a -> b
 
-class HasComputedTeamId a b | a -> b where
-    computedTeamId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTeamId =
-        to (\x -> TF.compute (TF.refKey x) "team_id")
+class HasComputedEndTime a s b | a -> s b where
+    computedEndTime :: TF.Ref s a -> b
 
-class HasComputedTimeZone a b | a -> b where
-    computedTimeZone
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedTimeZone =
-        to (\x -> TF.compute (TF.refKey x) "time_zone")
+class HasComputedEscalationPolicy a s b | a -> s b where
+    computedEscalationPolicy :: TF.Ref s a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType'
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedType' =
-        to (\x -> TF.compute (TF.refKey x) "type")
+class HasComputedHtmlUrl a s b | a -> s b where
+    computedHtmlUrl :: TF.Ref s a -> b
 
-class HasComputedUserId a b | a -> b where
-    computedUserId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedUserId =
-        to (\x -> TF.compute (TF.refKey x) "user_id")
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedIntegrationEmail a s b | a -> s b where
+    computedIntegrationEmail :: TF.Ref s a -> b
+
+class HasComputedIntegrationKey a s b | a -> s b where
+    computedIntegrationKey :: TF.Ref s a -> b
+
+class HasComputedInvitationSent a s b | a -> s b where
+    computedInvitationSent :: TF.Ref s a -> b
+
+class HasComputedJobTitle a s b | a -> s b where
+    computedJobTitle :: TF.Ref s a -> b
+
+class HasComputedLabel a s b | a -> s b where
+    computedLabel :: TF.Ref s a -> b
+
+class HasComputedLastIncidentTimestamp a s b | a -> s b where
+    computedLastIncidentTimestamp :: TF.Ref s a -> b
+
+class HasComputedLayer a s b | a -> s b where
+    computedLayer :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNumLoops a s b | a -> s b where
+    computedNumLoops :: TF.Ref s a -> b
+
+class HasComputedOverflow a s b | a -> s b where
+    computedOverflow :: TF.Ref s a -> b
+
+class HasComputedRole a s b | a -> s b where
+    computedRole :: TF.Ref s a -> b
+
+class HasComputedRule a s b | a -> s b where
+    computedRule :: TF.Ref s a -> b
+
+class HasComputedSendShortEmail a s b | a -> s b where
+    computedSendShortEmail :: TF.Ref s a -> b
+
+class HasComputedService a s b | a -> s b where
+    computedService :: TF.Ref s a -> b
+
+class HasComputedServices a s b | a -> s b where
+    computedServices :: TF.Ref s a -> b
+
+class HasComputedSrc a s b | a -> s b where
+    computedSrc :: TF.Ref s a -> b
+
+class HasComputedStartTime a s b | a -> s b where
+    computedStartTime :: TF.Ref s a -> b
+
+class HasComputedStatus a s b | a -> s b where
+    computedStatus :: TF.Ref s a -> b
+
+class HasComputedTeamId a s b | a -> s b where
+    computedTeamId :: TF.Ref s a -> b
+
+class HasComputedTeams a s b | a -> s b where
+    computedTeams :: TF.Ref s a -> b
+
+class HasComputedTimeZone a s b | a -> s b where
+    computedTimeZone :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b
+
+class HasComputedUserId a s b | a -> s b where
+    computedUserId :: TF.Ref s a -> b
+
+class HasComputedVendor a s b | a -> s b where
+    computedVendor :: TF.Ref s a -> b

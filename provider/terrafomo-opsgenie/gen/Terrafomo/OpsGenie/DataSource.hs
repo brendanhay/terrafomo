@@ -32,6 +32,7 @@ module Terrafomo.OpsGenie.DataSource
     -- ** Computed Attributes
     , P.HasComputedFullName (..)
     , P.HasComputedRole (..)
+    , P.HasComputedUsername (..)
 
     -- * Re-exported Types
     , module P
@@ -41,7 +42,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -56,6 +57,7 @@ import           Terrafomo.OpsGenie.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @opsgenie_user@ OpsGenie datasource.
@@ -78,8 +80,16 @@ instance P.HasUsername (UserData s) (TF.Attr s Text) where
         lens (_username :: UserData s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserData s)
 
-instance P.HasComputedFullName (UserData s) (Text)
-instance P.HasComputedRole (UserData s) (Text)
+instance P.HasComputedFullName (UserData s) s (TF.Attr s Text) where
+    computedFullName x = TF.compute (TF.refKey x) "full_name"
+
+instance P.HasComputedRole (UserData s) s (TF.Attr s Text) where
+    computedRole x = TF.compute (TF.refKey x) "role"
+
+instance P.HasComputedUsername (UserData s) s (TF.Attr s Text) where
+    computedUsername =
+        (_username :: UserData s -> TF.Attr s Text)
+            . TF.refValue
 
 userData :: TF.Schema TF.DataSource P.OpsGenie (UserData s)
 userData =

@@ -46,13 +46,35 @@ module Terrafomo.SoftLayer.Lens
     , HasUserData (..)
 
     -- ** Computed Attributes
+    , HasComputedBackendVlanId (..)
+    , HasComputedBlockDeviceTemplateGroupGid (..)
+    , HasComputedCpu (..)
+    , HasComputedDedicatedAcctHostOnly (..)
+    , HasComputedDisks (..)
+    , HasComputedDomain (..)
     , HasComputedFingerprint (..)
+    , HasComputedFrontendVlanId (..)
+    , HasComputedHourlyBilling (..)
     , HasComputedId (..)
+    , HasComputedImage (..)
+    , HasComputedIpv4Address (..)
+    , HasComputedIpv4AddressPrivate (..)
+    , HasComputedLocalDisk (..)
+    , HasComputedName (..)
+    , HasComputedNotes (..)
+    , HasComputedPostInstallScriptUri (..)
+    , HasComputedPrivateNetworkOnly (..)
+    , HasComputedPublicKey (..)
+    , HasComputedPublicNetworkSpeed (..)
+    , HasComputedRam (..)
+    , HasComputedRegion (..)
+    , HasComputedSshKeys (..)
+    , HasComputedUserData (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -190,14 +212,74 @@ class HasUserData a b | a -> b where
 instance HasUserData a b => HasUserData (TF.Schema l p a) b where
     userData = TF.configuration . userData
 
-class HasComputedFingerprint a b | a -> b where
-    computedFingerprint
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedFingerprint =
-        to (\x -> TF.compute (TF.refKey x) "fingerprint")
+class HasComputedBackendVlanId a s b | a -> s b where
+    computedBackendVlanId :: TF.Ref s a -> b
 
-class HasComputedId a b | a -> b where
-    computedId
-        :: forall r s. Getting r (TF.Ref s a) (TF.Attr s b)
-    computedId =
-        to (\x -> TF.compute (TF.refKey x) "id")
+class HasComputedBlockDeviceTemplateGroupGid a s b | a -> s b where
+    computedBlockDeviceTemplateGroupGid :: TF.Ref s a -> b
+
+class HasComputedCpu a s b | a -> s b where
+    computedCpu :: TF.Ref s a -> b
+
+class HasComputedDedicatedAcctHostOnly a s b | a -> s b where
+    computedDedicatedAcctHostOnly :: TF.Ref s a -> b
+
+class HasComputedDisks a s b | a -> s b where
+    computedDisks :: TF.Ref s a -> b
+
+class HasComputedDomain a s b | a -> s b where
+    computedDomain :: TF.Ref s a -> b
+
+class HasComputedFingerprint a s b | a -> s b where
+    computedFingerprint :: TF.Ref s a -> b
+
+class HasComputedFrontendVlanId a s b | a -> s b where
+    computedFrontendVlanId :: TF.Ref s a -> b
+
+class HasComputedHourlyBilling a s b | a -> s b where
+    computedHourlyBilling :: TF.Ref s a -> b
+
+class HasComputedId a s b | a -> s b where
+    computedId :: TF.Ref s a -> b
+
+class HasComputedImage a s b | a -> s b where
+    computedImage :: TF.Ref s a -> b
+
+class HasComputedIpv4Address a s b | a -> s b where
+    computedIpv4Address :: TF.Ref s a -> b
+
+class HasComputedIpv4AddressPrivate a s b | a -> s b where
+    computedIpv4AddressPrivate :: TF.Ref s a -> b
+
+class HasComputedLocalDisk a s b | a -> s b where
+    computedLocalDisk :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNotes a s b | a -> s b where
+    computedNotes :: TF.Ref s a -> b
+
+class HasComputedPostInstallScriptUri a s b | a -> s b where
+    computedPostInstallScriptUri :: TF.Ref s a -> b
+
+class HasComputedPrivateNetworkOnly a s b | a -> s b where
+    computedPrivateNetworkOnly :: TF.Ref s a -> b
+
+class HasComputedPublicKey a s b | a -> s b where
+    computedPublicKey :: TF.Ref s a -> b
+
+class HasComputedPublicNetworkSpeed a s b | a -> s b where
+    computedPublicNetworkSpeed :: TF.Ref s a -> b
+
+class HasComputedRam a s b | a -> s b where
+    computedRam :: TF.Ref s a -> b
+
+class HasComputedRegion a s b | a -> s b where
+    computedRegion :: TF.Ref s a -> b
+
+class HasComputedSshKeys a s b | a -> s b where
+    computedSshKeys :: TF.Ref s a -> b
+
+class HasComputedUserData a s b | a -> s b where
+    computedUserData :: TF.Ref s a -> b

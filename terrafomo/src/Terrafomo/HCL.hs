@@ -164,7 +164,7 @@ instance Pretty Interpolate where
         Escape  (String x) -> "${" <> pretty x <> "}"
         Escape  x          -> "${" <> pretty x <> "}"
         Chunk   x          -> pretty x
-        Flatten xs         -> mconcat (List.intersperse "," (map go xs))
+        Flatten xs         -> mconcat (map go xs)
           where
             go = \case
                 Escape (String x) -> pretty x
@@ -197,9 +197,11 @@ attribute :: ToHCL a => Attr s a -> Maybe Value
 attribute = \case
     Attr.Compute  k' v _ -> Just (compute k' v)
     Attr.Constant    v   -> Just (toHCL      v)
-    Attr.Flatten    vs   ->
-        Just $ String (Flatten (map Escape . mapMaybe attribute $ vs))
-    _                    -> Nothing
+    Attr.Nil             -> Nothing
+    Attr.Join     v  vs  -> Just . String $ Flatten escaped
+      where
+        escaped = List.intersperse sep . map Escape $ mapMaybe attribute vs
+        sep     = Chunk (LText.fromStrict v)
 
 compute :: Key -> Name -> Value
 compute (Key t n) v =

@@ -49,7 +49,15 @@ module Terrafomo.ProfitBricks.DataSource
     , P.HasVersion (..)
 
     -- ** Computed Attributes
+    , P.HasComputedFeature (..)
     , P.HasComputedId (..)
+    , P.HasComputedLocation (..)
+    , P.HasComputedName (..)
+    , P.HasComputedResourceId (..)
+    , P.HasComputedResourceType (..)
+    , P.HasComputedSize (..)
+    , P.HasComputedType' (..)
+    , P.HasComputedVersion (..)
 
     -- * Re-exported Types
     , module P
@@ -59,7 +67,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -74,6 +82,7 @@ import           Terrafomo.ProfitBricks.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @profitbricks_datacenter@ ProfitBricks datasource.
@@ -109,7 +118,18 @@ instance P.HasName (DatacenterData s) (TF.Attr s Text) where
         lens (_name :: DatacenterData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatacenterData s)
 
-instance P.HasComputedId (DatacenterData s) (Text)
+instance P.HasComputedId (DatacenterData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLocation (DatacenterData s) s (TF.Attr s Text) where
+    computedLocation =
+        (_location :: DatacenterData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (DatacenterData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: DatacenterData s -> TF.Attr s Text)
+            . TF.refValue
 
 datacenterData :: TF.Schema TF.DataSource P.ProfitBricks (DatacenterData s)
 datacenterData =
@@ -163,7 +183,28 @@ instance P.HasVersion (ImageData s) (TF.Attr s Text) where
         lens (_version :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ImageData s)
 
-instance P.HasComputedId (ImageData s) (Text)
+instance P.HasComputedId (ImageData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLocation (ImageData s) s (TF.Attr s Text) where
+    computedLocation =
+        (_location :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ImageData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedType' (ImageData s) s (TF.Attr s Text) where
+    computedType' =
+        (_type' :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedVersion (ImageData s) s (TF.Attr s Text) where
+    computedVersion =
+        (_version :: ImageData s -> TF.Attr s Text)
+            . TF.refValue
 
 imageData :: TF.Schema TF.DataSource P.ProfitBricks (ImageData s)
 imageData =
@@ -203,7 +244,18 @@ instance P.HasName (LocationData s) (TF.Attr s Text) where
         lens (_name :: LocationData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LocationData s)
 
-instance P.HasComputedId (LocationData s) (Text)
+instance P.HasComputedFeature (LocationData s) s (TF.Attr s Text) where
+    computedFeature =
+        (_feature :: LocationData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (LocationData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (LocationData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: LocationData s -> TF.Attr s Text)
+            . TF.refValue
 
 locationData :: TF.Schema TF.DataSource P.ProfitBricks (LocationData s)
 locationData =
@@ -247,7 +299,18 @@ instance P.HasResourceType (ResourceData s) (TF.Attr s Text) where
         lens (_resource_type :: ResourceData s -> TF.Attr s Text)
              (\s a -> s { _resource_type = a } :: ResourceData s)
 
-instance P.HasComputedId (ResourceData s) (Text)
+instance P.HasComputedId (ResourceData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedResourceId (ResourceData s) s (TF.Attr s Text) where
+    computedResourceId =
+        (_resource_id :: ResourceData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedResourceType (ResourceData s) s (TF.Attr s Text) where
+    computedResourceType =
+        (_resource_type :: ResourceData s -> TF.Attr s Text)
+            . TF.refValue
 
 resourceData :: TF.Schema TF.DataSource P.ProfitBricks (ResourceData s)
 resourceData =
@@ -293,7 +356,23 @@ instance P.HasSize (SnapshotData s) (TF.Attr s Text) where
         lens (_size :: SnapshotData s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: SnapshotData s)
 
-instance P.HasComputedId (SnapshotData s) (Text)
+instance P.HasComputedId (SnapshotData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLocation (SnapshotData s) s (TF.Attr s Text) where
+    computedLocation =
+        (_location :: SnapshotData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (SnapshotData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: SnapshotData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSize (SnapshotData s) s (TF.Attr s Text) where
+    computedSize =
+        (_size :: SnapshotData s -> TF.Attr s Text)
+            . TF.refValue
 
 snapshotData :: TF.Schema TF.DataSource P.ProfitBricks (SnapshotData s)
 snapshotData =

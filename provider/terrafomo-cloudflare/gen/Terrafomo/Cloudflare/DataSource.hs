@@ -41,7 +41,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -56,6 +56,7 @@ import qualified Terrafomo.IP                  as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @cloudflare_ip_ranges@ Cloudflare datasource.
@@ -69,9 +70,14 @@ data IpRangesData s = IpRangesData {
 instance TF.ToHCL (IpRangesData s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedCidrBlocks (IpRangesData s) (Text)
-instance P.HasComputedIpv4CidrBlocks (IpRangesData s) (Text)
-instance P.HasComputedIpv6CidrBlocks (IpRangesData s) (Text)
+instance P.HasComputedCidrBlocks (IpRangesData s) s (TF.Attr s Text) where
+    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+
+instance P.HasComputedIpv4CidrBlocks (IpRangesData s) s (TF.Attr s Text) where
+    computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
+
+instance P.HasComputedIpv6CidrBlocks (IpRangesData s) s (TF.Attr s Text) where
+    computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
 
 ipRangesData :: TF.Schema TF.DataSource P.Cloudflare (IpRangesData s)
 ipRangesData =

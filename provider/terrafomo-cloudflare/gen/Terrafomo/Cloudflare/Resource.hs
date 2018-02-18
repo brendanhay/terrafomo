@@ -36,6 +36,7 @@ module Terrafomo.Cloudflare.Resource
     , P.HasValue (..)
 
     -- ** Computed Attributes
+    , P.HasComputedDomain (..)
     , P.HasComputedHostname (..)
     , P.HasComputedId (..)
     , P.HasComputedName (..)
@@ -54,7 +55,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -69,6 +70,7 @@ import qualified Terrafomo.IP                  as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @cloudflare_record@ Cloudflare resource.
@@ -138,15 +140,37 @@ instance P.HasValue (RecordResource s) (TF.Attr s Text) where
         lens (_value :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _value = a } :: RecordResource s)
 
-instance P.HasComputedHostname (RecordResource s) (Text)
-instance P.HasComputedId (RecordResource s) (Text)
-instance P.HasComputedName (RecordResource s) (Text)
-instance P.HasComputedPriority (RecordResource s) (Text)
-instance P.HasComputedProxied (RecordResource s) (Text)
-instance P.HasComputedTtl (RecordResource s) (Text)
-instance P.HasComputedType' (RecordResource s) (Text)
-instance P.HasComputedValue (RecordResource s) (Text)
-instance P.HasComputedZoneId (RecordResource s) (Text)
+instance P.HasComputedDomain (RecordResource s) s (TF.Attr s Text) where
+    computedDomain =
+        (_domain :: RecordResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHostname (RecordResource s) s (TF.Attr s Text) where
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
+
+instance P.HasComputedId (RecordResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (RecordResource s) s (TF.Attr s Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance P.HasComputedPriority (RecordResource s) s (TF.Attr s Text) where
+    computedPriority x = TF.compute (TF.refKey x) "priority"
+
+instance P.HasComputedProxied (RecordResource s) s (TF.Attr s Text) where
+    computedProxied x = TF.compute (TF.refKey x) "proxied"
+
+instance P.HasComputedTtl (RecordResource s) s (TF.Attr s Text) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
+
+instance P.HasComputedType' (RecordResource s) s (TF.Attr s Text) where
+    computedType' x = TF.compute (TF.refKey x) "type"
+
+instance P.HasComputedValue (RecordResource s) s (TF.Attr s Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
+
+instance P.HasComputedZoneId (RecordResource s) s (TF.Attr s Text) where
+    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 recordResource :: TF.Schema TF.Resource P.Cloudflare (RecordResource s)
 recordResource =

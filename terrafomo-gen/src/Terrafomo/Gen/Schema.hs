@@ -95,39 +95,56 @@ defaultType = Type
     }
 
 data Field = Field
-    { fieldClass  :: !Text
-    , fieldMethod :: !Text
-    , fieldLabel  :: !Text
-    , fieldName   :: !Text
-    , fieldType   :: !Type
+    { fieldClass    :: !Text
+    , fieldMethod   :: !Text
+    , fieldLabel    :: !Text
+    , fieldName     :: !Text
+    , fieldType     :: !Type
+    , fieldComputed :: !Bool
     } deriving (Show, Eq, Ord, Generic)
 
 instance ToJSON Field where
     toJSON = JSON.genericToJSON (JSON.options "field")
 
 getFields :: Schema -> (Set Field, Set Field)
-getFields Schema{..} = (args, attrs)
+getFields Schema{..} =
+    ( args
+    , Set.fromList $ Map.elems
+        ( attrs True  schemaAttributes
+       <> attrs False (fmap attributeArgument schemaArguments)
+        )
+    )
   where
-    args =  Set.fromList
-          . mapMaybe (\(k, v) -> go k <$> getLast (argName v) <*> getLast (argType v))
-          $ Map.toList schemaArguments
+    args =
+          Set.fromList
+        $ mapMaybe (\(k, v) ->
+            go k k False
+                <$> getLast (argName v) <*> getLast (argType v))
+          (Map.toList schemaArguments)
 
-    attrs = Set.fromList
-          . mapMaybe (\(k, v) -> go k <$> getLast (attrName v) <*> getLast (attrType v))
-          $ Map.toList schemaAttributes
+    attrs computed =
+        Map.mapMaybeWithKey (\k v ->
+            go k (safeAttrName k) computed
+                <$> getLast (attrName v) <*> getLast (attrType v))
 
-    go k name ty =
-        Field { fieldClass  = fieldClassName  k
-              , fieldMethod = fieldMethodName k
-              , fieldLabel  = k
-              , fieldName   = name
-              , fieldType   = ty
+    go k k' computed name ty =
+        Field { fieldClass    = fieldClassName  k'
+              , fieldMethod   = fieldMethodName k'
+              , fieldLabel    = k
+              , fieldName     = name
+              , fieldType     = ty
+              , fieldComputed = computed
               }
+
+    attributeArgument Arg{..} =
+        Attr { attrName = argName
+             , attrHelp = argHelp
+             , attrType = argType
+             }
 
 data Class = Class
     { className   :: !Text
     , classMethod :: !Text
-    , classSymbol :: !Text
     } deriving (Show, Eq, Ord, Generic)
 
 instance ToJSON Class where
@@ -140,7 +157,6 @@ getClasses =
     go = Set.map $ \x ->
         Class { className   = fieldClass  x
               , classMethod = fieldMethod x
-              , classSymbol = fieldName   x
               }
 
 data Schema = Schema
@@ -232,9 +248,9 @@ data Attr = Attr
 
 instance Semigroup Attr where
     (<>) parsed saved = Attr
-        { attrName = on (<>) attrName parsed saved
-        , attrHelp = on (<>) attrHelp parsed saved
-        , attrType = on (<>) attrType parsed saved
+        { attrName     = on (<>) attrName     parsed saved
+        , attrHelp     = on (<>) attrHelp     parsed saved
+        , attrType     = on (<>) attrType     parsed saved
         }
 
 instance ToJSON Attr where

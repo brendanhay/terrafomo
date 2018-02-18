@@ -61,11 +61,48 @@ module Terrafomo.CenturyLinkCloud.Lens
     , HasType' (..)
 
     -- ** Computed Attributes
+    , HasComputedAaPolicyId (..)
+    , HasComputedAdditionalDisks (..)
+    , HasComputedConfigurationId (..)
+    , HasComputedCpu (..)
+    , HasComputedCreatedDat (..)
+    , HasComputedCustomFields (..)
+    , HasComputedDataCenter (..)
+    , HasComputedDescription (..)
+    , HasComputedGroupId (..)
+    , HasComputedInternalIpAddress (..)
+    , HasComputedIpAddress (..)
+    , HasComputedLoadBalancer (..)
+    , HasComputedLocationId (..)
+    , HasComputedMemoryMb (..)
+    , HasComputedMetadata (..)
+    , HasComputedMethod (..)
+    , HasComputedModifiedDat (..)
+    , HasComputedName (..)
+    , HasComputedNameTemplate (..)
+    , HasComputedNetworkId (..)
+    , HasComputedNodes (..)
+    , HasComputedOsType (..)
+    , HasComputedParent (..)
+    , HasComputedParentGroupId (..)
+    , HasComputedPassword (..)
+    , HasComputedPersistence (..)
+    , HasComputedPort (..)
+    , HasComputedPorts (..)
+    , HasComputedPowerState (..)
+    , HasComputedPrivateIpAddress (..)
+    , HasComputedPublicIpAddress (..)
+    , HasComputedServerId (..)
+    , HasComputedSourceRestrictions (..)
+    , HasComputedSourceServerId (..)
+    , HasComputedStatus (..)
+    , HasComputedStorageType (..)
+    , HasComputedType' (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', lens, to)
+import Lens.Micro (Lens', lens)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -292,3 +329,114 @@ class HasType' a b | a -> b where
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
+
+class HasComputedAaPolicyId a s b | a -> s b where
+    computedAaPolicyId :: TF.Ref s a -> b
+
+class HasComputedAdditionalDisks a s b | a -> s b where
+    computedAdditionalDisks :: TF.Ref s a -> b
+
+class HasComputedConfigurationId a s b | a -> s b where
+    computedConfigurationId :: TF.Ref s a -> b
+
+class HasComputedCpu a s b | a -> s b where
+    computedCpu :: TF.Ref s a -> b
+
+class HasComputedCreatedDat a s b | a -> s b where
+    computedCreatedDat :: TF.Ref s a -> b
+
+class HasComputedCustomFields a s b | a -> s b where
+    computedCustomFields :: TF.Ref s a -> b
+
+class HasComputedDataCenter a s b | a -> s b where
+    computedDataCenter :: TF.Ref s a -> b
+
+class HasComputedDescription a s b | a -> s b where
+    computedDescription :: TF.Ref s a -> b
+
+class HasComputedGroupId a s b | a -> s b where
+    computedGroupId :: TF.Ref s a -> b
+
+class HasComputedInternalIpAddress a s b | a -> s b where
+    computedInternalIpAddress :: TF.Ref s a -> b
+
+class HasComputedIpAddress a s b | a -> s b where
+    computedIpAddress :: TF.Ref s a -> b
+
+class HasComputedLoadBalancer a s b | a -> s b where
+    computedLoadBalancer :: TF.Ref s a -> b
+
+class HasComputedLocationId a s b | a -> s b where
+    computedLocationId :: TF.Ref s a -> b
+
+class HasComputedMemoryMb a s b | a -> s b where
+    computedMemoryMb :: TF.Ref s a -> b
+
+class HasComputedMetadata a s b | a -> s b where
+    computedMetadata :: TF.Ref s a -> b
+
+class HasComputedMethod a s b | a -> s b where
+    computedMethod :: TF.Ref s a -> b
+
+class HasComputedModifiedDat a s b | a -> s b where
+    computedModifiedDat :: TF.Ref s a -> b
+
+class HasComputedName a s b | a -> s b where
+    computedName :: TF.Ref s a -> b
+
+class HasComputedNameTemplate a s b | a -> s b where
+    computedNameTemplate :: TF.Ref s a -> b
+
+class HasComputedNetworkId a s b | a -> s b where
+    computedNetworkId :: TF.Ref s a -> b
+
+class HasComputedNodes a s b | a -> s b where
+    computedNodes :: TF.Ref s a -> b
+
+class HasComputedOsType a s b | a -> s b where
+    computedOsType :: TF.Ref s a -> b
+
+class HasComputedParent a s b | a -> s b where
+    computedParent :: TF.Ref s a -> b
+
+class HasComputedParentGroupId a s b | a -> s b where
+    computedParentGroupId :: TF.Ref s a -> b
+
+class HasComputedPassword a s b | a -> s b where
+    computedPassword :: TF.Ref s a -> b
+
+class HasComputedPersistence a s b | a -> s b where
+    computedPersistence :: TF.Ref s a -> b
+
+class HasComputedPort a s b | a -> s b where
+    computedPort :: TF.Ref s a -> b
+
+class HasComputedPorts a s b | a -> s b where
+    computedPorts :: TF.Ref s a -> b
+
+class HasComputedPowerState a s b | a -> s b where
+    computedPowerState :: TF.Ref s a -> b
+
+class HasComputedPrivateIpAddress a s b | a -> s b where
+    computedPrivateIpAddress :: TF.Ref s a -> b
+
+class HasComputedPublicIpAddress a s b | a -> s b where
+    computedPublicIpAddress :: TF.Ref s a -> b
+
+class HasComputedServerId a s b | a -> s b where
+    computedServerId :: TF.Ref s a -> b
+
+class HasComputedSourceRestrictions a s b | a -> s b where
+    computedSourceRestrictions :: TF.Ref s a -> b
+
+class HasComputedSourceServerId a s b | a -> s b where
+    computedSourceServerId :: TF.Ref s a -> b
+
+class HasComputedStatus a s b | a -> s b where
+    computedStatus :: TF.Ref s a -> b
+
+class HasComputedStorageType a s b | a -> s b where
+    computedStorageType :: TF.Ref s a -> b
+
+class HasComputedType' a s b | a -> s b where
+    computedType' :: TF.Ref s a -> b

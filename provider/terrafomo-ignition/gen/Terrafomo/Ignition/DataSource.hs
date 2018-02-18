@@ -101,8 +101,50 @@ module Terrafomo.Ignition.DataSource
     , P.HasWipeTable (..)
 
     -- ** Computed Attributes
+    , P.HasComputedAppend (..)
+    , P.HasComputedArrays (..)
+    , P.HasComputedContent (..)
+    , P.HasComputedDevice (..)
+    , P.HasComputedDevices (..)
+    , P.HasComputedDirectories (..)
+    , P.HasComputedDisks (..)
+    , P.HasComputedDropin (..)
+    , P.HasComputedEnabled (..)
+    , P.HasComputedFiles (..)
+    , P.HasComputedFilesystem (..)
+    , P.HasComputedFilesystems (..)
+    , P.HasComputedGecos (..)
+    , P.HasComputedGid (..)
+    , P.HasComputedGroups (..)
+    , P.HasComputedHard (..)
+    , P.HasComputedHomeDir (..)
     , P.HasComputedId (..)
+    , P.HasComputedLevel (..)
+    , P.HasComputedLinks (..)
+    , P.HasComputedMask (..)
+    , P.HasComputedMode (..)
+    , P.HasComputedMount (..)
+    , P.HasComputedName (..)
+    , P.HasComputedNetworkd (..)
+    , P.HasComputedNoCreateHome (..)
+    , P.HasComputedNoLogInit (..)
+    , P.HasComputedNoUserGroup (..)
+    , P.HasComputedPartition (..)
+    , P.HasComputedPasswordHash (..)
+    , P.HasComputedPath (..)
+    , P.HasComputedPrimaryGroup (..)
     , P.HasComputedRendered (..)
+    , P.HasComputedReplace (..)
+    , P.HasComputedShell (..)
+    , P.HasComputedSource (..)
+    , P.HasComputedSpares (..)
+    , P.HasComputedSshAuthorizedKeys (..)
+    , P.HasComputedSystem (..)
+    , P.HasComputedSystemd (..)
+    , P.HasComputedTarget (..)
+    , P.HasComputedUid (..)
+    , P.HasComputedUsers (..)
+    , P.HasComputedWipeTable (..)
 
     -- * Re-exported Types
     , module P
@@ -112,7 +154,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -127,6 +169,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @ignition_config@ Ignition datasource.
@@ -237,7 +280,68 @@ instance P.HasUsers (ConfigData s) (TF.Attr s Text) where
         lens (_users :: ConfigData s -> TF.Attr s Text)
              (\s a -> s { _users = a } :: ConfigData s)
 
-instance P.HasComputedRendered (ConfigData s) (Text)
+instance P.HasComputedAppend (ConfigData s) s (TF.Attr s Text) where
+    computedAppend =
+        (_append :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedArrays (ConfigData s) s (TF.Attr s Text) where
+    computedArrays =
+        (_arrays :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDirectories (ConfigData s) s (TF.Attr s Text) where
+    computedDirectories =
+        (_directories :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDisks (ConfigData s) s (TF.Attr s Text) where
+    computedDisks =
+        (_disks :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFiles (ConfigData s) s (TF.Attr s Text) where
+    computedFiles =
+        (_files :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFilesystems (ConfigData s) s (TF.Attr s Text) where
+    computedFilesystems =
+        (_filesystems :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGroups (ConfigData s) s (TF.Attr s Text) where
+    computedGroups =
+        (_groups :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLinks (ConfigData s) s (TF.Attr s Text) where
+    computedLinks =
+        (_links :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNetworkd (ConfigData s) s (TF.Attr s Text) where
+    computedNetworkd =
+        (_networkd :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRendered (ConfigData s) s (TF.Attr s Text) where
+    computedRendered x = TF.compute (TF.refKey x) "rendered"
+
+instance P.HasComputedReplace (ConfigData s) s (TF.Attr s Text) where
+    computedReplace =
+        (_replace :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSystemd (ConfigData s) s (TF.Attr s Text) where
+    computedSystemd =
+        (_systemd :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUsers (ConfigData s) s (TF.Attr s Text) where
+    computedUsers =
+        (_users :: ConfigData s -> TF.Attr s Text)
+            . TF.refValue
 
 configData :: TF.Schema TF.DataSource P.Ignition (ConfigData s)
 configData =
@@ -308,7 +412,33 @@ instance P.HasUid (DirectoryData s) (TF.Attr s Text) where
         lens (_uid :: DirectoryData s -> TF.Attr s Text)
              (\s a -> s { _uid = a } :: DirectoryData s)
 
-instance P.HasComputedId (DirectoryData s) (Text)
+instance P.HasComputedFilesystem (DirectoryData s) s (TF.Attr s Text) where
+    computedFilesystem =
+        (_filesystem :: DirectoryData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGid (DirectoryData s) s (TF.Attr s Text) where
+    computedGid =
+        (_gid :: DirectoryData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (DirectoryData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMode (DirectoryData s) s (TF.Attr s Text) where
+    computedMode =
+        (_mode :: DirectoryData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPath (DirectoryData s) s (TF.Attr s Text) where
+    computedPath =
+        (_path :: DirectoryData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUid (DirectoryData s) s (TF.Attr s Text) where
+    computedUid =
+        (_uid :: DirectoryData s -> TF.Attr s Text)
+            . TF.refValue
 
 directoryData :: TF.Schema TF.DataSource P.Ignition (DirectoryData s)
 directoryData =
@@ -356,7 +486,23 @@ instance P.HasWipeTable (DiskData s) (TF.Attr s Text) where
         lens (_wipe_table :: DiskData s -> TF.Attr s Text)
              (\s a -> s { _wipe_table = a } :: DiskData s)
 
-instance P.HasComputedId (DiskData s) (Text)
+instance P.HasComputedDevice (DiskData s) s (TF.Attr s Text) where
+    computedDevice =
+        (_device :: DiskData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (DiskData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedPartition (DiskData s) s (TF.Attr s Text) where
+    computedPartition =
+        (_partition :: DiskData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedWipeTable (DiskData s) s (TF.Attr s Text) where
+    computedWipeTable =
+        (_wipe_table :: DiskData s -> TF.Attr s Text)
+            . TF.refValue
 
 diskData :: TF.Schema TF.DataSource P.Ignition (DiskData s)
 diskData =
@@ -434,7 +580,43 @@ instance P.HasUid (FileData s) (TF.Attr s Text) where
         lens (_uid :: FileData s -> TF.Attr s Text)
              (\s a -> s { _uid = a } :: FileData s)
 
-instance P.HasComputedId (FileData s) (Text)
+instance P.HasComputedContent (FileData s) s (TF.Attr s Text) where
+    computedContent =
+        (_content :: FileData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedFilesystem (FileData s) s (TF.Attr s Text) where
+    computedFilesystem =
+        (_filesystem :: FileData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGid (FileData s) s (TF.Attr s Text) where
+    computedGid =
+        (_gid :: FileData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (FileData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMode (FileData s) s (TF.Attr s Text) where
+    computedMode =
+        (_mode :: FileData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPath (FileData s) s (TF.Attr s Text) where
+    computedPath =
+        (_path :: FileData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSource (FileData s) s (TF.Attr s Text) where
+    computedSource =
+        (_source :: FileData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUid (FileData s) s (TF.Attr s Text) where
+    computedUid =
+        (_uid :: FileData s -> TF.Attr s Text)
+            . TF.refValue
 
 fileData :: TF.Schema TF.DataSource P.Ignition (FileData s)
 fileData =
@@ -485,7 +667,23 @@ instance P.HasPath (FilesystemData s) (TF.Attr s Text) where
         lens (_path :: FilesystemData s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: FilesystemData s)
 
-instance P.HasComputedId (FilesystemData s) (Text)
+instance P.HasComputedId (FilesystemData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMount (FilesystemData s) s (TF.Attr s Text) where
+    computedMount =
+        (_mount :: FilesystemData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (FilesystemData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: FilesystemData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPath (FilesystemData s) s (TF.Attr s Text) where
+    computedPath =
+        (_path :: FilesystemData s -> TF.Attr s Text)
+            . TF.refValue
 
 filesystemData :: TF.Schema TF.DataSource P.Ignition (FilesystemData s)
 filesystemData =
@@ -531,7 +729,23 @@ instance P.HasPasswordHash (GroupData s) (TF.Attr s Text) where
         lens (_password_hash :: GroupData s -> TF.Attr s Text)
              (\s a -> s { _password_hash = a } :: GroupData s)
 
-instance P.HasComputedId (GroupData s) (Text)
+instance P.HasComputedGid (GroupData s) s (TF.Attr s Text) where
+    computedGid =
+        (_gid :: GroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (GroupData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (GroupData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: GroupData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPasswordHash (GroupData s) s (TF.Attr s Text) where
+    computedPasswordHash =
+        (_password_hash :: GroupData s -> TF.Attr s Text)
+            . TF.refValue
 
 groupData :: TF.Schema TF.DataSource P.Ignition (GroupData s)
 groupData =
@@ -601,7 +815,38 @@ instance P.HasUid (LinkData s) (TF.Attr s Text) where
         lens (_uid :: LinkData s -> TF.Attr s Text)
              (\s a -> s { _uid = a } :: LinkData s)
 
-instance P.HasComputedId (LinkData s) (Text)
+instance P.HasComputedFilesystem (LinkData s) s (TF.Attr s Text) where
+    computedFilesystem =
+        (_filesystem :: LinkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGid (LinkData s) s (TF.Attr s Text) where
+    computedGid =
+        (_gid :: LinkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHard (LinkData s) s (TF.Attr s Text) where
+    computedHard =
+        (_hard :: LinkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (LinkData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedPath (LinkData s) s (TF.Attr s Text) where
+    computedPath =
+        (_path :: LinkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedTarget (LinkData s) s (TF.Attr s Text) where
+    computedTarget =
+        (_target :: LinkData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUid (LinkData s) s (TF.Attr s Text) where
+    computedUid =
+        (_uid :: LinkData s -> TF.Attr s Text)
+            . TF.refValue
 
 linkData :: TF.Schema TF.DataSource P.Ignition (LinkData s)
 linkData =
@@ -642,7 +887,18 @@ instance P.HasName (NetworkdUnitData s) (TF.Attr s Text) where
         lens (_name :: NetworkdUnitData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkdUnitData s)
 
-instance P.HasComputedId (NetworkdUnitData s) (Text)
+instance P.HasComputedContent (NetworkdUnitData s) s (TF.Attr s Text) where
+    computedContent =
+        (_content :: NetworkdUnitData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (NetworkdUnitData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (NetworkdUnitData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: NetworkdUnitData s -> TF.Attr s Text)
+            . TF.refValue
 
 networkdUnitData :: TF.Schema TF.DataSource P.Ignition (NetworkdUnitData s)
 networkdUnitData =
@@ -695,7 +951,28 @@ instance P.HasSpares (RaidData s) (TF.Attr s Text) where
         lens (_spares :: RaidData s -> TF.Attr s Text)
              (\s a -> s { _spares = a } :: RaidData s)
 
-instance P.HasComputedId (RaidData s) (Text)
+instance P.HasComputedDevices (RaidData s) s (TF.Attr s Text) where
+    computedDevices =
+        (_devices :: RaidData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (RaidData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedLevel (RaidData s) s (TF.Attr s Text) where
+    computedLevel =
+        (_level :: RaidData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (RaidData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: RaidData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSpares (RaidData s) s (TF.Attr s Text) where
+    computedSpares =
+        (_spares :: RaidData s -> TF.Attr s Text)
+            . TF.refValue
 
 raidData :: TF.Schema TF.DataSource P.Ignition (RaidData s)
 raidData =
@@ -758,7 +1035,33 @@ instance P.HasName (SystemdUnitData s) (TF.Attr s Text) where
         lens (_name :: SystemdUnitData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SystemdUnitData s)
 
-instance P.HasComputedId (SystemdUnitData s) (Text)
+instance P.HasComputedContent (SystemdUnitData s) s (TF.Attr s Text) where
+    computedContent =
+        (_content :: SystemdUnitData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedDropin (SystemdUnitData s) s (TF.Attr s Text) where
+    computedDropin =
+        (_dropin :: SystemdUnitData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedEnabled (SystemdUnitData s) s (TF.Attr s Text) where
+    computedEnabled =
+        (_enabled :: SystemdUnitData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (SystemdUnitData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedMask (SystemdUnitData s) s (TF.Attr s Text) where
+    computedMask =
+        (_mask :: SystemdUnitData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (SystemdUnitData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: SystemdUnitData s -> TF.Attr s Text)
+            . TF.refValue
 
 systemdUnitData :: TF.Schema TF.DataSource P.Ignition (SystemdUnitData s)
 systemdUnitData =
@@ -886,7 +1189,73 @@ instance P.HasUid (UserData s) (TF.Attr s Text) where
         lens (_uid :: UserData s -> TF.Attr s Text)
              (\s a -> s { _uid = a } :: UserData s)
 
-instance P.HasComputedId (UserData s) (Text)
+instance P.HasComputedGecos (UserData s) s (TF.Attr s Text) where
+    computedGecos =
+        (_gecos :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedGroups (UserData s) s (TF.Attr s Text) where
+    computedGroups =
+        (_groups :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedHomeDir (UserData s) s (TF.Attr s Text) where
+    computedHomeDir =
+        (_home_dir :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (UserData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance P.HasComputedName (UserData s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNoCreateHome (UserData s) s (TF.Attr s Text) where
+    computedNoCreateHome =
+        (_no_create_home :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNoLogInit (UserData s) s (TF.Attr s Text) where
+    computedNoLogInit =
+        (_no_log_init :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedNoUserGroup (UserData s) s (TF.Attr s Text) where
+    computedNoUserGroup =
+        (_no_user_group :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPasswordHash (UserData s) s (TF.Attr s Text) where
+    computedPasswordHash =
+        (_password_hash :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPrimaryGroup (UserData s) s (TF.Attr s Text) where
+    computedPrimaryGroup =
+        (_primary_group :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedShell (UserData s) s (TF.Attr s Text) where
+    computedShell =
+        (_shell :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSshAuthorizedKeys (UserData s) s (TF.Attr s Text) where
+    computedSshAuthorizedKeys =
+        (_ssh_authorized_keys :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedSystem (UserData s) s (TF.Attr s Text) where
+    computedSystem =
+        (_system :: UserData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedUid (UserData s) s (TF.Attr s Text) where
+    computedUid =
+        (_uid :: UserData s -> TF.Attr s Text)
+            . TF.refValue
 
 userData :: TF.Schema TF.DataSource P.Ignition (UserData s)
 userData =

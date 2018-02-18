@@ -43,6 +43,12 @@ module Terrafomo.InfluxDB.Resource
 
     -- ** Computed Attributes
     , P.HasComputedAdmin (..)
+    , P.HasComputedDatabase (..)
+    , P.HasComputedGrant (..)
+    , P.HasComputedName (..)
+    , P.HasComputedPassword (..)
+    , P.HasComputedQuery (..)
+    , P.HasComputedRetentionPolicies (..)
 
     -- * Re-exported Types
     , module P
@@ -52,7 +58,7 @@ import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 import Data.Text    (Text)
 
-import GHC.Base (Eq, ($))
+import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
@@ -67,6 +73,7 @@ import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @influxdb_continuous_query@ InfluxDB resource.
@@ -105,6 +112,20 @@ instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s Text) where
         lens (_query :: ContinuousQueryResource s -> TF.Attr s Text)
              (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
+instance P.HasComputedDatabase (ContinuousQueryResource s) s (TF.Attr s Text) where
+    computedDatabase =
+        (_database :: ContinuousQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (ContinuousQueryResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: ContinuousQueryResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedQuery (ContinuousQueryResource s) s (TF.Attr s Text) where
+    computedQuery =
+        (_query :: ContinuousQueryResource s -> TF.Attr s Text)
+            . TF.refValue
 
 continuousQueryResource :: TF.Schema TF.Resource P.InfluxDB (ContinuousQueryResource s)
 continuousQueryResource =
@@ -142,6 +163,15 @@ instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s Text) where
         lens (_retention_policies :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _retention_policies = a } :: DatabaseResource s)
 
+instance P.HasComputedName (DatabaseResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: DatabaseResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedRetentionPolicies (DatabaseResource s) s (TF.Attr s Text) where
+    computedRetentionPolicies =
+        (_retention_policies :: DatabaseResource s -> TF.Attr s Text)
+            . TF.refValue
 
 databaseResource :: TF.Schema TF.Resource P.InfluxDB (DatabaseResource s)
 databaseResource =
@@ -194,7 +224,23 @@ instance P.HasPassword (UserResource s) (TF.Attr s Text) where
         lens (_password :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasComputedAdmin (UserResource s) (Text)
+instance P.HasComputedAdmin (UserResource s) s (TF.Attr s Text) where
+    computedAdmin x = TF.compute (TF.refKey x) "admin"
+
+instance P.HasComputedGrant (UserResource s) s (TF.Attr s Text) where
+    computedGrant =
+        (_grant :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (UserResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedPassword (UserResource s) s (TF.Attr s Text) where
+    computedPassword =
+        (_password :: UserResource s -> TF.Attr s Text)
+            . TF.refValue
 
 userResource :: TF.Schema TF.Resource P.InfluxDB (UserResource s)
 userResource =
