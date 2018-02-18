@@ -51,21 +51,11 @@ class HasDescription a b | a -> b where
 instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-instance HasDescription a b => HasDescription (TF.Ref s a) b where
-    description =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . description
-
 class HasFullName a b | a -> b where
     fullName :: Lens' a b
 
 instance HasFullName a b => HasFullName (TF.Schema l p a) b where
     fullName = TF.configuration . fullName
-
-instance HasFullName a b => HasFullName (TF.Ref s a) b where
-    fullName =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . fullName
 
 class HasLocale a b | a -> b where
     locale :: Lens' a b
@@ -73,21 +63,11 @@ class HasLocale a b | a -> b where
 instance HasLocale a b => HasLocale (TF.Schema l p a) b where
     locale = TF.configuration . locale
 
-instance HasLocale a b => HasLocale (TF.Ref s a) b where
-    locale =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . locale
-
 class HasMember a b | a -> b where
     member :: Lens' a b
 
 instance HasMember a b => HasMember (TF.Schema l p a) b where
     member = TF.configuration . member
-
-instance HasMember a b => HasMember (TF.Ref s a) b where
-    member =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . member
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -95,21 +75,11 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-instance HasName a b => HasName (TF.Ref s a) b where
-    name =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . name
-
 class HasRole a b | a -> b where
     role :: Lens' a b
 
 instance HasRole a b => HasRole (TF.Schema l p a) b where
     role = TF.configuration . role
-
-instance HasRole a b => HasRole (TF.Ref s a) b where
-    role =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . role
 
 class HasTimezone a b | a -> b where
     timezone :: Lens' a b
@@ -117,21 +87,11 @@ class HasTimezone a b | a -> b where
 instance HasTimezone a b => HasTimezone (TF.Schema l p a) b where
     timezone = TF.configuration . timezone
 
-instance HasTimezone a b => HasTimezone (TF.Ref s a) b where
-    timezone =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . timezone
-
 class HasUsername a b | a -> b where
     username :: Lens' a b
 
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
-
-instance HasUsername a b => HasUsername (TF.Ref s a) b where
-    username =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . username
 
 class HasComputedFullName a b | a -> b where
     computedFullName

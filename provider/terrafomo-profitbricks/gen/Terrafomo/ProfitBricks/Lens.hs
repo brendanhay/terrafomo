@@ -50,21 +50,11 @@ class HasDescription a b | a -> b where
 instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-instance HasDescription a b => HasDescription (TF.Ref s a) b where
-    description =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . description
-
 class HasFeature a b | a -> b where
     feature :: Lens' a b
 
 instance HasFeature a b => HasFeature (TF.Schema l p a) b where
     feature = TF.configuration . feature
-
-instance HasFeature a b => HasFeature (TF.Ref s a) b where
-    feature =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . feature
 
 class HasLocation a b | a -> b where
     location :: Lens' a b
@@ -72,21 +62,11 @@ class HasLocation a b | a -> b where
 instance HasLocation a b => HasLocation (TF.Schema l p a) b where
     location = TF.configuration . location
 
-instance HasLocation a b => HasLocation (TF.Ref s a) b where
-    location =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . location
-
 class HasName a b | a -> b where
     name :: Lens' a b
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
-
-instance HasName a b => HasName (TF.Ref s a) b where
-    name =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . name
 
 class HasResourceId a b | a -> b where
     resourceId :: Lens' a b
@@ -94,21 +74,11 @@ class HasResourceId a b | a -> b where
 instance HasResourceId a b => HasResourceId (TF.Schema l p a) b where
     resourceId = TF.configuration . resourceId
 
-instance HasResourceId a b => HasResourceId (TF.Ref s a) b where
-    resourceId =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . resourceId
-
 class HasResourceType a b | a -> b where
     resourceType :: Lens' a b
 
 instance HasResourceType a b => HasResourceType (TF.Schema l p a) b where
     resourceType = TF.configuration . resourceType
-
-instance HasResourceType a b => HasResourceType (TF.Ref s a) b where
-    resourceType =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . resourceType
 
 class HasSize a b | a -> b where
     size :: Lens' a b
@@ -116,32 +86,17 @@ class HasSize a b | a -> b where
 instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size
 
-instance HasSize a b => HasSize (TF.Ref s a) b where
-    size =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . size
-
 class HasType' a b | a -> b where
     type' :: Lens' a b
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-instance HasType' a b => HasType' (TF.Ref s a) b where
-    type' =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . type'
-
 class HasVersion a b | a -> b where
     version :: Lens' a b
 
 instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
-
-instance HasVersion a b => HasVersion (TF.Ref s a) b where
-    version =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . version
 
 class HasComputedId a b | a -> b where
     computedId

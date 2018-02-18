@@ -51,21 +51,11 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-instance HasName a b => HasName (TF.Ref s a) b where
-    name =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . name
-
 class HasSmtpPassword a b | a -> b where
     smtpPassword :: Lens' a b
 
 instance HasSmtpPassword a b => HasSmtpPassword (TF.Schema l p a) b where
     smtpPassword = TF.configuration . smtpPassword
-
-instance HasSmtpPassword a b => HasSmtpPassword (TF.Ref s a) b where
-    smtpPassword =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . smtpPassword
 
 class HasSpamAction a b | a -> b where
     spamAction :: Lens' a b
@@ -73,21 +63,11 @@ class HasSpamAction a b | a -> b where
 instance HasSpamAction a b => HasSpamAction (TF.Schema l p a) b where
     spamAction = TF.configuration . spamAction
 
-instance HasSpamAction a b => HasSpamAction (TF.Ref s a) b where
-    spamAction =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . spamAction
-
 class HasWildcard a b | a -> b where
     wildcard :: Lens' a b
 
 instance HasWildcard a b => HasWildcard (TF.Schema l p a) b where
     wildcard = TF.configuration . wildcard
-
-instance HasWildcard a b => HasWildcard (TF.Ref s a) b where
-    wildcard =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . wildcard
 
 class HasComputedName a b | a -> b where
     computedName

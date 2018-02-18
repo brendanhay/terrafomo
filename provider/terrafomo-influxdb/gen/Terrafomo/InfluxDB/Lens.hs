@@ -48,21 +48,11 @@ class HasAdmin a b | a -> b where
 instance HasAdmin a b => HasAdmin (TF.Schema l p a) b where
     admin = TF.configuration . admin
 
-instance HasAdmin a b => HasAdmin (TF.Ref s a) b where
-    admin =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . admin
-
 class HasDatabase a b | a -> b where
     database :: Lens' a b
 
 instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
-
-instance HasDatabase a b => HasDatabase (TF.Ref s a) b where
-    database =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . database
 
 class HasGrant a b | a -> b where
     grant :: Lens' a b
@@ -70,21 +60,11 @@ class HasGrant a b | a -> b where
 instance HasGrant a b => HasGrant (TF.Schema l p a) b where
     grant = TF.configuration . grant
 
-instance HasGrant a b => HasGrant (TF.Ref s a) b where
-    grant =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . grant
-
 class HasName a b | a -> b where
     name :: Lens' a b
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
-
-instance HasName a b => HasName (TF.Ref s a) b where
-    name =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . name
 
 class HasPassword a b | a -> b where
     password :: Lens' a b
@@ -92,32 +72,17 @@ class HasPassword a b | a -> b where
 instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
 
-instance HasPassword a b => HasPassword (TF.Ref s a) b where
-    password =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . password
-
 class HasQuery a b | a -> b where
     query :: Lens' a b
 
 instance HasQuery a b => HasQuery (TF.Schema l p a) b where
     query = TF.configuration . query
 
-instance HasQuery a b => HasQuery (TF.Ref s a) b where
-    query =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . query
-
 class HasRetentionPolicies a b | a -> b where
     retentionPolicies :: Lens' a b
 
 instance HasRetentionPolicies a b => HasRetentionPolicies (TF.Schema l p a) b where
     retentionPolicies = TF.configuration . retentionPolicies
-
-instance HasRetentionPolicies a b => HasRetentionPolicies (TF.Ref s a) b where
-    retentionPolicies =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . retentionPolicies
 
 class HasComputedAdmin a b | a -> b where
     computedAdmin

@@ -50,21 +50,11 @@ class HasData' a b | a -> b where
 instance HasData' a b => HasData' (TF.Schema l p a) b where
     data' = TF.configuration . data'
 
-instance HasData' a b => HasData' (TF.Ref s a) b where
-    data' =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . data'
-
 class HasImagePullSecret a b | a -> b where
     imagePullSecret :: Lens' a b
 
 instance HasImagePullSecret a b => HasImagePullSecret (TF.Schema l p a) b where
     imagePullSecret = TF.configuration . imagePullSecret
-
-instance HasImagePullSecret a b => HasImagePullSecret (TF.Ref s a) b where
-    imagePullSecret =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . imagePullSecret
 
 class HasMetadata a b | a -> b where
     metadata :: Lens' a b
@@ -72,21 +62,11 @@ class HasMetadata a b | a -> b where
 instance HasMetadata a b => HasMetadata (TF.Schema l p a) b where
     metadata = TF.configuration . metadata
 
-instance HasMetadata a b => HasMetadata (TF.Ref s a) b where
-    metadata =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . metadata
-
 class HasParameters a b | a -> b where
     parameters :: Lens' a b
 
 instance HasParameters a b => HasParameters (TF.Schema l p a) b where
     parameters = TF.configuration . parameters
-
-instance HasParameters a b => HasParameters (TF.Ref s a) b where
-    parameters =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . parameters
 
 class HasSecret a b | a -> b where
     secret :: Lens' a b
@@ -94,21 +74,11 @@ class HasSecret a b | a -> b where
 instance HasSecret a b => HasSecret (TF.Schema l p a) b where
     secret = TF.configuration . secret
 
-instance HasSecret a b => HasSecret (TF.Ref s a) b where
-    secret =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . secret
-
 class HasSpec a b | a -> b where
     spec :: Lens' a b
 
 instance HasSpec a b => HasSpec (TF.Schema l p a) b where
     spec = TF.configuration . spec
-
-instance HasSpec a b => HasSpec (TF.Ref s a) b where
-    spec =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . spec
 
 class HasStorageProvisioner a b | a -> b where
     storageProvisioner :: Lens' a b
@@ -116,32 +86,17 @@ class HasStorageProvisioner a b | a -> b where
 instance HasStorageProvisioner a b => HasStorageProvisioner (TF.Schema l p a) b where
     storageProvisioner = TF.configuration . storageProvisioner
 
-instance HasStorageProvisioner a b => HasStorageProvisioner (TF.Ref s a) b where
-    storageProvisioner =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . storageProvisioner
-
 class HasType' a b | a -> b where
     type' :: Lens' a b
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-instance HasType' a b => HasType' (TF.Ref s a) b where
-    type' =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . type'
-
 class HasWaitUntilBound a b | a -> b where
     waitUntilBound :: Lens' a b
 
 instance HasWaitUntilBound a b => HasWaitUntilBound (TF.Schema l p a) b where
     waitUntilBound = TF.configuration . waitUntilBound
-
-instance HasWaitUntilBound a b => HasWaitUntilBound (TF.Ref s a) b where
-    waitUntilBound =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . waitUntilBound
 
 class HasComputedDefaultSecretName a b | a -> b where
     computedDefaultSecretName

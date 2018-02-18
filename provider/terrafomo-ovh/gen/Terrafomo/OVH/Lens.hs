@@ -95,21 +95,11 @@ class HasDescription a b | a -> b where
 instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-instance HasDescription a b => HasDescription (TF.Ref s a) b where
-    description =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . description
-
 class HasDhcp a b | a -> b where
     dhcp :: Lens' a b
 
 instance HasDhcp a b => HasDhcp (TF.Schema l p a) b where
     dhcp = TF.configuration . dhcp
-
-instance HasDhcp a b => HasDhcp (TF.Ref s a) b where
-    dhcp =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . dhcp
 
 class HasEnd a b | a -> b where
     end :: Lens' a b
@@ -117,21 +107,11 @@ class HasEnd a b | a -> b where
 instance HasEnd a b => HasEnd (TF.Schema l p a) b where
     end = TF.configuration . end
 
-instance HasEnd a b => HasEnd (TF.Ref s a) b where
-    end =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . end
-
 class HasFieldType a b | a -> b where
     fieldType :: Lens' a b
 
 instance HasFieldType a b => HasFieldType (TF.Schema l p a) b where
     fieldType = TF.configuration . fieldType
-
-instance HasFieldType a b => HasFieldType (TF.Ref s a) b where
-    fieldType =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . fieldType
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -139,21 +119,11 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-instance HasName a b => HasName (TF.Ref s a) b where
-    name =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . name
-
 class HasNetwork a b | a -> b where
     network :: Lens' a b
 
 instance HasNetwork a b => HasNetwork (TF.Schema l p a) b where
     network = TF.configuration . network
-
-instance HasNetwork a b => HasNetwork (TF.Ref s a) b where
-    network =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . network
 
 class HasNetworkId a b | a -> b where
     networkId :: Lens' a b
@@ -161,21 +131,11 @@ class HasNetworkId a b | a -> b where
 instance HasNetworkId a b => HasNetworkId (TF.Schema l p a) b where
     networkId = TF.configuration . networkId
 
-instance HasNetworkId a b => HasNetworkId (TF.Ref s a) b where
-    networkId =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . networkId
-
 class HasNoGateway a b | a -> b where
     noGateway :: Lens' a b
 
 instance HasNoGateway a b => HasNoGateway (TF.Schema l p a) b where
     noGateway = TF.configuration . noGateway
-
-instance HasNoGateway a b => HasNoGateway (TF.Ref s a) b where
-    noGateway =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . noGateway
 
 class HasProjectId a b | a -> b where
     projectId :: Lens' a b
@@ -183,21 +143,11 @@ class HasProjectId a b | a -> b where
 instance HasProjectId a b => HasProjectId (TF.Schema l p a) b where
     projectId = TF.configuration . projectId
 
-instance HasProjectId a b => HasProjectId (TF.Ref s a) b where
-    projectId =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . projectId
-
 class HasRegion a b | a -> b where
     region :: Lens' a b
 
 instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
-
-instance HasRegion a b => HasRegion (TF.Ref s a) b where
-    region =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . region
 
 class HasRegions a b | a -> b where
     regions :: Lens' a b
@@ -205,21 +155,11 @@ class HasRegions a b | a -> b where
 instance HasRegions a b => HasRegions (TF.Schema l p a) b where
     regions = TF.configuration . regions
 
-instance HasRegions a b => HasRegions (TF.Ref s a) b where
-    regions =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . regions
-
 class HasStart a b | a -> b where
     start :: Lens' a b
 
 instance HasStart a b => HasStart (TF.Schema l p a) b where
     start = TF.configuration . start
-
-instance HasStart a b => HasStart (TF.Ref s a) b where
-    start =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . start
 
 class HasSubDomain a b | a -> b where
     subDomain :: Lens' a b
@@ -227,21 +167,11 @@ class HasSubDomain a b | a -> b where
 instance HasSubDomain a b => HasSubDomain (TF.Schema l p a) b where
     subDomain = TF.configuration . subDomain
 
-instance HasSubDomain a b => HasSubDomain (TF.Ref s a) b where
-    subDomain =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . subDomain
-
 class HasTarget a b | a -> b where
     target :: Lens' a b
 
 instance HasTarget a b => HasTarget (TF.Schema l p a) b where
     target = TF.configuration . target
-
-instance HasTarget a b => HasTarget (TF.Ref s a) b where
-    target =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . target
 
 class HasTtl a b | a -> b where
     ttl :: Lens' a b
@@ -249,21 +179,11 @@ class HasTtl a b | a -> b where
 instance HasTtl a b => HasTtl (TF.Schema l p a) b where
     ttl = TF.configuration . ttl
 
-instance HasTtl a b => HasTtl (TF.Ref s a) b where
-    ttl =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . ttl
-
 class HasVlanId a b | a -> b where
     vlanId :: Lens' a b
 
 instance HasVlanId a b => HasVlanId (TF.Schema l p a) b where
     vlanId = TF.configuration . vlanId
-
-instance HasVlanId a b => HasVlanId (TF.Ref s a) b where
-    vlanId =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . vlanId
 
 class HasVrackId a b | a -> b where
     vrackId :: Lens' a b
@@ -271,21 +191,11 @@ class HasVrackId a b | a -> b where
 instance HasVrackId a b => HasVrackId (TF.Schema l p a) b where
     vrackId = TF.configuration . vrackId
 
-instance HasVrackId a b => HasVrackId (TF.Ref s a) b where
-    vrackId =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . vrackId
-
 class HasZone a b | a -> b where
     zone :: Lens' a b
 
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
-
-instance HasZone a b => HasZone (TF.Ref s a) b where
-    zone =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . zone
 
 class HasComputedCidr a b | a -> b where
     computedCidr

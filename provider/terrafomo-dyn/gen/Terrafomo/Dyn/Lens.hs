@@ -47,21 +47,11 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-instance HasName a b => HasName (TF.Ref s a) b where
-    name =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . name
-
 class HasTtl a b | a -> b where
     ttl :: Lens' a b
 
 instance HasTtl a b => HasTtl (TF.Schema l p a) b where
     ttl = TF.configuration . ttl
-
-instance HasTtl a b => HasTtl (TF.Ref s a) b where
-    ttl =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . ttl
 
 class HasType' a b | a -> b where
     type' :: Lens' a b
@@ -69,32 +59,17 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-instance HasType' a b => HasType' (TF.Ref s a) b where
-    type' =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . type'
-
 class HasValue a b | a -> b where
     value :: Lens' a b
 
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
-instance HasValue a b => HasValue (TF.Ref s a) b where
-    value =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . value
-
 class HasZone a b | a -> b where
     zone :: Lens' a b
 
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
-
-instance HasZone a b => HasZone (TF.Ref s a) b where
-    zone =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . zone
 
 class HasComputedFqdn a b | a -> b where
     computedFqdn

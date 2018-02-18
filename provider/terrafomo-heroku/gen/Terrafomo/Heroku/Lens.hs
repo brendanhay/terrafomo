@@ -80,21 +80,11 @@ class HasAcm a b | a -> b where
 instance HasAcm a b => HasAcm (TF.Schema l p a) b where
     acm = TF.configuration . acm
 
-instance HasAcm a b => HasAcm (TF.Ref s a) b where
-    acm =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . acm
-
 class HasAddonId a b | a -> b where
     addonId :: Lens' a b
 
 instance HasAddonId a b => HasAddonId (TF.Schema l p a) b where
     addonId = TF.configuration . addonId
-
-instance HasAddonId a b => HasAddonId (TF.Ref s a) b where
-    addonId =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . addonId
 
 class HasApp a b | a -> b where
     app :: Lens' a b
@@ -102,21 +92,11 @@ class HasApp a b | a -> b where
 instance HasApp a b => HasApp (TF.Schema l p a) b where
     app = TF.configuration . app
 
-instance HasApp a b => HasApp (TF.Ref s a) b where
-    app =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . app
-
 class HasAppId a b | a -> b where
     appId :: Lens' a b
 
 instance HasAppId a b => HasAppId (TF.Schema l p a) b where
     appId = TF.configuration . appId
-
-instance HasAppId a b => HasAppId (TF.Ref s a) b where
-    appId =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . appId
 
 class HasBuildpacks a b | a -> b where
     buildpacks :: Lens' a b
@@ -124,21 +104,11 @@ class HasBuildpacks a b | a -> b where
 instance HasBuildpacks a b => HasBuildpacks (TF.Schema l p a) b where
     buildpacks = TF.configuration . buildpacks
 
-instance HasBuildpacks a b => HasBuildpacks (TF.Ref s a) b where
-    buildpacks =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . buildpacks
-
 class HasCertificateChain a b | a -> b where
     certificateChain :: Lens' a b
 
 instance HasCertificateChain a b => HasCertificateChain (TF.Schema l p a) b where
     certificateChain = TF.configuration . certificateChain
-
-instance HasCertificateChain a b => HasCertificateChain (TF.Ref s a) b where
-    certificateChain =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . certificateChain
 
 class HasConfig a b | a -> b where
     config :: Lens' a b
@@ -146,21 +116,11 @@ class HasConfig a b | a -> b where
 instance HasConfig a b => HasConfig (TF.Schema l p a) b where
     config = TF.configuration . config
 
-instance HasConfig a b => HasConfig (TF.Ref s a) b where
-    config =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . config
-
 class HasConfigVars a b | a -> b where
     configVars :: Lens' a b
 
 instance HasConfigVars a b => HasConfigVars (TF.Schema l p a) b where
     configVars = TF.configuration . configVars
-
-instance HasConfigVars a b => HasConfigVars (TF.Ref s a) b where
-    configVars =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . configVars
 
 class HasEnabled a b | a -> b where
     enabled :: Lens' a b
@@ -168,21 +128,11 @@ class HasEnabled a b | a -> b where
 instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
     enabled = TF.configuration . enabled
 
-instance HasEnabled a b => HasEnabled (TF.Ref s a) b where
-    enabled =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . enabled
-
 class HasHostname a b | a -> b where
     hostname :: Lens' a b
 
 instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
-
-instance HasHostname a b => HasHostname (TF.Ref s a) b where
-    hostname =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . hostname
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -190,21 +140,11 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-instance HasName a b => HasName (TF.Ref s a) b where
-    name =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . name
-
 class HasOrganization a b | a -> b where
     organization :: Lens' a b
 
 instance HasOrganization a b => HasOrganization (TF.Schema l p a) b where
     organization = TF.configuration . organization
-
-instance HasOrganization a b => HasOrganization (TF.Ref s a) b where
-    organization =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . organization
 
 class HasPipeline a b | a -> b where
     pipeline :: Lens' a b
@@ -212,21 +152,11 @@ class HasPipeline a b | a -> b where
 instance HasPipeline a b => HasPipeline (TF.Schema l p a) b where
     pipeline = TF.configuration . pipeline
 
-instance HasPipeline a b => HasPipeline (TF.Ref s a) b where
-    pipeline =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . pipeline
-
 class HasPlan a b | a -> b where
     plan :: Lens' a b
 
 instance HasPlan a b => HasPlan (TF.Schema l p a) b where
     plan = TF.configuration . plan
-
-instance HasPlan a b => HasPlan (TF.Ref s a) b where
-    plan =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . plan
 
 class HasPrivateKey a b | a -> b where
     privateKey :: Lens' a b
@@ -234,21 +164,11 @@ class HasPrivateKey a b | a -> b where
 instance HasPrivateKey a b => HasPrivateKey (TF.Schema l p a) b where
     privateKey = TF.configuration . privateKey
 
-instance HasPrivateKey a b => HasPrivateKey (TF.Ref s a) b where
-    privateKey =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . privateKey
-
 class HasRegion a b | a -> b where
     region :: Lens' a b
 
 instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
-
-instance HasRegion a b => HasRegion (TF.Ref s a) b where
-    region =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . region
 
 class HasSpace a b | a -> b where
     space :: Lens' a b
@@ -256,21 +176,11 @@ class HasSpace a b | a -> b where
 instance HasSpace a b => HasSpace (TF.Schema l p a) b where
     space = TF.configuration . space
 
-instance HasSpace a b => HasSpace (TF.Ref s a) b where
-    space =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . space
-
 class HasStack a b | a -> b where
     stack :: Lens' a b
 
 instance HasStack a b => HasStack (TF.Schema l p a) b where
     stack = TF.configuration . stack
-
-instance HasStack a b => HasStack (TF.Ref s a) b where
-    stack =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . stack
 
 class HasStage a b | a -> b where
     stage :: Lens' a b
@@ -278,21 +188,11 @@ class HasStage a b | a -> b where
 instance HasStage a b => HasStage (TF.Schema l p a) b where
     stage = TF.configuration . stage
 
-instance HasStage a b => HasStage (TF.Ref s a) b where
-    stage =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . stage
-
 class HasUrl a b | a -> b where
     url :: Lens' a b
 
 instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
-
-instance HasUrl a b => HasUrl (TF.Ref s a) b where
-    url =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . url
 
 class HasComputedAllConfigVars a b | a -> b where
     computedAllConfigVars

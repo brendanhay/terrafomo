@@ -40,11 +40,6 @@ class {{ class.value.name }} a b | a -> b where
 
 instance {{ class.value.name }} a b => {{ class.value.name}} (TF.Schema l p a) b where
     {{ class.value.method }} = TF.configuration . {{ class.value.method }}
-
-instance {{ class.value.name }} a b => {{ class.value.name}} (TF.Ref s a) b where
-    {{ class.value.method }} =
-        lens TF.refValue (\s a -> s { TF.refValue =  a })
-            . {{ class.value.method }}
 {% endfor %}
 {% for class in attributeClasses %}
 
