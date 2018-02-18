@@ -30,6 +30,9 @@ data Attr s a
     | Nil
       deriving (Show, Eq, Generic)
 
+-- Flatten above is really a sign of some expression language - rather than a
+-- special one off case. For instance, doing a join(strs, ',')
+
 instance Hashable a => Hashable (Attr s a)
 
 instance IsString a => IsString (Attr s a) where

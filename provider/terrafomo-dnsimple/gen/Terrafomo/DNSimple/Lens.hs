@@ -42,7 +42,7 @@ module Terrafomo.DNSimple.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', to)
+import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -54,11 +54,21 @@ class HasDomain a b | a -> b where
 instance HasDomain a b => HasDomain (TF.Schema l p a) b where
     domain = TF.configuration . domain
 
+instance HasDomain a b => HasDomain (TF.Ref s a) b where
+    domain =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . domain
+
 class HasName a b | a -> b where
     name :: Lens' a b
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+instance HasName a b => HasName (TF.Ref s a) b where
+    name =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . name
 
 class HasPriority a b | a -> b where
     priority :: Lens' a b
@@ -66,11 +76,21 @@ class HasPriority a b | a -> b where
 instance HasPriority a b => HasPriority (TF.Schema l p a) b where
     priority = TF.configuration . priority
 
+instance HasPriority a b => HasPriority (TF.Ref s a) b where
+    priority =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . priority
+
 class HasTtl a b | a -> b where
     ttl :: Lens' a b
 
 instance HasTtl a b => HasTtl (TF.Schema l p a) b where
     ttl = TF.configuration . ttl
+
+instance HasTtl a b => HasTtl (TF.Ref s a) b where
+    ttl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ttl
 
 class HasType' a b | a -> b where
     type' :: Lens' a b
@@ -78,11 +98,21 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
+instance HasType' a b => HasType' (TF.Ref s a) b where
+    type' =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . type'
+
 class HasValue a b | a -> b where
     value :: Lens' a b
 
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
+
+instance HasValue a b => HasValue (TF.Ref s a) b where
+    value =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . value
 
 class HasComputedDomainId a b | a -> b where
     computedDomainId

@@ -59,8 +59,9 @@ instance Hashable Key where
           `hashWithSalt` keyName x
 
 -- | Opaque Named Ref.
-newtype Ref s a = UnsafeRef
-    { refKey :: Key
+data Ref s a = UnsafeRef
+    { refKey   :: !Key
+    , refValue :: !a
     } deriving (Show)
 
 refName :: Ref s a -> Name

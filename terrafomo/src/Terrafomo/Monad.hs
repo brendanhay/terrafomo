@@ -320,7 +320,7 @@ ref name x =
         unless unique $
             MTL.throwError (NonUniqueRef key value)
 
-        pure (UnsafeRef key)
+        pure $! UnsafeRef key (_schemaConfig x)
 
 -- * Use a unique supply / incrementing counter to generate unique output names
 --   for values and key/name for computed attributes.

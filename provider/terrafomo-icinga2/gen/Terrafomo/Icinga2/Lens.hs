@@ -37,7 +37,7 @@ module Terrafomo.Icinga2.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', to)
+import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -49,11 +49,21 @@ class HasAddress a b | a -> b where
 instance HasAddress a b => HasAddress (TF.Schema l p a) b where
     address = TF.configuration . address
 
+instance HasAddress a b => HasAddress (TF.Ref s a) b where
+    address =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . address
+
 class HasArguments a b | a -> b where
     arguments :: Lens' a b
 
 instance HasArguments a b => HasArguments (TF.Schema l p a) b where
     arguments = TF.configuration . arguments
+
+instance HasArguments a b => HasArguments (TF.Ref s a) b where
+    arguments =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . arguments
 
 class HasCheckCommand a b | a -> b where
     checkCommand :: Lens' a b
@@ -61,11 +71,21 @@ class HasCheckCommand a b | a -> b where
 instance HasCheckCommand a b => HasCheckCommand (TF.Schema l p a) b where
     checkCommand = TF.configuration . checkCommand
 
+instance HasCheckCommand a b => HasCheckCommand (TF.Ref s a) b where
+    checkCommand =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . checkCommand
+
 class HasCommand a b | a -> b where
     command :: Lens' a b
 
 instance HasCommand a b => HasCommand (TF.Schema l p a) b where
     command = TF.configuration . command
+
+instance HasCommand a b => HasCommand (TF.Ref s a) b where
+    command =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . command
 
 class HasDisplayName a b | a -> b where
     displayName :: Lens' a b
@@ -73,11 +93,21 @@ class HasDisplayName a b | a -> b where
 instance HasDisplayName a b => HasDisplayName (TF.Schema l p a) b where
     displayName = TF.configuration . displayName
 
+instance HasDisplayName a b => HasDisplayName (TF.Ref s a) b where
+    displayName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . displayName
+
 class HasHostname a b | a -> b where
     hostname :: Lens' a b
 
 instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
+
+instance HasHostname a b => HasHostname (TF.Ref s a) b where
+    hostname =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . hostname
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -85,14 +115,29 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
+instance HasName a b => HasName (TF.Ref s a) b where
+    name =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . name
+
 class HasTemplates a b | a -> b where
     templates :: Lens' a b
 
 instance HasTemplates a b => HasTemplates (TF.Schema l p a) b where
     templates = TF.configuration . templates
 
+instance HasTemplates a b => HasTemplates (TF.Ref s a) b where
+    templates =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . templates
+
 class HasVars a b | a -> b where
     vars :: Lens' a b
 
 instance HasVars a b => HasVars (TF.Schema l p a) b where
     vars = TF.configuration . vars
+
+instance HasVars a b => HasVars (TF.Ref s a) b where
+    vars =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vars

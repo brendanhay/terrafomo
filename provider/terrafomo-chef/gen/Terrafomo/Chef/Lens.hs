@@ -41,7 +41,7 @@ module Terrafomo.Chef.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', to)
+import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -53,11 +53,21 @@ class HasAutomaticAttributesJson a b | a -> b where
 instance HasAutomaticAttributesJson a b => HasAutomaticAttributesJson (TF.Schema l p a) b where
     automaticAttributesJson = TF.configuration . automaticAttributesJson
 
+instance HasAutomaticAttributesJson a b => HasAutomaticAttributesJson (TF.Ref s a) b where
+    automaticAttributesJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . automaticAttributesJson
+
 class HasContentJson a b | a -> b where
     contentJson :: Lens' a b
 
 instance HasContentJson a b => HasContentJson (TF.Schema l p a) b where
     contentJson = TF.configuration . contentJson
+
+instance HasContentJson a b => HasContentJson (TF.Ref s a) b where
+    contentJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentJson
 
 class HasCookbookConstraints a b | a -> b where
     cookbookConstraints :: Lens' a b
@@ -65,11 +75,21 @@ class HasCookbookConstraints a b | a -> b where
 instance HasCookbookConstraints a b => HasCookbookConstraints (TF.Schema l p a) b where
     cookbookConstraints = TF.configuration . cookbookConstraints
 
+instance HasCookbookConstraints a b => HasCookbookConstraints (TF.Ref s a) b where
+    cookbookConstraints =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cookbookConstraints
+
 class HasDataBagName a b | a -> b where
     dataBagName :: Lens' a b
 
 instance HasDataBagName a b => HasDataBagName (TF.Schema l p a) b where
     dataBagName = TF.configuration . dataBagName
+
+instance HasDataBagName a b => HasDataBagName (TF.Ref s a) b where
+    dataBagName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dataBagName
 
 class HasDefaultAttributesJson a b | a -> b where
     defaultAttributesJson :: Lens' a b
@@ -77,11 +97,21 @@ class HasDefaultAttributesJson a b | a -> b where
 instance HasDefaultAttributesJson a b => HasDefaultAttributesJson (TF.Schema l p a) b where
     defaultAttributesJson = TF.configuration . defaultAttributesJson
 
+instance HasDefaultAttributesJson a b => HasDefaultAttributesJson (TF.Ref s a) b where
+    defaultAttributesJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultAttributesJson
+
 class HasDescription a b | a -> b where
     description :: Lens' a b
 
 instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
+
+instance HasDescription a b => HasDescription (TF.Ref s a) b where
+    description =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . description
 
 class HasEnvironmentName a b | a -> b where
     environmentName :: Lens' a b
@@ -89,11 +119,21 @@ class HasEnvironmentName a b | a -> b where
 instance HasEnvironmentName a b => HasEnvironmentName (TF.Schema l p a) b where
     environmentName = TF.configuration . environmentName
 
+instance HasEnvironmentName a b => HasEnvironmentName (TF.Ref s a) b where
+    environmentName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . environmentName
+
 class HasName a b | a -> b where
     name :: Lens' a b
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+instance HasName a b => HasName (TF.Ref s a) b where
+    name =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . name
 
 class HasNormalAttributesJson a b | a -> b where
     normalAttributesJson :: Lens' a b
@@ -101,17 +141,32 @@ class HasNormalAttributesJson a b | a -> b where
 instance HasNormalAttributesJson a b => HasNormalAttributesJson (TF.Schema l p a) b where
     normalAttributesJson = TF.configuration . normalAttributesJson
 
+instance HasNormalAttributesJson a b => HasNormalAttributesJson (TF.Ref s a) b where
+    normalAttributesJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . normalAttributesJson
+
 class HasOverrideAttributesJson a b | a -> b where
     overrideAttributesJson :: Lens' a b
 
 instance HasOverrideAttributesJson a b => HasOverrideAttributesJson (TF.Schema l p a) b where
     overrideAttributesJson = TF.configuration . overrideAttributesJson
 
+instance HasOverrideAttributesJson a b => HasOverrideAttributesJson (TF.Ref s a) b where
+    overrideAttributesJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . overrideAttributesJson
+
 class HasRunList a b | a -> b where
     runList :: Lens' a b
 
 instance HasRunList a b => HasRunList (TF.Schema l p a) b where
     runList = TF.configuration . runList
+
+instance HasRunList a b => HasRunList (TF.Ref s a) b where
+    runList =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . runList
 
 class HasComputedApiUri a b | a -> b where
     computedApiUri

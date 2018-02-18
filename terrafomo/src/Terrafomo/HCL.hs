@@ -57,7 +57,7 @@ import Data.Hashable          (Hashable)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
 import Data.Map.Strict        (Map)
-import Data.Maybe             (fromMaybe, mapMaybe, maybeToList)
+import Data.Maybe             (mapMaybe, maybeToList)
 import Data.Semigroup         ((<>))
 import Data.String            (IsString (fromString))
 import Data.Text              (Text)

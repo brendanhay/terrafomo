@@ -1577,7 +1577,7 @@ module Terrafomo.AWS.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Getting, Lens', to)
+import Lens.Micro (Getting, Lens', lens, to)
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
@@ -1589,11 +1589,21 @@ class HasAccelerationStatus a b | a -> b where
 instance HasAccelerationStatus a b => HasAccelerationStatus (TF.Schema l p a) b where
     accelerationStatus = TF.configuration . accelerationStatus
 
+instance HasAccelerationStatus a b => HasAccelerationStatus (TF.Ref s a) b where
+    accelerationStatus =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . accelerationStatus
+
 class HasAcceptanceRequired a b | a -> b where
     acceptanceRequired :: Lens' a b
 
 instance HasAcceptanceRequired a b => HasAcceptanceRequired (TF.Schema l p a) b where
     acceptanceRequired = TF.configuration . acceptanceRequired
+
+instance HasAcceptanceRequired a b => HasAcceptanceRequired (TF.Ref s a) b where
+    acceptanceRequired =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . acceptanceRequired
 
 class HasAccepter a b | a -> b where
     accepter :: Lens' a b
@@ -1601,11 +1611,21 @@ class HasAccepter a b | a -> b where
 instance HasAccepter a b => HasAccepter (TF.Schema l p a) b where
     accepter = TF.configuration . accepter
 
+instance HasAccepter a b => HasAccepter (TF.Ref s a) b where
+    accepter =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . accepter
+
 class HasAccessLogs a b | a -> b where
     accessLogs :: Lens' a b
 
 instance HasAccessLogs a b => HasAccessLogs (TF.Schema l p a) b where
     accessLogs = TF.configuration . accessLogs
+
+instance HasAccessLogs a b => HasAccessLogs (TF.Ref s a) b where
+    accessLogs =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . accessLogs
 
 class HasAccessPolicies a b | a -> b where
     accessPolicies :: Lens' a b
@@ -1613,11 +1633,21 @@ class HasAccessPolicies a b | a -> b where
 instance HasAccessPolicies a b => HasAccessPolicies (TF.Schema l p a) b where
     accessPolicies = TF.configuration . accessPolicies
 
+instance HasAccessPolicies a b => HasAccessPolicies (TF.Ref s a) b where
+    accessPolicies =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . accessPolicies
+
 class HasAccessPolicy a b | a -> b where
     accessPolicy :: Lens' a b
 
 instance HasAccessPolicy a b => HasAccessPolicy (TF.Schema l p a) b where
     accessPolicy = TF.configuration . accessPolicy
+
+instance HasAccessPolicy a b => HasAccessPolicy (TF.Ref s a) b where
+    accessPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . accessPolicy
 
 class HasAccountAlias a b | a -> b where
     accountAlias :: Lens' a b
@@ -1625,11 +1655,21 @@ class HasAccountAlias a b | a -> b where
 instance HasAccountAlias a b => HasAccountAlias (TF.Schema l p a) b where
     accountAlias = TF.configuration . accountAlias
 
+instance HasAccountAlias a b => HasAccountAlias (TF.Ref s a) b where
+    accountAlias =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . accountAlias
+
 class HasAccountId a b | a -> b where
     accountId :: Lens' a b
 
 instance HasAccountId a b => HasAccountId (TF.Schema l p a) b where
     accountId = TF.configuration . accountId
+
+instance HasAccountId a b => HasAccountId (TF.Ref s a) b where
+    accountId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . accountId
 
 class HasAcl a b | a -> b where
     acl :: Lens' a b
@@ -1637,11 +1677,21 @@ class HasAcl a b | a -> b where
 instance HasAcl a b => HasAcl (TF.Schema l p a) b where
     acl = TF.configuration . acl
 
+instance HasAcl a b => HasAcl (TF.Ref s a) b where
+    acl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . acl
+
 class HasAction a b | a -> b where
     action :: Lens' a b
 
 instance HasAction a b => HasAction (TF.Schema l p a) b where
     action = TF.configuration . action
+
+instance HasAction a b => HasAction (TF.Ref s a) b where
+    action =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . action
 
 class HasActionsEnabled a b | a -> b where
     actionsEnabled :: Lens' a b
@@ -1649,11 +1699,21 @@ class HasActionsEnabled a b | a -> b where
 instance HasActionsEnabled a b => HasActionsEnabled (TF.Schema l p a) b where
     actionsEnabled = TF.configuration . actionsEnabled
 
+instance HasActionsEnabled a b => HasActionsEnabled (TF.Ref s a) b where
+    actionsEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . actionsEnabled
+
 class HasActivate a b | a -> b where
     activate :: Lens' a b
 
 instance HasActivate a b => HasActivate (TF.Schema l p a) b where
     activate = TF.configuration . activate
+
+instance HasActivate a b => HasActivate (TF.Ref s a) b where
+    activate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . activate
 
 class HasActive a b | a -> b where
     active :: Lens' a b
@@ -1661,11 +1721,21 @@ class HasActive a b | a -> b where
 instance HasActive a b => HasActive (TF.Schema l p a) b where
     active = TF.configuration . active
 
+instance HasActive a b => HasActive (TF.Ref s a) b where
+    active =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . active
+
 class HasAddHeaderAction a b | a -> b where
     addHeaderAction :: Lens' a b
 
 instance HasAddHeaderAction a b => HasAddHeaderAction (TF.Schema l p a) b where
     addHeaderAction = TF.configuration . addHeaderAction
+
+instance HasAddHeaderAction a b => HasAddHeaderAction (TF.Ref s a) b where
+    addHeaderAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . addHeaderAction
 
 class HasAdjustmentType a b | a -> b where
     adjustmentType :: Lens' a b
@@ -1673,11 +1743,21 @@ class HasAdjustmentType a b | a -> b where
 instance HasAdjustmentType a b => HasAdjustmentType (TF.Schema l p a) b where
     adjustmentType = TF.configuration . adjustmentType
 
+instance HasAdjustmentType a b => HasAdjustmentType (TF.Ref s a) b where
+    adjustmentType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . adjustmentType
+
 class HasAdminCreateUserConfig a b | a -> b where
     adminCreateUserConfig :: Lens' a b
 
 instance HasAdminCreateUserConfig a b => HasAdminCreateUserConfig (TF.Schema l p a) b where
     adminCreateUserConfig = TF.configuration . adminCreateUserConfig
+
+instance HasAdminCreateUserConfig a b => HasAdminCreateUserConfig (TF.Ref s a) b where
+    adminCreateUserConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . adminCreateUserConfig
 
 class HasAdvancedOptions a b | a -> b where
     advancedOptions :: Lens' a b
@@ -1685,11 +1765,21 @@ class HasAdvancedOptions a b | a -> b where
 instance HasAdvancedOptions a b => HasAdvancedOptions (TF.Schema l p a) b where
     advancedOptions = TF.configuration . advancedOptions
 
+instance HasAdvancedOptions a b => HasAdvancedOptions (TF.Ref s a) b where
+    advancedOptions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . advancedOptions
+
 class HasAfter a b | a -> b where
     after :: Lens' a b
 
 instance HasAfter a b => HasAfter (TF.Schema l p a) b where
     after = TF.configuration . after
+
+instance HasAfter a b => HasAfter (TF.Ref s a) b where
+    after =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . after
 
 class HasAgentVersion a b | a -> b where
     agentVersion :: Lens' a b
@@ -1697,11 +1787,21 @@ class HasAgentVersion a b | a -> b where
 instance HasAgentVersion a b => HasAgentVersion (TF.Schema l p a) b where
     agentVersion = TF.configuration . agentVersion
 
+instance HasAgentVersion a b => HasAgentVersion (TF.Ref s a) b where
+    agentVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . agentVersion
+
 class HasAlarmActions a b | a -> b where
     alarmActions :: Lens' a b
 
 instance HasAlarmActions a b => HasAlarmActions (TF.Schema l p a) b where
     alarmActions = TF.configuration . alarmActions
+
+instance HasAlarmActions a b => HasAlarmActions (TF.Ref s a) b where
+    alarmActions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . alarmActions
 
 class HasAlarmConfiguration a b | a -> b where
     alarmConfiguration :: Lens' a b
@@ -1709,11 +1809,21 @@ class HasAlarmConfiguration a b | a -> b where
 instance HasAlarmConfiguration a b => HasAlarmConfiguration (TF.Schema l p a) b where
     alarmConfiguration = TF.configuration . alarmConfiguration
 
+instance HasAlarmConfiguration a b => HasAlarmConfiguration (TF.Ref s a) b where
+    alarmConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . alarmConfiguration
+
 class HasAlarmDescription a b | a -> b where
     alarmDescription :: Lens' a b
 
 instance HasAlarmDescription a b => HasAlarmDescription (TF.Schema l p a) b where
     alarmDescription = TF.configuration . alarmDescription
+
+instance HasAlarmDescription a b => HasAlarmDescription (TF.Ref s a) b where
+    alarmDescription =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . alarmDescription
 
 class HasAlarmName a b | a -> b where
     alarmName :: Lens' a b
@@ -1721,11 +1831,21 @@ class HasAlarmName a b | a -> b where
 instance HasAlarmName a b => HasAlarmName (TF.Schema l p a) b where
     alarmName = TF.configuration . alarmName
 
+instance HasAlarmName a b => HasAlarmName (TF.Ref s a) b where
+    alarmName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . alarmName
+
 class HasAlbTargetGroupArn a b | a -> b where
     albTargetGroupArn :: Lens' a b
 
 instance HasAlbTargetGroupArn a b => HasAlbTargetGroupArn (TF.Schema l p a) b where
     albTargetGroupArn = TF.configuration . albTargetGroupArn
+
+instance HasAlbTargetGroupArn a b => HasAlbTargetGroupArn (TF.Ref s a) b where
+    albTargetGroupArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . albTargetGroupArn
 
 class HasAlias a b | a -> b where
     alias :: Lens' a b
@@ -1733,11 +1853,21 @@ class HasAlias a b | a -> b where
 instance HasAlias a b => HasAlias (TF.Schema l p a) b where
     alias = TF.configuration . alias
 
+instance HasAlias a b => HasAlias (TF.Ref s a) b where
+    alias =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . alias
+
 class HasAliasAttributes a b | a -> b where
     aliasAttributes :: Lens' a b
 
 instance HasAliasAttributes a b => HasAliasAttributes (TF.Schema l p a) b where
     aliasAttributes = TF.configuration . aliasAttributes
+
+instance HasAliasAttributes a b => HasAliasAttributes (TF.Ref s a) b where
+    aliasAttributes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . aliasAttributes
 
 class HasAliases a b | a -> b where
     aliases :: Lens' a b
@@ -1745,11 +1875,21 @@ class HasAliases a b | a -> b where
 instance HasAliases a b => HasAliases (TF.Schema l p a) b where
     aliases = TF.configuration . aliases
 
+instance HasAliases a b => HasAliases (TF.Ref s a) b where
+    aliases =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . aliases
+
 class HasAllocatedMemory a b | a -> b where
     allocatedMemory :: Lens' a b
 
 instance HasAllocatedMemory a b => HasAllocatedMemory (TF.Schema l p a) b where
     allocatedMemory = TF.configuration . allocatedMemory
+
+instance HasAllocatedMemory a b => HasAllocatedMemory (TF.Ref s a) b where
+    allocatedMemory =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allocatedMemory
 
 class HasAllocatedStorage a b | a -> b where
     allocatedStorage :: Lens' a b
@@ -1757,11 +1897,21 @@ class HasAllocatedStorage a b | a -> b where
 instance HasAllocatedStorage a b => HasAllocatedStorage (TF.Schema l p a) b where
     allocatedStorage = TF.configuration . allocatedStorage
 
+instance HasAllocatedStorage a b => HasAllocatedStorage (TF.Ref s a) b where
+    allocatedStorage =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allocatedStorage
+
 class HasAllocationId a b | a -> b where
     allocationId :: Lens' a b
 
 instance HasAllocationId a b => HasAllocationId (TF.Schema l p a) b where
     allocationId = TF.configuration . allocationId
+
+instance HasAllocationId a b => HasAllocationId (TF.Ref s a) b where
+    allocationId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allocationId
 
 class HasAllocationStrategy a b | a -> b where
     allocationStrategy :: Lens' a b
@@ -1769,11 +1919,21 @@ class HasAllocationStrategy a b | a -> b where
 instance HasAllocationStrategy a b => HasAllocationStrategy (TF.Schema l p a) b where
     allocationStrategy = TF.configuration . allocationStrategy
 
+instance HasAllocationStrategy a b => HasAllocationStrategy (TF.Ref s a) b where
+    allocationStrategy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allocationStrategy
+
 class HasAllowMajorVersionUpgrade a b | a -> b where
     allowMajorVersionUpgrade :: Lens' a b
 
 instance HasAllowMajorVersionUpgrade a b => HasAllowMajorVersionUpgrade (TF.Schema l p a) b where
     allowMajorVersionUpgrade = TF.configuration . allowMajorVersionUpgrade
+
+instance HasAllowMajorVersionUpgrade a b => HasAllowMajorVersionUpgrade (TF.Ref s a) b where
+    allowMajorVersionUpgrade =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowMajorVersionUpgrade
 
 class HasAllowOverwrite a b | a -> b where
     allowOverwrite :: Lens' a b
@@ -1781,11 +1941,21 @@ class HasAllowOverwrite a b | a -> b where
 instance HasAllowOverwrite a b => HasAllowOverwrite (TF.Schema l p a) b where
     allowOverwrite = TF.configuration . allowOverwrite
 
+instance HasAllowOverwrite a b => HasAllowOverwrite (TF.Ref s a) b where
+    allowOverwrite =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowOverwrite
+
 class HasAllowReassociation a b | a -> b where
     allowReassociation :: Lens' a b
 
 instance HasAllowReassociation a b => HasAllowReassociation (TF.Schema l p a) b where
     allowReassociation = TF.configuration . allowReassociation
+
+instance HasAllowReassociation a b => HasAllowReassociation (TF.Ref s a) b where
+    allowReassociation =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowReassociation
 
 class HasAllowSelfManagement a b | a -> b where
     allowSelfManagement :: Lens' a b
@@ -1793,11 +1963,21 @@ class HasAllowSelfManagement a b | a -> b where
 instance HasAllowSelfManagement a b => HasAllowSelfManagement (TF.Schema l p a) b where
     allowSelfManagement = TF.configuration . allowSelfManagement
 
+instance HasAllowSelfManagement a b => HasAllowSelfManagement (TF.Ref s a) b where
+    allowSelfManagement =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowSelfManagement
+
 class HasAllowSsh a b | a -> b where
     allowSsh :: Lens' a b
 
 instance HasAllowSsh a b => HasAllowSsh (TF.Schema l p a) b where
     allowSsh = TF.configuration . allowSsh
+
+instance HasAllowSsh a b => HasAllowSsh (TF.Ref s a) b where
+    allowSsh =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowSsh
 
 class HasAllowSudo a b | a -> b where
     allowSudo :: Lens' a b
@@ -1805,11 +1985,21 @@ class HasAllowSudo a b | a -> b where
 instance HasAllowSudo a b => HasAllowSudo (TF.Schema l p a) b where
     allowSudo = TF.configuration . allowSudo
 
+instance HasAllowSudo a b => HasAllowSudo (TF.Ref s a) b where
+    allowSudo =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowSudo
+
 class HasAllowUnassociatedTargets a b | a -> b where
     allowUnassociatedTargets :: Lens' a b
 
 instance HasAllowUnassociatedTargets a b => HasAllowUnassociatedTargets (TF.Schema l p a) b where
     allowUnassociatedTargets = TF.configuration . allowUnassociatedTargets
+
+instance HasAllowUnassociatedTargets a b => HasAllowUnassociatedTargets (TF.Ref s a) b where
+    allowUnassociatedTargets =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowUnassociatedTargets
 
 class HasAllowUnauthenticatedIdentities a b | a -> b where
     allowUnauthenticatedIdentities :: Lens' a b
@@ -1817,11 +2007,21 @@ class HasAllowUnauthenticatedIdentities a b | a -> b where
 instance HasAllowUnauthenticatedIdentities a b => HasAllowUnauthenticatedIdentities (TF.Schema l p a) b where
     allowUnauthenticatedIdentities = TF.configuration . allowUnauthenticatedIdentities
 
+instance HasAllowUnauthenticatedIdentities a b => HasAllowUnauthenticatedIdentities (TF.Ref s a) b where
+    allowUnauthenticatedIdentities =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowUnauthenticatedIdentities
+
 class HasAllowUsersToChangePassword a b | a -> b where
     allowUsersToChangePassword :: Lens' a b
 
 instance HasAllowUsersToChangePassword a b => HasAllowUsersToChangePassword (TF.Schema l p a) b where
     allowUsersToChangePassword = TF.configuration . allowUsersToChangePassword
+
+instance HasAllowUsersToChangePassword a b => HasAllowUsersToChangePassword (TF.Ref s a) b where
+    allowUsersToChangePassword =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowUsersToChangePassword
 
 class HasAllowVersionUpgrade a b | a -> b where
     allowVersionUpgrade :: Lens' a b
@@ -1829,11 +2029,21 @@ class HasAllowVersionUpgrade a b | a -> b where
 instance HasAllowVersionUpgrade a b => HasAllowVersionUpgrade (TF.Schema l p a) b where
     allowVersionUpgrade = TF.configuration . allowVersionUpgrade
 
+instance HasAllowVersionUpgrade a b => HasAllowVersionUpgrade (TF.Ref s a) b where
+    allowVersionUpgrade =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowVersionUpgrade
+
 class HasAllowedOauthFlows a b | a -> b where
     allowedOauthFlows :: Lens' a b
 
 instance HasAllowedOauthFlows a b => HasAllowedOauthFlows (TF.Schema l p a) b where
     allowedOauthFlows = TF.configuration . allowedOauthFlows
+
+instance HasAllowedOauthFlows a b => HasAllowedOauthFlows (TF.Ref s a) b where
+    allowedOauthFlows =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowedOauthFlows
 
 class HasAllowedOauthFlowsUserPoolClient a b | a -> b where
     allowedOauthFlowsUserPoolClient :: Lens' a b
@@ -1841,11 +2051,21 @@ class HasAllowedOauthFlowsUserPoolClient a b | a -> b where
 instance HasAllowedOauthFlowsUserPoolClient a b => HasAllowedOauthFlowsUserPoolClient (TF.Schema l p a) b where
     allowedOauthFlowsUserPoolClient = TF.configuration . allowedOauthFlowsUserPoolClient
 
+instance HasAllowedOauthFlowsUserPoolClient a b => HasAllowedOauthFlowsUserPoolClient (TF.Ref s a) b where
+    allowedOauthFlowsUserPoolClient =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowedOauthFlowsUserPoolClient
+
 class HasAllowedOauthScopes a b | a -> b where
     allowedOauthScopes :: Lens' a b
 
 instance HasAllowedOauthScopes a b => HasAllowedOauthScopes (TF.Schema l p a) b where
     allowedOauthScopes = TF.configuration . allowedOauthScopes
+
+instance HasAllowedOauthScopes a b => HasAllowedOauthScopes (TF.Ref s a) b where
+    allowedOauthScopes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowedOauthScopes
 
 class HasAllowedPrincipals a b | a -> b where
     allowedPrincipals :: Lens' a b
@@ -1853,11 +2073,21 @@ class HasAllowedPrincipals a b | a -> b where
 instance HasAllowedPrincipals a b => HasAllowedPrincipals (TF.Schema l p a) b where
     allowedPrincipals = TF.configuration . allowedPrincipals
 
+instance HasAllowedPrincipals a b => HasAllowedPrincipals (TF.Ref s a) b where
+    allowedPrincipals =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . allowedPrincipals
+
 class HasAmazonSideAsn a b | a -> b where
     amazonSideAsn :: Lens' a b
 
 instance HasAmazonSideAsn a b => HasAmazonSideAsn (TF.Schema l p a) b where
     amazonSideAsn = TF.configuration . amazonSideAsn
+
+instance HasAmazonSideAsn a b => HasAmazonSideAsn (TF.Ref s a) b where
+    amazonSideAsn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . amazonSideAsn
 
 class HasAmi a b | a -> b where
     ami :: Lens' a b
@@ -1865,11 +2095,21 @@ class HasAmi a b | a -> b where
 instance HasAmi a b => HasAmi (TF.Schema l p a) b where
     ami = TF.configuration . ami
 
+instance HasAmi a b => HasAmi (TF.Ref s a) b where
+    ami =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ami
+
 class HasAmiId a b | a -> b where
     amiId :: Lens' a b
 
 instance HasAmiId a b => HasAmiId (TF.Schema l p a) b where
     amiId = TF.configuration . amiId
+
+instance HasAmiId a b => HasAmiId (TF.Ref s a) b where
+    amiId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . amiId
 
 class HasApiId a b | a -> b where
     apiId :: Lens' a b
@@ -1877,11 +2117,21 @@ class HasApiId a b | a -> b where
 instance HasApiId a b => HasApiId (TF.Schema l p a) b where
     apiId = TF.configuration . apiId
 
+instance HasApiId a b => HasApiId (TF.Ref s a) b where
+    apiId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . apiId
+
 class HasApiKeyRequired a b | a -> b where
     apiKeyRequired :: Lens' a b
 
 instance HasApiKeyRequired a b => HasApiKeyRequired (TF.Schema l p a) b where
     apiKeyRequired = TF.configuration . apiKeyRequired
+
+instance HasApiKeyRequired a b => HasApiKeyRequired (TF.Ref s a) b where
+    apiKeyRequired =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . apiKeyRequired
 
 class HasApiStages a b | a -> b where
     apiStages :: Lens' a b
@@ -1889,11 +2139,21 @@ class HasApiStages a b | a -> b where
 instance HasApiStages a b => HasApiStages (TF.Schema l p a) b where
     apiStages = TF.configuration . apiStages
 
+instance HasApiStages a b => HasApiStages (TF.Ref s a) b where
+    apiStages =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . apiStages
+
 class HasAppName a b | a -> b where
     appName :: Lens' a b
 
 instance HasAppName a b => HasAppName (TF.Schema l p a) b where
     appName = TF.configuration . appName
+
+instance HasAppName a b => HasAppName (TF.Ref s a) b where
+    appName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . appName
 
 class HasAppServer a b | a -> b where
     appServer :: Lens' a b
@@ -1901,11 +2161,21 @@ class HasAppServer a b | a -> b where
 instance HasAppServer a b => HasAppServer (TF.Schema l p a) b where
     appServer = TF.configuration . appServer
 
+instance HasAppServer a b => HasAppServer (TF.Ref s a) b where
+    appServer =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . appServer
+
 class HasAppServerVersion a b | a -> b where
     appServerVersion :: Lens' a b
 
 instance HasAppServerVersion a b => HasAppServerVersion (TF.Schema l p a) b where
     appServerVersion = TF.configuration . appServerVersion
+
+instance HasAppServerVersion a b => HasAppServerVersion (TF.Ref s a) b where
+    appServerVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . appServerVersion
 
 class HasAppSource a b | a -> b where
     appSource :: Lens' a b
@@ -1913,11 +2183,21 @@ class HasAppSource a b | a -> b where
 instance HasAppSource a b => HasAppSource (TF.Schema l p a) b where
     appSource = TF.configuration . appSource
 
+instance HasAppSource a b => HasAppSource (TF.Ref s a) b where
+    appSource =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . appSource
+
 class HasApplication a b | a -> b where
     application :: Lens' a b
 
 instance HasApplication a b => HasApplication (TF.Schema l p a) b where
     application = TF.configuration . application
+
+instance HasApplication a b => HasApplication (TF.Ref s a) b where
+    application =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . application
 
 class HasApplicationFailureFeedbackRoleArn a b | a -> b where
     applicationFailureFeedbackRoleArn :: Lens' a b
@@ -1925,11 +2205,21 @@ class HasApplicationFailureFeedbackRoleArn a b | a -> b where
 instance HasApplicationFailureFeedbackRoleArn a b => HasApplicationFailureFeedbackRoleArn (TF.Schema l p a) b where
     applicationFailureFeedbackRoleArn = TF.configuration . applicationFailureFeedbackRoleArn
 
+instance HasApplicationFailureFeedbackRoleArn a b => HasApplicationFailureFeedbackRoleArn (TF.Ref s a) b where
+    applicationFailureFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . applicationFailureFeedbackRoleArn
+
 class HasApplicationSuccessFeedbackRoleArn a b | a -> b where
     applicationSuccessFeedbackRoleArn :: Lens' a b
 
 instance HasApplicationSuccessFeedbackRoleArn a b => HasApplicationSuccessFeedbackRoleArn (TF.Schema l p a) b where
     applicationSuccessFeedbackRoleArn = TF.configuration . applicationSuccessFeedbackRoleArn
+
+instance HasApplicationSuccessFeedbackRoleArn a b => HasApplicationSuccessFeedbackRoleArn (TF.Ref s a) b where
+    applicationSuccessFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . applicationSuccessFeedbackRoleArn
 
 class HasApplicationSuccessFeedbackSampleRate a b | a -> b where
     applicationSuccessFeedbackSampleRate :: Lens' a b
@@ -1937,11 +2227,21 @@ class HasApplicationSuccessFeedbackSampleRate a b | a -> b where
 instance HasApplicationSuccessFeedbackSampleRate a b => HasApplicationSuccessFeedbackSampleRate (TF.Schema l p a) b where
     applicationSuccessFeedbackSampleRate = TF.configuration . applicationSuccessFeedbackSampleRate
 
+instance HasApplicationSuccessFeedbackSampleRate a b => HasApplicationSuccessFeedbackSampleRate (TF.Ref s a) b where
+    applicationSuccessFeedbackSampleRate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . applicationSuccessFeedbackSampleRate
+
 class HasApplications a b | a -> b where
     applications :: Lens' a b
 
 instance HasApplications a b => HasApplications (TF.Schema l p a) b where
     applications = TF.configuration . applications
+
+instance HasApplications a b => HasApplications (TF.Ref s a) b where
+    applications =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . applications
 
 class HasApplyImmediately a b | a -> b where
     applyImmediately :: Lens' a b
@@ -1949,11 +2249,21 @@ class HasApplyImmediately a b | a -> b where
 instance HasApplyImmediately a b => HasApplyImmediately (TF.Schema l p a) b where
     applyImmediately = TF.configuration . applyImmediately
 
+instance HasApplyImmediately a b => HasApplyImmediately (TF.Ref s a) b where
+    applyImmediately =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . applyImmediately
+
 class HasApprovalRule a b | a -> b where
     approvalRule :: Lens' a b
 
 instance HasApprovalRule a b => HasApprovalRule (TF.Schema l p a) b where
     approvalRule = TF.configuration . approvalRule
+
+instance HasApprovalRule a b => HasApprovalRule (TF.Ref s a) b where
+    approvalRule =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . approvalRule
 
 class HasApprovedPatches a b | a -> b where
     approvedPatches :: Lens' a b
@@ -1961,11 +2271,21 @@ class HasApprovedPatches a b | a -> b where
 instance HasApprovedPatches a b => HasApprovedPatches (TF.Schema l p a) b where
     approvedPatches = TF.configuration . approvedPatches
 
+instance HasApprovedPatches a b => HasApprovedPatches (TF.Ref s a) b where
+    approvedPatches =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . approvedPatches
+
 class HasApprovedPatchesComplianceLevel a b | a -> b where
     approvedPatchesComplianceLevel :: Lens' a b
 
 instance HasApprovedPatchesComplianceLevel a b => HasApprovedPatchesComplianceLevel (TF.Schema l p a) b where
     approvedPatchesComplianceLevel = TF.configuration . approvedPatchesComplianceLevel
+
+instance HasApprovedPatchesComplianceLevel a b => HasApprovedPatchesComplianceLevel (TF.Ref s a) b where
+    approvedPatchesComplianceLevel =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . approvedPatchesComplianceLevel
 
 class HasArchitecture a b | a -> b where
     architecture :: Lens' a b
@@ -1973,11 +2293,21 @@ class HasArchitecture a b | a -> b where
 instance HasArchitecture a b => HasArchitecture (TF.Schema l p a) b where
     architecture = TF.configuration . architecture
 
+instance HasArchitecture a b => HasArchitecture (TF.Ref s a) b where
+    architecture =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . architecture
+
 class HasArn a b | a -> b where
     arn :: Lens' a b
 
 instance HasArn a b => HasArn (TF.Schema l p a) b where
     arn = TF.configuration . arn
+
+instance HasArn a b => HasArn (TF.Ref s a) b where
+    arn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . arn
 
 class HasArtifactStore a b | a -> b where
     artifactStore :: Lens' a b
@@ -1985,11 +2315,21 @@ class HasArtifactStore a b | a -> b where
 instance HasArtifactStore a b => HasArtifactStore (TF.Schema l p a) b where
     artifactStore = TF.configuration . artifactStore
 
+instance HasArtifactStore a b => HasArtifactStore (TF.Ref s a) b where
+    artifactStore =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . artifactStore
+
 class HasArtifacts a b | a -> b where
     artifacts :: Lens' a b
 
 instance HasArtifacts a b => HasArtifacts (TF.Schema l p a) b where
     artifacts = TF.configuration . artifacts
+
+instance HasArtifacts a b => HasArtifacts (TF.Ref s a) b where
+    artifacts =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . artifacts
 
 class HasAssignGeneratedIpv6CidrBlock a b | a -> b where
     assignGeneratedIpv6CidrBlock :: Lens' a b
@@ -1997,11 +2337,21 @@ class HasAssignGeneratedIpv6CidrBlock a b | a -> b where
 instance HasAssignGeneratedIpv6CidrBlock a b => HasAssignGeneratedIpv6CidrBlock (TF.Schema l p a) b where
     assignGeneratedIpv6CidrBlock = TF.configuration . assignGeneratedIpv6CidrBlock
 
+instance HasAssignGeneratedIpv6CidrBlock a b => HasAssignGeneratedIpv6CidrBlock (TF.Ref s a) b where
+    assignGeneratedIpv6CidrBlock =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . assignGeneratedIpv6CidrBlock
+
 class HasAssignIpv6AddressOnCreation a b | a -> b where
     assignIpv6AddressOnCreation :: Lens' a b
 
 instance HasAssignIpv6AddressOnCreation a b => HasAssignIpv6AddressOnCreation (TF.Schema l p a) b where
     assignIpv6AddressOnCreation = TF.configuration . assignIpv6AddressOnCreation
+
+instance HasAssignIpv6AddressOnCreation a b => HasAssignIpv6AddressOnCreation (TF.Ref s a) b where
+    assignIpv6AddressOnCreation =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . assignIpv6AddressOnCreation
 
 class HasAssociatePublicIpAddress a b | a -> b where
     associatePublicIpAddress :: Lens' a b
@@ -2009,11 +2359,21 @@ class HasAssociatePublicIpAddress a b | a -> b where
 instance HasAssociatePublicIpAddress a b => HasAssociatePublicIpAddress (TF.Schema l p a) b where
     associatePublicIpAddress = TF.configuration . associatePublicIpAddress
 
+instance HasAssociatePublicIpAddress a b => HasAssociatePublicIpAddress (TF.Ref s a) b where
+    associatePublicIpAddress =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . associatePublicIpAddress
+
 class HasAssociateWithPrivateIp a b | a -> b where
     associateWithPrivateIp :: Lens' a b
 
 instance HasAssociateWithPrivateIp a b => HasAssociateWithPrivateIp (TF.Schema l p a) b where
     associateWithPrivateIp = TF.configuration . associateWithPrivateIp
+
+instance HasAssociateWithPrivateIp a b => HasAssociateWithPrivateIp (TF.Ref s a) b where
+    associateWithPrivateIp =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . associateWithPrivateIp
 
 class HasAssociationName a b | a -> b where
     associationName :: Lens' a b
@@ -2021,11 +2381,21 @@ class HasAssociationName a b | a -> b where
 instance HasAssociationName a b => HasAssociationName (TF.Schema l p a) b where
     associationName = TF.configuration . associationName
 
+instance HasAssociationName a b => HasAssociationName (TF.Ref s a) b where
+    associationName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . associationName
+
 class HasAssumeRolePolicy a b | a -> b where
     assumeRolePolicy :: Lens' a b
 
 instance HasAssumeRolePolicy a b => HasAssumeRolePolicy (TF.Schema l p a) b where
     assumeRolePolicy = TF.configuration . assumeRolePolicy
+
+instance HasAssumeRolePolicy a b => HasAssumeRolePolicy (TF.Ref s a) b where
+    assumeRolePolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . assumeRolePolicy
 
 class HasAtRestEncryptionEnabled a b | a -> b where
     atRestEncryptionEnabled :: Lens' a b
@@ -2033,11 +2403,21 @@ class HasAtRestEncryptionEnabled a b | a -> b where
 instance HasAtRestEncryptionEnabled a b => HasAtRestEncryptionEnabled (TF.Schema l p a) b where
     atRestEncryptionEnabled = TF.configuration . atRestEncryptionEnabled
 
+instance HasAtRestEncryptionEnabled a b => HasAtRestEncryptionEnabled (TF.Ref s a) b where
+    atRestEncryptionEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . atRestEncryptionEnabled
+
 class HasAttachedVpcId a b | a -> b where
     attachedVpcId :: Lens' a b
 
 instance HasAttachedVpcId a b => HasAttachedVpcId (TF.Schema l p a) b where
     attachedVpcId = TF.configuration . attachedVpcId
+
+instance HasAttachedVpcId a b => HasAttachedVpcId (TF.Ref s a) b where
+    attachedVpcId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . attachedVpcId
 
 class HasAttachment a b | a -> b where
     attachment :: Lens' a b
@@ -2045,11 +2425,21 @@ class HasAttachment a b | a -> b where
 instance HasAttachment a b => HasAttachment (TF.Schema l p a) b where
     attachment = TF.configuration . attachment
 
+instance HasAttachment a b => HasAttachment (TF.Ref s a) b where
+    attachment =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . attachment
+
 class HasAttribute a b | a -> b where
     attribute :: Lens' a b
 
 instance HasAttribute a b => HasAttribute (TF.Schema l p a) b where
     attribute = TF.configuration . attribute
+
+instance HasAttribute a b => HasAttribute (TF.Ref s a) b where
+    attribute =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . attribute
 
 class HasAudio a b | a -> b where
     audio :: Lens' a b
@@ -2057,11 +2447,21 @@ class HasAudio a b | a -> b where
 instance HasAudio a b => HasAudio (TF.Schema l p a) b where
     audio = TF.configuration . audio
 
+instance HasAudio a b => HasAudio (TF.Ref s a) b where
+    audio =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . audio
+
 class HasAudioCodecOptions a b | a -> b where
     audioCodecOptions :: Lens' a b
 
 instance HasAudioCodecOptions a b => HasAudioCodecOptions (TF.Schema l p a) b where
     audioCodecOptions = TF.configuration . audioCodecOptions
+
+instance HasAudioCodecOptions a b => HasAudioCodecOptions (TF.Ref s a) b where
+    audioCodecOptions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . audioCodecOptions
 
 class HasAuthToken a b | a -> b where
     authToken :: Lens' a b
@@ -2069,11 +2469,21 @@ class HasAuthToken a b | a -> b where
 instance HasAuthToken a b => HasAuthToken (TF.Schema l p a) b where
     authToken = TF.configuration . authToken
 
+instance HasAuthToken a b => HasAuthToken (TF.Ref s a) b where
+    authToken =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . authToken
+
 class HasAuthenticationType a b | a -> b where
     authenticationType :: Lens' a b
 
 instance HasAuthenticationType a b => HasAuthenticationType (TF.Schema l p a) b where
     authenticationType = TF.configuration . authenticationType
+
+instance HasAuthenticationType a b => HasAuthenticationType (TF.Ref s a) b where
+    authenticationType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . authenticationType
 
 class HasAuthorization a b | a -> b where
     authorization :: Lens' a b
@@ -2081,11 +2491,21 @@ class HasAuthorization a b | a -> b where
 instance HasAuthorization a b => HasAuthorization (TF.Schema l p a) b where
     authorization = TF.configuration . authorization
 
+instance HasAuthorization a b => HasAuthorization (TF.Ref s a) b where
+    authorization =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . authorization
+
 class HasAuthorizerCredentials a b | a -> b where
     authorizerCredentials :: Lens' a b
 
 instance HasAuthorizerCredentials a b => HasAuthorizerCredentials (TF.Schema l p a) b where
     authorizerCredentials = TF.configuration . authorizerCredentials
+
+instance HasAuthorizerCredentials a b => HasAuthorizerCredentials (TF.Ref s a) b where
+    authorizerCredentials =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . authorizerCredentials
 
 class HasAuthorizerId a b | a -> b where
     authorizerId :: Lens' a b
@@ -2093,11 +2513,21 @@ class HasAuthorizerId a b | a -> b where
 instance HasAuthorizerId a b => HasAuthorizerId (TF.Schema l p a) b where
     authorizerId = TF.configuration . authorizerId
 
+instance HasAuthorizerId a b => HasAuthorizerId (TF.Ref s a) b where
+    authorizerId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . authorizerId
+
 class HasAuthorizerResultTtlInSeconds a b | a -> b where
     authorizerResultTtlInSeconds :: Lens' a b
 
 instance HasAuthorizerResultTtlInSeconds a b => HasAuthorizerResultTtlInSeconds (TF.Schema l p a) b where
     authorizerResultTtlInSeconds = TF.configuration . authorizerResultTtlInSeconds
+
+instance HasAuthorizerResultTtlInSeconds a b => HasAuthorizerResultTtlInSeconds (TF.Ref s a) b where
+    authorizerResultTtlInSeconds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . authorizerResultTtlInSeconds
 
 class HasAuthorizerUri a b | a -> b where
     authorizerUri :: Lens' a b
@@ -2105,11 +2535,21 @@ class HasAuthorizerUri a b | a -> b where
 instance HasAuthorizerUri a b => HasAuthorizerUri (TF.Schema l p a) b where
     authorizerUri = TF.configuration . authorizerUri
 
+instance HasAuthorizerUri a b => HasAuthorizerUri (TF.Ref s a) b where
+    authorizerUri =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . authorizerUri
+
 class HasAutoAccept a b | a -> b where
     autoAccept :: Lens' a b
 
 instance HasAutoAccept a b => HasAutoAccept (TF.Schema l p a) b where
     autoAccept = TF.configuration . autoAccept
+
+instance HasAutoAccept a b => HasAutoAccept (TF.Ref s a) b where
+    autoAccept =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoAccept
 
 class HasAutoAssignElasticIps a b | a -> b where
     autoAssignElasticIps :: Lens' a b
@@ -2117,11 +2557,21 @@ class HasAutoAssignElasticIps a b | a -> b where
 instance HasAutoAssignElasticIps a b => HasAutoAssignElasticIps (TF.Schema l p a) b where
     autoAssignElasticIps = TF.configuration . autoAssignElasticIps
 
+instance HasAutoAssignElasticIps a b => HasAutoAssignElasticIps (TF.Ref s a) b where
+    autoAssignElasticIps =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoAssignElasticIps
+
 class HasAutoAssignPublicIps a b | a -> b where
     autoAssignPublicIps :: Lens' a b
 
 instance HasAutoAssignPublicIps a b => HasAutoAssignPublicIps (TF.Schema l p a) b where
     autoAssignPublicIps = TF.configuration . autoAssignPublicIps
+
+instance HasAutoAssignPublicIps a b => HasAutoAssignPublicIps (TF.Ref s a) b where
+    autoAssignPublicIps =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoAssignPublicIps
 
 class HasAutoBundleOnDeploy a b | a -> b where
     autoBundleOnDeploy :: Lens' a b
@@ -2129,11 +2579,21 @@ class HasAutoBundleOnDeploy a b | a -> b where
 instance HasAutoBundleOnDeploy a b => HasAutoBundleOnDeploy (TF.Schema l p a) b where
     autoBundleOnDeploy = TF.configuration . autoBundleOnDeploy
 
+instance HasAutoBundleOnDeploy a b => HasAutoBundleOnDeploy (TF.Ref s a) b where
+    autoBundleOnDeploy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoBundleOnDeploy
+
 class HasAutoHealing a b | a -> b where
     autoHealing :: Lens' a b
 
 instance HasAutoHealing a b => HasAutoHealing (TF.Schema l p a) b where
     autoHealing = TF.configuration . autoHealing
+
+instance HasAutoHealing a b => HasAutoHealing (TF.Ref s a) b where
+    autoHealing =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoHealing
 
 class HasAutoMinorVersionUpgrade a b | a -> b where
     autoMinorVersionUpgrade :: Lens' a b
@@ -2141,11 +2601,21 @@ class HasAutoMinorVersionUpgrade a b | a -> b where
 instance HasAutoMinorVersionUpgrade a b => HasAutoMinorVersionUpgrade (TF.Schema l p a) b where
     autoMinorVersionUpgrade = TF.configuration . autoMinorVersionUpgrade
 
+instance HasAutoMinorVersionUpgrade a b => HasAutoMinorVersionUpgrade (TF.Ref s a) b where
+    autoMinorVersionUpgrade =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoMinorVersionUpgrade
+
 class HasAutoRollbackConfiguration a b | a -> b where
     autoRollbackConfiguration :: Lens' a b
 
 instance HasAutoRollbackConfiguration a b => HasAutoRollbackConfiguration (TF.Schema l p a) b where
     autoRollbackConfiguration = TF.configuration . autoRollbackConfiguration
+
+instance HasAutoRollbackConfiguration a b => HasAutoRollbackConfiguration (TF.Ref s a) b where
+    autoRollbackConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoRollbackConfiguration
 
 class HasAutoScalingType a b | a -> b where
     autoScalingType :: Lens' a b
@@ -2153,11 +2623,21 @@ class HasAutoScalingType a b | a -> b where
 instance HasAutoScalingType a b => HasAutoScalingType (TF.Schema l p a) b where
     autoScalingType = TF.configuration . autoScalingType
 
+instance HasAutoScalingType a b => HasAutoScalingType (TF.Ref s a) b where
+    autoScalingType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoScalingType
+
 class HasAutoVerifiedAttributes a b | a -> b where
     autoVerifiedAttributes :: Lens' a b
 
 instance HasAutoVerifiedAttributes a b => HasAutoVerifiedAttributes (TF.Schema l p a) b where
     autoVerifiedAttributes = TF.configuration . autoVerifiedAttributes
+
+instance HasAutoVerifiedAttributes a b => HasAutoVerifiedAttributes (TF.Ref s a) b where
+    autoVerifiedAttributes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoVerifiedAttributes
 
 class HasAutomatedSnapshotRetentionPeriod a b | a -> b where
     automatedSnapshotRetentionPeriod :: Lens' a b
@@ -2165,11 +2645,21 @@ class HasAutomatedSnapshotRetentionPeriod a b | a -> b where
 instance HasAutomatedSnapshotRetentionPeriod a b => HasAutomatedSnapshotRetentionPeriod (TF.Schema l p a) b where
     automatedSnapshotRetentionPeriod = TF.configuration . automatedSnapshotRetentionPeriod
 
+instance HasAutomatedSnapshotRetentionPeriod a b => HasAutomatedSnapshotRetentionPeriod (TF.Ref s a) b where
+    automatedSnapshotRetentionPeriod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . automatedSnapshotRetentionPeriod
+
 class HasAutomaticFailoverEnabled a b | a -> b where
     automaticFailoverEnabled :: Lens' a b
 
 instance HasAutomaticFailoverEnabled a b => HasAutomaticFailoverEnabled (TF.Schema l p a) b where
     automaticFailoverEnabled = TF.configuration . automaticFailoverEnabled
+
+instance HasAutomaticFailoverEnabled a b => HasAutomaticFailoverEnabled (TF.Ref s a) b where
+    automaticFailoverEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . automaticFailoverEnabled
 
 class HasAutomaticStopTimeMinutes a b | a -> b where
     automaticStopTimeMinutes :: Lens' a b
@@ -2177,11 +2667,21 @@ class HasAutomaticStopTimeMinutes a b | a -> b where
 instance HasAutomaticStopTimeMinutes a b => HasAutomaticStopTimeMinutes (TF.Schema l p a) b where
     automaticStopTimeMinutes = TF.configuration . automaticStopTimeMinutes
 
+instance HasAutomaticStopTimeMinutes a b => HasAutomaticStopTimeMinutes (TF.Ref s a) b where
+    automaticStopTimeMinutes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . automaticStopTimeMinutes
+
 class HasAutoscalingGroupName a b | a -> b where
     autoscalingGroupName :: Lens' a b
 
 instance HasAutoscalingGroupName a b => HasAutoscalingGroupName (TF.Schema l p a) b where
     autoscalingGroupName = TF.configuration . autoscalingGroupName
+
+instance HasAutoscalingGroupName a b => HasAutoscalingGroupName (TF.Ref s a) b where
+    autoscalingGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoscalingGroupName
 
 class HasAutoscalingGroups a b | a -> b where
     autoscalingGroups :: Lens' a b
@@ -2189,11 +2689,21 @@ class HasAutoscalingGroups a b | a -> b where
 instance HasAutoscalingGroups a b => HasAutoscalingGroups (TF.Schema l p a) b where
     autoscalingGroups = TF.configuration . autoscalingGroups
 
+instance HasAutoscalingGroups a b => HasAutoscalingGroups (TF.Ref s a) b where
+    autoscalingGroups =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoscalingGroups
+
 class HasAutoscalingRole a b | a -> b where
     autoscalingRole :: Lens' a b
 
 instance HasAutoscalingRole a b => HasAutoscalingRole (TF.Schema l p a) b where
     autoscalingRole = TF.configuration . autoscalingRole
+
+instance HasAutoscalingRole a b => HasAutoscalingRole (TF.Ref s a) b where
+    autoscalingRole =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . autoscalingRole
 
 class HasAvailabilityZone a b | a -> b where
     availabilityZone :: Lens' a b
@@ -2201,11 +2711,21 @@ class HasAvailabilityZone a b | a -> b where
 instance HasAvailabilityZone a b => HasAvailabilityZone (TF.Schema l p a) b where
     availabilityZone = TF.configuration . availabilityZone
 
+instance HasAvailabilityZone a b => HasAvailabilityZone (TF.Ref s a) b where
+    availabilityZone =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . availabilityZone
+
 class HasAvailabilityZones a b | a -> b where
     availabilityZones :: Lens' a b
 
 instance HasAvailabilityZones a b => HasAvailabilityZones (TF.Schema l p a) b where
     availabilityZones = TF.configuration . availabilityZones
+
+instance HasAvailabilityZones a b => HasAvailabilityZones (TF.Ref s a) b where
+    availabilityZones =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . availabilityZones
 
 class HasAwsFlowRubySettings a b | a -> b where
     awsFlowRubySettings :: Lens' a b
@@ -2213,11 +2733,21 @@ class HasAwsFlowRubySettings a b | a -> b where
 instance HasAwsFlowRubySettings a b => HasAwsFlowRubySettings (TF.Schema l p a) b where
     awsFlowRubySettings = TF.configuration . awsFlowRubySettings
 
+instance HasAwsFlowRubySettings a b => HasAwsFlowRubySettings (TF.Ref s a) b where
+    awsFlowRubySettings =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . awsFlowRubySettings
+
 class HasAwsKmsKeyArn a b | a -> b where
     awsKmsKeyArn :: Lens' a b
 
 instance HasAwsKmsKeyArn a b => HasAwsKmsKeyArn (TF.Schema l p a) b where
     awsKmsKeyArn = TF.configuration . awsKmsKeyArn
+
+instance HasAwsKmsKeyArn a b => HasAwsKmsKeyArn (TF.Ref s a) b where
+    awsKmsKeyArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . awsKmsKeyArn
 
 class HasAzMode a b | a -> b where
     azMode :: Lens' a b
@@ -2225,11 +2755,21 @@ class HasAzMode a b | a -> b where
 instance HasAzMode a b => HasAzMode (TF.Schema l p a) b where
     azMode = TF.configuration . azMode
 
+instance HasAzMode a b => HasAzMode (TF.Ref s a) b where
+    azMode =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . azMode
+
 class HasBackupRetentionPeriod a b | a -> b where
     backupRetentionPeriod :: Lens' a b
 
 instance HasBackupRetentionPeriod a b => HasBackupRetentionPeriod (TF.Schema l p a) b where
     backupRetentionPeriod = TF.configuration . backupRetentionPeriod
+
+instance HasBackupRetentionPeriod a b => HasBackupRetentionPeriod (TF.Ref s a) b where
+    backupRetentionPeriod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . backupRetentionPeriod
 
 class HasBackupWindow a b | a -> b where
     backupWindow :: Lens' a b
@@ -2237,11 +2777,21 @@ class HasBackupWindow a b | a -> b where
 instance HasBackupWindow a b => HasBackupWindow (TF.Schema l p a) b where
     backupWindow = TF.configuration . backupWindow
 
+instance HasBackupWindow a b => HasBackupWindow (TF.Ref s a) b where
+    backupWindow =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . backupWindow
+
 class HasBandwidth a b | a -> b where
     bandwidth :: Lens' a b
 
 instance HasBandwidth a b => HasBandwidth (TF.Schema l p a) b where
     bandwidth = TF.configuration . bandwidth
+
+instance HasBandwidth a b => HasBandwidth (TF.Ref s a) b where
+    bandwidth =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . bandwidth
 
 class HasBasePath a b | a -> b where
     basePath :: Lens' a b
@@ -2249,11 +2799,21 @@ class HasBasePath a b | a -> b where
 instance HasBasePath a b => HasBasePath (TF.Schema l p a) b where
     basePath = TF.configuration . basePath
 
+instance HasBasePath a b => HasBasePath (TF.Ref s a) b where
+    basePath =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . basePath
+
 class HasBaselineId a b | a -> b where
     baselineId :: Lens' a b
 
 instance HasBaselineId a b => HasBaselineId (TF.Schema l p a) b where
     baselineId = TF.configuration . baselineId
+
+instance HasBaselineId a b => HasBaselineId (TF.Ref s a) b where
+    baselineId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . baselineId
 
 class HasBatchSize a b | a -> b where
     batchSize :: Lens' a b
@@ -2261,11 +2821,21 @@ class HasBatchSize a b | a -> b where
 instance HasBatchSize a b => HasBatchSize (TF.Schema l p a) b where
     batchSize = TF.configuration . batchSize
 
+instance HasBatchSize a b => HasBatchSize (TF.Ref s a) b where
+    batchSize =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . batchSize
+
 class HasBerkshelfVersion a b | a -> b where
     berkshelfVersion :: Lens' a b
 
 instance HasBerkshelfVersion a b => HasBerkshelfVersion (TF.Schema l p a) b where
     berkshelfVersion = TF.configuration . berkshelfVersion
+
+instance HasBerkshelfVersion a b => HasBerkshelfVersion (TF.Ref s a) b where
+    berkshelfVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . berkshelfVersion
 
 class HasBgpAsn a b | a -> b where
     bgpAsn :: Lens' a b
@@ -2273,11 +2843,21 @@ class HasBgpAsn a b | a -> b where
 instance HasBgpAsn a b => HasBgpAsn (TF.Schema l p a) b where
     bgpAsn = TF.configuration . bgpAsn
 
+instance HasBgpAsn a b => HasBgpAsn (TF.Ref s a) b where
+    bgpAsn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . bgpAsn
+
 class HasBinaryMediaTypes a b | a -> b where
     binaryMediaTypes :: Lens' a b
 
 instance HasBinaryMediaTypes a b => HasBinaryMediaTypes (TF.Schema l p a) b where
     binaryMediaTypes = TF.configuration . binaryMediaTypes
+
+instance HasBinaryMediaTypes a b => HasBinaryMediaTypes (TF.Ref s a) b where
+    binaryMediaTypes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . binaryMediaTypes
 
 class HasBlockDurationMinutes a b | a -> b where
     blockDurationMinutes :: Lens' a b
@@ -2285,11 +2865,21 @@ class HasBlockDurationMinutes a b | a -> b where
 instance HasBlockDurationMinutes a b => HasBlockDurationMinutes (TF.Schema l p a) b where
     blockDurationMinutes = TF.configuration . blockDurationMinutes
 
+instance HasBlockDurationMinutes a b => HasBlockDurationMinutes (TF.Ref s a) b where
+    blockDurationMinutes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . blockDurationMinutes
+
 class HasBlueGreenDeploymentConfig a b | a -> b where
     blueGreenDeploymentConfig :: Lens' a b
 
 instance HasBlueGreenDeploymentConfig a b => HasBlueGreenDeploymentConfig (TF.Schema l p a) b where
     blueGreenDeploymentConfig = TF.configuration . blueGreenDeploymentConfig
+
+instance HasBlueGreenDeploymentConfig a b => HasBlueGreenDeploymentConfig (TF.Ref s a) b where
+    blueGreenDeploymentConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . blueGreenDeploymentConfig
 
 class HasBlueprintId a b | a -> b where
     blueprintId :: Lens' a b
@@ -2297,11 +2887,21 @@ class HasBlueprintId a b | a -> b where
 instance HasBlueprintId a b => HasBlueprintId (TF.Schema l p a) b where
     blueprintId = TF.configuration . blueprintId
 
+instance HasBlueprintId a b => HasBlueprintId (TF.Ref s a) b where
+    blueprintId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . blueprintId
+
 class HasBody a b | a -> b where
     body :: Lens' a b
 
 instance HasBody a b => HasBody (TF.Schema l p a) b where
     body = TF.configuration . body
+
+instance HasBody a b => HasBody (TF.Ref s a) b where
+    body =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . body
 
 class HasBootstrapAction a b | a -> b where
     bootstrapAction :: Lens' a b
@@ -2309,11 +2909,21 @@ class HasBootstrapAction a b | a -> b where
 instance HasBootstrapAction a b => HasBootstrapAction (TF.Schema l p a) b where
     bootstrapAction = TF.configuration . bootstrapAction
 
+instance HasBootstrapAction a b => HasBootstrapAction (TF.Ref s a) b where
+    bootstrapAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . bootstrapAction
+
 class HasBounceAction a b | a -> b where
     bounceAction :: Lens' a b
 
 instance HasBounceAction a b => HasBounceAction (TF.Schema l p a) b where
     bounceAction = TF.configuration . bounceAction
+
+instance HasBounceAction a b => HasBounceAction (TF.Ref s a) b where
+    bounceAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . bounceAction
 
 class HasBranches a b | a -> b where
     branches :: Lens' a b
@@ -2321,11 +2931,21 @@ class HasBranches a b | a -> b where
 instance HasBranches a b => HasBranches (TF.Schema l p a) b where
     branches = TF.configuration . branches
 
+instance HasBranches a b => HasBranches (TF.Ref s a) b where
+    branches =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . branches
+
 class HasBrokerName a b | a -> b where
     brokerName :: Lens' a b
 
 instance HasBrokerName a b => HasBrokerName (TF.Schema l p a) b where
     brokerName = TF.configuration . brokerName
+
+instance HasBrokerName a b => HasBrokerName (TF.Ref s a) b where
+    brokerName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . brokerName
 
 class HasBucket a b | a -> b where
     bucket :: Lens' a b
@@ -2333,11 +2953,21 @@ class HasBucket a b | a -> b where
 instance HasBucket a b => HasBucket (TF.Schema l p a) b where
     bucket = TF.configuration . bucket
 
+instance HasBucket a b => HasBucket (TF.Ref s a) b where
+    bucket =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . bucket
+
 class HasBucketPrefix a b | a -> b where
     bucketPrefix :: Lens' a b
 
 instance HasBucketPrefix a b => HasBucketPrefix (TF.Schema l p a) b where
     bucketPrefix = TF.configuration . bucketPrefix
+
+instance HasBucketPrefix a b => HasBucketPrefix (TF.Ref s a) b where
+    bucketPrefix =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . bucketPrefix
 
 class HasBuildId a b | a -> b where
     buildId :: Lens' a b
@@ -2345,11 +2975,21 @@ class HasBuildId a b | a -> b where
 instance HasBuildId a b => HasBuildId (TF.Schema l p a) b where
     buildId = TF.configuration . buildId
 
+instance HasBuildId a b => HasBuildId (TF.Ref s a) b where
+    buildId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . buildId
+
 class HasBuildTimeout a b | a -> b where
     buildTimeout :: Lens' a b
 
 instance HasBuildTimeout a b => HasBuildTimeout (TF.Schema l p a) b where
     buildTimeout = TF.configuration . buildTimeout
+
+instance HasBuildTimeout a b => HasBuildTimeout (TF.Ref s a) b where
+    buildTimeout =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . buildTimeout
 
 class HasBundleId a b | a -> b where
     bundleId :: Lens' a b
@@ -2357,11 +2997,21 @@ class HasBundleId a b | a -> b where
 instance HasBundleId a b => HasBundleId (TF.Schema l p a) b where
     bundleId = TF.configuration . bundleId
 
+instance HasBundleId a b => HasBundleId (TF.Ref s a) b where
+    bundleId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . bundleId
+
 class HasBundlerVersion a b | a -> b where
     bundlerVersion :: Lens' a b
 
 instance HasBundlerVersion a b => HasBundlerVersion (TF.Schema l p a) b where
     bundlerVersion = TF.configuration . bundlerVersion
+
+instance HasBundlerVersion a b => HasBundlerVersion (TF.Ref s a) b where
+    bundlerVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . bundlerVersion
 
 class HasByteMatchTuple a b | a -> b where
     byteMatchTuple :: Lens' a b
@@ -2369,11 +3019,21 @@ class HasByteMatchTuple a b | a -> b where
 instance HasByteMatchTuple a b => HasByteMatchTuple (TF.Schema l p a) b where
     byteMatchTuple = TF.configuration . byteMatchTuple
 
+instance HasByteMatchTuple a b => HasByteMatchTuple (TF.Ref s a) b where
+    byteMatchTuple =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . byteMatchTuple
+
 class HasByteMatchTuples a b | a -> b where
     byteMatchTuples :: Lens' a b
 
 instance HasByteMatchTuples a b => HasByteMatchTuples (TF.Schema l p a) b where
     byteMatchTuples = TF.configuration . byteMatchTuples
+
+instance HasByteMatchTuples a b => HasByteMatchTuples (TF.Ref s a) b where
+    byteMatchTuples =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . byteMatchTuples
 
 class HasCacheBehavior a b | a -> b where
     cacheBehavior :: Lens' a b
@@ -2381,11 +3041,21 @@ class HasCacheBehavior a b | a -> b where
 instance HasCacheBehavior a b => HasCacheBehavior (TF.Schema l p a) b where
     cacheBehavior = TF.configuration . cacheBehavior
 
+instance HasCacheBehavior a b => HasCacheBehavior (TF.Ref s a) b where
+    cacheBehavior =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cacheBehavior
+
 class HasCacheClusterEnabled a b | a -> b where
     cacheClusterEnabled :: Lens' a b
 
 instance HasCacheClusterEnabled a b => HasCacheClusterEnabled (TF.Schema l p a) b where
     cacheClusterEnabled = TF.configuration . cacheClusterEnabled
+
+instance HasCacheClusterEnabled a b => HasCacheClusterEnabled (TF.Ref s a) b where
+    cacheClusterEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cacheClusterEnabled
 
 class HasCacheClusterSize a b | a -> b where
     cacheClusterSize :: Lens' a b
@@ -2393,11 +3063,21 @@ class HasCacheClusterSize a b | a -> b where
 instance HasCacheClusterSize a b => HasCacheClusterSize (TF.Schema l p a) b where
     cacheClusterSize = TF.configuration . cacheClusterSize
 
+instance HasCacheClusterSize a b => HasCacheClusterSize (TF.Ref s a) b where
+    cacheClusterSize =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cacheClusterSize
+
 class HasCacheControl a b | a -> b where
     cacheControl :: Lens' a b
 
 instance HasCacheControl a b => HasCacheControl (TF.Schema l p a) b where
     cacheControl = TF.configuration . cacheControl
+
+instance HasCacheControl a b => HasCacheControl (TF.Ref s a) b where
+    cacheControl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cacheControl
 
 class HasCacheKeyNamespace a b | a -> b where
     cacheKeyNamespace :: Lens' a b
@@ -2405,11 +3085,21 @@ class HasCacheKeyNamespace a b | a -> b where
 instance HasCacheKeyNamespace a b => HasCacheKeyNamespace (TF.Schema l p a) b where
     cacheKeyNamespace = TF.configuration . cacheKeyNamespace
 
+instance HasCacheKeyNamespace a b => HasCacheKeyNamespace (TF.Ref s a) b where
+    cacheKeyNamespace =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cacheKeyNamespace
+
 class HasCacheKeyParameters a b | a -> b where
     cacheKeyParameters :: Lens' a b
 
 instance HasCacheKeyParameters a b => HasCacheKeyParameters (TF.Schema l p a) b where
     cacheKeyParameters = TF.configuration . cacheKeyParameters
+
+instance HasCacheKeyParameters a b => HasCacheKeyParameters (TF.Ref s a) b where
+    cacheKeyParameters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cacheKeyParameters
 
 class HasCallbackUrls a b | a -> b where
     callbackUrls :: Lens' a b
@@ -2417,11 +3107,21 @@ class HasCallbackUrls a b | a -> b where
 instance HasCallbackUrls a b => HasCallbackUrls (TF.Schema l p a) b where
     callbackUrls = TF.configuration . callbackUrls
 
+instance HasCallbackUrls a b => HasCallbackUrls (TF.Ref s a) b where
+    callbackUrls =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . callbackUrls
+
 class HasCapabilities a b | a -> b where
     capabilities :: Lens' a b
 
 instance HasCapabilities a b => HasCapabilities (TF.Schema l p a) b where
     capabilities = TF.configuration . capabilities
+
+instance HasCapabilities a b => HasCapabilities (TF.Ref s a) b where
+    capabilities =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . capabilities
 
 class HasCatalogId a b | a -> b where
     catalogId :: Lens' a b
@@ -2429,11 +3129,21 @@ class HasCatalogId a b | a -> b where
 instance HasCatalogId a b => HasCatalogId (TF.Schema l p a) b where
     catalogId = TF.configuration . catalogId
 
+instance HasCatalogId a b => HasCatalogId (TF.Ref s a) b where
+    catalogId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . catalogId
+
 class HasCdcStartTime a b | a -> b where
     cdcStartTime :: Lens' a b
 
 instance HasCdcStartTime a b => HasCdcStartTime (TF.Schema l p a) b where
     cdcStartTime = TF.configuration . cdcStartTime
+
+instance HasCdcStartTime a b => HasCdcStartTime (TF.Ref s a) b where
+    cdcStartTime =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cdcStartTime
 
 class HasCertificateArn a b | a -> b where
     certificateArn :: Lens' a b
@@ -2441,11 +3151,21 @@ class HasCertificateArn a b | a -> b where
 instance HasCertificateArn a b => HasCertificateArn (TF.Schema l p a) b where
     certificateArn = TF.configuration . certificateArn
 
+instance HasCertificateArn a b => HasCertificateArn (TF.Ref s a) b where
+    certificateArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . certificateArn
+
 class HasCertificateBody a b | a -> b where
     certificateBody :: Lens' a b
 
 instance HasCertificateBody a b => HasCertificateBody (TF.Schema l p a) b where
     certificateBody = TF.configuration . certificateBody
+
+instance HasCertificateBody a b => HasCertificateBody (TF.Ref s a) b where
+    certificateBody =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . certificateBody
 
 class HasCertificateChain a b | a -> b where
     certificateChain :: Lens' a b
@@ -2453,11 +3173,21 @@ class HasCertificateChain a b | a -> b where
 instance HasCertificateChain a b => HasCertificateChain (TF.Schema l p a) b where
     certificateChain = TF.configuration . certificateChain
 
+instance HasCertificateChain a b => HasCertificateChain (TF.Ref s a) b where
+    certificateChain =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . certificateChain
+
 class HasCertificateId a b | a -> b where
     certificateId :: Lens' a b
 
 instance HasCertificateId a b => HasCertificateId (TF.Schema l p a) b where
     certificateId = TF.configuration . certificateId
+
+instance HasCertificateId a b => HasCertificateId (TF.Ref s a) b where
+    certificateId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . certificateId
 
 class HasCertificateName a b | a -> b where
     certificateName :: Lens' a b
@@ -2465,11 +3195,21 @@ class HasCertificateName a b | a -> b where
 instance HasCertificateName a b => HasCertificateName (TF.Schema l p a) b where
     certificateName = TF.configuration . certificateName
 
+instance HasCertificateName a b => HasCertificateName (TF.Ref s a) b where
+    certificateName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . certificateName
+
 class HasCertificatePem a b | a -> b where
     certificatePem :: Lens' a b
 
 instance HasCertificatePem a b => HasCertificatePem (TF.Schema l p a) b where
     certificatePem = TF.configuration . certificatePem
+
+instance HasCertificatePem a b => HasCertificatePem (TF.Ref s a) b where
+    certificatePem =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . certificatePem
 
 class HasCertificatePrivateKey a b | a -> b where
     certificatePrivateKey :: Lens' a b
@@ -2477,11 +3217,21 @@ class HasCertificatePrivateKey a b | a -> b where
 instance HasCertificatePrivateKey a b => HasCertificatePrivateKey (TF.Schema l p a) b where
     certificatePrivateKey = TF.configuration . certificatePrivateKey
 
+instance HasCertificatePrivateKey a b => HasCertificatePrivateKey (TF.Ref s a) b where
+    certificatePrivateKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . certificatePrivateKey
+
 class HasCertificateWallet a b | a -> b where
     certificateWallet :: Lens' a b
 
 instance HasCertificateWallet a b => HasCertificateWallet (TF.Schema l p a) b where
     certificateWallet = TF.configuration . certificateWallet
+
+instance HasCertificateWallet a b => HasCertificateWallet (TF.Ref s a) b where
+    certificateWallet =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . certificateWallet
 
 class HasCharacterSetName a b | a -> b where
     characterSetName :: Lens' a b
@@ -2489,11 +3239,21 @@ class HasCharacterSetName a b | a -> b where
 instance HasCharacterSetName a b => HasCharacterSetName (TF.Schema l p a) b where
     characterSetName = TF.configuration . characterSetName
 
+instance HasCharacterSetName a b => HasCharacterSetName (TF.Ref s a) b where
+    characterSetName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . characterSetName
+
 class HasChildHealthThreshold a b | a -> b where
     childHealthThreshold :: Lens' a b
 
 instance HasChildHealthThreshold a b => HasChildHealthThreshold (TF.Schema l p a) b where
     childHealthThreshold = TF.configuration . childHealthThreshold
+
+instance HasChildHealthThreshold a b => HasChildHealthThreshold (TF.Ref s a) b where
+    childHealthThreshold =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . childHealthThreshold
 
 class HasChildHealthchecks a b | a -> b where
     childHealthchecks :: Lens' a b
@@ -2501,11 +3261,21 @@ class HasChildHealthchecks a b | a -> b where
 instance HasChildHealthchecks a b => HasChildHealthchecks (TF.Schema l p a) b where
     childHealthchecks = TF.configuration . childHealthchecks
 
+instance HasChildHealthchecks a b => HasChildHealthchecks (TF.Ref s a) b where
+    childHealthchecks =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . childHealthchecks
+
 class HasCidr a b | a -> b where
     cidr :: Lens' a b
 
 instance HasCidr a b => HasCidr (TF.Schema l p a) b where
     cidr = TF.configuration . cidr
+
+instance HasCidr a b => HasCidr (TF.Ref s a) b where
+    cidr =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cidr
 
 class HasCidrBlock a b | a -> b where
     cidrBlock :: Lens' a b
@@ -2513,11 +3283,21 @@ class HasCidrBlock a b | a -> b where
 instance HasCidrBlock a b => HasCidrBlock (TF.Schema l p a) b where
     cidrBlock = TF.configuration . cidrBlock
 
+instance HasCidrBlock a b => HasCidrBlock (TF.Ref s a) b where
+    cidrBlock =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cidrBlock
+
 class HasCidrBlocks a b | a -> b where
     cidrBlocks :: Lens' a b
 
 instance HasCidrBlocks a b => HasCidrBlocks (TF.Schema l p a) b where
     cidrBlocks = TF.configuration . cidrBlocks
+
+instance HasCidrBlocks a b => HasCidrBlocks (TF.Ref s a) b where
+    cidrBlocks =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cidrBlocks
 
 class HasClientCertificateId a b | a -> b where
     clientCertificateId :: Lens' a b
@@ -2525,11 +3305,21 @@ class HasClientCertificateId a b | a -> b where
 instance HasClientCertificateId a b => HasClientCertificateId (TF.Schema l p a) b where
     clientCertificateId = TF.configuration . clientCertificateId
 
+instance HasClientCertificateId a b => HasClientCertificateId (TF.Ref s a) b where
+    clientCertificateId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clientCertificateId
+
 class HasClientIdList a b | a -> b where
     clientIdList :: Lens' a b
 
 instance HasClientIdList a b => HasClientIdList (TF.Schema l p a) b where
     clientIdList = TF.configuration . clientIdList
+
+instance HasClientIdList a b => HasClientIdList (TF.Ref s a) b where
+    clientIdList =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clientIdList
 
 class HasCloudWatchLogsGroupArn a b | a -> b where
     cloudWatchLogsGroupArn :: Lens' a b
@@ -2537,11 +3327,21 @@ class HasCloudWatchLogsGroupArn a b | a -> b where
 instance HasCloudWatchLogsGroupArn a b => HasCloudWatchLogsGroupArn (TF.Schema l p a) b where
     cloudWatchLogsGroupArn = TF.configuration . cloudWatchLogsGroupArn
 
+instance HasCloudWatchLogsGroupArn a b => HasCloudWatchLogsGroupArn (TF.Ref s a) b where
+    cloudWatchLogsGroupArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cloudWatchLogsGroupArn
+
 class HasCloudWatchLogsRoleArn a b | a -> b where
     cloudWatchLogsRoleArn :: Lens' a b
 
 instance HasCloudWatchLogsRoleArn a b => HasCloudWatchLogsRoleArn (TF.Schema l p a) b where
     cloudWatchLogsRoleArn = TF.configuration . cloudWatchLogsRoleArn
+
+instance HasCloudWatchLogsRoleArn a b => HasCloudWatchLogsRoleArn (TF.Ref s a) b where
+    cloudWatchLogsRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cloudWatchLogsRoleArn
 
 class HasCloudwatchAlarmName a b | a -> b where
     cloudwatchAlarmName :: Lens' a b
@@ -2549,11 +3349,21 @@ class HasCloudwatchAlarmName a b | a -> b where
 instance HasCloudwatchAlarmName a b => HasCloudwatchAlarmName (TF.Schema l p a) b where
     cloudwatchAlarmName = TF.configuration . cloudwatchAlarmName
 
+instance HasCloudwatchAlarmName a b => HasCloudwatchAlarmName (TF.Ref s a) b where
+    cloudwatchAlarmName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cloudwatchAlarmName
+
 class HasCloudwatchAlarmRegion a b | a -> b where
     cloudwatchAlarmRegion :: Lens' a b
 
 instance HasCloudwatchAlarmRegion a b => HasCloudwatchAlarmRegion (TF.Schema l p a) b where
     cloudwatchAlarmRegion = TF.configuration . cloudwatchAlarmRegion
+
+instance HasCloudwatchAlarmRegion a b => HasCloudwatchAlarmRegion (TF.Ref s a) b where
+    cloudwatchAlarmRegion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cloudwatchAlarmRegion
 
 class HasCloudwatchDestination a b | a -> b where
     cloudwatchDestination :: Lens' a b
@@ -2561,11 +3371,21 @@ class HasCloudwatchDestination a b | a -> b where
 instance HasCloudwatchDestination a b => HasCloudwatchDestination (TF.Schema l p a) b where
     cloudwatchDestination = TF.configuration . cloudwatchDestination
 
+instance HasCloudwatchDestination a b => HasCloudwatchDestination (TF.Ref s a) b where
+    cloudwatchDestination =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cloudwatchDestination
+
 class HasCloudwatchLogGroupArn a b | a -> b where
     cloudwatchLogGroupArn :: Lens' a b
 
 instance HasCloudwatchLogGroupArn a b => HasCloudwatchLogGroupArn (TF.Schema l p a) b where
     cloudwatchLogGroupArn = TF.configuration . cloudwatchLogGroupArn
+
+instance HasCloudwatchLogGroupArn a b => HasCloudwatchLogGroupArn (TF.Ref s a) b where
+    cloudwatchLogGroupArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cloudwatchLogGroupArn
 
 class HasCloudwatchRoleArn a b | a -> b where
     cloudwatchRoleArn :: Lens' a b
@@ -2573,11 +3393,21 @@ class HasCloudwatchRoleArn a b | a -> b where
 instance HasCloudwatchRoleArn a b => HasCloudwatchRoleArn (TF.Schema l p a) b where
     cloudwatchRoleArn = TF.configuration . cloudwatchRoleArn
 
+instance HasCloudwatchRoleArn a b => HasCloudwatchRoleArn (TF.Ref s a) b where
+    cloudwatchRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cloudwatchRoleArn
+
 class HasCluster a b | a -> b where
     cluster :: Lens' a b
 
 instance HasCluster a b => HasCluster (TF.Schema l p a) b where
     cluster = TF.configuration . cluster
+
+instance HasCluster a b => HasCluster (TF.Ref s a) b where
+    cluster =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cluster
 
 class HasClusterConfig a b | a -> b where
     clusterConfig :: Lens' a b
@@ -2585,11 +3415,21 @@ class HasClusterConfig a b | a -> b where
 instance HasClusterConfig a b => HasClusterConfig (TF.Schema l p a) b where
     clusterConfig = TF.configuration . clusterConfig
 
+instance HasClusterConfig a b => HasClusterConfig (TF.Ref s a) b where
+    clusterConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterConfig
+
 class HasClusterId a b | a -> b where
     clusterId :: Lens' a b
 
 instance HasClusterId a b => HasClusterId (TF.Schema l p a) b where
     clusterId = TF.configuration . clusterId
+
+instance HasClusterId a b => HasClusterId (TF.Ref s a) b where
+    clusterId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterId
 
 class HasClusterIdentifier a b | a -> b where
     clusterIdentifier :: Lens' a b
@@ -2597,11 +3437,21 @@ class HasClusterIdentifier a b | a -> b where
 instance HasClusterIdentifier a b => HasClusterIdentifier (TF.Schema l p a) b where
     clusterIdentifier = TF.configuration . clusterIdentifier
 
+instance HasClusterIdentifier a b => HasClusterIdentifier (TF.Ref s a) b where
+    clusterIdentifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterIdentifier
+
 class HasClusterIdentifierPrefix a b | a -> b where
     clusterIdentifierPrefix :: Lens' a b
 
 instance HasClusterIdentifierPrefix a b => HasClusterIdentifierPrefix (TF.Schema l p a) b where
     clusterIdentifierPrefix = TF.configuration . clusterIdentifierPrefix
+
+instance HasClusterIdentifierPrefix a b => HasClusterIdentifierPrefix (TF.Ref s a) b where
+    clusterIdentifierPrefix =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterIdentifierPrefix
 
 class HasClusterMode a b | a -> b where
     clusterMode :: Lens' a b
@@ -2609,11 +3459,21 @@ class HasClusterMode a b | a -> b where
 instance HasClusterMode a b => HasClusterMode (TF.Schema l p a) b where
     clusterMode = TF.configuration . clusterMode
 
+instance HasClusterMode a b => HasClusterMode (TF.Ref s a) b where
+    clusterMode =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterMode
+
 class HasClusterName a b | a -> b where
     clusterName :: Lens' a b
 
 instance HasClusterName a b => HasClusterName (TF.Schema l p a) b where
     clusterName = TF.configuration . clusterName
+
+instance HasClusterName a b => HasClusterName (TF.Ref s a) b where
+    clusterName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterName
 
 class HasClusterParameterGroupName a b | a -> b where
     clusterParameterGroupName :: Lens' a b
@@ -2621,11 +3481,21 @@ class HasClusterParameterGroupName a b | a -> b where
 instance HasClusterParameterGroupName a b => HasClusterParameterGroupName (TF.Schema l p a) b where
     clusterParameterGroupName = TF.configuration . clusterParameterGroupName
 
+instance HasClusterParameterGroupName a b => HasClusterParameterGroupName (TF.Ref s a) b where
+    clusterParameterGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterParameterGroupName
+
 class HasClusterSecurityGroups a b | a -> b where
     clusterSecurityGroups :: Lens' a b
 
 instance HasClusterSecurityGroups a b => HasClusterSecurityGroups (TF.Schema l p a) b where
     clusterSecurityGroups = TF.configuration . clusterSecurityGroups
+
+instance HasClusterSecurityGroups a b => HasClusterSecurityGroups (TF.Ref s a) b where
+    clusterSecurityGroups =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterSecurityGroups
 
 class HasClusterSubnetGroupName a b | a -> b where
     clusterSubnetGroupName :: Lens' a b
@@ -2633,11 +3503,21 @@ class HasClusterSubnetGroupName a b | a -> b where
 instance HasClusterSubnetGroupName a b => HasClusterSubnetGroupName (TF.Schema l p a) b where
     clusterSubnetGroupName = TF.configuration . clusterSubnetGroupName
 
+instance HasClusterSubnetGroupName a b => HasClusterSubnetGroupName (TF.Ref s a) b where
+    clusterSubnetGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterSubnetGroupName
+
 class HasClusterType a b | a -> b where
     clusterType :: Lens' a b
 
 instance HasClusterType a b => HasClusterType (TF.Schema l p a) b where
     clusterType = TF.configuration . clusterType
+
+instance HasClusterType a b => HasClusterType (TF.Ref s a) b where
+    clusterType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterType
 
 class HasClusterVersion a b | a -> b where
     clusterVersion :: Lens' a b
@@ -2645,11 +3525,21 @@ class HasClusterVersion a b | a -> b where
 instance HasClusterVersion a b => HasClusterVersion (TF.Schema l p a) b where
     clusterVersion = TF.configuration . clusterVersion
 
+instance HasClusterVersion a b => HasClusterVersion (TF.Ref s a) b where
+    clusterVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . clusterVersion
+
 class HasCnamePrefix a b | a -> b where
     cnamePrefix :: Lens' a b
 
 instance HasCnamePrefix a b => HasCnamePrefix (TF.Schema l p a) b where
     cnamePrefix = TF.configuration . cnamePrefix
+
+instance HasCnamePrefix a b => HasCnamePrefix (TF.Ref s a) b where
+    cnamePrefix =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cnamePrefix
 
 class HasCognitoIdentityProviders a b | a -> b where
     cognitoIdentityProviders :: Lens' a b
@@ -2657,11 +3547,21 @@ class HasCognitoIdentityProviders a b | a -> b where
 instance HasCognitoIdentityProviders a b => HasCognitoIdentityProviders (TF.Schema l p a) b where
     cognitoIdentityProviders = TF.configuration . cognitoIdentityProviders
 
+instance HasCognitoIdentityProviders a b => HasCognitoIdentityProviders (TF.Ref s a) b where
+    cognitoIdentityProviders =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cognitoIdentityProviders
+
 class HasColor a b | a -> b where
     color :: Lens' a b
 
 instance HasColor a b => HasColor (TF.Schema l p a) b where
     color = TF.configuration . color
+
+instance HasColor a b => HasColor (TF.Ref s a) b where
+    color =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . color
 
 class HasComment a b | a -> b where
     comment :: Lens' a b
@@ -2669,11 +3569,21 @@ class HasComment a b | a -> b where
 instance HasComment a b => HasComment (TF.Schema l p a) b where
     comment = TF.configuration . comment
 
+instance HasComment a b => HasComment (TF.Ref s a) b where
+    comment =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . comment
+
 class HasComparisonOperator a b | a -> b where
     comparisonOperator :: Lens' a b
 
 instance HasComparisonOperator a b => HasComparisonOperator (TF.Schema l p a) b where
     comparisonOperator = TF.configuration . comparisonOperator
+
+instance HasComparisonOperator a b => HasComparisonOperator (TF.Ref s a) b where
+    comparisonOperator =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . comparisonOperator
 
 class HasComputeEnvironmentName a b | a -> b where
     computeEnvironmentName :: Lens' a b
@@ -2681,11 +3591,21 @@ class HasComputeEnvironmentName a b | a -> b where
 instance HasComputeEnvironmentName a b => HasComputeEnvironmentName (TF.Schema l p a) b where
     computeEnvironmentName = TF.configuration . computeEnvironmentName
 
+instance HasComputeEnvironmentName a b => HasComputeEnvironmentName (TF.Ref s a) b where
+    computeEnvironmentName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . computeEnvironmentName
+
 class HasComputeEnvironments a b | a -> b where
     computeEnvironments :: Lens' a b
 
 instance HasComputeEnvironments a b => HasComputeEnvironments (TF.Schema l p a) b where
     computeEnvironments = TF.configuration . computeEnvironments
+
+instance HasComputeEnvironments a b => HasComputeEnvironments (TF.Ref s a) b where
+    computeEnvironments =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . computeEnvironments
 
 class HasComputeResources a b | a -> b where
     computeResources :: Lens' a b
@@ -2693,11 +3613,21 @@ class HasComputeResources a b | a -> b where
 instance HasComputeResources a b => HasComputeResources (TF.Schema l p a) b where
     computeResources = TF.configuration . computeResources
 
+instance HasComputeResources a b => HasComputeResources (TF.Ref s a) b where
+    computeResources =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . computeResources
+
 class HasCondition a b | a -> b where
     condition :: Lens' a b
 
 instance HasCondition a b => HasCondition (TF.Schema l p a) b where
     condition = TF.configuration . condition
+
+instance HasCondition a b => HasCondition (TF.Ref s a) b where
+    condition =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . condition
 
 class HasConfiguration a b | a -> b where
     configuration :: Lens' a b
@@ -2705,11 +3635,21 @@ class HasConfiguration a b | a -> b where
 instance HasConfiguration a b => HasConfiguration (TF.Schema l p a) b where
     configuration = TF.configuration . configuration
 
+instance HasConfiguration a b => HasConfiguration (TF.Ref s a) b where
+    configuration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . configuration
+
 class HasConfigurationManagerName a b | a -> b where
     configurationManagerName :: Lens' a b
 
 instance HasConfigurationManagerName a b => HasConfigurationManagerName (TF.Schema l p a) b where
     configurationManagerName = TF.configuration . configurationManagerName
+
+instance HasConfigurationManagerName a b => HasConfigurationManagerName (TF.Ref s a) b where
+    configurationManagerName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . configurationManagerName
 
 class HasConfigurationManagerVersion a b | a -> b where
     configurationManagerVersion :: Lens' a b
@@ -2717,11 +3657,21 @@ class HasConfigurationManagerVersion a b | a -> b where
 instance HasConfigurationManagerVersion a b => HasConfigurationManagerVersion (TF.Schema l p a) b where
     configurationManagerVersion = TF.configuration . configurationManagerVersion
 
+instance HasConfigurationManagerVersion a b => HasConfigurationManagerVersion (TF.Ref s a) b where
+    configurationManagerVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . configurationManagerVersion
+
 class HasConfigurationSetName a b | a -> b where
     configurationSetName :: Lens' a b
 
 instance HasConfigurationSetName a b => HasConfigurationSetName (TF.Schema l p a) b where
     configurationSetName = TF.configuration . configurationSetName
+
+instance HasConfigurationSetName a b => HasConfigurationSetName (TF.Ref s a) b where
+    configurationSetName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . configurationSetName
 
 class HasConfigurations a b | a -> b where
     configurations :: Lens' a b
@@ -2729,11 +3679,21 @@ class HasConfigurations a b | a -> b where
 instance HasConfigurations a b => HasConfigurations (TF.Schema l p a) b where
     configurations = TF.configuration . configurations
 
+instance HasConfigurations a b => HasConfigurations (TF.Ref s a) b where
+    configurations =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . configurations
+
 class HasConfirmationTimeoutInMinutes a b | a -> b where
     confirmationTimeoutInMinutes :: Lens' a b
 
 instance HasConfirmationTimeoutInMinutes a b => HasConfirmationTimeoutInMinutes (TF.Schema l p a) b where
     confirmationTimeoutInMinutes = TF.configuration . confirmationTimeoutInMinutes
+
+instance HasConfirmationTimeoutInMinutes a b => HasConfirmationTimeoutInMinutes (TF.Ref s a) b where
+    confirmationTimeoutInMinutes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . confirmationTimeoutInMinutes
 
 class HasConnectSettings a b | a -> b where
     connectSettings :: Lens' a b
@@ -2741,11 +3701,21 @@ class HasConnectSettings a b | a -> b where
 instance HasConnectSettings a b => HasConnectSettings (TF.Schema l p a) b where
     connectSettings = TF.configuration . connectSettings
 
+instance HasConnectSettings a b => HasConnectSettings (TF.Ref s a) b where
+    connectSettings =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . connectSettings
+
 class HasConnectionDraining a b | a -> b where
     connectionDraining :: Lens' a b
 
 instance HasConnectionDraining a b => HasConnectionDraining (TF.Schema l p a) b where
     connectionDraining = TF.configuration . connectionDraining
+
+instance HasConnectionDraining a b => HasConnectionDraining (TF.Ref s a) b where
+    connectionDraining =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . connectionDraining
 
 class HasConnectionDrainingTimeout a b | a -> b where
     connectionDrainingTimeout :: Lens' a b
@@ -2753,11 +3723,21 @@ class HasConnectionDrainingTimeout a b | a -> b where
 instance HasConnectionDrainingTimeout a b => HasConnectionDrainingTimeout (TF.Schema l p a) b where
     connectionDrainingTimeout = TF.configuration . connectionDrainingTimeout
 
+instance HasConnectionDrainingTimeout a b => HasConnectionDrainingTimeout (TF.Ref s a) b where
+    connectionDrainingTimeout =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . connectionDrainingTimeout
+
 class HasConnectionEvents a b | a -> b where
     connectionEvents :: Lens' a b
 
 instance HasConnectionEvents a b => HasConnectionEvents (TF.Schema l p a) b where
     connectionEvents = TF.configuration . connectionEvents
+
+instance HasConnectionEvents a b => HasConnectionEvents (TF.Ref s a) b where
+    connectionEvents =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . connectionEvents
 
 class HasConnectionId a b | a -> b where
     connectionId :: Lens' a b
@@ -2765,11 +3745,21 @@ class HasConnectionId a b | a -> b where
 instance HasConnectionId a b => HasConnectionId (TF.Schema l p a) b where
     connectionId = TF.configuration . connectionId
 
+instance HasConnectionId a b => HasConnectionId (TF.Ref s a) b where
+    connectionId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . connectionId
+
 class HasConnectionNotificationArn a b | a -> b where
     connectionNotificationArn :: Lens' a b
 
 instance HasConnectionNotificationArn a b => HasConnectionNotificationArn (TF.Schema l p a) b where
     connectionNotificationArn = TF.configuration . connectionNotificationArn
+
+instance HasConnectionNotificationArn a b => HasConnectionNotificationArn (TF.Ref s a) b where
+    connectionNotificationArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . connectionNotificationArn
 
 class HasConnectionsBandwidth a b | a -> b where
     connectionsBandwidth :: Lens' a b
@@ -2777,11 +3767,21 @@ class HasConnectionsBandwidth a b | a -> b where
 instance HasConnectionsBandwidth a b => HasConnectionsBandwidth (TF.Schema l p a) b where
     connectionsBandwidth = TF.configuration . connectionsBandwidth
 
+instance HasConnectionsBandwidth a b => HasConnectionsBandwidth (TF.Ref s a) b where
+    connectionsBandwidth =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . connectionsBandwidth
+
 class HasContainer a b | a -> b where
     container :: Lens' a b
 
 instance HasContainer a b => HasContainer (TF.Schema l p a) b where
     container = TF.configuration . container
+
+instance HasContainer a b => HasContainer (TF.Ref s a) b where
+    container =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . container
 
 class HasContainerDefinitions a b | a -> b where
     containerDefinitions :: Lens' a b
@@ -2789,11 +3789,21 @@ class HasContainerDefinitions a b | a -> b where
 instance HasContainerDefinitions a b => HasContainerDefinitions (TF.Schema l p a) b where
     containerDefinitions = TF.configuration . containerDefinitions
 
+instance HasContainerDefinitions a b => HasContainerDefinitions (TF.Ref s a) b where
+    containerDefinitions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . containerDefinitions
+
 class HasContainerName a b | a -> b where
     containerName :: Lens' a b
 
 instance HasContainerName a b => HasContainerName (TF.Schema l p a) b where
     containerName = TF.configuration . containerName
+
+instance HasContainerName a b => HasContainerName (TF.Ref s a) b where
+    containerName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . containerName
 
 class HasContainerProperties a b | a -> b where
     containerProperties :: Lens' a b
@@ -2801,11 +3811,21 @@ class HasContainerProperties a b | a -> b where
 instance HasContainerProperties a b => HasContainerProperties (TF.Schema l p a) b where
     containerProperties = TF.configuration . containerProperties
 
+instance HasContainerProperties a b => HasContainerProperties (TF.Ref s a) b where
+    containerProperties =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . containerProperties
+
 class HasContent a b | a -> b where
     content :: Lens' a b
 
 instance HasContent a b => HasContent (TF.Schema l p a) b where
     content = TF.configuration . content
+
+instance HasContent a b => HasContent (TF.Ref s a) b where
+    content =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . content
 
 class HasContentBasedDeduplication a b | a -> b where
     contentBasedDeduplication :: Lens' a b
@@ -2813,11 +3833,21 @@ class HasContentBasedDeduplication a b | a -> b where
 instance HasContentBasedDeduplication a b => HasContentBasedDeduplication (TF.Schema l p a) b where
     contentBasedDeduplication = TF.configuration . contentBasedDeduplication
 
+instance HasContentBasedDeduplication a b => HasContentBasedDeduplication (TF.Ref s a) b where
+    contentBasedDeduplication =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentBasedDeduplication
+
 class HasContentConfig a b | a -> b where
     contentConfig :: Lens' a b
 
 instance HasContentConfig a b => HasContentConfig (TF.Schema l p a) b where
     contentConfig = TF.configuration . contentConfig
+
+instance HasContentConfig a b => HasContentConfig (TF.Ref s a) b where
+    contentConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentConfig
 
 class HasContentConfigPermissions a b | a -> b where
     contentConfigPermissions :: Lens' a b
@@ -2825,11 +3855,21 @@ class HasContentConfigPermissions a b | a -> b where
 instance HasContentConfigPermissions a b => HasContentConfigPermissions (TF.Schema l p a) b where
     contentConfigPermissions = TF.configuration . contentConfigPermissions
 
+instance HasContentConfigPermissions a b => HasContentConfigPermissions (TF.Ref s a) b where
+    contentConfigPermissions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentConfigPermissions
+
 class HasContentDisposition a b | a -> b where
     contentDisposition :: Lens' a b
 
 instance HasContentDisposition a b => HasContentDisposition (TF.Schema l p a) b where
     contentDisposition = TF.configuration . contentDisposition
+
+instance HasContentDisposition a b => HasContentDisposition (TF.Ref s a) b where
+    contentDisposition =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentDisposition
 
 class HasContentEncoding a b | a -> b where
     contentEncoding :: Lens' a b
@@ -2837,11 +3877,21 @@ class HasContentEncoding a b | a -> b where
 instance HasContentEncoding a b => HasContentEncoding (TF.Schema l p a) b where
     contentEncoding = TF.configuration . contentEncoding
 
+instance HasContentEncoding a b => HasContentEncoding (TF.Ref s a) b where
+    contentEncoding =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentEncoding
+
 class HasContentHandling a b | a -> b where
     contentHandling :: Lens' a b
 
 instance HasContentHandling a b => HasContentHandling (TF.Schema l p a) b where
     contentHandling = TF.configuration . contentHandling
+
+instance HasContentHandling a b => HasContentHandling (TF.Ref s a) b where
+    contentHandling =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentHandling
 
 class HasContentLanguage a b | a -> b where
     contentLanguage :: Lens' a b
@@ -2849,11 +3899,21 @@ class HasContentLanguage a b | a -> b where
 instance HasContentLanguage a b => HasContentLanguage (TF.Schema l p a) b where
     contentLanguage = TF.configuration . contentLanguage
 
+instance HasContentLanguage a b => HasContentLanguage (TF.Ref s a) b where
+    contentLanguage =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentLanguage
+
 class HasContentType a b | a -> b where
     contentType :: Lens' a b
 
 instance HasContentType a b => HasContentType (TF.Schema l p a) b where
     contentType = TF.configuration . contentType
+
+instance HasContentType a b => HasContentType (TF.Ref s a) b where
+    contentType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . contentType
 
 class HasContext a b | a -> b where
     context :: Lens' a b
@@ -2861,11 +3921,21 @@ class HasContext a b | a -> b where
 instance HasContext a b => HasContext (TF.Schema l p a) b where
     context = TF.configuration . context
 
+instance HasContext a b => HasContext (TF.Ref s a) b where
+    context =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . context
+
 class HasCookieExpirationPeriod a b | a -> b where
     cookieExpirationPeriod :: Lens' a b
 
 instance HasCookieExpirationPeriod a b => HasCookieExpirationPeriod (TF.Schema l p a) b where
     cookieExpirationPeriod = TF.configuration . cookieExpirationPeriod
+
+instance HasCookieExpirationPeriod a b => HasCookieExpirationPeriod (TF.Ref s a) b where
+    cookieExpirationPeriod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cookieExpirationPeriod
 
 class HasCookieName a b | a -> b where
     cookieName :: Lens' a b
@@ -2873,11 +3943,21 @@ class HasCookieName a b | a -> b where
 instance HasCookieName a b => HasCookieName (TF.Schema l p a) b where
     cookieName = TF.configuration . cookieName
 
+instance HasCookieName a b => HasCookieName (TF.Ref s a) b where
+    cookieName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cookieName
+
 class HasCopyTagsToSnapshot a b | a -> b where
     copyTagsToSnapshot :: Lens' a b
 
 instance HasCopyTagsToSnapshot a b => HasCopyTagsToSnapshot (TF.Schema l p a) b where
     copyTagsToSnapshot = TF.configuration . copyTagsToSnapshot
+
+instance HasCopyTagsToSnapshot a b => HasCopyTagsToSnapshot (TF.Ref s a) b where
+    copyTagsToSnapshot =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . copyTagsToSnapshot
 
 class HasCoreInstanceCount a b | a -> b where
     coreInstanceCount :: Lens' a b
@@ -2885,11 +3965,21 @@ class HasCoreInstanceCount a b | a -> b where
 instance HasCoreInstanceCount a b => HasCoreInstanceCount (TF.Schema l p a) b where
     coreInstanceCount = TF.configuration . coreInstanceCount
 
+instance HasCoreInstanceCount a b => HasCoreInstanceCount (TF.Ref s a) b where
+    coreInstanceCount =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . coreInstanceCount
+
 class HasCoreInstanceType a b | a -> b where
     coreInstanceType :: Lens' a b
 
 instance HasCoreInstanceType a b => HasCoreInstanceType (TF.Schema l p a) b where
     coreInstanceType = TF.configuration . coreInstanceType
+
+instance HasCoreInstanceType a b => HasCoreInstanceType (TF.Ref s a) b where
+    coreInstanceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . coreInstanceType
 
 class HasCorsRule a b | a -> b where
     corsRule :: Lens' a b
@@ -2897,11 +3987,21 @@ class HasCorsRule a b | a -> b where
 instance HasCorsRule a b => HasCorsRule (TF.Schema l p a) b where
     corsRule = TF.configuration . corsRule
 
+instance HasCorsRule a b => HasCorsRule (TF.Ref s a) b where
+    corsRule =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . corsRule
+
 class HasCreationToken a b | a -> b where
     creationToken :: Lens' a b
 
 instance HasCreationToken a b => HasCreationToken (TF.Schema l p a) b where
     creationToken = TF.configuration . creationToken
+
+instance HasCreationToken a b => HasCreationToken (TF.Ref s a) b where
+    creationToken =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . creationToken
 
 class HasCredentials a b | a -> b where
     credentials :: Lens' a b
@@ -2909,11 +4009,21 @@ class HasCredentials a b | a -> b where
 instance HasCredentials a b => HasCredentials (TF.Schema l p a) b where
     credentials = TF.configuration . credentials
 
+instance HasCredentials a b => HasCredentials (TF.Ref s a) b where
+    credentials =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . credentials
+
 class HasCrossZoneLoadBalancing a b | a -> b where
     crossZoneLoadBalancing :: Lens' a b
 
 instance HasCrossZoneLoadBalancing a b => HasCrossZoneLoadBalancing (TF.Schema l p a) b where
     crossZoneLoadBalancing = TF.configuration . crossZoneLoadBalancing
+
+instance HasCrossZoneLoadBalancing a b => HasCrossZoneLoadBalancing (TF.Ref s a) b where
+    crossZoneLoadBalancing =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . crossZoneLoadBalancing
 
 class HasCsr a b | a -> b where
     csr :: Lens' a b
@@ -2921,11 +4031,21 @@ class HasCsr a b | a -> b where
 instance HasCsr a b => HasCsr (TF.Schema l p a) b where
     csr = TF.configuration . csr
 
+instance HasCsr a b => HasCsr (TF.Ref s a) b where
+    csr =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . csr
+
 class HasCustomAmiId a b | a -> b where
     customAmiId :: Lens' a b
 
 instance HasCustomAmiId a b => HasCustomAmiId (TF.Schema l p a) b where
     customAmiId = TF.configuration . customAmiId
+
+instance HasCustomAmiId a b => HasCustomAmiId (TF.Ref s a) b where
+    customAmiId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . customAmiId
 
 class HasCustomCookbooksSource a b | a -> b where
     customCookbooksSource :: Lens' a b
@@ -2933,11 +4053,21 @@ class HasCustomCookbooksSource a b | a -> b where
 instance HasCustomCookbooksSource a b => HasCustomCookbooksSource (TF.Schema l p a) b where
     customCookbooksSource = TF.configuration . customCookbooksSource
 
+instance HasCustomCookbooksSource a b => HasCustomCookbooksSource (TF.Ref s a) b where
+    customCookbooksSource =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . customCookbooksSource
+
 class HasCustomData a b | a -> b where
     customData :: Lens' a b
 
 instance HasCustomData a b => HasCustomData (TF.Schema l p a) b where
     customData = TF.configuration . customData
+
+instance HasCustomData a b => HasCustomData (TF.Ref s a) b where
+    customData =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . customData
 
 class HasCustomErrorResponse a b | a -> b where
     customErrorResponse :: Lens' a b
@@ -2945,11 +4075,21 @@ class HasCustomErrorResponse a b | a -> b where
 instance HasCustomErrorResponse a b => HasCustomErrorResponse (TF.Schema l p a) b where
     customErrorResponse = TF.configuration . customErrorResponse
 
+instance HasCustomErrorResponse a b => HasCustomErrorResponse (TF.Ref s a) b where
+    customErrorResponse =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . customErrorResponse
+
 class HasCustomInstanceProfileArn a b | a -> b where
     customInstanceProfileArn :: Lens' a b
 
 instance HasCustomInstanceProfileArn a b => HasCustomInstanceProfileArn (TF.Schema l p a) b where
     customInstanceProfileArn = TF.configuration . customInstanceProfileArn
+
+instance HasCustomInstanceProfileArn a b => HasCustomInstanceProfileArn (TF.Ref s a) b where
+    customInstanceProfileArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . customInstanceProfileArn
 
 class HasCustomJson a b | a -> b where
     customJson :: Lens' a b
@@ -2957,11 +4097,21 @@ class HasCustomJson a b | a -> b where
 instance HasCustomJson a b => HasCustomJson (TF.Schema l p a) b where
     customJson = TF.configuration . customJson
 
+instance HasCustomJson a b => HasCustomJson (TF.Ref s a) b where
+    customJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . customJson
+
 class HasCustomSecurityGroupIds a b | a -> b where
     customSecurityGroupIds :: Lens' a b
 
 instance HasCustomSecurityGroupIds a b => HasCustomSecurityGroupIds (TF.Schema l p a) b where
     customSecurityGroupIds = TF.configuration . customSecurityGroupIds
+
+instance HasCustomSecurityGroupIds a b => HasCustomSecurityGroupIds (TF.Ref s a) b where
+    customSecurityGroupIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . customSecurityGroupIds
 
 class HasCustomerGatewayId a b | a -> b where
     customerGatewayId :: Lens' a b
@@ -2969,11 +4119,21 @@ class HasCustomerGatewayId a b | a -> b where
 instance HasCustomerGatewayId a b => HasCustomerGatewayId (TF.Schema l p a) b where
     customerGatewayId = TF.configuration . customerGatewayId
 
+instance HasCustomerGatewayId a b => HasCustomerGatewayId (TF.Ref s a) b where
+    customerGatewayId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . customerGatewayId
+
 class HasCutoff a b | a -> b where
     cutoff :: Lens' a b
 
 instance HasCutoff a b => HasCutoff (TF.Schema l p a) b where
     cutoff = TF.configuration . cutoff
+
+instance HasCutoff a b => HasCutoff (TF.Ref s a) b where
+    cutoff =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . cutoff
 
 class HasDashboardBody a b | a -> b where
     dashboardBody :: Lens' a b
@@ -2981,11 +4141,21 @@ class HasDashboardBody a b | a -> b where
 instance HasDashboardBody a b => HasDashboardBody (TF.Schema l p a) b where
     dashboardBody = TF.configuration . dashboardBody
 
+instance HasDashboardBody a b => HasDashboardBody (TF.Ref s a) b where
+    dashboardBody =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dashboardBody
+
 class HasDashboardName a b | a -> b where
     dashboardName :: Lens' a b
 
 instance HasDashboardName a b => HasDashboardName (TF.Schema l p a) b where
     dashboardName = TF.configuration . dashboardName
+
+instance HasDashboardName a b => HasDashboardName (TF.Ref s a) b where
+    dashboardName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dashboardName
 
 class HasData' a b | a -> b where
     data' :: Lens' a b
@@ -2993,11 +4163,21 @@ class HasData' a b | a -> b where
 instance HasData' a b => HasData' (TF.Schema l p a) b where
     data' = TF.configuration . data'
 
+instance HasData' a b => HasData' (TF.Ref s a) b where
+    data' =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . data'
+
 class HasDataSourceArn a b | a -> b where
     dataSourceArn :: Lens' a b
 
 instance HasDataSourceArn a b => HasDataSourceArn (TF.Schema l p a) b where
     dataSourceArn = TF.configuration . dataSourceArn
+
+instance HasDataSourceArn a b => HasDataSourceArn (TF.Ref s a) b where
+    dataSourceArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dataSourceArn
 
 class HasDataSourceDatabaseName a b | a -> b where
     dataSourceDatabaseName :: Lens' a b
@@ -3005,11 +4185,21 @@ class HasDataSourceDatabaseName a b | a -> b where
 instance HasDataSourceDatabaseName a b => HasDataSourceDatabaseName (TF.Schema l p a) b where
     dataSourceDatabaseName = TF.configuration . dataSourceDatabaseName
 
+instance HasDataSourceDatabaseName a b => HasDataSourceDatabaseName (TF.Ref s a) b where
+    dataSourceDatabaseName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dataSourceDatabaseName
+
 class HasDataSourceType a b | a -> b where
     dataSourceType :: Lens' a b
 
 instance HasDataSourceType a b => HasDataSourceType (TF.Schema l p a) b where
     dataSourceType = TF.configuration . dataSourceType
+
+instance HasDataSourceType a b => HasDataSourceType (TF.Ref s a) b where
+    dataSourceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dataSourceType
 
 class HasDatabase a b | a -> b where
     database :: Lens' a b
@@ -3017,11 +4207,21 @@ class HasDatabase a b | a -> b where
 instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
 
+instance HasDatabase a b => HasDatabase (TF.Ref s a) b where
+    database =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . database
+
 class HasDatabaseName a b | a -> b where
     databaseName :: Lens' a b
 
 instance HasDatabaseName a b => HasDatabaseName (TF.Schema l p a) b where
     databaseName = TF.configuration . databaseName
+
+instance HasDatabaseName a b => HasDatabaseName (TF.Ref s a) b where
+    databaseName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . databaseName
 
 class HasDatapointsToAlarm a b | a -> b where
     datapointsToAlarm :: Lens' a b
@@ -3029,11 +4229,21 @@ class HasDatapointsToAlarm a b | a -> b where
 instance HasDatapointsToAlarm a b => HasDatapointsToAlarm (TF.Schema l p a) b where
     datapointsToAlarm = TF.configuration . datapointsToAlarm
 
+instance HasDatapointsToAlarm a b => HasDatapointsToAlarm (TF.Ref s a) b where
+    datapointsToAlarm =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . datapointsToAlarm
+
 class HasDbClusterParameterGroupName a b | a -> b where
     dbClusterParameterGroupName :: Lens' a b
 
 instance HasDbClusterParameterGroupName a b => HasDbClusterParameterGroupName (TF.Schema l p a) b where
     dbClusterParameterGroupName = TF.configuration . dbClusterParameterGroupName
+
+instance HasDbClusterParameterGroupName a b => HasDbClusterParameterGroupName (TF.Ref s a) b where
+    dbClusterParameterGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dbClusterParameterGroupName
 
 class HasDbInstanceIdentifier a b | a -> b where
     dbInstanceIdentifier :: Lens' a b
@@ -3041,11 +4251,21 @@ class HasDbInstanceIdentifier a b | a -> b where
 instance HasDbInstanceIdentifier a b => HasDbInstanceIdentifier (TF.Schema l p a) b where
     dbInstanceIdentifier = TF.configuration . dbInstanceIdentifier
 
+instance HasDbInstanceIdentifier a b => HasDbInstanceIdentifier (TF.Ref s a) b where
+    dbInstanceIdentifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dbInstanceIdentifier
+
 class HasDbParameterGroupName a b | a -> b where
     dbParameterGroupName :: Lens' a b
 
 instance HasDbParameterGroupName a b => HasDbParameterGroupName (TF.Schema l p a) b where
     dbParameterGroupName = TF.configuration . dbParameterGroupName
+
+instance HasDbParameterGroupName a b => HasDbParameterGroupName (TF.Ref s a) b where
+    dbParameterGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dbParameterGroupName
 
 class HasDbPassword a b | a -> b where
     dbPassword :: Lens' a b
@@ -3053,11 +4273,21 @@ class HasDbPassword a b | a -> b where
 instance HasDbPassword a b => HasDbPassword (TF.Schema l p a) b where
     dbPassword = TF.configuration . dbPassword
 
+instance HasDbPassword a b => HasDbPassword (TF.Ref s a) b where
+    dbPassword =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dbPassword
+
 class HasDbSnapshotIdentifier a b | a -> b where
     dbSnapshotIdentifier :: Lens' a b
 
 instance HasDbSnapshotIdentifier a b => HasDbSnapshotIdentifier (TF.Schema l p a) b where
     dbSnapshotIdentifier = TF.configuration . dbSnapshotIdentifier
+
+instance HasDbSnapshotIdentifier a b => HasDbSnapshotIdentifier (TF.Ref s a) b where
+    dbSnapshotIdentifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dbSnapshotIdentifier
 
 class HasDbSubnetGroupName a b | a -> b where
     dbSubnetGroupName :: Lens' a b
@@ -3065,11 +4295,21 @@ class HasDbSubnetGroupName a b | a -> b where
 instance HasDbSubnetGroupName a b => HasDbSubnetGroupName (TF.Schema l p a) b where
     dbSubnetGroupName = TF.configuration . dbSubnetGroupName
 
+instance HasDbSubnetGroupName a b => HasDbSubnetGroupName (TF.Ref s a) b where
+    dbSubnetGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dbSubnetGroupName
+
 class HasDbUser a b | a -> b where
     dbUser :: Lens' a b
 
 instance HasDbUser a b => HasDbUser (TF.Schema l p a) b where
     dbUser = TF.configuration . dbUser
+
+instance HasDbUser a b => HasDbUser (TF.Ref s a) b where
+    dbUser =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dbUser
 
 class HasDeadLetterConfig a b | a -> b where
     deadLetterConfig :: Lens' a b
@@ -3077,11 +4317,21 @@ class HasDeadLetterConfig a b | a -> b where
 instance HasDeadLetterConfig a b => HasDeadLetterConfig (TF.Schema l p a) b where
     deadLetterConfig = TF.configuration . deadLetterConfig
 
+instance HasDeadLetterConfig a b => HasDeadLetterConfig (TF.Ref s a) b where
+    deadLetterConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deadLetterConfig
+
 class HasDefault' a b | a -> b where
     default' :: Lens' a b
 
 instance HasDefault' a b => HasDefault' (TF.Schema l p a) b where
     default' = TF.configuration . default'
+
+instance HasDefault' a b => HasDefault' (TF.Ref s a) b where
+    default' =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . default'
 
 class HasDefaultAction a b | a -> b where
     defaultAction :: Lens' a b
@@ -3089,11 +4339,21 @@ class HasDefaultAction a b | a -> b where
 instance HasDefaultAction a b => HasDefaultAction (TF.Schema l p a) b where
     defaultAction = TF.configuration . defaultAction
 
+instance HasDefaultAction a b => HasDefaultAction (TF.Ref s a) b where
+    defaultAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultAction
+
 class HasDefaultAvailabilityZone a b | a -> b where
     defaultAvailabilityZone :: Lens' a b
 
 instance HasDefaultAvailabilityZone a b => HasDefaultAvailabilityZone (TF.Schema l p a) b where
     defaultAvailabilityZone = TF.configuration . defaultAvailabilityZone
+
+instance HasDefaultAvailabilityZone a b => HasDefaultAvailabilityZone (TF.Ref s a) b where
+    defaultAvailabilityZone =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultAvailabilityZone
 
 class HasDefaultBranch a b | a -> b where
     defaultBranch :: Lens' a b
@@ -3101,11 +4361,21 @@ class HasDefaultBranch a b | a -> b where
 instance HasDefaultBranch a b => HasDefaultBranch (TF.Schema l p a) b where
     defaultBranch = TF.configuration . defaultBranch
 
+instance HasDefaultBranch a b => HasDefaultBranch (TF.Ref s a) b where
+    defaultBranch =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultBranch
+
 class HasDefaultCacheBehavior a b | a -> b where
     defaultCacheBehavior :: Lens' a b
 
 instance HasDefaultCacheBehavior a b => HasDefaultCacheBehavior (TF.Schema l p a) b where
     defaultCacheBehavior = TF.configuration . defaultCacheBehavior
+
+instance HasDefaultCacheBehavior a b => HasDefaultCacheBehavior (TF.Ref s a) b where
+    defaultCacheBehavior =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultCacheBehavior
 
 class HasDefaultCooldown a b | a -> b where
     defaultCooldown :: Lens' a b
@@ -3113,11 +4383,21 @@ class HasDefaultCooldown a b | a -> b where
 instance HasDefaultCooldown a b => HasDefaultCooldown (TF.Schema l p a) b where
     defaultCooldown = TF.configuration . defaultCooldown
 
+instance HasDefaultCooldown a b => HasDefaultCooldown (TF.Ref s a) b where
+    defaultCooldown =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultCooldown
+
 class HasDefaultForAz a b | a -> b where
     defaultForAz :: Lens' a b
 
 instance HasDefaultForAz a b => HasDefaultForAz (TF.Schema l p a) b where
     defaultForAz = TF.configuration . defaultForAz
+
+instance HasDefaultForAz a b => HasDefaultForAz (TF.Ref s a) b where
+    defaultForAz =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultForAz
 
 class HasDefaultInstanceProfileArn a b | a -> b where
     defaultInstanceProfileArn :: Lens' a b
@@ -3125,11 +4405,21 @@ class HasDefaultInstanceProfileArn a b | a -> b where
 instance HasDefaultInstanceProfileArn a b => HasDefaultInstanceProfileArn (TF.Schema l p a) b where
     defaultInstanceProfileArn = TF.configuration . defaultInstanceProfileArn
 
+instance HasDefaultInstanceProfileArn a b => HasDefaultInstanceProfileArn (TF.Ref s a) b where
+    defaultInstanceProfileArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultInstanceProfileArn
+
 class HasDefaultNetworkAclId a b | a -> b where
     defaultNetworkAclId :: Lens' a b
 
 instance HasDefaultNetworkAclId a b => HasDefaultNetworkAclId (TF.Schema l p a) b where
     defaultNetworkAclId = TF.configuration . defaultNetworkAclId
+
+instance HasDefaultNetworkAclId a b => HasDefaultNetworkAclId (TF.Ref s a) b where
+    defaultNetworkAclId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultNetworkAclId
 
 class HasDefaultOs a b | a -> b where
     defaultOs :: Lens' a b
@@ -3137,11 +4427,21 @@ class HasDefaultOs a b | a -> b where
 instance HasDefaultOs a b => HasDefaultOs (TF.Schema l p a) b where
     defaultOs = TF.configuration . defaultOs
 
+instance HasDefaultOs a b => HasDefaultOs (TF.Ref s a) b where
+    defaultOs =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultOs
+
 class HasDefaultRedirectUri a b | a -> b where
     defaultRedirectUri :: Lens' a b
 
 instance HasDefaultRedirectUri a b => HasDefaultRedirectUri (TF.Schema l p a) b where
     defaultRedirectUri = TF.configuration . defaultRedirectUri
+
+instance HasDefaultRedirectUri a b => HasDefaultRedirectUri (TF.Ref s a) b where
+    defaultRedirectUri =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultRedirectUri
 
 class HasDefaultResult a b | a -> b where
     defaultResult :: Lens' a b
@@ -3149,11 +4449,21 @@ class HasDefaultResult a b | a -> b where
 instance HasDefaultResult a b => HasDefaultResult (TF.Schema l p a) b where
     defaultResult = TF.configuration . defaultResult
 
+instance HasDefaultResult a b => HasDefaultResult (TF.Ref s a) b where
+    defaultResult =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultResult
+
 class HasDefaultRootDeviceType a b | a -> b where
     defaultRootDeviceType :: Lens' a b
 
 instance HasDefaultRootDeviceType a b => HasDefaultRootDeviceType (TF.Schema l p a) b where
     defaultRootDeviceType = TF.configuration . defaultRootDeviceType
+
+instance HasDefaultRootDeviceType a b => HasDefaultRootDeviceType (TF.Ref s a) b where
+    defaultRootDeviceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultRootDeviceType
 
 class HasDefaultRootObject a b | a -> b where
     defaultRootObject :: Lens' a b
@@ -3161,11 +4471,21 @@ class HasDefaultRootObject a b | a -> b where
 instance HasDefaultRootObject a b => HasDefaultRootObject (TF.Schema l p a) b where
     defaultRootObject = TF.configuration . defaultRootObject
 
+instance HasDefaultRootObject a b => HasDefaultRootObject (TF.Ref s a) b where
+    defaultRootObject =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultRootObject
+
 class HasDefaultRouteTableId a b | a -> b where
     defaultRouteTableId :: Lens' a b
 
 instance HasDefaultRouteTableId a b => HasDefaultRouteTableId (TF.Schema l p a) b where
     defaultRouteTableId = TF.configuration . defaultRouteTableId
+
+instance HasDefaultRouteTableId a b => HasDefaultRouteTableId (TF.Ref s a) b where
+    defaultRouteTableId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultRouteTableId
 
 class HasDefaultSshKeyName a b | a -> b where
     defaultSshKeyName :: Lens' a b
@@ -3173,11 +4493,21 @@ class HasDefaultSshKeyName a b | a -> b where
 instance HasDefaultSshKeyName a b => HasDefaultSshKeyName (TF.Schema l p a) b where
     defaultSshKeyName = TF.configuration . defaultSshKeyName
 
+instance HasDefaultSshKeyName a b => HasDefaultSshKeyName (TF.Ref s a) b where
+    defaultSshKeyName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultSshKeyName
+
 class HasDefaultSubnetId a b | a -> b where
     defaultSubnetId :: Lens' a b
 
 instance HasDefaultSubnetId a b => HasDefaultSubnetId (TF.Schema l p a) b where
     defaultSubnetId = TF.configuration . defaultSubnetId
+
+instance HasDefaultSubnetId a b => HasDefaultSubnetId (TF.Ref s a) b where
+    defaultSubnetId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . defaultSubnetId
 
 class HasDefinition a b | a -> b where
     definition :: Lens' a b
@@ -3185,11 +4515,21 @@ class HasDefinition a b | a -> b where
 instance HasDefinition a b => HasDefinition (TF.Schema l p a) b where
     definition = TF.configuration . definition
 
+instance HasDefinition a b => HasDefinition (TF.Ref s a) b where
+    definition =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . definition
+
 class HasDelaySeconds a b | a -> b where
     delaySeconds :: Lens' a b
 
 instance HasDelaySeconds a b => HasDelaySeconds (TF.Schema l p a) b where
     delaySeconds = TF.configuration . delaySeconds
+
+instance HasDelaySeconds a b => HasDelaySeconds (TF.Ref s a) b where
+    delaySeconds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . delaySeconds
 
 class HasDelegationSetId a b | a -> b where
     delegationSetId :: Lens' a b
@@ -3197,11 +4537,21 @@ class HasDelegationSetId a b | a -> b where
 instance HasDelegationSetId a b => HasDelegationSetId (TF.Schema l p a) b where
     delegationSetId = TF.configuration . delegationSetId
 
+instance HasDelegationSetId a b => HasDelegationSetId (TF.Ref s a) b where
+    delegationSetId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . delegationSetId
+
 class HasDeletionWindowInDays a b | a -> b where
     deletionWindowInDays :: Lens' a b
 
 instance HasDeletionWindowInDays a b => HasDeletionWindowInDays (TF.Schema l p a) b where
     deletionWindowInDays = TF.configuration . deletionWindowInDays
+
+instance HasDeletionWindowInDays a b => HasDeletionWindowInDays (TF.Ref s a) b where
+    deletionWindowInDays =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deletionWindowInDays
 
 class HasDeliveryPolicy a b | a -> b where
     deliveryPolicy :: Lens' a b
@@ -3209,11 +4559,21 @@ class HasDeliveryPolicy a b | a -> b where
 instance HasDeliveryPolicy a b => HasDeliveryPolicy (TF.Schema l p a) b where
     deliveryPolicy = TF.configuration . deliveryPolicy
 
+instance HasDeliveryPolicy a b => HasDeliveryPolicy (TF.Ref s a) b where
+    deliveryPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deliveryPolicy
+
 class HasDeploymentConfigName a b | a -> b where
     deploymentConfigName :: Lens' a b
 
 instance HasDeploymentConfigName a b => HasDeploymentConfigName (TF.Schema l p a) b where
     deploymentConfigName = TF.configuration . deploymentConfigName
+
+instance HasDeploymentConfigName a b => HasDeploymentConfigName (TF.Ref s a) b where
+    deploymentConfigName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deploymentConfigName
 
 class HasDeploymentGroupName a b | a -> b where
     deploymentGroupName :: Lens' a b
@@ -3221,11 +4581,21 @@ class HasDeploymentGroupName a b | a -> b where
 instance HasDeploymentGroupName a b => HasDeploymentGroupName (TF.Schema l p a) b where
     deploymentGroupName = TF.configuration . deploymentGroupName
 
+instance HasDeploymentGroupName a b => HasDeploymentGroupName (TF.Ref s a) b where
+    deploymentGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deploymentGroupName
+
 class HasDeploymentId a b | a -> b where
     deploymentId :: Lens' a b
 
 instance HasDeploymentId a b => HasDeploymentId (TF.Schema l p a) b where
     deploymentId = TF.configuration . deploymentId
+
+instance HasDeploymentId a b => HasDeploymentId (TF.Ref s a) b where
+    deploymentId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deploymentId
 
 class HasDeploymentMaximumPercent a b | a -> b where
     deploymentMaximumPercent :: Lens' a b
@@ -3233,11 +4603,21 @@ class HasDeploymentMaximumPercent a b | a -> b where
 instance HasDeploymentMaximumPercent a b => HasDeploymentMaximumPercent (TF.Schema l p a) b where
     deploymentMaximumPercent = TF.configuration . deploymentMaximumPercent
 
+instance HasDeploymentMaximumPercent a b => HasDeploymentMaximumPercent (TF.Ref s a) b where
+    deploymentMaximumPercent =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deploymentMaximumPercent
+
 class HasDeploymentMinimumHealthyPercent a b | a -> b where
     deploymentMinimumHealthyPercent :: Lens' a b
 
 instance HasDeploymentMinimumHealthyPercent a b => HasDeploymentMinimumHealthyPercent (TF.Schema l p a) b where
     deploymentMinimumHealthyPercent = TF.configuration . deploymentMinimumHealthyPercent
+
+instance HasDeploymentMinimumHealthyPercent a b => HasDeploymentMinimumHealthyPercent (TF.Ref s a) b where
+    deploymentMinimumHealthyPercent =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deploymentMinimumHealthyPercent
 
 class HasDeploymentMode a b | a -> b where
     deploymentMode :: Lens' a b
@@ -3245,11 +4625,21 @@ class HasDeploymentMode a b | a -> b where
 instance HasDeploymentMode a b => HasDeploymentMode (TF.Schema l p a) b where
     deploymentMode = TF.configuration . deploymentMode
 
+instance HasDeploymentMode a b => HasDeploymentMode (TF.Ref s a) b where
+    deploymentMode =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deploymentMode
+
 class HasDeploymentStyle a b | a -> b where
     deploymentStyle :: Lens' a b
 
 instance HasDeploymentStyle a b => HasDeploymentStyle (TF.Schema l p a) b where
     deploymentStyle = TF.configuration . deploymentStyle
+
+instance HasDeploymentStyle a b => HasDeploymentStyle (TF.Ref s a) b where
+    deploymentStyle =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deploymentStyle
 
 class HasDeregistrationDelay a b | a -> b where
     deregistrationDelay :: Lens' a b
@@ -3257,11 +4647,21 @@ class HasDeregistrationDelay a b | a -> b where
 instance HasDeregistrationDelay a b => HasDeregistrationDelay (TF.Schema l p a) b where
     deregistrationDelay = TF.configuration . deregistrationDelay
 
+instance HasDeregistrationDelay a b => HasDeregistrationDelay (TF.Ref s a) b where
+    deregistrationDelay =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deregistrationDelay
+
 class HasDescription a b | a -> b where
     description :: Lens' a b
 
 instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
+
+instance HasDescription a b => HasDescription (TF.Ref s a) b where
+    description =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . description
 
 class HasDesiredCapacity a b | a -> b where
     desiredCapacity :: Lens' a b
@@ -3269,11 +4669,21 @@ class HasDesiredCapacity a b | a -> b where
 instance HasDesiredCapacity a b => HasDesiredCapacity (TF.Schema l p a) b where
     desiredCapacity = TF.configuration . desiredCapacity
 
+instance HasDesiredCapacity a b => HasDesiredCapacity (TF.Ref s a) b where
+    desiredCapacity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . desiredCapacity
+
 class HasDesiredCount a b | a -> b where
     desiredCount :: Lens' a b
 
 instance HasDesiredCount a b => HasDesiredCount (TF.Schema l p a) b where
     desiredCount = TF.configuration . desiredCount
+
+instance HasDesiredCount a b => HasDesiredCount (TF.Ref s a) b where
+    desiredCount =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . desiredCount
 
 class HasDestination a b | a -> b where
     destination :: Lens' a b
@@ -3281,11 +4691,21 @@ class HasDestination a b | a -> b where
 instance HasDestination a b => HasDestination (TF.Schema l p a) b where
     destination = TF.configuration . destination
 
+instance HasDestination a b => HasDestination (TF.Ref s a) b where
+    destination =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . destination
+
 class HasDestinationArn a b | a -> b where
     destinationArn :: Lens' a b
 
 instance HasDestinationArn a b => HasDestinationArn (TF.Schema l p a) b where
     destinationArn = TF.configuration . destinationArn
+
+instance HasDestinationArn a b => HasDestinationArn (TF.Ref s a) b where
+    destinationArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . destinationArn
 
 class HasDestinationCidrBlock a b | a -> b where
     destinationCidrBlock :: Lens' a b
@@ -3293,11 +4713,21 @@ class HasDestinationCidrBlock a b | a -> b where
 instance HasDestinationCidrBlock a b => HasDestinationCidrBlock (TF.Schema l p a) b where
     destinationCidrBlock = TF.configuration . destinationCidrBlock
 
+instance HasDestinationCidrBlock a b => HasDestinationCidrBlock (TF.Ref s a) b where
+    destinationCidrBlock =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . destinationCidrBlock
+
 class HasDestinationIpv6CidrBlock a b | a -> b where
     destinationIpv6CidrBlock :: Lens' a b
 
 instance HasDestinationIpv6CidrBlock a b => HasDestinationIpv6CidrBlock (TF.Schema l p a) b where
     destinationIpv6CidrBlock = TF.configuration . destinationIpv6CidrBlock
+
+instance HasDestinationIpv6CidrBlock a b => HasDestinationIpv6CidrBlock (TF.Ref s a) b where
+    destinationIpv6CidrBlock =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . destinationIpv6CidrBlock
 
 class HasDestinationName a b | a -> b where
     destinationName :: Lens' a b
@@ -3305,11 +4735,21 @@ class HasDestinationName a b | a -> b where
 instance HasDestinationName a b => HasDestinationName (TF.Schema l p a) b where
     destinationName = TF.configuration . destinationName
 
+instance HasDestinationName a b => HasDestinationName (TF.Ref s a) b where
+    destinationName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . destinationName
+
 class HasDetectorId a b | a -> b where
     detectorId :: Lens' a b
 
 instance HasDetectorId a b => HasDetectorId (TF.Schema l p a) b where
     detectorId = TF.configuration . detectorId
+
+instance HasDetectorId a b => HasDetectorId (TF.Ref s a) b where
+    detectorId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . detectorId
 
 class HasDeveloperProviderName a b | a -> b where
     developerProviderName :: Lens' a b
@@ -3317,11 +4757,21 @@ class HasDeveloperProviderName a b | a -> b where
 instance HasDeveloperProviderName a b => HasDeveloperProviderName (TF.Schema l p a) b where
     developerProviderName = TF.configuration . developerProviderName
 
+instance HasDeveloperProviderName a b => HasDeveloperProviderName (TF.Ref s a) b where
+    developerProviderName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . developerProviderName
+
 class HasDeviceConfiguration a b | a -> b where
     deviceConfiguration :: Lens' a b
 
 instance HasDeviceConfiguration a b => HasDeviceConfiguration (TF.Schema l p a) b where
     deviceConfiguration = TF.configuration . deviceConfiguration
+
+instance HasDeviceConfiguration a b => HasDeviceConfiguration (TF.Ref s a) b where
+    deviceConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deviceConfiguration
 
 class HasDeviceIndex a b | a -> b where
     deviceIndex :: Lens' a b
@@ -3329,11 +4779,21 @@ class HasDeviceIndex a b | a -> b where
 instance HasDeviceIndex a b => HasDeviceIndex (TF.Schema l p a) b where
     deviceIndex = TF.configuration . deviceIndex
 
+instance HasDeviceIndex a b => HasDeviceIndex (TF.Ref s a) b where
+    deviceIndex =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deviceIndex
+
 class HasDeviceName a b | a -> b where
     deviceName :: Lens' a b
 
 instance HasDeviceName a b => HasDeviceName (TF.Schema l p a) b where
     deviceName = TF.configuration . deviceName
+
+instance HasDeviceName a b => HasDeviceName (TF.Ref s a) b where
+    deviceName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . deviceName
 
 class HasDhcpOptionsId a b | a -> b where
     dhcpOptionsId :: Lens' a b
@@ -3341,11 +4801,21 @@ class HasDhcpOptionsId a b | a -> b where
 instance HasDhcpOptionsId a b => HasDhcpOptionsId (TF.Schema l p a) b where
     dhcpOptionsId = TF.configuration . dhcpOptionsId
 
+instance HasDhcpOptionsId a b => HasDhcpOptionsId (TF.Ref s a) b where
+    dhcpOptionsId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dhcpOptionsId
+
 class HasDimensions a b | a -> b where
     dimensions :: Lens' a b
 
 instance HasDimensions a b => HasDimensions (TF.Schema l p a) b where
     dimensions = TF.configuration . dimensions
+
+instance HasDimensions a b => HasDimensions (TF.Ref s a) b where
+    dimensions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dimensions
 
 class HasDisableApiTermination a b | a -> b where
     disableApiTermination :: Lens' a b
@@ -3353,11 +4823,21 @@ class HasDisableApiTermination a b | a -> b where
 instance HasDisableApiTermination a b => HasDisableApiTermination (TF.Schema l p a) b where
     disableApiTermination = TF.configuration . disableApiTermination
 
+instance HasDisableApiTermination a b => HasDisableApiTermination (TF.Ref s a) b where
+    disableApiTermination =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . disableApiTermination
+
 class HasDisableRollback a b | a -> b where
     disableRollback :: Lens' a b
 
 instance HasDisableRollback a b => HasDisableRollback (TF.Schema l p a) b where
     disableRollback = TF.configuration . disableRollback
+
+instance HasDisableRollback a b => HasDisableRollback (TF.Ref s a) b where
+    disableRollback =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . disableRollback
 
 class HasDisplayName a b | a -> b where
     displayName :: Lens' a b
@@ -3365,11 +4845,21 @@ class HasDisplayName a b | a -> b where
 instance HasDisplayName a b => HasDisplayName (TF.Schema l p a) b where
     displayName = TF.configuration . displayName
 
+instance HasDisplayName a b => HasDisplayName (TF.Ref s a) b where
+    displayName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . displayName
+
 class HasDistribution a b | a -> b where
     distribution :: Lens' a b
 
 instance HasDistribution a b => HasDistribution (TF.Schema l p a) b where
     distribution = TF.configuration . distribution
+
+instance HasDistribution a b => HasDistribution (TF.Ref s a) b where
+    distribution =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . distribution
 
 class HasDnsConfig a b | a -> b where
     dnsConfig :: Lens' a b
@@ -3377,11 +4867,21 @@ class HasDnsConfig a b | a -> b where
 instance HasDnsConfig a b => HasDnsConfig (TF.Schema l p a) b where
     dnsConfig = TF.configuration . dnsConfig
 
+instance HasDnsConfig a b => HasDnsConfig (TF.Ref s a) b where
+    dnsConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . dnsConfig
+
 class HasDocumentRoot a b | a -> b where
     documentRoot :: Lens' a b
 
 instance HasDocumentRoot a b => HasDocumentRoot (TF.Schema l p a) b where
     documentRoot = TF.configuration . documentRoot
+
+instance HasDocumentRoot a b => HasDocumentRoot (TF.Ref s a) b where
+    documentRoot =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . documentRoot
 
 class HasDocumentType a b | a -> b where
     documentType :: Lens' a b
@@ -3389,11 +4889,21 @@ class HasDocumentType a b | a -> b where
 instance HasDocumentType a b => HasDocumentType (TF.Schema l p a) b where
     documentType = TF.configuration . documentType
 
+instance HasDocumentType a b => HasDocumentType (TF.Ref s a) b where
+    documentType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . documentType
+
 class HasDocumentVersion a b | a -> b where
     documentVersion :: Lens' a b
 
 instance HasDocumentVersion a b => HasDocumentVersion (TF.Schema l p a) b where
     documentVersion = TF.configuration . documentVersion
+
+instance HasDocumentVersion a b => HasDocumentVersion (TF.Ref s a) b where
+    documentVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . documentVersion
 
 class HasDocumentationVersion a b | a -> b where
     documentationVersion :: Lens' a b
@@ -3401,11 +4911,21 @@ class HasDocumentationVersion a b | a -> b where
 instance HasDocumentationVersion a b => HasDocumentationVersion (TF.Schema l p a) b where
     documentationVersion = TF.configuration . documentationVersion
 
+instance HasDocumentationVersion a b => HasDocumentationVersion (TF.Ref s a) b where
+    documentationVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . documentationVersion
+
 class HasDomain a b | a -> b where
     domain :: Lens' a b
 
 instance HasDomain a b => HasDomain (TF.Schema l p a) b where
     domain = TF.configuration . domain
+
+instance HasDomain a b => HasDomain (TF.Ref s a) b where
+    domain =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . domain
 
 class HasDomainName a b | a -> b where
     domainName :: Lens' a b
@@ -3413,11 +4933,21 @@ class HasDomainName a b | a -> b where
 instance HasDomainName a b => HasDomainName (TF.Schema l p a) b where
     domainName = TF.configuration . domainName
 
+instance HasDomainName a b => HasDomainName (TF.Ref s a) b where
+    domainName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . domainName
+
 class HasDomainNameServers a b | a -> b where
     domainNameServers :: Lens' a b
 
 instance HasDomainNameServers a b => HasDomainNameServers (TF.Schema l p a) b where
     domainNameServers = TF.configuration . domainNameServers
+
+instance HasDomainNameServers a b => HasDomainNameServers (TF.Ref s a) b where
+    domainNameServers =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . domainNameServers
 
 class HasDomains a b | a -> b where
     domains :: Lens' a b
@@ -3425,11 +4955,21 @@ class HasDomains a b | a -> b where
 instance HasDomains a b => HasDomains (TF.Schema l p a) b where
     domains = TF.configuration . domains
 
+instance HasDomains a b => HasDomains (TF.Ref s a) b where
+    domains =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . domains
+
 class HasDrainElbOnShutdown a b | a -> b where
     drainElbOnShutdown :: Lens' a b
 
 instance HasDrainElbOnShutdown a b => HasDrainElbOnShutdown (TF.Schema l p a) b where
     drainElbOnShutdown = TF.configuration . drainElbOnShutdown
+
+instance HasDrainElbOnShutdown a b => HasDrainElbOnShutdown (TF.Ref s a) b where
+    drainElbOnShutdown =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . drainElbOnShutdown
 
 class HasDuration a b | a -> b where
     duration :: Lens' a b
@@ -3437,11 +4977,21 @@ class HasDuration a b | a -> b where
 instance HasDuration a b => HasDuration (TF.Schema l p a) b where
     duration = TF.configuration . duration
 
+instance HasDuration a b => HasDuration (TF.Ref s a) b where
+    duration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . duration
+
 class HasEbsBlockDevice a b | a -> b where
     ebsBlockDevice :: Lens' a b
 
 instance HasEbsBlockDevice a b => HasEbsBlockDevice (TF.Schema l p a) b where
     ebsBlockDevice = TF.configuration . ebsBlockDevice
+
+instance HasEbsBlockDevice a b => HasEbsBlockDevice (TF.Ref s a) b where
+    ebsBlockDevice =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ebsBlockDevice
 
 class HasEbsConfig a b | a -> b where
     ebsConfig :: Lens' a b
@@ -3449,11 +4999,21 @@ class HasEbsConfig a b | a -> b where
 instance HasEbsConfig a b => HasEbsConfig (TF.Schema l p a) b where
     ebsConfig = TF.configuration . ebsConfig
 
+instance HasEbsConfig a b => HasEbsConfig (TF.Ref s a) b where
+    ebsConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ebsConfig
+
 class HasEbsOptimized a b | a -> b where
     ebsOptimized :: Lens' a b
 
 instance HasEbsOptimized a b => HasEbsOptimized (TF.Schema l p a) b where
     ebsOptimized = TF.configuration . ebsOptimized
+
+instance HasEbsOptimized a b => HasEbsOptimized (TF.Ref s a) b where
+    ebsOptimized =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ebsOptimized
 
 class HasEbsOptions a b | a -> b where
     ebsOptions :: Lens' a b
@@ -3461,11 +5021,21 @@ class HasEbsOptions a b | a -> b where
 instance HasEbsOptions a b => HasEbsOptions (TF.Schema l p a) b where
     ebsOptions = TF.configuration . ebsOptions
 
+instance HasEbsOptions a b => HasEbsOptions (TF.Ref s a) b where
+    ebsOptions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ebsOptions
+
 class HasEbsRootVolumeSize a b | a -> b where
     ebsRootVolumeSize :: Lens' a b
 
 instance HasEbsRootVolumeSize a b => HasEbsRootVolumeSize (TF.Schema l p a) b where
     ebsRootVolumeSize = TF.configuration . ebsRootVolumeSize
+
+instance HasEbsRootVolumeSize a b => HasEbsRootVolumeSize (TF.Ref s a) b where
+    ebsRootVolumeSize =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ebsRootVolumeSize
 
 class HasEbsVolume a b | a -> b where
     ebsVolume :: Lens' a b
@@ -3473,11 +5043,21 @@ class HasEbsVolume a b | a -> b where
 instance HasEbsVolume a b => HasEbsVolume (TF.Schema l p a) b where
     ebsVolume = TF.configuration . ebsVolume
 
+instance HasEbsVolume a b => HasEbsVolume (TF.Ref s a) b where
+    ebsVolume =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ebsVolume
+
 class HasEc2Attributes a b | a -> b where
     ec2Attributes :: Lens' a b
 
 instance HasEc2Attributes a b => HasEc2Attributes (TF.Schema l p a) b where
     ec2Attributes = TF.configuration . ec2Attributes
+
+instance HasEc2Attributes a b => HasEc2Attributes (TF.Ref s a) b where
+    ec2Attributes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ec2Attributes
 
 class HasEc2InboundPermission a b | a -> b where
     ec2InboundPermission :: Lens' a b
@@ -3485,11 +5065,21 @@ class HasEc2InboundPermission a b | a -> b where
 instance HasEc2InboundPermission a b => HasEc2InboundPermission (TF.Schema l p a) b where
     ec2InboundPermission = TF.configuration . ec2InboundPermission
 
+instance HasEc2InboundPermission a b => HasEc2InboundPermission (TF.Ref s a) b where
+    ec2InboundPermission =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ec2InboundPermission
+
 class HasEc2InstanceType a b | a -> b where
     ec2InstanceType :: Lens' a b
 
 instance HasEc2InstanceType a b => HasEc2InstanceType (TF.Schema l p a) b where
     ec2InstanceType = TF.configuration . ec2InstanceType
+
+instance HasEc2InstanceType a b => HasEc2InstanceType (TF.Ref s a) b where
+    ec2InstanceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ec2InstanceType
 
 class HasEc2TagFilter a b | a -> b where
     ec2TagFilter :: Lens' a b
@@ -3497,11 +5087,21 @@ class HasEc2TagFilter a b | a -> b where
 instance HasEc2TagFilter a b => HasEc2TagFilter (TF.Schema l p a) b where
     ec2TagFilter = TF.configuration . ec2TagFilter
 
+instance HasEc2TagFilter a b => HasEc2TagFilter (TF.Ref s a) b where
+    ec2TagFilter =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ec2TagFilter
+
 class HasEcsTarget a b | a -> b where
     ecsTarget :: Lens' a b
 
 instance HasEcsTarget a b => HasEcsTarget (TF.Schema l p a) b where
     ecsTarget = TF.configuration . ecsTarget
+
+instance HasEcsTarget a b => HasEcsTarget (TF.Ref s a) b where
+    ecsTarget =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ecsTarget
 
 class HasEgress a b | a -> b where
     egress :: Lens' a b
@@ -3509,11 +5109,21 @@ class HasEgress a b | a -> b where
 instance HasEgress a b => HasEgress (TF.Schema l p a) b where
     egress = TF.configuration . egress
 
+instance HasEgress a b => HasEgress (TF.Ref s a) b where
+    egress =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . egress
+
 class HasEgressOnlyGatewayId a b | a -> b where
     egressOnlyGatewayId :: Lens' a b
 
 instance HasEgressOnlyGatewayId a b => HasEgressOnlyGatewayId (TF.Schema l p a) b where
     egressOnlyGatewayId = TF.configuration . egressOnlyGatewayId
+
+instance HasEgressOnlyGatewayId a b => HasEgressOnlyGatewayId (TF.Ref s a) b where
+    egressOnlyGatewayId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . egressOnlyGatewayId
 
 class HasElasticIp a b | a -> b where
     elasticIp :: Lens' a b
@@ -3521,11 +5131,21 @@ class HasElasticIp a b | a -> b where
 instance HasElasticIp a b => HasElasticIp (TF.Schema l p a) b where
     elasticIp = TF.configuration . elasticIp
 
+instance HasElasticIp a b => HasElasticIp (TF.Ref s a) b where
+    elasticIp =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . elasticIp
+
 class HasElasticLoadBalancer a b | a -> b where
     elasticLoadBalancer :: Lens' a b
 
 instance HasElasticLoadBalancer a b => HasElasticLoadBalancer (TF.Schema l p a) b where
     elasticLoadBalancer = TF.configuration . elasticLoadBalancer
+
+instance HasElasticLoadBalancer a b => HasElasticLoadBalancer (TF.Ref s a) b where
+    elasticLoadBalancer =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . elasticLoadBalancer
 
 class HasElasticsearchVersion a b | a -> b where
     elasticsearchVersion :: Lens' a b
@@ -3533,11 +5153,21 @@ class HasElasticsearchVersion a b | a -> b where
 instance HasElasticsearchVersion a b => HasElasticsearchVersion (TF.Schema l p a) b where
     elasticsearchVersion = TF.configuration . elasticsearchVersion
 
+instance HasElasticsearchVersion a b => HasElasticsearchVersion (TF.Ref s a) b where
+    elasticsearchVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . elasticsearchVersion
+
 class HasElb a b | a -> b where
     elb :: Lens' a b
 
 instance HasElb a b => HasElb (TF.Schema l p a) b where
     elb = TF.configuration . elb
+
+instance HasElb a b => HasElb (TF.Ref s a) b where
+    elb =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . elb
 
 class HasEmail a b | a -> b where
     email :: Lens' a b
@@ -3545,11 +5175,21 @@ class HasEmail a b | a -> b where
 instance HasEmail a b => HasEmail (TF.Schema l p a) b where
     email = TF.configuration . email
 
+instance HasEmail a b => HasEmail (TF.Ref s a) b where
+    email =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . email
+
 class HasEmailConfiguration a b | a -> b where
     emailConfiguration :: Lens' a b
 
 instance HasEmailConfiguration a b => HasEmailConfiguration (TF.Schema l p a) b where
     emailConfiguration = TF.configuration . emailConfiguration
+
+instance HasEmailConfiguration a b => HasEmailConfiguration (TF.Ref s a) b where
+    emailConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . emailConfiguration
 
 class HasEmailVerificationMessage a b | a -> b where
     emailVerificationMessage :: Lens' a b
@@ -3557,11 +5197,21 @@ class HasEmailVerificationMessage a b | a -> b where
 instance HasEmailVerificationMessage a b => HasEmailVerificationMessage (TF.Schema l p a) b where
     emailVerificationMessage = TF.configuration . emailVerificationMessage
 
+instance HasEmailVerificationMessage a b => HasEmailVerificationMessage (TF.Ref s a) b where
+    emailVerificationMessage =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . emailVerificationMessage
+
 class HasEmailVerificationSubject a b | a -> b where
     emailVerificationSubject :: Lens' a b
 
 instance HasEmailVerificationSubject a b => HasEmailVerificationSubject (TF.Schema l p a) b where
     emailVerificationSubject = TF.configuration . emailVerificationSubject
+
+instance HasEmailVerificationSubject a b => HasEmailVerificationSubject (TF.Ref s a) b where
+    emailVerificationSubject =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . emailVerificationSubject
 
 class HasEnable a b | a -> b where
     enable :: Lens' a b
@@ -3569,11 +5219,21 @@ class HasEnable a b | a -> b where
 instance HasEnable a b => HasEnable (TF.Schema l p a) b where
     enable = TF.configuration . enable
 
+instance HasEnable a b => HasEnable (TF.Ref s a) b where
+    enable =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enable
+
 class HasEnableClassiclink a b | a -> b where
     enableClassiclink :: Lens' a b
 
 instance HasEnableClassiclink a b => HasEnableClassiclink (TF.Schema l p a) b where
     enableClassiclink = TF.configuration . enableClassiclink
+
+instance HasEnableClassiclink a b => HasEnableClassiclink (TF.Ref s a) b where
+    enableClassiclink =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableClassiclink
 
 class HasEnableClassiclinkDnsSupport a b | a -> b where
     enableClassiclinkDnsSupport :: Lens' a b
@@ -3581,11 +5241,21 @@ class HasEnableClassiclinkDnsSupport a b | a -> b where
 instance HasEnableClassiclinkDnsSupport a b => HasEnableClassiclinkDnsSupport (TF.Schema l p a) b where
     enableClassiclinkDnsSupport = TF.configuration . enableClassiclinkDnsSupport
 
+instance HasEnableClassiclinkDnsSupport a b => HasEnableClassiclinkDnsSupport (TF.Ref s a) b where
+    enableClassiclinkDnsSupport =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableClassiclinkDnsSupport
+
 class HasEnableDeletionProtection a b | a -> b where
     enableDeletionProtection :: Lens' a b
 
 instance HasEnableDeletionProtection a b => HasEnableDeletionProtection (TF.Schema l p a) b where
     enableDeletionProtection = TF.configuration . enableDeletionProtection
+
+instance HasEnableDeletionProtection a b => HasEnableDeletionProtection (TF.Ref s a) b where
+    enableDeletionProtection =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableDeletionProtection
 
 class HasEnableDnsHostnames a b | a -> b where
     enableDnsHostnames :: Lens' a b
@@ -3593,11 +5263,21 @@ class HasEnableDnsHostnames a b | a -> b where
 instance HasEnableDnsHostnames a b => HasEnableDnsHostnames (TF.Schema l p a) b where
     enableDnsHostnames = TF.configuration . enableDnsHostnames
 
+instance HasEnableDnsHostnames a b => HasEnableDnsHostnames (TF.Ref s a) b where
+    enableDnsHostnames =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableDnsHostnames
+
 class HasEnableDnsSupport a b | a -> b where
     enableDnsSupport :: Lens' a b
 
 instance HasEnableDnsSupport a b => HasEnableDnsSupport (TF.Schema l p a) b where
     enableDnsSupport = TF.configuration . enableDnsSupport
+
+instance HasEnableDnsSupport a b => HasEnableDnsSupport (TF.Ref s a) b where
+    enableDnsSupport =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableDnsSupport
 
 class HasEnableKeyRotation a b | a -> b where
     enableKeyRotation :: Lens' a b
@@ -3605,11 +5285,21 @@ class HasEnableKeyRotation a b | a -> b where
 instance HasEnableKeyRotation a b => HasEnableKeyRotation (TF.Schema l p a) b where
     enableKeyRotation = TF.configuration . enableKeyRotation
 
+instance HasEnableKeyRotation a b => HasEnableKeyRotation (TF.Ref s a) b where
+    enableKeyRotation =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableKeyRotation
+
 class HasEnableLogFileValidation a b | a -> b where
     enableLogFileValidation :: Lens' a b
 
 instance HasEnableLogFileValidation a b => HasEnableLogFileValidation (TF.Schema l p a) b where
     enableLogFileValidation = TF.configuration . enableLogFileValidation
+
+instance HasEnableLogFileValidation a b => HasEnableLogFileValidation (TF.Ref s a) b where
+    enableLogFileValidation =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableLogFileValidation
 
 class HasEnableLogging a b | a -> b where
     enableLogging :: Lens' a b
@@ -3617,11 +5307,21 @@ class HasEnableLogging a b | a -> b where
 instance HasEnableLogging a b => HasEnableLogging (TF.Schema l p a) b where
     enableLogging = TF.configuration . enableLogging
 
+instance HasEnableLogging a b => HasEnableLogging (TF.Ref s a) b where
+    enableLogging =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableLogging
+
 class HasEnableMonitoring a b | a -> b where
     enableMonitoring :: Lens' a b
 
 instance HasEnableMonitoring a b => HasEnableMonitoring (TF.Schema l p a) b where
     enableMonitoring = TF.configuration . enableMonitoring
+
+instance HasEnableMonitoring a b => HasEnableMonitoring (TF.Ref s a) b where
+    enableMonitoring =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableMonitoring
 
 class HasEnableSni a b | a -> b where
     enableSni :: Lens' a b
@@ -3629,11 +5329,21 @@ class HasEnableSni a b | a -> b where
 instance HasEnableSni a b => HasEnableSni (TF.Schema l p a) b where
     enableSni = TF.configuration . enableSni
 
+instance HasEnableSni a b => HasEnableSni (TF.Ref s a) b where
+    enableSni =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableSni
+
 class HasEnableSsl a b | a -> b where
     enableSsl :: Lens' a b
 
 instance HasEnableSsl a b => HasEnableSsl (TF.Schema l p a) b where
     enableSsl = TF.configuration . enableSsl
+
+instance HasEnableSsl a b => HasEnableSsl (TF.Ref s a) b where
+    enableSsl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableSsl
 
 class HasEnableSso a b | a -> b where
     enableSso :: Lens' a b
@@ -3641,11 +5351,21 @@ class HasEnableSso a b | a -> b where
 instance HasEnableSso a b => HasEnableSso (TF.Schema l p a) b where
     enableSso = TF.configuration . enableSso
 
+instance HasEnableSso a b => HasEnableSso (TF.Ref s a) b where
+    enableSso =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enableSso
+
 class HasEnabled a b | a -> b where
     enabled :: Lens' a b
 
 instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
     enabled = TF.configuration . enabled
+
+instance HasEnabled a b => HasEnabled (TF.Ref s a) b where
+    enabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enabled
 
 class HasEnabledMetrics a b | a -> b where
     enabledMetrics :: Lens' a b
@@ -3653,11 +5373,21 @@ class HasEnabledMetrics a b | a -> b where
 instance HasEnabledMetrics a b => HasEnabledMetrics (TF.Schema l p a) b where
     enabledMetrics = TF.configuration . enabledMetrics
 
+instance HasEnabledMetrics a b => HasEnabledMetrics (TF.Ref s a) b where
+    enabledMetrics =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enabledMetrics
+
 class HasEncoding a b | a -> b where
     encoding :: Lens' a b
 
 instance HasEncoding a b => HasEncoding (TF.Schema l p a) b where
     encoding = TF.configuration . encoding
+
+instance HasEncoding a b => HasEncoding (TF.Ref s a) b where
+    encoding =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . encoding
 
 class HasEncryptAtRest a b | a -> b where
     encryptAtRest :: Lens' a b
@@ -3665,11 +5395,21 @@ class HasEncryptAtRest a b | a -> b where
 instance HasEncryptAtRest a b => HasEncryptAtRest (TF.Schema l p a) b where
     encryptAtRest = TF.configuration . encryptAtRest
 
+instance HasEncryptAtRest a b => HasEncryptAtRest (TF.Ref s a) b where
+    encryptAtRest =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . encryptAtRest
+
 class HasEncrypted a b | a -> b where
     encrypted :: Lens' a b
 
 instance HasEncrypted a b => HasEncrypted (TF.Schema l p a) b where
     encrypted = TF.configuration . encrypted
+
+instance HasEncrypted a b => HasEncrypted (TF.Ref s a) b where
+    encrypted =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . encrypted
 
 class HasEncryptionKey a b | a -> b where
     encryptionKey :: Lens' a b
@@ -3677,11 +5417,21 @@ class HasEncryptionKey a b | a -> b where
 instance HasEncryptionKey a b => HasEncryptionKey (TF.Schema l p a) b where
     encryptionKey = TF.configuration . encryptionKey
 
+instance HasEncryptionKey a b => HasEncryptionKey (TF.Ref s a) b where
+    encryptionKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . encryptionKey
+
 class HasEncryptionType a b | a -> b where
     encryptionType :: Lens' a b
 
 instance HasEncryptionType a b => HasEncryptionType (TF.Schema l p a) b where
     encryptionType = TF.configuration . encryptionType
+
+instance HasEncryptionType a b => HasEncryptionType (TF.Ref s a) b where
+    encryptionType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . encryptionType
 
 class HasEndTime a b | a -> b where
     endTime :: Lens' a b
@@ -3689,11 +5439,21 @@ class HasEndTime a b | a -> b where
 instance HasEndTime a b => HasEndTime (TF.Schema l p a) b where
     endTime = TF.configuration . endTime
 
+instance HasEndTime a b => HasEndTime (TF.Ref s a) b where
+    endTime =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . endTime
+
 class HasEndpoint a b | a -> b where
     endpoint :: Lens' a b
 
 instance HasEndpoint a b => HasEndpoint (TF.Schema l p a) b where
     endpoint = TF.configuration . endpoint
+
+instance HasEndpoint a b => HasEndpoint (TF.Ref s a) b where
+    endpoint =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . endpoint
 
 class HasEndpointAutoConfirms a b | a -> b where
     endpointAutoConfirms :: Lens' a b
@@ -3701,11 +5461,21 @@ class HasEndpointAutoConfirms a b | a -> b where
 instance HasEndpointAutoConfirms a b => HasEndpointAutoConfirms (TF.Schema l p a) b where
     endpointAutoConfirms = TF.configuration . endpointAutoConfirms
 
+instance HasEndpointAutoConfirms a b => HasEndpointAutoConfirms (TF.Ref s a) b where
+    endpointAutoConfirms =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . endpointAutoConfirms
+
 class HasEndpointId a b | a -> b where
     endpointId :: Lens' a b
 
 instance HasEndpointId a b => HasEndpointId (TF.Schema l p a) b where
     endpointId = TF.configuration . endpointId
+
+instance HasEndpointId a b => HasEndpointId (TF.Ref s a) b where
+    endpointId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . endpointId
 
 class HasEndpointType a b | a -> b where
     endpointType :: Lens' a b
@@ -3713,11 +5483,21 @@ class HasEndpointType a b | a -> b where
 instance HasEndpointType a b => HasEndpointType (TF.Schema l p a) b where
     endpointType = TF.configuration . endpointType
 
+instance HasEndpointType a b => HasEndpointType (TF.Ref s a) b where
+    endpointType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . endpointType
+
 class HasEngine a b | a -> b where
     engine :: Lens' a b
 
 instance HasEngine a b => HasEngine (TF.Schema l p a) b where
     engine = TF.configuration . engine
+
+instance HasEngine a b => HasEngine (TF.Ref s a) b where
+    engine =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . engine
 
 class HasEngineName a b | a -> b where
     engineName :: Lens' a b
@@ -3725,11 +5505,21 @@ class HasEngineName a b | a -> b where
 instance HasEngineName a b => HasEngineName (TF.Schema l p a) b where
     engineName = TF.configuration . engineName
 
+instance HasEngineName a b => HasEngineName (TF.Ref s a) b where
+    engineName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . engineName
+
 class HasEngineType a b | a -> b where
     engineType :: Lens' a b
 
 instance HasEngineType a b => HasEngineType (TF.Schema l p a) b where
     engineType = TF.configuration . engineType
+
+instance HasEngineType a b => HasEngineType (TF.Ref s a) b where
+    engineType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . engineType
 
 class HasEngineVersion a b | a -> b where
     engineVersion :: Lens' a b
@@ -3737,11 +5527,21 @@ class HasEngineVersion a b | a -> b where
 instance HasEngineVersion a b => HasEngineVersion (TF.Schema l p a) b where
     engineVersion = TF.configuration . engineVersion
 
+instance HasEngineVersion a b => HasEngineVersion (TF.Ref s a) b where
+    engineVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . engineVersion
+
 class HasEnhancedVpcRouting a b | a -> b where
     enhancedVpcRouting :: Lens' a b
 
 instance HasEnhancedVpcRouting a b => HasEnhancedVpcRouting (TF.Schema l p a) b where
     enhancedVpcRouting = TF.configuration . enhancedVpcRouting
+
+instance HasEnhancedVpcRouting a b => HasEnhancedVpcRouting (TF.Ref s a) b where
+    enhancedVpcRouting =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . enhancedVpcRouting
 
 class HasEniId a b | a -> b where
     eniId :: Lens' a b
@@ -3749,11 +5549,21 @@ class HasEniId a b | a -> b where
 instance HasEniId a b => HasEniId (TF.Schema l p a) b where
     eniId = TF.configuration . eniId
 
+instance HasEniId a b => HasEniId (TF.Ref s a) b where
+    eniId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . eniId
+
 class HasEnvironment a b | a -> b where
     environment :: Lens' a b
 
 instance HasEnvironment a b => HasEnvironment (TF.Schema l p a) b where
     environment = TF.configuration . environment
+
+instance HasEnvironment a b => HasEnvironment (TF.Ref s a) b where
+    environment =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . environment
 
 class HasEnvironmentId a b | a -> b where
     environmentId :: Lens' a b
@@ -3761,11 +5571,21 @@ class HasEnvironmentId a b | a -> b where
 instance HasEnvironmentId a b => HasEnvironmentId (TF.Schema l p a) b where
     environmentId = TF.configuration . environmentId
 
+instance HasEnvironmentId a b => HasEnvironmentId (TF.Ref s a) b where
+    environmentId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . environmentId
+
 class HasEphemeralBlockDevice a b | a -> b where
     ephemeralBlockDevice :: Lens' a b
 
 instance HasEphemeralBlockDevice a b => HasEphemeralBlockDevice (TF.Schema l p a) b where
     ephemeralBlockDevice = TF.configuration . ephemeralBlockDevice
+
+instance HasEphemeralBlockDevice a b => HasEphemeralBlockDevice (TF.Ref s a) b where
+    ephemeralBlockDevice =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ephemeralBlockDevice
 
 class HasEtag a b | a -> b where
     etag :: Lens' a b
@@ -3773,11 +5593,21 @@ class HasEtag a b | a -> b where
 instance HasEtag a b => HasEtag (TF.Schema l p a) b where
     etag = TF.configuration . etag
 
+instance HasEtag a b => HasEtag (TF.Ref s a) b where
+    etag =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . etag
+
 class HasEvaluateLowSampleCountPercentiles a b | a -> b where
     evaluateLowSampleCountPercentiles :: Lens' a b
 
 instance HasEvaluateLowSampleCountPercentiles a b => HasEvaluateLowSampleCountPercentiles (TF.Schema l p a) b where
     evaluateLowSampleCountPercentiles = TF.configuration . evaluateLowSampleCountPercentiles
+
+instance HasEvaluateLowSampleCountPercentiles a b => HasEvaluateLowSampleCountPercentiles (TF.Ref s a) b where
+    evaluateLowSampleCountPercentiles =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . evaluateLowSampleCountPercentiles
 
 class HasEvaluationPeriods a b | a -> b where
     evaluationPeriods :: Lens' a b
@@ -3785,11 +5615,21 @@ class HasEvaluationPeriods a b | a -> b where
 instance HasEvaluationPeriods a b => HasEvaluationPeriods (TF.Schema l p a) b where
     evaluationPeriods = TF.configuration . evaluationPeriods
 
+instance HasEvaluationPeriods a b => HasEvaluationPeriods (TF.Ref s a) b where
+    evaluationPeriods =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . evaluationPeriods
+
 class HasEventCategories a b | a -> b where
     eventCategories :: Lens' a b
 
 instance HasEventCategories a b => HasEventCategories (TF.Schema l p a) b where
     eventCategories = TF.configuration . eventCategories
+
+instance HasEventCategories a b => HasEventCategories (TF.Ref s a) b where
+    eventCategories =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . eventCategories
 
 class HasEventDeliveryFailureTopicArn a b | a -> b where
     eventDeliveryFailureTopicArn :: Lens' a b
@@ -3797,11 +5637,21 @@ class HasEventDeliveryFailureTopicArn a b | a -> b where
 instance HasEventDeliveryFailureTopicArn a b => HasEventDeliveryFailureTopicArn (TF.Schema l p a) b where
     eventDeliveryFailureTopicArn = TF.configuration . eventDeliveryFailureTopicArn
 
+instance HasEventDeliveryFailureTopicArn a b => HasEventDeliveryFailureTopicArn (TF.Ref s a) b where
+    eventDeliveryFailureTopicArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . eventDeliveryFailureTopicArn
+
 class HasEventEndpointCreatedTopicArn a b | a -> b where
     eventEndpointCreatedTopicArn :: Lens' a b
 
 instance HasEventEndpointCreatedTopicArn a b => HasEventEndpointCreatedTopicArn (TF.Schema l p a) b where
     eventEndpointCreatedTopicArn = TF.configuration . eventEndpointCreatedTopicArn
+
+instance HasEventEndpointCreatedTopicArn a b => HasEventEndpointCreatedTopicArn (TF.Ref s a) b where
+    eventEndpointCreatedTopicArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . eventEndpointCreatedTopicArn
 
 class HasEventEndpointDeletedTopicArn a b | a -> b where
     eventEndpointDeletedTopicArn :: Lens' a b
@@ -3809,11 +5659,21 @@ class HasEventEndpointDeletedTopicArn a b | a -> b where
 instance HasEventEndpointDeletedTopicArn a b => HasEventEndpointDeletedTopicArn (TF.Schema l p a) b where
     eventEndpointDeletedTopicArn = TF.configuration . eventEndpointDeletedTopicArn
 
+instance HasEventEndpointDeletedTopicArn a b => HasEventEndpointDeletedTopicArn (TF.Ref s a) b where
+    eventEndpointDeletedTopicArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . eventEndpointDeletedTopicArn
+
 class HasEventEndpointUpdatedTopic a b | a -> b where
     eventEndpointUpdatedTopic :: Lens' a b
 
 instance HasEventEndpointUpdatedTopic a b => HasEventEndpointUpdatedTopic (TF.Schema l p a) b where
     eventEndpointUpdatedTopic = TF.configuration . eventEndpointUpdatedTopic
+
+instance HasEventEndpointUpdatedTopic a b => HasEventEndpointUpdatedTopic (TF.Ref s a) b where
+    eventEndpointUpdatedTopic =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . eventEndpointUpdatedTopic
 
 class HasEventPattern a b | a -> b where
     eventPattern :: Lens' a b
@@ -3821,11 +5681,21 @@ class HasEventPattern a b | a -> b where
 instance HasEventPattern a b => HasEventPattern (TF.Schema l p a) b where
     eventPattern = TF.configuration . eventPattern
 
+instance HasEventPattern a b => HasEventPattern (TF.Ref s a) b where
+    eventPattern =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . eventPattern
+
 class HasEventSourceArn a b | a -> b where
     eventSourceArn :: Lens' a b
 
 instance HasEventSourceArn a b => HasEventSourceArn (TF.Schema l p a) b where
     eventSourceArn = TF.configuration . eventSourceArn
+
+instance HasEventSourceArn a b => HasEventSourceArn (TF.Ref s a) b where
+    eventSourceArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . eventSourceArn
 
 class HasEvents a b | a -> b where
     events :: Lens' a b
@@ -3833,11 +5703,21 @@ class HasEvents a b | a -> b where
 instance HasEvents a b => HasEvents (TF.Schema l p a) b where
     events = TF.configuration . events
 
+instance HasEvents a b => HasEvents (TF.Ref s a) b where
+    events =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . events
+
 class HasExcessCapacityTerminationPolicy a b | a -> b where
     excessCapacityTerminationPolicy :: Lens' a b
 
 instance HasExcessCapacityTerminationPolicy a b => HasExcessCapacityTerminationPolicy (TF.Schema l p a) b where
     excessCapacityTerminationPolicy = TF.configuration . excessCapacityTerminationPolicy
+
+instance HasExcessCapacityTerminationPolicy a b => HasExcessCapacityTerminationPolicy (TF.Ref s a) b where
+    excessCapacityTerminationPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . excessCapacityTerminationPolicy
 
 class HasExecutableUsers a b | a -> b where
     executableUsers :: Lens' a b
@@ -3845,11 +5725,21 @@ class HasExecutableUsers a b | a -> b where
 instance HasExecutableUsers a b => HasExecutableUsers (TF.Schema l p a) b where
     executableUsers = TF.configuration . executableUsers
 
+instance HasExecutableUsers a b => HasExecutableUsers (TF.Ref s a) b where
+    executableUsers =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . executableUsers
+
 class HasExpirationDate a b | a -> b where
     expirationDate :: Lens' a b
 
 instance HasExpirationDate a b => HasExpirationDate (TF.Schema l p a) b where
     expirationDate = TF.configuration . expirationDate
+
+instance HasExpirationDate a b => HasExpirationDate (TF.Ref s a) b where
+    expirationDate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . expirationDate
 
 class HasExplicitAuthFlows a b | a -> b where
     explicitAuthFlows :: Lens' a b
@@ -3857,11 +5747,21 @@ class HasExplicitAuthFlows a b | a -> b where
 instance HasExplicitAuthFlows a b => HasExplicitAuthFlows (TF.Schema l p a) b where
     explicitAuthFlows = TF.configuration . explicitAuthFlows
 
+instance HasExplicitAuthFlows a b => HasExplicitAuthFlows (TF.Ref s a) b where
+    explicitAuthFlows =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . explicitAuthFlows
+
 class HasExtendedS3Configuration a b | a -> b where
     extendedS3Configuration :: Lens' a b
 
 instance HasExtendedS3Configuration a b => HasExtendedS3Configuration (TF.Schema l p a) b where
     extendedS3Configuration = TF.configuration . extendedS3Configuration
+
+instance HasExtendedS3Configuration a b => HasExtendedS3Configuration (TF.Ref s a) b where
+    extendedS3Configuration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . extendedS3Configuration
 
 class HasExtendedStatistic a b | a -> b where
     extendedStatistic :: Lens' a b
@@ -3869,11 +5769,21 @@ class HasExtendedStatistic a b | a -> b where
 instance HasExtendedStatistic a b => HasExtendedStatistic (TF.Schema l p a) b where
     extendedStatistic = TF.configuration . extendedStatistic
 
+instance HasExtendedStatistic a b => HasExtendedStatistic (TF.Ref s a) b where
+    extendedStatistic =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . extendedStatistic
+
 class HasExtraConnectionAttributes a b | a -> b where
     extraConnectionAttributes :: Lens' a b
 
 instance HasExtraConnectionAttributes a b => HasExtraConnectionAttributes (TF.Schema l p a) b where
     extraConnectionAttributes = TF.configuration . extraConnectionAttributes
+
+instance HasExtraConnectionAttributes a b => HasExtraConnectionAttributes (TF.Ref s a) b where
+    extraConnectionAttributes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . extraConnectionAttributes
 
 class HasFailoverRoutingPolicy a b | a -> b where
     failoverRoutingPolicy :: Lens' a b
@@ -3881,11 +5791,21 @@ class HasFailoverRoutingPolicy a b | a -> b where
 instance HasFailoverRoutingPolicy a b => HasFailoverRoutingPolicy (TF.Schema l p a) b where
     failoverRoutingPolicy = TF.configuration . failoverRoutingPolicy
 
+instance HasFailoverRoutingPolicy a b => HasFailoverRoutingPolicy (TF.Ref s a) b where
+    failoverRoutingPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . failoverRoutingPolicy
+
 class HasFailureFeedbackRoleArn a b | a -> b where
     failureFeedbackRoleArn :: Lens' a b
 
 instance HasFailureFeedbackRoleArn a b => HasFailureFeedbackRoleArn (TF.Schema l p a) b where
     failureFeedbackRoleArn = TF.configuration . failureFeedbackRoleArn
+
+instance HasFailureFeedbackRoleArn a b => HasFailureFeedbackRoleArn (TF.Ref s a) b where
+    failureFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . failureFeedbackRoleArn
 
 class HasFailureThreshold a b | a -> b where
     failureThreshold :: Lens' a b
@@ -3893,11 +5813,21 @@ class HasFailureThreshold a b | a -> b where
 instance HasFailureThreshold a b => HasFailureThreshold (TF.Schema l p a) b where
     failureThreshold = TF.configuration . failureThreshold
 
+instance HasFailureThreshold a b => HasFailureThreshold (TF.Ref s a) b where
+    failureThreshold =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . failureThreshold
+
 class HasFamily' a b | a -> b where
     family' :: Lens' a b
 
 instance HasFamily' a b => HasFamily' (TF.Schema l p a) b where
     family' = TF.configuration . family'
+
+instance HasFamily' a b => HasFamily' (TF.Ref s a) b where
+    family' =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . family'
 
 class HasFifoQueue a b | a -> b where
     fifoQueue :: Lens' a b
@@ -3905,11 +5835,21 @@ class HasFifoQueue a b | a -> b where
 instance HasFifoQueue a b => HasFifoQueue (TF.Schema l p a) b where
     fifoQueue = TF.configuration . fifoQueue
 
+instance HasFifoQueue a b => HasFifoQueue (TF.Ref s a) b where
+    fifoQueue =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . fifoQueue
+
 class HasFileSystemId a b | a -> b where
     fileSystemId :: Lens' a b
 
 instance HasFileSystemId a b => HasFileSystemId (TF.Schema l p a) b where
     fileSystemId = TF.configuration . fileSystemId
+
+instance HasFileSystemId a b => HasFileSystemId (TF.Ref s a) b where
+    fileSystemId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . fileSystemId
 
 class HasFilename a b | a -> b where
     filename :: Lens' a b
@@ -3917,11 +5857,21 @@ class HasFilename a b | a -> b where
 instance HasFilename a b => HasFilename (TF.Schema l p a) b where
     filename = TF.configuration . filename
 
+instance HasFilename a b => HasFilename (TF.Ref s a) b where
+    filename =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . filename
+
 class HasFilter a b | a -> b where
     filter :: Lens' a b
 
 instance HasFilter a b => HasFilter (TF.Schema l p a) b where
     filter = TF.configuration . filter
+
+instance HasFilter a b => HasFilter (TF.Ref s a) b where
+    filter =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . filter
 
 class HasFilterPattern a b | a -> b where
     filterPattern :: Lens' a b
@@ -3929,11 +5879,21 @@ class HasFilterPattern a b | a -> b where
 instance HasFilterPattern a b => HasFilterPattern (TF.Schema l p a) b where
     filterPattern = TF.configuration . filterPattern
 
+instance HasFilterPattern a b => HasFilterPattern (TF.Ref s a) b where
+    filterPattern =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . filterPattern
+
 class HasFilterPolicy a b | a -> b where
     filterPolicy :: Lens' a b
 
 instance HasFilterPolicy a b => HasFilterPolicy (TF.Schema l p a) b where
     filterPolicy = TF.configuration . filterPolicy
+
+instance HasFilterPolicy a b => HasFilterPolicy (TF.Ref s a) b where
+    filterPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . filterPolicy
 
 class HasFinalSnapshotIdentifier a b | a -> b where
     finalSnapshotIdentifier :: Lens' a b
@@ -3941,11 +5901,21 @@ class HasFinalSnapshotIdentifier a b | a -> b where
 instance HasFinalSnapshotIdentifier a b => HasFinalSnapshotIdentifier (TF.Schema l p a) b where
     finalSnapshotIdentifier = TF.configuration . finalSnapshotIdentifier
 
+instance HasFinalSnapshotIdentifier a b => HasFinalSnapshotIdentifier (TF.Ref s a) b where
+    finalSnapshotIdentifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . finalSnapshotIdentifier
+
 class HasForceDelete a b | a -> b where
     forceDelete :: Lens' a b
 
 instance HasForceDelete a b => HasForceDelete (TF.Schema l p a) b where
     forceDelete = TF.configuration . forceDelete
+
+instance HasForceDelete a b => HasForceDelete (TF.Ref s a) b where
+    forceDelete =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . forceDelete
 
 class HasForceDestroy a b | a -> b where
     forceDestroy :: Lens' a b
@@ -3953,11 +5923,21 @@ class HasForceDestroy a b | a -> b where
 instance HasForceDestroy a b => HasForceDestroy (TF.Schema l p a) b where
     forceDestroy = TF.configuration . forceDestroy
 
+instance HasForceDestroy a b => HasForceDestroy (TF.Ref s a) b where
+    forceDestroy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . forceDestroy
+
 class HasForceDetach a b | a -> b where
     forceDetach :: Lens' a b
 
 instance HasForceDetach a b => HasForceDetach (TF.Schema l p a) b where
     forceDetach = TF.configuration . forceDetach
+
+instance HasForceDetach a b => HasForceDetach (TF.Ref s a) b where
+    forceDetach =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . forceDetach
 
 class HasFormat a b | a -> b where
     format :: Lens' a b
@@ -3965,11 +5945,21 @@ class HasFormat a b | a -> b where
 instance HasFormat a b => HasFormat (TF.Schema l p a) b where
     format = TF.configuration . format
 
+instance HasFormat a b => HasFormat (TF.Ref s a) b where
+    format =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . format
+
 class HasFqdn a b | a -> b where
     fqdn :: Lens' a b
 
 instance HasFqdn a b => HasFqdn (TF.Schema l p a) b where
     fqdn = TF.configuration . fqdn
+
+instance HasFqdn a b => HasFqdn (TF.Ref s a) b where
+    fqdn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . fqdn
 
 class HasFromPort a b | a -> b where
     fromPort :: Lens' a b
@@ -3977,11 +5967,21 @@ class HasFromPort a b | a -> b where
 instance HasFromPort a b => HasFromPort (TF.Schema l p a) b where
     fromPort = TF.configuration . fromPort
 
+instance HasFromPort a b => HasFromPort (TF.Ref s a) b where
+    fromPort =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . fromPort
+
 class HasFunctionName a b | a -> b where
     functionName :: Lens' a b
 
 instance HasFunctionName a b => HasFunctionName (TF.Schema l p a) b where
     functionName = TF.configuration . functionName
+
+instance HasFunctionName a b => HasFunctionName (TF.Ref s a) b where
+    functionName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . functionName
 
 class HasFunctionVersion a b | a -> b where
     functionVersion :: Lens' a b
@@ -3989,11 +5989,21 @@ class HasFunctionVersion a b | a -> b where
 instance HasFunctionVersion a b => HasFunctionVersion (TF.Schema l p a) b where
     functionVersion = TF.configuration . functionVersion
 
+instance HasFunctionVersion a b => HasFunctionVersion (TF.Ref s a) b where
+    functionVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . functionVersion
+
 class HasGatewayId a b | a -> b where
     gatewayId :: Lens' a b
 
 instance HasGatewayId a b => HasGatewayId (TF.Schema l p a) b where
     gatewayId = TF.configuration . gatewayId
+
+instance HasGatewayId a b => HasGatewayId (TF.Ref s a) b where
+    gatewayId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . gatewayId
 
 class HasGenerateSecret a b | a -> b where
     generateSecret :: Lens' a b
@@ -4001,11 +6011,21 @@ class HasGenerateSecret a b | a -> b where
 instance HasGenerateSecret a b => HasGenerateSecret (TF.Schema l p a) b where
     generateSecret = TF.configuration . generateSecret
 
+instance HasGenerateSecret a b => HasGenerateSecret (TF.Ref s a) b where
+    generateSecret =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . generateSecret
+
 class HasGeolocationRoutingPolicy a b | a -> b where
     geolocationRoutingPolicy :: Lens' a b
 
 instance HasGeolocationRoutingPolicy a b => HasGeolocationRoutingPolicy (TF.Schema l p a) b where
     geolocationRoutingPolicy = TF.configuration . geolocationRoutingPolicy
+
+instance HasGeolocationRoutingPolicy a b => HasGeolocationRoutingPolicy (TF.Ref s a) b where
+    geolocationRoutingPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . geolocationRoutingPolicy
 
 class HasGlobalFilter a b | a -> b where
     globalFilter :: Lens' a b
@@ -4013,11 +6033,21 @@ class HasGlobalFilter a b | a -> b where
 instance HasGlobalFilter a b => HasGlobalFilter (TF.Schema l p a) b where
     globalFilter = TF.configuration . globalFilter
 
+instance HasGlobalFilter a b => HasGlobalFilter (TF.Ref s a) b where
+    globalFilter =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . globalFilter
+
 class HasGlobalSecondaryIndex a b | a -> b where
     globalSecondaryIndex :: Lens' a b
 
 instance HasGlobalSecondaryIndex a b => HasGlobalSecondaryIndex (TF.Schema l p a) b where
     globalSecondaryIndex = TF.configuration . globalSecondaryIndex
+
+instance HasGlobalSecondaryIndex a b => HasGlobalSecondaryIndex (TF.Ref s a) b where
+    globalSecondaryIndex =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . globalSecondaryIndex
 
 class HasGroup a b | a -> b where
     group :: Lens' a b
@@ -4025,11 +6055,21 @@ class HasGroup a b | a -> b where
 instance HasGroup a b => HasGroup (TF.Schema l p a) b where
     group = TF.configuration . group
 
+instance HasGroup a b => HasGroup (TF.Ref s a) b where
+    group =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . group
+
 class HasGroupName a b | a -> b where
     groupName :: Lens' a b
 
 instance HasGroupName a b => HasGroupName (TF.Schema l p a) b where
     groupName = TF.configuration . groupName
+
+instance HasGroupName a b => HasGroupName (TF.Ref s a) b where
+    groupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . groupName
 
 class HasGroupNames a b | a -> b where
     groupNames :: Lens' a b
@@ -4037,11 +6077,21 @@ class HasGroupNames a b | a -> b where
 instance HasGroupNames a b => HasGroupNames (TF.Schema l p a) b where
     groupNames = TF.configuration . groupNames
 
+instance HasGroupNames a b => HasGroupNames (TF.Ref s a) b where
+    groupNames =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . groupNames
+
 class HasGroups a b | a -> b where
     groups :: Lens' a b
 
 instance HasGroups a b => HasGroups (TF.Schema l p a) b where
     groups = TF.configuration . groups
+
+instance HasGroups a b => HasGroups (TF.Ref s a) b where
+    groups =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . groups
 
 class HasHandler a b | a -> b where
     handler :: Lens' a b
@@ -4049,11 +6099,21 @@ class HasHandler a b | a -> b where
 instance HasHandler a b => HasHandler (TF.Schema l p a) b where
     handler = TF.configuration . handler
 
+instance HasHandler a b => HasHandler (TF.Ref s a) b where
+    handler =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . handler
+
 class HasHardExpiry a b | a -> b where
     hardExpiry :: Lens' a b
 
 instance HasHardExpiry a b => HasHardExpiry (TF.Schema l p a) b where
     hardExpiry = TF.configuration . hardExpiry
+
+instance HasHardExpiry a b => HasHardExpiry (TF.Ref s a) b where
+    hardExpiry =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . hardExpiry
 
 class HasHashKey a b | a -> b where
     hashKey :: Lens' a b
@@ -4061,11 +6121,21 @@ class HasHashKey a b | a -> b where
 instance HasHashKey a b => HasHashKey (TF.Schema l p a) b where
     hashKey = TF.configuration . hashKey
 
+instance HasHashKey a b => HasHashKey (TF.Ref s a) b where
+    hashKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . hashKey
+
 class HasHealthCheck a b | a -> b where
     healthCheck :: Lens' a b
 
 instance HasHealthCheck a b => HasHealthCheck (TF.Schema l p a) b where
     healthCheck = TF.configuration . healthCheck
+
+instance HasHealthCheck a b => HasHealthCheck (TF.Ref s a) b where
+    healthCheck =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . healthCheck
 
 class HasHealthCheckConfig a b | a -> b where
     healthCheckConfig :: Lens' a b
@@ -4073,11 +6143,21 @@ class HasHealthCheckConfig a b | a -> b where
 instance HasHealthCheckConfig a b => HasHealthCheckConfig (TF.Schema l p a) b where
     healthCheckConfig = TF.configuration . healthCheckConfig
 
+instance HasHealthCheckConfig a b => HasHealthCheckConfig (TF.Ref s a) b where
+    healthCheckConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . healthCheckConfig
+
 class HasHealthCheckGracePeriod a b | a -> b where
     healthCheckGracePeriod :: Lens' a b
 
 instance HasHealthCheckGracePeriod a b => HasHealthCheckGracePeriod (TF.Schema l p a) b where
     healthCheckGracePeriod = TF.configuration . healthCheckGracePeriod
+
+instance HasHealthCheckGracePeriod a b => HasHealthCheckGracePeriod (TF.Ref s a) b where
+    healthCheckGracePeriod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . healthCheckGracePeriod
 
 class HasHealthCheckGracePeriodSeconds a b | a -> b where
     healthCheckGracePeriodSeconds :: Lens' a b
@@ -4085,11 +6165,21 @@ class HasHealthCheckGracePeriodSeconds a b | a -> b where
 instance HasHealthCheckGracePeriodSeconds a b => HasHealthCheckGracePeriodSeconds (TF.Schema l p a) b where
     healthCheckGracePeriodSeconds = TF.configuration . healthCheckGracePeriodSeconds
 
+instance HasHealthCheckGracePeriodSeconds a b => HasHealthCheckGracePeriodSeconds (TF.Ref s a) b where
+    healthCheckGracePeriodSeconds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . healthCheckGracePeriodSeconds
+
 class HasHealthCheckId a b | a -> b where
     healthCheckId :: Lens' a b
 
 instance HasHealthCheckId a b => HasHealthCheckId (TF.Schema l p a) b where
     healthCheckId = TF.configuration . healthCheckId
+
+instance HasHealthCheckId a b => HasHealthCheckId (TF.Ref s a) b where
+    healthCheckId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . healthCheckId
 
 class HasHealthCheckType a b | a -> b where
     healthCheckType :: Lens' a b
@@ -4097,11 +6187,21 @@ class HasHealthCheckType a b | a -> b where
 instance HasHealthCheckType a b => HasHealthCheckType (TF.Schema l p a) b where
     healthCheckType = TF.configuration . healthCheckType
 
+instance HasHealthCheckType a b => HasHealthCheckType (TF.Ref s a) b where
+    healthCheckType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . healthCheckType
+
 class HasHealthcheckMethod a b | a -> b where
     healthcheckMethod :: Lens' a b
 
 instance HasHealthcheckMethod a b => HasHealthcheckMethod (TF.Schema l p a) b where
     healthcheckMethod = TF.configuration . healthcheckMethod
+
+instance HasHealthcheckMethod a b => HasHealthcheckMethod (TF.Ref s a) b where
+    healthcheckMethod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . healthcheckMethod
 
 class HasHealthcheckUrl a b | a -> b where
     healthcheckUrl :: Lens' a b
@@ -4109,11 +6209,21 @@ class HasHealthcheckUrl a b | a -> b where
 instance HasHealthcheckUrl a b => HasHealthcheckUrl (TF.Schema l p a) b where
     healthcheckUrl = TF.configuration . healthcheckUrl
 
+instance HasHealthcheckUrl a b => HasHealthcheckUrl (TF.Ref s a) b where
+    healthcheckUrl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . healthcheckUrl
+
 class HasHeartbeatTimeout a b | a -> b where
     heartbeatTimeout :: Lens' a b
 
 instance HasHeartbeatTimeout a b => HasHeartbeatTimeout (TF.Schema l p a) b where
     heartbeatTimeout = TF.configuration . heartbeatTimeout
+
+instance HasHeartbeatTimeout a b => HasHeartbeatTimeout (TF.Ref s a) b where
+    heartbeatTimeout =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . heartbeatTimeout
 
 class HasHostInstanceType a b | a -> b where
     hostInstanceType :: Lens' a b
@@ -4121,11 +6231,21 @@ class HasHostInstanceType a b | a -> b where
 instance HasHostInstanceType a b => HasHostInstanceType (TF.Schema l p a) b where
     hostInstanceType = TF.configuration . hostInstanceType
 
+instance HasHostInstanceType a b => HasHostInstanceType (TF.Ref s a) b where
+    hostInstanceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . hostInstanceType
+
 class HasHostname a b | a -> b where
     hostname :: Lens' a b
 
 instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
+
+instance HasHostname a b => HasHostname (TF.Ref s a) b where
+    hostname =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . hostname
 
 class HasHostnameTheme a b | a -> b where
     hostnameTheme :: Lens' a b
@@ -4133,11 +6253,21 @@ class HasHostnameTheme a b | a -> b where
 instance HasHostnameTheme a b => HasHostnameTheme (TF.Schema l p a) b where
     hostnameTheme = TF.configuration . hostnameTheme
 
+instance HasHostnameTheme a b => HasHostnameTheme (TF.Ref s a) b where
+    hostnameTheme =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . hostnameTheme
+
 class HasHtml a b | a -> b where
     html :: Lens' a b
 
 instance HasHtml a b => HasHtml (TF.Schema l p a) b where
     html = TF.configuration . html
+
+instance HasHtml a b => HasHtml (TF.Ref s a) b where
+    html =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . html
 
 class HasHttpFailureFeedbackRoleArn a b | a -> b where
     httpFailureFeedbackRoleArn :: Lens' a b
@@ -4145,11 +6275,21 @@ class HasHttpFailureFeedbackRoleArn a b | a -> b where
 instance HasHttpFailureFeedbackRoleArn a b => HasHttpFailureFeedbackRoleArn (TF.Schema l p a) b where
     httpFailureFeedbackRoleArn = TF.configuration . httpFailureFeedbackRoleArn
 
+instance HasHttpFailureFeedbackRoleArn a b => HasHttpFailureFeedbackRoleArn (TF.Ref s a) b where
+    httpFailureFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . httpFailureFeedbackRoleArn
+
 class HasHttpMethod a b | a -> b where
     httpMethod :: Lens' a b
 
 instance HasHttpMethod a b => HasHttpMethod (TF.Schema l p a) b where
     httpMethod = TF.configuration . httpMethod
+
+instance HasHttpMethod a b => HasHttpMethod (TF.Ref s a) b where
+    httpMethod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . httpMethod
 
 class HasHttpSuccessFeedbackRoleArn a b | a -> b where
     httpSuccessFeedbackRoleArn :: Lens' a b
@@ -4157,11 +6297,21 @@ class HasHttpSuccessFeedbackRoleArn a b | a -> b where
 instance HasHttpSuccessFeedbackRoleArn a b => HasHttpSuccessFeedbackRoleArn (TF.Schema l p a) b where
     httpSuccessFeedbackRoleArn = TF.configuration . httpSuccessFeedbackRoleArn
 
+instance HasHttpSuccessFeedbackRoleArn a b => HasHttpSuccessFeedbackRoleArn (TF.Ref s a) b where
+    httpSuccessFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . httpSuccessFeedbackRoleArn
+
 class HasHttpSuccessFeedbackSampleRate a b | a -> b where
     httpSuccessFeedbackSampleRate :: Lens' a b
 
 instance HasHttpSuccessFeedbackSampleRate a b => HasHttpSuccessFeedbackSampleRate (TF.Schema l p a) b where
     httpSuccessFeedbackSampleRate = TF.configuration . httpSuccessFeedbackSampleRate
+
+instance HasHttpSuccessFeedbackSampleRate a b => HasHttpSuccessFeedbackSampleRate (TF.Ref s a) b where
+    httpSuccessFeedbackSampleRate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . httpSuccessFeedbackSampleRate
 
 class HasHttpVersion a b | a -> b where
     httpVersion :: Lens' a b
@@ -4169,11 +6319,21 @@ class HasHttpVersion a b | a -> b where
 instance HasHttpVersion a b => HasHttpVersion (TF.Schema l p a) b where
     httpVersion = TF.configuration . httpVersion
 
+instance HasHttpVersion a b => HasHttpVersion (TF.Ref s a) b where
+    httpVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . httpVersion
+
 class HasIamDatabaseAuthenticationEnabled a b | a -> b where
     iamDatabaseAuthenticationEnabled :: Lens' a b
 
 instance HasIamDatabaseAuthenticationEnabled a b => HasIamDatabaseAuthenticationEnabled (TF.Schema l p a) b where
     iamDatabaseAuthenticationEnabled = TF.configuration . iamDatabaseAuthenticationEnabled
+
+instance HasIamDatabaseAuthenticationEnabled a b => HasIamDatabaseAuthenticationEnabled (TF.Ref s a) b where
+    iamDatabaseAuthenticationEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . iamDatabaseAuthenticationEnabled
 
 class HasIamFleetRole a b | a -> b where
     iamFleetRole :: Lens' a b
@@ -4181,11 +6341,21 @@ class HasIamFleetRole a b | a -> b where
 instance HasIamFleetRole a b => HasIamFleetRole (TF.Schema l p a) b where
     iamFleetRole = TF.configuration . iamFleetRole
 
+instance HasIamFleetRole a b => HasIamFleetRole (TF.Ref s a) b where
+    iamFleetRole =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . iamFleetRole
+
 class HasIamInstanceProfile a b | a -> b where
     iamInstanceProfile :: Lens' a b
 
 instance HasIamInstanceProfile a b => HasIamInstanceProfile (TF.Schema l p a) b where
     iamInstanceProfile = TF.configuration . iamInstanceProfile
+
+instance HasIamInstanceProfile a b => HasIamInstanceProfile (TF.Ref s a) b where
+    iamInstanceProfile =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . iamInstanceProfile
 
 class HasIamRole a b | a -> b where
     iamRole :: Lens' a b
@@ -4193,11 +6363,21 @@ class HasIamRole a b | a -> b where
 instance HasIamRole a b => HasIamRole (TF.Schema l p a) b where
     iamRole = TF.configuration . iamRole
 
+instance HasIamRole a b => HasIamRole (TF.Ref s a) b where
+    iamRole =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . iamRole
+
 class HasIamRoleArn a b | a -> b where
     iamRoleArn :: Lens' a b
 
 instance HasIamRoleArn a b => HasIamRoleArn (TF.Schema l p a) b where
     iamRoleArn = TF.configuration . iamRoleArn
+
+instance HasIamRoleArn a b => HasIamRoleArn (TF.Ref s a) b where
+    iamRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . iamRoleArn
 
 class HasIamRoles a b | a -> b where
     iamRoles :: Lens' a b
@@ -4205,11 +6385,21 @@ class HasIamRoles a b | a -> b where
 instance HasIamRoles a b => HasIamRoles (TF.Schema l p a) b where
     iamRoles = TF.configuration . iamRoles
 
+instance HasIamRoles a b => HasIamRoles (TF.Ref s a) b where
+    iamRoles =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . iamRoles
+
 class HasIcmpCode a b | a -> b where
     icmpCode :: Lens' a b
 
 instance HasIcmpCode a b => HasIcmpCode (TF.Schema l p a) b where
     icmpCode = TF.configuration . icmpCode
+
+instance HasIcmpCode a b => HasIcmpCode (TF.Ref s a) b where
+    icmpCode =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . icmpCode
 
 class HasIcmpType a b | a -> b where
     icmpType :: Lens' a b
@@ -4217,11 +6407,21 @@ class HasIcmpType a b | a -> b where
 instance HasIcmpType a b => HasIcmpType (TF.Schema l p a) b where
     icmpType = TF.configuration . icmpType
 
+instance HasIcmpType a b => HasIcmpType (TF.Ref s a) b where
+    icmpType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . icmpType
+
 class HasId a b | a -> b where
     id :: Lens' a b
 
 instance HasId a b => HasId (TF.Schema l p a) b where
     id = TF.configuration . id
+
+instance HasId a b => HasId (TF.Ref s a) b where
+    id =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . id
 
 class HasIdentifier a b | a -> b where
     identifier :: Lens' a b
@@ -4229,11 +6429,21 @@ class HasIdentifier a b | a -> b where
 instance HasIdentifier a b => HasIdentifier (TF.Schema l p a) b where
     identifier = TF.configuration . identifier
 
+instance HasIdentifier a b => HasIdentifier (TF.Ref s a) b where
+    identifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . identifier
+
 class HasIdentifierPrefix a b | a -> b where
     identifierPrefix :: Lens' a b
 
 instance HasIdentifierPrefix a b => HasIdentifierPrefix (TF.Schema l p a) b where
     identifierPrefix = TF.configuration . identifierPrefix
+
+instance HasIdentifierPrefix a b => HasIdentifierPrefix (TF.Ref s a) b where
+    identifierPrefix =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . identifierPrefix
 
 class HasIdentityPoolId a b | a -> b where
     identityPoolId :: Lens' a b
@@ -4241,11 +6451,21 @@ class HasIdentityPoolId a b | a -> b where
 instance HasIdentityPoolId a b => HasIdentityPoolId (TF.Schema l p a) b where
     identityPoolId = TF.configuration . identityPoolId
 
+instance HasIdentityPoolId a b => HasIdentityPoolId (TF.Ref s a) b where
+    identityPoolId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . identityPoolId
+
 class HasIdentityPoolName a b | a -> b where
     identityPoolName :: Lens' a b
 
 instance HasIdentityPoolName a b => HasIdentityPoolName (TF.Schema l p a) b where
     identityPoolName = TF.configuration . identityPoolName
+
+instance HasIdentityPoolName a b => HasIdentityPoolName (TF.Ref s a) b where
+    identityPoolName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . identityPoolName
 
 class HasIdentitySource a b | a -> b where
     identitySource :: Lens' a b
@@ -4253,11 +6473,21 @@ class HasIdentitySource a b | a -> b where
 instance HasIdentitySource a b => HasIdentitySource (TF.Schema l p a) b where
     identitySource = TF.configuration . identitySource
 
+instance HasIdentitySource a b => HasIdentitySource (TF.Ref s a) b where
+    identitySource =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . identitySource
+
 class HasIdentityValidationExpression a b | a -> b where
     identityValidationExpression :: Lens' a b
 
 instance HasIdentityValidationExpression a b => HasIdentityValidationExpression (TF.Schema l p a) b where
     identityValidationExpression = TF.configuration . identityValidationExpression
+
+instance HasIdentityValidationExpression a b => HasIdentityValidationExpression (TF.Ref s a) b where
+    identityValidationExpression =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . identityValidationExpression
 
 class HasIdleTimeout a b | a -> b where
     idleTimeout :: Lens' a b
@@ -4265,11 +6495,21 @@ class HasIdleTimeout a b | a -> b where
 instance HasIdleTimeout a b => HasIdleTimeout (TF.Schema l p a) b where
     idleTimeout = TF.configuration . idleTimeout
 
+instance HasIdleTimeout a b => HasIdleTimeout (TF.Ref s a) b where
+    idleTimeout =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . idleTimeout
+
 class HasImageId a b | a -> b where
     imageId :: Lens' a b
 
 instance HasImageId a b => HasImageId (TF.Schema l p a) b where
     imageId = TF.configuration . imageId
+
+instance HasImageId a b => HasImageId (TF.Ref s a) b where
+    imageId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . imageId
 
 class HasIncludeGlobalServiceEvents a b | a -> b where
     includeGlobalServiceEvents :: Lens' a b
@@ -4277,11 +6517,21 @@ class HasIncludeGlobalServiceEvents a b | a -> b where
 instance HasIncludeGlobalServiceEvents a b => HasIncludeGlobalServiceEvents (TF.Schema l p a) b where
     includeGlobalServiceEvents = TF.configuration . includeGlobalServiceEvents
 
+instance HasIncludeGlobalServiceEvents a b => HasIncludeGlobalServiceEvents (TF.Ref s a) b where
+    includeGlobalServiceEvents =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . includeGlobalServiceEvents
+
 class HasIncludePublic a b | a -> b where
     includePublic :: Lens' a b
 
 instance HasIncludePublic a b => HasIncludePublic (TF.Schema l p a) b where
     includePublic = TF.configuration . includePublic
+
+instance HasIncludePublic a b => HasIncludePublic (TF.Ref s a) b where
+    includePublic =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . includePublic
 
 class HasIncludeShared a b | a -> b where
     includeShared :: Lens' a b
@@ -4289,11 +6539,21 @@ class HasIncludeShared a b | a -> b where
 instance HasIncludeShared a b => HasIncludeShared (TF.Schema l p a) b where
     includeShared = TF.configuration . includeShared
 
+instance HasIncludeShared a b => HasIncludeShared (TF.Ref s a) b where
+    includeShared =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . includeShared
+
 class HasIngress a b | a -> b where
     ingress :: Lens' a b
 
 instance HasIngress a b => HasIngress (TF.Schema l p a) b where
     ingress = TF.configuration . ingress
+
+instance HasIngress a b => HasIngress (TF.Ref s a) b where
+    ingress =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ingress
 
 class HasInitialLifecycleHook a b | a -> b where
     initialLifecycleHook :: Lens' a b
@@ -4301,11 +6561,21 @@ class HasInitialLifecycleHook a b | a -> b where
 instance HasInitialLifecycleHook a b => HasInitialLifecycleHook (TF.Schema l p a) b where
     initialLifecycleHook = TF.configuration . initialLifecycleHook
 
+instance HasInitialLifecycleHook a b => HasInitialLifecycleHook (TF.Ref s a) b where
+    initialLifecycleHook =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . initialLifecycleHook
+
 class HasInput a b | a -> b where
     input :: Lens' a b
 
 instance HasInput a b => HasInput (TF.Schema l p a) b where
     input = TF.configuration . input
+
+instance HasInput a b => HasInput (TF.Ref s a) b where
+    input =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . input
 
 class HasInputBucket a b | a -> b where
     inputBucket :: Lens' a b
@@ -4313,11 +6583,21 @@ class HasInputBucket a b | a -> b where
 instance HasInputBucket a b => HasInputBucket (TF.Schema l p a) b where
     inputBucket = TF.configuration . inputBucket
 
+instance HasInputBucket a b => HasInputBucket (TF.Ref s a) b where
+    inputBucket =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . inputBucket
+
 class HasInputParameters a b | a -> b where
     inputParameters :: Lens' a b
 
 instance HasInputParameters a b => HasInputParameters (TF.Schema l p a) b where
     inputParameters = TF.configuration . inputParameters
+
+instance HasInputParameters a b => HasInputParameters (TF.Ref s a) b where
+    inputParameters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . inputParameters
 
 class HasInputPath a b | a -> b where
     inputPath :: Lens' a b
@@ -4325,11 +6605,21 @@ class HasInputPath a b | a -> b where
 instance HasInputPath a b => HasInputPath (TF.Schema l p a) b where
     inputPath = TF.configuration . inputPath
 
+instance HasInputPath a b => HasInputPath (TF.Ref s a) b where
+    inputPath =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . inputPath
+
 class HasInputTransformer a b | a -> b where
     inputTransformer :: Lens' a b
 
 instance HasInputTransformer a b => HasInputTransformer (TF.Schema l p a) b where
     inputTransformer = TF.configuration . inputTransformer
+
+instance HasInputTransformer a b => HasInputTransformer (TF.Ref s a) b where
+    inputTransformer =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . inputTransformer
 
 class HasInstallUpdatesOnBoot a b | a -> b where
     installUpdatesOnBoot :: Lens' a b
@@ -4337,11 +6627,21 @@ class HasInstallUpdatesOnBoot a b | a -> b where
 instance HasInstallUpdatesOnBoot a b => HasInstallUpdatesOnBoot (TF.Schema l p a) b where
     installUpdatesOnBoot = TF.configuration . installUpdatesOnBoot
 
+instance HasInstallUpdatesOnBoot a b => HasInstallUpdatesOnBoot (TF.Ref s a) b where
+    installUpdatesOnBoot =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . installUpdatesOnBoot
+
 class HasInstance' a b | a -> b where
     instance' :: Lens' a b
 
 instance HasInstance' a b => HasInstance' (TF.Schema l p a) b where
     instance' = TF.configuration . instance'
+
+instance HasInstance' a b => HasInstance' (TF.Ref s a) b where
+    instance' =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instance'
 
 class HasInstanceClass a b | a -> b where
     instanceClass :: Lens' a b
@@ -4349,11 +6649,21 @@ class HasInstanceClass a b | a -> b where
 instance HasInstanceClass a b => HasInstanceClass (TF.Schema l p a) b where
     instanceClass = TF.configuration . instanceClass
 
+instance HasInstanceClass a b => HasInstanceClass (TF.Ref s a) b where
+    instanceClass =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceClass
+
 class HasInstanceCount a b | a -> b where
     instanceCount :: Lens' a b
 
 instance HasInstanceCount a b => HasInstanceCount (TF.Schema l p a) b where
     instanceCount = TF.configuration . instanceCount
+
+instance HasInstanceCount a b => HasInstanceCount (TF.Ref s a) b where
+    instanceCount =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceCount
 
 class HasInstanceGroup a b | a -> b where
     instanceGroup :: Lens' a b
@@ -4361,11 +6671,21 @@ class HasInstanceGroup a b | a -> b where
 instance HasInstanceGroup a b => HasInstanceGroup (TF.Schema l p a) b where
     instanceGroup = TF.configuration . instanceGroup
 
+instance HasInstanceGroup a b => HasInstanceGroup (TF.Ref s a) b where
+    instanceGroup =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceGroup
+
 class HasInstanceId a b | a -> b where
     instanceId :: Lens' a b
 
 instance HasInstanceId a b => HasInstanceId (TF.Schema l p a) b where
     instanceId = TF.configuration . instanceId
+
+instance HasInstanceId a b => HasInstanceId (TF.Ref s a) b where
+    instanceId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceId
 
 class HasInstanceInitiatedShutdownBehavior a b | a -> b where
     instanceInitiatedShutdownBehavior :: Lens' a b
@@ -4373,11 +6693,21 @@ class HasInstanceInitiatedShutdownBehavior a b | a -> b where
 instance HasInstanceInitiatedShutdownBehavior a b => HasInstanceInitiatedShutdownBehavior (TF.Schema l p a) b where
     instanceInitiatedShutdownBehavior = TF.configuration . instanceInitiatedShutdownBehavior
 
+instance HasInstanceInitiatedShutdownBehavior a b => HasInstanceInitiatedShutdownBehavior (TF.Ref s a) b where
+    instanceInitiatedShutdownBehavior =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceInitiatedShutdownBehavior
+
 class HasInstanceInterruptionBehavior a b | a -> b where
     instanceInterruptionBehavior :: Lens' a b
 
 instance HasInstanceInterruptionBehavior a b => HasInstanceInterruptionBehavior (TF.Schema l p a) b where
     instanceInterruptionBehavior = TF.configuration . instanceInterruptionBehavior
+
+instance HasInstanceInterruptionBehavior a b => HasInstanceInterruptionBehavior (TF.Ref s a) b where
+    instanceInterruptionBehavior =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceInterruptionBehavior
 
 class HasInstanceName a b | a -> b where
     instanceName :: Lens' a b
@@ -4385,11 +6715,21 @@ class HasInstanceName a b | a -> b where
 instance HasInstanceName a b => HasInstanceName (TF.Schema l p a) b where
     instanceName = TF.configuration . instanceName
 
+instance HasInstanceName a b => HasInstanceName (TF.Ref s a) b where
+    instanceName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceName
+
 class HasInstancePort a b | a -> b where
     instancePort :: Lens' a b
 
 instance HasInstancePort a b => HasInstancePort (TF.Schema l p a) b where
     instancePort = TF.configuration . instancePort
+
+instance HasInstancePort a b => HasInstancePort (TF.Ref s a) b where
+    instancePort =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instancePort
 
 class HasInstancePorts a b | a -> b where
     instancePorts :: Lens' a b
@@ -4397,11 +6737,21 @@ class HasInstancePorts a b | a -> b where
 instance HasInstancePorts a b => HasInstancePorts (TF.Schema l p a) b where
     instancePorts = TF.configuration . instancePorts
 
+instance HasInstancePorts a b => HasInstancePorts (TF.Ref s a) b where
+    instancePorts =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instancePorts
+
 class HasInstanceShutdownTimeout a b | a -> b where
     instanceShutdownTimeout :: Lens' a b
 
 instance HasInstanceShutdownTimeout a b => HasInstanceShutdownTimeout (TF.Schema l p a) b where
     instanceShutdownTimeout = TF.configuration . instanceShutdownTimeout
+
+instance HasInstanceShutdownTimeout a b => HasInstanceShutdownTimeout (TF.Ref s a) b where
+    instanceShutdownTimeout =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceShutdownTimeout
 
 class HasInstanceTags a b | a -> b where
     instanceTags :: Lens' a b
@@ -4409,11 +6759,21 @@ class HasInstanceTags a b | a -> b where
 instance HasInstanceTags a b => HasInstanceTags (TF.Schema l p a) b where
     instanceTags = TF.configuration . instanceTags
 
+instance HasInstanceTags a b => HasInstanceTags (TF.Ref s a) b where
+    instanceTags =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceTags
+
 class HasInstanceTenancy a b | a -> b where
     instanceTenancy :: Lens' a b
 
 instance HasInstanceTenancy a b => HasInstanceTenancy (TF.Schema l p a) b where
     instanceTenancy = TF.configuration . instanceTenancy
+
+instance HasInstanceTenancy a b => HasInstanceTenancy (TF.Ref s a) b where
+    instanceTenancy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceTenancy
 
 class HasInstanceType a b | a -> b where
     instanceType :: Lens' a b
@@ -4421,11 +6781,21 @@ class HasInstanceType a b | a -> b where
 instance HasInstanceType a b => HasInstanceType (TF.Schema l p a) b where
     instanceType = TF.configuration . instanceType
 
+instance HasInstanceType a b => HasInstanceType (TF.Ref s a) b where
+    instanceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instanceType
+
 class HasInstances a b | a -> b where
     instances :: Lens' a b
 
 instance HasInstances a b => HasInstances (TF.Schema l p a) b where
     instances = TF.configuration . instances
+
+instance HasInstances a b => HasInstances (TF.Ref s a) b where
+    instances =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . instances
 
 class HasInsufficientDataActions a b | a -> b where
     insufficientDataActions :: Lens' a b
@@ -4433,11 +6803,21 @@ class HasInsufficientDataActions a b | a -> b where
 instance HasInsufficientDataActions a b => HasInsufficientDataActions (TF.Schema l p a) b where
     insufficientDataActions = TF.configuration . insufficientDataActions
 
+instance HasInsufficientDataActions a b => HasInsufficientDataActions (TF.Ref s a) b where
+    insufficientDataActions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . insufficientDataActions
+
 class HasInsufficientDataHealthStatus a b | a -> b where
     insufficientDataHealthStatus :: Lens' a b
 
 instance HasInsufficientDataHealthStatus a b => HasInsufficientDataHealthStatus (TF.Schema l p a) b where
     insufficientDataHealthStatus = TF.configuration . insufficientDataHealthStatus
+
+instance HasInsufficientDataHealthStatus a b => HasInsufficientDataHealthStatus (TF.Ref s a) b where
+    insufficientDataHealthStatus =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . insufficientDataHealthStatus
 
 class HasIntegrationHttpMethod a b | a -> b where
     integrationHttpMethod :: Lens' a b
@@ -4445,11 +6825,21 @@ class HasIntegrationHttpMethod a b | a -> b where
 instance HasIntegrationHttpMethod a b => HasIntegrationHttpMethod (TF.Schema l p a) b where
     integrationHttpMethod = TF.configuration . integrationHttpMethod
 
+instance HasIntegrationHttpMethod a b => HasIntegrationHttpMethod (TF.Ref s a) b where
+    integrationHttpMethod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . integrationHttpMethod
+
 class HasInternal a b | a -> b where
     internal :: Lens' a b
 
 instance HasInternal a b => HasInternal (TF.Schema l p a) b where
     internal = TF.configuration . internal
+
+instance HasInternal a b => HasInternal (TF.Ref s a) b where
+    internal =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . internal
 
 class HasInternetGatewayId a b | a -> b where
     internetGatewayId :: Lens' a b
@@ -4457,11 +6847,21 @@ class HasInternetGatewayId a b | a -> b where
 instance HasInternetGatewayId a b => HasInternetGatewayId (TF.Schema l p a) b where
     internetGatewayId = TF.configuration . internetGatewayId
 
+instance HasInternetGatewayId a b => HasInternetGatewayId (TF.Ref s a) b where
+    internetGatewayId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . internetGatewayId
+
 class HasInvertHealthcheck a b | a -> b where
     invertHealthcheck :: Lens' a b
 
 instance HasInvertHealthcheck a b => HasInvertHealthcheck (TF.Schema l p a) b where
     invertHealthcheck = TF.configuration . invertHealthcheck
+
+instance HasInvertHealthcheck a b => HasInvertHealthcheck (TF.Ref s a) b where
+    invertHealthcheck =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . invertHealthcheck
 
 class HasIops a b | a -> b where
     iops :: Lens' a b
@@ -4469,11 +6869,21 @@ class HasIops a b | a -> b where
 instance HasIops a b => HasIops (TF.Schema l p a) b where
     iops = TF.configuration . iops
 
+instance HasIops a b => HasIops (TF.Ref s a) b where
+    iops =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . iops
+
 class HasIpAddress a b | a -> b where
     ipAddress :: Lens' a b
 
 instance HasIpAddress a b => HasIpAddress (TF.Schema l p a) b where
     ipAddress = TF.configuration . ipAddress
+
+instance HasIpAddress a b => HasIpAddress (TF.Ref s a) b where
+    ipAddress =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ipAddress
 
 class HasIpAddressType a b | a -> b where
     ipAddressType :: Lens' a b
@@ -4481,11 +6891,21 @@ class HasIpAddressType a b | a -> b where
 instance HasIpAddressType a b => HasIpAddressType (TF.Schema l p a) b where
     ipAddressType = TF.configuration . ipAddressType
 
+instance HasIpAddressType a b => HasIpAddressType (TF.Ref s a) b where
+    ipAddressType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ipAddressType
+
 class HasIpSetDescriptor a b | a -> b where
     ipSetDescriptor :: Lens' a b
 
 instance HasIpSetDescriptor a b => HasIpSetDescriptor (TF.Schema l p a) b where
     ipSetDescriptor = TF.configuration . ipSetDescriptor
+
+instance HasIpSetDescriptor a b => HasIpSetDescriptor (TF.Ref s a) b where
+    ipSetDescriptor =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ipSetDescriptor
 
 class HasIpSetDescriptors a b | a -> b where
     ipSetDescriptors :: Lens' a b
@@ -4493,11 +6913,21 @@ class HasIpSetDescriptors a b | a -> b where
 instance HasIpSetDescriptors a b => HasIpSetDescriptors (TF.Schema l p a) b where
     ipSetDescriptors = TF.configuration . ipSetDescriptors
 
+instance HasIpSetDescriptors a b => HasIpSetDescriptors (TF.Ref s a) b where
+    ipSetDescriptors =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ipSetDescriptors
+
 class HasIpv6AddressCount a b | a -> b where
     ipv6AddressCount :: Lens' a b
 
 instance HasIpv6AddressCount a b => HasIpv6AddressCount (TF.Schema l p a) b where
     ipv6AddressCount = TF.configuration . ipv6AddressCount
+
+instance HasIpv6AddressCount a b => HasIpv6AddressCount (TF.Ref s a) b where
+    ipv6AddressCount =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ipv6AddressCount
 
 class HasIpv6Addresses a b | a -> b where
     ipv6Addresses :: Lens' a b
@@ -4505,11 +6935,21 @@ class HasIpv6Addresses a b | a -> b where
 instance HasIpv6Addresses a b => HasIpv6Addresses (TF.Schema l p a) b where
     ipv6Addresses = TF.configuration . ipv6Addresses
 
+instance HasIpv6Addresses a b => HasIpv6Addresses (TF.Ref s a) b where
+    ipv6Addresses =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ipv6Addresses
+
 class HasIpv6CidrBlock a b | a -> b where
     ipv6CidrBlock :: Lens' a b
 
 instance HasIpv6CidrBlock a b => HasIpv6CidrBlock (TF.Schema l p a) b where
     ipv6CidrBlock = TF.configuration . ipv6CidrBlock
+
+instance HasIpv6CidrBlock a b => HasIpv6CidrBlock (TF.Ref s a) b where
+    ipv6CidrBlock =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ipv6CidrBlock
 
 class HasIpv6CidrBlocks a b | a -> b where
     ipv6CidrBlocks :: Lens' a b
@@ -4517,11 +6957,21 @@ class HasIpv6CidrBlocks a b | a -> b where
 instance HasIpv6CidrBlocks a b => HasIpv6CidrBlocks (TF.Schema l p a) b where
     ipv6CidrBlocks = TF.configuration . ipv6CidrBlocks
 
+instance HasIpv6CidrBlocks a b => HasIpv6CidrBlocks (TF.Ref s a) b where
+    ipv6CidrBlocks =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ipv6CidrBlocks
+
 class HasIsEnabled a b | a -> b where
     isEnabled :: Lens' a b
 
 instance HasIsEnabled a b => HasIsEnabled (TF.Schema l p a) b where
     isEnabled = TF.configuration . isEnabled
+
+instance HasIsEnabled a b => HasIsEnabled (TF.Ref s a) b where
+    isEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . isEnabled
 
 class HasIsIpv6Enabled a b | a -> b where
     isIpv6Enabled :: Lens' a b
@@ -4529,11 +6979,21 @@ class HasIsIpv6Enabled a b | a -> b where
 instance HasIsIpv6Enabled a b => HasIsIpv6Enabled (TF.Schema l p a) b where
     isIpv6Enabled = TF.configuration . isIpv6Enabled
 
+instance HasIsIpv6Enabled a b => HasIsIpv6Enabled (TF.Ref s a) b where
+    isIpv6Enabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . isIpv6Enabled
+
 class HasIsMultiRegionTrail a b | a -> b where
     isMultiRegionTrail :: Lens' a b
 
 instance HasIsMultiRegionTrail a b => HasIsMultiRegionTrail (TF.Schema l p a) b where
     isMultiRegionTrail = TF.configuration . isMultiRegionTrail
+
+instance HasIsMultiRegionTrail a b => HasIsMultiRegionTrail (TF.Ref s a) b where
+    isMultiRegionTrail =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . isMultiRegionTrail
 
 class HasItem a b | a -> b where
     item :: Lens' a b
@@ -4541,11 +7001,21 @@ class HasItem a b | a -> b where
 instance HasItem a b => HasItem (TF.Schema l p a) b where
     item = TF.configuration . item
 
+instance HasItem a b => HasItem (TF.Ref s a) b where
+    item =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . item
+
 class HasJvmOptions a b | a -> b where
     jvmOptions :: Lens' a b
 
 instance HasJvmOptions a b => HasJvmOptions (TF.Schema l p a) b where
     jvmOptions = TF.configuration . jvmOptions
+
+instance HasJvmOptions a b => HasJvmOptions (TF.Ref s a) b where
+    jvmOptions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . jvmOptions
 
 class HasJvmType a b | a -> b where
     jvmType :: Lens' a b
@@ -4553,11 +7023,21 @@ class HasJvmType a b | a -> b where
 instance HasJvmType a b => HasJvmType (TF.Schema l p a) b where
     jvmType = TF.configuration . jvmType
 
+instance HasJvmType a b => HasJvmType (TF.Ref s a) b where
+    jvmType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . jvmType
+
 class HasJvmVersion a b | a -> b where
     jvmVersion :: Lens' a b
 
 instance HasJvmVersion a b => HasJvmVersion (TF.Schema l p a) b where
     jvmVersion = TF.configuration . jvmVersion
+
+instance HasJvmVersion a b => HasJvmVersion (TF.Ref s a) b where
+    jvmVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . jvmVersion
 
 class HasKeepJobFlowAliveWhenNoSteps a b | a -> b where
     keepJobFlowAliveWhenNoSteps :: Lens' a b
@@ -4565,11 +7045,21 @@ class HasKeepJobFlowAliveWhenNoSteps a b | a -> b where
 instance HasKeepJobFlowAliveWhenNoSteps a b => HasKeepJobFlowAliveWhenNoSteps (TF.Schema l p a) b where
     keepJobFlowAliveWhenNoSteps = TF.configuration . keepJobFlowAliveWhenNoSteps
 
+instance HasKeepJobFlowAliveWhenNoSteps a b => HasKeepJobFlowAliveWhenNoSteps (TF.Ref s a) b where
+    keepJobFlowAliveWhenNoSteps =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . keepJobFlowAliveWhenNoSteps
+
 class HasKey a b | a -> b where
     key :: Lens' a b
 
 instance HasKey a b => HasKey (TF.Schema l p a) b where
     key = TF.configuration . key
+
+instance HasKey a b => HasKey (TF.Ref s a) b where
+    key =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . key
 
 class HasKeyId a b | a -> b where
     keyId :: Lens' a b
@@ -4577,11 +7067,21 @@ class HasKeyId a b | a -> b where
 instance HasKeyId a b => HasKeyId (TF.Schema l p a) b where
     keyId = TF.configuration . keyId
 
+instance HasKeyId a b => HasKeyId (TF.Ref s a) b where
+    keyId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . keyId
+
 class HasKeyName a b | a -> b where
     keyName :: Lens' a b
 
 instance HasKeyName a b => HasKeyName (TF.Schema l p a) b where
     keyName = TF.configuration . keyName
+
+instance HasKeyName a b => HasKeyName (TF.Ref s a) b where
+    keyName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . keyName
 
 class HasKeyNamePrefix a b | a -> b where
     keyNamePrefix :: Lens' a b
@@ -4589,11 +7089,21 @@ class HasKeyNamePrefix a b | a -> b where
 instance HasKeyNamePrefix a b => HasKeyNamePrefix (TF.Schema l p a) b where
     keyNamePrefix = TF.configuration . keyNamePrefix
 
+instance HasKeyNamePrefix a b => HasKeyNamePrefix (TF.Ref s a) b where
+    keyNamePrefix =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . keyNamePrefix
+
 class HasKeyPairName a b | a -> b where
     keyPairName :: Lens' a b
 
 instance HasKeyPairName a b => HasKeyPairName (TF.Schema l p a) b where
     keyPairName = TF.configuration . keyPairName
+
+instance HasKeyPairName a b => HasKeyPairName (TF.Ref s a) b where
+    keyPairName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . keyPairName
 
 class HasKeyType a b | a -> b where
     keyType :: Lens' a b
@@ -4601,11 +7111,21 @@ class HasKeyType a b | a -> b where
 instance HasKeyType a b => HasKeyType (TF.Schema l p a) b where
     keyType = TF.configuration . keyType
 
+instance HasKeyType a b => HasKeyType (TF.Ref s a) b where
+    keyType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . keyType
+
 class HasKeyUsage a b | a -> b where
     keyUsage :: Lens' a b
 
 instance HasKeyUsage a b => HasKeyUsage (TF.Schema l p a) b where
     keyUsage = TF.configuration . keyUsage
+
+instance HasKeyUsage a b => HasKeyUsage (TF.Ref s a) b where
+    keyUsage =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . keyUsage
 
 class HasKinesisDestination a b | a -> b where
     kinesisDestination :: Lens' a b
@@ -4613,11 +7133,21 @@ class HasKinesisDestination a b | a -> b where
 instance HasKinesisDestination a b => HasKinesisDestination (TF.Schema l p a) b where
     kinesisDestination = TF.configuration . kinesisDestination
 
+instance HasKinesisDestination a b => HasKinesisDestination (TF.Ref s a) b where
+    kinesisDestination =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . kinesisDestination
+
 class HasKinesisSourceConfiguration a b | a -> b where
     kinesisSourceConfiguration :: Lens' a b
 
 instance HasKinesisSourceConfiguration a b => HasKinesisSourceConfiguration (TF.Schema l p a) b where
     kinesisSourceConfiguration = TF.configuration . kinesisSourceConfiguration
+
+instance HasKinesisSourceConfiguration a b => HasKinesisSourceConfiguration (TF.Ref s a) b where
+    kinesisSourceConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . kinesisSourceConfiguration
 
 class HasKmsDataKeyReusePeriodSeconds a b | a -> b where
     kmsDataKeyReusePeriodSeconds :: Lens' a b
@@ -4625,11 +7155,21 @@ class HasKmsDataKeyReusePeriodSeconds a b | a -> b where
 instance HasKmsDataKeyReusePeriodSeconds a b => HasKmsDataKeyReusePeriodSeconds (TF.Schema l p a) b where
     kmsDataKeyReusePeriodSeconds = TF.configuration . kmsDataKeyReusePeriodSeconds
 
+instance HasKmsDataKeyReusePeriodSeconds a b => HasKmsDataKeyReusePeriodSeconds (TF.Ref s a) b where
+    kmsDataKeyReusePeriodSeconds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . kmsDataKeyReusePeriodSeconds
+
 class HasKmsKeyArn a b | a -> b where
     kmsKeyArn :: Lens' a b
 
 instance HasKmsKeyArn a b => HasKmsKeyArn (TF.Schema l p a) b where
     kmsKeyArn = TF.configuration . kmsKeyArn
+
+instance HasKmsKeyArn a b => HasKmsKeyArn (TF.Ref s a) b where
+    kmsKeyArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . kmsKeyArn
 
 class HasKmsKeyId a b | a -> b where
     kmsKeyId :: Lens' a b
@@ -4637,11 +7177,21 @@ class HasKmsKeyId a b | a -> b where
 instance HasKmsKeyId a b => HasKmsKeyId (TF.Schema l p a) b where
     kmsKeyId = TF.configuration . kmsKeyId
 
+instance HasKmsKeyId a b => HasKmsKeyId (TF.Ref s a) b where
+    kmsKeyId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . kmsKeyId
+
 class HasKmsMasterKeyId a b | a -> b where
     kmsMasterKeyId :: Lens' a b
 
 instance HasKmsMasterKeyId a b => HasKmsMasterKeyId (TF.Schema l p a) b where
     kmsMasterKeyId = TF.configuration . kmsMasterKeyId
+
+instance HasKmsMasterKeyId a b => HasKmsMasterKeyId (TF.Ref s a) b where
+    kmsMasterKeyId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . kmsMasterKeyId
 
 class HasLagId a b | a -> b where
     lagId :: Lens' a b
@@ -4649,11 +7199,21 @@ class HasLagId a b | a -> b where
 instance HasLagId a b => HasLagId (TF.Schema l p a) b where
     lagId = TF.configuration . lagId
 
+instance HasLagId a b => HasLagId (TF.Ref s a) b where
+    lagId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lagId
+
 class HasLambdaAction a b | a -> b where
     lambdaAction :: Lens' a b
 
 instance HasLambdaAction a b => HasLambdaAction (TF.Schema l p a) b where
     lambdaAction = TF.configuration . lambdaAction
+
+instance HasLambdaAction a b => HasLambdaAction (TF.Ref s a) b where
+    lambdaAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lambdaAction
 
 class HasLambdaConfig a b | a -> b where
     lambdaConfig :: Lens' a b
@@ -4661,11 +7221,21 @@ class HasLambdaConfig a b | a -> b where
 instance HasLambdaConfig a b => HasLambdaConfig (TF.Schema l p a) b where
     lambdaConfig = TF.configuration . lambdaConfig
 
+instance HasLambdaConfig a b => HasLambdaConfig (TF.Ref s a) b where
+    lambdaConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lambdaConfig
+
 class HasLambdaFailureFeedbackRoleArn a b | a -> b where
     lambdaFailureFeedbackRoleArn :: Lens' a b
 
 instance HasLambdaFailureFeedbackRoleArn a b => HasLambdaFailureFeedbackRoleArn (TF.Schema l p a) b where
     lambdaFailureFeedbackRoleArn = TF.configuration . lambdaFailureFeedbackRoleArn
+
+instance HasLambdaFailureFeedbackRoleArn a b => HasLambdaFailureFeedbackRoleArn (TF.Ref s a) b where
+    lambdaFailureFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lambdaFailureFeedbackRoleArn
 
 class HasLambdaFunction a b | a -> b where
     lambdaFunction :: Lens' a b
@@ -4673,11 +7243,21 @@ class HasLambdaFunction a b | a -> b where
 instance HasLambdaFunction a b => HasLambdaFunction (TF.Schema l p a) b where
     lambdaFunction = TF.configuration . lambdaFunction
 
+instance HasLambdaFunction a b => HasLambdaFunction (TF.Ref s a) b where
+    lambdaFunction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lambdaFunction
+
 class HasLambdaSuccessFeedbackRoleArn a b | a -> b where
     lambdaSuccessFeedbackRoleArn :: Lens' a b
 
 instance HasLambdaSuccessFeedbackRoleArn a b => HasLambdaSuccessFeedbackRoleArn (TF.Schema l p a) b where
     lambdaSuccessFeedbackRoleArn = TF.configuration . lambdaSuccessFeedbackRoleArn
+
+instance HasLambdaSuccessFeedbackRoleArn a b => HasLambdaSuccessFeedbackRoleArn (TF.Ref s a) b where
+    lambdaSuccessFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lambdaSuccessFeedbackRoleArn
 
 class HasLambdaSuccessFeedbackSampleRate a b | a -> b where
     lambdaSuccessFeedbackSampleRate :: Lens' a b
@@ -4685,11 +7265,21 @@ class HasLambdaSuccessFeedbackSampleRate a b | a -> b where
 instance HasLambdaSuccessFeedbackSampleRate a b => HasLambdaSuccessFeedbackSampleRate (TF.Schema l p a) b where
     lambdaSuccessFeedbackSampleRate = TF.configuration . lambdaSuccessFeedbackSampleRate
 
+instance HasLambdaSuccessFeedbackSampleRate a b => HasLambdaSuccessFeedbackSampleRate (TF.Ref s a) b where
+    lambdaSuccessFeedbackSampleRate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lambdaSuccessFeedbackSampleRate
+
 class HasLatencyRoutingPolicy a b | a -> b where
     latencyRoutingPolicy :: Lens' a b
 
 instance HasLatencyRoutingPolicy a b => HasLatencyRoutingPolicy (TF.Schema l p a) b where
     latencyRoutingPolicy = TF.configuration . latencyRoutingPolicy
+
+instance HasLatencyRoutingPolicy a b => HasLatencyRoutingPolicy (TF.Ref s a) b where
+    latencyRoutingPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . latencyRoutingPolicy
 
 class HasLatest a b | a -> b where
     latest :: Lens' a b
@@ -4697,11 +7287,21 @@ class HasLatest a b | a -> b where
 instance HasLatest a b => HasLatest (TF.Schema l p a) b where
     latest = TF.configuration . latest
 
+instance HasLatest a b => HasLatest (TF.Ref s a) b where
+    latest =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . latest
+
 class HasLaunchConfiguration a b | a -> b where
     launchConfiguration :: Lens' a b
 
 instance HasLaunchConfiguration a b => HasLaunchConfiguration (TF.Schema l p a) b where
     launchConfiguration = TF.configuration . launchConfiguration
+
+instance HasLaunchConfiguration a b => HasLaunchConfiguration (TF.Ref s a) b where
+    launchConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . launchConfiguration
 
 class HasLaunchGroup a b | a -> b where
     launchGroup :: Lens' a b
@@ -4709,11 +7309,21 @@ class HasLaunchGroup a b | a -> b where
 instance HasLaunchGroup a b => HasLaunchGroup (TF.Schema l p a) b where
     launchGroup = TF.configuration . launchGroup
 
+instance HasLaunchGroup a b => HasLaunchGroup (TF.Ref s a) b where
+    launchGroup =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . launchGroup
+
 class HasLaunchSpecification a b | a -> b where
     launchSpecification :: Lens' a b
 
 instance HasLaunchSpecification a b => HasLaunchSpecification (TF.Schema l p a) b where
     launchSpecification = TF.configuration . launchSpecification
+
+instance HasLaunchSpecification a b => HasLaunchSpecification (TF.Ref s a) b where
+    launchSpecification =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . launchSpecification
 
 class HasLaunchType a b | a -> b where
     launchType :: Lens' a b
@@ -4721,11 +7331,21 @@ class HasLaunchType a b | a -> b where
 instance HasLaunchType a b => HasLaunchType (TF.Schema l p a) b where
     launchType = TF.configuration . launchType
 
+instance HasLaunchType a b => HasLaunchType (TF.Ref s a) b where
+    launchType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . launchType
+
 class HasLayerIds a b | a -> b where
     layerIds :: Lens' a b
 
 instance HasLayerIds a b => HasLayerIds (TF.Schema l p a) b where
     layerIds = TF.configuration . layerIds
+
+instance HasLayerIds a b => HasLayerIds (TF.Ref s a) b where
+    layerIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . layerIds
 
 class HasLbPort a b | a -> b where
     lbPort :: Lens' a b
@@ -4733,11 +7353,21 @@ class HasLbPort a b | a -> b where
 instance HasLbPort a b => HasLbPort (TF.Schema l p a) b where
     lbPort = TF.configuration . lbPort
 
+instance HasLbPort a b => HasLbPort (TF.Ref s a) b where
+    lbPort =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lbPort
+
 class HasLevel a b | a -> b where
     level :: Lens' a b
 
 instance HasLevel a b => HasLevel (TF.Schema l p a) b where
     level = TF.configuration . level
+
+instance HasLevel a b => HasLevel (TF.Ref s a) b where
+    level =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . level
 
 class HasLicenseModel a b | a -> b where
     licenseModel :: Lens' a b
@@ -4745,11 +7375,21 @@ class HasLicenseModel a b | a -> b where
 instance HasLicenseModel a b => HasLicenseModel (TF.Schema l p a) b where
     licenseModel = TF.configuration . licenseModel
 
+instance HasLicenseModel a b => HasLicenseModel (TF.Ref s a) b where
+    licenseModel =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . licenseModel
+
 class HasLifecycleRule a b | a -> b where
     lifecycleRule :: Lens' a b
 
 instance HasLifecycleRule a b => HasLifecycleRule (TF.Schema l p a) b where
     lifecycleRule = TF.configuration . lifecycleRule
+
+instance HasLifecycleRule a b => HasLifecycleRule (TF.Ref s a) b where
+    lifecycleRule =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lifecycleRule
 
 class HasLifecycleTransition a b | a -> b where
     lifecycleTransition :: Lens' a b
@@ -4757,11 +7397,21 @@ class HasLifecycleTransition a b | a -> b where
 instance HasLifecycleTransition a b => HasLifecycleTransition (TF.Schema l p a) b where
     lifecycleTransition = TF.configuration . lifecycleTransition
 
+instance HasLifecycleTransition a b => HasLifecycleTransition (TF.Ref s a) b where
+    lifecycleTransition =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . lifecycleTransition
+
 class HasListener a b | a -> b where
     listener :: Lens' a b
 
 instance HasListener a b => HasListener (TF.Schema l p a) b where
     listener = TF.configuration . listener
+
+instance HasListener a b => HasListener (TF.Ref s a) b where
+    listener =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . listener
 
 class HasListenerArn a b | a -> b where
     listenerArn :: Lens' a b
@@ -4769,11 +7419,21 @@ class HasListenerArn a b | a -> b where
 instance HasListenerArn a b => HasListenerArn (TF.Schema l p a) b where
     listenerArn = TF.configuration . listenerArn
 
+instance HasListenerArn a b => HasListenerArn (TF.Ref s a) b where
+    listenerArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . listenerArn
+
 class HasLoadBalancer a b | a -> b where
     loadBalancer :: Lens' a b
 
 instance HasLoadBalancer a b => HasLoadBalancer (TF.Schema l p a) b where
     loadBalancer = TF.configuration . loadBalancer
+
+instance HasLoadBalancer a b => HasLoadBalancer (TF.Ref s a) b where
+    loadBalancer =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loadBalancer
 
 class HasLoadBalancerArn a b | a -> b where
     loadBalancerArn :: Lens' a b
@@ -4781,11 +7441,21 @@ class HasLoadBalancerArn a b | a -> b where
 instance HasLoadBalancerArn a b => HasLoadBalancerArn (TF.Schema l p a) b where
     loadBalancerArn = TF.configuration . loadBalancerArn
 
+instance HasLoadBalancerArn a b => HasLoadBalancerArn (TF.Ref s a) b where
+    loadBalancerArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loadBalancerArn
+
 class HasLoadBalancerInfo a b | a -> b where
     loadBalancerInfo :: Lens' a b
 
 instance HasLoadBalancerInfo a b => HasLoadBalancerInfo (TF.Schema l p a) b where
     loadBalancerInfo = TF.configuration . loadBalancerInfo
+
+instance HasLoadBalancerInfo a b => HasLoadBalancerInfo (TF.Ref s a) b where
+    loadBalancerInfo =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loadBalancerInfo
 
 class HasLoadBalancerName a b | a -> b where
     loadBalancerName :: Lens' a b
@@ -4793,11 +7463,21 @@ class HasLoadBalancerName a b | a -> b where
 instance HasLoadBalancerName a b => HasLoadBalancerName (TF.Schema l p a) b where
     loadBalancerName = TF.configuration . loadBalancerName
 
+instance HasLoadBalancerName a b => HasLoadBalancerName (TF.Ref s a) b where
+    loadBalancerName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loadBalancerName
+
 class HasLoadBalancerPort a b | a -> b where
     loadBalancerPort :: Lens' a b
 
 instance HasLoadBalancerPort a b => HasLoadBalancerPort (TF.Schema l p a) b where
     loadBalancerPort = TF.configuration . loadBalancerPort
+
+instance HasLoadBalancerPort a b => HasLoadBalancerPort (TF.Ref s a) b where
+    loadBalancerPort =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loadBalancerPort
 
 class HasLoadBalancerType a b | a -> b where
     loadBalancerType :: Lens' a b
@@ -4805,11 +7485,21 @@ class HasLoadBalancerType a b | a -> b where
 instance HasLoadBalancerType a b => HasLoadBalancerType (TF.Schema l p a) b where
     loadBalancerType = TF.configuration . loadBalancerType
 
+instance HasLoadBalancerType a b => HasLoadBalancerType (TF.Ref s a) b where
+    loadBalancerType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loadBalancerType
+
 class HasLoadBalancers a b | a -> b where
     loadBalancers :: Lens' a b
 
 instance HasLoadBalancers a b => HasLoadBalancers (TF.Schema l p a) b where
     loadBalancers = TF.configuration . loadBalancers
+
+instance HasLoadBalancers a b => HasLoadBalancers (TF.Ref s a) b where
+    loadBalancers =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loadBalancers
 
 class HasLocalSecondaryIndex a b | a -> b where
     localSecondaryIndex :: Lens' a b
@@ -4817,11 +7507,21 @@ class HasLocalSecondaryIndex a b | a -> b where
 instance HasLocalSecondaryIndex a b => HasLocalSecondaryIndex (TF.Schema l p a) b where
     localSecondaryIndex = TF.configuration . localSecondaryIndex
 
+instance HasLocalSecondaryIndex a b => HasLocalSecondaryIndex (TF.Ref s a) b where
+    localSecondaryIndex =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . localSecondaryIndex
+
 class HasLocation a b | a -> b where
     location :: Lens' a b
 
 instance HasLocation a b => HasLocation (TF.Schema l p a) b where
     location = TF.configuration . location
+
+instance HasLocation a b => HasLocation (TF.Ref s a) b where
+    location =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . location
 
 class HasLocationUri a b | a -> b where
     locationUri :: Lens' a b
@@ -4829,11 +7529,21 @@ class HasLocationUri a b | a -> b where
 instance HasLocationUri a b => HasLocationUri (TF.Schema l p a) b where
     locationUri = TF.configuration . locationUri
 
+instance HasLocationUri a b => HasLocationUri (TF.Ref s a) b where
+    locationUri =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . locationUri
+
 class HasLogGroupName a b | a -> b where
     logGroupName :: Lens' a b
 
 instance HasLogGroupName a b => HasLogGroupName (TF.Schema l p a) b where
     logGroupName = TF.configuration . logGroupName
+
+instance HasLogGroupName a b => HasLogGroupName (TF.Ref s a) b where
+    logGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . logGroupName
 
 class HasLogPublishingOptions a b | a -> b where
     logPublishingOptions :: Lens' a b
@@ -4841,11 +7551,21 @@ class HasLogPublishingOptions a b | a -> b where
 instance HasLogPublishingOptions a b => HasLogPublishingOptions (TF.Schema l p a) b where
     logPublishingOptions = TF.configuration . logPublishingOptions
 
+instance HasLogPublishingOptions a b => HasLogPublishingOptions (TF.Ref s a) b where
+    logPublishingOptions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . logPublishingOptions
+
 class HasLogUri a b | a -> b where
     logUri :: Lens' a b
 
 instance HasLogUri a b => HasLogUri (TF.Schema l p a) b where
     logUri = TF.configuration . logUri
+
+instance HasLogUri a b => HasLogUri (TF.Ref s a) b where
+    logUri =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . logUri
 
 class HasLogging a b | a -> b where
     logging :: Lens' a b
@@ -4853,11 +7573,21 @@ class HasLogging a b | a -> b where
 instance HasLogging a b => HasLogging (TF.Schema l p a) b where
     logging = TF.configuration . logging
 
+instance HasLogging a b => HasLogging (TF.Ref s a) b where
+    logging =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . logging
+
 class HasLoggingConfig a b | a -> b where
     loggingConfig :: Lens' a b
 
 instance HasLoggingConfig a b => HasLoggingConfig (TF.Schema l p a) b where
     loggingConfig = TF.configuration . loggingConfig
+
+instance HasLoggingConfig a b => HasLoggingConfig (TF.Ref s a) b where
+    loggingConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loggingConfig
 
 class HasLoggingInfo a b | a -> b where
     loggingInfo :: Lens' a b
@@ -4865,11 +7595,21 @@ class HasLoggingInfo a b | a -> b where
 instance HasLoggingInfo a b => HasLoggingInfo (TF.Schema l p a) b where
     loggingInfo = TF.configuration . loggingInfo
 
+instance HasLoggingInfo a b => HasLoggingInfo (TF.Ref s a) b where
+    loggingInfo =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . loggingInfo
+
 class HasLogoutUrls a b | a -> b where
     logoutUrls :: Lens' a b
 
 instance HasLogoutUrls a b => HasLogoutUrls (TF.Schema l p a) b where
     logoutUrls = TF.configuration . logoutUrls
+
+instance HasLogoutUrls a b => HasLogoutUrls (TF.Ref s a) b where
+    logoutUrls =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . logoutUrls
 
 class HasMailFromDomain a b | a -> b where
     mailFromDomain :: Lens' a b
@@ -4877,11 +7617,21 @@ class HasMailFromDomain a b | a -> b where
 instance HasMailFromDomain a b => HasMailFromDomain (TF.Schema l p a) b where
     mailFromDomain = TF.configuration . mailFromDomain
 
+instance HasMailFromDomain a b => HasMailFromDomain (TF.Ref s a) b where
+    mailFromDomain =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . mailFromDomain
+
 class HasMaintenanceWindow a b | a -> b where
     maintenanceWindow :: Lens' a b
 
 instance HasMaintenanceWindow a b => HasMaintenanceWindow (TF.Schema l p a) b where
     maintenanceWindow = TF.configuration . maintenanceWindow
+
+instance HasMaintenanceWindow a b => HasMaintenanceWindow (TF.Ref s a) b where
+    maintenanceWindow =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maintenanceWindow
 
 class HasMaintenanceWindowStartTime a b | a -> b where
     maintenanceWindowStartTime :: Lens' a b
@@ -4889,11 +7639,21 @@ class HasMaintenanceWindowStartTime a b | a -> b where
 instance HasMaintenanceWindowStartTime a b => HasMaintenanceWindowStartTime (TF.Schema l p a) b where
     maintenanceWindowStartTime = TF.configuration . maintenanceWindowStartTime
 
+instance HasMaintenanceWindowStartTime a b => HasMaintenanceWindowStartTime (TF.Ref s a) b where
+    maintenanceWindowStartTime =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maintenanceWindowStartTime
+
 class HasMajorEngineVersion a b | a -> b where
     majorEngineVersion :: Lens' a b
 
 instance HasMajorEngineVersion a b => HasMajorEngineVersion (TF.Schema l p a) b where
     majorEngineVersion = TF.configuration . majorEngineVersion
+
+instance HasMajorEngineVersion a b => HasMajorEngineVersion (TF.Ref s a) b where
+    majorEngineVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . majorEngineVersion
 
 class HasManageBerkshelf a b | a -> b where
     manageBerkshelf :: Lens' a b
@@ -4901,11 +7661,21 @@ class HasManageBerkshelf a b | a -> b where
 instance HasManageBerkshelf a b => HasManageBerkshelf (TF.Schema l p a) b where
     manageBerkshelf = TF.configuration . manageBerkshelf
 
+instance HasManageBerkshelf a b => HasManageBerkshelf (TF.Ref s a) b where
+    manageBerkshelf =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . manageBerkshelf
+
 class HasManageBundler a b | a -> b where
     manageBundler :: Lens' a b
 
 instance HasManageBundler a b => HasManageBundler (TF.Schema l p a) b where
     manageBundler = TF.configuration . manageBundler
+
+instance HasManageBundler a b => HasManageBundler (TF.Ref s a) b where
+    manageBundler =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . manageBundler
 
 class HasMapPublicIpOnLaunch a b | a -> b where
     mapPublicIpOnLaunch :: Lens' a b
@@ -4913,11 +7683,21 @@ class HasMapPublicIpOnLaunch a b | a -> b where
 instance HasMapPublicIpOnLaunch a b => HasMapPublicIpOnLaunch (TF.Schema l p a) b where
     mapPublicIpOnLaunch = TF.configuration . mapPublicIpOnLaunch
 
+instance HasMapPublicIpOnLaunch a b => HasMapPublicIpOnLaunch (TF.Ref s a) b where
+    mapPublicIpOnLaunch =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . mapPublicIpOnLaunch
+
 class HasMasterInstanceType a b | a -> b where
     masterInstanceType :: Lens' a b
 
 instance HasMasterInstanceType a b => HasMasterInstanceType (TF.Schema l p a) b where
     masterInstanceType = TF.configuration . masterInstanceType
+
+instance HasMasterInstanceType a b => HasMasterInstanceType (TF.Ref s a) b where
+    masterInstanceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . masterInstanceType
 
 class HasMasterPassword a b | a -> b where
     masterPassword :: Lens' a b
@@ -4925,11 +7705,21 @@ class HasMasterPassword a b | a -> b where
 instance HasMasterPassword a b => HasMasterPassword (TF.Schema l p a) b where
     masterPassword = TF.configuration . masterPassword
 
+instance HasMasterPassword a b => HasMasterPassword (TF.Ref s a) b where
+    masterPassword =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . masterPassword
+
 class HasMasterUsername a b | a -> b where
     masterUsername :: Lens' a b
 
 instance HasMasterUsername a b => HasMasterUsername (TF.Schema l p a) b where
     masterUsername = TF.configuration . masterUsername
+
+instance HasMasterUsername a b => HasMasterUsername (TF.Ref s a) b where
+    masterUsername =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . masterUsername
 
 class HasMatchingTypes a b | a -> b where
     matchingTypes :: Lens' a b
@@ -4937,11 +7727,21 @@ class HasMatchingTypes a b | a -> b where
 instance HasMatchingTypes a b => HasMatchingTypes (TF.Schema l p a) b where
     matchingTypes = TF.configuration . matchingTypes
 
+instance HasMatchingTypes a b => HasMatchingTypes (TF.Ref s a) b where
+    matchingTypes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . matchingTypes
+
 class HasMaxCapacity a b | a -> b where
     maxCapacity :: Lens' a b
 
 instance HasMaxCapacity a b => HasMaxCapacity (TF.Schema l p a) b where
     maxCapacity = TF.configuration . maxCapacity
+
+instance HasMaxCapacity a b => HasMaxCapacity (TF.Ref s a) b where
+    maxCapacity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maxCapacity
 
 class HasMaxConcurrency a b | a -> b where
     maxConcurrency :: Lens' a b
@@ -4949,11 +7749,21 @@ class HasMaxConcurrency a b | a -> b where
 instance HasMaxConcurrency a b => HasMaxConcurrency (TF.Schema l p a) b where
     maxConcurrency = TF.configuration . maxConcurrency
 
+instance HasMaxConcurrency a b => HasMaxConcurrency (TF.Ref s a) b where
+    maxConcurrency =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maxConcurrency
+
 class HasMaxErrors a b | a -> b where
     maxErrors :: Lens' a b
 
 instance HasMaxErrors a b => HasMaxErrors (TF.Schema l p a) b where
     maxErrors = TF.configuration . maxErrors
+
+instance HasMaxErrors a b => HasMaxErrors (TF.Ref s a) b where
+    maxErrors =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maxErrors
 
 class HasMaxMessageSize a b | a -> b where
     maxMessageSize :: Lens' a b
@@ -4961,11 +7771,21 @@ class HasMaxMessageSize a b | a -> b where
 instance HasMaxMessageSize a b => HasMaxMessageSize (TF.Schema l p a) b where
     maxMessageSize = TF.configuration . maxMessageSize
 
+instance HasMaxMessageSize a b => HasMaxMessageSize (TF.Ref s a) b where
+    maxMessageSize =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maxMessageSize
+
 class HasMaxPasswordAge a b | a -> b where
     maxPasswordAge :: Lens' a b
 
 instance HasMaxPasswordAge a b => HasMaxPasswordAge (TF.Schema l p a) b where
     maxPasswordAge = TF.configuration . maxPasswordAge
+
+instance HasMaxPasswordAge a b => HasMaxPasswordAge (TF.Ref s a) b where
+    maxPasswordAge =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maxPasswordAge
 
 class HasMaxSize a b | a -> b where
     maxSize :: Lens' a b
@@ -4973,11 +7793,21 @@ class HasMaxSize a b | a -> b where
 instance HasMaxSize a b => HasMaxSize (TF.Schema l p a) b where
     maxSize = TF.configuration . maxSize
 
+instance HasMaxSize a b => HasMaxSize (TF.Ref s a) b where
+    maxSize =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maxSize
+
 class HasMaximumExecutionFrequency a b | a -> b where
     maximumExecutionFrequency :: Lens' a b
 
 instance HasMaximumExecutionFrequency a b => HasMaximumExecutionFrequency (TF.Schema l p a) b where
     maximumExecutionFrequency = TF.configuration . maximumExecutionFrequency
+
+instance HasMaximumExecutionFrequency a b => HasMaximumExecutionFrequency (TF.Ref s a) b where
+    maximumExecutionFrequency =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . maximumExecutionFrequency
 
 class HasMeasureLatency a b | a -> b where
     measureLatency :: Lens' a b
@@ -4985,11 +7815,21 @@ class HasMeasureLatency a b | a -> b where
 instance HasMeasureLatency a b => HasMeasureLatency (TF.Schema l p a) b where
     measureLatency = TF.configuration . measureLatency
 
+instance HasMeasureLatency a b => HasMeasureLatency (TF.Ref s a) b where
+    measureLatency =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . measureLatency
+
 class HasMemorySize a b | a -> b where
     memorySize :: Lens' a b
 
 instance HasMemorySize a b => HasMemorySize (TF.Schema l p a) b where
     memorySize = TF.configuration . memorySize
+
+instance HasMemorySize a b => HasMemorySize (TF.Ref s a) b where
+    memorySize =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . memorySize
 
 class HasMessageRetentionSeconds a b | a -> b where
     messageRetentionSeconds :: Lens' a b
@@ -4997,11 +7837,21 @@ class HasMessageRetentionSeconds a b | a -> b where
 instance HasMessageRetentionSeconds a b => HasMessageRetentionSeconds (TF.Schema l p a) b where
     messageRetentionSeconds = TF.configuration . messageRetentionSeconds
 
+instance HasMessageRetentionSeconds a b => HasMessageRetentionSeconds (TF.Ref s a) b where
+    messageRetentionSeconds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . messageRetentionSeconds
+
 class HasMethodPath a b | a -> b where
     methodPath :: Lens' a b
 
 instance HasMethodPath a b => HasMethodPath (TF.Schema l p a) b where
     methodPath = TF.configuration . methodPath
+
+instance HasMethodPath a b => HasMethodPath (TF.Ref s a) b where
+    methodPath =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . methodPath
 
 class HasMetricGroups a b | a -> b where
     metricGroups :: Lens' a b
@@ -5009,11 +7859,21 @@ class HasMetricGroups a b | a -> b where
 instance HasMetricGroups a b => HasMetricGroups (TF.Schema l p a) b where
     metricGroups = TF.configuration . metricGroups
 
+instance HasMetricGroups a b => HasMetricGroups (TF.Ref s a) b where
+    metricGroups =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . metricGroups
+
 class HasMetricName a b | a -> b where
     metricName :: Lens' a b
 
 instance HasMetricName a b => HasMetricName (TF.Schema l p a) b where
     metricName = TF.configuration . metricName
+
+instance HasMetricName a b => HasMetricName (TF.Ref s a) b where
+    metricName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . metricName
 
 class HasMetricTransformation a b | a -> b where
     metricTransformation :: Lens' a b
@@ -5021,11 +7881,21 @@ class HasMetricTransformation a b | a -> b where
 instance HasMetricTransformation a b => HasMetricTransformation (TF.Schema l p a) b where
     metricTransformation = TF.configuration . metricTransformation
 
+instance HasMetricTransformation a b => HasMetricTransformation (TF.Ref s a) b where
+    metricTransformation =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . metricTransformation
+
 class HasMetricsGranularity a b | a -> b where
     metricsGranularity :: Lens' a b
 
 instance HasMetricsGranularity a b => HasMetricsGranularity (TF.Schema l p a) b where
     metricsGranularity = TF.configuration . metricsGranularity
+
+instance HasMetricsGranularity a b => HasMetricsGranularity (TF.Ref s a) b where
+    metricsGranularity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . metricsGranularity
 
 class HasMfaConfiguration a b | a -> b where
     mfaConfiguration :: Lens' a b
@@ -5033,11 +7903,21 @@ class HasMfaConfiguration a b | a -> b where
 instance HasMfaConfiguration a b => HasMfaConfiguration (TF.Schema l p a) b where
     mfaConfiguration = TF.configuration . mfaConfiguration
 
+instance HasMfaConfiguration a b => HasMfaConfiguration (TF.Ref s a) b where
+    mfaConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . mfaConfiguration
+
 class HasMigrationType a b | a -> b where
     migrationType :: Lens' a b
 
 instance HasMigrationType a b => HasMigrationType (TF.Schema l p a) b where
     migrationType = TF.configuration . migrationType
+
+instance HasMigrationType a b => HasMigrationType (TF.Ref s a) b where
+    migrationType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . migrationType
 
 class HasMinCapacity a b | a -> b where
     minCapacity :: Lens' a b
@@ -5045,11 +7925,21 @@ class HasMinCapacity a b | a -> b where
 instance HasMinCapacity a b => HasMinCapacity (TF.Schema l p a) b where
     minCapacity = TF.configuration . minCapacity
 
+instance HasMinCapacity a b => HasMinCapacity (TF.Ref s a) b where
+    minCapacity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . minCapacity
+
 class HasMinElbCapacity a b | a -> b where
     minElbCapacity :: Lens' a b
 
 instance HasMinElbCapacity a b => HasMinElbCapacity (TF.Schema l p a) b where
     minElbCapacity = TF.configuration . minElbCapacity
+
+instance HasMinElbCapacity a b => HasMinElbCapacity (TF.Ref s a) b where
+    minElbCapacity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . minElbCapacity
 
 class HasMinSize a b | a -> b where
     minSize :: Lens' a b
@@ -5057,11 +7947,21 @@ class HasMinSize a b | a -> b where
 instance HasMinSize a b => HasMinSize (TF.Schema l p a) b where
     minSize = TF.configuration . minSize
 
+instance HasMinSize a b => HasMinSize (TF.Ref s a) b where
+    minSize =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . minSize
+
 class HasMinimumHealthyHosts a b | a -> b where
     minimumHealthyHosts :: Lens' a b
 
 instance HasMinimumHealthyHosts a b => HasMinimumHealthyHosts (TF.Schema l p a) b where
     minimumHealthyHosts = TF.configuration . minimumHealthyHosts
+
+instance HasMinimumHealthyHosts a b => HasMinimumHealthyHosts (TF.Ref s a) b where
+    minimumHealthyHosts =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . minimumHealthyHosts
 
 class HasMinimumPasswordLength a b | a -> b where
     minimumPasswordLength :: Lens' a b
@@ -5069,11 +7969,21 @@ class HasMinimumPasswordLength a b | a -> b where
 instance HasMinimumPasswordLength a b => HasMinimumPasswordLength (TF.Schema l p a) b where
     minimumPasswordLength = TF.configuration . minimumPasswordLength
 
+instance HasMinimumPasswordLength a b => HasMinimumPasswordLength (TF.Ref s a) b where
+    minimumPasswordLength =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . minimumPasswordLength
+
 class HasMonitoring a b | a -> b where
     monitoring :: Lens' a b
 
 instance HasMonitoring a b => HasMonitoring (TF.Schema l p a) b where
     monitoring = TF.configuration . monitoring
+
+instance HasMonitoring a b => HasMonitoring (TF.Ref s a) b where
+    monitoring =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . monitoring
 
 class HasMonitoringInterval a b | a -> b where
     monitoringInterval :: Lens' a b
@@ -5081,11 +7991,21 @@ class HasMonitoringInterval a b | a -> b where
 instance HasMonitoringInterval a b => HasMonitoringInterval (TF.Schema l p a) b where
     monitoringInterval = TF.configuration . monitoringInterval
 
+instance HasMonitoringInterval a b => HasMonitoringInterval (TF.Ref s a) b where
+    monitoringInterval =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . monitoringInterval
+
 class HasMonitoringRoleArn a b | a -> b where
     monitoringRoleArn :: Lens' a b
 
 instance HasMonitoringRoleArn a b => HasMonitoringRoleArn (TF.Schema l p a) b where
     monitoringRoleArn = TF.configuration . monitoringRoleArn
+
+instance HasMonitoringRoleArn a b => HasMonitoringRoleArn (TF.Ref s a) b where
+    monitoringRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . monitoringRoleArn
 
 class HasMostRecent a b | a -> b where
     mostRecent :: Lens' a b
@@ -5093,11 +8013,21 @@ class HasMostRecent a b | a -> b where
 instance HasMostRecent a b => HasMostRecent (TF.Schema l p a) b where
     mostRecent = TF.configuration . mostRecent
 
+instance HasMostRecent a b => HasMostRecent (TF.Ref s a) b where
+    mostRecent =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . mostRecent
+
 class HasMountTargetId a b | a -> b where
     mountTargetId :: Lens' a b
 
 instance HasMountTargetId a b => HasMountTargetId (TF.Schema l p a) b where
     mountTargetId = TF.configuration . mountTargetId
+
+instance HasMountTargetId a b => HasMountTargetId (TF.Ref s a) b where
+    mountTargetId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . mountTargetId
 
 class HasMultiAz a b | a -> b where
     multiAz :: Lens' a b
@@ -5105,11 +8035,21 @@ class HasMultiAz a b | a -> b where
 instance HasMultiAz a b => HasMultiAz (TF.Schema l p a) b where
     multiAz = TF.configuration . multiAz
 
+instance HasMultiAz a b => HasMultiAz (TF.Ref s a) b where
+    multiAz =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . multiAz
+
 class HasMultivalueAnswerRoutingPolicy a b | a -> b where
     multivalueAnswerRoutingPolicy :: Lens' a b
 
 instance HasMultivalueAnswerRoutingPolicy a b => HasMultivalueAnswerRoutingPolicy (TF.Schema l p a) b where
     multivalueAnswerRoutingPolicy = TF.configuration . multivalueAnswerRoutingPolicy
+
+instance HasMultivalueAnswerRoutingPolicy a b => HasMultivalueAnswerRoutingPolicy (TF.Ref s a) b where
+    multivalueAnswerRoutingPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . multivalueAnswerRoutingPolicy
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -5117,11 +8057,21 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
+instance HasName a b => HasName (TF.Ref s a) b where
+    name =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . name
+
 class HasNamePrefix a b | a -> b where
     namePrefix :: Lens' a b
 
 instance HasNamePrefix a b => HasNamePrefix (TF.Schema l p a) b where
     namePrefix = TF.configuration . namePrefix
+
+instance HasNamePrefix a b => HasNamePrefix (TF.Ref s a) b where
+    namePrefix =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . namePrefix
 
 class HasNameRegex a b | a -> b where
     nameRegex :: Lens' a b
@@ -5129,11 +8079,21 @@ class HasNameRegex a b | a -> b where
 instance HasNameRegex a b => HasNameRegex (TF.Schema l p a) b where
     nameRegex = TF.configuration . nameRegex
 
+instance HasNameRegex a b => HasNameRegex (TF.Ref s a) b where
+    nameRegex =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . nameRegex
+
 class HasNamespace a b | a -> b where
     namespace :: Lens' a b
 
 instance HasNamespace a b => HasNamespace (TF.Schema l p a) b where
     namespace = TF.configuration . namespace
+
+instance HasNamespace a b => HasNamespace (TF.Ref s a) b where
+    namespace =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . namespace
 
 class HasNatGatewayId a b | a -> b where
     natGatewayId :: Lens' a b
@@ -5141,11 +8101,21 @@ class HasNatGatewayId a b | a -> b where
 instance HasNatGatewayId a b => HasNatGatewayId (TF.Schema l p a) b where
     natGatewayId = TF.configuration . natGatewayId
 
+instance HasNatGatewayId a b => HasNatGatewayId (TF.Ref s a) b where
+    natGatewayId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . natGatewayId
+
 class HasNetbiosNameServers a b | a -> b where
     netbiosNameServers :: Lens' a b
 
 instance HasNetbiosNameServers a b => HasNetbiosNameServers (TF.Schema l p a) b where
     netbiosNameServers = TF.configuration . netbiosNameServers
+
+instance HasNetbiosNameServers a b => HasNetbiosNameServers (TF.Ref s a) b where
+    netbiosNameServers =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . netbiosNameServers
 
 class HasNetbiosNodeType a b | a -> b where
     netbiosNodeType :: Lens' a b
@@ -5153,11 +8123,21 @@ class HasNetbiosNodeType a b | a -> b where
 instance HasNetbiosNodeType a b => HasNetbiosNodeType (TF.Schema l p a) b where
     netbiosNodeType = TF.configuration . netbiosNodeType
 
+instance HasNetbiosNodeType a b => HasNetbiosNodeType (TF.Ref s a) b where
+    netbiosNodeType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . netbiosNodeType
+
 class HasNetworkAclId a b | a -> b where
     networkAclId :: Lens' a b
 
 instance HasNetworkAclId a b => HasNetworkAclId (TF.Schema l p a) b where
     networkAclId = TF.configuration . networkAclId
+
+instance HasNetworkAclId a b => HasNetworkAclId (TF.Ref s a) b where
+    networkAclId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . networkAclId
 
 class HasNetworkConfiguration a b | a -> b where
     networkConfiguration :: Lens' a b
@@ -5165,11 +8145,21 @@ class HasNetworkConfiguration a b | a -> b where
 instance HasNetworkConfiguration a b => HasNetworkConfiguration (TF.Schema l p a) b where
     networkConfiguration = TF.configuration . networkConfiguration
 
+instance HasNetworkConfiguration a b => HasNetworkConfiguration (TF.Ref s a) b where
+    networkConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . networkConfiguration
+
 class HasNetworkInterface a b | a -> b where
     networkInterface :: Lens' a b
 
 instance HasNetworkInterface a b => HasNetworkInterface (TF.Schema l p a) b where
     networkInterface = TF.configuration . networkInterface
+
+instance HasNetworkInterface a b => HasNetworkInterface (TF.Ref s a) b where
+    networkInterface =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . networkInterface
 
 class HasNetworkInterfaceId a b | a -> b where
     networkInterfaceId :: Lens' a b
@@ -5177,11 +8167,21 @@ class HasNetworkInterfaceId a b | a -> b where
 instance HasNetworkInterfaceId a b => HasNetworkInterfaceId (TF.Schema l p a) b where
     networkInterfaceId = TF.configuration . networkInterfaceId
 
+instance HasNetworkInterfaceId a b => HasNetworkInterfaceId (TF.Ref s a) b where
+    networkInterfaceId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . networkInterfaceId
+
 class HasNetworkLoadBalancerArns a b | a -> b where
     networkLoadBalancerArns :: Lens' a b
 
 instance HasNetworkLoadBalancerArns a b => HasNetworkLoadBalancerArns (TF.Schema l p a) b where
     networkLoadBalancerArns = TF.configuration . networkLoadBalancerArns
+
+instance HasNetworkLoadBalancerArns a b => HasNetworkLoadBalancerArns (TF.Ref s a) b where
+    networkLoadBalancerArns =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . networkLoadBalancerArns
 
 class HasNewGameSessionProtectionPolicy a b | a -> b where
     newGameSessionProtectionPolicy :: Lens' a b
@@ -5189,11 +8189,21 @@ class HasNewGameSessionProtectionPolicy a b | a -> b where
 instance HasNewGameSessionProtectionPolicy a b => HasNewGameSessionProtectionPolicy (TF.Schema l p a) b where
     newGameSessionProtectionPolicy = TF.configuration . newGameSessionProtectionPolicy
 
+instance HasNewGameSessionProtectionPolicy a b => HasNewGameSessionProtectionPolicy (TF.Ref s a) b where
+    newGameSessionProtectionPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . newGameSessionProtectionPolicy
+
 class HasNodeType a b | a -> b where
     nodeType :: Lens' a b
 
 instance HasNodeType a b => HasNodeType (TF.Schema l p a) b where
     nodeType = TF.configuration . nodeType
+
+instance HasNodeType a b => HasNodeType (TF.Ref s a) b where
+    nodeType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . nodeType
 
 class HasNodejsVersion a b | a -> b where
     nodejsVersion :: Lens' a b
@@ -5201,11 +8211,21 @@ class HasNodejsVersion a b | a -> b where
 instance HasNodejsVersion a b => HasNodejsVersion (TF.Schema l p a) b where
     nodejsVersion = TF.configuration . nodejsVersion
 
+instance HasNodejsVersion a b => HasNodejsVersion (TF.Ref s a) b where
+    nodejsVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . nodejsVersion
+
 class HasNotification a b | a -> b where
     notification :: Lens' a b
 
 instance HasNotification a b => HasNotification (TF.Schema l p a) b where
     notification = TF.configuration . notification
+
+instance HasNotification a b => HasNotification (TF.Ref s a) b where
+    notification =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . notification
 
 class HasNotificationArns a b | a -> b where
     notificationArns :: Lens' a b
@@ -5213,11 +8233,21 @@ class HasNotificationArns a b | a -> b where
 instance HasNotificationArns a b => HasNotificationArns (TF.Schema l p a) b where
     notificationArns = TF.configuration . notificationArns
 
+instance HasNotificationArns a b => HasNotificationArns (TF.Ref s a) b where
+    notificationArns =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . notificationArns
+
 class HasNotificationMetadata a b | a -> b where
     notificationMetadata :: Lens' a b
 
 instance HasNotificationMetadata a b => HasNotificationMetadata (TF.Schema l p a) b where
     notificationMetadata = TF.configuration . notificationMetadata
+
+instance HasNotificationMetadata a b => HasNotificationMetadata (TF.Ref s a) b where
+    notificationMetadata =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . notificationMetadata
 
 class HasNotificationTargetArn a b | a -> b where
     notificationTargetArn :: Lens' a b
@@ -5225,11 +8255,21 @@ class HasNotificationTargetArn a b | a -> b where
 instance HasNotificationTargetArn a b => HasNotificationTargetArn (TF.Schema l p a) b where
     notificationTargetArn = TF.configuration . notificationTargetArn
 
+instance HasNotificationTargetArn a b => HasNotificationTargetArn (TF.Ref s a) b where
+    notificationTargetArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . notificationTargetArn
+
 class HasNotificationTopicArn a b | a -> b where
     notificationTopicArn :: Lens' a b
 
 instance HasNotificationTopicArn a b => HasNotificationTopicArn (TF.Schema l p a) b where
     notificationTopicArn = TF.configuration . notificationTopicArn
+
+instance HasNotificationTopicArn a b => HasNotificationTopicArn (TF.Ref s a) b where
+    notificationTopicArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . notificationTopicArn
 
 class HasNotifications a b | a -> b where
     notifications :: Lens' a b
@@ -5237,11 +8277,21 @@ class HasNotifications a b | a -> b where
 instance HasNotifications a b => HasNotifications (TF.Schema l p a) b where
     notifications = TF.configuration . notifications
 
+instance HasNotifications a b => HasNotifications (TF.Ref s a) b where
+    notifications =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . notifications
+
 class HasNtpServers a b | a -> b where
     ntpServers :: Lens' a b
 
 instance HasNtpServers a b => HasNtpServers (TF.Schema l p a) b where
     ntpServers = TF.configuration . ntpServers
+
+instance HasNtpServers a b => HasNtpServers (TF.Ref s a) b where
+    ntpServers =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ntpServers
 
 class HasNumCacheNodes a b | a -> b where
     numCacheNodes :: Lens' a b
@@ -5249,11 +8299,21 @@ class HasNumCacheNodes a b | a -> b where
 instance HasNumCacheNodes a b => HasNumCacheNodes (TF.Schema l p a) b where
     numCacheNodes = TF.configuration . numCacheNodes
 
+instance HasNumCacheNodes a b => HasNumCacheNodes (TF.Ref s a) b where
+    numCacheNodes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . numCacheNodes
+
 class HasNumberCacheClusters a b | a -> b where
     numberCacheClusters :: Lens' a b
 
 instance HasNumberCacheClusters a b => HasNumberCacheClusters (TF.Schema l p a) b where
     numberCacheClusters = TF.configuration . numberCacheClusters
+
+instance HasNumberCacheClusters a b => HasNumberCacheClusters (TF.Ref s a) b where
+    numberCacheClusters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . numberCacheClusters
 
 class HasNumberOfConnections a b | a -> b where
     numberOfConnections :: Lens' a b
@@ -5261,11 +8321,21 @@ class HasNumberOfConnections a b | a -> b where
 instance HasNumberOfConnections a b => HasNumberOfConnections (TF.Schema l p a) b where
     numberOfConnections = TF.configuration . numberOfConnections
 
+instance HasNumberOfConnections a b => HasNumberOfConnections (TF.Ref s a) b where
+    numberOfConnections =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . numberOfConnections
+
 class HasNumberOfNodes a b | a -> b where
     numberOfNodes :: Lens' a b
 
 instance HasNumberOfNodes a b => HasNumberOfNodes (TF.Schema l p a) b where
     numberOfNodes = TF.configuration . numberOfNodes
+
+instance HasNumberOfNodes a b => HasNumberOfNodes (TF.Ref s a) b where
+    numberOfNodes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . numberOfNodes
 
 class HasOkActions a b | a -> b where
     okActions :: Lens' a b
@@ -5273,11 +8343,21 @@ class HasOkActions a b | a -> b where
 instance HasOkActions a b => HasOkActions (TF.Schema l p a) b where
     okActions = TF.configuration . okActions
 
+instance HasOkActions a b => HasOkActions (TF.Ref s a) b where
+    okActions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . okActions
+
 class HasOnFailure a b | a -> b where
     onFailure :: Lens' a b
 
 instance HasOnFailure a b => HasOnFailure (TF.Schema l p a) b where
     onFailure = TF.configuration . onFailure
+
+instance HasOnFailure a b => HasOnFailure (TF.Ref s a) b where
+    onFailure =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . onFailure
 
 class HasOnPremisesInstanceTagFilter a b | a -> b where
     onPremisesInstanceTagFilter :: Lens' a b
@@ -5285,11 +8365,21 @@ class HasOnPremisesInstanceTagFilter a b | a -> b where
 instance HasOnPremisesInstanceTagFilter a b => HasOnPremisesInstanceTagFilter (TF.Schema l p a) b where
     onPremisesInstanceTagFilter = TF.configuration . onPremisesInstanceTagFilter
 
+instance HasOnPremisesInstanceTagFilter a b => HasOnPremisesInstanceTagFilter (TF.Ref s a) b where
+    onPremisesInstanceTagFilter =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . onPremisesInstanceTagFilter
+
 class HasOpenidConnectProviderArns a b | a -> b where
     openidConnectProviderArns :: Lens' a b
 
 instance HasOpenidConnectProviderArns a b => HasOpenidConnectProviderArns (TF.Schema l p a) b where
     openidConnectProviderArns = TF.configuration . openidConnectProviderArns
+
+instance HasOpenidConnectProviderArns a b => HasOpenidConnectProviderArns (TF.Ref s a) b where
+    openidConnectProviderArns =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . openidConnectProviderArns
 
 class HasOperatingSystem a b | a -> b where
     operatingSystem :: Lens' a b
@@ -5297,11 +8387,21 @@ class HasOperatingSystem a b | a -> b where
 instance HasOperatingSystem a b => HasOperatingSystem (TF.Schema l p a) b where
     operatingSystem = TF.configuration . operatingSystem
 
+instance HasOperatingSystem a b => HasOperatingSystem (TF.Ref s a) b where
+    operatingSystem =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . operatingSystem
+
 class HasOption a b | a -> b where
     option :: Lens' a b
 
 instance HasOption a b => HasOption (TF.Schema l p a) b where
     option = TF.configuration . option
+
+instance HasOption a b => HasOption (TF.Ref s a) b where
+    option =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . option
 
 class HasOptionGroupDescription a b | a -> b where
     optionGroupDescription :: Lens' a b
@@ -5309,11 +8409,21 @@ class HasOptionGroupDescription a b | a -> b where
 instance HasOptionGroupDescription a b => HasOptionGroupDescription (TF.Schema l p a) b where
     optionGroupDescription = TF.configuration . optionGroupDescription
 
+instance HasOptionGroupDescription a b => HasOptionGroupDescription (TF.Ref s a) b where
+    optionGroupDescription =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . optionGroupDescription
+
 class HasOptionGroupName a b | a -> b where
     optionGroupName :: Lens' a b
 
 instance HasOptionGroupName a b => HasOptionGroupName (TF.Schema l p a) b where
     optionGroupName = TF.configuration . optionGroupName
+
+instance HasOptionGroupName a b => HasOptionGroupName (TF.Ref s a) b where
+    optionGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . optionGroupName
 
 class HasOrigin a b | a -> b where
     origin :: Lens' a b
@@ -5321,11 +8431,21 @@ class HasOrigin a b | a -> b where
 instance HasOrigin a b => HasOrigin (TF.Schema l p a) b where
     origin = TF.configuration . origin
 
+instance HasOrigin a b => HasOrigin (TF.Ref s a) b where
+    origin =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . origin
+
 class HasOs a b | a -> b where
     os :: Lens' a b
 
 instance HasOs a b => HasOs (TF.Schema l p a) b where
     os = TF.configuration . os
+
+instance HasOs a b => HasOs (TF.Ref s a) b where
+    os =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . os
 
 class HasOutputBucket a b | a -> b where
     outputBucket :: Lens' a b
@@ -5333,11 +8453,21 @@ class HasOutputBucket a b | a -> b where
 instance HasOutputBucket a b => HasOutputBucket (TF.Schema l p a) b where
     outputBucket = TF.configuration . outputBucket
 
+instance HasOutputBucket a b => HasOutputBucket (TF.Ref s a) b where
+    outputBucket =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . outputBucket
+
 class HasOutputLocation a b | a -> b where
     outputLocation :: Lens' a b
 
 instance HasOutputLocation a b => HasOutputLocation (TF.Schema l p a) b where
     outputLocation = TF.configuration . outputLocation
+
+instance HasOutputLocation a b => HasOutputLocation (TF.Ref s a) b where
+    outputLocation =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . outputLocation
 
 class HasOverrideJson a b | a -> b where
     overrideJson :: Lens' a b
@@ -5345,11 +8475,21 @@ class HasOverrideJson a b | a -> b where
 instance HasOverrideJson a b => HasOverrideJson (TF.Schema l p a) b where
     overrideJson = TF.configuration . overrideJson
 
+instance HasOverrideJson a b => HasOverrideJson (TF.Ref s a) b where
+    overrideJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . overrideJson
+
 class HasOverwrite a b | a -> b where
     overwrite :: Lens' a b
 
 instance HasOverwrite a b => HasOverwrite (TF.Schema l p a) b where
     overwrite = TF.configuration . overwrite
+
+instance HasOverwrite a b => HasOverwrite (TF.Ref s a) b where
+    overwrite =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . overwrite
 
 class HasOwnerAccount a b | a -> b where
     ownerAccount :: Lens' a b
@@ -5357,11 +8497,21 @@ class HasOwnerAccount a b | a -> b where
 instance HasOwnerAccount a b => HasOwnerAccount (TF.Schema l p a) b where
     ownerAccount = TF.configuration . ownerAccount
 
+instance HasOwnerAccount a b => HasOwnerAccount (TF.Ref s a) b where
+    ownerAccount =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ownerAccount
+
 class HasOwnerArn a b | a -> b where
     ownerArn :: Lens' a b
 
 instance HasOwnerArn a b => HasOwnerArn (TF.Schema l p a) b where
     ownerArn = TF.configuration . ownerArn
+
+instance HasOwnerArn a b => HasOwnerArn (TF.Ref s a) b where
+    ownerArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ownerArn
 
 class HasOwnerId a b | a -> b where
     ownerId :: Lens' a b
@@ -5369,11 +8519,21 @@ class HasOwnerId a b | a -> b where
 instance HasOwnerId a b => HasOwnerId (TF.Schema l p a) b where
     ownerId = TF.configuration . ownerId
 
+instance HasOwnerId a b => HasOwnerId (TF.Ref s a) b where
+    ownerId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ownerId
+
 class HasOwnerInformation a b | a -> b where
     ownerInformation :: Lens' a b
 
 instance HasOwnerInformation a b => HasOwnerInformation (TF.Schema l p a) b where
     ownerInformation = TF.configuration . ownerInformation
+
+instance HasOwnerInformation a b => HasOwnerInformation (TF.Ref s a) b where
+    ownerInformation =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ownerInformation
 
 class HasOwners a b | a -> b where
     owners :: Lens' a b
@@ -5381,11 +8541,21 @@ class HasOwners a b | a -> b where
 instance HasOwners a b => HasOwners (TF.Schema l p a) b where
     owners = TF.configuration . owners
 
+instance HasOwners a b => HasOwners (TF.Ref s a) b where
+    owners =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . owners
+
 class HasParameter a b | a -> b where
     parameter :: Lens' a b
 
 instance HasParameter a b => HasParameter (TF.Schema l p a) b where
     parameter = TF.configuration . parameter
+
+instance HasParameter a b => HasParameter (TF.Ref s a) b where
+    parameter =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . parameter
 
 class HasParameterGroupName a b | a -> b where
     parameterGroupName :: Lens' a b
@@ -5393,11 +8563,21 @@ class HasParameterGroupName a b | a -> b where
 instance HasParameterGroupName a b => HasParameterGroupName (TF.Schema l p a) b where
     parameterGroupName = TF.configuration . parameterGroupName
 
+instance HasParameterGroupName a b => HasParameterGroupName (TF.Ref s a) b where
+    parameterGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . parameterGroupName
+
 class HasParameters a b | a -> b where
     parameters :: Lens' a b
 
 instance HasParameters a b => HasParameters (TF.Schema l p a) b where
     parameters = TF.configuration . parameters
+
+instance HasParameters a b => HasParameters (TF.Ref s a) b where
+    parameters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . parameters
 
 class HasParentId a b | a -> b where
     parentId :: Lens' a b
@@ -5405,11 +8585,21 @@ class HasParentId a b | a -> b where
 instance HasParentId a b => HasParentId (TF.Schema l p a) b where
     parentId = TF.configuration . parentId
 
+instance HasParentId a b => HasParentId (TF.Ref s a) b where
+    parentId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . parentId
+
 class HasPassengerVersion a b | a -> b where
     passengerVersion :: Lens' a b
 
 instance HasPassengerVersion a b => HasPassengerVersion (TF.Schema l p a) b where
     passengerVersion = TF.configuration . passengerVersion
+
+instance HasPassengerVersion a b => HasPassengerVersion (TF.Ref s a) b where
+    passengerVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . passengerVersion
 
 class HasPassthroughBehavior a b | a -> b where
     passthroughBehavior :: Lens' a b
@@ -5417,11 +8607,21 @@ class HasPassthroughBehavior a b | a -> b where
 instance HasPassthroughBehavior a b => HasPassthroughBehavior (TF.Schema l p a) b where
     passthroughBehavior = TF.configuration . passthroughBehavior
 
+instance HasPassthroughBehavior a b => HasPassthroughBehavior (TF.Ref s a) b where
+    passthroughBehavior =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . passthroughBehavior
+
 class HasPassword a b | a -> b where
     password :: Lens' a b
 
 instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
+
+instance HasPassword a b => HasPassword (TF.Ref s a) b where
+    password =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . password
 
 class HasPasswordLength a b | a -> b where
     passwordLength :: Lens' a b
@@ -5429,11 +8629,21 @@ class HasPasswordLength a b | a -> b where
 instance HasPasswordLength a b => HasPasswordLength (TF.Schema l p a) b where
     passwordLength = TF.configuration . passwordLength
 
+instance HasPasswordLength a b => HasPasswordLength (TF.Ref s a) b where
+    passwordLength =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . passwordLength
+
 class HasPasswordPolicy a b | a -> b where
     passwordPolicy :: Lens' a b
 
 instance HasPasswordPolicy a b => HasPasswordPolicy (TF.Schema l p a) b where
     passwordPolicy = TF.configuration . passwordPolicy
+
+instance HasPasswordPolicy a b => HasPasswordPolicy (TF.Ref s a) b where
+    passwordPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . passwordPolicy
 
 class HasPasswordResetRequired a b | a -> b where
     passwordResetRequired :: Lens' a b
@@ -5441,11 +8651,21 @@ class HasPasswordResetRequired a b | a -> b where
 instance HasPasswordResetRequired a b => HasPasswordResetRequired (TF.Schema l p a) b where
     passwordResetRequired = TF.configuration . passwordResetRequired
 
+instance HasPasswordResetRequired a b => HasPasswordResetRequired (TF.Ref s a) b where
+    passwordResetRequired =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . passwordResetRequired
+
 class HasPasswordReusePrevention a b | a -> b where
     passwordReusePrevention :: Lens' a b
 
 instance HasPasswordReusePrevention a b => HasPasswordReusePrevention (TF.Schema l p a) b where
     passwordReusePrevention = TF.configuration . passwordReusePrevention
+
+instance HasPasswordReusePrevention a b => HasPasswordReusePrevention (TF.Ref s a) b where
+    passwordReusePrevention =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . passwordReusePrevention
 
 class HasPatchGroup a b | a -> b where
     patchGroup :: Lens' a b
@@ -5453,11 +8673,21 @@ class HasPatchGroup a b | a -> b where
 instance HasPatchGroup a b => HasPatchGroup (TF.Schema l p a) b where
     patchGroup = TF.configuration . patchGroup
 
+instance HasPatchGroup a b => HasPatchGroup (TF.Ref s a) b where
+    patchGroup =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . patchGroup
+
 class HasPath a b | a -> b where
     path :: Lens' a b
 
 instance HasPath a b => HasPath (TF.Schema l p a) b where
     path = TF.configuration . path
+
+instance HasPath a b => HasPath (TF.Ref s a) b where
+    path =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . path
 
 class HasPathPart a b | a -> b where
     pathPart :: Lens' a b
@@ -5465,11 +8695,21 @@ class HasPathPart a b | a -> b where
 instance HasPathPart a b => HasPathPart (TF.Schema l p a) b where
     pathPart = TF.configuration . pathPart
 
+instance HasPathPart a b => HasPathPart (TF.Ref s a) b where
+    pathPart =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . pathPart
+
 class HasPattern a b | a -> b where
     pattern :: Lens' a b
 
 instance HasPattern a b => HasPattern (TF.Schema l p a) b where
     pattern = TF.configuration . pattern
+
+instance HasPattern a b => HasPattern (TF.Ref s a) b where
+    pattern =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . pattern
 
 class HasPeerCidrBlock a b | a -> b where
     peerCidrBlock :: Lens' a b
@@ -5477,11 +8717,21 @@ class HasPeerCidrBlock a b | a -> b where
 instance HasPeerCidrBlock a b => HasPeerCidrBlock (TF.Schema l p a) b where
     peerCidrBlock = TF.configuration . peerCidrBlock
 
+instance HasPeerCidrBlock a b => HasPeerCidrBlock (TF.Ref s a) b where
+    peerCidrBlock =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . peerCidrBlock
+
 class HasPeerOwnerId a b | a -> b where
     peerOwnerId :: Lens' a b
 
 instance HasPeerOwnerId a b => HasPeerOwnerId (TF.Schema l p a) b where
     peerOwnerId = TF.configuration . peerOwnerId
+
+instance HasPeerOwnerId a b => HasPeerOwnerId (TF.Ref s a) b where
+    peerOwnerId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . peerOwnerId
 
 class HasPeerRegion a b | a -> b where
     peerRegion :: Lens' a b
@@ -5489,11 +8739,21 @@ class HasPeerRegion a b | a -> b where
 instance HasPeerRegion a b => HasPeerRegion (TF.Schema l p a) b where
     peerRegion = TF.configuration . peerRegion
 
+instance HasPeerRegion a b => HasPeerRegion (TF.Ref s a) b where
+    peerRegion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . peerRegion
+
 class HasPeerVpcId a b | a -> b where
     peerVpcId :: Lens' a b
 
 instance HasPeerVpcId a b => HasPeerVpcId (TF.Schema l p a) b where
     peerVpcId = TF.configuration . peerVpcId
+
+instance HasPeerVpcId a b => HasPeerVpcId (TF.Ref s a) b where
+    peerVpcId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . peerVpcId
 
 class HasPerformanceInsightsEnabled a b | a -> b where
     performanceInsightsEnabled :: Lens' a b
@@ -5501,11 +8761,21 @@ class HasPerformanceInsightsEnabled a b | a -> b where
 instance HasPerformanceInsightsEnabled a b => HasPerformanceInsightsEnabled (TF.Schema l p a) b where
     performanceInsightsEnabled = TF.configuration . performanceInsightsEnabled
 
+instance HasPerformanceInsightsEnabled a b => HasPerformanceInsightsEnabled (TF.Ref s a) b where
+    performanceInsightsEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . performanceInsightsEnabled
+
 class HasPerformanceInsightsKmsKeyId a b | a -> b where
     performanceInsightsKmsKeyId :: Lens' a b
 
 instance HasPerformanceInsightsKmsKeyId a b => HasPerformanceInsightsKmsKeyId (TF.Schema l p a) b where
     performanceInsightsKmsKeyId = TF.configuration . performanceInsightsKmsKeyId
+
+instance HasPerformanceInsightsKmsKeyId a b => HasPerformanceInsightsKmsKeyId (TF.Ref s a) b where
+    performanceInsightsKmsKeyId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . performanceInsightsKmsKeyId
 
 class HasPerformanceMode a b | a -> b where
     performanceMode :: Lens' a b
@@ -5513,11 +8783,21 @@ class HasPerformanceMode a b | a -> b where
 instance HasPerformanceMode a b => HasPerformanceMode (TF.Schema l p a) b where
     performanceMode = TF.configuration . performanceMode
 
+instance HasPerformanceMode a b => HasPerformanceMode (TF.Ref s a) b where
+    performanceMode =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . performanceMode
+
 class HasPeriod a b | a -> b where
     period :: Lens' a b
 
 instance HasPeriod a b => HasPeriod (TF.Schema l p a) b where
     period = TF.configuration . period
+
+instance HasPeriod a b => HasPeriod (TF.Ref s a) b where
+    period =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . period
 
 class HasPermissions a b | a -> b where
     permissions :: Lens' a b
@@ -5525,11 +8805,21 @@ class HasPermissions a b | a -> b where
 instance HasPermissions a b => HasPermissions (TF.Schema l p a) b where
     permissions = TF.configuration . permissions
 
+instance HasPermissions a b => HasPermissions (TF.Ref s a) b where
+    permissions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . permissions
+
 class HasPgpKey a b | a -> b where
     pgpKey :: Lens' a b
 
 instance HasPgpKey a b => HasPgpKey (TF.Schema l p a) b where
     pgpKey = TF.configuration . pgpKey
+
+instance HasPgpKey a b => HasPgpKey (TF.Ref s a) b where
+    pgpKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . pgpKey
 
 class HasPlacementConstraints a b | a -> b where
     placementConstraints :: Lens' a b
@@ -5537,11 +8827,21 @@ class HasPlacementConstraints a b | a -> b where
 instance HasPlacementConstraints a b => HasPlacementConstraints (TF.Schema l p a) b where
     placementConstraints = TF.configuration . placementConstraints
 
+instance HasPlacementConstraints a b => HasPlacementConstraints (TF.Ref s a) b where
+    placementConstraints =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . placementConstraints
+
 class HasPlacementGroup a b | a -> b where
     placementGroup :: Lens' a b
 
 instance HasPlacementGroup a b => HasPlacementGroup (TF.Schema l p a) b where
     placementGroup = TF.configuration . placementGroup
+
+instance HasPlacementGroup a b => HasPlacementGroup (TF.Ref s a) b where
+    placementGroup =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . placementGroup
 
 class HasPlacementStrategy a b | a -> b where
     placementStrategy :: Lens' a b
@@ -5549,11 +8849,21 @@ class HasPlacementStrategy a b | a -> b where
 instance HasPlacementStrategy a b => HasPlacementStrategy (TF.Schema l p a) b where
     placementStrategy = TF.configuration . placementStrategy
 
+instance HasPlacementStrategy a b => HasPlacementStrategy (TF.Ref s a) b where
+    placementStrategy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . placementStrategy
+
 class HasPlacementTenancy a b | a -> b where
     placementTenancy :: Lens' a b
 
 instance HasPlacementTenancy a b => HasPlacementTenancy (TF.Schema l p a) b where
     placementTenancy = TF.configuration . placementTenancy
+
+instance HasPlacementTenancy a b => HasPlacementTenancy (TF.Ref s a) b where
+    placementTenancy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . placementTenancy
 
 class HasPlaintext a b | a -> b where
     plaintext :: Lens' a b
@@ -5561,11 +8871,21 @@ class HasPlaintext a b | a -> b where
 instance HasPlaintext a b => HasPlaintext (TF.Schema l p a) b where
     plaintext = TF.configuration . plaintext
 
+instance HasPlaintext a b => HasPlaintext (TF.Ref s a) b where
+    plaintext =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . plaintext
+
 class HasPlatform a b | a -> b where
     platform :: Lens' a b
 
 instance HasPlatform a b => HasPlatform (TF.Schema l p a) b where
     platform = TF.configuration . platform
+
+instance HasPlatform a b => HasPlatform (TF.Ref s a) b where
+    platform =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . platform
 
 class HasPlatformCredential a b | a -> b where
     platformCredential :: Lens' a b
@@ -5573,11 +8893,21 @@ class HasPlatformCredential a b | a -> b where
 instance HasPlatformCredential a b => HasPlatformCredential (TF.Schema l p a) b where
     platformCredential = TF.configuration . platformCredential
 
+instance HasPlatformCredential a b => HasPlatformCredential (TF.Ref s a) b where
+    platformCredential =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . platformCredential
+
 class HasPlatformPrincipal a b | a -> b where
     platformPrincipal :: Lens' a b
 
 instance HasPlatformPrincipal a b => HasPlatformPrincipal (TF.Schema l p a) b where
     platformPrincipal = TF.configuration . platformPrincipal
+
+instance HasPlatformPrincipal a b => HasPlatformPrincipal (TF.Ref s a) b where
+    platformPrincipal =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . platformPrincipal
 
 class HasPolicy a b | a -> b where
     policy :: Lens' a b
@@ -5585,11 +8915,21 @@ class HasPolicy a b | a -> b where
 instance HasPolicy a b => HasPolicy (TF.Schema l p a) b where
     policy = TF.configuration . policy
 
+instance HasPolicy a b => HasPolicy (TF.Ref s a) b where
+    policy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policy
+
 class HasPolicyArn a b | a -> b where
     policyArn :: Lens' a b
 
 instance HasPolicyArn a b => HasPolicyArn (TF.Schema l p a) b where
     policyArn = TF.configuration . policyArn
+
+instance HasPolicyArn a b => HasPolicyArn (TF.Ref s a) b where
+    policyArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyArn
 
 class HasPolicyAttribute a b | a -> b where
     policyAttribute :: Lens' a b
@@ -5597,11 +8937,21 @@ class HasPolicyAttribute a b | a -> b where
 instance HasPolicyAttribute a b => HasPolicyAttribute (TF.Schema l p a) b where
     policyAttribute = TF.configuration . policyAttribute
 
+instance HasPolicyAttribute a b => HasPolicyAttribute (TF.Ref s a) b where
+    policyAttribute =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyAttribute
+
 class HasPolicyBody a b | a -> b where
     policyBody :: Lens' a b
 
 instance HasPolicyBody a b => HasPolicyBody (TF.Schema l p a) b where
     policyBody = TF.configuration . policyBody
+
+instance HasPolicyBody a b => HasPolicyBody (TF.Ref s a) b where
+    policyBody =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyBody
 
 class HasPolicyDocument a b | a -> b where
     policyDocument :: Lens' a b
@@ -5609,11 +8959,21 @@ class HasPolicyDocument a b | a -> b where
 instance HasPolicyDocument a b => HasPolicyDocument (TF.Schema l p a) b where
     policyDocument = TF.configuration . policyDocument
 
+instance HasPolicyDocument a b => HasPolicyDocument (TF.Ref s a) b where
+    policyDocument =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyDocument
+
 class HasPolicyId a b | a -> b where
     policyId :: Lens' a b
 
 instance HasPolicyId a b => HasPolicyId (TF.Schema l p a) b where
     policyId = TF.configuration . policyId
+
+instance HasPolicyId a b => HasPolicyId (TF.Ref s a) b where
+    policyId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyId
 
 class HasPolicyName a b | a -> b where
     policyName :: Lens' a b
@@ -5621,11 +8981,21 @@ class HasPolicyName a b | a -> b where
 instance HasPolicyName a b => HasPolicyName (TF.Schema l p a) b where
     policyName = TF.configuration . policyName
 
+instance HasPolicyName a b => HasPolicyName (TF.Ref s a) b where
+    policyName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyName
+
 class HasPolicyNames a b | a -> b where
     policyNames :: Lens' a b
 
 instance HasPolicyNames a b => HasPolicyNames (TF.Schema l p a) b where
     policyNames = TF.configuration . policyNames
+
+instance HasPolicyNames a b => HasPolicyNames (TF.Ref s a) b where
+    policyNames =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyNames
 
 class HasPolicyType a b | a -> b where
     policyType :: Lens' a b
@@ -5633,11 +9003,21 @@ class HasPolicyType a b | a -> b where
 instance HasPolicyType a b => HasPolicyType (TF.Schema l p a) b where
     policyType = TF.configuration . policyType
 
+instance HasPolicyType a b => HasPolicyType (TF.Ref s a) b where
+    policyType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyType
+
 class HasPolicyTypeName a b | a -> b where
     policyTypeName :: Lens' a b
 
 instance HasPolicyTypeName a b => HasPolicyTypeName (TF.Schema l p a) b where
     policyTypeName = TF.configuration . policyTypeName
+
+instance HasPolicyTypeName a b => HasPolicyTypeName (TF.Ref s a) b where
+    policyTypeName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyTypeName
 
 class HasPolicyUrl a b | a -> b where
     policyUrl :: Lens' a b
@@ -5645,11 +9025,21 @@ class HasPolicyUrl a b | a -> b where
 instance HasPolicyUrl a b => HasPolicyUrl (TF.Schema l p a) b where
     policyUrl = TF.configuration . policyUrl
 
+instance HasPolicyUrl a b => HasPolicyUrl (TF.Ref s a) b where
+    policyUrl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . policyUrl
+
 class HasPollInterval a b | a -> b where
     pollInterval :: Lens' a b
 
 instance HasPollInterval a b => HasPollInterval (TF.Schema l p a) b where
     pollInterval = TF.configuration . pollInterval
+
+instance HasPollInterval a b => HasPollInterval (TF.Ref s a) b where
+    pollInterval =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . pollInterval
 
 class HasPort a b | a -> b where
     port :: Lens' a b
@@ -5657,11 +9047,21 @@ class HasPort a b | a -> b where
 instance HasPort a b => HasPort (TF.Schema l p a) b where
     port = TF.configuration . port
 
+instance HasPort a b => HasPort (TF.Ref s a) b where
+    port =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . port
+
 class HasPrecedence a b | a -> b where
     precedence :: Lens' a b
 
 instance HasPrecedence a b => HasPrecedence (TF.Schema l p a) b where
     precedence = TF.configuration . precedence
+
+instance HasPrecedence a b => HasPrecedence (TF.Ref s a) b where
+    precedence =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . precedence
 
 class HasPredicates a b | a -> b where
     predicates :: Lens' a b
@@ -5669,11 +9069,21 @@ class HasPredicates a b | a -> b where
 instance HasPredicates a b => HasPredicates (TF.Schema l p a) b where
     predicates = TF.configuration . predicates
 
+instance HasPredicates a b => HasPredicates (TF.Ref s a) b where
+    predicates =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . predicates
+
 class HasPreferredBackupWindow a b | a -> b where
     preferredBackupWindow :: Lens' a b
 
 instance HasPreferredBackupWindow a b => HasPreferredBackupWindow (TF.Schema l p a) b where
     preferredBackupWindow = TF.configuration . preferredBackupWindow
+
+instance HasPreferredBackupWindow a b => HasPreferredBackupWindow (TF.Ref s a) b where
+    preferredBackupWindow =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . preferredBackupWindow
 
 class HasPreferredMaintenanceWindow a b | a -> b where
     preferredMaintenanceWindow :: Lens' a b
@@ -5681,11 +9091,21 @@ class HasPreferredMaintenanceWindow a b | a -> b where
 instance HasPreferredMaintenanceWindow a b => HasPreferredMaintenanceWindow (TF.Schema l p a) b where
     preferredMaintenanceWindow = TF.configuration . preferredMaintenanceWindow
 
+instance HasPreferredMaintenanceWindow a b => HasPreferredMaintenanceWindow (TF.Ref s a) b where
+    preferredMaintenanceWindow =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . preferredMaintenanceWindow
+
 class HasPrefix a b | a -> b where
     prefix :: Lens' a b
 
 instance HasPrefix a b => HasPrefix (TF.Schema l p a) b where
     prefix = TF.configuration . prefix
+
+instance HasPrefix a b => HasPrefix (TF.Ref s a) b where
+    prefix =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . prefix
 
 class HasPrefixListId a b | a -> b where
     prefixListId :: Lens' a b
@@ -5693,11 +9113,21 @@ class HasPrefixListId a b | a -> b where
 instance HasPrefixListId a b => HasPrefixListId (TF.Schema l p a) b where
     prefixListId = TF.configuration . prefixListId
 
+instance HasPrefixListId a b => HasPrefixListId (TF.Ref s a) b where
+    prefixListId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . prefixListId
+
 class HasPrefixListIds a b | a -> b where
     prefixListIds :: Lens' a b
 
 instance HasPrefixListIds a b => HasPrefixListIds (TF.Schema l p a) b where
     prefixListIds = TF.configuration . prefixListIds
+
+instance HasPrefixListIds a b => HasPrefixListIds (TF.Ref s a) b where
+    prefixListIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . prefixListIds
 
 class HasPriceClass a b | a -> b where
     priceClass :: Lens' a b
@@ -5705,11 +9135,21 @@ class HasPriceClass a b | a -> b where
 instance HasPriceClass a b => HasPriceClass (TF.Schema l p a) b where
     priceClass = TF.configuration . priceClass
 
+instance HasPriceClass a b => HasPriceClass (TF.Ref s a) b where
+    priceClass =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . priceClass
+
 class HasPrincipal a b | a -> b where
     principal :: Lens' a b
 
 instance HasPrincipal a b => HasPrincipal (TF.Schema l p a) b where
     principal = TF.configuration . principal
+
+instance HasPrincipal a b => HasPrincipal (TF.Ref s a) b where
+    principal =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . principal
 
 class HasPrincipalArn a b | a -> b where
     principalArn :: Lens' a b
@@ -5717,11 +9157,21 @@ class HasPrincipalArn a b | a -> b where
 instance HasPrincipalArn a b => HasPrincipalArn (TF.Schema l p a) b where
     principalArn = TF.configuration . principalArn
 
+instance HasPrincipalArn a b => HasPrincipalArn (TF.Ref s a) b where
+    principalArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . principalArn
+
 class HasPriority a b | a -> b where
     priority :: Lens' a b
 
 instance HasPriority a b => HasPriority (TF.Schema l p a) b where
     priority = TF.configuration . priority
+
+instance HasPriority a b => HasPriority (TF.Ref s a) b where
+    priority =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . priority
 
 class HasPrivateDnsEnabled a b | a -> b where
     privateDnsEnabled :: Lens' a b
@@ -5729,11 +9179,21 @@ class HasPrivateDnsEnabled a b | a -> b where
 instance HasPrivateDnsEnabled a b => HasPrivateDnsEnabled (TF.Schema l p a) b where
     privateDnsEnabled = TF.configuration . privateDnsEnabled
 
+instance HasPrivateDnsEnabled a b => HasPrivateDnsEnabled (TF.Ref s a) b where
+    privateDnsEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . privateDnsEnabled
+
 class HasPrivateIp a b | a -> b where
     privateIp :: Lens' a b
 
 instance HasPrivateIp a b => HasPrivateIp (TF.Schema l p a) b where
     privateIp = TF.configuration . privateIp
+
+instance HasPrivateIp a b => HasPrivateIp (TF.Ref s a) b where
+    privateIp =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . privateIp
 
 class HasPrivateIpAddress a b | a -> b where
     privateIpAddress :: Lens' a b
@@ -5741,11 +9201,21 @@ class HasPrivateIpAddress a b | a -> b where
 instance HasPrivateIpAddress a b => HasPrivateIpAddress (TF.Schema l p a) b where
     privateIpAddress = TF.configuration . privateIpAddress
 
+instance HasPrivateIpAddress a b => HasPrivateIpAddress (TF.Ref s a) b where
+    privateIpAddress =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . privateIpAddress
+
 class HasPrivateIps a b | a -> b where
     privateIps :: Lens' a b
 
 instance HasPrivateIps a b => HasPrivateIps (TF.Schema l p a) b where
     privateIps = TF.configuration . privateIps
+
+instance HasPrivateIps a b => HasPrivateIps (TF.Ref s a) b where
+    privateIps =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . privateIps
 
 class HasPrivateIpsCount a b | a -> b where
     privateIpsCount :: Lens' a b
@@ -5753,11 +9223,21 @@ class HasPrivateIpsCount a b | a -> b where
 instance HasPrivateIpsCount a b => HasPrivateIpsCount (TF.Schema l p a) b where
     privateIpsCount = TF.configuration . privateIpsCount
 
+instance HasPrivateIpsCount a b => HasPrivateIpsCount (TF.Ref s a) b where
+    privateIpsCount =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . privateIpsCount
+
 class HasPrivateKey a b | a -> b where
     privateKey :: Lens' a b
 
 instance HasPrivateKey a b => HasPrivateKey (TF.Schema l p a) b where
     privateKey = TF.configuration . privateKey
+
+instance HasPrivateKey a b => HasPrivateKey (TF.Ref s a) b where
+    privateKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . privateKey
 
 class HasPrivateZone a b | a -> b where
     privateZone :: Lens' a b
@@ -5765,11 +9245,21 @@ class HasPrivateZone a b | a -> b where
 instance HasPrivateZone a b => HasPrivateZone (TF.Schema l p a) b where
     privateZone = TF.configuration . privateZone
 
+instance HasPrivateZone a b => HasPrivateZone (TF.Ref s a) b where
+    privateZone =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . privateZone
+
 class HasProductCode a b | a -> b where
     productCode :: Lens' a b
 
 instance HasProductCode a b => HasProductCode (TF.Schema l p a) b where
     productCode = TF.configuration . productCode
+
+instance HasProductCode a b => HasProductCode (TF.Ref s a) b where
+    productCode =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . productCode
 
 class HasPromotionTier a b | a -> b where
     promotionTier :: Lens' a b
@@ -5777,11 +9267,21 @@ class HasPromotionTier a b | a -> b where
 instance HasPromotionTier a b => HasPromotionTier (TF.Schema l p a) b where
     promotionTier = TF.configuration . promotionTier
 
+instance HasPromotionTier a b => HasPromotionTier (TF.Ref s a) b where
+    promotionTier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . promotionTier
+
 class HasPropagatingVgws a b | a -> b where
     propagatingVgws :: Lens' a b
 
 instance HasPropagatingVgws a b => HasPropagatingVgws (TF.Schema l p a) b where
     propagatingVgws = TF.configuration . propagatingVgws
+
+instance HasPropagatingVgws a b => HasPropagatingVgws (TF.Ref s a) b where
+    propagatingVgws =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . propagatingVgws
 
 class HasProperties a b | a -> b where
     properties :: Lens' a b
@@ -5789,11 +9289,21 @@ class HasProperties a b | a -> b where
 instance HasProperties a b => HasProperties (TF.Schema l p a) b where
     properties = TF.configuration . properties
 
+instance HasProperties a b => HasProperties (TF.Ref s a) b where
+    properties =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . properties
+
 class HasProtectFromScaleIn a b | a -> b where
     protectFromScaleIn :: Lens' a b
 
 instance HasProtectFromScaleIn a b => HasProtectFromScaleIn (TF.Schema l p a) b where
     protectFromScaleIn = TF.configuration . protectFromScaleIn
+
+instance HasProtectFromScaleIn a b => HasProtectFromScaleIn (TF.Ref s a) b where
+    protectFromScaleIn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . protectFromScaleIn
 
 class HasProtocol a b | a -> b where
     protocol :: Lens' a b
@@ -5801,11 +9311,21 @@ class HasProtocol a b | a -> b where
 instance HasProtocol a b => HasProtocol (TF.Schema l p a) b where
     protocol = TF.configuration . protocol
 
+instance HasProtocol a b => HasProtocol (TF.Ref s a) b where
+    protocol =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . protocol
+
 class HasProviderName a b | a -> b where
     providerName :: Lens' a b
 
 instance HasProviderName a b => HasProviderName (TF.Schema l p a) b where
     providerName = TF.configuration . providerName
+
+instance HasProviderName a b => HasProviderName (TF.Ref s a) b where
+    providerName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . providerName
 
 class HasPublicIp a b | a -> b where
     publicIp :: Lens' a b
@@ -5813,11 +9333,21 @@ class HasPublicIp a b | a -> b where
 instance HasPublicIp a b => HasPublicIp (TF.Schema l p a) b where
     publicIp = TF.configuration . publicIp
 
+instance HasPublicIp a b => HasPublicIp (TF.Ref s a) b where
+    publicIp =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . publicIp
+
 class HasPublicKey a b | a -> b where
     publicKey :: Lens' a b
 
 instance HasPublicKey a b => HasPublicKey (TF.Schema l p a) b where
     publicKey = TF.configuration . publicKey
+
+instance HasPublicKey a b => HasPublicKey (TF.Ref s a) b where
+    publicKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . publicKey
 
 class HasPubliclyAccessible a b | a -> b where
     publiclyAccessible :: Lens' a b
@@ -5825,11 +9355,21 @@ class HasPubliclyAccessible a b | a -> b where
 instance HasPubliclyAccessible a b => HasPubliclyAccessible (TF.Schema l p a) b where
     publiclyAccessible = TF.configuration . publiclyAccessible
 
+instance HasPubliclyAccessible a b => HasPubliclyAccessible (TF.Ref s a) b where
+    publiclyAccessible =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . publiclyAccessible
+
 class HasPublish a b | a -> b where
     publish :: Lens' a b
 
 instance HasPublish a b => HasPublish (TF.Schema l p a) b where
     publish = TF.configuration . publish
+
+instance HasPublish a b => HasPublish (TF.Ref s a) b where
+    publish =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . publish
 
 class HasQualifier a b | a -> b where
     qualifier :: Lens' a b
@@ -5837,11 +9377,21 @@ class HasQualifier a b | a -> b where
 instance HasQualifier a b => HasQualifier (TF.Schema l p a) b where
     qualifier = TF.configuration . qualifier
 
+instance HasQualifier a b => HasQualifier (TF.Ref s a) b where
+    qualifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . qualifier
+
 class HasQuery a b | a -> b where
     query :: Lens' a b
 
 instance HasQuery a b => HasQuery (TF.Schema l p a) b where
     query = TF.configuration . query
+
+instance HasQuery a b => HasQuery (TF.Ref s a) b where
+    query =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . query
 
 class HasQueue a b | a -> b where
     queue :: Lens' a b
@@ -5849,11 +9399,21 @@ class HasQueue a b | a -> b where
 instance HasQueue a b => HasQueue (TF.Schema l p a) b where
     queue = TF.configuration . queue
 
+instance HasQueue a b => HasQueue (TF.Ref s a) b where
+    queue =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . queue
+
 class HasQueueUrl a b | a -> b where
     queueUrl :: Lens' a b
 
 instance HasQueueUrl a b => HasQueueUrl (TF.Schema l p a) b where
     queueUrl = TF.configuration . queueUrl
+
+instance HasQueueUrl a b => HasQueueUrl (TF.Ref s a) b where
+    queueUrl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . queueUrl
 
 class HasQuotaSettings a b | a -> b where
     quotaSettings :: Lens' a b
@@ -5861,11 +9421,21 @@ class HasQuotaSettings a b | a -> b where
 instance HasQuotaSettings a b => HasQuotaSettings (TF.Schema l p a) b where
     quotaSettings = TF.configuration . quotaSettings
 
+instance HasQuotaSettings a b => HasQuotaSettings (TF.Ref s a) b where
+    quotaSettings =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . quotaSettings
+
 class HasRailsEnv a b | a -> b where
     railsEnv :: Lens' a b
 
 instance HasRailsEnv a b => HasRailsEnv (TF.Schema l p a) b where
     railsEnv = TF.configuration . railsEnv
+
+instance HasRailsEnv a b => HasRailsEnv (TF.Ref s a) b where
+    railsEnv =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . railsEnv
 
 class HasRangeKey a b | a -> b where
     rangeKey :: Lens' a b
@@ -5873,11 +9443,21 @@ class HasRangeKey a b | a -> b where
 instance HasRangeKey a b => HasRangeKey (TF.Schema l p a) b where
     rangeKey = TF.configuration . rangeKey
 
+instance HasRangeKey a b => HasRangeKey (TF.Ref s a) b where
+    rangeKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rangeKey
+
 class HasRateKey a b | a -> b where
     rateKey :: Lens' a b
 
 instance HasRateKey a b => HasRateKey (TF.Schema l p a) b where
     rateKey = TF.configuration . rateKey
+
+instance HasRateKey a b => HasRateKey (TF.Ref s a) b where
+    rateKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rateKey
 
 class HasRateLimit a b | a -> b where
     rateLimit :: Lens' a b
@@ -5885,11 +9465,21 @@ class HasRateLimit a b | a -> b where
 instance HasRateLimit a b => HasRateLimit (TF.Schema l p a) b where
     rateLimit = TF.configuration . rateLimit
 
+instance HasRateLimit a b => HasRateLimit (TF.Ref s a) b where
+    rateLimit =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rateLimit
+
 class HasRawMessageDelivery a b | a -> b where
     rawMessageDelivery :: Lens' a b
 
 instance HasRawMessageDelivery a b => HasRawMessageDelivery (TF.Schema l p a) b where
     rawMessageDelivery = TF.configuration . rawMessageDelivery
+
+instance HasRawMessageDelivery a b => HasRawMessageDelivery (TF.Ref s a) b where
+    rawMessageDelivery =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rawMessageDelivery
 
 class HasRdsDbInstanceArn a b | a -> b where
     rdsDbInstanceArn :: Lens' a b
@@ -5897,11 +9487,21 @@ class HasRdsDbInstanceArn a b | a -> b where
 instance HasRdsDbInstanceArn a b => HasRdsDbInstanceArn (TF.Schema l p a) b where
     rdsDbInstanceArn = TF.configuration . rdsDbInstanceArn
 
+instance HasRdsDbInstanceArn a b => HasRdsDbInstanceArn (TF.Ref s a) b where
+    rdsDbInstanceArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rdsDbInstanceArn
+
 class HasReadAttributes a b | a -> b where
     readAttributes :: Lens' a b
 
 instance HasReadAttributes a b => HasReadAttributes (TF.Schema l p a) b where
     readAttributes = TF.configuration . readAttributes
+
+instance HasReadAttributes a b => HasReadAttributes (TF.Ref s a) b where
+    readAttributes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . readAttributes
 
 class HasReadCapacity a b | a -> b where
     readCapacity :: Lens' a b
@@ -5909,11 +9509,21 @@ class HasReadCapacity a b | a -> b where
 instance HasReadCapacity a b => HasReadCapacity (TF.Schema l p a) b where
     readCapacity = TF.configuration . readCapacity
 
+instance HasReadCapacity a b => HasReadCapacity (TF.Ref s a) b where
+    readCapacity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . readCapacity
+
 class HasReceiveWaitTimeSeconds a b | a -> b where
     receiveWaitTimeSeconds :: Lens' a b
 
 instance HasReceiveWaitTimeSeconds a b => HasReceiveWaitTimeSeconds (TF.Schema l p a) b where
     receiveWaitTimeSeconds = TF.configuration . receiveWaitTimeSeconds
+
+instance HasReceiveWaitTimeSeconds a b => HasReceiveWaitTimeSeconds (TF.Ref s a) b where
+    receiveWaitTimeSeconds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . receiveWaitTimeSeconds
 
 class HasRecipients a b | a -> b where
     recipients :: Lens' a b
@@ -5921,11 +9531,21 @@ class HasRecipients a b | a -> b where
 instance HasRecipients a b => HasRecipients (TF.Schema l p a) b where
     recipients = TF.configuration . recipients
 
+instance HasRecipients a b => HasRecipients (TF.Ref s a) b where
+    recipients =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . recipients
+
 class HasRecordingGroup a b | a -> b where
     recordingGroup :: Lens' a b
 
 instance HasRecordingGroup a b => HasRecordingGroup (TF.Schema l p a) b where
     recordingGroup = TF.configuration . recordingGroup
+
+instance HasRecordingGroup a b => HasRecordingGroup (TF.Ref s a) b where
+    recordingGroup =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . recordingGroup
 
 class HasRecords a b | a -> b where
     records :: Lens' a b
@@ -5933,11 +9553,21 @@ class HasRecords a b | a -> b where
 instance HasRecords a b => HasRecords (TF.Schema l p a) b where
     records = TF.configuration . records
 
+instance HasRecords a b => HasRecords (TF.Ref s a) b where
+    records =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . records
+
 class HasRecurrence a b | a -> b where
     recurrence :: Lens' a b
 
 instance HasRecurrence a b => HasRecurrence (TF.Schema l p a) b where
     recurrence = TF.configuration . recurrence
+
+instance HasRecurrence a b => HasRecurrence (TF.Ref s a) b where
+    recurrence =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . recurrence
 
 class HasRedrivePolicy a b | a -> b where
     redrivePolicy :: Lens' a b
@@ -5945,11 +9575,21 @@ class HasRedrivePolicy a b | a -> b where
 instance HasRedrivePolicy a b => HasRedrivePolicy (TF.Schema l p a) b where
     redrivePolicy = TF.configuration . redrivePolicy
 
+instance HasRedrivePolicy a b => HasRedrivePolicy (TF.Ref s a) b where
+    redrivePolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . redrivePolicy
+
 class HasRedshiftConfiguration a b | a -> b where
     redshiftConfiguration :: Lens' a b
 
 instance HasRedshiftConfiguration a b => HasRedshiftConfiguration (TF.Schema l p a) b where
     redshiftConfiguration = TF.configuration . redshiftConfiguration
+
+instance HasRedshiftConfiguration a b => HasRedshiftConfiguration (TF.Ref s a) b where
+    redshiftConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . redshiftConfiguration
 
 class HasReferenceName a b | a -> b where
     referenceName :: Lens' a b
@@ -5957,11 +9597,21 @@ class HasReferenceName a b | a -> b where
 instance HasReferenceName a b => HasReferenceName (TF.Schema l p a) b where
     referenceName = TF.configuration . referenceName
 
+instance HasReferenceName a b => HasReferenceName (TF.Ref s a) b where
+    referenceName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . referenceName
+
 class HasRefreshTokenValidity a b | a -> b where
     refreshTokenValidity :: Lens' a b
 
 instance HasRefreshTokenValidity a b => HasRefreshTokenValidity (TF.Schema l p a) b where
     refreshTokenValidity = TF.configuration . refreshTokenValidity
+
+instance HasRefreshTokenValidity a b => HasRefreshTokenValidity (TF.Ref s a) b where
+    refreshTokenValidity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . refreshTokenValidity
 
 class HasRegion a b | a -> b where
     region :: Lens' a b
@@ -5969,11 +9619,21 @@ class HasRegion a b | a -> b where
 instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
 
+instance HasRegion a b => HasRegion (TF.Ref s a) b where
+    region =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . region
+
 class HasRegions a b | a -> b where
     regions :: Lens' a b
 
 instance HasRegions a b => HasRegions (TF.Schema l p a) b where
     regions = TF.configuration . regions
+
+instance HasRegions a b => HasRegions (TF.Ref s a) b where
+    regions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . regions
 
 class HasRegistrationLimit a b | a -> b where
     registrationLimit :: Lens' a b
@@ -5981,11 +9641,21 @@ class HasRegistrationLimit a b | a -> b where
 instance HasRegistrationLimit a b => HasRegistrationLimit (TF.Schema l p a) b where
     registrationLimit = TF.configuration . registrationLimit
 
+instance HasRegistrationLimit a b => HasRegistrationLimit (TF.Ref s a) b where
+    registrationLimit =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . registrationLimit
+
 class HasRejectedPatches a b | a -> b where
     rejectedPatches :: Lens' a b
 
 instance HasRejectedPatches a b => HasRejectedPatches (TF.Schema l p a) b where
     rejectedPatches = TF.configuration . rejectedPatches
+
+instance HasRejectedPatches a b => HasRejectedPatches (TF.Ref s a) b where
+    rejectedPatches =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rejectedPatches
 
 class HasReleaseLabel a b | a -> b where
     releaseLabel :: Lens' a b
@@ -5993,11 +9663,21 @@ class HasReleaseLabel a b | a -> b where
 instance HasReleaseLabel a b => HasReleaseLabel (TF.Schema l p a) b where
     releaseLabel = TF.configuration . releaseLabel
 
+instance HasReleaseLabel a b => HasReleaseLabel (TF.Ref s a) b where
+    releaseLabel =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . releaseLabel
+
 class HasReplaceUnhealthyInstances a b | a -> b where
     replaceUnhealthyInstances :: Lens' a b
 
 instance HasReplaceUnhealthyInstances a b => HasReplaceUnhealthyInstances (TF.Schema l p a) b where
     replaceUnhealthyInstances = TF.configuration . replaceUnhealthyInstances
+
+instance HasReplaceUnhealthyInstances a b => HasReplaceUnhealthyInstances (TF.Ref s a) b where
+    replaceUnhealthyInstances =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replaceUnhealthyInstances
 
 class HasReplica a b | a -> b where
     replica :: Lens' a b
@@ -6005,11 +9685,21 @@ class HasReplica a b | a -> b where
 instance HasReplica a b => HasReplica (TF.Schema l p a) b where
     replica = TF.configuration . replica
 
+instance HasReplica a b => HasReplica (TF.Ref s a) b where
+    replica =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replica
+
 class HasReplicateSourceDb a b | a -> b where
     replicateSourceDb :: Lens' a b
 
 instance HasReplicateSourceDb a b => HasReplicateSourceDb (TF.Schema l p a) b where
     replicateSourceDb = TF.configuration . replicateSourceDb
+
+instance HasReplicateSourceDb a b => HasReplicateSourceDb (TF.Ref s a) b where
+    replicateSourceDb =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicateSourceDb
 
 class HasReplicationConfiguration a b | a -> b where
     replicationConfiguration :: Lens' a b
@@ -6017,11 +9707,21 @@ class HasReplicationConfiguration a b | a -> b where
 instance HasReplicationConfiguration a b => HasReplicationConfiguration (TF.Schema l p a) b where
     replicationConfiguration = TF.configuration . replicationConfiguration
 
+instance HasReplicationConfiguration a b => HasReplicationConfiguration (TF.Ref s a) b where
+    replicationConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationConfiguration
+
 class HasReplicationFactor a b | a -> b where
     replicationFactor :: Lens' a b
 
 instance HasReplicationFactor a b => HasReplicationFactor (TF.Schema l p a) b where
     replicationFactor = TF.configuration . replicationFactor
+
+instance HasReplicationFactor a b => HasReplicationFactor (TF.Ref s a) b where
+    replicationFactor =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationFactor
 
 class HasReplicationGroupDescription a b | a -> b where
     replicationGroupDescription :: Lens' a b
@@ -6029,11 +9729,21 @@ class HasReplicationGroupDescription a b | a -> b where
 instance HasReplicationGroupDescription a b => HasReplicationGroupDescription (TF.Schema l p a) b where
     replicationGroupDescription = TF.configuration . replicationGroupDescription
 
+instance HasReplicationGroupDescription a b => HasReplicationGroupDescription (TF.Ref s a) b where
+    replicationGroupDescription =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationGroupDescription
+
 class HasReplicationGroupId a b | a -> b where
     replicationGroupId :: Lens' a b
 
 instance HasReplicationGroupId a b => HasReplicationGroupId (TF.Schema l p a) b where
     replicationGroupId = TF.configuration . replicationGroupId
+
+instance HasReplicationGroupId a b => HasReplicationGroupId (TF.Ref s a) b where
+    replicationGroupId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationGroupId
 
 class HasReplicationInstanceArn a b | a -> b where
     replicationInstanceArn :: Lens' a b
@@ -6041,11 +9751,21 @@ class HasReplicationInstanceArn a b | a -> b where
 instance HasReplicationInstanceArn a b => HasReplicationInstanceArn (TF.Schema l p a) b where
     replicationInstanceArn = TF.configuration . replicationInstanceArn
 
+instance HasReplicationInstanceArn a b => HasReplicationInstanceArn (TF.Ref s a) b where
+    replicationInstanceArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationInstanceArn
+
 class HasReplicationInstanceClass a b | a -> b where
     replicationInstanceClass :: Lens' a b
 
 instance HasReplicationInstanceClass a b => HasReplicationInstanceClass (TF.Schema l p a) b where
     replicationInstanceClass = TF.configuration . replicationInstanceClass
+
+instance HasReplicationInstanceClass a b => HasReplicationInstanceClass (TF.Ref s a) b where
+    replicationInstanceClass =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationInstanceClass
 
 class HasReplicationInstanceId a b | a -> b where
     replicationInstanceId :: Lens' a b
@@ -6053,11 +9773,21 @@ class HasReplicationInstanceId a b | a -> b where
 instance HasReplicationInstanceId a b => HasReplicationInstanceId (TF.Schema l p a) b where
     replicationInstanceId = TF.configuration . replicationInstanceId
 
+instance HasReplicationInstanceId a b => HasReplicationInstanceId (TF.Ref s a) b where
+    replicationInstanceId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationInstanceId
+
 class HasReplicationSubnetGroupDescription a b | a -> b where
     replicationSubnetGroupDescription :: Lens' a b
 
 instance HasReplicationSubnetGroupDescription a b => HasReplicationSubnetGroupDescription (TF.Schema l p a) b where
     replicationSubnetGroupDescription = TF.configuration . replicationSubnetGroupDescription
+
+instance HasReplicationSubnetGroupDescription a b => HasReplicationSubnetGroupDescription (TF.Ref s a) b where
+    replicationSubnetGroupDescription =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationSubnetGroupDescription
 
 class HasReplicationSubnetGroupId a b | a -> b where
     replicationSubnetGroupId :: Lens' a b
@@ -6065,11 +9795,21 @@ class HasReplicationSubnetGroupId a b | a -> b where
 instance HasReplicationSubnetGroupId a b => HasReplicationSubnetGroupId (TF.Schema l p a) b where
     replicationSubnetGroupId = TF.configuration . replicationSubnetGroupId
 
+instance HasReplicationSubnetGroupId a b => HasReplicationSubnetGroupId (TF.Ref s a) b where
+    replicationSubnetGroupId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationSubnetGroupId
+
 class HasReplicationTaskId a b | a -> b where
     replicationTaskId :: Lens' a b
 
 instance HasReplicationTaskId a b => HasReplicationTaskId (TF.Schema l p a) b where
     replicationTaskId = TF.configuration . replicationTaskId
+
+instance HasReplicationTaskId a b => HasReplicationTaskId (TF.Ref s a) b where
+    replicationTaskId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationTaskId
 
 class HasReplicationTaskSettings a b | a -> b where
     replicationTaskSettings :: Lens' a b
@@ -6077,11 +9817,21 @@ class HasReplicationTaskSettings a b | a -> b where
 instance HasReplicationTaskSettings a b => HasReplicationTaskSettings (TF.Schema l p a) b where
     replicationTaskSettings = TF.configuration . replicationTaskSettings
 
+instance HasReplicationTaskSettings a b => HasReplicationTaskSettings (TF.Ref s a) b where
+    replicationTaskSettings =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . replicationTaskSettings
+
 class HasRepository a b | a -> b where
     repository :: Lens' a b
 
 instance HasRepository a b => HasRepository (TF.Schema l p a) b where
     repository = TF.configuration . repository
+
+instance HasRepository a b => HasRepository (TF.Ref s a) b where
+    repository =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . repository
 
 class HasRepositoryName a b | a -> b where
     repositoryName :: Lens' a b
@@ -6089,11 +9839,21 @@ class HasRepositoryName a b | a -> b where
 instance HasRepositoryName a b => HasRepositoryName (TF.Schema l p a) b where
     repositoryName = TF.configuration . repositoryName
 
+instance HasRepositoryName a b => HasRepositoryName (TF.Ref s a) b where
+    repositoryName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . repositoryName
+
 class HasRequestInterval a b | a -> b where
     requestInterval :: Lens' a b
 
 instance HasRequestInterval a b => HasRequestInterval (TF.Schema l p a) b where
     requestInterval = TF.configuration . requestInterval
+
+instance HasRequestInterval a b => HasRequestInterval (TF.Ref s a) b where
+    requestInterval =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requestInterval
 
 class HasRequestModels a b | a -> b where
     requestModels :: Lens' a b
@@ -6101,11 +9861,21 @@ class HasRequestModels a b | a -> b where
 instance HasRequestModels a b => HasRequestModels (TF.Schema l p a) b where
     requestModels = TF.configuration . requestModels
 
+instance HasRequestModels a b => HasRequestModels (TF.Ref s a) b where
+    requestModels =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requestModels
+
 class HasRequestParameters a b | a -> b where
     requestParameters :: Lens' a b
 
 instance HasRequestParameters a b => HasRequestParameters (TF.Schema l p a) b where
     requestParameters = TF.configuration . requestParameters
+
+instance HasRequestParameters a b => HasRequestParameters (TF.Ref s a) b where
+    requestParameters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requestParameters
 
 class HasRequestParametersInJson a b | a -> b where
     requestParametersInJson :: Lens' a b
@@ -6113,11 +9883,21 @@ class HasRequestParametersInJson a b | a -> b where
 instance HasRequestParametersInJson a b => HasRequestParametersInJson (TF.Schema l p a) b where
     requestParametersInJson = TF.configuration . requestParametersInJson
 
+instance HasRequestParametersInJson a b => HasRequestParametersInJson (TF.Ref s a) b where
+    requestParametersInJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requestParametersInJson
+
 class HasRequestPayer a b | a -> b where
     requestPayer :: Lens' a b
 
 instance HasRequestPayer a b => HasRequestPayer (TF.Schema l p a) b where
     requestPayer = TF.configuration . requestPayer
+
+instance HasRequestPayer a b => HasRequestPayer (TF.Ref s a) b where
+    requestPayer =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requestPayer
 
 class HasRequestTemplates a b | a -> b where
     requestTemplates :: Lens' a b
@@ -6125,11 +9905,21 @@ class HasRequestTemplates a b | a -> b where
 instance HasRequestTemplates a b => HasRequestTemplates (TF.Schema l p a) b where
     requestTemplates = TF.configuration . requestTemplates
 
+instance HasRequestTemplates a b => HasRequestTemplates (TF.Ref s a) b where
+    requestTemplates =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requestTemplates
+
 class HasRequestValidatorId a b | a -> b where
     requestValidatorId :: Lens' a b
 
 instance HasRequestValidatorId a b => HasRequestValidatorId (TF.Schema l p a) b where
     requestValidatorId = TF.configuration . requestValidatorId
+
+instance HasRequestValidatorId a b => HasRequestValidatorId (TF.Ref s a) b where
+    requestValidatorId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requestValidatorId
 
 class HasRequester a b | a -> b where
     requester :: Lens' a b
@@ -6137,11 +9927,21 @@ class HasRequester a b | a -> b where
 instance HasRequester a b => HasRequester (TF.Schema l p a) b where
     requester = TF.configuration . requester
 
+instance HasRequester a b => HasRequester (TF.Ref s a) b where
+    requester =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requester
+
 class HasRequireLowercaseCharacters a b | a -> b where
     requireLowercaseCharacters :: Lens' a b
 
 instance HasRequireLowercaseCharacters a b => HasRequireLowercaseCharacters (TF.Schema l p a) b where
     requireLowercaseCharacters = TF.configuration . requireLowercaseCharacters
+
+instance HasRequireLowercaseCharacters a b => HasRequireLowercaseCharacters (TF.Ref s a) b where
+    requireLowercaseCharacters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requireLowercaseCharacters
 
 class HasRequireNumbers a b | a -> b where
     requireNumbers :: Lens' a b
@@ -6149,11 +9949,21 @@ class HasRequireNumbers a b | a -> b where
 instance HasRequireNumbers a b => HasRequireNumbers (TF.Schema l p a) b where
     requireNumbers = TF.configuration . requireNumbers
 
+instance HasRequireNumbers a b => HasRequireNumbers (TF.Ref s a) b where
+    requireNumbers =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requireNumbers
+
 class HasRequireSymbols a b | a -> b where
     requireSymbols :: Lens' a b
 
 instance HasRequireSymbols a b => HasRequireSymbols (TF.Schema l p a) b where
     requireSymbols = TF.configuration . requireSymbols
+
+instance HasRequireSymbols a b => HasRequireSymbols (TF.Ref s a) b where
+    requireSymbols =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requireSymbols
 
 class HasRequireUppercaseCharacters a b | a -> b where
     requireUppercaseCharacters :: Lens' a b
@@ -6161,11 +9971,21 @@ class HasRequireUppercaseCharacters a b | a -> b where
 instance HasRequireUppercaseCharacters a b => HasRequireUppercaseCharacters (TF.Schema l p a) b where
     requireUppercaseCharacters = TF.configuration . requireUppercaseCharacters
 
+instance HasRequireUppercaseCharacters a b => HasRequireUppercaseCharacters (TF.Ref s a) b where
+    requireUppercaseCharacters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . requireUppercaseCharacters
+
 class HasReservedConcurrentExecutions a b | a -> b where
     reservedConcurrentExecutions :: Lens' a b
 
 instance HasReservedConcurrentExecutions a b => HasReservedConcurrentExecutions (TF.Schema l p a) b where
     reservedConcurrentExecutions = TF.configuration . reservedConcurrentExecutions
+
+instance HasReservedConcurrentExecutions a b => HasReservedConcurrentExecutions (TF.Ref s a) b where
+    reservedConcurrentExecutions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . reservedConcurrentExecutions
 
 class HasResourceCreationLimitPolicy a b | a -> b where
     resourceCreationLimitPolicy :: Lens' a b
@@ -6173,11 +9993,21 @@ class HasResourceCreationLimitPolicy a b | a -> b where
 instance HasResourceCreationLimitPolicy a b => HasResourceCreationLimitPolicy (TF.Schema l p a) b where
     resourceCreationLimitPolicy = TF.configuration . resourceCreationLimitPolicy
 
+instance HasResourceCreationLimitPolicy a b => HasResourceCreationLimitPolicy (TF.Ref s a) b where
+    resourceCreationLimitPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . resourceCreationLimitPolicy
+
 class HasResourceGroupArn a b | a -> b where
     resourceGroupArn :: Lens' a b
 
 instance HasResourceGroupArn a b => HasResourceGroupArn (TF.Schema l p a) b where
     resourceGroupArn = TF.configuration . resourceGroupArn
+
+instance HasResourceGroupArn a b => HasResourceGroupArn (TF.Ref s a) b where
+    resourceGroupArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . resourceGroupArn
 
 class HasResourceId a b | a -> b where
     resourceId :: Lens' a b
@@ -6185,11 +10015,21 @@ class HasResourceId a b | a -> b where
 instance HasResourceId a b => HasResourceId (TF.Schema l p a) b where
     resourceId = TF.configuration . resourceId
 
+instance HasResourceId a b => HasResourceId (TF.Ref s a) b where
+    resourceId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . resourceId
+
 class HasResourcePath a b | a -> b where
     resourcePath :: Lens' a b
 
 instance HasResourcePath a b => HasResourcePath (TF.Schema l p a) b where
     resourcePath = TF.configuration . resourcePath
+
+instance HasResourcePath a b => HasResourcePath (TF.Ref s a) b where
+    resourcePath =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . resourcePath
 
 class HasResourceType a b | a -> b where
     resourceType :: Lens' a b
@@ -6197,11 +10037,21 @@ class HasResourceType a b | a -> b where
 instance HasResourceType a b => HasResourceType (TF.Schema l p a) b where
     resourceType = TF.configuration . resourceType
 
+instance HasResourceType a b => HasResourceType (TF.Ref s a) b where
+    resourceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . resourceType
+
 class HasResponseModels a b | a -> b where
     responseModels :: Lens' a b
 
 instance HasResponseModels a b => HasResponseModels (TF.Schema l p a) b where
     responseModels = TF.configuration . responseModels
+
+instance HasResponseModels a b => HasResponseModels (TF.Ref s a) b where
+    responseModels =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . responseModels
 
 class HasResponseParameters a b | a -> b where
     responseParameters :: Lens' a b
@@ -6209,11 +10059,21 @@ class HasResponseParameters a b | a -> b where
 instance HasResponseParameters a b => HasResponseParameters (TF.Schema l p a) b where
     responseParameters = TF.configuration . responseParameters
 
+instance HasResponseParameters a b => HasResponseParameters (TF.Ref s a) b where
+    responseParameters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . responseParameters
+
 class HasResponseParametersInJson a b | a -> b where
     responseParametersInJson :: Lens' a b
 
 instance HasResponseParametersInJson a b => HasResponseParametersInJson (TF.Schema l p a) b where
     responseParametersInJson = TF.configuration . responseParametersInJson
+
+instance HasResponseParametersInJson a b => HasResponseParametersInJson (TF.Ref s a) b where
+    responseParametersInJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . responseParametersInJson
 
 class HasResponseTemplates a b | a -> b where
     responseTemplates :: Lens' a b
@@ -6221,11 +10081,21 @@ class HasResponseTemplates a b | a -> b where
 instance HasResponseTemplates a b => HasResponseTemplates (TF.Schema l p a) b where
     responseTemplates = TF.configuration . responseTemplates
 
+instance HasResponseTemplates a b => HasResponseTemplates (TF.Ref s a) b where
+    responseTemplates =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . responseTemplates
+
 class HasResponseType a b | a -> b where
     responseType :: Lens' a b
 
 instance HasResponseType a b => HasResponseType (TF.Schema l p a) b where
     responseType = TF.configuration . responseType
+
+instance HasResponseType a b => HasResponseType (TF.Ref s a) b where
+    responseType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . responseType
 
 class HasRestApiId a b | a -> b where
     restApiId :: Lens' a b
@@ -6233,11 +10103,21 @@ class HasRestApiId a b | a -> b where
 instance HasRestApiId a b => HasRestApiId (TF.Schema l p a) b where
     restApiId = TF.configuration . restApiId
 
+instance HasRestApiId a b => HasRestApiId (TF.Ref s a) b where
+    restApiId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . restApiId
+
 class HasRestorableByUserIds a b | a -> b where
     restorableByUserIds :: Lens' a b
 
 instance HasRestorableByUserIds a b => HasRestorableByUserIds (TF.Schema l p a) b where
     restorableByUserIds = TF.configuration . restorableByUserIds
+
+instance HasRestorableByUserIds a b => HasRestorableByUserIds (TF.Ref s a) b where
+    restorableByUserIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . restorableByUserIds
 
 class HasRestrictions a b | a -> b where
     restrictions :: Lens' a b
@@ -6245,11 +10125,21 @@ class HasRestrictions a b | a -> b where
 instance HasRestrictions a b => HasRestrictions (TF.Schema l p a) b where
     restrictions = TF.configuration . restrictions
 
+instance HasRestrictions a b => HasRestrictions (TF.Ref s a) b where
+    restrictions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . restrictions
+
 class HasRetainOnDelete a b | a -> b where
     retainOnDelete :: Lens' a b
 
 instance HasRetainOnDelete a b => HasRetainOnDelete (TF.Schema l p a) b where
     retainOnDelete = TF.configuration . retainOnDelete
+
+instance HasRetainOnDelete a b => HasRetainOnDelete (TF.Ref s a) b where
+    retainOnDelete =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . retainOnDelete
 
 class HasRetentionInDays a b | a -> b where
     retentionInDays :: Lens' a b
@@ -6257,11 +10147,21 @@ class HasRetentionInDays a b | a -> b where
 instance HasRetentionInDays a b => HasRetentionInDays (TF.Schema l p a) b where
     retentionInDays = TF.configuration . retentionInDays
 
+instance HasRetentionInDays a b => HasRetentionInDays (TF.Ref s a) b where
+    retentionInDays =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . retentionInDays
+
 class HasRetentionPeriod a b | a -> b where
     retentionPeriod :: Lens' a b
 
 instance HasRetentionPeriod a b => HasRetentionPeriod (TF.Schema l p a) b where
     retentionPeriod = TF.configuration . retentionPeriod
+
+instance HasRetentionPeriod a b => HasRetentionPeriod (TF.Ref s a) b where
+    retentionPeriod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . retentionPeriod
 
 class HasRetryStrategy a b | a -> b where
     retryStrategy :: Lens' a b
@@ -6269,11 +10169,21 @@ class HasRetryStrategy a b | a -> b where
 instance HasRetryStrategy a b => HasRetryStrategy (TF.Schema l p a) b where
     retryStrategy = TF.configuration . retryStrategy
 
+instance HasRetryStrategy a b => HasRetryStrategy (TF.Ref s a) b where
+    retryStrategy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . retryStrategy
+
 class HasRevokeRulesOnDelete a b | a -> b where
     revokeRulesOnDelete :: Lens' a b
 
 instance HasRevokeRulesOnDelete a b => HasRevokeRulesOnDelete (TF.Schema l p a) b where
     revokeRulesOnDelete = TF.configuration . revokeRulesOnDelete
+
+instance HasRevokeRulesOnDelete a b => HasRevokeRulesOnDelete (TF.Ref s a) b where
+    revokeRulesOnDelete =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . revokeRulesOnDelete
 
 class HasRole a b | a -> b where
     role :: Lens' a b
@@ -6281,11 +10191,21 @@ class HasRole a b | a -> b where
 instance HasRole a b => HasRole (TF.Schema l p a) b where
     role = TF.configuration . role
 
+instance HasRole a b => HasRole (TF.Ref s a) b where
+    role =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . role
+
 class HasRoleArn a b | a -> b where
     roleArn :: Lens' a b
 
 instance HasRoleArn a b => HasRoleArn (TF.Schema l p a) b where
     roleArn = TF.configuration . roleArn
+
+instance HasRoleArn a b => HasRoleArn (TF.Ref s a) b where
+    roleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . roleArn
 
 class HasRoleMapping a b | a -> b where
     roleMapping :: Lens' a b
@@ -6293,11 +10213,21 @@ class HasRoleMapping a b | a -> b where
 instance HasRoleMapping a b => HasRoleMapping (TF.Schema l p a) b where
     roleMapping = TF.configuration . roleMapping
 
+instance HasRoleMapping a b => HasRoleMapping (TF.Ref s a) b where
+    roleMapping =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . roleMapping
+
 class HasRoles a b | a -> b where
     roles :: Lens' a b
 
 instance HasRoles a b => HasRoles (TF.Schema l p a) b where
     roles = TF.configuration . roles
+
+instance HasRoles a b => HasRoles (TF.Ref s a) b where
+    roles =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . roles
 
 class HasRootBlockDevice a b | a -> b where
     rootBlockDevice :: Lens' a b
@@ -6305,11 +10235,21 @@ class HasRootBlockDevice a b | a -> b where
 instance HasRootBlockDevice a b => HasRootBlockDevice (TF.Schema l p a) b where
     rootBlockDevice = TF.configuration . rootBlockDevice
 
+instance HasRootBlockDevice a b => HasRootBlockDevice (TF.Ref s a) b where
+    rootBlockDevice =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rootBlockDevice
+
 class HasRootDeviceName a b | a -> b where
     rootDeviceName :: Lens' a b
 
 instance HasRootDeviceName a b => HasRootDeviceName (TF.Schema l p a) b where
     rootDeviceName = TF.configuration . rootDeviceName
+
+instance HasRootDeviceName a b => HasRootDeviceName (TF.Ref s a) b where
+    rootDeviceName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rootDeviceName
 
 class HasRootDeviceType a b | a -> b where
     rootDeviceType :: Lens' a b
@@ -6317,11 +10257,21 @@ class HasRootDeviceType a b | a -> b where
 instance HasRootDeviceType a b => HasRootDeviceType (TF.Schema l p a) b where
     rootDeviceType = TF.configuration . rootDeviceType
 
+instance HasRootDeviceType a b => HasRootDeviceType (TF.Ref s a) b where
+    rootDeviceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rootDeviceType
+
 class HasRootPassword a b | a -> b where
     rootPassword :: Lens' a b
 
 instance HasRootPassword a b => HasRootPassword (TF.Schema l p a) b where
     rootPassword = TF.configuration . rootPassword
+
+instance HasRootPassword a b => HasRootPassword (TF.Ref s a) b where
+    rootPassword =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rootPassword
 
 class HasRootPasswordOnAllInstances a b | a -> b where
     rootPasswordOnAllInstances :: Lens' a b
@@ -6329,11 +10279,21 @@ class HasRootPasswordOnAllInstances a b | a -> b where
 instance HasRootPasswordOnAllInstances a b => HasRootPasswordOnAllInstances (TF.Schema l p a) b where
     rootPasswordOnAllInstances = TF.configuration . rootPasswordOnAllInstances
 
+instance HasRootPasswordOnAllInstances a b => HasRootPasswordOnAllInstances (TF.Ref s a) b where
+    rootPasswordOnAllInstances =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rootPasswordOnAllInstances
+
 class HasRoute a b | a -> b where
     route :: Lens' a b
 
 instance HasRoute a b => HasRoute (TF.Schema l p a) b where
     route = TF.configuration . route
+
+instance HasRoute a b => HasRoute (TF.Ref s a) b where
+    route =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . route
 
 class HasRouteTableId a b | a -> b where
     routeTableId :: Lens' a b
@@ -6341,11 +10301,21 @@ class HasRouteTableId a b | a -> b where
 instance HasRouteTableId a b => HasRouteTableId (TF.Schema l p a) b where
     routeTableId = TF.configuration . routeTableId
 
+instance HasRouteTableId a b => HasRouteTableId (TF.Ref s a) b where
+    routeTableId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . routeTableId
+
 class HasRouteTableIds a b | a -> b where
     routeTableIds :: Lens' a b
 
 instance HasRouteTableIds a b => HasRouteTableIds (TF.Schema l p a) b where
     routeTableIds = TF.configuration . routeTableIds
+
+instance HasRouteTableIds a b => HasRouteTableIds (TF.Ref s a) b where
+    routeTableIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . routeTableIds
 
 class HasRoutingStrategy a b | a -> b where
     routingStrategy :: Lens' a b
@@ -6353,11 +10323,21 @@ class HasRoutingStrategy a b | a -> b where
 instance HasRoutingStrategy a b => HasRoutingStrategy (TF.Schema l p a) b where
     routingStrategy = TF.configuration . routingStrategy
 
+instance HasRoutingStrategy a b => HasRoutingStrategy (TF.Ref s a) b where
+    routingStrategy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . routingStrategy
+
 class HasRubyVersion a b | a -> b where
     rubyVersion :: Lens' a b
 
 instance HasRubyVersion a b => HasRubyVersion (TF.Schema l p a) b where
     rubyVersion = TF.configuration . rubyVersion
+
+instance HasRubyVersion a b => HasRubyVersion (TF.Ref s a) b where
+    rubyVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rubyVersion
 
 class HasRubygemsVersion a b | a -> b where
     rubygemsVersion :: Lens' a b
@@ -6365,11 +10345,21 @@ class HasRubygemsVersion a b | a -> b where
 instance HasRubygemsVersion a b => HasRubygemsVersion (TF.Schema l p a) b where
     rubygemsVersion = TF.configuration . rubygemsVersion
 
+instance HasRubygemsVersion a b => HasRubygemsVersion (TF.Ref s a) b where
+    rubygemsVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rubygemsVersion
+
 class HasRule a b | a -> b where
     rule :: Lens' a b
 
 instance HasRule a b => HasRule (TF.Schema l p a) b where
     rule = TF.configuration . rule
+
+instance HasRule a b => HasRule (TF.Ref s a) b where
+    rule =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rule
 
 class HasRuleAction a b | a -> b where
     ruleAction :: Lens' a b
@@ -6377,11 +10367,21 @@ class HasRuleAction a b | a -> b where
 instance HasRuleAction a b => HasRuleAction (TF.Schema l p a) b where
     ruleAction = TF.configuration . ruleAction
 
+instance HasRuleAction a b => HasRuleAction (TF.Ref s a) b where
+    ruleAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ruleAction
+
 class HasRuleNumber a b | a -> b where
     ruleNumber :: Lens' a b
 
 instance HasRuleNumber a b => HasRuleNumber (TF.Schema l p a) b where
     ruleNumber = TF.configuration . ruleNumber
+
+instance HasRuleNumber a b => HasRuleNumber (TF.Ref s a) b where
+    ruleNumber =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ruleNumber
 
 class HasRuleSetName a b | a -> b where
     ruleSetName :: Lens' a b
@@ -6389,11 +10389,21 @@ class HasRuleSetName a b | a -> b where
 instance HasRuleSetName a b => HasRuleSetName (TF.Schema l p a) b where
     ruleSetName = TF.configuration . ruleSetName
 
+instance HasRuleSetName a b => HasRuleSetName (TF.Ref s a) b where
+    ruleSetName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ruleSetName
+
 class HasRules a b | a -> b where
     rules :: Lens' a b
 
 instance HasRules a b => HasRules (TF.Schema l p a) b where
     rules = TF.configuration . rules
+
+instance HasRules a b => HasRules (TF.Ref s a) b where
+    rules =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rules
 
 class HasRulesPackageArns a b | a -> b where
     rulesPackageArns :: Lens' a b
@@ -6401,11 +10411,21 @@ class HasRulesPackageArns a b | a -> b where
 instance HasRulesPackageArns a b => HasRulesPackageArns (TF.Schema l p a) b where
     rulesPackageArns = TF.configuration . rulesPackageArns
 
+instance HasRulesPackageArns a b => HasRulesPackageArns (TF.Ref s a) b where
+    rulesPackageArns =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . rulesPackageArns
+
 class HasRunCommandTargets a b | a -> b where
     runCommandTargets :: Lens' a b
 
 instance HasRunCommandTargets a b => HasRunCommandTargets (TF.Schema l p a) b where
     runCommandTargets = TF.configuration . runCommandTargets
+
+instance HasRunCommandTargets a b => HasRunCommandTargets (TF.Ref s a) b where
+    runCommandTargets =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . runCommandTargets
 
 class HasRuntime a b | a -> b where
     runtime :: Lens' a b
@@ -6413,11 +10433,21 @@ class HasRuntime a b | a -> b where
 instance HasRuntime a b => HasRuntime (TF.Schema l p a) b where
     runtime = TF.configuration . runtime
 
+instance HasRuntime a b => HasRuntime (TF.Ref s a) b where
+    runtime =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . runtime
+
 class HasRuntimeConfiguration a b | a -> b where
     runtimeConfiguration :: Lens' a b
 
 instance HasRuntimeConfiguration a b => HasRuntimeConfiguration (TF.Schema l p a) b where
     runtimeConfiguration = TF.configuration . runtimeConfiguration
+
+instance HasRuntimeConfiguration a b => HasRuntimeConfiguration (TF.Ref s a) b where
+    runtimeConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . runtimeConfiguration
 
 class HasS3Action a b | a -> b where
     s3Action :: Lens' a b
@@ -6425,11 +10455,21 @@ class HasS3Action a b | a -> b where
 instance HasS3Action a b => HasS3Action (TF.Schema l p a) b where
     s3Action = TF.configuration . s3Action
 
+instance HasS3Action a b => HasS3Action (TF.Ref s a) b where
+    s3Action =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . s3Action
+
 class HasS3Bucket a b | a -> b where
     s3Bucket :: Lens' a b
 
 instance HasS3Bucket a b => HasS3Bucket (TF.Schema l p a) b where
     s3Bucket = TF.configuration . s3Bucket
+
+instance HasS3Bucket a b => HasS3Bucket (TF.Ref s a) b where
+    s3Bucket =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . s3Bucket
 
 class HasS3BucketName a b | a -> b where
     s3BucketName :: Lens' a b
@@ -6437,11 +10477,21 @@ class HasS3BucketName a b | a -> b where
 instance HasS3BucketName a b => HasS3BucketName (TF.Schema l p a) b where
     s3BucketName = TF.configuration . s3BucketName
 
+instance HasS3BucketName a b => HasS3BucketName (TF.Ref s a) b where
+    s3BucketName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . s3BucketName
+
 class HasS3Configuration a b | a -> b where
     s3Configuration :: Lens' a b
 
 instance HasS3Configuration a b => HasS3Configuration (TF.Schema l p a) b where
     s3Configuration = TF.configuration . s3Configuration
+
+instance HasS3Configuration a b => HasS3Configuration (TF.Ref s a) b where
+    s3Configuration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . s3Configuration
 
 class HasS3Destination a b | a -> b where
     s3Destination :: Lens' a b
@@ -6449,11 +10499,21 @@ class HasS3Destination a b | a -> b where
 instance HasS3Destination a b => HasS3Destination (TF.Schema l p a) b where
     s3Destination = TF.configuration . s3Destination
 
+instance HasS3Destination a b => HasS3Destination (TF.Ref s a) b where
+    s3Destination =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . s3Destination
+
 class HasS3Key a b | a -> b where
     s3Key :: Lens' a b
 
 instance HasS3Key a b => HasS3Key (TF.Schema l p a) b where
     s3Key = TF.configuration . s3Key
+
+instance HasS3Key a b => HasS3Key (TF.Ref s a) b where
+    s3Key =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . s3Key
 
 class HasS3KeyPrefix a b | a -> b where
     s3KeyPrefix :: Lens' a b
@@ -6461,11 +10521,21 @@ class HasS3KeyPrefix a b | a -> b where
 instance HasS3KeyPrefix a b => HasS3KeyPrefix (TF.Schema l p a) b where
     s3KeyPrefix = TF.configuration . s3KeyPrefix
 
+instance HasS3KeyPrefix a b => HasS3KeyPrefix (TF.Ref s a) b where
+    s3KeyPrefix =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . s3KeyPrefix
+
 class HasS3ObjectVersion a b | a -> b where
     s3ObjectVersion :: Lens' a b
 
 instance HasS3ObjectVersion a b => HasS3ObjectVersion (TF.Schema l p a) b where
     s3ObjectVersion = TF.configuration . s3ObjectVersion
+
+instance HasS3ObjectVersion a b => HasS3ObjectVersion (TF.Ref s a) b where
+    s3ObjectVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . s3ObjectVersion
 
 class HasSamlMetadataDocument a b | a -> b where
     samlMetadataDocument :: Lens' a b
@@ -6473,11 +10543,21 @@ class HasSamlMetadataDocument a b | a -> b where
 instance HasSamlMetadataDocument a b => HasSamlMetadataDocument (TF.Schema l p a) b where
     samlMetadataDocument = TF.configuration . samlMetadataDocument
 
+instance HasSamlMetadataDocument a b => HasSamlMetadataDocument (TF.Ref s a) b where
+    samlMetadataDocument =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . samlMetadataDocument
+
 class HasSamlProviderArns a b | a -> b where
     samlProviderArns :: Lens' a b
 
 instance HasSamlProviderArns a b => HasSamlProviderArns (TF.Schema l p a) b where
     samlProviderArns = TF.configuration . samlProviderArns
+
+instance HasSamlProviderArns a b => HasSamlProviderArns (TF.Ref s a) b where
+    samlProviderArns =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . samlProviderArns
 
 class HasScalableDimension a b | a -> b where
     scalableDimension :: Lens' a b
@@ -6485,11 +10565,21 @@ class HasScalableDimension a b | a -> b where
 instance HasScalableDimension a b => HasScalableDimension (TF.Schema l p a) b where
     scalableDimension = TF.configuration . scalableDimension
 
+instance HasScalableDimension a b => HasScalableDimension (TF.Ref s a) b where
+    scalableDimension =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . scalableDimension
+
 class HasScalableTargetAction a b | a -> b where
     scalableTargetAction :: Lens' a b
 
 instance HasScalableTargetAction a b => HasScalableTargetAction (TF.Schema l p a) b where
     scalableTargetAction = TF.configuration . scalableTargetAction
+
+instance HasScalableTargetAction a b => HasScalableTargetAction (TF.Ref s a) b where
+    scalableTargetAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . scalableTargetAction
 
 class HasScanEnabled a b | a -> b where
     scanEnabled :: Lens' a b
@@ -6497,11 +10587,21 @@ class HasScanEnabled a b | a -> b where
 instance HasScanEnabled a b => HasScanEnabled (TF.Schema l p a) b where
     scanEnabled = TF.configuration . scanEnabled
 
+instance HasScanEnabled a b => HasScanEnabled (TF.Ref s a) b where
+    scanEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . scanEnabled
+
 class HasSchedule a b | a -> b where
     schedule :: Lens' a b
 
 instance HasSchedule a b => HasSchedule (TF.Schema l p a) b where
     schedule = TF.configuration . schedule
+
+instance HasSchedule a b => HasSchedule (TF.Ref s a) b where
+    schedule =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . schedule
 
 class HasScheduleExpression a b | a -> b where
     scheduleExpression :: Lens' a b
@@ -6509,11 +10609,21 @@ class HasScheduleExpression a b | a -> b where
 instance HasScheduleExpression a b => HasScheduleExpression (TF.Schema l p a) b where
     scheduleExpression = TF.configuration . scheduleExpression
 
+instance HasScheduleExpression a b => HasScheduleExpression (TF.Ref s a) b where
+    scheduleExpression =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . scheduleExpression
+
 class HasScheduledActionName a b | a -> b where
     scheduledActionName :: Lens' a b
 
 instance HasScheduledActionName a b => HasScheduledActionName (TF.Schema l p a) b where
     scheduledActionName = TF.configuration . scheduledActionName
+
+instance HasScheduledActionName a b => HasScheduledActionName (TF.Ref s a) b where
+    scheduledActionName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . scheduledActionName
 
 class HasSchema a b | a -> b where
     schema :: Lens' a b
@@ -6521,11 +10631,21 @@ class HasSchema a b | a -> b where
 instance HasSchema a b => HasSchema (TF.Schema l p a) b where
     schema = TF.configuration . schema
 
+instance HasSchema a b => HasSchema (TF.Ref s a) b where
+    schema =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . schema
+
 class HasScope a b | a -> b where
     scope :: Lens' a b
 
 instance HasScope a b => HasScope (TF.Schema l p a) b where
     scope = TF.configuration . scope
+
+instance HasScope a b => HasScope (TF.Ref s a) b where
+    scope =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . scope
 
 class HasSearchString a b | a -> b where
     searchString :: Lens' a b
@@ -6533,11 +10653,21 @@ class HasSearchString a b | a -> b where
 instance HasSearchString a b => HasSearchString (TF.Schema l p a) b where
     searchString = TF.configuration . searchString
 
+instance HasSearchString a b => HasSearchString (TF.Ref s a) b where
+    searchString =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . searchString
+
 class HasSecret a b | a -> b where
     secret :: Lens' a b
 
 instance HasSecret a b => HasSecret (TF.Schema l p a) b where
     secret = TF.configuration . secret
+
+instance HasSecret a b => HasSecret (TF.Ref s a) b where
+    secret =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . secret
 
 class HasSecurityConfiguration a b | a -> b where
     securityConfiguration :: Lens' a b
@@ -6545,11 +10675,21 @@ class HasSecurityConfiguration a b | a -> b where
 instance HasSecurityConfiguration a b => HasSecurityConfiguration (TF.Schema l p a) b where
     securityConfiguration = TF.configuration . securityConfiguration
 
+instance HasSecurityConfiguration a b => HasSecurityConfiguration (TF.Ref s a) b where
+    securityConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . securityConfiguration
+
 class HasSecurityGroupId a b | a -> b where
     securityGroupId :: Lens' a b
 
 instance HasSecurityGroupId a b => HasSecurityGroupId (TF.Schema l p a) b where
     securityGroupId = TF.configuration . securityGroupId
+
+instance HasSecurityGroupId a b => HasSecurityGroupId (TF.Ref s a) b where
+    securityGroupId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . securityGroupId
 
 class HasSecurityGroupIds a b | a -> b where
     securityGroupIds :: Lens' a b
@@ -6557,11 +10697,21 @@ class HasSecurityGroupIds a b | a -> b where
 instance HasSecurityGroupIds a b => HasSecurityGroupIds (TF.Schema l p a) b where
     securityGroupIds = TF.configuration . securityGroupIds
 
+instance HasSecurityGroupIds a b => HasSecurityGroupIds (TF.Ref s a) b where
+    securityGroupIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . securityGroupIds
+
 class HasSecurityGroupNames a b | a -> b where
     securityGroupNames :: Lens' a b
 
 instance HasSecurityGroupNames a b => HasSecurityGroupNames (TF.Schema l p a) b where
     securityGroupNames = TF.configuration . securityGroupNames
+
+instance HasSecurityGroupNames a b => HasSecurityGroupNames (TF.Ref s a) b where
+    securityGroupNames =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . securityGroupNames
 
 class HasSecurityGroups a b | a -> b where
     securityGroups :: Lens' a b
@@ -6569,11 +10719,21 @@ class HasSecurityGroups a b | a -> b where
 instance HasSecurityGroups a b => HasSecurityGroups (TF.Schema l p a) b where
     securityGroups = TF.configuration . securityGroups
 
+instance HasSecurityGroups a b => HasSecurityGroups (TF.Ref s a) b where
+    securityGroups =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . securityGroups
+
 class HasSelectionPattern a b | a -> b where
     selectionPattern :: Lens' a b
 
 instance HasSelectionPattern a b => HasSelectionPattern (TF.Schema l p a) b where
     selectionPattern = TF.configuration . selectionPattern
+
+instance HasSelectionPattern a b => HasSelectionPattern (TF.Ref s a) b where
+    selectionPattern =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . selectionPattern
 
 class HasSelf a b | a -> b where
     self :: Lens' a b
@@ -6581,11 +10741,21 @@ class HasSelf a b | a -> b where
 instance HasSelf a b => HasSelf (TF.Schema l p a) b where
     self = TF.configuration . self
 
+instance HasSelf a b => HasSelf (TF.Ref s a) b where
+    self =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . self
+
 class HasServerName a b | a -> b where
     serverName :: Lens' a b
 
 instance HasServerName a b => HasServerName (TF.Schema l p a) b where
     serverName = TF.configuration . serverName
+
+instance HasServerName a b => HasServerName (TF.Ref s a) b where
+    serverName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . serverName
 
 class HasServerSideEncryption a b | a -> b where
     serverSideEncryption :: Lens' a b
@@ -6593,11 +10763,21 @@ class HasServerSideEncryption a b | a -> b where
 instance HasServerSideEncryption a b => HasServerSideEncryption (TF.Schema l p a) b where
     serverSideEncryption = TF.configuration . serverSideEncryption
 
+instance HasServerSideEncryption a b => HasServerSideEncryption (TF.Ref s a) b where
+    serverSideEncryption =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . serverSideEncryption
+
 class HasServerSideEncryptionConfiguration a b | a -> b where
     serverSideEncryptionConfiguration :: Lens' a b
 
 instance HasServerSideEncryptionConfiguration a b => HasServerSideEncryptionConfiguration (TF.Schema l p a) b where
     serverSideEncryptionConfiguration = TF.configuration . serverSideEncryptionConfiguration
+
+instance HasServerSideEncryptionConfiguration a b => HasServerSideEncryptionConfiguration (TF.Ref s a) b where
+    serverSideEncryptionConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . serverSideEncryptionConfiguration
 
 class HasService a b | a -> b where
     service :: Lens' a b
@@ -6605,11 +10785,21 @@ class HasService a b | a -> b where
 instance HasService a b => HasService (TF.Schema l p a) b where
     service = TF.configuration . service
 
+instance HasService a b => HasService (TF.Ref s a) b where
+    service =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . service
+
 class HasServiceAccessRole a b | a -> b where
     serviceAccessRole :: Lens' a b
 
 instance HasServiceAccessRole a b => HasServiceAccessRole (TF.Schema l p a) b where
     serviceAccessRole = TF.configuration . serviceAccessRole
+
+instance HasServiceAccessRole a b => HasServiceAccessRole (TF.Ref s a) b where
+    serviceAccessRole =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . serviceAccessRole
 
 class HasServiceName a b | a -> b where
     serviceName :: Lens' a b
@@ -6617,11 +10807,21 @@ class HasServiceName a b | a -> b where
 instance HasServiceName a b => HasServiceName (TF.Schema l p a) b where
     serviceName = TF.configuration . serviceName
 
+instance HasServiceName a b => HasServiceName (TF.Ref s a) b where
+    serviceName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . serviceName
+
 class HasServiceNamespace a b | a -> b where
     serviceNamespace :: Lens' a b
 
 instance HasServiceNamespace a b => HasServiceNamespace (TF.Schema l p a) b where
     serviceNamespace = TF.configuration . serviceNamespace
+
+instance HasServiceNamespace a b => HasServiceNamespace (TF.Ref s a) b where
+    serviceNamespace =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . serviceNamespace
 
 class HasServiceRole a b | a -> b where
     serviceRole :: Lens' a b
@@ -6629,11 +10829,21 @@ class HasServiceRole a b | a -> b where
 instance HasServiceRole a b => HasServiceRole (TF.Schema l p a) b where
     serviceRole = TF.configuration . serviceRole
 
+instance HasServiceRole a b => HasServiceRole (TF.Ref s a) b where
+    serviceRole =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . serviceRole
+
 class HasServiceRoleArn a b | a -> b where
     serviceRoleArn :: Lens' a b
 
 instance HasServiceRoleArn a b => HasServiceRoleArn (TF.Schema l p a) b where
     serviceRoleArn = TF.configuration . serviceRoleArn
+
+instance HasServiceRoleArn a b => HasServiceRoleArn (TF.Ref s a) b where
+    serviceRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . serviceRoleArn
 
 class HasServices a b | a -> b where
     services :: Lens' a b
@@ -6641,11 +10851,21 @@ class HasServices a b | a -> b where
 instance HasServices a b => HasServices (TF.Schema l p a) b where
     services = TF.configuration . services
 
+instance HasServices a b => HasServices (TF.Ref s a) b where
+    services =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . services
+
 class HasSetIdentifier a b | a -> b where
     setIdentifier :: Lens' a b
 
 instance HasSetIdentifier a b => HasSetIdentifier (TF.Schema l p a) b where
     setIdentifier = TF.configuration . setIdentifier
+
+instance HasSetIdentifier a b => HasSetIdentifier (TF.Ref s a) b where
+    setIdentifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . setIdentifier
 
 class HasSetting a b | a -> b where
     setting :: Lens' a b
@@ -6653,11 +10873,21 @@ class HasSetting a b | a -> b where
 instance HasSetting a b => HasSetting (TF.Schema l p a) b where
     setting = TF.configuration . setting
 
+instance HasSetting a b => HasSetting (TF.Ref s a) b where
+    setting =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . setting
+
 class HasSettings a b | a -> b where
     settings :: Lens' a b
 
 instance HasSettings a b => HasSettings (TF.Schema l p a) b where
     settings = TF.configuration . settings
+
+instance HasSettings a b => HasSettings (TF.Ref s a) b where
+    settings =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . settings
 
 class HasShardCount a b | a -> b where
     shardCount :: Lens' a b
@@ -6665,11 +10895,21 @@ class HasShardCount a b | a -> b where
 instance HasShardCount a b => HasShardCount (TF.Schema l p a) b where
     shardCount = TF.configuration . shardCount
 
+instance HasShardCount a b => HasShardCount (TF.Ref s a) b where
+    shardCount =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . shardCount
+
 class HasShardLevelMetrics a b | a -> b where
     shardLevelMetrics :: Lens' a b
 
 instance HasShardLevelMetrics a b => HasShardLevelMetrics (TF.Schema l p a) b where
     shardLevelMetrics = TF.configuration . shardLevelMetrics
+
+instance HasShardLevelMetrics a b => HasShardLevelMetrics (TF.Ref s a) b where
+    shardLevelMetrics =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . shardLevelMetrics
 
 class HasShortName a b | a -> b where
     shortName :: Lens' a b
@@ -6677,11 +10917,21 @@ class HasShortName a b | a -> b where
 instance HasShortName a b => HasShortName (TF.Schema l p a) b where
     shortName = TF.configuration . shortName
 
+instance HasShortName a b => HasShortName (TF.Ref s a) b where
+    shortName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . shortName
+
 class HasSize a b | a -> b where
     size :: Lens' a b
 
 instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size
+
+instance HasSize a b => HasSize (TF.Ref s a) b where
+    size =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . size
 
 class HasSizeConstraints a b | a -> b where
     sizeConstraints :: Lens' a b
@@ -6689,11 +10939,21 @@ class HasSizeConstraints a b | a -> b where
 instance HasSizeConstraints a b => HasSizeConstraints (TF.Schema l p a) b where
     sizeConstraints = TF.configuration . sizeConstraints
 
+instance HasSizeConstraints a b => HasSizeConstraints (TF.Ref s a) b where
+    sizeConstraints =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sizeConstraints
+
 class HasSkipDestroy a b | a -> b where
     skipDestroy :: Lens' a b
 
 instance HasSkipDestroy a b => HasSkipDestroy (TF.Schema l p a) b where
     skipDestroy = TF.configuration . skipDestroy
+
+instance HasSkipDestroy a b => HasSkipDestroy (TF.Ref s a) b where
+    skipDestroy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . skipDestroy
 
 class HasSkipFinalSnapshot a b | a -> b where
     skipFinalSnapshot :: Lens' a b
@@ -6701,11 +10961,21 @@ class HasSkipFinalSnapshot a b | a -> b where
 instance HasSkipFinalSnapshot a b => HasSkipFinalSnapshot (TF.Schema l p a) b where
     skipFinalSnapshot = TF.configuration . skipFinalSnapshot
 
+instance HasSkipFinalSnapshot a b => HasSkipFinalSnapshot (TF.Ref s a) b where
+    skipFinalSnapshot =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . skipFinalSnapshot
+
 class HasSmsAuthenticationMessage a b | a -> b where
     smsAuthenticationMessage :: Lens' a b
 
 instance HasSmsAuthenticationMessage a b => HasSmsAuthenticationMessage (TF.Schema l p a) b where
     smsAuthenticationMessage = TF.configuration . smsAuthenticationMessage
+
+instance HasSmsAuthenticationMessage a b => HasSmsAuthenticationMessage (TF.Ref s a) b where
+    smsAuthenticationMessage =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . smsAuthenticationMessage
 
 class HasSmsConfiguration a b | a -> b where
     smsConfiguration :: Lens' a b
@@ -6713,11 +10983,21 @@ class HasSmsConfiguration a b | a -> b where
 instance HasSmsConfiguration a b => HasSmsConfiguration (TF.Schema l p a) b where
     smsConfiguration = TF.configuration . smsConfiguration
 
+instance HasSmsConfiguration a b => HasSmsConfiguration (TF.Ref s a) b where
+    smsConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . smsConfiguration
+
 class HasSmsVerificationMessage a b | a -> b where
     smsVerificationMessage :: Lens' a b
 
 instance HasSmsVerificationMessage a b => HasSmsVerificationMessage (TF.Schema l p a) b where
     smsVerificationMessage = TF.configuration . smsVerificationMessage
+
+instance HasSmsVerificationMessage a b => HasSmsVerificationMessage (TF.Ref s a) b where
+    smsVerificationMessage =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . smsVerificationMessage
 
 class HasSnapshotArns a b | a -> b where
     snapshotArns :: Lens' a b
@@ -6725,11 +11005,21 @@ class HasSnapshotArns a b | a -> b where
 instance HasSnapshotArns a b => HasSnapshotArns (TF.Schema l p a) b where
     snapshotArns = TF.configuration . snapshotArns
 
+instance HasSnapshotArns a b => HasSnapshotArns (TF.Ref s a) b where
+    snapshotArns =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotArns
+
 class HasSnapshotClusterIdentifier a b | a -> b where
     snapshotClusterIdentifier :: Lens' a b
 
 instance HasSnapshotClusterIdentifier a b => HasSnapshotClusterIdentifier (TF.Schema l p a) b where
     snapshotClusterIdentifier = TF.configuration . snapshotClusterIdentifier
+
+instance HasSnapshotClusterIdentifier a b => HasSnapshotClusterIdentifier (TF.Ref s a) b where
+    snapshotClusterIdentifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotClusterIdentifier
 
 class HasSnapshotCopy a b | a -> b where
     snapshotCopy :: Lens' a b
@@ -6737,11 +11027,21 @@ class HasSnapshotCopy a b | a -> b where
 instance HasSnapshotCopy a b => HasSnapshotCopy (TF.Schema l p a) b where
     snapshotCopy = TF.configuration . snapshotCopy
 
+instance HasSnapshotCopy a b => HasSnapshotCopy (TF.Ref s a) b where
+    snapshotCopy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotCopy
+
 class HasSnapshotDeliveryProperties a b | a -> b where
     snapshotDeliveryProperties :: Lens' a b
 
 instance HasSnapshotDeliveryProperties a b => HasSnapshotDeliveryProperties (TF.Schema l p a) b where
     snapshotDeliveryProperties = TF.configuration . snapshotDeliveryProperties
+
+instance HasSnapshotDeliveryProperties a b => HasSnapshotDeliveryProperties (TF.Ref s a) b where
+    snapshotDeliveryProperties =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotDeliveryProperties
 
 class HasSnapshotId a b | a -> b where
     snapshotId :: Lens' a b
@@ -6749,11 +11049,21 @@ class HasSnapshotId a b | a -> b where
 instance HasSnapshotId a b => HasSnapshotId (TF.Schema l p a) b where
     snapshotId = TF.configuration . snapshotId
 
+instance HasSnapshotId a b => HasSnapshotId (TF.Ref s a) b where
+    snapshotId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotId
+
 class HasSnapshotIdentifier a b | a -> b where
     snapshotIdentifier :: Lens' a b
 
 instance HasSnapshotIdentifier a b => HasSnapshotIdentifier (TF.Schema l p a) b where
     snapshotIdentifier = TF.configuration . snapshotIdentifier
+
+instance HasSnapshotIdentifier a b => HasSnapshotIdentifier (TF.Ref s a) b where
+    snapshotIdentifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotIdentifier
 
 class HasSnapshotIds a b | a -> b where
     snapshotIds :: Lens' a b
@@ -6761,11 +11071,21 @@ class HasSnapshotIds a b | a -> b where
 instance HasSnapshotIds a b => HasSnapshotIds (TF.Schema l p a) b where
     snapshotIds = TF.configuration . snapshotIds
 
+instance HasSnapshotIds a b => HasSnapshotIds (TF.Ref s a) b where
+    snapshotIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotIds
+
 class HasSnapshotName a b | a -> b where
     snapshotName :: Lens' a b
 
 instance HasSnapshotName a b => HasSnapshotName (TF.Schema l p a) b where
     snapshotName = TF.configuration . snapshotName
+
+instance HasSnapshotName a b => HasSnapshotName (TF.Ref s a) b where
+    snapshotName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotName
 
 class HasSnapshotOptions a b | a -> b where
     snapshotOptions :: Lens' a b
@@ -6773,11 +11093,21 @@ class HasSnapshotOptions a b | a -> b where
 instance HasSnapshotOptions a b => HasSnapshotOptions (TF.Schema l p a) b where
     snapshotOptions = TF.configuration . snapshotOptions
 
+instance HasSnapshotOptions a b => HasSnapshotOptions (TF.Ref s a) b where
+    snapshotOptions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotOptions
+
 class HasSnapshotRetentionLimit a b | a -> b where
     snapshotRetentionLimit :: Lens' a b
 
 instance HasSnapshotRetentionLimit a b => HasSnapshotRetentionLimit (TF.Schema l p a) b where
     snapshotRetentionLimit = TF.configuration . snapshotRetentionLimit
+
+instance HasSnapshotRetentionLimit a b => HasSnapshotRetentionLimit (TF.Ref s a) b where
+    snapshotRetentionLimit =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotRetentionLimit
 
 class HasSnapshotType a b | a -> b where
     snapshotType :: Lens' a b
@@ -6785,11 +11115,21 @@ class HasSnapshotType a b | a -> b where
 instance HasSnapshotType a b => HasSnapshotType (TF.Schema l p a) b where
     snapshotType = TF.configuration . snapshotType
 
+instance HasSnapshotType a b => HasSnapshotType (TF.Ref s a) b where
+    snapshotType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotType
+
 class HasSnapshotWindow a b | a -> b where
     snapshotWindow :: Lens' a b
 
 instance HasSnapshotWindow a b => HasSnapshotWindow (TF.Schema l p a) b where
     snapshotWindow = TF.configuration . snapshotWindow
+
+instance HasSnapshotWindow a b => HasSnapshotWindow (TF.Ref s a) b where
+    snapshotWindow =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotWindow
 
 class HasSnapshotWithoutReboot a b | a -> b where
     snapshotWithoutReboot :: Lens' a b
@@ -6797,11 +11137,21 @@ class HasSnapshotWithoutReboot a b | a -> b where
 instance HasSnapshotWithoutReboot a b => HasSnapshotWithoutReboot (TF.Schema l p a) b where
     snapshotWithoutReboot = TF.configuration . snapshotWithoutReboot
 
+instance HasSnapshotWithoutReboot a b => HasSnapshotWithoutReboot (TF.Ref s a) b where
+    snapshotWithoutReboot =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snapshotWithoutReboot
+
 class HasSnsAction a b | a -> b where
     snsAction :: Lens' a b
 
 instance HasSnsAction a b => HasSnsAction (TF.Schema l p a) b where
     snsAction = TF.configuration . snsAction
+
+instance HasSnsAction a b => HasSnsAction (TF.Ref s a) b where
+    snsAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snsAction
 
 class HasSnsDestination a b | a -> b where
     snsDestination :: Lens' a b
@@ -6809,11 +11159,21 @@ class HasSnsDestination a b | a -> b where
 instance HasSnsDestination a b => HasSnsDestination (TF.Schema l p a) b where
     snsDestination = TF.configuration . snsDestination
 
+instance HasSnsDestination a b => HasSnsDestination (TF.Ref s a) b where
+    snsDestination =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snsDestination
+
 class HasSnsTopic a b | a -> b where
     snsTopic :: Lens' a b
 
 instance HasSnsTopic a b => HasSnsTopic (TF.Schema l p a) b where
     snsTopic = TF.configuration . snsTopic
+
+instance HasSnsTopic a b => HasSnsTopic (TF.Ref s a) b where
+    snsTopic =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snsTopic
 
 class HasSnsTopicArn a b | a -> b where
     snsTopicArn :: Lens' a b
@@ -6821,11 +11181,21 @@ class HasSnsTopicArn a b | a -> b where
 instance HasSnsTopicArn a b => HasSnsTopicArn (TF.Schema l p a) b where
     snsTopicArn = TF.configuration . snsTopicArn
 
+instance HasSnsTopicArn a b => HasSnsTopicArn (TF.Ref s a) b where
+    snsTopicArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snsTopicArn
+
 class HasSnsTopicName a b | a -> b where
     snsTopicName :: Lens' a b
 
 instance HasSnsTopicName a b => HasSnsTopicName (TF.Schema l p a) b where
     snsTopicName = TF.configuration . snsTopicName
+
+instance HasSnsTopicName a b => HasSnsTopicName (TF.Ref s a) b where
+    snsTopicName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . snsTopicName
 
 class HasSolutionStackName a b | a -> b where
     solutionStackName :: Lens' a b
@@ -6833,11 +11203,21 @@ class HasSolutionStackName a b | a -> b where
 instance HasSolutionStackName a b => HasSolutionStackName (TF.Schema l p a) b where
     solutionStackName = TF.configuration . solutionStackName
 
+instance HasSolutionStackName a b => HasSolutionStackName (TF.Ref s a) b where
+    solutionStackName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . solutionStackName
+
 class HasSource a b | a -> b where
     source :: Lens' a b
 
 instance HasSource a b => HasSource (TF.Schema l p a) b where
     source = TF.configuration . source
+
+instance HasSource a b => HasSource (TF.Ref s a) b where
+    source =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . source
 
 class HasSourceAccount a b | a -> b where
     sourceAccount :: Lens' a b
@@ -6845,11 +11225,21 @@ class HasSourceAccount a b | a -> b where
 instance HasSourceAccount a b => HasSourceAccount (TF.Schema l p a) b where
     sourceAccount = TF.configuration . sourceAccount
 
+instance HasSourceAccount a b => HasSourceAccount (TF.Ref s a) b where
+    sourceAccount =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceAccount
+
 class HasSourceAmiId a b | a -> b where
     sourceAmiId :: Lens' a b
 
 instance HasSourceAmiId a b => HasSourceAmiId (TF.Schema l p a) b where
     sourceAmiId = TF.configuration . sourceAmiId
+
+instance HasSourceAmiId a b => HasSourceAmiId (TF.Ref s a) b where
+    sourceAmiId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceAmiId
 
 class HasSourceAmiRegion a b | a -> b where
     sourceAmiRegion :: Lens' a b
@@ -6857,11 +11247,21 @@ class HasSourceAmiRegion a b | a -> b where
 instance HasSourceAmiRegion a b => HasSourceAmiRegion (TF.Schema l p a) b where
     sourceAmiRegion = TF.configuration . sourceAmiRegion
 
+instance HasSourceAmiRegion a b => HasSourceAmiRegion (TF.Ref s a) b where
+    sourceAmiRegion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceAmiRegion
+
 class HasSourceArn a b | a -> b where
     sourceArn :: Lens' a b
 
 instance HasSourceArn a b => HasSourceArn (TF.Schema l p a) b where
     sourceArn = TF.configuration . sourceArn
+
+instance HasSourceArn a b => HasSourceArn (TF.Ref s a) b where
+    sourceArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceArn
 
 class HasSourceCodeHash a b | a -> b where
     sourceCodeHash :: Lens' a b
@@ -6869,11 +11269,21 @@ class HasSourceCodeHash a b | a -> b where
 instance HasSourceCodeHash a b => HasSourceCodeHash (TF.Schema l p a) b where
     sourceCodeHash = TF.configuration . sourceCodeHash
 
+instance HasSourceCodeHash a b => HasSourceCodeHash (TF.Ref s a) b where
+    sourceCodeHash =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceCodeHash
+
 class HasSourceDestCheck a b | a -> b where
     sourceDestCheck :: Lens' a b
 
 instance HasSourceDestCheck a b => HasSourceDestCheck (TF.Schema l p a) b where
     sourceDestCheck = TF.configuration . sourceDestCheck
+
+instance HasSourceDestCheck a b => HasSourceDestCheck (TF.Ref s a) b where
+    sourceDestCheck =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceDestCheck
 
 class HasSourceEndpointArn a b | a -> b where
     sourceEndpointArn :: Lens' a b
@@ -6881,11 +11291,21 @@ class HasSourceEndpointArn a b | a -> b where
 instance HasSourceEndpointArn a b => HasSourceEndpointArn (TF.Schema l p a) b where
     sourceEndpointArn = TF.configuration . sourceEndpointArn
 
+instance HasSourceEndpointArn a b => HasSourceEndpointArn (TF.Ref s a) b where
+    sourceEndpointArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceEndpointArn
+
 class HasSourceIds a b | a -> b where
     sourceIds :: Lens' a b
 
 instance HasSourceIds a b => HasSourceIds (TF.Schema l p a) b where
     sourceIds = TF.configuration . sourceIds
+
+instance HasSourceIds a b => HasSourceIds (TF.Ref s a) b where
+    sourceIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceIds
 
 class HasSourceInstanceId a b | a -> b where
     sourceInstanceId :: Lens' a b
@@ -6893,11 +11313,21 @@ class HasSourceInstanceId a b | a -> b where
 instance HasSourceInstanceId a b => HasSourceInstanceId (TF.Schema l p a) b where
     sourceInstanceId = TF.configuration . sourceInstanceId
 
+instance HasSourceInstanceId a b => HasSourceInstanceId (TF.Ref s a) b where
+    sourceInstanceId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceInstanceId
+
 class HasSourceJson a b | a -> b where
     sourceJson :: Lens' a b
 
 instance HasSourceJson a b => HasSourceJson (TF.Schema l p a) b where
     sourceJson = TF.configuration . sourceJson
+
+instance HasSourceJson a b => HasSourceJson (TF.Ref s a) b where
+    sourceJson =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceJson
 
 class HasSourceSecurityGroupId a b | a -> b where
     sourceSecurityGroupId :: Lens' a b
@@ -6905,11 +11335,21 @@ class HasSourceSecurityGroupId a b | a -> b where
 instance HasSourceSecurityGroupId a b => HasSourceSecurityGroupId (TF.Schema l p a) b where
     sourceSecurityGroupId = TF.configuration . sourceSecurityGroupId
 
+instance HasSourceSecurityGroupId a b => HasSourceSecurityGroupId (TF.Ref s a) b where
+    sourceSecurityGroupId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceSecurityGroupId
+
 class HasSourceType a b | a -> b where
     sourceType :: Lens' a b
 
 instance HasSourceType a b => HasSourceType (TF.Schema l p a) b where
     sourceType = TF.configuration . sourceType
+
+instance HasSourceType a b => HasSourceType (TF.Ref s a) b where
+    sourceType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sourceType
 
 class HasSpotPrice a b | a -> b where
     spotPrice :: Lens' a b
@@ -6917,11 +11357,21 @@ class HasSpotPrice a b | a -> b where
 instance HasSpotPrice a b => HasSpotPrice (TF.Schema l p a) b where
     spotPrice = TF.configuration . spotPrice
 
+instance HasSpotPrice a b => HasSpotPrice (TF.Ref s a) b where
+    spotPrice =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . spotPrice
+
 class HasSpotType a b | a -> b where
     spotType :: Lens' a b
 
 instance HasSpotType a b => HasSpotType (TF.Schema l p a) b where
     spotType = TF.configuration . spotType
+
+instance HasSpotType a b => HasSpotType (TF.Ref s a) b where
+    spotType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . spotType
 
 class HasSql a b | a -> b where
     sql :: Lens' a b
@@ -6929,11 +11379,21 @@ class HasSql a b | a -> b where
 instance HasSql a b => HasSql (TF.Schema l p a) b where
     sql = TF.configuration . sql
 
+instance HasSql a b => HasSql (TF.Ref s a) b where
+    sql =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sql
+
 class HasSqlInjectionMatchTuples a b | a -> b where
     sqlInjectionMatchTuples :: Lens' a b
 
 instance HasSqlInjectionMatchTuples a b => HasSqlInjectionMatchTuples (TF.Schema l p a) b where
     sqlInjectionMatchTuples = TF.configuration . sqlInjectionMatchTuples
+
+instance HasSqlInjectionMatchTuples a b => HasSqlInjectionMatchTuples (TF.Ref s a) b where
+    sqlInjectionMatchTuples =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sqlInjectionMatchTuples
 
 class HasSqlVersion a b | a -> b where
     sqlVersion :: Lens' a b
@@ -6941,11 +11401,21 @@ class HasSqlVersion a b | a -> b where
 instance HasSqlVersion a b => HasSqlVersion (TF.Schema l p a) b where
     sqlVersion = TF.configuration . sqlVersion
 
+instance HasSqlVersion a b => HasSqlVersion (TF.Ref s a) b where
+    sqlVersion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sqlVersion
+
 class HasSqsFailureFeedbackRoleArn a b | a -> b where
     sqsFailureFeedbackRoleArn :: Lens' a b
 
 instance HasSqsFailureFeedbackRoleArn a b => HasSqsFailureFeedbackRoleArn (TF.Schema l p a) b where
     sqsFailureFeedbackRoleArn = TF.configuration . sqsFailureFeedbackRoleArn
+
+instance HasSqsFailureFeedbackRoleArn a b => HasSqsFailureFeedbackRoleArn (TF.Ref s a) b where
+    sqsFailureFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sqsFailureFeedbackRoleArn
 
 class HasSqsSuccessFeedbackRoleArn a b | a -> b where
     sqsSuccessFeedbackRoleArn :: Lens' a b
@@ -6953,11 +11423,21 @@ class HasSqsSuccessFeedbackRoleArn a b | a -> b where
 instance HasSqsSuccessFeedbackRoleArn a b => HasSqsSuccessFeedbackRoleArn (TF.Schema l p a) b where
     sqsSuccessFeedbackRoleArn = TF.configuration . sqsSuccessFeedbackRoleArn
 
+instance HasSqsSuccessFeedbackRoleArn a b => HasSqsSuccessFeedbackRoleArn (TF.Ref s a) b where
+    sqsSuccessFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sqsSuccessFeedbackRoleArn
+
 class HasSqsSuccessFeedbackSampleRate a b | a -> b where
     sqsSuccessFeedbackSampleRate :: Lens' a b
 
 instance HasSqsSuccessFeedbackSampleRate a b => HasSqsSuccessFeedbackSampleRate (TF.Schema l p a) b where
     sqsSuccessFeedbackSampleRate = TF.configuration . sqsSuccessFeedbackSampleRate
+
+instance HasSqsSuccessFeedbackSampleRate a b => HasSqsSuccessFeedbackSampleRate (TF.Ref s a) b where
+    sqsSuccessFeedbackSampleRate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sqsSuccessFeedbackSampleRate
 
 class HasSshKeyName a b | a -> b where
     sshKeyName :: Lens' a b
@@ -6965,11 +11445,21 @@ class HasSshKeyName a b | a -> b where
 instance HasSshKeyName a b => HasSshKeyName (TF.Schema l p a) b where
     sshKeyName = TF.configuration . sshKeyName
 
+instance HasSshKeyName a b => HasSshKeyName (TF.Ref s a) b where
+    sshKeyName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sshKeyName
+
 class HasSshPublicKey a b | a -> b where
     sshPublicKey :: Lens' a b
 
 instance HasSshPublicKey a b => HasSshPublicKey (TF.Schema l p a) b where
     sshPublicKey = TF.configuration . sshPublicKey
+
+instance HasSshPublicKey a b => HasSshPublicKey (TF.Ref s a) b where
+    sshPublicKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sshPublicKey
 
 class HasSshUsername a b | a -> b where
     sshUsername :: Lens' a b
@@ -6977,11 +11467,21 @@ class HasSshUsername a b | a -> b where
 instance HasSshUsername a b => HasSshUsername (TF.Schema l p a) b where
     sshUsername = TF.configuration . sshUsername
 
+instance HasSshUsername a b => HasSshUsername (TF.Ref s a) b where
+    sshUsername =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sshUsername
+
 class HasSslConfiguration a b | a -> b where
     sslConfiguration :: Lens' a b
 
 instance HasSslConfiguration a b => HasSslConfiguration (TF.Schema l p a) b where
     sslConfiguration = TF.configuration . sslConfiguration
+
+instance HasSslConfiguration a b => HasSslConfiguration (TF.Ref s a) b where
+    sslConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sslConfiguration
 
 class HasSslMode a b | a -> b where
     sslMode :: Lens' a b
@@ -6989,11 +11489,21 @@ class HasSslMode a b | a -> b where
 instance HasSslMode a b => HasSslMode (TF.Schema l p a) b where
     sslMode = TF.configuration . sslMode
 
+instance HasSslMode a b => HasSslMode (TF.Ref s a) b where
+    sslMode =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sslMode
+
 class HasSslPolicy a b | a -> b where
     sslPolicy :: Lens' a b
 
 instance HasSslPolicy a b => HasSslPolicy (TF.Schema l p a) b where
     sslPolicy = TF.configuration . sslPolicy
+
+instance HasSslPolicy a b => HasSslPolicy (TF.Ref s a) b where
+    sslPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . sslPolicy
 
 class HasStackId a b | a -> b where
     stackId :: Lens' a b
@@ -7001,11 +11511,21 @@ class HasStackId a b | a -> b where
 instance HasStackId a b => HasStackId (TF.Schema l p a) b where
     stackId = TF.configuration . stackId
 
+instance HasStackId a b => HasStackId (TF.Ref s a) b where
+    stackId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . stackId
+
 class HasStage a b | a -> b where
     stage :: Lens' a b
 
 instance HasStage a b => HasStage (TF.Schema l p a) b where
     stage = TF.configuration . stage
+
+instance HasStage a b => HasStage (TF.Ref s a) b where
+    stage =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . stage
 
 class HasStageDescription a b | a -> b where
     stageDescription :: Lens' a b
@@ -7013,11 +11533,21 @@ class HasStageDescription a b | a -> b where
 instance HasStageDescription a b => HasStageDescription (TF.Schema l p a) b where
     stageDescription = TF.configuration . stageDescription
 
+instance HasStageDescription a b => HasStageDescription (TF.Ref s a) b where
+    stageDescription =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . stageDescription
+
 class HasStageKey a b | a -> b where
     stageKey :: Lens' a b
 
 instance HasStageKey a b => HasStageKey (TF.Schema l p a) b where
     stageKey = TF.configuration . stageKey
+
+instance HasStageKey a b => HasStageKey (TF.Ref s a) b where
+    stageKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . stageKey
 
 class HasStageName a b | a -> b where
     stageName :: Lens' a b
@@ -7025,11 +11555,21 @@ class HasStageName a b | a -> b where
 instance HasStageName a b => HasStageName (TF.Schema l p a) b where
     stageName = TF.configuration . stageName
 
+instance HasStageName a b => HasStageName (TF.Ref s a) b where
+    stageName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . stageName
+
 class HasStartTime a b | a -> b where
     startTime :: Lens' a b
 
 instance HasStartTime a b => HasStartTime (TF.Schema l p a) b where
     startTime = TF.configuration . startTime
+
+instance HasStartTime a b => HasStartTime (TF.Ref s a) b where
+    startTime =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . startTime
 
 class HasStartingPosition a b | a -> b where
     startingPosition :: Lens' a b
@@ -7037,11 +11577,21 @@ class HasStartingPosition a b | a -> b where
 instance HasStartingPosition a b => HasStartingPosition (TF.Schema l p a) b where
     startingPosition = TF.configuration . startingPosition
 
+instance HasStartingPosition a b => HasStartingPosition (TF.Ref s a) b where
+    startingPosition =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . startingPosition
+
 class HasState a b | a -> b where
     state :: Lens' a b
 
 instance HasState a b => HasState (TF.Schema l p a) b where
     state = TF.configuration . state
+
+instance HasState a b => HasState (TF.Ref s a) b where
+    state =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . state
 
 class HasStatement a b | a -> b where
     statement :: Lens' a b
@@ -7049,11 +11599,21 @@ class HasStatement a b | a -> b where
 instance HasStatement a b => HasStatement (TF.Schema l p a) b where
     statement = TF.configuration . statement
 
+instance HasStatement a b => HasStatement (TF.Ref s a) b where
+    statement =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statement
+
 class HasStatementId a b | a -> b where
     statementId :: Lens' a b
 
 instance HasStatementId a b => HasStatementId (TF.Schema l p a) b where
     statementId = TF.configuration . statementId
+
+instance HasStatementId a b => HasStatementId (TF.Ref s a) b where
+    statementId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statementId
 
 class HasStaticIpName a b | a -> b where
     staticIpName :: Lens' a b
@@ -7061,11 +11621,21 @@ class HasStaticIpName a b | a -> b where
 instance HasStaticIpName a b => HasStaticIpName (TF.Schema l p a) b where
     staticIpName = TF.configuration . staticIpName
 
+instance HasStaticIpName a b => HasStaticIpName (TF.Ref s a) b where
+    staticIpName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . staticIpName
+
 class HasStaticRoutesOnly a b | a -> b where
     staticRoutesOnly :: Lens' a b
 
 instance HasStaticRoutesOnly a b => HasStaticRoutesOnly (TF.Schema l p a) b where
     staticRoutesOnly = TF.configuration . staticRoutesOnly
+
+instance HasStaticRoutesOnly a b => HasStaticRoutesOnly (TF.Ref s a) b where
+    staticRoutesOnly =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . staticRoutesOnly
 
 class HasStatistic a b | a -> b where
     statistic :: Lens' a b
@@ -7073,11 +11643,21 @@ class HasStatistic a b | a -> b where
 instance HasStatistic a b => HasStatistic (TF.Schema l p a) b where
     statistic = TF.configuration . statistic
 
+instance HasStatistic a b => HasStatistic (TF.Ref s a) b where
+    statistic =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statistic
+
 class HasStatsEnabled a b | a -> b where
     statsEnabled :: Lens' a b
 
 instance HasStatsEnabled a b => HasStatsEnabled (TF.Schema l p a) b where
     statsEnabled = TF.configuration . statsEnabled
+
+instance HasStatsEnabled a b => HasStatsEnabled (TF.Ref s a) b where
+    statsEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statsEnabled
 
 class HasStatsPassword a b | a -> b where
     statsPassword :: Lens' a b
@@ -7085,11 +11665,21 @@ class HasStatsPassword a b | a -> b where
 instance HasStatsPassword a b => HasStatsPassword (TF.Schema l p a) b where
     statsPassword = TF.configuration . statsPassword
 
+instance HasStatsPassword a b => HasStatsPassword (TF.Ref s a) b where
+    statsPassword =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statsPassword
+
 class HasStatsUrl a b | a -> b where
     statsUrl :: Lens' a b
 
 instance HasStatsUrl a b => HasStatsUrl (TF.Schema l p a) b where
     statsUrl = TF.configuration . statsUrl
+
+instance HasStatsUrl a b => HasStatsUrl (TF.Ref s a) b where
+    statsUrl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statsUrl
 
 class HasStatsUser a b | a -> b where
     statsUser :: Lens' a b
@@ -7097,11 +11687,21 @@ class HasStatsUser a b | a -> b where
 instance HasStatsUser a b => HasStatsUser (TF.Schema l p a) b where
     statsUser = TF.configuration . statsUser
 
+instance HasStatsUser a b => HasStatsUser (TF.Ref s a) b where
+    statsUser =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statsUser
+
 class HasStatus a b | a -> b where
     status :: Lens' a b
 
 instance HasStatus a b => HasStatus (TF.Schema l p a) b where
     status = TF.configuration . status
+
+instance HasStatus a b => HasStatus (TF.Ref s a) b where
+    status =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . status
 
 class HasStatusCode a b | a -> b where
     statusCode :: Lens' a b
@@ -7109,11 +11709,21 @@ class HasStatusCode a b | a -> b where
 instance HasStatusCode a b => HasStatusCode (TF.Schema l p a) b where
     statusCode = TF.configuration . statusCode
 
+instance HasStatusCode a b => HasStatusCode (TF.Ref s a) b where
+    statusCode =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statusCode
+
 class HasStatuses a b | a -> b where
     statuses :: Lens' a b
 
 instance HasStatuses a b => HasStatuses (TF.Schema l p a) b where
     statuses = TF.configuration . statuses
+
+instance HasStatuses a b => HasStatuses (TF.Ref s a) b where
+    statuses =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . statuses
 
 class HasStepScalingPolicyConfiguration a b | a -> b where
     stepScalingPolicyConfiguration :: Lens' a b
@@ -7121,11 +11731,21 @@ class HasStepScalingPolicyConfiguration a b | a -> b where
 instance HasStepScalingPolicyConfiguration a b => HasStepScalingPolicyConfiguration (TF.Schema l p a) b where
     stepScalingPolicyConfiguration = TF.configuration . stepScalingPolicyConfiguration
 
+instance HasStepScalingPolicyConfiguration a b => HasStepScalingPolicyConfiguration (TF.Ref s a) b where
+    stepScalingPolicyConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . stepScalingPolicyConfiguration
+
 class HasStickiness a b | a -> b where
     stickiness :: Lens' a b
 
 instance HasStickiness a b => HasStickiness (TF.Schema l p a) b where
     stickiness = TF.configuration . stickiness
+
+instance HasStickiness a b => HasStickiness (TF.Ref s a) b where
+    stickiness =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . stickiness
 
 class HasStopAction a b | a -> b where
     stopAction :: Lens' a b
@@ -7133,11 +11753,21 @@ class HasStopAction a b | a -> b where
 instance HasStopAction a b => HasStopAction (TF.Schema l p a) b where
     stopAction = TF.configuration . stopAction
 
+instance HasStopAction a b => HasStopAction (TF.Ref s a) b where
+    stopAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . stopAction
+
 class HasStorageClass a b | a -> b where
     storageClass :: Lens' a b
 
 instance HasStorageClass a b => HasStorageClass (TF.Schema l p a) b where
     storageClass = TF.configuration . storageClass
+
+instance HasStorageClass a b => HasStorageClass (TF.Ref s a) b where
+    storageClass =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . storageClass
 
 class HasStorageEncrypted a b | a -> b where
     storageEncrypted :: Lens' a b
@@ -7145,11 +11775,21 @@ class HasStorageEncrypted a b | a -> b where
 instance HasStorageEncrypted a b => HasStorageEncrypted (TF.Schema l p a) b where
     storageEncrypted = TF.configuration . storageEncrypted
 
+instance HasStorageEncrypted a b => HasStorageEncrypted (TF.Ref s a) b where
+    storageEncrypted =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . storageEncrypted
+
 class HasStorageLocation a b | a -> b where
     storageLocation :: Lens' a b
 
 instance HasStorageLocation a b => HasStorageLocation (TF.Schema l p a) b where
     storageLocation = TF.configuration . storageLocation
+
+instance HasStorageLocation a b => HasStorageLocation (TF.Ref s a) b where
+    storageLocation =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . storageLocation
 
 class HasStorageType a b | a -> b where
     storageType :: Lens' a b
@@ -7157,11 +11797,21 @@ class HasStorageType a b | a -> b where
 instance HasStorageType a b => HasStorageType (TF.Schema l p a) b where
     storageType = TF.configuration . storageType
 
+instance HasStorageType a b => HasStorageType (TF.Ref s a) b where
+    storageType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . storageType
+
 class HasStrategy a b | a -> b where
     strategy :: Lens' a b
 
 instance HasStrategy a b => HasStrategy (TF.Schema l p a) b where
     strategy = TF.configuration . strategy
+
+instance HasStrategy a b => HasStrategy (TF.Ref s a) b where
+    strategy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . strategy
 
 class HasStreamEnabled a b | a -> b where
     streamEnabled :: Lens' a b
@@ -7169,11 +11819,21 @@ class HasStreamEnabled a b | a -> b where
 instance HasStreamEnabled a b => HasStreamEnabled (TF.Schema l p a) b where
     streamEnabled = TF.configuration . streamEnabled
 
+instance HasStreamEnabled a b => HasStreamEnabled (TF.Ref s a) b where
+    streamEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . streamEnabled
+
 class HasStreamViewType a b | a -> b where
     streamViewType :: Lens' a b
 
 instance HasStreamViewType a b => HasStreamViewType (TF.Schema l p a) b where
     streamViewType = TF.configuration . streamViewType
+
+instance HasStreamViewType a b => HasStreamViewType (TF.Ref s a) b where
+    streamViewType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . streamViewType
 
 class HasSubject a b | a -> b where
     subject :: Lens' a b
@@ -7181,11 +11841,21 @@ class HasSubject a b | a -> b where
 instance HasSubject a b => HasSubject (TF.Schema l p a) b where
     subject = TF.configuration . subject
 
+instance HasSubject a b => HasSubject (TF.Ref s a) b where
+    subject =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . subject
+
 class HasSubjectAlternativeNames a b | a -> b where
     subjectAlternativeNames :: Lens' a b
 
 instance HasSubjectAlternativeNames a b => HasSubjectAlternativeNames (TF.Schema l p a) b where
     subjectAlternativeNames = TF.configuration . subjectAlternativeNames
+
+instance HasSubjectAlternativeNames a b => HasSubjectAlternativeNames (TF.Ref s a) b where
+    subjectAlternativeNames =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . subjectAlternativeNames
 
 class HasSubnetGroupName a b | a -> b where
     subnetGroupName :: Lens' a b
@@ -7193,11 +11863,21 @@ class HasSubnetGroupName a b | a -> b where
 instance HasSubnetGroupName a b => HasSubnetGroupName (TF.Schema l p a) b where
     subnetGroupName = TF.configuration . subnetGroupName
 
+instance HasSubnetGroupName a b => HasSubnetGroupName (TF.Ref s a) b where
+    subnetGroupName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . subnetGroupName
+
 class HasSubnetId a b | a -> b where
     subnetId :: Lens' a b
 
 instance HasSubnetId a b => HasSubnetId (TF.Schema l p a) b where
     subnetId = TF.configuration . subnetId
+
+instance HasSubnetId a b => HasSubnetId (TF.Ref s a) b where
+    subnetId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . subnetId
 
 class HasSubnetIds a b | a -> b where
     subnetIds :: Lens' a b
@@ -7205,11 +11885,21 @@ class HasSubnetIds a b | a -> b where
 instance HasSubnetIds a b => HasSubnetIds (TF.Schema l p a) b where
     subnetIds = TF.configuration . subnetIds
 
+instance HasSubnetIds a b => HasSubnetIds (TF.Ref s a) b where
+    subnetIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . subnetIds
+
 class HasSubnetMapping a b | a -> b where
     subnetMapping :: Lens' a b
 
 instance HasSubnetMapping a b => HasSubnetMapping (TF.Schema l p a) b where
     subnetMapping = TF.configuration . subnetMapping
+
+instance HasSubnetMapping a b => HasSubnetMapping (TF.Ref s a) b where
+    subnetMapping =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . subnetMapping
 
 class HasSubnets a b | a -> b where
     subnets :: Lens' a b
@@ -7217,11 +11907,21 @@ class HasSubnets a b | a -> b where
 instance HasSubnets a b => HasSubnets (TF.Schema l p a) b where
     subnets = TF.configuration . subnets
 
+instance HasSubnets a b => HasSubnets (TF.Ref s a) b where
+    subnets =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . subnets
+
 class HasSuccessFeedbackRoleArn a b | a -> b where
     successFeedbackRoleArn :: Lens' a b
 
 instance HasSuccessFeedbackRoleArn a b => HasSuccessFeedbackRoleArn (TF.Schema l p a) b where
     successFeedbackRoleArn = TF.configuration . successFeedbackRoleArn
+
+instance HasSuccessFeedbackRoleArn a b => HasSuccessFeedbackRoleArn (TF.Ref s a) b where
+    successFeedbackRoleArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . successFeedbackRoleArn
 
 class HasSuccessFeedbackSampleRate a b | a -> b where
     successFeedbackSampleRate :: Lens' a b
@@ -7229,11 +11929,21 @@ class HasSuccessFeedbackSampleRate a b | a -> b where
 instance HasSuccessFeedbackSampleRate a b => HasSuccessFeedbackSampleRate (TF.Schema l p a) b where
     successFeedbackSampleRate = TF.configuration . successFeedbackSampleRate
 
+instance HasSuccessFeedbackSampleRate a b => HasSuccessFeedbackSampleRate (TF.Ref s a) b where
+    successFeedbackSampleRate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . successFeedbackSampleRate
+
 class HasSupportedIdentityProviders a b | a -> b where
     supportedIdentityProviders :: Lens' a b
 
 instance HasSupportedIdentityProviders a b => HasSupportedIdentityProviders (TF.Schema l p a) b where
     supportedIdentityProviders = TF.configuration . supportedIdentityProviders
+
+instance HasSupportedIdentityProviders a b => HasSupportedIdentityProviders (TF.Ref s a) b where
+    supportedIdentityProviders =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . supportedIdentityProviders
 
 class HasSupportedLoginProviders a b | a -> b where
     supportedLoginProviders :: Lens' a b
@@ -7241,11 +11951,21 @@ class HasSupportedLoginProviders a b | a -> b where
 instance HasSupportedLoginProviders a b => HasSupportedLoginProviders (TF.Schema l p a) b where
     supportedLoginProviders = TF.configuration . supportedLoginProviders
 
+instance HasSupportedLoginProviders a b => HasSupportedLoginProviders (TF.Ref s a) b where
+    supportedLoginProviders =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . supportedLoginProviders
+
 class HasSuspendedProcesses a b | a -> b where
     suspendedProcesses :: Lens' a b
 
 instance HasSuspendedProcesses a b => HasSuspendedProcesses (TF.Schema l p a) b where
     suspendedProcesses = TF.configuration . suspendedProcesses
+
+instance HasSuspendedProcesses a b => HasSuspendedProcesses (TF.Ref s a) b where
+    suspendedProcesses =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . suspendedProcesses
 
 class HasSystemPackages a b | a -> b where
     systemPackages :: Lens' a b
@@ -7253,11 +11973,21 @@ class HasSystemPackages a b | a -> b where
 instance HasSystemPackages a b => HasSystemPackages (TF.Schema l p a) b where
     systemPackages = TF.configuration . systemPackages
 
+instance HasSystemPackages a b => HasSystemPackages (TF.Ref s a) b where
+    systemPackages =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . systemPackages
+
 class HasTableMappings a b | a -> b where
     tableMappings :: Lens' a b
 
 instance HasTableMappings a b => HasTableMappings (TF.Schema l p a) b where
     tableMappings = TF.configuration . tableMappings
+
+instance HasTableMappings a b => HasTableMappings (TF.Ref s a) b where
+    tableMappings =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tableMappings
 
 class HasTableName a b | a -> b where
     tableName :: Lens' a b
@@ -7265,11 +11995,21 @@ class HasTableName a b | a -> b where
 instance HasTableName a b => HasTableName (TF.Schema l p a) b where
     tableName = TF.configuration . tableName
 
+instance HasTableName a b => HasTableName (TF.Ref s a) b where
+    tableName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tableName
+
 class HasTag a b | a -> b where
     tag :: Lens' a b
 
 instance HasTag a b => HasTag (TF.Schema l p a) b where
     tag = TF.configuration . tag
+
+instance HasTag a b => HasTag (TF.Ref s a) b where
+    tag =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tag
 
 class HasTags a b | a -> b where
     tags :: Lens' a b
@@ -7277,11 +12017,21 @@ class HasTags a b | a -> b where
 instance HasTags a b => HasTags (TF.Schema l p a) b where
     tags = TF.configuration . tags
 
+instance HasTags a b => HasTags (TF.Ref s a) b where
+    tags =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tags
+
 class HasTargetArn a b | a -> b where
     targetArn :: Lens' a b
 
 instance HasTargetArn a b => HasTargetArn (TF.Schema l p a) b where
     targetArn = TF.configuration . targetArn
+
+instance HasTargetArn a b => HasTargetArn (TF.Ref s a) b where
+    targetArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetArn
 
 class HasTargetCapacity a b | a -> b where
     targetCapacity :: Lens' a b
@@ -7289,11 +12039,21 @@ class HasTargetCapacity a b | a -> b where
 instance HasTargetCapacity a b => HasTargetCapacity (TF.Schema l p a) b where
     targetCapacity = TF.configuration . targetCapacity
 
+instance HasTargetCapacity a b => HasTargetCapacity (TF.Ref s a) b where
+    targetCapacity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetCapacity
+
 class HasTargetEndpointArn a b | a -> b where
     targetEndpointArn :: Lens' a b
 
 instance HasTargetEndpointArn a b => HasTargetEndpointArn (TF.Schema l p a) b where
     targetEndpointArn = TF.configuration . targetEndpointArn
+
+instance HasTargetEndpointArn a b => HasTargetEndpointArn (TF.Ref s a) b where
+    targetEndpointArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetEndpointArn
 
 class HasTargetGroupArn a b | a -> b where
     targetGroupArn :: Lens' a b
@@ -7301,11 +12061,21 @@ class HasTargetGroupArn a b | a -> b where
 instance HasTargetGroupArn a b => HasTargetGroupArn (TF.Schema l p a) b where
     targetGroupArn = TF.configuration . targetGroupArn
 
+instance HasTargetGroupArn a b => HasTargetGroupArn (TF.Ref s a) b where
+    targetGroupArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetGroupArn
+
 class HasTargetGroupArns a b | a -> b where
     targetGroupArns :: Lens' a b
 
 instance HasTargetGroupArns a b => HasTargetGroupArns (TF.Schema l p a) b where
     targetGroupArns = TF.configuration . targetGroupArns
+
+instance HasTargetGroupArns a b => HasTargetGroupArns (TF.Ref s a) b where
+    targetGroupArns =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetGroupArns
 
 class HasTargetId a b | a -> b where
     targetId :: Lens' a b
@@ -7313,11 +12083,21 @@ class HasTargetId a b | a -> b where
 instance HasTargetId a b => HasTargetId (TF.Schema l p a) b where
     targetId = TF.configuration . targetId
 
+instance HasTargetId a b => HasTargetId (TF.Ref s a) b where
+    targetId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetId
+
 class HasTargetKeyId a b | a -> b where
     targetKeyId :: Lens' a b
 
 instance HasTargetKeyId a b => HasTargetKeyId (TF.Schema l p a) b where
     targetKeyId = TF.configuration . targetKeyId
+
+instance HasTargetKeyId a b => HasTargetKeyId (TF.Ref s a) b where
+    targetKeyId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetKeyId
 
 class HasTargetTrackingScalingPolicyConfiguration a b | a -> b where
     targetTrackingScalingPolicyConfiguration :: Lens' a b
@@ -7325,11 +12105,21 @@ class HasTargetTrackingScalingPolicyConfiguration a b | a -> b where
 instance HasTargetTrackingScalingPolicyConfiguration a b => HasTargetTrackingScalingPolicyConfiguration (TF.Schema l p a) b where
     targetTrackingScalingPolicyConfiguration = TF.configuration . targetTrackingScalingPolicyConfiguration
 
+instance HasTargetTrackingScalingPolicyConfiguration a b => HasTargetTrackingScalingPolicyConfiguration (TF.Ref s a) b where
+    targetTrackingScalingPolicyConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetTrackingScalingPolicyConfiguration
+
 class HasTargetType a b | a -> b where
     targetType :: Lens' a b
 
 instance HasTargetType a b => HasTargetType (TF.Schema l p a) b where
     targetType = TF.configuration . targetType
+
+instance HasTargetType a b => HasTargetType (TF.Ref s a) b where
+    targetType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targetType
 
 class HasTargets a b | a -> b where
     targets :: Lens' a b
@@ -7337,11 +12127,21 @@ class HasTargets a b | a -> b where
 instance HasTargets a b => HasTargets (TF.Schema l p a) b where
     targets = TF.configuration . targets
 
+instance HasTargets a b => HasTargets (TF.Ref s a) b where
+    targets =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . targets
+
 class HasTaskArn a b | a -> b where
     taskArn :: Lens' a b
 
 instance HasTaskArn a b => HasTaskArn (TF.Schema l p a) b where
     taskArn = TF.configuration . taskArn
+
+instance HasTaskArn a b => HasTaskArn (TF.Ref s a) b where
+    taskArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . taskArn
 
 class HasTaskDefinition a b | a -> b where
     taskDefinition :: Lens' a b
@@ -7349,11 +12149,21 @@ class HasTaskDefinition a b | a -> b where
 instance HasTaskDefinition a b => HasTaskDefinition (TF.Schema l p a) b where
     taskDefinition = TF.configuration . taskDefinition
 
+instance HasTaskDefinition a b => HasTaskDefinition (TF.Ref s a) b where
+    taskDefinition =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . taskDefinition
+
 class HasTaskParameters a b | a -> b where
     taskParameters :: Lens' a b
 
 instance HasTaskParameters a b => HasTaskParameters (TF.Schema l p a) b where
     taskParameters = TF.configuration . taskParameters
+
+instance HasTaskParameters a b => HasTaskParameters (TF.Ref s a) b where
+    taskParameters =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . taskParameters
 
 class HasTaskType a b | a -> b where
     taskType :: Lens' a b
@@ -7361,11 +12171,21 @@ class HasTaskType a b | a -> b where
 instance HasTaskType a b => HasTaskType (TF.Schema l p a) b where
     taskType = TF.configuration . taskType
 
+instance HasTaskType a b => HasTaskType (TF.Ref s a) b where
+    taskType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . taskType
+
 class HasTemplateBody a b | a -> b where
     templateBody :: Lens' a b
 
 instance HasTemplateBody a b => HasTemplateBody (TF.Schema l p a) b where
     templateBody = TF.configuration . templateBody
+
+instance HasTemplateBody a b => HasTemplateBody (TF.Ref s a) b where
+    templateBody =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . templateBody
 
 class HasTemplateName a b | a -> b where
     templateName :: Lens' a b
@@ -7373,11 +12193,21 @@ class HasTemplateName a b | a -> b where
 instance HasTemplateName a b => HasTemplateName (TF.Schema l p a) b where
     templateName = TF.configuration . templateName
 
+instance HasTemplateName a b => HasTemplateName (TF.Ref s a) b where
+    templateName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . templateName
+
 class HasTemplateUrl a b | a -> b where
     templateUrl :: Lens' a b
 
 instance HasTemplateUrl a b => HasTemplateUrl (TF.Schema l p a) b where
     templateUrl = TF.configuration . templateUrl
+
+instance HasTemplateUrl a b => HasTemplateUrl (TF.Ref s a) b where
+    templateUrl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . templateUrl
 
 class HasTenancy a b | a -> b where
     tenancy :: Lens' a b
@@ -7385,11 +12215,21 @@ class HasTenancy a b | a -> b where
 instance HasTenancy a b => HasTenancy (TF.Schema l p a) b where
     tenancy = TF.configuration . tenancy
 
+instance HasTenancy a b => HasTenancy (TF.Ref s a) b where
+    tenancy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tenancy
+
 class HasTerminateInstancesWithExpiration a b | a -> b where
     terminateInstancesWithExpiration :: Lens' a b
 
 instance HasTerminateInstancesWithExpiration a b => HasTerminateInstancesWithExpiration (TF.Schema l p a) b where
     terminateInstancesWithExpiration = TF.configuration . terminateInstancesWithExpiration
+
+instance HasTerminateInstancesWithExpiration a b => HasTerminateInstancesWithExpiration (TF.Ref s a) b where
+    terminateInstancesWithExpiration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . terminateInstancesWithExpiration
 
 class HasTerminationPolicies a b | a -> b where
     terminationPolicies :: Lens' a b
@@ -7397,11 +12237,21 @@ class HasTerminationPolicies a b | a -> b where
 instance HasTerminationPolicies a b => HasTerminationPolicies (TF.Schema l p a) b where
     terminationPolicies = TF.configuration . terminationPolicies
 
+instance HasTerminationPolicies a b => HasTerminationPolicies (TF.Ref s a) b where
+    terminationPolicies =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . terminationPolicies
+
 class HasTerminationProtection a b | a -> b where
     terminationProtection :: Lens' a b
 
 instance HasTerminationProtection a b => HasTerminationProtection (TF.Schema l p a) b where
     terminationProtection = TF.configuration . terminationProtection
+
+instance HasTerminationProtection a b => HasTerminationProtection (TF.Ref s a) b where
+    terminationProtection =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . terminationProtection
 
 class HasText a b | a -> b where
     text :: Lens' a b
@@ -7409,11 +12259,21 @@ class HasText a b | a -> b where
 instance HasText a b => HasText (TF.Schema l p a) b where
     text = TF.configuration . text
 
+instance HasText a b => HasText (TF.Ref s a) b where
+    text =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . text
+
 class HasThreshold a b | a -> b where
     threshold :: Lens' a b
 
 instance HasThreshold a b => HasThreshold (TF.Schema l p a) b where
     threshold = TF.configuration . threshold
+
+instance HasThreshold a b => HasThreshold (TF.Ref s a) b where
+    threshold =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . threshold
 
 class HasThrottleSettings a b | a -> b where
     throttleSettings :: Lens' a b
@@ -7421,11 +12281,21 @@ class HasThrottleSettings a b | a -> b where
 instance HasThrottleSettings a b => HasThrottleSettings (TF.Schema l p a) b where
     throttleSettings = TF.configuration . throttleSettings
 
+instance HasThrottleSettings a b => HasThrottleSettings (TF.Ref s a) b where
+    throttleSettings =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . throttleSettings
+
 class HasThumbnailConfig a b | a -> b where
     thumbnailConfig :: Lens' a b
 
 instance HasThumbnailConfig a b => HasThumbnailConfig (TF.Schema l p a) b where
     thumbnailConfig = TF.configuration . thumbnailConfig
+
+instance HasThumbnailConfig a b => HasThumbnailConfig (TF.Ref s a) b where
+    thumbnailConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . thumbnailConfig
 
 class HasThumbnailConfigPermissions a b | a -> b where
     thumbnailConfigPermissions :: Lens' a b
@@ -7433,11 +12303,21 @@ class HasThumbnailConfigPermissions a b | a -> b where
 instance HasThumbnailConfigPermissions a b => HasThumbnailConfigPermissions (TF.Schema l p a) b where
     thumbnailConfigPermissions = TF.configuration . thumbnailConfigPermissions
 
+instance HasThumbnailConfigPermissions a b => HasThumbnailConfigPermissions (TF.Ref s a) b where
+    thumbnailConfigPermissions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . thumbnailConfigPermissions
+
 class HasThumbnails a b | a -> b where
     thumbnails :: Lens' a b
 
 instance HasThumbnails a b => HasThumbnails (TF.Schema l p a) b where
     thumbnails = TF.configuration . thumbnails
+
+instance HasThumbnails a b => HasThumbnails (TF.Ref s a) b where
+    thumbnails =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . thumbnails
 
 class HasThumbprintList a b | a -> b where
     thumbprintList :: Lens' a b
@@ -7445,11 +12325,21 @@ class HasThumbprintList a b | a -> b where
 instance HasThumbprintList a b => HasThumbprintList (TF.Schema l p a) b where
     thumbprintList = TF.configuration . thumbprintList
 
+instance HasThumbprintList a b => HasThumbprintList (TF.Ref s a) b where
+    thumbprintList =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . thumbprintList
+
 class HasTier a b | a -> b where
     tier :: Lens' a b
 
 instance HasTier a b => HasTier (TF.Schema l p a) b where
     tier = TF.configuration . tier
+
+instance HasTier a b => HasTier (TF.Ref s a) b where
+    tier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tier
 
 class HasTimeout a b | a -> b where
     timeout :: Lens' a b
@@ -7457,11 +12347,21 @@ class HasTimeout a b | a -> b where
 instance HasTimeout a b => HasTimeout (TF.Schema l p a) b where
     timeout = TF.configuration . timeout
 
+instance HasTimeout a b => HasTimeout (TF.Ref s a) b where
+    timeout =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . timeout
+
 class HasTimeoutInMinutes a b | a -> b where
     timeoutInMinutes :: Lens' a b
 
 instance HasTimeoutInMinutes a b => HasTimeoutInMinutes (TF.Schema l p a) b where
     timeoutInMinutes = TF.configuration . timeoutInMinutes
+
+instance HasTimeoutInMinutes a b => HasTimeoutInMinutes (TF.Ref s a) b where
+    timeoutInMinutes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . timeoutInMinutes
 
 class HasTimezone a b | a -> b where
     timezone :: Lens' a b
@@ -7469,11 +12369,21 @@ class HasTimezone a b | a -> b where
 instance HasTimezone a b => HasTimezone (TF.Schema l p a) b where
     timezone = TF.configuration . timezone
 
+instance HasTimezone a b => HasTimezone (TF.Ref s a) b where
+    timezone =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . timezone
+
 class HasTlsPolicy a b | a -> b where
     tlsPolicy :: Lens' a b
 
 instance HasTlsPolicy a b => HasTlsPolicy (TF.Schema l p a) b where
     tlsPolicy = TF.configuration . tlsPolicy
+
+instance HasTlsPolicy a b => HasTlsPolicy (TF.Ref s a) b where
+    tlsPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tlsPolicy
 
 class HasToPort a b | a -> b where
     toPort :: Lens' a b
@@ -7481,11 +12391,21 @@ class HasToPort a b | a -> b where
 instance HasToPort a b => HasToPort (TF.Schema l p a) b where
     toPort = TF.configuration . toPort
 
+instance HasToPort a b => HasToPort (TF.Ref s a) b where
+    toPort =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . toPort
+
 class HasTopic a b | a -> b where
     topic :: Lens' a b
 
 instance HasTopic a b => HasTopic (TF.Schema l p a) b where
     topic = TF.configuration . topic
+
+instance HasTopic a b => HasTopic (TF.Ref s a) b where
+    topic =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . topic
 
 class HasTopicArn a b | a -> b where
     topicArn :: Lens' a b
@@ -7493,11 +12413,21 @@ class HasTopicArn a b | a -> b where
 instance HasTopicArn a b => HasTopicArn (TF.Schema l p a) b where
     topicArn = TF.configuration . topicArn
 
+instance HasTopicArn a b => HasTopicArn (TF.Ref s a) b where
+    topicArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . topicArn
+
 class HasTrafficType a b | a -> b where
     trafficType :: Lens' a b
 
 instance HasTrafficType a b => HasTrafficType (TF.Schema l p a) b where
     trafficType = TF.configuration . trafficType
+
+instance HasTrafficType a b => HasTrafficType (TF.Ref s a) b where
+    trafficType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . trafficType
 
 class HasTransitEncryptionEnabled a b | a -> b where
     transitEncryptionEnabled :: Lens' a b
@@ -7505,11 +12435,21 @@ class HasTransitEncryptionEnabled a b | a -> b where
 instance HasTransitEncryptionEnabled a b => HasTransitEncryptionEnabled (TF.Schema l p a) b where
     transitEncryptionEnabled = TF.configuration . transitEncryptionEnabled
 
+instance HasTransitEncryptionEnabled a b => HasTransitEncryptionEnabled (TF.Ref s a) b where
+    transitEncryptionEnabled =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . transitEncryptionEnabled
+
 class HasTreatMissingData a b | a -> b where
     treatMissingData :: Lens' a b
 
 instance HasTreatMissingData a b => HasTreatMissingData (TF.Schema l p a) b where
     treatMissingData = TF.configuration . treatMissingData
+
+instance HasTreatMissingData a b => HasTreatMissingData (TF.Ref s a) b where
+    treatMissingData =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . treatMissingData
 
 class HasTriggerConfiguration a b | a -> b where
     triggerConfiguration :: Lens' a b
@@ -7517,11 +12457,21 @@ class HasTriggerConfiguration a b | a -> b where
 instance HasTriggerConfiguration a b => HasTriggerConfiguration (TF.Schema l p a) b where
     triggerConfiguration = TF.configuration . triggerConfiguration
 
+instance HasTriggerConfiguration a b => HasTriggerConfiguration (TF.Ref s a) b where
+    triggerConfiguration =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . triggerConfiguration
+
 class HasTtl a b | a -> b where
     ttl :: Lens' a b
 
 instance HasTtl a b => HasTtl (TF.Schema l p a) b where
     ttl = TF.configuration . ttl
+
+instance HasTtl a b => HasTtl (TF.Ref s a) b where
+    ttl =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . ttl
 
 class HasTunnel1InsideCidr a b | a -> b where
     tunnel1InsideCidr :: Lens' a b
@@ -7529,11 +12479,21 @@ class HasTunnel1InsideCidr a b | a -> b where
 instance HasTunnel1InsideCidr a b => HasTunnel1InsideCidr (TF.Schema l p a) b where
     tunnel1InsideCidr = TF.configuration . tunnel1InsideCidr
 
+instance HasTunnel1InsideCidr a b => HasTunnel1InsideCidr (TF.Ref s a) b where
+    tunnel1InsideCidr =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tunnel1InsideCidr
+
 class HasTunnel1PresharedKey a b | a -> b where
     tunnel1PresharedKey :: Lens' a b
 
 instance HasTunnel1PresharedKey a b => HasTunnel1PresharedKey (TF.Schema l p a) b where
     tunnel1PresharedKey = TF.configuration . tunnel1PresharedKey
+
+instance HasTunnel1PresharedKey a b => HasTunnel1PresharedKey (TF.Ref s a) b where
+    tunnel1PresharedKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tunnel1PresharedKey
 
 class HasTunnel2InsideCidr a b | a -> b where
     tunnel2InsideCidr :: Lens' a b
@@ -7541,11 +12501,21 @@ class HasTunnel2InsideCidr a b | a -> b where
 instance HasTunnel2InsideCidr a b => HasTunnel2InsideCidr (TF.Schema l p a) b where
     tunnel2InsideCidr = TF.configuration . tunnel2InsideCidr
 
+instance HasTunnel2InsideCidr a b => HasTunnel2InsideCidr (TF.Ref s a) b where
+    tunnel2InsideCidr =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tunnel2InsideCidr
+
 class HasTunnel2PresharedKey a b | a -> b where
     tunnel2PresharedKey :: Lens' a b
 
 instance HasTunnel2PresharedKey a b => HasTunnel2PresharedKey (TF.Schema l p a) b where
     tunnel2PresharedKey = TF.configuration . tunnel2PresharedKey
+
+instance HasTunnel2PresharedKey a b => HasTunnel2PresharedKey (TF.Ref s a) b where
+    tunnel2PresharedKey =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . tunnel2PresharedKey
 
 class HasType' a b | a -> b where
     type' :: Lens' a b
@@ -7553,11 +12523,21 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
+instance HasType' a b => HasType' (TF.Ref s a) b where
+    type' =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . type'
+
 class HasTypes a b | a -> b where
     types :: Lens' a b
 
 instance HasTypes a b => HasTypes (TF.Schema l p a) b where
     types = TF.configuration . types
+
+instance HasTypes a b => HasTypes (TF.Ref s a) b where
+    types =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . types
 
 class HasUnit a b | a -> b where
     unit :: Lens' a b
@@ -7565,11 +12545,21 @@ class HasUnit a b | a -> b where
 instance HasUnit a b => HasUnit (TF.Schema l p a) b where
     unit = TF.configuration . unit
 
+instance HasUnit a b => HasUnit (TF.Ref s a) b where
+    unit =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . unit
+
 class HasUri a b | a -> b where
     uri :: Lens' a b
 
 instance HasUri a b => HasUri (TF.Schema l p a) b where
     uri = TF.configuration . uri
+
+instance HasUri a b => HasUri (TF.Ref s a) b where
+    uri =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . uri
 
 class HasUrl a b | a -> b where
     url :: Lens' a b
@@ -7577,11 +12567,21 @@ class HasUrl a b | a -> b where
 instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
 
+instance HasUrl a b => HasUrl (TF.Ref s a) b where
+    url =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . url
+
 class HasUsagePlanId a b | a -> b where
     usagePlanId :: Lens' a b
 
 instance HasUsagePlanId a b => HasUsagePlanId (TF.Schema l p a) b where
     usagePlanId = TF.configuration . usagePlanId
+
+instance HasUsagePlanId a b => HasUsagePlanId (TF.Ref s a) b where
+    usagePlanId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . usagePlanId
 
 class HasUseCustomCookbooks a b | a -> b where
     useCustomCookbooks :: Lens' a b
@@ -7589,11 +12589,21 @@ class HasUseCustomCookbooks a b | a -> b where
 instance HasUseCustomCookbooks a b => HasUseCustomCookbooks (TF.Schema l p a) b where
     useCustomCookbooks = TF.configuration . useCustomCookbooks
 
+instance HasUseCustomCookbooks a b => HasUseCustomCookbooks (TF.Ref s a) b where
+    useCustomCookbooks =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . useCustomCookbooks
+
 class HasUseEbsOptimizedInstances a b | a -> b where
     useEbsOptimizedInstances :: Lens' a b
 
 instance HasUseEbsOptimizedInstances a b => HasUseEbsOptimizedInstances (TF.Schema l p a) b where
     useEbsOptimizedInstances = TF.configuration . useEbsOptimizedInstances
+
+instance HasUseEbsOptimizedInstances a b => HasUseEbsOptimizedInstances (TF.Ref s a) b where
+    useEbsOptimizedInstances =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . useEbsOptimizedInstances
 
 class HasUseOpsworksSecurityGroups a b | a -> b where
     useOpsworksSecurityGroups :: Lens' a b
@@ -7601,11 +12611,21 @@ class HasUseOpsworksSecurityGroups a b | a -> b where
 instance HasUseOpsworksSecurityGroups a b => HasUseOpsworksSecurityGroups (TF.Schema l p a) b where
     useOpsworksSecurityGroups = TF.configuration . useOpsworksSecurityGroups
 
+instance HasUseOpsworksSecurityGroups a b => HasUseOpsworksSecurityGroups (TF.Ref s a) b where
+    useOpsworksSecurityGroups =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . useOpsworksSecurityGroups
+
 class HasUser a b | a -> b where
     user :: Lens' a b
 
 instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user
+
+instance HasUser a b => HasUser (TF.Ref s a) b where
+    user =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . user
 
 class HasUserArn a b | a -> b where
     userArn :: Lens' a b
@@ -7613,11 +12633,21 @@ class HasUserArn a b | a -> b where
 instance HasUserArn a b => HasUserArn (TF.Schema l p a) b where
     userArn = TF.configuration . userArn
 
+instance HasUserArn a b => HasUserArn (TF.Ref s a) b where
+    userArn =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . userArn
+
 class HasUserData a b | a -> b where
     userData :: Lens' a b
 
 instance HasUserData a b => HasUserData (TF.Schema l p a) b where
     userData = TF.configuration . userData
+
+instance HasUserData a b => HasUserData (TF.Ref s a) b where
+    userData =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . userData
 
 class HasUserDataBase64 a b | a -> b where
     userDataBase64 :: Lens' a b
@@ -7625,11 +12655,21 @@ class HasUserDataBase64 a b | a -> b where
 instance HasUserDataBase64 a b => HasUserDataBase64 (TF.Schema l p a) b where
     userDataBase64 = TF.configuration . userDataBase64
 
+instance HasUserDataBase64 a b => HasUserDataBase64 (TF.Ref s a) b where
+    userDataBase64 =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . userDataBase64
+
 class HasUserId a b | a -> b where
     userId :: Lens' a b
 
 instance HasUserId a b => HasUserId (TF.Schema l p a) b where
     userId = TF.configuration . userId
+
+instance HasUserId a b => HasUserId (TF.Ref s a) b where
+    userId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . userId
 
 class HasUserName a b | a -> b where
     userName :: Lens' a b
@@ -7637,11 +12677,21 @@ class HasUserName a b | a -> b where
 instance HasUserName a b => HasUserName (TF.Schema l p a) b where
     userName = TF.configuration . userName
 
+instance HasUserName a b => HasUserName (TF.Ref s a) b where
+    userName =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . userName
+
 class HasUserPoolConfig a b | a -> b where
     userPoolConfig :: Lens' a b
 
 instance HasUserPoolConfig a b => HasUserPoolConfig (TF.Schema l p a) b where
     userPoolConfig = TF.configuration . userPoolConfig
+
+instance HasUserPoolConfig a b => HasUserPoolConfig (TF.Ref s a) b where
+    userPoolConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . userPoolConfig
 
 class HasUserPoolId a b | a -> b where
     userPoolId :: Lens' a b
@@ -7649,11 +12699,21 @@ class HasUserPoolId a b | a -> b where
 instance HasUserPoolId a b => HasUserPoolId (TF.Schema l p a) b where
     userPoolId = TF.configuration . userPoolId
 
+instance HasUserPoolId a b => HasUserPoolId (TF.Ref s a) b where
+    userPoolId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . userPoolId
+
 class HasUsername a b | a -> b where
     username :: Lens' a b
 
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
+
+instance HasUsername a b => HasUsername (TF.Ref s a) b where
+    username =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . username
 
 class HasUsernameAttributes a b | a -> b where
     usernameAttributes :: Lens' a b
@@ -7661,11 +12721,21 @@ class HasUsernameAttributes a b | a -> b where
 instance HasUsernameAttributes a b => HasUsernameAttributes (TF.Schema l p a) b where
     usernameAttributes = TF.configuration . usernameAttributes
 
+instance HasUsernameAttributes a b => HasUsernameAttributes (TF.Ref s a) b where
+    usernameAttributes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . usernameAttributes
+
 class HasUsers a b | a -> b where
     users :: Lens' a b
 
 instance HasUsers a b => HasUsers (TF.Schema l p a) b where
     users = TF.configuration . users
+
+instance HasUsers a b => HasUsers (TF.Ref s a) b where
+    users =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . users
 
 class HasValidUntil a b | a -> b where
     validUntil :: Lens' a b
@@ -7673,11 +12743,21 @@ class HasValidUntil a b | a -> b where
 instance HasValidUntil a b => HasValidUntil (TF.Schema l p a) b where
     validUntil = TF.configuration . validUntil
 
+instance HasValidUntil a b => HasValidUntil (TF.Ref s a) b where
+    validUntil =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . validUntil
+
 class HasValidationMethod a b | a -> b where
     validationMethod :: Lens' a b
 
 instance HasValidationMethod a b => HasValidationMethod (TF.Schema l p a) b where
     validationMethod = TF.configuration . validationMethod
+
+instance HasValidationMethod a b => HasValidationMethod (TF.Ref s a) b where
+    validationMethod =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . validationMethod
 
 class HasValidationRecordFqdns a b | a -> b where
     validationRecordFqdns :: Lens' a b
@@ -7685,11 +12765,21 @@ class HasValidationRecordFqdns a b | a -> b where
 instance HasValidationRecordFqdns a b => HasValidationRecordFqdns (TF.Schema l p a) b where
     validationRecordFqdns = TF.configuration . validationRecordFqdns
 
+instance HasValidationRecordFqdns a b => HasValidationRecordFqdns (TF.Ref s a) b where
+    validationRecordFqdns =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . validationRecordFqdns
+
 class HasValue a b | a -> b where
     value :: Lens' a b
 
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
+
+instance HasValue a b => HasValue (TF.Ref s a) b where
+    value =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . value
 
 class HasValues a b | a -> b where
     values :: Lens' a b
@@ -7697,11 +12787,21 @@ class HasValues a b | a -> b where
 instance HasValues a b => HasValues (TF.Schema l p a) b where
     values = TF.configuration . values
 
+instance HasValues a b => HasValues (TF.Ref s a) b where
+    values =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . values
+
 class HasVariables a b | a -> b where
     variables :: Lens' a b
 
 instance HasVariables a b => HasVariables (TF.Schema l p a) b where
     variables = TF.configuration . variables
+
+instance HasVariables a b => HasVariables (TF.Ref s a) b where
+    variables =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . variables
 
 class HasVerificationMessageTemplate a b | a -> b where
     verificationMessageTemplate :: Lens' a b
@@ -7709,11 +12809,21 @@ class HasVerificationMessageTemplate a b | a -> b where
 instance HasVerificationMessageTemplate a b => HasVerificationMessageTemplate (TF.Schema l p a) b where
     verificationMessageTemplate = TF.configuration . verificationMessageTemplate
 
+instance HasVerificationMessageTemplate a b => HasVerificationMessageTemplate (TF.Ref s a) b where
+    verificationMessageTemplate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . verificationMessageTemplate
+
 class HasVersion a b | a -> b where
     version :: Lens' a b
 
 instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
+
+instance HasVersion a b => HasVersion (TF.Ref s a) b where
+    version =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . version
 
 class HasVersionId a b | a -> b where
     versionId :: Lens' a b
@@ -7721,11 +12831,21 @@ class HasVersionId a b | a -> b where
 instance HasVersionId a b => HasVersionId (TF.Schema l p a) b where
     versionId = TF.configuration . versionId
 
+instance HasVersionId a b => HasVersionId (TF.Ref s a) b where
+    versionId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . versionId
+
 class HasVersionLabel a b | a -> b where
     versionLabel :: Lens' a b
 
 instance HasVersionLabel a b => HasVersionLabel (TF.Schema l p a) b where
     versionLabel = TF.configuration . versionLabel
+
+instance HasVersionLabel a b => HasVersionLabel (TF.Ref s a) b where
+    versionLabel =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . versionLabel
 
 class HasVersioning a b | a -> b where
     versioning :: Lens' a b
@@ -7733,11 +12853,21 @@ class HasVersioning a b | a -> b where
 instance HasVersioning a b => HasVersioning (TF.Schema l p a) b where
     versioning = TF.configuration . versioning
 
+instance HasVersioning a b => HasVersioning (TF.Ref s a) b where
+    versioning =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . versioning
+
 class HasVideo a b | a -> b where
     video :: Lens' a b
 
 instance HasVideo a b => HasVideo (TF.Schema l p a) b where
     video = TF.configuration . video
+
+instance HasVideo a b => HasVideo (TF.Ref s a) b where
+    video =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . video
 
 class HasVideoCodecOptions a b | a -> b where
     videoCodecOptions :: Lens' a b
@@ -7745,11 +12875,21 @@ class HasVideoCodecOptions a b | a -> b where
 instance HasVideoCodecOptions a b => HasVideoCodecOptions (TF.Schema l p a) b where
     videoCodecOptions = TF.configuration . videoCodecOptions
 
+instance HasVideoCodecOptions a b => HasVideoCodecOptions (TF.Ref s a) b where
+    videoCodecOptions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . videoCodecOptions
+
 class HasVideoWatermarks a b | a -> b where
     videoWatermarks :: Lens' a b
 
 instance HasVideoWatermarks a b => HasVideoWatermarks (TF.Schema l p a) b where
     videoWatermarks = TF.configuration . videoWatermarks
+
+instance HasVideoWatermarks a b => HasVideoWatermarks (TF.Ref s a) b where
+    videoWatermarks =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . videoWatermarks
 
 class HasViewerCertificate a b | a -> b where
     viewerCertificate :: Lens' a b
@@ -7757,11 +12897,21 @@ class HasViewerCertificate a b | a -> b where
 instance HasViewerCertificate a b => HasViewerCertificate (TF.Schema l p a) b where
     viewerCertificate = TF.configuration . viewerCertificate
 
+instance HasViewerCertificate a b => HasViewerCertificate (TF.Ref s a) b where
+    viewerCertificate =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . viewerCertificate
+
 class HasVirtualizationType a b | a -> b where
     virtualizationType :: Lens' a b
 
 instance HasVirtualizationType a b => HasVirtualizationType (TF.Schema l p a) b where
     virtualizationType = TF.configuration . virtualizationType
+
+instance HasVirtualizationType a b => HasVirtualizationType (TF.Ref s a) b where
+    virtualizationType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . virtualizationType
 
 class HasVisibilityTimeoutSeconds a b | a -> b where
     visibilityTimeoutSeconds :: Lens' a b
@@ -7769,11 +12919,21 @@ class HasVisibilityTimeoutSeconds a b | a -> b where
 instance HasVisibilityTimeoutSeconds a b => HasVisibilityTimeoutSeconds (TF.Schema l p a) b where
     visibilityTimeoutSeconds = TF.configuration . visibilityTimeoutSeconds
 
+instance HasVisibilityTimeoutSeconds a b => HasVisibilityTimeoutSeconds (TF.Ref s a) b where
+    visibilityTimeoutSeconds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . visibilityTimeoutSeconds
+
 class HasVisibleToAllUsers a b | a -> b where
     visibleToAllUsers :: Lens' a b
 
 instance HasVisibleToAllUsers a b => HasVisibleToAllUsers (TF.Schema l p a) b where
     visibleToAllUsers = TF.configuration . visibleToAllUsers
+
+instance HasVisibleToAllUsers a b => HasVisibleToAllUsers (TF.Ref s a) b where
+    visibleToAllUsers =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . visibleToAllUsers
 
 class HasVolumeId a b | a -> b where
     volumeId :: Lens' a b
@@ -7781,11 +12941,21 @@ class HasVolumeId a b | a -> b where
 instance HasVolumeId a b => HasVolumeId (TF.Schema l p a) b where
     volumeId = TF.configuration . volumeId
 
+instance HasVolumeId a b => HasVolumeId (TF.Ref s a) b where
+    volumeId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . volumeId
+
 class HasVolumeTags a b | a -> b where
     volumeTags :: Lens' a b
 
 instance HasVolumeTags a b => HasVolumeTags (TF.Schema l p a) b where
     volumeTags = TF.configuration . volumeTags
+
+instance HasVolumeTags a b => HasVolumeTags (TF.Ref s a) b where
+    volumeTags =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . volumeTags
 
 class HasVpc a b | a -> b where
     vpc :: Lens' a b
@@ -7793,11 +12963,21 @@ class HasVpc a b | a -> b where
 instance HasVpc a b => HasVpc (TF.Schema l p a) b where
     vpc = TF.configuration . vpc
 
+instance HasVpc a b => HasVpc (TF.Ref s a) b where
+    vpc =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpc
+
 class HasVpcClassicLinkId a b | a -> b where
     vpcClassicLinkId :: Lens' a b
 
 instance HasVpcClassicLinkId a b => HasVpcClassicLinkId (TF.Schema l p a) b where
     vpcClassicLinkId = TF.configuration . vpcClassicLinkId
+
+instance HasVpcClassicLinkId a b => HasVpcClassicLinkId (TF.Ref s a) b where
+    vpcClassicLinkId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcClassicLinkId
 
 class HasVpcClassicLinkSecurityGroups a b | a -> b where
     vpcClassicLinkSecurityGroups :: Lens' a b
@@ -7805,11 +12985,21 @@ class HasVpcClassicLinkSecurityGroups a b | a -> b where
 instance HasVpcClassicLinkSecurityGroups a b => HasVpcClassicLinkSecurityGroups (TF.Schema l p a) b where
     vpcClassicLinkSecurityGroups = TF.configuration . vpcClassicLinkSecurityGroups
 
+instance HasVpcClassicLinkSecurityGroups a b => HasVpcClassicLinkSecurityGroups (TF.Ref s a) b where
+    vpcClassicLinkSecurityGroups =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcClassicLinkSecurityGroups
+
 class HasVpcConfig a b | a -> b where
     vpcConfig :: Lens' a b
 
 instance HasVpcConfig a b => HasVpcConfig (TF.Schema l p a) b where
     vpcConfig = TF.configuration . vpcConfig
+
+instance HasVpcConfig a b => HasVpcConfig (TF.Ref s a) b where
+    vpcConfig =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcConfig
 
 class HasVpcEndpointId a b | a -> b where
     vpcEndpointId :: Lens' a b
@@ -7817,11 +13007,21 @@ class HasVpcEndpointId a b | a -> b where
 instance HasVpcEndpointId a b => HasVpcEndpointId (TF.Schema l p a) b where
     vpcEndpointId = TF.configuration . vpcEndpointId
 
+instance HasVpcEndpointId a b => HasVpcEndpointId (TF.Ref s a) b where
+    vpcEndpointId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcEndpointId
+
 class HasVpcEndpointServiceId a b | a -> b where
     vpcEndpointServiceId :: Lens' a b
 
 instance HasVpcEndpointServiceId a b => HasVpcEndpointServiceId (TF.Schema l p a) b where
     vpcEndpointServiceId = TF.configuration . vpcEndpointServiceId
+
+instance HasVpcEndpointServiceId a b => HasVpcEndpointServiceId (TF.Ref s a) b where
+    vpcEndpointServiceId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcEndpointServiceId
 
 class HasVpcEndpointType a b | a -> b where
     vpcEndpointType :: Lens' a b
@@ -7829,11 +13029,21 @@ class HasVpcEndpointType a b | a -> b where
 instance HasVpcEndpointType a b => HasVpcEndpointType (TF.Schema l p a) b where
     vpcEndpointType = TF.configuration . vpcEndpointType
 
+instance HasVpcEndpointType a b => HasVpcEndpointType (TF.Ref s a) b where
+    vpcEndpointType =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcEndpointType
+
 class HasVpcId a b | a -> b where
     vpcId :: Lens' a b
 
 instance HasVpcId a b => HasVpcId (TF.Schema l p a) b where
     vpcId = TF.configuration . vpcId
+
+instance HasVpcId a b => HasVpcId (TF.Ref s a) b where
+    vpcId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcId
 
 class HasVpcOptions a b | a -> b where
     vpcOptions :: Lens' a b
@@ -7841,11 +13051,21 @@ class HasVpcOptions a b | a -> b where
 instance HasVpcOptions a b => HasVpcOptions (TF.Schema l p a) b where
     vpcOptions = TF.configuration . vpcOptions
 
+instance HasVpcOptions a b => HasVpcOptions (TF.Ref s a) b where
+    vpcOptions =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcOptions
+
 class HasVpcPeeringConnectionId a b | a -> b where
     vpcPeeringConnectionId :: Lens' a b
 
 instance HasVpcPeeringConnectionId a b => HasVpcPeeringConnectionId (TF.Schema l p a) b where
     vpcPeeringConnectionId = TF.configuration . vpcPeeringConnectionId
+
+instance HasVpcPeeringConnectionId a b => HasVpcPeeringConnectionId (TF.Ref s a) b where
+    vpcPeeringConnectionId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcPeeringConnectionId
 
 class HasVpcRegion a b | a -> b where
     vpcRegion :: Lens' a b
@@ -7853,11 +13073,21 @@ class HasVpcRegion a b | a -> b where
 instance HasVpcRegion a b => HasVpcRegion (TF.Schema l p a) b where
     vpcRegion = TF.configuration . vpcRegion
 
+instance HasVpcRegion a b => HasVpcRegion (TF.Ref s a) b where
+    vpcRegion =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcRegion
+
 class HasVpcSecurityGroupIds a b | a -> b where
     vpcSecurityGroupIds :: Lens' a b
 
 instance HasVpcSecurityGroupIds a b => HasVpcSecurityGroupIds (TF.Schema l p a) b where
     vpcSecurityGroupIds = TF.configuration . vpcSecurityGroupIds
+
+instance HasVpcSecurityGroupIds a b => HasVpcSecurityGroupIds (TF.Ref s a) b where
+    vpcSecurityGroupIds =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcSecurityGroupIds
 
 class HasVpcSettings a b | a -> b where
     vpcSettings :: Lens' a b
@@ -7865,11 +13095,21 @@ class HasVpcSettings a b | a -> b where
 instance HasVpcSettings a b => HasVpcSettings (TF.Schema l p a) b where
     vpcSettings = TF.configuration . vpcSettings
 
+instance HasVpcSettings a b => HasVpcSettings (TF.Ref s a) b where
+    vpcSettings =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcSettings
+
 class HasVpcZoneIdentifier a b | a -> b where
     vpcZoneIdentifier :: Lens' a b
 
 instance HasVpcZoneIdentifier a b => HasVpcZoneIdentifier (TF.Schema l p a) b where
     vpcZoneIdentifier = TF.configuration . vpcZoneIdentifier
+
+instance HasVpcZoneIdentifier a b => HasVpcZoneIdentifier (TF.Ref s a) b where
+    vpcZoneIdentifier =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpcZoneIdentifier
 
 class HasVpnConnectionId a b | a -> b where
     vpnConnectionId :: Lens' a b
@@ -7877,11 +13117,21 @@ class HasVpnConnectionId a b | a -> b where
 instance HasVpnConnectionId a b => HasVpnConnectionId (TF.Schema l p a) b where
     vpnConnectionId = TF.configuration . vpnConnectionId
 
+instance HasVpnConnectionId a b => HasVpnConnectionId (TF.Ref s a) b where
+    vpnConnectionId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpnConnectionId
+
 class HasVpnGatewayId a b | a -> b where
     vpnGatewayId :: Lens' a b
 
 instance HasVpnGatewayId a b => HasVpnGatewayId (TF.Schema l p a) b where
     vpnGatewayId = TF.configuration . vpnGatewayId
+
+instance HasVpnGatewayId a b => HasVpnGatewayId (TF.Ref s a) b where
+    vpnGatewayId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . vpnGatewayId
 
 class HasWaitForCapacityTimeout a b | a -> b where
     waitForCapacityTimeout :: Lens' a b
@@ -7889,11 +13139,21 @@ class HasWaitForCapacityTimeout a b | a -> b where
 instance HasWaitForCapacityTimeout a b => HasWaitForCapacityTimeout (TF.Schema l p a) b where
     waitForCapacityTimeout = TF.configuration . waitForCapacityTimeout
 
+instance HasWaitForCapacityTimeout a b => HasWaitForCapacityTimeout (TF.Ref s a) b where
+    waitForCapacityTimeout =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . waitForCapacityTimeout
+
 class HasWaitForElbCapacity a b | a -> b where
     waitForElbCapacity :: Lens' a b
 
 instance HasWaitForElbCapacity a b => HasWaitForElbCapacity (TF.Schema l p a) b where
     waitForElbCapacity = TF.configuration . waitForElbCapacity
+
+instance HasWaitForElbCapacity a b => HasWaitForElbCapacity (TF.Ref s a) b where
+    waitForElbCapacity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . waitForElbCapacity
 
 class HasWaitForFulfillment a b | a -> b where
     waitForFulfillment :: Lens' a b
@@ -7901,11 +13161,21 @@ class HasWaitForFulfillment a b | a -> b where
 instance HasWaitForFulfillment a b => HasWaitForFulfillment (TF.Schema l p a) b where
     waitForFulfillment = TF.configuration . waitForFulfillment
 
+instance HasWaitForFulfillment a b => HasWaitForFulfillment (TF.Ref s a) b where
+    waitForFulfillment =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . waitForFulfillment
+
 class HasWaitForReadyTimeout a b | a -> b where
     waitForReadyTimeout :: Lens' a b
 
 instance HasWaitForReadyTimeout a b => HasWaitForReadyTimeout (TF.Schema l p a) b where
     waitForReadyTimeout = TF.configuration . waitForReadyTimeout
+
+instance HasWaitForReadyTimeout a b => HasWaitForReadyTimeout (TF.Ref s a) b where
+    waitForReadyTimeout =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . waitForReadyTimeout
 
 class HasWebAclId a b | a -> b where
     webAclId :: Lens' a b
@@ -7913,11 +13183,21 @@ class HasWebAclId a b | a -> b where
 instance HasWebAclId a b => HasWebAclId (TF.Schema l p a) b where
     webAclId = TF.configuration . webAclId
 
+instance HasWebAclId a b => HasWebAclId (TF.Ref s a) b where
+    webAclId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . webAclId
+
 class HasWebsite a b | a -> b where
     website :: Lens' a b
 
 instance HasWebsite a b => HasWebsite (TF.Schema l p a) b where
     website = TF.configuration . website
+
+instance HasWebsite a b => HasWebsite (TF.Ref s a) b where
+    website =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . website
 
 class HasWebsiteRedirect a b | a -> b where
     websiteRedirect :: Lens' a b
@@ -7925,11 +13205,21 @@ class HasWebsiteRedirect a b | a -> b where
 instance HasWebsiteRedirect a b => HasWebsiteRedirect (TF.Schema l p a) b where
     websiteRedirect = TF.configuration . websiteRedirect
 
+instance HasWebsiteRedirect a b => HasWebsiteRedirect (TF.Ref s a) b where
+    websiteRedirect =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . websiteRedirect
+
 class HasWeightedRoutingPolicy a b | a -> b where
     weightedRoutingPolicy :: Lens' a b
 
 instance HasWeightedRoutingPolicy a b => HasWeightedRoutingPolicy (TF.Schema l p a) b where
     weightedRoutingPolicy = TF.configuration . weightedRoutingPolicy
+
+instance HasWeightedRoutingPolicy a b => HasWeightedRoutingPolicy (TF.Ref s a) b where
+    weightedRoutingPolicy =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . weightedRoutingPolicy
 
 class HasWindowId a b | a -> b where
     windowId :: Lens' a b
@@ -7937,11 +13227,21 @@ class HasWindowId a b | a -> b where
 instance HasWindowId a b => HasWindowId (TF.Schema l p a) b where
     windowId = TF.configuration . windowId
 
+instance HasWindowId a b => HasWindowId (TF.Ref s a) b where
+    windowId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . windowId
+
 class HasWithDecryption a b | a -> b where
     withDecryption :: Lens' a b
 
 instance HasWithDecryption a b => HasWithDecryption (TF.Schema l p a) b where
     withDecryption = TF.configuration . withDecryption
+
+instance HasWithDecryption a b => HasWithDecryption (TF.Ref s a) b where
+    withDecryption =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . withDecryption
 
 class HasWorkmailAction a b | a -> b where
     workmailAction :: Lens' a b
@@ -7949,11 +13249,21 @@ class HasWorkmailAction a b | a -> b where
 instance HasWorkmailAction a b => HasWorkmailAction (TF.Schema l p a) b where
     workmailAction = TF.configuration . workmailAction
 
+instance HasWorkmailAction a b => HasWorkmailAction (TF.Ref s a) b where
+    workmailAction =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . workmailAction
+
 class HasWriteAttributes a b | a -> b where
     writeAttributes :: Lens' a b
 
 instance HasWriteAttributes a b => HasWriteAttributes (TF.Schema l p a) b where
     writeAttributes = TF.configuration . writeAttributes
+
+instance HasWriteAttributes a b => HasWriteAttributes (TF.Ref s a) b where
+    writeAttributes =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . writeAttributes
 
 class HasWriteCapacity a b | a -> b where
     writeCapacity :: Lens' a b
@@ -7961,17 +13271,32 @@ class HasWriteCapacity a b | a -> b where
 instance HasWriteCapacity a b => HasWriteCapacity (TF.Schema l p a) b where
     writeCapacity = TF.configuration . writeCapacity
 
+instance HasWriteCapacity a b => HasWriteCapacity (TF.Ref s a) b where
+    writeCapacity =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . writeCapacity
+
 class HasXssMatchTuples a b | a -> b where
     xssMatchTuples :: Lens' a b
 
 instance HasXssMatchTuples a b => HasXssMatchTuples (TF.Schema l p a) b where
     xssMatchTuples = TF.configuration . xssMatchTuples
 
+instance HasXssMatchTuples a b => HasXssMatchTuples (TF.Ref s a) b where
+    xssMatchTuples =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . xssMatchTuples
+
 class HasZoneId a b | a -> b where
     zoneId :: Lens' a b
 
 instance HasZoneId a b => HasZoneId (TF.Schema l p a) b where
     zoneId = TF.configuration . zoneId
+
+instance HasZoneId a b => HasZoneId (TF.Ref s a) b where
+    zoneId =
+        lens TF.refValue (\s a -> s { TF.refValue =  a })
+            . zoneId
 
 class HasComputedAcceptStatus a b | a -> b where
     computedAcceptStatus
