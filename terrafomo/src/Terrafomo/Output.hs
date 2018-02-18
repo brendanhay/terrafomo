@@ -36,4 +36,4 @@ deriving instance Show a => Show (Output a)
 instance HCL.ToHCL a => HCL.ToHCL (Output a) where
     toHCL (Output _ n v) =
         HCL.object (pure "output" <> pure (HCL.name n)) $
-            maybeToList (HCL.attribute "value" v)
+            maybeToList (HCL.assign "value" <$> HCL.attribute v)

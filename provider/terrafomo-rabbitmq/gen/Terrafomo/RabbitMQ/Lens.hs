@@ -48,82 +48,82 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasArguments a s b | a -> s b where
-    arguments :: Lens' a (TF.Attr s b)
+class HasArguments a b | a -> b where
+    arguments :: Lens' a b
 
-instance HasArguments a s b => HasArguments (TF.Schema l p a) s b where
+instance HasArguments a b => HasArguments (TF.Schema l p a) b where
     arguments = TF.configuration . arguments
 
-class HasDestination a s b | a -> s b where
-    destination :: Lens' a (TF.Attr s b)
+class HasDestination a b | a -> b where
+    destination :: Lens' a b
 
-instance HasDestination a s b => HasDestination (TF.Schema l p a) s b where
+instance HasDestination a b => HasDestination (TF.Schema l p a) b where
     destination = TF.configuration . destination
 
-class HasDestinationType a s b | a -> s b where
-    destinationType :: Lens' a (TF.Attr s b)
+class HasDestinationType a b | a -> b where
+    destinationType :: Lens' a b
 
-instance HasDestinationType a s b => HasDestinationType (TF.Schema l p a) s b where
+instance HasDestinationType a b => HasDestinationType (TF.Schema l p a) b where
     destinationType = TF.configuration . destinationType
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attr s b)
+class HasPassword a b | a -> b where
+    password :: Lens' a b
 
-instance HasPassword a s b => HasPassword (TF.Schema l p a) s b where
+instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
 
-class HasPermissions a s b | a -> s b where
-    permissions :: Lens' a (TF.Attr s b)
+class HasPermissions a b | a -> b where
+    permissions :: Lens' a b
 
-instance HasPermissions a s b => HasPermissions (TF.Schema l p a) s b where
+instance HasPermissions a b => HasPermissions (TF.Schema l p a) b where
     permissions = TF.configuration . permissions
 
-class HasPolicy a s b | a -> s b where
-    policy :: Lens' a (TF.Attr s b)
+class HasPolicy a b | a -> b where
+    policy :: Lens' a b
 
-instance HasPolicy a s b => HasPolicy (TF.Schema l p a) s b where
+instance HasPolicy a b => HasPolicy (TF.Schema l p a) b where
     policy = TF.configuration . policy
 
-class HasRoutingKey a s b | a -> s b where
-    routingKey :: Lens' a (TF.Attr s b)
+class HasRoutingKey a b | a -> b where
+    routingKey :: Lens' a b
 
-instance HasRoutingKey a s b => HasRoutingKey (TF.Schema l p a) s b where
+instance HasRoutingKey a b => HasRoutingKey (TF.Schema l p a) b where
     routingKey = TF.configuration . routingKey
 
-class HasSettings a s b | a -> s b where
-    settings :: Lens' a (TF.Attr s b)
+class HasSettings a b | a -> b where
+    settings :: Lens' a b
 
-instance HasSettings a s b => HasSettings (TF.Schema l p a) s b where
+instance HasSettings a b => HasSettings (TF.Schema l p a) b where
     settings = TF.configuration . settings
 
-class HasSource a s b | a -> s b where
-    source :: Lens' a (TF.Attr s b)
+class HasSource a b | a -> b where
+    source :: Lens' a b
 
-instance HasSource a s b => HasSource (TF.Schema l p a) s b where
+instance HasSource a b => HasSource (TF.Schema l p a) b where
     source = TF.configuration . source
 
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attr s b)
+class HasTags a b | a -> b where
+    tags :: Lens' a b
 
-instance HasTags a s b => HasTags (TF.Schema l p a) s b where
+instance HasTags a b => HasTags (TF.Schema l p a) b where
     tags = TF.configuration . tags
 
-class HasUser a s b | a -> s b where
-    user :: Lens' a (TF.Attr s b)
+class HasUser a b | a -> b where
+    user :: Lens' a b
 
-instance HasUser a s b => HasUser (TF.Schema l p a) s b where
+instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user
 
-class HasVhost a s b | a -> s b where
-    vhost :: Lens' a (TF.Attr s b)
+class HasVhost a b | a -> b where
+    vhost :: Lens' a b
 
-instance HasVhost a s b => HasVhost (TF.Schema l p a) s b where
+instance HasVhost a b => HasVhost (TF.Schema l p a) b where
     vhost = TF.configuration . vhost
 
 class HasComputedPropertiesKey a b | a -> b where

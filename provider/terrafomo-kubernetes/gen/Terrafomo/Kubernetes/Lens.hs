@@ -44,58 +44,58 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasData' a s b | a -> s b where
-    data' :: Lens' a (TF.Attr s b)
+class HasData' a b | a -> b where
+    data' :: Lens' a b
 
-instance HasData' a s b => HasData' (TF.Schema l p a) s b where
+instance HasData' a b => HasData' (TF.Schema l p a) b where
     data' = TF.configuration . data'
 
-class HasImagePullSecret a s b | a -> s b where
-    imagePullSecret :: Lens' a (TF.Attr s b)
+class HasImagePullSecret a b | a -> b where
+    imagePullSecret :: Lens' a b
 
-instance HasImagePullSecret a s b => HasImagePullSecret (TF.Schema l p a) s b where
+instance HasImagePullSecret a b => HasImagePullSecret (TF.Schema l p a) b where
     imagePullSecret = TF.configuration . imagePullSecret
 
-class HasMetadata a s b | a -> s b where
-    metadata :: Lens' a (TF.Attr s b)
+class HasMetadata a b | a -> b where
+    metadata :: Lens' a b
 
-instance HasMetadata a s b => HasMetadata (TF.Schema l p a) s b where
+instance HasMetadata a b => HasMetadata (TF.Schema l p a) b where
     metadata = TF.configuration . metadata
 
-class HasParameters a s b | a -> s b where
-    parameters :: Lens' a (TF.Attr s b)
+class HasParameters a b | a -> b where
+    parameters :: Lens' a b
 
-instance HasParameters a s b => HasParameters (TF.Schema l p a) s b where
+instance HasParameters a b => HasParameters (TF.Schema l p a) b where
     parameters = TF.configuration . parameters
 
-class HasSecret a s b | a -> s b where
-    secret :: Lens' a (TF.Attr s b)
+class HasSecret a b | a -> b where
+    secret :: Lens' a b
 
-instance HasSecret a s b => HasSecret (TF.Schema l p a) s b where
+instance HasSecret a b => HasSecret (TF.Schema l p a) b where
     secret = TF.configuration . secret
 
-class HasSpec a s b | a -> s b where
-    spec :: Lens' a (TF.Attr s b)
+class HasSpec a b | a -> b where
+    spec :: Lens' a b
 
-instance HasSpec a s b => HasSpec (TF.Schema l p a) s b where
+instance HasSpec a b => HasSpec (TF.Schema l p a) b where
     spec = TF.configuration . spec
 
-class HasStorageProvisioner a s b | a -> s b where
-    storageProvisioner :: Lens' a (TF.Attr s b)
+class HasStorageProvisioner a b | a -> b where
+    storageProvisioner :: Lens' a b
 
-instance HasStorageProvisioner a s b => HasStorageProvisioner (TF.Schema l p a) s b where
+instance HasStorageProvisioner a b => HasStorageProvisioner (TF.Schema l p a) b where
     storageProvisioner = TF.configuration . storageProvisioner
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasWaitUntilBound a s b | a -> s b where
-    waitUntilBound :: Lens' a (TF.Attr s b)
+class HasWaitUntilBound a b | a -> b where
+    waitUntilBound :: Lens' a b
 
-instance HasWaitUntilBound a s b => HasWaitUntilBound (TF.Schema l p a) s b where
+instance HasWaitUntilBound a b => HasWaitUntilBound (TF.Schema l p a) b where
     waitUntilBound = TF.configuration . waitUntilBound
 
 class HasComputedDefaultSecretName a b | a -> b where

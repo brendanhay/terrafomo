@@ -98,214 +98,214 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasActive a s b | a -> s b where
-    active :: Lens' a (TF.Attr s b)
+class HasActive a b | a -> b where
+    active :: Lens' a b
 
-instance HasActive a s b => HasActive (TF.Schema l p a) s b where
+instance HasActive a b => HasActive (TF.Schema l p a) b where
     active = TF.configuration . active
 
-class HasAllowMergeCommit a s b | a -> s b where
-    allowMergeCommit :: Lens' a (TF.Attr s b)
+class HasAllowMergeCommit a b | a -> b where
+    allowMergeCommit :: Lens' a b
 
-instance HasAllowMergeCommit a s b => HasAllowMergeCommit (TF.Schema l p a) s b where
+instance HasAllowMergeCommit a b => HasAllowMergeCommit (TF.Schema l p a) b where
     allowMergeCommit = TF.configuration . allowMergeCommit
 
-class HasAllowRebaseMerge a s b | a -> s b where
-    allowRebaseMerge :: Lens' a (TF.Attr s b)
+class HasAllowRebaseMerge a b | a -> b where
+    allowRebaseMerge :: Lens' a b
 
-instance HasAllowRebaseMerge a s b => HasAllowRebaseMerge (TF.Schema l p a) s b where
+instance HasAllowRebaseMerge a b => HasAllowRebaseMerge (TF.Schema l p a) b where
     allowRebaseMerge = TF.configuration . allowRebaseMerge
 
-class HasAllowSquashMerge a s b | a -> s b where
-    allowSquashMerge :: Lens' a (TF.Attr s b)
+class HasAllowSquashMerge a b | a -> b where
+    allowSquashMerge :: Lens' a b
 
-instance HasAllowSquashMerge a s b => HasAllowSquashMerge (TF.Schema l p a) s b where
+instance HasAllowSquashMerge a b => HasAllowSquashMerge (TF.Schema l p a) b where
     allowSquashMerge = TF.configuration . allowSquashMerge
 
-class HasAutoInit a s b | a -> s b where
-    autoInit :: Lens' a (TF.Attr s b)
+class HasAutoInit a b | a -> b where
+    autoInit :: Lens' a b
 
-instance HasAutoInit a s b => HasAutoInit (TF.Schema l p a) s b where
+instance HasAutoInit a b => HasAutoInit (TF.Schema l p a) b where
     autoInit = TF.configuration . autoInit
 
-class HasBranch a s b | a -> s b where
-    branch :: Lens' a (TF.Attr s b)
+class HasBranch a b | a -> b where
+    branch :: Lens' a b
 
-instance HasBranch a s b => HasBranch (TF.Schema l p a) s b where
+instance HasBranch a b => HasBranch (TF.Schema l p a) b where
     branch = TF.configuration . branch
 
-class HasColor a s b | a -> s b where
-    color :: Lens' a (TF.Attr s b)
+class HasColor a b | a -> b where
+    color :: Lens' a b
 
-instance HasColor a s b => HasColor (TF.Schema l p a) s b where
+instance HasColor a b => HasColor (TF.Schema l p a) b where
     color = TF.configuration . color
 
-class HasConfiguration a s b | a -> s b where
-    configuration :: Lens' a (TF.Attr s b)
+class HasConfiguration a b | a -> b where
+    configuration :: Lens' a b
 
-instance HasConfiguration a s b => HasConfiguration (TF.Schema l p a) s b where
+instance HasConfiguration a b => HasConfiguration (TF.Schema l p a) b where
     configuration = TF.configuration . configuration
 
-class HasDefaultBranch a s b | a -> s b where
-    defaultBranch :: Lens' a (TF.Attr s b)
+class HasDefaultBranch a b | a -> b where
+    defaultBranch :: Lens' a b
 
-instance HasDefaultBranch a s b => HasDefaultBranch (TF.Schema l p a) s b where
+instance HasDefaultBranch a b => HasDefaultBranch (TF.Schema l p a) b where
     defaultBranch = TF.configuration . defaultBranch
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasEnforceAdmins a s b | a -> s b where
-    enforceAdmins :: Lens' a (TF.Attr s b)
+class HasEnforceAdmins a b | a -> b where
+    enforceAdmins :: Lens' a b
 
-instance HasEnforceAdmins a s b => HasEnforceAdmins (TF.Schema l p a) s b where
+instance HasEnforceAdmins a b => HasEnforceAdmins (TF.Schema l p a) b where
     enforceAdmins = TF.configuration . enforceAdmins
 
-class HasEvents a s b | a -> s b where
-    events :: Lens' a (TF.Attr s b)
+class HasEvents a b | a -> b where
+    events :: Lens' a b
 
-instance HasEvents a s b => HasEvents (TF.Schema l p a) s b where
+instance HasEvents a b => HasEvents (TF.Schema l p a) b where
     events = TF.configuration . events
 
-class HasGitignoreTemplate a s b | a -> s b where
-    gitignoreTemplate :: Lens' a (TF.Attr s b)
+class HasGitignoreTemplate a b | a -> b where
+    gitignoreTemplate :: Lens' a b
 
-instance HasGitignoreTemplate a s b => HasGitignoreTemplate (TF.Schema l p a) s b where
+instance HasGitignoreTemplate a b => HasGitignoreTemplate (TF.Schema l p a) b where
     gitignoreTemplate = TF.configuration . gitignoreTemplate
 
-class HasHasDownloads a s b | a -> s b where
-    hasDownloads :: Lens' a (TF.Attr s b)
+class HasHasDownloads a b | a -> b where
+    hasDownloads :: Lens' a b
 
-instance HasHasDownloads a s b => HasHasDownloads (TF.Schema l p a) s b where
+instance HasHasDownloads a b => HasHasDownloads (TF.Schema l p a) b where
     hasDownloads = TF.configuration . hasDownloads
 
-class HasHasIssues a s b | a -> s b where
-    hasIssues :: Lens' a (TF.Attr s b)
+class HasHasIssues a b | a -> b where
+    hasIssues :: Lens' a b
 
-instance HasHasIssues a s b => HasHasIssues (TF.Schema l p a) s b where
+instance HasHasIssues a b => HasHasIssues (TF.Schema l p a) b where
     hasIssues = TF.configuration . hasIssues
 
-class HasHasWiki a s b | a -> s b where
-    hasWiki :: Lens' a (TF.Attr s b)
+class HasHasWiki a b | a -> b where
+    hasWiki :: Lens' a b
 
-instance HasHasWiki a s b => HasHasWiki (TF.Schema l p a) s b where
+instance HasHasWiki a b => HasHasWiki (TF.Schema l p a) b where
     hasWiki = TF.configuration . hasWiki
 
-class HasHomepageUrl a s b | a -> s b where
-    homepageUrl :: Lens' a (TF.Attr s b)
+class HasHomepageUrl a b | a -> b where
+    homepageUrl :: Lens' a b
 
-instance HasHomepageUrl a s b => HasHomepageUrl (TF.Schema l p a) s b where
+instance HasHomepageUrl a b => HasHomepageUrl (TF.Schema l p a) b where
     homepageUrl = TF.configuration . homepageUrl
 
-class HasKey a s b | a -> s b where
-    key :: Lens' a (TF.Attr s b)
+class HasKey a b | a -> b where
+    key :: Lens' a b
 
-instance HasKey a s b => HasKey (TF.Schema l p a) s b where
+instance HasKey a b => HasKey (TF.Schema l p a) b where
     key = TF.configuration . key
 
-class HasLdapDn a s b | a -> s b where
-    ldapDn :: Lens' a (TF.Attr s b)
+class HasLdapDn a b | a -> b where
+    ldapDn :: Lens' a b
 
-instance HasLdapDn a s b => HasLdapDn (TF.Schema l p a) s b where
+instance HasLdapDn a b => HasLdapDn (TF.Schema l p a) b where
     ldapDn = TF.configuration . ldapDn
 
-class HasLicenseTemplate a s b | a -> s b where
-    licenseTemplate :: Lens' a (TF.Attr s b)
+class HasLicenseTemplate a b | a -> b where
+    licenseTemplate :: Lens' a b
 
-instance HasLicenseTemplate a s b => HasLicenseTemplate (TF.Schema l p a) s b where
+instance HasLicenseTemplate a b => HasLicenseTemplate (TF.Schema l p a) b where
     licenseTemplate = TF.configuration . licenseTemplate
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasPermission a s b | a -> s b where
-    permission :: Lens' a (TF.Attr s b)
+class HasPermission a b | a -> b where
+    permission :: Lens' a b
 
-instance HasPermission a s b => HasPermission (TF.Schema l p a) s b where
+instance HasPermission a b => HasPermission (TF.Schema l p a) b where
     permission = TF.configuration . permission
 
-class HasPrivacy a s b | a -> s b where
-    privacy :: Lens' a (TF.Attr s b)
+class HasPrivacy a b | a -> b where
+    privacy :: Lens' a b
 
-instance HasPrivacy a s b => HasPrivacy (TF.Schema l p a) s b where
+instance HasPrivacy a b => HasPrivacy (TF.Schema l p a) b where
     privacy = TF.configuration . privacy
 
-class HasPrivate a s b | a -> s b where
-    private :: Lens' a (TF.Attr s b)
+class HasPrivate a b | a -> b where
+    private :: Lens' a b
 
-instance HasPrivate a s b => HasPrivate (TF.Schema l p a) s b where
+instance HasPrivate a b => HasPrivate (TF.Schema l p a) b where
     private = TF.configuration . private
 
-class HasReadOnly a s b | a -> s b where
-    readOnly :: Lens' a (TF.Attr s b)
+class HasReadOnly a b | a -> b where
+    readOnly :: Lens' a b
 
-instance HasReadOnly a s b => HasReadOnly (TF.Schema l p a) s b where
+instance HasReadOnly a b => HasReadOnly (TF.Schema l p a) b where
     readOnly = TF.configuration . readOnly
 
-class HasRepository a s b | a -> s b where
-    repository :: Lens' a (TF.Attr s b)
+class HasRepository a b | a -> b where
+    repository :: Lens' a b
 
-instance HasRepository a s b => HasRepository (TF.Schema l p a) s b where
+instance HasRepository a b => HasRepository (TF.Schema l p a) b where
     repository = TF.configuration . repository
 
-class HasRequiredPullRequestReviews a s b | a -> s b where
-    requiredPullRequestReviews :: Lens' a (TF.Attr s b)
+class HasRequiredPullRequestReviews a b | a -> b where
+    requiredPullRequestReviews :: Lens' a b
 
-instance HasRequiredPullRequestReviews a s b => HasRequiredPullRequestReviews (TF.Schema l p a) s b where
+instance HasRequiredPullRequestReviews a b => HasRequiredPullRequestReviews (TF.Schema l p a) b where
     requiredPullRequestReviews = TF.configuration . requiredPullRequestReviews
 
-class HasRequiredStatusChecks a s b | a -> s b where
-    requiredStatusChecks :: Lens' a (TF.Attr s b)
+class HasRequiredStatusChecks a b | a -> b where
+    requiredStatusChecks :: Lens' a b
 
-instance HasRequiredStatusChecks a s b => HasRequiredStatusChecks (TF.Schema l p a) s b where
+instance HasRequiredStatusChecks a b => HasRequiredStatusChecks (TF.Schema l p a) b where
     requiredStatusChecks = TF.configuration . requiredStatusChecks
 
-class HasRestrictions a s b | a -> s b where
-    restrictions :: Lens' a (TF.Attr s b)
+class HasRestrictions a b | a -> b where
+    restrictions :: Lens' a b
 
-instance HasRestrictions a s b => HasRestrictions (TF.Schema l p a) s b where
+instance HasRestrictions a b => HasRestrictions (TF.Schema l p a) b where
     restrictions = TF.configuration . restrictions
 
-class HasRole a s b | a -> s b where
-    role :: Lens' a (TF.Attr s b)
+class HasRole a b | a -> b where
+    role :: Lens' a b
 
-instance HasRole a s b => HasRole (TF.Schema l p a) s b where
+instance HasRole a b => HasRole (TF.Schema l p a) b where
     role = TF.configuration . role
 
-class HasSlug a s b | a -> s b where
-    slug :: Lens' a (TF.Attr s b)
+class HasSlug a b | a -> b where
+    slug :: Lens' a b
 
-instance HasSlug a s b => HasSlug (TF.Schema l p a) s b where
+instance HasSlug a b => HasSlug (TF.Schema l p a) b where
     slug = TF.configuration . slug
 
-class HasTeamId a s b | a -> s b where
-    teamId :: Lens' a (TF.Attr s b)
+class HasTeamId a b | a -> b where
+    teamId :: Lens' a b
 
-instance HasTeamId a s b => HasTeamId (TF.Schema l p a) s b where
+instance HasTeamId a b => HasTeamId (TF.Schema l p a) b where
     teamId = TF.configuration . teamId
 
-class HasTitle a s b | a -> s b where
-    title :: Lens' a (TF.Attr s b)
+class HasTitle a b | a -> b where
+    title :: Lens' a b
 
-instance HasTitle a s b => HasTitle (TF.Schema l p a) s b where
+instance HasTitle a b => HasTitle (TF.Schema l p a) b where
     title = TF.configuration . title
 
-class HasUrl a s b | a -> s b where
-    url :: Lens' a (TF.Attr s b)
+class HasUrl a b | a -> b where
+    url :: Lens' a b
 
-instance HasUrl a s b => HasUrl (TF.Schema l p a) s b where
+instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
 
-class HasUsername a s b | a -> s b where
-    username :: Lens' a (TF.Attr s b)
+class HasUsername a b | a -> b where
+    username :: Lens' a b
 
-instance HasUsername a s b => HasUsername (TF.Schema l p a) s b where
+instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
 class HasComputedAvatarUrl a b | a -> b where

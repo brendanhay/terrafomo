@@ -194,8 +194,9 @@ module Terrafomo.AliCloud.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -236,53 +237,53 @@ data DnsDomainsData s = DnsDomainsData {
 
 instance TF.ToHCL (DnsDomainsData s) where
     toHCL DnsDomainsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "ali_domain" _ali_domain
-        , TF.attribute "domain_name_regex" _domain_name_regex
-        , TF.attribute "group_name_regex" _group_name_regex
-        , TF.attribute "instance_id" _instance_id
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "version_code" _version_code
+        [ TF.assign "ali_domain" <$> TF.attribute _ali_domain
+        , TF.assign "domain_name_regex" <$> TF.attribute _domain_name_regex
+        , TF.assign "group_name_regex" <$> TF.attribute _group_name_regex
+        , TF.assign "instance_id" <$> TF.attribute _instance_id
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "version_code" <$> TF.attribute _version_code
         ]
 
-instance P.HasAliDomain (DnsDomainsData s) s Text where
+instance P.HasAliDomain (DnsDomainsData s) (TF.Attr s Text) where
     aliDomain =
         lens (_ali_domain :: DnsDomainsData s -> TF.Attr s Text)
              (\s a -> s { _ali_domain = a } :: DnsDomainsData s)
 
-instance P.HasDomainNameRegex (DnsDomainsData s) s Text where
+instance P.HasDomainNameRegex (DnsDomainsData s) (TF.Attr s Text) where
     domainNameRegex =
         lens (_domain_name_regex :: DnsDomainsData s -> TF.Attr s Text)
              (\s a -> s { _domain_name_regex = a } :: DnsDomainsData s)
 
-instance P.HasGroupNameRegex (DnsDomainsData s) s Text where
+instance P.HasGroupNameRegex (DnsDomainsData s) (TF.Attr s Text) where
     groupNameRegex =
         lens (_group_name_regex :: DnsDomainsData s -> TF.Attr s Text)
              (\s a -> s { _group_name_regex = a } :: DnsDomainsData s)
 
-instance P.HasInstanceId (DnsDomainsData s) s Text where
+instance P.HasInstanceId (DnsDomainsData s) (TF.Attr s Text) where
     instanceId =
         lens (_instance_id :: DnsDomainsData s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: DnsDomainsData s)
 
-instance P.HasOutputFile (DnsDomainsData s) s Text where
+instance P.HasOutputFile (DnsDomainsData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: DnsDomainsData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: DnsDomainsData s)
 
-instance P.HasVersionCode (DnsDomainsData s) s Text where
+instance P.HasVersionCode (DnsDomainsData s) (TF.Attr s Text) where
     versionCode =
         lens (_version_code :: DnsDomainsData s -> TF.Attr s Text)
              (\s a -> s { _version_code = a } :: DnsDomainsData s)
 
-instance P.HasComputedAliDomain (DnsDomainsData s) Text
-instance P.HasComputedDnsServers (DnsDomainsData s) Text
-instance P.HasComputedDomainId (DnsDomainsData s) Text
-instance P.HasComputedDomainName (DnsDomainsData s) Text
-instance P.HasComputedGroupId (DnsDomainsData s) Text
-instance P.HasComputedGroupName (DnsDomainsData s) Text
-instance P.HasComputedInstanceId (DnsDomainsData s) Text
-instance P.HasComputedPunyCode (DnsDomainsData s) Text
-instance P.HasComputedVersionCode (DnsDomainsData s) Text
+instance P.HasComputedAliDomain (DnsDomainsData s) (Text)
+instance P.HasComputedDnsServers (DnsDomainsData s) (Text)
+instance P.HasComputedDomainId (DnsDomainsData s) (Text)
+instance P.HasComputedDomainName (DnsDomainsData s) (Text)
+instance P.HasComputedGroupId (DnsDomainsData s) (Text)
+instance P.HasComputedGroupName (DnsDomainsData s) (Text)
+instance P.HasComputedInstanceId (DnsDomainsData s) (Text)
+instance P.HasComputedPunyCode (DnsDomainsData s) (Text)
+instance P.HasComputedVersionCode (DnsDomainsData s) (Text)
 
 dnsDomainsData :: TF.Schema TF.DataSource P.AliCloud (DnsDomainsData s)
 dnsDomainsData =
@@ -310,22 +311,22 @@ data DnsGroupsData s = DnsGroupsData {
 
 instance TF.ToHCL (DnsGroupsData s) where
     toHCL DnsGroupsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
+        [ TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
         ]
 
-instance P.HasNameRegex (DnsGroupsData s) s Text where
+instance P.HasNameRegex (DnsGroupsData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: DnsGroupsData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: DnsGroupsData s)
 
-instance P.HasOutputFile (DnsGroupsData s) s Text where
+instance P.HasOutputFile (DnsGroupsData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: DnsGroupsData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: DnsGroupsData s)
 
-instance P.HasComputedGroupId (DnsGroupsData s) Text
-instance P.HasComputedGroupName (DnsGroupsData s) Text
+instance P.HasComputedGroupId (DnsGroupsData s) (Text)
+instance P.HasComputedGroupName (DnsGroupsData s) (Text)
 
 dnsGroupsData :: TF.Schema TF.DataSource P.AliCloud (DnsGroupsData s)
 dnsGroupsData =
@@ -361,66 +362,66 @@ data DnsRecordsData s = DnsRecordsData {
 
 instance TF.ToHCL (DnsRecordsData s) where
     toHCL DnsRecordsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "domain_name" _domain_name
-        , TF.attribute "host_record_regex" _host_record_regex
-        , TF.attribute "is_locked" _is_locked
-        , TF.attribute "line" _line
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "status" _status
-        , TF.attribute "type" _type'
-        , TF.attribute "value_regex" _value_regex
+        [ TF.assign "domain_name" <$> TF.attribute _domain_name
+        , TF.assign "host_record_regex" <$> TF.attribute _host_record_regex
+        , TF.assign "is_locked" <$> TF.attribute _is_locked
+        , TF.assign "line" <$> TF.attribute _line
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value_regex" <$> TF.attribute _value_regex
         ]
 
-instance P.HasDomainName (DnsRecordsData s) s Text where
+instance P.HasDomainName (DnsRecordsData s) (TF.Attr s Text) where
     domainName =
         lens (_domain_name :: DnsRecordsData s -> TF.Attr s Text)
              (\s a -> s { _domain_name = a } :: DnsRecordsData s)
 
-instance P.HasHostRecordRegex (DnsRecordsData s) s Text where
+instance P.HasHostRecordRegex (DnsRecordsData s) (TF.Attr s Text) where
     hostRecordRegex =
         lens (_host_record_regex :: DnsRecordsData s -> TF.Attr s Text)
              (\s a -> s { _host_record_regex = a } :: DnsRecordsData s)
 
-instance P.HasIsLocked (DnsRecordsData s) s Text where
+instance P.HasIsLocked (DnsRecordsData s) (TF.Attr s Text) where
     isLocked =
         lens (_is_locked :: DnsRecordsData s -> TF.Attr s Text)
              (\s a -> s { _is_locked = a } :: DnsRecordsData s)
 
-instance P.HasLine (DnsRecordsData s) s Text where
+instance P.HasLine (DnsRecordsData s) (TF.Attr s Text) where
     line =
         lens (_line :: DnsRecordsData s -> TF.Attr s Text)
              (\s a -> s { _line = a } :: DnsRecordsData s)
 
-instance P.HasOutputFile (DnsRecordsData s) s Text where
+instance P.HasOutputFile (DnsRecordsData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: DnsRecordsData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: DnsRecordsData s)
 
-instance P.HasStatus (DnsRecordsData s) s Text where
+instance P.HasStatus (DnsRecordsData s) (TF.Attr s Text) where
     status =
         lens (_status :: DnsRecordsData s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: DnsRecordsData s)
 
-instance P.HasType' (DnsRecordsData s) s Text where
+instance P.HasType' (DnsRecordsData s) (TF.Attr s Text) where
     type' =
         lens (_type' :: DnsRecordsData s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DnsRecordsData s)
 
-instance P.HasValueRegex (DnsRecordsData s) s Text where
+instance P.HasValueRegex (DnsRecordsData s) (TF.Attr s Text) where
     valueRegex =
         lens (_value_regex :: DnsRecordsData s -> TF.Attr s Text)
              (\s a -> s { _value_regex = a } :: DnsRecordsData s)
 
-instance P.HasComputedDomainName (DnsRecordsData s) Text
-instance P.HasComputedHostRecord (DnsRecordsData s) Text
-instance P.HasComputedLine (DnsRecordsData s) Text
-instance P.HasComputedLocked (DnsRecordsData s) Text
-instance P.HasComputedPriority (DnsRecordsData s) Text
-instance P.HasComputedRecordId (DnsRecordsData s) Text
-instance P.HasComputedStatus (DnsRecordsData s) Text
-instance P.HasComputedTtl (DnsRecordsData s) Text
-instance P.HasComputedType' (DnsRecordsData s) Text
-instance P.HasComputedValue (DnsRecordsData s) Text
+instance P.HasComputedDomainName (DnsRecordsData s) (Text)
+instance P.HasComputedHostRecord (DnsRecordsData s) (Text)
+instance P.HasComputedLine (DnsRecordsData s) (Text)
+instance P.HasComputedLocked (DnsRecordsData s) (Text)
+instance P.HasComputedPriority (DnsRecordsData s) (Text)
+instance P.HasComputedRecordId (DnsRecordsData s) (Text)
+instance P.HasComputedStatus (DnsRecordsData s) (Text)
+instance P.HasComputedTtl (DnsRecordsData s) (Text)
+instance P.HasComputedType' (DnsRecordsData s) (Text)
+instance P.HasComputedValue (DnsRecordsData s) (Text)
 
 dnsRecordsData :: TF.Schema TF.DataSource P.AliCloud (DnsRecordsData s)
 dnsRecordsData =
@@ -455,33 +456,33 @@ data EipsData s = EipsData {
 
 instance TF.ToHCL (EipsData s) where
     toHCL EipsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "ids" _ids
-        , TF.attribute "in_use" _in_use
-        , TF.attribute "ip_addresses" _ip_addresses
-        , TF.attribute "output_file" _output_file
+        [ TF.assign "ids" <$> TF.attribute _ids
+        , TF.assign "in_use" <$> TF.attribute _in_use
+        , TF.assign "ip_addresses" <$> TF.attribute _ip_addresses
+        , TF.assign "output_file" <$> TF.attribute _output_file
         ]
 
-instance P.HasIds (EipsData s) s Text where
+instance P.HasIds (EipsData s) (TF.Attr s Text) where
     ids =
         lens (_ids :: EipsData s -> TF.Attr s Text)
              (\s a -> s { _ids = a } :: EipsData s)
 
-instance P.HasInUse (EipsData s) s Text where
+instance P.HasInUse (EipsData s) (TF.Attr s Text) where
     inUse =
         lens (_in_use :: EipsData s -> TF.Attr s Text)
              (\s a -> s { _in_use = a } :: EipsData s)
 
-instance P.HasIpAddresses (EipsData s) s Text where
+instance P.HasIpAddresses (EipsData s) (TF.Attr s Text) where
     ipAddresses =
         lens (_ip_addresses :: EipsData s -> TF.Attr s Text)
              (\s a -> s { _ip_addresses = a } :: EipsData s)
 
-instance P.HasOutputFile (EipsData s) s Text where
+instance P.HasOutputFile (EipsData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: EipsData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: EipsData s)
 
-instance P.HasComputedEips (EipsData s) Text
+instance P.HasComputedEips (EipsData s) (Text)
 
 eipsData :: TF.Schema TF.DataSource P.AliCloud (EipsData s)
 eipsData =
@@ -512,45 +513,45 @@ data ImagesData s = ImagesData {
 
 instance TF.ToHCL (ImagesData s) where
     toHCL ImagesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "most_recent" _most_recent
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "owners" _owners
+        [ TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "owners" <$> TF.attribute _owners
         ]
 
-instance P.HasMostRecent (ImagesData s) s Text where
+instance P.HasMostRecent (ImagesData s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: ImagesData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: ImagesData s)
 
-instance P.HasNameRegex (ImagesData s) s Text where
+instance P.HasNameRegex (ImagesData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: ImagesData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: ImagesData s)
 
-instance P.HasOutputFile (ImagesData s) s Text where
+instance P.HasOutputFile (ImagesData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: ImagesData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: ImagesData s)
 
-instance P.HasOwners (ImagesData s) s Text where
+instance P.HasOwners (ImagesData s) (TF.Attr s Text) where
     owners =
         lens (_owners :: ImagesData s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: ImagesData s)
 
-instance P.HasComputedArchitecture (ImagesData s) Text
-instance P.HasComputedCreationTime (ImagesData s) Text
-instance P.HasComputedDescription (ImagesData s) Text
-instance P.HasComputedDiskDeviceMappings (ImagesData s) Text
-instance P.HasComputedId (ImagesData s) Text
-instance P.HasComputedImageOwnerAlias (ImagesData s) Text
-instance P.HasComputedImageVersion (ImagesData s) Text
-instance P.HasComputedIsSubscribed (ImagesData s) Text
-instance P.HasComputedOsName (ImagesData s) Text
-instance P.HasComputedProductCode (ImagesData s) Text
-instance P.HasComputedProgress (ImagesData s) Text
-instance P.HasComputedSize (ImagesData s) Text
-instance P.HasComputedStatus (ImagesData s) Text
+instance P.HasComputedArchitecture (ImagesData s) (Text)
+instance P.HasComputedCreationTime (ImagesData s) (Text)
+instance P.HasComputedDescription (ImagesData s) (Text)
+instance P.HasComputedDiskDeviceMappings (ImagesData s) (Text)
+instance P.HasComputedId (ImagesData s) (Text)
+instance P.HasComputedImageOwnerAlias (ImagesData s) (Text)
+instance P.HasComputedImageVersion (ImagesData s) (Text)
+instance P.HasComputedIsSubscribed (ImagesData s) (Text)
+instance P.HasComputedOsName (ImagesData s) (Text)
+instance P.HasComputedProductCode (ImagesData s) (Text)
+instance P.HasComputedProgress (ImagesData s) (Text)
+instance P.HasComputedSize (ImagesData s) (Text)
+instance P.HasComputedStatus (ImagesData s) (Text)
 
 imagesData :: TF.Schema TF.DataSource P.AliCloud (ImagesData s)
 imagesData =
@@ -585,48 +586,48 @@ data InstanceTypesData s = InstanceTypesData {
 
 instance TF.ToHCL (InstanceTypesData s) where
     toHCL InstanceTypesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "availability_zone" _availability_zone
-        , TF.attribute "cpu_core_count" _cpu_core_count
-        , TF.attribute "instance_type_family" _instance_type_family
-        , TF.attribute "is_outdated" _is_outdated
-        , TF.attribute "memory_size" _memory_size
-        , TF.attribute "output_file" _output_file
+        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "cpu_core_count" <$> TF.attribute _cpu_core_count
+        , TF.assign "instance_type_family" <$> TF.attribute _instance_type_family
+        , TF.assign "is_outdated" <$> TF.attribute _is_outdated
+        , TF.assign "memory_size" <$> TF.attribute _memory_size
+        , TF.assign "output_file" <$> TF.attribute _output_file
         ]
 
-instance P.HasAvailabilityZone (InstanceTypesData s) s Text where
+instance P.HasAvailabilityZone (InstanceTypesData s) (TF.Attr s Text) where
     availabilityZone =
         lens (_availability_zone :: InstanceTypesData s -> TF.Attr s Text)
              (\s a -> s { _availability_zone = a } :: InstanceTypesData s)
 
-instance P.HasCpuCoreCount (InstanceTypesData s) s Text where
+instance P.HasCpuCoreCount (InstanceTypesData s) (TF.Attr s Text) where
     cpuCoreCount =
         lens (_cpu_core_count :: InstanceTypesData s -> TF.Attr s Text)
              (\s a -> s { _cpu_core_count = a } :: InstanceTypesData s)
 
-instance P.HasInstanceTypeFamily (InstanceTypesData s) s Text where
+instance P.HasInstanceTypeFamily (InstanceTypesData s) (TF.Attr s Text) where
     instanceTypeFamily =
         lens (_instance_type_family :: InstanceTypesData s -> TF.Attr s Text)
              (\s a -> s { _instance_type_family = a } :: InstanceTypesData s)
 
-instance P.HasIsOutdated (InstanceTypesData s) s Text where
+instance P.HasIsOutdated (InstanceTypesData s) (TF.Attr s Text) where
     isOutdated =
         lens (_is_outdated :: InstanceTypesData s -> TF.Attr s Text)
              (\s a -> s { _is_outdated = a } :: InstanceTypesData s)
 
-instance P.HasMemorySize (InstanceTypesData s) s Text where
+instance P.HasMemorySize (InstanceTypesData s) (TF.Attr s Text) where
     memorySize =
         lens (_memory_size :: InstanceTypesData s -> TF.Attr s Text)
              (\s a -> s { _memory_size = a } :: InstanceTypesData s)
 
-instance P.HasOutputFile (InstanceTypesData s) s Text where
+instance P.HasOutputFile (InstanceTypesData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: InstanceTypesData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: InstanceTypesData s)
 
-instance P.HasComputedCpuCoreCount (InstanceTypesData s) Text
-instance P.HasComputedFamily' (InstanceTypesData s) Text
-instance P.HasComputedId (InstanceTypesData s) Text
-instance P.HasComputedMemorySize (InstanceTypesData s) Text
+instance P.HasComputedCpuCoreCount (InstanceTypesData s) (Text)
+instance P.HasComputedFamily' (InstanceTypesData s) (Text)
+instance P.HasComputedId (InstanceTypesData s) (Text)
+instance P.HasComputedMemorySize (InstanceTypesData s) (Text)
 
 instanceTypesData :: TF.Schema TF.DataSource P.AliCloud (InstanceTypesData s)
 instanceTypesData =
@@ -668,63 +669,63 @@ data InstancesData s = InstancesData {
 
 instance TF.ToHCL (InstancesData s) where
     toHCL InstancesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "availability_zone" _availability_zone
-        , TF.attribute "ids" _ids
-        , TF.attribute "image_id" _image_id
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "status" _status
-        , TF.attribute "tags" _tags
-        , TF.attribute "vpc_id" _vpc_id
-        , TF.attribute "vswitch_id" _vswitch_id
+        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "ids" <$> TF.attribute _ids
+        , TF.assign "image_id" <$> TF.attribute _image_id
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitch_id
         ]
 
-instance P.HasAvailabilityZone (InstancesData s) s Text where
+instance P.HasAvailabilityZone (InstancesData s) (TF.Attr s Text) where
     availabilityZone =
         lens (_availability_zone :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _availability_zone = a } :: InstancesData s)
 
-instance P.HasIds (InstancesData s) s Text where
+instance P.HasIds (InstancesData s) (TF.Attr s Text) where
     ids =
         lens (_ids :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _ids = a } :: InstancesData s)
 
-instance P.HasImageId (InstancesData s) s Text where
+instance P.HasImageId (InstancesData s) (TF.Attr s Text) where
     imageId =
         lens (_image_id :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _image_id = a } :: InstancesData s)
 
-instance P.HasNameRegex (InstancesData s) s Text where
+instance P.HasNameRegex (InstancesData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: InstancesData s)
 
-instance P.HasOutputFile (InstancesData s) s Text where
+instance P.HasOutputFile (InstancesData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: InstancesData s)
 
-instance P.HasStatus (InstancesData s) s Text where
+instance P.HasStatus (InstancesData s) (TF.Attr s Text) where
     status =
         lens (_status :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: InstancesData s)
 
-instance P.HasTags (InstancesData s) s Text where
+instance P.HasTags (InstancesData s) (TF.Attr s Text) where
     tags =
         lens (_tags :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: InstancesData s)
 
-instance P.HasVpcId (InstancesData s) s Text where
+instance P.HasVpcId (InstancesData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: InstancesData s)
 
-instance P.HasVswitchId (InstancesData s) s Text where
+instance P.HasVswitchId (InstancesData s) (TF.Attr s Text) where
     vswitchId =
         lens (_vswitch_id :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _vswitch_id = a } :: InstancesData s)
 
-instance P.HasComputedInstances (InstancesData s) Text
+instance P.HasComputedInstances (InstancesData s) (Text)
 
 instancesData :: TF.Schema TF.DataSource P.AliCloud (InstancesData s)
 instancesData =
@@ -757,30 +758,30 @@ data KeyPairsData s = KeyPairsData {
 
 instance TF.ToHCL (KeyPairsData s) where
     toHCL KeyPairsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "finger_print" _finger_print
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
+        [ TF.assign "finger_print" <$> TF.attribute _finger_print
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
         ]
 
-instance P.HasFingerPrint (KeyPairsData s) s Text where
+instance P.HasFingerPrint (KeyPairsData s) (TF.Attr s Text) where
     fingerPrint =
         lens (_finger_print :: KeyPairsData s -> TF.Attr s Text)
              (\s a -> s { _finger_print = a } :: KeyPairsData s)
 
-instance P.HasNameRegex (KeyPairsData s) s Text where
+instance P.HasNameRegex (KeyPairsData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: KeyPairsData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: KeyPairsData s)
 
-instance P.HasOutputFile (KeyPairsData s) s Text where
+instance P.HasOutputFile (KeyPairsData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: KeyPairsData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: KeyPairsData s)
 
-instance P.HasComputedFingerPrint (KeyPairsData s) Text
-instance P.HasComputedId (KeyPairsData s) Text
-instance P.HasComputedInstances (KeyPairsData s) Text
-instance P.HasComputedKeyName (KeyPairsData s) Text
+instance P.HasComputedFingerPrint (KeyPairsData s) (Text)
+instance P.HasComputedId (KeyPairsData s) (Text)
+instance P.HasComputedInstances (KeyPairsData s) (Text)
+instance P.HasComputedKeyName (KeyPairsData s) (Text)
 
 keyPairsData :: TF.Schema TF.DataSource P.AliCloud (KeyPairsData s)
 keyPairsData =
@@ -809,39 +810,39 @@ data KmsKeysData s = KmsKeysData {
 
 instance TF.ToHCL (KmsKeysData s) where
     toHCL KmsKeysData{..} = TF.inline $ catMaybes
-        [ TF.attribute "description_regex" _description_regex
-        , TF.attribute "ids" _ids
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "status" _status
+        [ TF.assign "description_regex" <$> TF.attribute _description_regex
+        , TF.assign "ids" <$> TF.attribute _ids
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "status" <$> TF.attribute _status
         ]
 
-instance P.HasDescriptionRegex (KmsKeysData s) s Text where
+instance P.HasDescriptionRegex (KmsKeysData s) (TF.Attr s Text) where
     descriptionRegex =
         lens (_description_regex :: KmsKeysData s -> TF.Attr s Text)
              (\s a -> s { _description_regex = a } :: KmsKeysData s)
 
-instance P.HasIds (KmsKeysData s) s Text where
+instance P.HasIds (KmsKeysData s) (TF.Attr s Text) where
     ids =
         lens (_ids :: KmsKeysData s -> TF.Attr s Text)
              (\s a -> s { _ids = a } :: KmsKeysData s)
 
-instance P.HasOutputFile (KmsKeysData s) s Text where
+instance P.HasOutputFile (KmsKeysData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: KmsKeysData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: KmsKeysData s)
 
-instance P.HasStatus (KmsKeysData s) s Text where
+instance P.HasStatus (KmsKeysData s) (TF.Attr s Text) where
     status =
         lens (_status :: KmsKeysData s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: KmsKeysData s)
 
-instance P.HasComputedArn (KmsKeysData s) Text
-instance P.HasComputedCreationDate (KmsKeysData s) Text
-instance P.HasComputedCreator (KmsKeysData s) Text
-instance P.HasComputedDeleteDate (KmsKeysData s) Text
-instance P.HasComputedDescription (KmsKeysData s) Text
-instance P.HasComputedId (KmsKeysData s) Text
-instance P.HasComputedStatus (KmsKeysData s) Text
+instance P.HasComputedArn (KmsKeysData s) (Text)
+instance P.HasComputedCreationDate (KmsKeysData s) (Text)
+instance P.HasComputedCreator (KmsKeysData s) (Text)
+instance P.HasComputedDeleteDate (KmsKeysData s) (Text)
+instance P.HasComputedDescription (KmsKeysData s) (Text)
+instance P.HasComputedId (KmsKeysData s) (Text)
+instance P.HasComputedStatus (KmsKeysData s) (Text)
 
 kmsKeysData :: TF.Schema TF.DataSource P.AliCloud (KmsKeysData s)
 kmsKeysData =
@@ -884,15 +885,15 @@ data RamAccountAliasesData s = RamAccountAliasesData {
 
 instance TF.ToHCL (RamAccountAliasesData s) where
     toHCL RamAccountAliasesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "output_file" _output_file
+        [ TF.assign "output_file" <$> TF.attribute _output_file
         ]
 
-instance P.HasOutputFile (RamAccountAliasesData s) s Text where
+instance P.HasOutputFile (RamAccountAliasesData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: RamAccountAliasesData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: RamAccountAliasesData s)
 
-instance P.HasComputedAccountAlias (RamAccountAliasesData s) Text
+instance P.HasComputedAccountAlias (RamAccountAliasesData s) (Text)
 
 ramAccountAliasesData :: TF.Schema TF.DataSource P.AliCloud (RamAccountAliasesData s)
 ramAccountAliasesData =
@@ -921,40 +922,40 @@ data RamGroupsData s = RamGroupsData {
 
 instance TF.ToHCL (RamGroupsData s) where
     toHCL RamGroupsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "policy_name" _policy_name
-        , TF.attribute "policy_type" _policy_type
-        , TF.attribute "user_name" _user_name
+        [ TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "policy_name" <$> TF.attribute _policy_name
+        , TF.assign "policy_type" <$> TF.attribute _policy_type
+        , TF.assign "user_name" <$> TF.attribute _user_name
         ]
 
-instance P.HasNameRegex (RamGroupsData s) s Text where
+instance P.HasNameRegex (RamGroupsData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: RamGroupsData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: RamGroupsData s)
 
-instance P.HasOutputFile (RamGroupsData s) s Text where
+instance P.HasOutputFile (RamGroupsData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: RamGroupsData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: RamGroupsData s)
 
-instance P.HasPolicyName (RamGroupsData s) s Text where
+instance P.HasPolicyName (RamGroupsData s) (TF.Attr s Text) where
     policyName =
         lens (_policy_name :: RamGroupsData s -> TF.Attr s Text)
              (\s a -> s { _policy_name = a } :: RamGroupsData s)
 
-instance P.HasPolicyType (RamGroupsData s) s Text where
+instance P.HasPolicyType (RamGroupsData s) (TF.Attr s Text) where
     policyType =
         lens (_policy_type :: RamGroupsData s -> TF.Attr s Text)
              (\s a -> s { _policy_type = a } :: RamGroupsData s)
 
-instance P.HasUserName (RamGroupsData s) s Text where
+instance P.HasUserName (RamGroupsData s) (TF.Attr s Text) where
     userName =
         lens (_user_name :: RamGroupsData s -> TF.Attr s Text)
              (\s a -> s { _user_name = a } :: RamGroupsData s)
 
-instance P.HasComputedComments (RamGroupsData s) Text
-instance P.HasComputedName (RamGroupsData s) Text
+instance P.HasComputedComments (RamGroupsData s) (Text)
+instance P.HasComputedName (RamGroupsData s) (Text)
 
 ramGroupsData :: TF.Schema TF.DataSource P.AliCloud (RamGroupsData s)
 ramGroupsData =
@@ -989,52 +990,52 @@ data RamPoliciesData s = RamPoliciesData {
 
 instance TF.ToHCL (RamPoliciesData s) where
     toHCL RamPoliciesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "group_name" _group_name
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "role_name" _role_name
-        , TF.attribute "type" _type'
-        , TF.attribute "user_name" _user_name
+        [ TF.assign "group_name" <$> TF.attribute _group_name
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "role_name" <$> TF.attribute _role_name
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "user_name" <$> TF.attribute _user_name
         ]
 
-instance P.HasGroupName (RamPoliciesData s) s Text where
+instance P.HasGroupName (RamPoliciesData s) (TF.Attr s Text) where
     groupName =
         lens (_group_name :: RamPoliciesData s -> TF.Attr s Text)
              (\s a -> s { _group_name = a } :: RamPoliciesData s)
 
-instance P.HasNameRegex (RamPoliciesData s) s Text where
+instance P.HasNameRegex (RamPoliciesData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: RamPoliciesData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: RamPoliciesData s)
 
-instance P.HasOutputFile (RamPoliciesData s) s Text where
+instance P.HasOutputFile (RamPoliciesData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: RamPoliciesData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: RamPoliciesData s)
 
-instance P.HasRoleName (RamPoliciesData s) s Text where
+instance P.HasRoleName (RamPoliciesData s) (TF.Attr s Text) where
     roleName =
         lens (_role_name :: RamPoliciesData s -> TF.Attr s Text)
              (\s a -> s { _role_name = a } :: RamPoliciesData s)
 
-instance P.HasType' (RamPoliciesData s) s Text where
+instance P.HasType' (RamPoliciesData s) (TF.Attr s Text) where
     type' =
         lens (_type' :: RamPoliciesData s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: RamPoliciesData s)
 
-instance P.HasUserName (RamPoliciesData s) s Text where
+instance P.HasUserName (RamPoliciesData s) (TF.Attr s Text) where
     userName =
         lens (_user_name :: RamPoliciesData s -> TF.Attr s Text)
              (\s a -> s { _user_name = a } :: RamPoliciesData s)
 
-instance P.HasComputedAttachmentCount (RamPoliciesData s) Text
-instance P.HasComputedCreateDate (RamPoliciesData s) Text
-instance P.HasComputedDefaultVersion (RamPoliciesData s) Text
-instance P.HasComputedDescription (RamPoliciesData s) Text
-instance P.HasComputedDocument (RamPoliciesData s) Text
-instance P.HasComputedName (RamPoliciesData s) Text
-instance P.HasComputedType' (RamPoliciesData s) Text
-instance P.HasComputedUpdateDate (RamPoliciesData s) Text
+instance P.HasComputedAttachmentCount (RamPoliciesData s) (Text)
+instance P.HasComputedCreateDate (RamPoliciesData s) (Text)
+instance P.HasComputedDefaultVersion (RamPoliciesData s) (Text)
+instance P.HasComputedDescription (RamPoliciesData s) (Text)
+instance P.HasComputedDocument (RamPoliciesData s) (Text)
+instance P.HasComputedName (RamPoliciesData s) (Text)
+instance P.HasComputedType' (RamPoliciesData s) (Text)
+instance P.HasComputedUpdateDate (RamPoliciesData s) (Text)
 
 ramPoliciesData :: TF.Schema TF.DataSource P.AliCloud (RamPoliciesData s)
 ramPoliciesData =
@@ -1066,40 +1067,40 @@ data RamRolesData s = RamRolesData {
 
 instance TF.ToHCL (RamRolesData s) where
     toHCL RamRolesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "policy_name" _policy_name
-        , TF.attribute "policy_type" _policy_type
+        [ TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "policy_name" <$> TF.attribute _policy_name
+        , TF.assign "policy_type" <$> TF.attribute _policy_type
         ]
 
-instance P.HasNameRegex (RamRolesData s) s Text where
+instance P.HasNameRegex (RamRolesData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: RamRolesData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: RamRolesData s)
 
-instance P.HasOutputFile (RamRolesData s) s Text where
+instance P.HasOutputFile (RamRolesData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: RamRolesData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: RamRolesData s)
 
-instance P.HasPolicyName (RamRolesData s) s Text where
+instance P.HasPolicyName (RamRolesData s) (TF.Attr s Text) where
     policyName =
         lens (_policy_name :: RamRolesData s -> TF.Attr s Text)
              (\s a -> s { _policy_name = a } :: RamRolesData s)
 
-instance P.HasPolicyType (RamRolesData s) s Text where
+instance P.HasPolicyType (RamRolesData s) (TF.Attr s Text) where
     policyType =
         lens (_policy_type :: RamRolesData s -> TF.Attr s Text)
              (\s a -> s { _policy_type = a } :: RamRolesData s)
 
-instance P.HasComputedArn (RamRolesData s) Text
-instance P.HasComputedAssumeRolePolicyDocument (RamRolesData s) Text
-instance P.HasComputedCreateDate (RamRolesData s) Text
-instance P.HasComputedDescription (RamRolesData s) Text
-instance P.HasComputedDocument (RamRolesData s) Text
-instance P.HasComputedId (RamRolesData s) Text
-instance P.HasComputedName (RamRolesData s) Text
-instance P.HasComputedUpdateDate (RamRolesData s) Text
+instance P.HasComputedArn (RamRolesData s) (Text)
+instance P.HasComputedAssumeRolePolicyDocument (RamRolesData s) (Text)
+instance P.HasComputedCreateDate (RamRolesData s) (Text)
+instance P.HasComputedDescription (RamRolesData s) (Text)
+instance P.HasComputedDocument (RamRolesData s) (Text)
+instance P.HasComputedId (RamRolesData s) (Text)
+instance P.HasComputedName (RamRolesData s) (Text)
+instance P.HasComputedUpdateDate (RamRolesData s) (Text)
 
 ramRolesData :: TF.Schema TF.DataSource P.AliCloud (RamRolesData s)
 ramRolesData =
@@ -1131,42 +1132,42 @@ data RamUsersData s = RamUsersData {
 
 instance TF.ToHCL (RamUsersData s) where
     toHCL RamUsersData{..} = TF.inline $ catMaybes
-        [ TF.attribute "group_name" _group_name
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "policy_name" _policy_name
-        , TF.attribute "policy_type" _policy_type
+        [ TF.assign "group_name" <$> TF.attribute _group_name
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "policy_name" <$> TF.attribute _policy_name
+        , TF.assign "policy_type" <$> TF.attribute _policy_type
         ]
 
-instance P.HasGroupName (RamUsersData s) s Text where
+instance P.HasGroupName (RamUsersData s) (TF.Attr s Text) where
     groupName =
         lens (_group_name :: RamUsersData s -> TF.Attr s Text)
              (\s a -> s { _group_name = a } :: RamUsersData s)
 
-instance P.HasNameRegex (RamUsersData s) s Text where
+instance P.HasNameRegex (RamUsersData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: RamUsersData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: RamUsersData s)
 
-instance P.HasOutputFile (RamUsersData s) s Text where
+instance P.HasOutputFile (RamUsersData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: RamUsersData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: RamUsersData s)
 
-instance P.HasPolicyName (RamUsersData s) s Text where
+instance P.HasPolicyName (RamUsersData s) (TF.Attr s Text) where
     policyName =
         lens (_policy_name :: RamUsersData s -> TF.Attr s Text)
              (\s a -> s { _policy_name = a } :: RamUsersData s)
 
-instance P.HasPolicyType (RamUsersData s) s Text where
+instance P.HasPolicyType (RamUsersData s) (TF.Attr s Text) where
     policyType =
         lens (_policy_type :: RamUsersData s -> TF.Attr s Text)
              (\s a -> s { _policy_type = a } :: RamUsersData s)
 
-instance P.HasComputedCreateDate (RamUsersData s) Text
-instance P.HasComputedId (RamUsersData s) Text
-instance P.HasComputedLastLoginDate (RamUsersData s) Text
-instance P.HasComputedName (RamUsersData s) Text
+instance P.HasComputedCreateDate (RamUsersData s) (Text)
+instance P.HasComputedId (RamUsersData s) (Text)
+instance P.HasComputedLastLoginDate (RamUsersData s) (Text)
+instance P.HasComputedName (RamUsersData s) (Text)
 
 ramUsersData :: TF.Schema TF.DataSource P.AliCloud (RamUsersData s)
 ramUsersData =
@@ -1194,28 +1195,28 @@ data RegionsData s = RegionsData {
 
 instance TF.ToHCL (RegionsData s) where
     toHCL RegionsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "current" _current
-        , TF.attribute "name" _name
-        , TF.attribute "output_file" _output_file
+        [ TF.assign "current" <$> TF.attribute _current
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "output_file" <$> TF.attribute _output_file
         ]
 
-instance P.HasCurrent (RegionsData s) s Text where
+instance P.HasCurrent (RegionsData s) (TF.Attr s Text) where
     current =
         lens (_current :: RegionsData s -> TF.Attr s Text)
              (\s a -> s { _current = a } :: RegionsData s)
 
-instance P.HasName (RegionsData s) s Text where
+instance P.HasName (RegionsData s) (TF.Attr s Text) where
     name =
         lens (_name :: RegionsData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RegionsData s)
 
-instance P.HasOutputFile (RegionsData s) s Text where
+instance P.HasOutputFile (RegionsData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: RegionsData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: RegionsData s)
 
-instance P.HasComputedId (RegionsData s) Text
-instance P.HasComputedLocalName (RegionsData s) Text
+instance P.HasComputedId (RegionsData s) (Text)
+instance P.HasComputedLocalName (RegionsData s) (Text)
 
 regionsData :: TF.Schema TF.DataSource P.AliCloud (RegionsData s)
 regionsData =
@@ -1248,55 +1249,55 @@ data VpcsData s = VpcsData {
 
 instance TF.ToHCL (VpcsData s) where
     toHCL VpcsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "cidr_block" _cidr_block
-        , TF.attribute "is_default" _is_default
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "status" _status
-        , TF.attribute "vswitch_id" _vswitch_id
+        [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
+        , TF.assign "is_default" <$> TF.attribute _is_default
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitch_id
         ]
 
-instance P.HasCidrBlock (VpcsData s) s Text where
+instance P.HasCidrBlock (VpcsData s) (TF.Attr s Text) where
     cidrBlock =
         lens (_cidr_block :: VpcsData s -> TF.Attr s Text)
              (\s a -> s { _cidr_block = a } :: VpcsData s)
 
-instance P.HasIsDefault (VpcsData s) s Text where
+instance P.HasIsDefault (VpcsData s) (TF.Attr s Text) where
     isDefault =
         lens (_is_default :: VpcsData s -> TF.Attr s Text)
              (\s a -> s { _is_default = a } :: VpcsData s)
 
-instance P.HasNameRegex (VpcsData s) s Text where
+instance P.HasNameRegex (VpcsData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: VpcsData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: VpcsData s)
 
-instance P.HasOutputFile (VpcsData s) s Text where
+instance P.HasOutputFile (VpcsData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: VpcsData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: VpcsData s)
 
-instance P.HasStatus (VpcsData s) s Text where
+instance P.HasStatus (VpcsData s) (TF.Attr s Text) where
     status =
         lens (_status :: VpcsData s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: VpcsData s)
 
-instance P.HasVswitchId (VpcsData s) s Text where
+instance P.HasVswitchId (VpcsData s) (TF.Attr s Text) where
     vswitchId =
         lens (_vswitch_id :: VpcsData s -> TF.Attr s Text)
              (\s a -> s { _vswitch_id = a } :: VpcsData s)
 
-instance P.HasComputedCidrBlock (VpcsData s) Text
-instance P.HasComputedCreationTime (VpcsData s) Text
-instance P.HasComputedDescription (VpcsData s) Text
-instance P.HasComputedId (VpcsData s) Text
-instance P.HasComputedIsDefault (VpcsData s) Text
-instance P.HasComputedRegionId (VpcsData s) Text
-instance P.HasComputedRouteTableId (VpcsData s) Text
-instance P.HasComputedStatus (VpcsData s) Text
-instance P.HasComputedVpcName (VpcsData s) Text
-instance P.HasComputedVrouterId (VpcsData s) Text
-instance P.HasComputedVswitchIds (VpcsData s) Text
+instance P.HasComputedCidrBlock (VpcsData s) (Text)
+instance P.HasComputedCreationTime (VpcsData s) (Text)
+instance P.HasComputedDescription (VpcsData s) (Text)
+instance P.HasComputedId (VpcsData s) (Text)
+instance P.HasComputedIsDefault (VpcsData s) (Text)
+instance P.HasComputedRegionId (VpcsData s) (Text)
+instance P.HasComputedRouteTableId (VpcsData s) (Text)
+instance P.HasComputedStatus (VpcsData s) (Text)
+instance P.HasComputedVpcName (VpcsData s) (Text)
+instance P.HasComputedVrouterId (VpcsData s) (Text)
+instance P.HasComputedVswitchIds (VpcsData s) (Text)
 
 vpcsData :: TF.Schema TF.DataSource P.AliCloud (VpcsData s)
 vpcsData =
@@ -1333,45 +1334,45 @@ data VswitchesData s = VswitchesData {
 
 instance TF.ToHCL (VswitchesData s) where
     toHCL VswitchesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "cidr_block" _cidr_block
-        , TF.attribute "is_default" _is_default
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "output_file" _output_file
-        , TF.attribute "vpc_id" _vpc_id
-        , TF.attribute "zone_id" _zone_id
+        [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
+        , TF.assign "is_default" <$> TF.attribute _is_default
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "output_file" <$> TF.attribute _output_file
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        , TF.assign "zone_id" <$> TF.attribute _zone_id
         ]
 
-instance P.HasCidrBlock (VswitchesData s) s Text where
+instance P.HasCidrBlock (VswitchesData s) (TF.Attr s Text) where
     cidrBlock =
         lens (_cidr_block :: VswitchesData s -> TF.Attr s Text)
              (\s a -> s { _cidr_block = a } :: VswitchesData s)
 
-instance P.HasIsDefault (VswitchesData s) s Text where
+instance P.HasIsDefault (VswitchesData s) (TF.Attr s Text) where
     isDefault =
         lens (_is_default :: VswitchesData s -> TF.Attr s Text)
              (\s a -> s { _is_default = a } :: VswitchesData s)
 
-instance P.HasNameRegex (VswitchesData s) s Text where
+instance P.HasNameRegex (VswitchesData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: VswitchesData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: VswitchesData s)
 
-instance P.HasOutputFile (VswitchesData s) s Text where
+instance P.HasOutputFile (VswitchesData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: VswitchesData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: VswitchesData s)
 
-instance P.HasVpcId (VswitchesData s) s Text where
+instance P.HasVpcId (VswitchesData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: VswitchesData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: VswitchesData s)
 
-instance P.HasZoneId (VswitchesData s) s Text where
+instance P.HasZoneId (VswitchesData s) (TF.Attr s Text) where
     zoneId =
         lens (_zone_id :: VswitchesData s -> TF.Attr s Text)
              (\s a -> s { _zone_id = a } :: VswitchesData s)
 
-instance P.HasComputedVswitches (VswitchesData s) Text
+instance P.HasComputedVswitches (VswitchesData s) (Text)
 
 vswitchesData :: TF.Schema TF.DataSource P.AliCloud (VswitchesData s)
 vswitchesData =
@@ -1404,37 +1405,37 @@ data ZonesData s = ZonesData {
 
 instance TF.ToHCL (ZonesData s) where
     toHCL ZonesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "available_disk_category" _available_disk_category
-        , TF.attribute "available_instance_type" _available_instance_type
-        , TF.attribute "available_resource_creation" _available_resource_creation
-        , TF.attribute "output_file" _output_file
+        [ TF.assign "available_disk_category" <$> TF.attribute _available_disk_category
+        , TF.assign "available_instance_type" <$> TF.attribute _available_instance_type
+        , TF.assign "available_resource_creation" <$> TF.attribute _available_resource_creation
+        , TF.assign "output_file" <$> TF.attribute _output_file
         ]
 
-instance P.HasAvailableDiskCategory (ZonesData s) s Text where
+instance P.HasAvailableDiskCategory (ZonesData s) (TF.Attr s Text) where
     availableDiskCategory =
         lens (_available_disk_category :: ZonesData s -> TF.Attr s Text)
              (\s a -> s { _available_disk_category = a } :: ZonesData s)
 
-instance P.HasAvailableInstanceType (ZonesData s) s Text where
+instance P.HasAvailableInstanceType (ZonesData s) (TF.Attr s Text) where
     availableInstanceType =
         lens (_available_instance_type :: ZonesData s -> TF.Attr s Text)
              (\s a -> s { _available_instance_type = a } :: ZonesData s)
 
-instance P.HasAvailableResourceCreation (ZonesData s) s Text where
+instance P.HasAvailableResourceCreation (ZonesData s) (TF.Attr s Text) where
     availableResourceCreation =
         lens (_available_resource_creation :: ZonesData s -> TF.Attr s Text)
              (\s a -> s { _available_resource_creation = a } :: ZonesData s)
 
-instance P.HasOutputFile (ZonesData s) s Text where
+instance P.HasOutputFile (ZonesData s) (TF.Attr s Text) where
     outputFile =
         lens (_output_file :: ZonesData s -> TF.Attr s Text)
              (\s a -> s { _output_file = a } :: ZonesData s)
 
-instance P.HasComputedAvailableDiskCategories (ZonesData s) Text
-instance P.HasComputedAvailableInstanceTypes (ZonesData s) Text
-instance P.HasComputedAvailableResourceCreation (ZonesData s) Text
-instance P.HasComputedId (ZonesData s) Text
-instance P.HasComputedLocalName (ZonesData s) Text
+instance P.HasComputedAvailableDiskCategories (ZonesData s) (Text)
+instance P.HasComputedAvailableInstanceTypes (ZonesData s) (Text)
+instance P.HasComputedAvailableResourceCreation (ZonesData s) (Text)
+instance P.HasComputedId (ZonesData s) (Text)
+instance P.HasComputedLocalName (ZonesData s) (Text)
 
 zonesData :: TF.Schema TF.DataSource P.AliCloud (ZonesData s)
 zonesData =

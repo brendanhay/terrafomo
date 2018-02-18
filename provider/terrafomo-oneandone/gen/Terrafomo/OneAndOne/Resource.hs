@@ -80,8 +80,9 @@ module Terrafomo.OneAndOne.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -115,22 +116,22 @@ data InstanceSizeResource s = InstanceSizeResource {
 
 instance TF.ToHCL (InstanceSizeResource s) where
     toHCL InstanceSizeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "ram" _ram
-        , TF.attribute "vcores" _vcores
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ram" <$> TF.attribute _ram
+        , TF.assign "vcores" <$> TF.attribute _vcores
         ]
 
-instance P.HasName (InstanceSizeResource s) s Text where
+instance P.HasName (InstanceSizeResource s) (TF.Attr s Text) where
     name =
         lens (_name :: InstanceSizeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: InstanceSizeResource s)
 
-instance P.HasRam (InstanceSizeResource s) s Text where
+instance P.HasRam (InstanceSizeResource s) (TF.Attr s Text) where
     ram =
         lens (_ram :: InstanceSizeResource s -> TF.Attr s Text)
              (\s a -> s { _ram = a } :: InstanceSizeResource s)
 
-instance P.HasVcores (InstanceSizeResource s) s Text where
+instance P.HasVcores (InstanceSizeResource s) (TF.Attr s Text) where
     vcores =
         lens (_vcores :: InstanceSizeResource s -> TF.Attr s Text)
              (\s a -> s { _vcores = a } :: InstanceSizeResource s)
@@ -162,28 +163,28 @@ data IpResource s = IpResource {
 
 instance TF.ToHCL (IpResource s) where
     toHCL IpResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter" _datacenter
-        , TF.attribute "ip_address" _ip_address
-        , TF.attribute "ip_type" _ip_type
-        , TF.attribute "reverse_dns" _reverse_dns
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "ip_type" <$> TF.attribute _ip_type
+        , TF.assign "reverse_dns" <$> TF.attribute _reverse_dns
         ]
 
-instance P.HasDatacenter (IpResource s) s Text where
+instance P.HasDatacenter (IpResource s) (TF.Attr s Text) where
     datacenter =
         lens (_datacenter :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: IpResource s)
 
-instance P.HasIpAddress (IpResource s) s Text where
+instance P.HasIpAddress (IpResource s) (TF.Attr s Text) where
     ipAddress =
         lens (_ip_address :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: IpResource s)
 
-instance P.HasIpType (IpResource s) s Text where
+instance P.HasIpType (IpResource s) (TF.Attr s Text) where
     ipType =
         lens (_ip_type :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _ip_type = a } :: IpResource s)
 
-instance P.HasReverseDns (IpResource s) s Text where
+instance P.HasReverseDns (IpResource s) (TF.Attr s Text) where
     reverseDns =
         lens (_reverse_dns :: IpResource s -> TF.Attr s Text)
              (\s a -> s { _reverse_dns = a } :: IpResource s)
@@ -218,34 +219,34 @@ data ServerResource s = ServerResource {
 
 instance TF.ToHCL (ServerResource s) where
     toHCL ServerResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter" _datacenter
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "size" _size
-        , TF.attribute "storage_servers" _storage_servers
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "storage_servers" <$> TF.attribute _storage_servers
         ]
 
-instance P.HasDatacenter (ServerResource s) s Text where
+instance P.HasDatacenter (ServerResource s) (TF.Attr s Text) where
     datacenter =
         lens (_datacenter :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: ServerResource s)
 
-instance P.HasDescription (ServerResource s) s Text where
+instance P.HasDescription (ServerResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ServerResource s)
 
-instance P.HasName (ServerResource s) s Text where
+instance P.HasName (ServerResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasSize (ServerResource s) s Text where
+instance P.HasSize (ServerResource s) (TF.Attr s Text) where
     size =
         lens (_size :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: ServerResource s)
 
-instance P.HasStorageServers (ServerResource s) s Text where
+instance P.HasStorageServers (ServerResource s) (TF.Attr s Text) where
     storageServers =
         lens (_storage_servers :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _storage_servers = a } :: ServerResource s)
@@ -281,34 +282,34 @@ data VpnResource s = VpnResource {
 
 instance TF.ToHCL (VpnResource s) where
     toHCL VpnResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter" _datacenter
-        , TF.attribute "description" _description
-        , TF.attribute "download_path" _download_path
-        , TF.attribute "file_name" _file_name
-        , TF.attribute "name" _name
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "download_path" <$> TF.attribute _download_path
+        , TF.assign "file_name" <$> TF.attribute _file_name
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenter (VpnResource s) s Text where
+instance P.HasDatacenter (VpnResource s) (TF.Attr s Text) where
     datacenter =
         lens (_datacenter :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: VpnResource s)
 
-instance P.HasDescription (VpnResource s) s Text where
+instance P.HasDescription (VpnResource s) (TF.Attr s Text) where
     description =
         lens (_description :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: VpnResource s)
 
-instance P.HasDownloadPath (VpnResource s) s Text where
+instance P.HasDownloadPath (VpnResource s) (TF.Attr s Text) where
     downloadPath =
         lens (_download_path :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _download_path = a } :: VpnResource s)
 
-instance P.HasFileName (VpnResource s) s Text where
+instance P.HasFileName (VpnResource s) (TF.Attr s Text) where
     fileName =
         lens (_file_name :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _file_name = a } :: VpnResource s)
 
-instance P.HasName (VpnResource s) s Text where
+instance P.HasName (VpnResource s) (TF.Attr s Text) where
     name =
         lens (_name :: VpnResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VpnResource s)

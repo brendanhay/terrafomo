@@ -79,8 +79,9 @@ module Terrafomo.Consul.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -118,37 +119,37 @@ data AgentServiceResource s = AgentServiceResource {
 
 instance TF.ToHCL (AgentServiceResource s) where
     toHCL AgentServiceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "address" _address
-        , TF.attribute "name" _name
-        , TF.attribute "port" _port
-        , TF.attribute "tags" _tags
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasAddress (AgentServiceResource s) s Text where
+instance P.HasAddress (AgentServiceResource s) (TF.Attr s Text) where
     address =
         lens (_address :: AgentServiceResource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: AgentServiceResource s)
 
-instance P.HasName (AgentServiceResource s) s Text where
+instance P.HasName (AgentServiceResource s) (TF.Attr s Text) where
     name =
         lens (_name :: AgentServiceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AgentServiceResource s)
 
-instance P.HasPort (AgentServiceResource s) s Text where
+instance P.HasPort (AgentServiceResource s) (TF.Attr s Text) where
     port =
         lens (_port :: AgentServiceResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: AgentServiceResource s)
 
-instance P.HasTags (AgentServiceResource s) s Text where
+instance P.HasTags (AgentServiceResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: AgentServiceResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: AgentServiceResource s)
 
-instance P.HasComputedAddress (AgentServiceResource s) Text
-instance P.HasComputedId (AgentServiceResource s) Text
-instance P.HasComputedName (AgentServiceResource s) Text
-instance P.HasComputedPort (AgentServiceResource s) Text
-instance P.HasComputedTags (AgentServiceResource s) Text
+instance P.HasComputedAddress (AgentServiceResource s) (Text)
+instance P.HasComputedId (AgentServiceResource s) (Text)
+instance P.HasComputedName (AgentServiceResource s) (Text)
+instance P.HasComputedPort (AgentServiceResource s) (Text)
+instance P.HasComputedTags (AgentServiceResource s) (Text)
 
 agentServiceResource :: TF.Schema TF.Resource P.Consul (AgentServiceResource s)
 agentServiceResource =
@@ -181,40 +182,40 @@ data CatalogEntryResource s = CatalogEntryResource {
 
 instance TF.ToHCL (CatalogEntryResource s) where
     toHCL CatalogEntryResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "address" _address
-        , TF.attribute "datacenter" _datacenter
-        , TF.attribute "node" _node
-        , TF.attribute "service" _service
-        , TF.attribute "token" _token
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "node" <$> TF.attribute _node
+        , TF.assign "service" <$> TF.attribute _service
+        , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance P.HasAddress (CatalogEntryResource s) s Text where
+instance P.HasAddress (CatalogEntryResource s) (TF.Attr s Text) where
     address =
         lens (_address :: CatalogEntryResource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: CatalogEntryResource s)
 
-instance P.HasDatacenter (CatalogEntryResource s) s Text where
+instance P.HasDatacenter (CatalogEntryResource s) (TF.Attr s Text) where
     datacenter =
         lens (_datacenter :: CatalogEntryResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: CatalogEntryResource s)
 
-instance P.HasNode (CatalogEntryResource s) s Text where
+instance P.HasNode (CatalogEntryResource s) (TF.Attr s Text) where
     node =
         lens (_node :: CatalogEntryResource s -> TF.Attr s Text)
              (\s a -> s { _node = a } :: CatalogEntryResource s)
 
-instance P.HasService (CatalogEntryResource s) s Text where
+instance P.HasService (CatalogEntryResource s) (TF.Attr s Text) where
     service =
         lens (_service :: CatalogEntryResource s -> TF.Attr s Text)
              (\s a -> s { _service = a } :: CatalogEntryResource s)
 
-instance P.HasToken (CatalogEntryResource s) s Text where
+instance P.HasToken (CatalogEntryResource s) (TF.Attr s Text) where
     token =
         lens (_token :: CatalogEntryResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: CatalogEntryResource s)
 
-instance P.HasComputedAddress (CatalogEntryResource s) Text
-instance P.HasComputedNode (CatalogEntryResource s) Text
+instance P.HasComputedAddress (CatalogEntryResource s) (Text)
+instance P.HasComputedNode (CatalogEntryResource s) (Text)
 
 catalogEntryResource :: TF.Schema TF.Resource P.Consul (CatalogEntryResource s)
 catalogEntryResource =
@@ -259,33 +260,33 @@ data KeyPrefixResource s = KeyPrefixResource {
 
 instance TF.ToHCL (KeyPrefixResource s) where
     toHCL KeyPrefixResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter" _datacenter
-        , TF.attribute "path_prefix" _path_prefix
-        , TF.attribute "subkeys" _subkeys
-        , TF.attribute "token" _token
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "path_prefix" <$> TF.attribute _path_prefix
+        , TF.assign "subkeys" <$> TF.attribute _subkeys
+        , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance P.HasDatacenter (KeyPrefixResource s) s Text where
+instance P.HasDatacenter (KeyPrefixResource s) (TF.Attr s Text) where
     datacenter =
         lens (_datacenter :: KeyPrefixResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: KeyPrefixResource s)
 
-instance P.HasPathPrefix (KeyPrefixResource s) s Text where
+instance P.HasPathPrefix (KeyPrefixResource s) (TF.Attr s Text) where
     pathPrefix =
         lens (_path_prefix :: KeyPrefixResource s -> TF.Attr s Text)
              (\s a -> s { _path_prefix = a } :: KeyPrefixResource s)
 
-instance P.HasSubkeys (KeyPrefixResource s) s Text where
+instance P.HasSubkeys (KeyPrefixResource s) (TF.Attr s Text) where
     subkeys =
         lens (_subkeys :: KeyPrefixResource s -> TF.Attr s Text)
              (\s a -> s { _subkeys = a } :: KeyPrefixResource s)
 
-instance P.HasToken (KeyPrefixResource s) s Text where
+instance P.HasToken (KeyPrefixResource s) (TF.Attr s Text) where
     token =
         lens (_token :: KeyPrefixResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: KeyPrefixResource s)
 
-instance P.HasComputedDatacenter (KeyPrefixResource s) Text
+instance P.HasComputedDatacenter (KeyPrefixResource s) (Text)
 
 keyPrefixResource :: TF.Schema TF.Resource P.Consul (KeyPrefixResource s)
 keyPrefixResource =
@@ -319,27 +320,27 @@ data KeysResource s = KeysResource {
 
 instance TF.ToHCL (KeysResource s) where
     toHCL KeysResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter" _datacenter
-        , TF.attribute "key" _key
-        , TF.attribute "token" _token
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "key" <$> TF.attribute _key
+        , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance P.HasDatacenter (KeysResource s) s Text where
+instance P.HasDatacenter (KeysResource s) (TF.Attr s Text) where
     datacenter =
         lens (_datacenter :: KeysResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: KeysResource s)
 
-instance P.HasKey (KeysResource s) s Text where
+instance P.HasKey (KeysResource s) (TF.Attr s Text) where
     key =
         lens (_key :: KeysResource s -> TF.Attr s Text)
              (\s a -> s { _key = a } :: KeysResource s)
 
-instance P.HasToken (KeysResource s) s Text where
+instance P.HasToken (KeysResource s) (TF.Attr s Text) where
     token =
         lens (_token :: KeysResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: KeysResource s)
 
-instance P.HasComputedDatacenter (KeysResource s) Text
+instance P.HasComputedDatacenter (KeysResource s) (Text)
 
 keysResource :: TF.Schema TF.Resource P.Consul (KeysResource s)
 keysResource =
@@ -364,22 +365,22 @@ data NodeResource s = NodeResource {
 
 instance TF.ToHCL (NodeResource s) where
     toHCL NodeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "address" _address
-        , TF.attribute "name" _name
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasAddress (NodeResource s) s Text where
+instance P.HasAddress (NodeResource s) (TF.Attr s Text) where
     address =
         lens (_address :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: NodeResource s)
 
-instance P.HasName (NodeResource s) s Text where
+instance P.HasName (NodeResource s) (TF.Attr s Text) where
     name =
         lens (_name :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NodeResource s)
 
-instance P.HasComputedAddress (NodeResource s) Text
-instance P.HasComputedName (NodeResource s) Text
+instance P.HasComputedAddress (NodeResource s) (Text)
+instance P.HasComputedName (NodeResource s) (Text)
 
 nodeResource :: TF.Schema TF.Resource P.Consul (NodeResource s)
 nodeResource =
@@ -425,81 +426,81 @@ data PreparedQueryResource s = PreparedQueryResource {
 
 instance TF.ToHCL (PreparedQueryResource s) where
     toHCL PreparedQueryResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter" _datacenter
-        , TF.attribute "dns" _dns
-        , TF.attribute "failover" _failover
-        , TF.attribute "name" _name
-        , TF.attribute "near" _near
-        , TF.attribute "only_passing" _only_passing
-        , TF.attribute "service" _service
-        , TF.attribute "session" _session
-        , TF.attribute "stored_token" _stored_token
-        , TF.attribute "tags" _tags
-        , TF.attribute "template" _template
-        , TF.attribute "token" _token
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "dns" <$> TF.attribute _dns
+        , TF.assign "failover" <$> TF.attribute _failover
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "near" <$> TF.attribute _near
+        , TF.assign "only_passing" <$> TF.attribute _only_passing
+        , TF.assign "service" <$> TF.attribute _service
+        , TF.assign "session" <$> TF.attribute _session
+        , TF.assign "stored_token" <$> TF.attribute _stored_token
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "template" <$> TF.attribute _template
+        , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance P.HasDatacenter (PreparedQueryResource s) s Text where
+instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s Text) where
     datacenter =
         lens (_datacenter :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _datacenter = a } :: PreparedQueryResource s)
 
-instance P.HasDns (PreparedQueryResource s) s Text where
+instance P.HasDns (PreparedQueryResource s) (TF.Attr s Text) where
     dns =
         lens (_dns :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _dns = a } :: PreparedQueryResource s)
 
-instance P.HasFailover (PreparedQueryResource s) s Text where
+instance P.HasFailover (PreparedQueryResource s) (TF.Attr s Text) where
     failover =
         lens (_failover :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _failover = a } :: PreparedQueryResource s)
 
-instance P.HasName (PreparedQueryResource s) s Text where
+instance P.HasName (PreparedQueryResource s) (TF.Attr s Text) where
     name =
         lens (_name :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PreparedQueryResource s)
 
-instance P.HasNear (PreparedQueryResource s) s Text where
+instance P.HasNear (PreparedQueryResource s) (TF.Attr s Text) where
     near =
         lens (_near :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _near = a } :: PreparedQueryResource s)
 
-instance P.HasOnlyPassing (PreparedQueryResource s) s Text where
+instance P.HasOnlyPassing (PreparedQueryResource s) (TF.Attr s Text) where
     onlyPassing =
         lens (_only_passing :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _only_passing = a } :: PreparedQueryResource s)
 
-instance P.HasService (PreparedQueryResource s) s Text where
+instance P.HasService (PreparedQueryResource s) (TF.Attr s Text) where
     service =
         lens (_service :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _service = a } :: PreparedQueryResource s)
 
-instance P.HasSession (PreparedQueryResource s) s Text where
+instance P.HasSession (PreparedQueryResource s) (TF.Attr s Text) where
     session =
         lens (_session :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _session = a } :: PreparedQueryResource s)
 
-instance P.HasStoredToken (PreparedQueryResource s) s Text where
+instance P.HasStoredToken (PreparedQueryResource s) (TF.Attr s Text) where
     storedToken =
         lens (_stored_token :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _stored_token = a } :: PreparedQueryResource s)
 
-instance P.HasTags (PreparedQueryResource s) s Text where
+instance P.HasTags (PreparedQueryResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: PreparedQueryResource s)
 
-instance P.HasTemplate (PreparedQueryResource s) s Text where
+instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s Text) where
     template =
         lens (_template :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _template = a } :: PreparedQueryResource s)
 
-instance P.HasToken (PreparedQueryResource s) s Text where
+instance P.HasToken (PreparedQueryResource s) (TF.Attr s Text) where
     token =
         lens (_token :: PreparedQueryResource s -> TF.Attr s Text)
              (\s a -> s { _token = a } :: PreparedQueryResource s)
 
-instance P.HasComputedId (PreparedQueryResource s) Text
+instance P.HasComputedId (PreparedQueryResource s) (Text)
 
 preparedQueryResource :: TF.Schema TF.Resource P.Consul (PreparedQueryResource s)
 preparedQueryResource =
@@ -547,43 +548,43 @@ data ServiceResource s = ServiceResource {
 
 instance TF.ToHCL (ServiceResource s) where
     toHCL ServiceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "address" _address
-        , TF.attribute "name" _name
-        , TF.attribute "port" _port
-        , TF.attribute "service_id" _service_id
-        , TF.attribute "tags" _tags
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "service_id" <$> TF.attribute _service_id
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasAddress (ServiceResource s) s Text where
+instance P.HasAddress (ServiceResource s) (TF.Attr s Text) where
     address =
         lens (_address :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: ServiceResource s)
 
-instance P.HasName (ServiceResource s) s Text where
+instance P.HasName (ServiceResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasPort (ServiceResource s) s Text where
+instance P.HasPort (ServiceResource s) (TF.Attr s Text) where
     port =
         lens (_port :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: ServiceResource s)
 
-instance P.HasServiceId (ServiceResource s) s Text where
+instance P.HasServiceId (ServiceResource s) (TF.Attr s Text) where
     serviceId =
         lens (_service_id :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _service_id = a } :: ServiceResource s)
 
-instance P.HasTags (ServiceResource s) s Text where
+instance P.HasTags (ServiceResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ServiceResource s)
 
-instance P.HasComputedAddress (ServiceResource s) Text
-instance P.HasComputedName (ServiceResource s) Text
-instance P.HasComputedPort (ServiceResource s) Text
-instance P.HasComputedServiceId (ServiceResource s) Text
-instance P.HasComputedTags (ServiceResource s) Text
+instance P.HasComputedAddress (ServiceResource s) (Text)
+instance P.HasComputedName (ServiceResource s) (Text)
+instance P.HasComputedPort (ServiceResource s) (Text)
+instance P.HasComputedServiceId (ServiceResource s) (Text)
+instance P.HasComputedTags (ServiceResource s) (Text)
 
 serviceResource :: TF.Schema TF.Resource P.Consul (ServiceResource s)
 serviceResource =

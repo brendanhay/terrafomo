@@ -112,8 +112,9 @@ module Terrafomo.Cobbler.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -173,100 +174,100 @@ data DistroResource s = DistroResource {
 
 instance TF.ToHCL (DistroResource s) where
     toHCL DistroResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "arch" _arch
-        , TF.attribute "boot_files" _boot_files
-        , TF.attribute "breed" _breed
-        , TF.attribute "comment" _comment
-        , TF.attribute "fetchable_files" _fetchable_files
-        , TF.attribute "initrd" _initrd
-        , TF.attribute "kernel" _kernel
-        , TF.attribute "kernel_options" _kernel_options
-        , TF.attribute "kernel_options_post" _kernel_options_post
-        , TF.attribute "mgmt_classes" _mgmt_classes
-        , TF.attribute "name" _name
-        , TF.attribute "os_version" _os_version
-        , TF.attribute "owners" _owners
-        , TF.attribute "redhat_management_key" _redhat_management_key
-        , TF.attribute "redhat_management_server" _redhat_management_server
-        , TF.attribute "template_files" _template_files
+        [ TF.assign "arch" <$> TF.attribute _arch
+        , TF.assign "boot_files" <$> TF.attribute _boot_files
+        , TF.assign "breed" <$> TF.attribute _breed
+        , TF.assign "comment" <$> TF.attribute _comment
+        , TF.assign "fetchable_files" <$> TF.attribute _fetchable_files
+        , TF.assign "initrd" <$> TF.attribute _initrd
+        , TF.assign "kernel" <$> TF.attribute _kernel
+        , TF.assign "kernel_options" <$> TF.attribute _kernel_options
+        , TF.assign "kernel_options_post" <$> TF.attribute _kernel_options_post
+        , TF.assign "mgmt_classes" <$> TF.attribute _mgmt_classes
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "os_version" <$> TF.attribute _os_version
+        , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "redhat_management_key" <$> TF.attribute _redhat_management_key
+        , TF.assign "redhat_management_server" <$> TF.attribute _redhat_management_server
+        , TF.assign "template_files" <$> TF.attribute _template_files
         ]
 
-instance P.HasArch (DistroResource s) s Text where
+instance P.HasArch (DistroResource s) (TF.Attr s Text) where
     arch =
         lens (_arch :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _arch = a } :: DistroResource s)
 
-instance P.HasBootFiles (DistroResource s) s Text where
+instance P.HasBootFiles (DistroResource s) (TF.Attr s Text) where
     bootFiles =
         lens (_boot_files :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _boot_files = a } :: DistroResource s)
 
-instance P.HasBreed (DistroResource s) s Text where
+instance P.HasBreed (DistroResource s) (TF.Attr s Text) where
     breed =
         lens (_breed :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _breed = a } :: DistroResource s)
 
-instance P.HasComment (DistroResource s) s Text where
+instance P.HasComment (DistroResource s) (TF.Attr s Text) where
     comment =
         lens (_comment :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _comment = a } :: DistroResource s)
 
-instance P.HasFetchableFiles (DistroResource s) s Text where
+instance P.HasFetchableFiles (DistroResource s) (TF.Attr s Text) where
     fetchableFiles =
         lens (_fetchable_files :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _fetchable_files = a } :: DistroResource s)
 
-instance P.HasInitrd (DistroResource s) s Text where
+instance P.HasInitrd (DistroResource s) (TF.Attr s Text) where
     initrd =
         lens (_initrd :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _initrd = a } :: DistroResource s)
 
-instance P.HasKernel (DistroResource s) s Text where
+instance P.HasKernel (DistroResource s) (TF.Attr s Text) where
     kernel =
         lens (_kernel :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _kernel = a } :: DistroResource s)
 
-instance P.HasKernelOptions (DistroResource s) s Text where
+instance P.HasKernelOptions (DistroResource s) (TF.Attr s Text) where
     kernelOptions =
         lens (_kernel_options :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _kernel_options = a } :: DistroResource s)
 
-instance P.HasKernelOptionsPost (DistroResource s) s Text where
+instance P.HasKernelOptionsPost (DistroResource s) (TF.Attr s Text) where
     kernelOptionsPost =
         lens (_kernel_options_post :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _kernel_options_post = a } :: DistroResource s)
 
-instance P.HasMgmtClasses (DistroResource s) s Text where
+instance P.HasMgmtClasses (DistroResource s) (TF.Attr s Text) where
     mgmtClasses =
         lens (_mgmt_classes :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _mgmt_classes = a } :: DistroResource s)
 
-instance P.HasName (DistroResource s) s Text where
+instance P.HasName (DistroResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DistroResource s)
 
-instance P.HasOsVersion (DistroResource s) s Text where
+instance P.HasOsVersion (DistroResource s) (TF.Attr s Text) where
     osVersion =
         lens (_os_version :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _os_version = a } :: DistroResource s)
 
-instance P.HasOwners (DistroResource s) s Text where
+instance P.HasOwners (DistroResource s) (TF.Attr s Text) where
     owners =
         lens (_owners :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: DistroResource s)
 
-instance P.HasRedhatManagementKey (DistroResource s) s Text where
+instance P.HasRedhatManagementKey (DistroResource s) (TF.Attr s Text) where
     redhatManagementKey =
         lens (_redhat_management_key :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _redhat_management_key = a } :: DistroResource s)
 
-instance P.HasRedhatManagementServer (DistroResource s) s Text where
+instance P.HasRedhatManagementServer (DistroResource s) (TF.Attr s Text) where
     redhatManagementServer =
         lens (_redhat_management_server :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _redhat_management_server = a } :: DistroResource s)
 
-instance P.HasTemplateFiles (DistroResource s) s Text where
+instance P.HasTemplateFiles (DistroResource s) (TF.Attr s Text) where
     templateFiles =
         lens (_template_files :: DistroResource s -> TF.Attr s Text)
              (\s a -> s { _template_files = a } :: DistroResource s)
@@ -307,16 +308,16 @@ data KickstartFileResource s = KickstartFileResource {
 
 instance TF.ToHCL (KickstartFileResource s) where
     toHCL KickstartFileResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "body" _body
-        , TF.attribute "name" _name
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasBody (KickstartFileResource s) s Text where
+instance P.HasBody (KickstartFileResource s) (TF.Attr s Text) where
     body =
         lens (_body :: KickstartFileResource s -> TF.Attr s Text)
              (\s a -> s { _body = a } :: KickstartFileResource s)
 
-instance P.HasName (KickstartFileResource s) s Text where
+instance P.HasName (KickstartFileResource s) (TF.Attr s Text) where
     name =
         lens (_name :: KickstartFileResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KickstartFileResource s)
@@ -403,196 +404,196 @@ data ProfileResource s = ProfileResource {
 
 instance TF.ToHCL (ProfileResource s) where
     toHCL ProfileResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "boot_files" _boot_files
-        , TF.attribute "comment" _comment
-        , TF.attribute "distro" _distro
-        , TF.attribute "enable_gpxe" _enable_gpxe
-        , TF.attribute "enable_menu" _enable_menu
-        , TF.attribute "fetchable_files" _fetchable_files
-        , TF.attribute "kernel_options" _kernel_options
-        , TF.attribute "kernel_options_post" _kernel_options_post
-        , TF.attribute "kickstart" _kickstart
-        , TF.attribute "ks_meta" _ks_meta
-        , TF.attribute "mgmt_classes" _mgmt_classes
-        , TF.attribute "mgmt_parameters" _mgmt_parameters
-        , TF.attribute "name" _name
-        , TF.attribute "name_servers" _name_servers
-        , TF.attribute "name_servers_search" _name_servers_search
-        , TF.attribute "owners" _owners
-        , TF.attribute "parent" _parent
-        , TF.attribute "proxy" _proxy
-        , TF.attribute "redhat_management_key" _redhat_management_key
-        , TF.attribute "redhat_management_server" _redhat_management_server
-        , TF.attribute "repos" _repos
-        , TF.attribute "server" _server
-        , TF.attribute "template_files" _template_files
-        , TF.attribute "template_remote_kickstarts" _template_remote_kickstarts
-        , TF.attribute "virt_auto_boot" _virt_auto_boot
-        , TF.attribute "virt_bridge" _virt_bridge
-        , TF.attribute "virt_cpus" _virt_cpus
-        , TF.attribute "virt_disk_driver" _virt_disk_driver
-        , TF.attribute "virt_file_size" _virt_file_size
-        , TF.attribute "virt_path" _virt_path
-        , TF.attribute "virt_ram" _virt_ram
-        , TF.attribute "virt_type" _virt_type
+        [ TF.assign "boot_files" <$> TF.attribute _boot_files
+        , TF.assign "comment" <$> TF.attribute _comment
+        , TF.assign "distro" <$> TF.attribute _distro
+        , TF.assign "enable_gpxe" <$> TF.attribute _enable_gpxe
+        , TF.assign "enable_menu" <$> TF.attribute _enable_menu
+        , TF.assign "fetchable_files" <$> TF.attribute _fetchable_files
+        , TF.assign "kernel_options" <$> TF.attribute _kernel_options
+        , TF.assign "kernel_options_post" <$> TF.attribute _kernel_options_post
+        , TF.assign "kickstart" <$> TF.attribute _kickstart
+        , TF.assign "ks_meta" <$> TF.attribute _ks_meta
+        , TF.assign "mgmt_classes" <$> TF.attribute _mgmt_classes
+        , TF.assign "mgmt_parameters" <$> TF.attribute _mgmt_parameters
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_servers" <$> TF.attribute _name_servers
+        , TF.assign "name_servers_search" <$> TF.attribute _name_servers_search
+        , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "parent" <$> TF.attribute _parent
+        , TF.assign "proxy" <$> TF.attribute _proxy
+        , TF.assign "redhat_management_key" <$> TF.attribute _redhat_management_key
+        , TF.assign "redhat_management_server" <$> TF.attribute _redhat_management_server
+        , TF.assign "repos" <$> TF.attribute _repos
+        , TF.assign "server" <$> TF.attribute _server
+        , TF.assign "template_files" <$> TF.attribute _template_files
+        , TF.assign "template_remote_kickstarts" <$> TF.attribute _template_remote_kickstarts
+        , TF.assign "virt_auto_boot" <$> TF.attribute _virt_auto_boot
+        , TF.assign "virt_bridge" <$> TF.attribute _virt_bridge
+        , TF.assign "virt_cpus" <$> TF.attribute _virt_cpus
+        , TF.assign "virt_disk_driver" <$> TF.attribute _virt_disk_driver
+        , TF.assign "virt_file_size" <$> TF.attribute _virt_file_size
+        , TF.assign "virt_path" <$> TF.attribute _virt_path
+        , TF.assign "virt_ram" <$> TF.attribute _virt_ram
+        , TF.assign "virt_type" <$> TF.attribute _virt_type
         ]
 
-instance P.HasBootFiles (ProfileResource s) s Text where
+instance P.HasBootFiles (ProfileResource s) (TF.Attr s Text) where
     bootFiles =
         lens (_boot_files :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _boot_files = a } :: ProfileResource s)
 
-instance P.HasComment (ProfileResource s) s Text where
+instance P.HasComment (ProfileResource s) (TF.Attr s Text) where
     comment =
         lens (_comment :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _comment = a } :: ProfileResource s)
 
-instance P.HasDistro (ProfileResource s) s Text where
+instance P.HasDistro (ProfileResource s) (TF.Attr s Text) where
     distro =
         lens (_distro :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _distro = a } :: ProfileResource s)
 
-instance P.HasEnableGpxe (ProfileResource s) s Text where
+instance P.HasEnableGpxe (ProfileResource s) (TF.Attr s Text) where
     enableGpxe =
         lens (_enable_gpxe :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _enable_gpxe = a } :: ProfileResource s)
 
-instance P.HasEnableMenu (ProfileResource s) s Text where
+instance P.HasEnableMenu (ProfileResource s) (TF.Attr s Text) where
     enableMenu =
         lens (_enable_menu :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _enable_menu = a } :: ProfileResource s)
 
-instance P.HasFetchableFiles (ProfileResource s) s Text where
+instance P.HasFetchableFiles (ProfileResource s) (TF.Attr s Text) where
     fetchableFiles =
         lens (_fetchable_files :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _fetchable_files = a } :: ProfileResource s)
 
-instance P.HasKernelOptions (ProfileResource s) s Text where
+instance P.HasKernelOptions (ProfileResource s) (TF.Attr s Text) where
     kernelOptions =
         lens (_kernel_options :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _kernel_options = a } :: ProfileResource s)
 
-instance P.HasKernelOptionsPost (ProfileResource s) s Text where
+instance P.HasKernelOptionsPost (ProfileResource s) (TF.Attr s Text) where
     kernelOptionsPost =
         lens (_kernel_options_post :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _kernel_options_post = a } :: ProfileResource s)
 
-instance P.HasKickstart (ProfileResource s) s Text where
+instance P.HasKickstart (ProfileResource s) (TF.Attr s Text) where
     kickstart =
         lens (_kickstart :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _kickstart = a } :: ProfileResource s)
 
-instance P.HasKsMeta (ProfileResource s) s Text where
+instance P.HasKsMeta (ProfileResource s) (TF.Attr s Text) where
     ksMeta =
         lens (_ks_meta :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _ks_meta = a } :: ProfileResource s)
 
-instance P.HasMgmtClasses (ProfileResource s) s Text where
+instance P.HasMgmtClasses (ProfileResource s) (TF.Attr s Text) where
     mgmtClasses =
         lens (_mgmt_classes :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _mgmt_classes = a } :: ProfileResource s)
 
-instance P.HasMgmtParameters (ProfileResource s) s Text where
+instance P.HasMgmtParameters (ProfileResource s) (TF.Attr s Text) where
     mgmtParameters =
         lens (_mgmt_parameters :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _mgmt_parameters = a } :: ProfileResource s)
 
-instance P.HasName (ProfileResource s) s Text where
+instance P.HasName (ProfileResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ProfileResource s)
 
-instance P.HasNameServers (ProfileResource s) s Text where
+instance P.HasNameServers (ProfileResource s) (TF.Attr s Text) where
     nameServers =
         lens (_name_servers :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _name_servers = a } :: ProfileResource s)
 
-instance P.HasNameServersSearch (ProfileResource s) s Text where
+instance P.HasNameServersSearch (ProfileResource s) (TF.Attr s Text) where
     nameServersSearch =
         lens (_name_servers_search :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _name_servers_search = a } :: ProfileResource s)
 
-instance P.HasOwners (ProfileResource s) s Text where
+instance P.HasOwners (ProfileResource s) (TF.Attr s Text) where
     owners =
         lens (_owners :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: ProfileResource s)
 
-instance P.HasParent (ProfileResource s) s Text where
+instance P.HasParent (ProfileResource s) (TF.Attr s Text) where
     parent =
         lens (_parent :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _parent = a } :: ProfileResource s)
 
-instance P.HasProxy (ProfileResource s) s Text where
+instance P.HasProxy (ProfileResource s) (TF.Attr s Text) where
     proxy =
         lens (_proxy :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _proxy = a } :: ProfileResource s)
 
-instance P.HasRedhatManagementKey (ProfileResource s) s Text where
+instance P.HasRedhatManagementKey (ProfileResource s) (TF.Attr s Text) where
     redhatManagementKey =
         lens (_redhat_management_key :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _redhat_management_key = a } :: ProfileResource s)
 
-instance P.HasRedhatManagementServer (ProfileResource s) s Text where
+instance P.HasRedhatManagementServer (ProfileResource s) (TF.Attr s Text) where
     redhatManagementServer =
         lens (_redhat_management_server :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _redhat_management_server = a } :: ProfileResource s)
 
-instance P.HasRepos (ProfileResource s) s Text where
+instance P.HasRepos (ProfileResource s) (TF.Attr s Text) where
     repos =
         lens (_repos :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _repos = a } :: ProfileResource s)
 
-instance P.HasServer (ProfileResource s) s Text where
+instance P.HasServer (ProfileResource s) (TF.Attr s Text) where
     server =
         lens (_server :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _server = a } :: ProfileResource s)
 
-instance P.HasTemplateFiles (ProfileResource s) s Text where
+instance P.HasTemplateFiles (ProfileResource s) (TF.Attr s Text) where
     templateFiles =
         lens (_template_files :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _template_files = a } :: ProfileResource s)
 
-instance P.HasTemplateRemoteKickstarts (ProfileResource s) s Text where
+instance P.HasTemplateRemoteKickstarts (ProfileResource s) (TF.Attr s Text) where
     templateRemoteKickstarts =
         lens (_template_remote_kickstarts :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _template_remote_kickstarts = a } :: ProfileResource s)
 
-instance P.HasVirtAutoBoot (ProfileResource s) s Text where
+instance P.HasVirtAutoBoot (ProfileResource s) (TF.Attr s Text) where
     virtAutoBoot =
         lens (_virt_auto_boot :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _virt_auto_boot = a } :: ProfileResource s)
 
-instance P.HasVirtBridge (ProfileResource s) s Text where
+instance P.HasVirtBridge (ProfileResource s) (TF.Attr s Text) where
     virtBridge =
         lens (_virt_bridge :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _virt_bridge = a } :: ProfileResource s)
 
-instance P.HasVirtCpus (ProfileResource s) s Text where
+instance P.HasVirtCpus (ProfileResource s) (TF.Attr s Text) where
     virtCpus =
         lens (_virt_cpus :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _virt_cpus = a } :: ProfileResource s)
 
-instance P.HasVirtDiskDriver (ProfileResource s) s Text where
+instance P.HasVirtDiskDriver (ProfileResource s) (TF.Attr s Text) where
     virtDiskDriver =
         lens (_virt_disk_driver :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _virt_disk_driver = a } :: ProfileResource s)
 
-instance P.HasVirtFileSize (ProfileResource s) s Text where
+instance P.HasVirtFileSize (ProfileResource s) (TF.Attr s Text) where
     virtFileSize =
         lens (_virt_file_size :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _virt_file_size = a } :: ProfileResource s)
 
-instance P.HasVirtPath (ProfileResource s) s Text where
+instance P.HasVirtPath (ProfileResource s) (TF.Attr s Text) where
     virtPath =
         lens (_virt_path :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _virt_path = a } :: ProfileResource s)
 
-instance P.HasVirtRam (ProfileResource s) s Text where
+instance P.HasVirtRam (ProfileResource s) (TF.Attr s Text) where
     virtRam =
         lens (_virt_ram :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _virt_ram = a } :: ProfileResource s)
 
-instance P.HasVirtType (ProfileResource s) s Text where
+instance P.HasVirtType (ProfileResource s) (TF.Attr s Text) where
     virtType =
         lens (_virt_type :: ProfileResource s -> TF.Attr s Text)
              (\s a -> s { _virt_type = a } :: ProfileResource s)
@@ -673,88 +674,88 @@ data RepoResource s = RepoResource {
 
 instance TF.ToHCL (RepoResource s) where
     toHCL RepoResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "apt_components" _apt_components
-        , TF.attribute "apt_dists" _apt_dists
-        , TF.attribute "arch" _arch
-        , TF.attribute "breed" _breed
-        , TF.attribute "comment" _comment
-        , TF.attribute "createrepo_flags" _createrepo_flags
-        , TF.attribute "environment" _environment
-        , TF.attribute "keep_updated" _keep_updated
-        , TF.attribute "mirror" _mirror
-        , TF.attribute "mirror_locally" _mirror_locally
-        , TF.attribute "name" _name
-        , TF.attribute "owners" _owners
-        , TF.attribute "proxy" _proxy
-        , TF.attribute "rpm_list" _rpm_list
+        [ TF.assign "apt_components" <$> TF.attribute _apt_components
+        , TF.assign "apt_dists" <$> TF.attribute _apt_dists
+        , TF.assign "arch" <$> TF.attribute _arch
+        , TF.assign "breed" <$> TF.attribute _breed
+        , TF.assign "comment" <$> TF.attribute _comment
+        , TF.assign "createrepo_flags" <$> TF.attribute _createrepo_flags
+        , TF.assign "environment" <$> TF.attribute _environment
+        , TF.assign "keep_updated" <$> TF.attribute _keep_updated
+        , TF.assign "mirror" <$> TF.attribute _mirror
+        , TF.assign "mirror_locally" <$> TF.attribute _mirror_locally
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "proxy" <$> TF.attribute _proxy
+        , TF.assign "rpm_list" <$> TF.attribute _rpm_list
         ]
 
-instance P.HasAptComponents (RepoResource s) s Text where
+instance P.HasAptComponents (RepoResource s) (TF.Attr s Text) where
     aptComponents =
         lens (_apt_components :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _apt_components = a } :: RepoResource s)
 
-instance P.HasAptDists (RepoResource s) s Text where
+instance P.HasAptDists (RepoResource s) (TF.Attr s Text) where
     aptDists =
         lens (_apt_dists :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _apt_dists = a } :: RepoResource s)
 
-instance P.HasArch (RepoResource s) s Text where
+instance P.HasArch (RepoResource s) (TF.Attr s Text) where
     arch =
         lens (_arch :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _arch = a } :: RepoResource s)
 
-instance P.HasBreed (RepoResource s) s Text where
+instance P.HasBreed (RepoResource s) (TF.Attr s Text) where
     breed =
         lens (_breed :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _breed = a } :: RepoResource s)
 
-instance P.HasComment (RepoResource s) s Text where
+instance P.HasComment (RepoResource s) (TF.Attr s Text) where
     comment =
         lens (_comment :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _comment = a } :: RepoResource s)
 
-instance P.HasCreaterepoFlags (RepoResource s) s Text where
+instance P.HasCreaterepoFlags (RepoResource s) (TF.Attr s Text) where
     createrepoFlags =
         lens (_createrepo_flags :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _createrepo_flags = a } :: RepoResource s)
 
-instance P.HasEnvironment (RepoResource s) s Text where
+instance P.HasEnvironment (RepoResource s) (TF.Attr s Text) where
     environment =
         lens (_environment :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _environment = a } :: RepoResource s)
 
-instance P.HasKeepUpdated (RepoResource s) s Text where
+instance P.HasKeepUpdated (RepoResource s) (TF.Attr s Text) where
     keepUpdated =
         lens (_keep_updated :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _keep_updated = a } :: RepoResource s)
 
-instance P.HasMirror (RepoResource s) s Text where
+instance P.HasMirror (RepoResource s) (TF.Attr s Text) where
     mirror =
         lens (_mirror :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _mirror = a } :: RepoResource s)
 
-instance P.HasMirrorLocally (RepoResource s) s Text where
+instance P.HasMirrorLocally (RepoResource s) (TF.Attr s Text) where
     mirrorLocally =
         lens (_mirror_locally :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _mirror_locally = a } :: RepoResource s)
 
-instance P.HasName (RepoResource s) s Text where
+instance P.HasName (RepoResource s) (TF.Attr s Text) where
     name =
         lens (_name :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RepoResource s)
 
-instance P.HasOwners (RepoResource s) s Text where
+instance P.HasOwners (RepoResource s) (TF.Attr s Text) where
     owners =
         lens (_owners :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: RepoResource s)
 
-instance P.HasProxy (RepoResource s) s Text where
+instance P.HasProxy (RepoResource s) (TF.Attr s Text) where
     proxy =
         lens (_proxy :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _proxy = a } :: RepoResource s)
 
-instance P.HasRpmList (RepoResource s) s Text where
+instance P.HasRpmList (RepoResource s) (TF.Attr s Text) where
     rpmList =
         lens (_rpm_list :: RepoResource s -> TF.Attr s Text)
              (\s a -> s { _rpm_list = a } :: RepoResource s)
@@ -793,16 +794,16 @@ data SnippetResource s = SnippetResource {
 
 instance TF.ToHCL (SnippetResource s) where
     toHCL SnippetResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "body" _body
-        , TF.attribute "name" _name
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasBody (SnippetResource s) s Text where
+instance P.HasBody (SnippetResource s) (TF.Attr s Text) where
     body =
         lens (_body :: SnippetResource s -> TF.Attr s Text)
              (\s a -> s { _body = a } :: SnippetResource s)
 
-instance P.HasName (SnippetResource s) s Text where
+instance P.HasName (SnippetResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SnippetResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SnippetResource s)
@@ -911,262 +912,262 @@ data SystemResource s = SystemResource {
 
 instance TF.ToHCL (SystemResource s) where
     toHCL SystemResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "boot_files" _boot_files
-        , TF.attribute "comment" _comment
-        , TF.attribute "enable_gpxe" _enable_gpxe
-        , TF.attribute "fetchable_files" _fetchable_files
-        , TF.attribute "gateway" _gateway
-        , TF.attribute "hostname" _hostname
-        , TF.attribute "image" _image
-        , TF.attribute "interface" _interface
-        , TF.attribute "ipv6_default_device" _ipv6_default_device
-        , TF.attribute "kernel_options" _kernel_options
-        , TF.attribute "kernel_options_post" _kernel_options_post
-        , TF.attribute "kickstart" _kickstart
-        , TF.attribute "ks_meta" _ks_meta
-        , TF.attribute "ldap_enabled" _ldap_enabled
-        , TF.attribute "ldap_type" _ldap_type
-        , TF.attribute "mgmt_classes" _mgmt_classes
-        , TF.attribute "mgmt_parameters" _mgmt_parameters
-        , TF.attribute "monit_enabled" _monit_enabled
-        , TF.attribute "name" _name
-        , TF.attribute "name_servers" _name_servers
-        , TF.attribute "name_servers_search" _name_servers_search
-        , TF.attribute "netboot_enabled" _netboot_enabled
-        , TF.attribute "owners" _owners
-        , TF.attribute "power_address" _power_address
-        , TF.attribute "power_id" _power_id
-        , TF.attribute "power_pass" _power_pass
-        , TF.attribute "power_type" _power_type
-        , TF.attribute "power_user" _power_user
-        , TF.attribute "profile" _profile
-        , TF.attribute "proxy" _proxy
-        , TF.attribute "redhat_management_key" _redhat_management_key
-        , TF.attribute "redhat_management_server" _redhat_management_server
-        , TF.attribute "status" _status
-        , TF.attribute "template_files" _template_files
-        , TF.attribute "template_remote_kickstarts" _template_remote_kickstarts
-        , TF.attribute "virt_auto_boot" _virt_auto_boot
-        , TF.attribute "virt_cpus" _virt_cpus
-        , TF.attribute "virt_disk_driver" _virt_disk_driver
-        , TF.attribute "virt_file_size" _virt_file_size
-        , TF.attribute "virt_path" _virt_path
-        , TF.attribute "virt_pxe_boot" _virt_pxe_boot
-        , TF.attribute "virt_ram" _virt_ram
-        , TF.attribute "virt_type" _virt_type
+        [ TF.assign "boot_files" <$> TF.attribute _boot_files
+        , TF.assign "comment" <$> TF.attribute _comment
+        , TF.assign "enable_gpxe" <$> TF.attribute _enable_gpxe
+        , TF.assign "fetchable_files" <$> TF.attribute _fetchable_files
+        , TF.assign "gateway" <$> TF.attribute _gateway
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "interface" <$> TF.attribute _interface
+        , TF.assign "ipv6_default_device" <$> TF.attribute _ipv6_default_device
+        , TF.assign "kernel_options" <$> TF.attribute _kernel_options
+        , TF.assign "kernel_options_post" <$> TF.attribute _kernel_options_post
+        , TF.assign "kickstart" <$> TF.attribute _kickstart
+        , TF.assign "ks_meta" <$> TF.attribute _ks_meta
+        , TF.assign "ldap_enabled" <$> TF.attribute _ldap_enabled
+        , TF.assign "ldap_type" <$> TF.attribute _ldap_type
+        , TF.assign "mgmt_classes" <$> TF.attribute _mgmt_classes
+        , TF.assign "mgmt_parameters" <$> TF.attribute _mgmt_parameters
+        , TF.assign "monit_enabled" <$> TF.attribute _monit_enabled
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_servers" <$> TF.attribute _name_servers
+        , TF.assign "name_servers_search" <$> TF.attribute _name_servers_search
+        , TF.assign "netboot_enabled" <$> TF.attribute _netboot_enabled
+        , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "power_address" <$> TF.attribute _power_address
+        , TF.assign "power_id" <$> TF.attribute _power_id
+        , TF.assign "power_pass" <$> TF.attribute _power_pass
+        , TF.assign "power_type" <$> TF.attribute _power_type
+        , TF.assign "power_user" <$> TF.attribute _power_user
+        , TF.assign "profile" <$> TF.attribute _profile
+        , TF.assign "proxy" <$> TF.attribute _proxy
+        , TF.assign "redhat_management_key" <$> TF.attribute _redhat_management_key
+        , TF.assign "redhat_management_server" <$> TF.attribute _redhat_management_server
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "template_files" <$> TF.attribute _template_files
+        , TF.assign "template_remote_kickstarts" <$> TF.attribute _template_remote_kickstarts
+        , TF.assign "virt_auto_boot" <$> TF.attribute _virt_auto_boot
+        , TF.assign "virt_cpus" <$> TF.attribute _virt_cpus
+        , TF.assign "virt_disk_driver" <$> TF.attribute _virt_disk_driver
+        , TF.assign "virt_file_size" <$> TF.attribute _virt_file_size
+        , TF.assign "virt_path" <$> TF.attribute _virt_path
+        , TF.assign "virt_pxe_boot" <$> TF.attribute _virt_pxe_boot
+        , TF.assign "virt_ram" <$> TF.attribute _virt_ram
+        , TF.assign "virt_type" <$> TF.attribute _virt_type
         ]
 
-instance P.HasBootFiles (SystemResource s) s Text where
+instance P.HasBootFiles (SystemResource s) (TF.Attr s Text) where
     bootFiles =
         lens (_boot_files :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _boot_files = a } :: SystemResource s)
 
-instance P.HasComment (SystemResource s) s Text where
+instance P.HasComment (SystemResource s) (TF.Attr s Text) where
     comment =
         lens (_comment :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _comment = a } :: SystemResource s)
 
-instance P.HasEnableGpxe (SystemResource s) s Text where
+instance P.HasEnableGpxe (SystemResource s) (TF.Attr s Text) where
     enableGpxe =
         lens (_enable_gpxe :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _enable_gpxe = a } :: SystemResource s)
 
-instance P.HasFetchableFiles (SystemResource s) s Text where
+instance P.HasFetchableFiles (SystemResource s) (TF.Attr s Text) where
     fetchableFiles =
         lens (_fetchable_files :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _fetchable_files = a } :: SystemResource s)
 
-instance P.HasGateway (SystemResource s) s Text where
+instance P.HasGateway (SystemResource s) (TF.Attr s Text) where
     gateway =
         lens (_gateway :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _gateway = a } :: SystemResource s)
 
-instance P.HasHostname (SystemResource s) s Text where
+instance P.HasHostname (SystemResource s) (TF.Attr s Text) where
     hostname =
         lens (_hostname :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: SystemResource s)
 
-instance P.HasImage (SystemResource s) s Text where
+instance P.HasImage (SystemResource s) (TF.Attr s Text) where
     image =
         lens (_image :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _image = a } :: SystemResource s)
 
-instance P.HasInterface (SystemResource s) s Text where
+instance P.HasInterface (SystemResource s) (TF.Attr s Text) where
     interface =
         lens (_interface :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _interface = a } :: SystemResource s)
 
-instance P.HasIpv6DefaultDevice (SystemResource s) s Text where
+instance P.HasIpv6DefaultDevice (SystemResource s) (TF.Attr s Text) where
     ipv6DefaultDevice =
         lens (_ipv6_default_device :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _ipv6_default_device = a } :: SystemResource s)
 
-instance P.HasKernelOptions (SystemResource s) s Text where
+instance P.HasKernelOptions (SystemResource s) (TF.Attr s Text) where
     kernelOptions =
         lens (_kernel_options :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _kernel_options = a } :: SystemResource s)
 
-instance P.HasKernelOptionsPost (SystemResource s) s Text where
+instance P.HasKernelOptionsPost (SystemResource s) (TF.Attr s Text) where
     kernelOptionsPost =
         lens (_kernel_options_post :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _kernel_options_post = a } :: SystemResource s)
 
-instance P.HasKickstart (SystemResource s) s Text where
+instance P.HasKickstart (SystemResource s) (TF.Attr s Text) where
     kickstart =
         lens (_kickstart :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _kickstart = a } :: SystemResource s)
 
-instance P.HasKsMeta (SystemResource s) s Text where
+instance P.HasKsMeta (SystemResource s) (TF.Attr s Text) where
     ksMeta =
         lens (_ks_meta :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _ks_meta = a } :: SystemResource s)
 
-instance P.HasLdapEnabled (SystemResource s) s Text where
+instance P.HasLdapEnabled (SystemResource s) (TF.Attr s Text) where
     ldapEnabled =
         lens (_ldap_enabled :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _ldap_enabled = a } :: SystemResource s)
 
-instance P.HasLdapType (SystemResource s) s Text where
+instance P.HasLdapType (SystemResource s) (TF.Attr s Text) where
     ldapType =
         lens (_ldap_type :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _ldap_type = a } :: SystemResource s)
 
-instance P.HasMgmtClasses (SystemResource s) s Text where
+instance P.HasMgmtClasses (SystemResource s) (TF.Attr s Text) where
     mgmtClasses =
         lens (_mgmt_classes :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _mgmt_classes = a } :: SystemResource s)
 
-instance P.HasMgmtParameters (SystemResource s) s Text where
+instance P.HasMgmtParameters (SystemResource s) (TF.Attr s Text) where
     mgmtParameters =
         lens (_mgmt_parameters :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _mgmt_parameters = a } :: SystemResource s)
 
-instance P.HasMonitEnabled (SystemResource s) s Text where
+instance P.HasMonitEnabled (SystemResource s) (TF.Attr s Text) where
     monitEnabled =
         lens (_monit_enabled :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _monit_enabled = a } :: SystemResource s)
 
-instance P.HasName (SystemResource s) s Text where
+instance P.HasName (SystemResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SystemResource s)
 
-instance P.HasNameServers (SystemResource s) s Text where
+instance P.HasNameServers (SystemResource s) (TF.Attr s Text) where
     nameServers =
         lens (_name_servers :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _name_servers = a } :: SystemResource s)
 
-instance P.HasNameServersSearch (SystemResource s) s Text where
+instance P.HasNameServersSearch (SystemResource s) (TF.Attr s Text) where
     nameServersSearch =
         lens (_name_servers_search :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _name_servers_search = a } :: SystemResource s)
 
-instance P.HasNetbootEnabled (SystemResource s) s Text where
+instance P.HasNetbootEnabled (SystemResource s) (TF.Attr s Text) where
     netbootEnabled =
         lens (_netboot_enabled :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _netboot_enabled = a } :: SystemResource s)
 
-instance P.HasOwners (SystemResource s) s Text where
+instance P.HasOwners (SystemResource s) (TF.Attr s Text) where
     owners =
         lens (_owners :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: SystemResource s)
 
-instance P.HasPowerAddress (SystemResource s) s Text where
+instance P.HasPowerAddress (SystemResource s) (TF.Attr s Text) where
     powerAddress =
         lens (_power_address :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _power_address = a } :: SystemResource s)
 
-instance P.HasPowerId (SystemResource s) s Text where
+instance P.HasPowerId (SystemResource s) (TF.Attr s Text) where
     powerId =
         lens (_power_id :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _power_id = a } :: SystemResource s)
 
-instance P.HasPowerPass (SystemResource s) s Text where
+instance P.HasPowerPass (SystemResource s) (TF.Attr s Text) where
     powerPass =
         lens (_power_pass :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _power_pass = a } :: SystemResource s)
 
-instance P.HasPowerType (SystemResource s) s Text where
+instance P.HasPowerType (SystemResource s) (TF.Attr s Text) where
     powerType =
         lens (_power_type :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _power_type = a } :: SystemResource s)
 
-instance P.HasPowerUser (SystemResource s) s Text where
+instance P.HasPowerUser (SystemResource s) (TF.Attr s Text) where
     powerUser =
         lens (_power_user :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _power_user = a } :: SystemResource s)
 
-instance P.HasProfile (SystemResource s) s Text where
+instance P.HasProfile (SystemResource s) (TF.Attr s Text) where
     profile =
         lens (_profile :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _profile = a } :: SystemResource s)
 
-instance P.HasProxy (SystemResource s) s Text where
+instance P.HasProxy (SystemResource s) (TF.Attr s Text) where
     proxy =
         lens (_proxy :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _proxy = a } :: SystemResource s)
 
-instance P.HasRedhatManagementKey (SystemResource s) s Text where
+instance P.HasRedhatManagementKey (SystemResource s) (TF.Attr s Text) where
     redhatManagementKey =
         lens (_redhat_management_key :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _redhat_management_key = a } :: SystemResource s)
 
-instance P.HasRedhatManagementServer (SystemResource s) s Text where
+instance P.HasRedhatManagementServer (SystemResource s) (TF.Attr s Text) where
     redhatManagementServer =
         lens (_redhat_management_server :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _redhat_management_server = a } :: SystemResource s)
 
-instance P.HasStatus (SystemResource s) s Text where
+instance P.HasStatus (SystemResource s) (TF.Attr s Text) where
     status =
         lens (_status :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: SystemResource s)
 
-instance P.HasTemplateFiles (SystemResource s) s Text where
+instance P.HasTemplateFiles (SystemResource s) (TF.Attr s Text) where
     templateFiles =
         lens (_template_files :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _template_files = a } :: SystemResource s)
 
-instance P.HasTemplateRemoteKickstarts (SystemResource s) s Text where
+instance P.HasTemplateRemoteKickstarts (SystemResource s) (TF.Attr s Text) where
     templateRemoteKickstarts =
         lens (_template_remote_kickstarts :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _template_remote_kickstarts = a } :: SystemResource s)
 
-instance P.HasVirtAutoBoot (SystemResource s) s Text where
+instance P.HasVirtAutoBoot (SystemResource s) (TF.Attr s Text) where
     virtAutoBoot =
         lens (_virt_auto_boot :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _virt_auto_boot = a } :: SystemResource s)
 
-instance P.HasVirtCpus (SystemResource s) s Text where
+instance P.HasVirtCpus (SystemResource s) (TF.Attr s Text) where
     virtCpus =
         lens (_virt_cpus :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _virt_cpus = a } :: SystemResource s)
 
-instance P.HasVirtDiskDriver (SystemResource s) s Text where
+instance P.HasVirtDiskDriver (SystemResource s) (TF.Attr s Text) where
     virtDiskDriver =
         lens (_virt_disk_driver :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _virt_disk_driver = a } :: SystemResource s)
 
-instance P.HasVirtFileSize (SystemResource s) s Text where
+instance P.HasVirtFileSize (SystemResource s) (TF.Attr s Text) where
     virtFileSize =
         lens (_virt_file_size :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _virt_file_size = a } :: SystemResource s)
 
-instance P.HasVirtPath (SystemResource s) s Text where
+instance P.HasVirtPath (SystemResource s) (TF.Attr s Text) where
     virtPath =
         lens (_virt_path :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _virt_path = a } :: SystemResource s)
 
-instance P.HasVirtPxeBoot (SystemResource s) s Text where
+instance P.HasVirtPxeBoot (SystemResource s) (TF.Attr s Text) where
     virtPxeBoot =
         lens (_virt_pxe_boot :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _virt_pxe_boot = a } :: SystemResource s)
 
-instance P.HasVirtRam (SystemResource s) s Text where
+instance P.HasVirtRam (SystemResource s) (TF.Attr s Text) where
     virtRam =
         lens (_virt_ram :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _virt_ram = a } :: SystemResource s)
 
-instance P.HasVirtType (SystemResource s) s Text where
+instance P.HasVirtType (SystemResource s) (TF.Attr s Text) where
     virtType =
         lens (_virt_type :: SystemResource s -> TF.Attr s Text)
              (\s a -> s { _virt_type = a } :: SystemResource s)

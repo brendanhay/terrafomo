@@ -45,52 +45,52 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasFullName a s b | a -> s b where
-    fullName :: Lens' a (TF.Attr s b)
+class HasFullName a b | a -> b where
+    fullName :: Lens' a b
 
-instance HasFullName a s b => HasFullName (TF.Schema l p a) s b where
+instance HasFullName a b => HasFullName (TF.Schema l p a) b where
     fullName = TF.configuration . fullName
 
-class HasLocale a s b | a -> s b where
-    locale :: Lens' a (TF.Attr s b)
+class HasLocale a b | a -> b where
+    locale :: Lens' a b
 
-instance HasLocale a s b => HasLocale (TF.Schema l p a) s b where
+instance HasLocale a b => HasLocale (TF.Schema l p a) b where
     locale = TF.configuration . locale
 
-class HasMember a s b | a -> s b where
-    member :: Lens' a (TF.Attr s b)
+class HasMember a b | a -> b where
+    member :: Lens' a b
 
-instance HasMember a s b => HasMember (TF.Schema l p a) s b where
+instance HasMember a b => HasMember (TF.Schema l p a) b where
     member = TF.configuration . member
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasRole a s b | a -> s b where
-    role :: Lens' a (TF.Attr s b)
+class HasRole a b | a -> b where
+    role :: Lens' a b
 
-instance HasRole a s b => HasRole (TF.Schema l p a) s b where
+instance HasRole a b => HasRole (TF.Schema l p a) b where
     role = TF.configuration . role
 
-class HasTimezone a s b | a -> s b where
-    timezone :: Lens' a (TF.Attr s b)
+class HasTimezone a b | a -> b where
+    timezone :: Lens' a b
 
-instance HasTimezone a s b => HasTimezone (TF.Schema l p a) s b where
+instance HasTimezone a b => HasTimezone (TF.Schema l p a) b where
     timezone = TF.configuration . timezone
 
-class HasUsername a s b | a -> s b where
-    username :: Lens' a (TF.Attr s b)
+class HasUsername a b | a -> b where
+    username :: Lens' a b
 
-instance HasUsername a s b => HasUsername (TF.Schema l p a) s b where
+instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
 class HasComputedFullName a b | a -> b where

@@ -73,8 +73,9 @@ module Terrafomo.ProfitBricks.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -108,22 +109,22 @@ data DatacenterResource s = DatacenterResource {
 
 instance TF.ToHCL (DatacenterResource s) where
     toHCL DatacenterResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "location" _location
-        , TF.attribute "name" _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (DatacenterResource s) s Text where
+instance P.HasDescription (DatacenterResource s) (TF.Attr s Text) where
     description =
         lens (_description :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DatacenterResource s)
 
-instance P.HasLocation (DatacenterResource s) s Text where
+instance P.HasLocation (DatacenterResource s) (TF.Attr s Text) where
     location =
         lens (_location :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: DatacenterResource s)
 
-instance P.HasName (DatacenterResource s) s Text where
+instance P.HasName (DatacenterResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DatacenterResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatacenterResource s)

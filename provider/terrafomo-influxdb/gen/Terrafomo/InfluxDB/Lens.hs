@@ -42,46 +42,46 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasAdmin a s b | a -> s b where
-    admin :: Lens' a (TF.Attr s b)
+class HasAdmin a b | a -> b where
+    admin :: Lens' a b
 
-instance HasAdmin a s b => HasAdmin (TF.Schema l p a) s b where
+instance HasAdmin a b => HasAdmin (TF.Schema l p a) b where
     admin = TF.configuration . admin
 
-class HasDatabase a s b | a -> s b where
-    database :: Lens' a (TF.Attr s b)
+class HasDatabase a b | a -> b where
+    database :: Lens' a b
 
-instance HasDatabase a s b => HasDatabase (TF.Schema l p a) s b where
+instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
 
-class HasGrant a s b | a -> s b where
-    grant :: Lens' a (TF.Attr s b)
+class HasGrant a b | a -> b where
+    grant :: Lens' a b
 
-instance HasGrant a s b => HasGrant (TF.Schema l p a) s b where
+instance HasGrant a b => HasGrant (TF.Schema l p a) b where
     grant = TF.configuration . grant
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attr s b)
+class HasPassword a b | a -> b where
+    password :: Lens' a b
 
-instance HasPassword a s b => HasPassword (TF.Schema l p a) s b where
+instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
 
-class HasQuery a s b | a -> s b where
-    query :: Lens' a (TF.Attr s b)
+class HasQuery a b | a -> b where
+    query :: Lens' a b
 
-instance HasQuery a s b => HasQuery (TF.Schema l p a) s b where
+instance HasQuery a b => HasQuery (TF.Schema l p a) b where
     query = TF.configuration . query
 
-class HasRetentionPolicies a s b | a -> s b where
-    retentionPolicies :: Lens' a (TF.Attr s b)
+class HasRetentionPolicies a b | a -> b where
+    retentionPolicies :: Lens' a b
 
-instance HasRetentionPolicies a s b => HasRetentionPolicies (TF.Schema l p a) s b where
+instance HasRetentionPolicies a b => HasRetentionPolicies (TF.Schema l p a) b where
     retentionPolicies = TF.configuration . retentionPolicies
 
 class HasComputedAdmin a b | a -> b where

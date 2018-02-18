@@ -69,8 +69,9 @@ module Terrafomo.PostgreSQL.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -120,64 +121,64 @@ data DatabaseResource s = DatabaseResource {
 
 instance TF.ToHCL (DatabaseResource s) where
     toHCL DatabaseResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "allow_connections" _allow_connections
-        , TF.attribute "connection_limit" _connection_limit
-        , TF.attribute "encoding" _encoding
-        , TF.attribute "is_template" _is_template
-        , TF.attribute "lc_collate" _lc_collate
-        , TF.attribute "lc_ctype" _lc_ctype
-        , TF.attribute "name" _name
-        , TF.attribute "owner" _owner
-        , TF.attribute "tablespace_name" _tablespace_name
-        , TF.attribute "template" _template
+        [ TF.assign "allow_connections" <$> TF.attribute _allow_connections
+        , TF.assign "connection_limit" <$> TF.attribute _connection_limit
+        , TF.assign "encoding" <$> TF.attribute _encoding
+        , TF.assign "is_template" <$> TF.attribute _is_template
+        , TF.assign "lc_collate" <$> TF.attribute _lc_collate
+        , TF.assign "lc_ctype" <$> TF.attribute _lc_ctype
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "owner" <$> TF.attribute _owner
+        , TF.assign "tablespace_name" <$> TF.attribute _tablespace_name
+        , TF.assign "template" <$> TF.attribute _template
         ]
 
-instance P.HasAllowConnections (DatabaseResource s) s Text where
+instance P.HasAllowConnections (DatabaseResource s) (TF.Attr s Text) where
     allowConnections =
         lens (_allow_connections :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _allow_connections = a } :: DatabaseResource s)
 
-instance P.HasConnectionLimit (DatabaseResource s) s Text where
+instance P.HasConnectionLimit (DatabaseResource s) (TF.Attr s Text) where
     connectionLimit =
         lens (_connection_limit :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _connection_limit = a } :: DatabaseResource s)
 
-instance P.HasEncoding (DatabaseResource s) s Text where
+instance P.HasEncoding (DatabaseResource s) (TF.Attr s Text) where
     encoding =
         lens (_encoding :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _encoding = a } :: DatabaseResource s)
 
-instance P.HasIsTemplate (DatabaseResource s) s Text where
+instance P.HasIsTemplate (DatabaseResource s) (TF.Attr s Text) where
     isTemplate =
         lens (_is_template :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _is_template = a } :: DatabaseResource s)
 
-instance P.HasLcCollate (DatabaseResource s) s Text where
+instance P.HasLcCollate (DatabaseResource s) (TF.Attr s Text) where
     lcCollate =
         lens (_lc_collate :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _lc_collate = a } :: DatabaseResource s)
 
-instance P.HasLcCtype (DatabaseResource s) s Text where
+instance P.HasLcCtype (DatabaseResource s) (TF.Attr s Text) where
     lcCtype =
         lens (_lc_ctype :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _lc_ctype = a } :: DatabaseResource s)
 
-instance P.HasName (DatabaseResource s) s Text where
+instance P.HasName (DatabaseResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasOwner (DatabaseResource s) s Text where
+instance P.HasOwner (DatabaseResource s) (TF.Attr s Text) where
     owner =
         lens (_owner :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _owner = a } :: DatabaseResource s)
 
-instance P.HasTablespaceName (DatabaseResource s) s Text where
+instance P.HasTablespaceName (DatabaseResource s) (TF.Attr s Text) where
     tablespaceName =
         lens (_tablespace_name :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _tablespace_name = a } :: DatabaseResource s)
 
-instance P.HasTemplate (DatabaseResource s) s Text where
+instance P.HasTemplate (DatabaseResource s) (TF.Attr s Text) where
     template =
         lens (_template :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _template = a } :: DatabaseResource s)
@@ -215,22 +216,22 @@ data ExtensionResource s = ExtensionResource {
 
 instance TF.ToHCL (ExtensionResource s) where
     toHCL ExtensionResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "schema" _schema
-        , TF.attribute "version" _version
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "schema" <$> TF.attribute _schema
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasName (ExtensionResource s) s Text where
+instance P.HasName (ExtensionResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ExtensionResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ExtensionResource s)
 
-instance P.HasSchema (ExtensionResource s) s Text where
+instance P.HasSchema (ExtensionResource s) (TF.Attr s Text) where
     schema =
         lens (_schema :: ExtensionResource s -> TF.Attr s Text)
              (\s a -> s { _schema = a } :: ExtensionResource s)
 
-instance P.HasVersion (ExtensionResource s) s Text where
+instance P.HasVersion (ExtensionResource s) (TF.Attr s Text) where
     version =
         lens (_version :: ExtensionResource s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ExtensionResource s)
@@ -293,88 +294,88 @@ data RoleResource s = RoleResource {
 
 instance TF.ToHCL (RoleResource s) where
     toHCL RoleResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "bypass_row_level_security" _bypass_row_level_security
-        , TF.attribute "connection_limit" _connection_limit
-        , TF.attribute "create_database" _create_database
-        , TF.attribute "create_role" _create_role
-        , TF.attribute "encrypted_password" _encrypted_password
-        , TF.attribute "inherit" _inherit
-        , TF.attribute "login" _login
-        , TF.attribute "name" _name
-        , TF.attribute "password" _password
-        , TF.attribute "replication" _replication
-        , TF.attribute "skip_drop_role" _skip_drop_role
-        , TF.attribute "skip_reassign_owned" _skip_reassign_owned
-        , TF.attribute "superuser" _superuser
-        , TF.attribute "valid_until" _valid_until
+        [ TF.assign "bypass_row_level_security" <$> TF.attribute _bypass_row_level_security
+        , TF.assign "connection_limit" <$> TF.attribute _connection_limit
+        , TF.assign "create_database" <$> TF.attribute _create_database
+        , TF.assign "create_role" <$> TF.attribute _create_role
+        , TF.assign "encrypted_password" <$> TF.attribute _encrypted_password
+        , TF.assign "inherit" <$> TF.attribute _inherit
+        , TF.assign "login" <$> TF.attribute _login
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "replication" <$> TF.attribute _replication
+        , TF.assign "skip_drop_role" <$> TF.attribute _skip_drop_role
+        , TF.assign "skip_reassign_owned" <$> TF.attribute _skip_reassign_owned
+        , TF.assign "superuser" <$> TF.attribute _superuser
+        , TF.assign "valid_until" <$> TF.attribute _valid_until
         ]
 
-instance P.HasBypassRowLevelSecurity (RoleResource s) s Text where
+instance P.HasBypassRowLevelSecurity (RoleResource s) (TF.Attr s Text) where
     bypassRowLevelSecurity =
         lens (_bypass_row_level_security :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _bypass_row_level_security = a } :: RoleResource s)
 
-instance P.HasConnectionLimit (RoleResource s) s Text where
+instance P.HasConnectionLimit (RoleResource s) (TF.Attr s Text) where
     connectionLimit =
         lens (_connection_limit :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _connection_limit = a } :: RoleResource s)
 
-instance P.HasCreateDatabase (RoleResource s) s Text where
+instance P.HasCreateDatabase (RoleResource s) (TF.Attr s Text) where
     createDatabase =
         lens (_create_database :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _create_database = a } :: RoleResource s)
 
-instance P.HasCreateRole (RoleResource s) s Text where
+instance P.HasCreateRole (RoleResource s) (TF.Attr s Text) where
     createRole =
         lens (_create_role :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _create_role = a } :: RoleResource s)
 
-instance P.HasEncryptedPassword (RoleResource s) s Text where
+instance P.HasEncryptedPassword (RoleResource s) (TF.Attr s Text) where
     encryptedPassword =
         lens (_encrypted_password :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _encrypted_password = a } :: RoleResource s)
 
-instance P.HasInherit (RoleResource s) s Text where
+instance P.HasInherit (RoleResource s) (TF.Attr s Text) where
     inherit =
         lens (_inherit :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _inherit = a } :: RoleResource s)
 
-instance P.HasLogin (RoleResource s) s Text where
+instance P.HasLogin (RoleResource s) (TF.Attr s Text) where
     login =
         lens (_login :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _login = a } :: RoleResource s)
 
-instance P.HasName (RoleResource s) s Text where
+instance P.HasName (RoleResource s) (TF.Attr s Text) where
     name =
         lens (_name :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RoleResource s)
 
-instance P.HasPassword (RoleResource s) s Text where
+instance P.HasPassword (RoleResource s) (TF.Attr s Text) where
     password =
         lens (_password :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: RoleResource s)
 
-instance P.HasReplication (RoleResource s) s Text where
+instance P.HasReplication (RoleResource s) (TF.Attr s Text) where
     replication =
         lens (_replication :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _replication = a } :: RoleResource s)
 
-instance P.HasSkipDropRole (RoleResource s) s Text where
+instance P.HasSkipDropRole (RoleResource s) (TF.Attr s Text) where
     skipDropRole =
         lens (_skip_drop_role :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _skip_drop_role = a } :: RoleResource s)
 
-instance P.HasSkipReassignOwned (RoleResource s) s Text where
+instance P.HasSkipReassignOwned (RoleResource s) (TF.Attr s Text) where
     skipReassignOwned =
         lens (_skip_reassign_owned :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _skip_reassign_owned = a } :: RoleResource s)
 
-instance P.HasSuperuser (RoleResource s) s Text where
+instance P.HasSuperuser (RoleResource s) (TF.Attr s Text) where
     superuser =
         lens (_superuser :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _superuser = a } :: RoleResource s)
 
-instance P.HasValidUntil (RoleResource s) s Text where
+instance P.HasValidUntil (RoleResource s) (TF.Attr s Text) where
     validUntil =
         lens (_valid_until :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _valid_until = a } :: RoleResource s)
@@ -419,28 +420,28 @@ data SchemaResource s = SchemaResource {
 
 instance TF.ToHCL (SchemaResource s) where
     toHCL SchemaResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "if_not_exists" _if_not_exists
-        , TF.attribute "name" _name
-        , TF.attribute "owner" _owner
-        , TF.attribute "policy" _policy
+        [ TF.assign "if_not_exists" <$> TF.attribute _if_not_exists
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "owner" <$> TF.attribute _owner
+        , TF.assign "policy" <$> TF.attribute _policy
         ]
 
-instance P.HasIfNotExists (SchemaResource s) s Text where
+instance P.HasIfNotExists (SchemaResource s) (TF.Attr s Text) where
     ifNotExists =
         lens (_if_not_exists :: SchemaResource s -> TF.Attr s Text)
              (\s a -> s { _if_not_exists = a } :: SchemaResource s)
 
-instance P.HasName (SchemaResource s) s Text where
+instance P.HasName (SchemaResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SchemaResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SchemaResource s)
 
-instance P.HasOwner (SchemaResource s) s Text where
+instance P.HasOwner (SchemaResource s) (TF.Attr s Text) where
     owner =
         lens (_owner :: SchemaResource s -> TF.Attr s Text)
              (\s a -> s { _owner = a } :: SchemaResource s)
 
-instance P.HasPolicy (SchemaResource s) s Text where
+instance P.HasPolicy (SchemaResource s) (TF.Attr s Text) where
     policy =
         lens (_policy :: SchemaResource s -> TF.Attr s Text)
              (\s a -> s { _policy = a } :: SchemaResource s)

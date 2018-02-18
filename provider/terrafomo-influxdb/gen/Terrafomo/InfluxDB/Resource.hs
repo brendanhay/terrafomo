@@ -48,8 +48,9 @@ module Terrafomo.InfluxDB.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -84,22 +85,22 @@ data ContinuousQueryResource s = ContinuousQueryResource {
 
 instance TF.ToHCL (ContinuousQueryResource s) where
     toHCL ContinuousQueryResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "database" _database
-        , TF.attribute "name" _name
-        , TF.attribute "query" _query
+        [ TF.assign "database" <$> TF.attribute _database
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "query" <$> TF.attribute _query
         ]
 
-instance P.HasDatabase (ContinuousQueryResource s) s Text where
+instance P.HasDatabase (ContinuousQueryResource s) (TF.Attr s Text) where
     database =
         lens (_database :: ContinuousQueryResource s -> TF.Attr s Text)
              (\s a -> s { _database = a } :: ContinuousQueryResource s)
 
-instance P.HasName (ContinuousQueryResource s) s Text where
+instance P.HasName (ContinuousQueryResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ContinuousQueryResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ContinuousQueryResource s)
 
-instance P.HasQuery (ContinuousQueryResource s) s Text where
+instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s Text) where
     query =
         lens (_query :: ContinuousQueryResource s -> TF.Attr s Text)
              (\s a -> s { _query = a } :: ContinuousQueryResource s)
@@ -127,16 +128,16 @@ data DatabaseResource s = DatabaseResource {
 
 instance TF.ToHCL (DatabaseResource s) where
     toHCL DatabaseResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "retention_policies" _retention_policies
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "retention_policies" <$> TF.attribute _retention_policies
         ]
 
-instance P.HasName (DatabaseResource s) s Text where
+instance P.HasName (DatabaseResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasRetentionPolicies (DatabaseResource s) s Text where
+instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s Text) where
     retentionPolicies =
         lens (_retention_policies :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _retention_policies = a } :: DatabaseResource s)
@@ -167,33 +168,33 @@ data UserResource s = UserResource {
 
 instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin" _admin
-        , TF.attribute "grant" _grant
-        , TF.attribute "name" _name
-        , TF.attribute "password" _password
+        [ TF.assign "admin" <$> TF.attribute _admin
+        , TF.assign "grant" <$> TF.attribute _grant
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
         ]
 
-instance P.HasAdmin (UserResource s) s Text where
+instance P.HasAdmin (UserResource s) (TF.Attr s Text) where
     admin =
         lens (_admin :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _admin = a } :: UserResource s)
 
-instance P.HasGrant (UserResource s) s Text where
+instance P.HasGrant (UserResource s) (TF.Attr s Text) where
     grant =
         lens (_grant :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _grant = a } :: UserResource s)
 
-instance P.HasName (UserResource s) s Text where
+instance P.HasName (UserResource s) (TF.Attr s Text) where
     name =
         lens (_name :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: UserResource s)
 
-instance P.HasPassword (UserResource s) s Text where
+instance P.HasPassword (UserResource s) (TF.Attr s Text) where
     password =
         lens (_password :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasComputedAdmin (UserResource s) Text
+instance P.HasComputedAdmin (UserResource s) (Text)
 
 userResource :: TF.Schema TF.Resource P.InfluxDB (UserResource s)
 userResource =

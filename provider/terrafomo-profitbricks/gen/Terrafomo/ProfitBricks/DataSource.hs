@@ -55,8 +55,9 @@ module Terrafomo.ProfitBricks.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -94,21 +95,21 @@ data DatacenterData s = DatacenterData {
 
 instance TF.ToHCL (DatacenterData s) where
     toHCL DatacenterData{..} = TF.inline $ catMaybes
-        [ TF.attribute "location" _location
-        , TF.attribute "name" _name
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasLocation (DatacenterData s) s Text where
+instance P.HasLocation (DatacenterData s) (TF.Attr s Text) where
     location =
         lens (_location :: DatacenterData s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: DatacenterData s)
 
-instance P.HasName (DatacenterData s) s Text where
+instance P.HasName (DatacenterData s) (TF.Attr s Text) where
     name =
         lens (_name :: DatacenterData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatacenterData s)
 
-instance P.HasComputedId (DatacenterData s) Text
+instance P.HasComputedId (DatacenterData s) (Text)
 
 datacenterData :: TF.Schema TF.DataSource P.ProfitBricks (DatacenterData s)
 datacenterData =
@@ -136,33 +137,33 @@ data ImageData s = ImageData {
 
 instance TF.ToHCL (ImageData s) where
     toHCL ImageData{..} = TF.inline $ catMaybes
-        [ TF.attribute "location" _location
-        , TF.attribute "name" _name
-        , TF.attribute "type" _type'
-        , TF.attribute "version" _version
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasLocation (ImageData s) s Text where
+instance P.HasLocation (ImageData s) (TF.Attr s Text) where
     location =
         lens (_location :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: ImageData s)
 
-instance P.HasName (ImageData s) s Text where
+instance P.HasName (ImageData s) (TF.Attr s Text) where
     name =
         lens (_name :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageData s)
 
-instance P.HasType' (ImageData s) s Text where
+instance P.HasType' (ImageData s) (TF.Attr s Text) where
     type' =
         lens (_type' :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: ImageData s)
 
-instance P.HasVersion (ImageData s) s Text where
+instance P.HasVersion (ImageData s) (TF.Attr s Text) where
     version =
         lens (_version :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ImageData s)
 
-instance P.HasComputedId (ImageData s) Text
+instance P.HasComputedId (ImageData s) (Text)
 
 imageData :: TF.Schema TF.DataSource P.ProfitBricks (ImageData s)
 imageData =
@@ -188,21 +189,21 @@ data LocationData s = LocationData {
 
 instance TF.ToHCL (LocationData s) where
     toHCL LocationData{..} = TF.inline $ catMaybes
-        [ TF.attribute "feature" _feature
-        , TF.attribute "name" _name
+        [ TF.assign "feature" <$> TF.attribute _feature
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasFeature (LocationData s) s Text where
+instance P.HasFeature (LocationData s) (TF.Attr s Text) where
     feature =
         lens (_feature :: LocationData s -> TF.Attr s Text)
              (\s a -> s { _feature = a } :: LocationData s)
 
-instance P.HasName (LocationData s) s Text where
+instance P.HasName (LocationData s) (TF.Attr s Text) where
     name =
         lens (_name :: LocationData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LocationData s)
 
-instance P.HasComputedId (LocationData s) Text
+instance P.HasComputedId (LocationData s) (Text)
 
 locationData :: TF.Schema TF.DataSource P.ProfitBricks (LocationData s)
 locationData =
@@ -232,21 +233,21 @@ data ResourceData s = ResourceData {
 
 instance TF.ToHCL (ResourceData s) where
     toHCL ResourceData{..} = TF.inline $ catMaybes
-        [ TF.attribute "resource_id" _resource_id
-        , TF.attribute "resource_type" _resource_type
+        [ TF.assign "resource_id" <$> TF.attribute _resource_id
+        , TF.assign "resource_type" <$> TF.attribute _resource_type
         ]
 
-instance P.HasResourceId (ResourceData s) s Text where
+instance P.HasResourceId (ResourceData s) (TF.Attr s Text) where
     resourceId =
         lens (_resource_id :: ResourceData s -> TF.Attr s Text)
              (\s a -> s { _resource_id = a } :: ResourceData s)
 
-instance P.HasResourceType (ResourceData s) s Text where
+instance P.HasResourceType (ResourceData s) (TF.Attr s Text) where
     resourceType =
         lens (_resource_type :: ResourceData s -> TF.Attr s Text)
              (\s a -> s { _resource_type = a } :: ResourceData s)
 
-instance P.HasComputedId (ResourceData s) Text
+instance P.HasComputedId (ResourceData s) (Text)
 
 resourceData :: TF.Schema TF.DataSource P.ProfitBricks (ResourceData s)
 resourceData =
@@ -272,27 +273,27 @@ data SnapshotData s = SnapshotData {
 
 instance TF.ToHCL (SnapshotData s) where
     toHCL SnapshotData{..} = TF.inline $ catMaybes
-        [ TF.attribute "location" _location
-        , TF.attribute "name" _name
-        , TF.attribute "size" _size
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasLocation (SnapshotData s) s Text where
+instance P.HasLocation (SnapshotData s) (TF.Attr s Text) where
     location =
         lens (_location :: SnapshotData s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: SnapshotData s)
 
-instance P.HasName (SnapshotData s) s Text where
+instance P.HasName (SnapshotData s) (TF.Attr s Text) where
     name =
         lens (_name :: SnapshotData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SnapshotData s)
 
-instance P.HasSize (SnapshotData s) s Text where
+instance P.HasSize (SnapshotData s) (TF.Attr s Text) where
     size =
         lens (_size :: SnapshotData s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: SnapshotData s)
 
-instance P.HasComputedId (SnapshotData s) Text
+instance P.HasComputedId (SnapshotData s) (Text)
 
 snapshotData :: TF.Schema TF.DataSource P.ProfitBricks (SnapshotData s)
 snapshotData =

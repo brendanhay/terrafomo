@@ -48,8 +48,9 @@ module Terrafomo.DNSimple.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -89,52 +90,52 @@ data RecordResource s = RecordResource {
 
 instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "domain" _domain
-        , TF.attribute "name" _name
-        , TF.attribute "priority" _priority
-        , TF.attribute "ttl" _ttl
-        , TF.attribute "type" _type'
-        , TF.attribute "value" _value
+        [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance P.HasDomain (RecordResource s) s Text where
+instance P.HasDomain (RecordResource s) (TF.Attr s Text) where
     domain =
         lens (_domain :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _domain = a } :: RecordResource s)
 
-instance P.HasName (RecordResource s) s Text where
+instance P.HasName (RecordResource s) (TF.Attr s Text) where
     name =
         lens (_name :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RecordResource s)
 
-instance P.HasPriority (RecordResource s) s Text where
+instance P.HasPriority (RecordResource s) (TF.Attr s Text) where
     priority =
         lens (_priority :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _priority = a } :: RecordResource s)
 
-instance P.HasTtl (RecordResource s) s Text where
+instance P.HasTtl (RecordResource s) (TF.Attr s Text) where
     ttl =
         lens (_ttl :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance P.HasType' (RecordResource s) s Text where
+instance P.HasType' (RecordResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: RecordResource s)
 
-instance P.HasValue (RecordResource s) s Text where
+instance P.HasValue (RecordResource s) (TF.Attr s Text) where
     value =
         lens (_value :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _value = a } :: RecordResource s)
 
-instance P.HasComputedDomainId (RecordResource s) Text
-instance P.HasComputedHostname (RecordResource s) Text
-instance P.HasComputedId (RecordResource s) Text
-instance P.HasComputedName (RecordResource s) Text
-instance P.HasComputedPriority (RecordResource s) Text
-instance P.HasComputedTtl (RecordResource s) Text
-instance P.HasComputedType' (RecordResource s) Text
-instance P.HasComputedValue (RecordResource s) Text
+instance P.HasComputedDomainId (RecordResource s) (Text)
+instance P.HasComputedHostname (RecordResource s) (Text)
+instance P.HasComputedId (RecordResource s) (Text)
+instance P.HasComputedName (RecordResource s) (Text)
+instance P.HasComputedPriority (RecordResource s) (Text)
+instance P.HasComputedTtl (RecordResource s) (Text)
+instance P.HasComputedType' (RecordResource s) (Text)
+instance P.HasComputedValue (RecordResource s) (Text)
 
 recordResource :: TF.Schema TF.Resource P.DNSimple (RecordResource s)
 recordResource =

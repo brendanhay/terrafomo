@@ -139,6 +139,9 @@ module Terrafomo.AWS.DataSource
     , IamUserData (..)
     , iamUserData
 
+    , InspectorRulesPackagesData (..)
+    , inspectorRulesPackagesData
+
     , InstanceData (..)
     , instanceData
 
@@ -326,8 +329,10 @@ module Terrafomo.AWS.DataSource
     , P.HasComputedAddress (..)
     , P.HasComputedAllocatedStorage (..)
     , P.HasComputedAllocationId (..)
+    , P.HasComputedAmi (..)
     , P.HasComputedArchitecture (..)
     , P.HasComputedArn (..)
+    , P.HasComputedArns (..)
     , P.HasComputedAssociatePublicIpAddress (..)
     , P.HasComputedAssociation (..)
     , P.HasComputedAssumeRolePolicy (..)
@@ -558,8 +563,9 @@ module Terrafomo.AWS.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -599,33 +605,33 @@ data AcmCertificateData s = AcmCertificateData {
 
 instance TF.ToHCL (AcmCertificateData s) where
     toHCL AcmCertificateData{..} = TF.inline $ catMaybes
-        [ TF.attribute "domain" _domain
-        , TF.attribute "most_recent" _most_recent
-        , TF.attribute "statuses" _statuses
-        , TF.attribute "types" _types
+        [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "statuses" <$> TF.attribute _statuses
+        , TF.assign "types" <$> TF.attribute _types
         ]
 
-instance P.HasDomain (AcmCertificateData s) s Text where
+instance P.HasDomain (AcmCertificateData s) (TF.Attr s Text) where
     domain =
         lens (_domain :: AcmCertificateData s -> TF.Attr s Text)
              (\s a -> s { _domain = a } :: AcmCertificateData s)
 
-instance P.HasMostRecent (AcmCertificateData s) s Text where
+instance P.HasMostRecent (AcmCertificateData s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: AcmCertificateData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: AcmCertificateData s)
 
-instance P.HasStatuses (AcmCertificateData s) s Text where
+instance P.HasStatuses (AcmCertificateData s) (TF.Attr s Text) where
     statuses =
         lens (_statuses :: AcmCertificateData s -> TF.Attr s Text)
              (\s a -> s { _statuses = a } :: AcmCertificateData s)
 
-instance P.HasTypes (AcmCertificateData s) s Text where
+instance P.HasTypes (AcmCertificateData s) (TF.Attr s Text) where
     types =
         lens (_types :: AcmCertificateData s -> TF.Attr s Text)
              (\s a -> s { _types = a } :: AcmCertificateData s)
 
-instance P.HasComputedArn (AcmCertificateData s) Text
+instance P.HasComputedArn (AcmCertificateData s) (Text)
 
 acmCertificateData :: TF.Schema TF.DataSource P.AWS (AcmCertificateData s)
 acmCertificateData =
@@ -657,62 +663,62 @@ data AmiData s = AmiData {
 
 instance TF.ToHCL (AmiData s) where
     toHCL AmiData{..} = TF.inline $ catMaybes
-        [ TF.attribute "executable_users" _executable_users
-        , TF.attribute "filter" _filter
-        , TF.attribute "most_recent" _most_recent
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "owners" _owners
+        [ TF.assign "executable_users" <$> TF.attribute _executable_users
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "owners" <$> TF.attribute _owners
         ]
 
-instance P.HasExecutableUsers (AmiData s) s Text where
+instance P.HasExecutableUsers (AmiData s) (TF.Attr s Text) where
     executableUsers =
         lens (_executable_users :: AmiData s -> TF.Attr s Text)
              (\s a -> s { _executable_users = a } :: AmiData s)
 
-instance P.HasFilter (AmiData s) s Text where
+instance P.HasFilter (AmiData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: AmiData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: AmiData s)
 
-instance P.HasMostRecent (AmiData s) s Text where
+instance P.HasMostRecent (AmiData s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: AmiData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: AmiData s)
 
-instance P.HasNameRegex (AmiData s) s Text where
+instance P.HasNameRegex (AmiData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: AmiData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: AmiData s)
 
-instance P.HasOwners (AmiData s) s Text where
+instance P.HasOwners (AmiData s) (TF.Attr s Text) where
     owners =
         lens (_owners :: AmiData s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: AmiData s)
 
-instance P.HasComputedArchitecture (AmiData s) Text
-instance P.HasComputedBlockDeviceMappings (AmiData s) Text
-instance P.HasComputedCreationDate (AmiData s) Text
-instance P.HasComputedDescription (AmiData s) Text
-instance P.HasComputedHypervisor (AmiData s) Text
-instance P.HasComputedImageId (AmiData s) Text
-instance P.HasComputedImageLocation (AmiData s) Text
-instance P.HasComputedImageOwnerAlias (AmiData s) Text
-instance P.HasComputedImageType (AmiData s) Text
-instance P.HasComputedKernelId (AmiData s) Text
-instance P.HasComputedName (AmiData s) Text
-instance P.HasComputedOwnerId (AmiData s) Text
-instance P.HasComputedPlatform (AmiData s) Text
-instance P.HasComputedProductCodes (AmiData s) Text
-instance P.HasComputedPublic (AmiData s) Text
-instance P.HasComputedRamdiskId (AmiData s) Text
-instance P.HasComputedRootDeviceName (AmiData s) Text
-instance P.HasComputedRootDeviceType (AmiData s) Text
-instance P.HasComputedRootSnapshotId (AmiData s) Text
-instance P.HasComputedSriovNetSupport (AmiData s) Text
-instance P.HasComputedState (AmiData s) Text
-instance P.HasComputedStateReason (AmiData s) Text
-instance P.HasComputedTags (AmiData s) P.Tags
-instance P.HasComputedVirtualizationType (AmiData s) Text
+instance P.HasComputedArchitecture (AmiData s) (Text)
+instance P.HasComputedBlockDeviceMappings (AmiData s) (Text)
+instance P.HasComputedCreationDate (AmiData s) (Text)
+instance P.HasComputedDescription (AmiData s) (Text)
+instance P.HasComputedHypervisor (AmiData s) (Text)
+instance P.HasComputedImageId (AmiData s) (Text)
+instance P.HasComputedImageLocation (AmiData s) (Text)
+instance P.HasComputedImageOwnerAlias (AmiData s) (Text)
+instance P.HasComputedImageType (AmiData s) (Text)
+instance P.HasComputedKernelId (AmiData s) (Text)
+instance P.HasComputedName (AmiData s) (Text)
+instance P.HasComputedOwnerId (AmiData s) (Text)
+instance P.HasComputedPlatform (AmiData s) (Text)
+instance P.HasComputedProductCodes (AmiData s) (Text)
+instance P.HasComputedPublic (AmiData s) (Text)
+instance P.HasComputedRamdiskId (AmiData s) (Text)
+instance P.HasComputedRootDeviceName (AmiData s) (Text)
+instance P.HasComputedRootDeviceType (AmiData s) (Text)
+instance P.HasComputedRootSnapshotId (AmiData s) (Text)
+instance P.HasComputedSriovNetSupport (AmiData s) (Text)
+instance P.HasComputedState (AmiData s) (Text)
+instance P.HasComputedStateReason (AmiData s) (Text)
+instance P.HasComputedTags (AmiData s) (P.Tags)
+instance P.HasComputedVirtualizationType (AmiData s) (Text)
 
 amiData :: TF.Schema TF.DataSource P.AWS (AmiData s)
 amiData =
@@ -743,28 +749,28 @@ data AmiIdsData s = AmiIdsData {
 
 instance TF.ToHCL (AmiIdsData s) where
     toHCL AmiIdsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "executable_users" _executable_users
-        , TF.attribute "filter" _filter
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "owners" _owners
+        [ TF.assign "executable_users" <$> TF.attribute _executable_users
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "owners" <$> TF.attribute _owners
         ]
 
-instance P.HasExecutableUsers (AmiIdsData s) s Text where
+instance P.HasExecutableUsers (AmiIdsData s) (TF.Attr s Text) where
     executableUsers =
         lens (_executable_users :: AmiIdsData s -> TF.Attr s Text)
              (\s a -> s { _executable_users = a } :: AmiIdsData s)
 
-instance P.HasFilter (AmiIdsData s) s Text where
+instance P.HasFilter (AmiIdsData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: AmiIdsData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: AmiIdsData s)
 
-instance P.HasNameRegex (AmiIdsData s) s Text where
+instance P.HasNameRegex (AmiIdsData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: AmiIdsData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: AmiIdsData s)
 
-instance P.HasOwners (AmiIdsData s) s Text where
+instance P.HasOwners (AmiIdsData s) (TF.Attr s Text) where
     owners =
         lens (_owners :: AmiIdsData s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: AmiIdsData s)
@@ -793,15 +799,15 @@ data AutoscalingGroupsData s = AutoscalingGroupsData {
 
 instance TF.ToHCL (AutoscalingGroupsData s) where
     toHCL AutoscalingGroupsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
+        [ TF.assign "filter" <$> TF.attribute _filter
         ]
 
-instance P.HasFilter (AutoscalingGroupsData s) s Text where
+instance P.HasFilter (AutoscalingGroupsData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: AutoscalingGroupsData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: AutoscalingGroupsData s)
 
-instance P.HasComputedNames (AutoscalingGroupsData s) Text
+instance P.HasComputedNames (AutoscalingGroupsData s) (Text)
 
 autoscalingGroupsData :: TF.Schema TF.DataSource P.AWS (AutoscalingGroupsData s)
 autoscalingGroupsData =
@@ -830,24 +836,24 @@ data AvailabilityZoneData s = AvailabilityZoneData {
 
 instance TF.ToHCL (AvailabilityZoneData s) where
     toHCL AvailabilityZoneData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "state" _state
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "state" <$> TF.attribute _state
         ]
 
-instance P.HasName (AvailabilityZoneData s) s Text where
+instance P.HasName (AvailabilityZoneData s) (TF.Attr s Text) where
     name =
         lens (_name :: AvailabilityZoneData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AvailabilityZoneData s)
 
-instance P.HasState (AvailabilityZoneData s) s Text where
+instance P.HasState (AvailabilityZoneData s) (TF.Attr s Text) where
     state =
         lens (_state :: AvailabilityZoneData s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: AvailabilityZoneData s)
 
-instance P.HasComputedName (AvailabilityZoneData s) Text
-instance P.HasComputedNameSuffix (AvailabilityZoneData s) Text
-instance P.HasComputedRegion (AvailabilityZoneData s) P.Region
-instance P.HasComputedState (AvailabilityZoneData s) Text
+instance P.HasComputedName (AvailabilityZoneData s) (Text)
+instance P.HasComputedNameSuffix (AvailabilityZoneData s) (Text)
+instance P.HasComputedRegion (AvailabilityZoneData s) (P.Region)
+instance P.HasComputedState (AvailabilityZoneData s) (Text)
 
 availabilityZoneData :: TF.Schema TF.DataSource P.AWS (AvailabilityZoneData s)
 availabilityZoneData =
@@ -872,15 +878,15 @@ data AvailabilityZonesData s = AvailabilityZonesData {
 
 instance TF.ToHCL (AvailabilityZonesData s) where
     toHCL AvailabilityZonesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "state" _state
+        [ TF.assign "state" <$> TF.attribute _state
         ]
 
-instance P.HasState (AvailabilityZonesData s) s Text where
+instance P.HasState (AvailabilityZonesData s) (TF.Attr s Text) where
     state =
         lens (_state :: AvailabilityZonesData s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: AvailabilityZonesData s)
 
-instance P.HasComputedNames (AvailabilityZonesData s) Text
+instance P.HasComputedNames (AvailabilityZonesData s) (Text)
 
 availabilityZonesData :: TF.Schema TF.DataSource P.AWS (AvailabilityZonesData s)
 availabilityZonesData =
@@ -901,8 +907,8 @@ data BillingServiceAccountData s = BillingServiceAccountData {
 instance TF.ToHCL (BillingServiceAccountData s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedArn (BillingServiceAccountData s) Text
-instance P.HasComputedId (BillingServiceAccountData s) Text
+instance P.HasComputedArn (BillingServiceAccountData s) (Text)
+instance P.HasComputedId (BillingServiceAccountData s) (Text)
 
 billingServiceAccountData :: TF.Schema TF.DataSource P.AWS (BillingServiceAccountData s)
 billingServiceAccountData =
@@ -926,22 +932,22 @@ data CallerIdentityData s = CallerIdentityData {
 
 instance TF.ToHCL (CallerIdentityData s) where
     toHCL CallerIdentityData{..} = TF.inline $ catMaybes
-        [ TF.attribute "account_id" _account_id
-        , TF.attribute "arn" _arn
-        , TF.attribute "user_id" _user_id
+        [ TF.assign "account_id" <$> TF.attribute _account_id
+        , TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "user_id" <$> TF.attribute _user_id
         ]
 
-instance P.HasAccountId (CallerIdentityData s) s Text where
+instance P.HasAccountId (CallerIdentityData s) (TF.Attr s Text) where
     accountId =
         lens (_account_id :: CallerIdentityData s -> TF.Attr s Text)
              (\s a -> s { _account_id = a } :: CallerIdentityData s)
 
-instance P.HasArn (CallerIdentityData s) s Text where
+instance P.HasArn (CallerIdentityData s) (TF.Attr s Text) where
     arn =
         lens (_arn :: CallerIdentityData s -> TF.Attr s Text)
              (\s a -> s { _arn = a } :: CallerIdentityData s)
 
-instance P.HasUserId (CallerIdentityData s) s Text where
+instance P.HasUserId (CallerIdentityData s) (TF.Attr s Text) where
     userId =
         lens (_user_id :: CallerIdentityData s -> TF.Attr s Text)
              (\s a -> s { _user_id = a } :: CallerIdentityData s)
@@ -971,16 +977,16 @@ data CanonicalUserIdData s = CanonicalUserIdData {
 
 instance TF.ToHCL (CanonicalUserIdData s) where
     toHCL CanonicalUserIdData{..} = TF.inline $ catMaybes
-        [ TF.attribute "display_name" _display_name
-        , TF.attribute "id" _id
+        [ TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "id" <$> TF.attribute _id
         ]
 
-instance P.HasDisplayName (CanonicalUserIdData s) s Text where
+instance P.HasDisplayName (CanonicalUserIdData s) (TF.Attr s Text) where
     displayName =
         lens (_display_name :: CanonicalUserIdData s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: CanonicalUserIdData s)
 
-instance P.HasId (CanonicalUserIdData s) s Text where
+instance P.HasId (CanonicalUserIdData s) (TF.Attr s Text) where
     id =
         lens (_id :: CanonicalUserIdData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: CanonicalUserIdData s)
@@ -1006,24 +1012,24 @@ data CloudformationStackData s = CloudformationStackData {
 
 instance TF.ToHCL (CloudformationStackData s) where
     toHCL CloudformationStackData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (CloudformationStackData s) s Text where
+instance P.HasName (CloudformationStackData s) (TF.Attr s Text) where
     name =
         lens (_name :: CloudformationStackData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CloudformationStackData s)
 
-instance P.HasComputedCapabilities (CloudformationStackData s) Text
-instance P.HasComputedDescription (CloudformationStackData s) Text
-instance P.HasComputedDisableRollback (CloudformationStackData s) Text
-instance P.HasComputedIamRoleArn (CloudformationStackData s) Text
-instance P.HasComputedNotificationArns (CloudformationStackData s) Text
-instance P.HasComputedOutputs (CloudformationStackData s) Text
-instance P.HasComputedParameters (CloudformationStackData s) Text
-instance P.HasComputedTags (CloudformationStackData s) P.Tags
-instance P.HasComputedTemplateBody (CloudformationStackData s) Text
-instance P.HasComputedTimeoutInMinutes (CloudformationStackData s) Text
+instance P.HasComputedCapabilities (CloudformationStackData s) (Text)
+instance P.HasComputedDescription (CloudformationStackData s) (Text)
+instance P.HasComputedDisableRollback (CloudformationStackData s) (Text)
+instance P.HasComputedIamRoleArn (CloudformationStackData s) (Text)
+instance P.HasComputedNotificationArns (CloudformationStackData s) (Text)
+instance P.HasComputedOutputs (CloudformationStackData s) (Text)
+instance P.HasComputedParameters (CloudformationStackData s) (Text)
+instance P.HasComputedTags (CloudformationStackData s) (P.Tags)
+instance P.HasComputedTemplateBody (CloudformationStackData s) (Text)
+instance P.HasComputedTimeoutInMinutes (CloudformationStackData s) (Text)
 
 cloudformationStackData :: TF.Schema TF.DataSource P.AWS (CloudformationStackData s)
 cloudformationStackData =
@@ -1046,16 +1052,16 @@ data CloudtrailServiceAccountData s = CloudtrailServiceAccountData {
 
 instance TF.ToHCL (CloudtrailServiceAccountData s) where
     toHCL CloudtrailServiceAccountData{..} = TF.inline $ catMaybes
-        [ TF.attribute "region" _region
+        [ TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasRegion (CloudtrailServiceAccountData s) s P.Region where
+instance P.HasRegion (CloudtrailServiceAccountData s) (TF.Attr s P.Region) where
     region =
         lens (_region :: CloudtrailServiceAccountData s -> TF.Attr s P.Region)
              (\s a -> s { _region = a } :: CloudtrailServiceAccountData s)
 
-instance P.HasComputedArn (CloudtrailServiceAccountData s) Text
-instance P.HasComputedId (CloudtrailServiceAccountData s) Text
+instance P.HasComputedArn (CloudtrailServiceAccountData s) (Text)
+instance P.HasComputedId (CloudtrailServiceAccountData s) (Text)
 
 cloudtrailServiceAccountData :: TF.Schema TF.DataSource P.AWS (CloudtrailServiceAccountData s)
 cloudtrailServiceAccountData =
@@ -1075,49 +1081,49 @@ data DbInstanceData s = DbInstanceData {
 
 instance TF.ToHCL (DbInstanceData s) where
     toHCL DbInstanceData{..} = TF.inline $ catMaybes
-        [ TF.attribute "db_instance_identifier" _db_instance_identifier
+        [ TF.assign "db_instance_identifier" <$> TF.attribute _db_instance_identifier
         ]
 
-instance P.HasDbInstanceIdentifier (DbInstanceData s) s Text where
+instance P.HasDbInstanceIdentifier (DbInstanceData s) (TF.Attr s Text) where
     dbInstanceIdentifier =
         lens (_db_instance_identifier :: DbInstanceData s -> TF.Attr s Text)
              (\s a -> s { _db_instance_identifier = a } :: DbInstanceData s)
 
-instance P.HasComputedAddress (DbInstanceData s) Text
-instance P.HasComputedAllocatedStorage (DbInstanceData s) Text
-instance P.HasComputedAutoMinorVersionUpgrade (DbInstanceData s) Text
-instance P.HasComputedAvailabilityZone (DbInstanceData s) P.Zone
-instance P.HasComputedBackupRetentionPeriod (DbInstanceData s) Text
-instance P.HasComputedCaCertIdentifier (DbInstanceData s) Text
-instance P.HasComputedDbClusterIdentifier (DbInstanceData s) Text
-instance P.HasComputedDbInstanceArn (DbInstanceData s) Text
-instance P.HasComputedDbInstanceClass (DbInstanceData s) Text
-instance P.HasComputedDbInstancePort (DbInstanceData s) P.Word16
-instance P.HasComputedDbName (DbInstanceData s) Text
-instance P.HasComputedDbParameterGroups (DbInstanceData s) Text
-instance P.HasComputedDbSecurityGroups (DbInstanceData s) Text
-instance P.HasComputedDbSubnetGroup (DbInstanceData s) Text
-instance P.HasComputedEndpoint (DbInstanceData s) Text
-instance P.HasComputedEngine (DbInstanceData s) Text
-instance P.HasComputedEngineVersion (DbInstanceData s) Text
-instance P.HasComputedHostedZoneId (DbInstanceData s) Text
-instance P.HasComputedIops (DbInstanceData s) Text
-instance P.HasComputedKmsKeyId (DbInstanceData s) Text
-instance P.HasComputedLicenseModel (DbInstanceData s) Text
-instance P.HasComputedMasterUsername (DbInstanceData s) Text
-instance P.HasComputedMonitoringInterval (DbInstanceData s) Text
-instance P.HasComputedMonitoringRoleArn (DbInstanceData s) Text
-instance P.HasComputedMultiAz (DbInstanceData s) Text
-instance P.HasComputedOptionGroupMemberships (DbInstanceData s) Text
-instance P.HasComputedPort (DbInstanceData s) Text
-instance P.HasComputedPreferredBackupWindow (DbInstanceData s) Text
-instance P.HasComputedPreferredMaintenanceWindow (DbInstanceData s) Text
-instance P.HasComputedPubliclyAccessible (DbInstanceData s) Text
-instance P.HasComputedReplicateSourceDb (DbInstanceData s) Text
-instance P.HasComputedStorageEncrypted (DbInstanceData s) Text
-instance P.HasComputedStorageType (DbInstanceData s) Text
-instance P.HasComputedTimezone (DbInstanceData s) Text
-instance P.HasComputedVpcSecurityGroups (DbInstanceData s) Text
+instance P.HasComputedAddress (DbInstanceData s) (Text)
+instance P.HasComputedAllocatedStorage (DbInstanceData s) (Text)
+instance P.HasComputedAutoMinorVersionUpgrade (DbInstanceData s) (Text)
+instance P.HasComputedAvailabilityZone (DbInstanceData s) (P.Zone)
+instance P.HasComputedBackupRetentionPeriod (DbInstanceData s) (Text)
+instance P.HasComputedCaCertIdentifier (DbInstanceData s) (Text)
+instance P.HasComputedDbClusterIdentifier (DbInstanceData s) (Text)
+instance P.HasComputedDbInstanceArn (DbInstanceData s) (Text)
+instance P.HasComputedDbInstanceClass (DbInstanceData s) (Text)
+instance P.HasComputedDbInstancePort (DbInstanceData s) (P.Word16)
+instance P.HasComputedDbName (DbInstanceData s) (Text)
+instance P.HasComputedDbParameterGroups (DbInstanceData s) (Text)
+instance P.HasComputedDbSecurityGroups (DbInstanceData s) (Text)
+instance P.HasComputedDbSubnetGroup (DbInstanceData s) (Text)
+instance P.HasComputedEndpoint (DbInstanceData s) (Text)
+instance P.HasComputedEngine (DbInstanceData s) (Text)
+instance P.HasComputedEngineVersion (DbInstanceData s) (Text)
+instance P.HasComputedHostedZoneId (DbInstanceData s) (Text)
+instance P.HasComputedIops (DbInstanceData s) (Text)
+instance P.HasComputedKmsKeyId (DbInstanceData s) (Text)
+instance P.HasComputedLicenseModel (DbInstanceData s) (Text)
+instance P.HasComputedMasterUsername (DbInstanceData s) (Text)
+instance P.HasComputedMonitoringInterval (DbInstanceData s) (Text)
+instance P.HasComputedMonitoringRoleArn (DbInstanceData s) (Text)
+instance P.HasComputedMultiAz (DbInstanceData s) (Text)
+instance P.HasComputedOptionGroupMemberships (DbInstanceData s) (Text)
+instance P.HasComputedPort (DbInstanceData s) (Text)
+instance P.HasComputedPreferredBackupWindow (DbInstanceData s) (Text)
+instance P.HasComputedPreferredMaintenanceWindow (DbInstanceData s) (Text)
+instance P.HasComputedPubliclyAccessible (DbInstanceData s) (Text)
+instance P.HasComputedReplicateSourceDb (DbInstanceData s) (Text)
+instance P.HasComputedStorageEncrypted (DbInstanceData s) (Text)
+instance P.HasComputedStorageType (DbInstanceData s) (Text)
+instance P.HasComputedTimezone (DbInstanceData s) (Text)
+instance P.HasComputedVpcSecurityGroups (DbInstanceData s) (Text)
 
 dbInstanceData :: TF.Schema TF.DataSource P.AWS (DbInstanceData s)
 dbInstanceData =
@@ -1149,61 +1155,61 @@ data DbSnapshotData s = DbSnapshotData {
 
 instance TF.ToHCL (DbSnapshotData s) where
     toHCL DbSnapshotData{..} = TF.inline $ catMaybes
-        [ TF.attribute "db_instance_identifier" _db_instance_identifier
-        , TF.attribute "db_snapshot_identifier" _db_snapshot_identifier
-        , TF.attribute "include_public" _include_public
-        , TF.attribute "include_shared" _include_shared
-        , TF.attribute "most_recent" _most_recent
-        , TF.attribute "snapshot_type" _snapshot_type
+        [ TF.assign "db_instance_identifier" <$> TF.attribute _db_instance_identifier
+        , TF.assign "db_snapshot_identifier" <$> TF.attribute _db_snapshot_identifier
+        , TF.assign "include_public" <$> TF.attribute _include_public
+        , TF.assign "include_shared" <$> TF.attribute _include_shared
+        , TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "snapshot_type" <$> TF.attribute _snapshot_type
         ]
 
-instance P.HasDbInstanceIdentifier (DbSnapshotData s) s Text where
+instance P.HasDbInstanceIdentifier (DbSnapshotData s) (TF.Attr s Text) where
     dbInstanceIdentifier =
         lens (_db_instance_identifier :: DbSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _db_instance_identifier = a } :: DbSnapshotData s)
 
-instance P.HasDbSnapshotIdentifier (DbSnapshotData s) s Text where
+instance P.HasDbSnapshotIdentifier (DbSnapshotData s) (TF.Attr s Text) where
     dbSnapshotIdentifier =
         lens (_db_snapshot_identifier :: DbSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _db_snapshot_identifier = a } :: DbSnapshotData s)
 
-instance P.HasIncludePublic (DbSnapshotData s) s Text where
+instance P.HasIncludePublic (DbSnapshotData s) (TF.Attr s Text) where
     includePublic =
         lens (_include_public :: DbSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _include_public = a } :: DbSnapshotData s)
 
-instance P.HasIncludeShared (DbSnapshotData s) s Text where
+instance P.HasIncludeShared (DbSnapshotData s) (TF.Attr s Text) where
     includeShared =
         lens (_include_shared :: DbSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _include_shared = a } :: DbSnapshotData s)
 
-instance P.HasMostRecent (DbSnapshotData s) s Text where
+instance P.HasMostRecent (DbSnapshotData s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: DbSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: DbSnapshotData s)
 
-instance P.HasSnapshotType (DbSnapshotData s) s Text where
+instance P.HasSnapshotType (DbSnapshotData s) (TF.Attr s Text) where
     snapshotType =
         lens (_snapshot_type :: DbSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _snapshot_type = a } :: DbSnapshotData s)
 
-instance P.HasComputedAllocatedStorage (DbSnapshotData s) Text
-instance P.HasComputedAvailabilityZone (DbSnapshotData s) P.Zone
-instance P.HasComputedDbSnapshotArn (DbSnapshotData s) Text
-instance P.HasComputedEncrypted (DbSnapshotData s) Text
-instance P.HasComputedEngine (DbSnapshotData s) Text
-instance P.HasComputedEngineVersion (DbSnapshotData s) Text
-instance P.HasComputedId (DbSnapshotData s) Text
-instance P.HasComputedIops (DbSnapshotData s) Text
-instance P.HasComputedKmsKeyId (DbSnapshotData s) Text
-instance P.HasComputedLicenseModel (DbSnapshotData s) Text
-instance P.HasComputedOptionGroupName (DbSnapshotData s) Text
-instance P.HasComputedSnapshotCreateTime (DbSnapshotData s) Text
-instance P.HasComputedSourceDbSnapshotIdentifier (DbSnapshotData s) Text
-instance P.HasComputedSourceRegion (DbSnapshotData s) P.Region
-instance P.HasComputedStatus (DbSnapshotData s) Text
-instance P.HasComputedStorageType (DbSnapshotData s) Text
-instance P.HasComputedVpcId (DbSnapshotData s) Text
+instance P.HasComputedAllocatedStorage (DbSnapshotData s) (Text)
+instance P.HasComputedAvailabilityZone (DbSnapshotData s) (P.Zone)
+instance P.HasComputedDbSnapshotArn (DbSnapshotData s) (Text)
+instance P.HasComputedEncrypted (DbSnapshotData s) (Text)
+instance P.HasComputedEngine (DbSnapshotData s) (Text)
+instance P.HasComputedEngineVersion (DbSnapshotData s) (Text)
+instance P.HasComputedId (DbSnapshotData s) (Text)
+instance P.HasComputedIops (DbSnapshotData s) (Text)
+instance P.HasComputedKmsKeyId (DbSnapshotData s) (Text)
+instance P.HasComputedLicenseModel (DbSnapshotData s) (Text)
+instance P.HasComputedOptionGroupName (DbSnapshotData s) (Text)
+instance P.HasComputedSnapshotCreateTime (DbSnapshotData s) (Text)
+instance P.HasComputedSourceDbSnapshotIdentifier (DbSnapshotData s) (Text)
+instance P.HasComputedSourceRegion (DbSnapshotData s) (P.Region)
+instance P.HasComputedStatus (DbSnapshotData s) (Text)
+instance P.HasComputedStorageType (DbSnapshotData s) (Text)
+instance P.HasComputedVpcId (DbSnapshotData s) (Text)
 
 dbSnapshotData :: TF.Schema TF.DataSource P.AWS (DbSnapshotData s)
 dbSnapshotData =
@@ -1228,10 +1234,10 @@ data DynamodbTableData s = DynamodbTableData {
 
 instance TF.ToHCL (DynamodbTableData s) where
     toHCL DynamodbTableData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DynamodbTableData s) s Text where
+instance P.HasName (DynamodbTableData s) (TF.Attr s Text) where
     name =
         lens (_name :: DynamodbTableData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DynamodbTableData s)
@@ -1264,50 +1270,50 @@ data EbsSnapshotData s = EbsSnapshotData {
 
 instance TF.ToHCL (EbsSnapshotData s) where
     toHCL EbsSnapshotData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "most_recent" _most_recent
-        , TF.attribute "owners" _owners
-        , TF.attribute "restorable_by_user_ids" _restorable_by_user_ids
-        , TF.attribute "snapshot_ids" _snapshot_ids
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorable_by_user_ids
+        , TF.assign "snapshot_ids" <$> TF.attribute _snapshot_ids
         ]
 
-instance P.HasFilter (EbsSnapshotData s) s Text where
+instance P.HasFilter (EbsSnapshotData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: EbsSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: EbsSnapshotData s)
 
-instance P.HasMostRecent (EbsSnapshotData s) s Text where
+instance P.HasMostRecent (EbsSnapshotData s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: EbsSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: EbsSnapshotData s)
 
-instance P.HasOwners (EbsSnapshotData s) s Text where
+instance P.HasOwners (EbsSnapshotData s) (TF.Attr s Text) where
     owners =
         lens (_owners :: EbsSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: EbsSnapshotData s)
 
-instance P.HasRestorableByUserIds (EbsSnapshotData s) s Text where
+instance P.HasRestorableByUserIds (EbsSnapshotData s) (TF.Attr s Text) where
     restorableByUserIds =
         lens (_restorable_by_user_ids :: EbsSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotData s)
 
-instance P.HasSnapshotIds (EbsSnapshotData s) s Text where
+instance P.HasSnapshotIds (EbsSnapshotData s) (TF.Attr s Text) where
     snapshotIds =
         lens (_snapshot_ids :: EbsSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _snapshot_ids = a } :: EbsSnapshotData s)
 
-instance P.HasComputedDataEncryptionKeyId (EbsSnapshotData s) Text
-instance P.HasComputedDescription (EbsSnapshotData s) Text
-instance P.HasComputedEncrypted (EbsSnapshotData s) Text
-instance P.HasComputedId (EbsSnapshotData s) Text
-instance P.HasComputedKmsKeyId (EbsSnapshotData s) Text
-instance P.HasComputedOwnerAlias (EbsSnapshotData s) Text
-instance P.HasComputedOwnerId (EbsSnapshotData s) Text
-instance P.HasComputedSnapshotId (EbsSnapshotData s) Text
-instance P.HasComputedState (EbsSnapshotData s) Text
-instance P.HasComputedTags (EbsSnapshotData s) P.Tags
-instance P.HasComputedVolumeId (EbsSnapshotData s) Text
-instance P.HasComputedVolumeSize (EbsSnapshotData s) Text
+instance P.HasComputedDataEncryptionKeyId (EbsSnapshotData s) (Text)
+instance P.HasComputedDescription (EbsSnapshotData s) (Text)
+instance P.HasComputedEncrypted (EbsSnapshotData s) (Text)
+instance P.HasComputedId (EbsSnapshotData s) (Text)
+instance P.HasComputedKmsKeyId (EbsSnapshotData s) (Text)
+instance P.HasComputedOwnerAlias (EbsSnapshotData s) (Text)
+instance P.HasComputedOwnerId (EbsSnapshotData s) (Text)
+instance P.HasComputedSnapshotId (EbsSnapshotData s) (Text)
+instance P.HasComputedState (EbsSnapshotData s) (Text)
+instance P.HasComputedTags (EbsSnapshotData s) (P.Tags)
+instance P.HasComputedVolumeId (EbsSnapshotData s) (Text)
+instance P.HasComputedVolumeSize (EbsSnapshotData s) (Text)
 
 ebsSnapshotData :: TF.Schema TF.DataSource P.AWS (EbsSnapshotData s)
 ebsSnapshotData =
@@ -1336,22 +1342,22 @@ data EbsSnapshotIdsData s = EbsSnapshotIdsData {
 
 instance TF.ToHCL (EbsSnapshotIdsData s) where
     toHCL EbsSnapshotIdsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "owners" _owners
-        , TF.attribute "restorable_by_user_ids" _restorable_by_user_ids
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorable_by_user_ids
         ]
 
-instance P.HasFilter (EbsSnapshotIdsData s) s Text where
+instance P.HasFilter (EbsSnapshotIdsData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: EbsSnapshotIdsData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: EbsSnapshotIdsData s)
 
-instance P.HasOwners (EbsSnapshotIdsData s) s Text where
+instance P.HasOwners (EbsSnapshotIdsData s) (TF.Attr s Text) where
     owners =
         lens (_owners :: EbsSnapshotIdsData s -> TF.Attr s Text)
              (\s a -> s { _owners = a } :: EbsSnapshotIdsData s)
 
-instance P.HasRestorableByUserIds (EbsSnapshotIdsData s) s Text where
+instance P.HasRestorableByUserIds (EbsSnapshotIdsData s) (TF.Attr s Text) where
     restorableByUserIds =
         lens (_restorable_by_user_ids :: EbsSnapshotIdsData s -> TF.Attr s Text)
              (\s a -> s { _restorable_by_user_ids = a } :: EbsSnapshotIdsData s)
@@ -1380,31 +1386,31 @@ data EbsVolumeData s = EbsVolumeData {
 
 instance TF.ToHCL (EbsVolumeData s) where
     toHCL EbsVolumeData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "most_recent" _most_recent
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "most_recent" <$> TF.attribute _most_recent
         ]
 
-instance P.HasFilter (EbsVolumeData s) s Text where
+instance P.HasFilter (EbsVolumeData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: EbsVolumeData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: EbsVolumeData s)
 
-instance P.HasMostRecent (EbsVolumeData s) s Text where
+instance P.HasMostRecent (EbsVolumeData s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: EbsVolumeData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: EbsVolumeData s)
 
-instance P.HasComputedArn (EbsVolumeData s) Text
-instance P.HasComputedAvailabilityZone (EbsVolumeData s) P.Zone
-instance P.HasComputedEncrypted (EbsVolumeData s) Text
-instance P.HasComputedId (EbsVolumeData s) Text
-instance P.HasComputedIops (EbsVolumeData s) Text
-instance P.HasComputedKmsKeyId (EbsVolumeData s) Text
-instance P.HasComputedSize (EbsVolumeData s) Text
-instance P.HasComputedSnapshotId (EbsVolumeData s) Text
-instance P.HasComputedTags (EbsVolumeData s) P.Tags
-instance P.HasComputedVolumeId (EbsVolumeData s) Text
-instance P.HasComputedVolumeType (EbsVolumeData s) Text
+instance P.HasComputedArn (EbsVolumeData s) (Text)
+instance P.HasComputedAvailabilityZone (EbsVolumeData s) (P.Zone)
+instance P.HasComputedEncrypted (EbsVolumeData s) (Text)
+instance P.HasComputedId (EbsVolumeData s) (Text)
+instance P.HasComputedIops (EbsVolumeData s) (Text)
+instance P.HasComputedKmsKeyId (EbsVolumeData s) (Text)
+instance P.HasComputedSize (EbsVolumeData s) (Text)
+instance P.HasComputedSnapshotId (EbsVolumeData s) (Text)
+instance P.HasComputedTags (EbsVolumeData s) (P.Tags)
+instance P.HasComputedVolumeId (EbsVolumeData s) (Text)
+instance P.HasComputedVolumeType (EbsVolumeData s) (Text)
 
 ebsVolumeData :: TF.Schema TF.DataSource P.AWS (EbsVolumeData s)
 ebsVolumeData =
@@ -1426,17 +1432,17 @@ data EcrRepositoryData s = EcrRepositoryData {
 
 instance TF.ToHCL (EcrRepositoryData s) where
     toHCL EcrRepositoryData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (EcrRepositoryData s) s Text where
+instance P.HasName (EcrRepositoryData s) (TF.Attr s Text) where
     name =
         lens (_name :: EcrRepositoryData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: EcrRepositoryData s)
 
-instance P.HasComputedArn (EcrRepositoryData s) Text
-instance P.HasComputedRegistryId (EcrRepositoryData s) Text
-instance P.HasComputedRepositoryUrl (EcrRepositoryData s) Text
+instance P.HasComputedArn (EcrRepositoryData s) (Text)
+instance P.HasComputedRegistryId (EcrRepositoryData s) (Text)
+instance P.HasComputedRepositoryUrl (EcrRepositoryData s) (Text)
 
 ecrRepositoryData :: TF.Schema TF.DataSource P.AWS (EcrRepositoryData s)
 ecrRepositoryData =
@@ -1457,19 +1463,19 @@ data EcsClusterData s = EcsClusterData {
 
 instance TF.ToHCL (EcsClusterData s) where
     toHCL EcsClusterData{..} = TF.inline $ catMaybes
-        [ TF.attribute "cluster_name" _cluster_name
+        [ TF.assign "cluster_name" <$> TF.attribute _cluster_name
         ]
 
-instance P.HasClusterName (EcsClusterData s) s Text where
+instance P.HasClusterName (EcsClusterData s) (TF.Attr s Text) where
     clusterName =
         lens (_cluster_name :: EcsClusterData s -> TF.Attr s Text)
              (\s a -> s { _cluster_name = a } :: EcsClusterData s)
 
-instance P.HasComputedArn (EcsClusterData s) Text
-instance P.HasComputedPendingTasksCount (EcsClusterData s) Text
-instance P.HasComputedRegisteredContainerInstancesCount (EcsClusterData s) Text
-instance P.HasComputedRunningTasksCount (EcsClusterData s) Text
-instance P.HasComputedStatus (EcsClusterData s) Text
+instance P.HasComputedArn (EcsClusterData s) (Text)
+instance P.HasComputedPendingTasksCount (EcsClusterData s) (Text)
+instance P.HasComputedRegisteredContainerInstancesCount (EcsClusterData s) (Text)
+instance P.HasComputedRunningTasksCount (EcsClusterData s) (Text)
+instance P.HasComputedStatus (EcsClusterData s) (Text)
 
 ecsClusterData :: TF.Schema TF.DataSource P.AWS (EcsClusterData s)
 ecsClusterData =
@@ -1492,28 +1498,28 @@ data EcsContainerDefinitionData s = EcsContainerDefinitionData {
 
 instance TF.ToHCL (EcsContainerDefinitionData s) where
     toHCL EcsContainerDefinitionData{..} = TF.inline $ catMaybes
-        [ TF.attribute "container_name" _container_name
-        , TF.attribute "task_definition" _task_definition
+        [ TF.assign "container_name" <$> TF.attribute _container_name
+        , TF.assign "task_definition" <$> TF.attribute _task_definition
         ]
 
-instance P.HasContainerName (EcsContainerDefinitionData s) s Text where
+instance P.HasContainerName (EcsContainerDefinitionData s) (TF.Attr s Text) where
     containerName =
         lens (_container_name :: EcsContainerDefinitionData s -> TF.Attr s Text)
              (\s a -> s { _container_name = a } :: EcsContainerDefinitionData s)
 
-instance P.HasTaskDefinition (EcsContainerDefinitionData s) s Text where
+instance P.HasTaskDefinition (EcsContainerDefinitionData s) (TF.Attr s Text) where
     taskDefinition =
         lens (_task_definition :: EcsContainerDefinitionData s -> TF.Attr s Text)
              (\s a -> s { _task_definition = a } :: EcsContainerDefinitionData s)
 
-instance P.HasComputedCpu (EcsContainerDefinitionData s) Text
-instance P.HasComputedDisableNetworking (EcsContainerDefinitionData s) Text
-instance P.HasComputedDockerLabels (EcsContainerDefinitionData s) Text
-instance P.HasComputedEnvironment (EcsContainerDefinitionData s) Text
-instance P.HasComputedImage (EcsContainerDefinitionData s) Text
-instance P.HasComputedImageDigest (EcsContainerDefinitionData s) Text
-instance P.HasComputedMemory (EcsContainerDefinitionData s) Text
-instance P.HasComputedMemoryReservation (EcsContainerDefinitionData s) Text
+instance P.HasComputedCpu (EcsContainerDefinitionData s) (Text)
+instance P.HasComputedDisableNetworking (EcsContainerDefinitionData s) (Text)
+instance P.HasComputedDockerLabels (EcsContainerDefinitionData s) (Text)
+instance P.HasComputedEnvironment (EcsContainerDefinitionData s) (Text)
+instance P.HasComputedImage (EcsContainerDefinitionData s) (Text)
+instance P.HasComputedImageDigest (EcsContainerDefinitionData s) (Text)
+instance P.HasComputedMemory (EcsContainerDefinitionData s) (Text)
+instance P.HasComputedMemoryReservation (EcsContainerDefinitionData s) (Text)
 
 ecsContainerDefinitionData :: TF.Schema TF.DataSource P.AWS (EcsContainerDefinitionData s)
 ecsContainerDefinitionData =
@@ -1535,19 +1541,19 @@ data EcsTaskDefinitionData s = EcsTaskDefinitionData {
 
 instance TF.ToHCL (EcsTaskDefinitionData s) where
     toHCL EcsTaskDefinitionData{..} = TF.inline $ catMaybes
-        [ TF.attribute "task_definition" _task_definition
+        [ TF.assign "task_definition" <$> TF.attribute _task_definition
         ]
 
-instance P.HasTaskDefinition (EcsTaskDefinitionData s) s Text where
+instance P.HasTaskDefinition (EcsTaskDefinitionData s) (TF.Attr s Text) where
     taskDefinition =
         lens (_task_definition :: EcsTaskDefinitionData s -> TF.Attr s Text)
              (\s a -> s { _task_definition = a } :: EcsTaskDefinitionData s)
 
-instance P.HasComputedFamily' (EcsTaskDefinitionData s) Text
-instance P.HasComputedNetworkMode (EcsTaskDefinitionData s) Text
-instance P.HasComputedRevision (EcsTaskDefinitionData s) Text
-instance P.HasComputedStatus (EcsTaskDefinitionData s) Text
-instance P.HasComputedTaskRoleArn (EcsTaskDefinitionData s) Text
+instance P.HasComputedFamily' (EcsTaskDefinitionData s) (Text)
+instance P.HasComputedNetworkMode (EcsTaskDefinitionData s) (Text)
+instance P.HasComputedRevision (EcsTaskDefinitionData s) (Text)
+instance P.HasComputedStatus (EcsTaskDefinitionData s) (Text)
+instance P.HasComputedTaskRoleArn (EcsTaskDefinitionData s) (Text)
 
 ecsTaskDefinitionData :: TF.Schema TF.DataSource P.AWS (EcsTaskDefinitionData s)
 ecsTaskDefinitionData =
@@ -1569,25 +1575,25 @@ data EfsFileSystemData s = EfsFileSystemData {
 
 instance TF.ToHCL (EfsFileSystemData s) where
     toHCL EfsFileSystemData{..} = TF.inline $ catMaybes
-        [ TF.attribute "creation_token" _creation_token
-        , TF.attribute "file_system_id" _file_system_id
+        [ TF.assign "creation_token" <$> TF.attribute _creation_token
+        , TF.assign "file_system_id" <$> TF.attribute _file_system_id
         ]
 
-instance P.HasCreationToken (EfsFileSystemData s) s Text where
+instance P.HasCreationToken (EfsFileSystemData s) (TF.Attr s Text) where
     creationToken =
         lens (_creation_token :: EfsFileSystemData s -> TF.Attr s Text)
              (\s a -> s { _creation_token = a } :: EfsFileSystemData s)
 
-instance P.HasFileSystemId (EfsFileSystemData s) s Text where
+instance P.HasFileSystemId (EfsFileSystemData s) (TF.Attr s Text) where
     fileSystemId =
         lens (_file_system_id :: EfsFileSystemData s -> TF.Attr s Text)
              (\s a -> s { _file_system_id = a } :: EfsFileSystemData s)
 
-instance P.HasComputedDnsName (EfsFileSystemData s) Text
-instance P.HasComputedEncrypted (EfsFileSystemData s) Text
-instance P.HasComputedKmsKeyId (EfsFileSystemData s) Text
-instance P.HasComputedPerformanceMode (EfsFileSystemData s) Text
-instance P.HasComputedTags (EfsFileSystemData s) P.Tags
+instance P.HasComputedDnsName (EfsFileSystemData s) (Text)
+instance P.HasComputedEncrypted (EfsFileSystemData s) (Text)
+instance P.HasComputedKmsKeyId (EfsFileSystemData s) (Text)
+instance P.HasComputedPerformanceMode (EfsFileSystemData s) (Text)
+instance P.HasComputedTags (EfsFileSystemData s) (P.Tags)
 
 efsFileSystemData :: TF.Schema TF.DataSource P.AWS (EfsFileSystemData s)
 efsFileSystemData =
@@ -1608,20 +1614,20 @@ data EfsMountTargetData s = EfsMountTargetData {
 
 instance TF.ToHCL (EfsMountTargetData s) where
     toHCL EfsMountTargetData{..} = TF.inline $ catMaybes
-        [ TF.attribute "mount_target_id" _mount_target_id
+        [ TF.assign "mount_target_id" <$> TF.attribute _mount_target_id
         ]
 
-instance P.HasMountTargetId (EfsMountTargetData s) s Text where
+instance P.HasMountTargetId (EfsMountTargetData s) (TF.Attr s Text) where
     mountTargetId =
         lens (_mount_target_id :: EfsMountTargetData s -> TF.Attr s Text)
              (\s a -> s { _mount_target_id = a } :: EfsMountTargetData s)
 
-instance P.HasComputedDnsName (EfsMountTargetData s) Text
-instance P.HasComputedFileSystemId (EfsMountTargetData s) Text
-instance P.HasComputedIpAddress (EfsMountTargetData s) Text
-instance P.HasComputedNetworkInterfaceId (EfsMountTargetData s) Text
-instance P.HasComputedSecurityGroups (EfsMountTargetData s) Text
-instance P.HasComputedSubnetId (EfsMountTargetData s) Text
+instance P.HasComputedDnsName (EfsMountTargetData s) (Text)
+instance P.HasComputedFileSystemId (EfsMountTargetData s) (Text)
+instance P.HasComputedIpAddress (EfsMountTargetData s) (Text)
+instance P.HasComputedNetworkInterfaceId (EfsMountTargetData s) (Text)
+instance P.HasComputedSecurityGroups (EfsMountTargetData s) (Text)
+instance P.HasComputedSubnetId (EfsMountTargetData s) (Text)
 
 efsMountTargetData :: TF.Schema TF.DataSource P.AWS (EfsMountTargetData s)
 efsMountTargetData =
@@ -1645,16 +1651,16 @@ data EipData s = EipData {
 
 instance TF.ToHCL (EipData s) where
     toHCL EipData{..} = TF.inline $ catMaybes
-        [ TF.attribute "id" _id
-        , TF.attribute "public_ip" _public_ip
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "public_ip" <$> TF.attribute _public_ip
         ]
 
-instance P.HasId (EipData s) s Text where
+instance P.HasId (EipData s) (TF.Attr s Text) where
     id =
         lens (_id :: EipData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: EipData s)
 
-instance P.HasPublicIp (EipData s) s Text where
+instance P.HasPublicIp (EipData s) (TF.Attr s Text) where
     publicIp =
         lens (_public_ip :: EipData s -> TF.Attr s Text)
              (\s a -> s { _public_ip = a } :: EipData s)
@@ -1681,16 +1687,16 @@ data ElasticBeanstalkHostedZoneData s = ElasticBeanstalkHostedZoneData {
 
 instance TF.ToHCL (ElasticBeanstalkHostedZoneData s) where
     toHCL ElasticBeanstalkHostedZoneData{..} = TF.inline $ catMaybes
-        [ TF.attribute "region" _region
+        [ TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasRegion (ElasticBeanstalkHostedZoneData s) s P.Region where
+instance P.HasRegion (ElasticBeanstalkHostedZoneData s) (TF.Attr s P.Region) where
     region =
         lens (_region :: ElasticBeanstalkHostedZoneData s -> TF.Attr s P.Region)
              (\s a -> s { _region = a } :: ElasticBeanstalkHostedZoneData s)
 
-instance P.HasComputedId (ElasticBeanstalkHostedZoneData s) Text
-instance P.HasComputedRegion (ElasticBeanstalkHostedZoneData s) P.Region
+instance P.HasComputedId (ElasticBeanstalkHostedZoneData s) (Text)
+instance P.HasComputedRegion (ElasticBeanstalkHostedZoneData s) (P.Region)
 
 elasticBeanstalkHostedZoneData :: TF.Schema TF.DataSource P.AWS (ElasticBeanstalkHostedZoneData s)
 elasticBeanstalkHostedZoneData =
@@ -1712,21 +1718,21 @@ data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData {
 
 instance TF.ToHCL (ElasticBeanstalkSolutionStackData s) where
     toHCL ElasticBeanstalkSolutionStackData{..} = TF.inline $ catMaybes
-        [ TF.attribute "most_recent" _most_recent
-        , TF.attribute "name_regex" _name_regex
+        [ TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
         ]
 
-instance P.HasMostRecent (ElasticBeanstalkSolutionStackData s) s P.Bool where
+instance P.HasMostRecent (ElasticBeanstalkSolutionStackData s) (TF.Attr s P.Bool) where
     mostRecent =
         lens (_most_recent :: ElasticBeanstalkSolutionStackData s -> TF.Attr s P.Bool)
              (\s a -> s { _most_recent = a } :: ElasticBeanstalkSolutionStackData s)
 
-instance P.HasNameRegex (ElasticBeanstalkSolutionStackData s) s Text where
+instance P.HasNameRegex (ElasticBeanstalkSolutionStackData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: ElasticBeanstalkSolutionStackData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: ElasticBeanstalkSolutionStackData s)
 
-instance P.HasComputedName (ElasticBeanstalkSolutionStackData s) Text
+instance P.HasComputedName (ElasticBeanstalkSolutionStackData s) (Text)
 
 elasticBeanstalkSolutionStackData :: TF.Schema TF.DataSource P.AWS (ElasticBeanstalkSolutionStackData s)
 elasticBeanstalkSolutionStackData =
@@ -1747,33 +1753,33 @@ data ElasticacheClusterData s = ElasticacheClusterData {
 
 instance TF.ToHCL (ElasticacheClusterData s) where
     toHCL ElasticacheClusterData{..} = TF.inline $ catMaybes
-        [ TF.attribute "cluster_id" _cluster_id
+        [ TF.assign "cluster_id" <$> TF.attribute _cluster_id
         ]
 
-instance P.HasClusterId (ElasticacheClusterData s) s Text where
+instance P.HasClusterId (ElasticacheClusterData s) (TF.Attr s Text) where
     clusterId =
         lens (_cluster_id :: ElasticacheClusterData s -> TF.Attr s Text)
              (\s a -> s { _cluster_id = a } :: ElasticacheClusterData s)
 
-instance P.HasComputedAvailabilityZone (ElasticacheClusterData s) P.Zone
-instance P.HasComputedCacheNodes (ElasticacheClusterData s) Text
-instance P.HasComputedClusterAddress (ElasticacheClusterData s) Text
-instance P.HasComputedConfigurationEndpoint (ElasticacheClusterData s) Text
-instance P.HasComputedEngine (ElasticacheClusterData s) Text
-instance P.HasComputedEngineVersion (ElasticacheClusterData s) Text
-instance P.HasComputedMaintenanceWindow (ElasticacheClusterData s) Text
-instance P.HasComputedNodeType (ElasticacheClusterData s) Text
-instance P.HasComputedNotificationTopicArn (ElasticacheClusterData s) Text
-instance P.HasComputedNumCacheNodes (ElasticacheClusterData s) Text
-instance P.HasComputedParameterGroupName (ElasticacheClusterData s) Text
-instance P.HasComputedPort (ElasticacheClusterData s) Text
-instance P.HasComputedReplicationGroupId (ElasticacheClusterData s) Text
-instance P.HasComputedSecurityGroupIds (ElasticacheClusterData s) Text
-instance P.HasComputedSecurityGroupNames (ElasticacheClusterData s) Text
-instance P.HasComputedSnapshotRetentionLimit (ElasticacheClusterData s) Text
-instance P.HasComputedSnapshotWindow (ElasticacheClusterData s) Text
-instance P.HasComputedSubnetGroupName (ElasticacheClusterData s) Text
-instance P.HasComputedTags (ElasticacheClusterData s) P.Tags
+instance P.HasComputedAvailabilityZone (ElasticacheClusterData s) (P.Zone)
+instance P.HasComputedCacheNodes (ElasticacheClusterData s) (Text)
+instance P.HasComputedClusterAddress (ElasticacheClusterData s) (Text)
+instance P.HasComputedConfigurationEndpoint (ElasticacheClusterData s) (Text)
+instance P.HasComputedEngine (ElasticacheClusterData s) (Text)
+instance P.HasComputedEngineVersion (ElasticacheClusterData s) (Text)
+instance P.HasComputedMaintenanceWindow (ElasticacheClusterData s) (Text)
+instance P.HasComputedNodeType (ElasticacheClusterData s) (Text)
+instance P.HasComputedNotificationTopicArn (ElasticacheClusterData s) (Text)
+instance P.HasComputedNumCacheNodes (ElasticacheClusterData s) (Text)
+instance P.HasComputedParameterGroupName (ElasticacheClusterData s) (Text)
+instance P.HasComputedPort (ElasticacheClusterData s) (Text)
+instance P.HasComputedReplicationGroupId (ElasticacheClusterData s) (Text)
+instance P.HasComputedSecurityGroupIds (ElasticacheClusterData s) (Text)
+instance P.HasComputedSecurityGroupNames (ElasticacheClusterData s) (Text)
+instance P.HasComputedSnapshotRetentionLimit (ElasticacheClusterData s) (Text)
+instance P.HasComputedSnapshotWindow (ElasticacheClusterData s) (Text)
+instance P.HasComputedSubnetGroupName (ElasticacheClusterData s) (Text)
+instance P.HasComputedTags (ElasticacheClusterData s) (P.Tags)
 
 elasticacheClusterData :: TF.Schema TF.DataSource P.AWS (ElasticacheClusterData s)
 elasticacheClusterData =
@@ -1794,25 +1800,25 @@ data ElasticacheReplicationGroupData s = ElasticacheReplicationGroupData {
 
 instance TF.ToHCL (ElasticacheReplicationGroupData s) where
     toHCL ElasticacheReplicationGroupData{..} = TF.inline $ catMaybes
-        [ TF.attribute "replication_group_id" _replication_group_id
+        [ TF.assign "replication_group_id" <$> TF.attribute _replication_group_id
         ]
 
-instance P.HasReplicationGroupId (ElasticacheReplicationGroupData s) s Text where
+instance P.HasReplicationGroupId (ElasticacheReplicationGroupData s) (TF.Attr s Text) where
     replicationGroupId =
         lens (_replication_group_id :: ElasticacheReplicationGroupData s -> TF.Attr s Text)
              (\s a -> s { _replication_group_id = a } :: ElasticacheReplicationGroupData s)
 
-instance P.HasComputedAuthTokenEnabled (ElasticacheReplicationGroupData s) P.Bool
-instance P.HasComputedAutomaticFailoverEnabled (ElasticacheReplicationGroupData s) P.Bool
-instance P.HasComputedConfigurationEndpointAddress (ElasticacheReplicationGroupData s) Text
-instance P.HasComputedNodeType (ElasticacheReplicationGroupData s) Text
-instance P.HasComputedNumberCacheClusters (ElasticacheReplicationGroupData s) Text
-instance P.HasComputedPort (ElasticacheReplicationGroupData s) Text
-instance P.HasComputedPrimaryEndpointAddress (ElasticacheReplicationGroupData s) Text
-instance P.HasComputedReplicationGroupDescription (ElasticacheReplicationGroupData s) Text
-instance P.HasComputedReplicationGroupId (ElasticacheReplicationGroupData s) Text
-instance P.HasComputedSnapshotRetentionLimit (ElasticacheReplicationGroupData s) Text
-instance P.HasComputedSnapshotWindow (ElasticacheReplicationGroupData s) Text
+instance P.HasComputedAuthTokenEnabled (ElasticacheReplicationGroupData s) (P.Bool)
+instance P.HasComputedAutomaticFailoverEnabled (ElasticacheReplicationGroupData s) (P.Bool)
+instance P.HasComputedConfigurationEndpointAddress (ElasticacheReplicationGroupData s) (Text)
+instance P.HasComputedNodeType (ElasticacheReplicationGroupData s) (Text)
+instance P.HasComputedNumberCacheClusters (ElasticacheReplicationGroupData s) (Text)
+instance P.HasComputedPort (ElasticacheReplicationGroupData s) (Text)
+instance P.HasComputedPrimaryEndpointAddress (ElasticacheReplicationGroupData s) (Text)
+instance P.HasComputedReplicationGroupDescription (ElasticacheReplicationGroupData s) (Text)
+instance P.HasComputedReplicationGroupId (ElasticacheReplicationGroupData s) (Text)
+instance P.HasComputedSnapshotRetentionLimit (ElasticacheReplicationGroupData s) (Text)
+instance P.HasComputedSnapshotWindow (ElasticacheReplicationGroupData s) (Text)
 
 elasticacheReplicationGroupData :: TF.Schema TF.DataSource P.AWS (ElasticacheReplicationGroupData s)
 elasticacheReplicationGroupData =
@@ -1836,10 +1842,10 @@ data ElbData s = ElbData {
 
 instance TF.ToHCL (ElbData s) where
     toHCL ElbData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ElbData s) s Text where
+instance P.HasName (ElbData s) (TF.Attr s Text) where
     name =
         lens (_name :: ElbData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ElbData s)
@@ -1865,15 +1871,15 @@ data ElbHostedZoneIdData s = ElbHostedZoneIdData {
 
 instance TF.ToHCL (ElbHostedZoneIdData s) where
     toHCL ElbHostedZoneIdData{..} = TF.inline $ catMaybes
-        [ TF.attribute "region" _region
+        [ TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasRegion (ElbHostedZoneIdData s) s P.Region where
+instance P.HasRegion (ElbHostedZoneIdData s) (TF.Attr s P.Region) where
     region =
         lens (_region :: ElbHostedZoneIdData s -> TF.Attr s P.Region)
              (\s a -> s { _region = a } :: ElbHostedZoneIdData s)
 
-instance P.HasComputedId (ElbHostedZoneIdData s) Text
+instance P.HasComputedId (ElbHostedZoneIdData s) (Text)
 
 elbHostedZoneIdData :: TF.Schema TF.DataSource P.AWS (ElbHostedZoneIdData s)
 elbHostedZoneIdData =
@@ -1895,16 +1901,16 @@ data ElbServiceAccountData s = ElbServiceAccountData {
 
 instance TF.ToHCL (ElbServiceAccountData s) where
     toHCL ElbServiceAccountData{..} = TF.inline $ catMaybes
-        [ TF.attribute "region" _region
+        [ TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasRegion (ElbServiceAccountData s) s P.Region where
+instance P.HasRegion (ElbServiceAccountData s) (TF.Attr s P.Region) where
     region =
         lens (_region :: ElbServiceAccountData s -> TF.Attr s P.Region)
              (\s a -> s { _region = a } :: ElbServiceAccountData s)
 
-instance P.HasComputedArn (ElbServiceAccountData s) Text
-instance P.HasComputedId (ElbServiceAccountData s) Text
+instance P.HasComputedArn (ElbServiceAccountData s) (Text)
+instance P.HasComputedId (ElbServiceAccountData s) (Text)
 
 elbServiceAccountData :: TF.Schema TF.DataSource P.AWS (ElbServiceAccountData s)
 elbServiceAccountData =
@@ -1925,10 +1931,10 @@ data IamAccountAliasData s = IamAccountAliasData {
 
 instance TF.ToHCL (IamAccountAliasData s) where
     toHCL IamAccountAliasData{..} = TF.inline $ catMaybes
-        [ TF.attribute "account_alias" _account_alias
+        [ TF.assign "account_alias" <$> TF.attribute _account_alias
         ]
 
-instance P.HasAccountAlias (IamAccountAliasData s) s Text where
+instance P.HasAccountAlias (IamAccountAliasData s) (TF.Attr s Text) where
     accountAlias =
         lens (_account_alias :: IamAccountAliasData s -> TF.Attr s Text)
              (\s a -> s { _account_alias = a } :: IamAccountAliasData s)
@@ -1954,17 +1960,17 @@ data IamGroupData s = IamGroupData {
 
 instance TF.ToHCL (IamGroupData s) where
     toHCL IamGroupData{..} = TF.inline $ catMaybes
-        [ TF.attribute "group_name" _group_name
+        [ TF.assign "group_name" <$> TF.attribute _group_name
         ]
 
-instance P.HasGroupName (IamGroupData s) s Text where
+instance P.HasGroupName (IamGroupData s) (TF.Attr s Text) where
     groupName =
         lens (_group_name :: IamGroupData s -> TF.Attr s Text)
              (\s a -> s { _group_name = a } :: IamGroupData s)
 
-instance P.HasComputedArn (IamGroupData s) Text
-instance P.HasComputedGroupId (IamGroupData s) Text
-instance P.HasComputedPath (IamGroupData s) Text
+instance P.HasComputedArn (IamGroupData s) (Text)
+instance P.HasComputedGroupId (IamGroupData s) (Text)
+instance P.HasComputedPath (IamGroupData s) (Text)
 
 iamGroupData :: TF.Schema TF.DataSource P.AWS (IamGroupData s)
 iamGroupData =
@@ -1986,18 +1992,18 @@ data IamInstanceProfileData s = IamInstanceProfileData {
 
 instance TF.ToHCL (IamInstanceProfileData s) where
     toHCL IamInstanceProfileData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (IamInstanceProfileData s) s Text where
+instance P.HasName (IamInstanceProfileData s) (TF.Attr s Text) where
     name =
         lens (_name :: IamInstanceProfileData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: IamInstanceProfileData s)
 
-instance P.HasComputedArn (IamInstanceProfileData s) Text
-instance P.HasComputedCreateDate (IamInstanceProfileData s) Text
-instance P.HasComputedPath (IamInstanceProfileData s) Text
-instance P.HasComputedRoleId (IamInstanceProfileData s) Text
+instance P.HasComputedArn (IamInstanceProfileData s) (Text)
+instance P.HasComputedCreateDate (IamInstanceProfileData s) (Text)
+instance P.HasComputedPath (IamInstanceProfileData s) (Text)
+instance P.HasComputedRoleId (IamInstanceProfileData s) (Text)
 
 iamInstanceProfileData :: TF.Schema TF.DataSource P.AWS (IamInstanceProfileData s)
 iamInstanceProfileData =
@@ -2018,19 +2024,19 @@ data IamPolicyData s = IamPolicyData {
 
 instance TF.ToHCL (IamPolicyData s) where
     toHCL IamPolicyData{..} = TF.inline $ catMaybes
-        [ TF.attribute "arn" _arn
+        [ TF.assign "arn" <$> TF.attribute _arn
         ]
 
-instance P.HasArn (IamPolicyData s) s Text where
+instance P.HasArn (IamPolicyData s) (TF.Attr s Text) where
     arn =
         lens (_arn :: IamPolicyData s -> TF.Attr s Text)
              (\s a -> s { _arn = a } :: IamPolicyData s)
 
-instance P.HasComputedArn (IamPolicyData s) Text
-instance P.HasComputedDescription (IamPolicyData s) Text
-instance P.HasComputedName (IamPolicyData s) Text
-instance P.HasComputedPath (IamPolicyData s) Text
-instance P.HasComputedPolicy (IamPolicyData s) Text
+instance P.HasComputedArn (IamPolicyData s) (Text)
+instance P.HasComputedDescription (IamPolicyData s) (Text)
+instance P.HasComputedName (IamPolicyData s) (Text)
+instance P.HasComputedPath (IamPolicyData s) (Text)
+instance P.HasComputedPolicy (IamPolicyData s) (Text)
 
 iamPolicyData :: TF.Schema TF.DataSource P.AWS (IamPolicyData s)
 iamPolicyData =
@@ -2059,33 +2065,33 @@ data IamPolicyDocumentData s = IamPolicyDocumentData {
 
 instance TF.ToHCL (IamPolicyDocumentData s) where
     toHCL IamPolicyDocumentData{..} = TF.inline $ catMaybes
-        [ TF.attribute "override_json" _override_json
-        , TF.attribute "policy_id" _policy_id
-        , TF.attribute "source_json" _source_json
-        , TF.attribute "statement" _statement
+        [ TF.assign "override_json" <$> TF.attribute _override_json
+        , TF.assign "policy_id" <$> TF.attribute _policy_id
+        , TF.assign "source_json" <$> TF.attribute _source_json
+        , TF.assign "statement" <$> TF.attribute _statement
         ]
 
-instance P.HasOverrideJson (IamPolicyDocumentData s) s Text where
+instance P.HasOverrideJson (IamPolicyDocumentData s) (TF.Attr s Text) where
     overrideJson =
         lens (_override_json :: IamPolicyDocumentData s -> TF.Attr s Text)
              (\s a -> s { _override_json = a } :: IamPolicyDocumentData s)
 
-instance P.HasPolicyId (IamPolicyDocumentData s) s Text where
+instance P.HasPolicyId (IamPolicyDocumentData s) (TF.Attr s Text) where
     policyId =
         lens (_policy_id :: IamPolicyDocumentData s -> TF.Attr s Text)
              (\s a -> s { _policy_id = a } :: IamPolicyDocumentData s)
 
-instance P.HasSourceJson (IamPolicyDocumentData s) s Text where
+instance P.HasSourceJson (IamPolicyDocumentData s) (TF.Attr s Text) where
     sourceJson =
         lens (_source_json :: IamPolicyDocumentData s -> TF.Attr s Text)
              (\s a -> s { _source_json = a } :: IamPolicyDocumentData s)
 
-instance P.HasStatement (IamPolicyDocumentData s) s Text where
+instance P.HasStatement (IamPolicyDocumentData s) (TF.Attr s Text) where
     statement =
         lens (_statement :: IamPolicyDocumentData s -> TF.Attr s Text)
              (\s a -> s { _statement = a } :: IamPolicyDocumentData s)
 
-instance P.HasComputedJson (IamPolicyDocumentData s) Text
+instance P.HasComputedJson (IamPolicyDocumentData s) (Text)
 
 iamPolicyDocumentData :: TF.Schema TF.DataSource P.AWS (IamPolicyDocumentData s)
 iamPolicyDocumentData =
@@ -2110,19 +2116,19 @@ data IamRoleData s = IamRoleData {
 
 instance TF.ToHCL (IamRoleData s) where
     toHCL IamRoleData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (IamRoleData s) s Text where
+instance P.HasName (IamRoleData s) (TF.Attr s Text) where
     name =
         lens (_name :: IamRoleData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: IamRoleData s)
 
-instance P.HasComputedArn (IamRoleData s) Text
-instance P.HasComputedAssumeRolePolicy (IamRoleData s) Text
-instance P.HasComputedId (IamRoleData s) Text
-instance P.HasComputedPath (IamRoleData s) Text
-instance P.HasComputedUniqueId (IamRoleData s) Text
+instance P.HasComputedArn (IamRoleData s) (Text)
+instance P.HasComputedAssumeRolePolicy (IamRoleData s) (Text)
+instance P.HasComputedId (IamRoleData s) (Text)
+instance P.HasComputedPath (IamRoleData s) (Text)
+instance P.HasComputedUniqueId (IamRoleData s) (Text)
 
 iamRoleData :: TF.Schema TF.DataSource P.AWS (IamRoleData s)
 iamRoleData =
@@ -2146,32 +2152,32 @@ data IamServerCertificateData s = IamServerCertificateData {
 
 instance TF.ToHCL (IamServerCertificateData s) where
     toHCL IamServerCertificateData{..} = TF.inline $ catMaybes
-        [ TF.attribute "latest" _latest
-        , TF.attribute "name" _name
-        , TF.attribute "name_prefix" _name_prefix
+        [ TF.assign "latest" <$> TF.attribute _latest
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _name_prefix
         ]
 
-instance P.HasLatest (IamServerCertificateData s) s Text where
+instance P.HasLatest (IamServerCertificateData s) (TF.Attr s Text) where
     latest =
         lens (_latest :: IamServerCertificateData s -> TF.Attr s Text)
              (\s a -> s { _latest = a } :: IamServerCertificateData s)
 
-instance P.HasName (IamServerCertificateData s) s Text where
+instance P.HasName (IamServerCertificateData s) (TF.Attr s Text) where
     name =
         lens (_name :: IamServerCertificateData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: IamServerCertificateData s)
 
-instance P.HasNamePrefix (IamServerCertificateData s) s Text where
+instance P.HasNamePrefix (IamServerCertificateData s) (TF.Attr s Text) where
     namePrefix =
         lens (_name_prefix :: IamServerCertificateData s -> TF.Attr s Text)
              (\s a -> s { _name_prefix = a } :: IamServerCertificateData s)
 
-instance P.HasComputedArn (IamServerCertificateData s) Text
-instance P.HasComputedCertificateBody (IamServerCertificateData s) Text
-instance P.HasComputedCertificateChain (IamServerCertificateData s) Text
-instance P.HasComputedExpirationDate (IamServerCertificateData s) Text
-instance P.HasComputedPath (IamServerCertificateData s) Text
-instance P.HasComputedUploadDate (IamServerCertificateData s) Text
+instance P.HasComputedArn (IamServerCertificateData s) (Text)
+instance P.HasComputedCertificateBody (IamServerCertificateData s) (Text)
+instance P.HasComputedCertificateChain (IamServerCertificateData s) (Text)
+instance P.HasComputedExpirationDate (IamServerCertificateData s) (Text)
+instance P.HasComputedPath (IamServerCertificateData s) (Text)
+instance P.HasComputedUploadDate (IamServerCertificateData s) (Text)
 
 iamServerCertificateData :: TF.Schema TF.DataSource P.AWS (IamServerCertificateData s)
 iamServerCertificateData =
@@ -2195,23 +2201,43 @@ data IamUserData s = IamUserData {
 
 instance TF.ToHCL (IamUserData s) where
     toHCL IamUserData{..} = TF.inline $ catMaybes
-        [ TF.attribute "user_name" _user_name
+        [ TF.assign "user_name" <$> TF.attribute _user_name
         ]
 
-instance P.HasUserName (IamUserData s) s Text where
+instance P.HasUserName (IamUserData s) (TF.Attr s Text) where
     userName =
         lens (_user_name :: IamUserData s -> TF.Attr s Text)
              (\s a -> s { _user_name = a } :: IamUserData s)
 
-instance P.HasComputedArn (IamUserData s) Text
-instance P.HasComputedPath (IamUserData s) Text
-instance P.HasComputedUserId (IamUserData s) Text
+instance P.HasComputedArn (IamUserData s) (Text)
+instance P.HasComputedPath (IamUserData s) (Text)
+instance P.HasComputedUserId (IamUserData s) (Text)
 
 iamUserData :: TF.Schema TF.DataSource P.AWS (IamUserData s)
 iamUserData =
     TF.newDataSource "aws_iam_user" $
         IamUserData {
               _user_name = TF.Nil
+            }
+
+{- | The @aws_inspector_rules_packages@ AWS datasource.
+
+The AWS Inspector Rules Packages data source allows access to the list of
+AWS Inspector Rules Packages which can be used by AWS Inspector within the
+region configured in the provider.
+-}
+data InspectorRulesPackagesData s = InspectorRulesPackagesData {
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (InspectorRulesPackagesData s) where
+    toHCL _ = TF.empty
+
+instance P.HasComputedArns (InspectorRulesPackagesData s) (Text)
+
+inspectorRulesPackagesData :: TF.Schema TF.DataSource P.AWS (InspectorRulesPackagesData s)
+inspectorRulesPackagesData =
+    TF.newDataSource "aws_inspector_rules_packages" $
+        InspectorRulesPackagesData {
             }
 
 {- | The @aws_instance@ AWS datasource.
@@ -2230,50 +2256,51 @@ data InstanceData s = InstanceData {
 
 instance TF.ToHCL (InstanceData s) where
     toHCL InstanceData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "instance_id" _instance_id
-        , TF.attribute "instance_tags" _instance_tags
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "instance_id" <$> TF.attribute _instance_id
+        , TF.assign "instance_tags" <$> TF.attribute _instance_tags
         ]
 
-instance P.HasFilter (InstanceData s) s Text where
+instance P.HasFilter (InstanceData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: InstanceData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: InstanceData s)
 
-instance P.HasInstanceId (InstanceData s) s Text where
+instance P.HasInstanceId (InstanceData s) (TF.Attr s Text) where
     instanceId =
         lens (_instance_id :: InstanceData s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: InstanceData s)
 
-instance P.HasInstanceTags (InstanceData s) s Text where
+instance P.HasInstanceTags (InstanceData s) (TF.Attr s Text) where
     instanceTags =
         lens (_instance_tags :: InstanceData s -> TF.Attr s Text)
              (\s a -> s { _instance_tags = a } :: InstanceData s)
 
-instance P.HasComputedAssociatePublicIpAddress (InstanceData s) Text
-instance P.HasComputedAvailabilityZone (InstanceData s) P.Zone
-instance P.HasComputedEbsBlockDevice (InstanceData s) Text
-instance P.HasComputedEbsOptimized (InstanceData s) Text
-instance P.HasComputedEphemeralBlockDevice (InstanceData s) Text
-instance P.HasComputedIamInstanceProfile (InstanceData s) Text
-instance P.HasComputedInstanceType (InstanceData s) Text
-instance P.HasComputedIpv6Addresses (InstanceData s) Text
-instance P.HasComputedKeyName (InstanceData s) Text
-instance P.HasComputedMonitoring (InstanceData s) Text
-instance P.HasComputedNetworkInterfaceId (InstanceData s) Text
-instance P.HasComputedPlacementGroup (InstanceData s) Text
-instance P.HasComputedPrivateDns (InstanceData s) Text
-instance P.HasComputedPrivateIp (InstanceData s) Text
-instance P.HasComputedPublicDns (InstanceData s) Text
-instance P.HasComputedPublicIp (InstanceData s) Text
-instance P.HasComputedRootBlockDevice (InstanceData s) Text
-instance P.HasComputedSecurityGroups (InstanceData s) Text
-instance P.HasComputedSourceDestCheck (InstanceData s) Text
-instance P.HasComputedSubnetId (InstanceData s) Text
-instance P.HasComputedTags (InstanceData s) P.Tags
-instance P.HasComputedTenancy (InstanceData s) Text
-instance P.HasComputedUserData (InstanceData s) Text
-instance P.HasComputedVpcSecurityGroupIds (InstanceData s) Text
+instance P.HasComputedAmi (InstanceData s) (Text)
+instance P.HasComputedAssociatePublicIpAddress (InstanceData s) (Text)
+instance P.HasComputedAvailabilityZone (InstanceData s) (P.Zone)
+instance P.HasComputedEbsBlockDevice (InstanceData s) (Text)
+instance P.HasComputedEbsOptimized (InstanceData s) (Text)
+instance P.HasComputedEphemeralBlockDevice (InstanceData s) (Text)
+instance P.HasComputedIamInstanceProfile (InstanceData s) (Text)
+instance P.HasComputedInstanceType (InstanceData s) (Text)
+instance P.HasComputedIpv6Addresses (InstanceData s) (Text)
+instance P.HasComputedKeyName (InstanceData s) (Text)
+instance P.HasComputedMonitoring (InstanceData s) (Text)
+instance P.HasComputedNetworkInterfaceId (InstanceData s) (Text)
+instance P.HasComputedPlacementGroup (InstanceData s) (Text)
+instance P.HasComputedPrivateDns (InstanceData s) (Text)
+instance P.HasComputedPrivateIp (InstanceData s) (Text)
+instance P.HasComputedPublicDns (InstanceData s) (Text)
+instance P.HasComputedPublicIp (InstanceData s) (Text)
+instance P.HasComputedRootBlockDevice (InstanceData s) (Text)
+instance P.HasComputedSecurityGroups (InstanceData s) (Text)
+instance P.HasComputedSourceDestCheck (InstanceData s) (Text)
+instance P.HasComputedSubnetId (InstanceData s) (Text)
+instance P.HasComputedTags (InstanceData s) (P.Tags)
+instance P.HasComputedTenancy (InstanceData s) (Text)
+instance P.HasComputedUserData (InstanceData s) (Text)
+instance P.HasComputedVpcSecurityGroupIds (InstanceData s) (Text)
 
 instanceData :: TF.Schema TF.DataSource P.AWS (InstanceData s)
 instanceData =
@@ -2308,23 +2335,23 @@ data InstancesData s = InstancesData {
 
 instance TF.ToHCL (InstancesData s) where
     toHCL InstancesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "instance_tags" _instance_tags
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "instance_tags" <$> TF.attribute _instance_tags
         ]
 
-instance P.HasFilter (InstancesData s) s Text where
+instance P.HasFilter (InstancesData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: InstancesData s)
 
-instance P.HasInstanceTags (InstancesData s) s Text where
+instance P.HasInstanceTags (InstancesData s) (TF.Attr s Text) where
     instanceTags =
         lens (_instance_tags :: InstancesData s -> TF.Attr s Text)
              (\s a -> s { _instance_tags = a } :: InstancesData s)
 
-instance P.HasComputedIds (InstancesData s) Text
-instance P.HasComputedPrivateIps (InstancesData s) Text
-instance P.HasComputedPublicIps (InstancesData s) Text
+instance P.HasComputedIds (InstancesData s) (Text)
+instance P.HasComputedPrivateIps (InstancesData s) (Text)
+instance P.HasComputedPublicIps (InstancesData s) (Text)
 
 instancesData :: TF.Schema TF.DataSource P.AWS (InstancesData s)
 instancesData =
@@ -2349,28 +2376,28 @@ data InternetGatewayData s = InternetGatewayData {
 
 instance TF.ToHCL (InternetGatewayData s) where
     toHCL InternetGatewayData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "internet_gateway_id" _internet_gateway_id
-        , TF.attribute "tags" _tags
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "internet_gateway_id" <$> TF.attribute _internet_gateway_id
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasFilter (InternetGatewayData s) s Text where
+instance P.HasFilter (InternetGatewayData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: InternetGatewayData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: InternetGatewayData s)
 
-instance P.HasInternetGatewayId (InternetGatewayData s) s Text where
+instance P.HasInternetGatewayId (InternetGatewayData s) (TF.Attr s Text) where
     internetGatewayId =
         lens (_internet_gateway_id :: InternetGatewayData s -> TF.Attr s Text)
              (\s a -> s { _internet_gateway_id = a } :: InternetGatewayData s)
 
-instance P.HasTags (InternetGatewayData s) s P.Tags where
+instance P.HasTags (InternetGatewayData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: InternetGatewayData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: InternetGatewayData s)
 
-instance P.HasComputedState (InternetGatewayData s) Text
-instance P.HasComputedVpcId (InternetGatewayData s) Text
+instance P.HasComputedState (InternetGatewayData s) (Text)
+instance P.HasComputedVpcId (InternetGatewayData s) (Text)
 
 internetGatewayData :: TF.Schema TF.DataSource P.AWS (InternetGatewayData s)
 internetGatewayData =
@@ -2396,23 +2423,23 @@ data IpRangesData s = IpRangesData {
 
 instance TF.ToHCL (IpRangesData s) where
     toHCL IpRangesData{..} = TF.inline $ catMaybes
-        [ TF.attribute "regions" _regions
-        , TF.attribute "services" _services
+        [ TF.assign "regions" <$> TF.attribute _regions
+        , TF.assign "services" <$> TF.attribute _services
         ]
 
-instance P.HasRegions (IpRangesData s) s Text where
+instance P.HasRegions (IpRangesData s) (TF.Attr s Text) where
     regions =
         lens (_regions :: IpRangesData s -> TF.Attr s Text)
              (\s a -> s { _regions = a } :: IpRangesData s)
 
-instance P.HasServices (IpRangesData s) s Text where
+instance P.HasServices (IpRangesData s) (TF.Attr s Text) where
     services =
         lens (_services :: IpRangesData s -> TF.Attr s Text)
              (\s a -> s { _services = a } :: IpRangesData s)
 
-instance P.HasComputedCidrBlocks (IpRangesData s) Text
-instance P.HasComputedCreateDate (IpRangesData s) Text
-instance P.HasComputedSyncToken (IpRangesData s) Text
+instance P.HasComputedCidrBlocks (IpRangesData s) (Text)
+instance P.HasComputedCreateDate (IpRangesData s) (Text)
+instance P.HasComputedSyncToken (IpRangesData s) (Text)
 
 ipRangesData :: TF.Schema TF.DataSource P.AWS (IpRangesData s)
 ipRangesData =
@@ -2435,23 +2462,23 @@ data KinesisStreamData s = KinesisStreamData {
 
 instance TF.ToHCL (KinesisStreamData s) where
     toHCL KinesisStreamData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (KinesisStreamData s) s Text where
+instance P.HasName (KinesisStreamData s) (TF.Attr s Text) where
     name =
         lens (_name :: KinesisStreamData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KinesisStreamData s)
 
-instance P.HasComputedArn (KinesisStreamData s) Text
-instance P.HasComputedClosedShards (KinesisStreamData s) Text
-instance P.HasComputedCreationTimestamp (KinesisStreamData s) Text
-instance P.HasComputedName (KinesisStreamData s) Text
-instance P.HasComputedOpenShards (KinesisStreamData s) Text
-instance P.HasComputedRetentionPeriod (KinesisStreamData s) Text
-instance P.HasComputedShardLevelMetrics (KinesisStreamData s) Text
-instance P.HasComputedStatus (KinesisStreamData s) Text
-instance P.HasComputedTags (KinesisStreamData s) P.Tags
+instance P.HasComputedArn (KinesisStreamData s) (Text)
+instance P.HasComputedClosedShards (KinesisStreamData s) (Text)
+instance P.HasComputedCreationTimestamp (KinesisStreamData s) (Text)
+instance P.HasComputedName (KinesisStreamData s) (Text)
+instance P.HasComputedOpenShards (KinesisStreamData s) (Text)
+instance P.HasComputedRetentionPeriod (KinesisStreamData s) (Text)
+instance P.HasComputedShardLevelMetrics (KinesisStreamData s) (Text)
+instance P.HasComputedStatus (KinesisStreamData s) (Text)
+instance P.HasComputedTags (KinesisStreamData s) (P.Tags)
 
 kinesisStreamData :: TF.Schema TF.DataSource P.AWS (KinesisStreamData s)
 kinesisStreamData =
@@ -2473,17 +2500,17 @@ data KmsAliasData s = KmsAliasData {
 
 instance TF.ToHCL (KmsAliasData s) where
     toHCL KmsAliasData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (KmsAliasData s) s Text where
+instance P.HasName (KmsAliasData s) (TF.Attr s Text) where
     name =
         lens (_name :: KmsAliasData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KmsAliasData s)
 
-instance P.HasComputedArn (KmsAliasData s) Text
-instance P.HasComputedTargetKeyArn (KmsAliasData s) Text
-instance P.HasComputedTargetKeyId (KmsAliasData s) Text
+instance P.HasComputedArn (KmsAliasData s) (Text)
+instance P.HasComputedTargetKeyArn (KmsAliasData s) (Text)
+instance P.HasComputedTargetKeyId (KmsAliasData s) (Text)
 
 kmsAliasData :: TF.Schema TF.DataSource P.AWS (KmsAliasData s)
 kmsAliasData =
@@ -2510,27 +2537,27 @@ data KmsCiphertextData s = KmsCiphertextData {
 
 instance TF.ToHCL (KmsCiphertextData s) where
     toHCL KmsCiphertextData{..} = TF.inline $ catMaybes
-        [ TF.attribute "context" _context
-        , TF.attribute "key_id" _key_id
-        , TF.attribute "plaintext" _plaintext
+        [ TF.assign "context" <$> TF.attribute _context
+        , TF.assign "key_id" <$> TF.attribute _key_id
+        , TF.assign "plaintext" <$> TF.attribute _plaintext
         ]
 
-instance P.HasContext (KmsCiphertextData s) s Text where
+instance P.HasContext (KmsCiphertextData s) (TF.Attr s Text) where
     context =
         lens (_context :: KmsCiphertextData s -> TF.Attr s Text)
              (\s a -> s { _context = a } :: KmsCiphertextData s)
 
-instance P.HasKeyId (KmsCiphertextData s) s Text where
+instance P.HasKeyId (KmsCiphertextData s) (TF.Attr s Text) where
     keyId =
         lens (_key_id :: KmsCiphertextData s -> TF.Attr s Text)
              (\s a -> s { _key_id = a } :: KmsCiphertextData s)
 
-instance P.HasPlaintext (KmsCiphertextData s) s Text where
+instance P.HasPlaintext (KmsCiphertextData s) (TF.Attr s Text) where
     plaintext =
         lens (_plaintext :: KmsCiphertextData s -> TF.Attr s Text)
              (\s a -> s { _plaintext = a } :: KmsCiphertextData s)
 
-instance P.HasComputedCiphertextBlob (KmsCiphertextData s) Text
+instance P.HasComputedCiphertextBlob (KmsCiphertextData s) (Text)
 
 kmsCiphertextData :: TF.Schema TF.DataSource P.AWS (KmsCiphertextData s)
 kmsCiphertextData =
@@ -2557,10 +2584,10 @@ data KmsSecretData s = KmsSecretData {
 
 instance TF.ToHCL (KmsSecretData s) where
     toHCL KmsSecretData{..} = TF.inline $ catMaybes
-        [ TF.attribute "secret" _secret
+        [ TF.assign "secret" <$> TF.attribute _secret
         ]
 
-instance P.HasSecret (KmsSecretData s) s Text where
+instance P.HasSecret (KmsSecretData s) (TF.Attr s Text) where
     secret =
         lens (_secret :: KmsSecretData s -> TF.Attr s Text)
              (\s a -> s { _secret = a } :: KmsSecretData s)
@@ -2589,16 +2616,16 @@ data LbData s = LbData {
 
 instance TF.ToHCL (LbData s) where
     toHCL LbData{..} = TF.inline $ catMaybes
-        [ TF.attribute "arn" _arn
-        , TF.attribute "name" _name
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasArn (LbData s) s Text where
+instance P.HasArn (LbData s) (TF.Attr s Text) where
     arn =
         lens (_arn :: LbData s -> TF.Attr s Text)
              (\s a -> s { _arn = a } :: LbData s)
 
-instance P.HasName (LbData s) s Text where
+instance P.HasName (LbData s) (TF.Attr s Text) where
     name =
         lens (_name :: LbData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbData s)
@@ -2631,22 +2658,22 @@ data LbListenerData s = LbListenerData {
 
 instance TF.ToHCL (LbListenerData s) where
     toHCL LbListenerData{..} = TF.inline $ catMaybes
-        [ TF.attribute "arn" _arn
-        , TF.attribute "load_balancer_arn" _load_balancer_arn
-        , TF.attribute "port" _port
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "load_balancer_arn" <$> TF.attribute _load_balancer_arn
+        , TF.assign "port" <$> TF.attribute _port
         ]
 
-instance P.HasArn (LbListenerData s) s Text where
+instance P.HasArn (LbListenerData s) (TF.Attr s Text) where
     arn =
         lens (_arn :: LbListenerData s -> TF.Attr s Text)
              (\s a -> s { _arn = a } :: LbListenerData s)
 
-instance P.HasLoadBalancerArn (LbListenerData s) s Text where
+instance P.HasLoadBalancerArn (LbListenerData s) (TF.Attr s Text) where
     loadBalancerArn =
         lens (_load_balancer_arn :: LbListenerData s -> TF.Attr s Text)
              (\s a -> s { _load_balancer_arn = a } :: LbListenerData s)
 
-instance P.HasPort (LbListenerData s) s Text where
+instance P.HasPort (LbListenerData s) (TF.Attr s Text) where
     port =
         lens (_port :: LbListenerData s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: LbListenerData s)
@@ -2679,16 +2706,16 @@ data LbTargetGroupData s = LbTargetGroupData {
 
 instance TF.ToHCL (LbTargetGroupData s) where
     toHCL LbTargetGroupData{..} = TF.inline $ catMaybes
-        [ TF.attribute "arn" _arn
-        , TF.attribute "name" _name
+        [ TF.assign "arn" <$> TF.attribute _arn
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasArn (LbTargetGroupData s) s Text where
+instance P.HasArn (LbTargetGroupData s) (TF.Attr s Text) where
     arn =
         lens (_arn :: LbTargetGroupData s -> TF.Attr s Text)
              (\s a -> s { _arn = a } :: LbTargetGroupData s)
 
-instance P.HasName (LbTargetGroupData s) s Text where
+instance P.HasName (LbTargetGroupData s) (TF.Attr s Text) where
     name =
         lens (_name :: LbTargetGroupData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbTargetGroupData s)
@@ -2725,54 +2752,54 @@ data NatGatewayData s = NatGatewayData {
 
 instance TF.ToHCL (NatGatewayData s) where
     toHCL NatGatewayData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "id" _id
-        , TF.attribute "name" _name
-        , TF.attribute "state" _state
-        , TF.attribute "subnet_id" _subnet_id
-        , TF.attribute "values" _values
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+        , TF.assign "values" <$> TF.attribute _values
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasFilter (NatGatewayData s) s Text where
+instance P.HasFilter (NatGatewayData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: NatGatewayData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: NatGatewayData s)
 
-instance P.HasId (NatGatewayData s) s Text where
+instance P.HasId (NatGatewayData s) (TF.Attr s Text) where
     id =
         lens (_id :: NatGatewayData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: NatGatewayData s)
 
-instance P.HasName (NatGatewayData s) s Text where
+instance P.HasName (NatGatewayData s) (TF.Attr s Text) where
     name =
         lens (_name :: NatGatewayData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NatGatewayData s)
 
-instance P.HasState (NatGatewayData s) s Text where
+instance P.HasState (NatGatewayData s) (TF.Attr s Text) where
     state =
         lens (_state :: NatGatewayData s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: NatGatewayData s)
 
-instance P.HasSubnetId (NatGatewayData s) s Text where
+instance P.HasSubnetId (NatGatewayData s) (TF.Attr s Text) where
     subnetId =
         lens (_subnet_id :: NatGatewayData s -> TF.Attr s Text)
              (\s a -> s { _subnet_id = a } :: NatGatewayData s)
 
-instance P.HasValues (NatGatewayData s) s Text where
+instance P.HasValues (NatGatewayData s) (TF.Attr s Text) where
     values =
         lens (_values :: NatGatewayData s -> TF.Attr s Text)
              (\s a -> s { _values = a } :: NatGatewayData s)
 
-instance P.HasVpcId (NatGatewayData s) s Text where
+instance P.HasVpcId (NatGatewayData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: NatGatewayData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: NatGatewayData s)
 
-instance P.HasComputedAllocationId (NatGatewayData s) Text
-instance P.HasComputedNetworkInterfaceId (NatGatewayData s) Text
-instance P.HasComputedPrivateIp (NatGatewayData s) Text
-instance P.HasComputedPublicIp (NatGatewayData s) Text
+instance P.HasComputedAllocationId (NatGatewayData s) (Text)
+instance P.HasComputedNetworkInterfaceId (NatGatewayData s) (Text)
+instance P.HasComputedPrivateIp (NatGatewayData s) (Text)
+instance P.HasComputedPublicIp (NatGatewayData s) (Text)
 
 natGatewayData :: TF.Schema TF.DataSource P.AWS (NatGatewayData s)
 natGatewayData =
@@ -2800,27 +2827,27 @@ data NetworkInterfaceData s = NetworkInterfaceData {
 
 instance TF.ToHCL (NetworkInterfaceData s) where
     toHCL NetworkInterfaceData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "id" _id
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
         ]
 
-instance P.HasFilter (NetworkInterfaceData s) s Text where
+instance P.HasFilter (NetworkInterfaceData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: NetworkInterfaceData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: NetworkInterfaceData s)
 
-instance P.HasId (NetworkInterfaceData s) s Text where
+instance P.HasId (NetworkInterfaceData s) (TF.Attr s Text) where
     id =
         lens (_id :: NetworkInterfaceData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: NetworkInterfaceData s)
 
-instance P.HasComputedAssociation (NetworkInterfaceData s) Text
-instance P.HasComputedAvailabilityZone (NetworkInterfaceData s) P.Zone
-instance P.HasComputedInterfaceType (NetworkInterfaceData s) Text
-instance P.HasComputedIpv6Addresses (NetworkInterfaceData s) Text
-instance P.HasComputedMacAddress (NetworkInterfaceData s) Text
-instance P.HasComputedOwnerId (NetworkInterfaceData s) Text
-instance P.HasComputedRequesterId (NetworkInterfaceData s) Text
+instance P.HasComputedAssociation (NetworkInterfaceData s) (Text)
+instance P.HasComputedAvailabilityZone (NetworkInterfaceData s) (P.Zone)
+instance P.HasComputedInterfaceType (NetworkInterfaceData s) (Text)
+instance P.HasComputedIpv6Addresses (NetworkInterfaceData s) (Text)
+instance P.HasComputedMacAddress (NetworkInterfaceData s) (Text)
+instance P.HasComputedOwnerId (NetworkInterfaceData s) (Text)
+instance P.HasComputedRequesterId (NetworkInterfaceData s) (Text)
 
 networkInterfaceData :: TF.Schema TF.DataSource P.AWS (NetworkInterfaceData s)
 networkInterfaceData =
@@ -2865,23 +2892,23 @@ data PrefixListData s = PrefixListData {
 
 instance TF.ToHCL (PrefixListData s) where
     toHCL PrefixListData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "prefix_list_id" _prefix_list_id
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "prefix_list_id" <$> TF.attribute _prefix_list_id
         ]
 
-instance P.HasName (PrefixListData s) s Text where
+instance P.HasName (PrefixListData s) (TF.Attr s Text) where
     name =
         lens (_name :: PrefixListData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PrefixListData s)
 
-instance P.HasPrefixListId (PrefixListData s) s Text where
+instance P.HasPrefixListId (PrefixListData s) (TF.Attr s Text) where
     prefixListId =
         lens (_prefix_list_id :: PrefixListData s -> TF.Attr s Text)
              (\s a -> s { _prefix_list_id = a } :: PrefixListData s)
 
-instance P.HasComputedCidrBlocks (PrefixListData s) Text
-instance P.HasComputedId (PrefixListData s) Text
-instance P.HasComputedName (PrefixListData s) Text
+instance P.HasComputedCidrBlocks (PrefixListData s) (Text)
+instance P.HasComputedId (PrefixListData s) (Text)
+instance P.HasComputedName (PrefixListData s) (Text)
 
 prefixListData :: TF.Schema TF.DataSource P.AWS (PrefixListData s)
 prefixListData =
@@ -2902,10 +2929,10 @@ data RdsClusterData s = RdsClusterData {
 
 instance TF.ToHCL (RdsClusterData s) where
     toHCL RdsClusterData{..} = TF.inline $ catMaybes
-        [ TF.attribute "cluster_identifier" _cluster_identifier
+        [ TF.assign "cluster_identifier" <$> TF.attribute _cluster_identifier
         ]
 
-instance P.HasClusterIdentifier (RdsClusterData s) s Text where
+instance P.HasClusterIdentifier (RdsClusterData s) (TF.Attr s Text) where
     clusterIdentifier =
         lens (_cluster_identifier :: RdsClusterData s -> TF.Attr s Text)
              (\s a -> s { _cluster_identifier = a } :: RdsClusterData s)
@@ -2932,16 +2959,16 @@ data RedshiftServiceAccountData s = RedshiftServiceAccountData {
 
 instance TF.ToHCL (RedshiftServiceAccountData s) where
     toHCL RedshiftServiceAccountData{..} = TF.inline $ catMaybes
-        [ TF.attribute "region" _region
+        [ TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasRegion (RedshiftServiceAccountData s) s P.Region where
+instance P.HasRegion (RedshiftServiceAccountData s) (TF.Attr s P.Region) where
     region =
         lens (_region :: RedshiftServiceAccountData s -> TF.Attr s P.Region)
              (\s a -> s { _region = a } :: RedshiftServiceAccountData s)
 
-instance P.HasComputedArn (RedshiftServiceAccountData s) Text
-instance P.HasComputedId (RedshiftServiceAccountData s) Text
+instance P.HasComputedArn (RedshiftServiceAccountData s) (Text)
+instance P.HasComputedId (RedshiftServiceAccountData s) (Text)
 
 redshiftServiceAccountData :: TF.Schema TF.DataSource P.AWS (RedshiftServiceAccountData s)
 redshiftServiceAccountData =
@@ -2967,23 +2994,23 @@ data RegionData s = RegionData {
 
 instance TF.ToHCL (RegionData s) where
     toHCL RegionData{..} = TF.inline $ catMaybes
-        [ TF.attribute "endpoint" _endpoint
-        , TF.attribute "name" _name
+        [ TF.assign "endpoint" <$> TF.attribute _endpoint
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasEndpoint (RegionData s) s Text where
+instance P.HasEndpoint (RegionData s) (TF.Attr s Text) where
     endpoint =
         lens (_endpoint :: RegionData s -> TF.Attr s Text)
              (\s a -> s { _endpoint = a } :: RegionData s)
 
-instance P.HasName (RegionData s) s Text where
+instance P.HasName (RegionData s) (TF.Attr s Text) where
     name =
         lens (_name :: RegionData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RegionData s)
 
-instance P.HasComputedCurrent (RegionData s) Text
-instance P.HasComputedEndpoint (RegionData s) Text
-instance P.HasComputedName (RegionData s) Text
+instance P.HasComputedCurrent (RegionData s) (Text)
+instance P.HasComputedEndpoint (RegionData s) (Text)
+instance P.HasComputedName (RegionData s) (Text)
 
 regionData :: TF.Schema TF.DataSource P.AWS (RegionData s)
 regionData =
@@ -3014,41 +3041,41 @@ data Route53ZoneData s = Route53ZoneData {
 
 instance TF.ToHCL (Route53ZoneData s) where
     toHCL Route53ZoneData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "private_zone" _private_zone
-        , TF.attribute "tags" _tags
-        , TF.attribute "vpc_id" _vpc_id
-        , TF.attribute "zone_id" _zone_id
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "private_zone" <$> TF.attribute _private_zone
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        , TF.assign "zone_id" <$> TF.attribute _zone_id
         ]
 
-instance P.HasName (Route53ZoneData s) s Text where
+instance P.HasName (Route53ZoneData s) (TF.Attr s Text) where
     name =
         lens (_name :: Route53ZoneData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: Route53ZoneData s)
 
-instance P.HasPrivateZone (Route53ZoneData s) s Text where
+instance P.HasPrivateZone (Route53ZoneData s) (TF.Attr s Text) where
     privateZone =
         lens (_private_zone :: Route53ZoneData s -> TF.Attr s Text)
              (\s a -> s { _private_zone = a } :: Route53ZoneData s)
 
-instance P.HasTags (Route53ZoneData s) s P.Tags where
+instance P.HasTags (Route53ZoneData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: Route53ZoneData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: Route53ZoneData s)
 
-instance P.HasVpcId (Route53ZoneData s) s Text where
+instance P.HasVpcId (Route53ZoneData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: Route53ZoneData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: Route53ZoneData s)
 
-instance P.HasZoneId (Route53ZoneData s) s Text where
+instance P.HasZoneId (Route53ZoneData s) (TF.Attr s Text) where
     zoneId =
         lens (_zone_id :: Route53ZoneData s -> TF.Attr s Text)
              (\s a -> s { _zone_id = a } :: Route53ZoneData s)
 
-instance P.HasComputedCallerReference (Route53ZoneData s) Text
-instance P.HasComputedComment (Route53ZoneData s) Text
-instance P.HasComputedResourceRecordSetCount (Route53ZoneData s) Text
+instance P.HasComputedCallerReference (Route53ZoneData s) (Text)
+instance P.HasComputedComment (Route53ZoneData s) (Text)
+instance P.HasComputedResourceRecordSetCount (Route53ZoneData s) (Text)
 
 route53ZoneData :: TF.Schema TF.DataSource P.AWS (Route53ZoneData s)
 route53ZoneData =
@@ -3082,46 +3109,46 @@ data RouteTableData s = RouteTableData {
 
 instance TF.ToHCL (RouteTableData s) where
     toHCL RouteTableData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "route_table_id" _route_table_id
-        , TF.attribute "subnet_id" _subnet_id
-        , TF.attribute "tags" _tags
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "route_table_id" <$> TF.attribute _route_table_id
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasFilter (RouteTableData s) s Text where
+instance P.HasFilter (RouteTableData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: RouteTableData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: RouteTableData s)
 
-instance P.HasRouteTableId (RouteTableData s) s Text where
+instance P.HasRouteTableId (RouteTableData s) (TF.Attr s Text) where
     routeTableId =
         lens (_route_table_id :: RouteTableData s -> TF.Attr s Text)
              (\s a -> s { _route_table_id = a } :: RouteTableData s)
 
-instance P.HasSubnetId (RouteTableData s) s Text where
+instance P.HasSubnetId (RouteTableData s) (TF.Attr s Text) where
     subnetId =
         lens (_subnet_id :: RouteTableData s -> TF.Attr s Text)
              (\s a -> s { _subnet_id = a } :: RouteTableData s)
 
-instance P.HasTags (RouteTableData s) s P.Tags where
+instance P.HasTags (RouteTableData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: RouteTableData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: RouteTableData s)
 
-instance P.HasVpcId (RouteTableData s) s Text where
+instance P.HasVpcId (RouteTableData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: RouteTableData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: RouteTableData s)
 
-instance P.HasComputedCidrBlock (RouteTableData s) P.CIDR
-instance P.HasComputedEgressOnlyGatewayId (RouteTableData s) Text
-instance P.HasComputedGatewayId (RouteTableData s) Text
-instance P.HasComputedInstanceId (RouteTableData s) Text
-instance P.HasComputedIpv6CidrBlock (RouteTableData s) P.CIDR
-instance P.HasComputedNatGatewayId (RouteTableData s) Text
-instance P.HasComputedNetworkInterfaceId (RouteTableData s) Text
-instance P.HasComputedVpcPeeringConnectionId (RouteTableData s) Text
+instance P.HasComputedCidrBlock (RouteTableData s) (P.CIDR)
+instance P.HasComputedEgressOnlyGatewayId (RouteTableData s) (Text)
+instance P.HasComputedGatewayId (RouteTableData s) (Text)
+instance P.HasComputedInstanceId (RouteTableData s) (Text)
+instance P.HasComputedIpv6CidrBlock (RouteTableData s) (P.CIDR)
+instance P.HasComputedNatGatewayId (RouteTableData s) (Text)
+instance P.HasComputedNetworkInterfaceId (RouteTableData s) (Text)
+instance P.HasComputedVpcPeeringConnectionId (RouteTableData s) (Text)
 
 routeTableData :: TF.Schema TF.DataSource P.AWS (RouteTableData s)
 routeTableData =
@@ -3147,21 +3174,21 @@ data S3BucketData s = S3BucketData {
 
 instance TF.ToHCL (S3BucketData s) where
     toHCL S3BucketData{..} = TF.inline $ catMaybes
-        [ TF.attribute "bucket" _bucket
+        [ TF.assign "bucket" <$> TF.attribute _bucket
         ]
 
-instance P.HasBucket (S3BucketData s) s Text where
+instance P.HasBucket (S3BucketData s) (TF.Attr s Text) where
     bucket =
         lens (_bucket :: S3BucketData s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: S3BucketData s)
 
-instance P.HasComputedArn (S3BucketData s) Text
-instance P.HasComputedBucketDomainName (S3BucketData s) Text
-instance P.HasComputedHostedZoneId (S3BucketData s) Text
-instance P.HasComputedId (S3BucketData s) Text
-instance P.HasComputedRegion (S3BucketData s) P.Region
-instance P.HasComputedWebsiteDomain (S3BucketData s) Text
-instance P.HasComputedWebsiteEndpoint (S3BucketData s) Text
+instance P.HasComputedArn (S3BucketData s) (Text)
+instance P.HasComputedBucketDomainName (S3BucketData s) (Text)
+instance P.HasComputedHostedZoneId (S3BucketData s) (Text)
+instance P.HasComputedId (S3BucketData s) (Text)
+instance P.HasComputedRegion (S3BucketData s) (P.Region)
+instance P.HasComputedWebsiteDomain (S3BucketData s) (Text)
+instance P.HasComputedWebsiteEndpoint (S3BucketData s) (Text)
 
 s3BucketData :: TF.Schema TF.DataSource P.AWS (S3BucketData s)
 s3BucketData =
@@ -3190,44 +3217,44 @@ data S3BucketObjectData s = S3BucketObjectData {
 
 instance TF.ToHCL (S3BucketObjectData s) where
     toHCL S3BucketObjectData{..} = TF.inline $ catMaybes
-        [ TF.attribute "bucket" _bucket
-        , TF.attribute "key" _key
-        , TF.attribute "version_id" _version_id
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "key" <$> TF.attribute _key
+        , TF.assign "version_id" <$> TF.attribute _version_id
         ]
 
-instance P.HasBucket (S3BucketObjectData s) s Text where
+instance P.HasBucket (S3BucketObjectData s) (TF.Attr s Text) where
     bucket =
         lens (_bucket :: S3BucketObjectData s -> TF.Attr s Text)
              (\s a -> s { _bucket = a } :: S3BucketObjectData s)
 
-instance P.HasKey (S3BucketObjectData s) s Text where
+instance P.HasKey (S3BucketObjectData s) (TF.Attr s Text) where
     key =
         lens (_key :: S3BucketObjectData s -> TF.Attr s Text)
              (\s a -> s { _key = a } :: S3BucketObjectData s)
 
-instance P.HasVersionId (S3BucketObjectData s) s Text where
+instance P.HasVersionId (S3BucketObjectData s) (TF.Attr s Text) where
     versionId =
         lens (_version_id :: S3BucketObjectData s -> TF.Attr s Text)
              (\s a -> s { _version_id = a } :: S3BucketObjectData s)
 
-instance P.HasComputedBody (S3BucketObjectData s) Text
-instance P.HasComputedCacheControl (S3BucketObjectData s) Text
-instance P.HasComputedContentDisposition (S3BucketObjectData s) Text
-instance P.HasComputedContentEncoding (S3BucketObjectData s) Text
-instance P.HasComputedContentLanguage (S3BucketObjectData s) Text
-instance P.HasComputedContentLength (S3BucketObjectData s) Text
-instance P.HasComputedContentType (S3BucketObjectData s) Text
-instance P.HasComputedEtag (S3BucketObjectData s) Text
-instance P.HasComputedExpiration (S3BucketObjectData s) Text
-instance P.HasComputedExpires (S3BucketObjectData s) Text
-instance P.HasComputedLastModified (S3BucketObjectData s) Text
-instance P.HasComputedMetadata (S3BucketObjectData s) Text
-instance P.HasComputedServerSideEncryption (S3BucketObjectData s) Text
-instance P.HasComputedSseKmsKeyId (S3BucketObjectData s) Text
-instance P.HasComputedStorageClass (S3BucketObjectData s) Text
-instance P.HasComputedTags (S3BucketObjectData s) P.Tags
-instance P.HasComputedVersionId (S3BucketObjectData s) Text
-instance P.HasComputedWebsiteRedirectLocation (S3BucketObjectData s) Text
+instance P.HasComputedBody (S3BucketObjectData s) (Text)
+instance P.HasComputedCacheControl (S3BucketObjectData s) (Text)
+instance P.HasComputedContentDisposition (S3BucketObjectData s) (Text)
+instance P.HasComputedContentEncoding (S3BucketObjectData s) (Text)
+instance P.HasComputedContentLanguage (S3BucketObjectData s) (Text)
+instance P.HasComputedContentLength (S3BucketObjectData s) (Text)
+instance P.HasComputedContentType (S3BucketObjectData s) (Text)
+instance P.HasComputedEtag (S3BucketObjectData s) (Text)
+instance P.HasComputedExpiration (S3BucketObjectData s) (Text)
+instance P.HasComputedExpires (S3BucketObjectData s) (Text)
+instance P.HasComputedLastModified (S3BucketObjectData s) (Text)
+instance P.HasComputedMetadata (S3BucketObjectData s) (Text)
+instance P.HasComputedServerSideEncryption (S3BucketObjectData s) (Text)
+instance P.HasComputedSseKmsKeyId (S3BucketObjectData s) (Text)
+instance P.HasComputedStorageClass (S3BucketObjectData s) (Text)
+instance P.HasComputedTags (S3BucketObjectData s) (P.Tags)
+instance P.HasComputedVersionId (S3BucketObjectData s) (Text)
+instance P.HasComputedWebsiteRedirectLocation (S3BucketObjectData s) (Text)
 
 s3BucketObjectData :: TF.Schema TF.DataSource P.AWS (S3BucketObjectData s)
 s3BucketObjectData =
@@ -3260,40 +3287,40 @@ data SecurityGroupData s = SecurityGroupData {
 
 instance TF.ToHCL (SecurityGroupData s) where
     toHCL SecurityGroupData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "id" _id
-        , TF.attribute "name" _name
-        , TF.attribute "tags" _tags
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasFilter (SecurityGroupData s) s Text where
+instance P.HasFilter (SecurityGroupData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: SecurityGroupData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: SecurityGroupData s)
 
-instance P.HasId (SecurityGroupData s) s Text where
+instance P.HasId (SecurityGroupData s) (TF.Attr s Text) where
     id =
         lens (_id :: SecurityGroupData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: SecurityGroupData s)
 
-instance P.HasName (SecurityGroupData s) s Text where
+instance P.HasName (SecurityGroupData s) (TF.Attr s Text) where
     name =
         lens (_name :: SecurityGroupData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SecurityGroupData s)
 
-instance P.HasTags (SecurityGroupData s) s P.Tags where
+instance P.HasTags (SecurityGroupData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: SecurityGroupData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: SecurityGroupData s)
 
-instance P.HasVpcId (SecurityGroupData s) s Text where
+instance P.HasVpcId (SecurityGroupData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: SecurityGroupData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: SecurityGroupData s)
 
-instance P.HasComputedArn (SecurityGroupData s) Text
-instance P.HasComputedDescription (SecurityGroupData s) Text
+instance P.HasComputedArn (SecurityGroupData s) (Text)
+instance P.HasComputedDescription (SecurityGroupData s) (Text)
 
 securityGroupData :: TF.Schema TF.DataSource P.AWS (SecurityGroupData s)
 securityGroupData =
@@ -3319,15 +3346,15 @@ data SnsTopicData s = SnsTopicData {
 
 instance TF.ToHCL (SnsTopicData s) where
     toHCL SnsTopicData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (SnsTopicData s) s Text where
+instance P.HasName (SnsTopicData s) (TF.Attr s Text) where
     name =
         lens (_name :: SnsTopicData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SnsTopicData s)
 
-instance P.HasComputedArn (SnsTopicData s) Text
+instance P.HasComputedArn (SnsTopicData s) (Text)
 
 snsTopicData :: TF.Schema TF.DataSource P.AWS (SnsTopicData s)
 snsTopicData =
@@ -3349,16 +3376,16 @@ data SsmParameterData s = SsmParameterData {
 
 instance TF.ToHCL (SsmParameterData s) where
     toHCL SsmParameterData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "with_decryption" _with_decryption
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "with_decryption" <$> TF.attribute _with_decryption
         ]
 
-instance P.HasName (SsmParameterData s) s Text where
+instance P.HasName (SsmParameterData s) (TF.Attr s Text) where
     name =
         lens (_name :: SsmParameterData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SsmParameterData s)
 
-instance P.HasWithDecryption (SsmParameterData s) s Text where
+instance P.HasWithDecryption (SsmParameterData s) (TF.Attr s Text) where
     withDecryption =
         lens (_with_decryption :: SsmParameterData s -> TF.Attr s Text)
              (\s a -> s { _with_decryption = a } :: SsmParameterData s)
@@ -3402,58 +3429,58 @@ data SubnetData s = SubnetData {
 
 instance TF.ToHCL (SubnetData s) where
     toHCL SubnetData{..} = TF.inline $ catMaybes
-        [ TF.attribute "availability_zone" _availability_zone
-        , TF.attribute "cidr_block" _cidr_block
-        , TF.attribute "default_for_az" _default_for_az
-        , TF.attribute "filter" _filter
-        , TF.attribute "id" _id
-        , TF.attribute "ipv6_cidr_block" _ipv6_cidr_block
-        , TF.attribute "state" _state
-        , TF.attribute "tags" _tags
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "cidr_block" <$> TF.attribute _cidr_block
+        , TF.assign "default_for_az" <$> TF.attribute _default_for_az
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "ipv6_cidr_block" <$> TF.attribute _ipv6_cidr_block
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasAvailabilityZone (SubnetData s) s P.Zone where
+instance P.HasAvailabilityZone (SubnetData s) (TF.Attr s P.Zone) where
     availabilityZone =
         lens (_availability_zone :: SubnetData s -> TF.Attr s P.Zone)
              (\s a -> s { _availability_zone = a } :: SubnetData s)
 
-instance P.HasCidrBlock (SubnetData s) s P.CIDR where
+instance P.HasCidrBlock (SubnetData s) (TF.Attr s P.CIDR) where
     cidrBlock =
         lens (_cidr_block :: SubnetData s -> TF.Attr s P.CIDR)
              (\s a -> s { _cidr_block = a } :: SubnetData s)
 
-instance P.HasDefaultForAz (SubnetData s) s Text where
+instance P.HasDefaultForAz (SubnetData s) (TF.Attr s Text) where
     defaultForAz =
         lens (_default_for_az :: SubnetData s -> TF.Attr s Text)
              (\s a -> s { _default_for_az = a } :: SubnetData s)
 
-instance P.HasFilter (SubnetData s) s Text where
+instance P.HasFilter (SubnetData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: SubnetData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: SubnetData s)
 
-instance P.HasId (SubnetData s) s Text where
+instance P.HasId (SubnetData s) (TF.Attr s Text) where
     id =
         lens (_id :: SubnetData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: SubnetData s)
 
-instance P.HasIpv6CidrBlock (SubnetData s) s P.CIDR where
+instance P.HasIpv6CidrBlock (SubnetData s) (TF.Attr s P.CIDR) where
     ipv6CidrBlock =
         lens (_ipv6_cidr_block :: SubnetData s -> TF.Attr s P.CIDR)
              (\s a -> s { _ipv6_cidr_block = a } :: SubnetData s)
 
-instance P.HasState (SubnetData s) s Text where
+instance P.HasState (SubnetData s) (TF.Attr s Text) where
     state =
         lens (_state :: SubnetData s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: SubnetData s)
 
-instance P.HasTags (SubnetData s) s P.Tags where
+instance P.HasTags (SubnetData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: SubnetData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: SubnetData s)
 
-instance P.HasVpcId (SubnetData s) s Text where
+instance P.HasVpcId (SubnetData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: SubnetData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: SubnetData s)
@@ -3488,21 +3515,21 @@ data SubnetIdsData s = SubnetIdsData {
 
 instance TF.ToHCL (SubnetIdsData s) where
     toHCL SubnetIdsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "tags" _tags
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasTags (SubnetIdsData s) s P.Tags where
+instance P.HasTags (SubnetIdsData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: SubnetIdsData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: SubnetIdsData s)
 
-instance P.HasVpcId (SubnetIdsData s) s Text where
+instance P.HasVpcId (SubnetIdsData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: SubnetIdsData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: SubnetIdsData s)
 
-instance P.HasComputedIds (SubnetIdsData s) Text
+instance P.HasComputedIds (SubnetIdsData s) (Text)
 
 subnetIdsData :: TF.Schema TF.DataSource P.AWS (SubnetIdsData s)
 subnetIdsData =
@@ -3537,55 +3564,55 @@ data VpcData s = VpcData {
 
 instance TF.ToHCL (VpcData s) where
     toHCL VpcData{..} = TF.inline $ catMaybes
-        [ TF.attribute "cidr_block" _cidr_block
-        , TF.attribute "default" _default'
-        , TF.attribute "dhcp_options_id" _dhcp_options_id
-        , TF.attribute "filter" _filter
-        , TF.attribute "id" _id
-        , TF.attribute "state" _state
-        , TF.attribute "tags" _tags
+        [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
+        , TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "dhcp_options_id" <$> TF.attribute _dhcp_options_id
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasCidrBlock (VpcData s) s P.CIDR where
+instance P.HasCidrBlock (VpcData s) (TF.Attr s P.CIDR) where
     cidrBlock =
         lens (_cidr_block :: VpcData s -> TF.Attr s P.CIDR)
              (\s a -> s { _cidr_block = a } :: VpcData s)
 
-instance P.HasDefault' (VpcData s) s Text where
+instance P.HasDefault' (VpcData s) (TF.Attr s Text) where
     default' =
         lens (_default' :: VpcData s -> TF.Attr s Text)
              (\s a -> s { _default' = a } :: VpcData s)
 
-instance P.HasDhcpOptionsId (VpcData s) s Text where
+instance P.HasDhcpOptionsId (VpcData s) (TF.Attr s Text) where
     dhcpOptionsId =
         lens (_dhcp_options_id :: VpcData s -> TF.Attr s Text)
              (\s a -> s { _dhcp_options_id = a } :: VpcData s)
 
-instance P.HasFilter (VpcData s) s Text where
+instance P.HasFilter (VpcData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: VpcData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: VpcData s)
 
-instance P.HasId (VpcData s) s Text where
+instance P.HasId (VpcData s) (TF.Attr s Text) where
     id =
         lens (_id :: VpcData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: VpcData s)
 
-instance P.HasState (VpcData s) s Text where
+instance P.HasState (VpcData s) (TF.Attr s Text) where
     state =
         lens (_state :: VpcData s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: VpcData s)
 
-instance P.HasTags (VpcData s) s P.Tags where
+instance P.HasTags (VpcData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: VpcData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: VpcData s)
 
-instance P.HasComputedEnableDnsHostnames (VpcData s) P.Bool
-instance P.HasComputedEnableDnsSupport (VpcData s) P.Bool
-instance P.HasComputedInstanceTenancy (VpcData s) Text
-instance P.HasComputedIpv6AssociationId (VpcData s) Text
-instance P.HasComputedIpv6CidrBlock (VpcData s) P.CIDR
+instance P.HasComputedEnableDnsHostnames (VpcData s) (P.Bool)
+instance P.HasComputedEnableDnsSupport (VpcData s) (P.Bool)
+instance P.HasComputedInstanceTenancy (VpcData s) (Text)
+instance P.HasComputedIpv6AssociationId (VpcData s) (Text)
+instance P.HasComputedIpv6CidrBlock (VpcData s) (P.CIDR)
 
 vpcData :: TF.Schema TF.DataSource P.AWS (VpcData s)
 vpcData =
@@ -3617,42 +3644,42 @@ data VpcEndpointData s = VpcEndpointData {
 
 instance TF.ToHCL (VpcEndpointData s) where
     toHCL VpcEndpointData{..} = TF.inline $ catMaybes
-        [ TF.attribute "id" _id
-        , TF.attribute "service_name" _service_name
-        , TF.attribute "state" _state
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "service_name" <$> TF.attribute _service_name
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasId (VpcEndpointData s) s Text where
+instance P.HasId (VpcEndpointData s) (TF.Attr s Text) where
     id =
         lens (_id :: VpcEndpointData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: VpcEndpointData s)
 
-instance P.HasServiceName (VpcEndpointData s) s Text where
+instance P.HasServiceName (VpcEndpointData s) (TF.Attr s Text) where
     serviceName =
         lens (_service_name :: VpcEndpointData s -> TF.Attr s Text)
              (\s a -> s { _service_name = a } :: VpcEndpointData s)
 
-instance P.HasState (VpcEndpointData s) s Text where
+instance P.HasState (VpcEndpointData s) (TF.Attr s Text) where
     state =
         lens (_state :: VpcEndpointData s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: VpcEndpointData s)
 
-instance P.HasVpcId (VpcEndpointData s) s Text where
+instance P.HasVpcId (VpcEndpointData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: VpcEndpointData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: VpcEndpointData s)
 
-instance P.HasComputedCidrBlocks (VpcEndpointData s) Text
-instance P.HasComputedDnsEntry (VpcEndpointData s) Text
-instance P.HasComputedNetworkInterfaceIds (VpcEndpointData s) Text
-instance P.HasComputedPolicy (VpcEndpointData s) Text
-instance P.HasComputedPrefixListId (VpcEndpointData s) Text
-instance P.HasComputedPrivateDnsEnabled (VpcEndpointData s) P.Bool
-instance P.HasComputedRouteTableIds (VpcEndpointData s) Text
-instance P.HasComputedSecurityGroupIds (VpcEndpointData s) Text
-instance P.HasComputedSubnetIds (VpcEndpointData s) Text
-instance P.HasComputedVpcEndpointType (VpcEndpointData s) Text
+instance P.HasComputedCidrBlocks (VpcEndpointData s) (Text)
+instance P.HasComputedDnsEntry (VpcEndpointData s) (Text)
+instance P.HasComputedNetworkInterfaceIds (VpcEndpointData s) (Text)
+instance P.HasComputedPolicy (VpcEndpointData s) (Text)
+instance P.HasComputedPrefixListId (VpcEndpointData s) (Text)
+instance P.HasComputedPrivateDnsEnabled (VpcEndpointData s) (P.Bool)
+instance P.HasComputedRouteTableIds (VpcEndpointData s) (Text)
+instance P.HasComputedSecurityGroupIds (VpcEndpointData s) (Text)
+instance P.HasComputedSubnetIds (VpcEndpointData s) (Text)
+instance P.HasComputedVpcEndpointType (VpcEndpointData s) (Text)
 
 vpcEndpointData :: TF.Schema TF.DataSource P.AWS (VpcEndpointData s)
 vpcEndpointData =
@@ -3679,27 +3706,27 @@ data VpcEndpointServiceData s = VpcEndpointServiceData {
 
 instance TF.ToHCL (VpcEndpointServiceData s) where
     toHCL VpcEndpointServiceData{..} = TF.inline $ catMaybes
-        [ TF.attribute "service" _service
-        , TF.attribute "service_name" _service_name
+        [ TF.assign "service" <$> TF.attribute _service
+        , TF.assign "service_name" <$> TF.attribute _service_name
         ]
 
-instance P.HasService (VpcEndpointServiceData s) s Text where
+instance P.HasService (VpcEndpointServiceData s) (TF.Attr s Text) where
     service =
         lens (_service :: VpcEndpointServiceData s -> TF.Attr s Text)
              (\s a -> s { _service = a } :: VpcEndpointServiceData s)
 
-instance P.HasServiceName (VpcEndpointServiceData s) s Text where
+instance P.HasServiceName (VpcEndpointServiceData s) (TF.Attr s Text) where
     serviceName =
         lens (_service_name :: VpcEndpointServiceData s -> TF.Attr s Text)
              (\s a -> s { _service_name = a } :: VpcEndpointServiceData s)
 
-instance P.HasComputedAcceptanceRequired (VpcEndpointServiceData s) Text
-instance P.HasComputedAvailabilityZones (VpcEndpointServiceData s) Text
-instance P.HasComputedBaseEndpointDnsNames (VpcEndpointServiceData s) Text
-instance P.HasComputedOwner (VpcEndpointServiceData s) Text
-instance P.HasComputedPrivateDnsName (VpcEndpointServiceData s) Text
-instance P.HasComputedServiceType (VpcEndpointServiceData s) Text
-instance P.HasComputedVpcEndpointPolicySupported (VpcEndpointServiceData s) Text
+instance P.HasComputedAcceptanceRequired (VpcEndpointServiceData s) (Text)
+instance P.HasComputedAvailabilityZones (VpcEndpointServiceData s) (Text)
+instance P.HasComputedBaseEndpointDnsNames (VpcEndpointServiceData s) (Text)
+instance P.HasComputedOwner (VpcEndpointServiceData s) (Text)
+instance P.HasComputedPrivateDnsName (VpcEndpointServiceData s) (Text)
+instance P.HasComputedServiceType (VpcEndpointServiceData s) (Text)
+instance P.HasComputedVpcEndpointPolicySupported (VpcEndpointServiceData s) (Text)
 
 vpcEndpointServiceData :: TF.Schema TF.DataSource P.AWS (VpcEndpointServiceData s)
 vpcEndpointServiceData =
@@ -3743,82 +3770,82 @@ data VpcPeeringConnectionData s = VpcPeeringConnectionData {
 
 instance TF.ToHCL (VpcPeeringConnectionData s) where
     toHCL VpcPeeringConnectionData{..} = TF.inline $ catMaybes
-        [ TF.attribute "cidr_block" _cidr_block
-        , TF.attribute "filter" _filter
-        , TF.attribute "id" _id
-        , TF.attribute "owner_id" _owner_id
-        , TF.attribute "peer_cidr_block" _peer_cidr_block
-        , TF.attribute "peer_owner_id" _peer_owner_id
-        , TF.attribute "peer_region" _peer_region
-        , TF.attribute "peer_vpc_id" _peer_vpc_id
-        , TF.attribute "region" _region
-        , TF.attribute "status" _status
-        , TF.attribute "tags" _tags
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "cidr_block" <$> TF.attribute _cidr_block
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "owner_id" <$> TF.attribute _owner_id
+        , TF.assign "peer_cidr_block" <$> TF.attribute _peer_cidr_block
+        , TF.assign "peer_owner_id" <$> TF.attribute _peer_owner_id
+        , TF.assign "peer_region" <$> TF.attribute _peer_region
+        , TF.assign "peer_vpc_id" <$> TF.attribute _peer_vpc_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasCidrBlock (VpcPeeringConnectionData s) s P.CIDR where
+instance P.HasCidrBlock (VpcPeeringConnectionData s) (TF.Attr s P.CIDR) where
     cidrBlock =
         lens (_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.CIDR)
              (\s a -> s { _cidr_block = a } :: VpcPeeringConnectionData s)
 
-instance P.HasFilter (VpcPeeringConnectionData s) s Text where
+instance P.HasFilter (VpcPeeringConnectionData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: VpcPeeringConnectionData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: VpcPeeringConnectionData s)
 
-instance P.HasId (VpcPeeringConnectionData s) s Text where
+instance P.HasId (VpcPeeringConnectionData s) (TF.Attr s Text) where
     id =
         lens (_id :: VpcPeeringConnectionData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: VpcPeeringConnectionData s)
 
-instance P.HasOwnerId (VpcPeeringConnectionData s) s Text where
+instance P.HasOwnerId (VpcPeeringConnectionData s) (TF.Attr s Text) where
     ownerId =
         lens (_owner_id :: VpcPeeringConnectionData s -> TF.Attr s Text)
              (\s a -> s { _owner_id = a } :: VpcPeeringConnectionData s)
 
-instance P.HasPeerCidrBlock (VpcPeeringConnectionData s) s P.CIDR where
+instance P.HasPeerCidrBlock (VpcPeeringConnectionData s) (TF.Attr s P.CIDR) where
     peerCidrBlock =
         lens (_peer_cidr_block :: VpcPeeringConnectionData s -> TF.Attr s P.CIDR)
              (\s a -> s { _peer_cidr_block = a } :: VpcPeeringConnectionData s)
 
-instance P.HasPeerOwnerId (VpcPeeringConnectionData s) s Text where
+instance P.HasPeerOwnerId (VpcPeeringConnectionData s) (TF.Attr s Text) where
     peerOwnerId =
         lens (_peer_owner_id :: VpcPeeringConnectionData s -> TF.Attr s Text)
              (\s a -> s { _peer_owner_id = a } :: VpcPeeringConnectionData s)
 
-instance P.HasPeerRegion (VpcPeeringConnectionData s) s P.Region where
+instance P.HasPeerRegion (VpcPeeringConnectionData s) (TF.Attr s P.Region) where
     peerRegion =
         lens (_peer_region :: VpcPeeringConnectionData s -> TF.Attr s P.Region)
              (\s a -> s { _peer_region = a } :: VpcPeeringConnectionData s)
 
-instance P.HasPeerVpcId (VpcPeeringConnectionData s) s Text where
+instance P.HasPeerVpcId (VpcPeeringConnectionData s) (TF.Attr s Text) where
     peerVpcId =
         lens (_peer_vpc_id :: VpcPeeringConnectionData s -> TF.Attr s Text)
              (\s a -> s { _peer_vpc_id = a } :: VpcPeeringConnectionData s)
 
-instance P.HasRegion (VpcPeeringConnectionData s) s P.Region where
+instance P.HasRegion (VpcPeeringConnectionData s) (TF.Attr s P.Region) where
     region =
         lens (_region :: VpcPeeringConnectionData s -> TF.Attr s P.Region)
              (\s a -> s { _region = a } :: VpcPeeringConnectionData s)
 
-instance P.HasStatus (VpcPeeringConnectionData s) s Text where
+instance P.HasStatus (VpcPeeringConnectionData s) (TF.Attr s Text) where
     status =
         lens (_status :: VpcPeeringConnectionData s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: VpcPeeringConnectionData s)
 
-instance P.HasTags (VpcPeeringConnectionData s) s P.Tags where
+instance P.HasTags (VpcPeeringConnectionData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: VpcPeeringConnectionData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: VpcPeeringConnectionData s)
 
-instance P.HasVpcId (VpcPeeringConnectionData s) s Text where
+instance P.HasVpcId (VpcPeeringConnectionData s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: VpcPeeringConnectionData s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: VpcPeeringConnectionData s)
 
-instance P.HasComputedAccepter (VpcPeeringConnectionData s) Text
-instance P.HasComputedRequester (VpcPeeringConnectionData s) Text
+instance P.HasComputedAccepter (VpcPeeringConnectionData s) (Text)
+instance P.HasComputedRequester (VpcPeeringConnectionData s) (Text)
 
 vpcPeeringConnectionData :: TF.Schema TF.DataSource P.AWS (VpcPeeringConnectionData s)
 vpcPeeringConnectionData =
@@ -3861,46 +3888,46 @@ data VpnGatewayData s = VpnGatewayData {
 
 instance TF.ToHCL (VpnGatewayData s) where
     toHCL VpnGatewayData{..} = TF.inline $ catMaybes
-        [ TF.attribute "amazon_side_asn" _amazon_side_asn
-        , TF.attribute "attached_vpc_id" _attached_vpc_id
-        , TF.attribute "availability_zone" _availability_zone
-        , TF.attribute "filter" _filter
-        , TF.attribute "id" _id
-        , TF.attribute "state" _state
-        , TF.attribute "tags" _tags
+        [ TF.assign "amazon_side_asn" <$> TF.attribute _amazon_side_asn
+        , TF.assign "attached_vpc_id" <$> TF.attribute _attached_vpc_id
+        , TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasAmazonSideAsn (VpnGatewayData s) s Text where
+instance P.HasAmazonSideAsn (VpnGatewayData s) (TF.Attr s Text) where
     amazonSideAsn =
         lens (_amazon_side_asn :: VpnGatewayData s -> TF.Attr s Text)
              (\s a -> s { _amazon_side_asn = a } :: VpnGatewayData s)
 
-instance P.HasAttachedVpcId (VpnGatewayData s) s Text where
+instance P.HasAttachedVpcId (VpnGatewayData s) (TF.Attr s Text) where
     attachedVpcId =
         lens (_attached_vpc_id :: VpnGatewayData s -> TF.Attr s Text)
              (\s a -> s { _attached_vpc_id = a } :: VpnGatewayData s)
 
-instance P.HasAvailabilityZone (VpnGatewayData s) s P.Zone where
+instance P.HasAvailabilityZone (VpnGatewayData s) (TF.Attr s P.Zone) where
     availabilityZone =
         lens (_availability_zone :: VpnGatewayData s -> TF.Attr s P.Zone)
              (\s a -> s { _availability_zone = a } :: VpnGatewayData s)
 
-instance P.HasFilter (VpnGatewayData s) s Text where
+instance P.HasFilter (VpnGatewayData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: VpnGatewayData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: VpnGatewayData s)
 
-instance P.HasId (VpnGatewayData s) s Text where
+instance P.HasId (VpnGatewayData s) (TF.Attr s Text) where
     id =
         lens (_id :: VpnGatewayData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: VpnGatewayData s)
 
-instance P.HasState (VpnGatewayData s) s Text where
+instance P.HasState (VpnGatewayData s) (TF.Attr s Text) where
     state =
         lens (_state :: VpnGatewayData s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: VpnGatewayData s)
 
-instance P.HasTags (VpnGatewayData s) s P.Tags where
+instance P.HasTags (VpnGatewayData s) (TF.Attr s P.Tags) where
     tags =
         lens (_tags :: VpnGatewayData s -> TF.Attr s P.Tags)
              (\s a -> s { _tags = a } :: VpnGatewayData s)

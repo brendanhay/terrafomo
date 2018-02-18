@@ -41,8 +41,9 @@ module Terrafomo.LogicMonitor.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -78,28 +79,28 @@ data CollectorsData s = CollectorsData {
 
 instance TF.ToHCL (CollectorsData s) where
     toHCL CollectorsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filters" _filters
-        , TF.attribute "most_recent" _most_recent
-        , TF.attribute "offset" _offset
-        , TF.attribute "size" _size
+        [ TF.assign "filters" <$> TF.attribute _filters
+        , TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "offset" <$> TF.attribute _offset
+        , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasFilters (CollectorsData s) s Text where
+instance P.HasFilters (CollectorsData s) (TF.Attr s Text) where
     filters =
         lens (_filters :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _filters = a } :: CollectorsData s)
 
-instance P.HasMostRecent (CollectorsData s) s Text where
+instance P.HasMostRecent (CollectorsData s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: CollectorsData s)
 
-instance P.HasOffset (CollectorsData s) s Text where
+instance P.HasOffset (CollectorsData s) (TF.Attr s Text) where
     offset =
         lens (_offset :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _offset = a } :: CollectorsData s)
 
-instance P.HasSize (CollectorsData s) s Text where
+instance P.HasSize (CollectorsData s) (TF.Attr s Text) where
     size =
         lens (_size :: CollectorsData s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: CollectorsData s)
@@ -130,22 +131,22 @@ data DeviceGroupData s = DeviceGroupData {
 
 instance TF.ToHCL (DeviceGroupData s) where
     toHCL DeviceGroupData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filters" _filters
-        , TF.attribute "offset" _offset
-        , TF.attribute "size" _size
+        [ TF.assign "filters" <$> TF.attribute _filters
+        , TF.assign "offset" <$> TF.attribute _offset
+        , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasFilters (DeviceGroupData s) s Text where
+instance P.HasFilters (DeviceGroupData s) (TF.Attr s Text) where
     filters =
         lens (_filters :: DeviceGroupData s -> TF.Attr s Text)
              (\s a -> s { _filters = a } :: DeviceGroupData s)
 
-instance P.HasOffset (DeviceGroupData s) s Text where
+instance P.HasOffset (DeviceGroupData s) (TF.Attr s Text) where
     offset =
         lens (_offset :: DeviceGroupData s -> TF.Attr s Text)
              (\s a -> s { _offset = a } :: DeviceGroupData s)
 
-instance P.HasSize (DeviceGroupData s) s Text where
+instance P.HasSize (DeviceGroupData s) (TF.Attr s Text) where
     size =
         lens (_size :: DeviceGroupData s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: DeviceGroupData s)

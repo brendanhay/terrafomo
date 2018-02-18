@@ -36,8 +36,9 @@ module Terrafomo.Docker.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -69,15 +70,15 @@ data RegistryImageData s = RegistryImageData {
 
 instance TF.ToHCL (RegistryImageData s) where
     toHCL RegistryImageData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (RegistryImageData s) s Text where
+instance P.HasName (RegistryImageData s) (TF.Attr s Text) where
     name =
         lens (_name :: RegistryImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RegistryImageData s)
 
-instance P.HasComputedSha256Digest (RegistryImageData s) Text
+instance P.HasComputedSha256Digest (RegistryImageData s) (Text)
 
 registryImageData :: TF.Schema TF.DataSource P.Docker (RegistryImageData s)
 registryImageData =

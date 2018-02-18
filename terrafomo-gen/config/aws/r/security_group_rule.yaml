@@ -1,6 +1,8 @@
 arguments:
   _cidr_blocks:
-    type: '[P.CIDR]'
+    type:
+      name: 'P.CIDR'
+      format: repeated
   _type':
     type: 'P.SecurityGroupType'
   _protocol:

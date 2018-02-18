@@ -39,32 +39,32 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasRecords a s b | a -> s b where
-    records :: Lens' a (TF.Attr s b)
+class HasRecords a b | a -> b where
+    records :: Lens' a b
 
-instance HasRecords a s b => HasRecords (TF.Schema l p a) s b where
+instance HasRecords a b => HasRecords (TF.Schema l p a) b where
     records = TF.configuration . records
 
-class HasTtl a s b | a -> s b where
-    ttl :: Lens' a (TF.Attr s b)
+class HasTtl a b | a -> b where
+    ttl :: Lens' a b
 
-instance HasTtl a s b => HasTtl (TF.Schema l p a) s b where
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
     ttl = TF.configuration . ttl
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasZone a s b | a -> s b where
-    zone :: Lens' a (TF.Attr s b)
+class HasZone a b | a -> b where
+    zone :: Lens' a b
 
-instance HasZone a s b => HasZone (TF.Schema l p a) s b where
+instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone

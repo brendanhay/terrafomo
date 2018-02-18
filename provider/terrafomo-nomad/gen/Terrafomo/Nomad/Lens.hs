@@ -43,56 +43,56 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasDeregisterOnDestroy a s b | a -> s b where
-    deregisterOnDestroy :: Lens' a (TF.Attr s b)
+class HasDeregisterOnDestroy a b | a -> b where
+    deregisterOnDestroy :: Lens' a b
 
-instance HasDeregisterOnDestroy a s b => HasDeregisterOnDestroy (TF.Schema l p a) s b where
+instance HasDeregisterOnDestroy a b => HasDeregisterOnDestroy (TF.Schema l p a) b where
     deregisterOnDestroy = TF.configuration . deregisterOnDestroy
 
-class HasDeregisterOnIdChange a s b | a -> s b where
-    deregisterOnIdChange :: Lens' a (TF.Attr s b)
+class HasDeregisterOnIdChange a b | a -> b where
+    deregisterOnIdChange :: Lens' a b
 
-instance HasDeregisterOnIdChange a s b => HasDeregisterOnIdChange (TF.Schema l p a) s b where
+instance HasDeregisterOnIdChange a b => HasDeregisterOnIdChange (TF.Schema l p a) b where
     deregisterOnIdChange = TF.configuration . deregisterOnIdChange
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasGlobal a s b | a -> s b where
-    global :: Lens' a (TF.Attr s b)
+class HasGlobal a b | a -> b where
+    global :: Lens' a b
 
-instance HasGlobal a s b => HasGlobal (TF.Schema l p a) s b where
+instance HasGlobal a b => HasGlobal (TF.Schema l p a) b where
     global = TF.configuration . global
 
-class HasJobspec a s b | a -> s b where
-    jobspec :: Lens' a (TF.Attr s b)
+class HasJobspec a b | a -> b where
+    jobspec :: Lens' a b
 
-instance HasJobspec a s b => HasJobspec (TF.Schema l p a) s b where
+instance HasJobspec a b => HasJobspec (TF.Schema l p a) b where
     jobspec = TF.configuration . jobspec
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasPolicies a s b | a -> s b where
-    policies :: Lens' a (TF.Attr s b)
+class HasPolicies a b | a -> b where
+    policies :: Lens' a b
 
-instance HasPolicies a s b => HasPolicies (TF.Schema l p a) s b where
+instance HasPolicies a b => HasPolicies (TF.Schema l p a) b where
     policies = TF.configuration . policies
 
-class HasRulesHcl a s b | a -> s b where
-    rulesHcl :: Lens' a (TF.Attr s b)
+class HasRulesHcl a b | a -> b where
+    rulesHcl :: Lens' a b
 
-instance HasRulesHcl a s b => HasRulesHcl (TF.Schema l p a) s b where
+instance HasRulesHcl a b => HasRulesHcl (TF.Schema l p a) b where
     rulesHcl = TF.configuration . rulesHcl
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'

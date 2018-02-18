@@ -48,86 +48,86 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasAppliesTo a s b | a -> s b where
-    appliesTo :: Lens' a (TF.Attr s b)
+class HasAppliesTo a b | a -> b where
+    appliesTo :: Lens' a b
 
-instance HasAppliesTo a s b => HasAppliesTo (TF.Schema l p a) s b where
+instance HasAppliesTo a b => HasAppliesTo (TF.Schema l p a) b where
     appliesTo = TF.configuration . appliesTo
 
-class HasCollector a s b | a -> s b where
-    collector :: Lens' a (TF.Attr s b)
+class HasCollector a b | a -> b where
+    collector :: Lens' a b
 
-instance HasCollector a s b => HasCollector (TF.Schema l p a) s b where
+instance HasCollector a b => HasCollector (TF.Schema l p a) b where
     collector = TF.configuration . collector
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasDisableAlerting a s b | a -> s b where
-    disableAlerting :: Lens' a (TF.Attr s b)
+class HasDisableAlerting a b | a -> b where
+    disableAlerting :: Lens' a b
 
-instance HasDisableAlerting a s b => HasDisableAlerting (TF.Schema l p a) s b where
+instance HasDisableAlerting a b => HasDisableAlerting (TF.Schema l p a) b where
     disableAlerting = TF.configuration . disableAlerting
 
-class HasDisplayName a s b | a -> s b where
-    displayName :: Lens' a (TF.Attr s b)
+class HasDisplayName a b | a -> b where
+    displayName :: Lens' a b
 
-instance HasDisplayName a s b => HasDisplayName (TF.Schema l p a) s b where
+instance HasDisplayName a b => HasDisplayName (TF.Schema l p a) b where
     displayName = TF.configuration . displayName
 
-class HasFilters a s b | a -> s b where
-    filters :: Lens' a (TF.Attr s b)
+class HasFilters a b | a -> b where
+    filters :: Lens' a b
 
-instance HasFilters a s b => HasFilters (TF.Schema l p a) s b where
+instance HasFilters a b => HasFilters (TF.Schema l p a) b where
     filters = TF.configuration . filters
 
-class HasHostgroupId a s b | a -> s b where
-    hostgroupId :: Lens' a (TF.Attr s b)
+class HasHostgroupId a b | a -> b where
+    hostgroupId :: Lens' a b
 
-instance HasHostgroupId a s b => HasHostgroupId (TF.Schema l p a) s b where
+instance HasHostgroupId a b => HasHostgroupId (TF.Schema l p a) b where
     hostgroupId = TF.configuration . hostgroupId
 
-class HasIpAddr a s b | a -> s b where
-    ipAddr :: Lens' a (TF.Attr s b)
+class HasIpAddr a b | a -> b where
+    ipAddr :: Lens' a b
 
-instance HasIpAddr a s b => HasIpAddr (TF.Schema l p a) s b where
+instance HasIpAddr a b => HasIpAddr (TF.Schema l p a) b where
     ipAddr = TF.configuration . ipAddr
 
-class HasMostRecent a s b | a -> s b where
-    mostRecent :: Lens' a (TF.Attr s b)
+class HasMostRecent a b | a -> b where
+    mostRecent :: Lens' a b
 
-instance HasMostRecent a s b => HasMostRecent (TF.Schema l p a) s b where
+instance HasMostRecent a b => HasMostRecent (TF.Schema l p a) b where
     mostRecent = TF.configuration . mostRecent
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasOffset a s b | a -> s b where
-    offset :: Lens' a (TF.Attr s b)
+class HasOffset a b | a -> b where
+    offset :: Lens' a b
 
-instance HasOffset a s b => HasOffset (TF.Schema l p a) s b where
+instance HasOffset a b => HasOffset (TF.Schema l p a) b where
     offset = TF.configuration . offset
 
-class HasParentId a s b | a -> s b where
-    parentId :: Lens' a (TF.Attr s b)
+class HasParentId a b | a -> b where
+    parentId :: Lens' a b
 
-instance HasParentId a s b => HasParentId (TF.Schema l p a) s b where
+instance HasParentId a b => HasParentId (TF.Schema l p a) b where
     parentId = TF.configuration . parentId
 
-class HasProperties a s b | a -> s b where
-    properties :: Lens' a (TF.Attr s b)
+class HasProperties a b | a -> b where
+    properties :: Lens' a b
 
-instance HasProperties a s b => HasProperties (TF.Schema l p a) s b where
+instance HasProperties a b => HasProperties (TF.Schema l p a) b where
     properties = TF.configuration . properties
 
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attr s b)
+class HasSize a b | a -> b where
+    size :: Lens' a b
 
-instance HasSize a s b => HasSize (TF.Schema l p a) s b where
+instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size

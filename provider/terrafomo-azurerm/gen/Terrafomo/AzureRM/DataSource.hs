@@ -133,6 +133,7 @@ module Terrafomo.AzureRM.DataSource
     , P.HasComputedLocation (..)
     , P.HasComputedLocationPlacementId (..)
     , P.HasComputedMaxNumberOfRecordSets (..)
+    , P.HasComputedMaximumNumberOfWorkers (..)
     , P.HasComputedMaximumThroughputUnits (..)
     , P.HasComputedName (..)
     , P.HasComputedNameServers (..)
@@ -180,8 +181,9 @@ module Terrafomo.AzureRM.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -214,26 +216,27 @@ data AppServicePlanData s = AppServicePlanData {
 
 instance TF.ToHCL (AppServicePlanData s) where
     toHCL AppServicePlanData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (AppServicePlanData s) s Text where
+instance P.HasName (AppServicePlanData s) (TF.Attr s Text) where
     name =
         lens (_name :: AppServicePlanData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AppServicePlanData s)
 
-instance P.HasResourceGroupName (AppServicePlanData s) s Text where
+instance P.HasResourceGroupName (AppServicePlanData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: AppServicePlanData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: AppServicePlanData s)
 
-instance P.HasComputedId (AppServicePlanData s) Text
-instance P.HasComputedKind (AppServicePlanData s) Text
-instance P.HasComputedLocation (AppServicePlanData s) Text
-instance P.HasComputedProperties (AppServicePlanData s) Text
-instance P.HasComputedSku (AppServicePlanData s) Text
-instance P.HasComputedTags (AppServicePlanData s) Text
+instance P.HasComputedId (AppServicePlanData s) (Text)
+instance P.HasComputedKind (AppServicePlanData s) (Text)
+instance P.HasComputedLocation (AppServicePlanData s) (Text)
+instance P.HasComputedMaximumNumberOfWorkers (AppServicePlanData s) (Text)
+instance P.HasComputedProperties (AppServicePlanData s) (Text)
+instance P.HasComputedSku (AppServicePlanData s) (Text)
+instance P.HasComputedTags (AppServicePlanData s) (Text)
 
 appServicePlanData :: TF.Schema TF.DataSource P.AzureRM (AppServicePlanData s)
 appServicePlanData =
@@ -256,19 +259,19 @@ data BuiltinRoleDefinitionData s = BuiltinRoleDefinitionData {
 
 instance TF.ToHCL (BuiltinRoleDefinitionData s) where
     toHCL BuiltinRoleDefinitionData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (BuiltinRoleDefinitionData s) s Text where
+instance P.HasName (BuiltinRoleDefinitionData s) (TF.Attr s Text) where
     name =
         lens (_name :: BuiltinRoleDefinitionData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: BuiltinRoleDefinitionData s)
 
-instance P.HasComputedAssignableScopes (BuiltinRoleDefinitionData s) Text
-instance P.HasComputedDescription (BuiltinRoleDefinitionData s) Text
-instance P.HasComputedId (BuiltinRoleDefinitionData s) Text
-instance P.HasComputedPermissions (BuiltinRoleDefinitionData s) Text
-instance P.HasComputedType' (BuiltinRoleDefinitionData s) Text
+instance P.HasComputedAssignableScopes (BuiltinRoleDefinitionData s) (Text)
+instance P.HasComputedDescription (BuiltinRoleDefinitionData s) (Text)
+instance P.HasComputedId (BuiltinRoleDefinitionData s) (Text)
+instance P.HasComputedPermissions (BuiltinRoleDefinitionData s) (Text)
+instance P.HasComputedType' (BuiltinRoleDefinitionData s) (Text)
 
 builtinRoleDefinitionData :: TF.Schema TF.DataSource P.AzureRM (BuiltinRoleDefinitionData s)
 builtinRoleDefinitionData =
@@ -293,22 +296,22 @@ data ClientConfigData s = ClientConfigData {
 
 instance TF.ToHCL (ClientConfigData s) where
     toHCL ClientConfigData{..} = TF.inline $ catMaybes
-        [ TF.attribute "client_id" _client_id
-        , TF.attribute "subscription_id" _subscription_id
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "client_id" <$> TF.attribute _client_id
+        , TF.assign "subscription_id" <$> TF.attribute _subscription_id
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasClientId (ClientConfigData s) s Text where
+instance P.HasClientId (ClientConfigData s) (TF.Attr s Text) where
     clientId =
         lens (_client_id :: ClientConfigData s -> TF.Attr s Text)
              (\s a -> s { _client_id = a } :: ClientConfigData s)
 
-instance P.HasSubscriptionId (ClientConfigData s) s Text where
+instance P.HasSubscriptionId (ClientConfigData s) (TF.Attr s Text) where
     subscriptionId =
         lens (_subscription_id :: ClientConfigData s -> TF.Attr s Text)
              (\s a -> s { _subscription_id = a } :: ClientConfigData s)
 
-instance P.HasTenantId (ClientConfigData s) s Text where
+instance P.HasTenantId (ClientConfigData s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: ClientConfigData s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: ClientConfigData s)
@@ -336,25 +339,25 @@ data DnsZoneData s = DnsZoneData {
 
 instance TF.ToHCL (DnsZoneData s) where
     toHCL DnsZoneData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (DnsZoneData s) s Text where
+instance P.HasName (DnsZoneData s) (TF.Attr s Text) where
     name =
         lens (_name :: DnsZoneData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsZoneData s)
 
-instance P.HasResourceGroupName (DnsZoneData s) s Text where
+instance P.HasResourceGroupName (DnsZoneData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: DnsZoneData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: DnsZoneData s)
 
-instance P.HasComputedId (DnsZoneData s) Text
-instance P.HasComputedMaxNumberOfRecordSets (DnsZoneData s) Text
-instance P.HasComputedNameServers (DnsZoneData s) Text
-instance P.HasComputedNumberOfRecordSets (DnsZoneData s) Text
-instance P.HasComputedTags (DnsZoneData s) Text
+instance P.HasComputedId (DnsZoneData s) (Text)
+instance P.HasComputedMaxNumberOfRecordSets (DnsZoneData s) (Text)
+instance P.HasComputedNameServers (DnsZoneData s) (Text)
+instance P.HasComputedNumberOfRecordSets (DnsZoneData s) (Text)
+instance P.HasComputedTags (DnsZoneData s) (Text)
 
 dnsZoneData :: TF.Schema TF.DataSource P.AzureRM (DnsZoneData s)
 dnsZoneData =
@@ -377,27 +380,27 @@ data EventhubNamespaceData s = EventhubNamespaceData {
 
 instance TF.ToHCL (EventhubNamespaceData s) where
     toHCL EventhubNamespaceData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (EventhubNamespaceData s) s Text where
+instance P.HasName (EventhubNamespaceData s) (TF.Attr s Text) where
     name =
         lens (_name :: EventhubNamespaceData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: EventhubNamespaceData s)
 
-instance P.HasResourceGroupName (EventhubNamespaceData s) s Text where
+instance P.HasResourceGroupName (EventhubNamespaceData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: EventhubNamespaceData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: EventhubNamespaceData s)
 
-instance P.HasComputedAutoInflateEnabled (EventhubNamespaceData s) Text
-instance P.HasComputedCapacity (EventhubNamespaceData s) Text
-instance P.HasComputedId (EventhubNamespaceData s) Text
-instance P.HasComputedLocation (EventhubNamespaceData s) Text
-instance P.HasComputedMaximumThroughputUnits (EventhubNamespaceData s) Text
-instance P.HasComputedSku (EventhubNamespaceData s) Text
-instance P.HasComputedTags (EventhubNamespaceData s) Text
+instance P.HasComputedAutoInflateEnabled (EventhubNamespaceData s) (Text)
+instance P.HasComputedCapacity (EventhubNamespaceData s) (Text)
+instance P.HasComputedId (EventhubNamespaceData s) (Text)
+instance P.HasComputedLocation (EventhubNamespaceData s) (Text)
+instance P.HasComputedMaximumThroughputUnits (EventhubNamespaceData s) (Text)
+instance P.HasComputedSku (EventhubNamespaceData s) (Text)
+instance P.HasComputedTags (EventhubNamespaceData s) (Text)
 
 eventhubNamespaceData :: TF.Schema TF.DataSource P.AzureRM (EventhubNamespaceData s)
 eventhubNamespaceData =
@@ -424,37 +427,37 @@ data ImageData s = ImageData {
 
 instance TF.ToHCL (ImageData s) where
     toHCL ImageData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "name_regex" _name_regex
-        , TF.attribute "resource_group_name" _resource_group_name
-        , TF.attribute "sort_descending" _sort_descending
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_regex" <$> TF.attribute _name_regex
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        , TF.assign "sort_descending" <$> TF.attribute _sort_descending
         ]
 
-instance P.HasName (ImageData s) s Text where
+instance P.HasName (ImageData s) (TF.Attr s Text) where
     name =
         lens (_name :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageData s)
 
-instance P.HasNameRegex (ImageData s) s Text where
+instance P.HasNameRegex (ImageData s) (TF.Attr s Text) where
     nameRegex =
         lens (_name_regex :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name_regex = a } :: ImageData s)
 
-instance P.HasResourceGroupName (ImageData s) s Text where
+instance P.HasResourceGroupName (ImageData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: ImageData s)
 
-instance P.HasSortDescending (ImageData s) s Text where
+instance P.HasSortDescending (ImageData s) (TF.Attr s Text) where
     sortDescending =
         lens (_sort_descending :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _sort_descending = a } :: ImageData s)
 
-instance P.HasComputedDataDisk (ImageData s) Text
-instance P.HasComputedLocation (ImageData s) Text
-instance P.HasComputedName (ImageData s) Text
-instance P.HasComputedOsDisk (ImageData s) Text
-instance P.HasComputedTags (ImageData s) Text
+instance P.HasComputedDataDisk (ImageData s) (Text)
+instance P.HasComputedLocation (ImageData s) (Text)
+instance P.HasComputedName (ImageData s) (Text)
+instance P.HasComputedOsDisk (ImageData s) (Text)
+instance P.HasComputedTags (ImageData s) (Text)
 
 imageData :: TF.Schema TF.DataSource P.AzureRM (ImageData s)
 imageData =
@@ -478,18 +481,18 @@ data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData {
 
 instance TF.ToHCL (KeyVaultAccessPolicyData s) where
     toHCL KeyVaultAccessPolicyData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (KeyVaultAccessPolicyData s) s Text where
+instance P.HasName (KeyVaultAccessPolicyData s) (TF.Attr s Text) where
     name =
         lens (_name :: KeyVaultAccessPolicyData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: KeyVaultAccessPolicyData s)
 
-instance P.HasComputedCertificatePermissions (KeyVaultAccessPolicyData s) Text
-instance P.HasComputedId (KeyVaultAccessPolicyData s) Text
-instance P.HasComputedKeyPermissions (KeyVaultAccessPolicyData s) Text
-instance P.HasComputedSecretPermissions (KeyVaultAccessPolicyData s) Text
+instance P.HasComputedCertificatePermissions (KeyVaultAccessPolicyData s) (Text)
+instance P.HasComputedId (KeyVaultAccessPolicyData s) (Text)
+instance P.HasComputedKeyPermissions (KeyVaultAccessPolicyData s) (Text)
+instance P.HasComputedSecretPermissions (KeyVaultAccessPolicyData s) (Text)
 
 keyVaultAccessPolicyData :: TF.Schema TF.DataSource P.AzureRM (KeyVaultAccessPolicyData s)
 keyVaultAccessPolicyData =
@@ -512,26 +515,26 @@ data ManagedDiskData s = ManagedDiskData {
 
 instance TF.ToHCL (ManagedDiskData s) where
     toHCL ManagedDiskData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (ManagedDiskData s) s Text where
+instance P.HasName (ManagedDiskData s) (TF.Attr s Text) where
     name =
         lens (_name :: ManagedDiskData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ManagedDiskData s)
 
-instance P.HasResourceGroupName (ManagedDiskData s) s Text where
+instance P.HasResourceGroupName (ManagedDiskData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: ManagedDiskData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: ManagedDiskData s)
 
-instance P.HasComputedDiskSizeGb (ManagedDiskData s) Text
-instance P.HasComputedOsType (ManagedDiskData s) Text
-instance P.HasComputedSourceResourceId (ManagedDiskData s) Text
-instance P.HasComputedSourceUri (ManagedDiskData s) Text
-instance P.HasComputedStorageAccountType (ManagedDiskData s) Text
-instance P.HasComputedTags (ManagedDiskData s) Text
+instance P.HasComputedDiskSizeGb (ManagedDiskData s) (Text)
+instance P.HasComputedOsType (ManagedDiskData s) (Text)
+instance P.HasComputedSourceResourceId (ManagedDiskData s) (Text)
+instance P.HasComputedSourceUri (ManagedDiskData s) (Text)
+instance P.HasComputedStorageAccountType (ManagedDiskData s) (Text)
+instance P.HasComputedTags (ManagedDiskData s) (Text)
 
 managedDiskData :: TF.Schema TF.DataSource P.AzureRM (ManagedDiskData s)
 managedDiskData =
@@ -554,24 +557,24 @@ data NetworkSecurityGroupData s = NetworkSecurityGroupData {
 
 instance TF.ToHCL (NetworkSecurityGroupData s) where
     toHCL NetworkSecurityGroupData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (NetworkSecurityGroupData s) s Text where
+instance P.HasName (NetworkSecurityGroupData s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkSecurityGroupData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkSecurityGroupData s)
 
-instance P.HasResourceGroupName (NetworkSecurityGroupData s) s Text where
+instance P.HasResourceGroupName (NetworkSecurityGroupData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: NetworkSecurityGroupData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: NetworkSecurityGroupData s)
 
-instance P.HasComputedId (NetworkSecurityGroupData s) Text
-instance P.HasComputedLocation (NetworkSecurityGroupData s) Text
-instance P.HasComputedSecurityRule (NetworkSecurityGroupData s) Text
-instance P.HasComputedTags (NetworkSecurityGroupData s) Text
+instance P.HasComputedId (NetworkSecurityGroupData s) (Text)
+instance P.HasComputedLocation (NetworkSecurityGroupData s) (Text)
+instance P.HasComputedSecurityRule (NetworkSecurityGroupData s) (Text)
+instance P.HasComputedTags (NetworkSecurityGroupData s) (Text)
 
 networkSecurityGroupData :: TF.Schema TF.DataSource P.AzureRM (NetworkSecurityGroupData s)
 networkSecurityGroupData =
@@ -598,34 +601,34 @@ data PlatformImageData s = PlatformImageData {
 
 instance TF.ToHCL (PlatformImageData s) where
     toHCL PlatformImageData{..} = TF.inline $ catMaybes
-        [ TF.attribute "location" _location
-        , TF.attribute "offer" _offer
-        , TF.attribute "publisher" _publisher
-        , TF.attribute "sku" _sku
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "offer" <$> TF.attribute _offer
+        , TF.assign "publisher" <$> TF.attribute _publisher
+        , TF.assign "sku" <$> TF.attribute _sku
         ]
 
-instance P.HasLocation (PlatformImageData s) s Text where
+instance P.HasLocation (PlatformImageData s) (TF.Attr s Text) where
     location =
         lens (_location :: PlatformImageData s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: PlatformImageData s)
 
-instance P.HasOffer (PlatformImageData s) s Text where
+instance P.HasOffer (PlatformImageData s) (TF.Attr s Text) where
     offer =
         lens (_offer :: PlatformImageData s -> TF.Attr s Text)
              (\s a -> s { _offer = a } :: PlatformImageData s)
 
-instance P.HasPublisher (PlatformImageData s) s Text where
+instance P.HasPublisher (PlatformImageData s) (TF.Attr s Text) where
     publisher =
         lens (_publisher :: PlatformImageData s -> TF.Attr s Text)
              (\s a -> s { _publisher = a } :: PlatformImageData s)
 
-instance P.HasSku (PlatformImageData s) s Text where
+instance P.HasSku (PlatformImageData s) (TF.Attr s Text) where
     sku =
         lens (_sku :: PlatformImageData s -> TF.Attr s Text)
              (\s a -> s { _sku = a } :: PlatformImageData s)
 
-instance P.HasComputedId (PlatformImageData s) Text
-instance P.HasComputedVersion (PlatformImageData s) Text
+instance P.HasComputedId (PlatformImageData s) (Text)
+instance P.HasComputedVersion (PlatformImageData s) (Text)
 
 platformImageData :: TF.Schema TF.DataSource P.AzureRM (PlatformImageData s)
 platformImageData =
@@ -651,25 +654,25 @@ data PublicIpData s = PublicIpData {
 
 instance TF.ToHCL (PublicIpData s) where
     toHCL PublicIpData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (PublicIpData s) s Text where
+instance P.HasName (PublicIpData s) (TF.Attr s Text) where
     name =
         lens (_name :: PublicIpData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PublicIpData s)
 
-instance P.HasResourceGroupName (PublicIpData s) s Text where
+instance P.HasResourceGroupName (PublicIpData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: PublicIpData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: PublicIpData s)
 
-instance P.HasComputedDomainNameLabel (PublicIpData s) Text
-instance P.HasComputedFqdn (PublicIpData s) Text
-instance P.HasComputedIdleTimeoutInMinutes (PublicIpData s) Text
-instance P.HasComputedIpAddress (PublicIpData s) Text
-instance P.HasComputedTags (PublicIpData s) Text
+instance P.HasComputedDomainNameLabel (PublicIpData s) (Text)
+instance P.HasComputedFqdn (PublicIpData s) (Text)
+instance P.HasComputedIdleTimeoutInMinutes (PublicIpData s) (Text)
+instance P.HasComputedIpAddress (PublicIpData s) (Text)
+instance P.HasComputedTags (PublicIpData s) (Text)
 
 publicIpData :: TF.Schema TF.DataSource P.AzureRM (PublicIpData s)
 publicIpData =
@@ -690,16 +693,16 @@ data ResourceGroupData s = ResourceGroupData {
 
 instance TF.ToHCL (ResourceGroupData s) where
     toHCL ResourceGroupData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ResourceGroupData s) s Text where
+instance P.HasName (ResourceGroupData s) (TF.Attr s Text) where
     name =
         lens (_name :: ResourceGroupData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ResourceGroupData s)
 
-instance P.HasComputedLocation (ResourceGroupData s) Text
-instance P.HasComputedTags (ResourceGroupData s) Text
+instance P.HasComputedLocation (ResourceGroupData s) (Text)
+instance P.HasComputedTags (ResourceGroupData s) (Text)
 
 resourceGroupData :: TF.Schema TF.DataSource P.AzureRM (ResourceGroupData s)
 resourceGroupData =
@@ -723,25 +726,25 @@ data RoleDefinitionData s = RoleDefinitionData {
 
 instance TF.ToHCL (RoleDefinitionData s) where
     toHCL RoleDefinitionData{..} = TF.inline $ catMaybes
-        [ TF.attribute "role_definition_id" _role_definition_id
-        , TF.attribute "scope" _scope
+        [ TF.assign "role_definition_id" <$> TF.attribute _role_definition_id
+        , TF.assign "scope" <$> TF.attribute _scope
         ]
 
-instance P.HasRoleDefinitionId (RoleDefinitionData s) s Text where
+instance P.HasRoleDefinitionId (RoleDefinitionData s) (TF.Attr s Text) where
     roleDefinitionId =
         lens (_role_definition_id :: RoleDefinitionData s -> TF.Attr s Text)
              (\s a -> s { _role_definition_id = a } :: RoleDefinitionData s)
 
-instance P.HasScope (RoleDefinitionData s) s Text where
+instance P.HasScope (RoleDefinitionData s) (TF.Attr s Text) where
     scope =
         lens (_scope :: RoleDefinitionData s -> TF.Attr s Text)
              (\s a -> s { _scope = a } :: RoleDefinitionData s)
 
-instance P.HasComputedAssignableScopes (RoleDefinitionData s) Text
-instance P.HasComputedDescription (RoleDefinitionData s) Text
-instance P.HasComputedId (RoleDefinitionData s) Text
-instance P.HasComputedPermissions (RoleDefinitionData s) Text
-instance P.HasComputedType' (RoleDefinitionData s) Text
+instance P.HasComputedAssignableScopes (RoleDefinitionData s) (Text)
+instance P.HasComputedDescription (RoleDefinitionData s) (Text)
+instance P.HasComputedId (RoleDefinitionData s) (Text)
+instance P.HasComputedPermissions (RoleDefinitionData s) (Text)
+instance P.HasComputedType' (RoleDefinitionData s) (Text)
 
 roleDefinitionData :: TF.Schema TF.DataSource P.AzureRM (RoleDefinitionData s)
 roleDefinitionData =
@@ -764,26 +767,26 @@ data SnapshotData s = SnapshotData {
 
 instance TF.ToHCL (SnapshotData s) where
     toHCL SnapshotData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (SnapshotData s) s Text where
+instance P.HasName (SnapshotData s) (TF.Attr s Text) where
     name =
         lens (_name :: SnapshotData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SnapshotData s)
 
-instance P.HasResourceGroupName (SnapshotData s) s Text where
+instance P.HasResourceGroupName (SnapshotData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: SnapshotData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: SnapshotData s)
 
-instance P.HasComputedCreateOption (SnapshotData s) Text
-instance P.HasComputedDiskSizeGb (SnapshotData s) Text
-instance P.HasComputedId (SnapshotData s) Text
-instance P.HasComputedSourceResourceId (SnapshotData s) Text
-instance P.HasComputedSourceUri (SnapshotData s) Text
-instance P.HasComputedStorageAccountId (SnapshotData s) Text
+instance P.HasComputedCreateOption (SnapshotData s) (Text)
+instance P.HasComputedDiskSizeGb (SnapshotData s) (Text)
+instance P.HasComputedId (SnapshotData s) (Text)
+instance P.HasComputedSourceResourceId (SnapshotData s) (Text)
+instance P.HasComputedSourceUri (SnapshotData s) (Text)
+instance P.HasComputedStorageAccountId (SnapshotData s) (Text)
 
 snapshotData :: TF.Schema TF.DataSource P.AzureRM (SnapshotData s)
 snapshotData =
@@ -806,48 +809,48 @@ data StorageAccountData s = StorageAccountData {
 
 instance TF.ToHCL (StorageAccountData s) where
     toHCL StorageAccountData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (StorageAccountData s) s Text where
+instance P.HasName (StorageAccountData s) (TF.Attr s Text) where
     name =
         lens (_name :: StorageAccountData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: StorageAccountData s)
 
-instance P.HasResourceGroupName (StorageAccountData s) s Text where
+instance P.HasResourceGroupName (StorageAccountData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: StorageAccountData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: StorageAccountData s)
 
-instance P.HasComputedAccessTier (StorageAccountData s) Text
-instance P.HasComputedAccountEncryptionSource (StorageAccountData s) Text
-instance P.HasComputedAccountKind (StorageAccountData s) Text
-instance P.HasComputedAccountReplicationType (StorageAccountData s) Text
-instance P.HasComputedAccountTier (StorageAccountData s) Text
-instance P.HasComputedCustomDomain (StorageAccountData s) Text
-instance P.HasComputedEnableBlobEncryption (StorageAccountData s) Text
-instance P.HasComputedEnableFileEncryption (StorageAccountData s) Text
-instance P.HasComputedEnableHttpsTrafficOnly (StorageAccountData s) Text
-instance P.HasComputedId (StorageAccountData s) Text
-instance P.HasComputedLocation (StorageAccountData s) Text
-instance P.HasComputedName (StorageAccountData s) Text
-instance P.HasComputedPrimaryAccessKey (StorageAccountData s) Text
-instance P.HasComputedPrimaryBlobConnectionString (StorageAccountData s) Text
-instance P.HasComputedPrimaryBlobEndpoint (StorageAccountData s) Text
-instance P.HasComputedPrimaryConnectionString (StorageAccountData s) Text
-instance P.HasComputedPrimaryFileEndpoint (StorageAccountData s) Text
-instance P.HasComputedPrimaryLocation (StorageAccountData s) Text
-instance P.HasComputedPrimaryQueueEndpoint (StorageAccountData s) Text
-instance P.HasComputedPrimaryTableEndpoint (StorageAccountData s) Text
-instance P.HasComputedSecondaryAccessKey (StorageAccountData s) Text
-instance P.HasComputedSecondaryBlobConnectionString (StorageAccountData s) Text
-instance P.HasComputedSecondaryBlobEndpoint (StorageAccountData s) Text
-instance P.HasComputedSecondaryConnectionString (StorageAccountData s) Text
-instance P.HasComputedSecondaryLocation (StorageAccountData s) Text
-instance P.HasComputedSecondaryQueueEndpoint (StorageAccountData s) Text
-instance P.HasComputedSecondaryTableEndpoint (StorageAccountData s) Text
-instance P.HasComputedTags (StorageAccountData s) Text
+instance P.HasComputedAccessTier (StorageAccountData s) (Text)
+instance P.HasComputedAccountEncryptionSource (StorageAccountData s) (Text)
+instance P.HasComputedAccountKind (StorageAccountData s) (Text)
+instance P.HasComputedAccountReplicationType (StorageAccountData s) (Text)
+instance P.HasComputedAccountTier (StorageAccountData s) (Text)
+instance P.HasComputedCustomDomain (StorageAccountData s) (Text)
+instance P.HasComputedEnableBlobEncryption (StorageAccountData s) (Text)
+instance P.HasComputedEnableFileEncryption (StorageAccountData s) (Text)
+instance P.HasComputedEnableHttpsTrafficOnly (StorageAccountData s) (Text)
+instance P.HasComputedId (StorageAccountData s) (Text)
+instance P.HasComputedLocation (StorageAccountData s) (Text)
+instance P.HasComputedName (StorageAccountData s) (Text)
+instance P.HasComputedPrimaryAccessKey (StorageAccountData s) (Text)
+instance P.HasComputedPrimaryBlobConnectionString (StorageAccountData s) (Text)
+instance P.HasComputedPrimaryBlobEndpoint (StorageAccountData s) (Text)
+instance P.HasComputedPrimaryConnectionString (StorageAccountData s) (Text)
+instance P.HasComputedPrimaryFileEndpoint (StorageAccountData s) (Text)
+instance P.HasComputedPrimaryLocation (StorageAccountData s) (Text)
+instance P.HasComputedPrimaryQueueEndpoint (StorageAccountData s) (Text)
+instance P.HasComputedPrimaryTableEndpoint (StorageAccountData s) (Text)
+instance P.HasComputedSecondaryAccessKey (StorageAccountData s) (Text)
+instance P.HasComputedSecondaryBlobConnectionString (StorageAccountData s) (Text)
+instance P.HasComputedSecondaryBlobEndpoint (StorageAccountData s) (Text)
+instance P.HasComputedSecondaryConnectionString (StorageAccountData s) (Text)
+instance P.HasComputedSecondaryLocation (StorageAccountData s) (Text)
+instance P.HasComputedSecondaryQueueEndpoint (StorageAccountData s) (Text)
+instance P.HasComputedSecondaryTableEndpoint (StorageAccountData s) (Text)
+instance P.HasComputedTags (StorageAccountData s) (Text)
 
 storageAccountData :: TF.Schema TF.DataSource P.AzureRM (StorageAccountData s)
 storageAccountData =
@@ -873,31 +876,31 @@ data SubnetData s = SubnetData {
 
 instance TF.ToHCL (SubnetData s) where
     toHCL SubnetData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
-        , TF.attribute "virtual_network_name" _virtual_network_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
+        , TF.assign "virtual_network_name" <$> TF.attribute _virtual_network_name
         ]
 
-instance P.HasName (SubnetData s) s Text where
+instance P.HasName (SubnetData s) (TF.Attr s Text) where
     name =
         lens (_name :: SubnetData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SubnetData s)
 
-instance P.HasResourceGroupName (SubnetData s) s Text where
+instance P.HasResourceGroupName (SubnetData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: SubnetData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: SubnetData s)
 
-instance P.HasVirtualNetworkName (SubnetData s) s Text where
+instance P.HasVirtualNetworkName (SubnetData s) (TF.Attr s Text) where
     virtualNetworkName =
         lens (_virtual_network_name :: SubnetData s -> TF.Attr s Text)
              (\s a -> s { _virtual_network_name = a } :: SubnetData s)
 
-instance P.HasComputedAddressPrefix (SubnetData s) Text
-instance P.HasComputedId (SubnetData s) Text
-instance P.HasComputedIpConfigurations (SubnetData s) Text
-instance P.HasComputedNetworkSecurityGroupId (SubnetData s) Text
-instance P.HasComputedRouteTableId (SubnetData s) Text
+instance P.HasComputedAddressPrefix (SubnetData s) (Text)
+instance P.HasComputedId (SubnetData s) (Text)
+instance P.HasComputedIpConfigurations (SubnetData s) (Text)
+instance P.HasComputedNetworkSecurityGroupId (SubnetData s) (Text)
+instance P.HasComputedRouteTableId (SubnetData s) (Text)
 
 subnetData :: TF.Schema TF.DataSource P.AzureRM (SubnetData s)
 subnetData =
@@ -919,19 +922,19 @@ data SubscriptionData s = SubscriptionData {
 
 instance TF.ToHCL (SubscriptionData s) where
     toHCL SubscriptionData{..} = TF.inline $ catMaybes
-        [ TF.attribute "subscription_id" _subscription_id
+        [ TF.assign "subscription_id" <$> TF.attribute _subscription_id
         ]
 
-instance P.HasSubscriptionId (SubscriptionData s) s Text where
+instance P.HasSubscriptionId (SubscriptionData s) (TF.Attr s Text) where
     subscriptionId =
         lens (_subscription_id :: SubscriptionData s -> TF.Attr s Text)
              (\s a -> s { _subscription_id = a } :: SubscriptionData s)
 
-instance P.HasComputedDisplayName (SubscriptionData s) Text
-instance P.HasComputedLocationPlacementId (SubscriptionData s) Text
-instance P.HasComputedQuotaId (SubscriptionData s) Text
-instance P.HasComputedSpendingLimit (SubscriptionData s) Text
-instance P.HasComputedState (SubscriptionData s) Text
+instance P.HasComputedDisplayName (SubscriptionData s) (Text)
+instance P.HasComputedLocationPlacementId (SubscriptionData s) (Text)
+instance P.HasComputedQuotaId (SubscriptionData s) (Text)
+instance P.HasComputedSpendingLimit (SubscriptionData s) (Text)
+instance P.HasComputedState (SubscriptionData s) (Text)
 
 subscriptionData :: TF.Schema TF.DataSource P.AzureRM (SubscriptionData s)
 subscriptionData =
@@ -953,25 +956,25 @@ data VirtualNetworkData s = VirtualNetworkData {
 
 instance TF.ToHCL (VirtualNetworkData s) where
     toHCL VirtualNetworkData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (VirtualNetworkData s) s Text where
+instance P.HasName (VirtualNetworkData s) (TF.Attr s Text) where
     name =
         lens (_name :: VirtualNetworkData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VirtualNetworkData s)
 
-instance P.HasResourceGroupName (VirtualNetworkData s) s Text where
+instance P.HasResourceGroupName (VirtualNetworkData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: VirtualNetworkData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: VirtualNetworkData s)
 
-instance P.HasComputedAddressSpaces (VirtualNetworkData s) Text
-instance P.HasComputedDnsServers (VirtualNetworkData s) Text
-instance P.HasComputedId (VirtualNetworkData s) Text
-instance P.HasComputedSubnets (VirtualNetworkData s) Text
-instance P.HasComputedVnetPeerings (VirtualNetworkData s) Text
+instance P.HasComputedAddressSpaces (VirtualNetworkData s) (Text)
+instance P.HasComputedDnsServers (VirtualNetworkData s) (Text)
+instance P.HasComputedId (VirtualNetworkData s) (Text)
+instance P.HasComputedSubnets (VirtualNetworkData s) (Text)
+instance P.HasComputedVnetPeerings (VirtualNetworkData s) (Text)
 
 virtualNetworkData :: TF.Schema TF.DataSource P.AzureRM (VirtualNetworkData s)
 virtualNetworkData =
@@ -995,31 +998,31 @@ data VirtualNetworkGatewayData s = VirtualNetworkGatewayData {
 
 instance TF.ToHCL (VirtualNetworkGatewayData s) where
     toHCL VirtualNetworkGatewayData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "resource_group_name" _resource_group_name
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_group_name" <$> TF.attribute _resource_group_name
         ]
 
-instance P.HasName (VirtualNetworkGatewayData s) s Text where
+instance P.HasName (VirtualNetworkGatewayData s) (TF.Attr s Text) where
     name =
         lens (_name :: VirtualNetworkGatewayData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VirtualNetworkGatewayData s)
 
-instance P.HasResourceGroupName (VirtualNetworkGatewayData s) s Text where
+instance P.HasResourceGroupName (VirtualNetworkGatewayData s) (TF.Attr s Text) where
     resourceGroupName =
         lens (_resource_group_name :: VirtualNetworkGatewayData s -> TF.Attr s Text)
              (\s a -> s { _resource_group_name = a } :: VirtualNetworkGatewayData s)
 
-instance P.HasComputedActiveActive (VirtualNetworkGatewayData s) Text
-instance P.HasComputedDefaultLocalNetworkGatewayId (VirtualNetworkGatewayData s) Text
-instance P.HasComputedEnableBgp (VirtualNetworkGatewayData s) Text
-instance P.HasComputedId (VirtualNetworkGatewayData s) Text
-instance P.HasComputedIpConfiguration (VirtualNetworkGatewayData s) Text
-instance P.HasComputedLocation (VirtualNetworkGatewayData s) Text
-instance P.HasComputedSku (VirtualNetworkGatewayData s) Text
-instance P.HasComputedTags (VirtualNetworkGatewayData s) Text
-instance P.HasComputedType' (VirtualNetworkGatewayData s) Text
-instance P.HasComputedVpnClientConfiguration (VirtualNetworkGatewayData s) Text
-instance P.HasComputedVpnType (VirtualNetworkGatewayData s) Text
+instance P.HasComputedActiveActive (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedDefaultLocalNetworkGatewayId (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedEnableBgp (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedId (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedIpConfiguration (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedLocation (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedSku (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedTags (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedType' (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedVpnClientConfiguration (VirtualNetworkGatewayData s) (Text)
+instance P.HasComputedVpnType (VirtualNetworkGatewayData s) (Text)
 
 virtualNetworkGatewayData :: TF.Schema TF.DataSource P.AzureRM (VirtualNetworkGatewayData s)
 virtualNetworkGatewayData =

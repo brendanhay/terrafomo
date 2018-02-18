@@ -54,8 +54,9 @@ module Terrafomo.Triton.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -86,10 +87,10 @@ data AccountData s = AccountData {
 
 instance TF.ToHCL (AccountData s) where
     toHCL AccountData{..} = TF.inline $ catMaybes
-        [ TF.attribute "cns_enabled" _cns_enabled
+        [ TF.assign "cns_enabled" <$> TF.attribute _cns_enabled
         ]
 
-instance P.HasCnsEnabled (AccountData s) s Text where
+instance P.HasCnsEnabled (AccountData s) (TF.Attr s Text) where
     cnsEnabled =
         lens (_cns_enabled :: AccountData s -> TF.Attr s Text)
              (\s a -> s { _cns_enabled = a } :: AccountData s)
@@ -116,16 +117,16 @@ data DatacenterData s = DatacenterData {
 
 instance TF.ToHCL (DatacenterData s) where
     toHCL DatacenterData{..} = TF.inline $ catMaybes
-        [ TF.attribute "endpoint" _endpoint
-        , TF.attribute "name" _name
+        [ TF.assign "endpoint" <$> TF.attribute _endpoint
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasEndpoint (DatacenterData s) s Text where
+instance P.HasEndpoint (DatacenterData s) (TF.Attr s Text) where
     endpoint =
         lens (_endpoint :: DatacenterData s -> TF.Attr s Text)
              (\s a -> s { _endpoint = a } :: DatacenterData s)
 
-instance P.HasName (DatacenterData s) s Text where
+instance P.HasName (DatacenterData s) (TF.Attr s Text) where
     name =
         lens (_name :: DatacenterData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatacenterData s)
@@ -165,52 +166,52 @@ data ImageData s = ImageData {
 
 instance TF.ToHCL (ImageData s) where
     toHCL ImageData{..} = TF.inline $ catMaybes
-        [ TF.attribute "most_recent" _most_recent
-        , TF.attribute "name" _name
-        , TF.attribute "os" _os
-        , TF.attribute "owner" _owner
-        , TF.attribute "public" _public
-        , TF.attribute "state" _state
-        , TF.attribute "type" _type'
-        , TF.attribute "version" _version
+        [ TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "os" <$> TF.attribute _os
+        , TF.assign "owner" <$> TF.attribute _owner
+        , TF.assign "public" <$> TF.attribute _public
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasMostRecent (ImageData s) s Text where
+instance P.HasMostRecent (ImageData s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: ImageData s)
 
-instance P.HasName (ImageData s) s Text where
+instance P.HasName (ImageData s) (TF.Attr s Text) where
     name =
         lens (_name :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageData s)
 
-instance P.HasOs (ImageData s) s Text where
+instance P.HasOs (ImageData s) (TF.Attr s Text) where
     os =
         lens (_os :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _os = a } :: ImageData s)
 
-instance P.HasOwner (ImageData s) s Text where
+instance P.HasOwner (ImageData s) (TF.Attr s Text) where
     owner =
         lens (_owner :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _owner = a } :: ImageData s)
 
-instance P.HasPublic (ImageData s) s Text where
+instance P.HasPublic (ImageData s) (TF.Attr s Text) where
     public =
         lens (_public :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _public = a } :: ImageData s)
 
-instance P.HasState (ImageData s) s Text where
+instance P.HasState (ImageData s) (TF.Attr s Text) where
     state =
         lens (_state :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _state = a } :: ImageData s)
 
-instance P.HasType' (ImageData s) s Text where
+instance P.HasType' (ImageData s) (TF.Attr s Text) where
     type' =
         lens (_type' :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: ImageData s)
 
-instance P.HasVersion (ImageData s) s Text where
+instance P.HasVersion (ImageData s) (TF.Attr s Text) where
     version =
         lens (_version :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ImageData s)
@@ -242,15 +243,15 @@ data NetworkData s = NetworkData {
 
 instance TF.ToHCL (NetworkData s) where
     toHCL NetworkData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (NetworkData s) s Text where
+instance P.HasName (NetworkData s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkData s)
 
-instance P.HasComputedId (NetworkData s) Text
+instance P.HasComputedId (NetworkData s) (Text)
 
 networkData :: TF.Schema TF.DataSource P.Triton (NetworkData s)
 networkData =

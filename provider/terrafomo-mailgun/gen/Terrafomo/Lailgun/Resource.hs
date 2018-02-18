@@ -45,8 +45,9 @@ module Terrafomo.Lailgun.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -83,39 +84,39 @@ data DomainResource s = DomainResource {
 
 instance TF.ToHCL (DomainResource s) where
     toHCL DomainResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "smtp_password" _smtp_password
-        , TF.attribute "spam_action" _spam_action
-        , TF.attribute "wildcard" _wildcard
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "smtp_password" <$> TF.attribute _smtp_password
+        , TF.assign "spam_action" <$> TF.attribute _spam_action
+        , TF.assign "wildcard" <$> TF.attribute _wildcard
         ]
 
-instance P.HasName (DomainResource s) s Text where
+instance P.HasName (DomainResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DomainResource s)
 
-instance P.HasSmtpPassword (DomainResource s) s Text where
+instance P.HasSmtpPassword (DomainResource s) (TF.Attr s Text) where
     smtpPassword =
         lens (_smtp_password :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _smtp_password = a } :: DomainResource s)
 
-instance P.HasSpamAction (DomainResource s) s Text where
+instance P.HasSpamAction (DomainResource s) (TF.Attr s Text) where
     spamAction =
         lens (_spam_action :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _spam_action = a } :: DomainResource s)
 
-instance P.HasWildcard (DomainResource s) s Text where
+instance P.HasWildcard (DomainResource s) (TF.Attr s Text) where
     wildcard =
         lens (_wildcard :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _wildcard = a } :: DomainResource s)
 
-instance P.HasComputedName (DomainResource s) Text
-instance P.HasComputedReceivingRecords (DomainResource s) Text
-instance P.HasComputedSendingRecords (DomainResource s) Text
-instance P.HasComputedSmtpLogin (DomainResource s) Text
-instance P.HasComputedSmtpPassword (DomainResource s) Text
-instance P.HasComputedSpamAction (DomainResource s) Text
-instance P.HasComputedWildcard (DomainResource s) Text
+instance P.HasComputedName (DomainResource s) (Text)
+instance P.HasComputedReceivingRecords (DomainResource s) (Text)
+instance P.HasComputedSendingRecords (DomainResource s) (Text)
+instance P.HasComputedSmtpLogin (DomainResource s) (Text)
+instance P.HasComputedSmtpPassword (DomainResource s) (Text)
+instance P.HasComputedSpamAction (DomainResource s) (Text)
+instance P.HasComputedWildcard (DomainResource s) (Text)
 
 domainResource :: TF.Schema TF.Resource P.Lailgun (DomainResource s)
 domainResource =

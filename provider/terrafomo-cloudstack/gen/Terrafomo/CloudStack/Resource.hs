@@ -197,8 +197,9 @@ module Terrafomo.CloudStack.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -234,34 +235,34 @@ data AffinityGroupResource s = AffinityGroupResource {
 
 instance TF.ToHCL (AffinityGroupResource s) where
     toHCL AffinityGroupResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "project" _project
-        , TF.attribute "type" _type'
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasDescription (AffinityGroupResource s) s Text where
+instance P.HasDescription (AffinityGroupResource s) (TF.Attr s Text) where
     description =
         lens (_description :: AffinityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: AffinityGroupResource s)
 
-instance P.HasName (AffinityGroupResource s) s Text where
+instance P.HasName (AffinityGroupResource s) (TF.Attr s Text) where
     name =
         lens (_name :: AffinityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AffinityGroupResource s)
 
-instance P.HasProject (AffinityGroupResource s) s Text where
+instance P.HasProject (AffinityGroupResource s) (TF.Attr s Text) where
     project =
         lens (_project :: AffinityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: AffinityGroupResource s)
 
-instance P.HasType' (AffinityGroupResource s) s Text where
+instance P.HasType' (AffinityGroupResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: AffinityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: AffinityGroupResource s)
 
-instance P.HasComputedDescription (AffinityGroupResource s) Text
-instance P.HasComputedId (AffinityGroupResource s) Text
+instance P.HasComputedDescription (AffinityGroupResource s) (Text)
+instance P.HasComputedId (AffinityGroupResource s) (Text)
 
 affinityGroupResource :: TF.Schema TF.Resource P.CloudStack (AffinityGroupResource s)
 affinityGroupResource =
@@ -301,64 +302,64 @@ data DiskResource s = DiskResource {
 
 instance TF.ToHCL (DiskResource s) where
     toHCL DiskResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "attach" _attach
-        , TF.attribute "device_id" _device_id
-        , TF.attribute "disk_offering" _disk_offering
-        , TF.attribute "name" _name
-        , TF.attribute "project" _project
-        , TF.attribute "shrink_ok" _shrink_ok
-        , TF.attribute "size" _size
-        , TF.attribute "virtual_machine_id" _virtual_machine_id
-        , TF.attribute "zone" _zone
+        [ TF.assign "attach" <$> TF.attribute _attach
+        , TF.assign "device_id" <$> TF.attribute _device_id
+        , TF.assign "disk_offering" <$> TF.attribute _disk_offering
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "shrink_ok" <$> TF.attribute _shrink_ok
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasAttach (DiskResource s) s Text where
+instance P.HasAttach (DiskResource s) (TF.Attr s Text) where
     attach =
         lens (_attach :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _attach = a } :: DiskResource s)
 
-instance P.HasDeviceId (DiskResource s) s Text where
+instance P.HasDeviceId (DiskResource s) (TF.Attr s Text) where
     deviceId =
         lens (_device_id :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _device_id = a } :: DiskResource s)
 
-instance P.HasDiskOffering (DiskResource s) s Text where
+instance P.HasDiskOffering (DiskResource s) (TF.Attr s Text) where
     diskOffering =
         lens (_disk_offering :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _disk_offering = a } :: DiskResource s)
 
-instance P.HasName (DiskResource s) s Text where
+instance P.HasName (DiskResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DiskResource s)
 
-instance P.HasProject (DiskResource s) s Text where
+instance P.HasProject (DiskResource s) (TF.Attr s Text) where
     project =
         lens (_project :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: DiskResource s)
 
-instance P.HasShrinkOk (DiskResource s) s Text where
+instance P.HasShrinkOk (DiskResource s) (TF.Attr s Text) where
     shrinkOk =
         lens (_shrink_ok :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _shrink_ok = a } :: DiskResource s)
 
-instance P.HasSize (DiskResource s) s Text where
+instance P.HasSize (DiskResource s) (TF.Attr s Text) where
     size =
         lens (_size :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: DiskResource s)
 
-instance P.HasVirtualMachineId (DiskResource s) s Text where
+instance P.HasVirtualMachineId (DiskResource s) (TF.Attr s Text) where
     virtualMachineId =
         lens (_virtual_machine_id :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _virtual_machine_id = a } :: DiskResource s)
 
-instance P.HasZone (DiskResource s) s Text where
+instance P.HasZone (DiskResource s) (TF.Attr s Text) where
     zone =
         lens (_zone :: DiskResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: DiskResource s)
 
-instance P.HasComputedDeviceId (DiskResource s) Text
-instance P.HasComputedId (DiskResource s) Text
+instance P.HasComputedDeviceId (DiskResource s) (Text)
+instance P.HasComputedId (DiskResource s) (Text)
 
 diskResource :: TF.Schema TF.Resource P.CloudStack (DiskResource s)
 diskResource =
@@ -392,33 +393,33 @@ data EgressFirewallResource s = EgressFirewallResource {
 
 instance TF.ToHCL (EgressFirewallResource s) where
     toHCL EgressFirewallResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "managed" _managed
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "parallelism" _parallelism
-        , TF.attribute "rule" _rule
+        [ TF.assign "managed" <$> TF.attribute _managed
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "parallelism" <$> TF.attribute _parallelism
+        , TF.assign "rule" <$> TF.attribute _rule
         ]
 
-instance P.HasManaged (EgressFirewallResource s) s Text where
+instance P.HasManaged (EgressFirewallResource s) (TF.Attr s Text) where
     managed =
         lens (_managed :: EgressFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _managed = a } :: EgressFirewallResource s)
 
-instance P.HasNetworkId (EgressFirewallResource s) s Text where
+instance P.HasNetworkId (EgressFirewallResource s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: EgressFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: EgressFirewallResource s)
 
-instance P.HasParallelism (EgressFirewallResource s) s Text where
+instance P.HasParallelism (EgressFirewallResource s) (TF.Attr s Text) where
     parallelism =
         lens (_parallelism :: EgressFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _parallelism = a } :: EgressFirewallResource s)
 
-instance P.HasRule (EgressFirewallResource s) s Text where
+instance P.HasRule (EgressFirewallResource s) (TF.Attr s Text) where
     rule =
         lens (_rule :: EgressFirewallResource s -> TF.Attr s Text)
              (\s a -> s { _rule = a } :: EgressFirewallResource s)
 
-instance P.HasComputedId (EgressFirewallResource s) Text
+instance P.HasComputedId (EgressFirewallResource s) (Text)
 
 egressFirewallResource :: TF.Schema TF.Resource P.CloudStack (EgressFirewallResource s)
 egressFirewallResource =
@@ -447,33 +448,33 @@ data FirewallResource s = FirewallResource {
 
 instance TF.ToHCL (FirewallResource s) where
     toHCL FirewallResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "ip_address_id" _ip_address_id
-        , TF.attribute "managed" _managed
-        , TF.attribute "parallelism" _parallelism
-        , TF.attribute "rule" _rule
+        [ TF.assign "ip_address_id" <$> TF.attribute _ip_address_id
+        , TF.assign "managed" <$> TF.attribute _managed
+        , TF.assign "parallelism" <$> TF.attribute _parallelism
+        , TF.assign "rule" <$> TF.attribute _rule
         ]
 
-instance P.HasIpAddressId (FirewallResource s) s Text where
+instance P.HasIpAddressId (FirewallResource s) (TF.Attr s Text) where
     ipAddressId =
         lens (_ip_address_id :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address_id = a } :: FirewallResource s)
 
-instance P.HasManaged (FirewallResource s) s Text where
+instance P.HasManaged (FirewallResource s) (TF.Attr s Text) where
     managed =
         lens (_managed :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _managed = a } :: FirewallResource s)
 
-instance P.HasParallelism (FirewallResource s) s Text where
+instance P.HasParallelism (FirewallResource s) (TF.Attr s Text) where
     parallelism =
         lens (_parallelism :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _parallelism = a } :: FirewallResource s)
 
-instance P.HasRule (FirewallResource s) s Text where
+instance P.HasRule (FirewallResource s) (TF.Attr s Text) where
     rule =
         lens (_rule :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _rule = a } :: FirewallResource s)
 
-instance P.HasComputedId (FirewallResource s) Text
+instance P.HasComputedId (FirewallResource s) (Text)
 
 firewallResource :: TF.Schema TF.Resource P.CloudStack (FirewallResource s)
 firewallResource =
@@ -529,112 +530,112 @@ data InstanceResource s = InstanceResource {
 
 instance TF.ToHCL (InstanceResource s) where
     toHCL InstanceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "affinity_group_ids" _affinity_group_ids
-        , TF.attribute "affinity_group_names" _affinity_group_names
-        , TF.attribute "display_name" _display_name
-        , TF.attribute "expunge" _expunge
-        , TF.attribute "group" _group
-        , TF.attribute "ip_address" _ip_address
-        , TF.attribute "keypair" _keypair
-        , TF.attribute "name" _name
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "project" _project
-        , TF.attribute "root_disk_size" _root_disk_size
-        , TF.attribute "security_group_ids" _security_group_ids
-        , TF.attribute "security_group_names" _security_group_names
-        , TF.attribute "service_offering" _service_offering
-        , TF.attribute "template" _template
-        , TF.attribute "user_data" _user_data
-        , TF.attribute "zone" _zone
+        [ TF.assign "affinity_group_ids" <$> TF.attribute _affinity_group_ids
+        , TF.assign "affinity_group_names" <$> TF.attribute _affinity_group_names
+        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "expunge" <$> TF.attribute _expunge
+        , TF.assign "group" <$> TF.attribute _group
+        , TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "keypair" <$> TF.attribute _keypair
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "root_disk_size" <$> TF.attribute _root_disk_size
+        , TF.assign "security_group_ids" <$> TF.attribute _security_group_ids
+        , TF.assign "security_group_names" <$> TF.attribute _security_group_names
+        , TF.assign "service_offering" <$> TF.attribute _service_offering
+        , TF.assign "template" <$> TF.attribute _template
+        , TF.assign "user_data" <$> TF.attribute _user_data
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasAffinityGroupIds (InstanceResource s) s Text where
+instance P.HasAffinityGroupIds (InstanceResource s) (TF.Attr s Text) where
     affinityGroupIds =
         lens (_affinity_group_ids :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _affinity_group_ids = a } :: InstanceResource s)
 
-instance P.HasAffinityGroupNames (InstanceResource s) s Text where
+instance P.HasAffinityGroupNames (InstanceResource s) (TF.Attr s Text) where
     affinityGroupNames =
         lens (_affinity_group_names :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _affinity_group_names = a } :: InstanceResource s)
 
-instance P.HasDisplayName (InstanceResource s) s Text where
+instance P.HasDisplayName (InstanceResource s) (TF.Attr s Text) where
     displayName =
         lens (_display_name :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: InstanceResource s)
 
-instance P.HasExpunge (InstanceResource s) s Text where
+instance P.HasExpunge (InstanceResource s) (TF.Attr s Text) where
     expunge =
         lens (_expunge :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _expunge = a } :: InstanceResource s)
 
-instance P.HasGroup (InstanceResource s) s Text where
+instance P.HasGroup (InstanceResource s) (TF.Attr s Text) where
     group =
         lens (_group :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _group = a } :: InstanceResource s)
 
-instance P.HasIpAddress (InstanceResource s) s Text where
+instance P.HasIpAddress (InstanceResource s) (TF.Attr s Text) where
     ipAddress =
         lens (_ip_address :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: InstanceResource s)
 
-instance P.HasKeypair (InstanceResource s) s Text where
+instance P.HasKeypair (InstanceResource s) (TF.Attr s Text) where
     keypair =
         lens (_keypair :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _keypair = a } :: InstanceResource s)
 
-instance P.HasName (InstanceResource s) s Text where
+instance P.HasName (InstanceResource s) (TF.Attr s Text) where
     name =
         lens (_name :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: InstanceResource s)
 
-instance P.HasNetworkId (InstanceResource s) s Text where
+instance P.HasNetworkId (InstanceResource s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: InstanceResource s)
 
-instance P.HasProject (InstanceResource s) s Text where
+instance P.HasProject (InstanceResource s) (TF.Attr s Text) where
     project =
         lens (_project :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: InstanceResource s)
 
-instance P.HasRootDiskSize (InstanceResource s) s Text where
+instance P.HasRootDiskSize (InstanceResource s) (TF.Attr s Text) where
     rootDiskSize =
         lens (_root_disk_size :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _root_disk_size = a } :: InstanceResource s)
 
-instance P.HasSecurityGroupIds (InstanceResource s) s Text where
+instance P.HasSecurityGroupIds (InstanceResource s) (TF.Attr s Text) where
     securityGroupIds =
         lens (_security_group_ids :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _security_group_ids = a } :: InstanceResource s)
 
-instance P.HasSecurityGroupNames (InstanceResource s) s Text where
+instance P.HasSecurityGroupNames (InstanceResource s) (TF.Attr s Text) where
     securityGroupNames =
         lens (_security_group_names :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _security_group_names = a } :: InstanceResource s)
 
-instance P.HasServiceOffering (InstanceResource s) s Text where
+instance P.HasServiceOffering (InstanceResource s) (TF.Attr s Text) where
     serviceOffering =
         lens (_service_offering :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _service_offering = a } :: InstanceResource s)
 
-instance P.HasTemplate (InstanceResource s) s Text where
+instance P.HasTemplate (InstanceResource s) (TF.Attr s Text) where
     template =
         lens (_template :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _template = a } :: InstanceResource s)
 
-instance P.HasUserData (InstanceResource s) s Text where
+instance P.HasUserData (InstanceResource s) (TF.Attr s Text) where
     userData =
         lens (_user_data :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _user_data = a } :: InstanceResource s)
 
-instance P.HasZone (InstanceResource s) s Text where
+instance P.HasZone (InstanceResource s) (TF.Attr s Text) where
     zone =
         lens (_zone :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: InstanceResource s)
 
-instance P.HasComputedDisplayName (InstanceResource s) Text
-instance P.HasComputedId (InstanceResource s) Text
+instance P.HasComputedDisplayName (InstanceResource s) (Text)
+instance P.HasComputedId (InstanceResource s) (Text)
 
 instanceResource :: TF.Schema TF.Resource P.CloudStack (InstanceResource s)
 instanceResource =
@@ -678,40 +679,40 @@ data IpaddressResource s = IpaddressResource {
 
 instance TF.ToHCL (IpaddressResource s) where
     toHCL IpaddressResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "is_portable" _is_portable
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "project" _project
-        , TF.attribute "vpc_id" _vpc_id
-        , TF.attribute "zone" _zone
+        [ TF.assign "is_portable" <$> TF.attribute _is_portable
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasIsPortable (IpaddressResource s) s Text where
+instance P.HasIsPortable (IpaddressResource s) (TF.Attr s Text) where
     isPortable =
         lens (_is_portable :: IpaddressResource s -> TF.Attr s Text)
              (\s a -> s { _is_portable = a } :: IpaddressResource s)
 
-instance P.HasNetworkId (IpaddressResource s) s Text where
+instance P.HasNetworkId (IpaddressResource s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: IpaddressResource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: IpaddressResource s)
 
-instance P.HasProject (IpaddressResource s) s Text where
+instance P.HasProject (IpaddressResource s) (TF.Attr s Text) where
     project =
         lens (_project :: IpaddressResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: IpaddressResource s)
 
-instance P.HasVpcId (IpaddressResource s) s Text where
+instance P.HasVpcId (IpaddressResource s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: IpaddressResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: IpaddressResource s)
 
-instance P.HasZone (IpaddressResource s) s Text where
+instance P.HasZone (IpaddressResource s) (TF.Attr s Text) where
     zone =
         lens (_zone :: IpaddressResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: IpaddressResource s)
 
-instance P.HasComputedId (IpaddressResource s) Text
-instance P.HasComputedIpAddress (IpaddressResource s) Text
+instance P.HasComputedId (IpaddressResource s) (Text)
+instance P.HasComputedIpAddress (IpaddressResource s) (Text)
 
 ipaddressResource :: TF.Schema TF.Resource P.CloudStack (IpaddressResource s)
 ipaddressResource =
@@ -753,70 +754,70 @@ data LoadbalancerRuleResource s = LoadbalancerRuleResource {
 
 instance TF.ToHCL (LoadbalancerRuleResource s) where
     toHCL LoadbalancerRuleResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "algorithm" _algorithm
-        , TF.attribute "description" _description
-        , TF.attribute "ip_address_id" _ip_address_id
-        , TF.attribute "member_ids" _member_ids
-        , TF.attribute "name" _name
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "private_port" _private_port
-        , TF.attribute "project" _project
-        , TF.attribute "protocol" _protocol
-        , TF.attribute "public_port" _public_port
+        [ TF.assign "algorithm" <$> TF.attribute _algorithm
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address_id" <$> TF.attribute _ip_address_id
+        , TF.assign "member_ids" <$> TF.attribute _member_ids
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "private_port" <$> TF.attribute _private_port
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "public_port" <$> TF.attribute _public_port
         ]
 
-instance P.HasAlgorithm (LoadbalancerRuleResource s) s Text where
+instance P.HasAlgorithm (LoadbalancerRuleResource s) (TF.Attr s Text) where
     algorithm =
         lens (_algorithm :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _algorithm = a } :: LoadbalancerRuleResource s)
 
-instance P.HasDescription (LoadbalancerRuleResource s) s Text where
+instance P.HasDescription (LoadbalancerRuleResource s) (TF.Attr s Text) where
     description =
         lens (_description :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: LoadbalancerRuleResource s)
 
-instance P.HasIpAddressId (LoadbalancerRuleResource s) s Text where
+instance P.HasIpAddressId (LoadbalancerRuleResource s) (TF.Attr s Text) where
     ipAddressId =
         lens (_ip_address_id :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address_id = a } :: LoadbalancerRuleResource s)
 
-instance P.HasMemberIds (LoadbalancerRuleResource s) s Text where
+instance P.HasMemberIds (LoadbalancerRuleResource s) (TF.Attr s Text) where
     memberIds =
         lens (_member_ids :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _member_ids = a } :: LoadbalancerRuleResource s)
 
-instance P.HasName (LoadbalancerRuleResource s) s Text where
+instance P.HasName (LoadbalancerRuleResource s) (TF.Attr s Text) where
     name =
         lens (_name :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LoadbalancerRuleResource s)
 
-instance P.HasNetworkId (LoadbalancerRuleResource s) s Text where
+instance P.HasNetworkId (LoadbalancerRuleResource s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: LoadbalancerRuleResource s)
 
-instance P.HasPrivatePort (LoadbalancerRuleResource s) s Text where
+instance P.HasPrivatePort (LoadbalancerRuleResource s) (TF.Attr s Text) where
     privatePort =
         lens (_private_port :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _private_port = a } :: LoadbalancerRuleResource s)
 
-instance P.HasProject (LoadbalancerRuleResource s) s Text where
+instance P.HasProject (LoadbalancerRuleResource s) (TF.Attr s Text) where
     project =
         lens (_project :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: LoadbalancerRuleResource s)
 
-instance P.HasProtocol (LoadbalancerRuleResource s) s Text where
+instance P.HasProtocol (LoadbalancerRuleResource s) (TF.Attr s Text) where
     protocol =
         lens (_protocol :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: LoadbalancerRuleResource s)
 
-instance P.HasPublicPort (LoadbalancerRuleResource s) s Text where
+instance P.HasPublicPort (LoadbalancerRuleResource s) (TF.Attr s Text) where
     publicPort =
         lens (_public_port :: LoadbalancerRuleResource s -> TF.Attr s Text)
              (\s a -> s { _public_port = a } :: LoadbalancerRuleResource s)
 
-instance P.HasComputedDescription (LoadbalancerRuleResource s) Text
-instance P.HasComputedId (LoadbalancerRuleResource s) Text
+instance P.HasComputedDescription (LoadbalancerRuleResource s) (Text)
+instance P.HasComputedId (LoadbalancerRuleResource s) (Text)
 
 loadbalancerRuleResource :: TF.Schema TF.Resource P.CloudStack (LoadbalancerRuleResource s)
 loadbalancerRuleResource =
@@ -851,33 +852,33 @@ data NetworkAclResource s = NetworkAclResource {
 
 instance TF.ToHCL (NetworkAclResource s) where
     toHCL NetworkAclResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "project" _project
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasDescription (NetworkAclResource s) s Text where
+instance P.HasDescription (NetworkAclResource s) (TF.Attr s Text) where
     description =
         lens (_description :: NetworkAclResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: NetworkAclResource s)
 
-instance P.HasName (NetworkAclResource s) s Text where
+instance P.HasName (NetworkAclResource s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkAclResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkAclResource s)
 
-instance P.HasProject (NetworkAclResource s) s Text where
+instance P.HasProject (NetworkAclResource s) (TF.Attr s Text) where
     project =
         lens (_project :: NetworkAclResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: NetworkAclResource s)
 
-instance P.HasVpcId (NetworkAclResource s) s Text where
+instance P.HasVpcId (NetworkAclResource s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: NetworkAclResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: NetworkAclResource s)
 
-instance P.HasComputedId (NetworkAclResource s) Text
+instance P.HasComputedId (NetworkAclResource s) (Text)
 
 networkAclResource :: TF.Schema TF.Resource P.CloudStack (NetworkAclResource s)
 networkAclResource =
@@ -908,39 +909,39 @@ data NetworkAclRuleResource s = NetworkAclRuleResource {
 
 instance TF.ToHCL (NetworkAclRuleResource s) where
     toHCL NetworkAclRuleResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "acl_id" _acl_id
-        , TF.attribute "managed" _managed
-        , TF.attribute "parallelism" _parallelism
-        , TF.attribute "project" _project
-        , TF.attribute "rule" _rule
+        [ TF.assign "acl_id" <$> TF.attribute _acl_id
+        , TF.assign "managed" <$> TF.attribute _managed
+        , TF.assign "parallelism" <$> TF.attribute _parallelism
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "rule" <$> TF.attribute _rule
         ]
 
-instance P.HasAclId (NetworkAclRuleResource s) s Text where
+instance P.HasAclId (NetworkAclRuleResource s) (TF.Attr s Text) where
     aclId =
         lens (_acl_id :: NetworkAclRuleResource s -> TF.Attr s Text)
              (\s a -> s { _acl_id = a } :: NetworkAclRuleResource s)
 
-instance P.HasManaged (NetworkAclRuleResource s) s Text where
+instance P.HasManaged (NetworkAclRuleResource s) (TF.Attr s Text) where
     managed =
         lens (_managed :: NetworkAclRuleResource s -> TF.Attr s Text)
              (\s a -> s { _managed = a } :: NetworkAclRuleResource s)
 
-instance P.HasParallelism (NetworkAclRuleResource s) s Text where
+instance P.HasParallelism (NetworkAclRuleResource s) (TF.Attr s Text) where
     parallelism =
         lens (_parallelism :: NetworkAclRuleResource s -> TF.Attr s Text)
              (\s a -> s { _parallelism = a } :: NetworkAclRuleResource s)
 
-instance P.HasProject (NetworkAclRuleResource s) s Text where
+instance P.HasProject (NetworkAclRuleResource s) (TF.Attr s Text) where
     project =
         lens (_project :: NetworkAclRuleResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: NetworkAclRuleResource s)
 
-instance P.HasRule (NetworkAclRuleResource s) s Text where
+instance P.HasRule (NetworkAclRuleResource s) (TF.Attr s Text) where
     rule =
         lens (_rule :: NetworkAclRuleResource s -> TF.Attr s Text)
              (\s a -> s { _rule = a } :: NetworkAclRuleResource s)
 
-instance P.HasComputedId (NetworkAclRuleResource s) Text
+instance P.HasComputedId (NetworkAclRuleResource s) (Text)
 
 networkAclRuleResource :: TF.Schema TF.Resource P.CloudStack (NetworkAclRuleResource s)
 networkAclRuleResource =
@@ -990,95 +991,95 @@ data NetworkResource s = NetworkResource {
 
 instance TF.ToHCL (NetworkResource s) where
     toHCL NetworkResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "acl_id" _acl_id
-        , TF.attribute "cidr" _cidr
-        , TF.attribute "display_text" _display_text
-        , TF.attribute "endip" _endip
-        , TF.attribute "gateway" _gateway
-        , TF.attribute "name" _name
-        , TF.attribute "network_domain" _network_domain
-        , TF.attribute "network_offering" _network_offering
-        , TF.attribute "project" _project
-        , TF.attribute "startip" _startip
-        , TF.attribute "tags" _tags
-        , TF.attribute "vlan" _vlan
-        , TF.attribute "vpc_id" _vpc_id
-        , TF.attribute "zone" _zone
+        [ TF.assign "acl_id" <$> TF.attribute _acl_id
+        , TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "display_text" <$> TF.attribute _display_text
+        , TF.assign "endip" <$> TF.attribute _endip
+        , TF.assign "gateway" <$> TF.attribute _gateway
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_domain" <$> TF.attribute _network_domain
+        , TF.assign "network_offering" <$> TF.attribute _network_offering
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "startip" <$> TF.attribute _startip
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vlan" <$> TF.attribute _vlan
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasAclId (NetworkResource s) s Text where
+instance P.HasAclId (NetworkResource s) (TF.Attr s Text) where
     aclId =
         lens (_acl_id :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _acl_id = a } :: NetworkResource s)
 
-instance P.HasCidr (NetworkResource s) s Text where
+instance P.HasCidr (NetworkResource s) (TF.Attr s Text) where
     cidr =
         lens (_cidr :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _cidr = a } :: NetworkResource s)
 
-instance P.HasDisplayText (NetworkResource s) s Text where
+instance P.HasDisplayText (NetworkResource s) (TF.Attr s Text) where
     displayText =
         lens (_display_text :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _display_text = a } :: NetworkResource s)
 
-instance P.HasEndip (NetworkResource s) s Text where
+instance P.HasEndip (NetworkResource s) (TF.Attr s Text) where
     endip =
         lens (_endip :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _endip = a } :: NetworkResource s)
 
-instance P.HasGateway (NetworkResource s) s Text where
+instance P.HasGateway (NetworkResource s) (TF.Attr s Text) where
     gateway =
         lens (_gateway :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _gateway = a } :: NetworkResource s)
 
-instance P.HasName (NetworkResource s) s Text where
+instance P.HasName (NetworkResource s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkResource s)
 
-instance P.HasNetworkDomain (NetworkResource s) s Text where
+instance P.HasNetworkDomain (NetworkResource s) (TF.Attr s Text) where
     networkDomain =
         lens (_network_domain :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _network_domain = a } :: NetworkResource s)
 
-instance P.HasNetworkOffering (NetworkResource s) s Text where
+instance P.HasNetworkOffering (NetworkResource s) (TF.Attr s Text) where
     networkOffering =
         lens (_network_offering :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _network_offering = a } :: NetworkResource s)
 
-instance P.HasProject (NetworkResource s) s Text where
+instance P.HasProject (NetworkResource s) (TF.Attr s Text) where
     project =
         lens (_project :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: NetworkResource s)
 
-instance P.HasStartip (NetworkResource s) s Text where
+instance P.HasStartip (NetworkResource s) (TF.Attr s Text) where
     startip =
         lens (_startip :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _startip = a } :: NetworkResource s)
 
-instance P.HasTags (NetworkResource s) s Text where
+instance P.HasTags (NetworkResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: NetworkResource s)
 
-instance P.HasVlan (NetworkResource s) s Text where
+instance P.HasVlan (NetworkResource s) (TF.Attr s Text) where
     vlan =
         lens (_vlan :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _vlan = a } :: NetworkResource s)
 
-instance P.HasVpcId (NetworkResource s) s Text where
+instance P.HasVpcId (NetworkResource s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: NetworkResource s)
 
-instance P.HasZone (NetworkResource s) s Text where
+instance P.HasZone (NetworkResource s) (TF.Attr s Text) where
     zone =
         lens (_zone :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: NetworkResource s)
 
-instance P.HasComputedDisplayText (NetworkResource s) Text
-instance P.HasComputedId (NetworkResource s) Text
-instance P.HasComputedNetworkDomain (NetworkResource s) Text
+instance P.HasComputedDisplayText (NetworkResource s) (Text)
+instance P.HasComputedId (NetworkResource s) (Text)
+instance P.HasComputedNetworkDomain (NetworkResource s) (Text)
 
 networkResource :: TF.Schema TF.Resource P.CloudStack (NetworkResource s)
 networkResource =
@@ -1115,28 +1116,28 @@ data NicResource s = NicResource {
 
 instance TF.ToHCL (NicResource s) where
     toHCL NicResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "ip_address" _ip_address
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "virtual_machine_id" _virtual_machine_id
+        [ TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
         ]
 
-instance P.HasIpAddress (NicResource s) s Text where
+instance P.HasIpAddress (NicResource s) (TF.Attr s Text) where
     ipAddress =
         lens (_ip_address :: NicResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: NicResource s)
 
-instance P.HasNetworkId (NicResource s) s Text where
+instance P.HasNetworkId (NicResource s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: NicResource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: NicResource s)
 
-instance P.HasVirtualMachineId (NicResource s) s Text where
+instance P.HasVirtualMachineId (NicResource s) (TF.Attr s Text) where
     virtualMachineId =
         lens (_virtual_machine_id :: NicResource s -> TF.Attr s Text)
              (\s a -> s { _virtual_machine_id = a } :: NicResource s)
 
-instance P.HasComputedId (NicResource s) Text
-instance P.HasComputedIpAddress (NicResource s) Text
+instance P.HasComputedId (NicResource s) (Text)
+instance P.HasComputedIpAddress (NicResource s) (Text)
 
 nicResource :: TF.Schema TF.Resource P.CloudStack (NicResource s)
 nicResource =
@@ -1164,34 +1165,34 @@ data PortForwardResource s = PortForwardResource {
 
 instance TF.ToHCL (PortForwardResource s) where
     toHCL PortForwardResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "forward" _forward
-        , TF.attribute "ip_address_id" _ip_address_id
-        , TF.attribute "managed" _managed
-        , TF.attribute "project" _project
+        [ TF.assign "forward" <$> TF.attribute _forward
+        , TF.assign "ip_address_id" <$> TF.attribute _ip_address_id
+        , TF.assign "managed" <$> TF.attribute _managed
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasForward (PortForwardResource s) s Text where
+instance P.HasForward (PortForwardResource s) (TF.Attr s Text) where
     forward =
         lens (_forward :: PortForwardResource s -> TF.Attr s Text)
              (\s a -> s { _forward = a } :: PortForwardResource s)
 
-instance P.HasIpAddressId (PortForwardResource s) s Text where
+instance P.HasIpAddressId (PortForwardResource s) (TF.Attr s Text) where
     ipAddressId =
         lens (_ip_address_id :: PortForwardResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address_id = a } :: PortForwardResource s)
 
-instance P.HasManaged (PortForwardResource s) s Text where
+instance P.HasManaged (PortForwardResource s) (TF.Attr s Text) where
     managed =
         lens (_managed :: PortForwardResource s -> TF.Attr s Text)
              (\s a -> s { _managed = a } :: PortForwardResource s)
 
-instance P.HasProject (PortForwardResource s) s Text where
+instance P.HasProject (PortForwardResource s) (TF.Attr s Text) where
     project =
         lens (_project :: PortForwardResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: PortForwardResource s)
 
-instance P.HasComputedId (PortForwardResource s) Text
-instance P.HasComputedVmGuestIp (PortForwardResource s) Text
+instance P.HasComputedId (PortForwardResource s) (Text)
+instance P.HasComputedVmGuestIp (PortForwardResource s) (Text)
 
 portForwardResource :: TF.Schema TF.Resource P.CloudStack (PortForwardResource s)
 portForwardResource =
@@ -1229,57 +1230,57 @@ data PrivateGatewayResource s = PrivateGatewayResource {
 
 instance TF.ToHCL (PrivateGatewayResource s) where
     toHCL PrivateGatewayResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "acl_id" _acl_id
-        , TF.attribute "gateway" _gateway
-        , TF.attribute "ip_address" _ip_address
-        , TF.attribute "netmask" _netmask
-        , TF.attribute "network_offering" _network_offering
-        , TF.attribute "physical_network_id" _physical_network_id
-        , TF.attribute "vlan" _vlan
-        , TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "acl_id" <$> TF.attribute _acl_id
+        , TF.assign "gateway" <$> TF.attribute _gateway
+        , TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "netmask" <$> TF.attribute _netmask
+        , TF.assign "network_offering" <$> TF.attribute _network_offering
+        , TF.assign "physical_network_id" <$> TF.attribute _physical_network_id
+        , TF.assign "vlan" <$> TF.attribute _vlan
+        , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasAclId (PrivateGatewayResource s) s Text where
+instance P.HasAclId (PrivateGatewayResource s) (TF.Attr s Text) where
     aclId =
         lens (_acl_id :: PrivateGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _acl_id = a } :: PrivateGatewayResource s)
 
-instance P.HasGateway (PrivateGatewayResource s) s Text where
+instance P.HasGateway (PrivateGatewayResource s) (TF.Attr s Text) where
     gateway =
         lens (_gateway :: PrivateGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _gateway = a } :: PrivateGatewayResource s)
 
-instance P.HasIpAddress (PrivateGatewayResource s) s Text where
+instance P.HasIpAddress (PrivateGatewayResource s) (TF.Attr s Text) where
     ipAddress =
         lens (_ip_address :: PrivateGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: PrivateGatewayResource s)
 
-instance P.HasNetmask (PrivateGatewayResource s) s Text where
+instance P.HasNetmask (PrivateGatewayResource s) (TF.Attr s Text) where
     netmask =
         lens (_netmask :: PrivateGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _netmask = a } :: PrivateGatewayResource s)
 
-instance P.HasNetworkOffering (PrivateGatewayResource s) s Text where
+instance P.HasNetworkOffering (PrivateGatewayResource s) (TF.Attr s Text) where
     networkOffering =
         lens (_network_offering :: PrivateGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _network_offering = a } :: PrivateGatewayResource s)
 
-instance P.HasPhysicalNetworkId (PrivateGatewayResource s) s Text where
+instance P.HasPhysicalNetworkId (PrivateGatewayResource s) (TF.Attr s Text) where
     physicalNetworkId =
         lens (_physical_network_id :: PrivateGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _physical_network_id = a } :: PrivateGatewayResource s)
 
-instance P.HasVlan (PrivateGatewayResource s) s Text where
+instance P.HasVlan (PrivateGatewayResource s) (TF.Attr s Text) where
     vlan =
         lens (_vlan :: PrivateGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _vlan = a } :: PrivateGatewayResource s)
 
-instance P.HasVpcId (PrivateGatewayResource s) s Text where
+instance P.HasVpcId (PrivateGatewayResource s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: PrivateGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: PrivateGatewayResource s)
 
-instance P.HasComputedId (PrivateGatewayResource s) Text
+instance P.HasComputedId (PrivateGatewayResource s) (Text)
 
 privateGatewayResource :: TF.Schema TF.Resource P.CloudStack (PrivateGatewayResource s)
 privateGatewayResource =
@@ -1310,27 +1311,27 @@ data SecondaryIpaddressResource s = SecondaryIpaddressResource {
 
 instance TF.ToHCL (SecondaryIpaddressResource s) where
     toHCL SecondaryIpaddressResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "ip_address" _ip_address
-        , TF.attribute "nic_id" _nic_id
-        , TF.attribute "virtual_machine_id" _virtual_machine_id
+        [ TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "nic_id" <$> TF.attribute _nic_id
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
         ]
 
-instance P.HasIpAddress (SecondaryIpaddressResource s) s Text where
+instance P.HasIpAddress (SecondaryIpaddressResource s) (TF.Attr s Text) where
     ipAddress =
         lens (_ip_address :: SecondaryIpaddressResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: SecondaryIpaddressResource s)
 
-instance P.HasNicId (SecondaryIpaddressResource s) s Text where
+instance P.HasNicId (SecondaryIpaddressResource s) (TF.Attr s Text) where
     nicId =
         lens (_nic_id :: SecondaryIpaddressResource s -> TF.Attr s Text)
              (\s a -> s { _nic_id = a } :: SecondaryIpaddressResource s)
 
-instance P.HasVirtualMachineId (SecondaryIpaddressResource s) s Text where
+instance P.HasVirtualMachineId (SecondaryIpaddressResource s) (TF.Attr s Text) where
     virtualMachineId =
         lens (_virtual_machine_id :: SecondaryIpaddressResource s -> TF.Attr s Text)
              (\s a -> s { _virtual_machine_id = a } :: SecondaryIpaddressResource s)
 
-instance P.HasComputedId (SecondaryIpaddressResource s) Text
+instance P.HasComputedId (SecondaryIpaddressResource s) (Text)
 
 secondaryIpaddressResource :: TF.Schema TF.Resource P.CloudStack (SecondaryIpaddressResource s)
 secondaryIpaddressResource =
@@ -1356,27 +1357,27 @@ data SecurityGroupResource s = SecurityGroupResource {
 
 instance TF.ToHCL (SecurityGroupResource s) where
     toHCL SecurityGroupResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "project" _project
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasDescription (SecurityGroupResource s) s Text where
+instance P.HasDescription (SecurityGroupResource s) (TF.Attr s Text) where
     description =
         lens (_description :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: SecurityGroupResource s)
 
-instance P.HasName (SecurityGroupResource s) s Text where
+instance P.HasName (SecurityGroupResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SecurityGroupResource s)
 
-instance P.HasProject (SecurityGroupResource s) s Text where
+instance P.HasProject (SecurityGroupResource s) (TF.Attr s Text) where
     project =
         lens (_project :: SecurityGroupResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: SecurityGroupResource s)
 
-instance P.HasComputedId (SecurityGroupResource s) Text
+instance P.HasComputedId (SecurityGroupResource s) (Text)
 
 securityGroupResource :: TF.Schema TF.Resource P.CloudStack (SecurityGroupResource s)
 securityGroupResource =
@@ -1405,33 +1406,33 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource {
 
 instance TF.ToHCL (SecurityGroupRuleResource s) where
     toHCL SecurityGroupRuleResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "parallelism" _parallelism
-        , TF.attribute "project" _project
-        , TF.attribute "rule" _rule
-        , TF.attribute "security_group_id" _security_group_id
+        [ TF.assign "parallelism" <$> TF.attribute _parallelism
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "rule" <$> TF.attribute _rule
+        , TF.assign "security_group_id" <$> TF.attribute _security_group_id
         ]
 
-instance P.HasParallelism (SecurityGroupRuleResource s) s Text where
+instance P.HasParallelism (SecurityGroupRuleResource s) (TF.Attr s Text) where
     parallelism =
         lens (_parallelism :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _parallelism = a } :: SecurityGroupRuleResource s)
 
-instance P.HasProject (SecurityGroupRuleResource s) s Text where
+instance P.HasProject (SecurityGroupRuleResource s) (TF.Attr s Text) where
     project =
         lens (_project :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: SecurityGroupRuleResource s)
 
-instance P.HasRule (SecurityGroupRuleResource s) s Text where
+instance P.HasRule (SecurityGroupRuleResource s) (TF.Attr s Text) where
     rule =
         lens (_rule :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _rule = a } :: SecurityGroupRuleResource s)
 
-instance P.HasSecurityGroupId (SecurityGroupRuleResource s) s Text where
+instance P.HasSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s Text) where
     securityGroupId =
         lens (_security_group_id :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _security_group_id = a } :: SecurityGroupRuleResource s)
 
-instance P.HasComputedId (SecurityGroupRuleResource s) Text
+instance P.HasComputedId (SecurityGroupRuleResource s) (Text)
 
 securityGroupRuleResource :: TF.Schema TF.Resource P.CloudStack (SecurityGroupRuleResource s)
 securityGroupRuleResource =
@@ -1458,29 +1459,29 @@ data SshKeypairResource s = SshKeypairResource {
 
 instance TF.ToHCL (SshKeypairResource s) where
     toHCL SshKeypairResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "project" _project
-        , TF.attribute "public_key" _public_key
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "public_key" <$> TF.attribute _public_key
         ]
 
-instance P.HasName (SshKeypairResource s) s Text where
+instance P.HasName (SshKeypairResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SshKeypairResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SshKeypairResource s)
 
-instance P.HasProject (SshKeypairResource s) s Text where
+instance P.HasProject (SshKeypairResource s) (TF.Attr s Text) where
     project =
         lens (_project :: SshKeypairResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: SshKeypairResource s)
 
-instance P.HasPublicKey (SshKeypairResource s) s Text where
+instance P.HasPublicKey (SshKeypairResource s) (TF.Attr s Text) where
     publicKey =
         lens (_public_key :: SshKeypairResource s -> TF.Attr s Text)
              (\s a -> s { _public_key = a } :: SshKeypairResource s)
 
-instance P.HasComputedFingerprint (SshKeypairResource s) Text
-instance P.HasComputedId (SshKeypairResource s) Text
-instance P.HasComputedPrivateKey (SshKeypairResource s) Text
+instance P.HasComputedFingerprint (SshKeypairResource s) (Text)
+instance P.HasComputedId (SshKeypairResource s) (Text)
+instance P.HasComputedPrivateKey (SshKeypairResource s) (Text)
 
 sshKeypairResource :: TF.Schema TF.Resource P.CloudStack (SshKeypairResource s)
 sshKeypairResource =
@@ -1508,34 +1509,34 @@ data StaticNatResource s = StaticNatResource {
 
 instance TF.ToHCL (StaticNatResource s) where
     toHCL StaticNatResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "ip_address_id" _ip_address_id
-        , TF.attribute "project" _project
-        , TF.attribute "virtual_machine_id" _virtual_machine_id
-        , TF.attribute "vm_guest_ip" _vm_guest_ip
+        [ TF.assign "ip_address_id" <$> TF.attribute _ip_address_id
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
+        , TF.assign "vm_guest_ip" <$> TF.attribute _vm_guest_ip
         ]
 
-instance P.HasIpAddressId (StaticNatResource s) s Text where
+instance P.HasIpAddressId (StaticNatResource s) (TF.Attr s Text) where
     ipAddressId =
         lens (_ip_address_id :: StaticNatResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address_id = a } :: StaticNatResource s)
 
-instance P.HasProject (StaticNatResource s) s Text where
+instance P.HasProject (StaticNatResource s) (TF.Attr s Text) where
     project =
         lens (_project :: StaticNatResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: StaticNatResource s)
 
-instance P.HasVirtualMachineId (StaticNatResource s) s Text where
+instance P.HasVirtualMachineId (StaticNatResource s) (TF.Attr s Text) where
     virtualMachineId =
         lens (_virtual_machine_id :: StaticNatResource s -> TF.Attr s Text)
              (\s a -> s { _virtual_machine_id = a } :: StaticNatResource s)
 
-instance P.HasVmGuestIp (StaticNatResource s) s Text where
+instance P.HasVmGuestIp (StaticNatResource s) (TF.Attr s Text) where
     vmGuestIp =
         lens (_vm_guest_ip :: StaticNatResource s -> TF.Attr s Text)
              (\s a -> s { _vm_guest_ip = a } :: StaticNatResource s)
 
-instance P.HasComputedId (StaticNatResource s) Text
-instance P.HasComputedVmGuestIp (StaticNatResource s) Text
+instance P.HasComputedId (StaticNatResource s) (Text)
+instance P.HasComputedVmGuestIp (StaticNatResource s) (Text)
 
 staticNatResource :: TF.Schema TF.Resource P.CloudStack (StaticNatResource s)
 staticNatResource =
@@ -1560,21 +1561,21 @@ data StaticRouteResource s = StaticRouteResource {
 
 instance TF.ToHCL (StaticRouteResource s) where
     toHCL StaticRouteResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "cidr" _cidr
-        , TF.attribute "gateway_id" _gateway_id
+        [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "gateway_id" <$> TF.attribute _gateway_id
         ]
 
-instance P.HasCidr (StaticRouteResource s) s Text where
+instance P.HasCidr (StaticRouteResource s) (TF.Attr s Text) where
     cidr =
         lens (_cidr :: StaticRouteResource s -> TF.Attr s Text)
              (\s a -> s { _cidr = a } :: StaticRouteResource s)
 
-instance P.HasGatewayId (StaticRouteResource s) s Text where
+instance P.HasGatewayId (StaticRouteResource s) (TF.Attr s Text) where
     gatewayId =
         lens (_gateway_id :: StaticRouteResource s -> TF.Attr s Text)
              (\s a -> s { _gateway_id = a } :: StaticRouteResource s)
 
-instance P.HasComputedId (StaticRouteResource s) Text
+instance P.HasComputedId (StaticRouteResource s) (Text)
 
 staticRouteResource :: TF.Schema TF.Resource P.CloudStack (StaticRouteResource s)
 staticRouteResource =
@@ -1621,100 +1622,100 @@ data TemplateResource s = TemplateResource {
 
 instance TF.ToHCL (TemplateResource s) where
     toHCL TemplateResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "display_text" _display_text
-        , TF.attribute "format" _format
-        , TF.attribute "hypervisor" _hypervisor
-        , TF.attribute "is_dynamically_scalable" _is_dynamically_scalable
-        , TF.attribute "is_extractable" _is_extractable
-        , TF.attribute "is_featured" _is_featured
-        , TF.attribute "is_public" _is_public
-        , TF.attribute "is_ready_timeout" _is_ready_timeout
-        , TF.attribute "name" _name
-        , TF.attribute "os_type" _os_type
-        , TF.attribute "password_enabled" _password_enabled
-        , TF.attribute "project" _project
-        , TF.attribute "url" _url
-        , TF.attribute "zone" _zone
+        [ TF.assign "display_text" <$> TF.attribute _display_text
+        , TF.assign "format" <$> TF.attribute _format
+        , TF.assign "hypervisor" <$> TF.attribute _hypervisor
+        , TF.assign "is_dynamically_scalable" <$> TF.attribute _is_dynamically_scalable
+        , TF.assign "is_extractable" <$> TF.attribute _is_extractable
+        , TF.assign "is_featured" <$> TF.attribute _is_featured
+        , TF.assign "is_public" <$> TF.attribute _is_public
+        , TF.assign "is_ready_timeout" <$> TF.attribute _is_ready_timeout
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "os_type" <$> TF.attribute _os_type
+        , TF.assign "password_enabled" <$> TF.attribute _password_enabled
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "url" <$> TF.attribute _url
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasDisplayText (TemplateResource s) s Text where
+instance P.HasDisplayText (TemplateResource s) (TF.Attr s Text) where
     displayText =
         lens (_display_text :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _display_text = a } :: TemplateResource s)
 
-instance P.HasFormat (TemplateResource s) s Text where
+instance P.HasFormat (TemplateResource s) (TF.Attr s Text) where
     format =
         lens (_format :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _format = a } :: TemplateResource s)
 
-instance P.HasHypervisor (TemplateResource s) s Text where
+instance P.HasHypervisor (TemplateResource s) (TF.Attr s Text) where
     hypervisor =
         lens (_hypervisor :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _hypervisor = a } :: TemplateResource s)
 
-instance P.HasIsDynamicallyScalable (TemplateResource s) s Text where
+instance P.HasIsDynamicallyScalable (TemplateResource s) (TF.Attr s Text) where
     isDynamicallyScalable =
         lens (_is_dynamically_scalable :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _is_dynamically_scalable = a } :: TemplateResource s)
 
-instance P.HasIsExtractable (TemplateResource s) s Text where
+instance P.HasIsExtractable (TemplateResource s) (TF.Attr s Text) where
     isExtractable =
         lens (_is_extractable :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _is_extractable = a } :: TemplateResource s)
 
-instance P.HasIsFeatured (TemplateResource s) s Text where
+instance P.HasIsFeatured (TemplateResource s) (TF.Attr s Text) where
     isFeatured =
         lens (_is_featured :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _is_featured = a } :: TemplateResource s)
 
-instance P.HasIsPublic (TemplateResource s) s Text where
+instance P.HasIsPublic (TemplateResource s) (TF.Attr s Text) where
     isPublic =
         lens (_is_public :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _is_public = a } :: TemplateResource s)
 
-instance P.HasIsReadyTimeout (TemplateResource s) s Text where
+instance P.HasIsReadyTimeout (TemplateResource s) (TF.Attr s Text) where
     isReadyTimeout =
         lens (_is_ready_timeout :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _is_ready_timeout = a } :: TemplateResource s)
 
-instance P.HasName (TemplateResource s) s Text where
+instance P.HasName (TemplateResource s) (TF.Attr s Text) where
     name =
         lens (_name :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TemplateResource s)
 
-instance P.HasOsType (TemplateResource s) s Text where
+instance P.HasOsType (TemplateResource s) (TF.Attr s Text) where
     osType =
         lens (_os_type :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _os_type = a } :: TemplateResource s)
 
-instance P.HasPasswordEnabled (TemplateResource s) s Text where
+instance P.HasPasswordEnabled (TemplateResource s) (TF.Attr s Text) where
     passwordEnabled =
         lens (_password_enabled :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _password_enabled = a } :: TemplateResource s)
 
-instance P.HasProject (TemplateResource s) s Text where
+instance P.HasProject (TemplateResource s) (TF.Attr s Text) where
     project =
         lens (_project :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: TemplateResource s)
 
-instance P.HasUrl (TemplateResource s) s Text where
+instance P.HasUrl (TemplateResource s) (TF.Attr s Text) where
     url =
         lens (_url :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _url = a } :: TemplateResource s)
 
-instance P.HasZone (TemplateResource s) s Text where
+instance P.HasZone (TemplateResource s) (TF.Attr s Text) where
     zone =
         lens (_zone :: TemplateResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: TemplateResource s)
 
-instance P.HasComputedDisplayText (TemplateResource s) Text
-instance P.HasComputedId (TemplateResource s) Text
-instance P.HasComputedIsDynamicallyScalable (TemplateResource s) Text
-instance P.HasComputedIsExtractable (TemplateResource s) Text
-instance P.HasComputedIsFeatured (TemplateResource s) Text
-instance P.HasComputedIsPublic (TemplateResource s) Text
-instance P.HasComputedIsReady (TemplateResource s) Text
-instance P.HasComputedPasswordEnabled (TemplateResource s) Text
+instance P.HasComputedDisplayText (TemplateResource s) (Text)
+instance P.HasComputedId (TemplateResource s) (Text)
+instance P.HasComputedIsDynamicallyScalable (TemplateResource s) (Text)
+instance P.HasComputedIsExtractable (TemplateResource s) (Text)
+instance P.HasComputedIsFeatured (TemplateResource s) (Text)
+instance P.HasComputedIsPublic (TemplateResource s) (Text)
+instance P.HasComputedIsReady (TemplateResource s) (Text)
+instance P.HasComputedPasswordEnabled (TemplateResource s) (Text)
 
 templateResource :: TF.Schema TF.Resource P.CloudStack (TemplateResource s)
 templateResource =
@@ -1759,53 +1760,53 @@ data VpcResource s = VpcResource {
 
 instance TF.ToHCL (VpcResource s) where
     toHCL VpcResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "cidr" _cidr
-        , TF.attribute "display_text" _display_text
-        , TF.attribute "name" _name
-        , TF.attribute "network_domain" _network_domain
-        , TF.attribute "project" _project
-        , TF.attribute "vpc_offering" _vpc_offering
-        , TF.attribute "zone" _zone
+        [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "display_text" <$> TF.attribute _display_text
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_domain" <$> TF.attribute _network_domain
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "vpc_offering" <$> TF.attribute _vpc_offering
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasCidr (VpcResource s) s Text where
+instance P.HasCidr (VpcResource s) (TF.Attr s Text) where
     cidr =
         lens (_cidr :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _cidr = a } :: VpcResource s)
 
-instance P.HasDisplayText (VpcResource s) s Text where
+instance P.HasDisplayText (VpcResource s) (TF.Attr s Text) where
     displayText =
         lens (_display_text :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _display_text = a } :: VpcResource s)
 
-instance P.HasName (VpcResource s) s Text where
+instance P.HasName (VpcResource s) (TF.Attr s Text) where
     name =
         lens (_name :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VpcResource s)
 
-instance P.HasNetworkDomain (VpcResource s) s Text where
+instance P.HasNetworkDomain (VpcResource s) (TF.Attr s Text) where
     networkDomain =
         lens (_network_domain :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _network_domain = a } :: VpcResource s)
 
-instance P.HasProject (VpcResource s) s Text where
+instance P.HasProject (VpcResource s) (TF.Attr s Text) where
     project =
         lens (_project :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: VpcResource s)
 
-instance P.HasVpcOffering (VpcResource s) s Text where
+instance P.HasVpcOffering (VpcResource s) (TF.Attr s Text) where
     vpcOffering =
         lens (_vpc_offering :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_offering = a } :: VpcResource s)
 
-instance P.HasZone (VpcResource s) s Text where
+instance P.HasZone (VpcResource s) (TF.Attr s Text) where
     zone =
         lens (_zone :: VpcResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: VpcResource s)
 
-instance P.HasComputedDisplayText (VpcResource s) Text
-instance P.HasComputedId (VpcResource s) Text
-instance P.HasComputedSourceNatIp (VpcResource s) Text
+instance P.HasComputedDisplayText (VpcResource s) (Text)
+instance P.HasComputedId (VpcResource s) (Text)
+instance P.HasComputedSourceNatIp (VpcResource s) (Text)
 
 vpcResource :: TF.Schema TF.Resource P.CloudStack (VpcResource s)
 vpcResource =
@@ -1833,21 +1834,21 @@ data VpnConnectionResource s = VpnConnectionResource {
 
 instance TF.ToHCL (VpnConnectionResource s) where
     toHCL VpnConnectionResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "customer_gateway_id" _customer_gateway_id
-        , TF.attribute "vpn_gateway_id" _vpn_gateway_id
+        [ TF.assign "customer_gateway_id" <$> TF.attribute _customer_gateway_id
+        , TF.assign "vpn_gateway_id" <$> TF.attribute _vpn_gateway_id
         ]
 
-instance P.HasCustomerGatewayId (VpnConnectionResource s) s Text where
+instance P.HasCustomerGatewayId (VpnConnectionResource s) (TF.Attr s Text) where
     customerGatewayId =
         lens (_customer_gateway_id :: VpnConnectionResource s -> TF.Attr s Text)
              (\s a -> s { _customer_gateway_id = a } :: VpnConnectionResource s)
 
-instance P.HasVpnGatewayId (VpnConnectionResource s) s Text where
+instance P.HasVpnGatewayId (VpnConnectionResource s) (TF.Attr s Text) where
     vpnGatewayId =
         lens (_vpn_gateway_id :: VpnConnectionResource s -> TF.Attr s Text)
              (\s a -> s { _vpn_gateway_id = a } :: VpnConnectionResource s)
 
-instance P.HasComputedId (VpnConnectionResource s) Text
+instance P.HasComputedId (VpnConnectionResource s) (Text)
 
 vpnConnectionResource :: TF.Schema TF.Resource P.CloudStack (VpnConnectionResource s)
 vpnConnectionResource =
@@ -1886,72 +1887,72 @@ data VpnCustomerGatewayResource s = VpnCustomerGatewayResource {
 
 instance TF.ToHCL (VpnCustomerGatewayResource s) where
     toHCL VpnCustomerGatewayResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "cidr" _cidr
-        , TF.attribute "dpd" _dpd
-        , TF.attribute "esp_lifetime" _esp_lifetime
-        , TF.attribute "esp_policy" _esp_policy
-        , TF.attribute "gateway" _gateway
-        , TF.attribute "ike_lifetime" _ike_lifetime
-        , TF.attribute "ike_policy" _ike_policy
-        , TF.attribute "ipsec_psk" _ipsec_psk
-        , TF.attribute "name" _name
-        , TF.attribute "project" _project
+        [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "dpd" <$> TF.attribute _dpd
+        , TF.assign "esp_lifetime" <$> TF.attribute _esp_lifetime
+        , TF.assign "esp_policy" <$> TF.attribute _esp_policy
+        , TF.assign "gateway" <$> TF.attribute _gateway
+        , TF.assign "ike_lifetime" <$> TF.attribute _ike_lifetime
+        , TF.assign "ike_policy" <$> TF.attribute _ike_policy
+        , TF.assign "ipsec_psk" <$> TF.attribute _ipsec_psk
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
-instance P.HasCidr (VpnCustomerGatewayResource s) s Text where
+instance P.HasCidr (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     cidr =
         lens (_cidr :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _cidr = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasDpd (VpnCustomerGatewayResource s) s Text where
+instance P.HasDpd (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     dpd =
         lens (_dpd :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _dpd = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasEspLifetime (VpnCustomerGatewayResource s) s Text where
+instance P.HasEspLifetime (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     espLifetime =
         lens (_esp_lifetime :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _esp_lifetime = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasEspPolicy (VpnCustomerGatewayResource s) s Text where
+instance P.HasEspPolicy (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     espPolicy =
         lens (_esp_policy :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _esp_policy = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasGateway (VpnCustomerGatewayResource s) s Text where
+instance P.HasGateway (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     gateway =
         lens (_gateway :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _gateway = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasIkeLifetime (VpnCustomerGatewayResource s) s Text where
+instance P.HasIkeLifetime (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     ikeLifetime =
         lens (_ike_lifetime :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _ike_lifetime = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasIkePolicy (VpnCustomerGatewayResource s) s Text where
+instance P.HasIkePolicy (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     ikePolicy =
         lens (_ike_policy :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _ike_policy = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasIpsecPsk (VpnCustomerGatewayResource s) s Text where
+instance P.HasIpsecPsk (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     ipsecPsk =
         lens (_ipsec_psk :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _ipsec_psk = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasName (VpnCustomerGatewayResource s) s Text where
+instance P.HasName (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     name =
         lens (_name :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasProject (VpnCustomerGatewayResource s) s Text where
+instance P.HasProject (VpnCustomerGatewayResource s) (TF.Attr s Text) where
     project =
         lens (_project :: VpnCustomerGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _project = a } :: VpnCustomerGatewayResource s)
 
-instance P.HasComputedDpd (VpnCustomerGatewayResource s) Text
-instance P.HasComputedEspLifetime (VpnCustomerGatewayResource s) Text
-instance P.HasComputedId (VpnCustomerGatewayResource s) Text
-instance P.HasComputedIkeLifetime (VpnCustomerGatewayResource s) Text
+instance P.HasComputedDpd (VpnCustomerGatewayResource s) (Text)
+instance P.HasComputedEspLifetime (VpnCustomerGatewayResource s) (Text)
+instance P.HasComputedId (VpnCustomerGatewayResource s) (Text)
+instance P.HasComputedIkeLifetime (VpnCustomerGatewayResource s) (Text)
 
 vpnCustomerGatewayResource :: TF.Schema TF.Resource P.CloudStack (VpnCustomerGatewayResource s)
 vpnCustomerGatewayResource =
@@ -1980,16 +1981,16 @@ data VpnGatewayResource s = VpnGatewayResource {
 
 instance TF.ToHCL (VpnGatewayResource s) where
     toHCL VpnGatewayResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "vpc_id" _vpc_id
+        [ TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasVpcId (VpnGatewayResource s) s Text where
+instance P.HasVpcId (VpnGatewayResource s) (TF.Attr s Text) where
     vpcId =
         lens (_vpc_id :: VpnGatewayResource s -> TF.Attr s Text)
              (\s a -> s { _vpc_id = a } :: VpnGatewayResource s)
 
-instance P.HasComputedId (VpnGatewayResource s) Text
-instance P.HasComputedPublicIp (VpnGatewayResource s) Text
+instance P.HasComputedId (VpnGatewayResource s) (Text)
+instance P.HasComputedPublicIp (VpnGatewayResource s) (Text)
 
 vpnGatewayResource :: TF.Schema TF.Resource P.CloudStack (VpnGatewayResource s)
 vpnGatewayResource =

@@ -55,8 +55,9 @@ module Terrafomo.Vault.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -88,21 +89,21 @@ data ApproleAuthBackendRoleData s = ApproleAuthBackendRoleData {
 
 instance TF.ToHCL (ApproleAuthBackendRoleData s) where
     toHCL ApproleAuthBackendRoleData{..} = TF.inline $ catMaybes
-        [ TF.attribute "backend" _backend
-        , TF.attribute "role_name" _role_name
+        [ TF.assign "backend" <$> TF.attribute _backend
+        , TF.assign "role_name" <$> TF.attribute _role_name
         ]
 
-instance P.HasBackend (ApproleAuthBackendRoleData s) s Text where
+instance P.HasBackend (ApproleAuthBackendRoleData s) (TF.Attr s Text) where
     backend =
         lens (_backend :: ApproleAuthBackendRoleData s -> TF.Attr s Text)
              (\s a -> s { _backend = a } :: ApproleAuthBackendRoleData s)
 
-instance P.HasRoleName (ApproleAuthBackendRoleData s) s Text where
+instance P.HasRoleName (ApproleAuthBackendRoleData s) (TF.Attr s Text) where
     roleName =
         lens (_role_name :: ApproleAuthBackendRoleData s -> TF.Attr s Text)
              (\s a -> s { _role_name = a } :: ApproleAuthBackendRoleData s)
 
-instance P.HasComputedRoleId (ApproleAuthBackendRoleData s) Text
+instance P.HasComputedRoleId (ApproleAuthBackendRoleData s) (Text)
 
 approleAuthBackendRoleData :: TF.Schema TF.DataSource P.Vault (ApproleAuthBackendRoleData s)
 approleAuthBackendRoleData =
@@ -132,33 +133,33 @@ data AwsAccessCredentialsData s = AwsAccessCredentialsData {
 
 instance TF.ToHCL (AwsAccessCredentialsData s) where
     toHCL AwsAccessCredentialsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "backend" _backend
-        , TF.attribute "role" _role
-        , TF.attribute "type" _type'
+        [ TF.assign "backend" <$> TF.attribute _backend
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasBackend (AwsAccessCredentialsData s) s Text where
+instance P.HasBackend (AwsAccessCredentialsData s) (TF.Attr s Text) where
     backend =
         lens (_backend :: AwsAccessCredentialsData s -> TF.Attr s Text)
              (\s a -> s { _backend = a } :: AwsAccessCredentialsData s)
 
-instance P.HasRole (AwsAccessCredentialsData s) s Text where
+instance P.HasRole (AwsAccessCredentialsData s) (TF.Attr s Text) where
     role =
         lens (_role :: AwsAccessCredentialsData s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: AwsAccessCredentialsData s)
 
-instance P.HasType' (AwsAccessCredentialsData s) s Text where
+instance P.HasType' (AwsAccessCredentialsData s) (TF.Attr s Text) where
     type' =
         lens (_type' :: AwsAccessCredentialsData s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
 
-instance P.HasComputedAccessKey (AwsAccessCredentialsData s) Text
-instance P.HasComputedLeaseDuration (AwsAccessCredentialsData s) Text
-instance P.HasComputedLeaseId (AwsAccessCredentialsData s) Text
-instance P.HasComputedLeaseRenewable (AwsAccessCredentialsData s) Text
-instance P.HasComputedLeaseStartTime (AwsAccessCredentialsData s) Text
-instance P.HasComputedSecretKey (AwsAccessCredentialsData s) Text
-instance P.HasComputedSecurityToken (AwsAccessCredentialsData s) Text
+instance P.HasComputedAccessKey (AwsAccessCredentialsData s) (Text)
+instance P.HasComputedLeaseDuration (AwsAccessCredentialsData s) (Text)
+instance P.HasComputedLeaseId (AwsAccessCredentialsData s) (Text)
+instance P.HasComputedLeaseRenewable (AwsAccessCredentialsData s) (Text)
+instance P.HasComputedLeaseStartTime (AwsAccessCredentialsData s) (Text)
+instance P.HasComputedSecretKey (AwsAccessCredentialsData s) (Text)
+instance P.HasComputedSecurityToken (AwsAccessCredentialsData s) (Text)
 
 awsAccessCredentialsData :: TF.Schema TF.DataSource P.Vault (AwsAccessCredentialsData s)
 awsAccessCredentialsData =
@@ -188,20 +189,20 @@ data GenericSecretData s = GenericSecretData {
 
 instance TF.ToHCL (GenericSecretData s) where
     toHCL GenericSecretData{..} = TF.inline $ catMaybes
-        [ TF.attribute "path" _path
+        [ TF.assign "path" <$> TF.attribute _path
         ]
 
-instance P.HasPath (GenericSecretData s) s Text where
+instance P.HasPath (GenericSecretData s) (TF.Attr s Text) where
     path =
         lens (_path :: GenericSecretData s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: GenericSecretData s)
 
-instance P.HasComputedData' (GenericSecretData s) Text
-instance P.HasComputedDataJson (GenericSecretData s) Text
-instance P.HasComputedLeaseDuration (GenericSecretData s) Text
-instance P.HasComputedLeaseId (GenericSecretData s) Text
-instance P.HasComputedLeaseRenewable (GenericSecretData s) Text
-instance P.HasComputedLeaseStartTime (GenericSecretData s) Text
+instance P.HasComputedData' (GenericSecretData s) (Text)
+instance P.HasComputedDataJson (GenericSecretData s) (Text)
+instance P.HasComputedLeaseDuration (GenericSecretData s) (Text)
+instance P.HasComputedLeaseId (GenericSecretData s) (Text)
+instance P.HasComputedLeaseRenewable (GenericSecretData s) (Text)
+instance P.HasComputedLeaseStartTime (GenericSecretData s) (Text)
 
 genericSecretData :: TF.Schema TF.DataSource P.Vault (GenericSecretData s)
 genericSecretData =

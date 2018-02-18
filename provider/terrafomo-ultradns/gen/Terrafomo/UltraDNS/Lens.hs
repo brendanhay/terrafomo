@@ -61,124 +61,124 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasActOnProbes a s b | a -> s b where
-    actOnProbes :: Lens' a (TF.Attr s b)
+class HasActOnProbes a b | a -> b where
+    actOnProbes :: Lens' a b
 
-instance HasActOnProbes a s b => HasActOnProbes (TF.Schema l p a) s b where
+instance HasActOnProbes a b => HasActOnProbes (TF.Schema l p a) b where
     actOnProbes = TF.configuration . actOnProbes
 
-class HasAgents a s b | a -> s b where
-    agents :: Lens' a (TF.Attr s b)
+class HasAgents a b | a -> b where
+    agents :: Lens' a b
 
-instance HasAgents a s b => HasAgents (TF.Schema l p a) s b where
+instance HasAgents a b => HasAgents (TF.Schema l p a) b where
     agents = TF.configuration . agents
 
-class HasBackupRecordFailoverDelay a s b | a -> s b where
-    backupRecordFailoverDelay :: Lens' a (TF.Attr s b)
+class HasBackupRecordFailoverDelay a b | a -> b where
+    backupRecordFailoverDelay :: Lens' a b
 
-instance HasBackupRecordFailoverDelay a s b => HasBackupRecordFailoverDelay (TF.Schema l p a) s b where
+instance HasBackupRecordFailoverDelay a b => HasBackupRecordFailoverDelay (TF.Schema l p a) b where
     backupRecordFailoverDelay = TF.configuration . backupRecordFailoverDelay
 
-class HasBackupRecordRdata a s b | a -> s b where
-    backupRecordRdata :: Lens' a (TF.Attr s b)
+class HasBackupRecordRdata a b | a -> b where
+    backupRecordRdata :: Lens' a b
 
-instance HasBackupRecordRdata a s b => HasBackupRecordRdata (TF.Schema l p a) s b where
+instance HasBackupRecordRdata a b => HasBackupRecordRdata (TF.Schema l p a) b where
     backupRecordRdata = TF.configuration . backupRecordRdata
 
-class HasConflictResolve a s b | a -> s b where
-    conflictResolve :: Lens' a (TF.Attr s b)
+class HasConflictResolve a b | a -> b where
+    conflictResolve :: Lens' a b
 
-instance HasConflictResolve a s b => HasConflictResolve (TF.Schema l p a) s b where
+instance HasConflictResolve a b => HasConflictResolve (TF.Schema l p a) b where
     conflictResolve = TF.configuration . conflictResolve
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasHttpProbe a s b | a -> s b where
-    httpProbe :: Lens' a (TF.Attr s b)
+class HasHttpProbe a b | a -> b where
+    httpProbe :: Lens' a b
 
-instance HasHttpProbe a s b => HasHttpProbe (TF.Schema l p a) s b where
+instance HasHttpProbe a b => HasHttpProbe (TF.Schema l p a) b where
     httpProbe = TF.configuration . httpProbe
 
-class HasInterval a s b | a -> s b where
-    interval :: Lens' a (TF.Attr s b)
+class HasInterval a b | a -> b where
+    interval :: Lens' a b
 
-instance HasInterval a s b => HasInterval (TF.Schema l p a) s b where
+instance HasInterval a b => HasInterval (TF.Schema l p a) b where
     interval = TF.configuration . interval
 
-class HasMaxToLb a s b | a -> s b where
-    maxToLb :: Lens' a (TF.Attr s b)
+class HasMaxToLb a b | a -> b where
+    maxToLb :: Lens' a b
 
-instance HasMaxToLb a s b => HasMaxToLb (TF.Schema l p a) s b where
+instance HasMaxToLb a b => HasMaxToLb (TF.Schema l p a) b where
     maxToLb = TF.configuration . maxToLb
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasNoResponse a s b | a -> s b where
-    noResponse :: Lens' a (TF.Attr s b)
+class HasNoResponse a b | a -> b where
+    noResponse :: Lens' a b
 
-instance HasNoResponse a s b => HasNoResponse (TF.Schema l p a) s b where
+instance HasNoResponse a b => HasNoResponse (TF.Schema l p a) b where
     noResponse = TF.configuration . noResponse
 
-class HasOrder a s b | a -> s b where
-    order :: Lens' a (TF.Attr s b)
+class HasOrder a b | a -> b where
+    order :: Lens' a b
 
-instance HasOrder a s b => HasOrder (TF.Schema l p a) s b where
+instance HasOrder a b => HasOrder (TF.Schema l p a) b where
     order = TF.configuration . order
 
-class HasPingProbe a s b | a -> s b where
-    pingProbe :: Lens' a (TF.Attr s b)
+class HasPingProbe a b | a -> b where
+    pingProbe :: Lens' a b
 
-instance HasPingProbe a s b => HasPingProbe (TF.Schema l p a) s b where
+instance HasPingProbe a b => HasPingProbe (TF.Schema l p a) b where
     pingProbe = TF.configuration . pingProbe
 
-class HasPoolRecord a s b | a -> s b where
-    poolRecord :: Lens' a (TF.Attr s b)
+class HasPoolRecord a b | a -> b where
+    poolRecord :: Lens' a b
 
-instance HasPoolRecord a s b => HasPoolRecord (TF.Schema l p a) s b where
+instance HasPoolRecord a b => HasPoolRecord (TF.Schema l p a) b where
     poolRecord = TF.configuration . poolRecord
 
-class HasRdata a s b | a -> s b where
-    rdata :: Lens' a (TF.Attr s b)
+class HasRdata a b | a -> b where
+    rdata :: Lens' a b
 
-instance HasRdata a s b => HasRdata (TF.Schema l p a) s b where
+instance HasRdata a b => HasRdata (TF.Schema l p a) b where
     rdata = TF.configuration . rdata
 
-class HasRunProbes a s b | a -> s b where
-    runProbes :: Lens' a (TF.Attr s b)
+class HasRunProbes a b | a -> b where
+    runProbes :: Lens' a b
 
-instance HasRunProbes a s b => HasRunProbes (TF.Schema l p a) s b where
+instance HasRunProbes a b => HasRunProbes (TF.Schema l p a) b where
     runProbes = TF.configuration . runProbes
 
-class HasThreshold a s b | a -> s b where
-    threshold :: Lens' a (TF.Attr s b)
+class HasThreshold a b | a -> b where
+    threshold :: Lens' a b
 
-instance HasThreshold a s b => HasThreshold (TF.Schema l p a) s b where
+instance HasThreshold a b => HasThreshold (TF.Schema l p a) b where
     threshold = TF.configuration . threshold
 
-class HasTtl a s b | a -> s b where
-    ttl :: Lens' a (TF.Attr s b)
+class HasTtl a b | a -> b where
+    ttl :: Lens' a b
 
-instance HasTtl a s b => HasTtl (TF.Schema l p a) s b where
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
     ttl = TF.configuration . ttl
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasZone a s b | a -> s b where
-    zone :: Lens' a (TF.Attr s b)
+class HasZone a b | a -> b where
+    zone :: Lens' a b
 
-instance HasZone a s b => HasZone (TF.Schema l p a) s b where
+instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
 class HasComputedHostname a b | a -> b where

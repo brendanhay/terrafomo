@@ -518,8 +518,9 @@ module Terrafomo.OpenStack.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -579,83 +580,83 @@ data BlockstorageVolumeAttachV2Resource s = BlockstorageVolumeAttachV2Resource {
 
 instance TF.ToHCL (BlockstorageVolumeAttachV2Resource s) where
     toHCL BlockstorageVolumeAttachV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "attach_mode" _attach_mode
-        , TF.attribute "device" _device
-        , TF.attribute "host_name" _host_name
-        , TF.attribute "initiator" _initiator
-        , TF.attribute "ip_address" _ip_address
-        , TF.attribute "multipath" _multipath
-        , TF.attribute "os_type" _os_type
-        , TF.attribute "platform" _platform
-        , TF.attribute "region" _region
-        , TF.attribute "volume_id" _volume_id
-        , TF.attribute "wwnn" _wwnn
-        , TF.attribute "wwpn" _wwpn
+        [ TF.assign "attach_mode" <$> TF.attribute _attach_mode
+        , TF.assign "device" <$> TF.attribute _device
+        , TF.assign "host_name" <$> TF.attribute _host_name
+        , TF.assign "initiator" <$> TF.attribute _initiator
+        , TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "multipath" <$> TF.attribute _multipath
+        , TF.assign "os_type" <$> TF.attribute _os_type
+        , TF.assign "platform" <$> TF.attribute _platform
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "volume_id" <$> TF.attribute _volume_id
+        , TF.assign "wwnn" <$> TF.attribute _wwnn
+        , TF.assign "wwpn" <$> TF.attribute _wwpn
         ]
 
-instance P.HasAttachMode (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasAttachMode (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     attachMode =
         lens (_attach_mode :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _attach_mode = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasDevice (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasDevice (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     device =
         lens (_device :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _device = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasHostName (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasHostName (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     hostName =
         lens (_host_name :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _host_name = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasInitiator (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasInitiator (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     initiator =
         lens (_initiator :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _initiator = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasIpAddress (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasIpAddress (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     ipAddress =
         lens (_ip_address :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasMultipath (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasMultipath (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     multipath =
         lens (_multipath :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _multipath = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasOsType (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasOsType (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     osType =
         lens (_os_type :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _os_type = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasPlatform (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasPlatform (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     platform =
         lens (_platform :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _platform = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasRegion (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasRegion (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasVolumeId (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasVolumeId (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     volumeId =
         lens (_volume_id :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _volume_id = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasWwnn (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasWwnn (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     wwnn =
         lens (_wwnn :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _wwnn = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasWwpn (BlockstorageVolumeAttachV2Resource s) s Text where
+instance P.HasWwpn (BlockstorageVolumeAttachV2Resource s) (TF.Attr s Text) where
     wwpn =
         lens (_wwpn :: BlockstorageVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _wwpn = a } :: BlockstorageVolumeAttachV2Resource s)
 
-instance P.HasComputedData' (BlockstorageVolumeAttachV2Resource s) Text
-instance P.HasComputedDriverVolumeType (BlockstorageVolumeAttachV2Resource s) Text
-instance P.HasComputedMountPointBase (BlockstorageVolumeAttachV2Resource s) Text
+instance P.HasComputedData' (BlockstorageVolumeAttachV2Resource s) (Text)
+instance P.HasComputedDriverVolumeType (BlockstorageVolumeAttachV2Resource s) (Text)
+instance P.HasComputedMountPointBase (BlockstorageVolumeAttachV2Resource s) (Text)
 
 blockstorageVolumeAttachV2Resource :: TF.Schema TF.Resource P.OpenStack (BlockstorageVolumeAttachV2Resource s)
 blockstorageVolumeAttachV2Resource =
@@ -704,79 +705,79 @@ data BlockstorageVolumeV1Resource s = BlockstorageVolumeV1Resource {
 
 instance TF.ToHCL (BlockstorageVolumeV1Resource s) where
     toHCL BlockstorageVolumeV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "availability_zone" _availability_zone
-        , TF.attribute "description" _description
-        , TF.attribute "image_id" _image_id
-        , TF.attribute "metadata" _metadata
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "size" _size
-        , TF.attribute "snapshot_id" _snapshot_id
-        , TF.attribute "source_vol_id" _source_vol_id
-        , TF.attribute "volume_type" _volume_type
+        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "image_id" <$> TF.attribute _image_id
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshot_id
+        , TF.assign "source_vol_id" <$> TF.attribute _source_vol_id
+        , TF.assign "volume_type" <$> TF.attribute _volume_type
         ]
 
-instance P.HasAvailabilityZone (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasAvailabilityZone (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     availabilityZone =
         lens (_availability_zone :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _availability_zone = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasDescription (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasDescription (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasImageId (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasImageId (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     imageId =
         lens (_image_id :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _image_id = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasMetadata (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasMetadata (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasName (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasName (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasRegion (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasRegion (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasSize (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasSize (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     size =
         lens (_size :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasSnapshotId (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasSnapshotId (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     snapshotId =
         lens (_snapshot_id :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_id = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasSourceVolId (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasSourceVolId (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     sourceVolId =
         lens (_source_vol_id :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _source_vol_id = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasVolumeType (BlockstorageVolumeV1Resource s) s Text where
+instance P.HasVolumeType (BlockstorageVolumeV1Resource s) (TF.Attr s Text) where
     volumeType =
         lens (_volume_type :: BlockstorageVolumeV1Resource s -> TF.Attr s Text)
              (\s a -> s { _volume_type = a } :: BlockstorageVolumeV1Resource s)
 
-instance P.HasComputedAttachment (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedAvailabilityZone (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedDescription (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedImageId (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedMetadata (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedName (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedRegion (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedSize (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedSnapshotId (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedSourceVolId (BlockstorageVolumeV1Resource s) Text
-instance P.HasComputedVolumeType (BlockstorageVolumeV1Resource s) Text
+instance P.HasComputedAttachment (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedAvailabilityZone (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedDescription (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedImageId (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedMetadata (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedName (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedRegion (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedSize (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedSnapshotId (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedSourceVolId (BlockstorageVolumeV1Resource s) (Text)
+instance P.HasComputedVolumeType (BlockstorageVolumeV1Resource s) (Text)
 
 blockstorageVolumeV1Resource :: TF.Schema TF.Resource P.OpenStack (BlockstorageVolumeV1Resource s)
 blockstorageVolumeV1Resource =
@@ -827,91 +828,91 @@ data BlockstorageVolumeV2Resource s = BlockstorageVolumeV2Resource {
 
 instance TF.ToHCL (BlockstorageVolumeV2Resource s) where
     toHCL BlockstorageVolumeV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "availability_zone" _availability_zone
-        , TF.attribute "consistency_group_id" _consistency_group_id
-        , TF.attribute "description" _description
-        , TF.attribute "image_id" _image_id
-        , TF.attribute "metadata" _metadata
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "size" _size
-        , TF.attribute "snapshot_id" _snapshot_id
-        , TF.attribute "source_replica" _source_replica
-        , TF.attribute "source_vol_id" _source_vol_id
-        , TF.attribute "volume_type" _volume_type
+        [ TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "consistency_group_id" <$> TF.attribute _consistency_group_id
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "image_id" <$> TF.attribute _image_id
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshot_id
+        , TF.assign "source_replica" <$> TF.attribute _source_replica
+        , TF.assign "source_vol_id" <$> TF.attribute _source_vol_id
+        , TF.assign "volume_type" <$> TF.attribute _volume_type
         ]
 
-instance P.HasAvailabilityZone (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasAvailabilityZone (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     availabilityZone =
         lens (_availability_zone :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _availability_zone = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasConsistencyGroupId (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasConsistencyGroupId (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     consistencyGroupId =
         lens (_consistency_group_id :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _consistency_group_id = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasDescription (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasDescription (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasImageId (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasImageId (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     imageId =
         lens (_image_id :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _image_id = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasMetadata (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasMetadata (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasName (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasName (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasRegion (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasRegion (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasSize (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasSize (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     size =
         lens (_size :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasSnapshotId (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasSnapshotId (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     snapshotId =
         lens (_snapshot_id :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_id = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasSourceReplica (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasSourceReplica (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     sourceReplica =
         lens (_source_replica :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _source_replica = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasSourceVolId (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasSourceVolId (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     sourceVolId =
         lens (_source_vol_id :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _source_vol_id = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasVolumeType (BlockstorageVolumeV2Resource s) s Text where
+instance P.HasVolumeType (BlockstorageVolumeV2Resource s) (TF.Attr s Text) where
     volumeType =
         lens (_volume_type :: BlockstorageVolumeV2Resource s -> TF.Attr s Text)
              (\s a -> s { _volume_type = a } :: BlockstorageVolumeV2Resource s)
 
-instance P.HasComputedAttachment (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedAvailabilityZone (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedDescription (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedImageId (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedMetadata (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedName (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedRegion (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedSize (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedSnapshotId (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedSourceVolId (BlockstorageVolumeV2Resource s) Text
-instance P.HasComputedVolumeType (BlockstorageVolumeV2Resource s) Text
+instance P.HasComputedAttachment (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedAvailabilityZone (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedDescription (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedImageId (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedMetadata (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedName (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedRegion (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedSize (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedSnapshotId (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedSourceVolId (BlockstorageVolumeV2Resource s) (Text)
+instance P.HasComputedVolumeType (BlockstorageVolumeV2Resource s) (Text)
 
 blockstorageVolumeV2Resource :: TF.Schema TF.Resource P.OpenStack (BlockstorageVolumeV2Resource s)
 blockstorageVolumeV2Resource =
@@ -956,64 +957,64 @@ data ComputeFlavorV2Resource s = ComputeFlavorV2Resource {
 
 instance TF.ToHCL (ComputeFlavorV2Resource s) where
     toHCL ComputeFlavorV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "disk" _disk
-        , TF.attribute "is_public" _is_public
-        , TF.attribute "name" _name
-        , TF.attribute "ram" _ram
-        , TF.attribute "region" _region
-        , TF.attribute "rx_tx_factor" _rx_tx_factor
-        , TF.attribute "swap" _swap
-        , TF.attribute "vcpus" _vcpus
+        [ TF.assign "disk" <$> TF.attribute _disk
+        , TF.assign "is_public" <$> TF.attribute _is_public
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ram" <$> TF.attribute _ram
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "rx_tx_factor" <$> TF.attribute _rx_tx_factor
+        , TF.assign "swap" <$> TF.attribute _swap
+        , TF.assign "vcpus" <$> TF.attribute _vcpus
         ]
 
-instance P.HasDisk (ComputeFlavorV2Resource s) s Text where
+instance P.HasDisk (ComputeFlavorV2Resource s) (TF.Attr s Text) where
     disk =
         lens (_disk :: ComputeFlavorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _disk = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasIsPublic (ComputeFlavorV2Resource s) s Text where
+instance P.HasIsPublic (ComputeFlavorV2Resource s) (TF.Attr s Text) where
     isPublic =
         lens (_is_public :: ComputeFlavorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _is_public = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasName (ComputeFlavorV2Resource s) s Text where
+instance P.HasName (ComputeFlavorV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeFlavorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasRam (ComputeFlavorV2Resource s) s Text where
+instance P.HasRam (ComputeFlavorV2Resource s) (TF.Attr s Text) where
     ram =
         lens (_ram :: ComputeFlavorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _ram = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasRegion (ComputeFlavorV2Resource s) s Text where
+instance P.HasRegion (ComputeFlavorV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeFlavorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasRxTxFactor (ComputeFlavorV2Resource s) s Text where
+instance P.HasRxTxFactor (ComputeFlavorV2Resource s) (TF.Attr s Text) where
     rxTxFactor =
         lens (_rx_tx_factor :: ComputeFlavorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _rx_tx_factor = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasSwap (ComputeFlavorV2Resource s) s Text where
+instance P.HasSwap (ComputeFlavorV2Resource s) (TF.Attr s Text) where
     swap =
         lens (_swap :: ComputeFlavorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _swap = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasVcpus (ComputeFlavorV2Resource s) s Text where
+instance P.HasVcpus (ComputeFlavorV2Resource s) (TF.Attr s Text) where
     vcpus =
         lens (_vcpus :: ComputeFlavorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _vcpus = a } :: ComputeFlavorV2Resource s)
 
-instance P.HasComputedDisk (ComputeFlavorV2Resource s) Text
-instance P.HasComputedIsPublic (ComputeFlavorV2Resource s) Text
-instance P.HasComputedName (ComputeFlavorV2Resource s) Text
-instance P.HasComputedRam (ComputeFlavorV2Resource s) Text
-instance P.HasComputedRegion (ComputeFlavorV2Resource s) Text
-instance P.HasComputedRxTxFactor (ComputeFlavorV2Resource s) Text
-instance P.HasComputedSwap (ComputeFlavorV2Resource s) Text
-instance P.HasComputedVcpus (ComputeFlavorV2Resource s) Text
+instance P.HasComputedDisk (ComputeFlavorV2Resource s) (Text)
+instance P.HasComputedIsPublic (ComputeFlavorV2Resource s) (Text)
+instance P.HasComputedName (ComputeFlavorV2Resource s) (Text)
+instance P.HasComputedRam (ComputeFlavorV2Resource s) (Text)
+instance P.HasComputedRegion (ComputeFlavorV2Resource s) (Text)
+instance P.HasComputedRxTxFactor (ComputeFlavorV2Resource s) (Text)
+instance P.HasComputedSwap (ComputeFlavorV2Resource s) (Text)
+instance P.HasComputedVcpus (ComputeFlavorV2Resource s) (Text)
 
 computeFlavorV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeFlavorV2Resource s)
 computeFlavorV2Resource =
@@ -1047,36 +1048,36 @@ data ComputeFloatingipAssociateV2Resource s = ComputeFloatingipAssociateV2Resour
 
 instance TF.ToHCL (ComputeFloatingipAssociateV2Resource s) where
     toHCL ComputeFloatingipAssociateV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "fixed_ip" _fixed_ip
-        , TF.attribute "floating_ip" _floating_ip
-        , TF.attribute "instance_id" _instance_id
-        , TF.attribute "region" _region
+        [ TF.assign "fixed_ip" <$> TF.attribute _fixed_ip
+        , TF.assign "floating_ip" <$> TF.attribute _floating_ip
+        , TF.assign "instance_id" <$> TF.attribute _instance_id
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasFixedIp (ComputeFloatingipAssociateV2Resource s) s Text where
+instance P.HasFixedIp (ComputeFloatingipAssociateV2Resource s) (TF.Attr s Text) where
     fixedIp =
         lens (_fixed_ip :: ComputeFloatingipAssociateV2Resource s -> TF.Attr s Text)
              (\s a -> s { _fixed_ip = a } :: ComputeFloatingipAssociateV2Resource s)
 
-instance P.HasFloatingIp (ComputeFloatingipAssociateV2Resource s) s Text where
+instance P.HasFloatingIp (ComputeFloatingipAssociateV2Resource s) (TF.Attr s Text) where
     floatingIp =
         lens (_floating_ip :: ComputeFloatingipAssociateV2Resource s -> TF.Attr s Text)
              (\s a -> s { _floating_ip = a } :: ComputeFloatingipAssociateV2Resource s)
 
-instance P.HasInstanceId (ComputeFloatingipAssociateV2Resource s) s Text where
+instance P.HasInstanceId (ComputeFloatingipAssociateV2Resource s) (TF.Attr s Text) where
     instanceId =
         lens (_instance_id :: ComputeFloatingipAssociateV2Resource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: ComputeFloatingipAssociateV2Resource s)
 
-instance P.HasRegion (ComputeFloatingipAssociateV2Resource s) s Text where
+instance P.HasRegion (ComputeFloatingipAssociateV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeFloatingipAssociateV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeFloatingipAssociateV2Resource s)
 
-instance P.HasComputedFixedIp (ComputeFloatingipAssociateV2Resource s) Text
-instance P.HasComputedFloatingIp (ComputeFloatingipAssociateV2Resource s) Text
-instance P.HasComputedInstanceId (ComputeFloatingipAssociateV2Resource s) Text
-instance P.HasComputedRegion (ComputeFloatingipAssociateV2Resource s) Text
+instance P.HasComputedFixedIp (ComputeFloatingipAssociateV2Resource s) (Text)
+instance P.HasComputedFloatingIp (ComputeFloatingipAssociateV2Resource s) (Text)
+instance P.HasComputedInstanceId (ComputeFloatingipAssociateV2Resource s) (Text)
+instance P.HasComputedRegion (ComputeFloatingipAssociateV2Resource s) (Text)
 
 computeFloatingipAssociateV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeFloatingipAssociateV2Resource s)
 computeFloatingipAssociateV2Resource =
@@ -1106,25 +1107,25 @@ data ComputeFloatingipV2Resource s = ComputeFloatingipV2Resource {
 
 instance TF.ToHCL (ComputeFloatingipV2Resource s) where
     toHCL ComputeFloatingipV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "pool" _pool
-        , TF.attribute "region" _region
+        [ TF.assign "pool" <$> TF.attribute _pool
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasPool (ComputeFloatingipV2Resource s) s Text where
+instance P.HasPool (ComputeFloatingipV2Resource s) (TF.Attr s Text) where
     pool =
         lens (_pool :: ComputeFloatingipV2Resource s -> TF.Attr s Text)
              (\s a -> s { _pool = a } :: ComputeFloatingipV2Resource s)
 
-instance P.HasRegion (ComputeFloatingipV2Resource s) s Text where
+instance P.HasRegion (ComputeFloatingipV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeFloatingipV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeFloatingipV2Resource s)
 
-instance P.HasComputedAddress (ComputeFloatingipV2Resource s) Text
-instance P.HasComputedFixedIp (ComputeFloatingipV2Resource s) Text
-instance P.HasComputedInstanceId (ComputeFloatingipV2Resource s) Text
-instance P.HasComputedPool (ComputeFloatingipV2Resource s) Text
-instance P.HasComputedRegion (ComputeFloatingipV2Resource s) Text
+instance P.HasComputedAddress (ComputeFloatingipV2Resource s) (Text)
+instance P.HasComputedFixedIp (ComputeFloatingipV2Resource s) (Text)
+instance P.HasComputedInstanceId (ComputeFloatingipV2Resource s) (Text)
+instance P.HasComputedPool (ComputeFloatingipV2Resource s) (Text)
+instance P.HasComputedRegion (ComputeFloatingipV2Resource s) (Text)
 
 computeFloatingipV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeFloatingipV2Resource s)
 computeFloatingipV2Resource =
@@ -1181,136 +1182,136 @@ data ComputeInstanceV2Resource s = ComputeInstanceV2Resource {
 
 instance TF.ToHCL (ComputeInstanceV2Resource s) where
     toHCL ComputeInstanceV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_pass" _admin_pass
-        , TF.attribute "availability_zone" _availability_zone
-        , TF.attribute "block_device" _block_device
-        , TF.attribute "config_drive" _config_drive
-        , TF.attribute "flavor_id" _flavor_id
-        , TF.attribute "flavor_name" _flavor_name
-        , TF.attribute "force_delete" _force_delete
-        , TF.attribute "image_id" _image_id
-        , TF.attribute "image_name" _image_name
-        , TF.attribute "key_pair" _key_pair
-        , TF.attribute "metadata" _metadata
-        , TF.attribute "name" _name
-        , TF.attribute "network" _network
-        , TF.attribute "personality" _personality
-        , TF.attribute "region" _region
-        , TF.attribute "scheduler_hints" _scheduler_hints
-        , TF.attribute "security_groups" _security_groups
-        , TF.attribute "stop_before_destroy" _stop_before_destroy
-        , TF.attribute "user_data" _user_data
+        [ TF.assign "admin_pass" <$> TF.attribute _admin_pass
+        , TF.assign "availability_zone" <$> TF.attribute _availability_zone
+        , TF.assign "block_device" <$> TF.attribute _block_device
+        , TF.assign "config_drive" <$> TF.attribute _config_drive
+        , TF.assign "flavor_id" <$> TF.attribute _flavor_id
+        , TF.assign "flavor_name" <$> TF.attribute _flavor_name
+        , TF.assign "force_delete" <$> TF.attribute _force_delete
+        , TF.assign "image_id" <$> TF.attribute _image_id
+        , TF.assign "image_name" <$> TF.attribute _image_name
+        , TF.assign "key_pair" <$> TF.attribute _key_pair
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "personality" <$> TF.attribute _personality
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "scheduler_hints" <$> TF.attribute _scheduler_hints
+        , TF.assign "security_groups" <$> TF.attribute _security_groups
+        , TF.assign "stop_before_destroy" <$> TF.attribute _stop_before_destroy
+        , TF.assign "user_data" <$> TF.attribute _user_data
         ]
 
-instance P.HasAdminPass (ComputeInstanceV2Resource s) s Text where
+instance P.HasAdminPass (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     adminPass =
         lens (_admin_pass :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_pass = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasAvailabilityZone (ComputeInstanceV2Resource s) s Text where
+instance P.HasAvailabilityZone (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     availabilityZone =
         lens (_availability_zone :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _availability_zone = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasBlockDevice (ComputeInstanceV2Resource s) s Text where
+instance P.HasBlockDevice (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     blockDevice =
         lens (_block_device :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _block_device = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasConfigDrive (ComputeInstanceV2Resource s) s Text where
+instance P.HasConfigDrive (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     configDrive =
         lens (_config_drive :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _config_drive = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasFlavorId (ComputeInstanceV2Resource s) s Text where
+instance P.HasFlavorId (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     flavorId =
         lens (_flavor_id :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _flavor_id = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasFlavorName (ComputeInstanceV2Resource s) s Text where
+instance P.HasFlavorName (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     flavorName =
         lens (_flavor_name :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _flavor_name = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasForceDelete (ComputeInstanceV2Resource s) s Text where
+instance P.HasForceDelete (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     forceDelete =
         lens (_force_delete :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _force_delete = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasImageId (ComputeInstanceV2Resource s) s Text where
+instance P.HasImageId (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     imageId =
         lens (_image_id :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _image_id = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasImageName (ComputeInstanceV2Resource s) s Text where
+instance P.HasImageName (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     imageName =
         lens (_image_name :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _image_name = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasKeyPair (ComputeInstanceV2Resource s) s Text where
+instance P.HasKeyPair (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     keyPair =
         lens (_key_pair :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _key_pair = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasMetadata (ComputeInstanceV2Resource s) s Text where
+instance P.HasMetadata (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasName (ComputeInstanceV2Resource s) s Text where
+instance P.HasName (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasNetwork (ComputeInstanceV2Resource s) s Text where
+instance P.HasNetwork (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     network =
         lens (_network :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasPersonality (ComputeInstanceV2Resource s) s Text where
+instance P.HasPersonality (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     personality =
         lens (_personality :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _personality = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasRegion (ComputeInstanceV2Resource s) s Text where
+instance P.HasRegion (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasSchedulerHints (ComputeInstanceV2Resource s) s Text where
+instance P.HasSchedulerHints (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     schedulerHints =
         lens (_scheduler_hints :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _scheduler_hints = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasSecurityGroups (ComputeInstanceV2Resource s) s Text where
+instance P.HasSecurityGroups (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     securityGroups =
         lens (_security_groups :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _security_groups = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasStopBeforeDestroy (ComputeInstanceV2Resource s) s Text where
+instance P.HasStopBeforeDestroy (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     stopBeforeDestroy =
         lens (_stop_before_destroy :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _stop_before_destroy = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasUserData (ComputeInstanceV2Resource s) s Text where
+instance P.HasUserData (ComputeInstanceV2Resource s) (TF.Attr s Text) where
     userData =
         lens (_user_data :: ComputeInstanceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _user_data = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasComputedAccessIpV4 (ComputeInstanceV2Resource s) Text
-instance P.HasComputedAccessIpV6 (ComputeInstanceV2Resource s) Text
-instance P.HasComputedAllMetadata (ComputeInstanceV2Resource s) Text
-instance P.HasComputedFixedIpV4 (ComputeInstanceV2Resource s) Text
-instance P.HasComputedFixedIpV6 (ComputeInstanceV2Resource s) Text
-instance P.HasComputedFlavorId (ComputeInstanceV2Resource s) Text
-instance P.HasComputedFlavorName (ComputeInstanceV2Resource s) Text
-instance P.HasComputedMac (ComputeInstanceV2Resource s) Text
-instance P.HasComputedMetadata (ComputeInstanceV2Resource s) Text
-instance P.HasComputedName (ComputeInstanceV2Resource s) Text
-instance P.HasComputedPort (ComputeInstanceV2Resource s) Text
-instance P.HasComputedRegion (ComputeInstanceV2Resource s) Text
-instance P.HasComputedSecurityGroups (ComputeInstanceV2Resource s) Text
-instance P.HasComputedUuid (ComputeInstanceV2Resource s) Text
+instance P.HasComputedAccessIpV4 (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedAccessIpV6 (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedAllMetadata (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedFixedIpV4 (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedFixedIpV6 (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedFlavorId (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedFlavorName (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedMac (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedMetadata (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedName (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedPort (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedRegion (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedSecurityGroups (ComputeInstanceV2Resource s) (Text)
+instance P.HasComputedUuid (ComputeInstanceV2Resource s) (Text)
 
 computeInstanceV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeInstanceV2Resource s)
 computeInstanceV2Resource =
@@ -1359,37 +1360,37 @@ data ComputeKeypairV2Resource s = ComputeKeypairV2Resource {
 
 instance TF.ToHCL (ComputeKeypairV2Resource s) where
     toHCL ComputeKeypairV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "public_key" _public_key
-        , TF.attribute "region" _region
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_key" <$> TF.attribute _public_key
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasName (ComputeKeypairV2Resource s) s Text where
+instance P.HasName (ComputeKeypairV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeKeypairV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeKeypairV2Resource s)
 
-instance P.HasPublicKey (ComputeKeypairV2Resource s) s Text where
+instance P.HasPublicKey (ComputeKeypairV2Resource s) (TF.Attr s Text) where
     publicKey =
         lens (_public_key :: ComputeKeypairV2Resource s -> TF.Attr s Text)
              (\s a -> s { _public_key = a } :: ComputeKeypairV2Resource s)
 
-instance P.HasRegion (ComputeKeypairV2Resource s) s Text where
+instance P.HasRegion (ComputeKeypairV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeKeypairV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeKeypairV2Resource s)
 
-instance P.HasValueSpecs (ComputeKeypairV2Resource s) s Text where
+instance P.HasValueSpecs (ComputeKeypairV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: ComputeKeypairV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: ComputeKeypairV2Resource s)
 
-instance P.HasComputedFingerprint (ComputeKeypairV2Resource s) Text
-instance P.HasComputedName (ComputeKeypairV2Resource s) Text
-instance P.HasComputedPrivateKey (ComputeKeypairV2Resource s) Text
-instance P.HasComputedPublicKey (ComputeKeypairV2Resource s) Text
-instance P.HasComputedRegion (ComputeKeypairV2Resource s) Text
+instance P.HasComputedFingerprint (ComputeKeypairV2Resource s) (Text)
+instance P.HasComputedName (ComputeKeypairV2Resource s) (Text)
+instance P.HasComputedPrivateKey (ComputeKeypairV2Resource s) (Text)
+instance P.HasComputedPublicKey (ComputeKeypairV2Resource s) (Text)
+instance P.HasComputedRegion (ComputeKeypairV2Resource s) (Text)
 
 computeKeypairV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeKeypairV2Resource s)
 computeKeypairV2Resource =
@@ -1423,36 +1424,36 @@ data ComputeSecgroupV2Resource s = ComputeSecgroupV2Resource {
 
 instance TF.ToHCL (ComputeSecgroupV2Resource s) where
     toHCL ComputeSecgroupV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "rule" _rule
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "rule" <$> TF.attribute _rule
         ]
 
-instance P.HasDescription (ComputeSecgroupV2Resource s) s Text where
+instance P.HasDescription (ComputeSecgroupV2Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeSecgroupV2Resource s)
 
-instance P.HasName (ComputeSecgroupV2Resource s) s Text where
+instance P.HasName (ComputeSecgroupV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSecgroupV2Resource s)
 
-instance P.HasRegion (ComputeSecgroupV2Resource s) s Text where
+instance P.HasRegion (ComputeSecgroupV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeSecgroupV2Resource s)
 
-instance P.HasRule (ComputeSecgroupV2Resource s) s Text where
+instance P.HasRule (ComputeSecgroupV2Resource s) (TF.Attr s Text) where
     rule =
         lens (_rule :: ComputeSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _rule = a } :: ComputeSecgroupV2Resource s)
 
-instance P.HasComputedDescription (ComputeSecgroupV2Resource s) Text
-instance P.HasComputedName (ComputeSecgroupV2Resource s) Text
-instance P.HasComputedRegion (ComputeSecgroupV2Resource s) Text
-instance P.HasComputedRule (ComputeSecgroupV2Resource s) Text
+instance P.HasComputedDescription (ComputeSecgroupV2Resource s) (Text)
+instance P.HasComputedName (ComputeSecgroupV2Resource s) (Text)
+instance P.HasComputedRegion (ComputeSecgroupV2Resource s) (Text)
+instance P.HasComputedRule (ComputeSecgroupV2Resource s) (Text)
 
 computeSecgroupV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeSecgroupV2Resource s)
 computeSecgroupV2Resource =
@@ -1481,36 +1482,36 @@ data ComputeServergroupV2Resource s = ComputeServergroupV2Resource {
 
 instance TF.ToHCL (ComputeServergroupV2Resource s) where
     toHCL ComputeServergroupV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "policies" _policies
-        , TF.attribute "region" _region
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "policies" <$> TF.attribute _policies
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasName (ComputeServergroupV2Resource s) s Text where
+instance P.HasName (ComputeServergroupV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeServergroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeServergroupV2Resource s)
 
-instance P.HasPolicies (ComputeServergroupV2Resource s) s Text where
+instance P.HasPolicies (ComputeServergroupV2Resource s) (TF.Attr s Text) where
     policies =
         lens (_policies :: ComputeServergroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _policies = a } :: ComputeServergroupV2Resource s)
 
-instance P.HasRegion (ComputeServergroupV2Resource s) s Text where
+instance P.HasRegion (ComputeServergroupV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeServergroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeServergroupV2Resource s)
 
-instance P.HasValueSpecs (ComputeServergroupV2Resource s) s Text where
+instance P.HasValueSpecs (ComputeServergroupV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: ComputeServergroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: ComputeServergroupV2Resource s)
 
-instance P.HasComputedMembers (ComputeServergroupV2Resource s) Text
-instance P.HasComputedName (ComputeServergroupV2Resource s) Text
-instance P.HasComputedPolicies (ComputeServergroupV2Resource s) Text
-instance P.HasComputedRegion (ComputeServergroupV2Resource s) Text
+instance P.HasComputedMembers (ComputeServergroupV2Resource s) (Text)
+instance P.HasComputedName (ComputeServergroupV2Resource s) (Text)
+instance P.HasComputedPolicies (ComputeServergroupV2Resource s) (Text)
+instance P.HasComputedRegion (ComputeServergroupV2Resource s) (Text)
 
 computeServergroupV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeServergroupV2Resource s)
 computeServergroupV2Resource =
@@ -1540,36 +1541,36 @@ data ComputeVolumeAttachV2Resource s = ComputeVolumeAttachV2Resource {
 
 instance TF.ToHCL (ComputeVolumeAttachV2Resource s) where
     toHCL ComputeVolumeAttachV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "device" _device
-        , TF.attribute "instance_id" _instance_id
-        , TF.attribute "region" _region
-        , TF.attribute "volume_id" _volume_id
+        [ TF.assign "device" <$> TF.attribute _device
+        , TF.assign "instance_id" <$> TF.attribute _instance_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "volume_id" <$> TF.attribute _volume_id
         ]
 
-instance P.HasDevice (ComputeVolumeAttachV2Resource s) s Text where
+instance P.HasDevice (ComputeVolumeAttachV2Resource s) (TF.Attr s Text) where
     device =
         lens (_device :: ComputeVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _device = a } :: ComputeVolumeAttachV2Resource s)
 
-instance P.HasInstanceId (ComputeVolumeAttachV2Resource s) s Text where
+instance P.HasInstanceId (ComputeVolumeAttachV2Resource s) (TF.Attr s Text) where
     instanceId =
         lens (_instance_id :: ComputeVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: ComputeVolumeAttachV2Resource s)
 
-instance P.HasRegion (ComputeVolumeAttachV2Resource s) s Text where
+instance P.HasRegion (ComputeVolumeAttachV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeVolumeAttachV2Resource s)
 
-instance P.HasVolumeId (ComputeVolumeAttachV2Resource s) s Text where
+instance P.HasVolumeId (ComputeVolumeAttachV2Resource s) (TF.Attr s Text) where
     volumeId =
         lens (_volume_id :: ComputeVolumeAttachV2Resource s -> TF.Attr s Text)
              (\s a -> s { _volume_id = a } :: ComputeVolumeAttachV2Resource s)
 
-instance P.HasComputedDevice (ComputeVolumeAttachV2Resource s) Text
-instance P.HasComputedInstanceId (ComputeVolumeAttachV2Resource s) Text
-instance P.HasComputedRegion (ComputeVolumeAttachV2Resource s) Text
-instance P.HasComputedVolumeId (ComputeVolumeAttachV2Resource s) Text
+instance P.HasComputedDevice (ComputeVolumeAttachV2Resource s) (Text)
+instance P.HasComputedInstanceId (ComputeVolumeAttachV2Resource s) (Text)
+instance P.HasComputedRegion (ComputeVolumeAttachV2Resource s) (Text)
+instance P.HasComputedVolumeId (ComputeVolumeAttachV2Resource s) (Text)
 
 computeVolumeAttachV2Resource :: TF.Schema TF.Resource P.OpenStack (ComputeVolumeAttachV2Resource s)
 computeVolumeAttachV2Resource =
@@ -1600,44 +1601,44 @@ data DbConfigurationV1Resource s = DbConfigurationV1Resource {
 
 instance TF.ToHCL (DbConfigurationV1Resource s) where
     toHCL DbConfigurationV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "configuration" _configuration
-        , TF.attribute "datastore" _datastore
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
+        [ TF.assign "configuration" <$> TF.attribute _configuration
+        , TF.assign "datastore" <$> TF.attribute _datastore
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasConfiguration (DbConfigurationV1Resource s) s Text where
+instance P.HasConfiguration (DbConfigurationV1Resource s) (TF.Attr s Text) where
     configuration =
         lens (_configuration :: DbConfigurationV1Resource s -> TF.Attr s Text)
              (\s a -> s { _configuration = a } :: DbConfigurationV1Resource s)
 
-instance P.HasDatastore (DbConfigurationV1Resource s) s Text where
+instance P.HasDatastore (DbConfigurationV1Resource s) (TF.Attr s Text) where
     datastore =
         lens (_datastore :: DbConfigurationV1Resource s -> TF.Attr s Text)
              (\s a -> s { _datastore = a } :: DbConfigurationV1Resource s)
 
-instance P.HasDescription (DbConfigurationV1Resource s) s Text where
+instance P.HasDescription (DbConfigurationV1Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: DbConfigurationV1Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DbConfigurationV1Resource s)
 
-instance P.HasName (DbConfigurationV1Resource s) s Text where
+instance P.HasName (DbConfigurationV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: DbConfigurationV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DbConfigurationV1Resource s)
 
-instance P.HasRegion (DbConfigurationV1Resource s) s Text where
+instance P.HasRegion (DbConfigurationV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: DbConfigurationV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DbConfigurationV1Resource s)
 
-instance P.HasComputedDescription (DbConfigurationV1Resource s) Text
-instance P.HasComputedName (DbConfigurationV1Resource s) Text
-instance P.HasComputedRegion (DbConfigurationV1Resource s) Text
-instance P.HasComputedType' (DbConfigurationV1Resource s) Text
-instance P.HasComputedValue (DbConfigurationV1Resource s) Text
-instance P.HasComputedVersion (DbConfigurationV1Resource s) Text
+instance P.HasComputedDescription (DbConfigurationV1Resource s) (Text)
+instance P.HasComputedName (DbConfigurationV1Resource s) (Text)
+instance P.HasComputedRegion (DbConfigurationV1Resource s) (Text)
+instance P.HasComputedType' (DbConfigurationV1Resource s) (Text)
+instance P.HasComputedValue (DbConfigurationV1Resource s) (Text)
+instance P.HasComputedVersion (DbConfigurationV1Resource s) (Text)
 
 dbConfigurationV1Resource :: TF.Schema TF.Resource P.OpenStack (DbConfigurationV1Resource s)
 dbConfigurationV1Resource =
@@ -1663,23 +1664,23 @@ data DbDatabaseV1Resource s = DbDatabaseV1Resource {
 
 instance TF.ToHCL (DbDatabaseV1Resource s) where
     toHCL DbDatabaseV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "instance_id" _instance_id
-        , TF.attribute "name" _name
+        [ TF.assign "instance_id" <$> TF.attribute _instance_id
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasInstanceId (DbDatabaseV1Resource s) s Text where
+instance P.HasInstanceId (DbDatabaseV1Resource s) (TF.Attr s Text) where
     instanceId =
         lens (_instance_id :: DbDatabaseV1Resource s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: DbDatabaseV1Resource s)
 
-instance P.HasName (DbDatabaseV1Resource s) s Text where
+instance P.HasName (DbDatabaseV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: DbDatabaseV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DbDatabaseV1Resource s)
 
-instance P.HasComputedInstanceId (DbDatabaseV1Resource s) Text
-instance P.HasComputedName (DbDatabaseV1Resource s) Text
-instance P.HasComputedRegion (DbDatabaseV1Resource s) Text
+instance P.HasComputedInstanceId (DbDatabaseV1Resource s) (Text)
+instance P.HasComputedName (DbDatabaseV1Resource s) (Text)
+instance P.HasComputedRegion (DbDatabaseV1Resource s) (Text)
 
 dbDatabaseV1Resource :: TF.Schema TF.Resource P.OpenStack (DbDatabaseV1Resource s)
 dbDatabaseV1Resource =
@@ -1716,78 +1717,78 @@ data DbInstanceV1Resource s = DbInstanceV1Resource {
 
 instance TF.ToHCL (DbInstanceV1Resource s) where
     toHCL DbInstanceV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "configuration_id" _configuration_id
-        , TF.attribute "database" _database
-        , TF.attribute "datastore" _datastore
-        , TF.attribute "flavor_id" _flavor_id
-        , TF.attribute "name" _name
-        , TF.attribute "network" _network
-        , TF.attribute "region" _region
-        , TF.attribute "size" _size
-        , TF.attribute "user" _user
+        [ TF.assign "configuration_id" <$> TF.attribute _configuration_id
+        , TF.assign "database" <$> TF.attribute _database
+        , TF.assign "datastore" <$> TF.attribute _datastore
+        , TF.assign "flavor_id" <$> TF.attribute _flavor_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "user" <$> TF.attribute _user
         ]
 
-instance P.HasConfigurationId (DbInstanceV1Resource s) s Text where
+instance P.HasConfigurationId (DbInstanceV1Resource s) (TF.Attr s Text) where
     configurationId =
         lens (_configuration_id :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _configuration_id = a } :: DbInstanceV1Resource s)
 
-instance P.HasDatabase (DbInstanceV1Resource s) s Text where
+instance P.HasDatabase (DbInstanceV1Resource s) (TF.Attr s Text) where
     database =
         lens (_database :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _database = a } :: DbInstanceV1Resource s)
 
-instance P.HasDatastore (DbInstanceV1Resource s) s Text where
+instance P.HasDatastore (DbInstanceV1Resource s) (TF.Attr s Text) where
     datastore =
         lens (_datastore :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _datastore = a } :: DbInstanceV1Resource s)
 
-instance P.HasFlavorId (DbInstanceV1Resource s) s Text where
+instance P.HasFlavorId (DbInstanceV1Resource s) (TF.Attr s Text) where
     flavorId =
         lens (_flavor_id :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _flavor_id = a } :: DbInstanceV1Resource s)
 
-instance P.HasName (DbInstanceV1Resource s) s Text where
+instance P.HasName (DbInstanceV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DbInstanceV1Resource s)
 
-instance P.HasNetwork (DbInstanceV1Resource s) s Text where
+instance P.HasNetwork (DbInstanceV1Resource s) (TF.Attr s Text) where
     network =
         lens (_network :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _network = a } :: DbInstanceV1Resource s)
 
-instance P.HasRegion (DbInstanceV1Resource s) s Text where
+instance P.HasRegion (DbInstanceV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DbInstanceV1Resource s)
 
-instance P.HasSize (DbInstanceV1Resource s) s Text where
+instance P.HasSize (DbInstanceV1Resource s) (TF.Attr s Text) where
     size =
         lens (_size :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: DbInstanceV1Resource s)
 
-instance P.HasUser (DbInstanceV1Resource s) s Text where
+instance P.HasUser (DbInstanceV1Resource s) (TF.Attr s Text) where
     user =
         lens (_user :: DbInstanceV1Resource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: DbInstanceV1Resource s)
 
-instance P.HasComputedCharset (DbInstanceV1Resource s) Text
-instance P.HasComputedCollate (DbInstanceV1Resource s) Text
-instance P.HasComputedConfigurationId (DbInstanceV1Resource s) Text
-instance P.HasComputedDatabases (DbInstanceV1Resource s) Text
-instance P.HasComputedFixedIpV4 (DbInstanceV1Resource s) Text
-instance P.HasComputedFixedIpV6 (DbInstanceV1Resource s) Text
-instance P.HasComputedFlavorId (DbInstanceV1Resource s) Text
-instance P.HasComputedHost (DbInstanceV1Resource s) Text
-instance P.HasComputedName (DbInstanceV1Resource s) Text
-instance P.HasComputedPassword (DbInstanceV1Resource s) Text
-instance P.HasComputedPort (DbInstanceV1Resource s) Text
-instance P.HasComputedRegion (DbInstanceV1Resource s) Text
-instance P.HasComputedSize (DbInstanceV1Resource s) Text
-instance P.HasComputedType' (DbInstanceV1Resource s) Text
-instance P.HasComputedUuid (DbInstanceV1Resource s) Text
-instance P.HasComputedVersion (DbInstanceV1Resource s) Text
+instance P.HasComputedCharset (DbInstanceV1Resource s) (Text)
+instance P.HasComputedCollate (DbInstanceV1Resource s) (Text)
+instance P.HasComputedConfigurationId (DbInstanceV1Resource s) (Text)
+instance P.HasComputedDatabases (DbInstanceV1Resource s) (Text)
+instance P.HasComputedFixedIpV4 (DbInstanceV1Resource s) (Text)
+instance P.HasComputedFixedIpV6 (DbInstanceV1Resource s) (Text)
+instance P.HasComputedFlavorId (DbInstanceV1Resource s) (Text)
+instance P.HasComputedHost (DbInstanceV1Resource s) (Text)
+instance P.HasComputedName (DbInstanceV1Resource s) (Text)
+instance P.HasComputedPassword (DbInstanceV1Resource s) (Text)
+instance P.HasComputedPort (DbInstanceV1Resource s) (Text)
+instance P.HasComputedRegion (DbInstanceV1Resource s) (Text)
+instance P.HasComputedSize (DbInstanceV1Resource s) (Text)
+instance P.HasComputedType' (DbInstanceV1Resource s) (Text)
+instance P.HasComputedUuid (DbInstanceV1Resource s) (Text)
+instance P.HasComputedVersion (DbInstanceV1Resource s) (Text)
 
 dbInstanceV1Resource :: TF.Schema TF.Resource P.OpenStack (DbInstanceV1Resource s)
 dbInstanceV1Resource =
@@ -1821,37 +1822,37 @@ data DbUserV1Resource s = DbUserV1Resource {
 
 instance TF.ToHCL (DbUserV1Resource s) where
     toHCL DbUserV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "databases" _databases
-        , TF.attribute "instance" _instance'
-        , TF.attribute "name" _name
-        , TF.attribute "password" _password
+        [ TF.assign "databases" <$> TF.attribute _databases
+        , TF.assign "instance" <$> TF.attribute _instance'
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
         ]
 
-instance P.HasDatabases (DbUserV1Resource s) s Text where
+instance P.HasDatabases (DbUserV1Resource s) (TF.Attr s Text) where
     databases =
         lens (_databases :: DbUserV1Resource s -> TF.Attr s Text)
              (\s a -> s { _databases = a } :: DbUserV1Resource s)
 
-instance P.HasInstance' (DbUserV1Resource s) s Text where
+instance P.HasInstance' (DbUserV1Resource s) (TF.Attr s Text) where
     instance' =
         lens (_instance' :: DbUserV1Resource s -> TF.Attr s Text)
              (\s a -> s { _instance' = a } :: DbUserV1Resource s)
 
-instance P.HasName (DbUserV1Resource s) s Text where
+instance P.HasName (DbUserV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: DbUserV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DbUserV1Resource s)
 
-instance P.HasPassword (DbUserV1Resource s) s Text where
+instance P.HasPassword (DbUserV1Resource s) (TF.Attr s Text) where
     password =
         lens (_password :: DbUserV1Resource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: DbUserV1Resource s)
 
-instance P.HasComputedDatabases (DbUserV1Resource s) Text
-instance P.HasComputedInstance' (DbUserV1Resource s) Text
-instance P.HasComputedName (DbUserV1Resource s) Text
-instance P.HasComputedPassword (DbUserV1Resource s) Text
-instance P.HasComputedRegion (DbUserV1Resource s) Text
+instance P.HasComputedDatabases (DbUserV1Resource s) (Text)
+instance P.HasComputedInstance' (DbUserV1Resource s) (Text)
+instance P.HasComputedName (DbUserV1Resource s) (Text)
+instance P.HasComputedPassword (DbUserV1Resource s) (Text)
+instance P.HasComputedRegion (DbUserV1Resource s) (Text)
 
 dbUserV1Resource :: TF.Schema TF.Resource P.OpenStack (DbUserV1Resource s)
 dbUserV1Resource =
@@ -1888,64 +1889,64 @@ data DnsRecordsetV2Resource s = DnsRecordsetV2Resource {
 
 instance TF.ToHCL (DnsRecordsetV2Resource s) where
     toHCL DnsRecordsetV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "records" _records
-        , TF.attribute "region" _region
-        , TF.attribute "ttl" _ttl
-        , TF.attribute "type" _type'
-        , TF.attribute "value_specs" _value_specs
-        , TF.attribute "zone_id" _zone_id
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "records" <$> TF.attribute _records
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
+        , TF.assign "zone_id" <$> TF.attribute _zone_id
         ]
 
-instance P.HasDescription (DnsRecordsetV2Resource s) s Text where
+instance P.HasDescription (DnsRecordsetV2Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: DnsRecordsetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasName (DnsRecordsetV2Resource s) s Text where
+instance P.HasName (DnsRecordsetV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: DnsRecordsetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasRecords (DnsRecordsetV2Resource s) s Text where
+instance P.HasRecords (DnsRecordsetV2Resource s) (TF.Attr s Text) where
     records =
         lens (_records :: DnsRecordsetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _records = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasRegion (DnsRecordsetV2Resource s) s Text where
+instance P.HasRegion (DnsRecordsetV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: DnsRecordsetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasTtl (DnsRecordsetV2Resource s) s Text where
+instance P.HasTtl (DnsRecordsetV2Resource s) (TF.Attr s Text) where
     ttl =
         lens (_ttl :: DnsRecordsetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasType' (DnsRecordsetV2Resource s) s Text where
+instance P.HasType' (DnsRecordsetV2Resource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: DnsRecordsetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasValueSpecs (DnsRecordsetV2Resource s) s Text where
+instance P.HasValueSpecs (DnsRecordsetV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: DnsRecordsetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasZoneId (DnsRecordsetV2Resource s) s Text where
+instance P.HasZoneId (DnsRecordsetV2Resource s) (TF.Attr s Text) where
     zoneId =
         lens (_zone_id :: DnsRecordsetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _zone_id = a } :: DnsRecordsetV2Resource s)
 
-instance P.HasComputedDescription (DnsRecordsetV2Resource s) Text
-instance P.HasComputedName (DnsRecordsetV2Resource s) Text
-instance P.HasComputedRecords (DnsRecordsetV2Resource s) Text
-instance P.HasComputedRegion (DnsRecordsetV2Resource s) Text
-instance P.HasComputedTtl (DnsRecordsetV2Resource s) Text
-instance P.HasComputedType' (DnsRecordsetV2Resource s) Text
-instance P.HasComputedValueSpecs (DnsRecordsetV2Resource s) Text
-instance P.HasComputedZoneId (DnsRecordsetV2Resource s) Text
+instance P.HasComputedDescription (DnsRecordsetV2Resource s) (Text)
+instance P.HasComputedName (DnsRecordsetV2Resource s) (Text)
+instance P.HasComputedRecords (DnsRecordsetV2Resource s) (Text)
+instance P.HasComputedRegion (DnsRecordsetV2Resource s) (Text)
+instance P.HasComputedTtl (DnsRecordsetV2Resource s) (Text)
+instance P.HasComputedType' (DnsRecordsetV2Resource s) (Text)
+instance P.HasComputedValueSpecs (DnsRecordsetV2Resource s) (Text)
+instance P.HasComputedZoneId (DnsRecordsetV2Resource s) (Text)
 
 dnsRecordsetV2Resource :: TF.Schema TF.Resource P.OpenStack (DnsRecordsetV2Resource s)
 dnsRecordsetV2Resource =
@@ -1988,71 +1989,71 @@ data DnsZoneV2Resource s = DnsZoneV2Resource {
 
 instance TF.ToHCL (DnsZoneV2Resource s) where
     toHCL DnsZoneV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "attributes" _attributes
-        , TF.attribute "description" _description
-        , TF.attribute "email" _email
-        , TF.attribute "masters" _masters
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "ttl" _ttl
-        , TF.attribute "type" _type'
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "attributes" <$> TF.attribute _attributes
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "masters" <$> TF.attribute _masters
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasAttributes (DnsZoneV2Resource s) s Text where
+instance P.HasAttributes (DnsZoneV2Resource s) (TF.Attr s Text) where
     attributes =
         lens (_attributes :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _attributes = a } :: DnsZoneV2Resource s)
 
-instance P.HasDescription (DnsZoneV2Resource s) s Text where
+instance P.HasDescription (DnsZoneV2Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DnsZoneV2Resource s)
 
-instance P.HasEmail (DnsZoneV2Resource s) s Text where
+instance P.HasEmail (DnsZoneV2Resource s) (TF.Attr s Text) where
     email =
         lens (_email :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _email = a } :: DnsZoneV2Resource s)
 
-instance P.HasMasters (DnsZoneV2Resource s) s Text where
+instance P.HasMasters (DnsZoneV2Resource s) (TF.Attr s Text) where
     masters =
         lens (_masters :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _masters = a } :: DnsZoneV2Resource s)
 
-instance P.HasName (DnsZoneV2Resource s) s Text where
+instance P.HasName (DnsZoneV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsZoneV2Resource s)
 
-instance P.HasRegion (DnsZoneV2Resource s) s Text where
+instance P.HasRegion (DnsZoneV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DnsZoneV2Resource s)
 
-instance P.HasTtl (DnsZoneV2Resource s) s Text where
+instance P.HasTtl (DnsZoneV2Resource s) (TF.Attr s Text) where
     ttl =
         lens (_ttl :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: DnsZoneV2Resource s)
 
-instance P.HasType' (DnsZoneV2Resource s) s Text where
+instance P.HasType' (DnsZoneV2Resource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DnsZoneV2Resource s)
 
-instance P.HasValueSpecs (DnsZoneV2Resource s) s Text where
+instance P.HasValueSpecs (DnsZoneV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: DnsZoneV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: DnsZoneV2Resource s)
 
-instance P.HasComputedAttributes (DnsZoneV2Resource s) Text
-instance P.HasComputedDescription (DnsZoneV2Resource s) Text
-instance P.HasComputedEmail (DnsZoneV2Resource s) Text
-instance P.HasComputedMasters (DnsZoneV2Resource s) Text
-instance P.HasComputedName (DnsZoneV2Resource s) Text
-instance P.HasComputedRegion (DnsZoneV2Resource s) Text
-instance P.HasComputedTtl (DnsZoneV2Resource s) Text
-instance P.HasComputedType' (DnsZoneV2Resource s) Text
-instance P.HasComputedValueSpecs (DnsZoneV2Resource s) Text
+instance P.HasComputedAttributes (DnsZoneV2Resource s) (Text)
+instance P.HasComputedDescription (DnsZoneV2Resource s) (Text)
+instance P.HasComputedEmail (DnsZoneV2Resource s) (Text)
+instance P.HasComputedMasters (DnsZoneV2Resource s) (Text)
+instance P.HasComputedName (DnsZoneV2Resource s) (Text)
+instance P.HasComputedRegion (DnsZoneV2Resource s) (Text)
+instance P.HasComputedTtl (DnsZoneV2Resource s) (Text)
+instance P.HasComputedType' (DnsZoneV2Resource s) (Text)
+instance P.HasComputedValueSpecs (DnsZoneV2Resource s) (Text)
 
 dnsZoneV2Resource :: TF.Schema TF.Resource P.OpenStack (DnsZoneV2Resource s)
 dnsZoneV2Resource =
@@ -2096,70 +2097,70 @@ data FwFirewallV1Resource s = FwFirewallV1Resource {
 
 instance TF.ToHCL (FwFirewallV1Resource s) where
     toHCL FwFirewallV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "associated_routers" _associated_routers
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "no_routers" _no_routers
-        , TF.attribute "policy_id" _policy_id
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "associated_routers" <$> TF.attribute _associated_routers
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "no_routers" <$> TF.attribute _no_routers
+        , TF.assign "policy_id" <$> TF.attribute _policy_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasAdminStateUp (FwFirewallV1Resource s) s Text where
+instance P.HasAdminStateUp (FwFirewallV1Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: FwFirewallV1Resource s)
 
-instance P.HasAssociatedRouters (FwFirewallV1Resource s) s Text where
+instance P.HasAssociatedRouters (FwFirewallV1Resource s) (TF.Attr s Text) where
     associatedRouters =
         lens (_associated_routers :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _associated_routers = a } :: FwFirewallV1Resource s)
 
-instance P.HasDescription (FwFirewallV1Resource s) s Text where
+instance P.HasDescription (FwFirewallV1Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: FwFirewallV1Resource s)
 
-instance P.HasName (FwFirewallV1Resource s) s Text where
+instance P.HasName (FwFirewallV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: FwFirewallV1Resource s)
 
-instance P.HasNoRouters (FwFirewallV1Resource s) s Text where
+instance P.HasNoRouters (FwFirewallV1Resource s) (TF.Attr s Text) where
     noRouters =
         lens (_no_routers :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _no_routers = a } :: FwFirewallV1Resource s)
 
-instance P.HasPolicyId (FwFirewallV1Resource s) s Text where
+instance P.HasPolicyId (FwFirewallV1Resource s) (TF.Attr s Text) where
     policyId =
         lens (_policy_id :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _policy_id = a } :: FwFirewallV1Resource s)
 
-instance P.HasRegion (FwFirewallV1Resource s) s Text where
+instance P.HasRegion (FwFirewallV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: FwFirewallV1Resource s)
 
-instance P.HasTenantId (FwFirewallV1Resource s) s Text where
+instance P.HasTenantId (FwFirewallV1Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: FwFirewallV1Resource s)
 
-instance P.HasValueSpecs (FwFirewallV1Resource s) s Text where
+instance P.HasValueSpecs (FwFirewallV1Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: FwFirewallV1Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: FwFirewallV1Resource s)
 
-instance P.HasComputedAdminStateUp (FwFirewallV1Resource s) Text
-instance P.HasComputedAssociatedRouters (FwFirewallV1Resource s) Text
-instance P.HasComputedDescription (FwFirewallV1Resource s) Text
-instance P.HasComputedName (FwFirewallV1Resource s) Text
-instance P.HasComputedNoRouters (FwFirewallV1Resource s) Text
-instance P.HasComputedPolicyId (FwFirewallV1Resource s) Text
-instance P.HasComputedRegion (FwFirewallV1Resource s) Text
-instance P.HasComputedTenantId (FwFirewallV1Resource s) Text
+instance P.HasComputedAdminStateUp (FwFirewallV1Resource s) (Text)
+instance P.HasComputedAssociatedRouters (FwFirewallV1Resource s) (Text)
+instance P.HasComputedDescription (FwFirewallV1Resource s) (Text)
+instance P.HasComputedName (FwFirewallV1Resource s) (Text)
+instance P.HasComputedNoRouters (FwFirewallV1Resource s) (Text)
+instance P.HasComputedPolicyId (FwFirewallV1Resource s) (Text)
+instance P.HasComputedRegion (FwFirewallV1Resource s) (Text)
+instance P.HasComputedTenantId (FwFirewallV1Resource s) (Text)
 
 fwFirewallV1Resource :: TF.Schema TF.Resource P.OpenStack (FwFirewallV1Resource s)
 fwFirewallV1Resource =
@@ -2199,55 +2200,55 @@ data FwPolicyV1Resource s = FwPolicyV1Resource {
 
 instance TF.ToHCL (FwPolicyV1Resource s) where
     toHCL FwPolicyV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "audited" _audited
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "rules" _rules
-        , TF.attribute "shared" _shared
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "audited" <$> TF.attribute _audited
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "rules" <$> TF.attribute _rules
+        , TF.assign "shared" <$> TF.attribute _shared
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasAudited (FwPolicyV1Resource s) s Text where
+instance P.HasAudited (FwPolicyV1Resource s) (TF.Attr s Text) where
     audited =
         lens (_audited :: FwPolicyV1Resource s -> TF.Attr s Text)
              (\s a -> s { _audited = a } :: FwPolicyV1Resource s)
 
-instance P.HasDescription (FwPolicyV1Resource s) s Text where
+instance P.HasDescription (FwPolicyV1Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: FwPolicyV1Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: FwPolicyV1Resource s)
 
-instance P.HasName (FwPolicyV1Resource s) s Text where
+instance P.HasName (FwPolicyV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: FwPolicyV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: FwPolicyV1Resource s)
 
-instance P.HasRegion (FwPolicyV1Resource s) s Text where
+instance P.HasRegion (FwPolicyV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: FwPolicyV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: FwPolicyV1Resource s)
 
-instance P.HasRules (FwPolicyV1Resource s) s Text where
+instance P.HasRules (FwPolicyV1Resource s) (TF.Attr s Text) where
     rules =
         lens (_rules :: FwPolicyV1Resource s -> TF.Attr s Text)
              (\s a -> s { _rules = a } :: FwPolicyV1Resource s)
 
-instance P.HasShared (FwPolicyV1Resource s) s Text where
+instance P.HasShared (FwPolicyV1Resource s) (TF.Attr s Text) where
     shared =
         lens (_shared :: FwPolicyV1Resource s -> TF.Attr s Text)
              (\s a -> s { _shared = a } :: FwPolicyV1Resource s)
 
-instance P.HasValueSpecs (FwPolicyV1Resource s) s Text where
+instance P.HasValueSpecs (FwPolicyV1Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: FwPolicyV1Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: FwPolicyV1Resource s)
 
-instance P.HasComputedAudited (FwPolicyV1Resource s) Text
-instance P.HasComputedDescription (FwPolicyV1Resource s) Text
-instance P.HasComputedName (FwPolicyV1Resource s) Text
-instance P.HasComputedRegion (FwPolicyV1Resource s) Text
-instance P.HasComputedShared (FwPolicyV1Resource s) Text
+instance P.HasComputedAudited (FwPolicyV1Resource s) (Text)
+instance P.HasComputedDescription (FwPolicyV1Resource s) (Text)
+instance P.HasComputedName (FwPolicyV1Resource s) (Text)
+instance P.HasComputedRegion (FwPolicyV1Resource s) (Text)
+instance P.HasComputedShared (FwPolicyV1Resource s) (Text)
 
 fwPolicyV1Resource :: TF.Schema TF.Resource P.OpenStack (FwPolicyV1Resource s)
 fwPolicyV1Resource =
@@ -2297,98 +2298,98 @@ data FwRuleV1Resource s = FwRuleV1Resource {
 
 instance TF.ToHCL (FwRuleV1Resource s) where
     toHCL FwRuleV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "action" _action
-        , TF.attribute "description" _description
-        , TF.attribute "destination_ip_address" _destination_ip_address
-        , TF.attribute "destination_port" _destination_port
-        , TF.attribute "enabled" _enabled
-        , TF.attribute "ip_version" _ip_version
-        , TF.attribute "name" _name
-        , TF.attribute "protocol" _protocol
-        , TF.attribute "region" _region
-        , TF.attribute "source_ip_address" _source_ip_address
-        , TF.attribute "source_port" _source_port
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "destination_ip_address" <$> TF.attribute _destination_ip_address
+        , TF.assign "destination_port" <$> TF.attribute _destination_port
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "ip_version" <$> TF.attribute _ip_version
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "source_ip_address" <$> TF.attribute _source_ip_address
+        , TF.assign "source_port" <$> TF.attribute _source_port
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasAction (FwRuleV1Resource s) s Text where
+instance P.HasAction (FwRuleV1Resource s) (TF.Attr s Text) where
     action =
         lens (_action :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _action = a } :: FwRuleV1Resource s)
 
-instance P.HasDescription (FwRuleV1Resource s) s Text where
+instance P.HasDescription (FwRuleV1Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: FwRuleV1Resource s)
 
-instance P.HasDestinationIpAddress (FwRuleV1Resource s) s Text where
+instance P.HasDestinationIpAddress (FwRuleV1Resource s) (TF.Attr s Text) where
     destinationIpAddress =
         lens (_destination_ip_address :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _destination_ip_address = a } :: FwRuleV1Resource s)
 
-instance P.HasDestinationPort (FwRuleV1Resource s) s Text where
+instance P.HasDestinationPort (FwRuleV1Resource s) (TF.Attr s Text) where
     destinationPort =
         lens (_destination_port :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _destination_port = a } :: FwRuleV1Resource s)
 
-instance P.HasEnabled (FwRuleV1Resource s) s Text where
+instance P.HasEnabled (FwRuleV1Resource s) (TF.Attr s Text) where
     enabled =
         lens (_enabled :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _enabled = a } :: FwRuleV1Resource s)
 
-instance P.HasIpVersion (FwRuleV1Resource s) s Text where
+instance P.HasIpVersion (FwRuleV1Resource s) (TF.Attr s Text) where
     ipVersion =
         lens (_ip_version :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _ip_version = a } :: FwRuleV1Resource s)
 
-instance P.HasName (FwRuleV1Resource s) s Text where
+instance P.HasName (FwRuleV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: FwRuleV1Resource s)
 
-instance P.HasProtocol (FwRuleV1Resource s) s Text where
+instance P.HasProtocol (FwRuleV1Resource s) (TF.Attr s Text) where
     protocol =
         lens (_protocol :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: FwRuleV1Resource s)
 
-instance P.HasRegion (FwRuleV1Resource s) s Text where
+instance P.HasRegion (FwRuleV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: FwRuleV1Resource s)
 
-instance P.HasSourceIpAddress (FwRuleV1Resource s) s Text where
+instance P.HasSourceIpAddress (FwRuleV1Resource s) (TF.Attr s Text) where
     sourceIpAddress =
         lens (_source_ip_address :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _source_ip_address = a } :: FwRuleV1Resource s)
 
-instance P.HasSourcePort (FwRuleV1Resource s) s Text where
+instance P.HasSourcePort (FwRuleV1Resource s) (TF.Attr s Text) where
     sourcePort =
         lens (_source_port :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _source_port = a } :: FwRuleV1Resource s)
 
-instance P.HasTenantId (FwRuleV1Resource s) s Text where
+instance P.HasTenantId (FwRuleV1Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: FwRuleV1Resource s)
 
-instance P.HasValueSpecs (FwRuleV1Resource s) s Text where
+instance P.HasValueSpecs (FwRuleV1Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: FwRuleV1Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: FwRuleV1Resource s)
 
-instance P.HasComputedAction (FwRuleV1Resource s) Text
-instance P.HasComputedDescription (FwRuleV1Resource s) Text
-instance P.HasComputedDestinationIpAddress (FwRuleV1Resource s) Text
-instance P.HasComputedDestinationPort (FwRuleV1Resource s) Text
-instance P.HasComputedEnabled (FwRuleV1Resource s) Text
-instance P.HasComputedIpVersion (FwRuleV1Resource s) Text
-instance P.HasComputedName (FwRuleV1Resource s) Text
-instance P.HasComputedProtocol (FwRuleV1Resource s) Text
-instance P.HasComputedRegion (FwRuleV1Resource s) Text
-instance P.HasComputedSourceIpAddress (FwRuleV1Resource s) Text
-instance P.HasComputedSourcePort (FwRuleV1Resource s) Text
-instance P.HasComputedTenantId (FwRuleV1Resource s) Text
+instance P.HasComputedAction (FwRuleV1Resource s) (Text)
+instance P.HasComputedDescription (FwRuleV1Resource s) (Text)
+instance P.HasComputedDestinationIpAddress (FwRuleV1Resource s) (Text)
+instance P.HasComputedDestinationPort (FwRuleV1Resource s) (Text)
+instance P.HasComputedEnabled (FwRuleV1Resource s) (Text)
+instance P.HasComputedIpVersion (FwRuleV1Resource s) (Text)
+instance P.HasComputedName (FwRuleV1Resource s) (Text)
+instance P.HasComputedProtocol (FwRuleV1Resource s) (Text)
+instance P.HasComputedRegion (FwRuleV1Resource s) (Text)
+instance P.HasComputedSourceIpAddress (FwRuleV1Resource s) (Text)
+instance P.HasComputedSourcePort (FwRuleV1Resource s) (Text)
+instance P.HasComputedTenantId (FwRuleV1Resource s) (Text)
 
 fwRuleV1Resource :: TF.Schema TF.Resource P.OpenStack (FwRuleV1Resource s)
 fwRuleV1Resource =
@@ -2433,52 +2434,52 @@ data IdentityProjectV3Resource s = IdentityProjectV3Resource {
 
 instance TF.ToHCL (IdentityProjectV3Resource s) where
     toHCL IdentityProjectV3Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "domain_id" _domain_id
-        , TF.attribute "enabled" _enabled
-        , TF.attribute "is_domain" _is_domain
-        , TF.attribute "name" _name
-        , TF.attribute "parent_id" _parent_id
-        , TF.attribute "region" _region
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "domain_id" <$> TF.attribute _domain_id
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "is_domain" <$> TF.attribute _is_domain
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_id" <$> TF.attribute _parent_id
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasDescription (IdentityProjectV3Resource s) s Text where
+instance P.HasDescription (IdentityProjectV3Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: IdentityProjectV3Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: IdentityProjectV3Resource s)
 
-instance P.HasDomainId (IdentityProjectV3Resource s) s Text where
+instance P.HasDomainId (IdentityProjectV3Resource s) (TF.Attr s Text) where
     domainId =
         lens (_domain_id :: IdentityProjectV3Resource s -> TF.Attr s Text)
              (\s a -> s { _domain_id = a } :: IdentityProjectV3Resource s)
 
-instance P.HasEnabled (IdentityProjectV3Resource s) s Text where
+instance P.HasEnabled (IdentityProjectV3Resource s) (TF.Attr s Text) where
     enabled =
         lens (_enabled :: IdentityProjectV3Resource s -> TF.Attr s Text)
              (\s a -> s { _enabled = a } :: IdentityProjectV3Resource s)
 
-instance P.HasIsDomain (IdentityProjectV3Resource s) s Text where
+instance P.HasIsDomain (IdentityProjectV3Resource s) (TF.Attr s Text) where
     isDomain =
         lens (_is_domain :: IdentityProjectV3Resource s -> TF.Attr s Text)
              (\s a -> s { _is_domain = a } :: IdentityProjectV3Resource s)
 
-instance P.HasName (IdentityProjectV3Resource s) s Text where
+instance P.HasName (IdentityProjectV3Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: IdentityProjectV3Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: IdentityProjectV3Resource s)
 
-instance P.HasParentId (IdentityProjectV3Resource s) s Text where
+instance P.HasParentId (IdentityProjectV3Resource s) (TF.Attr s Text) where
     parentId =
         lens (_parent_id :: IdentityProjectV3Resource s -> TF.Attr s Text)
              (\s a -> s { _parent_id = a } :: IdentityProjectV3Resource s)
 
-instance P.HasRegion (IdentityProjectV3Resource s) s Text where
+instance P.HasRegion (IdentityProjectV3Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: IdentityProjectV3Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: IdentityProjectV3Resource s)
 
-instance P.HasComputedDomainId (IdentityProjectV3Resource s) Text
-instance P.HasComputedParentId (IdentityProjectV3Resource s) Text
+instance P.HasComputedDomainId (IdentityProjectV3Resource s) (Text)
+instance P.HasComputedParentId (IdentityProjectV3Resource s) (Text)
 
 identityProjectV3Resource :: TF.Schema TF.Resource P.OpenStack (IdentityProjectV3Resource s)
 identityProjectV3Resource =
@@ -2529,87 +2530,87 @@ data IdentityUserV3Resource s = IdentityUserV3Resource {
 
 instance TF.ToHCL (IdentityUserV3Resource s) where
     toHCL IdentityUserV3Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "default_project_id" _default_project_id
-        , TF.attribute "description" _description
-        , TF.attribute "domain_id" _domain_id
-        , TF.attribute "enabled" _enabled
-        , TF.attribute "extra" _extra
-        , TF.attribute "ignore_change_password_upon_first_use" _ignore_change_password_upon_first_use
-        , TF.attribute "ignore_lockout_failure_attempts" _ignore_lockout_failure_attempts
-        , TF.attribute "ignore_password_expiry" _ignore_password_expiry
-        , TF.attribute "multi_factor_auth_enabled" _multi_factor_auth_enabled
-        , TF.attribute "multi_factor_auth_rule" _multi_factor_auth_rule
-        , TF.attribute "name" _name
-        , TF.attribute "password" _password
-        , TF.attribute "region" _region
+        [ TF.assign "default_project_id" <$> TF.attribute _default_project_id
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "domain_id" <$> TF.attribute _domain_id
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "extra" <$> TF.attribute _extra
+        , TF.assign "ignore_change_password_upon_first_use" <$> TF.attribute _ignore_change_password_upon_first_use
+        , TF.assign "ignore_lockout_failure_attempts" <$> TF.attribute _ignore_lockout_failure_attempts
+        , TF.assign "ignore_password_expiry" <$> TF.attribute _ignore_password_expiry
+        , TF.assign "multi_factor_auth_enabled" <$> TF.attribute _multi_factor_auth_enabled
+        , TF.assign "multi_factor_auth_rule" <$> TF.attribute _multi_factor_auth_rule
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasDefaultProjectId (IdentityUserV3Resource s) s Text where
+instance P.HasDefaultProjectId (IdentityUserV3Resource s) (TF.Attr s Text) where
     defaultProjectId =
         lens (_default_project_id :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _default_project_id = a } :: IdentityUserV3Resource s)
 
-instance P.HasDescription (IdentityUserV3Resource s) s Text where
+instance P.HasDescription (IdentityUserV3Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: IdentityUserV3Resource s)
 
-instance P.HasDomainId (IdentityUserV3Resource s) s Text where
+instance P.HasDomainId (IdentityUserV3Resource s) (TF.Attr s Text) where
     domainId =
         lens (_domain_id :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _domain_id = a } :: IdentityUserV3Resource s)
 
-instance P.HasEnabled (IdentityUserV3Resource s) s Text where
+instance P.HasEnabled (IdentityUserV3Resource s) (TF.Attr s Text) where
     enabled =
         lens (_enabled :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _enabled = a } :: IdentityUserV3Resource s)
 
-instance P.HasExtra (IdentityUserV3Resource s) s Text where
+instance P.HasExtra (IdentityUserV3Resource s) (TF.Attr s Text) where
     extra =
         lens (_extra :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _extra = a } :: IdentityUserV3Resource s)
 
-instance P.HasIgnoreChangePasswordUponFirstUse (IdentityUserV3Resource s) s Text where
+instance P.HasIgnoreChangePasswordUponFirstUse (IdentityUserV3Resource s) (TF.Attr s Text) where
     ignoreChangePasswordUponFirstUse =
         lens (_ignore_change_password_upon_first_use :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _ignore_change_password_upon_first_use = a } :: IdentityUserV3Resource s)
 
-instance P.HasIgnoreLockoutFailureAttempts (IdentityUserV3Resource s) s Text where
+instance P.HasIgnoreLockoutFailureAttempts (IdentityUserV3Resource s) (TF.Attr s Text) where
     ignoreLockoutFailureAttempts =
         lens (_ignore_lockout_failure_attempts :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _ignore_lockout_failure_attempts = a } :: IdentityUserV3Resource s)
 
-instance P.HasIgnorePasswordExpiry (IdentityUserV3Resource s) s Text where
+instance P.HasIgnorePasswordExpiry (IdentityUserV3Resource s) (TF.Attr s Text) where
     ignorePasswordExpiry =
         lens (_ignore_password_expiry :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _ignore_password_expiry = a } :: IdentityUserV3Resource s)
 
-instance P.HasMultiFactorAuthEnabled (IdentityUserV3Resource s) s Text where
+instance P.HasMultiFactorAuthEnabled (IdentityUserV3Resource s) (TF.Attr s Text) where
     multiFactorAuthEnabled =
         lens (_multi_factor_auth_enabled :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _multi_factor_auth_enabled = a } :: IdentityUserV3Resource s)
 
-instance P.HasMultiFactorAuthRule (IdentityUserV3Resource s) s Text where
+instance P.HasMultiFactorAuthRule (IdentityUserV3Resource s) (TF.Attr s Text) where
     multiFactorAuthRule =
         lens (_multi_factor_auth_rule :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _multi_factor_auth_rule = a } :: IdentityUserV3Resource s)
 
-instance P.HasName (IdentityUserV3Resource s) s Text where
+instance P.HasName (IdentityUserV3Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: IdentityUserV3Resource s)
 
-instance P.HasPassword (IdentityUserV3Resource s) s Text where
+instance P.HasPassword (IdentityUserV3Resource s) (TF.Attr s Text) where
     password =
         lens (_password :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: IdentityUserV3Resource s)
 
-instance P.HasRegion (IdentityUserV3Resource s) s Text where
+instance P.HasRegion (IdentityUserV3Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: IdentityUserV3Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: IdentityUserV3Resource s)
 
-instance P.HasComputedDomainId (IdentityUserV3Resource s) Text
+instance P.HasComputedDomainId (IdentityUserV3Resource s) (Text)
 
 identityUserV3Resource :: TF.Schema TF.Resource P.OpenStack (IdentityUserV3Resource s)
 identityUserV3Resource =
@@ -2665,106 +2666,106 @@ data ImagesImageV2Resource s = ImagesImageV2Resource {
 
 instance TF.ToHCL (ImagesImageV2Resource s) where
     toHCL ImagesImageV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "container_format" _container_format
-        , TF.attribute "disk_format" _disk_format
-        , TF.attribute "image_cache_path" _image_cache_path
-        , TF.attribute "image_source_url" _image_source_url
-        , TF.attribute "local_file_path" _local_file_path
-        , TF.attribute "min_disk_gb" _min_disk_gb
-        , TF.attribute "min_ram_mb" _min_ram_mb
-        , TF.attribute "name" _name
-        , TF.attribute "properties" _properties
-        , TF.attribute "protected" _protected
-        , TF.attribute "region" _region
-        , TF.attribute "tags" _tags
-        , TF.attribute "visibility" _visibility
+        [ TF.assign "container_format" <$> TF.attribute _container_format
+        , TF.assign "disk_format" <$> TF.attribute _disk_format
+        , TF.assign "image_cache_path" <$> TF.attribute _image_cache_path
+        , TF.assign "image_source_url" <$> TF.attribute _image_source_url
+        , TF.assign "local_file_path" <$> TF.attribute _local_file_path
+        , TF.assign "min_disk_gb" <$> TF.attribute _min_disk_gb
+        , TF.assign "min_ram_mb" <$> TF.attribute _min_ram_mb
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "properties" <$> TF.attribute _properties
+        , TF.assign "protected" <$> TF.attribute _protected
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "visibility" <$> TF.attribute _visibility
         ]
 
-instance P.HasContainerFormat (ImagesImageV2Resource s) s Text where
+instance P.HasContainerFormat (ImagesImageV2Resource s) (TF.Attr s Text) where
     containerFormat =
         lens (_container_format :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _container_format = a } :: ImagesImageV2Resource s)
 
-instance P.HasDiskFormat (ImagesImageV2Resource s) s Text where
+instance P.HasDiskFormat (ImagesImageV2Resource s) (TF.Attr s Text) where
     diskFormat =
         lens (_disk_format :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _disk_format = a } :: ImagesImageV2Resource s)
 
-instance P.HasImageCachePath (ImagesImageV2Resource s) s Text where
+instance P.HasImageCachePath (ImagesImageV2Resource s) (TF.Attr s Text) where
     imageCachePath =
         lens (_image_cache_path :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _image_cache_path = a } :: ImagesImageV2Resource s)
 
-instance P.HasImageSourceUrl (ImagesImageV2Resource s) s Text where
+instance P.HasImageSourceUrl (ImagesImageV2Resource s) (TF.Attr s Text) where
     imageSourceUrl =
         lens (_image_source_url :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _image_source_url = a } :: ImagesImageV2Resource s)
 
-instance P.HasLocalFilePath (ImagesImageV2Resource s) s Text where
+instance P.HasLocalFilePath (ImagesImageV2Resource s) (TF.Attr s Text) where
     localFilePath =
         lens (_local_file_path :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _local_file_path = a } :: ImagesImageV2Resource s)
 
-instance P.HasMinDiskGb (ImagesImageV2Resource s) s Text where
+instance P.HasMinDiskGb (ImagesImageV2Resource s) (TF.Attr s Text) where
     minDiskGb =
         lens (_min_disk_gb :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _min_disk_gb = a } :: ImagesImageV2Resource s)
 
-instance P.HasMinRamMb (ImagesImageV2Resource s) s Text where
+instance P.HasMinRamMb (ImagesImageV2Resource s) (TF.Attr s Text) where
     minRamMb =
         lens (_min_ram_mb :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _min_ram_mb = a } :: ImagesImageV2Resource s)
 
-instance P.HasName (ImagesImageV2Resource s) s Text where
+instance P.HasName (ImagesImageV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImagesImageV2Resource s)
 
-instance P.HasProperties (ImagesImageV2Resource s) s Text where
+instance P.HasProperties (ImagesImageV2Resource s) (TF.Attr s Text) where
     properties =
         lens (_properties :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _properties = a } :: ImagesImageV2Resource s)
 
-instance P.HasProtected (ImagesImageV2Resource s) s Text where
+instance P.HasProtected (ImagesImageV2Resource s) (TF.Attr s Text) where
     protected =
         lens (_protected :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _protected = a } :: ImagesImageV2Resource s)
 
-instance P.HasRegion (ImagesImageV2Resource s) s Text where
+instance P.HasRegion (ImagesImageV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ImagesImageV2Resource s)
 
-instance P.HasTags (ImagesImageV2Resource s) s Text where
+instance P.HasTags (ImagesImageV2Resource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ImagesImageV2Resource s)
 
-instance P.HasVisibility (ImagesImageV2Resource s) s Text where
+instance P.HasVisibility (ImagesImageV2Resource s) (TF.Attr s Text) where
     visibility =
         lens (_visibility :: ImagesImageV2Resource s -> TF.Attr s Text)
              (\s a -> s { _visibility = a } :: ImagesImageV2Resource s)
 
-instance P.HasComputedChecksum (ImagesImageV2Resource s) Text
-instance P.HasComputedContainerFormat (ImagesImageV2Resource s) Text
-instance P.HasComputedCreatedAt (ImagesImageV2Resource s) Text
-instance P.HasComputedDiskFormat (ImagesImageV2Resource s) Text
-instance P.HasComputedFile (ImagesImageV2Resource s) Text
-instance P.HasComputedId (ImagesImageV2Resource s) Text
-instance P.HasComputedMetadata (ImagesImageV2Resource s) Text
-instance P.HasComputedMinDiskGb (ImagesImageV2Resource s) Text
-instance P.HasComputedMinRamMb (ImagesImageV2Resource s) Text
-instance P.HasComputedName (ImagesImageV2Resource s) Text
-instance P.HasComputedOwner (ImagesImageV2Resource s) Text
-instance P.HasComputedProperties (ImagesImageV2Resource s) Text
-instance P.HasComputedProtected (ImagesImageV2Resource s) Text
-instance P.HasComputedRegion (ImagesImageV2Resource s) Text
-instance P.HasComputedSchema (ImagesImageV2Resource s) Text
-instance P.HasComputedSizeBytes (ImagesImageV2Resource s) Text
-instance P.HasComputedStatus (ImagesImageV2Resource s) Text
-instance P.HasComputedTags (ImagesImageV2Resource s) Text
-instance P.HasComputedUpdateAt (ImagesImageV2Resource s) Text
-instance P.HasComputedVisibility (ImagesImageV2Resource s) Text
+instance P.HasComputedChecksum (ImagesImageV2Resource s) (Text)
+instance P.HasComputedContainerFormat (ImagesImageV2Resource s) (Text)
+instance P.HasComputedCreatedAt (ImagesImageV2Resource s) (Text)
+instance P.HasComputedDiskFormat (ImagesImageV2Resource s) (Text)
+instance P.HasComputedFile (ImagesImageV2Resource s) (Text)
+instance P.HasComputedId (ImagesImageV2Resource s) (Text)
+instance P.HasComputedMetadata (ImagesImageV2Resource s) (Text)
+instance P.HasComputedMinDiskGb (ImagesImageV2Resource s) (Text)
+instance P.HasComputedMinRamMb (ImagesImageV2Resource s) (Text)
+instance P.HasComputedName (ImagesImageV2Resource s) (Text)
+instance P.HasComputedOwner (ImagesImageV2Resource s) (Text)
+instance P.HasComputedProperties (ImagesImageV2Resource s) (Text)
+instance P.HasComputedProtected (ImagesImageV2Resource s) (Text)
+instance P.HasComputedRegion (ImagesImageV2Resource s) (Text)
+instance P.HasComputedSchema (ImagesImageV2Resource s) (Text)
+instance P.HasComputedSizeBytes (ImagesImageV2Resource s) (Text)
+instance P.HasComputedStatus (ImagesImageV2Resource s) (Text)
+instance P.HasComputedTags (ImagesImageV2Resource s) (Text)
+instance P.HasComputedUpdateAt (ImagesImageV2Resource s) (Text)
+instance P.HasComputedVisibility (ImagesImageV2Resource s) (Text)
 
 imagesImageV2Resource :: TF.Schema TF.Resource P.OpenStack (ImagesImageV2Resource s)
 imagesImageV2Resource =
@@ -2818,91 +2819,91 @@ data LbListenerV2Resource s = LbListenerV2Resource {
 
 instance TF.ToHCL (LbListenerV2Resource s) where
     toHCL LbListenerV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "connection_limit" _connection_limit
-        , TF.attribute "default_pool_id" _default_pool_id
-        , TF.attribute "default_tls_container_ref" _default_tls_container_ref
-        , TF.attribute "description" _description
-        , TF.attribute "loadbalancer_id" _loadbalancer_id
-        , TF.attribute "name" _name
-        , TF.attribute "protocol" _protocol
-        , TF.attribute "protocol_port" _protocol_port
-        , TF.attribute "region" _region
-        , TF.attribute "sni_container_refs" _sni_container_refs
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "connection_limit" <$> TF.attribute _connection_limit
+        , TF.assign "default_pool_id" <$> TF.attribute _default_pool_id
+        , TF.assign "default_tls_container_ref" <$> TF.attribute _default_tls_container_ref
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancer_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "protocol_port" <$> TF.attribute _protocol_port
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "sni_container_refs" <$> TF.attribute _sni_container_refs
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasAdminStateUp (LbListenerV2Resource s) s Text where
+instance P.HasAdminStateUp (LbListenerV2Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: LbListenerV2Resource s)
 
-instance P.HasConnectionLimit (LbListenerV2Resource s) s Text where
+instance P.HasConnectionLimit (LbListenerV2Resource s) (TF.Attr s Text) where
     connectionLimit =
         lens (_connection_limit :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _connection_limit = a } :: LbListenerV2Resource s)
 
-instance P.HasDefaultPoolId (LbListenerV2Resource s) s Text where
+instance P.HasDefaultPoolId (LbListenerV2Resource s) (TF.Attr s Text) where
     defaultPoolId =
         lens (_default_pool_id :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _default_pool_id = a } :: LbListenerV2Resource s)
 
-instance P.HasDefaultTlsContainerRef (LbListenerV2Resource s) s Text where
+instance P.HasDefaultTlsContainerRef (LbListenerV2Resource s) (TF.Attr s Text) where
     defaultTlsContainerRef =
         lens (_default_tls_container_ref :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _default_tls_container_ref = a } :: LbListenerV2Resource s)
 
-instance P.HasDescription (LbListenerV2Resource s) s Text where
+instance P.HasDescription (LbListenerV2Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: LbListenerV2Resource s)
 
-instance P.HasLoadbalancerId (LbListenerV2Resource s) s Text where
+instance P.HasLoadbalancerId (LbListenerV2Resource s) (TF.Attr s Text) where
     loadbalancerId =
         lens (_loadbalancer_id :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _loadbalancer_id = a } :: LbListenerV2Resource s)
 
-instance P.HasName (LbListenerV2Resource s) s Text where
+instance P.HasName (LbListenerV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbListenerV2Resource s)
 
-instance P.HasProtocol (LbListenerV2Resource s) s Text where
+instance P.HasProtocol (LbListenerV2Resource s) (TF.Attr s Text) where
     protocol =
         lens (_protocol :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: LbListenerV2Resource s)
 
-instance P.HasProtocolPort (LbListenerV2Resource s) s Text where
+instance P.HasProtocolPort (LbListenerV2Resource s) (TF.Attr s Text) where
     protocolPort =
         lens (_protocol_port :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _protocol_port = a } :: LbListenerV2Resource s)
 
-instance P.HasRegion (LbListenerV2Resource s) s Text where
+instance P.HasRegion (LbListenerV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbListenerV2Resource s)
 
-instance P.HasSniContainerRefs (LbListenerV2Resource s) s Text where
+instance P.HasSniContainerRefs (LbListenerV2Resource s) (TF.Attr s Text) where
     sniContainerRefs =
         lens (_sni_container_refs :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _sni_container_refs = a } :: LbListenerV2Resource s)
 
-instance P.HasTenantId (LbListenerV2Resource s) s Text where
+instance P.HasTenantId (LbListenerV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbListenerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbListenerV2Resource s)
 
-instance P.HasComputedAdminStateUp (LbListenerV2Resource s) Text
-instance P.HasComputedConnectionLimit (LbListenerV2Resource s) Text
-instance P.HasComputedDefaultPortId (LbListenerV2Resource s) Text
-instance P.HasComputedDefaultTlsContainerRef (LbListenerV2Resource s) Text
-instance P.HasComputedDescription (LbListenerV2Resource s) Text
-instance P.HasComputedId (LbListenerV2Resource s) Text
-instance P.HasComputedName (LbListenerV2Resource s) Text
-instance P.HasComputedProtocol (LbListenerV2Resource s) Text
-instance P.HasComputedProtocolPort (LbListenerV2Resource s) Text
-instance P.HasComputedSniContainerRefs (LbListenerV2Resource s) Text
-instance P.HasComputedTenantId (LbListenerV2Resource s) Text
+instance P.HasComputedAdminStateUp (LbListenerV2Resource s) (Text)
+instance P.HasComputedConnectionLimit (LbListenerV2Resource s) (Text)
+instance P.HasComputedDefaultPortId (LbListenerV2Resource s) (Text)
+instance P.HasComputedDefaultTlsContainerRef (LbListenerV2Resource s) (Text)
+instance P.HasComputedDescription (LbListenerV2Resource s) (Text)
+instance P.HasComputedId (LbListenerV2Resource s) (Text)
+instance P.HasComputedName (LbListenerV2Resource s) (Text)
+instance P.HasComputedProtocol (LbListenerV2Resource s) (Text)
+instance P.HasComputedProtocolPort (LbListenerV2Resource s) (Text)
+instance P.HasComputedSniContainerRefs (LbListenerV2Resource s) (Text)
+instance P.HasComputedTenantId (LbListenerV2Resource s) (Text)
 
 lbListenerV2Resource :: TF.Schema TF.Resource P.OpenStack (LbListenerV2Resource s)
 lbListenerV2Resource =
@@ -2951,79 +2952,79 @@ data LbLoadbalancerV2Resource s = LbLoadbalancerV2Resource {
 
 instance TF.ToHCL (LbLoadbalancerV2Resource s) where
     toHCL LbLoadbalancerV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "description" _description
-        , TF.attribute "flavor" _flavor
-        , TF.attribute "loadbalancer_provider" _loadbalancer_provider
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "security_group_ids" _security_group_ids
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "vip_address" _vip_address
-        , TF.attribute "vip_subnet_id" _vip_subnet_id
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "flavor" <$> TF.attribute _flavor
+        , TF.assign "loadbalancer_provider" <$> TF.attribute _loadbalancer_provider
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "security_group_ids" <$> TF.attribute _security_group_ids
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "vip_address" <$> TF.attribute _vip_address
+        , TF.assign "vip_subnet_id" <$> TF.attribute _vip_subnet_id
         ]
 
-instance P.HasAdminStateUp (LbLoadbalancerV2Resource s) s Text where
+instance P.HasAdminStateUp (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasDescription (LbLoadbalancerV2Resource s) s Text where
+instance P.HasDescription (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasFlavor (LbLoadbalancerV2Resource s) s Text where
+instance P.HasFlavor (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     flavor =
         lens (_flavor :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _flavor = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasLoadbalancerProvider (LbLoadbalancerV2Resource s) s Text where
+instance P.HasLoadbalancerProvider (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     loadbalancerProvider =
         lens (_loadbalancer_provider :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _loadbalancer_provider = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasName (LbLoadbalancerV2Resource s) s Text where
+instance P.HasName (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasRegion (LbLoadbalancerV2Resource s) s Text where
+instance P.HasRegion (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasSecurityGroupIds (LbLoadbalancerV2Resource s) s Text where
+instance P.HasSecurityGroupIds (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     securityGroupIds =
         lens (_security_group_ids :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _security_group_ids = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasTenantId (LbLoadbalancerV2Resource s) s Text where
+instance P.HasTenantId (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasVipAddress (LbLoadbalancerV2Resource s) s Text where
+instance P.HasVipAddress (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     vipAddress =
         lens (_vip_address :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _vip_address = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasVipSubnetId (LbLoadbalancerV2Resource s) s Text where
+instance P.HasVipSubnetId (LbLoadbalancerV2Resource s) (TF.Attr s Text) where
     vipSubnetId =
         lens (_vip_subnet_id :: LbLoadbalancerV2Resource s -> TF.Attr s Text)
              (\s a -> s { _vip_subnet_id = a } :: LbLoadbalancerV2Resource s)
 
-instance P.HasComputedAdminStateUp (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedDescription (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedFlavor (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedLoadbalancerProvider (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedName (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedRegion (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedSecurityGroupIds (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedTenantId (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedVipAddress (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedVipPortId (LbLoadbalancerV2Resource s) Text
-instance P.HasComputedVipSubnetId (LbLoadbalancerV2Resource s) Text
+instance P.HasComputedAdminStateUp (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedDescription (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedFlavor (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedLoadbalancerProvider (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedName (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedRegion (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedSecurityGroupIds (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedTenantId (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedVipAddress (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedVipPortId (LbLoadbalancerV2Resource s) (Text)
+instance P.HasComputedVipSubnetId (LbLoadbalancerV2Resource s) (Text)
 
 lbLoadbalancerV2Resource :: TF.Schema TF.Resource P.OpenStack (LbLoadbalancerV2Resource s)
 lbLoadbalancerV2Resource =
@@ -3062,50 +3063,50 @@ data LbMemberV1Resource s = LbMemberV1Resource {
 
 instance TF.ToHCL (LbMemberV1Resource s) where
     toHCL LbMemberV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "address" _address
-        , TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "pool_id" _pool_id
-        , TF.attribute "port" _port
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "pool_id" <$> TF.attribute _pool_id
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasAddress (LbMemberV1Resource s) s Text where
+instance P.HasAddress (LbMemberV1Resource s) (TF.Attr s Text) where
     address =
         lens (_address :: LbMemberV1Resource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: LbMemberV1Resource s)
 
-instance P.HasAdminStateUp (LbMemberV1Resource s) s Text where
+instance P.HasAdminStateUp (LbMemberV1Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: LbMemberV1Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: LbMemberV1Resource s)
 
-instance P.HasPoolId (LbMemberV1Resource s) s Text where
+instance P.HasPoolId (LbMemberV1Resource s) (TF.Attr s Text) where
     poolId =
         lens (_pool_id :: LbMemberV1Resource s -> TF.Attr s Text)
              (\s a -> s { _pool_id = a } :: LbMemberV1Resource s)
 
-instance P.HasPort (LbMemberV1Resource s) s Text where
+instance P.HasPort (LbMemberV1Resource s) (TF.Attr s Text) where
     port =
         lens (_port :: LbMemberV1Resource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: LbMemberV1Resource s)
 
-instance P.HasRegion (LbMemberV1Resource s) s Text where
+instance P.HasRegion (LbMemberV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbMemberV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbMemberV1Resource s)
 
-instance P.HasTenantId (LbMemberV1Resource s) s Text where
+instance P.HasTenantId (LbMemberV1Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbMemberV1Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbMemberV1Resource s)
 
-instance P.HasComputedAddress (LbMemberV1Resource s) Text
-instance P.HasComputedAdminStateUp (LbMemberV1Resource s) Text
-instance P.HasComputedPoolId (LbMemberV1Resource s) Text
-instance P.HasComputedPort (LbMemberV1Resource s) Text
-instance P.HasComputedRegion (LbMemberV1Resource s) Text
-instance P.HasComputedWeight (LbMemberV1Resource s) Text
+instance P.HasComputedAddress (LbMemberV1Resource s) (Text)
+instance P.HasComputedAdminStateUp (LbMemberV1Resource s) (Text)
+instance P.HasComputedPoolId (LbMemberV1Resource s) (Text)
+instance P.HasComputedPort (LbMemberV1Resource s) (Text)
+instance P.HasComputedRegion (LbMemberV1Resource s) (Text)
+instance P.HasComputedWeight (LbMemberV1Resource s) (Text)
 
 lbMemberV1Resource :: TF.Schema TF.Resource P.OpenStack (LbMemberV1Resource s)
 lbMemberV1Resource =
@@ -3146,71 +3147,71 @@ data LbMemberV2Resource s = LbMemberV2Resource {
 
 instance TF.ToHCL (LbMemberV2Resource s) where
     toHCL LbMemberV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "address" _address
-        , TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "name" _name
-        , TF.attribute "pool_id" _pool_id
-        , TF.attribute "protocol_port" _protocol_port
-        , TF.attribute "region" _region
-        , TF.attribute "subnet_id" _subnet_id
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "weight" _weight
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pool_id" <$> TF.attribute _pool_id
+        , TF.assign "protocol_port" <$> TF.attribute _protocol_port
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "weight" <$> TF.attribute _weight
         ]
 
-instance P.HasAddress (LbMemberV2Resource s) s Text where
+instance P.HasAddress (LbMemberV2Resource s) (TF.Attr s Text) where
     address =
         lens (_address :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: LbMemberV2Resource s)
 
-instance P.HasAdminStateUp (LbMemberV2Resource s) s Text where
+instance P.HasAdminStateUp (LbMemberV2Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: LbMemberV2Resource s)
 
-instance P.HasName (LbMemberV2Resource s) s Text where
+instance P.HasName (LbMemberV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbMemberV2Resource s)
 
-instance P.HasPoolId (LbMemberV2Resource s) s Text where
+instance P.HasPoolId (LbMemberV2Resource s) (TF.Attr s Text) where
     poolId =
         lens (_pool_id :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _pool_id = a } :: LbMemberV2Resource s)
 
-instance P.HasProtocolPort (LbMemberV2Resource s) s Text where
+instance P.HasProtocolPort (LbMemberV2Resource s) (TF.Attr s Text) where
     protocolPort =
         lens (_protocol_port :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _protocol_port = a } :: LbMemberV2Resource s)
 
-instance P.HasRegion (LbMemberV2Resource s) s Text where
+instance P.HasRegion (LbMemberV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbMemberV2Resource s)
 
-instance P.HasSubnetId (LbMemberV2Resource s) s Text where
+instance P.HasSubnetId (LbMemberV2Resource s) (TF.Attr s Text) where
     subnetId =
         lens (_subnet_id :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _subnet_id = a } :: LbMemberV2Resource s)
 
-instance P.HasTenantId (LbMemberV2Resource s) s Text where
+instance P.HasTenantId (LbMemberV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbMemberV2Resource s)
 
-instance P.HasWeight (LbMemberV2Resource s) s Text where
+instance P.HasWeight (LbMemberV2Resource s) (TF.Attr s Text) where
     weight =
         lens (_weight :: LbMemberV2Resource s -> TF.Attr s Text)
              (\s a -> s { _weight = a } :: LbMemberV2Resource s)
 
-instance P.HasComputedAddress (LbMemberV2Resource s) Text
-instance P.HasComputedAdminStateUp (LbMemberV2Resource s) Text
-instance P.HasComputedId (LbMemberV2Resource s) Text
-instance P.HasComputedName (LbMemberV2Resource s) Text
-instance P.HasComputedPoolId (LbMemberV2Resource s) Text
-instance P.HasComputedProtocolPort (LbMemberV2Resource s) Text
-instance P.HasComputedSubnetId (LbMemberV2Resource s) Text
-instance P.HasComputedTenantId (LbMemberV2Resource s) Text
-instance P.HasComputedWeight (LbMemberV2Resource s) Text
+instance P.HasComputedAddress (LbMemberV2Resource s) (Text)
+instance P.HasComputedAdminStateUp (LbMemberV2Resource s) (Text)
+instance P.HasComputedId (LbMemberV2Resource s) (Text)
+instance P.HasComputedName (LbMemberV2Resource s) (Text)
+instance P.HasComputedPoolId (LbMemberV2Resource s) (Text)
+instance P.HasComputedProtocolPort (LbMemberV2Resource s) (Text)
+instance P.HasComputedSubnetId (LbMemberV2Resource s) (Text)
+instance P.HasComputedTenantId (LbMemberV2Resource s) (Text)
+instance P.HasComputedWeight (LbMemberV2Resource s) (Text)
 
 lbMemberV2Resource :: TF.Schema TF.Resource P.OpenStack (LbMemberV2Resource s)
 lbMemberV2Resource =
@@ -3256,78 +3257,78 @@ data LbMonitorV1Resource s = LbMonitorV1Resource {
 
 instance TF.ToHCL (LbMonitorV1Resource s) where
     toHCL LbMonitorV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "delay" _delay
-        , TF.attribute "expected_codes" _expected_codes
-        , TF.attribute "http_method" _http_method
-        , TF.attribute "max_retries" _max_retries
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "timeout" _timeout
-        , TF.attribute "type" _type'
-        , TF.attribute "url_path" _url_path
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "delay" <$> TF.attribute _delay
+        , TF.assign "expected_codes" <$> TF.attribute _expected_codes
+        , TF.assign "http_method" <$> TF.attribute _http_method
+        , TF.assign "max_retries" <$> TF.attribute _max_retries
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "url_path" <$> TF.attribute _url_path
         ]
 
-instance P.HasAdminStateUp (LbMonitorV1Resource s) s Text where
+instance P.HasAdminStateUp (LbMonitorV1Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: LbMonitorV1Resource s)
 
-instance P.HasDelay (LbMonitorV1Resource s) s Text where
+instance P.HasDelay (LbMonitorV1Resource s) (TF.Attr s Text) where
     delay =
         lens (_delay :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _delay = a } :: LbMonitorV1Resource s)
 
-instance P.HasExpectedCodes (LbMonitorV1Resource s) s Text where
+instance P.HasExpectedCodes (LbMonitorV1Resource s) (TF.Attr s Text) where
     expectedCodes =
         lens (_expected_codes :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _expected_codes = a } :: LbMonitorV1Resource s)
 
-instance P.HasHttpMethod (LbMonitorV1Resource s) s Text where
+instance P.HasHttpMethod (LbMonitorV1Resource s) (TF.Attr s Text) where
     httpMethod =
         lens (_http_method :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _http_method = a } :: LbMonitorV1Resource s)
 
-instance P.HasMaxRetries (LbMonitorV1Resource s) s Text where
+instance P.HasMaxRetries (LbMonitorV1Resource s) (TF.Attr s Text) where
     maxRetries =
         lens (_max_retries :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _max_retries = a } :: LbMonitorV1Resource s)
 
-instance P.HasRegion (LbMonitorV1Resource s) s Text where
+instance P.HasRegion (LbMonitorV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbMonitorV1Resource s)
 
-instance P.HasTenantId (LbMonitorV1Resource s) s Text where
+instance P.HasTenantId (LbMonitorV1Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbMonitorV1Resource s)
 
-instance P.HasTimeout (LbMonitorV1Resource s) s Text where
+instance P.HasTimeout (LbMonitorV1Resource s) (TF.Attr s Text) where
     timeout =
         lens (_timeout :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _timeout = a } :: LbMonitorV1Resource s)
 
-instance P.HasType' (LbMonitorV1Resource s) s Text where
+instance P.HasType' (LbMonitorV1Resource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: LbMonitorV1Resource s)
 
-instance P.HasUrlPath (LbMonitorV1Resource s) s Text where
+instance P.HasUrlPath (LbMonitorV1Resource s) (TF.Attr s Text) where
     urlPath =
         lens (_url_path :: LbMonitorV1Resource s -> TF.Attr s Text)
              (\s a -> s { _url_path = a } :: LbMonitorV1Resource s)
 
-instance P.HasComputedAdminStateUp (LbMonitorV1Resource s) Text
-instance P.HasComputedDelay (LbMonitorV1Resource s) Text
-instance P.HasComputedExpectedCodes (LbMonitorV1Resource s) Text
-instance P.HasComputedHttpMethod (LbMonitorV1Resource s) Text
-instance P.HasComputedMaxRetries (LbMonitorV1Resource s) Text
-instance P.HasComputedRegion (LbMonitorV1Resource s) Text
-instance P.HasComputedTenantId (LbMonitorV1Resource s) Text
-instance P.HasComputedTimeout (LbMonitorV1Resource s) Text
-instance P.HasComputedType' (LbMonitorV1Resource s) Text
-instance P.HasComputedUrlPath (LbMonitorV1Resource s) Text
+instance P.HasComputedAdminStateUp (LbMonitorV1Resource s) (Text)
+instance P.HasComputedDelay (LbMonitorV1Resource s) (Text)
+instance P.HasComputedExpectedCodes (LbMonitorV1Resource s) (Text)
+instance P.HasComputedHttpMethod (LbMonitorV1Resource s) (Text)
+instance P.HasComputedMaxRetries (LbMonitorV1Resource s) (Text)
+instance P.HasComputedRegion (LbMonitorV1Resource s) (Text)
+instance P.HasComputedTenantId (LbMonitorV1Resource s) (Text)
+instance P.HasComputedTimeout (LbMonitorV1Resource s) (Text)
+instance P.HasComputedType' (LbMonitorV1Resource s) (Text)
+instance P.HasComputedUrlPath (LbMonitorV1Resource s) (Text)
 
 lbMonitorV1Resource :: TF.Schema TF.Resource P.OpenStack (LbMonitorV1Resource s)
 lbMonitorV1Resource =
@@ -3378,90 +3379,90 @@ data LbMonitorV2Resource s = LbMonitorV2Resource {
 
 instance TF.ToHCL (LbMonitorV2Resource s) where
     toHCL LbMonitorV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "delay" _delay
-        , TF.attribute "expected_codes" _expected_codes
-        , TF.attribute "http_method" _http_method
-        , TF.attribute "max_retries" _max_retries
-        , TF.attribute "name" _name
-        , TF.attribute "pool_id" _pool_id
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "timeout" _timeout
-        , TF.attribute "type" _type'
-        , TF.attribute "url_path" _url_path
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "delay" <$> TF.attribute _delay
+        , TF.assign "expected_codes" <$> TF.attribute _expected_codes
+        , TF.assign "http_method" <$> TF.attribute _http_method
+        , TF.assign "max_retries" <$> TF.attribute _max_retries
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pool_id" <$> TF.attribute _pool_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "url_path" <$> TF.attribute _url_path
         ]
 
-instance P.HasAdminStateUp (LbMonitorV2Resource s) s Text where
+instance P.HasAdminStateUp (LbMonitorV2Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: LbMonitorV2Resource s)
 
-instance P.HasDelay (LbMonitorV2Resource s) s Text where
+instance P.HasDelay (LbMonitorV2Resource s) (TF.Attr s Text) where
     delay =
         lens (_delay :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _delay = a } :: LbMonitorV2Resource s)
 
-instance P.HasExpectedCodes (LbMonitorV2Resource s) s Text where
+instance P.HasExpectedCodes (LbMonitorV2Resource s) (TF.Attr s Text) where
     expectedCodes =
         lens (_expected_codes :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _expected_codes = a } :: LbMonitorV2Resource s)
 
-instance P.HasHttpMethod (LbMonitorV2Resource s) s Text where
+instance P.HasHttpMethod (LbMonitorV2Resource s) (TF.Attr s Text) where
     httpMethod =
         lens (_http_method :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _http_method = a } :: LbMonitorV2Resource s)
 
-instance P.HasMaxRetries (LbMonitorV2Resource s) s Text where
+instance P.HasMaxRetries (LbMonitorV2Resource s) (TF.Attr s Text) where
     maxRetries =
         lens (_max_retries :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _max_retries = a } :: LbMonitorV2Resource s)
 
-instance P.HasName (LbMonitorV2Resource s) s Text where
+instance P.HasName (LbMonitorV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbMonitorV2Resource s)
 
-instance P.HasPoolId (LbMonitorV2Resource s) s Text where
+instance P.HasPoolId (LbMonitorV2Resource s) (TF.Attr s Text) where
     poolId =
         lens (_pool_id :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _pool_id = a } :: LbMonitorV2Resource s)
 
-instance P.HasRegion (LbMonitorV2Resource s) s Text where
+instance P.HasRegion (LbMonitorV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbMonitorV2Resource s)
 
-instance P.HasTenantId (LbMonitorV2Resource s) s Text where
+instance P.HasTenantId (LbMonitorV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbMonitorV2Resource s)
 
-instance P.HasTimeout (LbMonitorV2Resource s) s Text where
+instance P.HasTimeout (LbMonitorV2Resource s) (TF.Attr s Text) where
     timeout =
         lens (_timeout :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _timeout = a } :: LbMonitorV2Resource s)
 
-instance P.HasType' (LbMonitorV2Resource s) s Text where
+instance P.HasType' (LbMonitorV2Resource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: LbMonitorV2Resource s)
 
-instance P.HasUrlPath (LbMonitorV2Resource s) s Text where
+instance P.HasUrlPath (LbMonitorV2Resource s) (TF.Attr s Text) where
     urlPath =
         lens (_url_path :: LbMonitorV2Resource s -> TF.Attr s Text)
              (\s a -> s { _url_path = a } :: LbMonitorV2Resource s)
 
-instance P.HasComputedAdminStateUp (LbMonitorV2Resource s) Text
-instance P.HasComputedDelay (LbMonitorV2Resource s) Text
-instance P.HasComputedExpectedCodes (LbMonitorV2Resource s) Text
-instance P.HasComputedHttpMethod (LbMonitorV2Resource s) Text
-instance P.HasComputedId (LbMonitorV2Resource s) Text
-instance P.HasComputedMaxRetries (LbMonitorV2Resource s) Text
-instance P.HasComputedTenantId (LbMonitorV2Resource s) Text
-instance P.HasComputedTimeout (LbMonitorV2Resource s) Text
-instance P.HasComputedType' (LbMonitorV2Resource s) Text
-instance P.HasComputedUrlPath (LbMonitorV2Resource s) Text
+instance P.HasComputedAdminStateUp (LbMonitorV2Resource s) (Text)
+instance P.HasComputedDelay (LbMonitorV2Resource s) (Text)
+instance P.HasComputedExpectedCodes (LbMonitorV2Resource s) (Text)
+instance P.HasComputedHttpMethod (LbMonitorV2Resource s) (Text)
+instance P.HasComputedId (LbMonitorV2Resource s) (Text)
+instance P.HasComputedMaxRetries (LbMonitorV2Resource s) (Text)
+instance P.HasComputedTenantId (LbMonitorV2Resource s) (Text)
+instance P.HasComputedTimeout (LbMonitorV2Resource s) (Text)
+instance P.HasComputedType' (LbMonitorV2Resource s) (Text)
+instance P.HasComputedUrlPath (LbMonitorV2Resource s) (Text)
 
 lbMonitorV2Resource :: TF.Schema TF.Resource P.OpenStack (LbMonitorV2Resource s)
 lbMonitorV2Resource =
@@ -3508,71 +3509,71 @@ data LbPoolV1Resource s = LbPoolV1Resource {
 
 instance TF.ToHCL (LbPoolV1Resource s) where
     toHCL LbPoolV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "lb_method" _lb_method
-        , TF.attribute "lb_provider" _lb_provider
-        , TF.attribute "member" _member
-        , TF.attribute "monitor_ids" _monitor_ids
-        , TF.attribute "name" _name
-        , TF.attribute "protocol" _protocol
-        , TF.attribute "region" _region
-        , TF.attribute "subnet_id" _subnet_id
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "lb_method" <$> TF.attribute _lb_method
+        , TF.assign "lb_provider" <$> TF.attribute _lb_provider
+        , TF.assign "member" <$> TF.attribute _member
+        , TF.assign "monitor_ids" <$> TF.attribute _monitor_ids
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasLbMethod (LbPoolV1Resource s) s Text where
+instance P.HasLbMethod (LbPoolV1Resource s) (TF.Attr s Text) where
     lbMethod =
         lens (_lb_method :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _lb_method = a } :: LbPoolV1Resource s)
 
-instance P.HasLbProvider (LbPoolV1Resource s) s Text where
+instance P.HasLbProvider (LbPoolV1Resource s) (TF.Attr s Text) where
     lbProvider =
         lens (_lb_provider :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _lb_provider = a } :: LbPoolV1Resource s)
 
-instance P.HasMember (LbPoolV1Resource s) s Text where
+instance P.HasMember (LbPoolV1Resource s) (TF.Attr s Text) where
     member =
         lens (_member :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _member = a } :: LbPoolV1Resource s)
 
-instance P.HasMonitorIds (LbPoolV1Resource s) s Text where
+instance P.HasMonitorIds (LbPoolV1Resource s) (TF.Attr s Text) where
     monitorIds =
         lens (_monitor_ids :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _monitor_ids = a } :: LbPoolV1Resource s)
 
-instance P.HasName (LbPoolV1Resource s) s Text where
+instance P.HasName (LbPoolV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbPoolV1Resource s)
 
-instance P.HasProtocol (LbPoolV1Resource s) s Text where
+instance P.HasProtocol (LbPoolV1Resource s) (TF.Attr s Text) where
     protocol =
         lens (_protocol :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: LbPoolV1Resource s)
 
-instance P.HasRegion (LbPoolV1Resource s) s Text where
+instance P.HasRegion (LbPoolV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbPoolV1Resource s)
 
-instance P.HasSubnetId (LbPoolV1Resource s) s Text where
+instance P.HasSubnetId (LbPoolV1Resource s) (TF.Attr s Text) where
     subnetId =
         lens (_subnet_id :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _subnet_id = a } :: LbPoolV1Resource s)
 
-instance P.HasTenantId (LbPoolV1Resource s) s Text where
+instance P.HasTenantId (LbPoolV1Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbPoolV1Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbPoolV1Resource s)
 
-instance P.HasComputedLbMethod (LbPoolV1Resource s) Text
-instance P.HasComputedLbProvider (LbPoolV1Resource s) Text
-instance P.HasComputedMember (LbPoolV1Resource s) Text
-instance P.HasComputedMonitorId (LbPoolV1Resource s) Text
-instance P.HasComputedName (LbPoolV1Resource s) Text
-instance P.HasComputedProtocol (LbPoolV1Resource s) Text
-instance P.HasComputedRegion (LbPoolV1Resource s) Text
-instance P.HasComputedSubnetId (LbPoolV1Resource s) Text
-instance P.HasComputedTenantId (LbPoolV1Resource s) Text
+instance P.HasComputedLbMethod (LbPoolV1Resource s) (Text)
+instance P.HasComputedLbProvider (LbPoolV1Resource s) (Text)
+instance P.HasComputedMember (LbPoolV1Resource s) (Text)
+instance P.HasComputedMonitorId (LbPoolV1Resource s) (Text)
+instance P.HasComputedName (LbPoolV1Resource s) (Text)
+instance P.HasComputedProtocol (LbPoolV1Resource s) (Text)
+instance P.HasComputedRegion (LbPoolV1Resource s) (Text)
+instance P.HasComputedSubnetId (LbPoolV1Resource s) (Text)
+instance P.HasComputedTenantId (LbPoolV1Resource s) (Text)
 
 lbPoolV1Resource :: TF.Schema TF.Resource P.OpenStack (LbPoolV1Resource s)
 lbPoolV1Resource =
@@ -3618,76 +3619,76 @@ data LbPoolV2Resource s = LbPoolV2Resource {
 
 instance TF.ToHCL (LbPoolV2Resource s) where
     toHCL LbPoolV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "description" _description
-        , TF.attribute "lb_method" _lb_method
-        , TF.attribute "listener_id" _listener_id
-        , TF.attribute "loadbalancer_id" _loadbalancer_id
-        , TF.attribute "name" _name
-        , TF.attribute "persistence" _persistence
-        , TF.attribute "protocol" _protocol
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "lb_method" <$> TF.attribute _lb_method
+        , TF.assign "listener_id" <$> TF.attribute _listener_id
+        , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancer_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "persistence" <$> TF.attribute _persistence
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasAdminStateUp (LbPoolV2Resource s) s Text where
+instance P.HasAdminStateUp (LbPoolV2Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: LbPoolV2Resource s)
 
-instance P.HasDescription (LbPoolV2Resource s) s Text where
+instance P.HasDescription (LbPoolV2Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: LbPoolV2Resource s)
 
-instance P.HasLbMethod (LbPoolV2Resource s) s Text where
+instance P.HasLbMethod (LbPoolV2Resource s) (TF.Attr s Text) where
     lbMethod =
         lens (_lb_method :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _lb_method = a } :: LbPoolV2Resource s)
 
-instance P.HasListenerId (LbPoolV2Resource s) s Text where
+instance P.HasListenerId (LbPoolV2Resource s) (TF.Attr s Text) where
     listenerId =
         lens (_listener_id :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _listener_id = a } :: LbPoolV2Resource s)
 
-instance P.HasLoadbalancerId (LbPoolV2Resource s) s Text where
+instance P.HasLoadbalancerId (LbPoolV2Resource s) (TF.Attr s Text) where
     loadbalancerId =
         lens (_loadbalancer_id :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _loadbalancer_id = a } :: LbPoolV2Resource s)
 
-instance P.HasName (LbPoolV2Resource s) s Text where
+instance P.HasName (LbPoolV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbPoolV2Resource s)
 
-instance P.HasPersistence (LbPoolV2Resource s) s Text where
+instance P.HasPersistence (LbPoolV2Resource s) (TF.Attr s Text) where
     persistence =
         lens (_persistence :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _persistence = a } :: LbPoolV2Resource s)
 
-instance P.HasProtocol (LbPoolV2Resource s) s Text where
+instance P.HasProtocol (LbPoolV2Resource s) (TF.Attr s Text) where
     protocol =
         lens (_protocol :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: LbPoolV2Resource s)
 
-instance P.HasRegion (LbPoolV2Resource s) s Text where
+instance P.HasRegion (LbPoolV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbPoolV2Resource s)
 
-instance P.HasTenantId (LbPoolV2Resource s) s Text where
+instance P.HasTenantId (LbPoolV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbPoolV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbPoolV2Resource s)
 
-instance P.HasComputedAdminStateUp (LbPoolV2Resource s) Text
-instance P.HasComputedDescription (LbPoolV2Resource s) Text
-instance P.HasComputedId (LbPoolV2Resource s) Text
-instance P.HasComputedLbMethod (LbPoolV2Resource s) Text
-instance P.HasComputedName (LbPoolV2Resource s) Text
-instance P.HasComputedPersistence (LbPoolV2Resource s) Text
-instance P.HasComputedProtocol (LbPoolV2Resource s) Text
-instance P.HasComputedTenantId (LbPoolV2Resource s) Text
+instance P.HasComputedAdminStateUp (LbPoolV2Resource s) (Text)
+instance P.HasComputedDescription (LbPoolV2Resource s) (Text)
+instance P.HasComputedId (LbPoolV2Resource s) (Text)
+instance P.HasComputedLbMethod (LbPoolV2Resource s) (Text)
+instance P.HasComputedName (LbPoolV2Resource s) (Text)
+instance P.HasComputedPersistence (LbPoolV2Resource s) (Text)
+instance P.HasComputedProtocol (LbPoolV2Resource s) (Text)
+instance P.HasComputedTenantId (LbPoolV2Resource s) (Text)
 
 lbPoolV2Resource :: TF.Schema TF.Resource P.OpenStack (LbPoolV2Resource s)
 lbPoolV2Resource =
@@ -3740,100 +3741,100 @@ data LbVipV1Resource s = LbVipV1Resource {
 
 instance TF.ToHCL (LbVipV1Resource s) where
     toHCL LbVipV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "address" _address
-        , TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "conn_limit" _conn_limit
-        , TF.attribute "description" _description
-        , TF.attribute "floating_ip" _floating_ip
-        , TF.attribute "name" _name
-        , TF.attribute "persistence" _persistence
-        , TF.attribute "pool_id" _pool_id
-        , TF.attribute "port" _port
-        , TF.attribute "protocol" _protocol
-        , TF.attribute "region" _region
-        , TF.attribute "subnet_id" _subnet_id
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "conn_limit" <$> TF.attribute _conn_limit
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "floating_ip" <$> TF.attribute _floating_ip
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "persistence" <$> TF.attribute _persistence
+        , TF.assign "pool_id" <$> TF.attribute _pool_id
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasAddress (LbVipV1Resource s) s Text where
+instance P.HasAddress (LbVipV1Resource s) (TF.Attr s Text) where
     address =
         lens (_address :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: LbVipV1Resource s)
 
-instance P.HasAdminStateUp (LbVipV1Resource s) s Text where
+instance P.HasAdminStateUp (LbVipV1Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: LbVipV1Resource s)
 
-instance P.HasConnLimit (LbVipV1Resource s) s Text where
+instance P.HasConnLimit (LbVipV1Resource s) (TF.Attr s Text) where
     connLimit =
         lens (_conn_limit :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _conn_limit = a } :: LbVipV1Resource s)
 
-instance P.HasDescription (LbVipV1Resource s) s Text where
+instance P.HasDescription (LbVipV1Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: LbVipV1Resource s)
 
-instance P.HasFloatingIp (LbVipV1Resource s) s Text where
+instance P.HasFloatingIp (LbVipV1Resource s) (TF.Attr s Text) where
     floatingIp =
         lens (_floating_ip :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _floating_ip = a } :: LbVipV1Resource s)
 
-instance P.HasName (LbVipV1Resource s) s Text where
+instance P.HasName (LbVipV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LbVipV1Resource s)
 
-instance P.HasPersistence (LbVipV1Resource s) s Text where
+instance P.HasPersistence (LbVipV1Resource s) (TF.Attr s Text) where
     persistence =
         lens (_persistence :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _persistence = a } :: LbVipV1Resource s)
 
-instance P.HasPoolId (LbVipV1Resource s) s Text where
+instance P.HasPoolId (LbVipV1Resource s) (TF.Attr s Text) where
     poolId =
         lens (_pool_id :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _pool_id = a } :: LbVipV1Resource s)
 
-instance P.HasPort (LbVipV1Resource s) s Text where
+instance P.HasPort (LbVipV1Resource s) (TF.Attr s Text) where
     port =
         lens (_port :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: LbVipV1Resource s)
 
-instance P.HasProtocol (LbVipV1Resource s) s Text where
+instance P.HasProtocol (LbVipV1Resource s) (TF.Attr s Text) where
     protocol =
         lens (_protocol :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: LbVipV1Resource s)
 
-instance P.HasRegion (LbVipV1Resource s) s Text where
+instance P.HasRegion (LbVipV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LbVipV1Resource s)
 
-instance P.HasSubnetId (LbVipV1Resource s) s Text where
+instance P.HasSubnetId (LbVipV1Resource s) (TF.Attr s Text) where
     subnetId =
         lens (_subnet_id :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _subnet_id = a } :: LbVipV1Resource s)
 
-instance P.HasTenantId (LbVipV1Resource s) s Text where
+instance P.HasTenantId (LbVipV1Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: LbVipV1Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: LbVipV1Resource s)
 
-instance P.HasComputedAddress (LbVipV1Resource s) Text
-instance P.HasComputedAdminStateUp (LbVipV1Resource s) Text
-instance P.HasComputedConnLimit (LbVipV1Resource s) Text
-instance P.HasComputedDescription (LbVipV1Resource s) Text
-instance P.HasComputedFloatingIp (LbVipV1Resource s) Text
-instance P.HasComputedName (LbVipV1Resource s) Text
-instance P.HasComputedPersistence (LbVipV1Resource s) Text
-instance P.HasComputedPoolId (LbVipV1Resource s) Text
-instance P.HasComputedPort (LbVipV1Resource s) Text
-instance P.HasComputedPortId (LbVipV1Resource s) Text
-instance P.HasComputedProtocol (LbVipV1Resource s) Text
-instance P.HasComputedRegion (LbVipV1Resource s) Text
-instance P.HasComputedSubnetId (LbVipV1Resource s) Text
-instance P.HasComputedTenantId (LbVipV1Resource s) Text
+instance P.HasComputedAddress (LbVipV1Resource s) (Text)
+instance P.HasComputedAdminStateUp (LbVipV1Resource s) (Text)
+instance P.HasComputedConnLimit (LbVipV1Resource s) (Text)
+instance P.HasComputedDescription (LbVipV1Resource s) (Text)
+instance P.HasComputedFloatingIp (LbVipV1Resource s) (Text)
+instance P.HasComputedName (LbVipV1Resource s) (Text)
+instance P.HasComputedPersistence (LbVipV1Resource s) (Text)
+instance P.HasComputedPoolId (LbVipV1Resource s) (Text)
+instance P.HasComputedPort (LbVipV1Resource s) (Text)
+instance P.HasComputedPortId (LbVipV1Resource s) (Text)
+instance P.HasComputedProtocol (LbVipV1Resource s) (Text)
+instance P.HasComputedRegion (LbVipV1Resource s) (Text)
+instance P.HasComputedSubnetId (LbVipV1Resource s) (Text)
+instance P.HasComputedTenantId (LbVipV1Resource s) (Text)
 
 lbVipV1Resource :: TF.Schema TF.Resource P.OpenStack (LbVipV1Resource s)
 lbVipV1Resource =
@@ -3878,50 +3879,50 @@ data NetworkingFloatingipV2Resource s = NetworkingFloatingipV2Resource {
 
 instance TF.ToHCL (NetworkingFloatingipV2Resource s) where
     toHCL NetworkingFloatingipV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "fixed_ip" _fixed_ip
-        , TF.attribute "pool" _pool
-        , TF.attribute "port_id" _port_id
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "fixed_ip" <$> TF.attribute _fixed_ip
+        , TF.assign "pool" <$> TF.attribute _pool
+        , TF.assign "port_id" <$> TF.attribute _port_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasFixedIp (NetworkingFloatingipV2Resource s) s Text where
+instance P.HasFixedIp (NetworkingFloatingipV2Resource s) (TF.Attr s Text) where
     fixedIp =
         lens (_fixed_ip :: NetworkingFloatingipV2Resource s -> TF.Attr s Text)
              (\s a -> s { _fixed_ip = a } :: NetworkingFloatingipV2Resource s)
 
-instance P.HasPool (NetworkingFloatingipV2Resource s) s Text where
+instance P.HasPool (NetworkingFloatingipV2Resource s) (TF.Attr s Text) where
     pool =
         lens (_pool :: NetworkingFloatingipV2Resource s -> TF.Attr s Text)
              (\s a -> s { _pool = a } :: NetworkingFloatingipV2Resource s)
 
-instance P.HasPortId (NetworkingFloatingipV2Resource s) s Text where
+instance P.HasPortId (NetworkingFloatingipV2Resource s) (TF.Attr s Text) where
     portId =
         lens (_port_id :: NetworkingFloatingipV2Resource s -> TF.Attr s Text)
              (\s a -> s { _port_id = a } :: NetworkingFloatingipV2Resource s)
 
-instance P.HasRegion (NetworkingFloatingipV2Resource s) s Text where
+instance P.HasRegion (NetworkingFloatingipV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingFloatingipV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingFloatingipV2Resource s)
 
-instance P.HasTenantId (NetworkingFloatingipV2Resource s) s Text where
+instance P.HasTenantId (NetworkingFloatingipV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingFloatingipV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingFloatingipV2Resource s)
 
-instance P.HasValueSpecs (NetworkingFloatingipV2Resource s) s Text where
+instance P.HasValueSpecs (NetworkingFloatingipV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: NetworkingFloatingipV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: NetworkingFloatingipV2Resource s)
 
-instance P.HasComputedAddress (NetworkingFloatingipV2Resource s) Text
-instance P.HasComputedFixedIp (NetworkingFloatingipV2Resource s) Text
-instance P.HasComputedPool (NetworkingFloatingipV2Resource s) Text
-instance P.HasComputedPortId (NetworkingFloatingipV2Resource s) Text
-instance P.HasComputedRegion (NetworkingFloatingipV2Resource s) Text
-instance P.HasComputedTenantId (NetworkingFloatingipV2Resource s) Text
+instance P.HasComputedAddress (NetworkingFloatingipV2Resource s) (Text)
+instance P.HasComputedFixedIp (NetworkingFloatingipV2Resource s) (Text)
+instance P.HasComputedPool (NetworkingFloatingipV2Resource s) (Text)
+instance P.HasComputedPortId (NetworkingFloatingipV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingFloatingipV2Resource s) (Text)
+instance P.HasComputedTenantId (NetworkingFloatingipV2Resource s) (Text)
 
 networkingFloatingipV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingFloatingipV2Resource s)
 networkingFloatingipV2Resource =
@@ -3960,62 +3961,62 @@ data NetworkingNetworkV2Resource s = NetworkingNetworkV2Resource {
 
 instance TF.ToHCL (NetworkingNetworkV2Resource s) where
     toHCL NetworkingNetworkV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "availability_zone_hints" _availability_zone_hints
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "segments" _segments
-        , TF.attribute "shared" _shared
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "availability_zone_hints" <$> TF.attribute _availability_zone_hints
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "segments" <$> TF.attribute _segments
+        , TF.assign "shared" <$> TF.attribute _shared
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasAdminStateUp (NetworkingNetworkV2Resource s) s Text where
+instance P.HasAdminStateUp (NetworkingNetworkV2Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: NetworkingNetworkV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasAvailabilityZoneHints (NetworkingNetworkV2Resource s) s Text where
+instance P.HasAvailabilityZoneHints (NetworkingNetworkV2Resource s) (TF.Attr s Text) where
     availabilityZoneHints =
         lens (_availability_zone_hints :: NetworkingNetworkV2Resource s -> TF.Attr s Text)
              (\s a -> s { _availability_zone_hints = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasName (NetworkingNetworkV2Resource s) s Text where
+instance P.HasName (NetworkingNetworkV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkingNetworkV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasRegion (NetworkingNetworkV2Resource s) s Text where
+instance P.HasRegion (NetworkingNetworkV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingNetworkV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasSegments (NetworkingNetworkV2Resource s) s Text where
+instance P.HasSegments (NetworkingNetworkV2Resource s) (TF.Attr s Text) where
     segments =
         lens (_segments :: NetworkingNetworkV2Resource s -> TF.Attr s Text)
              (\s a -> s { _segments = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasShared (NetworkingNetworkV2Resource s) s Text where
+instance P.HasShared (NetworkingNetworkV2Resource s) (TF.Attr s Text) where
     shared =
         lens (_shared :: NetworkingNetworkV2Resource s -> TF.Attr s Text)
              (\s a -> s { _shared = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasTenantId (NetworkingNetworkV2Resource s) s Text where
+instance P.HasTenantId (NetworkingNetworkV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingNetworkV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasValueSpecs (NetworkingNetworkV2Resource s) s Text where
+instance P.HasValueSpecs (NetworkingNetworkV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: NetworkingNetworkV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasComputedAdminStateUp (NetworkingNetworkV2Resource s) Text
-instance P.HasComputedAvailabilityZoneHints (NetworkingNetworkV2Resource s) Text
-instance P.HasComputedName (NetworkingNetworkV2Resource s) Text
-instance P.HasComputedRegion (NetworkingNetworkV2Resource s) Text
-instance P.HasComputedShared (NetworkingNetworkV2Resource s) Text
-instance P.HasComputedTenantId (NetworkingNetworkV2Resource s) Text
+instance P.HasComputedAdminStateUp (NetworkingNetworkV2Resource s) (Text)
+instance P.HasComputedAvailabilityZoneHints (NetworkingNetworkV2Resource s) (Text)
+instance P.HasComputedName (NetworkingNetworkV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingNetworkV2Resource s) (Text)
+instance P.HasComputedShared (NetworkingNetworkV2Resource s) (Text)
+instance P.HasComputedTenantId (NetworkingNetworkV2Resource s) (Text)
 
 networkingNetworkV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingNetworkV2Resource s)
 networkingNetworkV2Resource =
@@ -4066,96 +4067,96 @@ data NetworkingPortV2Resource s = NetworkingPortV2Resource {
 
 instance TF.ToHCL (NetworkingPortV2Resource s) where
     toHCL NetworkingPortV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "allowed_address_pairs" _allowed_address_pairs
-        , TF.attribute "device_id" _device_id
-        , TF.attribute "device_owner" _device_owner
-        , TF.attribute "fixed_ip" _fixed_ip
-        , TF.attribute "mac_address" _mac_address
-        , TF.attribute "name" _name
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "no_security_groups" _no_security_groups
-        , TF.attribute "region" _region
-        , TF.attribute "security_group_ids" _security_group_ids
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "allowed_address_pairs" <$> TF.attribute _allowed_address_pairs
+        , TF.assign "device_id" <$> TF.attribute _device_id
+        , TF.assign "device_owner" <$> TF.attribute _device_owner
+        , TF.assign "fixed_ip" <$> TF.attribute _fixed_ip
+        , TF.assign "mac_address" <$> TF.attribute _mac_address
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "no_security_groups" <$> TF.attribute _no_security_groups
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "security_group_ids" <$> TF.attribute _security_group_ids
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasAdminStateUp (NetworkingPortV2Resource s) s Text where
+instance P.HasAdminStateUp (NetworkingPortV2Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: NetworkingPortV2Resource s)
 
-instance P.HasAllowedAddressPairs (NetworkingPortV2Resource s) s Text where
+instance P.HasAllowedAddressPairs (NetworkingPortV2Resource s) (TF.Attr s Text) where
     allowedAddressPairs =
         lens (_allowed_address_pairs :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _allowed_address_pairs = a } :: NetworkingPortV2Resource s)
 
-instance P.HasDeviceId (NetworkingPortV2Resource s) s Text where
+instance P.HasDeviceId (NetworkingPortV2Resource s) (TF.Attr s Text) where
     deviceId =
         lens (_device_id :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _device_id = a } :: NetworkingPortV2Resource s)
 
-instance P.HasDeviceOwner (NetworkingPortV2Resource s) s Text where
+instance P.HasDeviceOwner (NetworkingPortV2Resource s) (TF.Attr s Text) where
     deviceOwner =
         lens (_device_owner :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _device_owner = a } :: NetworkingPortV2Resource s)
 
-instance P.HasFixedIp (NetworkingPortV2Resource s) s Text where
+instance P.HasFixedIp (NetworkingPortV2Resource s) (TF.Attr s Text) where
     fixedIp =
         lens (_fixed_ip :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _fixed_ip = a } :: NetworkingPortV2Resource s)
 
-instance P.HasMacAddress (NetworkingPortV2Resource s) s Text where
+instance P.HasMacAddress (NetworkingPortV2Resource s) (TF.Attr s Text) where
     macAddress =
         lens (_mac_address :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _mac_address = a } :: NetworkingPortV2Resource s)
 
-instance P.HasName (NetworkingPortV2Resource s) s Text where
+instance P.HasName (NetworkingPortV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingPortV2Resource s)
 
-instance P.HasNetworkId (NetworkingPortV2Resource s) s Text where
+instance P.HasNetworkId (NetworkingPortV2Resource s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: NetworkingPortV2Resource s)
 
-instance P.HasNoSecurityGroups (NetworkingPortV2Resource s) s Text where
+instance P.HasNoSecurityGroups (NetworkingPortV2Resource s) (TF.Attr s Text) where
     noSecurityGroups =
         lens (_no_security_groups :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _no_security_groups = a } :: NetworkingPortV2Resource s)
 
-instance P.HasRegion (NetworkingPortV2Resource s) s Text where
+instance P.HasRegion (NetworkingPortV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingPortV2Resource s)
 
-instance P.HasSecurityGroupIds (NetworkingPortV2Resource s) s Text where
+instance P.HasSecurityGroupIds (NetworkingPortV2Resource s) (TF.Attr s Text) where
     securityGroupIds =
         lens (_security_group_ids :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _security_group_ids = a } :: NetworkingPortV2Resource s)
 
-instance P.HasTenantId (NetworkingPortV2Resource s) s Text where
+instance P.HasTenantId (NetworkingPortV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingPortV2Resource s)
 
-instance P.HasValueSpecs (NetworkingPortV2Resource s) s Text where
+instance P.HasValueSpecs (NetworkingPortV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: NetworkingPortV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: NetworkingPortV2Resource s)
 
-instance P.HasComputedAdminStateUp (NetworkingPortV2Resource s) Text
-instance P.HasComputedAllFixedIps (NetworkingPortV2Resource s) Text
-instance P.HasComputedAllSecurityGroupIds (NetworkingPortV2Resource s) Text
-instance P.HasComputedDeviceId (NetworkingPortV2Resource s) Text
-instance P.HasComputedDeviceOwner (NetworkingPortV2Resource s) Text
-instance P.HasComputedFixedIp (NetworkingPortV2Resource s) Text
-instance P.HasComputedMacAddress (NetworkingPortV2Resource s) Text
-instance P.HasComputedRegion (NetworkingPortV2Resource s) Text
-instance P.HasComputedSecurityGroupIds (NetworkingPortV2Resource s) Text
-instance P.HasComputedTenantId (NetworkingPortV2Resource s) Text
+instance P.HasComputedAdminStateUp (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedAllFixedIps (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedAllSecurityGroupIds (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedDeviceId (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedDeviceOwner (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedFixedIp (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedMacAddress (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedSecurityGroupIds (NetworkingPortV2Resource s) (Text)
+instance P.HasComputedTenantId (NetworkingPortV2Resource s) (Text)
 
 networkingPortV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingPortV2Resource s)
 networkingPortV2Resource =
@@ -4193,36 +4194,36 @@ data NetworkingRouterInterfaceV2Resource s = NetworkingRouterInterfaceV2Resource
 
 instance TF.ToHCL (NetworkingRouterInterfaceV2Resource s) where
     toHCL NetworkingRouterInterfaceV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "port_id" _port_id
-        , TF.attribute "region" _region
-        , TF.attribute "router_id" _router_id
-        , TF.attribute "subnet_id" _subnet_id
+        [ TF.assign "port_id" <$> TF.attribute _port_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "router_id" <$> TF.attribute _router_id
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
         ]
 
-instance P.HasPortId (NetworkingRouterInterfaceV2Resource s) s Text where
+instance P.HasPortId (NetworkingRouterInterfaceV2Resource s) (TF.Attr s Text) where
     portId =
         lens (_port_id :: NetworkingRouterInterfaceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _port_id = a } :: NetworkingRouterInterfaceV2Resource s)
 
-instance P.HasRegion (NetworkingRouterInterfaceV2Resource s) s Text where
+instance P.HasRegion (NetworkingRouterInterfaceV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingRouterInterfaceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingRouterInterfaceV2Resource s)
 
-instance P.HasRouterId (NetworkingRouterInterfaceV2Resource s) s Text where
+instance P.HasRouterId (NetworkingRouterInterfaceV2Resource s) (TF.Attr s Text) where
     routerId =
         lens (_router_id :: NetworkingRouterInterfaceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _router_id = a } :: NetworkingRouterInterfaceV2Resource s)
 
-instance P.HasSubnetId (NetworkingRouterInterfaceV2Resource s) s Text where
+instance P.HasSubnetId (NetworkingRouterInterfaceV2Resource s) (TF.Attr s Text) where
     subnetId =
         lens (_subnet_id :: NetworkingRouterInterfaceV2Resource s -> TF.Attr s Text)
              (\s a -> s { _subnet_id = a } :: NetworkingRouterInterfaceV2Resource s)
 
-instance P.HasComputedPortId (NetworkingRouterInterfaceV2Resource s) Text
-instance P.HasComputedRegion (NetworkingRouterInterfaceV2Resource s) Text
-instance P.HasComputedRouterId (NetworkingRouterInterfaceV2Resource s) Text
-instance P.HasComputedSubnetId (NetworkingRouterInterfaceV2Resource s) Text
+instance P.HasComputedPortId (NetworkingRouterInterfaceV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingRouterInterfaceV2Resource s) (Text)
+instance P.HasComputedRouterId (NetworkingRouterInterfaceV2Resource s) (Text)
+instance P.HasComputedSubnetId (NetworkingRouterInterfaceV2Resource s) (Text)
 
 networkingRouterInterfaceV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingRouterInterfaceV2Resource s)
 networkingRouterInterfaceV2Resource =
@@ -4251,36 +4252,36 @@ data NetworkingRouterRouteV2Resource s = NetworkingRouterRouteV2Resource {
 
 instance TF.ToHCL (NetworkingRouterRouteV2Resource s) where
     toHCL NetworkingRouterRouteV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "destination_cidr" _destination_cidr
-        , TF.attribute "next_hop" _next_hop
-        , TF.attribute "region" _region
-        , TF.attribute "router_id" _router_id
+        [ TF.assign "destination_cidr" <$> TF.attribute _destination_cidr
+        , TF.assign "next_hop" <$> TF.attribute _next_hop
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "router_id" <$> TF.attribute _router_id
         ]
 
-instance P.HasDestinationCidr (NetworkingRouterRouteV2Resource s) s Text where
+instance P.HasDestinationCidr (NetworkingRouterRouteV2Resource s) (TF.Attr s Text) where
     destinationCidr =
         lens (_destination_cidr :: NetworkingRouterRouteV2Resource s -> TF.Attr s Text)
              (\s a -> s { _destination_cidr = a } :: NetworkingRouterRouteV2Resource s)
 
-instance P.HasNextHop (NetworkingRouterRouteV2Resource s) s Text where
+instance P.HasNextHop (NetworkingRouterRouteV2Resource s) (TF.Attr s Text) where
     nextHop =
         lens (_next_hop :: NetworkingRouterRouteV2Resource s -> TF.Attr s Text)
              (\s a -> s { _next_hop = a } :: NetworkingRouterRouteV2Resource s)
 
-instance P.HasRegion (NetworkingRouterRouteV2Resource s) s Text where
+instance P.HasRegion (NetworkingRouterRouteV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingRouterRouteV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingRouterRouteV2Resource s)
 
-instance P.HasRouterId (NetworkingRouterRouteV2Resource s) s Text where
+instance P.HasRouterId (NetworkingRouterRouteV2Resource s) (TF.Attr s Text) where
     routerId =
         lens (_router_id :: NetworkingRouterRouteV2Resource s -> TF.Attr s Text)
              (\s a -> s { _router_id = a } :: NetworkingRouterRouteV2Resource s)
 
-instance P.HasComputedDestinationCidr (NetworkingRouterRouteV2Resource s) Text
-instance P.HasComputedNextHop (NetworkingRouterRouteV2Resource s) Text
-instance P.HasComputedRegion (NetworkingRouterRouteV2Resource s) Text
-instance P.HasComputedRouterId (NetworkingRouterRouteV2Resource s) Text
+instance P.HasComputedDestinationCidr (NetworkingRouterRouteV2Resource s) (Text)
+instance P.HasComputedNextHop (NetworkingRouterRouteV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingRouterRouteV2Resource s) (Text)
+instance P.HasComputedRouterId (NetworkingRouterRouteV2Resource s) (Text)
 
 networkingRouterRouteV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingRouterRouteV2Resource s)
 networkingRouterRouteV2Resource =
@@ -4321,79 +4322,79 @@ data NetworkingRouterV2Resource s = NetworkingRouterV2Resource {
 
 instance TF.ToHCL (NetworkingRouterV2Resource s) where
     toHCL NetworkingRouterV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_state_up" _admin_state_up
-        , TF.attribute "availability_zone_hints" _availability_zone_hints
-        , TF.attribute "distributed" _distributed
-        , TF.attribute "enable_snat" _enable_snat
-        , TF.attribute "external_fixed_ip" _external_fixed_ip
-        , TF.attribute "external_network_id" _external_network_id
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "admin_state_up" <$> TF.attribute _admin_state_up
+        , TF.assign "availability_zone_hints" <$> TF.attribute _availability_zone_hints
+        , TF.assign "distributed" <$> TF.attribute _distributed
+        , TF.assign "enable_snat" <$> TF.attribute _enable_snat
+        , TF.assign "external_fixed_ip" <$> TF.attribute _external_fixed_ip
+        , TF.assign "external_network_id" <$> TF.attribute _external_network_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasAdminStateUp (NetworkingRouterV2Resource s) s Text where
+instance P.HasAdminStateUp (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     adminStateUp =
         lens (_admin_state_up :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _admin_state_up = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasAvailabilityZoneHints (NetworkingRouterV2Resource s) s Text where
+instance P.HasAvailabilityZoneHints (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     availabilityZoneHints =
         lens (_availability_zone_hints :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _availability_zone_hints = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasDistributed (NetworkingRouterV2Resource s) s Text where
+instance P.HasDistributed (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     distributed =
         lens (_distributed :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _distributed = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasEnableSnat (NetworkingRouterV2Resource s) s Text where
+instance P.HasEnableSnat (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     enableSnat =
         lens (_enable_snat :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _enable_snat = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasExternalFixedIp (NetworkingRouterV2Resource s) s Text where
+instance P.HasExternalFixedIp (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     externalFixedIp =
         lens (_external_fixed_ip :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _external_fixed_ip = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasExternalNetworkId (NetworkingRouterV2Resource s) s Text where
+instance P.HasExternalNetworkId (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     externalNetworkId =
         lens (_external_network_id :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _external_network_id = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasName (NetworkingRouterV2Resource s) s Text where
+instance P.HasName (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasRegion (NetworkingRouterV2Resource s) s Text where
+instance P.HasRegion (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasTenantId (NetworkingRouterV2Resource s) s Text where
+instance P.HasTenantId (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasValueSpecs (NetworkingRouterV2Resource s) s Text where
+instance P.HasValueSpecs (NetworkingRouterV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: NetworkingRouterV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasComputedAdminStateUp (NetworkingRouterV2Resource s) Text
-instance P.HasComputedAvailabilityZoneHints (NetworkingRouterV2Resource s) Text
-instance P.HasComputedEnableSnat (NetworkingRouterV2Resource s) Text
-instance P.HasComputedExternalFixedIp (NetworkingRouterV2Resource s) Text
-instance P.HasComputedExternalGateway (NetworkingRouterV2Resource s) Text
-instance P.HasComputedExternalNetworkId (NetworkingRouterV2Resource s) Text
-instance P.HasComputedId (NetworkingRouterV2Resource s) Text
-instance P.HasComputedName (NetworkingRouterV2Resource s) Text
-instance P.HasComputedRegion (NetworkingRouterV2Resource s) Text
-instance P.HasComputedTenantId (NetworkingRouterV2Resource s) Text
-instance P.HasComputedValueSpecs (NetworkingRouterV2Resource s) Text
+instance P.HasComputedAdminStateUp (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedAvailabilityZoneHints (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedEnableSnat (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedExternalFixedIp (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedExternalGateway (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedExternalNetworkId (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedId (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedName (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedTenantId (NetworkingRouterV2Resource s) (Text)
+instance P.HasComputedValueSpecs (NetworkingRouterV2Resource s) (Text)
 
 networkingRouterV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingRouterV2Resource s)
 networkingRouterV2Resource =
@@ -4442,78 +4443,78 @@ data NetworkingSecgroupRuleV2Resource s = NetworkingSecgroupRuleV2Resource {
 
 instance TF.ToHCL (NetworkingSecgroupRuleV2Resource s) where
     toHCL NetworkingSecgroupRuleV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "direction" _direction
-        , TF.attribute "ethertype" _ethertype
-        , TF.attribute "port_range_max" _port_range_max
-        , TF.attribute "port_range_min" _port_range_min
-        , TF.attribute "protocol" _protocol
-        , TF.attribute "region" _region
-        , TF.attribute "remote_group_id" _remote_group_id
-        , TF.attribute "remote_ip_prefix" _remote_ip_prefix
-        , TF.attribute "security_group_id" _security_group_id
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "direction" <$> TF.attribute _direction
+        , TF.assign "ethertype" <$> TF.attribute _ethertype
+        , TF.assign "port_range_max" <$> TF.attribute _port_range_max
+        , TF.assign "port_range_min" <$> TF.attribute _port_range_min
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "remote_group_id" <$> TF.attribute _remote_group_id
+        , TF.assign "remote_ip_prefix" <$> TF.attribute _remote_ip_prefix
+        , TF.assign "security_group_id" <$> TF.attribute _security_group_id
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasDirection (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasDirection (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     direction =
         lens (_direction :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _direction = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasEthertype (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasEthertype (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     ethertype =
         lens (_ethertype :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _ethertype = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasPortRangeMax (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasPortRangeMax (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     portRangeMax =
         lens (_port_range_max :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _port_range_max = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasPortRangeMin (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasPortRangeMin (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     portRangeMin =
         lens (_port_range_min :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _port_range_min = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasProtocol (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasProtocol (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     protocol =
         lens (_protocol :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasRegion (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasRegion (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasRemoteGroupId (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasRemoteGroupId (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     remoteGroupId =
         lens (_remote_group_id :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _remote_group_id = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasRemoteIpPrefix (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasRemoteIpPrefix (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     remoteIpPrefix =
         lens (_remote_ip_prefix :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _remote_ip_prefix = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasSecurityGroupId (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasSecurityGroupId (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     securityGroupId =
         lens (_security_group_id :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _security_group_id = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasTenantId (NetworkingSecgroupRuleV2Resource s) s Text where
+instance P.HasTenantId (NetworkingSecgroupRuleV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingSecgroupRuleV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSecgroupRuleV2Resource s)
 
-instance P.HasComputedDirection (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedEthertype (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedPortRangeMax (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedPortRangeMin (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedProtocol (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedRegion (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedRemoteGroupId (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedRemoteIpPrefix (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedSecurityGroupId (NetworkingSecgroupRuleV2Resource s) Text
-instance P.HasComputedTenantId (NetworkingSecgroupRuleV2Resource s) Text
+instance P.HasComputedDirection (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedEthertype (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedPortRangeMax (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedPortRangeMin (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedProtocol (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedRemoteGroupId (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedRemoteIpPrefix (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedSecurityGroupId (NetworkingSecgroupRuleV2Resource s) (Text)
+instance P.HasComputedTenantId (NetworkingSecgroupRuleV2Resource s) (Text)
 
 networkingSecgroupRuleV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingSecgroupRuleV2Resource s)
 networkingSecgroupRuleV2Resource =
@@ -4552,42 +4553,42 @@ data NetworkingSecgroupV2Resource s = NetworkingSecgroupV2Resource {
 
 instance TF.ToHCL (NetworkingSecgroupV2Resource s) where
     toHCL NetworkingSecgroupV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "delete_default_rules" _delete_default_rules
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "delete_default_rules" <$> TF.attribute _delete_default_rules
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasDeleteDefaultRules (NetworkingSecgroupV2Resource s) s Text where
+instance P.HasDeleteDefaultRules (NetworkingSecgroupV2Resource s) (TF.Attr s Text) where
     deleteDefaultRules =
         lens (_delete_default_rules :: NetworkingSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _delete_default_rules = a } :: NetworkingSecgroupV2Resource s)
 
-instance P.HasDescription (NetworkingSecgroupV2Resource s) s Text where
+instance P.HasDescription (NetworkingSecgroupV2Resource s) (TF.Attr s Text) where
     description =
         lens (_description :: NetworkingSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: NetworkingSecgroupV2Resource s)
 
-instance P.HasName (NetworkingSecgroupV2Resource s) s Text where
+instance P.HasName (NetworkingSecgroupV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkingSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingSecgroupV2Resource s)
 
-instance P.HasRegion (NetworkingSecgroupV2Resource s) s Text where
+instance P.HasRegion (NetworkingSecgroupV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingSecgroupV2Resource s)
 
-instance P.HasTenantId (NetworkingSecgroupV2Resource s) s Text where
+instance P.HasTenantId (NetworkingSecgroupV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingSecgroupV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSecgroupV2Resource s)
 
-instance P.HasComputedDescription (NetworkingSecgroupV2Resource s) Text
-instance P.HasComputedName (NetworkingSecgroupV2Resource s) Text
-instance P.HasComputedRegion (NetworkingSecgroupV2Resource s) Text
-instance P.HasComputedTenantId (NetworkingSecgroupV2Resource s) Text
+instance P.HasComputedDescription (NetworkingSecgroupV2Resource s) (Text)
+instance P.HasComputedName (NetworkingSecgroupV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingSecgroupV2Resource s) (Text)
+instance P.HasComputedTenantId (NetworkingSecgroupV2Resource s) (Text)
 
 networkingSecgroupV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingSecgroupV2Resource s)
 networkingSecgroupV2Resource =
@@ -4639,109 +4640,109 @@ data NetworkingSubnetV2Resource s = NetworkingSubnetV2Resource {
 
 instance TF.ToHCL (NetworkingSubnetV2Resource s) where
     toHCL NetworkingSubnetV2Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "allocation_pools" _allocation_pools
-        , TF.attribute "cidr" _cidr
-        , TF.attribute "dns_nameservers" _dns_nameservers
-        , TF.attribute "enable_dhcp" _enable_dhcp
-        , TF.attribute "gateway_ip" _gateway_ip
-        , TF.attribute "host_routes" _host_routes
-        , TF.attribute "ip_version" _ip_version
-        , TF.attribute "ipv6_address_mode" _ipv6_address_mode
-        , TF.attribute "ipv6_ra_mode" _ipv6_ra_mode
-        , TF.attribute "name" _name
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "no_gateway" _no_gateway
-        , TF.attribute "region" _region
-        , TF.attribute "tenant_id" _tenant_id
-        , TF.attribute "value_specs" _value_specs
+        [ TF.assign "allocation_pools" <$> TF.attribute _allocation_pools
+        , TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "dns_nameservers" <$> TF.attribute _dns_nameservers
+        , TF.assign "enable_dhcp" <$> TF.attribute _enable_dhcp
+        , TF.assign "gateway_ip" <$> TF.attribute _gateway_ip
+        , TF.assign "host_routes" <$> TF.attribute _host_routes
+        , TF.assign "ip_version" <$> TF.attribute _ip_version
+        , TF.assign "ipv6_address_mode" <$> TF.attribute _ipv6_address_mode
+        , TF.assign "ipv6_ra_mode" <$> TF.attribute _ipv6_ra_mode
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "no_gateway" <$> TF.attribute _no_gateway
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
+        , TF.assign "value_specs" <$> TF.attribute _value_specs
         ]
 
-instance P.HasAllocationPools (NetworkingSubnetV2Resource s) s Text where
+instance P.HasAllocationPools (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     allocationPools =
         lens (_allocation_pools :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _allocation_pools = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasCidr (NetworkingSubnetV2Resource s) s Text where
+instance P.HasCidr (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     cidr =
         lens (_cidr :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _cidr = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasDnsNameservers (NetworkingSubnetV2Resource s) s Text where
+instance P.HasDnsNameservers (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     dnsNameservers =
         lens (_dns_nameservers :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _dns_nameservers = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasEnableDhcp (NetworkingSubnetV2Resource s) s Text where
+instance P.HasEnableDhcp (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     enableDhcp =
         lens (_enable_dhcp :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _enable_dhcp = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasGatewayIp (NetworkingSubnetV2Resource s) s Text where
+instance P.HasGatewayIp (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     gatewayIp =
         lens (_gateway_ip :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _gateway_ip = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasHostRoutes (NetworkingSubnetV2Resource s) s Text where
+instance P.HasHostRoutes (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     hostRoutes =
         lens (_host_routes :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _host_routes = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasIpVersion (NetworkingSubnetV2Resource s) s Text where
+instance P.HasIpVersion (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     ipVersion =
         lens (_ip_version :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _ip_version = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasIpv6AddressMode (NetworkingSubnetV2Resource s) s Text where
+instance P.HasIpv6AddressMode (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     ipv6AddressMode =
         lens (_ipv6_address_mode :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _ipv6_address_mode = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasIpv6RaMode (NetworkingSubnetV2Resource s) s Text where
+instance P.HasIpv6RaMode (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     ipv6RaMode =
         lens (_ipv6_ra_mode :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _ipv6_ra_mode = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasName (NetworkingSubnetV2Resource s) s Text where
+instance P.HasName (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasNetworkId (NetworkingSubnetV2Resource s) s Text where
+instance P.HasNetworkId (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasNoGateway (NetworkingSubnetV2Resource s) s Text where
+instance P.HasNoGateway (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     noGateway =
         lens (_no_gateway :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _no_gateway = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasRegion (NetworkingSubnetV2Resource s) s Text where
+instance P.HasRegion (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasTenantId (NetworkingSubnetV2Resource s) s Text where
+instance P.HasTenantId (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasValueSpecs (NetworkingSubnetV2Resource s) s Text where
+instance P.HasValueSpecs (NetworkingSubnetV2Resource s) (TF.Attr s Text) where
     valueSpecs =
         lens (_value_specs :: NetworkingSubnetV2Resource s -> TF.Attr s Text)
              (\s a -> s { _value_specs = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasComputedAllocationPools (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedCidr (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedDnsNameservers (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedEnableDhcp (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedGatewayIp (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedHostRoutes (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedIpVersion (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedName (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedNetworkId (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedRegion (NetworkingSubnetV2Resource s) Text
-instance P.HasComputedTenantId (NetworkingSubnetV2Resource s) Text
+instance P.HasComputedAllocationPools (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedCidr (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedDnsNameservers (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedEnableDhcp (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedGatewayIp (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedHostRoutes (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedIpVersion (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedName (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedNetworkId (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedRegion (NetworkingSubnetV2Resource s) (Text)
+instance P.HasComputedTenantId (NetworkingSubnetV2Resource s) (Text)
 
 networkingSubnetV2Resource :: TF.Schema TF.Resource P.OpenStack (NetworkingSubnetV2Resource s)
 networkingSubnetV2Resource =
@@ -4789,64 +4790,64 @@ data ObjectstorageContainerV1Resource s = ObjectstorageContainerV1Resource {
 
 instance TF.ToHCL (ObjectstorageContainerV1Resource s) where
     toHCL ObjectstorageContainerV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "container_read" _container_read
-        , TF.attribute "container_sync_key" _container_sync_key
-        , TF.attribute "container_sync_to" _container_sync_to
-        , TF.attribute "container_write" _container_write
-        , TF.attribute "content_type" _content_type
-        , TF.attribute "metadata" _metadata
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
+        [ TF.assign "container_read" <$> TF.attribute _container_read
+        , TF.assign "container_sync_key" <$> TF.attribute _container_sync_key
+        , TF.assign "container_sync_to" <$> TF.attribute _container_sync_to
+        , TF.assign "container_write" <$> TF.attribute _container_write
+        , TF.assign "content_type" <$> TF.attribute _content_type
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasContainerRead (ObjectstorageContainerV1Resource s) s Text where
+instance P.HasContainerRead (ObjectstorageContainerV1Resource s) (TF.Attr s Text) where
     containerRead =
         lens (_container_read :: ObjectstorageContainerV1Resource s -> TF.Attr s Text)
              (\s a -> s { _container_read = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasContainerSyncKey (ObjectstorageContainerV1Resource s) s Text where
+instance P.HasContainerSyncKey (ObjectstorageContainerV1Resource s) (TF.Attr s Text) where
     containerSyncKey =
         lens (_container_sync_key :: ObjectstorageContainerV1Resource s -> TF.Attr s Text)
              (\s a -> s { _container_sync_key = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasContainerSyncTo (ObjectstorageContainerV1Resource s) s Text where
+instance P.HasContainerSyncTo (ObjectstorageContainerV1Resource s) (TF.Attr s Text) where
     containerSyncTo =
         lens (_container_sync_to :: ObjectstorageContainerV1Resource s -> TF.Attr s Text)
              (\s a -> s { _container_sync_to = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasContainerWrite (ObjectstorageContainerV1Resource s) s Text where
+instance P.HasContainerWrite (ObjectstorageContainerV1Resource s) (TF.Attr s Text) where
     containerWrite =
         lens (_container_write :: ObjectstorageContainerV1Resource s -> TF.Attr s Text)
              (\s a -> s { _container_write = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasContentType (ObjectstorageContainerV1Resource s) s Text where
+instance P.HasContentType (ObjectstorageContainerV1Resource s) (TF.Attr s Text) where
     contentType =
         lens (_content_type :: ObjectstorageContainerV1Resource s -> TF.Attr s Text)
              (\s a -> s { _content_type = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasMetadata (ObjectstorageContainerV1Resource s) s Text where
+instance P.HasMetadata (ObjectstorageContainerV1Resource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ObjectstorageContainerV1Resource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasName (ObjectstorageContainerV1Resource s) s Text where
+instance P.HasName (ObjectstorageContainerV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: ObjectstorageContainerV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasRegion (ObjectstorageContainerV1Resource s) s Text where
+instance P.HasRegion (ObjectstorageContainerV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ObjectstorageContainerV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ObjectstorageContainerV1Resource s)
 
-instance P.HasComputedContainerRead (ObjectstorageContainerV1Resource s) Text
-instance P.HasComputedContainerSyncKey (ObjectstorageContainerV1Resource s) Text
-instance P.HasComputedContainerSyncTo (ObjectstorageContainerV1Resource s) Text
-instance P.HasComputedContainerWrite (ObjectstorageContainerV1Resource s) Text
-instance P.HasComputedContentType (ObjectstorageContainerV1Resource s) Text
-instance P.HasComputedMetadata (ObjectstorageContainerV1Resource s) Text
-instance P.HasComputedName (ObjectstorageContainerV1Resource s) Text
-instance P.HasComputedRegion (ObjectstorageContainerV1Resource s) Text
+instance P.HasComputedContainerRead (ObjectstorageContainerV1Resource s) (Text)
+instance P.HasComputedContainerSyncKey (ObjectstorageContainerV1Resource s) (Text)
+instance P.HasComputedContainerSyncTo (ObjectstorageContainerV1Resource s) (Text)
+instance P.HasComputedContainerWrite (ObjectstorageContainerV1Resource s) (Text)
+instance P.HasComputedContentType (ObjectstorageContainerV1Resource s) (Text)
+instance P.HasComputedMetadata (ObjectstorageContainerV1Resource s) (Text)
+instance P.HasComputedName (ObjectstorageContainerV1Resource s) (Text)
+instance P.HasComputedRegion (ObjectstorageContainerV1Resource s) (Text)
 
 objectstorageContainerV1Resource :: TF.Schema TF.Resource P.OpenStack (ObjectstorageContainerV1Resource s)
 objectstorageContainerV1Resource =
@@ -4899,111 +4900,111 @@ data ObjectstorageObjectV1Resource s = ObjectstorageObjectV1Resource {
 
 instance TF.ToHCL (ObjectstorageObjectV1Resource s) where
     toHCL ObjectstorageObjectV1Resource{..} = TF.inline $ catMaybes
-        [ TF.attribute "container_name" _container_name
-        , TF.attribute "content" _content
-        , TF.attribute "content_disposition" _content_disposition
-        , TF.attribute "content_encoding" _content_encoding
-        , TF.attribute "content_type" _content_type
-        , TF.attribute "copy_from" _copy_from
-        , TF.attribute "delete_after" _delete_after
-        , TF.attribute "delete_at" _delete_at
-        , TF.attribute "detect_content_type" _detect_content_type
-        , TF.attribute "etag" _etag
-        , TF.attribute "name" _name
-        , TF.attribute "object_manifest" _object_manifest
-        , TF.attribute "region" _region
-        , TF.attribute "source" _source
+        [ TF.assign "container_name" <$> TF.attribute _container_name
+        , TF.assign "content" <$> TF.attribute _content
+        , TF.assign "content_disposition" <$> TF.attribute _content_disposition
+        , TF.assign "content_encoding" <$> TF.attribute _content_encoding
+        , TF.assign "content_type" <$> TF.attribute _content_type
+        , TF.assign "copy_from" <$> TF.attribute _copy_from
+        , TF.assign "delete_after" <$> TF.attribute _delete_after
+        , TF.assign "delete_at" <$> TF.attribute _delete_at
+        , TF.assign "detect_content_type" <$> TF.attribute _detect_content_type
+        , TF.assign "etag" <$> TF.attribute _etag
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "object_manifest" <$> TF.attribute _object_manifest
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "source" <$> TF.attribute _source
         ]
 
-instance P.HasContainerName (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasContainerName (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     containerName =
         lens (_container_name :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _container_name = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasContent (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasContent (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     content =
         lens (_content :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _content = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasContentDisposition (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasContentDisposition (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     contentDisposition =
         lens (_content_disposition :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _content_disposition = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasContentEncoding (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasContentEncoding (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     contentEncoding =
         lens (_content_encoding :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _content_encoding = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasContentType (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasContentType (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     contentType =
         lens (_content_type :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _content_type = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasCopyFrom (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasCopyFrom (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     copyFrom =
         lens (_copy_from :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _copy_from = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasDeleteAfter (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasDeleteAfter (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     deleteAfter =
         lens (_delete_after :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _delete_after = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasDeleteAt (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasDeleteAt (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     deleteAt =
         lens (_delete_at :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _delete_at = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasDetectContentType (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasDetectContentType (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     detectContentType =
         lens (_detect_content_type :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _detect_content_type = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasEtag (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasEtag (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     etag =
         lens (_etag :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _etag = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasName (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasName (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     name =
         lens (_name :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasObjectManifest (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasObjectManifest (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     objectManifest =
         lens (_object_manifest :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _object_manifest = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasRegion (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasRegion (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     region =
         lens (_region :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasSource (ObjectstorageObjectV1Resource s) s Text where
+instance P.HasSource (ObjectstorageObjectV1Resource s) (TF.Attr s Text) where
     source =
         lens (_source :: ObjectstorageObjectV1Resource s -> TF.Attr s Text)
              (\s a -> s { _source = a } :: ObjectstorageObjectV1Resource s)
 
-instance P.HasComputedContainerName (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedContent (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedContentDisposition (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedContentEncoding (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedContentLength (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedContentType (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedCopyFrom (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedDate (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedDeleteAfter (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedDeleteAt (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedDetectContentType (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedEtag (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedLastModified (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedName (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedObjectManifest (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedRegion (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedSource (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedStaticLargeObject (ObjectstorageObjectV1Resource s) Text
-instance P.HasComputedTransId (ObjectstorageObjectV1Resource s) Text
+instance P.HasComputedContainerName (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedContent (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedContentDisposition (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedContentEncoding (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedContentLength (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedContentType (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedCopyFrom (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedDate (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedDeleteAfter (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedDeleteAt (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedDetectContentType (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedEtag (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedLastModified (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedName (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedObjectManifest (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedRegion (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedSource (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedStaticLargeObject (ObjectstorageObjectV1Resource s) (Text)
+instance P.HasComputedTransId (ObjectstorageObjectV1Resource s) (Text)
 
 objectstorageObjectV1Resource :: TF.Schema TF.Resource P.OpenStack (ObjectstorageObjectV1Resource s)
 objectstorageObjectV1Resource =

@@ -59,8 +59,9 @@ module Terrafomo.Chef.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -95,21 +96,21 @@ data DataBagItemResource s = DataBagItemResource {
 
 instance TF.ToHCL (DataBagItemResource s) where
     toHCL DataBagItemResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "content_json" _content_json
-        , TF.attribute "data_bag_name" _data_bag_name
+        [ TF.assign "content_json" <$> TF.attribute _content_json
+        , TF.assign "data_bag_name" <$> TF.attribute _data_bag_name
         ]
 
-instance P.HasContentJson (DataBagItemResource s) s Text where
+instance P.HasContentJson (DataBagItemResource s) (TF.Attr s Text) where
     contentJson =
         lens (_content_json :: DataBagItemResource s -> TF.Attr s Text)
              (\s a -> s { _content_json = a } :: DataBagItemResource s)
 
-instance P.HasDataBagName (DataBagItemResource s) s Text where
+instance P.HasDataBagName (DataBagItemResource s) (TF.Attr s Text) where
     dataBagName =
         lens (_data_bag_name :: DataBagItemResource s -> TF.Attr s Text)
              (\s a -> s { _data_bag_name = a } :: DataBagItemResource s)
 
-instance P.HasComputedId (DataBagItemResource s) Text
+instance P.HasComputedId (DataBagItemResource s) (Text)
 
 dataBagItemResource :: TF.Schema TF.Resource P.Chef (DataBagItemResource s)
 dataBagItemResource =
@@ -134,15 +135,15 @@ data DataBagResource s = DataBagResource {
 
 instance TF.ToHCL (DataBagResource s) where
     toHCL DataBagResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DataBagResource s) s Text where
+instance P.HasName (DataBagResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DataBagResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DataBagResource s)
 
-instance P.HasComputedApiUri (DataBagResource s) Text
+instance P.HasComputedApiUri (DataBagResource s) (Text)
 
 dataBagResource :: TF.Schema TF.Resource P.Chef (DataBagResource s)
 dataBagResource =
@@ -172,34 +173,34 @@ data EnvironmentResource s = EnvironmentResource {
 
 instance TF.ToHCL (EnvironmentResource s) where
     toHCL EnvironmentResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "cookbook_constraints" _cookbook_constraints
-        , TF.attribute "default_attributes_json" _default_attributes_json
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "override_attributes_json" _override_attributes_json
+        [ TF.assign "cookbook_constraints" <$> TF.attribute _cookbook_constraints
+        , TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "override_attributes_json" <$> TF.attribute _override_attributes_json
         ]
 
-instance P.HasCookbookConstraints (EnvironmentResource s) s Text where
+instance P.HasCookbookConstraints (EnvironmentResource s) (TF.Attr s Text) where
     cookbookConstraints =
         lens (_cookbook_constraints :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _cookbook_constraints = a } :: EnvironmentResource s)
 
-instance P.HasDefaultAttributesJson (EnvironmentResource s) s Text where
+instance P.HasDefaultAttributesJson (EnvironmentResource s) (TF.Attr s Text) where
     defaultAttributesJson =
         lens (_default_attributes_json :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _default_attributes_json = a } :: EnvironmentResource s)
 
-instance P.HasDescription (EnvironmentResource s) s Text where
+instance P.HasDescription (EnvironmentResource s) (TF.Attr s Text) where
     description =
         lens (_description :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: EnvironmentResource s)
 
-instance P.HasName (EnvironmentResource s) s Text where
+instance P.HasName (EnvironmentResource s) (TF.Attr s Text) where
     name =
         lens (_name :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: EnvironmentResource s)
 
-instance P.HasOverrideAttributesJson (EnvironmentResource s) s Text where
+instance P.HasOverrideAttributesJson (EnvironmentResource s) (TF.Attr s Text) where
     overrideAttributesJson =
         lens (_override_attributes_json :: EnvironmentResource s -> TF.Attr s Text)
              (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
@@ -244,46 +245,46 @@ data NodeResource s = NodeResource {
 
 instance TF.ToHCL (NodeResource s) where
     toHCL NodeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "automatic_attributes_json" _automatic_attributes_json
-        , TF.attribute "default_attributes_json" _default_attributes_json
-        , TF.attribute "environment_name" _environment_name
-        , TF.attribute "name" _name
-        , TF.attribute "normal_attributes_json" _normal_attributes_json
-        , TF.attribute "override_attributes_json" _override_attributes_json
-        , TF.attribute "run_list" _run_list
+        [ TF.assign "automatic_attributes_json" <$> TF.attribute _automatic_attributes_json
+        , TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
+        , TF.assign "environment_name" <$> TF.attribute _environment_name
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "normal_attributes_json" <$> TF.attribute _normal_attributes_json
+        , TF.assign "override_attributes_json" <$> TF.attribute _override_attributes_json
+        , TF.assign "run_list" <$> TF.attribute _run_list
         ]
 
-instance P.HasAutomaticAttributesJson (NodeResource s) s Text where
+instance P.HasAutomaticAttributesJson (NodeResource s) (TF.Attr s Text) where
     automaticAttributesJson =
         lens (_automatic_attributes_json :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _automatic_attributes_json = a } :: NodeResource s)
 
-instance P.HasDefaultAttributesJson (NodeResource s) s Text where
+instance P.HasDefaultAttributesJson (NodeResource s) (TF.Attr s Text) where
     defaultAttributesJson =
         lens (_default_attributes_json :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _default_attributes_json = a } :: NodeResource s)
 
-instance P.HasEnvironmentName (NodeResource s) s Text where
+instance P.HasEnvironmentName (NodeResource s) (TF.Attr s Text) where
     environmentName =
         lens (_environment_name :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _environment_name = a } :: NodeResource s)
 
-instance P.HasName (NodeResource s) s Text where
+instance P.HasName (NodeResource s) (TF.Attr s Text) where
     name =
         lens (_name :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NodeResource s)
 
-instance P.HasNormalAttributesJson (NodeResource s) s Text where
+instance P.HasNormalAttributesJson (NodeResource s) (TF.Attr s Text) where
     normalAttributesJson =
         lens (_normal_attributes_json :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _normal_attributes_json = a } :: NodeResource s)
 
-instance P.HasOverrideAttributesJson (NodeResource s) s Text where
+instance P.HasOverrideAttributesJson (NodeResource s) (TF.Attr s Text) where
     overrideAttributesJson =
         lens (_override_attributes_json :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _override_attributes_json = a } :: NodeResource s)
 
-instance P.HasRunList (NodeResource s) s Text where
+instance P.HasRunList (NodeResource s) (TF.Attr s Text) where
     runList =
         lens (_run_list :: NodeResource s -> TF.Attr s Text)
              (\s a -> s { _run_list = a } :: NodeResource s)
@@ -322,34 +323,34 @@ data RoleResource s = RoleResource {
 
 instance TF.ToHCL (RoleResource s) where
     toHCL RoleResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "default_attributes_json" _default_attributes_json
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "override_attributes_json" _override_attributes_json
-        , TF.attribute "run_list" _run_list
+        [ TF.assign "default_attributes_json" <$> TF.attribute _default_attributes_json
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "override_attributes_json" <$> TF.attribute _override_attributes_json
+        , TF.assign "run_list" <$> TF.attribute _run_list
         ]
 
-instance P.HasDefaultAttributesJson (RoleResource s) s Text where
+instance P.HasDefaultAttributesJson (RoleResource s) (TF.Attr s Text) where
     defaultAttributesJson =
         lens (_default_attributes_json :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _default_attributes_json = a } :: RoleResource s)
 
-instance P.HasDescription (RoleResource s) s Text where
+instance P.HasDescription (RoleResource s) (TF.Attr s Text) where
     description =
         lens (_description :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: RoleResource s)
 
-instance P.HasName (RoleResource s) s Text where
+instance P.HasName (RoleResource s) (TF.Attr s Text) where
     name =
         lens (_name :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RoleResource s)
 
-instance P.HasOverrideAttributesJson (RoleResource s) s Text where
+instance P.HasOverrideAttributesJson (RoleResource s) (TF.Attr s Text) where
     overrideAttributesJson =
         lens (_override_attributes_json :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _override_attributes_json = a } :: RoleResource s)
 
-instance P.HasRunList (RoleResource s) s Text where
+instance P.HasRunList (RoleResource s) (TF.Attr s Text) where
     runList =
         lens (_run_list :: RoleResource s -> TF.Attr s Text)
              (\s a -> s { _run_list = a } :: RoleResource s)

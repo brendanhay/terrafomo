@@ -49,7 +49,7 @@ import qualified Terrafomo.Provider as TF
 -}
 data {{ provider.name }} = {{ provider.name }} {
   {% for arg in schema.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(Maybe {{ arg.value.type }})
+    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(Maybe {{ arg.value.type.name }})
     {- ^ {{ arg.value.help }} -}
   {% endfor %}
     } deriving (Show, Eq, Generic)
@@ -78,7 +78,7 @@ empty{{ provider.name }} = {{ provider.name }} {
     }
 {% for field in schema.argumentFields %}
 
-provider{{ field.value.method | upperHead }} :: Lens' {{ provider.name }} (Maybe {{ field.value.type }})
+provider{{ field.value.method | upperHead }} :: Lens' {{ provider.name }} (Maybe {{ field.value.type.name }})
 provider{{ field.value.method | upperHead }} =
     lens {{ field.value.label }} (\s a -> s { {{ field.value.label }} = a })
 {% endfor %}

@@ -49,8 +49,9 @@ module Terrafomo.Nomad.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -84,22 +85,22 @@ data AclPolicyResource s = AclPolicyResource {
 
 instance TF.ToHCL (AclPolicyResource s) where
     toHCL AclPolicyResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "rules_hcl" _rules_hcl
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "rules_hcl" <$> TF.attribute _rules_hcl
         ]
 
-instance P.HasDescription (AclPolicyResource s) s Text where
+instance P.HasDescription (AclPolicyResource s) (TF.Attr s Text) where
     description =
         lens (_description :: AclPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: AclPolicyResource s)
 
-instance P.HasName (AclPolicyResource s) s Text where
+instance P.HasName (AclPolicyResource s) (TF.Attr s Text) where
     name =
         lens (_name :: AclPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AclPolicyResource s)
 
-instance P.HasRulesHcl (AclPolicyResource s) s Text where
+instance P.HasRulesHcl (AclPolicyResource s) (TF.Attr s Text) where
     rulesHcl =
         lens (_rules_hcl :: AclPolicyResource s -> TF.Attr s Text)
              (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
@@ -133,28 +134,28 @@ data AclTokenResource s = AclTokenResource {
 
 instance TF.ToHCL (AclTokenResource s) where
     toHCL AclTokenResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "global" _global
-        , TF.attribute "name" _name
-        , TF.attribute "policies" _policies
-        , TF.attribute "type" _type'
+        [ TF.assign "global" <$> TF.attribute _global
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "policies" <$> TF.attribute _policies
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasGlobal (AclTokenResource s) s Text where
+instance P.HasGlobal (AclTokenResource s) (TF.Attr s Text) where
     global =
         lens (_global :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _global = a } :: AclTokenResource s)
 
-instance P.HasName (AclTokenResource s) s Text where
+instance P.HasName (AclTokenResource s) (TF.Attr s Text) where
     name =
         lens (_name :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AclTokenResource s)
 
-instance P.HasPolicies (AclTokenResource s) s Text where
+instance P.HasPolicies (AclTokenResource s) (TF.Attr s Text) where
     policies =
         lens (_policies :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _policies = a } :: AclTokenResource s)
 
-instance P.HasType' (AclTokenResource s) s Text where
+instance P.HasType' (AclTokenResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: AclTokenResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: AclTokenResource s)
@@ -191,22 +192,22 @@ data JobResource s = JobResource {
 
 instance TF.ToHCL (JobResource s) where
     toHCL JobResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "deregister_on_destroy" _deregister_on_destroy
-        , TF.attribute "deregister_on_id_change" _deregister_on_id_change
-        , TF.attribute "jobspec" _jobspec
+        [ TF.assign "deregister_on_destroy" <$> TF.attribute _deregister_on_destroy
+        , TF.assign "deregister_on_id_change" <$> TF.attribute _deregister_on_id_change
+        , TF.assign "jobspec" <$> TF.attribute _jobspec
         ]
 
-instance P.HasDeregisterOnDestroy (JobResource s) s Text where
+instance P.HasDeregisterOnDestroy (JobResource s) (TF.Attr s Text) where
     deregisterOnDestroy =
         lens (_deregister_on_destroy :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _deregister_on_destroy = a } :: JobResource s)
 
-instance P.HasDeregisterOnIdChange (JobResource s) s Text where
+instance P.HasDeregisterOnIdChange (JobResource s) (TF.Attr s Text) where
     deregisterOnIdChange =
         lens (_deregister_on_id_change :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _deregister_on_id_change = a } :: JobResource s)
 
-instance P.HasJobspec (JobResource s) s Text where
+instance P.HasJobspec (JobResource s) (TF.Attr s Text) where
     jobspec =
         lens (_jobspec :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _jobspec = a } :: JobResource s)

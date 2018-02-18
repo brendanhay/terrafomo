@@ -44,62 +44,62 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasDatabase a s b | a -> s b where
-    database :: Lens' a (TF.Attr s b)
+class HasDatabase a b | a -> b where
+    database :: Lens' a b
 
-instance HasDatabase a s b => HasDatabase (TF.Schema l p a) s b where
+instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
 
-class HasDefaultCharacterSet a s b | a -> s b where
-    defaultCharacterSet :: Lens' a (TF.Attr s b)
+class HasDefaultCharacterSet a b | a -> b where
+    defaultCharacterSet :: Lens' a b
 
-instance HasDefaultCharacterSet a s b => HasDefaultCharacterSet (TF.Schema l p a) s b where
+instance HasDefaultCharacterSet a b => HasDefaultCharacterSet (TF.Schema l p a) b where
     defaultCharacterSet = TF.configuration . defaultCharacterSet
 
-class HasDefaultCollation a s b | a -> s b where
-    defaultCollation :: Lens' a (TF.Attr s b)
+class HasDefaultCollation a b | a -> b where
+    defaultCollation :: Lens' a b
 
-instance HasDefaultCollation a s b => HasDefaultCollation (TF.Schema l p a) s b where
+instance HasDefaultCollation a b => HasDefaultCollation (TF.Schema l p a) b where
     defaultCollation = TF.configuration . defaultCollation
 
-class HasGrant a s b | a -> s b where
-    grant :: Lens' a (TF.Attr s b)
+class HasGrant a b | a -> b where
+    grant :: Lens' a b
 
-instance HasGrant a s b => HasGrant (TF.Schema l p a) s b where
+instance HasGrant a b => HasGrant (TF.Schema l p a) b where
     grant = TF.configuration . grant
 
-class HasHost a s b | a -> s b where
-    host :: Lens' a (TF.Attr s b)
+class HasHost a b | a -> b where
+    host :: Lens' a b
 
-instance HasHost a s b => HasHost (TF.Schema l p a) s b where
+instance HasHost a b => HasHost (TF.Schema l p a) b where
     host = TF.configuration . host
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasPassword a s b | a -> s b where
-    password :: Lens' a (TF.Attr s b)
+class HasPassword a b | a -> b where
+    password :: Lens' a b
 
-instance HasPassword a s b => HasPassword (TF.Schema l p a) s b where
+instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
 
-class HasPlaintextPassword a s b | a -> s b where
-    plaintextPassword :: Lens' a (TF.Attr s b)
+class HasPlaintextPassword a b | a -> b where
+    plaintextPassword :: Lens' a b
 
-instance HasPlaintextPassword a s b => HasPlaintextPassword (TF.Schema l p a) s b where
+instance HasPlaintextPassword a b => HasPlaintextPassword (TF.Schema l p a) b where
     plaintextPassword = TF.configuration . plaintextPassword
 
-class HasPrivileges a s b | a -> s b where
-    privileges :: Lens' a (TF.Attr s b)
+class HasPrivileges a b | a -> b where
+    privileges :: Lens' a b
 
-instance HasPrivileges a s b => HasPrivileges (TF.Schema l p a) s b where
+instance HasPrivileges a b => HasPrivileges (TF.Schema l p a) b where
     privileges = TF.configuration . privileges
 
-class HasUser a s b | a -> s b where
-    user :: Lens' a (TF.Attr s b)
+class HasUser a b | a -> b where
+    user :: Lens' a b
 
-instance HasUser a s b => HasUser (TF.Schema l p a) s b where
+instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user

@@ -43,56 +43,56 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasAddress a s b | a -> s b where
-    address :: Lens' a (TF.Attr s b)
+class HasAddress a b | a -> b where
+    address :: Lens' a b
 
-instance HasAddress a s b => HasAddress (TF.Schema l p a) s b where
+instance HasAddress a b => HasAddress (TF.Schema l p a) b where
     address = TF.configuration . address
 
-class HasArguments a s b | a -> s b where
-    arguments :: Lens' a (TF.Attr s b)
+class HasArguments a b | a -> b where
+    arguments :: Lens' a b
 
-instance HasArguments a s b => HasArguments (TF.Schema l p a) s b where
+instance HasArguments a b => HasArguments (TF.Schema l p a) b where
     arguments = TF.configuration . arguments
 
-class HasCheckCommand a s b | a -> s b where
-    checkCommand :: Lens' a (TF.Attr s b)
+class HasCheckCommand a b | a -> b where
+    checkCommand :: Lens' a b
 
-instance HasCheckCommand a s b => HasCheckCommand (TF.Schema l p a) s b where
+instance HasCheckCommand a b => HasCheckCommand (TF.Schema l p a) b where
     checkCommand = TF.configuration . checkCommand
 
-class HasCommand a s b | a -> s b where
-    command :: Lens' a (TF.Attr s b)
+class HasCommand a b | a -> b where
+    command :: Lens' a b
 
-instance HasCommand a s b => HasCommand (TF.Schema l p a) s b where
+instance HasCommand a b => HasCommand (TF.Schema l p a) b where
     command = TF.configuration . command
 
-class HasDisplayName a s b | a -> s b where
-    displayName :: Lens' a (TF.Attr s b)
+class HasDisplayName a b | a -> b where
+    displayName :: Lens' a b
 
-instance HasDisplayName a s b => HasDisplayName (TF.Schema l p a) s b where
+instance HasDisplayName a b => HasDisplayName (TF.Schema l p a) b where
     displayName = TF.configuration . displayName
 
-class HasHostname a s b | a -> s b where
-    hostname :: Lens' a (TF.Attr s b)
+class HasHostname a b | a -> b where
+    hostname :: Lens' a b
 
-instance HasHostname a s b => HasHostname (TF.Schema l p a) s b where
+instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasTemplates a s b | a -> s b where
-    templates :: Lens' a (TF.Attr s b)
+class HasTemplates a b | a -> b where
+    templates :: Lens' a b
 
-instance HasTemplates a s b => HasTemplates (TF.Schema l p a) s b where
+instance HasTemplates a b => HasTemplates (TF.Schema l p a) b where
     templates = TF.configuration . templates
 
-class HasVars a s b | a -> s b where
-    vars :: Lens' a (TF.Attr s b)
+class HasVars a b | a -> b where
+    vars :: Lens' a b
 
-instance HasVars a s b => HasVars (TF.Schema l p a) s b where
+instance HasVars a b => HasVars (TF.Schema l p a) b where
     vars = TF.configuration . vars

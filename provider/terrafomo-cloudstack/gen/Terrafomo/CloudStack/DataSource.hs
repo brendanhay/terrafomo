@@ -45,8 +45,9 @@ module Terrafomo.CloudStack.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -78,29 +79,29 @@ data TemplateData s = TemplateData {
 
 instance TF.ToHCL (TemplateData s) where
     toHCL TemplateData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "template_filter" _template_filter
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "template_filter" <$> TF.attribute _template_filter
         ]
 
-instance P.HasFilter (TemplateData s) s Text where
+instance P.HasFilter (TemplateData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: TemplateData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: TemplateData s)
 
-instance P.HasTemplateFilter (TemplateData s) s Text where
+instance P.HasTemplateFilter (TemplateData s) (TF.Attr s Text) where
     templateFilter =
         lens (_template_filter :: TemplateData s -> TF.Attr s Text)
              (\s a -> s { _template_filter = a } :: TemplateData s)
 
-instance P.HasComputedAccount (TemplateData s) Text
-instance P.HasComputedCreated (TemplateData s) Text
-instance P.HasComputedDisplayText (TemplateData s) Text
-instance P.HasComputedFormat (TemplateData s) Text
-instance P.HasComputedHypervisor (TemplateData s) Text
-instance P.HasComputedId (TemplateData s) Text
-instance P.HasComputedName (TemplateData s) Text
-instance P.HasComputedSize (TemplateData s) Text
-instance P.HasComputedTags (TemplateData s) Text
+instance P.HasComputedAccount (TemplateData s) (Text)
+instance P.HasComputedCreated (TemplateData s) (Text)
+instance P.HasComputedDisplayText (TemplateData s) (Text)
+instance P.HasComputedFormat (TemplateData s) (Text)
+instance P.HasComputedHypervisor (TemplateData s) (Text)
+instance P.HasComputedId (TemplateData s) (Text)
+instance P.HasComputedName (TemplateData s) (Text)
+instance P.HasComputedSize (TemplateData s) (Text)
+instance P.HasComputedTags (TemplateData s) (Text)
 
 templateData :: TF.Schema TF.DataSource P.CloudStack (TemplateData s)
 templateData =

@@ -45,64 +45,64 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasCheckRate a s b | a -> s b where
-    checkRate :: Lens' a (TF.Attr s b)
+class HasCheckRate a b | a -> b where
+    checkRate :: Lens' a b
 
-instance HasCheckRate a s b => HasCheckRate (TF.Schema l p a) s b where
+instance HasCheckRate a b => HasCheckRate (TF.Schema l p a) b where
     checkRate = TF.configuration . checkRate
 
-class HasConfirmations a s b | a -> s b where
-    confirmations :: Lens' a (TF.Attr s b)
+class HasConfirmations a b | a -> b where
+    confirmations :: Lens' a b
 
-instance HasConfirmations a s b => HasConfirmations (TF.Schema l p a) s b where
+instance HasConfirmations a b => HasConfirmations (TF.Schema l p a) b where
     confirmations = TF.configuration . confirmations
 
-class HasContactId a s b | a -> s b where
-    contactId :: Lens' a (TF.Attr s b)
+class HasContactId a b | a -> b where
+    contactId :: Lens' a b
 
-instance HasContactId a s b => HasContactId (TF.Schema l p a) s b where
+instance HasContactId a b => HasContactId (TF.Schema l p a) b where
     contactId = TF.configuration . contactId
 
-class HasPaused a s b | a -> s b where
-    paused :: Lens' a (TF.Attr s b)
+class HasPaused a b | a -> b where
+    paused :: Lens' a b
 
-instance HasPaused a s b => HasPaused (TF.Schema l p a) s b where
+instance HasPaused a b => HasPaused (TF.Schema l p a) b where
     paused = TF.configuration . paused
 
-class HasPort a s b | a -> s b where
-    port :: Lens' a (TF.Attr s b)
+class HasPort a b | a -> b where
+    port :: Lens' a b
 
-instance HasPort a s b => HasPort (TF.Schema l p a) s b where
+instance HasPort a b => HasPort (TF.Schema l p a) b where
     port = TF.configuration . port
 
-class HasTestType a s b | a -> s b where
-    testType :: Lens' a (TF.Attr s b)
+class HasTestType a b | a -> b where
+    testType :: Lens' a b
 
-instance HasTestType a s b => HasTestType (TF.Schema l p a) s b where
+instance HasTestType a b => HasTestType (TF.Schema l p a) b where
     testType = TF.configuration . testType
 
-class HasTimeout a s b | a -> s b where
-    timeout :: Lens' a (TF.Attr s b)
+class HasTimeout a b | a -> b where
+    timeout :: Lens' a b
 
-instance HasTimeout a s b => HasTimeout (TF.Schema l p a) s b where
+instance HasTimeout a b => HasTimeout (TF.Schema l p a) b where
     timeout = TF.configuration . timeout
 
-class HasTriggerRate a s b | a -> s b where
-    triggerRate :: Lens' a (TF.Attr s b)
+class HasTriggerRate a b | a -> b where
+    triggerRate :: Lens' a b
 
-instance HasTriggerRate a s b => HasTriggerRate (TF.Schema l p a) s b where
+instance HasTriggerRate a b => HasTriggerRate (TF.Schema l p a) b where
     triggerRate = TF.configuration . triggerRate
 
-class HasWebsiteName a s b | a -> s b where
-    websiteName :: Lens' a (TF.Attr s b)
+class HasWebsiteName a b | a -> b where
+    websiteName :: Lens' a b
 
-instance HasWebsiteName a s b => HasWebsiteName (TF.Schema l p a) s b where
+instance HasWebsiteName a b => HasWebsiteName (TF.Schema l p a) b where
     websiteName = TF.configuration . websiteName
 
-class HasWebsiteUrl a s b | a -> s b where
-    websiteUrl :: Lens' a (TF.Attr s b)
+class HasWebsiteUrl a b | a -> b where
+    websiteUrl :: Lens' a b
 
-instance HasWebsiteUrl a s b => HasWebsiteUrl (TF.Schema l p a) s b where
+instance HasWebsiteUrl a b => HasWebsiteUrl (TF.Schema l p a) b where
     websiteUrl = TF.configuration . websiteUrl
 
 class HasComputedTestId a b | a -> b where

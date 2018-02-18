@@ -35,8 +35,9 @@ module Terrafomo.Fastly.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -67,7 +68,7 @@ data IpRangesData s = IpRangesData {
 instance TF.ToHCL (IpRangesData s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedCidrBlocks (IpRangesData s) Text
+instance P.HasComputedCidrBlocks (IpRangesData s) (Text)
 
 ipRangesData :: TF.Schema TF.DataSource P.Fastly (IpRangesData s)
 ipRangesData =

@@ -28,6 +28,7 @@ module Terrafomo.NewRelic.Lens
     , HasEditable (..)
     , HasEnabled (..)
     , HasEntities (..)
+    , HasGcMetric (..)
     , HasIcon (..)
     , HasIncidentPreference (..)
     , HasMetric (..)
@@ -41,6 +42,7 @@ module Terrafomo.NewRelic.Lens
     , HasUserDefinedMetric (..)
     , HasUserDefinedValueFunction (..)
     , HasValueFunction (..)
+    , HasViolationCloseTimer (..)
     , HasVisibility (..)
     , HasWidget (..)
 
@@ -60,130 +62,142 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasChannelId a s b | a -> s b where
-    channelId :: Lens' a (TF.Attr s b)
+class HasChannelId a b | a -> b where
+    channelId :: Lens' a b
 
-instance HasChannelId a s b => HasChannelId (TF.Schema l p a) s b where
+instance HasChannelId a b => HasChannelId (TF.Schema l p a) b where
     channelId = TF.configuration . channelId
 
-class HasConditionScope a s b | a -> s b where
-    conditionScope :: Lens' a (TF.Attr s b)
+class HasConditionScope a b | a -> b where
+    conditionScope :: Lens' a b
 
-instance HasConditionScope a s b => HasConditionScope (TF.Schema l p a) s b where
+instance HasConditionScope a b => HasConditionScope (TF.Schema l p a) b where
     conditionScope = TF.configuration . conditionScope
 
-class HasConfiguration a s b | a -> s b where
-    configuration :: Lens' a (TF.Attr s b)
+class HasConfiguration a b | a -> b where
+    configuration :: Lens' a b
 
-instance HasConfiguration a s b => HasConfiguration (TF.Schema l p a) s b where
+instance HasConfiguration a b => HasConfiguration (TF.Schema l p a) b where
     configuration = TF.configuration . configuration
 
-class HasEditable a s b | a -> s b where
-    editable :: Lens' a (TF.Attr s b)
+class HasEditable a b | a -> b where
+    editable :: Lens' a b
 
-instance HasEditable a s b => HasEditable (TF.Schema l p a) s b where
+instance HasEditable a b => HasEditable (TF.Schema l p a) b where
     editable = TF.configuration . editable
 
-class HasEnabled a s b | a -> s b where
-    enabled :: Lens' a (TF.Attr s b)
+class HasEnabled a b | a -> b where
+    enabled :: Lens' a b
 
-instance HasEnabled a s b => HasEnabled (TF.Schema l p a) s b where
+instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
     enabled = TF.configuration . enabled
 
-class HasEntities a s b | a -> s b where
-    entities :: Lens' a (TF.Attr s b)
+class HasEntities a b | a -> b where
+    entities :: Lens' a b
 
-instance HasEntities a s b => HasEntities (TF.Schema l p a) s b where
+instance HasEntities a b => HasEntities (TF.Schema l p a) b where
     entities = TF.configuration . entities
 
-class HasIcon a s b | a -> s b where
-    icon :: Lens' a (TF.Attr s b)
+class HasGcMetric a b | a -> b where
+    gcMetric :: Lens' a b
 
-instance HasIcon a s b => HasIcon (TF.Schema l p a) s b where
+instance HasGcMetric a b => HasGcMetric (TF.Schema l p a) b where
+    gcMetric = TF.configuration . gcMetric
+
+class HasIcon a b | a -> b where
+    icon :: Lens' a b
+
+instance HasIcon a b => HasIcon (TF.Schema l p a) b where
     icon = TF.configuration . icon
 
-class HasIncidentPreference a s b | a -> s b where
-    incidentPreference :: Lens' a (TF.Attr s b)
+class HasIncidentPreference a b | a -> b where
+    incidentPreference :: Lens' a b
 
-instance HasIncidentPreference a s b => HasIncidentPreference (TF.Schema l p a) s b where
+instance HasIncidentPreference a b => HasIncidentPreference (TF.Schema l p a) b where
     incidentPreference = TF.configuration . incidentPreference
 
-class HasMetric a s b | a -> s b where
-    metric :: Lens' a (TF.Attr s b)
+class HasMetric a b | a -> b where
+    metric :: Lens' a b
 
-instance HasMetric a s b => HasMetric (TF.Schema l p a) s b where
+instance HasMetric a b => HasMetric (TF.Schema l p a) b where
     metric = TF.configuration . metric
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasNrql a s b | a -> s b where
-    nrql :: Lens' a (TF.Attr s b)
+class HasNrql a b | a -> b where
+    nrql :: Lens' a b
 
-instance HasNrql a s b => HasNrql (TF.Schema l p a) s b where
+instance HasNrql a b => HasNrql (TF.Schema l p a) b where
     nrql = TF.configuration . nrql
 
-class HasPolicyId a s b | a -> s b where
-    policyId :: Lens' a (TF.Attr s b)
+class HasPolicyId a b | a -> b where
+    policyId :: Lens' a b
 
-instance HasPolicyId a s b => HasPolicyId (TF.Schema l p a) s b where
+instance HasPolicyId a b => HasPolicyId (TF.Schema l p a) b where
     policyId = TF.configuration . policyId
 
-class HasRunbookUrl a s b | a -> s b where
-    runbookUrl :: Lens' a (TF.Attr s b)
+class HasRunbookUrl a b | a -> b where
+    runbookUrl :: Lens' a b
 
-instance HasRunbookUrl a s b => HasRunbookUrl (TF.Schema l p a) s b where
+instance HasRunbookUrl a b => HasRunbookUrl (TF.Schema l p a) b where
     runbookUrl = TF.configuration . runbookUrl
 
-class HasTerm a s b | a -> s b where
-    term :: Lens' a (TF.Attr s b)
+class HasTerm a b | a -> b where
+    term :: Lens' a b
 
-instance HasTerm a s b => HasTerm (TF.Schema l p a) s b where
+instance HasTerm a b => HasTerm (TF.Schema l p a) b where
     term = TF.configuration . term
 
-class HasTitle a s b | a -> s b where
-    title :: Lens' a (TF.Attr s b)
+class HasTitle a b | a -> b where
+    title :: Lens' a b
 
-instance HasTitle a s b => HasTitle (TF.Schema l p a) s b where
+instance HasTitle a b => HasTitle (TF.Schema l p a) b where
     title = TF.configuration . title
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasUserDefinedMetric a s b | a -> s b where
-    userDefinedMetric :: Lens' a (TF.Attr s b)
+class HasUserDefinedMetric a b | a -> b where
+    userDefinedMetric :: Lens' a b
 
-instance HasUserDefinedMetric a s b => HasUserDefinedMetric (TF.Schema l p a) s b where
+instance HasUserDefinedMetric a b => HasUserDefinedMetric (TF.Schema l p a) b where
     userDefinedMetric = TF.configuration . userDefinedMetric
 
-class HasUserDefinedValueFunction a s b | a -> s b where
-    userDefinedValueFunction :: Lens' a (TF.Attr s b)
+class HasUserDefinedValueFunction a b | a -> b where
+    userDefinedValueFunction :: Lens' a b
 
-instance HasUserDefinedValueFunction a s b => HasUserDefinedValueFunction (TF.Schema l p a) s b where
+instance HasUserDefinedValueFunction a b => HasUserDefinedValueFunction (TF.Schema l p a) b where
     userDefinedValueFunction = TF.configuration . userDefinedValueFunction
 
-class HasValueFunction a s b | a -> s b where
-    valueFunction :: Lens' a (TF.Attr s b)
+class HasValueFunction a b | a -> b where
+    valueFunction :: Lens' a b
 
-instance HasValueFunction a s b => HasValueFunction (TF.Schema l p a) s b where
+instance HasValueFunction a b => HasValueFunction (TF.Schema l p a) b where
     valueFunction = TF.configuration . valueFunction
 
-class HasVisibility a s b | a -> s b where
-    visibility :: Lens' a (TF.Attr s b)
+class HasViolationCloseTimer a b | a -> b where
+    violationCloseTimer :: Lens' a b
 
-instance HasVisibility a s b => HasVisibility (TF.Schema l p a) s b where
+instance HasViolationCloseTimer a b => HasViolationCloseTimer (TF.Schema l p a) b where
+    violationCloseTimer = TF.configuration . violationCloseTimer
+
+class HasVisibility a b | a -> b where
+    visibility :: Lens' a b
+
+instance HasVisibility a b => HasVisibility (TF.Schema l p a) b where
     visibility = TF.configuration . visibility
 
-class HasWidget a s b | a -> s b where
-    widget :: Lens' a (TF.Attr s b)
+class HasWidget a b | a -> b where
+    widget :: Lens' a b
 
-instance HasWidget a s b => HasWidget (TF.Schema l p a) s b where
+instance HasWidget a b => HasWidget (TF.Schema l p a) b where
     widget = TF.configuration . widget
 
 class HasComputedCreatedAt a b | a -> b where

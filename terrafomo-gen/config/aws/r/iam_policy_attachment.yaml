@@ -1,3 +1,5 @@
 arguments:
   _roles:
-    type: '[Text]'
+    type:
+      name: 'Text'
+      format: repeated

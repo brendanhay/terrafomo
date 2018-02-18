@@ -42,46 +42,46 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasFilename a s b | a -> s b where
-    filename :: Lens' a (TF.Attr s b)
+class HasFilename a b | a -> b where
+    filename :: Lens' a b
 
-instance HasFilename a s b => HasFilename (TF.Schema l p a) s b where
+instance HasFilename a b => HasFilename (TF.Schema l p a) b where
     filename = TF.configuration . filename
 
-class HasLocation a s b | a -> s b where
-    location :: Lens' a (TF.Attr s b)
+class HasLocation a b | a -> b where
+    location :: Lens' a b
 
-instance HasLocation a s b => HasLocation (TF.Schema l p a) s b where
+instance HasLocation a b => HasLocation (TF.Schema l p a) b where
     location = TF.configuration . location
 
-class HasLogsetId a s b | a -> s b where
-    logsetId :: Lens' a (TF.Attr s b)
+class HasLogsetId a b | a -> b where
+    logsetId :: Lens' a b
 
-instance HasLogsetId a s b => HasLogsetId (TF.Schema l p a) s b where
+instance HasLogsetId a b => HasLogsetId (TF.Schema l p a) b where
     logsetId = TF.configuration . logsetId
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasRetentionPeriod a s b | a -> s b where
-    retentionPeriod :: Lens' a (TF.Attr s b)
+class HasRetentionPeriod a b | a -> b where
+    retentionPeriod :: Lens' a b
 
-instance HasRetentionPeriod a s b => HasRetentionPeriod (TF.Schema l p a) s b where
+instance HasRetentionPeriod a b => HasRetentionPeriod (TF.Schema l p a) b where
     retentionPeriod = TF.configuration . retentionPeriod
 
-class HasSource a s b | a -> s b where
-    source :: Lens' a (TF.Attr s b)
+class HasSource a b | a -> b where
+    source :: Lens' a b
 
-instance HasSource a s b => HasSource (TF.Schema l p a) s b where
+instance HasSource a b => HasSource (TF.Schema l p a) b where
     source = TF.configuration . source
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
 class HasComputedToken a b | a -> b where

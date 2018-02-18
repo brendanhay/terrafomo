@@ -101,8 +101,9 @@ module Terrafomo.Heroku.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -136,27 +137,27 @@ data AddonAttachmentResource s = AddonAttachmentResource {
 
 instance TF.ToHCL (AddonAttachmentResource s) where
     toHCL AddonAttachmentResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "addon_id" _addon_id
-        , TF.attribute "app_id" _app_id
-        , TF.attribute "name" _name
+        [ TF.assign "addon_id" <$> TF.attribute _addon_id
+        , TF.assign "app_id" <$> TF.attribute _app_id
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasAddonId (AddonAttachmentResource s) s Text where
+instance P.HasAddonId (AddonAttachmentResource s) (TF.Attr s Text) where
     addonId =
         lens (_addon_id :: AddonAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _addon_id = a } :: AddonAttachmentResource s)
 
-instance P.HasAppId (AddonAttachmentResource s) s Text where
+instance P.HasAppId (AddonAttachmentResource s) (TF.Attr s Text) where
     appId =
         lens (_app_id :: AddonAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _app_id = a } :: AddonAttachmentResource s)
 
-instance P.HasName (AddonAttachmentResource s) s Text where
+instance P.HasName (AddonAttachmentResource s) (TF.Attr s Text) where
     name =
         lens (_name :: AddonAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AddonAttachmentResource s)
 
-instance P.HasComputedId (AddonAttachmentResource s) Text
+instance P.HasComputedId (AddonAttachmentResource s) (Text)
 
 addonAttachmentResource :: TF.Schema TF.Resource P.Heroku (AddonAttachmentResource s)
 addonAttachmentResource =
@@ -183,31 +184,31 @@ data AddonResource s = AddonResource {
 
 instance TF.ToHCL (AddonResource s) where
     toHCL AddonResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "app" _app
-        , TF.attribute "config" _config
-        , TF.attribute "plan" _plan
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "config" <$> TF.attribute _config
+        , TF.assign "plan" <$> TF.attribute _plan
         ]
 
-instance P.HasApp (AddonResource s) s Text where
+instance P.HasApp (AddonResource s) (TF.Attr s Text) where
     app =
         lens (_app :: AddonResource s -> TF.Attr s Text)
              (\s a -> s { _app = a } :: AddonResource s)
 
-instance P.HasConfig (AddonResource s) s Text where
+instance P.HasConfig (AddonResource s) (TF.Attr s Text) where
     config =
         lens (_config :: AddonResource s -> TF.Attr s Text)
              (\s a -> s { _config = a } :: AddonResource s)
 
-instance P.HasPlan (AddonResource s) s Text where
+instance P.HasPlan (AddonResource s) (TF.Attr s Text) where
     plan =
         lens (_plan :: AddonResource s -> TF.Attr s Text)
              (\s a -> s { _plan = a } :: AddonResource s)
 
-instance P.HasComputedConfigVars (AddonResource s) Text
-instance P.HasComputedId (AddonResource s) Text
-instance P.HasComputedName (AddonResource s) Text
-instance P.HasComputedPlan (AddonResource s) Text
-instance P.HasComputedProviderId (AddonResource s) Text
+instance P.HasComputedConfigVars (AddonResource s) (Text)
+instance P.HasComputedId (AddonResource s) (Text)
+instance P.HasComputedName (AddonResource s) (Text)
+instance P.HasComputedPlan (AddonResource s) (Text)
+instance P.HasComputedProviderId (AddonResource s) (Text)
 
 addonResource :: TF.Schema TF.Resource P.Heroku (AddonResource s)
 addonResource =
@@ -234,22 +235,22 @@ data AppFeatureResource s = AppFeatureResource {
 
 instance TF.ToHCL (AppFeatureResource s) where
     toHCL AppFeatureResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "app" _app
-        , TF.attribute "enabled" _enabled
-        , TF.attribute "name" _name
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasApp (AppFeatureResource s) s Text where
+instance P.HasApp (AppFeatureResource s) (TF.Attr s Text) where
     app =
         lens (_app :: AppFeatureResource s -> TF.Attr s Text)
              (\s a -> s { _app = a } :: AppFeatureResource s)
 
-instance P.HasEnabled (AppFeatureResource s) s Text where
+instance P.HasEnabled (AppFeatureResource s) (TF.Attr s Text) where
     enabled =
         lens (_enabled :: AppFeatureResource s -> TF.Attr s Text)
              (\s a -> s { _enabled = a } :: AppFeatureResource s)
 
-instance P.HasName (AppFeatureResource s) s Text where
+instance P.HasName (AppFeatureResource s) (TF.Attr s Text) where
     name =
         lens (_name :: AppFeatureResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AppFeatureResource s)
@@ -290,65 +291,65 @@ data AppResource s = AppResource {
 
 instance TF.ToHCL (AppResource s) where
     toHCL AppResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "acm" _acm
-        , TF.attribute "buildpacks" _buildpacks
-        , TF.attribute "config_vars" _config_vars
-        , TF.attribute "name" _name
-        , TF.attribute "organization" _organization
-        , TF.attribute "region" _region
-        , TF.attribute "space" _space
-        , TF.attribute "stack" _stack
+        [ TF.assign "acm" <$> TF.attribute _acm
+        , TF.assign "buildpacks" <$> TF.attribute _buildpacks
+        , TF.assign "config_vars" <$> TF.attribute _config_vars
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "organization" <$> TF.attribute _organization
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "space" <$> TF.attribute _space
+        , TF.assign "stack" <$> TF.attribute _stack
         ]
 
-instance P.HasAcm (AppResource s) s Text where
+instance P.HasAcm (AppResource s) (TF.Attr s Text) where
     acm =
         lens (_acm :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _acm = a } :: AppResource s)
 
-instance P.HasBuildpacks (AppResource s) s Text where
+instance P.HasBuildpacks (AppResource s) (TF.Attr s Text) where
     buildpacks =
         lens (_buildpacks :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _buildpacks = a } :: AppResource s)
 
-instance P.HasConfigVars (AppResource s) s Text where
+instance P.HasConfigVars (AppResource s) (TF.Attr s Text) where
     configVars =
         lens (_config_vars :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _config_vars = a } :: AppResource s)
 
-instance P.HasName (AppResource s) s Text where
+instance P.HasName (AppResource s) (TF.Attr s Text) where
     name =
         lens (_name :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AppResource s)
 
-instance P.HasOrganization (AppResource s) s Text where
+instance P.HasOrganization (AppResource s) (TF.Attr s Text) where
     organization =
         lens (_organization :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _organization = a } :: AppResource s)
 
-instance P.HasRegion (AppResource s) s Text where
+instance P.HasRegion (AppResource s) (TF.Attr s Text) where
     region =
         lens (_region :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: AppResource s)
 
-instance P.HasSpace (AppResource s) s Text where
+instance P.HasSpace (AppResource s) (TF.Attr s Text) where
     space =
         lens (_space :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _space = a } :: AppResource s)
 
-instance P.HasStack (AppResource s) s Text where
+instance P.HasStack (AppResource s) (TF.Attr s Text) where
     stack =
         lens (_stack :: AppResource s -> TF.Attr s Text)
              (\s a -> s { _stack = a } :: AppResource s)
 
-instance P.HasComputedAllConfigVars (AppResource s) Text
-instance P.HasComputedGitUrl (AppResource s) Text
-instance P.HasComputedHerokuHostname (AppResource s) Text
-instance P.HasComputedId (AppResource s) Text
-instance P.HasComputedName (AppResource s) Text
-instance P.HasComputedRegion (AppResource s) Text
-instance P.HasComputedSpace (AppResource s) Text
-instance P.HasComputedStack (AppResource s) Text
-instance P.HasComputedWebUrl (AppResource s) Text
+instance P.HasComputedAllConfigVars (AppResource s) (Text)
+instance P.HasComputedGitUrl (AppResource s) (Text)
+instance P.HasComputedHerokuHostname (AppResource s) (Text)
+instance P.HasComputedId (AppResource s) (Text)
+instance P.HasComputedName (AppResource s) (Text)
+instance P.HasComputedRegion (AppResource s) (Text)
+instance P.HasComputedSpace (AppResource s) (Text)
+instance P.HasComputedStack (AppResource s) (Text)
+instance P.HasComputedWebUrl (AppResource s) (Text)
 
 appResource :: TF.Schema TF.Resource P.Heroku (AppResource s)
 appResource =
@@ -380,29 +381,29 @@ data CertResource s = CertResource {
 
 instance TF.ToHCL (CertResource s) where
     toHCL CertResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "app" _app
-        , TF.attribute "certificate_chain" _certificate_chain
-        , TF.attribute "private_key" _private_key
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "certificate_chain" <$> TF.attribute _certificate_chain
+        , TF.assign "private_key" <$> TF.attribute _private_key
         ]
 
-instance P.HasApp (CertResource s) s Text where
+instance P.HasApp (CertResource s) (TF.Attr s Text) where
     app =
         lens (_app :: CertResource s -> TF.Attr s Text)
              (\s a -> s { _app = a } :: CertResource s)
 
-instance P.HasCertificateChain (CertResource s) s Text where
+instance P.HasCertificateChain (CertResource s) (TF.Attr s Text) where
     certificateChain =
         lens (_certificate_chain :: CertResource s -> TF.Attr s Text)
              (\s a -> s { _certificate_chain = a } :: CertResource s)
 
-instance P.HasPrivateKey (CertResource s) s Text where
+instance P.HasPrivateKey (CertResource s) (TF.Attr s Text) where
     privateKey =
         lens (_private_key :: CertResource s -> TF.Attr s Text)
              (\s a -> s { _private_key = a } :: CertResource s)
 
-instance P.HasComputedCname (CertResource s) Text
-instance P.HasComputedId (CertResource s) Text
-instance P.HasComputedName (CertResource s) Text
+instance P.HasComputedCname (CertResource s) (Text)
+instance P.HasComputedId (CertResource s) (Text)
+instance P.HasComputedName (CertResource s) (Text)
 
 certResource :: TF.Schema TF.Resource P.Heroku (CertResource s)
 certResource =
@@ -427,23 +428,23 @@ data DomainResource s = DomainResource {
 
 instance TF.ToHCL (DomainResource s) where
     toHCL DomainResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "app" _app
-        , TF.attribute "hostname" _hostname
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "hostname" <$> TF.attribute _hostname
         ]
 
-instance P.HasApp (DomainResource s) s Text where
+instance P.HasApp (DomainResource s) (TF.Attr s Text) where
     app =
         lens (_app :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _app = a } :: DomainResource s)
 
-instance P.HasHostname (DomainResource s) s Text where
+instance P.HasHostname (DomainResource s) (TF.Attr s Text) where
     hostname =
         lens (_hostname :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: DomainResource s)
 
-instance P.HasComputedCname (DomainResource s) Text
-instance P.HasComputedHostname (DomainResource s) Text
-instance P.HasComputedId (DomainResource s) Text
+instance P.HasComputedCname (DomainResource s) (Text)
+instance P.HasComputedHostname (DomainResource s) (Text)
+instance P.HasComputedId (DomainResource s) (Text)
 
 domainResource :: TF.Schema TF.Resource P.Heroku (DomainResource s)
 domainResource =
@@ -467,21 +468,21 @@ data DrainResource s = DrainResource {
 
 instance TF.ToHCL (DrainResource s) where
     toHCL DrainResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "app" _app
-        , TF.attribute "url" _url
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "url" <$> TF.attribute _url
         ]
 
-instance P.HasApp (DrainResource s) s Text where
+instance P.HasApp (DrainResource s) (TF.Attr s Text) where
     app =
         lens (_app :: DrainResource s -> TF.Attr s Text)
              (\s a -> s { _app = a } :: DrainResource s)
 
-instance P.HasUrl (DrainResource s) s Text where
+instance P.HasUrl (DrainResource s) (TF.Attr s Text) where
     url =
         lens (_url :: DrainResource s -> TF.Attr s Text)
              (\s a -> s { _url = a } :: DrainResource s)
 
-instance P.HasComputedToken (DrainResource s) Text
+instance P.HasComputedToken (DrainResource s) (Text)
 
 drainResource :: TF.Schema TF.Resource P.Heroku (DrainResource s)
 drainResource =
@@ -510,31 +511,31 @@ data PipelineCouplingResource s = PipelineCouplingResource {
 
 instance TF.ToHCL (PipelineCouplingResource s) where
     toHCL PipelineCouplingResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "app" _app
-        , TF.attribute "pipeline" _pipeline
-        , TF.attribute "stage" _stage
+        [ TF.assign "app" <$> TF.attribute _app
+        , TF.assign "pipeline" <$> TF.attribute _pipeline
+        , TF.assign "stage" <$> TF.attribute _stage
         ]
 
-instance P.HasApp (PipelineCouplingResource s) s Text where
+instance P.HasApp (PipelineCouplingResource s) (TF.Attr s Text) where
     app =
         lens (_app :: PipelineCouplingResource s -> TF.Attr s Text)
              (\s a -> s { _app = a } :: PipelineCouplingResource s)
 
-instance P.HasPipeline (PipelineCouplingResource s) s Text where
+instance P.HasPipeline (PipelineCouplingResource s) (TF.Attr s Text) where
     pipeline =
         lens (_pipeline :: PipelineCouplingResource s -> TF.Attr s Text)
              (\s a -> s { _pipeline = a } :: PipelineCouplingResource s)
 
-instance P.HasStage (PipelineCouplingResource s) s Text where
+instance P.HasStage (PipelineCouplingResource s) (TF.Attr s Text) where
     stage =
         lens (_stage :: PipelineCouplingResource s -> TF.Attr s Text)
              (\s a -> s { _stage = a } :: PipelineCouplingResource s)
 
-instance P.HasComputedApp (PipelineCouplingResource s) Text
-instance P.HasComputedAppId (PipelineCouplingResource s) Text
-instance P.HasComputedId (PipelineCouplingResource s) Text
-instance P.HasComputedPipeline (PipelineCouplingResource s) Text
-instance P.HasComputedStage (PipelineCouplingResource s) Text
+instance P.HasComputedApp (PipelineCouplingResource s) (Text)
+instance P.HasComputedAppId (PipelineCouplingResource s) (Text)
+instance P.HasComputedId (PipelineCouplingResource s) (Text)
+instance P.HasComputedPipeline (PipelineCouplingResource s) (Text)
+instance P.HasComputedStage (PipelineCouplingResource s) (Text)
 
 pipelineCouplingResource :: TF.Schema TF.Resource P.Heroku (PipelineCouplingResource s)
 pipelineCouplingResource =
@@ -559,16 +560,16 @@ data PipelineResource s = PipelineResource {
 
 instance TF.ToHCL (PipelineResource s) where
     toHCL PipelineResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (PipelineResource s) s Text where
+instance P.HasName (PipelineResource s) (TF.Attr s Text) where
     name =
         lens (_name :: PipelineResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PipelineResource s)
 
-instance P.HasComputedId (PipelineResource s) Text
-instance P.HasComputedName (PipelineResource s) Text
+instance P.HasComputedId (PipelineResource s) (Text)
+instance P.HasComputedName (PipelineResource s) (Text)
 
 pipelineResource :: TF.Schema TF.Resource P.Heroku (PipelineResource s)
 pipelineResource =
@@ -593,30 +594,30 @@ data SpaceResource s = SpaceResource {
 
 instance TF.ToHCL (SpaceResource s) where
     toHCL SpaceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "organization" _organization
-        , TF.attribute "region" _region
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "organization" <$> TF.attribute _organization
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasName (SpaceResource s) s Text where
+instance P.HasName (SpaceResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SpaceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SpaceResource s)
 
-instance P.HasOrganization (SpaceResource s) s Text where
+instance P.HasOrganization (SpaceResource s) (TF.Attr s Text) where
     organization =
         lens (_organization :: SpaceResource s -> TF.Attr s Text)
              (\s a -> s { _organization = a } :: SpaceResource s)
 
-instance P.HasRegion (SpaceResource s) s Text where
+instance P.HasRegion (SpaceResource s) (TF.Attr s Text) where
     region =
         lens (_region :: SpaceResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: SpaceResource s)
 
-instance P.HasComputedId (SpaceResource s) Text
-instance P.HasComputedName (SpaceResource s) Text
-instance P.HasComputedOrganization (SpaceResource s) Text
-instance P.HasComputedRegion (SpaceResource s) Text
+instance P.HasComputedId (SpaceResource s) (Text)
+instance P.HasComputedName (SpaceResource s) (Text)
+instance P.HasComputedOrganization (SpaceResource s) (Text)
+instance P.HasComputedRegion (SpaceResource s) (Text)
 
 spaceResource :: TF.Schema TF.Resource P.Heroku (SpaceResource s)
 spaceResource =

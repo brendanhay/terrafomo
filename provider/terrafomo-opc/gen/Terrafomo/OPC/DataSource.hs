@@ -92,8 +92,9 @@ module Terrafomo.OPC.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -127,30 +128,30 @@ data ComputeImageListEntryData s = ComputeImageListEntryData {
 
 instance TF.ToHCL (ComputeImageListEntryData s) where
     toHCL ComputeImageListEntryData{..} = TF.inline $ catMaybes
-        [ TF.attribute "entry" _entry
-        , TF.attribute "image_list" _image_list
-        , TF.attribute "version" _version
+        [ TF.assign "entry" <$> TF.attribute _entry
+        , TF.assign "image_list" <$> TF.attribute _image_list
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasEntry (ComputeImageListEntryData s) s Text where
+instance P.HasEntry (ComputeImageListEntryData s) (TF.Attr s Text) where
     entry =
         lens (_entry :: ComputeImageListEntryData s -> TF.Attr s Text)
              (\s a -> s { _entry = a } :: ComputeImageListEntryData s)
 
-instance P.HasImageList (ComputeImageListEntryData s) s Text where
+instance P.HasImageList (ComputeImageListEntryData s) (TF.Attr s Text) where
     imageList =
         lens (_image_list :: ComputeImageListEntryData s -> TF.Attr s Text)
              (\s a -> s { _image_list = a } :: ComputeImageListEntryData s)
 
-instance P.HasVersion (ComputeImageListEntryData s) s Text where
+instance P.HasVersion (ComputeImageListEntryData s) (TF.Attr s Text) where
     version =
         lens (_version :: ComputeImageListEntryData s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ComputeImageListEntryData s)
 
-instance P.HasComputedAttributes (ComputeImageListEntryData s) Text
-instance P.HasComputedDns (ComputeImageListEntryData s) Text
-instance P.HasComputedMachineImages (ComputeImageListEntryData s) Text
-instance P.HasComputedUri (ComputeImageListEntryData s) Text
+instance P.HasComputedAttributes (ComputeImageListEntryData s) (Text)
+instance P.HasComputedDns (ComputeImageListEntryData s) (Text)
+instance P.HasComputedMachineImages (ComputeImageListEntryData s) (Text)
+instance P.HasComputedUri (ComputeImageListEntryData s) (Text)
 
 computeImageListEntryData :: TF.Schema TF.DataSource P.OPC (ComputeImageListEntryData s)
 computeImageListEntryData =
@@ -174,29 +175,29 @@ data ComputeMachineImageData s = ComputeMachineImageData {
 
 instance TF.ToHCL (ComputeMachineImageData s) where
     toHCL ComputeMachineImageData{..} = TF.inline $ catMaybes
-        [ TF.attribute "account" _account
-        , TF.attribute "name" _name
+        [ TF.assign "account" <$> TF.attribute _account
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasAccount (ComputeMachineImageData s) s Text where
+instance P.HasAccount (ComputeMachineImageData s) (TF.Attr s Text) where
     account =
         lens (_account :: ComputeMachineImageData s -> TF.Attr s Text)
              (\s a -> s { _account = a } :: ComputeMachineImageData s)
 
-instance P.HasName (ComputeMachineImageData s) s Text where
+instance P.HasName (ComputeMachineImageData s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeMachineImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeMachineImageData s)
 
-instance P.HasComputedAttributes (ComputeMachineImageData s) Text
-instance P.HasComputedDescription (ComputeMachineImageData s) Text
-instance P.HasComputedErrorReason (ComputeMachineImageData s) Text
-instance P.HasComputedFile (ComputeMachineImageData s) Text
-instance P.HasComputedHypervisor (ComputeMachineImageData s) Text
-instance P.HasComputedImageFormat (ComputeMachineImageData s) Text
-instance P.HasComputedPlatform (ComputeMachineImageData s) Text
-instance P.HasComputedState (ComputeMachineImageData s) Text
-instance P.HasComputedUri (ComputeMachineImageData s) Text
+instance P.HasComputedAttributes (ComputeMachineImageData s) (Text)
+instance P.HasComputedDescription (ComputeMachineImageData s) (Text)
+instance P.HasComputedErrorReason (ComputeMachineImageData s) (Text)
+instance P.HasComputedFile (ComputeMachineImageData s) (Text)
+instance P.HasComputedHypervisor (ComputeMachineImageData s) (Text)
+instance P.HasComputedImageFormat (ComputeMachineImageData s) (Text)
+instance P.HasComputedPlatform (ComputeMachineImageData s) (Text)
+instance P.HasComputedState (ComputeMachineImageData s) (Text)
+instance P.HasComputedUri (ComputeMachineImageData s) (Text)
 
 computeMachineImageData :: TF.Schema TF.DataSource P.OPC (ComputeMachineImageData s)
 computeMachineImageData =
@@ -222,39 +223,39 @@ data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData {
 
 instance TF.ToHCL (ComputeNetworkInterfaceData s) where
     toHCL ComputeNetworkInterfaceData{..} = TF.inline $ catMaybes
-        [ TF.attribute "instance_id" _instance_id
-        , TF.attribute "instance_name" _instance_name
-        , TF.attribute "interface" _interface
+        [ TF.assign "instance_id" <$> TF.attribute _instance_id
+        , TF.assign "instance_name" <$> TF.attribute _instance_name
+        , TF.assign "interface" <$> TF.attribute _interface
         ]
 
-instance P.HasInstanceId (ComputeNetworkInterfaceData s) s Text where
+instance P.HasInstanceId (ComputeNetworkInterfaceData s) (TF.Attr s Text) where
     instanceId =
         lens (_instance_id :: ComputeNetworkInterfaceData s -> TF.Attr s Text)
              (\s a -> s { _instance_id = a } :: ComputeNetworkInterfaceData s)
 
-instance P.HasInstanceName (ComputeNetworkInterfaceData s) s Text where
+instance P.HasInstanceName (ComputeNetworkInterfaceData s) (TF.Attr s Text) where
     instanceName =
         lens (_instance_name :: ComputeNetworkInterfaceData s -> TF.Attr s Text)
              (\s a -> s { _instance_name = a } :: ComputeNetworkInterfaceData s)
 
-instance P.HasInterface (ComputeNetworkInterfaceData s) s Text where
+instance P.HasInterface (ComputeNetworkInterfaceData s) (TF.Attr s Text) where
     interface =
         lens (_interface :: ComputeNetworkInterfaceData s -> TF.Attr s Text)
              (\s a -> s { _interface = a } :: ComputeNetworkInterfaceData s)
 
-instance P.HasComputedDns (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedIpAddress (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedIpNetwork (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedIsDefaultGateway (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedMacAddress (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedModel (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedNameServers (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedNat (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedSearchDomains (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedSecLists (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedSharedNetwork (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedVnic (ComputeNetworkInterfaceData s) Text
-instance P.HasComputedVnicSets (ComputeNetworkInterfaceData s) Text
+instance P.HasComputedDns (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedIpAddress (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedIpNetwork (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedIsDefaultGateway (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedMacAddress (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedModel (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedNameServers (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedNat (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedSearchDomains (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedSecLists (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedSharedNetwork (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedVnic (ComputeNetworkInterfaceData s) (Text)
+instance P.HasComputedVnicSets (ComputeNetworkInterfaceData s) (Text)
 
 computeNetworkInterfaceData :: TF.Schema TF.DataSource P.OPC (ComputeNetworkInterfaceData s)
 computeNetworkInterfaceData =
@@ -277,31 +278,31 @@ data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData {
 
 instance TF.ToHCL (ComputeStorageVolumeSnapshotData s) where
     toHCL ComputeStorageVolumeSnapshotData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ComputeStorageVolumeSnapshotData s) s Text where
+instance P.HasName (ComputeStorageVolumeSnapshotData s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeStorageVolumeSnapshotData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotData s)
 
-instance P.HasComputedAccount (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedCollocated (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedDescription (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedMachineImageName (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedParentVolumeBootable (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedPlatform (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedProperty (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedSize (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedSnapshotId (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedSnapshotTimestamp (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedStartTimestamp (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedStatus (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedStatusDetail (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedTags (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedUri (ComputeStorageVolumeSnapshotData s) Text
-instance P.HasComputedVolumeName (ComputeStorageVolumeSnapshotData s) Text
+instance P.HasComputedAccount (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedCollocated (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedDescription (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedMachineImageName (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedParentVolumeBootable (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedPlatform (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedProperty (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedSize (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedSnapshotId (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedSnapshotTimestamp (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedStartTimestamp (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedStatus (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedStatusDetail (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedTags (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedUri (ComputeStorageVolumeSnapshotData s) (Text)
+instance P.HasComputedVolumeName (ComputeStorageVolumeSnapshotData s) (Text)
 
 computeStorageVolumeSnapshotData :: TF.Schema TF.DataSource P.OPC (ComputeStorageVolumeSnapshotData s)
 computeStorageVolumeSnapshotData =
@@ -321,19 +322,19 @@ data ComputeVnicData s = ComputeVnicData {
 
 instance TF.ToHCL (ComputeVnicData s) where
     toHCL ComputeVnicData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ComputeVnicData s) s Text where
+instance P.HasName (ComputeVnicData s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeVnicData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeVnicData s)
 
-instance P.HasComputedDescription (ComputeVnicData s) Text
-instance P.HasComputedMacAddress (ComputeVnicData s) Text
-instance P.HasComputedTags (ComputeVnicData s) Text
-instance P.HasComputedTransitFlag (ComputeVnicData s) Text
-instance P.HasComputedUri (ComputeVnicData s) Text
+instance P.HasComputedDescription (ComputeVnicData s) (Text)
+instance P.HasComputedMacAddress (ComputeVnicData s) (Text)
+instance P.HasComputedTags (ComputeVnicData s) (Text)
+instance P.HasComputedTransitFlag (ComputeVnicData s) (Text)
+instance P.HasComputedUri (ComputeVnicData s) (Text)
 
 computeVnicData :: TF.Schema TF.DataSource P.OPC (ComputeVnicData s)
 computeVnicData =

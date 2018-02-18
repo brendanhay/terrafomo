@@ -52,106 +52,106 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasCapacity a s b | a -> s b where
-    capacity :: Lens' a (TF.Attr s b)
+class HasCapacity a b | a -> b where
+    capacity :: Lens' a b
 
-instance HasCapacity a s b => HasCapacity (TF.Schema l p a) s b where
+instance HasCapacity a b => HasCapacity (TF.Schema l p a) b where
     capacity = TF.configuration . capacity
 
-class HasCheck a s b | a -> s b where
-    check :: Lens' a (TF.Attr s b)
+class HasCheck a b | a -> b where
+    check :: Lens' a b
 
-instance HasCheck a s b => HasCheck (TF.Schema l p a) s b where
+instance HasCheck a b => HasCheck (TF.Schema l p a) b where
     check = TF.configuration . check
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasElasticIps a s b | a -> s b where
-    elasticIps :: Lens' a (TF.Attr s b)
+class HasElasticIps a b | a -> b where
+    elasticIps :: Lens' a b
 
-instance HasElasticIps a s b => HasElasticIps (TF.Schema l p a) s b where
+instance HasElasticIps a b => HasElasticIps (TF.Schema l p a) b where
     elasticIps = TF.configuration . elasticIps
 
-class HasEndpoint a s b | a -> s b where
-    endpoint :: Lens' a (TF.Attr s b)
+class HasEndpoint a b | a -> b where
+    endpoint :: Lens' a b
 
-instance HasEndpoint a s b => HasEndpoint (TF.Schema l p a) s b where
+instance HasEndpoint a b => HasEndpoint (TF.Schema l p a) b where
     endpoint = TF.configuration . endpoint
 
-class HasEventType a s b | a -> s b where
-    eventType :: Lens' a (TF.Attr s b)
+class HasEventType a b | a -> b where
+    eventType :: Lens' a b
 
-instance HasEventType a s b => HasEventType (TF.Schema l p a) s b where
+instance HasEventType a b => HasEventType (TF.Schema l p a) b where
     eventType = TF.configuration . eventType
 
-class HasFormat a s b | a -> s b where
-    format :: Lens' a (TF.Attr s b)
+class HasFormat a b | a -> b where
+    format :: Lens' a b
 
-instance HasFormat a s b => HasFormat (TF.Schema l p a) s b where
+instance HasFormat a b => HasFormat (TF.Schema l p a) b where
     format = TF.configuration . format
 
-class HasInstanceTypes a s b | a -> s b where
-    instanceTypes :: Lens' a (TF.Attr s b)
+class HasInstanceTypes a b | a -> b where
+    instanceTypes :: Lens' a b
 
-instance HasInstanceTypes a s b => HasInstanceTypes (TF.Schema l p a) s b where
+instance HasInstanceTypes a b => HasInstanceTypes (TF.Schema l p a) b where
     instanceTypes = TF.configuration . instanceTypes
 
-class HasLaunchSpecification a s b | a -> s b where
-    launchSpecification :: Lens' a (TF.Attr s b)
+class HasLaunchSpecification a b | a -> b where
+    launchSpecification :: Lens' a b
 
-instance HasLaunchSpecification a s b => HasLaunchSpecification (TF.Schema l p a) s b where
+instance HasLaunchSpecification a b => HasLaunchSpecification (TF.Schema l p a) b where
     launchSpecification = TF.configuration . launchSpecification
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasProduct a s b | a -> s b where
-    product :: Lens' a (TF.Attr s b)
+class HasProduct a b | a -> b where
+    product :: Lens' a b
 
-instance HasProduct a s b => HasProduct (TF.Schema l p a) s b where
+instance HasProduct a b => HasProduct (TF.Schema l p a) b where
     product = TF.configuration . product
 
-class HasProtocol a s b | a -> s b where
-    protocol :: Lens' a (TF.Attr s b)
+class HasProtocol a b | a -> b where
+    protocol :: Lens' a b
 
-instance HasProtocol a s b => HasProtocol (TF.Schema l p a) s b where
+instance HasProtocol a b => HasProtocol (TF.Schema l p a) b where
     protocol = TF.configuration . protocol
 
-class HasProxy a s b | a -> s b where
-    proxy :: Lens' a (TF.Attr s b)
+class HasProxy a b | a -> b where
+    proxy :: Lens' a b
 
-instance HasProxy a s b => HasProxy (TF.Schema l p a) s b where
+instance HasProxy a b => HasProxy (TF.Schema l p a) b where
     proxy = TF.configuration . proxy
 
-class HasResourceId a s b | a -> s b where
-    resourceId :: Lens' a (TF.Attr s b)
+class HasResourceId a b | a -> b where
+    resourceId :: Lens' a b
 
-instance HasResourceId a s b => HasResourceId (TF.Schema l p a) s b where
+instance HasResourceId a b => HasResourceId (TF.Schema l p a) b where
     resourceId = TF.configuration . resourceId
 
-class HasStrategy a s b | a -> s b where
-    strategy :: Lens' a (TF.Attr s b)
+class HasStrategy a b | a -> b where
+    strategy :: Lens' a b
 
-instance HasStrategy a s b => HasStrategy (TF.Schema l p a) s b where
+instance HasStrategy a b => HasStrategy (TF.Schema l p a) b where
     strategy = TF.configuration . strategy
 
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attr s b)
+class HasTags a b | a -> b where
+    tags :: Lens' a b
 
-instance HasTags a s b => HasTags (TF.Schema l p a) s b where
+instance HasTags a b => HasTags (TF.Schema l p a) b where
     tags = TF.configuration . tags
 
-class HasThreshold a s b | a -> s b where
-    threshold :: Lens' a (TF.Attr s b)
+class HasThreshold a b | a -> b where
+    threshold :: Lens' a b
 
-instance HasThreshold a s b => HasThreshold (TF.Schema l p a) s b where
+instance HasThreshold a b => HasThreshold (TF.Schema l p a) b where
     threshold = TF.configuration . threshold
 
 class HasComputedId a b | a -> b where

@@ -122,8 +122,9 @@ module Terrafomo.OpenStack.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -169,63 +170,63 @@ data ComputeFlavorV2Data s = ComputeFlavorV2Data {
 
 instance TF.ToHCL (ComputeFlavorV2Data s) where
     toHCL ComputeFlavorV2Data{..} = TF.inline $ catMaybes
-        [ TF.attribute "disk" _disk
-        , TF.attribute "min_disk" _min_disk
-        , TF.attribute "min_ram" _min_ram
-        , TF.attribute "name" _name
-        , TF.attribute "ram" _ram
-        , TF.attribute "region" _region
-        , TF.attribute "rx_tx_factor" _rx_tx_factor
-        , TF.attribute "swap" _swap
-        , TF.attribute "vcpus" _vcpus
+        [ TF.assign "disk" <$> TF.attribute _disk
+        , TF.assign "min_disk" <$> TF.attribute _min_disk
+        , TF.assign "min_ram" <$> TF.attribute _min_ram
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ram" <$> TF.attribute _ram
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "rx_tx_factor" <$> TF.attribute _rx_tx_factor
+        , TF.assign "swap" <$> TF.attribute _swap
+        , TF.assign "vcpus" <$> TF.attribute _vcpus
         ]
 
-instance P.HasDisk (ComputeFlavorV2Data s) s Text where
+instance P.HasDisk (ComputeFlavorV2Data s) (TF.Attr s Text) where
     disk =
         lens (_disk :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _disk = a } :: ComputeFlavorV2Data s)
 
-instance P.HasMinDisk (ComputeFlavorV2Data s) s Text where
+instance P.HasMinDisk (ComputeFlavorV2Data s) (TF.Attr s Text) where
     minDisk =
         lens (_min_disk :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _min_disk = a } :: ComputeFlavorV2Data s)
 
-instance P.HasMinRam (ComputeFlavorV2Data s) s Text where
+instance P.HasMinRam (ComputeFlavorV2Data s) (TF.Attr s Text) where
     minRam =
         lens (_min_ram :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _min_ram = a } :: ComputeFlavorV2Data s)
 
-instance P.HasName (ComputeFlavorV2Data s) s Text where
+instance P.HasName (ComputeFlavorV2Data s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeFlavorV2Data s)
 
-instance P.HasRam (ComputeFlavorV2Data s) s Text where
+instance P.HasRam (ComputeFlavorV2Data s) (TF.Attr s Text) where
     ram =
         lens (_ram :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _ram = a } :: ComputeFlavorV2Data s)
 
-instance P.HasRegion (ComputeFlavorV2Data s) s Text where
+instance P.HasRegion (ComputeFlavorV2Data s) (TF.Attr s Text) where
     region =
         lens (_region :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ComputeFlavorV2Data s)
 
-instance P.HasRxTxFactor (ComputeFlavorV2Data s) s Text where
+instance P.HasRxTxFactor (ComputeFlavorV2Data s) (TF.Attr s Text) where
     rxTxFactor =
         lens (_rx_tx_factor :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _rx_tx_factor = a } :: ComputeFlavorV2Data s)
 
-instance P.HasSwap (ComputeFlavorV2Data s) s Text where
+instance P.HasSwap (ComputeFlavorV2Data s) (TF.Attr s Text) where
     swap =
         lens (_swap :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _swap = a } :: ComputeFlavorV2Data s)
 
-instance P.HasVcpus (ComputeFlavorV2Data s) s Text where
+instance P.HasVcpus (ComputeFlavorV2Data s) (TF.Attr s Text) where
     vcpus =
         lens (_vcpus :: ComputeFlavorV2Data s -> TF.Attr s Text)
              (\s a -> s { _vcpus = a } :: ComputeFlavorV2Data s)
 
-instance P.HasComputedIsPublic (ComputeFlavorV2Data s) Text
+instance P.HasComputedIsPublic (ComputeFlavorV2Data s) (Text)
 
 computeFlavorV2Data :: TF.Schema TF.DataSource P.OpenStack (ComputeFlavorV2Data s)
 computeFlavorV2Data =
@@ -265,66 +266,66 @@ data DnsZoneV2Data s = DnsZoneV2Data {
 
 instance TF.ToHCL (DnsZoneV2Data s) where
     toHCL DnsZoneV2Data{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "email" _email
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "status" _status
-        , TF.attribute "ttl" _ttl
-        , TF.attribute "type" _type'
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasDescription (DnsZoneV2Data s) s Text where
+instance P.HasDescription (DnsZoneV2Data s) (TF.Attr s Text) where
     description =
         lens (_description :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DnsZoneV2Data s)
 
-instance P.HasEmail (DnsZoneV2Data s) s Text where
+instance P.HasEmail (DnsZoneV2Data s) (TF.Attr s Text) where
     email =
         lens (_email :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _email = a } :: DnsZoneV2Data s)
 
-instance P.HasName (DnsZoneV2Data s) s Text where
+instance P.HasName (DnsZoneV2Data s) (TF.Attr s Text) where
     name =
         lens (_name :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DnsZoneV2Data s)
 
-instance P.HasRegion (DnsZoneV2Data s) s Text where
+instance P.HasRegion (DnsZoneV2Data s) (TF.Attr s Text) where
     region =
         lens (_region :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DnsZoneV2Data s)
 
-instance P.HasStatus (DnsZoneV2Data s) s Text where
+instance P.HasStatus (DnsZoneV2Data s) (TF.Attr s Text) where
     status =
         lens (_status :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: DnsZoneV2Data s)
 
-instance P.HasTtl (DnsZoneV2Data s) s Text where
+instance P.HasTtl (DnsZoneV2Data s) (TF.Attr s Text) where
     ttl =
         lens (_ttl :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: DnsZoneV2Data s)
 
-instance P.HasType' (DnsZoneV2Data s) s Text where
+instance P.HasType' (DnsZoneV2Data s) (TF.Attr s Text) where
     type' =
         lens (_type' :: DnsZoneV2Data s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: DnsZoneV2Data s)
 
-instance P.HasComputedAttributes (DnsZoneV2Data s) Text
-instance P.HasComputedCreatedAt (DnsZoneV2Data s) Text
-instance P.HasComputedDescription (DnsZoneV2Data s) Text
-instance P.HasComputedEmail (DnsZoneV2Data s) Text
-instance P.HasComputedMasters (DnsZoneV2Data s) Text
-instance P.HasComputedName (DnsZoneV2Data s) Text
-instance P.HasComputedPoolId (DnsZoneV2Data s) Text
-instance P.HasComputedProjectId (DnsZoneV2Data s) Text
-instance P.HasComputedRegion (DnsZoneV2Data s) Text
-instance P.HasComputedSerial (DnsZoneV2Data s) Text
-instance P.HasComputedStatus (DnsZoneV2Data s) Text
-instance P.HasComputedTransferredAt (DnsZoneV2Data s) Text
-instance P.HasComputedTtl (DnsZoneV2Data s) Text
-instance P.HasComputedType' (DnsZoneV2Data s) Text
-instance P.HasComputedUpdatedAt (DnsZoneV2Data s) Text
-instance P.HasComputedVersion (DnsZoneV2Data s) Text
+instance P.HasComputedAttributes (DnsZoneV2Data s) (Text)
+instance P.HasComputedCreatedAt (DnsZoneV2Data s) (Text)
+instance P.HasComputedDescription (DnsZoneV2Data s) (Text)
+instance P.HasComputedEmail (DnsZoneV2Data s) (Text)
+instance P.HasComputedMasters (DnsZoneV2Data s) (Text)
+instance P.HasComputedName (DnsZoneV2Data s) (Text)
+instance P.HasComputedPoolId (DnsZoneV2Data s) (Text)
+instance P.HasComputedProjectId (DnsZoneV2Data s) (Text)
+instance P.HasComputedRegion (DnsZoneV2Data s) (Text)
+instance P.HasComputedSerial (DnsZoneV2Data s) (Text)
+instance P.HasComputedStatus (DnsZoneV2Data s) (Text)
+instance P.HasComputedTransferredAt (DnsZoneV2Data s) (Text)
+instance P.HasComputedTtl (DnsZoneV2Data s) (Text)
+instance P.HasComputedType' (DnsZoneV2Data s) (Text)
+instance P.HasComputedUpdatedAt (DnsZoneV2Data s) (Text)
+instance P.HasComputedVersion (DnsZoneV2Data s) (Text)
 
 dnsZoneV2Data :: TF.Schema TF.DataSource P.OpenStack (DnsZoneV2Data s)
 dnsZoneV2Data =
@@ -370,88 +371,88 @@ data ImagesImageV2Data s = ImagesImageV2Data {
 
 instance TF.ToHCL (ImagesImageV2Data s) where
     toHCL ImagesImageV2Data{..} = TF.inline $ catMaybes
-        [ TF.attribute "most_recent" _most_recent
-        , TF.attribute "name" _name
-        , TF.attribute "owner" _owner
-        , TF.attribute "properties" _properties
-        , TF.attribute "region" _region
-        , TF.attribute "size_max" _size_max
-        , TF.attribute "size_min" _size_min
-        , TF.attribute "sort_direction" _sort_direction
-        , TF.attribute "sort_key" _sort_key
-        , TF.attribute "tag" _tag
-        , TF.attribute "visibility" _visibility
+        [ TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "owner" <$> TF.attribute _owner
+        , TF.assign "properties" <$> TF.attribute _properties
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "size_max" <$> TF.attribute _size_max
+        , TF.assign "size_min" <$> TF.attribute _size_min
+        , TF.assign "sort_direction" <$> TF.attribute _sort_direction
+        , TF.assign "sort_key" <$> TF.attribute _sort_key
+        , TF.assign "tag" <$> TF.attribute _tag
+        , TF.assign "visibility" <$> TF.attribute _visibility
         ]
 
-instance P.HasMostRecent (ImagesImageV2Data s) s Text where
+instance P.HasMostRecent (ImagesImageV2Data s) (TF.Attr s Text) where
     mostRecent =
         lens (_most_recent :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _most_recent = a } :: ImagesImageV2Data s)
 
-instance P.HasName (ImagesImageV2Data s) s Text where
+instance P.HasName (ImagesImageV2Data s) (TF.Attr s Text) where
     name =
         lens (_name :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImagesImageV2Data s)
 
-instance P.HasOwner (ImagesImageV2Data s) s Text where
+instance P.HasOwner (ImagesImageV2Data s) (TF.Attr s Text) where
     owner =
         lens (_owner :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _owner = a } :: ImagesImageV2Data s)
 
-instance P.HasProperties (ImagesImageV2Data s) s Text where
+instance P.HasProperties (ImagesImageV2Data s) (TF.Attr s Text) where
     properties =
         lens (_properties :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _properties = a } :: ImagesImageV2Data s)
 
-instance P.HasRegion (ImagesImageV2Data s) s Text where
+instance P.HasRegion (ImagesImageV2Data s) (TF.Attr s Text) where
     region =
         lens (_region :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: ImagesImageV2Data s)
 
-instance P.HasSizeMax (ImagesImageV2Data s) s Text where
+instance P.HasSizeMax (ImagesImageV2Data s) (TF.Attr s Text) where
     sizeMax =
         lens (_size_max :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _size_max = a } :: ImagesImageV2Data s)
 
-instance P.HasSizeMin (ImagesImageV2Data s) s Text where
+instance P.HasSizeMin (ImagesImageV2Data s) (TF.Attr s Text) where
     sizeMin =
         lens (_size_min :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _size_min = a } :: ImagesImageV2Data s)
 
-instance P.HasSortDirection (ImagesImageV2Data s) s Text where
+instance P.HasSortDirection (ImagesImageV2Data s) (TF.Attr s Text) where
     sortDirection =
         lens (_sort_direction :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _sort_direction = a } :: ImagesImageV2Data s)
 
-instance P.HasSortKey (ImagesImageV2Data s) s Text where
+instance P.HasSortKey (ImagesImageV2Data s) (TF.Attr s Text) where
     sortKey =
         lens (_sort_key :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _sort_key = a } :: ImagesImageV2Data s)
 
-instance P.HasTag (ImagesImageV2Data s) s Text where
+instance P.HasTag (ImagesImageV2Data s) (TF.Attr s Text) where
     tag =
         lens (_tag :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _tag = a } :: ImagesImageV2Data s)
 
-instance P.HasVisibility (ImagesImageV2Data s) s Text where
+instance P.HasVisibility (ImagesImageV2Data s) (TF.Attr s Text) where
     visibility =
         lens (_visibility :: ImagesImageV2Data s -> TF.Attr s Text)
              (\s a -> s { _visibility = a } :: ImagesImageV2Data s)
 
-instance P.HasComputedChecksum (ImagesImageV2Data s) Text
-instance P.HasComputedContainerFormat (ImagesImageV2Data s) Text
-instance P.HasComputedCreatedAt (ImagesImageV2Data s) Text
-instance P.HasComputedDiskFormat (ImagesImageV2Data s) Text
-instance P.HasComputedFile (ImagesImageV2Data s) Text
-instance P.HasComputedMetadata (ImagesImageV2Data s) Text
-instance P.HasComputedMinDiskGb (ImagesImageV2Data s) Text
-instance P.HasComputedMinRamMb (ImagesImageV2Data s) Text
-instance P.HasComputedProperties (ImagesImageV2Data s) Text
-instance P.HasComputedProtected (ImagesImageV2Data s) Text
-instance P.HasComputedSchema (ImagesImageV2Data s) Text
-instance P.HasComputedSizeBytes (ImagesImageV2Data s) Text
-instance P.HasComputedTags (ImagesImageV2Data s) Text
-instance P.HasComputedUpdateAt (ImagesImageV2Data s) Text
+instance P.HasComputedChecksum (ImagesImageV2Data s) (Text)
+instance P.HasComputedContainerFormat (ImagesImageV2Data s) (Text)
+instance P.HasComputedCreatedAt (ImagesImageV2Data s) (Text)
+instance P.HasComputedDiskFormat (ImagesImageV2Data s) (Text)
+instance P.HasComputedFile (ImagesImageV2Data s) (Text)
+instance P.HasComputedMetadata (ImagesImageV2Data s) (Text)
+instance P.HasComputedMinDiskGb (ImagesImageV2Data s) (Text)
+instance P.HasComputedMinRamMb (ImagesImageV2Data s) (Text)
+instance P.HasComputedProperties (ImagesImageV2Data s) (Text)
+instance P.HasComputedProtected (ImagesImageV2Data s) (Text)
+instance P.HasComputedSchema (ImagesImageV2Data s) (Text)
+instance P.HasComputedSizeBytes (ImagesImageV2Data s) (Text)
+instance P.HasComputedTags (ImagesImageV2Data s) (Text)
+instance P.HasComputedUpdateAt (ImagesImageV2Data s) (Text)
 
 imagesImageV2Data :: TF.Schema TF.DataSource P.OpenStack (ImagesImageV2Data s)
 imagesImageV2Data =
@@ -493,55 +494,55 @@ data NetworkingNetworkV2Data s = NetworkingNetworkV2Data {
 
 instance TF.ToHCL (NetworkingNetworkV2Data s) where
     toHCL NetworkingNetworkV2Data{..} = TF.inline $ catMaybes
-        [ TF.attribute "availability_zone_hints" _availability_zone_hints
-        , TF.attribute "matching_subnet_cidr" _matching_subnet_cidr
-        , TF.attribute "name" _name
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "region" _region
-        , TF.attribute "status" _status
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "availability_zone_hints" <$> TF.attribute _availability_zone_hints
+        , TF.assign "matching_subnet_cidr" <$> TF.attribute _matching_subnet_cidr
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasAvailabilityZoneHints (NetworkingNetworkV2Data s) s Text where
+instance P.HasAvailabilityZoneHints (NetworkingNetworkV2Data s) (TF.Attr s Text) where
     availabilityZoneHints =
         lens (_availability_zone_hints :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _availability_zone_hints = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasMatchingSubnetCidr (NetworkingNetworkV2Data s) s Text where
+instance P.HasMatchingSubnetCidr (NetworkingNetworkV2Data s) (TF.Attr s Text) where
     matchingSubnetCidr =
         lens (_matching_subnet_cidr :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _matching_subnet_cidr = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasName (NetworkingNetworkV2Data s) s Text where
+instance P.HasName (NetworkingNetworkV2Data s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasNetworkId (NetworkingNetworkV2Data s) s Text where
+instance P.HasNetworkId (NetworkingNetworkV2Data s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasRegion (NetworkingNetworkV2Data s) s Text where
+instance P.HasRegion (NetworkingNetworkV2Data s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasStatus (NetworkingNetworkV2Data s) s Text where
+instance P.HasStatus (NetworkingNetworkV2Data s) (TF.Attr s Text) where
     status =
         lens (_status :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasTenantId (NetworkingNetworkV2Data s) s Text where
+instance P.HasTenantId (NetworkingNetworkV2Data s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingNetworkV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingNetworkV2Data s)
 
-instance P.HasComputedAdminStateUp (NetworkingNetworkV2Data s) Text
-instance P.HasComputedAvailabilityZoneHints (NetworkingNetworkV2Data s) Text
-instance P.HasComputedName (NetworkingNetworkV2Data s) Text
-instance P.HasComputedRegion (NetworkingNetworkV2Data s) Text
-instance P.HasComputedShared (NetworkingNetworkV2Data s) Text
+instance P.HasComputedAdminStateUp (NetworkingNetworkV2Data s) (Text)
+instance P.HasComputedAvailabilityZoneHints (NetworkingNetworkV2Data s) (Text)
+instance P.HasComputedName (NetworkingNetworkV2Data s) (Text)
+instance P.HasComputedRegion (NetworkingNetworkV2Data s) (Text)
+instance P.HasComputedShared (NetworkingNetworkV2Data s) (Text)
 
 networkingNetworkV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingNetworkV2Data s)
 networkingNetworkV2Data =
@@ -573,35 +574,35 @@ data NetworkingSecgroupV2Data s = NetworkingSecgroupV2Data {
 
 instance TF.ToHCL (NetworkingSecgroupV2Data s) where
     toHCL NetworkingSecgroupV2Data{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "secgroup_id" _secgroup_id
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "secgroup_id" <$> TF.attribute _secgroup_id
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasName (NetworkingSecgroupV2Data s) s Text where
+instance P.HasName (NetworkingSecgroupV2Data s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingSecgroupV2Data s)
 
-instance P.HasRegion (NetworkingSecgroupV2Data s) s Text where
+instance P.HasRegion (NetworkingSecgroupV2Data s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingSecgroupV2Data s)
 
-instance P.HasSecgroupId (NetworkingSecgroupV2Data s) s Text where
+instance P.HasSecgroupId (NetworkingSecgroupV2Data s) (TF.Attr s Text) where
     secgroupId =
         lens (_secgroup_id :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _secgroup_id = a } :: NetworkingSecgroupV2Data s)
 
-instance P.HasTenantId (NetworkingSecgroupV2Data s) s Text where
+instance P.HasTenantId (NetworkingSecgroupV2Data s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingSecgroupV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSecgroupV2Data s)
 
-instance P.HasComputedDescription (NetworkingSecgroupV2Data s) Text
-instance P.HasComputedName (NetworkingSecgroupV2Data s) Text
-instance P.HasComputedRegion (NetworkingSecgroupV2Data s) Text
+instance P.HasComputedDescription (NetworkingSecgroupV2Data s) (Text)
+instance P.HasComputedName (NetworkingSecgroupV2Data s) (Text)
+instance P.HasComputedRegion (NetworkingSecgroupV2Data s) (Text)
 
 networkingSecgroupV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingSecgroupV2Data s)
 networkingSecgroupV2Data =
@@ -646,85 +647,85 @@ data NetworkingSubnetV2Data s = NetworkingSubnetV2Data {
 
 instance TF.ToHCL (NetworkingSubnetV2Data s) where
     toHCL NetworkingSubnetV2Data{..} = TF.inline $ catMaybes
-        [ TF.attribute "cidr" _cidr
-        , TF.attribute "dhcp_disabled" _dhcp_disabled
-        , TF.attribute "dhcp_enabled" _dhcp_enabled
-        , TF.attribute "gateway_ip" _gateway_ip
-        , TF.attribute "ip_version" _ip_version
-        , TF.attribute "ipv6_address_mode" _ipv6_address_mode
-        , TF.attribute "ipv6_ra_mode" _ipv6_ra_mode
-        , TF.attribute "name" _name
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "region" _region
-        , TF.attribute "subnet_id" _subnet_id
-        , TF.attribute "tenant_id" _tenant_id
+        [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "dhcp_disabled" <$> TF.attribute _dhcp_disabled
+        , TF.assign "dhcp_enabled" <$> TF.attribute _dhcp_enabled
+        , TF.assign "gateway_ip" <$> TF.attribute _gateway_ip
+        , TF.assign "ip_version" <$> TF.attribute _ip_version
+        , TF.assign "ipv6_address_mode" <$> TF.attribute _ipv6_address_mode
+        , TF.assign "ipv6_ra_mode" <$> TF.attribute _ipv6_ra_mode
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "subnet_id" <$> TF.attribute _subnet_id
+        , TF.assign "tenant_id" <$> TF.attribute _tenant_id
         ]
 
-instance P.HasCidr (NetworkingSubnetV2Data s) s Text where
+instance P.HasCidr (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     cidr =
         lens (_cidr :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _cidr = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasDhcpDisabled (NetworkingSubnetV2Data s) s Text where
+instance P.HasDhcpDisabled (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     dhcpDisabled =
         lens (_dhcp_disabled :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _dhcp_disabled = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasDhcpEnabled (NetworkingSubnetV2Data s) s Text where
+instance P.HasDhcpEnabled (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     dhcpEnabled =
         lens (_dhcp_enabled :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _dhcp_enabled = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasGatewayIp (NetworkingSubnetV2Data s) s Text where
+instance P.HasGatewayIp (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     gatewayIp =
         lens (_gateway_ip :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _gateway_ip = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasIpVersion (NetworkingSubnetV2Data s) s Text where
+instance P.HasIpVersion (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     ipVersion =
         lens (_ip_version :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _ip_version = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasIpv6AddressMode (NetworkingSubnetV2Data s) s Text where
+instance P.HasIpv6AddressMode (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     ipv6AddressMode =
         lens (_ipv6_address_mode :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _ipv6_address_mode = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasIpv6RaMode (NetworkingSubnetV2Data s) s Text where
+instance P.HasIpv6RaMode (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     ipv6RaMode =
         lens (_ipv6_ra_mode :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _ipv6_ra_mode = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasName (NetworkingSubnetV2Data s) s Text where
+instance P.HasName (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasNetworkId (NetworkingSubnetV2Data s) s Text where
+instance P.HasNetworkId (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasRegion (NetworkingSubnetV2Data s) s Text where
+instance P.HasRegion (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     region =
         lens (_region :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasSubnetId (NetworkingSubnetV2Data s) s Text where
+instance P.HasSubnetId (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     subnetId =
         lens (_subnet_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _subnet_id = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasTenantId (NetworkingSubnetV2Data s) s Text where
+instance P.HasTenantId (NetworkingSubnetV2Data s) (TF.Attr s Text) where
     tenantId =
         lens (_tenant_id :: NetworkingSubnetV2Data s -> TF.Attr s Text)
              (\s a -> s { _tenant_id = a } :: NetworkingSubnetV2Data s)
 
-instance P.HasComputedAllocationPools (NetworkingSubnetV2Data s) Text
-instance P.HasComputedDnsNameservers (NetworkingSubnetV2Data s) Text
-instance P.HasComputedEnableDhcp (NetworkingSubnetV2Data s) Text
-instance P.HasComputedHostRoutes (NetworkingSubnetV2Data s) Text
-instance P.HasComputedRegion (NetworkingSubnetV2Data s) Text
+instance P.HasComputedAllocationPools (NetworkingSubnetV2Data s) (Text)
+instance P.HasComputedDnsNameservers (NetworkingSubnetV2Data s) (Text)
+instance P.HasComputedEnableDhcp (NetworkingSubnetV2Data s) (Text)
+instance P.HasComputedHostRoutes (NetworkingSubnetV2Data s) (Text)
+instance P.HasComputedRegion (NetworkingSubnetV2Data s) (Text)
 
 networkingSubnetV2Data :: TF.Schema TF.DataSource P.OpenStack (NetworkingSubnetV2Data s)
 networkingSubnetV2Data =

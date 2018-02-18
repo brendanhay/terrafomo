@@ -39,8 +39,9 @@ module Terrafomo.DNSMadeEasy.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -69,11 +70,11 @@ data RecordResource s = RecordResource {
 instance TF.ToHCL (RecordResource s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedGtdLocation (RecordResource s) Text
-instance P.HasComputedName (RecordResource s) Text
-instance P.HasComputedTtl (RecordResource s) Text
-instance P.HasComputedType' (RecordResource s) Text
-instance P.HasComputedValue (RecordResource s) Text
+instance P.HasComputedGtdLocation (RecordResource s) (Text)
+instance P.HasComputedName (RecordResource s) (Text)
+instance P.HasComputedTtl (RecordResource s) (Text)
+instance P.HasComputedType' (RecordResource s) (Text)
+instance P.HasComputedValue (RecordResource s) (Text)
 
 recordResource :: TF.Schema TF.Resource P.DNSMadeEasy (RecordResource s)
 recordResource =

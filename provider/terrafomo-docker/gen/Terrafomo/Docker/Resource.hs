@@ -93,8 +93,9 @@ module Terrafomo.Docker.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -186,204 +187,204 @@ data ContainerResource s = ContainerResource {
 
 instance TF.ToHCL (ContainerResource s) where
     toHCL ContainerResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "capabilities" _capabilities
-        , TF.attribute "command" _command
-        , TF.attribute "cpu_shares" _cpu_shares
-        , TF.attribute "destroy_grace_seconds" _destroy_grace_seconds
-        , TF.attribute "dns" _dns
-        , TF.attribute "dns_opts" _dns_opts
-        , TF.attribute "dns_search" _dns_search
-        , TF.attribute "domainname" _domainname
-        , TF.attribute "entrypoint" _entrypoint
-        , TF.attribute "env" _env
-        , TF.attribute "host" _host
-        , TF.attribute "hostname" _hostname
-        , TF.attribute "image" _image
-        , TF.attribute "labels" _labels
-        , TF.attribute "links" _links
-        , TF.attribute "log_driver" _log_driver
-        , TF.attribute "log_opts" _log_opts
-        , TF.attribute "max_retry_count" _max_retry_count
-        , TF.attribute "memory" _memory
-        , TF.attribute "memory_swap" _memory_swap
-        , TF.attribute "must_run" _must_run
-        , TF.attribute "name" _name
-        , TF.attribute "network_alias" _network_alias
-        , TF.attribute "network_mode" _network_mode
-        , TF.attribute "networks" _networks
-        , TF.attribute "ports" _ports
-        , TF.attribute "privileged" _privileged
-        , TF.attribute "publish_all_ports" _publish_all_ports
-        , TF.attribute "restart" _restart
-        , TF.attribute "upload" _upload
-        , TF.attribute "user" _user
-        , TF.attribute "volumes" _volumes
+        [ TF.assign "capabilities" <$> TF.attribute _capabilities
+        , TF.assign "command" <$> TF.attribute _command
+        , TF.assign "cpu_shares" <$> TF.attribute _cpu_shares
+        , TF.assign "destroy_grace_seconds" <$> TF.attribute _destroy_grace_seconds
+        , TF.assign "dns" <$> TF.attribute _dns
+        , TF.assign "dns_opts" <$> TF.attribute _dns_opts
+        , TF.assign "dns_search" <$> TF.attribute _dns_search
+        , TF.assign "domainname" <$> TF.attribute _domainname
+        , TF.assign "entrypoint" <$> TF.attribute _entrypoint
+        , TF.assign "env" <$> TF.attribute _env
+        , TF.assign "host" <$> TF.attribute _host
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "links" <$> TF.attribute _links
+        , TF.assign "log_driver" <$> TF.attribute _log_driver
+        , TF.assign "log_opts" <$> TF.attribute _log_opts
+        , TF.assign "max_retry_count" <$> TF.attribute _max_retry_count
+        , TF.assign "memory" <$> TF.attribute _memory
+        , TF.assign "memory_swap" <$> TF.attribute _memory_swap
+        , TF.assign "must_run" <$> TF.attribute _must_run
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_alias" <$> TF.attribute _network_alias
+        , TF.assign "network_mode" <$> TF.attribute _network_mode
+        , TF.assign "networks" <$> TF.attribute _networks
+        , TF.assign "ports" <$> TF.attribute _ports
+        , TF.assign "privileged" <$> TF.attribute _privileged
+        , TF.assign "publish_all_ports" <$> TF.attribute _publish_all_ports
+        , TF.assign "restart" <$> TF.attribute _restart
+        , TF.assign "upload" <$> TF.attribute _upload
+        , TF.assign "user" <$> TF.attribute _user
+        , TF.assign "volumes" <$> TF.attribute _volumes
         ]
 
-instance P.HasCapabilities (ContainerResource s) s Text where
+instance P.HasCapabilities (ContainerResource s) (TF.Attr s Text) where
     capabilities =
         lens (_capabilities :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _capabilities = a } :: ContainerResource s)
 
-instance P.HasCommand (ContainerResource s) s Text where
+instance P.HasCommand (ContainerResource s) (TF.Attr s Text) where
     command =
         lens (_command :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _command = a } :: ContainerResource s)
 
-instance P.HasCpuShares (ContainerResource s) s Text where
+instance P.HasCpuShares (ContainerResource s) (TF.Attr s Text) where
     cpuShares =
         lens (_cpu_shares :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _cpu_shares = a } :: ContainerResource s)
 
-instance P.HasDestroyGraceSeconds (ContainerResource s) s Text where
+instance P.HasDestroyGraceSeconds (ContainerResource s) (TF.Attr s Text) where
     destroyGraceSeconds =
         lens (_destroy_grace_seconds :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _destroy_grace_seconds = a } :: ContainerResource s)
 
-instance P.HasDns (ContainerResource s) s Text where
+instance P.HasDns (ContainerResource s) (TF.Attr s Text) where
     dns =
         lens (_dns :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _dns = a } :: ContainerResource s)
 
-instance P.HasDnsOpts (ContainerResource s) s Text where
+instance P.HasDnsOpts (ContainerResource s) (TF.Attr s Text) where
     dnsOpts =
         lens (_dns_opts :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _dns_opts = a } :: ContainerResource s)
 
-instance P.HasDnsSearch (ContainerResource s) s Text where
+instance P.HasDnsSearch (ContainerResource s) (TF.Attr s Text) where
     dnsSearch =
         lens (_dns_search :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _dns_search = a } :: ContainerResource s)
 
-instance P.HasDomainname (ContainerResource s) s Text where
+instance P.HasDomainname (ContainerResource s) (TF.Attr s Text) where
     domainname =
         lens (_domainname :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _domainname = a } :: ContainerResource s)
 
-instance P.HasEntrypoint (ContainerResource s) s Text where
+instance P.HasEntrypoint (ContainerResource s) (TF.Attr s Text) where
     entrypoint =
         lens (_entrypoint :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _entrypoint = a } :: ContainerResource s)
 
-instance P.HasEnv (ContainerResource s) s Text where
+instance P.HasEnv (ContainerResource s) (TF.Attr s Text) where
     env =
         lens (_env :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _env = a } :: ContainerResource s)
 
-instance P.HasHost (ContainerResource s) s Text where
+instance P.HasHost (ContainerResource s) (TF.Attr s Text) where
     host =
         lens (_host :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _host = a } :: ContainerResource s)
 
-instance P.HasHostname (ContainerResource s) s Text where
+instance P.HasHostname (ContainerResource s) (TF.Attr s Text) where
     hostname =
         lens (_hostname :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: ContainerResource s)
 
-instance P.HasImage (ContainerResource s) s Text where
+instance P.HasImage (ContainerResource s) (TF.Attr s Text) where
     image =
         lens (_image :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _image = a } :: ContainerResource s)
 
-instance P.HasLabels (ContainerResource s) s Text where
+instance P.HasLabels (ContainerResource s) (TF.Attr s Text) where
     labels =
         lens (_labels :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _labels = a } :: ContainerResource s)
 
-instance P.HasLinks (ContainerResource s) s Text where
+instance P.HasLinks (ContainerResource s) (TF.Attr s Text) where
     links =
         lens (_links :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _links = a } :: ContainerResource s)
 
-instance P.HasLogDriver (ContainerResource s) s Text where
+instance P.HasLogDriver (ContainerResource s) (TF.Attr s Text) where
     logDriver =
         lens (_log_driver :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _log_driver = a } :: ContainerResource s)
 
-instance P.HasLogOpts (ContainerResource s) s Text where
+instance P.HasLogOpts (ContainerResource s) (TF.Attr s Text) where
     logOpts =
         lens (_log_opts :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _log_opts = a } :: ContainerResource s)
 
-instance P.HasMaxRetryCount (ContainerResource s) s Text where
+instance P.HasMaxRetryCount (ContainerResource s) (TF.Attr s Text) where
     maxRetryCount =
         lens (_max_retry_count :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _max_retry_count = a } :: ContainerResource s)
 
-instance P.HasMemory (ContainerResource s) s Text where
+instance P.HasMemory (ContainerResource s) (TF.Attr s Text) where
     memory =
         lens (_memory :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _memory = a } :: ContainerResource s)
 
-instance P.HasMemorySwap (ContainerResource s) s Text where
+instance P.HasMemorySwap (ContainerResource s) (TF.Attr s Text) where
     memorySwap =
         lens (_memory_swap :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _memory_swap = a } :: ContainerResource s)
 
-instance P.HasMustRun (ContainerResource s) s Text where
+instance P.HasMustRun (ContainerResource s) (TF.Attr s Text) where
     mustRun =
         lens (_must_run :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _must_run = a } :: ContainerResource s)
 
-instance P.HasName (ContainerResource s) s Text where
+instance P.HasName (ContainerResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ContainerResource s)
 
-instance P.HasNetworkAlias (ContainerResource s) s Text where
+instance P.HasNetworkAlias (ContainerResource s) (TF.Attr s Text) where
     networkAlias =
         lens (_network_alias :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _network_alias = a } :: ContainerResource s)
 
-instance P.HasNetworkMode (ContainerResource s) s Text where
+instance P.HasNetworkMode (ContainerResource s) (TF.Attr s Text) where
     networkMode =
         lens (_network_mode :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _network_mode = a } :: ContainerResource s)
 
-instance P.HasNetworks (ContainerResource s) s Text where
+instance P.HasNetworks (ContainerResource s) (TF.Attr s Text) where
     networks =
         lens (_networks :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _networks = a } :: ContainerResource s)
 
-instance P.HasPorts (ContainerResource s) s Text where
+instance P.HasPorts (ContainerResource s) (TF.Attr s Text) where
     ports =
         lens (_ports :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _ports = a } :: ContainerResource s)
 
-instance P.HasPrivileged (ContainerResource s) s Text where
+instance P.HasPrivileged (ContainerResource s) (TF.Attr s Text) where
     privileged =
         lens (_privileged :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _privileged = a } :: ContainerResource s)
 
-instance P.HasPublishAllPorts (ContainerResource s) s Text where
+instance P.HasPublishAllPorts (ContainerResource s) (TF.Attr s Text) where
     publishAllPorts =
         lens (_publish_all_ports :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _publish_all_ports = a } :: ContainerResource s)
 
-instance P.HasRestart (ContainerResource s) s Text where
+instance P.HasRestart (ContainerResource s) (TF.Attr s Text) where
     restart =
         lens (_restart :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _restart = a } :: ContainerResource s)
 
-instance P.HasUpload (ContainerResource s) s Text where
+instance P.HasUpload (ContainerResource s) (TF.Attr s Text) where
     upload =
         lens (_upload :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _upload = a } :: ContainerResource s)
 
-instance P.HasUser (ContainerResource s) s Text where
+instance P.HasUser (ContainerResource s) (TF.Attr s Text) where
     user =
         lens (_user :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: ContainerResource s)
 
-instance P.HasVolumes (ContainerResource s) s Text where
+instance P.HasVolumes (ContainerResource s) (TF.Attr s Text) where
     volumes =
         lens (_volumes :: ContainerResource s -> TF.Attr s Text)
              (\s a -> s { _volumes = a } :: ContainerResource s)
 
-instance P.HasComputedBridge (ContainerResource s) Text
-instance P.HasComputedGateway (ContainerResource s) Text
-instance P.HasComputedIpAddress (ContainerResource s) Text
-instance P.HasComputedIpPrefixLength (ContainerResource s) Text
+instance P.HasComputedBridge (ContainerResource s) (Text)
+instance P.HasComputedGateway (ContainerResource s) (Text)
+instance P.HasComputedIpAddress (ContainerResource s) (Text)
+instance P.HasComputedIpPrefixLength (ContainerResource s) (Text)
 
 containerResource :: TF.Schema TF.Resource P.Docker (ContainerResource s)
 containerResource =
@@ -443,33 +444,33 @@ data ImageResource s = ImageResource {
 
 instance TF.ToHCL (ImageResource s) where
     toHCL ImageResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "keep_locally" _keep_locally
-        , TF.attribute "name" _name
-        , TF.attribute "pull_trigger" _pull_trigger
-        , TF.attribute "pull_triggers" _pull_triggers
+        [ TF.assign "keep_locally" <$> TF.attribute _keep_locally
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "pull_trigger" <$> TF.attribute _pull_trigger
+        , TF.assign "pull_triggers" <$> TF.attribute _pull_triggers
         ]
 
-instance P.HasKeepLocally (ImageResource s) s Text where
+instance P.HasKeepLocally (ImageResource s) (TF.Attr s Text) where
     keepLocally =
         lens (_keep_locally :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _keep_locally = a } :: ImageResource s)
 
-instance P.HasName (ImageResource s) s Text where
+instance P.HasName (ImageResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageResource s)
 
-instance P.HasPullTrigger (ImageResource s) s Text where
+instance P.HasPullTrigger (ImageResource s) (TF.Attr s Text) where
     pullTrigger =
         lens (_pull_trigger :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _pull_trigger = a } :: ImageResource s)
 
-instance P.HasPullTriggers (ImageResource s) s Text where
+instance P.HasPullTriggers (ImageResource s) (TF.Attr s Text) where
     pullTriggers =
         lens (_pull_triggers :: ImageResource s -> TF.Attr s Text)
              (\s a -> s { _pull_triggers = a } :: ImageResource s)
 
-instance P.HasComputedLatest (ImageResource s) Text
+instance P.HasComputedLatest (ImageResource s) (Text)
 
 imageResource :: TF.Schema TF.Resource P.Docker (ImageResource s)
 imageResource =
@@ -506,52 +507,52 @@ data NetworkResource s = NetworkResource {
 
 instance TF.ToHCL (NetworkResource s) where
     toHCL NetworkResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "check_duplicate" _check_duplicate
-        , TF.attribute "driver" _driver
-        , TF.attribute "internal" _internal
-        , TF.attribute "ipam_config" _ipam_config
-        , TF.attribute "ipam_driver" _ipam_driver
-        , TF.attribute "name" _name
-        , TF.attribute "options" _options
+        [ TF.assign "check_duplicate" <$> TF.attribute _check_duplicate
+        , TF.assign "driver" <$> TF.attribute _driver
+        , TF.assign "internal" <$> TF.attribute _internal
+        , TF.assign "ipam_config" <$> TF.attribute _ipam_config
+        , TF.assign "ipam_driver" <$> TF.attribute _ipam_driver
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "options" <$> TF.attribute _options
         ]
 
-instance P.HasCheckDuplicate (NetworkResource s) s Text where
+instance P.HasCheckDuplicate (NetworkResource s) (TF.Attr s Text) where
     checkDuplicate =
         lens (_check_duplicate :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _check_duplicate = a } :: NetworkResource s)
 
-instance P.HasDriver (NetworkResource s) s Text where
+instance P.HasDriver (NetworkResource s) (TF.Attr s Text) where
     driver =
         lens (_driver :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _driver = a } :: NetworkResource s)
 
-instance P.HasInternal (NetworkResource s) s Text where
+instance P.HasInternal (NetworkResource s) (TF.Attr s Text) where
     internal =
         lens (_internal :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _internal = a } :: NetworkResource s)
 
-instance P.HasIpamConfig (NetworkResource s) s Text where
+instance P.HasIpamConfig (NetworkResource s) (TF.Attr s Text) where
     ipamConfig =
         lens (_ipam_config :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _ipam_config = a } :: NetworkResource s)
 
-instance P.HasIpamDriver (NetworkResource s) s Text where
+instance P.HasIpamDriver (NetworkResource s) (TF.Attr s Text) where
     ipamDriver =
         lens (_ipam_driver :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _ipam_driver = a } :: NetworkResource s)
 
-instance P.HasName (NetworkResource s) s Text where
+instance P.HasName (NetworkResource s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkResource s)
 
-instance P.HasOptions (NetworkResource s) s Text where
+instance P.HasOptions (NetworkResource s) (TF.Attr s Text) where
     options =
         lens (_options :: NetworkResource s -> TF.Attr s Text)
              (\s a -> s { _options = a } :: NetworkResource s)
 
-instance P.HasComputedId (NetworkResource s) Text
-instance P.HasComputedScope (NetworkResource s) Text
+instance P.HasComputedId (NetworkResource s) (Text)
+instance P.HasComputedScope (NetworkResource s) (Text)
 
 networkResource :: TF.Schema TF.Resource P.Docker (NetworkResource s)
 networkResource =
@@ -583,27 +584,27 @@ data VolumeResource s = VolumeResource {
 
 instance TF.ToHCL (VolumeResource s) where
     toHCL VolumeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "driver" _driver
-        , TF.attribute "driver_opts" _driver_opts
-        , TF.attribute "name" _name
+        [ TF.assign "driver" <$> TF.attribute _driver
+        , TF.assign "driver_opts" <$> TF.attribute _driver_opts
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDriver (VolumeResource s) s Text where
+instance P.HasDriver (VolumeResource s) (TF.Attr s Text) where
     driver =
         lens (_driver :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _driver = a } :: VolumeResource s)
 
-instance P.HasDriverOpts (VolumeResource s) s Text where
+instance P.HasDriverOpts (VolumeResource s) (TF.Attr s Text) where
     driverOpts =
         lens (_driver_opts :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _driver_opts = a } :: VolumeResource s)
 
-instance P.HasName (VolumeResource s) s Text where
+instance P.HasName (VolumeResource s) (TF.Attr s Text) where
     name =
         lens (_name :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VolumeResource s)
 
-instance P.HasComputedMountpoint (VolumeResource s) Text
+instance P.HasComputedMountpoint (VolumeResource s) (Text)
 
 volumeResource :: TF.Schema TF.Resource P.Docker (VolumeResource s)
 volumeResource =

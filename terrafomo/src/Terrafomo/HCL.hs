@@ -18,15 +18,16 @@ module Terrafomo.HCL
     -- * Serialization
     , ToHCL       (..)
 
-    , assign
-    , attribute
-
     , object
     , pairs
     , block
     , inline
     , list
     , empty
+
+    , assign
+    , repeated
+    , attribute
 
     , unquoted
     , quoted
@@ -51,14 +52,12 @@ module Terrafomo.HCL
     , genericInlineAttributes
     ) where
 
-import Prelude hiding (repeat)
-
 import Data.Aeson             (ToJSON (..))
 import Data.Hashable          (Hashable)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
 import Data.Map.Strict        (Map)
-import Data.Maybe             (mapMaybe, maybeToList)
+import Data.Maybe             (fromMaybe, mapMaybe, maybeToList)
 import Data.Semigroup         ((<>))
 import Data.String            (IsString (fromString))
 import Data.Text              (Text)
@@ -139,7 +138,7 @@ instance Pretty Value where
         Comment x             -> "//" <+> pretty x
 
         HereDoc (pretty -> k) x ->
-            "<<" <> k <$$> pretty x <$$> k
+            "<<-" <> k <$$> pretty x <$$> k
 
         List (reverse -> vs) ->
             case vs of
@@ -187,40 +186,20 @@ prettyBool = \case
 assign :: ToHCL a => Id -> a -> Value
 assign k v = Assign k (toHCL v)
 
--- repeat :: ToHCL a => Id -> Attr s [a] -> Maybe Value
--- repeat k = \case
---     Attr.Constant v  ->
---     Attr.Flatten  vs ->
---     Attr.Nil         ->
---     x                -> attribute k x
-    -- We want to support the following:
-      -- setting = ["${var.additional_settings}"]
-      --
-      -- setting {
-      --   namespace = "aws:autoscaling:launchconfiguration"
-      --   name      = "RootVolumeSize"
-      --   value     = "${var.root_volume_size}"
-      -- }
-      --
-      -- setting {
-      --   namespace = "aws:elasticbeanstalk:environment"
-      --   name      = "LoadBalancerType"
-      --   value     = "application"
-      -- }
+repeated :: ToHCL a => Maybe [Attr s a] -> Maybe Value
+repeated x = do
+    ys <- x
+    case mapMaybe attribute ys of
+        [] -> Nothing
+        zs -> Just (List zs)
 
--- Since nil/null doesn't (consistently) exist in terraform/HCL's universe,
--- we need to filter it out here.
-attribute :: ToHCL a => Id -> Attr s a -> Maybe Value
-attribute k = fmap (assign k) . go
-  where
-    go = \case
-        Attr.Compute  k' v _ -> Just (compute k' v)
-        Attr.Constant    v   -> Just (toHCL      v)
-        Attr.Flatten    vs   ->
-            case mapMaybe go vs of
-                [] -> Nothing
-                xs -> Just (flatten xs)
-        _                    -> Nothing
+attribute :: ToHCL a => Attr s a -> Maybe Value
+attribute = \case
+    Attr.Compute  k' v _ -> Just (compute k' v)
+    Attr.Constant    v   -> Just (toHCL      v)
+    Attr.Flatten    vs   ->
+        Just $ String (Flatten (map Escape . mapMaybe attribute $ vs))
+    _                    -> Nothing
 
 compute :: Key -> Name -> Value
 compute (Key t n) v =
@@ -384,7 +363,7 @@ instance ( Selector s
     gToValues p =
         let k = fromString (case selName p of '_':x -> x; x -> x)
             v = unK1 (unM1 p)
-         in maybeToList (attribute k v)
+          in maybeToList (assign k <$> attribute v)
     {-# INLINEABLE gToValues #-}
 
 instance GToAttributes f => GToAttributes (D1 x f) where

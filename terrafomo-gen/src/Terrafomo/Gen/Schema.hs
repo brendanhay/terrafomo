@@ -31,17 +31,75 @@ import qualified Terrafomo.Gen.JSON as JSON
 data SchemaType
     = Resource
     | DataSource
-      deriving (Show, Eq)
+      deriving (Show, Eq, Ord)
 
 instance ToJSON SchemaType where
     toJSON = JSON.toJSON . show
+
+data Format
+   = Repeated
+   | Attribute
+   | Verbatim
+     deriving (Show, Eq, Ord, Generic)
+
+instance ToJSON Format where
+    toJSON = JSON.genericToJSON (JSON.options "")
+
+instance FromJSON Format where
+    parseJSON = JSON.genericParseJSON (JSON.options "")
+
+data Type = Type
+    { typeName   :: !Text
+    , typeFormat :: !Format
+    } deriving (Show, Eq, Ord, Generic)
+
+instance ToJSON Type where
+    toJSON Type{..} = JSON.object
+        [ "name"       .= typeName
+        , "parametric" .= parametric
+        , "applied"    .= fullyApplied
+        , "encoder"    .= encoder
+        , "default"    .= default'
+        ]
+      where
+        (parametric, fullyApplied, encoder, default') =
+            case typeFormat of
+                Verbatim ->
+                    ( "P.Maybe b"            :: Text
+                    , "P.Maybe " <> typeName :: Text
+                    , ""                     :: Text
+                    , "P.Nothing"            :: Text
+                    )
+                Repeated ->
+                    ( "P.Maybe [TF.Attr s b]"
+                    , "P.Maybe [TF.Attr s " <> typeName <> "]"
+                    , "TF.repeated"
+                    , "P.Nothing"
+                    )
+                Attribute ->
+                    ( "TF.Attr s b"
+                    , "TF.Attr s " <> typeName
+                    , "TF.attribute"
+                    , "TF.Nil"
+                    )
+
+instance FromJSON Type where
+    parseJSON = \case
+        JSON.String s -> pure $! defaultType { typeName = s }
+        v             -> JSON.genericParseJSON (JSON.options "type") v
+
+defaultType :: Type
+defaultType = Type
+    { typeName   = "Text"
+    , typeFormat = Attribute
+    }
 
 data Field = Field
     { fieldClass  :: !Text
     , fieldMethod :: !Text
     , fieldLabel  :: !Text
     , fieldName   :: !Text
-    , fieldType   :: !(Last Text)
+    , fieldType   :: !Type
     } deriving (Show, Eq, Ord, Generic)
 
 instance ToJSON Field where
@@ -51,15 +109,11 @@ getFields :: Schema -> (Set Field, Set Field)
 getFields Schema{..} = (args, attrs)
   where
     args =  Set.fromList
-          . mapMaybe (\(k, v) -> do
-                         n <- getLast (argName v)
-                         pure $! go k n (argType v))
+          . mapMaybe (\(k, v) -> go k <$> getLast (argName v) <*> getLast (argType v))
           $ Map.toList schemaArguments
 
     attrs = Set.fromList
-          . mapMaybe (\(k, v) -> do
-                         n <- getLast (attrName v)
-                         pure $! go k n (attrType v))
+          . mapMaybe (\(k, v) -> go k <$> getLast (attrName v) <*> getLast (attrType v))
           $ Map.toList schemaAttributes
 
     go k name ty =
@@ -144,9 +198,8 @@ data Arg = Arg
     { argName     :: !(Last Text)
     , argHelp     :: !(Last Text)
     , argRequired :: !Bool
-    , argRepeated :: !Bool
     , argIgnored  :: !Bool
-    , argType     :: !(Last Text)
+    , argType     :: !(Last Type)
     } deriving (Show, Eq, Ord, Generic)
 
 instance Semigroup Arg where
@@ -154,7 +207,6 @@ instance Semigroup Arg where
         { argName     = on (<>) argName     parsed saved
         , argHelp     = on (<>) argHelp     parsed saved
         , argRequired = on (||) argRequired parsed saved
-        , argRepeated = on (||) argRepeated parsed saved
         , argIgnored  = on (||) argIgnored  parsed saved
         , argType     = on (<>) argType     parsed saved
         }
@@ -167,24 +219,15 @@ instance FromJSON Arg where
         argName     <- o .:? "name"     .!= mempty
         argHelp     <- o .:? "help"     .!= mempty
         argRequired <- o .:? "required" .!= False
-        argRepeated <- o .:? "repeated" .!= False
         argIgnored  <- o .:? "ignored"  .!= False
-        argType'    <- o .:? "type"     .!= mempty
-
-        let argType = Last $ do
-                ty <- argType'
-                pure $!
-                    if argRepeated
-                        then ("[" <> ty <> "]")
-                        else ty
-
+        argType     <- o .:? "type"     .!= mempty
         pure Arg{..}
 
 -- > * `name` - documentation
 data Attr = Attr
     { attrName :: !(Last Text)
     , attrHelp :: !(Last Text)
-    , attrType :: !(Last Text)
+    , attrType :: !(Last Type)
     } deriving (Show, Eq, Ord, Generic)
 
 instance Semigroup Attr where
@@ -199,7 +242,7 @@ instance ToJSON Attr where
 
 instance FromJSON Attr where
     parseJSON = JSON.withObject "Attribute" $ \o -> do
-        attrName     <- o .:? "name" .!= mempty
-        attrHelp     <- o .:? "help" .!= mempty
-        attrType     <- o .:? "type" .!= mempty
+        attrName <- o .:? "name" .!= mempty
+        attrHelp <- o .:? "help" .!= mempty
+        attrType <- o .:? "type" .!= mempty
         pure Attr{..}

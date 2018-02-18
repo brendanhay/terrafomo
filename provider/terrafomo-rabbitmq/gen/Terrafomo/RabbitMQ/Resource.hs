@@ -66,8 +66,9 @@ module Terrafomo.RabbitMQ.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -108,45 +109,45 @@ data BindingResource s = BindingResource {
 
 instance TF.ToHCL (BindingResource s) where
     toHCL BindingResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "arguments" _arguments
-        , TF.attribute "destination" _destination
-        , TF.attribute "destination_type" _destination_type
-        , TF.attribute "routing_key" _routing_key
-        , TF.attribute "source" _source
-        , TF.attribute "vhost" _vhost
+        [ TF.assign "arguments" <$> TF.attribute _arguments
+        , TF.assign "destination" <$> TF.attribute _destination
+        , TF.assign "destination_type" <$> TF.attribute _destination_type
+        , TF.assign "routing_key" <$> TF.attribute _routing_key
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasArguments (BindingResource s) s Text where
+instance P.HasArguments (BindingResource s) (TF.Attr s Text) where
     arguments =
         lens (_arguments :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _arguments = a } :: BindingResource s)
 
-instance P.HasDestination (BindingResource s) s Text where
+instance P.HasDestination (BindingResource s) (TF.Attr s Text) where
     destination =
         lens (_destination :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _destination = a } :: BindingResource s)
 
-instance P.HasDestinationType (BindingResource s) s Text where
+instance P.HasDestinationType (BindingResource s) (TF.Attr s Text) where
     destinationType =
         lens (_destination_type :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _destination_type = a } :: BindingResource s)
 
-instance P.HasRoutingKey (BindingResource s) s Text where
+instance P.HasRoutingKey (BindingResource s) (TF.Attr s Text) where
     routingKey =
         lens (_routing_key :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _routing_key = a } :: BindingResource s)
 
-instance P.HasSource (BindingResource s) s Text where
+instance P.HasSource (BindingResource s) (TF.Attr s Text) where
     source =
         lens (_source :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _source = a } :: BindingResource s)
 
-instance P.HasVhost (BindingResource s) s Text where
+instance P.HasVhost (BindingResource s) (TF.Attr s Text) where
     vhost =
         lens (_vhost :: BindingResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: BindingResource s)
 
-instance P.HasComputedPropertiesKey (BindingResource s) Text
+instance P.HasComputedPropertiesKey (BindingResource s) (Text)
 
 bindingResource :: TF.Schema TF.Resource P.RabbitMQ (BindingResource s)
 bindingResource =
@@ -175,22 +176,22 @@ data ExchangeResource s = ExchangeResource {
 
 instance TF.ToHCL (ExchangeResource s) where
     toHCL ExchangeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "settings" _settings
-        , TF.attribute "vhost" _vhost
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "settings" <$> TF.attribute _settings
+        , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasName (ExchangeResource s) s Text where
+instance P.HasName (ExchangeResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ExchangeResource s)
 
-instance P.HasSettings (ExchangeResource s) s Text where
+instance P.HasSettings (ExchangeResource s) (TF.Attr s Text) where
     settings =
         lens (_settings :: ExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _settings = a } :: ExchangeResource s)
 
-instance P.HasVhost (ExchangeResource s) s Text where
+instance P.HasVhost (ExchangeResource s) (TF.Attr s Text) where
     vhost =
         lens (_vhost :: ExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: ExchangeResource s)
@@ -221,22 +222,22 @@ data PermissionsResource s = PermissionsResource {
 
 instance TF.ToHCL (PermissionsResource s) where
     toHCL PermissionsResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "permissions" _permissions
-        , TF.attribute "user" _user
-        , TF.attribute "vhost" _vhost
+        [ TF.assign "permissions" <$> TF.attribute _permissions
+        , TF.assign "user" <$> TF.attribute _user
+        , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasPermissions (PermissionsResource s) s Text where
+instance P.HasPermissions (PermissionsResource s) (TF.Attr s Text) where
     permissions =
         lens (_permissions :: PermissionsResource s -> TF.Attr s Text)
              (\s a -> s { _permissions = a } :: PermissionsResource s)
 
-instance P.HasUser (PermissionsResource s) s Text where
+instance P.HasUser (PermissionsResource s) (TF.Attr s Text) where
     user =
         lens (_user :: PermissionsResource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: PermissionsResource s)
 
-instance P.HasVhost (PermissionsResource s) s Text where
+instance P.HasVhost (PermissionsResource s) (TF.Attr s Text) where
     vhost =
         lens (_vhost :: PermissionsResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: PermissionsResource s)
@@ -267,22 +268,22 @@ data PolicyResource s = PolicyResource {
 
 instance TF.ToHCL (PolicyResource s) where
     toHCL PolicyResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "policy" _policy
-        , TF.attribute "vhost" _vhost
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "policy" <$> TF.attribute _policy
+        , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasName (PolicyResource s) s Text where
+instance P.HasName (PolicyResource s) (TF.Attr s Text) where
     name =
         lens (_name :: PolicyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: PolicyResource s)
 
-instance P.HasPolicy (PolicyResource s) s Text where
+instance P.HasPolicy (PolicyResource s) (TF.Attr s Text) where
     policy =
         lens (_policy :: PolicyResource s -> TF.Attr s Text)
              (\s a -> s { _policy = a } :: PolicyResource s)
 
-instance P.HasVhost (PolicyResource s) s Text where
+instance P.HasVhost (PolicyResource s) (TF.Attr s Text) where
     vhost =
         lens (_vhost :: PolicyResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: PolicyResource s)
@@ -312,22 +313,22 @@ data QueueResource s = QueueResource {
 
 instance TF.ToHCL (QueueResource s) where
     toHCL QueueResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "settings" _settings
-        , TF.attribute "vhost" _vhost
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "settings" <$> TF.attribute _settings
+        , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasName (QueueResource s) s Text where
+instance P.HasName (QueueResource s) (TF.Attr s Text) where
     name =
         lens (_name :: QueueResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: QueueResource s)
 
-instance P.HasSettings (QueueResource s) s Text where
+instance P.HasSettings (QueueResource s) (TF.Attr s Text) where
     settings =
         lens (_settings :: QueueResource s -> TF.Attr s Text)
              (\s a -> s { _settings = a } :: QueueResource s)
 
-instance P.HasVhost (QueueResource s) s Text where
+instance P.HasVhost (QueueResource s) (TF.Attr s Text) where
     vhost =
         lens (_vhost :: QueueResource s -> TF.Attr s Text)
              (\s a -> s { _vhost = a } :: QueueResource s)
@@ -359,22 +360,22 @@ data UserResource s = UserResource {
 
 instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "password" _password
-        , TF.attribute "tags" _tags
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasName (UserResource s) s Text where
+instance P.HasName (UserResource s) (TF.Attr s Text) where
     name =
         lens (_name :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: UserResource s)
 
-instance P.HasPassword (UserResource s) s Text where
+instance P.HasPassword (UserResource s) (TF.Attr s Text) where
     password =
         lens (_password :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasTags (UserResource s) s Text where
+instance P.HasTags (UserResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: UserResource s)
@@ -400,10 +401,10 @@ data VhostResource s = VhostResource {
 
 instance TF.ToHCL (VhostResource s) where
     toHCL VhostResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (VhostResource s) s Text where
+instance P.HasName (VhostResource s) (TF.Attr s Text) where
     name =
         lens (_name :: VhostResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VhostResource s)

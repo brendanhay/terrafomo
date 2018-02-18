@@ -128,8 +128,9 @@ module Terrafomo.DigitalOcean.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -168,36 +169,36 @@ data CertificateResource s = CertificateResource {
 
 instance TF.ToHCL (CertificateResource s) where
     toHCL CertificateResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "certificate_chain" _certificate_chain
-        , TF.attribute "leaf_certificate" _leaf_certificate
-        , TF.attribute "name" _name
-        , TF.attribute "private_key" _private_key
+        [ TF.assign "certificate_chain" <$> TF.attribute _certificate_chain
+        , TF.assign "leaf_certificate" <$> TF.attribute _leaf_certificate
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "private_key" <$> TF.attribute _private_key
         ]
 
-instance P.HasCertificateChain (CertificateResource s) s Text where
+instance P.HasCertificateChain (CertificateResource s) (TF.Attr s Text) where
     certificateChain =
         lens (_certificate_chain :: CertificateResource s -> TF.Attr s Text)
              (\s a -> s { _certificate_chain = a } :: CertificateResource s)
 
-instance P.HasLeafCertificate (CertificateResource s) s Text where
+instance P.HasLeafCertificate (CertificateResource s) (TF.Attr s Text) where
     leafCertificate =
         lens (_leaf_certificate :: CertificateResource s -> TF.Attr s Text)
              (\s a -> s { _leaf_certificate = a } :: CertificateResource s)
 
-instance P.HasName (CertificateResource s) s Text where
+instance P.HasName (CertificateResource s) (TF.Attr s Text) where
     name =
         lens (_name :: CertificateResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CertificateResource s)
 
-instance P.HasPrivateKey (CertificateResource s) s Text where
+instance P.HasPrivateKey (CertificateResource s) (TF.Attr s Text) where
     privateKey =
         lens (_private_key :: CertificateResource s -> TF.Attr s Text)
              (\s a -> s { _private_key = a } :: CertificateResource s)
 
-instance P.HasComputedId (CertificateResource s) Text
-instance P.HasComputedName (CertificateResource s) Text
-instance P.HasComputedNotAfter (CertificateResource s) Text
-instance P.HasComputedSha1Fingerprint (CertificateResource s) Text
+instance P.HasComputedId (CertificateResource s) (Text)
+instance P.HasComputedName (CertificateResource s) (Text)
+instance P.HasComputedNotAfter (CertificateResource s) (Text)
+instance P.HasComputedSha1Fingerprint (CertificateResource s) (Text)
 
 certificateResource :: TF.Schema TF.Resource P.DigitalOcean (CertificateResource s)
 certificateResource =
@@ -222,21 +223,21 @@ data DomainResource s = DomainResource {
 
 instance TF.ToHCL (DomainResource s) where
     toHCL DomainResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "ip_address" _ip_address
-        , TF.attribute "name" _name
+        [ TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasIpAddress (DomainResource s) s Text where
+instance P.HasIpAddress (DomainResource s) (TF.Attr s Text) where
     ipAddress =
         lens (_ip_address :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: DomainResource s)
 
-instance P.HasName (DomainResource s) s Text where
+instance P.HasName (DomainResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DomainResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DomainResource s)
 
-instance P.HasComputedId (DomainResource s) Text
+instance P.HasComputedId (DomainResource s) (Text)
 
 domainResource :: TF.Schema TF.Resource P.DigitalOcean (DomainResource s)
 domainResource =
@@ -283,105 +284,105 @@ data DropletResource s = DropletResource {
 
 instance TF.ToHCL (DropletResource s) where
     toHCL DropletResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "backups" _backups
-        , TF.attribute "image" _image
-        , TF.attribute "ipv6" _ipv6
-        , TF.attribute "monitoring" _monitoring
-        , TF.attribute "name" _name
-        , TF.attribute "private_networking" _private_networking
-        , TF.attribute "region" _region
-        , TF.attribute "resize_disk" _resize_disk
-        , TF.attribute "size" _size
-        , TF.attribute "ssh_keys" _ssh_keys
-        , TF.attribute "tags" _tags
-        , TF.attribute "user_data" _user_data
-        , TF.attribute "volume_ids" _volume_ids
+        [ TF.assign "backups" <$> TF.attribute _backups
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "ipv6" <$> TF.attribute _ipv6
+        , TF.assign "monitoring" <$> TF.attribute _monitoring
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "private_networking" <$> TF.attribute _private_networking
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "resize_disk" <$> TF.attribute _resize_disk
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "ssh_keys" <$> TF.attribute _ssh_keys
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "user_data" <$> TF.attribute _user_data
+        , TF.assign "volume_ids" <$> TF.attribute _volume_ids
         ]
 
-instance P.HasBackups (DropletResource s) s Text where
+instance P.HasBackups (DropletResource s) (TF.Attr s Text) where
     backups =
         lens (_backups :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _backups = a } :: DropletResource s)
 
-instance P.HasImage (DropletResource s) s Text where
+instance P.HasImage (DropletResource s) (TF.Attr s Text) where
     image =
         lens (_image :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _image = a } :: DropletResource s)
 
-instance P.HasIpv6 (DropletResource s) s Text where
+instance P.HasIpv6 (DropletResource s) (TF.Attr s Text) where
     ipv6 =
         lens (_ipv6 :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _ipv6 = a } :: DropletResource s)
 
-instance P.HasMonitoring (DropletResource s) s Text where
+instance P.HasMonitoring (DropletResource s) (TF.Attr s Text) where
     monitoring =
         lens (_monitoring :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _monitoring = a } :: DropletResource s)
 
-instance P.HasName (DropletResource s) s Text where
+instance P.HasName (DropletResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DropletResource s)
 
-instance P.HasPrivateNetworking (DropletResource s) s Text where
+instance P.HasPrivateNetworking (DropletResource s) (TF.Attr s Text) where
     privateNetworking =
         lens (_private_networking :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _private_networking = a } :: DropletResource s)
 
-instance P.HasRegion (DropletResource s) s Text where
+instance P.HasRegion (DropletResource s) (TF.Attr s Text) where
     region =
         lens (_region :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: DropletResource s)
 
-instance P.HasResizeDisk (DropletResource s) s Text where
+instance P.HasResizeDisk (DropletResource s) (TF.Attr s Text) where
     resizeDisk =
         lens (_resize_disk :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _resize_disk = a } :: DropletResource s)
 
-instance P.HasSize (DropletResource s) s Text where
+instance P.HasSize (DropletResource s) (TF.Attr s Text) where
     size =
         lens (_size :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: DropletResource s)
 
-instance P.HasSshKeys (DropletResource s) s Text where
+instance P.HasSshKeys (DropletResource s) (TF.Attr s Text) where
     sshKeys =
         lens (_ssh_keys :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _ssh_keys = a } :: DropletResource s)
 
-instance P.HasTags (DropletResource s) s Text where
+instance P.HasTags (DropletResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: DropletResource s)
 
-instance P.HasUserData (DropletResource s) s Text where
+instance P.HasUserData (DropletResource s) (TF.Attr s Text) where
     userData =
         lens (_user_data :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _user_data = a } :: DropletResource s)
 
-instance P.HasVolumeIds (DropletResource s) s Text where
+instance P.HasVolumeIds (DropletResource s) (TF.Attr s Text) where
     volumeIds =
         lens (_volume_ids :: DropletResource s -> TF.Attr s Text)
              (\s a -> s { _volume_ids = a } :: DropletResource s)
 
-instance P.HasComputedDisk (DropletResource s) Text
-instance P.HasComputedId (DropletResource s) Text
-instance P.HasComputedImage (DropletResource s) Text
-instance P.HasComputedIpv4Address (DropletResource s) Text
-instance P.HasComputedIpv4AddressPrivate (DropletResource s) Text
-instance P.HasComputedIpv6 (DropletResource s) Text
-instance P.HasComputedIpv6Address (DropletResource s) Text
-instance P.HasComputedIpv6AddressPrivate (DropletResource s) Text
-instance P.HasComputedLocked (DropletResource s) Text
-instance P.HasComputedName (DropletResource s) Text
-instance P.HasComputedPriceHourly (DropletResource s) Text
-instance P.HasComputedPriceMonthly (DropletResource s) Text
-instance P.HasComputedPrivateNetworking (DropletResource s) Text
-instance P.HasComputedRegion (DropletResource s) Text
-instance P.HasComputedSize (DropletResource s) Text
-instance P.HasComputedStatus (DropletResource s) Text
-instance P.HasComputedTags (DropletResource s) Text
-instance P.HasComputedVcpus (DropletResource s) Text
-instance P.HasComputedVolumeIds (DropletResource s) Text
+instance P.HasComputedDisk (DropletResource s) (Text)
+instance P.HasComputedId (DropletResource s) (Text)
+instance P.HasComputedImage (DropletResource s) (Text)
+instance P.HasComputedIpv4Address (DropletResource s) (Text)
+instance P.HasComputedIpv4AddressPrivate (DropletResource s) (Text)
+instance P.HasComputedIpv6 (DropletResource s) (Text)
+instance P.HasComputedIpv6Address (DropletResource s) (Text)
+instance P.HasComputedIpv6AddressPrivate (DropletResource s) (Text)
+instance P.HasComputedLocked (DropletResource s) (Text)
+instance P.HasComputedName (DropletResource s) (Text)
+instance P.HasComputedPriceHourly (DropletResource s) (Text)
+instance P.HasComputedPriceMonthly (DropletResource s) (Text)
+instance P.HasComputedPrivateNetworking (DropletResource s) (Text)
+instance P.HasComputedRegion (DropletResource s) (Text)
+instance P.HasComputedSize (DropletResource s) (Text)
+instance P.HasComputedStatus (DropletResource s) (Text)
+instance P.HasComputedTags (DropletResource s) (Text)
+instance P.HasComputedVcpus (DropletResource s) (Text)
+instance P.HasComputedVolumeIds (DropletResource s) (Text)
 
 dropletResource :: TF.Schema TF.Resource P.DigitalOcean (DropletResource s)
 dropletResource =
@@ -422,47 +423,47 @@ data FirewallResource s = FirewallResource {
 
 instance TF.ToHCL (FirewallResource s) where
     toHCL FirewallResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "droplet_ids" _droplet_ids
-        , TF.attribute "inbound_rule" _inbound_rule
-        , TF.attribute "name" _name
-        , TF.attribute "outbound_rule" _outbound_rule
-        , TF.attribute "tags" _tags
+        [ TF.assign "droplet_ids" <$> TF.attribute _droplet_ids
+        , TF.assign "inbound_rule" <$> TF.attribute _inbound_rule
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "outbound_rule" <$> TF.attribute _outbound_rule
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDropletIds (FirewallResource s) s Text where
+instance P.HasDropletIds (FirewallResource s) (TF.Attr s Text) where
     dropletIds =
         lens (_droplet_ids :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _droplet_ids = a } :: FirewallResource s)
 
-instance P.HasInboundRule (FirewallResource s) s Text where
+instance P.HasInboundRule (FirewallResource s) (TF.Attr s Text) where
     inboundRule =
         lens (_inbound_rule :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _inbound_rule = a } :: FirewallResource s)
 
-instance P.HasName (FirewallResource s) s Text where
+instance P.HasName (FirewallResource s) (TF.Attr s Text) where
     name =
         lens (_name :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: FirewallResource s)
 
-instance P.HasOutboundRule (FirewallResource s) s Text where
+instance P.HasOutboundRule (FirewallResource s) (TF.Attr s Text) where
     outboundRule =
         lens (_outbound_rule :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _outbound_rule = a } :: FirewallResource s)
 
-instance P.HasTags (FirewallResource s) s Text where
+instance P.HasTags (FirewallResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: FirewallResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: FirewallResource s)
 
-instance P.HasComputedCreatedAt (FirewallResource s) Text
-instance P.HasComputedDropletIds (FirewallResource s) Text
-instance P.HasComputedId (FirewallResource s) Text
-instance P.HasComputedInboundRules (FirewallResource s) Text
-instance P.HasComputedName (FirewallResource s) Text
-instance P.HasComputedOutboundRules (FirewallResource s) Text
-instance P.HasComputedPendingChanges (FirewallResource s) Text
-instance P.HasComputedStatus (FirewallResource s) Text
-instance P.HasComputedTags (FirewallResource s) Text
+instance P.HasComputedCreatedAt (FirewallResource s) (Text)
+instance P.HasComputedDropletIds (FirewallResource s) (Text)
+instance P.HasComputedId (FirewallResource s) (Text)
+instance P.HasComputedInboundRules (FirewallResource s) (Text)
+instance P.HasComputedName (FirewallResource s) (Text)
+instance P.HasComputedOutboundRules (FirewallResource s) (Text)
+instance P.HasComputedPendingChanges (FirewallResource s) (Text)
+instance P.HasComputedStatus (FirewallResource s) (Text)
+instance P.HasComputedTags (FirewallResource s) (Text)
 
 firewallResource :: TF.Schema TF.Resource P.DigitalOcean (FirewallResource s)
 firewallResource =
@@ -489,21 +490,21 @@ data FloatingIpResource s = FloatingIpResource {
 
 instance TF.ToHCL (FloatingIpResource s) where
     toHCL FloatingIpResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "droplet_id" _droplet_id
-        , TF.attribute "region" _region
+        [ TF.assign "droplet_id" <$> TF.attribute _droplet_id
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasDropletId (FloatingIpResource s) s Text where
+instance P.HasDropletId (FloatingIpResource s) (TF.Attr s Text) where
     dropletId =
         lens (_droplet_id :: FloatingIpResource s -> TF.Attr s Text)
              (\s a -> s { _droplet_id = a } :: FloatingIpResource s)
 
-instance P.HasRegion (FloatingIpResource s) s Text where
+instance P.HasRegion (FloatingIpResource s) (TF.Attr s Text) where
     region =
         lens (_region :: FloatingIpResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: FloatingIpResource s)
 
-instance P.HasComputedIpAddress (FloatingIpResource s) Text
+instance P.HasComputedIpAddress (FloatingIpResource s) (Text)
 
 floatingIpResource :: TF.Schema TF.Resource P.DigitalOcean (FloatingIpResource s)
 floatingIpResource =
@@ -541,64 +542,64 @@ data LoadbalancerResource s = LoadbalancerResource {
 
 instance TF.ToHCL (LoadbalancerResource s) where
     toHCL LoadbalancerResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "algorithm" _algorithm
-        , TF.attribute "droplet_ids" _droplet_ids
-        , TF.attribute "droplet_tag" _droplet_tag
-        , TF.attribute "forwarding_rule" _forwarding_rule
-        , TF.attribute "healthcheck" _healthcheck
-        , TF.attribute "name" _name
-        , TF.attribute "redirect_http_to_https" _redirect_http_to_https
-        , TF.attribute "region" _region
-        , TF.attribute "sticky_sessions" _sticky_sessions
+        [ TF.assign "algorithm" <$> TF.attribute _algorithm
+        , TF.assign "droplet_ids" <$> TF.attribute _droplet_ids
+        , TF.assign "droplet_tag" <$> TF.attribute _droplet_tag
+        , TF.assign "forwarding_rule" <$> TF.attribute _forwarding_rule
+        , TF.assign "healthcheck" <$> TF.attribute _healthcheck
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "redirect_http_to_https" <$> TF.attribute _redirect_http_to_https
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "sticky_sessions" <$> TF.attribute _sticky_sessions
         ]
 
-instance P.HasAlgorithm (LoadbalancerResource s) s Text where
+instance P.HasAlgorithm (LoadbalancerResource s) (TF.Attr s Text) where
     algorithm =
         lens (_algorithm :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _algorithm = a } :: LoadbalancerResource s)
 
-instance P.HasDropletIds (LoadbalancerResource s) s Text where
+instance P.HasDropletIds (LoadbalancerResource s) (TF.Attr s Text) where
     dropletIds =
         lens (_droplet_ids :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _droplet_ids = a } :: LoadbalancerResource s)
 
-instance P.HasDropletTag (LoadbalancerResource s) s Text where
+instance P.HasDropletTag (LoadbalancerResource s) (TF.Attr s Text) where
     dropletTag =
         lens (_droplet_tag :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _droplet_tag = a } :: LoadbalancerResource s)
 
-instance P.HasForwardingRule (LoadbalancerResource s) s Text where
+instance P.HasForwardingRule (LoadbalancerResource s) (TF.Attr s Text) where
     forwardingRule =
         lens (_forwarding_rule :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _forwarding_rule = a } :: LoadbalancerResource s)
 
-instance P.HasHealthcheck (LoadbalancerResource s) s Text where
+instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s Text) where
     healthcheck =
         lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _healthcheck = a } :: LoadbalancerResource s)
 
-instance P.HasName (LoadbalancerResource s) s Text where
+instance P.HasName (LoadbalancerResource s) (TF.Attr s Text) where
     name =
         lens (_name :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LoadbalancerResource s)
 
-instance P.HasRedirectHttpToHttps (LoadbalancerResource s) s Text where
+instance P.HasRedirectHttpToHttps (LoadbalancerResource s) (TF.Attr s Text) where
     redirectHttpToHttps =
         lens (_redirect_http_to_https :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _redirect_http_to_https = a } :: LoadbalancerResource s)
 
-instance P.HasRegion (LoadbalancerResource s) s Text where
+instance P.HasRegion (LoadbalancerResource s) (TF.Attr s Text) where
     region =
         lens (_region :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: LoadbalancerResource s)
 
-instance P.HasStickySessions (LoadbalancerResource s) s Text where
+instance P.HasStickySessions (LoadbalancerResource s) (TF.Attr s Text) where
     stickySessions =
         lens (_sticky_sessions :: LoadbalancerResource s -> TF.Attr s Text)
              (\s a -> s { _sticky_sessions = a } :: LoadbalancerResource s)
 
-instance P.HasComputedId (LoadbalancerResource s) Text
-instance P.HasComputedIp (LoadbalancerResource s) Text
+instance P.HasComputedId (LoadbalancerResource s) (Text)
+instance P.HasComputedIp (LoadbalancerResource s) (Text)
 
 loadbalancerResource :: TF.Schema TF.Resource P.DigitalOcean (LoadbalancerResource s)
 loadbalancerResource =
@@ -640,58 +641,58 @@ data RecordResource s = RecordResource {
 
 instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "domain" _domain
-        , TF.attribute "name" _name
-        , TF.attribute "port" _port
-        , TF.attribute "priority" _priority
-        , TF.attribute "ttl" _ttl
-        , TF.attribute "type" _type'
-        , TF.attribute "value" _value
-        , TF.attribute "weight" _weight
+        [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value" <$> TF.attribute _value
+        , TF.assign "weight" <$> TF.attribute _weight
         ]
 
-instance P.HasDomain (RecordResource s) s Text where
+instance P.HasDomain (RecordResource s) (TF.Attr s Text) where
     domain =
         lens (_domain :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _domain = a } :: RecordResource s)
 
-instance P.HasName (RecordResource s) s Text where
+instance P.HasName (RecordResource s) (TF.Attr s Text) where
     name =
         lens (_name :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RecordResource s)
 
-instance P.HasPort (RecordResource s) s Text where
+instance P.HasPort (RecordResource s) (TF.Attr s Text) where
     port =
         lens (_port :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: RecordResource s)
 
-instance P.HasPriority (RecordResource s) s Text where
+instance P.HasPriority (RecordResource s) (TF.Attr s Text) where
     priority =
         lens (_priority :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _priority = a } :: RecordResource s)
 
-instance P.HasTtl (RecordResource s) s Text where
+instance P.HasTtl (RecordResource s) (TF.Attr s Text) where
     ttl =
         lens (_ttl :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance P.HasType' (RecordResource s) s Text where
+instance P.HasType' (RecordResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: RecordResource s)
 
-instance P.HasValue (RecordResource s) s Text where
+instance P.HasValue (RecordResource s) (TF.Attr s Text) where
     value =
         lens (_value :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _value = a } :: RecordResource s)
 
-instance P.HasWeight (RecordResource s) s Text where
+instance P.HasWeight (RecordResource s) (TF.Attr s Text) where
     weight =
         lens (_weight :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _weight = a } :: RecordResource s)
 
-instance P.HasComputedFqdn (RecordResource s) Text
-instance P.HasComputedId (RecordResource s) Text
+instance P.HasComputedFqdn (RecordResource s) (Text)
+instance P.HasComputedId (RecordResource s) (Text)
 
 recordResource :: TF.Schema TF.Resource P.DigitalOcean (RecordResource s)
 recordResource =
@@ -722,24 +723,24 @@ data SshKeyResource s = SshKeyResource {
 
 instance TF.ToHCL (SshKeyResource s) where
     toHCL SshKeyResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "public_key" _public_key
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_key" <$> TF.attribute _public_key
         ]
 
-instance P.HasName (SshKeyResource s) s Text where
+instance P.HasName (SshKeyResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SshKeyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SshKeyResource s)
 
-instance P.HasPublicKey (SshKeyResource s) s Text where
+instance P.HasPublicKey (SshKeyResource s) (TF.Attr s Text) where
     publicKey =
         lens (_public_key :: SshKeyResource s -> TF.Attr s Text)
              (\s a -> s { _public_key = a } :: SshKeyResource s)
 
-instance P.HasComputedFingerprint (SshKeyResource s) Text
-instance P.HasComputedId (SshKeyResource s) Text
-instance P.HasComputedName (SshKeyResource s) Text
-instance P.HasComputedPublicKey (SshKeyResource s) Text
+instance P.HasComputedFingerprint (SshKeyResource s) (Text)
+instance P.HasComputedId (SshKeyResource s) (Text)
+instance P.HasComputedName (SshKeyResource s) (Text)
+instance P.HasComputedPublicKey (SshKeyResource s) (Text)
 
 sshKeyResource :: TF.Schema TF.Resource P.DigitalOcean (SshKeyResource s)
 sshKeyResource =
@@ -763,16 +764,16 @@ data TagResource s = TagResource {
 
 instance TF.ToHCL (TagResource s) where
     toHCL TagResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (TagResource s) s Text where
+instance P.HasName (TagResource s) (TF.Attr s Text) where
     name =
         lens (_name :: TagResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TagResource s)
 
-instance P.HasComputedId (TagResource s) Text
-instance P.HasComputedName (TagResource s) Text
+instance P.HasComputedId (TagResource s) (Text)
+instance P.HasComputedName (TagResource s) (Text)
 
 tagResource :: TF.Schema TF.Resource P.DigitalOcean (TagResource s)
 tagResource =
@@ -801,39 +802,39 @@ data VolumeResource s = VolumeResource {
 
 instance TF.ToHCL (VolumeResource s) where
     toHCL VolumeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "droplet_ids" _droplet_ids
-        , TF.attribute "name" _name
-        , TF.attribute "region" _region
-        , TF.attribute "size" _size
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "droplet_ids" <$> TF.attribute _droplet_ids
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasDescription (VolumeResource s) s Text where
+instance P.HasDescription (VolumeResource s) (TF.Attr s Text) where
     description =
         lens (_description :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: VolumeResource s)
 
-instance P.HasDropletIds (VolumeResource s) s Text where
+instance P.HasDropletIds (VolumeResource s) (TF.Attr s Text) where
     dropletIds =
         lens (_droplet_ids :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _droplet_ids = a } :: VolumeResource s)
 
-instance P.HasName (VolumeResource s) s Text where
+instance P.HasName (VolumeResource s) (TF.Attr s Text) where
     name =
         lens (_name :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VolumeResource s)
 
-instance P.HasRegion (VolumeResource s) s Text where
+instance P.HasRegion (VolumeResource s) (TF.Attr s Text) where
     region =
         lens (_region :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: VolumeResource s)
 
-instance P.HasSize (VolumeResource s) s Text where
+instance P.HasSize (VolumeResource s) (TF.Attr s Text) where
     size =
         lens (_size :: VolumeResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: VolumeResource s)
 
-instance P.HasComputedId (VolumeResource s) Text
+instance P.HasComputedId (VolumeResource s) (Text)
 
 volumeResource :: TF.Schema TF.Resource P.DigitalOcean (VolumeResource s)
 volumeResource =

@@ -50,8 +50,9 @@ module Terrafomo.LogicMonitor.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -84,16 +85,16 @@ data CollectorGroupResource s = CollectorGroupResource {
 
 instance TF.ToHCL (CollectorGroupResource s) where
     toHCL CollectorGroupResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (CollectorGroupResource s) s Text where
+instance P.HasDescription (CollectorGroupResource s) (TF.Attr s Text) where
     description =
         lens (_description :: CollectorGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: CollectorGroupResource s)
 
-instance P.HasName (CollectorGroupResource s) s Text where
+instance P.HasName (CollectorGroupResource s) (TF.Attr s Text) where
     name =
         lens (_name :: CollectorGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CollectorGroupResource s)
@@ -129,40 +130,40 @@ data DeviceGroupResource s = DeviceGroupResource {
 
 instance TF.ToHCL (DeviceGroupResource s) where
     toHCL DeviceGroupResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "applies_to" _applies_to
-        , TF.attribute "description" _description
-        , TF.attribute "disable_alerting" _disable_alerting
-        , TF.attribute "name" _name
-        , TF.attribute "parent_id" _parent_id
-        , TF.attribute "properties" _properties
+        [ TF.assign "applies_to" <$> TF.attribute _applies_to
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_id" <$> TF.attribute _parent_id
+        , TF.assign "properties" <$> TF.attribute _properties
         ]
 
-instance P.HasAppliesTo (DeviceGroupResource s) s Text where
+instance P.HasAppliesTo (DeviceGroupResource s) (TF.Attr s Text) where
     appliesTo =
         lens (_applies_to :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
 
-instance P.HasDescription (DeviceGroupResource s) s Text where
+instance P.HasDescription (DeviceGroupResource s) (TF.Attr s Text) where
     description =
         lens (_description :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: DeviceGroupResource s)
 
-instance P.HasDisableAlerting (DeviceGroupResource s) s Text where
+instance P.HasDisableAlerting (DeviceGroupResource s) (TF.Attr s Text) where
     disableAlerting =
         lens (_disable_alerting :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
 
-instance P.HasName (DeviceGroupResource s) s Text where
+instance P.HasName (DeviceGroupResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DeviceGroupResource s)
 
-instance P.HasParentId (DeviceGroupResource s) s Text where
+instance P.HasParentId (DeviceGroupResource s) (TF.Attr s Text) where
     parentId =
         lens (_parent_id :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
 
-instance P.HasProperties (DeviceGroupResource s) s Text where
+instance P.HasProperties (DeviceGroupResource s) (TF.Attr s Text) where
     properties =
         lens (_properties :: DeviceGroupResource s -> TF.Attr s Text)
              (\s a -> s { _properties = a } :: DeviceGroupResource s)
@@ -202,40 +203,40 @@ data DeviceResource s = DeviceResource {
 
 instance TF.ToHCL (DeviceResource s) where
     toHCL DeviceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "collector" _collector
-        , TF.attribute "disable_alerting" _disable_alerting
-        , TF.attribute "display_name" _display_name
-        , TF.attribute "hostgroup_id" _hostgroup_id
-        , TF.attribute "ip_addr" _ip_addr
-        , TF.attribute "properties" _properties
+        [ TF.assign "collector" <$> TF.attribute _collector
+        , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
+        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "hostgroup_id" <$> TF.attribute _hostgroup_id
+        , TF.assign "ip_addr" <$> TF.attribute _ip_addr
+        , TF.assign "properties" <$> TF.attribute _properties
         ]
 
-instance P.HasCollector (DeviceResource s) s Text where
+instance P.HasCollector (DeviceResource s) (TF.Attr s Text) where
     collector =
         lens (_collector :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _collector = a } :: DeviceResource s)
 
-instance P.HasDisableAlerting (DeviceResource s) s Text where
+instance P.HasDisableAlerting (DeviceResource s) (TF.Attr s Text) where
     disableAlerting =
         lens (_disable_alerting :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _disable_alerting = a } :: DeviceResource s)
 
-instance P.HasDisplayName (DeviceResource s) s Text where
+instance P.HasDisplayName (DeviceResource s) (TF.Attr s Text) where
     displayName =
         lens (_display_name :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: DeviceResource s)
 
-instance P.HasHostgroupId (DeviceResource s) s Text where
+instance P.HasHostgroupId (DeviceResource s) (TF.Attr s Text) where
     hostgroupId =
         lens (_hostgroup_id :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
 
-instance P.HasIpAddr (DeviceResource s) s Text where
+instance P.HasIpAddr (DeviceResource s) (TF.Attr s Text) where
     ipAddr =
         lens (_ip_addr :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _ip_addr = a } :: DeviceResource s)
 
-instance P.HasProperties (DeviceResource s) s Text where
+instance P.HasProperties (DeviceResource s) (TF.Attr s Text) where
     properties =
         lens (_properties :: DeviceResource s -> TF.Attr s Text)
              (\s a -> s { _properties = a } :: DeviceResource s)

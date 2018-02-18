@@ -1,3 +1,5 @@
 arguments:
   _records:
-    type: '[Text]'
+    type:
+      name: 'Text'
+      format: repeated

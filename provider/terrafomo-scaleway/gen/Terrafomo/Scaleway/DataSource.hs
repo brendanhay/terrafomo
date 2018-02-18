@@ -48,8 +48,9 @@ module Terrafomo.Scaleway.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -84,33 +85,33 @@ data BootscriptData s = BootscriptData {
 
 instance TF.ToHCL (BootscriptData s) where
     toHCL BootscriptData{..} = TF.inline $ catMaybes
-        [ TF.attribute "architecture" _architecture
-        , TF.attribute "name" _name
-        , TF.attribute "name_filter" _name_filter
+        [ TF.assign "architecture" <$> TF.attribute _architecture
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_filter" <$> TF.attribute _name_filter
         ]
 
-instance P.HasArchitecture (BootscriptData s) s Text where
+instance P.HasArchitecture (BootscriptData s) (TF.Attr s Text) where
     architecture =
         lens (_architecture :: BootscriptData s -> TF.Attr s Text)
              (\s a -> s { _architecture = a } :: BootscriptData s)
 
-instance P.HasName (BootscriptData s) s Text where
+instance P.HasName (BootscriptData s) (TF.Attr s Text) where
     name =
         lens (_name :: BootscriptData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: BootscriptData s)
 
-instance P.HasNameFilter (BootscriptData s) s Text where
+instance P.HasNameFilter (BootscriptData s) (TF.Attr s Text) where
     nameFilter =
         lens (_name_filter :: BootscriptData s -> TF.Attr s Text)
              (\s a -> s { _name_filter = a } :: BootscriptData s)
 
-instance P.HasComputedArchitecture (BootscriptData s) Text
-instance P.HasComputedBootCmdArgs (BootscriptData s) Text
-instance P.HasComputedDtb (BootscriptData s) Text
-instance P.HasComputedInitrd (BootscriptData s) Text
-instance P.HasComputedKernel (BootscriptData s) Text
-instance P.HasComputedOrganization (BootscriptData s) Text
-instance P.HasComputedPublic (BootscriptData s) Text
+instance P.HasComputedArchitecture (BootscriptData s) (Text)
+instance P.HasComputedBootCmdArgs (BootscriptData s) (Text)
+instance P.HasComputedDtb (BootscriptData s) (Text)
+instance P.HasComputedInitrd (BootscriptData s) (Text)
+instance P.HasComputedKernel (BootscriptData s) (Text)
+instance P.HasComputedOrganization (BootscriptData s) (Text)
+instance P.HasComputedPublic (BootscriptData s) (Text)
 
 bootscriptData :: TF.Schema TF.DataSource P.Scaleway (BootscriptData s)
 bootscriptData =
@@ -137,30 +138,30 @@ data ImageData s = ImageData {
 
 instance TF.ToHCL (ImageData s) where
     toHCL ImageData{..} = TF.inline $ catMaybes
-        [ TF.attribute "architecture" _architecture
-        , TF.attribute "name" _name
-        , TF.attribute "name_filter" _name_filter
+        [ TF.assign "architecture" <$> TF.attribute _architecture
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_filter" <$> TF.attribute _name_filter
         ]
 
-instance P.HasArchitecture (ImageData s) s Text where
+instance P.HasArchitecture (ImageData s) (TF.Attr s Text) where
     architecture =
         lens (_architecture :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _architecture = a } :: ImageData s)
 
-instance P.HasName (ImageData s) s Text where
+instance P.HasName (ImageData s) (TF.Attr s Text) where
     name =
         lens (_name :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ImageData s)
 
-instance P.HasNameFilter (ImageData s) s Text where
+instance P.HasNameFilter (ImageData s) (TF.Attr s Text) where
     nameFilter =
         lens (_name_filter :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _name_filter = a } :: ImageData s)
 
-instance P.HasComputedArchitecture (ImageData s) Text
-instance P.HasComputedCreationDate (ImageData s) Text
-instance P.HasComputedOrganization (ImageData s) Text
-instance P.HasComputedPublic (ImageData s) Text
+instance P.HasComputedArchitecture (ImageData s) (Text)
+instance P.HasComputedCreationDate (ImageData s) (Text)
+instance P.HasComputedOrganization (ImageData s) (Text)
+instance P.HasComputedPublic (ImageData s) (Text)
 
 imageData :: TF.Schema TF.DataSource P.Scaleway (ImageData s)
 imageData =

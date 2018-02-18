@@ -89,142 +89,142 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasAddressFamily a s b | a -> s b where
-    addressFamily :: Lens' a (TF.Attr s b)
+class HasAddressFamily a b | a -> b where
+    addressFamily :: Lens' a b
 
-instance HasAddressFamily a s b => HasAddressFamily (TF.Schema l p a) s b where
+instance HasAddressFamily a b => HasAddressFamily (TF.Schema l p a) b where
     addressFamily = TF.configuration . addressFamily
 
-class HasAlwaysPxe a s b | a -> s b where
-    alwaysPxe :: Lens' a (TF.Attr s b)
+class HasAlwaysPxe a b | a -> b where
+    alwaysPxe :: Lens' a b
 
-instance HasAlwaysPxe a s b => HasAlwaysPxe (TF.Schema l p a) s b where
+instance HasAlwaysPxe a b => HasAlwaysPxe (TF.Schema l p a) b where
     alwaysPxe = TF.configuration . alwaysPxe
 
-class HasBillingCycle a s b | a -> s b where
-    billingCycle :: Lens' a (TF.Attr s b)
+class HasBillingCycle a b | a -> b where
+    billingCycle :: Lens' a b
 
-instance HasBillingCycle a s b => HasBillingCycle (TF.Schema l p a) s b where
+instance HasBillingCycle a b => HasBillingCycle (TF.Schema l p a) b where
     billingCycle = TF.configuration . billingCycle
 
-class HasCidrNotation a s b | a -> s b where
-    cidrNotation :: Lens' a (TF.Attr s b)
+class HasCidrNotation a b | a -> b where
+    cidrNotation :: Lens' a b
 
-instance HasCidrNotation a s b => HasCidrNotation (TF.Schema l p a) s b where
+instance HasCidrNotation a b => HasCidrNotation (TF.Schema l p a) b where
     cidrNotation = TF.configuration . cidrNotation
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasDeviceId a s b | a -> s b where
-    deviceId :: Lens' a (TF.Attr s b)
+class HasDeviceId a b | a -> b where
+    deviceId :: Lens' a b
 
-instance HasDeviceId a s b => HasDeviceId (TF.Schema l p a) s b where
+instance HasDeviceId a b => HasDeviceId (TF.Schema l p a) b where
     deviceId = TF.configuration . deviceId
 
-class HasFacility a s b | a -> s b where
-    facility :: Lens' a (TF.Attr s b)
+class HasFacility a b | a -> b where
+    facility :: Lens' a b
 
-instance HasFacility a s b => HasFacility (TF.Schema l p a) s b where
+instance HasFacility a b => HasFacility (TF.Schema l p a) b where
     facility = TF.configuration . facility
 
-class HasHardwareReservationId a s b | a -> s b where
-    hardwareReservationId :: Lens' a (TF.Attr s b)
+class HasHardwareReservationId a b | a -> b where
+    hardwareReservationId :: Lens' a b
 
-instance HasHardwareReservationId a s b => HasHardwareReservationId (TF.Schema l p a) s b where
+instance HasHardwareReservationId a b => HasHardwareReservationId (TF.Schema l p a) b where
     hardwareReservationId = TF.configuration . hardwareReservationId
 
-class HasHostname a s b | a -> s b where
-    hostname :: Lens' a (TF.Attr s b)
+class HasHostname a b | a -> b where
+    hostname :: Lens' a b
 
-instance HasHostname a s b => HasHostname (TF.Schema l p a) s b where
+instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
 
-class HasIpxeScriptUrl a s b | a -> s b where
-    ipxeScriptUrl :: Lens' a (TF.Attr s b)
+class HasIpxeScriptUrl a b | a -> b where
+    ipxeScriptUrl :: Lens' a b
 
-instance HasIpxeScriptUrl a s b => HasIpxeScriptUrl (TF.Schema l p a) s b where
+instance HasIpxeScriptUrl a b => HasIpxeScriptUrl (TF.Schema l p a) b where
     ipxeScriptUrl = TF.configuration . ipxeScriptUrl
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasOperatingSystem a s b | a -> s b where
-    operatingSystem :: Lens' a (TF.Attr s b)
+class HasOperatingSystem a b | a -> b where
+    operatingSystem :: Lens' a b
 
-instance HasOperatingSystem a s b => HasOperatingSystem (TF.Schema l p a) s b where
+instance HasOperatingSystem a b => HasOperatingSystem (TF.Schema l p a) b where
     operatingSystem = TF.configuration . operatingSystem
 
-class HasPlan a s b | a -> s b where
-    plan :: Lens' a (TF.Attr s b)
+class HasPlan a b | a -> b where
+    plan :: Lens' a b
 
-instance HasPlan a s b => HasPlan (TF.Schema l p a) s b where
+instance HasPlan a b => HasPlan (TF.Schema l p a) b where
     plan = TF.configuration . plan
 
-class HasProjectId a s b | a -> s b where
-    projectId :: Lens' a (TF.Attr s b)
+class HasProjectId a b | a -> b where
+    projectId :: Lens' a b
 
-instance HasProjectId a s b => HasProjectId (TF.Schema l p a) s b where
+instance HasProjectId a b => HasProjectId (TF.Schema l p a) b where
     projectId = TF.configuration . projectId
 
-class HasPublic a s b | a -> s b where
-    public :: Lens' a (TF.Attr s b)
+class HasPublic a b | a -> b where
+    public :: Lens' a b
 
-instance HasPublic a s b => HasPublic (TF.Schema l p a) s b where
+instance HasPublic a b => HasPublic (TF.Schema l p a) b where
     public = TF.configuration . public
 
-class HasPublicIpv4SubnetSize a s b | a -> s b where
-    publicIpv4SubnetSize :: Lens' a (TF.Attr s b)
+class HasPublicIpv4SubnetSize a b | a -> b where
+    publicIpv4SubnetSize :: Lens' a b
 
-instance HasPublicIpv4SubnetSize a s b => HasPublicIpv4SubnetSize (TF.Schema l p a) s b where
+instance HasPublicIpv4SubnetSize a b => HasPublicIpv4SubnetSize (TF.Schema l p a) b where
     publicIpv4SubnetSize = TF.configuration . publicIpv4SubnetSize
 
-class HasPublicKey a s b | a -> s b where
-    publicKey :: Lens' a (TF.Attr s b)
+class HasPublicKey a b | a -> b where
+    publicKey :: Lens' a b
 
-instance HasPublicKey a s b => HasPublicKey (TF.Schema l p a) s b where
+instance HasPublicKey a b => HasPublicKey (TF.Schema l p a) b where
     publicKey = TF.configuration . publicKey
 
-class HasQuantity a s b | a -> s b where
-    quantity :: Lens' a (TF.Attr s b)
+class HasQuantity a b | a -> b where
+    quantity :: Lens' a b
 
-instance HasQuantity a s b => HasQuantity (TF.Schema l p a) s b where
+instance HasQuantity a b => HasQuantity (TF.Schema l p a) b where
     quantity = TF.configuration . quantity
 
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attr s b)
+class HasSize a b | a -> b where
+    size :: Lens' a b
 
-instance HasSize a s b => HasSize (TF.Schema l p a) s b where
+instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size
 
-class HasSnapshotPolicies a s b | a -> s b where
-    snapshotPolicies :: Lens' a (TF.Attr s b)
+class HasSnapshotPolicies a b | a -> b where
+    snapshotPolicies :: Lens' a b
 
-instance HasSnapshotPolicies a s b => HasSnapshotPolicies (TF.Schema l p a) s b where
+instance HasSnapshotPolicies a b => HasSnapshotPolicies (TF.Schema l p a) b where
     snapshotPolicies = TF.configuration . snapshotPolicies
 
-class HasStorage a s b | a -> s b where
-    storage :: Lens' a (TF.Attr s b)
+class HasStorage a b | a -> b where
+    storage :: Lens' a b
 
-instance HasStorage a s b => HasStorage (TF.Schema l p a) s b where
+instance HasStorage a b => HasStorage (TF.Schema l p a) b where
     storage = TF.configuration . storage
 
-class HasUserData a s b | a -> s b where
-    userData :: Lens' a (TF.Attr s b)
+class HasUserData a b | a -> b where
+    userData :: Lens' a b
 
-instance HasUserData a s b => HasUserData (TF.Schema l p a) s b where
+instance HasUserData a b => HasUserData (TF.Schema l p a) b where
     userData = TF.configuration . userData
 
-class HasVolumeId a s b | a -> s b where
-    volumeId :: Lens' a (TF.Attr s b)
+class HasVolumeId a b | a -> b where
+    volumeId :: Lens' a b
 
-instance HasVolumeId a s b => HasVolumeId (TF.Schema l p a) s b where
+instance HasVolumeId a b => HasVolumeId (TF.Schema l p a) b where
     volumeId = TF.configuration . volumeId
 
 class HasComputedAccessPrivateIpv4 a b | a -> b where

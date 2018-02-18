@@ -1,6 +1,8 @@
 arguments:
   _attribute:
-    type: '[P.DynamoTableAttribute]'
+    type:
+      name: '[P.DynamoTableAttribute]'
+      format: verbatim
   _read_capacity:
     type: 'P.Natural'
   _write_capacity:

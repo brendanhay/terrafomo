@@ -74,124 +74,124 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasAcm a s b | a -> s b where
-    acm :: Lens' a (TF.Attr s b)
+class HasAcm a b | a -> b where
+    acm :: Lens' a b
 
-instance HasAcm a s b => HasAcm (TF.Schema l p a) s b where
+instance HasAcm a b => HasAcm (TF.Schema l p a) b where
     acm = TF.configuration . acm
 
-class HasAddonId a s b | a -> s b where
-    addonId :: Lens' a (TF.Attr s b)
+class HasAddonId a b | a -> b where
+    addonId :: Lens' a b
 
-instance HasAddonId a s b => HasAddonId (TF.Schema l p a) s b where
+instance HasAddonId a b => HasAddonId (TF.Schema l p a) b where
     addonId = TF.configuration . addonId
 
-class HasApp a s b | a -> s b where
-    app :: Lens' a (TF.Attr s b)
+class HasApp a b | a -> b where
+    app :: Lens' a b
 
-instance HasApp a s b => HasApp (TF.Schema l p a) s b where
+instance HasApp a b => HasApp (TF.Schema l p a) b where
     app = TF.configuration . app
 
-class HasAppId a s b | a -> s b where
-    appId :: Lens' a (TF.Attr s b)
+class HasAppId a b | a -> b where
+    appId :: Lens' a b
 
-instance HasAppId a s b => HasAppId (TF.Schema l p a) s b where
+instance HasAppId a b => HasAppId (TF.Schema l p a) b where
     appId = TF.configuration . appId
 
-class HasBuildpacks a s b | a -> s b where
-    buildpacks :: Lens' a (TF.Attr s b)
+class HasBuildpacks a b | a -> b where
+    buildpacks :: Lens' a b
 
-instance HasBuildpacks a s b => HasBuildpacks (TF.Schema l p a) s b where
+instance HasBuildpacks a b => HasBuildpacks (TF.Schema l p a) b where
     buildpacks = TF.configuration . buildpacks
 
-class HasCertificateChain a s b | a -> s b where
-    certificateChain :: Lens' a (TF.Attr s b)
+class HasCertificateChain a b | a -> b where
+    certificateChain :: Lens' a b
 
-instance HasCertificateChain a s b => HasCertificateChain (TF.Schema l p a) s b where
+instance HasCertificateChain a b => HasCertificateChain (TF.Schema l p a) b where
     certificateChain = TF.configuration . certificateChain
 
-class HasConfig a s b | a -> s b where
-    config :: Lens' a (TF.Attr s b)
+class HasConfig a b | a -> b where
+    config :: Lens' a b
 
-instance HasConfig a s b => HasConfig (TF.Schema l p a) s b where
+instance HasConfig a b => HasConfig (TF.Schema l p a) b where
     config = TF.configuration . config
 
-class HasConfigVars a s b | a -> s b where
-    configVars :: Lens' a (TF.Attr s b)
+class HasConfigVars a b | a -> b where
+    configVars :: Lens' a b
 
-instance HasConfigVars a s b => HasConfigVars (TF.Schema l p a) s b where
+instance HasConfigVars a b => HasConfigVars (TF.Schema l p a) b where
     configVars = TF.configuration . configVars
 
-class HasEnabled a s b | a -> s b where
-    enabled :: Lens' a (TF.Attr s b)
+class HasEnabled a b | a -> b where
+    enabled :: Lens' a b
 
-instance HasEnabled a s b => HasEnabled (TF.Schema l p a) s b where
+instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
     enabled = TF.configuration . enabled
 
-class HasHostname a s b | a -> s b where
-    hostname :: Lens' a (TF.Attr s b)
+class HasHostname a b | a -> b where
+    hostname :: Lens' a b
 
-instance HasHostname a s b => HasHostname (TF.Schema l p a) s b where
+instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasOrganization a s b | a -> s b where
-    organization :: Lens' a (TF.Attr s b)
+class HasOrganization a b | a -> b where
+    organization :: Lens' a b
 
-instance HasOrganization a s b => HasOrganization (TF.Schema l p a) s b where
+instance HasOrganization a b => HasOrganization (TF.Schema l p a) b where
     organization = TF.configuration . organization
 
-class HasPipeline a s b | a -> s b where
-    pipeline :: Lens' a (TF.Attr s b)
+class HasPipeline a b | a -> b where
+    pipeline :: Lens' a b
 
-instance HasPipeline a s b => HasPipeline (TF.Schema l p a) s b where
+instance HasPipeline a b => HasPipeline (TF.Schema l p a) b where
     pipeline = TF.configuration . pipeline
 
-class HasPlan a s b | a -> s b where
-    plan :: Lens' a (TF.Attr s b)
+class HasPlan a b | a -> b where
+    plan :: Lens' a b
 
-instance HasPlan a s b => HasPlan (TF.Schema l p a) s b where
+instance HasPlan a b => HasPlan (TF.Schema l p a) b where
     plan = TF.configuration . plan
 
-class HasPrivateKey a s b | a -> s b where
-    privateKey :: Lens' a (TF.Attr s b)
+class HasPrivateKey a b | a -> b where
+    privateKey :: Lens' a b
 
-instance HasPrivateKey a s b => HasPrivateKey (TF.Schema l p a) s b where
+instance HasPrivateKey a b => HasPrivateKey (TF.Schema l p a) b where
     privateKey = TF.configuration . privateKey
 
-class HasRegion a s b | a -> s b where
-    region :: Lens' a (TF.Attr s b)
+class HasRegion a b | a -> b where
+    region :: Lens' a b
 
-instance HasRegion a s b => HasRegion (TF.Schema l p a) s b where
+instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
 
-class HasSpace a s b | a -> s b where
-    space :: Lens' a (TF.Attr s b)
+class HasSpace a b | a -> b where
+    space :: Lens' a b
 
-instance HasSpace a s b => HasSpace (TF.Schema l p a) s b where
+instance HasSpace a b => HasSpace (TF.Schema l p a) b where
     space = TF.configuration . space
 
-class HasStack a s b | a -> s b where
-    stack :: Lens' a (TF.Attr s b)
+class HasStack a b | a -> b where
+    stack :: Lens' a b
 
-instance HasStack a s b => HasStack (TF.Schema l p a) s b where
+instance HasStack a b => HasStack (TF.Schema l p a) b where
     stack = TF.configuration . stack
 
-class HasStage a s b | a -> s b where
-    stage :: Lens' a (TF.Attr s b)
+class HasStage a b | a -> b where
+    stage :: Lens' a b
 
-instance HasStage a s b => HasStage (TF.Schema l p a) s b where
+instance HasStage a b => HasStage (TF.Schema l p a) b where
     stage = TF.configuration . stage
 
-class HasUrl a s b | a -> s b where
-    url :: Lens' a (TF.Attr s b)
+class HasUrl a b | a -> b where
+    url :: Lens' a b
 
-instance HasUrl a s b => HasUrl (TF.Schema l p a) s b where
+instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
 
 class HasComputedAllConfigVars a b | a -> b where

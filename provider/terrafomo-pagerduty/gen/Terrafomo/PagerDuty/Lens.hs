@@ -81,190 +81,190 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasAcknowledgementTimeout a s b | a -> s b where
-    acknowledgementTimeout :: Lens' a (TF.Attr s b)
+class HasAcknowledgementTimeout a b | a -> b where
+    acknowledgementTimeout :: Lens' a b
 
-instance HasAcknowledgementTimeout a s b => HasAcknowledgementTimeout (TF.Schema l p a) s b where
+instance HasAcknowledgementTimeout a b => HasAcknowledgementTimeout (TF.Schema l p a) b where
     acknowledgementTimeout = TF.configuration . acknowledgementTimeout
 
-class HasAddress a s b | a -> s b where
-    address :: Lens' a (TF.Attr s b)
+class HasAddress a b | a -> b where
+    address :: Lens' a b
 
-instance HasAddress a s b => HasAddress (TF.Schema l p a) s b where
+instance HasAddress a b => HasAddress (TF.Schema l p a) b where
     address = TF.configuration . address
 
-class HasAlertCreation a s b | a -> s b where
-    alertCreation :: Lens' a (TF.Attr s b)
+class HasAlertCreation a b | a -> b where
+    alertCreation :: Lens' a b
 
-instance HasAlertCreation a s b => HasAlertCreation (TF.Schema l p a) s b where
+instance HasAlertCreation a b => HasAlertCreation (TF.Schema l p a) b where
     alertCreation = TF.configuration . alertCreation
 
-class HasAutoResolveTimeout a s b | a -> s b where
-    autoResolveTimeout :: Lens' a (TF.Attr s b)
+class HasAutoResolveTimeout a b | a -> b where
+    autoResolveTimeout :: Lens' a b
 
-instance HasAutoResolveTimeout a s b => HasAutoResolveTimeout (TF.Schema l p a) s b where
+instance HasAutoResolveTimeout a b => HasAutoResolveTimeout (TF.Schema l p a) b where
     autoResolveTimeout = TF.configuration . autoResolveTimeout
 
-class HasColor a s b | a -> s b where
-    color :: Lens' a (TF.Attr s b)
+class HasColor a b | a -> b where
+    color :: Lens' a b
 
-instance HasColor a s b => HasColor (TF.Schema l p a) s b where
+instance HasColor a b => HasColor (TF.Schema l p a) b where
     color = TF.configuration . color
 
-class HasCountryCode a s b | a -> s b where
-    countryCode :: Lens' a (TF.Attr s b)
+class HasCountryCode a b | a -> b where
+    countryCode :: Lens' a b
 
-instance HasCountryCode a s b => HasCountryCode (TF.Schema l p a) s b where
+instance HasCountryCode a b => HasCountryCode (TF.Schema l p a) b where
     countryCode = TF.configuration . countryCode
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasEmail a s b | a -> s b where
-    email :: Lens' a (TF.Attr s b)
+class HasEmail a b | a -> b where
+    email :: Lens' a b
 
-instance HasEmail a s b => HasEmail (TF.Schema l p a) s b where
+instance HasEmail a b => HasEmail (TF.Schema l p a) b where
     email = TF.configuration . email
 
-class HasEndTime a s b | a -> s b where
-    endTime :: Lens' a (TF.Attr s b)
+class HasEndTime a b | a -> b where
+    endTime :: Lens' a b
 
-instance HasEndTime a s b => HasEndTime (TF.Schema l p a) s b where
+instance HasEndTime a b => HasEndTime (TF.Schema l p a) b where
     endTime = TF.configuration . endTime
 
-class HasEscalationPolicy a s b | a -> s b where
-    escalationPolicy :: Lens' a (TF.Attr s b)
+class HasEscalationPolicy a b | a -> b where
+    escalationPolicy :: Lens' a b
 
-instance HasEscalationPolicy a s b => HasEscalationPolicy (TF.Schema l p a) s b where
+instance HasEscalationPolicy a b => HasEscalationPolicy (TF.Schema l p a) b where
     escalationPolicy = TF.configuration . escalationPolicy
 
-class HasIntegrationEmail a s b | a -> s b where
-    integrationEmail :: Lens' a (TF.Attr s b)
+class HasIntegrationEmail a b | a -> b where
+    integrationEmail :: Lens' a b
 
-instance HasIntegrationEmail a s b => HasIntegrationEmail (TF.Schema l p a) s b where
+instance HasIntegrationEmail a b => HasIntegrationEmail (TF.Schema l p a) b where
     integrationEmail = TF.configuration . integrationEmail
 
-class HasIntegrationKey a s b | a -> s b where
-    integrationKey :: Lens' a (TF.Attr s b)
+class HasIntegrationKey a b | a -> b where
+    integrationKey :: Lens' a b
 
-instance HasIntegrationKey a s b => HasIntegrationKey (TF.Schema l p a) s b where
+instance HasIntegrationKey a b => HasIntegrationKey (TF.Schema l p a) b where
     integrationKey = TF.configuration . integrationKey
 
-class HasJobTitle a s b | a -> s b where
-    jobTitle :: Lens' a (TF.Attr s b)
+class HasJobTitle a b | a -> b where
+    jobTitle :: Lens' a b
 
-instance HasJobTitle a s b => HasJobTitle (TF.Schema l p a) s b where
+instance HasJobTitle a b => HasJobTitle (TF.Schema l p a) b where
     jobTitle = TF.configuration . jobTitle
 
-class HasLabel a s b | a -> s b where
-    label :: Lens' a (TF.Attr s b)
+class HasLabel a b | a -> b where
+    label :: Lens' a b
 
-instance HasLabel a s b => HasLabel (TF.Schema l p a) s b where
+instance HasLabel a b => HasLabel (TF.Schema l p a) b where
     label = TF.configuration . label
 
-class HasLayer a s b | a -> s b where
-    layer :: Lens' a (TF.Attr s b)
+class HasLayer a b | a -> b where
+    layer :: Lens' a b
 
-instance HasLayer a s b => HasLayer (TF.Schema l p a) s b where
+instance HasLayer a b => HasLayer (TF.Schema l p a) b where
     layer = TF.configuration . layer
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasNumLoops a s b | a -> s b where
-    numLoops :: Lens' a (TF.Attr s b)
+class HasNumLoops a b | a -> b where
+    numLoops :: Lens' a b
 
-instance HasNumLoops a s b => HasNumLoops (TF.Schema l p a) s b where
+instance HasNumLoops a b => HasNumLoops (TF.Schema l p a) b where
     numLoops = TF.configuration . numLoops
 
-class HasOverflow a s b | a -> s b where
-    overflow :: Lens' a (TF.Attr s b)
+class HasOverflow a b | a -> b where
+    overflow :: Lens' a b
 
-instance HasOverflow a s b => HasOverflow (TF.Schema l p a) s b where
+instance HasOverflow a b => HasOverflow (TF.Schema l p a) b where
     overflow = TF.configuration . overflow
 
-class HasRole a s b | a -> s b where
-    role :: Lens' a (TF.Attr s b)
+class HasRole a b | a -> b where
+    role :: Lens' a b
 
-instance HasRole a s b => HasRole (TF.Schema l p a) s b where
+instance HasRole a b => HasRole (TF.Schema l p a) b where
     role = TF.configuration . role
 
-class HasRule a s b | a -> s b where
-    rule :: Lens' a (TF.Attr s b)
+class HasRule a b | a -> b where
+    rule :: Lens' a b
 
-instance HasRule a s b => HasRule (TF.Schema l p a) s b where
+instance HasRule a b => HasRule (TF.Schema l p a) b where
     rule = TF.configuration . rule
 
-class HasSendShortEmail a s b | a -> s b where
-    sendShortEmail :: Lens' a (TF.Attr s b)
+class HasSendShortEmail a b | a -> b where
+    sendShortEmail :: Lens' a b
 
-instance HasSendShortEmail a s b => HasSendShortEmail (TF.Schema l p a) s b where
+instance HasSendShortEmail a b => HasSendShortEmail (TF.Schema l p a) b where
     sendShortEmail = TF.configuration . sendShortEmail
 
-class HasService a s b | a -> s b where
-    service :: Lens' a (TF.Attr s b)
+class HasService a b | a -> b where
+    service :: Lens' a b
 
-instance HasService a s b => HasService (TF.Schema l p a) s b where
+instance HasService a b => HasService (TF.Schema l p a) b where
     service = TF.configuration . service
 
-class HasServices a s b | a -> s b where
-    services :: Lens' a (TF.Attr s b)
+class HasServices a b | a -> b where
+    services :: Lens' a b
 
-instance HasServices a s b => HasServices (TF.Schema l p a) s b where
+instance HasServices a b => HasServices (TF.Schema l p a) b where
     services = TF.configuration . services
 
-class HasSrc a s b | a -> s b where
-    src :: Lens' a (TF.Attr s b)
+class HasSrc a b | a -> b where
+    src :: Lens' a b
 
-instance HasSrc a s b => HasSrc (TF.Schema l p a) s b where
+instance HasSrc a b => HasSrc (TF.Schema l p a) b where
     src = TF.configuration . src
 
-class HasStartTime a s b | a -> s b where
-    startTime :: Lens' a (TF.Attr s b)
+class HasStartTime a b | a -> b where
+    startTime :: Lens' a b
 
-instance HasStartTime a s b => HasStartTime (TF.Schema l p a) s b where
+instance HasStartTime a b => HasStartTime (TF.Schema l p a) b where
     startTime = TF.configuration . startTime
 
-class HasTeamId a s b | a -> s b where
-    teamId :: Lens' a (TF.Attr s b)
+class HasTeamId a b | a -> b where
+    teamId :: Lens' a b
 
-instance HasTeamId a s b => HasTeamId (TF.Schema l p a) s b where
+instance HasTeamId a b => HasTeamId (TF.Schema l p a) b where
     teamId = TF.configuration . teamId
 
-class HasTeams a s b | a -> s b where
-    teams :: Lens' a (TF.Attr s b)
+class HasTeams a b | a -> b where
+    teams :: Lens' a b
 
-instance HasTeams a s b => HasTeams (TF.Schema l p a) s b where
+instance HasTeams a b => HasTeams (TF.Schema l p a) b where
     teams = TF.configuration . teams
 
-class HasTimeZone a s b | a -> s b where
-    timeZone :: Lens' a (TF.Attr s b)
+class HasTimeZone a b | a -> b where
+    timeZone :: Lens' a b
 
-instance HasTimeZone a s b => HasTimeZone (TF.Schema l p a) s b where
+instance HasTimeZone a b => HasTimeZone (TF.Schema l p a) b where
     timeZone = TF.configuration . timeZone
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasUserId a s b | a -> s b where
-    userId :: Lens' a (TF.Attr s b)
+class HasUserId a b | a -> b where
+    userId :: Lens' a b
 
-instance HasUserId a s b => HasUserId (TF.Schema l p a) s b where
+instance HasUserId a b => HasUserId (TF.Schema l p a) b where
     userId = TF.configuration . userId
 
-class HasVendor a s b | a -> s b where
-    vendor :: Lens' a (TF.Attr s b)
+class HasVendor a b | a -> b where
+    vendor :: Lens' a b
 
-instance HasVendor a s b => HasVendor (TF.Schema l p a) s b where
+instance HasVendor a b => HasVendor (TF.Schema l p a) b where
     vendor = TF.configuration . vendor
 
 class HasComputedAvatarUrl a b | a -> b where

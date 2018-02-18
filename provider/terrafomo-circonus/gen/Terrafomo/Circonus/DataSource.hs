@@ -60,8 +60,9 @@ module Terrafomo.Circonus.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -97,36 +98,36 @@ data AccountData s = AccountData {
 
 instance TF.ToHCL (AccountData s) where
     toHCL AccountData{..} = TF.inline $ catMaybes
-        [ TF.attribute "current" _current
-        , TF.attribute "id" _id
+        [ TF.assign "current" <$> TF.attribute _current
+        , TF.assign "id" <$> TF.attribute _id
         ]
 
-instance P.HasCurrent (AccountData s) s Text where
+instance P.HasCurrent (AccountData s) (TF.Attr s Text) where
     current =
         lens (_current :: AccountData s -> TF.Attr s Text)
              (\s a -> s { _current = a } :: AccountData s)
 
-instance P.HasId (AccountData s) s Text where
+instance P.HasId (AccountData s) (TF.Attr s Text) where
     id =
         lens (_id :: AccountData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: AccountData s)
 
-instance P.HasComputedAddress1 (AccountData s) Text
-instance P.HasComputedAddress2 (AccountData s) Text
-instance P.HasComputedCcEmail (AccountData s) Text
-instance P.HasComputedCity (AccountData s) Text
-instance P.HasComputedContactGroups (AccountData s) Text
-instance P.HasComputedCountry (AccountData s) Text
-instance P.HasComputedDescription (AccountData s) Text
-instance P.HasComputedId (AccountData s) Text
-instance P.HasComputedInvites (AccountData s) Text
-instance P.HasComputedName (AccountData s) Text
-instance P.HasComputedOwner (AccountData s) Text
-instance P.HasComputedState (AccountData s) Text
-instance P.HasComputedTimezone (AccountData s) Text
-instance P.HasComputedUiBaseUrl (AccountData s) Text
-instance P.HasComputedUsage (AccountData s) Text
-instance P.HasComputedUsers (AccountData s) Text
+instance P.HasComputedAddress1 (AccountData s) (Text)
+instance P.HasComputedAddress2 (AccountData s) (Text)
+instance P.HasComputedCcEmail (AccountData s) (Text)
+instance P.HasComputedCity (AccountData s) (Text)
+instance P.HasComputedContactGroups (AccountData s) (Text)
+instance P.HasComputedCountry (AccountData s) (Text)
+instance P.HasComputedDescription (AccountData s) (Text)
+instance P.HasComputedId (AccountData s) (Text)
+instance P.HasComputedInvites (AccountData s) (Text)
+instance P.HasComputedName (AccountData s) (Text)
+instance P.HasComputedOwner (AccountData s) (Text)
+instance P.HasComputedState (AccountData s) (Text)
+instance P.HasComputedTimezone (AccountData s) (Text)
+instance P.HasComputedUiBaseUrl (AccountData s) (Text)
+instance P.HasComputedUsage (AccountData s) (Text)
+instance P.HasComputedUsers (AccountData s) (Text)
 
 accountData :: TF.Schema TF.DataSource P.Circonus (AccountData s)
 accountData =
@@ -160,21 +161,21 @@ data CollectorData s = CollectorData {
 
 instance TF.ToHCL (CollectorData s) where
     toHCL CollectorData{..} = TF.inline $ catMaybes
-        [ TF.attribute "id" _id
+        [ TF.assign "id" <$> TF.attribute _id
         ]
 
-instance P.HasId (CollectorData s) s Text where
+instance P.HasId (CollectorData s) (TF.Attr s Text) where
     id =
         lens (_id :: CollectorData s -> TF.Attr s Text)
              (\s a -> s { _id = a } :: CollectorData s)
 
-instance P.HasComputedDetails (CollectorData s) Text
-instance P.HasComputedId (CollectorData s) Text
-instance P.HasComputedLatitude (CollectorData s) Text
-instance P.HasComputedLongitude (CollectorData s) Text
-instance P.HasComputedName (CollectorData s) Text
-instance P.HasComputedTags (CollectorData s) Text
-instance P.HasComputedType' (CollectorData s) Text
+instance P.HasComputedDetails (CollectorData s) (Text)
+instance P.HasComputedId (CollectorData s) (Text)
+instance P.HasComputedLatitude (CollectorData s) (Text)
+instance P.HasComputedLongitude (CollectorData s) (Text)
+instance P.HasComputedName (CollectorData s) (Text)
+instance P.HasComputedTags (CollectorData s) (Text)
+instance P.HasComputedType' (CollectorData s) (Text)
 
 collectorData :: TF.Schema TF.DataSource P.Circonus (CollectorData s)
 collectorData =

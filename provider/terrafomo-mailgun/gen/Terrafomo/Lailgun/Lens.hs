@@ -45,28 +45,28 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasSmtpPassword a s b | a -> s b where
-    smtpPassword :: Lens' a (TF.Attr s b)
+class HasSmtpPassword a b | a -> b where
+    smtpPassword :: Lens' a b
 
-instance HasSmtpPassword a s b => HasSmtpPassword (TF.Schema l p a) s b where
+instance HasSmtpPassword a b => HasSmtpPassword (TF.Schema l p a) b where
     smtpPassword = TF.configuration . smtpPassword
 
-class HasSpamAction a s b | a -> s b where
-    spamAction :: Lens' a (TF.Attr s b)
+class HasSpamAction a b | a -> b where
+    spamAction :: Lens' a b
 
-instance HasSpamAction a s b => HasSpamAction (TF.Schema l p a) s b where
+instance HasSpamAction a b => HasSpamAction (TF.Schema l p a) b where
     spamAction = TF.configuration . spamAction
 
-class HasWildcard a s b | a -> s b where
-    wildcard :: Lens' a (TF.Attr s b)
+class HasWildcard a b | a -> b where
+    wildcard :: Lens' a b
 
-instance HasWildcard a s b => HasWildcard (TF.Schema l p a) s b where
+instance HasWildcard a b => HasWildcard (TF.Schema l p a) b where
     wildcard = TF.configuration . wildcard
 
 class HasComputedName a b | a -> b where

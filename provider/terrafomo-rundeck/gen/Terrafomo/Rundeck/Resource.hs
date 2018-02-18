@@ -75,8 +75,9 @@ module Terrafomo.Rundeck.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -141,111 +142,111 @@ data JobResource s = JobResource {
 
 instance TF.ToHCL (JobResource s) where
     toHCL JobResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "allow_concurrent_executions" _allow_concurrent_executions
-        , TF.attribute "command" _command
-        , TF.attribute "command_ordering_strategy" _command_ordering_strategy
-        , TF.attribute "continue_on_error" _continue_on_error
-        , TF.attribute "description" _description
-        , TF.attribute "group_name" _group_name
-        , TF.attribute "log_level" _log_level
-        , TF.attribute "max_thread_count" _max_thread_count
-        , TF.attribute "name" _name
-        , TF.attribute "node_filter_exclude_precedence" _node_filter_exclude_precedence
-        , TF.attribute "node_filter_query" _node_filter_query
-        , TF.attribute "option" _option
-        , TF.attribute "preserve_options_order" _preserve_options_order
-        , TF.attribute "project_name" _project_name
-        , TF.attribute "rank_attribute" _rank_attribute
-        , TF.attribute "rank_order" _rank_order
-        , TF.attribute "schedule" _schedule
+        [ TF.assign "allow_concurrent_executions" <$> TF.attribute _allow_concurrent_executions
+        , TF.assign "command" <$> TF.attribute _command
+        , TF.assign "command_ordering_strategy" <$> TF.attribute _command_ordering_strategy
+        , TF.assign "continue_on_error" <$> TF.attribute _continue_on_error
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "group_name" <$> TF.attribute _group_name
+        , TF.assign "log_level" <$> TF.attribute _log_level
+        , TF.assign "max_thread_count" <$> TF.attribute _max_thread_count
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "node_filter_exclude_precedence" <$> TF.attribute _node_filter_exclude_precedence
+        , TF.assign "node_filter_query" <$> TF.attribute _node_filter_query
+        , TF.assign "option" <$> TF.attribute _option
+        , TF.assign "preserve_options_order" <$> TF.attribute _preserve_options_order
+        , TF.assign "project_name" <$> TF.attribute _project_name
+        , TF.assign "rank_attribute" <$> TF.attribute _rank_attribute
+        , TF.assign "rank_order" <$> TF.attribute _rank_order
+        , TF.assign "schedule" <$> TF.attribute _schedule
         ]
 
-instance P.HasAllowConcurrentExecutions (JobResource s) s Text where
+instance P.HasAllowConcurrentExecutions (JobResource s) (TF.Attr s Text) where
     allowConcurrentExecutions =
         lens (_allow_concurrent_executions :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _allow_concurrent_executions = a } :: JobResource s)
 
-instance P.HasCommand (JobResource s) s Text where
+instance P.HasCommand (JobResource s) (TF.Attr s Text) where
     command =
         lens (_command :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _command = a } :: JobResource s)
 
-instance P.HasCommandOrderingStrategy (JobResource s) s Text where
+instance P.HasCommandOrderingStrategy (JobResource s) (TF.Attr s Text) where
     commandOrderingStrategy =
         lens (_command_ordering_strategy :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _command_ordering_strategy = a } :: JobResource s)
 
-instance P.HasContinueOnError (JobResource s) s Text where
+instance P.HasContinueOnError (JobResource s) (TF.Attr s Text) where
     continueOnError =
         lens (_continue_on_error :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _continue_on_error = a } :: JobResource s)
 
-instance P.HasDescription (JobResource s) s Text where
+instance P.HasDescription (JobResource s) (TF.Attr s Text) where
     description =
         lens (_description :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: JobResource s)
 
-instance P.HasGroupName (JobResource s) s Text where
+instance P.HasGroupName (JobResource s) (TF.Attr s Text) where
     groupName =
         lens (_group_name :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _group_name = a } :: JobResource s)
 
-instance P.HasLogLevel (JobResource s) s Text where
+instance P.HasLogLevel (JobResource s) (TF.Attr s Text) where
     logLevel =
         lens (_log_level :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _log_level = a } :: JobResource s)
 
-instance P.HasMaxThreadCount (JobResource s) s Text where
+instance P.HasMaxThreadCount (JobResource s) (TF.Attr s Text) where
     maxThreadCount =
         lens (_max_thread_count :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _max_thread_count = a } :: JobResource s)
 
-instance P.HasName (JobResource s) s Text where
+instance P.HasName (JobResource s) (TF.Attr s Text) where
     name =
         lens (_name :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: JobResource s)
 
-instance P.HasNodeFilterExcludePrecedence (JobResource s) s Text where
+instance P.HasNodeFilterExcludePrecedence (JobResource s) (TF.Attr s Text) where
     nodeFilterExcludePrecedence =
         lens (_node_filter_exclude_precedence :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _node_filter_exclude_precedence = a } :: JobResource s)
 
-instance P.HasNodeFilterQuery (JobResource s) s Text where
+instance P.HasNodeFilterQuery (JobResource s) (TF.Attr s Text) where
     nodeFilterQuery =
         lens (_node_filter_query :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _node_filter_query = a } :: JobResource s)
 
-instance P.HasOption (JobResource s) s Text where
+instance P.HasOption (JobResource s) (TF.Attr s Text) where
     option =
         lens (_option :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _option = a } :: JobResource s)
 
-instance P.HasPreserveOptionsOrder (JobResource s) s Text where
+instance P.HasPreserveOptionsOrder (JobResource s) (TF.Attr s Text) where
     preserveOptionsOrder =
         lens (_preserve_options_order :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _preserve_options_order = a } :: JobResource s)
 
-instance P.HasProjectName (JobResource s) s Text where
+instance P.HasProjectName (JobResource s) (TF.Attr s Text) where
     projectName =
         lens (_project_name :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _project_name = a } :: JobResource s)
 
-instance P.HasRankAttribute (JobResource s) s Text where
+instance P.HasRankAttribute (JobResource s) (TF.Attr s Text) where
     rankAttribute =
         lens (_rank_attribute :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _rank_attribute = a } :: JobResource s)
 
-instance P.HasRankOrder (JobResource s) s Text where
+instance P.HasRankOrder (JobResource s) (TF.Attr s Text) where
     rankOrder =
         lens (_rank_order :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _rank_order = a } :: JobResource s)
 
-instance P.HasSchedule (JobResource s) s Text where
+instance P.HasSchedule (JobResource s) (TF.Attr s Text) where
     schedule =
         lens (_schedule :: JobResource s -> TF.Attr s Text)
              (\s a -> s { _schedule = a } :: JobResource s)
 
-instance P.HasComputedId (JobResource s) Text
+instance P.HasComputedId (JobResource s) (Text)
 
 jobResource :: TF.Schema TF.Resource P.Rundeck (JobResource s)
 jobResource =
@@ -285,16 +286,16 @@ data PrivateKeyResource s = PrivateKeyResource {
 
 instance TF.ToHCL (PrivateKeyResource s) where
     toHCL PrivateKeyResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "key_material" _key_material
-        , TF.attribute "path" _path
+        [ TF.assign "key_material" <$> TF.attribute _key_material
+        , TF.assign "path" <$> TF.attribute _path
         ]
 
-instance P.HasKeyMaterial (PrivateKeyResource s) s Text where
+instance P.HasKeyMaterial (PrivateKeyResource s) (TF.Attr s Text) where
     keyMaterial =
         lens (_key_material :: PrivateKeyResource s -> TF.Attr s Text)
              (\s a -> s { _key_material = a } :: PrivateKeyResource s)
 
-instance P.HasPath (PrivateKeyResource s) s Text where
+instance P.HasPath (PrivateKeyResource s) (TF.Attr s Text) where
     path =
         lens (_path :: PrivateKeyResource s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: PrivateKeyResource s)
@@ -337,64 +338,64 @@ data ProjectResource s = ProjectResource {
 
 instance TF.ToHCL (ProjectResource s) where
     toHCL ProjectResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "default_node_executor_plugin" _default_node_executor_plugin
-        , TF.attribute "default_node_file_copier_plugin" _default_node_file_copier_plugin
-        , TF.attribute "description" _description
-        , TF.attribute "extra_config" _extra_config
-        , TF.attribute "name" _name
-        , TF.attribute "resource_model_source" _resource_model_source
-        , TF.attribute "ssh_authentication_type" _ssh_authentication_type
-        , TF.attribute "ssh_key_file_path" _ssh_key_file_path
-        , TF.attribute "ssh_key_storage_path" _ssh_key_storage_path
+        [ TF.assign "default_node_executor_plugin" <$> TF.attribute _default_node_executor_plugin
+        , TF.assign "default_node_file_copier_plugin" <$> TF.attribute _default_node_file_copier_plugin
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "extra_config" <$> TF.attribute _extra_config
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "resource_model_source" <$> TF.attribute _resource_model_source
+        , TF.assign "ssh_authentication_type" <$> TF.attribute _ssh_authentication_type
+        , TF.assign "ssh_key_file_path" <$> TF.attribute _ssh_key_file_path
+        , TF.assign "ssh_key_storage_path" <$> TF.attribute _ssh_key_storage_path
         ]
 
-instance P.HasDefaultNodeExecutorPlugin (ProjectResource s) s Text where
+instance P.HasDefaultNodeExecutorPlugin (ProjectResource s) (TF.Attr s Text) where
     defaultNodeExecutorPlugin =
         lens (_default_node_executor_plugin :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _default_node_executor_plugin = a } :: ProjectResource s)
 
-instance P.HasDefaultNodeFileCopierPlugin (ProjectResource s) s Text where
+instance P.HasDefaultNodeFileCopierPlugin (ProjectResource s) (TF.Attr s Text) where
     defaultNodeFileCopierPlugin =
         lens (_default_node_file_copier_plugin :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _default_node_file_copier_plugin = a } :: ProjectResource s)
 
-instance P.HasDescription (ProjectResource s) s Text where
+instance P.HasDescription (ProjectResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ProjectResource s)
 
-instance P.HasExtraConfig (ProjectResource s) s Text where
+instance P.HasExtraConfig (ProjectResource s) (TF.Attr s Text) where
     extraConfig =
         lens (_extra_config :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _extra_config = a } :: ProjectResource s)
 
-instance P.HasName (ProjectResource s) s Text where
+instance P.HasName (ProjectResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ProjectResource s)
 
-instance P.HasResourceModelSource (ProjectResource s) s Text where
+instance P.HasResourceModelSource (ProjectResource s) (TF.Attr s Text) where
     resourceModelSource =
         lens (_resource_model_source :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _resource_model_source = a } :: ProjectResource s)
 
-instance P.HasSshAuthenticationType (ProjectResource s) s Text where
+instance P.HasSshAuthenticationType (ProjectResource s) (TF.Attr s Text) where
     sshAuthenticationType =
         lens (_ssh_authentication_type :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _ssh_authentication_type = a } :: ProjectResource s)
 
-instance P.HasSshKeyFilePath (ProjectResource s) s Text where
+instance P.HasSshKeyFilePath (ProjectResource s) (TF.Attr s Text) where
     sshKeyFilePath =
         lens (_ssh_key_file_path :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _ssh_key_file_path = a } :: ProjectResource s)
 
-instance P.HasSshKeyStoragePath (ProjectResource s) s Text where
+instance P.HasSshKeyStoragePath (ProjectResource s) (TF.Attr s Text) where
     sshKeyStoragePath =
         lens (_ssh_key_storage_path :: ProjectResource s -> TF.Attr s Text)
              (\s a -> s { _ssh_key_storage_path = a } :: ProjectResource s)
 
-instance P.HasComputedName (ProjectResource s) Text
-instance P.HasComputedUiUrl (ProjectResource s) Text
+instance P.HasComputedName (ProjectResource s) (Text)
+instance P.HasComputedUiUrl (ProjectResource s) (Text)
 
 projectResource :: TF.Schema TF.Resource P.Rundeck (ProjectResource s)
 projectResource =
@@ -430,28 +431,28 @@ data PublicKeyResource s = PublicKeyResource {
 
 instance TF.ToHCL (PublicKeyResource s) where
     toHCL PublicKeyResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "delete" _delete
-        , TF.attribute "key_material" _key_material
-        , TF.attribute "path" _path
+        [ TF.assign "delete" <$> TF.attribute _delete
+        , TF.assign "key_material" <$> TF.attribute _key_material
+        , TF.assign "path" <$> TF.attribute _path
         ]
 
-instance P.HasDelete (PublicKeyResource s) s Text where
+instance P.HasDelete (PublicKeyResource s) (TF.Attr s Text) where
     delete =
         lens (_delete :: PublicKeyResource s -> TF.Attr s Text)
              (\s a -> s { _delete = a } :: PublicKeyResource s)
 
-instance P.HasKeyMaterial (PublicKeyResource s) s Text where
+instance P.HasKeyMaterial (PublicKeyResource s) (TF.Attr s Text) where
     keyMaterial =
         lens (_key_material :: PublicKeyResource s -> TF.Attr s Text)
              (\s a -> s { _key_material = a } :: PublicKeyResource s)
 
-instance P.HasPath (PublicKeyResource s) s Text where
+instance P.HasPath (PublicKeyResource s) (TF.Attr s Text) where
     path =
         lens (_path :: PublicKeyResource s -> TF.Attr s Text)
              (\s a -> s { _path = a } :: PublicKeyResource s)
 
-instance P.HasComputedKeyMaterial (PublicKeyResource s) Text
-instance P.HasComputedUrl (PublicKeyResource s) Text
+instance P.HasComputedKeyMaterial (PublicKeyResource s) (Text)
+instance P.HasComputedUrl (PublicKeyResource s) (Text)
 
 publicKeyResource :: TF.Schema TF.Resource P.Rundeck (PublicKeyResource s)
 publicKeyResource =

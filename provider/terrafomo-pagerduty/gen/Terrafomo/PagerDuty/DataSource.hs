@@ -47,8 +47,9 @@ module Terrafomo.PagerDuty.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -80,15 +81,15 @@ data EscalationPolicyData s = EscalationPolicyData {
 
 instance TF.ToHCL (EscalationPolicyData s) where
     toHCL EscalationPolicyData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (EscalationPolicyData s) s Text where
+instance P.HasName (EscalationPolicyData s) (TF.Attr s Text) where
     name =
         lens (_name :: EscalationPolicyData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: EscalationPolicyData s)
 
-instance P.HasComputedName (EscalationPolicyData s) Text
+instance P.HasComputedName (EscalationPolicyData s) (Text)
 
 escalationPolicyData :: TF.Schema TF.DataSource P.PagerDuty (EscalationPolicyData s)
 escalationPolicyData =
@@ -110,15 +111,15 @@ data ScheduleData s = ScheduleData {
 
 instance TF.ToHCL (ScheduleData s) where
     toHCL ScheduleData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ScheduleData s) s Text where
+instance P.HasName (ScheduleData s) (TF.Attr s Text) where
     name =
         lens (_name :: ScheduleData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ScheduleData s)
 
-instance P.HasComputedName (ScheduleData s) Text
+instance P.HasComputedName (ScheduleData s) (Text)
 
 scheduleData :: TF.Schema TF.DataSource P.PagerDuty (ScheduleData s)
 scheduleData =
@@ -140,15 +141,15 @@ data UserData s = UserData {
 
 instance TF.ToHCL (UserData s) where
     toHCL UserData{..} = TF.inline $ catMaybes
-        [ TF.attribute "email" _email
+        [ TF.assign "email" <$> TF.attribute _email
         ]
 
-instance P.HasEmail (UserData s) s Text where
+instance P.HasEmail (UserData s) (TF.Attr s Text) where
     email =
         lens (_email :: UserData s -> TF.Attr s Text)
              (\s a -> s { _email = a } :: UserData s)
 
-instance P.HasComputedName (UserData s) Text
+instance P.HasComputedName (UserData s) (Text)
 
 userData :: TF.Schema TF.DataSource P.PagerDuty (UserData s)
 userData =
@@ -171,16 +172,16 @@ data VendorData s = VendorData {
 
 instance TF.ToHCL (VendorData s) where
     toHCL VendorData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (VendorData s) s Text where
+instance P.HasName (VendorData s) (TF.Attr s Text) where
     name =
         lens (_name :: VendorData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VendorData s)
 
-instance P.HasComputedName (VendorData s) Text
-instance P.HasComputedType' (VendorData s) Text
+instance P.HasComputedName (VendorData s) (Text)
+instance P.HasComputedType' (VendorData s) (Text)
 
 vendorData :: TF.Schema TF.DataSource P.PagerDuty (VendorData s)
 vendorData =

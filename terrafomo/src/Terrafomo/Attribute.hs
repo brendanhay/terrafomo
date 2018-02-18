@@ -28,9 +28,7 @@ data Attr s a
     | Flatten  ![Attr s a]      -- ^ A flattened comma-seperated list of attributes.
     | Constant !a               -- ^ A constant Haskell-value.
     | Nil
-      deriving (Show, Eq, Generic, Functor)
-    -- FIXME: This Functor instance was added as a hack and needs to be
-    -- very seriously reconsidered.
+      deriving (Show, Eq, Generic)
 
 instance Hashable a => Hashable (Attr s a)
 
@@ -40,9 +38,6 @@ instance IsString a => IsString (Attr s a) where
 compute :: Key -> Name -> Attr s a
 compute k v = Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))
 {-# INLINE compute #-}
-
--- list :: [Attr s a] -> Attr s [a]
--- list =
 
 flatten :: [Attr s a] -> Attr s a
 flatten = Flatten

@@ -242,8 +242,9 @@ module Terrafomo.OPC.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -280,28 +281,28 @@ data ComputeAclResource s = ComputeAclResource {
 
 instance TF.ToHCL (ComputeAclResource s) where
     toHCL ComputeAclResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "enabled" _enabled
-        , TF.attribute "name" _name
-        , TF.attribute "tags" _tags
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ComputeAclResource s) s Text where
+instance P.HasDescription (ComputeAclResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeAclResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeAclResource s)
 
-instance P.HasEnabled (ComputeAclResource s) s Text where
+instance P.HasEnabled (ComputeAclResource s) (TF.Attr s Text) where
     enabled =
         lens (_enabled :: ComputeAclResource s -> TF.Attr s Text)
              (\s a -> s { _enabled = a } :: ComputeAclResource s)
 
-instance P.HasName (ComputeAclResource s) s Text where
+instance P.HasName (ComputeAclResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeAclResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeAclResource s)
 
-instance P.HasTags (ComputeAclResource s) s Text where
+instance P.HasTags (ComputeAclResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeAclResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeAclResource s)
@@ -335,33 +336,33 @@ data ComputeImageListEntryResource s = ComputeImageListEntryResource {
 
 instance TF.ToHCL (ComputeImageListEntryResource s) where
     toHCL ComputeImageListEntryResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "attributes" _attributes
-        , TF.attribute "machine_images" _machine_images
-        , TF.attribute "name" _name
-        , TF.attribute "version" _version
+        [ TF.assign "attributes" <$> TF.attribute _attributes
+        , TF.assign "machine_images" <$> TF.attribute _machine_images
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance P.HasAttributes (ComputeImageListEntryResource s) s Text where
+instance P.HasAttributes (ComputeImageListEntryResource s) (TF.Attr s Text) where
     attributes =
         lens (_attributes :: ComputeImageListEntryResource s -> TF.Attr s Text)
              (\s a -> s { _attributes = a } :: ComputeImageListEntryResource s)
 
-instance P.HasMachineImages (ComputeImageListEntryResource s) s Text where
+instance P.HasMachineImages (ComputeImageListEntryResource s) (TF.Attr s Text) where
     machineImages =
         lens (_machine_images :: ComputeImageListEntryResource s -> TF.Attr s Text)
              (\s a -> s { _machine_images = a } :: ComputeImageListEntryResource s)
 
-instance P.HasName (ComputeImageListEntryResource s) s Text where
+instance P.HasName (ComputeImageListEntryResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeImageListEntryResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeImageListEntryResource s)
 
-instance P.HasVersion (ComputeImageListEntryResource s) s Text where
+instance P.HasVersion (ComputeImageListEntryResource s) (TF.Attr s Text) where
     version =
         lens (_version :: ComputeImageListEntryResource s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ComputeImageListEntryResource s)
 
-instance P.HasComputedUri (ComputeImageListEntryResource s) Text
+instance P.HasComputedUri (ComputeImageListEntryResource s) (Text)
 
 computeImageListEntryResource :: TF.Schema TF.Resource P.OPC (ComputeImageListEntryResource s)
 computeImageListEntryResource =
@@ -389,22 +390,22 @@ data ComputeImageListResource s = ComputeImageListResource {
 
 instance TF.ToHCL (ComputeImageListResource s) where
     toHCL ComputeImageListResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "default" _default'
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
+        [ TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDefault' (ComputeImageListResource s) s Text where
+instance P.HasDefault' (ComputeImageListResource s) (TF.Attr s Text) where
     default' =
         lens (_default' :: ComputeImageListResource s -> TF.Attr s Text)
              (\s a -> s { _default' = a } :: ComputeImageListResource s)
 
-instance P.HasDescription (ComputeImageListResource s) s Text where
+instance P.HasDescription (ComputeImageListResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeImageListResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeImageListResource s)
 
-instance P.HasName (ComputeImageListResource s) s Text where
+instance P.HasName (ComputeImageListResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeImageListResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeImageListResource s)
@@ -459,107 +460,107 @@ data ComputeInstanceResource s = ComputeInstanceResource {
 
 instance TF.ToHCL (ComputeInstanceResource s) where
     toHCL ComputeInstanceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "boot_order" _boot_order
-        , TF.attribute "desired_state" _desired_state
-        , TF.attribute "hostname" _hostname
-        , TF.attribute "image_list" _image_list
-        , TF.attribute "instance_attributes" _instance_attributes
-        , TF.attribute "label" _label
-        , TF.attribute "name" _name
-        , TF.attribute "networking_info" _networking_info
-        , TF.attribute "reverse_dns" _reverse_dns
-        , TF.attribute "shape" _shape
-        , TF.attribute "ssh_keys" _ssh_keys
-        , TF.attribute "storage" _storage
-        , TF.attribute "tags" _tags
+        [ TF.assign "boot_order" <$> TF.attribute _boot_order
+        , TF.assign "desired_state" <$> TF.attribute _desired_state
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "image_list" <$> TF.attribute _image_list
+        , TF.assign "instance_attributes" <$> TF.attribute _instance_attributes
+        , TF.assign "label" <$> TF.attribute _label
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "networking_info" <$> TF.attribute _networking_info
+        , TF.assign "reverse_dns" <$> TF.attribute _reverse_dns
+        , TF.assign "shape" <$> TF.attribute _shape
+        , TF.assign "ssh_keys" <$> TF.attribute _ssh_keys
+        , TF.assign "storage" <$> TF.attribute _storage
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasBootOrder (ComputeInstanceResource s) s Text where
+instance P.HasBootOrder (ComputeInstanceResource s) (TF.Attr s Text) where
     bootOrder =
         lens (_boot_order :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _boot_order = a } :: ComputeInstanceResource s)
 
-instance P.HasDesiredState (ComputeInstanceResource s) s Text where
+instance P.HasDesiredState (ComputeInstanceResource s) (TF.Attr s Text) where
     desiredState =
         lens (_desired_state :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _desired_state = a } :: ComputeInstanceResource s)
 
-instance P.HasHostname (ComputeInstanceResource s) s Text where
+instance P.HasHostname (ComputeInstanceResource s) (TF.Attr s Text) where
     hostname =
         lens (_hostname :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: ComputeInstanceResource s)
 
-instance P.HasImageList (ComputeInstanceResource s) s Text where
+instance P.HasImageList (ComputeInstanceResource s) (TF.Attr s Text) where
     imageList =
         lens (_image_list :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _image_list = a } :: ComputeInstanceResource s)
 
-instance P.HasInstanceAttributes (ComputeInstanceResource s) s Text where
+instance P.HasInstanceAttributes (ComputeInstanceResource s) (TF.Attr s Text) where
     instanceAttributes =
         lens (_instance_attributes :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance_attributes = a } :: ComputeInstanceResource s)
 
-instance P.HasLabel (ComputeInstanceResource s) s Text where
+instance P.HasLabel (ComputeInstanceResource s) (TF.Attr s Text) where
     label =
         lens (_label :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _label = a } :: ComputeInstanceResource s)
 
-instance P.HasName (ComputeInstanceResource s) s Text where
+instance P.HasName (ComputeInstanceResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeInstanceResource s)
 
-instance P.HasNetworkingInfo (ComputeInstanceResource s) s Text where
+instance P.HasNetworkingInfo (ComputeInstanceResource s) (TF.Attr s Text) where
     networkingInfo =
         lens (_networking_info :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _networking_info = a } :: ComputeInstanceResource s)
 
-instance P.HasReverseDns (ComputeInstanceResource s) s Text where
+instance P.HasReverseDns (ComputeInstanceResource s) (TF.Attr s Text) where
     reverseDns =
         lens (_reverse_dns :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _reverse_dns = a } :: ComputeInstanceResource s)
 
-instance P.HasShape (ComputeInstanceResource s) s Text where
+instance P.HasShape (ComputeInstanceResource s) (TF.Attr s Text) where
     shape =
         lens (_shape :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _shape = a } :: ComputeInstanceResource s)
 
-instance P.HasSshKeys (ComputeInstanceResource s) s Text where
+instance P.HasSshKeys (ComputeInstanceResource s) (TF.Attr s Text) where
     sshKeys =
         lens (_ssh_keys :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _ssh_keys = a } :: ComputeInstanceResource s)
 
-instance P.HasStorage (ComputeInstanceResource s) s Text where
+instance P.HasStorage (ComputeInstanceResource s) (TF.Attr s Text) where
     storage =
         lens (_storage :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _storage = a } :: ComputeInstanceResource s)
 
-instance P.HasTags (ComputeInstanceResource s) s Text where
+instance P.HasTags (ComputeInstanceResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeInstanceResource s)
 
-instance P.HasComputedAttributes (ComputeInstanceResource s) Text
-instance P.HasComputedAvailabilityDomain (ComputeInstanceResource s) Text
-instance P.HasComputedDomain (ComputeInstanceResource s) Text
-instance P.HasComputedEntry (ComputeInstanceResource s) Text
-instance P.HasComputedFingerprint (ComputeInstanceResource s) Text
-instance P.HasComputedFqdn (ComputeInstanceResource s) Text
-instance P.HasComputedId (ComputeInstanceResource s) Text
-instance P.HasComputedImageFormat (ComputeInstanceResource s) Text
-instance P.HasComputedIpAddress (ComputeInstanceResource s) Text
-instance P.HasComputedPlacementRequirements (ComputeInstanceResource s) Text
-instance P.HasComputedPlatform (ComputeInstanceResource s) Text
-instance P.HasComputedPriority (ComputeInstanceResource s) Text
-instance P.HasComputedQuotaReservation (ComputeInstanceResource s) Text
-instance P.HasComputedRelationships (ComputeInstanceResource s) Text
-instance P.HasComputedResolvers (ComputeInstanceResource s) Text
-instance P.HasComputedSite (ComputeInstanceResource s) Text
-instance P.HasComputedStartTime (ComputeInstanceResource s) Text
-instance P.HasComputedState (ComputeInstanceResource s) Text
-instance P.HasComputedVcableId (ComputeInstanceResource s) Text
-instance P.HasComputedVirtio (ComputeInstanceResource s) Text
-instance P.HasComputedVncAddress (ComputeInstanceResource s) Text
+instance P.HasComputedAttributes (ComputeInstanceResource s) (Text)
+instance P.HasComputedAvailabilityDomain (ComputeInstanceResource s) (Text)
+instance P.HasComputedDomain (ComputeInstanceResource s) (Text)
+instance P.HasComputedEntry (ComputeInstanceResource s) (Text)
+instance P.HasComputedFingerprint (ComputeInstanceResource s) (Text)
+instance P.HasComputedFqdn (ComputeInstanceResource s) (Text)
+instance P.HasComputedId (ComputeInstanceResource s) (Text)
+instance P.HasComputedImageFormat (ComputeInstanceResource s) (Text)
+instance P.HasComputedIpAddress (ComputeInstanceResource s) (Text)
+instance P.HasComputedPlacementRequirements (ComputeInstanceResource s) (Text)
+instance P.HasComputedPlatform (ComputeInstanceResource s) (Text)
+instance P.HasComputedPriority (ComputeInstanceResource s) (Text)
+instance P.HasComputedQuotaReservation (ComputeInstanceResource s) (Text)
+instance P.HasComputedRelationships (ComputeInstanceResource s) (Text)
+instance P.HasComputedResolvers (ComputeInstanceResource s) (Text)
+instance P.HasComputedSite (ComputeInstanceResource s) (Text)
+instance P.HasComputedStartTime (ComputeInstanceResource s) (Text)
+instance P.HasComputedState (ComputeInstanceResource s) (Text)
+instance P.HasComputedVcableId (ComputeInstanceResource s) (Text)
+instance P.HasComputedVirtio (ComputeInstanceResource s) (Text)
+instance P.HasComputedVncAddress (ComputeInstanceResource s) (Text)
 
 computeInstanceResource :: TF.Schema TF.Resource P.OPC (ComputeInstanceResource s)
 computeInstanceResource =
@@ -601,34 +602,34 @@ data ComputeIpAddressAssociationResource s = ComputeIpAddressAssociationResource
 
 instance TF.ToHCL (ComputeIpAddressAssociationResource s) where
     toHCL ComputeIpAddressAssociationResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "ip_address_reservation" _ip_address_reservation
-        , TF.attribute "name" _name
-        , TF.attribute "tags" _tags
-        , TF.attribute "vnic" _vnic
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address_reservation" <$> TF.attribute _ip_address_reservation
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vnic" <$> TF.attribute _vnic
         ]
 
-instance P.HasDescription (ComputeIpAddressAssociationResource s) s Text where
+instance P.HasDescription (ComputeIpAddressAssociationResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeIpAddressAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasIpAddressReservation (ComputeIpAddressAssociationResource s) s Text where
+instance P.HasIpAddressReservation (ComputeIpAddressAssociationResource s) (TF.Attr s Text) where
     ipAddressReservation =
         lens (_ip_address_reservation :: ComputeIpAddressAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address_reservation = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasName (ComputeIpAddressAssociationResource s) s Text where
+instance P.HasName (ComputeIpAddressAssociationResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeIpAddressAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasTags (ComputeIpAddressAssociationResource s) s Text where
+instance P.HasTags (ComputeIpAddressAssociationResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeIpAddressAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasVnic (ComputeIpAddressAssociationResource s) s Text where
+instance P.HasVnic (ComputeIpAddressAssociationResource s) (TF.Attr s Text) where
     vnic =
         lens (_vnic :: ComputeIpAddressAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _vnic = a } :: ComputeIpAddressAssociationResource s)
@@ -663,28 +664,28 @@ data ComputeIpAddressPrefixSetResource s = ComputeIpAddressPrefixSetResource {
 
 instance TF.ToHCL (ComputeIpAddressPrefixSetResource s) where
     toHCL ComputeIpAddressPrefixSetResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "prefixes" _prefixes
-        , TF.attribute "tags" _tags
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "prefixes" <$> TF.attribute _prefixes
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ComputeIpAddressPrefixSetResource s) s Text where
+instance P.HasDescription (ComputeIpAddressPrefixSetResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeIpAddressPrefixSetResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeIpAddressPrefixSetResource s)
 
-instance P.HasName (ComputeIpAddressPrefixSetResource s) s Text where
+instance P.HasName (ComputeIpAddressPrefixSetResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeIpAddressPrefixSetResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeIpAddressPrefixSetResource s)
 
-instance P.HasPrefixes (ComputeIpAddressPrefixSetResource s) s Text where
+instance P.HasPrefixes (ComputeIpAddressPrefixSetResource s) (TF.Attr s Text) where
     prefixes =
         lens (_prefixes :: ComputeIpAddressPrefixSetResource s -> TF.Attr s Text)
              (\s a -> s { _prefixes = a } :: ComputeIpAddressPrefixSetResource s)
 
-instance P.HasTags (ComputeIpAddressPrefixSetResource s) s Text where
+instance P.HasTags (ComputeIpAddressPrefixSetResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeIpAddressPrefixSetResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeIpAddressPrefixSetResource s)
@@ -718,28 +719,28 @@ data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource
 
 instance TF.ToHCL (ComputeIpAddressReservationResource s) where
     toHCL ComputeIpAddressReservationResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "ip_address_pool" _ip_address_pool
-        , TF.attribute "name" _name
-        , TF.attribute "tags" _tags
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address_pool" <$> TF.attribute _ip_address_pool
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ComputeIpAddressReservationResource s) s Text where
+instance P.HasDescription (ComputeIpAddressReservationResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeIpAddressReservationResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeIpAddressReservationResource s)
 
-instance P.HasIpAddressPool (ComputeIpAddressReservationResource s) s Text where
+instance P.HasIpAddressPool (ComputeIpAddressReservationResource s) (TF.Attr s Text) where
     ipAddressPool =
         lens (_ip_address_pool :: ComputeIpAddressReservationResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address_pool = a } :: ComputeIpAddressReservationResource s)
 
-instance P.HasName (ComputeIpAddressReservationResource s) s Text where
+instance P.HasName (ComputeIpAddressReservationResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeIpAddressReservationResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeIpAddressReservationResource s)
 
-instance P.HasTags (ComputeIpAddressReservationResource s) s Text where
+instance P.HasTags (ComputeIpAddressReservationResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeIpAddressReservationResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeIpAddressReservationResource s)
@@ -770,21 +771,21 @@ data ComputeIpAssociationResource s = ComputeIpAssociationResource {
 
 instance TF.ToHCL (ComputeIpAssociationResource s) where
     toHCL ComputeIpAssociationResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "parent_pool" _parent_pool
-        , TF.attribute "vcable" _vcable
+        [ TF.assign "parent_pool" <$> TF.attribute _parent_pool
+        , TF.assign "vcable" <$> TF.attribute _vcable
         ]
 
-instance P.HasParentPool (ComputeIpAssociationResource s) s Text where
+instance P.HasParentPool (ComputeIpAssociationResource s) (TF.Attr s Text) where
     parentPool =
         lens (_parent_pool :: ComputeIpAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _parent_pool = a } :: ComputeIpAssociationResource s)
 
-instance P.HasVcable (ComputeIpAssociationResource s) s Text where
+instance P.HasVcable (ComputeIpAssociationResource s) (TF.Attr s Text) where
     vcable =
         lens (_vcable :: ComputeIpAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _vcable = a } :: ComputeIpAssociationResource s)
 
-instance P.HasComputedName (ComputeIpAssociationResource s) Text
+instance P.HasComputedName (ComputeIpAssociationResource s) (Text)
 
 computeIpAssociationResource :: TF.Schema TF.Resource P.OPC (ComputeIpAssociationResource s)
 computeIpAssociationResource =
@@ -810,22 +811,22 @@ data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource {
 
 instance TF.ToHCL (ComputeIpNetworkExchangeResource s) where
     toHCL ComputeIpNetworkExchangeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "tags" _tags
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ComputeIpNetworkExchangeResource s) s Text where
+instance P.HasDescription (ComputeIpNetworkExchangeResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeIpNetworkExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeIpNetworkExchangeResource s)
 
-instance P.HasName (ComputeIpNetworkExchangeResource s) s Text where
+instance P.HasName (ComputeIpNetworkExchangeResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeIpNetworkExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeIpNetworkExchangeResource s)
 
-instance P.HasTags (ComputeIpNetworkExchangeResource s) s Text where
+instance P.HasTags (ComputeIpNetworkExchangeResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeIpNetworkExchangeResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeIpNetworkExchangeResource s)
@@ -859,44 +860,44 @@ data ComputeIpNetworkResource s = ComputeIpNetworkResource {
 
 instance TF.ToHCL (ComputeIpNetworkResource s) where
     toHCL ComputeIpNetworkResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "ip_address_prefix" _ip_address_prefix
-        , TF.attribute "ip_network_exchange" _ip_network_exchange
-        , TF.attribute "name" _name
-        , TF.attribute "public_napt_enabled" _public_napt_enabled
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address_prefix" <$> TF.attribute _ip_address_prefix
+        , TF.assign "ip_network_exchange" <$> TF.attribute _ip_network_exchange
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_napt_enabled" <$> TF.attribute _public_napt_enabled
         ]
 
-instance P.HasDescription (ComputeIpNetworkResource s) s Text where
+instance P.HasDescription (ComputeIpNetworkResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeIpNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeIpNetworkResource s)
 
-instance P.HasIpAddressPrefix (ComputeIpNetworkResource s) s Text where
+instance P.HasIpAddressPrefix (ComputeIpNetworkResource s) (TF.Attr s Text) where
     ipAddressPrefix =
         lens (_ip_address_prefix :: ComputeIpNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address_prefix = a } :: ComputeIpNetworkResource s)
 
-instance P.HasIpNetworkExchange (ComputeIpNetworkResource s) s Text where
+instance P.HasIpNetworkExchange (ComputeIpNetworkResource s) (TF.Attr s Text) where
     ipNetworkExchange =
         lens (_ip_network_exchange :: ComputeIpNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _ip_network_exchange = a } :: ComputeIpNetworkResource s)
 
-instance P.HasName (ComputeIpNetworkResource s) s Text where
+instance P.HasName (ComputeIpNetworkResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeIpNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeIpNetworkResource s)
 
-instance P.HasPublicNaptEnabled (ComputeIpNetworkResource s) s Text where
+instance P.HasPublicNaptEnabled (ComputeIpNetworkResource s) (TF.Attr s Text) where
     publicNaptEnabled =
         lens (_public_napt_enabled :: ComputeIpNetworkResource s -> TF.Attr s Text)
              (\s a -> s { _public_napt_enabled = a } :: ComputeIpNetworkResource s)
 
-instance P.HasComputedDescription (ComputeIpNetworkResource s) Text
-instance P.HasComputedIpAddressPrefix (ComputeIpNetworkResource s) Text
-instance P.HasComputedIpNetworkExchange (ComputeIpNetworkResource s) Text
-instance P.HasComputedName (ComputeIpNetworkResource s) Text
-instance P.HasComputedPublicNaptEnabled (ComputeIpNetworkResource s) Text
-instance P.HasComputedUri (ComputeIpNetworkResource s) Text
+instance P.HasComputedDescription (ComputeIpNetworkResource s) (Text)
+instance P.HasComputedIpAddressPrefix (ComputeIpNetworkResource s) (Text)
+instance P.HasComputedIpNetworkExchange (ComputeIpNetworkResource s) (Text)
+instance P.HasComputedName (ComputeIpNetworkResource s) (Text)
+instance P.HasComputedPublicNaptEnabled (ComputeIpNetworkResource s) (Text)
+instance P.HasComputedUri (ComputeIpNetworkResource s) (Text)
 
 computeIpNetworkResource :: TF.Schema TF.Resource P.OPC (ComputeIpNetworkResource s)
 computeIpNetworkResource =
@@ -927,28 +928,28 @@ data ComputeIpReservationResource s = ComputeIpReservationResource {
 
 instance TF.ToHCL (ComputeIpReservationResource s) where
     toHCL ComputeIpReservationResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "parent_pool" _parent_pool
-        , TF.attribute "permanent" _permanent
-        , TF.attribute "tags" _tags
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_pool" <$> TF.attribute _parent_pool
+        , TF.assign "permanent" <$> TF.attribute _permanent
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasName (ComputeIpReservationResource s) s Text where
+instance P.HasName (ComputeIpReservationResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeIpReservationResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeIpReservationResource s)
 
-instance P.HasParentPool (ComputeIpReservationResource s) s Text where
+instance P.HasParentPool (ComputeIpReservationResource s) (TF.Attr s Text) where
     parentPool =
         lens (_parent_pool :: ComputeIpReservationResource s -> TF.Attr s Text)
              (\s a -> s { _parent_pool = a } :: ComputeIpReservationResource s)
 
-instance P.HasPermanent (ComputeIpReservationResource s) s Text where
+instance P.HasPermanent (ComputeIpReservationResource s) (TF.Attr s Text) where
     permanent =
         lens (_permanent :: ComputeIpReservationResource s -> TF.Attr s Text)
              (\s a -> s { _permanent = a } :: ComputeIpReservationResource s)
 
-instance P.HasTags (ComputeIpReservationResource s) s Text where
+instance P.HasTags (ComputeIpReservationResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeIpReservationResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeIpReservationResource s)
@@ -987,34 +988,34 @@ data ComputeMachineImageResource s = ComputeMachineImageResource {
 
 instance TF.ToHCL (ComputeMachineImageResource s) where
     toHCL ComputeMachineImageResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "account" _account
-        , TF.attribute "attributes" _attributes
-        , TF.attribute "description" _description
-        , TF.attribute "file" _file
-        , TF.attribute "name" _name
+        [ TF.assign "account" <$> TF.attribute _account
+        , TF.assign "attributes" <$> TF.attribute _attributes
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "file" <$> TF.attribute _file
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasAccount (ComputeMachineImageResource s) s Text where
+instance P.HasAccount (ComputeMachineImageResource s) (TF.Attr s Text) where
     account =
         lens (_account :: ComputeMachineImageResource s -> TF.Attr s Text)
              (\s a -> s { _account = a } :: ComputeMachineImageResource s)
 
-instance P.HasAttributes (ComputeMachineImageResource s) s Text where
+instance P.HasAttributes (ComputeMachineImageResource s) (TF.Attr s Text) where
     attributes =
         lens (_attributes :: ComputeMachineImageResource s -> TF.Attr s Text)
              (\s a -> s { _attributes = a } :: ComputeMachineImageResource s)
 
-instance P.HasDescription (ComputeMachineImageResource s) s Text where
+instance P.HasDescription (ComputeMachineImageResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeMachineImageResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeMachineImageResource s)
 
-instance P.HasFile (ComputeMachineImageResource s) s Text where
+instance P.HasFile (ComputeMachineImageResource s) (TF.Attr s Text) where
     file =
         lens (_file :: ComputeMachineImageResource s -> TF.Attr s Text)
              (\s a -> s { _file = a } :: ComputeMachineImageResource s)
 
-instance P.HasName (ComputeMachineImageResource s) s Text where
+instance P.HasName (ComputeMachineImageResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeMachineImageResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeMachineImageResource s)
@@ -1049,28 +1050,28 @@ data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource
 
 instance TF.ToHCL (ComputeOrchestratedInstanceResource s) where
     toHCL ComputeOrchestratedInstanceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "desired_state" _desired_state
-        , TF.attribute "instance" _instance'
-        , TF.attribute "name" _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "desired_state" <$> TF.attribute _desired_state
+        , TF.assign "instance" <$> TF.attribute _instance'
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (ComputeOrchestratedInstanceResource s) s Text where
+instance P.HasDescription (ComputeOrchestratedInstanceResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeOrchestratedInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasDesiredState (ComputeOrchestratedInstanceResource s) s Text where
+instance P.HasDesiredState (ComputeOrchestratedInstanceResource s) (TF.Attr s Text) where
     desiredState =
         lens (_desired_state :: ComputeOrchestratedInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _desired_state = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasInstance' (ComputeOrchestratedInstanceResource s) s Text where
+instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s Text) where
     instance' =
         lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _instance' = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasName (ComputeOrchestratedInstanceResource s) s Text where
+instance P.HasName (ComputeOrchestratedInstanceResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeOrchestratedInstanceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeOrchestratedInstanceResource s)
@@ -1106,43 +1107,43 @@ data ComputeRouteResource s = ComputeRouteResource {
 
 instance TF.ToHCL (ComputeRouteResource s) where
     toHCL ComputeRouteResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "admin_distance" _admin_distance
-        , TF.attribute "description" _description
-        , TF.attribute "ip_address_prefix" _ip_address_prefix
-        , TF.attribute "name" _name
-        , TF.attribute "next_hop_vnic_set" _next_hop_vnic_set
+        [ TF.assign "admin_distance" <$> TF.attribute _admin_distance
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address_prefix" <$> TF.attribute _ip_address_prefix
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "next_hop_vnic_set" <$> TF.attribute _next_hop_vnic_set
         ]
 
-instance P.HasAdminDistance (ComputeRouteResource s) s Text where
+instance P.HasAdminDistance (ComputeRouteResource s) (TF.Attr s Text) where
     adminDistance =
         lens (_admin_distance :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _admin_distance = a } :: ComputeRouteResource s)
 
-instance P.HasDescription (ComputeRouteResource s) s Text where
+instance P.HasDescription (ComputeRouteResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeRouteResource s)
 
-instance P.HasIpAddressPrefix (ComputeRouteResource s) s Text where
+instance P.HasIpAddressPrefix (ComputeRouteResource s) (TF.Attr s Text) where
     ipAddressPrefix =
         lens (_ip_address_prefix :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address_prefix = a } :: ComputeRouteResource s)
 
-instance P.HasName (ComputeRouteResource s) s Text where
+instance P.HasName (ComputeRouteResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeRouteResource s)
 
-instance P.HasNextHopVnicSet (ComputeRouteResource s) s Text where
+instance P.HasNextHopVnicSet (ComputeRouteResource s) (TF.Attr s Text) where
     nextHopVnicSet =
         lens (_next_hop_vnic_set :: ComputeRouteResource s -> TF.Attr s Text)
              (\s a -> s { _next_hop_vnic_set = a } :: ComputeRouteResource s)
 
-instance P.HasComputedAdminDistance (ComputeRouteResource s) Text
-instance P.HasComputedDescription (ComputeRouteResource s) Text
-instance P.HasComputedIpAddressPrefix (ComputeRouteResource s) Text
-instance P.HasComputedName (ComputeRouteResource s) Text
-instance P.HasComputedNextHopVnicSet (ComputeRouteResource s) Text
+instance P.HasComputedAdminDistance (ComputeRouteResource s) (Text)
+instance P.HasComputedDescription (ComputeRouteResource s) (Text)
+instance P.HasComputedIpAddressPrefix (ComputeRouteResource s) (Text)
+instance P.HasComputedName (ComputeRouteResource s) (Text)
+instance P.HasComputedNextHopVnicSet (ComputeRouteResource s) (Text)
 
 computeRouteResource :: TF.Schema TF.Resource P.OPC (ComputeRouteResource s)
 computeRouteResource =
@@ -1181,46 +1182,46 @@ data ComputeSecRuleResource s = ComputeSecRuleResource {
 
 instance TF.ToHCL (ComputeSecRuleResource s) where
     toHCL ComputeSecRuleResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "action" _action
-        , TF.attribute "application" _application
-        , TF.attribute "description" _description
-        , TF.attribute "destination_list" _destination_list
-        , TF.attribute "disabled" _disabled
-        , TF.attribute "name" _name
-        , TF.attribute "source_list" _source_list
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "application" <$> TF.attribute _application
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "destination_list" <$> TF.attribute _destination_list
+        , TF.assign "disabled" <$> TF.attribute _disabled
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "source_list" <$> TF.attribute _source_list
         ]
 
-instance P.HasAction (ComputeSecRuleResource s) s Text where
+instance P.HasAction (ComputeSecRuleResource s) (TF.Attr s Text) where
     action =
         lens (_action :: ComputeSecRuleResource s -> TF.Attr s Text)
              (\s a -> s { _action = a } :: ComputeSecRuleResource s)
 
-instance P.HasApplication (ComputeSecRuleResource s) s Text where
+instance P.HasApplication (ComputeSecRuleResource s) (TF.Attr s Text) where
     application =
         lens (_application :: ComputeSecRuleResource s -> TF.Attr s Text)
              (\s a -> s { _application = a } :: ComputeSecRuleResource s)
 
-instance P.HasDescription (ComputeSecRuleResource s) s Text where
+instance P.HasDescription (ComputeSecRuleResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeSecRuleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeSecRuleResource s)
 
-instance P.HasDestinationList (ComputeSecRuleResource s) s Text where
+instance P.HasDestinationList (ComputeSecRuleResource s) (TF.Attr s Text) where
     destinationList =
         lens (_destination_list :: ComputeSecRuleResource s -> TF.Attr s Text)
              (\s a -> s { _destination_list = a } :: ComputeSecRuleResource s)
 
-instance P.HasDisabled (ComputeSecRuleResource s) s Text where
+instance P.HasDisabled (ComputeSecRuleResource s) (TF.Attr s Text) where
     disabled =
         lens (_disabled :: ComputeSecRuleResource s -> TF.Attr s Text)
              (\s a -> s { _disabled = a } :: ComputeSecRuleResource s)
 
-instance P.HasName (ComputeSecRuleResource s) s Text where
+instance P.HasName (ComputeSecRuleResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSecRuleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSecRuleResource s)
 
-instance P.HasSourceList (ComputeSecRuleResource s) s Text where
+instance P.HasSourceList (ComputeSecRuleResource s) (TF.Attr s Text) where
     sourceList =
         lens (_source_list :: ComputeSecRuleResource s -> TF.Attr s Text)
              (\s a -> s { _source_list = a } :: ComputeSecRuleResource s)
@@ -1259,34 +1260,34 @@ data ComputeSecurityApplicationResource s = ComputeSecurityApplicationResource {
 
 instance TF.ToHCL (ComputeSecurityApplicationResource s) where
     toHCL ComputeSecurityApplicationResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "dport" _dport
-        , TF.attribute "icmpcode" _icmpcode
-        , TF.attribute "icmptype" _icmptype
-        , TF.attribute "name" _name
-        , TF.attribute "protocol" _protocol
+        [ TF.assign "dport" <$> TF.attribute _dport
+        , TF.assign "icmpcode" <$> TF.attribute _icmpcode
+        , TF.assign "icmptype" <$> TF.attribute _icmptype
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "protocol" <$> TF.attribute _protocol
         ]
 
-instance P.HasDport (ComputeSecurityApplicationResource s) s Text where
+instance P.HasDport (ComputeSecurityApplicationResource s) (TF.Attr s Text) where
     dport =
         lens (_dport :: ComputeSecurityApplicationResource s -> TF.Attr s Text)
              (\s a -> s { _dport = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasIcmpcode (ComputeSecurityApplicationResource s) s Text where
+instance P.HasIcmpcode (ComputeSecurityApplicationResource s) (TF.Attr s Text) where
     icmpcode =
         lens (_icmpcode :: ComputeSecurityApplicationResource s -> TF.Attr s Text)
              (\s a -> s { _icmpcode = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasIcmptype (ComputeSecurityApplicationResource s) s Text where
+instance P.HasIcmptype (ComputeSecurityApplicationResource s) (TF.Attr s Text) where
     icmptype =
         lens (_icmptype :: ComputeSecurityApplicationResource s -> TF.Attr s Text)
              (\s a -> s { _icmptype = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasName (ComputeSecurityApplicationResource s) s Text where
+instance P.HasName (ComputeSecurityApplicationResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSecurityApplicationResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasProtocol (ComputeSecurityApplicationResource s) s Text where
+instance P.HasProtocol (ComputeSecurityApplicationResource s) (TF.Attr s Text) where
     protocol =
         lens (_protocol :: ComputeSecurityApplicationResource s -> TF.Attr s Text)
              (\s a -> s { _protocol = a } :: ComputeSecurityApplicationResource s)
@@ -1320,22 +1321,22 @@ data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource {
 
 instance TF.ToHCL (ComputeSecurityAssociationResource s) where
     toHCL ComputeSecurityAssociationResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "seclist" _seclist
-        , TF.attribute "vcable" _vcable
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "seclist" <$> TF.attribute _seclist
+        , TF.assign "vcable" <$> TF.attribute _vcable
         ]
 
-instance P.HasName (ComputeSecurityAssociationResource s) s Text where
+instance P.HasName (ComputeSecurityAssociationResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSecurityAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSecurityAssociationResource s)
 
-instance P.HasSeclist (ComputeSecurityAssociationResource s) s Text where
+instance P.HasSeclist (ComputeSecurityAssociationResource s) (TF.Attr s Text) where
     seclist =
         lens (_seclist :: ComputeSecurityAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _seclist = a } :: ComputeSecurityAssociationResource s)
 
-instance P.HasVcable (ComputeSecurityAssociationResource s) s Text where
+instance P.HasVcable (ComputeSecurityAssociationResource s) (TF.Attr s Text) where
     vcable =
         lens (_vcable :: ComputeSecurityAssociationResource s -> TF.Attr s Text)
              (\s a -> s { _vcable = a } :: ComputeSecurityAssociationResource s)
@@ -1366,22 +1367,22 @@ data ComputeSecurityIpListResource s = ComputeSecurityIpListResource {
 
 instance TF.ToHCL (ComputeSecurityIpListResource s) where
     toHCL ComputeSecurityIpListResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "ip_entries" _ip_entries
-        , TF.attribute "name" _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_entries" <$> TF.attribute _ip_entries
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (ComputeSecurityIpListResource s) s Text where
+instance P.HasDescription (ComputeSecurityIpListResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeSecurityIpListResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeSecurityIpListResource s)
 
-instance P.HasIpEntries (ComputeSecurityIpListResource s) s Text where
+instance P.HasIpEntries (ComputeSecurityIpListResource s) (TF.Attr s Text) where
     ipEntries =
         lens (_ip_entries :: ComputeSecurityIpListResource s -> TF.Attr s Text)
              (\s a -> s { _ip_entries = a } :: ComputeSecurityIpListResource s)
 
-instance P.HasName (ComputeSecurityIpListResource s) s Text where
+instance P.HasName (ComputeSecurityIpListResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSecurityIpListResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSecurityIpListResource s)
@@ -1412,22 +1413,22 @@ data ComputeSecurityListResource s = ComputeSecurityListResource {
 
 instance TF.ToHCL (ComputeSecurityListResource s) where
     toHCL ComputeSecurityListResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "output_cidr_policy" _output_cidr_policy
-        , TF.attribute "policy" _policy
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "output_cidr_policy" <$> TF.attribute _output_cidr_policy
+        , TF.assign "policy" <$> TF.attribute _policy
         ]
 
-instance P.HasName (ComputeSecurityListResource s) s Text where
+instance P.HasName (ComputeSecurityListResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSecurityListResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSecurityListResource s)
 
-instance P.HasOutputCidrPolicy (ComputeSecurityListResource s) s Text where
+instance P.HasOutputCidrPolicy (ComputeSecurityListResource s) (TF.Attr s Text) where
     outputCidrPolicy =
         lens (_output_cidr_policy :: ComputeSecurityListResource s -> TF.Attr s Text)
              (\s a -> s { _output_cidr_policy = a } :: ComputeSecurityListResource s)
 
-instance P.HasPolicy (ComputeSecurityListResource s) s Text where
+instance P.HasPolicy (ComputeSecurityListResource s) (TF.Attr s Text) where
     policy =
         lens (_policy :: ComputeSecurityListResource s -> TF.Attr s Text)
              (\s a -> s { _policy = a } :: ComputeSecurityListResource s)
@@ -1464,40 +1465,40 @@ data ComputeSecurityProtocolResource s = ComputeSecurityProtocolResource {
 
 instance TF.ToHCL (ComputeSecurityProtocolResource s) where
     toHCL ComputeSecurityProtocolResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "dst_ports" _dst_ports
-        , TF.attribute "ip_protocol" _ip_protocol
-        , TF.attribute "name" _name
-        , TF.attribute "src_ports" _src_ports
-        , TF.attribute "tags" _tags
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "dst_ports" <$> TF.attribute _dst_ports
+        , TF.assign "ip_protocol" <$> TF.attribute _ip_protocol
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "src_ports" <$> TF.attribute _src_ports
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasDescription (ComputeSecurityProtocolResource s) s Text where
+instance P.HasDescription (ComputeSecurityProtocolResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeSecurityProtocolResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasDstPorts (ComputeSecurityProtocolResource s) s Text where
+instance P.HasDstPorts (ComputeSecurityProtocolResource s) (TF.Attr s Text) where
     dstPorts =
         lens (_dst_ports :: ComputeSecurityProtocolResource s -> TF.Attr s Text)
              (\s a -> s { _dst_ports = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasIpProtocol (ComputeSecurityProtocolResource s) s Text where
+instance P.HasIpProtocol (ComputeSecurityProtocolResource s) (TF.Attr s Text) where
     ipProtocol =
         lens (_ip_protocol :: ComputeSecurityProtocolResource s -> TF.Attr s Text)
              (\s a -> s { _ip_protocol = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasName (ComputeSecurityProtocolResource s) s Text where
+instance P.HasName (ComputeSecurityProtocolResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSecurityProtocolResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasSrcPorts (ComputeSecurityProtocolResource s) s Text where
+instance P.HasSrcPorts (ComputeSecurityProtocolResource s) (TF.Attr s Text) where
     srcPorts =
         lens (_src_ports :: ComputeSecurityProtocolResource s -> TF.Attr s Text)
              (\s a -> s { _src_ports = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasTags (ComputeSecurityProtocolResource s) s Text where
+instance P.HasTags (ComputeSecurityProtocolResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeSecurityProtocolResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeSecurityProtocolResource s)
@@ -1547,75 +1548,75 @@ data ComputeSecurityRuleResource s = ComputeSecurityRuleResource {
 
 instance TF.ToHCL (ComputeSecurityRuleResource s) where
     toHCL ComputeSecurityRuleResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "acl" _acl
-        , TF.attribute "description" _description
-        , TF.attribute "disabled" _disabled
-        , TF.attribute "dst_ip_address_prefixes" _dst_ip_address_prefixes
-        , TF.attribute "dst_vnic_set" _dst_vnic_set
-        , TF.attribute "flow_direction" _flow_direction
-        , TF.attribute "name" _name
-        , TF.attribute "security_protocols" _security_protocols
-        , TF.attribute "src_ip_address_prefixes" _src_ip_address_prefixes
-        , TF.attribute "src_vnic_set" _src_vnic_set
-        , TF.attribute "tags" _tags
+        [ TF.assign "acl" <$> TF.attribute _acl
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "disabled" <$> TF.attribute _disabled
+        , TF.assign "dst_ip_address_prefixes" <$> TF.attribute _dst_ip_address_prefixes
+        , TF.assign "dst_vnic_set" <$> TF.attribute _dst_vnic_set
+        , TF.assign "flow_direction" <$> TF.attribute _flow_direction
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "security_protocols" <$> TF.attribute _security_protocols
+        , TF.assign "src_ip_address_prefixes" <$> TF.attribute _src_ip_address_prefixes
+        , TF.assign "src_vnic_set" <$> TF.attribute _src_vnic_set
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasAcl (ComputeSecurityRuleResource s) s Text where
+instance P.HasAcl (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     acl =
         lens (_acl :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _acl = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasDescription (ComputeSecurityRuleResource s) s Text where
+instance P.HasDescription (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasDisabled (ComputeSecurityRuleResource s) s Text where
+instance P.HasDisabled (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     disabled =
         lens (_disabled :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _disabled = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasDstIpAddressPrefixes (ComputeSecurityRuleResource s) s Text where
+instance P.HasDstIpAddressPrefixes (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     dstIpAddressPrefixes =
         lens (_dst_ip_address_prefixes :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _dst_ip_address_prefixes = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasDstVnicSet (ComputeSecurityRuleResource s) s Text where
+instance P.HasDstVnicSet (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     dstVnicSet =
         lens (_dst_vnic_set :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _dst_vnic_set = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasFlowDirection (ComputeSecurityRuleResource s) s Text where
+instance P.HasFlowDirection (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     flowDirection =
         lens (_flow_direction :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _flow_direction = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasName (ComputeSecurityRuleResource s) s Text where
+instance P.HasName (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasSecurityProtocols (ComputeSecurityRuleResource s) s Text where
+instance P.HasSecurityProtocols (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     securityProtocols =
         lens (_security_protocols :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _security_protocols = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasSrcIpAddressPrefixes (ComputeSecurityRuleResource s) s Text where
+instance P.HasSrcIpAddressPrefixes (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     srcIpAddressPrefixes =
         lens (_src_ip_address_prefixes :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _src_ip_address_prefixes = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasSrcVnicSet (ComputeSecurityRuleResource s) s Text where
+instance P.HasSrcVnicSet (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     srcVnicSet =
         lens (_src_vnic_set :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _src_vnic_set = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasTags (ComputeSecurityRuleResource s) s Text where
+instance P.HasTags (ComputeSecurityRuleResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeSecurityRuleResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasComputedUri (ComputeSecurityRuleResource s) Text
+instance P.HasComputedUri (ComputeSecurityRuleResource s) (Text)
 
 computeSecurityRuleResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityRuleResource s)
 computeSecurityRuleResource =
@@ -1650,22 +1651,22 @@ data ComputeSshKeyResource s = ComputeSshKeyResource {
 
 instance TF.ToHCL (ComputeSshKeyResource s) where
     toHCL ComputeSshKeyResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "enabled" _enabled
-        , TF.attribute "key" _key
-        , TF.attribute "name" _name
+        [ TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "key" <$> TF.attribute _key
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasEnabled (ComputeSshKeyResource s) s Text where
+instance P.HasEnabled (ComputeSshKeyResource s) (TF.Attr s Text) where
     enabled =
         lens (_enabled :: ComputeSshKeyResource s -> TF.Attr s Text)
              (\s a -> s { _enabled = a } :: ComputeSshKeyResource s)
 
-instance P.HasKey (ComputeSshKeyResource s) s Text where
+instance P.HasKey (ComputeSshKeyResource s) (TF.Attr s Text) where
     key =
         lens (_key :: ComputeSshKeyResource s -> TF.Attr s Text)
              (\s a -> s { _key = a } :: ComputeSshKeyResource s)
 
-instance P.HasName (ComputeSshKeyResource s) s Text where
+instance P.HasName (ComputeSshKeyResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeSshKeyResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeSshKeyResource s)
@@ -1696,22 +1697,22 @@ data ComputeStorageVolumeAttachmentResource s = ComputeStorageVolumeAttachmentRe
 
 instance TF.ToHCL (ComputeStorageVolumeAttachmentResource s) where
     toHCL ComputeStorageVolumeAttachmentResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "index" _index
-        , TF.attribute "instance" _instance'
-        , TF.attribute "storage_volume" _storage_volume
+        [ TF.assign "index" <$> TF.attribute _index
+        , TF.assign "instance" <$> TF.attribute _instance'
+        , TF.assign "storage_volume" <$> TF.attribute _storage_volume
         ]
 
-instance P.HasIndex (ComputeStorageVolumeAttachmentResource s) s Text where
+instance P.HasIndex (ComputeStorageVolumeAttachmentResource s) (TF.Attr s Text) where
     index =
         lens (_index :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _index = a } :: ComputeStorageVolumeAttachmentResource s)
 
-instance P.HasInstance' (ComputeStorageVolumeAttachmentResource s) s Text where
+instance P.HasInstance' (ComputeStorageVolumeAttachmentResource s) (TF.Attr s Text) where
     instance' =
         lens (_instance' :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _instance' = a } :: ComputeStorageVolumeAttachmentResource s)
 
-instance P.HasStorageVolume (ComputeStorageVolumeAttachmentResource s) s Text where
+instance P.HasStorageVolume (ComputeStorageVolumeAttachmentResource s) (TF.Attr s Text) where
     storageVolume =
         lens (_storage_volume :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s Text)
              (\s a -> s { _storage_volume = a } :: ComputeStorageVolumeAttachmentResource s)
@@ -1762,82 +1763,82 @@ data ComputeStorageVolumeResource s = ComputeStorageVolumeResource {
 
 instance TF.ToHCL (ComputeStorageVolumeResource s) where
     toHCL ComputeStorageVolumeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "bootable" _bootable
-        , TF.attribute "description" _description
-        , TF.attribute "image_list" _image_list
-        , TF.attribute "image_list_entry" _image_list_entry
-        , TF.attribute "name" _name
-        , TF.attribute "size" _size
-        , TF.attribute "snapshot" _snapshot
-        , TF.attribute "snapshot_account" _snapshot_account
-        , TF.attribute "snapshot_id" _snapshot_id
-        , TF.attribute "storage_type" _storage_type
-        , TF.attribute "tags" _tags
+        [ TF.assign "bootable" <$> TF.attribute _bootable
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "image_list" <$> TF.attribute _image_list
+        , TF.assign "image_list_entry" <$> TF.attribute _image_list_entry
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "snapshot" <$> TF.attribute _snapshot
+        , TF.assign "snapshot_account" <$> TF.attribute _snapshot_account
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshot_id
+        , TF.assign "storage_type" <$> TF.attribute _storage_type
+        , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasBootable (ComputeStorageVolumeResource s) s Text where
+instance P.HasBootable (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     bootable =
         lens (_bootable :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _bootable = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasDescription (ComputeStorageVolumeResource s) s Text where
+instance P.HasDescription (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasImageList (ComputeStorageVolumeResource s) s Text where
+instance P.HasImageList (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     imageList =
         lens (_image_list :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _image_list = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasImageListEntry (ComputeStorageVolumeResource s) s Text where
+instance P.HasImageListEntry (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     imageListEntry =
         lens (_image_list_entry :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _image_list_entry = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasName (ComputeStorageVolumeResource s) s Text where
+instance P.HasName (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSize (ComputeStorageVolumeResource s) s Text where
+instance P.HasSize (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     size =
         lens (_size :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _size = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSnapshot (ComputeStorageVolumeResource s) s Text where
+instance P.HasSnapshot (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     snapshot =
         lens (_snapshot :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSnapshotAccount (ComputeStorageVolumeResource s) s Text where
+instance P.HasSnapshotAccount (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     snapshotAccount =
         lens (_snapshot_account :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_account = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasSnapshotId (ComputeStorageVolumeResource s) s Text where
+instance P.HasSnapshotId (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     snapshotId =
         lens (_snapshot_id :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _snapshot_id = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasStorageType (ComputeStorageVolumeResource s) s Text where
+instance P.HasStorageType (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     storageType =
         lens (_storage_type :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _storage_type = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasTags (ComputeStorageVolumeResource s) s Text where
+instance P.HasTags (ComputeStorageVolumeResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeStorageVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasComputedHypervisor (ComputeStorageVolumeResource s) Text
-instance P.HasComputedMachineImage (ComputeStorageVolumeResource s) Text
-instance P.HasComputedManaged (ComputeStorageVolumeResource s) Text
-instance P.HasComputedPlatform (ComputeStorageVolumeResource s) Text
-instance P.HasComputedReadonly (ComputeStorageVolumeResource s) Text
-instance P.HasComputedStatus (ComputeStorageVolumeResource s) Text
-instance P.HasComputedStoragePool (ComputeStorageVolumeResource s) Text
-instance P.HasComputedUri (ComputeStorageVolumeResource s) Text
+instance P.HasComputedHypervisor (ComputeStorageVolumeResource s) (Text)
+instance P.HasComputedMachineImage (ComputeStorageVolumeResource s) (Text)
+instance P.HasComputedManaged (ComputeStorageVolumeResource s) (Text)
+instance P.HasComputedPlatform (ComputeStorageVolumeResource s) (Text)
+instance P.HasComputedReadonly (ComputeStorageVolumeResource s) (Text)
+instance P.HasComputedStatus (ComputeStorageVolumeResource s) (Text)
+instance P.HasComputedStoragePool (ComputeStorageVolumeResource s) (Text)
+instance P.HasComputedUri (ComputeStorageVolumeResource s) (Text)
 
 computeStorageVolumeResource :: TF.Schema TF.Resource P.OPC (ComputeStorageVolumeResource s)
 computeStorageVolumeResource =
@@ -1878,56 +1879,56 @@ data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResour
 
 instance TF.ToHCL (ComputeStorageVolumeSnapshotResource s) where
     toHCL ComputeStorageVolumeSnapshotResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "collocated" _collocated
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "parent_volume_bootable" _parent_volume_bootable
-        , TF.attribute "tags" _tags
-        , TF.attribute "volume_name" _volume_name
+        [ TF.assign "collocated" <$> TF.attribute _collocated
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_volume_bootable" <$> TF.attribute _parent_volume_bootable
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "volume_name" <$> TF.attribute _volume_name
         ]
 
-instance P.HasCollocated (ComputeStorageVolumeSnapshotResource s) s Text where
+instance P.HasCollocated (ComputeStorageVolumeSnapshotResource s) (TF.Attr s Text) where
     collocated =
         lens (_collocated :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _collocated = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasDescription (ComputeStorageVolumeSnapshotResource s) s Text where
+instance P.HasDescription (ComputeStorageVolumeSnapshotResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasName (ComputeStorageVolumeSnapshotResource s) s Text where
+instance P.HasName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasParentVolumeBootable (ComputeStorageVolumeSnapshotResource s) s Text where
+instance P.HasParentVolumeBootable (ComputeStorageVolumeSnapshotResource s) (TF.Attr s Text) where
     parentVolumeBootable =
         lens (_parent_volume_bootable :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _parent_volume_bootable = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasTags (ComputeStorageVolumeSnapshotResource s) s Text where
+instance P.HasTags (ComputeStorageVolumeSnapshotResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasVolumeName (ComputeStorageVolumeSnapshotResource s) s Text where
+instance P.HasVolumeName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s Text) where
     volumeName =
         lens (_volume_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s Text)
              (\s a -> s { _volume_name = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasComputedAccount (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedMachineImageName (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedPlatform (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedProperty (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedSize (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedSnapshotId (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedSnapshotTimestamp (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedStartTimestamp (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedStatus (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedStatusDetail (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotResource s) Text
-instance P.HasComputedUri (ComputeStorageVolumeSnapshotResource s) Text
+instance P.HasComputedAccount (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedMachineImageName (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedPlatform (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedProperty (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedSize (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedSnapshotId (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedSnapshotTimestamp (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedStartTimestamp (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedStatus (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedStatusDetail (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotResource s) (Text)
+instance P.HasComputedUri (ComputeStorageVolumeSnapshotResource s) (Text)
 
 computeStorageVolumeSnapshotResource :: TF.Schema TF.Resource P.OPC (ComputeStorageVolumeSnapshotResource s)
 computeStorageVolumeSnapshotResource =
@@ -1961,34 +1962,34 @@ data ComputeVnicSetResource s = ComputeVnicSetResource {
 
 instance TF.ToHCL (ComputeVnicSetResource s) where
     toHCL ComputeVnicSetResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "applied_acls" _applied_acls
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "tags" _tags
-        , TF.attribute "virtual_nics" _virtual_nics
+        [ TF.assign "applied_acls" <$> TF.attribute _applied_acls
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "virtual_nics" <$> TF.attribute _virtual_nics
         ]
 
-instance P.HasAppliedAcls (ComputeVnicSetResource s) s Text where
+instance P.HasAppliedAcls (ComputeVnicSetResource s) (TF.Attr s Text) where
     appliedAcls =
         lens (_applied_acls :: ComputeVnicSetResource s -> TF.Attr s Text)
              (\s a -> s { _applied_acls = a } :: ComputeVnicSetResource s)
 
-instance P.HasDescription (ComputeVnicSetResource s) s Text where
+instance P.HasDescription (ComputeVnicSetResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ComputeVnicSetResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ComputeVnicSetResource s)
 
-instance P.HasName (ComputeVnicSetResource s) s Text where
+instance P.HasName (ComputeVnicSetResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ComputeVnicSetResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ComputeVnicSetResource s)
 
-instance P.HasTags (ComputeVnicSetResource s) s Text where
+instance P.HasTags (ComputeVnicSetResource s) (TF.Attr s Text) where
     tags =
         lens (_tags :: ComputeVnicSetResource s -> TF.Attr s Text)
              (\s a -> s { _tags = a } :: ComputeVnicSetResource s)
 
-instance P.HasVirtualNics (ComputeVnicSetResource s) s Text where
+instance P.HasVirtualNics (ComputeVnicSetResource s) (TF.Attr s Text) where
     virtualNics =
         lens (_virtual_nics :: ComputeVnicSetResource s -> TF.Attr s Text)
              (\s a -> s { _virtual_nics = a } :: ComputeVnicSetResource s)
@@ -2038,70 +2039,70 @@ data StorageContainerResource s = StorageContainerResource {
 
 instance TF.ToHCL (StorageContainerResource s) where
     toHCL StorageContainerResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "allowed_origins" _allowed_origins
-        , TF.attribute "exposed_headers" _exposed_headers
-        , TF.attribute "max_age" _max_age
-        , TF.attribute "metadata" _metadata
-        , TF.attribute "name" _name
-        , TF.attribute "primary_key" _primary_key
-        , TF.attribute "quota_bytes" _quota_bytes
-        , TF.attribute "quota_count" _quota_count
-        , TF.attribute "read_acls" _read_acls
-        , TF.attribute "secondary_key" _secondary_key
-        , TF.attribute "write_acls" _write_acls
+        [ TF.assign "allowed_origins" <$> TF.attribute _allowed_origins
+        , TF.assign "exposed_headers" <$> TF.attribute _exposed_headers
+        , TF.assign "max_age" <$> TF.attribute _max_age
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "primary_key" <$> TF.attribute _primary_key
+        , TF.assign "quota_bytes" <$> TF.attribute _quota_bytes
+        , TF.assign "quota_count" <$> TF.attribute _quota_count
+        , TF.assign "read_acls" <$> TF.attribute _read_acls
+        , TF.assign "secondary_key" <$> TF.attribute _secondary_key
+        , TF.assign "write_acls" <$> TF.attribute _write_acls
         ]
 
-instance P.HasAllowedOrigins (StorageContainerResource s) s Text where
+instance P.HasAllowedOrigins (StorageContainerResource s) (TF.Attr s Text) where
     allowedOrigins =
         lens (_allowed_origins :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _allowed_origins = a } :: StorageContainerResource s)
 
-instance P.HasExposedHeaders (StorageContainerResource s) s Text where
+instance P.HasExposedHeaders (StorageContainerResource s) (TF.Attr s Text) where
     exposedHeaders =
         lens (_exposed_headers :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _exposed_headers = a } :: StorageContainerResource s)
 
-instance P.HasMaxAge (StorageContainerResource s) s Text where
+instance P.HasMaxAge (StorageContainerResource s) (TF.Attr s Text) where
     maxAge =
         lens (_max_age :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _max_age = a } :: StorageContainerResource s)
 
-instance P.HasMetadata (StorageContainerResource s) s Text where
+instance P.HasMetadata (StorageContainerResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: StorageContainerResource s)
 
-instance P.HasName (StorageContainerResource s) s Text where
+instance P.HasName (StorageContainerResource s) (TF.Attr s Text) where
     name =
         lens (_name :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: StorageContainerResource s)
 
-instance P.HasPrimaryKey (StorageContainerResource s) s Text where
+instance P.HasPrimaryKey (StorageContainerResource s) (TF.Attr s Text) where
     primaryKey =
         lens (_primary_key :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _primary_key = a } :: StorageContainerResource s)
 
-instance P.HasQuotaBytes (StorageContainerResource s) s Text where
+instance P.HasQuotaBytes (StorageContainerResource s) (TF.Attr s Text) where
     quotaBytes =
         lens (_quota_bytes :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _quota_bytes = a } :: StorageContainerResource s)
 
-instance P.HasQuotaCount (StorageContainerResource s) s Text where
+instance P.HasQuotaCount (StorageContainerResource s) (TF.Attr s Text) where
     quotaCount =
         lens (_quota_count :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _quota_count = a } :: StorageContainerResource s)
 
-instance P.HasReadAcls (StorageContainerResource s) s Text where
+instance P.HasReadAcls (StorageContainerResource s) (TF.Attr s Text) where
     readAcls =
         lens (_read_acls :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _read_acls = a } :: StorageContainerResource s)
 
-instance P.HasSecondaryKey (StorageContainerResource s) s Text where
+instance P.HasSecondaryKey (StorageContainerResource s) (TF.Attr s Text) where
     secondaryKey =
         lens (_secondary_key :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _secondary_key = a } :: StorageContainerResource s)
 
-instance P.HasWriteAcls (StorageContainerResource s) s Text where
+instance P.HasWriteAcls (StorageContainerResource s) (TF.Attr s Text) where
     writeAcls =
         lens (_write_acls :: StorageContainerResource s -> TF.Attr s Text)
              (\s a -> s { _write_acls = a } :: StorageContainerResource s)
@@ -2139,16 +2140,16 @@ data StorageObjectResource s = StorageObjectResource {
 
 instance TF.ToHCL (StorageObjectResource s) where
     toHCL StorageObjectResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "container" _container
-        , TF.attribute "name" _name
+        [ TF.assign "container" <$> TF.attribute _container
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasContainer (StorageObjectResource s) s Text where
+instance P.HasContainer (StorageObjectResource s) (TF.Attr s Text) where
     container =
         lens (_container :: StorageObjectResource s -> TF.Attr s Text)
              (\s a -> s { _container = a } :: StorageObjectResource s)
 
-instance P.HasName (StorageObjectResource s) s Text where
+instance P.HasName (StorageObjectResource s) (TF.Attr s Text) where
     name =
         lens (_name :: StorageObjectResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: StorageObjectResource s)

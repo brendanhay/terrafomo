@@ -45,8 +45,9 @@ module Terrafomo.StatusCake.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -94,69 +95,69 @@ data TestResource s = TestResource {
 
 instance TF.ToHCL (TestResource s) where
     toHCL TestResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "check_rate" _check_rate
-        , TF.attribute "confirmations" _confirmations
-        , TF.attribute "contact_id" _contact_id
-        , TF.attribute "paused" _paused
-        , TF.attribute "port" _port
-        , TF.attribute "test_type" _test_type
-        , TF.attribute "timeout" _timeout
-        , TF.attribute "trigger_rate" _trigger_rate
-        , TF.attribute "website_name" _website_name
-        , TF.attribute "website_url" _website_url
+        [ TF.assign "check_rate" <$> TF.attribute _check_rate
+        , TF.assign "confirmations" <$> TF.attribute _confirmations
+        , TF.assign "contact_id" <$> TF.attribute _contact_id
+        , TF.assign "paused" <$> TF.attribute _paused
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "test_type" <$> TF.attribute _test_type
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        , TF.assign "trigger_rate" <$> TF.attribute _trigger_rate
+        , TF.assign "website_name" <$> TF.attribute _website_name
+        , TF.assign "website_url" <$> TF.attribute _website_url
         ]
 
-instance P.HasCheckRate (TestResource s) s Text where
+instance P.HasCheckRate (TestResource s) (TF.Attr s Text) where
     checkRate =
         lens (_check_rate :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _check_rate = a } :: TestResource s)
 
-instance P.HasConfirmations (TestResource s) s Text where
+instance P.HasConfirmations (TestResource s) (TF.Attr s Text) where
     confirmations =
         lens (_confirmations :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _confirmations = a } :: TestResource s)
 
-instance P.HasContactId (TestResource s) s Text where
+instance P.HasContactId (TestResource s) (TF.Attr s Text) where
     contactId =
         lens (_contact_id :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _contact_id = a } :: TestResource s)
 
-instance P.HasPaused (TestResource s) s Text where
+instance P.HasPaused (TestResource s) (TF.Attr s Text) where
     paused =
         lens (_paused :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _paused = a } :: TestResource s)
 
-instance P.HasPort (TestResource s) s Text where
+instance P.HasPort (TestResource s) (TF.Attr s Text) where
     port =
         lens (_port :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: TestResource s)
 
-instance P.HasTestType (TestResource s) s Text where
+instance P.HasTestType (TestResource s) (TF.Attr s Text) where
     testType =
         lens (_test_type :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _test_type = a } :: TestResource s)
 
-instance P.HasTimeout (TestResource s) s Text where
+instance P.HasTimeout (TestResource s) (TF.Attr s Text) where
     timeout =
         lens (_timeout :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _timeout = a } :: TestResource s)
 
-instance P.HasTriggerRate (TestResource s) s Text where
+instance P.HasTriggerRate (TestResource s) (TF.Attr s Text) where
     triggerRate =
         lens (_trigger_rate :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _trigger_rate = a } :: TestResource s)
 
-instance P.HasWebsiteName (TestResource s) s Text where
+instance P.HasWebsiteName (TestResource s) (TF.Attr s Text) where
     websiteName =
         lens (_website_name :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _website_name = a } :: TestResource s)
 
-instance P.HasWebsiteUrl (TestResource s) s Text where
+instance P.HasWebsiteUrl (TestResource s) (TF.Attr s Text) where
     websiteUrl =
         lens (_website_url :: TestResource s -> TF.Attr s Text)
              (\s a -> s { _website_url = a } :: TestResource s)
 
-instance P.HasComputedTestId (TestResource s) Text
+instance P.HasComputedTestId (TestResource s) (Text)
 
 testResource :: TF.Schema TF.Resource P.StatusCake (TestResource s)
 testResource =

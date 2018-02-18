@@ -46,8 +46,9 @@ module Terrafomo.OpsGenie.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -81,27 +82,27 @@ data TeamResource s = TeamResource {
 
 instance TF.ToHCL (TeamResource s) where
     toHCL TeamResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "description" _description
-        , TF.attribute "member" _member
-        , TF.attribute "name" _name
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "member" <$> TF.attribute _member
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (TeamResource s) s Text where
+instance P.HasDescription (TeamResource s) (TF.Attr s Text) where
     description =
         lens (_description :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: TeamResource s)
 
-instance P.HasMember (TeamResource s) s Text where
+instance P.HasMember (TeamResource s) (TF.Attr s Text) where
     member =
         lens (_member :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _member = a } :: TeamResource s)
 
-instance P.HasName (TeamResource s) s Text where
+instance P.HasName (TeamResource s) (TF.Attr s Text) where
     name =
         lens (_name :: TeamResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TeamResource s)
 
-instance P.HasComputedId (TeamResource s) Text
+instance P.HasComputedId (TeamResource s) (Text)
 
 teamResource :: TF.Schema TF.Resource P.OpsGenie (TeamResource s)
 teamResource =
@@ -131,39 +132,39 @@ data UserResource s = UserResource {
 
 instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "full_name" _full_name
-        , TF.attribute "locale" _locale
-        , TF.attribute "role" _role
-        , TF.attribute "timezone" _timezone
-        , TF.attribute "username" _username
+        [ TF.assign "full_name" <$> TF.attribute _full_name
+        , TF.assign "locale" <$> TF.attribute _locale
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "timezone" <$> TF.attribute _timezone
+        , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasFullName (UserResource s) s Text where
+instance P.HasFullName (UserResource s) (TF.Attr s Text) where
     fullName =
         lens (_full_name :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _full_name = a } :: UserResource s)
 
-instance P.HasLocale (UserResource s) s Text where
+instance P.HasLocale (UserResource s) (TF.Attr s Text) where
     locale =
         lens (_locale :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _locale = a } :: UserResource s)
 
-instance P.HasRole (UserResource s) s Text where
+instance P.HasRole (UserResource s) (TF.Attr s Text) where
     role =
         lens (_role :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _role = a } :: UserResource s)
 
-instance P.HasTimezone (UserResource s) s Text where
+instance P.HasTimezone (UserResource s) (TF.Attr s Text) where
     timezone =
         lens (_timezone :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _timezone = a } :: UserResource s)
 
-instance P.HasUsername (UserResource s) s Text where
+instance P.HasUsername (UserResource s) (TF.Attr s Text) where
     username =
         lens (_username :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserResource s)
 
-instance P.HasComputedId (UserResource s) Text
+instance P.HasComputedId (UserResource s) (Text)
 
 userResource :: TF.Schema TF.Resource P.OpsGenie (UserResource s)
 userResource =

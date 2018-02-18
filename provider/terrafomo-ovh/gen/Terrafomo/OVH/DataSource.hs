@@ -45,8 +45,9 @@ module Terrafomo.OVH.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -79,25 +80,25 @@ data RegionData s = RegionData {
 
 instance TF.ToHCL (RegionData s) where
     toHCL RegionData{..} = TF.inline $ catMaybes
-        [ TF.attribute "project_id" _project_id
-        , TF.attribute "region" _region
+        [ TF.assign "project_id" <$> TF.attribute _project_id
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasProjectId (RegionData s) s Text where
+instance P.HasProjectId (RegionData s) (TF.Attr s Text) where
     projectId =
         lens (_project_id :: RegionData s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: RegionData s)
 
-instance P.HasRegion (RegionData s) s Text where
+instance P.HasRegion (RegionData s) (TF.Attr s Text) where
     region =
         lens (_region :: RegionData s -> TF.Attr s Text)
              (\s a -> s { _region = a } :: RegionData s)
 
-instance P.HasComputedContinentCode (RegionData s) Text
-instance P.HasComputedContinentCode (RegionData s) Text
-instance P.HasComputedDatacenterLocation (RegionData s) Text
-instance P.HasComputedDatacenterLocation (RegionData s) Text
-instance P.HasComputedServices (RegionData s) Text
+instance P.HasComputedContinentCode (RegionData s) (Text)
+instance P.HasComputedContinentCode (RegionData s) (Text)
+instance P.HasComputedDatacenterLocation (RegionData s) (Text)
+instance P.HasComputedDatacenterLocation (RegionData s) (Text)
+instance P.HasComputedServices (RegionData s) (Text)
 
 regionData :: TF.Schema TF.DataSource P.OVH (RegionData s)
 regionData =
@@ -118,15 +119,15 @@ data RegionsData s = RegionsData {
 
 instance TF.ToHCL (RegionsData s) where
     toHCL RegionsData{..} = TF.inline $ catMaybes
-        [ TF.attribute "project_id" _project_id
+        [ TF.assign "project_id" <$> TF.attribute _project_id
         ]
 
-instance P.HasProjectId (RegionsData s) s Text where
+instance P.HasProjectId (RegionsData s) (TF.Attr s Text) where
     projectId =
         lens (_project_id :: RegionsData s -> TF.Attr s Text)
              (\s a -> s { _project_id = a } :: RegionsData s)
 
-instance P.HasComputedNames (RegionsData s) Text
+instance P.HasComputedNames (RegionsData s) (Text)
 
 regionsData :: TF.Schema TF.DataSource P.OVH (RegionsData s)
 regionsData =

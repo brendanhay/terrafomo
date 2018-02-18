@@ -53,46 +53,46 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasDomain a s b | a -> s b where
-    domain :: Lens' a (TF.Attr s b)
+class HasDomain a b | a -> b where
+    domain :: Lens' a b
 
-instance HasDomain a s b => HasDomain (TF.Schema l p a) s b where
+instance HasDomain a b => HasDomain (TF.Schema l p a) b where
     domain = TF.configuration . domain
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasPriority a s b | a -> s b where
-    priority :: Lens' a (TF.Attr s b)
+class HasPriority a b | a -> b where
+    priority :: Lens' a b
 
-instance HasPriority a s b => HasPriority (TF.Schema l p a) s b where
+instance HasPriority a b => HasPriority (TF.Schema l p a) b where
     priority = TF.configuration . priority
 
-class HasProxied a s b | a -> s b where
-    proxied :: Lens' a (TF.Attr s b)
+class HasProxied a b | a -> b where
+    proxied :: Lens' a b
 
-instance HasProxied a s b => HasProxied (TF.Schema l p a) s b where
+instance HasProxied a b => HasProxied (TF.Schema l p a) b where
     proxied = TF.configuration . proxied
 
-class HasTtl a s b | a -> s b where
-    ttl :: Lens' a (TF.Attr s b)
+class HasTtl a b | a -> b where
+    ttl :: Lens' a b
 
-instance HasTtl a s b => HasTtl (TF.Schema l p a) s b where
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
     ttl = TF.configuration . ttl
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasValue a s b | a -> s b where
-    value :: Lens' a (TF.Attr s b)
+class HasValue a b | a -> b where
+    value :: Lens' a b
 
-instance HasValue a s b => HasValue (TF.Schema l p a) s b where
+instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
 class HasComputedCidrBlocks a b | a -> b where

@@ -38,8 +38,9 @@ module Terrafomo.Kubernetes.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -71,10 +72,10 @@ data ServiceData s = ServiceData {
 
 instance TF.ToHCL (ServiceData s) where
     toHCL ServiceData{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
+        [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
-instance P.HasMetadata (ServiceData s) s Text where
+instance P.HasMetadata (ServiceData s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ServiceData s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ServiceData s)
@@ -101,10 +102,10 @@ data StorageClassData s = StorageClassData {
 
 instance TF.ToHCL (StorageClassData s) where
     toHCL StorageClassData{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
+        [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
-instance P.HasMetadata (StorageClassData s) s Text where
+instance P.HasMetadata (StorageClassData s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: StorageClassData s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: StorageClassData s)

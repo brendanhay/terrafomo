@@ -83,8 +83,9 @@ module Terrafomo.CenturyLinkCloud.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -125,40 +126,40 @@ data GroupResource s = GroupResource {
 
 instance TF.ToHCL (GroupResource s) where
     toHCL GroupResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "custom_fields" _custom_fields
-        , TF.attribute "description" _description
-        , TF.attribute "location_id" _location_id
-        , TF.attribute "name" _name
-        , TF.attribute "parent" _parent
-        , TF.attribute "parent_group_id" _parent_group_id
+        [ TF.assign "custom_fields" <$> TF.attribute _custom_fields
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "location_id" <$> TF.attribute _location_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent" <$> TF.attribute _parent
+        , TF.assign "parent_group_id" <$> TF.attribute _parent_group_id
         ]
 
-instance P.HasCustomFields (GroupResource s) s Text where
+instance P.HasCustomFields (GroupResource s) (TF.Attr s Text) where
     customFields =
         lens (_custom_fields :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _custom_fields = a } :: GroupResource s)
 
-instance P.HasDescription (GroupResource s) s Text where
+instance P.HasDescription (GroupResource s) (TF.Attr s Text) where
     description =
         lens (_description :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: GroupResource s)
 
-instance P.HasLocationId (GroupResource s) s Text where
+instance P.HasLocationId (GroupResource s) (TF.Attr s Text) where
     locationId =
         lens (_location_id :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _location_id = a } :: GroupResource s)
 
-instance P.HasName (GroupResource s) s Text where
+instance P.HasName (GroupResource s) (TF.Attr s Text) where
     name =
         lens (_name :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: GroupResource s)
 
-instance P.HasParent (GroupResource s) s Text where
+instance P.HasParent (GroupResource s) (TF.Attr s Text) where
     parent =
         lens (_parent :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _parent = a } :: GroupResource s)
 
-instance P.HasParentGroupId (GroupResource s) s Text where
+instance P.HasParentGroupId (GroupResource s) (TF.Attr s Text) where
     parentGroupId =
         lens (_parent_group_id :: GroupResource s -> TF.Attr s Text)
              (\s a -> s { _parent_group_id = a } :: GroupResource s)
@@ -199,40 +200,40 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource {
 
 instance TF.ToHCL (LoadBalancerPoolResource s) where
     toHCL LoadBalancerPoolResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "data_center" _data_center
-        , TF.attribute "load_balancer" _load_balancer
-        , TF.attribute "method" _method
-        , TF.attribute "nodes" _nodes
-        , TF.attribute "persistence" _persistence
-        , TF.attribute "port" _port
+        [ TF.assign "data_center" <$> TF.attribute _data_center
+        , TF.assign "load_balancer" <$> TF.attribute _load_balancer
+        , TF.assign "method" <$> TF.attribute _method
+        , TF.assign "nodes" <$> TF.attribute _nodes
+        , TF.assign "persistence" <$> TF.attribute _persistence
+        , TF.assign "port" <$> TF.attribute _port
         ]
 
-instance P.HasDataCenter (LoadBalancerPoolResource s) s Text where
+instance P.HasDataCenter (LoadBalancerPoolResource s) (TF.Attr s Text) where
     dataCenter =
         lens (_data_center :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _data_center = a } :: LoadBalancerPoolResource s)
 
-instance P.HasLoadBalancer (LoadBalancerPoolResource s) s Text where
+instance P.HasLoadBalancer (LoadBalancerPoolResource s) (TF.Attr s Text) where
     loadBalancer =
         lens (_load_balancer :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _load_balancer = a } :: LoadBalancerPoolResource s)
 
-instance P.HasMethod (LoadBalancerPoolResource s) s Text where
+instance P.HasMethod (LoadBalancerPoolResource s) (TF.Attr s Text) where
     method =
         lens (_method :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _method = a } :: LoadBalancerPoolResource s)
 
-instance P.HasNodes (LoadBalancerPoolResource s) s Text where
+instance P.HasNodes (LoadBalancerPoolResource s) (TF.Attr s Text) where
     nodes =
         lens (_nodes :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _nodes = a } :: LoadBalancerPoolResource s)
 
-instance P.HasPersistence (LoadBalancerPoolResource s) s Text where
+instance P.HasPersistence (LoadBalancerPoolResource s) (TF.Attr s Text) where
     persistence =
         lens (_persistence :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _persistence = a } :: LoadBalancerPoolResource s)
 
-instance P.HasPort (LoadBalancerPoolResource s) s Text where
+instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s Text) where
     port =
         lens (_port :: LoadBalancerPoolResource s -> TF.Attr s Text)
              (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
@@ -271,34 +272,34 @@ data LoadBalancerResource s = LoadBalancerResource {
 
 instance TF.ToHCL (LoadBalancerResource s) where
     toHCL LoadBalancerResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "data_center" _data_center
-        , TF.attribute "description" _description
-        , TF.attribute "ip_address" _ip_address
-        , TF.attribute "name" _name
-        , TF.attribute "status" _status
+        [ TF.assign "data_center" <$> TF.attribute _data_center
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address" <$> TF.attribute _ip_address
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "status" <$> TF.attribute _status
         ]
 
-instance P.HasDataCenter (LoadBalancerResource s) s Text where
+instance P.HasDataCenter (LoadBalancerResource s) (TF.Attr s Text) where
     dataCenter =
         lens (_data_center :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _data_center = a } :: LoadBalancerResource s)
 
-instance P.HasDescription (LoadBalancerResource s) s Text where
+instance P.HasDescription (LoadBalancerResource s) (TF.Attr s Text) where
     description =
         lens (_description :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: LoadBalancerResource s)
 
-instance P.HasIpAddress (LoadBalancerResource s) s Text where
+instance P.HasIpAddress (LoadBalancerResource s) (TF.Attr s Text) where
     ipAddress =
         lens (_ip_address :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _ip_address = a } :: LoadBalancerResource s)
 
-instance P.HasName (LoadBalancerResource s) s Text where
+instance P.HasName (LoadBalancerResource s) (TF.Attr s Text) where
     name =
         lens (_name :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LoadBalancerResource s)
 
-instance P.HasStatus (LoadBalancerResource s) s Text where
+instance P.HasStatus (LoadBalancerResource s) (TF.Attr s Text) where
     status =
         lens (_status :: LoadBalancerResource s -> TF.Attr s Text)
              (\s a -> s { _status = a } :: LoadBalancerResource s)
@@ -333,28 +334,28 @@ data PublicIpResource s = PublicIpResource {
 
 instance TF.ToHCL (PublicIpResource s) where
     toHCL PublicIpResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "internal_ip_address" _internal_ip_address
-        , TF.attribute "ports" _ports
-        , TF.attribute "server_id" _server_id
-        , TF.attribute "source_restrictions" _source_restrictions
+        [ TF.assign "internal_ip_address" <$> TF.attribute _internal_ip_address
+        , TF.assign "ports" <$> TF.attribute _ports
+        , TF.assign "server_id" <$> TF.attribute _server_id
+        , TF.assign "source_restrictions" <$> TF.attribute _source_restrictions
         ]
 
-instance P.HasInternalIpAddress (PublicIpResource s) s Text where
+instance P.HasInternalIpAddress (PublicIpResource s) (TF.Attr s Text) where
     internalIpAddress =
         lens (_internal_ip_address :: PublicIpResource s -> TF.Attr s Text)
              (\s a -> s { _internal_ip_address = a } :: PublicIpResource s)
 
-instance P.HasPorts (PublicIpResource s) s Text where
+instance P.HasPorts (PublicIpResource s) (TF.Attr s Text) where
     ports =
         lens (_ports :: PublicIpResource s -> TF.Attr s Text)
              (\s a -> s { _ports = a } :: PublicIpResource s)
 
-instance P.HasServerId (PublicIpResource s) s Text where
+instance P.HasServerId (PublicIpResource s) (TF.Attr s Text) where
     serverId =
         lens (_server_id :: PublicIpResource s -> TF.Attr s Text)
              (\s a -> s { _server_id = a } :: PublicIpResource s)
 
-instance P.HasSourceRestrictions (PublicIpResource s) s Text where
+instance P.HasSourceRestrictions (PublicIpResource s) (TF.Attr s Text) where
     sourceRestrictions =
         lens (_source_restrictions :: PublicIpResource s -> TF.Attr s Text)
              (\s a -> s { _source_restrictions = a } :: PublicIpResource s)
@@ -423,136 +424,136 @@ data ServerResource s = ServerResource {
 
 instance TF.ToHCL (ServerResource s) where
     toHCL ServerResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "aa_policy_id" _aa_policy_id
-        , TF.attribute "additional_disks" _additional_disks
-        , TF.attribute "configuration_id" _configuration_id
-        , TF.attribute "cpu" _cpu
-        , TF.attribute "created_dat" _created_dat
-        , TF.attribute "custom_fields" _custom_fields
-        , TF.attribute "description" _description
-        , TF.attribute "group_id" _group_id
-        , TF.attribute "memory_mb" _memory_mb
-        , TF.attribute "metadata" _metadata
-        , TF.attribute "modified_dat" _modified_dat
-        , TF.attribute "name" _name
-        , TF.attribute "name_template" _name_template
-        , TF.attribute "network_id" _network_id
-        , TF.attribute "os_type" _os_type
-        , TF.attribute "password" _password
-        , TF.attribute "power_state" _power_state
-        , TF.attribute "private_ip_address" _private_ip_address
-        , TF.attribute "public_ip_address" _public_ip_address
-        , TF.attribute "source_server_id" _source_server_id
-        , TF.attribute "storage_type" _storage_type
-        , TF.attribute "type" _type'
+        [ TF.assign "aa_policy_id" <$> TF.attribute _aa_policy_id
+        , TF.assign "additional_disks" <$> TF.attribute _additional_disks
+        , TF.assign "configuration_id" <$> TF.attribute _configuration_id
+        , TF.assign "cpu" <$> TF.attribute _cpu
+        , TF.assign "created_dat" <$> TF.attribute _created_dat
+        , TF.assign "custom_fields" <$> TF.attribute _custom_fields
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "group_id" <$> TF.attribute _group_id
+        , TF.assign "memory_mb" <$> TF.attribute _memory_mb
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "modified_dat" <$> TF.attribute _modified_dat
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_template" <$> TF.attribute _name_template
+        , TF.assign "network_id" <$> TF.attribute _network_id
+        , TF.assign "os_type" <$> TF.attribute _os_type
+        , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "power_state" <$> TF.attribute _power_state
+        , TF.assign "private_ip_address" <$> TF.attribute _private_ip_address
+        , TF.assign "public_ip_address" <$> TF.attribute _public_ip_address
+        , TF.assign "source_server_id" <$> TF.attribute _source_server_id
+        , TF.assign "storage_type" <$> TF.attribute _storage_type
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasAaPolicyId (ServerResource s) s Text where
+instance P.HasAaPolicyId (ServerResource s) (TF.Attr s Text) where
     aaPolicyId =
         lens (_aa_policy_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _aa_policy_id = a } :: ServerResource s)
 
-instance P.HasAdditionalDisks (ServerResource s) s Text where
+instance P.HasAdditionalDisks (ServerResource s) (TF.Attr s Text) where
     additionalDisks =
         lens (_additional_disks :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _additional_disks = a } :: ServerResource s)
 
-instance P.HasConfigurationId (ServerResource s) s Text where
+instance P.HasConfigurationId (ServerResource s) (TF.Attr s Text) where
     configurationId =
         lens (_configuration_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _configuration_id = a } :: ServerResource s)
 
-instance P.HasCpu (ServerResource s) s Text where
+instance P.HasCpu (ServerResource s) (TF.Attr s Text) where
     cpu =
         lens (_cpu :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _cpu = a } :: ServerResource s)
 
-instance P.HasCreatedDat (ServerResource s) s Text where
+instance P.HasCreatedDat (ServerResource s) (TF.Attr s Text) where
     createdDat =
         lens (_created_dat :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _created_dat = a } :: ServerResource s)
 
-instance P.HasCustomFields (ServerResource s) s Text where
+instance P.HasCustomFields (ServerResource s) (TF.Attr s Text) where
     customFields =
         lens (_custom_fields :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _custom_fields = a } :: ServerResource s)
 
-instance P.HasDescription (ServerResource s) s Text where
+instance P.HasDescription (ServerResource s) (TF.Attr s Text) where
     description =
         lens (_description :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: ServerResource s)
 
-instance P.HasGroupId (ServerResource s) s Text where
+instance P.HasGroupId (ServerResource s) (TF.Attr s Text) where
     groupId =
         lens (_group_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _group_id = a } :: ServerResource s)
 
-instance P.HasMemoryMb (ServerResource s) s Text where
+instance P.HasMemoryMb (ServerResource s) (TF.Attr s Text) where
     memoryMb =
         lens (_memory_mb :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _memory_mb = a } :: ServerResource s)
 
-instance P.HasMetadata (ServerResource s) s Text where
+instance P.HasMetadata (ServerResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ServerResource s)
 
-instance P.HasModifiedDat (ServerResource s) s Text where
+instance P.HasModifiedDat (ServerResource s) (TF.Attr s Text) where
     modifiedDat =
         lens (_modified_dat :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _modified_dat = a } :: ServerResource s)
 
-instance P.HasName (ServerResource s) s Text where
+instance P.HasName (ServerResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasNameTemplate (ServerResource s) s Text where
+instance P.HasNameTemplate (ServerResource s) (TF.Attr s Text) where
     nameTemplate =
         lens (_name_template :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _name_template = a } :: ServerResource s)
 
-instance P.HasNetworkId (ServerResource s) s Text where
+instance P.HasNetworkId (ServerResource s) (TF.Attr s Text) where
     networkId =
         lens (_network_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _network_id = a } :: ServerResource s)
 
-instance P.HasOsType (ServerResource s) s Text where
+instance P.HasOsType (ServerResource s) (TF.Attr s Text) where
     osType =
         lens (_os_type :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _os_type = a } :: ServerResource s)
 
-instance P.HasPassword (ServerResource s) s Text where
+instance P.HasPassword (ServerResource s) (TF.Attr s Text) where
     password =
         lens (_password :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: ServerResource s)
 
-instance P.HasPowerState (ServerResource s) s Text where
+instance P.HasPowerState (ServerResource s) (TF.Attr s Text) where
     powerState =
         lens (_power_state :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _power_state = a } :: ServerResource s)
 
-instance P.HasPrivateIpAddress (ServerResource s) s Text where
+instance P.HasPrivateIpAddress (ServerResource s) (TF.Attr s Text) where
     privateIpAddress =
         lens (_private_ip_address :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _private_ip_address = a } :: ServerResource s)
 
-instance P.HasPublicIpAddress (ServerResource s) s Text where
+instance P.HasPublicIpAddress (ServerResource s) (TF.Attr s Text) where
     publicIpAddress =
         lens (_public_ip_address :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _public_ip_address = a } :: ServerResource s)
 
-instance P.HasSourceServerId (ServerResource s) s Text where
+instance P.HasSourceServerId (ServerResource s) (TF.Attr s Text) where
     sourceServerId =
         lens (_source_server_id :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _source_server_id = a } :: ServerResource s)
 
-instance P.HasStorageType (ServerResource s) s Text where
+instance P.HasStorageType (ServerResource s) (TF.Attr s Text) where
     storageType =
         lens (_storage_type :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _storage_type = a } :: ServerResource s)
 
-instance P.HasType' (ServerResource s) s Text where
+instance P.HasType' (ServerResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: ServerResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: ServerResource s)

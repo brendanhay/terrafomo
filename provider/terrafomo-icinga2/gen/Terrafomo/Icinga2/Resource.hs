@@ -52,8 +52,9 @@ module Terrafomo.Icinga2.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -90,28 +91,28 @@ data CheckcommandResource s = CheckcommandResource {
 
 instance TF.ToHCL (CheckcommandResource s) where
     toHCL CheckcommandResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "arguments" _arguments
-        , TF.attribute "command" _command
-        , TF.attribute "name" _name
-        , TF.attribute "templates" _templates
+        [ TF.assign "arguments" <$> TF.attribute _arguments
+        , TF.assign "command" <$> TF.attribute _command
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "templates" <$> TF.attribute _templates
         ]
 
-instance P.HasArguments (CheckcommandResource s) s Text where
+instance P.HasArguments (CheckcommandResource s) (TF.Attr s Text) where
     arguments =
         lens (_arguments :: CheckcommandResource s -> TF.Attr s Text)
              (\s a -> s { _arguments = a } :: CheckcommandResource s)
 
-instance P.HasCommand (CheckcommandResource s) s Text where
+instance P.HasCommand (CheckcommandResource s) (TF.Attr s Text) where
     command =
         lens (_command :: CheckcommandResource s -> TF.Attr s Text)
              (\s a -> s { _command = a } :: CheckcommandResource s)
 
-instance P.HasName (CheckcommandResource s) s Text where
+instance P.HasName (CheckcommandResource s) (TF.Attr s Text) where
     name =
         lens (_name :: CheckcommandResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CheckcommandResource s)
 
-instance P.HasTemplates (CheckcommandResource s) s Text where
+instance P.HasTemplates (CheckcommandResource s) (TF.Attr s Text) where
     templates =
         lens (_templates :: CheckcommandResource s -> TF.Attr s Text)
              (\s a -> s { _templates = a } :: CheckcommandResource s)
@@ -147,34 +148,34 @@ data HostResource s = HostResource {
 
 instance TF.ToHCL (HostResource s) where
     toHCL HostResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "address" _address
-        , TF.attribute "check_command" _check_command
-        , TF.attribute "hostname" _hostname
-        , TF.attribute "templates" _templates
-        , TF.attribute "vars" _vars
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "check_command" <$> TF.attribute _check_command
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "templates" <$> TF.attribute _templates
+        , TF.assign "vars" <$> TF.attribute _vars
         ]
 
-instance P.HasAddress (HostResource s) s Text where
+instance P.HasAddress (HostResource s) (TF.Attr s Text) where
     address =
         lens (_address :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _address = a } :: HostResource s)
 
-instance P.HasCheckCommand (HostResource s) s Text where
+instance P.HasCheckCommand (HostResource s) (TF.Attr s Text) where
     checkCommand =
         lens (_check_command :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _check_command = a } :: HostResource s)
 
-instance P.HasHostname (HostResource s) s Text where
+instance P.HasHostname (HostResource s) (TF.Attr s Text) where
     hostname =
         lens (_hostname :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: HostResource s)
 
-instance P.HasTemplates (HostResource s) s Text where
+instance P.HasTemplates (HostResource s) (TF.Attr s Text) where
     templates =
         lens (_templates :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _templates = a } :: HostResource s)
 
-instance P.HasVars (HostResource s) s Text where
+instance P.HasVars (HostResource s) (TF.Attr s Text) where
     vars =
         lens (_vars :: HostResource s -> TF.Attr s Text)
              (\s a -> s { _vars = a } :: HostResource s)
@@ -205,16 +206,16 @@ data HostgroupResource s = HostgroupResource {
 
 instance TF.ToHCL (HostgroupResource s) where
     toHCL HostgroupResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "display_name" _display_name
-        , TF.attribute "name" _name
+        [ TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDisplayName (HostgroupResource s) s Text where
+instance P.HasDisplayName (HostgroupResource s) (TF.Attr s Text) where
     displayName =
         lens (_display_name :: HostgroupResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: HostgroupResource s)
 
-instance P.HasName (HostgroupResource s) s Text where
+instance P.HasName (HostgroupResource s) (TF.Attr s Text) where
     name =
         lens (_name :: HostgroupResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: HostgroupResource s)
@@ -244,22 +245,22 @@ data ServiceResource s = ServiceResource {
 
 instance TF.ToHCL (ServiceResource s) where
     toHCL ServiceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "check_command" _check_command
-        , TF.attribute "hostname" _hostname
-        , TF.attribute "name" _name
+        [ TF.assign "check_command" <$> TF.attribute _check_command
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasCheckCommand (ServiceResource s) s Text where
+instance P.HasCheckCommand (ServiceResource s) (TF.Attr s Text) where
     checkCommand =
         lens (_check_command :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _check_command = a } :: ServiceResource s)
 
-instance P.HasHostname (ServiceResource s) s Text where
+instance P.HasHostname (ServiceResource s) (TF.Attr s Text) where
     hostname =
         lens (_hostname :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _hostname = a } :: ServiceResource s)
 
-instance P.HasName (ServiceResource s) s Text where
+instance P.HasName (ServiceResource s) (TF.Attr s Text) where
     name =
         lens (_name :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ServiceResource s)

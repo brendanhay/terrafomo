@@ -1,17 +1,19 @@
 {-# LANGUAGE DeriveFunctor     #-}
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
 
 module Terrafomo.Gen.Provider where
 
-import Data.Aeson  (FromJSON (..), ToJSON (..), (.!=), (.:), (.:?), (.=))
-import Data.Maybe  (fromMaybe, isJust, listToMaybe, mapMaybe)
-import Data.Monoid (Last (..))
-import Data.Text   (Text)
+import Data.Aeson (FromJSON (..), ToJSON (..), (.!=), (.:), (.:?), (.=))
+import Data.Maybe (fromMaybe, isJust, listToMaybe, mapMaybe)
+import Data.Text  (Text)
 
 import GHC.Generics (Generic)
+
+import Terrafomo.Gen.Schema (Type, defaultType)
 
 import qualified Data.Aeson         as JSON
 import qualified Data.Text          as Text
@@ -34,7 +36,7 @@ instance FromJSON Mode where
 data Rule = Rule
     { ruleMode  :: !Mode
     , ruleMatch :: !Text
-    , ruleType  :: !Text
+    , ruleType  :: !Type
     } deriving (Show, Generic)
 
 instance ToJSON Rule where
@@ -43,11 +45,11 @@ instance ToJSON Rule where
 instance FromJSON Rule where
     parseJSON = JSON.genericParseJSON (JSON.options "rule")
 
-guessType :: [Rule] -> Text -> Last Text
-guessType rules name =
-    pure . fromMaybe "Text" . listToMaybe $ mapMaybe go rules
+matchTypeRule :: [Rule] -> Text -> Type
+matchTypeRule rules name =
+    fromMaybe defaultType . listToMaybe $ mapMaybe match rules
   where
-    go Rule{..} =
+    match Rule{..} =
         case ruleMode of
             Prefix | Text.isPrefixOf ruleMatch name -> Just ruleType
             Suffix | Text.isSuffixOf ruleMatch name -> Just ruleType

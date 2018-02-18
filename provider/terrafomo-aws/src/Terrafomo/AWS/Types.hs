@@ -157,11 +157,11 @@ data S3BucketVersioning s = S3BucketVersioning
 instance ToHCL (S3BucketVersioning s) where
     toHCL = HCL.genericInlineAttributes
 
-instance Lens.HasEnabled (S3BucketVersioning s) s Bool where
-    enabled = lens _enabled (\s a -> s { _enabled = a })
+-- instance Lens.HasEnabled (S3BucketVersioning s) s Bool where
+--     enabled = lens _enabled (\s a -> s { _enabled = a })
 
-instance HasMfaDelete (S3BucketVersioning s) s Bool where
-    mfaDelete = lens _mfa_delete (\s a -> s { _mfa_delete = a })
+-- instance HasMfaDelete (S3BucketVersioning s) s Bool where
+--     mfaDelete = lens _mfa_delete (\s a -> s { _mfa_delete = a })
 
 s3BucketVersioning :: S3BucketVersioning s
 s3BucketVersioning = S3BucketVersioning
@@ -210,13 +210,13 @@ data ElasticBeanstalkSetting s = ElasticBeanstalkSetting
 instance ToHCL (ElasticBeanstalkSetting s) where
     toHCL = HCL.genericBlockAttributes
 
-instance Lens.HasNamespace (ElasticBeanstalkSetting s) s Text where
+instance Lens.HasNamespace (ElasticBeanstalkSetting s) (Attr s Text) where
     namespace = lens _namespace (\s a -> s { _namespace = a })
 
-instance Lens.HasName (ElasticBeanstalkSetting s) s Text where
+instance Lens.HasName (ElasticBeanstalkSetting s) (Attr s Text) where
     name = lens _name (\s a -> s { _name = a })
 
-instance Lens.HasValue (ElasticBeanstalkSetting s) s Text where
+instance Lens.HasValue (ElasticBeanstalkSetting s) (Attr s Text) where
     value = lens _value (\s a -> s { _value = a })
 
 elasticBeanstalkSetting :: ElasticBeanstalkSetting s
@@ -233,8 +233,8 @@ type IamPolicy = HCL.JSON
 
 -- Field Classes
 
-class HasMfaDelete a s b | a -> s b where
-    mfaDelete :: Lens' a (Attr s b)
+class HasMfaDelete a b | a -> b where
+    mfaDelete :: Lens' a b
 
-instance HasMfaDelete a s b => HasMfaDelete (Schema l p a) s b where
+instance HasMfaDelete a b => HasMfaDelete (Schema l p a) b where
     mfaDelete = configuration . mfaDelete

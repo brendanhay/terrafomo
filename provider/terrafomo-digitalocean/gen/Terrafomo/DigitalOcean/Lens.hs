@@ -106,220 +106,220 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasAlgorithm a s b | a -> s b where
-    algorithm :: Lens' a (TF.Attr s b)
+class HasAlgorithm a b | a -> b where
+    algorithm :: Lens' a b
 
-instance HasAlgorithm a s b => HasAlgorithm (TF.Schema l p a) s b where
+instance HasAlgorithm a b => HasAlgorithm (TF.Schema l p a) b where
     algorithm = TF.configuration . algorithm
 
-class HasBackups a s b | a -> s b where
-    backups :: Lens' a (TF.Attr s b)
+class HasBackups a b | a -> b where
+    backups :: Lens' a b
 
-instance HasBackups a s b => HasBackups (TF.Schema l p a) s b where
+instance HasBackups a b => HasBackups (TF.Schema l p a) b where
     backups = TF.configuration . backups
 
-class HasCertificateChain a s b | a -> s b where
-    certificateChain :: Lens' a (TF.Attr s b)
+class HasCertificateChain a b | a -> b where
+    certificateChain :: Lens' a b
 
-instance HasCertificateChain a s b => HasCertificateChain (TF.Schema l p a) s b where
+instance HasCertificateChain a b => HasCertificateChain (TF.Schema l p a) b where
     certificateChain = TF.configuration . certificateChain
 
-class HasDescription a s b | a -> s b where
-    description :: Lens' a (TF.Attr s b)
+class HasDescription a b | a -> b where
+    description :: Lens' a b
 
-instance HasDescription a s b => HasDescription (TF.Schema l p a) s b where
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
     description = TF.configuration . description
 
-class HasDomain a s b | a -> s b where
-    domain :: Lens' a (TF.Attr s b)
+class HasDomain a b | a -> b where
+    domain :: Lens' a b
 
-instance HasDomain a s b => HasDomain (TF.Schema l p a) s b where
+instance HasDomain a b => HasDomain (TF.Schema l p a) b where
     domain = TF.configuration . domain
 
-class HasDropletId a s b | a -> s b where
-    dropletId :: Lens' a (TF.Attr s b)
+class HasDropletId a b | a -> b where
+    dropletId :: Lens' a b
 
-instance HasDropletId a s b => HasDropletId (TF.Schema l p a) s b where
+instance HasDropletId a b => HasDropletId (TF.Schema l p a) b where
     dropletId = TF.configuration . dropletId
 
-class HasDropletIds a s b | a -> s b where
-    dropletIds :: Lens' a (TF.Attr s b)
+class HasDropletIds a b | a -> b where
+    dropletIds :: Lens' a b
 
-instance HasDropletIds a s b => HasDropletIds (TF.Schema l p a) s b where
+instance HasDropletIds a b => HasDropletIds (TF.Schema l p a) b where
     dropletIds = TF.configuration . dropletIds
 
-class HasDropletTag a s b | a -> s b where
-    dropletTag :: Lens' a (TF.Attr s b)
+class HasDropletTag a b | a -> b where
+    dropletTag :: Lens' a b
 
-instance HasDropletTag a s b => HasDropletTag (TF.Schema l p a) s b where
+instance HasDropletTag a b => HasDropletTag (TF.Schema l p a) b where
     dropletTag = TF.configuration . dropletTag
 
-class HasForwardingRule a s b | a -> s b where
-    forwardingRule :: Lens' a (TF.Attr s b)
+class HasForwardingRule a b | a -> b where
+    forwardingRule :: Lens' a b
 
-instance HasForwardingRule a s b => HasForwardingRule (TF.Schema l p a) s b where
+instance HasForwardingRule a b => HasForwardingRule (TF.Schema l p a) b where
     forwardingRule = TF.configuration . forwardingRule
 
-class HasHealthcheck a s b | a -> s b where
-    healthcheck :: Lens' a (TF.Attr s b)
+class HasHealthcheck a b | a -> b where
+    healthcheck :: Lens' a b
 
-instance HasHealthcheck a s b => HasHealthcheck (TF.Schema l p a) s b where
+instance HasHealthcheck a b => HasHealthcheck (TF.Schema l p a) b where
     healthcheck = TF.configuration . healthcheck
 
-class HasImage a s b | a -> s b where
-    image :: Lens' a (TF.Attr s b)
+class HasImage a b | a -> b where
+    image :: Lens' a b
 
-instance HasImage a s b => HasImage (TF.Schema l p a) s b where
+instance HasImage a b => HasImage (TF.Schema l p a) b where
     image = TF.configuration . image
 
-class HasInboundRule a s b | a -> s b where
-    inboundRule :: Lens' a (TF.Attr s b)
+class HasInboundRule a b | a -> b where
+    inboundRule :: Lens' a b
 
-instance HasInboundRule a s b => HasInboundRule (TF.Schema l p a) s b where
+instance HasInboundRule a b => HasInboundRule (TF.Schema l p a) b where
     inboundRule = TF.configuration . inboundRule
 
-class HasIpAddress a s b | a -> s b where
-    ipAddress :: Lens' a (TF.Attr s b)
+class HasIpAddress a b | a -> b where
+    ipAddress :: Lens' a b
 
-instance HasIpAddress a s b => HasIpAddress (TF.Schema l p a) s b where
+instance HasIpAddress a b => HasIpAddress (TF.Schema l p a) b where
     ipAddress = TF.configuration . ipAddress
 
-class HasIpv6 a s b | a -> s b where
-    ipv6 :: Lens' a (TF.Attr s b)
+class HasIpv6 a b | a -> b where
+    ipv6 :: Lens' a b
 
-instance HasIpv6 a s b => HasIpv6 (TF.Schema l p a) s b where
+instance HasIpv6 a b => HasIpv6 (TF.Schema l p a) b where
     ipv6 = TF.configuration . ipv6
 
-class HasLeafCertificate a s b | a -> s b where
-    leafCertificate :: Lens' a (TF.Attr s b)
+class HasLeafCertificate a b | a -> b where
+    leafCertificate :: Lens' a b
 
-instance HasLeafCertificate a s b => HasLeafCertificate (TF.Schema l p a) s b where
+instance HasLeafCertificate a b => HasLeafCertificate (TF.Schema l p a) b where
     leafCertificate = TF.configuration . leafCertificate
 
-class HasMonitoring a s b | a -> s b where
-    monitoring :: Lens' a (TF.Attr s b)
+class HasMonitoring a b | a -> b where
+    monitoring :: Lens' a b
 
-instance HasMonitoring a s b => HasMonitoring (TF.Schema l p a) s b where
+instance HasMonitoring a b => HasMonitoring (TF.Schema l p a) b where
     monitoring = TF.configuration . monitoring
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasOutboundRule a s b | a -> s b where
-    outboundRule :: Lens' a (TF.Attr s b)
+class HasOutboundRule a b | a -> b where
+    outboundRule :: Lens' a b
 
-instance HasOutboundRule a s b => HasOutboundRule (TF.Schema l p a) s b where
+instance HasOutboundRule a b => HasOutboundRule (TF.Schema l p a) b where
     outboundRule = TF.configuration . outboundRule
 
-class HasPort a s b | a -> s b where
-    port :: Lens' a (TF.Attr s b)
+class HasPort a b | a -> b where
+    port :: Lens' a b
 
-instance HasPort a s b => HasPort (TF.Schema l p a) s b where
+instance HasPort a b => HasPort (TF.Schema l p a) b where
     port = TF.configuration . port
 
-class HasPriority a s b | a -> s b where
-    priority :: Lens' a (TF.Attr s b)
+class HasPriority a b | a -> b where
+    priority :: Lens' a b
 
-instance HasPriority a s b => HasPriority (TF.Schema l p a) s b where
+instance HasPriority a b => HasPriority (TF.Schema l p a) b where
     priority = TF.configuration . priority
 
-class HasPrivateKey a s b | a -> s b where
-    privateKey :: Lens' a (TF.Attr s b)
+class HasPrivateKey a b | a -> b where
+    privateKey :: Lens' a b
 
-instance HasPrivateKey a s b => HasPrivateKey (TF.Schema l p a) s b where
+instance HasPrivateKey a b => HasPrivateKey (TF.Schema l p a) b where
     privateKey = TF.configuration . privateKey
 
-class HasPrivateNetworking a s b | a -> s b where
-    privateNetworking :: Lens' a (TF.Attr s b)
+class HasPrivateNetworking a b | a -> b where
+    privateNetworking :: Lens' a b
 
-instance HasPrivateNetworking a s b => HasPrivateNetworking (TF.Schema l p a) s b where
+instance HasPrivateNetworking a b => HasPrivateNetworking (TF.Schema l p a) b where
     privateNetworking = TF.configuration . privateNetworking
 
-class HasPublicKey a s b | a -> s b where
-    publicKey :: Lens' a (TF.Attr s b)
+class HasPublicKey a b | a -> b where
+    publicKey :: Lens' a b
 
-instance HasPublicKey a s b => HasPublicKey (TF.Schema l p a) s b where
+instance HasPublicKey a b => HasPublicKey (TF.Schema l p a) b where
     publicKey = TF.configuration . publicKey
 
-class HasRedirectHttpToHttps a s b | a -> s b where
-    redirectHttpToHttps :: Lens' a (TF.Attr s b)
+class HasRedirectHttpToHttps a b | a -> b where
+    redirectHttpToHttps :: Lens' a b
 
-instance HasRedirectHttpToHttps a s b => HasRedirectHttpToHttps (TF.Schema l p a) s b where
+instance HasRedirectHttpToHttps a b => HasRedirectHttpToHttps (TF.Schema l p a) b where
     redirectHttpToHttps = TF.configuration . redirectHttpToHttps
 
-class HasRegion a s b | a -> s b where
-    region :: Lens' a (TF.Attr s b)
+class HasRegion a b | a -> b where
+    region :: Lens' a b
 
-instance HasRegion a s b => HasRegion (TF.Schema l p a) s b where
+instance HasRegion a b => HasRegion (TF.Schema l p a) b where
     region = TF.configuration . region
 
-class HasResizeDisk a s b | a -> s b where
-    resizeDisk :: Lens' a (TF.Attr s b)
+class HasResizeDisk a b | a -> b where
+    resizeDisk :: Lens' a b
 
-instance HasResizeDisk a s b => HasResizeDisk (TF.Schema l p a) s b where
+instance HasResizeDisk a b => HasResizeDisk (TF.Schema l p a) b where
     resizeDisk = TF.configuration . resizeDisk
 
-class HasSize a s b | a -> s b where
-    size :: Lens' a (TF.Attr s b)
+class HasSize a b | a -> b where
+    size :: Lens' a b
 
-instance HasSize a s b => HasSize (TF.Schema l p a) s b where
+instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size
 
-class HasSshKeys a s b | a -> s b where
-    sshKeys :: Lens' a (TF.Attr s b)
+class HasSshKeys a b | a -> b where
+    sshKeys :: Lens' a b
 
-instance HasSshKeys a s b => HasSshKeys (TF.Schema l p a) s b where
+instance HasSshKeys a b => HasSshKeys (TF.Schema l p a) b where
     sshKeys = TF.configuration . sshKeys
 
-class HasStickySessions a s b | a -> s b where
-    stickySessions :: Lens' a (TF.Attr s b)
+class HasStickySessions a b | a -> b where
+    stickySessions :: Lens' a b
 
-instance HasStickySessions a s b => HasStickySessions (TF.Schema l p a) s b where
+instance HasStickySessions a b => HasStickySessions (TF.Schema l p a) b where
     stickySessions = TF.configuration . stickySessions
 
-class HasTags a s b | a -> s b where
-    tags :: Lens' a (TF.Attr s b)
+class HasTags a b | a -> b where
+    tags :: Lens' a b
 
-instance HasTags a s b => HasTags (TF.Schema l p a) s b where
+instance HasTags a b => HasTags (TF.Schema l p a) b where
     tags = TF.configuration . tags
 
-class HasTtl a s b | a -> s b where
-    ttl :: Lens' a (TF.Attr s b)
+class HasTtl a b | a -> b where
+    ttl :: Lens' a b
 
-instance HasTtl a s b => HasTtl (TF.Schema l p a) s b where
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
     ttl = TF.configuration . ttl
 
-class HasType' a s b | a -> s b where
-    type' :: Lens' a (TF.Attr s b)
+class HasType' a b | a -> b where
+    type' :: Lens' a b
 
-instance HasType' a s b => HasType' (TF.Schema l p a) s b where
+instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasUserData a s b | a -> s b where
-    userData :: Lens' a (TF.Attr s b)
+class HasUserData a b | a -> b where
+    userData :: Lens' a b
 
-instance HasUserData a s b => HasUserData (TF.Schema l p a) s b where
+instance HasUserData a b => HasUserData (TF.Schema l p a) b where
     userData = TF.configuration . userData
 
-class HasValue a s b | a -> s b where
-    value :: Lens' a (TF.Attr s b)
+class HasValue a b | a -> b where
+    value :: Lens' a b
 
-instance HasValue a s b => HasValue (TF.Schema l p a) s b where
+instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
-class HasVolumeIds a s b | a -> s b where
-    volumeIds :: Lens' a (TF.Attr s b)
+class HasVolumeIds a b | a -> b where
+    volumeIds :: Lens' a b
 
-instance HasVolumeIds a s b => HasVolumeIds (TF.Schema l p a) s b where
+instance HasVolumeIds a b => HasVolumeIds (TF.Schema l p a) b where
     volumeIds = TF.configuration . volumeIds
 
-class HasWeight a s b | a -> s b where
-    weight :: Lens' a (TF.Attr s b)
+class HasWeight a b | a -> b where
+    weight :: Lens' a b
 
-instance HasWeight a s b => HasWeight (TF.Schema l p a) s b where
+instance HasWeight a b => HasWeight (TF.Schema l p a) b where
     weight = TF.configuration . weight
 
 class HasComputedCreatedAt a b | a -> b where

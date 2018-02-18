@@ -37,8 +37,9 @@ module Terrafomo.OpsGenie.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -69,16 +70,16 @@ data UserData s = UserData {
 
 instance TF.ToHCL (UserData s) where
     toHCL UserData{..} = TF.inline $ catMaybes
-        [ TF.attribute "username" _username
+        [ TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasUsername (UserData s) s Text where
+instance P.HasUsername (UserData s) (TF.Attr s Text) where
     username =
         lens (_username :: UserData s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserData s)
 
-instance P.HasComputedFullName (UserData s) Text
-instance P.HasComputedRole (UserData s) Text
+instance P.HasComputedFullName (UserData s) (Text)
+instance P.HasComputedRole (UserData s) (Text)
 
 userData :: TF.Schema TF.DataSource P.OpsGenie (UserData s)
 userData =

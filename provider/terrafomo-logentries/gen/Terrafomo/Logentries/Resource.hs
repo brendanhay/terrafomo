@@ -45,8 +45,9 @@ module Terrafomo.Logentries.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -86,45 +87,45 @@ data LogResource s = LogResource {
 
 instance TF.ToHCL (LogResource s) where
     toHCL LogResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "filename" _filename
-        , TF.attribute "logset_id" _logset_id
-        , TF.attribute "name" _name
-        , TF.attribute "retention_period" _retention_period
-        , TF.attribute "source" _source
-        , TF.attribute "type" _type'
+        [ TF.assign "filename" <$> TF.attribute _filename
+        , TF.assign "logset_id" <$> TF.attribute _logset_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "retention_period" <$> TF.attribute _retention_period
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasFilename (LogResource s) s Text where
+instance P.HasFilename (LogResource s) (TF.Attr s Text) where
     filename =
         lens (_filename :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _filename = a } :: LogResource s)
 
-instance P.HasLogsetId (LogResource s) s Text where
+instance P.HasLogsetId (LogResource s) (TF.Attr s Text) where
     logsetId =
         lens (_logset_id :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _logset_id = a } :: LogResource s)
 
-instance P.HasName (LogResource s) s Text where
+instance P.HasName (LogResource s) (TF.Attr s Text) where
     name =
         lens (_name :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LogResource s)
 
-instance P.HasRetentionPeriod (LogResource s) s Text where
+instance P.HasRetentionPeriod (LogResource s) (TF.Attr s Text) where
     retentionPeriod =
         lens (_retention_period :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _retention_period = a } :: LogResource s)
 
-instance P.HasSource (LogResource s) s Text where
+instance P.HasSource (LogResource s) (TF.Attr s Text) where
     source =
         lens (_source :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _source = a } :: LogResource s)
 
-instance P.HasType' (LogResource s) s Text where
+instance P.HasType' (LogResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: LogResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: LogResource s)
 
-instance P.HasComputedToken (LogResource s) Text
+instance P.HasComputedToken (LogResource s) (Text)
 
 logResource :: TF.Schema TF.Resource P.Logentries (LogResource s)
 logResource =
@@ -152,16 +153,16 @@ data LogsetResource s = LogsetResource {
 
 instance TF.ToHCL (LogsetResource s) where
     toHCL LogsetResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "location" _location
-        , TF.attribute "name" _name
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasLocation (LogsetResource s) s Text where
+instance P.HasLocation (LogsetResource s) (TF.Attr s Text) where
     location =
         lens (_location :: LogsetResource s -> TF.Attr s Text)
              (\s a -> s { _location = a } :: LogsetResource s)
 
-instance P.HasName (LogsetResource s) s Text where
+instance P.HasName (LogsetResource s) (TF.Attr s Text) where
     name =
         lens (_name :: LogsetResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: LogsetResource s)

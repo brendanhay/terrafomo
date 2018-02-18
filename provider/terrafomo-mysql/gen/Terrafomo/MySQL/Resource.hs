@@ -50,8 +50,9 @@ module Terrafomo.MySQL.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -89,22 +90,22 @@ data DatabaseResource s = DatabaseResource {
 
 instance TF.ToHCL (DatabaseResource s) where
     toHCL DatabaseResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "default_character_set" _default_character_set
-        , TF.attribute "default_collation" _default_collation
-        , TF.attribute "name" _name
+        [ TF.assign "default_character_set" <$> TF.attribute _default_character_set
+        , TF.assign "default_collation" <$> TF.attribute _default_collation
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDefaultCharacterSet (DatabaseResource s) s Text where
+instance P.HasDefaultCharacterSet (DatabaseResource s) (TF.Attr s Text) where
     defaultCharacterSet =
         lens (_default_character_set :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _default_character_set = a } :: DatabaseResource s)
 
-instance P.HasDefaultCollation (DatabaseResource s) s Text where
+instance P.HasDefaultCollation (DatabaseResource s) (TF.Attr s Text) where
     defaultCollation =
         lens (_default_collation :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _default_collation = a } :: DatabaseResource s)
 
-instance P.HasName (DatabaseResource s) s Text where
+instance P.HasName (DatabaseResource s) (TF.Attr s Text) where
     name =
         lens (_name :: DatabaseResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatabaseResource s)
@@ -139,34 +140,34 @@ data GrantResource s = GrantResource {
 
 instance TF.ToHCL (GrantResource s) where
     toHCL GrantResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "database" _database
-        , TF.attribute "grant" _grant
-        , TF.attribute "host" _host
-        , TF.attribute "privileges" _privileges
-        , TF.attribute "user" _user
+        [ TF.assign "database" <$> TF.attribute _database
+        , TF.assign "grant" <$> TF.attribute _grant
+        , TF.assign "host" <$> TF.attribute _host
+        , TF.assign "privileges" <$> TF.attribute _privileges
+        , TF.assign "user" <$> TF.attribute _user
         ]
 
-instance P.HasDatabase (GrantResource s) s Text where
+instance P.HasDatabase (GrantResource s) (TF.Attr s Text) where
     database =
         lens (_database :: GrantResource s -> TF.Attr s Text)
              (\s a -> s { _database = a } :: GrantResource s)
 
-instance P.HasGrant (GrantResource s) s Text where
+instance P.HasGrant (GrantResource s) (TF.Attr s Text) where
     grant =
         lens (_grant :: GrantResource s -> TF.Attr s Text)
              (\s a -> s { _grant = a } :: GrantResource s)
 
-instance P.HasHost (GrantResource s) s Text where
+instance P.HasHost (GrantResource s) (TF.Attr s Text) where
     host =
         lens (_host :: GrantResource s -> TF.Attr s Text)
              (\s a -> s { _host = a } :: GrantResource s)
 
-instance P.HasPrivileges (GrantResource s) s Text where
+instance P.HasPrivileges (GrantResource s) (TF.Attr s Text) where
     privileges =
         lens (_privileges :: GrantResource s -> TF.Attr s Text)
              (\s a -> s { _privileges = a } :: GrantResource s)
 
-instance P.HasUser (GrantResource s) s Text where
+instance P.HasUser (GrantResource s) (TF.Attr s Text) where
     user =
         lens (_user :: GrantResource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: GrantResource s)
@@ -203,28 +204,28 @@ data UserResource s = UserResource {
 
 instance TF.ToHCL (UserResource s) where
     toHCL UserResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "host" _host
-        , TF.attribute "password" _password
-        , TF.attribute "plaintext_password" _plaintext_password
-        , TF.attribute "user" _user
+        [ TF.assign "host" <$> TF.attribute _host
+        , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "plaintext_password" <$> TF.attribute _plaintext_password
+        , TF.assign "user" <$> TF.attribute _user
         ]
 
-instance P.HasHost (UserResource s) s Text where
+instance P.HasHost (UserResource s) (TF.Attr s Text) where
     host =
         lens (_host :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _host = a } :: UserResource s)
 
-instance P.HasPassword (UserResource s) s Text where
+instance P.HasPassword (UserResource s) (TF.Attr s Text) where
     password =
         lens (_password :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasPlaintextPassword (UserResource s) s Text where
+instance P.HasPlaintextPassword (UserResource s) (TF.Attr s Text) where
     plaintextPassword =
         lens (_plaintext_password :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _plaintext_password = a } :: UserResource s)
 
-instance P.HasUser (UserResource s) s Text where
+instance P.HasUser (UserResource s) (TF.Attr s Text) where
     user =
         lens (_user :: UserResource s -> TF.Attr s Text)
              (\s a -> s { _user = a } :: UserResource s)

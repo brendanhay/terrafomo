@@ -25,6 +25,9 @@ module Terrafomo.NewRelic.DataSource
       ApplicationData (..)
     , applicationData
 
+    , KeyTransactionData (..)
+    , keyTransactionData
+
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasName (..)
@@ -38,8 +41,9 @@ module Terrafomo.NewRelic.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -70,21 +74,50 @@ data ApplicationData s = ApplicationData {
 
 instance TF.ToHCL (ApplicationData s) where
     toHCL ApplicationData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (ApplicationData s) s Text where
+instance P.HasName (ApplicationData s) (TF.Attr s Text) where
     name =
         lens (_name :: ApplicationData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ApplicationData s)
 
-instance P.HasComputedHostIds (ApplicationData s) Text
-instance P.HasComputedId (ApplicationData s) Text
-instance P.HasComputedInstanceIds (ApplicationData s) Text
+instance P.HasComputedHostIds (ApplicationData s) (Text)
+instance P.HasComputedId (ApplicationData s) (Text)
+instance P.HasComputedInstanceIds (ApplicationData s) (Text)
 
 applicationData :: TF.Schema TF.DataSource P.NewRelic (ApplicationData s)
 applicationData =
     TF.newDataSource "newrelic_application" $
         ApplicationData {
+              _name = TF.Nil
+            }
+
+{- | The @newrelic_key_transaction@ NewRelic datasource.
+
+Use this data source to get information about a specific key transaction in
+New Relic.
+-}
+data KeyTransactionData s = KeyTransactionData {
+      _name :: !(TF.Attr s Text)
+    {- ^ (Required) The name of the application in New Relic. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (KeyTransactionData s) where
+    toHCL KeyTransactionData{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasName (KeyTransactionData s) (TF.Attr s Text) where
+    name =
+        lens (_name :: KeyTransactionData s -> TF.Attr s Text)
+             (\s a -> s { _name = a } :: KeyTransactionData s)
+
+instance P.HasComputedId (KeyTransactionData s) (Text)
+
+keyTransactionData :: TF.Schema TF.DataSource P.NewRelic (KeyTransactionData s)
+keyTransactionData =
+    TF.newDataSource "newrelic_key_transaction" $
+        KeyTransactionData {
               _name = TF.Nil
             }

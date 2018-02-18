@@ -97,380 +97,380 @@ import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Schema    as TF
 
-class HasAptComponents a s b | a -> s b where
-    aptComponents :: Lens' a (TF.Attr s b)
+class HasAptComponents a b | a -> b where
+    aptComponents :: Lens' a b
 
-instance HasAptComponents a s b => HasAptComponents (TF.Schema l p a) s b where
+instance HasAptComponents a b => HasAptComponents (TF.Schema l p a) b where
     aptComponents = TF.configuration . aptComponents
 
-class HasAptDists a s b | a -> s b where
-    aptDists :: Lens' a (TF.Attr s b)
+class HasAptDists a b | a -> b where
+    aptDists :: Lens' a b
 
-instance HasAptDists a s b => HasAptDists (TF.Schema l p a) s b where
+instance HasAptDists a b => HasAptDists (TF.Schema l p a) b where
     aptDists = TF.configuration . aptDists
 
-class HasArch a s b | a -> s b where
-    arch :: Lens' a (TF.Attr s b)
+class HasArch a b | a -> b where
+    arch :: Lens' a b
 
-instance HasArch a s b => HasArch (TF.Schema l p a) s b where
+instance HasArch a b => HasArch (TF.Schema l p a) b where
     arch = TF.configuration . arch
 
-class HasBody a s b | a -> s b where
-    body :: Lens' a (TF.Attr s b)
+class HasBody a b | a -> b where
+    body :: Lens' a b
 
-instance HasBody a s b => HasBody (TF.Schema l p a) s b where
+instance HasBody a b => HasBody (TF.Schema l p a) b where
     body = TF.configuration . body
 
-class HasBootFiles a s b | a -> s b where
-    bootFiles :: Lens' a (TF.Attr s b)
+class HasBootFiles a b | a -> b where
+    bootFiles :: Lens' a b
 
-instance HasBootFiles a s b => HasBootFiles (TF.Schema l p a) s b where
+instance HasBootFiles a b => HasBootFiles (TF.Schema l p a) b where
     bootFiles = TF.configuration . bootFiles
 
-class HasBreed a s b | a -> s b where
-    breed :: Lens' a (TF.Attr s b)
+class HasBreed a b | a -> b where
+    breed :: Lens' a b
 
-instance HasBreed a s b => HasBreed (TF.Schema l p a) s b where
+instance HasBreed a b => HasBreed (TF.Schema l p a) b where
     breed = TF.configuration . breed
 
-class HasComment a s b | a -> s b where
-    comment :: Lens' a (TF.Attr s b)
+class HasComment a b | a -> b where
+    comment :: Lens' a b
 
-instance HasComment a s b => HasComment (TF.Schema l p a) s b where
+instance HasComment a b => HasComment (TF.Schema l p a) b where
     comment = TF.configuration . comment
 
-class HasCreaterepoFlags a s b | a -> s b where
-    createrepoFlags :: Lens' a (TF.Attr s b)
+class HasCreaterepoFlags a b | a -> b where
+    createrepoFlags :: Lens' a b
 
-instance HasCreaterepoFlags a s b => HasCreaterepoFlags (TF.Schema l p a) s b where
+instance HasCreaterepoFlags a b => HasCreaterepoFlags (TF.Schema l p a) b where
     createrepoFlags = TF.configuration . createrepoFlags
 
-class HasDistro a s b | a -> s b where
-    distro :: Lens' a (TF.Attr s b)
+class HasDistro a b | a -> b where
+    distro :: Lens' a b
 
-instance HasDistro a s b => HasDistro (TF.Schema l p a) s b where
+instance HasDistro a b => HasDistro (TF.Schema l p a) b where
     distro = TF.configuration . distro
 
-class HasEnableGpxe a s b | a -> s b where
-    enableGpxe :: Lens' a (TF.Attr s b)
+class HasEnableGpxe a b | a -> b where
+    enableGpxe :: Lens' a b
 
-instance HasEnableGpxe a s b => HasEnableGpxe (TF.Schema l p a) s b where
+instance HasEnableGpxe a b => HasEnableGpxe (TF.Schema l p a) b where
     enableGpxe = TF.configuration . enableGpxe
 
-class HasEnableMenu a s b | a -> s b where
-    enableMenu :: Lens' a (TF.Attr s b)
+class HasEnableMenu a b | a -> b where
+    enableMenu :: Lens' a b
 
-instance HasEnableMenu a s b => HasEnableMenu (TF.Schema l p a) s b where
+instance HasEnableMenu a b => HasEnableMenu (TF.Schema l p a) b where
     enableMenu = TF.configuration . enableMenu
 
-class HasEnvironment a s b | a -> s b where
-    environment :: Lens' a (TF.Attr s b)
+class HasEnvironment a b | a -> b where
+    environment :: Lens' a b
 
-instance HasEnvironment a s b => HasEnvironment (TF.Schema l p a) s b where
+instance HasEnvironment a b => HasEnvironment (TF.Schema l p a) b where
     environment = TF.configuration . environment
 
-class HasFetchableFiles a s b | a -> s b where
-    fetchableFiles :: Lens' a (TF.Attr s b)
+class HasFetchableFiles a b | a -> b where
+    fetchableFiles :: Lens' a b
 
-instance HasFetchableFiles a s b => HasFetchableFiles (TF.Schema l p a) s b where
+instance HasFetchableFiles a b => HasFetchableFiles (TF.Schema l p a) b where
     fetchableFiles = TF.configuration . fetchableFiles
 
-class HasGateway a s b | a -> s b where
-    gateway :: Lens' a (TF.Attr s b)
+class HasGateway a b | a -> b where
+    gateway :: Lens' a b
 
-instance HasGateway a s b => HasGateway (TF.Schema l p a) s b where
+instance HasGateway a b => HasGateway (TF.Schema l p a) b where
     gateway = TF.configuration . gateway
 
-class HasHostname a s b | a -> s b where
-    hostname :: Lens' a (TF.Attr s b)
+class HasHostname a b | a -> b where
+    hostname :: Lens' a b
 
-instance HasHostname a s b => HasHostname (TF.Schema l p a) s b where
+instance HasHostname a b => HasHostname (TF.Schema l p a) b where
     hostname = TF.configuration . hostname
 
-class HasImage a s b | a -> s b where
-    image :: Lens' a (TF.Attr s b)
+class HasImage a b | a -> b where
+    image :: Lens' a b
 
-instance HasImage a s b => HasImage (TF.Schema l p a) s b where
+instance HasImage a b => HasImage (TF.Schema l p a) b where
     image = TF.configuration . image
 
-class HasInitrd a s b | a -> s b where
-    initrd :: Lens' a (TF.Attr s b)
+class HasInitrd a b | a -> b where
+    initrd :: Lens' a b
 
-instance HasInitrd a s b => HasInitrd (TF.Schema l p a) s b where
+instance HasInitrd a b => HasInitrd (TF.Schema l p a) b where
     initrd = TF.configuration . initrd
 
-class HasInterface a s b | a -> s b where
-    interface :: Lens' a (TF.Attr s b)
+class HasInterface a b | a -> b where
+    interface :: Lens' a b
 
-instance HasInterface a s b => HasInterface (TF.Schema l p a) s b where
+instance HasInterface a b => HasInterface (TF.Schema l p a) b where
     interface = TF.configuration . interface
 
-class HasIpv6DefaultDevice a s b | a -> s b where
-    ipv6DefaultDevice :: Lens' a (TF.Attr s b)
+class HasIpv6DefaultDevice a b | a -> b where
+    ipv6DefaultDevice :: Lens' a b
 
-instance HasIpv6DefaultDevice a s b => HasIpv6DefaultDevice (TF.Schema l p a) s b where
+instance HasIpv6DefaultDevice a b => HasIpv6DefaultDevice (TF.Schema l p a) b where
     ipv6DefaultDevice = TF.configuration . ipv6DefaultDevice
 
-class HasKeepUpdated a s b | a -> s b where
-    keepUpdated :: Lens' a (TF.Attr s b)
+class HasKeepUpdated a b | a -> b where
+    keepUpdated :: Lens' a b
 
-instance HasKeepUpdated a s b => HasKeepUpdated (TF.Schema l p a) s b where
+instance HasKeepUpdated a b => HasKeepUpdated (TF.Schema l p a) b where
     keepUpdated = TF.configuration . keepUpdated
 
-class HasKernel a s b | a -> s b where
-    kernel :: Lens' a (TF.Attr s b)
+class HasKernel a b | a -> b where
+    kernel :: Lens' a b
 
-instance HasKernel a s b => HasKernel (TF.Schema l p a) s b where
+instance HasKernel a b => HasKernel (TF.Schema l p a) b where
     kernel = TF.configuration . kernel
 
-class HasKernelOptions a s b | a -> s b where
-    kernelOptions :: Lens' a (TF.Attr s b)
+class HasKernelOptions a b | a -> b where
+    kernelOptions :: Lens' a b
 
-instance HasKernelOptions a s b => HasKernelOptions (TF.Schema l p a) s b where
+instance HasKernelOptions a b => HasKernelOptions (TF.Schema l p a) b where
     kernelOptions = TF.configuration . kernelOptions
 
-class HasKernelOptionsPost a s b | a -> s b where
-    kernelOptionsPost :: Lens' a (TF.Attr s b)
+class HasKernelOptionsPost a b | a -> b where
+    kernelOptionsPost :: Lens' a b
 
-instance HasKernelOptionsPost a s b => HasKernelOptionsPost (TF.Schema l p a) s b where
+instance HasKernelOptionsPost a b => HasKernelOptionsPost (TF.Schema l p a) b where
     kernelOptionsPost = TF.configuration . kernelOptionsPost
 
-class HasKickstart a s b | a -> s b where
-    kickstart :: Lens' a (TF.Attr s b)
+class HasKickstart a b | a -> b where
+    kickstart :: Lens' a b
 
-instance HasKickstart a s b => HasKickstart (TF.Schema l p a) s b where
+instance HasKickstart a b => HasKickstart (TF.Schema l p a) b where
     kickstart = TF.configuration . kickstart
 
-class HasKsMeta a s b | a -> s b where
-    ksMeta :: Lens' a (TF.Attr s b)
+class HasKsMeta a b | a -> b where
+    ksMeta :: Lens' a b
 
-instance HasKsMeta a s b => HasKsMeta (TF.Schema l p a) s b where
+instance HasKsMeta a b => HasKsMeta (TF.Schema l p a) b where
     ksMeta = TF.configuration . ksMeta
 
-class HasLdapEnabled a s b | a -> s b where
-    ldapEnabled :: Lens' a (TF.Attr s b)
+class HasLdapEnabled a b | a -> b where
+    ldapEnabled :: Lens' a b
 
-instance HasLdapEnabled a s b => HasLdapEnabled (TF.Schema l p a) s b where
+instance HasLdapEnabled a b => HasLdapEnabled (TF.Schema l p a) b where
     ldapEnabled = TF.configuration . ldapEnabled
 
-class HasLdapType a s b | a -> s b where
-    ldapType :: Lens' a (TF.Attr s b)
+class HasLdapType a b | a -> b where
+    ldapType :: Lens' a b
 
-instance HasLdapType a s b => HasLdapType (TF.Schema l p a) s b where
+instance HasLdapType a b => HasLdapType (TF.Schema l p a) b where
     ldapType = TF.configuration . ldapType
 
-class HasMgmtClasses a s b | a -> s b where
-    mgmtClasses :: Lens' a (TF.Attr s b)
+class HasMgmtClasses a b | a -> b where
+    mgmtClasses :: Lens' a b
 
-instance HasMgmtClasses a s b => HasMgmtClasses (TF.Schema l p a) s b where
+instance HasMgmtClasses a b => HasMgmtClasses (TF.Schema l p a) b where
     mgmtClasses = TF.configuration . mgmtClasses
 
-class HasMgmtParameters a s b | a -> s b where
-    mgmtParameters :: Lens' a (TF.Attr s b)
+class HasMgmtParameters a b | a -> b where
+    mgmtParameters :: Lens' a b
 
-instance HasMgmtParameters a s b => HasMgmtParameters (TF.Schema l p a) s b where
+instance HasMgmtParameters a b => HasMgmtParameters (TF.Schema l p a) b where
     mgmtParameters = TF.configuration . mgmtParameters
 
-class HasMirror a s b | a -> s b where
-    mirror :: Lens' a (TF.Attr s b)
+class HasMirror a b | a -> b where
+    mirror :: Lens' a b
 
-instance HasMirror a s b => HasMirror (TF.Schema l p a) s b where
+instance HasMirror a b => HasMirror (TF.Schema l p a) b where
     mirror = TF.configuration . mirror
 
-class HasMirrorLocally a s b | a -> s b where
-    mirrorLocally :: Lens' a (TF.Attr s b)
+class HasMirrorLocally a b | a -> b where
+    mirrorLocally :: Lens' a b
 
-instance HasMirrorLocally a s b => HasMirrorLocally (TF.Schema l p a) s b where
+instance HasMirrorLocally a b => HasMirrorLocally (TF.Schema l p a) b where
     mirrorLocally = TF.configuration . mirrorLocally
 
-class HasMonitEnabled a s b | a -> s b where
-    monitEnabled :: Lens' a (TF.Attr s b)
+class HasMonitEnabled a b | a -> b where
+    monitEnabled :: Lens' a b
 
-instance HasMonitEnabled a s b => HasMonitEnabled (TF.Schema l p a) s b where
+instance HasMonitEnabled a b => HasMonitEnabled (TF.Schema l p a) b where
     monitEnabled = TF.configuration . monitEnabled
 
-class HasName a s b | a -> s b where
-    name :: Lens' a (TF.Attr s b)
+class HasName a b | a -> b where
+    name :: Lens' a b
 
-instance HasName a s b => HasName (TF.Schema l p a) s b where
+instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasNameServers a s b | a -> s b where
-    nameServers :: Lens' a (TF.Attr s b)
+class HasNameServers a b | a -> b where
+    nameServers :: Lens' a b
 
-instance HasNameServers a s b => HasNameServers (TF.Schema l p a) s b where
+instance HasNameServers a b => HasNameServers (TF.Schema l p a) b where
     nameServers = TF.configuration . nameServers
 
-class HasNameServersSearch a s b | a -> s b where
-    nameServersSearch :: Lens' a (TF.Attr s b)
+class HasNameServersSearch a b | a -> b where
+    nameServersSearch :: Lens' a b
 
-instance HasNameServersSearch a s b => HasNameServersSearch (TF.Schema l p a) s b where
+instance HasNameServersSearch a b => HasNameServersSearch (TF.Schema l p a) b where
     nameServersSearch = TF.configuration . nameServersSearch
 
-class HasNetbootEnabled a s b | a -> s b where
-    netbootEnabled :: Lens' a (TF.Attr s b)
+class HasNetbootEnabled a b | a -> b where
+    netbootEnabled :: Lens' a b
 
-instance HasNetbootEnabled a s b => HasNetbootEnabled (TF.Schema l p a) s b where
+instance HasNetbootEnabled a b => HasNetbootEnabled (TF.Schema l p a) b where
     netbootEnabled = TF.configuration . netbootEnabled
 
-class HasOsVersion a s b | a -> s b where
-    osVersion :: Lens' a (TF.Attr s b)
+class HasOsVersion a b | a -> b where
+    osVersion :: Lens' a b
 
-instance HasOsVersion a s b => HasOsVersion (TF.Schema l p a) s b where
+instance HasOsVersion a b => HasOsVersion (TF.Schema l p a) b where
     osVersion = TF.configuration . osVersion
 
-class HasOwners a s b | a -> s b where
-    owners :: Lens' a (TF.Attr s b)
+class HasOwners a b | a -> b where
+    owners :: Lens' a b
 
-instance HasOwners a s b => HasOwners (TF.Schema l p a) s b where
+instance HasOwners a b => HasOwners (TF.Schema l p a) b where
     owners = TF.configuration . owners
 
-class HasParent a s b | a -> s b where
-    parent :: Lens' a (TF.Attr s b)
+class HasParent a b | a -> b where
+    parent :: Lens' a b
 
-instance HasParent a s b => HasParent (TF.Schema l p a) s b where
+instance HasParent a b => HasParent (TF.Schema l p a) b where
     parent = TF.configuration . parent
 
-class HasPowerAddress a s b | a -> s b where
-    powerAddress :: Lens' a (TF.Attr s b)
+class HasPowerAddress a b | a -> b where
+    powerAddress :: Lens' a b
 
-instance HasPowerAddress a s b => HasPowerAddress (TF.Schema l p a) s b where
+instance HasPowerAddress a b => HasPowerAddress (TF.Schema l p a) b where
     powerAddress = TF.configuration . powerAddress
 
-class HasPowerId a s b | a -> s b where
-    powerId :: Lens' a (TF.Attr s b)
+class HasPowerId a b | a -> b where
+    powerId :: Lens' a b
 
-instance HasPowerId a s b => HasPowerId (TF.Schema l p a) s b where
+instance HasPowerId a b => HasPowerId (TF.Schema l p a) b where
     powerId = TF.configuration . powerId
 
-class HasPowerPass a s b | a -> s b where
-    powerPass :: Lens' a (TF.Attr s b)
+class HasPowerPass a b | a -> b where
+    powerPass :: Lens' a b
 
-instance HasPowerPass a s b => HasPowerPass (TF.Schema l p a) s b where
+instance HasPowerPass a b => HasPowerPass (TF.Schema l p a) b where
     powerPass = TF.configuration . powerPass
 
-class HasPowerType a s b | a -> s b where
-    powerType :: Lens' a (TF.Attr s b)
+class HasPowerType a b | a -> b where
+    powerType :: Lens' a b
 
-instance HasPowerType a s b => HasPowerType (TF.Schema l p a) s b where
+instance HasPowerType a b => HasPowerType (TF.Schema l p a) b where
     powerType = TF.configuration . powerType
 
-class HasPowerUser a s b | a -> s b where
-    powerUser :: Lens' a (TF.Attr s b)
+class HasPowerUser a b | a -> b where
+    powerUser :: Lens' a b
 
-instance HasPowerUser a s b => HasPowerUser (TF.Schema l p a) s b where
+instance HasPowerUser a b => HasPowerUser (TF.Schema l p a) b where
     powerUser = TF.configuration . powerUser
 
-class HasProfile a s b | a -> s b where
-    profile :: Lens' a (TF.Attr s b)
+class HasProfile a b | a -> b where
+    profile :: Lens' a b
 
-instance HasProfile a s b => HasProfile (TF.Schema l p a) s b where
+instance HasProfile a b => HasProfile (TF.Schema l p a) b where
     profile = TF.configuration . profile
 
-class HasProxy a s b | a -> s b where
-    proxy :: Lens' a (TF.Attr s b)
+class HasProxy a b | a -> b where
+    proxy :: Lens' a b
 
-instance HasProxy a s b => HasProxy (TF.Schema l p a) s b where
+instance HasProxy a b => HasProxy (TF.Schema l p a) b where
     proxy = TF.configuration . proxy
 
-class HasRedhatManagementKey a s b | a -> s b where
-    redhatManagementKey :: Lens' a (TF.Attr s b)
+class HasRedhatManagementKey a b | a -> b where
+    redhatManagementKey :: Lens' a b
 
-instance HasRedhatManagementKey a s b => HasRedhatManagementKey (TF.Schema l p a) s b where
+instance HasRedhatManagementKey a b => HasRedhatManagementKey (TF.Schema l p a) b where
     redhatManagementKey = TF.configuration . redhatManagementKey
 
-class HasRedhatManagementServer a s b | a -> s b where
-    redhatManagementServer :: Lens' a (TF.Attr s b)
+class HasRedhatManagementServer a b | a -> b where
+    redhatManagementServer :: Lens' a b
 
-instance HasRedhatManagementServer a s b => HasRedhatManagementServer (TF.Schema l p a) s b where
+instance HasRedhatManagementServer a b => HasRedhatManagementServer (TF.Schema l p a) b where
     redhatManagementServer = TF.configuration . redhatManagementServer
 
-class HasRepos a s b | a -> s b where
-    repos :: Lens' a (TF.Attr s b)
+class HasRepos a b | a -> b where
+    repos :: Lens' a b
 
-instance HasRepos a s b => HasRepos (TF.Schema l p a) s b where
+instance HasRepos a b => HasRepos (TF.Schema l p a) b where
     repos = TF.configuration . repos
 
-class HasRpmList a s b | a -> s b where
-    rpmList :: Lens' a (TF.Attr s b)
+class HasRpmList a b | a -> b where
+    rpmList :: Lens' a b
 
-instance HasRpmList a s b => HasRpmList (TF.Schema l p a) s b where
+instance HasRpmList a b => HasRpmList (TF.Schema l p a) b where
     rpmList = TF.configuration . rpmList
 
-class HasServer a s b | a -> s b where
-    server :: Lens' a (TF.Attr s b)
+class HasServer a b | a -> b where
+    server :: Lens' a b
 
-instance HasServer a s b => HasServer (TF.Schema l p a) s b where
+instance HasServer a b => HasServer (TF.Schema l p a) b where
     server = TF.configuration . server
 
-class HasStatus a s b | a -> s b where
-    status :: Lens' a (TF.Attr s b)
+class HasStatus a b | a -> b where
+    status :: Lens' a b
 
-instance HasStatus a s b => HasStatus (TF.Schema l p a) s b where
+instance HasStatus a b => HasStatus (TF.Schema l p a) b where
     status = TF.configuration . status
 
-class HasTemplateFiles a s b | a -> s b where
-    templateFiles :: Lens' a (TF.Attr s b)
+class HasTemplateFiles a b | a -> b where
+    templateFiles :: Lens' a b
 
-instance HasTemplateFiles a s b => HasTemplateFiles (TF.Schema l p a) s b where
+instance HasTemplateFiles a b => HasTemplateFiles (TF.Schema l p a) b where
     templateFiles = TF.configuration . templateFiles
 
-class HasTemplateRemoteKickstarts a s b | a -> s b where
-    templateRemoteKickstarts :: Lens' a (TF.Attr s b)
+class HasTemplateRemoteKickstarts a b | a -> b where
+    templateRemoteKickstarts :: Lens' a b
 
-instance HasTemplateRemoteKickstarts a s b => HasTemplateRemoteKickstarts (TF.Schema l p a) s b where
+instance HasTemplateRemoteKickstarts a b => HasTemplateRemoteKickstarts (TF.Schema l p a) b where
     templateRemoteKickstarts = TF.configuration . templateRemoteKickstarts
 
-class HasVirtAutoBoot a s b | a -> s b where
-    virtAutoBoot :: Lens' a (TF.Attr s b)
+class HasVirtAutoBoot a b | a -> b where
+    virtAutoBoot :: Lens' a b
 
-instance HasVirtAutoBoot a s b => HasVirtAutoBoot (TF.Schema l p a) s b where
+instance HasVirtAutoBoot a b => HasVirtAutoBoot (TF.Schema l p a) b where
     virtAutoBoot = TF.configuration . virtAutoBoot
 
-class HasVirtBridge a s b | a -> s b where
-    virtBridge :: Lens' a (TF.Attr s b)
+class HasVirtBridge a b | a -> b where
+    virtBridge :: Lens' a b
 
-instance HasVirtBridge a s b => HasVirtBridge (TF.Schema l p a) s b where
+instance HasVirtBridge a b => HasVirtBridge (TF.Schema l p a) b where
     virtBridge = TF.configuration . virtBridge
 
-class HasVirtCpus a s b | a -> s b where
-    virtCpus :: Lens' a (TF.Attr s b)
+class HasVirtCpus a b | a -> b where
+    virtCpus :: Lens' a b
 
-instance HasVirtCpus a s b => HasVirtCpus (TF.Schema l p a) s b where
+instance HasVirtCpus a b => HasVirtCpus (TF.Schema l p a) b where
     virtCpus = TF.configuration . virtCpus
 
-class HasVirtDiskDriver a s b | a -> s b where
-    virtDiskDriver :: Lens' a (TF.Attr s b)
+class HasVirtDiskDriver a b | a -> b where
+    virtDiskDriver :: Lens' a b
 
-instance HasVirtDiskDriver a s b => HasVirtDiskDriver (TF.Schema l p a) s b where
+instance HasVirtDiskDriver a b => HasVirtDiskDriver (TF.Schema l p a) b where
     virtDiskDriver = TF.configuration . virtDiskDriver
 
-class HasVirtFileSize a s b | a -> s b where
-    virtFileSize :: Lens' a (TF.Attr s b)
+class HasVirtFileSize a b | a -> b where
+    virtFileSize :: Lens' a b
 
-instance HasVirtFileSize a s b => HasVirtFileSize (TF.Schema l p a) s b where
+instance HasVirtFileSize a b => HasVirtFileSize (TF.Schema l p a) b where
     virtFileSize = TF.configuration . virtFileSize
 
-class HasVirtPath a s b | a -> s b where
-    virtPath :: Lens' a (TF.Attr s b)
+class HasVirtPath a b | a -> b where
+    virtPath :: Lens' a b
 
-instance HasVirtPath a s b => HasVirtPath (TF.Schema l p a) s b where
+instance HasVirtPath a b => HasVirtPath (TF.Schema l p a) b where
     virtPath = TF.configuration . virtPath
 
-class HasVirtPxeBoot a s b | a -> s b where
-    virtPxeBoot :: Lens' a (TF.Attr s b)
+class HasVirtPxeBoot a b | a -> b where
+    virtPxeBoot :: Lens' a b
 
-instance HasVirtPxeBoot a s b => HasVirtPxeBoot (TF.Schema l p a) s b where
+instance HasVirtPxeBoot a b => HasVirtPxeBoot (TF.Schema l p a) b where
     virtPxeBoot = TF.configuration . virtPxeBoot
 
-class HasVirtRam a s b | a -> s b where
-    virtRam :: Lens' a (TF.Attr s b)
+class HasVirtRam a b | a -> b where
+    virtRam :: Lens' a b
 
-instance HasVirtRam a s b => HasVirtRam (TF.Schema l p a) s b where
+instance HasVirtRam a b => HasVirtRam (TF.Schema l p a) b where
     virtRam = TF.configuration . virtRam
 
-class HasVirtType a s b | a -> s b where
-    virtType :: Lens' a (TF.Attr s b)
+class HasVirtType a b | a -> b where
+    virtType :: Lens' a b
 
-instance HasVirtType a s b => HasVirtType (TF.Schema l p a) s b where
+instance HasVirtType a b => HasVirtType (TF.Schema l p a) b where
     virtType = TF.configuration . virtType

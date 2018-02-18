@@ -23,7 +23,7 @@ import Control.Applicative (many, some, (<|>))
 import Control.Monad       (unless, void)
 
 import Terrafomo.Gen.Markdown
-import Terrafomo.Gen.Provider (Rule, guessType)
+import Terrafomo.Gen.Provider (Rule, matchTypeRule)
 import Terrafomo.Gen.Schema
 import Terrafomo.Gen.Text
 
@@ -167,9 +167,11 @@ argItem rules = item >>> paragraph >>> argument
                     arg { argName     = pure name
                         , argHelp     = pure "(Optional) See datatype documentation."
                         , argRequired = False
-                        , argRepeated = False
                         , argIgnored  = False
-                        , argType     = pure ("P." <> dataTypeName x <> "Type")
+                        , argType     =
+                            pure $ defaultType
+                                { typeName = "P." <> dataTypeName x <> "Type"
+                                }
                         }
 
     -- should use Parsec.Char here and rethrow errors.
@@ -183,9 +185,8 @@ argItem rules = item >>> paragraph >>> argument
             Arg { argName     = pure mempty
                 , argHelp     = pure h'
                 , argRequired = require
-                , argRepeated = False
                 , argIgnored  = deprecate
-                , argType     = guessType rules name
+                , argType     = pure (matchTypeRule rules name)
                 }
 
 attrItem :: [Rule] -> Parser (Text, Attr)
@@ -195,7 +196,7 @@ attrItem rules = item >>> paragraph >>> attribute
         name <- code
         attr <- Attr (pure name)
             <$> fmap (pure . strip) textual
-            <*> pure (guessType rules name)
+            <*> pure (pure $ matchTypeRule rules name)
         pure (safeAttrName name, attr)
 
     strip x = fromMaybe x (Text.stripPrefix " - " x)

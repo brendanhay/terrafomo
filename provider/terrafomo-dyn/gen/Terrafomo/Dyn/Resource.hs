@@ -41,8 +41,9 @@ module Terrafomo.Dyn.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -80,40 +81,40 @@ data RecordResource s = RecordResource {
 
 instance TF.ToHCL (RecordResource s) where
     toHCL RecordResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
-        , TF.attribute "ttl" _ttl
-        , TF.attribute "type" _type'
-        , TF.attribute "value" _value
-        , TF.attribute "zone" _zone
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value" <$> TF.attribute _value
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasName (RecordResource s) s Text where
+instance P.HasName (RecordResource s) (TF.Attr s Text) where
     name =
         lens (_name :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: RecordResource s)
 
-instance P.HasTtl (RecordResource s) s Text where
+instance P.HasTtl (RecordResource s) (TF.Attr s Text) where
     ttl =
         lens (_ttl :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance P.HasType' (RecordResource s) s Text where
+instance P.HasType' (RecordResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: RecordResource s)
 
-instance P.HasValue (RecordResource s) s Text where
+instance P.HasValue (RecordResource s) (TF.Attr s Text) where
     value =
         lens (_value :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _value = a } :: RecordResource s)
 
-instance P.HasZone (RecordResource s) s Text where
+instance P.HasZone (RecordResource s) (TF.Attr s Text) where
     zone =
         lens (_zone :: RecordResource s -> TF.Attr s Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
-instance P.HasComputedFqdn (RecordResource s) Text
-instance P.HasComputedId (RecordResource s) Text
+instance P.HasComputedFqdn (RecordResource s) (Text)
+instance P.HasComputedId (RecordResource s) (Text)
 
 recordResource :: TF.Schema TF.Resource P.Dyn (RecordResource s)
 recordResource =

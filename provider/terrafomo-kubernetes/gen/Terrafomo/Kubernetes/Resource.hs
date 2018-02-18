@@ -80,8 +80,9 @@ module Terrafomo.Kubernetes.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -116,16 +117,16 @@ data ConfigMapResource s = ConfigMapResource {
 
 instance TF.ToHCL (ConfigMapResource s) where
     toHCL ConfigMapResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "data" _data'
-        , TF.attribute "metadata" _metadata
+        [ TF.assign "data" <$> TF.attribute _data'
+        , TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
-instance P.HasData' (ConfigMapResource s) s Text where
+instance P.HasData' (ConfigMapResource s) (TF.Attr s Text) where
     data' =
         lens (_data' :: ConfigMapResource s -> TF.Attr s Text)
              (\s a -> s { _data' = a } :: ConfigMapResource s)
 
-instance P.HasMetadata (ConfigMapResource s) s Text where
+instance P.HasMetadata (ConfigMapResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ConfigMapResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ConfigMapResource s)
@@ -154,16 +155,16 @@ data HorizontalPodAutoscalerResource s = HorizontalPodAutoscalerResource {
 
 instance TF.ToHCL (HorizontalPodAutoscalerResource s) where
     toHCL HorizontalPodAutoscalerResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "spec" _spec
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
         ]
 
-instance P.HasMetadata (HorizontalPodAutoscalerResource s) s Text where
+instance P.HasMetadata (HorizontalPodAutoscalerResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: HorizontalPodAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: HorizontalPodAutoscalerResource s)
 
-instance P.HasSpec (HorizontalPodAutoscalerResource s) s Text where
+instance P.HasSpec (HorizontalPodAutoscalerResource s) (TF.Attr s Text) where
     spec =
         lens (_spec :: HorizontalPodAutoscalerResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: HorizontalPodAutoscalerResource s)
@@ -193,16 +194,16 @@ data LimitRangeResource s = LimitRangeResource {
 
 instance TF.ToHCL (LimitRangeResource s) where
     toHCL LimitRangeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "spec" _spec
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
         ]
 
-instance P.HasMetadata (LimitRangeResource s) s Text where
+instance P.HasMetadata (LimitRangeResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: LimitRangeResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: LimitRangeResource s)
 
-instance P.HasSpec (LimitRangeResource s) s Text where
+instance P.HasSpec (LimitRangeResource s) (TF.Attr s Text) where
     spec =
         lens (_spec :: LimitRangeResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: LimitRangeResource s)
@@ -229,10 +230,10 @@ data NamespaceResource s = NamespaceResource {
 
 instance TF.ToHCL (NamespaceResource s) where
     toHCL NamespaceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
+        [ TF.assign "metadata" <$> TF.attribute _metadata
         ]
 
-instance P.HasMetadata (NamespaceResource s) s Text where
+instance P.HasMetadata (NamespaceResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: NamespaceResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: NamespaceResource s)
@@ -261,22 +262,22 @@ data PersistentVolumeClaimResource s = PersistentVolumeClaimResource {
 
 instance TF.ToHCL (PersistentVolumeClaimResource s) where
     toHCL PersistentVolumeClaimResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "spec" _spec
-        , TF.attribute "wait_until_bound" _wait_until_bound
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
+        , TF.assign "wait_until_bound" <$> TF.attribute _wait_until_bound
         ]
 
-instance P.HasMetadata (PersistentVolumeClaimResource s) s Text where
+instance P.HasMetadata (PersistentVolumeClaimResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: PersistentVolumeClaimResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: PersistentVolumeClaimResource s)
 
-instance P.HasSpec (PersistentVolumeClaimResource s) s Text where
+instance P.HasSpec (PersistentVolumeClaimResource s) (TF.Attr s Text) where
     spec =
         lens (_spec :: PersistentVolumeClaimResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: PersistentVolumeClaimResource s)
 
-instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) s Text where
+instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) (TF.Attr s Text) where
     waitUntilBound =
         lens (_wait_until_bound :: PersistentVolumeClaimResource s -> TF.Attr s Text)
              (\s a -> s { _wait_until_bound = a } :: PersistentVolumeClaimResource s)
@@ -308,16 +309,16 @@ data PersistentVolumeResource s = PersistentVolumeResource {
 
 instance TF.ToHCL (PersistentVolumeResource s) where
     toHCL PersistentVolumeResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "spec" _spec
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
         ]
 
-instance P.HasMetadata (PersistentVolumeResource s) s Text where
+instance P.HasMetadata (PersistentVolumeResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: PersistentVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: PersistentVolumeResource s)
 
-instance P.HasSpec (PersistentVolumeResource s) s Text where
+instance P.HasSpec (PersistentVolumeResource s) (TF.Attr s Text) where
     spec =
         lens (_spec :: PersistentVolumeResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: PersistentVolumeResource s)
@@ -347,16 +348,16 @@ data PodResource s = PodResource {
 
 instance TF.ToHCL (PodResource s) where
     toHCL PodResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "spec" _spec
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
         ]
 
-instance P.HasMetadata (PodResource s) s Text where
+instance P.HasMetadata (PodResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: PodResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: PodResource s)
 
-instance P.HasSpec (PodResource s) s Text where
+instance P.HasSpec (PodResource s) (TF.Attr s Text) where
     spec =
         lens (_spec :: PodResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: PodResource s)
@@ -387,16 +388,16 @@ data ReplicationControllerResource s = ReplicationControllerResource {
 
 instance TF.ToHCL (ReplicationControllerResource s) where
     toHCL ReplicationControllerResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "spec" _spec
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
         ]
 
-instance P.HasMetadata (ReplicationControllerResource s) s Text where
+instance P.HasMetadata (ReplicationControllerResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ReplicationControllerResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ReplicationControllerResource s)
 
-instance P.HasSpec (ReplicationControllerResource s) s Text where
+instance P.HasSpec (ReplicationControllerResource s) (TF.Attr s Text) where
     spec =
         lens (_spec :: ReplicationControllerResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: ReplicationControllerResource s)
@@ -426,16 +427,16 @@ data ResourceQuotaResource s = ResourceQuotaResource {
 
 instance TF.ToHCL (ResourceQuotaResource s) where
     toHCL ResourceQuotaResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "spec" _spec
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
         ]
 
-instance P.HasMetadata (ResourceQuotaResource s) s Text where
+instance P.HasMetadata (ResourceQuotaResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ResourceQuotaResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ResourceQuotaResource s)
 
-instance P.HasSpec (ResourceQuotaResource s) s Text where
+instance P.HasSpec (ResourceQuotaResource s) (TF.Attr s Text) where
     spec =
         lens (_spec :: ResourceQuotaResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: ResourceQuotaResource s)
@@ -468,27 +469,27 @@ data SecretResource s = SecretResource {
     , _metadata :: !(TF.Attr s Text)
     {- ^ (Required) Standard secret's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata -}
     , _type'    :: !(TF.Attr s Text)
-    {- ^ (Optional) The secret type. Defaults to @Opaque@ . More info: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/secrets.md#proposed-design -}
+    {- ^ (Optional) The secret type. Defaults to @Opaque@ . More info: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/auth/secrets.md#proposed-design -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SecretResource s) where
     toHCL SecretResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "data" _data'
-        , TF.attribute "metadata" _metadata
-        , TF.attribute "type" _type'
+        [ TF.assign "data" <$> TF.attribute _data'
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasData' (SecretResource s) s Text where
+instance P.HasData' (SecretResource s) (TF.Attr s Text) where
     data' =
         lens (_data' :: SecretResource s -> TF.Attr s Text)
              (\s a -> s { _data' = a } :: SecretResource s)
 
-instance P.HasMetadata (SecretResource s) s Text where
+instance P.HasMetadata (SecretResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: SecretResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: SecretResource s)
 
-instance P.HasType' (SecretResource s) s Text where
+instance P.HasType' (SecretResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: SecretResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: SecretResource s)
@@ -519,27 +520,27 @@ data ServiceAccountResource s = ServiceAccountResource {
 
 instance TF.ToHCL (ServiceAccountResource s) where
     toHCL ServiceAccountResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "image_pull_secret" _image_pull_secret
-        , TF.attribute "metadata" _metadata
-        , TF.attribute "secret" _secret
+        [ TF.assign "image_pull_secret" <$> TF.attribute _image_pull_secret
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "secret" <$> TF.attribute _secret
         ]
 
-instance P.HasImagePullSecret (ServiceAccountResource s) s Text where
+instance P.HasImagePullSecret (ServiceAccountResource s) (TF.Attr s Text) where
     imagePullSecret =
         lens (_image_pull_secret :: ServiceAccountResource s -> TF.Attr s Text)
              (\s a -> s { _image_pull_secret = a } :: ServiceAccountResource s)
 
-instance P.HasMetadata (ServiceAccountResource s) s Text where
+instance P.HasMetadata (ServiceAccountResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ServiceAccountResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ServiceAccountResource s)
 
-instance P.HasSecret (ServiceAccountResource s) s Text where
+instance P.HasSecret (ServiceAccountResource s) (TF.Attr s Text) where
     secret =
         lens (_secret :: ServiceAccountResource s -> TF.Attr s Text)
              (\s a -> s { _secret = a } :: ServiceAccountResource s)
 
-instance P.HasComputedDefaultSecretName (ServiceAccountResource s) Text
+instance P.HasComputedDefaultSecretName (ServiceAccountResource s) (Text)
 
 serviceAccountResource :: TF.Schema TF.Resource P.Kubernetes (ServiceAccountResource s)
 serviceAccountResource =
@@ -564,16 +565,16 @@ data ServiceResource s = ServiceResource {
 
 instance TF.ToHCL (ServiceResource s) where
     toHCL ServiceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "spec" _spec
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "spec" <$> TF.attribute _spec
         ]
 
-instance P.HasMetadata (ServiceResource s) s Text where
+instance P.HasMetadata (ServiceResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: ServiceResource s)
 
-instance P.HasSpec (ServiceResource s) s Text where
+instance P.HasSpec (ServiceResource s) (TF.Attr s Text) where
     spec =
         lens (_spec :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _spec = a } :: ServiceResource s)
@@ -605,22 +606,22 @@ data StorageClassResource s = StorageClassResource {
 
 instance TF.ToHCL (StorageClassResource s) where
     toHCL StorageClassResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "metadata" _metadata
-        , TF.attribute "parameters" _parameters
-        , TF.attribute "storage_provisioner" _storage_provisioner
+        [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "parameters" <$> TF.attribute _parameters
+        , TF.assign "storage_provisioner" <$> TF.attribute _storage_provisioner
         ]
 
-instance P.HasMetadata (StorageClassResource s) s Text where
+instance P.HasMetadata (StorageClassResource s) (TF.Attr s Text) where
     metadata =
         lens (_metadata :: StorageClassResource s -> TF.Attr s Text)
              (\s a -> s { _metadata = a } :: StorageClassResource s)
 
-instance P.HasParameters (StorageClassResource s) s Text where
+instance P.HasParameters (StorageClassResource s) (TF.Attr s Text) where
     parameters =
         lens (_parameters :: StorageClassResource s -> TF.Attr s Text)
              (\s a -> s { _parameters = a } :: StorageClassResource s)
 
-instance P.HasStorageProvisioner (StorageClassResource s) s Text where
+instance P.HasStorageProvisioner (StorageClassResource s) (TF.Attr s Text) where
     storageProvisioner =
         lens (_storage_provisioner :: StorageClassResource s -> TF.Attr s Text)
              (\s a -> s { _storage_provisioner = a } :: StorageClassResource s)

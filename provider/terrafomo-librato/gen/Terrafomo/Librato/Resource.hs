@@ -80,8 +80,9 @@ module Terrafomo.Librato.Resource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -124,57 +125,57 @@ data AlertResource s = AlertResource {
 
 instance TF.ToHCL (AlertResource s) where
     toHCL AlertResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "active" _active
-        , TF.attribute "attributes" _attributes
-        , TF.attribute "condition" _condition
-        , TF.attribute "description" _description
-        , TF.attribute "name" _name
-        , TF.attribute "rearm_seconds" _rearm_seconds
-        , TF.attribute "services" _services
+        [ TF.assign "active" <$> TF.attribute _active
+        , TF.assign "attributes" <$> TF.attribute _attributes
+        , TF.assign "condition" <$> TF.attribute _condition
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "rearm_seconds" <$> TF.attribute _rearm_seconds
+        , TF.assign "services" <$> TF.attribute _services
         ]
 
-instance P.HasActive (AlertResource s) s Text where
+instance P.HasActive (AlertResource s) (TF.Attr s Text) where
     active =
         lens (_active :: AlertResource s -> TF.Attr s Text)
              (\s a -> s { _active = a } :: AlertResource s)
 
-instance P.HasAttributes (AlertResource s) s Text where
+instance P.HasAttributes (AlertResource s) (TF.Attr s Text) where
     attributes =
         lens (_attributes :: AlertResource s -> TF.Attr s Text)
              (\s a -> s { _attributes = a } :: AlertResource s)
 
-instance P.HasCondition (AlertResource s) s Text where
+instance P.HasCondition (AlertResource s) (TF.Attr s Text) where
     condition =
         lens (_condition :: AlertResource s -> TF.Attr s Text)
              (\s a -> s { _condition = a } :: AlertResource s)
 
-instance P.HasDescription (AlertResource s) s Text where
+instance P.HasDescription (AlertResource s) (TF.Attr s Text) where
     description =
         lens (_description :: AlertResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: AlertResource s)
 
-instance P.HasName (AlertResource s) s Text where
+instance P.HasName (AlertResource s) (TF.Attr s Text) where
     name =
         lens (_name :: AlertResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: AlertResource s)
 
-instance P.HasRearmSeconds (AlertResource s) s Text where
+instance P.HasRearmSeconds (AlertResource s) (TF.Attr s Text) where
     rearmSeconds =
         lens (_rearm_seconds :: AlertResource s -> TF.Attr s Text)
              (\s a -> s { _rearm_seconds = a } :: AlertResource s)
 
-instance P.HasServices (AlertResource s) s Text where
+instance P.HasServices (AlertResource s) (TF.Attr s Text) where
     services =
         lens (_services :: AlertResource s -> TF.Attr s Text)
              (\s a -> s { _services = a } :: AlertResource s)
 
-instance P.HasComputedActive (AlertResource s) Text
-instance P.HasComputedCondition (AlertResource s) Text
-instance P.HasComputedDescription (AlertResource s) Text
-instance P.HasComputedId (AlertResource s) Text
-instance P.HasComputedName (AlertResource s) Text
-instance P.HasComputedRearmSeconds (AlertResource s) Text
-instance P.HasComputedServices (AlertResource s) Text
+instance P.HasComputedActive (AlertResource s) (Text)
+instance P.HasComputedCondition (AlertResource s) (Text)
+instance P.HasComputedDescription (AlertResource s) (Text)
+instance P.HasComputedId (AlertResource s) (Text)
+instance P.HasComputedName (AlertResource s) (Text)
+instance P.HasComputedRearmSeconds (AlertResource s) (Text)
+instance P.HasComputedServices (AlertResource s) (Text)
 
 alertResource :: TF.Schema TF.Resource P.Librato (AlertResource s)
 alertResource =
@@ -213,57 +214,57 @@ data MetricResource s = MetricResource {
 
 instance TF.ToHCL (MetricResource s) where
     toHCL MetricResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "attributes" _attributes
-        , TF.attribute "composite" _composite
-        , TF.attribute "description" _description
-        , TF.attribute "display_name" _display_name
-        , TF.attribute "name" _name
-        , TF.attribute "period" _period
-        , TF.attribute "type" _type'
+        [ TF.assign "attributes" <$> TF.attribute _attributes
+        , TF.assign "composite" <$> TF.attribute _composite
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "period" <$> TF.attribute _period
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasAttributes (MetricResource s) s Text where
+instance P.HasAttributes (MetricResource s) (TF.Attr s Text) where
     attributes =
         lens (_attributes :: MetricResource s -> TF.Attr s Text)
              (\s a -> s { _attributes = a } :: MetricResource s)
 
-instance P.HasComposite (MetricResource s) s Text where
+instance P.HasComposite (MetricResource s) (TF.Attr s Text) where
     composite =
         lens (_composite :: MetricResource s -> TF.Attr s Text)
              (\s a -> s { _composite = a } :: MetricResource s)
 
-instance P.HasDescription (MetricResource s) s Text where
+instance P.HasDescription (MetricResource s) (TF.Attr s Text) where
     description =
         lens (_description :: MetricResource s -> TF.Attr s Text)
              (\s a -> s { _description = a } :: MetricResource s)
 
-instance P.HasDisplayName (MetricResource s) s Text where
+instance P.HasDisplayName (MetricResource s) (TF.Attr s Text) where
     displayName =
         lens (_display_name :: MetricResource s -> TF.Attr s Text)
              (\s a -> s { _display_name = a } :: MetricResource s)
 
-instance P.HasName (MetricResource s) s Text where
+instance P.HasName (MetricResource s) (TF.Attr s Text) where
     name =
         lens (_name :: MetricResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: MetricResource s)
 
-instance P.HasPeriod (MetricResource s) s Text where
+instance P.HasPeriod (MetricResource s) (TF.Attr s Text) where
     period =
         lens (_period :: MetricResource s -> TF.Attr s Text)
              (\s a -> s { _period = a } :: MetricResource s)
 
-instance P.HasType' (MetricResource s) s Text where
+instance P.HasType' (MetricResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: MetricResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: MetricResource s)
 
-instance P.HasComputedComposite (MetricResource s) Text
-instance P.HasComputedDescription (MetricResource s) Text
-instance P.HasComputedDisplayName (MetricResource s) Text
-instance P.HasComputedName (MetricResource s) Text
-instance P.HasComputedPeriod (MetricResource s) Text
-instance P.HasComputedSourceLag (MetricResource s) Text
-instance P.HasComputedType' (MetricResource s) Text
+instance P.HasComputedComposite (MetricResource s) (Text)
+instance P.HasComputedDescription (MetricResource s) (Text)
+instance P.HasComputedDisplayName (MetricResource s) (Text)
+instance P.HasComputedName (MetricResource s) (Text)
+instance P.HasComputedPeriod (MetricResource s) (Text)
+instance P.HasComputedSourceLag (MetricResource s) (Text)
+instance P.HasComputedType' (MetricResource s) (Text)
 
 metricResource :: TF.Schema TF.Resource P.Librato (MetricResource s)
 metricResource =
@@ -294,30 +295,30 @@ data ServiceResource s = ServiceResource {
 
 instance TF.ToHCL (ServiceResource s) where
     toHCL ServiceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "settings" _settings
-        , TF.attribute "title" _title
-        , TF.attribute "type" _type'
+        [ TF.assign "settings" <$> TF.attribute _settings
+        , TF.assign "title" <$> TF.attribute _title
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasSettings (ServiceResource s) s Text where
+instance P.HasSettings (ServiceResource s) (TF.Attr s Text) where
     settings =
         lens (_settings :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _settings = a } :: ServiceResource s)
 
-instance P.HasTitle (ServiceResource s) s Text where
+instance P.HasTitle (ServiceResource s) (TF.Attr s Text) where
     title =
         lens (_title :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _title = a } :: ServiceResource s)
 
-instance P.HasType' (ServiceResource s) s Text where
+instance P.HasType' (ServiceResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: ServiceResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: ServiceResource s)
 
-instance P.HasComputedId (ServiceResource s) Text
-instance P.HasComputedSettings (ServiceResource s) Text
-instance P.HasComputedTitle (ServiceResource s) Text
-instance P.HasComputedType' (ServiceResource s) Text
+instance P.HasComputedId (ServiceResource s) (Text)
+instance P.HasComputedSettings (ServiceResource s) (Text)
+instance P.HasComputedTitle (ServiceResource s) (Text)
+instance P.HasComputedType' (ServiceResource s) (Text)
 
 serviceResource :: TF.Schema TF.Resource P.Librato (ServiceResource s)
 serviceResource =
@@ -354,59 +355,59 @@ data SpaceChartResource s = SpaceChartResource {
 
 instance TF.ToHCL (SpaceChartResource s) where
     toHCL SpaceChartResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "label" _label
-        , TF.attribute "max" _max
-        , TF.attribute "min" _min
-        , TF.attribute "name" _name
-        , TF.attribute "related_space" _related_space
-        , TF.attribute "space_id" _space_id
-        , TF.attribute "stream" _stream
-        , TF.attribute "type" _type'
+        [ TF.assign "label" <$> TF.attribute _label
+        , TF.assign "max" <$> TF.attribute _max
+        , TF.assign "min" <$> TF.attribute _min
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "related_space" <$> TF.attribute _related_space
+        , TF.assign "space_id" <$> TF.attribute _space_id
+        , TF.assign "stream" <$> TF.attribute _stream
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance P.HasLabel (SpaceChartResource s) s Text where
+instance P.HasLabel (SpaceChartResource s) (TF.Attr s Text) where
     label =
         lens (_label :: SpaceChartResource s -> TF.Attr s Text)
              (\s a -> s { _label = a } :: SpaceChartResource s)
 
-instance P.HasMax (SpaceChartResource s) s Text where
+instance P.HasMax (SpaceChartResource s) (TF.Attr s Text) where
     max =
         lens (_max :: SpaceChartResource s -> TF.Attr s Text)
              (\s a -> s { _max = a } :: SpaceChartResource s)
 
-instance P.HasMin (SpaceChartResource s) s Text where
+instance P.HasMin (SpaceChartResource s) (TF.Attr s Text) where
     min =
         lens (_min :: SpaceChartResource s -> TF.Attr s Text)
              (\s a -> s { _min = a } :: SpaceChartResource s)
 
-instance P.HasName (SpaceChartResource s) s Text where
+instance P.HasName (SpaceChartResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SpaceChartResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SpaceChartResource s)
 
-instance P.HasRelatedSpace (SpaceChartResource s) s Text where
+instance P.HasRelatedSpace (SpaceChartResource s) (TF.Attr s Text) where
     relatedSpace =
         lens (_related_space :: SpaceChartResource s -> TF.Attr s Text)
              (\s a -> s { _related_space = a } :: SpaceChartResource s)
 
-instance P.HasSpaceId (SpaceChartResource s) s Text where
+instance P.HasSpaceId (SpaceChartResource s) (TF.Attr s Text) where
     spaceId =
         lens (_space_id :: SpaceChartResource s -> TF.Attr s Text)
              (\s a -> s { _space_id = a } :: SpaceChartResource s)
 
-instance P.HasStream (SpaceChartResource s) s Text where
+instance P.HasStream (SpaceChartResource s) (TF.Attr s Text) where
     stream =
         lens (_stream :: SpaceChartResource s -> TF.Attr s Text)
              (\s a -> s { _stream = a } :: SpaceChartResource s)
 
-instance P.HasType' (SpaceChartResource s) s Text where
+instance P.HasType' (SpaceChartResource s) (TF.Attr s Text) where
     type' =
         lens (_type' :: SpaceChartResource s -> TF.Attr s Text)
              (\s a -> s { _type' = a } :: SpaceChartResource s)
 
-instance P.HasComputedId (SpaceChartResource s) Text
-instance P.HasComputedSpaceId (SpaceChartResource s) Text
-instance P.HasComputedTitle (SpaceChartResource s) Text
+instance P.HasComputedId (SpaceChartResource s) (Text)
+instance P.HasComputedSpaceId (SpaceChartResource s) (Text)
+instance P.HasComputedTitle (SpaceChartResource s) (Text)
 
 spaceChartResource :: TF.Schema TF.Resource P.Librato (SpaceChartResource s)
 spaceChartResource =
@@ -434,16 +435,16 @@ data SpaceResource s = SpaceResource {
 
 instance TF.ToHCL (SpaceResource s) where
     toHCL SpaceResource{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (SpaceResource s) s Text where
+instance P.HasName (SpaceResource s) (TF.Attr s Text) where
     name =
         lens (_name :: SpaceResource s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: SpaceResource s)
 
-instance P.HasComputedId (SpaceResource s) Text
-instance P.HasComputedName (SpaceResource s) Text
+instance P.HasComputedId (SpaceResource s) (Text)
+instance P.HasComputedName (SpaceResource s) (Text)
 
 spaceResource :: TF.Schema TF.Resource P.Librato (SpaceResource s)
 spaceResource =

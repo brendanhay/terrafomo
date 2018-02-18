@@ -62,8 +62,9 @@ module Terrafomo.GitHub.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -93,20 +94,20 @@ data TeamData s = TeamData {
 
 instance TF.ToHCL (TeamData s) where
     toHCL TeamData{..} = TF.inline $ catMaybes
-        [ TF.attribute "slug" _slug
+        [ TF.assign "slug" <$> TF.attribute _slug
         ]
 
-instance P.HasSlug (TeamData s) s Text where
+instance P.HasSlug (TeamData s) (TF.Attr s Text) where
     slug =
         lens (_slug :: TeamData s -> TF.Attr s Text)
              (\s a -> s { _slug = a } :: TeamData s)
 
-instance P.HasComputedDescription (TeamData s) Text
-instance P.HasComputedId (TeamData s) Text
-instance P.HasComputedMembers (TeamData s) Text
-instance P.HasComputedName (TeamData s) Text
-instance P.HasComputedPermission (TeamData s) Text
-instance P.HasComputedPrivacy (TeamData s) Text
+instance P.HasComputedDescription (TeamData s) (Text)
+instance P.HasComputedId (TeamData s) (Text)
+instance P.HasComputedMembers (TeamData s) (Text)
+instance P.HasComputedName (TeamData s) (Text)
+instance P.HasComputedPermission (TeamData s) (Text)
+instance P.HasComputedPrivacy (TeamData s) (Text)
 
 teamData :: TF.Schema TF.DataSource P.GitHub (TeamData s)
 teamData =
@@ -126,32 +127,32 @@ data UserData s = UserData {
 
 instance TF.ToHCL (UserData s) where
     toHCL UserData{..} = TF.inline $ catMaybes
-        [ TF.attribute "username" _username
+        [ TF.assign "username" <$> TF.attribute _username
         ]
 
-instance P.HasUsername (UserData s) s Text where
+instance P.HasUsername (UserData s) (TF.Attr s Text) where
     username =
         lens (_username :: UserData s -> TF.Attr s Text)
              (\s a -> s { _username = a } :: UserData s)
 
-instance P.HasComputedAvatarUrl (UserData s) Text
-instance P.HasComputedBio (UserData s) Text
-instance P.HasComputedBlog (UserData s) Text
-instance P.HasComputedCompany (UserData s) Text
-instance P.HasComputedCreatedAt (UserData s) Text
-instance P.HasComputedEmail (UserData s) Text
-instance P.HasComputedFollowers (UserData s) Text
-instance P.HasComputedFollowing (UserData s) Text
-instance P.HasComputedGpgKeys (UserData s) Text
-instance P.HasComputedGravatarId (UserData s) Text
-instance P.HasComputedLocation (UserData s) Text
-instance P.HasComputedLogin (UserData s) Text
-instance P.HasComputedName (UserData s) Text
-instance P.HasComputedPublicGists (UserData s) Text
-instance P.HasComputedPublicRepos (UserData s) Text
-instance P.HasComputedSiteAdmin (UserData s) Text
-instance P.HasComputedSshKeys (UserData s) Text
-instance P.HasComputedUpdatedAt (UserData s) Text
+instance P.HasComputedAvatarUrl (UserData s) (Text)
+instance P.HasComputedBio (UserData s) (Text)
+instance P.HasComputedBlog (UserData s) (Text)
+instance P.HasComputedCompany (UserData s) (Text)
+instance P.HasComputedCreatedAt (UserData s) (Text)
+instance P.HasComputedEmail (UserData s) (Text)
+instance P.HasComputedFollowers (UserData s) (Text)
+instance P.HasComputedFollowing (UserData s) (Text)
+instance P.HasComputedGpgKeys (UserData s) (Text)
+instance P.HasComputedGravatarId (UserData s) (Text)
+instance P.HasComputedLocation (UserData s) (Text)
+instance P.HasComputedLogin (UserData s) (Text)
+instance P.HasComputedName (UserData s) (Text)
+instance P.HasComputedPublicGists (UserData s) (Text)
+instance P.HasComputedPublicRepos (UserData s) (Text)
+instance P.HasComputedSiteAdmin (UserData s) (Text)
+instance P.HasComputedSshKeys (UserData s) (Text)
+instance P.HasComputedUpdatedAt (UserData s) (Text)
 
 userData :: TF.Schema TF.DataSource P.GitHub (UserData s)
 userData =

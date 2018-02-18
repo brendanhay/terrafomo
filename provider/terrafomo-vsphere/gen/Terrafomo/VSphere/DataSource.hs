@@ -82,8 +82,9 @@ module Terrafomo.VSphere.DataSource
     , module P
     ) where
 
-import Data.Maybe (catMaybes)
-import Data.Text  (Text)
+import Data.Functor ((<$>))
+import Data.Maybe   (catMaybes)
+import Data.Text    (Text)
 
 import GHC.Base (Eq, ($))
 import GHC.Show (Show)
@@ -119,10 +120,10 @@ data CustomAttributeData s = CustomAttributeData {
 
 instance TF.ToHCL (CustomAttributeData s) where
     toHCL CustomAttributeData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (CustomAttributeData s) s Text where
+instance P.HasName (CustomAttributeData s) (TF.Attr s Text) where
     name =
         lens (_name :: CustomAttributeData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: CustomAttributeData s)
@@ -149,10 +150,10 @@ data DatacenterData s = DatacenterData {
 
 instance TF.ToHCL (DatacenterData s) where
     toHCL DatacenterData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (DatacenterData s) s Text where
+instance P.HasName (DatacenterData s) (TF.Attr s Text) where
     name =
         lens (_name :: DatacenterData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatacenterData s)
@@ -181,16 +182,16 @@ data DatastoreData s = DatastoreData {
 
 instance TF.ToHCL (DatastoreData s) where
     toHCL DatastoreData{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter_id" _datacenter_id
-        , TF.attribute "name" _name
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (DatastoreData s) s Text where
+instance P.HasDatacenterId (DatastoreData s) (TF.Attr s Text) where
     datacenterId =
         lens (_datacenter_id :: DatastoreData s -> TF.Attr s Text)
              (\s a -> s { _datacenter_id = a } :: DatastoreData s)
 
-instance P.HasName (DatastoreData s) s Text where
+instance P.HasName (DatastoreData s) (TF.Attr s Text) where
     name =
         lens (_name :: DatastoreData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DatastoreData s)
@@ -222,22 +223,22 @@ data DistributedVirtualSwitchData s = DistributedVirtualSwitchData {
 
 instance TF.ToHCL (DistributedVirtualSwitchData s) where
     toHCL DistributedVirtualSwitchData{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter_id" _datacenter_id
-        , TF.attribute "name" _name
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (DistributedVirtualSwitchData s) s Text where
+instance P.HasDatacenterId (DistributedVirtualSwitchData s) (TF.Attr s Text) where
     datacenterId =
         lens (_datacenter_id :: DistributedVirtualSwitchData s -> TF.Attr s Text)
              (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchData s)
 
-instance P.HasName (DistributedVirtualSwitchData s) s Text where
+instance P.HasName (DistributedVirtualSwitchData s) (TF.Attr s Text) where
     name =
         lens (_name :: DistributedVirtualSwitchData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: DistributedVirtualSwitchData s)
 
-instance P.HasComputedId (DistributedVirtualSwitchData s) Text
-instance P.HasComputedUplinks (DistributedVirtualSwitchData s) Text
+instance P.HasComputedId (DistributedVirtualSwitchData s) (Text)
+instance P.HasComputedUplinks (DistributedVirtualSwitchData s) (Text)
 
 distributedVirtualSwitchData :: TF.Schema TF.DataSource P.VSphere (DistributedVirtualSwitchData s)
 distributedVirtualSwitchData =
@@ -262,16 +263,16 @@ data HostData s = HostData {
 
 instance TF.ToHCL (HostData s) where
     toHCL HostData{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter_id" _datacenter_id
-        , TF.attribute "name" _name
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (HostData s) s Text where
+instance P.HasDatacenterId (HostData s) (TF.Attr s Text) where
     datacenterId =
         lens (_datacenter_id :: HostData s -> TF.Attr s Text)
              (\s a -> s { _datacenter_id = a } :: HostData s)
 
-instance P.HasName (HostData s) s Text where
+instance P.HasName (HostData s) (TF.Attr s Text) where
     name =
         lens (_name :: HostData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: HostData s)
@@ -302,22 +303,22 @@ data NetworkData s = NetworkData {
 
 instance TF.ToHCL (NetworkData s) where
     toHCL NetworkData{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter_id" _datacenter_id
-        , TF.attribute "name" _name
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (NetworkData s) s Text where
+instance P.HasDatacenterId (NetworkData s) (TF.Attr s Text) where
     datacenterId =
         lens (_datacenter_id :: NetworkData s -> TF.Attr s Text)
              (\s a -> s { _datacenter_id = a } :: NetworkData s)
 
-instance P.HasName (NetworkData s) s Text where
+instance P.HasName (NetworkData s) (TF.Attr s Text) where
     name =
         lens (_name :: NetworkData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: NetworkData s)
 
-instance P.HasComputedId (NetworkData s) Text
-instance P.HasComputedType' (NetworkData s) Text
+instance P.HasComputedId (NetworkData s) (Text)
+instance P.HasComputedType' (NetworkData s) (Text)
 
 networkData :: TF.Schema TF.DataSource P.VSphere (NetworkData s)
 networkData =
@@ -343,16 +344,16 @@ data ResourcePoolData s = ResourcePoolData {
 
 instance TF.ToHCL (ResourcePoolData s) where
     toHCL ResourcePoolData{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter_id" _datacenter_id
-        , TF.attribute "name" _name
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDatacenterId (ResourcePoolData s) s Text where
+instance P.HasDatacenterId (ResourcePoolData s) (TF.Attr s Text) where
     datacenterId =
         lens (_datacenter_id :: ResourcePoolData s -> TF.Attr s Text)
              (\s a -> s { _datacenter_id = a } :: ResourcePoolData s)
 
-instance P.HasName (ResourcePoolData s) s Text where
+instance P.HasName (ResourcePoolData s) (TF.Attr s Text) where
     name =
         lens (_name :: ResourcePoolData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: ResourcePoolData s)
@@ -383,10 +384,10 @@ data TagCategoryData s = TagCategoryData {
 
 instance TF.ToHCL (TagCategoryData s) where
     toHCL TagCategoryData{..} = TF.inline $ catMaybes
-        [ TF.attribute "name" _name
+        [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (TagCategoryData s) s Text where
+instance P.HasName (TagCategoryData s) (TF.Attr s Text) where
     name =
         lens (_name :: TagCategoryData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TagCategoryData s)
@@ -418,16 +419,16 @@ data TagData s = TagData {
 
 instance TF.ToHCL (TagData s) where
     toHCL TagData{..} = TF.inline $ catMaybes
-        [ TF.attribute "category_id" _category_id
-        , TF.attribute "name" _name
+        [ TF.assign "category_id" <$> TF.attribute _category_id
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasCategoryId (TagData s) s Text where
+instance P.HasCategoryId (TagData s) (TF.Attr s Text) where
     categoryId =
         lens (_category_id :: TagData s -> TF.Attr s Text)
              (\s a -> s { _category_id = a } :: TagData s)
 
-instance P.HasName (TagData s) s Text where
+instance P.HasName (TagData s) (TF.Attr s Text) where
     name =
         lens (_name :: TagData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: TagData s)
@@ -460,35 +461,35 @@ data VirtualMachineData s = VirtualMachineData {
 
 instance TF.ToHCL (VirtualMachineData s) where
     toHCL VirtualMachineData{..} = TF.inline $ catMaybes
-        [ TF.attribute "datacenter_id" _datacenter_id
-        , TF.attribute "name" _name
-        , TF.attribute "scsi_controller_scan_count" _scsi_controller_scan_count
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "scsi_controller_scan_count" <$> TF.attribute _scsi_controller_scan_count
         ]
 
-instance P.HasDatacenterId (VirtualMachineData s) s Text where
+instance P.HasDatacenterId (VirtualMachineData s) (TF.Attr s Text) where
     datacenterId =
         lens (_datacenter_id :: VirtualMachineData s -> TF.Attr s Text)
              (\s a -> s { _datacenter_id = a } :: VirtualMachineData s)
 
-instance P.HasName (VirtualMachineData s) s Text where
+instance P.HasName (VirtualMachineData s) (TF.Attr s Text) where
     name =
         lens (_name :: VirtualMachineData s -> TF.Attr s Text)
              (\s a -> s { _name = a } :: VirtualMachineData s)
 
-instance P.HasScsiControllerScanCount (VirtualMachineData s) s Text where
+instance P.HasScsiControllerScanCount (VirtualMachineData s) (TF.Attr s Text) where
     scsiControllerScanCount =
         lens (_scsi_controller_scan_count :: VirtualMachineData s -> TF.Attr s Text)
              (\s a -> s { _scsi_controller_scan_count = a } :: VirtualMachineData s)
 
-instance P.HasComputedAlternateGuestName (VirtualMachineData s) Text
-instance P.HasComputedDisks (VirtualMachineData s) Text
-instance P.HasComputedEagerlyScrub (VirtualMachineData s) Text
-instance P.HasComputedGuestId (VirtualMachineData s) Text
-instance P.HasComputedId (VirtualMachineData s) Text
-instance P.HasComputedNetworkInterfaceTypes (VirtualMachineData s) Text
-instance P.HasComputedScsiType (VirtualMachineData s) Text
-instance P.HasComputedSize (VirtualMachineData s) Text
-instance P.HasComputedThinProvisioned (VirtualMachineData s) Text
+instance P.HasComputedAlternateGuestName (VirtualMachineData s) (Text)
+instance P.HasComputedDisks (VirtualMachineData s) (Text)
+instance P.HasComputedEagerlyScrub (VirtualMachineData s) (Text)
+instance P.HasComputedGuestId (VirtualMachineData s) (Text)
+instance P.HasComputedId (VirtualMachineData s) (Text)
+instance P.HasComputedNetworkInterfaceTypes (VirtualMachineData s) (Text)
+instance P.HasComputedScsiType (VirtualMachineData s) (Text)
+instance P.HasComputedSize (VirtualMachineData s) (Text)
+instance P.HasComputedThinProvisioned (VirtualMachineData s) (Text)
 
 virtualMachineData :: TF.Schema TF.DataSource P.VSphere (VirtualMachineData s)
 virtualMachineData =
@@ -517,27 +518,27 @@ data VmfsDisksData s = VmfsDisksData {
 
 instance TF.ToHCL (VmfsDisksData s) where
     toHCL VmfsDisksData{..} = TF.inline $ catMaybes
-        [ TF.attribute "filter" _filter
-        , TF.attribute "host_system_id" _host_system_id
-        , TF.attribute "rescan" _rescan
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "host_system_id" <$> TF.attribute _host_system_id
+        , TF.assign "rescan" <$> TF.attribute _rescan
         ]
 
-instance P.HasFilter (VmfsDisksData s) s Text where
+instance P.HasFilter (VmfsDisksData s) (TF.Attr s Text) where
     filter =
         lens (_filter :: VmfsDisksData s -> TF.Attr s Text)
              (\s a -> s { _filter = a } :: VmfsDisksData s)
 
-instance P.HasHostSystemId (VmfsDisksData s) s Text where
+instance P.HasHostSystemId (VmfsDisksData s) (TF.Attr s Text) where
     hostSystemId =
         lens (_host_system_id :: VmfsDisksData s -> TF.Attr s Text)
              (\s a -> s { _host_system_id = a } :: VmfsDisksData s)
 
-instance P.HasRescan (VmfsDisksData s) s Text where
+instance P.HasRescan (VmfsDisksData s) (TF.Attr s Text) where
     rescan =
         lens (_rescan :: VmfsDisksData s -> TF.Attr s Text)
              (\s a -> s { _rescan = a } :: VmfsDisksData s)
 
-instance P.HasComputedDisks (VmfsDisksData s) Text
+instance P.HasComputedDisks (VmfsDisksData s) (Text)
 
 vmfsDisksData :: TF.Schema TF.DataSource P.VSphere (VmfsDisksData s)
 vmfsDisksData =
