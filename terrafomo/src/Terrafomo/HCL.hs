@@ -168,15 +168,15 @@ instance Pretty Interpolate where
     pretty = \case
         Chunk  x  -> pretty x
         Escape xs -> "${" <> PP.hcat (map unquote xs) <> "}"
-        Concat xs -> PP.hcat (map pretty xs)
+        Concat xs -> PP.hcat (concatMap unescape xs)
       where
         unquote = \case
             String x -> pretty x
             x        -> pretty x
 
-        -- unescape = \case
-        --     Escape x -> map unquote x
-        --     x        -> pretty x
+        unescape = \case
+            Escape xs -> map unquote xs
+            x         -> [pretty x]
 
 type JSON = JSON.Value
 
