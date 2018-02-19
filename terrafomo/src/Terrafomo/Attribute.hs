@@ -25,9 +25,11 @@ import Terrafomo.Name
 -- | An argument is either a computed attribute of another terraform resource
 -- or data source, a constant value, or nil.
 data Attr s a
-    = Compute  !Key  !Name !Name -- ^ A computed @TYPE.NAME.FIELD@ attribute.
-    | Join     !Text ![Attr s a] -- ^ A flattened delimited list of attributes.
-    | Constant !a                -- ^ A constant Haskell-value.
+    = Compute  !Key  !Name !Name
+    | Join     !Text ![Attr s a]
+    | Apply    !Text ![Attr s a]
+    | Infix    !Text !(Attr s a) !(Attr s a)
+    | Constant !a
     | Nil
       deriving (Show, Eq, Generic)
 
@@ -38,6 +40,14 @@ instance Hashable a => Hashable (Attr s a)
 
 instance IsString a => IsString (Attr s a) where
     fromString = attr . fromString
+
+instance Num a => Num (Attr s a) where
+    (+)         = Infix "+"
+    (-)         = Infix "-"
+    (*)         = Infix "*"
+    abs         = Apply "abs" . pure
+    signum      = Apply "signum" . pure
+    fromInteger = attr . fromInteger
 
 compute :: Key -> Name -> Attr s a
 compute k v = Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))

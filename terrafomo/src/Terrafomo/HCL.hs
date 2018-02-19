@@ -39,7 +39,7 @@ module Terrafomo.HCL
     , number
     , float
     , string
-    , flatten
+    , concat
 
     -- ** JSON Heredocs
     , ToJSON (..)
@@ -52,12 +52,14 @@ module Terrafomo.HCL
     , genericInlineAttributes
     ) where
 
+import Prelude hiding (concat)
+
 import Data.Aeson             (ToJSON (..))
 import Data.Hashable          (Hashable)
 import Data.Int
 import Data.List.NonEmpty     (NonEmpty ((:|)))
 import Data.Map.Strict        (Map)
-import Data.Maybe             (mapMaybe, maybeToList)
+import Data.Maybe             (fromMaybe, mapMaybe, maybeToList)
 import Data.Semigroup         ((<>))
 import Data.String            (IsString (fromString))
 import Data.Text              (Text)
@@ -66,14 +68,14 @@ import Data.Word
 
 import Formatting ((%))
 
-import GHC.Generics
+import GHC.Generics hiding (Infix)
 
 import Numeric.Natural (Natural)
 
 import Text.PrettyPrint.Leijen.Text (Doc, Pretty (pretty, prettyList), (<$$>),
                                      (<+>))
 
-import Terrafomo.Attribute (Attr)
+import Terrafomo.Attribute (Attr (..))
 import Terrafomo.Name
 
 import qualified Data.Aeson                   as JSON
@@ -123,6 +125,9 @@ data Value
 
 instance Hashable Value
 
+instance IsString Value where
+    fromString = String . fromString
+
 instance Pretty Value where
     prettyList = pretty . List
     pretty     = \case
@@ -149,9 +154,9 @@ instance Pretty Value where
                      in PP.nest 2 ("[" <$$> PP.vcat (reverse (y : ys))) <$$> "]"
 
 data Interpolate
-    = Escape  !Value
-    | Chunk   !LText.Text
-    | Flatten ![Interpolate]
+    = Chunk  !LText.Text
+    | Escape ![Value]
+    | Concat ![Interpolate]
       deriving (Show, Eq, Generic)
 
 instance Hashable Interpolate
@@ -161,14 +166,17 @@ instance IsString Interpolate where
 
 instance Pretty Interpolate where
     pretty = \case
-        Escape  (String x) -> "${" <> pretty x <> "}"
-        Escape  x          -> "${" <> pretty x <> "}"
-        Chunk   x          -> pretty x
-        Flatten xs         -> mconcat (map go xs)
-          where
-            go = \case
-                Escape (String x) -> pretty x
-                x                 -> pretty x
+        Chunk  x  -> pretty x
+        Escape xs -> "${" <> PP.hcat (map unquote xs) <> "}"
+        Concat xs -> PP.hcat (map pretty xs)
+      where
+        unquote = \case
+            String x -> pretty x
+            x        -> pretty x
+
+        -- unescape = \case
+        --     Escape x -> map unquote x
+        --     x        -> pretty x
 
 type JSON = JSON.Value
 
@@ -193,19 +201,34 @@ repeated x = do
         [] -> Nothing
         zs -> Just (List zs)
 
+-- FIXME: This is essentially a scratch pad. Need to revisit attributes and
+-- expressions specifically, along with general interpolation syntax (Interpolate).
 attribute :: ToHCL a => Attr s a -> Maybe Value
 attribute = \case
-    Attr.Compute  k' v _ -> Just (compute k' v)
-    Attr.Constant    v   -> Just (toHCL      v)
-    Attr.Nil             -> Nothing
-    Attr.Join     v  vs  -> Just . String $ Flatten escaped
+    Compute  k' v _ -> Just (compute k' v)
+    Constant    v   -> Just (toHCL      v)
+    Nil             -> Nothing
+
+    Infix    op a b -> Just . String $ Escape [a', " ", sym, " ", b']
       where
-        escaped = List.intersperse sep . map Escape $ mapMaybe attribute vs
-        sep     = Chunk (LText.fromStrict v)
+        a'  = fromMaybe "nil" (attribute a)
+        b'  = fromMaybe "nil" (attribute b)
+
+        sym = string (LText.fromStrict op)
+
+    Apply    f  xs  -> Just $ String args
+      where
+        args    = Escape $ fun : "(" : List.intersperse ", " (mapMaybe attribute xs) ++ [")"]
+        fun     = string (LText.fromStrict f)
+
+    Join d vs -> Just (concat escaped)
+      where
+        escaped = List.intersperse sep (map (Escape . pure) $ mapMaybe attribute vs)
+        sep     = Chunk (LText.fromStrict d)
 
 compute :: Key -> Name -> Value
 compute (Key t n) v =
-    String . Escape . string $
+    String . Escape . pure . string $
         Format.format (Format.stext % ftype % "." % fname % "." % fname)
             (maybe mempty (<> ".") (typePrefix t)) t n v
 
@@ -251,8 +274,11 @@ float = Float . realToFrac
 string :: LText.Text -> Value
 string = String . Chunk
 
-flatten :: [Value] -> Value
-flatten = String . Flatten . map Escape
+concat :: [Interpolate] -> Value
+concat = String . Concat
+
+-- escape :: Value -> Value
+-- escape = String . Escape . pure
 
 json :: ToJSON a => a -> Value
 json = HereDoc "JSON" . LText.decodeUtf8 . JSON.encodePretty
