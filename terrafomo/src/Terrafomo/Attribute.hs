@@ -43,7 +43,7 @@ compute :: Key -> Name -> Attr s a
 compute k v = Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))
 {-# INLINE compute #-}
 
--- | Join a
+-- | Joins the list with the delimiter for a resultant string.
 join :: Text -> [Attr s a] -> Attr s a
 join = Join
 {-# INLINE join #-}
