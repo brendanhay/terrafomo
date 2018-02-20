@@ -7,3 +7,5 @@ arguments:
     type: 'P.SecurityGroupType'
   _protocol:
     type: 'P.Protocol'
+  _self:
+    type: 'P.Bool'

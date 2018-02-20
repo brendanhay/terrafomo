@@ -87,7 +87,6 @@ import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import qualified Data.Text.Lazy.Encoding      as LText (decodeUtf8)
 import qualified Formatting                   as Format
-import qualified Terrafomo.Attribute          as Attr
 import qualified Text.PrettyPrint.Leijen.Text as PP
 
 -- FIXME: Alternative JSON serialization.

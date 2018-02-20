@@ -32556,7 +32556,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource {
     {- ^ (Required) The protocol. If not icmp, tcp, udp, or all use the <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml> -}
     , _security_group_id        :: !(TF.Attr s Text)
     {- ^ (Required) The security group to apply this rule to. -}
-    , _self                     :: !(TF.Attr s Text)
+    , _self                     :: !(TF.Attr s P.Bool)
     {- ^ (Optional) If true, the security group itself will be added as a source to this ingress rule. -}
     , _source_security_group_id :: !(TF.Attr s Text)
     {- ^ (Optional) The security group id to allow access to/from, depending on the @type@ . Cannot be specified with @cidr_blocks@ . -}
@@ -32616,9 +32616,9 @@ instance P.HasSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s Text) whe
         lens (_security_group_id :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _security_group_id = a } :: SecurityGroupRuleResource s)
 
-instance P.HasSelf (SecurityGroupRuleResource s) (TF.Attr s Text) where
+instance P.HasSelf (SecurityGroupRuleResource s) (TF.Attr s P.Bool) where
     self =
-        lens (_self :: SecurityGroupRuleResource s -> TF.Attr s Text)
+        lens (_self :: SecurityGroupRuleResource s -> TF.Attr s P.Bool)
              (\s a -> s { _self = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSourceSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s Text) where
@@ -32668,9 +32668,9 @@ instance P.HasComputedSecurityGroupId (SecurityGroupRuleResource s) s (TF.Attr s
         (_security_group_id :: SecurityGroupRuleResource s -> TF.Attr s Text)
             . TF.refValue
 
-instance P.HasComputedSelf (SecurityGroupRuleResource s) s (TF.Attr s Text) where
+instance P.HasComputedSelf (SecurityGroupRuleResource s) s (TF.Attr s P.Bool) where
     computedSelf =
-        (_self :: SecurityGroupRuleResource s -> TF.Attr s Text)
+        (_self :: SecurityGroupRuleResource s -> TF.Attr s P.Bool)
             . TF.refValue
 
 instance P.HasComputedSourceSecurityGroupId (SecurityGroupRuleResource s) s (TF.Attr s Text) where
