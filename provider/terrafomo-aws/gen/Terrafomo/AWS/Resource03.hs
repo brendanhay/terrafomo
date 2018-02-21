@@ -64,9 +64,6 @@ module Terrafomo.AWS.Resource03
     , AppsyncGraphqlApiResource (..)
     , appsyncGraphqlApiResource
 
-    , AthenaDatabaseResource (..)
-    , athenaDatabaseResource
-
     , AutoscalingLifecycleHookResource (..)
     , autoscalingLifecycleHookResource
 
@@ -294,6 +291,9 @@ module Terrafomo.AWS.Resource03
 
     , SsmMaintenanceWindowTaskResource (..)
     , ssmMaintenanceWindowTaskResource
+
+    , SsmResourceDataSyncResource (..)
+    , ssmResourceDataSyncResource
 
     , VpcDhcpOptionsResource (..)
     , vpcDhcpOptionsResource
@@ -2538,51 +2538,6 @@ appsyncGraphqlApiResource =
               _authentication_type = TF.Nil
             , _name = TF.Nil
             , _user_pool_config = TF.Nil
-            }
-
-{- | The @aws_athena_database@ AWS resource.
-
-Provides a SSM resource data sync.
--}
-data AthenaDatabaseResource s = AthenaDatabaseResource {
-      _name           :: !(TF.Attr s Text)
-    {- ^ (Required) Name for the configuration. -}
-    , _s3_destination :: !(TF.Attr s Text)
-    {- ^ (Required) Amazon S3 configuration details for the sync. -}
-    } deriving (Show, Eq)
-
-instance TF.ToHCL (AthenaDatabaseResource s) where
-    toHCL AthenaDatabaseResource{..} = TF.inline $ catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "s3_destination" <$> TF.attribute _s3_destination
-        ]
-
-instance P.HasName (AthenaDatabaseResource s) (TF.Attr s Text) where
-    name =
-        lens (_name :: AthenaDatabaseResource s -> TF.Attr s Text)
-             (\s a -> s { _name = a } :: AthenaDatabaseResource s)
-
-instance P.HasS3Destination (AthenaDatabaseResource s) (TF.Attr s Text) where
-    s3Destination =
-        lens (_s3_destination :: AthenaDatabaseResource s -> TF.Attr s Text)
-             (\s a -> s { _s3_destination = a } :: AthenaDatabaseResource s)
-
-instance P.HasComputedName (AthenaDatabaseResource s) s (TF.Attr s Text) where
-    computedName =
-        (_name :: AthenaDatabaseResource s -> TF.Attr s Text)
-            . TF.refValue
-
-instance P.HasComputedS3Destination (AthenaDatabaseResource s) s (TF.Attr s Text) where
-    computedS3Destination =
-        (_s3_destination :: AthenaDatabaseResource s -> TF.Attr s Text)
-            . TF.refValue
-
-athenaDatabaseResource :: TF.Schema TF.Resource P.AWS (AthenaDatabaseResource s)
-athenaDatabaseResource =
-    TF.newResource "aws_athena_database" $
-        AthenaDatabaseResource {
-              _name = TF.Nil
-            , _s3_destination = TF.Nil
             }
 
 {- | The @aws_autoscaling_lifecycle_hook@ AWS resource.
@@ -11699,6 +11654,51 @@ ssmMaintenanceWindowTaskResource =
             , _task_parameters = TF.Nil
             , _task_type = TF.Nil
             , _window_id = TF.Nil
+            }
+
+{- | The @aws_ssm_resource_data_sync@ AWS resource.
+
+Provides a SSM resource data sync.
+-}
+data SsmResourceDataSyncResource s = SsmResourceDataSyncResource {
+      _name           :: !(TF.Attr s Text)
+    {- ^ (Required) Name for the configuration. -}
+    , _s3_destination :: !(TF.Attr s Text)
+    {- ^ (Required) Amazon S3 configuration details for the sync. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (SsmResourceDataSyncResource s) where
+    toHCL SsmResourceDataSyncResource{..} = TF.inline $ catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "s3_destination" <$> TF.attribute _s3_destination
+        ]
+
+instance P.HasName (SsmResourceDataSyncResource s) (TF.Attr s Text) where
+    name =
+        lens (_name :: SsmResourceDataSyncResource s -> TF.Attr s Text)
+             (\s a -> s { _name = a } :: SsmResourceDataSyncResource s)
+
+instance P.HasS3Destination (SsmResourceDataSyncResource s) (TF.Attr s Text) where
+    s3Destination =
+        lens (_s3_destination :: SsmResourceDataSyncResource s -> TF.Attr s Text)
+             (\s a -> s { _s3_destination = a } :: SsmResourceDataSyncResource s)
+
+instance P.HasComputedName (SsmResourceDataSyncResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: SsmResourceDataSyncResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedS3Destination (SsmResourceDataSyncResource s) s (TF.Attr s Text) where
+    computedS3Destination =
+        (_s3_destination :: SsmResourceDataSyncResource s -> TF.Attr s Text)
+            . TF.refValue
+
+ssmResourceDataSyncResource :: TF.Schema TF.Resource P.AWS (SsmResourceDataSyncResource s)
+ssmResourceDataSyncResource =
+    TF.newResource "aws_ssm_resource_data_sync" $
+        SsmResourceDataSyncResource {
+              _name = TF.Nil
+            , _s3_destination = TF.Nil
             }
 
 {- | The @aws_vpc_dhcp_options@ AWS resource.

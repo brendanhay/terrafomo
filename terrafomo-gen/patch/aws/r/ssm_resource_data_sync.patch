@@ -1,0 +1,11 @@
+--- ssm_resource_data_sync.html.markdown	2018-02-21 09:44:01.009164542 +0100
++++ ssm_resource_data_sync.html.markdown.new	2018-02-21 09:43:47.042066710 +0100
+@@ -6,7 +6,7 @@
+   Provides a SSM resource data sync.
+ ---
+ 
+-# aws_athena_database
++# aws_ssm_resource_data_sync
+ 
+ Provides a SSM resource data sync.
+ 
