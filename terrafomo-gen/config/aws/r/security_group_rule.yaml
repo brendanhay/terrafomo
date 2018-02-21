@@ -4,8 +4,8 @@ arguments:
       name: 'P.CIDR'
       format: repeated
   _type':
-    type: 'P.SecurityGroupType'
+    type: 'P.Ec2SecurityGroupType'
   _protocol:
-    type: 'P.Protocol'
+    type: 'P.Ec2Protocol'
   _self:
     type: 'P.Bool'

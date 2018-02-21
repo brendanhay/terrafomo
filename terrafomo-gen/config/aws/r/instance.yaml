@@ -1,0 +1,11 @@
+arguments:
+  _root_block_device:
+    type: '(P.Ec2RootBlockDevice s)'
+  _ebs_block_device:
+    type:
+      name: '(P.Ec2EbsBlockDevice s)'
+      format: repeated
+  _ephemeral_block_device:
+    type:
+      name: '(P.Ec2EphemeralBlockDevice s)'
+      format: repeated

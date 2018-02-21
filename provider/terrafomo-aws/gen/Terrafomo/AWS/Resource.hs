@@ -21264,59 +21264,59 @@ updated, and deleted. Instances also support </docs/provisioners/index.html>
 .
 -}
 data InstanceResource s = InstanceResource {
-      _ami                                  :: !(TF.Attr s Text)
+      _ami :: !(TF.Attr s Text)
     {- ^ (Required) The AMI to use for the instance. -}
-    , _associate_public_ip_address          :: !(TF.Attr s Text)
+    , _associate_public_ip_address :: !(TF.Attr s Text)
     {- ^ (Optional) Associate a public ip address with an instance in a VPC.  Boolean value. -}
-    , _availability_zone                    :: !(TF.Attr s P.Zone)
+    , _availability_zone :: !(TF.Attr s P.Zone)
     {- ^ (Optional) The AZ to start the instance in. -}
-    , _disable_api_termination              :: !(TF.Attr s Text)
+    , _disable_api_termination :: !(TF.Attr s Text)
     {- ^ (Optional) If true, enables <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingDisableAPITermination> -}
-    , _ebs_block_device                     :: !(TF.Attr s Text)
+    , _ebs_block_device :: !(P.Maybe [TF.Attr s (P.Ec2EbsBlockDevice s)])
     {- ^ (Optional) Additional EBS block devices to attach to the instance.  See <#block-devices> below for details. -}
-    , _ebs_optimized                        :: !(TF.Attr s Text)
+    , _ebs_optimized :: !(TF.Attr s Text)
     {- ^ (Optional) If true, the launched EC2 instance will be EBS-optimized. -}
-    , _ephemeral_block_device               :: !(TF.Attr s Text)
+    , _ephemeral_block_device :: !(P.Maybe [TF.Attr s (P.Ec2EphemeralBlockDevice s)])
     {- ^ (Optional) Customize Ephemeral (also known as "Instance Store") volumes on the instance. See <#block-devices> below for details. -}
-    , _iam_instance_profile                 :: !(TF.Attr s Text)
+    , _iam_instance_profile :: !(TF.Attr s Text)
     {- ^ (Optional) The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. Ensure your credentials have the correct permission to assign the instance profile according to the <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html#roles-usingrole-ec2instance-permissions> , notably @iam:PassRole@ . -}
     , _instance_initiated_shutdown_behavior :: !(TF.Attr s Text)
     {- ^ (Optional) Shutdown behavior for the instance. Amazon defaults this to @stop@ for EBS-backed instances and @terminate@ for instance-store instances. Cannot be set on instance-store instances. See <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingInstanceInitiatedShutdownBehavior> for more information. -}
-    , _instance_type                        :: !(TF.Attr s Text)
+    , _instance_type :: !(TF.Attr s Text)
     {- ^ (Required) The type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance. -}
-    , _ipv6_address_count                   :: !(TF.Attr s Text)
+    , _ipv6_address_count :: !(TF.Attr s Text)
     {- ^ (Optional) A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. -}
-    , _ipv6_addresses                       :: !(TF.Attr s Text)
+    , _ipv6_addresses :: !(TF.Attr s Text)
     {- ^ (Optional) Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface -}
-    , _key_name                             :: !(TF.Attr s Text)
+    , _key_name :: !(TF.Attr s Text)
     {- ^ (Optional) The key name to use for the instance. -}
-    , _monitoring                           :: !(TF.Attr s Text)
+    , _monitoring :: !(TF.Attr s Text)
     {- ^ (Optional) If true, the launched EC2 instance will have detailed monitoring enabled. (Available since v0.6.0) -}
-    , _network_interface                    :: !(TF.Attr s Text)
+    , _network_interface :: !(TF.Attr s Text)
     {- ^ (Optional) Customize network interfaces to be attached at instance boot time. See <#network-interfaces> below for more details. -}
-    , _placement_group                      :: !(TF.Attr s Text)
+    , _placement_group :: !(TF.Attr s Text)
     {- ^ (Optional) The Placement Group to start the instance in. -}
-    , _private_ip                           :: !(TF.Attr s Text)
+    , _private_ip :: !(TF.Attr s Text)
     {- ^ (Optional) Private IP address to associate with the instance in a VPC. -}
-    , _root_block_device                    :: !(TF.Attr s Text)
+    , _root_block_device :: !(TF.Attr s (P.Ec2RootBlockDevice s))
     {- ^ (Optional) Customize details about the root block device of the instance. See <#block-devices> below for details. -}
-    , _security_groups                      :: !(TF.Attr s Text)
+    , _security_groups :: !(TF.Attr s Text)
     {- ^ (Optional) A list of security group names to associate with. If you are creating Instances in a VPC, use @vpc_security_group_ids@ instead. -}
-    , _source_dest_check                    :: !(TF.Attr s Text)
+    , _source_dest_check :: !(TF.Attr s Text)
     {- ^ (Optional) Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true. -}
-    , _subnet_id                            :: !(TF.Attr s Text)
+    , _subnet_id :: !(TF.Attr s Text)
     {- ^ (Optional) The VPC Subnet ID to launch in. -}
-    , _tags                                 :: !(TF.Attr s P.Tags)
+    , _tags :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
-    , _tenancy                              :: !(TF.Attr s Text)
+    , _tenancy :: !(TF.Attr s Text)
     {- ^ (Optional) The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. -}
-    , _user_data                            :: !(TF.Attr s Text)
+    , _user_data :: !(TF.Attr s Text)
     {- ^ (Optional) The user data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see @user_data_base64@ instead. -}
-    , _user_data_base64                     :: !(TF.Attr s Text)
+    , _user_data_base64 :: !(TF.Attr s Text)
     {- ^ (Optional) Can be used instead of @user_data@ to pass base64-encoded binary data directly. Use this instead of @user_data@ whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. -}
-    , _volume_tags                          :: !(TF.Attr s Text)
+    , _volume_tags :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of tags to assign to the devices created by the instance at launch time. -}
-    , _vpc_security_group_ids               :: !(TF.Attr s Text)
+    , _vpc_security_group_ids :: !(TF.Attr s Text)
     {- ^ (Optional) A list of security group IDs to associate with. -}
     } deriving (Show, Eq)
 
@@ -21326,9 +21326,9 @@ instance TF.ToHCL (InstanceResource s) where
         , TF.assign "associate_public_ip_address" <$> TF.attribute _associate_public_ip_address
         , TF.assign "availability_zone" <$> TF.attribute _availability_zone
         , TF.assign "disable_api_termination" <$> TF.attribute _disable_api_termination
-        , TF.assign "ebs_block_device" <$> TF.attribute _ebs_block_device
+        , TF.assign "ebs_block_device" <$> TF.repeated _ebs_block_device
         , TF.assign "ebs_optimized" <$> TF.attribute _ebs_optimized
-        , TF.assign "ephemeral_block_device" <$> TF.attribute _ephemeral_block_device
+        , TF.assign "ephemeral_block_device" <$> TF.repeated _ephemeral_block_device
         , TF.assign "iam_instance_profile" <$> TF.attribute _iam_instance_profile
         , TF.assign "instance_initiated_shutdown_behavior" <$> TF.attribute _instance_initiated_shutdown_behavior
         , TF.assign "instance_type" <$> TF.attribute _instance_type
@@ -21371,9 +21371,9 @@ instance P.HasDisableApiTermination (InstanceResource s) (TF.Attr s Text) where
         lens (_disable_api_termination :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _disable_api_termination = a } :: InstanceResource s)
 
-instance P.HasEbsBlockDevice (InstanceResource s) (TF.Attr s Text) where
+instance P.HasEbsBlockDevice (InstanceResource s) (P.Maybe [TF.Attr s (P.Ec2EbsBlockDevice s)]) where
     ebsBlockDevice =
-        lens (_ebs_block_device :: InstanceResource s -> TF.Attr s Text)
+        lens (_ebs_block_device :: InstanceResource s -> P.Maybe [TF.Attr s (P.Ec2EbsBlockDevice s)])
              (\s a -> s { _ebs_block_device = a } :: InstanceResource s)
 
 instance P.HasEbsOptimized (InstanceResource s) (TF.Attr s Text) where
@@ -21381,9 +21381,9 @@ instance P.HasEbsOptimized (InstanceResource s) (TF.Attr s Text) where
         lens (_ebs_optimized :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _ebs_optimized = a } :: InstanceResource s)
 
-instance P.HasEphemeralBlockDevice (InstanceResource s) (TF.Attr s Text) where
+instance P.HasEphemeralBlockDevice (InstanceResource s) (P.Maybe [TF.Attr s (P.Ec2EphemeralBlockDevice s)]) where
     ephemeralBlockDevice =
-        lens (_ephemeral_block_device :: InstanceResource s -> TF.Attr s Text)
+        lens (_ephemeral_block_device :: InstanceResource s -> P.Maybe [TF.Attr s (P.Ec2EphemeralBlockDevice s)])
              (\s a -> s { _ephemeral_block_device = a } :: InstanceResource s)
 
 instance P.HasIamInstanceProfile (InstanceResource s) (TF.Attr s Text) where
@@ -21436,9 +21436,9 @@ instance P.HasPrivateIp (InstanceResource s) (TF.Attr s Text) where
         lens (_private_ip :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _private_ip = a } :: InstanceResource s)
 
-instance P.HasRootBlockDevice (InstanceResource s) (TF.Attr s Text) where
+instance P.HasRootBlockDevice (InstanceResource s) (TF.Attr s (P.Ec2RootBlockDevice s)) where
     rootBlockDevice =
-        lens (_root_block_device :: InstanceResource s -> TF.Attr s Text)
+        lens (_root_block_device :: InstanceResource s -> TF.Attr s (P.Ec2RootBlockDevice s))
              (\s a -> s { _root_block_device = a } :: InstanceResource s)
 
 instance P.HasSecurityGroups (InstanceResource s) (TF.Attr s Text) where
@@ -21504,9 +21504,9 @@ instance P.HasComputedDisableApiTermination (InstanceResource s) s (TF.Attr s Te
         (_disable_api_termination :: InstanceResource s -> TF.Attr s Text)
             . TF.refValue
 
-instance P.HasComputedEbsBlockDevice (InstanceResource s) s (TF.Attr s Text) where
+instance P.HasComputedEbsBlockDevice (InstanceResource s) s (P.Maybe [TF.Attr s (P.Ec2EbsBlockDevice s)]) where
     computedEbsBlockDevice =
-        (_ebs_block_device :: InstanceResource s -> TF.Attr s Text)
+        (_ebs_block_device :: InstanceResource s -> P.Maybe [TF.Attr s (P.Ec2EbsBlockDevice s)])
             . TF.refValue
 
 instance P.HasComputedEbsOptimized (InstanceResource s) s (TF.Attr s Text) where
@@ -21514,9 +21514,9 @@ instance P.HasComputedEbsOptimized (InstanceResource s) s (TF.Attr s Text) where
         (_ebs_optimized :: InstanceResource s -> TF.Attr s Text)
             . TF.refValue
 
-instance P.HasComputedEphemeralBlockDevice (InstanceResource s) s (TF.Attr s Text) where
+instance P.HasComputedEphemeralBlockDevice (InstanceResource s) s (P.Maybe [TF.Attr s (P.Ec2EphemeralBlockDevice s)]) where
     computedEphemeralBlockDevice =
-        (_ephemeral_block_device :: InstanceResource s -> TF.Attr s Text)
+        (_ephemeral_block_device :: InstanceResource s -> P.Maybe [TF.Attr s (P.Ec2EphemeralBlockDevice s)])
             . TF.refValue
 
 instance P.HasComputedIamInstanceProfile (InstanceResource s) s (TF.Attr s Text) where
@@ -21579,9 +21579,9 @@ instance P.HasComputedPublicDns (InstanceResource s) s (TF.Attr s Text) where
 instance P.HasComputedPublicIp (InstanceResource s) s (TF.Attr s Text) where
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
-instance P.HasComputedRootBlockDevice (InstanceResource s) s (TF.Attr s Text) where
+instance P.HasComputedRootBlockDevice (InstanceResource s) s (TF.Attr s (P.Ec2RootBlockDevice s)) where
     computedRootBlockDevice =
-        (_root_block_device :: InstanceResource s -> TF.Attr s Text)
+        (_root_block_device :: InstanceResource s -> TF.Attr s (P.Ec2RootBlockDevice s))
             . TF.refValue
 
 instance P.HasComputedSecurityGroups (InstanceResource s) s (TF.Attr s Text) where
@@ -21631,9 +21631,9 @@ instanceResource =
             , _associate_public_ip_address = TF.Nil
             , _availability_zone = TF.Nil
             , _disable_api_termination = TF.Nil
-            , _ebs_block_device = TF.Nil
+            , _ebs_block_device = P.Nothing
             , _ebs_optimized = TF.Nil
-            , _ephemeral_block_device = TF.Nil
+            , _ephemeral_block_device = P.Nothing
             , _iam_instance_profile = TF.Nil
             , _instance_initiated_shutdown_behavior = TF.Nil
             , _instance_type = TF.Nil
@@ -32552,7 +32552,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource {
     {- ^ (Optional) List of IPv6 CIDR blocks. -}
     , _prefix_list_ids          :: !(TF.Attr s Text)
     {- ^ (Optional) List of prefix list IDs (for allowing access to VPC endpoints). Only valid with @egress@ . -}
-    , _protocol                 :: !(TF.Attr s P.Protocol)
+    , _protocol                 :: !(TF.Attr s P.Ec2Protocol)
     {- ^ (Required) The protocol. If not icmp, tcp, udp, or all use the <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml> -}
     , _security_group_id        :: !(TF.Attr s Text)
     {- ^ (Required) The security group to apply this rule to. -}
@@ -32562,7 +32562,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource {
     {- ^ (Optional) The security group id to allow access to/from, depending on the @type@ . Cannot be specified with @cidr_blocks@ . -}
     , _to_port                  :: !(TF.Attr s P.Word16)
     {- ^ (Required) The end port (or ICMP code if protocol is "icmp"). -}
-    , _type'                    :: !(TF.Attr s P.SecurityGroupType)
+    , _type'                    :: !(TF.Attr s P.Ec2SecurityGroupType)
     {- ^ (Required) The type of rule being created. Valid options are @ingress@ (inbound) or @egress@ (outbound). -}
     } deriving (Show, Eq)
 
@@ -32606,9 +32606,9 @@ instance P.HasPrefixListIds (SecurityGroupRuleResource s) (TF.Attr s Text) where
         lens (_prefix_list_ids :: SecurityGroupRuleResource s -> TF.Attr s Text)
              (\s a -> s { _prefix_list_ids = a } :: SecurityGroupRuleResource s)
 
-instance P.HasProtocol (SecurityGroupRuleResource s) (TF.Attr s P.Protocol) where
+instance P.HasProtocol (SecurityGroupRuleResource s) (TF.Attr s P.Ec2Protocol) where
     protocol =
-        lens (_protocol :: SecurityGroupRuleResource s -> TF.Attr s P.Protocol)
+        lens (_protocol :: SecurityGroupRuleResource s -> TF.Attr s P.Ec2Protocol)
              (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s Text) where
@@ -32631,9 +32631,9 @@ instance P.HasToPort (SecurityGroupRuleResource s) (TF.Attr s P.Word16) where
         lens (_to_port :: SecurityGroupRuleResource s -> TF.Attr s P.Word16)
              (\s a -> s { _to_port = a } :: SecurityGroupRuleResource s)
 
-instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.SecurityGroupType) where
+instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.Ec2SecurityGroupType) where
     type' =
-        lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.SecurityGroupType)
+        lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.Ec2SecurityGroupType)
              (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
 instance P.HasComputedCidrBlocks (SecurityGroupRuleResource s) s (P.Maybe [TF.Attr s P.CIDR]) where

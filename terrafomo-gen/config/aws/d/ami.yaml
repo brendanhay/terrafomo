@@ -1,5 +1,5 @@
 arguments:
   _filter:
     type:
-      name: '[P.Filter s]'
+      name: '[P.Ec2Filter s]'
       format: verbatim
