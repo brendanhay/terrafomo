@@ -55,11 +55,10 @@ module Terrafomo.RabbitMQ.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens', lens)
+import Lens.Micro (Lens')
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Schema    as TF
+import qualified Terrafomo.Name   as TF
+import qualified Terrafomo.Schema as TF
 
 class HasArguments a b | a -> b where
     arguments :: Lens' a b

@@ -300,6 +300,7 @@ module Terrafomo.AWS.Lens
     , HasDeploymentMinimumHealthyPercent (..)
     , HasDeploymentMode (..)
     , HasDeploymentStyle (..)
+    , HasDeprecated (..)
     , HasDeregistrationDelay (..)
     , HasDescription (..)
     , HasDesiredCapacity (..)
@@ -342,6 +343,7 @@ module Terrafomo.AWS.Lens
     , HasEc2InstanceType (..)
     , HasEc2TagFilter (..)
     , HasEcsTarget (..)
+    , HasEdition (..)
     , HasEgress (..)
     , HasEgressOnlyGatewayId (..)
     , HasElasticIp (..)
@@ -395,6 +397,7 @@ module Terrafomo.AWS.Lens
     , HasEventEndpointDeletedTopicArn (..)
     , HasEventEndpointUpdatedTopic (..)
     , HasEventPattern (..)
+    , HasEventSelector (..)
     , HasEventSourceArn (..)
     , HasEvents (..)
     , HasExcessCapacityTerminationPolicy (..)
@@ -840,6 +843,7 @@ module Terrafomo.AWS.Lens
     , HasSamlProviderArns (..)
     , HasScalableDimension (..)
     , HasScalableTargetAction (..)
+    , HasScaleDownBehavior (..)
     , HasScanEnabled (..)
     , HasSchedule (..)
     , HasScheduleExpression (..)
@@ -847,6 +851,7 @@ module Terrafomo.AWS.Lens
     , HasSchema (..)
     , HasScope (..)
     , HasSearchString (..)
+    , HasSearchableAttributes (..)
     , HasSecret (..)
     , HasSecurityConfiguration (..)
     , HasSecurityGroupId (..)
@@ -1429,6 +1434,7 @@ module Terrafomo.AWS.Lens
     , HasComputedDeploymentMinimumHealthyPercent (..)
     , HasComputedDeploymentMode (..)
     , HasComputedDeploymentStyle (..)
+    , HasComputedDeprecated (..)
     , HasComputedDeregistrationDelay (..)
     , HasComputedDescription (..)
     , HasComputedDesiredCapacity (..)
@@ -1480,6 +1486,7 @@ module Terrafomo.AWS.Lens
     , HasComputedEc2TagFilter (..)
     , HasComputedEcsClusterArn (..)
     , HasComputedEcsTarget (..)
+    , HasComputedEdition (..)
     , HasComputedEgress (..)
     , HasComputedEgressOnlyGatewayId (..)
     , HasComputedElasticIp (..)
@@ -1538,6 +1545,7 @@ module Terrafomo.AWS.Lens
     , HasComputedEventEndpointDeletedTopicArn (..)
     , HasComputedEventEndpointUpdatedTopic (..)
     , HasComputedEventPattern (..)
+    , HasComputedEventSelector (..)
     , HasComputedEventSourceArn (..)
     , HasComputedEvents (..)
     , HasComputedExcessCapacityTerminationPolicy (..)
@@ -2075,6 +2083,7 @@ module Terrafomo.AWS.Lens
     , HasComputedSamlProviderArns (..)
     , HasComputedScalableDimension (..)
     , HasComputedScalableTargetAction (..)
+    , HasComputedScaleDownBehavior (..)
     , HasComputedScanEnabled (..)
     , HasComputedSchedule (..)
     , HasComputedScheduleExpression (..)
@@ -2083,6 +2092,7 @@ module Terrafomo.AWS.Lens
     , HasComputedSchemaVersion (..)
     , HasComputedScope (..)
     , HasComputedSearchString (..)
+    , HasComputedSearchableAttributes (..)
     , HasComputedSecret (..)
     , HasComputedSecurityConfiguration (..)
     , HasComputedSecurityGroupId (..)
@@ -2372,11 +2382,10 @@ module Terrafomo.AWS.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens', lens)
+import Lens.Micro (Lens')
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Schema    as TF
+import qualified Terrafomo.Name   as TF
+import qualified Terrafomo.Schema as TF
 
 class HasAccelerationStatus a b | a -> b where
     accelerationStatus :: Lens' a b
@@ -4046,6 +4055,12 @@ class HasDeploymentStyle a b | a -> b where
 instance HasDeploymentStyle a b => HasDeploymentStyle (TF.Schema l p a) b where
     deploymentStyle = TF.configuration . deploymentStyle
 
+class HasDeprecated a b | a -> b where
+    deprecated :: Lens' a b
+
+instance HasDeprecated a b => HasDeprecated (TF.Schema l p a) b where
+    deprecated = TF.configuration . deprecated
+
 class HasDeregistrationDelay a b | a -> b where
     deregistrationDelay :: Lens' a b
 
@@ -4297,6 +4312,12 @@ class HasEcsTarget a b | a -> b where
 
 instance HasEcsTarget a b => HasEcsTarget (TF.Schema l p a) b where
     ecsTarget = TF.configuration . ecsTarget
+
+class HasEdition a b | a -> b where
+    edition :: Lens' a b
+
+instance HasEdition a b => HasEdition (TF.Schema l p a) b where
+    edition = TF.configuration . edition
 
 class HasEgress a b | a -> b where
     egress :: Lens' a b
@@ -4615,6 +4636,12 @@ class HasEventPattern a b | a -> b where
 
 instance HasEventPattern a b => HasEventPattern (TF.Schema l p a) b where
     eventPattern = TF.configuration . eventPattern
+
+class HasEventSelector a b | a -> b where
+    eventSelector :: Lens' a b
+
+instance HasEventSelector a b => HasEventSelector (TF.Schema l p a) b where
+    eventSelector = TF.configuration . eventSelector
 
 class HasEventSourceArn a b | a -> b where
     eventSourceArn :: Lens' a b
@@ -7286,6 +7313,12 @@ class HasScalableTargetAction a b | a -> b where
 instance HasScalableTargetAction a b => HasScalableTargetAction (TF.Schema l p a) b where
     scalableTargetAction = TF.configuration . scalableTargetAction
 
+class HasScaleDownBehavior a b | a -> b where
+    scaleDownBehavior :: Lens' a b
+
+instance HasScaleDownBehavior a b => HasScaleDownBehavior (TF.Schema l p a) b where
+    scaleDownBehavior = TF.configuration . scaleDownBehavior
+
 class HasScanEnabled a b | a -> b where
     scanEnabled :: Lens' a b
 
@@ -7327,6 +7360,12 @@ class HasSearchString a b | a -> b where
 
 instance HasSearchString a b => HasSearchString (TF.Schema l p a) b where
     searchString = TF.configuration . searchString
+
+class HasSearchableAttributes a b | a -> b where
+    searchableAttributes :: Lens' a b
+
+instance HasSearchableAttributes a b => HasSearchableAttributes (TF.Schema l p a) b where
+    searchableAttributes = TF.configuration . searchableAttributes
 
 class HasSecret a b | a -> b where
     secret :: Lens' a b
@@ -9788,6 +9827,9 @@ class HasComputedDeploymentMode a s b | a -> s b where
 class HasComputedDeploymentStyle a s b | a -> s b where
     computedDeploymentStyle :: TF.Ref s a -> b
 
+class HasComputedDeprecated a s b | a -> s b where
+    computedDeprecated :: TF.Ref s a -> b
+
 class HasComputedDeregistrationDelay a s b | a -> s b where
     computedDeregistrationDelay :: TF.Ref s a -> b
 
@@ -9940,6 +9982,9 @@ class HasComputedEcsClusterArn a s b | a -> s b where
 
 class HasComputedEcsTarget a s b | a -> s b where
     computedEcsTarget :: TF.Ref s a -> b
+
+class HasComputedEdition a s b | a -> s b where
+    computedEdition :: TF.Ref s a -> b
 
 class HasComputedEgress a s b | a -> s b where
     computedEgress :: TF.Ref s a -> b
@@ -10114,6 +10159,9 @@ class HasComputedEventEndpointUpdatedTopic a s b | a -> s b where
 
 class HasComputedEventPattern a s b | a -> s b where
     computedEventPattern :: TF.Ref s a -> b
+
+class HasComputedEventSelector a s b | a -> s b where
+    computedEventSelector :: TF.Ref s a -> b
 
 class HasComputedEventSourceArn a s b | a -> s b where
     computedEventSourceArn :: TF.Ref s a -> b
@@ -11726,6 +11774,9 @@ class HasComputedScalableDimension a s b | a -> s b where
 class HasComputedScalableTargetAction a s b | a -> s b where
     computedScalableTargetAction :: TF.Ref s a -> b
 
+class HasComputedScaleDownBehavior a s b | a -> s b where
+    computedScaleDownBehavior :: TF.Ref s a -> b
+
 class HasComputedScanEnabled a s b | a -> s b where
     computedScanEnabled :: TF.Ref s a -> b
 
@@ -11749,6 +11800,9 @@ class HasComputedScope a s b | a -> s b where
 
 class HasComputedSearchString a s b | a -> s b where
     computedSearchString :: TF.Ref s a -> b
+
+class HasComputedSearchableAttributes a s b | a -> s b where
+    computedSearchableAttributes :: TF.Ref s a -> b
 
 class HasComputedSecret a s b | a -> s b where
     computedSecret :: TF.Ref s a -> b

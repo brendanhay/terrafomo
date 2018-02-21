@@ -14,9 +14,11 @@
 module Terrafomo.Grafana
     ( module Terrafomo.Grafana.Types
     , module Terrafomo.Grafana.Provider
+    , module Terrafomo.Grafana.Lens
     , module Terrafomo.Grafana.Resource
     ) where
 
+import Terrafomo.Grafana.Lens
 import Terrafomo.Grafana.Provider
 import Terrafomo.Grafana.Resource
 import Terrafomo.Grafana.Types

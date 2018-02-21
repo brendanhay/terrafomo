@@ -14,9 +14,11 @@
 module Terrafomo.Chef
     ( module Terrafomo.Chef.Types
     , module Terrafomo.Chef.Provider
+    , module Terrafomo.Chef.Lens
     , module Terrafomo.Chef.Resource
     ) where
 
+import Terrafomo.Chef.Lens
 import Terrafomo.Chef.Provider
 import Terrafomo.Chef.Resource
 import Terrafomo.Chef.Types

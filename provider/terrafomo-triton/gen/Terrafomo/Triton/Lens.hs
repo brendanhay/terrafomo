@@ -32,6 +32,7 @@ module Terrafomo.Triton.Lens
     , HasEndpoint (..)
     , HasFirewallEnabled (..)
     , HasGateway (..)
+    , HasId (..)
     , HasImage (..)
     , HasInternetNat (..)
     , HasKey (..)
@@ -66,6 +67,7 @@ module Terrafomo.Triton.Lens
     , HasComputedCloudConfig (..)
     , HasComputedCns (..)
     , HasComputedCnsEnabled (..)
+    , HasComputedComputeNode (..)
     , HasComputedCreated (..)
     , HasComputedDataset (..)
     , HasComputedDescription (..)
@@ -117,11 +119,10 @@ module Terrafomo.Triton.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens', lens)
+import Lens.Micro (Lens')
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Schema    as TF
+import qualified Terrafomo.Name   as TF
+import qualified Terrafomo.Schema as TF
 
 class HasAdministratorPw a b | a -> b where
     administratorPw :: Lens' a b
@@ -182,6 +183,12 @@ class HasGateway a b | a -> b where
 
 instance HasGateway a b => HasGateway (TF.Schema l p a) b where
     gateway = TF.configuration . gateway
+
+class HasId a b | a -> b where
+    id :: Lens' a b
+
+instance HasId a b => HasId (TF.Schema l p a) b where
+    id = TF.configuration . id
 
 class HasImage a b | a -> b where
     image :: Lens' a b
@@ -359,6 +366,9 @@ class HasComputedCns a s b | a -> s b where
 
 class HasComputedCnsEnabled a s b | a -> s b where
     computedCnsEnabled :: TF.Ref s a -> b
+
+class HasComputedComputeNode a s b | a -> s b where
+    computedComputeNode :: TF.Ref s a -> b
 
 class HasComputedCreated a s b | a -> s b where
     computedCreated :: TF.Ref s a -> b

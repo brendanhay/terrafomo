@@ -14,9 +14,11 @@
 module Terrafomo.Lailgun
     ( module Terrafomo.Lailgun.Types
     , module Terrafomo.Lailgun.Provider
+    , module Terrafomo.Lailgun.Lens
     , module Terrafomo.Lailgun.Resource
     ) where
 
+import Terrafomo.Lailgun.Lens
 import Terrafomo.Lailgun.Provider
 import Terrafomo.Lailgun.Resource
 import Terrafomo.Lailgun.Types

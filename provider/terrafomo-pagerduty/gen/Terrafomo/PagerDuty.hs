@@ -14,11 +14,13 @@
 module Terrafomo.PagerDuty
     ( module Terrafomo.PagerDuty.Types
     , module Terrafomo.PagerDuty.Provider
+    , module Terrafomo.PagerDuty.Lens
     , module Terrafomo.PagerDuty.DataSource
     , module Terrafomo.PagerDuty.Resource
     ) where
 
 import Terrafomo.PagerDuty.DataSource
+import Terrafomo.PagerDuty.Lens
 import Terrafomo.PagerDuty.Provider
 import Terrafomo.PagerDuty.Resource
 import Terrafomo.PagerDuty.Types

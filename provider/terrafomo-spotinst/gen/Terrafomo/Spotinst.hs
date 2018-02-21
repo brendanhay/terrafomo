@@ -14,9 +14,11 @@
 module Terrafomo.Spotinst
     ( module Terrafomo.Spotinst.Types
     , module Terrafomo.Spotinst.Provider
+    , module Terrafomo.Spotinst.Lens
     , module Terrafomo.Spotinst.Resource
     ) where
 
+import Terrafomo.Spotinst.Lens
 import Terrafomo.Spotinst.Provider
 import Terrafomo.Spotinst.Resource
 import Terrafomo.Spotinst.Types

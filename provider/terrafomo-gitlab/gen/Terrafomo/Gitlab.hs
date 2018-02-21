@@ -14,9 +14,11 @@
 module Terrafomo.Gitlab
     ( module Terrafomo.Gitlab.Types
     , module Terrafomo.Gitlab.Provider
+    , module Terrafomo.Gitlab.Lens
     , module Terrafomo.Gitlab.Resource
     ) where
 
+import Terrafomo.Gitlab.Lens
 import Terrafomo.Gitlab.Provider
 import Terrafomo.Gitlab.Resource
 import Terrafomo.Gitlab.Types

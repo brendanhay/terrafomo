@@ -14,11 +14,13 @@
 module Terrafomo.CloudStack
     ( module Terrafomo.CloudStack.Types
     , module Terrafomo.CloudStack.Provider
+    , module Terrafomo.CloudStack.Lens
     , module Terrafomo.CloudStack.DataSource
     , module Terrafomo.CloudStack.Resource
     ) where
 
 import Terrafomo.CloudStack.DataSource
+import Terrafomo.CloudStack.Lens
 import Terrafomo.CloudStack.Provider
 import Terrafomo.CloudStack.Resource
 import Terrafomo.CloudStack.Types

@@ -14,9 +14,11 @@
 module Terrafomo.Dyn
     ( module Terrafomo.Dyn.Types
     , module Terrafomo.Dyn.Provider
+    , module Terrafomo.Dyn.Lens
     , module Terrafomo.Dyn.Resource
     ) where
 
+import Terrafomo.Dyn.Lens
 import Terrafomo.Dyn.Provider
 import Terrafomo.Dyn.Resource
 import Terrafomo.Dyn.Types

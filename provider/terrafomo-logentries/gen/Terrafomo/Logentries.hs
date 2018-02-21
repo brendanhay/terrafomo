@@ -14,9 +14,11 @@
 module Terrafomo.Logentries
     ( module Terrafomo.Logentries.Types
     , module Terrafomo.Logentries.Provider
+    , module Terrafomo.Logentries.Lens
     , module Terrafomo.Logentries.Resource
     ) where
 
+import Terrafomo.Logentries.Lens
 import Terrafomo.Logentries.Provider
 import Terrafomo.Logentries.Resource
 import Terrafomo.Logentries.Types

@@ -121,11 +121,10 @@ module Terrafomo.Docker.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens', lens)
+import Lens.Micro (Lens')
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Schema    as TF
+import qualified Terrafomo.Name   as TF
+import qualified Terrafomo.Schema as TF
 
 class HasCapabilities a b | a -> b where
     capabilities :: Lens' a b

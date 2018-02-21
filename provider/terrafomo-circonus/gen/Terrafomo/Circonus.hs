@@ -14,11 +14,13 @@
 module Terrafomo.Circonus
     ( module Terrafomo.Circonus.Types
     , module Terrafomo.Circonus.Provider
+    , module Terrafomo.Circonus.Lens
     , module Terrafomo.Circonus.DataSource
     , module Terrafomo.Circonus.Resource
     ) where
 
 import Terrafomo.Circonus.DataSource
+import Terrafomo.Circonus.Lens
 import Terrafomo.Circonus.Provider
 import Terrafomo.Circonus.Resource
 import Terrafomo.Circonus.Types

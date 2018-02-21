@@ -14,11 +14,19 @@
 module Terrafomo.AWS
     ( module Terrafomo.AWS.Types
     , module Terrafomo.AWS.Provider
+    , module Terrafomo.AWS.Lens
     , module Terrafomo.AWS.DataSource
-    , module Terrafomo.AWS.Resource
+    , module Terrafomo.AWS.Resource01
+    , module Terrafomo.AWS.Resource02
+    , module Terrafomo.AWS.Resource03
+    , module Terrafomo.AWS.Resource04
     ) where
 
 import Terrafomo.AWS.DataSource
+import Terrafomo.AWS.Lens
 import Terrafomo.AWS.Provider
-import Terrafomo.AWS.Resource
+import Terrafomo.AWS.Resource01
+import Terrafomo.AWS.Resource02
+import Terrafomo.AWS.Resource03
+import Terrafomo.AWS.Resource04
 import Terrafomo.AWS.Types

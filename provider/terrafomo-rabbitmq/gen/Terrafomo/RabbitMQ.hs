@@ -14,9 +14,11 @@
 module Terrafomo.RabbitMQ
     ( module Terrafomo.RabbitMQ.Types
     , module Terrafomo.RabbitMQ.Provider
+    , module Terrafomo.RabbitMQ.Lens
     , module Terrafomo.RabbitMQ.Resource
     ) where
 
+import Terrafomo.RabbitMQ.Lens
 import Terrafomo.RabbitMQ.Provider
 import Terrafomo.RabbitMQ.Resource
 import Terrafomo.RabbitMQ.Types

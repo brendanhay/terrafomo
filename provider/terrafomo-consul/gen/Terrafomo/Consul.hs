@@ -14,11 +14,13 @@
 module Terrafomo.Consul
     ( module Terrafomo.Consul.Types
     , module Terrafomo.Consul.Provider
+    , module Terrafomo.Consul.Lens
     , module Terrafomo.Consul.DataSource
     , module Terrafomo.Consul.Resource
     ) where
 
 import Terrafomo.Consul.DataSource
+import Terrafomo.Consul.Lens
 import Terrafomo.Consul.Provider
 import Terrafomo.Consul.Resource
 import Terrafomo.Consul.Types

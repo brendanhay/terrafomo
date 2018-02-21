@@ -14,9 +14,11 @@
 module Terrafomo.UltraDNS
     ( module Terrafomo.UltraDNS.Types
     , module Terrafomo.UltraDNS.Provider
+    , module Terrafomo.UltraDNS.Lens
     , module Terrafomo.UltraDNS.Resource
     ) where
 
+import Terrafomo.UltraDNS.Lens
 import Terrafomo.UltraDNS.Provider
 import Terrafomo.UltraDNS.Resource
 import Terrafomo.UltraDNS.Types

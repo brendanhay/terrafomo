@@ -31,6 +31,7 @@ executables:
       - optparse-applicative
       - pretty-show
       - process
+      - split
       - terrafomo
       - text
       - unordered-containers

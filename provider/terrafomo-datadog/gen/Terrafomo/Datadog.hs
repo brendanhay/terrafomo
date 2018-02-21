@@ -14,9 +14,11 @@
 module Terrafomo.Datadog
     ( module Terrafomo.Datadog.Types
     , module Terrafomo.Datadog.Provider
+    , module Terrafomo.Datadog.Lens
     , module Terrafomo.Datadog.Resource
     ) where
 
+import Terrafomo.Datadog.Lens
 import Terrafomo.Datadog.Provider
 import Terrafomo.Datadog.Resource
 import Terrafomo.Datadog.Types

@@ -14,9 +14,11 @@
 module Terrafomo.Bitbucket
     ( module Terrafomo.Bitbucket.Types
     , module Terrafomo.Bitbucket.Provider
+    , module Terrafomo.Bitbucket.Lens
     , module Terrafomo.Bitbucket.Resource
     ) where
 
+import Terrafomo.Bitbucket.Lens
 import Terrafomo.Bitbucket.Provider
 import Terrafomo.Bitbucket.Resource
 import Terrafomo.Bitbucket.Types

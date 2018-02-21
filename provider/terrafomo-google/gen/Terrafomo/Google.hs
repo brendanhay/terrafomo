@@ -14,11 +14,15 @@
 module Terrafomo.Google
     ( module Terrafomo.Google.Types
     , module Terrafomo.Google.Provider
+    , module Terrafomo.Google.Lens
     , module Terrafomo.Google.DataSource
-    , module Terrafomo.Google.Resource
+    , module Terrafomo.Google.Resource01
+    , module Terrafomo.Google.Resource02
     ) where
 
 import Terrafomo.Google.DataSource
+import Terrafomo.Google.Lens
 import Terrafomo.Google.Provider
-import Terrafomo.Google.Resource
+import Terrafomo.Google.Resource01
+import Terrafomo.Google.Resource02
 import Terrafomo.Google.Types

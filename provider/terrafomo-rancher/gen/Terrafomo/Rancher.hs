@@ -14,11 +14,13 @@
 module Terrafomo.Rancher
     ( module Terrafomo.Rancher.Types
     , module Terrafomo.Rancher.Provider
+    , module Terrafomo.Rancher.Lens
     , module Terrafomo.Rancher.DataSource
     , module Terrafomo.Rancher.Resource
     ) where
 
 import Terrafomo.Rancher.DataSource
+import Terrafomo.Rancher.Lens
 import Terrafomo.Rancher.Provider
 import Terrafomo.Rancher.Resource
 import Terrafomo.Rancher.Types

@@ -14,9 +14,11 @@
 module Terrafomo.CenturyLinkCloud
     ( module Terrafomo.CenturyLinkCloud.Types
     , module Terrafomo.CenturyLinkCloud.Provider
+    , module Terrafomo.CenturyLinkCloud.Lens
     , module Terrafomo.CenturyLinkCloud.Resource
     ) where
 
+import Terrafomo.CenturyLinkCloud.Lens
 import Terrafomo.CenturyLinkCloud.Provider
 import Terrafomo.CenturyLinkCloud.Resource
 import Terrafomo.CenturyLinkCloud.Types

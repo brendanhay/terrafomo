@@ -14,11 +14,13 @@
 module Terrafomo.Kubernetes
     ( module Terrafomo.Kubernetes.Types
     , module Terrafomo.Kubernetes.Provider
+    , module Terrafomo.Kubernetes.Lens
     , module Terrafomo.Kubernetes.DataSource
     , module Terrafomo.Kubernetes.Resource
     ) where
 
 import Terrafomo.Kubernetes.DataSource
+import Terrafomo.Kubernetes.Lens
 import Terrafomo.Kubernetes.Provider
 import Terrafomo.Kubernetes.Resource
 import Terrafomo.Kubernetes.Types

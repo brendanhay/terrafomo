@@ -14,9 +14,11 @@
 module Terrafomo.StatusCake
     ( module Terrafomo.StatusCake.Types
     , module Terrafomo.StatusCake.Provider
+    , module Terrafomo.StatusCake.Lens
     , module Terrafomo.StatusCake.Resource
     ) where
 
+import Terrafomo.StatusCake.Lens
 import Terrafomo.StatusCake.Provider
 import Terrafomo.StatusCake.Resource
 import Terrafomo.StatusCake.Types

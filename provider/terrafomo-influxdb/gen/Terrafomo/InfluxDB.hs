@@ -14,9 +14,11 @@
 module Terrafomo.InfluxDB
     ( module Terrafomo.InfluxDB.Types
     , module Terrafomo.InfluxDB.Provider
+    , module Terrafomo.InfluxDB.Lens
     , module Terrafomo.InfluxDB.Resource
     ) where
 
+import Terrafomo.InfluxDB.Lens
 import Terrafomo.InfluxDB.Provider
 import Terrafomo.InfluxDB.Resource
 import Terrafomo.InfluxDB.Types

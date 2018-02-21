@@ -14,9 +14,11 @@
 module Terrafomo.MySQL
     ( module Terrafomo.MySQL.Types
     , module Terrafomo.MySQL.Provider
+    , module Terrafomo.MySQL.Lens
     , module Terrafomo.MySQL.Resource
     ) where
 
+import Terrafomo.MySQL.Lens
 import Terrafomo.MySQL.Provider
 import Terrafomo.MySQL.Resource
 import Terrafomo.MySQL.Types

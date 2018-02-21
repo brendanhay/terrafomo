@@ -14,11 +14,13 @@
 module Terrafomo.ProfitBricks
     ( module Terrafomo.ProfitBricks.Types
     , module Terrafomo.ProfitBricks.Provider
+    , module Terrafomo.ProfitBricks.Lens
     , module Terrafomo.ProfitBricks.DataSource
     , module Terrafomo.ProfitBricks.Resource
     ) where
 
 import Terrafomo.ProfitBricks.DataSource
+import Terrafomo.ProfitBricks.Lens
 import Terrafomo.ProfitBricks.Provider
 import Terrafomo.ProfitBricks.Resource
 import Terrafomo.ProfitBricks.Types

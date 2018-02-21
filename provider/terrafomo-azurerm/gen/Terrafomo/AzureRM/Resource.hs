@@ -969,8 +969,8 @@ import GHC.Show (Show)
 import Lens.Micro (lens)
 
 import Terrafomo.AzureRM.Types as P
-import qualified Terrafomo.AzureRM.Lens as P
 import qualified Terrafomo.AzureRM.Provider as P
+import qualified Terrafomo.AzureRM.Lens as P
 import qualified Data.Word       as P
 import qualified GHC.Base        as P
 import qualified Numeric.Natural as P
@@ -7340,7 +7340,7 @@ data MysqlFirewallRuleResource s = MysqlFirewallRuleResource {
     , _server_name :: !(TF.Attr s Text)
     {- ^ (Required) Specifies the name of the MySQL Server. Changing this forces a new resource to be created. -}
     , _start_ip_address :: !(TF.Attr s Text)
-    {- ^ (Required) Specifies the Charset for the MySQL Database. Changing this forces a new resource to be created. -}
+    {- ^ (Required) Specifies the Start IP Address associated with this Firewall Rule. Changing this forces a new resource to be created. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (MysqlFirewallRuleResource s) where

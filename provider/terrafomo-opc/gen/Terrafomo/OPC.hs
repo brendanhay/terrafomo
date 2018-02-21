@@ -14,11 +14,13 @@
 module Terrafomo.OPC
     ( module Terrafomo.OPC.Types
     , module Terrafomo.OPC.Provider
+    , module Terrafomo.OPC.Lens
     , module Terrafomo.OPC.DataSource
     , module Terrafomo.OPC.Resource
     ) where
 
 import Terrafomo.OPC.DataSource
+import Terrafomo.OPC.Lens
 import Terrafomo.OPC.Provider
 import Terrafomo.OPC.Resource
 import Terrafomo.OPC.Types

@@ -14,11 +14,13 @@
 module Terrafomo.NewRelic
     ( module Terrafomo.NewRelic.Types
     , module Terrafomo.NewRelic.Provider
+    , module Terrafomo.NewRelic.Lens
     , module Terrafomo.NewRelic.DataSource
     , module Terrafomo.NewRelic.Resource
     ) where
 
 import Terrafomo.NewRelic.DataSource
+import Terrafomo.NewRelic.Lens
 import Terrafomo.NewRelic.Provider
 import Terrafomo.NewRelic.Resource
 import Terrafomo.NewRelic.Types

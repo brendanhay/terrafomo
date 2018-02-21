@@ -38,6 +38,7 @@ module Terrafomo.Triton.DataSource
     -- ** Arguments
     , P.HasCnsEnabled (..)
     , P.HasEndpoint (..)
+    , P.HasId (..)
     , P.HasMostRecent (..)
     , P.HasName (..)
     , P.HasOs (..)
@@ -94,11 +95,14 @@ information.
 data AccountData s = AccountData {
       _cns_enabled :: !(TF.Attr s Text)
     {- ^ - (bool) Whether CNS is enabled for the account. -}
+    , _id          :: !(TF.Attr s Text)
+    {- ^ - (string) - The identifier representing the account in Triton. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (AccountData s) where
     toHCL AccountData{..} = TF.inline $ catMaybes
         [ TF.assign "cns_enabled" <$> TF.attribute _cns_enabled
+        , TF.assign "id" <$> TF.attribute _id
         ]
 
 instance P.HasCnsEnabled (AccountData s) (TF.Attr s Text) where
@@ -106,9 +110,19 @@ instance P.HasCnsEnabled (AccountData s) (TF.Attr s Text) where
         lens (_cns_enabled :: AccountData s -> TF.Attr s Text)
              (\s a -> s { _cns_enabled = a } :: AccountData s)
 
+instance P.HasId (AccountData s) (TF.Attr s Text) where
+    id =
+        lens (_id :: AccountData s -> TF.Attr s Text)
+             (\s a -> s { _id = a } :: AccountData s)
+
 instance P.HasComputedCnsEnabled (AccountData s) s (TF.Attr s Text) where
     computedCnsEnabled =
         (_cns_enabled :: AccountData s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedId (AccountData s) s (TF.Attr s Text) where
+    computedId =
+        (_id :: AccountData s -> TF.Attr s Text)
             . TF.refValue
 
 accountData :: TF.Schema TF.DataSource P.Triton (AccountData s)
@@ -116,6 +130,7 @@ accountData =
     TF.newDataSource "triton_account" $
         AccountData {
               _cns_enabled = TF.Nil
+            , _id = TF.Nil
             }
 
 {- | The @triton_datacenter@ Triton datasource.
@@ -239,6 +254,9 @@ instance P.HasVersion (ImageData s) (TF.Attr s Text) where
     version =
         lens (_version :: ImageData s -> TF.Attr s Text)
              (\s a -> s { _version = a } :: ImageData s)
+
+instance P.HasComputedId (ImageData s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance P.HasComputedMostRecent (ImageData s) s (TF.Attr s Text) where
     computedMostRecent =

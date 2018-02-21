@@ -14,11 +14,13 @@
 module Terrafomo.AliCloud
     ( module Terrafomo.AliCloud.Types
     , module Terrafomo.AliCloud.Provider
+    , module Terrafomo.AliCloud.Lens
     , module Terrafomo.AliCloud.DataSource
     , module Terrafomo.AliCloud.Resource
     ) where
 
 import Terrafomo.AliCloud.DataSource
+import Terrafomo.AliCloud.Lens
 import Terrafomo.AliCloud.Provider
 import Terrafomo.AliCloud.Resource
 import Terrafomo.AliCloud.Types

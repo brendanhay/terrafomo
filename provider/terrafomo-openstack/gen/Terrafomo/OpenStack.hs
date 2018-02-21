@@ -14,11 +14,13 @@
 module Terrafomo.OpenStack
     ( module Terrafomo.OpenStack.Types
     , module Terrafomo.OpenStack.Provider
+    , module Terrafomo.OpenStack.Lens
     , module Terrafomo.OpenStack.DataSource
     , module Terrafomo.OpenStack.Resource
     ) where
 
 import Terrafomo.OpenStack.DataSource
+import Terrafomo.OpenStack.Lens
 import Terrafomo.OpenStack.Provider
 import Terrafomo.OpenStack.Resource
 import Terrafomo.OpenStack.Types

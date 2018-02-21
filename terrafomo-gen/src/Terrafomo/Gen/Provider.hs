@@ -63,6 +63,7 @@ data Provider a = Provider
     , providerDependencies :: ![Text]
     , providerDatatype     :: !a
     , providerRules        :: ![Rule]
+    , providerMaxPartition :: !Int
     } deriving (Show, Generic, Functor)
 
 instance FromJSON (Provider Bool) where
@@ -70,20 +71,22 @@ instance FromJSON (Provider Bool) where
         providerName         <- o .:  "name"
         providerOriginal     <- o .:  "original"
         providerPackage      <- o .:? "package"
-        providerDependencies <- o .:? "dependencies" .!= []
-        providerDatatype     <- o .:? "datatype"     .!= False
-        providerRules        <- o .:? "rules"        .!= []
+        providerDependencies <- o .:? "dependencies"  .!= []
+        providerDatatype     <- o .:? "datatype"      .!= False
+        providerRules        <- o .:? "rules"         .!= []
+        providerMaxPartition <- o .:? "max-partition" .!= 100
         pure Provider {..}
 
 instance ToJSON (Provider (Maybe a)) where
     toJSON Provider{..} =
         JSON.object
-            [ "name"         .= providerName
-            , "original"     .= providerOriginal
-            , "package"      .= providerPackage
-            , "dependencies" .= providerDependencies
-            , "rules"        .= providerRules
-            , "type"         .=
+            [ "name"          .= providerName
+            , "original"      .= providerOriginal
+            , "package"       .= providerPackage
+            , "dependencies"  .= providerDependencies
+            , "rules"         .= providerRules
+            , "max-partition" .= providerMaxPartition
+            , "type"          .=
                 if isJust providerDatatype
                     then providerName
                     else "Provider"

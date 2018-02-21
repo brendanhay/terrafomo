@@ -73,8 +73,8 @@ import GHC.Show (Show)
 import Lens.Micro (lens)
 
 import Terrafomo.Consul.Types as P
-import qualified Terrafomo.Consul.Lens as P
 import qualified Terrafomo.Consul.Provider as P
+import qualified Terrafomo.Consul.Lens as P
 import qualified Data.Word       as P
 import qualified GHC.Base        as P
 import qualified Numeric.Natural as P

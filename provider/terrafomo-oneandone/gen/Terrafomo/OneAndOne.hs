@@ -14,9 +14,11 @@
 module Terrafomo.OneAndOne
     ( module Terrafomo.OneAndOne.Types
     , module Terrafomo.OneAndOne.Provider
+    , module Terrafomo.OneAndOne.Lens
     , module Terrafomo.OneAndOne.Resource
     ) where
 
+import Terrafomo.OneAndOne.Lens
 import Terrafomo.OneAndOne.Provider
 import Terrafomo.OneAndOne.Resource
 import Terrafomo.OneAndOne.Types

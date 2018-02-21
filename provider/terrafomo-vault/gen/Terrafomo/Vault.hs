@@ -14,11 +14,13 @@
 module Terrafomo.Vault
     ( module Terrafomo.Vault.Types
     , module Terrafomo.Vault.Provider
+    , module Terrafomo.Vault.Lens
     , module Terrafomo.Vault.DataSource
     , module Terrafomo.Vault.Resource
     ) where
 
 import Terrafomo.Vault.DataSource
+import Terrafomo.Vault.Lens
 import Terrafomo.Vault.Provider
 import Terrafomo.Vault.Resource
 import Terrafomo.Vault.Types

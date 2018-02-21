@@ -59,10 +59,9 @@ package tmpls p =
 main
     :: Templates EDE.Template
     -> Provider (Maybe Schema)
-    -> Bool -- ^ Any datasource module?
-    -> Bool -- ^ Any resource module?
+    -> [NS]
     -> Either Text (NS, LText.Text)
-main tmpls p d r =
+main tmpls p namespaces =
     let ns = NS.provider p
      in second (ns,) $ render (mainTemplate tmpls)
         [ "namespace" .= ns
@@ -70,22 +69,22 @@ main tmpls p d r =
         , "schema"    .= providerDatatype p
         , "reexports" .=
             ( NS.types p
-            : [NS.provider   p <> "Provider" | isJust (providerDatatype p)]
-           ++ [NS.schemaType p DataSource    | d]
-           ++ [NS.schemaType p Resource      | r]
+            : [NS.provider p <> "Provider" | isJust (providerDatatype p)]
+           ++ namespaces
             )
         ]
 
 types
     :: Templates EDE.Template
     -> Provider (Maybe a)
+    -> [NS]
     -> Either Text (NS, LText.Text)
-types tmpls p =
+types tmpls p namespaces =
     let ns = NS.types p
      in second (ns,) $ render (typesTemplate tmpls)
         [ "namespace" .= ns
         , "provider"  .= p
-        , "imports"   .= [NS.lenses p]
+        , "imports"   .= namespaces
         ]
 
 provider
@@ -104,12 +103,12 @@ provider tmpls p =
 lenses
     :: Templates EDE.Template
     -> Provider (Maybe a)
+    -> NS
     -> [Schema]
-    -> Either Text (NS, LText.Text)
-lenses tmpls p xs =
-    let ns            = NS.provider p <> "Lens"
-        (args, attrs) = getClasses xs
-     in second (ns,) $ render (lensTemplate tmpls)
+    -> Either Text LText.Text
+lenses tmpls p ns xs =
+    let (args, attrs) = getClasses xs
+     in render (lensTemplate tmpls)
         [ "namespace"        .= ns
         , "provider"         .= p
         , "argumentClasses"  .= args
@@ -119,13 +118,14 @@ lenses tmpls p xs =
 schemas
     :: Templates EDE.Template
     -> Provider (Maybe a)
+    -> NS
+    -> [NS]
     -> SchemaType
     -> [Schema]
-    -> Either Text (NS, LText.Text)
-schemas tmpls p typ xs =
-    let ns            = NS.schemaType p typ
-        (args, attrs) = getClasses xs
-     in second (ns,) $ render (schemaTemplate tmpls)
+    -> Either Text LText.Text
+schemas tmpls p ns namespaces typ xs =
+    let (args, attrs) = getClasses xs
+     in render (schemaTemplate tmpls)
         [ "namespace"        .= ns
         , "provider"         .= p
         , "type"             .= typ
@@ -134,8 +134,8 @@ schemas tmpls p typ xs =
         , "attributeClasses" .= attrs
         , "typesNamespace"   .= NS.types p
         , "imports"          .=
-            ( NS.lenses p
-            : [NS.provider p <> "Provider" | isJust (providerDatatype p)]
+            ( [NS.provider p <> "Provider" | isJust (providerDatatype p)]
+           ++ namespaces
             )
         ]
 

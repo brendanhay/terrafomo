@@ -14,9 +14,11 @@
 module Terrafomo.Rundeck
     ( module Terrafomo.Rundeck.Types
     , module Terrafomo.Rundeck.Provider
+    , module Terrafomo.Rundeck.Lens
     , module Terrafomo.Rundeck.Resource
     ) where
 
+import Terrafomo.Rundeck.Lens
 import Terrafomo.Rundeck.Provider
 import Terrafomo.Rundeck.Resource
 import Terrafomo.Rundeck.Types

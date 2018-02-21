@@ -31,6 +31,9 @@ module Terrafomo.Nomad.Resource
     , JobResource (..)
     , jobResource
 
+    , QuotaSpecificationResource (..)
+    , quotaSpecificationResource
+
     -- * Overloaded Fields
     -- ** Arguments
     , P.HasDeregisterOnDestroy (..)
@@ -38,6 +41,7 @@ module Terrafomo.Nomad.Resource
     , P.HasDescription (..)
     , P.HasGlobal (..)
     , P.HasJobspec (..)
+    , P.HasLimits (..)
     , P.HasName (..)
     , P.HasPolicies (..)
     , P.HasRulesHcl (..)
@@ -49,6 +53,7 @@ module Terrafomo.Nomad.Resource
     , P.HasComputedDescription (..)
     , P.HasComputedGlobal (..)
     , P.HasComputedJobspec (..)
+    , P.HasComputedLimits (..)
     , P.HasComputedName (..)
     , P.HasComputedPolicies (..)
     , P.HasComputedRulesHcl (..)
@@ -277,4 +282,63 @@ jobResource =
               _deregister_on_destroy = TF.Nil
             , _deregister_on_id_change = TF.Nil
             , _jobspec = TF.Nil
+            }
+
+{- | The @nomad_quota_specification@ Nomad resource.
+
+Manages a quota specification in a Nomad cluster.
+-}
+data QuotaSpecificationResource s = QuotaSpecificationResource {
+      _description :: !(TF.Attr s Text)
+    {- ^  @(string: "")@ - A description of the quota specification. -}
+    , _limits      :: !(TF.Attr s Text)
+    {- ^  @(block: <required>)@ - A block of quota limits to enforce. Can be repeated. See below for the structure of this block. -}
+    , _name        :: !(TF.Attr s Text)
+    {- ^  @(string: <required>)@ - A unique name for the quota specification. -}
+    } deriving (Show, Eq)
+
+instance TF.ToHCL (QuotaSpecificationResource s) where
+    toHCL QuotaSpecificationResource{..} = TF.inline $ catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "limits" <$> TF.attribute _limits
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance P.HasDescription (QuotaSpecificationResource s) (TF.Attr s Text) where
+    description =
+        lens (_description :: QuotaSpecificationResource s -> TF.Attr s Text)
+             (\s a -> s { _description = a } :: QuotaSpecificationResource s)
+
+instance P.HasLimits (QuotaSpecificationResource s) (TF.Attr s Text) where
+    limits =
+        lens (_limits :: QuotaSpecificationResource s -> TF.Attr s Text)
+             (\s a -> s { _limits = a } :: QuotaSpecificationResource s)
+
+instance P.HasName (QuotaSpecificationResource s) (TF.Attr s Text) where
+    name =
+        lens (_name :: QuotaSpecificationResource s -> TF.Attr s Text)
+             (\s a -> s { _name = a } :: QuotaSpecificationResource s)
+
+instance P.HasComputedDescription (QuotaSpecificationResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: QuotaSpecificationResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedLimits (QuotaSpecificationResource s) s (TF.Attr s Text) where
+    computedLimits =
+        (_limits :: QuotaSpecificationResource s -> TF.Attr s Text)
+            . TF.refValue
+
+instance P.HasComputedName (QuotaSpecificationResource s) s (TF.Attr s Text) where
+    computedName =
+        (_name :: QuotaSpecificationResource s -> TF.Attr s Text)
+            . TF.refValue
+
+quotaSpecificationResource :: TF.Schema TF.Resource P.Nomad (QuotaSpecificationResource s)
+quotaSpecificationResource =
+    TF.newResource "nomad_quota_specification" $
+        QuotaSpecificationResource {
+              _description = TF.Nil
+            , _limits = TF.Nil
+            , _name = TF.Nil
             }

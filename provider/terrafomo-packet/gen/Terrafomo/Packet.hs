@@ -14,11 +14,13 @@
 module Terrafomo.Packet
     ( module Terrafomo.Packet.Types
     , module Terrafomo.Packet.Provider
+    , module Terrafomo.Packet.Lens
     , module Terrafomo.Packet.DataSource
     , module Terrafomo.Packet.Resource
     ) where
 
 import Terrafomo.Packet.DataSource
+import Terrafomo.Packet.Lens
 import Terrafomo.Packet.Provider
 import Terrafomo.Packet.Resource
 import Terrafomo.Packet.Types

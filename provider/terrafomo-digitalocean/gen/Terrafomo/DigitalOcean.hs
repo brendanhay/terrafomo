@@ -14,11 +14,13 @@
 module Terrafomo.DigitalOcean
     ( module Terrafomo.DigitalOcean.Types
     , module Terrafomo.DigitalOcean.Provider
+    , module Terrafomo.DigitalOcean.Lens
     , module Terrafomo.DigitalOcean.DataSource
     , module Terrafomo.DigitalOcean.Resource
     ) where
 
 import Terrafomo.DigitalOcean.DataSource
+import Terrafomo.DigitalOcean.Lens
 import Terrafomo.DigitalOcean.Provider
 import Terrafomo.DigitalOcean.Resource
 import Terrafomo.DigitalOcean.Types

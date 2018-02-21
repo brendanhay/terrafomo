@@ -14,9 +14,11 @@
 module Terrafomo.Ignition
     ( module Terrafomo.Ignition.Types
     , module Terrafomo.Ignition.Provider
+    , module Terrafomo.Ignition.Lens
     , module Terrafomo.Ignition.DataSource
     ) where
 
 import Terrafomo.Ignition.DataSource
+import Terrafomo.Ignition.Lens
 import Terrafomo.Ignition.Provider
 import Terrafomo.Ignition.Types

@@ -14,9 +14,11 @@
 module Terrafomo.DNSimple
     ( module Terrafomo.DNSimple.Types
     , module Terrafomo.DNSimple.Provider
+    , module Terrafomo.DNSimple.Lens
     , module Terrafomo.DNSimple.Resource
     ) where
 
+import Terrafomo.DNSimple.Lens
 import Terrafomo.DNSimple.Provider
 import Terrafomo.DNSimple.Resource
 import Terrafomo.DNSimple.Types

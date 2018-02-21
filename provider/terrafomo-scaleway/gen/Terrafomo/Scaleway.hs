@@ -14,11 +14,13 @@
 module Terrafomo.Scaleway
     ( module Terrafomo.Scaleway.Types
     , module Terrafomo.Scaleway.Provider
+    , module Terrafomo.Scaleway.Lens
     , module Terrafomo.Scaleway.DataSource
     , module Terrafomo.Scaleway.Resource
     ) where
 
 import Terrafomo.Scaleway.DataSource
+import Terrafomo.Scaleway.Lens
 import Terrafomo.Scaleway.Provider
 import Terrafomo.Scaleway.Resource
 import Terrafomo.Scaleway.Types

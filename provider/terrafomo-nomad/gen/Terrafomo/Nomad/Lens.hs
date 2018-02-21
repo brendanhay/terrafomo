@@ -27,6 +27,7 @@ module Terrafomo.Nomad.Lens
     , HasDescription (..)
     , HasGlobal (..)
     , HasJobspec (..)
+    , HasLimits (..)
     , HasName (..)
     , HasPolicies (..)
     , HasRulesHcl (..)
@@ -38,6 +39,7 @@ module Terrafomo.Nomad.Lens
     , HasComputedDescription (..)
     , HasComputedGlobal (..)
     , HasComputedJobspec (..)
+    , HasComputedLimits (..)
     , HasComputedName (..)
     , HasComputedPolicies (..)
     , HasComputedRulesHcl (..)
@@ -46,11 +48,10 @@ module Terrafomo.Nomad.Lens
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens', lens)
+import Lens.Micro (Lens')
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Schema    as TF
+import qualified Terrafomo.Name   as TF
+import qualified Terrafomo.Schema as TF
 
 class HasDeregisterOnDestroy a b | a -> b where
     deregisterOnDestroy :: Lens' a b
@@ -81,6 +82,12 @@ class HasJobspec a b | a -> b where
 
 instance HasJobspec a b => HasJobspec (TF.Schema l p a) b where
     jobspec = TF.configuration . jobspec
+
+class HasLimits a b | a -> b where
+    limits :: Lens' a b
+
+instance HasLimits a b => HasLimits (TF.Schema l p a) b where
+    limits = TF.configuration . limits
 
 class HasName a b | a -> b where
     name :: Lens' a b
@@ -120,6 +127,9 @@ class HasComputedGlobal a s b | a -> s b where
 
 class HasComputedJobspec a s b | a -> s b where
     computedJobspec :: TF.Ref s a -> b
+
+class HasComputedLimits a s b | a -> s b where
+    computedLimits :: TF.Ref s a -> b
 
 class HasComputedName a s b | a -> s b where
     computedName :: TF.Ref s a -> b

@@ -14,9 +14,11 @@
 module Terrafomo.Icinga2
     ( module Terrafomo.Icinga2.Types
     , module Terrafomo.Icinga2.Provider
+    , module Terrafomo.Icinga2.Lens
     , module Terrafomo.Icinga2.Resource
     ) where
 
+import Terrafomo.Icinga2.Lens
 import Terrafomo.Icinga2.Provider
 import Terrafomo.Icinga2.Resource
 import Terrafomo.Icinga2.Types

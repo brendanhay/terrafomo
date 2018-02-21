@@ -14,9 +14,11 @@
 module Terrafomo.Librato
     ( module Terrafomo.Librato.Types
     , module Terrafomo.Librato.Provider
+    , module Terrafomo.Librato.Lens
     , module Terrafomo.Librato.Resource
     ) where
 
+import Terrafomo.Librato.Lens
 import Terrafomo.Librato.Provider
 import Terrafomo.Librato.Resource
 import Terrafomo.Librato.Types

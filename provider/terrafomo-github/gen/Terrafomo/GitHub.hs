@@ -14,11 +14,13 @@
 module Terrafomo.GitHub
     ( module Terrafomo.GitHub.Types
     , module Terrafomo.GitHub.Provider
+    , module Terrafomo.GitHub.Lens
     , module Terrafomo.GitHub.DataSource
     , module Terrafomo.GitHub.Resource
     ) where
 
 import Terrafomo.GitHub.DataSource
+import Terrafomo.GitHub.Lens
 import Terrafomo.GitHub.Provider
 import Terrafomo.GitHub.Resource
 import Terrafomo.GitHub.Types

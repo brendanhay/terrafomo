@@ -14,11 +14,13 @@
 module Terrafomo.LogicMonitor
     ( module Terrafomo.LogicMonitor.Types
     , module Terrafomo.LogicMonitor.Provider
+    , module Terrafomo.LogicMonitor.Lens
     , module Terrafomo.LogicMonitor.DataSource
     , module Terrafomo.LogicMonitor.Resource
     ) where
 
 import Terrafomo.LogicMonitor.DataSource
+import Terrafomo.LogicMonitor.Lens
 import Terrafomo.LogicMonitor.Provider
 import Terrafomo.LogicMonitor.Resource
 import Terrafomo.LogicMonitor.Types

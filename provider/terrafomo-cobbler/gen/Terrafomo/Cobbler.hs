@@ -14,9 +14,11 @@
 module Terrafomo.Cobbler
     ( module Terrafomo.Cobbler.Types
     , module Terrafomo.Cobbler.Provider
+    , module Terrafomo.Cobbler.Lens
     , module Terrafomo.Cobbler.Resource
     ) where
 
+import Terrafomo.Cobbler.Lens
 import Terrafomo.Cobbler.Provider
 import Terrafomo.Cobbler.Resource
 import Terrafomo.Cobbler.Types

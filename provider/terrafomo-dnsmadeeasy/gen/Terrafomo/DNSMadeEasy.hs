@@ -14,9 +14,11 @@
 module Terrafomo.DNSMadeEasy
     ( module Terrafomo.DNSMadeEasy.Types
     , module Terrafomo.DNSMadeEasy.Provider
+    , module Terrafomo.DNSMadeEasy.Lens
     , module Terrafomo.DNSMadeEasy.Resource
     ) where
 
+import Terrafomo.DNSMadeEasy.Lens
 import Terrafomo.DNSMadeEasy.Provider
 import Terrafomo.DNSMadeEasy.Resource
 import Terrafomo.DNSMadeEasy.Types

@@ -14,9 +14,11 @@
 module Terrafomo.PowerDNS
     ( module Terrafomo.PowerDNS.Types
     , module Terrafomo.PowerDNS.Provider
+    , module Terrafomo.PowerDNS.Lens
     , module Terrafomo.PowerDNS.Resource
     ) where
 
+import Terrafomo.PowerDNS.Lens
 import Terrafomo.PowerDNS.Provider
 import Terrafomo.PowerDNS.Resource
 import Terrafomo.PowerDNS.Types

@@ -2,6 +2,7 @@ name: AWS
 package: terrafomo-aws
 datatype: true
 original: aws
+
 dependencies:
   - amazonka-core
   - formatting

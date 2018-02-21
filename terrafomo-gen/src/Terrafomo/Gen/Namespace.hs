@@ -1,5 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE NamedFieldPuns             #-}
 {-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 
 module Terrafomo.Gen.Namespace where
 
@@ -12,9 +14,12 @@ import Data.Text          (Text)
 import Terrafomo.Gen.Provider
 import Terrafomo.Gen.Schema
 
+import Text.Printf (printf)
+
 import qualified Data.Aeson       as JSON
 import qualified Data.Aeson.Types as JSON
 import qualified Data.Foldable    as Fold
+import qualified Data.List.Split  as Split
 import qualified Data.Text        as Text
 
 -- Haskell Namespace
@@ -52,5 +57,20 @@ types p = provider p <> "Types"
 lenses :: Provider a -> NS
 lenses p = provider p <> "Lens"
 
-schemaType :: Provider a -> SchemaType -> NS
-schemaType p typ = provider p <> fromString (show typ)
+partitionSchemas :: Provider a -> SchemaType -> [b] -> [(NS, [b])]
+partitionSchemas p typ = partition p (show typ)
+
+partition :: Provider a -> String -> [b] -> [(NS, [b])]
+partition p@Provider{providerMaxPartition} root xs
+    | null   xs                         = []
+    | length xs <= providerMaxPartition = [single]
+    | otherwise                         =
+          zipWith multiple [1..]
+        . filter (not . null)
+        $ Split.chunksOf providerMaxPartition xs
+  where
+    single =
+        (provider p <> fromString root, xs)
+
+    multiple (n :: Int) ys =
+        (provider p <> fromString (root ++ printf "%02d" n), ys)

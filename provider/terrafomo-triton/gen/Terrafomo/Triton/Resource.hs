@@ -76,6 +76,7 @@ module Terrafomo.Triton.Resource
     , P.HasComputedAffinity (..)
     , P.HasComputedCloudConfig (..)
     , P.HasComputedCns (..)
+    , P.HasComputedComputeNode (..)
     , P.HasComputedCreated (..)
     , P.HasComputedDataset (..)
     , P.HasComputedDescription (..)
@@ -246,6 +247,9 @@ instance P.HasComputedFabric (FabricResource s) s (TF.Attr s Text) where
 instance P.HasComputedGateway (FabricResource s) s (TF.Attr s Text) where
     computedGateway x = TF.compute (TF.refKey x) "gateway"
 
+instance P.HasComputedId (FabricResource s) s (TF.Attr s Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance P.HasComputedInternetNat (FabricResource s) s (TF.Attr s Text) where
     computedInternetNat x = TF.compute (TF.refKey x) "internet_nat"
 
@@ -295,17 +299,25 @@ The @triton_firewall_rule@ resource represents a rule for the Triton cloud
 firewall.
 -}
 data FirewallRuleResource s = FirewallRuleResource {
-      _enabled :: !(TF.Attr s Text)
-    {- ^ - (boolean)  Default: @false@ Whether the rule should be effective. -}
-    , _rule    :: !(TF.Attr s Text)
-    {- ^ - (string, Required) The firewall rule described using the Cloud API rule syntax defined at https://docs.joyent.com/public-cloud/network/firewall/cloud-firewall-rules-reference. -}
+      _description :: !(TF.Attr s Text)
+    {- ^ - (string, Optional) Description of the firewall rule -}
+    , _enabled     :: !(TF.Attr s Text)
+    {- ^ - (boolean, Optional)  Default: @false@ Whether the rule should be effective. -}
+    , _rule        :: !(TF.Attr s Text)
+    {- ^ - (string, Required) The firewall rule described using the Cloud API rule syntax defined at https://docs.joyent.com/public-cloud/network/firewall/cloud-firewall-rules-reference. Note: Cloud API will normalize rules based on case-sensitivity, parentheses, ordering of IP addresses, etc. This can result in Terraform updating rules repeatedly if the rule definition differs from the normalized value. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (FirewallRuleResource s) where
     toHCL FirewallRuleResource{..} = TF.inline $ catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "rule" <$> TF.attribute _rule
         ]
+
+instance P.HasDescription (FirewallRuleResource s) (TF.Attr s Text) where
+    description =
+        lens (_description :: FirewallRuleResource s -> TF.Attr s Text)
+             (\s a -> s { _description = a } :: FirewallRuleResource s)
 
 instance P.HasEnabled (FirewallRuleResource s) (TF.Attr s Text) where
     enabled =
@@ -316,6 +328,11 @@ instance P.HasRule (FirewallRuleResource s) (TF.Attr s Text) where
     rule =
         lens (_rule :: FirewallRuleResource s -> TF.Attr s Text)
              (\s a -> s { _rule = a } :: FirewallRuleResource s)
+
+instance P.HasComputedDescription (FirewallRuleResource s) s (TF.Attr s Text) where
+    computedDescription =
+        (_description :: FirewallRuleResource s -> TF.Attr s Text)
+            . TF.refValue
 
 instance P.HasComputedEnabled (FirewallRuleResource s) s (TF.Attr s Text) where
     computedEnabled =
@@ -334,7 +351,8 @@ firewallRuleResource :: TF.Schema TF.Resource P.Triton (FirewallRuleResource s)
 firewallRuleResource =
     TF.newResource "triton_firewall_rule" $
         FirewallRuleResource {
-              _enabled = TF.Nil
+              _description = TF.Nil
+            , _enabled = TF.Nil
             , _rule = TF.Nil
             }
 
@@ -404,7 +422,7 @@ data MachineResource s = MachineResource {
     , _image                :: !(TF.Attr s Text)
     {- ^ - (string, Required) The UUID of the image to provision. -}
     , _locality             :: !(TF.Attr s Text)
-    {- ^ - (map of Locality hints, Optional) A mapping of <https://apidocs.joyent.com/cloudapi/#CreateMachine> attributes to apply to the machine that assist in data center placement. NOTE: Locality hints are only used at the time of machine creation and not referenced after. -}
+    {- ^ - (map of Locality hints, Optional) A mapping of <https://apidocs.joyent.com/cloudapi/#CreateMachine> attributes to apply to the machine that assist in data center placement. NOTE: Locality hints are only used at the time of machine creation and not referenced after. Locality is deprecated as of <https://apidocs.joyent.com/cloudapi/#830> . -}
     , _metadata             :: !(TF.Attr s Text)
     {- ^ - (map, optional) A mapping of metadata to apply to the machine. -}
     , _name                 :: !(TF.Attr s Text)
@@ -536,6 +554,9 @@ instance P.HasComputedCns (MachineResource s) s (TF.Attr s Text) where
     computedCns =
         (_cns :: MachineResource s -> TF.Attr s Text)
             . TF.refValue
+
+instance P.HasComputedComputeNode (MachineResource s) s (TF.Attr s Text) where
+    computedComputeNode x = TF.compute (TF.refKey x) "compute_node"
 
 instance P.HasComputedCreated (MachineResource s) s (TF.Attr s Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
@@ -675,7 +696,7 @@ data SnapshotResource s = SnapshotResource {
       _machine_id :: !(TF.Attr s Text)
     {- ^ - (string, Required) The ID of the machine of which to take a snapshot. -}
     , _name       :: !(TF.Attr s Text)
-    {- ^ - (string) The name for the snapshot. -}
+    {- ^ - (string, Required) The name for the snapshot. -}
     } deriving (Show, Eq)
 
 instance TF.ToHCL (SnapshotResource s) where

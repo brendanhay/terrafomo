@@ -14,9 +14,11 @@
 module Terrafomo.NS1
     ( module Terrafomo.NS1.Types
     , module Terrafomo.NS1.Provider
+    , module Terrafomo.NS1.Lens
     , module Terrafomo.NS1.Resource
     ) where
 
+import Terrafomo.NS1.Lens
 import Terrafomo.NS1.Provider
 import Terrafomo.NS1.Resource
 import Terrafomo.NS1.Types

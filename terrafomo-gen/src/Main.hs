@@ -139,24 +139,35 @@ main = do
     runScript $ do
         echo "Program" "Starting..."
 
-        tmpls       <- loadTemplates   opts
-        provider    <- loadProvider    opts
-        datasources <- loadDataSources (providerRules provider) opts
-        resources   <- loadResources   (providerRules provider) opts
+        tmpls       <- loadTemplates opts
+        provider    <- loadProvider  opts
 
-        let anyDataSources = not (null datasources)
-            anyResources   = not (null resources)
+        datasources <-
+            NS.partitionSchemas provider DataSource
+                <$> loadDataSources (providerRules provider) opts
 
-        dir         <- renderProvider tmpls provider anyDataSources anyResources
+        resources   <-
+            NS.partitionSchemas provider Resource
+                <$> loadResources (providerRules provider) opts
 
-        when (anyDataSources || anyResources) $
-            renderLenses tmpls dir provider (datasources ++ resources)
+        let lensNS  = NS.lenses provider
+            schemas = concatMap snd (datasources ++ resources)
 
-        when anyDataSources $
-            renderSchemas tmpls dir provider DataSource datasources
+        dir         <-
+            renderProvider tmpls provider [lensNS]
+                (lensNS : map fst (datasources ++ resources))
 
-        when anyResources $
-            renderSchemas tmpls dir provider Resource resources
+        unless (null schemas) $
+            hoistEither (Render.lenses tmpls provider lensNS schemas)
+                >>= writeNS (dir </> "gen") . (lensNS,)
+
+        Fold.for_ datasources $ \(ns, xs) ->
+            hoistEither (Render.schemas tmpls provider ns [lensNS] DataSource xs)
+                >>= writeNS (dir </> "gen") . (ns,)
+
+        Fold.for_ resources $ \(ns, xs) ->
+            hoistEither (Render.schemas tmpls provider ns [lensNS] Resource xs)
+                >>= writeNS (dir </> "gen") . (ns,)
 
         echo "Program" "Done."
 
@@ -245,15 +256,16 @@ parseMarkdown parser Path{markdownFile} = do
 renderProvider
     :: Templates EDE.Template
     -> Provider (Maybe Schema)
-    -> Bool -- ^ Any datasource module?
-    -> Bool -- ^ Any resource module?
+    -> [NS]
+    -> [NS]
     -> Script FilePath
-renderProvider tmpls p@Provider{providerPackage, providerDatatype} d r = do
-    let dir = maybe "terrafomo" (Path.combine "provider" . Text.unpack)
+renderProvider tmpls p lenses namespaces = do
+    let Provider{providerPackage, providerDatatype} = p
+        dir = maybe "terrafomo" (Path.combine "provider" . Text.unpack)
                     providerPackage
 
     Fold.for_ providerPackage $
-        const (renderPackage tmpls dir p d r)
+        const (renderPackage tmpls dir p lenses namespaces)
 
     when (isJust providerDatatype) $
         hoistEither (Render.provider tmpls p)
@@ -265,51 +277,28 @@ renderPackage
     :: Templates EDE.Template
     -> FilePath
     -> Provider (Maybe Schema)
-    -> Bool -- ^ Any datasource module?
-    -> Bool -- ^ Any resource module?
+    -> [NS]
+    -> [NS]
     -> Script ()
-renderPackage tmpls dir p d r = do
+renderPackage tmpls dir p lenses namespaces = do
     let packageFile = dir    </> "package" <.> "yaml"
         srcDir      = dir    </> "src"
         genDir      = dir    </> "gen"
-        typesFile   = srcDir </> NS.toPath (NS.types    p) <.> "hs"
+        typesFile   = srcDir </> NS.toPath (NS.types p) <.> "hs"
 
     createDirectory dir
 
     hoistEither (Render.package tmpls p)
         >>= scriptIO . LText.writeFile packageFile
 
-    hoistEither (Render.main tmpls p d r)
+    hoistEither (Render.main tmpls p namespaces)
         >>= writeNS genDir
 
     typesExists <- scriptIO (Dir.doesFileExist typesFile)
     echo "Types" (typesFile ++ " == " ++ show typesExists)
     unless typesExists $
-        hoistEither (Render.types tmpls p)
+        hoistEither (Render.types tmpls p lenses)
             >>= writeNS srcDir
-
-renderSchemas
-    :: Templates EDE.Template
-    -> FilePath
-    -> Provider (Maybe a)
-    -> SchemaType
-    -> [Schema]
-    -> Script ()
-renderSchemas tmpls dir p typ xs = do
-    let writeModule = writeNS (dir </> "gen")
-    hoistEither (Render.schemas tmpls p typ xs)
-        >>= writeModule
-
-renderLenses
-    :: Templates EDE.Template
-    -> FilePath
-    -> Provider (Maybe a)
-    -> [Schema]
-    -> Script ()
-renderLenses tmpls dir p xs = do
-    let writeModule = writeNS (dir </> "gen")
-    hoistEither (Render.lenses tmpls p xs)
-        >>= writeModule
 
 writeNS :: FilePath -> (NS, LText.Text) -> Script ()
 writeNS dir (ns, text) = do
