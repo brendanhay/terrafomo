@@ -386,6 +386,15 @@ class GToAttributes f where
 
 instance ( Selector s
          , ToHCL a
+         ) => GToAttributes (S1 s (K1 i [Attr t a])) where
+    gToValues p =
+        let k  = fromString (case selName p of '_':x -> x; x -> x)
+            vs = unK1 (unM1 p)
+          in maybeToList (assign k <$> repeated (Just vs))
+    {-# INLINEABLE gToValues #-}
+
+instance ( Selector s
+         , ToHCL a
          ) => GToAttributes (S1 s (K1 i (Attr t a))) where
     gToValues p =
         let k = fromString (case selName p of '_':x -> x; x -> x)

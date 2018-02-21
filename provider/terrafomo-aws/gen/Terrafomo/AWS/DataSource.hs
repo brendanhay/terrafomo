@@ -733,7 +733,7 @@ resources.
 data AmiData s = AmiData {
       _executable_users :: !(TF.Attr s Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter           :: !(TF.Attr s Text)
+    , _filter           :: !(P.Maybe [P.Filter s])
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
     , _most_recent      :: !(TF.Attr s Text)
     {- ^ (Optional) If more than one result is returned, use the most recent AMI. -}
@@ -746,7 +746,7 @@ data AmiData s = AmiData {
 instance TF.ToHCL (AmiData s) where
     toHCL AmiData{..} = TF.inline $ catMaybes
         [ TF.assign "executable_users" <$> TF.attribute _executable_users
-        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "filter" <$>  _filter
         , TF.assign "most_recent" <$> TF.attribute _most_recent
         , TF.assign "name_regex" <$> TF.attribute _name_regex
         , TF.assign "owners" <$> TF.attribute _owners
@@ -757,9 +757,9 @@ instance P.HasExecutableUsers (AmiData s) (TF.Attr s Text) where
         lens (_executable_users :: AmiData s -> TF.Attr s Text)
              (\s a -> s { _executable_users = a } :: AmiData s)
 
-instance P.HasFilter (AmiData s) (TF.Attr s Text) where
+instance P.HasFilter (AmiData s) (P.Maybe [P.Filter s]) where
     filter =
-        lens (_filter :: AmiData s -> TF.Attr s Text)
+        lens (_filter :: AmiData s -> P.Maybe [P.Filter s])
              (\s a -> s { _filter = a } :: AmiData s)
 
 instance P.HasMostRecent (AmiData s) (TF.Attr s Text) where
@@ -794,9 +794,9 @@ instance P.HasComputedExecutableUsers (AmiData s) s (TF.Attr s Text) where
         (_executable_users :: AmiData s -> TF.Attr s Text)
             . TF.refValue
 
-instance P.HasComputedFilter (AmiData s) s (TF.Attr s Text) where
+instance P.HasComputedFilter (AmiData s) s (P.Maybe [P.Filter s]) where
     computedFilter =
-        (_filter :: AmiData s -> TF.Attr s Text)
+        (_filter :: AmiData s -> P.Maybe [P.Filter s])
             . TF.refValue
 
 instance P.HasComputedHypervisor (AmiData s) s (TF.Attr s Text) where
@@ -879,7 +879,7 @@ amiData =
     TF.newDataSource "aws_ami" $
         AmiData {
               _executable_users = TF.Nil
-            , _filter = TF.Nil
+            , _filter = P.Nothing
             , _most_recent = TF.Nil
             , _name_regex = TF.Nil
             , _owners = TF.Nil

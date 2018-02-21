@@ -4,13 +4,11 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RankNTypes             #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE TypeFamilies           #-}
 
 module Terrafomo.Lifecycle
     ( Changes
-    , wildcardChange
-    , attributeChange
     , ignoreAllChanges
-    , ignore
 
     , HasLifecycle (..)
     , Lifecycle    (..)
@@ -20,6 +18,8 @@ module Terrafomo.Lifecycle
 import Data.Function  (on)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
+
+import GHC.Exts (IsList (..))
 
 import Lens.Micro (ASetter', Lens', lens)
 
@@ -58,24 +58,24 @@ instance HCL.ToHCL (Changes a) where
         Wildcard -> HCL.list [HCL.string "*"]
         Match xs -> HCL.list xs
 
-wildcardChange :: Changes a
-wildcardChange = Wildcard
+instance IsList (Changes a) where
+    type Item (Changes a) = Name
 
-attributeChange :: Name -> Changes a
-attributeChange x = Match (Set.singleton x)
+    toList = \case
+        Wildcard -> ["*"]
+        Match xs -> Set.toList xs
+
+    fromList xs =
+        let s = Set.fromList xs
+         in if Set.member "*" s
+                then Wildcard
+                else Match s
 
 ignoreAllChanges
     :: HasLifecycle a b
     => a
     -> a
-ignoreAllChanges = Lens.set ignoreChanges wildcardChange
-
-ignore
-    :: HasLifecycle a b
-    => Lens.SimpleGetter a (Changes b)
-    -> a
-    -> a
-ignore l x = Lens.over ignoreChanges (<> (x Lens.^. l)) x
+ignoreAllChanges = Lens.set ignoreChanges Wildcard
 
 -- | Resources have a strict lifecycle, and can be thought of as basic state
 -- machines. Understanding this lifecycle can help better understand how Terraform

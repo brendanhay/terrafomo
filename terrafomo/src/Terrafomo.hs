@@ -45,7 +45,6 @@ module Terrafomo
     -- ** Ignored Attributes
     , Changes
     , ignoreAllChanges
-    , ignore
 
     -- ** Dependencies
     , dependOn

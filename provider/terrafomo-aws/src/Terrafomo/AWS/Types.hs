@@ -1,12 +1,14 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
 {-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE DuplicateRecordFields      #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE FunctionalDependencies     #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE UndecidableInstances       #-}
 
@@ -30,10 +32,10 @@ module Terrafomo.AWS.Types
     -- * EC2
     , SecurityGroupType       (..)
     , Protocol                (..)
+    , Filter                  (..)
 
     -- * S3
     , S3BucketVersioning      (..)
-    , s3BucketVersioning
 
     -- * DynamoDB
     , DynamoTableAttribute    (..)
@@ -74,6 +76,7 @@ import Formatting (Format, (%))
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
 import qualified Network.AWS.Data.Text  as AWS
+import qualified Terrafomo.Attribute    as TF
 import qualified Terrafomo.AWS.Lens     as Lens
 import qualified Terrafomo.HCL          as HCL
 
@@ -142,6 +145,24 @@ instance ToHCL Protocol where
         UDP          -> "udp"
         AllProtocols -> "-1"
 
+data Filter s = Filter
+    { _name   :: !(Attr s Text)
+    , _values :: ![Attr s Text]
+    } deriving (Show, Eq, Generic)
+
+instance ToHCL (Filter s) where
+    toHCL = HCL.genericInlineAttributes
+
+instance Lens.HasName (Filter s) (Attr s Text) where
+    name =
+        lens (_name :: Filter s -> Attr s Text)
+             (\s a -> s { _name = a } :: Filter s)
+
+instance Lens.HasValues (Filter s) [Attr s Text] where
+    values =
+        lens (_values :: Filter s -> [Attr s Text])
+             (\s a -> s { _values = a } :: Filter s)
+
 -- S3
 
 data S3BucketVersioning s = S3BucketVersioning
@@ -157,17 +178,11 @@ data S3BucketVersioning s = S3BucketVersioning
 instance ToHCL (S3BucketVersioning s) where
     toHCL = HCL.genericInlineAttributes
 
--- instance Lens.HasEnabled (S3BucketVersioning s) s Bool where
---     enabled = lens _enabled (\s a -> s { _enabled = a })
+instance Lens.HasEnabled (S3BucketVersioning s) (Attr s Bool) where
+    enabled = lens _enabled (\s a -> s { _enabled = a })
 
--- instance HasMfaDelete (S3BucketVersioning s) s Bool where
---     mfaDelete = lens _mfa_delete (\s a -> s { _mfa_delete = a })
-
-s3BucketVersioning :: S3BucketVersioning s
-s3BucketVersioning = S3BucketVersioning
-    { _enabled    = attr False
-    , _mfa_delete = attr False
-    }
+instance HasMfaDelete (S3BucketVersioning s) (Attr s Bool) where
+    mfaDelete = lens _mfa_delete (\s a -> s { _mfa_delete = a })
 
 -- DynamoDB
 
@@ -214,10 +229,14 @@ instance Lens.HasNamespace (ElasticBeanstalkSetting s) (Attr s Text) where
     namespace = lens _namespace (\s a -> s { _namespace = a })
 
 instance Lens.HasName (ElasticBeanstalkSetting s) (Attr s Text) where
-    name = lens _name (\s a -> s { _name = a })
+    name =
+        lens (_name :: ElasticBeanstalkSetting s -> Attr s Text)
+             (\s a -> s { _name = a } :: ElasticBeanstalkSetting s)
 
 instance Lens.HasValue (ElasticBeanstalkSetting s) (Attr s Text) where
-    value = lens _value (\s a -> s { _value = a })
+    value =
+        lens (_value :: ElasticBeanstalkSetting s -> Attr s Text)
+             (\s a -> s { _value = a } :: ElasticBeanstalkSetting s)
 
 elasticBeanstalkSetting :: ElasticBeanstalkSetting s
 elasticBeanstalkSetting = ElasticBeanstalkSetting

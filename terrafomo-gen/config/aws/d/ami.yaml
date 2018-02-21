@@ -1,0 +1,5 @@
+arguments:
+  _filter:
+    type:
+      name: '[P.Filter s]'
+      format: verbatim
