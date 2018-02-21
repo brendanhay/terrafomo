@@ -9,3 +9,11 @@ arguments:
     type:
       name: '(P.Ec2EphemeralBlockDevice s)'
       format: repeated
+  _security_groups:
+    type:
+      name: 'Text'
+      format: repeated
+  _vpc_security_group_ids:
+    type:
+      name: 'Text'
+      format: repeated

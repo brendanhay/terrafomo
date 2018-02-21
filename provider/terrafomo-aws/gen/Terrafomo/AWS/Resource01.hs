@@ -5560,7 +5560,7 @@ data InstanceResource s = InstanceResource {
     {- ^ (Optional) Private IP address to associate with the instance in a VPC. -}
     , _root_block_device :: !(TF.Attr s (P.Ec2RootBlockDevice s))
     {- ^ (Optional) Customize details about the root block device of the instance. See <#block-devices> below for details. -}
-    , _security_groups :: !(TF.Attr s Text)
+    , _security_groups :: !(P.Maybe [TF.Attr s Text])
     {- ^ (Optional) A list of security group names to associate with. If you are creating Instances in a VPC, use @vpc_security_group_ids@ instead. -}
     , _source_dest_check :: !(TF.Attr s Text)
     {- ^ (Optional) Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true. -}
@@ -5576,7 +5576,7 @@ data InstanceResource s = InstanceResource {
     {- ^ (Optional) Can be used instead of @user_data@ to pass base64-encoded binary data directly. Use this instead of @user_data@ whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. -}
     , _volume_tags :: !(TF.Attr s Text)
     {- ^ (Optional) A mapping of tags to assign to the devices created by the instance at launch time. -}
-    , _vpc_security_group_ids :: !(TF.Attr s Text)
+    , _vpc_security_group_ids :: !(P.Maybe [TF.Attr s Text])
     {- ^ (Optional) A list of security group IDs to associate with. -}
     } deriving (Show, Eq)
 
@@ -5600,7 +5600,7 @@ instance TF.ToHCL (InstanceResource s) where
         , TF.assign "placement_group" <$> TF.attribute _placement_group
         , TF.assign "private_ip" <$> TF.attribute _private_ip
         , TF.assign "root_block_device" <$> TF.attribute _root_block_device
-        , TF.assign "security_groups" <$> TF.attribute _security_groups
+        , TF.assign "security_groups" <$> TF.repeated _security_groups
         , TF.assign "source_dest_check" <$> TF.attribute _source_dest_check
         , TF.assign "subnet_id" <$> TF.attribute _subnet_id
         , TF.assign "tags" <$> TF.attribute _tags
@@ -5608,7 +5608,7 @@ instance TF.ToHCL (InstanceResource s) where
         , TF.assign "user_data" <$> TF.attribute _user_data
         , TF.assign "user_data_base64" <$> TF.attribute _user_data_base64
         , TF.assign "volume_tags" <$> TF.attribute _volume_tags
-        , TF.assign "vpc_security_group_ids" <$> TF.attribute _vpc_security_group_ids
+        , TF.assign "vpc_security_group_ids" <$> TF.repeated _vpc_security_group_ids
         ]
 
 instance P.HasAmi (InstanceResource s) (TF.Attr s Text) where
@@ -5701,9 +5701,9 @@ instance P.HasRootBlockDevice (InstanceResource s) (TF.Attr s (P.Ec2RootBlockDev
         lens (_root_block_device :: InstanceResource s -> TF.Attr s (P.Ec2RootBlockDevice s))
              (\s a -> s { _root_block_device = a } :: InstanceResource s)
 
-instance P.HasSecurityGroups (InstanceResource s) (TF.Attr s Text) where
+instance P.HasSecurityGroups (InstanceResource s) (P.Maybe [TF.Attr s Text]) where
     securityGroups =
-        lens (_security_groups :: InstanceResource s -> TF.Attr s Text)
+        lens (_security_groups :: InstanceResource s -> P.Maybe [TF.Attr s Text])
              (\s a -> s { _security_groups = a } :: InstanceResource s)
 
 instance P.HasSourceDestCheck (InstanceResource s) (TF.Attr s Text) where
@@ -5741,9 +5741,9 @@ instance P.HasVolumeTags (InstanceResource s) (TF.Attr s Text) where
         lens (_volume_tags :: InstanceResource s -> TF.Attr s Text)
              (\s a -> s { _volume_tags = a } :: InstanceResource s)
 
-instance P.HasVpcSecurityGroupIds (InstanceResource s) (TF.Attr s Text) where
+instance P.HasVpcSecurityGroupIds (InstanceResource s) (P.Maybe [TF.Attr s Text]) where
     vpcSecurityGroupIds =
-        lens (_vpc_security_group_ids :: InstanceResource s -> TF.Attr s Text)
+        lens (_vpc_security_group_ids :: InstanceResource s -> P.Maybe [TF.Attr s Text])
              (\s a -> s { _vpc_security_group_ids = a } :: InstanceResource s)
 
 instance P.HasComputedAmi (InstanceResource s) s (TF.Attr s Text) where
@@ -5905,7 +5905,7 @@ instanceResource =
             , _placement_group = TF.Nil
             , _private_ip = TF.Nil
             , _root_block_device = TF.Nil
-            , _security_groups = TF.Nil
+            , _security_groups = P.Nothing
             , _source_dest_check = TF.Nil
             , _subnet_id = TF.Nil
             , _tags = TF.Nil
@@ -5913,7 +5913,7 @@ instanceResource =
             , _user_data = TF.Nil
             , _user_data_base64 = TF.Nil
             , _volume_tags = TF.Nil
-            , _vpc_security_group_ids = TF.Nil
+            , _vpc_security_group_ids = P.Nothing
             }
 
 {- | The @aws_kinesis_firehose_delivery_stream@ AWS resource.
