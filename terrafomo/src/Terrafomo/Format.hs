@@ -13,8 +13,7 @@ module Terrafomo.Format
     , Format.bprint
 
     , nformat
-    , aformat
-    -- , aformatList
+    , vformat
 
     -- * Formatters
     -- ** Terraform Syntax
@@ -66,9 +65,9 @@ nformat :: Format Name r -> r
 nformat fmt =
     Format.runFormat fmt (Name . LText.toStrict . Build.toLazyText)
 
--- | Given a textual formatter and a constant, produce a Terraform attribute.
-aformat :: Format (Attr s Text) r -> r
-aformat fmt =
+-- | Given a textual formatter and a constant, produce a Terraform attribute value.
+vformat :: Format (Attr s Text) r -> r
+vformat fmt =
     Format.runFormat fmt (Constant . LText.toStrict . Build.toLazyText)
 
 -- Formatters

@@ -7,7 +7,7 @@ module Terrafomo.Attribute
     ( Attr (..)
     , compute
     , join
-    , attr
+    , value
     , nil
     , true
     , false
@@ -39,7 +39,7 @@ data Attr s a
 instance Hashable a => Hashable (Attr s a)
 
 instance IsString a => IsString (Attr s a) where
-    fromString = attr . fromString
+    fromString = value . fromString
 
 instance Num a => Num (Attr s a) where
     (+)         = Infix "+"
@@ -47,7 +47,7 @@ instance Num a => Num (Attr s a) where
     (*)         = Infix "*"
     abs         = Apply "abs" . pure
     signum      = Apply "signum" . pure
-    fromInteger = attr . fromInteger
+    fromInteger = value . fromInteger
 
 compute :: Key -> Name -> Attr s a
 compute k v = Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))
@@ -59,9 +59,9 @@ join = Join
 {-# INLINE join #-}
 
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.
-attr :: a -> Attr s a
-attr = Constant
-{-# INLINE attr #-}
+value :: a -> Attr s a
+value = Constant
+{-# INLINE value #-}
 
 -- | Omit an attribute. Equivalent to 'Nothing'.
 nil :: Attr s a

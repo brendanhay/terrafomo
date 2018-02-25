@@ -25,7 +25,7 @@ module Terrafomo
     , Name            (..)
     , Attr
     , join
-    , attr
+    , value
     , nil
     , true
     , false
