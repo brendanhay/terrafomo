@@ -41,19 +41,20 @@ module Terrafomo.DNSMadeEasy.Resource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.DNSMadeEasy.Types as P
+
+import qualified Data.Text                      as P
 import qualified Data.Word                      as P
 import qualified GHC.Base                       as P
 import qualified Numeric.Natural                as P
 import qualified Terrafomo.DNSMadeEasy.Lens     as P
 import qualified Terrafomo.DNSMadeEasy.Provider as P
-import           Terrafomo.DNSMadeEasy.Types    as P
 import qualified Terrafomo.IP                   as P
 
 import qualified Terrafomo.Attribute as TF
@@ -71,19 +72,19 @@ data RecordResource s = RecordResource {
 instance TF.ToHCL (RecordResource s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedGtdLocation (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedGtdLocation (RecordResource s) s (TF.Attr s P.Text) where
     computedGtdLocation x = TF.compute (TF.refKey x) "gtdLocation"
 
-instance P.HasComputedName (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (RecordResource s) s (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedTtl (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedTtl (RecordResource s) s (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance P.HasComputedType' (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedType' (RecordResource s) s (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedValue (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedValue (RecordResource s) s (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
 recordResource :: TF.Schema TF.Resource P.DNSMadeEasy (RecordResource s)

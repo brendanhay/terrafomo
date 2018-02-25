@@ -42,12 +42,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                  as P
 import qualified Terrafomo.IP               as P
 import qualified Terrafomo.Kubernetes.Types as P
 
@@ -63,31 +63,31 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data Kubernetes = Kubernetes {
-      _client_certificate       :: !(Maybe Text)
+      _client_certificate       :: !(Maybe P.Text)
     {- ^ (Optional) PEM-encoded client certificate for TLS authentication. Can be sourced from @KUBE_CLIENT_CERT_DATA@ . -}
-    , _client_key               :: !(Maybe Text)
+    , _client_key               :: !(Maybe P.Text)
     {- ^ (Optional) PEM-encoded client certificate key for TLS authentication. Can be sourced from @KUBE_CLIENT_KEY_DATA@ . -}
-    , _cluster_ca_certificate   :: !(Maybe Text)
+    , _cluster_ca_certificate   :: !(Maybe P.Text)
     {- ^ (Optional) PEM-encoded root certificates bundle for TLS authentication. Can be sourced from @KUBE_CLUSTER_CA_CERT_DATA@ . -}
-    , _config_context           :: !(Maybe Text)
+    , _config_context           :: !(Maybe P.Text)
     {- ^ (Optional) Context to choose from the config file. Can be sourced from @KUBE_CTX@ . -}
-    , _config_context_auth_info :: !(Maybe Text)
+    , _config_context_auth_info :: !(Maybe P.Text)
     {- ^ (Optional) Authentication info context of the kube config (name of the kubeconfig user, @--user@ flag in @kubectl@ ). Can be sourced from @KUBE_CTX_AUTH_INFO@ . -}
-    , _config_context_cluster   :: !(Maybe Text)
+    , _config_context_cluster   :: !(Maybe P.Text)
     {- ^ (Optional) Cluster context of the kube config (name of the kubeconfig cluster, @--cluster@ flag in @kubectl@ ). Can be sourced from @KUBE_CTX_CLUSTER@ . -}
-    , _config_path              :: !(Maybe Text)
+    , _config_path              :: !(Maybe P.Text)
     {- ^ (Optional) Path to the kube config file. Can be sourced from @KUBE_CONFIG@ or @KUBECONFIG@ . Defaults to @~/.kube/config@ . -}
-    , _host                     :: !(Maybe Text)
+    , _host                     :: !(Maybe P.Text)
     {- ^ (Optional) The hostname (in form of URI) of Kubernetes master. Can be sourced from @KUBE_HOST@ . Defaults to @https://localhost@ . -}
-    , _insecure                 :: !(Maybe Text)
+    , _insecure                 :: !(Maybe P.Text)
     {- ^ (Optional) Whether server should be accessed without verifying the TLS certificate. Can be sourced from @KUBE_INSECURE@ . Defaults to @false@ . -}
-    , _load_config_file         :: !(Maybe Text)
+    , _load_config_file         :: !(Maybe P.Text)
     {- ^ (Optional) By default the local config (~/.kube/config) is loaded when you use this provider. This option at false disable this behaviour. Can be sourced from @KUBE_LOAD_CONFIG_FILE@ . -}
-    , _password                 :: !(Maybe Text)
+    , _password                 :: !(Maybe P.Text)
     {- ^ (Optional) The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint. Can be sourced from @KUBE_PASSWORD@ . -}
-    , _token                    :: !(Maybe Text)
+    , _token                    :: !(Maybe P.Text)
     {- ^ (Optional) Token of your service account.  Can be sourced from @KUBE_TOKEN@ . -}
-    , _username                 :: !(Maybe Text)
+    , _username                 :: !(Maybe P.Text)
     {- ^ (Optional) The username to use for HTTP basic authentication when accessing the Kubernetes master endpoint. Can be sourced from @KUBE_USER@ . -}
     } deriving (Show, Eq, Generic)
 
@@ -134,54 +134,54 @@ emptyKubernetes = Kubernetes {
       , _username = Nothing
     }
 
-providerClientCertificate :: Lens' Kubernetes (Maybe Text)
+providerClientCertificate :: Lens' Kubernetes (Maybe P.Text)
 providerClientCertificate =
     lens _client_certificate (\s a -> s { _client_certificate = a })
 
-providerClientKey :: Lens' Kubernetes (Maybe Text)
+providerClientKey :: Lens' Kubernetes (Maybe P.Text)
 providerClientKey =
     lens _client_key (\s a -> s { _client_key = a })
 
-providerClusterCaCertificate :: Lens' Kubernetes (Maybe Text)
+providerClusterCaCertificate :: Lens' Kubernetes (Maybe P.Text)
 providerClusterCaCertificate =
     lens _cluster_ca_certificate (\s a -> s { _cluster_ca_certificate = a })
 
-providerConfigContext :: Lens' Kubernetes (Maybe Text)
+providerConfigContext :: Lens' Kubernetes (Maybe P.Text)
 providerConfigContext =
     lens _config_context (\s a -> s { _config_context = a })
 
-providerConfigContextAuthInfo :: Lens' Kubernetes (Maybe Text)
+providerConfigContextAuthInfo :: Lens' Kubernetes (Maybe P.Text)
 providerConfigContextAuthInfo =
     lens _config_context_auth_info (\s a -> s { _config_context_auth_info = a })
 
-providerConfigContextCluster :: Lens' Kubernetes (Maybe Text)
+providerConfigContextCluster :: Lens' Kubernetes (Maybe P.Text)
 providerConfigContextCluster =
     lens _config_context_cluster (\s a -> s { _config_context_cluster = a })
 
-providerConfigPath :: Lens' Kubernetes (Maybe Text)
+providerConfigPath :: Lens' Kubernetes (Maybe P.Text)
 providerConfigPath =
     lens _config_path (\s a -> s { _config_path = a })
 
-providerHost :: Lens' Kubernetes (Maybe Text)
+providerHost :: Lens' Kubernetes (Maybe P.Text)
 providerHost =
     lens _host (\s a -> s { _host = a })
 
-providerInsecure :: Lens' Kubernetes (Maybe Text)
+providerInsecure :: Lens' Kubernetes (Maybe P.Text)
 providerInsecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-providerLoadConfigFile :: Lens' Kubernetes (Maybe Text)
+providerLoadConfigFile :: Lens' Kubernetes (Maybe P.Text)
 providerLoadConfigFile =
     lens _load_config_file (\s a -> s { _load_config_file = a })
 
-providerPassword :: Lens' Kubernetes (Maybe Text)
+providerPassword :: Lens' Kubernetes (Maybe P.Text)
 providerPassword =
     lens _password (\s a -> s { _password = a })
 
-providerToken :: Lens' Kubernetes (Maybe Text)
+providerToken :: Lens' Kubernetes (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })
 
-providerUsername :: Lens' Kubernetes (Maybe Text)
+providerUsername :: Lens' Kubernetes (Maybe P.Text)
 providerUsername =
     lens _username (\s a -> s { _username = a })

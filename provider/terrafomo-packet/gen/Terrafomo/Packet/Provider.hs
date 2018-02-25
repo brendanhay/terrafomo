@@ -30,12 +30,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text              as P
 import qualified Terrafomo.IP           as P
 import qualified Terrafomo.Packet.Types as P
 
@@ -51,7 +51,7 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Packet = Packet {
-      _auth_token :: !(Maybe Text)
+      _auth_token :: !(Maybe P.Text)
     {- ^ (Required) This is your Packet API Auth token. This can also be specified with the @PACKET_AUTH_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -74,6 +74,6 @@ emptyPacket = Packet {
         _auth_token = Nothing
     }
 
-providerAuthToken :: Lens' Packet (Maybe Text)
+providerAuthToken :: Lens' Packet (Maybe P.Text)
 providerAuthToken =
     lens _auth_token (\s a -> s { _auth_token = a })

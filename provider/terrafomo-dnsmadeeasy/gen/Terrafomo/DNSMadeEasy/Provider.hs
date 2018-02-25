@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                   as P
 import qualified Terrafomo.DNSMadeEasy.Types as P
 import qualified Terrafomo.IP                as P
 
@@ -53,11 +53,11 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data DNSMadeEasy = DNSMadeEasy {
-      _akey       :: !(Maybe Text)
+      _akey       :: !(Maybe P.Text)
     {- ^ (Required) The DNSMadeEasy API key. This can also be specified with the @DME_AKEY@ shell environment variable. -}
-    , _skey       :: !(Maybe Text)
+    , _skey       :: !(Maybe P.Text)
     {- ^ (Required) The DNSMadeEasy Secret key. This can also be specified with the @DME_SKEY@ shell environment variable. -}
-    , _usesandbox :: !(Maybe Text)
+    , _usesandbox :: !(Maybe P.Text)
     {- ^ (Optional) If true, the DNSMadeEasy sandbox will be used. This can also be specified with the @DME_USESANDBOX@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -84,14 +84,14 @@ emptyDNSMadeEasy = DNSMadeEasy {
       , _usesandbox = Nothing
     }
 
-providerAkey :: Lens' DNSMadeEasy (Maybe Text)
+providerAkey :: Lens' DNSMadeEasy (Maybe P.Text)
 providerAkey =
     lens _akey (\s a -> s { _akey = a })
 
-providerSkey :: Lens' DNSMadeEasy (Maybe Text)
+providerSkey :: Lens' DNSMadeEasy (Maybe P.Text)
 providerSkey =
     lens _skey (\s a -> s { _skey = a })
 
-providerUsesandbox :: Lens' DNSMadeEasy (Maybe Text)
+providerUsesandbox :: Lens' DNSMadeEasy (Maybe P.Text)
 providerUsesandbox =
     lens _usesandbox (\s a -> s { _usesandbox = a })

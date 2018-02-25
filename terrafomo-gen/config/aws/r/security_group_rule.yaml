@@ -1,10 +1,8 @@
 arguments:
   _cidr_blocks:
-    type:
-      name: 'P.CIDR'
-      format: repeated
+    type: '[TF.Attr s P.CIDR]'
   _type':
-    type: 'P.Ec2SecurityGroupType'
+    type: 'P.Ec2Traffic'
   _protocol:
     type: 'P.Ec2Protocol'
   _self:

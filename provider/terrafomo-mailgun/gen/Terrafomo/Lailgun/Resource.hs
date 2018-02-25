@@ -47,20 +47,21 @@ module Terrafomo.Lailgun.Resource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.Lailgun.Types as P
+
+import qualified Data.Text                  as P
 import qualified Data.Word                  as P
 import qualified GHC.Base                   as P
 import qualified Numeric.Natural            as P
 import qualified Terrafomo.IP               as P
 import qualified Terrafomo.Lailgun.Lens     as P
 import qualified Terrafomo.Lailgun.Provider as P
-import           Terrafomo.Lailgun.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -73,13 +74,13 @@ Provides a Mailgun App resource. This can be used to create and manage
 applications on Mailgun.
 -}
 data DomainResource s = DomainResource {
-      _name          :: !(TF.Attr s Text)
+      _name          :: !(TF.Attr s P.Text)
     {- ^ (Required) The domain to add to Mailgun -}
-    , _smtp_password :: !(TF.Attr s Text)
+    , _smtp_password :: !(TF.Attr s P.Text)
     {- ^ (Required) Password for SMTP authentication -}
-    , _spam_action   :: !(TF.Attr s Text)
+    , _spam_action   :: !(TF.Attr s P.Text)
     {- ^ (Optional) @disabled@ or @tag@ Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged with a spam header. -}
-    , _wildcard      :: !(TF.Attr s Text)
+    , _wildcard      :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean that determines whether the domain will accept email for sub-domains. -}
     } deriving (Show, Eq)
 
@@ -91,45 +92,45 @@ instance TF.ToHCL (DomainResource s) where
         , TF.assign "wildcard" <$> TF.attribute _wildcard
         ]
 
-instance P.HasName (DomainResource s) (TF.Attr s Text) where
+instance P.HasName (DomainResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DomainResource s -> TF.Attr s Text)
+        lens (_name :: DomainResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DomainResource s)
 
-instance P.HasSmtpPassword (DomainResource s) (TF.Attr s Text) where
+instance P.HasSmtpPassword (DomainResource s) (TF.Attr s P.Text) where
     smtpPassword =
-        lens (_smtp_password :: DomainResource s -> TF.Attr s Text)
+        lens (_smtp_password :: DomainResource s -> TF.Attr s P.Text)
              (\s a -> s { _smtp_password = a } :: DomainResource s)
 
-instance P.HasSpamAction (DomainResource s) (TF.Attr s Text) where
+instance P.HasSpamAction (DomainResource s) (TF.Attr s P.Text) where
     spamAction =
-        lens (_spam_action :: DomainResource s -> TF.Attr s Text)
+        lens (_spam_action :: DomainResource s -> TF.Attr s P.Text)
              (\s a -> s { _spam_action = a } :: DomainResource s)
 
-instance P.HasWildcard (DomainResource s) (TF.Attr s Text) where
+instance P.HasWildcard (DomainResource s) (TF.Attr s P.Text) where
     wildcard =
-        lens (_wildcard :: DomainResource s -> TF.Attr s Text)
+        lens (_wildcard :: DomainResource s -> TF.Attr s P.Text)
              (\s a -> s { _wildcard = a } :: DomainResource s)
 
-instance P.HasComputedName (DomainResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (DomainResource s) s (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedReceivingRecords (DomainResource s) s (TF.Attr s Text) where
+instance P.HasComputedReceivingRecords (DomainResource s) s (TF.Attr s P.Text) where
     computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
 
-instance P.HasComputedSendingRecords (DomainResource s) s (TF.Attr s Text) where
+instance P.HasComputedSendingRecords (DomainResource s) s (TF.Attr s P.Text) where
     computedSendingRecords x = TF.compute (TF.refKey x) "sending_records"
 
-instance P.HasComputedSmtpLogin (DomainResource s) s (TF.Attr s Text) where
+instance P.HasComputedSmtpLogin (DomainResource s) s (TF.Attr s P.Text) where
     computedSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
 
-instance P.HasComputedSmtpPassword (DomainResource s) s (TF.Attr s Text) where
+instance P.HasComputedSmtpPassword (DomainResource s) s (TF.Attr s P.Text) where
     computedSmtpPassword x = TF.compute (TF.refKey x) "smtp_password"
 
-instance P.HasComputedSpamAction (DomainResource s) s (TF.Attr s Text) where
+instance P.HasComputedSpamAction (DomainResource s) s (TF.Attr s P.Text) where
     computedSpamAction x = TF.compute (TF.refKey x) "spam_action"
 
-instance P.HasComputedWildcard (DomainResource s) s (TF.Attr s Text) where
+instance P.HasComputedWildcard (DomainResource s) s (TF.Attr s P.Text) where
     computedWildcard x = TF.compute (TF.refKey x) "wildcard"
 
 domainResource :: TF.Schema TF.Resource P.Lailgun (DomainResource s)

@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                 as P
 import qualified Terrafomo.IP              as P
 import qualified Terrafomo.PagerDuty.Types as P
 
@@ -53,9 +53,9 @@ alarms, and alerts an on duty engineer if there’s a problem. Use the
 navigation to the left to read about the available resources.
 -}
 data PagerDuty = PagerDuty {
-      _skip_credentials_validation :: !(Maybe Text)
+      _skip_credentials_validation :: !(Maybe P.Text)
     {- ^ (Optional) Skip validation of the token against the PagerDuty API. -}
-    , _token                       :: !(Maybe Text)
+    , _token                       :: !(Maybe P.Text)
     {- ^ (Required) The v2 authorization token. See <https://v2.developer.pagerduty.com/docs/authentication> for more information. -}
     } deriving (Show, Eq, Generic)
 
@@ -80,10 +80,10 @@ emptyPagerDuty = PagerDuty {
       , _token = Nothing
     }
 
-providerSkipCredentialsValidation :: Lens' PagerDuty (Maybe Text)
+providerSkipCredentialsValidation :: Lens' PagerDuty (Maybe P.Text)
 providerSkipCredentialsValidation =
     lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
 
-providerToken :: Lens' PagerDuty (Maybe Text)
+providerToken :: Lens' PagerDuty (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

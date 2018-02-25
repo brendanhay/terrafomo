@@ -33,12 +33,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text            as P
 import qualified Terrafomo.Chef.Types as P
 import qualified Terrafomo.IP         as P
 
@@ -54,13 +54,13 @@ that exist within <http://docs.chef.io/chef_server.html> . Use the
 navigation to the left to read about the available resources.
 -}
 data Chef = Chef {
-      _allow_unverified_ssl :: !(Maybe Text)
+      _allow_unverified_ssl :: !(Maybe P.Text)
     {- ^ (Optional) Boolean indicating whether to make requests to a Chef server whose SSL certicate cannot be verified. Defaults to @false@ . -}
-    , _client_name          :: !(Maybe Text)
+    , _client_name          :: !(Maybe P.Text)
     {- ^ (Required) The name of the client account to use when making requests. This must have been already configured on the Chef server. May be provided instead via the @CHEF_CLIENT_NAME@ environment variable. -}
-    , _key_material         :: !(Maybe Text)
+    , _key_material         :: !(Maybe P.Text)
     {- ^ (Required) The PEM-formatted private key contents belonging to the configured client. This is issued by the server when a new client object is created. May be provided via the @CHEF_KEY_MATERIAL@ environment variable. -}
-    , _server_url           :: !(Maybe Text)
+    , _server_url           :: !(Maybe P.Text)
     {- ^ (Required) The HTTP(S) API URL of the Chef server to use. If the target Chef server supports organizations, use the full URL of the organization you wish to configure. May be provided instead via the @CHEF_SERVER_URL@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -89,18 +89,18 @@ emptyChef = Chef {
       , _server_url = Nothing
     }
 
-providerAllowUnverifiedSsl :: Lens' Chef (Maybe Text)
+providerAllowUnverifiedSsl :: Lens' Chef (Maybe P.Text)
 providerAllowUnverifiedSsl =
     lens _allow_unverified_ssl (\s a -> s { _allow_unverified_ssl = a })
 
-providerClientName :: Lens' Chef (Maybe Text)
+providerClientName :: Lens' Chef (Maybe P.Text)
 providerClientName =
     lens _client_name (\s a -> s { _client_name = a })
 
-providerKeyMaterial :: Lens' Chef (Maybe Text)
+providerKeyMaterial :: Lens' Chef (Maybe P.Text)
 providerKeyMaterial =
     lens _key_material (\s a -> s { _key_material = a })
 
-providerServerUrl :: Lens' Chef (Maybe Text)
+providerServerUrl :: Lens' Chef (Maybe P.Text)
 providerServerUrl =
     lens _server_url (\s a -> s { _server_url = a })

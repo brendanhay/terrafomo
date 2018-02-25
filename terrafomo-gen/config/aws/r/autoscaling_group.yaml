@@ -1,0 +1,15 @@
+arguments:
+  _min_size:
+    type: 'P.Int'
+  _max_size:
+    type: 'P.Int'
+  _desired_capacity:
+    type: 'P.Int'
+  _health_check_grace_period:
+    type: 'P.Int'
+  _force_delete:
+    type: 'P.Bool'
+  _vpc_zone_identifier:
+    type: '[TF.Attr s P.Text]'
+  _load_balancers:
+    type: '[TF.Attr s P.Text]'

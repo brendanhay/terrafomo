@@ -38,12 +38,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                  as P
 import qualified Terrafomo.IP               as P
 import qualified Terrafomo.PostgreSQL.Types as P
 
@@ -58,23 +58,23 @@ in a PostgreSQL server. Use the navigation to the left to read about the
 available resources.
 -}
 data PostgreSQL = PostgreSQL {
-      _connect_timeout  :: !(Maybe Text)
+      _connect_timeout  :: !(Maybe P.Text)
     {- ^ (Optional) Maximum wait for connection, in seconds. The default is @180s@ .  Zero or not specified means wait indefinitely. -}
-    , _database         :: !(Maybe Text)
+    , _database         :: !(Maybe P.Text)
     {- ^ (Optional) Database to connect to. The default is @postgres@ . -}
-    , _expected_version :: !(Maybe Text)
+    , _expected_version :: !(Maybe P.Text)
     {- ^ (Optional) Specify a hint to Terraform regarding the expected version that the provider will be talking with.  This is a required hint in order for Terraform to talk with an ancient version of PostgreSQL. This parameter is expected to be a <https://www.postgresql.org/support/versioning/> or @current@ .  Once a connection has been established, Terraform will fingerprint the actual version.  Default: @9.0.0@ . -}
-    , _host             :: !(Maybe Text)
+    , _host             :: !(Maybe P.Text)
     {- ^ (Required) The address for the postgresql server connection. -}
-    , _max_connections  :: !(Maybe Text)
+    , _max_connections  :: !(Maybe P.Text)
     {- ^ (Optional) Set the maximum number of open connections to the database. The default is @4@ .  Zero means unlimited open connections. -}
-    , _password         :: !(Maybe Text)
+    , _password         :: !(Maybe P.Text)
     {- ^ (Optional) Password for the server connection. -}
-    , _port             :: !(Maybe Text)
+    , _port             :: !(Maybe P.Text)
     {- ^ (Optional) The port for the postgresql server connection. The default is @5432@ . -}
-    , _sslmode          :: !(Maybe Text)
+    , _sslmode          :: !(Maybe P.Text)
     {- ^ (Optional) Set the priority for an SSL connection to the server. Valid values for @sslmode@ are (note: @prefer@ is not supported by Go's <https://godoc.org/github.com/lib/pq> ): -}
-    , _username         :: !(Maybe Text)
+    , _username         :: !(Maybe P.Text)
     {- ^ (Required) Username for the server connection. -}
     } deriving (Show, Eq, Generic)
 
@@ -113,38 +113,38 @@ emptyPostgreSQL = PostgreSQL {
       , _username = Nothing
     }
 
-providerConnectTimeout :: Lens' PostgreSQL (Maybe Text)
+providerConnectTimeout :: Lens' PostgreSQL (Maybe P.Text)
 providerConnectTimeout =
     lens _connect_timeout (\s a -> s { _connect_timeout = a })
 
-providerDatabase :: Lens' PostgreSQL (Maybe Text)
+providerDatabase :: Lens' PostgreSQL (Maybe P.Text)
 providerDatabase =
     lens _database (\s a -> s { _database = a })
 
-providerExpectedVersion :: Lens' PostgreSQL (Maybe Text)
+providerExpectedVersion :: Lens' PostgreSQL (Maybe P.Text)
 providerExpectedVersion =
     lens _expected_version (\s a -> s { _expected_version = a })
 
-providerHost :: Lens' PostgreSQL (Maybe Text)
+providerHost :: Lens' PostgreSQL (Maybe P.Text)
 providerHost =
     lens _host (\s a -> s { _host = a })
 
-providerMaxConnections :: Lens' PostgreSQL (Maybe Text)
+providerMaxConnections :: Lens' PostgreSQL (Maybe P.Text)
 providerMaxConnections =
     lens _max_connections (\s a -> s { _max_connections = a })
 
-providerPassword :: Lens' PostgreSQL (Maybe Text)
+providerPassword :: Lens' PostgreSQL (Maybe P.Text)
 providerPassword =
     lens _password (\s a -> s { _password = a })
 
-providerPort :: Lens' PostgreSQL (Maybe Text)
+providerPort :: Lens' PostgreSQL (Maybe P.Text)
 providerPort =
     lens _port (\s a -> s { _port = a })
 
-providerSslmode :: Lens' PostgreSQL (Maybe Text)
+providerSslmode :: Lens' PostgreSQL (Maybe P.Text)
 providerSslmode =
     lens _sslmode (\s a -> s { _sslmode = a })
 
-providerUsername :: Lens' PostgreSQL (Maybe Text)
+providerUsername :: Lens' PostgreSQL (Maybe P.Text)
 providerUsername =
     lens _username (\s a -> s { _username = a })

@@ -33,12 +33,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text              as P
 import qualified Terrafomo.Gitlab.Types as P
 import qualified Terrafomo.IP           as P
 
@@ -53,13 +53,13 @@ It needs to be configured with the proper credentials before it can be used.
 Use the navigation to the left to read about the available resources.
 -}
 data Gitlab = Gitlab {
-      _base_url    :: !(Maybe Text)
+      _base_url    :: !(Maybe P.Text)
     {- ^ (Optional) This is the target GitLab base API endpoint. Providing a value is a requirement when working with GitLab CE or GitLab Enterprise e.g. https://my.gitlab.server/api/v3/. It is optional to provide this value and it can also be sourced from the @GITLAB_BASE_URL@ environment variable. The value must end with a slash. -}
-    , _cacert_file :: !(Maybe Text)
+    , _cacert_file :: !(Maybe P.Text)
     {- ^ (Optional) This is a file containing the ca cert to verify the gitlab instance.  This is available for use when working with GitLab CE or Gitlab Enterprise with a locally-issued or self-signed certificate chain. -}
-    , _insecure    :: !(Maybe Text)
+    , _insecure    :: !(Maybe P.Text)
     {- ^ (Optional; boolean, defaults to false) When set to true this disables SSL verification of the connection to the GitLab instance. -}
-    , _token       :: !(Maybe Text)
+    , _token       :: !(Maybe P.Text)
     {- ^ (Optional) This is the GitLab personal access token. It must be provided, but it can also be sourced from the @GITLAB_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -88,18 +88,18 @@ emptyGitlab = Gitlab {
       , _token = Nothing
     }
 
-providerBaseUrl :: Lens' Gitlab (Maybe Text)
+providerBaseUrl :: Lens' Gitlab (Maybe P.Text)
 providerBaseUrl =
     lens _base_url (\s a -> s { _base_url = a })
 
-providerCacertFile :: Lens' Gitlab (Maybe Text)
+providerCacertFile :: Lens' Gitlab (Maybe P.Text)
 providerCacertFile =
     lens _cacert_file (\s a -> s { _cacert_file = a })
 
-providerInsecure :: Lens' Gitlab (Maybe Text)
+providerInsecure :: Lens' Gitlab (Maybe P.Text)
 providerInsecure =
     lens _insecure (\s a -> s { _insecure = a })
 
-providerToken :: Lens' Gitlab (Maybe Text)
+providerToken :: Lens' Gitlab (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

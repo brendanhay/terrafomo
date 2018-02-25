@@ -29,6 +29,7 @@ library:
     - Terrafomo.Provider
     - Terrafomo.RemoteState
     - Terrafomo.Schema
+    - Terrafomo.TH
 
   dependencies:
     - aeson
@@ -38,9 +39,11 @@ library:
     - formatting >= 6.2.5
     - hashable
     - microlens
+    - microlens-th
     - mmorph
     - mtl
     - random
+    - template-haskell
     - text
     - transformers
     - wl-pprint-text

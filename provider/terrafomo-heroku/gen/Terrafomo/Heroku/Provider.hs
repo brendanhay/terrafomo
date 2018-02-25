@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text              as P
 import qualified Terrafomo.Heroku.Types as P
 import qualified Terrafomo.IP           as P
 
@@ -52,9 +52,9 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Heroku = Heroku {
-      _api_key :: !(Maybe Text)
+      _api_key :: !(Maybe P.Text)
     {- ^ (Required) Heroku API token. It must be provided, but it can also be sourced from the @HEROKU_API_KEY@ environment variable. -}
-    , _email   :: !(Maybe Text)
+    , _email   :: !(Maybe P.Text)
     {- ^ (Required) Email to be notified by Heroku. It must be provided, but it can also be sourced from the @HEROKU_EMAIL@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -79,10 +79,10 @@ emptyHeroku = Heroku {
       , _email = Nothing
     }
 
-providerApiKey :: Lens' Heroku (Maybe Text)
+providerApiKey :: Lens' Heroku (Maybe P.Text)
 providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-providerEmail :: Lens' Heroku (Maybe Text)
+providerEmail :: Lens' Heroku (Maybe P.Text)
 providerEmail =
     lens _email (\s a -> s { _email = a })

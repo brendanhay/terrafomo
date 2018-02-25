@@ -81,20 +81,21 @@ module Terrafomo.RabbitMQ.Resource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.RabbitMQ.Types as P
+
+import qualified Data.Text                   as P
 import qualified Data.Word                   as P
 import qualified GHC.Base                    as P
 import qualified Numeric.Natural             as P
 import qualified Terrafomo.IP                as P
 import qualified Terrafomo.RabbitMQ.Lens     as P
 import qualified Terrafomo.RabbitMQ.Provider as P
-import           Terrafomo.RabbitMQ.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -107,17 +108,17 @@ The @rabbitmq_binding@ resource creates and manages a binding relationship
 between a queue an exchange.
 -}
 data BindingResource s = BindingResource {
-      _arguments        :: !(TF.Attr s Text)
+      _arguments        :: !(TF.Attr s P.Text)
     {- ^ (Optional) Additional key/value arguments for the binding. -}
-    , _destination      :: !(TF.Attr s Text)
+    , _destination      :: !(TF.Attr s P.Text)
     {- ^ (Required) The destination queue or exchange. -}
-    , _destination_type :: !(TF.Attr s Text)
+    , _destination_type :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of destination (queue or exchange). -}
-    , _routing_key      :: !(TF.Attr s Text)
+    , _routing_key      :: !(TF.Attr s P.Text)
     {- ^ (Optional) A routing key for the binding. -}
-    , _source           :: !(TF.Attr s Text)
+    , _source           :: !(TF.Attr s P.Text)
     {- ^ (Required) The source exchange. -}
-    , _vhost            :: !(TF.Attr s Text)
+    , _vhost            :: !(TF.Attr s P.Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
@@ -131,67 +132,67 @@ instance TF.ToHCL (BindingResource s) where
         , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasArguments (BindingResource s) (TF.Attr s Text) where
+instance P.HasArguments (BindingResource s) (TF.Attr s P.Text) where
     arguments =
-        lens (_arguments :: BindingResource s -> TF.Attr s Text)
+        lens (_arguments :: BindingResource s -> TF.Attr s P.Text)
              (\s a -> s { _arguments = a } :: BindingResource s)
 
-instance P.HasDestination (BindingResource s) (TF.Attr s Text) where
+instance P.HasDestination (BindingResource s) (TF.Attr s P.Text) where
     destination =
-        lens (_destination :: BindingResource s -> TF.Attr s Text)
+        lens (_destination :: BindingResource s -> TF.Attr s P.Text)
              (\s a -> s { _destination = a } :: BindingResource s)
 
-instance P.HasDestinationType (BindingResource s) (TF.Attr s Text) where
+instance P.HasDestinationType (BindingResource s) (TF.Attr s P.Text) where
     destinationType =
-        lens (_destination_type :: BindingResource s -> TF.Attr s Text)
+        lens (_destination_type :: BindingResource s -> TF.Attr s P.Text)
              (\s a -> s { _destination_type = a } :: BindingResource s)
 
-instance P.HasRoutingKey (BindingResource s) (TF.Attr s Text) where
+instance P.HasRoutingKey (BindingResource s) (TF.Attr s P.Text) where
     routingKey =
-        lens (_routing_key :: BindingResource s -> TF.Attr s Text)
+        lens (_routing_key :: BindingResource s -> TF.Attr s P.Text)
              (\s a -> s { _routing_key = a } :: BindingResource s)
 
-instance P.HasSource (BindingResource s) (TF.Attr s Text) where
+instance P.HasSource (BindingResource s) (TF.Attr s P.Text) where
     source =
-        lens (_source :: BindingResource s -> TF.Attr s Text)
+        lens (_source :: BindingResource s -> TF.Attr s P.Text)
              (\s a -> s { _source = a } :: BindingResource s)
 
-instance P.HasVhost (BindingResource s) (TF.Attr s Text) where
+instance P.HasVhost (BindingResource s) (TF.Attr s P.Text) where
     vhost =
-        lens (_vhost :: BindingResource s -> TF.Attr s Text)
+        lens (_vhost :: BindingResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: BindingResource s)
 
-instance P.HasComputedArguments (BindingResource s) s (TF.Attr s Text) where
+instance P.HasComputedArguments (BindingResource s) s (TF.Attr s P.Text) where
     computedArguments =
-        (_arguments :: BindingResource s -> TF.Attr s Text)
+        (_arguments :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDestination (BindingResource s) s (TF.Attr s Text) where
+instance P.HasComputedDestination (BindingResource s) s (TF.Attr s P.Text) where
     computedDestination =
-        (_destination :: BindingResource s -> TF.Attr s Text)
+        (_destination :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDestinationType (BindingResource s) s (TF.Attr s Text) where
+instance P.HasComputedDestinationType (BindingResource s) s (TF.Attr s P.Text) where
     computedDestinationType =
-        (_destination_type :: BindingResource s -> TF.Attr s Text)
+        (_destination_type :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPropertiesKey (BindingResource s) s (TF.Attr s Text) where
+instance P.HasComputedPropertiesKey (BindingResource s) s (TF.Attr s P.Text) where
     computedPropertiesKey x = TF.compute (TF.refKey x) "properties_key"
 
-instance P.HasComputedRoutingKey (BindingResource s) s (TF.Attr s Text) where
+instance P.HasComputedRoutingKey (BindingResource s) s (TF.Attr s P.Text) where
     computedRoutingKey =
-        (_routing_key :: BindingResource s -> TF.Attr s Text)
+        (_routing_key :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSource (BindingResource s) s (TF.Attr s Text) where
+instance P.HasComputedSource (BindingResource s) s (TF.Attr s P.Text) where
     computedSource =
-        (_source :: BindingResource s -> TF.Attr s Text)
+        (_source :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (BindingResource s) s (TF.Attr s Text) where
+instance P.HasComputedVhost (BindingResource s) s (TF.Attr s P.Text) where
     computedVhost =
-        (_vhost :: BindingResource s -> TF.Attr s Text)
+        (_vhost :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 bindingResource :: TF.Schema TF.Resource P.RabbitMQ (BindingResource s)
@@ -211,11 +212,11 @@ bindingResource =
 The @rabbitmq_exchange@ resource creates and manages an exchange.
 -}
 data ExchangeResource s = ExchangeResource {
-      _name     :: !(TF.Attr s Text)
+      _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the exchange. -}
-    , _settings :: !(TF.Attr s Text)
+    , _settings :: !(TF.Attr s P.Text)
     {- ^ (Required) The settings of the exchange. The structure is described below. -}
-    , _vhost    :: !(TF.Attr s Text)
+    , _vhost    :: !(TF.Attr s P.Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
@@ -226,34 +227,34 @@ instance TF.ToHCL (ExchangeResource s) where
         , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasName (ExchangeResource s) (TF.Attr s Text) where
+instance P.HasName (ExchangeResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ExchangeResource s -> TF.Attr s Text)
+        lens (_name :: ExchangeResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ExchangeResource s)
 
-instance P.HasSettings (ExchangeResource s) (TF.Attr s Text) where
+instance P.HasSettings (ExchangeResource s) (TF.Attr s P.Text) where
     settings =
-        lens (_settings :: ExchangeResource s -> TF.Attr s Text)
+        lens (_settings :: ExchangeResource s -> TF.Attr s P.Text)
              (\s a -> s { _settings = a } :: ExchangeResource s)
 
-instance P.HasVhost (ExchangeResource s) (TF.Attr s Text) where
+instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
     vhost =
-        lens (_vhost :: ExchangeResource s -> TF.Attr s Text)
+        lens (_vhost :: ExchangeResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: ExchangeResource s)
 
-instance P.HasComputedName (ExchangeResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (ExchangeResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: ExchangeResource s -> TF.Attr s Text)
+        (_name :: ExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSettings (ExchangeResource s) s (TF.Attr s Text) where
+instance P.HasComputedSettings (ExchangeResource s) s (TF.Attr s P.Text) where
     computedSettings =
-        (_settings :: ExchangeResource s -> TF.Attr s Text)
+        (_settings :: ExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (ExchangeResource s) s (TF.Attr s Text) where
+instance P.HasComputedVhost (ExchangeResource s) s (TF.Attr s P.Text) where
     computedVhost =
-        (_vhost :: ExchangeResource s -> TF.Attr s Text)
+        (_vhost :: ExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 exchangeResource :: TF.Schema TF.Resource P.RabbitMQ (ExchangeResource s)
@@ -271,11 +272,11 @@ The @rabbitmq_permissions@ resource creates and manages a user's set of
 permissions.
 -}
 data PermissionsResource s = PermissionsResource {
-      _permissions :: !(TF.Attr s Text)
+      _permissions :: !(TF.Attr s P.Text)
     {- ^ (Required) The settings of the permissions. The structure is described below. -}
-    , _user        :: !(TF.Attr s Text)
+    , _user        :: !(TF.Attr s P.Text)
     {- ^ (Required) The user to apply the permissions to. -}
-    , _vhost       :: !(TF.Attr s Text)
+    , _vhost       :: !(TF.Attr s P.Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
@@ -286,34 +287,34 @@ instance TF.ToHCL (PermissionsResource s) where
         , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasPermissions (PermissionsResource s) (TF.Attr s Text) where
+instance P.HasPermissions (PermissionsResource s) (TF.Attr s P.Text) where
     permissions =
-        lens (_permissions :: PermissionsResource s -> TF.Attr s Text)
+        lens (_permissions :: PermissionsResource s -> TF.Attr s P.Text)
              (\s a -> s { _permissions = a } :: PermissionsResource s)
 
-instance P.HasUser (PermissionsResource s) (TF.Attr s Text) where
+instance P.HasUser (PermissionsResource s) (TF.Attr s P.Text) where
     user =
-        lens (_user :: PermissionsResource s -> TF.Attr s Text)
+        lens (_user :: PermissionsResource s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: PermissionsResource s)
 
-instance P.HasVhost (PermissionsResource s) (TF.Attr s Text) where
+instance P.HasVhost (PermissionsResource s) (TF.Attr s P.Text) where
     vhost =
-        lens (_vhost :: PermissionsResource s -> TF.Attr s Text)
+        lens (_vhost :: PermissionsResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: PermissionsResource s)
 
-instance P.HasComputedPermissions (PermissionsResource s) s (TF.Attr s Text) where
+instance P.HasComputedPermissions (PermissionsResource s) s (TF.Attr s P.Text) where
     computedPermissions =
-        (_permissions :: PermissionsResource s -> TF.Attr s Text)
+        (_permissions :: PermissionsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUser (PermissionsResource s) s (TF.Attr s Text) where
+instance P.HasComputedUser (PermissionsResource s) s (TF.Attr s P.Text) where
     computedUser =
-        (_user :: PermissionsResource s -> TF.Attr s Text)
+        (_user :: PermissionsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (PermissionsResource s) s (TF.Attr s Text) where
+instance P.HasComputedVhost (PermissionsResource s) s (TF.Attr s P.Text) where
     computedVhost =
-        (_vhost :: PermissionsResource s -> TF.Attr s Text)
+        (_vhost :: PermissionsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 permissionsResource :: TF.Schema TF.Resource P.RabbitMQ (PermissionsResource s)
@@ -331,11 +332,11 @@ The @rabbitmq_policy@ resource creates and manages policies for exchanges
 and queues.
 -}
 data PolicyResource s = PolicyResource {
-      _name   :: !(TF.Attr s Text)
+      _name   :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the policy. -}
-    , _policy :: !(TF.Attr s Text)
+    , _policy :: !(TF.Attr s P.Text)
     {- ^ (Required) The settings of the policy. The structure is described below. -}
-    , _vhost  :: !(TF.Attr s Text)
+    , _vhost  :: !(TF.Attr s P.Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
@@ -346,34 +347,34 @@ instance TF.ToHCL (PolicyResource s) where
         , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasName (PolicyResource s) (TF.Attr s Text) where
+instance P.HasName (PolicyResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: PolicyResource s -> TF.Attr s Text)
+        lens (_name :: PolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: PolicyResource s)
 
-instance P.HasPolicy (PolicyResource s) (TF.Attr s Text) where
+instance P.HasPolicy (PolicyResource s) (TF.Attr s P.Text) where
     policy =
-        lens (_policy :: PolicyResource s -> TF.Attr s Text)
+        lens (_policy :: PolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _policy = a } :: PolicyResource s)
 
-instance P.HasVhost (PolicyResource s) (TF.Attr s Text) where
+instance P.HasVhost (PolicyResource s) (TF.Attr s P.Text) where
     vhost =
-        lens (_vhost :: PolicyResource s -> TF.Attr s Text)
+        lens (_vhost :: PolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: PolicyResource s)
 
-instance P.HasComputedName (PolicyResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (PolicyResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: PolicyResource s -> TF.Attr s Text)
+        (_name :: PolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicy (PolicyResource s) s (TF.Attr s Text) where
+instance P.HasComputedPolicy (PolicyResource s) s (TF.Attr s P.Text) where
     computedPolicy =
-        (_policy :: PolicyResource s -> TF.Attr s Text)
+        (_policy :: PolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (PolicyResource s) s (TF.Attr s Text) where
+instance P.HasComputedVhost (PolicyResource s) s (TF.Attr s P.Text) where
     computedVhost =
-        (_vhost :: PolicyResource s -> TF.Attr s Text)
+        (_vhost :: PolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 policyResource :: TF.Schema TF.Resource P.RabbitMQ (PolicyResource s)
@@ -390,11 +391,11 @@ policyResource =
 The @rabbitmq_queue@ resource creates and manages a queue.
 -}
 data QueueResource s = QueueResource {
-      _name     :: !(TF.Attr s Text)
+      _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the queue. -}
-    , _settings :: !(TF.Attr s Text)
+    , _settings :: !(TF.Attr s P.Text)
     {- ^ (Required) The settings of the queue. The structure is described below. -}
-    , _vhost    :: !(TF.Attr s Text)
+    , _vhost    :: !(TF.Attr s P.Text)
     {- ^ (Required) The vhost to create the resource in. -}
     } deriving (Show, Eq)
 
@@ -405,34 +406,34 @@ instance TF.ToHCL (QueueResource s) where
         , TF.assign "vhost" <$> TF.attribute _vhost
         ]
 
-instance P.HasName (QueueResource s) (TF.Attr s Text) where
+instance P.HasName (QueueResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: QueueResource s -> TF.Attr s Text)
+        lens (_name :: QueueResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: QueueResource s)
 
-instance P.HasSettings (QueueResource s) (TF.Attr s Text) where
+instance P.HasSettings (QueueResource s) (TF.Attr s P.Text) where
     settings =
-        lens (_settings :: QueueResource s -> TF.Attr s Text)
+        lens (_settings :: QueueResource s -> TF.Attr s P.Text)
              (\s a -> s { _settings = a } :: QueueResource s)
 
-instance P.HasVhost (QueueResource s) (TF.Attr s Text) where
+instance P.HasVhost (QueueResource s) (TF.Attr s P.Text) where
     vhost =
-        lens (_vhost :: QueueResource s -> TF.Attr s Text)
+        lens (_vhost :: QueueResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: QueueResource s)
 
-instance P.HasComputedName (QueueResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (QueueResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: QueueResource s -> TF.Attr s Text)
+        (_name :: QueueResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSettings (QueueResource s) s (TF.Attr s Text) where
+instance P.HasComputedSettings (QueueResource s) s (TF.Attr s P.Text) where
     computedSettings =
-        (_settings :: QueueResource s -> TF.Attr s Text)
+        (_settings :: QueueResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (QueueResource s) s (TF.Attr s Text) where
+instance P.HasComputedVhost (QueueResource s) s (TF.Attr s P.Text) where
     computedVhost =
-        (_vhost :: QueueResource s -> TF.Attr s Text)
+        (_vhost :: QueueResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 queueResource :: TF.Schema TF.Resource P.RabbitMQ (QueueResource s)
@@ -451,11 +452,11 @@ arguments including username and password will be stored in the raw state as
 plain-text. </docs/state/sensitive-data.html> .
 -}
 data UserResource s = UserResource {
-      _name     :: !(TF.Attr s Text)
+      _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the user. -}
-    , _password :: !(TF.Attr s Text)
+    , _password :: !(TF.Attr s P.Text)
     {- ^ (Required) The password of the user. The value of this argument is plain-text so make sure to secure where this is defined. -}
-    , _tags     :: !(TF.Attr s Text)
+    , _tags     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator. -}
     } deriving (Show, Eq)
 
@@ -466,34 +467,34 @@ instance TF.ToHCL (UserResource s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasName (UserResource s) (TF.Attr s Text) where
+instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: UserResource s -> TF.Attr s Text)
+        lens (_name :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: UserResource s)
 
-instance P.HasPassword (UserResource s) (TF.Attr s Text) where
+instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
     password =
-        lens (_password :: UserResource s -> TF.Attr s Text)
+        lens (_password :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasTags (UserResource s) (TF.Attr s Text) where
+instance P.HasTags (UserResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: UserResource s -> TF.Attr s Text)
+        lens (_tags :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: UserResource s)
 
-instance P.HasComputedName (UserResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (UserResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: UserResource s -> TF.Attr s Text)
+        (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (UserResource s) s (TF.Attr s Text) where
+instance P.HasComputedPassword (UserResource s) s (TF.Attr s P.Text) where
     computedPassword =
-        (_password :: UserResource s -> TF.Attr s Text)
+        (_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (UserResource s) s (TF.Attr s Text) where
+instance P.HasComputedTags (UserResource s) s (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: UserResource s -> TF.Attr s Text)
+        (_tags :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 userResource :: TF.Schema TF.Resource P.RabbitMQ (UserResource s)
@@ -510,7 +511,7 @@ userResource =
 The @rabbitmq_vhost@ resource creates and manages a vhost.
 -}
 data VhostResource s = VhostResource {
-      _name :: !(TF.Attr s Text)
+      _name :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the vhost. -}
     } deriving (Show, Eq)
 
@@ -519,14 +520,14 @@ instance TF.ToHCL (VhostResource s) where
         [ TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasName (VhostResource s) (TF.Attr s Text) where
+instance P.HasName (VhostResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VhostResource s -> TF.Attr s Text)
+        lens (_name :: VhostResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: VhostResource s)
 
-instance P.HasComputedName (VhostResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (VhostResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: VhostResource s -> TF.Attr s Text)
+        (_name :: VhostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 vhostResource :: TF.Schema TF.Resource P.RabbitMQ (VhostResource s)

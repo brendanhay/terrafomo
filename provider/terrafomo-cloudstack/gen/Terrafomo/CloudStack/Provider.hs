@@ -36,12 +36,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                  as P
 import qualified Terrafomo.CloudStack.Types as P
 import qualified Terrafomo.IP               as P
 
@@ -61,19 +61,19 @@ allowed and will not work. Use the navigation to the left to read about the
 available resources.
 -}
 data CloudStack = CloudStack {
-      _api_key       :: !(Maybe Text)
+      _api_key       :: !(Maybe P.Text)
     {- ^ (Optional) This is the CloudStack API key. It can also be sourced from the @CLOUDSTACK_API_KEY@ environment variable. -}
-    , _api_url       :: !(Maybe Text)
+    , _api_url       :: !(Maybe P.Text)
     {- ^ (Optional) This is the CloudStack API URL. It can also be sourced from the @CLOUDSTACK_API_URL@ environment variable. -}
-    , _config        :: !(Maybe Text)
+    , _config        :: !(Maybe P.Text)
     {- ^ (Optional) The path to a @CloudMonkey@ config file. If set the API URL, key and secret will be retrieved from this file. -}
-    , _http_get_only :: !(Maybe Text)
+    , _http_get_only :: !(Maybe P.Text)
     {- ^ (Optional) Some cloud providers only allow HTTP GET calls to their CloudStack API. If using such a provider, you need to set this to @true@ in order for the provider to only make GET calls and no POST calls. It can also be sourced from the @CLOUDSTACK_HTTP_GET_ONLY@ environment variable. -}
-    , _profile       :: !(Maybe Text)
+    , _profile       :: !(Maybe P.Text)
     {- ^ (Optional) Used together with the @config@ option. Specifies which @CloudMonkey@ profile in the config file to use. -}
-    , _secret_key    :: !(Maybe Text)
+    , _secret_key    :: !(Maybe P.Text)
     {- ^ (Optional) This is the CloudStack secret key. It can also be sourced from the @CLOUDSTACK_SECRET_KEY@ environment variable. -}
-    , _timeout       :: !(Maybe Text)
+    , _timeout       :: !(Maybe P.Text)
     {- ^ (Optional) A value in seconds. This is the time allowed for Cloudstack to complete each asynchronous job triggered. If unset, this can be sourced from the @CLOUDSTACK_TIMEOUT@ environment variable. Otherwise, this will default to 300 seconds. -}
     } deriving (Show, Eq, Generic)
 
@@ -108,30 +108,30 @@ emptyCloudStack = CloudStack {
       , _timeout = Nothing
     }
 
-providerApiKey :: Lens' CloudStack (Maybe Text)
+providerApiKey :: Lens' CloudStack (Maybe P.Text)
 providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-providerApiUrl :: Lens' CloudStack (Maybe Text)
+providerApiUrl :: Lens' CloudStack (Maybe P.Text)
 providerApiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-providerConfig :: Lens' CloudStack (Maybe Text)
+providerConfig :: Lens' CloudStack (Maybe P.Text)
 providerConfig =
     lens _config (\s a -> s { _config = a })
 
-providerHttpGetOnly :: Lens' CloudStack (Maybe Text)
+providerHttpGetOnly :: Lens' CloudStack (Maybe P.Text)
 providerHttpGetOnly =
     lens _http_get_only (\s a -> s { _http_get_only = a })
 
-providerProfile :: Lens' CloudStack (Maybe Text)
+providerProfile :: Lens' CloudStack (Maybe P.Text)
 providerProfile =
     lens _profile (\s a -> s { _profile = a })
 
-providerSecretKey :: Lens' CloudStack (Maybe Text)
+providerSecretKey :: Lens' CloudStack (Maybe P.Text)
 providerSecretKey =
     lens _secret_key (\s a -> s { _secret_key = a })
 
-providerTimeout :: Lens' CloudStack (Maybe Text)
+providerTimeout :: Lens' CloudStack (Maybe P.Text)
 providerTimeout =
     lens _timeout (\s a -> s { _timeout = a })

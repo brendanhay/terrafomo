@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                  as P
 import qualified Terrafomo.Cloudflare.Types as P
 import qualified Terrafomo.IP               as P
 
@@ -52,9 +52,9 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data Cloudflare = Cloudflare {
-      _email :: !(Maybe Text)
+      _email :: !(Maybe P.Text)
     {- ^ (Required) The email associated with the account. This can also be specified with the @CLOUDFLARE_EMAIL@ shell environment variable. -}
-    , _token :: !(Maybe Text)
+    , _token :: !(Maybe P.Text)
     {- ^ (Required) The Cloudflare API token. This can also be specified with the @CLOUDFLARE_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -79,10 +79,10 @@ emptyCloudflare = Cloudflare {
       , _token = Nothing
     }
 
-providerEmail :: Lens' Cloudflare (Maybe Text)
+providerEmail :: Lens' Cloudflare (Maybe P.Text)
 providerEmail =
     lens _email (\s a -> s { _email = a })
 
-providerToken :: Lens' Cloudflare (Maybe Text)
+providerToken :: Lens' Cloudflare (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

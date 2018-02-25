@@ -1,9 +1,10 @@
-{-# LANGUAGE DeriveGeneric       #-}
-{-# LANGUAGE LambdaCase          #-}
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE RecordWildCards     #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TupleSections       #-}
+{-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE RecordWildCards            #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
+{-# LANGUAGE TupleSections              #-}
 
 module Terrafomo.Gen.Schema where
 
@@ -36,63 +37,20 @@ data SchemaType
 instance ToJSON SchemaType where
     toJSON = JSON.toJSON . show
 
-data Format
-   = Repeated
-   | Attribute
-   | Verbatim
-     deriving (Show, Eq, Ord, Generic)
-
-instance ToJSON Format where
-    toJSON = JSON.genericToJSON (JSON.options "")
-
-instance FromJSON Format where
-    parseJSON = JSON.genericParseJSON (JSON.options "")
-
-data Type = Type
-    { typeName   :: !Text
-    , typeFormat :: !Format
-    } deriving (Show, Eq, Ord, Generic)
+newtype Type = Type { typeName :: Text }
+    deriving (Show, Eq, Ord, FromJSON)
 
 instance ToJSON Type where
     toJSON Type{..} = JSON.object
         [ "name"       .= typeName
-        , "parametric" .= parametric
-        , "applied"    .= fullyApplied
-        , "encoder"    .= encoder
-        , "default"    .= default'
+        , "parametric" .= ("TF.Attr s b"            :: Text)
+        , "applied"    .= ("TF.Attr s " <> typeName :: Text)
+        , "encoder"    .= ("TF.attribute"           :: Text)
+        , "default"    .= ("TF.Nil"                 :: Text)
         ]
-      where
-        (parametric, fullyApplied, encoder, default') =
-            case typeFormat of
-                Verbatim ->
-                    ( "P.Maybe b"            :: Text
-                    , "P.Maybe " <> typeName :: Text
-                    , ""                     :: Text
-                    , "P.Nothing"            :: Text
-                    )
-                Repeated ->
-                    ( "P.Maybe [TF.Attr s b]"
-                    , "P.Maybe [TF.Attr s " <> typeName <> "]"
-                    , "TF.repeated"
-                    , "P.Nothing"
-                    )
-                Attribute ->
-                    ( "TF.Attr s b"
-                    , "TF.Attr s " <> typeName
-                    , "TF.attribute"
-                    , "TF.Nil"
-                    )
-
-instance FromJSON Type where
-    parseJSON = \case
-        JSON.String s -> pure $! defaultType { typeName = s }
-        v             -> JSON.genericParseJSON (JSON.options "type") v
 
 defaultType :: Type
-defaultType = Type
-    { typeName   = "Text"
-    , typeFormat = Attribute
-    }
+defaultType = Type { typeName = "P.Text" }
 
 data Field = Field
     { fieldClass    :: !Text
@@ -115,17 +73,17 @@ getFields Schema{..} =
         )
     )
   where
-    args =
-          Set.fromList
-        $ mapMaybe (\(k, v) ->
-            go k k False
-                <$> getLast (argName v) <*> getLast (argType v))
-          (Map.toList schemaArguments)
+    args = Set.fromList $
+        mapMaybe (\(k, v) -> do
+            val <- getLast (argName v)
+            typ <- getLast (argType v)
+            pure $! go k k False val typ) (Map.toList schemaArguments)
 
     attrs computed =
-        Map.mapMaybeWithKey (\k v ->
-            go k (safeAttrName k) computed
-                <$> getLast (attrName v) <*> getLast (attrType v))
+        Map.mapMaybeWithKey (\k v -> do
+            val <- getLast (attrName v)
+            typ <- getLast (attrType v)
+            pure $! go k (safeAttrName k) computed val typ)
 
     go k k' computed name ty =
         Field { fieldClass    = fieldClassName  k'

@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text              as P
 import qualified Terrafomo.GitHub.Types as P
 import qualified Terrafomo.IP           as P
 
@@ -54,11 +54,11 @@ it can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data GitHub = GitHub {
-      _base_url     :: !(Maybe Text)
+      _base_url     :: !(Maybe P.Text)
     {- ^ (Optional) This is the target GitHub base API endpoint. Providing a value is a requirement when working with GitHub Enterprise.  It is optional to provide this value and it can also be sourced from the @GITHUB_BASE_URL@ environment variable.  The value must end with a slash. -}
-    , _organization :: !(Maybe Text)
+    , _organization :: !(Maybe P.Text)
     {- ^ (Optional) This is the target GitHub organization to manage. The account corresponding to the token will need "owner" privileges for this organization. It must be provided, but it can also be sourced from the @GITHUB_ORGANIZATION@ environment variable. -}
-    , _token        :: !(Maybe Text)
+    , _token        :: !(Maybe P.Text)
     {- ^ (Optional) This is the GitHub personal access token. It must be provided, but it can also be sourced from the @GITHUB_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -85,14 +85,14 @@ emptyGitHub = GitHub {
       , _token = Nothing
     }
 
-providerBaseUrl :: Lens' GitHub (Maybe Text)
+providerBaseUrl :: Lens' GitHub (Maybe P.Text)
 providerBaseUrl =
     lens _base_url (\s a -> s { _base_url = a })
 
-providerOrganization :: Lens' GitHub (Maybe Text)
+providerOrganization :: Lens' GitHub (Maybe P.Text)
 providerOrganization =
     lens _organization (\s a -> s { _organization = a })
 
-providerToken :: Lens' GitHub (Maybe Text)
+providerToken :: Lens' GitHub (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

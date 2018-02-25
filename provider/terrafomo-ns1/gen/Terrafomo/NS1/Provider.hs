@@ -30,12 +30,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text           as P
 import qualified Terrafomo.IP        as P
 import qualified Terrafomo.NS1.Types as P
 
@@ -50,7 +50,7 @@ provider needs to be configured with the proper credentials before it can be
 used. Use the navigation to the left to read about the available resources.
 -}
 data NS1 = NS1 {
-      _apikey :: !(Maybe Text)
+      _apikey :: !(Maybe P.Text)
     {- ^ (Required) NS1 API token. It must be provided, but it can also be sourced from the @NS1_APIKEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -73,6 +73,6 @@ emptyNS1 = NS1 {
         _apikey = Nothing
     }
 
-providerApikey :: Lens' NS1 (Maybe Text)
+providerApikey :: Lens' NS1 (Maybe P.Text)
 providerApikey =
     lens _apikey (\s a -> s { _apikey = a })

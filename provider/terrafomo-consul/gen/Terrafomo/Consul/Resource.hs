@@ -93,19 +93,20 @@ module Terrafomo.Consul.Resource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.Consul.Types as P
+
+import qualified Data.Text                 as P
 import qualified Data.Word                 as P
 import qualified GHC.Base                  as P
 import qualified Numeric.Natural           as P
 import qualified Terrafomo.Consul.Lens     as P
 import qualified Terrafomo.Consul.Provider as P
-import           Terrafomo.Consul.Types    as P
 import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
@@ -120,13 +121,13 @@ define a service associated with a particular agent. Currently, defining
 health checks for an agent service is not supported.
 -}
 data AgentServiceResource s = AgentServiceResource {
-      _address :: !(TF.Attr s Text)
+      _address :: !(TF.Attr s P.Text)
     {- ^ (Optional) The address of the service. Defaults to the address of the agent. -}
-    , _name    :: !(TF.Attr s Text)
+    , _name    :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the service. -}
-    , _port    :: !(TF.Attr s Text)
+    , _port    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The port of the service. -}
-    , _tags    :: !(TF.Attr s Text)
+    , _tags    :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
     } deriving (Show, Eq)
 
@@ -138,39 +139,39 @@ instance TF.ToHCL (AgentServiceResource s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasAddress (AgentServiceResource s) (TF.Attr s Text) where
+instance P.HasAddress (AgentServiceResource s) (TF.Attr s P.Text) where
     address =
-        lens (_address :: AgentServiceResource s -> TF.Attr s Text)
+        lens (_address :: AgentServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _address = a } :: AgentServiceResource s)
 
-instance P.HasName (AgentServiceResource s) (TF.Attr s Text) where
+instance P.HasName (AgentServiceResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: AgentServiceResource s -> TF.Attr s Text)
+        lens (_name :: AgentServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: AgentServiceResource s)
 
-instance P.HasPort (AgentServiceResource s) (TF.Attr s Text) where
+instance P.HasPort (AgentServiceResource s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: AgentServiceResource s -> TF.Attr s Text)
+        lens (_port :: AgentServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _port = a } :: AgentServiceResource s)
 
-instance P.HasTags (AgentServiceResource s) (TF.Attr s Text) where
+instance P.HasTags (AgentServiceResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: AgentServiceResource s -> TF.Attr s Text)
+        lens (_tags :: AgentServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: AgentServiceResource s)
 
-instance P.HasComputedAddress (AgentServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedAddress (AgentServiceResource s) s (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedId (AgentServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedId (AgentServiceResource s) s (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (AgentServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (AgentServiceResource s) s (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPort (AgentServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedPort (AgentServiceResource s) s (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
-instance P.HasComputedTags (AgentServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedTags (AgentServiceResource s) s (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 agentServiceResource :: TF.Schema TF.Resource P.Consul (AgentServiceResource s)
@@ -190,15 +191,15 @@ Registers a node or service with the
 Currently, defining health checks is not supported.
 -}
 data CatalogEntryResource s = CatalogEntryResource {
-      _address    :: !(TF.Attr s Text)
+      _address    :: !(TF.Attr s P.Text)
     {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
-    , _datacenter :: !(TF.Attr s Text)
+    , _datacenter :: !(TF.Attr s P.Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _node       :: !(TF.Attr s Text)
+    , _node       :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
-    , _service    :: !(TF.Attr s Text)
+    , _service    :: !(TF.Attr s P.Text)
     {- ^ (Optional) A service to optionally associated with the node. Supported values are documented below. -}
-    , _token      :: !(TF.Attr s Text)
+    , _token      :: !(TF.Attr s P.Text)
     {- ^ (Optional) ACL token. -}
     } deriving (Show, Eq)
 
@@ -211,50 +212,50 @@ instance TF.ToHCL (CatalogEntryResource s) where
         , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance P.HasAddress (CatalogEntryResource s) (TF.Attr s Text) where
+instance P.HasAddress (CatalogEntryResource s) (TF.Attr s P.Text) where
     address =
-        lens (_address :: CatalogEntryResource s -> TF.Attr s Text)
+        lens (_address :: CatalogEntryResource s -> TF.Attr s P.Text)
              (\s a -> s { _address = a } :: CatalogEntryResource s)
 
-instance P.HasDatacenter (CatalogEntryResource s) (TF.Attr s Text) where
+instance P.HasDatacenter (CatalogEntryResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: CatalogEntryResource s -> TF.Attr s Text)
+        lens (_datacenter :: CatalogEntryResource s -> TF.Attr s P.Text)
              (\s a -> s { _datacenter = a } :: CatalogEntryResource s)
 
-instance P.HasNode (CatalogEntryResource s) (TF.Attr s Text) where
+instance P.HasNode (CatalogEntryResource s) (TF.Attr s P.Text) where
     node =
-        lens (_node :: CatalogEntryResource s -> TF.Attr s Text)
+        lens (_node :: CatalogEntryResource s -> TF.Attr s P.Text)
              (\s a -> s { _node = a } :: CatalogEntryResource s)
 
-instance P.HasService (CatalogEntryResource s) (TF.Attr s Text) where
+instance P.HasService (CatalogEntryResource s) (TF.Attr s P.Text) where
     service =
-        lens (_service :: CatalogEntryResource s -> TF.Attr s Text)
+        lens (_service :: CatalogEntryResource s -> TF.Attr s P.Text)
              (\s a -> s { _service = a } :: CatalogEntryResource s)
 
-instance P.HasToken (CatalogEntryResource s) (TF.Attr s Text) where
+instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
     token =
-        lens (_token :: CatalogEntryResource s -> TF.Attr s Text)
+        lens (_token :: CatalogEntryResource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: CatalogEntryResource s)
 
-instance P.HasComputedAddress (CatalogEntryResource s) s (TF.Attr s Text) where
+instance P.HasComputedAddress (CatalogEntryResource s) s (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedDatacenter (CatalogEntryResource s) s (TF.Attr s Text) where
+instance P.HasComputedDatacenter (CatalogEntryResource s) s (TF.Attr s P.Text) where
     computedDatacenter =
-        (_datacenter :: CatalogEntryResource s -> TF.Attr s Text)
+        (_datacenter :: CatalogEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNode (CatalogEntryResource s) s (TF.Attr s Text) where
+instance P.HasComputedNode (CatalogEntryResource s) s (TF.Attr s P.Text) where
     computedNode x = TF.compute (TF.refKey x) "node"
 
-instance P.HasComputedService (CatalogEntryResource s) s (TF.Attr s Text) where
+instance P.HasComputedService (CatalogEntryResource s) s (TF.Attr s P.Text) where
     computedService =
-        (_service :: CatalogEntryResource s -> TF.Attr s Text)
+        (_service :: CatalogEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (CatalogEntryResource s) s (TF.Attr s Text) where
+instance P.HasComputedToken (CatalogEntryResource s) s (TF.Attr s P.Text) where
     computedToken =
-        (_token :: CatalogEntryResource s -> TF.Attr s Text)
+        (_token :: CatalogEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 catalogEntryResource :: TF.Schema TF.Resource P.Consul (CatalogEntryResource s)
@@ -288,13 +289,13 @@ configuration. It will also delete all keys under the given prefix when a
 outside of Terraform.
 -}
 data KeyPrefixResource s = KeyPrefixResource {
-      _datacenter  :: !(TF.Attr s Text)
+      _datacenter  :: !(TF.Attr s P.Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _path_prefix :: !(TF.Attr s Text)
+    , _path_prefix :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies the common prefix shared by all keys that will be managed by this resource instance. In most cases this will end with a slash, to manage a "folder" of keys. -}
-    , _subkeys     :: !(TF.Attr s Text)
+    , _subkeys     :: !(TF.Attr s P.Text)
     {- ^ (Required) A mapping from subkey name (which will be appended to the given @path_prefix@ ) to the value that should be stored at that key. Use slashes, as shown in the above example, to create "sub-folders" under the given path prefix. -}
-    , _token       :: !(TF.Attr s Text)
+    , _token       :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
@@ -306,42 +307,42 @@ instance TF.ToHCL (KeyPrefixResource s) where
         , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance P.HasDatacenter (KeyPrefixResource s) (TF.Attr s Text) where
+instance P.HasDatacenter (KeyPrefixResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: KeyPrefixResource s -> TF.Attr s Text)
+        lens (_datacenter :: KeyPrefixResource s -> TF.Attr s P.Text)
              (\s a -> s { _datacenter = a } :: KeyPrefixResource s)
 
-instance P.HasPathPrefix (KeyPrefixResource s) (TF.Attr s Text) where
+instance P.HasPathPrefix (KeyPrefixResource s) (TF.Attr s P.Text) where
     pathPrefix =
-        lens (_path_prefix :: KeyPrefixResource s -> TF.Attr s Text)
+        lens (_path_prefix :: KeyPrefixResource s -> TF.Attr s P.Text)
              (\s a -> s { _path_prefix = a } :: KeyPrefixResource s)
 
-instance P.HasSubkeys (KeyPrefixResource s) (TF.Attr s Text) where
+instance P.HasSubkeys (KeyPrefixResource s) (TF.Attr s P.Text) where
     subkeys =
-        lens (_subkeys :: KeyPrefixResource s -> TF.Attr s Text)
+        lens (_subkeys :: KeyPrefixResource s -> TF.Attr s P.Text)
              (\s a -> s { _subkeys = a } :: KeyPrefixResource s)
 
-instance P.HasToken (KeyPrefixResource s) (TF.Attr s Text) where
+instance P.HasToken (KeyPrefixResource s) (TF.Attr s P.Text) where
     token =
-        lens (_token :: KeyPrefixResource s -> TF.Attr s Text)
+        lens (_token :: KeyPrefixResource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: KeyPrefixResource s)
 
-instance P.HasComputedDatacenter (KeyPrefixResource s) s (TF.Attr s Text) where
+instance P.HasComputedDatacenter (KeyPrefixResource s) s (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance P.HasComputedPathPrefix (KeyPrefixResource s) s (TF.Attr s Text) where
+instance P.HasComputedPathPrefix (KeyPrefixResource s) s (TF.Attr s P.Text) where
     computedPathPrefix =
-        (_path_prefix :: KeyPrefixResource s -> TF.Attr s Text)
+        (_path_prefix :: KeyPrefixResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSubkeys (KeyPrefixResource s) s (TF.Attr s Text) where
+instance P.HasComputedSubkeys (KeyPrefixResource s) s (TF.Attr s P.Text) where
     computedSubkeys =
-        (_subkeys :: KeyPrefixResource s -> TF.Attr s Text)
+        (_subkeys :: KeyPrefixResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (KeyPrefixResource s) s (TF.Attr s Text) where
+instance P.HasComputedToken (KeyPrefixResource s) s (TF.Attr s P.Text) where
     computedToken =
-        (_token :: KeyPrefixResource s -> TF.Attr s Text)
+        (_token :: KeyPrefixResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 keyPrefixResource :: TF.Schema TF.Resource P.Consul (KeyPrefixResource s)
@@ -366,11 +367,11 @@ present in the configuration, consider using the @consul_key_prefix@
 resource instead.
 -}
 data KeysResource s = KeysResource {
-      _datacenter :: !(TF.Attr s Text)
+      _datacenter :: !(TF.Attr s P.Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _key        :: !(TF.Attr s Text)
+    , _key        :: !(TF.Attr s P.Text)
     {- ^ (Required) Specifies a key in Consul to be written. Supported values documented below. -}
-    , _token      :: !(TF.Attr s Text)
+    , _token      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ACL token to use. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
@@ -381,32 +382,32 @@ instance TF.ToHCL (KeysResource s) where
         , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance P.HasDatacenter (KeysResource s) (TF.Attr s Text) where
+instance P.HasDatacenter (KeysResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: KeysResource s -> TF.Attr s Text)
+        lens (_datacenter :: KeysResource s -> TF.Attr s P.Text)
              (\s a -> s { _datacenter = a } :: KeysResource s)
 
-instance P.HasKey (KeysResource s) (TF.Attr s Text) where
+instance P.HasKey (KeysResource s) (TF.Attr s P.Text) where
     key =
-        lens (_key :: KeysResource s -> TF.Attr s Text)
+        lens (_key :: KeysResource s -> TF.Attr s P.Text)
              (\s a -> s { _key = a } :: KeysResource s)
 
-instance P.HasToken (KeysResource s) (TF.Attr s Text) where
+instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
     token =
-        lens (_token :: KeysResource s -> TF.Attr s Text)
+        lens (_token :: KeysResource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: KeysResource s)
 
-instance P.HasComputedDatacenter (KeysResource s) s (TF.Attr s Text) where
+instance P.HasComputedDatacenter (KeysResource s) s (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance P.HasComputedKey (KeysResource s) s (TF.Attr s Text) where
+instance P.HasComputedKey (KeysResource s) s (TF.Attr s P.Text) where
     computedKey =
-        (_key :: KeysResource s -> TF.Attr s Text)
+        (_key :: KeysResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (KeysResource s) s (TF.Attr s Text) where
+instance P.HasComputedToken (KeysResource s) s (TF.Attr s P.Text) where
     computedToken =
-        (_token :: KeysResource s -> TF.Attr s Text)
+        (_token :: KeysResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 keysResource :: TF.Schema TF.Resource P.Consul (KeysResource s)
@@ -424,9 +425,9 @@ Provides access to Node data in Consul. This can be used to define a node.
 Currently, defining health checks is not supported.
 -}
 data NodeResource s = NodeResource {
-      _address :: !(TF.Attr s Text)
+      _address :: !(TF.Attr s P.Text)
     {- ^ (Required) The address of the node being added to, or referenced in the catalog. -}
-    , _name    :: !(TF.Attr s Text)
+    , _name    :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the node being added to, or referenced in the catalog. -}
     } deriving (Show, Eq)
 
@@ -436,20 +437,20 @@ instance TF.ToHCL (NodeResource s) where
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasAddress (NodeResource s) (TF.Attr s Text) where
+instance P.HasAddress (NodeResource s) (TF.Attr s P.Text) where
     address =
-        lens (_address :: NodeResource s -> TF.Attr s Text)
+        lens (_address :: NodeResource s -> TF.Attr s P.Text)
              (\s a -> s { _address = a } :: NodeResource s)
 
-instance P.HasName (NodeResource s) (TF.Attr s Text) where
+instance P.HasName (NodeResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: NodeResource s -> TF.Attr s Text)
+        lens (_name :: NodeResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: NodeResource s)
 
-instance P.HasComputedAddress (NodeResource s) s (TF.Attr s Text) where
+instance P.HasComputedAddress (NodeResource s) s (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedName (NodeResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (NodeResource s) s (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 nodeResource :: TF.Schema TF.Resource P.Consul (NodeResource s)
@@ -468,29 +469,29 @@ a consistent and declarative way of managing prepared queries in your Consul
 cluster using Terraform.
 -}
 data PreparedQueryResource s = PreparedQueryResource {
-      _datacenter   :: !(TF.Attr s Text)
+      _datacenter   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The datacenter to use. This overrides the datacenter in the provider setup and the agent's default datacenter. -}
-    , _dns          :: !(TF.Attr s Text)
+    , _dns          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Settings for controlling the DNS response details. -}
-    , _failover     :: !(TF.Attr s Text)
+    , _failover     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Options for controlling behavior when no healthy nodes are available in the local DC. -}
-    , _name         :: !(TF.Attr s Text)
+    , _name         :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the prepared query. Used to identify the prepared query during requests. Can be specified as an empty string to configure the query as a catch-all. -}
-    , _near         :: !(TF.Attr s Text)
+    , _near         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Allows specifying the name of a node to sort results near using Consul's distance sorting and network coordinates. The magic @_agent@ value can be used to always sort nearest the node servicing the request. -}
-    , _only_passing :: !(TF.Attr s Text)
+    , _only_passing :: !(TF.Attr s P.Text)
     {- ^ (Optional) When @true@ , the prepared query will only return nodes with passing health checks in the result. -}
-    , _service      :: !(TF.Attr s Text)
+    , _service      :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the service to query. -}
-    , _session      :: !(TF.Attr s Text)
+    , _session      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the Consul session to tie this query's lifetime to.  This is an advanced parameter that should not be used without a complete understanding of Consul sessions and the implications of their use (it is recommended to leave this blank in nearly all cases).  If this parameter is omitted the query will not expire. -}
-    , _stored_token :: !(TF.Attr s Text)
+    , _stored_token :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ACL token to store with the prepared query. This token will be used by default whenever the query is executed. -}
-    , _tags         :: !(TF.Attr s Text)
+    , _tags         :: !(TF.Attr s P.Text)
     {- ^ (Optional) The list of required and/or disallowed tags.  If a tag is in this list it must be present.  If the tag is preceded with a "!" then it is disallowed. -}
-    , _template     :: !(TF.Attr s Text)
+    , _template     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Query templating options. This is used to make a single prepared query respond to many different requests. -}
-    , _token        :: !(TF.Attr s Text)
+    , _token        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ACL token to use when saving the prepared query. This overrides the token that the agent provides by default. -}
     } deriving (Show, Eq)
 
@@ -510,127 +511,127 @@ instance TF.ToHCL (PreparedQueryResource s) where
         , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_datacenter :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _datacenter = a } :: PreparedQueryResource s)
 
-instance P.HasDns (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasDns (PreparedQueryResource s) (TF.Attr s P.Text) where
     dns =
-        lens (_dns :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_dns :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _dns = a } :: PreparedQueryResource s)
 
-instance P.HasFailover (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasFailover (PreparedQueryResource s) (TF.Attr s P.Text) where
     failover =
-        lens (_failover :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_failover :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _failover = a } :: PreparedQueryResource s)
 
-instance P.HasName (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasName (PreparedQueryResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_name :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: PreparedQueryResource s)
 
-instance P.HasNear (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasNear (PreparedQueryResource s) (TF.Attr s P.Text) where
     near =
-        lens (_near :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_near :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _near = a } :: PreparedQueryResource s)
 
-instance P.HasOnlyPassing (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasOnlyPassing (PreparedQueryResource s) (TF.Attr s P.Text) where
     onlyPassing =
-        lens (_only_passing :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_only_passing :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _only_passing = a } :: PreparedQueryResource s)
 
-instance P.HasService (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasService (PreparedQueryResource s) (TF.Attr s P.Text) where
     service =
-        lens (_service :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_service :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _service = a } :: PreparedQueryResource s)
 
-instance P.HasSession (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasSession (PreparedQueryResource s) (TF.Attr s P.Text) where
     session =
-        lens (_session :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_session :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _session = a } :: PreparedQueryResource s)
 
-instance P.HasStoredToken (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasStoredToken (PreparedQueryResource s) (TF.Attr s P.Text) where
     storedToken =
-        lens (_stored_token :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_stored_token :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _stored_token = a } :: PreparedQueryResource s)
 
-instance P.HasTags (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasTags (PreparedQueryResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_tags :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: PreparedQueryResource s)
 
-instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s P.Text) where
     template =
-        lens (_template :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_template :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _template = a } :: PreparedQueryResource s)
 
-instance P.HasToken (PreparedQueryResource s) (TF.Attr s Text) where
+instance P.HasToken (PreparedQueryResource s) (TF.Attr s P.Text) where
     token =
-        lens (_token :: PreparedQueryResource s -> TF.Attr s Text)
+        lens (_token :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: PreparedQueryResource s)
 
-instance P.HasComputedDatacenter (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedDatacenter (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedDatacenter =
-        (_datacenter :: PreparedQueryResource s -> TF.Attr s Text)
+        (_datacenter :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDns (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedDns (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedDns =
-        (_dns :: PreparedQueryResource s -> TF.Attr s Text)
+        (_dns :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFailover (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedFailover (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedFailover =
-        (_failover :: PreparedQueryResource s -> TF.Attr s Text)
+        (_failover :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedId (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: PreparedQueryResource s -> TF.Attr s Text)
+        (_name :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNear (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedNear (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedNear =
-        (_near :: PreparedQueryResource s -> TF.Attr s Text)
+        (_near :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOnlyPassing (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedOnlyPassing (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedOnlyPassing =
-        (_only_passing :: PreparedQueryResource s -> TF.Attr s Text)
+        (_only_passing :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedService (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedService (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedService =
-        (_service :: PreparedQueryResource s -> TF.Attr s Text)
+        (_service :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSession (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedSession (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedSession =
-        (_session :: PreparedQueryResource s -> TF.Attr s Text)
+        (_session :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStoredToken (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedStoredToken (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedStoredToken =
-        (_stored_token :: PreparedQueryResource s -> TF.Attr s Text)
+        (_stored_token :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedTags (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedTags =
-        (_tags :: PreparedQueryResource s -> TF.Attr s Text)
+        (_tags :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTemplate (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedTemplate (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedTemplate =
-        (_template :: PreparedQueryResource s -> TF.Attr s Text)
+        (_template :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (PreparedQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedToken (PreparedQueryResource s) s (TF.Attr s P.Text) where
     computedToken =
-        (_token :: PreparedQueryResource s -> TF.Attr s Text)
+        (_token :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 preparedQueryResource :: TF.Schema TF.Resource P.Consul (PreparedQueryResource s)
@@ -665,15 +666,15 @@ resource, such as a hosted database, as a service, as described in
 instead, which can create an arbitrary service record in the Consul catalog.
 -}
 data ServiceResource s = ServiceResource {
-      _address    :: !(TF.Attr s Text)
+      _address    :: !(TF.Attr s P.Text)
     {- ^ (Optional, string) The address of the service. Defaults to the address of the agent. -}
-    , _name       :: !(TF.Attr s Text)
+    , _name       :: !(TF.Attr s P.Text)
     {- ^ (Required, string) The name of the service. -}
-    , _port       :: !(TF.Attr s Text)
+    , _port       :: !(TF.Attr s P.Text)
     {- ^ (Optional, int) The port of the service. -}
-    , _service_id :: !(TF.Attr s Text)
+    , _service_id :: !(TF.Attr s P.Text)
     {- ^ (Optional, string) The ID of the service, defaults to the value of @name@ if not supplied. -}
-    , _tags       :: !(TF.Attr s Text)
+    , _tags       :: !(TF.Attr s P.Text)
     {- ^ (Optional, set of strings) A list of values that are opaque to Consul, but can be used to distinguish between services or nodes. -}
     } deriving (Show, Eq)
 
@@ -686,44 +687,44 @@ instance TF.ToHCL (ServiceResource s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasAddress (ServiceResource s) (TF.Attr s Text) where
+instance P.HasAddress (ServiceResource s) (TF.Attr s P.Text) where
     address =
-        lens (_address :: ServiceResource s -> TF.Attr s Text)
+        lens (_address :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _address = a } :: ServiceResource s)
 
-instance P.HasName (ServiceResource s) (TF.Attr s Text) where
+instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ServiceResource s -> TF.Attr s Text)
+        lens (_name :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasPort (ServiceResource s) (TF.Attr s Text) where
+instance P.HasPort (ServiceResource s) (TF.Attr s P.Text) where
     port =
-        lens (_port :: ServiceResource s -> TF.Attr s Text)
+        lens (_port :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _port = a } :: ServiceResource s)
 
-instance P.HasServiceId (ServiceResource s) (TF.Attr s Text) where
+instance P.HasServiceId (ServiceResource s) (TF.Attr s P.Text) where
     serviceId =
-        lens (_service_id :: ServiceResource s -> TF.Attr s Text)
+        lens (_service_id :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _service_id = a } :: ServiceResource s)
 
-instance P.HasTags (ServiceResource s) (TF.Attr s Text) where
+instance P.HasTags (ServiceResource s) (TF.Attr s P.Text) where
     tags =
-        lens (_tags :: ServiceResource s -> TF.Attr s Text)
+        lens (_tags :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ServiceResource s)
 
-instance P.HasComputedAddress (ServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedAddress (ServiceResource s) s (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedName (ServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (ServiceResource s) s (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPort (ServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedPort (ServiceResource s) s (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
-instance P.HasComputedServiceId (ServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedServiceId (ServiceResource s) s (TF.Attr s P.Text) where
     computedServiceId x = TF.compute (TF.refKey x) "service_id"
 
-instance P.HasComputedTags (ServiceResource s) s (TF.Attr s Text) where
+instance P.HasComputedTags (ServiceResource s) s (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 serviceResource :: TF.Schema TF.Resource P.Consul (ServiceResource s)

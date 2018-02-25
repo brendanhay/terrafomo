@@ -22,11 +22,11 @@
 module Terrafomo.Circonus.DataSource
     (
     -- * Types
-      AccountData (..)
-    , accountData
+      AccountDataSource (..)
+    , accountDataSource
 
-    , CollectorData (..)
-    , collectorData
+    , CollectorDataSource (..)
+    , collectorDataSource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -63,19 +63,20 @@ module Terrafomo.Circonus.DataSource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.Circonus.Types as P
+
+import qualified Data.Text                   as P
 import qualified Data.Word                   as P
 import qualified GHC.Base                    as P
 import qualified Numeric.Natural             as P
 import qualified Terrafomo.Circonus.Lens     as P
 import qualified Terrafomo.Circonus.Provider as P
-import           Terrafomo.Circonus.Types    as P
 import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
@@ -91,86 +92,86 @@ import qualified Terrafomo.Schema    as TF
 @circonus_account@ data source can be used for pulling various attributes
 about a specific Circonus Account.
 -}
-data AccountData s = AccountData {
-      _current :: !(TF.Attr s Text)
+data AccountDataSource s = AccountDataSource {
+      _current :: !(TF.Attr s P.Text)
     {- ^ (Optional) Automatically use the current Circonus Account attached to the API token making the request. -}
-    , _id      :: !(TF.Attr s Text)
+    , _id      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Circonus ID of a given account. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (AccountData s) where
-    toHCL AccountData{..} = TF.inline $ catMaybes
+instance TF.ToHCL (AccountDataSource s) where
+    toHCL AccountDataSource{..} = TF.inline $ catMaybes
         [ TF.assign "current" <$> TF.attribute _current
         , TF.assign "id" <$> TF.attribute _id
         ]
 
-instance P.HasCurrent (AccountData s) (TF.Attr s Text) where
+instance P.HasCurrent (AccountDataSource s) (TF.Attr s P.Text) where
     current =
-        lens (_current :: AccountData s -> TF.Attr s Text)
-             (\s a -> s { _current = a } :: AccountData s)
+        lens (_current :: AccountDataSource s -> TF.Attr s P.Text)
+             (\s a -> s { _current = a } :: AccountDataSource s)
 
-instance P.HasId (AccountData s) (TF.Attr s Text) where
+instance P.HasId (AccountDataSource s) (TF.Attr s P.Text) where
     id =
-        lens (_id :: AccountData s -> TF.Attr s Text)
-             (\s a -> s { _id = a } :: AccountData s)
+        lens (_id :: AccountDataSource s -> TF.Attr s P.Text)
+             (\s a -> s { _id = a } :: AccountDataSource s)
 
-instance P.HasComputedAddress1 (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedAddress1 (AccountDataSource s) s (TF.Attr s P.Text) where
     computedAddress1 x = TF.compute (TF.refKey x) "address1"
 
-instance P.HasComputedAddress2 (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedAddress2 (AccountDataSource s) s (TF.Attr s P.Text) where
     computedAddress2 x = TF.compute (TF.refKey x) "address2"
 
-instance P.HasComputedCcEmail (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedCcEmail (AccountDataSource s) s (TF.Attr s P.Text) where
     computedCcEmail x = TF.compute (TF.refKey x) "cc_email"
 
-instance P.HasComputedCity (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedCity (AccountDataSource s) s (TF.Attr s P.Text) where
     computedCity x = TF.compute (TF.refKey x) "city"
 
-instance P.HasComputedContactGroups (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedContactGroups (AccountDataSource s) s (TF.Attr s P.Text) where
     computedContactGroups x = TF.compute (TF.refKey x) "contact_groups"
 
-instance P.HasComputedCountry (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedCountry (AccountDataSource s) s (TF.Attr s P.Text) where
     computedCountry x = TF.compute (TF.refKey x) "country"
 
-instance P.HasComputedCurrent (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedCurrent (AccountDataSource s) s (TF.Attr s P.Text) where
     computedCurrent =
-        (_current :: AccountData s -> TF.Attr s Text)
+        (_current :: AccountDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedDescription (AccountDataSource s) s (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedId (AccountDataSource s) s (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInvites (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedInvites (AccountDataSource s) s (TF.Attr s P.Text) where
     computedInvites x = TF.compute (TF.refKey x) "invites"
 
-instance P.HasComputedName (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedName (AccountDataSource s) s (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedOwner (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedOwner (AccountDataSource s) s (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance P.HasComputedState (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedState (AccountDataSource s) s (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance P.HasComputedTimezone (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedTimezone (AccountDataSource s) s (TF.Attr s P.Text) where
     computedTimezone x = TF.compute (TF.refKey x) "timezone"
 
-instance P.HasComputedUiBaseUrl (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedUiBaseUrl (AccountDataSource s) s (TF.Attr s P.Text) where
     computedUiBaseUrl x = TF.compute (TF.refKey x) "ui_base_url"
 
-instance P.HasComputedUsage (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedUsage (AccountDataSource s) s (TF.Attr s P.Text) where
     computedUsage x = TF.compute (TF.refKey x) "usage"
 
-instance P.HasComputedUsers (AccountData s) s (TF.Attr s Text) where
+instance P.HasComputedUsers (AccountDataSource s) s (TF.Attr s P.Text) where
     computedUsers x = TF.compute (TF.refKey x) "users"
 
-accountData :: TF.Schema TF.DataSource P.Circonus (AccountData s)
-accountData =
+accountDataSource :: TF.Schema TF.DataSource P.Circonus (AccountDataSource s)
+accountDataSource =
     TF.newDataSource "circonus_account" $
-        AccountData {
+        AccountDataSource {
               _current = TF.Nil
             , _id = TF.Nil
             }
@@ -192,45 +193,45 @@ broker group level. The @circonus_collector@ is simply a renamed Circonus
 act as a fan-in agent that either pulls or has metrics pushed into it and
 funneled back through Circonus.
 -}
-data CollectorData s = CollectorData {
-      _id :: !(TF.Attr s Text)
+data CollectorDataSource s = CollectorDataSource {
+      _id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Circonus ID of a given collector. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (CollectorData s) where
-    toHCL CollectorData{..} = TF.inline $ catMaybes
+instance TF.ToHCL (CollectorDataSource s) where
+    toHCL CollectorDataSource{..} = TF.inline $ catMaybes
         [ TF.assign "id" <$> TF.attribute _id
         ]
 
-instance P.HasId (CollectorData s) (TF.Attr s Text) where
+instance P.HasId (CollectorDataSource s) (TF.Attr s P.Text) where
     id =
-        lens (_id :: CollectorData s -> TF.Attr s Text)
-             (\s a -> s { _id = a } :: CollectorData s)
+        lens (_id :: CollectorDataSource s -> TF.Attr s P.Text)
+             (\s a -> s { _id = a } :: CollectorDataSource s)
 
-instance P.HasComputedDetails (CollectorData s) s (TF.Attr s Text) where
+instance P.HasComputedDetails (CollectorDataSource s) s (TF.Attr s P.Text) where
     computedDetails x = TF.compute (TF.refKey x) "details"
 
-instance P.HasComputedId (CollectorData s) s (TF.Attr s Text) where
+instance P.HasComputedId (CollectorDataSource s) s (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLatitude (CollectorData s) s (TF.Attr s Text) where
+instance P.HasComputedLatitude (CollectorDataSource s) s (TF.Attr s P.Text) where
     computedLatitude x = TF.compute (TF.refKey x) "latitude"
 
-instance P.HasComputedLongitude (CollectorData s) s (TF.Attr s Text) where
+instance P.HasComputedLongitude (CollectorDataSource s) s (TF.Attr s P.Text) where
     computedLongitude x = TF.compute (TF.refKey x) "longitude"
 
-instance P.HasComputedName (CollectorData s) s (TF.Attr s Text) where
+instance P.HasComputedName (CollectorDataSource s) s (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedTags (CollectorData s) s (TF.Attr s Text) where
+instance P.HasComputedTags (CollectorDataSource s) s (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance P.HasComputedType' (CollectorData s) s (TF.Attr s Text) where
+instance P.HasComputedType' (CollectorDataSource s) s (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-collectorData :: TF.Schema TF.DataSource P.Circonus (CollectorData s)
-collectorData =
+collectorDataSource :: TF.Schema TF.DataSource P.Circonus (CollectorDataSource s)
+collectorDataSource =
     TF.newDataSource "circonus_collector" $
-        CollectorData {
+        CollectorDataSource {
               _id = TF.Nil
             }

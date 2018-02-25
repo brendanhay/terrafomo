@@ -35,12 +35,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text             as P
 import qualified Terrafomo.IP          as P
 import qualified Terrafomo.Nomad.Types as P
 
@@ -55,17 +55,17 @@ provider exposes resources to interact with a Nomad cluster. Use the
 navigation to the left to read about the available resources.
 -}
 data Nomad = Nomad {
-      _address   :: !(Maybe Text)
+      _address   :: !(Maybe P.Text)
     {- ^  @(string: "http://127.0.0.1:4646")@ - The HTTP(S) API address of the Nomad agent. This must include the leading protocol (e.g. @https://@ ). This can also be specified as the @NOMAD_ADDR@ environment variable. -}
-    , _ca_file   :: !(Maybe Text)
+    , _ca_file   :: !(Maybe P.Text)
     {- ^  @(string: "")@ - A local file path to a PEM-encoded certificate authority used to verify the remote agent's certificate. This can also be specified as the @NOMAD_CACERT@ environment variable. -}
-    , _cert_file :: !(Maybe Text)
+    , _cert_file :: !(Maybe P.Text)
     {- ^  @(string: "")@ - A local file path to a PEM-encoded certificate provided to the remote agent. If this is specified, @key_file@ is also required. This can also be specified as the @NOMAD_CLIENT_CERT@ environment variable. -}
-    , _key_file  :: !(Maybe Text)
+    , _key_file  :: !(Maybe P.Text)
     {- ^  @(string: "")@ - A local file path to a PEM-encoded private key. This is required if @cert_file@ is specified. This can also be specified via the @NOMAD_CLIENT_KEY@ environment variable. -}
-    , _region    :: !(Maybe Text)
+    , _region    :: !(Maybe P.Text)
     {- ^  @(string: "")@ - The Nomad region to target. This can also be specified as the @NOMAD_REGION@ environment variable. -}
-    , _secret_id :: !(Maybe Text)
+    , _secret_id :: !(Maybe P.Text)
     {- ^  @(string: "")@ - The Secret ID of an ACL token to make requests with, for ACL-enabled clusters. This can also be specified via the @NOMAD_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -98,26 +98,26 @@ emptyNomad = Nomad {
       , _secret_id = Nothing
     }
 
-providerAddress :: Lens' Nomad (Maybe Text)
+providerAddress :: Lens' Nomad (Maybe P.Text)
 providerAddress =
     lens _address (\s a -> s { _address = a })
 
-providerCaFile :: Lens' Nomad (Maybe Text)
+providerCaFile :: Lens' Nomad (Maybe P.Text)
 providerCaFile =
     lens _ca_file (\s a -> s { _ca_file = a })
 
-providerCertFile :: Lens' Nomad (Maybe Text)
+providerCertFile :: Lens' Nomad (Maybe P.Text)
 providerCertFile =
     lens _cert_file (\s a -> s { _cert_file = a })
 
-providerKeyFile :: Lens' Nomad (Maybe Text)
+providerKeyFile :: Lens' Nomad (Maybe P.Text)
 providerKeyFile =
     lens _key_file (\s a -> s { _key_file = a })
 
-providerRegion :: Lens' Nomad (Maybe Text)
+providerRegion :: Lens' Nomad (Maybe P.Text)
 providerRegion =
     lens _region (\s a -> s { _region = a })
 
-providerSecretId :: Lens' Nomad (Maybe Text)
+providerSecretId :: Lens' Nomad (Maybe P.Text)
 providerSecretId =
     lens _secret_id (\s a -> s { _secret_id = a })

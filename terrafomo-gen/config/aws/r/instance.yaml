@@ -2,18 +2,10 @@ arguments:
   _root_block_device:
     type: '(P.Ec2RootBlockDevice s)'
   _ebs_block_device:
-    type:
-      name: '(P.Ec2EbsBlockDevice s)'
-      format: repeated
+    type: '[P.Ec2EbsBlockDevice s]'
   _ephemeral_block_device:
-    type:
-      name: '(P.Ec2EphemeralBlockDevice s)'
-      format: repeated
+    type: '[P.Ec2EphemeralBlockDevice s]'
   _security_groups:
-    type:
-      name: 'Text'
-      format: repeated
+    type: '[TF.Attr s P.Text]'
   _vpc_security_group_ids:
-    type:
-      name: 'Text'
-      format: repeated
+    type: '[TF.Attr s P.Text]'

@@ -32,7 +32,7 @@ resourceName :: Text -> Text
 resourceName = (<> "Resource") . schemaTypeName
 
 dataSourceName :: Text -> Text
-dataSourceName = (<> "Data") . schemaTypeName
+dataSourceName = (<> "DataSource") . schemaTypeName
 
 schemaTypeName :: Text -> Text
 schemaTypeName x =

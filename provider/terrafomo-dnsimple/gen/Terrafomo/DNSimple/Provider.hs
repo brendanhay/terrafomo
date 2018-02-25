@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                as P
 import qualified Terrafomo.DNSimple.Types as P
 import qualified Terrafomo.IP             as P
 
@@ -52,9 +52,9 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data DNSimple = DNSimple {
-      _account :: !(Maybe Text)
+      _account :: !(Maybe P.Text)
     {- ^ (Required) The ID of the account associated with the token. It must be provided, but it can also be sourced from the @DNSIMPLE_ACCOUNT@ environment variable. -}
-    , _token   :: !(Maybe Text)
+    , _token   :: !(Maybe P.Text)
     {- ^ (Required) The DNSimple API v2 token. It must be provided, but it can also be sourced from the @DNSIMPLE_TOKEN@ environment variable. Please note that this must be an <https://support.dnsimple.com/articles/api-access-token/> . You can use either an User or Account token, but an Account token is recommended. -}
     } deriving (Show, Eq, Generic)
 
@@ -79,10 +79,10 @@ emptyDNSimple = DNSimple {
       , _token = Nothing
     }
 
-providerAccount :: Lens' DNSimple (Maybe Text)
+providerAccount :: Lens' DNSimple (Maybe P.Text)
 providerAccount =
     lens _account (\s a -> s { _account = a })
 
-providerToken :: Lens' DNSimple (Maybe Text)
+providerToken :: Lens' DNSimple (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

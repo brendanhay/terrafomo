@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text               as P
 import qualified Terrafomo.IP            as P
 import qualified Terrafomo.Librato.Types as P
 
@@ -52,9 +52,9 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Librato = Librato {
-      _email :: !(Maybe Text)
+      _email :: !(Maybe P.Text)
     {- ^ (Required) Librato email address. It must be provided, but it can also be sourced from the @LIBRATO_EMAIL@ environment variable. -}
-    , _token :: !(Maybe Text)
+    , _token :: !(Maybe P.Text)
     {- ^ (Required) Librato API token. It must be provided, but it can also be sourced from the @LIBRATO_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -79,10 +79,10 @@ emptyLibrato = Librato {
       , _token = Nothing
     }
 
-providerEmail :: Lens' Librato (Maybe Text)
+providerEmail :: Lens' Librato (Maybe P.Text)
 providerEmail =
     lens _email (\s a -> s { _email = a })
 
-providerToken :: Lens' Librato (Maybe Text)
+providerToken :: Lens' Librato (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

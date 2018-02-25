@@ -33,12 +33,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text               as P
 import qualified Terrafomo.IP            as P
 import qualified Terrafomo.VSphere.Types as P
 
@@ -59,13 +59,13 @@ sources supported by the provider. ~> NOTE: This provider requires API write
 access and hence is not supported on a free ESXi license.
 -}
 data VSphere = VSphere {
-      _allow_unverified_ssl :: !(Maybe Text)
+      _allow_unverified_ssl :: !(Maybe P.Text)
     {- ^ (Optional) Boolean that can be set to true to disable SSL certificate verification. This should be used with care as it could allow an attacker to intercept your auth token. If omitted, default value is @false@ . Can also be specified with the @VSPHERE_ALLOW_UNVERIFIED_SSL@ environment variable. -}
-    , _password             :: !(Maybe Text)
+    , _password             :: !(Maybe P.Text)
     {- ^ (Required) This is the password for vSphere API operations. Can also be specified with the @VSPHERE_PASSWORD@ environment variable. -}
-    , _user                 :: !(Maybe Text)
+    , _user                 :: !(Maybe P.Text)
     {- ^ (Required) This is the username for vSphere API operations. Can also be specified with the @VSPHERE_USER@ environment variable. -}
-    , _vsphere_server       :: !(Maybe Text)
+    , _vsphere_server       :: !(Maybe P.Text)
     {- ^ (Required) This is the vCenter server name for vSphere API operations. Can also be specified with the @VSPHERE_SERVER@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -94,18 +94,18 @@ emptyVSphere = VSphere {
       , _vsphere_server = Nothing
     }
 
-providerAllowUnverifiedSsl :: Lens' VSphere (Maybe Text)
+providerAllowUnverifiedSsl :: Lens' VSphere (Maybe P.Text)
 providerAllowUnverifiedSsl =
     lens _allow_unverified_ssl (\s a -> s { _allow_unverified_ssl = a })
 
-providerPassword :: Lens' VSphere (Maybe Text)
+providerPassword :: Lens' VSphere (Maybe P.Text)
 providerPassword =
     lens _password (\s a -> s { _password = a })
 
-providerUser :: Lens' VSphere (Maybe Text)
+providerUser :: Lens' VSphere (Maybe P.Text)
 providerUser =
     lens _user (\s a -> s { _user = a })
 
-providerVsphereServer :: Lens' VSphere (Maybe Text)
+providerVsphereServer :: Lens' VSphere (Maybe P.Text)
 providerVsphereServer =
     lens _vsphere_server (\s a -> s { _vsphere_server = a })

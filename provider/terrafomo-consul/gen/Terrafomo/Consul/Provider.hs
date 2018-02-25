@@ -38,12 +38,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text              as P
 import qualified Terrafomo.Consul.Types as P
 import qualified Terrafomo.IP           as P
 
@@ -64,23 +64,23 @@ used to manage resources within Consul itself, such as adding external
 services or working with the key/value store.
 -}
 data Consul = Consul {
-      _address        :: !(Maybe Text)
+      _address        :: !(Maybe P.Text)
     {- ^ (Optional) The HTTP(S) API address of the agent to use. Defaults to "127.0.0.1:8500". -}
-    , _ca_file        :: !(Maybe Text)
+    , _ca_file        :: !(Maybe P.Text)
     {- ^ (Optional) A path to a PEM-encoded certificate authority used to verify the remote agent's certificate. -}
-    , _cert_file      :: !(Maybe Text)
+    , _cert_file      :: !(Maybe P.Text)
     {- ^ (Optional) A path to a PEM-encoded certificate provided to the remote agent; requires use of @key_file@ . -}
-    , _datacenter     :: !(Maybe Text)
+    , _datacenter     :: !(Maybe P.Text)
     {- ^ (Optional) The datacenter to use. Defaults to that of the agent. -}
-    , _http_auth      :: !(Maybe Text)
+    , _http_auth      :: !(Maybe P.Text)
     {- ^ (Optional) HTTP Basic Authentication credentials to be used when communicating with Consul, in the format of either @user@ or @user:pass@ . This may also be specified using the @CONSUL_HTTP_AUTH@ environment variable. -}
-    , _insecure_https :: !(Maybe Text)
+    , _insecure_https :: !(Maybe P.Text)
     {- ^ (Optional) Boolean value to disable SSL certificate verification; setting this value to true is not recommended for production use. Only use this with scheme set to "https". -}
-    , _key_file       :: !(Maybe Text)
+    , _key_file       :: !(Maybe P.Text)
     {- ^ (Optional) A path to a PEM-encoded private key, required if @cert_file@ is specified. -}
-    , _scheme         :: !(Maybe Text)
+    , _scheme         :: !(Maybe P.Text)
     {- ^ (Optional) The URL scheme of the agent to use ("http" or "https"). Defaults to "http". -}
-    , _token          :: !(Maybe Text)
+    , _token          :: !(Maybe P.Text)
     {- ^ (Optional) The ACL token to use by default when making requests to the agent. -}
     } deriving (Show, Eq, Generic)
 
@@ -119,38 +119,38 @@ emptyConsul = Consul {
       , _token = Nothing
     }
 
-providerAddress :: Lens' Consul (Maybe Text)
+providerAddress :: Lens' Consul (Maybe P.Text)
 providerAddress =
     lens _address (\s a -> s { _address = a })
 
-providerCaFile :: Lens' Consul (Maybe Text)
+providerCaFile :: Lens' Consul (Maybe P.Text)
 providerCaFile =
     lens _ca_file (\s a -> s { _ca_file = a })
 
-providerCertFile :: Lens' Consul (Maybe Text)
+providerCertFile :: Lens' Consul (Maybe P.Text)
 providerCertFile =
     lens _cert_file (\s a -> s { _cert_file = a })
 
-providerDatacenter :: Lens' Consul (Maybe Text)
+providerDatacenter :: Lens' Consul (Maybe P.Text)
 providerDatacenter =
     lens _datacenter (\s a -> s { _datacenter = a })
 
-providerHttpAuth :: Lens' Consul (Maybe Text)
+providerHttpAuth :: Lens' Consul (Maybe P.Text)
 providerHttpAuth =
     lens _http_auth (\s a -> s { _http_auth = a })
 
-providerInsecureHttps :: Lens' Consul (Maybe Text)
+providerInsecureHttps :: Lens' Consul (Maybe P.Text)
 providerInsecureHttps =
     lens _insecure_https (\s a -> s { _insecure_https = a })
 
-providerKeyFile :: Lens' Consul (Maybe Text)
+providerKeyFile :: Lens' Consul (Maybe P.Text)
 providerKeyFile =
     lens _key_file (\s a -> s { _key_file = a })
 
-providerScheme :: Lens' Consul (Maybe Text)
+providerScheme :: Lens' Consul (Maybe P.Text)
 providerScheme =
     lens _scheme (\s a -> s { _scheme = a })
 
-providerToken :: Lens' Consul (Maybe Text)
+providerToken :: Lens' Consul (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

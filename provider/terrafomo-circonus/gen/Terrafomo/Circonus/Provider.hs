@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                as P
 import qualified Terrafomo.Circonus.Types as P
 import qualified Terrafomo.IP             as P
 
@@ -50,9 +50,9 @@ The Circonus provider gives the ability to manage a Circonus account. Use
 the navigation to the left to read about the available resources.
 -}
 data Circonus = Circonus {
-      _api_url :: !(Maybe Text)
+      _api_url :: !(Maybe P.Text)
     {- ^ (Optional) The API URL to use to talk with. The default is @https://api.circonus.com/v2@ . -}
-    , _key     :: !(Maybe Text)
+    , _key     :: !(Maybe P.Text)
     {- ^ (Required) The Circonus API Key. -}
     } deriving (Show, Eq, Generic)
 
@@ -77,10 +77,10 @@ emptyCirconus = Circonus {
       , _key = Nothing
     }
 
-providerApiUrl :: Lens' Circonus (Maybe Text)
+providerApiUrl :: Lens' Circonus (Maybe P.Text)
 providerApiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-providerKey :: Lens' Circonus (Maybe Text)
+providerKey :: Lens' Circonus (Maybe P.Text)
 providerKey =
     lens _key (\s a -> s { _key = a })

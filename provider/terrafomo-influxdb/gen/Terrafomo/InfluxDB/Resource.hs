@@ -56,19 +56,20 @@ module Terrafomo.InfluxDB.Resource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.InfluxDB.Types as P
+
+import qualified Data.Text                   as P
 import qualified Data.Word                   as P
 import qualified GHC.Base                    as P
 import qualified Numeric.Natural             as P
 import qualified Terrafomo.InfluxDB.Lens     as P
 import qualified Terrafomo.InfluxDB.Provider as P
-import           Terrafomo.InfluxDB.Types    as P
 import qualified Terrafomo.IP                as P
 
 import qualified Terrafomo.Attribute as TF
@@ -82,11 +83,11 @@ The continuous_query resource allows a continuous query to be created on an
 InfluxDB server.
 -}
 data ContinuousQueryResource s = ContinuousQueryResource {
-      _database :: !(TF.Attr s Text)
+      _database :: !(TF.Attr s P.Text)
     {- ^ (Required) The database for the continuous_query. This must be an existing influxdb database. -}
-    , _name     :: !(TF.Attr s Text)
+    , _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name for the continuous_query. This must be unique on the InfluxDB server. -}
-    , _query    :: !(TF.Attr s Text)
+    , _query    :: !(TF.Attr s P.Text)
     {- ^ (Required) The query for the continuous_query. -}
     } deriving (Show, Eq)
 
@@ -97,34 +98,34 @@ instance TF.ToHCL (ContinuousQueryResource s) where
         , TF.assign "query" <$> TF.attribute _query
         ]
 
-instance P.HasDatabase (ContinuousQueryResource s) (TF.Attr s Text) where
+instance P.HasDatabase (ContinuousQueryResource s) (TF.Attr s P.Text) where
     database =
-        lens (_database :: ContinuousQueryResource s -> TF.Attr s Text)
+        lens (_database :: ContinuousQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _database = a } :: ContinuousQueryResource s)
 
-instance P.HasName (ContinuousQueryResource s) (TF.Attr s Text) where
+instance P.HasName (ContinuousQueryResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ContinuousQueryResource s -> TF.Attr s Text)
+        lens (_name :: ContinuousQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ContinuousQueryResource s)
 
-instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s Text) where
+instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
     query =
-        lens (_query :: ContinuousQueryResource s -> TF.Attr s Text)
+        lens (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
-instance P.HasComputedDatabase (ContinuousQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedDatabase (ContinuousQueryResource s) s (TF.Attr s P.Text) where
     computedDatabase =
-        (_database :: ContinuousQueryResource s -> TF.Attr s Text)
+        (_database :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ContinuousQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (ContinuousQueryResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: ContinuousQueryResource s -> TF.Attr s Text)
+        (_name :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedQuery (ContinuousQueryResource s) s (TF.Attr s Text) where
+instance P.HasComputedQuery (ContinuousQueryResource s) s (TF.Attr s P.Text) where
     computedQuery =
-        (_query :: ContinuousQueryResource s -> TF.Attr s Text)
+        (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 continuousQueryResource :: TF.Schema TF.Resource P.InfluxDB (ContinuousQueryResource s)
@@ -141,9 +142,9 @@ continuousQueryResource =
 The database resource allows a database to be created on an InfluxDB server.
 -}
 data DatabaseResource s = DatabaseResource {
-      _name               :: !(TF.Attr s Text)
+      _name               :: !(TF.Attr s P.Text)
     {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
-    , _retention_policies :: !(TF.Attr s Text)
+    , _retention_policies :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of retention policies for specified database -}
     } deriving (Show, Eq)
 
@@ -153,24 +154,24 @@ instance TF.ToHCL (DatabaseResource s) where
         , TF.assign "retention_policies" <$> TF.attribute _retention_policies
         ]
 
-instance P.HasName (DatabaseResource s) (TF.Attr s Text) where
+instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatabaseResource s -> TF.Attr s Text)
+        lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s Text) where
+instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s P.Text) where
     retentionPolicies =
-        lens (_retention_policies :: DatabaseResource s -> TF.Attr s Text)
+        lens (_retention_policies :: DatabaseResource s -> TF.Attr s P.Text)
              (\s a -> s { _retention_policies = a } :: DatabaseResource s)
 
-instance P.HasComputedName (DatabaseResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (DatabaseResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: DatabaseResource s -> TF.Attr s Text)
+        (_name :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRetentionPolicies (DatabaseResource s) s (TF.Attr s Text) where
+instance P.HasComputedRetentionPolicies (DatabaseResource s) s (TF.Attr s P.Text) where
     computedRetentionPolicies =
-        (_retention_policies :: DatabaseResource s -> TF.Attr s Text)
+        (_retention_policies :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 databaseResource :: TF.Schema TF.Resource P.InfluxDB (DatabaseResource s)
@@ -186,13 +187,13 @@ databaseResource =
 The user resource allows a user to be created on an InfluxDB server.
 -}
 data UserResource s = UserResource {
-      _admin    :: !(TF.Attr s Text)
+      _admin    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Mark the user as admin. -}
-    , _grant    :: !(TF.Attr s Text)
+    , _grant    :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of grants for non-admin users -}
-    , _name     :: !(TF.Attr s Text)
+    , _name     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name for the user. -}
-    , _password :: !(TF.Attr s Text)
+    , _password :: !(TF.Attr s P.Text)
     {- ^ (Required) The password for the user. -}
     } deriving (Show, Eq)
 
@@ -204,42 +205,42 @@ instance TF.ToHCL (UserResource s) where
         , TF.assign "password" <$> TF.attribute _password
         ]
 
-instance P.HasAdmin (UserResource s) (TF.Attr s Text) where
+instance P.HasAdmin (UserResource s) (TF.Attr s P.Text) where
     admin =
-        lens (_admin :: UserResource s -> TF.Attr s Text)
+        lens (_admin :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _admin = a } :: UserResource s)
 
-instance P.HasGrant (UserResource s) (TF.Attr s Text) where
+instance P.HasGrant (UserResource s) (TF.Attr s P.Text) where
     grant =
-        lens (_grant :: UserResource s -> TF.Attr s Text)
+        lens (_grant :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _grant = a } :: UserResource s)
 
-instance P.HasName (UserResource s) (TF.Attr s Text) where
+instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: UserResource s -> TF.Attr s Text)
+        lens (_name :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: UserResource s)
 
-instance P.HasPassword (UserResource s) (TF.Attr s Text) where
+instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
     password =
-        lens (_password :: UserResource s -> TF.Attr s Text)
+        lens (_password :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasComputedAdmin (UserResource s) s (TF.Attr s Text) where
+instance P.HasComputedAdmin (UserResource s) s (TF.Attr s P.Text) where
     computedAdmin x = TF.compute (TF.refKey x) "admin"
 
-instance P.HasComputedGrant (UserResource s) s (TF.Attr s Text) where
+instance P.HasComputedGrant (UserResource s) s (TF.Attr s P.Text) where
     computedGrant =
-        (_grant :: UserResource s -> TF.Attr s Text)
+        (_grant :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (UserResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (UserResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: UserResource s -> TF.Attr s Text)
+        (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (UserResource s) s (TF.Attr s Text) where
+instance P.HasComputedPassword (UserResource s) s (TF.Attr s P.Text) where
     computedPassword =
-        (_password :: UserResource s -> TF.Attr s Text)
+        (_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 userResource :: TF.Schema TF.Resource P.InfluxDB (UserResource s)

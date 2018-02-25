@@ -36,12 +36,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text               as P
 import qualified Terrafomo.AzureRM.Types as P
 import qualified Terrafomo.IP            as P
 
@@ -58,19 +58,19 @@ the Service Management API. Use the navigation to the left to read about the
 available resources.
 -}
 data AzureRM = AzureRM {
-      _client_id                   :: !(Maybe Text)
+      _client_id                   :: !(Maybe P.Text)
     {- ^ (Optional) The client ID to use. It can also be sourced from the @ARM_CLIENT_ID@ environment variable. -}
-    , _client_secret               :: !(Maybe Text)
+    , _client_secret               :: !(Maybe P.Text)
     {- ^ (Optional) The client secret to use. It can also be sourced from the @ARM_CLIENT_SECRET@ environment variable. -}
-    , _environment                 :: !(Maybe Text)
+    , _environment                 :: !(Maybe P.Text)
     {- ^ (Optional) The cloud environment to use. It can also be sourced from the @ARM_ENVIRONMENT@ environment variable. Supported values are: -}
-    , _skip_credentials_validation :: !(Maybe Text)
+    , _skip_credentials_validation :: !(Maybe P.Text)
     {- ^ (Optional) Prevents the provider from validating the given credentials. When set to @true@ , @skip_provider_registration@ is assumed. It can also be sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable; defaults to @false@ . -}
-    , _skip_provider_registration  :: !(Maybe Text)
+    , _skip_provider_registration  :: !(Maybe P.Text)
     {- ^ (Optional) Prevents the provider from registering the ARM provider namespaces, this can be used if you don't wish to give the Active Directory Application permission to register resource providers. It can also be sourced from the @ARM_SKIP_PROVIDER_REGISTRATION@ environment variable; defaults to @false@ . -}
-    , _subscription_id             :: !(Maybe Text)
+    , _subscription_id             :: !(Maybe P.Text)
     {- ^ (Optional) The subscription ID to use. It can also be sourced from the @ARM_SUBSCRIPTION_ID@ environment variable. -}
-    , _tenant_id                   :: !(Maybe Text)
+    , _tenant_id                   :: !(Maybe P.Text)
     {- ^ (Optional) The tenant ID to use. It can also be sourced from the @ARM_TENANT_ID@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -105,30 +105,30 @@ emptyAzureRM = AzureRM {
       , _tenant_id = Nothing
     }
 
-providerClientId :: Lens' AzureRM (Maybe Text)
+providerClientId :: Lens' AzureRM (Maybe P.Text)
 providerClientId =
     lens _client_id (\s a -> s { _client_id = a })
 
-providerClientSecret :: Lens' AzureRM (Maybe Text)
+providerClientSecret :: Lens' AzureRM (Maybe P.Text)
 providerClientSecret =
     lens _client_secret (\s a -> s { _client_secret = a })
 
-providerEnvironment :: Lens' AzureRM (Maybe Text)
+providerEnvironment :: Lens' AzureRM (Maybe P.Text)
 providerEnvironment =
     lens _environment (\s a -> s { _environment = a })
 
-providerSkipCredentialsValidation :: Lens' AzureRM (Maybe Text)
+providerSkipCredentialsValidation :: Lens' AzureRM (Maybe P.Text)
 providerSkipCredentialsValidation =
     lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
 
-providerSkipProviderRegistration :: Lens' AzureRM (Maybe Text)
+providerSkipProviderRegistration :: Lens' AzureRM (Maybe P.Text)
 providerSkipProviderRegistration =
     lens _skip_provider_registration (\s a -> s { _skip_provider_registration = a })
 
-providerSubscriptionId :: Lens' AzureRM (Maybe Text)
+providerSubscriptionId :: Lens' AzureRM (Maybe P.Text)
 providerSubscriptionId =
     lens _subscription_id (\s a -> s { _subscription_id = a })
 
-providerTenantId :: Lens' AzureRM (Maybe Text)
+providerTenantId :: Lens' AzureRM (Maybe P.Text)
 providerTenantId =
     lens _tenant_id (\s a -> s { _tenant_id = a })

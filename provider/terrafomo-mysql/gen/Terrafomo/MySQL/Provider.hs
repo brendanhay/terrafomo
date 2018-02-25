@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text             as P
 import qualified Terrafomo.IP          as P
 import qualified Terrafomo.MySQL.Types as P
 
@@ -53,11 +53,11 @@ server. Use the navigation to the left to read about the available
 resources.
 -}
 data MySQL = MySQL {
-      _endpoint :: !(Maybe Text)
+      _endpoint :: !(Maybe P.Text)
     {- ^ (Required) The address of the MySQL server to use. Most often a "hostname:port" pair, but may also be an absolute path to a Unix socket when the host OS is Unix-compatible. -}
-    , _password :: !(Maybe Text)
+    , _password :: !(Maybe P.Text)
     {- ^ (Optional) Password for the given user, if that user has a password. -}
-    , _username :: !(Maybe Text)
+    , _username :: !(Maybe P.Text)
     {- ^ (Required) Username to use to authenticate with the server. -}
     } deriving (Show, Eq, Generic)
 
@@ -84,14 +84,14 @@ emptyMySQL = MySQL {
       , _username = Nothing
     }
 
-providerEndpoint :: Lens' MySQL (Maybe Text)
+providerEndpoint :: Lens' MySQL (Maybe P.Text)
 providerEndpoint =
     lens _endpoint (\s a -> s { _endpoint = a })
 
-providerPassword :: Lens' MySQL (Maybe Text)
+providerPassword :: Lens' MySQL (Maybe P.Text)
 providerPassword =
     lens _password (\s a -> s { _password = a })
 
-providerUsername :: Lens' MySQL (Maybe Text)
+providerUsername :: Lens' MySQL (Maybe P.Text)
 providerUsername =
     lens _username (\s a -> s { _username = a })

@@ -1,0 +1,11 @@
+arguments:
+  _associate_public_ip_address:
+    type: 'P.Bool'
+  _root_block_device:
+    type: '(P.Ec2RootBlockDevice s)'
+  _ebs_block_device:
+    type: '[P.Ec2EbsBlockDevice s]'
+  _ephemeral_block_device:
+    type: '[P.Ec2EphemeralBlockDevice s]'
+  _security_groups:
+    type: '[TF.Attr s P.Text]'

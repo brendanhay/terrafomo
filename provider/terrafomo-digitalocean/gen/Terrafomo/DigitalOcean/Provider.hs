@@ -30,12 +30,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                    as P
 import qualified Terrafomo.DigitalOcean.Types as P
 import qualified Terrafomo.IP                 as P
 
@@ -51,7 +51,7 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data DigitalOcean = DigitalOcean {
-      _token :: !(Maybe Text)
+      _token :: !(Maybe P.Text)
     {- ^ (Required) This is the DO API token. This can also be specified with the @DIGITALOCEAN_TOKEN@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -74,6 +74,6 @@ emptyDigitalOcean = DigitalOcean {
         _token = Nothing
     }
 
-providerToken :: Lens' DigitalOcean (Maybe Text)
+providerToken :: Lens' DigitalOcean (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

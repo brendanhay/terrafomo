@@ -33,12 +33,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text               as P
 import qualified Terrafomo.Icinga2.Types as P
 import qualified Terrafomo.IP            as P
 
@@ -54,13 +54,13 @@ be configured with the API URL of the Icinga2 server and credentials for an
 API user with the appropriate permissions.
 -}
 data Icinga2 = Icinga2 {
-      _api_password             :: !(Maybe Text)
+      _api_password             :: !(Maybe P.Text)
     {- ^ (Required) The password to use to authenticate to the Icinga2 server. May alternatively be set via the @ICINGA2_API_PASSWORD@ environment variable. -}
-    , _api_url                  :: !(Maybe Text)
+    , _api_url                  :: !(Maybe P.Text)
     {- ^ (Required) The root API URL of an Icinga2 server. May alternatively be set via the @ICINGA2_API_URL@ environment variable. -}
-    , _api_user                 :: !(Maybe Text)
+    , _api_user                 :: !(Maybe P.Text)
     {- ^ (Required) The API username to use to authenticate to the Icinga2 server. May alternatively be set via the @ICINGA2_API_USER@ environment variable. -}
-    , _insecure_skip_tls_verify :: !(Maybe Text)
+    , _insecure_skip_tls_verify :: !(Maybe P.Text)
     {- ^ - (optional) Defaults to false. If set to true, verification of the Icinga2 server's SSL certificate is disabled. This is a security risk and should be avoided. May alternatively be set via the @ICINGA2_INSECURE_SKIP_TLS_VERIFY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -89,18 +89,18 @@ emptyIcinga2 = Icinga2 {
       , _insecure_skip_tls_verify = Nothing
     }
 
-providerApiPassword :: Lens' Icinga2 (Maybe Text)
+providerApiPassword :: Lens' Icinga2 (Maybe P.Text)
 providerApiPassword =
     lens _api_password (\s a -> s { _api_password = a })
 
-providerApiUrl :: Lens' Icinga2 (Maybe Text)
+providerApiUrl :: Lens' Icinga2 (Maybe P.Text)
 providerApiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-providerApiUser :: Lens' Icinga2 (Maybe Text)
+providerApiUser :: Lens' Icinga2 (Maybe P.Text)
 providerApiUser =
     lens _api_user (\s a -> s { _api_user = a })
 
-providerInsecureSkipTlsVerify :: Lens' Icinga2 (Maybe Text)
+providerInsecureSkipTlsVerify :: Lens' Icinga2 (Maybe P.Text)
 providerInsecureSkipTlsVerify =
     lens _insecure_skip_tls_verify (\s a -> s { _insecure_skip_tls_verify = a })

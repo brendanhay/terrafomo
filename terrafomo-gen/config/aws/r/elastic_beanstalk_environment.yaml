@@ -1,5 +1,3 @@
 arguments:
   _setting:
-    type:
-      name: '[P.ElasticBeanstalkSetting s]'
-      format: verbatim
+    type: '[P.ElasticBeanstalkSetting s]'

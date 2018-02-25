@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text               as P
 import qualified Terrafomo.Datadog.Types as P
 import qualified Terrafomo.IP            as P
 
@@ -52,9 +52,9 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data Datadog = Datadog {
-      _api_key :: !(Maybe Text)
+      _api_key :: !(Maybe P.Text)
     {- ^ (Required) Datadog API key. This can also be set via the @DATADOG_API_KEY@ environment variable. -}
-    , _app_key :: !(Maybe Text)
+    , _app_key :: !(Maybe P.Text)
     {- ^ (Required) Datadog APP key. This can also be set via the @DATADOG_APP_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -79,10 +79,10 @@ emptyDatadog = Datadog {
       , _app_key = Nothing
     }
 
-providerApiKey :: Lens' Datadog (Maybe Text)
+providerApiKey :: Lens' Datadog (Maybe P.Text)
 providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-providerAppKey :: Lens' Datadog (Maybe Text)
+providerAppKey :: Lens' Datadog (Maybe P.Text)
 providerAppKey =
     lens _app_key (\s a -> s { _app_key = a })

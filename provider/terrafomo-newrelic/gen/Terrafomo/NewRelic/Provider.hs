@@ -30,12 +30,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                as P
 import qualified Terrafomo.IP             as P
 import qualified Terrafomo.NewRelic.Types as P
 
@@ -50,7 +50,7 @@ developers to diagnose and fix application performance problems in real
 time. Use the navigation to the left to read about the available resources.
 -}
 data NewRelic = NewRelic {
-      _api_key :: !(Maybe Text)
+      _api_key :: !(Maybe P.Text)
     {- ^ (Required) Your New Relic API key. Can also use @NEWRELIC_API_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -73,6 +73,6 @@ emptyNewRelic = NewRelic {
         _api_key = Nothing
     }
 
-providerApiKey :: Lens' NewRelic (Maybe Text)
+providerApiKey :: Lens' NewRelic (Maybe P.Text)
 providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })

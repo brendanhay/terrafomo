@@ -78,19 +78,20 @@ module Terrafomo.Fastly.Resource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.Fastly.Types as P
+
+import qualified Data.Text                 as P
 import qualified Data.Word                 as P
 import qualified GHC.Base                  as P
 import qualified Numeric.Natural           as P
 import qualified Terrafomo.Fastly.Lens     as P
 import qualified Terrafomo.Fastly.Provider as P
-import           Terrafomo.Fastly.Types    as P
 import qualified Terrafomo.IP              as P
 
 import qualified Terrafomo.Attribute as TF
@@ -109,45 +110,45 @@ Fastly's guide on
 documentation site for guidance.
 -}
 data ServiceV1Resource s = ServiceV1Resource {
-      _backend         :: !(TF.Attr s Text)
+      _backend         :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of Backends to service requests from your Domains. Defined below. Backends must be defined in this argument, or defined in the @vcl@ argument below -}
-    , _cache_setting   :: !(TF.Attr s Text)
+    , _cache_setting   :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of Cache Settings, allowing you to override when an item is not to be cached based on an above @condition@ . Defined below -}
-    , _condition       :: !(TF.Attr s Text)
+    , _condition       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of conditions to add logic to any basic configuration object in this service. Defined below. -}
-    , _default_host    :: !(TF.Attr s Text)
+    , _default_host    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The default hostname. -}
-    , _default_ttl     :: !(TF.Attr s Text)
+    , _default_ttl     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The default Time-to-live (TTL) for requests. -}
-    , _domain          :: !(TF.Attr s Text)
+    , _domain          :: !(TF.Attr s P.Text)
     {- ^ (Required) A set of Domain names to serve as entry points for your Service. Defined below. -}
-    , _force_destroy   :: !(TF.Attr s Text)
+    , _force_destroy   :: !(TF.Attr s P.Text)
     {- ^ (Optional) Services that are active cannot be destroyed. In order to destroy the Service, set @force_destroy@ to @true@ . Default @false@ . -}
-    , _gcslogging      :: !(TF.Attr s Text)
+    , _gcslogging      :: !(TF.Attr s P.Text)
     {- ^ (Optional) A gcs endpoint to send streaming logs too. Defined below. -}
-    , _gzip            :: !(TF.Attr s Text)
+    , _gzip            :: !(TF.Attr s P.Text)
     {- ^ (Required) A set of gzip rules to control automatic gzipping of content. Defined below. -}
-    , _header          :: !(TF.Attr s Text)
+    , _header          :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of Headers to manipulate for each request. Defined below. -}
-    , _healthcheck     :: !(TF.Attr s Text)
+    , _healthcheck     :: !(TF.Attr s P.Text)
     {- ^ (Optional) Automated healthchecks on the cache that can change how fastly interacts with the cache based on its health. -}
-    , _logentries      :: !(TF.Attr s Text)
+    , _logentries      :: !(TF.Attr s P.Text)
     {- ^ (Optional) A logentries endpoint to send streaming logs too. Defined below. -}
-    , _name            :: !(TF.Attr s Text)
+    , _name            :: !(TF.Attr s P.Text)
     {- ^ (Required) The unique name for the Service to create. -}
-    , _papertrail      :: !(TF.Attr s Text)
+    , _papertrail      :: !(TF.Attr s P.Text)
     {- ^ (Optional) A Papertrail endpoint to send streaming logs too. Defined below. -}
-    , _request_setting :: !(TF.Attr s Text)
+    , _request_setting :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of Request modifiers. Defined below -}
-    , _response_object :: !(TF.Attr s Text)
+    , _response_object :: !(TF.Attr s P.Text)
     {- ^ (Optional) Allows you to create synthetic responses that exist entirely on the varnish machine. Useful for creating error or maintenance pages that exists outside the scope of your datacenter. Best when used with Condition objects. -}
-    , _s3logging       :: !(TF.Attr s Text)
+    , _s3logging       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of S3 Buckets to send streaming logs too. Defined below. -}
-    , _sumologic       :: !(TF.Attr s Text)
+    , _sumologic       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A Sumologic endpoint to send streaming logs too. Defined below. -}
-    , _syslog          :: !(TF.Attr s Text)
+    , _syslog          :: !(TF.Attr s P.Text)
     {- ^ (Optional) A syslog endpoint to send streaming logs too. Defined below. -}
-    , _vcl             :: !(TF.Attr s Text)
+    , _vcl             :: !(TF.Attr s P.Text)
     {- ^ (Optional) A set of custom VCL configuration blocks. The ability to upload custom VCL code is not enabled by default for new Fastly accounts (see the <https://docs.fastly.com/guides/vcl/uploading-custom-vcl> for details). -}
     } deriving (Show, Eq)
 
@@ -175,188 +176,188 @@ instance TF.ToHCL (ServiceV1Resource s) where
         , TF.assign "vcl" <$> TF.attribute _vcl
         ]
 
-instance P.HasBackend (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasBackend (ServiceV1Resource s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_backend :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _backend = a } :: ServiceV1Resource s)
 
-instance P.HasCacheSetting (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasCacheSetting (ServiceV1Resource s) (TF.Attr s P.Text) where
     cacheSetting =
-        lens (_cache_setting :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_cache_setting :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _cache_setting = a } :: ServiceV1Resource s)
 
-instance P.HasCondition (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasCondition (ServiceV1Resource s) (TF.Attr s P.Text) where
     condition =
-        lens (_condition :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_condition :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _condition = a } :: ServiceV1Resource s)
 
-instance P.HasDefaultHost (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasDefaultHost (ServiceV1Resource s) (TF.Attr s P.Text) where
     defaultHost =
-        lens (_default_host :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_default_host :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _default_host = a } :: ServiceV1Resource s)
 
-instance P.HasDefaultTtl (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasDefaultTtl (ServiceV1Resource s) (TF.Attr s P.Text) where
     defaultTtl =
-        lens (_default_ttl :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_default_ttl :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _default_ttl = a } :: ServiceV1Resource s)
 
-instance P.HasDomain (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasDomain (ServiceV1Resource s) (TF.Attr s P.Text) where
     domain =
-        lens (_domain :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_domain :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _domain = a } :: ServiceV1Resource s)
 
-instance P.HasForceDestroy (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasForceDestroy (ServiceV1Resource s) (TF.Attr s P.Text) where
     forceDestroy =
-        lens (_force_destroy :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_force_destroy :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _force_destroy = a } :: ServiceV1Resource s)
 
-instance P.HasGcslogging (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasGcslogging (ServiceV1Resource s) (TF.Attr s P.Text) where
     gcslogging =
-        lens (_gcslogging :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_gcslogging :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _gcslogging = a } :: ServiceV1Resource s)
 
-instance P.HasGzip (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasGzip (ServiceV1Resource s) (TF.Attr s P.Text) where
     gzip =
-        lens (_gzip :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_gzip :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _gzip = a } :: ServiceV1Resource s)
 
-instance P.HasHeader (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasHeader (ServiceV1Resource s) (TF.Attr s P.Text) where
     header =
-        lens (_header :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_header :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _header = a } :: ServiceV1Resource s)
 
-instance P.HasHealthcheck (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasHealthcheck (ServiceV1Resource s) (TF.Attr s P.Text) where
     healthcheck =
-        lens (_healthcheck :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_healthcheck :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _healthcheck = a } :: ServiceV1Resource s)
 
-instance P.HasLogentries (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasLogentries (ServiceV1Resource s) (TF.Attr s P.Text) where
     logentries =
-        lens (_logentries :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_logentries :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _logentries = a } :: ServiceV1Resource s)
 
-instance P.HasName (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasName (ServiceV1Resource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_name :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ServiceV1Resource s)
 
-instance P.HasPapertrail (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasPapertrail (ServiceV1Resource s) (TF.Attr s P.Text) where
     papertrail =
-        lens (_papertrail :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_papertrail :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _papertrail = a } :: ServiceV1Resource s)
 
-instance P.HasRequestSetting (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasRequestSetting (ServiceV1Resource s) (TF.Attr s P.Text) where
     requestSetting =
-        lens (_request_setting :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_request_setting :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _request_setting = a } :: ServiceV1Resource s)
 
-instance P.HasResponseObject (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasResponseObject (ServiceV1Resource s) (TF.Attr s P.Text) where
     responseObject =
-        lens (_response_object :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_response_object :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _response_object = a } :: ServiceV1Resource s)
 
-instance P.HasS3logging (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasS3logging (ServiceV1Resource s) (TF.Attr s P.Text) where
     s3logging =
-        lens (_s3logging :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_s3logging :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _s3logging = a } :: ServiceV1Resource s)
 
-instance P.HasSumologic (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasSumologic (ServiceV1Resource s) (TF.Attr s P.Text) where
     sumologic =
-        lens (_sumologic :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_sumologic :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _sumologic = a } :: ServiceV1Resource s)
 
-instance P.HasSyslog (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasSyslog (ServiceV1Resource s) (TF.Attr s P.Text) where
     syslog =
-        lens (_syslog :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_syslog :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _syslog = a } :: ServiceV1Resource s)
 
-instance P.HasVcl (ServiceV1Resource s) (TF.Attr s Text) where
+instance P.HasVcl (ServiceV1Resource s) (TF.Attr s P.Text) where
     vcl =
-        lens (_vcl :: ServiceV1Resource s -> TF.Attr s Text)
+        lens (_vcl :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _vcl = a } :: ServiceV1Resource s)
 
-instance P.HasComputedActiveVersion (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedActiveVersion (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedActiveVersion x = TF.compute (TF.refKey x) "active_version"
 
-instance P.HasComputedBackend (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedBackend (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedBackend x = TF.compute (TF.refKey x) "backend"
 
-instance P.HasComputedCacheSetting (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedCacheSetting (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedCacheSetting =
-        (_cache_setting :: ServiceV1Resource s -> TF.Attr s Text)
+        (_cache_setting :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCondition (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedCondition (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedCondition =
-        (_condition :: ServiceV1Resource s -> TF.Attr s Text)
+        (_condition :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultHost (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedDefaultHost (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedDefaultHost x = TF.compute (TF.refKey x) "default_host"
 
-instance P.HasComputedDefaultTtl (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedDefaultTtl (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedDefaultTtl x = TF.compute (TF.refKey x) "default_ttl"
 
-instance P.HasComputedDomain (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedDomain (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedDomain x = TF.compute (TF.refKey x) "domain"
 
-instance P.HasComputedForceDestroy (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedForceDestroy (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedForceDestroy x = TF.compute (TF.refKey x) "force_destroy"
 
-instance P.HasComputedGcslogging (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedGcslogging (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedGcslogging =
-        (_gcslogging :: ServiceV1Resource s -> TF.Attr s Text)
+        (_gcslogging :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGzip (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedGzip (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedGzip =
-        (_gzip :: ServiceV1Resource s -> TF.Attr s Text)
+        (_gzip :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHeader (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedHeader (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedHeader x = TF.compute (TF.refKey x) "header"
 
-instance P.HasComputedHealthcheck (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedHealthcheck (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedHealthcheck =
-        (_healthcheck :: ServiceV1Resource s -> TF.Attr s Text)
+        (_healthcheck :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedId (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLogentries (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedLogentries (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedLogentries =
-        (_logentries :: ServiceV1Resource s -> TF.Attr s Text)
+        (_logentries :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedName (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPapertrail (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedPapertrail (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedPapertrail x = TF.compute (TF.refKey x) "papertrail"
 
-instance P.HasComputedRequestSetting (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedRequestSetting (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedRequestSetting =
-        (_request_setting :: ServiceV1Resource s -> TF.Attr s Text)
+        (_request_setting :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedResponseObject (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedResponseObject (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedResponseObject x = TF.compute (TF.refKey x) "response_object"
 
-instance P.HasComputedS3logging (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedS3logging (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedS3logging x = TF.compute (TF.refKey x) "s3logging"
 
-instance P.HasComputedSumologic (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedSumologic (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedSumologic =
-        (_sumologic :: ServiceV1Resource s -> TF.Attr s Text)
+        (_sumologic :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSyslog (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedSyslog (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedSyslog =
-        (_syslog :: ServiceV1Resource s -> TF.Attr s Text)
+        (_syslog :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVcl (ServiceV1Resource s) s (TF.Attr s Text) where
+instance P.HasComputedVcl (ServiceV1Resource s) s (TF.Attr s P.Text) where
     computedVcl x = TF.compute (TF.refKey x) "vcl"
 
 serviceV1Resource :: TF.Schema TF.Resource P.Fastly (ServiceV1Resource s)

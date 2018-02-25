@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text              as P
 import qualified Terrafomo.Fastly.Types as P
 import qualified Terrafomo.IP           as P
 
@@ -53,9 +53,9 @@ https://www.fastly.com/signup Use the navigation to the left to read about
 the available resources.
 -}
 data Fastly = Fastly {
-      _api_key  :: !(Maybe Text)
+      _api_key  :: !(Maybe P.Text)
     {- ^ (Optional) This is the API key. It must be provided, but it can also be sourced from the @FASTLY_API_KEY@ environment variable -}
-    , _base_url :: !(Maybe Text)
+    , _base_url :: !(Maybe P.Text)
     {- ^ (Optional) This is the API server hostname. It is required if using a private instance of the API and otherwise defaults to the public Fastly production service. It can also be sourced from the @FASTLY_API_URL@ environment variable -}
     } deriving (Show, Eq, Generic)
 
@@ -80,10 +80,10 @@ emptyFastly = Fastly {
       , _base_url = Nothing
     }
 
-providerApiKey :: Lens' Fastly (Maybe Text)
+providerApiKey :: Lens' Fastly (Maybe P.Text)
 providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-providerBaseUrl :: Lens' Fastly (Maybe Text)
+providerBaseUrl :: Lens' Fastly (Maybe P.Text)
 providerBaseUrl =
     lens _base_url (\s a -> s { _base_url = a })

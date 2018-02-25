@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text           as P
 import qualified Terrafomo.Dyn.Types as P
 import qualified Terrafomo.IP        as P
 
@@ -53,11 +53,11 @@ can be used. Use the navigation to the left to read about the available
 resources.
 -}
 data Dyn = Dyn {
-      _customer_name :: !(Maybe Text)
+      _customer_name :: !(Maybe P.Text)
     {- ^ (Required) The Dyn customer name. It must be provided, but it can also be sourced from the @DYN_CUSTOMER_NAME@ environment variable. -}
-    , _password      :: !(Maybe Text)
+    , _password      :: !(Maybe P.Text)
     {- ^ (Required) The Dyn password. It must be provided, but it can also be sourced from the @DYN_PASSWORD@ environment variable. -}
-    , _username      :: !(Maybe Text)
+    , _username      :: !(Maybe P.Text)
     {- ^ (Required) The Dyn username. It must be provided, but it can also be sourced from the @DYN_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -84,14 +84,14 @@ emptyDyn = Dyn {
       , _username = Nothing
     }
 
-providerCustomerName :: Lens' Dyn (Maybe Text)
+providerCustomerName :: Lens' Dyn (Maybe P.Text)
 providerCustomerName =
     lens _customer_name (\s a -> s { _customer_name = a })
 
-providerPassword :: Lens' Dyn (Maybe Text)
+providerPassword :: Lens' Dyn (Maybe P.Text)
 providerPassword =
     lens _password (\s a -> s { _password = a })
 
-providerUsername :: Lens' Dyn (Maybe Text)
+providerUsername :: Lens' Dyn (Maybe P.Text)
 providerUsername =
     lens _username (\s a -> s { _username = a })

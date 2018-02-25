@@ -1,0 +1,25 @@
+arguments:
+  _append:
+    type: '[P.FileSource s]'
+  _replace:
+    type: '[P.FileSource s]'
+  _arrays:
+    type: '[TF.Attr s P.Text]'
+  _directories:
+    type: '[TF.Attr s P.Text]'
+  _disks:
+    type: '[TF.Attr s P.Text]'
+  _files:
+    type: '[TF.Attr s P.Text]'
+  _filesystems:
+    type: '[TF.Attr s P.Text]'
+  _groups:
+    type: '[TF.Attr s P.Text]'
+  _links:
+    type: '[TF.Attr s P.Text]'
+  _networkd:
+    type: '[TF.Attr s P.Text]'
+  _systemd:
+    type: '[TF.Attr s P.Text]'
+  _users:
+    type: '[TF.Attr s P.Text]'

@@ -1,0 +1,31 @@
+arguments:
+  _instances:
+    type: '[TF.Attr s P.Text]'
+  # _security_groups:
+  #   type:
+  #     name: 'P.Text'
+  #     format: repeated
+  # _subnets:
+  #   type:
+  #     name: 'P.Text'
+  #     format: repeated
+  # _availability_zones:
+  #   type:
+  #     name: 'P.Text'
+  #     format: repeated
+  _internal:
+    type: 'P.Bool'
+  _idle_timeout:
+    type: 'P.Int'
+  _cross_zone_load_balancing:
+    type: 'P.Bool'
+  _connection_draining:
+    type: 'P.Bool'
+  _connection_draining_timeout:
+    type: 'P.Int'
+  _listener:
+    type: '[P.ElbListener s]'
+  _health_check:
+    type: '(P.ElbHealthCheck s)'
+  _access_logs:
+    type: '(P.ElbAccessLogs s)'

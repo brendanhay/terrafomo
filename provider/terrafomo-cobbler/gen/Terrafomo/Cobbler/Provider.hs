@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text               as P
 import qualified Terrafomo.Cobbler.Types as P
 import qualified Terrafomo.IP            as P
 
@@ -53,11 +53,11 @@ the proper credentials before it can be used. Use the navigation to the left
 to read about the available resources.
 -}
 data Cobbler = Cobbler {
-      _password :: !(Maybe Text)
+      _password :: !(Maybe P.Text)
     {- ^ (Required) The password to the Cobbler service. This can also be specified with the @COBBLER_PASSWORD@ shell environment variable. -}
-    , _url      :: !(Maybe Text)
+    , _url      :: !(Maybe P.Text)
     {- ^ (Required) The url to the Cobbler service. This can also be specified with the @COBBLER_URL@ shell environment variable. -}
-    , _username :: !(Maybe Text)
+    , _username :: !(Maybe P.Text)
     {- ^ (Required) The username to the Cobbler service. This can also be specified with the @COBBLER_USERNAME@ shell environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -84,14 +84,14 @@ emptyCobbler = Cobbler {
       , _username = Nothing
     }
 
-providerPassword :: Lens' Cobbler (Maybe Text)
+providerPassword :: Lens' Cobbler (Maybe P.Text)
 providerPassword =
     lens _password (\s a -> s { _password = a })
 
-providerUrl :: Lens' Cobbler (Maybe Text)
+providerUrl :: Lens' Cobbler (Maybe P.Text)
 providerUrl =
     lens _url (\s a -> s { _url = a })
 
-providerUsername :: Lens' Cobbler (Maybe Text)
+providerUsername :: Lens' Cobbler (Maybe P.Text)
 providerUsername =
     lens _username (\s a -> s { _username = a })

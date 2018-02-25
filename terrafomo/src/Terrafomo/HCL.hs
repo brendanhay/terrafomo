@@ -26,7 +26,7 @@ module Terrafomo.HCL
     , empty
 
     , assign
-    , repeated
+--    , repeated
     , attribute
 
     , unquoted
@@ -193,12 +193,12 @@ prettyBool = \case
 assign :: ToHCL a => Id -> a -> Value
 assign k v = Assign k (toHCL v)
 
-repeated :: ToHCL a => Maybe [Attr s a] -> Maybe Value
-repeated x = do
-    ys <- x
-    case mapMaybe attribute ys of
-        [] -> Nothing
-        zs -> Just (List zs)
+-- repeated :: ToHCL a => Maybe [Attr s a] -> Maybe Value
+-- repeated x = do
+--     ys <- x
+--     case mapMaybe attribute ys of
+--         [] -> Nothing
+--         zs -> Just (List zs)
 
 -- FIXME: This is essentially a scratch pad. Need to revisit attributes and
 -- expressions specifically, along with general interpolation syntax (Interpolate).
@@ -373,6 +373,10 @@ instance ToHCL Key where
     toHCL (Key t n) = toHCL (Format.sformat (ftype % "." % fname) t n)
     {-# INLINEABLE toHCL #-}
 
+instance ToHCL a => ToHCL (Attr s a) where
+    toHCL = fromMaybe empty . attribute
+    {-# INLINEABLE toHCL #-}
+
 genericBlockAttributes :: (Generic a, GToAttributes (Rep a)) => a -> Value
 genericBlockAttributes = block . gToValues . from
 {-# INLINEABLE genericBlockAttributes #-}
@@ -383,15 +387,6 @@ genericInlineAttributes = inline . gToValues . from
 
 class GToAttributes f where
     gToValues :: f a -> [Value]
-
-instance ( Selector s
-         , ToHCL a
-         ) => GToAttributes (S1 s (K1 i [Attr t a])) where
-    gToValues p =
-        let k  = fromString (case selName p of '_':x -> x; x -> x)
-            vs = unK1 (unM1 p)
-          in maybeToList (assign k <$> repeated (Just vs))
-    {-# INLINEABLE gToValues #-}
 
 instance ( Selector s
          , ToHCL a

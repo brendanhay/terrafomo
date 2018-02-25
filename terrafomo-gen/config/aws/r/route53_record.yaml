@@ -1,5 +1,3 @@
 arguments:
   _records:
-    type:
-      name: 'Text'
-      format: repeated
+    type: '[TF.Attr s P.Text]'

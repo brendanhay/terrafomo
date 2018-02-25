@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text               as P
 import qualified Terrafomo.IP            as P
 import qualified Terrafomo.Rancher.Types as P
 
@@ -53,11 +53,11 @@ server at minimum and API credentials if access control is enabled on the
 server.
 -}
 data Rancher = Rancher {
-      _access_key :: !(Maybe Text)
+      _access_key :: !(Maybe P.Text)
     {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_ACCESS_KEY@ environment variable. -}
-    , _api_url    :: !(Maybe Text)
+    , _api_url    :: !(Maybe P.Text)
     {- ^ (Required) Rancher API url. It must be provided, but it can also be sourced from the @RANCHER_URL@ environment variable. -}
-    , _secret_key :: !(Maybe Text)
+    , _secret_key :: !(Maybe P.Text)
     {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_SECRET_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -84,14 +84,14 @@ emptyRancher = Rancher {
       , _secret_key = Nothing
     }
 
-providerAccessKey :: Lens' Rancher (Maybe Text)
+providerAccessKey :: Lens' Rancher (Maybe P.Text)
 providerAccessKey =
     lens _access_key (\s a -> s { _access_key = a })
 
-providerApiUrl :: Lens' Rancher (Maybe Text)
+providerApiUrl :: Lens' Rancher (Maybe P.Text)
 providerApiUrl =
     lens _api_url (\s a -> s { _api_url = a })
 
-providerSecretKey :: Lens' Rancher (Maybe Text)
+providerSecretKey :: Lens' Rancher (Maybe P.Text)
 providerSecretKey =
     lens _secret_key (\s a -> s { _secret_key = a })

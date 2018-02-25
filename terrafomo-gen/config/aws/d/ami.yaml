@@ -1,5 +1,3 @@
 arguments:
   _filter:
-    type:
-      name: '[P.Ec2Filter s]'
-      format: verbatim
+    type: '[P.Ec2Filter s]'

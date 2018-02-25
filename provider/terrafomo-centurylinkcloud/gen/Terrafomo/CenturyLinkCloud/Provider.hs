@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                        as P
 import qualified Terrafomo.CenturyLinkCloud.Types as P
 import qualified Terrafomo.IP                     as P
 
@@ -54,11 +54,11 @@ about the available resources. For additional documentation, see the
 <https://www.ctl.io/developers/>
 -}
 data CenturyLinkCloud = CenturyLinkCloud {
-      _clc_account  :: !(Maybe Text)
+      _clc_account  :: !(Maybe P.Text)
     {- ^ (Optional) Override CLC account alias. Also taken from the @CLC_ACCOUNT@ environment variable if provided. -}
-    , _clc_password :: !(Maybe Text)
+    , _clc_password :: !(Maybe P.Text)
     {- ^ (Required) This is the CLC account password. It must be provided, but it can also be sourced from the @CLC_PASSWORD@ environment variable. -}
-    , _clc_username :: !(Maybe Text)
+    , _clc_username :: !(Maybe P.Text)
     {- ^ (Required) This is the CLC account username. It must be provided, but it can also be sourced from the @CLC_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -85,14 +85,14 @@ emptyCenturyLinkCloud = CenturyLinkCloud {
       , _clc_username = Nothing
     }
 
-providerClcAccount :: Lens' CenturyLinkCloud (Maybe Text)
+providerClcAccount :: Lens' CenturyLinkCloud (Maybe P.Text)
 providerClcAccount =
     lens _clc_account (\s a -> s { _clc_account = a })
 
-providerClcPassword :: Lens' CenturyLinkCloud (Maybe Text)
+providerClcPassword :: Lens' CenturyLinkCloud (Maybe P.Text)
 providerClcPassword =
     lens _clc_password (\s a -> s { _clc_password = a })
 
-providerClcUsername :: Lens' CenturyLinkCloud (Maybe Text)
+providerClcUsername :: Lens' CenturyLinkCloud (Maybe P.Text)
 providerClcUsername =
     lens _clc_username (\s a -> s { _clc_username = a })

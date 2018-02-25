@@ -1,0 +1,3 @@
+arguments:
+  _policy:
+    type: 'P.IamPolicy'

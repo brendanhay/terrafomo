@@ -1,5 +1,3 @@
 arguments:
   _roles:
-    type:
-      name: 'Text'
-      format: repeated
+    type: '[TF.Attr s P.Text]'

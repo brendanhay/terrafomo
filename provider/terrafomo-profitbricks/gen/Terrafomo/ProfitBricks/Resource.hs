@@ -78,20 +78,21 @@ module Terrafomo.ProfitBricks.Resource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.ProfitBricks.Types as P
+
+import qualified Data.Text                       as P
 import qualified Data.Word                       as P
 import qualified GHC.Base                        as P
 import qualified Numeric.Natural                 as P
 import qualified Terrafomo.IP                    as P
 import qualified Terrafomo.ProfitBricks.Lens     as P
 import qualified Terrafomo.ProfitBricks.Provider as P
-import           Terrafomo.ProfitBricks.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -103,11 +104,11 @@ import qualified Terrafomo.Schema    as TF
 Manages a Virtual Data Center on ProfitBricks
 -}
 data DatacenterResource s = DatacenterResource {
-      _description :: !(TF.Attr s Text)
+      _description :: !(TF.Attr s P.Text)
     {- ^ (Optional)[string] Description for the data center. -}
-    , _location    :: !(TF.Attr s Text)
+    , _location    :: !(TF.Attr s P.Text)
     {- ^ (Required)[string] The physical location where the data center will be created. -}
-    , _name        :: !(TF.Attr s Text)
+    , _name        :: !(TF.Attr s P.Text)
     {- ^ (Required)[string] The name of the Virtual Data Center. -}
     } deriving (Show, Eq)
 
@@ -118,34 +119,34 @@ instance TF.ToHCL (DatacenterResource s) where
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasDescription (DatacenterResource s) (TF.Attr s Text) where
+instance P.HasDescription (DatacenterResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: DatacenterResource s -> TF.Attr s Text)
+        lens (_description :: DatacenterResource s -> TF.Attr s P.Text)
              (\s a -> s { _description = a } :: DatacenterResource s)
 
-instance P.HasLocation (DatacenterResource s) (TF.Attr s Text) where
+instance P.HasLocation (DatacenterResource s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: DatacenterResource s -> TF.Attr s Text)
+        lens (_location :: DatacenterResource s -> TF.Attr s P.Text)
              (\s a -> s { _location = a } :: DatacenterResource s)
 
-instance P.HasName (DatacenterResource s) (TF.Attr s Text) where
+instance P.HasName (DatacenterResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatacenterResource s -> TF.Attr s Text)
+        lens (_name :: DatacenterResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatacenterResource s)
 
-instance P.HasComputedDescription (DatacenterResource s) s (TF.Attr s Text) where
+instance P.HasComputedDescription (DatacenterResource s) s (TF.Attr s P.Text) where
     computedDescription =
-        (_description :: DatacenterResource s -> TF.Attr s Text)
+        (_description :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLocation (DatacenterResource s) s (TF.Attr s Text) where
+instance P.HasComputedLocation (DatacenterResource s) s (TF.Attr s P.Text) where
     computedLocation =
-        (_location :: DatacenterResource s -> TF.Attr s Text)
+        (_location :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatacenterResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (DatacenterResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: DatacenterResource s -> TF.Attr s Text)
+        (_name :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 datacenterResource :: TF.Schema TF.Resource P.ProfitBricks (DatacenterResource s)

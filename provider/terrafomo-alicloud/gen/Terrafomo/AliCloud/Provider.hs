@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                as P
 import qualified Terrafomo.AliCloud.Types as P
 import qualified Terrafomo.IP             as P
 
@@ -53,11 +53,11 @@ proper credentials before it can be used. Use the navigation to the left to
 read about the available resources.
 -}
 data AliCloud = AliCloud {
-      _access_key :: !(Maybe Text)
+      _access_key :: !(Maybe P.Text)
     {- ^ (Optional) This is the Alicloud access key. It must be provided, but it can also be sourced from the @ALICLOUD_ACCESS_KEY@ environment variable. -}
-    , _region     :: !(Maybe Text)
+    , _region     :: !(Maybe P.Text)
     {- ^ (Required) This is the Alicloud region. It must be provided, but it can also be sourced from the @ALICLOUD_REGION@ environment variables. -}
-    , _secret_key :: !(Maybe Text)
+    , _secret_key :: !(Maybe P.Text)
     {- ^ (Optional) This is the Alicloud secret key. It must be provided, but it can also be sourced from the @ALICLOUD_SECRET_KEY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -84,14 +84,14 @@ emptyAliCloud = AliCloud {
       , _secret_key = Nothing
     }
 
-providerAccessKey :: Lens' AliCloud (Maybe Text)
+providerAccessKey :: Lens' AliCloud (Maybe P.Text)
 providerAccessKey =
     lens _access_key (\s a -> s { _access_key = a })
 
-providerRegion :: Lens' AliCloud (Maybe Text)
+providerRegion :: Lens' AliCloud (Maybe P.Text)
 providerRegion =
     lens _region (\s a -> s { _region = a })
 
-providerSecretKey :: Lens' AliCloud (Maybe Text)
+providerSecretKey :: Lens' AliCloud (Maybe P.Text)
 providerSecretKey =
     lens _secret_key (\s a -> s { _secret_key = a })

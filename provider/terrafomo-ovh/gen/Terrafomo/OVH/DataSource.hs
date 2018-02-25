@@ -22,11 +22,11 @@
 module Terrafomo.OVH.DataSource
     (
     -- * Types
-      RegionData (..)
-    , regionData
+      RegionDataSource (..)
+    , regionDataSource
 
-    , RegionsData (..)
-    , regionsData
+    , RegionsDataSource (..)
+    , regionsDataSource
 
     -- * Overloaded Fields
     -- ** Arguments
@@ -47,20 +47,21 @@ module Terrafomo.OVH.DataSource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.OVH.Types as P
+
+import qualified Data.Text              as P
 import qualified Data.Word              as P
 import qualified GHC.Base               as P
 import qualified Numeric.Natural        as P
 import qualified Terrafomo.IP           as P
 import qualified Terrafomo.OVH.Lens     as P
 import qualified Terrafomo.OVH.Provider as P
-import           Terrafomo.OVH.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -72,58 +73,58 @@ import qualified Terrafomo.Schema    as TF
 Use this data source to retrieve information about a region associated with
 a public cloud project. The region must be associated with the project.
 -}
-data RegionData s = RegionData {
-      _project_id :: !(TF.Attr s Text)
+data RegionDataSource s = RegionDataSource {
+      _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _region     :: !(TF.Attr s Text)
+    , _region     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the region associated with the public cloud project. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegionData s) where
-    toHCL RegionData{..} = TF.inline $ catMaybes
+instance TF.ToHCL (RegionDataSource s) where
+    toHCL RegionDataSource{..} = TF.inline $ catMaybes
         [ TF.assign "project_id" <$> TF.attribute _project_id
         , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance P.HasProjectId (RegionData s) (TF.Attr s Text) where
+instance P.HasProjectId (RegionDataSource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: RegionData s -> TF.Attr s Text)
-             (\s a -> s { _project_id = a } :: RegionData s)
+        lens (_project_id :: RegionDataSource s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: RegionDataSource s)
 
-instance P.HasRegion (RegionData s) (TF.Attr s Text) where
+instance P.HasRegion (RegionDataSource s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: RegionData s -> TF.Attr s Text)
-             (\s a -> s { _region = a } :: RegionData s)
+        lens (_region :: RegionDataSource s -> TF.Attr s P.Text)
+             (\s a -> s { _region = a } :: RegionDataSource s)
 
-instance P.HasComputedContinentCode (RegionData s) s (TF.Attr s Text) where
+instance P.HasComputedContinentCode (RegionDataSource s) s (TF.Attr s P.Text) where
     computedContinentCode x = TF.compute (TF.refKey x) "continentCode"
 
-instance P.HasComputedContinentCode (RegionData s) s (TF.Attr s Text) where
+instance P.HasComputedContinentCode (RegionDataSource s) s (TF.Attr s P.Text) where
     computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
 
-instance P.HasComputedDatacenterLocation (RegionData s) s (TF.Attr s Text) where
+instance P.HasComputedDatacenterLocation (RegionDataSource s) s (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenterLocation"
 
-instance P.HasComputedDatacenterLocation (RegionData s) s (TF.Attr s Text) where
+instance P.HasComputedDatacenterLocation (RegionDataSource s) s (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance P.HasComputedProjectId (RegionData s) s (TF.Attr s Text) where
+instance P.HasComputedProjectId (RegionDataSource s) s (TF.Attr s P.Text) where
     computedProjectId =
-        (_project_id :: RegionData s -> TF.Attr s Text)
+        (_project_id :: RegionDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRegion (RegionData s) s (TF.Attr s Text) where
+instance P.HasComputedRegion (RegionDataSource s) s (TF.Attr s P.Text) where
     computedRegion =
-        (_region :: RegionData s -> TF.Attr s Text)
+        (_region :: RegionDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedServices (RegionData s) s (TF.Attr s Text) where
+instance P.HasComputedServices (RegionDataSource s) s (TF.Attr s P.Text) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
-regionData :: TF.Schema TF.DataSource P.OVH (RegionData s)
-regionData =
+regionDataSource :: TF.Schema TF.DataSource P.OVH (RegionDataSource s)
+regionDataSource =
     TF.newDataSource "publiccloud_region" $
-        RegionData {
+        RegionDataSource {
               _project_id = TF.Nil
             , _region = TF.Nil
             }
@@ -132,32 +133,32 @@ regionData =
 
 Use this data source to get the regions of a public cloud project.
 -}
-data RegionsData s = RegionsData {
-      _project_id :: !(TF.Attr s Text)
+data RegionsDataSource s = RegionsDataSource {
+      _project_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
     } deriving (Show, Eq)
 
-instance TF.ToHCL (RegionsData s) where
-    toHCL RegionsData{..} = TF.inline $ catMaybes
+instance TF.ToHCL (RegionsDataSource s) where
+    toHCL RegionsDataSource{..} = TF.inline $ catMaybes
         [ TF.assign "project_id" <$> TF.attribute _project_id
         ]
 
-instance P.HasProjectId (RegionsData s) (TF.Attr s Text) where
+instance P.HasProjectId (RegionsDataSource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: RegionsData s -> TF.Attr s Text)
-             (\s a -> s { _project_id = a } :: RegionsData s)
+        lens (_project_id :: RegionsDataSource s -> TF.Attr s P.Text)
+             (\s a -> s { _project_id = a } :: RegionsDataSource s)
 
-instance P.HasComputedNames (RegionsData s) s (TF.Attr s Text) where
+instance P.HasComputedNames (RegionsDataSource s) s (TF.Attr s P.Text) where
     computedNames x = TF.compute (TF.refKey x) "names"
 
-instance P.HasComputedProjectId (RegionsData s) s (TF.Attr s Text) where
+instance P.HasComputedProjectId (RegionsDataSource s) s (TF.Attr s P.Text) where
     computedProjectId =
-        (_project_id :: RegionsData s -> TF.Attr s Text)
+        (_project_id :: RegionsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-regionsData :: TF.Schema TF.DataSource P.OVH (RegionsData s)
-regionsData =
+regionsDataSource :: TF.Schema TF.DataSource P.OVH (RegionsDataSource s)
+regionsDataSource =
     TF.newDataSource "publiccloud_regions" $
-        RegionsData {
+        RegionsDataSource {
               _project_id = TF.Nil
             }

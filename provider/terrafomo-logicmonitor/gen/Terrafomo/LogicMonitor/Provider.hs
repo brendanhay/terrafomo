@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                    as P
 import qualified Terrafomo.IP                 as P
 import qualified Terrafomo.LogicMonitor.Types as P
 
@@ -53,11 +53,11 @@ credentials before it can be used. Use the navigation to the left to read
 about the available resources.
 -}
 data LogicMonitor = LogicMonitor {
-      _api_id  :: !(Maybe Text)
+      _api_id  :: !(Maybe P.Text)
     {- ^ (Required) LogicMonitor API id. This can also be set via the @LM_API_ID@ environment variable. -}
-    , _api_key :: !(Maybe Text)
+    , _api_key :: !(Maybe P.Text)
     {- ^ (Required) LogicMonitor API key. This can also be set via the @LM_API_KEY@ environment variable. -}
-    , _company :: !(Maybe Text)
+    , _company :: !(Maybe P.Text)
     {- ^ (Required) LogicMonitor company name. This can also be set via the @LM_COMPANY@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -84,14 +84,14 @@ emptyLogicMonitor = LogicMonitor {
       , _company = Nothing
     }
 
-providerApiId :: Lens' LogicMonitor (Maybe Text)
+providerApiId :: Lens' LogicMonitor (Maybe P.Text)
 providerApiId =
     lens _api_id (\s a -> s { _api_id = a })
 
-providerApiKey :: Lens' LogicMonitor (Maybe Text)
+providerApiKey :: Lens' LogicMonitor (Maybe P.Text)
 providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-providerCompany :: Lens' LogicMonitor (Maybe Text)
+providerCompany :: Lens' LogicMonitor (Maybe P.Text)
 providerCompany =
     lens _company (\s a -> s { _company = a })

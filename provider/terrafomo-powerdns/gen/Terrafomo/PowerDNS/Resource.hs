@@ -46,20 +46,21 @@ module Terrafomo.PowerDNS.Resource
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
-import Data.Text    (Text)
 
 import GHC.Base (Eq, ($), (.))
 import GHC.Show (Show)
 
 import Lens.Micro (lens)
 
+import Terrafomo.PowerDNS.Types as P
+
+import qualified Data.Text                   as P
 import qualified Data.Word                   as P
 import qualified GHC.Base                    as P
 import qualified Numeric.Natural             as P
 import qualified Terrafomo.IP                as P
 import qualified Terrafomo.PowerDNS.Lens     as P
 import qualified Terrafomo.PowerDNS.Provider as P
-import           Terrafomo.PowerDNS.Types    as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -71,15 +72,15 @@ import qualified Terrafomo.Schema    as TF
 Provides a PowerDNS record resource.
 -}
 data RecordResource s = RecordResource {
-      _name    :: !(TF.Attr s Text)
+      _name    :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the record. -}
-    , _records :: !(TF.Attr s Text)
+    , _records :: !(TF.Attr s P.Text)
     {- ^ (Required) A string list of records. -}
-    , _ttl     :: !(TF.Attr s Text)
+    , _ttl     :: !(TF.Attr s P.Text)
     {- ^ (Required) The TTL of the record. -}
-    , _type'   :: !(TF.Attr s Text)
+    , _type'   :: !(TF.Attr s P.Text)
     {- ^ (Required) The record type. -}
-    , _zone    :: !(TF.Attr s Text)
+    , _zone    :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of zone to contain this record. -}
     } deriving (Show, Eq)
 
@@ -92,54 +93,54 @@ instance TF.ToHCL (RecordResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasName (RecordResource s) (TF.Attr s Text) where
+instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RecordResource s -> TF.Attr s Text)
+        lens (_name :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: RecordResource s)
 
-instance P.HasRecords (RecordResource s) (TF.Attr s Text) where
+instance P.HasRecords (RecordResource s) (TF.Attr s P.Text) where
     records =
-        lens (_records :: RecordResource s -> TF.Attr s Text)
+        lens (_records :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _records = a } :: RecordResource s)
 
-instance P.HasTtl (RecordResource s) (TF.Attr s Text) where
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
     ttl =
-        lens (_ttl :: RecordResource s -> TF.Attr s Text)
+        lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _ttl = a } :: RecordResource s)
 
-instance P.HasType' (RecordResource s) (TF.Attr s Text) where
+instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attr s Text)
+        lens (_type' :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: RecordResource s)
 
-instance P.HasZone (RecordResource s) (TF.Attr s Text) where
+instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: RecordResource s -> TF.Attr s Text)
+        lens (_zone :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
-instance P.HasComputedName (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedName (RecordResource s) s (TF.Attr s P.Text) where
     computedName =
-        (_name :: RecordResource s -> TF.Attr s Text)
+        (_name :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRecords (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedRecords (RecordResource s) s (TF.Attr s P.Text) where
     computedRecords =
-        (_records :: RecordResource s -> TF.Attr s Text)
+        (_records :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTtl (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedTtl (RecordResource s) s (TF.Attr s P.Text) where
     computedTtl =
-        (_ttl :: RecordResource s -> TF.Attr s Text)
+        (_ttl :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedType' (RecordResource s) s (TF.Attr s P.Text) where
     computedType' =
-        (_type' :: RecordResource s -> TF.Attr s Text)
+        (_type' :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedZone (RecordResource s) s (TF.Attr s Text) where
+instance P.HasComputedZone (RecordResource s) s (TF.Attr s P.Text) where
     computedZone =
-        (_zone :: RecordResource s -> TF.Attr s Text)
+        (_zone :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
 recordResource :: TF.Schema TF.Resource P.PowerDNS (RecordResource s)

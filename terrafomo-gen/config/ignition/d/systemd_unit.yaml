@@ -1,0 +1,7 @@
+arguments:
+  _enabled:
+    type: 'P.Bool'
+  _content:
+    type: 'P.SystemdUnit'
+  _dropin:
+    type: '[P.SystemdUnitDropin s]'

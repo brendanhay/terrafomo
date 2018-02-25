@@ -30,12 +30,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                  as P
 import qualified Terrafomo.IP               as P
 import qualified Terrafomo.Logentries.Types as P
 
@@ -51,7 +51,7 @@ be configured with a Logentries account key before it can be used. Use the
 navigation to the left to read about the available resources.
 -}
 data Logentries = Logentries {
-      _account_key :: !(Maybe Text)
+      _account_key :: !(Maybe P.Text)
     {- ^ (Required) The Logentries account key. This can also be specified with the @LOGENTRIES_ACCOUNT_KEY@ environment variable. See the Logentries <https://logentries.com/doc/accountkey/> for more information. -}
     } deriving (Show, Eq, Generic)
 
@@ -74,6 +74,6 @@ emptyLogentries = Logentries {
         _account_key = Nothing
     }
 
-providerAccountKey :: Lens' Logentries (Maybe Text)
+providerAccountKey :: Lens' Logentries (Maybe P.Text)
 providerAccountKey =
     lens _account_key (\s a -> s { _account_key = a })

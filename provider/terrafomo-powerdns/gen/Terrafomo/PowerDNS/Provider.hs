@@ -31,12 +31,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                as P
 import qualified Terrafomo.IP             as P
 import qualified Terrafomo.PowerDNS.Types as P
 
@@ -55,9 +55,9 @@ to be configured differently. Use the navigation to the left to read about
 the available resources.
 -}
 data PowerDNS = PowerDNS {
-      _api_key    :: !(Maybe Text)
+      _api_key    :: !(Maybe P.Text)
     {- ^ (Required) The PowerDNS API key. This can also be specified with @PDNS_API_KEY@ environment variable. -}
-    , _server_url :: !(Maybe Text)
+    , _server_url :: !(Maybe P.Text)
     {- ^ (Required) The address of PowerDNS server. This can also be specified with @PDNS_SERVER_URL@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -82,10 +82,10 @@ emptyPowerDNS = PowerDNS {
       , _server_url = Nothing
     }
 
-providerApiKey :: Lens' PowerDNS (Maybe Text)
+providerApiKey :: Lens' PowerDNS (Maybe P.Text)
 providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })
 
-providerServerUrl :: Lens' PowerDNS (Maybe Text)
+providerServerUrl :: Lens' PowerDNS (Maybe P.Text)
 providerServerUrl =
     lens _server_url (\s a -> s { _server_url = a })

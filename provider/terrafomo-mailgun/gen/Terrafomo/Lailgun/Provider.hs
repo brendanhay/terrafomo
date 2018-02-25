@@ -30,12 +30,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text               as P
 import qualified Terrafomo.IP            as P
 import qualified Terrafomo.Lailgun.Types as P
 
@@ -51,7 +51,7 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Lailgun = Lailgun {
-      _api_key :: !(Maybe Text)
+      _api_key :: !(Maybe P.Text)
     {- ^ (Required) Mailgun API key -}
     } deriving (Show, Eq, Generic)
 
@@ -74,6 +74,6 @@ emptyLailgun = Lailgun {
         _api_key = Nothing
     }
 
-providerApiKey :: Lens' Lailgun (Maybe Text)
+providerApiKey :: Lens' Lailgun (Maybe P.Text)
 providerApiKey =
     lens _api_key (\s a -> s { _api_key = a })

@@ -33,12 +33,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text              as P
 import qualified Terrafomo.Docker.Types as P
 import qualified Terrafomo.IP           as P
 
@@ -56,13 +56,13 @@ Docker-compatible API hosts. Use the navigation to the left to read about
 the available resources.
 -}
 data Docker = Docker {
-      _ca_material   :: !(Maybe Text)
+      _ca_material   :: !(Maybe P.Text)
     {- ^ , @cert_material@ , @key_material@ , - (Optional) Content of @ca.pem@ , @cert.pem@ , and @key.pem@ files for TLS authentication. Cannot be used together with @cert_path@ . -}
-    , _cert_path     :: !(Maybe Text)
+    , _cert_path     :: !(Maybe P.Text)
     {- ^ (Optional) Path to a directory with certificate information for connecting to the Docker host via TLS. If this is blank, the @DOCKER_CERT_PATH@ will also be checked. -}
-    , _host          :: !(Maybe Text)
+    , _host          :: !(Maybe P.Text)
     {- ^ (Required) This is the address to the Docker host. If this is blank, the @DOCKER_HOST@ environment variable will also be read. -}
-    , _registry_auth :: !(Maybe Text)
+    , _registry_auth :: !(Maybe P.Text)
     {- ^ (Optional) A block specifying the credentials for a target v2 Docker registry. -}
     } deriving (Show, Eq, Generic)
 
@@ -91,18 +91,18 @@ emptyDocker = Docker {
       , _registry_auth = Nothing
     }
 
-providerCaMaterial :: Lens' Docker (Maybe Text)
+providerCaMaterial :: Lens' Docker (Maybe P.Text)
 providerCaMaterial =
     lens _ca_material (\s a -> s { _ca_material = a })
 
-providerCertPath :: Lens' Docker (Maybe Text)
+providerCertPath :: Lens' Docker (Maybe P.Text)
 providerCertPath =
     lens _cert_path (\s a -> s { _cert_path = a })
 
-providerHost :: Lens' Docker (Maybe Text)
+providerHost :: Lens' Docker (Maybe P.Text)
 providerHost =
     lens _host (\s a -> s { _host = a })
 
-providerRegistryAuth :: Lens' Docker (Maybe Text)
+providerRegistryAuth :: Lens' Docker (Maybe P.Text)
 providerRegistryAuth =
     lens _registry_auth (\s a -> s { _registry_auth = a })

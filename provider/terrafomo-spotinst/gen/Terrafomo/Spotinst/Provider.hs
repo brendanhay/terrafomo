@@ -34,12 +34,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                as P
 import qualified Terrafomo.IP             as P
 import qualified Terrafomo.Spotinst.Types as P
 
@@ -55,15 +55,15 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data Spotinst = Spotinst {
-      _client_id     :: !(Maybe Text)
+      _client_id     :: !(Maybe P.Text)
     {- ^ (Optional; Required if not using @token@ ) The OAuth client ID associated with the username. It can be sourced from the @SPOTINST_CLIENT_ID@ environment variable. -}
-    , _client_secret :: !(Maybe Text)
+    , _client_secret :: !(Maybe P.Text)
     {- ^ (Optional; Required if not using @token@ ) The OAuth client secret associated with the username. It can be sourced from the @SPOTINST_CLIENT_SECRET@ environment variable. -}
-    , _email         :: !(Maybe Text)
+    , _email         :: !(Maybe P.Text)
     {- ^ (Required) The email registered in Spotinst. It must be provided, but it can also be sourced from the @SPOTINST_EMAIL@ environment variable. -}
-    , _password      :: !(Maybe Text)
+    , _password      :: !(Maybe P.Text)
     {- ^ (Optional; Required if not using @token@ ) The password associated with the username. It can be sourced from the @SPOTINST_PASSWORD@ environment variable. -}
-    , _token         :: !(Maybe Text)
+    , _token         :: !(Maybe P.Text)
     {- ^ (Optional; Required if not using @password@ ) A Personal API Access Token issued by Spotinst. It can be sourced from the @SPOTINST_TOKEN@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -94,22 +94,22 @@ emptySpotinst = Spotinst {
       , _token = Nothing
     }
 
-providerClientId :: Lens' Spotinst (Maybe Text)
+providerClientId :: Lens' Spotinst (Maybe P.Text)
 providerClientId =
     lens _client_id (\s a -> s { _client_id = a })
 
-providerClientSecret :: Lens' Spotinst (Maybe Text)
+providerClientSecret :: Lens' Spotinst (Maybe P.Text)
 providerClientSecret =
     lens _client_secret (\s a -> s { _client_secret = a })
 
-providerEmail :: Lens' Spotinst (Maybe Text)
+providerEmail :: Lens' Spotinst (Maybe P.Text)
 providerEmail =
     lens _email (\s a -> s { _email = a })
 
-providerPassword :: Lens' Spotinst (Maybe Text)
+providerPassword :: Lens' Spotinst (Maybe P.Text)
 providerPassword =
     lens _password (\s a -> s { _password = a })
 
-providerToken :: Lens' Spotinst (Maybe Text)
+providerToken :: Lens' Spotinst (Maybe P.Text)
 providerToken =
     lens _token (\s a -> s { _token = a })

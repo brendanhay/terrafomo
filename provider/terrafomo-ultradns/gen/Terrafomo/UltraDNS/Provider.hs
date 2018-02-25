@@ -32,12 +32,12 @@ import Data.Hashable      (Hashable)
 import Data.List.NonEmpty (NonEmpty ((:|)))
 import Data.Maybe         (catMaybes)
 import Data.Proxy         (Proxy (Proxy))
-import Data.Text          (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro (Lens', lens)
 
+import qualified Data.Text                as P
 import qualified Terrafomo.IP             as P
 import qualified Terrafomo.UltraDNS.Types as P
 
@@ -53,11 +53,11 @@ before it can be used. Use the navigation to the left to read about the
 available resources.
 -}
 data UltraDNS = UltraDNS {
-      _baseurl  :: !(Maybe Text)
+      _baseurl  :: !(Maybe P.Text)
     {- ^ (Required) The base url for the UltraDNS REST API, but it can also be sourced from the @ULTRADNS_BASEURL@ environment variable. -}
-    , _password :: !(Maybe Text)
+    , _password :: !(Maybe P.Text)
     {- ^ (Required) The password associated with the username. It must be provided, but it can also be sourced from the @ULTRADNS_PASSWORD@ environment variable. -}
-    , _username :: !(Maybe Text)
+    , _username :: !(Maybe P.Text)
     {- ^ (Required) The UltraDNS username. It must be provided, but it can also be sourced from the @ULTRADNS_USERNAME@ environment variable. -}
     } deriving (Show, Eq, Generic)
 
@@ -84,14 +84,14 @@ emptyUltraDNS = UltraDNS {
       , _username = Nothing
     }
 
-providerBaseurl :: Lens' UltraDNS (Maybe Text)
+providerBaseurl :: Lens' UltraDNS (Maybe P.Text)
 providerBaseurl =
     lens _baseurl (\s a -> s { _baseurl = a })
 
-providerPassword :: Lens' UltraDNS (Maybe Text)
+providerPassword :: Lens' UltraDNS (Maybe P.Text)
 providerPassword =
     lens _password (\s a -> s { _password = a })
 
-providerUsername :: Lens' UltraDNS (Maybe Text)
+providerUsername :: Lens' UltraDNS (Maybe P.Text)
 providerUsername =
     lens _username (\s a -> s { _username = a })
