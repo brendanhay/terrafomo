@@ -106,28 +106,28 @@ instance HasVars a b => HasVars (TF.Schema l p a) b where
     vars = TF.configuration . vars
 
 class HasComputedAddress a b | a -> b where
-    computedAddress :: TF.Ref s a -> b
+    computedAddress :: a -> b
 
 class HasComputedArguments a b | a -> b where
-    computedArguments :: TF.Ref s a -> b
+    computedArguments :: a -> b
 
 class HasComputedCheckCommand a b | a -> b where
-    computedCheckCommand :: TF.Ref s a -> b
+    computedCheckCommand :: a -> b
 
 class HasComputedCommand a b | a -> b where
-    computedCommand :: TF.Ref s a -> b
+    computedCommand :: a -> b
 
 class HasComputedDisplayName a b | a -> b where
-    computedDisplayName :: TF.Ref s a -> b
+    computedDisplayName :: a -> b
 
 class HasComputedHostname a b | a -> b where
-    computedHostname :: TF.Ref s a -> b
+    computedHostname :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedTemplates a b | a -> b where
-    computedTemplates :: TF.Ref s a -> b
+    computedTemplates :: a -> b
 
 class HasComputedVars a b | a -> b where
-    computedVars :: TF.Ref s a -> b
+    computedVars :: a -> b

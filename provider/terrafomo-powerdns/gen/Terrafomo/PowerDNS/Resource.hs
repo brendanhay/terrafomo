@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -118,27 +120,27 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
         lens (_zone :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
-instance P.HasComputedName (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRecords (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedRecords =
         (_records :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedTtl =
         (_ttl :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedZone (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedZone =
         (_zone :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue

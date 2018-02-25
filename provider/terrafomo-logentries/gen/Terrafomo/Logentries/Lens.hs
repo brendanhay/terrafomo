@@ -91,25 +91,25 @@ instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
 class HasComputedFilename a b | a -> b where
-    computedFilename :: TF.Ref s a -> b
+    computedFilename :: a -> b
 
 class HasComputedLocation a b | a -> b where
-    computedLocation :: TF.Ref s a -> b
+    computedLocation :: a -> b
 
 class HasComputedLogsetId a b | a -> b where
-    computedLogsetId :: TF.Ref s a -> b
+    computedLogsetId :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedRetentionPeriod a b | a -> b where
-    computedRetentionPeriod :: TF.Ref s a -> b
+    computedRetentionPeriod :: a -> b
 
 class HasComputedSource a b | a -> b where
-    computedSource :: TF.Ref s a -> b
+    computedSource :: a -> b
 
 class HasComputedToken a b | a -> b where
-    computedToken :: TF.Ref s a -> b
+    computedToken :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b

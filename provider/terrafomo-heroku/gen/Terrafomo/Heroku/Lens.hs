@@ -202,85 +202,85 @@ instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
 
 class HasComputedAcm a b | a -> b where
-    computedAcm :: TF.Ref s a -> b
+    computedAcm :: a -> b
 
 class HasComputedAddonId a b | a -> b where
-    computedAddonId :: TF.Ref s a -> b
+    computedAddonId :: a -> b
 
 class HasComputedAllConfigVars a b | a -> b where
-    computedAllConfigVars :: TF.Ref s a -> b
+    computedAllConfigVars :: a -> b
 
 class HasComputedApp a b | a -> b where
-    computedApp :: TF.Ref s a -> b
+    computedApp :: a -> b
 
 class HasComputedAppId a b | a -> b where
-    computedAppId :: TF.Ref s a -> b
+    computedAppId :: a -> b
 
 class HasComputedBuildpacks a b | a -> b where
-    computedBuildpacks :: TF.Ref s a -> b
+    computedBuildpacks :: a -> b
 
 class HasComputedCertificateChain a b | a -> b where
-    computedCertificateChain :: TF.Ref s a -> b
+    computedCertificateChain :: a -> b
 
 class HasComputedCname a b | a -> b where
-    computedCname :: TF.Ref s a -> b
+    computedCname :: a -> b
 
 class HasComputedConfig a b | a -> b where
-    computedConfig :: TF.Ref s a -> b
+    computedConfig :: a -> b
 
 class HasComputedConfigVars a b | a -> b where
-    computedConfigVars :: TF.Ref s a -> b
+    computedConfigVars :: a -> b
 
 class HasComputedEnabled a b | a -> b where
-    computedEnabled :: TF.Ref s a -> b
+    computedEnabled :: a -> b
 
 class HasComputedGitUrl a b | a -> b where
-    computedGitUrl :: TF.Ref s a -> b
+    computedGitUrl :: a -> b
 
 class HasComputedHerokuHostname a b | a -> b where
-    computedHerokuHostname :: TF.Ref s a -> b
+    computedHerokuHostname :: a -> b
 
 class HasComputedHostname a b | a -> b where
-    computedHostname :: TF.Ref s a -> b
+    computedHostname :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedOrganization a b | a -> b where
-    computedOrganization :: TF.Ref s a -> b
+    computedOrganization :: a -> b
 
 class HasComputedPipeline a b | a -> b where
-    computedPipeline :: TF.Ref s a -> b
+    computedPipeline :: a -> b
 
 class HasComputedPlan a b | a -> b where
-    computedPlan :: TF.Ref s a -> b
+    computedPlan :: a -> b
 
 class HasComputedPrivateKey a b | a -> b where
-    computedPrivateKey :: TF.Ref s a -> b
+    computedPrivateKey :: a -> b
 
 class HasComputedProviderId a b | a -> b where
-    computedProviderId :: TF.Ref s a -> b
+    computedProviderId :: a -> b
 
 class HasComputedRegion a b | a -> b where
-    computedRegion :: TF.Ref s a -> b
+    computedRegion :: a -> b
 
 class HasComputedSpace a b | a -> b where
-    computedSpace :: TF.Ref s a -> b
+    computedSpace :: a -> b
 
 class HasComputedStack a b | a -> b where
-    computedStack :: TF.Ref s a -> b
+    computedStack :: a -> b
 
 class HasComputedStage a b | a -> b where
-    computedStage :: TF.Ref s a -> b
+    computedStage :: a -> b
 
 class HasComputedToken a b | a -> b where
-    computedToken :: TF.Ref s a -> b
+    computedToken :: a -> b
 
 class HasComputedUrl a b | a -> b where
-    computedUrl :: TF.Ref s a -> b
+    computedUrl :: a -> b
 
 class HasComputedWebUrl a b | a -> b where
-    computedWebUrl :: TF.Ref s a -> b
+    computedWebUrl :: a -> b

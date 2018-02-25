@@ -353,160 +353,160 @@ instance HasVlanId a b => HasVlanId (TF.Schema l p a) b where
     vlanId = TF.configuration . vlanId
 
 class HasComputedAdministratorPw a b | a -> b where
-    computedAdministratorPw :: TF.Ref s a -> b
+    computedAdministratorPw :: a -> b
 
 class HasComputedAffinity a b | a -> b where
-    computedAffinity :: TF.Ref s a -> b
+    computedAffinity :: a -> b
 
 class HasComputedCloudConfig a b | a -> b where
-    computedCloudConfig :: TF.Ref s a -> b
+    computedCloudConfig :: a -> b
 
 class HasComputedCns a b | a -> b where
-    computedCns :: TF.Ref s a -> b
+    computedCns :: a -> b
 
 class HasComputedCnsEnabled a b | a -> b where
-    computedCnsEnabled :: TF.Ref s a -> b
+    computedCnsEnabled :: a -> b
 
 class HasComputedComputeNode a b | a -> b where
-    computedComputeNode :: TF.Ref s a -> b
+    computedComputeNode :: a -> b
 
 class HasComputedCreated a b | a -> b where
-    computedCreated :: TF.Ref s a -> b
+    computedCreated :: a -> b
 
 class HasComputedDataset a b | a -> b where
-    computedDataset :: TF.Ref s a -> b
+    computedDataset :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDisk a b | a -> b where
-    computedDisk :: TF.Ref s a -> b
+    computedDisk :: a -> b
 
 class HasComputedEnabled a b | a -> b where
-    computedEnabled :: TF.Ref s a -> b
+    computedEnabled :: a -> b
 
 class HasComputedEndpoint a b | a -> b where
-    computedEndpoint :: TF.Ref s a -> b
+    computedEndpoint :: a -> b
 
 class HasComputedFabric a b | a -> b where
-    computedFabric :: TF.Ref s a -> b
+    computedFabric :: a -> b
 
 class HasComputedFirewallEnabled a b | a -> b where
-    computedFirewallEnabled :: TF.Ref s a -> b
+    computedFirewallEnabled :: a -> b
 
 class HasComputedGateway a b | a -> b where
-    computedGateway :: TF.Ref s a -> b
+    computedGateway :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedImage a b | a -> b where
-    computedImage :: TF.Ref s a -> b
+    computedImage :: a -> b
 
 class HasComputedInternetNat a b | a -> b where
-    computedInternetNat :: TF.Ref s a -> b
+    computedInternetNat :: a -> b
 
 class HasComputedIp a b | a -> b where
-    computedIp :: TF.Ref s a -> b
+    computedIp :: a -> b
 
 class HasComputedIps a b | a -> b where
-    computedIps :: TF.Ref s a -> b
+    computedIps :: a -> b
 
 class HasComputedKey a b | a -> b where
-    computedKey :: TF.Ref s a -> b
+    computedKey :: a -> b
 
 class HasComputedLocality a b | a -> b where
-    computedLocality :: TF.Ref s a -> b
+    computedLocality :: a -> b
 
 class HasComputedMac a b | a -> b where
-    computedMac :: TF.Ref s a -> b
+    computedMac :: a -> b
 
 class HasComputedMachineId a b | a -> b where
-    computedMachineId :: TF.Ref s a -> b
+    computedMachineId :: a -> b
 
 class HasComputedMemory a b | a -> b where
-    computedMemory :: TF.Ref s a -> b
+    computedMemory :: a -> b
 
 class HasComputedMetadata a b | a -> b where
-    computedMetadata :: TF.Ref s a -> b
+    computedMetadata :: a -> b
 
 class HasComputedMostRecent a b | a -> b where
-    computedMostRecent :: TF.Ref s a -> b
+    computedMostRecent :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNetmask a b | a -> b where
-    computedNetmask :: TF.Ref s a -> b
+    computedNetmask :: a -> b
 
 class HasComputedNetwork a b | a -> b where
-    computedNetwork :: TF.Ref s a -> b
+    computedNetwork :: a -> b
 
 class HasComputedNetworks a b | a -> b where
-    computedNetworks :: TF.Ref s a -> b
+    computedNetworks :: a -> b
 
 class HasComputedNic a b | a -> b where
-    computedNic :: TF.Ref s a -> b
+    computedNic :: a -> b
 
 class HasComputedOs a b | a -> b where
-    computedOs :: TF.Ref s a -> b
+    computedOs :: a -> b
 
 class HasComputedOwner a b | a -> b where
-    computedOwner :: TF.Ref s a -> b
+    computedOwner :: a -> b
 
 class HasComputedPackage a b | a -> b where
-    computedPackage :: TF.Ref s a -> b
+    computedPackage :: a -> b
 
 class HasComputedPrimary a b | a -> b where
-    computedPrimary :: TF.Ref s a -> b
+    computedPrimary :: a -> b
 
 class HasComputedPrimaryip a b | a -> b where
-    computedPrimaryip :: TF.Ref s a -> b
+    computedPrimaryip :: a -> b
 
 class HasComputedProvisionEndIp a b | a -> b where
-    computedProvisionEndIp :: TF.Ref s a -> b
+    computedProvisionEndIp :: a -> b
 
 class HasComputedProvisionStartIp a b | a -> b where
-    computedProvisionStartIp :: TF.Ref s a -> b
+    computedProvisionStartIp :: a -> b
 
 class HasComputedPublic a b | a -> b where
-    computedPublic :: TF.Ref s a -> b
+    computedPublic :: a -> b
 
 class HasComputedResolvers a b | a -> b where
-    computedResolvers :: TF.Ref s a -> b
+    computedResolvers :: a -> b
 
 class HasComputedRootAuthorizedKeys a b | a -> b where
-    computedRootAuthorizedKeys :: TF.Ref s a -> b
+    computedRootAuthorizedKeys :: a -> b
 
 class HasComputedRoutes a b | a -> b where
-    computedRoutes :: TF.Ref s a -> b
+    computedRoutes :: a -> b
 
 class HasComputedRule a b | a -> b where
-    computedRule :: TF.Ref s a -> b
+    computedRule :: a -> b
 
 class HasComputedState a b | a -> b where
-    computedState :: TF.Ref s a -> b
+    computedState :: a -> b
 
 class HasComputedSubnet a b | a -> b where
-    computedSubnet :: TF.Ref s a -> b
+    computedSubnet :: a -> b
 
 class HasComputedTags a b | a -> b where
-    computedTags :: TF.Ref s a -> b
+    computedTags :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedUpdated a b | a -> b where
-    computedUpdated :: TF.Ref s a -> b
+    computedUpdated :: a -> b
 
 class HasComputedUserData a b | a -> b where
-    computedUserData :: TF.Ref s a -> b
+    computedUserData :: a -> b
 
 class HasComputedUserScript a b | a -> b where
-    computedUserScript :: TF.Ref s a -> b
+    computedUserScript :: a -> b
 
 class HasComputedVersion a b | a -> b where
-    computedVersion :: TF.Ref s a -> b
+    computedVersion :: a -> b
 
 class HasComputedVlanId a b | a -> b where
-    computedVlanId :: TF.Ref s a -> b
+    computedVlanId :: a -> b

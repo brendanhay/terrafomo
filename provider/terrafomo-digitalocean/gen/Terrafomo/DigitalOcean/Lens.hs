@@ -346,181 +346,181 @@ instance HasWeight a b => HasWeight (TF.Schema l p a) b where
     weight = TF.configuration . weight
 
 class HasComputedAlgorithm a b | a -> b where
-    computedAlgorithm :: TF.Ref s a -> b
+    computedAlgorithm :: a -> b
 
 class HasComputedBackups a b | a -> b where
-    computedBackups :: TF.Ref s a -> b
+    computedBackups :: a -> b
 
 class HasComputedCertificateChain a b | a -> b where
-    computedCertificateChain :: TF.Ref s a -> b
+    computedCertificateChain :: a -> b
 
 class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt :: TF.Ref s a -> b
+    computedCreatedAt :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDisk a b | a -> b where
-    computedDisk :: TF.Ref s a -> b
+    computedDisk :: a -> b
 
 class HasComputedDomain a b | a -> b where
-    computedDomain :: TF.Ref s a -> b
+    computedDomain :: a -> b
 
 class HasComputedDropletId a b | a -> b where
-    computedDropletId :: TF.Ref s a -> b
+    computedDropletId :: a -> b
 
 class HasComputedDropletIds a b | a -> b where
-    computedDropletIds :: TF.Ref s a -> b
+    computedDropletIds :: a -> b
 
 class HasComputedDropletTag a b | a -> b where
-    computedDropletTag :: TF.Ref s a -> b
+    computedDropletTag :: a -> b
 
 class HasComputedFingerprint a b | a -> b where
-    computedFingerprint :: TF.Ref s a -> b
+    computedFingerprint :: a -> b
 
 class HasComputedForwardingRule a b | a -> b where
-    computedForwardingRule :: TF.Ref s a -> b
+    computedForwardingRule :: a -> b
 
 class HasComputedFqdn a b | a -> b where
-    computedFqdn :: TF.Ref s a -> b
+    computedFqdn :: a -> b
 
 class HasComputedHealthcheck a b | a -> b where
-    computedHealthcheck :: TF.Ref s a -> b
+    computedHealthcheck :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedImage a b | a -> b where
-    computedImage :: TF.Ref s a -> b
+    computedImage :: a -> b
 
 class HasComputedInboundRule a b | a -> b where
-    computedInboundRule :: TF.Ref s a -> b
+    computedInboundRule :: a -> b
 
 class HasComputedInboundRules a b | a -> b where
-    computedInboundRules :: TF.Ref s a -> b
+    computedInboundRules :: a -> b
 
 class HasComputedIp a b | a -> b where
-    computedIp :: TF.Ref s a -> b
+    computedIp :: a -> b
 
 class HasComputedIpAddress a b | a -> b where
-    computedIpAddress :: TF.Ref s a -> b
+    computedIpAddress :: a -> b
 
 class HasComputedIpv4Address a b | a -> b where
-    computedIpv4Address :: TF.Ref s a -> b
+    computedIpv4Address :: a -> b
 
 class HasComputedIpv4AddressPrivate a b | a -> b where
-    computedIpv4AddressPrivate :: TF.Ref s a -> b
+    computedIpv4AddressPrivate :: a -> b
 
 class HasComputedIpv6 a b | a -> b where
-    computedIpv6 :: TF.Ref s a -> b
+    computedIpv6 :: a -> b
 
 class HasComputedIpv6Address a b | a -> b where
-    computedIpv6Address :: TF.Ref s a -> b
+    computedIpv6Address :: a -> b
 
 class HasComputedIpv6AddressPrivate a b | a -> b where
-    computedIpv6AddressPrivate :: TF.Ref s a -> b
+    computedIpv6AddressPrivate :: a -> b
 
 class HasComputedLeafCertificate a b | a -> b where
-    computedLeafCertificate :: TF.Ref s a -> b
+    computedLeafCertificate :: a -> b
 
 class HasComputedLocked a b | a -> b where
-    computedLocked :: TF.Ref s a -> b
+    computedLocked :: a -> b
 
 class HasComputedMinDiskSize a b | a -> b where
-    computedMinDiskSize :: TF.Ref s a -> b
+    computedMinDiskSize :: a -> b
 
 class HasComputedMonitoring a b | a -> b where
-    computedMonitoring :: TF.Ref s a -> b
+    computedMonitoring :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNotAfter a b | a -> b where
-    computedNotAfter :: TF.Ref s a -> b
+    computedNotAfter :: a -> b
 
 class HasComputedOutboundRule a b | a -> b where
-    computedOutboundRule :: TF.Ref s a -> b
+    computedOutboundRule :: a -> b
 
 class HasComputedOutboundRules a b | a -> b where
-    computedOutboundRules :: TF.Ref s a -> b
+    computedOutboundRules :: a -> b
 
 class HasComputedPendingChanges a b | a -> b where
-    computedPendingChanges :: TF.Ref s a -> b
+    computedPendingChanges :: a -> b
 
 class HasComputedPort a b | a -> b where
-    computedPort :: TF.Ref s a -> b
+    computedPort :: a -> b
 
 class HasComputedPriceHourly a b | a -> b where
-    computedPriceHourly :: TF.Ref s a -> b
+    computedPriceHourly :: a -> b
 
 class HasComputedPriceMonthly a b | a -> b where
-    computedPriceMonthly :: TF.Ref s a -> b
+    computedPriceMonthly :: a -> b
 
 class HasComputedPriority a b | a -> b where
-    computedPriority :: TF.Ref s a -> b
+    computedPriority :: a -> b
 
 class HasComputedPrivate a b | a -> b where
-    computedPrivate :: TF.Ref s a -> b
+    computedPrivate :: a -> b
 
 class HasComputedPrivateKey a b | a -> b where
-    computedPrivateKey :: TF.Ref s a -> b
+    computedPrivateKey :: a -> b
 
 class HasComputedPrivateNetworking a b | a -> b where
-    computedPrivateNetworking :: TF.Ref s a -> b
+    computedPrivateNetworking :: a -> b
 
 class HasComputedPublicKey a b | a -> b where
-    computedPublicKey :: TF.Ref s a -> b
+    computedPublicKey :: a -> b
 
 class HasComputedRedirectHttpToHttps a b | a -> b where
-    computedRedirectHttpToHttps :: TF.Ref s a -> b
+    computedRedirectHttpToHttps :: a -> b
 
 class HasComputedRegion a b | a -> b where
-    computedRegion :: TF.Ref s a -> b
+    computedRegion :: a -> b
 
 class HasComputedRegions a b | a -> b where
-    computedRegions :: TF.Ref s a -> b
+    computedRegions :: a -> b
 
 class HasComputedResizeDisk a b | a -> b where
-    computedResizeDisk :: TF.Ref s a -> b
+    computedResizeDisk :: a -> b
 
 class HasComputedSha1Fingerprint a b | a -> b where
-    computedSha1Fingerprint :: TF.Ref s a -> b
+    computedSha1Fingerprint :: a -> b
 
 class HasComputedSize a b | a -> b where
-    computedSize :: TF.Ref s a -> b
+    computedSize :: a -> b
 
 class HasComputedSizeGigabytes a b | a -> b where
-    computedSizeGigabytes :: TF.Ref s a -> b
+    computedSizeGigabytes :: a -> b
 
 class HasComputedSshKeys a b | a -> b where
-    computedSshKeys :: TF.Ref s a -> b
+    computedSshKeys :: a -> b
 
 class HasComputedStatus a b | a -> b where
-    computedStatus :: TF.Ref s a -> b
+    computedStatus :: a -> b
 
 class HasComputedStickySessions a b | a -> b where
-    computedStickySessions :: TF.Ref s a -> b
+    computedStickySessions :: a -> b
 
 class HasComputedTags a b | a -> b where
-    computedTags :: TF.Ref s a -> b
+    computedTags :: a -> b
 
 class HasComputedTtl a b | a -> b where
-    computedTtl :: TF.Ref s a -> b
+    computedTtl :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedUserData a b | a -> b where
-    computedUserData :: TF.Ref s a -> b
+    computedUserData :: a -> b
 
 class HasComputedValue a b | a -> b where
-    computedValue :: TF.Ref s a -> b
+    computedValue :: a -> b
 
 class HasComputedVcpus a b | a -> b where
-    computedVcpus :: TF.Ref s a -> b
+    computedVcpus :: a -> b
 
 class HasComputedVolumeIds a b | a -> b where
-    computedVolumeIds :: TF.Ref s a -> b
+    computedVolumeIds :: a -> b
 
 class HasComputedWeight a b | a -> b where
-    computedWeight :: TF.Ref s a -> b
+    computedWeight :: a -> b

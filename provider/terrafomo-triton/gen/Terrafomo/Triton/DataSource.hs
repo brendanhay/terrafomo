@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -116,12 +118,12 @@ instance P.HasId (AccountDataSource s) (TF.Attr s P.Text) where
         lens (_id :: AccountDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _id = a } :: AccountDataSource s)
 
-instance P.HasComputedCnsEnabled (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCnsEnabled (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedCnsEnabled =
         (_cns_enabled :: AccountDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedId =
         (_id :: AccountDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -162,12 +164,12 @@ instance P.HasName (DatacenterDataSource s) (TF.Attr s P.Text) where
         lens (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatacenterDataSource s)
 
-instance P.HasComputedEndpoint (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
     computedEndpoint =
         (_endpoint :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -256,45 +258,45 @@ instance P.HasVersion (ImageDataSource s) (TF.Attr s P.Text) where
         lens (_version :: ImageDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: ImageDataSource s)
 
-instance P.HasComputedId (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMostRecent (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedMostRecent =
         (_most_recent :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOs (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOs (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedOs =
         (_os :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOwner (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedOwner =
         (_owner :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPublic (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedPublic =
         (_public :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedState (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedState (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedState =
         (_state :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVersion (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedVersion =
         (_version :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -333,10 +335,10 @@ instance P.HasName (NetworkDataSource s) (TF.Attr s P.Text) where
         lens (_name :: NetworkDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: NetworkDataSource s)
 
-instance P.HasComputedId (NetworkDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (NetworkDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: NetworkDataSource s -> TF.Attr s P.Text)
             . TF.refValue

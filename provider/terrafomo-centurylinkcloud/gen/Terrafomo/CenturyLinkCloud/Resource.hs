@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -203,32 +205,32 @@ instance P.HasParentGroupId (GroupResource s) (TF.Attr s P.Text) where
         lens (_parent_group_id :: GroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _parent_group_id = a } :: GroupResource s)
 
-instance P.HasComputedCustomFields (GroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCustomFields (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedCustomFields =
         (_custom_fields :: GroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (GroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: GroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLocationId (GroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedLocationId =
         (_location_id :: GroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (GroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: GroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedParent (GroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedParent (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedParent =
         (_parent :: GroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedParentGroupId (GroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedParentGroupId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedParentGroupId =
         (_parent_group_id :: GroupResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -306,32 +308,32 @@ instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
         lens (_port :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
              (\s a -> s { _port = a } :: LoadBalancerPoolResource s)
 
-instance P.HasComputedDataCenter (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDataCenter (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
     computedDataCenter =
         (_data_center :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLoadBalancer (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLoadBalancer (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
     computedLoadBalancer =
         (_load_balancer :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMethod (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMethod (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
     computedMethod =
         (_method :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNodes (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
     computedNodes =
         (_nodes :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPersistence (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPersistence (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
     computedPersistence =
         (_persistence :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPort (LoadBalancerPoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
     computedPort =
         (_port :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -401,27 +403,27 @@ instance P.HasStatus (LoadBalancerResource s) (TF.Attr s P.Text) where
         lens (_status :: LoadBalancerResource s -> TF.Attr s P.Text)
              (\s a -> s { _status = a } :: LoadBalancerResource s)
 
-instance P.HasComputedDataCenter (LoadBalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDataCenter (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
     computedDataCenter =
         (_data_center :: LoadBalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (LoadBalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: LoadBalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpAddress (LoadBalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
     computedIpAddress =
         (_ip_address :: LoadBalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (LoadBalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStatus (LoadBalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
     computedStatus =
         (_status :: LoadBalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -481,22 +483,22 @@ instance P.HasSourceRestrictions (PublicIpResource s) (TF.Attr s P.Text) where
         lens (_source_restrictions :: PublicIpResource s -> TF.Attr s P.Text)
              (\s a -> s { _source_restrictions = a } :: PublicIpResource s)
 
-instance P.HasComputedInternalIpAddress (PublicIpResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternalIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
     computedInternalIpAddress =
         (_internal_ip_address :: PublicIpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPorts (PublicIpResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPorts (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
     computedPorts =
         (_ports :: PublicIpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedServerId (PublicIpResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedServerId (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
     computedServerId =
         (_server_id :: PublicIpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceRestrictions (PublicIpResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceRestrictions (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
     computedSourceRestrictions =
         (_source_restrictions :: PublicIpResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -698,112 +700,112 @@ instance P.HasType' (ServerResource s) (TF.Attr s P.Text) where
         lens (_type' :: ServerResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: ServerResource s)
 
-instance P.HasComputedAaPolicyId (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAaPolicyId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedAaPolicyId =
         (_aa_policy_id :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAdditionalDisks (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAdditionalDisks (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedAdditionalDisks =
         (_additional_disks :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedConfigurationId (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfigurationId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedConfigurationId =
         (_configuration_id :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCpu (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCpu (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedCpu =
         (_cpu :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCreatedDat (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreatedDat (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedCreatedDat =
         (_created_dat :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCustomFields (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCustomFields (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedCustomFields =
         (_custom_fields :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGroupId (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedGroupId =
         (_group_id :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMemoryMb (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMemoryMb (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedMemoryMb =
         (_memory_mb :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMetadata (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedMetadata =
         (_metadata :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedModifiedDat (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedModifiedDat (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedModifiedDat =
         (_modified_dat :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNameTemplate (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNameTemplate (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedNameTemplate =
         (_name_template :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNetworkId (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedNetworkId =
         (_network_id :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOsType (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOsType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedOsType =
         (_os_type :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPowerState (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPowerState (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedPowerState =
         (_power_state :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrivateIpAddress (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivateIpAddress (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedPrivateIpAddress =
         (_private_ip_address :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPublicIpAddress (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicIpAddress (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedPublicIpAddress =
         (_public_ip_address :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceServerId (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceServerId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedSourceServerId =
         (_source_server_id :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStorageType (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStorageType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedStorageType =
         (_storage_type :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (ServerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue

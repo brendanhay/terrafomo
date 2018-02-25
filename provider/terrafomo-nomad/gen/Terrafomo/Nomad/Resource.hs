@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -121,17 +123,17 @@ instance P.HasRulesHcl (AclPolicyResource s) (TF.Attr s P.Text) where
         lens (_rules_hcl :: AclPolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
 
-instance P.HasComputedDescription (AclPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AclPolicyResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: AclPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (AclPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AclPolicyResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: AclPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRulesHcl (AclPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRulesHcl (TF.Ref s' (AclPolicyResource s)) (TF.Attr s P.Text) where
     computedRulesHcl =
         (_rules_hcl :: AclPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -190,22 +192,22 @@ instance P.HasType' (AclTokenResource s) (TF.Attr s P.Text) where
         lens (_type' :: AclTokenResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: AclTokenResource s)
 
-instance P.HasComputedGlobal (AclTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGlobal (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
     computedGlobal =
         (_global :: AclTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (AclTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: AclTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicies (AclTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
     computedPolicies =
         (_policies :: AclTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (AclTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: AclTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -261,17 +263,17 @@ instance P.HasJobspec (JobResource s) (TF.Attr s P.Text) where
         lens (_jobspec :: JobResource s -> TF.Attr s P.Text)
              (\s a -> s { _jobspec = a } :: JobResource s)
 
-instance P.HasComputedDeregisterOnDestroy (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDeregisterOnDestroy (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedDeregisterOnDestroy =
         (_deregister_on_destroy :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDeregisterOnIdChange (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDeregisterOnIdChange (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedDeregisterOnIdChange =
         (_deregister_on_id_change :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedJobspec (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedJobspec (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedJobspec =
         (_jobspec :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -320,17 +322,17 @@ instance P.HasName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
         lens (_name :: QuotaSpecificationResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: QuotaSpecificationResource s)
 
-instance P.HasComputedDescription (QuotaSpecificationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (QuotaSpecificationResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: QuotaSpecificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLimits (QuotaSpecificationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLimits (TF.Ref s' (QuotaSpecificationResource s)) (TF.Attr s P.Text) where
     computedLimits =
         (_limits :: QuotaSpecificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (QuotaSpecificationResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: QuotaSpecificationResource s -> TF.Attr s P.Text)
             . TF.refValue

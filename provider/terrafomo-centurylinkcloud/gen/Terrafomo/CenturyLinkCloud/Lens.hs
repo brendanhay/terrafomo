@@ -330,112 +330,112 @@ instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
 class HasComputedAaPolicyId a b | a -> b where
-    computedAaPolicyId :: TF.Ref s a -> b
+    computedAaPolicyId :: a -> b
 
 class HasComputedAdditionalDisks a b | a -> b where
-    computedAdditionalDisks :: TF.Ref s a -> b
+    computedAdditionalDisks :: a -> b
 
 class HasComputedConfigurationId a b | a -> b where
-    computedConfigurationId :: TF.Ref s a -> b
+    computedConfigurationId :: a -> b
 
 class HasComputedCpu a b | a -> b where
-    computedCpu :: TF.Ref s a -> b
+    computedCpu :: a -> b
 
 class HasComputedCreatedDat a b | a -> b where
-    computedCreatedDat :: TF.Ref s a -> b
+    computedCreatedDat :: a -> b
 
 class HasComputedCustomFields a b | a -> b where
-    computedCustomFields :: TF.Ref s a -> b
+    computedCustomFields :: a -> b
 
 class HasComputedDataCenter a b | a -> b where
-    computedDataCenter :: TF.Ref s a -> b
+    computedDataCenter :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedGroupId a b | a -> b where
-    computedGroupId :: TF.Ref s a -> b
+    computedGroupId :: a -> b
 
 class HasComputedInternalIpAddress a b | a -> b where
-    computedInternalIpAddress :: TF.Ref s a -> b
+    computedInternalIpAddress :: a -> b
 
 class HasComputedIpAddress a b | a -> b where
-    computedIpAddress :: TF.Ref s a -> b
+    computedIpAddress :: a -> b
 
 class HasComputedLoadBalancer a b | a -> b where
-    computedLoadBalancer :: TF.Ref s a -> b
+    computedLoadBalancer :: a -> b
 
 class HasComputedLocationId a b | a -> b where
-    computedLocationId :: TF.Ref s a -> b
+    computedLocationId :: a -> b
 
 class HasComputedMemoryMb a b | a -> b where
-    computedMemoryMb :: TF.Ref s a -> b
+    computedMemoryMb :: a -> b
 
 class HasComputedMetadata a b | a -> b where
-    computedMetadata :: TF.Ref s a -> b
+    computedMetadata :: a -> b
 
 class HasComputedMethod a b | a -> b where
-    computedMethod :: TF.Ref s a -> b
+    computedMethod :: a -> b
 
 class HasComputedModifiedDat a b | a -> b where
-    computedModifiedDat :: TF.Ref s a -> b
+    computedModifiedDat :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNameTemplate a b | a -> b where
-    computedNameTemplate :: TF.Ref s a -> b
+    computedNameTemplate :: a -> b
 
 class HasComputedNetworkId a b | a -> b where
-    computedNetworkId :: TF.Ref s a -> b
+    computedNetworkId :: a -> b
 
 class HasComputedNodes a b | a -> b where
-    computedNodes :: TF.Ref s a -> b
+    computedNodes :: a -> b
 
 class HasComputedOsType a b | a -> b where
-    computedOsType :: TF.Ref s a -> b
+    computedOsType :: a -> b
 
 class HasComputedParent a b | a -> b where
-    computedParent :: TF.Ref s a -> b
+    computedParent :: a -> b
 
 class HasComputedParentGroupId a b | a -> b where
-    computedParentGroupId :: TF.Ref s a -> b
+    computedParentGroupId :: a -> b
 
 class HasComputedPassword a b | a -> b where
-    computedPassword :: TF.Ref s a -> b
+    computedPassword :: a -> b
 
 class HasComputedPersistence a b | a -> b where
-    computedPersistence :: TF.Ref s a -> b
+    computedPersistence :: a -> b
 
 class HasComputedPort a b | a -> b where
-    computedPort :: TF.Ref s a -> b
+    computedPort :: a -> b
 
 class HasComputedPorts a b | a -> b where
-    computedPorts :: TF.Ref s a -> b
+    computedPorts :: a -> b
 
 class HasComputedPowerState a b | a -> b where
-    computedPowerState :: TF.Ref s a -> b
+    computedPowerState :: a -> b
 
 class HasComputedPrivateIpAddress a b | a -> b where
-    computedPrivateIpAddress :: TF.Ref s a -> b
+    computedPrivateIpAddress :: a -> b
 
 class HasComputedPublicIpAddress a b | a -> b where
-    computedPublicIpAddress :: TF.Ref s a -> b
+    computedPublicIpAddress :: a -> b
 
 class HasComputedServerId a b | a -> b where
-    computedServerId :: TF.Ref s a -> b
+    computedServerId :: a -> b
 
 class HasComputedSourceRestrictions a b | a -> b where
-    computedSourceRestrictions :: TF.Ref s a -> b
+    computedSourceRestrictions :: a -> b
 
 class HasComputedSourceServerId a b | a -> b where
-    computedSourceServerId :: TF.Ref s a -> b
+    computedSourceServerId :: a -> b
 
 class HasComputedStatus a b | a -> b where
-    computedStatus :: TF.Ref s a -> b
+    computedStatus :: a -> b
 
 class HasComputedStorageType a b | a -> b where
-    computedStorageType :: TF.Ref s a -> b
+    computedStorageType :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b

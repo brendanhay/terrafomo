@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -113,17 +115,17 @@ instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
         lens (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
-instance P.HasComputedDatabase (ContinuousQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatabase (TF.Ref s' (ContinuousQueryResource s)) (TF.Attr s P.Text) where
     computedDatabase =
         (_database :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ContinuousQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ContinuousQueryResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedQuery (TF.Ref s' (ContinuousQueryResource s)) (TF.Attr s P.Text) where
     computedQuery =
         (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -164,12 +166,12 @@ instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s P.Text) where
         lens (_retention_policies :: DatabaseResource s -> TF.Attr s P.Text)
              (\s a -> s { _retention_policies = a } :: DatabaseResource s)
 
-instance P.HasComputedName (DatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRetentionPolicies (DatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRetentionPolicies (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedRetentionPolicies =
         (_retention_policies :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -225,20 +227,20 @@ instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
         lens (_password :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasComputedAdmin (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAdmin (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedAdmin x = TF.compute (TF.refKey x) "admin"
 
-instance P.HasComputedGrant (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGrant (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedGrant =
         (_grant :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue

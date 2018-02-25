@@ -188,64 +188,64 @@ instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
 class HasComputedActive a b | a -> b where
-    computedActive :: TF.Ref s a -> b
+    computedActive :: a -> b
 
 class HasComputedAttributes a b | a -> b where
-    computedAttributes :: TF.Ref s a -> b
+    computedAttributes :: a -> b
 
 class HasComputedComposite a b | a -> b where
-    computedComposite :: TF.Ref s a -> b
+    computedComposite :: a -> b
 
 class HasComputedCondition a b | a -> b where
-    computedCondition :: TF.Ref s a -> b
+    computedCondition :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDisplayName a b | a -> b where
-    computedDisplayName :: TF.Ref s a -> b
+    computedDisplayName :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedLabel a b | a -> b where
-    computedLabel :: TF.Ref s a -> b
+    computedLabel :: a -> b
 
 class HasComputedMax a b | a -> b where
-    computedMax :: TF.Ref s a -> b
+    computedMax :: a -> b
 
 class HasComputedMin a b | a -> b where
-    computedMin :: TF.Ref s a -> b
+    computedMin :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedPeriod a b | a -> b where
-    computedPeriod :: TF.Ref s a -> b
+    computedPeriod :: a -> b
 
 class HasComputedRearmSeconds a b | a -> b where
-    computedRearmSeconds :: TF.Ref s a -> b
+    computedRearmSeconds :: a -> b
 
 class HasComputedRelatedSpace a b | a -> b where
-    computedRelatedSpace :: TF.Ref s a -> b
+    computedRelatedSpace :: a -> b
 
 class HasComputedServices a b | a -> b where
-    computedServices :: TF.Ref s a -> b
+    computedServices :: a -> b
 
 class HasComputedSettings a b | a -> b where
-    computedSettings :: TF.Ref s a -> b
+    computedSettings :: a -> b
 
 class HasComputedSourceLag a b | a -> b where
-    computedSourceLag :: TF.Ref s a -> b
+    computedSourceLag :: a -> b
 
 class HasComputedSpaceId a b | a -> b where
-    computedSpaceId :: TF.Ref s a -> b
+    computedSpaceId :: a -> b
 
 class HasComputedStream a b | a -> b where
-    computedStream :: TF.Ref s a -> b
+    computedStream :: a -> b
 
 class HasComputedTitle a b | a -> b where
-    computedTitle :: TF.Ref s a -> b
+    computedTitle :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b

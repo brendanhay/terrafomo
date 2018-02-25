@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -81,12 +83,12 @@ instance P.HasName (RegistryImageDataSource s) (TF.Attr s P.Text) where
         lens (_name :: RegistryImageDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: RegistryImageDataSource s)
 
-instance P.HasComputedName (RegistryImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RegistryImageDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: RegistryImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSha256Digest (RegistryImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSha256Digest (TF.Ref s' (RegistryImageDataSource s)) (TF.Attr s P.Text) where
     computedSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"
 
 registryImageDataSource :: TF.DataSource P.Docker (RegistryImageDataSource s)

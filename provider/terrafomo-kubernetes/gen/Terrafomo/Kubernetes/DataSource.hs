@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -83,7 +85,7 @@ instance P.HasMetadata (ServiceDataSource s) (TF.Attr s P.Text) where
         lens (_metadata :: ServiceDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _metadata = a } :: ServiceDataSource s)
 
-instance P.HasComputedMetadata (ServiceDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ServiceDataSource s)) (TF.Attr s P.Text) where
     computedMetadata =
         (_metadata :: ServiceDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -117,7 +119,7 @@ instance P.HasMetadata (StorageClassDataSource s) (TF.Attr s P.Text) where
         lens (_metadata :: StorageClassDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _metadata = a } :: StorageClassDataSource s)
 
-instance P.HasComputedMetadata (StorageClassDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (StorageClassDataSource s)) (TF.Attr s P.Text) where
     computedMetadata =
         (_metadata :: StorageClassDataSource s -> TF.Attr s P.Text)
             . TF.refValue

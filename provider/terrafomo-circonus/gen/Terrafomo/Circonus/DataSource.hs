@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -115,57 +117,57 @@ instance P.HasId (AccountDataSource s) (TF.Attr s P.Text) where
         lens (_id :: AccountDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _id = a } :: AccountDataSource s)
 
-instance P.HasComputedAddress1 (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress1 (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedAddress1 x = TF.compute (TF.refKey x) "address1"
 
-instance P.HasComputedAddress2 (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress2 (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedAddress2 x = TF.compute (TF.refKey x) "address2"
 
-instance P.HasComputedCcEmail (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCcEmail (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedCcEmail x = TF.compute (TF.refKey x) "cc_email"
 
-instance P.HasComputedCity (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCity (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedCity x = TF.compute (TF.refKey x) "city"
 
-instance P.HasComputedContactGroups (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContactGroups (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedContactGroups x = TF.compute (TF.refKey x) "contact_groups"
 
-instance P.HasComputedCountry (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCountry (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedCountry x = TF.compute (TF.refKey x) "country"
 
-instance P.HasComputedCurrent (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedCurrent =
         (_current :: AccountDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInvites (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInvites (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedInvites x = TF.compute (TF.refKey x) "invites"
 
-instance P.HasComputedName (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedOwner (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance P.HasComputedState (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedState (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance P.HasComputedTimezone (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTimezone (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedTimezone x = TF.compute (TF.refKey x) "timezone"
 
-instance P.HasComputedUiBaseUrl (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUiBaseUrl (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedUiBaseUrl x = TF.compute (TF.refKey x) "ui_base_url"
 
-instance P.HasComputedUsage (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsage (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedUsage x = TF.compute (TF.refKey x) "usage"
 
-instance P.HasComputedUsers (AccountDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (AccountDataSource s)) (TF.Attr s P.Text) where
     computedUsers x = TF.compute (TF.refKey x) "users"
 
 accountDataSource :: TF.DataSource P.Circonus (AccountDataSource s)
@@ -208,25 +210,25 @@ instance P.HasId (CollectorDataSource s) (TF.Attr s P.Text) where
         lens (_id :: CollectorDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _id = a } :: CollectorDataSource s)
 
-instance P.HasComputedDetails (CollectorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDetails (TF.Ref s' (CollectorDataSource s)) (TF.Attr s P.Text) where
     computedDetails x = TF.compute (TF.refKey x) "details"
 
-instance P.HasComputedId (CollectorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLatitude (CollectorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLatitude (TF.Ref s' (CollectorDataSource s)) (TF.Attr s P.Text) where
     computedLatitude x = TF.compute (TF.refKey x) "latitude"
 
-instance P.HasComputedLongitude (CollectorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLongitude (TF.Ref s' (CollectorDataSource s)) (TF.Attr s P.Text) where
     computedLongitude x = TF.compute (TF.refKey x) "longitude"
 
-instance P.HasComputedName (CollectorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CollectorDataSource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedTags (CollectorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CollectorDataSource s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance P.HasComputedType' (CollectorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (CollectorDataSource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
 collectorDataSource :: TF.DataSource P.Circonus (CollectorDataSource s)

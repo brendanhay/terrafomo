@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -119,15 +121,15 @@ instance P.HasName (DatacenterDataSource s) (TF.Attr s P.Text) where
         lens (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatacenterDataSource s)
 
-instance P.HasComputedId (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocation (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -184,25 +186,25 @@ instance P.HasVersion (ImageDataSource s) (TF.Attr s P.Text) where
         lens (_version :: ImageDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: ImageDataSource s)
 
-instance P.HasComputedId (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocation (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVersion (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedVersion =
         (_version :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -245,15 +247,15 @@ instance P.HasName (LocationDataSource s) (TF.Attr s P.Text) where
         lens (_name :: LocationDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: LocationDataSource s)
 
-instance P.HasComputedFeature (LocationDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFeature (TF.Ref s' (LocationDataSource s)) (TF.Attr s P.Text) where
     computedFeature =
         (_feature :: LocationDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (LocationDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LocationDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (LocationDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LocationDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: LocationDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -300,15 +302,15 @@ instance P.HasResourceType (ResourceDataSource s) (TF.Attr s P.Text) where
         lens (_resource_type :: ResourceDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _resource_type = a } :: ResourceDataSource s)
 
-instance P.HasComputedId (ResourceDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedResourceId (ResourceDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (ResourceDataSource s)) (TF.Attr s P.Text) where
     computedResourceId =
         (_resource_id :: ResourceDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedResourceType (ResourceDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceType (TF.Ref s' (ResourceDataSource s)) (TF.Attr s P.Text) where
     computedResourceType =
         (_resource_type :: ResourceDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -357,20 +359,20 @@ instance P.HasSize (SnapshotDataSource s) (TF.Attr s P.Text) where
         lens (_size :: SnapshotDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: SnapshotDataSource s)
 
-instance P.HasComputedId (SnapshotDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocation (SnapshotDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (SnapshotDataSource s)) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: SnapshotDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (SnapshotDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SnapshotDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: SnapshotDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (SnapshotDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (SnapshotDataSource s)) (TF.Attr s P.Text) where
     computedSize =
         (_size :: SnapshotDataSource s -> TF.Attr s P.Text)
             . TF.refValue

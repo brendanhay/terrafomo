@@ -458,202 +458,202 @@ instance HasVictorops a b => HasVictorops (TF.Schema l p a) b where
     victorops = TF.configuration . victorops
 
 class HasComputedActive a b | a -> b where
-    computedActive :: TF.Ref s a -> b
+    computedActive :: a -> b
 
 class HasComputedAddress1 a b | a -> b where
-    computedAddress1 :: TF.Ref s a -> b
+    computedAddress1 :: a -> b
 
 class HasComputedAddress2 a b | a -> b where
-    computedAddress2 :: TF.Ref s a -> b
+    computedAddress2 :: a -> b
 
 class HasComputedAggregationWindow a b | a -> b where
-    computedAggregationWindow :: TF.Ref s a -> b
+    computedAggregationWindow :: a -> b
 
 class HasComputedAlertOption a b | a -> b where
-    computedAlertOption :: TF.Ref s a -> b
+    computedAlertOption :: a -> b
 
 class HasComputedCaql a b | a -> b where
-    computedCaql :: TF.Ref s a -> b
+    computedCaql :: a -> b
 
 class HasComputedCcEmail a b | a -> b where
-    computedCcEmail :: TF.Ref s a -> b
+    computedCcEmail :: a -> b
 
 class HasComputedCheck a b | a -> b where
-    computedCheck :: TF.Ref s a -> b
+    computedCheck :: a -> b
 
 class HasComputedCity a b | a -> b where
-    computedCity :: TF.Ref s a -> b
+    computedCity :: a -> b
 
 class HasComputedCloudwatch a b | a -> b where
-    computedCloudwatch :: TF.Ref s a -> b
+    computedCloudwatch :: a -> b
 
 class HasComputedCollector a b | a -> b where
-    computedCollector :: TF.Ref s a -> b
+    computedCollector :: a -> b
 
 class HasComputedConsul a b | a -> b where
-    computedConsul :: TF.Ref s a -> b
+    computedConsul :: a -> b
 
 class HasComputedContactGroups a b | a -> b where
-    computedContactGroups :: TF.Ref s a -> b
+    computedContactGroups :: a -> b
 
 class HasComputedCountry a b | a -> b where
-    computedCountry :: TF.Ref s a -> b
+    computedCountry :: a -> b
 
 class HasComputedCurrent a b | a -> b where
-    computedCurrent :: TF.Ref s a -> b
+    computedCurrent :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDetails a b | a -> b where
-    computedDetails :: TF.Ref s a -> b
+    computedDetails :: a -> b
 
 class HasComputedEmail a b | a -> b where
-    computedEmail :: TF.Ref s a -> b
+    computedEmail :: a -> b
 
 class HasComputedGraphStyle a b | a -> b where
-    computedGraphStyle :: TF.Ref s a -> b
+    computedGraphStyle :: a -> b
 
 class HasComputedHttp a b | a -> b where
-    computedHttp :: TF.Ref s a -> b
+    computedHttp :: a -> b
 
 class HasComputedHttptrap a b | a -> b where
-    computedHttptrap :: TF.Ref s a -> b
+    computedHttptrap :: a -> b
 
 class HasComputedIcmpPing a b | a -> b where
-    computedIcmpPing :: TF.Ref s a -> b
+    computedIcmpPing :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedIf' a b | a -> b where
-    computedIf' :: TF.Ref s a -> b
+    computedIf' :: a -> b
 
 class HasComputedInvites a b | a -> b where
-    computedInvites :: TF.Ref s a -> b
+    computedInvites :: a -> b
 
 class HasComputedIrc a b | a -> b where
-    computedIrc :: TF.Ref s a -> b
+    computedIrc :: a -> b
 
 class HasComputedJson a b | a -> b where
-    computedJson :: TF.Ref s a -> b
+    computedJson :: a -> b
 
 class HasComputedLatitude a b | a -> b where
-    computedLatitude :: TF.Ref s a -> b
+    computedLatitude :: a -> b
 
 class HasComputedLeft a b | a -> b where
-    computedLeft :: TF.Ref s a -> b
+    computedLeft :: a -> b
 
 class HasComputedLineStyle a b | a -> b where
-    computedLineStyle :: TF.Ref s a -> b
+    computedLineStyle :: a -> b
 
 class HasComputedLink a b | a -> b where
-    computedLink :: TF.Ref s a -> b
+    computedLink :: a -> b
 
 class HasComputedLongMessage a b | a -> b where
-    computedLongMessage :: TF.Ref s a -> b
+    computedLongMessage :: a -> b
 
 class HasComputedLongSubject a b | a -> b where
-    computedLongSubject :: TF.Ref s a -> b
+    computedLongSubject :: a -> b
 
 class HasComputedLongSummary a b | a -> b where
-    computedLongSummary :: TF.Ref s a -> b
+    computedLongSummary :: a -> b
 
 class HasComputedLongitude a b | a -> b where
-    computedLongitude :: TF.Ref s a -> b
+    computedLongitude :: a -> b
 
 class HasComputedMetric a b | a -> b where
-    computedMetric :: TF.Ref s a -> b
+    computedMetric :: a -> b
 
 class HasComputedMetricCluster a b | a -> b where
-    computedMetricCluster :: TF.Ref s a -> b
+    computedMetricCluster :: a -> b
 
 class HasComputedMetricLimit a b | a -> b where
-    computedMetricLimit :: TF.Ref s a -> b
+    computedMetricLimit :: a -> b
 
 class HasComputedMetricName a b | a -> b where
-    computedMetricName :: TF.Ref s a -> b
+    computedMetricName :: a -> b
 
 class HasComputedMetricType a b | a -> b where
-    computedMetricType :: TF.Ref s a -> b
+    computedMetricType :: a -> b
 
 class HasComputedMysql a b | a -> b where
-    computedMysql :: TF.Ref s a -> b
+    computedMysql :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNotes a b | a -> b where
-    computedNotes :: TF.Ref s a -> b
+    computedNotes :: a -> b
 
 class HasComputedOwner a b | a -> b where
-    computedOwner :: TF.Ref s a -> b
+    computedOwner :: a -> b
 
 class HasComputedPagerDuty a b | a -> b where
-    computedPagerDuty :: TF.Ref s a -> b
+    computedPagerDuty :: a -> b
 
 class HasComputedParent a b | a -> b where
-    computedParent :: TF.Ref s a -> b
+    computedParent :: a -> b
 
 class HasComputedPeriod a b | a -> b where
-    computedPeriod :: TF.Ref s a -> b
+    computedPeriod :: a -> b
 
 class HasComputedPostgresql a b | a -> b where
-    computedPostgresql :: TF.Ref s a -> b
+    computedPostgresql :: a -> b
 
 class HasComputedQuery a b | a -> b where
-    computedQuery :: TF.Ref s a -> b
+    computedQuery :: a -> b
 
 class HasComputedRight a b | a -> b where
-    computedRight :: TF.Ref s a -> b
+    computedRight :: a -> b
 
 class HasComputedShortMessage a b | a -> b where
-    computedShortMessage :: TF.Ref s a -> b
+    computedShortMessage :: a -> b
 
 class HasComputedShortSummary a b | a -> b where
-    computedShortSummary :: TF.Ref s a -> b
+    computedShortSummary :: a -> b
 
 class HasComputedSlack a b | a -> b where
-    computedSlack :: TF.Ref s a -> b
+    computedSlack :: a -> b
 
 class HasComputedSms a b | a -> b where
-    computedSms :: TF.Ref s a -> b
+    computedSms :: a -> b
 
 class HasComputedState a b | a -> b where
-    computedState :: TF.Ref s a -> b
+    computedState :: a -> b
 
 class HasComputedStatsd a b | a -> b where
-    computedStatsd :: TF.Ref s a -> b
+    computedStatsd :: a -> b
 
 class HasComputedTags a b | a -> b where
-    computedTags :: TF.Ref s a -> b
+    computedTags :: a -> b
 
 class HasComputedTarget a b | a -> b where
-    computedTarget :: TF.Ref s a -> b
+    computedTarget :: a -> b
 
 class HasComputedTcp a b | a -> b where
-    computedTcp :: TF.Ref s a -> b
+    computedTcp :: a -> b
 
 class HasComputedTimeout a b | a -> b where
-    computedTimeout :: TF.Ref s a -> b
+    computedTimeout :: a -> b
 
 class HasComputedTimezone a b | a -> b where
-    computedTimezone :: TF.Ref s a -> b
+    computedTimezone :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedUiBaseUrl a b | a -> b where
-    computedUiBaseUrl :: TF.Ref s a -> b
+    computedUiBaseUrl :: a -> b
 
 class HasComputedUnit a b | a -> b where
-    computedUnit :: TF.Ref s a -> b
+    computedUnit :: a -> b
 
 class HasComputedUsage a b | a -> b where
-    computedUsage :: TF.Ref s a -> b
+    computedUsage :: a -> b
 
 class HasComputedUsers a b | a -> b where
-    computedUsers :: TF.Ref s a -> b
+    computedUsers :: a -> b
 
 class HasComputedVictorops a b | a -> b where
-    computedVictorops :: TF.Ref s a -> b
+    computedVictorops :: a -> b

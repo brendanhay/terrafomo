@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -211,67 +213,67 @@ instance P.HasName (CertificateResource s) (TF.Attr s P.Text) where
         lens (_name :: CertificateResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: CertificateResource s)
 
-instance P.HasComputedAlgorithm (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
 
-instance P.HasComputedCert (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCert (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedCert =
         (_cert :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCertChain (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCertChain (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedCertChain =
         (_cert_chain :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCertFingerprint (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCertFingerprint (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedCertFingerprint x = TF.compute (TF.refKey x) "cert_fingerprint"
 
-instance P.HasComputedCn (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCn (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedCn x = TF.compute (TF.refKey x) "cn"
 
-instance P.HasComputedDescription (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentId (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentId (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedEnvironmentId =
         (_environment_id :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedExpiresAt (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExpiresAt (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedExpiresAt x = TF.compute (TF.refKey x) "expires_at"
 
-instance P.HasComputedId (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIssuedAt (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIssuedAt (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedIssuedAt x = TF.compute (TF.refKey x) "issued_at"
 
-instance P.HasComputedIssuer (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIssuer (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedIssuer x = TF.compute (TF.refKey x) "issuer"
 
-instance P.HasComputedKey (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedKey =
         (_key :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedKeySize (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeySize (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedKeySize x = TF.compute (TF.refKey x) "key_size"
 
-instance P.HasComputedName (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSerialNumber (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSerialNumber (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedSerialNumber x = TF.compute (TF.refKey x) "serial_number"
 
-instance P.HasComputedSubjectAlternativeNames (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "subject_alternative_names"
 
-instance P.HasComputedVersion (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
 certificateResource :: TF.Resource P.Rancher (CertificateResource s)
@@ -338,30 +340,30 @@ instance P.HasProjectTemplateId (EnvironmentResource s) (TF.Attr s P.Text) where
         lens (_project_template_id :: EnvironmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _project_template_id = a } :: EnvironmentResource s)
 
-instance P.HasComputedDescription (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMember (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedMember =
         (_member :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOrchestration (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOrchestration (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedOrchestration =
         (_orchestration :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProjectTemplateId (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectTemplateId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedProjectTemplateId =
         (_project_template_id :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -437,32 +439,32 @@ instance P.HasName (HostResource s) (TF.Attr s P.Text) where
         lens (_name :: HostResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: HostResource s)
 
-instance P.HasComputedDescription (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentId (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentId (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedEnvironmentId =
         (_environment_id :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostname (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedHostname =
         (_hostname :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedId =
         (_id :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLabels (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedLabels =
         (_labels :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -531,44 +533,44 @@ instance P.HasName (RegistrationTokenResource s) (TF.Attr s P.Text) where
         lens (_name :: RegistrationTokenResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: RegistrationTokenResource s)
 
-instance P.HasComputedAgentIp (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAgentIp (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedAgentIp =
         (_agent_ip :: RegistrationTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCommand (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCommand (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedCommand x = TF.compute (TF.refKey x) "command"
 
-instance P.HasComputedDescription (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: RegistrationTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentId (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentId (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedEnvironmentId =
         (_environment_id :: RegistrationTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostLabels (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostLabels (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedHostLabels =
         (_host_labels :: RegistrationTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImage (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
 
-instance P.HasComputedName (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: RegistrationTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRegistrationUrl (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegistrationUrl (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedRegistrationUrl x = TF.compute (TF.refKey x) "registration_url"
 
-instance P.HasComputedToken (RegistrationTokenResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedToken x = TF.compute (TF.refKey x) "token"
 
 registrationTokenResource :: TF.Resource P.Rancher (RegistrationTokenResource s)
@@ -635,30 +637,30 @@ instance P.HasSecretValue (RegistryCredentialResource s) (TF.Attr s P.Text) wher
         lens (_secret_value :: RegistryCredentialResource s -> TF.Attr s P.Text)
              (\s a -> s { _secret_value = a } :: RegistryCredentialResource s)
 
-instance P.HasComputedDescription (RegistryCredentialResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: RegistryCredentialResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (RegistryCredentialResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RegistryCredentialResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: RegistryCredentialResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPublicValue (RegistryCredentialResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicValue (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
     computedPublicValue =
         (_public_value :: RegistryCredentialResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRegistryId (RegistryCredentialResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegistryId (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
     computedRegistryId =
         (_registry_id :: RegistryCredentialResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecretValue (RegistryCredentialResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecretValue (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
     computedSecretValue =
         (_secret_value :: RegistryCredentialResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -718,25 +720,25 @@ instance P.HasServerAddress (RegistryResource s) (TF.Attr s P.Text) where
         lens (_server_address :: RegistryResource s -> TF.Attr s P.Text)
              (\s a -> s { _server_address = a } :: RegistryResource s)
 
-instance P.HasComputedDescription (RegistryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: RegistryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentId (RegistryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentId (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
     computedEnvironmentId =
         (_environment_id :: RegistryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (RegistryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RegistryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: RegistryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedServerAddress (RegistryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedServerAddress (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
     computedServerAddress =
         (_server_address :: RegistryResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -795,22 +797,22 @@ instance P.HasValue (SecretsResource s) (TF.Attr s P.Text) where
         lens (_value :: SecretsResource s -> TF.Attr s P.Text)
              (\s a -> s { _value = a } :: SecretsResource s)
 
-instance P.HasComputedDescription (SecretsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecretsResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: SecretsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentId (SecretsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentId (TF.Ref s' (SecretsResource s)) (TF.Attr s P.Text) where
     computedEnvironmentId =
         (_environment_id :: SecretsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (SecretsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecretsResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: SecretsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedValue (SecretsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (SecretsResource s)) (TF.Attr s P.Text) where
     computedValue =
         (_value :: SecretsResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -917,61 +919,61 @@ instance P.HasStartOnCreate (StackResource s) (TF.Attr s P.Text) where
         lens (_start_on_create :: StackResource s -> TF.Attr s P.Text)
              (\s a -> s { _start_on_create = a } :: StackResource s)
 
-instance P.HasComputedCatalogId (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedCatalogId =
         (_catalog_id :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDockerCompose (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDockerCompose (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedDockerCompose =
         (_docker_compose :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironment (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironment (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedEnvironment =
         (_environment :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentId (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentId (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedEnvironmentId =
         (_environment_id :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFinishUpgrade (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFinishUpgrade (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedFinishUpgrade =
         (_finish_upgrade :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRancherCompose (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRancherCompose (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedRancherCompose =
         (_rancher_compose :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRenderedDockerCompose (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRenderedDockerCompose (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedRenderedDockerCompose x = TF.compute (TF.refKey x) "rendered_docker_compose"
 
-instance P.HasComputedRenderedRancherCompose (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRenderedRancherCompose (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedRenderedRancherCompose x = TF.compute (TF.refKey x) "rendered_rancher_compose"
 
-instance P.HasComputedScope (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScope (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedScope =
         (_scope :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStartOnCreate (StackResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStartOnCreate (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedStartOnCreate =
         (_start_on_create :: StackResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -1036,22 +1038,22 @@ instance P.HasName (VolumesResource s) (TF.Attr s P.Text) where
         lens (_name :: VolumesResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: VolumesResource s)
 
-instance P.HasComputedDescription (VolumesResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VolumesResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: VolumesResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDriver (VolumesResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDriver (TF.Ref s' (VolumesResource s)) (TF.Attr s P.Text) where
     computedDriver =
         (_driver :: VolumesResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentId (VolumesResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentId (TF.Ref s' (VolumesResource s)) (TF.Attr s P.Text) where
     computedEnvironmentId =
         (_environment_id :: VolumesResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (VolumesResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VolumesResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: VolumesResource s -> TF.Attr s P.Text)
             . TF.refValue

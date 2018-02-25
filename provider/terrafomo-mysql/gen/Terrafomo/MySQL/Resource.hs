@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -122,17 +124,17 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
         lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasComputedDefaultCharacterSet (DatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultCharacterSet (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedDefaultCharacterSet =
         (_default_character_set :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultCollation (DatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultCollation (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedDefaultCollation =
         (_default_collation :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -198,27 +200,27 @@ instance P.HasUser (GrantResource s) (TF.Attr s P.Text) where
         lens (_user :: GrantResource s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: GrantResource s)
 
-instance P.HasComputedDatabase (GrantResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatabase (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedDatabase =
         (_database :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGrant (GrantResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGrant (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedGrant =
         (_grant :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHost (GrantResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHost (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedHost =
         (_host :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrivileges (GrantResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivileges (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedPrivileges =
         (_privileges :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUser (GrantResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
     computedUser =
         (_user :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -280,22 +282,22 @@ instance P.HasUser (UserResource s) (TF.Attr s P.Text) where
         lens (_user :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: UserResource s)
 
-instance P.HasComputedHost (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHost (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedHost =
         (_host :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPlaintextPassword (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPlaintextPassword (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedPlaintextPassword =
         (_plaintext_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUser (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedUser =
         (_user :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue

@@ -775,397 +775,397 @@ instance HasWriteAcls a b => HasWriteAcls (TF.Schema l p a) b where
     writeAcls = TF.configuration . writeAcls
 
 class HasComputedAccount a b | a -> b where
-    computedAccount :: TF.Ref s a -> b
+    computedAccount :: a -> b
 
 class HasComputedAcl a b | a -> b where
-    computedAcl :: TF.Ref s a -> b
+    computedAcl :: a -> b
 
 class HasComputedAction a b | a -> b where
-    computedAction :: TF.Ref s a -> b
+    computedAction :: a -> b
 
 class HasComputedAdminDistance a b | a -> b where
-    computedAdminDistance :: TF.Ref s a -> b
+    computedAdminDistance :: a -> b
 
 class HasComputedAllowedOrigins a b | a -> b where
-    computedAllowedOrigins :: TF.Ref s a -> b
+    computedAllowedOrigins :: a -> b
 
 class HasComputedApplication a b | a -> b where
-    computedApplication :: TF.Ref s a -> b
+    computedApplication :: a -> b
 
 class HasComputedAppliedAcls a b | a -> b where
-    computedAppliedAcls :: TF.Ref s a -> b
+    computedAppliedAcls :: a -> b
 
 class HasComputedAttributes a b | a -> b where
-    computedAttributes :: TF.Ref s a -> b
+    computedAttributes :: a -> b
 
 class HasComputedAvailabilityDomain a b | a -> b where
-    computedAvailabilityDomain :: TF.Ref s a -> b
+    computedAvailabilityDomain :: a -> b
 
 class HasComputedBootOrder a b | a -> b where
-    computedBootOrder :: TF.Ref s a -> b
+    computedBootOrder :: a -> b
 
 class HasComputedBootable a b | a -> b where
-    computedBootable :: TF.Ref s a -> b
+    computedBootable :: a -> b
 
 class HasComputedCollocated a b | a -> b where
-    computedCollocated :: TF.Ref s a -> b
+    computedCollocated :: a -> b
 
 class HasComputedContainer a b | a -> b where
-    computedContainer :: TF.Ref s a -> b
+    computedContainer :: a -> b
 
 class HasComputedDefault' a b | a -> b where
-    computedDefault' :: TF.Ref s a -> b
+    computedDefault' :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDesiredState a b | a -> b where
-    computedDesiredState :: TF.Ref s a -> b
+    computedDesiredState :: a -> b
 
 class HasComputedDestinationList a b | a -> b where
-    computedDestinationList :: TF.Ref s a -> b
+    computedDestinationList :: a -> b
 
 class HasComputedDisabled a b | a -> b where
-    computedDisabled :: TF.Ref s a -> b
+    computedDisabled :: a -> b
 
 class HasComputedDns a b | a -> b where
-    computedDns :: TF.Ref s a -> b
+    computedDns :: a -> b
 
 class HasComputedDomain a b | a -> b where
-    computedDomain :: TF.Ref s a -> b
+    computedDomain :: a -> b
 
 class HasComputedDport a b | a -> b where
-    computedDport :: TF.Ref s a -> b
+    computedDport :: a -> b
 
 class HasComputedDstIpAddressPrefixes a b | a -> b where
-    computedDstIpAddressPrefixes :: TF.Ref s a -> b
+    computedDstIpAddressPrefixes :: a -> b
 
 class HasComputedDstPorts a b | a -> b where
-    computedDstPorts :: TF.Ref s a -> b
+    computedDstPorts :: a -> b
 
 class HasComputedDstVnicSet a b | a -> b where
-    computedDstVnicSet :: TF.Ref s a -> b
+    computedDstVnicSet :: a -> b
 
 class HasComputedEnabled a b | a -> b where
-    computedEnabled :: TF.Ref s a -> b
+    computedEnabled :: a -> b
 
 class HasComputedEntry a b | a -> b where
-    computedEntry :: TF.Ref s a -> b
+    computedEntry :: a -> b
 
 class HasComputedErrorReason a b | a -> b where
-    computedErrorReason :: TF.Ref s a -> b
+    computedErrorReason :: a -> b
 
 class HasComputedExposedHeaders a b | a -> b where
-    computedExposedHeaders :: TF.Ref s a -> b
+    computedExposedHeaders :: a -> b
 
 class HasComputedFile a b | a -> b where
-    computedFile :: TF.Ref s a -> b
+    computedFile :: a -> b
 
 class HasComputedFingerprint a b | a -> b where
-    computedFingerprint :: TF.Ref s a -> b
+    computedFingerprint :: a -> b
 
 class HasComputedFlowDirection a b | a -> b where
-    computedFlowDirection :: TF.Ref s a -> b
+    computedFlowDirection :: a -> b
 
 class HasComputedFqdn a b | a -> b where
-    computedFqdn :: TF.Ref s a -> b
+    computedFqdn :: a -> b
 
 class HasComputedHostname a b | a -> b where
-    computedHostname :: TF.Ref s a -> b
+    computedHostname :: a -> b
 
 class HasComputedHypervisor a b | a -> b where
-    computedHypervisor :: TF.Ref s a -> b
+    computedHypervisor :: a -> b
 
 class HasComputedIcmpcode a b | a -> b where
-    computedIcmpcode :: TF.Ref s a -> b
+    computedIcmpcode :: a -> b
 
 class HasComputedIcmptype a b | a -> b where
-    computedIcmptype :: TF.Ref s a -> b
+    computedIcmptype :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedImageFormat a b | a -> b where
-    computedImageFormat :: TF.Ref s a -> b
+    computedImageFormat :: a -> b
 
 class HasComputedImageList a b | a -> b where
-    computedImageList :: TF.Ref s a -> b
+    computedImageList :: a -> b
 
 class HasComputedImageListEntry a b | a -> b where
-    computedImageListEntry :: TF.Ref s a -> b
+    computedImageListEntry :: a -> b
 
 class HasComputedIndex a b | a -> b where
-    computedIndex :: TF.Ref s a -> b
+    computedIndex :: a -> b
 
 class HasComputedInstance' a b | a -> b where
-    computedInstance' :: TF.Ref s a -> b
+    computedInstance' :: a -> b
 
 class HasComputedInstanceAttributes a b | a -> b where
-    computedInstanceAttributes :: TF.Ref s a -> b
+    computedInstanceAttributes :: a -> b
 
 class HasComputedInstanceId a b | a -> b where
-    computedInstanceId :: TF.Ref s a -> b
+    computedInstanceId :: a -> b
 
 class HasComputedInstanceName a b | a -> b where
-    computedInstanceName :: TF.Ref s a -> b
+    computedInstanceName :: a -> b
 
 class HasComputedInterface a b | a -> b where
-    computedInterface :: TF.Ref s a -> b
+    computedInterface :: a -> b
 
 class HasComputedIpAddress a b | a -> b where
-    computedIpAddress :: TF.Ref s a -> b
+    computedIpAddress :: a -> b
 
 class HasComputedIpAddressPool a b | a -> b where
-    computedIpAddressPool :: TF.Ref s a -> b
+    computedIpAddressPool :: a -> b
 
 class HasComputedIpAddressPrefix a b | a -> b where
-    computedIpAddressPrefix :: TF.Ref s a -> b
+    computedIpAddressPrefix :: a -> b
 
 class HasComputedIpAddressReservation a b | a -> b where
-    computedIpAddressReservation :: TF.Ref s a -> b
+    computedIpAddressReservation :: a -> b
 
 class HasComputedIpEntries a b | a -> b where
-    computedIpEntries :: TF.Ref s a -> b
+    computedIpEntries :: a -> b
 
 class HasComputedIpNetwork a b | a -> b where
-    computedIpNetwork :: TF.Ref s a -> b
+    computedIpNetwork :: a -> b
 
 class HasComputedIpNetworkExchange a b | a -> b where
-    computedIpNetworkExchange :: TF.Ref s a -> b
+    computedIpNetworkExchange :: a -> b
 
 class HasComputedIpProtocol a b | a -> b where
-    computedIpProtocol :: TF.Ref s a -> b
+    computedIpProtocol :: a -> b
 
 class HasComputedIsDefaultGateway a b | a -> b where
-    computedIsDefaultGateway :: TF.Ref s a -> b
+    computedIsDefaultGateway :: a -> b
 
 class HasComputedKey a b | a -> b where
-    computedKey :: TF.Ref s a -> b
+    computedKey :: a -> b
 
 class HasComputedLabel a b | a -> b where
-    computedLabel :: TF.Ref s a -> b
+    computedLabel :: a -> b
 
 class HasComputedMacAddress a b | a -> b where
-    computedMacAddress :: TF.Ref s a -> b
+    computedMacAddress :: a -> b
 
 class HasComputedMachineImage a b | a -> b where
-    computedMachineImage :: TF.Ref s a -> b
+    computedMachineImage :: a -> b
 
 class HasComputedMachineImageName a b | a -> b where
-    computedMachineImageName :: TF.Ref s a -> b
+    computedMachineImageName :: a -> b
 
 class HasComputedMachineImages a b | a -> b where
-    computedMachineImages :: TF.Ref s a -> b
+    computedMachineImages :: a -> b
 
 class HasComputedManaged a b | a -> b where
-    computedManaged :: TF.Ref s a -> b
+    computedManaged :: a -> b
 
 class HasComputedMaxAge a b | a -> b where
-    computedMaxAge :: TF.Ref s a -> b
+    computedMaxAge :: a -> b
 
 class HasComputedMetadata a b | a -> b where
-    computedMetadata :: TF.Ref s a -> b
+    computedMetadata :: a -> b
 
 class HasComputedModel a b | a -> b where
-    computedModel :: TF.Ref s a -> b
+    computedModel :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNameServers a b | a -> b where
-    computedNameServers :: TF.Ref s a -> b
+    computedNameServers :: a -> b
 
 class HasComputedNat a b | a -> b where
-    computedNat :: TF.Ref s a -> b
+    computedNat :: a -> b
 
 class HasComputedNetworkingInfo a b | a -> b where
-    computedNetworkingInfo :: TF.Ref s a -> b
+    computedNetworkingInfo :: a -> b
 
 class HasComputedNextHopVnicSet a b | a -> b where
-    computedNextHopVnicSet :: TF.Ref s a -> b
+    computedNextHopVnicSet :: a -> b
 
 class HasComputedOutputCidrPolicy a b | a -> b where
-    computedOutputCidrPolicy :: TF.Ref s a -> b
+    computedOutputCidrPolicy :: a -> b
 
 class HasComputedParentPool a b | a -> b where
-    computedParentPool :: TF.Ref s a -> b
+    computedParentPool :: a -> b
 
 class HasComputedParentVolumeBootable a b | a -> b where
-    computedParentVolumeBootable :: TF.Ref s a -> b
+    computedParentVolumeBootable :: a -> b
 
 class HasComputedPermanent a b | a -> b where
-    computedPermanent :: TF.Ref s a -> b
+    computedPermanent :: a -> b
 
 class HasComputedPlacementRequirements a b | a -> b where
-    computedPlacementRequirements :: TF.Ref s a -> b
+    computedPlacementRequirements :: a -> b
 
 class HasComputedPlatform a b | a -> b where
-    computedPlatform :: TF.Ref s a -> b
+    computedPlatform :: a -> b
 
 class HasComputedPolicy a b | a -> b where
-    computedPolicy :: TF.Ref s a -> b
+    computedPolicy :: a -> b
 
 class HasComputedPrefixes a b | a -> b where
-    computedPrefixes :: TF.Ref s a -> b
+    computedPrefixes :: a -> b
 
 class HasComputedPrimaryKey a b | a -> b where
-    computedPrimaryKey :: TF.Ref s a -> b
+    computedPrimaryKey :: a -> b
 
 class HasComputedPriority a b | a -> b where
-    computedPriority :: TF.Ref s a -> b
+    computedPriority :: a -> b
 
 class HasComputedProperty a b | a -> b where
-    computedProperty :: TF.Ref s a -> b
+    computedProperty :: a -> b
 
 class HasComputedProtocol a b | a -> b where
-    computedProtocol :: TF.Ref s a -> b
+    computedProtocol :: a -> b
 
 class HasComputedPublicNaptEnabled a b | a -> b where
-    computedPublicNaptEnabled :: TF.Ref s a -> b
+    computedPublicNaptEnabled :: a -> b
 
 class HasComputedQuotaBytes a b | a -> b where
-    computedQuotaBytes :: TF.Ref s a -> b
+    computedQuotaBytes :: a -> b
 
 class HasComputedQuotaCount a b | a -> b where
-    computedQuotaCount :: TF.Ref s a -> b
+    computedQuotaCount :: a -> b
 
 class HasComputedQuotaReservation a b | a -> b where
-    computedQuotaReservation :: TF.Ref s a -> b
+    computedQuotaReservation :: a -> b
 
 class HasComputedReadAcls a b | a -> b where
-    computedReadAcls :: TF.Ref s a -> b
+    computedReadAcls :: a -> b
 
 class HasComputedReadonly a b | a -> b where
-    computedReadonly :: TF.Ref s a -> b
+    computedReadonly :: a -> b
 
 class HasComputedRelationships a b | a -> b where
-    computedRelationships :: TF.Ref s a -> b
+    computedRelationships :: a -> b
 
 class HasComputedResolvers a b | a -> b where
-    computedResolvers :: TF.Ref s a -> b
+    computedResolvers :: a -> b
 
 class HasComputedReverseDns a b | a -> b where
-    computedReverseDns :: TF.Ref s a -> b
+    computedReverseDns :: a -> b
 
 class HasComputedSearchDomains a b | a -> b where
-    computedSearchDomains :: TF.Ref s a -> b
+    computedSearchDomains :: a -> b
 
 class HasComputedSecLists a b | a -> b where
-    computedSecLists :: TF.Ref s a -> b
+    computedSecLists :: a -> b
 
 class HasComputedSeclist a b | a -> b where
-    computedSeclist :: TF.Ref s a -> b
+    computedSeclist :: a -> b
 
 class HasComputedSecondaryKey a b | a -> b where
-    computedSecondaryKey :: TF.Ref s a -> b
+    computedSecondaryKey :: a -> b
 
 class HasComputedSecurityProtocols a b | a -> b where
-    computedSecurityProtocols :: TF.Ref s a -> b
+    computedSecurityProtocols :: a -> b
 
 class HasComputedShape a b | a -> b where
-    computedShape :: TF.Ref s a -> b
+    computedShape :: a -> b
 
 class HasComputedSharedNetwork a b | a -> b where
-    computedSharedNetwork :: TF.Ref s a -> b
+    computedSharedNetwork :: a -> b
 
 class HasComputedSite a b | a -> b where
-    computedSite :: TF.Ref s a -> b
+    computedSite :: a -> b
 
 class HasComputedSize a b | a -> b where
-    computedSize :: TF.Ref s a -> b
+    computedSize :: a -> b
 
 class HasComputedSnapshot a b | a -> b where
-    computedSnapshot :: TF.Ref s a -> b
+    computedSnapshot :: a -> b
 
 class HasComputedSnapshotAccount a b | a -> b where
-    computedSnapshotAccount :: TF.Ref s a -> b
+    computedSnapshotAccount :: a -> b
 
 class HasComputedSnapshotId a b | a -> b where
-    computedSnapshotId :: TF.Ref s a -> b
+    computedSnapshotId :: a -> b
 
 class HasComputedSnapshotTimestamp a b | a -> b where
-    computedSnapshotTimestamp :: TF.Ref s a -> b
+    computedSnapshotTimestamp :: a -> b
 
 class HasComputedSourceList a b | a -> b where
-    computedSourceList :: TF.Ref s a -> b
+    computedSourceList :: a -> b
 
 class HasComputedSrcIpAddressPrefixes a b | a -> b where
-    computedSrcIpAddressPrefixes :: TF.Ref s a -> b
+    computedSrcIpAddressPrefixes :: a -> b
 
 class HasComputedSrcPorts a b | a -> b where
-    computedSrcPorts :: TF.Ref s a -> b
+    computedSrcPorts :: a -> b
 
 class HasComputedSrcVnicSet a b | a -> b where
-    computedSrcVnicSet :: TF.Ref s a -> b
+    computedSrcVnicSet :: a -> b
 
 class HasComputedSshKeys a b | a -> b where
-    computedSshKeys :: TF.Ref s a -> b
+    computedSshKeys :: a -> b
 
 class HasComputedStartTime a b | a -> b where
-    computedStartTime :: TF.Ref s a -> b
+    computedStartTime :: a -> b
 
 class HasComputedStartTimestamp a b | a -> b where
-    computedStartTimestamp :: TF.Ref s a -> b
+    computedStartTimestamp :: a -> b
 
 class HasComputedState a b | a -> b where
-    computedState :: TF.Ref s a -> b
+    computedState :: a -> b
 
 class HasComputedStatus a b | a -> b where
-    computedStatus :: TF.Ref s a -> b
+    computedStatus :: a -> b
 
 class HasComputedStatusDetail a b | a -> b where
-    computedStatusDetail :: TF.Ref s a -> b
+    computedStatusDetail :: a -> b
 
 class HasComputedStatusTimestamp a b | a -> b where
-    computedStatusTimestamp :: TF.Ref s a -> b
+    computedStatusTimestamp :: a -> b
 
 class HasComputedStorage a b | a -> b where
-    computedStorage :: TF.Ref s a -> b
+    computedStorage :: a -> b
 
 class HasComputedStoragePool a b | a -> b where
-    computedStoragePool :: TF.Ref s a -> b
+    computedStoragePool :: a -> b
 
 class HasComputedStorageType a b | a -> b where
-    computedStorageType :: TF.Ref s a -> b
+    computedStorageType :: a -> b
 
 class HasComputedStorageVolume a b | a -> b where
-    computedStorageVolume :: TF.Ref s a -> b
+    computedStorageVolume :: a -> b
 
 class HasComputedTags a b | a -> b where
-    computedTags :: TF.Ref s a -> b
+    computedTags :: a -> b
 
 class HasComputedTransitFlag a b | a -> b where
-    computedTransitFlag :: TF.Ref s a -> b
+    computedTransitFlag :: a -> b
 
 class HasComputedUri a b | a -> b where
-    computedUri :: TF.Ref s a -> b
+    computedUri :: a -> b
 
 class HasComputedVcable a b | a -> b where
-    computedVcable :: TF.Ref s a -> b
+    computedVcable :: a -> b
 
 class HasComputedVcableId a b | a -> b where
-    computedVcableId :: TF.Ref s a -> b
+    computedVcableId :: a -> b
 
 class HasComputedVersion a b | a -> b where
-    computedVersion :: TF.Ref s a -> b
+    computedVersion :: a -> b
 
 class HasComputedVirtio a b | a -> b where
-    computedVirtio :: TF.Ref s a -> b
+    computedVirtio :: a -> b
 
 class HasComputedVirtualNics a b | a -> b where
-    computedVirtualNics :: TF.Ref s a -> b
+    computedVirtualNics :: a -> b
 
 class HasComputedVncAddress a b | a -> b where
-    computedVncAddress :: TF.Ref s a -> b
+    computedVncAddress :: a -> b
 
 class HasComputedVnic a b | a -> b where
-    computedVnic :: TF.Ref s a -> b
+    computedVnic :: a -> b
 
 class HasComputedVnicSets a b | a -> b where
-    computedVnicSets :: TF.Ref s a -> b
+    computedVnicSets :: a -> b
 
 class HasComputedVolumeName a b | a -> b where
-    computedVolumeName :: TF.Ref s a -> b
+    computedVolumeName :: a -> b
 
 class HasComputedWriteAcls a b | a -> b where
-    computedWriteAcls :: TF.Ref s a -> b
+    computedWriteAcls :: a -> b

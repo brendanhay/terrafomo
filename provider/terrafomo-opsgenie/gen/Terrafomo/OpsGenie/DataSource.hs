@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -81,13 +83,13 @@ instance P.HasUsername (UserDataSource s) (TF.Attr s P.Text) where
         lens (_username :: UserDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: UserDataSource s)
 
-instance P.HasComputedFullName (UserDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
     computedFullName x = TF.compute (TF.refKey x) "full_name"
 
-instance P.HasComputedRole (UserDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
     computedRole x = TF.compute (TF.refKey x) "role"
 
-instance P.HasComputedUsername (UserDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue

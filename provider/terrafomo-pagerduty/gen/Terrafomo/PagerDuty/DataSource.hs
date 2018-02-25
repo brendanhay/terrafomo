@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -92,7 +94,7 @@ instance P.HasName (EscalationPolicyDataSource s) (TF.Attr s P.Text) where
         lens (_name :: EscalationPolicyDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: EscalationPolicyDataSource s)
 
-instance P.HasComputedName (EscalationPolicyDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EscalationPolicyDataSource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 escalationPolicyDataSource :: TF.DataSource P.PagerDuty (EscalationPolicyDataSource s)
@@ -123,7 +125,7 @@ instance P.HasName (ScheduleDataSource s) (TF.Attr s P.Text) where
         lens (_name :: ScheduleDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ScheduleDataSource s)
 
-instance P.HasComputedName (ScheduleDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ScheduleDataSource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 scheduleDataSource :: TF.DataSource P.PagerDuty (ScheduleDataSource s)
@@ -154,12 +156,12 @@ instance P.HasEmail (UserDataSource s) (TF.Attr s P.Text) where
         lens (_email :: UserDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _email = a } :: UserDataSource s)
 
-instance P.HasComputedEmail (UserDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
     computedEmail =
         (_email :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (UserDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (UserDataSource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 userDataSource :: TF.DataSource P.PagerDuty (UserDataSource s)
@@ -191,10 +193,10 @@ instance P.HasName (VendorDataSource s) (TF.Attr s P.Text) where
         lens (_name :: VendorDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: VendorDataSource s)
 
-instance P.HasComputedName (VendorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VendorDataSource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedType' (VendorDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (VendorDataSource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
 vendorDataSource :: TF.DataSource P.PagerDuty (VendorDataSource s)

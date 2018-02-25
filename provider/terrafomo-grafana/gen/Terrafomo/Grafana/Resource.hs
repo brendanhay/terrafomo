@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -139,25 +141,25 @@ instance P.HasType' (AlertNotificationResource s) (TF.Attr s P.Text) where
         lens (_type' :: AlertNotificationResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: AlertNotificationResource s)
 
-instance P.HasComputedId (AlertNotificationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIsDefault (AlertNotificationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
     computedIsDefault =
         (_is_default :: AlertNotificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (AlertNotificationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: AlertNotificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSettings (AlertNotificationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
     computedSettings =
         (_settings :: AlertNotificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (AlertNotificationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: AlertNotificationResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -191,12 +193,12 @@ instance P.HasConfigJson (DashboardResource s) (TF.Attr s P.Text) where
         lens (_config_json :: DashboardResource s -> TF.Attr s P.Text)
              (\s a -> s { _config_json = a } :: DashboardResource s)
 
-instance P.HasComputedConfigJson (DashboardResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfigJson (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
     computedConfigJson =
         (_config_json :: DashboardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSlug (DashboardResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSlug (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
     computedSlug x = TF.compute (TF.refKey x) "slug"
 
 dashboardResource :: TF.Resource P.Grafana (DashboardResource s)
@@ -322,70 +324,70 @@ instance P.HasUsername (DataSourceResource s) (TF.Attr s P.Text) where
         lens (_username :: DataSourceResource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: DataSourceResource s)
 
-instance P.HasComputedAccessMode (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessMode (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedAccessMode =
         (_access_mode :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedBasicAuthEnabled (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBasicAuthEnabled (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedBasicAuthEnabled =
         (_basic_auth_enabled :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedBasicAuthPassword (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBasicAuthPassword (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedBasicAuthPassword =
         (_basic_auth_password :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedBasicAuthUsername (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBasicAuthUsername (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedBasicAuthUsername =
         (_basic_auth_username :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDatabaseName (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatabaseName (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedDatabaseName =
         (_database_name :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIsDefault (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedIsDefault =
         (_is_default :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedJsonData (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedJsonData (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedJsonData =
         (_json_data :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecureJsonData (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecureJsonData (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedSecureJsonData =
         (_secure_json_data :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUrl (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedUrl =
         (_url :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUsername (DataSourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: DataSourceResource s -> TF.Attr s P.Text)
             . TF.refValue

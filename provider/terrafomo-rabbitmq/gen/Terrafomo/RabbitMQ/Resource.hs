@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -162,35 +164,35 @@ instance P.HasVhost (BindingResource s) (TF.Attr s P.Text) where
         lens (_vhost :: BindingResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: BindingResource s)
 
-instance P.HasComputedArguments (BindingResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedArguments (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
     computedArguments =
         (_arguments :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDestination (BindingResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDestination (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
     computedDestination =
         (_destination :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDestinationType (BindingResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDestinationType (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
     computedDestinationType =
         (_destination_type :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPropertiesKey (BindingResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPropertiesKey (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
     computedPropertiesKey x = TF.compute (TF.refKey x) "properties_key"
 
-instance P.HasComputedRoutingKey (BindingResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoutingKey (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
     computedRoutingKey =
         (_routing_key :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSource (BindingResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
     computedSource =
         (_source :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (BindingResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
     computedVhost =
         (_vhost :: BindingResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -242,17 +244,17 @@ instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
         lens (_vhost :: ExchangeResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: ExchangeResource s)
 
-instance P.HasComputedName (ExchangeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ExchangeResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSettings (ExchangeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ExchangeResource s)) (TF.Attr s P.Text) where
     computedSettings =
         (_settings :: ExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (ExchangeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (ExchangeResource s)) (TF.Attr s P.Text) where
     computedVhost =
         (_vhost :: ExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -302,17 +304,17 @@ instance P.HasVhost (PermissionsResource s) (TF.Attr s P.Text) where
         lens (_vhost :: PermissionsResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: PermissionsResource s)
 
-instance P.HasComputedPermissions (PermissionsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (PermissionsResource s)) (TF.Attr s P.Text) where
     computedPermissions =
         (_permissions :: PermissionsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUser (PermissionsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (PermissionsResource s)) (TF.Attr s P.Text) where
     computedUser =
         (_user :: PermissionsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (PermissionsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (PermissionsResource s)) (TF.Attr s P.Text) where
     computedVhost =
         (_vhost :: PermissionsResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -362,17 +364,17 @@ instance P.HasVhost (PolicyResource s) (TF.Attr s P.Text) where
         lens (_vhost :: PolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: PolicyResource s)
 
-instance P.HasComputedName (PolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (PolicyResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: PolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicy (PolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (PolicyResource s)) (TF.Attr s P.Text) where
     computedPolicy =
         (_policy :: PolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (PolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (PolicyResource s)) (TF.Attr s P.Text) where
     computedVhost =
         (_vhost :: PolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -421,17 +423,17 @@ instance P.HasVhost (QueueResource s) (TF.Attr s P.Text) where
         lens (_vhost :: QueueResource s -> TF.Attr s P.Text)
              (\s a -> s { _vhost = a } :: QueueResource s)
 
-instance P.HasComputedName (QueueResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (QueueResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: QueueResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSettings (QueueResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (QueueResource s)) (TF.Attr s P.Text) where
     computedSettings =
         (_settings :: QueueResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVhost (QueueResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVhost (TF.Ref s' (QueueResource s)) (TF.Attr s P.Text) where
     computedVhost =
         (_vhost :: QueueResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -482,17 +484,17 @@ instance P.HasTags (UserResource s) (TF.Attr s P.Text) where
         lens (_tags :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: UserResource s)
 
-instance P.HasComputedName (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -525,7 +527,7 @@ instance P.HasName (VhostResource s) (TF.Attr s P.Text) where
         lens (_name :: VhostResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: VhostResource s)
 
-instance P.HasComputedName (VhostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VhostResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: VhostResource s -> TF.Attr s P.Text)
             . TF.refValue

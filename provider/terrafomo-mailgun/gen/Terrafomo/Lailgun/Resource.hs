@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -112,25 +114,25 @@ instance P.HasWildcard (DomainResource s) (TF.Attr s P.Text) where
         lens (_wildcard :: DomainResource s -> TF.Attr s P.Text)
              (\s a -> s { _wildcard = a } :: DomainResource s)
 
-instance P.HasComputedName (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedReceivingRecords (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
 
-instance P.HasComputedSendingRecords (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSendingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedSendingRecords x = TF.compute (TF.refKey x) "sending_records"
 
-instance P.HasComputedSmtpLogin (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSmtpLogin (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
 
-instance P.HasComputedSmtpPassword (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSmtpPassword (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedSmtpPassword x = TF.compute (TF.refKey x) "smtp_password"
 
-instance P.HasComputedSpamAction (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpamAction (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedSpamAction x = TF.compute (TF.refKey x) "spam_action"
 
-instance P.HasComputedWildcard (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWildcard (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedWildcard x = TF.compute (TF.refKey x) "wildcard"
 
 domainResource :: TF.Resource P.Lailgun (DomainResource s)

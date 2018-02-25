@@ -196,67 +196,67 @@ instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
 class HasComputedActOnProbes a b | a -> b where
-    computedActOnProbes :: TF.Ref s a -> b
+    computedActOnProbes :: a -> b
 
 class HasComputedAgents a b | a -> b where
-    computedAgents :: TF.Ref s a -> b
+    computedAgents :: a -> b
 
 class HasComputedBackupRecordFailoverDelay a b | a -> b where
-    computedBackupRecordFailoverDelay :: TF.Ref s a -> b
+    computedBackupRecordFailoverDelay :: a -> b
 
 class HasComputedBackupRecordRdata a b | a -> b where
-    computedBackupRecordRdata :: TF.Ref s a -> b
+    computedBackupRecordRdata :: a -> b
 
 class HasComputedConflictResolve a b | a -> b where
-    computedConflictResolve :: TF.Ref s a -> b
+    computedConflictResolve :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedHostname a b | a -> b where
-    computedHostname :: TF.Ref s a -> b
+    computedHostname :: a -> b
 
 class HasComputedHttpProbe a b | a -> b where
-    computedHttpProbe :: TF.Ref s a -> b
+    computedHttpProbe :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedInterval a b | a -> b where
-    computedInterval :: TF.Ref s a -> b
+    computedInterval :: a -> b
 
 class HasComputedMaxToLb a b | a -> b where
-    computedMaxToLb :: TF.Ref s a -> b
+    computedMaxToLb :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNoResponse a b | a -> b where
-    computedNoResponse :: TF.Ref s a -> b
+    computedNoResponse :: a -> b
 
 class HasComputedOrder a b | a -> b where
-    computedOrder :: TF.Ref s a -> b
+    computedOrder :: a -> b
 
 class HasComputedPingProbe a b | a -> b where
-    computedPingProbe :: TF.Ref s a -> b
+    computedPingProbe :: a -> b
 
 class HasComputedPoolRecord a b | a -> b where
-    computedPoolRecord :: TF.Ref s a -> b
+    computedPoolRecord :: a -> b
 
 class HasComputedRdata a b | a -> b where
-    computedRdata :: TF.Ref s a -> b
+    computedRdata :: a -> b
 
 class HasComputedRunProbes a b | a -> b where
-    computedRunProbes :: TF.Ref s a -> b
+    computedRunProbes :: a -> b
 
 class HasComputedThreshold a b | a -> b where
-    computedThreshold :: TF.Ref s a -> b
+    computedThreshold :: a -> b
 
 class HasComputedTtl a b | a -> b where
-    computedTtl :: TF.Ref s a -> b
+    computedTtl :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedZone a b | a -> b where
-    computedZone :: TF.Ref s a -> b
+    computedZone :: a -> b

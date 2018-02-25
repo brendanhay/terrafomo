@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -169,55 +171,55 @@ instance P.HasWebsiteUrl (TestResource s) (TF.Attr s P.Text) where
         lens (_website_url :: TestResource s -> TF.Attr s P.Text)
              (\s a -> s { _website_url = a } :: TestResource s)
 
-instance P.HasComputedCheckRate (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCheckRate (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedCheckRate =
         (_check_rate :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedConfirmations (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfirmations (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedConfirmations =
         (_confirmations :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedContactId (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContactId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedContactId =
         (_contact_id :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPaused (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPaused (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedPaused =
         (_paused :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPort (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedPort =
         (_port :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTestId (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTestId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedTestId x = TF.compute (TF.refKey x) "test_id"
 
-instance P.HasComputedTestType (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTestType (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedTestType =
         (_test_type :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTimeout (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedTimeout =
         (_timeout :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTriggerRate (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTriggerRate (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedTriggerRate =
         (_trigger_rate :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedWebsiteName (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWebsiteName (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedWebsiteName =
         (_website_name :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedWebsiteUrl (TestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWebsiteUrl (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
     computedWebsiteUrl =
         (_website_url :: TestResource s -> TF.Attr s P.Text)
             . TF.refValue

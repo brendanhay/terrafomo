@@ -107,31 +107,31 @@ instance HasWaitUntilBound a b => HasWaitUntilBound (TF.Schema l p a) b where
     waitUntilBound = TF.configuration . waitUntilBound
 
 class HasComputedData' a b | a -> b where
-    computedData' :: TF.Ref s a -> b
+    computedData' :: a -> b
 
 class HasComputedDefaultSecretName a b | a -> b where
-    computedDefaultSecretName :: TF.Ref s a -> b
+    computedDefaultSecretName :: a -> b
 
 class HasComputedImagePullSecret a b | a -> b where
-    computedImagePullSecret :: TF.Ref s a -> b
+    computedImagePullSecret :: a -> b
 
 class HasComputedMetadata a b | a -> b where
-    computedMetadata :: TF.Ref s a -> b
+    computedMetadata :: a -> b
 
 class HasComputedParameters a b | a -> b where
-    computedParameters :: TF.Ref s a -> b
+    computedParameters :: a -> b
 
 class HasComputedSecret a b | a -> b where
-    computedSecret :: TF.Ref s a -> b
+    computedSecret :: a -> b
 
 class HasComputedSpec a b | a -> b where
-    computedSpec :: TF.Ref s a -> b
+    computedSpec :: a -> b
 
 class HasComputedStorageProvisioner a b | a -> b where
-    computedStorageProvisioner :: TF.Ref s a -> b
+    computedStorageProvisioner :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedWaitUntilBound a b | a -> b where
-    computedWaitUntilBound :: TF.Ref s a -> b
+    computedWaitUntilBound :: a -> b

@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -111,22 +113,22 @@ instance P.HasSize (CollectorsDataSource s) (TF.Attr s P.Text) where
         lens (_size :: CollectorsDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: CollectorsDataSource s)
 
-instance P.HasComputedFilters (CollectorsDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (CollectorsDataSource s)) (TF.Attr s P.Text) where
     computedFilters =
         (_filters :: CollectorsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMostRecent (CollectorsDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (CollectorsDataSource s)) (TF.Attr s P.Text) where
     computedMostRecent =
         (_most_recent :: CollectorsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOffset (CollectorsDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOffset (TF.Ref s' (CollectorsDataSource s)) (TF.Attr s P.Text) where
     computedOffset =
         (_offset :: CollectorsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (CollectorsDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (CollectorsDataSource s)) (TF.Attr s P.Text) where
     computedSize =
         (_size :: CollectorsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -176,17 +178,17 @@ instance P.HasSize (DeviceGroupDataSource s) (TF.Attr s P.Text) where
         lens (_size :: DeviceGroupDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: DeviceGroupDataSource s)
 
-instance P.HasComputedFilters (DeviceGroupDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (DeviceGroupDataSource s)) (TF.Attr s P.Text) where
     computedFilters =
         (_filters :: DeviceGroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOffset (DeviceGroupDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOffset (TF.Ref s' (DeviceGroupDataSource s)) (TF.Attr s P.Text) where
     computedOffset =
         (_offset :: DeviceGroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (DeviceGroupDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DeviceGroupDataSource s)) (TF.Attr s P.Text) where
     computedSize =
         (_size :: DeviceGroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue

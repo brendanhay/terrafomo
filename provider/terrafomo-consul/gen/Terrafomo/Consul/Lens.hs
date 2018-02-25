@@ -215,82 +215,82 @@ instance HasToken a b => HasToken (TF.Schema l p a) b where
     token = TF.configuration . token
 
 class HasComputedAddress a b | a -> b where
-    computedAddress :: TF.Ref s a -> b
+    computedAddress :: a -> b
 
 class HasComputedDatacenter a b | a -> b where
-    computedDatacenter :: TF.Ref s a -> b
+    computedDatacenter :: a -> b
 
 class HasComputedDns a b | a -> b where
-    computedDns :: TF.Ref s a -> b
+    computedDns :: a -> b
 
 class HasComputedFailover a b | a -> b where
-    computedFailover :: TF.Ref s a -> b
+    computedFailover :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedKey a b | a -> b where
-    computedKey :: TF.Ref s a -> b
+    computedKey :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNear a b | a -> b where
-    computedNear :: TF.Ref s a -> b
+    computedNear :: a -> b
 
 class HasComputedNode a b | a -> b where
-    computedNode :: TF.Ref s a -> b
+    computedNode :: a -> b
 
 class HasComputedNodeIds a b | a -> b where
-    computedNodeIds :: TF.Ref s a -> b
+    computedNodeIds :: a -> b
 
 class HasComputedNodeNames a b | a -> b where
-    computedNodeNames :: TF.Ref s a -> b
+    computedNodeNames :: a -> b
 
 class HasComputedNodes a b | a -> b where
-    computedNodes :: TF.Ref s a -> b
+    computedNodes :: a -> b
 
 class HasComputedOnlyPassing a b | a -> b where
-    computedOnlyPassing :: TF.Ref s a -> b
+    computedOnlyPassing :: a -> b
 
 class HasComputedPathPrefix a b | a -> b where
-    computedPathPrefix :: TF.Ref s a -> b
+    computedPathPrefix :: a -> b
 
 class HasComputedPort a b | a -> b where
-    computedPort :: TF.Ref s a -> b
+    computedPort :: a -> b
 
 class HasComputedQueryOptions a b | a -> b where
-    computedQueryOptions :: TF.Ref s a -> b
+    computedQueryOptions :: a -> b
 
 class HasComputedService a b | a -> b where
-    computedService :: TF.Ref s a -> b
+    computedService :: a -> b
 
 class HasComputedServiceId a b | a -> b where
-    computedServiceId :: TF.Ref s a -> b
+    computedServiceId :: a -> b
 
 class HasComputedSession a b | a -> b where
-    computedSession :: TF.Ref s a -> b
+    computedSession :: a -> b
 
 class HasComputedStoredToken a b | a -> b where
-    computedStoredToken :: TF.Ref s a -> b
+    computedStoredToken :: a -> b
 
 class HasComputedSubkey a b | a -> b where
-    computedSubkey :: TF.Ref s a -> b
+    computedSubkey :: a -> b
 
 class HasComputedSubkeys a b | a -> b where
-    computedSubkeys :: TF.Ref s a -> b
+    computedSubkeys :: a -> b
 
 class HasComputedTag a b | a -> b where
-    computedTag :: TF.Ref s a -> b
+    computedTag :: a -> b
 
 class HasComputedTags a b | a -> b where
-    computedTags :: TF.Ref s a -> b
+    computedTags :: a -> b
 
 class HasComputedTemplate a b | a -> b where
-    computedTemplate :: TF.Ref s a -> b
+    computedTemplate :: a -> b
 
 class HasComputedToken a b | a -> b where
-    computedToken :: TF.Ref s a -> b
+    computedToken :: a -> b
 
 class HasComputedVar<name> a b | a -> b where
-    computedVar<name> :: TF.Ref s a -> b
+    computedVar<name> :: a -> b

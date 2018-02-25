@@ -538,190 +538,190 @@ instance HasVirtType a b => HasVirtType (TF.Schema l p a) b where
     virtType = TF.configuration . virtType
 
 class HasComputedAptComponents a b | a -> b where
-    computedAptComponents :: TF.Ref s a -> b
+    computedAptComponents :: a -> b
 
 class HasComputedAptDists a b | a -> b where
-    computedAptDists :: TF.Ref s a -> b
+    computedAptDists :: a -> b
 
 class HasComputedArch a b | a -> b where
-    computedArch :: TF.Ref s a -> b
+    computedArch :: a -> b
 
 class HasComputedBody a b | a -> b where
-    computedBody :: TF.Ref s a -> b
+    computedBody :: a -> b
 
 class HasComputedBootFiles a b | a -> b where
-    computedBootFiles :: TF.Ref s a -> b
+    computedBootFiles :: a -> b
 
 class HasComputedBreed a b | a -> b where
-    computedBreed :: TF.Ref s a -> b
+    computedBreed :: a -> b
 
 class HasComputedComment a b | a -> b where
-    computedComment :: TF.Ref s a -> b
+    computedComment :: a -> b
 
 class HasComputedCreaterepoFlags a b | a -> b where
-    computedCreaterepoFlags :: TF.Ref s a -> b
+    computedCreaterepoFlags :: a -> b
 
 class HasComputedDistro a b | a -> b where
-    computedDistro :: TF.Ref s a -> b
+    computedDistro :: a -> b
 
 class HasComputedEnableGpxe a b | a -> b where
-    computedEnableGpxe :: TF.Ref s a -> b
+    computedEnableGpxe :: a -> b
 
 class HasComputedEnableMenu a b | a -> b where
-    computedEnableMenu :: TF.Ref s a -> b
+    computedEnableMenu :: a -> b
 
 class HasComputedEnvironment a b | a -> b where
-    computedEnvironment :: TF.Ref s a -> b
+    computedEnvironment :: a -> b
 
 class HasComputedFetchableFiles a b | a -> b where
-    computedFetchableFiles :: TF.Ref s a -> b
+    computedFetchableFiles :: a -> b
 
 class HasComputedGateway a b | a -> b where
-    computedGateway :: TF.Ref s a -> b
+    computedGateway :: a -> b
 
 class HasComputedHostname a b | a -> b where
-    computedHostname :: TF.Ref s a -> b
+    computedHostname :: a -> b
 
 class HasComputedImage a b | a -> b where
-    computedImage :: TF.Ref s a -> b
+    computedImage :: a -> b
 
 class HasComputedInitrd a b | a -> b where
-    computedInitrd :: TF.Ref s a -> b
+    computedInitrd :: a -> b
 
 class HasComputedInterface a b | a -> b where
-    computedInterface :: TF.Ref s a -> b
+    computedInterface :: a -> b
 
 class HasComputedIpv6DefaultDevice a b | a -> b where
-    computedIpv6DefaultDevice :: TF.Ref s a -> b
+    computedIpv6DefaultDevice :: a -> b
 
 class HasComputedKeepUpdated a b | a -> b where
-    computedKeepUpdated :: TF.Ref s a -> b
+    computedKeepUpdated :: a -> b
 
 class HasComputedKernel a b | a -> b where
-    computedKernel :: TF.Ref s a -> b
+    computedKernel :: a -> b
 
 class HasComputedKernelOptions a b | a -> b where
-    computedKernelOptions :: TF.Ref s a -> b
+    computedKernelOptions :: a -> b
 
 class HasComputedKernelOptionsPost a b | a -> b where
-    computedKernelOptionsPost :: TF.Ref s a -> b
+    computedKernelOptionsPost :: a -> b
 
 class HasComputedKickstart a b | a -> b where
-    computedKickstart :: TF.Ref s a -> b
+    computedKickstart :: a -> b
 
 class HasComputedKsMeta a b | a -> b where
-    computedKsMeta :: TF.Ref s a -> b
+    computedKsMeta :: a -> b
 
 class HasComputedLdapEnabled a b | a -> b where
-    computedLdapEnabled :: TF.Ref s a -> b
+    computedLdapEnabled :: a -> b
 
 class HasComputedLdapType a b | a -> b where
-    computedLdapType :: TF.Ref s a -> b
+    computedLdapType :: a -> b
 
 class HasComputedMgmtClasses a b | a -> b where
-    computedMgmtClasses :: TF.Ref s a -> b
+    computedMgmtClasses :: a -> b
 
 class HasComputedMgmtParameters a b | a -> b where
-    computedMgmtParameters :: TF.Ref s a -> b
+    computedMgmtParameters :: a -> b
 
 class HasComputedMirror a b | a -> b where
-    computedMirror :: TF.Ref s a -> b
+    computedMirror :: a -> b
 
 class HasComputedMirrorLocally a b | a -> b where
-    computedMirrorLocally :: TF.Ref s a -> b
+    computedMirrorLocally :: a -> b
 
 class HasComputedMonitEnabled a b | a -> b where
-    computedMonitEnabled :: TF.Ref s a -> b
+    computedMonitEnabled :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNameServers a b | a -> b where
-    computedNameServers :: TF.Ref s a -> b
+    computedNameServers :: a -> b
 
 class HasComputedNameServersSearch a b | a -> b where
-    computedNameServersSearch :: TF.Ref s a -> b
+    computedNameServersSearch :: a -> b
 
 class HasComputedNetbootEnabled a b | a -> b where
-    computedNetbootEnabled :: TF.Ref s a -> b
+    computedNetbootEnabled :: a -> b
 
 class HasComputedOsVersion a b | a -> b where
-    computedOsVersion :: TF.Ref s a -> b
+    computedOsVersion :: a -> b
 
 class HasComputedOwners a b | a -> b where
-    computedOwners :: TF.Ref s a -> b
+    computedOwners :: a -> b
 
 class HasComputedParent a b | a -> b where
-    computedParent :: TF.Ref s a -> b
+    computedParent :: a -> b
 
 class HasComputedPowerAddress a b | a -> b where
-    computedPowerAddress :: TF.Ref s a -> b
+    computedPowerAddress :: a -> b
 
 class HasComputedPowerId a b | a -> b where
-    computedPowerId :: TF.Ref s a -> b
+    computedPowerId :: a -> b
 
 class HasComputedPowerPass a b | a -> b where
-    computedPowerPass :: TF.Ref s a -> b
+    computedPowerPass :: a -> b
 
 class HasComputedPowerType a b | a -> b where
-    computedPowerType :: TF.Ref s a -> b
+    computedPowerType :: a -> b
 
 class HasComputedPowerUser a b | a -> b where
-    computedPowerUser :: TF.Ref s a -> b
+    computedPowerUser :: a -> b
 
 class HasComputedProfile a b | a -> b where
-    computedProfile :: TF.Ref s a -> b
+    computedProfile :: a -> b
 
 class HasComputedProxy a b | a -> b where
-    computedProxy :: TF.Ref s a -> b
+    computedProxy :: a -> b
 
 class HasComputedRedhatManagementKey a b | a -> b where
-    computedRedhatManagementKey :: TF.Ref s a -> b
+    computedRedhatManagementKey :: a -> b
 
 class HasComputedRedhatManagementServer a b | a -> b where
-    computedRedhatManagementServer :: TF.Ref s a -> b
+    computedRedhatManagementServer :: a -> b
 
 class HasComputedRepos a b | a -> b where
-    computedRepos :: TF.Ref s a -> b
+    computedRepos :: a -> b
 
 class HasComputedRpmList a b | a -> b where
-    computedRpmList :: TF.Ref s a -> b
+    computedRpmList :: a -> b
 
 class HasComputedServer a b | a -> b where
-    computedServer :: TF.Ref s a -> b
+    computedServer :: a -> b
 
 class HasComputedStatus a b | a -> b where
-    computedStatus :: TF.Ref s a -> b
+    computedStatus :: a -> b
 
 class HasComputedTemplateFiles a b | a -> b where
-    computedTemplateFiles :: TF.Ref s a -> b
+    computedTemplateFiles :: a -> b
 
 class HasComputedTemplateRemoteKickstarts a b | a -> b where
-    computedTemplateRemoteKickstarts :: TF.Ref s a -> b
+    computedTemplateRemoteKickstarts :: a -> b
 
 class HasComputedVirtAutoBoot a b | a -> b where
-    computedVirtAutoBoot :: TF.Ref s a -> b
+    computedVirtAutoBoot :: a -> b
 
 class HasComputedVirtBridge a b | a -> b where
-    computedVirtBridge :: TF.Ref s a -> b
+    computedVirtBridge :: a -> b
 
 class HasComputedVirtCpus a b | a -> b where
-    computedVirtCpus :: TF.Ref s a -> b
+    computedVirtCpus :: a -> b
 
 class HasComputedVirtDiskDriver a b | a -> b where
-    computedVirtDiskDriver :: TF.Ref s a -> b
+    computedVirtDiskDriver :: a -> b
 
 class HasComputedVirtFileSize a b | a -> b where
-    computedVirtFileSize :: TF.Ref s a -> b
+    computedVirtFileSize :: a -> b
 
 class HasComputedVirtPath a b | a -> b where
-    computedVirtPath :: TF.Ref s a -> b
+    computedVirtPath :: a -> b
 
 class HasComputedVirtPxeBoot a b | a -> b where
-    computedVirtPxeBoot :: TF.Ref s a -> b
+    computedVirtPxeBoot :: a -> b
 
 class HasComputedVirtRam a b | a -> b where
-    computedVirtRam :: TF.Ref s a -> b
+    computedVirtRam :: a -> b
 
 class HasComputedVirtType a b | a -> b where
-    computedVirtType :: TF.Ref s a -> b
+    computedVirtType :: a -> b

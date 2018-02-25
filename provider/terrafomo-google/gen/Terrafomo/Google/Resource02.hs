@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -171,47 +173,47 @@ instance P.HasZone (ContainerNodePoolResource s) (TF.Attr s P.Text) where
         lens (_zone :: ContainerNodePoolResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ContainerNodePoolResource s)
 
-instance P.HasComputedAutoscaling (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAutoscaling (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedAutoscaling =
         (_autoscaling :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCluster (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCluster (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedCluster =
         (_cluster :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedManagement (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedManagement =
         (_management :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNamePrefix (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedNamePrefix =
         (_name_prefix :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNodeConfig (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedNodeConfig =
         (_node_config :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNodeCount (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedNodeCount =
         (_node_count :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProject (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedProject =
         (_project :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedZone (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedZone =
         (_zone :: ContainerNodePoolResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -272,20 +274,20 @@ instance P.HasRole (KmsCryptoKeyIamMemberResource s) (TF.Attr s P.Text) where
         lens (_role :: KmsCryptoKeyIamMemberResource s -> TF.Attr s P.Text)
              (\s a -> s { _role = a } :: KmsCryptoKeyIamMemberResource s)
 
-instance P.HasComputedCryptoKeyId (KmsCryptoKeyIamMemberResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCryptoKeyId (TF.Ref s' (KmsCryptoKeyIamMemberResource s)) (TF.Attr s P.Text) where
     computedCryptoKeyId =
         (_crypto_key_id :: KmsCryptoKeyIamMemberResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEtag (KmsCryptoKeyIamMemberResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsCryptoKeyIamMemberResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
-instance P.HasComputedMember (KmsCryptoKeyIamMemberResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (KmsCryptoKeyIamMemberResource s)) (TF.Attr s P.Text) where
     computedMember =
         (_member :: KmsCryptoKeyIamMemberResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRole (KmsCryptoKeyIamMemberResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (KmsCryptoKeyIamMemberResource s)) (TF.Attr s P.Text) where
     computedRole =
         (_role :: KmsCryptoKeyIamMemberResource s -> TF.Attr s P.Text)
             . TF.refValue

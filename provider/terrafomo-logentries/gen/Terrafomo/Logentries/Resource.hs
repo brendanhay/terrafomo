@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -134,35 +136,35 @@ instance P.HasType' (LogResource s) (TF.Attr s P.Text) where
         lens (_type' :: LogResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: LogResource s)
 
-instance P.HasComputedFilename (LogResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilename (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedFilename =
         (_filename :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLogsetId (LogResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogsetId (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedLogsetId =
         (_logset_id :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (LogResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRetentionPeriod (LogResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRetentionPeriod (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedRetentionPeriod =
         (_retention_period :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSource (LogResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedSource =
         (_source :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (LogResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedToken x = TF.compute (TF.refKey x) "token"
 
-instance P.HasComputedType' (LogResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -207,12 +209,12 @@ instance P.HasName (LogsetResource s) (TF.Attr s P.Text) where
         lens (_name :: LogsetResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: LogsetResource s)
 
-instance P.HasComputedLocation (LogsetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (LogsetResource s)) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: LogsetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (LogsetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LogsetResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: LogsetResource s -> TF.Attr s P.Text)
             . TF.refValue

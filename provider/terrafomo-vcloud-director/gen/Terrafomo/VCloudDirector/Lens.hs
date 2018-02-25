@@ -322,109 +322,109 @@ instance HasVappName a b => HasVappName (TF.Schema l p a) b where
     vappName = TF.configuration . vappName
 
 class HasComputedCatalogName a b | a -> b where
-    computedCatalogName :: TF.Ref s a -> b
+    computedCatalogName :: a -> b
 
 class HasComputedCpus a b | a -> b where
-    computedCpus :: TF.Ref s a -> b
+    computedCpus :: a -> b
 
 class HasComputedDefaultAction a b | a -> b where
-    computedDefaultAction :: TF.Ref s a -> b
+    computedDefaultAction :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDhcpPool a b | a -> b where
-    computedDhcpPool :: TF.Ref s a -> b
+    computedDhcpPool :: a -> b
 
 class HasComputedDns1 a b | a -> b where
-    computedDns1 :: TF.Ref s a -> b
+    computedDns1 :: a -> b
 
 class HasComputedDns2 a b | a -> b where
-    computedDns2 :: TF.Ref s a -> b
+    computedDns2 :: a -> b
 
 class HasComputedDnsSuffix a b | a -> b where
-    computedDnsSuffix :: TF.Ref s a -> b
+    computedDnsSuffix :: a -> b
 
 class HasComputedEdgeGateway a b | a -> b where
-    computedEdgeGateway :: TF.Ref s a -> b
+    computedEdgeGateway :: a -> b
 
 class HasComputedEncryptionProtocol a b | a -> b where
-    computedEncryptionProtocol :: TF.Ref s a -> b
+    computedEncryptionProtocol :: a -> b
 
 class HasComputedExternalIp a b | a -> b where
-    computedExternalIp :: TF.Ref s a -> b
+    computedExternalIp :: a -> b
 
 class HasComputedGateway a b | a -> b where
-    computedGateway :: TF.Ref s a -> b
+    computedGateway :: a -> b
 
 class HasComputedInitscript a b | a -> b where
-    computedInitscript :: TF.Ref s a -> b
+    computedInitscript :: a -> b
 
 class HasComputedInternalIp a b | a -> b where
-    computedInternalIp :: TF.Ref s a -> b
+    computedInternalIp :: a -> b
 
 class HasComputedIp a b | a -> b where
-    computedIp :: TF.Ref s a -> b
+    computedIp :: a -> b
 
 class HasComputedLocalId a b | a -> b where
-    computedLocalId :: TF.Ref s a -> b
+    computedLocalId :: a -> b
 
 class HasComputedLocalIpAddress a b | a -> b where
-    computedLocalIpAddress :: TF.Ref s a -> b
+    computedLocalIpAddress :: a -> b
 
 class HasComputedLocalSubnets a b | a -> b where
-    computedLocalSubnets :: TF.Ref s a -> b
+    computedLocalSubnets :: a -> b
 
 class HasComputedMemory a b | a -> b where
-    computedMemory :: TF.Ref s a -> b
+    computedMemory :: a -> b
 
 class HasComputedMetadata a b | a -> b where
-    computedMetadata :: TF.Ref s a -> b
+    computedMetadata :: a -> b
 
 class HasComputedMtu a b | a -> b where
-    computedMtu :: TF.Ref s a -> b
+    computedMtu :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNetmask a b | a -> b where
-    computedNetmask :: TF.Ref s a -> b
+    computedNetmask :: a -> b
 
 class HasComputedNetworkName a b | a -> b where
-    computedNetworkName :: TF.Ref s a -> b
+    computedNetworkName :: a -> b
 
 class HasComputedOvf a b | a -> b where
-    computedOvf :: TF.Ref s a -> b
+    computedOvf :: a -> b
 
 class HasComputedPeerId a b | a -> b where
-    computedPeerId :: TF.Ref s a -> b
+    computedPeerId :: a -> b
 
 class HasComputedPeerIpAddress a b | a -> b where
-    computedPeerIpAddress :: TF.Ref s a -> b
+    computedPeerIpAddress :: a -> b
 
 class HasComputedPeerSubnets a b | a -> b where
-    computedPeerSubnets :: TF.Ref s a -> b
+    computedPeerSubnets :: a -> b
 
 class HasComputedPort a b | a -> b where
-    computedPort :: TF.Ref s a -> b
+    computedPort :: a -> b
 
 class HasComputedPowerOn a b | a -> b where
-    computedPowerOn :: TF.Ref s a -> b
+    computedPowerOn :: a -> b
 
 class HasComputedRule a b | a -> b where
-    computedRule :: TF.Ref s a -> b
+    computedRule :: a -> b
 
 class HasComputedShared a b | a -> b where
-    computedShared :: TF.Ref s a -> b
+    computedShared :: a -> b
 
 class HasComputedSharedSecret a b | a -> b where
-    computedSharedSecret :: TF.Ref s a -> b
+    computedSharedSecret :: a -> b
 
 class HasComputedStaticIpPool a b | a -> b where
-    computedStaticIpPool :: TF.Ref s a -> b
+    computedStaticIpPool :: a -> b
 
 class HasComputedTemplateName a b | a -> b where
-    computedTemplateName :: TF.Ref s a -> b
+    computedTemplateName :: a -> b
 
 class HasComputedVappName a b | a -> b where
-    computedVappName :: TF.Ref s a -> b
+    computedVappName :: a -> b

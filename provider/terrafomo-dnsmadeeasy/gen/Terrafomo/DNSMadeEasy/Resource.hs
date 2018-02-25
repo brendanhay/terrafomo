@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -72,19 +74,19 @@ data RecordResource s = RecordResource {
 instance TF.ToHCL (RecordResource s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedGtdLocation (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGtdLocation (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedGtdLocation x = TF.compute (TF.refKey x) "gtdLocation"
 
-instance P.HasComputedName (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedValue (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
 recordResource :: TF.Resource P.DNSMadeEasy (RecordResource s)

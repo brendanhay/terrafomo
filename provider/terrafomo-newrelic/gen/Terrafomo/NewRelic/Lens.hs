@@ -223,85 +223,85 @@ instance HasWidget a b => HasWidget (TF.Schema l p a) b where
     widget = TF.configuration . widget
 
 class HasComputedChannelId a b | a -> b where
-    computedChannelId :: TF.Ref s a -> b
+    computedChannelId :: a -> b
 
 class HasComputedConditionScope a b | a -> b where
-    computedConditionScope :: TF.Ref s a -> b
+    computedConditionScope :: a -> b
 
 class HasComputedConfiguration a b | a -> b where
-    computedConfiguration :: TF.Ref s a -> b
+    computedConfiguration :: a -> b
 
 class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt :: TF.Ref s a -> b
+    computedCreatedAt :: a -> b
 
 class HasComputedEditable a b | a -> b where
-    computedEditable :: TF.Ref s a -> b
+    computedEditable :: a -> b
 
 class HasComputedEnabled a b | a -> b where
-    computedEnabled :: TF.Ref s a -> b
+    computedEnabled :: a -> b
 
 class HasComputedEntities a b | a -> b where
-    computedEntities :: TF.Ref s a -> b
+    computedEntities :: a -> b
 
 class HasComputedGcMetric a b | a -> b where
-    computedGcMetric :: TF.Ref s a -> b
+    computedGcMetric :: a -> b
 
 class HasComputedHostIds a b | a -> b where
-    computedHostIds :: TF.Ref s a -> b
+    computedHostIds :: a -> b
 
 class HasComputedIcon a b | a -> b where
-    computedIcon :: TF.Ref s a -> b
+    computedIcon :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedIncidentPreference a b | a -> b where
-    computedIncidentPreference :: TF.Ref s a -> b
+    computedIncidentPreference :: a -> b
 
 class HasComputedInstanceIds a b | a -> b where
-    computedInstanceIds :: TF.Ref s a -> b
+    computedInstanceIds :: a -> b
 
 class HasComputedMetric a b | a -> b where
-    computedMetric :: TF.Ref s a -> b
+    computedMetric :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNrql a b | a -> b where
-    computedNrql :: TF.Ref s a -> b
+    computedNrql :: a -> b
 
 class HasComputedPolicyId a b | a -> b where
-    computedPolicyId :: TF.Ref s a -> b
+    computedPolicyId :: a -> b
 
 class HasComputedRunbookUrl a b | a -> b where
-    computedRunbookUrl :: TF.Ref s a -> b
+    computedRunbookUrl :: a -> b
 
 class HasComputedTerm a b | a -> b where
-    computedTerm :: TF.Ref s a -> b
+    computedTerm :: a -> b
 
 class HasComputedTitle a b | a -> b where
-    computedTitle :: TF.Ref s a -> b
+    computedTitle :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedUpdatedAt a b | a -> b where
-    computedUpdatedAt :: TF.Ref s a -> b
+    computedUpdatedAt :: a -> b
 
 class HasComputedUserDefinedMetric a b | a -> b where
-    computedUserDefinedMetric :: TF.Ref s a -> b
+    computedUserDefinedMetric :: a -> b
 
 class HasComputedUserDefinedValueFunction a b | a -> b where
-    computedUserDefinedValueFunction :: TF.Ref s a -> b
+    computedUserDefinedValueFunction :: a -> b
 
 class HasComputedValueFunction a b | a -> b where
-    computedValueFunction :: TF.Ref s a -> b
+    computedValueFunction :: a -> b
 
 class HasComputedViolationCloseTimer a b | a -> b where
-    computedViolationCloseTimer :: TF.Ref s a -> b
+    computedViolationCloseTimer :: a -> b
 
 class HasComputedVisibility a b | a -> b where
-    computedVisibility :: TF.Ref s a -> b
+    computedVisibility :: a -> b
 
 class HasComputedWidget a b | a -> b where
-    computedWidget :: TF.Ref s a -> b
+    computedWidget :: a -> b

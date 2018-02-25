@@ -96,40 +96,40 @@ instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
 class HasComputedCidrBlocks a b | a -> b where
-    computedCidrBlocks :: TF.Ref s a -> b
+    computedCidrBlocks :: a -> b
 
 class HasComputedDomain a b | a -> b where
-    computedDomain :: TF.Ref s a -> b
+    computedDomain :: a -> b
 
 class HasComputedHostname a b | a -> b where
-    computedHostname :: TF.Ref s a -> b
+    computedHostname :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedIpv4CidrBlocks a b | a -> b where
-    computedIpv4CidrBlocks :: TF.Ref s a -> b
+    computedIpv4CidrBlocks :: a -> b
 
 class HasComputedIpv6CidrBlocks a b | a -> b where
-    computedIpv6CidrBlocks :: TF.Ref s a -> b
+    computedIpv6CidrBlocks :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedPriority a b | a -> b where
-    computedPriority :: TF.Ref s a -> b
+    computedPriority :: a -> b
 
 class HasComputedProxied a b | a -> b where
-    computedProxied :: TF.Ref s a -> b
+    computedProxied :: a -> b
 
 class HasComputedTtl a b | a -> b where
-    computedTtl :: TF.Ref s a -> b
+    computedTtl :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedValue a b | a -> b where
-    computedValue :: TF.Ref s a -> b
+    computedValue :: a -> b
 
 class HasComputedZoneId a b | a -> b where
-    computedZoneId :: TF.Ref s a -> b
+    computedZoneId :: a -> b

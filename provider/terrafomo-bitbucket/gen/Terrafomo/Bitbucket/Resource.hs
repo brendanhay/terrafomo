@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -130,17 +132,17 @@ instance P.HasReviewers (DefaultReviewersResource s) (TF.Attr s P.Text) where
         lens (_reviewers :: DefaultReviewersResource s -> TF.Attr s P.Text)
              (\s a -> s { _reviewers = a } :: DefaultReviewersResource s)
 
-instance P.HasComputedOwner (DefaultReviewersResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (DefaultReviewersResource s)) (TF.Attr s P.Text) where
     computedOwner =
         (_owner :: DefaultReviewersResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRepository (DefaultReviewersResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRepository (TF.Ref s' (DefaultReviewersResource s)) (TF.Attr s P.Text) where
     computedRepository =
         (_repository :: DefaultReviewersResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedReviewers (DefaultReviewersResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedReviewers (TF.Ref s' (DefaultReviewersResource s)) (TF.Attr s P.Text) where
     computedReviewers =
         (_reviewers :: DefaultReviewersResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -206,27 +208,27 @@ instance P.HasUrl (HookResource s) (TF.Attr s P.Text) where
         lens (_url :: HookResource s -> TF.Attr s P.Text)
              (\s a -> s { _url = a } :: HookResource s)
 
-instance P.HasComputedDescription (HookResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: HookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEvents (HookResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEvents (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
     computedEvents =
         (_events :: HookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOwner (HookResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
     computedOwner =
         (_owner :: HookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRepository (HookResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRepository (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
     computedRepository =
         (_repository :: HookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUrl (HookResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
     computedUrl =
         (_url :: HookResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -351,62 +353,62 @@ instance P.HasWebsite (RepositoryResource s) (TF.Attr s P.Text) where
         lens (_website :: RepositoryResource s -> TF.Attr s P.Text)
              (\s a -> s { _website = a } :: RepositoryResource s)
 
-instance P.HasComputedDescription (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedForkPolicy (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForkPolicy (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedForkPolicy =
         (_fork_policy :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHasIssues (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHasIssues (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedHasIssues =
         (_has_issues :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHasWiki (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHasWiki (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedHasWiki =
         (_has_wiki :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIsPrivate (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIsPrivate (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedIsPrivate =
         (_is_private :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLanguage (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLanguage (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedLanguage =
         (_language :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOwner (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedOwner =
         (_owner :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProjectKey (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectKey (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedProjectKey =
         (_project_key :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedScm (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScm (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedScm =
         (_scm :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSlug (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSlug (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedSlug =
         (_slug :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedWebsite (RepositoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWebsite (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
     computedWebsite =
         (_website :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue

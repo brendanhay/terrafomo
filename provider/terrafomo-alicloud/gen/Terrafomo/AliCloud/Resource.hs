@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -721,54 +723,54 @@ instance P.HasSources (CdnDomainResource s) (TF.Attr s P.Text) where
         lens (_sources :: CdnDomainResource s -> TF.Attr s P.Text)
              (\s a -> s { _sources = a } :: CdnDomainResource s)
 
-instance P.HasComputedAuthConfig (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAuthConfig (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedAuthConfig x = TF.compute (TF.refKey x) "auth_config"
 
-instance P.HasComputedCacheConfig (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCacheConfig (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedCacheConfig x = TF.compute (TF.refKey x) "cache_config"
 
-instance P.HasComputedCdnType (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCdnType (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedCdnType x = TF.compute (TF.refKey x) "cdn_type"
 
-instance P.HasComputedDomainName (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedDomainName x = TF.compute (TF.refKey x) "domain_name"
 
-instance P.HasComputedHttpHeaderConfig (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHttpHeaderConfig (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedHttpHeaderConfig x = TF.compute (TF.refKey x) "http_header_config"
 
-instance P.HasComputedOptimizeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOptimizeEnable (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedOptimizeEnable x = TF.compute (TF.refKey x) "optimize_enable"
 
-instance P.HasComputedPage404Config (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPage404Config (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedPage404Config x = TF.compute (TF.refKey x) "page_404_config"
 
-instance P.HasComputedPageCompressEnable (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPageCompressEnable (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedPageCompressEnable x = TF.compute (TF.refKey x) "page_compress_enable"
 
-instance P.HasComputedParameterFilterConfig (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedParameterFilterConfig (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedParameterFilterConfig x = TF.compute (TF.refKey x) "parameter_filter_config"
 
-instance P.HasComputedRangeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRangeEnable (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedRangeEnable x = TF.compute (TF.refKey x) "range_enable"
 
-instance P.HasComputedReferConfig (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedReferConfig (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedReferConfig x = TF.compute (TF.refKey x) "refer_config"
 
-instance P.HasComputedScope (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScope (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedScope x = TF.compute (TF.refKey x) "scope"
 
-instance P.HasComputedSourcePort (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourcePort (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedSourcePort =
         (_source_port :: CdnDomainResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceType (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceType (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedSourceType x = TF.compute (TF.refKey x) "source_type"
 
-instance P.HasComputedSources (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSources (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedSources x = TF.compute (TF.refKey x) "sources"
 
-instance P.HasComputedVideoSeekEnable (CdnDomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVideoSeekEnable (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedVideoSeekEnable x = TF.compute (TF.refKey x) "video_seek_enable"
 
 cdnDomainResource :: TF.Resource P.AliCloud (CdnDomainResource s)
@@ -874,54 +876,54 @@ instance P.HasVswitchId (ContainerClusterResource s) (TF.Attr s P.Text) where
         lens (_vswitch_id :: ContainerClusterResource s -> TF.Attr s P.Text)
              (\s a -> s { _vswitch_id = a } :: ContainerClusterResource s)
 
-instance P.HasComputedCidrBlock (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedCidrBlock =
         (_cidr_block :: ContainerClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDiskCategory (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDiskCategory (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedDiskCategory =
         (_disk_category :: ContainerClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDiskSize (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDiskSize (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedDiskSize =
         (_disk_size :: ContainerClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImageId (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedImageId =
         (_image_id :: ContainerClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInstanceType (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedInstanceType =
         (_instance_type :: ContainerClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedNamePrefix (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedNamePrefix =
         (_name_prefix :: ContainerClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: ContainerClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance P.HasComputedVpcId (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
-instance P.HasComputedVswitchId (ContainerClusterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
 
 containerClusterResource :: TF.Resource P.AliCloud (ContainerClusterResource s)
@@ -985,19 +987,19 @@ instance P.HasPrivilege (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
         lens (_privilege :: DbAccountPrivilegeResource s -> TF.Attr s P.Text)
              (\s a -> s { _privilege = a } :: DbAccountPrivilegeResource s)
 
-instance P.HasComputedAccountName (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccountName (TF.Ref s' (DbAccountPrivilegeResource s)) (TF.Attr s P.Text) where
     computedAccountName x = TF.compute (TF.refKey x) "account_name"
 
-instance P.HasComputedDbNames (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDbNames (TF.Ref s' (DbAccountPrivilegeResource s)) (TF.Attr s P.Text) where
     computedDbNames x = TF.compute (TF.refKey x) "db_names"
 
-instance P.HasComputedId (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbAccountPrivilegeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceId (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DbAccountPrivilegeResource s)) (TF.Attr s P.Text) where
     computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
-instance P.HasComputedPrivilege (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivilege (TF.Ref s' (DbAccountPrivilegeResource s)) (TF.Attr s P.Text) where
     computedPrivilege x = TF.compute (TF.refKey x) "privilege"
 
 dbAccountPrivilegeResource :: TF.Resource P.AliCloud (DbAccountPrivilegeResource s)
@@ -1062,24 +1064,24 @@ instance P.HasType' (DbAccountResource s) (TF.Attr s P.Text) where
         lens (_type' :: DbAccountResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: DbAccountResource s)
 
-instance P.HasComputedDescription (DbAccountResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DbAccountResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (DbAccountResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbAccountResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceId (DbAccountResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DbAccountResource s)) (TF.Attr s P.Text) where
     computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
-instance P.HasComputedName (DbAccountResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DbAccountResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPassword (DbAccountResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (DbAccountResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: DbAccountResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (DbAccountResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DbAccountResource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
 dbAccountResource :: TF.Resource P.AliCloud (DbAccountResource s)
@@ -1154,25 +1156,25 @@ instance P.HasRetentionPeriod (DbBackupPolicyResource s) (TF.Attr s P.Text) wher
         lens (_retention_period :: DbBackupPolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _retention_period = a } :: DbBackupPolicyResource s)
 
-instance P.HasComputedBackupPeriod (DbBackupPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackupPeriod (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s P.Text) where
     computedBackupPeriod x = TF.compute (TF.refKey x) "backup_period"
 
-instance P.HasComputedBackupTime (DbBackupPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackupTime (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s P.Text) where
     computedBackupTime x = TF.compute (TF.refKey x) "backup_time"
 
-instance P.HasComputedId (DbBackupPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceId (DbBackupPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s P.Text) where
     computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
-instance P.HasComputedLogBackup (DbBackupPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogBackup (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s P.Text) where
     computedLogBackup x = TF.compute (TF.refKey x) "log_backup"
 
-instance P.HasComputedLogRetentionPeriod (DbBackupPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogRetentionPeriod (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s P.Text) where
     computedLogRetentionPeriod x = TF.compute (TF.refKey x) "log_retention_period"
 
-instance P.HasComputedRetentionPeriod (DbBackupPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRetentionPeriod (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s P.Text) where
     computedRetentionPeriod x = TF.compute (TF.refKey x) "retention_period"
 
 dbBackupPolicyResource :: TF.Resource P.AliCloud (DbBackupPolicyResource s)
@@ -1226,24 +1228,24 @@ instance P.HasPort (DbConnectionResource s) (TF.Attr s P.Text) where
         lens (_port :: DbConnectionResource s -> TF.Attr s P.Text)
              (\s a -> s { _port = a } :: DbConnectionResource s)
 
-instance P.HasComputedConnectionPrefix (DbConnectionResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConnectionPrefix (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
     computedConnectionPrefix x = TF.compute (TF.refKey x) "connection_prefix"
 
-instance P.HasComputedConnectionString (DbConnectionResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
     computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
 
-instance P.HasComputedId (DbConnectionResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceId (DbConnectionResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
     computedInstanceId =
         (_instance_id :: DbConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpAddress (DbConnectionResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance P.HasComputedPort (DbConnectionResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
 dbConnectionResource :: TF.Resource P.AliCloud (DbConnectionResource s)
@@ -1299,19 +1301,19 @@ instance P.HasName (DbDatabaseResource s) (TF.Attr s P.Text) where
         lens (_name :: DbDatabaseResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DbDatabaseResource s)
 
-instance P.HasComputedCharacterSet (DbDatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCharacterSet (TF.Ref s' (DbDatabaseResource s)) (TF.Attr s P.Text) where
     computedCharacterSet x = TF.compute (TF.refKey x) "character_set"
 
-instance P.HasComputedDescription (DbDatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DbDatabaseResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (DbDatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbDatabaseResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceId (DbDatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DbDatabaseResource s)) (TF.Attr s P.Text) where
     computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
-instance P.HasComputedName (DbDatabaseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DbDatabaseResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 dbDatabaseResource :: TF.Resource P.AliCloud (DbDatabaseResource s)
@@ -1425,78 +1427,78 @@ instance P.HasZoneId (DbInstanceResource s) (TF.Attr s P.Text) where
         lens (_zone_id :: DbInstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone_id = a } :: DbInstanceResource s)
 
-instance P.HasComputedBackupRetentionPeriod (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackupRetentionPeriod (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedBackupRetentionPeriod x = TF.compute (TF.refKey x) "backup_retention_period"
 
-instance P.HasComputedConnectionString (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
 
-instance P.HasComputedConnections (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConnections (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedConnections x = TF.compute (TF.refKey x) "connections"
 
-instance P.HasComputedDbInstanceClass (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDbInstanceClass (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedDbInstanceClass x = TF.compute (TF.refKey x) "db_instance_class"
 
-instance P.HasComputedDbInstanceNetType (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDbInstanceNetType (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedDbInstanceNetType x = TF.compute (TF.refKey x) "db_instance_net_type"
 
-instance P.HasComputedDbInstanceStorage (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDbInstanceStorage (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedDbInstanceStorage x = TF.compute (TF.refKey x) "db_instance_storage"
 
-instance P.HasComputedDbMappings (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDbMappings (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedDbMappings x = TF.compute (TF.refKey x) "db_mappings"
 
-instance P.HasComputedEngine (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEngine (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedEngine x = TF.compute (TF.refKey x) "engine"
 
-instance P.HasComputedEngineVersion (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedEngineVersion x = TF.compute (TF.refKey x) "engine_version"
 
-instance P.HasComputedId (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceChargeType (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceChargeType (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceChargeType x = TF.compute (TF.refKey x) "instance_charge_type"
 
-instance P.HasComputedInstanceName (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceName x = TF.compute (TF.refKey x) "instance_name"
 
-instance P.HasComputedInstanceNetworkType (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceNetworkType (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceNetworkType x = TF.compute (TF.refKey x) "instance_network_type"
 
-instance P.HasComputedInstanceStorage (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceStorage (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceStorage x = TF.compute (TF.refKey x) "instance_storage"
 
-instance P.HasComputedInstanceType (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
 
-instance P.HasComputedMasterUserName (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMasterUserName (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedMasterUserName x = TF.compute (TF.refKey x) "master_user_name"
 
-instance P.HasComputedMultiAz (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMultiAz (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedMultiAz =
         (_multi_az :: DbInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPeriod (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedPeriod x = TF.compute (TF.refKey x) "period"
 
-instance P.HasComputedPort (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
-instance P.HasComputedPreferredBackupPeriod (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPreferredBackupPeriod (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedPreferredBackupPeriod x = TF.compute (TF.refKey x) "preferred_backup_period"
 
-instance P.HasComputedPreferredBackupTime (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPreferredBackupTime (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedPreferredBackupTime x = TF.compute (TF.refKey x) "preferred_backup_time"
 
-instance P.HasComputedSecurityIps (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecurityIps (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedSecurityIps x = TF.compute (TF.refKey x) "security_ips"
 
-instance P.HasComputedVswitchId (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
 
-instance P.HasComputedZoneId (DbInstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 dbInstanceResource :: TF.Resource P.AliCloud (DbInstanceResource s)
@@ -1544,13 +1546,13 @@ instance P.HasInstanceId (DiskAttachmentResource s) (TF.Attr s P.Text) where
         lens (_instance_id :: DiskAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _instance_id = a } :: DiskAttachmentResource s)
 
-instance P.HasComputedDeviceName (DiskAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (DiskAttachmentResource s)) (TF.Attr s P.Text) where
     computedDeviceName x = TF.compute (TF.refKey x) "device_name"
 
-instance P.HasComputedDiskId (DiskAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDiskId (TF.Ref s' (DiskAttachmentResource s)) (TF.Attr s P.Text) where
     computedDiskId x = TF.compute (TF.refKey x) "disk_id"
 
-instance P.HasComputedInstanceId (DiskAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DiskAttachmentResource s)) (TF.Attr s P.Text) where
     computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
 diskAttachmentResource :: TF.Resource P.AliCloud (DiskAttachmentResource s)
@@ -1631,31 +1633,31 @@ instance P.HasTags (DiskResource s) (TF.Attr s P.Text) where
         lens (_tags :: DiskResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: DiskResource s)
 
-instance P.HasComputedAvailabilityZone (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance P.HasComputedCategory (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCategory (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedCategory x = TF.compute (TF.refKey x) "category"
 
-instance P.HasComputedDescription (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedSize (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance P.HasComputedSnapshotId (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
 
-instance P.HasComputedStatus (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedTags (DiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 diskResource :: TF.Resource P.AliCloud (DiskResource s)
@@ -1690,10 +1692,10 @@ instance P.HasName (DnsGroupResource s) (TF.Attr s P.Text) where
         lens (_name :: DnsGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DnsGroupResource s)
 
-instance P.HasComputedId (DnsGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (DnsGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DnsGroupResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 dnsGroupResource :: TF.Resource P.AliCloud (DnsGroupResource s)
@@ -1770,34 +1772,34 @@ instance P.HasValue (DnsResource s) (TF.Attr s P.Text) where
         lens (_value :: DnsResource s -> TF.Attr s P.Text)
              (\s a -> s { _value = a } :: DnsResource s)
 
-instance P.HasComputedHostRecord (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostRecord (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedHostRecord x = TF.compute (TF.refKey x) "host_record"
 
-instance P.HasComputedId (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocked (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedLocked x = TF.compute (TF.refKey x) "Locked"
 
-instance P.HasComputedName (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPriority (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance P.HasComputedRouting (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRouting (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedRouting x = TF.compute (TF.refKey x) "routing"
 
-instance P.HasComputedStatus (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedTtl (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance P.HasComputedType' (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedValue (DnsResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
 dnsResource :: TF.Resource P.AliCloud (DnsResource s)
@@ -1846,10 +1848,10 @@ instance P.HasInstanceId (EipAssociationResource s) (TF.Attr s P.Text) where
         lens (_instance_id :: EipAssociationResource s -> TF.Attr s P.Text)
              (\s a -> s { _instance_id = a } :: EipAssociationResource s)
 
-instance P.HasComputedAllocationId (EipAssociationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
     computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
 
-instance P.HasComputedInstanceId (EipAssociationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
     computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
 eipAssociationResource :: TF.Resource P.AliCloud (EipAssociationResource s)
@@ -1891,19 +1893,19 @@ instance P.HasInternetChargeType (EipResource s) (TF.Attr s P.Text) where
         lens (_internet_charge_type :: EipResource s -> TF.Attr s P.Text)
              (\s a -> s { _internet_charge_type = a } :: EipResource s)
 
-instance P.HasComputedBandwidth (EipResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBandwidth (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedBandwidth x = TF.compute (TF.refKey x) "bandwidth"
 
-instance P.HasComputedId (EipResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInternetChargeType (EipResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternetChargeType (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedInternetChargeType x = TF.compute (TF.refKey x) "internet_charge_type"
 
-instance P.HasComputedIpAddress (EipResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance P.HasComputedStatus (EipResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
 eipResource :: TF.Resource P.AliCloud (EipResource s)
@@ -1954,16 +1956,16 @@ instance P.HasScalingGroupId (EssAttachmentResource s) (TF.Attr s P.Text) where
         lens (_scaling_group_id :: EssAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _scaling_group_id = a } :: EssAttachmentResource s)
 
-instance P.HasComputedForce (EssAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForce (TF.Ref s' (EssAttachmentResource s)) (TF.Attr s P.Text) where
     computedForce x = TF.compute (TF.refKey x) "force"
 
-instance P.HasComputedId (EssAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceIds (EssAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (EssAttachmentResource s)) (TF.Attr s P.Text) where
     computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
-instance P.HasComputedScalingGroupId (EssAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScalingGroupId (TF.Ref s' (EssAttachmentResource s)) (TF.Attr s P.Text) where
     computedScalingGroupId =
         (_scaling_group_id :: EssAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -2152,83 +2154,83 @@ instance P.HasUserData (EssScalingConfigurationResource s) (TF.Attr s P.Text) wh
         lens (_user_data :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_data = a } :: EssScalingConfigurationResource s)
 
-instance P.HasComputedActive (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedActive x = TF.compute (TF.refKey x) "active"
 
-instance P.HasComputedDataDisk (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDataDisk (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedDataDisk =
         (_data_disk :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnable (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnable (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedEnable =
         (_enable :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedForceDelete (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForceDelete (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedForceDelete x = TF.compute (TF.refKey x) "force_delete"
 
-instance P.HasComputedId (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImageId (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedImageId x = TF.compute (TF.refKey x) "image_id"
 
-instance P.HasComputedInstanceName (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedInstanceName x = TF.compute (TF.refKey x) "instance_name"
 
-instance P.HasComputedInstanceType (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
 
-instance P.HasComputedInternetChargeType (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternetChargeType (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedInternetChargeType x = TF.compute (TF.refKey x) "internet_charge_type"
 
-instance P.HasComputedInternetMaxBandwidthIn (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternetMaxBandwidthIn (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedInternetMaxBandwidthIn =
         (_internet_max_bandwidth_in :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInternetMaxBandwidthOut (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternetMaxBandwidthOut (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedInternetMaxBandwidthOut =
         (_internet_max_bandwidth_out :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIsOutdated (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIsOutdated (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedIsOutdated =
         (_is_outdated :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedKeyName (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedKeyName x = TF.compute (TF.refKey x) "key_name"
 
-instance P.HasComputedRoleName (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedRoleName x = TF.compute (TF.refKey x) "role_name"
 
-instance P.HasComputedScalingConfigurationName (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScalingConfigurationName (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedScalingConfigurationName x = TF.compute (TF.refKey x) "scaling_configuration_name"
 
-instance P.HasComputedScalingGroupId (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScalingGroupId (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedScalingGroupId =
         (_scaling_group_id :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecurityGroupId (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedSecurityGroupId x = TF.compute (TF.refKey x) "security_group_id"
 
-instance P.HasComputedSubstitute (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubstitute (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedSubstitute =
         (_substitute :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSystemDiskCategory (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSystemDiskCategory (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedSystemDiskCategory =
         (_system_disk_category :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance P.HasComputedUserData (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserData (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
     computedUserData x = TF.compute (TF.refKey x) "user_data"
 
 essScalingConfigurationResource :: TF.Resource P.AliCloud (EssScalingConfigurationResource s)
@@ -2337,31 +2339,31 @@ instance P.HasVswitchIds (EssScalingGroupResource s) (TF.Attr s P.Text) where
         lens (_vswitch_ids :: EssScalingGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _vswitch_ids = a } :: EssScalingGroupResource s)
 
-instance P.HasComputedDbInstanceIds (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDbInstanceIds (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedDbInstanceIds x = TF.compute (TF.refKey x) "db_instance_ids"
 
-instance P.HasComputedDefaultCooldown (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultCooldown (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedDefaultCooldown x = TF.compute (TF.refKey x) "default_cooldown"
 
-instance P.HasComputedId (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLoadbalancerIds (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLoadbalancerIds (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedLoadbalancerIds x = TF.compute (TF.refKey x) "loadbalancer_ids"
 
-instance P.HasComputedMaxSize (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxSize (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedMaxSize x = TF.compute (TF.refKey x) "max_size"
 
-instance P.HasComputedMinSize (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMinSize (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedMinSize x = TF.compute (TF.refKey x) "min_size"
 
-instance P.HasComputedRemovalPolicies (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRemovalPolicies (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedRemovalPolicies x = TF.compute (TF.refKey x) "removal_policies"
 
-instance P.HasComputedScalingGroupName (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScalingGroupName (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedScalingGroupName x = TF.compute (TF.refKey x) "scaling_group_name"
 
-instance P.HasComputedVswitchIds (EssScalingGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVswitchIds (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
     computedVswitchIds x = TF.compute (TF.refKey x) "vswitch_ids"
 
 essScalingGroupResource :: TF.Resource P.AliCloud (EssScalingGroupResource s)
@@ -2429,25 +2431,25 @@ instance P.HasScalingRuleName (EssScalingRuleResource s) (TF.Attr s P.Text) wher
         lens (_scaling_rule_name :: EssScalingRuleResource s -> TF.Attr s P.Text)
              (\s a -> s { _scaling_rule_name = a } :: EssScalingRuleResource s)
 
-instance P.HasComputedAdjustmentType (EssScalingRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAdjustmentType (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedAdjustmentType x = TF.compute (TF.refKey x) "adjustment_type"
 
-instance P.HasComputedAdjustmentValue (EssScalingRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAdjustmentValue (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedAdjustmentValue x = TF.compute (TF.refKey x) "adjustment_value"
 
-instance P.HasComputedAri (EssScalingRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAri (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedAri x = TF.compute (TF.refKey x) "ari"
 
-instance P.HasComputedCooldown (EssScalingRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedCooldown x = TF.compute (TF.refKey x) "cooldown"
 
-instance P.HasComputedId (EssScalingRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedScalingGroupId (EssScalingRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScalingGroupId (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedScalingGroupId x = TF.compute (TF.refKey x) "scaling_group_id"
 
-instance P.HasComputedScalingRuleName (EssScalingRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScalingRuleName (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedScalingRuleName x = TF.compute (TF.refKey x) "scaling_rule_name"
 
 essScalingRuleResource :: TF.Resource P.AliCloud (EssScalingRuleResource s)
@@ -2544,42 +2546,42 @@ instance P.HasTaskEnabled (EssScheduleResource s) (TF.Attr s P.Text) where
         lens (_task_enabled :: EssScheduleResource s -> TF.Attr s P.Text)
              (\s a -> s { _task_enabled = a } :: EssScheduleResource s)
 
-instance P.HasComputedDescription (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLaunchExpirationTime (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLaunchExpirationTime (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedLaunchExpirationTime =
         (_launch_expiration_time :: EssScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLaunchTime (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLaunchTime (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedLaunchTime x = TF.compute (TF.refKey x) "launch_time"
 
-instance P.HasComputedRecurrenceEndTime (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRecurrenceEndTime (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedRecurrenceEndTime =
         (_recurrence_end_time :: EssScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRecurrenceType (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRecurrenceType (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedRecurrenceType =
         (_recurrence_type :: EssScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRecurrenceValue (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRecurrenceValue (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedRecurrenceValue =
         (_recurrence_value :: EssScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedScheduledAction (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScheduledAction (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedScheduledAction x = TF.compute (TF.refKey x) "scheduled_action"
 
-instance P.HasComputedScheduledTaskName (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScheduledTaskName (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedScheduledTaskName x = TF.compute (TF.refKey x) "scheduled_task_name"
 
-instance P.HasComputedTaskEnabled (EssScheduleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTaskEnabled (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedTaskEnabled x = TF.compute (TF.refKey x) "task_enabled"
 
 essScheduleResource :: TF.Resource P.AliCloud (EssScheduleResource s)
@@ -2656,32 +2658,32 @@ instance P.HasIpProtocol (ForwardResource s) (TF.Attr s P.Text) where
         lens (_ip_protocol :: ForwardResource s -> TF.Attr s P.Text)
              (\s a -> s { _ip_protocol = a } :: ForwardResource s)
 
-instance P.HasComputedExternalIp (ForwardResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExternalIp (TF.Ref s' (ForwardResource s)) (TF.Attr s P.Text) where
     computedExternalIp =
         (_external_ip :: ForwardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedExternalPort (ForwardResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExternalPort (TF.Ref s' (ForwardResource s)) (TF.Attr s P.Text) where
     computedExternalPort =
         (_external_port :: ForwardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedForwardTableId (ForwardResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForwardTableId (TF.Ref s' (ForwardResource s)) (TF.Attr s P.Text) where
     computedForwardTableId =
         (_forward_table_id :: ForwardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInternalIp (ForwardResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternalIp (TF.Ref s' (ForwardResource s)) (TF.Attr s P.Text) where
     computedInternalIp =
         (_internal_ip :: ForwardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInternalPort (ForwardResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternalPort (TF.Ref s' (ForwardResource s)) (TF.Attr s P.Text) where
     computedInternalPort =
         (_internal_port :: ForwardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpProtocol (ForwardResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (ForwardResource s)) (TF.Attr s P.Text) where
     computedIpProtocol =
         (_ip_protocol :: ForwardResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -2935,114 +2937,114 @@ instance P.HasVswitchId (InstanceResource s) (TF.Attr s P.Text) where
         lens (_vswitch_id :: InstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _vswitch_id = a } :: InstanceResource s)
 
-instance P.HasComputedAvailabilityZone (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance P.HasComputedDescription (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedDryRun (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDryRun (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedDryRun x = TF.compute (TF.refKey x) "dry_run"
 
-instance P.HasComputedHostName (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedHostName x = TF.compute (TF.refKey x) "host_name"
 
-instance P.HasComputedId (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImageId (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedImageId x = TF.compute (TF.refKey x) "image_id"
 
-instance P.HasComputedIncludeDataDisks (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIncludeDataDisks (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedIncludeDataDisks =
         (_include_data_disks :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInstanceChargeType (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceChargeType (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceChargeType =
         (_instance_charge_type :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInstanceName (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceName x = TF.compute (TF.refKey x) "instance_name"
 
-instance P.HasComputedInstanceType (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
 
-instance P.HasComputedInternetChargeType (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternetChargeType (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedInternetChargeType =
         (_internet_charge_type :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInternetMaxBandwidthIn (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternetMaxBandwidthIn (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedInternetMaxBandwidthIn =
         (_internet_max_bandwidth_in :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInternetMaxBandwidthOut (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternetMaxBandwidthOut (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedInternetMaxBandwidthOut =
         (_internet_max_bandwidth_out :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIsOutdated (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIsOutdated (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedIsOutdated =
         (_is_outdated :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedKeyName (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedKeyName x = TF.compute (TF.refKey x) "key_name"
 
-instance P.HasComputedPassword (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPeriod (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedPeriod x = TF.compute (TF.refKey x) "period"
 
-instance P.HasComputedPeriodUnit (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPeriodUnit (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedPeriodUnit x = TF.compute (TF.refKey x) "period_unit"
 
-instance P.HasComputedPrivateIp (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
 
-instance P.HasComputedPublicIp (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
-instance P.HasComputedRoleName (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedRoleName x = TF.compute (TF.refKey x) "role_name"
 
-instance P.HasComputedSecurityGroups (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedSecurityGroups =
         (_security_groups :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSpotPriceLimit (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpotPriceLimit (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedSpotPriceLimit x = TF.compute (TF.refKey x) "spot_price_limit"
 
-instance P.HasComputedSpotStrategy (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpotStrategy (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedSpotStrategy x = TF.compute (TF.refKey x) "spot_strategy"
 
-instance P.HasComputedStatus (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedSystemDiskCategory (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSystemDiskCategory (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedSystemDiskCategory =
         (_system_disk_category :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSystemDiskSize (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSystemDiskSize (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedSystemDiskSize =
         (_system_disk_size :: InstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance P.HasComputedUserData (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserData (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedUserData x = TF.compute (TF.refKey x) "user_data"
 
-instance P.HasComputedVswitchId (InstanceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
 
 instanceResource :: TF.Resource P.AliCloud (InstanceResource s)
@@ -3106,10 +3108,10 @@ instance P.HasKeyName (KeyPairAttachmentResource s) (TF.Attr s P.Text) where
         lens (_key_name :: KeyPairAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _key_name = a } :: KeyPairAttachmentResource s)
 
-instance P.HasComputedInstanceIds (KeyPairAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (KeyPairAttachmentResource s)) (TF.Attr s P.Text) where
     computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
-instance P.HasComputedKeyName (KeyPairAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairAttachmentResource s)) (TF.Attr s P.Text) where
     computedKeyName x = TF.compute (TF.refKey x) "key_name"
 
 keyPairAttachmentResource :: TF.Resource P.AliCloud (KeyPairAttachmentResource s)
@@ -3163,23 +3165,23 @@ instance P.HasPublicKey (KeyPairResource s) (TF.Attr s P.Text) where
         lens (_public_key :: KeyPairResource s -> TF.Attr s P.Text)
              (\s a -> s { _public_key = a } :: KeyPairResource s)
 
-instance P.HasComputedFingerprint (KeyPairResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance P.HasComputedKeyFile (KeyPairResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyFile (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
     computedKeyFile =
         (_key_file :: KeyPairResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedKeyName (KeyPairResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
     computedKeyName x = TF.compute (TF.refKey x) "key_name"
 
-instance P.HasComputedKeyNamePrefix (KeyPairResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyNamePrefix (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
     computedKeyNamePrefix =
         (_key_name_prefix :: KeyPairResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPublicKey (KeyPairResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
     computedPublicKey =
         (_public_key :: KeyPairResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -3238,22 +3240,22 @@ instance P.HasKeyUsage (KmsKeyResource s) (TF.Attr s P.Text) where
         lens (_key_usage :: KmsKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _key_usage = a } :: KmsKeyResource s)
 
-instance P.HasComputedArn (KmsKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance P.HasComputedDeletionWindowInDays (KmsKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDeletionWindowInDays (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
     computedDeletionWindowInDays x = TF.compute (TF.refKey x) "deletion_window_in_days"
 
-instance P.HasComputedDescription (KmsKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (KmsKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIsEnabled (KmsKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIsEnabled (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
     computedIsEnabled x = TF.compute (TF.refKey x) "is_enabled"
 
-instance P.HasComputedKeyUsage (KmsKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyUsage (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
     computedKeyUsage x = TF.compute (TF.refKey x) "key_usage"
 
 kmsKeyResource :: TF.Resource P.AliCloud (KmsKeyResource s)
@@ -3316,31 +3318,31 @@ instance P.HasVpcId (NatGatewayResource s) (TF.Attr s P.Text) where
         lens (_vpc_id :: NatGatewayResource s -> TF.Attr s P.Text)
              (\s a -> s { _vpc_id = a } :: NatGatewayResource s)
 
-instance P.HasComputedBandwidthPackageIds (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBandwidthPackageIds (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedBandwidthPackageIds x = TF.compute (TF.refKey x) "bandwidth_package_ids"
 
-instance P.HasComputedDescription (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedForwardTableIds (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForwardTableIds (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedForwardTableIds x = TF.compute (TF.refKey x) "forward_table_ids"
 
-instance P.HasComputedId (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedSnatTableIds (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnatTableIds (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedSnatTableIds x = TF.compute (TF.refKey x) "snat_table_ids"
 
-instance P.HasComputedSpec (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedSpec x = TF.compute (TF.refKey x) "spec"
 
-instance P.HasComputedSpecification (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpecification (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedSpecification x = TF.compute (TF.refKey x) "specification"
 
-instance P.HasComputedVpcId (NatGatewayResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 natGatewayResource :: TF.Resource P.AliCloud (NatGatewayResource s)
@@ -3460,71 +3462,71 @@ instance P.HasSource (OssBucketObjectResource s) (TF.Attr s P.Text) where
         lens (_source :: OssBucketObjectResource s -> TF.Attr s P.Text)
              (\s a -> s { _source = a } :: OssBucketObjectResource s)
 
-instance P.HasComputedAcl (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAcl (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedAcl =
         (_acl :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedBucket (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBucket (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedBucket =
         (_bucket :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCacheControl (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCacheControl (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedCacheControl =
         (_cache_control :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedContent (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContent (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedContent =
         (_content :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedContentDisposition (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContentDisposition (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedContentDisposition =
         (_content_disposition :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedContentEncoding (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContentEncoding (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedContentEncoding =
         (_content_encoding :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedContentLength (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedContentLength x = TF.compute (TF.refKey x) "content_length"
 
-instance P.HasComputedContentMd5 (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContentMd5 (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedContentMd5 =
         (_content_md5 :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedContentType (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContentType (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedContentType =
         (_content_type :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEtag (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedEtag x = TF.compute (TF.refKey x) "etag"
 
-instance P.HasComputedExpires (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExpires (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedExpires =
         (_expires :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedKey (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedKey =
         (_key :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedServerSideEncryption (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedServerSideEncryption =
         (_server_side_encryption :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSource (OssBucketObjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedSource =
         (_source :: OssBucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -3624,61 +3626,61 @@ instance P.HasWebsite (OssBucketResource s) (TF.Attr s P.Text) where
         lens (_website :: OssBucketResource s -> TF.Attr s P.Text)
              (\s a -> s { _website = a } :: OssBucketResource s)
 
-instance P.HasComputedAcl (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAcl (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedAcl x = TF.compute (TF.refKey x) "acl"
 
-instance P.HasComputedBucket (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBucket (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedBucket =
         (_bucket :: OssBucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCoreRule (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCoreRule (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedCoreRule =
         (_core_rule :: OssBucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCreationDate (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
-instance P.HasComputedExtranetEndpoint (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExtranetEndpoint (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedExtranetEndpoint x = TF.compute (TF.refKey x) "extranet_endpoint"
 
-instance P.HasComputedId (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIntranetEndpoint (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIntranetEndpoint (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedIntranetEndpoint x = TF.compute (TF.refKey x) "intranet_endpoint"
 
-instance P.HasComputedLifecycleRule (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLifecycleRule (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedLifecycleRule =
         (_lifecycle_rule :: OssBucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLocation (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance P.HasComputedLogging (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogging (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedLogging =
         (_logging :: OssBucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLoggingIsenable (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLoggingIsenable (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedLoggingIsenable =
         (_logging_isenable :: OssBucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOwner (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOwner (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance P.HasComputedRefererConfig (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRefererConfig (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedRefererConfig =
         (_referer_config :: OssBucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStorageClass (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedStorageClass x = TF.compute (TF.refKey x) "storage_class"
 
-instance P.HasComputedWebsite (OssBucketResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWebsite (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedWebsite =
         (_website :: OssBucketResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -3733,18 +3735,18 @@ instance P.HasUserName (RamAccessKeyResource s) (TF.Attr s P.Text) where
         lens (_user_name :: RamAccessKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_name = a } :: RamAccessKeyResource s)
 
-instance P.HasComputedId (RamAccessKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamAccessKeyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedSecretFile (RamAccessKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecretFile (TF.Ref s' (RamAccessKeyResource s)) (TF.Attr s P.Text) where
     computedSecretFile =
         (_secret_file :: RamAccessKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStatus (RamAccessKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (RamAccessKeyResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedUserName (RamAccessKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserName (TF.Ref s' (RamAccessKeyResource s)) (TF.Attr s P.Text) where
     computedUserName =
         (_user_name :: RamAccessKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -3777,7 +3779,7 @@ instance P.HasAccountAlias (RamAccountAliasResource s) (TF.Attr s P.Text) where
         lens (_account_alias :: RamAccountAliasResource s -> TF.Attr s P.Text)
              (\s a -> s { _account_alias = a } :: RamAccountAliasResource s)
 
-instance P.HasComputedAccountAlias (RamAccountAliasResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (RamAccountAliasResource s)) (TF.Attr s P.Text) where
     computedAccountAlias x = TF.compute (TF.refKey x) "account_alias"
 
 ramAccountAliasResource :: TF.Resource P.AliCloud (RamAccountAliasResource s)
@@ -3832,13 +3834,13 @@ instance P.HasUserNames (RamGroupMembershipResource s) (TF.Attr s P.Text) where
         lens (_user_names :: RamGroupMembershipResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_names = a } :: RamGroupMembershipResource s)
 
-instance P.HasComputedGroupName (RamGroupMembershipResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (RamGroupMembershipResource s)) (TF.Attr s P.Text) where
     computedGroupName x = TF.compute (TF.refKey x) "group_name"
 
-instance P.HasComputedId (RamGroupMembershipResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupMembershipResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedUserNames (RamGroupMembershipResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserNames (TF.Ref s' (RamGroupMembershipResource s)) (TF.Attr s P.Text) where
     computedUserNames x = TF.compute (TF.refKey x) "user_names"
 
 ramGroupMembershipResource :: TF.Resource P.AliCloud (RamGroupMembershipResource s)
@@ -3884,16 +3886,16 @@ instance P.HasPolicyType (RamGroupPolicyAttachmentResource s) (TF.Attr s P.Text)
         lens (_policy_type :: RamGroupPolicyAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _policy_type = a } :: RamGroupPolicyAttachmentResource s)
 
-instance P.HasComputedGroupName (RamGroupPolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (RamGroupPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedGroupName x = TF.compute (TF.refKey x) "group_name"
 
-instance P.HasComputedId (RamGroupPolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedPolicyName (RamGroupPolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicyName (TF.Ref s' (RamGroupPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedPolicyName x = TF.compute (TF.refKey x) "policy_name"
 
-instance P.HasComputedPolicyType (RamGroupPolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicyType (TF.Ref s' (RamGroupPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedPolicyType x = TF.compute (TF.refKey x) "policy_type"
 
 ramGroupPolicyAttachmentResource :: TF.Resource P.AliCloud (RamGroupPolicyAttachmentResource s)
@@ -3944,18 +3946,18 @@ instance P.HasName (RamGroupResource s) (TF.Attr s P.Text) where
         lens (_name :: RamGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: RamGroupResource s)
 
-instance P.HasComputedComments (RamGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedComments (TF.Ref s' (RamGroupResource s)) (TF.Attr s P.Text) where
     computedComments x = TF.compute (TF.refKey x) "comments"
 
-instance P.HasComputedForce (RamGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForce (TF.Ref s' (RamGroupResource s)) (TF.Attr s P.Text) where
     computedForce =
         (_force :: RamGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (RamGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RamGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RamGroupResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 ramGroupResource :: TF.Resource P.AliCloud (RamGroupResource s)
@@ -4010,21 +4012,21 @@ instance P.HasUserName (RamLoginProfileResource s) (TF.Attr s P.Text) where
         lens (_user_name :: RamLoginProfileResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_name = a } :: RamLoginProfileResource s)
 
-instance P.HasComputedId (RamLoginProfileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamLoginProfileResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMfaBindRequired (RamLoginProfileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMfaBindRequired (TF.Ref s' (RamLoginProfileResource s)) (TF.Attr s P.Text) where
     computedMfaBindRequired x = TF.compute (TF.refKey x) "mfa_bind_required"
 
-instance P.HasComputedPassword (RamLoginProfileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (RamLoginProfileResource s)) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: RamLoginProfileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPasswordResetRequired (RamLoginProfileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPasswordResetRequired (TF.Ref s' (RamLoginProfileResource s)) (TF.Attr s P.Text) where
     computedPasswordResetRequired x = TF.compute (TF.refKey x) "password_reset_required"
 
-instance P.HasComputedUserName (RamLoginProfileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserName (TF.Ref s' (RamLoginProfileResource s)) (TF.Attr s P.Text) where
     computedUserName x = TF.compute (TF.refKey x) "user_name"
 
 ramLoginProfileResource :: TF.Resource P.AliCloud (RamLoginProfileResource s)
@@ -4100,33 +4102,33 @@ instance P.HasVersion (RamPolicyResource s) (TF.Attr s P.Text) where
         lens (_version :: RamPolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: RamPolicyResource s)
 
-instance P.HasComputedAttachmentCount (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAttachmentCount (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedAttachmentCount x = TF.compute (TF.refKey x) "attachment_count"
 
-instance P.HasComputedDescription (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedDocument (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDocument (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedDocument x = TF.compute (TF.refKey x) "document"
 
-instance P.HasComputedForce (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForce (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedForce =
         (_force :: RamPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedStatement (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatement (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedStatement x = TF.compute (TF.refKey x) "statement"
 
-instance P.HasComputedType' (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedVersion (RamPolicyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
 ramPolicyResource :: TF.Resource P.AliCloud (RamPolicyResource s)
@@ -4169,10 +4171,10 @@ instance P.HasRoleName (RamRoleAttachmentResource s) (TF.Attr s P.Text) where
         lens (_role_name :: RamRoleAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _role_name = a } :: RamRoleAttachmentResource s)
 
-instance P.HasComputedInstanceIds (RamRoleAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (RamRoleAttachmentResource s)) (TF.Attr s P.Text) where
     computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
-instance P.HasComputedRoleName (RamRoleAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (RamRoleAttachmentResource s)) (TF.Attr s P.Text) where
     computedRoleName x = TF.compute (TF.refKey x) "role_name"
 
 ramRoleAttachmentResource :: TF.Resource P.AliCloud (RamRoleAttachmentResource s)
@@ -4218,16 +4220,16 @@ instance P.HasRoleName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) wh
         lens (_role_name :: RamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _role_name = a } :: RamRolePolicyAttachmentResource s)
 
-instance P.HasComputedId (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRolePolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedPolicyName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicyName (TF.Ref s' (RamRolePolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedPolicyName x = TF.compute (TF.refKey x) "policy_name"
 
-instance P.HasComputedPolicyType (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicyType (TF.Ref s' (RamRolePolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedPolicyType x = TF.compute (TF.refKey x) "policy_type"
 
-instance P.HasComputedRoleName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (RamRolePolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedRoleName x = TF.compute (TF.refKey x) "role_name"
 
 ramRolePolicyAttachmentResource :: TF.Resource P.AliCloud (RamRolePolicyAttachmentResource s)
@@ -4310,33 +4312,33 @@ instance P.HasVersion (RamRoleResource s) (TF.Attr s P.Text) where
         lens (_version :: RamRoleResource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: RamRoleResource s)
 
-instance P.HasComputedArn (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance P.HasComputedDescription (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedDocument (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDocument (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedDocument x = TF.compute (TF.refKey x) "document"
 
-instance P.HasComputedForce (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForce (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedForce =
         (_force :: RamRoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedRamUsers (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRamUsers (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedRamUsers x = TF.compute (TF.refKey x) "ram_users"
 
-instance P.HasComputedServices (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
-instance P.HasComputedVersion (RamRoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
 ramRoleResource :: TF.Resource P.AliCloud (RamRoleResource s)
@@ -4387,16 +4389,16 @@ instance P.HasUserName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) wh
         lens (_user_name :: RamUserPolicyAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_name = a } :: RamUserPolicyAttachmentResource s)
 
-instance P.HasComputedId (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUserPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedPolicyName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicyName (TF.Ref s' (RamUserPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedPolicyName x = TF.compute (TF.refKey x) "policy_name"
 
-instance P.HasComputedPolicyType (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicyType (TF.Ref s' (RamUserPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedPolicyType x = TF.compute (TF.refKey x) "policy_type"
 
-instance P.HasComputedUserName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserName (TF.Ref s' (RamUserPolicyAttachmentResource s)) (TF.Attr s P.Text) where
     computedUserName x = TF.compute (TF.refKey x) "user_name"
 
 ramUserPolicyAttachmentResource :: TF.Resource P.AliCloud (RamUserPolicyAttachmentResource s)
@@ -4471,27 +4473,27 @@ instance P.HasName (RamUserResource s) (TF.Attr s P.Text) where
         lens (_name :: RamUserResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: RamUserResource s)
 
-instance P.HasComputedComments (RamUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedComments (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
     computedComments x = TF.compute (TF.refKey x) "comments"
 
-instance P.HasComputedDisplayName (RamUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
 
-instance P.HasComputedEmail (RamUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
     computedEmail x = TF.compute (TF.refKey x) "email"
 
-instance P.HasComputedForce (RamUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForce (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
     computedForce =
         (_force :: RamUserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (RamUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMobile (RamUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMobile (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
     computedMobile x = TF.compute (TF.refKey x) "mobile"
 
-instance P.HasComputedName (RamUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 ramUserResource :: TF.Resource P.AliCloud (RamUserResource s)
@@ -4550,19 +4552,19 @@ instance P.HasRouteTableId (RouteEntryResource s) (TF.Attr s P.Text) where
         lens (_route_table_id :: RouteEntryResource s -> TF.Attr s P.Text)
              (\s a -> s { _route_table_id = a } :: RouteEntryResource s)
 
-instance P.HasComputedDestinationCidrblock (RouteEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDestinationCidrblock (TF.Ref s' (RouteEntryResource s)) (TF.Attr s P.Text) where
     computedDestinationCidrblock x = TF.compute (TF.refKey x) "destination_cidrblock"
 
-instance P.HasComputedNexthopId (RouteEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNexthopId (TF.Ref s' (RouteEntryResource s)) (TF.Attr s P.Text) where
     computedNexthopId x = TF.compute (TF.refKey x) "nexthop_id"
 
-instance P.HasComputedNexthopType (RouteEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNexthopType (TF.Ref s' (RouteEntryResource s)) (TF.Attr s P.Text) where
     computedNexthopType x = TF.compute (TF.refKey x) "nexthop_type"
 
-instance P.HasComputedRouteTableId (RouteEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (RouteEntryResource s)) (TF.Attr s P.Text) where
     computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
 
-instance P.HasComputedRouterId (RouteEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRouterId (TF.Ref s' (RouteEntryResource s)) (TF.Attr s P.Text) where
     computedRouterId x = TF.compute (TF.refKey x) "router_id"
 
 routeEntryResource :: TF.Resource P.AliCloud (RouteEntryResource s)
@@ -4709,54 +4711,54 @@ instance P.HasSpecification (RouterInterfaceResource s) (TF.Attr s P.Text) where
         lens (_specification :: RouterInterfaceResource s -> TF.Attr s P.Text)
              (\s a -> s { _specification = a } :: RouterInterfaceResource s)
 
-instance P.HasComputedAccessPointId (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessPointId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedAccessPointId x = TF.compute (TF.refKey x) "access_point_id"
 
-instance P.HasComputedDescription (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedHealthCheckSourceIp (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckSourceIp (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedHealthCheckSourceIp x = TF.compute (TF.refKey x) "health_check_source_ip"
 
-instance P.HasComputedHealthCheckTargetIp (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckTargetIp (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedHealthCheckTargetIp x = TF.compute (TF.refKey x) "health_check_target_ip"
 
-instance P.HasComputedId (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedOppositeAccessPointId (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOppositeAccessPointId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedOppositeAccessPointId x = TF.compute (TF.refKey x) "opposite_access_point_id"
 
-instance P.HasComputedOppositeInterfaceId (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOppositeInterfaceId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedOppositeInterfaceId x = TF.compute (TF.refKey x) "opposite_interface_id"
 
-instance P.HasComputedOppositeInterfaceOwnerId (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOppositeInterfaceOwnerId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedOppositeInterfaceOwnerId x = TF.compute (TF.refKey x) "opposite_interface_owner_id"
 
-instance P.HasComputedOppositeRegion (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOppositeRegion (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedOppositeRegion =
         (_opposite_region :: RouterInterfaceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOppositeRouterId (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOppositeRouterId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedOppositeRouterId x = TF.compute (TF.refKey x) "opposite_router_id"
 
-instance P.HasComputedOppositeRouterType (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOppositeRouterType (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedOppositeRouterType x = TF.compute (TF.refKey x) "opposite_router_type"
 
-instance P.HasComputedRole (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedRole x = TF.compute (TF.refKey x) "role"
 
-instance P.HasComputedRouterId (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRouterId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedRouterId x = TF.compute (TF.refKey x) "router_id"
 
-instance P.HasComputedRouterType (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRouterType (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedRouterType x = TF.compute (TF.refKey x) "router_type"
 
-instance P.HasComputedSpecification (RouterInterfaceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpecification (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
     computedSpecification x = TF.compute (TF.refKey x) "specification"
 
 routerInterfaceResource :: TF.Resource P.AliCloud (RouterInterfaceResource s)
@@ -4827,19 +4829,19 @@ instance P.HasVpcId (SecurityGroupResource s) (TF.Attr s P.Text) where
         lens (_vpc_id :: SecurityGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _vpc_id = a } :: SecurityGroupResource s)
 
-instance P.HasComputedDescription (SecurityGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (SecurityGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInnerAccess (SecurityGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInnerAccess (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedInnerAccess x = TF.compute (TF.refKey x) "inner_access"
 
-instance P.HasComputedName (SecurityGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedVpcId (SecurityGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 securityGroupResource :: TF.Resource P.AliCloud (SecurityGroupResource s)
@@ -4948,54 +4950,54 @@ instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
         lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
-instance P.HasComputedCidrIp (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrIp (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedCidrIp =
         (_cidr_ip :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIpProtocol (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedIpProtocol x = TF.compute (TF.refKey x) "ip_protocol"
 
-instance P.HasComputedName (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedNicType (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNicType (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedNicType =
         (_nic_type :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicy (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedPolicy =
         (_policy :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPortRange (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPortRange (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedPortRange x = TF.compute (TF.refKey x) "port_range"
 
-instance P.HasComputedPriority (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedPriority =
         (_priority :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedSecurityGroupId =
         (_security_group_id :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceGroupOwnerAccount (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceGroupOwnerAccount (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedSourceGroupOwnerAccount =
         (_source_group_owner_account :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceSecurityGroupId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedSourceSecurityGroupId =
         (_source_security_group_id :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
 securityGroupRuleResource :: TF.Resource P.AliCloud (SecurityGroupRuleResource s)
@@ -5050,19 +5052,19 @@ instance P.HasWeight (SlbAttachmentResource s) (TF.Attr s P.Text) where
         lens (_weight :: SlbAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _weight = a } :: SlbAttachmentResource s)
 
-instance P.HasComputedBackendServers (SlbAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackendServers (TF.Ref s' (SlbAttachmentResource s)) (TF.Attr s P.Text) where
     computedBackendServers x = TF.compute (TF.refKey x) "backend_servers"
 
-instance P.HasComputedId (SlbAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceIds (SlbAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (SlbAttachmentResource s)) (TF.Attr s P.Text) where
     computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
-instance P.HasComputedLoadBalancerId (SlbAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLoadBalancerId (TF.Ref s' (SlbAttachmentResource s)) (TF.Attr s P.Text) where
     computedLoadBalancerId x = TF.compute (TF.refKey x) "load_balancer_id"
 
-instance P.HasComputedWeight (SlbAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWeight (TF.Ref s' (SlbAttachmentResource s)) (TF.Attr s P.Text) where
     computedWeight x = TF.compute (TF.refKey x) "weight"
 
 slbAttachmentResource :: TF.Resource P.AliCloud (SlbAttachmentResource s)
@@ -5261,73 +5263,73 @@ instance P.HasUnhealthyThreshold (SlbListenerResource s) (TF.Attr s P.Text) wher
         lens (_unhealthy_threshold :: SlbListenerResource s -> TF.Attr s P.Text)
              (\s a -> s { _unhealthy_threshold = a } :: SlbListenerResource s)
 
-instance P.HasComputedBackendPort (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackendPort (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedBackendPort x = TF.compute (TF.refKey x) "backend_port"
 
-instance P.HasComputedBandwidth (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBandwidth (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedBandwidth x = TF.compute (TF.refKey x) "bandwidth"
 
-instance P.HasComputedCookie (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCookie (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedCookie x = TF.compute (TF.refKey x) "cookie"
 
-instance P.HasComputedCookieTimeout (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCookieTimeout (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedCookieTimeout x = TF.compute (TF.refKey x) "cookie_timeout"
 
-instance P.HasComputedFrontendPort (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFrontendPort (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedFrontendPort x = TF.compute (TF.refKey x) "frontend_port"
 
-instance P.HasComputedHealthCheck (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthCheck x = TF.compute (TF.refKey x) "health_check"
 
-instance P.HasComputedHealthCheckConnectPort (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckConnectPort (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthCheckConnectPort x = TF.compute (TF.refKey x) "health_check_connect_port"
 
-instance P.HasComputedHealthCheckDomain (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckDomain (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthCheckDomain x = TF.compute (TF.refKey x) "health_check_domain"
 
-instance P.HasComputedHealthCheckHttpCode (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckHttpCode (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthCheckHttpCode x = TF.compute (TF.refKey x) "health_check_http_code"
 
-instance P.HasComputedHealthCheckInterval (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckInterval (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthCheckInterval x = TF.compute (TF.refKey x) "health_check_interval"
 
-instance P.HasComputedHealthCheckTimeout (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckTimeout (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthCheckTimeout x = TF.compute (TF.refKey x) "health_check_timeout"
 
-instance P.HasComputedHealthCheckType (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckType (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthCheckType x = TF.compute (TF.refKey x) "health_check_type"
 
-instance P.HasComputedHealthCheckUri (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthCheckUri (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthCheckUri x = TF.compute (TF.refKey x) "health_check_uri"
 
-instance P.HasComputedHealthyThreshold (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedHealthyThreshold x = TF.compute (TF.refKey x) "healthy_threshold"
 
-instance P.HasComputedId (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLoadBalancerId (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLoadBalancerId (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedLoadBalancerId x = TF.compute (TF.refKey x) "load_balancer_id"
 
-instance P.HasComputedPersistenceTimeout (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPersistenceTimeout (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedPersistenceTimeout x = TF.compute (TF.refKey x) "persistence_timeout"
 
-instance P.HasComputedProtocol (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedProtocol x = TF.compute (TF.refKey x) "protocol"
 
-instance P.HasComputedScheduler (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScheduler (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedScheduler x = TF.compute (TF.refKey x) "scheduler"
 
-instance P.HasComputedSslCertificateId (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSslCertificateId (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedSslCertificateId x = TF.compute (TF.refKey x) "ssl_certificate_id"
 
-instance P.HasComputedStickySession (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStickySession (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedStickySession x = TF.compute (TF.refKey x) "sticky_session"
 
-instance P.HasComputedStickySessionType (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStickySessionType (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedStickySessionType x = TF.compute (TF.refKey x) "sticky_session_type"
 
-instance P.HasComputedUnhealthyThreshold (SlbListenerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
     computedUnhealthyThreshold x = TF.compute (TF.refKey x) "unhealthy_threshold"
 
 slbListenerResource :: TF.Resource P.AliCloud (SlbListenerResource s)
@@ -5427,28 +5429,28 @@ instance P.HasVswitchId (SlbResource s) (TF.Attr s P.Text) where
         lens (_vswitch_id :: SlbResource s -> TF.Attr s P.Text)
              (\s a -> s { _vswitch_id = a } :: SlbResource s)
 
-instance P.HasComputedAddress (SlbResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedBandwidth (SlbResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBandwidth (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedBandwidth x = TF.compute (TF.refKey x) "bandwidth"
 
-instance P.HasComputedId (SlbResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInternet (SlbResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternet (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedInternet x = TF.compute (TF.refKey x) "internet"
 
-instance P.HasComputedInternetChargeType (SlbResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInternetChargeType (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedInternetChargeType x = TF.compute (TF.refKey x) "internet_charge_type"
 
-instance P.HasComputedName (SlbResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedSpecification (SlbResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSpecification (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedSpecification x = TF.compute (TF.refKey x) "specification"
 
-instance P.HasComputedVswitchId (SlbResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
 
 slbResource :: TF.Resource P.AliCloud (SlbResource s)
@@ -5531,30 +5533,30 @@ instance P.HasUrl (SlbRuleResource s) (TF.Attr s P.Text) where
         lens (_url :: SlbRuleResource s -> TF.Attr s P.Text)
              (\s a -> s { _url = a } :: SlbRuleResource s)
 
-instance P.HasComputedDomain (SlbRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
     computedDomain x = TF.compute (TF.refKey x) "domain"
 
-instance P.HasComputedForntendPort (SlbRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForntendPort (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
     computedForntendPort x = TF.compute (TF.refKey x) "forntend_port"
 
-instance P.HasComputedFrontendPort (SlbRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFrontendPort (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
     computedFrontendPort =
         (_frontend_port :: SlbRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (SlbRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLoadBalancerId (SlbRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLoadBalancerId (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
     computedLoadBalancerId x = TF.compute (TF.refKey x) "load_balancer_id"
 
-instance P.HasComputedName (SlbRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedServerGroupId (SlbRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedServerGroupId (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
     computedServerGroupId x = TF.compute (TF.refKey x) "server_group_id"
 
-instance P.HasComputedUrl (SlbRuleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
 slbRuleResource :: TF.Resource P.AliCloud (SlbRuleResource s)
@@ -5613,16 +5615,16 @@ instance P.HasServers (SlbServerGroupResource s) (TF.Attr s P.Text) where
         lens (_servers :: SlbServerGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _servers = a } :: SlbServerGroupResource s)
 
-instance P.HasComputedId (SlbServerGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbServerGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLoadBalancerId (SlbServerGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLoadBalancerId (TF.Ref s' (SlbServerGroupResource s)) (TF.Attr s P.Text) where
     computedLoadBalancerId x = TF.compute (TF.refKey x) "load_balancer_id"
 
-instance P.HasComputedName (SlbServerGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SlbServerGroupResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedServers (SlbServerGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedServers (TF.Ref s' (SlbServerGroupResource s)) (TF.Attr s P.Text) where
     computedServers x = TF.compute (TF.refKey x) "servers"
 
 slbServerGroupResource :: TF.Resource P.AliCloud (SlbServerGroupResource s)
@@ -5669,17 +5671,17 @@ instance P.HasSourceVswitchId (SnatResource s) (TF.Attr s P.Text) where
         lens (_source_vswitch_id :: SnatResource s -> TF.Attr s P.Text)
              (\s a -> s { _source_vswitch_id = a } :: SnatResource s)
 
-instance P.HasComputedSnatIp (SnatResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnatIp (TF.Ref s' (SnatResource s)) (TF.Attr s P.Text) where
     computedSnatIp =
         (_snat_ip :: SnatResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSnatTableId (SnatResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnatTableId (TF.Ref s' (SnatResource s)) (TF.Attr s P.Text) where
     computedSnatTableId =
         (_snat_table_id :: SnatResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceVswitchId (SnatResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceVswitchId (TF.Ref s' (SnatResource s)) (TF.Attr s P.Text) where
     computedSourceVswitchId =
         (_source_vswitch_id :: SnatResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -5729,22 +5731,22 @@ instance P.HasName (VpcResource s) (TF.Attr s P.Text) where
         lens (_name :: VpcResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: VpcResource s)
 
-instance P.HasComputedCidrBlock (VpcResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
 
-instance P.HasComputedDescription (VpcResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (VpcResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (VpcResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedRouteTableId (VpcResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
 
-instance P.HasComputedRouterId (VpcResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRouterId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedRouterId x = TF.compute (TF.refKey x) "router_id"
 
 vpcResource :: TF.Resource P.AliCloud (VpcResource s)
@@ -5807,22 +5809,22 @@ instance P.HasVpcId (VswitchResource s) (TF.Attr s P.Text) where
         lens (_vpc_id :: VswitchResource s -> TF.Attr s P.Text)
              (\s a -> s { _vpc_id = a } :: VswitchResource s)
 
-instance P.HasComputedAvailabilityZone (VswitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (VswitchResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance P.HasComputedCidrBlock (VswitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VswitchResource s)) (TF.Attr s P.Text) where
     computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
 
-instance P.HasComputedDescription (VswitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VswitchResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedId (VswitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VswitchResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (VswitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VswitchResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedVpcId (VswitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VswitchResource s)) (TF.Attr s P.Text) where
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 vswitchResource :: TF.Resource P.AliCloud (VswitchResource s)

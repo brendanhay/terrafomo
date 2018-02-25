@@ -139,43 +139,43 @@ instance HasVhost a b => HasVhost (TF.Schema l p a) b where
     vhost = TF.configuration . vhost
 
 class HasComputedArguments a b | a -> b where
-    computedArguments :: TF.Ref s a -> b
+    computedArguments :: a -> b
 
 class HasComputedDestination a b | a -> b where
-    computedDestination :: TF.Ref s a -> b
+    computedDestination :: a -> b
 
 class HasComputedDestinationType a b | a -> b where
-    computedDestinationType :: TF.Ref s a -> b
+    computedDestinationType :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedPassword a b | a -> b where
-    computedPassword :: TF.Ref s a -> b
+    computedPassword :: a -> b
 
 class HasComputedPermissions a b | a -> b where
-    computedPermissions :: TF.Ref s a -> b
+    computedPermissions :: a -> b
 
 class HasComputedPolicy a b | a -> b where
-    computedPolicy :: TF.Ref s a -> b
+    computedPolicy :: a -> b
 
 class HasComputedPropertiesKey a b | a -> b where
-    computedPropertiesKey :: TF.Ref s a -> b
+    computedPropertiesKey :: a -> b
 
 class HasComputedRoutingKey a b | a -> b where
-    computedRoutingKey :: TF.Ref s a -> b
+    computedRoutingKey :: a -> b
 
 class HasComputedSettings a b | a -> b where
-    computedSettings :: TF.Ref s a -> b
+    computedSettings :: a -> b
 
 class HasComputedSource a b | a -> b where
-    computedSource :: TF.Ref s a -> b
+    computedSource :: a -> b
 
 class HasComputedTags a b | a -> b where
-    computedTags :: TF.Ref s a -> b
+    computedTags :: a -> b
 
 class HasComputedUser a b | a -> b where
-    computedUser :: TF.Ref s a -> b
+    computedUser :: a -> b
 
 class HasComputedVhost a b | a -> b where
-    computedVhost :: TF.Ref s a -> b
+    computedVhost :: a -> b

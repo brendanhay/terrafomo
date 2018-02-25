@@ -114,31 +114,31 @@ instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user
 
 class HasComputedDatabase a b | a -> b where
-    computedDatabase :: TF.Ref s a -> b
+    computedDatabase :: a -> b
 
 class HasComputedDefaultCharacterSet a b | a -> b where
-    computedDefaultCharacterSet :: TF.Ref s a -> b
+    computedDefaultCharacterSet :: a -> b
 
 class HasComputedDefaultCollation a b | a -> b where
-    computedDefaultCollation :: TF.Ref s a -> b
+    computedDefaultCollation :: a -> b
 
 class HasComputedGrant a b | a -> b where
-    computedGrant :: TF.Ref s a -> b
+    computedGrant :: a -> b
 
 class HasComputedHost a b | a -> b where
-    computedHost :: TF.Ref s a -> b
+    computedHost :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedPassword a b | a -> b where
-    computedPassword :: TF.Ref s a -> b
+    computedPassword :: a -> b
 
 class HasComputedPlaintextPassword a b | a -> b where
-    computedPlaintextPassword :: TF.Ref s a -> b
+    computedPlaintextPassword :: a -> b
 
 class HasComputedPrivileges a b | a -> b where
-    computedPrivileges :: TF.Ref s a -> b
+    computedPrivileges :: a -> b
 
 class HasComputedUser a b | a -> b where
-    computedUser :: TF.Ref s a -> b
+    computedUser :: a -> b

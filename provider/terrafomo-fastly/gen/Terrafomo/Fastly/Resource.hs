@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -276,88 +278,88 @@ instance P.HasVcl (ServiceV1Resource s) (TF.Attr s P.Text) where
         lens (_vcl :: ServiceV1Resource s -> TF.Attr s P.Text)
              (\s a -> s { _vcl = a } :: ServiceV1Resource s)
 
-instance P.HasComputedActiveVersion (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedActiveVersion (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedActiveVersion x = TF.compute (TF.refKey x) "active_version"
 
-instance P.HasComputedBackend (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedBackend x = TF.compute (TF.refKey x) "backend"
 
-instance P.HasComputedCacheSetting (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCacheSetting (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedCacheSetting =
         (_cache_setting :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCondition (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCondition (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedCondition =
         (_condition :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultHost (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultHost (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedDefaultHost x = TF.compute (TF.refKey x) "default_host"
 
-instance P.HasComputedDefaultTtl (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultTtl (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedDefaultTtl x = TF.compute (TF.refKey x) "default_ttl"
 
-instance P.HasComputedDomain (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedDomain x = TF.compute (TF.refKey x) "domain"
 
-instance P.HasComputedForceDestroy (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForceDestroy (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedForceDestroy x = TF.compute (TF.refKey x) "force_destroy"
 
-instance P.HasComputedGcslogging (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGcslogging (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedGcslogging =
         (_gcslogging :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGzip (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGzip (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedGzip =
         (_gzip :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHeader (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHeader (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedHeader x = TF.compute (TF.refKey x) "header"
 
-instance P.HasComputedHealthcheck (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthcheck (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedHealthcheck =
         (_healthcheck :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLogentries (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogentries (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedLogentries =
         (_logentries :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPapertrail (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPapertrail (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedPapertrail x = TF.compute (TF.refKey x) "papertrail"
 
-instance P.HasComputedRequestSetting (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRequestSetting (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedRequestSetting =
         (_request_setting :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedResponseObject (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResponseObject (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedResponseObject x = TF.compute (TF.refKey x) "response_object"
 
-instance P.HasComputedS3logging (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedS3logging (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedS3logging x = TF.compute (TF.refKey x) "s3logging"
 
-instance P.HasComputedSumologic (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSumologic (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedSumologic =
         (_sumologic :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSyslog (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSyslog (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedSyslog =
         (_syslog :: ServiceV1Resource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVcl (ServiceV1Resource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVcl (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
     computedVcl x = TF.compute (TF.refKey x) "vcl"
 
 serviceV1Resource :: TF.Resource P.Fastly (ServiceV1Resource s)

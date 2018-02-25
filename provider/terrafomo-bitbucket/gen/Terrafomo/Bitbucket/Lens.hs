@@ -162,49 +162,49 @@ instance HasWebsite a b => HasWebsite (TF.Schema l p a) b where
     website = TF.configuration . website
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedEvents a b | a -> b where
-    computedEvents :: TF.Ref s a -> b
+    computedEvents :: a -> b
 
 class HasComputedForkPolicy a b | a -> b where
-    computedForkPolicy :: TF.Ref s a -> b
+    computedForkPolicy :: a -> b
 
 class HasComputedHasIssues a b | a -> b where
-    computedHasIssues :: TF.Ref s a -> b
+    computedHasIssues :: a -> b
 
 class HasComputedHasWiki a b | a -> b where
-    computedHasWiki :: TF.Ref s a -> b
+    computedHasWiki :: a -> b
 
 class HasComputedIsPrivate a b | a -> b where
-    computedIsPrivate :: TF.Ref s a -> b
+    computedIsPrivate :: a -> b
 
 class HasComputedLanguage a b | a -> b where
-    computedLanguage :: TF.Ref s a -> b
+    computedLanguage :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedOwner a b | a -> b where
-    computedOwner :: TF.Ref s a -> b
+    computedOwner :: a -> b
 
 class HasComputedProjectKey a b | a -> b where
-    computedProjectKey :: TF.Ref s a -> b
+    computedProjectKey :: a -> b
 
 class HasComputedRepository a b | a -> b where
-    computedRepository :: TF.Ref s a -> b
+    computedRepository :: a -> b
 
 class HasComputedReviewers a b | a -> b where
-    computedReviewers :: TF.Ref s a -> b
+    computedReviewers :: a -> b
 
 class HasComputedScm a b | a -> b where
-    computedScm :: TF.Ref s a -> b
+    computedScm :: a -> b
 
 class HasComputedSlug a b | a -> b where
-    computedSlug :: TF.Ref s a -> b
+    computedSlug :: a -> b
 
 class HasComputedUrl a b | a -> b where
-    computedUrl :: TF.Ref s a -> b
+    computedUrl :: a -> b
 
 class HasComputedWebsite a b | a -> b where
-    computedWebsite :: TF.Ref s a -> b
+    computedWebsite :: a -> b

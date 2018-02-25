@@ -253,91 +253,91 @@ instance HasSshKeyStoragePath a b => HasSshKeyStoragePath (TF.Schema l p a) b wh
     sshKeyStoragePath = TF.configuration . sshKeyStoragePath
 
 class HasComputedAllowConcurrentExecutions a b | a -> b where
-    computedAllowConcurrentExecutions :: TF.Ref s a -> b
+    computedAllowConcurrentExecutions :: a -> b
 
 class HasComputedCommand a b | a -> b where
-    computedCommand :: TF.Ref s a -> b
+    computedCommand :: a -> b
 
 class HasComputedCommandOrderingStrategy a b | a -> b where
-    computedCommandOrderingStrategy :: TF.Ref s a -> b
+    computedCommandOrderingStrategy :: a -> b
 
 class HasComputedContinueOnError a b | a -> b where
-    computedContinueOnError :: TF.Ref s a -> b
+    computedContinueOnError :: a -> b
 
 class HasComputedDefaultNodeExecutorPlugin a b | a -> b where
-    computedDefaultNodeExecutorPlugin :: TF.Ref s a -> b
+    computedDefaultNodeExecutorPlugin :: a -> b
 
 class HasComputedDefaultNodeFileCopierPlugin a b | a -> b where
-    computedDefaultNodeFileCopierPlugin :: TF.Ref s a -> b
+    computedDefaultNodeFileCopierPlugin :: a -> b
 
 class HasComputedDelete a b | a -> b where
-    computedDelete :: TF.Ref s a -> b
+    computedDelete :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedExtraConfig a b | a -> b where
-    computedExtraConfig :: TF.Ref s a -> b
+    computedExtraConfig :: a -> b
 
 class HasComputedGroupName a b | a -> b where
-    computedGroupName :: TF.Ref s a -> b
+    computedGroupName :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedKeyMaterial a b | a -> b where
-    computedKeyMaterial :: TF.Ref s a -> b
+    computedKeyMaterial :: a -> b
 
 class HasComputedLogLevel a b | a -> b where
-    computedLogLevel :: TF.Ref s a -> b
+    computedLogLevel :: a -> b
 
 class HasComputedMaxThreadCount a b | a -> b where
-    computedMaxThreadCount :: TF.Ref s a -> b
+    computedMaxThreadCount :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNodeFilterExcludePrecedence a b | a -> b where
-    computedNodeFilterExcludePrecedence :: TF.Ref s a -> b
+    computedNodeFilterExcludePrecedence :: a -> b
 
 class HasComputedNodeFilterQuery a b | a -> b where
-    computedNodeFilterQuery :: TF.Ref s a -> b
+    computedNodeFilterQuery :: a -> b
 
 class HasComputedOption a b | a -> b where
-    computedOption :: TF.Ref s a -> b
+    computedOption :: a -> b
 
 class HasComputedPath a b | a -> b where
-    computedPath :: TF.Ref s a -> b
+    computedPath :: a -> b
 
 class HasComputedPreserveOptionsOrder a b | a -> b where
-    computedPreserveOptionsOrder :: TF.Ref s a -> b
+    computedPreserveOptionsOrder :: a -> b
 
 class HasComputedProjectName a b | a -> b where
-    computedProjectName :: TF.Ref s a -> b
+    computedProjectName :: a -> b
 
 class HasComputedRankAttribute a b | a -> b where
-    computedRankAttribute :: TF.Ref s a -> b
+    computedRankAttribute :: a -> b
 
 class HasComputedRankOrder a b | a -> b where
-    computedRankOrder :: TF.Ref s a -> b
+    computedRankOrder :: a -> b
 
 class HasComputedResourceModelSource a b | a -> b where
-    computedResourceModelSource :: TF.Ref s a -> b
+    computedResourceModelSource :: a -> b
 
 class HasComputedSchedule a b | a -> b where
-    computedSchedule :: TF.Ref s a -> b
+    computedSchedule :: a -> b
 
 class HasComputedSshAuthenticationType a b | a -> b where
-    computedSshAuthenticationType :: TF.Ref s a -> b
+    computedSshAuthenticationType :: a -> b
 
 class HasComputedSshKeyFilePath a b | a -> b where
-    computedSshKeyFilePath :: TF.Ref s a -> b
+    computedSshKeyFilePath :: a -> b
 
 class HasComputedSshKeyStoragePath a b | a -> b where
-    computedSshKeyStoragePath :: TF.Ref s a -> b
+    computedSshKeyStoragePath :: a -> b
 
 class HasComputedUiUrl a b | a -> b where
-    computedUiUrl :: TF.Ref s a -> b
+    computedUiUrl :: a -> b
 
 class HasComputedUrl a b | a -> b where
-    computedUrl :: TF.Ref s a -> b
+    computedUrl :: a -> b

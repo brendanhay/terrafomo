@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -143,23 +145,23 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
         lens (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _public_key = a } :: SshKeyResource s)
 
-instance P.HasComputedFingerprint (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance P.HasComputedId (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: SshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotes (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedNotes =
         (_notes :: SshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedPublicKey =
         (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -346,105 +348,105 @@ instance P.HasUserData (VirtualGuestResource s) (TF.Attr s P.Text) where
         lens (_user_data :: VirtualGuestResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_data = a } :: VirtualGuestResource s)
 
-instance P.HasComputedBackendVlanId (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackendVlanId (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedBackendVlanId =
         (_backend_vlan_id :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedBlockDeviceTemplateGroupGid (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBlockDeviceTemplateGroupGid (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedBlockDeviceTemplateGroupGid =
         (_block_device_template_group_gid :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCpu (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCpu (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedCpu =
         (_cpu :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDedicatedAcctHostOnly (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDedicatedAcctHostOnly (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedDedicatedAcctHostOnly =
         (_dedicated_acct_host_only :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDisks (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedDisks =
         (_disks :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDomain (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedDomain =
         (_domain :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFrontendVlanId (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFrontendVlanId (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedFrontendVlanId =
         (_frontend_vlan_id :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHourlyBilling (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHourlyBilling (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedHourlyBilling =
         (_hourly_billing :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImage (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedImage =
         (_image :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpv4Address (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedIpv4Address =
         (_ipv4_address :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpv4AddressPrivate (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4AddressPrivate (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedIpv4AddressPrivate =
         (_ipv4_address_private :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLocalDisk (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocalDisk (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedLocalDisk =
         (_local_disk :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPostInstallScriptUri (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPostInstallScriptUri (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedPostInstallScriptUri =
         (_post_install_script_uri :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrivateNetworkOnly (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivateNetworkOnly (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedPrivateNetworkOnly =
         (_private_network_only :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPublicNetworkSpeed (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicNetworkSpeed (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedPublicNetworkSpeed =
         (_public_network_speed :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRam (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRam (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedRam =
         (_ram :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRegion (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedRegion =
         (_region :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSshKeys (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSshKeys (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedSshKeys =
         (_ssh_keys :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUserData (VirtualGuestResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserData (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
     computedUserData =
         (_user_data :: VirtualGuestResource s -> TF.Attr s P.Text)
             . TF.refValue

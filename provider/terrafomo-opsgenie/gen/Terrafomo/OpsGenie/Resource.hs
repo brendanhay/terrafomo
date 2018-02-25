@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -112,20 +114,20 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
         lens (_name :: TeamResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TeamResource s)
 
-instance P.HasComputedDescription (TeamResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (TeamResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMember (TeamResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedMember =
         (_member :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (TeamResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -190,30 +192,30 @@ instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
         lens (_username :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: UserResource s)
 
-instance P.HasComputedFullName (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedFullName =
         (_full_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocale (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocale (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedLocale =
         (_locale :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRole (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedRole =
         (_role :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTimezone (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTimezone (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedTimezone =
         (_timezone :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUsername (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue

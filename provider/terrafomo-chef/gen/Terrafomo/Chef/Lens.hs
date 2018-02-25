@@ -124,40 +124,40 @@ instance HasRunList a b => HasRunList (TF.Schema l p a) b where
     runList = TF.configuration . runList
 
 class HasComputedApiUri a b | a -> b where
-    computedApiUri :: TF.Ref s a -> b
+    computedApiUri :: a -> b
 
 class HasComputedAutomaticAttributesJson a b | a -> b where
-    computedAutomaticAttributesJson :: TF.Ref s a -> b
+    computedAutomaticAttributesJson :: a -> b
 
 class HasComputedContentJson a b | a -> b where
-    computedContentJson :: TF.Ref s a -> b
+    computedContentJson :: a -> b
 
 class HasComputedCookbookConstraints a b | a -> b where
-    computedCookbookConstraints :: TF.Ref s a -> b
+    computedCookbookConstraints :: a -> b
 
 class HasComputedDataBagName a b | a -> b where
-    computedDataBagName :: TF.Ref s a -> b
+    computedDataBagName :: a -> b
 
 class HasComputedDefaultAttributesJson a b | a -> b where
-    computedDefaultAttributesJson :: TF.Ref s a -> b
+    computedDefaultAttributesJson :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedEnvironmentName a b | a -> b where
-    computedEnvironmentName :: TF.Ref s a -> b
+    computedEnvironmentName :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNormalAttributesJson a b | a -> b where
-    computedNormalAttributesJson :: TF.Ref s a -> b
+    computedNormalAttributesJson :: a -> b
 
 class HasComputedOverrideAttributesJson a b | a -> b where
-    computedOverrideAttributesJson :: TF.Ref s a -> b
+    computedOverrideAttributesJson :: a -> b
 
 class HasComputedRunList a b | a -> b where
-    computedRunList :: TF.Ref s a -> b
+    computedRunList :: a -> b

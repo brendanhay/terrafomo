@@ -194,103 +194,103 @@ instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
 class HasComputedCidr a b | a -> b where
-    computedCidr :: TF.Ref s a -> b
+    computedCidr :: a -> b
 
 class HasComputedContinentCode a b | a -> b where
-    computedContinentCode :: TF.Ref s a -> b
+    computedContinentCode :: a -> b
 
 class HasComputedCreationDate a b | a -> b where
-    computedCreationDate :: TF.Ref s a -> b
+    computedCreationDate :: a -> b
 
 class HasComputedDatacenterLocation a b | a -> b where
-    computedDatacenterLocation :: TF.Ref s a -> b
+    computedDatacenterLocation :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDhcp a b | a -> b where
-    computedDhcp :: TF.Ref s a -> b
+    computedDhcp :: a -> b
 
 class HasComputedDhcpId a b | a -> b where
-    computedDhcpId :: TF.Ref s a -> b
+    computedDhcpId :: a -> b
 
 class HasComputedEnd a b | a -> b where
-    computedEnd :: TF.Ref s a -> b
+    computedEnd :: a -> b
 
 class HasComputedFieldType a b | a -> b where
-    computedFieldType :: TF.Ref s a -> b
+    computedFieldType :: a -> b
 
 class HasComputedGatewayIp a b | a -> b where
-    computedGatewayIp :: TF.Ref s a -> b
+    computedGatewayIp :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedIpPools a b | a -> b where
-    computedIpPools :: TF.Ref s a -> b
+    computedIpPools :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNames a b | a -> b where
-    computedNames :: TF.Ref s a -> b
+    computedNames :: a -> b
 
 class HasComputedNetwork a b | a -> b where
-    computedNetwork :: TF.Ref s a -> b
+    computedNetwork :: a -> b
 
 class HasComputedNetworkId a b | a -> b where
-    computedNetworkId :: TF.Ref s a -> b
+    computedNetworkId :: a -> b
 
 class HasComputedNoGateway a b | a -> b where
-    computedNoGateway :: TF.Ref s a -> b
+    computedNoGateway :: a -> b
 
 class HasComputedOpenstackRc a b | a -> b where
-    computedOpenstackRc :: TF.Ref s a -> b
+    computedOpenstackRc :: a -> b
 
 class HasComputedPassword a b | a -> b where
-    computedPassword :: TF.Ref s a -> b
+    computedPassword :: a -> b
 
 class HasComputedProjectId a b | a -> b where
-    computedProjectId :: TF.Ref s a -> b
+    computedProjectId :: a -> b
 
 class HasComputedRegion a b | a -> b where
-    computedRegion :: TF.Ref s a -> b
+    computedRegion :: a -> b
 
 class HasComputedRegions a b | a -> b where
-    computedRegions :: TF.Ref s a -> b
+    computedRegions :: a -> b
 
 class HasComputedRegionsStatus a b | a -> b where
-    computedRegionsStatus :: TF.Ref s a -> b
+    computedRegionsStatus :: a -> b
 
 class HasComputedServices a b | a -> b where
-    computedServices :: TF.Ref s a -> b
+    computedServices :: a -> b
 
 class HasComputedStart a b | a -> b where
-    computedStart :: TF.Ref s a -> b
+    computedStart :: a -> b
 
 class HasComputedStatus a b | a -> b where
-    computedStatus :: TF.Ref s a -> b
+    computedStatus :: a -> b
 
 class HasComputedSubDomain a b | a -> b where
-    computedSubDomain :: TF.Ref s a -> b
+    computedSubDomain :: a -> b
 
 class HasComputedTarget a b | a -> b where
-    computedTarget :: TF.Ref s a -> b
+    computedTarget :: a -> b
 
 class HasComputedTtl a b | a -> b where
-    computedTtl :: TF.Ref s a -> b
+    computedTtl :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedUsername a b | a -> b where
-    computedUsername :: TF.Ref s a -> b
+    computedUsername :: a -> b
 
 class HasComputedVlanId a b | a -> b where
-    computedVlanId :: TF.Ref s a -> b
+    computedVlanId :: a -> b
 
 class HasComputedVrackId a b | a -> b where
-    computedVrackId :: TF.Ref s a -> b
+    computedVrackId :: a -> b
 
 class HasComputedZone a b | a -> b where
-    computedZone :: TF.Ref s a -> b
+    computedZone :: a -> b

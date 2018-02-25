@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -123,17 +125,17 @@ instance P.HasDataBagName (DataBagItemResource s) (TF.Attr s P.Text) where
         lens (_data_bag_name :: DataBagItemResource s -> TF.Attr s P.Text)
              (\s a -> s { _data_bag_name = a } :: DataBagItemResource s)
 
-instance P.HasComputedContentJson (DataBagItemResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContentJson (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
     computedContentJson =
         (_content_json :: DataBagItemResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDataBagName (DataBagItemResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDataBagName (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
     computedDataBagName =
         (_data_bag_name :: DataBagItemResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DataBagItemResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 dataBagItemResource :: TF.Resource P.Chef (DataBagItemResource s)
@@ -167,10 +169,10 @@ instance P.HasName (DataBagResource s) (TF.Attr s P.Text) where
         lens (_name :: DataBagResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataBagResource s)
 
-instance P.HasComputedApiUri (DataBagResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedApiUri (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
     computedApiUri x = TF.compute (TF.refKey x) "api_uri"
 
-instance P.HasComputedName (DataBagResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DataBagResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -235,27 +237,27 @@ instance P.HasOverrideAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) 
         lens (_override_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
 
-instance P.HasComputedCookbookConstraints (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCookbookConstraints (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedCookbookConstraints =
         (_cookbook_constraints :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
         (_default_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOverrideAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
         (_override_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -343,37 +345,37 @@ instance P.HasRunList (NodeResource s) (TF.Attr s P.Text) where
         lens (_run_list :: NodeResource s -> TF.Attr s P.Text)
              (\s a -> s { _run_list = a } :: NodeResource s)
 
-instance P.HasComputedAutomaticAttributesJson (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAutomaticAttributesJson (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedAutomaticAttributesJson =
         (_automatic_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultAttributesJson (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
         (_default_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentName (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnvironmentName (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedEnvironmentName =
         (_environment_name :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNormalAttributesJson (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNormalAttributesJson (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedNormalAttributesJson =
         (_normal_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOverrideAttributesJson (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
         (_override_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRunList (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRunList (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedRunList =
         (_run_list :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -443,27 +445,27 @@ instance P.HasRunList (RoleResource s) (TF.Attr s P.Text) where
         lens (_run_list :: RoleResource s -> TF.Attr s P.Text)
              (\s a -> s { _run_list = a } :: RoleResource s)
 
-instance P.HasComputedDefaultAttributesJson (RoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultAttributesJson (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
         (_default_attributes_json :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (RoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (RoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOverrideAttributesJson (RoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOverrideAttributesJson (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
         (_override_attributes_json :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRunList (RoleResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRunList (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedRunList =
         (_run_list :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue

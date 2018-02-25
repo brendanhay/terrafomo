@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -273,90 +275,90 @@ instance P.HasSchedule (JobResource s) (TF.Attr s P.Text) where
         lens (_schedule :: JobResource s -> TF.Attr s P.Text)
              (\s a -> s { _schedule = a } :: JobResource s)
 
-instance P.HasComputedAllowConcurrentExecutions (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAllowConcurrentExecutions (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedAllowConcurrentExecutions =
         (_allow_concurrent_executions :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCommand (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCommand (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedCommand =
         (_command :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCommandOrderingStrategy (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCommandOrderingStrategy (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedCommandOrderingStrategy =
         (_command_ordering_strategy :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedContinueOnError (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContinueOnError (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedContinueOnError =
         (_continue_on_error :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGroupName (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedGroupName =
         (_group_name :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLogLevel (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLogLevel (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedLogLevel =
         (_log_level :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMaxThreadCount (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxThreadCount (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedMaxThreadCount =
         (_max_thread_count :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNodeFilterExcludePrecedence (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNodeFilterExcludePrecedence (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedNodeFilterExcludePrecedence =
         (_node_filter_exclude_precedence :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNodeFilterQuery (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNodeFilterQuery (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedNodeFilterQuery =
         (_node_filter_query :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOption (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOption (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedOption =
         (_option :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPreserveOptionsOrder (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPreserveOptionsOrder (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedPreserveOptionsOrder =
         (_preserve_options_order :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProjectName (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectName (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedProjectName =
         (_project_name :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRankAttribute (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRankAttribute (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedRankAttribute =
         (_rank_attribute :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRankOrder (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRankOrder (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedRankOrder =
         (_rank_order :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSchedule (JobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSchedule (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
     computedSchedule =
         (_schedule :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -413,12 +415,12 @@ instance P.HasPath (PrivateKeyResource s) (TF.Attr s P.Text) where
         lens (_path :: PrivateKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _path = a } :: PrivateKeyResource s)
 
-instance P.HasComputedKeyMaterial (PrivateKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyMaterial (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
     computedKeyMaterial =
         (_key_material :: PrivateKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPath (PrivateKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (PrivateKeyResource s)) (TF.Attr s P.Text) where
     computedPath =
         (_path :: PrivateKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -516,50 +518,50 @@ instance P.HasSshKeyStoragePath (ProjectResource s) (TF.Attr s P.Text) where
         lens (_ssh_key_storage_path :: ProjectResource s -> TF.Attr s P.Text)
              (\s a -> s { _ssh_key_storage_path = a } :: ProjectResource s)
 
-instance P.HasComputedDefaultNodeExecutorPlugin (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultNodeExecutorPlugin (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedDefaultNodeExecutorPlugin =
         (_default_node_executor_plugin :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultNodeFileCopierPlugin (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultNodeFileCopierPlugin (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedDefaultNodeFileCopierPlugin =
         (_default_node_file_copier_plugin :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedExtraConfig (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExtraConfig (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedExtraConfig =
         (_extra_config :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedResourceModelSource (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourceModelSource (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedResourceModelSource =
         (_resource_model_source :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSshAuthenticationType (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSshAuthenticationType (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedSshAuthenticationType =
         (_ssh_authentication_type :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSshKeyFilePath (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSshKeyFilePath (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedSshKeyFilePath =
         (_ssh_key_file_path :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSshKeyStoragePath (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSshKeyStoragePath (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedSshKeyStoragePath =
         (_ssh_key_storage_path :: ProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUiUrl (ProjectResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUiUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedUiUrl x = TF.compute (TF.refKey x) "ui_url"
 
 projectResource :: TF.Resource P.Rundeck (ProjectResource s)
@@ -616,20 +618,20 @@ instance P.HasPath (PublicKeyResource s) (TF.Attr s P.Text) where
         lens (_path :: PublicKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _path = a } :: PublicKeyResource s)
 
-instance P.HasComputedDelete (PublicKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDelete (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
     computedDelete =
         (_delete :: PublicKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedKeyMaterial (PublicKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKeyMaterial (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
     computedKeyMaterial x = TF.compute (TF.refKey x) "key_material"
 
-instance P.HasComputedPath (PublicKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
     computedPath =
         (_path :: PublicKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUrl (PublicKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
 publicKeyResource :: TF.Resource P.Rundeck (PublicKeyResource s)

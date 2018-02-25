@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -159,19 +161,19 @@ instance P.HasTags (AgentServiceResource s) (TF.Attr s P.Text) where
         lens (_tags :: AgentServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: AgentServiceResource s)
 
-instance P.HasComputedAddress (AgentServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedId (AgentServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (AgentServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPort (AgentServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
-instance P.HasComputedTags (AgentServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 agentServiceResource :: TF.Resource P.Consul (AgentServiceResource s)
@@ -237,23 +239,23 @@ instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
         lens (_token :: CatalogEntryResource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: CatalogEntryResource s)
 
-instance P.HasComputedAddress (CatalogEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedDatacenter (CatalogEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
     computedDatacenter =
         (_datacenter :: CatalogEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNode (CatalogEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNode (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
     computedNode x = TF.compute (TF.refKey x) "node"
 
-instance P.HasComputedService (CatalogEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedService (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
     computedService =
         (_service :: CatalogEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (CatalogEntryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
     computedToken =
         (_token :: CatalogEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -327,20 +329,20 @@ instance P.HasToken (KeyPrefixResource s) (TF.Attr s P.Text) where
         lens (_token :: KeyPrefixResource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: KeyPrefixResource s)
 
-instance P.HasComputedDatacenter (KeyPrefixResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance P.HasComputedPathPrefix (KeyPrefixResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPathPrefix (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
     computedPathPrefix =
         (_path_prefix :: KeyPrefixResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSubkeys (KeyPrefixResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubkeys (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
     computedSubkeys =
         (_subkeys :: KeyPrefixResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (KeyPrefixResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
     computedToken =
         (_token :: KeyPrefixResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -397,15 +399,15 @@ instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
         lens (_token :: KeysResource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: KeysResource s)
 
-instance P.HasComputedDatacenter (KeysResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance P.HasComputedKey (KeysResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
     computedKey =
         (_key :: KeysResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (KeysResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
     computedToken =
         (_token :: KeysResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -447,10 +449,10 @@ instance P.HasName (NodeResource s) (TF.Attr s P.Text) where
         lens (_name :: NodeResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: NodeResource s)
 
-instance P.HasComputedAddress (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedName (NodeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 nodeResource :: TF.Resource P.Consul (NodeResource s)
@@ -571,65 +573,65 @@ instance P.HasToken (PreparedQueryResource s) (TF.Attr s P.Text) where
         lens (_token :: PreparedQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: PreparedQueryResource s)
 
-instance P.HasComputedDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedDatacenter =
         (_datacenter :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDns (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDns (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedDns =
         (_dns :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFailover (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFailover (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedFailover =
         (_failover :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNear (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNear (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedNear =
         (_near :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOnlyPassing (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOnlyPassing (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedOnlyPassing =
         (_only_passing :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedService (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedService (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedService =
         (_service :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSession (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSession (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedSession =
         (_session :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStoredToken (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStoredToken (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedStoredToken =
         (_stored_token :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTemplate (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedTemplate =
         (_template :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (PreparedQueryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (PreparedQueryResource s)) (TF.Attr s P.Text) where
     computedToken =
         (_token :: PreparedQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -712,19 +714,19 @@ instance P.HasTags (ServiceResource s) (TF.Attr s P.Text) where
         lens (_tags :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ServiceResource s)
 
-instance P.HasComputedAddress (ServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance P.HasComputedName (ServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPort (ServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
-instance P.HasComputedServiceId (ServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedServiceId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedServiceId x = TF.compute (TF.refKey x) "service_id"
 
-instance P.HasComputedTags (ServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 serviceResource :: TF.Resource P.Consul (ServiceResource s)

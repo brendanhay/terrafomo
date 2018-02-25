@@ -266,130 +266,130 @@ instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
 class HasComputedAgentIp a b | a -> b where
-    computedAgentIp :: TF.Ref s a -> b
+    computedAgentIp :: a -> b
 
 class HasComputedAlgorithm a b | a -> b where
-    computedAlgorithm :: TF.Ref s a -> b
+    computedAlgorithm :: a -> b
 
 class HasComputedCatalogId a b | a -> b where
-    computedCatalogId :: TF.Ref s a -> b
+    computedCatalogId :: a -> b
 
 class HasComputedCert a b | a -> b where
-    computedCert :: TF.Ref s a -> b
+    computedCert :: a -> b
 
 class HasComputedCertChain a b | a -> b where
-    computedCertChain :: TF.Ref s a -> b
+    computedCertChain :: a -> b
 
 class HasComputedCertFingerprint a b | a -> b where
-    computedCertFingerprint :: TF.Ref s a -> b
+    computedCertFingerprint :: a -> b
 
 class HasComputedCn a b | a -> b where
-    computedCn :: TF.Ref s a -> b
+    computedCn :: a -> b
 
 class HasComputedCommand a b | a -> b where
-    computedCommand :: TF.Ref s a -> b
+    computedCommand :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDockerCompose a b | a -> b where
-    computedDockerCompose :: TF.Ref s a -> b
+    computedDockerCompose :: a -> b
 
 class HasComputedDriver a b | a -> b where
-    computedDriver :: TF.Ref s a -> b
+    computedDriver :: a -> b
 
 class HasComputedEnvironment a b | a -> b where
-    computedEnvironment :: TF.Ref s a -> b
+    computedEnvironment :: a -> b
 
 class HasComputedEnvironmentId a b | a -> b where
-    computedEnvironmentId :: TF.Ref s a -> b
+    computedEnvironmentId :: a -> b
 
 class HasComputedExpiresAt a b | a -> b where
-    computedExpiresAt :: TF.Ref s a -> b
+    computedExpiresAt :: a -> b
 
 class HasComputedFinishUpgrade a b | a -> b where
-    computedFinishUpgrade :: TF.Ref s a -> b
+    computedFinishUpgrade :: a -> b
 
 class HasComputedHostLabels a b | a -> b where
-    computedHostLabels :: TF.Ref s a -> b
+    computedHostLabels :: a -> b
 
 class HasComputedHostname a b | a -> b where
-    computedHostname :: TF.Ref s a -> b
+    computedHostname :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedImage a b | a -> b where
-    computedImage :: TF.Ref s a -> b
+    computedImage :: a -> b
 
 class HasComputedIssuedAt a b | a -> b where
-    computedIssuedAt :: TF.Ref s a -> b
+    computedIssuedAt :: a -> b
 
 class HasComputedIssuer a b | a -> b where
-    computedIssuer :: TF.Ref s a -> b
+    computedIssuer :: a -> b
 
 class HasComputedKey a b | a -> b where
-    computedKey :: TF.Ref s a -> b
+    computedKey :: a -> b
 
 class HasComputedKeySize a b | a -> b where
-    computedKeySize :: TF.Ref s a -> b
+    computedKeySize :: a -> b
 
 class HasComputedLabels a b | a -> b where
-    computedLabels :: TF.Ref s a -> b
+    computedLabels :: a -> b
 
 class HasComputedMember a b | a -> b where
-    computedMember :: TF.Ref s a -> b
+    computedMember :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedOrchestration a b | a -> b where
-    computedOrchestration :: TF.Ref s a -> b
+    computedOrchestration :: a -> b
 
 class HasComputedProjectTemplateId a b | a -> b where
-    computedProjectTemplateId :: TF.Ref s a -> b
+    computedProjectTemplateId :: a -> b
 
 class HasComputedPublicValue a b | a -> b where
-    computedPublicValue :: TF.Ref s a -> b
+    computedPublicValue :: a -> b
 
 class HasComputedRancherCompose a b | a -> b where
-    computedRancherCompose :: TF.Ref s a -> b
+    computedRancherCompose :: a -> b
 
 class HasComputedRegistrationUrl a b | a -> b where
-    computedRegistrationUrl :: TF.Ref s a -> b
+    computedRegistrationUrl :: a -> b
 
 class HasComputedRegistryId a b | a -> b where
-    computedRegistryId :: TF.Ref s a -> b
+    computedRegistryId :: a -> b
 
 class HasComputedRenderedDockerCompose a b | a -> b where
-    computedRenderedDockerCompose :: TF.Ref s a -> b
+    computedRenderedDockerCompose :: a -> b
 
 class HasComputedRenderedRancherCompose a b | a -> b where
-    computedRenderedRancherCompose :: TF.Ref s a -> b
+    computedRenderedRancherCompose :: a -> b
 
 class HasComputedScope a b | a -> b where
-    computedScope :: TF.Ref s a -> b
+    computedScope :: a -> b
 
 class HasComputedSecretValue a b | a -> b where
-    computedSecretValue :: TF.Ref s a -> b
+    computedSecretValue :: a -> b
 
 class HasComputedSerialNumber a b | a -> b where
-    computedSerialNumber :: TF.Ref s a -> b
+    computedSerialNumber :: a -> b
 
 class HasComputedServerAddress a b | a -> b where
-    computedServerAddress :: TF.Ref s a -> b
+    computedServerAddress :: a -> b
 
 class HasComputedStartOnCreate a b | a -> b where
-    computedStartOnCreate :: TF.Ref s a -> b
+    computedStartOnCreate :: a -> b
 
 class HasComputedSubjectAlternativeNames a b | a -> b where
-    computedSubjectAlternativeNames :: TF.Ref s a -> b
+    computedSubjectAlternativeNames :: a -> b
 
 class HasComputedToken a b | a -> b where
-    computedToken :: TF.Ref s a -> b
+    computedToken :: a -> b
 
 class HasComputedValue a b | a -> b where
-    computedValue :: TF.Ref s a -> b
+    computedValue :: a -> b
 
 class HasComputedVersion a b | a -> b where
-    computedVersion :: TF.Ref s a -> b
+    computedVersion :: a -> b

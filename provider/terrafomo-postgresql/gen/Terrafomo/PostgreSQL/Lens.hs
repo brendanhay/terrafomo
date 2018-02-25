@@ -242,79 +242,79 @@ instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
 
 class HasComputedAllowConnections a b | a -> b where
-    computedAllowConnections :: TF.Ref s a -> b
+    computedAllowConnections :: a -> b
 
 class HasComputedBypassRowLevelSecurity a b | a -> b where
-    computedBypassRowLevelSecurity :: TF.Ref s a -> b
+    computedBypassRowLevelSecurity :: a -> b
 
 class HasComputedConnectionLimit a b | a -> b where
-    computedConnectionLimit :: TF.Ref s a -> b
+    computedConnectionLimit :: a -> b
 
 class HasComputedCreateDatabase a b | a -> b where
-    computedCreateDatabase :: TF.Ref s a -> b
+    computedCreateDatabase :: a -> b
 
 class HasComputedCreateRole a b | a -> b where
-    computedCreateRole :: TF.Ref s a -> b
+    computedCreateRole :: a -> b
 
 class HasComputedEncoding a b | a -> b where
-    computedEncoding :: TF.Ref s a -> b
+    computedEncoding :: a -> b
 
 class HasComputedEncryptedPassword a b | a -> b where
-    computedEncryptedPassword :: TF.Ref s a -> b
+    computedEncryptedPassword :: a -> b
 
 class HasComputedIfNotExists a b | a -> b where
-    computedIfNotExists :: TF.Ref s a -> b
+    computedIfNotExists :: a -> b
 
 class HasComputedInherit a b | a -> b where
-    computedInherit :: TF.Ref s a -> b
+    computedInherit :: a -> b
 
 class HasComputedIsTemplate a b | a -> b where
-    computedIsTemplate :: TF.Ref s a -> b
+    computedIsTemplate :: a -> b
 
 class HasComputedLcCollate a b | a -> b where
-    computedLcCollate :: TF.Ref s a -> b
+    computedLcCollate :: a -> b
 
 class HasComputedLcCtype a b | a -> b where
-    computedLcCtype :: TF.Ref s a -> b
+    computedLcCtype :: a -> b
 
 class HasComputedLogin a b | a -> b where
-    computedLogin :: TF.Ref s a -> b
+    computedLogin :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedOwner a b | a -> b where
-    computedOwner :: TF.Ref s a -> b
+    computedOwner :: a -> b
 
 class HasComputedPassword a b | a -> b where
-    computedPassword :: TF.Ref s a -> b
+    computedPassword :: a -> b
 
 class HasComputedPolicy a b | a -> b where
-    computedPolicy :: TF.Ref s a -> b
+    computedPolicy :: a -> b
 
 class HasComputedReplication a b | a -> b where
-    computedReplication :: TF.Ref s a -> b
+    computedReplication :: a -> b
 
 class HasComputedSchema a b | a -> b where
-    computedSchema :: TF.Ref s a -> b
+    computedSchema :: a -> b
 
 class HasComputedSkipDropRole a b | a -> b where
-    computedSkipDropRole :: TF.Ref s a -> b
+    computedSkipDropRole :: a -> b
 
 class HasComputedSkipReassignOwned a b | a -> b where
-    computedSkipReassignOwned :: TF.Ref s a -> b
+    computedSkipReassignOwned :: a -> b
 
 class HasComputedSuperuser a b | a -> b where
-    computedSuperuser :: TF.Ref s a -> b
+    computedSuperuser :: a -> b
 
 class HasComputedTablespaceName a b | a -> b where
-    computedTablespaceName :: TF.Ref s a -> b
+    computedTablespaceName :: a -> b
 
 class HasComputedTemplate a b | a -> b where
-    computedTemplate :: TF.Ref s a -> b
+    computedTemplate :: a -> b
 
 class HasComputedValidUntil a b | a -> b where
-    computedValidUntil :: TF.Ref s a -> b
+    computedValidUntil :: a -> b
 
 class HasComputedVersion a b | a -> b where
-    computedVersion :: TF.Ref s a -> b
+    computedVersion :: a -> b

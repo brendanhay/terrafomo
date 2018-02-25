@@ -221,100 +221,100 @@ instance HasVolume a b => HasVolume (TF.Schema l p a) b where
     volume = TF.configuration . volume
 
 class HasComputedAction a b | a -> b where
-    computedAction :: TF.Ref s a -> b
+    computedAction :: a -> b
 
 class HasComputedArchitecture a b | a -> b where
-    computedArchitecture :: TF.Ref s a -> b
+    computedArchitecture :: a -> b
 
 class HasComputedBootCmdArgs a b | a -> b where
-    computedBootCmdArgs :: TF.Ref s a -> b
+    computedBootCmdArgs :: a -> b
 
 class HasComputedBootscript a b | a -> b where
-    computedBootscript :: TF.Ref s a -> b
+    computedBootscript :: a -> b
 
 class HasComputedCreationDate a b | a -> b where
-    computedCreationDate :: TF.Ref s a -> b
+    computedCreationDate :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedDirection a b | a -> b where
-    computedDirection :: TF.Ref s a -> b
+    computedDirection :: a -> b
 
 class HasComputedDtb a b | a -> b where
-    computedDtb :: TF.Ref s a -> b
+    computedDtb :: a -> b
 
 class HasComputedDynamicIpRequired a b | a -> b where
-    computedDynamicIpRequired :: TF.Ref s a -> b
+    computedDynamicIpRequired :: a -> b
 
 class HasComputedEnableIpv6 a b | a -> b where
-    computedEnableIpv6 :: TF.Ref s a -> b
+    computedEnableIpv6 :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedImage a b | a -> b where
-    computedImage :: TF.Ref s a -> b
+    computedImage :: a -> b
 
 class HasComputedInitrd a b | a -> b where
-    computedInitrd :: TF.Ref s a -> b
+    computedInitrd :: a -> b
 
 class HasComputedIp a b | a -> b where
-    computedIp :: TF.Ref s a -> b
+    computedIp :: a -> b
 
 class HasComputedIpRange a b | a -> b where
-    computedIpRange :: TF.Ref s a -> b
+    computedIpRange :: a -> b
 
 class HasComputedKernel a b | a -> b where
-    computedKernel :: TF.Ref s a -> b
+    computedKernel :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedNameFilter a b | a -> b where
-    computedNameFilter :: TF.Ref s a -> b
+    computedNameFilter :: a -> b
 
 class HasComputedOrganization a b | a -> b where
-    computedOrganization :: TF.Ref s a -> b
+    computedOrganization :: a -> b
 
 class HasComputedPort a b | a -> b where
-    computedPort :: TF.Ref s a -> b
+    computedPort :: a -> b
 
 class HasComputedPrivateIp a b | a -> b where
-    computedPrivateIp :: TF.Ref s a -> b
+    computedPrivateIp :: a -> b
 
 class HasComputedProtocol a b | a -> b where
-    computedProtocol :: TF.Ref s a -> b
+    computedProtocol :: a -> b
 
 class HasComputedPublic a b | a -> b where
-    computedPublic :: TF.Ref s a -> b
+    computedPublic :: a -> b
 
 class HasComputedPublicIp a b | a -> b where
-    computedPublicIp :: TF.Ref s a -> b
+    computedPublicIp :: a -> b
 
 class HasComputedPublicIpv6 a b | a -> b where
-    computedPublicIpv6 :: TF.Ref s a -> b
+    computedPublicIpv6 :: a -> b
 
 class HasComputedSecurityGroup a b | a -> b where
-    computedSecurityGroup :: TF.Ref s a -> b
+    computedSecurityGroup :: a -> b
 
 class HasComputedServer a b | a -> b where
-    computedServer :: TF.Ref s a -> b
+    computedServer :: a -> b
 
 class HasComputedSizeInGb a b | a -> b where
-    computedSizeInGb :: TF.Ref s a -> b
+    computedSizeInGb :: a -> b
 
 class HasComputedState a b | a -> b where
-    computedState :: TF.Ref s a -> b
+    computedState :: a -> b
 
 class HasComputedStateDetail a b | a -> b where
-    computedStateDetail :: TF.Ref s a -> b
+    computedStateDetail :: a -> b
 
 class HasComputedTags a b | a -> b where
-    computedTags :: TF.Ref s a -> b
+    computedTags :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedVolume a b | a -> b where
-    computedVolume :: TF.Ref s a -> b
+    computedVolume :: a -> b

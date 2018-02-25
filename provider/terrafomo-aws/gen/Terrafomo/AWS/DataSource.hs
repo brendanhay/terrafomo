@@ -7,8 +7,8 @@
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
-{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
@@ -635,13 +635,13 @@ import Lens.Micro (lens)
 
 import Terrafomo.AWS.Types as P
 
+import qualified Data.Text              as P
+import qualified Data.Word              as P
+import qualified GHC.Base               as P
+import qualified Numeric.Natural        as P
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.AWS.Lens as P
-import qualified Data.Text       as P
-import qualified Data.Word       as P
-import qualified GHC.Base        as P
-import qualified Numeric.Natural as P
-import qualified Terrafomo.IP    as P
+import qualified Terrafomo.IP           as P
 
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
@@ -657,13 +657,13 @@ creation of ACM certificates. But using this data source, you can reference
 them by domain without having to hard code the ARNs as input.
 -}
 data AcmCertificateDataSource s = AcmCertificateDataSource {
-      _domain :: !(TF.Attr s P.Text)
+      _domain      :: !(TF.Attr s P.Text)
     {- ^ (Required) The domain of the certificate to look up. If no certificate is found with this name, an error will be returned. -}
     , _most_recent :: !(TF.Attr s P.Text)
     {- ^ (Optional) If set to true, it sorts the certificates matched by previous criteria by the NotBefore field, returning only the most recent one. If set to false, it returns an error if more than one certificate is found. Defaults to false. -}
-    , _statuses :: !(TF.Attr s P.Text)
+    , _statuses    :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of statuses on which to filter the returned list. Valid values are @PENDING_VALIDATION@ , @ISSUED@ , @INACTIVE@ , @EXPIRED@ , @VALIDATION_TIMED_OUT@ , @REVOKED@ and @FAILED@ . If no value is specified, only certificates in the @ISSUED@ state are returned. -}
-    , _types :: !(TF.Attr s P.Text)
+    , _types       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of types on which to filter the returned list. Valid values are @AMAZON_ISSUED@ and @IMPORTED@ . -}
     } deriving (Show, Eq)
 
@@ -736,13 +736,13 @@ resources.
 data AmiDataSource s = AmiDataSource {
       _executable_users :: !(TF.Attr s P.Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter :: !(TF.Attr s [P.Ec2Filter s])
+    , _filter           :: !(TF.Attr s [P.Ec2Filter s])
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _most_recent :: !(TF.Attr s P.Text)
+    , _most_recent      :: !(TF.Attr s P.Text)
     {- ^ (Optional) If more than one result is returned, use the most recent AMI. -}
-    , _name_regex :: !(TF.Attr s P.Text)
+    , _name_regex       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners :: !(TF.Attr s P.Text)
+    , _owners           :: !(TF.Attr s P.Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
@@ -896,11 +896,11 @@ criteria.
 data AmiIdsDataSource s = AmiIdsDataSource {
       _executable_users :: !(TF.Attr s P.Text)
     {- ^ (Optional) Limit search to users with explicit launch permission on  the image. Valid items are the numeric account ID or @self@ . -}
-    , _filter :: !(TF.Attr s P.Text)
+    , _filter           :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html> . -}
-    , _name_regex :: !(TF.Attr s P.Text)
+    , _name_regex       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A regex string to apply to the AMI list returned by AWS. This allows more advanced filtering not supported from the AWS API. This filtering is done locally on what AWS returns, and could have a performance impact if the result is large. It is recommended to combine this with other options to narrow down the list AWS returns. -}
-    , _owners :: !(TF.Attr s P.Text)
+    , _owners           :: !(TF.Attr s P.Text)
     {- ^ (Optional) Limit search to specific AMI owners. Valid items are the numeric account ID, @amazon@ , or @self@ . -}
     } deriving (Show, Eq)
 
@@ -1010,7 +1010,7 @@ numbers. This is different from the @aws_availability_zones@ (plural) data
 source, which provides a list of the available zones.
 -}
 data AvailabilityZoneDataSource s = AvailabilityZoneDataSource {
-      _name :: !(TF.Attr s P.Text)
+      _name  :: !(TF.Attr s P.Text)
     {- ^ (Optional) The full name of the availability zone to select. -}
     , _state :: !(TF.Attr s P.Text)
     {- ^ (Optional) A specific availability zone state to require. May be any of @"available"@ , @"information"@ or @"impaired"@ . -}
@@ -1122,9 +1122,9 @@ and ARN in which Terraform is authorized.
 data CallerIdentityDataSource s = CallerIdentityDataSource {
       _account_id :: !(TF.Attr s P.Text)
     {- ^ - The AWS Account ID number of the account that owns or contains the calling entity. -}
-    , _arn :: !(TF.Attr s P.Text)
+    , _arn        :: !(TF.Attr s P.Text)
     {- ^ - The AWS ARN associated with the calling entity. -}
-    , _user_id :: !(TF.Attr s P.Text)
+    , _user_id    :: !(TF.Attr s P.Text)
     {- ^ - The unique identifier of the calling entity. -}
     } deriving (Show, Eq)
 
@@ -1183,7 +1183,7 @@ effective account in which Terraform is working.
 data CanonicalUserIdDataSource s = CanonicalUserIdDataSource {
       _display_name :: !(TF.Attr s P.Text)
     {- ^ - The human-friendly name linked to the canonical user ID. -}
-    , _id :: !(TF.Attr s P.Text)
+    , _id           :: !(TF.Attr s P.Text)
     {- ^ - The canonical user ID associated with the AWS account. -}
     } deriving (Show, Eq)
 
@@ -1470,13 +1470,13 @@ data DbSnapshotDataSource s = DbSnapshotDataSource {
     {- ^ (Optional) Returns the list of snapshots created by the specific db_instance -}
     , _db_snapshot_identifier :: !(TF.Attr s P.Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
-    , _include_public :: !(TF.Attr s P.Text)
+    , _include_public         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set this value to true to include manual DB snapshots that are public and can be copied or restored by any AWS account, otherwise set this value to false. The default is @false@ . -}
-    , _include_shared :: !(TF.Attr s P.Text)
+    , _include_shared         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Set this value to true to include shared manual DB snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, otherwise set this value to false. The default is @false@ . -}
-    , _most_recent :: !(TF.Attr s P.Text)
+    , _most_recent            :: !(TF.Attr s P.Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Snapshot. -}
-    , _snapshot_type :: !(TF.Attr s P.Text)
+    , _snapshot_type          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The type of snapshots to be returned. If you don't specify a SnapshotType value, then both automated and manual snapshots are returned. Shared and public DB snapshots are not included in the returned results by default. Possible values are, @automated@ , @manual@ , @shared@ and @public@ . -}
     } deriving (Show, Eq)
 
@@ -1650,15 +1650,15 @@ Use this data source to get information about an EBS Snapshot for use when
 provisioning EBS Volumes
 -}
 data EbsSnapshotDataSource s = EbsSnapshotDataSource {
-      _filter :: !(TF.Attr s P.Text)
+      _filter                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _most_recent :: !(TF.Attr s P.Text)
+    , _most_recent            :: !(TF.Attr s P.Text)
     {- ^ (Optional) If more than one result is returned, use the most recent snapshot. -}
-    , _owners :: !(TF.Attr s P.Text)
+    , _owners                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
-    , _snapshot_ids :: !(TF.Attr s P.Text)
+    , _snapshot_ids           :: !(TF.Attr s P.Text)
     {- ^ (Optional) Returns information on a specific snapshot_id. -}
     } deriving (Show, Eq)
 
@@ -1774,9 +1774,9 @@ Use this data source to get a list of EBS Snapshot IDs matching the
 specified criteria.
 -}
 data EbsSnapshotIdsDataSource s = EbsSnapshotIdsDataSource {
-      _filter :: !(TF.Attr s P.Text)
+      _filter                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-snapshots.html> . -}
-    , _owners :: !(TF.Attr s P.Text)
+    , _owners                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) Returns the snapshots owned by the specified owner id. Multiple owners can be specified. -}
     , _restorable_by_user_ids :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more AWS accounts IDs that can create volumes from the snapshot. -}
@@ -1834,7 +1834,7 @@ Use this data source to get information about an EBS volume for use in other
 resources.
 -}
 data EbsVolumeDataSource s = EbsVolumeDataSource {
-      _filter :: !(TF.Attr s P.Text)
+      _filter      :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html> . -}
     , _most_recent :: !(TF.Attr s P.Text)
     {- ^ (Optional) If more than one result is returned, use the most recent Volume. -}
@@ -2001,7 +2001,7 @@ The ECS container definition data source allows access to details of a
 specific container within an AWS ECS service.
 -}
 data EcsContainerDefinitionDataSource s = EcsContainerDefinitionDataSource {
-      _container_name :: !(TF.Attr s P.Text)
+      _container_name  :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the container definition -}
     , _task_definition :: !(TF.Attr s P.Text)
     {- ^ (Required) The ARN of the task definition which contains the container -}
@@ -2228,7 +2228,7 @@ prove useful when a module accepts an allocation ID or public IP as an input
 variable and needs to determine the other.
 -}
 data EipDataSource s = EipDataSource {
-      _id :: !(TF.Attr s P.Text)
+      _id        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The allocation id of the specific EIP to retrieve. -}
     , _public_ip :: !(TF.Attr s P.Text)
     {- ^ (Optional) The public IP of the specific EIP to retrieve. -}
@@ -2309,7 +2309,7 @@ Use this data source to get the name of a elastic beanstalk solution stack.
 data ElasticBeanstalkSolutionStackDataSource s = ElasticBeanstalkSolutionStackDataSource {
       _most_recent :: !(TF.Attr s P.Bool)
     {- ^ (Optional) If more than one result is returned, use the most recent solution stack. -}
-    , _name_regex :: !(TF.Attr s P.Text)
+    , _name_regex  :: !(TF.Attr s P.Text)
     {- ^ - A regex string to apply to the solution stack list returned by AWS. See <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> from AWS documentation for reference solution stack names. -}
     } deriving (Show, Eq)
 
@@ -2779,11 +2779,11 @@ for use with resources which expect policy documents, such as the
 data IamPolicyDocumentDataSource s = IamPolicyDocumentDataSource {
       _override_json :: !(TF.Attr s P.Text)
     {- ^ (Optional) - An IAM policy document to import and override the current policy document.  Statements with non-blank @sid@ s in the override document will overwrite statements with the same @sid@ in the current document. Statements without an @sid@ cannot be overwritten. -}
-    , _policy_id :: !(TF.Attr s P.Text)
+    , _policy_id     :: !(TF.Attr s P.Text)
     {- ^ (Optional) - An ID for the policy document. -}
-    , _source_json :: !(TF.Attr s P.Text)
+    , _source_json   :: !(TF.Attr s P.Text)
     {- ^ (Optional) - An IAM policy document to import as a base for the current policy document.  Statements with non-blank @sid@ s in the current policy document will overwrite statements with the same @sid@ in the source json.  Statements without an @sid@ cannot be overwritten. -}
-    , _statement :: !(TF.Attr s P.Text)
+    , _statement     :: !(TF.Attr s P.Text)
     {- ^ (Required) - A nested configuration block (described below) configuring one statement to be included in the policy document. -}
     } deriving (Show, Eq)
 
@@ -2901,9 +2901,9 @@ iamRoleDataSource =
 Use this data source to lookup information about IAM Server Certificates.
 -}
 data IamServerCertificateDataSource s = IamServerCertificateDataSource {
-      _latest :: !(TF.Attr s P.Text)
+      _latest      :: !(TF.Attr s P.Text)
     {- ^ - sort results by expiration date. returns the certificate with expiration date in furthest in the future. -}
-    , _name :: !(TF.Attr s P.Text)
+    , _name        :: !(TF.Attr s P.Text)
     {- ^ - exact name of the cert to lookup -}
     , _name_prefix :: !(TF.Attr s P.Text)
     {- ^ - prefix of cert to filter by -}
@@ -3042,9 +3042,9 @@ Use this data source to get the ID of an Amazon EC2 Instance for use in
 other resources.
 -}
 data InstanceDataSource s = InstanceDataSource {
-      _filter :: !(TF.Attr s P.Text)
+      _filter        :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
-    , _instance_id :: !(TF.Attr s P.Text)
+    , _instance_id   :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specify the exact Instance ID with which to populate the data source. -}
     , _instance_tags :: !(TF.Attr s P.Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Instance. -}
@@ -3187,7 +3187,7 @@ any time and you'd need to re-run @apply@ every time an instance comes up or
 dies.
 -}
 data InstancesDataSource s = InstancesDataSource {
-      _filter :: !(TF.Attr s P.Text)
+      _filter        :: !(TF.Attr s P.Text)
     {- ^ (Optional) One or more name/value pairs to use as filters. There are several valid keys, for a full reference, check out <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html> . -}
     , _instance_tags :: !(TF.Attr s P.Text)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on desired instances. -}
@@ -3241,11 +3241,11 @@ instancesDataSource =
 @aws_internet_gateway@ provides details about a specific Internet Gateway.
 -}
 data InternetGatewayDataSource s = InternetGatewayDataSource {
-      _filter :: !(TF.Attr s P.Text)
+      _filter              :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _internet_gateway_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the specific Internet Gateway to retrieve. -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags                :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Internet Gateway. -}
     } deriving (Show, Eq)
 
@@ -3308,7 +3308,7 @@ Use this data source to get the
 AWS products and services.
 -}
 data IpRangesDataSource s = IpRangesDataSource {
-      _regions :: !(TF.Attr s P.Text)
+      _regions  :: !(TF.Attr s P.Text)
     {- ^ (Optional) Filter IP ranges by regions (or include all regions, if omitted). Valid items are @global@ (for @cloudfront@ ) as well as all AWS regions (e.g. @eu-central-1@ ) -}
     , _services :: !(TF.Attr s P.Text)
     {- ^ (Required) Filter IP ranges by services. Valid items are @amazon@ (for amazon.com), @cloudfront@ , @codebuild@ , @ec2@ , @route53@ , @route53_healthchecks@ and @S3@ . -}
@@ -3462,9 +3462,9 @@ including the plaintext be stored in the raw state as plain-text.
 </docs/state/sensitive-data.html> .
 -}
 data KmsCiphertextDataSource s = KmsCiphertextDataSource {
-      _context :: !(TF.Attr s P.Text)
+      _context   :: !(TF.Attr s P.Text)
     {- ^ (Optional) An optional mapping that makes up the encryption context. -}
-    , _key_id :: !(TF.Attr s P.Text)
+    , _key_id    :: !(TF.Attr s P.Text)
     {- ^ (Required) Globally unique key ID for the customer master key. -}
     , _plaintext :: !(TF.Attr s P.Text)
     {- ^ (Required) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file. -}
@@ -3563,7 +3563,7 @@ useful when a module accepts an LB as an input variable and needs to, for
 example, determine the security groups associated with it, etc.
 -}
 data LbDataSource s = LbDataSource {
-      _arn :: !(TF.Attr s P.Text)
+      _arn  :: !(TF.Attr s P.Text)
     {- ^ (Optional) The full ARN of the load balancer. -}
     , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The unique name of the load balancer. -}
@@ -3612,11 +3612,11 @@ Listener as an input variable and needs to know the LB it is attached to, or
 other information specific to the listener in question.
 -}
 data LbListenerDataSource s = LbListenerDataSource {
-      _arn :: !(TF.Attr s P.Text)
+      _arn               :: !(TF.Attr s P.Text)
     {- ^ (Optional) The arn of the listener. Required if @load_balancer_arn@ and @port@ is not set. -}
     , _load_balancer_arn :: !(TF.Attr s P.Text)
     {- ^ (Optional) The arn of the load balander. Required if @arn@ is not set. -}
-    , _port :: !(TF.Attr s P.Text)
+    , _port              :: !(TF.Attr s P.Text)
     {- ^ (Optional) The port of the listener. Required if @arn@ is not set. -}
     } deriving (Show, Eq)
 
@@ -3676,7 +3676,7 @@ also be used to get the ARN of an LB Target Group for use in other
 resources, given LB Target Group name.
 -}
 data LbTargetGroupDataSource s = LbTargetGroupDataSource {
-      _arn :: !(TF.Attr s P.Text)
+      _arn  :: !(TF.Attr s P.Text)
     {- ^ (Optional) The full ARN of the target group. -}
     , _name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The unique name of the target group. -}
@@ -3721,19 +3721,19 @@ lbTargetGroupDataSource =
 Provides details about a specific Nat Gateway.
 -}
 data NatGatewayDataSource s = NatGatewayDataSource {
-      _filter :: !(TF.Attr s P.Text)
+      _filter    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. More complex filters can be expressed using one or more @filter@ sub-blocks, which take the following arguments: -}
-    , _id :: !(TF.Attr s P.Text)
+    , _id        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the specific Nat Gateway to retrieve. -}
-    , _name :: !(TF.Attr s P.Text)
+    , _name      :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the field to filter by, as defined by <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html> . -}
-    , _state :: !(TF.Attr s P.Text)
+    , _state     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The state of the NAT gateway (pending | failed | available | deleting | deleted ). -}
     , _subnet_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of subnet that the Nat Gateway resides in. -}
-    , _values :: !(TF.Attr s P.Text)
+    , _values    :: !(TF.Attr s P.Text)
     {- ^ (Required) Set of values that are accepted for the given field. An Nat Gateway will be selected if any one of the given values matches. -}
-    , _vpc_id :: !(TF.Attr s P.Text)
+    , _vpc_id    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the VPC that the Nat Gateway resides in. -}
     } deriving (Show, Eq)
 
@@ -3850,7 +3850,7 @@ Use this data source to get information about a Network Interface.
 data NetworkInterfaceDataSource s = NetworkInterfaceDataSource {
       _filter :: !(TF.Attr s P.Text)
     {- ^ – (Optional) One or more name/value pairs to filter off of. There are several valid keys, for a full reference, check out <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-network-interfaces.html> in the AWS CLI reference. -}
-    , _id :: !(TF.Attr s P.Text)
+    , _id     :: !(TF.Attr s P.Text)
     {- ^ – (Optional) The identifier for the network interface. -}
     } deriving (Show, Eq)
 
@@ -3935,7 +3935,7 @@ associated AWS service. The latter may be useful e.g. for adding network ACL
 rules.
 -}
 data PrefixListDataSource s = PrefixListDataSource {
-      _name :: !(TF.Attr s P.Text)
+      _name           :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the prefix list to select. -}
     , _prefix_list_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the prefix list to select. -}
@@ -4061,7 +4061,7 @@ parent module.
 data RegionDataSource s = RegionDataSource {
       _endpoint :: !(TF.Attr s P.Text)
     {- ^ (Optional) The EC2 endpoint of the region to select. -}
-    , _name :: !(TF.Attr s P.Text)
+    , _name     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The full name of the region to select. -}
     } deriving (Show, Eq)
 
@@ -4105,15 +4105,15 @@ This data source allows to find a Hosted Zone ID given Hosted Zone name and
 certain search criteria.
 -}
 data Route53ZoneDataSource s = Route53ZoneDataSource {
-      _name :: !(TF.Attr s P.Text)
+      _name         :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Hosted Zone name of the desired Hosted Zone. -}
     , _private_zone :: !(TF.Attr s P.Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone. -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags         :: !(TF.Attr s P.Tags)
     {- ^ (Optional) Used with @name@ field. A mapping of tags, each pair of which must exactly match a pair on the desired Hosted Zone. -}
-    , _vpc_id :: !(TF.Attr s P.Text)
+    , _vpc_id       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone associated with the vpc_id (in this case, private_zone is not mandatory). -}
-    , _zone_id :: !(TF.Attr s P.Text)
+    , _zone_id      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Hosted Zone id of the desired Hosted Zone. -}
     } deriving (Show, Eq)
 
@@ -4203,15 +4203,15 @@ resource can prove useful when a module accepts a Subnet id as an input
 variable and needs to, for example, add a route in the Route Table.
 -}
 data RouteTableDataSource s = RouteTableDataSource {
-      _filter :: !(TF.Attr s P.Text)
+      _filter         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. -}
     , _route_table_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the specific Route Table to retrieve. -}
-    , _subnet_id :: !(TF.Attr s P.Text)
+    , _subnet_id      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of a Subnet which is connected to the Route Table (not be exported if not given in parameter). -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags           :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Route Table. -}
-    , _vpc_id :: !(TF.Attr s P.Text)
+    , _vpc_id         :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
     } deriving (Show, Eq)
 
@@ -4373,9 +4373,9 @@ to prevent printing unsafe characters and potentially downloading large
 amount of data which would be thrown away in favour of metadata.
 -}
 data S3BucketObjectDataSource s = S3BucketObjectDataSource {
-      _bucket :: !(TF.Attr s P.Text)
+      _bucket     :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the bucket to read the object from -}
-    , _key :: !(TF.Attr s P.Text)
+    , _key        :: !(TF.Attr s P.Text)
     {- ^ (Required) The full path to the object inside the bucket -}
     , _version_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specific version ID of the object returned (defaults to latest version) -}
@@ -4486,11 +4486,11 @@ the security group belongs to.
 data SecurityGroupDataSource s = SecurityGroupDataSource {
       _filter :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attr s P.Text)
+    , _id     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the specific security group to retrieve. -}
-    , _name :: !(TF.Attr s P.Text)
+    , _name   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name that the desired security group must have. -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags   :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired security group. -}
     , _vpc_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
@@ -4613,7 +4613,7 @@ snsTopicDataSource =
 Provides an SSM Parameter data source.
 -}
 data SsmParameterDataSource s = SsmParameterDataSource {
-      _name :: !(TF.Attr s P.Text)
+      _name            :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the parameter. -}
     , _with_decryption :: !(TF.Attr s P.Text)
     {- ^ (Optional) Whether to return decrypted @SecureString@ value. Defaults to @true@ . -}
@@ -4663,21 +4663,21 @@ to.
 data SubnetDataSource s = SubnetDataSource {
       _availability_zone :: !(TF.Attr s P.Zone)
     {- ^ (Optional) The availability zone where the subnet must reside. -}
-    , _cidr_block :: !(TF.Attr s P.CIDR)
+    , _cidr_block        :: !(TF.Attr s P.CIDR)
     {- ^ (Optional) The cidr block of the desired subnet. -}
-    , _default_for_az :: !(TF.Attr s P.Text)
+    , _default_for_az    :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean constraint for whether the desired subnet must be the default subnet for its associated availability zone. -}
-    , _filter :: !(TF.Attr s P.Text)
+    , _filter            :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attr s P.Text)
+    , _id                :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the specific subnet to retrieve. -}
-    , _ipv6_cidr_block :: !(TF.Attr s P.CIDR)
+    , _ipv6_cidr_block   :: !(TF.Attr s P.CIDR)
     {- ^ (Optional) The Ipv6 cidr block of the desired subnet -}
-    , _state :: !(TF.Attr s P.Text)
+    , _state             :: !(TF.Attr s P.Text)
     {- ^ (Optional) The state that the desired subnet must have. -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnet. -}
-    , _vpc_id :: !(TF.Attr s P.Text)
+    , _vpc_id            :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the VPC that the desired subnet belongs to. -}
     } deriving (Show, Eq)
 
@@ -4805,7 +4805,7 @@ subnetDataSource =
 useful for getting back a list of subnet ids for a vpc.
 -}
 data SubnetIdsDataSource s = SubnetIdsDataSource {
-      _tags :: !(TF.Attr s P.Tags)
+      _tags   :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnets. -}
     , _vpc_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The VPC ID that you want to filter from. -}
@@ -4855,19 +4855,19 @@ useful when a module accepts a vpc id as an input variable and needs to, for
 example, determine the CIDR block of that VPC.
 -}
 data VpcDataSource s = VpcDataSource {
-      _cidr_block :: !(TF.Attr s P.CIDR)
+      _cidr_block      :: !(TF.Attr s P.CIDR)
     {- ^ (Optional) The cidr block of the desired VPC. -}
-    , _default' :: !(TF.Attr s P.Text)
+    , _default'        :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean constraint on whether the desired VPC is the default VPC for the region. -}
     , _dhcp_options_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The DHCP options id of the desired VPC. -}
-    , _filter :: !(TF.Attr s P.Text)
+    , _filter          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attr s P.Text)
+    , _id              :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the specific VPC to retrieve. -}
-    , _state :: !(TF.Attr s P.Text)
+    , _state           :: !(TF.Attr s P.Text)
     {- ^ (Optional) The current state of the desired VPC. Can be either @"pending"@ or @"available"@ . -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags            :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC. -}
     } deriving (Show, Eq)
 
@@ -4985,13 +4985,13 @@ vpcDataSource =
 The VPC Endpoint data source provides details about a specific VPC endpoint.
 -}
 data VpcEndpointDataSource s = VpcEndpointDataSource {
-      _id :: !(TF.Attr s P.Text)
+      _id           :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the specific VPC Endpoint to retrieve. -}
     , _service_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS service name of the specific VPC Endpoint to retrieve. -}
-    , _state :: !(TF.Attr s P.Text)
+    , _state        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The state of the specific VPC Endpoint to retrieve. -}
-    , _vpc_id :: !(TF.Attr s P.Text)
+    , _vpc_id       :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the VPC in which the specific VPC Endpoint is used. -}
     } deriving (Show, Eq)
 
@@ -5090,7 +5090,7 @@ can be specified when creating a VPC endpoint within the region configured
 in the provider.
 -}
 data VpcEndpointServiceDataSource s = VpcEndpointServiceDataSource {
-      _service :: !(TF.Attr s P.Text)
+      _service      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The common name of an AWS service (e.g. @s3@ ). -}
     , _service_name :: !(TF.Attr s P.Text)
     {- ^ (Optional) The service name that can be specified when creating a VPC endpoint. -}
@@ -5157,29 +5157,29 @@ The VPC Peering Connection data source provides details about a specific VPC
 peering connection.
 -}
 data VpcPeeringConnectionDataSource s = VpcPeeringConnectionDataSource {
-      _cidr_block :: !(TF.Attr s P.CIDR)
+      _cidr_block      :: !(TF.Attr s P.CIDR)
     {- ^ (Optional) The CIDR block of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _filter :: !(TF.Attr s P.Text)
+    , _filter          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attr s P.Text)
+    , _id              :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the specific VPC Peering Connection to retrieve. -}
-    , _owner_id :: !(TF.Attr s P.Text)
+    , _owner_id        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS account ID of the owner of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     , _peer_cidr_block :: !(TF.Attr s P.CIDR)
     {- ^ (Optional) The CIDR block of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_owner_id :: !(TF.Attr s P.Text)
+    , _peer_owner_id   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The AWS account ID of the owner of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_region :: !(TF.Attr s P.Region)
+    , _peer_region     :: !(TF.Attr s P.Region)
     {- ^ (Optional) The region of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _peer_vpc_id :: !(TF.Attr s P.Text)
+    , _peer_vpc_id     :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the accepter VPC of the specific VPC Peering Connection to retrieve. -}
-    , _region :: !(TF.Attr s P.Region)
+    , _region          :: !(TF.Attr s P.Region)
     {- ^ (Optional) The region of the requester VPC of the specific VPC Peering Connection to retrieve. -}
-    , _status :: !(TF.Attr s P.Text)
+    , _status          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The status of the specific VPC Peering Connection to retrieve. -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags            :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC Peering Connection. -}
-    , _vpc_id :: !(TF.Attr s P.Text)
+    , _vpc_id          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     } deriving (Show, Eq)
 
@@ -5348,19 +5348,19 @@ vpcPeeringConnectionDataSource =
 The VPN Gateway data source provides details about a specific VPN gateway.
 -}
 data VpnGatewayDataSource s = VpnGatewayDataSource {
-      _amazon_side_asn :: !(TF.Attr s P.Text)
+      _amazon_side_asn   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The Autonomous System Number (ASN) for the Amazon side of the specific VPN Gateway to retrieve. -}
-    , _attached_vpc_id :: !(TF.Attr s P.Text)
+    , _attached_vpc_id   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of a VPC attached to the specific VPN Gateway to retrieve. -}
     , _availability_zone :: !(TF.Attr s P.Zone)
     {- ^ (Optional) The Availability Zone of the specific VPN Gateway to retrieve. -}
-    , _filter :: !(TF.Attr s P.Text)
+    , _filter            :: !(TF.Attr s P.Text)
     {- ^ (Optional) Custom filter block as described below. -}
-    , _id :: !(TF.Attr s P.Text)
+    , _id                :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the specific VPN Gateway to retrieve. -}
-    , _state :: !(TF.Attr s P.Text)
+    , _state             :: !(TF.Attr s P.Text)
     {- ^ (Optional) The state of the specific VPN Gateway to retrieve. -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s P.Tags)
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPN Gateway. -}
     } deriving (Show, Eq)
 

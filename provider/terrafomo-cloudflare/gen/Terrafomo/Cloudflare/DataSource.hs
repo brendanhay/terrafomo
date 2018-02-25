@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -71,13 +73,13 @@ data IpRangesDataSource s = IpRangesDataSource {
 instance TF.ToHCL (IpRangesDataSource s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedCidrBlocks (IpRangesDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesDataSource s)) (TF.Attr s P.Text) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
-instance P.HasComputedIpv4CidrBlocks (IpRangesDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4CidrBlocks (TF.Ref s' (IpRangesDataSource s)) (TF.Attr s P.Text) where
     computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
 
-instance P.HasComputedIpv6CidrBlocks (IpRangesDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6CidrBlocks (TF.Ref s' (IpRangesDataSource s)) (TF.Attr s P.Text) where
     computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
 
 ipRangesDataSource :: TF.DataSource P.Cloudflare (IpRangesDataSource s)

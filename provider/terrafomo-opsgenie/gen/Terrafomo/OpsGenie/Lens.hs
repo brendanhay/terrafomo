@@ -99,28 +99,28 @@ instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedFullName a b | a -> b where
-    computedFullName :: TF.Ref s a -> b
+    computedFullName :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedLocale a b | a -> b where
-    computedLocale :: TF.Ref s a -> b
+    computedLocale :: a -> b
 
 class HasComputedMember a b | a -> b where
-    computedMember :: TF.Ref s a -> b
+    computedMember :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedRole a b | a -> b where
-    computedRole :: TF.Ref s a -> b
+    computedRole :: a -> b
 
 class HasComputedTimezone a b | a -> b where
-    computedTimezone :: TF.Ref s a -> b
+    computedTimezone :: a -> b
 
 class HasComputedUsername a b | a -> b where
-    computedUsername :: TF.Ref s a -> b
+    computedUsername :: a -> b

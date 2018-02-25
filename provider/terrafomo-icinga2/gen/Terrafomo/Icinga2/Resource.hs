@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -128,22 +130,22 @@ instance P.HasTemplates (CheckcommandResource s) (TF.Attr s P.Text) where
         lens (_templates :: CheckcommandResource s -> TF.Attr s P.Text)
              (\s a -> s { _templates = a } :: CheckcommandResource s)
 
-instance P.HasComputedArguments (CheckcommandResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedArguments (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
     computedArguments =
         (_arguments :: CheckcommandResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCommand (CheckcommandResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCommand (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
     computedCommand =
         (_command :: CheckcommandResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (CheckcommandResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: CheckcommandResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTemplates (CheckcommandResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTemplates (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
     computedTemplates =
         (_templates :: CheckcommandResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -210,27 +212,27 @@ instance P.HasVars (HostResource s) (TF.Attr s P.Text) where
         lens (_vars :: HostResource s -> TF.Attr s P.Text)
              (\s a -> s { _vars = a } :: HostResource s)
 
-instance P.HasComputedAddress (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedAddress =
         (_address :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCheckCommand (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCheckCommand (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedCheckCommand =
         (_check_command :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostname (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedHostname =
         (_hostname :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTemplates (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTemplates (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedTemplates =
         (_templates :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVars (HostResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVars (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedVars =
         (_vars :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -274,12 +276,12 @@ instance P.HasName (HostgroupResource s) (TF.Attr s P.Text) where
         lens (_name :: HostgroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: HostgroupResource s)
 
-instance P.HasComputedDisplayName (HostgroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (HostgroupResource s)) (TF.Attr s P.Text) where
     computedDisplayName =
         (_display_name :: HostgroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (HostgroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (HostgroupResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: HostgroupResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -328,17 +330,17 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         lens (_name :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasComputedCheckCommand (ServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCheckCommand (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedCheckCommand =
         (_check_command :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostname (ServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedHostname =
         (_hostname :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ServiceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue

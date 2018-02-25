@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -199,22 +201,22 @@ instance P.HasTeams (ApikeyResource s) (TF.Attr s P.Text) where
         lens (_teams :: ApikeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _teams = a } :: ApikeyResource s)
 
-instance P.HasComputedKey (ApikeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
     computedKey =
         (_key :: ApikeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ApikeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ApikeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPermissions (ApikeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
     computedPermissions =
         (_permissions :: ApikeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTeams (ApikeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTeams (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
     computedTeams =
         (_teams :: ApikeyResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -265,17 +267,17 @@ instance P.HasSourceId (DatafeedResource s) (TF.Attr s P.Text) where
         lens (_source_id :: DatafeedResource s -> TF.Attr s P.Text)
              (\s a -> s { _source_id = a } :: DatafeedResource s)
 
-instance P.HasComputedConfig (DatafeedResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfig (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
     computedConfig =
         (_config :: DatafeedResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatafeedResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatafeedResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceId (DatafeedResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceId (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
     computedSourceId =
         (_source_id :: DatafeedResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -325,17 +327,17 @@ instance P.HasSourcetype (DatasourceResource s) (TF.Attr s P.Text) where
         lens (_sourcetype :: DatasourceResource s -> TF.Attr s P.Text)
              (\s a -> s { _sourcetype = a } :: DatasourceResource s)
 
-instance P.HasComputedConfig (DatasourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfig (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
     computedConfig =
         (_config :: DatasourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatasourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatasourceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourcetype (DatasourceResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourcetype (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
     computedSourcetype =
         (_sourcetype :: DatasourceResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -481,77 +483,77 @@ instance P.HasRules (MonitoringjobResource s) (TF.Attr s P.Text) where
         lens (_rules :: MonitoringjobResource s -> TF.Attr s P.Text)
              (\s a -> s { _rules = a } :: MonitoringjobResource s)
 
-instance P.HasComputedActive (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedActive (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedActive =
         (_active :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedConfig (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfig (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedConfig =
         (_config :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFrequency (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFrequency (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedFrequency =
         (_frequency :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedJobType (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedJobType (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedJobType =
         (_job_type :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotes (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotes =
         (_notes :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotifyDelay (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyDelay (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyDelay =
         (_notify_delay :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotifyFailback (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyFailback (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyFailback =
         (_notify_failback :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotifyList (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyList (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyList =
         (_notify_list :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotifyRegional (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyRegional (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyRegional =
         (_notify_regional :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotifyRepeat (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifyRepeat (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedNotifyRepeat =
         (_notify_repeat :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicy (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedPolicy =
         (_policy :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRapidRecheck (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRapidRecheck (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedRapidRecheck =
         (_rapid_recheck :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRegions (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedRegions =
         (_regions :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRules (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRules (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
     computedRules =
         (_rules :: MonitoringjobResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -605,12 +607,12 @@ instance P.HasNotifications (NotifylistResource s) (TF.Attr s P.Text) where
         lens (_notifications :: NotifylistResource s -> TF.Attr s P.Text)
              (\s a -> s { _notifications = a } :: NotifylistResource s)
 
-instance P.HasComputedName (NotifylistResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: NotifylistResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotifications (NotifylistResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotifications (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
     computedNotifications =
         (_notifications :: NotifylistResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -699,42 +701,42 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
         lens (_zone :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
-instance P.HasComputedAnswers (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAnswers (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedAnswers =
         (_answers :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDomain (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedDomain =
         (_domain :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFilters (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilters (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedFilters =
         (_filters :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLink (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLink (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedLink =
         (_link :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedTtl =
         (_ttl :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUseClientSubnet (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUseClientSubnet (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedUseClientSubnet =
         (_use_client_subnet :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedZone (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedZone =
         (_zone :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -781,12 +783,12 @@ instance P.HasPermissions (TeamResource s) (TF.Attr s P.Text) where
         lens (_permissions :: TeamResource s -> TF.Attr s P.Text)
              (\s a -> s { _permissions = a } :: TeamResource s)
 
-instance P.HasComputedName (TeamResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPermissions (TeamResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
     computedPermissions =
         (_permissions :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -860,32 +862,32 @@ instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
         lens (_username :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: UserResource s)
 
-instance P.HasComputedEmail (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedEmail =
         (_email :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotify (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotify (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedNotify =
         (_notify :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPermissions (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedPermissions =
         (_permissions :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTeams (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTeams (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedTeams =
         (_teams :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUsername (UserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -978,42 +980,42 @@ instance P.HasZone (ZoneResource s) (TF.Attr s P.Text) where
         lens (_zone :: ZoneResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: ZoneResource s)
 
-instance P.HasComputedExpiry (ZoneResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExpiry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedExpiry =
         (_expiry :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLink (ZoneResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLink (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedLink =
         (_link :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNxTtl (ZoneResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNxTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedNxTtl =
         (_nx_ttl :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrimary (ZoneResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedPrimary =
         (_primary :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRefresh (ZoneResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRefresh (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedRefresh =
         (_refresh :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRetry (ZoneResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRetry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedRetry =
         (_retry :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTtl (ZoneResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedTtl =
         (_ttl :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedZone (ZoneResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
     computedZone =
         (_zone :: ZoneResource s -> TF.Attr s P.Text)
             . TF.refValue

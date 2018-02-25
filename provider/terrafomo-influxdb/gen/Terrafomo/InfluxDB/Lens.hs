@@ -90,22 +90,22 @@ instance HasRetentionPolicies a b => HasRetentionPolicies (TF.Schema l p a) b wh
     retentionPolicies = TF.configuration . retentionPolicies
 
 class HasComputedAdmin a b | a -> b where
-    computedAdmin :: TF.Ref s a -> b
+    computedAdmin :: a -> b
 
 class HasComputedDatabase a b | a -> b where
-    computedDatabase :: TF.Ref s a -> b
+    computedDatabase :: a -> b
 
 class HasComputedGrant a b | a -> b where
-    computedGrant :: TF.Ref s a -> b
+    computedGrant :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedPassword a b | a -> b where
-    computedPassword :: TF.Ref s a -> b
+    computedPassword :: a -> b
 
 class HasComputedQuery a b | a -> b where
-    computedQuery :: TF.Ref s a -> b
+    computedQuery :: a -> b
 
 class HasComputedRetentionPolicies a b | a -> b where
-    computedRetentionPolicies :: TF.Ref s a -> b
+    computedRetentionPolicies :: a -> b

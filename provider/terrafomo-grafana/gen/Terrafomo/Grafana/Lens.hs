@@ -156,52 +156,52 @@ instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
 class HasComputedAccessMode a b | a -> b where
-    computedAccessMode :: TF.Ref s a -> b
+    computedAccessMode :: a -> b
 
 class HasComputedBasicAuthEnabled a b | a -> b where
-    computedBasicAuthEnabled :: TF.Ref s a -> b
+    computedBasicAuthEnabled :: a -> b
 
 class HasComputedBasicAuthPassword a b | a -> b where
-    computedBasicAuthPassword :: TF.Ref s a -> b
+    computedBasicAuthPassword :: a -> b
 
 class HasComputedBasicAuthUsername a b | a -> b where
-    computedBasicAuthUsername :: TF.Ref s a -> b
+    computedBasicAuthUsername :: a -> b
 
 class HasComputedConfigJson a b | a -> b where
-    computedConfigJson :: TF.Ref s a -> b
+    computedConfigJson :: a -> b
 
 class HasComputedDatabaseName a b | a -> b where
-    computedDatabaseName :: TF.Ref s a -> b
+    computedDatabaseName :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedIsDefault a b | a -> b where
-    computedIsDefault :: TF.Ref s a -> b
+    computedIsDefault :: a -> b
 
 class HasComputedJsonData a b | a -> b where
-    computedJsonData :: TF.Ref s a -> b
+    computedJsonData :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedPassword a b | a -> b where
-    computedPassword :: TF.Ref s a -> b
+    computedPassword :: a -> b
 
 class HasComputedSecureJsonData a b | a -> b where
-    computedSecureJsonData :: TF.Ref s a -> b
+    computedSecureJsonData :: a -> b
 
 class HasComputedSettings a b | a -> b where
-    computedSettings :: TF.Ref s a -> b
+    computedSettings :: a -> b
 
 class HasComputedSlug a b | a -> b where
-    computedSlug :: TF.Ref s a -> b
+    computedSlug :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedUrl a b | a -> b where
-    computedUrl :: TF.Ref s a -> b
+    computedUrl :: a -> b
 
 class HasComputedUsername a b | a -> b where
-    computedUsername :: TF.Ref s a -> b
+    computedUsername :: a -> b

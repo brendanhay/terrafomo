@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -86,25 +88,25 @@ instance P.HasName (ImageDataSource s) (TF.Attr s P.Text) where
         lens (_name :: ImageDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ImageDataSource s)
 
-instance P.HasComputedImage (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
 
-instance P.HasComputedMinDiskSize (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMinDiskSize (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedMinDiskSize x = TF.compute (TF.refKey x) "min_disk_size"
 
-instance P.HasComputedName (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPrivate (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivate (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedPrivate x = TF.compute (TF.refKey x) "private"
 
-instance P.HasComputedRegions (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
-instance P.HasComputedSizeGigabytes (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSizeGigabytes (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedSizeGigabytes x = TF.compute (TF.refKey x) "size_gigabytes"
 
-instance P.HasComputedType' (ImageDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageDataSource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
 imageDataSource :: TF.DataSource P.DigitalOcean (ImageDataSource s)

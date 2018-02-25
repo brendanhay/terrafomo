@@ -107,31 +107,31 @@ instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedFeature a b | a -> b where
-    computedFeature :: TF.Ref s a -> b
+    computedFeature :: a -> b
 
 class HasComputedId a b | a -> b where
-    computedId :: TF.Ref s a -> b
+    computedId :: a -> b
 
 class HasComputedLocation a b | a -> b where
-    computedLocation :: TF.Ref s a -> b
+    computedLocation :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedResourceId a b | a -> b where
-    computedResourceId :: TF.Ref s a -> b
+    computedResourceId :: a -> b
 
 class HasComputedResourceType a b | a -> b where
-    computedResourceType :: TF.Ref s a -> b
+    computedResourceType :: a -> b
 
 class HasComputedSize a b | a -> b where
-    computedSize :: TF.Ref s a -> b
+    computedSize :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
 
 class HasComputedVersion a b | a -> b where
-    computedVersion :: TF.Ref s a -> b
+    computedVersion :: a -> b

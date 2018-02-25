@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -85,16 +87,16 @@ instance P.HasName (ApplicationDataSource s) (TF.Attr s P.Text) where
         lens (_name :: ApplicationDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ApplicationDataSource s)
 
-instance P.HasComputedHostIds (ApplicationDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationDataSource s)) (TF.Attr s P.Text) where
     computedHostIds x = TF.compute (TF.refKey x) "host_ids"
 
-instance P.HasComputedId (ApplicationDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceIds (ApplicationDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (ApplicationDataSource s)) (TF.Attr s P.Text) where
     computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
-instance P.HasComputedName (ApplicationDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ApplicationDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ApplicationDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -126,10 +128,10 @@ instance P.HasName (KeyTransactionDataSource s) (TF.Attr s P.Text) where
         lens (_name :: KeyTransactionDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: KeyTransactionDataSource s)
 
-instance P.HasComputedId (KeyTransactionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyTransactionDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (KeyTransactionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyTransactionDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: KeyTransactionDataSource s -> TF.Attr s P.Text)
             . TF.refValue

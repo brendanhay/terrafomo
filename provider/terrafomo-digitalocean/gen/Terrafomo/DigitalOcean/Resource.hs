@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -222,31 +224,31 @@ instance P.HasPrivateKey (CertificateResource s) (TF.Attr s P.Text) where
         lens (_private_key :: CertificateResource s -> TF.Attr s P.Text)
              (\s a -> s { _private_key = a } :: CertificateResource s)
 
-instance P.HasComputedCertificateChain (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedCertificateChain =
         (_certificate_chain :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLeafCertificate (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLeafCertificate (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedLeafCertificate =
         (_leaf_certificate :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedNotAfter (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedNotAfter x = TF.compute (TF.refKey x) "not_after"
 
-instance P.HasComputedPrivateKey (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedPrivateKey =
         (_private_key :: CertificateResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSha1Fingerprint (CertificateResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSha1Fingerprint (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedSha1Fingerprint x = TF.compute (TF.refKey x) "sha1_fingerprint"
 
 certificateResource :: TF.Resource P.DigitalOcean (CertificateResource s)
@@ -286,15 +288,15 @@ instance P.HasName (DomainResource s) (TF.Attr s P.Text) where
         lens (_name :: DomainResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DomainResource s)
 
-instance P.HasComputedId (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIpAddress (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedIpAddress =
         (_ip_address :: DomainResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DomainResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DomainResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -424,86 +426,86 @@ instance P.HasVolumeIds (DropletResource s) (TF.Attr s P.Text) where
         lens (_volume_ids :: DropletResource s -> TF.Attr s P.Text)
              (\s a -> s { _volume_ids = a } :: DropletResource s)
 
-instance P.HasComputedBackups (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBackups (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedBackups =
         (_backups :: DropletResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDisk (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
-instance P.HasComputedId (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImage (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImage (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
 
-instance P.HasComputedIpv4Address (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedIpv4Address x = TF.compute (TF.refKey x) "ipv4_address"
 
-instance P.HasComputedIpv4AddressPrivate (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4AddressPrivate (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "ipv4_address_private"
 
-instance P.HasComputedIpv6 (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedIpv6 x = TF.compute (TF.refKey x) "ipv6"
 
-instance P.HasComputedIpv6Address (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6Address (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedIpv6Address x = TF.compute (TF.refKey x) "ipv6_address"
 
-instance P.HasComputedIpv6AddressPrivate (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6AddressPrivate (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedIpv6AddressPrivate x = TF.compute (TF.refKey x) "ipv6_address_private"
 
-instance P.HasComputedLocked (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedLocked x = TF.compute (TF.refKey x) "locked"
 
-instance P.HasComputedMonitoring (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMonitoring (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedMonitoring =
         (_monitoring :: DropletResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPriceHourly (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriceHourly (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedPriceHourly x = TF.compute (TF.refKey x) "price_hourly"
 
-instance P.HasComputedPriceMonthly (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriceMonthly (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedPriceMonthly x = TF.compute (TF.refKey x) "price_monthly"
 
-instance P.HasComputedPrivateNetworking (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPrivateNetworking (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedPrivateNetworking x = TF.compute (TF.refKey x) "private_networking"
 
-instance P.HasComputedRegion (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance P.HasComputedResizeDisk (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResizeDisk (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedResizeDisk =
         (_resize_disk :: DropletResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance P.HasComputedSshKeys (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSshKeys (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedSshKeys =
         (_ssh_keys :: DropletResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStatus (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedTags (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance P.HasComputedUserData (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUserData (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedUserData =
         (_user_data :: DropletResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVcpus (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedVcpus x = TF.compute (TF.refKey x) "vcpus"
 
-instance P.HasComputedVolumeIds (DropletResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVolumeIds (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
     computedVolumeIds x = TF.compute (TF.refKey x) "volume_ids"
 
 dropletResource :: TF.Resource P.DigitalOcean (DropletResource s)
@@ -577,41 +579,41 @@ instance P.HasTags (FirewallResource s) (TF.Attr s P.Text) where
         lens (_tags :: FirewallResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: FirewallResource s)
 
-instance P.HasComputedCreatedAt (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance P.HasComputedDropletIds (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDropletIds (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedDropletIds x = TF.compute (TF.refKey x) "droplet_ids"
 
-instance P.HasComputedId (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInboundRule (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInboundRule (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedInboundRule =
         (_inbound_rule :: FirewallResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInboundRules (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInboundRules (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedInboundRules x = TF.compute (TF.refKey x) "inbound_rules"
 
-instance P.HasComputedName (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedOutboundRule (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOutboundRule (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedOutboundRule =
         (_outbound_rule :: FirewallResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOutboundRules (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOutboundRules (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedOutboundRules x = TF.compute (TF.refKey x) "outbound_rules"
 
-instance P.HasComputedPendingChanges (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPendingChanges (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedPendingChanges x = TF.compute (TF.refKey x) "pending_changes"
 
-instance P.HasComputedStatus (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedTags (FirewallResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 firewallResource :: TF.Resource P.DigitalOcean (FirewallResource s)
@@ -653,15 +655,15 @@ instance P.HasRegion (FloatingIpResource s) (TF.Attr s P.Text) where
         lens (_region :: FloatingIpResource s -> TF.Attr s P.Text)
              (\s a -> s { _region = a } :: FloatingIpResource s)
 
-instance P.HasComputedDropletId (FloatingIpResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDropletId (TF.Ref s' (FloatingIpResource s)) (TF.Attr s P.Text) where
     computedDropletId =
         (_droplet_id :: FloatingIpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpAddress (FloatingIpResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (FloatingIpResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance P.HasComputedRegion (FloatingIpResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (FloatingIpResource s)) (TF.Attr s P.Text) where
     computedRegion =
         (_region :: FloatingIpResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -758,53 +760,53 @@ instance P.HasStickySessions (LoadbalancerResource s) (TF.Attr s P.Text) where
         lens (_sticky_sessions :: LoadbalancerResource s -> TF.Attr s P.Text)
              (\s a -> s { _sticky_sessions = a } :: LoadbalancerResource s)
 
-instance P.HasComputedAlgorithm (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedAlgorithm =
         (_algorithm :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDropletIds (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDropletIds (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedDropletIds =
         (_droplet_ids :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDropletTag (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDropletTag (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedDropletTag =
         (_droplet_tag :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedForwardingRule (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedForwardingRule (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedForwardingRule =
         (_forwarding_rule :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHealthcheck (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHealthcheck (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedHealthcheck =
         (_healthcheck :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIp (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
 
-instance P.HasComputedName (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRedirectHttpToHttps (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRedirectHttpToHttps (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedRedirectHttpToHttps =
         (_redirect_http_to_https :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRegion (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedRegion =
         (_region :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStickySessions (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedStickySessions =
         (_sticky_sessions :: LoadbalancerResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -899,48 +901,48 @@ instance P.HasWeight (RecordResource s) (TF.Attr s P.Text) where
         lens (_weight :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _weight = a } :: RecordResource s)
 
-instance P.HasComputedDomain (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedDomain =
         (_domain :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFqdn (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
-instance P.HasComputedId (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPort (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedPort =
         (_port :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPriority (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedPriority =
         (_priority :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedTtl =
         (_ttl :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedValue (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedValue =
         (_value :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedWeight (RecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedWeight (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedWeight =
         (_weight :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -988,16 +990,16 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
         lens (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _public_key = a } :: SshKeyResource s)
 
-instance P.HasComputedFingerprint (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance P.HasComputedId (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedPublicKey x = TF.compute (TF.refKey x) "public_key"
 
 sshKeyResource :: TF.Resource P.DigitalOcean (SshKeyResource s)
@@ -1030,10 +1032,10 @@ instance P.HasName (TagResource s) (TF.Attr s P.Text) where
         lens (_name :: TagResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TagResource s)
 
-instance P.HasComputedId (TagResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (TagResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
 tagResource :: TF.Resource P.DigitalOcean (TagResource s)
@@ -1095,30 +1097,30 @@ instance P.HasSize (VolumeResource s) (TF.Attr s P.Text) where
         lens (_size :: VolumeResource s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: VolumeResource s)
 
-instance P.HasComputedDescription (VolumeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDropletIds (VolumeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDropletIds (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedDropletIds =
         (_droplet_ids :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (VolumeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (VolumeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRegion (VolumeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedRegion =
         (_region :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (VolumeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedSize =
         (_size :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue

@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -137,7 +139,7 @@ instance P.HasName (CustomAttributeDataSource s) (TF.Attr s P.Text) where
         lens (_name :: CustomAttributeDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: CustomAttributeDataSource s)
 
-instance P.HasComputedName (CustomAttributeDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CustomAttributeDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: CustomAttributeDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -171,7 +173,7 @@ instance P.HasName (DatacenterDataSource s) (TF.Attr s P.Text) where
         lens (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatacenterDataSource s)
 
-instance P.HasComputedName (DatacenterDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -213,12 +215,12 @@ instance P.HasName (DatastoreDataSource s) (TF.Attr s P.Text) where
         lens (_name :: DatastoreDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatastoreDataSource s)
 
-instance P.HasComputedDatacenterId (DatastoreDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DatastoreDataSource s)) (TF.Attr s P.Text) where
     computedDatacenterId =
         (_datacenter_id :: DatastoreDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatastoreDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatastoreDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatastoreDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -263,20 +265,20 @@ instance P.HasName (DistributedVirtualSwitchDataSource s) (TF.Attr s P.Text) whe
         lens (_name :: DistributedVirtualSwitchDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DistributedVirtualSwitchDataSource s)
 
-instance P.HasComputedDatacenterId (DistributedVirtualSwitchDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DistributedVirtualSwitchDataSource s)) (TF.Attr s P.Text) where
     computedDatacenterId =
         (_datacenter_id :: DistributedVirtualSwitchDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DistributedVirtualSwitchDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedVirtualSwitchDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (DistributedVirtualSwitchDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DistributedVirtualSwitchDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DistributedVirtualSwitchDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUplinks (DistributedVirtualSwitchDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUplinks (TF.Ref s' (DistributedVirtualSwitchDataSource s)) (TF.Attr s P.Text) where
     computedUplinks x = TF.compute (TF.refKey x) "uplinks"
 
 distributedVirtualSwitchDataSource :: TF.DataSource P.VSphere (DistributedVirtualSwitchDataSource s)
@@ -316,12 +318,12 @@ instance P.HasName (HostDataSource s) (TF.Attr s P.Text) where
         lens (_name :: HostDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: HostDataSource s)
 
-instance P.HasComputedDatacenterId (HostDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (HostDataSource s)) (TF.Attr s P.Text) where
     computedDatacenterId =
         (_datacenter_id :: HostDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (HostDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (HostDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: HostDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -365,20 +367,20 @@ instance P.HasName (NetworkDataSource s) (TF.Attr s P.Text) where
         lens (_name :: NetworkDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: NetworkDataSource s)
 
-instance P.HasComputedDatacenterId (NetworkDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
     computedDatacenterId =
         (_datacenter_id :: NetworkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (NetworkDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (NetworkDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: NetworkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (NetworkDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (NetworkDataSource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
 networkDataSource :: TF.DataSource P.VSphere (NetworkDataSource s)
@@ -419,12 +421,12 @@ instance P.HasName (ResourcePoolDataSource s) (TF.Attr s P.Text) where
         lens (_name :: ResourcePoolDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ResourcePoolDataSource s)
 
-instance P.HasComputedDatacenterId (ResourcePoolDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (ResourcePoolDataSource s)) (TF.Attr s P.Text) where
     computedDatacenterId =
         (_datacenter_id :: ResourcePoolDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ResourcePoolDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePoolDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: ResourcePoolDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -462,7 +464,7 @@ instance P.HasName (TagCategoryDataSource s) (TF.Attr s P.Text) where
         lens (_name :: TagCategoryDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TagCategoryDataSource s)
 
-instance P.HasComputedName (TagCategoryDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TagCategoryDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: TagCategoryDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -507,12 +509,12 @@ instance P.HasName (TagDataSource s) (TF.Attr s P.Text) where
         lens (_name :: TagDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TagDataSource s)
 
-instance P.HasComputedCategoryId (TagDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCategoryId (TF.Ref s' (TagDataSource s)) (TF.Attr s P.Text) where
     computedCategoryId =
         (_category_id :: TagDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (TagDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TagDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: TagDataSource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -564,46 +566,46 @@ instance P.HasScsiControllerScanCount (VirtualMachineDataSource s) (TF.Attr s P.
         lens (_scsi_controller_scan_count :: VirtualMachineDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _scsi_controller_scan_count = a } :: VirtualMachineDataSource s)
 
-instance P.HasComputedAlternateGuestName (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAlternateGuestName (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedAlternateGuestName x = TF.compute (TF.refKey x) "alternate_guest_name"
 
-instance P.HasComputedDatacenterId (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedDatacenterId =
         (_datacenter_id :: VirtualMachineDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDisks (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedDisks x = TF.compute (TF.refKey x) "disks"
 
-instance P.HasComputedEagerlyScrub (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEagerlyScrub (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedEagerlyScrub x = TF.compute (TF.refKey x) "eagerly_scrub"
 
-instance P.HasComputedGuestId (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGuestId (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedGuestId x = TF.compute (TF.refKey x) "guest_id"
 
-instance P.HasComputedId (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: VirtualMachineDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNetworkInterfaceTypes (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetworkInterfaceTypes (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedNetworkInterfaceTypes x = TF.compute (TF.refKey x) "network_interface_types"
 
-instance P.HasComputedScsiControllerScanCount (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScsiControllerScanCount (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedScsiControllerScanCount =
         (_scsi_controller_scan_count :: VirtualMachineDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedScsiType (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedScsiType (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedScsiType x = TF.compute (TF.refKey x) "scsi_type"
 
-instance P.HasComputedSize (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance P.HasComputedThinProvisioned (VirtualMachineDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedThinProvisioned (TF.Ref s' (VirtualMachineDataSource s)) (TF.Attr s P.Text) where
     computedThinProvisioned x = TF.compute (TF.refKey x) "thin_provisioned"
 
 virtualMachineDataSource :: TF.DataSource P.VSphere (VirtualMachineDataSource s)
@@ -653,20 +655,20 @@ instance P.HasRescan (VmfsDisksDataSource s) (TF.Attr s P.Text) where
         lens (_rescan :: VmfsDisksDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _rescan = a } :: VmfsDisksDataSource s)
 
-instance P.HasComputedDisks (VmfsDisksDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VmfsDisksDataSource s)) (TF.Attr s P.Text) where
     computedDisks x = TF.compute (TF.refKey x) "disks"
 
-instance P.HasComputedFilter (VmfsDisksDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFilter (TF.Ref s' (VmfsDisksDataSource s)) (TF.Attr s P.Text) where
     computedFilter =
         (_filter :: VmfsDisksDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostSystemId (VmfsDisksDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (VmfsDisksDataSource s)) (TF.Attr s P.Text) where
     computedHostSystemId =
         (_host_system_id :: VmfsDisksDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRescan (VmfsDisksDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRescan (TF.Ref s' (VmfsDisksDataSource s)) (TF.Attr s P.Text) where
     computedRescan =
         (_rescan :: VmfsDisksDataSource s -> TF.Attr s P.Text)
             . TF.refValue

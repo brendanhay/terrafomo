@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -96,29 +98,29 @@ instance P.HasRegion (RegionDataSource s) (TF.Attr s P.Text) where
         lens (_region :: RegionDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _region = a } :: RegionDataSource s)
 
-instance P.HasComputedContinentCode (RegionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (RegionDataSource s)) (TF.Attr s P.Text) where
     computedContinentCode x = TF.compute (TF.refKey x) "continentCode"
 
-instance P.HasComputedContinentCode (RegionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (RegionDataSource s)) (TF.Attr s P.Text) where
     computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
 
-instance P.HasComputedDatacenterLocation (RegionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (RegionDataSource s)) (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenterLocation"
 
-instance P.HasComputedDatacenterLocation (RegionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (RegionDataSource s)) (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance P.HasComputedProjectId (RegionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (RegionDataSource s)) (TF.Attr s P.Text) where
     computedProjectId =
         (_project_id :: RegionDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRegion (RegionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RegionDataSource s)) (TF.Attr s P.Text) where
     computedRegion =
         (_region :: RegionDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedServices (RegionDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (RegionDataSource s)) (TF.Attr s P.Text) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
 regionDataSource :: TF.DataSource P.OVH (RegionDataSource s)
@@ -148,10 +150,10 @@ instance P.HasProjectId (RegionsDataSource s) (TF.Attr s P.Text) where
         lens (_project_id :: RegionsDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _project_id = a } :: RegionsDataSource s)
 
-instance P.HasComputedNames (RegionsDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNames (TF.Ref s' (RegionsDataSource s)) (TF.Attr s P.Text) where
     computedNames x = TF.compute (TF.refKey x) "names"
 
-instance P.HasComputedProjectId (RegionsDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (RegionsDataSource s)) (TF.Attr s P.Text) where
     computedProjectId =
         (_project_id :: RegionsDataSource s -> TF.Attr s P.Text)
             . TF.refValue

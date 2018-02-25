@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -168,22 +170,22 @@ instance P.HasZone (DomainZoneRecordResource s) (TF.Attr s P.Text) where
         lens (_zone :: DomainZoneRecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: DomainZoneRecordResource s)
 
-instance P.HasComputedFieldType (DomainZoneRecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFieldType (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
     computedFieldType x = TF.compute (TF.refKey x) "fieldType"
 
-instance P.HasComputedId (DomainZoneRecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedSubDomain (DomainZoneRecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSubDomain (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
     computedSubDomain x = TF.compute (TF.refKey x) "subDomain"
 
-instance P.HasComputedTarget (DomainZoneRecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTarget (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
     computedTarget x = TF.compute (TF.refKey x) "target"
 
-instance P.HasComputedTtl (DomainZoneRecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance P.HasComputedZone (DomainZoneRecordResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
     computedZone x = TF.compute (TF.refKey x) "zone"
 
 domainZoneRecordResource :: TF.Resource P.OVH (DomainZoneRecordResource s)
@@ -240,28 +242,28 @@ instance P.HasVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) wh
         lens (_vlan_id :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
              (\s a -> s { _vlan_id = a } :: PubliccloudPrivateNetworkResource s)
 
-instance P.HasComputedName (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedProjectId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
     computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance P.HasComputedRegion (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "regions_status/region"
 
-instance P.HasComputedRegions (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
-instance P.HasComputedRegionsStatus (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
     computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
 
-instance P.HasComputedStatus (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedType' (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
     computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
 
 publiccloudPrivateNetworkResource :: TF.Resource P.OVH (PubliccloudPrivateNetworkResource s)
@@ -349,40 +351,40 @@ instance P.HasStart (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Tex
         lens (_start :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
              (\s a -> s { _start = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
-instance P.HasComputedCidr (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedCidr x = TF.compute (TF.refKey x) "cidr"
 
-instance P.HasComputedDhcp (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDhcp (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedDhcp x = TF.compute (TF.refKey x) "ip_pools/dhcp"
 
-instance P.HasComputedDhcpId (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDhcpId (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedDhcpId x = TF.compute (TF.refKey x) "dhcp_id"
 
-instance P.HasComputedEnd (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEnd (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedEnd x = TF.compute (TF.refKey x) "ip_pools/end"
 
-instance P.HasComputedGatewayIp (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
 
-instance P.HasComputedIpPools (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
 
-instance P.HasComputedNetwork (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedNetwork x = TF.compute (TF.refKey x) "ip_pools/network"
 
-instance P.HasComputedNetworkId (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedNetworkId x = TF.compute (TF.refKey x) "network_id"
 
-instance P.HasComputedNoGateway (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNoGateway (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedNoGateway x = TF.compute (TF.refKey x) "no_gateway"
 
-instance P.HasComputedProjectId (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance P.HasComputedRegion (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "ip_pools/region"
 
-instance P.HasComputedStart (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStart (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedStart x = TF.compute (TF.refKey x) "ip_pools/start"
 
 publiccloudPrivateNetworkSubnetResource :: TF.Resource P.OVH (PubliccloudPrivateNetworkSubnetResource s)
@@ -426,25 +428,25 @@ instance P.HasProjectId (PubliccloudUserResource s) (TF.Attr s P.Text) where
         lens (_project_id :: PubliccloudUserResource s -> TF.Attr s P.Text)
              (\s a -> s { _project_id = a } :: PubliccloudUserResource s)
 
-instance P.HasComputedCreationDate (PubliccloudUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
-instance P.HasComputedDescription (PubliccloudUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedOpenstackRc (PubliccloudUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedOpenstackRc x = TF.compute (TF.refKey x) "openstack_rc"
 
-instance P.HasComputedPassword (PubliccloudUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedPassword x = TF.compute (TF.refKey x) "password"
 
-instance P.HasComputedProjectId (PubliccloudUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance P.HasComputedStatus (PubliccloudUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedUsername (PubliccloudUserResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
     computedUsername x = TF.compute (TF.refKey x) "username"
 
 publiccloudUserResource :: TF.Resource P.OVH (PubliccloudUserResource s)
@@ -482,10 +484,10 @@ instance P.HasVrackId (VrackPubliccloudAttachmentResource s) (TF.Attr s P.Text) 
         lens (_vrack_id :: VrackPubliccloudAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _vrack_id = a } :: VrackPubliccloudAttachmentResource s)
 
-instance P.HasComputedProjectId (VrackPubliccloudAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (VrackPubliccloudAttachmentResource s)) (TF.Attr s P.Text) where
     computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
-instance P.HasComputedVrackId (VrackPubliccloudAttachmentResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVrackId (TF.Ref s' (VrackPubliccloudAttachmentResource s)) (TF.Attr s P.Text) where
     computedVrackId x = TF.compute (TF.refKey x) "vrack_id"
 
 vrackPubliccloudAttachmentResource :: TF.Resource P.OVH (VrackPubliccloudAttachmentResource s)

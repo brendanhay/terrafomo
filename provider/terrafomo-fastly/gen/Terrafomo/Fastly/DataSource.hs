@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -70,7 +72,7 @@ data IpRangesDataSource s = IpRangesDataSource {
 instance TF.ToHCL (IpRangesDataSource s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedCidrBlocks (IpRangesDataSource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesDataSource s)) (TF.Attr s P.Text) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
 ipRangesDataSource :: TF.DataSource P.Fastly (IpRangesDataSource s)

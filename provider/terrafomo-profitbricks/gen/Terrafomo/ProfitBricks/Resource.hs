@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -134,17 +136,17 @@ instance P.HasName (DatacenterResource s) (TF.Attr s P.Text) where
         lens (_name :: DatacenterResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatacenterResource s)
 
-instance P.HasComputedDescription (DatacenterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLocation (DatacenterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatacenterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue

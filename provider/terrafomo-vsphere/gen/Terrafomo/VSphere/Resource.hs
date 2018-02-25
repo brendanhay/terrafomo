@@ -8,6 +8,8 @@
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE TypeFamilies           #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -264,12 +266,12 @@ instance P.HasName (CustomAttributeResource s) (TF.Attr s P.Text) where
         lens (_name :: CustomAttributeResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: CustomAttributeResource s)
 
-instance P.HasComputedManagedObjectType (CustomAttributeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedManagedObjectType (TF.Ref s' (CustomAttributeResource s)) (TF.Attr s P.Text) where
     computedManagedObjectType =
         (_managed_object_type :: CustomAttributeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (CustomAttributeResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CustomAttributeResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: CustomAttributeResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -318,17 +320,17 @@ instance P.HasTags (DatacenterResource s) (TF.Attr s P.Text) where
         lens (_tags :: DatacenterResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: DatacenterResource s)
 
-instance P.HasComputedFolder (DatacenterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFolder (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
     computedFolder =
         (_folder :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatacenterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (DatacenterResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -413,38 +415,38 @@ instance P.HasType' (DistributedPortGroupResource s) (TF.Attr s P.Text) where
         lens (_type' :: DistributedPortGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: DistributedPortGroupResource s)
 
-instance P.HasComputedAutoExpand (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAutoExpand (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedAutoExpand =
         (_auto_expand :: DistributedPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: DistributedPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDistributedVirtualSwitchUuid (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDistributedVirtualSwitchUuid (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedDistributedVirtualSwitchUuid =
         (_distributed_virtual_switch_uuid :: DistributedPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedKey (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedKey x = TF.compute (TF.refKey x) "key"
 
-instance P.HasComputedName (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DistributedPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNumberOfPorts (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNumberOfPorts (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedNumberOfPorts =
         (_number_of_ports :: DistributedPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: DistributedPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -598,78 +600,78 @@ instance P.HasVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) wh
         lens (_version :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: DistributedVirtualSwitchResource s)
 
-instance P.HasComputedConfigVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConfigVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedConfigVersion x = TF.compute (TF.refKey x) "config_version"
 
-instance P.HasComputedContactDetail (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContactDetail (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedContactDetail =
         (_contact_detail :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedContactName (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedContactName (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedContactName =
         (_contact_name :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDatacenterId (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedDatacenterId =
         (_datacenter_id :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFolder (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFolder (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedFolder =
         (_folder :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIpv4Address (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedIpv4Address =
         (_ipv4_address :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLacpApiVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLacpApiVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedLacpApiVersion =
         (_lacp_api_version :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLinkDiscoveryOperation (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLinkDiscoveryOperation (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedLinkDiscoveryOperation =
         (_link_discovery_operation :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLinkDiscoveryProtocol (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLinkDiscoveryProtocol (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedLinkDiscoveryProtocol =
         (_link_discovery_protocol :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMaxMtu (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaxMtu (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedMaxMtu =
         (_max_mtu :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMulticastFilteringMode (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMulticastFilteringMode (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedMulticastFilteringMode =
         (_multicast_filtering_mode :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedVersion =
         (_version :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -771,37 +773,37 @@ instance P.HasSourceFile (FileResource s) (TF.Attr s P.Text) where
         lens (_source_file :: FileResource s -> TF.Attr s P.Text)
              (\s a -> s { _source_file = a } :: FileResource s)
 
-instance P.HasComputedCreateDirectories (FileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCreateDirectories (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedCreateDirectories =
         (_create_directories :: FileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDatacenter (FileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedDatacenter =
         (_datacenter :: FileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDatastore (FileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatastore (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedDatastore =
         (_datastore :: FileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDestinationFile (FileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDestinationFile (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedDestinationFile =
         (_destination_file :: FileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceDatacenter (FileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceDatacenter (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedSourceDatacenter =
         (_source_datacenter :: FileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceDatastore (FileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceDatastore (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedSourceDatastore =
         (_source_datastore :: FileResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceFile (FileResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSourceFile (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
     computedSourceFile =
         (_source_file :: FileResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -845,7 +847,7 @@ instance P.HasPath (FolderResource s) (TF.Attr s P.Text) where
         lens (_path :: FolderResource s -> TF.Attr s P.Text)
              (\s a -> s { _path = a } :: FolderResource s)
 
-instance P.HasComputedPath (FolderResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
     computedPath =
         (_path :: FolderResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -906,34 +908,34 @@ instance P.HasVlanId (HostPortGroupResource s) (TF.Attr s P.Text) where
         lens (_vlan_id :: HostPortGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _vlan_id = a } :: HostPortGroupResource s)
 
-instance P.HasComputedComputedPolicy (HostPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedComputedPolicy (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedComputedPolicy x = TF.compute (TF.refKey x) "computed_policy"
 
-instance P.HasComputedHostSystemId (HostPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedHostSystemId =
         (_host_system_id :: HostPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (HostPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedKey (HostPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedKey x = TF.compute (TF.refKey x) "key"
 
-instance P.HasComputedName (HostPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: HostPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPorts (HostPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPorts (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedPorts x = TF.compute (TF.refKey x) "ports"
 
-instance P.HasComputedVirtualSwitchName (HostPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVirtualSwitchName (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedVirtualSwitchName =
         (_virtual_switch_name :: HostPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVlanId (HostPortGroupResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedVlanId =
         (_vlan_id :: HostPortGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -997,22 +999,22 @@ instance P.HasNumberOfPorts (HostVirtualSwitchResource s) (TF.Attr s P.Text) whe
         lens (_number_of_ports :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
              (\s a -> s { _number_of_ports = a } :: HostVirtualSwitchResource s)
 
-instance P.HasComputedHostSystemId (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedHostSystemId =
         (_host_system_id :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMtu (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMtu (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedMtu =
         (_mtu :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNumberOfPorts (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNumberOfPorts (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
     computedNumberOfPorts =
         (_number_of_ports :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -1055,26 +1057,26 @@ instance P.HasLicenseKey (LicenseResource s) (TF.Attr s P.Text) where
         lens (_license_key :: LicenseResource s -> TF.Attr s P.Text)
              (\s a -> s { _license_key = a } :: LicenseResource s)
 
-instance P.HasComputedEditionKey (LicenseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedEditionKey (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
     computedEditionKey x = TF.compute (TF.refKey x) "edition_key"
 
-instance P.HasComputedLabels (LicenseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
     computedLabels =
         (_labels :: LicenseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLicenseKey (LicenseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLicenseKey (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
     computedLicenseKey =
         (_license_key :: LicenseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (LicenseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedTotal (LicenseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTotal (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
     computedTotal x = TF.compute (TF.refKey x) "total"
 
-instance P.HasComputedUsed (LicenseResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUsed (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
     computedUsed x = TF.compute (TF.refKey x) "used"
 
 licenseResource :: TF.Resource P.VSphere (LicenseResource s)
@@ -1174,76 +1176,76 @@ instance P.HasType' (NasDatastoreResource s) (TF.Attr s P.Text) where
         lens (_type' :: NasDatastoreResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: NasDatastoreResource s)
 
-instance P.HasComputedAccessMode (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessMode (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedAccessMode =
         (_access_mode :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAccessible (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedAccessible x = TF.compute (TF.refKey x) "accessible"
 
-instance P.HasComputedCapacity (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
-instance P.HasComputedFolder (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFolder (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedFolder =
         (_folder :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFreeSpace (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedFreeSpace x = TF.compute (TF.refKey x) "free_space"
 
-instance P.HasComputedHostSystemIds (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostSystemIds (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedHostSystemIds =
         (_host_system_ids :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMaintenanceMode (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaintenanceMode (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedMaintenanceMode x = TF.compute (TF.refKey x) "maintenance_mode"
 
-instance P.HasComputedMultipleHostAccess (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedMultipleHostAccess x = TF.compute (TF.refKey x) "multiple_host_access"
 
-instance P.HasComputedName (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProtocolEndpoint (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedProtocolEndpoint (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedProtocolEndpoint x = TF.compute (TF.refKey x) "protocol_endpoint"
 
-instance P.HasComputedRemoteHosts (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRemoteHosts (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedRemoteHosts =
         (_remote_hosts :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRemotePath (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRemotePath (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedRemotePath =
         (_remote_path :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecurityType (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSecurityType (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedSecurityType =
         (_security_type :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: NasDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUncommittedSpace (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedUncommittedSpace x = TF.compute (TF.refKey x) "uncommitted_space"
 
-instance P.HasComputedUrl (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
 nasDatastoreResource :: TF.Resource P.VSphere (NasDatastoreResource s)
@@ -1311,22 +1313,22 @@ instance P.HasName (TagCategoryResource s) (TF.Attr s P.Text) where
         lens (_name :: TagCategoryResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TagCategoryResource s)
 
-instance P.HasComputedAssociableTypes (TagCategoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAssociableTypes (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
     computedAssociableTypes =
         (_associable_types :: TagCategoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCardinality (TagCategoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCardinality (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
     computedCardinality =
         (_cardinality :: TagCategoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (TagCategoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: TagCategoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (TagCategoryResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: TagCategoryResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -1382,17 +1384,17 @@ instance P.HasName (TagResource s) (TF.Attr s P.Text) where
         lens (_name :: TagResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TagResource s)
 
-instance P.HasComputedCategoryId (TagResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCategoryId (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
     computedCategoryId =
         (_category_id :: TagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (TagResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: TagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (TagResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: TagResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -1469,32 +1471,32 @@ instance P.HasVmdkPath (VirtualDiskResource s) (TF.Attr s P.Text) where
         lens (_vmdk_path :: VirtualDiskResource s -> TF.Attr s P.Text)
              (\s a -> s { _vmdk_path = a } :: VirtualDiskResource s)
 
-instance P.HasComputedAdapterType (VirtualDiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAdapterType (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
     computedAdapterType =
         (_adapter_type :: VirtualDiskResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDatacenter (VirtualDiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
     computedDatacenter =
         (_datacenter :: VirtualDiskResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDatastore (VirtualDiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDatastore (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
     computedDatastore =
         (_datastore :: VirtualDiskResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (VirtualDiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
     computedSize =
         (_size :: VirtualDiskResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (VirtualDiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedType' (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: VirtualDiskResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVmdkPath (VirtualDiskResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVmdkPath (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
     computedVmdkPath =
         (_vmdk_path :: VirtualDiskResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -1544,41 +1546,41 @@ instance P.HasResourcePoolId (VirtualMachineResource s) (TF.Attr s P.Text) where
         lens (_resource_pool_id :: VirtualMachineResource s -> TF.Attr s P.Text)
              (\s a -> s { _resource_pool_id = a } :: VirtualMachineResource s)
 
-instance P.HasComputedChangeVersion (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedChangeVersion (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedChangeVersion x = TF.compute (TF.refKey x) "change_version"
 
-instance P.HasComputedDefaultIpAddress (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDefaultIpAddress (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedDefaultIpAddress x = TF.compute (TF.refKey x) "default_ip_address"
 
-instance P.HasComputedGuestIpAddresses (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGuestIpAddresses (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedGuestIpAddresses x = TF.compute (TF.refKey x) "guest_ip_addresses"
 
-instance P.HasComputedId (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImported (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImported (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedImported x = TF.compute (TF.refKey x) "imported"
 
-instance P.HasComputedName (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: VirtualMachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRebootRequired (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRebootRequired (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedRebootRequired x = TF.compute (TF.refKey x) "reboot_required"
 
-instance P.HasComputedResourcePoolId (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedResourcePoolId =
         (_resource_pool_id :: VirtualMachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUuid (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUuid (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedUuid x = TF.compute (TF.refKey x) "uuid"
 
-instance P.HasComputedVmwareToolsStatus (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVmwareToolsStatus (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedVmwareToolsStatus x = TF.compute (TF.refKey x) "vmware_tools_status"
 
-instance P.HasComputedVmxPath (VirtualMachineResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVmxPath (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedVmxPath x = TF.compute (TF.refKey x) "vmx_path"
 
 virtualMachineResource :: TF.Resource P.VSphere (VirtualMachineResource s)
@@ -1673,37 +1675,37 @@ instance P.HasVirtualMachineUuid (VirtualMachineSnapshotResource s) (TF.Attr s P
         lens (_virtual_machine_uuid :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
              (\s a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource s)
 
-instance P.HasComputedConsolidate (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedConsolidate (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
     computedConsolidate =
         (_consolidate :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMemory (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMemory (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
     computedMemory =
         (_memory :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedQuiesce (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedQuiesce (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
     computedQuiesce =
         (_quiesce :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRemoveChildren (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRemoveChildren (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
     computedRemoveChildren =
         (_remove_children :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSnapshotName (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSnapshotName (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
     computedSnapshotName =
         (_snapshot_name :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVirtualMachineUuid (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVirtualMachineUuid (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
     computedVirtualMachineUuid =
         (_virtual_machine_uuid :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
@@ -1777,53 +1779,53 @@ instance P.HasTags (VmfsDatastoreResource s) (TF.Attr s P.Text) where
         lens (_tags :: VmfsDatastoreResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
 
-instance P.HasComputedAccessible (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedAccessible x = TF.compute (TF.refKey x) "accessible"
 
-instance P.HasComputedCapacity (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
-instance P.HasComputedDisks (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedDisks =
         (_disks :: VmfsDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFolder (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFolder (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedFolder =
         (_folder :: VmfsDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFreeSpace (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedFreeSpace x = TF.compute (TF.refKey x) "free_space"
 
-instance P.HasComputedHostSystemId (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedHostSystemId =
         (_host_system_id :: VmfsDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMaintenanceMode (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMaintenanceMode (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedMaintenanceMode x = TF.compute (TF.refKey x) "maintenance_mode"
 
-instance P.HasComputedMultipleHostAccess (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedMultipleHostAccess x = TF.compute (TF.refKey x) "multiple_host_access"
 
-instance P.HasComputedName (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedName =
         (_name :: VmfsDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: VmfsDatastoreResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUncommittedSpace (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedUncommittedSpace x = TF.compute (TF.refKey x) "uncommitted_space"
 
-instance P.HasComputedUrl (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUrl (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
 vmfsDatastoreResource :: TF.Resource P.VSphere (VmfsDatastoreResource s)

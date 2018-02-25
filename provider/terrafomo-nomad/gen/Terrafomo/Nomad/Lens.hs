@@ -114,31 +114,31 @@ instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
 class HasComputedDeregisterOnDestroy a b | a -> b where
-    computedDeregisterOnDestroy :: TF.Ref s a -> b
+    computedDeregisterOnDestroy :: a -> b
 
 class HasComputedDeregisterOnIdChange a b | a -> b where
-    computedDeregisterOnIdChange :: TF.Ref s a -> b
+    computedDeregisterOnIdChange :: a -> b
 
 class HasComputedDescription a b | a -> b where
-    computedDescription :: TF.Ref s a -> b
+    computedDescription :: a -> b
 
 class HasComputedGlobal a b | a -> b where
-    computedGlobal :: TF.Ref s a -> b
+    computedGlobal :: a -> b
 
 class HasComputedJobspec a b | a -> b where
-    computedJobspec :: TF.Ref s a -> b
+    computedJobspec :: a -> b
 
 class HasComputedLimits a b | a -> b where
-    computedLimits :: TF.Ref s a -> b
+    computedLimits :: a -> b
 
 class HasComputedName a b | a -> b where
-    computedName :: TF.Ref s a -> b
+    computedName :: a -> b
 
 class HasComputedPolicies a b | a -> b where
-    computedPolicies :: TF.Ref s a -> b
+    computedPolicies :: a -> b
 
 class HasComputedRulesHcl a b | a -> b where
-    computedRulesHcl :: TF.Ref s a -> b
+    computedRulesHcl :: a -> b
 
 class HasComputedType' a b | a -> b where
-    computedType' :: TF.Ref s a -> b
+    computedType' :: a -> b
