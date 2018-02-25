@@ -81,18 +81,18 @@ instance P.HasUsername (UserDataSource s) (TF.Attr s P.Text) where
         lens (_username :: UserDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: UserDataSource s)
 
-instance P.HasComputedFullName (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFullName (UserDataSource s) (TF.Attr s P.Text) where
     computedFullName x = TF.compute (TF.refKey x) "full_name"
 
-instance P.HasComputedRole (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRole (UserDataSource s) (TF.Attr s P.Text) where
     computedRole x = TF.compute (TF.refKey x) "role"
 
-instance P.HasComputedUsername (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUsername (UserDataSource s) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-userDataSource :: TF.Schema TF.DataSource P.OpsGenie (UserDataSource s)
+userDataSource :: TF.DataSource P.OpsGenie (UserDataSource s)
 userDataSource =
     TF.newDataSource "opsgenie_user" $
         UserDataSource {

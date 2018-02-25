@@ -120,38 +120,38 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
         lens (_zone :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
-instance P.HasComputedFqdn (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFqdn (RecordResource s) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
-instance P.HasComputedId (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (RecordResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RecordResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTtl (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
     computedTtl =
         (_ttl :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedValue (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedValue (RecordResource s) (TF.Attr s P.Text) where
     computedValue =
         (_value :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedZone (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedZone (RecordResource s) (TF.Attr s P.Text) where
     computedZone =
         (_zone :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-recordResource :: TF.Schema TF.Resource P.Dyn (RecordResource s)
+recordResource :: TF.Resource P.Dyn (RecordResource s)
 recordResource =
     TF.newResource "dyn_record" $
         RecordResource {

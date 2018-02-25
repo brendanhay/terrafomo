@@ -1,13 +1,15 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE DuplicateRecordFields  #-}
+{-# LANGUAGE FlexibleInstances      #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
 {-# LANGUAGE NoImplicitPrelude      #-}
 {-# LANGUAGE OverloadedStrings      #-}
 {-# LANGUAGE RecordWildCards        #-}
+{-# LANGUAGE TypeFamilies           #-}
 {-# LANGUAGE ScopedTypeVariables    #-}
+{-# LANGUAGE UndecidableInstances   #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -92,7 +94,7 @@ instance P.{{ field.value.class }} ({{ schema.key }} s) ({{ field.value.type.app
   {% endfor %}
   {% for field in schema.value.attributeFields %}
 
-instance P.{{ field.value.class }} ({{ schema.key }} s) s ({{ field.value.type.applied }}) where
+instance s ~ s' => P.{{ field.value.class }} (TF.Ref s' ({{ schema.key }} s)) ({{ field.value.type.applied }}) where
     {% if field.value.computed %}
     {{ field.value.method }} x = TF.compute (TF.refKey x) "{{ field.value.name }}"
     {% else %}
@@ -103,7 +105,7 @@ instance P.{{ field.value.class }} ({{ schema.key }} s) s ({{ field.value.type.a
   {% endfor %}
 
 {% let constructor = schema.key | lowerHead %}
-{{ constructor }} :: TF.Schema TF.{{ type }} P.{{ provider.name }} ({{ schema.key }} s)
+{{ constructor }} :: TF.{{ type }} P.{{ provider.name }} ({{ schema.key }} s)
 {{ constructor }} =
     TF.new{{ type }} "{{ original }}" $
         {{ schema.key }} {

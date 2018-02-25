@@ -222,86 +222,86 @@ class HasWidget a b | a -> b where
 instance HasWidget a b => HasWidget (TF.Schema l p a) b where
     widget = TF.configuration . widget
 
-class HasComputedChannelId a s b | a -> s b where
+class HasComputedChannelId a b | a -> b where
     computedChannelId :: TF.Ref s a -> b
 
-class HasComputedConditionScope a s b | a -> s b where
+class HasComputedConditionScope a b | a -> b where
     computedConditionScope :: TF.Ref s a -> b
 
-class HasComputedConfiguration a s b | a -> s b where
+class HasComputedConfiguration a b | a -> b where
     computedConfiguration :: TF.Ref s a -> b
 
-class HasComputedCreatedAt a s b | a -> s b where
+class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: TF.Ref s a -> b
 
-class HasComputedEditable a s b | a -> s b where
+class HasComputedEditable a b | a -> b where
     computedEditable :: TF.Ref s a -> b
 
-class HasComputedEnabled a s b | a -> s b where
+class HasComputedEnabled a b | a -> b where
     computedEnabled :: TF.Ref s a -> b
 
-class HasComputedEntities a s b | a -> s b where
+class HasComputedEntities a b | a -> b where
     computedEntities :: TF.Ref s a -> b
 
-class HasComputedGcMetric a s b | a -> s b where
+class HasComputedGcMetric a b | a -> b where
     computedGcMetric :: TF.Ref s a -> b
 
-class HasComputedHostIds a s b | a -> s b where
+class HasComputedHostIds a b | a -> b where
     computedHostIds :: TF.Ref s a -> b
 
-class HasComputedIcon a s b | a -> s b where
+class HasComputedIcon a b | a -> b where
     computedIcon :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedIncidentPreference a s b | a -> s b where
+class HasComputedIncidentPreference a b | a -> b where
     computedIncidentPreference :: TF.Ref s a -> b
 
-class HasComputedInstanceIds a s b | a -> s b where
+class HasComputedInstanceIds a b | a -> b where
     computedInstanceIds :: TF.Ref s a -> b
 
-class HasComputedMetric a s b | a -> s b where
+class HasComputedMetric a b | a -> b where
     computedMetric :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNrql a s b | a -> s b where
+class HasComputedNrql a b | a -> b where
     computedNrql :: TF.Ref s a -> b
 
-class HasComputedPolicyId a s b | a -> s b where
+class HasComputedPolicyId a b | a -> b where
     computedPolicyId :: TF.Ref s a -> b
 
-class HasComputedRunbookUrl a s b | a -> s b where
+class HasComputedRunbookUrl a b | a -> b where
     computedRunbookUrl :: TF.Ref s a -> b
 
-class HasComputedTerm a s b | a -> s b where
+class HasComputedTerm a b | a -> b where
     computedTerm :: TF.Ref s a -> b
 
-class HasComputedTitle a s b | a -> s b where
+class HasComputedTitle a b | a -> b where
     computedTitle :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedUpdatedAt a s b | a -> s b where
+class HasComputedUpdatedAt a b | a -> b where
     computedUpdatedAt :: TF.Ref s a -> b
 
-class HasComputedUserDefinedMetric a s b | a -> s b where
+class HasComputedUserDefinedMetric a b | a -> b where
     computedUserDefinedMetric :: TF.Ref s a -> b
 
-class HasComputedUserDefinedValueFunction a s b | a -> s b where
+class HasComputedUserDefinedValueFunction a b | a -> b where
     computedUserDefinedValueFunction :: TF.Ref s a -> b
 
-class HasComputedValueFunction a s b | a -> s b where
+class HasComputedValueFunction a b | a -> b where
     computedValueFunction :: TF.Ref s a -> b
 
-class HasComputedViolationCloseTimer a s b | a -> s b where
+class HasComputedViolationCloseTimer a b | a -> b where
     computedViolationCloseTimer :: TF.Ref s a -> b
 
-class HasComputedVisibility a s b | a -> s b where
+class HasComputedVisibility a b | a -> b where
     computedVisibility :: TF.Ref s a -> b
 
-class HasComputedWidget a s b | a -> s b where
+class HasComputedWidget a b | a -> b where
     computedWidget :: TF.Ref s a -> b

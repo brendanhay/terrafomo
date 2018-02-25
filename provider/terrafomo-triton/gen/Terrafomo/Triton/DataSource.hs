@@ -116,17 +116,17 @@ instance P.HasId (AccountDataSource s) (TF.Attr s P.Text) where
         lens (_id :: AccountDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _id = a } :: AccountDataSource s)
 
-instance P.HasComputedCnsEnabled (AccountDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCnsEnabled (AccountDataSource s) (TF.Attr s P.Text) where
     computedCnsEnabled =
         (_cns_enabled :: AccountDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (AccountDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (AccountDataSource s) (TF.Attr s P.Text) where
     computedId =
         (_id :: AccountDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-accountDataSource :: TF.Schema TF.DataSource P.Triton (AccountDataSource s)
+accountDataSource :: TF.DataSource P.Triton (AccountDataSource s)
 accountDataSource =
     TF.newDataSource "triton_account" $
         AccountDataSource {
@@ -162,17 +162,17 @@ instance P.HasName (DatacenterDataSource s) (TF.Attr s P.Text) where
         lens (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatacenterDataSource s)
 
-instance P.HasComputedEndpoint (DatacenterDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEndpoint (DatacenterDataSource s) (TF.Attr s P.Text) where
     computedEndpoint =
         (_endpoint :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatacenterDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (DatacenterDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-datacenterDataSource :: TF.Schema TF.DataSource P.Triton (DatacenterDataSource s)
+datacenterDataSource :: TF.DataSource P.Triton (DatacenterDataSource s)
 datacenterDataSource =
     TF.newDataSource "triton_datacenter" $
         DatacenterDataSource {
@@ -256,50 +256,50 @@ instance P.HasVersion (ImageDataSource s) (TF.Attr s P.Text) where
         lens (_version :: ImageDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: ImageDataSource s)
 
-instance P.HasComputedId (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ImageDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMostRecent (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMostRecent (ImageDataSource s) (TF.Attr s P.Text) where
     computedMostRecent =
         (_most_recent :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ImageDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOs (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOs (ImageDataSource s) (TF.Attr s P.Text) where
     computedOs =
         (_os :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOwner (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOwner (ImageDataSource s) (TF.Attr s P.Text) where
     computedOwner =
         (_owner :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPublic (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPublic (ImageDataSource s) (TF.Attr s P.Text) where
     computedPublic =
         (_public :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedState (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedState (ImageDataSource s) (TF.Attr s P.Text) where
     computedState =
         (_state :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (ImageDataSource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVersion (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVersion (ImageDataSource s) (TF.Attr s P.Text) where
     computedVersion =
         (_version :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-imageDataSource :: TF.Schema TF.DataSource P.Triton (ImageDataSource s)
+imageDataSource :: TF.DataSource P.Triton (ImageDataSource s)
 imageDataSource =
     TF.newDataSource "triton_image" $
         ImageDataSource {
@@ -333,15 +333,15 @@ instance P.HasName (NetworkDataSource s) (TF.Attr s P.Text) where
         lens (_name :: NetworkDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: NetworkDataSource s)
 
-instance P.HasComputedId (NetworkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (NetworkDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (NetworkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (NetworkDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: NetworkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-networkDataSource :: TF.Schema TF.DataSource P.Triton (NetworkDataSource s)
+networkDataSource :: TF.DataSource P.Triton (NetworkDataSource s)
 networkDataSource =
     TF.newDataSource "triton_network" $
         NetworkDataSource {

@@ -187,65 +187,65 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputedActive a s b | a -> s b where
+class HasComputedActive a b | a -> b where
     computedActive :: TF.Ref s a -> b
 
-class HasComputedAttributes a s b | a -> s b where
+class HasComputedAttributes a b | a -> b where
     computedAttributes :: TF.Ref s a -> b
 
-class HasComputedComposite a s b | a -> s b where
+class HasComputedComposite a b | a -> b where
     computedComposite :: TF.Ref s a -> b
 
-class HasComputedCondition a s b | a -> s b where
+class HasComputedCondition a b | a -> b where
     computedCondition :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedDisplayName a s b | a -> s b where
+class HasComputedDisplayName a b | a -> b where
     computedDisplayName :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedLabel a s b | a -> s b where
+class HasComputedLabel a b | a -> b where
     computedLabel :: TF.Ref s a -> b
 
-class HasComputedMax a s b | a -> s b where
+class HasComputedMax a b | a -> b where
     computedMax :: TF.Ref s a -> b
 
-class HasComputedMin a s b | a -> s b where
+class HasComputedMin a b | a -> b where
     computedMin :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedPeriod a s b | a -> s b where
+class HasComputedPeriod a b | a -> b where
     computedPeriod :: TF.Ref s a -> b
 
-class HasComputedRearmSeconds a s b | a -> s b where
+class HasComputedRearmSeconds a b | a -> b where
     computedRearmSeconds :: TF.Ref s a -> b
 
-class HasComputedRelatedSpace a s b | a -> s b where
+class HasComputedRelatedSpace a b | a -> b where
     computedRelatedSpace :: TF.Ref s a -> b
 
-class HasComputedServices a s b | a -> s b where
+class HasComputedServices a b | a -> b where
     computedServices :: TF.Ref s a -> b
 
-class HasComputedSettings a s b | a -> s b where
+class HasComputedSettings a b | a -> b where
     computedSettings :: TF.Ref s a -> b
 
-class HasComputedSourceLag a s b | a -> s b where
+class HasComputedSourceLag a b | a -> b where
     computedSourceLag :: TF.Ref s a -> b
 
-class HasComputedSpaceId a s b | a -> s b where
+class HasComputedSpaceId a b | a -> b where
     computedSpaceId :: TF.Ref s a -> b
 
-class HasComputedStream a s b | a -> s b where
+class HasComputedStream a b | a -> b where
     computedStream :: TF.Ref s a -> b
 
-class HasComputedTitle a s b | a -> s b where
+class HasComputedTitle a b | a -> b where
     computedTitle :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b

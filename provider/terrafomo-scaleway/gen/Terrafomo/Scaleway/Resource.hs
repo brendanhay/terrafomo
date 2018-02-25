@@ -137,18 +137,18 @@ instance P.HasServer (IpResource s) (TF.Attr s P.Text) where
         lens (_server :: IpResource s -> TF.Attr s P.Text)
              (\s a -> s { _server = a } :: IpResource s)
 
-instance P.HasComputedId (IpResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (IpResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIp (IpResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIp (IpResource s) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
 
-instance P.HasComputedServer (IpResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedServer (IpResource s) (TF.Attr s P.Text) where
     computedServer =
         (_server :: IpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-ipResource :: TF.Schema TF.Resource P.Scaleway (IpResource s)
+ipResource :: TF.Resource P.Scaleway (IpResource s)
 ipResource =
     TF.newResource "scaleway_ip" $
         IpResource {
@@ -184,20 +184,20 @@ instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
         lens (_name :: SecurityGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: SecurityGroupResource s)
 
-instance P.HasComputedDescription (SecurityGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (SecurityGroupResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: SecurityGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (SecurityGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (SecurityGroupResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (SecurityGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (SecurityGroupResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: SecurityGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-securityGroupResource :: TF.Schema TF.Resource P.Scaleway (SecurityGroupResource s)
+securityGroupResource :: TF.Resource P.Scaleway (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "scaleway_security_group" $
         SecurityGroupResource {
@@ -266,40 +266,40 @@ instance P.HasSecurityGroup (SecurityGroupRuleResource s) (TF.Attr s P.Text) whe
         lens (_security_group :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
              (\s a -> s { _security_group = a } :: SecurityGroupRuleResource s)
 
-instance P.HasComputedAction (SecurityGroupRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAction (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     computedAction =
         (_action :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDirection (SecurityGroupRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDirection (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     computedDirection =
         (_direction :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (SecurityGroupRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIpRange (SecurityGroupRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpRange (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     computedIpRange =
         (_ip_range :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPort (SecurityGroupRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPort (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     computedPort =
         (_port :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProtocol (SecurityGroupRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProtocol (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     computedProtocol =
         (_protocol :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecurityGroup (SecurityGroupRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSecurityGroup (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     computedSecurityGroup =
         (_security_group :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-securityGroupRuleResource :: TF.Schema TF.Resource P.Scaleway (SecurityGroupRuleResource s)
+securityGroupRuleResource :: TF.Resource P.Scaleway (SecurityGroupRuleResource s)
 securityGroupRuleResource =
     TF.newResource "scaleway_security_group_rule" $
         SecurityGroupRuleResource {
@@ -420,76 +420,76 @@ instance P.HasVolume (ServerResource s) (TF.Attr s P.Text) where
         lens (_volume :: ServerResource s -> TF.Attr s P.Text)
              (\s a -> s { _volume = a } :: ServerResource s)
 
-instance P.HasComputedBootscript (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBootscript (ServerResource s) (TF.Attr s P.Text) where
     computedBootscript =
         (_bootscript :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDynamicIpRequired (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDynamicIpRequired (ServerResource s) (TF.Attr s P.Text) where
     computedDynamicIpRequired =
         (_dynamic_ip_required :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnableIpv6 (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEnableIpv6 (ServerResource s) (TF.Attr s P.Text) where
     computedEnableIpv6 =
         (_enable_ipv6 :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ServerResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImage (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedImage (ServerResource s) (TF.Attr s P.Text) where
     computedImage =
         (_image :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ServerResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrivateIp (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrivateIp (ServerResource s) (TF.Attr s P.Text) where
     computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
 
-instance P.HasComputedPublicIp (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPublicIp (ServerResource s) (TF.Attr s P.Text) where
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
-instance P.HasComputedPublicIpv6 (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPublicIpv6 (ServerResource s) (TF.Attr s P.Text) where
     computedPublicIpv6 =
         (_public_ipv6 :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecurityGroup (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSecurityGroup (ServerResource s) (TF.Attr s P.Text) where
     computedSecurityGroup =
         (_security_group :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedState (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedState (ServerResource s) (TF.Attr s P.Text) where
     computedState =
         (_state :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStateDetail (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStateDetail (ServerResource s) (TF.Attr s P.Text) where
     computedStateDetail =
         (_state_detail :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ServerResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (ServerResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVolume (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVolume (ServerResource s) (TF.Attr s P.Text) where
     computedVolume =
         (_volume :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-serverResource :: TF.Schema TF.Resource P.Scaleway (ServerResource s)
+serverResource :: TF.Resource P.Scaleway (ServerResource s)
 serverResource =
     TF.newResource "scaleway_server" $
         ServerResource {
@@ -536,20 +536,20 @@ instance P.HasVolume (VolumeAttachmentResource s) (TF.Attr s P.Text) where
         lens (_volume :: VolumeAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
 
-instance P.HasComputedId (VolumeAttachmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedServer (VolumeAttachmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedServer (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     computedServer =
         (_server :: VolumeAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVolume (VolumeAttachmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVolume (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     computedVolume =
         (_volume :: VolumeAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-volumeAttachmentResource :: TF.Schema TF.Resource P.Scaleway (VolumeAttachmentResource s)
+volumeAttachmentResource :: TF.Resource P.Scaleway (VolumeAttachmentResource s)
 volumeAttachmentResource =
     TF.newResource "scaleway_volume_attachment" $
         VolumeAttachmentResource {
@@ -602,30 +602,30 @@ instance P.HasType' (VolumeResource s) (TF.Attr s P.Text) where
         lens (_type' :: VolumeResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: VolumeResource s)
 
-instance P.HasComputedId (VolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (VolumeResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (VolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (VolumeResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedServer (VolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedServer (VolumeResource s) (TF.Attr s P.Text) where
     computedServer =
         (_server :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSizeInGb (VolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSizeInGb (VolumeResource s) (TF.Attr s P.Text) where
     computedSizeInGb =
         (_size_in_gb :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (VolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (VolumeResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: VolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-volumeResource :: TF.Schema TF.Resource P.Scaleway (VolumeResource s)
+volumeResource :: TF.Resource P.Scaleway (VolumeResource s)
 volumeResource =
     TF.newResource "scaleway_volume" $
         VolumeResource {

@@ -748,299 +748,299 @@ class HasVerifyConnection a b | a -> b where
 instance HasVerifyConnection a b => HasVerifyConnection (TF.Schema l p a) b where
     verifyConnection = TF.configuration . verifyConnection
 
-class HasComputedAccessKey a s b | a -> s b where
+class HasComputedAccessKey a b | a -> b where
     computedAccessKey :: TF.Ref s a -> b
 
-class HasComputedAccessor a s b | a -> s b where
+class HasComputedAccessor a b | a -> b where
     computedAccessor :: TF.Ref s a -> b
 
-class HasComputedAccountId a s b | a -> s b where
+class HasComputedAccountId a b | a -> b where
     computedAccountId :: TF.Ref s a -> b
 
-class HasComputedAllowInstanceMigration a s b | a -> s b where
+class HasComputedAllowInstanceMigration a b | a -> b where
     computedAllowInstanceMigration :: TF.Ref s a -> b
 
-class HasComputedAllowRead a s b | a -> s b where
+class HasComputedAllowRead a b | a -> b where
     computedAllowRead :: TF.Ref s a -> b
 
-class HasComputedAllowedRoles a s b | a -> s b where
+class HasComputedAllowedRoles a b | a -> b where
     computedAllowedRoles :: TF.Ref s a -> b
 
-class HasComputedAuthType a s b | a -> s b where
+class HasComputedAuthType a b | a -> b where
     computedAuthType :: TF.Ref s a -> b
 
-class HasComputedAwsPublicCert a s b | a -> s b where
+class HasComputedAwsPublicCert a b | a -> b where
     computedAwsPublicCert :: TF.Ref s a -> b
 
-class HasComputedBackend a s b | a -> s b where
+class HasComputedBackend a b | a -> b where
     computedBackend :: TF.Ref s a -> b
 
-class HasComputedBaseUrl a s b | a -> s b where
+class HasComputedBaseUrl a b | a -> b where
     computedBaseUrl :: TF.Ref s a -> b
 
-class HasComputedBindSecretId a s b | a -> s b where
+class HasComputedBindSecretId a b | a -> b where
     computedBindSecretId :: TF.Ref s a -> b
 
-class HasComputedBoundAccountId a s b | a -> s b where
+class HasComputedBoundAccountId a b | a -> b where
     computedBoundAccountId :: TF.Ref s a -> b
 
-class HasComputedBoundAmiId a s b | a -> s b where
+class HasComputedBoundAmiId a b | a -> b where
     computedBoundAmiId :: TF.Ref s a -> b
 
-class HasComputedBoundCidrList a s b | a -> s b where
+class HasComputedBoundCidrList a b | a -> b where
     computedBoundCidrList :: TF.Ref s a -> b
 
-class HasComputedBoundIamInstanceProfileArn a s b | a -> s b where
+class HasComputedBoundIamInstanceProfileArn a b | a -> b where
     computedBoundIamInstanceProfileArn :: TF.Ref s a -> b
 
-class HasComputedBoundIamPrincipalArn a s b | a -> s b where
+class HasComputedBoundIamPrincipalArn a b | a -> b where
     computedBoundIamPrincipalArn :: TF.Ref s a -> b
 
-class HasComputedBoundIamRoleArn a s b | a -> s b where
+class HasComputedBoundIamRoleArn a b | a -> b where
     computedBoundIamRoleArn :: TF.Ref s a -> b
 
-class HasComputedBoundRegion a s b | a -> s b where
+class HasComputedBoundRegion a b | a -> b where
     computedBoundRegion :: TF.Ref s a -> b
 
-class HasComputedBoundSubnetId a s b | a -> s b where
+class HasComputedBoundSubnetId a b | a -> b where
     computedBoundSubnetId :: TF.Ref s a -> b
 
-class HasComputedBoundVpcId a s b | a -> s b where
+class HasComputedBoundVpcId a b | a -> b where
     computedBoundVpcId :: TF.Ref s a -> b
 
-class HasComputedCassandra a s b | a -> s b where
+class HasComputedCassandra a b | a -> b where
     computedCassandra :: TF.Ref s a -> b
 
-class HasComputedCertName a s b | a -> s b where
+class HasComputedCertName a b | a -> b where
     computedCertName :: TF.Ref s a -> b
 
-class HasComputedCidrList a s b | a -> s b where
+class HasComputedCidrList a b | a -> b where
     computedCidrList :: TF.Ref s a -> b
 
-class HasComputedClientToken a s b | a -> s b where
+class HasComputedClientToken a b | a -> b where
     computedClientToken :: TF.Ref s a -> b
 
-class HasComputedCreationStatements a s b | a -> s b where
+class HasComputedCreationStatements a b | a -> b where
     computedCreationStatements :: TF.Ref s a -> b
 
-class HasComputedData' a s b | a -> s b where
+class HasComputedData' a b | a -> b where
     computedData' :: TF.Ref s a -> b
 
-class HasComputedDataJson a s b | a -> s b where
+class HasComputedDataJson a b | a -> b where
     computedDataJson :: TF.Ref s a -> b
 
-class HasComputedDbName a s b | a -> s b where
+class HasComputedDbName a b | a -> b where
     computedDbName :: TF.Ref s a -> b
 
-class HasComputedDefaultLeaseTtlSeconds a s b | a -> s b where
+class HasComputedDefaultLeaseTtlSeconds a b | a -> b where
     computedDefaultLeaseTtlSeconds :: TF.Ref s a -> b
 
-class HasComputedDefaultTtl a s b | a -> s b where
+class HasComputedDefaultTtl a b | a -> b where
     computedDefaultTtl :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedDisablePeriodicTidy a s b | a -> s b where
+class HasComputedDisablePeriodicTidy a b | a -> b where
     computedDisablePeriodicTidy :: TF.Ref s a -> b
 
-class HasComputedDisableRead a s b | a -> s b where
+class HasComputedDisableRead a b | a -> b where
     computedDisableRead :: TF.Ref s a -> b
 
-class HasComputedDisallowReauthentication a s b | a -> s b where
+class HasComputedDisallowReauthentication a b | a -> b where
     computedDisallowReauthentication :: TF.Ref s a -> b
 
-class HasComputedEc2Endpoint a s b | a -> s b where
+class HasComputedEc2Endpoint a b | a -> b where
     computedEc2Endpoint :: TF.Ref s a -> b
 
-class HasComputedGroup a s b | a -> s b where
+class HasComputedGroup a b | a -> b where
     computedGroup :: TF.Ref s a -> b
 
-class HasComputedGroupName a s b | a -> s b where
+class HasComputedGroupName a b | a -> b where
     computedGroupName :: TF.Ref s a -> b
 
-class HasComputedGroups a s b | a -> s b where
+class HasComputedGroups a b | a -> b where
     computedGroups :: TF.Ref s a -> b
 
-class HasComputedHana a s b | a -> s b where
+class HasComputedHana a b | a -> b where
     computedHana :: TF.Ref s a -> b
 
-class HasComputedIamEndpoint a s b | a -> s b where
+class HasComputedIamEndpoint a b | a -> b where
     computedIamEndpoint :: TF.Ref s a -> b
 
-class HasComputedIamHttpRequestMethod a s b | a -> s b where
+class HasComputedIamHttpRequestMethod a b | a -> b where
     computedIamHttpRequestMethod :: TF.Ref s a -> b
 
-class HasComputedIamRequestBody a s b | a -> s b where
+class HasComputedIamRequestBody a b | a -> b where
     computedIamRequestBody :: TF.Ref s a -> b
 
-class HasComputedIamRequestHeaders a s b | a -> s b where
+class HasComputedIamRequestHeaders a b | a -> b where
     computedIamRequestHeaders :: TF.Ref s a -> b
 
-class HasComputedIamRequestUrl a s b | a -> s b where
+class HasComputedIamRequestUrl a b | a -> b where
     computedIamRequestUrl :: TF.Ref s a -> b
 
-class HasComputedIamServerIdHeaderValue a s b | a -> s b where
+class HasComputedIamServerIdHeaderValue a b | a -> b where
     computedIamServerIdHeaderValue :: TF.Ref s a -> b
 
-class HasComputedIdentity a s b | a -> s b where
+class HasComputedIdentity a b | a -> b where
     computedIdentity :: TF.Ref s a -> b
 
-class HasComputedInferredAwsRegion a s b | a -> s b where
+class HasComputedInferredAwsRegion a b | a -> b where
     computedInferredAwsRegion :: TF.Ref s a -> b
 
-class HasComputedInferredEntityType a s b | a -> s b where
+class HasComputedInferredEntityType a b | a -> b where
     computedInferredEntityType :: TF.Ref s a -> b
 
-class HasComputedInstanceId a s b | a -> s b where
+class HasComputedInstanceId a b | a -> b where
     computedInstanceId :: TF.Ref s a -> b
 
-class HasComputedLeaseDuration a s b | a -> s b where
+class HasComputedLeaseDuration a b | a -> b where
     computedLeaseDuration :: TF.Ref s a -> b
 
-class HasComputedLeaseId a s b | a -> s b where
+class HasComputedLeaseId a b | a -> b where
     computedLeaseId :: TF.Ref s a -> b
 
-class HasComputedLeaseRenewable a s b | a -> s b where
+class HasComputedLeaseRenewable a b | a -> b where
     computedLeaseRenewable :: TF.Ref s a -> b
 
-class HasComputedLeaseStartTime a s b | a -> s b where
+class HasComputedLeaseStartTime a b | a -> b where
     computedLeaseStartTime :: TF.Ref s a -> b
 
-class HasComputedMaxLeaseTtlSeconds a s b | a -> s b where
+class HasComputedMaxLeaseTtlSeconds a b | a -> b where
     computedMaxLeaseTtlSeconds :: TF.Ref s a -> b
 
-class HasComputedMaxTtl a s b | a -> s b where
+class HasComputedMaxTtl a b | a -> b where
     computedMaxTtl :: TF.Ref s a -> b
 
-class HasComputedMetadata a s b | a -> s b where
+class HasComputedMetadata a b | a -> b where
     computedMetadata :: TF.Ref s a -> b
 
-class HasComputedMongodb a s b | a -> s b where
+class HasComputedMongodb a b | a -> b where
     computedMongodb :: TF.Ref s a -> b
 
-class HasComputedMssql a s b | a -> s b where
+class HasComputedMssql a b | a -> b where
     computedMssql :: TF.Ref s a -> b
 
-class HasComputedMysql a s b | a -> s b where
+class HasComputedMysql a b | a -> b where
     computedMysql :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNonce a s b | a -> s b where
+class HasComputedNonce a b | a -> b where
     computedNonce :: TF.Ref s a -> b
 
-class HasComputedOracle a s b | a -> s b where
+class HasComputedOracle a b | a -> b where
     computedOracle :: TF.Ref s a -> b
 
-class HasComputedOrganization a s b | a -> s b where
+class HasComputedOrganization a b | a -> b where
     computedOrganization :: TF.Ref s a -> b
 
-class HasComputedPath a s b | a -> s b where
+class HasComputedPath a b | a -> b where
     computedPath :: TF.Ref s a -> b
 
-class HasComputedPeriod a s b | a -> s b where
+class HasComputedPeriod a b | a -> b where
     computedPeriod :: TF.Ref s a -> b
 
-class HasComputedPkcs7 a s b | a -> s b where
+class HasComputedPkcs7 a b | a -> b where
     computedPkcs7 :: TF.Ref s a -> b
 
-class HasComputedPolicies a s b | a -> s b where
+class HasComputedPolicies a b | a -> b where
     computedPolicies :: TF.Ref s a -> b
 
-class HasComputedPolicy a s b | a -> s b where
+class HasComputedPolicy a b | a -> b where
     computedPolicy :: TF.Ref s a -> b
 
-class HasComputedPolicyArn a s b | a -> s b where
+class HasComputedPolicyArn a b | a -> b where
     computedPolicyArn :: TF.Ref s a -> b
 
-class HasComputedPostgresql a s b | a -> s b where
+class HasComputedPostgresql a b | a -> b where
     computedPostgresql :: TF.Ref s a -> b
 
-class HasComputedRenewStatements a s b | a -> s b where
+class HasComputedRenewStatements a b | a -> b where
     computedRenewStatements :: TF.Ref s a -> b
 
-class HasComputedRenewable a s b | a -> s b where
+class HasComputedRenewable a b | a -> b where
     computedRenewable :: TF.Ref s a -> b
 
-class HasComputedResolveAwsUniqueIds a s b | a -> s b where
+class HasComputedResolveAwsUniqueIds a b | a -> b where
     computedResolveAwsUniqueIds :: TF.Ref s a -> b
 
-class HasComputedRevocationStatements a s b | a -> s b where
+class HasComputedRevocationStatements a b | a -> b where
     computedRevocationStatements :: TF.Ref s a -> b
 
-class HasComputedRole a s b | a -> s b where
+class HasComputedRole a b | a -> b where
     computedRole :: TF.Ref s a -> b
 
-class HasComputedRoleId a s b | a -> s b where
+class HasComputedRoleId a b | a -> b where
     computedRoleId :: TF.Ref s a -> b
 
-class HasComputedRoleName a s b | a -> s b where
+class HasComputedRoleName a b | a -> b where
     computedRoleName :: TF.Ref s a -> b
 
-class HasComputedRoleTag a s b | a -> s b where
+class HasComputedRoleTag a b | a -> b where
     computedRoleTag :: TF.Ref s a -> b
 
-class HasComputedRollbackStatements a s b | a -> s b where
+class HasComputedRollbackStatements a b | a -> b where
     computedRollbackStatements :: TF.Ref s a -> b
 
-class HasComputedSafetyBuffer a s b | a -> s b where
+class HasComputedSafetyBuffer a b | a -> b where
     computedSafetyBuffer :: TF.Ref s a -> b
 
-class HasComputedSecretId a s b | a -> s b where
+class HasComputedSecretId a b | a -> b where
     computedSecretId :: TF.Ref s a -> b
 
-class HasComputedSecretIdNumUses a s b | a -> s b where
+class HasComputedSecretIdNumUses a b | a -> b where
     computedSecretIdNumUses :: TF.Ref s a -> b
 
-class HasComputedSecretIdTtl a s b | a -> s b where
+class HasComputedSecretIdTtl a b | a -> b where
     computedSecretIdTtl :: TF.Ref s a -> b
 
-class HasComputedSecretKey a s b | a -> s b where
+class HasComputedSecretKey a b | a -> b where
     computedSecretKey :: TF.Ref s a -> b
 
-class HasComputedSecurityToken a s b | a -> s b where
+class HasComputedSecurityToken a b | a -> b where
     computedSecurityToken :: TF.Ref s a -> b
 
-class HasComputedSignature a s b | a -> s b where
+class HasComputedSignature a b | a -> b where
     computedSignature :: TF.Ref s a -> b
 
-class HasComputedStsEndpoint a s b | a -> s b where
+class HasComputedStsEndpoint a b | a -> b where
     computedStsEndpoint :: TF.Ref s a -> b
 
-class HasComputedStsRole a s b | a -> s b where
+class HasComputedStsRole a b | a -> b where
     computedStsRole :: TF.Ref s a -> b
 
-class HasComputedTagKey a s b | a -> s b where
+class HasComputedTagKey a b | a -> b where
     computedTagKey :: TF.Ref s a -> b
 
-class HasComputedTagValue a s b | a -> s b where
+class HasComputedTagValue a b | a -> b where
     computedTagValue :: TF.Ref s a -> b
 
-class HasComputedToken a s b | a -> s b where
+class HasComputedToken a b | a -> b where
     computedToken :: TF.Ref s a -> b
 
-class HasComputedTokenMaxTtl a s b | a -> s b where
+class HasComputedTokenMaxTtl a b | a -> b where
     computedTokenMaxTtl :: TF.Ref s a -> b
 
-class HasComputedTokenNumUses a s b | a -> s b where
+class HasComputedTokenNumUses a b | a -> b where
     computedTokenNumUses :: TF.Ref s a -> b
 
-class HasComputedTokenTtl a s b | a -> s b where
+class HasComputedTokenTtl a b | a -> b where
     computedTokenTtl :: TF.Ref s a -> b
 
-class HasComputedTtl a s b | a -> s b where
+class HasComputedTtl a b | a -> b where
     computedTtl :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedUser a s b | a -> s b where
+class HasComputedUser a b | a -> b where
     computedUser :: TF.Ref s a -> b
 
-class HasComputedUsername a s b | a -> s b where
+class HasComputedUsername a b | a -> b where
     computedUsername :: TF.Ref s a -> b
 
-class HasComputedVerifyConnection a s b | a -> s b where
+class HasComputedVerifyConnection a b | a -> b where
     computedVerifyConnection :: TF.Ref s a -> b

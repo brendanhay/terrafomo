@@ -121,22 +121,22 @@ instance P.HasRulesHcl (AclPolicyResource s) (TF.Attr s P.Text) where
         lens (_rules_hcl :: AclPolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _rules_hcl = a } :: AclPolicyResource s)
 
-instance P.HasComputedDescription (AclPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (AclPolicyResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: AclPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (AclPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (AclPolicyResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: AclPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRulesHcl (AclPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRulesHcl (AclPolicyResource s) (TF.Attr s P.Text) where
     computedRulesHcl =
         (_rules_hcl :: AclPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-aclPolicyResource :: TF.Schema TF.Resource P.Nomad (AclPolicyResource s)
+aclPolicyResource :: TF.Resource P.Nomad (AclPolicyResource s)
 aclPolicyResource =
     TF.newResource "nomad_acl_policy" $
         AclPolicyResource {
@@ -190,27 +190,27 @@ instance P.HasType' (AclTokenResource s) (TF.Attr s P.Text) where
         lens (_type' :: AclTokenResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: AclTokenResource s)
 
-instance P.HasComputedGlobal (AclTokenResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGlobal (AclTokenResource s) (TF.Attr s P.Text) where
     computedGlobal =
         (_global :: AclTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (AclTokenResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (AclTokenResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: AclTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicies (AclTokenResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPolicies (AclTokenResource s) (TF.Attr s P.Text) where
     computedPolicies =
         (_policies :: AclTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (AclTokenResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (AclTokenResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: AclTokenResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-aclTokenResource :: TF.Schema TF.Resource P.Nomad (AclTokenResource s)
+aclTokenResource :: TF.Resource P.Nomad (AclTokenResource s)
 aclTokenResource =
     TF.newResource "nomad_acl_token" $
         AclTokenResource {
@@ -261,22 +261,22 @@ instance P.HasJobspec (JobResource s) (TF.Attr s P.Text) where
         lens (_jobspec :: JobResource s -> TF.Attr s P.Text)
              (\s a -> s { _jobspec = a } :: JobResource s)
 
-instance P.HasComputedDeregisterOnDestroy (JobResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDeregisterOnDestroy (JobResource s) (TF.Attr s P.Text) where
     computedDeregisterOnDestroy =
         (_deregister_on_destroy :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDeregisterOnIdChange (JobResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDeregisterOnIdChange (JobResource s) (TF.Attr s P.Text) where
     computedDeregisterOnIdChange =
         (_deregister_on_id_change :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedJobspec (JobResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedJobspec (JobResource s) (TF.Attr s P.Text) where
     computedJobspec =
         (_jobspec :: JobResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-jobResource :: TF.Schema TF.Resource P.Nomad (JobResource s)
+jobResource :: TF.Resource P.Nomad (JobResource s)
 jobResource =
     TF.newResource "nomad_job" $
         JobResource {
@@ -320,22 +320,22 @@ instance P.HasName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
         lens (_name :: QuotaSpecificationResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: QuotaSpecificationResource s)
 
-instance P.HasComputedDescription (QuotaSpecificationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (QuotaSpecificationResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: QuotaSpecificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLimits (QuotaSpecificationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLimits (QuotaSpecificationResource s) (TF.Attr s P.Text) where
     computedLimits =
         (_limits :: QuotaSpecificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (QuotaSpecificationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: QuotaSpecificationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-quotaSpecificationResource :: TF.Schema TF.Resource P.Nomad (QuotaSpecificationResource s)
+quotaSpecificationResource :: TF.Resource P.Nomad (QuotaSpecificationResource s)
 quotaSpecificationResource =
     TF.newResource "nomad_quota_specification" $
         QuotaSpecificationResource {

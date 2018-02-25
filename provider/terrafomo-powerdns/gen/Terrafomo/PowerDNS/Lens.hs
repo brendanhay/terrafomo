@@ -73,17 +73,17 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedRecords a s b | a -> s b where
+class HasComputedRecords a b | a -> b where
     computedRecords :: TF.Ref s a -> b
 
-class HasComputedTtl a s b | a -> s b where
+class HasComputedTtl a b | a -> b where
     computedTtl :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedZone a s b | a -> s b where
+class HasComputedZone a b | a -> b where
     computedZone :: TF.Ref s a -> b

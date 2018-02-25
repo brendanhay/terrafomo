@@ -119,20 +119,20 @@ instance P.HasName (DatacenterDataSource s) (TF.Attr s P.Text) where
         lens (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatacenterDataSource s)
 
-instance P.HasComputedId (DatacenterDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (DatacenterDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocation (DatacenterDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLocation (DatacenterDataSource s) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatacenterDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (DatacenterDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatacenterDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-datacenterDataSource :: TF.Schema TF.DataSource P.ProfitBricks (DatacenterDataSource s)
+datacenterDataSource :: TF.DataSource P.ProfitBricks (DatacenterDataSource s)
 datacenterDataSource =
     TF.newDataSource "profitbricks_datacenter" $
         DatacenterDataSource {
@@ -184,30 +184,30 @@ instance P.HasVersion (ImageDataSource s) (TF.Attr s P.Text) where
         lens (_version :: ImageDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: ImageDataSource s)
 
-instance P.HasComputedId (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ImageDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocation (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLocation (ImageDataSource s) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ImageDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (ImageDataSource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVersion (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVersion (ImageDataSource s) (TF.Attr s P.Text) where
     computedVersion =
         (_version :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-imageDataSource :: TF.Schema TF.DataSource P.ProfitBricks (ImageDataSource s)
+imageDataSource :: TF.DataSource P.ProfitBricks (ImageDataSource s)
 imageDataSource =
     TF.newDataSource "profitbricks_image" $
         ImageDataSource {
@@ -245,20 +245,20 @@ instance P.HasName (LocationDataSource s) (TF.Attr s P.Text) where
         lens (_name :: LocationDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: LocationDataSource s)
 
-instance P.HasComputedFeature (LocationDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFeature (LocationDataSource s) (TF.Attr s P.Text) where
     computedFeature =
         (_feature :: LocationDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (LocationDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (LocationDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (LocationDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (LocationDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: LocationDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-locationDataSource :: TF.Schema TF.DataSource P.ProfitBricks (LocationDataSource s)
+locationDataSource :: TF.DataSource P.ProfitBricks (LocationDataSource s)
 locationDataSource =
     TF.newDataSource "profitbricks_location" $
         LocationDataSource {
@@ -300,20 +300,20 @@ instance P.HasResourceType (ResourceDataSource s) (TF.Attr s P.Text) where
         lens (_resource_type :: ResourceDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _resource_type = a } :: ResourceDataSource s)
 
-instance P.HasComputedId (ResourceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ResourceDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedResourceId (ResourceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedResourceId (ResourceDataSource s) (TF.Attr s P.Text) where
     computedResourceId =
         (_resource_id :: ResourceDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedResourceType (ResourceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedResourceType (ResourceDataSource s) (TF.Attr s P.Text) where
     computedResourceType =
         (_resource_type :: ResourceDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-resourceDataSource :: TF.Schema TF.DataSource P.ProfitBricks (ResourceDataSource s)
+resourceDataSource :: TF.DataSource P.ProfitBricks (ResourceDataSource s)
 resourceDataSource =
     TF.newDataSource "profitbricks_resource" $
         ResourceDataSource {
@@ -357,25 +357,25 @@ instance P.HasSize (SnapshotDataSource s) (TF.Attr s P.Text) where
         lens (_size :: SnapshotDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: SnapshotDataSource s)
 
-instance P.HasComputedId (SnapshotDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (SnapshotDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocation (SnapshotDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLocation (SnapshotDataSource s) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: SnapshotDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (SnapshotDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (SnapshotDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: SnapshotDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (SnapshotDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSize (SnapshotDataSource s) (TF.Attr s P.Text) where
     computedSize =
         (_size :: SnapshotDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-snapshotDataSource :: TF.Schema TF.DataSource P.ProfitBricks (SnapshotDataSource s)
+snapshotDataSource :: TF.DataSource P.ProfitBricks (SnapshotDataSource s)
 snapshotDataSource =
     TF.newDataSource "profitbricks_snapshot" $
         SnapshotDataSource {

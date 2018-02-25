@@ -98,7 +98,7 @@ data AgentSelfDataSource s = AgentSelfDataSource {
 instance TF.ToHCL (AgentSelfDataSource s) where
     toHCL _ = TF.empty
 
-agentSelfDataSource :: TF.Schema TF.DataSource P.Consul (AgentSelfDataSource s)
+agentSelfDataSource :: TF.DataSource P.Consul (AgentSelfDataSource s)
 agentSelfDataSource =
     TF.newDataSource "consul_agent_self" $
         AgentSelfDataSource {
@@ -134,24 +134,24 @@ instance P.HasQueryOptions (CatalogNodesDataSource s) (TF.Attr s P.Text) where
         lens (_query_options :: CatalogNodesDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _query_options = a } :: CatalogNodesDataSource s)
 
-instance P.HasComputedDatacenter (CatalogNodesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDatacenter (CatalogNodesDataSource s) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance P.HasComputedNodeIds (CatalogNodesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNodeIds (CatalogNodesDataSource s) (TF.Attr s P.Text) where
     computedNodeIds x = TF.compute (TF.refKey x) "node_ids"
 
-instance P.HasComputedNodeNames (CatalogNodesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNodeNames (CatalogNodesDataSource s) (TF.Attr s P.Text) where
     computedNodeNames x = TF.compute (TF.refKey x) "node_names"
 
-instance P.HasComputedNodes (CatalogNodesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNodes (CatalogNodesDataSource s) (TF.Attr s P.Text) where
     computedNodes x = TF.compute (TF.refKey x) "nodes"
 
-instance P.HasComputedQueryOptions (CatalogNodesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedQueryOptions (CatalogNodesDataSource s) (TF.Attr s P.Text) where
     computedQueryOptions =
         (_query_options :: CatalogNodesDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-catalogNodesDataSource :: TF.Schema TF.DataSource P.Consul (CatalogNodesDataSource s)
+catalogNodesDataSource :: TF.DataSource P.Consul (CatalogNodesDataSource s)
 catalogNodesDataSource =
     TF.newDataSource "consul_catalog_nodes" $
         CatalogNodesDataSource {
@@ -208,24 +208,24 @@ instance P.HasTag (CatalogServiceDataSource s) (TF.Attr s P.Text) where
         lens (_tag :: CatalogServiceDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _tag = a } :: CatalogServiceDataSource s)
 
-instance P.HasComputedDatacenter (CatalogServiceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDatacenter (CatalogServiceDataSource s) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance P.HasComputedName (CatalogServiceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (CatalogServiceDataSource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedQueryOptions (CatalogServiceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedQueryOptions (CatalogServiceDataSource s) (TF.Attr s P.Text) where
     computedQueryOptions =
         (_query_options :: CatalogServiceDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedService (CatalogServiceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedService (CatalogServiceDataSource s) (TF.Attr s P.Text) where
     computedService x = TF.compute (TF.refKey x) "service"
 
-instance P.HasComputedTag (CatalogServiceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTag (CatalogServiceDataSource s) (TF.Attr s P.Text) where
     computedTag x = TF.compute (TF.refKey x) "tag"
 
-catalogServiceDataSource :: TF.Schema TF.DataSource P.Consul (CatalogServiceDataSource s)
+catalogServiceDataSource :: TF.DataSource P.Consul (CatalogServiceDataSource s)
 catalogServiceDataSource =
     TF.newDataSource "consul_catalog_service" $
         CatalogServiceDataSource {
@@ -279,29 +279,29 @@ instance P.HasToken (KeyPrefixDataSource s) (TF.Attr s P.Text) where
         lens (_token :: KeyPrefixDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _token = a } :: KeyPrefixDataSource s)
 
-instance P.HasComputedDatacenter (KeyPrefixDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDatacenter (KeyPrefixDataSource s) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance P.HasComputedPathPrefix (KeyPrefixDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPathPrefix (KeyPrefixDataSource s) (TF.Attr s P.Text) where
     computedPathPrefix x = TF.compute (TF.refKey x) "path_prefix"
 
-instance P.HasComputedSubkey (KeyPrefixDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSubkey (KeyPrefixDataSource s) (TF.Attr s P.Text) where
     computedSubkey =
         (_subkey :: KeyPrefixDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSubkeys (KeyPrefixDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSubkeys (KeyPrefixDataSource s) (TF.Attr s P.Text) where
     computedSubkeys x = TF.compute (TF.refKey x) "subkeys"
 
-instance P.HasComputedToken (KeyPrefixDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedToken (KeyPrefixDataSource s) (TF.Attr s P.Text) where
     computedToken =
         (_token :: KeyPrefixDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVar<name> (KeyPrefixDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVar<name> (KeyPrefixDataSource s) (TF.Attr s P.Text) where
     computedVar<name> x = TF.compute (TF.refKey x) "var.<name>"
 
-keyPrefixDataSource :: TF.Schema TF.DataSource P.Consul (KeyPrefixDataSource s)
+keyPrefixDataSource :: TF.DataSource P.Consul (KeyPrefixDataSource s)
 keyPrefixDataSource =
     TF.newDataSource "consul_key_prefix" $
         KeyPrefixDataSource {

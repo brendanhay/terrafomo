@@ -329,113 +329,113 @@ class HasZone a b | a -> b where
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedActive a s b | a -> s b where
+class HasComputedActive a b | a -> b where
     computedActive :: TF.Ref s a -> b
 
-class HasComputedAnswers a s b | a -> s b where
+class HasComputedAnswers a b | a -> b where
     computedAnswers :: TF.Ref s a -> b
 
-class HasComputedConfig a s b | a -> s b where
+class HasComputedConfig a b | a -> b where
     computedConfig :: TF.Ref s a -> b
 
-class HasComputedDomain a s b | a -> s b where
+class HasComputedDomain a b | a -> b where
     computedDomain :: TF.Ref s a -> b
 
-class HasComputedEmail a s b | a -> s b where
+class HasComputedEmail a b | a -> b where
     computedEmail :: TF.Ref s a -> b
 
-class HasComputedExpiry a s b | a -> s b where
+class HasComputedExpiry a b | a -> b where
     computedExpiry :: TF.Ref s a -> b
 
-class HasComputedFilters a s b | a -> s b where
+class HasComputedFilters a b | a -> b where
     computedFilters :: TF.Ref s a -> b
 
-class HasComputedFrequency a s b | a -> s b where
+class HasComputedFrequency a b | a -> b where
     computedFrequency :: TF.Ref s a -> b
 
-class HasComputedJobType a s b | a -> s b where
+class HasComputedJobType a b | a -> b where
     computedJobType :: TF.Ref s a -> b
 
-class HasComputedKey a s b | a -> s b where
+class HasComputedKey a b | a -> b where
     computedKey :: TF.Ref s a -> b
 
-class HasComputedLink a s b | a -> s b where
+class HasComputedLink a b | a -> b where
     computedLink :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNotes a s b | a -> s b where
+class HasComputedNotes a b | a -> b where
     computedNotes :: TF.Ref s a -> b
 
-class HasComputedNotifications a s b | a -> s b where
+class HasComputedNotifications a b | a -> b where
     computedNotifications :: TF.Ref s a -> b
 
-class HasComputedNotify a s b | a -> s b where
+class HasComputedNotify a b | a -> b where
     computedNotify :: TF.Ref s a -> b
 
-class HasComputedNotifyDelay a s b | a -> s b where
+class HasComputedNotifyDelay a b | a -> b where
     computedNotifyDelay :: TF.Ref s a -> b
 
-class HasComputedNotifyFailback a s b | a -> s b where
+class HasComputedNotifyFailback a b | a -> b where
     computedNotifyFailback :: TF.Ref s a -> b
 
-class HasComputedNotifyList a s b | a -> s b where
+class HasComputedNotifyList a b | a -> b where
     computedNotifyList :: TF.Ref s a -> b
 
-class HasComputedNotifyRegional a s b | a -> s b where
+class HasComputedNotifyRegional a b | a -> b where
     computedNotifyRegional :: TF.Ref s a -> b
 
-class HasComputedNotifyRepeat a s b | a -> s b where
+class HasComputedNotifyRepeat a b | a -> b where
     computedNotifyRepeat :: TF.Ref s a -> b
 
-class HasComputedNxTtl a s b | a -> s b where
+class HasComputedNxTtl a b | a -> b where
     computedNxTtl :: TF.Ref s a -> b
 
-class HasComputedPermissions a s b | a -> s b where
+class HasComputedPermissions a b | a -> b where
     computedPermissions :: TF.Ref s a -> b
 
-class HasComputedPolicy a s b | a -> s b where
+class HasComputedPolicy a b | a -> b where
     computedPolicy :: TF.Ref s a -> b
 
-class HasComputedPrimary a s b | a -> s b where
+class HasComputedPrimary a b | a -> b where
     computedPrimary :: TF.Ref s a -> b
 
-class HasComputedRapidRecheck a s b | a -> s b where
+class HasComputedRapidRecheck a b | a -> b where
     computedRapidRecheck :: TF.Ref s a -> b
 
-class HasComputedRefresh a s b | a -> s b where
+class HasComputedRefresh a b | a -> b where
     computedRefresh :: TF.Ref s a -> b
 
-class HasComputedRegions a s b | a -> s b where
+class HasComputedRegions a b | a -> b where
     computedRegions :: TF.Ref s a -> b
 
-class HasComputedRetry a s b | a -> s b where
+class HasComputedRetry a b | a -> b where
     computedRetry :: TF.Ref s a -> b
 
-class HasComputedRules a s b | a -> s b where
+class HasComputedRules a b | a -> b where
     computedRules :: TF.Ref s a -> b
 
-class HasComputedSourceId a s b | a -> s b where
+class HasComputedSourceId a b | a -> b where
     computedSourceId :: TF.Ref s a -> b
 
-class HasComputedSourcetype a s b | a -> s b where
+class HasComputedSourcetype a b | a -> b where
     computedSourcetype :: TF.Ref s a -> b
 
-class HasComputedTeams a s b | a -> s b where
+class HasComputedTeams a b | a -> b where
     computedTeams :: TF.Ref s a -> b
 
-class HasComputedTtl a s b | a -> s b where
+class HasComputedTtl a b | a -> b where
     computedTtl :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedUseClientSubnet a s b | a -> s b where
+class HasComputedUseClientSubnet a b | a -> b where
     computedUseClientSubnet :: TF.Ref s a -> b
 
-class HasComputedUsername a s b | a -> s b where
+class HasComputedUsername a b | a -> b where
     computedUsername :: TF.Ref s a -> b
 
-class HasComputedZone a s b | a -> s b where
+class HasComputedZone a b | a -> b where
     computedZone :: TF.Ref s a -> b

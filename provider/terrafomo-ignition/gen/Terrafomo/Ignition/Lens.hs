@@ -371,134 +371,134 @@ class HasWipeTable a b | a -> b where
 instance HasWipeTable a b => HasWipeTable (TF.Schema l p a) b where
     wipeTable = TF.configuration . wipeTable
 
-class HasComputedAppend a s b | a -> s b where
+class HasComputedAppend a b | a -> b where
     computedAppend :: TF.Ref s a -> b
 
-class HasComputedArrays a s b | a -> s b where
+class HasComputedArrays a b | a -> b where
     computedArrays :: TF.Ref s a -> b
 
-class HasComputedContent a s b | a -> s b where
+class HasComputedContent a b | a -> b where
     computedContent :: TF.Ref s a -> b
 
-class HasComputedDevice a s b | a -> s b where
+class HasComputedDevice a b | a -> b where
     computedDevice :: TF.Ref s a -> b
 
-class HasComputedDevices a s b | a -> s b where
+class HasComputedDevices a b | a -> b where
     computedDevices :: TF.Ref s a -> b
 
-class HasComputedDirectories a s b | a -> s b where
+class HasComputedDirectories a b | a -> b where
     computedDirectories :: TF.Ref s a -> b
 
-class HasComputedDisks a s b | a -> s b where
+class HasComputedDisks a b | a -> b where
     computedDisks :: TF.Ref s a -> b
 
-class HasComputedDropin a s b | a -> s b where
+class HasComputedDropin a b | a -> b where
     computedDropin :: TF.Ref s a -> b
 
-class HasComputedEnabled a s b | a -> s b where
+class HasComputedEnabled a b | a -> b where
     computedEnabled :: TF.Ref s a -> b
 
-class HasComputedFiles a s b | a -> s b where
+class HasComputedFiles a b | a -> b where
     computedFiles :: TF.Ref s a -> b
 
-class HasComputedFilesystem a s b | a -> s b where
+class HasComputedFilesystem a b | a -> b where
     computedFilesystem :: TF.Ref s a -> b
 
-class HasComputedFilesystems a s b | a -> s b where
+class HasComputedFilesystems a b | a -> b where
     computedFilesystems :: TF.Ref s a -> b
 
-class HasComputedGecos a s b | a -> s b where
+class HasComputedGecos a b | a -> b where
     computedGecos :: TF.Ref s a -> b
 
-class HasComputedGid a s b | a -> s b where
+class HasComputedGid a b | a -> b where
     computedGid :: TF.Ref s a -> b
 
-class HasComputedGroups a s b | a -> s b where
+class HasComputedGroups a b | a -> b where
     computedGroups :: TF.Ref s a -> b
 
-class HasComputedHard a s b | a -> s b where
+class HasComputedHard a b | a -> b where
     computedHard :: TF.Ref s a -> b
 
-class HasComputedHomeDir a s b | a -> s b where
+class HasComputedHomeDir a b | a -> b where
     computedHomeDir :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedLevel a s b | a -> s b where
+class HasComputedLevel a b | a -> b where
     computedLevel :: TF.Ref s a -> b
 
-class HasComputedLinks a s b | a -> s b where
+class HasComputedLinks a b | a -> b where
     computedLinks :: TF.Ref s a -> b
 
-class HasComputedMask a s b | a -> s b where
+class HasComputedMask a b | a -> b where
     computedMask :: TF.Ref s a -> b
 
-class HasComputedMode a s b | a -> s b where
+class HasComputedMode a b | a -> b where
     computedMode :: TF.Ref s a -> b
 
-class HasComputedMount a s b | a -> s b where
+class HasComputedMount a b | a -> b where
     computedMount :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNetworkd a s b | a -> s b where
+class HasComputedNetworkd a b | a -> b where
     computedNetworkd :: TF.Ref s a -> b
 
-class HasComputedNoCreateHome a s b | a -> s b where
+class HasComputedNoCreateHome a b | a -> b where
     computedNoCreateHome :: TF.Ref s a -> b
 
-class HasComputedNoLogInit a s b | a -> s b where
+class HasComputedNoLogInit a b | a -> b where
     computedNoLogInit :: TF.Ref s a -> b
 
-class HasComputedNoUserGroup a s b | a -> s b where
+class HasComputedNoUserGroup a b | a -> b where
     computedNoUserGroup :: TF.Ref s a -> b
 
-class HasComputedPartition a s b | a -> s b where
+class HasComputedPartition a b | a -> b where
     computedPartition :: TF.Ref s a -> b
 
-class HasComputedPasswordHash a s b | a -> s b where
+class HasComputedPasswordHash a b | a -> b where
     computedPasswordHash :: TF.Ref s a -> b
 
-class HasComputedPath a s b | a -> s b where
+class HasComputedPath a b | a -> b where
     computedPath :: TF.Ref s a -> b
 
-class HasComputedPrimaryGroup a s b | a -> s b where
+class HasComputedPrimaryGroup a b | a -> b where
     computedPrimaryGroup :: TF.Ref s a -> b
 
-class HasComputedRendered a s b | a -> s b where
+class HasComputedRendered a b | a -> b where
     computedRendered :: TF.Ref s a -> b
 
-class HasComputedReplace a s b | a -> s b where
+class HasComputedReplace a b | a -> b where
     computedReplace :: TF.Ref s a -> b
 
-class HasComputedShell a s b | a -> s b where
+class HasComputedShell a b | a -> b where
     computedShell :: TF.Ref s a -> b
 
-class HasComputedSource a s b | a -> s b where
+class HasComputedSource a b | a -> b where
     computedSource :: TF.Ref s a -> b
 
-class HasComputedSpares a s b | a -> s b where
+class HasComputedSpares a b | a -> b where
     computedSpares :: TF.Ref s a -> b
 
-class HasComputedSshAuthorizedKeys a s b | a -> s b where
+class HasComputedSshAuthorizedKeys a b | a -> b where
     computedSshAuthorizedKeys :: TF.Ref s a -> b
 
-class HasComputedSystem a s b | a -> s b where
+class HasComputedSystem a b | a -> b where
     computedSystem :: TF.Ref s a -> b
 
-class HasComputedSystemd a s b | a -> s b where
+class HasComputedSystemd a b | a -> b where
     computedSystemd :: TF.Ref s a -> b
 
-class HasComputedTarget a s b | a -> s b where
+class HasComputedTarget a b | a -> b where
     computedTarget :: TF.Ref s a -> b
 
-class HasComputedUid a s b | a -> s b where
+class HasComputedUid a b | a -> b where
     computedUid :: TF.Ref s a -> b
 
-class HasComputedUsers a s b | a -> s b where
+class HasComputedUsers a b | a -> b where
     computedUsers :: TF.Ref s a -> b
 
-class HasComputedWipeTable a s b | a -> s b where
+class HasComputedWipeTable a b | a -> b where
     computedWipeTable :: TF.Ref s a -> b

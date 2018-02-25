@@ -123,20 +123,20 @@ instance P.HasDataBagName (DataBagItemResource s) (TF.Attr s P.Text) where
         lens (_data_bag_name :: DataBagItemResource s -> TF.Attr s P.Text)
              (\s a -> s { _data_bag_name = a } :: DataBagItemResource s)
 
-instance P.HasComputedContentJson (DataBagItemResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedContentJson (DataBagItemResource s) (TF.Attr s P.Text) where
     computedContentJson =
         (_content_json :: DataBagItemResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDataBagName (DataBagItemResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDataBagName (DataBagItemResource s) (TF.Attr s P.Text) where
     computedDataBagName =
         (_data_bag_name :: DataBagItemResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DataBagItemResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (DataBagItemResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-dataBagItemResource :: TF.Schema TF.Resource P.Chef (DataBagItemResource s)
+dataBagItemResource :: TF.Resource P.Chef (DataBagItemResource s)
 dataBagItemResource =
     TF.newResource "chef_data_bag_item" $
         DataBagItemResource {
@@ -167,15 +167,15 @@ instance P.HasName (DataBagResource s) (TF.Attr s P.Text) where
         lens (_name :: DataBagResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DataBagResource s)
 
-instance P.HasComputedApiUri (DataBagResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedApiUri (DataBagResource s) (TF.Attr s P.Text) where
     computedApiUri x = TF.compute (TF.refKey x) "api_uri"
 
-instance P.HasComputedName (DataBagResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (DataBagResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: DataBagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-dataBagResource :: TF.Schema TF.Resource P.Chef (DataBagResource s)
+dataBagResource :: TF.Resource P.Chef (DataBagResource s)
 dataBagResource =
     TF.newResource "chef_data_bag" $
         DataBagResource {
@@ -235,32 +235,32 @@ instance P.HasOverrideAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) 
         lens (_override_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _override_attributes_json = a } :: EnvironmentResource s)
 
-instance P.HasComputedCookbookConstraints (EnvironmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCookbookConstraints (EnvironmentResource s) (TF.Attr s P.Text) where
     computedCookbookConstraints =
         (_cookbook_constraints :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultAttributesJson (EnvironmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDefaultAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
         (_default_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (EnvironmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (EnvironmentResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (EnvironmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (EnvironmentResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOverrideAttributesJson (EnvironmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOverrideAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
         (_override_attributes_json :: EnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-environmentResource :: TF.Schema TF.Resource P.Chef (EnvironmentResource s)
+environmentResource :: TF.Resource P.Chef (EnvironmentResource s)
 environmentResource =
     TF.newResource "chef_environment" $
         EnvironmentResource {
@@ -343,42 +343,42 @@ instance P.HasRunList (NodeResource s) (TF.Attr s P.Text) where
         lens (_run_list :: NodeResource s -> TF.Attr s P.Text)
              (\s a -> s { _run_list = a } :: NodeResource s)
 
-instance P.HasComputedAutomaticAttributesJson (NodeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAutomaticAttributesJson (NodeResource s) (TF.Attr s P.Text) where
     computedAutomaticAttributesJson =
         (_automatic_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultAttributesJson (NodeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDefaultAttributesJson (NodeResource s) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
         (_default_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnvironmentName (NodeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEnvironmentName (NodeResource s) (TF.Attr s P.Text) where
     computedEnvironmentName =
         (_environment_name :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (NodeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (NodeResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNormalAttributesJson (NodeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNormalAttributesJson (NodeResource s) (TF.Attr s P.Text) where
     computedNormalAttributesJson =
         (_normal_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOverrideAttributesJson (NodeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOverrideAttributesJson (NodeResource s) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
         (_override_attributes_json :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRunList (NodeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRunList (NodeResource s) (TF.Attr s P.Text) where
     computedRunList =
         (_run_list :: NodeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-nodeResource :: TF.Schema TF.Resource P.Chef (NodeResource s)
+nodeResource :: TF.Resource P.Chef (NodeResource s)
 nodeResource =
     TF.newResource "chef_node" $
         NodeResource {
@@ -443,32 +443,32 @@ instance P.HasRunList (RoleResource s) (TF.Attr s P.Text) where
         lens (_run_list :: RoleResource s -> TF.Attr s P.Text)
              (\s a -> s { _run_list = a } :: RoleResource s)
 
-instance P.HasComputedDefaultAttributesJson (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDefaultAttributesJson (RoleResource s) (TF.Attr s P.Text) where
     computedDefaultAttributesJson =
         (_default_attributes_json :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (RoleResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RoleResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOverrideAttributesJson (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOverrideAttributesJson (RoleResource s) (TF.Attr s P.Text) where
     computedOverrideAttributesJson =
         (_override_attributes_json :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRunList (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRunList (RoleResource s) (TF.Attr s P.Text) where
     computedRunList =
         (_run_list :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-roleResource :: TF.Schema TF.Resource P.Chef (RoleResource s)
+roleResource :: TF.Resource P.Chef (RoleResource s)
 roleResource =
     TF.newResource "chef_role" $
         RoleResource {

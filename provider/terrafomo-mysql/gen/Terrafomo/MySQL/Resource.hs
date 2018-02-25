@@ -122,22 +122,22 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
         lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasComputedDefaultCharacterSet (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDefaultCharacterSet (DatabaseResource s) (TF.Attr s P.Text) where
     computedDefaultCharacterSet =
         (_default_character_set :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultCollation (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDefaultCollation (DatabaseResource s) (TF.Attr s P.Text) where
     computedDefaultCollation =
         (_default_collation :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (DatabaseResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-databaseResource :: TF.Schema TF.Resource P.MySQL (DatabaseResource s)
+databaseResource :: TF.Resource P.MySQL (DatabaseResource s)
 databaseResource =
     TF.newResource "mysql_database" $
         DatabaseResource {
@@ -198,32 +198,32 @@ instance P.HasUser (GrantResource s) (TF.Attr s P.Text) where
         lens (_user :: GrantResource s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: GrantResource s)
 
-instance P.HasComputedDatabase (GrantResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDatabase (GrantResource s) (TF.Attr s P.Text) where
     computedDatabase =
         (_database :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGrant (GrantResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGrant (GrantResource s) (TF.Attr s P.Text) where
     computedGrant =
         (_grant :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHost (GrantResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHost (GrantResource s) (TF.Attr s P.Text) where
     computedHost =
         (_host :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrivileges (GrantResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrivileges (GrantResource s) (TF.Attr s P.Text) where
     computedPrivileges =
         (_privileges :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUser (GrantResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUser (GrantResource s) (TF.Attr s P.Text) where
     computedUser =
         (_user :: GrantResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-grantResource :: TF.Schema TF.Resource P.MySQL (GrantResource s)
+grantResource :: TF.Resource P.MySQL (GrantResource s)
 grantResource =
     TF.newResource "mysql_grant" $
         GrantResource {
@@ -280,27 +280,27 @@ instance P.HasUser (UserResource s) (TF.Attr s P.Text) where
         lens (_user :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _user = a } :: UserResource s)
 
-instance P.HasComputedHost (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHost (UserResource s) (TF.Attr s P.Text) where
     computedHost =
         (_host :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPassword (UserResource s) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPlaintextPassword (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPlaintextPassword (UserResource s) (TF.Attr s P.Text) where
     computedPlaintextPassword =
         (_plaintext_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUser (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUser (UserResource s) (TF.Attr s P.Text) where
     computedUser =
         (_user :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-userResource :: TF.Schema TF.Resource P.MySQL (UserResource s)
+userResource :: TF.Resource P.MySQL (UserResource s)
 userResource =
     TF.newResource "mysql_user" $
         UserResource {

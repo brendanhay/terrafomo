@@ -123,41 +123,41 @@ class HasRunList a b | a -> b where
 instance HasRunList a b => HasRunList (TF.Schema l p a) b where
     runList = TF.configuration . runList
 
-class HasComputedApiUri a s b | a -> s b where
+class HasComputedApiUri a b | a -> b where
     computedApiUri :: TF.Ref s a -> b
 
-class HasComputedAutomaticAttributesJson a s b | a -> s b where
+class HasComputedAutomaticAttributesJson a b | a -> b where
     computedAutomaticAttributesJson :: TF.Ref s a -> b
 
-class HasComputedContentJson a s b | a -> s b where
+class HasComputedContentJson a b | a -> b where
     computedContentJson :: TF.Ref s a -> b
 
-class HasComputedCookbookConstraints a s b | a -> s b where
+class HasComputedCookbookConstraints a b | a -> b where
     computedCookbookConstraints :: TF.Ref s a -> b
 
-class HasComputedDataBagName a s b | a -> s b where
+class HasComputedDataBagName a b | a -> b where
     computedDataBagName :: TF.Ref s a -> b
 
-class HasComputedDefaultAttributesJson a s b | a -> s b where
+class HasComputedDefaultAttributesJson a b | a -> b where
     computedDefaultAttributesJson :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedEnvironmentName a s b | a -> s b where
+class HasComputedEnvironmentName a b | a -> b where
     computedEnvironmentName :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNormalAttributesJson a s b | a -> s b where
+class HasComputedNormalAttributesJson a b | a -> b where
     computedNormalAttributesJson :: TF.Ref s a -> b
 
-class HasComputedOverrideAttributesJson a s b | a -> s b where
+class HasComputedOverrideAttributesJson a b | a -> b where
     computedOverrideAttributesJson :: TF.Ref s a -> b
 
-class HasComputedRunList a s b | a -> s b where
+class HasComputedRunList a b | a -> b where
     computedRunList :: TF.Ref s a -> b

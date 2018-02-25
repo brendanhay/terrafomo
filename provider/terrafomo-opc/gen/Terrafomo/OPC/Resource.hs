@@ -381,27 +381,27 @@ instance P.HasTags (ComputeAclResource s) (TF.Attr s P.Text) where
         lens (_tags :: ComputeAclResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeAclResource s)
 
-instance P.HasComputedDescription (ComputeAclResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeAclResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnabled (ComputeAclResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEnabled (ComputeAclResource s) (TF.Attr s P.Text) where
     computedEnabled =
         (_enabled :: ComputeAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeAclResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeAclResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeAclResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeAclResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeAclResource :: TF.Schema TF.Resource P.OPC (ComputeAclResource s)
+computeAclResource :: TF.Resource P.OPC (ComputeAclResource s)
 computeAclResource =
     TF.newResource "opc_compute_acl" $
         ComputeAclResource {
@@ -455,30 +455,30 @@ instance P.HasVersion (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
         lens (_version :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: ComputeImageListEntryResource s)
 
-instance P.HasComputedAttributes (ComputeImageListEntryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAttributes (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     computedAttributes =
         (_attributes :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMachineImages (ComputeImageListEntryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMachineImages (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     computedMachineImages =
         (_machine_images :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeImageListEntryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUri (ComputeImageListEntryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUri (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-instance P.HasComputedVersion (ComputeImageListEntryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVersion (ComputeImageListEntryResource s) (TF.Attr s P.Text) where
     computedVersion =
         (_version :: ComputeImageListEntryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeImageListEntryResource :: TF.Schema TF.Resource P.OPC (ComputeImageListEntryResource s)
+computeImageListEntryResource :: TF.Resource P.OPC (ComputeImageListEntryResource s)
 computeImageListEntryResource =
     TF.newResource "opc_compute_image_list_entry" $
         ComputeImageListEntryResource {
@@ -524,22 +524,22 @@ instance P.HasName (ComputeImageListResource s) (TF.Attr s P.Text) where
         lens (_name :: ComputeImageListResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ComputeImageListResource s)
 
-instance P.HasComputedDefault' (ComputeImageListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDefault' (ComputeImageListResource s) (TF.Attr s P.Text) where
     computedDefault' =
         (_default' :: ComputeImageListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ComputeImageListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeImageListResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeImageListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeImageListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeImageListResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeImageListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeImageListResource :: TF.Schema TF.Resource P.OPC (ComputeImageListResource s)
+computeImageListResource :: TF.Resource P.OPC (ComputeImageListResource s)
 computeImageListResource =
     TF.newResource "opc_compute_image_list" $
         ComputeImageListResource {
@@ -668,135 +668,135 @@ instance P.HasTags (ComputeInstanceResource s) (TF.Attr s P.Text) where
         lens (_tags :: ComputeInstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeInstanceResource s)
 
-instance P.HasComputedAttributes (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAttributes (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
-instance P.HasComputedAvailabilityDomain (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAvailabilityDomain (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedAvailabilityDomain x = TF.compute (TF.refKey x) "availability_domain"
 
-instance P.HasComputedBootOrder (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBootOrder (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedBootOrder =
         (_boot_order :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDesiredState (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDesiredState (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedDesiredState =
         (_desired_state :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDomain (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDomain (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedDomain x = TF.compute (TF.refKey x) "domain"
 
-instance P.HasComputedEntry (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEntry (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedEntry x = TF.compute (TF.refKey x) "entry"
 
-instance P.HasComputedFingerprint (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFingerprint (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance P.HasComputedFqdn (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFqdn (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
-instance P.HasComputedHostname (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHostname (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedHostname =
         (_hostname :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImageFormat (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedImageFormat (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedImageFormat x = TF.compute (TF.refKey x) "image_format"
 
-instance P.HasComputedImageList (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedImageList (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedImageList =
         (_image_list :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInstanceAttributes (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedInstanceAttributes (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedInstanceAttributes =
         (_instance_attributes :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpAddress (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpAddress (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance P.HasComputedLabel (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLabel (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedLabel =
         (_label :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNetworkingInfo (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNetworkingInfo (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedNetworkingInfo =
         (_networking_info :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPlacementRequirements (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPlacementRequirements (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedPlacementRequirements x = TF.compute (TF.refKey x) "placement_requirements"
 
-instance P.HasComputedPlatform (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPlatform (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance P.HasComputedPriority (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPriority (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance P.HasComputedQuotaReservation (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedQuotaReservation (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedQuotaReservation x = TF.compute (TF.refKey x) "quota_reservation"
 
-instance P.HasComputedRelationships (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRelationships (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedRelationships x = TF.compute (TF.refKey x) "relationships"
 
-instance P.HasComputedResolvers (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedResolvers (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedResolvers x = TF.compute (TF.refKey x) "resolvers"
 
-instance P.HasComputedReverseDns (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedReverseDns (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedReverseDns =
         (_reverse_dns :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedShape (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedShape (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedShape =
         (_shape :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSite (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSite (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedSite x = TF.compute (TF.refKey x) "site"
 
-instance P.HasComputedSshKeys (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSshKeys (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedSshKeys =
         (_ssh_keys :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStartTime (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStartTime (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedStartTime x = TF.compute (TF.refKey x) "start_time"
 
-instance P.HasComputedState (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedState (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance P.HasComputedStorage (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStorage (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedStorage =
         (_storage :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVcableId (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVcableId (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedVcableId x = TF.compute (TF.refKey x) "vcable_id"
 
-instance P.HasComputedVirtio (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVirtio (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedVirtio x = TF.compute (TF.refKey x) "virtio"
 
-instance P.HasComputedVncAddress (ComputeInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVncAddress (ComputeInstanceResource s) (TF.Attr s P.Text) where
     computedVncAddress x = TF.compute (TF.refKey x) "vnc_address"
 
-computeInstanceResource :: TF.Schema TF.Resource P.OPC (ComputeInstanceResource s)
+computeInstanceResource :: TF.Resource P.OPC (ComputeInstanceResource s)
 computeInstanceResource =
     TF.newResource "opc_compute_instance" $
         ComputeInstanceResource {
@@ -868,32 +868,32 @@ instance P.HasVnic (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) wh
         lens (_vnic :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
              (\s a -> s { _vnic = a } :: ComputeIpAddressAssociationResource s)
 
-instance P.HasComputedDescription (ComputeIpAddressAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpAddressReservation (ComputeIpAddressAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpAddressReservation (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     computedIpAddressReservation =
         (_ip_address_reservation :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeIpAddressAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeIpAddressAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVnic (ComputeIpAddressAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVnic (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) where
     computedVnic =
         (_vnic :: ComputeIpAddressAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeIpAddressAssociationResource :: TF.Schema TF.Resource P.OPC (ComputeIpAddressAssociationResource s)
+computeIpAddressAssociationResource :: TF.Resource P.OPC (ComputeIpAddressAssociationResource s)
 computeIpAddressAssociationResource =
     TF.newResource "opc_compute_ip_address_association" $
         ComputeIpAddressAssociationResource {
@@ -948,27 +948,27 @@ instance P.HasTags (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) wher
         lens (_tags :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeIpAddressPrefixSetResource s)
 
-instance P.HasComputedDescription (ComputeIpAddressPrefixSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeIpAddressPrefixSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrefixes (ComputeIpAddressPrefixSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrefixes (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) where
     computedPrefixes =
         (_prefixes :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeIpAddressPrefixSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeIpAddressPrefixSetResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeIpAddressPrefixSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeIpAddressPrefixSetResource :: TF.Schema TF.Resource P.OPC (ComputeIpAddressPrefixSetResource s)
+computeIpAddressPrefixSetResource :: TF.Resource P.OPC (ComputeIpAddressPrefixSetResource s)
 computeIpAddressPrefixSetResource =
     TF.newResource "opc_compute_ip_address_prefix_set" $
         ComputeIpAddressPrefixSetResource {
@@ -1022,27 +1022,27 @@ instance P.HasTags (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) wh
         lens (_tags :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeIpAddressReservationResource s)
 
-instance P.HasComputedDescription (ComputeIpAddressReservationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpAddressPool (ComputeIpAddressReservationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpAddressPool (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) where
     computedIpAddressPool =
         (_ip_address_pool :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeIpAddressReservationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeIpAddressReservationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeIpAddressReservationResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeIpAddressReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeIpAddressReservationResource :: TF.Schema TF.Resource P.OPC (ComputeIpAddressReservationResource s)
+computeIpAddressReservationResource :: TF.Resource P.OPC (ComputeIpAddressReservationResource s)
 computeIpAddressReservationResource =
     TF.newResource "opc_compute_ip_address_reservation" $
         ComputeIpAddressReservationResource {
@@ -1081,20 +1081,20 @@ instance P.HasVcable (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
         lens (_vcable :: ComputeIpAssociationResource s -> TF.Attr s P.Text)
              (\s a -> s { _vcable = a } :: ComputeIpAssociationResource s)
 
-instance P.HasComputedName (ComputeIpAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedParentPool (ComputeIpAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedParentPool (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
     computedParentPool =
         (_parent_pool :: ComputeIpAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVcable (ComputeIpAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVcable (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
     computedVcable =
         (_vcable :: ComputeIpAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeIpAssociationResource :: TF.Schema TF.Resource P.OPC (ComputeIpAssociationResource s)
+computeIpAssociationResource :: TF.Resource P.OPC (ComputeIpAssociationResource s)
 computeIpAssociationResource =
     TF.newResource "opc_compute_ip_association" $
         ComputeIpAssociationResource {
@@ -1138,22 +1138,22 @@ instance P.HasTags (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
         lens (_tags :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeIpNetworkExchangeResource s)
 
-instance P.HasComputedDescription (ComputeIpNetworkExchangeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeIpNetworkExchangeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeIpNetworkExchangeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeIpNetworkExchangeResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeIpNetworkExchangeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeIpNetworkExchangeResource :: TF.Schema TF.Resource P.OPC (ComputeIpNetworkExchangeResource s)
+computeIpNetworkExchangeResource :: TF.Resource P.OPC (ComputeIpNetworkExchangeResource s)
 computeIpNetworkExchangeResource =
     TF.newResource "opc_compute_ip_network_exchange" $
         ComputeIpNetworkExchangeResource {
@@ -1213,25 +1213,25 @@ instance P.HasPublicNaptEnabled (ComputeIpNetworkResource s) (TF.Attr s P.Text) 
         lens (_public_napt_enabled :: ComputeIpNetworkResource s -> TF.Attr s P.Text)
              (\s a -> s { _public_napt_enabled = a } :: ComputeIpNetworkResource s)
 
-instance P.HasComputedDescription (ComputeIpNetworkResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedIpAddressPrefix (ComputeIpNetworkResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpAddressPrefix (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     computedIpAddressPrefix x = TF.compute (TF.refKey x) "ip_address_prefix"
 
-instance P.HasComputedIpNetworkExchange (ComputeIpNetworkResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpNetworkExchange (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     computedIpNetworkExchange x = TF.compute (TF.refKey x) "ip_network_exchange"
 
-instance P.HasComputedName (ComputeIpNetworkResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPublicNaptEnabled (ComputeIpNetworkResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPublicNaptEnabled (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     computedPublicNaptEnabled x = TF.compute (TF.refKey x) "public_napt_enabled"
 
-instance P.HasComputedUri (ComputeIpNetworkResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUri (ComputeIpNetworkResource s) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-computeIpNetworkResource :: TF.Schema TF.Resource P.OPC (ComputeIpNetworkResource s)
+computeIpNetworkResource :: TF.Resource P.OPC (ComputeIpNetworkResource s)
 computeIpNetworkResource =
     TF.newResource "opc_compute_ip_network" $
         ComputeIpNetworkResource {
@@ -1286,27 +1286,27 @@ instance P.HasTags (ComputeIpReservationResource s) (TF.Attr s P.Text) where
         lens (_tags :: ComputeIpReservationResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeIpReservationResource s)
 
-instance P.HasComputedName (ComputeIpReservationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedParentPool (ComputeIpReservationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedParentPool (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     computedParentPool =
         (_parent_pool :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPermanent (ComputeIpReservationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPermanent (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     computedPermanent =
         (_permanent :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeIpReservationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeIpReservationResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeIpReservationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeIpReservationResource :: TF.Schema TF.Resource P.OPC (ComputeIpReservationResource s)
+computeIpReservationResource :: TF.Resource P.OPC (ComputeIpReservationResource s)
 computeIpReservationResource =
     TF.newResource "opc_compute_ip_reservation" $
         ComputeIpReservationResource {
@@ -1371,32 +1371,32 @@ instance P.HasName (ComputeMachineImageResource s) (TF.Attr s P.Text) where
         lens (_name :: ComputeMachineImageResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ComputeMachineImageResource s)
 
-instance P.HasComputedAccount (ComputeMachineImageResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAccount (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     computedAccount =
         (_account :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAttributes (ComputeMachineImageResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAttributes (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     computedAttributes =
         (_attributes :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ComputeMachineImageResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFile (ComputeMachineImageResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFile (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     computedFile =
         (_file :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeMachineImageResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeMachineImageResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeMachineImageResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeMachineImageResource :: TF.Schema TF.Resource P.OPC (ComputeMachineImageResource s)
+computeMachineImageResource :: TF.Resource P.OPC (ComputeMachineImageResource s)
 computeMachineImageResource =
     TF.newResource "opc_compute_machine_image" $
         ComputeMachineImageResource {
@@ -1451,27 +1451,27 @@ instance P.HasName (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) wh
         lens (_name :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasComputedDescription (ComputeOrchestratedInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDesiredState (ComputeOrchestratedInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDesiredState (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     computedDesiredState =
         (_desired_state :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInstance' (ComputeOrchestratedInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     computedInstance' =
         (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeOrchestratedInstanceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeOrchestratedInstanceResource :: TF.Schema TF.Resource P.OPC (ComputeOrchestratedInstanceResource s)
+computeOrchestratedInstanceResource :: TF.Resource P.OPC (ComputeOrchestratedInstanceResource s)
 computeOrchestratedInstanceResource =
     TF.newResource "opc_compute_orchestrated_instance" $
         ComputeOrchestratedInstanceResource {
@@ -1533,22 +1533,22 @@ instance P.HasNextHopVnicSet (ComputeRouteResource s) (TF.Attr s P.Text) where
         lens (_next_hop_vnic_set :: ComputeRouteResource s -> TF.Attr s P.Text)
              (\s a -> s { _next_hop_vnic_set = a } :: ComputeRouteResource s)
 
-instance P.HasComputedAdminDistance (ComputeRouteResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAdminDistance (ComputeRouteResource s) (TF.Attr s P.Text) where
     computedAdminDistance x = TF.compute (TF.refKey x) "admin_distance"
 
-instance P.HasComputedDescription (ComputeRouteResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeRouteResource s) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedIpAddressPrefix (ComputeRouteResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpAddressPrefix (ComputeRouteResource s) (TF.Attr s P.Text) where
     computedIpAddressPrefix x = TF.compute (TF.refKey x) "ip_address_prefix"
 
-instance P.HasComputedName (ComputeRouteResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeRouteResource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedNextHopVnicSet (ComputeRouteResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNextHopVnicSet (ComputeRouteResource s) (TF.Attr s P.Text) where
     computedNextHopVnicSet x = TF.compute (TF.refKey x) "next_hop_vnic_set"
 
-computeRouteResource :: TF.Schema TF.Resource P.OPC (ComputeRouteResource s)
+computeRouteResource :: TF.Resource P.OPC (ComputeRouteResource s)
 computeRouteResource =
     TF.newResource "opc_compute_route" $
         ComputeRouteResource {
@@ -1629,42 +1629,42 @@ instance P.HasSourceList (ComputeSecRuleResource s) (TF.Attr s P.Text) where
         lens (_source_list :: ComputeSecRuleResource s -> TF.Attr s P.Text)
              (\s a -> s { _source_list = a } :: ComputeSecRuleResource s)
 
-instance P.HasComputedAction (ComputeSecRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAction (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     computedAction =
         (_action :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedApplication (ComputeSecRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedApplication (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     computedApplication =
         (_application :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ComputeSecRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDestinationList (ComputeSecRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDestinationList (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     computedDestinationList =
         (_destination_list :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDisabled (ComputeSecRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDisabled (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     computedDisabled =
         (_disabled :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeSecRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSourceList (ComputeSecRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSourceList (ComputeSecRuleResource s) (TF.Attr s P.Text) where
     computedSourceList =
         (_source_list :: ComputeSecRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSecRuleResource :: TF.Schema TF.Resource P.OPC (ComputeSecRuleResource s)
+computeSecRuleResource :: TF.Resource P.OPC (ComputeSecRuleResource s)
 computeSecRuleResource =
     TF.newResource "opc_compute_sec_rule" $
         ComputeSecRuleResource {
@@ -1729,32 +1729,32 @@ instance P.HasProtocol (ComputeSecurityApplicationResource s) (TF.Attr s P.Text)
         lens (_protocol :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
              (\s a -> s { _protocol = a } :: ComputeSecurityApplicationResource s)
 
-instance P.HasComputedDport (ComputeSecurityApplicationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDport (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     computedDport =
         (_dport :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIcmpcode (ComputeSecurityApplicationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIcmpcode (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     computedIcmpcode =
         (_icmpcode :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIcmptype (ComputeSecurityApplicationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIcmptype (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     computedIcmptype =
         (_icmptype :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeSecurityApplicationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProtocol (ComputeSecurityApplicationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProtocol (ComputeSecurityApplicationResource s) (TF.Attr s P.Text) where
     computedProtocol =
         (_protocol :: ComputeSecurityApplicationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSecurityApplicationResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityApplicationResource s)
+computeSecurityApplicationResource :: TF.Resource P.OPC (ComputeSecurityApplicationResource s)
 computeSecurityApplicationResource =
     TF.newResource "opc_compute_security_application" $
         ComputeSecurityApplicationResource {
@@ -1802,22 +1802,22 @@ instance P.HasVcable (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) w
         lens (_vcable :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
              (\s a -> s { _vcable = a } :: ComputeSecurityAssociationResource s)
 
-instance P.HasComputedName (ComputeSecurityAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSeclist (ComputeSecurityAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSeclist (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) where
     computedSeclist =
         (_seclist :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVcable (ComputeSecurityAssociationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVcable (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) where
     computedVcable =
         (_vcable :: ComputeSecurityAssociationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSecurityAssociationResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityAssociationResource s)
+computeSecurityAssociationResource :: TF.Resource P.OPC (ComputeSecurityAssociationResource s)
 computeSecurityAssociationResource =
     TF.newResource "opc_compute_security_association" $
         ComputeSecurityAssociationResource {
@@ -1862,22 +1862,22 @@ instance P.HasName (ComputeSecurityIpListResource s) (TF.Attr s P.Text) where
         lens (_name :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ComputeSecurityIpListResource s)
 
-instance P.HasComputedDescription (ComputeSecurityIpListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeSecurityIpListResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpEntries (ComputeSecurityIpListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpEntries (ComputeSecurityIpListResource s) (TF.Attr s P.Text) where
     computedIpEntries =
         (_ip_entries :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeSecurityIpListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeSecurityIpListResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeSecurityIpListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSecurityIpListResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityIpListResource s)
+computeSecurityIpListResource :: TF.Resource P.OPC (ComputeSecurityIpListResource s)
 computeSecurityIpListResource =
     TF.newResource "opc_compute_security_ip_list" $
         ComputeSecurityIpListResource {
@@ -1922,22 +1922,22 @@ instance P.HasPolicy (ComputeSecurityListResource s) (TF.Attr s P.Text) where
         lens (_policy :: ComputeSecurityListResource s -> TF.Attr s P.Text)
              (\s a -> s { _policy = a } :: ComputeSecurityListResource s)
 
-instance P.HasComputedName (ComputeSecurityListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeSecurityListResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeSecurityListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOutputCidrPolicy (ComputeSecurityListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOutputCidrPolicy (ComputeSecurityListResource s) (TF.Attr s P.Text) where
     computedOutputCidrPolicy =
         (_output_cidr_policy :: ComputeSecurityListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicy (ComputeSecurityListResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPolicy (ComputeSecurityListResource s) (TF.Attr s P.Text) where
     computedPolicy =
         (_policy :: ComputeSecurityListResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSecurityListResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityListResource s)
+computeSecurityListResource :: TF.Resource P.OPC (ComputeSecurityListResource s)
 computeSecurityListResource =
     TF.newResource "opc_compute_security_list" $
         ComputeSecurityListResource {
@@ -2006,37 +2006,37 @@ instance P.HasTags (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
         lens (_tags :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeSecurityProtocolResource s)
 
-instance P.HasComputedDescription (ComputeSecurityProtocolResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDstPorts (ComputeSecurityProtocolResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDstPorts (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     computedDstPorts =
         (_dst_ports :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpProtocol (ComputeSecurityProtocolResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpProtocol (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     computedIpProtocol =
         (_ip_protocol :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeSecurityProtocolResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSrcPorts (ComputeSecurityProtocolResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSrcPorts (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     computedSrcPorts =
         (_src_ports :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeSecurityProtocolResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeSecurityProtocolResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeSecurityProtocolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSecurityProtocolResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityProtocolResource s)
+computeSecurityProtocolResource :: TF.Resource P.OPC (ComputeSecurityProtocolResource s)
 computeSecurityProtocolResource =
     TF.newResource "opc_compute_security_protocol" $
         ComputeSecurityProtocolResource {
@@ -2148,65 +2148,65 @@ instance P.HasTags (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
         lens (_tags :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeSecurityRuleResource s)
 
-instance P.HasComputedAcl (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAcl (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedAcl =
         (_acl :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDisabled (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDisabled (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedDisabled =
         (_disabled :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDstIpAddressPrefixes (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDstIpAddressPrefixes (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedDstIpAddressPrefixes =
         (_dst_ip_address_prefixes :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDstVnicSet (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDstVnicSet (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedDstVnicSet =
         (_dst_vnic_set :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFlowDirection (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFlowDirection (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedFlowDirection =
         (_flow_direction :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecurityProtocols (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSecurityProtocols (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedSecurityProtocols =
         (_security_protocols :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSrcIpAddressPrefixes (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSrcIpAddressPrefixes (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedSrcIpAddressPrefixes =
         (_src_ip_address_prefixes :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSrcVnicSet (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSrcVnicSet (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedSrcVnicSet =
         (_src_vnic_set :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeSecurityRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUri (ComputeSecurityRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUri (ComputeSecurityRuleResource s) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-computeSecurityRuleResource :: TF.Schema TF.Resource P.OPC (ComputeSecurityRuleResource s)
+computeSecurityRuleResource :: TF.Resource P.OPC (ComputeSecurityRuleResource s)
 computeSecurityRuleResource =
     TF.newResource "opc_compute_security_rule" $
         ComputeSecurityRuleResource {
@@ -2259,22 +2259,22 @@ instance P.HasName (ComputeSshKeyResource s) (TF.Attr s P.Text) where
         lens (_name :: ComputeSshKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ComputeSshKeyResource s)
 
-instance P.HasComputedEnabled (ComputeSshKeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEnabled (ComputeSshKeyResource s) (TF.Attr s P.Text) where
     computedEnabled =
         (_enabled :: ComputeSshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedKey (ComputeSshKeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedKey (ComputeSshKeyResource s) (TF.Attr s P.Text) where
     computedKey =
         (_key :: ComputeSshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeSshKeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeSshKeyResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeSshKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeSshKeyResource :: TF.Schema TF.Resource P.OPC (ComputeSshKeyResource s)
+computeSshKeyResource :: TF.Resource P.OPC (ComputeSshKeyResource s)
 computeSshKeyResource =
     TF.newResource "opc_compute_ssh_key" $
         ComputeSshKeyResource {
@@ -2319,22 +2319,22 @@ instance P.HasStorageVolume (ComputeStorageVolumeAttachmentResource s) (TF.Attr 
         lens (_storage_volume :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _storage_volume = a } :: ComputeStorageVolumeAttachmentResource s)
 
-instance P.HasComputedIndex (ComputeStorageVolumeAttachmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIndex (ComputeStorageVolumeAttachmentResource s) (TF.Attr s P.Text) where
     computedIndex =
         (_index :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInstance' (ComputeStorageVolumeAttachmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedInstance' (ComputeStorageVolumeAttachmentResource s) (TF.Attr s P.Text) where
     computedInstance' =
         (_instance' :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStorageVolume (ComputeStorageVolumeAttachmentResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStorageVolume (ComputeStorageVolumeAttachmentResource s) (TF.Attr s P.Text) where
     computedStorageVolume =
         (_storage_volume :: ComputeStorageVolumeAttachmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeStorageVolumeAttachmentResource :: TF.Schema TF.Resource P.OPC (ComputeStorageVolumeAttachmentResource s)
+computeStorageVolumeAttachmentResource :: TF.Resource P.OPC (ComputeStorageVolumeAttachmentResource s)
 computeStorageVolumeAttachmentResource =
     TF.newResource "opc_compute_storage_volume_attachment" $
         ComputeStorageVolumeAttachmentResource {
@@ -2447,86 +2447,86 @@ instance P.HasTags (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
         lens (_tags :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: ComputeStorageVolumeResource s)
 
-instance P.HasComputedBootable (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBootable (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedBootable =
         (_bootable :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHypervisor (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHypervisor (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
-instance P.HasComputedImageList (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedImageList (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedImageList =
         (_image_list :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedImageListEntry (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedImageListEntry (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedImageListEntry =
         (_image_list_entry :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMachineImage (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMachineImage (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedMachineImage x = TF.compute (TF.refKey x) "machine_image"
 
-instance P.HasComputedManaged (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedManaged (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedManaged x = TF.compute (TF.refKey x) "managed"
 
-instance P.HasComputedName (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPlatform (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPlatform (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance P.HasComputedReadonly (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedReadonly (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedReadonly x = TF.compute (TF.refKey x) "readonly"
 
-instance P.HasComputedSize (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSize (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedSize =
         (_size :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSnapshot (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSnapshot (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedSnapshot =
         (_snapshot :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSnapshotAccount (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSnapshotAccount (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedSnapshotAccount =
         (_snapshot_account :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSnapshotId (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSnapshotId (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedSnapshotId =
         (_snapshot_id :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStatus (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStatus (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedStoragePool (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStoragePool (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedStoragePool x = TF.compute (TF.refKey x) "storage_pool"
 
-instance P.HasComputedStorageType (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStorageType (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedStorageType =
         (_storage_type :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeStorageVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUri (ComputeStorageVolumeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUri (ComputeStorageVolumeResource s) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-computeStorageVolumeResource :: TF.Schema TF.Resource P.OPC (ComputeStorageVolumeResource s)
+computeStorageVolumeResource :: TF.Resource P.OPC (ComputeStorageVolumeResource s)
 computeStorageVolumeResource =
     TF.newResource "opc_compute_storage_volume" $
         ComputeStorageVolumeResource {
@@ -2603,73 +2603,73 @@ instance P.HasVolumeName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.T
         lens (_volume_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
              (\s a -> s { _volume_name = a } :: ComputeStorageVolumeSnapshotResource s)
 
-instance P.HasComputedAccount (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAccount (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "account"
 
-instance P.HasComputedCollocated (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCollocated (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedCollocated =
         (_collocated :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMachineImageName (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMachineImageName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedMachineImageName x = TF.compute (TF.refKey x) "machine_image_name"
 
-instance P.HasComputedName (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedParentVolumeBootable (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedParentVolumeBootable (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedParentVolumeBootable =
         (_parent_volume_bootable :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPlatform (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPlatform (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance P.HasComputedProperty (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProperty (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedProperty x = TF.compute (TF.refKey x) "property"
 
-instance P.HasComputedSize (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSize (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance P.HasComputedSnapshotId (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSnapshotId (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
 
-instance P.HasComputedSnapshotTimestamp (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSnapshotTimestamp (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedSnapshotTimestamp x = TF.compute (TF.refKey x) "snapshot_timestamp"
 
-instance P.HasComputedStartTimestamp (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStartTimestamp (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedStartTimestamp x = TF.compute (TF.refKey x) "start_timestamp"
 
-instance P.HasComputedStatus (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStatus (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance P.HasComputedStatusDetail (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStatusDetail (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedStatusDetail x = TF.compute (TF.refKey x) "status_detail"
 
-instance P.HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStatusTimestamp (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedStatusTimestamp x = TF.compute (TF.refKey x) "status_timestamp"
 
-instance P.HasComputedTags (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUri (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUri (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedUri x = TF.compute (TF.refKey x) "uri"
 
-instance P.HasComputedVolumeName (ComputeStorageVolumeSnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVolumeName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.Text) where
     computedVolumeName =
         (_volume_name :: ComputeStorageVolumeSnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeStorageVolumeSnapshotResource :: TF.Schema TF.Resource P.OPC (ComputeStorageVolumeSnapshotResource s)
+computeStorageVolumeSnapshotResource :: TF.Resource P.OPC (ComputeStorageVolumeSnapshotResource s)
 computeStorageVolumeSnapshotResource =
     TF.newResource "opc_compute_storage_volume_snapshot" $
         ComputeStorageVolumeSnapshotResource {
@@ -2733,32 +2733,32 @@ instance P.HasVirtualNics (ComputeVnicSetResource s) (TF.Attr s P.Text) where
         lens (_virtual_nics :: ComputeVnicSetResource s -> TF.Attr s P.Text)
              (\s a -> s { _virtual_nics = a } :: ComputeVnicSetResource s)
 
-instance P.HasComputedAppliedAcls (ComputeVnicSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAppliedAcls (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     computedAppliedAcls =
         (_applied_acls :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ComputeVnicSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ComputeVnicSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ComputeVnicSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVirtualNics (ComputeVnicSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVirtualNics (ComputeVnicSetResource s) (TF.Attr s P.Text) where
     computedVirtualNics =
         (_virtual_nics :: ComputeVnicSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-computeVnicSetResource :: TF.Schema TF.Resource P.OPC (ComputeVnicSetResource s)
+computeVnicSetResource :: TF.Resource P.OPC (ComputeVnicSetResource s)
 computeVnicSetResource =
     TF.newResource "opc_compute_vnic_set" $
         ComputeVnicSetResource {
@@ -2870,62 +2870,62 @@ instance P.HasWriteAcls (StorageContainerResource s) (TF.Attr s P.Text) where
         lens (_write_acls :: StorageContainerResource s -> TF.Attr s P.Text)
              (\s a -> s { _write_acls = a } :: StorageContainerResource s)
 
-instance P.HasComputedAllowedOrigins (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAllowedOrigins (StorageContainerResource s) (TF.Attr s P.Text) where
     computedAllowedOrigins =
         (_allowed_origins :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedExposedHeaders (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedExposedHeaders (StorageContainerResource s) (TF.Attr s P.Text) where
     computedExposedHeaders =
         (_exposed_headers :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMaxAge (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMaxAge (StorageContainerResource s) (TF.Attr s P.Text) where
     computedMaxAge =
         (_max_age :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMetadata (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetadata (StorageContainerResource s) (TF.Attr s P.Text) where
     computedMetadata =
         (_metadata :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (StorageContainerResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrimaryKey (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrimaryKey (StorageContainerResource s) (TF.Attr s P.Text) where
     computedPrimaryKey =
         (_primary_key :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedQuotaBytes (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedQuotaBytes (StorageContainerResource s) (TF.Attr s P.Text) where
     computedQuotaBytes =
         (_quota_bytes :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedQuotaCount (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedQuotaCount (StorageContainerResource s) (TF.Attr s P.Text) where
     computedQuotaCount =
         (_quota_count :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedReadAcls (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedReadAcls (StorageContainerResource s) (TF.Attr s P.Text) where
     computedReadAcls =
         (_read_acls :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecondaryKey (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSecondaryKey (StorageContainerResource s) (TF.Attr s P.Text) where
     computedSecondaryKey =
         (_secondary_key :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedWriteAcls (StorageContainerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedWriteAcls (StorageContainerResource s) (TF.Attr s P.Text) where
     computedWriteAcls =
         (_write_acls :: StorageContainerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-storageContainerResource :: TF.Schema TF.Resource P.OPC (StorageContainerResource s)
+storageContainerResource :: TF.Resource P.OPC (StorageContainerResource s)
 storageContainerResource =
     TF.newResource "opc_storage_container" $
         StorageContainerResource {
@@ -2971,17 +2971,17 @@ instance P.HasName (StorageObjectResource s) (TF.Attr s P.Text) where
         lens (_name :: StorageObjectResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: StorageObjectResource s)
 
-instance P.HasComputedContainer (StorageObjectResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedContainer (StorageObjectResource s) (TF.Attr s P.Text) where
     computedContainer =
         (_container :: StorageObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (StorageObjectResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (StorageObjectResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: StorageObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-storageObjectResource :: TF.Schema TF.Resource P.OPC (StorageObjectResource s)
+storageObjectResource :: TF.Resource P.OPC (StorageObjectResource s)
 storageObjectResource =
     TF.newResource "opc_storage_object" $
         StorageObjectResource {

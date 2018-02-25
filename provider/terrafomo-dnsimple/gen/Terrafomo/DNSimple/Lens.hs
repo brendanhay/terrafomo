@@ -84,29 +84,29 @@ class HasValue a b | a -> b where
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
-class HasComputedDomain a s b | a -> s b where
+class HasComputedDomain a b | a -> b where
     computedDomain :: TF.Ref s a -> b
 
-class HasComputedDomainId a s b | a -> s b where
+class HasComputedDomainId a b | a -> b where
     computedDomainId :: TF.Ref s a -> b
 
-class HasComputedHostname a s b | a -> s b where
+class HasComputedHostname a b | a -> b where
     computedHostname :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedPriority a s b | a -> s b where
+class HasComputedPriority a b | a -> b where
     computedPriority :: TF.Ref s a -> b
 
-class HasComputedTtl a s b | a -> s b where
+class HasComputedTtl a b | a -> b where
     computedTtl :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedValue a s b | a -> s b where
+class HasComputedValue a b | a -> b where
     computedValue :: TF.Ref s a -> b

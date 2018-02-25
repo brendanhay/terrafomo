@@ -186,20 +186,20 @@ instance P.HasSrc (AddonResource s) (TF.Attr s P.Text) where
         lens (_src :: AddonResource s -> TF.Attr s P.Text)
              (\s a -> s { _src = a } :: AddonResource s)
 
-instance P.HasComputedId (AddonResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (AddonResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (AddonResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (AddonResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: AddonResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSrc (AddonResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSrc (AddonResource s) (TF.Attr s P.Text) where
     computedSrc =
         (_src :: AddonResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-addonResource :: TF.Schema TF.Resource P.PagerDuty (AddonResource s)
+addonResource :: TF.Resource P.PagerDuty (AddonResource s)
 addonResource =
     TF.newResource "pagerduty_addon" $
         AddonResource {
@@ -262,35 +262,35 @@ instance P.HasTeams (EscalationPolicyResource s) (TF.Attr s P.Text) where
         lens (_teams :: EscalationPolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _teams = a } :: EscalationPolicyResource s)
 
-instance P.HasComputedDescription (EscalationPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (EscalationPolicyResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: EscalationPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (EscalationPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (EscalationPolicyResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (EscalationPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (EscalationPolicyResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: EscalationPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNumLoops (EscalationPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNumLoops (EscalationPolicyResource s) (TF.Attr s P.Text) where
     computedNumLoops =
         (_num_loops :: EscalationPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRule (EscalationPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRule (EscalationPolicyResource s) (TF.Attr s P.Text) where
     computedRule =
         (_rule :: EscalationPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTeams (EscalationPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTeams (EscalationPolicyResource s) (TF.Attr s P.Text) where
     computedTeams =
         (_teams :: EscalationPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-escalationPolicyResource :: TF.Schema TF.Resource P.PagerDuty (EscalationPolicyResource s)
+escalationPolicyResource :: TF.Resource P.PagerDuty (EscalationPolicyResource s)
 escalationPolicyResource =
     TF.newResource "pagerduty_escalation_policy" $
         EscalationPolicyResource {
@@ -351,30 +351,30 @@ instance P.HasStartTime (MaintenanceWindowResource s) (TF.Attr s P.Text) where
         lens (_start_time :: MaintenanceWindowResource s -> TF.Attr s P.Text)
              (\s a -> s { _start_time = a } :: MaintenanceWindowResource s)
 
-instance P.HasComputedDescription (MaintenanceWindowResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: MaintenanceWindowResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEndTime (MaintenanceWindowResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEndTime (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     computedEndTime =
         (_end_time :: MaintenanceWindowResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (MaintenanceWindowResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedServices (MaintenanceWindowResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedServices (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     computedServices =
         (_services :: MaintenanceWindowResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStartTime (MaintenanceWindowResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStartTime (MaintenanceWindowResource s) (TF.Attr s P.Text) where
     computedStartTime =
         (_start_time :: MaintenanceWindowResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-maintenanceWindowResource :: TF.Schema TF.Resource P.PagerDuty (MaintenanceWindowResource s)
+maintenanceWindowResource :: TF.Resource P.PagerDuty (MaintenanceWindowResource s)
 maintenanceWindowResource =
     TF.newResource "pagerduty_maintenance_window" $
         MaintenanceWindowResource {
@@ -438,35 +438,35 @@ instance P.HasTimeZone (ScheduleResource s) (TF.Attr s P.Text) where
         lens (_time_zone :: ScheduleResource s -> TF.Attr s P.Text)
              (\s a -> s { _time_zone = a } :: ScheduleResource s)
 
-instance P.HasComputedDescription (ScheduleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ScheduleResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (ScheduleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ScheduleResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLayer (ScheduleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLayer (ScheduleResource s) (TF.Attr s P.Text) where
     computedLayer =
         (_layer :: ScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ScheduleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ScheduleResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOverflow (ScheduleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOverflow (ScheduleResource s) (TF.Attr s P.Text) where
     computedOverflow =
         (_overflow :: ScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTimeZone (ScheduleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTimeZone (ScheduleResource s) (TF.Attr s P.Text) where
     computedTimeZone =
         (_time_zone :: ScheduleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-scheduleResource :: TF.Schema TF.Resource P.PagerDuty (ScheduleResource s)
+scheduleResource :: TF.Resource P.PagerDuty (ScheduleResource s)
 scheduleResource =
     TF.newResource "pagerduty_schedule" $
         ScheduleResource {
@@ -538,39 +538,39 @@ instance P.HasVendor (ServiceIntegrationResource s) (TF.Attr s P.Text) where
         lens (_vendor :: ServiceIntegrationResource s -> TF.Attr s P.Text)
              (\s a -> s { _vendor = a } :: ServiceIntegrationResource s)
 
-instance P.HasComputedHtmlUrl (ServiceIntegrationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHtmlUrl (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
-instance P.HasComputedId (ServiceIntegrationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIntegrationEmail (ServiceIntegrationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIntegrationEmail (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     computedIntegrationEmail x = TF.compute (TF.refKey x) "integration_email"
 
-instance P.HasComputedIntegrationKey (ServiceIntegrationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIntegrationKey (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     computedIntegrationKey x = TF.compute (TF.refKey x) "integration_key"
 
-instance P.HasComputedName (ServiceIntegrationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ServiceIntegrationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedService (ServiceIntegrationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedService (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     computedService =
         (_service :: ServiceIntegrationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (ServiceIntegrationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: ServiceIntegrationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVendor (ServiceIntegrationResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVendor (ServiceIntegrationResource s) (TF.Attr s P.Text) where
     computedVendor =
         (_vendor :: ServiceIntegrationResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-serviceIntegrationResource :: TF.Schema TF.Resource P.PagerDuty (ServiceIntegrationResource s)
+serviceIntegrationResource :: TF.Resource P.PagerDuty (ServiceIntegrationResource s)
 serviceIntegrationResource =
     TF.newResource "pagerduty_service_integration" $
         ServiceIntegrationResource {
@@ -645,49 +645,49 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         lens (_name :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasComputedAcknowledgementTimeout (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAcknowledgementTimeout (ServiceResource s) (TF.Attr s P.Text) where
     computedAcknowledgementTimeout =
         (_acknowledgement_timeout :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAlertCreation (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAlertCreation (ServiceResource s) (TF.Attr s P.Text) where
     computedAlertCreation =
         (_alert_creation :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAutoResolveTimeout (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAutoResolveTimeout (ServiceResource s) (TF.Attr s P.Text) where
     computedAutoResolveTimeout =
         (_auto_resolve_timeout :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCreatedAt (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCreatedAt (ServiceResource s) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance P.HasComputedDescription (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ServiceResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEscalationPolicy (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEscalationPolicy (ServiceResource s) (TF.Attr s P.Text) where
     computedEscalationPolicy =
         (_escalation_policy :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ServiceResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLastIncidentTimestamp (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLastIncidentTimestamp (ServiceResource s) (TF.Attr s P.Text) where
     computedLastIncidentTimestamp x = TF.compute (TF.refKey x) "last_incident_timestamp"
 
-instance P.HasComputedName (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ServiceResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStatus (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStatus (ServiceResource s) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-serviceResource :: TF.Schema TF.Resource P.PagerDuty (ServiceResource s)
+serviceResource :: TF.Resource P.PagerDuty (ServiceResource s)
 serviceResource =
     TF.newResource "pagerduty_service" $
         ServiceResource {
@@ -728,13 +728,13 @@ instance P.HasUserId (TeamMembershipResource s) (TF.Attr s P.Text) where
         lens (_user_id :: TeamMembershipResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_id = a } :: TeamMembershipResource s)
 
-instance P.HasComputedTeamId (TeamMembershipResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTeamId (TeamMembershipResource s) (TF.Attr s P.Text) where
     computedTeamId x = TF.compute (TF.refKey x) "team_id"
 
-instance P.HasComputedUserId (TeamMembershipResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUserId (TeamMembershipResource s) (TF.Attr s P.Text) where
     computedUserId x = TF.compute (TF.refKey x) "user_id"
 
-teamMembershipResource :: TF.Schema TF.Resource P.PagerDuty (TeamMembershipResource s)
+teamMembershipResource :: TF.Resource P.PagerDuty (TeamMembershipResource s)
 teamMembershipResource =
     TF.newResource "pagerduty_team_membership" $
         TeamMembershipResource {
@@ -773,20 +773,20 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
         lens (_name :: TeamResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TeamResource s)
 
-instance P.HasComputedDescription (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (TeamResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (TeamResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (TeamResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-teamResource :: TF.Schema TF.Resource P.PagerDuty (TeamResource s)
+teamResource :: TF.Resource P.PagerDuty (TeamResource s)
 teamResource =
     TF.newResource "pagerduty_team" $
         TeamResource {
@@ -855,46 +855,46 @@ instance P.HasUserId (UserContactMethodResource s) (TF.Attr s P.Text) where
         lens (_user_id :: UserContactMethodResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_id = a } :: UserContactMethodResource s)
 
-instance P.HasComputedAddress (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAddress (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedAddress =
         (_address :: UserContactMethodResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedBlacklisted (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBlacklisted (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedBlacklisted x = TF.compute (TF.refKey x) "blacklisted"
 
-instance P.HasComputedCountryCode (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCountryCode (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedCountryCode =
         (_country_code :: UserContactMethodResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnabled (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEnabled (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedEnabled x = TF.compute (TF.refKey x) "enabled"
 
-instance P.HasComputedId (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLabel (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLabel (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedLabel =
         (_label :: UserContactMethodResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSendShortEmail (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSendShortEmail (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedSendShortEmail =
         (_send_short_email :: UserContactMethodResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: UserContactMethodResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUserId (UserContactMethodResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUserId (UserContactMethodResource s) (TF.Attr s P.Text) where
     computedUserId =
         (_user_id :: UserContactMethodResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-userContactMethodResource :: TF.Schema TF.Resource P.PagerDuty (UserContactMethodResource s)
+userContactMethodResource :: TF.Resource P.PagerDuty (UserContactMethodResource s)
 userContactMethodResource =
     TF.newResource "pagerduty_user_contact_method" $
         UserContactMethodResource {
@@ -976,57 +976,57 @@ instance P.HasTeams (UserResource s) (TF.Attr s P.Text) where
         lens (_teams :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _teams = a } :: UserResource s)
 
-instance P.HasComputedAvatarUrl (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAvatarUrl (UserResource s) (TF.Attr s P.Text) where
     computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
 
-instance P.HasComputedColor (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedColor (UserResource s) (TF.Attr s P.Text) where
     computedColor =
         (_color :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (UserResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEmail (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEmail (UserResource s) (TF.Attr s P.Text) where
     computedEmail =
         (_email :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHtmlUrl (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHtmlUrl (UserResource s) (TF.Attr s P.Text) where
     computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
-instance P.HasComputedId (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (UserResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInvitationSent (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedInvitationSent (UserResource s) (TF.Attr s P.Text) where
     computedInvitationSent x = TF.compute (TF.refKey x) "invitation_sent"
 
-instance P.HasComputedJobTitle (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedJobTitle (UserResource s) (TF.Attr s P.Text) where
     computedJobTitle =
         (_job_title :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (UserResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRole (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRole (UserResource s) (TF.Attr s P.Text) where
     computedRole =
         (_role :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTeams (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTeams (UserResource s) (TF.Attr s P.Text) where
     computedTeams =
         (_teams :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTimeZone (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTimeZone (UserResource s) (TF.Attr s P.Text) where
     computedTimeZone x = TF.compute (TF.refKey x) "time_zone"
 
-userResource :: TF.Schema TF.Resource P.PagerDuty (UserResource s)
+userResource :: TF.Resource P.PagerDuty (UserResource s)
 userResource =
     TF.newResource "pagerduty_user" $
         UserResource {

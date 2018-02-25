@@ -111,30 +111,30 @@ instance P.HasPublic (PrecreatedIpBlockDataSource s) (TF.Attr s P.Text) where
         lens (_public :: PrecreatedIpBlockDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _public = a } :: PrecreatedIpBlockDataSource s)
 
-instance P.HasComputedAddressFamily (PrecreatedIpBlockDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAddressFamily (PrecreatedIpBlockDataSource s) (TF.Attr s P.Text) where
     computedAddressFamily =
         (_address_family :: PrecreatedIpBlockDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCidrNotation (PrecreatedIpBlockDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCidrNotation (PrecreatedIpBlockDataSource s) (TF.Attr s P.Text) where
     computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
 
-instance P.HasComputedFacility (PrecreatedIpBlockDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFacility (PrecreatedIpBlockDataSource s) (TF.Attr s P.Text) where
     computedFacility =
         (_facility :: PrecreatedIpBlockDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProjectId (PrecreatedIpBlockDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProjectId (PrecreatedIpBlockDataSource s) (TF.Attr s P.Text) where
     computedProjectId =
         (_project_id :: PrecreatedIpBlockDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPublic (PrecreatedIpBlockDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPublic (PrecreatedIpBlockDataSource s) (TF.Attr s P.Text) where
     computedPublic =
         (_public :: PrecreatedIpBlockDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-precreatedIpBlockDataSource :: TF.Schema TF.DataSource P.Packet (PrecreatedIpBlockDataSource s)
+precreatedIpBlockDataSource :: TF.DataSource P.Packet (PrecreatedIpBlockDataSource s)
 precreatedIpBlockDataSource =
     TF.newDataSource "packet_precreated_ip_block" $
         PrecreatedIpBlockDataSource {

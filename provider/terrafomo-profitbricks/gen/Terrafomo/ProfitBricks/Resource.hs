@@ -134,22 +134,22 @@ instance P.HasName (DatacenterResource s) (TF.Attr s P.Text) where
         lens (_name :: DatacenterResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DatacenterResource s)
 
-instance P.HasComputedDescription (DatacenterResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (DatacenterResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLocation (DatacenterResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLocation (DatacenterResource s) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatacenterResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (DatacenterResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatacenterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-datacenterResource :: TF.Schema TF.Resource P.ProfitBricks (DatacenterResource s)
+datacenterResource :: TF.Resource P.ProfitBricks (DatacenterResource s)
 datacenterResource =
     TF.newResource "profitbricks_datacenter" $
         DatacenterResource {
@@ -168,7 +168,7 @@ data FirewallResource s = FirewallResource {
 instance TF.ToHCL (FirewallResource s) where
     toHCL _ = TF.empty
 
-firewallResource :: TF.Schema TF.Resource P.ProfitBricks (FirewallResource s)
+firewallResource :: TF.Resource P.ProfitBricks (FirewallResource s)
 firewallResource =
     TF.newResource "profitbricks_firewall" $
         FirewallResource {
@@ -184,7 +184,7 @@ data GroupResource s = GroupResource {
 instance TF.ToHCL (GroupResource s) where
     toHCL _ = TF.empty
 
-groupResource :: TF.Schema TF.Resource P.ProfitBricks (GroupResource s)
+groupResource :: TF.Resource P.ProfitBricks (GroupResource s)
 groupResource =
     TF.newResource "profitbricks_group" $
         GroupResource {
@@ -200,7 +200,7 @@ data IpblockResource s = IpblockResource {
 instance TF.ToHCL (IpblockResource s) where
     toHCL _ = TF.empty
 
-ipblockResource :: TF.Schema TF.Resource P.ProfitBricks (IpblockResource s)
+ipblockResource :: TF.Resource P.ProfitBricks (IpblockResource s)
 ipblockResource =
     TF.newResource "profitbricks_ipblock" $
         IpblockResource {
@@ -216,7 +216,7 @@ data IpfailoverResource s = IpfailoverResource {
 instance TF.ToHCL (IpfailoverResource s) where
     toHCL _ = TF.empty
 
-ipfailoverResource :: TF.Schema TF.Resource P.ProfitBricks (IpfailoverResource s)
+ipfailoverResource :: TF.Resource P.ProfitBricks (IpfailoverResource s)
 ipfailoverResource =
     TF.newResource "profitbricks_ipfailover" $
         IpfailoverResource {
@@ -232,7 +232,7 @@ data LanResource s = LanResource {
 instance TF.ToHCL (LanResource s) where
     toHCL _ = TF.empty
 
-lanResource :: TF.Schema TF.Resource P.ProfitBricks (LanResource s)
+lanResource :: TF.Resource P.ProfitBricks (LanResource s)
 lanResource =
     TF.newResource "profitbricks_lan" $
         LanResource {
@@ -248,7 +248,7 @@ data LoadbalancerResource s = LoadbalancerResource {
 instance TF.ToHCL (LoadbalancerResource s) where
     toHCL _ = TF.empty
 
-loadbalancerResource :: TF.Schema TF.Resource P.ProfitBricks (LoadbalancerResource s)
+loadbalancerResource :: TF.Resource P.ProfitBricks (LoadbalancerResource s)
 loadbalancerResource =
     TF.newResource "profitbricks_loadbalancer" $
         LoadbalancerResource {
@@ -264,7 +264,7 @@ data NicResource s = NicResource {
 instance TF.ToHCL (NicResource s) where
     toHCL _ = TF.empty
 
-nicResource :: TF.Schema TF.Resource P.ProfitBricks (NicResource s)
+nicResource :: TF.Resource P.ProfitBricks (NicResource s)
 nicResource =
     TF.newResource "profitbricks_nic" $
         NicResource {
@@ -280,7 +280,7 @@ data ServerResource s = ServerResource {
 instance TF.ToHCL (ServerResource s) where
     toHCL _ = TF.empty
 
-serverResource :: TF.Schema TF.Resource P.ProfitBricks (ServerResource s)
+serverResource :: TF.Resource P.ProfitBricks (ServerResource s)
 serverResource =
     TF.newResource "profitbricks_server" $
         ServerResource {
@@ -297,7 +297,7 @@ data ShareResource s = ShareResource {
 instance TF.ToHCL (ShareResource s) where
     toHCL _ = TF.empty
 
-shareResource :: TF.Schema TF.Resource P.ProfitBricks (ShareResource s)
+shareResource :: TF.Resource P.ProfitBricks (ShareResource s)
 shareResource =
     TF.newResource "profitbricks_share" $
         ShareResource {
@@ -313,7 +313,7 @@ data SnapshotResource s = SnapshotResource {
 instance TF.ToHCL (SnapshotResource s) where
     toHCL _ = TF.empty
 
-snapshotResource :: TF.Schema TF.Resource P.ProfitBricks (SnapshotResource s)
+snapshotResource :: TF.Resource P.ProfitBricks (SnapshotResource s)
 snapshotResource =
     TF.newResource "profitbricks_snapshot" $
         SnapshotResource {
@@ -329,7 +329,7 @@ data UserResource s = UserResource {
 instance TF.ToHCL (UserResource s) where
     toHCL _ = TF.empty
 
-userResource :: TF.Schema TF.Resource P.ProfitBricks (UserResource s)
+userResource :: TF.Resource P.ProfitBricks (UserResource s)
 userResource =
     TF.newResource "profitbricks_user" $
         UserResource {
@@ -345,7 +345,7 @@ data VolumeResource s = VolumeResource {
 instance TF.ToHCL (VolumeResource s) where
     toHCL _ = TF.empty
 
-volumeResource :: TF.Schema TF.Resource P.ProfitBricks (VolumeResource s)
+volumeResource :: TF.Resource P.ProfitBricks (VolumeResource s)
 volumeResource =
     TF.newResource "profitbricks_volume" $
         VolumeResource {

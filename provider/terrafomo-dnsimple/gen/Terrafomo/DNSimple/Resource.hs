@@ -131,36 +131,36 @@ instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
         lens (_value :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _value = a } :: RecordResource s)
 
-instance P.HasComputedDomain (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDomain (RecordResource s) (TF.Attr s P.Text) where
     computedDomain =
         (_domain :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDomainId (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDomainId (RecordResource s) (TF.Attr s P.Text) where
     computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
-instance P.HasComputedHostname (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHostname (RecordResource s) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance P.HasComputedId (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (RecordResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RecordResource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPriority (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPriority (RecordResource s) (TF.Attr s P.Text) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance P.HasComputedTtl (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance P.HasComputedType' (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedValue (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedValue (RecordResource s) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
-recordResource :: TF.Schema TF.Resource P.DNSimple (RecordResource s)
+recordResource :: TF.Resource P.DNSimple (RecordResource s)
 recordResource =
     TF.newResource "dnsimple_record" $
         RecordResource {

@@ -156,25 +156,25 @@ instance P.HasType' (AlertChannelResource s) (TF.Attr s P.Text) where
         lens (_type' :: AlertChannelResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: AlertChannelResource s)
 
-instance P.HasComputedConfiguration (AlertChannelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedConfiguration (AlertChannelResource s) (TF.Attr s P.Text) where
     computedConfiguration =
         (_configuration :: AlertChannelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (AlertChannelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (AlertChannelResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (AlertChannelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (AlertChannelResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: AlertChannelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (AlertChannelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (AlertChannelResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: AlertChannelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-alertChannelResource :: TF.Schema TF.Resource P.NewRelic (AlertChannelResource s)
+alertChannelResource :: TF.Resource P.NewRelic (AlertChannelResource s)
 alertChannelResource =
     TF.newResource "newrelic_alert_channel" $
         AlertChannelResource {
@@ -290,70 +290,70 @@ instance P.HasViolationCloseTimer (AlertConditionResource s) (TF.Attr s P.Text) 
         lens (_violation_close_timer :: AlertConditionResource s -> TF.Attr s P.Text)
              (\s a -> s { _violation_close_timer = a } :: AlertConditionResource s)
 
-instance P.HasComputedConditionScope (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedConditionScope (AlertConditionResource s) (TF.Attr s P.Text) where
     computedConditionScope =
         (_condition_scope :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEntities (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEntities (AlertConditionResource s) (TF.Attr s P.Text) where
     computedEntities =
         (_entities :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGcMetric (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGcMetric (AlertConditionResource s) (TF.Attr s P.Text) where
     computedGcMetric =
         (_gc_metric :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (AlertConditionResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMetric (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetric (AlertConditionResource s) (TF.Attr s P.Text) where
     computedMetric =
         (_metric :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (AlertConditionResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicyId (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPolicyId (AlertConditionResource s) (TF.Attr s P.Text) where
     computedPolicyId =
         (_policy_id :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRunbookUrl (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRunbookUrl (AlertConditionResource s) (TF.Attr s P.Text) where
     computedRunbookUrl =
         (_runbook_url :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTerm (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTerm (AlertConditionResource s) (TF.Attr s P.Text) where
     computedTerm =
         (_term :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (AlertConditionResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUserDefinedMetric (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUserDefinedMetric (AlertConditionResource s) (TF.Attr s P.Text) where
     computedUserDefinedMetric =
         (_user_defined_metric :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUserDefinedValueFunction (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUserDefinedValueFunction (AlertConditionResource s) (TF.Attr s P.Text) where
     computedUserDefinedValueFunction =
         (_user_defined_value_function :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedViolationCloseTimer (AlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedViolationCloseTimer (AlertConditionResource s) (TF.Attr s P.Text) where
     computedViolationCloseTimer =
         (_violation_close_timer :: AlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-alertConditionResource :: TF.Schema TF.Resource P.NewRelic (AlertConditionResource s)
+alertConditionResource :: TF.Resource P.NewRelic (AlertConditionResource s)
 alertConditionResource =
     TF.newResource "newrelic_alert_condition" $
         AlertConditionResource {
@@ -398,17 +398,17 @@ instance P.HasPolicyId (AlertPolicyChannelResource s) (TF.Attr s P.Text) where
         lens (_policy_id :: AlertPolicyChannelResource s -> TF.Attr s P.Text)
              (\s a -> s { _policy_id = a } :: AlertPolicyChannelResource s)
 
-instance P.HasComputedChannelId (AlertPolicyChannelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedChannelId (AlertPolicyChannelResource s) (TF.Attr s P.Text) where
     computedChannelId =
         (_channel_id :: AlertPolicyChannelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicyId (AlertPolicyChannelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPolicyId (AlertPolicyChannelResource s) (TF.Attr s P.Text) where
     computedPolicyId =
         (_policy_id :: AlertPolicyChannelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-alertPolicyChannelResource :: TF.Schema TF.Resource P.NewRelic (AlertPolicyChannelResource s)
+alertPolicyChannelResource :: TF.Resource P.NewRelic (AlertPolicyChannelResource s)
 alertPolicyChannelResource =
     TF.newResource "newrelic_alert_policy_channel" $
         AlertPolicyChannelResource {
@@ -443,26 +443,26 @@ instance P.HasName (AlertPolicyResource s) (TF.Attr s P.Text) where
         lens (_name :: AlertPolicyResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: AlertPolicyResource s)
 
-instance P.HasComputedCreatedAt (AlertPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCreatedAt (AlertPolicyResource s) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance P.HasComputedId (AlertPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (AlertPolicyResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedIncidentPreference (AlertPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIncidentPreference (AlertPolicyResource s) (TF.Attr s P.Text) where
     computedIncidentPreference =
         (_incident_preference :: AlertPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (AlertPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (AlertPolicyResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: AlertPolicyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUpdatedAt (AlertPolicyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUpdatedAt (AlertPolicyResource s) (TF.Attr s P.Text) where
     computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
-alertPolicyResource :: TF.Schema TF.Resource P.NewRelic (AlertPolicyResource s)
+alertPolicyResource :: TF.Resource P.NewRelic (AlertPolicyResource s)
 alertPolicyResource =
     TF.newResource "newrelic_alert_policy" $
         AlertPolicyResource {
@@ -521,35 +521,35 @@ instance P.HasWidget (DashboardResource s) (TF.Attr s P.Text) where
         lens (_widget :: DashboardResource s -> TF.Attr s P.Text)
              (\s a -> s { _widget = a } :: DashboardResource s)
 
-instance P.HasComputedEditable (DashboardResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEditable (DashboardResource s) (TF.Attr s P.Text) where
     computedEditable =
         (_editable :: DashboardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIcon (DashboardResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIcon (DashboardResource s) (TF.Attr s P.Text) where
     computedIcon =
         (_icon :: DashboardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DashboardResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (DashboardResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedTitle (DashboardResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTitle (DashboardResource s) (TF.Attr s P.Text) where
     computedTitle =
         (_title :: DashboardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVisibility (DashboardResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVisibility (DashboardResource s) (TF.Attr s P.Text) where
     computedVisibility =
         (_visibility :: DashboardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedWidget (DashboardResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedWidget (DashboardResource s) (TF.Attr s P.Text) where
     computedWidget =
         (_widget :: DashboardResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-dashboardResource :: TF.Schema TF.Resource P.NewRelic (DashboardResource s)
+dashboardResource :: TF.Resource P.NewRelic (DashboardResource s)
 dashboardResource =
     TF.newResource "newrelic_dashboard" $
         DashboardResource {
@@ -627,45 +627,45 @@ instance P.HasValueFunction (NrqlAlertConditionResource s) (TF.Attr s P.Text) wh
         lens (_value_function :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
              (\s a -> s { _value_function = a } :: NrqlAlertConditionResource s)
 
-instance P.HasComputedEnabled (NrqlAlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEnabled (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
     computedEnabled =
         (_enabled :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (NrqlAlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (NrqlAlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNrql (NrqlAlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNrql (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
     computedNrql =
         (_nrql :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicyId (NrqlAlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPolicyId (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
     computedPolicyId =
         (_policy_id :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRunbookUrl (NrqlAlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRunbookUrl (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
     computedRunbookUrl =
         (_runbook_url :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTerm (NrqlAlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTerm (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
     computedTerm =
         (_term :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedValueFunction (NrqlAlertConditionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedValueFunction (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
     computedValueFunction =
         (_value_function :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-nrqlAlertConditionResource :: TF.Schema TF.Resource P.NewRelic (NrqlAlertConditionResource s)
+nrqlAlertConditionResource :: TF.Resource P.NewRelic (NrqlAlertConditionResource s)
 nrqlAlertConditionResource =
     TF.newResource "newrelic_nrql_alert_condition" $
         NrqlAlertConditionResource {

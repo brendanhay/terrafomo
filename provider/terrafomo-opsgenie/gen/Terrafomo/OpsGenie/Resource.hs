@@ -112,25 +112,25 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
         lens (_name :: TeamResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: TeamResource s)
 
-instance P.HasComputedDescription (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (TeamResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (TeamResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMember (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMember (TeamResource s) (TF.Attr s P.Text) where
     computedMember =
         (_member :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (TeamResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-teamResource :: TF.Schema TF.Resource P.OpsGenie (TeamResource s)
+teamResource :: TF.Resource P.OpsGenie (TeamResource s)
 teamResource =
     TF.newResource "opsgenie_team" $
         TeamResource {
@@ -190,35 +190,35 @@ instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
         lens (_username :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: UserResource s)
 
-instance P.HasComputedFullName (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFullName (UserResource s) (TF.Attr s P.Text) where
     computedFullName =
         (_full_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (UserResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLocale (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLocale (UserResource s) (TF.Attr s P.Text) where
     computedLocale =
         (_locale :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRole (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRole (UserResource s) (TF.Attr s P.Text) where
     computedRole =
         (_role :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTimezone (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTimezone (UserResource s) (TF.Attr s P.Text) where
     computedTimezone =
         (_timezone :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUsername (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUsername (UserResource s) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-userResource :: TF.Schema TF.Resource P.OpsGenie (UserResource s)
+userResource :: TF.Resource P.OpsGenie (UserResource s)
 userResource =
     TF.newResource "opsgenie_user" $
         UserResource {

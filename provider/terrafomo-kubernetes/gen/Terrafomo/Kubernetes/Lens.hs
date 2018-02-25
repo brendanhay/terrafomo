@@ -106,32 +106,32 @@ class HasWaitUntilBound a b | a -> b where
 instance HasWaitUntilBound a b => HasWaitUntilBound (TF.Schema l p a) b where
     waitUntilBound = TF.configuration . waitUntilBound
 
-class HasComputedData' a s b | a -> s b where
+class HasComputedData' a b | a -> b where
     computedData' :: TF.Ref s a -> b
 
-class HasComputedDefaultSecretName a s b | a -> s b where
+class HasComputedDefaultSecretName a b | a -> b where
     computedDefaultSecretName :: TF.Ref s a -> b
 
-class HasComputedImagePullSecret a s b | a -> s b where
+class HasComputedImagePullSecret a b | a -> b where
     computedImagePullSecret :: TF.Ref s a -> b
 
-class HasComputedMetadata a s b | a -> s b where
+class HasComputedMetadata a b | a -> b where
     computedMetadata :: TF.Ref s a -> b
 
-class HasComputedParameters a s b | a -> s b where
+class HasComputedParameters a b | a -> b where
     computedParameters :: TF.Ref s a -> b
 
-class HasComputedSecret a s b | a -> s b where
+class HasComputedSecret a b | a -> b where
     computedSecret :: TF.Ref s a -> b
 
-class HasComputedSpec a s b | a -> s b where
+class HasComputedSpec a b | a -> b where
     computedSpec :: TF.Ref s a -> b
 
-class HasComputedStorageProvisioner a s b | a -> s b where
+class HasComputedStorageProvisioner a b | a -> b where
     computedStorageProvisioner :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedWaitUntilBound a s b | a -> s b where
+class HasComputedWaitUntilBound a b | a -> b where
     computedWaitUntilBound :: TF.Ref s a -> b

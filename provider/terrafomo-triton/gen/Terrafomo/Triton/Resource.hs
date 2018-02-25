@@ -239,46 +239,46 @@ instance P.HasVlanId (FabricResource s) (TF.Attr s P.Text) where
         lens (_vlan_id :: FabricResource s -> TF.Attr s P.Text)
              (\s a -> s { _vlan_id = a } :: FabricResource s)
 
-instance P.HasComputedDescription (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (FabricResource s) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.HasComputedFabric (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFabric (FabricResource s) (TF.Attr s P.Text) where
     computedFabric x = TF.compute (TF.refKey x) "fabric"
 
-instance P.HasComputedGateway (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGateway (FabricResource s) (TF.Attr s P.Text) where
     computedGateway x = TF.compute (TF.refKey x) "gateway"
 
-instance P.HasComputedId (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (FabricResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInternetNat (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedInternetNat (FabricResource s) (TF.Attr s P.Text) where
     computedInternetNat x = TF.compute (TF.refKey x) "internet_nat"
 
-instance P.HasComputedName (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (FabricResource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedProvisionEndIp (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProvisionEndIp (FabricResource s) (TF.Attr s P.Text) where
     computedProvisionEndIp x = TF.compute (TF.refKey x) "provision_end_ip"
 
-instance P.HasComputedProvisionStartIp (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProvisionStartIp (FabricResource s) (TF.Attr s P.Text) where
     computedProvisionStartIp x = TF.compute (TF.refKey x) "provision_start_ip"
 
-instance P.HasComputedPublic (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPublic (FabricResource s) (TF.Attr s P.Text) where
     computedPublic x = TF.compute (TF.refKey x) "public"
 
-instance P.HasComputedResolvers (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedResolvers (FabricResource s) (TF.Attr s P.Text) where
     computedResolvers x = TF.compute (TF.refKey x) "resolvers"
 
-instance P.HasComputedRoutes (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRoutes (FabricResource s) (TF.Attr s P.Text) where
     computedRoutes x = TF.compute (TF.refKey x) "routes"
 
-instance P.HasComputedSubnet (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSubnet (FabricResource s) (TF.Attr s P.Text) where
     computedSubnet x = TF.compute (TF.refKey x) "subnet"
 
-instance P.HasComputedVlanId (FabricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVlanId (FabricResource s) (TF.Attr s P.Text) where
     computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
 
-fabricResource :: TF.Schema TF.Resource P.Triton (FabricResource s)
+fabricResource :: TF.Resource P.Triton (FabricResource s)
 fabricResource =
     TF.newResource "triton_fabric" $
         FabricResource {
@@ -330,25 +330,25 @@ instance P.HasRule (FirewallRuleResource s) (TF.Attr s P.Text) where
         lens (_rule :: FirewallRuleResource s -> TF.Attr s P.Text)
              (\s a -> s { _rule = a } :: FirewallRuleResource s)
 
-instance P.HasComputedDescription (FirewallRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (FirewallRuleResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: FirewallRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnabled (FirewallRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEnabled (FirewallRuleResource s) (TF.Attr s P.Text) where
     computedEnabled =
         (_enabled :: FirewallRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (FirewallRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (FirewallRuleResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedRule (FirewallRuleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRule (FirewallRuleResource s) (TF.Attr s P.Text) where
     computedRule =
         (_rule :: FirewallRuleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-firewallRuleResource :: TF.Schema TF.Resource P.Triton (FirewallRuleResource s)
+firewallRuleResource :: TF.Resource P.Triton (FirewallRuleResource s)
 firewallRuleResource =
     TF.newResource "triton_firewall_rule" $
         FirewallRuleResource {
@@ -384,17 +384,17 @@ instance P.HasName (KeyResource s) (TF.Attr s P.Text) where
         lens (_name :: KeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: KeyResource s)
 
-instance P.HasComputedKey (KeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedKey (KeyResource s) (TF.Attr s P.Text) where
     computedKey =
         (_key :: KeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (KeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (KeyResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: KeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-keyResource :: TF.Schema TF.Resource P.Triton (KeyResource s)
+keyResource :: TF.Resource P.Triton (KeyResource s)
 keyResource =
     TF.newResource "triton_key" $
         KeyResource {
@@ -536,136 +536,136 @@ instance P.HasUserScript (MachineResource s) (TF.Attr s P.Text) where
         lens (_user_script :: MachineResource s -> TF.Attr s P.Text)
              (\s a -> s { _user_script = a } :: MachineResource s)
 
-instance P.HasComputedAdministratorPw (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAdministratorPw (MachineResource s) (TF.Attr s P.Text) where
     computedAdministratorPw =
         (_administrator_pw :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAffinity (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAffinity (MachineResource s) (TF.Attr s P.Text) where
     computedAffinity =
         (_affinity :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCloudConfig (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCloudConfig (MachineResource s) (TF.Attr s P.Text) where
     computedCloudConfig =
         (_cloud_config :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCns (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCns (MachineResource s) (TF.Attr s P.Text) where
     computedCns =
         (_cns :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedComputeNode (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedComputeNode (MachineResource s) (TF.Attr s P.Text) where
     computedComputeNode x = TF.compute (TF.refKey x) "compute_node"
 
-instance P.HasComputedCreated (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCreated (MachineResource s) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
 
-instance P.HasComputedDataset (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDataset (MachineResource s) (TF.Attr s P.Text) where
     computedDataset x = TF.compute (TF.refKey x) "dataset"
 
-instance P.HasComputedDisk (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDisk (MachineResource s) (TF.Attr s P.Text) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
-instance P.HasComputedFirewallEnabled (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFirewallEnabled (MachineResource s) (TF.Attr s P.Text) where
     computedFirewallEnabled =
         (_firewall_enabled :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGateway (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGateway (MachineResource s) (TF.Attr s P.Text) where
     computedGateway x = TF.compute (TF.refKey x) "gateway"
 
-instance P.HasComputedId (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (MachineResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedImage (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedImage (MachineResource s) (TF.Attr s P.Text) where
     computedImage =
         (_image :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIp (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIp (MachineResource s) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
 
-instance P.HasComputedIps (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIps (MachineResource s) (TF.Attr s P.Text) where
     computedIps x = TF.compute (TF.refKey x) "ips"
 
-instance P.HasComputedLocality (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLocality (MachineResource s) (TF.Attr s P.Text) where
     computedLocality =
         (_locality :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMac (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMac (MachineResource s) (TF.Attr s P.Text) where
     computedMac x = TF.compute (TF.refKey x) "mac"
 
-instance P.HasComputedMemory (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMemory (MachineResource s) (TF.Attr s P.Text) where
     computedMemory x = TF.compute (TF.refKey x) "memory"
 
-instance P.HasComputedMetadata (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetadata (MachineResource s) (TF.Attr s P.Text) where
     computedMetadata =
         (_metadata :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (MachineResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNetmask (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNetmask (MachineResource s) (TF.Attr s P.Text) where
     computedNetmask x = TF.compute (TF.refKey x) "netmask"
 
-instance P.HasComputedNetwork (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNetwork (MachineResource s) (TF.Attr s P.Text) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
 
-instance P.HasComputedNetworks (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNetworks (MachineResource s) (TF.Attr s P.Text) where
     computedNetworks =
         (_networks :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNic (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNic (MachineResource s) (TF.Attr s P.Text) where
     computedNic x = TF.compute (TF.refKey x) "nic"
 
-instance P.HasComputedPackage (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPackage (MachineResource s) (TF.Attr s P.Text) where
     computedPackage =
         (_package :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrimary (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrimary (MachineResource s) (TF.Attr s P.Text) where
     computedPrimary x = TF.compute (TF.refKey x) "primary"
 
-instance P.HasComputedPrimaryip (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrimaryip (MachineResource s) (TF.Attr s P.Text) where
     computedPrimaryip x = TF.compute (TF.refKey x) "primaryip"
 
-instance P.HasComputedRootAuthorizedKeys (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRootAuthorizedKeys (MachineResource s) (TF.Attr s P.Text) where
     computedRootAuthorizedKeys =
         (_root_authorized_keys :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedState (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedState (MachineResource s) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance P.HasComputedTags (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (MachineResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (MachineResource s) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedUpdated (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUpdated (MachineResource s) (TF.Attr s P.Text) where
     computedUpdated x = TF.compute (TF.refKey x) "updated"
 
-instance P.HasComputedUserData (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUserData (MachineResource s) (TF.Attr s P.Text) where
     computedUserData =
         (_user_data :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUserScript (MachineResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUserScript (MachineResource s) (TF.Attr s P.Text) where
     computedUserScript =
         (_user_script :: MachineResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-machineResource :: TF.Schema TF.Resource P.Triton (MachineResource s)
+machineResource :: TF.Resource P.Triton (MachineResource s)
 machineResource =
     TF.newResource "triton_machine" $
         MachineResource {
@@ -716,23 +716,23 @@ instance P.HasName (SnapshotResource s) (TF.Attr s P.Text) where
         lens (_name :: SnapshotResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: SnapshotResource s)
 
-instance P.HasComputedId (SnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (SnapshotResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMachineId (SnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMachineId (SnapshotResource s) (TF.Attr s P.Text) where
     computedMachineId =
         (_machine_id :: SnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (SnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (SnapshotResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: SnapshotResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedState (SnapshotResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedState (SnapshotResource s) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-snapshotResource :: TF.Schema TF.Resource P.Triton (SnapshotResource s)
+snapshotResource :: TF.Resource P.Triton (SnapshotResource s)
 snapshotResource =
     TF.newResource "triton_snapshot" $
         SnapshotResource {
@@ -777,22 +777,22 @@ instance P.HasVlanId (VlanResource s) (TF.Attr s P.Text) where
         lens (_vlan_id :: VlanResource s -> TF.Attr s P.Text)
              (\s a -> s { _vlan_id = a } :: VlanResource s)
 
-instance P.HasComputedDescription (VlanResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (VlanResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: VlanResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (VlanResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (VlanResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: VlanResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVlanId (VlanResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVlanId (VlanResource s) (TF.Attr s P.Text) where
     computedVlanId =
         (_vlan_id :: VlanResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-vlanResource :: TF.Schema TF.Resource P.Triton (VlanResource s)
+vlanResource :: TF.Resource P.Triton (VlanResource s)
 vlanResource =
     TF.newResource "triton_vlan" $
         VlanResource {

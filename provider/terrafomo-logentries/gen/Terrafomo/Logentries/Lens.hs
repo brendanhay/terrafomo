@@ -90,26 +90,26 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputedFilename a s b | a -> s b where
+class HasComputedFilename a b | a -> b where
     computedFilename :: TF.Ref s a -> b
 
-class HasComputedLocation a s b | a -> s b where
+class HasComputedLocation a b | a -> b where
     computedLocation :: TF.Ref s a -> b
 
-class HasComputedLogsetId a s b | a -> s b where
+class HasComputedLogsetId a b | a -> b where
     computedLogsetId :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedRetentionPeriod a s b | a -> s b where
+class HasComputedRetentionPeriod a b | a -> b where
     computedRetentionPeriod :: TF.Ref s a -> b
 
-class HasComputedSource a s b | a -> s b where
+class HasComputedSource a b | a -> b where
     computedSource :: TF.Ref s a -> b
 
-class HasComputedToken a s b | a -> s b where
+class HasComputedToken a b | a -> b where
     computedToken :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b

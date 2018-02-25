@@ -85,21 +85,21 @@ instance P.HasName (ApplicationDataSource s) (TF.Attr s P.Text) where
         lens (_name :: ApplicationDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ApplicationDataSource s)
 
-instance P.HasComputedHostIds (ApplicationDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHostIds (ApplicationDataSource s) (TF.Attr s P.Text) where
     computedHostIds x = TF.compute (TF.refKey x) "host_ids"
 
-instance P.HasComputedId (ApplicationDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (ApplicationDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedInstanceIds (ApplicationDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedInstanceIds (ApplicationDataSource s) (TF.Attr s P.Text) where
     computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
-instance P.HasComputedName (ApplicationDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ApplicationDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ApplicationDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-applicationDataSource :: TF.Schema TF.DataSource P.NewRelic (ApplicationDataSource s)
+applicationDataSource :: TF.DataSource P.NewRelic (ApplicationDataSource s)
 applicationDataSource =
     TF.newDataSource "newrelic_application" $
         ApplicationDataSource {
@@ -126,15 +126,15 @@ instance P.HasName (KeyTransactionDataSource s) (TF.Attr s P.Text) where
         lens (_name :: KeyTransactionDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: KeyTransactionDataSource s)
 
-instance P.HasComputedId (KeyTransactionDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (KeyTransactionDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (KeyTransactionDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (KeyTransactionDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: KeyTransactionDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-keyTransactionDataSource :: TF.Schema TF.DataSource P.NewRelic (KeyTransactionDataSource s)
+keyTransactionDataSource :: TF.DataSource P.NewRelic (KeyTransactionDataSource s)
 keyTransactionDataSource =
     TF.newDataSource "newrelic_key_transaction" $
         KeyTransactionDataSource {

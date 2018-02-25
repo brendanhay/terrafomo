@@ -111,17 +111,17 @@ instance P.HasName (CollectorGroupResource s) (TF.Attr s P.Text) where
         lens (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: CollectorGroupResource s)
 
-instance P.HasComputedDescription (CollectorGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (CollectorGroupResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: CollectorGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (CollectorGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (CollectorGroupResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-collectorGroupResource :: TF.Schema TF.Resource P.LogicMonitor (CollectorGroupResource s)
+collectorGroupResource :: TF.Resource P.LogicMonitor (CollectorGroupResource s)
 collectorGroupResource =
     TF.newResource "logicmonitor_collector_group" $
         CollectorGroupResource {
@@ -189,37 +189,37 @@ instance P.HasProperties (DeviceGroupResource s) (TF.Attr s P.Text) where
         lens (_properties :: DeviceGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _properties = a } :: DeviceGroupResource s)
 
-instance P.HasComputedAppliesTo (DeviceGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAppliesTo (DeviceGroupResource s) (TF.Attr s P.Text) where
     computedAppliesTo =
         (_applies_to :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (DeviceGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (DeviceGroupResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDisableAlerting (DeviceGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDisableAlerting (DeviceGroupResource s) (TF.Attr s P.Text) where
     computedDisableAlerting =
         (_disable_alerting :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DeviceGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (DeviceGroupResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedParentId (DeviceGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedParentId (DeviceGroupResource s) (TF.Attr s P.Text) where
     computedParentId =
         (_parent_id :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProperties (DeviceGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProperties (DeviceGroupResource s) (TF.Attr s P.Text) where
     computedProperties =
         (_properties :: DeviceGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-deviceGroupResource :: TF.Schema TF.Resource P.LogicMonitor (DeviceGroupResource s)
+deviceGroupResource :: TF.Resource P.LogicMonitor (DeviceGroupResource s)
 deviceGroupResource =
     TF.newResource "logicmonitor_device_group" $
         DeviceGroupResource {
@@ -291,37 +291,37 @@ instance P.HasProperties (DeviceResource s) (TF.Attr s P.Text) where
         lens (_properties :: DeviceResource s -> TF.Attr s P.Text)
              (\s a -> s { _properties = a } :: DeviceResource s)
 
-instance P.HasComputedCollector (DeviceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCollector (DeviceResource s) (TF.Attr s P.Text) where
     computedCollector =
         (_collector :: DeviceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDisableAlerting (DeviceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDisableAlerting (DeviceResource s) (TF.Attr s P.Text) where
     computedDisableAlerting =
         (_disable_alerting :: DeviceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDisplayName (DeviceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDisplayName (DeviceResource s) (TF.Attr s P.Text) where
     computedDisplayName =
         (_display_name :: DeviceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostgroupId (DeviceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHostgroupId (DeviceResource s) (TF.Attr s P.Text) where
     computedHostgroupId =
         (_hostgroup_id :: DeviceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpAddr (DeviceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpAddr (DeviceResource s) (TF.Attr s P.Text) where
     computedIpAddr =
         (_ip_addr :: DeviceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedProperties (DeviceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProperties (DeviceResource s) (TF.Attr s P.Text) where
     computedProperties =
         (_properties :: DeviceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-deviceResource :: TF.Schema TF.Resource P.LogicMonitor (DeviceResource s)
+deviceResource :: TF.Resource P.LogicMonitor (DeviceResource s)
 deviceResource =
     TF.newResource "logicmonitor_device" $
         DeviceResource {

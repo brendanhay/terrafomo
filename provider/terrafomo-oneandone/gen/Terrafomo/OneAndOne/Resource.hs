@@ -175,22 +175,22 @@ instance P.HasVcores (InstanceSizeResource s) (TF.Attr s P.Text) where
         lens (_vcores :: InstanceSizeResource s -> TF.Attr s P.Text)
              (\s a -> s { _vcores = a } :: InstanceSizeResource s)
 
-instance P.HasComputedName (InstanceSizeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (InstanceSizeResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: InstanceSizeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRam (InstanceSizeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRam (InstanceSizeResource s) (TF.Attr s P.Text) where
     computedRam =
         (_ram :: InstanceSizeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVcores (InstanceSizeResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVcores (InstanceSizeResource s) (TF.Attr s P.Text) where
     computedVcores =
         (_vcores :: InstanceSizeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instanceSizeResource :: TF.Schema TF.Resource P.OneAndOne (InstanceSizeResource s)
+instanceSizeResource :: TF.Resource P.OneAndOne (InstanceSizeResource s)
 instanceSizeResource =
     TF.newResource "oneandone_instance_size" $
         InstanceSizeResource {
@@ -242,27 +242,27 @@ instance P.HasReverseDns (IpResource s) (TF.Attr s P.Text) where
         lens (_reverse_dns :: IpResource s -> TF.Attr s P.Text)
              (\s a -> s { _reverse_dns = a } :: IpResource s)
 
-instance P.HasComputedDatacenter (IpResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDatacenter (IpResource s) (TF.Attr s P.Text) where
     computedDatacenter =
         (_datacenter :: IpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpAddress (IpResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpAddress (IpResource s) (TF.Attr s P.Text) where
     computedIpAddress =
         (_ip_address :: IpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIpType (IpResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpType (IpResource s) (TF.Attr s P.Text) where
     computedIpType =
         (_ip_type :: IpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedReverseDns (IpResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedReverseDns (IpResource s) (TF.Attr s P.Text) where
     computedReverseDns =
         (_reverse_dns :: IpResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-ipResource :: TF.Schema TF.Resource P.OneAndOne (IpResource s)
+ipResource :: TF.Resource P.OneAndOne (IpResource s)
 ipResource =
     TF.newResource "oneandone_ip" $
         IpResource {
@@ -323,32 +323,32 @@ instance P.HasStorageServers (ServerResource s) (TF.Attr s P.Text) where
         lens (_storage_servers :: ServerResource s -> TF.Attr s P.Text)
              (\s a -> s { _storage_servers = a } :: ServerResource s)
 
-instance P.HasComputedDatacenter (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDatacenter (ServerResource s) (TF.Attr s P.Text) where
     computedDatacenter =
         (_datacenter :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (ServerResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ServerResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSize (ServerResource s) (TF.Attr s P.Text) where
     computedSize =
         (_size :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStorageServers (ServerResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStorageServers (ServerResource s) (TF.Attr s P.Text) where
     computedStorageServers =
         (_storage_servers :: ServerResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-serverResource :: TF.Schema TF.Resource P.OneAndOne (ServerResource s)
+serverResource :: TF.Resource P.OneAndOne (ServerResource s)
 serverResource =
     TF.newResource "oneandone_server" $
         ServerResource {
@@ -410,32 +410,32 @@ instance P.HasName (VpnResource s) (TF.Attr s P.Text) where
         lens (_name :: VpnResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: VpnResource s)
 
-instance P.HasComputedDatacenter (VpnResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDatacenter (VpnResource s) (TF.Attr s P.Text) where
     computedDatacenter =
         (_datacenter :: VpnResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (VpnResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (VpnResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: VpnResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDownloadPath (VpnResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDownloadPath (VpnResource s) (TF.Attr s P.Text) where
     computedDownloadPath =
         (_download_path :: VpnResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFileName (VpnResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFileName (VpnResource s) (TF.Attr s P.Text) where
     computedFileName =
         (_file_name :: VpnResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (VpnResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (VpnResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: VpnResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-vpnResource :: TF.Schema TF.Resource P.OneAndOne (VpnResource s)
+vpnResource :: TF.Resource P.OneAndOne (VpnResource s)
 vpnResource =
     TF.newResource "oneandone_vpn" $
         VpnResource {

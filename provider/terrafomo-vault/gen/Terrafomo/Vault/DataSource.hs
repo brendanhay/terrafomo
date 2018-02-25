@@ -110,20 +110,20 @@ instance P.HasRoleName (ApproleAuthBackendRoleDataSource s) (TF.Attr s P.Text) w
         lens (_role_name :: ApproleAuthBackendRoleDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _role_name = a } :: ApproleAuthBackendRoleDataSource s)
 
-instance P.HasComputedBackend (ApproleAuthBackendRoleDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBackend (ApproleAuthBackendRoleDataSource s) (TF.Attr s P.Text) where
     computedBackend =
         (_backend :: ApproleAuthBackendRoleDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRoleId (ApproleAuthBackendRoleDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRoleId (ApproleAuthBackendRoleDataSource s) (TF.Attr s P.Text) where
     computedRoleId x = TF.compute (TF.refKey x) "role_id"
 
-instance P.HasComputedRoleName (ApproleAuthBackendRoleDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRoleName (ApproleAuthBackendRoleDataSource s) (TF.Attr s P.Text) where
     computedRoleName =
         (_role_name :: ApproleAuthBackendRoleDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-approleAuthBackendRoleDataSource :: TF.Schema TF.DataSource P.Vault (ApproleAuthBackendRoleDataSource s)
+approleAuthBackendRoleDataSource :: TF.DataSource P.Vault (ApproleAuthBackendRoleDataSource s)
 approleAuthBackendRoleDataSource =
     TF.newDataSource "vault_approle_auth_backend_role" $
         ApproleAuthBackendRoleDataSource {
@@ -171,43 +171,43 @@ instance P.HasType' (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
         lens (_type' :: AwsAccessCredentialsDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: AwsAccessCredentialsDataSource s)
 
-instance P.HasComputedAccessKey (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAccessKey (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedAccessKey x = TF.compute (TF.refKey x) "access_key"
 
-instance P.HasComputedBackend (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBackend (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedBackend =
         (_backend :: AwsAccessCredentialsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLeaseDuration (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeaseDuration (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
-instance P.HasComputedLeaseId (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeaseId (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
 
-instance P.HasComputedLeaseRenewable (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeaseRenewable (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
 
-instance P.HasComputedLeaseStartTime (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeaseStartTime (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
 
-instance P.HasComputedRole (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRole (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedRole =
         (_role :: AwsAccessCredentialsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSecretKey (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSecretKey (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedSecretKey x = TF.compute (TF.refKey x) "secret_key"
 
-instance P.HasComputedSecurityToken (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSecurityToken (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedSecurityToken x = TF.compute (TF.refKey x) "security_token"
 
-instance P.HasComputedType' (AwsAccessCredentialsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (AwsAccessCredentialsDataSource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: AwsAccessCredentialsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-awsAccessCredentialsDataSource :: TF.Schema TF.DataSource P.Vault (AwsAccessCredentialsDataSource s)
+awsAccessCredentialsDataSource :: TF.DataSource P.Vault (AwsAccessCredentialsDataSource s)
 awsAccessCredentialsDataSource =
     TF.newDataSource "vault_aws_access_credentials" $
         AwsAccessCredentialsDataSource {
@@ -243,30 +243,30 @@ instance P.HasPath (GenericSecretDataSource s) (TF.Attr s P.Text) where
         lens (_path :: GenericSecretDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _path = a } :: GenericSecretDataSource s)
 
-instance P.HasComputedData' (GenericSecretDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedData' (GenericSecretDataSource s) (TF.Attr s P.Text) where
     computedData' x = TF.compute (TF.refKey x) "data"
 
-instance P.HasComputedDataJson (GenericSecretDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDataJson (GenericSecretDataSource s) (TF.Attr s P.Text) where
     computedDataJson x = TF.compute (TF.refKey x) "data_json"
 
-instance P.HasComputedLeaseDuration (GenericSecretDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeaseDuration (GenericSecretDataSource s) (TF.Attr s P.Text) where
     computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
-instance P.HasComputedLeaseId (GenericSecretDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeaseId (GenericSecretDataSource s) (TF.Attr s P.Text) where
     computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
 
-instance P.HasComputedLeaseRenewable (GenericSecretDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeaseRenewable (GenericSecretDataSource s) (TF.Attr s P.Text) where
     computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
 
-instance P.HasComputedLeaseStartTime (GenericSecretDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeaseStartTime (GenericSecretDataSource s) (TF.Attr s P.Text) where
     computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
 
-instance P.HasComputedPath (GenericSecretDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPath (GenericSecretDataSource s) (TF.Attr s P.Text) where
     computedPath =
         (_path :: GenericSecretDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-genericSecretDataSource :: TF.Schema TF.DataSource P.Vault (GenericSecretDataSource s)
+genericSecretDataSource :: TF.DataSource P.Vault (GenericSecretDataSource s)
 genericSecretDataSource =
     TF.newDataSource "vault_generic_secret" $
         GenericSecretDataSource {

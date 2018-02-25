@@ -161,50 +161,50 @@ class HasWebsite a b | a -> b where
 instance HasWebsite a b => HasWebsite (TF.Schema l p a) b where
     website = TF.configuration . website
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedEvents a s b | a -> s b where
+class HasComputedEvents a b | a -> b where
     computedEvents :: TF.Ref s a -> b
 
-class HasComputedForkPolicy a s b | a -> s b where
+class HasComputedForkPolicy a b | a -> b where
     computedForkPolicy :: TF.Ref s a -> b
 
-class HasComputedHasIssues a s b | a -> s b where
+class HasComputedHasIssues a b | a -> b where
     computedHasIssues :: TF.Ref s a -> b
 
-class HasComputedHasWiki a s b | a -> s b where
+class HasComputedHasWiki a b | a -> b where
     computedHasWiki :: TF.Ref s a -> b
 
-class HasComputedIsPrivate a s b | a -> s b where
+class HasComputedIsPrivate a b | a -> b where
     computedIsPrivate :: TF.Ref s a -> b
 
-class HasComputedLanguage a s b | a -> s b where
+class HasComputedLanguage a b | a -> b where
     computedLanguage :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedOwner a s b | a -> s b where
+class HasComputedOwner a b | a -> b where
     computedOwner :: TF.Ref s a -> b
 
-class HasComputedProjectKey a s b | a -> s b where
+class HasComputedProjectKey a b | a -> b where
     computedProjectKey :: TF.Ref s a -> b
 
-class HasComputedRepository a s b | a -> s b where
+class HasComputedRepository a b | a -> b where
     computedRepository :: TF.Ref s a -> b
 
-class HasComputedReviewers a s b | a -> s b where
+class HasComputedReviewers a b | a -> b where
     computedReviewers :: TF.Ref s a -> b
 
-class HasComputedScm a s b | a -> s b where
+class HasComputedScm a b | a -> b where
     computedScm :: TF.Ref s a -> b
 
-class HasComputedSlug a s b | a -> s b where
+class HasComputedSlug a b | a -> b where
     computedSlug :: TF.Ref s a -> b
 
-class HasComputedUrl a s b | a -> s b where
+class HasComputedUrl a b | a -> b where
     computedUrl :: TF.Ref s a -> b
 
-class HasComputedWebsite a s b | a -> s b where
+class HasComputedWebsite a b | a -> b where
     computedWebsite :: TF.Ref s a -> b

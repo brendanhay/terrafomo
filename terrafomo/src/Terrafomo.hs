@@ -40,7 +40,6 @@ module Terrafomo
     -- ** Lifecycles
     , HasLifecycle    (..)
     , Lifecycle       (..)
-    , NoLifecycle
 
     -- ** Ignored Attributes
     , Changes

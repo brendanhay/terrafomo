@@ -113,32 +113,32 @@ class HasType' a b | a -> b where
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputedDeregisterOnDestroy a s b | a -> s b where
+class HasComputedDeregisterOnDestroy a b | a -> b where
     computedDeregisterOnDestroy :: TF.Ref s a -> b
 
-class HasComputedDeregisterOnIdChange a s b | a -> s b where
+class HasComputedDeregisterOnIdChange a b | a -> b where
     computedDeregisterOnIdChange :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedGlobal a s b | a -> s b where
+class HasComputedGlobal a b | a -> b where
     computedGlobal :: TF.Ref s a -> b
 
-class HasComputedJobspec a s b | a -> s b where
+class HasComputedJobspec a b | a -> b where
     computedJobspec :: TF.Ref s a -> b
 
-class HasComputedLimits a s b | a -> s b where
+class HasComputedLimits a b | a -> b where
     computedLimits :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedPolicies a s b | a -> s b where
+class HasComputedPolicies a b | a -> b where
     computedPolicies :: TF.Ref s a -> b
 
-class HasComputedRulesHcl a s b | a -> s b where
+class HasComputedRulesHcl a b | a -> b where
     computedRulesHcl :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b

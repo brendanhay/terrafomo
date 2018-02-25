@@ -155,53 +155,53 @@ class HasUsername a b | a -> b where
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputedAccessMode a s b | a -> s b where
+class HasComputedAccessMode a b | a -> b where
     computedAccessMode :: TF.Ref s a -> b
 
-class HasComputedBasicAuthEnabled a s b | a -> s b where
+class HasComputedBasicAuthEnabled a b | a -> b where
     computedBasicAuthEnabled :: TF.Ref s a -> b
 
-class HasComputedBasicAuthPassword a s b | a -> s b where
+class HasComputedBasicAuthPassword a b | a -> b where
     computedBasicAuthPassword :: TF.Ref s a -> b
 
-class HasComputedBasicAuthUsername a s b | a -> s b where
+class HasComputedBasicAuthUsername a b | a -> b where
     computedBasicAuthUsername :: TF.Ref s a -> b
 
-class HasComputedConfigJson a s b | a -> s b where
+class HasComputedConfigJson a b | a -> b where
     computedConfigJson :: TF.Ref s a -> b
 
-class HasComputedDatabaseName a s b | a -> s b where
+class HasComputedDatabaseName a b | a -> b where
     computedDatabaseName :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedIsDefault a s b | a -> s b where
+class HasComputedIsDefault a b | a -> b where
     computedIsDefault :: TF.Ref s a -> b
 
-class HasComputedJsonData a s b | a -> s b where
+class HasComputedJsonData a b | a -> b where
     computedJsonData :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedPassword a s b | a -> s b where
+class HasComputedPassword a b | a -> b where
     computedPassword :: TF.Ref s a -> b
 
-class HasComputedSecureJsonData a s b | a -> s b where
+class HasComputedSecureJsonData a b | a -> b where
     computedSecureJsonData :: TF.Ref s a -> b
 
-class HasComputedSettings a s b | a -> s b where
+class HasComputedSettings a b | a -> b where
     computedSettings :: TF.Ref s a -> b
 
-class HasComputedSlug a s b | a -> s b where
+class HasComputedSlug a b | a -> b where
     computedSlug :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedUrl a s b | a -> s b where
+class HasComputedUrl a b | a -> b where
     computedUrl :: TF.Ref s a -> b
 
-class HasComputedUsername a s b | a -> s b where
+class HasComputedUsername a b | a -> b where
     computedUsername :: TF.Ref s a -> b

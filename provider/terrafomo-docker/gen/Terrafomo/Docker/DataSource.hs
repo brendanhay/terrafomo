@@ -81,15 +81,15 @@ instance P.HasName (RegistryImageDataSource s) (TF.Attr s P.Text) where
         lens (_name :: RegistryImageDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: RegistryImageDataSource s)
 
-instance P.HasComputedName (RegistryImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RegistryImageDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: RegistryImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSha256Digest (RegistryImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSha256Digest (RegistryImageDataSource s) (TF.Attr s P.Text) where
     computedSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"
 
-registryImageDataSource :: TF.Schema TF.DataSource P.Docker (RegistryImageDataSource s)
+registryImageDataSource :: TF.DataSource P.Docker (RegistryImageDataSource s)
 registryImageDataSource =
     TF.newDataSource "docker_registry_image" $
         RegistryImageDataSource {

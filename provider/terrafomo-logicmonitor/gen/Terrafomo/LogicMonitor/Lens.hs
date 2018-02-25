@@ -145,44 +145,44 @@ class HasSize a b | a -> b where
 instance HasSize a b => HasSize (TF.Schema l p a) b where
     size = TF.configuration . size
 
-class HasComputedAppliesTo a s b | a -> s b where
+class HasComputedAppliesTo a b | a -> b where
     computedAppliesTo :: TF.Ref s a -> b
 
-class HasComputedCollector a s b | a -> s b where
+class HasComputedCollector a b | a -> b where
     computedCollector :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedDisableAlerting a s b | a -> s b where
+class HasComputedDisableAlerting a b | a -> b where
     computedDisableAlerting :: TF.Ref s a -> b
 
-class HasComputedDisplayName a s b | a -> s b where
+class HasComputedDisplayName a b | a -> b where
     computedDisplayName :: TF.Ref s a -> b
 
-class HasComputedFilters a s b | a -> s b where
+class HasComputedFilters a b | a -> b where
     computedFilters :: TF.Ref s a -> b
 
-class HasComputedHostgroupId a s b | a -> s b where
+class HasComputedHostgroupId a b | a -> b where
     computedHostgroupId :: TF.Ref s a -> b
 
-class HasComputedIpAddr a s b | a -> s b where
+class HasComputedIpAddr a b | a -> b where
     computedIpAddr :: TF.Ref s a -> b
 
-class HasComputedMostRecent a s b | a -> s b where
+class HasComputedMostRecent a b | a -> b where
     computedMostRecent :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedOffset a s b | a -> s b where
+class HasComputedOffset a b | a -> b where
     computedOffset :: TF.Ref s a -> b
 
-class HasComputedParentId a s b | a -> s b where
+class HasComputedParentId a b | a -> b where
     computedParentId :: TF.Ref s a -> b
 
-class HasComputedProperties a s b | a -> s b where
+class HasComputedProperties a b | a -> b where
     computedProperties :: TF.Ref s a -> b
 
-class HasComputedSize a s b | a -> s b where
+class HasComputedSize a b | a -> b where
     computedSize :: TF.Ref s a -> b

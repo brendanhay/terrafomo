@@ -337,179 +337,179 @@ class HasUsername a b | a -> b where
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputedActive a s b | a -> s b where
+class HasComputedActive a b | a -> b where
     computedActive :: TF.Ref s a -> b
 
-class HasComputedAllowMergeCommit a s b | a -> s b where
+class HasComputedAllowMergeCommit a b | a -> b where
     computedAllowMergeCommit :: TF.Ref s a -> b
 
-class HasComputedAllowRebaseMerge a s b | a -> s b where
+class HasComputedAllowRebaseMerge a b | a -> b where
     computedAllowRebaseMerge :: TF.Ref s a -> b
 
-class HasComputedAllowSquashMerge a s b | a -> s b where
+class HasComputedAllowSquashMerge a b | a -> b where
     computedAllowSquashMerge :: TF.Ref s a -> b
 
-class HasComputedAutoInit a s b | a -> s b where
+class HasComputedAutoInit a b | a -> b where
     computedAutoInit :: TF.Ref s a -> b
 
-class HasComputedAvatarUrl a s b | a -> s b where
+class HasComputedAvatarUrl a b | a -> b where
     computedAvatarUrl :: TF.Ref s a -> b
 
-class HasComputedBio a s b | a -> s b where
+class HasComputedBio a b | a -> b where
     computedBio :: TF.Ref s a -> b
 
-class HasComputedBlog a s b | a -> s b where
+class HasComputedBlog a b | a -> b where
     computedBlog :: TF.Ref s a -> b
 
-class HasComputedBranch a s b | a -> s b where
+class HasComputedBranch a b | a -> b where
     computedBranch :: TF.Ref s a -> b
 
-class HasComputedColor a s b | a -> s b where
+class HasComputedColor a b | a -> b where
     computedColor :: TF.Ref s a -> b
 
-class HasComputedCompany a s b | a -> s b where
+class HasComputedCompany a b | a -> b where
     computedCompany :: TF.Ref s a -> b
 
-class HasComputedConfiguration a s b | a -> s b where
+class HasComputedConfiguration a b | a -> b where
     computedConfiguration :: TF.Ref s a -> b
 
-class HasComputedCreatedAt a s b | a -> s b where
+class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: TF.Ref s a -> b
 
-class HasComputedDefaultBranch a s b | a -> s b where
+class HasComputedDefaultBranch a b | a -> b where
     computedDefaultBranch :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedEmail a s b | a -> s b where
+class HasComputedEmail a b | a -> b where
     computedEmail :: TF.Ref s a -> b
 
-class HasComputedEnforceAdmins a s b | a -> s b where
+class HasComputedEnforceAdmins a b | a -> b where
     computedEnforceAdmins :: TF.Ref s a -> b
 
-class HasComputedEvents a s b | a -> s b where
+class HasComputedEvents a b | a -> b where
     computedEvents :: TF.Ref s a -> b
 
-class HasComputedFollowers a s b | a -> s b where
+class HasComputedFollowers a b | a -> b where
     computedFollowers :: TF.Ref s a -> b
 
-class HasComputedFollowing a s b | a -> s b where
+class HasComputedFollowing a b | a -> b where
     computedFollowing :: TF.Ref s a -> b
 
-class HasComputedFullName a s b | a -> s b where
+class HasComputedFullName a b | a -> b where
     computedFullName :: TF.Ref s a -> b
 
-class HasComputedGitCloneUrl a s b | a -> s b where
+class HasComputedGitCloneUrl a b | a -> b where
     computedGitCloneUrl :: TF.Ref s a -> b
 
-class HasComputedGitignoreTemplate a s b | a -> s b where
+class HasComputedGitignoreTemplate a b | a -> b where
     computedGitignoreTemplate :: TF.Ref s a -> b
 
-class HasComputedGpgKeys a s b | a -> s b where
+class HasComputedGpgKeys a b | a -> b where
     computedGpgKeys :: TF.Ref s a -> b
 
-class HasComputedGravatarId a s b | a -> s b where
+class HasComputedGravatarId a b | a -> b where
     computedGravatarId :: TF.Ref s a -> b
 
-class HasComputedHasDownloads a s b | a -> s b where
+class HasComputedHasDownloads a b | a -> b where
     computedHasDownloads :: TF.Ref s a -> b
 
-class HasComputedHasIssues a s b | a -> s b where
+class HasComputedHasIssues a b | a -> b where
     computedHasIssues :: TF.Ref s a -> b
 
-class HasComputedHasWiki a s b | a -> s b where
+class HasComputedHasWiki a b | a -> b where
     computedHasWiki :: TF.Ref s a -> b
 
-class HasComputedHomepageUrl a s b | a -> s b where
+class HasComputedHomepageUrl a b | a -> b where
     computedHomepageUrl :: TF.Ref s a -> b
 
-class HasComputedHttpCloneUrl a s b | a -> s b where
+class HasComputedHttpCloneUrl a b | a -> b where
     computedHttpCloneUrl :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedKey a s b | a -> s b where
+class HasComputedKey a b | a -> b where
     computedKey :: TF.Ref s a -> b
 
-class HasComputedLdapDn a s b | a -> s b where
+class HasComputedLdapDn a b | a -> b where
     computedLdapDn :: TF.Ref s a -> b
 
-class HasComputedLicenseTemplate a s b | a -> s b where
+class HasComputedLicenseTemplate a b | a -> b where
     computedLicenseTemplate :: TF.Ref s a -> b
 
-class HasComputedLocation a s b | a -> s b where
+class HasComputedLocation a b | a -> b where
     computedLocation :: TF.Ref s a -> b
 
-class HasComputedLogin a s b | a -> s b where
+class HasComputedLogin a b | a -> b where
     computedLogin :: TF.Ref s a -> b
 
-class HasComputedMembers a s b | a -> s b where
+class HasComputedMembers a b | a -> b where
     computedMembers :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedPermission a s b | a -> s b where
+class HasComputedPermission a b | a -> b where
     computedPermission :: TF.Ref s a -> b
 
-class HasComputedPrivacy a s b | a -> s b where
+class HasComputedPrivacy a b | a -> b where
     computedPrivacy :: TF.Ref s a -> b
 
-class HasComputedPrivate a s b | a -> s b where
+class HasComputedPrivate a b | a -> b where
     computedPrivate :: TF.Ref s a -> b
 
-class HasComputedPublicGists a s b | a -> s b where
+class HasComputedPublicGists a b | a -> b where
     computedPublicGists :: TF.Ref s a -> b
 
-class HasComputedPublicRepos a s b | a -> s b where
+class HasComputedPublicRepos a b | a -> b where
     computedPublicRepos :: TF.Ref s a -> b
 
-class HasComputedReadOnly a s b | a -> s b where
+class HasComputedReadOnly a b | a -> b where
     computedReadOnly :: TF.Ref s a -> b
 
-class HasComputedRepository a s b | a -> s b where
+class HasComputedRepository a b | a -> b where
     computedRepository :: TF.Ref s a -> b
 
-class HasComputedRequiredPullRequestReviews a s b | a -> s b where
+class HasComputedRequiredPullRequestReviews a b | a -> b where
     computedRequiredPullRequestReviews :: TF.Ref s a -> b
 
-class HasComputedRequiredStatusChecks a s b | a -> s b where
+class HasComputedRequiredStatusChecks a b | a -> b where
     computedRequiredStatusChecks :: TF.Ref s a -> b
 
-class HasComputedRestrictions a s b | a -> s b where
+class HasComputedRestrictions a b | a -> b where
     computedRestrictions :: TF.Ref s a -> b
 
-class HasComputedRole a s b | a -> s b where
+class HasComputedRole a b | a -> b where
     computedRole :: TF.Ref s a -> b
 
-class HasComputedSiteAdmin a s b | a -> s b where
+class HasComputedSiteAdmin a b | a -> b where
     computedSiteAdmin :: TF.Ref s a -> b
 
-class HasComputedSlug a s b | a -> s b where
+class HasComputedSlug a b | a -> b where
     computedSlug :: TF.Ref s a -> b
 
-class HasComputedSshCloneUrl a s b | a -> s b where
+class HasComputedSshCloneUrl a b | a -> b where
     computedSshCloneUrl :: TF.Ref s a -> b
 
-class HasComputedSshKeys a s b | a -> s b where
+class HasComputedSshKeys a b | a -> b where
     computedSshKeys :: TF.Ref s a -> b
 
-class HasComputedSvnUrl a s b | a -> s b where
+class HasComputedSvnUrl a b | a -> b where
     computedSvnUrl :: TF.Ref s a -> b
 
-class HasComputedTeamId a s b | a -> s b where
+class HasComputedTeamId a b | a -> b where
     computedTeamId :: TF.Ref s a -> b
 
-class HasComputedTitle a s b | a -> s b where
+class HasComputedTitle a b | a -> b where
     computedTitle :: TF.Ref s a -> b
 
-class HasComputedUpdatedAt a s b | a -> s b where
+class HasComputedUpdatedAt a b | a -> b where
     computedUpdatedAt :: TF.Ref s a -> b
 
-class HasComputedUrl a s b | a -> s b where
+class HasComputedUrl a b | a -> b where
     computedUrl :: TF.Ref s a -> b
 
-class HasComputedUsername a s b | a -> s b where
+class HasComputedUsername a b | a -> b where
     computedUsername :: TF.Ref s a -> b

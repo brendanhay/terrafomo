@@ -38,17 +38,17 @@ import Lens.Micro (Lens')
 import qualified Terrafomo.Name   as TF
 import qualified Terrafomo.Schema as TF
 
-class HasComputedGtdLocation a s b | a -> s b where
+class HasComputedGtdLocation a b | a -> b where
     computedGtdLocation :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedTtl a s b | a -> s b where
+class HasComputedTtl a b | a -> b where
     computedTtl :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedValue a s b | a -> s b where
+class HasComputedValue a b | a -> b where
     computedValue :: TF.Ref s a -> b

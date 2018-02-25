@@ -170,56 +170,56 @@ class HasThreshold a b | a -> b where
 instance HasThreshold a b => HasThreshold (TF.Schema l p a) b where
     threshold = TF.configuration . threshold
 
-class HasComputedCapacity a s b | a -> s b where
+class HasComputedCapacity a b | a -> b where
     computedCapacity :: TF.Ref s a -> b
 
-class HasComputedCheck a s b | a -> s b where
+class HasComputedCheck a b | a -> b where
     computedCheck :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedElasticIps a s b | a -> s b where
+class HasComputedElasticIps a b | a -> b where
     computedElasticIps :: TF.Ref s a -> b
 
-class HasComputedEndpoint a s b | a -> s b where
+class HasComputedEndpoint a b | a -> b where
     computedEndpoint :: TF.Ref s a -> b
 
-class HasComputedEventType a s b | a -> s b where
+class HasComputedEventType a b | a -> b where
     computedEventType :: TF.Ref s a -> b
 
-class HasComputedFormat a s b | a -> s b where
+class HasComputedFormat a b | a -> b where
     computedFormat :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedInstanceTypes a s b | a -> s b where
+class HasComputedInstanceTypes a b | a -> b where
     computedInstanceTypes :: TF.Ref s a -> b
 
-class HasComputedLaunchSpecification a s b | a -> s b where
+class HasComputedLaunchSpecification a b | a -> b where
     computedLaunchSpecification :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedProduct a s b | a -> s b where
+class HasComputedProduct a b | a -> b where
     computedProduct :: TF.Ref s a -> b
 
-class HasComputedProtocol a s b | a -> s b where
+class HasComputedProtocol a b | a -> b where
     computedProtocol :: TF.Ref s a -> b
 
-class HasComputedProxy a s b | a -> s b where
+class HasComputedProxy a b | a -> b where
     computedProxy :: TF.Ref s a -> b
 
-class HasComputedResourceId a s b | a -> s b where
+class HasComputedResourceId a b | a -> b where
     computedResourceId :: TF.Ref s a -> b
 
-class HasComputedStrategy a s b | a -> s b where
+class HasComputedStrategy a b | a -> b where
     computedStrategy :: TF.Ref s a -> b
 
-class HasComputedTags a s b | a -> s b where
+class HasComputedTags a b | a -> b where
     computedTags :: TF.Ref s a -> b
 
-class HasComputedThreshold a s b | a -> s b where
+class HasComputedThreshold a b | a -> b where
     computedThreshold :: TF.Ref s a -> b

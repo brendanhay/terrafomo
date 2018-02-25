@@ -134,40 +134,40 @@ instance P.HasType' (LogResource s) (TF.Attr s P.Text) where
         lens (_type' :: LogResource s -> TF.Attr s P.Text)
              (\s a -> s { _type' = a } :: LogResource s)
 
-instance P.HasComputedFilename (LogResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFilename (LogResource s) (TF.Attr s P.Text) where
     computedFilename =
         (_filename :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLogsetId (LogResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLogsetId (LogResource s) (TF.Attr s P.Text) where
     computedLogsetId =
         (_logset_id :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (LogResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (LogResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRetentionPeriod (LogResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRetentionPeriod (LogResource s) (TF.Attr s P.Text) where
     computedRetentionPeriod =
         (_retention_period :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSource (LogResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSource (LogResource s) (TF.Attr s P.Text) where
     computedSource =
         (_source :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedToken (LogResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedToken (LogResource s) (TF.Attr s P.Text) where
     computedToken x = TF.compute (TF.refKey x) "token"
 
-instance P.HasComputedType' (LogResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (LogResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: LogResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-logResource :: TF.Schema TF.Resource P.Logentries (LogResource s)
+logResource :: TF.Resource P.Logentries (LogResource s)
 logResource =
     TF.newResource "logentries_log" $
         LogResource {
@@ -207,17 +207,17 @@ instance P.HasName (LogsetResource s) (TF.Attr s P.Text) where
         lens (_name :: LogsetResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: LogsetResource s)
 
-instance P.HasComputedLocation (LogsetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLocation (LogsetResource s) (TF.Attr s P.Text) where
     computedLocation =
         (_location :: LogsetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (LogsetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (LogsetResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: LogsetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-logsetResource :: TF.Schema TF.Resource P.Logentries (LogsetResource s)
+logsetResource :: TF.Resource P.Logentries (LogsetResource s)
 logsetResource =
     TF.newResource "logentries_logset" $
         LogsetResource {

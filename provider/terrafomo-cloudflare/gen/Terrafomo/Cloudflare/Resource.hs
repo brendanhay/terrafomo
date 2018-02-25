@@ -141,39 +141,39 @@ instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
         lens (_value :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _value = a } :: RecordResource s)
 
-instance P.HasComputedDomain (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDomain (RecordResource s) (TF.Attr s P.Text) where
     computedDomain =
         (_domain :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostname (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHostname (RecordResource s) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance P.HasComputedId (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (RecordResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RecordResource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedPriority (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPriority (RecordResource s) (TF.Attr s P.Text) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance P.HasComputedProxied (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedProxied (RecordResource s) (TF.Attr s P.Text) where
     computedProxied x = TF.compute (TF.refKey x) "proxied"
 
-instance P.HasComputedTtl (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance P.HasComputedType' (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedValue (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedValue (RecordResource s) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
-instance P.HasComputedZoneId (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedZoneId (RecordResource s) (TF.Attr s P.Text) where
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
-recordResource :: TF.Schema TF.Resource P.Cloudflare (RecordResource s)
+recordResource :: TF.Resource P.Cloudflare (RecordResource s)
 recordResource =
     TF.newResource "cloudflare_record" $
         RecordResource {

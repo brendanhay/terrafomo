@@ -201,86 +201,86 @@ class HasUrl a b | a -> b where
 instance HasUrl a b => HasUrl (TF.Schema l p a) b where
     url = TF.configuration . url
 
-class HasComputedAcm a s b | a -> s b where
+class HasComputedAcm a b | a -> b where
     computedAcm :: TF.Ref s a -> b
 
-class HasComputedAddonId a s b | a -> s b where
+class HasComputedAddonId a b | a -> b where
     computedAddonId :: TF.Ref s a -> b
 
-class HasComputedAllConfigVars a s b | a -> s b where
+class HasComputedAllConfigVars a b | a -> b where
     computedAllConfigVars :: TF.Ref s a -> b
 
-class HasComputedApp a s b | a -> s b where
+class HasComputedApp a b | a -> b where
     computedApp :: TF.Ref s a -> b
 
-class HasComputedAppId a s b | a -> s b where
+class HasComputedAppId a b | a -> b where
     computedAppId :: TF.Ref s a -> b
 
-class HasComputedBuildpacks a s b | a -> s b where
+class HasComputedBuildpacks a b | a -> b where
     computedBuildpacks :: TF.Ref s a -> b
 
-class HasComputedCertificateChain a s b | a -> s b where
+class HasComputedCertificateChain a b | a -> b where
     computedCertificateChain :: TF.Ref s a -> b
 
-class HasComputedCname a s b | a -> s b where
+class HasComputedCname a b | a -> b where
     computedCname :: TF.Ref s a -> b
 
-class HasComputedConfig a s b | a -> s b where
+class HasComputedConfig a b | a -> b where
     computedConfig :: TF.Ref s a -> b
 
-class HasComputedConfigVars a s b | a -> s b where
+class HasComputedConfigVars a b | a -> b where
     computedConfigVars :: TF.Ref s a -> b
 
-class HasComputedEnabled a s b | a -> s b where
+class HasComputedEnabled a b | a -> b where
     computedEnabled :: TF.Ref s a -> b
 
-class HasComputedGitUrl a s b | a -> s b where
+class HasComputedGitUrl a b | a -> b where
     computedGitUrl :: TF.Ref s a -> b
 
-class HasComputedHerokuHostname a s b | a -> s b where
+class HasComputedHerokuHostname a b | a -> b where
     computedHerokuHostname :: TF.Ref s a -> b
 
-class HasComputedHostname a s b | a -> s b where
+class HasComputedHostname a b | a -> b where
     computedHostname :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedOrganization a s b | a -> s b where
+class HasComputedOrganization a b | a -> b where
     computedOrganization :: TF.Ref s a -> b
 
-class HasComputedPipeline a s b | a -> s b where
+class HasComputedPipeline a b | a -> b where
     computedPipeline :: TF.Ref s a -> b
 
-class HasComputedPlan a s b | a -> s b where
+class HasComputedPlan a b | a -> b where
     computedPlan :: TF.Ref s a -> b
 
-class HasComputedPrivateKey a s b | a -> s b where
+class HasComputedPrivateKey a b | a -> b where
     computedPrivateKey :: TF.Ref s a -> b
 
-class HasComputedProviderId a s b | a -> s b where
+class HasComputedProviderId a b | a -> b where
     computedProviderId :: TF.Ref s a -> b
 
-class HasComputedRegion a s b | a -> s b where
+class HasComputedRegion a b | a -> b where
     computedRegion :: TF.Ref s a -> b
 
-class HasComputedSpace a s b | a -> s b where
+class HasComputedSpace a b | a -> b where
     computedSpace :: TF.Ref s a -> b
 
-class HasComputedStack a s b | a -> s b where
+class HasComputedStack a b | a -> b where
     computedStack :: TF.Ref s a -> b
 
-class HasComputedStage a s b | a -> s b where
+class HasComputedStage a b | a -> b where
     computedStage :: TF.Ref s a -> b
 
-class HasComputedToken a s b | a -> s b where
+class HasComputedToken a b | a -> b where
     computedToken :: TF.Ref s a -> b
 
-class HasComputedUrl a s b | a -> s b where
+class HasComputedUrl a b | a -> b where
     computedUrl :: TF.Ref s a -> b
 
-class HasComputedWebUrl a s b | a -> s b where
+class HasComputedWebUrl a b | a -> b where
     computedWebUrl :: TF.Ref s a -> b

@@ -83,12 +83,12 @@ instance P.HasMetadata (ServiceDataSource s) (TF.Attr s P.Text) where
         lens (_metadata :: ServiceDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _metadata = a } :: ServiceDataSource s)
 
-instance P.HasComputedMetadata (ServiceDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetadata (ServiceDataSource s) (TF.Attr s P.Text) where
     computedMetadata =
         (_metadata :: ServiceDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-serviceDataSource :: TF.Schema TF.DataSource P.Kubernetes (ServiceDataSource s)
+serviceDataSource :: TF.DataSource P.Kubernetes (ServiceDataSource s)
 serviceDataSource =
     TF.newDataSource "kubernetes_service" $
         ServiceDataSource {
@@ -117,12 +117,12 @@ instance P.HasMetadata (StorageClassDataSource s) (TF.Attr s P.Text) where
         lens (_metadata :: StorageClassDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _metadata = a } :: StorageClassDataSource s)
 
-instance P.HasComputedMetadata (StorageClassDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetadata (StorageClassDataSource s) (TF.Attr s P.Text) where
     computedMetadata =
         (_metadata :: StorageClassDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-storageClassDataSource :: TF.Schema TF.DataSource P.Kubernetes (StorageClassDataSource s)
+storageClassDataSource :: TF.DataSource P.Kubernetes (StorageClassDataSource s)
 storageClassDataSource =
     TF.newDataSource "kubernetes_storage_class" $
         StorageClassDataSource {

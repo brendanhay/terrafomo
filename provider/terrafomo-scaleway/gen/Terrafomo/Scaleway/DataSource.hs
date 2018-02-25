@@ -109,38 +109,38 @@ instance P.HasNameFilter (BootscriptDataSource s) (TF.Attr s P.Text) where
         lens (_name_filter :: BootscriptDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name_filter = a } :: BootscriptDataSource s)
 
-instance P.HasComputedArchitecture (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedArchitecture (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedArchitecture x = TF.compute (TF.refKey x) "architecture"
 
-instance P.HasComputedBootCmdArgs (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBootCmdArgs (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedBootCmdArgs x = TF.compute (TF.refKey x) "boot_cmd_args"
 
-instance P.HasComputedDtb (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDtb (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedDtb x = TF.compute (TF.refKey x) "dtb"
 
-instance P.HasComputedInitrd (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedInitrd (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedInitrd x = TF.compute (TF.refKey x) "initrd"
 
-instance P.HasComputedKernel (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedKernel (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedKernel x = TF.compute (TF.refKey x) "kernel"
 
-instance P.HasComputedName (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: BootscriptDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNameFilter (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNameFilter (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedNameFilter =
         (_name_filter :: BootscriptDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOrganization (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOrganization (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedOrganization x = TF.compute (TF.refKey x) "organization"
 
-instance P.HasComputedPublic (BootscriptDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPublic (BootscriptDataSource s) (TF.Attr s P.Text) where
     computedPublic x = TF.compute (TF.refKey x) "public"
 
-bootscriptDataSource :: TF.Schema TF.DataSource P.Scaleway (BootscriptDataSource s)
+bootscriptDataSource :: TF.DataSource P.Scaleway (BootscriptDataSource s)
 bootscriptDataSource =
     TF.newDataSource "scaleway_bootscript" $
         BootscriptDataSource {
@@ -185,29 +185,29 @@ instance P.HasNameFilter (ImageDataSource s) (TF.Attr s P.Text) where
         lens (_name_filter :: ImageDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name_filter = a } :: ImageDataSource s)
 
-instance P.HasComputedArchitecture (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedArchitecture (ImageDataSource s) (TF.Attr s P.Text) where
     computedArchitecture x = TF.compute (TF.refKey x) "architecture"
 
-instance P.HasComputedCreationDate (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCreationDate (ImageDataSource s) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
-instance P.HasComputedName (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ImageDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNameFilter (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNameFilter (ImageDataSource s) (TF.Attr s P.Text) where
     computedNameFilter =
         (_name_filter :: ImageDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOrganization (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOrganization (ImageDataSource s) (TF.Attr s P.Text) where
     computedOrganization x = TF.compute (TF.refKey x) "organization"
 
-instance P.HasComputedPublic (ImageDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPublic (ImageDataSource s) (TF.Attr s P.Text) where
     computedPublic x = TF.compute (TF.refKey x) "public"
 
-imageDataSource :: TF.Schema TF.DataSource P.Scaleway (ImageDataSource s)
+imageDataSource :: TF.DataSource P.Scaleway (ImageDataSource s)
 imageDataSource =
     TF.newDataSource "scaleway_image" $
         ImageDataSource {

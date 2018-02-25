@@ -72,22 +72,22 @@ data RecordResource s = RecordResource {
 instance TF.ToHCL (RecordResource s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedGtdLocation (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGtdLocation (RecordResource s) (TF.Attr s P.Text) where
     computedGtdLocation x = TF.compute (TF.refKey x) "gtdLocation"
 
-instance P.HasComputedName (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RecordResource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedTtl (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
-instance P.HasComputedType' (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
     computedType' x = TF.compute (TF.refKey x) "type"
 
-instance P.HasComputedValue (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedValue (RecordResource s) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
-recordResource :: TF.Schema TF.Resource P.DNSMadeEasy (RecordResource s)
+recordResource :: TF.Resource P.DNSMadeEasy (RecordResource s)
 recordResource =
     TF.newResource "dme_record" $
         RecordResource {

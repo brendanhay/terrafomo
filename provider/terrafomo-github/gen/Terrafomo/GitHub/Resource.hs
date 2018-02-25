@@ -224,37 +224,37 @@ instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s P.Text) where
         lens (_restrictions :: BranchProtectionResource s -> TF.Attr s P.Text)
              (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
-instance P.HasComputedBranch (BranchProtectionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBranch (BranchProtectionResource s) (TF.Attr s P.Text) where
     computedBranch =
         (_branch :: BranchProtectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEnforceAdmins (BranchProtectionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEnforceAdmins (BranchProtectionResource s) (TF.Attr s P.Text) where
     computedEnforceAdmins =
         (_enforce_admins :: BranchProtectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRepository (BranchProtectionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRepository (BranchProtectionResource s) (TF.Attr s P.Text) where
     computedRepository =
         (_repository :: BranchProtectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRequiredPullRequestReviews (BranchProtectionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s P.Text) where
     computedRequiredPullRequestReviews =
         (_required_pull_request_reviews :: BranchProtectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRequiredStatusChecks (BranchProtectionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s P.Text) where
     computedRequiredStatusChecks =
         (_required_status_checks :: BranchProtectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRestrictions (BranchProtectionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRestrictions (BranchProtectionResource s) (TF.Attr s P.Text) where
     computedRestrictions =
         (_restrictions :: BranchProtectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-branchProtectionResource :: TF.Schema TF.Resource P.GitHub (BranchProtectionResource s)
+branchProtectionResource :: TF.Resource P.GitHub (BranchProtectionResource s)
 branchProtectionResource =
     TF.newResource "github_branch_protection" $
         BranchProtectionResource {
@@ -316,27 +316,27 @@ instance P.HasUrl (IssueLabelResource s) (TF.Attr s P.Text) where
         lens (_url :: IssueLabelResource s -> TF.Attr s P.Text)
              (\s a -> s { _url = a } :: IssueLabelResource s)
 
-instance P.HasComputedColor (IssueLabelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedColor (IssueLabelResource s) (TF.Attr s P.Text) where
     computedColor =
         (_color :: IssueLabelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (IssueLabelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (IssueLabelResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: IssueLabelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRepository (IssueLabelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRepository (IssueLabelResource s) (TF.Attr s P.Text) where
     computedRepository =
         (_repository :: IssueLabelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUrl (IssueLabelResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUrl (IssueLabelResource s) (TF.Attr s P.Text) where
     computedUrl =
         (_url :: IssueLabelResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-issueLabelResource :: TF.Schema TF.Resource P.GitHub (IssueLabelResource s)
+issueLabelResource :: TF.Resource P.GitHub (IssueLabelResource s)
 issueLabelResource =
     TF.newResource "github_issue_label" $
         IssueLabelResource {
@@ -376,17 +376,17 @@ instance P.HasUsername (MembershipResource s) (TF.Attr s P.Text) where
         lens (_username :: MembershipResource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: MembershipResource s)
 
-instance P.HasComputedRole (MembershipResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRole (MembershipResource s) (TF.Attr s P.Text) where
     computedRole =
         (_role :: MembershipResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUsername (MembershipResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUsername (MembershipResource s) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: MembershipResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-membershipResource :: TF.Schema TF.Resource P.GitHub (MembershipResource s)
+membershipResource :: TF.Resource P.GitHub (MembershipResource s)
 membershipResource =
     TF.newResource "github_membership" $
         MembershipResource {
@@ -438,30 +438,30 @@ instance P.HasName (OrganizationWebhookResource s) (TF.Attr s P.Text) where
         lens (_name :: OrganizationWebhookResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: OrganizationWebhookResource s)
 
-instance P.HasComputedActive (OrganizationWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedActive (OrganizationWebhookResource s) (TF.Attr s P.Text) where
     computedActive =
         (_active :: OrganizationWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedConfiguration (OrganizationWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedConfiguration (OrganizationWebhookResource s) (TF.Attr s P.Text) where
     computedConfiguration =
         (_configuration :: OrganizationWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEvents (OrganizationWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEvents (OrganizationWebhookResource s) (TF.Attr s P.Text) where
     computedEvents =
         (_events :: OrganizationWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (OrganizationWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (OrganizationWebhookResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: OrganizationWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUrl (OrganizationWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUrl (OrganizationWebhookResource s) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
-organizationWebhookResource :: TF.Schema TF.Resource P.GitHub (OrganizationWebhookResource s)
+organizationWebhookResource :: TF.Resource P.GitHub (OrganizationWebhookResource s)
 organizationWebhookResource =
     TF.newResource "github_organization_webhook" $
         OrganizationWebhookResource {
@@ -514,22 +514,22 @@ instance P.HasUsername (RepositoryCollaboratorResource s) (TF.Attr s P.Text) whe
         lens (_username :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: RepositoryCollaboratorResource s)
 
-instance P.HasComputedPermission (RepositoryCollaboratorResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPermission (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
     computedPermission =
         (_permission :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRepository (RepositoryCollaboratorResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRepository (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
     computedRepository =
         (_repository :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUsername (RepositoryCollaboratorResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUsername (RepositoryCollaboratorResource s) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: RepositoryCollaboratorResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-repositoryCollaboratorResource :: TF.Schema TF.Resource P.GitHub (RepositoryCollaboratorResource s)
+repositoryCollaboratorResource :: TF.Resource P.GitHub (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource =
     TF.newResource "github_repository_collaborator" $
         RepositoryCollaboratorResource {
@@ -585,27 +585,27 @@ instance P.HasTitle (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
         lens (_title :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _title = a } :: RepositoryDeployKeyResource s)
 
-instance P.HasComputedKey (RepositoryDeployKeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedKey (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
     computedKey =
         (_key :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedReadOnly (RepositoryDeployKeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedReadOnly (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
     computedReadOnly =
         (_read_only :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRepository (RepositoryDeployKeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRepository (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
     computedRepository =
         (_repository :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTitle (RepositoryDeployKeyResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTitle (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
     computedTitle =
         (_title :: RepositoryDeployKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-repositoryDeployKeyResource :: TF.Schema TF.Resource P.GitHub (RepositoryDeployKeyResource s)
+repositoryDeployKeyResource :: TF.Resource P.GitHub (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource =
     TF.newResource "github_repository_deploy_key" $
         RepositoryDeployKeyResource {
@@ -740,92 +740,92 @@ instance P.HasPrivate (RepositoryResource s) (TF.Attr s P.Text) where
         lens (_private :: RepositoryResource s -> TF.Attr s P.Text)
              (\s a -> s { _private = a } :: RepositoryResource s)
 
-instance P.HasComputedAllowMergeCommit (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAllowMergeCommit (RepositoryResource s) (TF.Attr s P.Text) where
     computedAllowMergeCommit =
         (_allow_merge_commit :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAllowRebaseMerge (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAllowRebaseMerge (RepositoryResource s) (TF.Attr s P.Text) where
     computedAllowRebaseMerge =
         (_allow_rebase_merge :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAllowSquashMerge (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAllowSquashMerge (RepositoryResource s) (TF.Attr s P.Text) where
     computedAllowSquashMerge =
         (_allow_squash_merge :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAutoInit (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAutoInit (RepositoryResource s) (TF.Attr s P.Text) where
     computedAutoInit =
         (_auto_init :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDefaultBranch (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDefaultBranch (RepositoryResource s) (TF.Attr s P.Text) where
     computedDefaultBranch =
         (_default_branch :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedDescription (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (RepositoryResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFullName (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFullName (RepositoryResource s) (TF.Attr s P.Text) where
     computedFullName x = TF.compute (TF.refKey x) "full_name"
 
-instance P.HasComputedGitCloneUrl (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGitCloneUrl (RepositoryResource s) (TF.Attr s P.Text) where
     computedGitCloneUrl x = TF.compute (TF.refKey x) "git_clone_url"
 
-instance P.HasComputedGitignoreTemplate (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGitignoreTemplate (RepositoryResource s) (TF.Attr s P.Text) where
     computedGitignoreTemplate =
         (_gitignore_template :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHasDownloads (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHasDownloads (RepositoryResource s) (TF.Attr s P.Text) where
     computedHasDownloads =
         (_has_downloads :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHasIssues (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHasIssues (RepositoryResource s) (TF.Attr s P.Text) where
     computedHasIssues =
         (_has_issues :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHasWiki (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHasWiki (RepositoryResource s) (TF.Attr s P.Text) where
     computedHasWiki =
         (_has_wiki :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHomepageUrl (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHomepageUrl (RepositoryResource s) (TF.Attr s P.Text) where
     computedHomepageUrl =
         (_homepage_url :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHttpCloneUrl (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHttpCloneUrl (RepositoryResource s) (TF.Attr s P.Text) where
     computedHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
 
-instance P.HasComputedLicenseTemplate (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLicenseTemplate (RepositoryResource s) (TF.Attr s P.Text) where
     computedLicenseTemplate =
         (_license_template :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RepositoryResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrivate (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrivate (RepositoryResource s) (TF.Attr s P.Text) where
     computedPrivate =
         (_private :: RepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSshCloneUrl (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSshCloneUrl (RepositoryResource s) (TF.Attr s P.Text) where
     computedSshCloneUrl x = TF.compute (TF.refKey x) "ssh_clone_url"
 
-instance P.HasComputedSvnUrl (RepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSvnUrl (RepositoryResource s) (TF.Attr s P.Text) where
     computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
 
-repositoryResource :: TF.Schema TF.Resource P.GitHub (RepositoryResource s)
+repositoryResource :: TF.Resource P.GitHub (RepositoryResource s)
 repositoryResource =
     TF.newResource "github_repository" $
         RepositoryResource {
@@ -898,35 +898,35 @@ instance P.HasRepository (RepositoryWebhookResource s) (TF.Attr s P.Text) where
         lens (_repository :: RepositoryWebhookResource s -> TF.Attr s P.Text)
              (\s a -> s { _repository = a } :: RepositoryWebhookResource s)
 
-instance P.HasComputedActive (RepositoryWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedActive (RepositoryWebhookResource s) (TF.Attr s P.Text) where
     computedActive =
         (_active :: RepositoryWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedConfiguration (RepositoryWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedConfiguration (RepositoryWebhookResource s) (TF.Attr s P.Text) where
     computedConfiguration =
         (_configuration :: RepositoryWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEvents (RepositoryWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEvents (RepositoryWebhookResource s) (TF.Attr s P.Text) where
     computedEvents =
         (_events :: RepositoryWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (RepositoryWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RepositoryWebhookResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: RepositoryWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRepository (RepositoryWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRepository (RepositoryWebhookResource s) (TF.Attr s P.Text) where
     computedRepository =
         (_repository :: RepositoryWebhookResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUrl (RepositoryWebhookResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUrl (RepositoryWebhookResource s) (TF.Attr s P.Text) where
     computedUrl x = TF.compute (TF.refKey x) "url"
 
-repositoryWebhookResource :: TF.Schema TF.Resource P.GitHub (RepositoryWebhookResource s)
+repositoryWebhookResource :: TF.Resource P.GitHub (RepositoryWebhookResource s)
 repositoryWebhookResource =
     TF.newResource "github_repository_webhook" $
         RepositoryWebhookResource {
@@ -976,22 +976,22 @@ instance P.HasUsername (TeamMembershipResource s) (TF.Attr s P.Text) where
         lens (_username :: TeamMembershipResource s -> TF.Attr s P.Text)
              (\s a -> s { _username = a } :: TeamMembershipResource s)
 
-instance P.HasComputedRole (TeamMembershipResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRole (TeamMembershipResource s) (TF.Attr s P.Text) where
     computedRole =
         (_role :: TeamMembershipResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTeamId (TeamMembershipResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTeamId (TeamMembershipResource s) (TF.Attr s P.Text) where
     computedTeamId =
         (_team_id :: TeamMembershipResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUsername (TeamMembershipResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUsername (TeamMembershipResource s) (TF.Attr s P.Text) where
     computedUsername =
         (_username :: TeamMembershipResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-teamMembershipResource :: TF.Schema TF.Resource P.GitHub (TeamMembershipResource s)
+teamMembershipResource :: TF.Resource P.GitHub (TeamMembershipResource s)
 teamMembershipResource =
     TF.newResource "github_team_membership" $
         TeamMembershipResource {
@@ -1039,22 +1039,22 @@ instance P.HasTeamId (TeamRepositoryResource s) (TF.Attr s P.Text) where
         lens (_team_id :: TeamRepositoryResource s -> TF.Attr s P.Text)
              (\s a -> s { _team_id = a } :: TeamRepositoryResource s)
 
-instance P.HasComputedPermission (TeamRepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPermission (TeamRepositoryResource s) (TF.Attr s P.Text) where
     computedPermission =
         (_permission :: TeamRepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRepository (TeamRepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRepository (TeamRepositoryResource s) (TF.Attr s P.Text) where
     computedRepository =
         (_repository :: TeamRepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTeamId (TeamRepositoryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTeamId (TeamRepositoryResource s) (TF.Attr s P.Text) where
     computedTeamId =
         (_team_id :: TeamRepositoryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-teamRepositoryResource :: TF.Schema TF.Resource P.GitHub (TeamRepositoryResource s)
+teamRepositoryResource :: TF.Resource P.GitHub (TeamRepositoryResource s)
 teamRepositoryResource =
     TF.newResource "github_team_repository" $
         TeamRepositoryResource {
@@ -1108,30 +1108,30 @@ instance P.HasPrivacy (TeamResource s) (TF.Attr s P.Text) where
         lens (_privacy :: TeamResource s -> TF.Attr s P.Text)
              (\s a -> s { _privacy = a } :: TeamResource s)
 
-instance P.HasComputedDescription (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (TeamResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (TeamResource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLdapDn (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLdapDn (TeamResource s) (TF.Attr s P.Text) where
     computedLdapDn =
         (_ldap_dn :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (TeamResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrivacy (TeamResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrivacy (TeamResource s) (TF.Attr s P.Text) where
     computedPrivacy =
         (_privacy :: TeamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-teamResource :: TF.Schema TF.Resource P.GitHub (TeamResource s)
+teamResource :: TF.Resource P.GitHub (TeamResource s)
 teamResource =
     TF.newResource "github_team" $
         TeamResource {

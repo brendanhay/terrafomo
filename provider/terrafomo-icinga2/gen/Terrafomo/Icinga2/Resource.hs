@@ -128,27 +128,27 @@ instance P.HasTemplates (CheckcommandResource s) (TF.Attr s P.Text) where
         lens (_templates :: CheckcommandResource s -> TF.Attr s P.Text)
              (\s a -> s { _templates = a } :: CheckcommandResource s)
 
-instance P.HasComputedArguments (CheckcommandResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedArguments (CheckcommandResource s) (TF.Attr s P.Text) where
     computedArguments =
         (_arguments :: CheckcommandResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCommand (CheckcommandResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCommand (CheckcommandResource s) (TF.Attr s P.Text) where
     computedCommand =
         (_command :: CheckcommandResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (CheckcommandResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (CheckcommandResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: CheckcommandResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTemplates (CheckcommandResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTemplates (CheckcommandResource s) (TF.Attr s P.Text) where
     computedTemplates =
         (_templates :: CheckcommandResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-checkcommandResource :: TF.Schema TF.Resource P.Icinga2 (CheckcommandResource s)
+checkcommandResource :: TF.Resource P.Icinga2 (CheckcommandResource s)
 checkcommandResource =
     TF.newResource "icinga2_checkcommand" $
         CheckcommandResource {
@@ -210,32 +210,32 @@ instance P.HasVars (HostResource s) (TF.Attr s P.Text) where
         lens (_vars :: HostResource s -> TF.Attr s P.Text)
              (\s a -> s { _vars = a } :: HostResource s)
 
-instance P.HasComputedAddress (HostResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAddress (HostResource s) (TF.Attr s P.Text) where
     computedAddress =
         (_address :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCheckCommand (HostResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCheckCommand (HostResource s) (TF.Attr s P.Text) where
     computedCheckCommand =
         (_check_command :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostname (HostResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHostname (HostResource s) (TF.Attr s P.Text) where
     computedHostname =
         (_hostname :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTemplates (HostResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTemplates (HostResource s) (TF.Attr s P.Text) where
     computedTemplates =
         (_templates :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVars (HostResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVars (HostResource s) (TF.Attr s P.Text) where
     computedVars =
         (_vars :: HostResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-hostResource :: TF.Schema TF.Resource P.Icinga2 (HostResource s)
+hostResource :: TF.Resource P.Icinga2 (HostResource s)
 hostResource =
     TF.newResource "icinga2_host" $
         HostResource {
@@ -274,17 +274,17 @@ instance P.HasName (HostgroupResource s) (TF.Attr s P.Text) where
         lens (_name :: HostgroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: HostgroupResource s)
 
-instance P.HasComputedDisplayName (HostgroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDisplayName (HostgroupResource s) (TF.Attr s P.Text) where
     computedDisplayName =
         (_display_name :: HostgroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (HostgroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (HostgroupResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: HostgroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-hostgroupResource :: TF.Schema TF.Resource P.Icinga2 (HostgroupResource s)
+hostgroupResource :: TF.Resource P.Icinga2 (HostgroupResource s)
 hostgroupResource =
     TF.newResource "icinga2_hostgroup" $
         HostgroupResource {
@@ -328,22 +328,22 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         lens (_name :: ServiceResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasComputedCheckCommand (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCheckCommand (ServiceResource s) (TF.Attr s P.Text) where
     computedCheckCommand =
         (_check_command :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHostname (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHostname (ServiceResource s) (TF.Attr s P.Text) where
     computedHostname =
         (_hostname :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ServiceResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ServiceResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ServiceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-serviceResource :: TF.Schema TF.Resource P.Icinga2 (ServiceResource s)
+serviceResource :: TF.Resource P.Icinga2 (ServiceResource s)
 serviceResource =
     TF.newResource "icinga2_service" $
         ServiceResource {

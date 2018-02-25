@@ -70,10 +70,10 @@ data IpRangesDataSource s = IpRangesDataSource {
 instance TF.ToHCL (IpRangesDataSource s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedCidrBlocks (IpRangesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCidrBlocks (IpRangesDataSource s) (TF.Attr s P.Text) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
-ipRangesDataSource :: TF.Schema TF.DataSource P.Fastly (IpRangesDataSource s)
+ipRangesDataSource :: TF.DataSource P.Fastly (IpRangesDataSource s)
 ipRangesDataSource =
     TF.newDataSource "fastly_ip_ranges" $
         IpRangesDataSource {

@@ -97,44 +97,44 @@ instance P.HasTemplateFilter (TemplateDataSource s) (TF.Attr s P.Text) where
         lens (_template_filter :: TemplateDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _template_filter = a } :: TemplateDataSource s)
 
-instance P.HasComputedAccount (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAccount (TemplateDataSource s) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "account"
 
-instance P.HasComputedCreated (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCreated (TemplateDataSource s) (TF.Attr s P.Text) where
     computedCreated x = TF.compute (TF.refKey x) "created"
 
-instance P.HasComputedDisplayText (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDisplayText (TemplateDataSource s) (TF.Attr s P.Text) where
     computedDisplayText x = TF.compute (TF.refKey x) "display_text"
 
-instance P.HasComputedFilter (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFilter (TemplateDataSource s) (TF.Attr s P.Text) where
     computedFilter =
         (_filter :: TemplateDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedFormat (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFormat (TemplateDataSource s) (TF.Attr s P.Text) where
     computedFormat x = TF.compute (TF.refKey x) "format"
 
-instance P.HasComputedHypervisor (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHypervisor (TemplateDataSource s) (TF.Attr s P.Text) where
     computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
-instance P.HasComputedId (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (TemplateDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (TemplateDataSource s) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance P.HasComputedSize (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSize (TemplateDataSource s) (TF.Attr s P.Text) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance P.HasComputedTags (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (TemplateDataSource s) (TF.Attr s P.Text) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance P.HasComputedTemplateFilter (TemplateDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTemplateFilter (TemplateDataSource s) (TF.Attr s P.Text) where
     computedTemplateFilter =
         (_template_filter :: TemplateDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-templateDataSource :: TF.Schema TF.DataSource P.CloudStack (TemplateDataSource s)
+templateDataSource :: TF.DataSource P.CloudStack (TemplateDataSource s)
 templateDataSource =
     TF.newDataSource "cloudstack_template" $
         TemplateDataSource {

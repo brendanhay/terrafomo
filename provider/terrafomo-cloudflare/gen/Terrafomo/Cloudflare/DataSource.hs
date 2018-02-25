@@ -71,16 +71,16 @@ data IpRangesDataSource s = IpRangesDataSource {
 instance TF.ToHCL (IpRangesDataSource s) where
     toHCL _ = TF.empty
 
-instance P.HasComputedCidrBlocks (IpRangesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCidrBlocks (IpRangesDataSource s) (TF.Attr s P.Text) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
-instance P.HasComputedIpv4CidrBlocks (IpRangesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpv4CidrBlocks (IpRangesDataSource s) (TF.Attr s P.Text) where
     computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
 
-instance P.HasComputedIpv6CidrBlocks (IpRangesDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIpv6CidrBlocks (IpRangesDataSource s) (TF.Attr s P.Text) where
     computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
 
-ipRangesDataSource :: TF.Schema TF.DataSource P.Cloudflare (IpRangesDataSource s)
+ipRangesDataSource :: TF.DataSource P.Cloudflare (IpRangesDataSource s)
 ipRangesDataSource =
     TF.newDataSource "cloudflare_ip_ranges" $
         IpRangesDataSource {

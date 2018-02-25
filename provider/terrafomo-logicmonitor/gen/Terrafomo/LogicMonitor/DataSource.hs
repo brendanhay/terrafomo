@@ -111,27 +111,27 @@ instance P.HasSize (CollectorsDataSource s) (TF.Attr s P.Text) where
         lens (_size :: CollectorsDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: CollectorsDataSource s)
 
-instance P.HasComputedFilters (CollectorsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFilters (CollectorsDataSource s) (TF.Attr s P.Text) where
     computedFilters =
         (_filters :: CollectorsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMostRecent (CollectorsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMostRecent (CollectorsDataSource s) (TF.Attr s P.Text) where
     computedMostRecent =
         (_most_recent :: CollectorsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOffset (CollectorsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOffset (CollectorsDataSource s) (TF.Attr s P.Text) where
     computedOffset =
         (_offset :: CollectorsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (CollectorsDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSize (CollectorsDataSource s) (TF.Attr s P.Text) where
     computedSize =
         (_size :: CollectorsDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-collectorsDataSource :: TF.Schema TF.DataSource P.LogicMonitor (CollectorsDataSource s)
+collectorsDataSource :: TF.DataSource P.LogicMonitor (CollectorsDataSource s)
 collectorsDataSource =
     TF.newDataSource "logicmonitor_collectors" $
         CollectorsDataSource {
@@ -176,22 +176,22 @@ instance P.HasSize (DeviceGroupDataSource s) (TF.Attr s P.Text) where
         lens (_size :: DeviceGroupDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _size = a } :: DeviceGroupDataSource s)
 
-instance P.HasComputedFilters (DeviceGroupDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFilters (DeviceGroupDataSource s) (TF.Attr s P.Text) where
     computedFilters =
         (_filters :: DeviceGroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOffset (DeviceGroupDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOffset (DeviceGroupDataSource s) (TF.Attr s P.Text) where
     computedOffset =
         (_offset :: DeviceGroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSize (DeviceGroupDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSize (DeviceGroupDataSource s) (TF.Attr s P.Text) where
     computedSize =
         (_size :: DeviceGroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-deviceGroupDataSource :: TF.Schema TF.DataSource P.LogicMonitor (DeviceGroupDataSource s)
+deviceGroupDataSource :: TF.DataSource P.LogicMonitor (DeviceGroupDataSource s)
 deviceGroupDataSource =
     TF.newDataSource "logicmonitor_device_group" $
         DeviceGroupDataSource {

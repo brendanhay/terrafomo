@@ -68,23 +68,23 @@ class HasWildcard a b | a -> b where
 instance HasWildcard a b => HasWildcard (TF.Schema l p a) b where
     wildcard = TF.configuration . wildcard
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedReceivingRecords a s b | a -> s b where
+class HasComputedReceivingRecords a b | a -> b where
     computedReceivingRecords :: TF.Ref s a -> b
 
-class HasComputedSendingRecords a s b | a -> s b where
+class HasComputedSendingRecords a b | a -> b where
     computedSendingRecords :: TF.Ref s a -> b
 
-class HasComputedSmtpLogin a s b | a -> s b where
+class HasComputedSmtpLogin a b | a -> b where
     computedSmtpLogin :: TF.Ref s a -> b
 
-class HasComputedSmtpPassword a s b | a -> s b where
+class HasComputedSmtpPassword a b | a -> b where
     computedSmtpPassword :: TF.Ref s a -> b
 
-class HasComputedSpamAction a s b | a -> s b where
+class HasComputedSpamAction a b | a -> b where
     computedSpamAction :: TF.Ref s a -> b
 
-class HasComputedWildcard a s b | a -> s b where
+class HasComputedWildcard a b | a -> b where
     computedWildcard :: TF.Ref s a -> b

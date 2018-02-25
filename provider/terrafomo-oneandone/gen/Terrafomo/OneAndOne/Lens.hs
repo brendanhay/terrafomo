@@ -329,113 +329,113 @@ class HasVcores a b | a -> b where
 instance HasVcores a b => HasVcores (TF.Schema l p a) b where
     vcores = TF.configuration . vcores
 
-class HasComputed*diskSize a s b | a -> s b where
+class HasComputed*diskSize a b | a -> b where
     computed*diskSize :: TF.Ref s a -> b
 
-class HasComputed*isMain a s b | a -> s b where
+class HasComputed*isMain a b | a -> b where
     computed*isMain :: TF.Ref s a -> b
 
-class HasComputedAgent a s b | a -> s b where
+class HasComputedAgent a b | a -> b where
     computedAgent :: TF.Ref s a -> b
 
-class HasComputedCoresPerProcessor a s b | a -> s b where
+class HasComputedCoresPerProcessor a b | a -> b where
     computedCoresPerProcessor :: TF.Ref s a -> b
 
-class HasComputedDatacenter a s b | a -> s b where
+class HasComputedDatacenter a b | a -> b where
     computedDatacenter :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedDownloadPath a s b | a -> s b where
+class HasComputedDownloadPath a b | a -> b where
     computedDownloadPath :: TF.Ref s a -> b
 
-class HasComputedEmail a s b | a -> s b where
+class HasComputedEmail a b | a -> b where
     computedEmail :: TF.Ref s a -> b
 
-class HasComputedFileName a s b | a -> s b where
+class HasComputedFileName a b | a -> b where
     computedFileName :: TF.Ref s a -> b
 
-class HasComputedFirewallPolicyId a s b | a -> s b where
+class HasComputedFirewallPolicyId a b | a -> b where
     computedFirewallPolicyId :: TF.Ref s a -> b
 
-class HasComputedFixedInstanceSize a s b | a -> s b where
+class HasComputedFixedInstanceSize a b | a -> b where
     computedFixedInstanceSize :: TF.Ref s a -> b
 
-class HasComputedHdds a s b | a -> s b where
+class HasComputedHdds a b | a -> b where
     computedHdds :: TF.Ref s a -> b
 
-class HasComputedHealthCheckInterval a s b | a -> s b where
+class HasComputedHealthCheckInterval a b | a -> b where
     computedHealthCheckInterval :: TF.Ref s a -> b
 
-class HasComputedHealthCheckPath a s b | a -> s b where
+class HasComputedHealthCheckPath a b | a -> b where
     computedHealthCheckPath :: TF.Ref s a -> b
 
-class HasComputedHealthCheckPathParser a s b | a -> s b where
+class HasComputedHealthCheckPathParser a b | a -> b where
     computedHealthCheckPathParser :: TF.Ref s a -> b
 
-class HasComputedHealthCheckTest a s b | a -> s b where
+class HasComputedHealthCheckTest a b | a -> b where
     computedHealthCheckTest :: TF.Ref s a -> b
 
-class HasComputedImage a s b | a -> s b where
+class HasComputedImage a b | a -> b where
     computedImage :: TF.Ref s a -> b
 
-class HasComputedIp a s b | a -> s b where
+class HasComputedIp a b | a -> b where
     computedIp :: TF.Ref s a -> b
 
-class HasComputedIpAddress a s b | a -> s b where
+class HasComputedIpAddress a b | a -> b where
     computedIpAddress :: TF.Ref s a -> b
 
-class HasComputedIpType a s b | a -> s b where
+class HasComputedIpType a b | a -> b where
     computedIpType :: TF.Ref s a -> b
 
-class HasComputedLoadbalancerId a s b | a -> s b where
+class HasComputedLoadbalancerId a b | a -> b where
     computedLoadbalancerId :: TF.Ref s a -> b
 
-class HasComputedMethod a s b | a -> s b where
+class HasComputedMethod a b | a -> b where
     computedMethod :: TF.Ref s a -> b
 
-class HasComputedMonitoringPolicyId a s b | a -> s b where
+class HasComputedMonitoringPolicyId a b | a -> b where
     computedMonitoringPolicyId :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNetworkAddress a s b | a -> s b where
+class HasComputedNetworkAddress a b | a -> b where
     computedNetworkAddress :: TF.Ref s a -> b
 
-class HasComputedPassword a s b | a -> s b where
+class HasComputedPassword a b | a -> b where
     computedPassword :: TF.Ref s a -> b
 
-class HasComputedPersistence a s b | a -> s b where
+class HasComputedPersistence a b | a -> b where
     computedPersistence :: TF.Ref s a -> b
 
-class HasComputedPersistenceTime a s b | a -> s b where
+class HasComputedPersistenceTime a b | a -> b where
     computedPersistenceTime :: TF.Ref s a -> b
 
-class HasComputedRam a s b | a -> s b where
+class HasComputedRam a b | a -> b where
     computedRam :: TF.Ref s a -> b
 
-class HasComputedReverseDns a s b | a -> s b where
+class HasComputedReverseDns a b | a -> b where
     computedReverseDns :: TF.Ref s a -> b
 
-class HasComputedServerIds a s b | a -> s b where
+class HasComputedServerIds a b | a -> b where
     computedServerIds :: TF.Ref s a -> b
 
-class HasComputedSize a s b | a -> s b where
+class HasComputedSize a b | a -> b where
     computedSize :: TF.Ref s a -> b
 
-class HasComputedSshKeyPath a s b | a -> s b where
+class HasComputedSshKeyPath a b | a -> b where
     computedSshKeyPath :: TF.Ref s a -> b
 
-class HasComputedSshKeyPublic a s b | a -> s b where
+class HasComputedSshKeyPublic a b | a -> b where
     computedSshKeyPublic :: TF.Ref s a -> b
 
-class HasComputedStorageServers a s b | a -> s b where
+class HasComputedStorageServers a b | a -> b where
     computedStorageServers :: TF.Ref s a -> b
 
-class HasComputedSubnetMask a s b | a -> s b where
+class HasComputedSubnetMask a b | a -> b where
     computedSubnetMask :: TF.Ref s a -> b
 
-class HasComputedVcores a s b | a -> s b where
+class HasComputedVcores a b | a -> b where
     computedVcores :: TF.Ref s a -> b

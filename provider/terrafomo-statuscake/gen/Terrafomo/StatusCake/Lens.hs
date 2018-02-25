@@ -114,35 +114,35 @@ class HasWebsiteUrl a b | a -> b where
 instance HasWebsiteUrl a b => HasWebsiteUrl (TF.Schema l p a) b where
     websiteUrl = TF.configuration . websiteUrl
 
-class HasComputedCheckRate a s b | a -> s b where
+class HasComputedCheckRate a b | a -> b where
     computedCheckRate :: TF.Ref s a -> b
 
-class HasComputedConfirmations a s b | a -> s b where
+class HasComputedConfirmations a b | a -> b where
     computedConfirmations :: TF.Ref s a -> b
 
-class HasComputedContactId a s b | a -> s b where
+class HasComputedContactId a b | a -> b where
     computedContactId :: TF.Ref s a -> b
 
-class HasComputedPaused a s b | a -> s b where
+class HasComputedPaused a b | a -> b where
     computedPaused :: TF.Ref s a -> b
 
-class HasComputedPort a s b | a -> s b where
+class HasComputedPort a b | a -> b where
     computedPort :: TF.Ref s a -> b
 
-class HasComputedTestId a s b | a -> s b where
+class HasComputedTestId a b | a -> b where
     computedTestId :: TF.Ref s a -> b
 
-class HasComputedTestType a s b | a -> s b where
+class HasComputedTestType a b | a -> b where
     computedTestType :: TF.Ref s a -> b
 
-class HasComputedTimeout a s b | a -> s b where
+class HasComputedTimeout a b | a -> b where
     computedTimeout :: TF.Ref s a -> b
 
-class HasComputedTriggerRate a s b | a -> s b where
+class HasComputedTriggerRate a b | a -> b where
     computedTriggerRate :: TF.Ref s a -> b
 
-class HasComputedWebsiteName a s b | a -> s b where
+class HasComputedWebsiteName a b | a -> b where
     computedWebsiteName :: TF.Ref s a -> b
 
-class HasComputedWebsiteUrl a s b | a -> s b where
+class HasComputedWebsiteUrl a b | a -> b where
     computedWebsiteUrl :: TF.Ref s a -> b

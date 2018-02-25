@@ -290,122 +290,122 @@ class HasVendor a b | a -> b where
 instance HasVendor a b => HasVendor (TF.Schema l p a) b where
     vendor = TF.configuration . vendor
 
-class HasComputedAcknowledgementTimeout a s b | a -> s b where
+class HasComputedAcknowledgementTimeout a b | a -> b where
     computedAcknowledgementTimeout :: TF.Ref s a -> b
 
-class HasComputedAddress a s b | a -> s b where
+class HasComputedAddress a b | a -> b where
     computedAddress :: TF.Ref s a -> b
 
-class HasComputedAlertCreation a s b | a -> s b where
+class HasComputedAlertCreation a b | a -> b where
     computedAlertCreation :: TF.Ref s a -> b
 
-class HasComputedAutoResolveTimeout a s b | a -> s b where
+class HasComputedAutoResolveTimeout a b | a -> b where
     computedAutoResolveTimeout :: TF.Ref s a -> b
 
-class HasComputedAvatarUrl a s b | a -> s b where
+class HasComputedAvatarUrl a b | a -> b where
     computedAvatarUrl :: TF.Ref s a -> b
 
-class HasComputedBlacklisted a s b | a -> s b where
+class HasComputedBlacklisted a b | a -> b where
     computedBlacklisted :: TF.Ref s a -> b
 
-class HasComputedColor a s b | a -> s b where
+class HasComputedColor a b | a -> b where
     computedColor :: TF.Ref s a -> b
 
-class HasComputedCountryCode a s b | a -> s b where
+class HasComputedCountryCode a b | a -> b where
     computedCountryCode :: TF.Ref s a -> b
 
-class HasComputedCreatedAt a s b | a -> s b where
+class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: TF.Ref s a -> b
 
-class HasComputedDescription a s b | a -> s b where
+class HasComputedDescription a b | a -> b where
     computedDescription :: TF.Ref s a -> b
 
-class HasComputedEmail a s b | a -> s b where
+class HasComputedEmail a b | a -> b where
     computedEmail :: TF.Ref s a -> b
 
-class HasComputedEnabled a s b | a -> s b where
+class HasComputedEnabled a b | a -> b where
     computedEnabled :: TF.Ref s a -> b
 
-class HasComputedEndTime a s b | a -> s b where
+class HasComputedEndTime a b | a -> b where
     computedEndTime :: TF.Ref s a -> b
 
-class HasComputedEscalationPolicy a s b | a -> s b where
+class HasComputedEscalationPolicy a b | a -> b where
     computedEscalationPolicy :: TF.Ref s a -> b
 
-class HasComputedHtmlUrl a s b | a -> s b where
+class HasComputedHtmlUrl a b | a -> b where
     computedHtmlUrl :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedIntegrationEmail a s b | a -> s b where
+class HasComputedIntegrationEmail a b | a -> b where
     computedIntegrationEmail :: TF.Ref s a -> b
 
-class HasComputedIntegrationKey a s b | a -> s b where
+class HasComputedIntegrationKey a b | a -> b where
     computedIntegrationKey :: TF.Ref s a -> b
 
-class HasComputedInvitationSent a s b | a -> s b where
+class HasComputedInvitationSent a b | a -> b where
     computedInvitationSent :: TF.Ref s a -> b
 
-class HasComputedJobTitle a s b | a -> s b where
+class HasComputedJobTitle a b | a -> b where
     computedJobTitle :: TF.Ref s a -> b
 
-class HasComputedLabel a s b | a -> s b where
+class HasComputedLabel a b | a -> b where
     computedLabel :: TF.Ref s a -> b
 
-class HasComputedLastIncidentTimestamp a s b | a -> s b where
+class HasComputedLastIncidentTimestamp a b | a -> b where
     computedLastIncidentTimestamp :: TF.Ref s a -> b
 
-class HasComputedLayer a s b | a -> s b where
+class HasComputedLayer a b | a -> b where
     computedLayer :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNumLoops a s b | a -> s b where
+class HasComputedNumLoops a b | a -> b where
     computedNumLoops :: TF.Ref s a -> b
 
-class HasComputedOverflow a s b | a -> s b where
+class HasComputedOverflow a b | a -> b where
     computedOverflow :: TF.Ref s a -> b
 
-class HasComputedRole a s b | a -> s b where
+class HasComputedRole a b | a -> b where
     computedRole :: TF.Ref s a -> b
 
-class HasComputedRule a s b | a -> s b where
+class HasComputedRule a b | a -> b where
     computedRule :: TF.Ref s a -> b
 
-class HasComputedSendShortEmail a s b | a -> s b where
+class HasComputedSendShortEmail a b | a -> b where
     computedSendShortEmail :: TF.Ref s a -> b
 
-class HasComputedService a s b | a -> s b where
+class HasComputedService a b | a -> b where
     computedService :: TF.Ref s a -> b
 
-class HasComputedServices a s b | a -> s b where
+class HasComputedServices a b | a -> b where
     computedServices :: TF.Ref s a -> b
 
-class HasComputedSrc a s b | a -> s b where
+class HasComputedSrc a b | a -> b where
     computedSrc :: TF.Ref s a -> b
 
-class HasComputedStartTime a s b | a -> s b where
+class HasComputedStartTime a b | a -> b where
     computedStartTime :: TF.Ref s a -> b
 
-class HasComputedStatus a s b | a -> s b where
+class HasComputedStatus a b | a -> b where
     computedStatus :: TF.Ref s a -> b
 
-class HasComputedTeamId a s b | a -> s b where
+class HasComputedTeamId a b | a -> b where
     computedTeamId :: TF.Ref s a -> b
 
-class HasComputedTeams a s b | a -> s b where
+class HasComputedTeams a b | a -> b where
     computedTeams :: TF.Ref s a -> b
 
-class HasComputedTimeZone a s b | a -> s b where
+class HasComputedTimeZone a b | a -> b where
     computedTimeZone :: TF.Ref s a -> b
 
-class HasComputedType' a s b | a -> s b where
+class HasComputedType' a b | a -> b where
     computedType' :: TF.Ref s a -> b
 
-class HasComputedUserId a s b | a -> s b where
+class HasComputedUserId a b | a -> b where
     computedUserId :: TF.Ref s a -> b
 
-class HasComputedVendor a s b | a -> s b where
+class HasComputedVendor a b | a -> b where
     computedVendor :: TF.Ref s a -> b

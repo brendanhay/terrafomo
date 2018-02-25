@@ -211,57 +211,57 @@ instance P.HasTemplate (DatabaseResource s) (TF.Attr s P.Text) where
         lens (_template :: DatabaseResource s -> TF.Attr s P.Text)
              (\s a -> s { _template = a } :: DatabaseResource s)
 
-instance P.HasComputedAllowConnections (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAllowConnections (DatabaseResource s) (TF.Attr s P.Text) where
     computedAllowConnections =
         (_allow_connections :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedConnectionLimit (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedConnectionLimit (DatabaseResource s) (TF.Attr s P.Text) where
     computedConnectionLimit =
         (_connection_limit :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEncoding (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEncoding (DatabaseResource s) (TF.Attr s P.Text) where
     computedEncoding =
         (_encoding :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIsTemplate (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIsTemplate (DatabaseResource s) (TF.Attr s P.Text) where
     computedIsTemplate =
         (_is_template :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLcCollate (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLcCollate (DatabaseResource s) (TF.Attr s P.Text) where
     computedLcCollate =
         (_lc_collate :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLcCtype (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLcCtype (DatabaseResource s) (TF.Attr s P.Text) where
     computedLcCtype =
         (_lc_ctype :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (DatabaseResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOwner (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOwner (DatabaseResource s) (TF.Attr s P.Text) where
     computedOwner =
         (_owner :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTablespaceName (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTablespaceName (DatabaseResource s) (TF.Attr s P.Text) where
     computedTablespaceName =
         (_tablespace_name :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTemplate (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTemplate (DatabaseResource s) (TF.Attr s P.Text) where
     computedTemplate =
         (_template :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-databaseResource :: TF.Schema TF.Resource P.PostgreSQL (DatabaseResource s)
+databaseResource :: TF.Resource P.PostgreSQL (DatabaseResource s)
 databaseResource =
     TF.newResource "postgresql_database" $
         DatabaseResource {
@@ -313,22 +313,22 @@ instance P.HasVersion (ExtensionResource s) (TF.Attr s P.Text) where
         lens (_version :: ExtensionResource s -> TF.Attr s P.Text)
              (\s a -> s { _version = a } :: ExtensionResource s)
 
-instance P.HasComputedName (ExtensionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ExtensionResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ExtensionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSchema (ExtensionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSchema (ExtensionResource s) (TF.Attr s P.Text) where
     computedSchema =
         (_schema :: ExtensionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVersion (ExtensionResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVersion (ExtensionResource s) (TF.Attr s P.Text) where
     computedVersion =
         (_version :: ExtensionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-extensionResource :: TF.Schema TF.Resource P.PostgreSQL (ExtensionResource s)
+extensionResource :: TF.Resource P.PostgreSQL (ExtensionResource s)
 extensionResource =
     TF.newResource "postgresql_extension" $
         ExtensionResource {
@@ -471,77 +471,77 @@ instance P.HasValidUntil (RoleResource s) (TF.Attr s P.Text) where
         lens (_valid_until :: RoleResource s -> TF.Attr s P.Text)
              (\s a -> s { _valid_until = a } :: RoleResource s)
 
-instance P.HasComputedBypassRowLevelSecurity (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedBypassRowLevelSecurity (RoleResource s) (TF.Attr s P.Text) where
     computedBypassRowLevelSecurity =
         (_bypass_row_level_security :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedConnectionLimit (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedConnectionLimit (RoleResource s) (TF.Attr s P.Text) where
     computedConnectionLimit =
         (_connection_limit :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCreateDatabase (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCreateDatabase (RoleResource s) (TF.Attr s P.Text) where
     computedCreateDatabase =
         (_create_database :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCreateRole (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCreateRole (RoleResource s) (TF.Attr s P.Text) where
     computedCreateRole =
         (_create_role :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEncryptedPassword (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEncryptedPassword (RoleResource s) (TF.Attr s P.Text) where
     computedEncryptedPassword =
         (_encrypted_password :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedInherit (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedInherit (RoleResource s) (TF.Attr s P.Text) where
     computedInherit =
         (_inherit :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLogin (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLogin (RoleResource s) (TF.Attr s P.Text) where
     computedLogin =
         (_login :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RoleResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPassword (RoleResource s) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedReplication (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedReplication (RoleResource s) (TF.Attr s P.Text) where
     computedReplication =
         (_replication :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSkipDropRole (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSkipDropRole (RoleResource s) (TF.Attr s P.Text) where
     computedSkipDropRole =
         (_skip_drop_role :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSkipReassignOwned (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSkipReassignOwned (RoleResource s) (TF.Attr s P.Text) where
     computedSkipReassignOwned =
         (_skip_reassign_owned :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSuperuser (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSuperuser (RoleResource s) (TF.Attr s P.Text) where
     computedSuperuser =
         (_superuser :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedValidUntil (RoleResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedValidUntil (RoleResource s) (TF.Attr s P.Text) where
     computedValidUntil =
         (_valid_until :: RoleResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-roleResource :: TF.Schema TF.Resource P.PostgreSQL (RoleResource s)
+roleResource :: TF.Resource P.PostgreSQL (RoleResource s)
 roleResource =
     TF.newResource "postgresql_role" $
         RoleResource {
@@ -606,27 +606,27 @@ instance P.HasPolicy (SchemaResource s) (TF.Attr s P.Text) where
         lens (_policy :: SchemaResource s -> TF.Attr s P.Text)
              (\s a -> s { _policy = a } :: SchemaResource s)
 
-instance P.HasComputedIfNotExists (SchemaResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIfNotExists (SchemaResource s) (TF.Attr s P.Text) where
     computedIfNotExists =
         (_if_not_exists :: SchemaResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (SchemaResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (SchemaResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: SchemaResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedOwner (SchemaResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedOwner (SchemaResource s) (TF.Attr s P.Text) where
     computedOwner =
         (_owner :: SchemaResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPolicy (SchemaResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPolicy (SchemaResource s) (TF.Attr s P.Text) where
     computedPolicy =
         (_policy :: SchemaResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-schemaResource :: TF.Schema TF.Resource P.PostgreSQL (SchemaResource s)
+schemaResource :: TF.Resource P.PostgreSQL (SchemaResource s)
 schemaResource =
     TF.newResource "postgresql_schema" $
         SchemaResource {

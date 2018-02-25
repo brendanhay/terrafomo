@@ -537,191 +537,191 @@ class HasVirtType a b | a -> b where
 instance HasVirtType a b => HasVirtType (TF.Schema l p a) b where
     virtType = TF.configuration . virtType
 
-class HasComputedAptComponents a s b | a -> s b where
+class HasComputedAptComponents a b | a -> b where
     computedAptComponents :: TF.Ref s a -> b
 
-class HasComputedAptDists a s b | a -> s b where
+class HasComputedAptDists a b | a -> b where
     computedAptDists :: TF.Ref s a -> b
 
-class HasComputedArch a s b | a -> s b where
+class HasComputedArch a b | a -> b where
     computedArch :: TF.Ref s a -> b
 
-class HasComputedBody a s b | a -> s b where
+class HasComputedBody a b | a -> b where
     computedBody :: TF.Ref s a -> b
 
-class HasComputedBootFiles a s b | a -> s b where
+class HasComputedBootFiles a b | a -> b where
     computedBootFiles :: TF.Ref s a -> b
 
-class HasComputedBreed a s b | a -> s b where
+class HasComputedBreed a b | a -> b where
     computedBreed :: TF.Ref s a -> b
 
-class HasComputedComment a s b | a -> s b where
+class HasComputedComment a b | a -> b where
     computedComment :: TF.Ref s a -> b
 
-class HasComputedCreaterepoFlags a s b | a -> s b where
+class HasComputedCreaterepoFlags a b | a -> b where
     computedCreaterepoFlags :: TF.Ref s a -> b
 
-class HasComputedDistro a s b | a -> s b where
+class HasComputedDistro a b | a -> b where
     computedDistro :: TF.Ref s a -> b
 
-class HasComputedEnableGpxe a s b | a -> s b where
+class HasComputedEnableGpxe a b | a -> b where
     computedEnableGpxe :: TF.Ref s a -> b
 
-class HasComputedEnableMenu a s b | a -> s b where
+class HasComputedEnableMenu a b | a -> b where
     computedEnableMenu :: TF.Ref s a -> b
 
-class HasComputedEnvironment a s b | a -> s b where
+class HasComputedEnvironment a b | a -> b where
     computedEnvironment :: TF.Ref s a -> b
 
-class HasComputedFetchableFiles a s b | a -> s b where
+class HasComputedFetchableFiles a b | a -> b where
     computedFetchableFiles :: TF.Ref s a -> b
 
-class HasComputedGateway a s b | a -> s b where
+class HasComputedGateway a b | a -> b where
     computedGateway :: TF.Ref s a -> b
 
-class HasComputedHostname a s b | a -> s b where
+class HasComputedHostname a b | a -> b where
     computedHostname :: TF.Ref s a -> b
 
-class HasComputedImage a s b | a -> s b where
+class HasComputedImage a b | a -> b where
     computedImage :: TF.Ref s a -> b
 
-class HasComputedInitrd a s b | a -> s b where
+class HasComputedInitrd a b | a -> b where
     computedInitrd :: TF.Ref s a -> b
 
-class HasComputedInterface a s b | a -> s b where
+class HasComputedInterface a b | a -> b where
     computedInterface :: TF.Ref s a -> b
 
-class HasComputedIpv6DefaultDevice a s b | a -> s b where
+class HasComputedIpv6DefaultDevice a b | a -> b where
     computedIpv6DefaultDevice :: TF.Ref s a -> b
 
-class HasComputedKeepUpdated a s b | a -> s b where
+class HasComputedKeepUpdated a b | a -> b where
     computedKeepUpdated :: TF.Ref s a -> b
 
-class HasComputedKernel a s b | a -> s b where
+class HasComputedKernel a b | a -> b where
     computedKernel :: TF.Ref s a -> b
 
-class HasComputedKernelOptions a s b | a -> s b where
+class HasComputedKernelOptions a b | a -> b where
     computedKernelOptions :: TF.Ref s a -> b
 
-class HasComputedKernelOptionsPost a s b | a -> s b where
+class HasComputedKernelOptionsPost a b | a -> b where
     computedKernelOptionsPost :: TF.Ref s a -> b
 
-class HasComputedKickstart a s b | a -> s b where
+class HasComputedKickstart a b | a -> b where
     computedKickstart :: TF.Ref s a -> b
 
-class HasComputedKsMeta a s b | a -> s b where
+class HasComputedKsMeta a b | a -> b where
     computedKsMeta :: TF.Ref s a -> b
 
-class HasComputedLdapEnabled a s b | a -> s b where
+class HasComputedLdapEnabled a b | a -> b where
     computedLdapEnabled :: TF.Ref s a -> b
 
-class HasComputedLdapType a s b | a -> s b where
+class HasComputedLdapType a b | a -> b where
     computedLdapType :: TF.Ref s a -> b
 
-class HasComputedMgmtClasses a s b | a -> s b where
+class HasComputedMgmtClasses a b | a -> b where
     computedMgmtClasses :: TF.Ref s a -> b
 
-class HasComputedMgmtParameters a s b | a -> s b where
+class HasComputedMgmtParameters a b | a -> b where
     computedMgmtParameters :: TF.Ref s a -> b
 
-class HasComputedMirror a s b | a -> s b where
+class HasComputedMirror a b | a -> b where
     computedMirror :: TF.Ref s a -> b
 
-class HasComputedMirrorLocally a s b | a -> s b where
+class HasComputedMirrorLocally a b | a -> b where
     computedMirrorLocally :: TF.Ref s a -> b
 
-class HasComputedMonitEnabled a s b | a -> s b where
+class HasComputedMonitEnabled a b | a -> b where
     computedMonitEnabled :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNameServers a s b | a -> s b where
+class HasComputedNameServers a b | a -> b where
     computedNameServers :: TF.Ref s a -> b
 
-class HasComputedNameServersSearch a s b | a -> s b where
+class HasComputedNameServersSearch a b | a -> b where
     computedNameServersSearch :: TF.Ref s a -> b
 
-class HasComputedNetbootEnabled a s b | a -> s b where
+class HasComputedNetbootEnabled a b | a -> b where
     computedNetbootEnabled :: TF.Ref s a -> b
 
-class HasComputedOsVersion a s b | a -> s b where
+class HasComputedOsVersion a b | a -> b where
     computedOsVersion :: TF.Ref s a -> b
 
-class HasComputedOwners a s b | a -> s b where
+class HasComputedOwners a b | a -> b where
     computedOwners :: TF.Ref s a -> b
 
-class HasComputedParent a s b | a -> s b where
+class HasComputedParent a b | a -> b where
     computedParent :: TF.Ref s a -> b
 
-class HasComputedPowerAddress a s b | a -> s b where
+class HasComputedPowerAddress a b | a -> b where
     computedPowerAddress :: TF.Ref s a -> b
 
-class HasComputedPowerId a s b | a -> s b where
+class HasComputedPowerId a b | a -> b where
     computedPowerId :: TF.Ref s a -> b
 
-class HasComputedPowerPass a s b | a -> s b where
+class HasComputedPowerPass a b | a -> b where
     computedPowerPass :: TF.Ref s a -> b
 
-class HasComputedPowerType a s b | a -> s b where
+class HasComputedPowerType a b | a -> b where
     computedPowerType :: TF.Ref s a -> b
 
-class HasComputedPowerUser a s b | a -> s b where
+class HasComputedPowerUser a b | a -> b where
     computedPowerUser :: TF.Ref s a -> b
 
-class HasComputedProfile a s b | a -> s b where
+class HasComputedProfile a b | a -> b where
     computedProfile :: TF.Ref s a -> b
 
-class HasComputedProxy a s b | a -> s b where
+class HasComputedProxy a b | a -> b where
     computedProxy :: TF.Ref s a -> b
 
-class HasComputedRedhatManagementKey a s b | a -> s b where
+class HasComputedRedhatManagementKey a b | a -> b where
     computedRedhatManagementKey :: TF.Ref s a -> b
 
-class HasComputedRedhatManagementServer a s b | a -> s b where
+class HasComputedRedhatManagementServer a b | a -> b where
     computedRedhatManagementServer :: TF.Ref s a -> b
 
-class HasComputedRepos a s b | a -> s b where
+class HasComputedRepos a b | a -> b where
     computedRepos :: TF.Ref s a -> b
 
-class HasComputedRpmList a s b | a -> s b where
+class HasComputedRpmList a b | a -> b where
     computedRpmList :: TF.Ref s a -> b
 
-class HasComputedServer a s b | a -> s b where
+class HasComputedServer a b | a -> b where
     computedServer :: TF.Ref s a -> b
 
-class HasComputedStatus a s b | a -> s b where
+class HasComputedStatus a b | a -> b where
     computedStatus :: TF.Ref s a -> b
 
-class HasComputedTemplateFiles a s b | a -> s b where
+class HasComputedTemplateFiles a b | a -> b where
     computedTemplateFiles :: TF.Ref s a -> b
 
-class HasComputedTemplateRemoteKickstarts a s b | a -> s b where
+class HasComputedTemplateRemoteKickstarts a b | a -> b where
     computedTemplateRemoteKickstarts :: TF.Ref s a -> b
 
-class HasComputedVirtAutoBoot a s b | a -> s b where
+class HasComputedVirtAutoBoot a b | a -> b where
     computedVirtAutoBoot :: TF.Ref s a -> b
 
-class HasComputedVirtBridge a s b | a -> s b where
+class HasComputedVirtBridge a b | a -> b where
     computedVirtBridge :: TF.Ref s a -> b
 
-class HasComputedVirtCpus a s b | a -> s b where
+class HasComputedVirtCpus a b | a -> b where
     computedVirtCpus :: TF.Ref s a -> b
 
-class HasComputedVirtDiskDriver a s b | a -> s b where
+class HasComputedVirtDiskDriver a b | a -> b where
     computedVirtDiskDriver :: TF.Ref s a -> b
 
-class HasComputedVirtFileSize a s b | a -> s b where
+class HasComputedVirtFileSize a b | a -> b where
     computedVirtFileSize :: TF.Ref s a -> b
 
-class HasComputedVirtPath a s b | a -> s b where
+class HasComputedVirtPath a b | a -> b where
     computedVirtPath :: TF.Ref s a -> b
 
-class HasComputedVirtPxeBoot a s b | a -> s b where
+class HasComputedVirtPxeBoot a b | a -> b where
     computedVirtPxeBoot :: TF.Ref s a -> b
 
-class HasComputedVirtRam a s b | a -> s b where
+class HasComputedVirtRam a b | a -> b where
     computedVirtRam :: TF.Ref s a -> b
 
-class HasComputedVirtType a s b | a -> s b where
+class HasComputedVirtType a b | a -> b where
     computedVirtType :: TF.Ref s a -> b

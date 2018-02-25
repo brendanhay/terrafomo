@@ -1,11 +1,8 @@
-{-# LANGUAGE DataKinds             #-}
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE LambdaCase            #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE RecordWildCards       #-}
-{-# LANGUAGE StandaloneDeriving    #-}
-{-# LANGUAGE TypeFamilies          #-}
 
 -- | Shared type representing datasources and resources.
 --
@@ -51,31 +48,22 @@ instance ToHCL Dependency where
 
 -- Schema Types
 
-data DataSource
-data Resource
-
-type family HasMetadata l a where
-    HasMetadata DataSource a = NoLifecycle
-    HasMetadata Resource   a = Lifecycle a
+type DataSource p a = Schema ()            p a
+type Resource   p a = Schema (Lifecycle a) p a
 
 data Schema l p a = Schema
     { _schemaProvider  :: !(Maybe p)
-    , _schemaLifecycle :: !(HasMetadata l a)
+    , _schemaLifecycle :: !l
     , _schemaDependsOn :: !(Set Dependency)
     , _schemaKeywords  :: !(NonEmpty HCL.Id)
     , _schemaType      :: !Type
     , _schemaConfig    :: !a
-    }
+    } deriving (Show, Eq)
 
-deriving instance (Show p, Show a) => Show (Schema DataSource p a)
-deriving instance (Show p, Show a) => Show (Schema Resource   p a)
-deriving instance (Eq   p, Eq   a) => Eq   (Schema DataSource p a)
-deriving instance (Eq   p, Eq   a) => Eq   (Schema Resource   p a)
-
-instance HasLifecycle (Schema Resource p a) a where
+instance HasLifecycle (Resource p a) a where
     lifecycle = lens _schemaLifecycle (\s a -> s { _schemaLifecycle = a })
 
-instance ToHCL a => ToHCL (Schema DataSource Key a) where
+instance ToHCL a => ToHCL (DataSource Key a) where
     toHCL Schema{..} =
         HCL.object _schemaKeywords $ catMaybes
             [ HCL.assign "provider" <$> _schemaProvider
@@ -85,7 +73,7 @@ instance ToHCL a => ToHCL (Schema DataSource Key a) where
                   else Just (HCL.assign "depends_on" (HCL.list _schemaDependsOn))
              ]
 
-instance ToHCL a => ToHCL (Schema Resource Key a) where
+instance ToHCL a => ToHCL (Resource Key a) where
     toHCL Schema{..} =
         HCL.object _schemaKeywords $ catMaybes
             [ HCL.assign "provider" <$> _schemaProvider
@@ -98,17 +86,17 @@ instance ToHCL a => ToHCL (Schema Resource Key a) where
                   else Just (HCL.assign "depends_on" (HCL.list _schemaDependsOn))
              ]
 
-newDataSource :: Text -> a -> Schema DataSource p a
+newDataSource :: Text -> a -> DataSource p a
 newDataSource name cfg =
     Schema { _schemaProvider  = Nothing
-           , _schemaLifecycle = NoLifecycle
+           , _schemaLifecycle = ()
            , _schemaDependsOn = mempty
            , _schemaKeywords  = pure (HCL.unquoted "data")
            , _schemaType      = Type (Just "data") name
            , _schemaConfig    = cfg
            }
 
-newResource :: Text -> a -> Schema Resource p a
+newResource :: Text -> a -> Resource p a
 newResource name cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = mempty

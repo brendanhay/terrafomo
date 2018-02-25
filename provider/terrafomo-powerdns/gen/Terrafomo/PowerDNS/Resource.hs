@@ -118,32 +118,32 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
         lens (_zone :: RecordResource s -> TF.Attr s P.Text)
              (\s a -> s { _zone = a } :: RecordResource s)
 
-instance P.HasComputedName (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RecordResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRecords (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRecords (RecordResource s) (TF.Attr s P.Text) where
     computedRecords =
         (_records :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTtl (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTtl (RecordResource s) (TF.Attr s P.Text) where
     computedTtl =
         (_ttl :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (RecordResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedZone (RecordResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedZone (RecordResource s) (TF.Attr s P.Text) where
     computedZone =
         (_zone :: RecordResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-recordResource :: TF.Schema TF.Resource P.PowerDNS (RecordResource s)
+recordResource :: TF.Resource P.PowerDNS (RecordResource s)
 recordResource =
     TF.newResource "powerdns_record" $
         RecordResource {

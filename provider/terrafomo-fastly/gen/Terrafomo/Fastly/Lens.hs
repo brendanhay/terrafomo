@@ -196,71 +196,71 @@ class HasVcl a b | a -> b where
 instance HasVcl a b => HasVcl (TF.Schema l p a) b where
     vcl = TF.configuration . vcl
 
-class HasComputedActiveVersion a s b | a -> s b where
+class HasComputedActiveVersion a b | a -> b where
     computedActiveVersion :: TF.Ref s a -> b
 
-class HasComputedBackend a s b | a -> s b where
+class HasComputedBackend a b | a -> b where
     computedBackend :: TF.Ref s a -> b
 
-class HasComputedCacheSetting a s b | a -> s b where
+class HasComputedCacheSetting a b | a -> b where
     computedCacheSetting :: TF.Ref s a -> b
 
-class HasComputedCidrBlocks a s b | a -> s b where
+class HasComputedCidrBlocks a b | a -> b where
     computedCidrBlocks :: TF.Ref s a -> b
 
-class HasComputedCondition a s b | a -> s b where
+class HasComputedCondition a b | a -> b where
     computedCondition :: TF.Ref s a -> b
 
-class HasComputedDefaultHost a s b | a -> s b where
+class HasComputedDefaultHost a b | a -> b where
     computedDefaultHost :: TF.Ref s a -> b
 
-class HasComputedDefaultTtl a s b | a -> s b where
+class HasComputedDefaultTtl a b | a -> b where
     computedDefaultTtl :: TF.Ref s a -> b
 
-class HasComputedDomain a s b | a -> s b where
+class HasComputedDomain a b | a -> b where
     computedDomain :: TF.Ref s a -> b
 
-class HasComputedForceDestroy a s b | a -> s b where
+class HasComputedForceDestroy a b | a -> b where
     computedForceDestroy :: TF.Ref s a -> b
 
-class HasComputedGcslogging a s b | a -> s b where
+class HasComputedGcslogging a b | a -> b where
     computedGcslogging :: TF.Ref s a -> b
 
-class HasComputedGzip a s b | a -> s b where
+class HasComputedGzip a b | a -> b where
     computedGzip :: TF.Ref s a -> b
 
-class HasComputedHeader a s b | a -> s b where
+class HasComputedHeader a b | a -> b where
     computedHeader :: TF.Ref s a -> b
 
-class HasComputedHealthcheck a s b | a -> s b where
+class HasComputedHealthcheck a b | a -> b where
     computedHealthcheck :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedLogentries a s b | a -> s b where
+class HasComputedLogentries a b | a -> b where
     computedLogentries :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedPapertrail a s b | a -> s b where
+class HasComputedPapertrail a b | a -> b where
     computedPapertrail :: TF.Ref s a -> b
 
-class HasComputedRequestSetting a s b | a -> s b where
+class HasComputedRequestSetting a b | a -> b where
     computedRequestSetting :: TF.Ref s a -> b
 
-class HasComputedResponseObject a s b | a -> s b where
+class HasComputedResponseObject a b | a -> b where
     computedResponseObject :: TF.Ref s a -> b
 
-class HasComputedS3logging a s b | a -> s b where
+class HasComputedS3logging a b | a -> b where
     computedS3logging :: TF.Ref s a -> b
 
-class HasComputedSumologic a s b | a -> s b where
+class HasComputedSumologic a b | a -> b where
     computedSumologic :: TF.Ref s a -> b
 
-class HasComputedSyslog a s b | a -> s b where
+class HasComputedSyslog a b | a -> b where
     computedSyslog :: TF.Ref s a -> b
 
-class HasComputedVcl a s b | a -> s b where
+class HasComputedVcl a b | a -> b where
     computedVcl :: TF.Ref s a -> b

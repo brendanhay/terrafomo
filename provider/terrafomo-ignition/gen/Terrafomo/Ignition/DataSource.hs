@@ -281,70 +281,70 @@ instance P.HasUsers (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
         lens (_users :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
              (\s a -> s { _users = a } :: ConfigDataSource s)
 
-instance P.HasComputedAppend (ConfigDataSource s) s (TF.Attr s [P.FileSource s]) where
+instance P.HasComputedAppend (ConfigDataSource s) (TF.Attr s [P.FileSource s]) where
     computedAppend =
         (_append :: ConfigDataSource s -> TF.Attr s [P.FileSource s])
             . TF.refValue
 
-instance P.HasComputedArrays (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedArrays (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedArrays =
         (_arrays :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedDirectories (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedDirectories (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedDirectories =
         (_directories :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedDisks (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedDisks (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedDisks =
         (_disks :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedFiles (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedFiles (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedFiles =
         (_files :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedFilesystems (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedFilesystems (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedFilesystems =
         (_filesystems :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedGroups (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedGroups (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedGroups =
         (_groups :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedLinks (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedLinks (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedLinks =
         (_links :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedNetworkd (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedNetworkd (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedNetworkd =
         (_networkd :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedRendered (ConfigDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRendered (ConfigDataSource s) (TF.Attr s P.Text) where
     computedRendered x = TF.compute (TF.refKey x) "rendered"
 
-instance P.HasComputedReplace (ConfigDataSource s) s (TF.Attr s [P.FileSource s]) where
+instance P.HasComputedReplace (ConfigDataSource s) (TF.Attr s [P.FileSource s]) where
     computedReplace =
         (_replace :: ConfigDataSource s -> TF.Attr s [P.FileSource s])
             . TF.refValue
 
-instance P.HasComputedSystemd (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedSystemd (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedSystemd =
         (_systemd :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance P.HasComputedUsers (ConfigDataSource s) s (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasComputedUsers (ConfigDataSource s) (TF.Attr s [TF.Attr s P.Text]) where
     computedUsers =
         (_users :: ConfigDataSource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-configDataSource :: TF.Schema TF.DataSource P.Ignition (ConfigDataSource s)
+configDataSource :: TF.DataSource P.Ignition (ConfigDataSource s)
 configDataSource =
     TF.newDataSource "ignition_config" $
         ConfigDataSource {
@@ -413,35 +413,35 @@ instance P.HasUid (DirectoryDataSource s) (TF.Attr s P.Text) where
         lens (_uid :: DirectoryDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _uid = a } :: DirectoryDataSource s)
 
-instance P.HasComputedFilesystem (DirectoryDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFilesystem (DirectoryDataSource s) (TF.Attr s P.Text) where
     computedFilesystem =
         (_filesystem :: DirectoryDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGid (DirectoryDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGid (DirectoryDataSource s) (TF.Attr s P.Text) where
     computedGid =
         (_gid :: DirectoryDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DirectoryDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (DirectoryDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMode (DirectoryDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMode (DirectoryDataSource s) (TF.Attr s P.Text) where
     computedMode =
         (_mode :: DirectoryDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPath (DirectoryDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPath (DirectoryDataSource s) (TF.Attr s P.Text) where
     computedPath =
         (_path :: DirectoryDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUid (DirectoryDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUid (DirectoryDataSource s) (TF.Attr s P.Text) where
     computedUid =
         (_uid :: DirectoryDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-directoryDataSource :: TF.Schema TF.DataSource P.Ignition (DirectoryDataSource s)
+directoryDataSource :: TF.DataSource P.Ignition (DirectoryDataSource s)
 directoryDataSource =
     TF.newDataSource "ignition_directory" $
         DirectoryDataSource {
@@ -487,25 +487,25 @@ instance P.HasWipeTable (DiskDataSource s) (TF.Attr s P.Text) where
         lens (_wipe_table :: DiskDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _wipe_table = a } :: DiskDataSource s)
 
-instance P.HasComputedDevice (DiskDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDevice (DiskDataSource s) (TF.Attr s P.Text) where
     computedDevice =
         (_device :: DiskDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (DiskDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (DiskDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedPartition (DiskDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPartition (DiskDataSource s) (TF.Attr s P.Text) where
     computedPartition =
         (_partition :: DiskDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedWipeTable (DiskDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedWipeTable (DiskDataSource s) (TF.Attr s P.Text) where
     computedWipeTable =
         (_wipe_table :: DiskDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-diskDataSource :: TF.Schema TF.DataSource P.Ignition (DiskDataSource s)
+diskDataSource :: TF.DataSource P.Ignition (DiskDataSource s)
 diskDataSource =
     TF.newDataSource "ignition_disk" $
         DiskDataSource {
@@ -581,45 +581,45 @@ instance P.HasUid (FileDataSource s) (TF.Attr s P.Int) where
         lens (_uid :: FileDataSource s -> TF.Attr s P.Int)
              (\s a -> s { _uid = a } :: FileDataSource s)
 
-instance P.HasComputedContent (FileDataSource s) s (TF.Attr s (P.FileContent s)) where
+instance P.HasComputedContent (FileDataSource s) (TF.Attr s (P.FileContent s)) where
     computedContent =
         (_content :: FileDataSource s -> TF.Attr s (P.FileContent s))
             . TF.refValue
 
-instance P.HasComputedFilesystem (FileDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFilesystem (FileDataSource s) (TF.Attr s P.Text) where
     computedFilesystem =
         (_filesystem :: FileDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGid (FileDataSource s) s (TF.Attr s P.Int) where
+instance P.HasComputedGid (FileDataSource s) (TF.Attr s P.Int) where
     computedGid =
         (_gid :: FileDataSource s -> TF.Attr s P.Int)
             . TF.refValue
 
-instance P.HasComputedId (FileDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (FileDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMode (FileDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMode (FileDataSource s) (TF.Attr s P.Text) where
     computedMode =
         (_mode :: FileDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPath (FileDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPath (FileDataSource s) (TF.Attr s P.Text) where
     computedPath =
         (_path :: FileDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSource (FileDataSource s) s (TF.Attr s (P.FileSource s)) where
+instance P.HasComputedSource (FileDataSource s) (TF.Attr s (P.FileSource s)) where
     computedSource =
         (_source :: FileDataSource s -> TF.Attr s (P.FileSource s))
             . TF.refValue
 
-instance P.HasComputedUid (FileDataSource s) s (TF.Attr s P.Int) where
+instance P.HasComputedUid (FileDataSource s) (TF.Attr s P.Int) where
     computedUid =
         (_uid :: FileDataSource s -> TF.Attr s P.Int)
             . TF.refValue
 
-fileDataSource :: TF.Schema TF.DataSource P.Ignition (FileDataSource s)
+fileDataSource :: TF.DataSource P.Ignition (FileDataSource s)
 fileDataSource =
     TF.newDataSource "ignition_file" $
         FileDataSource {
@@ -668,25 +668,25 @@ instance P.HasPath (FilesystemDataSource s) (TF.Attr s P.Text) where
         lens (_path :: FilesystemDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _path = a } :: FilesystemDataSource s)
 
-instance P.HasComputedId (FilesystemDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (FilesystemDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMount (FilesystemDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMount (FilesystemDataSource s) (TF.Attr s P.Text) where
     computedMount =
         (_mount :: FilesystemDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (FilesystemDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (FilesystemDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: FilesystemDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPath (FilesystemDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPath (FilesystemDataSource s) (TF.Attr s P.Text) where
     computedPath =
         (_path :: FilesystemDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-filesystemDataSource :: TF.Schema TF.DataSource P.Ignition (FilesystemDataSource s)
+filesystemDataSource :: TF.DataSource P.Ignition (FilesystemDataSource s)
 filesystemDataSource =
     TF.newDataSource "ignition_filesystem" $
         FilesystemDataSource {
@@ -730,25 +730,25 @@ instance P.HasPasswordHash (GroupDataSource s) (TF.Attr s P.Text) where
         lens (_password_hash :: GroupDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _password_hash = a } :: GroupDataSource s)
 
-instance P.HasComputedGid (GroupDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGid (GroupDataSource s) (TF.Attr s P.Text) where
     computedGid =
         (_gid :: GroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (GroupDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (GroupDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (GroupDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (GroupDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: GroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPasswordHash (GroupDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPasswordHash (GroupDataSource s) (TF.Attr s P.Text) where
     computedPasswordHash =
         (_password_hash :: GroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-groupDataSource :: TF.Schema TF.DataSource P.Ignition (GroupDataSource s)
+groupDataSource :: TF.DataSource P.Ignition (GroupDataSource s)
 groupDataSource =
     TF.newDataSource "ignition_group" $
         GroupDataSource {
@@ -816,40 +816,40 @@ instance P.HasUid (LinkDataSource s) (TF.Attr s P.Text) where
         lens (_uid :: LinkDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _uid = a } :: LinkDataSource s)
 
-instance P.HasComputedFilesystem (LinkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedFilesystem (LinkDataSource s) (TF.Attr s P.Text) where
     computedFilesystem =
         (_filesystem :: LinkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGid (LinkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGid (LinkDataSource s) (TF.Attr s P.Text) where
     computedGid =
         (_gid :: LinkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHard (LinkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHard (LinkDataSource s) (TF.Attr s P.Text) where
     computedHard =
         (_hard :: LinkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (LinkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (LinkDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedPath (LinkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPath (LinkDataSource s) (TF.Attr s P.Text) where
     computedPath =
         (_path :: LinkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTarget (LinkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTarget (LinkDataSource s) (TF.Attr s P.Text) where
     computedTarget =
         (_target :: LinkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUid (LinkDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUid (LinkDataSource s) (TF.Attr s P.Text) where
     computedUid =
         (_uid :: LinkDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-linkDataSource :: TF.Schema TF.DataSource P.Ignition (LinkDataSource s)
+linkDataSource :: TF.DataSource P.Ignition (LinkDataSource s)
 linkDataSource =
     TF.newDataSource "ignition_link" $
         LinkDataSource {
@@ -888,20 +888,20 @@ instance P.HasName (NetworkdUnitDataSource s) (TF.Attr s P.Text) where
         lens (_name :: NetworkdUnitDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: NetworkdUnitDataSource s)
 
-instance P.HasComputedContent (NetworkdUnitDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedContent (NetworkdUnitDataSource s) (TF.Attr s P.Text) where
     computedContent =
         (_content :: NetworkdUnitDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (NetworkdUnitDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (NetworkdUnitDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (NetworkdUnitDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (NetworkdUnitDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: NetworkdUnitDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-networkdUnitDataSource :: TF.Schema TF.DataSource P.Ignition (NetworkdUnitDataSource s)
+networkdUnitDataSource :: TF.DataSource P.Ignition (NetworkdUnitDataSource s)
 networkdUnitDataSource =
     TF.newDataSource "ignition_networkd_unit" $
         NetworkdUnitDataSource {
@@ -952,30 +952,30 @@ instance P.HasSpares (RaidDataSource s) (TF.Attr s P.Text) where
         lens (_spares :: RaidDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _spares = a } :: RaidDataSource s)
 
-instance P.HasComputedDevices (RaidDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDevices (RaidDataSource s) (TF.Attr s P.Text) where
     computedDevices =
         (_devices :: RaidDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (RaidDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (RaidDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedLevel (RaidDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLevel (RaidDataSource s) (TF.Attr s P.Text) where
     computedLevel =
         (_level :: RaidDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (RaidDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (RaidDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: RaidDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSpares (RaidDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSpares (RaidDataSource s) (TF.Attr s P.Text) where
     computedSpares =
         (_spares :: RaidDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-raidDataSource :: TF.Schema TF.DataSource P.Ignition (RaidDataSource s)
+raidDataSource :: TF.DataSource P.Ignition (RaidDataSource s)
 raidDataSource =
     TF.newDataSource "ignition_raid" $
         RaidDataSource {
@@ -1036,35 +1036,35 @@ instance P.HasName (SystemdUnitDataSource s) (TF.Attr s P.Text) where
         lens (_name :: SystemdUnitDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: SystemdUnitDataSource s)
 
-instance P.HasComputedContent (SystemdUnitDataSource s) s (TF.Attr s P.SystemdUnit) where
+instance P.HasComputedContent (SystemdUnitDataSource s) (TF.Attr s P.SystemdUnit) where
     computedContent =
         (_content :: SystemdUnitDataSource s -> TF.Attr s P.SystemdUnit)
             . TF.refValue
 
-instance P.HasComputedDropin (SystemdUnitDataSource s) s (TF.Attr s [P.SystemdUnitDropin s]) where
+instance P.HasComputedDropin (SystemdUnitDataSource s) (TF.Attr s [P.SystemdUnitDropin s]) where
     computedDropin =
         (_dropin :: SystemdUnitDataSource s -> TF.Attr s [P.SystemdUnitDropin s])
             . TF.refValue
 
-instance P.HasComputedEnabled (SystemdUnitDataSource s) s (TF.Attr s P.Bool) where
+instance P.HasComputedEnabled (SystemdUnitDataSource s) (TF.Attr s P.Bool) where
     computedEnabled =
         (_enabled :: SystemdUnitDataSource s -> TF.Attr s P.Bool)
             . TF.refValue
 
-instance P.HasComputedId (SystemdUnitDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (SystemdUnitDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedMask (SystemdUnitDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMask (SystemdUnitDataSource s) (TF.Attr s P.Text) where
     computedMask =
         (_mask :: SystemdUnitDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (SystemdUnitDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (SystemdUnitDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: SystemdUnitDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-systemdUnitDataSource :: TF.Schema TF.DataSource P.Ignition (SystemdUnitDataSource s)
+systemdUnitDataSource :: TF.DataSource P.Ignition (SystemdUnitDataSource s)
 systemdUnitDataSource =
     TF.newDataSource "ignition_systemd_unit" $
         SystemdUnitDataSource {
@@ -1190,75 +1190,75 @@ instance P.HasUid (UserDataSource s) (TF.Attr s P.Text) where
         lens (_uid :: UserDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _uid = a } :: UserDataSource s)
 
-instance P.HasComputedGecos (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGecos (UserDataSource s) (TF.Attr s P.Text) where
     computedGecos =
         (_gecos :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGroups (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGroups (UserDataSource s) (TF.Attr s P.Text) where
     computedGroups =
         (_groups :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHomeDir (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHomeDir (UserDataSource s) (TF.Attr s P.Text) where
     computedHomeDir =
         (_home_dir :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedId (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedId (UserDataSource s) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance P.HasComputedName (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (UserDataSource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNoCreateHome (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNoCreateHome (UserDataSource s) (TF.Attr s P.Text) where
     computedNoCreateHome =
         (_no_create_home :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNoLogInit (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNoLogInit (UserDataSource s) (TF.Attr s P.Text) where
     computedNoLogInit =
         (_no_log_init :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNoUserGroup (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNoUserGroup (UserDataSource s) (TF.Attr s P.Text) where
     computedNoUserGroup =
         (_no_user_group :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPasswordHash (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPasswordHash (UserDataSource s) (TF.Attr s P.Text) where
     computedPasswordHash =
         (_password_hash :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPrimaryGroup (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPrimaryGroup (UserDataSource s) (TF.Attr s P.Text) where
     computedPrimaryGroup =
         (_primary_group :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedShell (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedShell (UserDataSource s) (TF.Attr s P.Text) where
     computedShell =
         (_shell :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSshAuthorizedKeys (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSshAuthorizedKeys (UserDataSource s) (TF.Attr s P.Text) where
     computedSshAuthorizedKeys =
         (_ssh_authorized_keys :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSystem (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSystem (UserDataSource s) (TF.Attr s P.Text) where
     computedSystem =
         (_system :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUid (UserDataSource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUid (UserDataSource s) (TF.Attr s P.Text) where
     computedUid =
         (_uid :: UserDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-userDataSource :: TF.Schema TF.DataSource P.Ignition (UserDataSource s)
+userDataSource :: TF.DataSource P.Ignition (UserDataSource s)
 userDataSource =
     TF.newDataSource "ignition_user" $
         UserDataSource {

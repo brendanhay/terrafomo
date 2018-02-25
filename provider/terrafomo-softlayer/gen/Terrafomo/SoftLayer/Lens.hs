@@ -211,74 +211,74 @@ class HasUserData a b | a -> b where
 instance HasUserData a b => HasUserData (TF.Schema l p a) b where
     userData = TF.configuration . userData
 
-class HasComputedBackendVlanId a s b | a -> s b where
+class HasComputedBackendVlanId a b | a -> b where
     computedBackendVlanId :: TF.Ref s a -> b
 
-class HasComputedBlockDeviceTemplateGroupGid a s b | a -> s b where
+class HasComputedBlockDeviceTemplateGroupGid a b | a -> b where
     computedBlockDeviceTemplateGroupGid :: TF.Ref s a -> b
 
-class HasComputedCpu a s b | a -> s b where
+class HasComputedCpu a b | a -> b where
     computedCpu :: TF.Ref s a -> b
 
-class HasComputedDedicatedAcctHostOnly a s b | a -> s b where
+class HasComputedDedicatedAcctHostOnly a b | a -> b where
     computedDedicatedAcctHostOnly :: TF.Ref s a -> b
 
-class HasComputedDisks a s b | a -> s b where
+class HasComputedDisks a b | a -> b where
     computedDisks :: TF.Ref s a -> b
 
-class HasComputedDomain a s b | a -> s b where
+class HasComputedDomain a b | a -> b where
     computedDomain :: TF.Ref s a -> b
 
-class HasComputedFingerprint a s b | a -> s b where
+class HasComputedFingerprint a b | a -> b where
     computedFingerprint :: TF.Ref s a -> b
 
-class HasComputedFrontendVlanId a s b | a -> s b where
+class HasComputedFrontendVlanId a b | a -> b where
     computedFrontendVlanId :: TF.Ref s a -> b
 
-class HasComputedHourlyBilling a s b | a -> s b where
+class HasComputedHourlyBilling a b | a -> b where
     computedHourlyBilling :: TF.Ref s a -> b
 
-class HasComputedId a s b | a -> s b where
+class HasComputedId a b | a -> b where
     computedId :: TF.Ref s a -> b
 
-class HasComputedImage a s b | a -> s b where
+class HasComputedImage a b | a -> b where
     computedImage :: TF.Ref s a -> b
 
-class HasComputedIpv4Address a s b | a -> s b where
+class HasComputedIpv4Address a b | a -> b where
     computedIpv4Address :: TF.Ref s a -> b
 
-class HasComputedIpv4AddressPrivate a s b | a -> s b where
+class HasComputedIpv4AddressPrivate a b | a -> b where
     computedIpv4AddressPrivate :: TF.Ref s a -> b
 
-class HasComputedLocalDisk a s b | a -> s b where
+class HasComputedLocalDisk a b | a -> b where
     computedLocalDisk :: TF.Ref s a -> b
 
-class HasComputedName a s b | a -> s b where
+class HasComputedName a b | a -> b where
     computedName :: TF.Ref s a -> b
 
-class HasComputedNotes a s b | a -> s b where
+class HasComputedNotes a b | a -> b where
     computedNotes :: TF.Ref s a -> b
 
-class HasComputedPostInstallScriptUri a s b | a -> s b where
+class HasComputedPostInstallScriptUri a b | a -> b where
     computedPostInstallScriptUri :: TF.Ref s a -> b
 
-class HasComputedPrivateNetworkOnly a s b | a -> s b where
+class HasComputedPrivateNetworkOnly a b | a -> b where
     computedPrivateNetworkOnly :: TF.Ref s a -> b
 
-class HasComputedPublicKey a s b | a -> s b where
+class HasComputedPublicKey a b | a -> b where
     computedPublicKey :: TF.Ref s a -> b
 
-class HasComputedPublicNetworkSpeed a s b | a -> s b where
+class HasComputedPublicNetworkSpeed a b | a -> b where
     computedPublicNetworkSpeed :: TF.Ref s a -> b
 
-class HasComputedRam a s b | a -> s b where
+class HasComputedRam a b | a -> b where
     computedRam :: TF.Ref s a -> b
 
-class HasComputedRegion a s b | a -> s b where
+class HasComputedRegion a b | a -> b where
     computedRegion :: TF.Ref s a -> b
 
-class HasComputedSshKeys a s b | a -> s b where
+class HasComputedSshKeys a b | a -> b where
     computedSshKeys :: TF.Ref s a -> b
 
-class HasComputedUserData a s b | a -> s b where
+class HasComputedUserData a b | a -> b where
     computedUserData :: TF.Ref s a -> b

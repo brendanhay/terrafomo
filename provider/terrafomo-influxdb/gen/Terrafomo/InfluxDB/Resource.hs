@@ -113,22 +113,22 @@ instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
         lens (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
              (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
-instance P.HasComputedDatabase (ContinuousQueryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDatabase (ContinuousQueryResource s) (TF.Attr s P.Text) where
     computedDatabase =
         (_database :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ContinuousQueryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ContinuousQueryResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedQuery (ContinuousQueryResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
     computedQuery =
         (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-continuousQueryResource :: TF.Schema TF.Resource P.InfluxDB (ContinuousQueryResource s)
+continuousQueryResource :: TF.Resource P.InfluxDB (ContinuousQueryResource s)
 continuousQueryResource =
     TF.newResource "influxdb_continuous_query" $
         ContinuousQueryResource {
@@ -164,17 +164,17 @@ instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s P.Text) where
         lens (_retention_policies :: DatabaseResource s -> TF.Attr s P.Text)
              (\s a -> s { _retention_policies = a } :: DatabaseResource s)
 
-instance P.HasComputedName (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (DatabaseResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRetentionPolicies (DatabaseResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRetentionPolicies (DatabaseResource s) (TF.Attr s P.Text) where
     computedRetentionPolicies =
         (_retention_policies :: DatabaseResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-databaseResource :: TF.Schema TF.Resource P.InfluxDB (DatabaseResource s)
+databaseResource :: TF.Resource P.InfluxDB (DatabaseResource s)
 databaseResource =
     TF.newResource "influxdb_database" $
         DatabaseResource {
@@ -225,25 +225,25 @@ instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
         lens (_password :: UserResource s -> TF.Attr s P.Text)
              (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasComputedAdmin (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAdmin (UserResource s) (TF.Attr s P.Text) where
     computedAdmin x = TF.compute (TF.refKey x) "admin"
 
-instance P.HasComputedGrant (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGrant (UserResource s) (TF.Attr s P.Text) where
     computedGrant =
         (_grant :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (UserResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPassword (UserResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPassword (UserResource s) (TF.Attr s P.Text) where
     computedPassword =
         (_password :: UserResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-userResource :: TF.Schema TF.Resource P.InfluxDB (UserResource s)
+userResource :: TF.Resource P.InfluxDB (UserResource s)
 userResource =
     TF.newResource "influxdb_user" $
         UserResource {

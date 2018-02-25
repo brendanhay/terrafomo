@@ -356,112 +356,112 @@ instance P.HasTimeout (CheckResource s) (TF.Attr s P.Text) where
         lens (_timeout :: CheckResource s -> TF.Attr s P.Text)
              (\s a -> s { _timeout = a } :: CheckResource s)
 
-instance P.HasComputedActive (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedActive (CheckResource s) (TF.Attr s P.Text) where
     computedActive =
         (_active :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCaql (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCaql (CheckResource s) (TF.Attr s P.Text) where
     computedCaql =
         (_caql :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCloudwatch (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCloudwatch (CheckResource s) (TF.Attr s P.Text) where
     computedCloudwatch =
         (_cloudwatch :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedCollector (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCollector (CheckResource s) (TF.Attr s P.Text) where
     computedCollector =
         (_collector :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedConsul (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedConsul (CheckResource s) (TF.Attr s P.Text) where
     computedConsul =
         (_consul :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHttp (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHttp (CheckResource s) (TF.Attr s P.Text) where
     computedHttp =
         (_http :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHttptrap (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHttptrap (CheckResource s) (TF.Attr s P.Text) where
     computedHttptrap =
         (_httptrap :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIcmpPing (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIcmpPing (CheckResource s) (TF.Attr s P.Text) where
     computedIcmpPing =
         (_icmp_ping :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedJson (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedJson (CheckResource s) (TF.Attr s P.Text) where
     computedJson =
         (_json :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMetric (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetric (CheckResource s) (TF.Attr s P.Text) where
     computedMetric =
         (_metric :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMetricLimit (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetricLimit (CheckResource s) (TF.Attr s P.Text) where
     computedMetricLimit =
         (_metric_limit :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMysql (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMysql (CheckResource s) (TF.Attr s P.Text) where
     computedMysql =
         (_mysql :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (CheckResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotes (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNotes (CheckResource s) (TF.Attr s P.Text) where
     computedNotes =
         (_notes :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPeriod (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPeriod (CheckResource s) (TF.Attr s P.Text) where
     computedPeriod =
         (_period :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPostgresql (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPostgresql (CheckResource s) (TF.Attr s P.Text) where
     computedPostgresql =
         (_postgresql :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedStatsd (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedStatsd (CheckResource s) (TF.Attr s P.Text) where
     computedStatsd =
         (_statsd :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (CheckResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTarget (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTarget (CheckResource s) (TF.Attr s P.Text) where
     computedTarget =
         (_target :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTcp (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTcp (CheckResource s) (TF.Attr s P.Text) where
     computedTcp =
         (_tcp :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTimeout (CheckResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTimeout (CheckResource s) (TF.Attr s P.Text) where
     computedTimeout =
         (_timeout :: CheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-checkResource :: TF.Schema TF.Resource P.Circonus (CheckResource s)
+checkResource :: TF.Resource P.Circonus (CheckResource s)
 checkResource =
     TF.newResource "circonus_check" $
         CheckResource {
@@ -628,87 +628,87 @@ instance P.HasVictorops (ContactGroupResource s) (TF.Attr s P.Text) where
         lens (_victorops :: ContactGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _victorops = a } :: ContactGroupResource s)
 
-instance P.HasComputedAggregationWindow (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAggregationWindow (ContactGroupResource s) (TF.Attr s P.Text) where
     computedAggregationWindow =
         (_aggregation_window :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedAlertOption (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedAlertOption (ContactGroupResource s) (TF.Attr s P.Text) where
     computedAlertOption =
         (_alert_option :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedEmail (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedEmail (ContactGroupResource s) (TF.Attr s P.Text) where
     computedEmail =
         (_email :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedHttp (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedHttp (ContactGroupResource s) (TF.Attr s P.Text) where
     computedHttp =
         (_http :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIrc (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIrc (ContactGroupResource s) (TF.Attr s P.Text) where
     computedIrc =
         (_irc :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLongMessage (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLongMessage (ContactGroupResource s) (TF.Attr s P.Text) where
     computedLongMessage =
         (_long_message :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLongSubject (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLongSubject (ContactGroupResource s) (TF.Attr s P.Text) where
     computedLongSubject =
         (_long_subject :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLongSummary (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLongSummary (ContactGroupResource s) (TF.Attr s P.Text) where
     computedLongSummary =
         (_long_summary :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (ContactGroupResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedPagerDuty (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedPagerDuty (ContactGroupResource s) (TF.Attr s P.Text) where
     computedPagerDuty =
         (_pager_duty :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedShortMessage (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedShortMessage (ContactGroupResource s) (TF.Attr s P.Text) where
     computedShortMessage =
         (_short_message :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedShortSummary (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedShortSummary (ContactGroupResource s) (TF.Attr s P.Text) where
     computedShortSummary =
         (_short_summary :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSlack (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSlack (ContactGroupResource s) (TF.Attr s P.Text) where
     computedSlack =
         (_slack :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedSms (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedSms (ContactGroupResource s) (TF.Attr s P.Text) where
     computedSms =
         (_sms :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (ContactGroupResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedVictorops (ContactGroupResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedVictorops (ContactGroupResource s) (TF.Attr s P.Text) where
     computedVictorops =
         (_victorops :: ContactGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-contactGroupResource :: TF.Schema TF.Resource P.Circonus (ContactGroupResource s)
+contactGroupResource :: TF.Resource P.Circonus (ContactGroupResource s)
 contactGroupResource =
     TF.newResource "circonus_contact_group" $
         ContactGroupResource {
@@ -823,57 +823,57 @@ instance P.HasTags (GraphResource s) (TF.Attr s P.Text) where
         lens (_tags :: GraphResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: GraphResource s)
 
-instance P.HasComputedDescription (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (GraphResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedGraphStyle (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedGraphStyle (GraphResource s) (TF.Attr s P.Text) where
     computedGraphStyle =
         (_graph_style :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLeft (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLeft (GraphResource s) (TF.Attr s P.Text) where
     computedLeft =
         (_left :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLineStyle (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLineStyle (GraphResource s) (TF.Attr s P.Text) where
     computedLineStyle =
         (_line_style :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMetric (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetric (GraphResource s) (TF.Attr s P.Text) where
     computedMetric =
         (_metric :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMetricCluster (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetricCluster (GraphResource s) (TF.Attr s P.Text) where
     computedMetricCluster =
         (_metric_cluster :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (GraphResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotes (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNotes (GraphResource s) (TF.Attr s P.Text) where
     computedNotes =
         (_notes :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedRight (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedRight (GraphResource s) (TF.Attr s P.Text) where
     computedRight =
         (_right :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (GraphResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (GraphResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: GraphResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-graphResource :: TF.Schema TF.Resource P.Circonus (GraphResource s)
+graphResource :: TF.Resource P.Circonus (GraphResource s)
 graphResource =
     TF.newResource "circonus_graph" $
         GraphResource {
@@ -933,27 +933,27 @@ instance P.HasTags (MetricClusterResource s) (TF.Attr s P.Text) where
         lens (_tags :: MetricClusterResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: MetricClusterResource s)
 
-instance P.HasComputedDescription (MetricClusterResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedDescription (MetricClusterResource s) (TF.Attr s P.Text) where
     computedDescription =
         (_description :: MetricClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (MetricClusterResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (MetricClusterResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: MetricClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedQuery (MetricClusterResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedQuery (MetricClusterResource s) (TF.Attr s P.Text) where
     computedQuery =
         (_query :: MetricClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (MetricClusterResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (MetricClusterResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: MetricClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-metricClusterResource :: TF.Schema TF.Resource P.Circonus (MetricClusterResource s)
+metricClusterResource :: TF.Resource P.Circonus (MetricClusterResource s)
 metricClusterResource =
     TF.newResource "circonus_metric_cluster" $
         MetricClusterResource {
@@ -1016,32 +1016,32 @@ instance P.HasUnit (MetricResource s) (TF.Attr s P.Text) where
         lens (_unit :: MetricResource s -> TF.Attr s P.Text)
              (\s a -> s { _unit = a } :: MetricResource s)
 
-instance P.HasComputedActive (MetricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedActive (MetricResource s) (TF.Attr s P.Text) where
     computedActive =
         (_active :: MetricResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedName (MetricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedName (MetricResource s) (TF.Attr s P.Text) where
     computedName =
         (_name :: MetricResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (MetricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (MetricResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: MetricResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedType' (MetricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedType' (MetricResource s) (TF.Attr s P.Text) where
     computedType' =
         (_type' :: MetricResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedUnit (MetricResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedUnit (MetricResource s) (TF.Attr s P.Text) where
     computedUnit =
         (_unit :: MetricResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-metricResource :: TF.Schema TF.Resource P.Circonus (MetricResource s)
+metricResource :: TF.Resource P.Circonus (MetricResource s)
 metricResource =
     TF.newResource "circonus_metric" $
         MetricResource {
@@ -1128,47 +1128,47 @@ instance P.HasTags (RuleSetResource s) (TF.Attr s P.Text) where
         lens (_tags :: RuleSetResource s -> TF.Attr s P.Text)
              (\s a -> s { _tags = a } :: RuleSetResource s)
 
-instance P.HasComputedCheck (RuleSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedCheck (RuleSetResource s) (TF.Attr s P.Text) where
     computedCheck =
         (_check :: RuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedIf' (RuleSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedIf' (RuleSetResource s) (TF.Attr s P.Text) where
     computedIf' =
         (_if' :: RuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedLink (RuleSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedLink (RuleSetResource s) (TF.Attr s P.Text) where
     computedLink =
         (_link :: RuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMetricName (RuleSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetricName (RuleSetResource s) (TF.Attr s P.Text) where
     computedMetricName =
         (_metric_name :: RuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedMetricType (RuleSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedMetricType (RuleSetResource s) (TF.Attr s P.Text) where
     computedMetricType =
         (_metric_type :: RuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedNotes (RuleSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedNotes (RuleSetResource s) (TF.Attr s P.Text) where
     computedNotes =
         (_notes :: RuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedParent (RuleSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedParent (RuleSetResource s) (TF.Attr s P.Text) where
     computedParent =
         (_parent :: RuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance P.HasComputedTags (RuleSetResource s) s (TF.Attr s P.Text) where
+instance P.HasComputedTags (RuleSetResource s) (TF.Attr s P.Text) where
     computedTags =
         (_tags :: RuleSetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-ruleSetResource :: TF.Schema TF.Resource P.Circonus (RuleSetResource s)
+ruleSetResource :: TF.Resource P.Circonus (RuleSetResource s)
 ruleSetResource =
     TF.newResource "circonus_rule_set" $
         RuleSetResource {
