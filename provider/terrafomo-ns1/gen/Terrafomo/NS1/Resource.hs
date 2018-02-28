@@ -155,6 +155,7 @@ import qualified Terrafomo.NS1.Provider as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @ns1_apikey@ NS1 resource.

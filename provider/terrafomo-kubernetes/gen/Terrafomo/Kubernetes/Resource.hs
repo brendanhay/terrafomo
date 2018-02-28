@@ -112,6 +112,7 @@ import qualified Terrafomo.Kubernetes.Provider as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @kubernetes_config_map@ Kubernetes resource.

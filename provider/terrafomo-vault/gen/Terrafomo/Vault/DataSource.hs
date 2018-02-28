@@ -83,6 +83,7 @@ import qualified Terrafomo.Vault.Provider as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @vault_approle_auth_backend_role@ Vault datasource.

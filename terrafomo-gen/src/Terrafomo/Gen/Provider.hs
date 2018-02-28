@@ -60,6 +60,7 @@ data Provider a = Provider
     { providerName         :: !Text
     , providerOriginal     :: !Text
     , providerPackage      :: !(Maybe Text)
+    , providerPackageYaml  :: !Bool
     , providerDependencies :: ![Text]
     , providerDatatype     :: !a
     , providerRules        :: ![Rule]
@@ -71,6 +72,7 @@ instance FromJSON (Provider Bool) where
         providerName         <- o .:  "name"
         providerOriginal     <- o .:  "original"
         providerPackage      <- o .:? "package"
+        providerPackageYaml  <- o .:? "package-yaml"  .!= True
         providerDependencies <- o .:? "dependencies"  .!= []
         providerDatatype     <- o .:? "datatype"      .!= False
         providerRules        <- o .:? "rules"         .!= []
@@ -83,11 +85,12 @@ instance ToJSON (Provider (Maybe a)) where
             [ "name"          .= providerName
             , "original"      .= providerOriginal
             , "package"       .= providerPackage
+            , "package-yaml"  .= providerPackageYaml
             , "dependencies"  .= providerDependencies
             , "rules"         .= providerRules
             , "max-partition" .= providerMaxPartition
             , "type"          .=
                 if isJust providerDatatype
-                    then providerName
-                    else "Provider"
+                    then mappend "P." providerName
+                    else "TF.NoProvider"
             ]

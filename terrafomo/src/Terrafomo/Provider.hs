@@ -4,11 +4,12 @@
 {-# LANGUAGE TypeFamilies        #-}
 
 module Terrafomo.Provider
-    ( IsProvider (..)
+    ( NoProvider
+    , IsProvider (..)
     , providerKey
     ) where
 
-import Data.Hashable (Hashable)
+import Data.Hashable (Hashable (hashWithSalt))
 import Data.Proxy    (Proxy (..))
 import Data.String   (fromString)
 
@@ -18,6 +19,18 @@ import Terrafomo.Name
 
 import qualified Terrafomo.Hash as Hash
 import qualified Terrafomo.HCL  as HCL
+
+data NoProvider = NoProvider
+    deriving (Show, Eq)
+
+instance Hashable NoProvider where
+    hashWithSalt s NoProvider = s `hashWithSalt` (0 :: Int)
+
+instance HCL.ToHCL NoProvider where
+    toHCL = const HCL.empty
+
+instance IsProvider NoProvider where
+    type ProviderType NoProvider = "no_provider"
 
 class ( KnownSymbol (ProviderType p)
       , Hashable p

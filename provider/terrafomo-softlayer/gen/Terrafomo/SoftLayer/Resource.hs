@@ -106,6 +106,7 @@ import qualified Terrafomo.SoftLayer.Provider as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @softlayer_ssh_key@ SoftLayer resource.

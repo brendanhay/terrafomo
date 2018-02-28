@@ -122,6 +122,7 @@ import qualified Terrafomo.OPC.Provider as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @opc_compute_image_list_entry@ OPC datasource.

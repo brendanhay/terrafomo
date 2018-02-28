@@ -18,6 +18,7 @@ module Terrafomo
     , localBackend
 
     -- * Providers
+    , NoProvider
     , IsProvider      (..)
     , withProvider
 
@@ -25,6 +26,7 @@ module Terrafomo
     , Name            (..)
     , Attr
     , join
+    , file
     , value
     , nil
     , true

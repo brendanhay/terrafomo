@@ -14,7 +14,7 @@ rules:
 
   - mode: exact
     match: tags
-    type: 'P.Tags'
+    type: '(P.Tags s)'
 
   - mode: suffix
     match: _port

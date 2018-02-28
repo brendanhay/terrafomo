@@ -336,6 +336,7 @@ import qualified Terrafomo.IP           as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @aws_api_gateway_documentation_part@ AWS resource.
@@ -572,7 +573,7 @@ data DefaultRouteTableResource s = DefaultRouteTableResource {
     {- ^ (Optional) A list of virtual gateways for propagation. -}
     , _route                  :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of route objects. Their keys are documented below. -}
-    , _tags                   :: !(TF.Attr s P.Tags)
+    , _tags                   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -599,9 +600,9 @@ instance P.HasRoute (DefaultRouteTableResource s) (TF.Attr s P.Text) where
         lens (_route :: DefaultRouteTableResource s -> TF.Attr s P.Text)
              (\s a -> s { _route = a } :: DefaultRouteTableResource s)
 
-instance P.HasTags (DefaultRouteTableResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DefaultRouteTableResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DefaultRouteTableResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DefaultRouteTableResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DefaultRouteTableResource s)
 
 instance s ~ s' => P.HasComputedDefaultRouteTableId (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Text) where
@@ -622,9 +623,9 @@ instance s ~ s' => P.HasComputedRoute (TF.Ref s' (DefaultRouteTableResource s)) 
         (_route :: DefaultRouteTableResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DefaultRouteTableResource s -> TF.Attr s P.Tags)
+        (_tags :: DefaultRouteTableResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 defaultRouteTableResource :: TF.Resource P.AWS (DefaultRouteTableResource s)
@@ -652,7 +653,7 @@ data DxLagResource s = DxLagResource {
     {- ^ (Required) The name of the LAG. -}
     , _number_of_connections :: !(TF.Attr s P.Text)
     {- ^ - ( Deprecated ) The number of physical connections initially provisioned and bundled by the LAG. Use @aws_dx_connection@ and @aws_dx_connection_association@ resources instead. Default connections will be removed as part of LAG creation automatically in future versions. -}
-    , _tags                  :: !(TF.Attr s P.Tags)
+    , _tags                  :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -691,9 +692,9 @@ instance P.HasNumberOfConnections (DxLagResource s) (TF.Attr s P.Text) where
         lens (_number_of_connections :: DxLagResource s -> TF.Attr s P.Text)
              (\s a -> s { _number_of_connections = a } :: DxLagResource s)
 
-instance P.HasTags (DxLagResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DxLagResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DxLagResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DxLagResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DxLagResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxLagResource s)) (TF.Attr s P.Text) where
@@ -727,9 +728,9 @@ instance s ~ s' => P.HasComputedNumberOfConnections (TF.Ref s' (DxLagResource s)
         (_number_of_connections :: DxLagResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DxLagResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DxLagResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DxLagResource s -> TF.Attr s P.Tags)
+        (_tags :: DxLagResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 dxLagResource :: TF.Resource P.AWS (DxLagResource s)
@@ -798,7 +799,7 @@ data ElasticacheClusterResource s = ElasticacheClusterResource {
     {- ^ (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. Example: 05:00-09:00 -}
     , _subnet_group_name        :: !(TF.Attr s P.Text)
     {- ^ – (Optional, VPC only) Name of the subnet group to be used for the cache cluster. -}
-    , _tags                     :: !(TF.Attr s P.Tags)
+    , _tags                     :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource -}
     } deriving (Show, Eq)
 
@@ -927,9 +928,9 @@ instance P.HasSubnetGroupName (ElasticacheClusterResource s) (TF.Attr s P.Text) 
         lens (_subnet_group_name :: ElasticacheClusterResource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_group_name = a } :: ElasticacheClusterResource s)
 
-instance P.HasTags (ElasticacheClusterResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (ElasticacheClusterResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: ElasticacheClusterResource s -> TF.Attr s P.Tags)
+        lens (_tags :: ElasticacheClusterResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ElasticacheClusterResource s)
 
 instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s P.Text) where
@@ -1041,9 +1042,9 @@ instance s ~ s' => P.HasComputedSubnetGroupName (TF.Ref s' (ElasticacheClusterRe
         (_subnet_group_name :: ElasticacheClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: ElasticacheClusterResource s -> TF.Attr s P.Tags)
+        (_tags :: ElasticacheClusterResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 elasticacheClusterResource :: TF.Resource P.AWS (ElasticacheClusterResource s)
@@ -1126,7 +1127,7 @@ data ElasticacheReplicationGroupResource s = ElasticacheReplicationGroupResource
     {- ^ (Optional, Redis only) The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: @05:00-09:00@ -}
     , _subnet_group_name             :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the cache subnet group to be used for the replication group. -}
-    , _tags                          :: !(TF.Attr s P.Tags)
+    , _tags                          :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource -}
     , _transit_encryption_enabled    :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Whether to enable encryption in transit. -}
@@ -1282,9 +1283,9 @@ instance P.HasSubnetGroupName (ElasticacheReplicationGroupResource s) (TF.Attr s
         lens (_subnet_group_name :: ElasticacheReplicationGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_group_name = a } :: ElasticacheReplicationGroupResource s)
 
-instance P.HasTags (ElasticacheReplicationGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (ElasticacheReplicationGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: ElasticacheReplicationGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: ElasticacheReplicationGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ElasticacheReplicationGroupResource s)
 
 instance P.HasTransitEncryptionEnabled (ElasticacheReplicationGroupResource s) (TF.Attr s P.Bool) where
@@ -1421,9 +1422,9 @@ instance s ~ s' => P.HasComputedSubnetGroupName (TF.Ref s' (ElasticacheReplicati
         (_subnet_group_name :: ElasticacheReplicationGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: ElasticacheReplicationGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: ElasticacheReplicationGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTransitEncryptionEnabled (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s P.Bool) where
@@ -1477,7 +1478,7 @@ data GlacierVaultResource s = GlacierVaultResource {
     {- ^ (Required) The name of the Vault. Names can be between 1 and 255 characters long and the valid characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.' (period). -}
     , _notification  :: !(TF.Attr s P.Text)
     {- ^ (Optional) The notifications for the Vault. Fields documented below. -}
-    , _tags          :: !(TF.Attr s P.Tags)
+    , _tags          :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -1504,9 +1505,9 @@ instance P.HasNotification (GlacierVaultResource s) (TF.Attr s P.Text) where
         lens (_notification :: GlacierVaultResource s -> TF.Attr s P.Text)
              (\s a -> s { _notification = a } :: GlacierVaultResource s)
 
-instance P.HasTags (GlacierVaultResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (GlacierVaultResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: GlacierVaultResource s -> TF.Attr s P.Tags)
+        lens (_tags :: GlacierVaultResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: GlacierVaultResource s)
 
 instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (GlacierVaultResource s)) (TF.Attr s P.Text) where
@@ -1530,9 +1531,9 @@ instance s ~ s' => P.HasComputedNotification (TF.Ref s' (GlacierVaultResource s)
         (_notification :: GlacierVaultResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (GlacierVaultResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (GlacierVaultResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: GlacierVaultResource s -> TF.Attr s P.Tags)
+        (_tags :: GlacierVaultResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 glacierVaultResource :: TF.Resource P.AWS (GlacierVaultResource s)
@@ -2302,7 +2303,7 @@ data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource {
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     , _parameter   :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html> after initial creation of the group. -}
-    , _tags        :: !(TF.Attr s P.Tags)
+    , _tags        :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -2341,9 +2342,9 @@ instance P.HasParameter (RdsClusterParameterGroupResource s) (TF.Attr s P.Text) 
         lens (_parameter :: RdsClusterParameterGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _parameter = a } :: RdsClusterParameterGroupResource s)
 
-instance P.HasTags (RdsClusterParameterGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (RdsClusterParameterGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: RdsClusterParameterGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: RdsClusterParameterGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: RdsClusterParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RdsClusterParameterGroupResource s)) (TF.Attr s P.Text) where
@@ -2377,9 +2378,9 @@ instance s ~ s' => P.HasComputedParameter (TF.Ref s' (RdsClusterParameterGroupRe
         (_parameter :: RdsClusterParameterGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (RdsClusterParameterGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RdsClusterParameterGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: RdsClusterParameterGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: RdsClusterParameterGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 rdsClusterParameterGroupResource :: TF.Resource P.AWS (RdsClusterParameterGroupResource s)
@@ -2417,7 +2418,7 @@ data SecurityGroupResource s = SecurityGroupResource {
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     , _revoke_rules_on_delete :: !(TF.Attr s P.Text)
     {- ^ (Optional) Instruct Terraform to revoke all of the Security Groups attached ingress and egress rules before deleting the rule itself. This is normally not needed, however certain AWS services such as Elastic Map Reduce may automatically add required rules to security groups used with the service, and those rules may contain a cyclic dependency that prevent the security groups from being destroyed without removing the dependency first. Default @false@ -}
-    , _tags                   :: !(TF.Attr s P.Tags)
+    , _tags                   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id                 :: !(TF.Attr s P.Text)
     {- ^ (Optional, Forces new resource) The VPC ID. -}
@@ -2465,9 +2466,9 @@ instance P.HasRevokeRulesOnDelete (SecurityGroupResource s) (TF.Attr s P.Text) w
         lens (_revoke_rules_on_delete :: SecurityGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _revoke_rules_on_delete = a } :: SecurityGroupResource s)
 
-instance P.HasTags (SecurityGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (SecurityGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: SecurityGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: SecurityGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: SecurityGroupResource s)
 
 instance P.HasVpcId (SecurityGroupResource s) (TF.Attr s P.Text) where
@@ -2503,9 +2504,9 @@ instance s ~ s' => P.HasComputedRevokeRulesOnDelete (TF.Ref s' (SecurityGroupRes
         (_revoke_rules_on_delete :: SecurityGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: SecurityGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: SecurityGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where

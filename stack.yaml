@@ -12,12 +12,14 @@ packages:
   - terrafomo
   - terrafomo-gen
   - terrafomo-examples
+  - provider/terrafomo-builtins
 
 # GENERATED
   - provider/terrafomo-alicloud
   - provider/terrafomo-aws
   - provider/terrafomo-azurerm
   - provider/terrafomo-bitbucket
+  - provider/terrafomo-builtins
   - provider/terrafomo-centurylinkcloud
   - provider/terrafomo-chef
   - provider/terrafomo-circonus

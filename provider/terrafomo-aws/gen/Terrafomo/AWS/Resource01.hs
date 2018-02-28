@@ -1273,6 +1273,7 @@ import qualified Terrafomo.IP           as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @aws_ami_copy@ AWS resource.
@@ -2205,7 +2206,7 @@ data AutoscalingGroupResource s = AutoscalingGroupResource {
     {- ^ (Optional) A list of processes to suspend for the AutoScaling Group. The allowed values are @Launch@ , @Terminate@ , @HealthCheck@ , @ReplaceUnhealthy@ , @AZRebalance@ , @AlarmNotification@ , @ScheduledActions@ , @AddToLoadBalancer@ . Note that if you suspend either the @Launch@ or @Terminate@ process types, it can prevent your autoscaling group from functioning properly. -}
     , _tag                       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of tag blocks. Tags documented below. -}
-    , _tags                      :: !(TF.Attr s P.Tags)
+    , _tags                      :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A list of tag blocks (maps). Tags documented below. -}
     , _target_group_arns         :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of @aws_alb_target_group@ ARNs, for use with Application Load Balancing. -}
@@ -2349,9 +2350,9 @@ instance P.HasTag (AutoscalingGroupResource s) (TF.Attr s P.Text) where
         lens (_tag :: AutoscalingGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _tag = a } :: AutoscalingGroupResource s)
 
-instance P.HasTags (AutoscalingGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (AutoscalingGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: AutoscalingGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: AutoscalingGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: AutoscalingGroupResource s)
 
 instance P.HasTargetGroupArns (AutoscalingGroupResource s) (TF.Attr s P.Text) where
@@ -2465,9 +2466,9 @@ instance s ~ s' => P.HasComputedTag (TF.Ref s' (AutoscalingGroupResource s)) (TF
         (_tag :: AutoscalingGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: AutoscalingGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: AutoscalingGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTargetGroupArns (TF.Ref s' (AutoscalingGroupResource s)) (TF.Attr s P.Text) where
@@ -2685,7 +2686,7 @@ data CloudwatchLogGroupResource s = CloudwatchLogGroupResource {
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     , _retention_in_days :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the number of days you want to retain log events in the specified log group. -}
-    , _tags              :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -2718,9 +2719,9 @@ instance P.HasRetentionInDays (CloudwatchLogGroupResource s) (TF.Attr s P.Text) 
         lens (_retention_in_days :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _retention_in_days = a } :: CloudwatchLogGroupResource s)
 
-instance P.HasTags (CloudwatchLogGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (CloudwatchLogGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: CloudwatchLogGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: CloudwatchLogGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: CloudwatchLogGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Text) where
@@ -2746,9 +2747,9 @@ instance s ~ s' => P.HasComputedRetentionInDays (TF.Ref s' (CloudwatchLogGroupRe
         (_retention_in_days :: CloudwatchLogGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CloudwatchLogGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: CloudwatchLogGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: CloudwatchLogGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 cloudwatchLogGroupResource :: TF.Resource P.AWS (CloudwatchLogGroupResource s)
@@ -3170,7 +3171,7 @@ data CodebuildProjectResource s = CodebuildProjectResource {
     {- ^ (Optional) The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account. -}
     , _source         :: !(TF.Attr s P.Text)
     {- ^ (Required) Information about the project's input source code. Source blocks are documented below. -}
-    , _tags           :: !(TF.Attr s P.Tags)
+    , _tags           :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -3227,9 +3228,9 @@ instance P.HasSource (CodebuildProjectResource s) (TF.Attr s P.Text) where
         lens (_source :: CodebuildProjectResource s -> TF.Attr s P.Text)
              (\s a -> s { _source = a } :: CodebuildProjectResource s)
 
-instance P.HasTags (CodebuildProjectResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (CodebuildProjectResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: CodebuildProjectResource s -> TF.Attr s P.Tags)
+        lens (_tags :: CodebuildProjectResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: CodebuildProjectResource s)
 
 instance s ~ s' => P.HasComputedArtifacts (TF.Ref s' (CodebuildProjectResource s)) (TF.Attr s P.Text) where
@@ -3267,9 +3268,9 @@ instance s ~ s' => P.HasComputedSource (TF.Ref s' (CodebuildProjectResource s)) 
         (_source :: CodebuildProjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (CodebuildProjectResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CodebuildProjectResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: CodebuildProjectResource s -> TF.Attr s P.Tags)
+        (_tags :: CodebuildProjectResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 codebuildProjectResource :: TF.Resource P.AWS (CodebuildProjectResource s)
@@ -3547,7 +3548,7 @@ data CustomerGatewayResource s = CustomerGatewayResource {
     {- ^ (Required) The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN). -}
     , _ip_address :: !(TF.Attr s P.Text)
     {- ^ (Required) The IP address of the gateway's Internet-routable external interface. -}
-    , _tags       :: !(TF.Attr s P.Tags)
+    , _tags       :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) Tags to apply to the gateway. -}
     , _type'      :: !(TF.Attr s P.Text)
     {- ^ (Required) The type of customer gateway. The only type AWS supports at this time is "ipsec.1". -}
@@ -3571,9 +3572,9 @@ instance P.HasIpAddress (CustomerGatewayResource s) (TF.Attr s P.Text) where
         lens (_ip_address :: CustomerGatewayResource s -> TF.Attr s P.Text)
              (\s a -> s { _ip_address = a } :: CustomerGatewayResource s)
 
-instance P.HasTags (CustomerGatewayResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (CustomerGatewayResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: CustomerGatewayResource s -> TF.Attr s P.Tags)
+        lens (_tags :: CustomerGatewayResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: CustomerGatewayResource s)
 
 instance P.HasType' (CustomerGatewayResource s) (TF.Attr s P.Text) where
@@ -3590,7 +3591,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (CustomerGatewayResource s)) (TF.A
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (CustomerGatewayResource s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (CustomerGatewayResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CustomerGatewayResource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedType' (TF.Ref s' (CustomerGatewayResource s)) (TF.Attr s P.Text) where
@@ -3623,7 +3624,7 @@ data DbEventSubscriptionResource s = DbEventSubscriptionResource {
     {- ^ (Optional) A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified. -}
     , _source_type      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The type of source that will be generating the events. -}
-    , _tags             :: !(TF.Attr s P.Tags)
+    , _tags             :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -3668,9 +3669,9 @@ instance P.HasSourceType (DbEventSubscriptionResource s) (TF.Attr s P.Text) wher
         lens (_source_type :: DbEventSubscriptionResource s -> TF.Attr s P.Text)
              (\s a -> s { _source_type = a } :: DbEventSubscriptionResource s)
 
-instance P.HasTags (DbEventSubscriptionResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DbEventSubscriptionResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DbEventSubscriptionResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DbEventSubscriptionResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DbEventSubscriptionResource s)
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (DbEventSubscriptionResource s)) (TF.Attr s P.Bool) where
@@ -3703,9 +3704,9 @@ instance s ~ s' => P.HasComputedSourceType (TF.Ref s' (DbEventSubscriptionResour
         (_source_type :: DbEventSubscriptionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DbEventSubscriptionResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DbEventSubscriptionResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DbEventSubscriptionResource s -> TF.Attr s P.Tags)
+        (_tags :: DbEventSubscriptionResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 dbEventSubscriptionResource :: TF.Resource P.AWS (DbEventSubscriptionResource s)
@@ -3736,7 +3737,7 @@ data DbParameterGroupResource s = DbParameterGroupResource {
     {- ^ (Optional, Forces new resource) Creates a unique name beginning with the specified prefix. Conflicts with @name@ . -}
     , _parameter   :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via <https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html> after initial creation of the group. -}
-    , _tags        :: !(TF.Attr s P.Tags)
+    , _tags        :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -3775,9 +3776,9 @@ instance P.HasParameter (DbParameterGroupResource s) (TF.Attr s P.Text) where
         lens (_parameter :: DbParameterGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _parameter = a } :: DbParameterGroupResource s)
 
-instance P.HasTags (DbParameterGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DbParameterGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DbParameterGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DbParameterGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DbParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DbParameterGroupResource s)) (TF.Attr s P.Text) where
@@ -3811,9 +3812,9 @@ instance s ~ s' => P.HasComputedParameter (TF.Ref s' (DbParameterGroupResource s
         (_parameter :: DbParameterGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DbParameterGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DbParameterGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DbParameterGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: DbParameterGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 dbParameterGroupResource :: TF.Resource P.AWS (DbParameterGroupResource s)
@@ -3927,7 +3928,7 @@ normal resources, in that Terraform does not create this resource, but
 instead "adopts" it into management.
 -}
 data DefaultSubnetResource s = DefaultSubnetResource {
-      _tags :: !(TF.Attr s P.Tags)
+      _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -3936,9 +3937,9 @@ instance TF.ToHCL (DefaultSubnetResource s) where
         [ TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasTags (DefaultSubnetResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DefaultSubnetResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DefaultSubnetResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DefaultSubnetResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DefaultSubnetResource s)
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (DefaultSubnetResource s)) (TF.Attr s P.Zone) where
@@ -3956,9 +3957,9 @@ instance s ~ s' => P.HasComputedIpv6AssociationId (TF.Ref s' (DefaultSubnetResou
 instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (DefaultSubnetResource s)) (TF.Attr s P.CIDR) where
     computedIpv6CidrBlock x = TF.compute (TF.refKey x) "ipv6_cidr_block"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultSubnetResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultSubnetResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DefaultSubnetResource s -> TF.Attr s P.Tags)
+        (_tags :: DefaultSubnetResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DefaultSubnetResource s)) (TF.Attr s P.Text) where
@@ -3987,7 +3988,7 @@ data DefaultVpcDhcpOptionsResource s = DefaultVpcDhcpOptionsResource {
     {- ^ (Optional) List of NETBIOS name servers. -}
     , _netbios_node_type    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see <http://www.ietf.org/rfc/rfc2132.txt> . -}
-    , _tags                 :: !(TF.Attr s P.Tags)
+    , _tags                 :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -4008,9 +4009,9 @@ instance P.HasNetbiosNodeType (DefaultVpcDhcpOptionsResource s) (TF.Attr s P.Tex
         lens (_netbios_node_type :: DefaultVpcDhcpOptionsResource s -> TF.Attr s P.Text)
              (\s a -> s { _netbios_node_type = a } :: DefaultVpcDhcpOptionsResource s)
 
-instance P.HasTags (DefaultVpcDhcpOptionsResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DefaultVpcDhcpOptionsResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DefaultVpcDhcpOptionsResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DefaultVpcDhcpOptionsResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DefaultVpcDhcpOptionsResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultVpcDhcpOptionsResource s)) (TF.Attr s P.Text) where
@@ -4026,9 +4027,9 @@ instance s ~ s' => P.HasComputedNetbiosNodeType (TF.Ref s' (DefaultVpcDhcpOption
         (_netbios_node_type :: DefaultVpcDhcpOptionsResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultVpcDhcpOptionsResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultVpcDhcpOptionsResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DefaultVpcDhcpOptionsResource s -> TF.Attr s P.Tags)
+        (_tags :: DefaultVpcDhcpOptionsResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 defaultVpcDhcpOptionsResource :: TF.Resource P.AWS (DefaultVpcDhcpOptionsResource s)
@@ -4370,7 +4371,7 @@ data EipResource s = EipResource {
     {- ^ (Optional) EC2 instance ID. -}
     , _network_interface         :: !(TF.Attr s P.Text)
     {- ^ (Optional) Network interface ID to associate with. -}
-    , _tags                      :: !(TF.Attr s P.Tags)
+    , _tags                      :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc                       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean if the EIP is in a VPC or not. -}
@@ -4400,9 +4401,9 @@ instance P.HasNetworkInterface (EipResource s) (TF.Attr s P.Text) where
         lens (_network_interface :: EipResource s -> TF.Attr s P.Text)
              (\s a -> s { _network_interface = a } :: EipResource s)
 
-instance P.HasTags (EipResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (EipResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: EipResource s -> TF.Attr s P.Tags)
+        lens (_tags :: EipResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: EipResource s)
 
 instance P.HasVpc (EipResource s) (TF.Attr s P.Text) where
@@ -4428,9 +4429,9 @@ instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (EipResource s)) (TF.Attr s
 instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (EipResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EipResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: EipResource s -> TF.Attr s P.Tags)
+        (_tags :: EipResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpc (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
@@ -4471,7 +4472,7 @@ data ElasticBeanstalkEnvironmentResource s = ElasticBeanstalkEnvironmentResource
     {- ^ – (Optional) Option settings to configure the new Environment. These override specific values that are set as defaults. The format is detailed below in <#option-settings> -}
     , _solution_stack_name    :: !(TF.Attr s P.Text)
     {- ^ – (Optional) A solution stack to base your environment off of. Example stacks can be found in the <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html> -}
-    , _tags                   :: !(TF.Attr s P.Tags)
+    , _tags                   :: !(TF.Attr s (P.Tags s))
     {- ^ – (Optional) A set of tags to apply to the Environment. Note: at this time the Elastic Beanstalk API does not provide a programatic way of changing these tags after initial application -}
     , _template_name          :: !(TF.Attr s P.Text)
     {- ^ – (Optional) The name of the Elastic Beanstalk Configuration template to use in deployment -}
@@ -4534,9 +4535,9 @@ instance P.HasSolutionStackName (ElasticBeanstalkEnvironmentResource s) (TF.Attr
         lens (_solution_stack_name :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
              (\s a -> s { _solution_stack_name = a } :: ElasticBeanstalkEnvironmentResource s)
 
-instance P.HasTags (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (ElasticBeanstalkEnvironmentResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Tags)
+        lens (_tags :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ElasticBeanstalkEnvironmentResource s)
 
 instance P.HasTemplateName (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
@@ -4610,9 +4611,9 @@ instance s ~ s' => P.HasComputedSolutionStackName (TF.Ref s' (ElasticBeanstalkEn
         (_solution_stack_name :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Tags)
+        (_tags :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTemplateName (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
@@ -5569,7 +5570,7 @@ data InstanceResource s = InstanceResource {
     {- ^ (Optional) Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true. -}
     , _subnet_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The VPC Subnet ID to launch in. -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _tenancy :: !(TF.Attr s P.Text)
     {- ^ (Optional) The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. -}
@@ -5719,9 +5720,9 @@ instance P.HasSubnetId (InstanceResource s) (TF.Attr s P.Text) where
         lens (_subnet_id :: InstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_id = a } :: InstanceResource s)
 
-instance P.HasTags (InstanceResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (InstanceResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: InstanceResource s -> TF.Attr s P.Tags)
+        lens (_tags :: InstanceResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: InstanceResource s)
 
 instance P.HasTenancy (InstanceResource s) (TF.Attr s P.Text) where
@@ -5858,9 +5859,9 @@ instance s ~ s' => P.HasComputedSourceDestCheck (TF.Ref s' (InstanceResource s))
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: InstanceResource s -> TF.Attr s P.Tags)
+        (_tags :: InstanceResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTenancy (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
@@ -6043,7 +6044,7 @@ data KmsKeyResource s = KmsKeyResource {
     {- ^ (Optional) Specifies the intended use of the key. Defaults to ENCRYPT_DECRYPT, and only symmetric encryption and decryption are supported. -}
     , _policy                  :: !(TF.Attr s P.Text)
     {- ^ (Optional) A valid policy JSON document. -}
-    , _tags                    :: !(TF.Attr s P.Tags)
+    , _tags                    :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the object. -}
     } deriving (Show, Eq)
 
@@ -6088,9 +6089,9 @@ instance P.HasPolicy (KmsKeyResource s) (TF.Attr s P.Text) where
         lens (_policy :: KmsKeyResource s -> TF.Attr s P.Text)
              (\s a -> s { _policy = a } :: KmsKeyResource s)
 
-instance P.HasTags (KmsKeyResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (KmsKeyResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: KmsKeyResource s -> TF.Attr s P.Tags)
+        lens (_tags :: KmsKeyResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: KmsKeyResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
@@ -6129,9 +6130,9 @@ instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (KmsKeyResource s)) (TF.Attr s
         (_policy :: KmsKeyResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (KmsKeyResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: KmsKeyResource s -> TF.Attr s P.Tags)
+        (_tags :: KmsKeyResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 kmsKeyResource :: TF.Resource P.AWS (KmsKeyResource s)
@@ -6187,7 +6188,7 @@ data LambdaFunctionResource s = LambdaFunctionResource {
     {- ^ (Optional) The object version containing the function's deployment package. Conflicts with @filename@ . -}
     , _source_code_hash               :: !(TF.Attr s P.Text)
     {- ^ (Optional) Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either @filename@ or @s3_key@ . The usual way to set this is @${base64sha256(file("file.zip"))}@ , where "file.zip" is the local filename of the lambda function source archive. -}
-    , _tags                           :: !(TF.Attr s P.Tags)
+    , _tags                           :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the object. -}
     , _timeout                        :: !(TF.Attr s P.Text)
     {- ^ (Optional) The amount of time your Lambda Function has to run in seconds. Defaults to @3@ . See <https://docs.aws.amazon.com/lambda/latest/dg/limits.html> -}
@@ -6298,9 +6299,9 @@ instance P.HasSourceCodeHash (LambdaFunctionResource s) (TF.Attr s P.Text) where
         lens (_source_code_hash :: LambdaFunctionResource s -> TF.Attr s P.Text)
              (\s a -> s { _source_code_hash = a } :: LambdaFunctionResource s)
 
-instance P.HasTags (LambdaFunctionResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (LambdaFunctionResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: LambdaFunctionResource s -> TF.Attr s P.Tags)
+        lens (_tags :: LambdaFunctionResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: LambdaFunctionResource s)
 
 instance P.HasTimeout (LambdaFunctionResource s) (TF.Attr s P.Text) where
@@ -6401,9 +6402,9 @@ instance s ~ s' => P.HasComputedS3ObjectVersion (TF.Ref s' (LambdaFunctionResour
 instance s ~ s' => P.HasComputedSourceCodeHash (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
     computedSourceCodeHash x = TF.compute (TF.refKey x) "source_code_hash"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: LambdaFunctionResource s -> TF.Attr s P.Tags)
+        (_tags :: LambdaFunctionResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (LambdaFunctionResource s)) (TF.Attr s P.Text) where
@@ -6589,7 +6590,7 @@ data LbResource s = LbResource {
     {- ^ (Optional) A subnet mapping block as documented below. -}
     , _subnets                    :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ (Optional) A list of subnet IDs to attach to the LB. Subnets cannot be updated for Load Balancers of type @network@ . Changing this value will for load balancers of type @network@ will force a recreation of the resource. -}
-    , _tags                       :: !(TF.Attr s P.Tags)
+    , _tags                       :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -6664,9 +6665,9 @@ instance P.HasSubnets (LbResource s) (TF.Attr s [TF.Attr s P.Text]) where
         lens (_subnets :: LbResource s -> TF.Attr s [TF.Attr s P.Text])
              (\s a -> s { _subnets = a } :: LbResource s)
 
-instance P.HasTags (LbResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (LbResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: LbResource s -> TF.Attr s P.Tags)
+        lens (_tags :: LbResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: LbResource s)
 
 instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (LbResource s)) (TF.Attr s P.Text) where
@@ -6739,9 +6740,9 @@ instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (LbResource s)) (TF.Attr s [T
         (_subnets :: LbResource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: LbResource s -> TF.Attr s P.Tags)
+        (_tags :: LbResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LbResource s)) (TF.Attr s P.Text) where
@@ -6786,7 +6787,7 @@ data LbTargetGroupResource s = LbTargetGroupResource {
     {- ^ (Required) The protocol to use for routing traffic to the targets. -}
     , _stickiness           :: !(TF.Attr s P.Text)
     {- ^ (Optional) A Stickiness block. Stickiness blocks are documented below. @stickiness@ is only valid if used with Load Balancers of type @Application@ -}
-    , _tags                 :: !(TF.Attr s P.Tags)
+    , _tags                 :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _target_type          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The type of target that you must specify when registering targets with this target group. The possible values are @instance@ (targets are specified by instance ID) or @ip@ (targets are specified by IP address). The default is @instance@ . Note that you can't specify targets for a target group using both instance IDs and IP addresses. If the target type is @ip@ , specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses. -}
@@ -6843,9 +6844,9 @@ instance P.HasStickiness (LbTargetGroupResource s) (TF.Attr s P.Text) where
         lens (_stickiness :: LbTargetGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _stickiness = a } :: LbTargetGroupResource s)
 
-instance P.HasTags (LbTargetGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (LbTargetGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: LbTargetGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: LbTargetGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: LbTargetGroupResource s)
 
 instance P.HasTargetType (LbTargetGroupResource s) (TF.Attr s P.Text) where
@@ -6900,9 +6901,9 @@ instance s ~ s' => P.HasComputedStickiness (TF.Ref s' (LbTargetGroupResource s))
         (_stickiness :: LbTargetGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: LbTargetGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: LbTargetGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTargetType (TF.Ref s' (LbTargetGroupResource s)) (TF.Attr s P.Text) where
@@ -7173,7 +7174,7 @@ data NatGatewayResource s = NatGatewayResource {
     {- ^ (Required) The Allocation ID of the Elastic IP address for the gateway. -}
     , _subnet_id     :: !(TF.Attr s P.Text)
     {- ^ (Required) The Subnet ID of the subnet in which to place the gateway. -}
-    , _tags          :: !(TF.Attr s P.Tags)
+    , _tags          :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -7194,9 +7195,9 @@ instance P.HasSubnetId (NatGatewayResource s) (TF.Attr s P.Text) where
         lens (_subnet_id :: NatGatewayResource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_id = a } :: NatGatewayResource s)
 
-instance P.HasTags (NatGatewayResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (NatGatewayResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: NatGatewayResource s -> TF.Attr s P.Tags)
+        lens (_tags :: NatGatewayResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: NatGatewayResource s)
 
 instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
@@ -7217,9 +7218,9 @@ instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (NatGatewayResource s)) (TF.
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NatGatewayResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: NatGatewayResource s -> TF.Attr s P.Tags)
+        (_tags :: NatGatewayResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 natGatewayResource :: TF.Resource P.AWS (NatGatewayResource s)
@@ -7246,7 +7247,7 @@ data NetworkAclResource s = NetworkAclResource {
     {- ^ (Optional, Deprecated) The ID of the associated Subnet. This attribute is deprecated, please use the @subnet_ids@ attribute instead -}
     , _subnet_ids :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of Subnet IDs to apply the ACL to -}
-    , _tags       :: !(TF.Attr s P.Tags)
+    , _tags       :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id     :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the associated VPC. -}
@@ -7282,9 +7283,9 @@ instance P.HasSubnetIds (NetworkAclResource s) (TF.Attr s P.Text) where
         lens (_subnet_ids :: NetworkAclResource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_ids = a } :: NetworkAclResource s)
 
-instance P.HasTags (NetworkAclResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (NetworkAclResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: NetworkAclResource s -> TF.Attr s P.Tags)
+        lens (_tags :: NetworkAclResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: NetworkAclResource s)
 
 instance P.HasVpcId (NetworkAclResource s) (TF.Attr s P.Text) where
@@ -7315,9 +7316,9 @@ instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (NetworkAclResource s)) (TF
         (_subnet_ids :: NetworkAclResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkAclResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: NetworkAclResource s -> TF.Attr s P.Tags)
+        (_tags :: NetworkAclResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
@@ -7591,7 +7592,7 @@ data NetworkInterfaceResource s = NetworkInterfaceResource {
     {- ^ (Optional) Whether to enable source destination checking for the ENI. Default true. -}
     , _subnet_id         :: !(TF.Attr s P.Text)
     {- ^ (Required) Subnet ID to create the ENI in. -}
-    , _tags              :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -7642,9 +7643,9 @@ instance P.HasSubnetId (NetworkInterfaceResource s) (TF.Attr s P.Text) where
         lens (_subnet_id :: NetworkInterfaceResource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_id = a } :: NetworkInterfaceResource s)
 
-instance P.HasTags (NetworkInterfaceResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (NetworkInterfaceResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: NetworkInterfaceResource s -> TF.Attr s P.Tags)
+        lens (_tags :: NetworkInterfaceResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: NetworkInterfaceResource s)
 
 instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
@@ -7673,7 +7674,7 @@ instance s ~ s' => P.HasComputedSourceDestCheck (TF.Ref s' (NetworkInterfaceReso
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
     computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 networkInterfaceResource :: TF.Resource P.AWS (NetworkInterfaceResource s)
@@ -8109,7 +8110,7 @@ data OpsworksStackResource s = OpsworksStackResource {
     {- ^ (Required) The name of the region where the stack will exist. -}
     , _service_role_arn              :: !(TF.Attr s P.Text)
     {- ^ (Required) The ARN of an IAM role that the OpsWorks service will act as. -}
-    , _tags                          :: !(TF.Attr s P.Tags)
+    , _tags                          :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _use_custom_cookbooks          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Boolean value controlling whether the custom cookbook settings are enabled. -}
@@ -8235,9 +8236,9 @@ instance P.HasServiceRoleArn (OpsworksStackResource s) (TF.Attr s P.Text) where
         lens (_service_role_arn :: OpsworksStackResource s -> TF.Attr s P.Text)
              (\s a -> s { _service_role_arn = a } :: OpsworksStackResource s)
 
-instance P.HasTags (OpsworksStackResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (OpsworksStackResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: OpsworksStackResource s -> TF.Attr s P.Tags)
+        lens (_tags :: OpsworksStackResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: OpsworksStackResource s)
 
 instance P.HasUseCustomCookbooks (OpsworksStackResource s) (TF.Attr s P.Text) where
@@ -8348,9 +8349,9 @@ instance s ~ s' => P.HasComputedServiceRoleArn (TF.Ref s' (OpsworksStackResource
         (_service_role_arn :: OpsworksStackResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (OpsworksStackResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (OpsworksStackResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: OpsworksStackResource s -> TF.Attr s P.Tags)
+        (_tags :: OpsworksStackResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedUseCustomCookbooks (TF.Ref s' (OpsworksStackResource s)) (TF.Attr s P.Text) where
@@ -8871,7 +8872,7 @@ data RedshiftClusterResource s = RedshiftClusterResource {
     {- ^ (Optional) Configuration of automatic copy of snapshots from one region to another. Documented below. -}
     , _snapshot_identifier                 :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name of the snapshot from which to create the new cluster. -}
-    , _tags                                :: !(TF.Attr s P.Tags)
+    , _tags                                :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_security_group_ids              :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster. -}
@@ -9057,9 +9058,9 @@ instance P.HasSnapshotIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) 
         lens (_snapshot_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
              (\s a -> s { _snapshot_identifier = a } :: RedshiftClusterResource s)
 
-instance P.HasTags (RedshiftClusterResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (RedshiftClusterResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: RedshiftClusterResource s -> TF.Attr s P.Tags)
+        lens (_tags :: RedshiftClusterResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: RedshiftClusterResource s)
 
 instance P.HasVpcSecurityGroupIds (RedshiftClusterResource s) (TF.Attr s P.Text) where
@@ -9198,9 +9199,9 @@ instance s ~ s' => P.HasComputedSnapshotIdentifier (TF.Ref s' (RedshiftClusterRe
         (_snapshot_identifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: RedshiftClusterResource s -> TF.Attr s P.Tags)
+        (_tags :: RedshiftClusterResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
@@ -9321,7 +9322,7 @@ data Route53HealthCheckResource s = Route53HealthCheckResource {
     {- ^ (Optional) The path that you want Amazon Route 53 to request when performing health checks. -}
     , _search_string                   :: !(TF.Attr s P.Text)
     {- ^ (Optional) String searched in the first 5120 bytes of the response body for check to be considered healthy. -}
-    , _tags                            :: !(TF.Attr s P.Tags)
+    , _tags                            :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the health check. -}
     , _type'                           :: !(TF.Attr s P.Text)
     {- ^ (Required) The protocol to use when performing health checks. Valid values are @HTTP@ , @HTTPS@ , @HTTP_STR_MATCH@ , @HTTPS_STR_MATCH@ , @TCP@ , @CALCULATED@ and @CLOUDWATCH_METRIC@ . -}
@@ -9435,9 +9436,9 @@ instance P.HasSearchString (Route53HealthCheckResource s) (TF.Attr s P.Text) whe
         lens (_search_string :: Route53HealthCheckResource s -> TF.Attr s P.Text)
              (\s a -> s { _search_string = a } :: Route53HealthCheckResource s)
 
-instance P.HasTags (Route53HealthCheckResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (Route53HealthCheckResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: Route53HealthCheckResource s -> TF.Attr s P.Tags)
+        lens (_tags :: Route53HealthCheckResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: Route53HealthCheckResource s)
 
 instance P.HasType' (Route53HealthCheckResource s) (TF.Attr s P.Text) where
@@ -9530,9 +9531,9 @@ instance s ~ s' => P.HasComputedSearchString (TF.Ref s' (Route53HealthCheckResou
         (_search_string :: Route53HealthCheckResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: Route53HealthCheckResource s -> TF.Attr s P.Tags)
+        (_tags :: Route53HealthCheckResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedType' (TF.Ref s' (Route53HealthCheckResource s)) (TF.Attr s P.Text) where
@@ -9632,7 +9633,7 @@ data Route53ZoneResource s = Route53ZoneResource {
     {- ^ (Optional) Whether to destroy all records (possibly managed outside of Terraform) in the zone when destroying the zone. -}
     , _name              :: !(TF.Attr s P.Text)
     {- ^ (Required) This is the name of the hosted zone. -}
-    , _tags              :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the zone. -}
     , _vpc_id            :: !(TF.Attr s P.Text)
     {- ^ (Optional) The VPC to associate with a private hosted zone. Specifying @vpc_id@ will create a private hosted zone. Conflicts w/ @delegation_set_id@ as delegation sets can only be used for public zones. -}
@@ -9671,9 +9672,9 @@ instance P.HasName (Route53ZoneResource s) (TF.Attr s P.Text) where
         lens (_name :: Route53ZoneResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: Route53ZoneResource s)
 
-instance P.HasTags (Route53ZoneResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (Route53ZoneResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: Route53ZoneResource s -> TF.Attr s P.Tags)
+        lens (_tags :: Route53ZoneResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: Route53ZoneResource s)
 
 instance P.HasVpcId (Route53ZoneResource s) (TF.Attr s P.Text) where
@@ -9709,9 +9710,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (Route53ZoneResource s)) (TF.Att
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
     computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: Route53ZoneResource s -> TF.Attr s P.Tags)
+        (_tags :: Route53ZoneResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (Route53ZoneResource s)) (TF.Attr s P.Text) where
@@ -10143,7 +10144,7 @@ data ServicecatalogPortfolioResource s = ServicecatalogPortfolioResource {
     {- ^ (Required) The name of the portfolio. -}
     , _provider_name :: !(TF.Attr s P.Text)
     {- ^ (Required) Name of the person or organization who owns the portfolio. -}
-    , _tags          :: !(TF.Attr s P.Tags)
+    , _tags          :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) Tags to apply to the connection. -}
     } deriving (Show, Eq)
 
@@ -10170,9 +10171,9 @@ instance P.HasProviderName (ServicecatalogPortfolioResource s) (TF.Attr s P.Text
         lens (_provider_name :: ServicecatalogPortfolioResource s -> TF.Attr s P.Text)
              (\s a -> s { _provider_name = a } :: ServicecatalogPortfolioResource s)
 
-instance P.HasTags (ServicecatalogPortfolioResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (ServicecatalogPortfolioResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: ServicecatalogPortfolioResource s -> TF.Attr s P.Tags)
+        lens (_tags :: ServicecatalogPortfolioResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ServicecatalogPortfolioResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ServicecatalogPortfolioResource s)) (TF.Attr s P.Text) where
@@ -10193,9 +10194,9 @@ instance s ~ s' => P.HasComputedProviderName (TF.Ref s' (ServicecatalogPortfolio
         (_provider_name :: ServicecatalogPortfolioResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ServicecatalogPortfolioResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ServicecatalogPortfolioResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: ServicecatalogPortfolioResource s -> TF.Attr s P.Tags)
+        (_tags :: ServicecatalogPortfolioResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 servicecatalogPortfolioResource :: TF.Resource P.AWS (ServicecatalogPortfolioResource s)
@@ -11348,7 +11349,7 @@ data VpnConnectionResource s = VpnConnectionResource {
     {- ^ (Required) The ID of the customer gateway. -}
     , _static_routes_only    :: !(TF.Attr s P.Text)
     {- ^ (Optional, Default @false@ ) Whether the VPN connection uses static routes exclusively. Static routes must be used for devices that don't support BGP. -}
-    , _tags                  :: !(TF.Attr s P.Tags)
+    , _tags                  :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) Tags to apply to the connection. -}
     , _tunnel1_inside_cidr   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The CIDR block of the inside IP addresses for the first VPN tunnel. -}
@@ -11387,9 +11388,9 @@ instance P.HasStaticRoutesOnly (VpnConnectionResource s) (TF.Attr s P.Text) wher
         lens (_static_routes_only :: VpnConnectionResource s -> TF.Attr s P.Text)
              (\s a -> s { _static_routes_only = a } :: VpnConnectionResource s)
 
-instance P.HasTags (VpnConnectionResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (VpnConnectionResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: VpnConnectionResource s -> TF.Attr s P.Tags)
+        lens (_tags :: VpnConnectionResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: VpnConnectionResource s)
 
 instance P.HasTunnel1InsideCidr (VpnConnectionResource s) (TF.Attr s P.Text) where
@@ -11434,7 +11435,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnConnectionResource s)) (TF.Att
 instance s ~ s' => P.HasComputedStaticRoutesOnly (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s P.Text) where
     computedStaticRoutesOnly x = TF.compute (TF.refKey x) "static_routes_only"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedTunnel1Address (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s P.Text) where
@@ -11558,7 +11559,7 @@ data VpnGatewayResource s = VpnGatewayResource {
     {- ^ (Optional) The Autonomous System Number (ASN) for the Amazon side of the gateway. If you don't specify an ASN, the virtual private gateway is created with the default ASN. -}
     , _availability_zone :: !(TF.Attr s P.Zone)
     {- ^ (Optional) The Availability Zone for the virtual private gateway. -}
-    , _tags              :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id            :: !(TF.Attr s P.Text)
     {- ^ (Optional) The VPC ID to create in. -}
@@ -11582,9 +11583,9 @@ instance P.HasAvailabilityZone (VpnGatewayResource s) (TF.Attr s P.Zone) where
         lens (_availability_zone :: VpnGatewayResource s -> TF.Attr s P.Zone)
              (\s a -> s { _availability_zone = a } :: VpnGatewayResource s)
 
-instance P.HasTags (VpnGatewayResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (VpnGatewayResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: VpnGatewayResource s -> TF.Attr s P.Tags)
+        lens (_tags :: VpnGatewayResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: VpnGatewayResource s)
 
 instance P.HasVpcId (VpnGatewayResource s) (TF.Attr s P.Text) where
@@ -11605,9 +11606,9 @@ instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (VpnGatewayResource 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnGatewayResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpnGatewayResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpnGatewayResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: VpnGatewayResource s -> TF.Attr s P.Tags)
+        (_tags :: VpnGatewayResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpnGatewayResource s)) (TF.Attr s P.Text) where

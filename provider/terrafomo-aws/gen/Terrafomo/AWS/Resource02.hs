@@ -1302,6 +1302,7 @@ import qualified Terrafomo.IP           as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @sfn_activity@ AWS resource.
@@ -3223,7 +3224,7 @@ data CognitoUserPoolResource s = CognitoUserPoolResource {
     {- ^ (Optional) - The <#sms-configuration> . -}
     , _sms_verification_message      :: !(TF.Attr s P.Text)
     {- ^ (Optional) A string representing the SMS verification message. -}
-    , _tags                          :: !(TF.Attr s P.Tags)
+    , _tags                          :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the User Pool. -}
     , _username_attributes           :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with @alias_attributes@ . -}
@@ -3328,9 +3329,9 @@ instance P.HasSmsVerificationMessage (CognitoUserPoolResource s) (TF.Attr s P.Te
         lens (_sms_verification_message :: CognitoUserPoolResource s -> TF.Attr s P.Text)
              (\s a -> s { _sms_verification_message = a } :: CognitoUserPoolResource s)
 
-instance P.HasTags (CognitoUserPoolResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (CognitoUserPoolResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: CognitoUserPoolResource s -> TF.Attr s P.Tags)
+        lens (_tags :: CognitoUserPoolResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: CognitoUserPoolResource s)
 
 instance P.HasUsernameAttributes (CognitoUserPoolResource s) (TF.Attr s P.Text) where
@@ -3430,9 +3431,9 @@ instance s ~ s' => P.HasComputedSmsVerificationMessage (TF.Ref s' (CognitoUserPo
         (_sms_verification_message :: CognitoUserPoolResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: CognitoUserPoolResource s -> TF.Attr s P.Tags)
+        (_tags :: CognitoUserPoolResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedUsernameAttributes (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Text) where
@@ -3544,7 +3545,7 @@ data DaxClusterResource s = DaxClusterResource {
     {- ^ – (Optional) One or more VPC security groups associated with the cluster -}
     , _subnet_group_name      :: !(TF.Attr s P.Text)
     {- ^ – (Optional) Name of the subnet group to be used for the cluster -}
-    , _tags                   :: !(TF.Attr s P.Tags)
+    , _tags                   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource -}
     } deriving (Show, Eq)
 
@@ -3619,9 +3620,9 @@ instance P.HasSubnetGroupName (DaxClusterResource s) (TF.Attr s P.Text) where
         lens (_subnet_group_name :: DaxClusterResource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_group_name = a } :: DaxClusterResource s)
 
-instance P.HasTags (DaxClusterResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DaxClusterResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DaxClusterResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DaxClusterResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DaxClusterResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
@@ -3694,9 +3695,9 @@ instance s ~ s' => P.HasComputedSubnetGroupName (TF.Ref s' (DaxClusterResource s
         (_subnet_group_name :: DaxClusterResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DaxClusterResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DaxClusterResource s -> TF.Attr s P.Tags)
+        (_tags :: DaxClusterResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 daxClusterResource :: TF.Resource P.AWS (DaxClusterResource s)
@@ -3731,7 +3732,7 @@ data DbSecurityGroupResource s = DbSecurityGroupResource {
     {- ^ (Required) A list of ingress rules. -}
     , _name        :: !(TF.Attr s P.Text)
     {- ^ (Required) The name of the DB security group. -}
-    , _tags        :: !(TF.Attr s P.Tags)
+    , _tags        :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -3758,9 +3759,9 @@ instance P.HasName (DbSecurityGroupResource s) (TF.Attr s P.Text) where
         lens (_name :: DbSecurityGroupResource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: DbSecurityGroupResource s)
 
-instance P.HasTags (DbSecurityGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DbSecurityGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DbSecurityGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DbSecurityGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DbSecurityGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DbSecurityGroupResource s)) (TF.Attr s P.Text) where
@@ -3784,9 +3785,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (DbSecurityGroupResource s)) (TF
         (_name :: DbSecurityGroupResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DbSecurityGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DbSecurityGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DbSecurityGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: DbSecurityGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 dbSecurityGroupResource :: TF.Resource P.AWS (DbSecurityGroupResource s)
@@ -3829,7 +3830,7 @@ data DefaultNetworkAclResource s = DefaultNetworkAclResource {
     {- ^ (Optional) Specifies an ingress rule. Parameters defined below. -}
     , _subnet_ids             :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of Subnet IDs to apply the ACL to. See the notes below on managing Subnets in the Default Network ACL -}
-    , _tags                   :: !(TF.Attr s P.Tags)
+    , _tags                   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -3862,9 +3863,9 @@ instance P.HasSubnetIds (DefaultNetworkAclResource s) (TF.Attr s P.Text) where
         lens (_subnet_ids :: DefaultNetworkAclResource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_ids = a } :: DefaultNetworkAclResource s)
 
-instance P.HasTags (DefaultNetworkAclResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DefaultNetworkAclResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DefaultNetworkAclResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DefaultNetworkAclResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DefaultNetworkAclResource s)
 
 instance s ~ s' => P.HasComputedDefaultNetworkAclId (TF.Ref s' (DefaultNetworkAclResource s)) (TF.Attr s P.Text) where
@@ -3884,9 +3885,9 @@ instance s ~ s' => P.HasComputedIngress (TF.Ref s' (DefaultNetworkAclResource s)
 instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (DefaultNetworkAclResource s)) (TF.Attr s P.Text) where
     computedSubnetIds x = TF.compute (TF.refKey x) "subnet_ids"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultNetworkAclResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultNetworkAclResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DefaultNetworkAclResource s -> TF.Attr s P.Tags)
+        (_tags :: DefaultNetworkAclResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DefaultNetworkAclResource s)) (TF.Attr s P.Text) where
@@ -3921,7 +3922,7 @@ data DefaultVpcResource s = DefaultVpcResource {
     {- ^ (Optional) A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false. -}
     , _enable_dns_support   :: !(TF.Attr s P.Bool)
     {- ^ (Optional) A boolean flag to enable/disable DNS support in the VPC. Defaults true. -}
-    , _tags                 :: !(TF.Attr s P.Tags)
+    , _tags                 :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -3948,9 +3949,9 @@ instance P.HasEnableDnsSupport (DefaultVpcResource s) (TF.Attr s P.Bool) where
         lens (_enable_dns_support :: DefaultVpcResource s -> TF.Attr s P.Bool)
              (\s a -> s { _enable_dns_support = a } :: DefaultVpcResource s)
 
-instance P.HasTags (DefaultVpcResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DefaultVpcResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DefaultVpcResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DefaultVpcResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DefaultVpcResource s)
 
 instance s ~ s' => P.HasComputedAssignGeneratedIpv6CidrBlock (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.CIDR) where
@@ -3992,9 +3993,9 @@ instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (DefaultVpcResource s))
 instance s ~ s' => P.HasComputedMainRouteTableId (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Text) where
     computedMainRouteTableId x = TF.compute (TF.refKey x) "main_route_table_id"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DefaultVpcResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DefaultVpcResource s -> TF.Attr s P.Tags)
+        (_tags :: DefaultVpcResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 defaultVpcResource :: TF.Resource P.AWS (DefaultVpcResource s)
@@ -4039,7 +4040,7 @@ data DmsEndpointResource s = DmsEndpointResource {
     {- ^ (Optional) The Amazon Resource Name (ARN) used by the service access IAM role for dynamodb endpoints. -}
     , _ssl_mode                    :: !(TF.Attr s P.Text)
     {- ^ (Optional, Default: none) The SSL mode to use for the connection. Can be one of @none | require | verify-ca | verify-full@ -}
-    , _tags                        :: !(TF.Attr s P.Tags)
+    , _tags                        :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _username                    :: !(TF.Attr s P.Text)
     {- ^ (Optional) The user name to be used to login to the endpoint database. -}
@@ -4123,9 +4124,9 @@ instance P.HasSslMode (DmsEndpointResource s) (TF.Attr s P.Text) where
         lens (_ssl_mode :: DmsEndpointResource s -> TF.Attr s P.Text)
              (\s a -> s { _ssl_mode = a } :: DmsEndpointResource s)
 
-instance P.HasTags (DmsEndpointResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DmsEndpointResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DmsEndpointResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DmsEndpointResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DmsEndpointResource s)
 
 instance P.HasUsername (DmsEndpointResource s) (TF.Attr s P.Text) where
@@ -4196,9 +4197,9 @@ instance s ~ s' => P.HasComputedSslMode (TF.Ref s' (DmsEndpointResource s)) (TF.
         (_ssl_mode :: DmsEndpointResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DmsEndpointResource s -> TF.Attr s P.Tags)
+        (_tags :: DmsEndpointResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedUsername (TF.Ref s' (DmsEndpointResource s)) (TF.Attr s P.Text) where
@@ -4256,7 +4257,7 @@ data DmsReplicationInstanceResource s = DmsReplicationInstanceResource {
     {- ^ (Required) The replication instance identifier. This parameter is stored as a lowercase string. -}
     , _replication_subnet_group_id  :: !(TF.Attr s P.Text)
     {- ^ (Optional) A subnet group to associate with the replication instance. -}
-    , _tags                         :: !(TF.Attr s P.Tags)
+    , _tags                         :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_security_group_ids       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of VPC security group IDs to be used with the replication instance. The VPC security groups must work with the VPC containing the replication instance. -}
@@ -4340,9 +4341,9 @@ instance P.HasReplicationSubnetGroupId (DmsReplicationInstanceResource s) (TF.At
         lens (_replication_subnet_group_id :: DmsReplicationInstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _replication_subnet_group_id = a } :: DmsReplicationInstanceResource s)
 
-instance P.HasTags (DmsReplicationInstanceResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DmsReplicationInstanceResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DmsReplicationInstanceResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DmsReplicationInstanceResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DmsReplicationInstanceResource s)
 
 instance P.HasVpcSecurityGroupIds (DmsReplicationInstanceResource s) (TF.Attr s P.Text) where
@@ -4419,9 +4420,9 @@ instance s ~ s' => P.HasComputedReplicationSubnetGroupId (TF.Ref s' (DmsReplicat
         (_replication_subnet_group_id :: DmsReplicationInstanceResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DmsReplicationInstanceResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DmsReplicationInstanceResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DmsReplicationInstanceResource s -> TF.Attr s P.Tags)
+        (_tags :: DmsReplicationInstanceResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (DmsReplicationInstanceResource s)) (TF.Attr s P.Text) where
@@ -4469,7 +4470,7 @@ data DmsReplicationTaskResource s = DmsReplicationTaskResource {
     {- ^ (Required) The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint. -}
     , _table_mappings            :: !(TF.Attr s P.Text)
     {- ^ (Required) An escaped JSON string that contains the table mappings. For information on table mapping see <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html> -}
-    , _tags                      :: !(TF.Attr s P.Tags)
+    , _tags                      :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _target_endpoint_arn       :: !(TF.Attr s P.Text)
     {- ^ (Required) The Amazon Resource Name (ARN) string that uniquely identifies the target endpoint. -}
@@ -4523,9 +4524,9 @@ instance P.HasTableMappings (DmsReplicationTaskResource s) (TF.Attr s P.Text) wh
         lens (_table_mappings :: DmsReplicationTaskResource s -> TF.Attr s P.Text)
              (\s a -> s { _table_mappings = a } :: DmsReplicationTaskResource s)
 
-instance P.HasTags (DmsReplicationTaskResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (DmsReplicationTaskResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: DmsReplicationTaskResource s -> TF.Attr s P.Tags)
+        lens (_tags :: DmsReplicationTaskResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: DmsReplicationTaskResource s)
 
 instance P.HasTargetEndpointArn (DmsReplicationTaskResource s) (TF.Attr s P.Text) where
@@ -4571,9 +4572,9 @@ instance s ~ s' => P.HasComputedTableMappings (TF.Ref s' (DmsReplicationTaskReso
         (_table_mappings :: DmsReplicationTaskResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DmsReplicationTaskResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (DmsReplicationTaskResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: DmsReplicationTaskResource s -> TF.Attr s P.Tags)
+        (_tags :: DmsReplicationTaskResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedTargetEndpointArn (TF.Ref s' (DmsReplicationTaskResource s)) (TF.Attr s P.Text) where
@@ -4613,7 +4614,7 @@ data EbsVolumeResource s = EbsVolumeResource {
     {- ^ (Optional) The size of the drive in GiBs. -}
     , _snapshot_id       :: !(TF.Attr s P.Text)
     {- ^ (Optional) A snapshot to base the EBS volume off of. -}
-    , _tags              :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _type'             :: !(TF.Attr s P.Text)
     {- ^ (Optional) The type of EBS volume. Can be "standard", "gp2", "io1", "sc1" or "st1" (Default: "standard"). -}
@@ -4661,9 +4662,9 @@ instance P.HasSnapshotId (EbsVolumeResource s) (TF.Attr s P.Text) where
         lens (_snapshot_id :: EbsVolumeResource s -> TF.Attr s P.Text)
              (\s a -> s { _snapshot_id = a } :: EbsVolumeResource s)
 
-instance P.HasTags (EbsVolumeResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (EbsVolumeResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: EbsVolumeResource s -> TF.Attr s P.Tags)
+        lens (_tags :: EbsVolumeResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: EbsVolumeResource s)
 
 instance P.HasType' (EbsVolumeResource s) (TF.Attr s P.Text) where
@@ -4707,9 +4708,9 @@ instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (EbsVolumeResource s)) (TF
         (_snapshot_id :: EbsVolumeResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (EbsVolumeResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EbsVolumeResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: EbsVolumeResource s -> TF.Attr s P.Tags)
+        (_tags :: EbsVolumeResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedType' (TF.Ref s' (EbsVolumeResource s)) (TF.Attr s P.Text) where
@@ -5459,7 +5460,7 @@ data ElasticsearchDomainResource s = ElasticsearchDomainResource {
     {- ^ (Optional) Options for publishing slow logs to CloudWatch Logs. -}
     , _snapshot_options       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Snapshot related options, see below. -}
-    , _tags                   :: !(TF.Attr s P.Tags)
+    , _tags                   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource -}
     , _vpc_options            :: !(TF.Attr s P.Text)
     {- ^ (Optional) VPC related options, see below. Adding or removing this configuration forces a new resource ( <https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-vpc-limitations> ). -}
@@ -5525,9 +5526,9 @@ instance P.HasSnapshotOptions (ElasticsearchDomainResource s) (TF.Attr s P.Text)
         lens (_snapshot_options :: ElasticsearchDomainResource s -> TF.Attr s P.Text)
              (\s a -> s { _snapshot_options = a } :: ElasticsearchDomainResource s)
 
-instance P.HasTags (ElasticsearchDomainResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (ElasticsearchDomainResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: ElasticsearchDomainResource s -> TF.Attr s P.Tags)
+        lens (_tags :: ElasticsearchDomainResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ElasticsearchDomainResource s)
 
 instance P.HasVpcOptions (ElasticsearchDomainResource s) (TF.Attr s P.Text) where
@@ -5592,9 +5593,9 @@ instance s ~ s' => P.HasComputedSnapshotOptions (TF.Ref s' (ElasticsearchDomainR
         (_snapshot_options :: ElasticsearchDomainResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: ElasticsearchDomainResource s -> TF.Attr s P.Tags)
+        (_tags :: ElasticsearchDomainResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcOptions (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s P.Text) where
@@ -6002,7 +6003,7 @@ data ElbResource s = ElbResource {
     {- ^ (Optional) A list of security group IDs to assign to the ELB. Only valid if creating an ELB within a VPC -}
     , _subnets                     :: !(TF.Attr s [TF.Attr s P.Text])
     {- ^ (Required for a VPC ELB) A list of subnet IDs to attach to the ELB. -}
-    , _tags                        :: !(TF.Attr s P.Tags)
+    , _tags                        :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -6095,9 +6096,9 @@ instance P.HasSubnets (ElbResource s) (TF.Attr s [TF.Attr s P.Text]) where
         lens (_subnets :: ElbResource s -> TF.Attr s [TF.Attr s P.Text])
              (\s a -> s { _subnets = a } :: ElbResource s)
 
-instance P.HasTags (ElbResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (ElbResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: ElbResource s -> TF.Attr s P.Tags)
+        lens (_tags :: ElbResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: ElbResource s)
 
 instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (ElbResource s)) (TF.Attr s (P.ElbAccessLogs s)) where
@@ -6181,9 +6182,9 @@ instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (ElbResource s)) (TF.Attr s [
         (_subnets :: ElbResource s -> TF.Attr s [TF.Attr s P.Text])
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElbResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElbResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: ElbResource s -> TF.Attr s P.Tags)
+        (_tags :: ElbResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
@@ -6254,7 +6255,7 @@ data EmrClusterResource s = EmrClusterResource {
     {- ^ (Optional) The security configuration name to attach to the EMR cluster. Only valid for EMR clusters with @release_label@ 4.8.0 or greater -}
     , _service_role                      :: !(TF.Attr s P.Text)
     {- ^ (Required) IAM role that will be assumed by the Amazon EMR service to access AWS resources -}
-    , _tags                              :: !(TF.Attr s P.Tags)
+    , _tags                              :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) list of tags to apply to the EMR Cluster -}
     , _termination_protection            :: !(TF.Attr s P.Text)
     {- ^ (Optional) Switch on/off termination protection (default is off) -}
@@ -6377,9 +6378,9 @@ instance P.HasServiceRole (EmrClusterResource s) (TF.Attr s P.Text) where
         lens (_service_role :: EmrClusterResource s -> TF.Attr s P.Text)
              (\s a -> s { _service_role = a } :: EmrClusterResource s)
 
-instance P.HasTags (EmrClusterResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (EmrClusterResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: EmrClusterResource s -> TF.Attr s P.Tags)
+        lens (_tags :: EmrClusterResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: EmrClusterResource s)
 
 instance P.HasTerminationProtection (EmrClusterResource s) (TF.Attr s P.Text) where
@@ -6466,7 +6467,7 @@ instance s ~ s' => P.HasComputedSecurityConfiguration (TF.Ref s' (EmrClusterReso
 instance s ~ s' => P.HasComputedServiceRole (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
     computedServiceRole x = TF.compute (TF.refKey x) "service_role"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EmrClusterResource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedTerminationProtection (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
@@ -7163,7 +7164,7 @@ inspectorAssessmentTemplateResource =
 Provides a Inspector resource group
 -}
 data InspectorResourceGroupResource s = InspectorResourceGroupResource {
-      _tags :: !(TF.Attr s P.Tags)
+      _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Required) The tags on your EC2 Instance. -}
     } deriving (Show, Eq)
 
@@ -7172,17 +7173,17 @@ instance TF.ToHCL (InspectorResourceGroupResource s) where
         [ TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasTags (InspectorResourceGroupResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (InspectorResourceGroupResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: InspectorResourceGroupResource s -> TF.Attr s P.Tags)
+        lens (_tags :: InspectorResourceGroupResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: InspectorResourceGroupResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (InspectorResourceGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (InspectorResourceGroupResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InspectorResourceGroupResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: InspectorResourceGroupResource s -> TF.Attr s P.Tags)
+        (_tags :: InspectorResourceGroupResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 inspectorResourceGroupResource :: TF.Resource P.AWS (InspectorResourceGroupResource s)
@@ -7197,7 +7198,7 @@ inspectorResourceGroupResource =
 Provides a resource to create a VPC Internet Gateway.
 -}
 data InternetGatewayResource s = InternetGatewayResource {
-      _tags   :: !(TF.Attr s P.Tags)
+      _tags   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The VPC ID to create in. -}
@@ -7209,9 +7210,9 @@ instance TF.ToHCL (InternetGatewayResource s) where
         , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasTags (InternetGatewayResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (InternetGatewayResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: InternetGatewayResource s -> TF.Attr s P.Tags)
+        lens (_tags :: InternetGatewayResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: InternetGatewayResource s)
 
 instance P.HasVpcId (InternetGatewayResource s) (TF.Attr s P.Text) where
@@ -7222,9 +7223,9 @@ instance P.HasVpcId (InternetGatewayResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InternetGatewayResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (InternetGatewayResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InternetGatewayResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: InternetGatewayResource s -> TF.Attr s P.Tags)
+        (_tags :: InternetGatewayResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (InternetGatewayResource s)) (TF.Attr s P.Text) where
@@ -7259,7 +7260,7 @@ data KinesisStreamResource s = KinesisStreamResource {
     {- ^ – (Required) The number of shards that the stream will use. Amazon has guidlines for specifying the Stream size that should be referenced when creating a Kinesis stream. See <https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html> for more. -}
     , _shard_level_metrics :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of shard-level CloudWatch metrics which can be enabled for the stream. See <https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html> for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable. -}
-    , _tags                :: !(TF.Attr s P.Tags)
+    , _tags                :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     } deriving (Show, Eq)
 
@@ -7304,9 +7305,9 @@ instance P.HasShardLevelMetrics (KinesisStreamResource s) (TF.Attr s P.Text) whe
         lens (_shard_level_metrics :: KinesisStreamResource s -> TF.Attr s P.Text)
              (\s a -> s { _shard_level_metrics = a } :: KinesisStreamResource s)
 
-instance P.HasTags (KinesisStreamResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (KinesisStreamResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: KinesisStreamResource s -> TF.Attr s P.Tags)
+        lens (_tags :: KinesisStreamResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: KinesisStreamResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Text) where
@@ -7341,9 +7342,9 @@ instance s ~ s' => P.HasComputedShardLevelMetrics (TF.Ref s' (KinesisStreamResou
         (_shard_level_metrics :: KinesisStreamResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (KinesisStreamResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: KinesisStreamResource s -> TF.Attr s P.Tags)
+        (_tags :: KinesisStreamResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 kinesisStreamResource :: TF.Resource P.AWS (KinesisStreamResource s)
@@ -8843,7 +8844,7 @@ data RdsClusterInstanceResource s = RdsClusterInstanceResource {
     {- ^ (Optional) Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer. -}
     , _publicly_accessible             :: !(TF.Attr s P.Text)
     {- ^ (Optional) Bool to control if instance is publicly accessible. Default @false@ . See the documentation on <https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html> for more details on controlling this property. -}
-    , _tags                            :: !(TF.Attr s P.Tags)
+    , _tags                            :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the instance. -}
     } deriving (Show, Eq)
 
@@ -8966,9 +8967,9 @@ instance P.HasPubliclyAccessible (RdsClusterInstanceResource s) (TF.Attr s P.Tex
         lens (_publicly_accessible :: RdsClusterInstanceResource s -> TF.Attr s P.Text)
              (\s a -> s { _publicly_accessible = a } :: RdsClusterInstanceResource s)
 
-instance P.HasTags (RdsClusterInstanceResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (RdsClusterInstanceResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: RdsClusterInstanceResource s -> TF.Attr s P.Tags)
+        lens (_tags :: RdsClusterInstanceResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: RdsClusterInstanceResource s)
 
 instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (RdsClusterInstanceResource s)) (TF.Attr s P.Text) where
@@ -9079,9 +9080,9 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (RdsClusterInstanceResource s)
 instance s ~ s' => P.HasComputedStorageEncrypted (TF.Ref s' (RdsClusterInstanceResource s)) (TF.Attr s P.Text) where
     computedStorageEncrypted x = TF.compute (TF.refKey x) "storage_encrypted"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (RdsClusterInstanceResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RdsClusterInstanceResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: RdsClusterInstanceResource s -> TF.Attr s P.Tags)
+        (_tags :: RdsClusterInstanceResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedWriter (TF.Ref s' (RdsClusterInstanceResource s)) (TF.Attr s P.Text) where
@@ -9404,7 +9405,7 @@ data RouteTableResource s = RouteTableResource {
     {- ^ (Optional) A list of virtual gateways for propagation. -}
     , _route            :: !(TF.Attr s P.Text)
     {- ^ (Optional) A list of route objects. Their keys are documented below. -}
-    , _tags             :: !(TF.Attr s P.Tags)
+    , _tags             :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id           :: !(TF.Attr s P.Text)
     {- ^ (Required) The VPC ID. -}
@@ -9428,9 +9429,9 @@ instance P.HasRoute (RouteTableResource s) (TF.Attr s P.Text) where
         lens (_route :: RouteTableResource s -> TF.Attr s P.Text)
              (\s a -> s { _route = a } :: RouteTableResource s)
 
-instance P.HasTags (RouteTableResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (RouteTableResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: RouteTableResource s -> TF.Attr s P.Tags)
+        lens (_tags :: RouteTableResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: RouteTableResource s)
 
 instance P.HasVpcId (RouteTableResource s) (TF.Attr s P.Text) where
@@ -9451,9 +9452,9 @@ instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableResource s)) (TF.Att
         (_route :: RouteTableResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTableResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTableResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: RouteTableResource s -> TF.Attr s P.Tags)
+        (_tags :: RouteTableResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RouteTableResource s)) (TF.Attr s P.Text) where
@@ -9504,7 +9505,7 @@ data S3BucketObjectResource s = S3BucketObjectResource {
     {- ^ (Required) The path to the source file being uploaded to the bucket. -}
     , _storage_class          :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies the desired <http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html> for the object. Can be either " @STANDARD@ ", " @REDUCED_REDUNDANCY@ ", or " @STANDARD_IA@ ". Defaults to " @STANDARD@ ". -}
-    , _tags                   :: !(TF.Attr s P.Tags)
+    , _tags                   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the object. -}
     , _website_redirect       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Specifies a target URL for <http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html> . -}
@@ -9600,9 +9601,9 @@ instance P.HasStorageClass (S3BucketObjectResource s) (TF.Attr s P.Text) where
         lens (_storage_class :: S3BucketObjectResource s -> TF.Attr s P.Text)
              (\s a -> s { _storage_class = a } :: S3BucketObjectResource s)
 
-instance P.HasTags (S3BucketObjectResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (S3BucketObjectResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: S3BucketObjectResource s -> TF.Attr s P.Tags)
+        lens (_tags :: S3BucketObjectResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: S3BucketObjectResource s)
 
 instance P.HasWebsiteRedirect (S3BucketObjectResource s) (TF.Attr s P.Text) where
@@ -9681,9 +9682,9 @@ instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (S3BucketObjectResource 
         (_storage_class :: S3BucketObjectResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (S3BucketObjectResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (S3BucketObjectResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: S3BucketObjectResource s -> TF.Attr s P.Tags)
+        (_tags :: S3BucketObjectResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (S3BucketObjectResource s)) (TF.Attr s P.Text) where
@@ -9747,7 +9748,7 @@ data S3BucketResource s = S3BucketResource {
     {- ^ (Optional) Specifies who should bear the cost of Amazon S3 data transfer. Can be either @BucketOwner@ or @Requester@ . By default, the owner of the S3 bucket would incur the costs of any data transfer. See <http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html> developer guide for more information. -}
     , _server_side_encryption_configuration :: !(TF.Attr s P.Text)
     {- ^ (Optional) A configuration of <http://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html> (documented below) -}
-    , _tags :: !(TF.Attr s P.Tags)
+    , _tags :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the bucket. -}
     , _versioning :: !(TF.Attr s (P.S3BucketVersioning s))
     {- ^ (Optional) A state of <https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html> (documented below) -}
@@ -9840,9 +9841,9 @@ instance P.HasServerSideEncryptionConfiguration (S3BucketResource s) (TF.Attr s 
         lens (_server_side_encryption_configuration :: S3BucketResource s -> TF.Attr s P.Text)
              (\s a -> s { _server_side_encryption_configuration = a } :: S3BucketResource s)
 
-instance P.HasTags (S3BucketResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (S3BucketResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: S3BucketResource s -> TF.Attr s P.Tags)
+        lens (_tags :: S3BucketResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: S3BucketResource s)
 
 instance P.HasVersioning (S3BucketResource s) (TF.Attr s (P.S3BucketVersioning s)) where
@@ -9930,9 +9931,9 @@ instance s ~ s' => P.HasComputedServerSideEncryptionConfiguration (TF.Ref s' (S3
         (_server_side_encryption_configuration :: S3BucketResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (S3BucketResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: S3BucketResource s -> TF.Attr s P.Tags)
+        (_tags :: S3BucketResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVersioning (TF.Ref s' (S3BucketResource s)) (TF.Attr s (P.S3BucketVersioning s)) where
@@ -11519,7 +11520,7 @@ data SubnetResource s = SubnetResource {
     {- ^ (Optional) The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length. -}
     , _map_public_ip_on_launch         :: !(TF.Attr s P.Text)
     {- ^ -  (Optional) Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is @false@ . -}
-    , _tags                            :: !(TF.Attr s P.Tags)
+    , _tags                            :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id                          :: !(TF.Attr s P.Text)
     {- ^ (Required) The VPC ID. -}
@@ -11561,9 +11562,9 @@ instance P.HasMapPublicIpOnLaunch (SubnetResource s) (TF.Attr s P.Text) where
         lens (_map_public_ip_on_launch :: SubnetResource s -> TF.Attr s P.Text)
              (\s a -> s { _map_public_ip_on_launch = a } :: SubnetResource s)
 
-instance P.HasTags (SubnetResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (SubnetResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: SubnetResource s -> TF.Attr s P.Tags)
+        lens (_tags :: SubnetResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: SubnetResource s)
 
 instance P.HasVpcId (SubnetResource s) (TF.Attr s P.Text) where
@@ -11596,9 +11597,9 @@ instance s ~ s' => P.HasComputedMapPublicIpOnLaunch (TF.Ref s' (SubnetResource s
         (_map_public_ip_on_launch :: SubnetResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: SubnetResource s -> TF.Attr s P.Tags)
+        (_tags :: SubnetResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SubnetResource s)) (TF.Attr s P.Text) where
@@ -11864,7 +11865,7 @@ data VpcPeeringConnectionResource s = VpcPeeringConnectionResource {
     {- ^ (Required) The ID of the VPC with which you are creating the VPC Peering Connection. -}
     , _requester     :: !(TF.Attr s P.Text)
     {- ^ (Optional) - A optional configuration block that allows for [VPC Peering Connection] (http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide) options to be set for the VPC that requests the peering connection (a maximum of one). -}
-    , _tags          :: !(TF.Attr s P.Tags)
+    , _tags          :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags to assign to the resource. -}
     , _vpc_id        :: !(TF.Attr s P.Text)
     {- ^ (Required) The ID of the requester VPC. -}
@@ -11912,9 +11913,9 @@ instance P.HasRequester (VpcPeeringConnectionResource s) (TF.Attr s P.Text) wher
         lens (_requester :: VpcPeeringConnectionResource s -> TF.Attr s P.Text)
              (\s a -> s { _requester = a } :: VpcPeeringConnectionResource s)
 
-instance P.HasTags (VpcPeeringConnectionResource s) (TF.Attr s P.Tags) where
+instance P.HasTags (VpcPeeringConnectionResource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: VpcPeeringConnectionResource s -> TF.Attr s P.Tags)
+        lens (_tags :: VpcPeeringConnectionResource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: VpcPeeringConnectionResource s)
 
 instance P.HasVpcId (VpcPeeringConnectionResource s) (TF.Attr s P.Text) where
@@ -11958,9 +11959,9 @@ instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionResour
         (_requester :: VpcPeeringConnectionResource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: VpcPeeringConnectionResource s -> TF.Attr s P.Tags)
+        (_tags :: VpcPeeringConnectionResource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s P.Text) where

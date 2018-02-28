@@ -173,6 +173,7 @@ import qualified Terrafomo.IP                as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @ignition_config@ Ignition datasource.
@@ -998,7 +999,7 @@ data SystemdUnitDataSource s = SystemdUnitDataSource {
     {- ^ (Optional) The list of drop-ins for the unit. -}
     , _enabled :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Whether or not the service shall be enabled. When true, the service is enabled. In order for this to have any effect, the unit must have an install section. (default true) -}
-    , _mask    :: !(TF.Attr s P.Text)
+    , _mask    :: !(TF.Attr s P.Bool)
     {- ^ (Optional) Whether or not the service shall be masked. When true, the service is masked by symlinking it to /dev/null . -}
     , _name    :: !(TF.Attr s P.Text)
     {- ^ (Required) Tthe name of the unit. This must be suffixed with a valid unit type (e.g. thing.service ). -}
@@ -1028,9 +1029,9 @@ instance P.HasEnabled (SystemdUnitDataSource s) (TF.Attr s P.Bool) where
         lens (_enabled :: SystemdUnitDataSource s -> TF.Attr s P.Bool)
              (\s a -> s { _enabled = a } :: SystemdUnitDataSource s)
 
-instance P.HasMask (SystemdUnitDataSource s) (TF.Attr s P.Text) where
+instance P.HasMask (SystemdUnitDataSource s) (TF.Attr s P.Bool) where
     mask =
-        lens (_mask :: SystemdUnitDataSource s -> TF.Attr s P.Text)
+        lens (_mask :: SystemdUnitDataSource s -> TF.Attr s P.Bool)
              (\s a -> s { _mask = a } :: SystemdUnitDataSource s)
 
 instance P.HasName (SystemdUnitDataSource s) (TF.Attr s P.Text) where
@@ -1056,9 +1057,9 @@ instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (SystemdUnitDataSource s)) (T
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMask (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMask (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.Bool) where
     computedMask =
-        (_mask :: SystemdUnitDataSource s -> TF.Attr s P.Text)
+        (_mask :: SystemdUnitDataSource s -> TF.Attr s P.Bool)
             . TF.refValue
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SystemdUnitDataSource s)) (TF.Attr s P.Text) where

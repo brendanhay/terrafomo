@@ -158,7 +158,7 @@ main = do
                 (lensNS : map fst (datasources ++ resources))
 
         unless (null schemas) $
-            hoistEither (Render.lenses tmpls provider lensNS schemas)
+            hoistEither (Render.lenses tmpls lensNS schemas)
                 >>= writeNS (dir </> "gen") . (lensNS,)
 
         Fold.for_ datasources $ \(ns, xs) ->
@@ -288,8 +288,9 @@ renderPackage tmpls dir p lenses namespaces = do
 
     createDirectory dir
 
-    hoistEither (Render.package tmpls p)
-        >>= scriptIO . LText.writeFile packageFile
+    when (providerPackageYaml p) $
+        hoistEither (Render.package tmpls p)
+            >>= scriptIO . LText.writeFile packageFile
 
     hoistEither (Render.main tmpls p namespaces)
         >>= writeNS genDir

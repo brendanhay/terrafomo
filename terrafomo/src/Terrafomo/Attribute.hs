@@ -7,6 +7,7 @@ module Terrafomo.Attribute
     ( Attr (..)
     , compute
     , join
+    , file
     , value
     , nil
     , true
@@ -57,6 +58,14 @@ compute k v = Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))
 join :: Text -> [Attr s a] -> Attr s a
 join = Join
 {-# INLINE join #-}
+
+-- | Reads the contents of a file into the string. Variables in this file are
+-- not interpolated. The contents of the file are read as-is.
+--
+-- The path is interpreted relative to the working directory.
+file :: FilePath -> Attr s Text
+file = Apply "file" . pure . fromString
+{-# INLINE file #-}
 
 -- | Supply a constant Haskell value as an attribute. Equivalent to 'Just'.
 value :: a -> Attr s a

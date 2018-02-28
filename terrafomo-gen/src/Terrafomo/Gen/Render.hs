@@ -83,7 +83,6 @@ types tmpls p namespaces =
     let ns = NS.types p
      in second (ns,) $ render (typesTemplate tmpls)
         [ "namespace" .= ns
-        , "provider"  .= p
         , "imports"   .= namespaces
         ]
 
@@ -102,15 +101,13 @@ provider tmpls p =
 
 lenses
     :: Templates EDE.Template
-    -> Provider (Maybe a)
     -> NS
     -> [Schema]
     -> Either Text LText.Text
-lenses tmpls p ns xs =
+lenses tmpls ns xs =
     let (args, attrs) = getClasses xs
      in render (lensTemplate tmpls)
         [ "namespace"        .= ns
-        , "provider"         .= p
         , "argumentClasses"  .= args
         , "attributeClasses" .= attrs
         ]

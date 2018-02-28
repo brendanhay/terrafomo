@@ -49,16 +49,15 @@ import qualified Network.AWS.Data.Text  as AWS
 import qualified Terrafomo.HCL          as HCL
 import qualified Terrafomo.TH           as TH
 
---import qualified Terrafomo.Schema       as TF (configuration)
-
-newtype Tags = Tags { fromTags :: Map Text Text }
+-- FIXME: Needs to be redefined using Attr.
+newtype Tags s = Tags { fromTags :: Map Text (Attr s Text) }
     deriving (Show, Eq)
 
-instance ToHCL Tags where
+instance ToHCL (Tags s) where
     toHCL = HCL.pairs . fromTags
 
-instance IsList Tags where
-    type Item Tags = (Text, Text)
+instance IsList (Tags s) where
+    type Item (Tags s) = (Text, Attr s Text)
 
     toList   = toList . fromTags
     fromList = Tags   . fromList

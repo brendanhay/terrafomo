@@ -1,0 +1,29 @@
+_include: !include '../../share/package.yaml'
+
+name: terrafomo-builtins
+
+<<: *common
+<<: *version
+<<: *options
+
+dependencies:
+  - base
+  - containers
+  - hashable
+  - microlens
+  - terrafomo
+  - text
+
+library:
+  source-dirs:
+    - src
+    - gen
+
+  exposed-modules:
+    - Terrafomo.Local
+    - Terrafomo.TLS
+    - Terrafomo.Template
+
+  reexported-modules: >
+    terrafomo:Terrafomo,
+    terrafomo:Terrafomo.Format

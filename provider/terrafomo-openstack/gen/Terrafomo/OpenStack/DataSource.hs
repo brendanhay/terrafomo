@@ -172,6 +172,7 @@ import qualified Terrafomo.OpenStack.Provider as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @openstack_compute_flavor_v2@ OpenStack datasource.

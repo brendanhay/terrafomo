@@ -646,6 +646,7 @@ import qualified Terrafomo.IP           as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 
 {- | The @aws_acm_certificate@ AWS datasource.
@@ -871,7 +872,7 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (AmiDataSource s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedStateReason (TF.Ref s' (AmiDataSource s)) (TF.Attr s P.Text) where
     computedStateReason x = TF.compute (TF.refKey x) "state_reason"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (AmiDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (AmiDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (AmiDataSource s)) (TF.Attr s P.Text) where
@@ -1267,7 +1268,7 @@ instance s ~ s' => P.HasComputedOutputs (TF.Ref s' (CloudformationStackDataSourc
 instance s ~ s' => P.HasComputedParameters (TF.Ref s' (CloudformationStackDataSource s)) (TF.Attr s P.Text) where
     computedParameters x = TF.compute (TF.refKey x) "parameters"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (CloudformationStackDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (CloudformationStackDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedTemplateBody (TF.Ref s' (CloudformationStackDataSource s)) (TF.Attr s P.Text) where
@@ -1748,7 +1749,7 @@ instance s ~ s' => P.HasComputedSnapshotIds (TF.Ref s' (EbsSnapshotDataSource s)
 instance s ~ s' => P.HasComputedState (TF.Ref s' (EbsSnapshotDataSource s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (EbsSnapshotDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EbsSnapshotDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (EbsSnapshotDataSource s)) (TF.Attr s P.Text) where
@@ -1890,7 +1891,7 @@ instance s ~ s' => P.HasComputedSize (TF.Ref s' (EbsVolumeDataSource s)) (TF.Att
 instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (EbsVolumeDataSource s)) (TF.Attr s P.Text) where
     computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (EbsVolumeDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EbsVolumeDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (EbsVolumeDataSource s)) (TF.Attr s P.Text) where
@@ -2161,7 +2162,7 @@ instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (EfsFileSystemDataSource s))
 instance s ~ s' => P.HasComputedPerformanceMode (TF.Ref s' (EfsFileSystemDataSource s)) (TF.Attr s P.Text) where
     computedPerformanceMode x = TF.compute (TF.refKey x) "performance_mode"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (EfsFileSystemDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (EfsFileSystemDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 efsFileSystemDataSource :: TF.DataSource P.AWS (EfsFileSystemDataSource s)
@@ -2428,7 +2429,7 @@ instance s ~ s' => P.HasComputedSnapshotWindow (TF.Ref s' (ElasticacheClusterDat
 instance s ~ s' => P.HasComputedSubnetGroupName (TF.Ref s' (ElasticacheClusterDataSource s)) (TF.Attr s P.Text) where
     computedSubnetGroupName x = TF.compute (TF.refKey x) "subnet_group_name"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticacheClusterDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElasticacheClusterDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 elasticacheClusterDataSource :: TF.DataSource P.AWS (ElasticacheClusterDataSource s)
@@ -3150,7 +3151,7 @@ instance s ~ s' => P.HasComputedSourceDestCheck (TF.Ref s' (InstanceDataSource s
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (InstanceDataSource s)) (TF.Attr s P.Text) where
     computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedTenancy (TF.Ref s' (InstanceDataSource s)) (TF.Attr s P.Text) where
@@ -3245,7 +3246,7 @@ data InternetGatewayDataSource s = InternetGatewayDataSource {
     {- ^ (Optional) Custom filter block as described below. -}
     , _internet_gateway_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the specific Internet Gateway to retrieve. -}
-    , _tags                :: !(TF.Attr s P.Tags)
+    , _tags                :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Internet Gateway. -}
     } deriving (Show, Eq)
 
@@ -3266,9 +3267,9 @@ instance P.HasInternetGatewayId (InternetGatewayDataSource s) (TF.Attr s P.Text)
         lens (_internet_gateway_id :: InternetGatewayDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _internet_gateway_id = a } :: InternetGatewayDataSource s)
 
-instance P.HasTags (InternetGatewayDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (InternetGatewayDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: InternetGatewayDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: InternetGatewayDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: InternetGatewayDataSource s)
 
 instance s ~ s' => P.HasComputedFilter (TF.Ref s' (InternetGatewayDataSource s)) (TF.Attr s P.Text) where
@@ -3284,9 +3285,9 @@ instance s ~ s' => P.HasComputedInternetGatewayId (TF.Ref s' (InternetGatewayDat
 instance s ~ s' => P.HasComputedState (TF.Ref s' (InternetGatewayDataSource s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (InternetGatewayDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (InternetGatewayDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: InternetGatewayDataSource s -> TF.Attr s P.Tags)
+        (_tags :: InternetGatewayDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (InternetGatewayDataSource s)) (TF.Attr s P.Text) where
@@ -3402,7 +3403,7 @@ instance s ~ s' => P.HasComputedShardLevelMetrics (TF.Ref s' (KinesisStreamDataS
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (KinesisStreamDataSource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (KinesisStreamDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (KinesisStreamDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 kinesisStreamDataSource :: TF.DataSource P.AWS (KinesisStreamDataSource s)
@@ -4109,7 +4110,7 @@ data Route53ZoneDataSource s = Route53ZoneDataSource {
     {- ^ (Optional) The Hosted Zone name of the desired Hosted Zone. -}
     , _private_zone :: !(TF.Attr s P.Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone. -}
-    , _tags         :: !(TF.Attr s P.Tags)
+    , _tags         :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) Used with @name@ field. A mapping of tags, each pair of which must exactly match a pair on the desired Hosted Zone. -}
     , _vpc_id       :: !(TF.Attr s P.Text)
     {- ^ (Optional) Used with @name@ field to get a private Hosted Zone associated with the vpc_id (in this case, private_zone is not mandatory). -}
@@ -4136,9 +4137,9 @@ instance P.HasPrivateZone (Route53ZoneDataSource s) (TF.Attr s P.Text) where
         lens (_private_zone :: Route53ZoneDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _private_zone = a } :: Route53ZoneDataSource s)
 
-instance P.HasTags (Route53ZoneDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (Route53ZoneDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: Route53ZoneDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: Route53ZoneDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: Route53ZoneDataSource s)
 
 instance P.HasVpcId (Route53ZoneDataSource s) (TF.Attr s P.Text) where
@@ -4170,9 +4171,9 @@ instance s ~ s' => P.HasComputedPrivateZone (TF.Ref s' (Route53ZoneDataSource s)
 instance s ~ s' => P.HasComputedResourceRecordSetCount (TF.Ref s' (Route53ZoneDataSource s)) (TF.Attr s P.Text) where
     computedResourceRecordSetCount x = TF.compute (TF.refKey x) "resource_record_set_count"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53ZoneDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53ZoneDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: Route53ZoneDataSource s -> TF.Attr s P.Tags)
+        (_tags :: Route53ZoneDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (Route53ZoneDataSource s)) (TF.Attr s P.Text) where
@@ -4209,7 +4210,7 @@ data RouteTableDataSource s = RouteTableDataSource {
     {- ^ (Optional) The id of the specific Route Table to retrieve. -}
     , _subnet_id      :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of a Subnet which is connected to the Route Table (not be exported if not given in parameter). -}
-    , _tags           :: !(TF.Attr s P.Tags)
+    , _tags           :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired Route Table. -}
     , _vpc_id         :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the VPC that the desired Route Table belongs to. -}
@@ -4239,9 +4240,9 @@ instance P.HasSubnetId (RouteTableDataSource s) (TF.Attr s P.Text) where
         lens (_subnet_id :: RouteTableDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _subnet_id = a } :: RouteTableDataSource s)
 
-instance P.HasTags (RouteTableDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (RouteTableDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: RouteTableDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: RouteTableDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: RouteTableDataSource s)
 
 instance P.HasVpcId (RouteTableDataSource s) (TF.Attr s P.Text) where
@@ -4285,9 +4286,9 @@ instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (RouteTableDataSource s)) (T
         (_subnet_id :: RouteTableDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTableDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTableDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: RouteTableDataSource s -> TF.Attr s P.Tags)
+        (_tags :: RouteTableDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RouteTableDataSource s)) (TF.Attr s P.Text) where
@@ -4458,7 +4459,7 @@ instance s ~ s' => P.HasComputedSseKmsKeyId (TF.Ref s' (S3BucketObjectDataSource
 instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (S3BucketObjectDataSource s)) (TF.Attr s P.Text) where
     computedStorageClass x = TF.compute (TF.refKey x) "storage_class"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (S3BucketObjectDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (S3BucketObjectDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (S3BucketObjectDataSource s)) (TF.Attr s P.Text) where
@@ -4490,7 +4491,7 @@ data SecurityGroupDataSource s = SecurityGroupDataSource {
     {- ^ (Optional) The id of the specific security group to retrieve. -}
     , _name   :: !(TF.Attr s P.Text)
     {- ^ (Optional) The name that the desired security group must have. -}
-    , _tags   :: !(TF.Attr s P.Tags)
+    , _tags   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired security group. -}
     , _vpc_id :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the VPC that the desired security group belongs to. -}
@@ -4520,9 +4521,9 @@ instance P.HasName (SecurityGroupDataSource s) (TF.Attr s P.Text) where
         lens (_name :: SecurityGroupDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _name = a } :: SecurityGroupDataSource s)
 
-instance P.HasTags (SecurityGroupDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (SecurityGroupDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: SecurityGroupDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: SecurityGroupDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: SecurityGroupDataSource s)
 
 instance P.HasVpcId (SecurityGroupDataSource s) (TF.Attr s P.Text) where
@@ -4551,9 +4552,9 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (SecurityGroupDataSource s)) (TF
         (_name :: SecurityGroupDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecurityGroupDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecurityGroupDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: SecurityGroupDataSource s -> TF.Attr s P.Tags)
+        (_tags :: SecurityGroupDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupDataSource s)) (TF.Attr s P.Text) where
@@ -4675,7 +4676,7 @@ data SubnetDataSource s = SubnetDataSource {
     {- ^ (Optional) The Ipv6 cidr block of the desired subnet -}
     , _state             :: !(TF.Attr s P.Text)
     {- ^ (Optional) The state that the desired subnet must have. -}
-    , _tags              :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnet. -}
     , _vpc_id            :: !(TF.Attr s P.Text)
     {- ^ (Optional) The id of the VPC that the desired subnet belongs to. -}
@@ -4729,9 +4730,9 @@ instance P.HasState (SubnetDataSource s) (TF.Attr s P.Text) where
         lens (_state :: SubnetDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _state = a } :: SubnetDataSource s)
 
-instance P.HasTags (SubnetDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (SubnetDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: SubnetDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: SubnetDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: SubnetDataSource s)
 
 instance P.HasVpcId (SubnetDataSource s) (TF.Attr s P.Text) where
@@ -4774,9 +4775,9 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (SubnetDataSource s)) (TF.Attr 
         (_state :: SubnetDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: SubnetDataSource s -> TF.Attr s P.Tags)
+        (_tags :: SubnetDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SubnetDataSource s)) (TF.Attr s P.Text) where
@@ -4805,7 +4806,7 @@ subnetDataSource =
 useful for getting back a list of subnet ids for a vpc.
 -}
 data SubnetIdsDataSource s = SubnetIdsDataSource {
-      _tags   :: !(TF.Attr s P.Tags)
+      _tags   :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired subnets. -}
     , _vpc_id :: !(TF.Attr s P.Text)
     {- ^ (Required) The VPC ID that you want to filter from. -}
@@ -4817,9 +4818,9 @@ instance TF.ToHCL (SubnetIdsDataSource s) where
         , TF.assign "vpc_id" <$> TF.attribute _vpc_id
         ]
 
-instance P.HasTags (SubnetIdsDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (SubnetIdsDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: SubnetIdsDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: SubnetIdsDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: SubnetIdsDataSource s)
 
 instance P.HasVpcId (SubnetIdsDataSource s) (TF.Attr s P.Text) where
@@ -4830,9 +4831,9 @@ instance P.HasVpcId (SubnetIdsDataSource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (SubnetIdsDataSource s)) (TF.Attr s P.Text) where
     computedIds x = TF.compute (TF.refKey x) "ids"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetIdsDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetIdsDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: SubnetIdsDataSource s -> TF.Attr s P.Tags)
+        (_tags :: SubnetIdsDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SubnetIdsDataSource s)) (TF.Attr s P.Text) where
@@ -4867,7 +4868,7 @@ data VpcDataSource s = VpcDataSource {
     {- ^ (Optional) The id of the specific VPC to retrieve. -}
     , _state           :: !(TF.Attr s P.Text)
     {- ^ (Optional) The current state of the desired VPC. Can be either @"pending"@ or @"available"@ . -}
-    , _tags            :: !(TF.Attr s P.Tags)
+    , _tags            :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC. -}
     } deriving (Show, Eq)
 
@@ -4912,9 +4913,9 @@ instance P.HasState (VpcDataSource s) (TF.Attr s P.Text) where
         lens (_state :: VpcDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _state = a } :: VpcDataSource s)
 
-instance P.HasTags (VpcDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (VpcDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: VpcDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: VpcDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: VpcDataSource s)
 
 instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcDataSource s)) (TF.Attr s P.CIDR) where
@@ -4962,9 +4963,9 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (VpcDataSource s)) (TF.Attr s P
         (_state :: VpcDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: VpcDataSource s -> TF.Attr s P.Tags)
+        (_tags :: VpcDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 vpcDataSource :: TF.DataSource P.AWS (VpcDataSource s)
@@ -5177,7 +5178,7 @@ data VpcPeeringConnectionDataSource s = VpcPeeringConnectionDataSource {
     {- ^ (Optional) The region of the requester VPC of the specific VPC Peering Connection to retrieve. -}
     , _status          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The status of the specific VPC Peering Connection to retrieve. -}
-    , _tags            :: !(TF.Attr s P.Tags)
+    , _tags            :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPC Peering Connection. -}
     , _vpc_id          :: !(TF.Attr s P.Text)
     {- ^ (Optional) The ID of the requester VPC of the specific VPC Peering Connection to retrieve. -}
@@ -5249,9 +5250,9 @@ instance P.HasStatus (VpcPeeringConnectionDataSource s) (TF.Attr s P.Text) where
         lens (_status :: VpcPeeringConnectionDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _status = a } :: VpcPeeringConnectionDataSource s)
 
-instance P.HasTags (VpcPeeringConnectionDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (VpcPeeringConnectionDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: VpcPeeringConnectionDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: VpcPeeringConnectionDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: VpcPeeringConnectionDataSource s)
 
 instance P.HasVpcId (VpcPeeringConnectionDataSource s) (TF.Attr s P.Text) where
@@ -5315,9 +5316,9 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (VpcPeeringConnectionDataSourc
         (_status :: VpcPeeringConnectionDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcPeeringConnectionDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcPeeringConnectionDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: VpcPeeringConnectionDataSource s -> TF.Attr s P.Tags)
+        (_tags :: VpcPeeringConnectionDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionDataSource s)) (TF.Attr s P.Text) where
@@ -5360,7 +5361,7 @@ data VpnGatewayDataSource s = VpnGatewayDataSource {
     {- ^ (Optional) The ID of the specific VPN Gateway to retrieve. -}
     , _state             :: !(TF.Attr s P.Text)
     {- ^ (Optional) The state of the specific VPN Gateway to retrieve. -}
-    , _tags              :: !(TF.Attr s P.Tags)
+    , _tags              :: !(TF.Attr s (P.Tags s))
     {- ^ (Optional) A mapping of tags, each pair of which must exactly match a pair on the desired VPN Gateway. -}
     } deriving (Show, Eq)
 
@@ -5405,9 +5406,9 @@ instance P.HasState (VpnGatewayDataSource s) (TF.Attr s P.Text) where
         lens (_state :: VpnGatewayDataSource s -> TF.Attr s P.Text)
              (\s a -> s { _state = a } :: VpnGatewayDataSource s)
 
-instance P.HasTags (VpnGatewayDataSource s) (TF.Attr s P.Tags) where
+instance P.HasTags (VpnGatewayDataSource s) (TF.Attr s (P.Tags s)) where
     tags =
-        lens (_tags :: VpnGatewayDataSource s -> TF.Attr s P.Tags)
+        lens (_tags :: VpnGatewayDataSource s -> TF.Attr s (P.Tags s))
              (\s a -> s { _tags = a } :: VpnGatewayDataSource s)
 
 instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (VpnGatewayDataSource s)) (TF.Attr s P.Text) where
@@ -5440,9 +5441,9 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (VpnGatewayDataSource s)) (TF.A
         (_state :: VpnGatewayDataSource s -> TF.Attr s P.Text)
             . TF.refValue
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpnGatewayDataSource s)) (TF.Attr s P.Tags) where
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpnGatewayDataSource s)) (TF.Attr s (P.Tags s)) where
     computedTags =
-        (_tags :: VpnGatewayDataSource s -> TF.Attr s P.Tags)
+        (_tags :: VpnGatewayDataSource s -> TF.Attr s (P.Tags s))
             . TF.refValue
 
 vpnGatewayDataSource :: TF.DataSource P.AWS (VpnGatewayDataSource s)

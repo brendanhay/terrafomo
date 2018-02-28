@@ -60,6 +60,7 @@ import qualified Terrafomo.IP    as P
 import qualified Terrafomo.Attribute as TF
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
 {% for schema in schemas %}
 
@@ -105,7 +106,7 @@ instance s ~ s' => P.{{ field.value.class }} (TF.Ref s' ({{ schema.key }} s)) ({
   {% endfor %}
 
 {% let constructor = schema.key | lowerHead %}
-{{ constructor }} :: TF.{{ type }} P.{{ provider.name }} ({{ schema.key }} s)
+{{ constructor }} :: TF.{{ type }} {{ provider.type }} ({{ schema.key }} s)
 {{ constructor }} =
     TF.new{{ type }} "{{ original }}" $
         {{ schema.key }} {
